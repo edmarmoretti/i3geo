@@ -29,11 +29,11 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.identifica.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.identifica.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda
@@ -78,20 +78,20 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="nome_i" >{{{nome}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{nome_i}}}" class="form-control" name="nome_i" required>
+							<input title="{{{nome}}}" type="text" value="{{{nome_i}}}" class="form-control" name="nome_i" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="login">{{{programa}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{abrir_i}}}" class="form-control" name="abrir_i" >
+							<input title="{{{programa}}}" type="text" value="{{{abrir_i}}}" class="form-control" name="abrir_i" >
 							<p>{{{programaDesc}}}</p>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="target_i">{{{abreComo}}}</label>
 						<div class="col-md-10">
-							<select class="form-control" name="target_i">
+							<select title="{{{abreComo}}}" class="form-control" name="target_i">
 								{{{opcoesTarget}}}
 							</select>
 
@@ -100,7 +100,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="publicado_i">{{{publicado}}}?</label>
 						<div class="col-md-10">
-							<select class="form-control" name="publicado_i">
+							<select title="{{{publicado}}}" class="form-control" name="publicado_i">
 								{{{opcoesPublicado}}}
 							</select>
 						</div>
@@ -108,7 +108,7 @@ include "../../head.php";
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 	</div>

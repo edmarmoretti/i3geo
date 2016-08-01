@@ -28,11 +28,11 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.tema.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.tema.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -65,7 +65,7 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="codigo_tema" >{{{codigoTema}}}</label>
 						<div class="col-md-8">
-							<select name="codigo_tema" class="form-control">
+							<select title="{{{codigoTema}}}" name="codigo_tema" class="form-control">
 								{{{opcoesTema}}}
 							</select>
 						</div>
@@ -75,7 +75,7 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ordem_tema" >{{{ordem}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{ordem_tema}}}" class="form-control" name="ordem_tema" required>
+							<input title="{{{ordem}}}" type="text" value="{{{ordem_tema}}}" class="form-control" name="ordem_tema" required>
 						</div>
 					</div>
 				</div>
@@ -83,7 +83,7 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ligado_tema" >{{{temaVisivel}}}</label>
 						<div class="col-md-8">
-							<select name="ligado_tema" class="form-control">
+							<select title="{{{temaVisivel}}}" name="ligado_tema" class="form-control">
 								{{{opcoesLigado}}}
 							</select>
 						</div>
@@ -91,7 +91,7 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 	</div>

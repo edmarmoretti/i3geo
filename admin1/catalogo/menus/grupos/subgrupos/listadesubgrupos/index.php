@@ -46,12 +46,12 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
-						onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.subgrupos.adicionaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button">{{{adicionar}}}</a>
+						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--
@@ -113,9 +113,9 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<div class="col-md-12">
 					<div class="pull-right">
 						<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_subgrupo}}')" class="btn btn-danger"
-							role="button">{{excluir}}</a>
+							style="color:#e13023;" role="button">{{excluir}}</a>
 						<a href="javascript:void(0)"
-							onclick="{{onSalvar}}('{{id_subgrupo}}')" class="btn btn-primary" role="button">{{salvar}}</a>
+							onclick="{{onSalvar}}('{{id_subgrupo}}')" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</a>
 					</div>
 				</div>
 			</div>

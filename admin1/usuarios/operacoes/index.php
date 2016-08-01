@@ -28,11 +28,11 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label" for="filtro">{{{filtro}}}</label>
-					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<select title="{{{filtro}}}" title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<button onclick="i3GEOadmin.operacoes.adicionaDialogo();" style="color:#008579;" style="color:#008579;" class="btn btn-primary" role="button">{{{adicionar}}}</button>
+					<button onclick="i3GEOadmin.operacoes.adicionaDialogo();" style="color:#008579;" style="color:#008579;" class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</button>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda-->
@@ -92,7 +92,7 @@ include "../../head.php";
 				</div>
 			</div>
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 			</div>
 		</form>
 	</div>

@@ -28,12 +28,12 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
-						onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.menus.adicionaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button">{{{adicionar}}}</a>
+						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
@@ -75,36 +75,36 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="nome_menu">{{{nomeMenu}}}</label>
 						<div class="col-md-9">
-							<input type="text" value="{{{nome_menu}}}" class="form-control" name="nome_menu" required>
+							<input title="{{{nomeMenu}}}" type="text" value="{{{nome_menu}}}" class="form-control" name="nome_menu" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="es">{{{nomeEs}}}</label>
 						<div class="col-md-9">
-							<input type="text" value="{{{es}}}" class="form-control" name="es">
+							<input title="{{{nomeEs}}}" type="text" value="{{{es}}}" class="form-control" name="es">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="en">{{{nomeIn}}}</label>
 						<div class="col-md-9">
-							<input type="text" value="{{{en}}}" class="form-control" name="en" required>
+							<input title="{{{nomeIn}}}" type="text" value="{{{en}}}" class="form-control" name="en" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="desc_menu">{{{descricao}}}</label>
 						<div class="col-md-9">
-							<input type="text" value="{{{desc_menu}}}" class="form-control" name="desc_menu">
+							<input title="{{{descricao}}}" type="text" value="{{{desc_menu}}}" class="form-control" name="desc_menu">
 						</div>
 					</div>
 
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="perfil_menu">{{{perfilAjuda}}}</label>
 						<div class="col-md-5">
-							<input id="perfil-{{id_menu}}" type="text" value="{{{perfil_menu}}}" class="form-control"
+							<input title="{{{perfilAjuda}}}" id="perfil-{{id_menu}}" type="text" value="{{{perfil_menu}}}" class="form-control"
 								name="perfil_menu">
 						</div>
 						<div class="col-md-4">
-							<select class="form-control"
+							<select title="{{{perfilAjuda}}}" class="form-control"
 								onchange="i3GEOadmin.menus.addPerfil('perfil-{{id_menu}}',this.value)"> {{{opcoesPerfil}}}
 							</select>
 						</div>
@@ -112,28 +112,28 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="publicado_menu">{{{publicadoTxt}}}</label>
 						<div class="col-md-9">
-							<select name="publicado_menu" class="form-control"> {{{opcoesPublicado}}}
+							<select title="{{{publicadoTxt}}}" name="publicado_menu" class="form-control"> {{{opcoesPublicado}}}
 							</select>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="aberto">{{{iniciaAberto}}}</label>
 						<div class="col-md-9">
-							<select name="aberto" class="form-control"> {{{opcoesAberto}}}
+							<select title="{{{iniciaAberto}}}" name="aberto" class="form-control"> {{{opcoesAberto}}}
 							</select>
 						</div>
 					</div>
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 
 	</div>
 	<div class="panel-footer" style="padding-top: 0px; padding-bottom: 0px;">
 		<div class="pull-right">
-			<button onclick="i3GEOadmin.menus.editarGrupos('{{id_menu}}','{{{nome_menu}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
+			<button style="color:#007a6f;" onclick="i3GEOadmin.menus.editarGrupos('{{id_menu}}','{{{nome_menu}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
 				<i class="material-icons">folder_open</i> {{{grupos}}}
 			</button>
 		</div>

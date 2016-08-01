@@ -29,11 +29,11 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.webservices.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.webservices.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda
@@ -78,31 +78,31 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="nome_ws" >{{{nomeTxt}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{nome_ws}}}" class="form-control" name="nome_ws" required>
+							<input title="{{{nomeTxt}}}" type="text" value="{{{nome_ws}}}" class="form-control" name="nome_ws" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="login">{{{descricaoTxt}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{desc_ws}}}" class="form-control" name="desc_ws" >
+							<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_ws}}}" class="form-control" name="desc_ws" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="email">{{{autor}}}</label>
 						<div class="col-md-10">
-							<input type="email" value="{{{autor_ws}}}" class="form-control" name="autor_ws" required>
+							<input title="{{{autor}}}" type="email" value="{{{autor_ws}}}" class="form-control" name="autor_ws" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="link_ws">{{{endereco}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{link_ws}}}" class="form-control" name="link_ws">
+							<input title="{{{endereco}}}" type="text" value="{{{link_ws}}}" class="form-control" name="link_ws">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="tipo_ws">{{{tipo}}}</label>
 						<div class="col-md-10">
-							<select name="tipo_ws" class="form-control">
+							<select title="{{{tipo}}}" name="tipo_ws" class="form-control">
 								{{{opcoesTipo}}}
 							</select>
 						</div>
@@ -110,7 +110,7 @@ include "../../head.php";
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 

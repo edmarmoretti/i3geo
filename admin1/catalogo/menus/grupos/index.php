@@ -32,7 +32,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
-						onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
@@ -54,7 +54,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<div class="clearfix"></div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.grupos.adicionaTemaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button">{{{adicionarTema}}}</a>
+						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionarTema}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<div id="raiz" class="panel-body panel-collapse collapse"></div>
@@ -69,7 +69,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<div class="clearfix"></div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.grupos.adicionaNoDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button">{{{adicionarGrupo}}}</a>
+						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionarGrupo}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<div id="corpo" class="panel-body panel-collapse in"></div>
@@ -102,7 +102,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="id_tema">{{{tema}}}</label>
 						<div class="col-md-8">
-							<select class="form-control" name="id_tema">
+							<select title="{{{tema}}}" class="form-control" name="id_tema">
 								{{{opcoesTema}}}
 							</select>
 						</div>
@@ -110,16 +110,16 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{ordem}}}" class="form-control" name="ordem">
+							<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
 						<div class="col-md-4">
-							<input id="perfil_tema-{{id_raiz}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
+							<input title="{{{perfis}}}" id="perfil_tema-{{id_raiz}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
 						</div>
 						<div class="col-md-4">
-							<select class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_tema-{{id_raiz}}',this.value)">
+							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_tema-{{id_raiz}}',this.value)">
 								{{{opcoesPerfil}}}
 							</select>
 						</div>
@@ -127,7 +127,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 
@@ -155,7 +155,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="id_grupo">{{{nomeTxt}}}</label>
 						<div class="col-md-6">
-							<select class="form-control" name="id_grupo">
+							<select title="{{{nomeTxt}}}" class="form-control" name="id_grupo">
 								{{{opcoesNo}}}
 							</select>
 						</div>
@@ -167,13 +167,13 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{ordem}}}" class="form-control" name="ordem">
+							<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="publicado">{{{publicadoTxt}}}</label>
 						<div class="col-md-8">
-							<select name="publicado" class="form-control">
+							<select title="{{{publicadoTxt}}}" name="publicado" class="form-control">
 								{{{opcoesPublicado}}}
 							</select>
 						</div>
@@ -181,10 +181,10 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
 						<div class="col-md-4">
-							<input id="perfil_no-{{id_n1}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
+							<input title="{{{perfis}}}" id="perfil_no-{{id_n1}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
 						</div>
 						<div class="col-md-4">
-							<select class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_no-{{id_n1}}',this.value)">
+							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_no-{{id_n1}}',this.value)">
 								{{{opcoesPerfil}}}
 							</select>
 						</div>
@@ -192,14 +192,14 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 
 	</div>
 	<div class="panel-footer {{escondido}}" style="padding-top: 0px; padding-bottom: 0px;">
 		<div class="pull-right">
-			<button onclick="i3GEOadmin.grupos.editarSubGrupos('{{id_n1}}','{{{nome_grupo}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
+			<button style="color:#007a6f;" onclick="i3GEOadmin.grupos.editarSubGrupos('{{id_n1}}','{{{nome_grupo}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
 				<i class="material-icons">folder_open</i> {{{editarSubgrupos}}}
 			</button>
 		</div>

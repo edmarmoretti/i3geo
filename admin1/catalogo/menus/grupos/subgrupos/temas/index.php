@@ -40,12 +40,12 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
-						onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.temas.adicionaTemaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button">{{{adicionarTema}}}</a>
+						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionarTema}}}</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -79,7 +79,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="id_tema">{{{tema}}}</label>
 						<div class="col-md-8">
-							<select class="form-control" name="id_tema">
+							<select title="{{{tema}}}" class="form-control" name="id_tema">
 								{{{opcoesTema}}}
 							</select>
 						</div>
@@ -87,16 +87,16 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{ordem}}}" class="form-control" name="ordem">
+							<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
 						<div class="col-md-4">
-							<input id="perfil_tema-{{id_raiz}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
+							<input title="{{{perfis}}}" id="perfil_tema-{{id_n3}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
 						</div>
 						<div class="col-md-4">
-							<select class="form-control" onchange="i3GEOadmin.temas.addInput('perfil_tema-{{id_raiz}}',this.value)">
+							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.temas.addInput('perfil_tema-{{id_n3}}',this.value)">
 								{{{opcoesPerfil}}}
 							</select>
 						</div>
@@ -104,7 +104,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 

@@ -27,11 +27,11 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.mapas.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.mapas.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
@@ -73,34 +73,34 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="nome_mapa" >{{{nomeMapa}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{nome_mapa}}}" class="form-control" name="nome_mapa" required>
+							<input title="{{{nomeMapa}}}" type="text" value="{{{nome_mapa}}}" class="form-control" name="nome_mapa" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="desc_mapa">{{{descricao}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{desc_mapa}}}" class="form-control" name="desc_mapa" >
+							<input title="{{{descricao}}}" type="text" value="{{{desc_mapa}}}" class="form-control" name="desc_mapa" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="contemmapfile" >{{{contemMapfile}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{contemmapfile}}}" disabled="" class="form-control" name="contemmapfile" required>
+							<input title="{{{contemMapfile}}}" type="text" value="{{{contemmapfile}}}" disabled="" class="form-control" name="contemmapfile" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ordem_mapa">{{{ordemMapa}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{ordem_mapa}}}" class="form-control" name="ordem_mapa">
+							<input title="{{{ordemMapa}}}" type="text" value="{{{ordem_mapa}}}" class="form-control" name="ordem_mapa">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="temas_mapa">{{{temas}}}</label>
 						<div class="col-md-4">
-							<input type="text" value="{{{temas_mapa}}}" class="form-control" name="temas_mapa" id="temas_mapa-{{id_mapa}}">
+							<input title="{{{temas}}}" type="text" value="{{{temas_mapa}}}" class="form-control" name="temas_mapa" id="temas_mapa-{{id_mapa}}">
 						</div>
 						<div class="col-md-4">
-							<select class="form-control" onchange="i3GEOadmin.mapas.addInput('temas_mapa-{{id_mapa}}',this.value)">
+							<select title="{{{temas}}}" class="form-control" onchange="i3GEOadmin.mapas.addInput('temas_mapa-{{id_mapa}}',this.value)">
 								{{{opcoesTema}}}
 							</select>
 						</div>
@@ -108,10 +108,10 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ligados_mapa">{{{temasLigados}}}</label>
 						<div class="col-md-4">
-							<input type="text" value="{{{ligados_mapa}}}" class="form-control" name="ligados_mapa" id="ligados_mapa-{{id_mapa}}">
+							<input title="{{{temasLigados}}}" type="text" value="{{{ligados_mapa}}}" class="form-control" name="ligados_mapa" id="ligados_mapa-{{id_mapa}}">
 						</div>
 						<div class="col-md-4">
-							<select class="form-control" onchange="i3GEOadmin.mapas.addInput('ligados_mapa-{{id_mapa}}',this.value)">
+							<select title="{{{temasLigados}}}" class="form-control" onchange="i3GEOadmin.mapas.addInput('ligados_mapa-{{id_mapa}}',this.value)">
 								{{{opcoesTema}}}
 							</select>
 						</div>
@@ -119,10 +119,10 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="perfil_mapa">{{{perfis}}}</label>
 						<div class="col-md-4">
-							<input id="perfil_mapa-{{id_mapa}}" type="text" value="{{{perfil_mapa}}}" class="form-control" name="perfil_mapa">
+							<input title="{{{perfis}}}" id="perfil_mapa-{{id_mapa}}" type="text" value="{{{perfil_mapa}}}" class="form-control" name="perfil_mapa">
 						</div>
 						<div class="col-md-4">
-							<select class="form-control" onchange="i3GEOadmin.mapas.addInput('perfil_mapa-{{id_mapa}}',this.value)">
+							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.mapas.addInput('perfil_mapa-{{id_mapa}}',this.value)">
 								{{{opcoesPerfil}}}
 							</select>
 						</div>
@@ -130,7 +130,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="publicado_mapa">{{{publicado}}}</label>
 						<div class="col-md-8">
-							<select name="publicado_mapa" class="form-control">
+							<select title="{{{publicado}}}" name="publicado_mapa" class="form-control">
 								{{{opcoesPublicado}}}
 							</select>
 						</div>
@@ -138,13 +138,13 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ext_mapa">{{{extensao}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{ext_mapa}}}" class="form-control" name="ext_mapa">
+							<input title="{{{extensao}}}" type="text" value="{{{ext_mapa}}}" class="form-control" name="ext_mapa">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="imagem_mapa">{{{img}}}</label>
 						<div class="col-md-4">
-							<input type="text" value="{{{imagem_mapa}}}" class="form-control" name="imagem_mapa">
+							<input title="{{{img}}}" type="text" value="{{{imagem_mapa}}}" class="form-control" name="imagem_mapa">
 						</div>
 						<div class="col-md-4">
 							<a href="#" class="thumbnail">
@@ -155,19 +155,19 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="linkdireto_mapa">{{{linkDireto}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{linkdireto_mapa}}}" class="form-control" name="linkdireto_mapa">
+							<input title="{{{linkDireto}}}" type="text" value="{{{linkdireto_mapa}}}" class="form-control" name="linkdireto_mapa">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="outros_mapa">{{{parametros}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{outros_mapa}}}" class="form-control" name="outros_mapa">
+							<input title="{{{parametros}}}" type="text" value="{{{outros_mapa}}}" class="form-control" name="outros_mapa">
 						</div>
 					</div>
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 

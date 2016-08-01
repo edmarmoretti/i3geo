@@ -211,6 +211,10 @@ a, a:focus, a:hover {
 .form-group.form-group-lg .checkbox label, .form-group.form-group-lg .radio label, .form-group.form-group-lg label {
 	color: #767676;
 }
+
+h2 small {
+	color: #767676;
+}
 </style>
 </head>
 <script id="iconeAguardeTpl" type="x-tmpl-mustache">
@@ -224,8 +228,8 @@ a, a:focus, a:hover {
 	<h4 class="pull-right">{{{mensagem}}}</h4>
 	<div class="clearfix"></div>
 	<div class="pull-right">
-		<button onclick="{{{onBotao1}}}" class="btn btn-primary" role="button">{{{botao1}}}</button>
-		<button onclick="{{{onBotao2}}}" class="btn btn-primary" role="button">{{{botao2}}}</button>
+		<button onclick="{{{onBotao1}}}" class="btn btn-primary" role="button" style="color:#008579;">{{{botao1}}}</button>
+		<button onclick="{{{onBotao2}}}" class="btn btn-primary" role="button" style="color:#008579;">{{{botao2}}}</button>
 	</div>
 	<div class="clearfix"></div>
 </script>

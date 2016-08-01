@@ -29,12 +29,12 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.gruposusuarios.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.gruposusuarios.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda
@@ -83,19 +83,19 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="nome" >{{{nomeTxt}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{nome}}}" class="form-control" name="nome" required>
+							<input title="{{{nomeTxt}}}" type="text" value="{{{nome}}}" class="form-control" name="nome" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="login">{{{descricaoTxt}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{descricao}}}" class="form-control" name="descricao">
+							<input title="{{{descricaoTxt}}}" type="text" value="{{{descricao}}}" class="form-control" name="descricao">
 						</div>
 					</div>
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 

@@ -27,11 +27,11 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.atlas.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.atlas.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
@@ -73,7 +73,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="nome_atlas" >{{{titulo}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{titulo_atlas}}}" class="form-control" name="titulo_atlas" required>
+							<input title="{{{titulo}}}" type="text" value="{{{titulo_atlas}}}" class="form-control" name="titulo_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -81,7 +81,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="desc_atlas" >{{{descricao}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{desc_atlas}}}" class="form-control" name="desc_atlas" required>
+							<input title="{{{descricao}}}" type="text" value="{{{desc_atlas}}}" class="form-control" name="desc_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -89,7 +89,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="link_atlas" >{{{linkTxt}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{link_atlas}}}" class="form-control" name="link_atlas" required>
+							<input title="{{{linkTxt}}}" type="text" value="{{{link_atlas}}}" class="form-control" name="link_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -97,7 +97,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="publicado_atlas">{{{publicado}}}</label>
 						<div class="col-md-8">
-							<select name="publicado_atlas" class="form-control">
+							<select title="{{{publicado}}}" name="publicado_atlas" class="form-control">
 								{{{opcoesPublicado}}}
 							</select>
 						</div>
@@ -107,7 +107,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ordem_atlas" >{{{ordem}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{ordem_atlas}}}" class="form-control" name="ordem_atlas" required>
+							<input title="{{{ordem}}}" type="text" value="{{{ordem_atlas}}}" class="form-control" name="ordem_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -115,7 +115,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="basemapfile_atlas" >{{{mapfileInicia}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{basemapfile_atlas}}}" class="form-control" name="basemapfile_atlas" required>
+							<input title="{{{mapfileInicia}}}" type="text" value="{{{basemapfile_atlas}}}" class="form-control" name="basemapfile_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -123,7 +123,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="h_atlas" >{{{altura}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{h_atlas}}}" class="form-control" name="h_atlas" required>
+							<input title="{{{altura}}}" type="text" value="{{{h_atlas}}}" class="form-control" name="h_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -131,7 +131,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="w_atlas" >{{{largura}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{w_atlas}}}" class="form-control" name="w_atlas" required>
+							<input title="{{{largura}}}" type="text" value="{{{w_atlas}}}" class="form-control" name="w_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -139,7 +139,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="icone_atlas" >{{{iconeAtlas}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{icone_atlas}}}" class="form-control" name="icone_atlas" required>
+							<input title="{{{iconeAtlas}}}" type="text" value="{{{icone_atlas}}}" class="form-control" name="icone_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -147,7 +147,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="pranchadefault_atlas" >{{{pranchaInicia}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{pranchadefault_atlas}}}" class="form-control" name="pranchadefault_atlas" required>
+							<input title="{{{pranchaInicia}}}" type="text" value="{{{pranchadefault_atlas}}}" class="form-control" name="pranchadefault_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -155,7 +155,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="template_atlas" >{{{template}}}</label>
 						<div class="col-md-8">
-							<input type="text" value="{{{template_atlas}}}" class="form-control" name="template_atlas" required>
+							<input title="{{{template}}}" type="text" value="{{{template_atlas}}}" class="form-control" name="template_atlas" required>
 						</div>
 					</div>
 				</div>
@@ -163,7 +163,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="tipoguias_atlas" >{{{tipoGuia}}}</label>
 						<div class="col-md-8">
-							<select name="publicado_atlas" class="form-control">
+							<select title="{{{tipoGuia}}}" name="publicado_atlas" class="form-control">
 								{{{opcoesTipoGuia}}}
 							</select>
 						</div>
@@ -171,13 +171,13 @@ include "../../head.php";
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 	</div>
 	<div class="panel-footer" style="padding-top: 0px; padding-bottom: 0px;">
 		<div class="pull-right">
-			<button onclick="i3GEOadmin.atlas.editarPranchas('{{id_atlas}}','{{{titulo_atlas}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
+			<button style="color:#007a6f;" onclick="i3GEOadmin.atlas.editarPranchas('{{id_atlas}}','{{{titulo_atlas}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
 				<i class="material-icons">folder_open</i> {{{pranchas}}}
 			</button>
 		</div>

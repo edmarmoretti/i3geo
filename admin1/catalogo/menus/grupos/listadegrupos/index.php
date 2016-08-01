@@ -37,12 +37,12 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label> <select
-						onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.grupos.adicionaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button">{{{adicionar}}}</a>
+						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--
@@ -76,25 +76,25 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 						<div class="form-group form-group-lg">
 							<label class="col-md-2 control-label" for="nome">{{{nomeTxt}}} (Pt)</label>
 							<div class="col-md-10">
-								<input type="text" value="{{{nome_grupo}}}" class="form-control" name="nome_grupo" required>
+								<input title="{{{nomeTxt}}}" type="text" value="{{{nome_grupo}}}" class="form-control" name="nome_grupo" required>
 							</div>
 						</div>
 						<div class="form-group form-group-lg">
 							<label class="col-md-2 control-label" for="desc_grupo">{{{descricaoTxt}}}</label>
 							<div class="col-md-10">
-								<input type="text" value="{{{desc_grupo}}}" class="form-control" name="desc_grupo" required>
+								<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_grupo}}}" class="form-control" name="desc_grupo" required>
 							</div>
 						</div>
 						<div class="form-group form-group-lg">
 							<label class="col-md-2 control-label" for="es">Es</label>
 							<div class="col-md-10">
-								<input type="text" value="{{{es}}}" class="form-control" name="es" required>
+								<input title="Espanhol" type="text" value="{{{es}}}" class="form-control" name="es" required>
 							</div>
 						</div>
 						<div class="form-group form-group-lg">
 							<label class="col-md-2 control-label" for="en">En</label>
 							<div class="col-md-10">
-								<input type="text" value="{{{en}}}" class="form-control" name="en" required>
+								<input title="Ingles" type="text" value="{{{en}}}" class="form-control" name="en" required>
 							</div>
 						</div>
 					</form>
@@ -104,9 +104,9 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<div class="col-md-12">
 					<div class="pull-right">
 						<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_grupo}}')" class="btn btn-danger"
-							role="button">{{excluir}}</a>
+							style="color:#e13023;" role="button">{{excluir}}</a>
 						<a href="javascript:void(0)"
-							onclick="{{onSalvar}}('{{id_grupo}}')" class="btn btn-primary" role="button">{{salvar}}</a>
+							onclick="{{onSalvar}}('{{id_grupo}}')" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</a>
 					</div>
 				</div>
 			</div>

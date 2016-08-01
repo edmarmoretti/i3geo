@@ -27,11 +27,11 @@ include "../../head.php";
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 					<label class="control-label">{{{filtro}}}</label>
-					<select onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
-					<a onclick="i3GEOadmin.usuarios.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" role="button">{{{adicionar}}}</a>
+					<a onclick="i3GEOadmin.usuarios.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda-->
@@ -79,37 +79,37 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="nome_usuario" >{{{nome}}}</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{nome_usuario}}}" class="form-control" name="nome_usuario" required>
+							<input title="{{{nome}}}" type="text" value="{{{nome_usuario}}}" class="form-control" name="nome_usuario" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="login">Login</label>
 						<div class="col-md-10">
-							<input type="text" value="{{{login}}}" class="form-control" name="login" required>
+							<input title="Login" type="text" value="{{{login}}}" class="form-control" name="login" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="novasenha">{{{labelNovaSenha}}}</label>
 						<div class="col-md-10">
-							<input type="password" value="" class="form-control" name="senha" >
+							<input title="password" type="password" value="" class="form-control" name="senha" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="email">e-mail</label>
 						<div class="col-md-10">
-							<input type="email" value="{{{email}}}" class="form-control" name="email" required>
+							<input title="e-mail" type="email" value="{{{email}}}" class="form-control" name="email" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="data_cadastro">{{{labelDataCadastro}}}</label>
 						<div class="col-md-10">
-							<input disabled="" type="text" value="{{{data_cadastro}}}" class="form-control" name="data_cadastro">
+							<input title="{{{labelDataCadastro}}}" disabled="" type="text" value="{{{data_cadastro}}}" class="form-control" name="data_cadastro">
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="ativo">{{{labelAtivo}}}</label>
 						<div class="col-md-10">
-							<select name="ativo" class="form-control">
+							<select title="{{{labelAtivo}}}" name="ativo" class="form-control">
 								<option value="1" {{selAtivoSim}} >{{sim}}</option>
 								<option value="0" {{selAtivoNao}} >{{{nao}}}</option>
 							</select>
@@ -119,14 +119,14 @@ include "../../head.php";
 						<div class="col-md-2"></div>
 						<div class="checkbox col-md-10">
 								<label>
-									<input type="checkbox" checked name="enviaSenha" /> {{{enviaSenha}}}
+									<input title="{{{enviaSenha}}}" type="checkbox" checked name="enviaSenha" /> {{{enviaSenha}}}
 								</label>
 						</div>
 					</div>
 				</div>
 			</div>
 		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button">{{salvar}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 		</div>
 		</form>
 
