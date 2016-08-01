@@ -26,6 +26,11 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="well hidden">
+				<button data-toggle="modal" data-target="#previewArvore"
+					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
+					<i class="material-icons">play_circle_outline</i>
+				</button>
+
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
@@ -224,6 +229,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 <script id="templateOpcoesPerfil" type="x-tmpl-mustache">
 	<option value="{{{perfil}}}">{{{perfil}}}</option>
 </script>
+<script type="text/javascript" src="../../../index.js"></script>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../../../dicionario/subgrupos.js"></script>
 <script>

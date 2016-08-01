@@ -273,6 +273,19 @@ h2 small {
 			</div>
 		</div>
 	</div>
+	<!--Modal usado para preview da arvore do catalogo -->
+	<div id="previewArvore" class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" style="overflow: auto; height: 400px;"></div>
+			</div>
+		</div>
+	</div>
 	<nav class="navbar-fixed-bottom">
 		<div class="container"></div>
 	</nav>

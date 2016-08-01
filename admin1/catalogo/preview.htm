@@ -1,0 +1,53 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<script src="../../pacotes/ol3/ol.js"></script>
+<script type="text/javascript" src="../../js/i3geo.js"></script>
+</head>
+<body id="i3geo" style=background-color:white; >
+PREVIEW<br>
+<div id=arvoreAdicionaTema style='position:absolute;top:15px;left:15px'></div>
+<script type="text/javascript">
+i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS = {
+	incluiArvore : false,
+	uploaddbf : false, // depreciado na versao 6.0
+	uploadlocal : false, // depreciado na versao 6.0
+	uploadarquivo : false,
+	downloadbase : false,
+	conectarwms : false, // depreciado na versao 6.0
+	conectarwmst : false, // depreciado na versao 6.0
+	conectargeorss : false, // depreciado na versao 6.0
+	conectargeojson : false, // depreciado na versao 6.0
+	nuvemTags : false,
+	nuvemTagsFlash : false,
+	navegacaoDir : false,
+	incluibusca : false,
+	kml : false,
+	qrcode : false,
+	mini : false,
+	estrelas : false,
+	refresh : false,
+	carousel : false,
+	inde : false,
+	uploadgpx : false, // depreciado na versao 6.0
+	comentarios : false,
+	bookmark : false,
+	importarwmc : false,
+	googleearth : false,
+	carregaKml : false, // depreciado na versao 6.0
+	flutuante : false,
+	metaestat : false,
+	idonde : ""
+};
+i3GEO.arvoreDeTemas.INCLUIINDIBR = false;
+
+i3GEO.cria();
+i3GEO.inicia();
+i3GEO.ajuda.ATIVAJANELA = false;
+i3GEO.arvoreDeTemas.atualiza();
+</script>
+</body>
+
+</html>

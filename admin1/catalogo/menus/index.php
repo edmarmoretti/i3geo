@@ -18,22 +18,29 @@ include "../../head.php";
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="well hidden" id="titulo">
+				<button data-toggle="modal" data-target="#previewArvore"
+					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
+					<i class="material-icons">play_circle_outline</i>
+				</button>
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
-				<h2><small>{{{txtTitulo}}}</small></h2>
+
+				<h2>
+					<small>{{{txtTitulo}}}</small>
+				</h2>
 				<blockquote>{{{txtDesc}}}</blockquote>
 
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					<label class="control-label">{{{filtro}}}</label> <select
-						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+					<label class="control-label">{{{filtro}}}</label> <select title="{{{filtro}}}"
+						onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.menus.adicionaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>
+						class="btn btn-primary" role="button" style="color: #008579;">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
@@ -154,6 +161,7 @@ include "../../head.php";
 	<option {{SIM-sel}} value="SIM">{{{sim}}}</option>
 	<option {{NAO-sel}} value="NAO">{{{nao}}}</option>
 </script>
+<script type="text/javascript" src="../index.js"></script>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../dicionario/menus.js"></script>
 <script>
