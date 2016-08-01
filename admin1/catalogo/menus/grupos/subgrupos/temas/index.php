@@ -59,7 +59,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 <option value="form-{{id_n3}}">{{{nome_tema}}}</option>
 </script>
 <script id="templateTemas" type="x-tmpl-mustache">
-<div class="panel panel-default" id="form-{{id_n3}}">
+<div class="panel panel-default" data-id="{{id_n3}}" id="form-{{id_n3}}">
 	<div class="panel-heading" role="tab">
 		<h3 class="panel-title" {{escondido}}>
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n3}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
@@ -67,7 +67,9 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 			</a>
 			&nbsp;
 			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_n3}}"
-			aria-expanded="false" aria-controls="#body-form-{{id_n3}}"> {{{nome_tema}}} </a>
+			aria-expanded="false" aria-controls="#body-form-{{id_n3}}"> {{{nome_tema}}}
+			<i  class="material-icons move" style="color: gray; display:none;">swap_vert</i>
+			</a>
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_n3}}">

@@ -85,7 +85,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 <option value="formNo-{{id_n2}}">{{{nome_subgrupo}}}</option>
 </script>
 <script id="templateRaiz" type="x-tmpl-mustache">
-<div class="panel panel-default" id="formRaiz-{{id_raiz}}">
+<div class="panel panel-default" data-id="{{id_raiz}}" id="formRaiz-{{id_raiz}}">
 	<div class="panel-heading" role="tab">
 		<h3 class="panel-title" {{escondido}}>
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_raiz}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
@@ -93,7 +93,9 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			</a>
 			&nbsp;
 			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-formRaiz-{{id_raiz}}"
-			aria-expanded="false" aria-controls="#body-formRaiz-{{id_raiz}}"> {{{nome_tema}}} </a>
+			aria-expanded="false" aria-controls="#body-formRaiz-{{id_raiz}}"> {{{nome_tema}}}
+			<i  class="material-icons move" style="color: gray; display:none;">swap_vert</i>
+			</a>
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-formRaiz-{{id_raiz}}">
@@ -136,7 +138,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 </div>
 </script>
 <script id="templateNos" type="x-tmpl-mustache">
-<div class="panel panel-default" id="formNo-{{id_n2}}">
+<div class="panel panel-default" data-id="{{id_n2}}" id="formNo-{{id_n2}}">
 	<div class="panel-heading" role="tab">
 		<h3 class="panel-title" {{escondido}}>
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n2}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
@@ -144,7 +146,9 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			</a>
 			&nbsp;
 			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-formNo-{{id_n2}}"
-			aria-expanded="false" aria-controls="#body-formNo-{{id_n2}}"> {{{nome_subgrupo}}} </a>
+			aria-expanded="false" aria-controls="#body-formNo-{{id_n2}}"> {{{nome_subgrupo}}}
+			<i  class="material-icons move" style="color: gray; display:none;">swap_vert</i>
+			</a>
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-formNo-{{id_n2}}">

@@ -67,6 +67,25 @@ i3GEOadmin.temas = {
 							i3GEOadmin.core.filtra(i3GEOadmin.core.pegaFiltro());
 						}
 						i3GEOadmin.temas.listaTemas(json["dados"],opcoesPerfil,json["temas"]);
+
+						//torna os paineis ordenavies
+						i3GEOadmin.temas.onde.sortable({
+							update: function( event, ui ) {
+								var data = i3GEOadmin.temas.onde.sortable('toArray', {attribute: "data-id"});
+								i3GEOadmin.temas.ordena(data);
+							}
+						});
+
+						//faz com que seja mostrado um icone de ordenamento no mouseover
+						$('.panel').hover(
+						        function(){
+						            $(this).find('.move').fadeIn(400);
+						        },
+						        function(){
+						            $(this).find('.move').fadeOut(250);
+						        }
+						    );
+
 						$.material.init();
 					}
 			)
@@ -221,6 +240,26 @@ i3GEOadmin.temas = {
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.temas.onde);
+						i3GEOadmin.temas.lista();
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
+		ordena: function(data){
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+				"exec.php?funcao=ordena",
+				"id_n2=" + i3GEOadmin.temas.id_n2 + "&ordem=" + data.join(" ")
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.temas.ondeNos);
 						i3GEOadmin.temas.lista();
 					}
 			)

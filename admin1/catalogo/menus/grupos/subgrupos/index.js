@@ -55,6 +55,31 @@ i3GEOadmin.subgrupos = {
 						);
 						i3GEOadmin.subgrupos.listaRaiz(json["raiz"],opcoesPerfil,json["temas"]);
 						i3GEOadmin.subgrupos.listaNos(json["subgrupos"],opcoesPerfil,json["tiposSubGrupos"]);
+
+						//torna os paineis ordenavies
+						i3GEOadmin.subgrupos.ondeNos.sortable({
+							update: function( event, ui ) {
+								var data = i3GEOadmin.subgrupos.ondeNos.sortable('toArray', {attribute: "data-id"});
+								i3GEOadmin.subgrupos.ordenaNos(data);
+							}
+						});
+						i3GEOadmin.subgrupos.ondeRaiz.sortable({
+							update: function( event, ui ) {
+								var data = i3GEOadmin.subgrupos.ondeRaiz.sortable('toArray', {attribute: "data-id"});
+								i3GEOadmin.subgrupos.ordenaRaiz(data);
+							}
+						});
+
+						//faz com que seja mostrado um icone de ordenamento no mouseover
+						$('.panel').hover(
+						        function(){
+						            $(this).find('.move').fadeIn(400);
+						        },
+						        function(){
+						            $(this).find('.move').fadeOut(250);
+						        }
+						    );
+
 						$.material.init();
 					}
 			)
@@ -393,6 +418,46 @@ i3GEOadmin.subgrupos = {
 			$.post(
 					"exec.php?funcao=alterar",
 					"id_n2="+ id + "&"+parametros + "&id_menu=" + i3GEOadmin.subgrupos.id_menu
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeNos);
+						i3GEOadmin.subgrupos.lista();
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
+		ordenaNos: function(data){
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+				"exec.php?funcao=ordena",
+				"id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&ordem=" + data.join(" ")
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeNos);
+						i3GEOadmin.subgrupos.lista();
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
+		ordenaRaiz: function(data){
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+				"execraiz.php?funcao=ordena",
+				"id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&ordem=" + data.join(" ")
 			)
 			.done(
 					function(data, status){

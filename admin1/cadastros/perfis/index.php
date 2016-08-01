@@ -62,7 +62,7 @@ include "../../head.php";
 	<div class="panel panel-default" id="form-{{id_perfil}}">
 		<div class="panel-body">
 			<div class="row">
-				<div class="col-md-7">
+				<div class="col-md-12">
 					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
 						method="post"  >
 						<div class="form-group form-group-lg">
@@ -72,14 +72,13 @@ include "../../head.php";
 							</div>
 						</div>
 					</form>
-				</div>
-				<div class="col-md-5">
 					<div class="pull-right">
 						<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_perfil}}')" class="btn btn-danger"
 							role="button">{{excluir}}</a>
 						<a href="javascript:void(0)"
 							onclick="{{onSalvar}}('{{id_perfil}}')" class="btn btn-primary" role="button">{{salvar}}</a>
 					</div>
+
 				</div>
 			</div>
 		</div>
