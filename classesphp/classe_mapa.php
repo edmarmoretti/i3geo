@@ -1239,9 +1239,9 @@ class Mapa
 				$extensao = ".gvp";
 			}
 			if($extensao == ".php"){
-				include_once($locaplic."/temas/".$nome.".php");
+				//include_once($locaplic."/temas/".$nome.".php");
 				if(function_exists($nome)){
-					eval($nome."(\$this->mapa);");
+					//eval($nome."(\$this->mapa);");
 				}
 			}
 			if($extensao == ".gvp"){
