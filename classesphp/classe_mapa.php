@@ -1233,7 +1233,7 @@ class Mapa
 			//
 			$extensao = ".map";
 			if ((file_exists($locaplic."/temas/".$nome.".php")) || (file_exists($nome.".php"))){
-				$extensao = ".php";
+				//$extensao = ".php";
 			}
 			if ((file_exists($locaplic."/temas/".$nome.".gvp")) || (file_exists($nome.".gvp"))){
 				$extensao = ".gvp";

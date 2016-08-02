@@ -799,10 +799,10 @@ function incluiTemasIniciais(){
 			$arqtemp = $arqt;
 		}
 		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."php"))){
-			$extensao = ".php";
+			//$extensao = ".php";
 		}
 		elseif (file_exists($temasdir."/".$arqt.".php")){
-			$extensao = ".php";
+			//$extensao = ".php";
 		}
 		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."gvp"))){
 			$extensao = ".gvp";
@@ -870,8 +870,8 @@ function incluiTemasIniciais(){
 					}
 				}
 				if($extensao == ".php"){
-					include_once($arqtemp);
-					eval($arqt."(\$mapn);");
+					//include_once($arqtemp);
+					//eval($arqt."(\$mapn);");
 				}
 				if($extensao == ".gvp"){
 					include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
