@@ -221,8 +221,6 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 	";
 	exit;
 }
-
-
 //$_COOKIE = array();
 //
 //quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute; sendo utilizado como um include em classesphp/mapa_controle.php
