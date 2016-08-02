@@ -38,7 +38,7 @@ if (ob_get_level() == 0) ob_start();
 			sleep(1);
 			$arqcsv = $_FILES['i3GEOuploadcsv']['tmp_name'];
 			$nomePrefixo = str_replace(" ","_",removeAcentos($_FILES['i3GEOuploadcsv']['name']));
-			$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4));
+			$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4)).".csv";
 
 			$Arquivo = $_FILES['i3GEOuploadcsv']['tmp_name'];
 			$status =  move_uploaded_file($Arquivo,$dir_tmp."/".$nomePrefixo);

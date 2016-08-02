@@ -22,9 +22,10 @@ if (isset($_FILES['i3GEOuploadgvp']['name'])){
 	ob_flush();
 	flush();
 	sleep(1);
-	$arq = $locaplic."/temas/".$_FILES['i3GEOuploadgvp']['name'];
-	//verifica nomes
 	verificaNome($_FILES['i3GEOuploadgvp']['name']);
+	$ArquivoDest = $_FILES['i3GEOuploadgvp']['name'];
+	$ArquivoDest = str_replace(".gvp","",$ArquivoDest).".gvp";
+	$arq = $locaplic."/temas/".$ArquivoDest;
 	if(file_exists($arq)){
 		unlink($arq);
 	}

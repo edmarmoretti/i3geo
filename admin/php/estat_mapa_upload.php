@@ -28,7 +28,7 @@ if (isset($_FILES['uploadimagem']['name'])){
 	//sobe arquivo
 	$Arquivo = $_FILES['uploadimagem']['tmp_name'];
 	//echo $Arquivo;
-	$status =  move_uploaded_file($Arquivo,$arq);
+	$status =  move_uploaded_file($Arquivo,str_replace(".png","",$arq).".png");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo. Verifique as permissoes de escrita";exit;}
 	if($status == 1){

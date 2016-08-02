@@ -7,7 +7,7 @@ if (isset($_FILES['i3GEOuploadArquivo']['name']))
 {
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	$Arquivoup = $_FILES['i3GEOuploadArquivo']['tmp_name'];
-	$nomearquivoserv = $dir_tmp."/upload".basename($Arquivoup);
+	$nomearquivoserv = $dir_tmp."/upload".basename($Arquivoup).".csv";
 	//echo $nomearquivoserv;
 	if(file_exists($nomearquivoserv)){
 		unlink($nomearquivoserv);
