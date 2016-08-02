@@ -27,7 +27,7 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name'])){
 	sleep(1);
 	include_once(dirname(__FILE__)."/../../admin/php/login.php");
 	if(verificaOperacaoSessao("admin/php/editortexto") == false){
-		echo "Vc nao pode realizar salvar os dados no servidor em uma pasta espec&iacute;fica";exit;
+		echo "Vc nao pode salvar os dados no servidor em uma pasta espec&iacute;fica";exit;
 	}
 	if(!isset($dirDestino) || $dirDestino == ""){
 		$dirDestino = $locaplic."/symbols/images";

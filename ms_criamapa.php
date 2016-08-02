@@ -595,10 +595,10 @@ $_SESSION["map_file"] = $tmpfname;
 $_SESSION["mapext"] = $mapext;
 if (isset($executa)){
 	if (file_exists($executa)){
-		include_once ($executa);
+		//include_once ($executa);
 	}
 	if (function_exists($executa)){
-		eval($executa."();");
+		//eval($executa."();");
 	}
 }
 if(isset($wkt)){
