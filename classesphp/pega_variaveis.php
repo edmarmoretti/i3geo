@@ -56,16 +56,16 @@ i3geo/classesphp/pega_variaveis.php
 //echo "<pre>";
 //var_dump($_POST);exit;
 error_reporting(0);
-$bl = array("passthru","shell_exec","escapeshellarg","escapeshellcmd","proc_close","proc_open","dl","popen"," ","base64","contents","delete","drop","update","insert","exec","system",";");
+$bl = array("_decode","php","eval","passthru","shell_exec","escapeshellarg","escapeshellcmd","proc_close","proc_open","dl","popen","contents","delete","drop","update","insert","exec","system",";");
 if (isset($_GET))
 {
 	foreach(array_keys($_GET) as $k)
 	{
 		$k = str_ireplace($bl,"",$k);
+		$k = filter_var($k, FILTER_SANITIZE_STRING);
 		if ($_GET[$k] != "''"){
 			$v = strip_tags($_GET[$k]);
 			$v = str_ireplace($bl,"",$v);
-			//$v = filter_var($v, FILTER_SANITIZE_STRING,FILTER_FLAG_ENCODE_LOW);
 			eval("\$".$k."='".(trim($v))."';");
 		}
 	}
@@ -77,8 +77,8 @@ if (isset($_POST))
 	foreach(array_keys($_POST) as $k)
 	{
 		$k = str_ireplace($bl,"",$k);
+		$k = filter_var($k, FILTER_SANITIZE_STRING);
 		$_POST[$k] = str_ireplace($bl,"",$_POST[$k]);
-		//$_POST[$k] = filter_var($_POST[$k], FILTER_SANITIZE_STRING,FILTER_FLAG_ENCODE_LOW);
 		if (($_POST[$k] != "''"))
 		eval("\$".$k."='".(strip_tags(trim($_POST[$k])))."';");
 

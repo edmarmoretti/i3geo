@@ -2829,6 +2829,7 @@ function cloneInlineSymbol($layern,$nmapa,$mapa){
 //recupera um mapfile armazenado no banco de dados de administracao
 //ver admin/php/mapas.php salvaMapfile
 function restauraMapaAdmin($id_mapa,$dir_tmp){
+	return;
 	include(dirname(__FILE__)."/../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
