@@ -25,10 +25,12 @@ if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]
 {
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	//verifica nomes
-	verificaNome($_FILES['i3GEOimportarwmc']['name']);
+	$ArquivoDest = $_FILES['i3GEOimportarwmc']['name'];
+	$ArquivoDest = str_replace(".xml","",$ArquivoDest).".xml";
+	verificaNome($ArquivoDest);
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOimportarwmc']['tmp_name'];
-	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOimportarwmc']['name']);
+	$status =  move_uploaded_file($Arquivo,$dirmap."/".$ArquivoDest);
 	$arquivo = $dirmap."/".$_FILES['i3GEOimportarwmc']['name'];
 }
 if($_POST["i3GEOimportarwmcurl"])

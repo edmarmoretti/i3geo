@@ -251,7 +251,6 @@ include_once (dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
-
 //
 //verifica a sessao que controla o login do usuario
 //

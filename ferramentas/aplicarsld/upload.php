@@ -28,10 +28,13 @@ if (isset($_FILES['i3GEOaplicarsld']['name']))
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = dirname($map_file);
 	//verifica nomes
-	verificaNome($_FILES['i3GEOaplicarsld']['name']);
+	$ArquivoDest = $_FILES['i3GEOaplicarsld']['name'];
+	$ArquivoDest = str_replace(".sld","",$ArquivoDest).".sld";
+	verificaNome($ArquivoDest);
+
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOaplicarsld']['tmp_name'];
-	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOaplicarsld']['name']);
+	$status =  move_uploaded_file($Arquivo,$dirmap."/".$ArquivoDest);
 
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SLD";paraAguarde();exit;}

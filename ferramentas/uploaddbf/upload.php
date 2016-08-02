@@ -31,13 +31,24 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	sleep(1);
 	$dirmap = dirname($map_file);
 	//verifica nomes
+	$ArquivoDest = $_FILES['i3GEOuploaddbffile']['name'];
+	if($i3GEOuploaddbftipoarquivo != "dbf"){
+		$ArquivoDest = str_replace(".csv","",$ArquivoDest).".csv";
+	}
+	else{
+		$ArquivoDest = str_replace(".dbf","",$ArquivoDest).".dbf";
+	}
+	verificaNome($ArquivoDest);
+
+
+
 	verificaNome($_FILES['i3GEOuploaddbffile']['name']);
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploaddbffile']['tmp_name'];
-	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
+	$status =  move_uploaded_file($Arquivo,$dirmap."/".$ArquivoDest);
 	if($status != 1)
 	{echo "Ocorreu um erro no envio do arquivo";paraAguarde();exit;}
-	$nome = explode(".",$_FILES['i3GEOuploaddbffile']['name']);
+	$nome = explode(".",$ArquivoDest);
 	$nome = $nome[0];
 	$nome = $nome."_".(nomeRandomico(4));
 	$nomeshp = $dirmap."/".$nome.".shp";

@@ -32,11 +32,13 @@ if (isset($_FILES['i3GEOuploadkml']['name']))
 	sleep(1);
 	$dirmap = dirname($map_file);
 	//verifica nomes
-	verificaNome($_FILES['i3GEOuploadkml']['name']);
+	$ArquivoDest = $_FILES['i3GEOuploadkml']['name'];
+	$ArquivoDest = str_replace(".kml","",$ArquivoDest).".kml";
+	verificaNome($ArquivoDest);
 
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadkml']['tmp_name'];
-	$status =  move_uploaded_file($Arquivo,$dirmap."/".$_FILES['i3GEOuploadkml']['name']);
+	$status =  move_uploaded_file($Arquivo,$dirmap."/".$ArquivoDest);
 
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo kml";paraAguarde();exit;}
@@ -49,15 +51,15 @@ if (isset($_FILES['i3GEOuploadkml']['name']))
 		$tipos = array("pontos","linhas","poligonos");
 		foreach($tipos as $tipo){
 			$novolayer = ms_newLayerObj($mapa);
-			$novolayer->set("connection",$dirmap."/".$_FILES['i3GEOuploadkml']['name']);
+			$novolayer->set("connection",$dirmap."/".$ArquivoDest);
 			if(ms_GetVersionInt() > 50201)
 			{$novolayer->setconnectiontype(MS_OGR);}
 			else
 			{$novolayer->set("connectiontype",MS_OGR);}
 
-			$nome = str_replace(".","",$_FILES['i3GEOuploadkml']['name']);
+			$nome = str_replace(".","",$ArquivoDest);
 			$novolayer->set("name",$nome.$tipo);
-			$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadkml']['name']." ".$tipo);
+			$novolayer->setmetadata("TEMA",$ArquivoDest." ".$tipo);
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->setmetadata("CLASSE","SIM");
 			$novolayer->setmetadata("TEXTO","NAO");

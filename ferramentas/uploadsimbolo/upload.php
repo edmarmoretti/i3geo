@@ -41,6 +41,9 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name'])){
 	//verifica nomes
 
 	$nome = basename($_FILES['i3GEOuploadsimboloarq']['name']);
+
+	$nome = str_replace(".png","",$nome).".png";
+
 	verificaNome($nome);
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadsimboloarq']['tmp_name'];

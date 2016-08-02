@@ -24,6 +24,8 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = $dir_tmp;
 	$Arquivo = $_FILES['i3GEOcarregamapafilemap']['name'];
+	$Arquivo = str_replace(".map","",$Arquivo).".map";
+
 	verificaNome($Arquivo);
 	/*
 	$statusNome = 1;
