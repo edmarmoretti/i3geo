@@ -40,7 +40,7 @@ switch (strtoupper($funcao))
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($tema);
 		if($l != ""){
-			$l->setmetadata("tme",base64_decode($tme));
+			//$l->setmetadata("tme",base64_decode($tme));
 			$mapa->save($map_file);
 		}
 		$arq = $locaplic."/temas/".$tema.".map";
@@ -48,7 +48,7 @@ switch (strtoupper($funcao))
 			$mapa = ms_newMapObj($arq);
 			$l = $mapa->getlayerbyname($tema);
 			if($l != ""){
-				$l->setmetadata("tme",base64_decode($tme));
+				//$l->setmetadata("tme",base64_decode($tme));
 				$mapa->save($arq);
 				removeCabecalho($arq);
 			}
