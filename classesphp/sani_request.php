@@ -15,42 +15,44 @@ if (isset($_GET)){
 		}
 	}
 }
+//array(3) { ["cpaint_function"]=> string(8) "criaMapa" ["cpaint_argument"]=> array(1) { [0]=> string(54) ""funcao=criaMapa&&desligar=mundo&interface=openlayers"" } ["cpaint_response_type"]=> string(4) "JSON" }
+
 if (isset($_POST)){
-	foreach(array_keys($_POST) as $k){
-		$k = str_ireplace($bl,"",$k);
-		$k = filter_var($k, FILTER_SANITIZE_STRING);
-		$_POST[$k] = str_ireplace($bl,"",$_POST[$k]);
-		if (($_POST[$k] != "''")){
-			$_POST[$k] = strip_tags(trim($_POST[$k]));
+	if (isset($_POST["cpaint_argument"]) && $_POST["cpaint_argument"][0] != "")
+	{
+		//var_dump( $_POST["cpaint_argument"]);exit;
+		$argumento_ = $_POST["cpaint_argument"][0];
+		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
+			$argumento_ = str_replace("\\\"","",$argumento_);
+		}
+		else{
+			$argumento_ = str_replace("\"","",$argumento_);
 		}
 
-		if (($_POST[$k] != "''") && ($k == "cpaint_argument"))
-		{
-			foreach($_POST["cpaint_argument"] as $argumento_)
-			{
-				if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-				{$argumento_ = str_replace("\\\"","",$argumento_);}
-				else
-				{$argumento_ = str_replace("\"","",$argumento_);}
-				$argumento_ = explode('"',$argumento_);
-				$argumento_ = implode("&",$argumento_);
-				$parametros_ = explode("&",$argumento_);
-				foreach($parametros_ as $parametro_)
-				{
-					$p_ = explode("=",$parametro_);
-					$parametro = $p_[0];
-					$p_ = array_slice($p_, 1, count($p_));
-					$valor_ = implode("=",$p_);
-					if($parametro != ""){
-						$valor_ = str_replace("'","*#*",$valor_);
-						$valor_ = trim($valor_);
-						$parametro = filter_var($parametro, FILTER_SANITIZE_STRING);
-						$valor = filter_var($valor, FILTER_SANITIZE_STRING);
-						$_POST[$parametro] = str_replace('*#*',"'",$valor_);
-						//eval("\$".$parametro."='".(trim($valor_))."';");
-						//eval("\$".$parametro."=str_replace('*#*','\'',\$".$parametro.");");
-					}
-				}
+		$argumento_ = explode('"',$argumento_);
+		$argumento_ = implode("&",$argumento_);
+		$parametros_ = explode("&",$argumento_);
+		foreach($parametros_ as $parametro_){
+			$p_ = explode("=",$parametro_);
+			$parametro = $p_[0];
+			$p_ = array_slice($p_, 1, count($p_));
+			$valor_ = implode("=",$p_);
+			if($parametro != ""){
+				$valor_ = str_replace("'","*#*",$valor_);
+				$valor_ = trim($valor_);
+				$parametro = filter_var($parametro, FILTER_SANITIZE_STRING);
+				$valor = filter_var($valor, FILTER_SANITIZE_STRING);
+				$_POST[$parametro] = str_replace('*#*',"'",$valor_);
+			}
+		}
+	}
+	else{
+		foreach(array_keys($_POST) as $k){
+			$k = str_ireplace($bl,"",$k);
+			$k = filter_var($k, FILTER_SANITIZE_STRING);
+			$_POST[$k] = str_ireplace($bl,"",$_POST[$k]);
+			if (($_POST[$k] != "''")){
+				$_POST[$k] = strip_tags(trim($_POST[$k]));
 			}
 		}
 	}

@@ -109,8 +109,11 @@ error_reporting(0);
 //
 $tempo = microtime(1);
 
-include_once("pega_variaveis.php");
-
+include_once("sani_request.php");
+$_pg = array_merge($_GET,$_POST);
+$interface = $_pg["interface"];
+$funcao = $_pg["funcao"];
+$g_sid = $_pg["g_sid"];
 $interfaceTemp = $interface;
 //
 //inicializa a sessao
@@ -166,6 +169,9 @@ if ($funcao != "pegaTodosTemas" && $funcao != "download3" && $funcao != "listain
 			return;
 		}
 	}
+}
+else{
+	$map_file = "";
 }
 //
 //isso &eacute; necess&aacute;rio pois a vari&aacute;vel "interface" pode ser utilizada como par&acirc;metro em algumas fun&ccedil;&otilde;es ajax
@@ -247,8 +253,6 @@ if($funcao != "recuperamapa" && $funcao != "TEMA2SLD")
 {
 	if(!substituiCon($map_file,$postgis_mapa))
 	{
-		//$cp->set_data("erro");
-		//$cp->return_data();
 		cpjson("erro",$cp);
 		return;
 	}
@@ -273,7 +277,10 @@ switch (strtoupper($funcao))
 	*/
 	case "INICIA":
 		include_once("mapa_inicia.php");
-		//include(dirname(__FILE__)."/../ms_configura.php");
+		$kmlurl = $_pg["kmlurl"];
+		$embedLegenda = $_pg["embedLegenda"];
+		$w = $_pg["w"];
+		$h = $_pg["h"];
 		iniciaMapa();
 		break;
 		/*
@@ -345,7 +352,7 @@ switch (strtoupper($funcao))
 	case "INCMAPAGEOMETRIAS":
 		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
-		$retorno = $m->incmapageometrias($dir_tmp,$imgdir,$lista);
+		$retorno = $m->incmapageometrias($dir_tmp,$imgdir,$_pg["lista"]);
 		$_SESSION["contadorsalva"]++;
 		break;
 		/*
@@ -359,8 +366,8 @@ switch (strtoupper($funcao))
 	case "FUNCOESGEOMETRIAS":
 		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
-		$retorno = $m->funcoesGeometrias($dir_tmp,$imgdir,$lista,$operacao);
-		if($recalcareaper == "true"){
+		$retorno = $m->funcoesGeometrias($dir_tmp,$imgdir,$_pg["lista"],$_pg["operacao"]);
+		if($_pg["recalcareaper"] == "true"){
 			$m->calculaGeometrias($dir_tmp,$imgdir,basename($retorno),"area");
 			$m->calculaGeometrias($dir_tmp,$imgdir,basename($retorno),"perimetro");
 		}
@@ -378,7 +385,7 @@ switch (strtoupper($funcao))
 	case "FUNCOESGEOMETRIASWKT":
 		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
-		$retorno = $m->aplicaFuncaoListaWKT(explode("|",$geometrias),$operacao,$dir_tmp,$imgdir);
+		$retorno = $m->aplicaFuncaoListaWKT(explode("|",$_pg["geometrias"]),$_pg["operacao"],$dir_tmp,$imgdir);
 		break;
 		/*
 		 Valor: CALCULAGEOMETRIAS
@@ -391,7 +398,7 @@ switch (strtoupper($funcao))
 	case "CALCULAGEOMETRIAS":
 		include_once("classe_analise.php");
 		$m = new Analise($map_file,"");
-		$retorno = $m->calculaGeometrias($dir_tmp,$imgdir,$lista,$operacao);
+		$retorno = $m->calculaGeometrias($dir_tmp,$imgdir,$_pg["lista"],$_pg["operacao"]);
 		break;
 		/*
 		 Valor: LISTAGEOMETRIAS
@@ -404,10 +411,10 @@ switch (strtoupper($funcao))
 		*/
 	case "LISTAGEOMETRIAS":
 		include_once("classe_temas.php");
-		if(!isset($tema)){
+		if(!isset($_pg["tema"])){
 			$tema = "";
 		}
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$retorno = $m->listaGeometrias($dir_tmp,$imgdir);
 		break;
 		/*
@@ -421,8 +428,8 @@ switch (strtoupper($funcao))
 		*/
 	case "CAPTURAGEOMETRIAS":
 		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
-		$retorno = $m->capturaGeometrias($dir_tmp,$imgdir,$nome);
+		$m = new Temas($map_file,$_pg["tema"]);
+		$retorno = $m->capturaGeometrias($dir_tmp,$imgdir,$_pg["nome"]);
 		break;
 		/*
 		 Section: Mapa
@@ -524,10 +531,10 @@ switch (strtoupper($funcao))
 	case "CONVERTEWS":
 		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
-		if(!isset($h)){
-			$h = "";
+		if(!isset($_pg["h"])){
+			$_pg["h"] = "";
 		}
-		$retorno = $m->converteWS($locaplic,$h);
+		$retorno = $m->converteWS($locaplic,$_pg["h"]);
 		break;
 		/*
 		 Valor: QUERYMAPCOR
@@ -540,7 +547,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$m->corQM($cor);
+		$m->corQM($_pg["cor"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -576,7 +583,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$retorno = $m->adicionaTemaSHP($arq);
+		$retorno = $m->adicionaTemaSHP($_pg["arq"]);
 		if ($retorno != "erro")
 		{
 			$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();
@@ -597,7 +604,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$retorno = $m->adicionaTemaIMG($arq);
+		$retorno = $m->adicionaTemaIMG($_pg["arq"]);
 		if ($retorno != "erro")
 		{
 			$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();
@@ -617,7 +624,7 @@ switch (strtoupper($funcao))
 	case "LISTATEMAS":
 		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
-		$retorno = $m->listaTemas($tipo);
+		$retorno = $m->listaTemas($_pg["tipo"]);
 		$retorno = array_reverse($retorno);
 		break;
 		/*
@@ -642,10 +649,10 @@ switch (strtoupper($funcao))
 	case "LISTATEMASTIPO":
 		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
-		if(!isset($selecao) || $selecao == ""){
-			$selecao = "nao";
+		if(!isset($_pg["selecao"]) || $_pg["selecao"] == ""){
+			$_pg["selecao"] = "nao";
 		}
-		$retorno = $m->listaTemasTipo($tipo,$selecao);
+		$retorno = $m->listaTemasTipo($_pg["tipo"],$_pg["selecao"]);
 		break;
 		/*
 		 Valor: LISTATEMASCOMSEL
@@ -670,7 +677,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file,$locaplic);
-		$retorno = $m->ligaDesligaTemas($ligar,$desligar,$adicionar);
+		$retorno = $m->ligaDesligaTemas($_pg["ligar"],$_pg["desligar"],$_pg["adicionar"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		break;
@@ -689,7 +696,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file,$locaplic);
-		$retorno = $m->ligaDesligaTemas($ligar,$desligar,$adicionar);
+		$retorno = $m->ligaDesligaTemas($_pg["ligar"],$_pg["desligar"],$_pg["adicionar"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		ob_start();
@@ -708,7 +715,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$salvar = $m->adicionaTema($temas,$locaplic);
+		$salvar = $m->adicionaTema($_pg["temas"],$locaplic);
 		if($salvar){
 			$m->salva();
 			$_SESSION["contadorsalva"]++;
@@ -736,7 +743,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$m->excluiTemas($temas);
+		$m->excluiTemas($_pg["temas"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -752,7 +759,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$m->adicionatemawms($tema,$servico,$nome,$proj,$formato,$locaplic,$tipo,$versao,$nomecamada,$dir_tmp,$imgdir,$imgurl,$tiporep,$suportasld,$formatosinfo,$time,$tile);
+		$m->adicionatemawms($_pg["tema"],$_pg["servico"],$_pg["nome"],$_pg["proj"],$_pg["formato"],$locaplic,$_pg["tipo"],$_pg["versao"],$_pg["nomecamada"],$dir_tmp,$imgdir,$imgurl,$_pg["tiporep"],$_pg["suportasld"],$_pg["formatosinfo"],$_pg["time"],$_pg["tile"]);
 		$teste = "ok";//testaMapa($map_file,$postgis_mapa);
 		if ($teste == "ok")
 		{
@@ -770,6 +777,7 @@ switch (strtoupper($funcao))
 	case "REFERENCIA":
 		$objMapa = ms_newMapObj($map_file);
 		$nomeImagem = nomeRandomico();
+		$ext = $_pg["ext"];
 		if(!isset($ext))
 		{
 			$ext = "";
@@ -784,11 +792,12 @@ switch (strtoupper($funcao))
 	case "REFERENCIADINAMICA":
 		//$objMapa = ms_newMapObj($map_file);
 		$nomeImagem = nomeRandomico();
+		$ext = $_pg["ext"];
 		if(!isset($ext))
 		{
 			$ext = "";
 		}
-		$retorno = retornaReferenciaDinamica($ext,$w,$h);
+		$retorno = retornaReferenciaDinamica($ext,$_pg["w"],$_pg["h"]);
 		break;
 		/*
 		 Valor: MUDAOUTPUTFORMAT
@@ -801,7 +810,7 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$res = $m->mudaoutputformat($tipo);
+		$res = $m->mudaoutputformat($_pg["tipo"]);
 		if($res != 1)
 		{
 			$m->salva();$_SESSION["contadorsalva"]++;
@@ -827,7 +836,7 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGANOMELAYER":
 		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$retorno = $m->peganomelayer();
 		break;
 		/*
@@ -842,6 +851,7 @@ switch (strtoupper($funcao))
 	case "PEGAMETADATA":
 		include_once("classe_temas.php");
 		//pode pegar os metadata de um mapfile existente em i3geo/temas
+		$tema = $_pg["tema"];
 		if(file_exists(dirname(__FILE__)."/../temas/".$tema.".map")){
 			$map_file = dirname(__FILE__)."/../temas/".$tema.".map";
 		}
@@ -864,7 +874,7 @@ switch (strtoupper($funcao))
 		}
 		else{
 			include_once("classe_temas.php");
-			$m = new Temas($map_file,$tema);
+			$m = new Temas($map_file,$_pg["tema"]);
 			$retorno = $m->pegadata();
 		}
 		break;
@@ -884,8 +894,8 @@ switch (strtoupper($funcao))
 		}
 		else{
 			include_once("classe_temas.php");
-			$m = new Temas($map_file,$tema);
-			$retorno = $m->alteradata($novodata,$removemeta);
+			$m = new Temas($map_file,$_pg["tema"]);
+			$retorno = $m->alteradata($_pg["novodata"],$_pg["removemeta"]);
 			if($retorno != ""){
 				$m->salva();
 			}
@@ -906,8 +916,8 @@ switch (strtoupper($funcao))
 		if(!isset($tema)){
 			$tema = "";
 		}
-		$m = new Temas($map_file,$tema);
-		$retorno = $m->removerGeometrias($dir_tmp,$imgdir,$lista);
+		$m = new Temas($map_file,$_pg["tema"]);
+		$retorno = $m->removerGeometrias($dir_tmp,$imgdir,$_pg["lista"]);
 		break;
 		/*
 		 Valor: ALTERAREPRESENTACAO
@@ -919,7 +929,7 @@ switch (strtoupper($funcao))
 	case "ALTERAREPRESENTACAO":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$m->alteraRepresentacao();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -934,14 +944,14 @@ switch (strtoupper($funcao))
 		*/
 	case "GERADESTAQUE":
 		include_once("classe_temas.php");
-		$m = new Temas($map_file,$tema,"",$ext);
+		$m = new Temas($map_file,$_pg["tema"],"",$_pg["ext"]);
 		$retorno = $m->geraDestaque();
 		break;
 		/*
 		 Valor: DOWNLOAD (depreciado, utilize DOWNLOAD2
 		 		*/
 	case "DOWNLOAD":
-		$retorno = downloadTema($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa);
+		$retorno = downloadTema($map_file,$_pg["tema"],$locaplic,$dir_tmp,$postgis_mapa);
 		break;
 		/*
 		 Valor: DOWNLOAD2
@@ -949,7 +959,7 @@ switch (strtoupper($funcao))
 		Gera os arquivos para download de um tema.
 		*/
 	case "DOWNLOAD2":
-		$retorno = downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa);
+		$retorno = downloadTema2($map_file,$_pg["tema"],$locaplic,$dir_tmp,$postgis_mapa);
 		break;
 		/*
 		 Valor: DOWNLOAD3
@@ -960,6 +970,7 @@ switch (strtoupper($funcao))
 		//caso o tema tenha de vir do sistema de metadados estatisticos
 
 		//pode ser uma regiao cadastrada no sistema de metadados
+		$codigo_tipo_regiao = $_pg["codigo_tipo_regiao"];
 		if(isset($codigo_tipo_regiao) && $codigo_tipo_regiao != ""){
 			include(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 			$m = new Metaestat();
@@ -968,6 +979,7 @@ switch (strtoupper($funcao))
 			$tema = str_replace(".map","",$tema["mapfile"]);
 		}
 		//pode ser uma medida de uma variavel
+		$id_medida_variavel = $_pg["id_medida_variavel"];
 		if(isset($id_medida_variavel) && $id_medida_variavel != ""){
 			include(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
 			$m = new Metaestat();
@@ -988,16 +1000,16 @@ switch (strtoupper($funcao))
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,"");
-		if(!isset($marca)){
-			$marca="";
+		if(!isset($_pg["marca"])){
+			$_pg["marca"] = "";
 		}
-		if(!isset($wkt)){
-			$wkt = false;
+		if(!isset($_pg["wkt"])){
+			$_pg["wkt"] = false;
 		}
-		if(!isset($nomeTema)){
-			$nomeTema = "";
+		if(!isset($_pg["nomeTema"])){
+			$_pg["nomeTema"] = "";
 		}
-		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,$wkt,$nomeTema);
+		$m->insereFeature($_pg["marca"],$_pg["tipo"],$_pg["xy"],$_pg["texto"],$_pg["position"],$_pg["partials"],$_pg["offsetx"],$_pg["offsety"],$_pg["minfeaturesize"],$_pg["mindistance"],$_pg["force"],$_pg["shadowcolor"],$_pg["shadowsizex"],$_pg["shadowsizey"],$_pg["outlinecolor"],$_pg["cor"],$_pg["sombray"],$_pg["sombrax"],$_pg["sombra"],$_pg["fundo"],$_pg["angulo"],$_pg["tamanho"],$_pg["fonte"],$_pg["wrap"],$_pg["wkt"],$_pg["nomeTema"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -1012,7 +1024,7 @@ switch (strtoupper($funcao))
 	case "SOBETEMA":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$m->sobeTema();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1028,7 +1040,7 @@ switch (strtoupper($funcao))
 	case "DESCETEMA":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$m->desceTema();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1044,7 +1056,7 @@ switch (strtoupper($funcao))
 	case "FONTETEMA":
 		include_once("classe_temas.php");
 		$m = new Temas($map_file,null,$locaplic);
-		$retorno = $m->fonteTema($tema);
+		$retorno = $m->fonteTema($_pg["tema"]);
 		break;
 		/*
 		 Valor: REORDENATEMAS
@@ -1057,7 +1069,7 @@ switch (strtoupper($funcao))
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file);
-		$m->reordenatemas($lista);
+		$m->reordenatemas($_pg["lista"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -1072,7 +1084,7 @@ switch (strtoupper($funcao))
 	case "ZOOMTEMA":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$m->zoomTema();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1088,7 +1100,7 @@ switch (strtoupper($funcao))
 	case "ZOOMSEL":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$m->zoomSel();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1104,8 +1116,8 @@ switch (strtoupper($funcao))
 	case "APLICAPROCESSOS":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
-		$m->aplicaProcessos($lista);
+		$m = new Temas($map_file,$_pg["tema"]);
+		$m->aplicaProcessos($_pg["lista"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -1120,7 +1132,7 @@ switch (strtoupper($funcao))
 	case "INVERTESTATUSLEGENDA":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$m->inverteStatusLegenda();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1136,8 +1148,8 @@ switch (strtoupper($funcao))
 	case "MUDATRANSP":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
-		$m->mudaTransparencia($valor);
+		$m = new Temas($map_file,$_pg["tema"]);
+		$m->mudaTransparencia($_pg["valor"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -1152,7 +1164,7 @@ switch (strtoupper($funcao))
 	case "COPIATEMA":
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$m->copiaTema();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1167,9 +1179,9 @@ switch (strtoupper($funcao))
 		*/
 	case "MUDANOME":
 		include_once("classe_temas.php");
-		$valor = mb_convert_encoding($valor,"ISO-8859-1",mb_detect_encoding($valor));
+		$valor = mb_convert_encoding($_pg["valor"],"ISO-8859-1",mb_detect_encoding($valor));
 		copiaSeguranca($map_file);
-		$m = new Temas($map_file,$tema);
+		$m = new Temas($map_file,$_pg["tema"]);
 		$m->mudaNome($valor);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1190,7 +1202,10 @@ switch (strtoupper($funcao))
 	case "ALTERACLASSE":
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
-		$m = new Alteraclasse($map_file,$tema,"",$ext);
+		$m = new Alteraclasse($map_file,$_pg["tema"],"",$_pg["ext"]);
+		$opcao = $_pg["opcao"];
+		$cores = $_pg["cores"];
+		$idclasse = $_pg["idclasse"];
 		if ($opcao == "aplicacoresrgb"){
 			$cores = str_replace("rgb","",$cores);
 			$cores = str_replace(")","",$cores);
@@ -1204,49 +1219,49 @@ switch (strtoupper($funcao))
 			$retorno = $m->desceclasse($idclasse);
 		}
 		if ($opcao == "alteracor"){
-			$retorno = $m->alteracor($idclasse,$cor);
+			$retorno = $m->alteracor($idclasse,$_pg["cor"]);
 		}
 		if ($opcao == "adicionaopacidade"){
 			$retorno = $m->adicionaopacidade();
 		}
 		if ($opcao == "alterageometria"){
-			$retorno = $m->alterageometria($tipo);
+			$retorno = $m->alterageometria($_pg["tipo"]);
 		}
 		if ($opcao == "adicionaclasse"){
 			$retorno = $m->adicionaclasse();
 		}
 		if ($opcao == "valorunico"){
-			if(empty($itemNome)){
-				$itemNome = "";
+			if(empty($_pg["itemNome"])){
+				$_pg["itemNome"] = "";
 			}
-			$retorno = $m->valorunico($item,$ignorar,$itemNome);
+			$retorno = $m->valorunico($_pg["item"],$_pg["ignorar"],$_pg["itemNome"]);
 		}
 		if ($opcao == "intervalosiguais"){
-			$retorno = $m->intervalosiguais($item,$nclasses,$ignorar);
+			$retorno = $m->intervalosiguais($_pg["item"],$_pg["nclasses"],$_pg["ignorar"]);
 		}
 		if ($opcao == "quantil"){
-			$retorno = $m->quantil($item,$nclasses,$ignorar);
+			$retorno = $m->quantil($_pg["item"],$_pg["nclasses"],$_pg["ignorar"]);
 		}
 		if ($opcao == "quebrasnaturais"){
-			$retorno = $m->quebrasnaturais($item,$nclasses,$ignorar);
+			$retorno = $m->quebrasnaturais($_pg["item"],$_pg["nclasses"],$_pg["ignorar"]);
 		}
 		if ($opcao == "metade"){
-			$retorno = $m->metade($item,$itemid,$ignorar);
+			$retorno = $m->metade($_pg["item"],$_pg["itemid"],$_pg["ignorar"]);
 		}
 		if ($opcao == "media"){
-			$retorno = $m->classemedia($item,$ignorar);
+			$retorno = $m->classemedia($_pg["item"],$_pg["ignorar"]);
 		}
 		if ($opcao == "quartis"){
-			if(!isset($tipoLegenda))
+			if(!isset($_pg["tipoLegenda"]))
 			{
-				$tipoLegenda = "";
+				$_pg["tipoLegenda"] = "";
 			}
-			$retorno = $m->quartis($item,$ignorar,$tipoLegenda);
+			$retorno = $m->quartis($_pg["item"],$_pg["ignorar"],$_pg["tipoLegenda"]);
 		}
 		if ($opcao == "alteraclasses"){
 			//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
 			//error_reporting(0);
-			alteraclassesPost($ids,$nomes,$exps,$base64,$minScales,$maxScales);
+			alteraclassesPost($_pg["ids"],$_pg["nomes"],$_pg["exps"],$_pg["base64"],$_pg["minScales"],$_pg["maxScales"]);
 			restauraCon($map_file,$postgis_mapa);
 			cpjson("");
 		}
@@ -1267,7 +1282,7 @@ switch (strtoupper($funcao))
 	case "INVERTECORESCLASSES":
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
-		$m = new Alteraclasse($map_file,$tema);
+		$m = new Alteraclasse($map_file,$_pg["tema"]);
 		$m->inverteCoresClasses();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1283,7 +1298,7 @@ switch (strtoupper($funcao))
 	case "CALCULATAMANHOCLASSES":
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
-		$m = new Alteraclasse($map_file,$tema);
+		$m = new Alteraclasse($map_file,$_pg["tema"]);
 		$retorno = $m->calculaTamanhoClasses();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1298,7 +1313,7 @@ switch (strtoupper($funcao))
 	case "ORDENACLASSES":
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
-		$m = new Alteraclasse($map_file,$tema);
+		$m = new Alteraclasse($map_file,$_pg["tema"]);
 		$retorno = $m->ordenaClasses();
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -1313,8 +1328,8 @@ switch (strtoupper($funcao))
 	case "ALTERACORESCLASSES":
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
-		$m = new Alteraclasse($map_file,$tema);
-		$retorno = $m->alteraCoresClasses($cori,$corf);
+		$m = new Alteraclasse($map_file,$_pg["tema"]);
+		$retorno = $m->alteraCoresClasses($_pg["cori"],$_pg["corf"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		break;
@@ -1328,8 +1343,8 @@ switch (strtoupper($funcao))
 	case "INVERTESTATUSCLASSE":
 		include_once("classe_alteraclasse.php");
 		copiaSeguranca($map_file);
-		$m = new Alteraclasse($map_file,$tema);
-		$retorno = $m->statusClasse($classe);
+		$m = new Alteraclasse($map_file,$_pg["tema"]);
+		$retorno = $m->statusClasse($_pg["classe"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		break;
@@ -1342,6 +1357,9 @@ switch (strtoupper($funcao))
 		*/
 	case "VERPALETA":
 		include_once("class.palette.php");
+		$cori = $_pg["cori"];
+		$corf = $_pg["corf"];
+		$numclasses = $_pg["numclasses"];
 		$cori = RGB2hex(explode(",",$cori));
 		$corf = RGB2hex(explode(",",$corf));
 		$myPalette=new palette(array($cori,$corf),($numclasses + 1));
@@ -1370,8 +1388,8 @@ switch (strtoupper($funcao))
 		*/
 	case "SPHPT2SHP":
 		include_once("classe_shp.php");
-		$m = new SHP($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->shpPT2shp($locaplic,$para);
+		$m = new SHP($map_file,$_pg["tema"],$locaplic,$_pg["ext"]);
+		$retorno = $m->shpPT2shp($locaplic,$_pg["para"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		break;
@@ -1384,7 +1402,7 @@ switch (strtoupper($funcao))
 		*/
 	case "LISTAPONTOSSHAPE":
 		include_once("classe_shp.php");
-		$m = new SHP($map_file,$tema);
+		$m = new SHP($map_file,$_pg["tema"]);
 		$retorno = $m->listaPontosShape();
 		break;
 		/*
@@ -1397,11 +1415,11 @@ switch (strtoupper($funcao))
 	case "CRIASHPVAZIO":
 		include_once("classe_shp.php");
 		$m = new SHP($map_file);
-		if(!isset($tituloTema))
+		if(!isset($_pg["tituloTema"]))
 		{
-			$tituloTema = "";
+			$_pg["tituloTema"] = "";
 		}
-		$retorno = $m->criaSHPvazio($tituloTema);
+		$retorno = $m->criaSHPvazio($_pg["tituloTema"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		break;
@@ -1414,7 +1432,7 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGAXYULTIMOPONTO":
 		include_once("classe_shp.php");
-		$m = new SHP($map_file,$tema);
+		$m = new SHP($map_file,$_pg["tema"]);
 		$retorno = $m->ultimoXY();
 		break;
 
@@ -1430,8 +1448,8 @@ switch (strtoupper($funcao))
 	case "INSERESHPGRAFICO":
 		include_once("classe_shp.php");
 		copiaSeguranca($map_file);
-		$m = new SHP($map_file,$tema,$locaplic);
-		$retorno = $m->insereSHPgrafico($x,$y,$itens,$width,$inclinacao,$shadow_height,$ext);
+		$m = new SHP($map_file,$_pg["tema"],$locaplic);
+		$retorno = $m->insereSHPgrafico($_pg["x"],$_pg["y"],$_pg["itens"],$_pg["width"],$_pg["inclinacao"],$_pg["shadow_height"],$_pg["ext"]);
 		$_SESSION["contadorsalva"]++;
 		break;
 		/*
@@ -1440,7 +1458,7 @@ switch (strtoupper($funcao))
 		Gera string wkt de um conjunto de pontos.
 		*/
 	case "MOSTRAWKT":
-		$res = xy2wkt($xy);
+		$res = xy2wkt($_pg["xy"]);
 		$retorno = array($res["ponto"],$res["linha"],$res["poligono"]);
 		break;
 		/*
@@ -1452,11 +1470,11 @@ switch (strtoupper($funcao))
 		*/
 	case "DADOSLINHADOTEMPO":
 		include_once("graficos.php");
-		if(!isset($ext))
+		if(!isset($_pg["ext"]))
 		{
-			$ext = "";
+			$_pg["ext"] = "";
 		}
-		$retorno = dadosLinhaDoTempo($map_file,$tema,$ext);
+		$retorno = dadosLinhaDoTempo($map_file,$_pg["tema"],$_pg["ext"]);
 		break;
 		/*
 		 Valor: DADOSPERFILRELEVO
@@ -1467,11 +1485,11 @@ switch (strtoupper($funcao))
 		*/
 	case "DADOSPERFILRELEVO":
 		include_once("graficos.php");
-		if(!isset($ext))
+		if(!isset($_pg["ext"]))
 		{
-			$ext = "";
+			$_pg["ext"] = "";
 		}
-		$retorno = dadosPerfilRelevo($pontos,$opcao,$amostragem,$item,$map_file);
+		$retorno = dadosPerfilRelevo($_pg["pontos"],$_pg["opcao"],$_pg["amostragem"],$_pg["item"],$map_file);
 		break;
 		/*
 		 Section: Menu de temas
@@ -1489,6 +1507,11 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGALISTADEMENUS":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+		$filtraOgc = $_pg["filtraOgc"];
+		$filtraDown = $_pg["filtraDown"];
 		if(!isset($editores)){
 			$editores = "";
 		}
@@ -1504,6 +1527,17 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGALISTADEGRUPOS":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+		$filtro = $_pg["filtro"];
+		$idmenu = $_pg["idmenu"];
+		$listasistemas = $_pg["listasistemas"];
+		$listasgrupos = $_pg["listasgrupos"];
+		$ordenaNome = $_pg["ordenaNome"];
+		$filtraOgc = $_pg["filtraOgc"];
+		$filtraDown = $_pg["filtraDown"];
+
 		if(!isset($urli3geo)){
 			$urli3geo = "";
 		}
@@ -1540,6 +1574,10 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGASISTEMASIDENTIFICACAO":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+
 		$m = new Menutemas($map_file,$perfil,$locaplic,"",$editores,$idioma);
 		$retorno = $m->pegaSistemasI();
 		break;
@@ -1552,6 +1590,10 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGASISTEMAS":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+
 		$m = new Menutemas($map_file,$perfil,$locaplic,"",$editores,$idioma);
 		$retorno = $m->pegaSistemas();
 		break;
@@ -1564,6 +1606,11 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGALISTADESUBGRUPOS":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+		$filtro = $_pg["filtro"];
+
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma,$filtro);
 		if(!isset($idmenu)){
 			$idmenu = "";
@@ -1579,6 +1626,10 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGALISTADETEMAS":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		if(!isset($idmenu)){
 			$idmenu = "";
@@ -1592,6 +1643,8 @@ switch (strtoupper($funcao))
 		 */
 	case "PEGATODOSTEMAS":
 		include("../admin/php/classe_arvore.php");
+		$idioma = $_pg["idioma"];
+
 		$arvore = new Arvore($locaplic,$idioma);
 		$resultado = $arvore->pegaTodosTemas();
 		$retorno = array("temas"=>$resultado);
@@ -1605,6 +1658,10 @@ switch (strtoupper($funcao))
 		*/
 	case "PROCURARTEMAS":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		$retorno = $m->procurartemas($procurar);
 		break;
@@ -1617,6 +1674,10 @@ switch (strtoupper($funcao))
 		*/
 	case "PROCURARTEMAS2":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		$retorno = $m->procurartemas2($procurar);
 		break;
@@ -1629,6 +1690,10 @@ switch (strtoupper($funcao))
 		*/
 	case "PROCURARTEMASESTRELA":
 		include_once("classe_menutemas.php");
+		$editores = $_pg["editores"];
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
 		$retorno = $m->procurartemasestrela($nivel,$fatorestrela);
 		break;
@@ -1643,6 +1708,9 @@ switch (strtoupper($funcao))
 		*/
 	case "PEGAMAPAS":
 		include_once("classe_menutemas.php");
+		$perfil = $_pg["perfil"];
+		$idioma = $_pg["idioma"];
+
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$idioma);
 		$retorno = $m->pegaListaDeMapas($locmapas);
 		break;
@@ -1661,7 +1729,7 @@ switch (strtoupper($funcao))
 		<georssCanais>
 		*/
 	case "GEORSSCANAIS":
-		$retorno = georssCanais($servico,$map_file,$dir_tmp,$locaplic);
+		$retorno = georssCanais($_pg["servico"],$map_file,$dir_tmp,$locaplic);
 		break;
 		/*
 		 Valor: GETCAPABILITIES
@@ -1739,6 +1807,8 @@ switch (strtoupper($funcao))
 		<buscaRapida>
 		*/
 	case "BUSCARAPIDA":
+		$servico = $_pg["servico"];
+		$palavra = $_pg["palavra"];
 		if($servico != "temas")
 		{
 			$retorno = buscaRapida($servico,$palavra);
@@ -1772,7 +1842,7 @@ switch (strtoupper($funcao))
 		*/
 	case "LISTAITENS":
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema,"",$ext);
+		$m = new Atributos($map_file,$_pg["tema"],"",$_pg["ext"]);
 		$retorno = $m->listaItens();
 		break;
 		/*
@@ -1784,11 +1854,11 @@ switch (strtoupper($funcao))
 		*/
 	case "LISTAVALORESITENS":
 		include_once("classe_atributos.php");
-		if(!isset($tema)){
-			$tema = "";
+		if(!isset($_pg["tema"])){
+			$_pg["tema"] = "";
 		}
-		$m = new Atributos($map_file,$tema,"",$ext);
-		$retorno = $m->buscaRegistros($palavra,$lista,$tipo,$onde);
+		$m = new Atributos($map_file,$_pg["tema"],"",$_pg["ext"]);
+		$retorno = $m->buscaRegistros($_pg["palavra"],$_pg["lista"],$_pg["tipo"],$_pg["onde"]);
 		break;
 		/*
 		 Valor: IDENTIFICA
@@ -1800,6 +1870,11 @@ switch (strtoupper($funcao))
 		<Atributos->identifica>
 		*/
 	case "IDENTIFICA":
+		$tema = $_pg["tema"];
+		$opcao = $_pg["opcao"];
+		$xy = $_pg["xy"];
+		$resolucao = $_pg["resolucao"];
+
 		if (!isset($tema)){
 			$tema = "";
 		}
@@ -1820,6 +1895,15 @@ switch (strtoupper($funcao))
 		<Atributos->identifica2>
 		*/
 	case "IDENTIFICA2":
+		$tema = $_pg["tema"];
+		$opcao = $_pg["opcao"];
+		$xy = $_pg["xy"];
+		$resolucao = $_pg["resolucao"];
+		$ext = $_pg["ext"];
+		$opcao = $_pg["opcao"];
+		$listaDeTemas = $_pg["listaDeTemas"];
+		$wkt = $_pg["wkt"];
+
 		if (!isset($tema)){
 			$tema = "";
 		}
@@ -1846,6 +1930,15 @@ switch (strtoupper($funcao))
 		<Atributos->identifica3>
 		*/
 	case "IDENTIFICA3":
+		$tema = $_pg["tema"];
+		$opcao = $_pg["opcao"];
+		$xy = $_pg["xy"];
+		$resolucao = $_pg["resolucao"];
+		$ext = $_pg["ext"];
+		$opcao = $_pg["opcao"];
+		$listaDeTemas = $_pg["listaDeTemas"];
+		$wkt = $_pg["wkt"];
+
 		if (!isset($tema)){
 			$tema = "";
 		}
@@ -1872,6 +1965,12 @@ switch (strtoupper($funcao))
 		<Atributos->identificaQBP>
 		*/
 	case "IDENTIFICAUNICO":
+		$tema = $_pg["tema"];
+		$xy = $_pg["xy"];
+		$resolucao = $_pg["resolucao"];
+		$ext = $_pg["ext"];
+		$item = $_pg["item"];
+
 		if (!isset($resolucao)){
 			$resolucao = 5;
 		}
@@ -1893,8 +1992,8 @@ switch (strtoupper($funcao))
 		*/
 	case "LISTATEXTO":
 		include_once("classe_atributos.php");
-		$m = new Atributos($map_file,$tema);
-		$retorno = $m->itensTexto($tipo);
+		$m = new Atributos($map_file,$_pg["tema"]);
+		$retorno = $m->itensTexto($_pg["tipo"]);
 		break;
 		/*
 		 Valor: LISTAREGISTROS
@@ -1904,6 +2003,16 @@ switch (strtoupper($funcao))
 		<Atributos->listaRegistros>
 		*/
 	case "LISTAREGISTROS":
+		$tema = $_pg["tema"];
+		$ext = $_pg["ext"];
+		$tipo = $_pg["tipo"];
+		$inicio = $_pg["inicio"];
+		$fim = $_pg["fim"];
+		$tipolista = $_pg["tipolista"];
+		$itemtema = $_pg["itemtema"];
+		$unico = $_pg["unico"];
+		$dadosDaClasse = $_pg["dadosDaClasse"];
+
 		include_once("classe_atributos.php");
 		$m = new Atributos($map_file,$tema,"",$ext);
 		if(!isset($tipo)){
@@ -1949,6 +2058,9 @@ switch (strtoupper($funcao))
 		<Atributos->listaRegistros>
 		*/
 		case "LISTAUNICA":
+			$tema = $_pg["tema"];
+			$ext = $_pg["ext"];
+			$item = $_pg["item"];
 			include_once("classe_atributos.php");
 			$m = new Atributos($map_file,$tema,"",$ext);
 			$retorno = $m->listaUnicoRapida($item);
@@ -1962,6 +2074,8 @@ switch (strtoupper($funcao))
 		*/
 	case "EXTREGISTROS":
 		include_once("classe_atributos.php");
+		$tema = $_pg["tema"];
+		$registro = $_pg["registro"];
 		$m = new Atributos($map_file,$tema);
 		$retorno = $m->extensaoRegistro($registro);
 		$m->salva();
@@ -2006,6 +2120,8 @@ switch (strtoupper($funcao))
 		Retorna coordenadas utm a partir de coordenadas geo
 		*/
 	case "GEO2UTM":
+		$x = $_pg["x"];
+		$y = $_pg["y"];
 		$zona = geo2zonaUTM($x);
 		$retorno = geo2utm($x,$y,$zona);
 		break;
@@ -2029,11 +2145,13 @@ switch (strtoupper($funcao))
 	case "MUDAEXT":
 		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
+		$ext = $_pg["ext"];
+		$geo = $_pg["geo"];
 		if (!isset($ext) || $ext == "" || $ext == " ")
 		{
 			$ext="-76.512593 -39.392568 -29.585185 9.490149";
 		}
-		if(!isset($geo))
+		if(!isset($geo) || $geo == "")
 		{
 			$geo = false;
 		}
@@ -2054,7 +2172,7 @@ switch (strtoupper($funcao))
 		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
-		$m->mudaEscala($escala);
+		$m->mudaEscala($_pg["escala"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -2070,10 +2188,11 @@ switch (strtoupper($funcao))
 		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
+		$tipo = $_pg["tipo"];
 		if(!isset($tipo)){
 			$tipo = "";
 		}
-		$m->pan($x,$y,$escala,$tipo);
+		$m->pan($_pg["x"],$_pg["y"],$_pg["escala"],$tipo);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -2089,7 +2208,7 @@ switch (strtoupper($funcao))
 		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
-		$m->aproxima($nivel);
+		$m->aproxima($_pg["nivel"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -2105,7 +2224,7 @@ switch (strtoupper($funcao))
 		include_once("classe_navegacao.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
-		$m->afasta($nivel);
+		$m->afasta($_pg["nivel"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -2120,12 +2239,12 @@ switch (strtoupper($funcao))
 	case "CRIALENTE":
 		include_once("classe_navegacao.php");
 		$m = new Navegacao($map_file);
-		if(!isset($ext))
+		if(!isset($_pg["ext"]))
 		{
-			$ext = "";
+			$_pg["ext"] = "";
 		}
 		//$ext = projetaExt($map_file,$ext);
-		$m->aplicaResolucao($resolucao,$ext);
+		$m->aplicaResolucao($_pg["resolucao"],$ext);
 		$retorno = ($m->mapa->width).",".($m->mapa->height).",".$m->gravaImagemCorpo();
 		break;
 		/*
@@ -2158,14 +2277,14 @@ switch (strtoupper($funcao))
 		include_once("classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Navegacao($map_file);
-		$m->zoomPonto($xy);
+		$m->zoomPonto($_pg["xy"]);
 		$m->salva();
 		$m = new Temas($map_file,"");
-		if(!isset($marca))
+		if(!isset($_pg["marca"]))
 		{
-			$marca = "ponto";
+			$_pg["marca"] = "ponto";
 		}
-		$m->insereFeature($marca,"POINT",$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte);
+		$m->insereFeature($marca,"POINT",$_pg["xy"],$_pg["texto"],$_pg["position"],$_pg["partials"],$_pg["offsetx"],$_pg["offsety"],$_pg["minfeaturesize"],$_pg["mindistance"],$_pg["force"],$_pg["shadowcolor"],$_pg["shadowsizex"],$_pg["shadowsizey"],$_pg["outlinecolor"],$_pg["cor"],$_pg["sombray"],$_pg["sombrax"],$_pg["sombra"],$_pg["fundo"],$_pg["angulo"],$_pg["tamanho"],$_pg["fonte"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -2185,7 +2304,7 @@ switch (strtoupper($funcao))
 	case "GERACORESCOLOURRAMP":
 		include_once("class.palette.php");
 		$m = new palette();
-		$retorno = $m->geraCoresColourRamp("..",$codigo,$inicio,$fim,$ncores);
+		$retorno = $m->geraCoresColourRamp("..",$_pg["codigo"],$_pg["inicio"],$_pg["fim"],$_pg["ncores"]);
 		break;
 		/*
 		 Valor: EDITASIMBOLO
@@ -2195,10 +2314,13 @@ switch (strtoupper($funcao))
 	case "EDITASIMBOLO":
 		include_once("classe_legenda.php");
 		copiaSeguranca($map_file);
-		if(!isset($tema)){
-			$tema = "";
+		if(!isset($_pg["tema"])){
+			$_pg["tema"] = "";
 		}
-		$m = new Legenda($map_file,$locaplic,$tema);
+		$classe = $_pg["classe"];
+		$estilo = $_pg["estilo"];
+		$opcao = $_pg["opcao"];
+		$m = new Legenda($map_file,$locaplic,$_pg["tema"]);
 		if ($opcao == "excluiestilo")
 		{
 			$retorno = $m->excluiEstilo($classe,$estilo);
@@ -2221,17 +2343,17 @@ switch (strtoupper($funcao))
 		}
 		if ($opcao == "aplica")
 		{
-			$retorno = $m->aplicaParametro($classe,$estilo,$outlinecolor,$backgroundcolor,$color,$symbolname,$size,$opacidade,$width,$pattern,$angle,$minsize,$maxsize,$offsetx,$offsety);
-			if(!empty($symbolscale)){
-				$m->layer->set("symbolscaledenom",$symbolscale);
+			$retorno = $m->aplicaParametro($classe,$estilo,$_pg["outlinecolor"],$_pg["backgroundcolor"],$_pg["color"],$_pg["symbolname"],$_pg["size"],$_pg["opacidade"],$_pg["width"],$_pg["pattern"],$_pg["angle"],$_pg["minsize"],$_pg["maxsize"],$_pg["offsetx"],$_pg["offsety"]);
+			if(!empty($_pg["symbolscale"])){
+				$m->layer->set("symbolscaledenom",$_pg["symbolscale"]);
 			}
 			$m->salva();
 		}
 		if ($opcao == "listaSimbolos"){
-			$retorno = $m->listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick);
+			$retorno = $m->listaSimbolos($_pg["tipo"],$dir_tmp,$imgdir,$_pg["onclick"]);
 			if($retorno == "")
 			{
-				$retorno = $m->listaSimbolos($tipo,$dir_tmp,$imgdir,$onclick,8,1,true);
+				$retorno = $m->listaSimbolos($_pg["tipo"],$dir_tmp,$imgdir,$_pg["onclick"],8,1,true);
 			}
 		}
 		if ($opcao == "pegaparametros")
@@ -2250,10 +2372,10 @@ switch (strtoupper($funcao))
 	case "CRIALEGENDAHTML":
 		include_once("classe_legenda.php");
 		//para efeitos de compatibilidade com vers&otilde;es anteriores
-		if(isset($template)){
-			$templateLegenda = $template;
+		if(isset($_pg["template"])){
+			$_pg["templateLegenda"] = $_pg["template"];
 		}
-		$m = new Legenda($map_file,$locaplic,$tema,$templateLegenda);
+		$m = new Legenda($map_file,$locaplic,$_pg["tema"],$_pg["templateLegenda"]);
 		$r = $m->criaLegenda();
 		if(!$r){
 			$r = "erro. Legenda nao disponivel";
@@ -2308,8 +2430,8 @@ switch (strtoupper($funcao))
 	case "SELECAOATRIB":
 		include_once("classe_selecao.php");
 		copiaSeguranca($map_file);
-		$m = new Selecao($map_file,$tema,$ext);
-		$retorno = $m->selecaoAtributos($tipo,$item,$operador,$valor);
+		$m = new Selecao($map_file,$_pg["tema"],$_pg["ext"]);
+		$retorno = $m->selecaoAtributos($_pg["tipo"],$_pg["item"],$_pg["operador"],$_pg["valor"]);
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 		break;
@@ -2333,7 +2455,7 @@ switch (strtoupper($funcao))
 		Calcula a &aacute;rea de um pixel da imagem.
 		*/
 	case "AREAPIXEL":
-		$retorno = calculaAreaPixel($map_file,$celsize);
+		$retorno = calculaAreaPixel($map_file,$_pg["celsize"]);
 		break;
 		/*
 		 Valor: LISTAEPSG
@@ -2353,7 +2475,7 @@ switch (strtoupper($funcao))
 
 		*/
 	case "LISTADIRETORIOS":
-		$retorno = listaDiretorios($diretorio);
+		$retorno = listaDiretorios($_pg["diretorio"]);
 		break;
 		/*
 		 Valor: LISTAARQUIVOS
@@ -2363,7 +2485,7 @@ switch (strtoupper($funcao))
 		Lista os arquivos de um diret&oacute;rio.
 		*/
 	case "LISTAARQUIVOS":
-		$retorno = listaArquivos($diretorio);
+		$retorno = listaArquivos($_pg["diretorio"]);
 		break;
 		/*
 		 Depreciado
@@ -2496,8 +2618,8 @@ Include:
 <classe_alteraclasse.php>
 */
 function alteraclassesPost($ids,$nomes,$exps,$base64="nao",$minScales="",$maxScales=""){
-	global $map_file,$tema;
-	$m = new Alteraclasse($map_file,$tema);
+	global $map_file,$_pg;
+	$m = new Alteraclasse($map_file,$_pg["tema"]);
 	$m->alteraclasses($ids,$nomes,$exps,$base64,$minScales,$maxScales);
 	$m->salva();
 	$_SESSION["contadorsalva"]++;
@@ -2516,7 +2638,9 @@ tipoimagem {String} - tipo de imagem que ser&aacute; gerada nenhum|cinza|sepiano
 */
 function redesenhaMapa()
 {
-	global $tempo,$map_file,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
+	global $_pg,$tempo,$map_file,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$cp;
+	$tipoimagem = $_pg["tipoimagem"];
+	$mapexten = $_pg["mapexten"];
 	if($tipoimagem != "nenhum" && $tipoimagem != "")
 	{
 		$utilizacgi = "nao";
