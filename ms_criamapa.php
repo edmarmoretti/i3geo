@@ -77,7 +77,7 @@ desligar - lista com os nomes dos temas que ser&atilde;o for&ccedil;ados a inici
 
 mapext - extensao geografica que ser&aacute; utilizada. Por padr&atilde;o, a extens&atilde;o geogr&aacute;fica &eacute; definida para abranger o Brasil todo. Para alterar o padr&atilde;o deve-se utilizar o par&acirc;metro mapext para especificar a nova abrang&ecirc;ncia. Essa abrang&ecirc;ncia deve ser definida em coordenadas no formato d&eacute;cimos de grau e na proje&ccedil;&atilde;o geogr&aacute;fica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores s&atilde;o xmin ymin xmax ymax
 
-executa - programa ou fun&ccedil;&atilde;o em php que ser&aacute; executado via include. O include &eacute; feito no final do processo de inicializa&ccedil;&atilde;o quando a vari&aacute;vel $tmpfname j&aacute; est&aacute; definida. Essa vari&aacute;vel guarda o nome do arquivo mapfile que ser&aacute; utilizado pelo i3geo.
+executa - (depreciado) programa ou fun&ccedil;&atilde;o em php que ser&aacute; executado via include. O include &eacute; feito no final do processo de inicializa&ccedil;&atilde;o quando a vari&aacute;vel $tmpfname j&aacute; est&aacute; definida. Essa vari&aacute;vel guarda o nome do arquivo mapfile que ser&aacute; utilizado pelo i3geo.
 
 interface - nome da interface que ser&aacute; utilizada para abrir o mapa. As interfaces s&atilde;o arquivos HTML que podem estar no diret&oacute;rio aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alter&aacute;-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
 
@@ -156,8 +156,6 @@ desligar - lista com os nomes dos temas que ser&atilde;o for&ccedil;ados a inici
 
 mapext - extensao geografica que ser&aacute; utilizada. Por padr&atilde;o, a extens&atilde;o geogr&aacute;fica &eacute; definida para abranger o Brasil todo. Para alterar o padr&atilde;o deve-se utilizar o par&acirc;metro mapext para especificar a nova abrang&ecirc;ncia. Essa abrang&ecirc;ncia deve ser definida em coordenadas no formato d&eacute;cimos de grau e na proje&ccedil;&atilde;o geogr&aacute;fica. Exemplo: &mapext=-54 -30 -50 -12. Observe que a ordem dos valores s&atilde;o xmin ymin xmax ymax
 
-executa - programa ou fun&ccedil;&atilde;o em php que ser&aacute; executado via include. O include &eacute; feito no final do processo de inicializa&ccedil;&atilde;o quando a vari&aacute;vel $tmpfname j&aacute; est&aacute; definida. Essa vari&aacute;vel guarda o nome do arquivo mapfile que ser&aacute; utilizado pelo i3geo.
-
 interface - nome da interface que ser&aacute; utilizada para abrir o mapa. As interfaces s&atilde;o arquivos HTML que podem estar no diret&oacute;rio aplicmap. Por default, utiliza-se o geral.htm. Vc pode copiar esse html e alter&aacute;-lo para customizar o mapa. Para chamar o html customizado, utilize ms_criamapa.php?interface=meumapa.htm
 
 perfil - perfil utilizado para restringir os menus de temas. ms_criamapa.php?perfil=usu&aacute;rio1
@@ -226,42 +224,57 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 //quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute; sendo utilizado como um include em classesphp/mapa_controle.php
 //
 ms_ResetErrorList();
+if(!isset($funcao)){
+	ob_end_clean();
+	/*
+	 Carrega as extens&otilde;es PHP
+
+	 Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
+	 A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela pr&oacute;pria inicializa&ccedil;&atilde;o do PHP.
+	 */
+	include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
+	/*
+	 Include dos arquivos PHP.
+
+	 Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
+	 */
+	include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+	$base = $parurl["base"];
+	$temasa = $parurl["temasa"];
+	$layers = $parurl["layers"];
+	$desligar = $parurl["desligar"];
+	$mapext = $parurl["mapext"];
+	$executa = "";//$parurl["executa"];
+	$interface = $parurl["interface"];
+	$perfil = $parurl["perfil"];
+	$caminho = $parurl["caminho"];
+	$pontos = $parurl["pontos"];
+	$nometemapontos = $parurl["nometemapontos"];
+	$linhas = $parurl["linhas"];
+	$nometemalinhas = $parurl["nometemalinhas"];
+	$poligonos = $parurl["poligonos"];
+	$nometemapoligonos = $parurl["nometemapoligonos"];
+	$simbolo = $parurl["simbolo"];
+	$corsimbolo = $parurl["corsimbolo"];
+	$tamanhosimbolo = $parurl["tamanhosimbolo"];
+	$wkt = $parurl["wkt"];
+	$nometemawkt = $parurl["nometemawkt"];
+	$idioma = $parurl["idioma"];
+	$kmlurl = $parurl["kmlurl"];
+	$url_wms = $parurl["url_wms"];
+	$layer_wms = $parurl["layer_wms"];
+	$style_wms = $parurl["style_wms"];
+	$nome_wms = $parurl["nome_wms"];
+	$srs_wms = $parurl["srs_wms"];
+	$image_wms = $parurl["image_wms"];
+	$versao_wms = $parurl["versao_wms"];
+	$gvsigview = $parurl["gvsigview"];
+	$restauramapa = $parurl["restauramapa"];
+}
 $parurl = array_merge($_GET,$_POST);
-if (!isset($parurl["debug"]))
-{error_reporting(0);$debug="nao";}
-else
-{error_reporting(0);$debug="sim";}
-if(!isset($funcao))
-{ob_end_clean();}
-/*
-Carrega as extens&otilde;es PHP
-
-Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
-A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela pr&oacute;pria inicializa&ccedil;&atilde;o do PHP.
-*/
-include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
-/*
-Include dos arquivos PHP.
-
-Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
-*/
-include_once (dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
-//
-//verifica a sessao que controla o login do usuario
-//
-/*
-session_name("i3GeoLogin");
-session_start();
-if(empty($_SESSION["usuario"])){
-	setcookie("i3geocodigologin", session_id());
-	setcookie("i3geousuariologin", "");
-	setcookie("i3GeoLogin", "");
-	session_destroy();
-}
-*/
 
 //
 //a vari&aacute;vel $base pode ser definida em ms_configura, mas a prefer&ecirc;ncia &eacute; pela defini&ccedil;&atilde;o j&aacute; existente
@@ -407,11 +420,8 @@ $_SESSION["cachedir"] = $cachedir_;
 $_SESSION["emailInstituicao"] = $emailInstituicao_;
 $_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
-//$_SESSION["locsistemas"] = $locsistemas_;
-//$_SESSION["locidentifica"] = $locidentifica_;
 $_SESSION["R_path"] = $R_path_;
 $_SESSION["mapext"] = $mapext_;
-
 $_SESSION["debug"] = $debug_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
@@ -419,15 +429,16 @@ $_SESSION["perfil"] = $perfil_;
 $_SESSION["navegadoresLocais"] = $navegadoresLocais_;
 $_SESSION["utilizacgi"] = $utilizacgi_;
 $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
-//$_SESSION["atlasxml"] = $atlasxml;
 $_SESSION["expoeMapfile"] = $expoeMapfile;
 $_SESSION["googleApiKey"] = $googleApiKey_;
 $_SESSION["mensagemInicia"] = $mensagemInicia_;
 $_SESSION["interfacePadrao"] = $interfacePadrao_;
-if(isset($interface_))
-$_SESSION["interface"] = $interface_;
-if(isset($kmlurl_))
-$_SESSION["kmlurl"] = $kmlurl_;
+if(isset($interface_)){
+	$_SESSION["interface"] = $interface_;
+}
+if(isset($kmlurl_)){
+	$_SESSION["kmlurl"] = $kmlurl_;
+}
 //rotina de seguran&ccedil;a, ver http://shiflett.org/articles/the-truth-about-sessions
 $fingerprint = 'I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'];
 $_SESSION['fingerprint'] = md5($fingerprint . session_id());
@@ -440,7 +451,7 @@ $_SESSION["saikuUrl"] = $saikuUrl_;
 //pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
 //
 foreach(array_keys($_SESSION) as $k){
-	eval("\$".$k."='".$_SESSION[$k]."';");
+	//eval("\$".$k."='".$_SESSION[$k]."';");
 }
 //sao arrays
 $postgis_mapa = $postgis_mapa_;

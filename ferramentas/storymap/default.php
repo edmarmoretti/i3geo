@@ -1,4 +1,5 @@
 <?php
+exit;
 //exemplo: http://localhost/i3geo/ferramentas/storymap/default.php?tema=_lreal&layers=_lbiomashp _llocali
 //temas do i3geo podem ser incluidos em &layers separados por espacos
 	if(empty($_GET["tema"])){

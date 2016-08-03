@@ -121,21 +121,50 @@ $interfaceTemp = $interface;
 //
 if ($funcao != "pegaTodosTemas" && $funcao != "download3" && $funcao != "listainterfaces" && $funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS"){
 	session_name("i3GeoPHP");
-	if (isset($g_sid) && $g_sid != "")
-	{
+	if (isset($g_sid) && $g_sid != ""){
 		session_id($g_sid);
 	}
 	session_start();
 	foreach(array_keys($_SESSION) as $k){
-		if(!is_array($_SESSION[$k]))
-			eval("\$".$k."='".$_SESSION[$k]."';");
+		if(!is_array($_SESSION[$k])){
+			//eval("\$".$k."='".$_SESSION[$k]."';");
+		}
 	}
+	$statusFerramentas = $_SESSION["statusFerramentas"];
+	$imgurl = $_SESSION["imgurl"];
+	$tmpurl = $_SESSION["tmpurl"];
+	$map_file = $_SESSION["map_file"];
+	$mapext = $_SESSION["mapext"];
+	$dir_tmp = $_SESSION["dir_tmp"] ;
+	$cachedir = $_SESSION["cachedir"];
+	$emailInstituicao = $_SESSION["emailInstituicao"];
+	$locmapserv = $_SESSION["locmapserv"];
+	$locaplic = $_SESSION["locaplic"];
+	$R_path = $_SESSION["R_path"];
+	$mapext = $_SESSION["mapext"];
+	$debug = $_SESSION["debug"];
+	$ler_extensoes = $_SESSION["ler_extensoes"];
+	$postgis_mapa = $_SESSION["postgis_mapa"];
+	$perfil = $_SESSION["perfil"];
+	$navegadoresLocais = $_SESSION["navegadoresLocais"];
+	$utilizacgi = $_SESSION["utilizacgi"];
+	$tituloInstituicao = $_SESSION["tituloInstituicao"];
+	$expoeMapfile = $_SESSION["expoeMapfile"];
+	$googleApiKey = $_SESSION["googleApiKey"];
+	$mensagemInicia = $_SESSION["mensagemInicia"];
+	$interfacePadrao = $_SESSION["interfacePadrao"];
+	$interface = $_SESSION["interface"];
+	$kmlurl = $_SESSION["kmlurl"];
+	$mapdir = $_SESSION["mapdir"];
+	$imgdir = $_SESSION["imgdir"];
+	$contadorsalva = $_SESSION["contadorsalva"];
+	$i3georendermode = $_SESSION["i3georendermode"];
+	$saikuUrl = $_SESSION["saikuUrl"];
 	//sao arrays
 	$postgis_mapa = $_SESSION["postgis_mapa"];
 	$statusFerramentas = $_SESSION["statusFerramentas"];
-	if(isset($fingerprint))	{
-		//if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
-		$f = explode(",",$fingerprint);
+	if(isset($_SESSION['fingerprint']))	{
+		$f = explode(",",$_SESSION['fingerprint']);
 		if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id())){
 			include_once("funcoes_gerais.php");
 			cpjson(". Tentativa de acesso nao permitida. Inicie um novo mapa.");

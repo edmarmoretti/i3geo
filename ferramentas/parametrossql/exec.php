@@ -129,6 +129,9 @@ switch (strtoupper($funcao))
 	 * Utilizado para pegar a lista de valores que sera apresentada ao usuario
 	 */
 	case "INCLUDEPROG":
+		//evita redirecoina o programa para algum lugar indevido
+		$prog = str_replace(".","",$prog);
+		$prog = $prog.".php";
 		if(file_exists($locaplic."/".$prog)){
 			include($locaplic."/".$prog);
 		}
