@@ -175,13 +175,7 @@ if(isset($interfaceTemp) && $interfaceTemp != ""){
 	$_SESSION["interface"] = $interfaceTemp;
 	$interface = $interfaceTemp;
 }
-//
-//verifica se deve ativar o debug
-//
-if (isset($debug) && strtolower($debug) == "sim")
-{
-	error_reporting(0);
-}
+error_reporting(0);
 //
 //teste de timeout
 //
@@ -231,10 +225,7 @@ if (!isset($map_file))
 }
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
-if (isset($debug) && strtolower($debug) == "sim")
-{
-	error_reporting(0);
-}
+error_reporting(0);
 //
 //identifica qual a url do i3geo
 //
@@ -651,7 +642,7 @@ switch (strtoupper($funcao))
 	case "LISTATEMASTIPO":
 		include_once("classe_mapa.php");
 		$m = new Mapa($map_file);
-		if(!isset($selecao)){
+		if(!isset($selecao) || $selecao == ""){
 			$selecao = "nao";
 		}
 		$retorno = $m->listaTemasTipo($tipo,$selecao);

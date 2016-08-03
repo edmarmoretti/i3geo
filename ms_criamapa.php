@@ -239,6 +239,7 @@ if(!isset($funcao)){
 	 Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
 	 */
 	include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+	$parurl = array_merge($_GET,$_POST);
 	$base = $parurl["base"];
 	$temasa = $parurl["temasa"];
 	$layers = $parurl["layers"];
@@ -271,7 +272,7 @@ if(!isset($funcao)){
 	$gvsigview = $parurl["gvsigview"];
 	$restauramapa = $parurl["restauramapa"];
 }
-$parurl = array_merge($_GET,$_POST);
+
 include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
