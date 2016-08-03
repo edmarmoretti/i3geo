@@ -494,8 +494,8 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		$nome = $cachedir.$tms;
 	}
 	if(!file_exists($nome)){
-		@mkdir(dirname($nome),0777,true);
-		chmod(dirname($nome),0777);
+		@mkdir(dirname($nome),0774,true);
+		chmod(dirname($nome),0774);
 		$img->saveImage($nome);
 		//
 		//corta a imagem gerada para voltar ao tamanho normal
@@ -503,7 +503,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		if($cortePixels > 0){
 			$img = cortaImagemDisco($nome,$cortePixels,256);
 		}
-		chmod($nome,0777);
+		chmod($nome,0774);
 	}
 	return $nome;
 }

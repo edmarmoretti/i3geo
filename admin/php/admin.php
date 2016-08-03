@@ -38,8 +38,8 @@ if(!isset($locaplic) || !isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
 if(!file_exists($dir_tmp)){
-	@mkdir ($dir_tmp,0777);
-	chmod($dir_tmp,0777);
+	@mkdir ($dir_tmp,0774);
+	chmod($dir_tmp,0774);
 }
 include_once($locaplic."/classesphp/pega_variaveis.php");
 error_reporting(0);

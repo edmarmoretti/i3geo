@@ -1223,8 +1223,8 @@ function salvaCacheImagem($cachedir,$map,$tms){
 	else{
 		$nome = $cachedir.$tms;
 	}
-	@mkdir(dirname($nome),0777,true);
-	chmod(dirname($nome),0777);
+	@mkdir(dirname($nome),0774,true);
+	chmod(dirname($nome),0774);
 	$img->saveImage($nome);
 	//
 	//corta a imagem gerada para voltar ao tamanho normal

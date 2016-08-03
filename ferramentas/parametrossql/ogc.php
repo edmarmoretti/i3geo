@@ -537,8 +537,8 @@ function salvaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 	else{
 		$nome = $cachedir.$tms;
 	}
-	@mkdir(dirname($nome),0777,true);
-	chmod(dirname($nome),0777);
+	@mkdir(dirname($nome),0774,true);
+	chmod(dirname($nome),0774);
 	$img->saveImage($nome);
 	//
 	//corta a imagem gerada para voltar ao tamanho normal
@@ -555,7 +555,7 @@ function salvaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 		imagecopy($imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256);
 		imagepng($imgc,$nome);
 	}
-	chmod($nome,0777);
+	chmod($nome,0774);
 	header('Content-Length: '.filesize($nome));
 	header('Content-Type: image/png');
 	header('Cache-Control: max-age=3600, must-revalidate');
