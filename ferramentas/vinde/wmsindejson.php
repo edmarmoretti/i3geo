@@ -1,22 +1,4 @@
 <?php
-exit;
-/*
-echo
-'[
-		"2013 - Agricultura Irrigada",
-		"http://www.geoservicos.inde.gov.br/geoserver/wms",
-		{
-			"layers": "MPOG:Agricultura_Irrigada",
-			"format": "image/png",
-			"transparent": true
-		}
-]
-';
-*/
-/*
- * new OpenLayers.Layer.WMS('2013 - Agricultura Irrigada', 'http://www.geoservicos.inde.gov.br/geoserver/wms', {layers: 'MPOG:Agricultura_Irrigada', format: 'image/png', transparent: true}, {isBaseLayer: false, visibility: false, group: 'Planejamento/Planejamento/2013 - Agricultura Irrigada', metadataURL: 'http://www.metadados.inde.gov.br/geonetwork/srv/br/metadata.show.embedded?uuid=045663f7-5691-447a-8d06-ab692522328c', legendURL: 'http://www.geoservicos.inde.gov.br/geoserver/wms?service=WMS&version=1.1.0&request=GetLegendGraphic&layer=MPOG:Agricultura_Irrigada&format=image/png',kmlURL: 'http://www.geoservicos.inde.gov.br/geoserver/wms?service=WMS&version=1.1.0&request=GetMap&layers=MPOG:Agricultura_Irrigada&width=1024&height=768&bbox=-74,-34,-29,6&format=application/vnd.google-earth.kmz+xml',sldtema: '','maxExtent': new OpenLayers.Bounds(-55.389,-22.229,-37.808,-2.922), isBaseGroup: false, displayInLayerSwitcher: false, removable: false, groupOfKeeper: 'MP/2013 - Agricultura Irrigada', groupOfTheme: 'Planejamento/Planejamento/2013 - Agricultura Irrigada'}),
- */
-
 include(dirname(__FILE__)."/../../ms_configura.php");
 include($locaplic."/classesphp/funcoes_gerais.php");
 $agora = intval(time() / 10000);
@@ -48,15 +30,6 @@ $convert = explode("\n", $resultado);
 
 $n = count($convert);
 $layers = array();
-//$novalinha[] = "var servicosINDE = [";
-//$convert= array(" new OpenLayers.Layer.WMS('2013 - Agricultura Irrigada', 'http://www.geoservicos.inde.gov.br/geoserver/wms',
-//{layers: 'MPOG:Agricultura_Irrigada', format: 'image/png', transparent: true},
-//{isBaseLayer: false, visibility: false, group: 'Planejamento/Planejamento/2013 - Agricultura Irrigada',
-//metadataURL: 'http://www.metadados.inde.gov.br/geonetwork/srv/br/metadata.show.embedded?uuid=045663f7-5691-447a-8d06-ab692522328c',
-//legendURL: 'http://www.geoservicos.inde.gov.br/geoserver/wms?service=WMS&version=1.1.0&request=GetLegendGraphic&layer=MPOG:Agricultura_Irrigada&format=image/png',
-//kmlURL: 'http://www.geoservicos.inde.gov.br/geoserver/wms?service=WMS&version=1.1.0&request=GetMap&layers=MPOG:Agricultura_Irrigada&width=1024&height=768&bbox=-74,-34,-29,6&format=application/vnd.google-earth.kmz+xml',sldtema: '',
-//'maxExtent': new OpenLayers.Bounds(-55.389,-22.229,-37.808,-2.922), isBaseGroup: false, displayInLayerSwitcher: false, removable: false, groupOfKeeper: 'MP/2013 - Agricultura Irrigada', groupOfTheme: 'Planejamento/Planejamento/2013 - Agricultura Irrigada'}),
-
 $busca = array(
 	array("layers","format:"),
 	array("format","transparent:"),
@@ -72,8 +45,6 @@ for ($i=0;$i<$n;$i++){
 
 		$pt = "/(new OpenLayers\.Layer\.WMS\(\')(.*)',\s'(.*)',\s{/";
 		preg_match_all($pt, $linha, $matches);
-		//echo "<pre>";
-		//var_dump($matches);exit;
 		$nomeLayer = $matches[2][0];////converte($matches[2][0]);
 		$layer[] = $nomeLayer;
 		$parametros = array();
@@ -110,18 +81,11 @@ for ($i=0;$i<$n;$i++){
 		$layers[$i] = $layer;
 	}
 }
-
-//separa os grupos
-//echo "<pre>";
-//var_dump($grupos);exit;
 $chaves = array_keys($grupos);
 sort($chaves);
-//echo count($chaves);exit;
 $arvore = array();
 foreach($chaves as $chave){
-	//echo $chave."\n";
 	$hs = explode("/",$chave);
-	//echo count($hs);
 	$d = $hs;
 	array_shift($d);
 	if(array_key_exists(0,$hs) && array_key_exists($hs[0],$arvore)){
@@ -131,8 +95,6 @@ foreach($chaves as $chave){
 		$arvore[$hs[0]] = noi($d,array());
 	}
 }
-//var_dump($arvore);
-//exit;
 $final = array(
 		"layers"=>$layers,
 		"arvore"=>$arvore
@@ -147,16 +109,10 @@ echo json_encode($final,true);
 if(extension_loaded('zlib')){
 	ob_end_flush();
 }
-
-//echo json_encode($novalinha,true);
-//echo "{".implode($novalinha,",")."}";
-//echo "[".$novalinha[0]."]";
 function noi($n,$l){
 	global $layers;
-	//var_dump($n);
 	$d = $n;
 	array_shift($d);
-	//echo count($n);
 	if(count($n) > 1){
 		if(array_key_exists(0,$n) && array_key_exists($n[0],$l)){
 			if(is_array($n[1])){
@@ -172,15 +128,11 @@ function noi($n,$l){
 		$l[$n[0]] = noi($d,$l);
 		return $l;
 	}
-	//$n[1] = $layers[$n[0]];
 	return $n;
 }
 function converte($texto)
 {
-	//if (!mb_detect_encoding($texto,"UTF-8",false))
-	//{
-		$texto = mb_convert_encoding($texto,"ISO-8859-1","AUTO");
-	//}
+	$texto = mb_convert_encoding($texto,"ISO-8859-1","AUTO");
 	return $texto;
 }
 ?>
