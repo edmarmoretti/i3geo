@@ -125,11 +125,6 @@ if ($funcao != "pegaTodosTemas" && $funcao != "download3" && $funcao != "listain
 		session_id($g_sid);
 	}
 	session_start();
-	foreach(array_keys($_SESSION) as $k){
-		if(!is_array($_SESSION[$k])){
-			//eval("\$".$k."='".$_SESSION[$k]."';");
-		}
-	}
 	$statusFerramentas = $_SESSION["statusFerramentas"];
 	$imgurl = $_SESSION["imgurl"];
 	$tmpurl = $_SESSION["tmpurl"];

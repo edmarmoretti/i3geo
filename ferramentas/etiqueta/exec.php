@@ -20,8 +20,10 @@ Ativa as etiquetas de um tema.
 		$m->layer->setmetadata("IDENTIFICA","");
 		$m->layer->setmetadata("TIP",$tips);
 		$m->layer->setmetadata("ITENS",$itens);
-		$m->layer->setmetadata("ITENSDESC",base64_decode($itensdesc));
-		$m->layer->setmetadata("ITENSLINK",base64_decode($itenslink));
+		//$m->layer->setmetadata("ITENSDESC",base64_decode($itensdesc));
+		//$m->layer->setmetadata("ITENSLINK",base64_decode($itenslink));
+		$m->layer->setmetadata("ITENSDESC",$itensdesc);
+		$m->layer->setmetadata("ITENSLINK",$itenslink);
 		$m->layer->setmetadata("itembuscarapida",$itembuscarapida);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;

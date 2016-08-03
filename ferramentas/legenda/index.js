@@ -856,7 +856,7 @@ i3GEOF.legenda =
 				var ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 				p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?"
-						+ "base64=sim"
+						+ "base64=nao"
 						+ "&g_sid="
 						+ i3GEO.configura.sid
 						+ "&funcao=alteraclasse"
@@ -866,11 +866,13 @@ i3GEOF.legenda =
 				cp = new cpaint();
 				cp.set_transfer_mode('POST');
 				cp.set_response_type("JSON");
-				cp.call(p, "alteraclassesPost", temp, "ids=" + i3GEO.util.base64encode(ids)
+				cp.call(p, "alteraclassesPost", temp, "ids=" + ids
 					+ "&nomes="
-					+ i3GEO.util.base64encode(nomes)
+					//+ i3GEO.util.base64encode(nomes)
+					+ nomes
 					+ "&exps="
-					+ i3GEO.util.base64encode(exps)
+					//+ i3GEO.util.base64encode(exps)
+					+ exps
 					+ "&minScales="
 					+ minScales
 					+ "&maxScales="
@@ -2301,7 +2303,8 @@ i3GEOF.legenda =
 					+ "&buffer="
 					+ $i("i3GEOlegendaClusterBuffer").value
 					+ "&filter="
-					+ i3GEO.util.base64encode($i("i3GEOlegendaClusterFilter").value)
+					//+ i3GEO.util.base64encode($i("i3GEOlegendaClusterFilter").value)
+					+ $i("i3GEOlegendaClusterFilter").value
 					+ "&region="
 					+ $i("i3GEOlegendaClusterRegion").value
 					+ "&group="

@@ -326,8 +326,10 @@ i3GEOF.etiqueta = {
 				+ i3GEOF.etiqueta.tema
 				+ "&tips="+lista[0].toString(",")
 				+ "&itens="+lista[1].toString(",")
-				+ "&itensdesc="+i3GEO.util.base64encode(lista[2].toString(","))
-				+ "&itenslink="+i3GEO.util.base64encode(lista[3].toString(","))
+				//+ "&itensdesc="+i3GEO.util.base64encode(lista[2].toString(","))
+				//+ "&itenslink="+i3GEO.util.base64encode(lista[3].toString(","))
+				+ "&itensdesc="+lista[2].toString(",")
+				+ "&itenslink="+lista[3].toString(",")
 				+ "&itembuscarapida="+lista[4];
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');

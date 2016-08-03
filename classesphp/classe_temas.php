@@ -495,7 +495,7 @@ $testa - Testa o filtro e retorna uma imagem.
 	function insereFiltro($filtro,$testa="",$base64="nao")
 	{
 		if($base64 == "sim"){
-			$filtro = base64_decode($filtro);
+			//$filtro = base64_decode($filtro);
 		}
 		foreach($this->indices as $indice){
 			$layer = $this->mapa->getlayer($indice);

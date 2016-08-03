@@ -196,9 +196,9 @@ class Alteraclasse
 	function alteraclasses($ids,$nomes,$exps,$base64="nao",$minScales="",$maxScales="")
 	{
 		if($base64 == "sim"){
-			$ids = base64_decode($ids);
-			$nomes = base64_decode($nomes);
-			$exps = base64_decode($exps);
+			//$ids = base64_decode($ids);
+			//$nomes = base64_decode($nomes);
+			//$exps = base64_decode($exps);
 		}
 		//prepara os arrays com os valores
 		$ids = explode(";",$ids);

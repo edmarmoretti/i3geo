@@ -103,7 +103,7 @@ Acrescenta a contagem de elementos em cada classe.
 		$m = new Temas($map_file,$tema);
 		$l = $m->mapa->getlayerbyname($tema);
 		if($filter != ""){
-			$filter = base64decode($filter);
+			//$filter = base64decode($filter);
 		}
 		$m->criaCluster($group,$filter,$maxdistance,$region,$buffer);
 		$m->salva();
