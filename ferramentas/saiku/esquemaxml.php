@@ -1,4 +1,5 @@
 <?php
+exit;
 //
 //utilize &output=xml para ver o xml
 //

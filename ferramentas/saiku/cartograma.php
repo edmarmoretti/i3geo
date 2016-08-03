@@ -1,4 +1,5 @@
 <?php
+exit;
 if(empty($_POST["g_sid"])){
 	echo "erro";
 	exit;
