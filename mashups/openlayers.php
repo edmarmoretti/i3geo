@@ -5,10 +5,40 @@
  * ser&aacute; definido automaticamente
  */
 include_once(dirname(__FILE__)."/../ms_configura.php");
-include_once(dirname(__FILE__)."/../classesphp/pega_variaveis.php");
+include_once(dirname(__FILE__)."/../classesphp/sani_request.php");
 include_once(dirname(__FILE__)."/../classesphp/carrega_ext.php");
 include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 error_reporting(0);
+//variaveis utilizadas
+$parurl = array_merge($_GET,$_POST);
+$desligacache = $parurl["desligacache"];
+$opacidade = $parurl["opacidade"];
+$nocache = $parurl["nocache"];
+$restauramapa = $parurl["restauramapa"];
+$mapext = $parurl["mapext"];
+$temas = $parurl["temas"];
+$layers = $parurl["layers"];
+
+$altura = $parurl["altura"];
+$controles = $parurl["controles"];
+$botoes = $parurl["botoes"];
+$fundo = $parurl["fundo"];
+$visiveis = $parurl["visiveis"];
+$servidor = $parurl["servidor"];
+$kml = $parurl["kml"];
+$numzoomlevels = $parurl["numzoomlevels"];
+$minresolution = $parurl["minresolution"];
+$maxextent = $parurl["maxextent"];
+
+$pontos = $parurl["pontos"];
+$marca = $parurl["marca"];
+$tiles = $parurl["tiles"];
+$incluilayergrafico = $parurl["incluilayergrafico"];
+$ativalayerswicther = $parurl["ativalayerswicther"];
+$ativarodadomouse = $parurl["ativarodadomouse"];
+$legendahtml = $parurl["legendahtml"];
+$nocache = $parurl["nocache"];
+
 //cria as pastas temporarias caso nao existam
 if (! file_exists ( $dir_tmp )) {
 	@mkdir ( $dir_tmp, 0777 );

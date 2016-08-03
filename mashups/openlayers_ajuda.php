@@ -1,5 +1,6 @@
 <?php
 include(dirname(__FILE__)."/../versao.php");
+include_once(dirname(__FILE__)."/../classesphp/sani_request.php");
 $completo = "block";
 if(!empty($_GET["completo"]) && $_GET["completo"] == "none"){
 	$completo = "none";
