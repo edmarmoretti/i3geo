@@ -1,4 +1,5 @@
 <?php
+exit;
 /**
 Esse programa e uma adaptacao do codigo i3geo/ogc.php
 E utilizado no mashup (i3geo/mashup) nas camadas que sao configuradas cm o plugin parametrossql

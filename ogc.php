@@ -79,7 +79,7 @@ ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 */
 set_time_limit(0);
 ini_set('memory_limit', '512M');
-
+include_once (dirname(__FILE__)."/classesphp/sani_request.php");
 if(isset($_GET["BBOX"])){
 	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
 }
@@ -104,6 +104,10 @@ if(isset($_GET["TileMatrix"])){
 }
 $_GET = array_merge($_GET,$_POST);
 
+
+if($_GET["id_medida_variavel"] != ""){
+	$_GET["id_medida_variavel"] = filter_var ( $_GET["id_medida_variavel"], FILTER_SANITIZE_NUMBER_INT);
+}
 //
 //caso nenhum parametros tenha sido enviado
 //
@@ -125,18 +129,20 @@ if(isset($_GET["outputformat"]) && $_GET["outputformat"] != ""){
 $cache = true;
 //require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
-include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 //
 //ajusta o default
 //
-if(!isset($ows_geomtype) || $ows_geomtype == ""){
+if(!isset($_GET["ows_geomtype"]) || $_GET["ows_geomtype"] == ""){
 	$ows_geomtype = "none";
+}
+else{
+	$ows_geomtype = $_GET["ows_geomtype"];
 }
 //
 //imprime na tela a ajuda
 //
-if(isset($ajuda)){
+if(isset($_GET["ajuda"])){
 	ogc_imprimeAjuda();
 	exit;
 }
@@ -149,44 +155,34 @@ $protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
 $protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
-//imprime na tela a lista de temas disponiveis
-//
-if(isset($lista) && $lista != ""){
-	include_once(dirname(__FILE__)."/classesphp/classe_menutemas.php");
-	if($lista == "temas"){
-		ogc_imprimeListaDeTemas();
-	}
-	if($lista == "temaswfs"){
-		ogc_imprimeListaDeTemasWfs();
-	}
-	exit;
-}
-//
 //define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
 //
-if(isset($id_medida_variavel) && $id_medida_variavel != ""){
-	$tema = "ogcmetaestat".$id_medida_variavel;
+if(isset($_GET["id_medida_variavel"]) && $_GET["id_medida_variavel"] != ""){
+	$tema = "ogcmetaestat".$_GET["id_medida_variavel"];
 }
 //
 //compatibiliza variaveis
 //
-if(!isset($tema) && isset($layers)){
-	$tema = $layers;
+if(!isset($tema) && isset($_GET["layers"])){
+	$tema = $_GET["layers"];
 }
-if(!isset($tema) && isset($LAYERS)){
-	$tema = $LAYERS;
+if(!isset($tema) && isset($_GET["LAYERS"])){
+	$tema = $_GET["LAYERS"];
 }
-if(!isset($tema) && isset($LAYER)){
-	$tema = $LAYER;
+if(!isset($tema) && isset($_GET["LAYER"])){
+	$tema = $_GET["LAYER"];
 }
-if(!isset($tema) && isset($temas)){
-	$tema = $temas;
+if(!isset($tema) && isset($_GET["temas"])){
+	$tema = $_GET["temas"];
 }
-if(isset($typeName)){
-	$typename = $typeName;
+if(isset($_GET["typeName"])){
+	$typename = $_GET["typeName"];
+	if(!isset($tema)){
+		$tema = $typename;
+	}
 }
-if(!isset($tema) && isset($typename)){
-	$tema = $typename;
+if(!isset($tema) && isset($_GET["typename"])){
+	$tema = $_GET["typename"];
 }
 //
 //garante que layers possam ser especificados de diferentes maneiras
@@ -199,6 +195,7 @@ if(!file_exists($tema)){
 
 $layers = $tema;
 //ajusta o OUTPUTFORMAT
+$OUTPUTFORMAT = $_GET["OUTPUTFORMAT"];
 if(strpos(strtolower($OUTPUTFORMAT),"kml") !== false){
 	$OUTPUTFORMAT = "kml";
 }
@@ -220,6 +217,7 @@ if(strtolower($OUTPUTFORMAT) == "kmz"){
 	header("Location:".$urln);
 	exit;
 }
+$ogrOutput = $_GET["ogrOutput"];
 if(strtolower($OUTPUTFORMAT) == "kml" && $ogrOutput == false){
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
@@ -239,6 +237,7 @@ if(strtolower($OUTPUTFORMAT) == "shape-zip" && $ogrOutput == false){
 //
 //caso seja uma requisição WMS com format
 //
+$format = $_GET["format"];
 if(strpos(strtolower($format),"kml") !== false){
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kml&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
@@ -269,7 +268,7 @@ if(strtolower($OUTPUTFORMAT) == "geojson"){
 //
 //recupera um mapa salvo no banco de administracao
 //
-if(!empty($restauramapa)){
+if(!empty($_GET["restauramapa"])){
 	restauraMapaSalvo();
 }
 //
@@ -316,8 +315,8 @@ foreach ($_GET as $k=>$v){
 //
 $req->setParameter("srsName",$req->getValueByName("SRS"));
 $listaepsg = $req->getValueByName("SRS")." EPSG:4618 EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
-
-if(isset($version) && !isset($VERSION)){
+$VERSION = $_GET["VERSION"];
+if(isset($_GET["version"]) && !isset($_GET["VERSION"])){
 	$VERSION = $version;
 }
 if(!isset($VERSION) || $VERSION == ""){
@@ -360,6 +359,7 @@ $arrayget["TileRow"] = "";
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
+$ogcwsmap = $_GET["ogcwsmap"];
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
@@ -405,7 +405,7 @@ else{
 		//$temai3geo = true indica que o layer ser&aacute; buscado na pasta i3geo/temas
 		$temai3geo = true;
 		//FIXME nao aceita gvp quando o caminho e completo
-		if(file_exists($_GET["tema"]) && !isset($id_medida_variavel)){
+		if(file_exists($_GET["tema"]) && !isset($_GET["id_medida_variavel"])){
 			$nmap = ms_newMapobj($_GET["tema"]);
 			$temai3geo = false;
 			$nmap->setmetadata("ows_enable_request","*");
@@ -413,7 +413,7 @@ else{
 		foreach ($listatema as $tx){
 			$extensao = ".map";
 			if($temai3geo == true && file_exists($locaplic."/temas/".$tx.".php")){
-				$extensao = ".php";
+				//$extensao = ".php";
 			}
 			if($temai3geo == true && file_exists($locaplic."/temas/".$tx.".gvp")){
 				$extensao = ".gvp";
@@ -421,23 +421,23 @@ else{
 			if($extensao == ".map"){
 				//cria o mapfile com base no sistema de metadados estatisticos
 				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
-				if(!isset($id_medida_variavel) && $temai3geo == true){
+				if(!isset($_GET["id_medida_variavel"]) && $temai3geo == true){
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 					$l = $nmap->getlayer(0);
 					$teste = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
 					if($teste != "" && $l->data == ""){
-						$id_medida_variavel = $teste;
+						$_GET["id_medida_variavel"] = $teste;
 					}
 				}
-				if(isset($id_medida_variavel)){
+				if(isset($_GET["id_medida_variavel"])){
 					$temai3geo = false;
 					include("admin/php/classe_metaestat.php");
 					$m = new Metaestat();
-					$m->nomecache = "ogcmetaestat".$id_medida_variavel;
-					$mapfileMetaestat = $m->mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
+					$m->nomecache = "ogcmetaestat".$_GET["id_medida_variavel"];
+					$mapfileMetaestat = $m->mapfileMedidaVariavel($_GET["id_medida_variavel"],"",1,"","","","","","",true);
 					$nmap = ms_newMapobj($mapfileMetaestat["mapfile"]);
 					$nmap->setmetadata("ows_enable_request","*");
-					$req->setParameter("LAYERS", "ogcmetaestat".$id_medida_variavel);
+					$req->setParameter("LAYERS", "ogcmetaestat".$_GET["id_medida_variavel"]);
 				}
 				if($temai3geo == true){
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
@@ -572,10 +572,7 @@ else{
 					}
 				}
 			}
-			if($extensao == ".php"){
-				include_once($locaplic."/temas/".$tx.".php");
-				eval($tx."(\$oMap);");
-			}
+
 			if($extensao == ".gvp"){
 				include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 				$gm = new gvsig2mapfile($locaplic."/temas/".$tx.".gvp");
@@ -633,7 +630,7 @@ else{
 		$conta = 0;
 		$int = explode(",",$intervalo);
 		$codigosTema = array();
-		if(empty($perfil)){
+		if(empty($_GET["perfil"])){
 			$perfil = "";
 		}
 		include("classesphp/classe_menutemas.php");
@@ -721,8 +718,8 @@ else{
 					echo "Erro no arquivo ".$locaplic."/temas/".$codigoTema.".map <br>";
 					$error = ms_GetErrorObj();
 					while($error && $error->code != MS_NOERR){
-						printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
-						$error = $error->next();
+						//printf("<br>Error in %s: %s<br>\n", $error->routine, $error->message);
+						//$error = $error->next();
 					}
 				}
 			}
@@ -731,6 +728,7 @@ else{
 	//
 	//a imagem do mapa recebera a legenda
 	//
+	$legenda = $_GET["legenda"];
 	if((isset($legenda)) && (strtolower($legenda) == "sim")){
 		$leg = $oMap->legend;
 		$leg->set("status",MS_EMBED);
@@ -743,6 +741,7 @@ else{
 	//caso seja download ou json ou csv
 	//
 	processaOutputformatMapfile();
+	$nomeMapfileTmp = str_replace(".map","").".map";
 	$oMap->save($nomeMapfileTmp);
 
 	validaAcessoTemas($nomeMapfileTmp,true);
@@ -881,8 +880,6 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$poPoint2->project($projInObj, $projOutObj);
 	$oMap->setsize(256,256);
 	$oMap->setExtent($poPoint1->x,$poPoint1->y,$poPoint2->x,$poPoint2->y);
-
-
 
 	$oMap->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
 
@@ -1124,84 +1121,16 @@ function ogc_imprimeAjuda(){
 	echo "de dados de administracao para utiliza-lo como um WMS";
 }
 function ogc_imprimeListaDeTemas(){
-	global $urli3geo,$perfil,$locaplic;
-	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
-	$menus = $m->pegaListaDeMenus();
-	echo '<html><head><title>WMS</title><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
-	echo "<body><b>Lista de temas por grupos e subgrupos e endere&ccedil;os de acesso aos dados por meio de Web Services WMS (os c&oacute;digos dos temas est&atilde;o em vermelho)</b><br><br>";
-	$imprimir = "";
-	foreach ($menus as $menu){
-		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
-		foreach($grupos as $grupo){
-			if(!empty($grupo["ogc"]) && strtolower($grupo["ogc"]) == "sim"){
-				$imprimegrupo = "<i>".texto2iso($grupo["nome"])."</i>";
-				foreach($grupo["subgrupos"] as $sgrupo){
-					if(strtolower($sgrupo["ogc"]) == "sim"){
-						$imprimesubgrupo = $sgrupo["nome"];
-						$lts = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
-						foreach($lts as $t){
-							if(strtolower($t["ogc"]) == "sim"){
-								$imprimir .= texto2iso($imprimegrupo)."->".texto2iso($imprimesubgrupo)."<br>";
-								$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-								$imprimir .= "<span style=color:red >".$t["tid"]."</span>";
-								$imprimir .= "&nbsp;-&nbsp;".texto2iso($t["nome"])."&nbsp";
-								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$t["tid"]."&service=wms&request=getcapabilities' >Getcapabilities</a>";
-								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$t["tid"]."&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=".$t["tid"]."' >GetMap </a>";
-								if($t["link"] != " ")
-									$imprimir .= "&nbsp;&nbsp;<a href='".$t["link"]."' >fonte</a>";
-								$imprimir .= "<br>";
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	echo $imprimir."</body></html>";
 }
 function ogc_imprimeListaDeTemasWfs(){
-	global $urli3geo,$perfil,$locaplic;
-	$m = new Menutemas("",$perfil,$locaplic,$urli3geo);
-	$menus = $m->pegaListaDeMenus();
-	echo '<html><head><title>WFS</title><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1"><meta name="description" content="OGC"><meta name="keywords" content="WMS OGC mapa sig gis webmapping geo geoprocessamento interativo meio ambiente MMA cartografia geografia"> <meta name="robots" content="index,follow">';
-	echo "<body><b>Lista de temas por grupos e subgrupos e endere&ccedil;os de acesso aos dados por meio de Web Services WFS (os c&oacute;digos dos temas est&atilde;o em vermelho)</b><br><br>";
-	$imprimir = "";
-	foreach ($menus as $menu){
-		$grupos = $m->pegaListaDeGrupos($menu["idmenu"],$listasistemas="nao",$listasgrupos="sim");
-		foreach($grupos as $grupo){
-			if(strtolower($grupo["ogc"]) == "sim"){
-				$imprimegrupo = "<i>".$grupo["nome"]."</i>";
-				foreach($grupo["subgrupos"] as $sgrupo){
-					if(strtolower($sgrupo["ogc"]) == "sim"){
-						$imprimesubgrupo = $sgrupo["nome"];
-						$lts = $m->pegaListaDeTemas($grupo["id_n1"],$sgrupo["id_n2"],$menu["idmenu"]);
-						foreach($lts as $t){
-							if(strtolower($t["ogc"]) == "sim" && strtolower($t["down"]) !== "nao"){
-								$imprimir .= $imprimegrupo."->".$imprimesubgrupo."<br>";
-								$imprimir .= "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
-								$imprimir .= "<span style=color:red >".$t["tid"]."</span>";
-								$imprimir .= "&nbsp;-&nbsp;".$t["nome"]."&nbsp";
-								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$t["tid"]."&service=wfs&request=getcapabilities' >Getcapabilities</a>";
-								$imprimir .= "&nbsp;<a href='".$urli3geo."/ogc.php?tema=".$t["tid"]."&SRS=EPSG:4618&service=wfs&version=1.1.0&request=getfeature&typename=".$t["tid"]."' >Getfeature </a>";
-								if($t["link"] != " ")
-									$imprimir .= "&nbsp;&nbsp;<a href='".$t["link"]."' >fonte</a>";
-								$imprimir .= "<br>";
-							}
-						}
-					}
-				}
-			}
-		}
-	}
-	echo $imprimir."</body></html>";
 }
 function carregaCacheImagem($cachedir,$map,$tms){
 	global $dir_tmp;
 	if($cachedir == ""){
-		$nome = $dir_tmp."/cache".$tms;
+		$nome = $dir_tmp."/cache".$tms.".png";
 	}
 	else{
-		$nome = $cachedir.$tms;
+		$nome = $cachedir.$tms.".png";
 	}
 	if(file_exists($nome)){
 		header('Content-Length: '.filesize($nome));
@@ -1217,6 +1146,7 @@ function carregaCacheImagem($cachedir,$map,$tms){
 }
 function salvaCacheImagem($cachedir,$map,$tms){
 	global $img,$dir_tmp,$cortePixels;
+	//por seguranca
 	if($cachedir == ""){
 		$nome = $dir_tmp."/cache".$tms;
 	}
@@ -1225,7 +1155,8 @@ function salvaCacheImagem($cachedir,$map,$tms){
 	}
 	@mkdir(dirname($nome),0774,true);
 	chmod(dirname($nome),0774);
-	$img->saveImage($nome);
+
+	$img->saveImage($nome.".png");
 	//
 	//corta a imagem gerada para voltar ao tamanho normal
 	//
@@ -1241,7 +1172,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		imagecopy($imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256);
 		imagepng($imgc,$nome);
 	}
-	chmod($nome,0777);
+	chmod($nome,0774);
 	header('Content-Length: '.filesize($nome));
 	header('Content-Type: image/png');
 	header('Cache-Control: max-age=3600, must-revalidate');
@@ -1496,10 +1427,10 @@ function exportaCsv(){
 
 	}
 	$contents = implode("\n",$linhas);
-	file_put_contents($arq,$contents);
+	file_put_contents($arq.".csv",$contents);
 	//envia para download
 	ob_clean();
-	header('Content-Disposition: attachment; filename='.$fileName);
+	header('Content-Disposition: attachment; filename='.$fileName.".csv");
 	header("Content-type: text/csv");
 	echo $contents;
 	exit;
@@ -1545,7 +1476,7 @@ function exportaGeojson(){
 	);
 	$contents = json_encode($n[0]);
 	$contents = str_replace('\"','',$contents);
-	file_put_contents($arq,$contents);
+	file_put_contents($arq.".json",$contents);
 	ob_clean();
 	header("Content-type: application/json; subtype=geojson");
 	echo $contents;
@@ -1560,6 +1491,7 @@ function converteenc($texto){
 }
 function processaPluginI3geo(){
 	global $oMap, $locaplic;
+	return;
 	$numlayers = $oMap->numlayers;
 	for ($i=0;$i < $numlayers;$i++){
 		$l = $oMap->getlayer($i);
@@ -1620,6 +1552,7 @@ function processaPluginI3geo(){
 }
 //utilizada para obter os dados default quando se utiliza o plugin parametrossql
 function execProg($prog){
+	return;
 	include($prog);
 	//$retorno variavel deve ser retornada pelo programa $prog
 	//veja como exemplo i3geo/aplicmap/daods/listaano.php
