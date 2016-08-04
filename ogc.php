@@ -103,7 +103,7 @@ if(isset($_GET["TileMatrix"])){
 	$_GET["REQUEST"] = "getMap";
 }
 $_GET = array_merge($_GET,$_POST);
-
+$tema = $_GET["tema"];
 if($_GET["id_medida_variavel"] != ""){
 	$_GET["id_medida_variavel"] = filter_var ( $_GET["id_medida_variavel"], FILTER_SANITIZE_NUMBER_INT);
 }
@@ -129,6 +129,7 @@ $cache = true;
 //require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
+
 //
 //ajusta o default
 //
@@ -157,12 +158,14 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
 //define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
 //
+
 if(isset($_GET["id_medida_variavel"]) && $_GET["id_medida_variavel"] != ""){
 	$tema = "ogcmetaestat".$_GET["id_medida_variavel"];
 }
 //
 //compatibiliza variaveis
 //
+
 if(!isset($tema) && isset($_GET["layers"])){
 	$tema = $_GET["layers"];
 }
@@ -184,6 +187,7 @@ if(isset($_GET["typeName"])){
 if(!isset($tema) && isset($_GET["typename"])){
 	$tema = $_GET["typename"];
 }
+
 //
 //garante que layers possam ser especificados de diferentes maneiras
 //mas evita definir o layer como o nome do mapfile
@@ -260,6 +264,7 @@ if(!isset($_GET["srs"]) && !isset($_GET["SRS"])){
 	$_GET["srs"] = "EPSG:4326";
 	$_GET["SRS"] = "EPSG:4326";
 }
+
 //
 //trata geojson da mesma forma que json
 //
@@ -323,6 +328,7 @@ if(isset($_GET["version"]) && !isset($_GET["VERSION"])){
 if(!isset($VERSION) || $VERSION == ""){
 	$req->setParameter("VeRsIoN","1.1.1");
 }
+
 //
 //nome do mapfile que ficara em cache
 //
@@ -363,6 +369,7 @@ $nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
 $ogcwsmap = $_GET["ogcwsmap"];
+
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
@@ -400,7 +407,6 @@ else{
 	}
 	$e = $oMap->extent;
 	$extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
-
 	//gera o mapa
 	if ($tema != ""){
 		$listatema = explode(" ",$tema);
@@ -504,6 +510,7 @@ else{
 						$l->setmetadata("wms_extent",$extensao);
 						if (!empty($postgis_mapa)){
 							if ($l->connectiontype == MS_POSTGIS){
+								
 								$lcon = $l->connection;
 								if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
 									//
@@ -793,10 +800,12 @@ if(isset($_GET["tms"])){
 		$lon2 = $top_left_minx + ($_GET["TileCol"] * $x_size) + $x_size;
 		$lat2 = $top_left_maxy - ($_GET["TileRow"] * $y_size);
 	}
+
 	//essa funcao termina o processo se a imagem existir
 	if($cache == true){
 		carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
 	}
+
 	$layer0 = $oMap->getlayer(0);
 	//
 	//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
@@ -824,7 +833,9 @@ if(isset($_GET["tms"])){
 		$ponto->setxy(($wh/2),($wh/2));
 		$oMap->zoomScale($escalaInicial, $ponto, $wh, $wh, $extensaoInicial);
 	}
+
 	$img = $oMap->draw();
+
 	if($img->imagepath == ""){
 		exit;
 	}
@@ -833,6 +844,7 @@ if(isset($_GET["tms"])){
 	}
 	renderNocacheTms();
 }
+
 //
 //verifica se a chamada do servico e do tipo TILE no padrao do Google
 //
@@ -1133,11 +1145,12 @@ function ogc_imprimeListaDeTemasWfs(){
 function carregaCacheImagem($cachedir,$map,$tms){
 	global $dir_tmp;
 	if($cachedir == ""){
-		$nome = $dir_tmp."/cache".$tms.".png";
+		$nome = $dir_tmp."/cache".$tms;
 	}
 	else{
-		$nome = $cachedir.$tms.".png";
+		$nome = $cachedir.$tms;
 	}
+	$nome = str_replace(".png","",$nome).".png";
 	if(file_exists($nome)){
 		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
@@ -1159,10 +1172,11 @@ function salvaCacheImagem($cachedir,$map,$tms){
 	else{
 		$nome = $cachedir.$tms;
 	}
+	$nome = str_replace(".png","",$nome).".png";
 	@mkdir(dirname($nome),0774,true);
 	chmod(dirname($nome),0774);
 
-	$img->saveImage($nome.".png");
+	$img->saveImage($nome);
 	//
 	//corta a imagem gerada para voltar ao tamanho normal
 	//
