@@ -3,7 +3,7 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])){
 	exit;
 }
 error_reporting(0);
-$bl = array("_decode","php","eval","passthru","shell_exec","escapeshellarg","escapeshellcmd","proc_close","proc_open","dl","popen","contents","delete","drop","update","insert","exec","system",";");
+$bl = array("password","select","_decode","php","eval","passthru","shell_exec","escapeshellarg","escapeshellcmd","proc_close","proc_open","dl","popen","contents","delete","drop","update","insert","exec","system",";");
 if (isset($_GET)){
 	foreach(array_keys($_GET) as $k)	{
 		$k = str_ireplace($bl,"",$k);

@@ -26,6 +26,7 @@ if(!file_exists($arq)){
 else{
 	$resultado = file_get_contents($arq);
 }
+$resultado = str_replace("<?","",$resultado);
 $convert = explode("\n", $resultado);
 
 $n = count($convert);
