@@ -103,7 +103,7 @@ $ext - extensao geogr&aacute;fica que ser&aacute; aplicada ao mapa
 
 		if($map_file != ""){
 			$this->mapa = ms_newMapObj($map_file);
-			$this->arquivo = $map_file;
+			$this->arquivo = str_replace(".map","",$map_file).".map";
 			$this->tema = $tema;
 			if($tema != "" && @$this->mapa->getlayerbyname($tema)){
 				$this->layer = $this->mapa->getlayerbyname($tema);

@@ -114,7 +114,7 @@ class Atributos
 			$this->qyfile = str_replace(".map",".qy",$map_file);
 			$this->locaplic = $locaplic;
 			$this->mapa = ms_newMapObj($map_file);
-			$this->arquivo = $map_file;
+			$this->arquivo = str_replace(".map","",$map_file).".map";
 			if($tema != "" && @$this->mapa->getlayerbyname($tema))
 			{
 				$this->layer = $this->mapa->getlayerbyname($tema);

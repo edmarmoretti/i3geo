@@ -79,7 +79,7 @@ class Alteraclasse
 		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		$this->locaplic = $locaplic;
 		$this->mapa = ms_newMapObj($map_file);
-		$this->arquivo = $map_file;
+		$this->arquivo = str_replace(".map","",$map_file).".map";
 		$this->layer = "";
 		if($tema != "" && @$this->mapa->getlayerbyname($tema)){
 			$this->layer = $this->mapa->getlayerbyname($tema);

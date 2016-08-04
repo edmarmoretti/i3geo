@@ -222,6 +222,7 @@ function gravaid()
 		$l->setmetadata("ATLAS","nao");
 		$l->setmetadata("TIP","");
 	}
+	$tmpfname = str_replace(".map","",$tmpfname).".map";
 	$m->save($tmpfname);
 }
 ?>

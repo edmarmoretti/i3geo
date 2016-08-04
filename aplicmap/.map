@@ -1,0 +1,202 @@
+MAP
+  EXTENT -140 -60 140 60
+  FONTSET "/var/www/i3geo/symbols/fontes.txt"
+  IMAGECOLOR 104 171 195
+  IMAGETYPE "AGG_Q"
+  MAXSIZE 4096
+  NAME "GERAL"
+  SHAPEPATH "/var/www/geodados"
+  SIZE 480 500
+  STATUS ON
+  SYMBOLSET "/var/www/i3geo/symbols/simbolosv7.sym"
+  UNITS DD
+
+  OUTPUTFORMAT
+    NAME "AGG_Q"
+    MIMETYPE "image/png"
+    DRIVER "AGG/PNG"
+    EXTENSION "png"
+    IMAGEMODE RGB
+    TRANSPARENT FALSE
+    FORMATOPTION "QUANTIZE_FORCE=ON"
+    FORMATOPTION "QUANTIZE_DITHER=OFF"
+    FORMATOPTION "QUANTIZE_COLORS=256"
+    FORMATOPTION "INTERLACE=OFF"
+  END # OUTPUTFORMAT
+
+  OUTPUTFORMAT
+    NAME "jpeg"
+    MIMETYPE "image/jpeg"
+    DRIVER "AGG/JPEG"
+    EXTENSION "jpg"
+    IMAGEMODE RGB
+    TRANSPARENT FALSE
+    FORMATOPTION "INTERLACE=OFF"
+  END # OUTPUTFORMAT
+
+  OUTPUTFORMAT
+    NAME "png1"
+    MIMETYPE "image/png"
+    DRIVER "AGG/PNG"
+    EXTENSION "png"
+    IMAGEMODE RGB
+    TRANSPARENT FALSE
+    FORMATOPTION "INTERLACE=OFF"
+  END # OUTPUTFORMAT
+
+  OUTPUTFORMAT
+    NAME "png2"
+    MIMETYPE "image/png"
+    DRIVER "AGG/PNG"
+    EXTENSION "png"
+    IMAGEMODE RGBA
+    TRANSPARENT TRUE
+    FORMATOPTION "INTERLACE=OFF"
+  END # OUTPUTFORMAT
+
+  PROJECTION
+    "proj=longlat"
+    "ellps=WGS84"
+    "datum=WGS84"
+    "no_defs"
+  END # PROJECTION
+  LEGEND
+    KEYSIZE 12 10
+    KEYSPACING 5 5
+    LABEL
+      FONT "verdana"
+      SIZE 7
+      OFFSET 0 -2
+      SHADOWSIZE 1 1
+    END # LABEL
+    STATUS OFF
+  END # LEGEND
+
+  QUERYMAP
+    COLOR 0 255 255
+    SIZE 480 500
+    STATUS ON
+    STYLE HILITE
+  END # QUERYMAP
+
+  REFERENCE
+    COLOR -1 -1 -1
+    EXTENT -75.5728 -37.4751 -30.525 7.57273
+    IMAGE "/var/www/i3geo/imagens/referencia1.png"
+    OUTLINECOLOR -1 -1 -1
+    SIZE 150 150
+    STATUS OFF
+    MARKER "ref"
+    MARKERSIZE 8
+    MAXBOXSIZE 145
+    MINBOXSIZE 8
+  END # REFERENCE
+
+  SCALEBAR
+    BACKGROUNDCOLOR 200 200 200
+    INTERVALS 5
+    LABEL
+      SIZE 5
+      OFFSET 0 0
+      SHADOWSIZE 1 1
+    END # LABEL
+    POSITION LR
+    SIZE 200 2
+    STATUS EMBED
+    TRANSPARENT FALSE
+    UNITS KILOMETERS
+  END # SCALEBAR
+
+  WEB
+    IMAGEPATH "/tmp/ms_tmp/imgEMZNhLeATG/"
+    IMAGEURL "/ms_tmp/imgEMZNhLeATG/"
+    TEMPLATE ""
+  END # WEB
+
+  LAYER
+    DATA "/var/www/i3geo/aplicmap/dados/mundo"
+    GROUP "mundo"
+    METADATA
+      "cache"	"sim"
+      "TIP"	"FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
+      "CLASSE"	"SIM"
+      "ITENSDESC"	"FIPS,GMI,Nome,Wikipedia"
+      "ITENSLINK"	",,,http://pt.wikipedia.org/wiki/[CNTRY_NAME]"
+      "TITULO"	"Países do mundo"
+      "itembuscarapida"	"LONG_NAME"
+      "ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME"
+      "TEMA"	"Países do mundo"
+    END # METADATA
+    NAME "mundo"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 230 230 230
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+  LAYER
+    METADATA
+      "cache"	"nao"
+      "ESCONDIDO"	"SIM"
+      "TEMA"	"NAO"
+    END # METADATA
+    NAME "copyright"
+    STATUS DEFAULT
+    TILEITEM "location"
+    TOLERANCE 0
+    TRANSFORM FALSE
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      LABEL
+        SIZE 5
+        COLOR 50 50 50
+        OFFSET 0 0
+        POSITION CC
+        SHADOWSIZE 1 1
+      END # LABEL
+    END # CLASS
+    FEATURE
+      POINTS
+      10 5
+      END # POINTS
+      TEXT "-    i3Geo"
+    END # FEATURE
+  END # LAYER
+
+  LAYER
+    METADATA
+      "CLASSE"	"NAO"
+      "TABELA"	"nao"
+      "TEMA"	"Rosa dos ventos"
+      "IDENTIFICA"	"nao"
+    END # METADATA
+    NAME "rosadosventos"
+    STATUS OFF
+    TILEITEM "location"
+    TOLERANCE 0
+    TRANSFORM LR
+    TYPE POINT
+    UNITS PIXELS
+    CLASS
+      STYLE
+        SIZE 90
+        SYMBOL "rosa200"
+      END # STYLE
+    END # CLASS
+    FEATURE
+      POINTS
+      -70 -70
+      END # POINTS
+    END # FEATURE
+  END # LAYER
+
+END # MAP

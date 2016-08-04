@@ -69,7 +69,7 @@ $map_file - string $map_file Endere&ccedil;o do mapfile no servidor.
   		else
   		include_once("funcoes_gerais.php");
   		$this->mapa = ms_newMapObj($map_file);
-  		$this->arquivo = $map_file;
+  		$this->arquivo = str_replace(".map","",$map_file).".map";
 	}
 /*
 function: salva

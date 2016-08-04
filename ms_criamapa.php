@@ -595,7 +595,7 @@ $projecao = pegaProjecaoDefault("proj4");
 if($projecao != ""){
 	$mapn->setProjection($projecao);
 }
-
+$tmpfname = str_replace(".map","",$tmpfname).".map";
 $salvo = $mapn->save($tmpfname);
 
 $_SESSION["imgurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual.$diretorios[2]."/";

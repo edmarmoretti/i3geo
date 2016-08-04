@@ -106,7 +106,7 @@ class Mapa
 			return $this->mapa = false;
 		}
 		$this->mapa = @ms_newMapObj($map_file);
-		$this->arquivo = $map_file;
+		$this->arquivo = str_replace(".map","",$map_file).".map";
 		$c = $this->mapa->numlayers;
 		for ($i=0;$i < $c;++$i){
 			$l = $this->mapa->getlayer($i);

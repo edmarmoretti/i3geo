@@ -159,7 +159,7 @@ locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 			if (($l->getmetadata("ATLAS")) != "nao")
 			{$l->set("status",MS_DELETE);}
 		}
-		$mapa->save($map_file);
+		$mapa->save(str_replace(".map","",$map_file).".map");
 		$mp = "";
 		foreach($this->xml->ATLAS as $s)
 		{
@@ -217,7 +217,7 @@ locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 				$layer = $mapa->getlayerbyname($t);
 				$layer->set("status",MS_DEFAULT);
 			}
-			$mapa->save($map_file);
+			$mapa->save(str_replace(".map","",$map_file).".map");
 		}
 		//verifica extens&atilde;o geogr&aacute;fica
 		$newext = array();
@@ -233,7 +233,7 @@ locaplic - localiza&ccedil;&atilde;o do i3geo no servidor
 			}
 			if (count($newext) == 4)
 			{$ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);}
-			$mapa->save($map_file);
+			$mapa->save(str_replace(".map","",$map_file).".map");
 		}
 		if(!function_exists("sobeAnno")){
 			include_once("funcoes_gerais.php");

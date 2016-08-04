@@ -100,7 +100,7 @@ $tema - nome do tema que ser&aacute; processado
 		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
 		$this->mapa = ms_newMapObj($map_file);
-		$this->arquivo = $map_file;
+		$this->arquivo = str_replace(".map","",$map_file).".map";
 		if($tema != "" && @$this->mapa->getlayerbyname($tema))
 		$this->layer = $this->mapa->getlayerbyname($tema);
 		$this->nome = $tema;
@@ -177,7 +177,7 @@ Retorno:
 		error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$this->removeToponimia();
-		
+
 		if (!isset($tipo)){$tipo = "";}
 		if ($item != "") //o layer nao tem tabela mas tem toponimia
 		{

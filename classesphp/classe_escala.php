@@ -75,7 +75,7 @@ $map_file - Endere&ccedil;o do mapfile no servidor.
 			include_once("funcoes_gerais.php");
 			$this->locaplic = $locaplic;
 			$this->mapa = ms_newMapObj($map_file);
-			$this->arquivo = $map_file;
+			$this->arquivo = str_replace(".map","",$map_file).".map";
 			if ($nomeImagem == "")
 			{$this->nomeImagem = nomeRandomico();}
 	}

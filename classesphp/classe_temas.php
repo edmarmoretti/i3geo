@@ -118,6 +118,7 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 	function __construct($map_file,$tema=null,$locaplic="",$ext="")
 	{
 			//error_reporting(0);
+		$map_file = str_replace(".map","",$map_file).".map";
 		$this->qyfile = str_replace(".map",".qy",$map_file);
 		$this->arquivo = $map_file;
 			if(file_exists($locaplic."/funcoes_gerais.php"))
