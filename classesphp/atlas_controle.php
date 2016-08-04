@@ -81,10 +81,9 @@ if(isset($g_sid))
 	if(isset($atlasId)){
 		$_SESSION["atlasId"] = $atlasId;
 	}
-	//
-	foreach(array_keys($_SESSION) as $k){
-		eval("\$".$k."='".$_SESSION[$k]."';");
-	}
+	$map_file = $_SESSION["map_file"];
+	include(dirname(__FILE__)."/../ms_configura.php");
+
 	$postgis_mapa = $_SESSION["postgis_mapa"];
 }
 if (($funcao == "pegaListaDeAtlas") || ($funcao == "criaAtlas")){
@@ -115,9 +114,7 @@ if ($map_file != ""){
 	//
 	substituiCon($map_file,$postgis_mapa);
 }
-if(!isset($locaplic)){
-	include(dirname(__FILE__)."/../ms_configura.php");
-}
+
 
 include($locaplic."/admin/php/xml.php");
 

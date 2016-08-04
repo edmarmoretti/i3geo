@@ -50,11 +50,9 @@ session_start();
 /**
  * transforma o array da sessao em variaveis
  */
-foreach(array_keys($_SESSION) as $k)
-{
-	if(!is_array($_SESSION[$k]))
-		eval("\$".$k."='".$_SESSION[$k]."';");
-}
+$map_file = $_SESSION["map_file"];
+$postgis_mapa = $_SESSION["postgis_mapa"];
+include (dirname(__FILE__)."/../../ms_configura.php");
 /**
  * verifica se esse programa esta sendo executado dentro de um mapa do i3geo
  */
@@ -724,7 +722,7 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formula
 	//$colunasWhere = array();
 	for($i=1;$i<$n;$i++){
 		$cwhere[] = "tabela0.".$gid."::text = "."tabela".$i.".".$gid."::text";
-		//$colunasWhere[] = 
+		//$colunasWhere[] =
 	}
 	$colunasDados = array();
 	$itens = array($gid,"regiao");

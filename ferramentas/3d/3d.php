@@ -1,4 +1,5 @@
 <?php
+return;
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/carrega_ext.php");
 error_reporting(0);
@@ -7,11 +8,9 @@ if (isset($g_sid))
 {session_id($g_sid);}
 session_name("i3GeoPHP");
 session_start();
-foreach(array_keys($_SESSION) as $k)
-{
-	eval("\$".$k."='".$_SESSION[$k]."';");
-}
+$map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
+require_once (dirname(__FILE__)."/../../ms_configura.php");
 require_once("../../classesphp/funcoes_gerais.php");
 //
 //carrega o phpmapscript
@@ -106,7 +105,7 @@ $imgalt = imagecreatefrompng($arquivoalt);
 $sx = imagesx($imgalt);
 $sy = imagesy($imgalt);
 $fp = fopen($nomefinal,"w");
-		
+
 
 $texto = "#VRML V2.0 utf8
 Group {

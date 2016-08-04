@@ -11,8 +11,9 @@ session_name("i3GeoPHP");
 if(isset($g_sid) && $g_sid != ""){
 	session_id($g_sid);
 	session_start();
-	foreach(array_keys($_SESSION) as $k)
-	{eval("\$".$k."='".$_SESSION[$k]."';");}
+	//foreach(array_keys($_SESSION) as $k)
+	//{eval("\$".$k."='".$_SESSION[$k]."';");}
+	$map_file = $_SESSION["map_file"];
 }
 if (ob_get_level() == 0) ob_start();
 ?>
@@ -65,17 +66,17 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shp");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP. Pode ser uma limita&ccedil;&atilde;o quanto ao tamanho do arquivo ou permiss&atilde;o de escrita na pasta indicada.";paraAguarde();exit;}
-	
+
 	$Arquivo = $_FILES['i3GEOuploadshx']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shx");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHX";paraAguarde();exit;}
-	
+
 	$Arquivo = $_FILES['i3GEOuploaddbf']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".dbf");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo DBF";paraAguarde();exit;}
-	
+
 	if($_FILES['i3GEOuploadprj']['name'] != ""){
 		$Arquivo = $_FILES['i3GEOuploadprj']['tmp_name'];
 		$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".prj");

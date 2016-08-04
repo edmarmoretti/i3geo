@@ -248,14 +248,13 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 			}
 		}
 		if(!stristr($tema, '.php') === FALSE){
+			/*
 			echo "<br>Arquivo <i>$tema</i> &eacute; um programa PHP. O teste pode n&atilde;o funcionar.<br>";
 			include_once($locaplic."/".$tema);
-			//
-			//$pegarext deve guardar o nome da camada para ser usado mais abaixo
-			//
 			$pegarext = str_replace(".php","",$tema);
 			$pegarext = str_replace("temas/","",$pegarext);
 			eval($pegarext."(\$mapa);");
+			*/
 		}
 		if(!stristr($tema, '.map') === FALSE){
 			if(file_exists($mapUrl)){

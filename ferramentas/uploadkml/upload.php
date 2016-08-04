@@ -7,8 +7,9 @@ session_name("i3GeoPHP");
 if (isset($g_sid))
 {session_id($g_sid);}
 session_start();
-foreach(array_keys($_SESSION) as $k)
-{eval("\$".$k."='".$_SESSION[$k]."';");}
+//foreach(array_keys($_SESSION) as $k)
+//{eval("\$".$k."='".$_SESSION[$k]."';");}
+$map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 if (ob_get_level() == 0) ob_start();
 ?>

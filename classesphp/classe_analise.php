@@ -2500,6 +2500,11 @@ class Analise
   {string wkt}
   */
   function aplicaFuncaoListaWKT($geometrias,$operacao,$dir_tmp="",$imgdir=""){
+
+    $permitido = array('converteSHP','union','intersection','difference','symdifference','convexhull','area','perimeter');
+    if(!in_array($operacao,$permitido)){
+    	return;
+    }
     if($operacao === "converteSHP"){
       $nomelayer = $this->incmapageometrias($dir_tmp,$imgdir,$geometrias,$tipoLista="arraywkt");
       return $nomelayer;
