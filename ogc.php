@@ -104,7 +104,6 @@ if(isset($_GET["TileMatrix"])){
 }
 $_GET = array_merge($_GET,$_POST);
 
-
 if($_GET["id_medida_variavel"] != ""){
 	$_GET["id_medida_variavel"] = filter_var ( $_GET["id_medida_variavel"], FILTER_SANITIZE_NUMBER_INT);
 }
@@ -139,6 +138,7 @@ if(!isset($_GET["ows_geomtype"]) || $_GET["ows_geomtype"] == ""){
 else{
 	$ows_geomtype = $_GET["ows_geomtype"];
 }
+
 //
 //imprime na tela a ajuda
 //
@@ -208,6 +208,7 @@ if(strpos(strtolower($OUTPUTFORMAT),"kmz") !== false){
 if(!empty($OUTPUTFORMAT)){
 	carregaCacheArquivo();
 }
+
 //
 //para o caso da requisicao kmz
 //kmz nao funciona diretamente com mapserver
@@ -325,6 +326,7 @@ if(!isset($VERSION) || $VERSION == ""){
 //
 //nome do mapfile que ficara em cache
 //
+
 $agora = intval(time() / 1000);
 //acrescenta ao nome a indicacao do tipo de TMS
 if(isset($_GET["tms"])){
@@ -357,6 +359,7 @@ $arrayget["TileCol"] = "";
 $arrayget["TileRow"] = "";
 
 $nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
+
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
 $ogcwsmap = $_GET["ogcwsmap"];
@@ -419,6 +422,7 @@ else{
 				$extensao = ".gvp";
 			}
 			if($extensao == ".map"){
+
 				//cria o mapfile com base no sistema de metadados estatisticos
 				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
 				if(!isset($_GET["id_medida_variavel"]) && $temai3geo == true){
@@ -526,6 +530,7 @@ else{
 								$l->setprocessing("POLYLINE_NO_CLIP=True");
 							}
 						}
+
 						//
 						//verifica se existem parametros de substituicao passados via url
 						//
@@ -736,12 +741,13 @@ else{
 	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
 	//verifica se existem layers com plugin definido e processa conforme o tipo de plugin
+
 	processaPluginI3geo();
 	//
 	//caso seja download ou json ou csv
 	//
 	processaOutputformatMapfile();
-	$nomeMapfileTmp = str_replace(".map","").".map";
+	$nomeMapfileTmp = str_replace(".map","",$nomeMapfileTmp).".map";
 	$oMap->save($nomeMapfileTmp);
 
 	validaAcessoTemas($nomeMapfileTmp,true);
