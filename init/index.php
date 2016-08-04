@@ -21,16 +21,17 @@ if (! empty ( $_GET ["customDir"] )) {
 	$customDir = "interface";
 }
 if (! file_exists ( $dir_tmp )) {
-	@mkdir ( $dir_tmp, 0774 );
+	@mkdir ( $dir_tmp, 0744 );
 }
 if (file_exists ( $dir_tmp )) {
-	@mkdir ( $dir_tmp . "/comum", 0774 );
-	@mkdir ( $dir_tmp . "/saiku-datasources", 0774 );
-	chmod ( $dir_tmp . "/saiku-datasources", 0774 );
-	@mkdir ( $dir_tmp . "/cache", 0774 );
-	chmod ( $dir_tmp . "/cache", 0774 );
-	@mkdir ( $dir_tmp . "/cache/googlemaps", 0774 );
-	chmod ( $dir_tmp . "/cache/googlemaps", 0774 );
+	@mkdir ( $dir_tmp . "/comum", 0744 );
+	chmod ( $dir_tmp . "/comum", 0744 );
+	@mkdir ( $dir_tmp . "/saiku-datasources", 0744 );
+	chmod ( $dir_tmp . "/saiku-datasources", 0744 );
+	@mkdir ( $dir_tmp . "/cache", 0744 );
+	chmod ( $dir_tmp . "/cache", 0744 );
+	@mkdir ( $dir_tmp . "/cache/googlemaps", 0744 );
+	chmod ( $dir_tmp . "/cache/googlemaps", 0744 );
 }
 error_reporting ( 0 );
 include "head.php";

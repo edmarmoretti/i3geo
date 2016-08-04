@@ -41,16 +41,16 @@ $nocache = $parurl["nocache"];
 
 //cria as pastas temporarias caso nao existam
 if (! file_exists ( $dir_tmp )) {
-	@mkdir ( $dir_tmp, 0774 );
+	@mkdir ( $dir_tmp, 0744 );
 }
 if (file_exists ( $dir_tmp )) {
-	@mkdir ( $dir_tmp . "/comum", 0774 );
-	@mkdir ( $dir_tmp . "/saiku-datasources", 0774 );
-	chmod ( $dir_tmp . "/saiku-datasources", 0774 );
-	@mkdir ( $dir_tmp . "/cache", 0774 );
-	chmod ( $dir_tmp . "/cache", 0774 );
-	@mkdir ( $dir_tmp . "/cache/googlemaps", 0774 );
-	chmod ( $dir_tmp . "/cache/googlemaps", 0774 );
+	@mkdir ( $dir_tmp . "/comum", 0744 );
+	@mkdir ( $dir_tmp . "/saiku-datasources", 0744 );
+	chmod ( $dir_tmp . "/saiku-datasources", 0744 );
+	@mkdir ( $dir_tmp . "/cache", 0744 );
+	chmod ( $dir_tmp . "/cache", 0744 );
+	@mkdir ( $dir_tmp . "/cache/googlemaps", 0744 );
+	chmod ( $dir_tmp . "/cache/googlemaps", 0744 );
 }
 if(!empty($desligacache)){
 	$DESLIGACACHE = $desligacache;

@@ -510,7 +510,7 @@ else{
 						$l->setmetadata("wms_extent",$extensao);
 						if (!empty($postgis_mapa)){
 							if ($l->connectiontype == MS_POSTGIS){
-								
+
 								$lcon = $l->connection;
 								if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
 									//
@@ -1173,8 +1173,8 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		$nome = $cachedir.$tms;
 	}
 	$nome = str_replace(".png","",$nome).".png";
-	@mkdir(dirname($nome),0774,true);
-	chmod(dirname($nome),0774);
+	@mkdir(dirname($nome),0744,true);
+	chmod(dirname($nome),0744);
 
 	$img->saveImage($nome);
 	//
@@ -1192,7 +1192,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		imagecopy($imgc, $img, 0 , 0 , $cortePixels , $cortePixels , 256, 256);
 		imagepng($imgc,$nome);
 	}
-	chmod($nome,0774);
+	chmod($nome,0744);
 	header('Content-Length: '.filesize($nome));
 	header('Content-Type: image/png');
 	header('Cache-Control: max-age=3600, must-revalidate');

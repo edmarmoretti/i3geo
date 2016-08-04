@@ -221,10 +221,10 @@ HTML;
 		if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 			echo "Criando a pasta $dir_tmp";
 			if(!file_exists($dir_tmp)){
-				@mkdir ($dir_tmp,0774);
+				@mkdir ($dir_tmp,0744);
 			}
 			else{
-				chmod($dir_tmp,0774);
+				chmod($dir_tmp,0744);
 			}
 			if(!file_exists($dir_tmp)){
 				echo "<span style=color:red >Arquivo $dir_tmp n&atilde;o pode ser criado";
@@ -243,7 +243,7 @@ HTML;
 				@symlink($dir_tmp,$d);
 			}
 			else{
-				chmod($d,0774);
+				chmod($d,0744);
 			}
 			if(!file_exists($d)){
 				echo "<span style=color:red >Link $d n&atilde;o pode ser criado\n";
@@ -258,10 +258,10 @@ HTML;
 		if(!empty($_POST["criaPastaMstmp"]) && $_POST["permPastaI3geo"] == "on"){
 			echo "Alterando permiss&otilde;es i3geo i3geo/temas i3geo/admin i3geo/admin/admin.db\n";
 			if(file_exists($locaplic)){
-				chmod($locaplic,0774);
-				chmod($locaplic."/temas",0774);
-				chmod($locaplic."/admin",0774);
-				chmod($locaplic."/admin/admin.db",0774);
+				chmod($locaplic,0744);
+				chmod($locaplic."/temas",0744);
+				chmod($locaplic."/admin",0744);
+				chmod($locaplic."/admin/admin.db",0744);
 				echo "...OK\n";
 			}
 		}

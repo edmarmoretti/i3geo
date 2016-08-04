@@ -50,7 +50,7 @@ switch (strtoupper($funcao))
 		if(file_exists($cost_surface_path)){
 			$pathresult = $dir_tmp."/melhorcaminho_".nomeRandomico();
 			//cria a pasta onde os resultados serao armazenados
-			mkdir ($pathresult,0774);
+			mkdir ($pathresult,0744);
 
 			//parametros para o calculo de melhor caminho e linha reta
 			$best = array(

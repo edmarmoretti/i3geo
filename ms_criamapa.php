@@ -1366,33 +1366,33 @@ Retorno:
 function criaDirMapa($dir_tmp,$cachedir="")
 {
 	if(!file_exists($dir_tmp)){
-		@mkdir ($dir_tmp,0774);
+		@mkdir ($dir_tmp,0744);
 	}
 	if(file_exists($dir_tmp))
 	{
 		$tmpdirname = nomeRandomico();
-		$crdir = @mkdir ($dir_tmp."/".$tmpdirname,0774);
-		chmod($dir_tmp."/".$tmpdirname,0774);
-		$crdiri = @mkdir ($dir_tmp."/img".$tmpdirname,0774);
-		chmod($dir_tmp."/img".$tmpdirname,0774);
+		$crdir = @mkdir ($dir_tmp."/".$tmpdirname,0744);
+		chmod($dir_tmp."/".$tmpdirname,0744);
+		$crdiri = @mkdir ($dir_tmp."/img".$tmpdirname,0744);
+		chmod($dir_tmp."/img".$tmpdirname,0744);
 		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
 		$tmpimgname = "img".$tmpdirname;
-		@mkdir($dir_tmp."/comum",0774);
+		@mkdir($dir_tmp."/comum",0744);
 		//utilizado para armazenar os arquivos de fonte de dados do SAIKU
-		@mkdir($dir_tmp."/saiku-datasources",0774);
-		chmod($dir_tmp."/saiku-datasources",0774);
+		@mkdir($dir_tmp."/saiku-datasources",0744);
+		chmod($dir_tmp."/saiku-datasources",0744);
 		//
 		if($cachedir == ""){
-			@mkdir($dir_tmp."/cache",0774);
-			chmod($dir_tmp."/cache",0774);
-			@mkdir($dir_tmp."/cache/googlemaps",0774);
-			chmod($dir_tmp."/cache/googlemaps",0774);
+			@mkdir($dir_tmp."/cache",0744);
+			chmod($dir_tmp."/cache",0744);
+			@mkdir($dir_tmp."/cache/googlemaps",0744);
+			chmod($dir_tmp."/cache/googlemaps",0744);
 		}
 		else{
-			@mkdir($cachedir,0774);
-			chmod($cachedir,0774);
-			@mkdir($cachedir."/googlemaps",0774);
-			chmod($cachedir."/googlemaps",0774);
+			@mkdir($cachedir,0744);
+			chmod($cachedir,0744);
+			@mkdir($cachedir."/googlemaps",0744);
+			chmod($cachedir."/googlemaps",0744);
 		}
 		if(file_exists($dir_tmp."/".$tmpdirname))
 		return array($mapfile,$tmpdirname,$tmpimgname);
