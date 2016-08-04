@@ -12,6 +12,7 @@ Remove a tela inicial de apresenta&ccedil;&atilde;o do i3Geo substituindo-a pela
 Ap&oacute;s remover, a tela inicial pode ser vista utilizando-se o endere&ccedil;o i3geo/init. Para definir qual a interface que
 ser&aacute; utilizada como default ao abrir o i3Geo edite o arquivo i3geo/ms_configura.php.<br><br>
 <?php
+exit;
 $locaplic = dirname(__FILE__)."/..";
 include_once(dirname(__FILE__)."/../admin/php/admin.php");
 include_once(dirname(__FILE__)."/../admin/php/conexao.php");

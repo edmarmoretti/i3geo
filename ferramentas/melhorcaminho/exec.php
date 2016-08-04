@@ -10,7 +10,7 @@ switch (strtoupper($funcao))
 		$mapa = ms_newMapObj($map_file);
 		$layer = $mapa->getlayerbyname($tema);
 		$shapes = retornaShapesSelecionados($layer,$map_file,$mapa);
-		
+
 		if(count($shapes) == 0){
 			$shapes = retornaShapesMapext($layer,$mapa);
 		}
@@ -26,13 +26,13 @@ switch (strtoupper($funcao))
 			$objLine = $shapes[0]->line(0);
 			$pontoA = $objLine->point(0);
 			$pontoB = $objLine->point($objLine->numpoints - 1);
-		}		
+		}
 		//quando poligono 2
 		if($layer->type == 2){
 			$objLine = $shapes[0]->line(0);
 			$pontoA = $objLine->point(0);
 			$pontoB = $shapes[0]->getCentroid();
-		}		
+		}
 		$retorno = array(
 			"ax"=>$pontoA->x,
 			"ay"=>$pontoA->y,
@@ -50,7 +50,7 @@ switch (strtoupper($funcao))
 		if(file_exists($cost_surface_path)){
 			$pathresult = $dir_tmp."/melhorcaminho_".nomeRandomico();
 			//cria a pasta onde os resultados serao armazenados
-			mkdir ($pathresult,0777);
+			mkdir ($pathresult,0774);
 
 			//parametros para o calculo de melhor caminho e linha reta
 			$best = array(
@@ -125,7 +125,7 @@ switch (strtoupper($funcao))
 								"stop_coord" => "[$ptb]"
 						)
 				);
-				$processos[] = $shp;				
+				$processos[] = $shp;
 			}
 			//monta o array que sera utilizado para gerar o arquivo yaml que sera o input do programa python que faz o calculo
 			$a = array(
