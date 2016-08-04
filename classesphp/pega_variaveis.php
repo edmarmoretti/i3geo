@@ -114,5 +114,8 @@ if (isset($_POST))
 		}
 	}
 }
+if(isset($id_medida_variavel)){
+	$id_medida_variavel = $id_medida_variavel * 1;
+}
 //echo $exps;exit;
 ?>
