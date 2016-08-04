@@ -59,6 +59,7 @@ Arquivo:
 i3geo/classesphp/mapa_openlayers.php
 
 */
+include("sani_request.php");
 //para efeitos de compatibilidade
 if (!function_exists('ms_GetVersion')){
 	include_once ("carrega_ext.php");
@@ -145,7 +146,7 @@ if(!empty($_GET["request"])){
 //
 //resolve o problema da selecao nas versoes mais recentes nova do mapserver
 //
-$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
+$qyfile = dirname($map_fileX)."/".$_GET["layer"];
 $qy = file_exists($qyfile);
 
 if($_GET["REQUEST"] == "getlegendgraphic" || $_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){
@@ -493,6 +494,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 	else{
 		$nome = $cachedir.$tms;
 	}
+	$nome = $nome.".png";
 	if(!file_exists($nome)){
 		@mkdir(dirname($nome),0774,true);
 		chmod(dirname($nome),0774);
@@ -514,6 +516,7 @@ function carregaCacheImagem($cachedir,$map,$tms,$i3georendermode=0){
 	else{
 		$nome = $cachedir.$tms;
 	}
+	$nome = $nome.".png";
 	if(file_exists($nome)){
 		if($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)){
 			header('Content-Length: '.filesize($nome));

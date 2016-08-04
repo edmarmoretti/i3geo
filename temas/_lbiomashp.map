@@ -7,7 +7,7 @@ MAP
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"CD_LEGENDA"
-      "CACHE"	"nao"
+      "CACHE"	"sim"
       "CLASSE"	"SIM"
       "permitekmz"	"sim"
       "ITENSDESC"	"Bioma Teste de acentuação"

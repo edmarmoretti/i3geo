@@ -35,6 +35,7 @@ Arquivo:
 i3geo/classesphp/mapa_googleearth.php
 
 */
+include("sani_request.php");
 //error_reporting(0);
 error_reporting(0);
 //para efeitos de compatibilidade
@@ -245,7 +246,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 	{
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico();
+		$nomer = ($img->imagepath)."filtroimgtemp".nomeRandomico().".png";
 		$img->saveImage($nomer);
 		filtraImagem($nomer,$_GET["TIPOIMAGEM"]);
 		$img = imagecreatefrompng($nomer);
@@ -259,7 +260,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 		ob_clean();
 		if($img->imagepath == "")
 		{echo "Erro IMAGEPATH vazio";exit;}
-		$nomer = ($img->imagepath)."imgtemp".nomeRandomico();
+		$nomer = ($img->imagepath)."imgtemp".nomeRandomico().".png";
 		$img->saveImage($nomer);
 		$img = imagecreatefrompng($nomer);
 		imagealphablending($img, false);
