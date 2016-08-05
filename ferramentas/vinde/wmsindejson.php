@@ -100,6 +100,10 @@ $final = array(
 		"layers"=>$layers,
 		"arvore"=>$arvore
 );
+//teste
+$final = json_encode($final);
+$final = json_decode($final);
+
 error_reporting(0);
 ob_end_clean();
 if(extension_loaded('zlib')){
