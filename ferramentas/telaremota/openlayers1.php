@@ -1,6 +1,8 @@
 <?php
-include("../../classesphp/pega_variaveis.php");
-if(!isset($fundo)){
+
+include (dirname(__FILE__)."/../../classesphp/sani_request.php");
+
+if(!isset($_GET["fundo"])){
 	$fundo = "''";
 }
 ?>
@@ -118,7 +120,7 @@ function inicia(){
 	if (app==='N'){navn=true;}else{navm=true;}
 	OpenLayers.ImgPath = "../../pacotes/openlayers/img/"
 	OpenLayers.Lang.setCode("pt-BR");
-	var urlLayer = "../../classesphp/mapa_openlayers.php?DESLIGACACHE=sim&g_sid=<?php echo $g_sid;?>&telaR=<?php echo $telaR;?>";
+	var urlLayer = "../../classesphp/mapa_openlayers.php?DESLIGACACHE=sim&g_sid=<?php echo $_GET["g_sid"];?>&telaR=<?php echo $_GET["telaR"];?>";
 
 	var remoto = new OpenLayers.Layer.WMS(
 		"Remoto",
@@ -197,8 +199,8 @@ function inicia(){
 			new OpenLayers.Control.Navigation()
 		]
 	});
-	if(<?php echo $fundo; ?> !== ""){
-		mapaRemoto.addLayers([LAYERSADICIONAIS[<?php echo $fundo; ?>],remoto]);
+	if(<?php echo $_GET["fundo"]; ?> !== ""){
+		mapaRemoto.addLayers([LAYERSADICIONAIS[<?php echo $_GET["fundo"]; ?>],remoto]);
 	}
 	else{
 		mapaRemoto.addLayers([remoto]);

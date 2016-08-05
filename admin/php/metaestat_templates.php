@@ -3,7 +3,6 @@
 			include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 			//parser do arquivo para envio como imagem diretamente ao navegador
 			if(!empty($_GET)){
-				//echo $_GET["nomeimg"];exit;
 				ob_clean();
 				echoimg($_GET["nomeimg"],$_GET["tipo"]);
 				exit;

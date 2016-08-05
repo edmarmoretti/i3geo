@@ -4,7 +4,7 @@
  *
  * Abre o arquivo com cesium/kml3d
  */
-//$_GET["tema"]
+include (dirname(__FILE__)."/../../classesphp/sani_request.php");
 include("../../classesphp/funcoes_gerais.php");
 include("../../ms_configura.php");
 $nomeDoMapfileTema = dirname(__FILE__)."/../../temas/".$_GET["tema"].".map";

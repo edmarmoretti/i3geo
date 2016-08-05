@@ -87,10 +87,21 @@ if(!isset($base) || $base == ""){
 //
 //nome do mapfile que ficara em cache
 //
+//testando
+$base = str_replace(".map","",$base).".map";
+$testemap = @ms_newMapobj($base);
+if(!$testemap){
+	exit;
+}
+
 copy($base,$nomeMapfileTmp);
+
 $oMap = ms_newMapobj($nomeMapfileTmp);
 $nmap = ms_newMapobj($locaplic."/temas/".$tema.".map");
 $l = $nmap->getlayerbyname($tema);
+if($l == ""){
+	exit;
+}
 $l->set("template","none.htm");
 if (!empty($postgis_mapa)){
 	if ($l->connectiontype == MS_POSTGIS){
@@ -199,6 +210,9 @@ function gdocs(){
 			"fields"=>$fields
 	);
 	$contents = json_encode($j);
+	//testa
+	$contents = json_decode($contents);
+	$contents = json_encode($contents);
 	//envia
 	if(empty($jsonp)){
 		file_put_contents($nomeArq.".json",$contents);
@@ -296,9 +310,13 @@ function storymap($par){
 	$j = array(
 			"storymap"=>$storymap
 	);
-	//echo "<pre>";var_dump($j);exit;
+
 	$contents = json_encode($j);
-	//var_dump($contents);exit;
+	
+	$contents = json_decode($contents);
+	$contents = json_encode($contents);
+	
+
 	file_put_contents($nomeArq.".json",$contents);
 	//envia
 	ob_clean();

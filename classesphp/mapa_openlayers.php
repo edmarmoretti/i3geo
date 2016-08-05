@@ -87,7 +87,6 @@ if(isset($_GET["tms"])){
 	$lat1 = $y / $n * 180.0 - 90.0;
 	$lat2 = ($y+1) / $n * 180.0 - 90;
 	$_GET["BBOX"] = $lon1." ".$lat1." ".$lon2." ".$lat2;
-	//echo $_GET["BBOX"];exit;
 }
 
 //para o caso da versao 3 do OpenLayers
@@ -103,7 +102,6 @@ if(isset($_GET["X"]) && !($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST
 	$_GET["WIDTH"] = 256;
 	$_GET["HEIGHT"] = 256;
 	$_GET["tms"] = "/".$_GET["layer"]."/".$z."/".$x."/".$y.".png";
-	echo $_GET["BBOX"]." ".$_GET["tms"];exit;
 }
 
 if(isset($_GET["TileMatrix"])){

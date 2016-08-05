@@ -1,4 +1,5 @@
 <?php
+include (dirname(__FILE__)."/../../../classesphp/sani_request.php");
 /*
 Template usado pelo sistema de publicacao de mapas do METAESTAT
 
@@ -8,20 +9,20 @@ GPL2
 
 i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
 
-Direitos Autorais Reservados (c) 2006 Ministério da Saúde
+Direitos Autorais Reservados (c) 2006 Ministï¿½rio da Saï¿½de
 Desenvolvedor: equipe da SAGE/MS http://189.28.128.178/sage/
 
-Este programa é software livre; você pode redistribuí-lo
-e/ou modificá-lo sob os termos da Licença Pública Geral
+Este programa ï¿½ software livre; vocï¿½ pode redistribuï¿½-lo
+e/ou modificï¿½-lo sob os termos da Licenï¿½a Pï¿½blica Geral
 GNU conforme publicada pela Free Software Foundation;
 
-Este programa é distribuído na expectativa de que seja útil,
-porém, SEM NENHUMA GARANTIA; nem mesmo a garantia implícita
-de COMERCIABILIDADE OU ADEQUAÇÃO A UMA FINALIDADE ESPECÍFICA.
-Consulte a Licença Pública Geral do GNU para mais detalhes.
-Você deve ter recebido uma cópia da Licença Pública Geral do
-GNU junto com este programa; se não, escreva para a
-Free Software Foundation, Inc., no endereço
+Este programa ï¿½ distribuï¿½do na expectativa de que seja ï¿½til,
+porï¿½m, SEM NENHUMA GARANTIA; nem mesmo a garantia implï¿½cita
+de COMERCIABILIDADE OU ADEQUAï¿½ï¿½O A UMA FINALIDADE ESPECï¿½FICA.
+Consulte a Licenï¿½a Pï¿½blica Geral do GNU para mais detalhes.
+Vocï¿½ deve ter recebido uma cï¿½pia da Licenï¿½a Pï¿½blica Geral do
+GNU junto com este programa; se nï¿½o, escreva para a
+Free Software Foundation, Inc., no endereï¿½o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 /*
@@ -37,7 +38,7 @@ $dadosmapa = array(6) {
 */
 /*
 * Utilize <template>.php?id=
-* Onde id é o identificador do mapa cadastrado no METAESTAT
+* Onde id ï¿½ o identificador do mapa cadastrado no METAESTAT
 */
 
 include("lib/dadosmapa.php");
@@ -139,7 +140,7 @@ $dadosmapa = dadosmapa("../../../");
 </table>
 <table id="i3GEOlogoMarca" style='margin: 0px auto;box-shadow:0 1px 13px gray;border-radius:5px;'>
 	<tr>
-		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criação de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, é licenciado sob GPL e integra o Portal do Software Público Brasileiro</h3></td>
+		<td><div id=versaoi3geo ></div><h2 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">i3Geo - Software livre para criaï¿½ï¿½o de mapas interativos e geoprocessamento</h2><h3 style="font-size:10px;font-family: Verdana, Arial, Helvetica, sans-serif;">Baseado no Mapserver, ï¿½ licenciado sob GPL e integra o Portal do Software Pï¿½blico Brasileiro</h3></td>
 	</tr>
 	<tr>
 		<td style="padding:10px;"><img style="width:560px;height:81px" alt="" src='../../../imagens/logo_inicio.png' ></td>

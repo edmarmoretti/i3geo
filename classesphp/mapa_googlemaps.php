@@ -257,7 +257,6 @@ else{
 //qd a cahamda e para um WMS, redireciona para ogc.php
 //
 if($_GET["REQUEST"] == "GetFeatureInfo" || $_GET["REQUEST"] == "getfeature"){
-	//echo $_GET["mapext"];exit;
 	if($_GET["REQUEST"] == "GetFeatureInfo"){
 		$mapa->setsize(256,256);
 		$mapext = explode(",",$_GET["BBOX"]);

@@ -4,6 +4,7 @@
  * E uma copia da ferramenta conctarwms sem mostrar as guias de esolha de servico
  * Isso pq o endereco do servico e um parametro obtido em $_GET["servico"]
  */
+include (dirname(__FILE__)."/../../classesphp/sani_request.php");
 ?>
 <html>
 
