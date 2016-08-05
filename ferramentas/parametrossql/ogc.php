@@ -493,6 +493,7 @@ function renderNocacheTms(){
 		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
 		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
 		//fpassthru(fopen($nomer, 'rb'));
+		$nomer = str_replace(".png","",$nome).".png";
 		readfile($nomer);
 	}
 	if($i3georendermode == 2){
@@ -523,6 +524,7 @@ function carregaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 		$etag = md5_file($nome);
 		header('Etag: '.$etag);
 		//fpassthru(fopen($nome, 'rb'));
+		$nome = str_replace(".png","",$nome).".png";
 		readfile($nome);
 		exit;
 	}
@@ -540,6 +542,7 @@ function salvaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 	}
 	@mkdir(dirname($nome),0744,true);
 	chmod(dirname($nome),0744);
+	$nome = str_replace(".png","",$nome).".png";
 	$img->saveImage($nome);
 	//
 	//corta a imagem gerada para voltar ao tamanho normal
