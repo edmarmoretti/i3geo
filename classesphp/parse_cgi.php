@@ -25,7 +25,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -36,7 +36,7 @@ i3geo/classesphp/parse_cgi.php
 
 Par&acirc;metros:
 
-$g_sid {string} - código da se&ccedil;&atilde;o aberta no servidor
+$g_sid {string} - cï¿½digo da se&ccedil;&atilde;o aberta no servidor
 
 $map_size {string} - string com o tamanho do novo mapa (w h)
 
@@ -71,12 +71,12 @@ if (!isset($map_imagecolor)) $map_imagecolor = "-1 -1 -1";
 
 if (!isset($map_transparent)) $map_transparent = "ON";
 //
-//faz uma cópia do mapfile para poder manipular sem afetar omapfile atual usado pelo i3geo
+//faz uma cï¿½pia do mapfile para poder manipular sem afetar omapfile atual usado pelo i3geo
 //
 $nomerando = nomerandomico();
 //echo $map_file."<br>";
 $map_filen = str_replace(basename($map_file),$nomerando.".map",$map_file);
-//echo $map_filen."<br>";
+$map_filen = str_replace(".map","",$map_filen).".map";
 copy($map_file,$map_filen);
 substituiCon($map_filen,$postgis_mapa);
 $map = ms_newMapObj($map_filen);

@@ -49,6 +49,7 @@ Testa os par&acirc;metros de defini&ccedil;&atilde;o da legenda inserida no mapa
 */
 	case "TESTALEGENDA":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
+		$map_file = str_replace(".map","",$map_file).".map";
 		copy($map_file,str_replace(".map","testeleg.map",$map_file));
 		$m = new Legenda(str_replace(".map","testeleg.map",$map_file));
 		$m->aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize);

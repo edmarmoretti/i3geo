@@ -335,6 +335,7 @@ function copiaSeguranca($map_file)
 	}
 	else
 	{
+		$map_file = str_replace(".map","",$map_file).".map";
 		copy((str_replace(".map","seguranca.map",$map_file)),$map_file);
 	}
 }
@@ -1747,6 +1748,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	$map_file = str_replace(".map",$nr."tmp.map",$map_file);
 	if(file_exists($qyfile)){
 		$nqyfile = str_replace(".map",".qy",$map_file);
+		$nqyfile = str_replace(".qy","",$nqyfile).".qy";
 		copy($qyfile,$nqyfile);
 	}
 	$map->save($map_file);
