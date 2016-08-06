@@ -223,12 +223,13 @@ else{
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
 	$nomeMapfileTmp = str_replace(".map","",$nomeMapfileTmp).".map";
 	$oMap->save($nomeMapfileTmp);
-	
+
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
 if(ob_get_contents ()){
 	ob_end_clean();
 }
+restauraCon($nomeMapfileTmp,$postgis_mapa);
 //
 //verifica se a requisicao e do tipo TMS.
 //
