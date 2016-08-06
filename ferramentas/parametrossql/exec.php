@@ -1,4 +1,5 @@
 <?php
+exit;
 include_once(dirname(__FILE__)."/../inicia.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
@@ -130,8 +131,8 @@ switch (strtoupper($funcao))
 	 */
 	case "INCLUDEPROG":
 		//evita redirecoina o programa para algum lugar indevido
-		$prog = str_replace(".","",$prog);
-		$prog = $prog.".php";
+		$prog = str_replace(".php","",$prog);
+		$prog = str_replace(".","",$prog).".php";
 		if(file_exists($locaplic."/".$prog)){
 			include($locaplic."/".$prog);
 		}

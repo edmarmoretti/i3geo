@@ -9,13 +9,16 @@ A diferenca e que esse servico processa o parametro "plugin", aplicando os filtr
 no plugin parametrossql
  */
 $cache = true;
-require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
+include(dirname(__FILE__)."/classesphp/sani_request.php");
 include(dirname(__FILE__)."/../../ms_configura.php");
-include(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+$_GET = array_merge($_GET,$_POST);
 $projDefault = pegaProjecaoDefault();
 
-$temas = $tema;
+$tema = basename($_GET["tema"]);
+if($tema == ""){
+	exit;
+}
 if(isset($_GET["sld"]) || isset($_GET["filter"])){
 	$cache = false;
 }
@@ -41,7 +44,7 @@ if($_GET["SRS"] == "EPSG:900913"){
 	$_GET["SRS"] = "EPSG:3857";
 }
 $req = ms_newowsrequestobj();
-$_GET = array_merge($_GET,$_POST);
+
 if(!isset($_GET["srs"]) && !isset($_GET["SRS"])){
 	$_GET["srs"] = "EPSG:".$projDefault["epsg"];
 }
@@ -72,7 +75,7 @@ $agora = intval(time() / 1000);
 if(isset($_GET["Z"]) && isset($_GET["X"])){
 	$agora .= "google";
 }
-$nomeMapfileTmp = $dir_tmp."/ogc_".md5($tema.$plugin.($req->getValueByName("SRS")))."_".$agora.".map";
+$nomeMapfileTmp = $dir_tmp."/ogcpsql_".md5($tema.$plugin.($req->getValueByName("SRS")))."_".$agora.".map";
 $nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
 $nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
@@ -218,7 +221,9 @@ else{
 
 	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
+	$nomeMapfileTmp = str_replace(".map","",$nomeMapfileTmp).".map";
 	$oMap->save($nomeMapfileTmp);
+	
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 }
 if(ob_get_contents ()){
@@ -570,6 +575,8 @@ function salvaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 	exit;
 }
 function execProg($prog){
+	$prog = str_replace(".php","",$prog);
+	$prog = str_replace(".","",$prog).".php";
 	include($prog);
 	//$retorno variavel deve ser retornada pelo programa $prog
 	//veja como exemplo i3geo/aplicmap/daods/listaano.php
