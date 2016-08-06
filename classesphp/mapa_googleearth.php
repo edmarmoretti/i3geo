@@ -62,6 +62,9 @@ if(!isset($_SESSION["map_file"]))
 //
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
+//por seguranca
+include_once("funcoes_gerais.php");
+restauraCon($map_fileX,$postgis_mapa);
 
 if($_GET["REQUEST"] == "GetKml")
 {retornaKml();}

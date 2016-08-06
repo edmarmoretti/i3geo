@@ -155,7 +155,6 @@ else{
 		carregaCacheImagem($_SESSION["cachedir"],$_SESSION["map_file"],$_GET["tms"],$_SESSION["i3georendermode"]);
 	}
 }
-
 //
 //map_fileX e para o caso register_globals = On no PHP.INI
 //
@@ -163,6 +162,11 @@ if(isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo"){
 	$map_fileX = str_replace(".map","fundo.map",$map_fileX);
 }
 $postgis_mapa = $_SESSION["postgis_mapa"];
+
+//por seguranca
+include_once("funcoes_gerais.php");
+restauraCon($map_fileX,$postgis_mapa);
+
 $cachedir = $_SESSION["cachedir"];
 if(isset($_GET["BBOX"])){
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);

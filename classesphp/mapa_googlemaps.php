@@ -89,7 +89,6 @@ else{
 if(!isset($_SESSION["map_file"])){
 	exit;
 }
-
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 $cachedir = $_SESSION["cachedir"];
@@ -144,6 +143,9 @@ elseif ($_GET["X"] != ""){
 elseif(isset($_GET["BBOX"])){
 	$_GET["mapext"] = str_replace(","," ",$_GET["BBOX"]);
 }
+//por seguranca
+include_once("funcoes_gerais.php");
+restauraCon($map_fileX,$postgis_mapa);
 
 $mapa = ms_newMapObj($map_fileX);
 $ret = $mapa->extent;
@@ -196,9 +198,6 @@ if(!isset($_GET["telaR"])){
 			$l->set("minscaledenom",$l->minscaledenom * 100000);
 			$l->set("symbolscaledenom",$l->symbolscaledenom * 100000);
 			if ($l->getmetadata("classesnome") != ""){
-				if(!function_exists("autoClasses")){
-					include_once("funcoes_gerais.php");
-				}
 				autoClasses($l,$mapa);
 			}
 			if(!empty($postgis_mapa)){
