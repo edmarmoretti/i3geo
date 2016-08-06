@@ -371,7 +371,9 @@ $cortePixels = 0;
 $ogcwsmap = $_GET["ogcwsmap"];
 
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
+	substituiCon($nomeMapfileTmp,$postgis_mapa);
 	$oMap = ms_newMapobj($nomeMapfileTmp);
+	restauraCon($nomeMapfileTmp,$postgis_mapa);
 }
 else{
 	if(empty($ogcwsmap)){
@@ -527,7 +529,9 @@ else{
 								}
 							}
 						}
+
 						autoClasses($l,$oMap);
+
 						if($versao > 5){
 							$pr = $l->getProcessing();
 							if(!in_array("LABEL_NO_CLIP=True",$pr)){
@@ -681,6 +685,7 @@ else{
 			}
 		}
 		//echo "<pre>".var_dump($codigosTema);exit;
+
 		foreach($codigosTema as $c){
 			$codigoTema = $c["tema"];
 			if(file_exists($locaplic."/temas/".$codigoTema.".map")){
@@ -737,6 +742,7 @@ else{
 			}
 		}
 	}
+
 	//
 	//a imagem do mapa recebera a legenda
 	//
@@ -756,10 +762,12 @@ else{
 	processaOutputformatMapfile();
 	$nomeMapfileTmp = str_replace(".map","",$nomeMapfileTmp).".map";
 	$oMap->save($nomeMapfileTmp);
-
 	validaAcessoTemas($nomeMapfileTmp,true);
 
+
+	substituiCon($nomeMapfileTmp,$postgis_mapa);
 	$oMap = ms_newMapobj($nomeMapfileTmp);
+	restauraCon($nomeMapfileTmp,$postgis_mapa);
 }
 
 if(ob_get_contents ()){
