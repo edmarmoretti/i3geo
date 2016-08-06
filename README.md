@@ -2,6 +2,8 @@
 
 Para versões do Mapserver 6.x ou posteriores e Openlayers 3
 
+Utilize esse repositório para manter seu código sempre atualizado diariamente. Isso garante o recebimento de correções de bugs.
+
 Arquivos antigos e outras informações, veja em: https://softwarepublico.gov.br/social/i3geo/
 
 Guia completo sobre instalação e administração do software, veja em: http://moodle.gvsig-training.com/mod/book/view.php?id=5025
