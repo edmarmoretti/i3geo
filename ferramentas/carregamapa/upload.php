@@ -4,8 +4,9 @@ require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
+if (isset($g_sid)){
+	session_id($g_sid);
+}
 session_start();
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
@@ -74,6 +75,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 			$layertemp->setmetadata("editorsql","nao");
 			$layertemp->setmetadata("EDITAVEL","nao");
 			$layertemp->setmetadata("PLUGINI3GEO","");
+			$layertemp->setmetadata("arquivodownload","");
 			if ($testa == 1)
 			{
 				echo "<p class='paragrafo' >Problemas em ".($layer->name).". Removido.</p><br>";

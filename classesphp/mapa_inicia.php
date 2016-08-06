@@ -102,7 +102,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $postgis_mapa,$statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	//
 	//verifica se algum tema e restrito a determinado usuario
 	//as funcoes de validacao encontram-se em funcoes_gerais.php
@@ -379,6 +379,7 @@ function iniciaMapa()
 	$res["editavel"] = $m->mapa->getmetadata("EDITAVEL");
 	$m->mapa->setmetadata("CUSTOMIZACOESINIT","");
 	$m->salva();
+	restauraCon($map_file,$postgis_mapa);
 	copy($map_file,(str_replace(".map","reinc.map",$map_file)));
 	copy($map_file,(str_replace(".map","seguranca.map",$map_file)));
 	ob_clean();

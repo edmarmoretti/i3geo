@@ -1668,7 +1668,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			}
 		}
 		$map_tmp = ms_newMapObj($base);
-		$map_file = $dir_tmp."/".nomerandomico(20).".map";
+		$map_file = $dir_tmp."/downloadTema2".nomerandomico(20).".map";
 		$map_tmp->setProjection($projecao["proj4"]);
 		$map_tmp->save($map_file);
 		$nomeRand = false;
@@ -1811,6 +1811,8 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			//se o arquivo n&atilde;o tiver sido copiado
 			//
 			$nomecopia = $dir_tmp."/".basename($meta);
+			//para evitar que tente copiar um arquivo mapfile
+			$nomecopia = str_replace(".map","",$nomecopia);
 			if(file_exists($meta)){
 				if(!file_exists($nomecopia)){
 					copy($meta,$nomecopia);

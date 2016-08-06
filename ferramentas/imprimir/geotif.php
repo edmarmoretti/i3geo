@@ -60,7 +60,7 @@ require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
-$temp = str_replace(".map","xxx.map",$map_file);
+$temp = str_replace(".map","",$map_file)."xxx.map";
 $map->save($temp);
 substituiCon($temp,$postgis_mapa);
 $of = $map->outputformat;

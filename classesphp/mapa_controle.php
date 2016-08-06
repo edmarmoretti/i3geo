@@ -2554,15 +2554,9 @@ switch (strtoupper($funcao))
 		break;
 
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
-		restauraCon($map_file,$postgis_mapa);
-	//$cp->return_data();
-	cpjson($retorno);
-}
-else{
-	exit();
-}
+if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+	restauraCon($map_file,$postgis_mapa);
+cpjson($retorno);
 /*
  Function: projetaExt
 
