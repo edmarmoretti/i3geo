@@ -126,7 +126,7 @@ autoClasses($l,$oMap);
 ms_newLayerObj($oMap, $l);
 
 $oMap->save($nomeMapfileTmp);
-
+restauraCon($nomeMapfileTmp,$postgis_mapa);
 validaAcessoTemas($nomeMapfileTmp,true);
 
 $oMap = ms_newMapobj($nomeMapfileTmp);
@@ -312,10 +312,10 @@ function storymap($par){
 	);
 
 	$contents = json_encode($j);
-	
+
 	$contents = json_decode($contents);
 	$contents = json_encode($contents);
-	
+
 
 	file_put_contents($nomeArq.".json",$contents);
 	//envia

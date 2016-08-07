@@ -387,6 +387,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 		if(isset($tabela)){
 			include("classesphp/classe_atributos.php");
 			$t = new Atributos($destino,$map);
+			restauraCon($destino,$postgis_mapa);
 			$r = $t->itensTexto();
 			$colunas = explode(";",$r["itens"]);
 			$ncolunas = count($colunas);
@@ -428,6 +429,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 		}
 		else{
 			$mapa = ms_newMapObj($destino);
+			restauraCon($destino,$postgis_mapa);
 			$objImagem = @$mapa->draw();
 			//corrige o titulo da legenda
 			$numlayers = $mapa->numlayers;

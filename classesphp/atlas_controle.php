@@ -221,5 +221,7 @@ function gravaid()
 	}
 	$tmpfname = str_replace(".map","",$tmpfname).".map";
 	$m->save($tmpfname);
+	include(dirname(__FILE__)."/../ms_configura.php");
+	restauraCon($tmpfname,$postgis_mapa);
 }
 ?>

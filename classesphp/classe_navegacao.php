@@ -78,8 +78,9 @@ Salva o mapfile atual
 */
  	function salva()
  	{
-	  	if (connection_aborted()){exit();}
 	  	$this->mapa->save($this->arquivo);
+		include(dirname(__FILE__)."/../ms_configura.php");
+		restauraCon($this->arquivo,$postgis_mapa);
 	}
 /*
 function: gravaImagemCorpo (depreciado)

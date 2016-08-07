@@ -121,10 +121,9 @@ class Mapa
 	*/
 	function salva()
 	{
-		if(connection_aborted()){
-			exit();
-		}
 		$this->mapa->save($this->arquivo);
+		include(dirname(__FILE__)."/../ms_configura.php");
+		restauraCon($this->arquivo,$postgis_mapa);
 	}
 	/*
 	 Method: listaTemasBuscaRapida
@@ -1728,38 +1727,7 @@ class Mapa
 	*/
 	function converteWS($locaplic,$h)
 	{
-		//$nomews = str_replace(".map","ws.map",$this->arquivo);
 		$nomeurl = "/ogc.php?tema=".$this->arquivo;
-		/*
-		 $w = $this->mapa->web;
-		$w->set("template","");
-		//adiciona os parametros no nivel do mapa
-		$this->mapa->setmetadata("wms_title","I3Geo");
-		$this->mapa->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
-		$this->mapa->setmetadata("wms_srs","EPSG:4291");
-		$this->mapa->setmetadata("ows_enable_request","*");
-		//$this->mapa->setmetadata("wms_getcontext_enabled","1");
-		foreach ($this->layers as $layer)
-		{
-		$n = pegaNome($layer);
-		$layer->setmetadata("wms_title",$n);
-		$layer->setmetadata("wms_name",$n);
-		$layer->setmetadata("wms_srs","EPSG:4291 EPSG:4326");
-		//$layer->setmetadata("wms_getcontext_enabled","1");
-		$layer->setmetadata("WMS_INCLUDE_ITEMS","all");
-		//$layer->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
-		$layer->set("status","ON");
-		$layer->set("template","none.htm");
-		$layer->setmetadata("gml_include_items","all");
-		$layer->set("dump",MS_TRUE);
-		$c = $layer->getclass(0);
-		if ($c->name == "")
-		{$c->name = " ";}
-		}
-		$eb = $this->mapa->scalebar;
-		$eb->set("status",MS_OFF);
-		$this->mapa->save($nomews);
-		*/
 		return($nomeurl);
 	}
 	/*

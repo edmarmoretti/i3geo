@@ -272,15 +272,6 @@ function retornaWms($map_fileX,$postgis_mapa){
 		echo header("Content-type: image/png \n\n");
 		imagepng($img);
 	}
-	 /*
-	$n = " ";
-    foreach(array_keys($_GET) as $s){
-		$n .= " key  ".$s." and value  ".$_GET[$s];
-    }
-	$l = $mapa->getlayerbyname("zee");
-	$l->setmetadata("str",$n);
-	$mapa->save($_GET["map"]);
-	*/
 }
 
 function nomeRandomico($n=10)

@@ -136,10 +136,11 @@ Salva o mapfile atual
 */
  	function salva()
  	{
-	  	if (connection_aborted()){exit();}
 	  	if($this->mapa->getmetadata("interface") == "googlemaps")
 		{$this->mapa->setProjection($this->projO);}
 	  	$this->mapa->save($this->arquivo);
+		include(dirname(__FILE__)."/../ms_configura.php");
+		restauraCon($this->arquivo,$postgis_mapa);
 	}
 /*
 function: nSel

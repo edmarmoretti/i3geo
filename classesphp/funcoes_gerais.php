@@ -310,6 +310,8 @@ $map_file {string} - Arquivo map file.
 */
 function copiaSeguranca($map_file)
 {
+	include(dirname(__FILE__)."/../ms_configura.php");
+	restauraCon($map_file,$postgis_mapa);
 	if (file_exists($map_file))
 	{
 		if ($objMapa = @ms_newMapObj($map_file))
