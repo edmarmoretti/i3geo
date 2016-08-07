@@ -257,6 +257,7 @@ if($transparente == "sim"){
 
 $mapa->save($arqtemp.".map");
 $mapa = ms_newMapObj($arqtemp.".map");
+restauraCon($arqtemp,$postgis_mapa);
 
 /*
 if(validaAcessoTemas($arqtemp.".map",false) == true){

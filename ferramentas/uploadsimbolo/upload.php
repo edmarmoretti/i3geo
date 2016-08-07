@@ -3,7 +3,6 @@
 //caso o usu&aacute;rio seja um administrador, ele pode enviar um nome de diret&oacute;rio onde os arquivos ser&atilde;o armazenados
 //na vari&aacute;vel $dirDestino
 //
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);

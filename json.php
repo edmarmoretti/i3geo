@@ -37,9 +37,9 @@ format -  storymap|gdocs
 No caso de storymap, o fornecimento dos dados depende dos parametros definidos no METADATA storymap existente no tema
 
 */
+include_once (dirname(__FILE__)."/classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 include(dirname(__FILE__)."/ms_configura.php");
-include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 //
 //pega os enderecos para compor a url de chamada do gerador de web services
@@ -50,7 +50,7 @@ $protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
 $protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 
-$nomeArq = $dir_tmp."/ogc_".md5(implode("",$_GET))."_json_".$output;
+$nomeArq = $dir_tmp."/ogc_".md5(implode("",$_GET))."_json_".$_GET["output"];
 $nomeMapfileTmp = $nomeArq.".map";
 
 $cache = carregaCacheArquivo();
@@ -95,7 +95,7 @@ if(!$testemap){
 }
 
 copy($base,$nomeMapfileTmp);
-
+$tema = $_GET["tema"];
 $oMap = ms_newMapobj($nomeMapfileTmp);
 $nmap = ms_newMapobj($locaplic."/temas/".$tema.".map");
 $l = $nmap->getlayerbyname($tema);
@@ -121,7 +121,6 @@ if (!empty($postgis_mapa)){
 		}
 	}
 }
-
 autoClasses($l,$oMap);
 ms_newLayerObj($oMap, $l);
 
@@ -136,6 +135,8 @@ if($layer == ""){
 	exit;
 }
 $data = pegaDadosJ();
+$format = $_GET["format"];
+$jsonp = $_GET["jsonp"];
 if($format == "storymap"){
 	//parametros via URL
 	$storymap = $layer->getmetadata("storymap");

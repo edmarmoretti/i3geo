@@ -83,6 +83,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 			}
 		}
 		$map->save($map_file);
+		restauraCon($map_file,$postgis_mapa);
 		$e = $mapt->extent;
 		$extatual = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
 		echo "<p class='paragrafo' >Ok. redesenhando.";

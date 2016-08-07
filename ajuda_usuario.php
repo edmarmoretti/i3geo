@@ -42,7 +42,7 @@ idcategoria - id da categoria. Lista apenas uma categoria
 
 idajuda - id da funcionalidade. Lista apenas uma funcionalidade
 */
-include("classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/classesphp/sani_request.php");
 include("ms_configura.php");
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
@@ -153,9 +153,8 @@ A:hover {
 <div class="mascaraPrincipal" id="divGeral">
 	<img src="imagens/i3geo1.jpg" />
 	<p style='font-size:16px'>Documenta&ccedil;&atilde;o do usu&aacute;rio.</p>
-	<p><?php echo $mensagemInicia;?></p>
 	<?php
-	if (isset($idcategoria))
+	if (isset($_GET["idcategoria"]))
 	{
 		echo "<p>Para ver toda a documenta&ccedil;&atilde;o, ";
 		echo "clique <a href='ajuda_usuario.php' >aqui</a></p>";
@@ -175,8 +174,8 @@ i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://"
 + window.location.host + "/i3geo";
 i3GEO.idioma.IDSELETOR = "bandeiras";
 i3GEO.idioma.mostraSeletor();
-var idcategoria = "<?php echo $idcategoria;?>";
-var idajuda = "<?php echo $idajuda;?>";
+var idcategoria = "<?php echo $_GET["idcategoria"];?>";
+var idajuda = "<?php echo $_GET["idajuda"];?>";
 if(screen.availWidth > 700){
 	document.getElementById("divGeral").style.width = "700px";
 }

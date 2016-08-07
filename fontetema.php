@@ -39,11 +39,13 @@ fontetema.php?tema=bioma
 
 */
 include(dirname(__FILE__)."/ms_configura.php");
-include(dirname(__FILE__)."/classesphp/pega_variaveis.php");
 include(dirname(__FILE__)."/admin/php/classe_arvore.php");
 
+include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
+
 $m = new Arvore($locaplic);
-$retorno = $m->pegaTemaPorCodigo($tema);
+$retorno = $m->pegaTemaPorCodigo($_GET["tema"]);
 $retorno = $retorno[0]["link_tema"];
 if(!headers_sent())
 {header("Location:".$retorno);}

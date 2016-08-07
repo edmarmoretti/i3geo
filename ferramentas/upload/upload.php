@@ -3,16 +3,18 @@
 //caso o usu&aacute;rio seja um administrador, ele pode enviar um nome de diret&oacute;rio onde os arquivos ser&atilde;o armazenados
 //na vari&aacute;vel $dirDestino
 //
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
+if(isset($_GET["tipo"])){
+	$tipo = $_GET["tipo"];
+}
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 session_name("i3GeoPHP");
-if(isset($g_sid) && $g_sid != ""){
-	session_id($g_sid);
+if(isset($_GET["g_sid"]) && $_GET["g_sid"] != ""){
+	session_id($_GET["g_sid"]);
 	session_start();
-	//foreach(array_keys($_SESSION) as $k)
-	//{eval("\$".$k."='".$_SESSION[$k]."';");}
 	$map_file = $_SESSION["map_file"];
 }
 if (ob_get_level() == 0) ob_start();
@@ -134,8 +136,8 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 			$novolayer->setmetadata("ITENSDESC",$its);
 			$novolayer->set("template","none.htm");
 		}
-		if(isset($uploadEPSG) && $uploadEPSG != ""){
-			$novolayer->setProjection("init=epsg:".$uploadEPSG);
+		if(isset($_GET["uploadEPSG"]) && $_GET["uploadEPSG"] != ""){
+			$novolayer->setProjection("init=epsg:".$_GET["uploadEPSG"]);
 		}
 		if(file_exists($dirmap."/".$nomePrefixo.".prj")){
 			$novolayer->setProjection("AUTO");

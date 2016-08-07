@@ -82,13 +82,7 @@ if (!function_exists('ms_GetVersion'))
 	else
 	{dl('php_mapscript.so');}
 }
-/*
-include($locaplic."/ms_configura.php");
-if(!function_exists("versao"))
-{include($locaplic."/classesphp/funcoes_gerais.php");}
-require_once($locaplic."/classesphp/pega_variaveis.php");
-include_once ($locaplic."/classesphp/carrega_ext.php");
-*/
+
 include_once (dirname(__FILE__)."/admin/php/admin.php");
 $versao = versao();
 $versao = $versao["principal"];
@@ -134,7 +128,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 	{
 		$arq = str_replace(" ","xxxx",$arq);
 		$temp = explode(".",$arq);
-		
+
 		if(file_exists($locaplic.'/temas/'.$arq) && $temp[(count($temp) - 1)] == "map" && !(strpos($temp[0],"_") === 0) )
 		{
 			echo "<b>$arq</b><br>";
@@ -253,7 +247,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 					}
 				}
 			}
-			
+
 			zoomTemaMiniatura($pegarext,$mapa);
 		}
 		if($extensao == ".gvp"){

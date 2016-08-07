@@ -1,6 +1,3 @@
-<?php
-include_once(dirname(__FILE__)."/../classesphp/pega_variaveis.php");
-?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -70,7 +67,7 @@ include_once(dirname(__FILE__)."/../classesphp/pega_variaveis.php");
 	<script type="text/javascript">
 i3GEO.configura.locaplic = i3GEO.util.protocolo()+"://"+window.location.host+"/i3geo";
 
-i3GEO.configura.mashuppar = "&mapext=<?php echo $mapext;?>&temasa=<?php echo $temasa;?>&layers=<?php echo $layers;?>";
+i3GEO.configura.mashuppar = "";
 
 i3GEO.Interface.ATUAL = "googlemaps";
 i3GEO.Interface.IDCORPO = "contemImg";

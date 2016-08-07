@@ -51,25 +51,34 @@ Exemplo:
 http://localhost/i3geo/classesphp/parse_cgi.php?g_sid=dgge4877dhhhgrjjey&map_size=500 500
 */
 error_reporting(0);
-include_once("pega_variaveis.php");
+include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 include_once ("carrega_ext.php");
 include_once("funcoes_gerais.php");
-$temp = $mapext;
+$temp = $_GET["mapext"];
 session_name("i3GeoPHP");
-session_id($g_sid);
+session_id($_GET["g_sid"]);
 session_start();
 $mapext = $temp;
 $map_file = $_SESSION["map_file"];
-
+$fingerprint = $_SESSION["fingerprint"];
 include(dirname(__FILE__)."/../ms_configura.php");
 if(isset($fingerprint))
 {
 	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $fingerprint)
 	{exit;}
 }
-if (!isset($map_imagecolor)) $map_imagecolor = "-1 -1 -1";
+if (!isset($_GET["map_imagecolor"])){
+	$map_imagecolor = "-1 -1 -1";
+} else {
+	$map_imagecolor = $_GET["map_imagecolor"];
+}
 
-if (!isset($map_transparent)) $map_transparent = "ON";
+if (!isset($map_transparent)){
+	$map_transparent = "ON";
+} else {
+	$map_transparent = $_GET["map_transparent"];
+}
 //
 //faz uma c�pia do mapfile para poder manipular sem afetar omapfile atual usado pelo i3geo
 //
@@ -80,6 +89,7 @@ $map_filen = str_replace(".map","",$map_filen).".map";
 copy($map_file,$map_filen);
 substituiCon($map_filen,$postgis_mapa);
 $map = ms_newMapObj($map_filen);
+restauraCon($map_filen,$postgis_mapa);
 $layersNames = $map->getalllayernames();
 foreach ($layersNames as $layerName)
 {
@@ -99,14 +109,14 @@ foreach ($layersNames as $layerName)
 		}
 	}
 }
-if(isset($map_size))
+if(isset($_GET["map_size"]))
 {
-	$map_size = explode(",",$map_size);
+	$map_size = explode(",",$_GET["map_size"]);
 	$map->setsize($map_size[0],$map_size[1]);
 }
-if(isset($mapext))
+if(isset($_GET["mapext"]))
 {
-	$mapext = explode(" ",$mapext);
+	$mapext = explode(" ",$_GET["mapext"]);
 	$map->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 }
 //$map->save($map_file);

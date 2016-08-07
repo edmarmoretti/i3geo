@@ -46,15 +46,24 @@ Exemplo:
 
 http://localhost/i3geo/classesphp/wscliente.php?funcao=listaRSSws&rss=http://localhost/i3geo/admin/xmlservicosws.php&g_sid=&cpaint_function=listaRSSws&cpaint_response_type=JSON
 */
-include_once("pega_variaveis.php");
+include_once (dirname(__FILE__)."/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 include_once("lews/wms_functions.php");
 include_once(dirname(__FILE__)."/../pacotes/cpaint/cpaint2.inc.php");
 include_once("carrega_ext.php");
 include(dirname(__FILE__)."/../ms_configura.php");
 $cp = new cpaint();
+
+$onlineresource = $_GET["onlineresource"];
+$tipo = $_GET["tipo"];
+$servico = $_GET["servico"];
+$param = $_GET["param"];
+$funcaows = $_GET["funcaows"];
+$rss = $_GET["rss"];
 //
 //busca o getcapabilities de um wms
 //
+$funcao = $_GET["funcao"];
 if ($funcao == "getcapabilities")
 {
 	$cp->register('getcapabilities');

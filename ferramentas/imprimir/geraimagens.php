@@ -34,7 +34,7 @@ $map = ms_newMapObj($map_file);
 $map->save($temp);
 substituiCon($temp,$postgis_mapa);
 $map = ms_newMapObj($temp);
-
+substituiCon($temp,$postgis_mapa);
 $w = $map->width;
 $h = $map->height;
 $legenda =$map->legend;

@@ -107,6 +107,7 @@ foreach ($temas as $tema)
 $map->save($temp);
 removeLinha("classeNula",$temp);
 $map = ms_newMapObj($temp);
+substituiCon($temp,$postgis_mapa);
 $o = $map->outputformat;
 if($mapexten != ""){
 	$ext = explode(" ",$mapexten);

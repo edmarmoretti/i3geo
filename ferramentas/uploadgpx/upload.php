@@ -1,14 +1,13 @@
 <?php
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
+if (isset($_GET["g_sid"]))
+{session_id($_GET["g_sid"]);}
 session_start();
-//foreach(array_keys($_SESSION) as $k)
-//{eval("\$".$k."='".$_SESSION[$k]."';");}
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 if (ob_get_level() == 0) ob_start();
@@ -83,8 +82,8 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 			// le os itens
 			$novolayer->set("status",MS_DEFAULT);
 			$novolayer->set("template","none.htm");
-			if(isset($uploadgpxEPSG) && $uploadgpxEPSG != "")
-			{$novolayer->setProjection("init=epsg:".$uploadgpxEPSG);}
+			if(isset($_GET["uploadkmlEPSG"]) && $_GET["uploadkmlEPSG"] != "")
+			{$novolayer->setProjection("init=epsg:".$_GET["uploadkmlEPSG"]);}
 			//$adiciona = ms_newLayerObj($mapa, $novolayer);
 		}
 		$salvo = $mapa->save($map_file);

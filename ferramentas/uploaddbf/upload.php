@@ -1,13 +1,12 @@
 <?php
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
+if (isset($_GET["g_sid"]))
+{session_id($_GET["g_sid"]);}
 session_start();
-//foreach(array_keys($_SESSION) as $k)
-//{eval("\$".$k."='".$_SESSION[$k]."';");}
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 if (ob_get_level() == 0) ob_start();
@@ -40,9 +39,6 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 		$ArquivoDest = str_replace(".dbf","",$ArquivoDest).".dbf";
 	}
 	verificaNome($ArquivoDest);
-
-
-
 	verificaNome($_FILES['i3GEOuploaddbffile']['name']);
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploaddbffile']['tmp_name'];
@@ -116,6 +112,9 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 				paraAguarde();
 			}
 			$shapefileObj = ms_newShapefileObj($nomeshp,-2);
+			$i3GEOuploaddbftipoarquivo = $_GET["i3GEOuploaddbftipoarquivo"];
+			$i3GEOuploaddbfnomex = $_GET["i3GEOuploaddbfnomex"];
+			$i3GEOuploaddbfnomey = $_GET["i3GEOuploaddbfnomey"];
 
 			if($i3GEOuploaddbftipoarquivo != "dbf"){
 				foreach($csv->data as $d){

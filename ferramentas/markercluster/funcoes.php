@@ -63,7 +63,7 @@ function markerclusterMapfile(){
 		ms_newLayerObj($mapa, $layern);
 		$mapa->save($map_file);
 		if(!empty($postgis_mapa)){
-			substituiCon($map_file,$postgis_mapa);
+			//substituiCon($map_file,$postgis_mapa);
 		}
 	}
 	return $map_file;

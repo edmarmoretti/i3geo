@@ -730,10 +730,10 @@ $shp_atual - Indices dos elementos j&aacute; selecionados.
 		$indxlayer = $this->layer->index;
 		$shp = array_merge($shpi,$shp_atual);
 		$shp = array_unique($shp);
+
 		$this->mapa->freequery($indxlayer);
 		foreach ($shp as $indx)
 		{@$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-		//echo $this->layer->getNumresults();
 		$this->mapa->savequery($this->qyfile);
 		$this->serializeQ($this->qyfileTema,$shp);
 		return("ok");

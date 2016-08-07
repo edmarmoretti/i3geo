@@ -62,6 +62,7 @@ foreach($temp as $t)
 if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
 {$itensrel[] = $itemagruparel;}
 $mapa = ms_newMapObj($map_file);
+substituiCon($temp,$postgis_mapa);
 if($ext && $ext != ""){
 	$e = explode(" ",$ext);
 	$extatual = $mapa->extent;
