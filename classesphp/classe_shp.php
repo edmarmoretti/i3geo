@@ -94,6 +94,9 @@ $ext - extensao geogr&aacute;fica que ser&aacute; aplicada ao mapa
 		if(!function_exists("corRGB")){
 			include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		}
+		include(dirname(__FILE__)."/../ms_configura.php");
+  		$this->postgis_mapa = $postgis_mapa;
+
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->dbaseExiste = false;
@@ -103,6 +106,8 @@ $ext - extensao geogr&aacute;fica que ser&aacute; aplicada ao mapa
 
 		if($map_file != ""){
 			$this->mapa = ms_newMapObj($map_file);
+			substituiConObj($this->mapa,$postgis_mapa);
+
 			$this->arquivo = str_replace(".map","",$map_file).".map";
 			$this->tema = $tema;
 			if($tema != "" && @$this->mapa->getlayerbyname($tema)){
@@ -127,9 +132,8 @@ Salva o mapfile atual
 */
 	function salva()
 	{
+		restauraConObj($this->mapa,$this->postgis_mapa);
 		$this->mapa->save($this->arquivo);
-		include(dirname(__FILE__)."/../ms_configura.php");
-		restauraCon($this->arquivo,$postgis_mapa);
 	}
 /*
 function: criaSHPvazio

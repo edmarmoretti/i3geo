@@ -755,11 +755,12 @@ String contendo vari&aacute;veis no formato javascript
 */
 function retornaReferenciaDinamica($ext="",$w="",$h="")
 {
-	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo,$interface;
+	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo,$interface,$postgis_mapa;
 	//
 	//adiciona o tema com o web service com o mapa mundi
 	//
 	$objMapa = ms_newMapObj($map_file);
+	substituiConObj($objMapa,$postgis_mapa);
 	$i = $objMapa->getmetadata("interface");
 	if($i == ""){
 		$i = $interface;
@@ -862,6 +863,7 @@ function testaMapa($map_file,$postgis_mapa)
 {
 	substituiCon($map_file,$postgis_mapa);
 	$objMapa = ms_newMapObj($map_file);
+	substituiConObj($objMapa,$postgis_mapa);
 	ms_ResetErrorList();
 	$img = $objMapa->draw();
 	$erros = "";
@@ -975,6 +977,10 @@ function gravaImagemMapa($mapa)
 {
 	if(is_string($mapa))
 	{$mapa = ms_newMapObj($mapa);}
+
+	include(dirname(__FILE__)."/../ms_configura.php");
+	substituiConObj($mapa,$postgis_mapa);
+
 	$imgo = @$mapa->draw();
 	if(!$imgo)
 	{
@@ -1149,8 +1155,10 @@ function xy2imagem($map_file,$xy,$map="")
 	if (!is_array($xy))
 	{$xy = explode(" ",$xy);}
 	$pt = ms_newPointObj();
+	include(dirname(__FILE__)."/../ms_configura.php");
 	if($map == ""){
 		$map = ms_newMapObj($map_file);
+		substituiConObj($map,$postgis_mapa);
 		$map = desligatemas($map);
 		$map = desligamargem($map);
 		$imgo = $map->draw();
@@ -1181,9 +1189,11 @@ Retorno:
 */
 function imagem2xy($map_file,$xy)
 {
+	include(dirname(__FILE__)."/../ms_configura.php");
 	if (!is_array($xy))
 	{$xy = explode(" ",$xy);}
 	$map = ms_newMapObj($map_file);
+	substituiConObj($map,$postgis_mapa);
 	$map = desligatemas($map);
 	$map = desligamargem($map);
 	$imgo = $map->draw();
@@ -1454,6 +1464,7 @@ Retorno:
 */
 function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$projetaToMap=true)
 {
+	include(dirname(__FILE__)."/../ms_configura.php");
 	$versao = versao();
 	$versao = $versao["principal"];
 	//para manipular dbf
@@ -1464,7 +1475,10 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$proj
 		include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 	}
 	$map = @ms_newMapObj($map_file);
+	substituiConObj($map,$postgis_mapa);
+
 	$layer = $map->getlayerbyname($tema);
+
 	//e necessario abrir ou nao vai projetar
 	$layer->open();
 	$prjMapa = $map->getProjection();
@@ -1802,9 +1816,10 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		copy($qyfile,$nqyfile);
 	}
 	$map->save($map_file);
-	substituiCon($map_file,$postgis_mapa);
+
 	//$map_file agora contem os LAYERS necess&aacute;rios
 	$map = ms_newMapObj($map_file);
+	substituiConObj($map,$postgis_mapa);
 	//
 	//verifica se existe mais de um tema (grupo) montando o array com os temas
 	//os grupos podem ter o nome do layer em GROUP ao inv&eacute;s de NAME
@@ -1863,6 +1878,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			$nomecopia = $dir_tmp."/".basename($meta);
 			//para evitar que tente copiar um arquivo mapfile
 			$nomecopia = str_replace(".map","",$nomecopia);
+			$nomecopia = str_replace(".zip","zip",$nomecopia).".zip";
 			if(file_exists($meta)){
 				if(!file_exists($nomecopia)){
 					copy($meta,$nomecopia);
@@ -1969,6 +1985,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//gera um mapfile para download
 	//
 	$nomemapfileurl = "";
+	/*
 	if(file_exists($temasdir."/".$tema.".map")){
 		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
 		$numlayers = $maptemp->numlayers;
@@ -1984,7 +2001,8 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 		$maptemp->save($nomemapfile);
 		$nomemapfileurl = str_replace($radtmp."/","",$nomemapfile);
 	}
-	return array("tema"=>$tema,"mapfile"=>$nomemapfile,"mapfileurl"=>$nomemapfileurl,"arquivos"=>implode(",",$resultado),"nreg"=>$nreg,"datas"=>$dataArquivos, "shape-zip"=>$nomeshp.".zip");
+	*/
+	return array("tema"=>$tema,"mapfile"=>"","mapfileurl"=>"","arquivos"=>implode(",",$resultado),"nreg"=>$nreg,"datas"=>$dataArquivos, "shape-zip"=>$nomeshp.".zip");
 }
 
 /*

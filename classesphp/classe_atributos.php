@@ -100,7 +100,9 @@ class Atributos
 	*/
 	function __construct($map_file="",$tema="",$locaplic="",$ext="")
 	{
-		error_reporting(0);
+		include(dirname(__FILE__)."/../ms_configura.php");
+  		$this->postgis_mapa = $postgis_mapa;
+
 		if (!function_exists('ms_newMapObj')) {
 			return false;
 		}
@@ -114,6 +116,8 @@ class Atributos
 			$this->qyfile = str_replace(".map",".qy",$map_file);
 			$this->locaplic = $locaplic;
 			$this->mapa = ms_newMapObj($map_file);
+			substituiConObj($this->mapa,$postgis_mapa);
+
 			$this->arquivo = str_replace(".map","",$map_file).".map";
 			if($tema != "" && @$this->mapa->getlayerbyname($tema))
 			{
@@ -139,16 +143,11 @@ class Atributos
 	*/
 	function salva()
 	{
-		if (connection_aborted()){
-			exit();
-		}
-		if($this->mapa->getmetadata("interface") == "googlemaps")
-		{
+		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$this->mapa->setProjection($this->projO);
 		}
+		restauraConObj($this->mapa,$this->postgis_mapa);
 		$this->mapa->save($this->arquivo);
-		include(dirname(__FILE__)."/../ms_configura.php");
-		restauraCon($this->arquivo,$postgis_mapa);
 	}
 
 	/*

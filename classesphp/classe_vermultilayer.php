@@ -24,7 +24,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -47,7 +47,7 @@ class vermultilayer
 	/*
 	Variavel: $temas
 
-	Lista de códigos dos temas
+	Lista de cï¿½digos dos temas
 	*/
 	var $temas; //lista de nomes de temas se for um grupo
 	/*
@@ -71,7 +71,7 @@ class vermultilayer
 	/*
 	Variavel: $temasvisiveis
 
-	Lista com os códigos dos temas vis&iacute;veis
+	Lista com os cï¿½digos dos temas vis&iacute;veis
 	*/
 	var $temasvisiveis; //temas vi'siveis na escala
 	/*
@@ -82,11 +82,16 @@ class vermultilayer
 	parameters:
 	$mapfile - arquivo mapfile
 
-	$tema - código do tema que ser&aacute; verificado
+	$tema - cï¿½digo do tema que ser&aacute; verificado
 	*/
 	function verifica($mapfile,$tema) //$mapfile = arquivo .map, $tema = nome do layer
 	{
+		include(dirname(__FILE__)."/../ms_configura.php");
+		$this->postgis_mapa = $postgis_mapa;
+
 		$map = ms_newMapObj($mapfile);
+		substituiConObj($this->mapa,$postgis_mapa);
+
 		$map->preparequery();
 		$escala = $map->scaledenom ;
 		$multilayer = 0;

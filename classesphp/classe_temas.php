@@ -117,22 +117,27 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 */
 	function __construct($map_file,$tema=null,$locaplic="",$ext="")
 	{
-			//error_reporting(0);
+		//error_reporting(0);
+		include(dirname(__FILE__)."/../ms_configura.php");
+		$this->postgis_mapa = $postgis_mapa;
+
 		$map_file = str_replace(".map","",$map_file).".map";
 		$this->qyfile = str_replace(".map",".qy",$map_file);
 		$this->arquivo = $map_file;
-			if(file_exists($locaplic."/funcoes_gerais.php"))
+		if(file_exists($locaplic."/funcoes_gerais.php"))
 			include_once($locaplic."/funcoes_gerais.php");
-			else
+		else
 			include_once("funcoes_gerais.php");
+
 		$this->v = versao();
 		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
 
-			$this->locaplic = $locaplic;
-			if($map_file != "")
+		$this->locaplic = $locaplic;
+		if($map_file != "")
 		{
 			$this->mapa = ms_newMapObj($map_file);
+			substituiConObj($this->mapa,$postgis_mapa);
 			$this->arquivo = $map_file;
 			if($tema != "")
 			{
@@ -170,9 +175,8 @@ Salva o mapfile atual
 */
 	function salva()
 	{
+		restauraConObj($this->mapa,$this->postgis_mapa);
 		$this->mapa->save($this->arquivo);
-		include(dirname(__FILE__)."/../ms_configura.php");
-		restauraCon($this->arquivo,$postgis_mapa);
 	}
 /*
 function: pegaMetadata

@@ -63,9 +63,9 @@ $idioma - (opcional) pt|en|es|it
 */
 	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt", $filtro="")
 	{
-		if($locaplic == ""){
-			include(dirname(__FILE__)."/../ms_configura.php");
-		}
+		include(dirname(__FILE__)."/../ms_configura.php");
+		$this->postgis_mapa = $postgis_mapa;
+
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->locaplic = $locaplic;
@@ -75,6 +75,8 @@ $idioma - (opcional) pt|en|es|it
 		if (($map_file != "") && (file_exists($map_file)))
 		{
 			$this->mapa = ms_newMapObj($map_file);
+			substituiConObj($this->mapa,$postgis_mapa);
+
 			$this->arquivo = $map_file;
 			if ($this->mapa)
 			{
@@ -681,16 +683,16 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 	//TODO verificar a acentuacao das palavras nessa funcao
 	function removeAcentos($s)
 	{
-		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
-		$s = ereg_replace("[&Aacute;À&Acirc;&Atilde;]","A",$s);
-		$s = ereg_replace("[&eacute;è&ecirc;]","e",$s);
+		$s = ereg_replace("[&aacute;ï¿½&acirc;&atilde;]","a",$s);
+		$s = ereg_replace("[&Aacute;ï¿½&Acirc;&Atilde;]","A",$s);
+		$s = ereg_replace("[&eacute;ï¿½&ecirc;]","e",$s);
 		$s = ereg_replace("[&iacute;]","i",$s);
 		$s = ereg_replace("[&Iacute;]","I",$s);
-		$s = ereg_replace("[&Eacute;È&Ecirc;]","E",$s);
-		$s = ereg_replace("[óò&ocirc;&otilde;]","o",$s);
-		$s = ereg_replace("[ÓÒ&Ocirc;&Otilde;]","O",$s);
-		$s = ereg_replace("[&uacute;ùû]","u",$s);
-		$s = ereg_replace("[&Uacute;ÙÛ]","U",$s);
+		$s = ereg_replace("[&Eacute;ï¿½&Ecirc;]","E",$s);
+		$s = ereg_replace("[ï¿½ï¿½&ocirc;&otilde;]","o",$s);
+		$s = ereg_replace("[ï¿½ï¿½&Ocirc;&Otilde;]","O",$s);
+		$s = ereg_replace("[&uacute;ï¿½ï¿½]","u",$s);
+		$s = ereg_replace("[&Uacute;ï¿½ï¿½]","U",$s);
 		$s = str_replace("&ccedil;","c",$s);
 		$s = str_replace("&Ccedil;","C",$s);
 		//$str = htmlentities($s);

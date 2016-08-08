@@ -75,10 +75,16 @@ class Alteraclasse
 	*/
 	function __construct($map_file,$tema="",$locaplic="",$ext="")
 	{
-		//error_reporting(0);
+		include(dirname(__FILE__)."/../ms_configura.php");
+  		$this->postgis_mapa = $postgis_mapa;
+
 		include_once(dirname(__FILE__)."/funcoes_gerais.php");
+
 		$this->locaplic = $locaplic;
+
 		$this->mapa = ms_newMapObj($map_file);
+		substituiConObj($this->mapa,$postgis_mapa);
+
 		$this->arquivo = str_replace(".map","",$map_file).".map";
 		$this->layer = "";
 		if($tema != "" && @$this->mapa->getlayerbyname($tema)){
@@ -99,12 +105,8 @@ class Alteraclasse
 	*/
 	function salva()
 	{
-		if (connection_aborted()){
-			exit();
-		}
+		restauraConObj($this->mapa,$this->postgis_mapa);
 		$this->mapa->save($this->arquivo);
-		include(dirname(__FILE__)."/../ms_configura.php");
-		restauraCon($this->arquivo,$postgis_mapa);
 	}
 	/*
 	 Function: aplicacoresrgb

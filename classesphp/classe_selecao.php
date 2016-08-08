@@ -143,8 +143,8 @@ Salva o mapfile atual
 	  	if($this->mapa->getmetadata("interface") == "googlemaps"){
 	  		$this->mapa->setProjection($this->projO);
 	  	}
+	  	restauraConObj($this->mapa,$this->postgis_mapa);
 	  	$this->mapa->save($this->arquivo);
-		restauraCon($this->arquivo,$this->postgis_mapa);
 	}
 /*
 function: nSel

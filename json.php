@@ -125,10 +125,10 @@ autoClasses($l,$oMap);
 ms_newLayerObj($oMap, $l);
 
 $oMap->save($nomeMapfileTmp);
-restauraCon($nomeMapfileTmp,$postgis_mapa);
 validaAcessoTemas($nomeMapfileTmp,true);
-
 $oMap = ms_newMapobj($nomeMapfileTmp);
+restauraCon($nomeMapfileTmp,$postgis_mapa);
+
 $layer = $oMap->getlayerbyname($tema);
 if($layer == ""){
 	echo "Layer nao encontrado";

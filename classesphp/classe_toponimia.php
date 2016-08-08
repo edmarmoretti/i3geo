@@ -26,7 +26,7 @@ Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til
 por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
 de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
 Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
+Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
@@ -91,15 +91,21 @@ $tema - nome do tema que ser&aacute; processado
 */
 	function __construct($map_file,$tema="",$locaplic="")
 	{
-		//error_reporting(0);
+		include(dirname(__FILE__)."/../ms_configura.php");
+  		$this->postgis_mapa = $postgis_mapa;
+
 		if(file_exists($locaplic."/funcoes_gerais.php"))
 		include_once($locaplic."/funcoes_gerais.php");
 		else
 		include_once("funcoes_gerais.php");
+
 		$this->v = versao();
 		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
+
 		$this->mapa = ms_newMapObj($map_file);
+		substituiConObj($this->mapa,$postgis_mapa);
+
 		$this->arquivo = str_replace(".map","",$map_file).".map";
 		if($tema != "" && @$this->mapa->getlayerbyname($tema))
 		$this->layer = $this->mapa->getlayerbyname($tema);
@@ -112,9 +118,8 @@ Salva o mapfile atual
 */
 	function salva()
 	{
+		restauraConObj($this->mapa,$this->postgis_mapa);
 		$this->mapa->save($this->arquivo);
-		include(dirname(__FILE__)."/../ms_configura.php");
-		restauraCon($this->arquivo,$postgis_mapa);
 	}
 /*
 function: criaToponimia
@@ -171,7 +176,7 @@ $novotema sim|nao Cria um novo tema ou n&atilde;o, nesse &uacute;ltimo caso, a t
 
 Retorno:
 
-{string} - código do layer criado
+{string} - cï¿½digo do layer criado
 */
 	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema="sim")
 	{

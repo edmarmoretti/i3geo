@@ -117,7 +117,9 @@ class Legenda
 
 	function __construct($map_file="",$locaplic="",$tema="",$template="")
 	{
-		//error_reporting(0);
+		include(dirname(__FILE__)."/../ms_configura.php");
+  		$this->postgis_mapa = $postgis_mapa;
+
 		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
@@ -127,6 +129,8 @@ class Legenda
 			return;
 		}
 		$this->mapa = ms_newMapObj($map_file);
+		substituiConObj($this->mapa,$postgis_mapa);
+
 		$this->arquivo = str_replace(".map","",$map_file).".map";
 		if($tema != "" && @$this->mapa->getlayerbyname($tema))
 		{
@@ -175,9 +179,8 @@ class Legenda
 	function salva()
 	{
 		$this->recalculaSLD();
+		restauraConObj($this->mapa,$this->postgis_mapa);
 		$this->mapa->save($this->arquivo);
-		include(dirname(__FILE__)."/../ms_configura.php");
-		restauraCon($this->arquivo,$postgis_mapa);
 	}
 	/*
 	 function: recalculaSLD

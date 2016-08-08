@@ -84,7 +84,9 @@ class Mapa
 	*/
 	function __construct($map_file,$locaplic="")
 	{
-		error_reporting(0);
+		include(dirname(__FILE__)."/../ms_configura.php");
+  		$this->postgis_mapa = $postgis_mapa;
+
 		if (!function_exists('ms_newMapObj')) {
 			return false;
 		}
@@ -106,6 +108,8 @@ class Mapa
 			return $this->mapa = false;
 		}
 		$this->mapa = @ms_newMapObj($map_file);
+		substituiConObj($this->mapa,$postgis_mapa);
+
 		$this->arquivo = str_replace(".map","",$map_file).".map";
 		$c = $this->mapa->numlayers;
 		for ($i=0;$i < $c;++$i){
@@ -121,9 +125,8 @@ class Mapa
 	*/
 	function salva()
 	{
+		restauraConObj($this->mapa,$this->postgis_mapa);
 		$this->mapa->save($this->arquivo);
-		include(dirname(__FILE__)."/../ms_configura.php");
-		restauraCon($this->arquivo,$postgis_mapa);
 	}
 	/*
 	 Method: listaTemasBuscaRapida
