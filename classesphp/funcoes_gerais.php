@@ -570,6 +570,36 @@ function substituiCon($map_file,$postgis_mapa)
 	}
 	return true;
 }
+function substituiConObj($objMap,$postgis_mapa){
+	error_reporting(0);
+	if (!empty($postgis_mapa)){
+		$numlayers = $objMap->numlayers;
+		for ($i=0;$i < $numlayers;++$i)
+		{
+			$layer = $objMap->getlayer($i);
+			if ($layer->connectiontype == MS_POSTGIS)
+			{
+				$lcon = $layer->connection;
+				if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa))))
+				{
+					//
+					//o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
+					//
+					if(($lcon == " ") || ($lcon == ""))
+					{
+						$layer->set("connection",$postgis_mapa);
+						$layer->setmetadata("CONEXAOORIGINAL",$lcon);
+					}
+					else
+					{
+						$layer->set("connection",$postgis_mapa[$lcon]);
+						$layer->setmetadata("CONEXAOORIGINAL",$lcon);
+					}
+				}
+			}
+		}
+	}
+}
 /*
 Function: restauraCon
 
@@ -600,6 +630,24 @@ function restauraCon($map_file,$postgis_mapa)
 			}
 		}
 		$objMap->save($map_file);
+	}
+}
+function restauraConObj($objMap,$postgis_mapa)
+{
+	if (!empty($postgis_mapa))
+	{
+		$numlayers = $objMap->numlayers;
+		for ($i=0;$i < $numlayers;++$i)
+		{
+			$layer = $objMap->getlayer($i);
+			if ($layer->connectiontype == MS_POSTGIS)
+			{
+				if (!is_array($postgis_mapa) && $layer->connection == $postgis_mapa)
+				{$layer->set("connection"," ");}
+				if($layer->getmetadata("conexaooriginal") != "")
+				{$layer->set("connection",$layer->getmetadata("conexaooriginal"));}
+			}
+		}
 	}
 }
 /*

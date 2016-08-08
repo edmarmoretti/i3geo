@@ -371,9 +371,11 @@ $cortePixels = 0;
 $ogcwsmap = $_GET["ogcwsmap"];
 
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
-	substituiCon($nomeMapfileTmp,$postgis_mapa);
+	//substituiCon($nomeMapfileTmp,$postgis_mapa);
+	//$oMap = ms_newMapobj($nomeMapfileTmp);
+	//restauraCon($nomeMapfileTmp,$postgis_mapa);
 	$oMap = ms_newMapobj($nomeMapfileTmp);
-	restauraCon($nomeMapfileTmp,$postgis_mapa);
+	substituiConObj($oMap,$postgis_mapa);
 }
 else{
 	if(empty($ogcwsmap)){
@@ -763,7 +765,6 @@ else{
 	$nomeMapfileTmp = str_replace(".map","",$nomeMapfileTmp).".map";
 	$oMap->save($nomeMapfileTmp);
 	validaAcessoTemas($nomeMapfileTmp,true);
-
 
 	substituiCon($nomeMapfileTmp,$postgis_mapa);
 	$oMap = ms_newMapobj($nomeMapfileTmp);

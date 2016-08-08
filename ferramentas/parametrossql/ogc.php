@@ -82,6 +82,7 @@ $nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
 $cortePixels = 0;
 if(file_exists($nomeMapfileTmp)){
 	$oMap = ms_newMapobj($nomeMapfileTmp);
+	substituiConObj($oMap,$postgis_mapa);
 }
 else{
 	if(empty($ogcwsmap)){

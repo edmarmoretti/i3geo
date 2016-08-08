@@ -99,6 +99,8 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
 	function __construct($map_file,$tema="",$ext="")
 	{
   		include_once(dirname(__FILE__)."/funcoes_gerais.php");
+  		include(dirname(__FILE__)."/../ms_configura.php");
+  		$this->postgis_mapa = $postgis_mapa;
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		$this->qyfile = str_replace(".map",".qy",$map_file);
@@ -108,7 +110,10 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
 		else{
 			$this->qyfileTema = "";
 		}
+
 		$this->mapa = ms_newMapObj($map_file);
+		substituiConObj($this->mapa,$postgis_mapa);
+
   		$this->arquivo = str_replace(".map","",$map_file).".map";
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
@@ -134,13 +139,12 @@ function: salva
 
 Salva o mapfile atual
 */
- 	function salva()
- 	{
-	  	if($this->mapa->getmetadata("interface") == "googlemaps")
-		{$this->mapa->setProjection($this->projO);}
+ 	function salva(){
+	  	if($this->mapa->getmetadata("interface") == "googlemaps"){
+	  		$this->mapa->setProjection($this->projO);
+	  	}
 	  	$this->mapa->save($this->arquivo);
-		include(dirname(__FILE__)."/../ms_configura.php");
-		restauraCon($this->arquivo,$postgis_mapa);
+		restauraCon($this->arquivo,$this->postgis_mapa);
 	}
 /*
 function: nSel
@@ -165,7 +169,7 @@ $ys - lista de coordenadas y separadas por virgula
 
 $wkt - string wkt opcional ao uso de xs e ys
 
-$buffer - buffer que será aplicado
+$buffer - buffer que serï¿½ aplicado
 */
 	function selecaoPorPoligono($tipo,$xs="",$ys="",$wkt="",$buffer=0)
 	{
@@ -891,58 +895,53 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 
 $ext - coordenadas separadas por espa&ccedil;os no estilo xmin ymin xmax ymax
 */
-	function selecaoBOX($tipo,$ext)
-	{
-		if ($tipo == "novo")
-		{
+	function selecaoBOX($tipo,$ext)	{
+		if ($tipo == "novo"){
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
 		}
-		if(!$this->layer){return "erro";}
-		$this->layer->set("tolerance",0);
-		if ($tipo == "limpa")
-		{return ($this->selecaoLimpa());}
-		if ($tipo == "inverte")
-		{return ($this->selecaoInverte());}
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		$indxlayer = $this->layer->index;
-		/*
-		$res_count = $this->layer->getNumresults();
-		$shp_atual = array();
-		for ($i = 0; $i < $res_count;++$i)
-		{
-			$rc = $this->layer->getResult($i);
-			$shp_atual[] = $rc->shapeindex;
+		if(!$this->layer){
+			return "erro";
 		}
-		$this->mapa->freequery($indxlayer);
-		*/
+		$this->layer->set("tolerance",0);
+		if ($tipo == "limpa"){
+			return ($this->selecaoLimpa());
+		}
+		if ($tipo == "inverte") {
+			return ($this->selecaoInverte());
+		}
+		if (file_exists($this->qyfile))	{
+			$this->mapa->loadquery($this->qyfile);
+		}
+		$indxlayer = $this->layer->index;
 		$shp_atual = array();
-		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
-		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema)) {
+			$shp_atual = $this->unserializeQ($this->qyfileTema);
+		}
 
 		$shpi = array();
 		$temp = explode(" ",$ext);
 		$rect = ms_newRectObj();
+
 		$rect->set("minx",(min(array($temp[0],$temp[2]))));
 		$rect->set("miny",(min(array($temp[1],$temp[3]))));
 		$rect->set("maxx",(max(array($temp[0],$temp[2]))));
 		$rect->set("maxy",(max(array($temp[1],$temp[3]))));
 		$ident = $this->layer->queryByRect($rect);
-		if ($ident != 1)
-		{
+		if ($ident != 1){
 			$res_count = $this->layer->getNumresults();
 			$shpi = array();
-			for ($i = 0; $i < $res_count; ++$i)
-			{
+			for ($i = 0; $i < $res_count; ++$i)	{
 				$result = $this->layer->getResult($i);
 				$shpi[]  = $result->shapeindex;
 			}
 		}
-		if ($tipo == "adiciona")
-		{return($this->selecaoAdiciona($shpi,$shp_atual));}
-		if ($tipo == "retira")
-		{return($this->selecaoRetira($shpi,$shp_atual));}
+		if ($tipo == "adiciona"){
+			return($this->selecaoAdiciona($shpi,$shp_atual));
+		}
+		if ($tipo == "retira"){
+			return($this->selecaoRetira($shpi,$shp_atual));
+		}
 	}
 /*
 function unserializeQ
