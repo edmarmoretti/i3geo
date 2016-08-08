@@ -221,8 +221,8 @@ g_traducao_init =
 		"17a" : [
 			{
 				pt : "Ao fazer a atualiza&ccedil;&atilde;o entre vers&otilde;es do i3Geo, verifique as mudan&ccedil;as que podem afetar o funcionamento dos mapas antigos.",
-				en : "",
-				es : ""
+				en : "When updating i3Geo version, verify those changes that can afffect old map performance.",
+				es : "Al hacer actualizaciones entre versiones de i3Geo, verifique los cambios que puedan afectar el funcionamiento de los mapas antiguos."
 			}
 		],
 		18 : [
@@ -235,8 +235,8 @@ g_traducao_init =
 		"18a" : [
 			{
 				pt : "Crie mapas interativos com fun&ccedil;&otilde;es b&aacute;sicas, defina os bot&otilde;es e outras caracter&iacute;sticas com uma URL parametrizada.",
-				en : "",
-				es : ""
+				en : "Build interactive maps with basic functions, define buttons and other features with a parameterized URL.",
+				es : "Construya mapas interactivos con funciones b&aacute;sicas, defina los botones y otras caracter&iacute;sticas con una URL parametrizada."
 			}
 		],
 		19 : [
@@ -263,8 +263,8 @@ g_traducao_init =
 		23 : [
 			{
 				pt : "i3Geo + <a tabindex='-1' href='http://wiki.openstreetmap.org' >OSM </a>",
-				en : "",
-				es : ""
+				en : "i3Geo + <a href='http://wiki.openstreetmap.org' >OSM <i class='fa fa-external-link' aria-hidden='true'></i></a>",
+				es : "i3Geo + <a href='http://wiki.openstreetmap.org' >OSM <i class='fa fa-external-link' aria-hidden='true'></i></a>"
 			}
 		],
 		"23a" : [
