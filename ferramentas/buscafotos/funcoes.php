@@ -1,10 +1,21 @@
 <?php
 error_reporting(0);
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
 require_once(dirname(__FILE__)."/../../ms_configura.php");
 require_once(dirname(__FILE__)."/../../pacotes/phpflickr/phpFlickr.php");
 error_reporting(0);
+
+
+$funcao = $_GET["funcao"];
+$key = $_GET["key"];
+$texto = $_GET["texto"];
+$page = $_GET["page"];
+$ret = $_GET["ret"];
+$ai = $_GET["ai"];
+$af = $_GET["af"];
+
 $cp = new cpaint();
 if($funcao == "listafotosflickr")
 {$cp->register('listafotosflickr');}

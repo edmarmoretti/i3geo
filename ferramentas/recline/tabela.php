@@ -5,8 +5,9 @@
 //
 
 //pega a extensao geografica da camada
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 include("../../ms_configura.php");
-include("../../classesphp/pega_variaveis.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">

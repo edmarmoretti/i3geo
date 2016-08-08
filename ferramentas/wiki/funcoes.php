@@ -2,7 +2,9 @@
 $usuarioGeonames = "i3geo";
 //set_time_limit(600);
 require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
+$ret = $_GET["ret"];
 require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
 $cp = new cpaint();

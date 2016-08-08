@@ -1,6 +1,10 @@
 <?php
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 include(dirname(__FILE__)."/../../ms_configura.php");
-include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+$_GET = array_merge($_GET,$_POST);
+$x = $_GET["x"];
+$y = $_GET["y"];
+
 ?>
 <html>
 <head>

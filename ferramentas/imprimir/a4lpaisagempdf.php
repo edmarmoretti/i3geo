@@ -2,11 +2,13 @@
 //
 //escrito por Luis Henrique Weirich de Matos
 //
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
+$mapexten = $_GET["mapexten"];
 error_reporting(0);
 session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
+if (isset($_GET["g_sid"]))
+{session_id($_GET["g_sid"]);}
 session_start();
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
@@ -125,7 +127,9 @@ $nomer = ($imgo->imagepath)."leg".$nomeImagem.".PNG";
 $imgo->saveImage($nomer);
 $pathlegenda = $dir_tmp."/".basename($imgo->imageurl)."/".basename($nomer);
 $titulo = $_GET['titulo'];
+
 substituiCon($map_file,$postgis_mapa);
+
 require(dirname(__FILE__).'/../../pacotes/fpdf/fpdf.php');
 $pdf = new FPDF("L","mm","A4");
 $pdf->SetAutoPageBreak(false);

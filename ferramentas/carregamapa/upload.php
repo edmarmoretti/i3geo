@@ -72,6 +72,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 			$layertemp->setmetadata("download","nao");
 			$layertemp->setmetadata("permitekml","nao");
 			$layertemp->setmetadata("permiteogc","nao");
+			$layertemp->setmetadata("animagif","");
 			$layertemp->setmetadata("editorsql","nao");
 			$layertemp->setmetadata("EDITAVEL","nao");
 			$layertemp->setmetadata("PLUGINI3GEO","");

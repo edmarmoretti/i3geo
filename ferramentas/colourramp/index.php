@@ -1,11 +1,12 @@
 <?php
-	include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+	include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+	$_GET = array_merge($_GET,$_POST);
 	include_once(dirname(__FILE__)."/../../classesphp/class.palette.php");
 	$m = new palette();
 	$lista = implode(",",($m->listaColourRamps(dirname(__FILE__)."/../..")));
 	if(!isset($ncores))
 	{$ncores = 10;}
-	if(empty($locaplic)){
+	if(empty($_GET["locaplic"])){
 		$locaplic = "../..";
 	}
 ?>
@@ -106,7 +107,7 @@ p .boom {
 </head>
 <body class=" yui-skin-sam" style="margin:0px;width:253px;" >
 <p class=paragrafo style="position:relative;left:6px;width:100%;" >
-Quantas cores voc&ecirc; quer gerar? <input id=ncores type=text size=3 value=<?php echo $ncores; ?> /><br>
+Quantas cores voc&ecirc; quer gerar? <input id=ncores type=text size=3 value=<?php echo $_GET["ncores"]; ?> /><br>
 Clique para escolher o modelo de cores
 </p>
 <div id="imagens" ></div>
@@ -129,7 +130,7 @@ new YAHOO.widget.Button(
 	{onclick:{fn: function(){aplicarCores();}}}
 );
 $i("voltar-button").style.width = "250px"
-var lista = "<?php echo $lista;?>";
+var lista = "<?php echo $_GET["lista"];?>";
 lista = lista.split(",");
 var n = lista.length;
 var ins = "";

@@ -15,7 +15,7 @@ if(empty($_GET)){
 		&legenda = sim|nao<br>
 		&transparente = sim|nao<br>
 		&operador = operador que ser&aacute; utilizado no filtro. Por default utilza-se 'igual a'. Pode ser ainda lt (menor que) ou gt (maior que)<br>
-		&nulos = lista de valores, separados por ',' que não serão considerados ao aplicar o filtro, por exemplo &nulos=-, ,0<br>
+		&nulos = lista de valores, separados por ',' que n&atilde;o ser&atilde;o considerados ao aplicar o filtro, por exemplo &nulos=-, ,0<br>
 		&tipocolunat = string|numero tipo de dados existentes na coluna que cont&eacute;m os valores para o filtro<br>
 		O tema pode ter par&acirc;metros j&aacute; armazenados no METADATA animagif, criado pelo formul&aacute;rio do i3Geo.
 		Para for&ccedil;ar o uso desses par&acirc;metros, basta passar &colunat como vazio.
@@ -28,6 +28,8 @@ if(empty($_GET)){
 include("../../ms_configura.php");
 include("../../classesphp/funcoes_gerais.php");
 include("../../classesphp/carrega_ext.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 //
 //verifica se existem parametros definidos no proprio mapfile
 //
@@ -50,8 +52,19 @@ if(empty($_GET["colunat"])){
 	$_GET["nulos"] = $animagif["nulos"];
 	$_GET["tipocolunat"] = $animagif["tipocolunat"];
 }
-
-include("../../classesphp/pega_variaveis.php");
+//podem vir da url tbm
+$tema = $_GET["tema"];
+$colunat = $_GET["colunat"];
+$tempo = $_GET["tempo"];
+$w = $_GET["w"];
+$h = $_GET["h"];
+$cache = $_GET["cache"];
+$mapext = $_GET["mapext"];
+$legenda = $_GET["legenda"];
+$transparente = $_GET["transparente"];
+$operador = $_GET["operador"];
+$nulos = $_GET["nulos"];
+$tipocolunat = $_GET["tipocolunat"];
 
 $v = versao();
 $vi = $v["inteiro"];
@@ -62,6 +75,7 @@ if($cache == "nao"){
 } else {
 	$nometemp = md5(implode("",$_GET));
 }
+$nometemp = "animagif".$nometemp;
 if(empty($tempo)){
 	$tempo = 40;
 }
@@ -83,10 +97,12 @@ if(empty($operador)){
 else{
 	if($operador == "lt"){
 		$operador = "<";
-	}
-	if($operador == "gt"){
+	} elseif ($operador == "gt"){
 		$operador = ">";
 	}
+}
+if(!in_array($operador,array("=","<",">"))){
+	exit;
 }
 
 $nulos = explode(",",$nulos);
@@ -115,6 +131,7 @@ $versao = versao();
 $versao = $versao["principal"];
 
 //cria um mapa temporario
+//base vem de ms_configura
 if($base == "" or !isset($base)){
 	$base = "";
 	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
@@ -202,7 +219,6 @@ for ($i=0;$i < $numlayers;$i++){
 }
 
 $mapa->save($arqtemp.".map");
-
 //aplica a extensao geografica
 $layer = $mapa->getlayerbyname($tema);
 
@@ -257,7 +273,7 @@ if($transparente == "sim"){
 
 $mapa->save($arqtemp.".map");
 $mapa = ms_newMapObj($arqtemp.".map");
-restauraCon($arqtemp,$postgis_mapa);
+restauraCon($arqtemp.".map",$postgis_mapa);
 
 /*
 if(validaAcessoTemas($arqtemp.".map",false) == true){

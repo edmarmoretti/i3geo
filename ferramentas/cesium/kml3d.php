@@ -1,14 +1,17 @@
 <?php
 include("../../ms_configura.php");
-include("../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 include("../../classesphp/funcoes_gerais.php");
+$kmlurl = $_GET ["kmlurl"];
+$legenda = $_GET ["legenda"];
 //define o centro, pegando as coordenadas do mapa de inicializacao
 $versao = versao();
 $versao = $versao["principal"];
 $centroX = -55;
 $centroY = -13;
 $extensao = "-180,-90,180,90";
-if(!isset($mapext)){
+if(!isset($_GET["mapext"])){
 	if(isset($base) && $base != ""){
 		if(file_exists($base)){
 			$f = $base;
@@ -49,10 +52,10 @@ if(!isset($mapext)){
 	}
 }
 else{
-	$c = explode(" ",$mapext);
+	$c = explode(" ",$_GET["mapext"]);
 	$centroX = $c[2] - ($c[2] - $c[0]) / 2;
 	$centroY = $c[3] - ($c[3] - $c[1]) / 2;
-	$extensao = $c[0].",".$c[1].",".$c[2].",".$c[3];	
+	$extensao = $c[0].",".$c[1].",".$c[2].",".$c[3];
 }
 ?>
 <!DOCTYPE html>
@@ -127,13 +130,7 @@ body {
 	if('<?php echo $kmlurl;?>' != ''){
 		viewer.dataSources.add(Cesium.KmlDataSource.load('<?php echo strip_tags($kmlurl);?>'))
 	}
-	/*
-	var center = Cesium.Cartesian3.fromDegrees(<?php echo $centroX.",".$centroY;?>);
-    var transform = Cesium.Transforms.eastNorthUpToFixedFrame(center);
-    var camera = viewer.camera;
-    camera.constrainedAxis = Cesium.Cartesian3.UNIT_Z;
-    camera.lookAtTransform(transform, new Cesium.Cartesian3(0,0, 12000000.0));
-    */
+
 </script>
 </body>
 </html>

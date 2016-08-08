@@ -29,11 +29,13 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
+$mapexten = $_GET["mapexten"];
 error_reporting(0);
 session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
+if (isset($_GET["g_sid"]))
+{session_id($_GET["g_sid"]);}
 session_start();
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];

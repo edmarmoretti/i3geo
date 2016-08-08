@@ -7,18 +7,28 @@
 </head>
 <?php
 session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
+
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
+
+$nomesrel = $_GET["nomesrel"];
+$ordemrel = $_GET["ordemrel"];
+$itensrel = $_GET["itensrel"];
+$itemagruparel = $_GET["itemagruparel"];
+
+if (isset($_GET["g_sid"]))
+{session_id($_GET["g_sid"]);}
 session_start();
-include(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
+
 include (dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
-substituiCon($map_file,$postgis_mapa);
+
 $temp = explode(",",$nomesrel);
 $colunasTemp = array();
 foreach($temp as $t){
@@ -61,8 +71,9 @@ foreach($temp as $t)
 }
 if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
 {$itensrel[] = $itemagruparel;}
+
 $mapa = ms_newMapObj($map_file);
-substituiCon($temp,$postgis_mapa);
+substituiConObj($temp,$postgis_mapa);
 if($ext && $ext != ""){
 	$e = explode(" ",$ext);
 	$extatual = $mapa->extent;

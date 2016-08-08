@@ -45,7 +45,10 @@ echo "<html><style>
 	P
 	{padding-top:1px;COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 	</style>";
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
+$y = $_GET["y"];
+$x = $_GET["x"];
 error_reporting(0);
 $url = "http://ws.geonames.org/findNearByWeatherXML?username=i3geo&lat=$y&lng=$x&lang=pt";
 

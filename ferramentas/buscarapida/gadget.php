@@ -1,4 +1,5 @@
 <?php
+return;
 include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 include_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $projecao = pegaProjecaoDefault("epsg");

@@ -1,15 +1,17 @@
 <?php
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 error_reporting(0);
+$_GET = array_merge($_GET,$_POST);
 session_name("i3GeoPHP");
-if (isset($g_sid))
-{session_id($g_sid);}
+if (isset($_GET["g_sid"]))
+{session_id($_GET["g_sid"]);}
 session_start();
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 require_once (dirname(__FILE__)."/../../ms_configura.php");
+$tema = $_GET["tema"];
 ?>
 <html>
 <head>
@@ -42,7 +44,7 @@ if (isset($_FILES['i3GEOaplicarsld']['name']))
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Aplicando SLD...$tema</p>";
 		$layer = $mapa->getlayerbyname($tema);
-		$arq = $dirmap."/".$_FILES['i3GEOaplicarsld']['name'];
+		$arq = $dirmap."/".$ArquivoDest;
 		$abre = fopen($arq, "r");
 		$buffer = fread($abre, filesize($arq));
 		fclose($abre);
