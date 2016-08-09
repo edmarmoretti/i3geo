@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -29,8 +29,8 @@ Inclui um filtro no tema.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		//copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema);
-		if(!isset($testa)){$testa="";}
-		{$retorno = $m->insereFiltro($filtro,$testa,"sim");}
+		if(!isset($_GET["testa"])){$_GET["testa"]="";}
+		{$retorno = $m->insereFiltro($_GET["filtro"],$_GET["testa"],"sim");}
 		if(strtolower($testa) != "sim"){
 			$m->salva();
 			$_SESSION["contadorsalva"]++;
@@ -39,11 +39,8 @@ Inclui um filtro no tema.
 	break;
 
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

@@ -1,4 +1,5 @@
 <?php
+exit;
 //forca o download de um arquivo
 include("../../ms_configura.php");
 $f = $_GET['file'];

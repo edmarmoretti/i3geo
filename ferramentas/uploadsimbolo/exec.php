@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include(dirname(__FILE__)."/../safe.php");
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
 if(verificaOperacaoSessao("admin/html/subirshapefile") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
@@ -29,10 +29,9 @@ switch (strtoupper($funcao))
 		}
 	break;
 }
-if (!connection_aborted()){
-	cpjson($retorno);
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
+	restauraCon($map_file,$postgis_mapa);
 }
-else
-{exit();}
+cpjson($retorno);
 
 ?>

@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -51,7 +51,7 @@ Sleciona elementos de um tema com base em outro tema.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema){
 			$m = new Selecao($map_file,$tema);
-			$ok[] = $m->selecaoTema($temao,$tipo,$buffer);
+			$ok[] = $m->selecaoTema($temao,$_GET["tipo"],$_GET["buffer"]);
 		}
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -68,7 +68,7 @@ Seleciona elementos com base nos atributos utilizando sintaxe complexa.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		copiaSeguranca($map_file);
 		$m = new Selecao($map_file,$tema,$ext);
-		$retorno = $m->selecaoAtributos2($filtro,$tipo);
+		$retorno = $m->selecaoAtributos2($_GET["filtro"],$_GET["tipo"]);
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
@@ -86,7 +86,7 @@ Seleciona elementos utilizando a extens&atilde;o do mapa.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoEXT($tipo);
+			$ok[] = $m->selecaoEXT($_GET["tipo"]);
 		}
 		//$retorno = implode(",",$ok);
 		$_SESSION["contadorsalva"]++;
@@ -107,7 +107,7 @@ Seleciona elementos utilizando um ret&acirc;ngulo.
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoBOX($tipo,$box);
+			$ok[] = $m->selecaoBOX($_GET["tipo"],$_GET["box"]);
 		}
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -125,7 +125,7 @@ Seleciona elementos utilizando um ret&acirc;ngulo.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema){
 			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoPorPoligono($tipo,"","",$wkt,$buffer);
+			$ok[] = $m->selecaoPorPoligono($_GET["tipo"],"","",$_GET["wkt"],$_GET["buffer"]);
 		}
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -141,12 +141,12 @@ Seleciona elementos utilizando um ponto.
 		//error_reporting(0);
 		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		copiaSeguranca($map_file);
-		if(!isset($xy)){$xy = "";}
+		if(!isset($_GET["xy"])){$_GET["xy"] = "";}
 		$temas = explode(",",$tema);
 		foreach($temas as $tema)
 		{
 			$m = new Selecao($map_file,$tema,$ext);
-			$ok[] = $m->selecaoPT($xy,$tipo,$tolerancia);
+			$ok[] = $m->selecaoPT($_GET["xy"],$_GET["tipo"],$_GET["tolerancia"]);
 		}
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
@@ -162,7 +162,7 @@ Sele&ccedil;&atilde;o por poligono (chamado via POST).
 		//esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
 		//por isso precisa ser executada com start
 		copiaSeguranca($map_file);
-		$retorno = selecaoPoli($xs,$ys,$tema,$tipo,$buffer);
+		$retorno = selecaoPoli($_GET["xs"],$_GET["ys"],$tema,$_GET["tipo"],$_GET["buffer"]);
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 		//restauraCon($map_file,$postgis_mapa);
@@ -181,13 +181,10 @@ Lista os pontos dos elementos selecionados de um layer
 	break;
 
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 /*
 Function: selecaoPoli
 

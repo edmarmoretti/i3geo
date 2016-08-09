@@ -181,10 +181,12 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	}
 	else
 	{
+		restauraCon($map_file,$postgis_mapa);
 		echo "<p>Erro ao enviar o arquivo.</p>";
 		paraAguarde();
 	}
 }
+restauraCon($map_file,$postgis_mapa);
 paraAguarde();
 function paraAguarde(){
 	echo "<script>window.scrollTo(0,10000);window.parent.i3GEOF.uploaddbf.aguarde.visibility='hidden';</script>";

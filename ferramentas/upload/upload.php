@@ -183,6 +183,7 @@ else
 {
 	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
+restauraCon($map_file,$postgis_mapa);
 paraAguarde();
 function paraAguarde(){
 	echo "<script>try{window.scrollTo(0,10000);window.parent.i3GEOF.upload.aguarde.visibility='hidden';}catch(e){};</script>";
