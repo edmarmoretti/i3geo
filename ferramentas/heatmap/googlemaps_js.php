@@ -17,12 +17,22 @@ nomevariavel nome da variavel javascript que sera retornada com os valores
  */
 $dir = dirname(__FILE__);
 //inicializa o programa verificando seguranca e pegando os parametros enviados pela URL e pela secao
-include_once($dir."/../inicia.php");
+include_once($dir."/../safe.php");
 include_once($dir."/funcoes.php");
+
+$layer = $_GET["layer"];
+$tipoGradiente = $_GET["tipoGradiente"];
+$coluna = $_GET["coluna"];
+$valorPonto = $_GET["valorPonto"];
+
 
 $map_file = heatmapMapfile();
 $resultado = heatmapDados($map_file);
 $gradiente = heatmapGradiente($map_file,$layer,$tipoGradiente);
+
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
+	restauraCon($map_file,$postgis_mapa);
+}
 
 echo $nomevariavel.' = ['.implode(",",$resultado).'];';
 echo $nomevariavelConfig.' = '.$gradiente.';';

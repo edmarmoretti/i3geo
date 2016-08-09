@@ -1,4 +1,5 @@
 <?php
+include (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $g_sid = strip_tags($_GET["g_sid"]);
 session_name("i3GeoPHP");
 session_id($g_sid);
@@ -11,7 +12,12 @@ if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id())){
 }
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $map_file = $_SESSION["map_file"];
+if(empty($map_file)){
+	exit;
+}
 $map_file = str_replace(".map","",$map_file).".map";
+restauraCon($map_file,$_SESSION["postgis_mapa"]);
+
 $base = basename($map_file);
 $dir = dirname($map_file);
 $novo_mapfile = $dir."/".nomeRandomico(5).$base;

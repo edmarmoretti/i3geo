@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -17,7 +17,7 @@ Adiciona um tema baseado em um RSS.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$retorno = $m->adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal);
+		$retorno = $m->adicionaTemaGeoRSS($_GET["servico"],$dir_tmp,$locaplic,$_GET["canal"]);
 		if ($retorno != "erro"){
 			$m->salva();
 			$_SESSION["contadorsalva"]++;
@@ -28,13 +28,8 @@ Adiciona um tema baseado em um RSS.
 		}
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-		restauraCon($map_file,$postgis_mapa);
-	}
-	cpjson($retorno);
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
+	restauraCon($map_file,$postgis_mapa);
 }
-else{
-	exit;
-}
+cpjson($retorno);
 ?>

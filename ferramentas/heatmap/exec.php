@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -15,23 +15,21 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$nameLayer = "heatmap".nomeRandomico();
 		$map = ms_newMapObj($map_file);
 		$layer = $map->getlayerbyname($tema);
-		$novolayer = ms_newLayerObj($map, $layer);
-		$novolayer->setmetadata("tema",$titulo);
-		$parametros = '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","valorPonto":"'.$valorPonto.'","coluna":"'.$coluna.'","radius":"'.$raio.'"}}';
+		$novolayer = ms_newLayerObj($map, $_GET["layer"]);
+		$novolayer->setmetadata("tema",$_GET["titulo"]);
+		$parametros = '{"plugin":"heatmap","parametros":{"tipoGradiente":"default","valorPonto":"'.$_GET["valorPonto"].'","coluna":"'.$_GET["coluna"].'","radius":"'.$_GET["raio"].'"}}';
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
 		$novolayer->set("group","");
-		if(!empty($opacidade)){
-			$novolayer->set("opacity",$opacidade);
+		if(!empty($_GET["opacidade_GET["])){
+			$novolayer->set("opacity",$_GET["opacidade"]);
 		}
 		$map->save($map_file);
 		$retorno = $nameLayer;
 	break;
 }
-if (!connection_aborted()){
-	cpjson($retorno);
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
+	restauraCon($map_file,$postgis_mapa);
 }
-else{
-	exit();
-}
+cpjson($retorno);
 ?>

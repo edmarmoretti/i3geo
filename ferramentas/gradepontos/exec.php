@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -20,22 +20,19 @@ Salva o mapa acrescentando um novo layer com a grade de coordenadas.
 		copiaSeguranca($map_file);
 		if(!isset($tema)){$tema = "";}
 		$m = new Analise($map_file,$tema);
-		if($proj == "sim"){
-			$proj = true;
+		if($_GET["proj"] == "sim"){
+			$_GET["proj"] = true;
 		}
 		else{
-			$proj = false;
+			$_GET["proj"] = false;
 		}
-		$retorno = $m->gradeDePontos($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty,$proj);
+		$retorno = $m->gradeDePontos($_GET["dd"],$_GET["px"],$_GET["py"],$locaplic,$_GET["nptx"],$_GET["npty"],$_GET["proj"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

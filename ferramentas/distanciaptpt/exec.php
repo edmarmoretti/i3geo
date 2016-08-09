@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -18,18 +18,15 @@ S&atilde;o considerados apenas os pontos próximos definidos por um buffer.
 	case "DISTANCIAPTPT":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$temaorigem,$locaplic,$ext);
-		$temaoverlay = $m->criaBuffer($distancia,$locaplic);
-		$retorno = $m->distanciaptpt($temaorigem,$temadestino,$temaoverlay,$locaplic,$itemorigem,$itemdestino);
+		$m = new Analise($map_file,$_GET["temaorigem"],$locaplic,$ext);
+		$temaoverlay = $m->criaBuffer($_GET["distancia"],$locaplic);
+		$retorno = $m->distanciaptpt($_GET["temaorigem"],$_GET["temadestino"],$temaoverlay,$locaplic,$_GET["itemorigem"],$_GET["itemdestino"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

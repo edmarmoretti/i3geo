@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -24,17 +24,14 @@ Gera graficos automaticamente para os elementos de um tema
 			$mesmoTema = false;
 		}
 
-		$m->graficotema($lista,$tamanho,$tipo,$outlinecolor,$offset,$mesmoTema);
+		$m->graficotema($_GET["lista"],$_GET["tamanho"],$_GET["tipo"],$_GET["outlinecolor"],$_GET["offset"],$_GET["mesmoTema"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

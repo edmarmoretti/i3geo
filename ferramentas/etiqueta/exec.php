@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -18,13 +18,13 @@ Ativa as etiquetas de um tema.
 		copiaSeguranca($map_file);
 		$m = new Toponimia($map_file,$tema);
 		$m->layer->setmetadata("IDENTIFICA","");
-		$m->layer->setmetadata("TIP",$tips);
-		$m->layer->setmetadata("ITENS",$itens);
+		$m->layer->setmetadata("TIP",$_GET["tips"]);
+		$m->layer->setmetadata("ITENS",$_GET["itens"]);
 		//$m->layer->setmetadata("ITENSDESC",base64_decode($itensdesc));
 		//$m->layer->setmetadata("ITENSLINK",base64_decode($itenslink));
-		$m->layer->setmetadata("ITENSDESC",$itensdesc);
-		$m->layer->setmetadata("ITENSLINK",$itenslink);
-		$m->layer->setmetadata("itembuscarapida",$itembuscarapida);
+		$m->layer->setmetadata("ITENSDESC",$_GET["itensdesc"]);
+		$m->layer->setmetadata("ITENSLINK",$_GET["itenslink"]);
+		$m->layer->setmetadata("itembuscarapida",$_GET["itembuscarapida"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		$retorno = "ok";
@@ -57,11 +57,8 @@ Obtém os dados sobre itens, itensdesc, etc
 		$retorno = $m->pegaDadosEtiquetas();
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>
