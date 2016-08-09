@@ -1,6 +1,7 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
+$url = $_GET["url"];
 switch (strtoupper($funcao))
 {
 	case "CRIALAYER":
@@ -15,11 +16,12 @@ switch (strtoupper($funcao))
 		$classe->set("name","");
 		$novolayer->set("status",MS_DEFAULT);
 		$novolayer->set("template","none.htm");
-		$salvo = $mapa->save($map_file);
+		$salvo = $mapa->save(str_replace(".map","",$map_file).".map");
 		$retorno = "ok";
 	break;
 }
-if (!connection_aborted()){
-	cpjson($retorno);
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
+	restauraCon($map_file,$postgis_mapa);
 }
+cpjson($retorno);
 ?>

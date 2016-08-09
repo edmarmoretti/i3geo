@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -10,17 +10,14 @@ switch (strtoupper($funcao))
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($tema);
 		if($l != ""){
-			$l->setmetadata($meta,$valor);
+			$l->setmetadata($_GET["meta"],$_GET["valor"]);
 			$mapa->save($map_file);
 		}
 		$retorno = "ok";
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

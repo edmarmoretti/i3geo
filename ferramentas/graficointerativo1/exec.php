@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -15,24 +15,21 @@ Pega os dados necessários para a geração dos gráficos da ferramenta seleção
 */
 	case "GRAFICOSELECAO":
 		include(dirname(__FILE__)."/../../classesphp/graficos.php");
-		if(!isset($exclui))
-		{$exclui = "";}
-		if(!isset($tipo))
-		{$tipo = "nenhum";}
-		if(!isset($ordenax))
-		{$ordenax = "nao";}
-		$itemvalores = explode(",",$itemvalores);
+		if(!isset($_GET["exclui"]))
+		{$_GET["exclui"] = "";}
+		if(!isset($_GET["tipo"]))
+		{$_GET["tipo"] = "nenhum";}
+		if(!isset($_GET["ordenax"]))
+		{$_GET["ordenax"] = "nao";}
+		$itemvalores = explode(",",$_GET["itemvalores"]);
 		if(count($itemvalores) == 1){
 			$itemvalores = $itemvalores[0];
 		}
-		$retorno = iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,false,$ext,true,$ordenax);
+		$retorno = iniciaDadosGrafico($map_file,$tema,$_GET["exclui"],$_GET["itemclasses"],$itemvalores,$_GET["tipo"],false,$ext,true,$_GET["ordenax"]);
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

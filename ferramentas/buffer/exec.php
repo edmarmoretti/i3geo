@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -19,23 +19,25 @@ Salva o mapa acrescentando um novo layer com o buffer.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		if(empty($multiplicar)){
-			$multiplicar = 1;
+		if(empty($_GET["multiplicar"])){
+			$_GET["multiplicar"] = 1;
 		}
-		$retorno = $m->criaBuffer($distancia,$locaplic,$unir,$wkt,$multiplicar,$itemdistancia);
+		$retorno = $m->criaBuffer($_GET["distancia"],$locaplic,$_GET["unir"],$_GET["wkt"],$_GET["multiplicar"],$_GET["itemdistancia"]);
 		$m->salva();
 		//$_SESSION["contadorsalva"]++;
 		//limpa selecao
 		$qyfile = str_replace(".map",".qy",$map_file);
-		if (file_exists($qyfile))
-		{unlink ($qyfile);}
+		if (file_exists($qyfile)){
+			unlink ($qyfile);
+		}
+		$qyfile = str_replace(".map","_qy.map",$map_file);
+		if (file_exists($qyfile)){
+			unlink ($qyfile);
+		}
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

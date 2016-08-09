@@ -14,6 +14,7 @@ g_sid
 
 tema - tema que ser&aacute; comentado
 */
+include (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $parametrosURL = array_merge($_GET,$_POST);
 
 session_name("openid");

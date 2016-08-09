@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -19,16 +19,13 @@ Salva o mapa acrescentando um novo layer com o ponto.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		copiaSeguranca($map_file);
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->centroMassa($item);
+		$retorno = $m->centroMassa($_GET["item"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>
