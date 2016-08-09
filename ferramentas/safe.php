@@ -22,6 +22,14 @@ if(!empty($_GET["g_sid"])){
 	$contadorsalva = $_SESSION["contadorsalva"];
 	$fingerprint = $_SESSION['fingerprint'];
 }
+else{
+	$g_sid = "";
+}
+//variaveis mais utilizadas
+$tema = $_GET["tema"];
+$ext = $_GET["ext"];
+$funcao = $_GET["funcao"];
+
 include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 if(isset($fingerprint) && !empty($g_sid))	{
 	$f = explode(",",$fingerprint);

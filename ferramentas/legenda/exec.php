@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -37,8 +37,8 @@ Adiciona LABEL em uma classe de um layer
 		{$retorno = "erro";}
 		else{
 			//$l->set("labelitem",$item);
-			$novac = $l->getclass($classe);
-			$m->adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,"[".$item."]");
+			$novac = $l->getclass($_GET["classe"]);
+			$m->adicionaLabel($novac,$_GET["wrap"],$_GET["fonte"],$_GET["tamanho"],$_GET["angulo"],$_GET["fundo"],$_GET["sombra"],$_GET["cor"],$_GET["outlinecolor"],$_GET["shadowcolor"],$_GET["shadowsizex"],$_GET["shadowsizey"],$_GET["force"],$_GET["mindistance"],$_GET["minfeaturesize"],$_GET["offsetx"],$_GET["offsety"],$_GET["partials"],$_GET["position"],"[".$_GET["item"]."]");
 			$m->salva();
 			$retorno = "ok";
 		}
@@ -51,7 +51,7 @@ Remove LABEL em uma classe de um layer
 	case "REMOVELABELCLASSE":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		$m = new Temas($map_file,$tema);
-		$m->removeLabel($classe);
+		$m->removeLabel($_GET["classe"]);
 		$m->salva();
 		$retorno = "ok";
 	break;
@@ -93,7 +93,7 @@ Acrescenta a contagem de elementos em cada classe.
 	case "APLICATODASCLASSES":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
 		$m = new Legenda($map_file,$locaplic,$tema);
-		$r = $m->aplicaTodasClasses($parametro,$valor);
+		$r = $m->aplicaTodasClasses($_GET["parametro"],$_GET["valor"]);
 		$m->salva();
 		if (!$r){$r = "erro.Erro legenda nao disponivel";}
 		$retorno = $r;
@@ -105,7 +105,7 @@ Acrescenta a contagem de elementos em cada classe.
 		if($filter != ""){
 			//$filter = base64decode($filter);
 		}
-		$m->criaCluster($group,$filter,$maxdistance,$region,$buffer);
+		$m->criaCluster($_GET["group"],$_GET["filter"],$_GET["maxdistance"],$_GET["region"],$_GET["buffer"]);
 		$m->salva();
 		$retorno = "ok";
 	break;
@@ -118,11 +118,8 @@ Acrescenta a contagem de elementos em cada classe.
 		$retorno = "ok";
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -16,7 +16,7 @@ Inclu&iacute; elementos em uma sele&ccedil;&atilde;o.
 	case "INCLUISEL":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
 		$m = new Selecao($map_file,$tema);
-		$retorno = $m->incluiSel($ids);
+		$retorno = $m->incluiSel($_GET["ids"]);
 		//
 		//&eacute; necess&aacute;rio obter os par&acirc;metros do mapa para remontar a &aacute;rvore de camadas
 		//
@@ -137,11 +137,8 @@ Faz a fus&atilde;o da imagem de um gr&aacute;fico com a imagem do mapa atual.
 		$retorno = $imagem;
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>
