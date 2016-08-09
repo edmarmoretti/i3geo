@@ -227,7 +227,6 @@ class Mapa
 		$temas = array();
 		$existesel = false;
 		$dir = dirname($this->arquivo);
-		//$qy = file_exists($this->qyfile);
 		foreach($this->layers as $l){
 			$l->set("template","none.htm");
 		}
@@ -278,7 +277,7 @@ class Mapa
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
 			$nSel = 0;
-			$arqS = $dir."/".$oLayer->name.".php";
+			$arqS = $dir."/".$oLayer->name."_qy.map";
 			if(file_exists($arqS)){
 				$sel = "sim";
 				$existesel = true;
@@ -462,51 +461,6 @@ class Mapa
 					}
 					$ferramentas["animagif"] = json_decode($f);
 				}
-				//formatacao antiga, antes da versao 6.0
-				/*
-				 $temas[] = array(
-				 		"name"=>($oLayer->name),
-				 		"nomeoriginal"=>($oLayer->getmetadata("nomeoriginal")),
-				 		"status"=>($oLayer->status),
-				 		"tema"=>(mb_convert_encoding(($oLayer->getmetadata("tema")),"UTF-8","ISO-8859-1")),
-				 		"transparency"=>($oLayer->opacity),
-				 		"type"=>($oLayer->type),
-				 		"sel"=>$sel,
-				 		"nsel"=>$nSel,
-				 		"escala"=>$escala,
-				 		"download"=>$down,
-				 		"features"=>$f,
-				 		"connectiontype"=>$ct,
-				 		"zoomtema"=>$zoomtema,
-				 		"contextoescala"=>$contextoescala,
-				 		"etiquetas"=>($oLayer->getmetadata("TIP")),
-				 		"identifica"=>($oLayer->getmetadata("IDENTIFICA")),
-				 		"editorsql"=>$editorsql,
-				 		"linhadotempo"=>$ltempo,
-				 		"escondido"=>strtolower($escondido),
-				 		"iconetema"=>($oLayer->getmetadata("iconetema")),
-				 		"classe"=>($oLayer->getmetadata("classe")),
-				 		"permitecomentario"=>$permitecomentario,
-				 		"exttema"=>$exttema,
-				 		"aplicaextensao"=>$aplicaextensao,
-				 		"transitioneffect"=>$transitioneffect,
-				 		"wmsurl"=>$wmsurl,
-				 		"wmsname"=>$wmsname,
-				 		"wmsformat"=>$wmsformat,
-				 		"wmssrs"=>$wmssrs,
-				 		"wmstile"=>$wmstile,
-				 		"tiles"=>$tiles,
-				 		"temporizador"=>($oLayer->getmetadata("temporizador")),
-				 		"permiteogc"=>($oLayer->getmetadata("permiteogc")),
-				 		"itembuscarapida"=>($oLayer->getmetadata("itembuscarapida")),
-				 		"usasld"=>$usasld,
-				 		"cache"=>$cache,
-				 		"editavel"=>($oLayer->getmetadata("EDITAVEL")),
-				 		"colunaidunico"=>($oLayer->getmetadata("COLUNAIDUNICO")),
-				 		"cortepixels"=>$cortepixels,
-				 		"plugini3geo"=>$plugini3geo
-				 );
-				*/
 				$temas[] = array(
 						$oLayer->name,
 						$oLayer->getmetadata("nomeoriginal"),

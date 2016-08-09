@@ -110,7 +110,7 @@ elseif ($_GET["X"] != ""){
 	$y = $_GET["Y"];
 	$z = $_GET["Z"];
 
-	$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
+	$qyfile = dirname($map_fileX)."/".$_GET["layer"]."_qy.map";
 	$qy = file_exists($qyfile);
 	if($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim"){
 		carregaCacheImagem();

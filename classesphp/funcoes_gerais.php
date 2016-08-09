@@ -2491,7 +2491,7 @@ function removeLinha($texto,$mapfile)
 //
 function carregaquery($mapfile,$objlayer,$objmapa)
 {
-	$qyfile = dirname($mapfile)."/".$objlayer->name.".php";
+	$qyfile = dirname($mapfile)."/".$objlayer->name."_qy.map";
 	if(file_exists($qyfile))
 	{
 		$indxlayer = $objlayer->index;
@@ -2522,7 +2522,7 @@ $objmapa
 */
 function carregaquery2($mapfile,&$objlayer,&$objmapa)
 {
-	$qyfile = dirname($mapfile)."/".$objlayer->name.".php";
+	$qyfile = dirname($mapfile)."/".$objlayer->name."_qy.map";
 	if(file_exists($qyfile)){
 		$indxlayer = $objlayer->index;
 		$handle = fopen ($qyfile, "r");
@@ -2620,11 +2620,10 @@ function retornaShapesMapext($objLayer,$objMapa){
 }
 function retornaShapesSelecionados($objLayer,$map_file,$objMapa,$indexado=false){
 	$shapes = array();
-	$qyfile = dirname($map_file)."/".$objLayer->name.".php";
+	$qyfile = dirname($map_file)."/".$objLayer->name."_qy.map";
 	if(!file_exists($qyfile)){
 		return $shapes;
 	}
-
 	$handle = fopen ($qyfile, "r");
 	$conteudo = fread ($handle, filesize ($qyfile));
 	fclose ($handle);

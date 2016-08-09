@@ -144,7 +144,7 @@ if(!empty($_GET["request"])){
 //
 //resolve o problema da selecao nas versoes mais recentes nova do mapserver
 //
-$qyfile = dirname($map_fileX)."/".$_GET["layer"];
+$qyfile = dirname($map_fileX)."/".$_GET["layer"]."_qy.map";
 $qy = file_exists($qyfile);
 
 if($_GET["REQUEST"] == "getlegendgraphic" || $_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature"){

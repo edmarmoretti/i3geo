@@ -103,9 +103,9 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
   		$this->postgis_mapa = $postgis_mapa;
 		$this->v = versao();
 		$this->v = $this->v["principal"];
-		$this->qyfile = str_replace(".map",".qy",$map_file);
+		$this->qyfile = str_replace(".map","_qy.map",$map_file);
   		if($tema != ""){
-  			$this->qyfileTema = dirname($map_file)."/".$tema.".php";
+  			$this->qyfileTema = dirname($map_file)."/".$tema."_qy.map";
   		}
 		else{
 			$this->qyfileTema = "";
@@ -953,6 +953,7 @@ $arquivo - arquivo que ser&aacute; processado
 */
 	function unserializeQ($arq)
 	{
+		$arq = str_replace("_qy.map","",$arq)."_qy.map";
 		$handle = fopen ($arq, "r");
 		$conteudo = fread ($handle, filesize ($arq));
 		fclose ($handle);
@@ -970,8 +971,10 @@ $geos - array com os dados
 */
 	function serializeQ($arq,$geos)
 	{
-		if (file_exists($arq))
-		{unlink($arq);}
+		$arq = str_replace("_qy.map","",$arq)."_qy.map";
+		if (file_exists($arq)){
+			unlink($arq);
+		}
 		$fp = fopen($arq,"w");
 		$r = serialize($geos);
 		fwrite($fp,$r);

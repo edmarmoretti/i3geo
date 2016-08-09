@@ -122,7 +122,7 @@ function retornaWms($map_fileX,$postgis_mapa){
 	//
 	//resolve o problema da sele&ccedil;&atilde;o na vers&atilde;o nova do mapserver
 	//
-	$qyfile = dirname($map_fileX)."/".$_GET["layer"].".php";
+	$qyfile = dirname($map_fileX)."/".$_GET["layer"]."_qy.map";
 	$qy = file_exists($qyfile);
 	$o = $mapa->outputformat;
 	$o->set("imagemode",MS_IMAGEMODE_RGBA);
