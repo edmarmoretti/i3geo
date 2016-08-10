@@ -26,7 +26,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = $dir_tmp;
 	$Arquivo = $_FILES['i3GEOcarregamapafilemap']['name'];
-	$Arquivo = str_replace(".map","",$Arquivo).".map";
+	$Arquivo = str_replace(".map","",$Arquivo)."_up.map";
 
 	verificaNome($Arquivo);
 	/*
@@ -44,14 +44,13 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 	if($status == 1)
 	{
 		echo "<p class='paragrafo' >Arquivo enviado. Verificando o mapa...</p>";
-		substituiCon($map_file,$postgis_mapa);
-		substituiCon($dirmap."/".$Arquivo,$postgis_mapa);
+
 		$mapt = ms_newMapObj($dirmap."/".$Arquivo);
 		$map = ms_newMapObj($map_file);
+
 		//apaga os layers do mapa atual
 		$numlayers = $map->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
-		{
+		for ($i=0;$i < $numlayers;$i++)	{
 			$layer = $map->getlayer($i);
 			$layer->set("status",MS_DELETE);
 		}
@@ -85,6 +84,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 		}
 		$map->save($map_file);
 		restauraCon($map_file,$postgis_mapa);
+		unlink($dirmap."/".$Arquivo);
 		$e = $mapt->extent;
 		$extatual = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
 		echo "<p class='paragrafo' >Ok. redesenhando.";
