@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -24,7 +24,7 @@ Aplica um par&acirc;metro em um estilo de uma classe.
 			$utilizacgi = "nao";
 		}
 		$m = new Legenda($map_file);
-		$retorno = $m->aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize);
+		$retorno = $m->aplicaParametrosLegImg($_GET["fonte"],$_GET["imagecolor"],$_GET["position"],$_GET["status"],$_GET["outlinecolor"],$_GET["keyspacingy"],$_GET["keyspacingx"],$_GET["keysizey"],$_GET["keysizex"],$_GET["height"],$_GET["width"],$_GET["labelsize"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;
@@ -52,16 +52,13 @@ Testa os par&acirc;metros de defini&ccedil;&atilde;o da legenda inserida no mapa
 		$map_file = str_replace(".map","",$map_file).".map";
 		copy($map_file,str_replace(".map","testeleg.map",$map_file));
 		$m = new Legenda(str_replace(".map","testeleg.map",$map_file));
-		$m->aplicaParametrosLegImg($fonte,$imagecolor,$position,$status,$outlinecolor,$keyspacingy,$keyspacingx,$keysizey,$keysizex,$height,$width,$labelsize);
+		$m->aplicaParametrosLegImg($_GET["fonte"],$_GET["imagecolor"],$_GET["position"],$_GET["status"],$_GET["outlinecolor"],$_GET["keyspacingy"],$_GET["keyspacingx"],$_GET["keysizey"],$_GET["keysizex"],$_GET["height"],$_GET["width"],$_GET["labelsize"]);
 		$retorno = $m->legendaGrafica();
 	break;
 
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

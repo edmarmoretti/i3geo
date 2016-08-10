@@ -1612,10 +1612,10 @@ switch (strtoupper($funcao))
 		$filtro = $_pg["filtro"];
 
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma,$filtro);
-		if(!isset($idmenu)){
-			$idmenu = "";
+		if(!isset($_pg["idmenu"])){
+			$_pg["idmenu"] = "";
 		}
-		$retorno = $m->pegaListaDeSubGrupos($grupo,$idmenu);
+		$retorno = $m->pegaListaDeSubGrupos($_pg["grupo"],$_pg["idmenu"]);
 		break;
 		/*
 		 Valor: PEGALISTADETEMAS
@@ -1631,10 +1631,10 @@ switch (strtoupper($funcao))
 		$idioma = $_pg["idioma"];
 
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
-		if(!isset($idmenu)){
-			$idmenu = "";
+		if(!isset($_pg["idmenu"])){
+			$_pg["idmenu"] = "";
 		}
-		$retorno = array("temas"=>$m->pegaListaDeTemas($grupo,$subgrupo,$idmenu));
+		$retorno = array("temas"=>$m->pegaListaDeTemas($_pg["grupo"],$_pg["subgrupo"],$_pg["idmenu"]));
 		break;
 		/*
 		 Valor: PEGATODOSTEMAS

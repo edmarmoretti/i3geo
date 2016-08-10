@@ -534,6 +534,10 @@ i3GEO.mapa =
 			 */
 			CAMADASSEMLEGENDA : [],
 			/**
+			 * posicao apos mover
+			 */
+			POSICAO: "",
+			/**
 			 * Function: cria
 			 *
 			 * Cria a legenda HTML
@@ -771,6 +775,10 @@ i3GEO.mapa =
 					altura = 300;
 				}
 				var cabecalho, minimiza, janela, titulo;
+				if(i3GEO.mapa.legendaHTML.POSICAO != ""){
+					topo = i3GEO.mapa.legendaHTML.POSICAO[1];
+					esquerda = i3GEO.mapa.legendaHTML.POSICAO[0];
+				}
 				//
 				// remove se a legenda ja esta aberta em outro lugar
 				//
@@ -805,6 +813,10 @@ i3GEO.mapa =
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
 					"i3GEO.mapa.legendaHTML.atualiza()"
 				]);
+				janela[0].moveEvent.subscribe(function(o,p){
+						i3GEO.mapa.legendaHTML.POSICAO = p[0];
+					}
+				);
 				i3GEO.mapa.legendaHTML.atualiza();
 				if (topo && esquerda) {
 					janela = YAHOO.i3GEO.janela.manager.find("wlegenda");

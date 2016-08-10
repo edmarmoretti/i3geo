@@ -9,6 +9,11 @@
  */
 include_once (dirname(__FILE__)."/../../ms_configura.php");
 include_once (dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+
+if (filter_var($_GET["restauramapa"], FILTER_VALIDATE_INT) === false){
+	exit;
+}
+
 $base = restauraMapaAdmin($_GET["restauramapa"],$dir_tmp);
 
 $nomeImagem = dirname($base)."/".str_replace(".map","","restauramapa".$_GET["restauramapa"])."_miniatura.png";

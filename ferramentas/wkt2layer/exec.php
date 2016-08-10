@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -19,7 +19,7 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 		if(!isset($marca)){
 			$marca="";
 		}
-		$shp = ms_shapeObjFromWkt($xy);
+		$shp = ms_shapeObjFromWkt($_GET["xy"]);
 		if($shp->type == MS_SHAPE_POINT){
 			$tipo = "POINT";
 		}
@@ -29,19 +29,19 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 		if($shp->type == MS_SHAPE_POLYGON){
 			$tipo = "POLYGON";
 		}
-		$m->insereFeature($marca,$tipo,$xy,$texto,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$wrap,true,$nometema);
+		$m->insereFeature($_GET["marca"],$_GET["tipo"],$_GET["xy"],$_GET["texto"],$_GET["position"],$_GET["partials"],$_GET["offsetx"],$_GET["offsety"],$_GET["minfeaturesize"],$_GET["mindistance"],$_GET["force"],$_GET["shadowcolor"],$_GET["shadowsizex"],$_GET["shadowsizey"],$_GET["outlinecolor"],$_GET["cor"],$_GET["sombray"],$_GET["sombrax"],$_GET["sombra"],$_GET["fundo"],$_GET["angulo"],$_GET["tamanho"],$_GET["fonte"],$_GET["wrap"],true,$_GET["nometema"]);
 		$m->salva();
 		redesenhaMapa();
 	break;
 	case "SHAPEFILE":
 		include_once("../../classesphp/classe_analise.php");
 		$m = new Analise($map_file,"");
-		$nomeLayer = $m->aplicaFuncaoListaWKT(array($xy),"converteSHP",$dir_tmp,$imgdir);
+		$nomeLayer = $m->aplicaFuncaoListaWKT(array($_GET["xy"]),"converteSHP",$dir_tmp,$imgdir);
 		$l = $m->mapa->getlayerbyname($nomeLayer);
-		$l->setmetadata("tema",$nometema);
+		$l->setmetadata("tema",$_GET["nometema"]);
 		//verifica projecao
 		//verifica a projecao
-		$shp = ms_shapeObjFromWkt($xy);
+		$shp = ms_shapeObjFromWkt($_GET["xy"]);
 		$c = $shp->getCentroid();
 		$c = $c->x;
 		if($c > -181 && $c < 181){
@@ -55,11 +55,8 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 	break;
 
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

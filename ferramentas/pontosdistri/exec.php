@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -18,24 +18,21 @@ Executa script R para gerar a imagem.
 	case "ANALISEDISTRIPT":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		copiaSeguranca($map_file);
-		if(!isset($tema2))
-		{$tema2 = "";}
-		if(!isset($limitepontos))
-		{$limitepontos = "";}
+		if(!isset($_GET["tema2"]))
+		{$_GET["tema2"] = "";}
+		if(!isset($_GET["limitepontos"]))
+		{$_GET["limitepontos"] = "";}
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
-		if(empty($item)){
-			$item = "";
+		if(empty($_GET["item"])){
+			$_GET["item"] = "";
 		}
-		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$numclasses,$tipo,$cori,$corf,$tmpurl,$sigma,$limitepontos,$tema2,$extendelimite);
+		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$_GET["numclasses"],$_GET["tipo"],$_GET["cori"],$_GET["corf"],$tmpurl,$_GET["sigma"],$_GET["limitepontos"],$_GET["tema2"],$_GET["extendelimite"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

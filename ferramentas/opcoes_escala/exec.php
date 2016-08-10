@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -17,7 +17,7 @@ Aplica novos par&acirc;metros na barra de escala atual.
 		include_once(dirname(__FILE__)."/../../classesphp/classe_escala.php");
 		copiaSeguranca($map_file);
 		$m = new Escala($map_file);
-		$retorno = $m->mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor,$status);
+		$retorno = $m->mudaEscalaGrafica($_GET["w"],$_GET["h"],$_GET["estilo"],$_GET["intervalos"],$_GET["unidade"],$_GET["cor"],$_GET["bcor"],$_GET["ocor"],$_GET["status"]);
 		$_SESSION["contadorsalva"]++;
 	break;
 /*
@@ -42,15 +42,12 @@ Testa os novos par&acirc;metros de uma barra de escala.
 	case "TESTAESCALAGRAFICA":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_escala.php");
 		$m = new Escala($map_file);
-		$retorno = $m->testaescalagrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor);
+		$retorno = $m->testaescalagrafica($_GET["w"],$_GET["h"],$_GET["estilo"],$_GET["intervalos"],$_GET["unidade"],$_GET["cor"],$_GET["bcor"],$_GET["ocor"]);
 	break;
 
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

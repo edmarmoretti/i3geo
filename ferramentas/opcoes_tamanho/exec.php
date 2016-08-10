@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -16,22 +16,18 @@ Muda o tamanho da imagem do mapa atual.
 	case "MUDATAMANHO":
 		copiaSeguranca($map_file);
 		$map = ms_newMapObj($map_file);
-		$map->setsize($largura,$altura);
-		if (connection_aborted()){exit();}
+		$map->setsize($_GET["largura"],$_GET["altura"]);
 		$salvo = $map->save($map_file);
 		include_once(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
 		$m = new Mapa($map_file);
-		$m->mudaQS($largura,$altura);
+		$m->mudaQS($_GET["largura"],$_GET["altura"]);
 		$retorno = "ok";
 		$_SESSION["contadorsalva"]++;
 	break;
 
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

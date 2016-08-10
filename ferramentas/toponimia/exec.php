@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -23,16 +23,16 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 		if(!isset($novotema)){
 			$novotema = "sim";
 		}
-		$retorno = $m->criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema);
-		if(empty($maxscale)){
-			$maxscale = -1;
+		$retorno = $m->criaToponimia($_GET["item"],$_GET["position"],$_GET["partials"],$_GET["offsetx"],$_GET["offsety"],$_GET["minfeaturesize"],$_GET["mindistance"],$_GET["force"],$_GET["shadowcolor"],$_GET["shadowsizex"],$_GET["shadowsizey"],$_GET["outlinecolor"],$_GET["cor"],$_GET["sombray"],$_GET["sombrax"],$_GET["sombra"],$_GET["fundo"],$_GET["angulo"],$_GET["tamanho"],$_GET["fonte"],$_GET["tipo"],$_GET["wrap"],$_GET["novotema"]);
+		if(empty($_GET["maxscale"])){
+			$_GET["maxscale"] = -1;
 		}
-		if(empty($minscale)){
-			$minscale = -1;
+		if(empty($_GET["minscale"])){
+			$_GET["minscale"] = -1;
 		}
-		$m->layer->set("labelmaxscaledenom",$maxscale);
-		$m->layer->set("labelminscaledenom",$minscale);
-		if ($tipo != "teste"){
+		$m->layer->set("labelmaxscaledenom",$_GET["maxscale"]);
+		$m->layer->set("labelminscaledenom",$_GET["minscale"]);
+		if ($_GET["tipo"] != "teste"){
 			$m->salva();$_SESSION["contadorsalva"]++;
 		}
 	break;
@@ -46,11 +46,8 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 		$_SESSION["contadorsalva"]++;
 		break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>
