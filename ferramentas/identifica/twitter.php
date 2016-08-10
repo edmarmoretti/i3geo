@@ -13,6 +13,7 @@ p {
 </head>
 <body style="background-color: white; margin: 10px">
 	<?php
+	include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 	if(empty($_GET["km"]))
 	{
 		$km = 5;

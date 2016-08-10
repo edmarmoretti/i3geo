@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -13,14 +13,14 @@ Valor: MINMAX
 	case "MINMAX":
 		$mapa = ms_newMapObj($map_file);
 		$layer = $mapa->getlayerbyname($tema);
-		if(empty($maxscaledenom)){
-			$maxscaledenom = -1;
+		if(empty($_GET["maxscaledenom"])){
+			$_GET["maxscaledenom"] = -1;
 		}
-		if(empty($minscaledenom)){
-			$minscaledenom = -1;
+		if(empty($_GET["minscaledenom"])){
+			$_GET["minscaledenom"] = -1;
 		}
-		$layer->set("maxscaledenom",$maxscaledenom);
-		$layer->set("minscaledenom",$minscaledenom);
+		$layer->set("maxscaledenom",$_GET["maxscaledenom"]);
+		$layer->set("minscaledenom",$_GET["minscaledenom"]);
 		$layer->setmetadata("cache","");
 		$mapa->save($map_file);
 		$retorno = "ok";
@@ -34,12 +34,8 @@ Valor: MINMAX
 		);
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else{
-	exit();
-}
+cpjson($retorno);
 ?>

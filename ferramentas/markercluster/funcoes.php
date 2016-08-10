@@ -20,9 +20,8 @@ function markerclusterDados($map_file){
 			$resultado[] = '{"lat":"'.$r["y"].'","lng":"'.$r["x"].'","count":"'.$r["valores"][0]["valor"].'"}';
 		}
 	}
-	if (!connection_aborted()){
-		if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
-			restauraCon($map_file,$postgis_mapa);
+	if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
+		restauraCon($map_file,$postgis_mapa);
 	}
 	return $resultado;
 }
@@ -60,11 +59,9 @@ function markerclusterMapfile(){
 
 		$tempMapa = ms_newMapObj($dir."/../../temas/{$layer}.map");
 		$layern = $tempMapa->getlayer(0);
+		restauraConObj($mapa,$postgis_mapa);
 		ms_newLayerObj($mapa, $layern);
 		$mapa->save($map_file);
-		if(!empty($postgis_mapa)){
-			//substituiCon($map_file,$postgis_mapa);
-		}
 	}
 	return $map_file;
 }

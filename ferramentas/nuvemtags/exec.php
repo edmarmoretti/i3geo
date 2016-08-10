@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -15,16 +15,13 @@ Pega a lista de tags registrados nos menus de temas.
 */
 	case "LISTATAGS":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_menutemas.php");
-		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo);
-		$retorno = $m->listatags($rss,$nrss);
+		$m = new Menutemas($map_file,$perfil,$locaplic,$_GET["urli3geo"]);
+		$retorno = $m->listatags($_GET["rss"],$_GET["nrss"]);
 	break;
 
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

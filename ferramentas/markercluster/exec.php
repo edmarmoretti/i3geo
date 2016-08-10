@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -17,7 +17,7 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$layer = $map->getlayerbyname($tema);
 		$novolayer = ms_newLayerObj($map, $layer);
 		$novolayer->setmetadata("tema",$titulo);
-		$parametros = '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","opacity":"'.$opacidade.'","gridSize":"'.$gridSize.'"}}';
+		$parametros = '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","opacity":"'.$_GET["opacidade"].'","gridSize":"'.$_GET["gridSize"].'"}}';
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
 		$novolayer->set("group","");
@@ -25,10 +25,8 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$retorno = $nameLayer;
 	break;
 }
-if (!connection_aborted()){
-	cpjson($retorno);
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
+	restauraCon($map_file,$postgis_mapa);
 }
-else{
-	exit();
-}
+cpjson($retorno);
 ?>

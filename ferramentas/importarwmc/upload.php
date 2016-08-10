@@ -17,6 +17,7 @@ $map_file = $_SESSION["map_file"];
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 error_reporting(0);
 require_once (dirname(__FILE__)."/../../ms_configura.php");
 $dirmap = dirname($map_file);

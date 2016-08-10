@@ -17,9 +17,13 @@ nomevariavel nome da variavel javascript que sera retornada com os valores
  */
 $dir = dirname(__FILE__);
 //inicializa o programa verificando seguranca e pegando os parametros enviados pela URL e pela secao
-include_once($dir."/../inicia.php");
+include_once($dir."/../safe.php");
 
 include_once($dir."/funcoes.php");
+
+$layer = $_GET["layer"];
+$tipoEstilos = $_GET["tipoEstilos"];
+$coluna = $_GET["coluna"];
 
 $map_file = markerclusterMapfile();
 $resultado = markerclusterDados($map_file);

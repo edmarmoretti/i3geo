@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -21,7 +21,7 @@ switch (strtoupper($funcao))
 	case "APLICAR":
 		$map = ms_newMapObj($map_file);
 		$c = $map->numlayers;
-		$mascarar = explode(",",$mascarar);
+		$mascarar = explode(",",$_GET["mascarar"]);
 		for ($i=0;$i < $c;++$i)	{
 			$l = $map->getlayer($i);
 			if($l->mask == $tema){
@@ -35,9 +35,8 @@ switch (strtoupper($funcao))
 		$map->save($map_file);
 	break;
 }
-if (!connection_aborted()){
-	cpjson($retorno);
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
+	restauraCon($map_file,$postgis_mapa);
 }
-else
-{exit();}
+cpjson($retorno);
 ?>

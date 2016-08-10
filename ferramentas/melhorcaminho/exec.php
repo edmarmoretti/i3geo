@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
+include_once(dirname(__FILE__)."/../safe.php");
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -43,7 +43,7 @@ switch (strtoupper($funcao))
 	case "MELHORCAMINHO":
 		//converte os parametros em um arquivo YAML
 		$mapa = ms_newMapObj($map_file);
-		$layer = $mapa->getlayerbyname($raster);
+		$layer = $mapa->getlayerbyname($_GET["raster"]);
 		$cost_surface_path = $layer->data;
 		$prefixo = nomeRandomico(3);
 		//verifica se o mapa de custo existe
@@ -51,6 +51,8 @@ switch (strtoupper($funcao))
 			$pathresult = $dir_tmp."/melhorcaminho_".nomeRandomico();
 			//cria a pasta onde os resultados serao armazenados
 			mkdir ($pathresult,0744);
+			$pta = $_GET["pta"];
+			$ptb = $_GET["ptb"];
 
 			//parametros para o calculo de melhor caminho e linha reta
 			$best = array(
@@ -76,7 +78,7 @@ switch (strtoupper($funcao))
 				$buf = array(
 					"p3"=>	array(
 							"calculation_type" =>"best_path_within_buffer",
-							"buffer_km" => $buffer,
+							"buffer_km" => $_GET["buffer"],
 							"file_prefix" => $prefixo,
 							"start_coord" => "[$pta]",
 							"stop_coord" => "[$ptb]"
@@ -85,6 +87,7 @@ switch (strtoupper($funcao))
 				$processos[] = $buf;
 			}
 			//parametros para calculo com reclassificacao
+			$lut = $_GET["lut"];
 			if($lut != ""){
 				//pega os valores da lut
 				$lista = explode("|",$lut);
@@ -111,6 +114,7 @@ switch (strtoupper($funcao))
 				$processos[] = $lut;
 			}
 			//parametros para o calculo quando o usuario escolhe um layer que contem um shapefile
+			$temausuario = $_GET["temausuario"];
 			if($temausuario != ""){
 				//exporta o layer como um shapefile pois pode ser postgis
 				$shparq = downloadTema2($map_file,$temausuario,$locaplic,$dir_tmp,$postgis_mapa);
@@ -222,7 +226,7 @@ switch (strtoupper($funcao))
 		$retorno = $pathresult;
 	break;
 	case "RELATORIO":
-		$yaml = yaml_parse_file($caminho."/result.yaml");
+		$yaml = yaml_parse_file($_GET["caminho"]."/result.yaml");
 		$resultados = $yaml["results"];
 		$retorno = array();
 		foreach($resultados as $r){
@@ -230,12 +234,8 @@ switch (strtoupper($funcao))
 		}
 	break;
 }
-if (!connection_aborted()){
-	if(isset($map_file) && isset($postgis_mapa) && $map_file != "")
+if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
-	cpjson($retorno);
 }
-else{
-	exit();
-}
+cpjson($retorno);
 ?>

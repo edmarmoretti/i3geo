@@ -13,6 +13,7 @@ text-align:left;
 </head>
 <body style="background-color:white;margin:10px">
 <?php
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 $s = PHP_SHLIB_SUFFIX;
 if(!function_exists('curl_init'))
