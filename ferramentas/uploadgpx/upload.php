@@ -21,8 +21,12 @@ if (ob_get_level() == 0) ob_start();
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
-if (isset($_FILES['i3GEOuploadgpx']['name']))
+if (isset($_FILES['i3GEOuploadgpx']['name']) && strlen(basename($_FILES['i3GEOuploadgpx']['name'])) < 200 )
 {
+	$checkphp = fileContemString($_FILES['i3GEOuploadgpx']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
 	//$ndir = dirname($filen);
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
@@ -33,7 +37,12 @@ if (isset($_FILES['i3GEOuploadgpx']['name']))
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$ArquivoDest = $_FILES['i3GEOuploadgpx']['name'];
+	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
 	$ArquivoDest = str_replace(".gpx","",$ArquivoDest).".gpx";
+
+	$ArquivoDest = strip_tags($ArquivoDest);
+	$ArquivoDest = htmlspecialchars($ArquivoDest, ENT_QUOTES);
+
 	verificaNome($ArquivoDest);
 
 	//sobe arquivo

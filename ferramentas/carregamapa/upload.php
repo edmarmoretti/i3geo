@@ -21,12 +21,15 @@ require_once (dirname(__FILE__)."/../../ms_configura.php");
 <body bgcolor="white" style="background-color:white">
 <p>
 <?php
-if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
+if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES['i3GEOcarregamapafilemap']['name'])) < 200)
 {
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = $dir_tmp;
 	$Arquivo = $_FILES['i3GEOcarregamapafilemap']['name'];
-	$Arquivo = str_replace(".map","",$Arquivo)."_up.map";
+	$Arquivo = str_replace(".map","",$Arquivo) . md5(uniqid(rand(), true)) . "_up.map";
+
+	$Arquivo = strip_tags($Arquivo);
+	$Arquivo = htmlspecialchars($Arquivo, ENT_QUOTES);
 
 	verificaNome($Arquivo);
 	/*
@@ -36,6 +39,12 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']))
 	if($statusNome != 1)
 	{echo "<p class='paragrafo' >Arquivo inv&aacute;lido.!";paraAguarde();exit;}
 	*/
+
+	$checkphp = fileContemString($_FILES['i3GEOcarregamapafilemap']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+
 	$nome = basename($Arquivo);
 	$arqtemp = $dirmap."/".$Arquivo;
 	$status =  move_uploaded_file($_FILES['i3GEOcarregamapafilemap']['tmp_name'],$dirmap."/".$Arquivo);

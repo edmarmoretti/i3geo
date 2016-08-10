@@ -3021,4 +3021,22 @@ function pegaProjecaoDefault($tipo=""){
 		return $i3GeoProjDefault[$tipo];
 	}
 }
+/**
+ * Verifica se uma string existe em um arquivo
+ */
+function fileContemString($arq,$s){
+	if(!file_exists($arq)){
+		return false;
+	}
+	$handle = fopen($arq, 'r');
+	$valid = false; // init as false
+	while (($buffer = fgets($handle)) !== false) {
+		if (strpos($buffer, $s) !== false) {
+			$valid = TRUE;
+			break; // Once you find the string, you should break out the loop.
+		}
+	}
+	fclose($handle);
+	return $valid;
+}
 ?>

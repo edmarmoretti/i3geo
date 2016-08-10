@@ -54,12 +54,36 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	verificaNome($_FILES['i3GEOuploadshp']['name']);
 	verificaNome($_FILES['i3GEOuploadshx']['name']);
 	verificaNome($_FILES['i3GEOuploaddbf']['name']);
+
 	if($_FILES['i3GEOuploadprj']['name'] != ""){
 		verificaNome($_FILES['i3GEOuploadprj']['name']);
 	}
+
+	$checkphp = fileContemString($_FILES['i3GEOuploadprj']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+	$checkphp = fileContemString($_FILES['i3GEOuploadshx']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+	$checkphp = fileContemString($_FILES['i3GEOuploaddbf']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+	$checkphp = fileContemString($_FILES['i3GEOuploadshp']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+
+
 	//remove acentos
 	$nomePrefixo = str_replace(" ","_",removeAcentos(str_replace(".shp","",$_FILES['i3GEOuploadshp']['name'])));
-	//$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4));
+
+	$nomePrefixo = strip_tags($nomePrefixo);
+	$nomePrefixo = htmlspecialchars($nomePrefixo, ENT_QUOTES);
+
+	$nomePrefixo = $nomePrefixo . md5(uniqid(rand(), true));
 
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
@@ -189,6 +213,9 @@ function paraAguarde(){
 	echo "<script>try{window.scrollTo(0,10000);window.parent.i3GEOF.upload.aguarde.visibility='hidden';}catch(e){};</script>";
 }
 function verificaNome($nome){
+	if(strlen(basename($nome)) > 200){
+		exit;
+	}
 	$nome = strtolower($nome);
 	$lista = explode(".",$nome);
 	$extensao = $lista[count($lista) - 1];

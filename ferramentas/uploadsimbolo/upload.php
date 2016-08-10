@@ -18,7 +18,13 @@ if (ob_get_level() == 0) ob_start();
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
-if (isset($_FILES['i3GEOuploadsimboloarq']['name'])){
+if (isset($_FILES['i3GEOuploadsimboloarq']['name']) && strlen(basename($_FILES['i3GEOuploadsimboloarq']['name'])) < 200){
+
+	$checkphp = fileContemString($_FILES['i3GEOuploadkml']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	ob_flush();
@@ -43,10 +49,20 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name'])){
 
 	$nome = str_replace(".png","",$nome).".png";
 
+	$nome = strip_tags($nome);
+	$nome = htmlspecialchars($nome, ENT_QUOTES);
+
+	$nome = $nome . md5(uniqid(rand(), true));
+
 	verificaNome($nome);
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadsimboloarq']['tmp_name'];
 	$destino = $dirDestino."/".$nome;
+
+	$check = getimagesize($Arquivo);
+	if($check === false) {
+		exit;
+	}
 
 	if(file_exists($destino))
 	{echo "<p class='paragrafo' >J&aacute; existe um arquivo com o nome ".$destino;paraAguarde();exit;}

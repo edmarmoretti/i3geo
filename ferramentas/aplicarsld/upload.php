@@ -22,7 +22,7 @@ $tema = $_GET["tema"];
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
-if (isset($_FILES['i3GEOaplicarsld']['name']))
+if (isset($_FILES['i3GEOaplicarsld']['name']) && strlen(basename($_FILES['i3GEOaplicarsld']['name'])) < 200 )
 {
 	//$ndir = dirname($filen);
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
@@ -31,11 +31,23 @@ if (isset($_FILES['i3GEOaplicarsld']['name']))
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$ArquivoDest = $_FILES['i3GEOaplicarsld']['name'];
+
+	$ArquivoDest = strip_tags($ArquivoDest);
+	$ArquivoDest = htmlspecialchars($ArquivoDest, ENT_QUOTES);
+
+	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
+
 	$ArquivoDest = str_replace(".sld","",$ArquivoDest).".sld";
 	verificaNome($ArquivoDest);
 
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOaplicarsld']['tmp_name'];
+
+	$checkphp = fileContemString($_FILES['i3GEOaplicarsld']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$ArquivoDest);
 
 	if($status != 1)

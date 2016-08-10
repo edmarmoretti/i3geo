@@ -20,8 +20,13 @@ if (ob_get_level() == 0) ob_start();
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
-if (isset($_FILES['i3GEOuploaddbffile']['name']))
+if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3GEOuploaddbffile']['name'])) < 200 )
 {
+	$checkphp = fileContemString($_FILES['i3GEOuploaddbffile']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+
 	//$ndir = dirname($filen);
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
@@ -32,12 +37,19 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']))
 	$dirmap = dirname($map_file);
 	//verifica nomes
 	$ArquivoDest = $_FILES['i3GEOuploaddbffile']['name'];
+
+	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
+
 	if($i3GEOuploaddbftipoarquivo != "dbf"){
 		$ArquivoDest = str_replace(".csv","",$ArquivoDest).".csv";
 	}
 	else{
 		$ArquivoDest = str_replace(".dbf","",$ArquivoDest).".dbf";
 	}
+
+	$ArquivoDest = strip_tags($ArquivoDest);
+	$ArquivoDest = htmlspecialchars($ArquivoDest, ENT_QUOTES);
+
 	verificaNome($ArquivoDest);
 	verificaNome($_FILES['i3GEOuploaddbffile']['name']);
 	//sobe arquivo

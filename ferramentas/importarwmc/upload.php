@@ -22,14 +22,25 @@ error_reporting(0);
 require_once (dirname(__FILE__)."/../../ms_configura.php");
 $dirmap = dirname($map_file);
 $arquivo = "";
-if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]))
+if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]) && strlen(basename($_FILES['i3GEOimportarwmc']['name'])) < 200)
 {
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	//verifica nomes
 	$ArquivoDest = $_FILES['i3GEOimportarwmc']['name'];
+	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
 	$ArquivoDest = str_replace(".xml","",$ArquivoDest).".xml";
+
+	$ArquivoDest = strip_tags($ArquivoDest);
+	$ArquivoDest = htmlspecialchars($ArquivoDest, ENT_QUOTES);
+
 	verificaNome($ArquivoDest);
 	//sobe arquivo
+
+	$checkphp = fileContemString($_FILES['i3GEOimportarwmc']['tmp_name'],"<?");
+	if($checkphp == true){
+		exit;
+	}
+
 	$Arquivo = $_FILES['i3GEOimportarwmc']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$ArquivoDest);
 	$arquivo = $dirmap."/".$_FILES['i3GEOimportarwmc']['name'];
