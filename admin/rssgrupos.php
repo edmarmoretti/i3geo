@@ -36,7 +36,7 @@ error_reporting(0);
 if(!isset($locaplic)){
 	include(dirname(__FILE__)."/../ms_configura.php");
 }
-include_once($locaplic."/classesphp/pega_variaveis.php");
+include_once(dirname(__FILE__)."/../classesphp/sani_request.php");
 include_once($locaplic."/admin/php/xml.php");
 $output = "xml";
 if(strtolower($_GET["output"]) == "json" || strtolower($_POST["output"]) == "json"){

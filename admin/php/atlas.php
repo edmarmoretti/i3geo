@@ -40,6 +40,13 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que de
 
 */
 include_once(dirname(__FILE__)."/login.php");
+
+$id = $_GET["id"];
+$id_atlas = $_GET["id_atlas"];
+$id_prancha = $_GET["id_prancha"];
+
+testaSafeNumerico([$id,$id_atlas,$id_prancha]);
+
 $funcoesEdicao = array(
 		"ALTERARATLAS",
 		"ALTERARPRANCHA",
@@ -437,27 +444,27 @@ function dadosAtlas()
 }
 function alterarAtlas()
 {
-	global $esquemaadmin,$publicado_atlas,$id_atlas,$basemapfile_atlas,$desc_atlas,$h_atlas,$w_atlas,$icone_atlas,$link_atlas,$pranchadefault_atlas,$template_atlas,$tipoguias_atlas,$titulo_atlas,$ordem_atlas;
+	global $esquemaadmin,$id_atlas;
 	try{
 		include("conexao.php");
 		if($id_atlas != ""){
 			if($convUTF){
-				$desc_atlas = utf8_encode($desc_atlas);
-				$titulo_atlas = utf8_encode($titulo_atlas);
+				$_GET["desc_atlas"] = utf8_encode($_GET["desc_atlas"]);
+				$_GET["titulo_atlas"] = utf8_encode($_GET["titulo_atlas"]);
 			}
 			$dataCol = array(
-					"publicado_atlas"=>$publicado_atlas,
-					"ordem_atlas"=>$ordem_atlas == "" ? 0 : $ordem_atlas,
-					"basemapfile_atlas"=>$basemapfile_atlas,
-					"desc_atlas"=>$desc_atlas,
-					"h_atlas"=>$h_atlas == "" ? 0 : $h_atlas,
-					"w_atlas"=>$w_atlas == "" ? 0 : $w_atlas,
-					"icone_atlas"=>$icone_atlas,
-					"link_atlas"=>$link_atlas,
-					"pranchadefault_atlas"=>$pranchadefault_atlas,
-					"template_atlas"=>$template_atlas,
-					"tipoguias_atlas"=>$tipoguias_atlas,
-					"titulo_atlas"=>$titulo_atlas
+					"publicado_atlas"=>$_GET["publicado_atlas"],
+					"ordem_atlas"=>$_GET["ordem_atlas"] == "" ? 0 : $_GET["ordem_atlas"],
+					"basemapfile_atlas"=>$_GET["basemapfile_atlas"],
+					"desc_atlas"=>$_GET["desc_atlas"],
+					"h_atlas"=>$_GET["h_atlas"] == "" ? 0 : $_GET["h_atlas"],
+					"w_atlas"=>$_GET["w_atlas"] == "" ? 0 : $_GET["w_atlas"],
+					"icone_atlas"=>$_GET["icone_atlas"],
+					"link_atlas"=>$_GET["link_atlas"],
+					"pranchadefault_atlas"=>$_GET["pranchadefault_atlas"],
+					"template_atlas"=>$_GET["template_atlas"],
+					"tipoguias_atlas"=>$_GET["tipoguias_atlas"],
+					"titulo_atlas"=>$_GET["titulo_atlas"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_atlas",$dataCol,"WHERE id_atlas = $id_atlas");
 			$retorna = $id_atlas;
@@ -492,23 +499,24 @@ function alterarAtlas()
 }
 function alterarPrancha()
 {
-	global $esquemaadmin,$mapext_prancha,$id_atlas,$id_prancha,$desc_prancha,$h_prancha,$w_prancha,$icone_prancha,$link_prancha,$titulo_prancha,$ordem_prancha;
+	global $esquemaadmin,$id_atlas,$id_prancha;
+
 	try{
 		include("conexao.php");
 		if($id_prancha != ""){
 			if($convUTF){
-				$desc_prancha = utf8_encode($desc_prancha);
-				$titulo_prancha = utf8_encode($titulo_prancha);
+				$_GET["desc_prancha"] = utf8_encode($_GET["desc_prancha"]);
+				$_GET["titulo_prancha"] = utf8_encode($_GET["titulo_prancha"]);
 			}
 			$dataCol = array(
-					"ordem_prancha"=>$ordem_prancha,
-					"mapext_prancha"=>$mapext_prancha,
-					"desc_prancha"=>$desc_prancha,
-					"h_prancha"=>$h_prancha == "" ? 0 : $h_prancha,
-					"w_prancha"=>$w_prancha == "" ? 0 : $w_prancha,
-					"icone_prancha"=>$icone_prancha,
-					"link_prancha"=>$link_prancha,
-					"titulo_prancha"=>$titulo_prancha
+					"ordem_prancha"=>$_GET["ordem_prancha"],
+					"mapext_prancha"=>$_GET["mapext_prancha"],
+					"desc_prancha"=>$_GET["desc_prancha"],
+					"h_prancha"=>$_GET["h_prancha"] == "" ? 0 : $_GET["h_prancha"],
+					"w_prancha"=>$_GET["w_prancha"] == "" ? 0 : $_GET["w_prancha"],
+					"icone_prancha"=>$_GET["icone_prancha"],
+					"link_prancha"=>$_GET["link_prancha"],
+					"titulo_prancha"=>$_GET["titulo_prancha"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_atlasp",$dataCol,"WHERE id_prancha = $id_prancha");
 			$retorna = $id_prancha;
@@ -522,8 +530,8 @@ function alterarPrancha()
 				"ordem_prancha"=>$o,
 				"mapext_prancha"=>'',
 				"desc_prancha"=>'',
-				"h_prancha"=>$h_prancha == "" ? 0 : $h_prancha,
-				"w_prancha"=>$w_prancha == "" ? 0 : $w_prancha,
+				"h_prancha"=>$_GET["h_prancha"] == "" ? 0 : $_GET["h_prancha"],
+				"w_prancha"=>$_GET["w_prancha"] == "" ? 0 : $_GET["w_prancha"],
 				"icone_prancha"=>'',
 				"link_prancha"=>'',
 				"titulo_prancha"=>'',
@@ -540,14 +548,14 @@ function alterarPrancha()
 	}
 }
 function alterarTema(){
-	global $esquemaadmin,$id_tema,$id_prancha,$codigo_tema,$ligado_tema,$ordem_tema;
+	global $esquemaadmin,$id_tema,$id_prancha;
 	try{
 		include("conexao.php");
 		if($id_tema != ""){
 			$dataCol = array(
-				"ordem_tema"=>$ordem_tema,
-				"codigo_tema"=>$codigo_tema,
-				"ligado_tema"=>$ligado_tema
+				"ordem_tema"=>$_GET["ordem_tema"],
+				"codigo_tema"=>$_GET["codigo_tema"],
+				"ligado_tema"=>$_GET["ligado_tema"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_atlast",$dataCol,"WHERE id_tema = $id_tema");
 			$retorna = $id_tema;
@@ -558,8 +566,8 @@ function alterarTema(){
 			$o = $o[0]['o'] + 1;
 			$dataCol = array(
 				"ordem_tema"=>$o,
-				"codigo_tema"=>$codigo_tema,
-				"ligado_tema"=>$ligado_tema,
+				"codigo_tema"=>$_GET["codigo_tema"],
+				"ligado_tema"=>$_GET["ligado_tema"],
 				"id_prancha"=>$id_prancha
 			);
 			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_atlast",$dataCol,"codigo_tema","id_tema");

@@ -42,6 +42,9 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 
 */
 include_once(dirname(__FILE__)."/login.php");
+$id = $_GET["id"];
+testaNumerico([$id]);
+
 $funcoesEdicao = array(
 		"ADICIONARTEMARAIZ",
 		"ADICIONARTEMARAIZGRUPO",
@@ -69,6 +72,7 @@ if($idioma == "")
 {
 	$idioma = "pt";
 }
+
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
@@ -539,7 +543,8 @@ switch (strtoupper($funcao))
 Altera o registro de um n&iacute;vel 3 (temas)
 */
 function alteraN3(){
-	global $publicado,$n3_perfil,$id,$id_n2,$id_tema,$ordem,$esquemaadmin;
+	global $publicado,$id,$id_n2,$id_tema,$ordem,$esquemaadmin;
+	$n3_perfil = $_GET["n3_perfil"];
 	try	{
 		require_once("conexao.php");
 		if($id != ""){
@@ -576,7 +581,8 @@ function alteraN3(){
 Altera o registro de um n&iacute;vel 2
 */
 function alteraN2(){
-	global $publicado,$n2_perfil,$id,$id_subgrupo,$id_n1,$esquemaadmin;
+	global $publicado,$id,$id_subgrupo,$id_n1,$esquemaadmin;
+	$n2_perfil = $_GET["n2_perfil"];
 	try	{
 		require("conexao.php");
 		if($id != ""){
@@ -612,7 +618,8 @@ function alteraN2(){
 Altera o registro de um n&iacute;vel 1 (grupos)
 */
 function alteraN1(){
-	global $publicado,$n1_perfil,$id_grupo,$id,$id_menu,$esquemaadmin;
+	global $publicado,$id_grupo,$id,$id_menu,$esquemaadmin;
+	$n1_perfil = $_GET["n1_perfil"];
 	try{
 		require("conexao.php");
 		if($id != ""){

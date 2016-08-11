@@ -44,8 +44,9 @@ error_reporting(0);
 if(!isset($locaplic)){
 	include(dirname(__FILE__)."/../ms_configura.php");
 }
-include_once($locaplic."/classesphp/pega_variaveis.php");
+include_once(dirname(__FILE__)."/../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 include_once($locaplic."/admin/php/xml.php");
 echo header("Content-type: application/xml");
-echo geraRSStemasRaiz($locaplic,$id,$nivel);
+echo geraRSStemasRaiz($locaplic,$_GET["id"],$_GET["nivel"]);
 ?>

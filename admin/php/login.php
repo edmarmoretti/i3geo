@@ -62,13 +62,13 @@ error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
-include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+include_once(dirname(__FILE__)."/../safe.php");
 include_once(dirname(__FILE__)."/admin.php");
 error_reporting(0);
 session_write_close();
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login
-if(!empty($usuario) && !empty($senha)){
+if(!empty($_POST["usuario"]) && !empty($_POST["senha"])){
 	logoutUsuario();
 	session_regenerate_id();
 	$_SESSION = array();
@@ -97,6 +97,9 @@ switch (strtoupper($funcao))
 
 	*/
 	case "LOGIN":
+		$usuario = $_POST["usuario"];
+		$senha = $_POST["senha"];
+
 		$teste = autenticaUsuario($usuario,$senha);
 		if($teste != false){
 			$_SESSION["usuario"] = $usuario;
@@ -137,12 +140,11 @@ switch (strtoupper($funcao))
 	*/
 	case "VALIDAOPERACAOSESSAO":
 		$retorno = "nao";
-		if($operacao == ""){
+		if($_GET["operacao"] == ""){
 			$retorno = "sim";
 		}
 		else{
-			//echo "oi";exit;
-			if(verificaOperacaoSessao($operacao) == true){
+			if(verificaOperacaoSessao($_GET["operacao"]) == true){
 				$retorno = "sim";
 			}
 			else{
@@ -163,8 +165,8 @@ switch (strtoupper($funcao))
 	*/
 	case "RECUPERARSENHA":
 		$retorno = false;
-		if(!empty($usuario)){
-			$retorno = recuperarSenha($usuario);
+		if(!empty($_POST["usuario"])){
+			$retorno = recuperarSenha($_POST["usuario"]);
 		}
 		cpjson($retorno);
 	break;
@@ -181,8 +183,8 @@ switch (strtoupper($funcao))
 	*/
 	case "ALTERARSENHA":
 		$retorno = false;
-		if(!empty($usuario)){
-			$retorno = alterarSenha($usuario,$novaSenha);
+		if(!empty($_POST["usuario"])){
+			$retorno = alterarSenha($_POST["usuario"],$_POST["novaSenha"]);
 		}
 		cpjson($retorno);
 	break;

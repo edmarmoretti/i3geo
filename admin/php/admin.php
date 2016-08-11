@@ -41,7 +41,8 @@ if(!file_exists($dir_tmp)){
 	@mkdir ($dir_tmp,0744);
 	chmod($dir_tmp,0744);
 }
-include_once($locaplic."/classesphp/pega_variaveis.php");
+//TODO retirar daqui
+//include_once($locaplic."/classesphp/pega_variaveis.php");
 error_reporting(0);
 
 //
@@ -66,7 +67,8 @@ if(!empty($esquemaadmin)){
 function testaNumerico($valores){
 	foreach ($valores as $valor) {
 		if(!empty($valor) && !is_numeric($valor)) {
-			echo "valor nao numerico";
+			ob_clean();
+			header ( "HTTP/1.1 403 valor nao numerico" );
 			exit;
 		}
 	}

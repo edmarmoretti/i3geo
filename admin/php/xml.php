@@ -119,12 +119,13 @@ Retorno:
 
 RSS
 */
-function geraRSScomentariosTemas($locaplic,$id_tema="")
-{
+function geraRSScomentariosTemas($locaplic,$id_tema=""){
 	global $esquemaadmin;
+	xml_testaNum([$id_tema]);
 	$sql = "select '' as tipo_ws, b.nome_tema||' '||a.data as nome_ws,a.openidnome||' '||a.openidurl||' &lt;br&gt;'||a.comentario as desc_ws, a.openidnome as autor_ws, b.link_tema as link_ws from ".$esquemaadmin."i3geoadmin_comentarios as a,".$esquemaadmin."i3geoadmin_temas as b where a.id_tema = b.id_tema ";
-	if($id_tema != "")
-	{$sql .= " and a.id_tema = $id_tema ";}
+	if($id_tema != ""){
+		$sql .= " and a.id_tema = $id_tema ";
+	}
 	return geraXmlRSS($locaplic,$sql,"Lista de comentarios");
 }
 /*
@@ -145,6 +146,7 @@ RSS
 function geraRSStemas($locaplic,$id_n2,$output="xml")
 {
 	global $esquemaadmin;
+	xml_testaNum([$id_n2]);
 	$sql = "
 		select '' as tipo_ws, i3geoadmin_temas.codigo_tema as id_ws,i3geoadmin_temas.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||i3geoadmin_temas.codigo_tema as link_ws,i3geoadmin_temas.link_tema as autor_ws
 		from ".$esquemaadmin."i3geoadmin_n3 as n3
@@ -173,6 +175,7 @@ RSS
 function geraRSStemasRaiz($locaplic,$id,$nivel)
 {
 	global $esquemaadmin;
+	xml_testaNum([$id,$nivel]);
 	$sql = "
 	select '' as tipo_ws, i3geoadmin_temas.codigo_tema as id_ws,i3geoadmin_temas.nome_tema as nome_ws,'' as desc_ws,'php/parsemapfile.php?id='||i3geoadmin_temas.codigo_tema as link_ws,i3geoadmin_temas.link_tema as autor_ws
 	from ".$esquemaadmin."i3geoadmin_raiz as r
@@ -199,6 +202,7 @@ RSS
 function geraRSSsubgrupos($locaplic,$id_n1,$output="json")
 {
 	global $esquemaadmin;
+	xml_testaNum([$id_n1]);
 	$sql = "select '' as tipo_ws, n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as g ";
 	$sql .= " where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' and n2.publicado != 'NAO' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos",$output);
@@ -737,6 +741,7 @@ function geraRSSmapas($locaplic,$output)
 function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 {
 	global $esquemaadmin;
+	xml_testaNum([$id_menu]);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 	if (!isset($perfil)){$perfil = "";}
@@ -794,6 +799,7 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 function geraXmlMenutemas_pegasubgrupos($id_n1,$xml,$dbh,$tipo,$perfil)
 {
 	global $esquemaadmin;
+	xml_testaNum([$id_n1]);
 	$q = "select subgrupos.id_subgrupo,nome_subgrupo,id_n2,n2.n2_perfil as perfil from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as subgrupos where n2.id_n1 = $id_n1 and n2.id_subgrupo = subgrupos.id_subgrupo ";
 	//echo $q;exit;
 	$qsgrupos = $dbh->query($q);
@@ -821,6 +827,7 @@ function geraXmlMenutemas_pegasubgrupos($id_n1,$xml,$dbh,$tipo,$perfil)
 function geraXmlMenutemas_pegatemas($id_n2,$xml,$dbh,$perfil)
 {
 	global $esquemaadmin;
+	xml_testaNum([$id_n2]);
 	$q = "select nome_tema,codigo_tema,desc_tema,link_tema,tipoa_tema,tags_tema,kml_tema,ogc_tema,download_tema,n3.n3_perfil as perfil from ".$esquemaadmin."i3geoadmin_n3 as n3,".$esquemaadmin."i3geoadmin_temas as temas where n3.id_n2 = $id_n2 and n3.id_tema = temas.id_tema ";
 	$qtemas = $dbh->query($q);
 	$xml = geraXmlMenutemas_notema($qtemas,$xml,$perfil);
@@ -863,6 +870,7 @@ function geraXmlMenutemas_notema($qtemas,$xml,$perfil)
 function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 {
 	global $esquemaadmin;
+	xml_testaNum([$id_atlas]);
 	$q = "select * from ".$esquemaadmin."i3geoadmin_atlasp as p where p.id_atlas = $id_atlas order by ordem_prancha";
 	$qpranchas = $dbh->query($q);
 	foreach($qpranchas as $row)
@@ -886,6 +894,7 @@ function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
 function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 {
 	global $esquemaadmin;
+	xml_testaNum([$id_prancha]);
 	$q = "select t.codigo_tema,t.ligado_tema from ".$esquemaadmin."i3geoadmin_atlast as t where t.id_prancha = '$id_prancha' order by ordem_tema";
 	//echo $q;
 	$qtemas = $dbh->query($q);
@@ -901,6 +910,7 @@ function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
 function geraXmlSistemas_pegafuncoes($perfil,$xml,$id_sistema,$dbh)
 {
 	global $esquemaadmin;
+	xml_testaNum([$id_sistema]);
 	$q = "select * from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema = '$id_sistema'";
 	$qtemas = $dbh->query($q);
 	foreach($qtemas as $row)
@@ -943,5 +953,13 @@ function entity_decode($texto)
 {
 	return html_entity_decode($texto);
 }
-
+function xml_testaNum($valores){
+	foreach ($valores as $valor) {
+		if(!empty($valor) && !is_numeric($valor)) {
+			ob_clean();
+			header ( "HTTP/1.1 403 valor nao numerico" );
+			exit;
+		}
+	}
+}
 ?>
