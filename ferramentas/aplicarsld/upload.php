@@ -43,7 +43,7 @@ if (isset($_FILES['i3GEOaplicarsld']['name']) && strlen(basename($_FILES['i3GEOa
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOaplicarsld']['tmp_name'];
 
-	$checkphp = fileContemString($_FILES['i3GEOaplicarsld']['tmp_name'],"<?");
+	$checkphp = fileContemString($_FILES['i3GEOaplicarsld']['tmp_name'],"<?php");
 	if($checkphp == true){
 		exit;
 	}
@@ -54,7 +54,7 @@ if (isset($_FILES['i3GEOaplicarsld']['name']) && strlen(basename($_FILES['i3GEOa
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SLD";paraAguarde();exit;}
 	if($status == 1)
 	{
-		echo "<p class='paragrafo' >Arquivo enviado. Aplicando SLD...$tema</p>";
+		echo "<p class='paragrafo' >Arquivo enviado. Aplicando SLD...</p>";
 		$layer = $mapa->getlayerbyname($tema);
 		$arq = $dirmap."/".$ArquivoDest;
 		$abre = fopen($arq, "r");

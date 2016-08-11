@@ -20,10 +20,14 @@ if (ob_get_level() == 0) ob_start();
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
+$i3GEOuploaddbftipoarquivo = $_GET["i3GEOuploaddbftipoarquivo"];
+$i3GEOuploaddbfnomex = $_GET["i3GEOuploaddbfnomex"];
+$i3GEOuploaddbfnomey = $_GET["i3GEOuploaddbfnomey"];
 if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3GEOuploaddbffile']['name'])) < 200 )
 {
-	$checkphp = fileContemString($_FILES['i3GEOuploaddbffile']['tmp_name'],"<?");
+	$checkphp = fileContemString($_FILES['i3GEOuploaddbffile']['tmp_name'],"<?php");
 	if($checkphp == true){
+		echo "erro";
 		exit;
 	}
 
@@ -40,7 +44,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 
 	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
 
-	if($i3GEOuploaddbftipoarquivo != "dbf"){
+	if($_GET["i3GEOuploaddbftipoarquivo"] != "dbf"){
 		$ArquivoDest = str_replace(".csv","",$ArquivoDest).".csv";
 	}
 	else{
@@ -75,7 +79,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 				include_once(dirname(__FILE__)."/../../pacotes/parsecsv/parsecsv.lib.php");
 				$csv = new parseCSV();
 				$csv->delimiter = $separador;
-				$dados = $csv->parse($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
+				$dados = $csv->parse($dirmap."/".$ArquivoDest);
 				$conta = 0;
 				$xy = array();
 				$colunas = array_keys($csv->data[0]);
@@ -111,9 +115,9 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 				xbase_close($db);
 			}
 			else{
-				copy($dirmap."/".$_FILES['i3GEOuploaddbffile']['name'],$dirmap."/".$nome.".dbf");
+				copy($dirmap."/".$ArquivoDest,$dirmap."/".$nome.".dbf");
 			}
-			echo "<p class='paragrafo'>Arquivo enviado. Criando shape file...$nomeshp </p>";
+			echo "<p class='paragrafo'>Arquivo enviado. Criando shape file... </p>";
 			ob_flush();
 			flush();
 			sleep(1);
@@ -124,9 +128,6 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 				paraAguarde();
 			}
 			$shapefileObj = ms_newShapefileObj($nomeshp,-2);
-			$i3GEOuploaddbftipoarquivo = $_GET["i3GEOuploaddbftipoarquivo"];
-			$i3GEOuploaddbfnomex = $_GET["i3GEOuploaddbfnomex"];
-			$i3GEOuploaddbfnomey = $_GET["i3GEOuploaddbfnomey"];
 
 			if($i3GEOuploaddbftipoarquivo != "dbf"){
 				foreach($csv->data as $d){
@@ -138,8 +139,8 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 			else
 			{
 				require_once(dirname(__FILE__)."/../../pacotes/phpxbase/api_conversion.php");
-				echo "<p class='paragrafo'>Lendo arquivo ".$dirmap."/".$_FILES['i3GEOuploaddbffile']['name']."</p>";
-				$dbf = xbase_open($dirmap."/".$_FILES['i3GEOuploaddbffile']['name']);
+				echo "<p class='paragrafo'>Lendo arquivo </p>";
+				$dbf = xbase_open($dirmap."/".$nome.".dbf");
 				$records = xbase_numrecords($dbf);
 				echo "<p class='paragrafo'>Numero de pontos: $records</p>";
 				ob_flush();
@@ -157,8 +158,8 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 			$shapefileObj->free();
 			$novolayer = ms_newLayerObj($mapa);
 			$novolayer->set("data",$nomeshp);
-			$novolayer->set("name",basename($nomeshp));
-			$novolayer->setmetadata("TEMA",basename($nomeshp));
+			$novolayer->set("name",$_FILES['i3GEOuploaddbffile']['name']);
+			$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploaddbffile']['name']);
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->setmetadata("TEMALOCAL","SIM");
 			$novolayer->setmetadata("CLASSE","SIM");

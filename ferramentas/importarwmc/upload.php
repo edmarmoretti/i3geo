@@ -36,7 +36,7 @@ if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]
 	verificaNome($ArquivoDest);
 	//sobe arquivo
 
-	$checkphp = fileContemString($_FILES['i3GEOimportarwmc']['tmp_name'],"<?");
+	$checkphp = fileContemString($_FILES['i3GEOimportarwmc']['tmp_name'],"<?php");
 	if($checkphp == true){
 		exit;
 	}

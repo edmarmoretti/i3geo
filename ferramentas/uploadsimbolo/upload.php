@@ -20,7 +20,7 @@ if (ob_get_level() == 0) ob_start();
 <?php
 if (isset($_FILES['i3GEOuploadsimboloarq']['name']) && strlen(basename($_FILES['i3GEOuploadsimboloarq']['name'])) < 200){
 
-	$checkphp = fileContemString($_FILES['i3GEOuploadkml']['tmp_name'],"<?");
+	$checkphp = fileContemString($_FILES['i3GEOuploadsimboloarq']['tmp_name'],"<?");
 	if($checkphp == true){
 		exit;
 	}
@@ -65,15 +65,14 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name']) && strlen(basename($_FILES['
 	}
 
 	if(file_exists($destino))
-	{echo "<p class='paragrafo' >J&aacute; existe um arquivo com o nome ".$destino;paraAguarde();exit;}
+	{echo "<p class='paragrafo' >J&aacute; existe um arquivo com o nome ";paraAguarde();exit;}
 	$status =  move_uploaded_file($Arquivo,$destino);
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo. Pode ser uma limita&ccedil;&atilde;o quanto ao tamanho do arquivo.";paraAguarde();exit;}
 	if(!file_exists($destino))
-	{echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ".$destino;paraAguarde();exit;}
+	{echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ";paraAguarde();exit;}
 
 	echo "<p class='paragrafo' >Arquivo enviado.</p>";
-	echo "<p class='paragrafo'>Nome: ".$destino." </p>";
 }
 else
 {

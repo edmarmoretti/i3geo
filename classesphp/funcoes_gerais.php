@@ -3030,7 +3030,8 @@ function fileContemString($arq,$s){
 	}
 	$handle = fopen($arq, 'r');
 	$valid = false; // init as false
-	while (($buffer = fgets($handle)) !== false) {
+	while(! feof($handle)) {
+		$buffer = fgets($handle);
 		if (strpos($buffer, $s) !== false) {
 			$valid = TRUE;
 			break; // Once you find the string, you should break out the loop.

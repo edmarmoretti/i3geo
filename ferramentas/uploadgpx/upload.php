@@ -23,8 +23,9 @@ if (ob_get_level() == 0) ob_start();
 <?php
 if (isset($_FILES['i3GEOuploadgpx']['name']) && strlen(basename($_FILES['i3GEOuploadgpx']['name'])) < 200 )
 {
-	$checkphp = fileContemString($_FILES['i3GEOuploadgpx']['tmp_name'],"<?");
+	$checkphp = fileContemString($_FILES['i3GEOuploadgpx']['tmp_name'],"<?php");
 	if($checkphp == true){
+		echo "erro";
 		exit;
 	}
 	//$ndir = dirname($filen);
@@ -49,10 +50,12 @@ if (isset($_FILES['i3GEOuploadgpx']['name']) && strlen(basename($_FILES['i3GEOup
 	$Arquivo = $_FILES['i3GEOuploadgpx']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$ArquivoDest);
 
-	if($status != 1)
-	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo gpx";paraAguarde();exit;}
-	if($status == 1)
-	{
+	if($status != 1){
+		echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo gpx";
+		paraAguarde();
+		exit;
+	}
+	if($status == 1){
 		echo "<p class='paragrafo' >Arquivo enviado. Adicionando tema...</p>";
 		ob_flush();
 		flush();
@@ -66,8 +69,8 @@ if (isset($_FILES['i3GEOuploadgpx']['name']) && strlen(basename($_FILES['i3GEOup
 			else
 			{$novolayer->set("connectiontype",MS_OGR);}
 			$nome = str_replace(".","",$ArquivoDest);
-			$novolayer->set("name",$nome.$tipo);
-			$novolayer->setmetadata("TEMA",$ArquivoDest." ".$tipo);
+			$novolayer->set("name",$_FILES['i3GEOuploadgpx']['name'].$tipo);
+			$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadgpx']['name']." ".$tipo);
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->setmetadata("CLASSE","SIM");
 			$novolayer->setmetadata("TEXTO","NAO");

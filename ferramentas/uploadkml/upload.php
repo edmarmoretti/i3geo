@@ -25,7 +25,7 @@ if (ob_get_level() == 0) ob_start();
 <?php
 if (isset($_FILES['i3GEOuploadkml']['name']) && strlen(basename($_FILES['i3GEOuploadkml']['name'])) < 200 )
 {
-	$checkphp = fileContemString($_FILES['i3GEOuploadkml']['tmp_name'],"<?");
+	$checkphp = fileContemString($_FILES['i3GEOuploadkml']['tmp_name'],"<?php");
 	if($checkphp == true){
 		exit;
 	}
@@ -70,7 +70,7 @@ if (isset($_FILES['i3GEOuploadkml']['name']) && strlen(basename($_FILES['i3GEOup
 
 			$nome = str_replace(".","",$ArquivoDest);
 			$novolayer->set("name",$nome.$tipo);
-			$novolayer->setmetadata("TEMA",$ArquivoDest." ".$tipo);
+			$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadkml']['name']." ".$tipo);
 			$novolayer->setmetadata("DOWNLOAD","SIM");
 			$novolayer->setmetadata("CLASSE","SIM");
 			$novolayer->setmetadata("TEXTO","NAO");

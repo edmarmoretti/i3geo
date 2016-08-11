@@ -59,24 +59,6 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		verificaNome($_FILES['i3GEOuploadprj']['name']);
 	}
 
-	$checkphp = fileContemString($_FILES['i3GEOuploadprj']['tmp_name'],"<?");
-	if($checkphp == true){
-		exit;
-	}
-	$checkphp = fileContemString($_FILES['i3GEOuploadshx']['tmp_name'],"<?");
-	if($checkphp == true){
-		exit;
-	}
-	$checkphp = fileContemString($_FILES['i3GEOuploaddbf']['tmp_name'],"<?");
-	if($checkphp == true){
-		exit;
-	}
-	$checkphp = fileContemString($_FILES['i3GEOuploadshp']['tmp_name'],"<?");
-	if($checkphp == true){
-		exit;
-	}
-
-
 	//remove acentos
 	$nomePrefixo = str_replace(" ","_",removeAcentos(str_replace(".shp","",$_FILES['i3GEOuploadshp']['name'])));
 
@@ -88,7 +70,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	//sobe arquivo
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
 	if(file_exists($dirmap."/".$nomePrefixo.".shp"))
-	{echo "<p class='paragrafo' >J&aacute; existe um SHP com o nome ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}
+	{echo "<p class='paragrafo' >J&aacute; existe um SHP com o nome ";paraAguarde();exit;}
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$nomePrefixo.".shp");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP. Pode ser uma limita&ccedil;&atilde;o quanto ao tamanho do arquivo ou permiss&atilde;o de escrita na pasta indicada.";paraAguarde();exit;}
@@ -112,10 +94,24 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	}
 
 	if(!file_exists($dirmap."/".$nomePrefixo.".shp"))
-	{echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ".$dirmap."/".$nomePrefixo;paraAguarde();exit;}
+	{echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ";paraAguarde();exit;}
+
+
+	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".prj","<?");
+	if($checkphp == true){
+		exit;
+	}
+	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".shx","<?");
+	if($checkphp == true){
+		exit;
+	}
+	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".dbf","<?");
+	if($checkphp == true){
+		exit;
+	}
 
 	echo "<p class='paragrafo' >Arquivo enviado.</p>";
-	echo "<p class='paragrafo'>Nome: ".$dirmap."/".$nomePrefixo.".shp </p>";
+	echo "<p class='paragrafo'></p>";
 	//nesse caso o formulario de upload esta sendo executado de dentro de um mapa interativo, por isso o mapfile ja existe
 	if(isset($map_file)){
 		echo "<p class='paragrafo' >Adicionando tema...</p>";
@@ -124,8 +120,8 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		sleep(1);
 		$novolayer = ms_newLayerObj($mapa);
 		$novolayer->set("data",$dirmap."/".$nomePrefixo.".shp");
-		$novolayer->set("name",$nomePrefixo.".shp");
-		$novolayer->setmetadata("TEMA",$nomePrefixo.".shp");
+		$novolayer->set("name",$_FILES['i3GEOuploadshp']['name']);
+		$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadshp']['name']);
 		$novolayer->setmetadata("DOWNLOAD","SIM");
 		$sfileObj = ms_newShapefileObj($dirmap."/".$nomePrefixo.".shp", -1);
 		if(!isset($tipo) || $tipo == "")
@@ -199,7 +195,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		$data = $dirmap."/".$nomePrefixo.".shp";
 		include_once($locaplic."/admin/php/editormapfile.php");
 		echo "<b><p class='paragrafo' >Criado!!!<br>";
-		echo "Para editar clique: <a href='../../admin/html/editormapfile.html' target=_blank >".$nomePrefixo."</a>";
+		echo "Para editar clique: <a href='../../admin/html/editormapfile.html' target=_blank >editar</a>";
 		echo "<script>window.scrollTo(0,10000);i3GEO.util.insereCookie('I3GEOletraAdmin','".$nomePrefixo."');</script>";
 	}
 }
