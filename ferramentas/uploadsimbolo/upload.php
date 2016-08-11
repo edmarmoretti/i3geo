@@ -26,6 +26,11 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name']) && strlen(basename($_FILES['
 	}
 
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
+
+	if(isset($logExec) && $logExec["upload"] == true){
+		i3GeoLog("uploadsimbolo filename:" . $_FILES['i3GEOuploadsimboloarq']['name'],$dir_tmp);
+	}
+
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	ob_flush();
 	flush();

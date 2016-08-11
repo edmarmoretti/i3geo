@@ -86,11 +86,20 @@ false
 
 */
 $logTransacoes = false;
-//TODO documentar
+//TODO documentar moodle
+/*
+ Variale: $logExec
+
+ Ativa a geracao do log em ms_tmp/.log_i3geo_
+
+ Para evitar o log, basta definir os valores como false ou $logExec = ''
+
+*/
 $logExec = array(
 	"mapa_" => true, //mapa_openlayers e mapa_googlemaps
 	"init" => true, //ms_criamapa mapa_inicia
-	"ogc" => true
+	"ogc" => true, //servico ogc
+	"upload" => true //ferramentas de upload
 );
 /*
  Variable: $i3GeoProjDefault

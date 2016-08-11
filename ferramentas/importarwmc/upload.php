@@ -22,6 +22,11 @@ error_reporting(0);
 require_once (dirname(__FILE__)."/../../ms_configura.php");
 $dirmap = dirname($map_file);
 $arquivo = "";
+
+if(isset($logExec) && $logExec["upload"] == true){
+	i3GeoLog("importarwmc filename:" . $_FILES['i3GEOimportarwmc']['name'],$dir_tmp);
+}
+
 if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]) && strlen(basename($_FILES['i3GEOimportarwmc']['name'])) < 200)
 {
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
