@@ -102,7 +102,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $postgis_mapa,$statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $dir_tmp, $logExec, $postgis_mapa,$statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	//
 	//verifica se algum tema e restrito a determinado usuario
 	//as funcoes de validacao encontram-se em funcoes_gerais.php
@@ -111,6 +111,11 @@ function iniciaMapa()
 		include_once("funcoes_gerais.php");
 	}
 	validaAcessoTemas($map_file);
+
+	if($dir_tmp != "" && isset($logExec) && $logExec["init"] == true){
+		i3GeoLog("iniciaMapa $interface",$dir_tmp);
+	}
+
 	if(!isset($kmlurl)){
 		$kmlurl = "";
 	}

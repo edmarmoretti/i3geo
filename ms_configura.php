@@ -86,6 +86,12 @@ false
 
 */
 $logTransacoes = false;
+//TODO documentar
+$logExec = array(
+	"mapa_" => true, //mapa_openlayers e mapa_googlemaps
+	"init" => true, //ms_criamapa mapa_inicia
+	"ogc" => true
+);
 /*
  Variable: $i3GeoProjDefault
 

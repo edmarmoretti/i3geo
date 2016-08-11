@@ -286,7 +286,9 @@ $versao = $versao["principal"];
 if(!isset($dir_tmp)){
 	include_once (dirname(__FILE__)."/ms_configura.php");
 }
-i3GeoLog("ms_criamapa",$dir_tmp);
+if(isset($logExec) && $logExec["init"] == true){
+	i3GeoLog("ms_criamapa ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
+}
 if(!empty($restauramapa)){
 	$base = restauraMapaAdmin($restauramapa,$dir_tmp);
 	$m = ms_newMapObj($base);
@@ -604,6 +606,7 @@ $_SESSION["imgurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atu
 $_SESSION["tmpurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual;
 $_SESSION["map_file"] = $tmpfname;
 $_SESSION["mapext"] = $mapext;
+$_SESSION["logExec"] = $logExec;
 if (isset($executa)){
 	if (file_exists($executa)){
 		//include_once ($executa);

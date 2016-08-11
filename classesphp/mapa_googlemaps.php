@@ -146,7 +146,10 @@ elseif(isset($_GET["BBOX"])){
 //por seguranca
 include_once("funcoes_gerais.php");
 
-i3GeoLog("mapa_googlemaps",$_SESSION["dir_tmp"]);
+$logExec = $_SESSION["logExec"];
+if(isset($logExec) && $logExec["mapa_"] == true){
+	i3GeoLog("mapa_googlemaps ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
+}
 
 restauraCon($map_fileX,$postgis_mapa);
 
