@@ -130,6 +130,7 @@ $cache = true;
 include(dirname(__FILE__)."/ms_configura.php");
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 
+i3GeoLog("ogc ".implode("&",$_GET),$_SESSION["dir_tmp"]);
 //
 //ajusta o default
 //

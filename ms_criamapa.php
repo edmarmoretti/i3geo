@@ -223,6 +223,7 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 //
 //quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute; sendo utilizado como um include em classesphp/mapa_controle.php
 //
+
 ms_ResetErrorList();
 if(!isset($funcao)){
 	ob_end_clean();
@@ -285,6 +286,7 @@ $versao = $versao["principal"];
 if(!isset($dir_tmp)){
 	include_once (dirname(__FILE__)."/ms_configura.php");
 }
+i3GeoLog("ms_criamapa",$dir_tmp);
 if(!empty($restauramapa)){
 	$base = restauraMapaAdmin($restauramapa,$dir_tmp);
 	$m = ms_newMapObj($base);

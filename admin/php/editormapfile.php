@@ -40,6 +40,14 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que de
 
 */
 include_once(dirname(__FILE__)."/login.php");
+
+$id = $_GET["id"];
+
+testaSafeNumerico([$id]);
+
+$codigoMap = $_GET["codigoMap"];
+$codigoLayer = $_GET["codigoLayer"];
+
 $funcoesEdicao = array(
 		"CRIARNOVOMAP",
 		"EDITASIMBOLO",
@@ -68,7 +76,8 @@ $funcoesEdicao = array(
 		"ALTERAREDITAVEL",
 		"PEGAPLUGIN",
 		"GRAVAPLUGIN",
-		"REMOVEPLUGIN"
+		"REMOVEPLUGIN",
+		"DOWNLOADGVP"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
@@ -91,8 +100,10 @@ error_reporting(0);
 //algumas funcoes podem ser inseridas com include em outros programas
 //nesse caso, defina output como "retorno"
 //caso contrario sera definido como json
-if(empty($output)){
+if(empty($_GET["output"])){
 	$output = "json";
+} else {
+	$output = $_GET["output"];
 }
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
@@ -142,7 +153,7 @@ switch (strtoupper($funcao))
 		$mapfile = $locaplic."/temas/".$codigoMap.".map";
 		$mapa = ms_newMapObj($mapfile);
 		$layer = $mapa->getlayerbyname($codigoLayer);
-		$layer->setmetadata("PLUGINI3GEO",$plugin);
+		$layer->setmetadata("PLUGINI3GEO",$_GET["plugin"]);
 		$mapa->save($mapfile);
 		removeCabecalho($mapfile);
 		retornaJSON("ok");
@@ -216,8 +227,9 @@ switch (strtoupper($funcao))
 				$base = $locaplic."/aplicmap/".$base;
 			}
 		}
+		$base = str_replace(".map","",$base).".map";
 		$m = new Legenda($base,$locaplic);
-		retornaJSON($m->listaSimbolos($tipo,$dir_tmp,"",$onclick,8,1,true));
+		retornaJSON($m->listaSimbolos($tipo,$dir_tmp,"",$_GET["onclick"],8,1,true));
 		exit;
 		break;
 		/*
@@ -1130,10 +1142,10 @@ switch (strtoupper($funcao))
 }
 function clonarMapfile()
 {
-	global $novomap, $codigomap, $locaplic;
+	global $codigomap, $locaplic;
 	error_reporting(0);
 	$arqtema = $locaplic."/temas/".$codigomap.".map";
-	$novotema = $locaplic."/temas/".$novomap.".map";
+	$novotema = $locaplic."/temas/".$_GET["novomap"].".map";
 	copy($arqtema,$novotema);
 	$mapa = ms_newMapObj($novotema);
 	$layer = @$mapa->getlayerbyname($codigomap);
@@ -1144,7 +1156,11 @@ function clonarMapfile()
 }
 function refazerLayer()
 {
-	global $nomelayer, $codigomap, $maporigem, $locaplic, $cache;
+	global $nomelayer, $codigomap, $locaplic;
+
+	$maporigem = $_GET["maporigem"];
+	$cache = $_GET["cache"];
+
 	error_reporting(0);
 	if(empty($cache)){
 		$cache = "";

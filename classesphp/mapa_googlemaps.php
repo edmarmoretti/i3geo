@@ -145,6 +145,9 @@ elseif(isset($_GET["BBOX"])){
 }
 //por seguranca
 include_once("funcoes_gerais.php");
+
+i3GeoLog("mapa_googlemaps",$_SESSION["dir_tmp"]);
+
 restauraCon($map_fileX,$postgis_mapa);
 
 $mapa = ms_newMapObj($map_fileX);
