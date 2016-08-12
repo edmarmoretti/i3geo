@@ -43,7 +43,6 @@ error_reporting(0);
 //
 //n&atilde;o sei pq mas ob_start e clean s&atilde;o necess&aacute;rios no Linux para n&atilde;o gerar erro indesejado
 //
-ob_start();
 include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERARWS",
@@ -54,7 +53,6 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
-ob_clean();
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {

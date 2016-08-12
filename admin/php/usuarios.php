@@ -72,6 +72,13 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
+
+$id = $_GET["id"];
+$id_usuario = $_GET["id_usuario"];
+$id_papel = $_GET["id_papel"];
+
+testaSafeNumerico([$id,$id_usuario,$id_papel]);
+
 switch (strtoupper($funcao))
 {
 	case "ALTERARUSUARIOS":
@@ -151,29 +158,29 @@ function enviarSenhaEmail(){
 }
 function alterarUsuarios()
 {
-	global $id_usuario,$ativo,$data_cadastro,$email,$login,$nome_usuario,$senha;
+	global $id_usuario;
 	try
 	{
 		include(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
-			$nome_usuario = utf8_encode($nome_usuario);
+			$_GET["nome_usuario"] = utf8_encode($_GET["nome_usuario"]);
 		}
 		if($id_usuario != ""){
 			//verifica uniciade de login
-			$dados = pegaDados("select login from ".$esquemaadmin."i3geousr_usuarios where login = '$login'");
+			$dados = pegaDados("select login from ".$esquemaadmin."i3geousr_usuarios where login = '".$_GET["login"]."'");
 			if(count($dados) > 0){
 				$retorna = false;
 			}
 			$dataCol = array(
-				"nome_usuario" => $nome_usuario,
-				"login" => $login,
-				"email" => $email,
-				"ativo" => $ativo,
-				"data_cadastro" => $data_cadastro
+				"nome_usuario" => $_GET["nome_usuario"],
+				"login" => $_GET["login"],
+				"email" => $_GET["email"],
+				"ativo" => $_GET["ativo"],
+				"data_cadastro" => $_GET["data_cadastro"]
 			);
 			//se a senha foi enviada, ela sera trocada
-			if($senha != ""){
-				$dataCol["senha"] = md5($senha);
+			if($_GET["senha"] != ""){
+				$dataCol["senha"] = md5($_GET["senha"]);
 			}
 			i3GeoAdminUpdate($dbhw,"i3geousr_usuarios",$dataCol,"WHERE id_usuario = $id_usuario");
 			$retorna = $id_usuario;

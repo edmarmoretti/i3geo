@@ -75,9 +75,9 @@ include "../init/head.php";
 				<!-- Template para criacao dos quadros ver index.js -->
 				<div id="botoesTpl" class="hidden">
 					<div class="{{id}} exemplo col-xs-12 center-block"
-						style="width: 260px; min-width: 260px; max-width: 260px;">
+						style="width: 260px; min-width: 350px; max-width: 300px;">
 						<div class="panel panel-default">
-							<div class="panel-body" style="height: 100px; overflow: auto;">
+							<div class="panel-body" style="height: 200px; overflow: auto;">
 								<span class="label label-info">{{{tag}}}</span>
 								<h4>{{{corpo}}}</h4>
 							</div>

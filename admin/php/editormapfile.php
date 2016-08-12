@@ -2198,7 +2198,7 @@ function pegaClasseGeral()
 }
 function alterarClasseGeral()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic,$status,$minscale,$maxscale,$name,$expression,$keyimage,$title;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -2206,26 +2206,26 @@ function alterarClasseGeral()
 	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
 		return "erro. Layer METAESTAT";
 	}
-	$classe = $layer->getclass($indiceClasse);
-	$classe->set("name",base64_decode($name));
-	$classe->set("title",base64_decode($title));
-	$classe->setexpression(base64_decode($expression));
-	$classe->set("keyimage",$keyimage);
-	$classe->set("maxscaledenom",$maxscale);
-	$classe->set("minscaledenom",$minscale);
-	$classe->set("status",$status);
+	$classe = $layer->getclass($_GET["indiceClasse"]);
+	$classe->set("name",base64_decode($_GET["name"]));
+	$classe->set("title",base64_decode($_GET["title"]));
+	$classe->setexpression(base64_decode($_GET["expression"]));
+	$classe->set("keyimage",$_GET["keyimage"]);
+	$classe->set("maxscaledenom",$_GET["maxscale"]);
+	$classe->set("minscaledenom",$_GET["minscale"]);
+	$classe->set("status",$_GET["status"]);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
 }
 function pegaClasseLabel()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
-	$classe = $layer->getclass($indiceClasse);
+	$classe = $layer->getclass($_GET["indiceClasse"]);
 
 	$v = versao();
 	$vi = $v["inteiro"];
@@ -2289,12 +2289,12 @@ function pegaClasseLabel()
 }
 function alterarClasseLabel()
 {
-	global $text,$codigoMap,$codigoLayer,$indiceClasse,$locaplic,$autoangle,$encoding,$force,$partials,$mindistance,$minfeaturesize,$wrap,$antialias,$buffer,$angle,$offsety,$offsetx,$position,$maxsize,$minsize,$size,$backgroundshadowsizey,$backgroundshadowsizex,$shadowsizey,$shadowsizex,$shadowcolor,$outlinecolor,$color,$backgroundshadowcolor,$backgroundcolor,$type,$font;
-	if(!isset($text)){
-		$text = "";
+	global $codigoMap,$codigoLayer,$locaplic;
+	if(!isset($_GET["text"])){
+		$_GET["text"] = "";
 	}
 	else{
-		$text = "[".$text."]";
+		$_GET["text"] = "[".$_GET["text"]."]";
 	}
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
@@ -2303,7 +2303,7 @@ function alterarClasseLabel()
 	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
 		return "erro. Layer METAESTAT";
 	}
-	$classe = $layer->getclass($indiceClasse);
+	$classe = $layer->getclass($_GET["indiceClasse"]);
 	$v = versao();
 	$vi = $v["inteiro"];
 	if($vi >= 60300){
@@ -2322,11 +2322,11 @@ function alterarClasseLabel()
 	}
 	elseif ($vi >= 60300 && $classe->numlabels == 0){
 		if($wrap != ""){
-			$s = "CLASS LABEL WRAP '$wrap' TEXT '".$text."' END END";
+			$s = "CLASS LABEL WRAP '$wrap' TEXT '".$_GET["text"]."' END END";
 			$classe->updateFromString($s);
 		}
 		else{
-			$s = "CLASS LABEL TEXT '".$text."' END END";
+			$s = "CLASS LABEL TEXT '".$_GET["text"]."' END END";
 			$classe->updateFromString($s);
 		}
 	}
@@ -2341,67 +2341,67 @@ function alterarClasseLabel()
 	if($wrap != ""){
 		$label->set("maxlength",1);
 	}
-	if($fonte != "bitmap"){
+	if($_GET["fonte"] != "bitmap"){
 		//para funcionar na versao 7 do mapserver
 		$label->updateFromString("LABEL type truetype END");
-		$label->set("font",$fonte);
-		$label->set("size",$tamanho);
+		$label->set("font",$_GET["fonte"]);
+		$label->set("size",$_GET["tamanho"]);
 	}
 	else{
 		//para funcionar na versao 7 do mapserver
 		$label->updateFromString("LABEL type bitmap END");
 		$t = MS_TINY;
-		if ($tamanho > 5 ){
+		if ($_GET["tamanho"] > 5 ){
 			$t = MS_TINY;
 		}
-		if ($tamanho >= 7 ){
+		if ($_GET["tamanho"] >= 7 ){
 			$t = MS_SMALL;
 		}
-		if ($tamanho >= 10 ){
+		if ($_GET["tamanho"] >= 10 ){
 			$t = MS_MEDIUM;
 		}
-		if ($tamanho >= 12 ){
+		if ($_GET["tamanho"] >= 12 ){
 			$t = MS_LARGE;
 		}
-		if ($tamanho >= 14 ){
+		if ($_GET["tamanho"] >= 14 ){
 			$t = MS_GIANT;
 		}
 		$label->set("size",$t);
 	}
 	if ($label != ""){
 		//$label->set("type",$type);
-		corE($label,$backgroundcolor,"backgroundcolor");
-		corE($label,$backgroundshadowcolor,"backgroundshadowcolor");
-		corE($label,$color,"color");
-		corE($label,$outlinecolor,"outlinecolor");
-		if(!empty($sombra) && !empty($backgroundshadowsizex)){
-			corE($label,$sombra,"backgroundshadowcolor",$backgroundshadowsizex,$backgroundshadowsizey);
+		corE($label,$_GET["backgroundcolor"],"backgroundcolor");
+		corE($label,$_GET["backgroundshadowcolor"],"backgroundshadowcolor");
+		corE($label,$_GET["color"],"color");
+		corE($label,$_GET["outlinecolor"],"outlinecolor");
+		if(!empty($_GET["sombra"]) && !empty($_GET["backgroundshadowsizex"])){
+			corE($label,$_GET["sombra"],"backgroundshadowcolor",$_GET["backgroundshadowsizex"],$_GET["backgroundshadowsizey"]);
 		}
-		$label->set("shadowsizex",$shadowsizex);
-		$label->set("shadowsizey",$shadowsizey);
+		$label->set("shadowsizex",$_GET["shadowsizex"]);
+		$label->set("shadowsizey",$_GET["shadowsizey"]);
 		//$label->set("backgroundshadowsizex",$backgroundshadowsizex);
 		//$label->set("backgroundshadowsizey",$backgroundshadowsizey);
 
-		$label->set("minsize",$minsize);
-		$label->set("maxsize",$maxsize);
+		$label->set("minsize",$_GET["minsize"]);
+		$label->set("maxsize",$_GET["maxsize"]);
 		//$label->set("position",$position);
 
-		$label->set("offsetx",$offsetx);
-		$label->set("offsety",$offsety);
-		$label->set("angle",$angle);
+		$label->set("offsetx",$_GET["offsetx"]);
+		$label->set("offsety",$_GET["offsety"]);
+		$label->set("angle",$_GET["angle"]);
 
 		//$label->set("autoangle",$autoangle);
 		//$label->set("buffer",$buffer);
 		//$label->set("antialias",$antialias);
-		$label->set("wrap",$wrap);
-		$label->set("minfeaturesize",$minfeaturesize);
-		$label->set("mindistance",$mindistance);
-		$label->set("partials",$partials);
-		$label->set("force",$force);
-		$label->set("encoding",$encoding);
+		$label->set("wrap",$_GET["wrap"]);
+		$label->set("minfeaturesize",$_GET["minfeaturesize"]);
+		$label->set("mindistance",$_GET["mindistance"]);
+		$label->set("partials",$_GET["partials"]);
+		$label->set("force",$_GET["force"]);
+		$label->set("encoding",$_GET["encoding"]);
 
 		$p = array("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
-		$label->set("position",$p[$position]);
+		$label->set("position",$p[$_GET["position"]]);
 	}
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
@@ -2409,14 +2409,14 @@ function alterarClasseLabel()
 }
 function pegaEstilo()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$indiceEstilo,$locaplic;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 	$nclasses = $layer->numclasses;
-	$classe = $layer->getclass($indiceClasse);
-	$estilo = $classe->getstyle($indiceEstilo);
+	$classe = $layer->getclass($_GET["indiceClasse"]);
+	$estilo = $classe->getstyle($_GET["indiceEstilo"]);
 	$dados["symbolname"] = $estilo->symbolname;
 
 	$dados["color"] = $estilo->color->red.",".$estilo->color->green.",".$estilo->color->blue;
@@ -2445,7 +2445,7 @@ function pegaEstilo()
 }
 function alterarEstilo()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$indiceEstilo,$locaplic,$angle,$maxwidth,$minwidth,$width,$outlinecolor,$backgroundcolor,$antialias,$offsety,$offsetx,$maxsize,$minsize,$size,$color,$symbolname;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -2454,28 +2454,28 @@ function alterarEstilo()
 		return "erro. Layer METAESTAT";
 	}
 	$nclasses = $layer->numclasses;
-	$classe = $layer->getclass($indiceClasse);
-	$estilo = $classe->getstyle($indiceEstilo);
-	if(!empty($symbolname)){
-		$estilo->set("symbolname",$symbolname);
+	$classe = $layer->getclass($_GET["indiceClasse"]);
+	$estilo = $classe->getstyle($_GET["indiceEstilo"]);
+	if(!empty($_GET["symbolname"])){
+		$estilo->set("symbolname",$_GET["symbolname"]);
 	}
-	if(empty($symbolname)){
+	if(empty($_GET["symbolname"])){
 		$estilo->set("symbolname"," ");
 	}
 	corE($estilo,$color,"color");
 
-	$estilo->set("size",$size);
-	$estilo->set("minsize",$minsize);
-	$estilo->set("maxsize",$maxsize);
-	$estilo->set("offsetx",$offsetx);
-	$estilo->set("offsety",$offsety);
-	$estilo->set("antialias",$antialias);
-	corE($estilo,$backgroundcolor,"backgroundcolor");
-	corE($estilo,$outlinecolor,"outlinecolor");
-	$estilo->set("width",$width);
-	$estilo->set("minwidth",$minwidth);
-	$estilo->set("maxwidth",$maxwidth);
-	$estilo->set("angle",$angle);
+	$estilo->set("size",$_GET["size"]);
+	$estilo->set("minsize",$_GET["minsize"]);
+	$estilo->set("maxsize",$_GET["maxsize"]);
+	$estilo->set("offsetx",$_GET["offsetx"]);
+	$estilo->set("offsety",$_GET["offsety"]);
+	$estilo->set("antialias",$_GET["antialias"]);
+	corE($estilo,$_GET["backgroundcolor"],"backgroundcolor");
+	corE($estilo,$_GET["outlinecolor"],"outlinecolor");
+	$estilo->set("width",$_GET["width"]);
+	$estilo->set("minwidth",$_GET["minwidth"]);
+	$estilo->set("maxwidth",$_GET["maxwidth"]);
+	$estilo->set("angle",$_GET["angle"]);
 	//$estilo->set("opacity",$opacity);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);

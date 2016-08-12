@@ -1,4 +1,5 @@
 <?php
+exit;
 include_once("admin.php");
 include_once("login.php");
 if(verificaOperacaoSessao("admin/metaestat/geral") == false){

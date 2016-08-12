@@ -41,8 +41,6 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-
-include_once(dirname(__FILE__)."/admin.php");
 include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERAMENUS",
@@ -60,6 +58,10 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	}
 }
 
+$codigo_tema = $_GET["codigo_tema"];
+$id = $_GET["id"];
+
+testaSafeNumerico([$id]);
 
 if(!isset($funcao))
 {
@@ -455,7 +457,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "ATUALIZAMINIATURA":
-		retornaJSON(atualizaMiniatura($tema));
+		retornaJSON(atualizaMiniatura($_GET["tema"]));
 		exit;
 		break;
 		/*
@@ -548,6 +550,7 @@ switch (strtoupper($funcao))
 		break;
 
 	case "EXCLUIRREGISTRO":
+		$tabela = $_GET["tabela"];
 		if($tabela == "grupos")
 		{
 			$tabela = "i3geoadmin_grupos";
@@ -754,7 +757,7 @@ filtro - texto para filtrar os dados
 */
 function pegaTemas()
 {
-	global $filtro,$esquemaadmin;
+	global $esquemaadmin;
 	try
 	{
 		$resultado = array();
@@ -762,14 +765,14 @@ function pegaTemas()
 		foreach($dbh->query("SELECT * from ".$esquemaadmin."i3geoadmin_temas order by nome_tema") as $row)
 		{
 			$continua = true;
-			if(isset($filtro) && $filtro != "")
+			if(isset($_GET["filtro"]) && $_GET["filtro"] != "")
 			{
 				$continua = false;
-				if ($row['codigo_tema'] == $filtro)
+				if ($row['codigo_tema'] == $_GET["filtro"])
 				{
 					$continua = true;
 				}
-				$testanome = mb_convert_encoding($filtro,"UTF-8","ISO-8859-1");
+				$testanome = mb_convert_encoding($_GET["filtro"],"UTF-8","ISO-8859-1");
 				if (!stristr($row['nome_tema'],$testanome) === FALSE)
 				{
 					$continua = true;
@@ -808,7 +811,7 @@ function pegaTemas()
 }
 function pegaTemas2()
 {
-	global $filtro,$esquemaadmin;
+	global $esquemaadmin;
 	try
 	{
 		$resultado = array();
@@ -816,14 +819,14 @@ function pegaTemas2()
 		foreach($dbh->query("SELECT codigo_tema,nome_tema,id_tema from ".$esquemaadmin."i3geoadmin_temas order by nome_tema") as $row)
 		{
 			$continua = true;
-			if(isset($filtro) && $filtro != "")
+			if(isset($_GET["filtro"]) && $_GET["filtro"] != "")
 			{
 				$continua = false;
-				if ($row['codigo_tema'] == $filtro)
+				if ($row['codigo_tema'] == $_GET["filtro"])
 				{
 					$continua = true;
 				}
-				$testanome = mb_convert_encoding($filtro,"UTF-8","ISO-8859-1");
+				$testanome = mb_convert_encoding($_GET["filtro"],"UTF-8","ISO-8859-1");
 				if (!stristr($row['nome_tema'],$testanome) === FALSE)
 				{
 					$continua = true;
@@ -853,14 +856,17 @@ Altera o registro de um menu. Se id for vazio acrescenta o registro
 */
 function alteraMenus()
 {
-	global $esquemaadmin,$nome_menu,$desc_menu,$id_menu,$aberto,$perfil_menu,$publicado_menu,$en,$es,$it;
+	global $esquemaadmin,$id_menu;
+	$en = $_GET["en"];
+	$es = $_GET["es"];
+	$it = $_GET["it"];
 	try
 	{
 		$retorna = "";
 		include("conexao.php");
 		if($convUTF){
-			$nome_menu = utf8_encode($nome_menu);
-			$desc_menu = utf8_encode($desc_menu);
+			$_GET["nome_menu"] = utf8_encode($_GET["nome_menu"]);
+			$_GET["desc_menu"] = utf8_encode($_GET["desc_menu"]);
 			$en = utf8_encode($en);
 			$es = utf8_encode($es);
 			$it = utf8_encode($it);
@@ -870,11 +876,11 @@ function alteraMenus()
 				"en" => $en,
 				"es" => $es,
 				"it" => $it,
-				"publicado_menu" => $publicado_menu,
-				"aberto" => $aberto,
-				"nome_menu" => $nome_menu,
-				"desc_menu" => $desc_menu,
-				"perfil_menu" => $perfil_menu
+				"publicado_menu" => $_GET["publicado_menu"],
+				"aberto" => $_GET["aberto"],
+				"nome_menu" => $_GET["nome_menu"],
+				"desc_menu" => $_GET["desc_menu"],
+				"perfil_menu" => $_GET["perfil_menu"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_menus",$dataCol,"WHERE id_menu = $id_menu");
 			$retorna = "ok";
@@ -1038,7 +1044,8 @@ function alteraPerfis(){
 	}
 }
 function alteraTags(){
-	global $nome,$id,$esquemaadmin;
+	global $id,$esquemaadmin;
+	$nome = $_GET["nome"];
 	try{
 		$dbh = "";
 		include("conexao.php");
@@ -1081,29 +1088,29 @@ Altera o registro de um grupo. Se id for vazio acrescenta o registro
 */
 function alteraGrupos()
 {
-	global $nome_grupo,$desc_grupo,$id_grupo,$en,$es,$it,$esquemaadmin;
+	global $id_grupo,$esquemaadmin;
 	try{
 		require(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
-			$nome_grupo = utf8_encode($nome_grupo);
-			$desc_grupo = utf8_encode($desc_grupo);
-			$en = utf8_encode($en);
-			$es = utf8_encode($es);
-			$it = utf8_encode($it);
+			$_GET["nome_grupo"] = utf8_encode($_GET["nome_grupo"]);
+			$_GET["desc_grupo"] = utf8_encode($_GET["desc_grupo"]);
+			$_GET["en"] = utf8_encode($_GET["en"]);
+			$_GET["es"] = utf8_encode($_GET["es"]);
+			$_GET["it"] = utf8_encode($_GET["it"]);
 		}
 		if($id_grupo != ""){
 			$dataCol = array(
-				"en" => $en,
-				"es" => $es,
-				"it" => $it,
-				"nome_grupo" => $nome_grupo,
-				"desc_grupo" => $desc_grupo
+				"en" => $_GET["en"],
+				"es" => $_GET["es"],
+				"it" => $_GET["it"],
+				"nome_grupo" => $_GET["nome_grupo"],
+				"desc_grupo" => $_GET["desc_grupo"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_grupos",$dataCol,"WHERE id_grupo = $id_grupo");
 		}
 		else{
 			$dataCol = array(
-				"nome_grupo" => $nome_grupo,
+				"nome_grupo" => $_GET["nome_grupo"],
 				"desc_grupo" => "",
 				"en" => "",
 				"es" => "",
@@ -1124,30 +1131,30 @@ Altera o registro de um sub-grupo. Se id for vazio acrescenta o registro
 */
 function alteraSubGrupos()
 {
-	global $nome_subgrupo,$desc_subgrupo,$id_subgrupo,$en,$es,$it,$esquemaadmin;
+	global $id_subgrupo,$esquemaadmin;
 	try{
 		require(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
-			$nome_subgrupo = utf8_encode($nome_subgrupo);
-			$desc_subgrupo = utf8_encode($desc_subgrupo);
-			$en = utf8_encode($en);
-			$es = utf8_encode($es);
-			$it = utf8_encode($it);
+			$_GET["nome_subgrupo"] = utf8_encode($_GET["nome_subgrupo"]);
+			$_GET["desc_subgrupo"] = utf8_encode($_GET["desc_subgrupo"]);
+			$_GET["en"] = utf8_encode($_GET["en"]);
+			$_GET["es"] = utf8_encode($_GET["es"]);
+			$_GET["it"] = utf8_encode($_GET["it"]);
 		}
 		$retorna = "";
 		if($id_subgrupo != ""){
 			$dataCol = array(
-					"en" => $en,
-					"es" => $es,
-					"it" => $it,
-					"nome_subgrupo" => $nome_subgrupo,
-					"desc_subgrupo" => $desc_subgrupo
+					"en" => $_GET["en"],
+					"es" => $_GET["es"],
+					"it" => $_GET["it"],
+					"nome_subgrupo" => $_GET["nome_subgrupo"],
+					"desc_subgrupo" => $_GET["desc_subgrupo"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_subgrupos",$dataCol,"WHERE id_subgrupo = $id_subgrupo");
 		}
 		else{
 			$dataCol = array(
-					"nome_subgrupo" => $nome_subgrupo,
+					"nome_subgrupo" => $_GET["nome_subgrupo"],
 					"desc_subgrupo" => "",
 					"en" => "",
 					"es" => "",
@@ -1204,43 +1211,43 @@ Altera o registro de um tema. Se id for vazio acrescenta o registro
 */
 function alteraTemas()
 {
-	global $esquemaadmin,$nome,$desc,$id,$codigo,$tipoa,$download,$ogc,$kml,$link,$tags,$kmz,$locaplic,$es,$it,$en;
+	global $esquemaadmin,$id,$locaplic;
 	//error_reporting(0);
 	try{
 		$retorna = "ok";
 		include("conexao.php");
-		$nomeo = $nome;
+		$nomeo = $_GET["nome"];
 		if($convUTF){
-			$nome = utf8_encode($nome);
-			$desc = utf8_encode($desc);
-			$tags = utf8_encode($tags);
-			$en = utf8_encode($en);
-			$es = utf8_encode($es);
-			$it = utf8_encode($it);
+			$_GET["nome"] = utf8_encode($_GET["nome"]);
+			$_GET["desc"] = utf8_encode($_GET["desc"]);
+			$_GET["tags"] = utf8_encode($_GET["tags"]);
+			$_GET["en"] = utf8_encode($_GET["en"]);
+			$_GET["es"] = utf8_encode($_GET["es"]);
+			$_GET["it"] = utf8_encode($_GET["it"]);
 		}
 		if($id != ""){
 			$dataCol = array(
-					"en" => $en,
-					"es" => $es,
-					"it" => $it,
-					"tags_tema" => $tags,
-					"link_tema" => $link,
-					"nome_tema" => $nome,
-					"desc_tema" => $desc,
-					"codigo_tema" => $codigo,
-					"tipoa_tema" => $tipoa,
-					"download_tema" => $download,
-					"ogc_tema" => $ogc,
-					"kml_tema" => $kml
+					"en" => $_GET["en"],
+					"es" => $_GET["es"],
+					"it" => $_GET["it"],
+					"tags_tema" => $_GET["tags"],
+					"link_tema" => $_GET["link"],
+					"nome_tema" => $_GET["nome"],
+					"desc_tema" => $_GET["desc"],
+					"codigo_tema" => $_GET["codigo"],
+					"tipoa_tema" => $_GET["tipoa"],
+					"download_tema" => $_GET["download"],
+					"ogc_tema" => $_GET["ogc"],
+					"kml_tema" => $_GET["kml"]
 			);
-			if(isset($kmz)){
-				$dataCol["kmz_tema"] = $kmz;
+			if(isset($_GET["kmz"])){
+				$dataCol["kmz_tema"] = $_GET["kmz"];
 			}
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE id_tema = $id");
 
 			$retorna = $id;
-			if(!isset($kmz)){
-				$kmz = "nao";
+			if(!isset($_GET["kmz"])){
+				$_GET["kmz"] = "nao";
 			}
 			$sql = "SELECT * from ".$esquemaadmin."i3geoadmin_temas where id_tema = $id";
 			$q = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -1253,18 +1260,18 @@ function alteraTemas()
 					$numlayers = $mapa->numlayers;
 					for ($i=0;$i < $numlayers;$i++){
 						$layer = $mapa->getlayer($i);
-						$layer->setmetadata("permitedownload",strtolower($download));
-						$layer->setmetadata("download",strtolower($download));
-						$layer->setmetadata("permiteogc",strtolower($ogc));
-						$layer->setmetadata("permitekml",strtolower($kml));
-						$layer->setmetadata("permitekmz",strtolower($kmz));
+						$layer->setmetadata("permitedownload",strtolower($_GET["download"]));
+						$layer->setmetadata("download",strtolower($_GET["download"]));
+						$layer->setmetadata("permiteogc",strtolower($_GET["ogc"]));
+						$layer->setmetadata("permitekml",strtolower($_GET["kml"]));
+						$layer->setmetadata("permitekmz",strtolower($_GET["kmz"]));
 						//zera os metadados do sistema METAESTAT
-						if($tipoa != "META"){
+						if($_GET["tipoa"] != "META"){
 							$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
 							$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
 							$layer->setmetadata("metaestat","");
 						}
-						if(count($nomes) == 1){
+						if(count($_GET["nomes"]) == 1){
 							$layer->setmetadata("tema",$nomeo);
 						}
 					}
@@ -1294,9 +1301,9 @@ function alteraTemas()
 			$retorna = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_temas",$dataCol,"nome_tema","id_tema");
 		}
 		//verifica se &eacute; necess&aacute;rio adicionar algum tag novo
-		$tags = explode(" ",$tags);
+		$_GET["tags"] = explode(" ",$_GET["tags"]);
 
-		foreach($tags as $tag){
+		foreach($_GET["tags"] as $tag){
 			if(!(verificaDuplicados("select * from ".$esquemaadmin."i3geoadmin_tags where nome = '$tag'",$dbh))){
 				$dataCol = array(
 					"nome" => $tag
@@ -1318,7 +1325,7 @@ Retorna a lista de mapfiles do diretorio i3geo/temas
 */
 function listaMapsTemas()
 {
-	global $cp,$locaplic,$letra,$filtro,$esquemaadmin,$checaNomes,$checaNames;
+	global $locaplic,$esquemaadmin;
 	$arquivos = array();
 	if (is_dir($locaplic."/temas"))
 	{
@@ -1327,11 +1334,12 @@ function listaMapsTemas()
 			$extensao = "";
 			while (($file = readdir($dh)) !== false)
 			{
+				$extensao = "";
 				if(!stristr($file, '.map') === FALSE){
 					$extensao = "map";
 				}
 				if(!stristr($file, '.php') === FALSE){
-					$extensao = "php";
+					//$extensao = "php";
 				}
 				if(!stristr($file, '.gvp') === FALSE){
 					$extensao = "gvp";
@@ -1339,9 +1347,9 @@ function listaMapsTemas()
 				if($extensao != "")
 				{
 					$file = str_replace(".".$extensao,"",$file);
-					if(isset($letra) && $letra != "")
+					if(isset($_GET["letra"]) && $_GET["letra"] != "")
 					{
-						if(strtolower(substr(basename($file),0,strlen($letra))) == strtolower($letra)){
+						if(strtolower(substr(basename($file),0,strlen($_GET["letra"]))) == strtolower($_GET["letra"])){
 							$arquivos[] = array("nome"=>$file,"extensao"=>$extensao);
 						}
 					}
@@ -1359,6 +1367,7 @@ function listaMapsTemas()
 	//pega o nome de cada tema filtrando a listagem se for o caso
 	//
 	$sql = "select * from ".$esquemaadmin."i3geoadmin_temas ";
+	$filtro = $_GET["filtro"];
 	if(isset($filtro) && $filtro != ""){
 		$filtro = explode(",",$filtro);
 		$filtro = $filtro[0]." ".$filtro[1]." '".$filtro[2]."' or ".$filtro[0]." ".$filtro[1]." '".strtoupper($filtro[2])."'";
@@ -1407,7 +1416,7 @@ function listaMapsTemas()
 		if(file_exists($locaplic."/temas/miniaturas/".$arq.".map.mini.png")){
 			$imagem = $arq.".map.mini.png";
 		}
-		if($checaNomes == "true"){
+		if($_GET["checaNomes"] == "true"){
 			if($extensao == "map"){
 				if(file_exists($locaplic."/temas/".$arq.".map")){
 					$handle = fopen($locaplic."/temas/".$arq.".map", "r");
@@ -1426,7 +1435,7 @@ function listaMapsTemas()
 				}
 			}
 		}
-		if($checaNames == "true"){
+		if($_GET["checaNames"] == "true"){
 			if($extensao == "map"){
 				if(file_exists($locaplic."/temas/".$arq.".map")){
 					$handle = fopen($locaplic."/temas/".$arq.".map", "r");
@@ -1466,7 +1475,7 @@ Retorna a lista de temas sem mapfiles
 */
 function verificaOrfaos()
 {
-	global $cp,$locaplic,$esquemaadmin;
+	global $locaplic,$esquemaadmin;
 	$arquivos = array();
 	//
 	//pega o nome de cada tema
@@ -1550,11 +1559,11 @@ function removeCabecalho($arq,$symbolset=true)
 	chmod($arq, 0666);
 }
 function atualizaMiniatura(){
-	global $tema,$locaplic;
+	global $locaplic;
 	$tipo = "foo";
 	include_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 	require(dirname(__FILE__)."/../../geraminiatura.php");
-	verificaMiniatura($tema,"todos",true);
+	verificaMiniatura($_GET["tema"],"todos",true);
 	return "ok";
 }
 ?>
