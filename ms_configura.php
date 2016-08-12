@@ -96,12 +96,12 @@ $logTransacoes = false;
 
 */
 $logExec = array(
-	"mapa_" => true, //mapa_openlayers e mapa_googlemaps
-	"init" => true, //ms_criamapa mapa_inicia
-	"ogc" => true, //servico ogc
-	"upload" => true, //ferramentas de upload
-	"ferramentas" => true, //todas asferramentas que usam safe.php
-	"controle" => true //tudo que passa por mapa_controle.php
+	"mapa_" => false, //mapa_openlayers e mapa_googlemaps
+	"init" => false, //ms_criamapa mapa_inicia
+	"ogc" => false, //servico ogc
+	"upload" => false, //ferramentas de upload
+	"ferramentas" => false, //todas asferramentas que usam safe.php
+	"controle" => false //tudo que passa por mapa_controle.php
 );
 /*
  Variable: $i3GeoProjDefault

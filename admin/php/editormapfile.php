@@ -1893,9 +1893,9 @@ function pegaConexao()
 }
 function alterarConexao()
 {
-	global $tiles,$cortepixels,$esquemaadmin,$metaestat_id_medida_variavel,$metaestat,$convcaracter,$cache,$tipooriginal,$filteritem,$filter,$projection,$type,$dir_tmp,$testar,$codigoMap,$codigoLayer,$locaplic,$connection,$connectiontype,$data,$tileitem,$tileindex;
-	if($data != ""){
-		$data =  base64_decode($data);
+	global $esquemaadmin,$dir_tmp,$codigoMap,$codigoLayer,$locaplic;
+	if($_GET["data"] != ""){
+		$_GET["data"] =  base64_decode($_GET["data"]);
 	}
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1921,17 +1921,17 @@ function alterarConexao()
 		i3GeoAdminInsert($dbhw,"i3geoadmin_temas",$dataCol);
 	}
 	if(strtoupper($metaestat) == "SIM"){
-		$connectiontype = 6;
-		$filteritem = "";
-		$filter = "";
-		$data = "";
-		$connection = "";
+		$_GET["connectiontype"] = 6;
+		$_GET["filteritem"] = "";
+		$_GET["filter"] = "";
+		$_GET["data"] = "";
+		$_GET["connection"] = "";
 		$dataCol = array(
 			"tipoa_tema" => "META"
 		);
 		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigoMap'");
 		$layer->setmetadata("metaestat","SIM");
-		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL",$metaestat_id_medida_variavel);
+		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL",$_GET["metaestat_id_medida_variavel"]);
 	}
 	else{
 		$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
@@ -1942,56 +1942,56 @@ function alterarConexao()
 		);
 		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigoMap'");
 	}
-	$layer->set("connection",$connection);
+	$layer->set("connection",$_GET["connection"]);
 	if(ms_GetVersionInt() > 50201){
-		$layer->setconnectiontype($connectiontype);
+		$layer->setconnectiontype($_GET["connectiontype"]);
 	}
 	else{
-		$layer->set("connectiontype",$connectiontype);
+		$layer->set("connectiontype",$_GET["connectiontype"]);
 	}
-	$layer->set("data",$data);
-	$layer->set("tileitem",$tileitem);
-	$layer->set("tileindex",$tileindex);
-	$layer->set("type",$type);
-	if($type == 0){
+	$layer->set("data",$_GET["data"]);
+	$layer->set("tileitem",$_GET["tileitem"]);
+	$layer->set("tileindex",$_GET["tileindex"]);
+	$layer->set("type",$_GET["type"]);
+	if($_GET["type"] == 0){
 		$c = $layer->getClass(0);
 		$e = $c->getStyle(0);
 		if($e->symbolname == ""){
 			$e->set("symbolname","ponto");
 		}
 	}
-	if($type == 1){
+	if($_GET["type"] == 1){
 		$c = $layer->getClass(0);
 		$e = $c->getStyle(0);
 		if($e->symbolname == "" || $e->symbolname == "ponto"){
 			$e->set("symbolname","linha");
 		}
 	}
-	if($type == 2){
+	if($_GET["type"] == 2){
 		$c = $layer->getClass(0);
 		$e = $c->getStyle(0);
 		if($e->symbolname == "linha" || $e->symbolname == "ponto"){
 			$e->set("symbolname"," ");
 		}
 	}
-	$layer->setfilter($filter);
-	$layer->set("filteritem",$filteritem);
+	$layer->setfilter($_GET["filter"]);
+	$layer->set("filteritem",$_GET["filteritem"]);
 	if($layer->getprojection() == MS_TRUE)
-		$layer->setprojection($projection);
-	if($layer->getprojection() == MS_FALSE && $projection != "")
-		$layer->setprojection($projection);
+		$layer->setprojection($_GET["projection"]);
+	if($layer->getprojection() == MS_FALSE && $_GET["projection"] != "")
+		$layer->setprojection($_GET["projection"]);
 	if($layer->connectiontype == 7 || $layer->connectiontype== 9){
-		$layer->setmetadata("tipooriginal",$tipooriginal);
+		$layer->setmetadata("tipooriginal",$_GET["tipooriginal"]);
 	}
-	$layer->setmetadata("cache",$cache);
-	$layer->setmetadata("tiles",$tiles);
-	if($cortepixels == ""){
-		$cortepixels = 0;
+	$layer->setmetadata("cache",$_GET["cache"]);
+	$layer->setmetadata("tiles",$_GET["tiles"]);
+	if($_GET["cortepixels"] == ""){
+		$_GET["cortepixels"] = 0;
 	}
-	$layer->setmetadata("cortepixels",$cortepixels);
+	$layer->setmetadata("cortepixels",$_GET["cortepixels"]);
 
-	$layer->setmetadata("convcaracter",$convcaracter);
-	if($testar == "true")
+	$layer->setmetadata("convcaracter",$_GET["convcaracter"]);
+	if($_GET["testar"] == "true")
 	{
 		$nome = $dir_tmp."/".$codigoMap.".map";
 		$mapa->save($nome);
@@ -2082,7 +2082,7 @@ function pegaMetadados()
 }
 function alterarMetadados()
 {
-	global $tipooriginal,$wms_srs,$wms_name,$wms_server_version,$wms_format,$wms_auth_username,$wms_auth_password,$wms_auth_type,$wms_connectiontimeout,$wms_latlonboundingbox,$wms_proxy_auth_type,$wms_proxy_host,$wms_proxy_port,$wms_proxy_type,$wms_proxy_username,$wms_proxy_password,$wms_sld_body,$wms_sld_url,$wms_style,$wms_bgcolor,$wms_transparent,$wms_time,$wms_tile,$itembuscarapida,$iconetema,$ltempoformatodata,$ltempoconvencode,$ltempoiteminicio,$ltempoitemfim,$ltempoitemtitulo,$ltempoitemdescricao,$ltempoitemtip,$ltempoitemimagem,$ltempoitemicone,$ltempoitemlink,$description_template,$palletestep,$palletefile,$codigoMap,$codigoLayer,$locaplic,$classestamanho,$classessimbolo,$classescor,$classesnome,$classesitem,$mensagem,$extensao,$tip,$itenslink,$itens,$itensdesc,$editorsql;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -2090,78 +2090,78 @@ function alterarMetadados()
 	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
 		return "erro. Layer METAESTAT";
 	}
-	$itens = str_replace(", ",",",$itens);
-	$itens = str_replace(" ,",",",$itens);
-	$layer->setmetadata("itens",$itens);
-	$itensdesc = str_replace(", ",",",$itensdesc);
-	$itensdesc = str_replace(" ,",",",$itensdesc);
-	$layer->setmetadata("itensdesc",$itensdesc);
-	$layer->setmetadata("itenslink",$itenslink);
-	$tip = str_replace(", ",",",$tip);
-	$tip = str_replace(" ,",",",$tip);
-	$layer->setmetadata("tip",$tip);
-	$layer->setmetadata("classesitem",$classesitem);
-	$layer->setmetadata("classesnome",$classesnome);
-	$layer->setmetadata("classescor",$classescor);
-	$layer->setmetadata("classessimbolo",$classessimbolo);
-	$layer->setmetadata("classestamanho",$classestamanho);
-	$layer->setmetadata("palletefile",$palletefile);
-	$layer->setmetadata("palletestep",$palletestep);
-	$layer->setmetadata("description_template",$description_template);
-	$layer->setmetadata("editorsql",$editorsql);
-	$layer->setmetadata("ltempoformatodata",$ltempoformatodata);
-	$layer->setmetadata("ltempoiteminicio",$ltempoiteminicio);
-	$layer->setmetadata("ltempoitemfim",$ltempoitemfim);
-	$layer->setmetadata("ltempoitemtitulo",$ltempoitemtitulo);
-	$layer->setmetadata("ltempoconvencode",$ltempoconvencode);
-	$layer->setmetadata("ltempoitemdescricao",$ltempoitemdescricao);
-	$layer->setmetadata("ltempoitemtip",$ltempoitemtip);
-	$layer->setmetadata("ltempoitemimagem",$ltempoitemimagem);
-	$layer->setmetadata("ltempoitemicone",$ltempoitemicone);
-	$layer->setmetadata("ltempoitemlink",$ltempoitemlink);
+	$_GET["itens"] = str_replace(", ",",",$_GET["itens"]);
+	$_GET["itens"] = str_replace(" ,",",",$_GET["itens"]);
+	$layer->setmetadata("itens",$_GET["itens"]);
+	$_GET["itensdesc"] = str_replace(", ",",",$_GET["itensdesc"]);
+	$_GET["itensdesc"] = str_replace(" ,",",",$_GET["itensdesc"]);
+	$layer->setmetadata("itensdesc",$_GET["itensdesc"]);
+	$layer->setmetadata("itenslink",$_GET["itenslink"]);
+	$_GET["tip"] = str_replace(", ",",",$_GET["tip"]);
+	$_GET["tip"] = str_replace(" ,",",",$_GET["tip"]);
+	$layer->setmetadata("tip",$_GET["tip"]);
+	$layer->setmetadata("classesitem",$_GET["classesitem"]);
+	$layer->setmetadata("classesnome",$_GET["classesnome"]);
+	$layer->setmetadata("classescor",$_GET["classescor"]);
+	$layer->setmetadata("classessimbolo",$_GET["classessimbolo"]);
+	$layer->setmetadata("classestamanho",$_GET["classestamanho"]);
+	$layer->setmetadata("palletefile",$_GET["palletefile"]);
+	$layer->setmetadata("palletestep",$_GET["palletestep"]);
+	$layer->setmetadata("description_template",$_GET["description_template"]);
+	$layer->setmetadata("editorsql",$_GET["editorsql"]);
+	$layer->setmetadata("ltempoformatodata",$_GET["ltempoformatodata"]);
+	$layer->setmetadata("ltempoiteminicio",$_GET["ltempoiteminicio"]);
+	$layer->setmetadata("ltempoitemfim",$_GET["ltempoitemfim"]);
+	$layer->setmetadata("ltempoitemtitulo",$_GET["ltempoitemtitulo"]);
+	$layer->setmetadata("ltempoconvencode",$_GET["ltempoconvencode"]);
+	$layer->setmetadata("ltempoitemdescricao",$_GET["ltempoitemdescricao"]);
+	$layer->setmetadata("ltempoitemtip",$_GET["ltempoitemtip"]);
+	$layer->setmetadata("ltempoitemimagem",$_GET["ltempoitemimagem"]);
+	$layer->setmetadata("ltempoitemicone",$_GET["ltempoitemicone"]);
+	$layer->setmetadata("ltempoitemlink",$_GET["ltempoitemlink"]);
 
-	$layer->setmetadata("itembuscarapida",$itembuscarapida);
+	$layer->setmetadata("itembuscarapida",$_GET["itembuscarapida"]);
 	if($layer->connectiontype == 7 || $layer->connectiontype== 9){
-		$layer->setmetadata("wms_srs",$wms_srs);
-		$layer->setmetadata("wms_name",$wms_name);
-		$layer->setmetadata("wms_server_version",$wms_server_version);
-		$layer->setmetadata("wms_format",$wms_format);
-		if($wms_auth_username != ""){
-			$layer->setmetadata("wms_auth_username",$wms_auth_username);
-			$layer->setmetadata("wms_auth_password",$wms_auth_password);
-			$layer->setmetadata("wms_auth_type",$wms_auth_type);
+		$layer->setmetadata("wms_srs",$_GET["wms_srs"]);
+		$layer->setmetadata("wms_name",$_GET["wms_name"]);
+		$layer->setmetadata("wms_server_version",$_GET["wms_server_version"]);
+		$layer->setmetadata("wms_format",$_GET["wms_format"]);
+		if($_GET["wms_auth_username"] != ""){
+			$layer->setmetadata("wms_auth_username",$_GET["wms_auth_username"]);
+			$layer->setmetadata("wms_auth_password",$_GET["wms_auth_password"]);
+			$layer->setmetadata("wms_auth_type",$_GET["wms_auth_type"]);
 		}
-		$layer->setmetadata("wms_connectiontimeout",$wms_connectiontimeout);
-		if($wms_latlonboundingbox != "")
+		$layer->setmetadata("wms_connectiontimeout",$_GET["wms_connectiontimeout"]);
+		if($_GET["wms_latlonboundingbox"] != "")
 		{
-			$layer->setmetadata("wms_latlonboundingbox",$wms_latlonboundingbox);
+			$layer->setmetadata("wms_latlonboundingbox",$_GET["wms_latlonboundingbox"]);
 		}
-		if($wms_proxy_host != ""){
-			$layer->setmetadata("wms_proxy_auth_type",$wms_proxy_auth_type);
-			$layer->setmetadata("wms_proxy_host",$wms_proxy_host);
-			$layer->setmetadata("wms_proxy_port",$wms_proxy_port);
-			$layer->setmetadata("wms_proxy_type",$wms_proxy_type);
-			$layer->setmetadata("wms_proxy_username",$wms_proxy_username);
-			$layer->setmetadata("wms_proxy_password",$wms_proxy_password);
+		if($_GET["wms_proxy_host"] != ""){
+			$layer->setmetadata("wms_proxy_auth_type",$_GET["wms_proxy_auth_type"]);
+			$layer->setmetadata("wms_proxy_host",$_GET["wms_proxy_host"]);
+			$layer->setmetadata("wms_proxy_port",$_GET["wms_proxy_port"]);
+			$layer->setmetadata("wms_proxy_type",$_GET["wms_proxy_type"]);
+			$layer->setmetadata("wms_proxy_username",$_GET["wms_proxy_username"]);
+			$layer->setmetadata("wms_proxy_password",$_GET["wms_proxy_password"]);
 		}
-		if($wms_sld_body != "")
+		if($_GET["wms_sld_body"] != "")
 		{
-			$layer->setmetadata("wms_sld_body",$wms_sld_body);
+			$layer->setmetadata("wms_sld_body",$_GET["wms_sld_body"]);
 		}
-		if($wms_sld_url != "")
+		if($_GET["wms_sld_url"] != "")
 		{
-			$layer->setmetadata("wms_sld_url",$wms_sld_url);
+			$layer->setmetadata("wms_sld_url",$_GET["wms_sld_url"]);
 		}
-		$layer->setmetadata("wms_style",$wms_style);
-		if($wms_bgcolor != "")
-			$layer->setmetadata("wms_bgcolor",$wms_bgcolor);
-		if($wms_transparent != "")
-			$layer->setmetadata("wms_transparent",$wms_transparent);
-		if($wms_time != "")
-			$layer->setmetadata("wms_time",$wms_time);
-		if($wms_tile != "")
-			$layer->setmetadata("wms_tile",$wms_tile);
-		$layer->setmetadata("tipooriginal",$tipooriginal);
+		$layer->setmetadata("wms_style",$_GET["wms_style"]);
+		if($_GET["wms_bgcolor"] != "")
+			$layer->setmetadata("wms_bgcolor",$_GET["wms_bgcolor"]);
+		if($_GET["wms_transparent"] != "")
+			$layer->setmetadata("wms_transparent",$_GET["wms_transparent"]);
+		if($_GET["wms_time"] != "")
+			$layer->setmetadata("wms_time",$_GET["wms_time"]);
+		if($_GET["wms_tile"] != "")
+			$layer->setmetadata("wms_tile",$_GET["wms_tile"]);
+		$layer->setmetadata("tipooriginal",$_GET["tipooriginal"]);
 	}
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
@@ -2169,14 +2169,14 @@ function alterarMetadados()
 }
 function pegaClasseGeral()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	global $codigoMap,$codigoLayer,$locaplic;
 
 	error_reporting(0);
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
-	$classe = $layer->getclass($indiceClasse);
+	$classe = $layer->getclass($_GET["indiceClasse"]);
 	$dados["name"] = base64_encode($classe->name);
 	$dados["title"] = base64_encode($classe->title);
 	$temp = $classe->getExpressionString();
@@ -2192,7 +2192,7 @@ function pegaClasseGeral()
 	//$dados["text"] = $classe->getTextString();
 	$dados["codigoMap"] = $codigoMap;
 	$dados["codigoLayer"] = $codigoLayer;
-	$dados["indiceClasse"] = $indiceClasse;
+	$dados["indiceClasse"] = $_GET["indiceClasse"];
 	$dados["colunas"] = implode(" ,",pegaItens($layer));
 	return $dados;
 }

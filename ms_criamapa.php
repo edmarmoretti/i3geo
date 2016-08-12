@@ -438,6 +438,7 @@ $_SESSION["expoeMapfile"] = $expoeMapfile;
 $_SESSION["googleApiKey"] = $googleApiKey_;
 $_SESSION["mensagemInicia"] = $mensagemInicia_;
 $_SESSION["interfacePadrao"] = $interfacePadrao_;
+$_SESSION["logExec"] = $logExec_;
 if(isset($interface_)){
 	$_SESSION["interface"] = $interface_;
 }
