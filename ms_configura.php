@@ -99,7 +99,9 @@ $logExec = array(
 	"mapa_" => true, //mapa_openlayers e mapa_googlemaps
 	"init" => true, //ms_criamapa mapa_inicia
 	"ogc" => true, //servico ogc
-	"upload" => true //ferramentas de upload
+	"upload" => true, //ferramentas de upload
+	"ferramentas" => true, //todas asferramentas que usam safe.php
+	"controle" => true //tudo que passa por mapa_controle.php
 );
 /*
  Variable: $i3GeoProjDefault

@@ -14,7 +14,7 @@ require_once (dirname(__FILE__)."/../../ms_configura.php");
 $tema = $_GET["tema"];
 
 if(isset($logExec) && $logExec["upload"] == true){
-	i3GeoLog("aplicarsld tema: $tema filename:" . $_FILES['i3GEOaplicarsld']['name'],$dir_tmp);
+	i3GeoLog("prog: aplicarsld tema: $tema filename:" . $_FILES['i3GEOaplicarsld']['name'],$dir_tmp);
 }
 ?>
 <html>

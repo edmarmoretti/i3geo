@@ -113,7 +113,7 @@ function iniciaMapa()
 	validaAcessoTemas($map_file);
 
 	if($dir_tmp != "" && isset($logExec) && $logExec["init"] == true){
-		i3GeoLog("iniciaMapa $interface",$dir_tmp);
+		i3GeoLog("prog: iniciaMapa interface: $interface",$dir_tmp);
 	}
 
 	if(!isset($kmlurl)){

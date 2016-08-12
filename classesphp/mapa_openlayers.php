@@ -168,7 +168,7 @@ include_once("funcoes_gerais.php");
 
 $logExec = $_SESSION["logExec"];
 if(isset($logExec) && $logExec["mapa_"] == true){
-	i3GeoLog("mapa_openlayers ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
+	i3GeoLog("prog: mapa_openlayers url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
 }
 
 restauraCon($map_fileX,$postgis_mapa);

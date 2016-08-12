@@ -35,7 +35,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
 
 	if(isset($logExec) && $logExec["upload"] == true){
-		i3GeoLog("upload filename:" . $_FILES['i3GEOuploadshp']['name'],$dir_tmp);
+		i3GeoLog("prog: upload filename:" . $_FILES['i3GEOuploadshp']['name'],$dir_tmp);
 	}
 
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";

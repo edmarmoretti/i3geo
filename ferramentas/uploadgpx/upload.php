@@ -32,7 +32,7 @@ if (isset($_FILES['i3GEOuploadgpx']['name']) && strlen(basename($_FILES['i3GEOup
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
 
 	if(isset($logExec) && $logExec["upload"] == true){
-		i3GeoLog("uploadgpx filename:" . $_FILES['i3GEOuploadgpx']['name'],$dir_tmp);
+		i3GeoLog("prog: uploadgpx filename:" . $_FILES['i3GEOuploadgpx']['name'],$dir_tmp);
 	}
 
 	$mapa = ms_newMapObj($map_file);

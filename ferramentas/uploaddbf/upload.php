@@ -35,7 +35,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
 
 	if(isset($logExec) && $logExec["upload"] == true){
-		i3GeoLog("uploaddbf filename:" . $_FILES['i3GEOuploaddbffile']['name'],$dir_tmp);
+		i3GeoLog("prog: uploaddbf filename:" . $_FILES['i3GEOuploaddbffile']['name'],$dir_tmp);
 	}
 
 	$mapa = ms_newMapObj($map_file);

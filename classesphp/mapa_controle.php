@@ -194,6 +194,11 @@ include_once ("carrega_ext.php");
 if(!function_exists("sobeAnno")){
 	include_once("funcoes_gerais.php");
 }
+
+if(isset($logExec) && $logExec["controle"] == true){
+	i3GeoLog("prog: mapa_controle url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
+}
+
 if($funcao == "criaMapa"){
 	session_name("i3GeoPHP");
 	unset($GLOBALS);

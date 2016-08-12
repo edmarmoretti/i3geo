@@ -13,7 +13,7 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 require_once (dirname(__FILE__)."/../../ms_configura.php");
 
 if(isset($logExec) && $logExec["upload"] == true){
-	i3GeoLog("carregamapa filename:" . $_FILES['i3GEOcarregamapafilemap']['name'],$dir_tmp);
+	i3GeoLog("prog: carregamapa filename:" . $_FILES['i3GEOcarregamapafilemap']['name'],$dir_tmp);
 }
 ?>
 <html>

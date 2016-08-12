@@ -31,6 +31,11 @@ $ext = $_GET["ext"];
 $funcao = $_GET["funcao"];
 
 include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
+
+if(isset($logExec) && $logExec["ferramentas"] == true){
+	i3GeoLog("prog: ferramentas url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
+}
+
 if(isset($fingerprint) && !empty($g_sid))	{
 	$f = explode(",",$fingerprint);
 	if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id())){

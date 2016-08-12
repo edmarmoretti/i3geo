@@ -47,6 +47,7 @@ testaSafeNumerico([$id]);
 
 $codigoMap = $_GET["codigoMap"];
 $codigoLayer = $_GET["codigoLayer"];
+$movimento = $_GET["movimento"];
 
 $funcoesEdicao = array(
 		"CRIARNOVOMAP",
@@ -1203,7 +1204,10 @@ function refazerLayer()
 }
 function sobeDesce()
 {
-	global $movimento,$tipo,$codigoMap,$codigoLayer,$indiceClasse,$indiceEstilo,$locaplic;
+	global $movimento,$tipo,$codigoMap,$codigoLayer,$locaplic;
+
+	$indiceClasse = $_GET["indiceClasse"];
+	$indiceEstilo = $_GET["indiceEstilo"];
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
@@ -1248,49 +1252,51 @@ function sobeDesce()
 }
 //essa funcao e usada tambem por i3geo/ferramentas/upload/upload.php
 function criarNovoMap(){
-	global $nome,$codigo,$locaplic,$it,$en,$es,$esquemaadmin,$metaestat,$tipoLayer,$data,$conexao,$acessopublico;
-	$arq = $locaplic."/temas/".$codigo.".map";
-	if(empty($acessopublico)){
-		$acessopublico = "SIM";
+	global $locaplic,$esquemaadmin;
+
+	$arq = $locaplic."/temas/".$_GET["codigo"].".map";
+	if(empty($_GET["acessopublico"])){
+		$_GET["acessopublico"] = "SIM";
 	}
 	if(!file_exists($arq)){
-		if(empty($tipoLayer)){
-			$tipoLayer = "line";
+		if(empty($_GET["tipoLayer"])){
+			$_GET["tipoLayer"] = "line";
 		}
 		$dados[] = "MAP";
 		$dados[] = "SYMBOLSET ../symbols/simbolosv6.sym";
 		$dados[] = 'FONTSET   "../symbols/fontes.txt"';
 		$dados[] = "LAYER";
-		$dados[] = '	NAME "'.$codigo.'"';
+		$dados[] = '	NAME "'.$_GET["codigo"].'"';
 		$dados[] = '	TEMPLATE "none.htm"';
-		if(!empty($metaestat) && $metaestat == "SIM"){
+		if(!empty($_GET["metaestat"]) && $_GET["metaestat"] == "SIM"){
 			$dados[] = '	CONNECTIONTYPE POSTGIS';
 			$tipoLayer = "polygon";
 		}
 		elseif(!empty($conexao)){
 			$dados[] = '	CONNECTIONTYPE POSTGIS';
-			$dados[] = '	CONNECTION "'.$conexao.'"';
+			$dados[] = '	CONNECTION "'.$_GET["conexao"].'"';
 		}
-		$dados[] = "	TYPE ".$tipoLayer;
-		if(empty($data)){
+		$dados[] = "	TYPE ".$_GET["tipoLayer"];
+		if(empty($_GET["data"])){
 			$dados[] = '	DATA ""';
 			$dados[] = '	CONNECTION ""';
 		}
 		else{
-			$dados[] = '	DATA "'.$data.'"';
+			$dados[] = '	DATA "'.$_GET["data"].'"';
 		}
 		$dados[] = '	STATUS DEFAULT';
 		$dados[] = '	METADATA';
-		$dados[] = '		TEMA "'.$nome.'"';
+		$dados[] = '		TEMA "'.$_GET["nome"].'"';
 		$dados[] = '		CLASSE "SIM"';
 		$tipoa_tema = "";
-		if(!empty($metaestat) && $metaestat == "SIM"){
+		if(!empty($_GET["metaestat"]) && $_GET["metaestat"] == "SIM"){
 			$dados[] = '		METAESTAT "SIM"';
 			//para marcar no banco de dados de administracao
 			$tipoa_tema = "META";
 			//METAESTAT_CODIGO_TIPO_REGIAO
 			//ID_MEDIDA_VARIAVEL
 		}
+		$acessopublico = $_GET["acessopublico"];
 		$dados[] = '		permiteogc "'.$acessopublico.'"';
 		$dados[] = '		permitedownload "'.$acessopublico.'"';
 		$dados[] = '		permitekml "'.$acessopublico.'"';
@@ -1317,8 +1323,8 @@ function criarNovoMap(){
 
 		include("conexao.php");
 		if($convUTF){
-			$nome = utf8_encode($nome);
-			$desc = utf8_encode($desc);
+			$_GET["nome"] = utf8_encode($_GET["nome"]);
+			$_GET["desc"] = utf8_encode($_GET["desc"]);
 		}
 		$dataCol = array(
 			"link_tema" => '',
@@ -1329,11 +1335,11 @@ function criarNovoMap(){
 			"desc_tema" => '',
 			"tipoa_tema" => $tipoa_tema,
 			"tags_tema" => '',
-			"nome_tema" => $nome,
-			"codigo_tema" => $codigo,
-			"it" => $it,
-			"es" => $es,
-			"en" => $en
+			"nome_tema" => $_GET["nome"],
+			"codigo_tema" => $_GET["codigo"],
+			"it" => $_GET["it"],
+			"es" => $_GET["es"],
+			"en" => $_GET["en"]
 		);
 		i3GeoAdminInsert($dbhw,"i3geoadmin_temas",$dataCol);
 		$dbh = null;
@@ -1345,6 +1351,7 @@ function criarNovoMap(){
 function criarNovoLayer()
 {
 	global $locaplic,$codigoMap;
+
 	include_once("$locaplic/classesphp/funcoes_gerais.php");
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1357,7 +1364,7 @@ function criarNovoLayer()
 }
 function autoClassesLayer()
 {
-	global $codigoMap,$codigoLayer,$itemExpressao,$itemNome,$locaplic,$dir_tmp,$postgis_mapa;
+	global $codigoMap,$codigoLayer,$locaplic,$dir_tmp,$postgis_mapa;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	include_once("$locaplic/classesphp/classe_alteraclasse.php");
 	error_reporting(0);
@@ -1419,7 +1426,7 @@ function autoClassesLayer()
 	}
 	$mapageral->save($nometemp);
 	$m = new Alteraclasse($nometemp,$codigoLayer);
-	$m->valorunico($itemExpressao,"",$itemNome);
+	$m->valorunico($_GET["itemExpressao"],"",$_GET["itemNome"]);
 	$m->salva();
 	$mapatemp = ms_newMapObj($nometemp);
 
@@ -1454,11 +1461,11 @@ function criarNovaClasse()
 }
 function criarNovoEstilo()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
-	$classObj = $nl->getclass($indiceClasse);
+	$classObj = $nl->getclass($_GET["indiceClasse"]);
 	$numestilos = $classObj->numstyles;
 	$nestilo = ms_newStyleObj($classObj);
 	$mapa->save($mapfile);
@@ -1562,7 +1569,7 @@ function listaClasses()
 }
 function listaEstilos()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
@@ -1570,7 +1577,7 @@ function listaEstilos()
 	if(strtoupper($layer->getmetadata("metaestat")) === "SIM"){
 		return $dados;
 	}
-	$classe = $layer->getclass($indiceClasse);
+	$classe = $layer->getclass($_GET["indiceClasse"]);
 	$numestilos = $classe->numstyles;
 	for($i=0;$i<$numestilos;++$i)
 	{
@@ -1592,11 +1599,11 @@ function excluirLayer()
 }
 function excluirClasse()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$locaplic;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
-	$classObj = $nl->getclass($indiceClasse);
+	$classObj = $nl->getclass($_GET["indiceClasse"]);
 	$classObj->set("status",MS_DELETE);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
@@ -1604,12 +1611,12 @@ function excluirClasse()
 }
 function excluirEstilo()
 {
-	global $codigoMap,$codigoLayer,$indiceClasse,$indiceEstilo,$locaplic;
+	global $codigoMap,$codigoLayer,$locaplic;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$nl = $mapa->getlayerbyname($codigoLayer);
-	$classObj = $nl->getclass($indiceClasse);
-	$classObj->deletestyle($indiceEstilo);
+	$classObj = $nl->getclass($_GET["indiceClasse"]);
+	$classObj->deletestyle($_GET["indiceEstilo"]);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
@@ -1649,40 +1656,40 @@ function pegaComport()
 }
 function alterarComport()
 {
-	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$aplicaextensao,$permitecomentario,$temporizador,$classe,$legendaimg,$escondido,$identifica,$transitioneffect,$status,$offsite,$opacity,$maxscale,$minscale,$labelitem,$labelmaxscale,$labelminscale,$symbolscale,$tolerance,$toleranceunits,$sizeunits;
+	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic;
 	$v = versao();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
-	$layer->setmetadata("aplicaextensao",$aplicaextensao);
-	$layer->setmetadata("permitecomentario",$permitecomentario);
-	$layer->setmetadata("temporizador",$temporizador);
-	$layer->setmetadata("classe",$classe);
-	$layer->setmetadata("legendaimg",$legendaimg);
-	$layer->setmetadata("escondido",$escondido);
-	$layer->setmetadata("identifica",$identifica);
-	$layer->setmetadata("transitioneffect",$transitioneffect);
-	$layer->set("status",$status);
-	if($offsite == -1 || $offsite == "null")
+	$layer->setmetadata("aplicaextensao",$_GET["aplicaextensao"]);
+	$layer->setmetadata("permitecomentario",$_GET["permitecomentario"]);
+	$layer->setmetadata("temporizador",$_GET["temporizador"]);
+	$layer->setmetadata("classe",$_GET["classe"]);
+	$layer->setmetadata("legendaimg",$_GET["legendaimg"]);
+	$layer->setmetadata("escondido",$_GET["escondido"]);
+	$layer->setmetadata("identifica",$_GET["identifica"]);
+	$layer->setmetadata("transitioneffect",$_GET["transitioneffect"]);
+	$layer->set("status",$_GET["status"]);
+	if($_GET["offsite"] == -1 || $_GET["offsite"] == "null")
 	{
-		$offsite = "-1,-1,-1";
+		$_GET["offsite"] = "-1,-1,-1";
 	}
 	$cor = $layer->offsite;
-	$c = explode(",",$offsite);
+	$c = explode(",",$_GET["offsite"]);
 	if(count($c) < 3)
-		$c = explode(" ",$offsite);
+		$c = explode(" ",$_GET["offsite"]);
 	$cor->setrgb($c[0],$c[1],$c[2]);
 	$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
-	$v["principal"] == "4" ? $layer->set("transparency",$opacity) : $layer->set("opacity",$opacity);
-	$layer->set("maxscaledenom",$maxscale);
-	$layer->set("minscaledenom",$minscale);
-	$layer->set("labelitem",$labelitem);
-	$layer->set("labelmaxscaledenom",$labelmaxscale);
-	$layer->set("labelminscaledenom",$labelminscale);
-	$layer->set("symbolscaledenom",$symbolscale);
-	$layer->set("tolerance",$tolerance);
-	$layer->set("toleranceunits",$toleranceunits);
-	$layer->set("sizeunits",$sizeunits);
+	$v["principal"] == "4" ? $layer->set("transparency",$_GET["opacity"]) : $layer->set("opacity",$_GET["opacity"]);
+	$layer->set("maxscaledenom",$_GET["maxscale"]);
+	$layer->set("minscaledenom",$_GET["minscale"]);
+	$layer->set("labelitem",$_GET["labelitem"]);
+	$layer->set("labelmaxscaledenom",$_GET["labelmaxscale"]);
+	$layer->set("labelminscaledenom",$_GET["labelminscale"]);
+	$layer->set("symbolscaledenom",$_GET["symbolscale"]);
+	$layer->set("tolerance",$_GET["tolerance"]);
+	$layer->set("toleranceunits",$_GET["toleranceunits"]);
+	$layer->set("sizeunits",$_GET["sizeunits"]);
 
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
@@ -1707,20 +1714,20 @@ function pegaTitulo()
 	return $dados;
 }
 function alterarNomeTema(){
-	global $locaplic,$codigoMap, $novoNome, $esquemaadmin;
+	global $locaplic,$codigoMap, $esquemaadmin;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoMap);
 	if($layer){
-		$layer->setmetadata("tema",$novoNome);
+		$layer->setmetadata("tema",$_GET["novoNome"]);
 		$mapa->save($mapfile);
 		removeCabecalho($mapfile);
 		include("conexao.php");
 		if($convUTF){
-			$novoNome = utf8_encode($novoNome);
+			$_GET["novoNome"] = utf8_encode($_GET["novoNome"]);
 		}
 		$dataCol = array(
-			"nome_tema" => $novoNome
+			"nome_tema" => $_GET["novoNome"]
 		);
 		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol," WHERE codigo_tema='$codigoMap'");
 		$dbhw = null;
@@ -1730,22 +1737,22 @@ function alterarNomeTema(){
 }
 function alterarTitulo()
 {
-	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$name,$tema,$iconetema,$mensagem,$escala,$extensao;
+	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
 
-	$layer->set("name",$name);
-	$layer->setmetadata("tema",$tema);
-	$layer->setmetadata("iconetema",$iconetema);
-	$layer->setmetadata("mensagem",$mensagem);
-	$layer->setmetadata("escala",$escala);
-	$layer->setmetadata("extensao",$extensao);
-	$layer->set("group",$group);
+	$layer->set("name",$_GET["name"]);
+	$layer->setmetadata("tema",$_GET["tema"]);
+	$layer->setmetadata("iconetema",$_GET["iconetema"]);
+	$layer->setmetadata("mensagem",$_GET["mensagem"]);
+	$layer->setmetadata("escala",$_GET["escala"]);
+	$layer->setmetadata("extensao",$_GET["extensao"]);
+	$layer->set("group",$_GET["group"]);
 
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
-	$codigoLayer = $name;
+	$codigoLayer = $_GET["name"];
 	return "ok";
 }
 function pegaDispo()
@@ -1784,15 +1791,15 @@ function pegaEditavel()
 }
 function alterarEditavel()
 {
-	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$editavel,$colunaidunico,$tabelaeditavel,$esquematabelaeditavel,$colunageometria;
+	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
-	$layer->setmetadata("EDITAVEL",$editavel);
-	$layer->setmetadata("COLUNAIDUNICO",$colunaidunico);
-	$layer->setmetadata("TABELAEDITAVEL",$tabelaeditavel);
-	$layer->setmetadata("ESQUEMATABELAEDITAVEL",$esquematabelaeditavel);
-	$layer->setmetadata("COLUNAGEOMETRIA",$colunageometria);
+	$layer->setmetadata("EDITAVEL",$_GET["editavel"]);
+	$layer->setmetadata("COLUNAIDUNICO",$_GET["colunaidunico"]);
+	$layer->setmetadata("TABELAEDITAVEL",$_GET["tabelaeditavel"]);
+	$layer->setmetadata("ESQUEMATABELAEDITAVEL",$_GET["esquematabelaeditavel"]);
+	$layer->setmetadata("COLUNAGEOMETRIA",$_GET["colunageometria"]);
 	$layer->setmetadata("cache","");
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
@@ -1800,30 +1807,30 @@ function alterarEditavel()
 }
 function alterarDispo()
 {
-	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic,$download,$arquivodownload,$arquivokmz,$ogc_tema,$kml_tema,$kmz_tema,$download_tema;
+	global $dir_tmp,$codigoMap,$codigoLayer,$locaplic;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);
 	$layer = $mapa->getlayerbyname($codigoLayer);
-	$layer->setmetadata("download",$download);
-	$layer->setmetadata("arquivodownload",$arquivodownload);
-	$layer->setmetadata("arquivokmz",$arquivokmz);
-	$layer->setmetadata("permiteogc",$ogc_tema);
-	$layer->setmetadata("permitekml",$kml_tema);
-	$layer->setmetadata("permitekmz",$kmz_tema);
-	$layer->setmetadata("permitedownload",$download_tema);
+	$layer->setmetadata("download",$_GET["download"]);
+	$layer->setmetadata("arquivodownload",$_GET["arquivodownload"]);
+	$layer->setmetadata("arquivokmz",$_GET["arquivokmz"]);
+	$layer->setmetadata("permiteogc",$_GET["ogc_tema"]);
+	$layer->setmetadata("permitekml",$_GET["kml_tema"]);
+	$layer->setmetadata("permitekmz",$_GET["kmz_tema"]);
+	$layer->setmetadata("permitedownload",$_GET["download_tema"]);
 	$mapa->save($mapfile);
 	removeCabecalho($mapfile);
 	return "ok";
 }
 //essa funcao existe tambem em menutemas.php
 function alteraTemas(){
-	global $esquemaadmin,$codigoLayer,$ogc_tema,$kml_tema,$kmz_tema,$locaplic,$download_tema;
+	global $esquemaadmin,$codigoLayer,$locaplic;
 	include("conexao.php");
 	$dataCol = array(
-		"download_tema" => $download_tema,
-		"ogc_tema" => $ogc_tema,
-		"kml_tema" => $kml_tema,
-		"kmz_tema" => $kmz_tema
+		"download_tema" => $_GET["download_tema"],
+		"ogc_tema" => $_GET["ogc_tema"],
+		"kml_tema" => $_GET["kml_tema"],
+		"kmz_tema" => $_GET["kmz_tema"]
 	);
 	i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigoLayer'");
 	$dbhw = null;
