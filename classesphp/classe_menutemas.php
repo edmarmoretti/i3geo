@@ -156,12 +156,12 @@ array
 		else
 		{$tipo = "gruposeraiz";}
 		$tempm = $this->pegaListaDeMenus($filtraOgc,$filtraDown);
+		include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
+		$arvore = new Arvore($this->locaplic,$this->idioma,$this->filtro);
 		foreach($tempm as $menu)
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
-				include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
-				$arvore = new Arvore($this->locaplic,$this->idioma,$this->filtro);
 				$grupos = $arvore->formataGruposMenu($idmenu,$this->perfil,$listasgrupos,$ordenaNome,$filtraOgc,$filtraDown);
 				unset($arvore);
 			}

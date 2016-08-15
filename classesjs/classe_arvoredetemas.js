@@ -839,7 +839,7 @@ i3GEO.arvoreDeTemas = {
 			}
 		};
 		if (i3GEO.arvoreDeTemas.FILTRADOWNLOAD || i3GEO.arvoreDeTemas.FILTRAOGC) {
-			i3GEO.php.pegalistadegrupos(retorno, id_menu, "sim");
+			i3GEO.php.pegalistadegrupos(retorno, id_menu, "sim", "sim", "sim", "sim");
 		} else {
 			i3GEO.php.pegalistadegrupos(retorno, id_menu, "nao");
 		}

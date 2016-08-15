@@ -37,10 +37,12 @@ Arquivo:
 
 i3geo/admin/php/parsemapfile.php
 */
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 include(dirname(__FILE__)."/../../ms_configura.php");
 include_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
+
 //
 //essa variavel indica se a senha do banco e bloqueada ou nao caso
 //o tema seja do tipo postgis
@@ -48,6 +50,7 @@ include_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 //
 $bloqueiaStringConexao = true;
 //
+$forcawms = $_GET["forcawms"];
 error_reporting(0);
 if(!isset($forcawms)){$forcawms = "nao";}
 $objcontype[0] = "MS_INLINE";
@@ -75,7 +78,7 @@ $objlayertypes[6] = "MS_LAYER_CIRCLE";
 $objlayertypes[7] = "MS_LAYER_TILEINDEX";
 $objlayertypes[8] = "MS_LAYER_CHART";
 
-$codigoLayer = $id;
+$codigoLayer = $_GET(["id"]);
 $mapfile = $locaplic."/temas/".$codigoLayer.".map";
 //remove temas restritos pelo sistema de controle de usuarios
 $indevidos = validaAcessoTemas($mapfile,false);
@@ -85,11 +88,12 @@ if($indevidos == true){
 }
 //
 $mapa = ms_newMapObj($mapfile);
+$tipoparse = $_GET(["tipoparse"]);
 if(!isset($tipoparse) || $tipoparse==""){
 	mapfile($_GET["output"]);
 	exit;
 }
-
+$layername = $_GET(["layername"]);
 if($tipoparse == "legenda")
 {
 	$tipoLegenda = tipoLegenda($layername);
@@ -408,16 +412,16 @@ function mapfile($output="xml")
 			else{
 				$xml .= "<user>".preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</user>\n";
 				$json["layer"]["connection"]["user"] = preg_replace('/.*user\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
-				
+
 				$xml .= "<password>".preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</password>\n";
 				$json["layer"]["connection"]["password"] = preg_replace('/.*password\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
-				
+
 				$xml .= "<dbname>".preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</dbname>\n";
 				$json["layer"]["connection"]["dbname"] = preg_replace('/.*dbname\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
-				
+
 				$xml .= "<host>".preg_replace('/.*host\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</host>\n";
 				$json["layer"]["connection"]["host"] = preg_replace('/.*host\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
-				
+
 				$xml .= "<port>".preg_replace('/.*port\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con)."</port>\n";
 				$json["layer"]["connection"]["port"] = preg_replace('/.*port\s*=\s*([a-zA-Z0-9_.]+).*/i', '\1', $con);
 			}
@@ -446,7 +450,7 @@ function mapfile($output="xml")
 			$xml .= "<labelmaxscale>$layer->labelmaxscaledenom</labelmaxscale>\n";
 			$xml .= "<labelminscale>$layer->labelminscaledenom</labelminscale>\n";
 			$xml .= "<labelsizeitem></labelsizeitem>\n";
-			
+
 			$json["layer"]["esquema"] = $esquemaTabela[0];
 			$json["layer"]["tabela"] = $esquemaTabela[1];
 			$json["layer"]["where"] = $s[1];
@@ -463,13 +467,13 @@ function mapfile($output="xml")
 		$xml .= "<minscale>$layer->minscaledenom</minscale>\n";
 		$xml .= "<offsite>".$layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue."</offsite>\n";
 		$xml .= "<opacity>$layer->opacity</opacity>\n";
-		
+
 		$json["layer"]["group"] = $layer->group;
 		$json["layer"]["maxscale"] = $layer->maxscaledenom;
 		$json["layer"]["minscale"] = $layer->minscaledenom;
 		$json["layer"]["offsite"] = $layer->offsite->red.",".$layer->offsite->green.",".$layer->offsite->blue;
 		$json["layer"]["opacity"] = $layer->opacity;
-		
+
 		if($ct != "xMS_WMS")
 		{
 			$xml .= "<symbolscale>$layer->symbolscaledenom</symbolscale>\n";
@@ -482,7 +486,7 @@ function mapfile($output="xml")
 			$xml .= "<classes>\n";
 			$xml .= pegaClasses($layer,"xml");
 			$xml .= "</classes>\n";
-			
+
 			$json["layer"]["symbolscale"] = $layer->symbolscaledenom;
 			$json["layer"]["tileindex"] = $layer->tileindex;
 			$json["layer"]["tileitem"] = $layer->tileitem;
@@ -520,7 +524,7 @@ function pegaClasses($layer,$output="xml")
 		$xml .= pegaEstilos($classe,$output);
 		$xml .= "</estilos>\n";
 		$xml .= "</classe>\n";
-		
+
 		$j = array();
 		$j["name"] = mb_convert_encoding(($classe->name),"UTF-8","ISO-8859-1");
 		$j["expression"] = $classe->getExpressionString();
@@ -549,7 +553,7 @@ function pegaEstilos($classe,$output = "xml")
 		$xml .= "<backgroundcolor>".$estilo->backgroundcolor->red.",".$estilo->backgroundcolor->green.",".$estilo->backgroundcolor->blue."</backgroundcolor>\n";
 		$xml .= "<outlinecolor>".$estilo->outlinecolor->red.",".$estilo->outlinecolor->green.",".$estilo->outlinecolor->blue."</outlinecolor>\n";
 		$xml .= "</estilo>\n";
-		
+
 		$e = array();
 		$e["symbolname"] = $estilo->symbolname;
 		$e["color"] = $estilo->color->red.",".$estilo->color->green.",".$estilo->color->blue;

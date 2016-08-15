@@ -4,9 +4,6 @@ Esse programa e uma adaptacao do codigo i3geo/ogc.php
 E utilizado no preview de camadas no editor de mapfiles
 Evita bloqueios de OGC e nao faz cache
  */
-include(dirname(__FILE__)."/../../ms_configura.php");
-include(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
-include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include(dirname(__FILE__)."/login.php");
 if(verificaOperacaoSessao("admin/php/editortexto") == false){
 	//echo "Vc nao pode realizar essa operacao.";exit;
@@ -35,7 +32,7 @@ if(isset($_GET["BBOX"])){
 	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
 }
 $req = ms_newowsrequestobj();
-$_GET = array_merge($_GET,$_POST);
+
 if(!isset($_GET["srs"]) && !isset($_GET["SRS"])){
 	$_GET["srs"] = "EPSG:4326";
 }

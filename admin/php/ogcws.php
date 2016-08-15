@@ -49,67 +49,7 @@ $web = $mapa->web;
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {
-	/*
-	Note:
 
-	Valores que o par&acirc;metro &funcao pode receber. Os par&acirc;metros devem ser enviados na requisi&ccedil;&atilde;o em AJAX.
-	*/
-	/*
-	Valor: PEGAPARAMETROSCONFIGURA
-
-	Lista os valores atuais das vari&aacute;veis registradas no ms_configura
-
-	Retorno:
-
-	{JSON}
-	*/
-	case "PEGAPARAMETROSCONFIGURA":
-		$vs = array(
-			"ows_abstract",
-			"ows_keywordlist",
-			"ows_fees",
-			"ows_accessconstraints",
-			"ows_contactperson",
-			"ows_contactorganization",
-			"ows_contactposition",
-			"ows_addresstype",
-			"ows_address",
-			"ows_city",
-			"ows_stateorprovince",
-			"ows_postcode",
-			"ows_country",
-			"ows_contactelectronicmailaddress",
-			"ows_name"
-		);
-		$par = array();
-		foreach ($vs as $v){
-			$par[$v] = utf8_encode($mapa->getmetadata($v));
-		}
-		$par["mapfile"] = $map_file;
-		retornaJSON($par);
-		exit;
-	break;
-	/*
-	Valor: SALVACONFIGURA
-
-	Salva um novo valor de uma vari&aacute;vel no ms_configura.php
-
-	Parameters:
-
-	variavel - nome da vari&aacute;vel
-
-	valor - novo valor
-
-	Retorno:
-
-	{JSON}
-	*/
-	case "SALVACONFIGURA":
-		$web->metadata->set($variavel,$valor);
-		$mapa->save($map_file);
-		retornaJSON("ok");
-	exit;
-	break;
 }
 
 ?>

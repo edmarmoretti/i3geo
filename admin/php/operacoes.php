@@ -63,6 +63,13 @@ error_reporting(0);
 //pega as variaveis passadas com get ou post
 //
 include_once(dirname(__FILE__)."/login.php");
+
+$id = $_GET["id"];
+$id_operacao = $_GET["id_operacao"];
+$id_papel = $_GET["id_papel"];
+
+testaSafeNumerico([$id,$id_operacao]);
+
 $funcoesEdicao = array(
 		"ALTERAROPERACOES",
 		"ADICIONAPAPELOPERACOES",
@@ -113,16 +120,16 @@ switch (strtoupper($funcao))
 }
 cpjson($retorno);
 function alterarOperacoes(){
-	global $id_operacao,$codigo,$descricao;
+	global $id_operacao;
 	try{
 		include(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
-			$descricao = utf8_encode($descricao);
+			$_GET["descricao"] = utf8_encode($_GET["descricao"]);
 		}
 		if($id_operacao != ""){
 			$dataCol = array(
-				"codigo" => $codigo,
-				"descricao" => $descricao
+				"codigo" => $_GET["codigo"],
+				"descricao" => $_GET["descricao"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geousr_operacoes",$dataCol,"WHERE id_operacao = $id_operacao");
 			$retorna = $id_operacao;

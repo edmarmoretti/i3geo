@@ -36,9 +36,28 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 
 Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
-include_once(dirname(__FILE__)."/admin.php");
-
 include_once(dirname(__FILE__)."/login.php");
+
+$codigo_estat_conexao = $_GET["codigo_estat_conexao"];
+$codigo_variavel = $_GET["codigo_variavel"];
+$codigo_tipo_periodo = $_GET["codigo_tipo_periodo"];
+$codigo_tipo_regiao = $_GET["codigo_tipo_regiao"];
+$codigo_unidade_medida = $_GET["codigo_unidade_medida"];
+$codigo_tipo_regiao_pai = $_GET["codigo_tipo_regiao_pai"];
+$id_medida_variavel = $_GET["id_medida_variavel"];
+$id_classificacao = $_GET["id_classificacao"];
+$id_link = $_GET["id_link"];
+$id_classe = $_GET["id_classe"];
+$id_parametro_medida = $_GET["id_parametro_medida"];
+$id_fonteinfo = $_GET["id_fonteinfo"];
+$id_agregaregiao = $_GET["id_agregaregiao"];
+$id_mapa = $_GET["id_mapa"];
+$id_mapa_grupo = $_GET["id_mapa_grupo"];
+$id_mapa_tema = $_GET["id_mapa_tema"];
+$id_pai = $_GET["id_pai"];
+
+testaSafeNumerico([$codigo_tipo_regiao_pai,$id_pai,$id_mapa_tema,$id_mapa_grupo,$id_mapa,$id_agregaregiao,$codigo_tipo_regiao,$codigo_tipo_periodo,$id_fonteinfo,$codigo_unidade_medida,$codigo_estat_conexao,$codigo_variavel,$id_medida_variavel,$id_classificacao,$id_link,$id_classe,$id_parametro_medida]);
+
 //lista de funcoes que passam pela validacao de login
 $funcoesEdicao = array(
 	"ALTERAMAPAGRUPO",
@@ -147,10 +166,10 @@ switch (strtoupper($funcao))
 	*/
 	case "LISTAVARIAVEL":
 		$m = new Metaestat();
-		if(empty($filtro_esquema)){
-			$filtro_esquema = "";
+		if(empty($_GET["filtro_esquema"])){
+			$_GET["filtro_esquema"] = "";
 		}
-		retornaJSON($m->listaVariavel($codigo_variavel,$filtro_esquema));
+		retornaJSON($m->listaVariavel($codigo_variavel,$_GET["filtro_esquema"]));
 		exit;
 	break;
 	/*
@@ -277,7 +296,7 @@ switch (strtoupper($funcao))
 		$valores = "";
 		//se achou apenas uma regiao, pega os valores
 		if(count($regioes) < 2 && $codigo_tipo_regiao != ""){
-			$valores = $m->listaDadosRegiao($codigo_tipo_regiao,$codigoregiaopai,$valorregiaopai);
+			$valores = $m->listaDadosRegiao($codigo_tipo_regiao,$_GET["codigoregiaopai"],$_GET["valorregiaopai"]);
 		}
 		retornaJSON(array("regiaopai"=>$codigo_tipo_regiao,"regioes"=>$regioes,"valores"=>$valores));
 		exit;
@@ -353,7 +372,7 @@ switch (strtoupper($funcao))
 			}
 		}
 		else{
-			$codigo_variavel = $m->alteraVariavel($codigo_variavel,$nome,$descricao);
+			$codigo_variavel = $m->alteraVariavel($codigo_variavel,$_GET["nome"],$_GET["descricao"]);
 		}
 		retornaJSON($m->listaVariavel($codigo_variavel));
 		exit;
@@ -373,7 +392,7 @@ switch (strtoupper($funcao))
 		$m = new Metaestat();
 		$default = false;
 		//verifica se a criacao da medida esta sendo feita na tabela default
-		if($codigo_tipo_periodo < 5 && $esquemadb == "i3geo_metaestat" && $colunaidgeo == "codigoregiao" && $tabela = "dados_medidas"){
+		if($codigo_tipo_periodo < 5 && $esquemadb == "i3geo_metaestat" && $_GET["colunaidgeo"] == "codigoregiao" && $_GET["tabela"] = "dados_medidas"){
 			$default = true;
 		}
 		if(empty($id_medida_variavel)){
@@ -385,7 +404,7 @@ switch (strtoupper($funcao))
 				$filtro = " id_medida_variavel = $id_medida_variavel ";
 			}
 			if(!empty($nomemedida)){
-				$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida);
+				$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$_GET["esquemadb"],$_GET["tabela"],$_GET["colunavalor"],$_GET["colunaidgeo"],$_GET["colunaidunico"],$filtro,$_GET["nomemedida"]);
 			}
 		}
 		else{
@@ -393,9 +412,9 @@ switch (strtoupper($funcao))
 			if($default == true && $filtro == ""){
 				$filtro = " id_medida_variavel = $id_medida_variavel ";
 			}
-			$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunavalor,$colunaidgeo,$colunaidunico,$filtro,$nomemedida);
+			$m->alteraMedidaVariavel("",$id_medida_variavel,$codigo_unidade_medida,$codigo_tipo_periodo,$codigo_tipo_regiao,$codigo_estat_conexao,$_GET["esquemadb"],$_GET["tabela"],$_GET["colunavalor"],$_GET["colunaidgeo"],$_GET["colunaidunico"],$filtro,$_GET["nomemedida"]);
 		}
-		if(!empty($colunaAno) || !empty($colunaMes) || !empty($colunaDia) || !empty($colunaHora)){
+		if(!empty($_GET["colunaAno"]) || !empty($_GET["colunaMes"]) || !empty($_GET["colunaDia"]) || !empty($_GET["colunaHora"])){
 			$default = true;
 		}
 		//adiciona os parametros de tempo conforme o tipo de periodo escolhido
@@ -409,20 +428,20 @@ switch (strtoupper($funcao))
 			$id_pai = 0;
 			//anual
 			if($codigo_tipo_periodo >= 1){
-				if(empty($colunaAno)){
-					$colunaAno = "ano";
+				if(empty($_GET["colunaAno"])){
+					$_GET["colunaAno"] = "ano";
 				}
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","",$colunaAno,$id_pai,1);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Ano","",$_GET["colunaAno"],$id_pai,1);
 				$id_pai = $id_parametro_medida;
 			}
 			//mensal
 			if($codigo_tipo_periodo >= 2){
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				if(empty($colunaMes)){
-					$colunaMes = "mes";
+				if(empty($_GET["colunaMes"])){
+					$_GET["colunaMes"] = "mes";
 				}
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","",$colunaMes,$id_pai,2);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Mes","",$_GET["colunaMes"],$id_pai,2);
 				$id_pai = $id_parametro_medida;
 			}
 			//diario
@@ -431,16 +450,16 @@ switch (strtoupper($funcao))
 				if(empty($colunaDia)){
 					$colunaDia = "dia";
 				}
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","",$colunaDia,$id_pai,3);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Dia","",$_GET["colunaDia"],$id_pai,3);
 				$id_pai = $id_parametro_medida;
 			}
 			//horario
 			if($codigo_tipo_periodo == 4){
 				$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel,"","","","","","");
-				if(empty($colunaHora)){
-					$colunaHora = "hora";
+				if(empty($_GET["colunaHora"])){
+					$_GET["colunaHora"] = "hora";
 				}
-				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","",$colunaHora,$id_pai,4);
+				$m->alteraParametroMedida($id_medida_variavel,$id_parametro_medida,"Hora","",$_GET["colunaHora"],$id_pai,4);
 			}
 		}
 		retornaJSON($m->listaMedidaVariavel("",$id_medida_variavel));
@@ -462,7 +481,7 @@ switch (strtoupper($funcao))
 			$id_parametro_medida = $m->alteraParametroMedida($id_medida_variavel);
 		}
 		else{
-			$m->alteraParametroMedida("",$id_parametro_medida,$nome,$descricao,$coluna,$id_pai,$tipo);
+			$m->alteraParametroMedida("",$id_parametro_medida,$_GET["nome"],$_GET["descricao"],$_GET["coluna"],$id_pai,$_GET["tipo"]);
 		}
 		retornaJSON($m->listaParametro($id_medida_variavel,$id_parametro_medida));
 		exit;
@@ -482,16 +501,20 @@ switch (strtoupper($funcao))
 			//isso ira criar um novo registro
 			$id_classificacao = $m->alteraClassificacaoMedida($id_medida_variavel);
 			if(!empty($nome)){
-				$m->alteraClassificacaoMedida($id_classificacao,$id_classificacao,$nome,$observacao);
+				$m->alteraClassificacaoMedida($id_classificacao,$id_classificacao,$_GET["nome"],$_GET["observacao"]);
 			}
 		}
 		else{
-			$m->alteraClassificacaoMedida("",$id_classificacao,$nome,$observacao);
+			$m->alteraClassificacaoMedida("",$id_classificacao,$_GET["nome"],$_GET["observacao"]);
 		}
 		retornaJSON($m->listaClassificacaoMedida($id_medida_variavel,$id_classificacao));
 		exit;
 	break;
 	case "CALCULACLASSIFICACAO":
+		$cores = $_GET["cores"];
+		$limite = $_GET["limite"];
+		$numintervalos = $_GET["numintervalos"];
+		$tipo = $_GET["tipo"];
 		//as cores vem no formato rgb(0,0,0);
 		if(!empty($cores)){
 			$cores = str_replace("rgb(","",$cores);
@@ -641,6 +664,8 @@ switch (strtoupper($funcao))
 		exit;
 	break;
 	case "ALTERAESTILOSCLASSIFICACAO":
+		$tipo = $_GET["tipo"];
+		$aumentar = $_GET["aumentar"];
 		if($tipo == "tamanho"){
 			$m = new Metaestat();
 			$classes = $m->listaClasseClassificacao($id_classificacao);
@@ -690,7 +715,7 @@ switch (strtoupper($funcao))
 		else{
 			$titulo = $_GET["titulo"];
 			$expressao = $_GET["expressao"];
-			$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$vermelho,$verde,$azul,$tamanho,$simbolo,$overmelho,$overde,$oazul,$otamanho);
+			$m->alteraClasseClassificacao("",$id_classe,$titulo,$expressao,$_GET["vermelho"],$_GET["verde"],$_GET["azul"],$_GET["tamanho"],$_GET["simbolo"],$_GET["overmelho"],$_GET["overde"],$_GET["oazul"],$_GET["otamanho"]);
 		}
 		retornaJSON($m->listaClasseClassificacao($id_classificacao,$id_classe));
 		exit;
@@ -702,7 +727,7 @@ switch (strtoupper($funcao))
 			$id_link = $m->alteraLinkMedida($id_medida_variavel);
 		}
 		else{
-			$m->alteraLinkMedida("",$id_link,$nome,$link);
+			$m->alteraLinkMedida("",$id_link,$_GET["nome"],$_GET["link"]);
 		}
 		retornaJSON($m->listaLinkMedida($id_medida_variavel,$id_link));
 		exit;
@@ -714,7 +739,7 @@ switch (strtoupper($funcao))
 			$id_fonteinfo = $m->alteraFonteinfo();
 		}
 		else{
-			$m->alteraFonteinfo($id_fonteinfo,$titulo,$link);
+			$m->alteraFonteinfo($id_fonteinfo,$_GET["titulo"],$_GET["link"]);
 		}
 		retornaJSON($m->listaFonteinfo($id_fonteinfo));
 		exit;
@@ -741,7 +766,7 @@ switch (strtoupper($funcao))
 			$codigo_unidade_medida = $m->alteraUnidadeMedida();
 		}
 		else{
-			$codigo_unidade_medida = $m->alteraUnidadeMedida($codigo_unidade_medida,$nome,$sigla,$permitesoma,$permitemedia);
+			$codigo_unidade_medida = $m->alteraUnidadeMedida($codigo_unidade_medida,$_GET["nome"],$_GET["sigla"],$_GET["permitesoma"],$_GET["permitemedia"]);
 		}
 		retornaJSON($m->listaUnidadeMedida($codigo_unidade_medida));
 		exit;
@@ -761,7 +786,7 @@ switch (strtoupper($funcao))
 			$codigo_estat_conexao = $m->alteraConexao();
 		}
 		else{
-			$codigo_estat_conexao = $m->alteraConexao($codigo_estat_conexao,$bancodedados,$host,$porta,$usuario);
+			$codigo_estat_conexao = $m->alteraConexao($codigo_estat_conexao,$_GET["bancodedados"],$_GET["host"],$_GET["porta"],$_GET["usuario"]);
 		}
 		retornaJSON($m->listaConexao($codigo_estat_conexao));
 		exit;
@@ -781,7 +806,7 @@ switch (strtoupper($funcao))
 			$codigo_tipo_regiao = $m->alteraTipoRegiao();
 		}
 		else{
-			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$nome_tipo_regiao,$descricao_tipo_regiao,$esquemadb,$tabela,$colunageo,$colunacentroide,$data,$identificador,$colunanomeregiao,$srid,$codigo_estat_conexao,$colunasvisiveis,$apelidos);
+			$codigo_tipo_regiao = $m->alteraTipoRegiao($codigo_tipo_regiao,$_GET["nome_tipo_regiao"],$_GET["descricao_tipo_regiao"],$_GET["esquemadb"],$_GET["tabela"],$_GET["colunageo"],$_GET["colunacentroide"],$_GET["data"],$_GET["identificador"],$_GET["colunanomeregiao"],$_GET["srid"],$codigo_estat_conexao,$_GET["colunasvisiveis"],$_GET["apelidos"]);
 		}
 		retornaJSON($m->listaTipoRegiao($codigo_tipo_regiao));
 		exit;
@@ -792,7 +817,7 @@ switch (strtoupper($funcao))
 			$id_agregaregiao = $m->alteraAgregaRegiao($codigo_tipo_regiao);
 		}
 		else{
-			$id_agregaregiao = $m->alteraAgregaRegiao("",$id_agregaregiao,$codigo_tipo_regiao_pai,$colunaligacao_regiaopai);
+			$id_agregaregiao = $m->alteraAgregaRegiao("",$id_agregaregiao,$codigo_tipo_regiao_pai,$_GET["colunaligacao_regiaopai"]);
 			$codigo_tipo_regiao = "";
 		}
 		retornaJSON($m->listaAgregaRegiao($codigo_tipo_regiao,$id_agregaregiao));
@@ -815,7 +840,7 @@ switch (strtoupper($funcao))
 		else{
 			//impede a alteracao dos valores reservados
 			if($codigo_tipo_periodo > 4){
-				$codigo_unidade_medida = $m->alteraTipoPeriodo($codigo_tipo_periodo,$nome,$descricao);
+				$codigo_unidade_medida = $m->alteraTipoPeriodo($codigo_tipo_periodo,$_GET["nome"],$_GET["descricao"]);
 			}
 		}
 		retornaJSON($m->listaTipoPeriodo($codigo_tipo_periodo));
@@ -836,7 +861,7 @@ switch (strtoupper($funcao))
 			$id_mapa = $m->alteraMapa();
 		}
 		else{
-			$id_mapa = $m->alteraMapa($id_mapa,$titulo,$template,$logoesquerdo,$logodireito,$publicado);
+			$id_mapa = $m->alteraMapa($id_mapa,$_GET["titulo"],$_GET["template"],$_GET["logoesquerdo"],$_GET["logodireito"],$_GET["publicado"]);
 		}
 		retornaJSON($m->listaMapas($id_mapa));
 		exit;
@@ -856,7 +881,7 @@ switch (strtoupper($funcao))
 			$id_mapa_grupo = $m->alteraMapaGrupo($id_mapa);
 		}
 		else{
-			$id_mapa_grupo = $m->alteraMapaGrupo($id_mapa,$id_mapa_grupo,$titulo);
+			$id_mapa_grupo = $m->alteraMapaGrupo($id_mapa,$id_mapa_grupo,$_GET["titulo"]);
 		}
 		retornaJSON($m->listaGruposMapa($id_mapa,$id_mapa_grupo));
 		exit;
@@ -867,7 +892,7 @@ switch (strtoupper($funcao))
 			$id_mapa_tema = $m->alteraMapaTema($id_mapa_grupo);
 		}
 		else{
-			$id_mapa_tema = $m->alteraMapaTema($id_mapa_grupo,$id_mapa_tema,$titulo,$id_medida_variavel);
+			$id_mapa_tema = $m->alteraMapaTema($id_mapa_grupo,$id_mapa_tema,$_GET["titulo"],$id_medida_variavel);
 		}
 		retornaJSON($m->listaTemasMapa($id_mapa_grupo,$id_mapa_tema));
 		exit;
@@ -1210,7 +1235,7 @@ switch (strtoupper($funcao))
 	*/
 	case "DADOSMEDIDAVARIAVEL":
 		$m = new Metaestat();
-		$dados = $m->dadosMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$agruparpor);
+		$dados = $m->dadosMedidaVariavel($id_medida_variavel,$_GET["filtro"],$_GET["todasascolunas"],$_GET["agruparpor"]);
 		if($formato == "json"){
 			retornaJSON($dados);
 		}
@@ -1247,22 +1272,22 @@ switch (strtoupper($funcao))
 	*/
 	case "MAPFILEMEDIDAVARIAVEL":
 		//$filtro usa aspas duplas para enviar os parametros
-		$filtro = str_replace('"',"'",$filtro);
+		$filtro = str_replace('"',"'",$_GET["filtro"]);
 		$m = new Metaestat();
 		if(!isset($codigo_tipo_regiao)){
 			$codigo_tipo_regiao = "";
 		}
-		if(!isset($opacidade)){
-			$opacidade = "";
+		if(!isset($_GET["opacidade"])){
+			$_GET["opacidade"] = "";
 		}
-		if($cachemapfile === "nao"){
-			$cachemapfile = false;
+		if($_GET["cachemapfile"] === "nao"){
+			$_GET["cachemapfile"] = false;
 		}
 		else{
-			$cachemapfile = true;
+			$_GET["cachemapfile"] = true;
 		}
-		if($formato == "json"){
-			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor,$codigo_tipo_regiao,$opacidade,false,$cachemapfile));
+		if($_GET["formato"] == "json"){
+			retornaJSON($m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$_GET["todasascolunas"],$_GET["tipolayer"],$_GET["titulolayer"],$id_classificacao,$_GET["agruparpor"],$codigo_tipo_regiao,$_GET["opacidade"],false,$_GET["cachemapfile"]));
 		}
 		exit;
 	break;
@@ -1274,16 +1299,16 @@ switch (strtoupper($funcao))
 	*/
 	case "MAPFILETIPOREGIAO":
 		$m = new Metaestat();
-		if(empty($outlinecolor)){
-			$outlinecolor = "255,0,0";
+		if(empty($_GET["outlinecolor"])){
+			$_GET["outlinecolor"] = "255,0,0";
 		}
-		if(empty($width)){
-			$width = 1;
+		if(empty($_GET["width"])){
+			$_GET["width"] = 1;
 		}
-		if(empty($nomes)){
-			$nomes = "nao";
+		if(empty($_GET["nomes"])){
+			$_GET["nomes"] = "nao";
 		}
-		retornaJSON($m->mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor,$width,$nomes));
+		retornaJSON($m->mapfileTipoRegiao($codigo_tipo_regiao,$_GET["outlinecolor"],$_GET["width"],$_GET["nomes"]));
 		exit;
 	break;
 	/*
@@ -1294,9 +1319,10 @@ switch (strtoupper($funcao))
 	*/
 	case "KMLMEDIDAVARIAVEL":
 		$m = new Metaestat();
-		$r = $m->mapfileMedidaVariavel($id_medida_variavel,$filtro,$todasascolunas,$tipolayer,$titulolayer,$id_classificacao,$agruparpor);
+		$r = $m->mapfileMedidaVariavel($id_medida_variavel,$_GET["filtro"],$_GET["todasascolunas"],$_GET["tipolayer"],$_GET["titulolayer"],$id_classificacao,$_GET["agruparpor"]);
 		//cria um mapfile completo, que inclui a camada no mapfile de inicializacao do i3geo
 		$mapfile = $m->mapfileCompleto($r["mapfile"]);
+		$formato = $_GET["formato"];
 		if($formato == "kml" || $formato == "kmz"){
 			//define as variaveis necessarias ao pacote kmlserver
 			set_time_limit(0);
@@ -1354,7 +1380,7 @@ switch (strtoupper($funcao))
 	*/
 	case "SUMARIOMEDIDAVARIAVEL":
 		$m = new Metaestat();
-		$dados = $m->sumarioMedidaVariavel($id_medida_variavel,$filtro,$agruparpor);
+		$dados = $m->sumarioMedidaVariavel($id_medida_variavel,$_GET["filtro"],$_GET["agruparpor"]);
 		if($formato == "json"){
 			retornaJSON($dados);
 		}
@@ -1405,11 +1431,11 @@ switch (strtoupper($funcao))
 	*/
 	case "TABELASESQUEMA":
 		$m = new Metaestat();
-		if(empty($excluigeom)){
-			$excluigeom = "";
+		if(empty($_GET["excluigeom"])){
+			$_GET["excluigeom"] = "";
 		}
 		if($formato == "json"){
-			retornaJSON($m->tabelasEsquema($codigo_estat_conexao,$nome_esquema,$excluigeom));
+			retornaJSON($m->tabelasEsquema($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["excluigeom"]));
 		}
 		exit;
 	break;
@@ -1419,35 +1445,35 @@ switch (strtoupper($funcao))
 			retornaJSON("erro");
 			exit;
 		}
-		retornaJSON($m->criaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$comentario));
+		retornaJSON($m->criaTabelaDB($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],$_GET["comentario"]));
 		exit;
 	break;
 	case "CRIAESQUEMADB":
 		$m = new Metaestat();
-		retornaJSON($m->criaEsquemaDB($codigo_estat_conexao,$nome_esquema));
+		retornaJSON($m->criaEsquemaDB($codigo_estat_conexao,$_GET["nome_esquema"]));
 		exit;
 		break;
 	case "ALTERANOMETABELADB":
 		$m = new Metaestat();
-		if($nome_esquema != "i3geo_metaestat"){
+		if($_GET["nome_esquema"] != "i3geo_metaestat"){
 			retornaJSON("erro");
 			exit;
 		}
-		retornaJSON($m->alteraNomeTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela));
+		retornaJSON($m->alteraNomeTabelaDB($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],$_GET["novonome_tabela"]));
 		exit;
 	break;
 	case "ALTERANOMEESQUEMADB":
 		$m = new Metaestat();
-		retornaJSON($m->alteraNomeEsquemaDB($codigo_estat_conexao,$nome_esquema,$novonome_esquema));
+		retornaJSON($m->alteraNomeEsquemaDB($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["novonome_esquema"]));
 		exit;
 	break;
 	case "COPIATABELADB":
 		$m = new Metaestat();
-		if($nome_esquema != "i3geo_metaestat"){
+		if($_GET["nome_esquema"] != "i3geo_metaestat"){
 			retornaJSON("erro");
 			exit;
 		}
-		retornaJSON($m->copiaTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$novonome_tabela));
+		retornaJSON($m->copiaTabelaDB($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],$_GET["novonome_tabela"]));
 		exit;
 	break;
 	/*
@@ -1471,19 +1497,19 @@ switch (strtoupper($funcao))
 	*/
 	case "COLUNASTABELA":
 		$m = new Metaestat();
-		if(empty($tipo)){
-			$tipo = "";
+		if(empty($_GET["tipo"])){
+			$_GET["tipo"] = "";
 		}
-		if($formato == "json"){
-			retornaJSON($m->colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo));
+		if($_GET["formato"] == "json"){
+			retornaJSON($m->colunasTabela($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],$_GET["tipo"]));
 		}
 		exit;
 	break;
 	case "INFOTABELA":
 		$m = new Metaestat();
-		$colunas = $m->colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,"");
-		$comentario = $m->comentarioTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela);
-		if($formato == "json"){
+		$colunas = $m->colunasTabela($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],"");
+		$comentario = $m->comentarioTabela($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"]);
+		if($_GET["formato"] == "json"){
 			retornaJSON(array(
 				"colunas"=>$colunas,
 				"comentario"=>$comentario
@@ -1492,34 +1518,34 @@ switch (strtoupper($funcao))
 		exit;
 	case "CRIACOLUNADB":
 		$m = new Metaestat();
-		if($nome_esquema != "i3geo_metaestat"){
+		if($_GET["nome_esquema"] != "i3geo_metaestat"){
 			retornaJSON("erro");
 			exit;
 		}
-		retornaJSON($m->criaColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nova_coluna,$tipo));
+		retornaJSON($m->criaColunaDB($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],$_GET["nova_coluna"],$_GET["tipo"]));
 		exit;
 	break;
 	case "ALTERANOMECOLUNADB":
 		$m = new Metaestat();
-		if($nome_esquema != "i3geo_metaestat"){
+		if($_GET["nome_esquema"] != "i3geo_metaestat"){
 			retornaJSON("erro");
 			exit;
 		}
-		retornaJSON($m->alteraNomeColunaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nome_coluna,$novonome_coluna));
+		retornaJSON($m->alteraNomeColunaDB($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],$_GET["nome_coluna"],$_GET["novonome_coluna"]));
 		exit;
 	break;
 	case "OBTEMDADOSTABELADB":
 		$m = new Metaestat();
-		if($formato == "json"){
-			retornaJSON($m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo,$nreg));
+		if($_GET["formato"] == "json"){
+			retornaJSON($m->obtemDadosTabelaDB($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],$_GET["geo"],$_GET["nreg"]));
 		}
-		if($formato == "csv"){
-			$dados = $m->obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo,$nreg);
+		if($_GET["formato"] == "csv"){
+			$dados = $m->obtemDadosTabelaDB($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"],$_GET["geo"],$_GET["nreg"]);
 			require_once(dirname(__FILE__)."/../../pacotes/parsecsv/parsecsv.lib.php");
 			$csv = new parseCSV();
 			//$csv->encoding('UTF-16', 'UTF-8');
 			$csv->titles = $dados["nomescolunas"];
-			$csv->output(true, 'mvar'.$nome_tabela.'_'.date('dmY').'.csv', $dados["linhas"]);
+			$csv->output(true, 'mvar'.$_GET["nome_tabela"].'_'.date('dmY').'.csv', $dados["linhas"]);
 		}
 		exit;
 	break;
@@ -1544,9 +1570,9 @@ switch (strtoupper($funcao))
 	*/
 	case "DESCREVECOLUNASTABELA":
 		$m = new Metaestat();
-		if($formato == "json"){
-			$c = $m->descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela);
-			$s = $m->listaTabelaSerial($codigo_estat_conexao,$nome_esquema,$nome_tabela);
+		if($_GET["formato"] == "json"){
+			$c = $m->descreveColunasTabela($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"]);
+			$s = $m->listaTabelaSerial($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["nome_tabela"]);
 			for($i=0;$i<count($c);$i++){
 				if($c[$i]["field"] == $s){
 					$c[$i]["serial"] = true;
@@ -1556,8 +1582,6 @@ switch (strtoupper($funcao))
 				}
 			}
 			retornaJSON($c);
-
-
 		}
 		exit;
 	break;
@@ -1566,7 +1590,7 @@ switch (strtoupper($funcao))
 		if(empty($codigo_variavel)){
 			$codigo_variavel = "";
 		}
-		$dados = $m->relatorioCompleto($codigo_variavel,$dadosGerenciais);
+		$dados = $m->relatorioCompleto($codigo_variavel,$_GET["dadosGerenciais"]);
 		retornaJSON($dados);
 		exit;
 		break;
@@ -1575,29 +1599,29 @@ switch (strtoupper($funcao))
 		if(empty($codigo_variavel)){
 			$codigo_variavel = "";
 		}
-		$dados = $m->relatorioCompleto($codigo_variavel,$dadosGerenciais);
-		if(empty($detalhes)){
-			$detalhes = "sim";
+		$dados = $m->relatorioCompleto($codigo_variavel,$_GET["dadosGerenciais"]);
+		if(empty($_GET["detalhes"])){
+			$_GET["detalhes"] = "sim";
 		}
-		$dados = $m->formataRelatorioHtml($dados,$detalhes);
+		$dados = $m->formataRelatorioHtml($dados,$_GET["detalhes"]);
 		retornaJSON($dados);
 		exit;
 	break;
 	//insere dados com base em um arquivo csv ja existente no servidor
 	case "INSERIRDADOS":
 		$m = new Metaestat();
-		retornaJSON($m->inserirDados($nomearquivoserv,$id_medida_variavel,$codigoregiao,$valor,$tipoinclusao,$ano,$mes,$dia,$hora));
+		retornaJSON($m->inserirDados($nomearquivoserv,$id_medida_variavel,$_GET["codigoregiao"],$_GET["valor"],$_GET["tipoinclusao"],$_GET["ano"],$_GET["mes"],$_GET["dia"],$_GET["hora"]));
 		exit;
 	break;
 	//grava ou cria um registro de uma regiao
 	case "MANTEMDADOSREGIAO":
 		$m = new Metaestat();
-		retornaJSON($m->mantemDadosRegiao($codigo_tipo_regiao,$identificador,$identificadornovo,$nome,$wkt,$tipo));
+		retornaJSON($m->mantemDadosRegiao($codigo_tipo_regiao,$_GET["identificador"],$_GET["identificadornovo"],$_GET["nome"],$_GET["wkt"],$_GET["tipo"]));
 		exit;
 	break;
 	case "LISTAATRIBUTOSMEDIDAVARIAVELXY":
 		$m = new Metaestat();
-		$regiao = $m->xy2regiao($codigo_tipo_regiao, $x, $y);
+		$regiao = $m->xy2regiao($codigo_tipo_regiao, $_GET["x"], $_GET["y"]);
 		$identificador_regiao = $regiao["identificador_regiao"];
 		$resultado = array();
 		if($regiao != ""){
@@ -1613,7 +1637,7 @@ switch (strtoupper($funcao))
 	case "LISTATODOSATRIBUTOSMEDIDAVARIAVELXY":
 		$lista = array();
 		$m = new Metaestat();
-		$regiao = $m->xy2regiao($codigo_tipo_regiao, $x, $y);
+		$regiao = $m->xy2regiao($codigo_tipo_regiao, $_GET["x"], $_GET["y"]);
 		$identificador_regiao = $regiao["identificador_regiao"];
 		$variaveis = $m->listaVariavel();
 		$dadosVariavel = array();
@@ -1643,24 +1667,24 @@ switch (strtoupper($funcao))
 	case "SALVAATRIBUTOSMEDIDAVARIAVEL":
 		/*	"&codigo_tipo_regiao="+codigo_tipo_regiao+"&identificador_regiao="+identificador_regiao+"&id_medida_variavel="+id_medida_variavel+"&colunas="+colunasT[0]+"&valores="+valoresT.join("|")+"&idsunicos="+idsunicosT[0]
 		*/
-		$valores = explode("#",$valores);//array de uma lista de strings com valores separados por ;
-		$idsunicos = explode("|",$idsunicos);//array
-		$colunas = explode("|",$colunas);//array
+		$_GET["valores"] = explode("#",$_GET["valores"]);//array de uma lista de strings com valores separados por ;
+		$_GET["idsunicos"] = explode("|",$_GET["idsunicos"]);//array
+		$_GET["colunas"] = explode("|",$_GET["colunas"]);//array
 		$m = new Metaestat();
-		$resultado = $m->salvaAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$idsunicos,$colunas,$valores);
+		$resultado = $m->salvaAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$_GET["identificador_regiao"],$_GET["idsunicos"],$_GET["colunas"],$_GET["valores"]);
 		retornaJSON($resultado);
 		exit;
 	break;
 	//utilizado na ferramenta de identificacao
 	case "SALVAATRIBUTOSTIPOREGIAO":
 		$m = new Metaestat();
-		$resultado = $m->mantemDadosRegiao($codigo_tipo_regiao,$identificador_regiao,$identificador_regiao,$valores,"","alterar",$colunas);
+		$resultado = $m->mantemDadosRegiao($codigo_tipo_regiao,$_GET["identificador_regiao"],$_GET["identificador_regiao"],$_GET["valores"],"","alterar",$_GET["colunas"]);
 		retornaJSON($resultado);
 		exit;
 		break;
 	case "EXCLUIATRIBUTOSMEDIDAVARIAVEL":
 		$m = new Metaestat();
-		$resultado = $m->excluiAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$identificador_regiao,$id);
+		$resultado = $m->excluiAtributosMedidaVariavel($id_medida_variavel,$codigo_tipo_regiao,$_GET["identificador_regiao"],$id);
 		retornaJSON($resultado);
 		exit;
 	break;

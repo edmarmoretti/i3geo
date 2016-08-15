@@ -42,7 +42,6 @@ include "../init/head.php";
 <p>{{{linkpagina}}}: <a href="{{{url}}}?temaOgc={{{tema}}}">{{{url}}}?temaOgc={{{tema}}}</a>
 <p>{{{wstodas}}}: <a href="{{{servico}}}" target="_blank" >{{{servico}}}</a>
 <p>{{{wscamada}}}: <a href="{{{servico}}}tema={{{tema}}}{{{id_medida_variavel}}}&" target="_blank" >{{{servico}}}tema={{{tema}}}{{{id_medida_variavel}}}&</a>
-<p>{{{linkpagina}}}: <a href="{{{url}}}?temaOgc={{{tema}}}">{{{url}}}?temaOgc={{{tema}}}</a>
 <p><a href="{{{urli3geo}}}/fontetema.php?tema={{{tema}}}" target="_blank" >Metadata</a></p>
 <p><a target=blank href="{{{servico}}}service=wms&version=1.1.1&request=getcapabilities&layers={{{tema}}}{{{id_medida_variavel}}}" >GetCapabilities</a>
 <p><a target=blank href="{{{servico}}}SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=<?php echo $mapext;?>&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers={{{tema}}}{{{id_medida_variavel}}}" >{{{getmap}}}</a>

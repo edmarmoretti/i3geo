@@ -44,6 +44,12 @@ error_reporting(0);
 //n&atilde;o sei pq mas ob_start e clean s&atilde;o necess&aacute;rios no Linux para n&atilde;o gerar erro indesejado
 //
 include_once(dirname(__FILE__)."/login.php");
+
+$id_ws = $_GET["id_ws"];
+$id = $_GET["id"];
+
+testaSafeNumerico([$id]);
+
 $funcoesEdicao = array(
 		"ALTERARWS",
 		"EXCLUIR"
@@ -71,12 +77,11 @@ switch (strtoupper($funcao))
 	{JSON}
 	*/
 	case "PEGAWS":
-		if(isset($tipows) && $tipows != "")
-		{
-			$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = '".strtoupper($tipows)."' order by tipo_ws,nome_ws ";
+		if(isset($tipows) && $tipows != "")	{
+			$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = '".strtoupper($_GET["tipows"])."' order by tipo_ws,nome_ws ";
 		}
-		else
-		{$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by tipo_ws,nome_ws";
+		else{
+			$sql = "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by tipo_ws,nome_ws";
 		}
 		retornaJSON(pegaDados($sql));
 		exit;
@@ -150,7 +155,12 @@ switch (strtoupper($funcao))
  Altera o registro de um WS
 */
 function alterarWS(){
-	global $esquemaadmin,$id_ws,$desc_ws,$nome_ws,$link_ws,$autor_ws,$tipo_ws;
+	global $esquemaadmin,$id_ws;
+	$desc_ws = $_GET["desc_ws"];
+	$nome_ws = $_GET["nome_ws"];
+	$link_ws = $_GET["link_ws"];
+	$autor_ws = $_GET["autor_ws"];
+	$tipo_ws = $_GET["tipo_ws"];
 	try{
 		require_once("conexao.php");
 		if($convUTF){

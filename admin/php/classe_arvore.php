@@ -113,7 +113,7 @@ class Arvore
 			$coluna = $idioma;
 		}
 
-		$this->sql_temasraiz = "select ordem,codigo_tema,id_raiz,i3geoadmin_raiz.id_tema,CASE $coluna WHEN '' THEN nome_tema ELSE $coluna END as nome_tema,tipoa_tema,perfil, ogc_tema, download_tema, link_tema FROM ".$this->esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
+		$this->sql_temasraiz = "select id_nivel,ordem,codigo_tema,id_raiz,i3geoadmin_raiz.id_tema,CASE $coluna WHEN '' THEN nome_tema ELSE $coluna END as nome_tema,tipoa_tema,perfil, ogc_tema, download_tema, link_tema FROM ".$this->esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema ";
 		$this->sql_temasSubgrupo = "select i3geoadmin_temas.tipoa_tema, i3geoadmin_temas.codigo_tema,i3geoadmin_temas.tags_tema,i3geoadmin_n3.id_n3,CASE i3geoadmin_temas.$coluna WHEN '' THEN nome_tema ELSE i3geoadmin_temas.$coluna END as nome_tema,i3geoadmin_n3.publicado,i3geoadmin_n3.n3_perfil,i3geoadmin_n3.id_tema,i3geoadmin_temas.download_tema,i3geoadmin_temas.ogc_tema from ".$this->esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$this->esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema ";
 
 		//$this->sql_temas = "select kmz_tema,nacessos,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,$coluna as nome_tema,codigo_tema from i3geoadmin_temas ";
@@ -632,7 +632,12 @@ class Arvore
 			}
 			$f = implode(" AND ",$ff) . " AND ";
 		}
-		$raiz = $this->execSQL($this->sql_temasraiz."where $f i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		if($id_n1 == ""){
+			$raiz = $this->execSQL($this->sql_temasraiz."where $f i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel > 0 order by ordem");
+		}
+		else {
+			$raiz = $this->execSQL($this->sql_temasraiz."where $f i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = $id_n1 order by ordem");
+		}
 		$raiz = $this->validaTemas($raiz,"codigo_tema");
 		return $raiz;
 	}
@@ -780,17 +785,21 @@ class Arvore
 		if(count($dados["grupos"]) == 0){
 			$grupos[] = array();
 		}
+		$raizgrupos = $this->pegaTemasRaizGrupo($id_menu,"",$filtraOgc,$filtraDown);
+		//var_dump($raizgrupos);exit;
 		foreach($dados["grupos"] as $grupo)	{
 			$a = $grupo["n1_perfil"];
 			$a = str_replace(" ",",",$a);
 			if($this->verificaOcorrencia($perfil,explode(",",$a)) == true)
 			{
 				$temas = array();
-				$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"],$filtraOgc,$filtraDown);
+				//$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"],$filtraOgc,$filtraDown);
 				$grupodown = "nao";
 				$grupoogc = "nao";
-				foreach($raizgrupo as $tema){
-					$temas[] = $this->formataTema($tema["id_tema"]);
+				foreach($raizgrupos as $tema){
+					if($tema["id_nivel"] == $grupo["id_n1"]){
+						$temas[] = $this->formataTema($tema["id_tema"]);
+					}
 				}
 				if($temas > 0){
 					$grupodown = "sim";

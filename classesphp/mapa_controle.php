@@ -173,7 +173,6 @@ if ($funcao != "pegaTodosTemas" && $funcao != "download3" && $funcao != "listain
 else{
 	$map_file = "";
 }
-
 $logExec = $_SESSION["logExec"];
 if(isset($logExec) && $logExec["controle"] == true){
 	i3GeoLog("prog: mapa_controle url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
@@ -235,6 +234,7 @@ if (!isset($map_file))
 	ilegal();
 	exit;
 }
+
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
 error_reporting(0);
@@ -418,7 +418,7 @@ switch (strtoupper($funcao))
 	case "LISTAGEOMETRIAS":
 		include_once("classe_temas.php");
 		if(!isset($_pg["tema"])){
-			$tema = "";
+			$_pg["tema"] = "";
 		}
 		$m = new Temas($map_file,$_pg["tema"]);
 		$retorno = $m->listaGeometrias($dir_tmp,$imgdir);
@@ -919,8 +919,8 @@ switch (strtoupper($funcao))
 		*/
 	case "REMOVERGEOMETRIAS":
 		include_once("classe_temas.php");
-		if(!isset($tema)){
-			$tema = "";
+		if(!isset($_pg["tema"])){
+			$_pg["tema"] = "";
 		}
 		$m = new Temas($map_file,$_pg["tema"]);
 		$retorno = $m->removerGeometrias($dir_tmp,$imgdir,$_pg["lista"]);
@@ -974,8 +974,8 @@ switch (strtoupper($funcao))
 		*/
 	case "DOWNLOAD3":
 		//caso o tema tenha de vir do sistema de metadados estatisticos
-
 		//pode ser uma regiao cadastrada no sistema de metadados
+		$tema = $_pg["tema"];
 		$codigo_tipo_regiao = $_pg["codigo_tipo_regiao"];
 		if(isset($codigo_tipo_regiao) && $codigo_tipo_regiao != ""){
 			include(dirname(__FILE__)."/../admin/php/classe_metaestat.php");

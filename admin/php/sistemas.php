@@ -39,6 +39,13 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
 include_once(dirname(__FILE__)."/login.php");
+
+$id_sistema = $_GET["id_sistema"];
+$id_funcao = $_GET["id_funcao"];
+$id = $_GET["id"];
+
+testaSafeNumerico([$id_sistema,$id_funcao,$id]);
+
 $funcoesEdicao = array(
 		"ALTERARSISTEMAS",
 		"ALTERARFUNCOES",
@@ -229,17 +236,17 @@ switch (strtoupper($funcao))
  Altera o registro de um WS
 */
 function alterarSistemas(){
-	global $esquemaadmin,$id_sistema,$perfil_sistema,$nome_sistema,$publicado_sistema;
+	global $esquemaadmin,$id_sistema;
 	try	{
 		require_once("conexao.php");
 		if($convUTF){
-			$nome_sistema = utf8_encode($nome_sistema);
+			$_GET["nome_sistema"] = utf8_encode($_GET["$nome_sistema"]);
 		}
 		if($id_sistema != ""){
 			$dataCol = array(
-					"publicado_sistema" => $publicado_sistema,
-					"nome_sistema" => $nome_sistema,
-					"perfil_sistema" => $perfil_sistema
+					"publicado_sistema" => $_GET["publicado_sistema"],
+					"nome_sistema" => $_GET["nome_sistema"],
+					"perfil_sistema" => $_GET["perfil_sistema"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_sistemas",$dataCol,"WHERE id_sistema = $id_sistema");
 			$retorna = $id_sistema;
@@ -261,25 +268,25 @@ function alterarSistemas(){
 	}
 }
 function alterarFuncoes(){
-	global $esquemaadmin,$id_sistema,$id_funcao,$perfil_funcao,$nome_funcao,$w_funcao,$h_funcao,$abrir_funcao;
-	if(empty($w_funcao)){
-		$w_funcao = 200;
+	global $esquemaadmin,$id_sistema,$id_funcao;
+	if(empty($_GET["w_funcao"])){
+		$_GET["w_funcao"] = 200;
 	}
-	if(empty($h_funcao)){
-		$h_funcao = 200;
+	if(empty($_GET["h_funcao"])){
+		$_GET["h_funcao"] = 200;
 	}
 	try{
 		require_once("conexao.php");
 		if($convUTF){
-			$nome_funcao = utf8_encode($nome_funcao);
+			$_GET["nome_funcao"] = utf8_encode($_GET["nome_funcao"]);
 		}
 		if($id_funcao != ""){
 			$dataCol = array(
-				"nome_funcao" => $nome_funcao,
-				"perfil_funcao" => $perfil_funcao,
-				"w_funcao" => $w_funcao,
-				"h_funcao" => $h_funcao,
-				"abrir_funcao" => $abrir_funcao
+				"nome_funcao" => $_GET["nome_funcao"],
+				"perfil_funcao" => $_GET["perfil_funcao"],
+				"w_funcao" => $_GET["w_funcao"],
+				"h_funcao" => $_GET["h_funcao"],
+				"abrir_funcao" => $_GET["abrir_funcao"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_sistemasf",$dataCol,"WHERE id_funcao = $id_funcao");
 			$retorna = $id_sistema;
