@@ -879,9 +879,9 @@ var g_traducao =
 		],
 		"a3a" : [
 			{
-				pt : "Importar Web Map Context (WMC)",
-				en : "Import Web Map Context (WMC)",
-				es : "Importar Web Map Context (WMC)"
+				pt : "Importar Web Map Context",
+				en : "Import Web Map Context",
+				es : "Importar Web Map Context"
 			}
 		],
 		"a4" : [
@@ -970,9 +970,9 @@ var g_traducao =
 		],
 		"a14" : [
 			{
-				pt : "Upload SHP, CSV, DBF, GPX, KML",
-				en : "Upload SHP, CSV, DBF, GPX, KML",
-				es : "Subir SHP, CSV, DBF, GPX, KML"
+				pt : "Upload SHP, CSV...",
+				en : "Upload SHP, CSV...",
+				es : "Subir SHP, CSV..."
 			}
 		],
 		"a15" : [

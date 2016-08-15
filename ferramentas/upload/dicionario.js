@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.upload.dicionario)+
 i3GEOF.upload.dicionario = {
 	'pastaArmazenamento' : [ {
-		pt : "Pasta no servidor onde os dados ser&atilde;o armazenados (obrigat&oacute;rio se voc&ecirc; estiver utilizando o formul&aacute;rio dentro do sistema de administra&ccedil;&atilde;o)",
+		pt : "Pasta no servidor onde os dados ser&atilde;o armazenados",
 		en : "",
 		es : ""
 	} ],
