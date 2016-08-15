@@ -17,12 +17,6 @@ if(isset($_GET["g_sid"]) && $_GET["g_sid"] != ""){
 	session_start();
 	$map_file = $_SESSION["map_file"];
 }
-else{
-	exit;
-}
-if(!file_exists($map_file)){
-	exit;
-}
 if (ob_get_level() == 0) ob_start();
 ?>
 <html>
@@ -38,6 +32,7 @@ if (ob_get_level() == 0) ob_start();
 <?php
 if (isset($_FILES['i3GEOuploadshp']['name']))
 {
+	$dirDestino = $_POST["dirDestino"];
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
 
 	if(isset($logExec) && $logExec["upload"] == true){
@@ -48,10 +43,18 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	ob_flush();
 	flush();
 	sleep(1);
-	$mapa = ms_newMapObj($map_file);
-	$dirmap = dirname($map_file);
-	if(!file_exists($dirmap)){
-		exit;
+	if(isset($map_file) && $map_file != ""){
+		$mapa = ms_newMapObj($map_file);
+		$dirmap = dirname($map_file);
+	}
+	if(isset($dirDestino) && $dirDestino != ""){
+		$dirmap = $dirDestino;
+		include_once(dirname(__FILE__)."/../../admin/php/login.php");
+		if(verificaOperacaoSessao("admin/php/editortexto") == false){
+			echo "Vc nao pode salvar os dados no servidor em uma pasta espec&iacute;fica";exit;
+		}
+		if(!file_exists($dirmap))
+		{echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";paraAguarde();exit;}
 	}
 	//verifica nomes
 	verificaNome($_FILES['i3GEOuploadshp']['name']);
@@ -127,63 +130,95 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 		unlink($dirmap."/".$nomePrefixo.".prj");
 		exit;
 	}
-
+echo $dirmap."/".$nomePrefixo;
 	echo "<p class='paragrafo' >Arquivo enviado.</p>";
 	echo "<p class='paragrafo'></p>";
 	//nesse caso o formulario de upload esta sendo executado de dentro de um mapa interativo, por isso o mapfile ja existe
-	echo "<p class='paragrafo' >Adicionando tema...</p>";
-	ob_flush();
-	flush();
-	sleep(1);
-	$novolayer = ms_newLayerObj($mapa);
-	$novolayer->set("data",$dirmap."/".$nomePrefixo.".shp");
-	$novolayer->set("name",$_FILES['i3GEOuploadshp']['name']);
-	$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadshp']['name']);
-	$novolayer->setmetadata("DOWNLOAD","SIM");
-	$sfileObj = ms_newShapefileObj($dirmap."/".$nomePrefixo.".shp", -1);
-	if(!isset($tipo) || $tipo == "")
-	{$tipo = $sfileObj->type;}
-	if ($tipo == 1){$novolayer->set("type",MS_LAYER_POINT);} // ponto
-	if ($tipo == 3){$novolayer->set("type",MS_LAYER_LINE);}
-	if ($tipo == 5){$novolayer->set("type",MS_LAYER_POLYGON);}
-	$novolayer->setmetadata("TEMALOCAL","SIM");
-	$novolayer->setmetadata("CLASSE","SIM");
-	$novolayer->setmetadata("TEXTO","NAO");
-	//if (($tipo != 3) and ($tipo != 8 )){$novolayer->set("type",0);}
-	$novolayer->setfilter("");
-	$classe = ms_newClassObj($novolayer);
-	$classe->set("name","");
-	$estilo = ms_newStyleObj($classe);
-	if ($tipo == 1)
-	{
-		$estilo->set("symbolname","ponto");
-		$estilo->set("size",6);
+	if(isset($map_file)){
+		echo "<p class='paragrafo' >Adicionando tema...</p>";
+		ob_flush();
+		flush();
+		sleep(1);
+		$novolayer = ms_newLayerObj($mapa);
+		$novolayer->set("data",$dirmap."/".$nomePrefixo.".shp");
+		$novolayer->set("name",$_FILES['i3GEOuploadshp']['name']);
+		$novolayer->setmetadata("TEMA",$_FILES['i3GEOuploadshp']['name']);
+		$novolayer->setmetadata("DOWNLOAD","SIM");
+		$sfileObj = ms_newShapefileObj($dirmap."/".$nomePrefixo.".shp", -1);
+		if(!isset($tipo) || $tipo == "")
+		{$tipo = $sfileObj->type;}
+		if ($tipo == 1){$novolayer->set("type",MS_LAYER_POINT);} // ponto
+		if ($tipo == 3){$novolayer->set("type",MS_LAYER_LINE);}
+		if ($tipo == 5){$novolayer->set("type",MS_LAYER_POLYGON);}
+		$novolayer->setmetadata("TEMALOCAL","SIM");
+		$novolayer->setmetadata("CLASSE","SIM");
+		$novolayer->setmetadata("TEXTO","NAO");
+		//if (($tipo != 3) and ($tipo != 8 )){$novolayer->set("type",0);}
+		$novolayer->setfilter("");
+		$classe = ms_newClassObj($novolayer);
+		$classe->set("name","");
+		$estilo = ms_newStyleObj($classe);
+		if ($tipo == 1)
+		{
+			$estilo->set("symbolname","ponto");
+			$estilo->set("size",6);
+		}
+		$estilo->color->setrgb(200,50,0);
+		$estilo->outlinecolor->setrgb(0,0,0);
+		// le os itens
+		$novolayer->set("status",MS_DEFAULT);
+		$abriu = $novolayer->open();
+		$items = $novolayer->getItems();
+		$fechou = $novolayer->close();
+		if ($items != "")
+		{
+			$its = implode(",",$items);
+			$novolayer->setmetadata("ITENS",$its);
+			$novolayer->setmetadata("ITENSDESC",$its);
+			$novolayer->set("template","none.htm");
+		}
+		if(isset($_GET["uploadEPSG"]) && $_GET["uploadEPSG"] != ""){
+			$novolayer->setProjection("init=epsg:".$_GET["uploadEPSG"]);
+		}
+		if(file_exists($dirmap."/".$nomePrefixo.".prj")){
+			$novolayer->setProjection("AUTO");
+		}
+		//$adiciona = ms_newLayerObj($mapa, $novolayer);
+		$salvo = $mapa->save($map_file);
+		//grava os templates de cada tema
+		echo "<b><p class='paragrafo' >Tema criado!!! Redesenhando o mapa.";
+		echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza()</script>";
 	}
-	$estilo->color->setrgb(200,50,0);
-	$estilo->outlinecolor->setrgb(0,0,0);
-	// le os itens
-	$novolayer->set("status",MS_DEFAULT);
-	$abriu = $novolayer->open();
-	$items = $novolayer->getItems();
-	$fechou = $novolayer->close();
-	if ($items != "")
-	{
-		$its = implode(",",$items);
-		$novolayer->setmetadata("ITENS",$its);
-		$novolayer->setmetadata("ITENSDESC",$its);
-		$novolayer->set("template","none.htm");
+	elseif($i3GEOuploadCriaMapfile == "on"){
+	//verifica se o usuario marcou a opcao de cria mapfile
+	//nesse caso o aplicativo de upload esta sendo executado de dentro do sistema de administracao, e o mapfile devera
+	//ser criado e registrado no sistema
+		$nome = $nomePrefixo;
+		$codigo = $nomePrefixo;
+		$it = $nomePrefixo;
+		$en = $nomePrefixo;
+		$es = $nomePrefixo;
+		$sfileObj = ms_newShapefileObj($dirmap."/".$nomePrefixo.".shp", -1);
+		if(!isset($tipo) || $tipo == ""){
+			$tipo = $sfileObj->type;
+		}
+		if ($tipo == 1){
+			$tipoLayer = "point";
+		}
+		if ($tipo == 3){
+			$tipoLayer = "line";
+		}
+		if ($tipo == 5){
+			$tipoLayer = "polygon";
+		}
+		$funcao = "CRIARNOVOMAP";
+		$output = "retorno";
+		$data = $dirmap."/".$nomePrefixo.".shp";
+		include_once($locaplic."/admin/php/editormapfile.php");
+		echo "<b><p class='paragrafo' >Criado!!!<br>";
+		echo "Para editar clique: <a href='../../admin/html/editormapfile.html' target=_blank >editar</a>";
+		echo "<script>window.scrollTo(0,10000);i3GEO.util.insereCookie('I3GEOletraAdmin','".$nomePrefixo."');</script>";
 	}
-	if(isset($_GET["uploadEPSG"]) && $_GET["uploadEPSG"] != ""){
-		$novolayer->setProjection("init=epsg:".$_GET["uploadEPSG"]);
-	}
-	if(file_exists($dirmap."/".$nomePrefixo.".prj")){
-		$novolayer->setProjection("AUTO");
-	}
-	//$adiciona = ms_newLayerObj($mapa, $novolayer);
-	$salvo = $mapa->save($map_file);
-	//grava os templates de cada tema
-	echo "<b><p class='paragrafo' >Tema criado!!! Redesenhando o mapa.";
-	echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza()</script>";
 }
 else
 {

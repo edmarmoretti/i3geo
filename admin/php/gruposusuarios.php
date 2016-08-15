@@ -72,6 +72,10 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
+
+$id_usuario = $_GET["id_usuario"];
+testaSafeNumerico([$id_usuario]);
+
 switch (strtoupper($funcao))
 {
 	case "ALTERARGRUPOS":
@@ -127,9 +131,11 @@ switch (strtoupper($funcao))
 cpjson($retorno);
 function alterarGrupos()
 {
-	global $id_grupo,$nome,$descricao;
+	global $id_grupo;
 	try
 	{
+		$nome = $_GET["nome"];
+		$descricao = $_GET["descricao"];
 		include(dirname(__FILE__)."/conexao.php");
 		if($convUTF){
 			$nome = utf8_encode($nome);

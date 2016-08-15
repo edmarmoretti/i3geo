@@ -1,4 +1,9 @@
+//Esse programa e um clone de i3geo/ferramentas/upload/index.js
+//
+
 /*
+
+
 Title: Upload de arquivo shapefile
 
 Envia para o servidor um arquivo shapefile local e insere como uma camada no mapa.
@@ -105,13 +110,21 @@ i3GEOF.upload = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/admin/php/subirshapefile.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<fieldset class=subbloco >' +
 		'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'<p class="paragrafo" >prj (opcional): <br><input type="file" size=22 name="i3GEOuploadprj" style="top:0px;left:0px;cursor:pointer;"></p>' +
 		'</fieldset>';
+		if(i3GEO.parametros.editor === "sim"){
+			ins += '<fieldset class=subbloco >' +
+			'<p class="paragrafo" >'+$trad('pastaArmazenamento',i3GEOF.upload.dicionario)+':</p>' +
+			'<div class="i3geoForm i3geoFormIconeEdita" ><input type="text" name="dirDestino" id="dirDestino" /></div>' +
+			"&nbsp;<img onclick='i3GEO.util.navegadorDir(\"dirDestino\",false,false,false,true);' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='cursor:pointer;position :relative;top:2px'/></p>" +
+			'<p class="paragrafo" ><input type=checkbox name=i3GEOuploadCriaMapfile id=i3GEOuploadCriaMapfile />&nbsp;'+$trad('criaMapfile',i3GEOF.upload.dicionario) +
+			'</fieldset>';
+		}
 		ins += '<fieldset class=subbloco >' +
 		'<p class="paragrafo" >'+$trad('tipoGeom',i3GEOF.upload.dicionario)+': </p>' +
 		'	<div class=styled-select >' +
