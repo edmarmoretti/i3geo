@@ -1,4 +1,5 @@
 		<?php
+			include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 			include(dirname(__FILE__)."/../../ms_configura.php");
 			include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 			//parser do arquivo para envio como imagem diretamente ao navegador

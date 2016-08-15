@@ -67,9 +67,9 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	//remove acentos
 	$nomePrefixo = str_replace(" ","_",removeAcentos(str_replace(".shp","",$_FILES['i3GEOuploadshp']['name'])));
 
+	$nomePrefixo = str_replace(".","",$nomePrefixo);
 	$nomePrefixo = strip_tags($nomePrefixo);
 	$nomePrefixo = htmlspecialchars($nomePrefixo, ENT_QUOTES);
-
 	$nomePrefixo = $nomePrefixo . md5(uniqid(rand(), true));
 
 	//sobe arquivo
@@ -104,14 +104,26 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 
 	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".prj","<?");
 	if($checkphp == true){
+		unlink($dirmap."/".$nomePrefixo.".shp");
+		unlink($dirmap."/".$nomePrefixo.".dbf");
+		unlink($dirmap."/".$nomePrefixo.".shx");
+		unlink($dirmap."/".$nomePrefixo.".prj");
 		exit;
 	}
 	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".shx","<?");
 	if($checkphp == true){
+		unlink($dirmap."/".$nomePrefixo.".shp");
+		unlink($dirmap."/".$nomePrefixo.".dbf");
+		unlink($dirmap."/".$nomePrefixo.".shx");
+		unlink($dirmap."/".$nomePrefixo.".prj");
 		exit;
 	}
 	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".dbf","<?");
 	if($checkphp == true){
+		unlink($dirmap."/".$nomePrefixo.".shp");
+		unlink($dirmap."/".$nomePrefixo.".dbf");
+		unlink($dirmap."/".$nomePrefixo.".shx");
+		unlink($dirmap."/".$nomePrefixo.".prj");
 		exit;
 	}
 

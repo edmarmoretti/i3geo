@@ -44,7 +44,8 @@ if (isset($_FILES['i3GEOuploadgpx']['name']) && strlen(basename($_FILES['i3GEOup
 	//verifica nomes
 	$ArquivoDest = $_FILES['i3GEOuploadgpx']['name'];
 	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
-	$ArquivoDest = str_replace(".gpx","",$ArquivoDest).".gpx";
+	$ArquivoDest = str_replace(".gpx","",$ArquivoDest);
+	$ArquivoDest = str_replace(".","",$ArquivoDest).".gpx";
 
 	$ArquivoDest = strip_tags($ArquivoDest);
 	$ArquivoDest = htmlspecialchars($ArquivoDest, ENT_QUOTES);

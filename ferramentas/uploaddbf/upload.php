@@ -50,10 +50,12 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
 
 	if($_GET["i3GEOuploaddbftipoarquivo"] != "dbf"){
-		$ArquivoDest = str_replace(".csv","",$ArquivoDest).".csv";
+		$ArquivoDest = str_replace(".csv","",$ArquivoDest);
+		$ArquivoDest = str_replace(".","",$ArquivoDest).".csv";
 	}
 	else{
-		$ArquivoDest = str_replace(".dbf","",$ArquivoDest).".dbf";
+		$ArquivoDest = str_replace(".dbf","",$ArquivoDest);
+		$ArquivoDest = str_replace(".","",$ArquivoDest).".dbf";
 	}
 
 	$ArquivoDest = strip_tags($ArquivoDest);

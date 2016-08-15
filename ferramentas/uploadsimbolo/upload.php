@@ -52,7 +52,8 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name']) && strlen(basename($_FILES['
 
 	$nome = basename($_FILES['i3GEOuploadsimboloarq']['name']);
 
-	$nome = str_replace(".png","",$nome).".png";
+	$nome = str_replace(".png","",$nome);
+	$nome = str_replace(".","",$nome).".png";
 
 	$nome = strip_tags($nome);
 	$nome = htmlspecialchars($nome, ENT_QUOTES);

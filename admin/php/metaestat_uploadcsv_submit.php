@@ -2,7 +2,6 @@
 /*
  * Faz o upload de csv e insere no banco de dados criando uma nova tabela
 */
-include_once("admin.php");
 include_once("login.php");
 if(verificaOperacaoSessao("admin/metaestat/editorbanco") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
@@ -31,13 +30,18 @@ if (ob_get_level() == 0) ob_start();
 			exit;
 		}
 		if (isset($_FILES['i3GEOuploadcsv']['name'])){
-			require_once (dirname(__FILE__)."/../../ms_configura.php");
 			echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 			ob_flush();
 			flush();
 			sleep(1);
 			$arqcsv = $_FILES['i3GEOuploadcsv']['tmp_name'];
 			$nomePrefixo = str_replace(" ","_",removeAcentos($_FILES['i3GEOuploadcsv']['name']));
+
+			$nomePrefixo = str_replace(".","",$nomePrefixo);
+			$nomePrefixo = strip_tags($nomePrefixo);
+			$nomePrefixo = htmlspecialchars($nomePrefixo, ENT_QUOTES);
+			$nomePrefixo = $nomePrefixo . md5(uniqid(rand(), true));
+
 			$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4)).".csv";
 
 			$Arquivo = $_FILES['i3GEOuploadcsv']['tmp_name'];
@@ -49,6 +53,13 @@ if (ob_get_level() == 0) ob_start();
 				echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ".$dir_tmp."/".$nomePrefixo;paraAguarde();exit;
 			}
 			$arqcsv = $dir_tmp."/".$nomePrefixo;
+
+			$checkphp = fileContemString($dirmap."/".$nomePrefixo,"<?");
+			if($checkphp == true){
+				unlink($dirmap."/".$nomePrefixo);
+				exit;
+			}
+
 			//pega os parametros de conexao
 			include("classe_metaestat.php");
 			$m = new Metaestat();

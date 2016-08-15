@@ -41,7 +41,10 @@ if (isset($_FILES['i3GEOaplicarsld']['name']) && strlen(basename($_FILES['i3GEOa
 
 	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
 
-	$ArquivoDest = str_replace(".sld","",$ArquivoDest).".sld";
+	$ArquivoDest = str_replace(".sld","",$ArquivoDest);
+	$ArquivoDest = str_replace(".","",$ArquivoDest).".sld";
+
+
 	verificaNome($ArquivoDest);
 
 	//sobe arquivo

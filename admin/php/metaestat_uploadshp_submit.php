@@ -2,7 +2,6 @@
 /*
  * Faz o upload de shapefile e insere no banco de dados
  */
-include_once("admin.php");
 include_once("login.php");
 set_time_limit(0);
 if(verificaOperacaoSessao("admin/metaestat/editorbanco") == false){
@@ -37,15 +36,25 @@ if ($_FILES['i3GEOuploadshp']['name'] == ""){
 }
 if (isset($_FILES['i3GEOuploadshp']['name'])){
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
+	if(isset($logExec) && $logExec["upload"] == true){
+		i3GeoLog("prog: metaestat_uploadshp_submit filename:" . $_FILES['i3GEOuploadshp']['name'],$dir_tmp);
+	}
+
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	ob_flush();
 	flush();
 	sleep(1);
+
+
 	$arqshp = $_FILES['i3GEOuploadshp']['tmp_name'];
 	//verifica nomes e sobe arquivo
 	verificaNome($_FILES['i3GEOuploadshp']['name'],"shp");
 	$nomePrefixo = str_replace(" ","_",removeAcentos(str_replace(".shp","",$_FILES['i3GEOuploadshp']['name'])));
-	$nomePrefixo = $nomePrefixo."_".(nomeRandomico(4));
+
+	$nomePrefixo = str_replace(".","",$nomePrefixo);
+	$nomePrefixo = strip_tags($nomePrefixo);
+	$nomePrefixo = htmlspecialchars($nomePrefixo, ENT_QUOTES);
+	$nomePrefixo = $nomePrefixo . md5(uniqid(rand(), true));
 
 	$Arquivo = $_FILES['i3GEOuploadshp']['tmp_name'];
 	$status =  move_uploaded_file($Arquivo,$dir_tmp."/".$nomePrefixo.".shp");
@@ -73,6 +82,32 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 		echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ".$dir_tmp."/".$nomePrefixo;paraAguarde();
 		exit;
 	}
+
+	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".prj","<?");
+	if($checkphp == true){
+		unlink($dirmap."/".$nomePrefixo.".prj");
+		unlink($dirmap."/".$nomePrefixo.".shx");
+		unlink($dirmap."/".$nomePrefixo.".dbf");
+		unlink($dirmap."/".$nomePrefixo.".shp");
+		exit;
+	}
+	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".shx","<?");
+	if($checkphp == true){
+		unlink($dirmap."/".$nomePrefixo.".prj");
+		unlink($dirmap."/".$nomePrefixo.".shx");
+		unlink($dirmap."/".$nomePrefixo.".dbf");
+		unlink($dirmap."/".$nomePrefixo.".shp");
+		exit;
+	}
+	$checkphp = fileContemString($dirmap."/".$nomePrefixo.".dbf","<?");
+	if($checkphp == true){
+		unlink($dirmap."/".$nomePrefixo.".prj");
+		unlink($dirmap."/".$nomePrefixo.".shx");
+		unlink($dirmap."/".$nomePrefixo.".dbf");
+		unlink($dirmap."/".$nomePrefixo.".shp");
+		exit;
+	}
+
 	$arqshp = $dir_tmp."/".$nomePrefixo.".shp";
 
 	//pega os parametros de conexao
@@ -363,6 +398,9 @@ else{
 	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
 function verificaNome($nome,$ext){
+	if(strlen(basename($nome)) > 200){
+		exit;
+	}
 	$nome = strtolower($nome);
 	$lista = explode(".",$nome);
 	$extensao = $lista[count($lista) - 1];

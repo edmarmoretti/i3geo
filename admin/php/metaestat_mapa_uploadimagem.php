@@ -1,9 +1,9 @@
 <?php
+exit;
 /*
  * Faz o upload de imagens para a pasta templates/logos
  * Essas imagens sao utilizadas nos mapas e sao escolhidas pelo usuario no formulario de publicacao dos mapas
  */
-include_once("admin.php");
 include_once("login.php");
 if(verificaOperacaoSessao("admin/metaestat/geral") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
@@ -31,7 +31,6 @@ if (isset($_FILES['uploadimagem']['name'])){
 	}
 	//sobe arquivo
 	$Arquivo = $_FILES['uploadimagem']['tmp_name'];
-	//echo $Arquivo;
 	$status =  move_uploaded_file($Arquivo,str_replace(".png","",$arq).".png");
 	if($status != 1)
 	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo. Verifique as permissoes de escrita";exit;}

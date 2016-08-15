@@ -45,7 +45,8 @@ if (isset($_FILES['i3GEOuploadkml']['name']) && strlen(basename($_FILES['i3GEOup
 	//verifica nomes
 	$ArquivoDest = $_FILES['i3GEOuploadkml']['name'];
 	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
-	$ArquivoDest = str_replace(".kml","",$ArquivoDest).".kml";
+	$ArquivoDest = str_replace(".kml","",$ArquivoDest);
+	$ArquivoDest = str_replace(".","",$ArquivoDest).".kml";
 
 	$ArquivoDest = strip_tags($ArquivoDest);
 	$ArquivoDest = htmlspecialchars($ArquivoDest, ENT_QUOTES);

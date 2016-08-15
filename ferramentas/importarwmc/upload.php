@@ -33,7 +33,9 @@ if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]
 	//verifica nomes
 	$ArquivoDest = $_FILES['i3GEOimportarwmc']['name'];
 	$ArquivoDest = $ArquivoDest . md5(uniqid(rand(), true));
-	$ArquivoDest = str_replace(".xml","",$ArquivoDest).".xml";
+
+	$ArquivoDest = str_replace(".xml","",$ArquivoDest);
+	$ArquivoDest = str_replace(".","",$ArquivoDest).".xml";
 
 	$ArquivoDest = strip_tags($ArquivoDest);
 	$ArquivoDest = htmlspecialchars($ArquivoDest, ENT_QUOTES);
