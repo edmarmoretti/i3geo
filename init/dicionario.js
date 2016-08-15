@@ -270,8 +270,8 @@ g_traducao_init =
 		"23a" : [
 			{
 				pt : "A mais completa base cartogr&aacute;fica livre, um esfor&ccedil;o de milhares de pessoas de todo o globo. Adicione outras camadas do cat&aacute;logo e crie mapas com riqueza de detalhes.",
-				en : "",
-				es : ""
+				en : "The most complete cartographic open data, an effort of thousands of people around the world. Add other layers from the catalogue and build detailed maps",
+				es : "La base cartogr&aacute;fica libre m&aacute;s completa, un esfuerzo de miles de personas de todo el globo terr&aacute;queo. Adicione otras capas del cat&aacute;logo y construya mapas con una gran variedad de detalles."
 			}
 		],
 		24 : [
