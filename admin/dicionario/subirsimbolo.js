@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.uploadsimbolo.dicionario)+
 i3GEOF.uploadsimbolo.dicionario = {
 	'pastaArmazenamento' : [ {
-		pt : "Pasta no servidor onde os dados ser&atilde;o armazenados (deixe em branco para usar a pasta i3geo/symbols/images). A pasta deve ter permiss&otilde;es adequadas para permitir o upload, consulte o administrador do sistema caso ocorra algum problema. Para facilitar, o i3Geo sugere a pasta indicada abaixo",
+		pt : "Pasta dentro de 'i3geo' (pasta onde o i3Geo est&aacute; instalado, por exemplo, 'temas') onde a imagem ser&aacute; armazenada. A pasta deve ter permiss&otilde;es adequadas para permitir o upload, consulte o administrador do sistema caso ocorra algum problema.",
 		en : "",
 		es : ""
 	} ],

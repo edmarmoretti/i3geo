@@ -1508,7 +1508,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$proj
 	else{
 		$novonomelayer = $tema;
 	}
-
 	$novonomelayer = str_replace(".","-",$novonomelayer);
 	$nomeshp = $dir_tmp."/".$novonomelayer;
 
@@ -1807,12 +1806,12 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
 	//
 	//verifica se tem query e copia o arquivo
-	$qyfile = str_replace(".map",".qy",$map_file);
-	$nr = nomerandomico(10);
+	$qyfile = str_replace(".map","_qy.map",$map_file);
+	$nr = nomerandomico(5);
 	$map_file = str_replace(".map",$nr."tmp.map",$map_file);
 	if(file_exists($qyfile)){
-		$nqyfile = str_replace(".map",".qy",$map_file);
-		$nqyfile = str_replace(".qy","",$nqyfile).".qy";
+		$nqyfile = str_replace(".map","_qy.map",$map_file);
+		$nqyfile = str_replace("_qy.map","",$nqyfile)."_qy.map";
 		copy($qyfile,$nqyfile);
 	}
 	$map->save($map_file);
@@ -1918,6 +1917,8 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				$sel = New Selecao($map_file,$tema);
 				//carrega a query para ver se o layer possui selecao ou nao
 				$numSel = 0;
+				$nomeRand = true;
+
 				if(file_exists($sel->qyfile)){
 					$map->loadquery($sel->qyfile);
 					$numSel = $l->getNumresults();
@@ -1926,12 +1927,13 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				//se nao existir selecao seleciona por box
 				//o box vem do mapfile original
 				//
-				if(!file_exists($sel->qyfile) || $numSel < 1){
+				if(!file_exists($sel->qyfile)){
 					$box = $rectextent->minx." ".$rectextent->miny." ".$rectextent->maxx." ".$rectextent->maxy;
 					$sel->selecaoBOX("novo",$box);
 					//reaproveita arquivo anterior
 					$nomeRand = false;
 				}
+
 				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand,$projecao["prj"]);
 				//remove o arquivo de selecao se ele foi criado apenas para pegar todos os elementos
 				if($nomeRand == false){

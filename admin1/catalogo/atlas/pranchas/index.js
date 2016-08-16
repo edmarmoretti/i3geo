@@ -40,7 +40,8 @@ Obt&eacute;m a lista
 		lista: function(){
 			i3GEOadmin.core.iconeAguarde(i3GEOadmin.prancha.ondeLista);
 			$.post(
-					"exec.php?funcao=lista&id_atlas=" + i3GEOadmin.prancha.id_atlas
+					"exec.php?funcao=lista",
+					"id_atlas=" + i3GEOadmin.prancha.id_atlas
 			)
 			.done(
 					function(data, status){

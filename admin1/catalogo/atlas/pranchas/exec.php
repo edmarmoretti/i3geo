@@ -41,10 +41,16 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 }
 include (dirname ( __FILE__ ) . "/../../../../admin/php/conexao.php");
 
+$id = $_POST["id"];
+$id_atlas = $_POST["id_atlas"];
+$id_prancha = $_POST["id_prancha"];
+
+testaSafeNumerico([$id,$id_atlas,$id_prancha]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $id_atlas, $titulo_prancha, $ordem_prancha, $desc_prancha, $h_prancha, $icone_prancha, $link_prancha, $mapext_prancha, $w_prancha, $dbhw );
+		$novo = adicionar( $id_atlas, $_POST["titulo_prancha"], $_POST["ordem_prancha"], $_POST["desc_prancha"], $_POST["h_prancha"], $_POST["icone_prancha"], $_POST["link_prancha"], $_POST["mapext_prancha"], $_POST["w_prancha"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -52,7 +58,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_atlas, $id_prancha, $titulo_prancha, $ordem_prancha, $desc_prancha, $h_prancha, $icone_prancha, $link_prancha, $mapext_prancha, $w_prancha, $dbhw );
+		$novo = alterar ( $id_atlas, $id_prancha, $_POST["titulo_prancha"], $_POST["ordem_prancha"], $_POST["desc_prancha"], $_POST["h_prancha"], $_POST["icone_prancha"], $_POST["link_prancha"], $_POST["mapext_prancha"], $_POST["w_prancha"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -69,7 +75,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$dados = pegaDados("SELECT id_atlas, id_prancha, titulo_prancha, ordem_prancha, desc_prancha, h_prancha, icone_prancha, link_prancha, mapext_prancha, w_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_atlas = '{$id_atlas}'", $dbh, false);
+		$dados = pegaDados("SELECT id_atlas, id_prancha, titulo_prancha, ordem_prancha, desc_prancha, h_prancha, icone_prancha, link_prancha, mapext_prancha, w_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_atlas = '$id_atlas'", $dbh, false);
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;

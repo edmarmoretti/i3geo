@@ -182,7 +182,7 @@ Obt&eacute;m a lista de Webservices
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
-					"exec.php?funcao=alterarWs",
+					"exec.php?funcao=alterar",
 					"id_ws="+ id+"&"+parametros
 			)
 			.done(

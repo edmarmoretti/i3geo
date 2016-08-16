@@ -85,7 +85,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="contemmapfile" >{{{contemMapfile}}}</label>
 						<div class="col-md-8">
-							<input title="{{{contemMapfile}}}" type="text" value="{{{contemmapfile}}}" disabled="" class="form-control" name="contemmapfile" required>
+							<input title="{{{contemMapfile}}}" type="text" value="{{{contemmapfile}}}" disabled="" class="form-control" name="contemmapfile" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">

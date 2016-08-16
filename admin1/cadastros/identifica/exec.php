@@ -40,10 +40,15 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	}
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
+
+$id_i = $_POST["id_i"];
+$id = $_POST["id"];
+testaSafeNumerico([$id_i,$id]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
+		$novo = adicionar( $_POST["publicado_i"], $_POST["abrir_i"], $_POST["nome_i"], $_POST["target_i"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -51,7 +56,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw );
+		$novo = alterar ( $id_i, $_POST["publicado_i"], $_POST["abrir_i"], $_POST["nome_i"], $_POST["target_i"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();

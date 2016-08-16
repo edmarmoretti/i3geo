@@ -42,7 +42,10 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 
 //remove espaco em branco do nome do tag
-$nome = str_replace(" ","",$nome);
+$nome = str_replace(" ","",$_POST["nome"]);
+$id_tag = $_POST["id_tag"];
+testaSafeNumerico([$id_tag]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :

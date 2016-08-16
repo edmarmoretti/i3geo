@@ -86,7 +86,6 @@ i3GEOF.uploadsimbolo = {
 			);
 			b.addClass("rodar");
 			//pega a pasta default
-			i3GEOF.uploadsimbolo.pegaPastaDefault();
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -100,7 +99,7 @@ i3GEOF.uploadsimbolo = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<form id=i3GEOuploadsimbolof target="i3GEOuploadsimboloiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/uploadsimbolo/upload.php" method="post" ENCTYPE="multipart/form-data">' +
+		var ins = '<form id=i3GEOuploadsimbolof target="i3GEOuploadsimboloiframe" action="../php/subirsimbolo.php" method="post" ENCTYPE="multipart/form-data">' +
 		'<p class="paragrafo" >'+$trad('escolha',i3GEOF.uploadsimbolo.dicionario)+': <br><br><input type="file" size=42 name="i3GEOuploadsimboloarq" style="top:0px;left:0px;cursor:pointer;"></p>';
 		if(i3GEO.parametros.editor === "sim"){
 			ins += '<p class="paragrafo" >'+$trad('pastaArmazenamento',i3GEOF.uploadsimbolo.dicionario)+':</p><div class="i3geoForm i3geoFormIconeEdita" style="width:300px;" ><input class=digitar type="text" name="dirDestino" id="dirDestino" ></div>';
@@ -160,16 +159,6 @@ i3GEOF.uploadsimbolo = {
 		{return;}
 		i3GEOF.uploadsimbolo.aguarde.visibility="visible";
 		$i("i3GEOuploadsimbolof").submit();
-	},
-	pegaPastaDefault: function(){
-		var fim, p;
-		fim = function(retorno){
-			$i("dirDestino").value = retorno.data;
-		};
-		p = i3GEO.configura.locaplic+"/ferramentas/uploadsimbolo/exec.php?funcao=NOMEPASTA";
-		cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"foo",fim);
 	},
 	selNavegador: function(onde){
 		i3GEO.util.navegadorDir(onde,false,false,false);

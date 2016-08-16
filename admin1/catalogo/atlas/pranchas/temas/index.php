@@ -59,7 +59,7 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_tema}}">
-		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_tema}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_tema}}','{{{codigo_tema}}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 			<div class="row">
 				<div class="col-md-12 {{esconde}}">
 					<div class="form-group form-group-lg">
@@ -75,7 +75,7 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ordem_tema" >{{{ordem}}}</label>
 						<div class="col-md-8">
-							<input title="{{{ordem}}}" type="text" value="{{{ordem_tema}}}" class="form-control" name="ordem_tema" required>
+							<input title="{{{ordem}}}" type="text" value="{{{ordem_tema}}}" class="form-control" name="ordem_tema" >
 						</div>
 					</div>
 				</div>

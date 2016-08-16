@@ -82,15 +82,15 @@ include "../../head.php";
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="login">{{{descricaoTxt}}}</label>
+						<label class="col-md-2 control-label" for="desc_ws">{{{descricaoTxt}}}</label>
 						<div class="col-md-10">
 							<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_ws}}}" class="form-control" name="desc_ws" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="email">{{{autor}}}</label>
+						<label class="col-md-2 control-label" for="autor_ws">{{{autor}}}</label>
 						<div class="col-md-10">
-							<input title="{{{autor}}}" type="email" value="{{{autor_ws}}}" class="form-control" name="autor_ws" required>
+							<input title="{{{autor}}}" type="text" value="{{{autor_ws}}}" class="form-control" name="autor_ws" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">

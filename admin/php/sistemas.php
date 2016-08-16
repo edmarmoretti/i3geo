@@ -240,7 +240,7 @@ function alterarSistemas(){
 	try	{
 		require_once("conexao.php");
 		if($convUTF){
-			$_GET["nome_sistema"] = utf8_encode($_GET["$nome_sistema"]);
+			$_GET["nome_sistema"] = utf8_encode($_GET["nome_sistema"]);
 		}
 		if($id_sistema != ""){
 			$dataCol = array(

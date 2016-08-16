@@ -39,7 +39,6 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 Cada opera&ccedil;&atilde;o possu&iacute; seus pr&oacute;prios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 
 */
-
 include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERARMAPA",
@@ -51,6 +50,11 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao. Tente fazer login novamente.");exit;
 	}
 }
+$id = $_GET["id"];
+$id_mapa = $_GET["id_mapa"];
+testaSafeNumerico([$id,$id_mapa]);
+
+
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
@@ -174,7 +178,7 @@ switch (strtoupper($funcao))
 	break;
 }
 function salvaMapfile(){
-	global $esquemaadmin,$nome_mapa,$arqmapfile,$url,$id_mapa,$preferenciasbase64,$geometriasbase64,$graficosbase64,$tabelasbase64,$ext;
+	global $esquemaadmin,$id_mapa;
 	//as preferencias sao criadas via javascript e guardadas junto com o mapa
 	try{
 		//
@@ -186,24 +190,24 @@ function salvaMapfile(){
 		//o parser para reconstruir os valores e feito em javascript, no cliente
 		//
 		$customizacoesinit = array();
-		if(isset($preferenciasbase64) || isset($geometriasbase64) || isset($graficosbase64) || isset($tabelasbase64)){
-			$customizacoesinit[] = '"preferenciasbase64":"'.$preferenciasbase64.'"';
-			$customizacoesinit[] = '"geometriasbase64":"'.$geometriasbase64.'"';
-			$customizacoesinit[] = '"graficosbase64":"'.$graficosbase64.'"';
-			$customizacoesinit[] = '"tabelasbase64":"'.$tabelasbase64.'"';
-			$m = ms_newMapObj($arqmapfile);
+		if(isset($_GET["preferenciasbase64"]) || isset($_GET["geometriasbase64"]) || isset($_GET["graficosbase64"]) || isset($_GET["tabelasbase64"])){
+			$customizacoesinit[] = '"preferenciasbase64":"'.$_GET["preferenciasbase64"].'"';
+			$customizacoesinit[] = '"geometriasbase64":"'.$_GET["geometriasbase64"].'"';
+			$customizacoesinit[] = '"graficosbase64":"'.$_GET["graficosbase64"].'"';
+			$customizacoesinit[] = '"tabelasbase64":"'.$_GET["tabelasbase64"].'"';
+			$m = ms_newMapObj($_GET["arqmapfile"]);
 			$m->setmetadata("CUSTOMIZACOESINIT",'{'.implode(",",$customizacoesinit).'}');
-			$m->save($arqmapfile);
+			$m->save($_GET["arqmapfile"]);
 		}
-		if($ext && $ext != ""){
-			$e = explode(" ",$ext);
-			$m = ms_newMapObj($arqmapfile);
+		if($_GET["ext"] && $_GET["ext"] != ""){
+			$e = explode(" ",$_GET["ext"]);
+			$m = ms_newMapObj($_GET["arqmapfile"]);
 			$extatual = $m->extent;
 			$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
-			$m->save($arqmapfile);
+			$m->save($_GET["arqmapfile"]);
 		}
-		$handle = fopen ($arqmapfile, 'r');
-		$conteudo = fread ($handle, filesize ($arqmapfile));
+		$handle = fopen ($_GET["arqmapfile"], 'r');
+		$conteudo = fread ($handle, filesize ($_GET["arqmapfile"]));
 		fclose ($handle);
 		$conteudo = base64_encode($conteudo);
 		if($conteudo == false){
@@ -211,7 +215,7 @@ function salvaMapfile(){
 		}
 		require_once("conexao.php");
 		if($convUTF){
-			$nome_mapa = utf8_encode($nome_mapa);
+			$_GET["nome_mapa"] = utf8_encode($_GET["nome_mapa"]);
 		}
 		$retorna = "";
 		if(empty($id_mapa)){
@@ -236,8 +240,8 @@ function salvaMapfile(){
 		$dataCol = array(
 			"mapfile" => $conteudo,
 			"publicado_mapa" => "sim",
-			"nome_mapa" => $nome_mapa,
-			"outros_mapa" => "&restauramapa=$id&interface=$url"
+			"nome_mapa" => $_GET["nome_mapa"],
+			"outros_mapa" => "&restauramapa=$id&interface=".$_GET["url"]
 		);
 		i3GeoAdminUpdate($dbhw,"i3geoadmin_mapas",$dataCol, "WHERE id_mapa =".$id);
 		$dbhw = null;
@@ -252,29 +256,29 @@ function salvaMapfile(){
 Altera o registro de um mapa
 */
 function alterarMapa(){
-	global $esquemaadmin,$publicado_mapa,$ordem_mapa,$id_mapa,$desc_mapa,$ext_mapa,$imagem_mapa,$outros_mapa,$nome_mapa,$linkdireto_mapa,$temas_mapa,$ligados_mapa,$perfil_mapa;
+	global $esquemaadmin,$id_mapa;
 	//substitui a string do parametro outros
-	$outros_mapa = str_replace("*","&",$outros_mapa);
+	$_GET["outros_mapa"] = str_replace("*","&",$_GET["outros_mapa"]);
 	try{
 		require_once("conexao.php");
 		if($convUTF){
-			$nome_mapa = utf8_encode($nome_mapa);
-			$desc_mapa = utf8_encode($desc_mapa);
+			$_GET["nome_mapa"] = utf8_encode($_GET["nome_mapa"]);
+			$_GET["desc_mapa"] = utf8_encode($_GET["desc_mapa"]);
 		}
 		$retorna = "";
 		if($id_mapa != ""){
 			$dataCol = array(
-				"publicado_mapa" => $publicado_mapa,
-				"ordem_mapa" => $ordem_mapa,
-				"desc_mapa" => $desc_mapa,
-				"ext_mapa" => $ext_mapa,
-				"imagem_mapa" => $imagem_mapa,
-				"outros_mapa" => $outros_mapa,
-				"nome_mapa" => $nome_mapa,
-				"linkdireto_mapa" => $linkdireto_mapa,
-				"temas_mapa" => $temas_mapa,
-				"ligados_mapa" => $ligados_mapa,
-				"perfil_mapa" => $perfil_mapa
+				"publicado_mapa" => $_GET["publicado_mapa"],
+				"ordem_mapa" => $_GET["ordem_mapa"],
+				"desc_mapa" => $_GET["desc_mapa"],
+				"ext_mapa" => $_GET["ext_mapa"],
+				"imagem_mapa" => $_GET["imagem_mapa"],
+				"outros_mapa" => $_GET["outros_mapa"],
+				"nome_mapa" => $_GET["nome_mapa"],
+				"linkdireto_mapa" => $_GET["linkdireto_mapa"],
+				"temas_mapa" => $_GET["temas_mapa"],
+				"ligados_mapa" => $_GET["ligados_mapa"],
+				"perfil_mapa" => $_GET["perfil_mapa"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_mapas",$dataCol, "WHERE id_mapa =".$id_mapa);
 			$retorna = $id_mapa;

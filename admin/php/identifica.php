@@ -50,6 +50,11 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}
 }
+
+$id_i = $_GET["id_i"];
+$id = $_GET["id"];
+testaSafeNumerico([$id_i,$id]);
+
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
@@ -127,19 +132,19 @@ switch (strtoupper($funcao))
 Altera o registro de um WS
 */
 function alterarFuncoes(){
-	global $id_i,$abrir_i,$nome_i,$target_i,$publicado_i,$esquemaadmin;
+	global $id_i,$esquemaadmin;
 	try{
 		//$nome_i = mb_convert_encoding($nome_i,"UTF-8","ISO-8859-1");
 		require_once("conexao.php");
 		if($convUTF){
-			$nome_i = utf8_encode($nome_i);
+			$_GET["nome_i"] = utf8_encode($_GET["nome_i"]);
 		}
 		if($id_i != ""){
 			$dataCol = array(
-				"publicado_i" => $publicado_i,
-				"nome_i" => $nome_i,
-				"abrir_i" => $abrir_i,
-				"target_i" => $target_i
+				"publicado_i" => $_GET["publicado_i"],
+				"nome_i" => $_GET["nome_i"],
+				"abrir_i" => $_GET["abrir_i"],
+				"target_i" => $_GET["target_i"]
 			);
 			i3GeoAdminUpdate($dbhw,"i3geoadmin_identifica",$dataCol,"WHERE id_i = $id_i");
 			$retorna = $id_i;

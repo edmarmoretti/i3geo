@@ -41,10 +41,16 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 }
 include (dirname ( __FILE__ ) . "/../../../../../admin/php/conexao.php");
 
+$id_atlas = $_POST["id_atlas"];
+$id_prancha = $_POST["id_prancha"];
+$id_tema = $_POST["id_tema"];
+
+testaSafeNumerico([$id,$id_atlas,$id_prancha]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $id_prancha, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw );
+		$novo = adicionar( $id_prancha, $_POST["ordem_tema"], $_POST["ligado_tema"], $_POST["codigo_tema"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -52,7 +58,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_tema, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw );
+		$novo = alterar ( $id_tema, $_POST["ordem_tema"], $_POST["ligado_tema"], $_POST["codigo_tema"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -69,7 +75,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$dados = pegaDados("SELECT id_tema, ordem_tema, codigo_tema, ligado_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_prancha = '{$id_prancha}'", $dbh, false);
+		$dados = pegaDados("SELECT id_tema, ordem_tema, codigo_tema, ligado_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_prancha = '$id_prancha'", $dbh, false);
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;

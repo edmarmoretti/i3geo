@@ -196,7 +196,7 @@ Obt&eacute;m a lista de Identifica
 		salvarDialogo: function(id_i){
 			var hash = {
 					"mensagem": i3GEOadmin.identifica.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.identifica.salvarIdentifica('"+id_i+"')",
+					"onBotao1": "i3GEOadmin.identifica.salvar('"+id_i+"')",
 					"botao1": i3GEOadmin.identifica.dicionario.sim,
 					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.identifica.dicionario.nao

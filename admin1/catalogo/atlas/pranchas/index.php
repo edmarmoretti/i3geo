@@ -84,7 +84,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="desc_prancha" >{{{descricao}}}</label>
 						<div class="col-md-8">
-							<input title="{{{descricao}}}" type="text" value="{{{desc_prancha}}}" class="form-control" name="desc_prancha" required>
+							<input title="{{{descricao}}}" type="text" value="{{{desc_prancha}}}" class="form-control" name="desc_prancha" >
 						</div>
 					</div>
 				</div>
@@ -92,7 +92,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="link_prancha" >{{{linkTxt}}}</label>
 						<div class="col-md-8">
-							<input title="{{{linkTxt}}}" type="text" value="{{{link_prancha}}}" class="form-control" name="link_prancha" required>
+							<input title="{{{linkTxt}}}" type="text" value="{{{link_prancha}}}" class="form-control" name="link_prancha" >
 						</div>
 					</div>
 				</div>
@@ -100,7 +100,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="ordem_prancha" >{{{ordem}}}</label>
 						<div class="col-md-8">
-							<input title="{{{ordem}}}" type="text" value="{{{ordem_prancha}}}" class="form-control" name="ordem_prancha" required>
+							<input title="{{{ordem}}}" type="text" value="{{{ordem_prancha}}}" class="form-control" name="ordem_prancha" >
 						</div>
 					</div>
 				</div>
@@ -108,7 +108,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="h_prancha" >{{{altura}}}</label>
 						<div class="col-md-8">
-							<input title="{{{altura}}}" type="text" value="{{{h_prancha}}}" class="form-control" name="h_prancha" required>
+							<input title="{{{altura}}}" type="text" value="{{{h_prancha}}}" class="form-control" name="h_prancha" >
 						</div>
 					</div>
 				</div>
@@ -116,7 +116,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="w_prancha" >{{{largura}}}</label>
 						<div class="col-md-8">
-							<input title="{{{largura}}}" type="text" value="{{{w_prancha}}}" class="form-control" name="w_prancha" required>
+							<input title="{{{largura}}}" type="text" value="{{{w_prancha}}}" class="form-control" name="w_prancha" >
 						</div>
 					</div>
 				</div>
@@ -124,7 +124,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="icone_prancha" >{{{icone}}}</label>
 						<div class="col-md-8">
-							<input title="{{{icone}}}" type="text" value="{{{icone_prancha}}}" class="form-control" name="icone_prancha" required>
+							<input title="{{{icone}}}" type="text" value="{{{icone_prancha}}}" class="form-control" name="icone_prancha" >
 						</div>
 					</div>
 				</div>
@@ -132,7 +132,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="mapext_prancha" >{{{extGeo}}}</label>
 						<div class="col-md-8">
-							<input title="{{{extGeo}}}" type="text" value="{{{mapext_prancha}}}" class="form-control" name="mapext_prancha" required>
+							<input title="{{{extGeo}}}" type="text" value="{{{mapext_prancha}}}" class="form-control" name="mapext_prancha" >
 						</div>
 					</div>
 				</div>
@@ -142,7 +142,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 		</div>
 		</form>
 	</div>
-	<div class="panel-footer" style="padding-top: 0px; padding-bottom: 0px;">
+	<div class="panel-footer {{{escondido}}}" style="padding-top: 0px; padding-bottom: 0px;">
 		<div class="pull-right">
 			<button  style="color:#007a6f;" onclick="i3GEOadmin.prancha.editarTemas('{{id_atlas}}','{{id_prancha}}','{{{titulo_prancha}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
 				<i class="material-icons">folder_open</i> {{{editarTema}}}

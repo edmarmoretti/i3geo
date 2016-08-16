@@ -4,7 +4,7 @@ MAP
   LAYER
     CONNECTION "i3geosaude"
     CONNECTIONTYPE POSTGIS
-    DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros /*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
+    DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros limit 10/*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
     METADATA
       "cache"	"nao"
       "TIP"	"no_bairro"

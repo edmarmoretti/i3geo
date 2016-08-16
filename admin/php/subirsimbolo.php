@@ -1,12 +1,15 @@
 <?php
-//
-//caso o usu&aacute;rio seja um administrador, ele pode enviar um nome de diret&oacute;rio onde os arquivos ser&atilde;o armazenados
-//na vari&aacute;vel $dirDestino
-//
-require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-error_reporting(0);
-if (ob_get_level() == 0) ob_start();
+include_once(dirname(__FILE__)."/login.php");
+
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+  if(verificaOperacaoSessao("admin/html/editortexto") == false){
+    retornaJSON("Vc nao pode realizar essa operacao.");exit;
+  }
+}
+//locaplic e usado para definir a pasta de destino
+if(empty($locaplic)){
+  exit;
+}
 ?>
 <html>
 <head>
@@ -19,13 +22,15 @@ if (ob_get_level() == 0) ob_start();
 <p>
 <?php
 if (isset($_FILES['i3GEOuploadsimboloarq']['name']) && strlen(basename($_FILES['i3GEOuploadsimboloarq']['name'])) < 200){
+	$dirDestino = $_GET["dirDestino"];
+	$dirDestino = str_replace(".","",$dirDestino);
+	$dirDestino = $locaplic."/".$dirDestino;
 
-	$checkphp = fileContemString($_FILES['i3GEOuploadsimboloarq']['tmp_name'],"<?");
+	$checkphp = fileContemString($_FILES['i3GEOuploadsimboloarq']['tmp_name'],"<?php");
 	if($checkphp == true){
+		echo "Arquivo invalido";
 		exit;
 	}
-
-	require_once (dirname(__FILE__)."/../../ms_configura.php");
 
 	if(isset($logExec) && $logExec["upload"] == true){
 		i3GeoLog("prog: uploadsimbolo filename:" . $_FILES['i3GEOuploadsimboloarq']['name'],$dir_tmp);
@@ -35,22 +40,16 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name']) && strlen(basename($_FILES['
 	ob_flush();
 	flush();
 	sleep(1);
-	include_once(dirname(__FILE__)."/../../admin/php/login.php");
-	if(verificaOperacaoSessao("admin/php/editortexto") == false){
-		echo "Vc nao pode salvar os dados no servidor em uma pasta espec&iacute;fica";exit;
-	}
-	if(!isset($dirDestino) || $dirDestino == ""){
-		$dirDestino = $locaplic."/symbols/images";
-	}
+
 	if(!file_exists($dirDestino)){
-		$dirDestino = dirname($locaplic)."/".$dirDestino;
 		if(!file_exists($dirDestino)){
-			echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";paraAguarde();exit;
+			echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";
+			paraAguarde();
+			exit;
 		}
 	}
 	//verifica nomes
-
-	$nome = basename($_FILES['i3GEOuploadsimboloarq']['name']);
+	$nome = $_FILES['i3GEOuploadsimboloarq']['name'];
 
 	$nome = str_replace(".png","",$nome);
 	$nome = str_replace(".","",$nome).".png";
@@ -58,7 +57,7 @@ if (isset($_FILES['i3GEOuploadsimboloarq']['name']) && strlen(basename($_FILES['
 	$nome = strip_tags($nome);
 	$nome = htmlspecialchars($nome, ENT_QUOTES);
 
-	$nome = $nome . md5(uniqid(rand(), true));
+	//$nome = $nome . md5(uniqid(rand(), true));
 
 	verificaNome($nome);
 	//sobe arquivo

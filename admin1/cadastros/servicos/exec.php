@@ -23,10 +23,6 @@
  * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
  */
 error_reporting ( 0 );
-//
-// pega as variaveis passadas com get ou post
-//
-
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
@@ -40,10 +36,16 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	}
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
+
+$id_ws = $_POST["id_ws"];
+$id = $_POST["id"];
+
+testaSafeNumerico([$id,$id_ws]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
+		$novo = adicionar( $_POST["autor_ws"], $_POST["desc_ws"], $_POST["link_ws"], $_POST["nome_ws"], $_POST["tipo_ws"],$dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -51,7 +53,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_ws,$autor_ws, $desc_ws, $link_ws, $nome_ws, $tipo_ws,$dbhw );
+		$novo = alterar ( $id_ws,$_POST["autor_ws"], $_POST["desc_ws"], $_POST["link_ws"], $_POST["nome_ws"], $_POST["tipo_ws"],$dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
