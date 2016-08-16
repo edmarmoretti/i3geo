@@ -175,4 +175,3 @@ i3GEOF.uploadsimbolo = {
 		i3GEO.util.navegadorDir(onde,false,false,false);
 	}
 };
-

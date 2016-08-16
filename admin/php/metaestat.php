@@ -1236,14 +1236,14 @@ switch (strtoupper($funcao))
 	case "DADOSMEDIDAVARIAVEL":
 		$m = new Metaestat();
 		$dados = $m->dadosMedidaVariavel($id_medida_variavel,$_GET["filtro"],$_GET["todasascolunas"],$_GET["agruparpor"]);
-		if($formato == "json"){
+		if($_GET["formato"] == "json"){
 			retornaJSON($dados);
 		}
-		if($formato == "xml"){
+		if($_GET["formato"] == "xml"){
 			header("Content-type: application/xml");
 			echo($m->formataXML($dados));
 		}
-		if($formato == "csv"){
+		if($_GET["formato"] == "csv"){
 			require_once(dirname(__FILE__)."/../../pacotes/parsecsv/parsecsv.lib.php");
 			$csv = new parseCSV();
 			$csv->titles = array_keys($dados[0]);
@@ -1381,10 +1381,10 @@ switch (strtoupper($funcao))
 	case "SUMARIOMEDIDAVARIAVEL":
 		$m = new Metaestat();
 		$dados = $m->sumarioMedidaVariavel($id_medida_variavel,$_GET["filtro"],$_GET["agruparpor"]);
-		if($formato == "json"){
+		if($_GET["formato"] == "json"){
 			retornaJSON($dados);
 		}
-		if($formato == "xml"){
+		if($_GET["formato"] == "xml"){
 			header("Content-type: application/xml");
 			echo($m->formataXML($dados["grupos"]));
 		}
@@ -1407,7 +1407,7 @@ switch (strtoupper($funcao))
 	*/
 	case "ESQUEMASCONEXAO":
 		$m = new Metaestat();
-		if($formato == "json"){
+		if($_GET["formato"] == "json"){
 			retornaJSON($m->esquemasConexao($codigo_estat_conexao));
 		}
 		exit;
@@ -1434,7 +1434,7 @@ switch (strtoupper($funcao))
 		if(empty($_GET["excluigeom"])){
 			$_GET["excluigeom"] = "";
 		}
-		if($formato == "json"){
+		if($_GET["formato"] == "json"){
 			retornaJSON($m->tabelasEsquema($codigo_estat_conexao,$_GET["nome_esquema"],$_GET["excluigeom"]));
 		}
 		exit;
