@@ -94,7 +94,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-3 control-label" for="en">{{{nomeIn}}}</label>
 						<div class="col-md-9">
-							<input title="{{{nomeIn}}}" type="text" value="{{{en}}}" class="form-control" name="en" required>
+							<input title="{{{nomeIn}}}" type="text" value="{{{en}}}" class="form-control" name="en" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
@@ -138,7 +138,7 @@ include "../../head.php";
 		</form>
 
 	</div>
-	<div class="panel-footer" style="padding-top: 0px; padding-bottom: 0px;">
+	<div class="panel-footer {{{escondido}}}" style="padding-top: 0px; padding-bottom: 0px;">
 		<div class="pull-right">
 			<button style="color:#007a6f;" onclick="i3GEOadmin.menus.editarGrupos('{{id_menu}}','{{{nome_menu}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
 				<i class="material-icons">folder_open</i> {{{grupos}}}

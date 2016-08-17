@@ -40,6 +40,11 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	}
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
+
+$id_usuario = $_POST["id_usuario"];
+$id_grupo = $_POST["id_grupo"];
+testaSafeNumerico([$id_usuario,$id_grupo]);
+
 $funcao = strtoupper ( $funcao );
 // converte os parametros de definicao dos papeis em um array
 if ($funcao == "ADICIONAR" || $funcao == "ALTERAR") {
@@ -54,7 +59,7 @@ if ($funcao == "ADICIONAR" || $funcao == "ALTERAR") {
 }
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $nome,$descricao, $usuarios, $dbhw );
+		$novo = adicionar( $_POST["nome"],$_POST["descricao"], $usuarios, $dbhw );
 		if ($novo != false) {
 			$sql = "SELECT * from " . $esquemaadmin . "i3geousr_grupos WHERE id_grupo = " . $novo;
 			$dados = pegaDados ( $sql, $dbh );
@@ -70,7 +75,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_grupo, $nome, $descricao, $usuarios, $dbhw );
+		$novo = alterar ( $id_grupo, $_POST["nome"], $_POST["descricao"], $usuarios, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();

@@ -86,7 +86,7 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-2 control-label" for="descricao">{{{labelDescricao}}}</label>
 						<div class="col-md-10">
-							<input title="{{{labelDescricao}}}" type="text" value="{{{descricao}}}" class="form-control" name="descricao" required>
+							<input title="{{{labelDescricao}}}" type="text" value="{{{descricao}}}" class="form-control" name="descricao" >
 						</div>
 					</div>
 				</div>

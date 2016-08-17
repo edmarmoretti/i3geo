@@ -47,7 +47,7 @@ testaSafeNumerico([$id_mapa]);
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $dbhw );
+		$novo = adicionar( $_POST["publicado_mapa"], $_POST["ordem_mapa"], $_POST["perfil_mapa"], $_POST["ligados_mapa"], $_POST["temas_mapa"], $_POST["desc_mapa"], $_POST["ext_mapa"], $_POST["imagem_mapa"], $_POST["linkdireto_mapa"], $_POST["nome_mapa"], $_POST["outros_mapa"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();

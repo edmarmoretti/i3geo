@@ -40,7 +40,8 @@ i3GEOadmin.grupos = {
 			i3GEOadmin.core.iconeAguarde(i3GEOadmin.grupos.ondeNos);
 
 			$.post(
-					"exec.php?funcao=lista&id_menu=" + i3GEOadmin.grupos.id_menu
+					"exec.php?funcao=lista",
+					"id_menu=" + i3GEOadmin.grupos.id_menu
 			)
 			.done(
 					function(data, status){

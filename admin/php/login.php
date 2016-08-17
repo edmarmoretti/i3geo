@@ -73,6 +73,7 @@ if(!empty($_POST["usuario"]) && !empty($_POST["senha"])){
 	session_regenerate_id();
 	$_SESSION = array();
 	session_start();
+	$funcao = "login";
 }
 else{//se nao, verifica se o login ja existe realmente
 	if(!empty($_COOKIE["i3geocodigologin"])){
@@ -80,10 +81,12 @@ else{//se nao, verifica se o login ja existe realmente
 		session_start();
 		if($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"]){
 			logoutUsuario();
+			cpjson("logout");
 		}
 	}
 	else{//caso nao exista, retorna um erro
-		$retorno = "erro";
+		logoutUsuario();
+		cpjson("erro");
 	}
 }
 //var_dump($_SESSION);exit;

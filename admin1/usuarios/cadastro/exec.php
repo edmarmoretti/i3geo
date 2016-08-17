@@ -40,6 +40,12 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	}
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
+
+$id_usuario = $_POST["id_usuario"];
+$id_papel = $_POST["id_papel"];
+
+testaSafeNumerico([$id_usuario,$id_papel]);
+
 $funcao = strtoupper ( $funcao );
 // converte os parametros de definicao dos papeis em um array
 if ($funcao == "ADICIONAR" || $funcao == "ALTERAR") {
@@ -54,7 +60,7 @@ if ($funcao == "ADICIONAR" || $funcao == "ALTERAR") {
 }
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
+		$novo = adicionar( $_POST["ativo"], $_POST["data_cadastro"], $_POST["email"], $_POST["login"], $_POST["nome_usuario"], $_POST["senha"], $papeis, $dbhw );
 		if ($novo != false) {
 			$sql = "SELECT id_usuario, ativo, data_cadastro, email, login, nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = " . $novo;
 			$dados = pegaDados ( $sql, $dbh );
@@ -77,7 +83,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
+		$novo = alterar ( $id_usuario, $_POST["ativo"], $_POST["data_cadastro"], $_POST["email"], $_POST["login"], $_POST["nome_usuario"], $_POST["senha"], $papeis, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -143,11 +149,11 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ENVIARSENHA" :
-		if($senha == "" || $email == ""){
+		if($_POST["senha"] == "" || $_POST["email"] == ""){
 			header ( "HTTP/1.1 500 erro ao enviar e-mail. Prrencha o valor de e-mail e senha" );
 			exit ();
 		}
-		$retorna = enviarSenha ( $senha, $email );
+		$retorna = enviarSenha ( $_POST["senha"], $_POST["email"] );
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao enviar e-mail $email" );
 			exit ();

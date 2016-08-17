@@ -40,6 +40,10 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	}
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
+
+$id_menu = $_POST["id_menu"];
+testaSafeNumerico([$id_menu]);
+
 if(!isset($idioma) || $idioma == ""){
 	$idioma = "pt";
 }
@@ -47,7 +51,7 @@ if(!isset($idioma) || $idioma == ""){
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw );
+		$novo = adicionar( $_POST["publicado_menu"], $_POST["perfil_menu"], $_POST["aberto"], $_POST["desc_menu"], $_POST["nome_menu"], $_POST["es"], $_POST["en"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -55,7 +59,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw );
+		$novo = alterar ( $id_menu, $_POST["publicado_menu"], $_POST["perfil_menu"], $_POST["aberto"], $_POST["desc_menu"], $_POST["nome_menu"], $_POST["es"], $_POST["en"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();

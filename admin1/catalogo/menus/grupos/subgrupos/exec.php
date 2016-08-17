@@ -45,10 +45,16 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 }
 include (dirname ( __FILE__ ) . "/../../../../../admin/php/conexao.php");
 
+$id_n1 = $_POST["id_n1"];
+$id_n2 = $_POST["id_n2"];
+$id_menu = $_POST["id_menu"];
+$id_subgrupo = $_POST["id_subgrupo"];
+testaSafeNumerico([$id_n1,$id_n2,$id_menu,$id_subgrupo]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ORDENA" :
-		$ordem = explode(" ",$ordem);
+		$ordem = explode(" ",$_POST["ordem"]);
 		//verifica se existe a mesma quantidade de registros no banco e na lista de ids
 		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n2 WHERE id_n1 = $id_n1", $dbh, false );
 		if(count($dados) != count($ordem)){
@@ -62,7 +68,7 @@ switch ($funcao) {
 			exit ();
 		}
 
-		$retorna = i3GeoAdminOrdena($dbhw,$ordem,i3geoadmin_n2,"id_n2");
+		$retorna = i3GeoAdminOrdena($dbhw,$ordem,"i3geoadmin_n2","id_n2");
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
@@ -73,7 +79,7 @@ switch ($funcao) {
 		exit();
 		break;
 	case "ADICIONAR" :
-		$novo = adicionar( $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw );
+		$novo = adicionar( $id_subgrupo, $id_n1, $_POST["publicado"], $_POST["n2_perfil"], $_POST["ordem"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -81,7 +87,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_n2, $id_subgrupo, $id_menu, $publicado, $n2_perfil, $ordem, $dbhw );
+		$novo = alterar ( $id_n2, $id_subgrupo, $id_menu, $publicado, $_POST["n2_perfil"], $_POST["ordem"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -113,7 +119,7 @@ switch ($funcao) {
 		retornaJSON($subgrupos);
 		break;
 	case "EXCLUIR" :
-		$r = pegaDados("SELECT id_n3 from ".$esquemaadmin."i3geoadmin_n3 where id_n2 ='$id'");
+		$r = pegaDados("SELECT id_n3 from ".$esquemaadmin."i3geoadmin_n3 where id_n2 ='$id_n2'");
 		if(count($r) > 0){
 			header ( "HTTP/1.1 500 erro ao excluir. Exclua os subgrupos primeiro" );
 			exit ();

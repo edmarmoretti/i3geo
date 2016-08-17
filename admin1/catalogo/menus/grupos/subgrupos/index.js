@@ -42,7 +42,8 @@ i3GEOadmin.subgrupos = {
 			i3GEOadmin.core.iconeAguarde(i3GEOadmin.subgrupos.ondeNos);
 
 			$.post(
-					"exec.php?funcao=lista&id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&id_menu=" + i3GEOadmin.subgrupos.id_menu
+					"exec.php?funcao=lista",
+					"id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&id_menu=" + i3GEOadmin.subgrupos.id_menu
 			)
 			.done(
 					function(data, status){

@@ -287,7 +287,7 @@ if(!isset($dir_tmp)){
 	include_once (dirname(__FILE__)."/ms_configura.php");
 }
 if(isset($logExec) && $logExec["init"] == true){
-	i3GeoLog("prog: ms_criamapa url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
+	i3GeoLog("prog: ms_criamapa url: ".implode("&",array_merge($_GET,$_POST)),$dir_tmp);
 }
 if(!empty($restauramapa)){
 	$base = restauraMapaAdmin($restauramapa,$dir_tmp);

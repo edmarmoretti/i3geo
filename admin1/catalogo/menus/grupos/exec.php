@@ -45,10 +45,15 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 }
 include (dirname ( __FILE__ ) . "/../../../../admin/php/conexao.php");
 
+$id_menu = $_POST["id_menu"];
+$id_n1 = $_POST["id_n1"];
+$id_grupo = $_POST["id_grupo"];
+testaSafeNumerico([$id_menu,$id_n1, $id_grupo]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ORDENA" :
-		$ordem = explode(" ",$ordem);
+		$ordem = explode(" ",$_POST["ordem"]);
 		//verifica se existe a mesma quantidade de registros no banco e na lista de ids
 		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n1 WHERE id_menu = $id_menu", $dbh, false );
 		if(count($dados) != count($ordem)){
@@ -62,7 +67,7 @@ switch ($funcao) {
 			exit ();
 		}
 
-		$retorna = i3GeoAdminOrdena($dbhw,$ordem,i3geoadmin_n1,"id_n1");
+		$retorna = i3GeoAdminOrdena($dbhw,$ordem,"i3geoadmin_n1","id_n1");
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
@@ -73,7 +78,7 @@ switch ($funcao) {
 		exit();
 		break;
 	case "ADICIONAR" :
-		$novo = adicionar( $id_grupo, $id_menu, $publicado, $n1_perfil, $ordem, $dbhw );
+		$novo = adicionar( $id_grupo, $id_menu, $_POST["publicado"], $_POST["n1_perfil"], $_POST["ordem"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -81,7 +86,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_n1, $id_grupo, $id_menu, $publicado, $n1_perfil, $ordem, $dbhw );
+		$novo = alterar ( $id_n1, $id_grupo, $id_menu, $_POST["publicado"], $_POST["n1_perfil"], $_POST["ordem"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -113,12 +118,12 @@ switch ($funcao) {
 		retornaJSON($grupos);
 		break;
 	case "EXCLUIR" :
-		$r = pegaDados("SELECT id_n2 from ".$esquemaadmin."i3geoadmin_n2 where id_n1 ='$id'");
+		$r = pegaDados("SELECT id_n2 from ".$esquemaadmin."i3geoadmin_n2 where id_n1 ='$id_n1'");
 		if(count($r) > 0){
 			header ( "HTTP/1.1 500 erro ao excluir. Exclua os subgrupos primeiro" );
 			exit ();
 		}
-		$r = pegaDados("SELECT id_raiz from ".$esquemaadmin."i3geoadmin_raiz where nivel='1' and id_nivel ='$id'");
+		$r = pegaDados("SELECT id_raiz from ".$esquemaadmin."i3geoadmin_raiz where nivel='1' and id_nivel ='$id_n1'");
 		if(count($r) > 0){
 			header ( "HTTP/1.1 500 erro ao excluir. Exclua os temas na raiz do grupo primeiro" );
 			exit ();
