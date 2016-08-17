@@ -104,64 +104,67 @@ function listaCamadasSubgrupo(idmenu,id_n1,id_n2){
 	i3GEO.php.pegalistadetemas(r, idmenu, id_n1, id_n2);
 }
 function listaMetaestat (onde,templateCamadas){
-	var r, p;
-	r = function(d){
-		var html = "", n, camadas = [], i, t;
-		n = d.length;
-		if(n > 0){
-			for(i=0; i<n; i++){
-				t = d[i];
-				camadas.push({
-					"nome": t.nomemedida,
-					"hidden": "",
-					"codigo_tema": t.id_medida_variavel
-				});
+	if(onde.html()){
+		var r, p;
+		r = function(d){
+			var html = "", n, camadas = [], i, t;
+			n = d.length;
+			if(n > 0){
+				for(i=0; i<n; i++){
+					t = d[i];
+					camadas.push({
+						"nome": t.nomemedida,
+						"hidden": "",
+						"codigo_tema": t.id_medida_variavel
+					});
+				}
+				html = Mustache.to_html(
+						onde.html(),
+						{
+							"nomemeta":$trad("nomemeta",g_traducao_ogc),
+							"camadasmeta": ckCamada(camadas,templateCamadas,"meta"),
+							"hidden": "hidden"
+						}
+				);
 			}
-			html = Mustache.to_html(
-					onde.html(),
-					{
-						"nomemeta":$trad("nomemeta",g_traducao_ogc),
-						"camadasmeta": ckCamada(camadas,templateCamadas,"meta"),
-						"hidden": "hidden"
-					}
-			);
-		}
-		onde.html(html);
-	};
-	//cpJSON vem de class_php.js
-	cpJSON.call("../admin/php/metaestat.php?funcao=listaMedidaVariavel&codigo_variavel=&g_sid=", "foo", r);
+			onde.html(html);
+		};
+		//cpJSON vem de class_php.js
+		cpJSON.call("../admin/php/metaestat.php?funcao=listaMedidaVariavel&codigo_variavel=&g_sid=", "foo", r);
+	}
 }
 function listaMapasSalvos(onde,templateCamadas){
-	var r, p;
-	r = function(d){
-		d = d.data.mapas;
-		var html = "", n, camadas = [], i, t;
-		n = d.length;
-		if(n > 0){
-			for(i=0; i<n; i++){
-				t = d[i];
-				camadas.push({
-					"nome": t.NOME,
-					"hidden": "",
-					"codigo_tema": t.ID_MAPA,
-					"download": "nao"
-				});
+	if(onde.html()){
+		var r, p;
+		r = function(d){
+			d = d.data.mapas;
+			var html = "", n, camadas = [], i, t;
+			n = d.length;
+			if(n > 0){
+				for(i=0; i<n; i++){
+					t = d[i];
+					camadas.push({
+						"nome": t.NOME,
+						"hidden": "",
+						"codigo_tema": t.ID_MAPA,
+						"download": "nao"
+					});
+				}
+
+				html = Mustache.to_html(
+						onde.html(),
+						{
+							"nomeMapasSalvos":$trad("nomeMapasSalvos",g_traducao_ogc),
+							"mapasSalvos": ckCamada(camadas,templateCamadas,"mapa"),
+							"hidden": "hidden"
+						}
+				);
 			}
-
-			html = Mustache.to_html(
-					onde.html(),
-					{
-						"nomeMapasSalvos":$trad("nomeMapasSalvos",g_traducao_ogc),
-						"mapasSalvos": ckCamada(camadas,templateCamadas,"mapa"),
-						"hidden": "hidden"
-					}
-			);
-		}
-		onde.html(html);
-	};
-	//cpJSON vem de class_php.js
-	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaMapas&g_sid=", "foo", r);
-
+			onde.html(html);
+		};
+		//cpJSON vem de class_php.js
+		cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaMapas&g_sid=", "foo", r);
+	}
 }
 function ckCamada(camadas,templateCamadas,tipo){
 	var ncamadas = [],
@@ -308,7 +311,12 @@ function listaCompleta(onde){
 			}
 			html = ckCamada(camadas,$("#templateCamadas").html(),"tema");
 		}
-		onde.html(html + $("#corpoMetaestat").html());
+		if($("#corpoMetaestat").html()){
+			onde.html(html + $("#corpoMetaestat").html());
+		}
+		else{
+			onde.html(html);
+		}
 	};
 	//cpJSON vem de class_php.js
 	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaTodosTemas&g_sid=&idioma=pt", "foo", r);

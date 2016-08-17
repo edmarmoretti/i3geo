@@ -188,7 +188,7 @@ include "../init/head.php";
 					</div>
 			</div>
 		</div>
-		<!-- Camadas oriundas do sistema de metadados estatisticos -->
+		<!-- Camadas oriundas do sistema de metadados estatisticos e mapas salvos
 		<div class="row center-block escondido hidden">
 			<div class="col-sm-6" id="metaestat">
 				<div class="panel-group" role="tablist" aria-multiselectable="true">
@@ -227,6 +227,7 @@ include "../init/head.php";
 				</div>
 			</div>
 		</div>
+		-->
 		<div class="row center-block">
 			<div class="col-sm-12" id="arvore">
 				<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>
