@@ -2031,6 +2031,8 @@ class Mapa
 	{
 		if (file_exists($arq))
 		{
+			$arq = str_replace(".shp","",$arq);
+			$arq = str_replace(".","",$arq).".shp";
 			$s = ms_newShapefileObj($arq,-1);
 			/*
 			 if($this->v == 6)

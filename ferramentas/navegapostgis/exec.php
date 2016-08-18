@@ -28,7 +28,7 @@ Valor: LISTAARQUIVOS*
 Lista os arquivos de um diretório.
 */
 	case "LISTAARQUIVOS":
-		$retorno = listaArquivos($diretorio,true);
+		$retorno = listaArquivos($_GET["diretorio"],true);
 	break;
 }
 cpjson($retorno);

@@ -589,14 +589,40 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
-		$retorno = $m->adicionaTemaSHP($_pg["arq"]);
-		if ($retorno != "erro")
-		{
-			$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();
+		//valida o caminho do arquivo shapefile
+		$nome = explode("/",$_pg["arq"]);
+		$nome = $nome[0];
+		if(empty($nome)){
+			$retorno = "erro";
 		}
-		else
-		{
-			$retorno = "erro.Nenhum dado espacializado foi encontrado.";
+		else{
+			//remove o nome do caminho
+			$novo = explode("/",$_pg["arq"]);
+			$novo[0] = "";
+			$_pg["arq"] = implode("/",$novo);
+			//
+			include(dirname(__FILE__)."/../ms_configura.php");
+			$d = $navegadoresLocais[0]["drives"];
+			$p = "";
+			foreach($d as $n){
+				if($n["nome"] == $nome){
+					$p = $n["caminho"];
+				}
+			}
+			if($p != "" && file_exists($p)){
+
+				$retorno = $m->adicionaTemaSHP($p."/".$_pg["arq"]);
+				if ($retorno != "erro")	{
+					$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();
+				}
+				else{
+					$retorno = "erro.Nenhum dado espacializado foi encontrado.";
+				}
+
+			}
+			else{
+				$retorno = "erro";
+			}
 		}
 		break;
 		/*

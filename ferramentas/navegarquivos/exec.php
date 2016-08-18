@@ -6,6 +6,8 @@ $funcoesEdicao = array(
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/editormapfile") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+
 		//se nao estiver logado permite acesso a pasta i3geo/aplicmap/dados
 		//localiza a pasta aplicmap/dados
 		$d = dirname(__FILE__); //precisa descer ainda
@@ -36,7 +38,15 @@ A lista de drives &eacute; definida no ms_configura e permite que o usu&aacute;r
 */
 	case "LISTADRIVES":
 		include(dirname(__FILE__)."/../ms_configura.php");
-		$retorno = $navegadoresLocais[0];
+		//pega apenas os nomes para nao expor o caminho completo
+		$d = $navegadoresLocais[0]["drives"];
+		$resultado = array();
+		//a primeira string sera o nome definido em drives
+		foreach($d as $n){
+			$n["caminho"] = $n["nome"];
+			$resultado[] = $n;
+		}
+		$retorno = array("drives"=>$resultado);
 	break;
 /*
 Valor: LISTAARQUIVOS*
@@ -44,7 +54,36 @@ Valor: LISTAARQUIVOS*
 Lista os arquivos de um diretório.
 */
 	case "LISTAARQUIVOS":
-		$retorno = listaArquivos($diretorio,true);
+		//pega o caminho
+		//nome
+		$nome = explode("/",$_GET["diretorio"]);
+		$nome = $nome[0];
+		if(empty($nome)){
+			$retorno = "erro";
+		}
+		else{
+			//remove o nome do caminho
+			$novo = explode("/",$_GET["diretorio"]);
+			$novo[0] = "";
+			$_GET["diretorio"] = implode("/",$novo);
+			//
+			include(dirname(__FILE__)."/../../ms_configura.php");
+			$d = $navegadoresLocais[0]["drives"];
+			$p = "";
+			foreach($d as $n){
+				if($n["nome"] == $nome){
+					$p = $n["caminho"];
+				}
+			}
+			if($p != "" && file_exists($p)){
+				$path = $p."/".$_GET["diretorio"];
+				$path = str_replace(".","",$path);
+				$retorno = listaArquivos($path,true);
+			}
+			else{
+				$retorno = "erro";
+			}
+		}
 	break;
 }
 cpjson($retorno);

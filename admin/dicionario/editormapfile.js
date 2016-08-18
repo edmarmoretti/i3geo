@@ -467,7 +467,7 @@ i3GEOadmin.editormapfile.dicionario = {
 		es : ""
 	} ],
     'dataTitulo' : [ {
-		pt : "Data - SQL ou caminho do arquivo com os dados",
+		pt : "Data - SQL ou caminho do arquivo com os dados. No caso de shapefile, verifique se o caminho est&aacute; correto ao usar o navegador de arquivos",
 		en : "",
 		es : ""
 	} ],
