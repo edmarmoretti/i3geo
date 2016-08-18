@@ -40,7 +40,8 @@ i3GEOadmin.temas = {
 			i3GEOadmin.core.iconeAguarde(i3GEOadmin.temas.onde);
 
 			$.post(
-					"exec.php?funcao=lista&id_n2=" + i3GEOadmin.temas.id_n2
+					"exec.php?funcao=lista",
+					"id_n2=" + i3GEOadmin.temas.id_n2
 			)
 			.done(
 					function(data, status){

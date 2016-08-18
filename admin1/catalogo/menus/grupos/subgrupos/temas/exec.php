@@ -45,10 +45,15 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 }
 include (dirname ( __FILE__ ) . "/../../../../../../admin/php/conexao.php");
 
+$id_n2 = $_POST["id_n2"];
+$id_n3 = $_POST["id_n3"];
+$id_tema = $_POST["id_tema"];
+testaSafeNumerico([$id_tema,$id_n2,$id_n3]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ORDENA" :
-		$ordem = explode(" ",$ordem);
+		$ordem = explode(" ",$_POST["ordem"]);
 		//verifica se existe a mesma quantidade de registros no banco e na lista de ids
 		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n3 WHERE id_n2 = $id_n2", $dbh, false );
 		if(count($dados) != count($ordem)){
@@ -62,7 +67,7 @@ switch ($funcao) {
 			exit ();
 		}
 
-		$retorna = i3GeoAdminOrdena($dbhw,$ordem,i3geoadmin_n3,"id_n3");
+		$retorna = i3GeoAdminOrdena($dbhw,$ordem,"i3geoadmin_n3","id_n3");
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
@@ -73,7 +78,7 @@ switch ($funcao) {
 		exit();
 		break;
 	case "ADICIONAR" :
-		$novo = adicionar( $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw );
+		$novo = adicionar( $id_tema, $id_n2, $_POST["publicado"], $_POST["n3_perfil"], $_POST["ordem"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -81,7 +86,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_n3, $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw );
+		$novo = alterar ( $id_n3, $id_tema, $id_n2, $_POST["publicado"], $_POST["n3_perfil"], $_POST["ordem"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();

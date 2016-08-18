@@ -41,10 +41,13 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 }
 include (dirname ( __FILE__ ) . "/../../../../../../admin/php/conexao.php");
 
+$id_subgrupo = $_POST["id_subgrupo"];
+testaSafeNumerico([$id_subgrupo]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw );
+		$novo = adicionar( $_POST["nome_subgrupo"], $_POST["desc_subgrupo"], $_POST["en"], $_POST["es"], $dbhw );
 		if ($novo === false) {
 			$dbhw = null;
 			$dbh = null;
@@ -54,7 +57,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_subgrupo, $nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw );
+		$novo = alterar ( $id_subgrupo, $_POST["nome_subgrupo"], $_POST["desc_subgrupo"], $_POST["en"], $_POST["es"], $dbhw );
 		if ($novo === false) {
 			$dbhw = null;
 			$dbh = null;

@@ -185,7 +185,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
 						<div class="col-md-4">
-							<input title="{{{perfis}}}" id="perfil_no-{{id_n1}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
+							<input title="{{{perfis}}}" id="perfil_no-{{id_n1}}" type="text" value="{{{n1_perfil}}}" class="form-control" name="n1_perfil">
 						</div>
 						<div class="col-md-4">
 							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_no-{{id_n1}}',this.value)">

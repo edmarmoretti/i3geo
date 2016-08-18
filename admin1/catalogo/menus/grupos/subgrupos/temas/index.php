@@ -98,7 +98,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 					<div class="form-group form-group-lg">
 						<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
 						<div class="col-md-4">
-							<input title="{{{perfis}}}" id="perfil_tema-{{id_n3}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
+							<input title="{{{perfis}}}" id="perfil_tema-{{id_n3}}" type="text" value="{{{n3_perfil}}}" class="form-control" name="n3_perfil">
 						</div>
 						<div class="col-md-4">
 							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.temas.addInput('perfil_tema-{{id_n3}}',this.value)">
