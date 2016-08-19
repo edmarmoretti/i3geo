@@ -275,6 +275,7 @@ if(!isset($funcao)){
 }
 
 include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");
+
 $versao = versao();
 $versao = $versao["principal"];
 

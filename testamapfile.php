@@ -55,9 +55,21 @@ tabela - (opcional) testa a tabela de atributos
 
 set_time_limit(300);
 ini_set('max_execution_time', 300);
+include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+$_GET = array_merge($_GET,$_POST);
 include("ms_configura.php");
+//verifica se o login pode ser realizado
+if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+	header ( "HTTP/1.1 403 Login desativado" );
+	exit ();
+}
 include("classesphp/funcoes_gerais.php");
-require_once("classesphp/pega_variaveis.php");
+
+//$i3geoPermiteLoginIp vem de ms_configura.php
+if(isset($i3geoPermiteLoginIp)){
+	checaLoginIp($i3geoPermiteLoginIp);
+}
+
 include_once ("classesphp/carrega_ext.php");
 //
 //carrega o phpmapscript
@@ -114,9 +126,14 @@ if ($tipo == "")
 	echo $combo."</select></form><br>";
 	echo '<br><input type=button value="Testa tabela" id="rodatabela" />';
 }
+
+$solegenda = $_GET["solegenda"];
+$iniciar = $_GET["iniciar"];
+$map = $_GET["map"];
+
 if (isset($map) && $map != "")
 {
-	if(!isset($solegenda)){$solegenda = "nao";}
+	if(!isset($solegenda) || $solegenda == ""){$solegenda = "nao";}
 	if ($map == "todos"){
 		$tipo = "todos";
 		$conta = 0;
@@ -187,8 +204,6 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 		{$tema = 'temas/'.$map;}
 		if (file_exists('temas/'.$map.'.map'))
 		{$tema = 'temas/'.$map.".map";}
-		if (file_exists('temas/'.$map.'.php'))
-		{$tema = 'temas/'.$map.".php";}
 		if (file_exists('temas/'.$map.'.gvp'))
 		{$tema = 'temas/'.$map.".gvp";}
 	}

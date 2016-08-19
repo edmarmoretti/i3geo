@@ -64,6 +64,17 @@ error_reporting(0);
 //
 include_once(dirname(__FILE__)."/../safe.php");
 include_once(dirname(__FILE__)."/admin.php");
+
+//verifica se o login pode ser realizado
+if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+	header ( "HTTP/1.1 403 Login desativado" );
+	exit ();
+}
+//$i3geoPermiteLoginIp vem de ms_configura.php
+if(isset($i3geoPermiteLoginIp)){
+	checaLoginIp($i3geoPermiteLoginIp);
+}
+
 error_reporting(0);
 session_write_close();
 session_name("i3GeoLogin");

@@ -50,6 +50,15 @@
 		//echo dirname(__FILE__);
 		$esquemaadmin = "";
 		include("admin.php");
+		//verifica se o login pode ser realizado
+		if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+			header ( "HTTP/1.1 403 Login desativado" );
+			exit ();
+		}
+		//$i3geoPermiteLoginIp vem de ms_configura.php
+		if(isset($i3geoPermiteLoginIp)){
+			checaLoginIp($i3geoPermiteLoginIp);
+		}
 		error_reporting(0);
 		$tabelas = array(
 				//tabelas gerais do sistema de administracao

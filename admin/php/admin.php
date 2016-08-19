@@ -33,10 +33,8 @@ Arquivo:
 
 i3geo/admin/php/admin.php
 */
-if(!isset($locaplic) || !isset($dir_tmp)){
-	$locaplic = "";
-	include(dirname(__FILE__)."/../../ms_configura.php");
-}
+include(dirname(__FILE__)."/../../ms_configura.php");
+
 if(!file_exists($dir_tmp)){
 	@mkdir ($dir_tmp,0744);
 	chmod($dir_tmp,0744);

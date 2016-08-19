@@ -74,8 +74,15 @@ include "../init/head.php";
 		*/
 		$locaplic = dirname(dirname(__FILE__));
 		include_once("../admin/php/admin.php");
-		include_once("../ms_configura.php");
-
+		//verifica se o login pode ser realizado
+		if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+			header ( "HTTP/1.1 403 Login desativado" );
+			exit ();
+		}
+		//$i3geoPermiteLoginIp vem de ms_configura.php
+		if(isset($i3geoPermiteLoginIp)){
+			checaLoginIp($i3geoPermiteLoginIp);
+		}
 		?>
 		<script src='../classesjs/compactados/dicionario_compacto.js'></script>
 		<script src='../classesjs/compactados/classe_util_compacto.js'></script>

@@ -44,6 +44,16 @@ i3geo/classesjs/compactajs.php
 
 $locaplic = dirname(__FILE__)."/..";
 include_once(dirname(__FILE__)."/../admin/php/admin.php");
+//verifica se o login pode ser realizado
+if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+	header ( "HTTP/1.1 403 Login desativado" );
+	exit ();
+}
+//$i3geoPermiteLoginIp vem de ms_configura.php
+if(isset($i3geoPermiteLoginIp)){
+	checaLoginIp($i3geoPermiteLoginIp);
+}
+
 include_once(dirname(__FILE__)."/../admin/php/conexao.php");
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 	formularioLoginMaster("compactajs.php");

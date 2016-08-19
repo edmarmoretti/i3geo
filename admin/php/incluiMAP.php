@@ -36,6 +36,15 @@ i3geo/admin/php/incluiMAP.php
 $funcao = "";
 $locaplic = dirname(__FILE__)."/../..";
 include_once("admin.php");
+//verifica se o login pode ser realizado
+if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+	header ( "HTTP/1.1 403 Login desativado" );
+	exit ();
+}
+//$i3geoPermiteLoginIp vem de ms_configura.php
+if(isset($i3geoPermiteLoginIp)){
+	checaLoginIp($i3geoPermiteLoginIp);
+}
 include_once("conexao.php");
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 	formularioLoginMaster("incluiMAP.php");

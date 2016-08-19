@@ -1,6 +1,12 @@
 <?php
 define ( ONDEI3GEO, "../../.." );
 include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
+//verifica se o login pode ser realizado
+if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+	header ( "HTTP/1.1 403 Login desativado" );
+	exit ();
+}
+
 error_reporting ( 0 );
 include "../../head.php";
 ?>

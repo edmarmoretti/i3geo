@@ -2095,15 +2095,24 @@ Retorno:
 
 {string}
 */
-function pegaIPcliente()
-{
-	$ip = "UNKNOWN";
-	if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
-	else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
-	else if(getenv("REMOTE_ADDR")) $ip = getenv("REMOTE_ADDR");
-	else $ip = "UNKNOWN";
-	//$ip = "200.252.111.1";//teste
-	return $ip;
+function pegaIPcliente(){
+      $ipaddress = '';
+      if (getenv('HTTP_CLIENT_IP'))
+          $ipaddress = getenv('HTTP_CLIENT_IP');
+      else if(getenv('HTTP_X_FORWARDED_FOR'))
+          $ipaddress = getenv('HTTP_X_FORWARDED_FOR');
+      else if(getenv('HTTP_X_FORWARDED'))
+          $ipaddress = getenv('HTTP_X_FORWARDED');
+      else if(getenv('HTTP_FORWARDED_FOR'))
+          $ipaddress = getenv('HTTP_FORWARDED_FOR');
+      else if(getenv('HTTP_FORWARDED'))
+          $ipaddress = getenv('HTTP_FORWARDED');
+      else if(getenv('REMOTE_ADDR'))
+          $ipaddress = getenv('REMOTE_ADDR');
+      else
+          $ipaddress = 'UNKNOWN';
+
+      return $ipaddress;
 }
 /*
 Function: pegaIPcliente2
@@ -3050,5 +3059,29 @@ function i3GeoLog($txt,$dir_tmp=""){
 	$txt.PHP_EOL.
 	"-------------------------".PHP_EOL;
 	file_put_contents($dir_tmp.'/.log_i3geo_'.date("j.n.Y"), $log, FILE_APPEND);
+}
+/**
+ * valida o IP do usuario em uma lista branca
+ */
+function validaIpUsuario($lista){
+	if($lista == ""){
+		return true;
+	}
+	$ip = pegaIPcliente();
+	if(in_array($ip,$lista)){
+		return true;
+	} else {
+		return false;
+	}
+}
+function checaLoginIp($lista){
+	if(empty($lista)){
+		return;
+	}
+	$r = validaIpUsuario($lista);
+	if($r == false){
+		header ( "HTTP/1.1 403 Login nao permitido" );
+		exit ();
+	}
 }
 ?>

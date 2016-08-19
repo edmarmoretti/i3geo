@@ -62,6 +62,32 @@ array(array("usuario"=>"admin", "senha"=>"adminx"));
 $i3geomaster = array(
 	array("usuario"=>"admin", "senha"=>"admin")
 );
+//TODO documentar no moodle
+/*
+Variable: $i3geoPermiteLogin
+
+Permite ou impede que sejam executadas as funcionalidades que exigem login
+
+Quando false o login e bloaueado, mesmo para usuarios cadastrados
+
+Tipo:
+{boolean}
+*/
+$i3geoPermiteLogin = true;
+/*
+Variable: $i3geoPermiteLoginIp
+
+Lista de IPs que podem fazer login. Valido apenas se $i3geoPermiteLogin for true
+
+A lista e um array, permitindo a inclusao de varios IPs
+
+Para nao fazer a verificacao, ou seja, permitir que qualquer IP faca login, deixe essa variavel em branco
+
+Exemplo de uso:
+
+$i3geoPermiteLoginIp = array("127.0.0.1","200.200.200.200");
+*/
+$i3geoPermiteLoginIp = array();
 /*
  Variable: $logTransacoes
 
@@ -94,6 +120,8 @@ $logTransacoes = false;
 
  Para evitar o log, basta definir os valores como false ou $logExec = ''
 
+ Tipo:
+ {array}
 */
 $logExec = array(
 	"mapa_" => false, //mapa_openlayers e mapa_googlemaps
@@ -146,8 +174,8 @@ Sobre essas configuracoes, veja na pasta i3geo/ferramentas e na documentacao do
 sistema de administracao do i3Geo
  */
 $statusFerramentas = array(
-	"saiku"=>true,
-	"melhorcaminho"=>true
+	"saiku"=>false,
+	"melhorcaminho"=>false
 );
 /*
 Variable: $ogrOutput

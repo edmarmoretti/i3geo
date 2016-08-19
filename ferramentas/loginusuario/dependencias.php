@@ -6,6 +6,15 @@
  * javascript i3GEOF.loginusuario.MUSTACHE
  * O template e substituido pelos valores definidos em index.js no momento da inicializacao da ferramenta
  */
+
+//verifica se o login pode ser realizado
+include(dirname(__FILE__)."/../../ms_configura.php");
+if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+	echo "alert('ferramenta de login desativada');";
+	//header ( "HTTP/1.1 403 Login desativado" );
+	exit ();
+}
+
 if(extension_loaded('zlib')){
 	ob_start('ob_gzhandler');
 }
