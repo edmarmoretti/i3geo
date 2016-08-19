@@ -29,6 +29,8 @@ error_reporting(0);
 if (isset($_FILES['i3GEOuploadshp']['name']))
 {
   $dirDestino = $_POST["dirDestino"];
+  $dirDestino = str_replace(".","",$dirDestino);
+
   if(empty($dirDestino)){
   	echo "Pasta nao encontrada"; exit;
   }
@@ -45,8 +47,8 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
   flush();
   sleep(1);
   $dirmap = $dirDestino;
-  if(!file_exists($dirmap)){
-    echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor";
+  if(!file_exists($dirmap) || $dirmap == dirname ( $locaplic ) || $dirmap == dirname ( $locaplic )."/"){
+    echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor ou n&atilde;o permitido";
     paraAguarde();
     exit;
   }

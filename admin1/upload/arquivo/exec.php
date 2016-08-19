@@ -1,248 +1,197 @@
 <?php
-/*
- * Licenca:
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Edmar Moretti
- * Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
- * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
- * GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
- * por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
- * de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
- * Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
- * Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a
- * Free Software Foundation, Inc., no endere&ccedil;o
- * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
-error_reporting ( 0 );
-//
-// pega as variaveis passadas com get ou post
-//
-
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
-$funcoesEdicao = array (
-		"ADICIONAR",
-		"ALTERAR",
-		"EXCLUIR"
-);
-if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/usuarios" ) === false) {
-		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
-		exit ();
-	}
-}
-include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
-$funcao = strtoupper ( $funcao );
-// converte os parametros de definicao dos papeis em um array
-if ($funcao == "ADICIONAR" || $funcao == "ALTERAR") {
-	$papeis = array ();
-	foreach ( array_keys ( $_POST ) as $k ) {
-		$teste = explode ( "-", $k );
-		if ($teste[0] == "id_papel") {
-			$papeis[] = $teste[1] * 1;
-		}
-	}
-	array_unique ( $papeis );
-}
-switch ($funcao) {
-	case "ADICIONAR" :
-		$novo = adicionar( $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
-		if ($novo != false) {
-			$sql = "SELECT id_usuario, ativo, data_cadastro, email, login, nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = " . $novo;
-			$dados = pegaDados ( $sql, $dbh );
-			if ($dados === false) {
-				header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-				exit ();
-			}
-			if(strtolower($enviaSenha) == "on"){
-				if($senha == "" || $email == ""){
-					$dados = header ( "HTTP/1.1 500 para enviar a senha &eacute; necess&aacute;rio preencher o valor de senha e e-mail" );
-				} else {
-					$dados = enviarSenha( $senha, $email );
-				}
-			}
-			retornaJSON ( $dados );
-		} else {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		exit ();
-		break;
-	case "ALTERAR" :
-		$novo = alterar ( $id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
-		if ($novo === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		$sql = "SELECT * from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = " . $novo;
-		$dados = pegaDados ( $sql, $dbh );
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		if(strtolower($enviaSenha) == "on"){
-			if($senha == "" || $email == ""){
-				$dados = header ( "HTTP/1.1 500 para enviar a senha &eacute; necess&aacute;rio preencher o valor de senha e e-mail" );
-			} else {
-				$dados = enviarSenha( $senha, $email );
-			}
-		}
-		retornaJSON ( $dados );
-		exit ();
-		break;
-	case "LISTA" :
-		$usuarios = pegaDados ( "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios order by nome_usuario", $dbh, false );
-		$papeis = pegaDados ( "SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM " . $esquemaadmin . "i3geousr_usuarios AS U JOIN " . $esquemaadmin . "i3geousr_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON UP.id_papel = P.id_papel ", dbh, false );
-		if ($usuarios === false || $papeis === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		$o = array ();
-		foreach ( $usuarios as $usuario ) {
-			// pega os papeis registrados para cada operacao
-			$p = array ();
-			foreach ( $papeis as $papel ) {
-				if ($papel["id_usuario"] == $usuario["id_usuario"]) {
-					$p[$papel["id_papel"]] = $papel;
-				}
-			}
-			$usuario["papeis"] = $p;
-			$o[] = $usuario;
-		}
-		$papeis = pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", $dbh );
-		$dbhw = null;
-		$dbh = null;
-		if ($papeis === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit();
-		}
-		retornaJSON ( array (
-				"usuarios" => $o,
-				"papeis" => $papeis
-		) );
-		break;
-	case "EXCLUIR" :
-		$retorna = excluir ( $id_usuario, $dbhw );
-		$dbhw = null;
-		$dbh = null;
-		if ($retorna === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		retornaJSON ( $id_usuario );
-		exit ();
-		break;
-	case "ENVIARSENHA" :
-		if($senha == "" || $email == ""){
-			header ( "HTTP/1.1 500 erro ao enviar e-mail. Prrencha o valor de e-mail e senha" );
-			exit ();
-		}
-		$retorna = enviarSenha ( $senha, $email );
-		if ($retorna === false) {
-			header ( "HTTP/1.1 500 erro ao enviar e-mail $email" );
-			exit ();
-		}
-		retornaJSON ( true );
-		exit ();
-		break;
-}
-cpjson ( $retorno );
 
-function enviarSenha( $senha, $email ){
-	$to      = $email;
-	$subject = 'senha i3geo criada em '. date('l jS \of F Y h:i:s A');
-	$message = $senha;
-	return mail($to, $subject, $message);
-}
-// $papeis deve ser um array
-function adicionar($ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
-	global $esquemaadmin;
-	try {
-		$dataCol = array(
-			"nome_usuario" => '',
-			"login" => '',
-			"email" => '',
-			"ativo" => 0,
-			"data_cadastro" => '',
-			"senha" => ''
-		);
-		$id_usuario = i3GeoAdminInsertUnico ( $dbhw, "i3geousr_usuarios", $dataCol, "nome_usuario", "id_usuario" );
-		$data_cadastro = date('l jS \of F Y h:i:s A');
-		$retorna = alterar ( $id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw );
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
+if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
+	if (verificaOperacaoSessao ( "admin/html/subirshapefile" ) == false) {
+		retornaJSON ( "Vc nao pode realizar essa operacao." );
+		exit ();
 	}
 }
-// $papeis deve ser um array
-function alterar($id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
-	global $esquemaadmin;
-	if ($convUTF) {
-		$nome_usuario = utf8_encode ( $nome_usuario );
+if (isset ( $_GET ["tipo"] )) {
+	$tipo = $_GET ["tipo"];
+}
+// locaplic e usado para definir a pasta de destino
+if (empty ( $locaplic )) {
+	exit ();
+}
+error_reporting ( 0 );
+?>
+<html>
+<head>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" type="text/css" href="../../../css/input.css" />
+<link rel="stylesheet" type="text/css" href="../../../css/geral.css" />
+<script src="../../../classesjs/classe_util.js"></script>
+<title></title>
+</head>
+<body bgcolor="white" style="background-color: white; text-align: left;">
+	<p>
+<?php
+if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
+	$dirDestino = $_POST ["dirDestino"];
+	$dirDestino = str_replace(".","",$dirDestino);
+	if (empty ( $dirDestino )) {
+		echo "Pasta n&atilde;o encontrada";
+		exit ();
 	}
-	$dataCol = array (
-			"nome_usuario" => $nome_usuario,
-			"login" => $login,
-			"email" => $email,
-			"ativo" => $ativo
-	);
-	// se a senha foi enviada, ela sera trocada
-	if ($senha != "") {
-		$dataCol ["senha"] = md5 ( $senha );
+	$checaDestino = dirname ( $locaplic );
+	$dirDestino = str_replace ( $checaDestino, "", $dirDestino );
+	$dirDestino = $checaDestino . "/" . $dirDestino;
+
+	if (isset ( $logExec ) && $logExec ["upload"] == true) {
+		i3GeoLog ( "prog: upload filename:" . $_FILES ['i3GEOuploadshp'] ['name'], $dir_tmp );
 	}
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geousr_usuarios", $dataCol, "WHERE id_usuario = $id_usuario" );
-	if ($resultado === false) {
-		return false;
+
+	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
+	ob_flush ();
+	flush ();
+	sleep ( 1 );
+	$dirmap = $dirDestino;
+	if (! file_exists ( $dirmap ) || $dirmap == dirname ( $locaplic ) || $dirmap == dirname ( $locaplic )."/") {
+		echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor ou o local n&atilde;o &eacute; permitido";
+		exit ();
 	}
-	// apaga todos os papeis
-	$resultado = excluirPapeis ( $id_usuario, $dbhw );
-	if ($resultado === false) {
-		return false;
+	// verifica nomes
+	verificaNome ( $_FILES ['i3GEOuploadshp'] ['name'] );
+	verificaNome ( $_FILES ['i3GEOuploadshx'] ['name'] );
+	verificaNome ( $_FILES ['i3GEOuploaddbf'] ['name'] );
+
+	if ($_FILES ['i3GEOuploadprj'] ['name'] != "") {
+		verificaNome ( $_FILES ['i3GEOuploadprj'] ['name'] );
 	}
-	if (! empty ( $papeis )) {
-		// atualiza papeis vinculados
-		foreach ( $papeis as $p ) {
-			$resultado = adicionaPapel ( $id_usuario, $p, $dbhw );
-			if ($resultado === false) {
-				return false;
-			}
+
+	// remove acentos
+	$nomePrefixo = str_replace ( " ", "_", removeAcentos ( str_replace ( ".shp", "", $_FILES ['i3GEOuploadshp'] ['name'] ) ) );
+
+	$nomePrefixo = str_replace ( ".", "", $nomePrefixo );
+	$nomePrefixo = strip_tags ( $nomePrefixo );
+	$nomePrefixo = htmlspecialchars ( $nomePrefixo, ENT_QUOTES );
+
+	// sobe arquivo
+	$Arquivo = $_FILES ['i3GEOuploadshp'] ['tmp_name'];
+	if (file_exists ( $dirmap . "/" . $nomePrefixo . ".shp" )) {
+		echo "<p class='paragrafo' >J&aacute; existe um SHP com o nome ";
+		paraAguarde ();
+		exit ();
+	}
+	$status = move_uploaded_file ( $Arquivo, $dirmap . "/" . $nomePrefixo . ".shp" );
+	if ($status != 1) {
+		echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHP. Pode ser uma limita&ccedil;&atilde;o quanto ao tamanho do arquivo ou permiss&atilde;o de escrita na pasta indicada.";
+		paraAguarde ();
+		exit ();
+	}
+
+	$Arquivo = $_FILES ['i3GEOuploadshx'] ['tmp_name'];
+	$status = move_uploaded_file ( $Arquivo, $dirmap . "/" . $nomePrefixo . ".shx" );
+	if ($status != 1) {
+		echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo SHX";
+		paraAguarde ();
+		exit ();
+	}
+
+	$Arquivo = $_FILES ['i3GEOuploaddbf'] ['tmp_name'];
+	$status = move_uploaded_file ( $Arquivo, $dirmap . "/" . $nomePrefixo . ".dbf" );
+	if ($status != 1) {
+		echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo DBF";
+		paraAguarde ();
+		exit ();
+	}
+
+	if ($_FILES ['i3GEOuploadprj'] ['name'] != "") {
+		$Arquivo = $_FILES ['i3GEOuploadprj'] ['tmp_name'];
+		$status = move_uploaded_file ( $Arquivo, $dirmap . "/" . $nomePrefixo . ".prj" );
+		if ($status != 1) {
+			echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo PRJ";
+			paraAguarde ();
+			exit ();
 		}
 	}
-	return $id_usuario;
-}
-function adicionaPapel($id_usuario, $id_papel, $dbhw) {
-	global $esquemaadmin;
-	$dataCol = array (
-			"id_usuario" => $id_usuario,
-			"id_papel" => $id_papel
-	);
-	$resultado = i3GeoAdminInsert ( $dbhw, "i3geousr_papelusuario", $dataCol );
-	return $resultado;
-}
-function excluir($id_usuario, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_usuarios", "id_usuario", $id_usuario, $dbhw, false );
-	if ($resultado === false) {
-		return false;
+
+	if (! file_exists ( $dirmap . "/" . $nomePrefixo . ".shp" )) {
+		echo "<p class='paragrafo' >Ocorreu algum problema no envio do arquivo ";
+		paraAguarde ();
+		exit ();
 	}
-	if ($resultado === true) {
-		$resultado = excluirPapeis ( $id_usuario, $dbhw );
+
+	$checkphp = fileContemString ( $dirmap . "/" . $nomePrefixo . ".prj", "<?" );
+	if ($checkphp == true) {
+		echo "Arquivo prj invalido";
+		unlink ( $dirmap . "/" . $nomePrefixo . ".shp" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".dbf" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".shx" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".prj" );
+		exit ();
 	}
-	return $resultado;
+	$checkphp = fileContemString ( $dirmap . "/" . $nomePrefixo . ".shx", "<?" );
+	if ($checkphp == true) {
+		echo "Arquivo shx invalido";
+		unlink ( $dirmap . "/" . $nomePrefixo . ".shp" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".dbf" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".shx" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".prj" );
+		exit ();
+	}
+	$checkphp = fileContemString ( $dirmap . "/" . $nomePrefixo . ".dbf", "<?" );
+	if ($checkphp == true) {
+		echo "Arquivo dbf invalido";
+		unlink ( $dirmap . "/" . $nomePrefixo . ".shp" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".dbf" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".shx" );
+		unlink ( $dirmap . "/" . $nomePrefixo . ".prj" );
+		exit ();
+	}
+	echo "<p class='paragrafo' >Arquivo enviado.</p>";
+	echo "<p class='paragrafo'></p>";
+	if ($i3GEOuploadCriaMapfile == "on") {
+		// verifica se o usuario marcou a opcao de cria mapfile
+		// nesse caso o aplicativo de upload esta sendo executado de dentro do sistema de administracao, e o mapfile devera
+		// ser criado e registrado no sistema
+		$nome = $nomePrefixo;
+		$codigo = $nomePrefixo;
+		$it = $nomePrefixo;
+		$en = $nomePrefixo;
+		$es = $nomePrefixo;
+		$sfileObj = ms_newShapefileObj ( $dirmap . "/" . $nomePrefixo . ".shp", - 1 );
+		if (! isset ( $tipo ) || $tipo == "") {
+			$tipo = $sfileObj->type;
+		}
+		if ($tipo == 1) {
+			$tipoLayer = "point";
+		}
+		if ($tipo == 3) {
+			$tipoLayer = "line";
+		}
+		if ($tipo == 5) {
+			$tipoLayer = "polygon";
+		}
+		$funcao = "CRIARNOVOMAP";
+		$output = "retorno";
+		$data = $dirmap . "/" . $nomePrefixo . ".shp";
+		include_once ($locaplic . "/admin/php/editormapfile.php");
+		echo "<b><p class='paragrafo' >Criado!!!<br>";
+		echo "Para editar clique: <a href='../../admin/html/editormapfile.html' target=_blank >editar</a>";
+		echo "<script>window.scrollTo(0,10000);i3GEO.util.insereCookie('I3GEOletraAdmin','" . $nomePrefixo . "');</script>";
+	}
+	echo "<p class='paragrafo'>Pode fechar essa janela.</p>";
+} else {
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
-function excluirPapeis($id_usuario, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_papelusuario", "id_usuario", $id_usuario, $dbhw, false );
-	return $resultado;
+
+function verificaNome($nome) {
+	if (strlen ( basename ( $nome ) ) > 200) {
+		exit ();
+	}
+	$nome = strtolower ( $nome );
+	$lista = explode ( ".", $nome );
+	$extensao = $lista [count ( $lista ) - 1];
+	if (($extensao != "dbf") && ($extensao != "shx") && ($extensao != "shp") && ($extensao != "prj")) {
+		echo "Nome de arquivo inv&aacute;lido. $nome";
+		paraAguarde ();
+		exit ();
+	}
 }
 ?>
+
+
+</body>
+</html>

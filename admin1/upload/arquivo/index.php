@@ -42,25 +42,26 @@ include "../../head.php";
 	</div>
 </div>
 <div class="container hidden" id="corpo">
-	<form style="" action="#" onsubmit="return false;" class="form-horizontal" role="form"
-		method="post">
+	<form style="" target="i3GEOuploadiframe"
+		action="exec.php" method="post"
+		ENCTYPE="multipart/form-data" onsubmit="javascript:$('#modalUpload').modal('show');" class="form-horizontal" role="form" method="post">
 		<div class="row center-block well">
 			<div class="col-md-12">
 				<h4>{{{txtArquivos}}}</h4>
 				<div class="form-group form-group-lg col-md-6">
-					<input id="i3GEOuploadshp" multiple="" type="file"> <input readonly="" class="form-control"
+					<input name="i3GEOuploadshp" multiple="" type="file"> <input readonly="" class="form-control"
 						placeholder="SHP" type="text">
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input id="i3GEOuploadshx" multiple="" type="file"> <input readonly="" class="form-control"
+					<input name="i3GEOuploadshx" multiple="" type="file"> <input readonly="" class="form-control"
 						placeholder="SHX" type="text">
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input id="i3GEOuploaddbf" multiple="" type="file"> <input readonly="" class="form-control"
+					<input name="i3GEOuploaddbf" multiple="" type="file"> <input readonly="" class="form-control"
 						placeholder="DBF" type="text">
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input id="i3GEOuploadprj" multiple="" type="file"> <input readonly="" class="form-control"
+					<input name="i3GEOuploadprj" multiple="" type="file"> <input readonly="" class="form-control"
 						placeholder="PRJ (opcional)" type="text">
 				</div>
 			</div>
@@ -94,12 +95,11 @@ include "../../head.php";
 					</div>
 				</div>
 				<div class="form-group form-group-lg">
-					<label class="col-md-5 control-label" style="margin-top:0px;" for="i3GEOuploadCriaMapfile">{{{criaMapfile}}}</label>
+					<label class="col-md-5 control-label" style="margin-top: 0px;" for="i3GEOuploadCriaMapfile">{{{criaMapfile}}}</label>
 					<div class="col-md-7">
-					<div class=" checkbox">
-						<label>
-						<input title="{{{criaMapfile}}}" name="i3GEOuploadCriaMapfile" type="checkbox">
-						</label>
+						<div class=" checkbox">
+							<label> <input title="{{{criaMapfile}}}" name="i3GEOuploadCriaMapfile" type="checkbox">
+							</label>
 						</div>
 					</div>
 				</div>
@@ -114,6 +114,16 @@ include "../../head.php";
 		</div>
 
 	</form>
+</div>
+<div id="modalUpload" class="modal fade" tabindex="-1">
+	<div class="modal-dialog modal-lg">
+		<div class="modal-content">
+			<div class="modal-body modal-lg">
+				<iframe name=i3GEOuploadiframe style="text-align: left; border: 0px solid gray;" width="100%"
+					height="100%"></iframe>
+			</div>
+		</div>
+	</div>
 </div>
 <script id="templateProj" type="x-tmpl-mustache">
 	<option value="{{{codigo}}}">{{{nome}}}</option>

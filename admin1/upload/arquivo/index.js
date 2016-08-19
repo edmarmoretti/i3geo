@@ -31,7 +31,6 @@ i3GEOadmin.uploadshp = {
 		.done(
 				function(data, status){
 					var json = jQuery.parseJSON(data);
-					console.info(json)
 					var html = Mustache.to_html(
 							"{{#data}}" + $("#templateProj").html() + "{{/data}}",
 							json

@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.upload.dicionario)+
 i3GEOF.upload.dicionario = {
 	'pastaArmazenamento' : [ {
-		pt : "Pasta no servidor onde os dados ser&atilde;o armazenados",
+		pt : "Pasta no servidor onde os dados ser&atilde;o armazenados. Apenas pastas localizadas no mesmo local onde o i3Geo est&aacute; instalado s&atilde;o permitidas.  Exemplo, no caso da instala&ccedil;&atilde;o ser /var/www e existir a pasta /var/www/data, digite apenas data",
 		en : "",
 		es : ""
 	} ],
