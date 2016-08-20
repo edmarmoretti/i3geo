@@ -398,6 +398,18 @@ if(empty($statusFerramentas)){
 else{
 	$statusFerramentas_ = $statusFerramentas;
 }
+if(empty($logExec)){
+	$logExec_ = "";
+}
+else{
+	$logExec_ = $logExec;
+}
+if(!isset($i3geoPermiteLogin)){
+	$i3geoPermiteLogin_ = "";
+}
+else{
+	$i3geoPermiteLogin_ = $i3geoPermiteLogin;
+}
 
 /*
 Inicia a se&ccedil;&atilde;o
@@ -440,6 +452,7 @@ $_SESSION["googleApiKey"] = $googleApiKey_;
 $_SESSION["mensagemInicia"] = $mensagemInicia_;
 $_SESSION["interfacePadrao"] = $interfacePadrao_;
 $_SESSION["logExec"] = $logExec_;
+$_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
 if(isset($interface_)){
 	$_SESSION["interface"] = $interface_;
 }
@@ -454,6 +467,8 @@ $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0;//essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 $_SESSION["i3georendermode"] = $i3georendermode_;
 $_SESSION["saikuUrl"] = $saikuUrl_;
+$_SESSION["logExec"] = $logExec_;
+$_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
 //
 //pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
 //
@@ -608,7 +623,6 @@ $_SESSION["imgurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atu
 $_SESSION["tmpurl"] = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].$atual;
 $_SESSION["map_file"] = $tmpfname;
 $_SESSION["mapext"] = $mapext;
-$_SESSION["logExec"] = $logExec;
 if (isset($executa)){
 	if (file_exists($executa)){
 		//include_once ($executa);

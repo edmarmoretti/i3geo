@@ -102,7 +102,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $dir_tmp, $logExec, $postgis_mapa,$statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $i3geoPermiteLogin, $dir_tmp, $logExec, $postgis_mapa,$statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	//
 	//verifica se algum tema e restrito a determinado usuario
 	//as funcoes de validacao encontram-se em funcoes_gerais.php
@@ -310,6 +310,11 @@ function iniciaMapa()
 	//
 	$res["papeis"] = array();
 	$logado = "nao";
+	$res["i3geoPermiteLogin"] = "sim";
+	if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+		$_COOKIE = array();
+		$res["i3geoPermiteLogin"] = "nao";
+	}
 	if(!empty($_COOKIE["i3geocodigologin"])){
 		session_write_close();
 		session_name("i3GeoLogin");
@@ -331,7 +336,6 @@ function iniciaMapa()
 		}
 
 	}
-
 	//
 	$res["mapexten"] = $ext;
 	$res["mapscale"] = $escalaMapa;

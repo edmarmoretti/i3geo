@@ -155,6 +155,7 @@ if ($funcao != "listaEpsg" && $funcao != "pegaTodosTemas" && $funcao != "downloa
 	$kmlurl = $_SESSION["kmlurl"];
 	$mapdir = $_SESSION["mapdir"];
 	$imgdir = $_SESSION["imgdir"];
+	$i3geoPermiteLogin = $_SESSION["i3geoPermiteLogin"];
 	$contadorsalva = $_SESSION["contadorsalva"];
 	$i3georendermode = $_SESSION["i3georendermode"];
 	$saikuUrl = $_SESSION["saikuUrl"];

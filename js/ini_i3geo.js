@@ -426,6 +426,11 @@ var i3GEO = {
 				} else {
 					if (retorno.data.variaveis) {
 						i3GEO.parametros = retorno.data.variaveis;
+						//verifica se o login e possivel em funcao da variavel variaveis i3geoPermiteLogin
+						//definida no ms_configura.php
+						if(i3GEO.gadgets && i3GEO.parametros.i3geoPermiteLogin && i3GEO.parametros.i3geoPermiteLogin == "nao" ){
+							i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = false;
+						}
 						//
 						// converte string em n&uacute;mero
 						//
