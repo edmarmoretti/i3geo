@@ -284,22 +284,22 @@ g_traducao_init =
 		"24a" : [
 			{
 				pt : "Descri&ccedil;&atilde;o das fun&ccedil;&otilde;es javascript que podem ser modificadas ou utilizadas para criar interfaces para os seus mapas.",
-				en : "",
-				es : ""
+				en : "Description of javascript functions you can use or modify to create your map interface.",
+				es : "Descripci&oacute;n de las funciones javascript que pueden ser modificadas o utilizadas para crear interfaces para sus mapas."
 			}
 		],
 		25 : [
 			{
 				pt : "i3Geo + <a  tabindex='-1' href='http://community.meteorite.bi/' >SAIKU </a>",
-				en : "",
-				es : ""
+				en : "i3Geo + <a  tabindex='-1' href='http://community.meteorite.bi/' >SAIKU </a>",
+				es : "i3Geo + <a  tabindex='-1' href='http://community.meteorite.bi/' >SAIKU </a>"
 			}
 		],
 		"25a" : [
 			{
 				pt : "Ferramenta OLAP que permite cruzar dados tabulares definidos por meio do m&oacute;dulo METAESTAT.",
-				en : "",
-				es : ""
+				en : "OLAP tool that allows you to cross data defined by METAESTAT module",
+				es : "Herramienta OLAP que permite cruzar datos tabulares definidos a trav&eacute;s del m&oacute;dulo METAESTAT"
 			}
 		],
 		26 : [
