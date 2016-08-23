@@ -174,10 +174,7 @@ if ($funcao != "listaEpsg" && $funcao != "pegaTodosTemas" && $funcao != "downloa
 else{
 	$map_file = "";
 }
-$logExec = $_SESSION["logExec"];
-if(isset($logExec) && $logExec["controle"] == true){
-	i3GeoLog("prog: mapa_controle url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
-}
+
 //
 //isso &eacute; necess&aacute;rio pois a vari&aacute;vel "interface" pode ser utilizada como par&acirc;metro em algumas fun&ccedil;&otilde;es ajax
 //nesses casos, &eacute; necess&aacute;rio recuperar o valor correto e n&atilde;o da sess&atilde;o
@@ -199,7 +196,10 @@ include_once ("carrega_ext.php");
 if(!function_exists("sobeAnno")){
 	include_once("funcoes_gerais.php");
 }
-
+$logExec = $_SESSION["logExec"];
+if(isset($logExec) && $logExec["controle"] == true){
+	i3GeoLog("prog: mapa_controle url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
+}
 if($funcao == "criaMapa"){
 	session_name("i3GeoPHP");
 	unset($GLOBALS);
