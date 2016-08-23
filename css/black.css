@@ -65,6 +65,7 @@ menu de contexto da arvore de camadas
 /*
 Botao de ligar desligar do tipo chave da legenda
 */
+
 .i3GEOcorpoLegi .temaSwitch {
   position: relative;
   display: inline-block;
@@ -536,4 +537,7 @@ Menu superior de opcoes
 }
 .i3GEOarvCam .ygtvcell .ygtvtmh, .i3GEOarvCam .ygtvtmh {
     background: url("../css/treeview-sprite.gif") no-repeat scroll 0 -8957px transparent;
+}
+.temaArrastar {
+	text-align: left;
 }

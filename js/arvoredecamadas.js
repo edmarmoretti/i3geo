@@ -1790,7 +1790,7 @@ i3GEO.arvoreDeCamadas =
 			</label>
 			*/
 			// inicia o div
-			html = "<div id='arrastar_" + tema.name + "'><label class='temaSwitch' for='" + tema.name + "ckbox'  ";
+			html = "<div class='temaArrastar' id='arrastar_" + tema.name + "'><label class='temaSwitch' for='" + tema.name + "ckbox'  ";
 			//
 			// inclui icone do tema
 			//
