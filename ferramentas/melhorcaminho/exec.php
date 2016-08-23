@@ -1,5 +1,8 @@
 <?php
 include_once(dirname(__FILE__)."/../safe.php");
+if($statusFerramentas["melhorcaminho"] != true){
+	exit;
+);
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
