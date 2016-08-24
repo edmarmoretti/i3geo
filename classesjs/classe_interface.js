@@ -258,7 +258,7 @@ i3GEO.Interface =
 				// AJAX API is loaded successfully. Now lets load the maps api
 				google.load("maps", "3", {
 					callback : "i3GEO.Interface.atual2gm.initemp",
-					other_params : "sensor=false"
+					other_params : "sensor=false&key=" + i3GEO.parametros.googleApiKey
 				});
 			},
 			initemp : function() {
