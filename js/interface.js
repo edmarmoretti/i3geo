@@ -257,7 +257,7 @@ i3GEO.Interface =
 						i3GEO.Interface.atual2gm.initemp();
 					}
 				} catch (e) {
-					i3GEO.util.scriptTag("http://www.google.com/jsapi?callback=i3GEO.Interface.atual2gm.loadMaps", "", "", false);
+					i3GEO.util.scriptTag("http://www.google.com/jsapi?key=" + i3GEO.parametros.googleApiKey + "&callback=i3GEO.Interface.atual2gm.loadMaps", "", "", false);
 				}
 			},
 			loadMaps : function() {
