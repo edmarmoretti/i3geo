@@ -29,6 +29,7 @@ i3GEO.scrollerWidth = 0;
 i3GEO.configura.guardaExtensao = true;
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 
+i3GEO.configura.optUsuarioLogado = true;
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.barraDeBotoes.ATIVA = false;
 i3GEO.configura.oMenuData["submenus"]["janelas"] = [];

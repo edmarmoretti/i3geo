@@ -49,6 +49,22 @@ if (typeof (i3GEO) === 'undefined') {
 i3GEO.configura =
 	{
 		/**
+		 * Propriedade : optUsuarioLogado
+		 *
+		 * Por default, quando o usuário estiver logado, sao mostradas opcoes especiais na arvore de temas e outros componente
+		 *
+		 * Mudando essa propriedade para false, essas opcoes nao serao mostradas nas seguintes ferramentas:
+		 *
+		 * arvore de temas
+		 * arvore kml
+		 * animagif
+		 * atalhoscamada
+		 * conectarwms
+		 * identifica
+		 * tme
+		 */
+		optUsuarioLogado : true,
+		/**
 		 * Propriedade: mostraCentroDoMapa
 		 *
 		 * Mostra ou nao o centro do mapa durante o PAN

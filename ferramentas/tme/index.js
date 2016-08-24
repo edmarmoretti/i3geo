@@ -37,12 +37,12 @@ if (typeof (i3GEOF) === 'undefined') {
 
 /*
  * Classe: i3GEOF.tme
- * 
+ *
  * Camadas podem ter as definicoes default de parametros armazenadas no metadata TME Esse metadata e mantido no objeto
  * i3GEO.arvoreDeCamadas.CAMADAS
- * 
+ *
  * Os campos definidos pelo usuario podem ser salvos no mapfile caso o usuario esteja logado
- * 
+ *
  * Veja tambem i3geo/ferramentas/atalhosedicao
  */
 i3GEOF.tme =
@@ -60,15 +60,15 @@ i3GEOF.tme =
 		AMAX : 2000000,
 		/*
 		 * Variavel: tema
-		 * 
+		 *
 		 * Tema que ser&aacute; utilizado
-		 * 
+		 *
 		 * Type: {string}
 		 */
 		tema : i3GEO.temaAtivo,
 		/*
 		 * Variavel: aguarde
-		 * 
+		 *
 		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 		 */
 		aguarde : "",
@@ -91,9 +91,9 @@ i3GEOF.tme =
 		},
 		/*
 		 * Function: iniciaDicionario
-		 * 
+		 *
 		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 * 
+		 *
 		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 		 */
 		iniciaDicionario : function() {
@@ -108,11 +108,11 @@ i3GEOF.tme =
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
@@ -201,7 +201,7 @@ i3GEOF.tme =
 			});
 			b.addClass("rodar");
 			$i("i3GEOtmebotao1-button").style.width = "350px";
-			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
+			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" && i3GEO.configura.optUsuarioLogado == true) {
 				$i("parametrosComLogin").style.display = 'block';
 				b = new YAHOO.widget.Button("i3GEOtmebotaoSalva", {
 					onclick : {
@@ -222,11 +222,11 @@ i3GEOF.tme =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
@@ -235,7 +235,7 @@ i3GEOF.tme =
 		},
 		/*
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function(tema) {
@@ -271,7 +271,7 @@ i3GEOF.tme =
 		},
 		/*
 		 * Function: ativaFoco
-		 * 
+		 *
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function() {
@@ -318,7 +318,7 @@ i3GEOF.tme =
 						+ "&tema=" + i3GEOF.tme.tema
 						+ "&tme=" + i3GEO.util.base64encode(j)
 						+ "&funcao=incluitme";
-	
+
 					retorno =
 						function(retorno) {
 							i3GEO.janela.fechaAguarde("tme");
@@ -326,7 +326,7 @@ i3GEOF.tme =
 					i3GEO.janela.abreAguarde("tme", $trad("o1"));
 					cpJSON.call(p, "foo", retorno, par);
 				});
-			
+
 		},
 		removeParametros: function(){
 			i3GEO.janela.confirma($trad("removePar", i3GEOF.tme.dicionario), 300, $trad("x14"),
@@ -335,7 +335,7 @@ i3GEOF.tme =
 					par = "&g_sid=" + i3GEO.configura.sid
 						+ "&tema=" + i3GEOF.tme.tema
 						+ "&funcao=removetme";
-	
+
 					retorno =
 						function(retorno) {
 							i3GEO.janela.fechaAguarde("tme");
@@ -346,9 +346,9 @@ i3GEOF.tme =
 		},
 		/*
 		 * Function: montaListaItens
-		 * 
+		 *
 		 * Monta a lista de itens que poder&atilde;o ser escolhidos para compor o mapa.
-		 * 
+		 *
 		 * A lista &eacute; inserida no elemento html com id "i3GEOtmelistai"
 		 */
 		montaListaItens : function(retorno) {
@@ -380,7 +380,7 @@ i3GEOF.tme =
 		},
 		/*
 		 * Function: pegaItensMarcados
-		 * 
+		 *
 		 * Recupera os itens que foram marcados e monta uma lista para enviar como parametro para a fun&ccedil;&atilde;o de
 		 * gera&ccedil;&atilde;o dos gr&aacute;ficos
 		 */
@@ -397,11 +397,11 @@ i3GEOF.tme =
 		},
 		/*
 		 * Function: ativa
-		 * 
+		 *
 		 * Cria o arquivo KML com os itens marcados
-		 * 
+		 *
 		 * Veja:
-		 * 
+		 *
 		 * <ATIVAtme>
 		 */
 		ativa : function() {

@@ -189,7 +189,7 @@ i3GEOF.animagif =
 		});
 		b.addClass("rodar");
 		$i("i3GEOanimagifbotao1-button").style.width = "350px";
-		if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
+		if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" && i3GEO.configura.optUsuarioLogado == true) {
 			$i("parametrosComLogin").style.display = 'block';
 			b = new YAHOO.widget.Button("i3GEOanimagifbotaoSalva", {
 				onclick : {

@@ -77,7 +77,7 @@ i3GEOF.atalhoscamada =
 				});
 				b.addClass("abrir");
 			}
-			if (i3GEO.parametros.editor.toLowerCase() === "sim") {
+			if (i3GEO.parametros.editor.toLowerCase() === "sim"  && i3GEO.configura.optUsuarioLogado == true ) {
 				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaSalva", {
 					onclick : {
 						fn : function() {
