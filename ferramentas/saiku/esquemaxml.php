@@ -22,7 +22,9 @@ include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
-
+if(isset($statusFerramentas) && $statusFerramentas["saiku"] != true){
+	exit;
+}
 $urlXmlEsquema = "";
 $nomeConexao = criaConexaoEsquema();
 

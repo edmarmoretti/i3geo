@@ -10,6 +10,9 @@ include_once(dirname(__FILE__)."/../../classesphp/classe_estatistica.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
+if(isset($statusFerramentas) && $statusFerramentas["saiku"] != true){
+	exit;
+}
 //pega o filtro da sessao PHP aberta pelo i3Geo
 session_name("i3GeoPHP");
 session_id($_POST["g_sid"]);
