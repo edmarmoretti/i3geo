@@ -2220,7 +2220,7 @@ class Metaestat{
 	 * @return execSQLDB
 	 */
 	function esquemasConexao($codigo_estat_conexao){
-		return $this->execSQLDB($codigo_estat_conexao,"SELECT oid,nspname as esquema FROM pg_namespace group by nspname,oid order by nspname");
+		return $this->execSQLDB($codigo_estat_conexao,"SELECT oid,nspname as esquema FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname NOT LIKE '%_schema%' group by nspname,oid order by nspname");
 	}
 	/**
 	 * Cria um novo esquema no banco de dados
@@ -2239,9 +2239,9 @@ class Metaestat{
 	 * @return execSQLDB
 	 */
 	function tabelasEsquema($codigo_estat_conexao,$nome_esquema,$excluigeom=""){
-		$sql = "SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema'";
+		$sql = "SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema' AND table_schema NOT LIKE 'i3geo%' AND table_schema NOT LIKE 'pg_%' AND table_schema NOT LIKE '%_schema%'";
 		if(strtolower($excluigeom) == "sim"){
-			$sql = "SELECT c.table_name as tabela FROM information_schema.tables as c left join (SELECT distinct a.table_name FROM information_schema.tables as a left join information_schema.columns as b	on	a.table_name = b.table_name	where a.table_schema = '$nome_esquema' and	udt_name = 'geometry' ) as d on c.table_name = d.table_name where c.table_schema = '$nome_esquema' and d.table_name is null";
+			$sql = "SELECT c.table_name as tabela FROM information_schema.tables as c left join (SELECT distinct a.table_name FROM information_schema.tables as a left join information_schema.columns as b	on	a.table_name = b.table_name	where a.table_schema = '$nome_esquema' and	udt_name = 'geometry' ) as d on c.table_name = d.table_name where c.table_schema = '$nome_esquema'  AND c.table_schema NOT LIKE 'i3geo%' AND c.table_schema NOT LIKE 'pg_%' AND c.table_schema NOT LIKE '%_schema%' and d.table_name is null";
 		}
 		return $this->execSQLDB($codigo_estat_conexao,$sql);
 	}

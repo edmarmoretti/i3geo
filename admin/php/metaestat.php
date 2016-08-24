@@ -38,7 +38,7 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que de
 */
 include_once(dirname(__FILE__)."/login.php");
 
-$codigo_estat_conexao = $_GET["codigo_estat_conexao"];
+$codigo_estat_conexao = $_GET["codigo_estat_conexao"];//pode ser string ou numerico
 $codigo_variavel = $_GET["codigo_variavel"];
 $codigo_tipo_periodo = $_GET["codigo_tipo_periodo"];
 $codigo_tipo_regiao = $_GET["codigo_tipo_regiao"];
@@ -56,7 +56,7 @@ $id_mapa_grupo = $_GET["id_mapa_grupo"];
 $id_mapa_tema = $_GET["id_mapa_tema"];
 $id_pai = $_GET["id_pai"];
 
-testaSafeNumerico([$codigo_tipo_regiao_pai,$id_pai,$id_mapa_tema,$id_mapa_grupo,$id_mapa,$id_agregaregiao,$codigo_tipo_regiao,$codigo_tipo_periodo,$id_fonteinfo,$codigo_unidade_medida,$codigo_estat_conexao,$codigo_variavel,$id_medida_variavel,$id_classificacao,$id_link,$id_classe,$id_parametro_medida]);
+testaSafeNumerico([$codigo_tipo_regiao_pai,$id_pai,$id_mapa_tema,$id_mapa_grupo,$id_mapa,$id_agregaregiao,$codigo_tipo_regiao,$codigo_tipo_periodo,$id_fonteinfo,$codigo_unidade_medida,$codigo_variavel,$id_medida_variavel,$id_classificacao,$id_link,$id_classe,$id_parametro_medida]);
 
 //lista de funcoes que passam pela validacao de login
 $funcoesEdicao = array(
@@ -93,13 +93,6 @@ $funcoesEdicao = array(
 	"EXCLUIRCLASSIFICACAOMEDIDA",
 	"EXCLUIRCLASSECLASSIFICACAO",
 	"EXCLUIRLINKMEDIDA",
-	"CRIATABELADB",
-	"CRIAESQUEMADB",
-	"ALTERANOMETABELADB",
-	"ALTERANOMEESQUEMADB",
-	"COPIATABELADB",
-	"CRIACOLUNADB",
-	"ALTERANOMECOLUNADB",
 	"OBTEMDADOSTABELADB",
 	"INSERIRDADOS",
 	"MANTEMDADOSREGIAO",
@@ -122,7 +115,7 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 			retornaJSON($esquema);exit;
 		}
 		if(strtoupper($funcao) == "TABELASESQUEMA"){
-			if($nome_esquema != "public"){
+			if($_GET["nome_esquema"] != "public"){
 				retornaJSON("Vc nao pode realizar essa operacao.");exit;
 			}
 		}
@@ -131,6 +124,25 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		}
 	}
 }
+//verifica as funcoes que manipulam o banco de dados
+$funcoesEdicao = array(
+		"CRIATABELADB",
+		"CRIAESQUEMADB",
+		"ALTERANOMETABELADB",
+		"ALTERANOMEESQUEMADB",
+		"COPIATABELADB",
+		"CRIACOLUNADB",
+		"ALTERANOMECOLUNADB",
+);
+if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	if(verificaOperacaoSessao("admin/metaestat/editorbanco") == false){
+		retornaJSON("Vc nao pode realizar essa operacao.");exit;
+	}
+}
+
+
+
+
 include(dirname(__FILE__)."/classe_metaestat.php");
 error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
