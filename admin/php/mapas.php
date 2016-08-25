@@ -189,6 +189,8 @@ function salvaMapfile(){
 		//a string que vai no metadata segue o padrao JSON
 		//o parser para reconstruir os valores e feito em javascript, no cliente
 		//
+		$_GET["arqmapfile"] = str_replace(".map","",$_GET["arqmapfile"]);
+		$_GET["arqmapfile"] = str_replace(".","",$_GET["arqmapfile"]).".map";
 		$customizacoesinit = array();
 		if(isset($_GET["preferenciasbase64"]) || isset($_GET["geometriasbase64"]) || isset($_GET["graficosbase64"]) || isset($_GET["tabelasbase64"])){
 			$customizacoesinit[] = '"preferenciasbase64":"'.$_GET["preferenciasbase64"].'"';
@@ -209,13 +211,15 @@ function salvaMapfile(){
 		$handle = fopen ($_GET["arqmapfile"], 'r');
 		$conteudo = fread ($handle, filesize ($_GET["arqmapfile"]));
 		fclose ($handle);
-		$conteudo = base64_encode($conteudo);
-		if($conteudo == false){
-			return array("id"=>"","status"=>"erro");
-		}
+		//$conteudo = base64_encode($conteudo);
+		$conteudo = str_replace("'","_!_",$conteudo);
+		$conteudo = str_replace('"',"_!!_",$conteudo);
+		$conteudo = str_replace(array("<?","?>"),"",$conteudo);
+
 		require_once("conexao.php");
 		if($convUTF){
 			$_GET["nome_mapa"] = utf8_encode($_GET["nome_mapa"]);
+			$conteudo = utf8_encode($conteudo);
 		}
 		$retorna = "";
 		if(empty($id_mapa)){
@@ -237,6 +241,9 @@ function salvaMapfile(){
 		else{
 			$id = $id_mapa;
 		}
+		if (filter_var($id, FILTER_VALIDATE_INT) === false){
+			return array("id"=>"","status"=>"Error!: ");
+		}
 		$dataCol = array(
 			"mapfile" => $conteudo,
 			"publicado_mapa" => "sim",
@@ -249,7 +256,7 @@ function salvaMapfile(){
 		return array("id"=>$id,"status"=>"ok");
 	}
 	catch (PDOException $e){
-		return array("id"=>"","status"=>"Error!: " . " ");
+		return array("id"=>"","status"=>"Error!: ");
 	}
 }
 /*

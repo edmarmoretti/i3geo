@@ -95,6 +95,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 				$layertemp->set("status",MS_DELETE);
 			}
 		}
+		$map->setmetadata("CUSTOMIZACOESINIT","");
 		$map->save($map_file);
 		restauraCon($map_file,$postgis_mapa);
 		unlink($dirmap."/".$Arquivo);

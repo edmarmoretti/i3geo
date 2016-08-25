@@ -17,6 +17,9 @@ if (filter_var($_GET["restauramapa"], FILTER_VALIDATE_INT) === false){
 $base = restauraMapaAdmin($_GET["restauramapa"],$dir_tmp);
 
 $nomeImagem = dirname($base)."/".str_replace(".map","","restauramapa".$_GET["restauramapa"])."_miniatura.png";
+//por seguranca
+$nomeImagem = str_replace(".png","",$nomeImagem);
+$nomeImagem = str_replace(".","",$nomeImagem).".png";
 
 if(!file_exists($nomeImagem)){
 	$mapa = ms_newMapObj($base);
@@ -46,7 +49,6 @@ if(!file_exists($nomeImagem)){
 	$sca->set("status",MS_OFF);
 	$objImagemM = @$mapa->draw();
 	$objImagemM->saveImage($nomeImagem);
-
 }
 ob_clean();
 header('Content-Length: '.filesize($nomeImagem));

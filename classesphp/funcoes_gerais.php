@@ -2910,31 +2910,50 @@ function cloneInlineSymbol($layern,$nmapa,$mapa){
 //recupera um mapfile armazenado no banco de dados de administracao
 //ver admin/php/mapas.php salvaMapfile
 function restauraMapaAdmin($id_mapa,$dir_tmp){
-	return;
+	if (filter_var($id_mapa, FILTER_VALIDATE_INT) === false){
+		exit;
+	}
 	include(dirname(__FILE__)."/../admin/php/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
 	$q = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_mapas where id_mapa=$id_mapa ",PDO::FETCH_ASSOC);
 	$mapasalvo = $q->fetchAll();
+	$dbh = null;
+	$dbhw = null;
 	$mapasalvo = $mapasalvo[0];
 	$base = "";
 	if(strtoupper($mapasalvo["publicado"]) != "NAO"){
-		$base = $dir_tmp."/".nomeRandomico().".map";
+		$base = $dir_tmp."/".nomeRandomico()."_restaurado.map";
 		$baseh = fopen($base,'w');
-		$registro = $mapasalvo["mapfile"];
+		$mapfile = $mapasalvo["mapfile"];
+		//$registro = $mapasalvo["mapfile"];
 		//verifica se existem parametros junto com o registro
-		$registro = explode(",",$registro);
-		$mapfile = $registro[0];
+		//$registro = explode(",",$registro);
+		//$mapfile = $registro[0];
 		//adapta para versoes novas do mapserver
-		$mapfile = base64_decode($mapfile);
-		$mapfile = str_replace("TYPE ANNOTATION","TYPE POINT",$mapfile);
+		//verifica se esta em base 64 (versoes antigas)
+		if (!preg_match('/MAP/',$mapfile)) {
+			$mapfile = base64_decode($mapfile);
+		}
+		else {
+			//substitui strings especiais
+			$mapfile = str_replace("_!!_",'"',$mapfile);
+			$mapfile = str_replace("_!_","'",$mapfile);
+		}
+		$mapfile = str_ireplace("TYPE ANNOTATION","TYPE POINT",$mapfile);
+		$mapfile = str_replace(array("<?","?>"),"",$mapfile);
 		$s = fwrite($baseh,$mapfile);
 		fclose($baseh);
 	}
-	$dbh = null;
-	$dbhw = null;
-	return $base;
+
+	if (@ms_newMapObj($base)){
+		return $base;
+	}
+	else{
+		unlink($base);
+	}
+	return false;
 }
 //
 //converte uma string de conexao do mapserver em um array com os componentes da conexao
