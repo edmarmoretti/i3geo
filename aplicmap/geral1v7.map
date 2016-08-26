@@ -34,7 +34,10 @@ MAP
 	SIZE 480 500
 	STATUS ON
 	UNITS DD
-	NAME "GERAL"
+	#
+	#tambem e utilizado pelo i3Geo para gerar prefixos em algumas ferramentas, como download
+	#
+	NAME "i3geomap"
 	DEBUG OFF
 	#
 	#utilize o agg apenas com mapserver 5x

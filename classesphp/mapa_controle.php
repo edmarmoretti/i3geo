@@ -982,7 +982,7 @@ switch (strtoupper($funcao))
 		break;
 		/*
 		 Valor: DOWNLOAD (depreciado, utilize DOWNLOAD2
-		 		*/
+		*/
 	case "DOWNLOAD":
 		$retorno = downloadTema($map_file,$_pg["tema"],$locaplic,$dir_tmp,$postgis_mapa);
 		break;

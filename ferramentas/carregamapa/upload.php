@@ -48,6 +48,10 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 	if($checkphp == true){
 		exit;
 	}
+	$checkphp = fileContemString($_FILES['i3GEOcarregamapafilemap']['tmp_name'],".php");
+	if($checkphp == true){
+		exit;
+	}
 
 	$nome = basename($Arquivo);
 	$arqtemp = $dirmap."/".$Arquivo;

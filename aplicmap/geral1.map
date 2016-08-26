@@ -33,7 +33,10 @@ MAP
 	SIZE 480 500
 	STATUS ON
 	UNITS DD
-	NAME "GERAL"
+	#
+	#tambem e utilizado pelo i3Geo para gerar prefixos em algumas ferramentas, como download
+	#
+	NAME "i3geomap"
 	DEBUG OFF
 	#
 	#utilize o agg apenas com mapserver 5x
@@ -48,7 +51,7 @@ MAP
  		FORMATOPTION "QUANTIZE_COLORS=256"
 		FORMATOPTION "INTERLACE=OFF"
 	END
-  
+
 	OUTPUTFORMAT
   		NAME jpeg
   		DRIVER GD/JPEG
@@ -84,7 +87,7 @@ MAP
 		TRANSPARENT TRUE
 		FORMATOPTION "INTERLACE=OFF"
 	END
-	
+
 
 	PROJECTION
 		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
@@ -119,7 +122,7 @@ MAP
 	END
 	REFERENCE
 		COLOR -1 -1 -1
-		EXTENT -75.5728 -37.4751 -30.525 7.57273#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401 
+		EXTENT -75.5728 -37.4751 -30.525 7.57273#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401
 		#edite o caminho se a aplicacao for movida de lugar
 		IMAGE "/opt/www/html/i3geo/imagens/referencia1.png"
 		OUTLINECOLOR -1 -1 -1
@@ -277,7 +280,7 @@ MAP
 	#	  END
 	#  END  # CLASS
 	#END  # LAYER
-  
+
 	LAYER
 		METADATA
 			#"TEMA"	"NAO"

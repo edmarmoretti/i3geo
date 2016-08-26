@@ -1475,6 +1475,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$proj
 		include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
 	}
 	$map = @ms_newMapObj($map_file);
+	$nameMapfile = $map->name;
 	substituiConObj($map,$postgis_mapa);
 
 	$layer = $map->getlayerbyname($tema);
@@ -1509,7 +1510,7 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$proj
 		$novonomelayer = $tema;
 	}
 	$novonomelayer = str_replace(".","-",$novonomelayer);
-	$nomeshp = $dir_tmp."/".$novonomelayer;
+	$nomeshp = $dir_tmp."/".$nameMapfile."_".$novonomelayer;
 
 	if(file_exists($nomeshp.".shp")){
 		return $nomeshp;
@@ -1731,6 +1732,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			}
 		}
 		$map_tmp = ms_newMapObj($base);
+
 		$map_file = $dir_tmp."/downloadTema2".nomerandomico(20).".map";
 		$map_tmp->setProjection($projecao["proj4"]);
 		$map_tmp->save($map_file);
@@ -1819,6 +1821,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//$map_file agora contem os LAYERS necess&aacute;rios
 	$map = ms_newMapObj($map_file);
 	substituiConObj($map,$postgis_mapa);
+	$nameMapfile = $map->name;
 	//
 	//verifica se existe mais de um tema (grupo) montando o array com os temas
 	//os grupos podem ter o nome do layer em GROUP ao inv&eacute;s de NAME
@@ -1851,7 +1854,8 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	foreach ($temas as $tema){
 		$l = $map->getlayerbyname($tema);
 		$novonomelayer = $tema;
-		$nomeshp = $dir_tmp."/".$novonomelayer;
+		//usa o NAME do mapfile para nao gerar arquivos com o mesmo nome em instalacoes multiplas do i3geo
+		$nomeshp = $dir_tmp."/".$nameMapfile."_".$novonomelayer;
 		if(file_exists($nomeshp.".dbf")){
 			//
 			//verifica se o arquivo est&aacute; vazio ou n&atilde;o
@@ -1874,7 +1878,9 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 			//
 			//se o arquivo n&atilde;o tiver sido copiado
 			//
-			$nomecopia = $dir_tmp."/".basename($meta);
+			//evita que se tente copiar qualquer arquivo
+			$meta = str_replace(".zip","",$meta).".zip";
+			$nomecopia = $dir_tmp."/".$nameMapfile."_".basename($meta);
 			//para evitar que tente copiar um arquivo mapfile
 			$nomecopia = str_replace(".map","",$nomecopia);
 			$nomecopia = str_replace(".zip","zip",$nomecopia).".zip";
@@ -1894,14 +1900,16 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				if (file_exists($dados)){
 					$dir = dirname($dados);
 					$arq = explode(".",basename($dados));
-					$nomecopia = $dir_tmp."/".$arq[0];
+					$nomecopia = $dir_tmp."/".$nameMapfile."_".$arq[0];
 					$exts = array("jpg","jpw","tif","tifw","tfw","png","pngw","jpgw","wld","img");
 					foreach($exts as $ext){
 						$copia = $nomecopia.".".$ext;
-						if(!file_exists($copia) && file_exists($dir."/".$arq[0].".".$ext))
-						{copy($dir."/".$arq[0].".".$ext,$copia);}
-						if(file_exists($copia))
-						$resultado[] = basename($dir_tmp)."/".basename($copia);
+						if(!file_exists($copia) && file_exists($dir."/".$arq[0].".".$ext)){
+							copy($dir."/".$arq[0].".".$ext,$copia);
+						}
+						if(file_exists($copia)){
+							$resultado[] = basename($dir_tmp)."/".basename($copia);
+						}
 					}
 				}
 				else{
