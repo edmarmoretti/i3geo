@@ -2945,13 +2945,12 @@ function restauraMapaAdmin($id_mapa,$dir_tmp){
 		$mapfile = str_replace(array("<?","?>"),"",$mapfile);
 		$s = fwrite($baseh,$mapfile);
 		fclose($baseh);
-	}
-
-	if (@ms_newMapObj($base)){
-		return $base;
-	}
-	else{
-		unlink($base);
+		if (@ms_newMapObj($base)){
+			return $base;
+		}
+		else{
+			unlink($base);
+		}
 	}
 	return false;
 }
