@@ -1821,6 +1821,11 @@ switch (strtoupper($funcao))
 		*/
 	case "LISTALAYERSWMS":
 		include_once("wmswfs.php");
+		$servico = $_pg["servico"];
+		$nivel = $_pg["nivel"];
+		$id_ws = $_pg["id_ws"];
+		$nomelayer = $_pg["nomelayer"];
+		$tipo_ws = $_pg["tipo_ws"];
 		$retorno = listaLayersWMS();
 		break;
 		/*

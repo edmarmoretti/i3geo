@@ -54,8 +54,9 @@ Return:
 function gravaCacheWMS($servico)
 {
 	global $dir_tmp;
-	if($dir_tmp == "")
-	{include(dirname(__FILE__)."/../ms_configura.php");}
+	if($dir_tmp == ""){
+		include(dirname(__FILE__)."/../ms_configura.php");
+	}
 	error_reporting(0);
 	try{
 		$teste = explode("=",$servico);
@@ -476,10 +477,12 @@ function listaLayersWMS()
 	if(!isset($nomelayer)){
 		$nomelayer = "undefined";
 	}
+
 	//para o caso do sistema de metadados estatisticos
 	$wms_service_request = gravaCacheWMS($servico);
 	include_once(dirname(__FILE__)."/../admin/php/admin.php");
 	include_once(dirname(__FILE__)."/../admin/php/webservices.php");
+
 	error_reporting(0);
 	if($tipo_ws != "WMSMETAESTAT" && $nivel < 2){
 		if($wms_service_request == "erro") {
@@ -494,6 +497,7 @@ function listaLayersWMS()
 			adicionaAcesso($id_ws,true);
 		}
 	}
+
 	$handle = fopen ($wms_service_request, "r");
 	$wms_capabilities = fread ($handle, filesize ($wms_service_request));
 	fclose ($handle);

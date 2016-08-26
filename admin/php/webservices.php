@@ -40,21 +40,18 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus próprios par&acirc;metros, que de
 
 */
 error_reporting(0);
-//
-//n&atilde;o sei pq mas ob_start e clean s&atilde;o necess&aacute;rios no Linux para n&atilde;o gerar erro indesejado
-//
-include_once(dirname(__FILE__)."/login.php");
 
-$id_ws = $_GET["id_ws"];
-$id = $_GET["id"];
-
-testaSafeNumerico([$id,$id_ws]);
+//a funcao PEGAWS pode ser executada por outros programas
 
 $funcoesEdicao = array(
 		"ALTERARWS",
 		"EXCLUIR"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
+	include_once(dirname(__FILE__)."/login.php");
+	$id_ws = $_GET["id_ws"];
+	$id = $_GET["id"];
+	testaSafeNumerico([$id,$id_ws]);
 	if(verificaOperacaoSessao("admin/html/webservices") == false){
 		retornaJSON("Vc nao pode realizar essa operacao.");exit;
 	}

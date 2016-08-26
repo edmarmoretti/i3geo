@@ -498,58 +498,50 @@ function listaRSSwsARRAY()
 	include_once("$locaplic/admin/php/xml.php");
 	include_once("$locaplic/ms_configura.php");
 	$rsss = explode("|",$rss);
-	if(count($rsss) == 0){$rsss = array(" ");}
+	if(count($rsss) == 0){
+		$rsss = array(" ");
+	}
 	$erro = "Erro. Nao foi possivel ler o arquivo";
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 	$urli3geo = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
-	foreach ($rsss as $r)
-	{
-		if($r == "" || $r == " ")
-		{
+	foreach ($rsss as $r){
+		if($r == "" || $r == " "){
 
-			if($tipo == "GEORSS")
-			{
+			if($tipo == "GEORSS"){
 				$canali = simplexml_load_string(geraXmlGeorss($locaplic));
 				$linkrss = $urli3geo."/admin/xmlgeorss.php";
 			}
-			if($tipo == "KML")
-			{
+			if($tipo == "KML"){
 				$canali = simplexml_load_string(geraXmlKmlrss($locaplic));
 				$linkrss = $urli3geo."/admin/xmlkmlrss.php";
 			}
-			if($tipo == "WMS" || $tipo == "WMS-Tile")
-			{
+			if($tipo == "WMS" || $tipo == "WMS-Tile"){
 				$canali = simplexml_load_string(geraXmlWMS($locaplic));
 				$linkrss = $urli3geo."/admin/xmlservicoswms.php";
 			}
-			if($tipo == "WMSMETAESTAT")
-			{
+			if($tipo == "WMSMETAESTAT")	{
 				$canali = simplexml_load_string(geraXmlWMSmetaestat($locaplic));
 				$linkrss = $urli3geo."/admin/xmlservicoswms.php";
 			}
-			if($tipo == "WS")
-			{
+			if($tipo == "WS"){
 				$canali = simplexml_load_string(geraXmlWS($locaplic));
 				$linkrss = $urli3geo."/admin/xmlservicosws.php";
 			}
-			if($tipo == "DOWNLOAD")
-			{
+			if($tipo == "DOWNLOAD"){
 				$canali = simplexml_load_string(geraXmlDownload($locaplic));
 				$linkrss = $urli3geo."/admin/xmllinksdownload.php";
 			}
+		} else {
+			$canali = simplexml_load_file($rss);
 		}
-		else
-		{$canali = simplexml_load_file($rss);}
 		if($r != "")
 		$linhas["rss"] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='../../imagens/rss.gif' /></a>";
-		else
-		{
+		else{
 			$linhas["rss"] = "<a href='".$linkrss."' target=blank ><img style='border:0px solid white;' src='../../imagens/rss.gif' /></a>";
 		}
 		//var_dump($canali);
 		$canais = array();
-		foreach ($canali->channel->item as $item)
-		{
+		foreach ($canali->channel->item as $item){
 			$canais[] = array("id_ws"=>(ixml($item,"id")),"title"=>(ixml($item,"title")),"description"=>(ixml($item,"description")),"link"=>(ixml($item,"link")),"author"=>(ixml($item,"author")),"nacessos"=>(ixml($item,"nacessos")),"nacessosok"=>(ixml($item,"nacessosok")),"tipo_ws"=>(ixml($item,"tipo")));
 		}
 		$linhas["canais"] = $canais;

@@ -487,13 +487,17 @@ RSS
 function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 {
 	global $esquemaadmin;
+	if(empty($output)){
+		$output = "xml";
+	}
 	//var_dump($_SERVER);exit;
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
-	if($convUTF)
-	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
-	else
-	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
+	if($convUTF){
+		$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
+	} else {
+		$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
+	}
 	$xml .= "<rss version='2.0'>";
 	$xml .= "<channel>\n";
 	$xml .= "<title>RSS</title>\n";
@@ -510,8 +514,7 @@ function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 	);
 	$jsonItems = array();
 	$qatlas = $dbh->query($sql);
-	foreach($qatlas as $row)
-	{
+	foreach($qatlas as $row) {
 		$xml .= "<item>\n";
 		$xml .= "<category/>\n";
 		$xml .= "<title>".entity_decode($row["nome_ws"])."</title>\n";
@@ -541,7 +544,7 @@ function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 	$xml .= "</channel></rss>\n";
 	$dbh = null;
 	$dbhw = null;
-	if($output=="xml"){
+	if($output == "xml"){
 		return $xml;
 	}
 	else{
