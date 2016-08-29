@@ -326,8 +326,8 @@ g_traducao_init =
 		"28a" : [
 			{
 				pt : "Curso gratuito sobre o sistema de administra&ccedil;&atilde;o hospedado na plataforma de treinamento da Associa&ccedil;&atilde;o gvSIG.",
-				en : "",
-				es : ""
+				en : "Free course about the management system hosted at gvSIG Association training site.",
+				es : "Curso gratuito sobre el sistema de administraci&oacute;n hospedado en la plataforma de entrenamiento de la asociaci&oacute;n gvSIG."
 			}
 		],
 		29 : [
@@ -347,8 +347,8 @@ g_traducao_init =
 		"30a" : [
 			{
 				pt : "Reposit&oacute;rio de c&oacute;digo Git. Informa&ccedil;&otilde;es sobre como instalar o i3Geo, como manter o c&oacute;digo atualizado.",
-				en : "",
-				es : ""
+				en : "Git code repository. Information about i3Geo installation and code updating.",
+				es : "Repositorio del c&oacute;digo Git. Informaciones sobre la instalaci&oacute;n de i3Geo y actualizaci&oacute;n del c&oacute;digo."
 			}
 		],
 		31 : [
