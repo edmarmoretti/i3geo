@@ -15,6 +15,9 @@ text-align:left;
 <body style="background-color:white;margin:10px;text-align:left">
 <?php
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 $d = "http://www.opentouchmap.org/?lat=".$_GET["y"]."&lon=".$_GET["x"]."&zoom=12%20lat:".$_GET["y"]."%20lon:".$_GET["x"];
 echo "<p>O c&oacute;digo de barras abaixo pode ser lido por dispositivos m&oacute;veis, como os celulares ou pdas.";
 echo "<p>Se o seu dispositivo possuir o software adequado, fotografe o c&oacute;digo para abrir o navegador de internet ou clique no link.";

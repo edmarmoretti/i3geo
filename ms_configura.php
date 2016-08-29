@@ -178,6 +178,49 @@ $statusFerramentas = array(
 	"melhorcaminho"=>false
 );
 /*
+Variable: $i3geoBlFerramentas
+
+Lista de ferramentas que sao bloqueadas, impedindo sua execucao.
+
+O bloqueio e feito da seguinte forma:
+
+- diretamente no programa PHP que executa as operacoes relativas a ferramenta
+
+- diretamente no programa que faz a carga dos javascripts necessarios ao funcionamento da ferramenta
+
+Essa lista nao impede que a ferramenta seja mostrada na interface do i3Geo. Para remover da interface
+e necessario usar as opcoes de configuracao das inetrfaces. Mesmo a opcao sendo mostrada, ela sera
+bloqueada quando o usuario tentar executa-la.
+
+As palavras incluidas na lista correspondem ao nome da pasta onde reside o codigo da ferramenta e
+armazenada em i3geo/ferramentas.
+
+Exemplo: para bloquear a funcao de edicao da legenda e a funcao que mostra a tabela de
+atributos, basta incluir na lista "legenda","tabela"
+
+$i3geoBlFerramentas = array("legenda","tabela");
+
+Para nao bloquear nenhuma ferramenta, deixe em branco
+
+Excecoes:
+
+As seguintes ferramentas nao podem ser bloqueadas:
+(algumas dessas ferramentas sao bloqueadas dependendo da configuracao de cada tema. Algumas
+sao agregadores de outras ferramentas ou nao utilizam PHP)
+
+colorpicker,colourramp,convertekml,download,editorgm,editorol,excluirarvore,opacidademapa,
+opcoes_autoredesenha,opcoes_label,salvamapfile,wmstime
+
+As seguintes ferramentas podem ser bloqueadas apenas impedindo-se a carga do javascript
+(as operacoes via PHP sao realizadas por outras classes que nao residem na pasta ferramentas ou não utiliza PHP)
+
+analisageometrias,animacao,atalhoscamada,atalhosedicao,atalhosmapa,bufferpt,busca,buscainde
+buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,geolocal,html2canvas,inseregrafico
+inseretxt,mostraexten,outputformat,perfil,tipoimagem
+
+*/
+$i3geoBlFerramentas = array("carregamapa");
+/*
 Variable: $ogrOutput
 
 Indica se o OGR esta corretamente instalado, permitindo o seu uso nos servicos OGC de exportacao de dados

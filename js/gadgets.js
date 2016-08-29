@@ -83,8 +83,8 @@ i3GEO.gadgets =
 			},
 			"mostraBuscaRapida" : {
 				idhtml : "buscaRapida",
-				servicosexternos : true,
-				temasmapa : false,
+				servicosexternos : false,
+				temasmapa : true,
 				google : true,
 				tipo : "mini" //pode ser mini|normal
 			},
@@ -387,6 +387,13 @@ i3GEO.gadgets =
 					};
 					if (i3GEO.Interface.ATUAL === "googlemaps") {
 						hashMustache["googlemaps"] = true;
+					}
+
+					if(conf.servicosexternos == false){
+						hashMustache["externo"] = "";
+					}
+					if(conf.temasmapa == true){
+						hashMustache["interno"] = "checked";
 					}
 					templateMustache = ""
 						+ "<p class=paragrafo >{{titulo}}:</p>"

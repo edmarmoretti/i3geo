@@ -763,25 +763,11 @@ class Atributos
 			if($sopen == MS_FAILURE){
 				return "erro";
 			}
+			$l->close();
 			$ret = $this->mapa->extent;
-			/*
-			 $prjMapa = $this->mapa->getProjection();
-			$prjTema = $l->getProjection();
-			if ($prjTema != ""){
-			$projInObj = ms_newprojectionobj($prjTema);
-			$projOutObj = ms_newprojectionobj($prjMapa);
-			}
-			*/
-			/*
-			 if (($prjTema != "") && ($prjMapa != $prjTema))	{
-			$status = $ret->project($projInObj, $projOutObj);
-			if($status !== MS_SUCCESS){
-			$ret = $this->mapa->extent;
-			}
-			}
-			*/
 			$fr = array();
 			if (@$l->queryByrect($ret) == MS_SUCCESS){
+				$l->open();
 				$res_count = $l->getNumresults();
 				$palavra = $this->remove_accents(strtolower($palavra));
 				for ($i = 0; $i < $res_count; ++$i)	{

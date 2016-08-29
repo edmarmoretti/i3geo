@@ -1,6 +1,9 @@
 <?php
-include_once(dirname(__FILE__)."/../inicia.php");
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
+
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 $funcoesEdicao = array(
 		"REMOVETME",
 		"INCLUITME"

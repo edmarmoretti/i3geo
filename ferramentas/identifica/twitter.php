@@ -25,6 +25,8 @@ p {
 	echo "<p class=paragrafo >Raio de <input type=text size=4 value='$km' id=km onchange='recarrega($par,this.value)'> km</p>";
 	include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 	include(dirname(__FILE__)."/../../ms_configura.php");
+	include(dirname(__FILE__)."/../blacklist.php");
+	verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 	$s = PHP_SHLIB_SUFFIX;
 	if(!function_exists('curl_init'))
 	{

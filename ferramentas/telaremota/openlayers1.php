@@ -1,7 +1,8 @@
 <?php
 
 include (dirname(__FILE__)."/../../classesphp/sani_request.php");
-
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),"",false);
 if(!isset($_GET["fundo"])){
 	$fundo = "''";
 }

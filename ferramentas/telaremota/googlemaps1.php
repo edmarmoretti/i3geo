@@ -1,5 +1,7 @@
 <?php
 include (dirname(__FILE__)."/../../classesphp/sani_request.php");
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),"",false);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -113,10 +115,10 @@ function inicia(){
 	navm = false;
 	var app = navigator.appName.substring(0,1);
 	if (app==='N'){navn=true;}else{navm=true;}
-	
+
 	mapaRemoto = new google.maps.Map($i("googlemapsdiv"),{scaleControl:true});
 	mapaRemoto.setMapTypeId("terrain");
-	
+
 	i3GeoMapOverlay = new google.maps.OverlayView();
 	i3GeoMapOverlay.draw = function() {};
 	criaLayer();
@@ -133,14 +135,14 @@ function criaLayer(){
 		tileSize: new google.maps.Size(256, 256),
 		isPng: true,
 		name: "Remoto"
-	});	
+	});
 	mapaRemoto.overlayMapTypes.insertAt(0, i3GEOTileO);
 }
 function zoom2ext(ext){
 	var ret = ext.split(" ");
 	sw = new google.maps.LatLng(ret[1],ret[0]);
 	ne = new google.maps.LatLng(ret[3],ret[2]);
-	mapaRemoto.fitBounds(new google.maps.LatLngBounds(sw,ne));	
+	mapaRemoto.fitBounds(new google.maps.LatLngBounds(sw,ne));
 }
 function atualizaMapa(){
 	mapaRemoto.overlayMapTypes.removeAt(0);

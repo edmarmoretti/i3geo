@@ -1,5 +1,9 @@
 <?php
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
+include("../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 $funcoesEdicao = array(
 		"LISTARQUIVOS"
 );
@@ -19,7 +23,6 @@ Pega a lista de drives registrados para o usu&aacute;rio atual.
 A lista de drives &eacute; definida no ms_configura e permite que o usu&aacute;rio navegue pelos arquivos do servidor.
 */
 	case "LISTADRIVES":
-		include(dirname(__FILE__)."/../ms_configura.php");
 		$retorno = $navegadoresLocais[0];
 	break;
 /*

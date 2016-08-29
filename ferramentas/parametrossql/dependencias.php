@@ -1,4 +1,8 @@
 <?php
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)));
+
+
 /**
  * Esse script e utilizado por i3GEO.pluginI3geo
  * Carrega os programas javascript necessarios para a ferramenta

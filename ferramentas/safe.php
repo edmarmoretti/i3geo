@@ -40,6 +40,7 @@ if(isset($fingerprint) && !empty($g_sid))	{
 	}
 }
 include_once(dirname(__FILE__)."/../ms_configura.php");
+include_once(dirname(__FILE__)."/blacklist.php");
 include_once(dirname(__FILE__)."/../classesphp/classe_vermultilayer.php");
 include_once(dirname(__FILE__)."/../classesphp/classe_estatistica.php");
 

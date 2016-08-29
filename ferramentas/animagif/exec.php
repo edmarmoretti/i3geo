@@ -26,6 +26,8 @@ if(empty($_GET)){
 //http://localhost:8014/i3geo/ferramentas/animagif/exec.php?transparente=nao&legenda=sim&tema=dengue_casos_provaveis&colunat=semana_ano_epidemiologico&w=500&h=500&mapext=-74%20-32%20-34%204
 //http://localhost/i3geo/ferramentas/animagif/exec.php?nulos=-,0&transparente=sim&legenda=nao&tema=_llocalianimagif&colunat=ANOCRIA&w=500&h=500&mapext=-74%20-32%20-34%204&tipocolunat=string
 include("../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 include("../../classesphp/funcoes_gerais.php");
 include("../../classesphp/carrega_ext.php");
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");

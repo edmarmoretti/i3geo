@@ -1,5 +1,8 @@
 <?php
 include(dirname(__FILE__)."/../../ms_configura.php");
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 include($locaplic."/classesphp/funcoes_gerais.php");
 $agora = intval(time() / 10000);
 $arq = $dir_tmp."/inde$agora.html";

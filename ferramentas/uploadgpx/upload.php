@@ -30,6 +30,8 @@ if (isset($_FILES['i3GEOuploadgpx']['name']) && strlen(basename($_FILES['i3GEOup
 	}
 	//$ndir = dirname($filen);
 	require_once (dirname(__FILE__)."/../../ms_configura.php");
+	include(dirname(__FILE__)."/../blacklist.php");
+	verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 
 	if(isset($logExec) && $logExec["upload"] == true){
 		i3GeoLog("prog: uploadgpx filename:" . $_FILES['i3GEOuploadgpx']['name'],$dir_tmp);

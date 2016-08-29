@@ -7,6 +7,9 @@
 include (dirname(__FILE__)."/../../classesphp/sani_request.php");
 include("../../classesphp/funcoes_gerais.php");
 include("../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 $nomeDoMapfileTema = dirname(__FILE__)."/../../temas/".$_GET["tema"].".map";
 if(!file_exists($nomeDoMapfileTema)){
 	$nomeDoMapfileTema = $dir_tmp."/".$_GET["tema"].".map";

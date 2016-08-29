@@ -9,8 +9,11 @@ if (isset($_GET["g_sid"]))
 {session_id($_GET["g_sid"]);}
 session_start();
 $map_file = $_SESSION["map_file"];
-$postgis_mapa = $_SESSION["postgis_mapa"];
-require_once (dirname(__FILE__)."/../../ms_configura.php");
+
+include (dirname(__FILE__)."/../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 $tema = $_GET["tema"];
 
 if(isset($logExec) && $logExec["upload"] == true){
@@ -29,7 +32,6 @@ if(isset($logExec) && $logExec["upload"] == true){
 if (isset($_FILES['i3GEOaplicarsld']['name']) && strlen(basename($_FILES['i3GEOaplicarsld']['name'])) < 200 )
 {
 	//$ndir = dirname($filen);
-	require_once (dirname(__FILE__)."/../../ms_configura.php");
 	$mapa = ms_newMapObj($map_file);
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = dirname($map_file);

@@ -1,8 +1,9 @@
 <?php
 include_once(dirname(__FILE__)."/../safe.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 if($statusFerramentas["melhorcaminho"] != true){
 	exit;
-);
+}
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //

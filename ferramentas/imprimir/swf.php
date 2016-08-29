@@ -1,5 +1,9 @@
 <?php
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),"",false);
+
 $_GET = array_merge($_GET,$_POST);
 error_reporting(0);
 session_name("i3GeoPHP");

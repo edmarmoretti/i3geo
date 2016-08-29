@@ -1,5 +1,8 @@
 <?php
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
+include("../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 $funcoesEdicao = array(
 		"LISTARQUIVOS",
 		"LISTADRIVES"

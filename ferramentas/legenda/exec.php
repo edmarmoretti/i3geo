@@ -1,5 +1,6 @@
 <?php
 include(dirname(__FILE__)."/../safe.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //

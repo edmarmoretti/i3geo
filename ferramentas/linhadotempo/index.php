@@ -1,3 +1,8 @@
+<?php
+include("../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+?>
 <html>
 <head>
 <script src="../../classesjs/i3geo.js" type="text/javascript"></script>

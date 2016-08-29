@@ -1,5 +1,9 @@
 <?php
 include (dirname(__FILE__)."/../../classesphp/sani_request.php");
+include("../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 $g_sid = $_GET["g_sid"];
 session_name("i3GeoPHP");
 session_id($g_sid);

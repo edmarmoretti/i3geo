@@ -32,6 +32,8 @@ Free Software Foundation, Inc., no endere&ccedil;o
  */
 error_reporting(0);
 include_once(dirname(__FILE__)."/../../ms_configura.php");
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>

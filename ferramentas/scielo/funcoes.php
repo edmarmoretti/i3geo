@@ -1,6 +1,9 @@
 <?php
 error_reporting(0);
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+include(dirname(__FILE__)."/../../ms_configura.php");
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 $_GET = array_merge($_GET,$_POST);
 $ret = $_GET["ret"];
 $servico = $_GET["servico"];

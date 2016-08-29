@@ -1,5 +1,4 @@
 <?php
-exit;
 require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
@@ -11,6 +10,8 @@ session_start();
 $map_file = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 require_once (dirname(__FILE__)."/../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 
 if(isset($logExec) && $logExec["upload"] == true){
 	i3GeoLog("prog: carregamapa filename:" . $_FILES['i3GEOcarregamapafilemap']['name'],$dir_tmp);

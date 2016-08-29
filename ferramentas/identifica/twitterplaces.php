@@ -21,7 +21,7 @@ if(!function_exists('curl_init'))
 if(!function_exists('curl_init'))
 {echo "curl n&atilde;o instalado";}
 include(dirname(__FILE__)."/../../ms_configura.php");
-
+include(dirname(__FILE__)."/../blacklist.php");
 
 $ch = curl_init();
 curl_setopt($ch,CURLOPT_URL, 'https://api.twitter.com/oauth2/token');

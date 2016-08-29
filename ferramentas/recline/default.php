@@ -3,6 +3,8 @@
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 include("../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 include("../../classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];

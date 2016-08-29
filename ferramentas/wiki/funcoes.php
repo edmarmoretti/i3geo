@@ -1,4 +1,7 @@
 <?php
+include(dirname(__FILE__)."/../../ms_configura.php");
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 $usuarioGeonames = "i3geo";
 //set_time_limit(600);
 require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");

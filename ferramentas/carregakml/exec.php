@@ -1,5 +1,6 @@
 <?php
 include_once(dirname(__FILE__)."/../safe.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 $url = $_GET["url"];
 switch (strtoupper($funcao))

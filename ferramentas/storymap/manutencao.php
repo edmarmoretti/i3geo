@@ -1,6 +1,5 @@
 <?php
 exit;
-include_once(dirname(__FILE__)."/../inicia.php");
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
 $funcoesEdicao = array(
 		"REMOVE",

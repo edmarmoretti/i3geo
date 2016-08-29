@@ -20,6 +20,9 @@ $map_file = $_SESSION["map_file"];
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 error_reporting(0);
 require_once (dirname(__FILE__)."/../../ms_configura.php");
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 $dirmap = dirname($map_file);
 $arquivo = "";
 

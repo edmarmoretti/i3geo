@@ -1072,24 +1072,21 @@ Retorno:
 
 {array} | "erro"
 */
-function buscaRapida($servico,$palavra)
-{
+function buscaRapida($servico,$palavra){
 	//error_reporting(0);
-	if(!function_exists('preg_match'))
-	{
+	if(!function_exists('preg_match')){
 		include_once(dirname(__FILE__).'/../pacotes/SOAPdepreciado/nusoap.php');
 		new Xsoapclient($servico."?wsdl","wsdl");
 	}
-	else
-	{
+	else{
 		include_once(dirname(__FILE__).'/../pacotes/SOAP/nusoap.php');
 		$soapclient = new nusoap_client($servico);
 	}
-//echo $soapclient->getDebug();
-//exit;
 	$vv = "erro";
 	$vv = $soapclient->call("procurar",array("palavra"=>$palavra,"tipoBusca"=>"qualquer"));
-	if($vv == ""){$vv = "erro";}
+	if($vv == ""){
+		$vv = "erro";
+	}
 	return ($vv);
 }
 /*

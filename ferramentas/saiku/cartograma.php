@@ -13,6 +13,8 @@ if(!isset($dir_tmp)){
 if(isset($statusFerramentas) && $statusFerramentas["saiku"] != true){
 	exit;
 }
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 //pega o filtro da sessao PHP aberta pelo i3Geo
 session_name("i3GeoPHP");
 session_id($_POST["g_sid"]);

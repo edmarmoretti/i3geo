@@ -18,6 +18,7 @@ nomevariavel nome da variavel javascript que sera retornada com os valores
 $dir = dirname(__FILE__);
 //inicializa o programa verificando seguranca e pegando os parametros enviados pela URL e pela secao
 include_once($dir."/../safe.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 
 include_once($dir."/funcoes.php");
 

@@ -236,7 +236,16 @@ i3GEOF.busca = {
 				cp = new cpaint();
 				cp.set_response_type("json");
 				cp.set_transfer_mode('POST');
-				cp.call(p,"listavaloresitens",i3GEOF.busca.mostraBusca,"funcao=listavaloresitens","palavra="+palavra,"lista="+listai.join("|"),"tipo="+tipo,"onde="+onde,"ext="+i3GEO.parametros.mapexten);
+				cp.call(
+						p,
+						"listavaloresitens",
+						i3GEOF.busca.mostraBusca,
+						"funcao=listavaloresitens&palavra="+palavra
+						+"&lista="+listai.join("|")
+						+"&tipo="+tipo
+						+"&onde="+onde
+						+"&ext="+i3GEO.parametros.mapexten
+					);
 			}
 		}
 	},

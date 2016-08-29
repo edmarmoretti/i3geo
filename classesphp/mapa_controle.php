@@ -111,6 +111,7 @@ $tempo = microtime(1);
 
 include_once("sani_request.php");
 $_pg = array_merge($_GET,$_POST);
+
 $interface = $_pg["interface"];
 $funcao = $_pg["funcao"];
 $g_sid = $_pg["g_sid"];
@@ -1847,8 +1848,7 @@ switch (strtoupper($funcao))
 	case "BUSCARAPIDA":
 		$servico = $_pg["servico"];
 		$palavra = $_pg["palavra"];
-		if($servico != "temas")
-		{
+		if($servico != "temas"){
 			$retorno = buscaRapida($servico,$palavra);
 		}
 		else{
@@ -1866,8 +1866,8 @@ switch (strtoupper($funcao))
 					}
 				}
 			}
-			else
-			{$retorno = "erro";
+			else {
+				$retorno = "erro";
 			}
 		}
 		break;

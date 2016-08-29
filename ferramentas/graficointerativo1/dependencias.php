@@ -1,4 +1,8 @@
 <?php
+include(dirname(__FILE__)."/../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)));
+
+
 /**
  * Carrega os arquivos javascript necessarios para a producao de graficos
  * Deve ser inserido na tag script de um arquivo HTML

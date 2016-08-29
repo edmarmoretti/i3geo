@@ -1,4 +1,5 @@
 <?php
+//depreciado
 return;
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/carrega_ext.php");

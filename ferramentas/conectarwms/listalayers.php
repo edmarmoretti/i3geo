@@ -5,6 +5,9 @@
  * Isso pq o endereco do servico e um parametro obtido em $_GET["servico"]
  */
 include (dirname(__FILE__)."/../../classesphp/sani_request.php");
+include(dirname(__FILE__)."../../ms_configura.php");
+include(dirname(__FILE__)."../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,true);
 ?>
 <html>
 

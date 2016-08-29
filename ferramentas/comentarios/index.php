@@ -14,6 +14,10 @@ g_sid
 
 tema - tema que ser&aacute; comentado
 */
+include("../../ms_configura.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 include (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $parametrosURL = array_merge($_GET,$_POST);
 
