@@ -833,41 +833,62 @@ i3GEO.editorOL.kml = [<?php
 	}
 ?>];
 i3GEO.editorOL.marca = "<?php
-	if(isset($marca)){echo $marca;}
-	else
-	{echo "../pacotes/openlayers/img/marker-gold.png";}
+	if(isset($marca)){
+		echo $marca;
+	}
+	else{
+		echo "../pacotes/openlayers/img/marker-gold.png";
+	}
 ?>";
 i3GEO.editorOL.tiles = "<?php
-	if(isset($tiles)){echo $tiles;}
-	else
-	{echo "true";}
+	if(isset($tiles)){
+		echo $tiles;
+	}
+	else{
+		echo "true";
+	}
 ?>";
 i3GEO.editorOL.incluilayergrafico = "<?php
-	if(isset($incluilayergrafico)){echo $incluilayergrafico;}
-	else
-	{echo "true";}
+	if(isset($incluilayergrafico)){
+		echo $incluilayergrafico;
+	}
+	else{
+		echo "true";
+	}
 ?>";
 i3GEO.editorOL.ativalayerswitcher = "<?php
-	if(isset($ativalayerswitcher)){echo $ativalayerswitcher;}
-	else
-	{echo "false";}
+	if(isset($ativalayerswitcher)){
+		echo $ativalayerswitcher;
+	}
+	else{
+		echo "false";
+	}
 ?>";
 i3GEO.editorOL.ativarodadomouse = "<?php
-	if(isset($ativarodadomouse)){echo $ativarodadomouse;}
-	else
-	{echo "true";}
+	if(isset($ativarodadomouse)){
+		echo $ativarodadomouse;
+	}
+	else{
+		echo "true";
+	}
 ?>";
 
 i3GEO.editorOL.legendahtml = "<?php
-	if(isset($legendahtml)){echo $legendahtml;}
-	else
-	{echo "true";}
+	if(isset($legendahtml)){
+		echo $legendahtml;
+	}
+	else {
+		echo "true";
+	}
 ?>";
 
 <?php
 if(isset($fundo) && $fundo != ""){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";
+} else {
+	echo "i3GEO.editorOL.fundo = '';";
 }
+
 
 if(isset($controles)){
 	echo "i3GEO.editorOL.controles = [".implode(",",$objControles)."];";

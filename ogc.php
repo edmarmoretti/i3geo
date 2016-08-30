@@ -1163,6 +1163,7 @@ function carregaCacheImagem($cachedir,$map,$tms){
 		$nome = $cachedir.$tms;
 	}
 	$nome = str_replace(".png","",$nome).".png";
+	//TODO verificar esses cabecalhos e comparar com geoserver
 	if(file_exists($nome)){
 		header('Content-Length: '.filesize($nome));
 		header('Content-Type: image/png');
