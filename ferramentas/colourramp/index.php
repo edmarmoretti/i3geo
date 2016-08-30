@@ -4,11 +4,14 @@
 	include_once(dirname(__FILE__)."/../../classesphp/class.palette.php");
 	$m = new palette();
 	$lista = implode(",",($m->listaColourRamps(dirname(__FILE__)."/../..")));
-	if(!isset($ncores))
-	{$ncores = 10;}
-	if(empty($_GET["locaplic"])){
-		$locaplic = "../..";
+	if(!isset($_GET["ncores"])){
+		$_GET["ncores"] = 10;
 	}
+	if(empty($_GET["locaplic"])){
+		$_GET["locaplic"] = "../..";
+	}
+
+	$locaplic = $_GET["locaplic"];
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -130,7 +133,7 @@ new YAHOO.widget.Button(
 	{onclick:{fn: function(){aplicarCores();}}}
 );
 $i("voltar-button").style.width = "250px"
-var lista = "<?php echo $_GET["lista"];?>";
+var lista = "<?php echo $lista;?>";
 lista = lista.split(",");
 var n = lista.length;
 var ins = "";

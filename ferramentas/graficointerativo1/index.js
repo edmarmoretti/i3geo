@@ -1874,7 +1874,7 @@ i3GEOF.graficointerativo1 =
 				temp = function(retorno){
 					i3GEO.Interface.atualizaTema(retorno,tema);
 				};
-				cp.call(p,"insereFiltro",temp,"tema="+tema,"filtro=");
+				cp.call(p,"insereFiltro",temp,"tema="+tema+"&filtro=");
 			}
 		}
 	};

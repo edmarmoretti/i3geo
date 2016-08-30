@@ -313,7 +313,7 @@ i3GEOF.animagif =
 			p = i3GEO.configura.locaplic + "/ferramentas/animagif/manutencao.php";
 			par = "&g_sid=" + i3GEO.configura.sid
 			+ "&tema=" + i3GEOF.animagif.tema
-			+ "&animagif=" + i3GEO.util.base64encode(j)
+			+ "&animagif=" + j
 			+ "&funcao=inclui";
 
 			retorno =

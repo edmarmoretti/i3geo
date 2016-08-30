@@ -37,11 +37,9 @@ $_GET = array_merge($_GET,$_POST);
 //
 if(empty($_GET["colunat"])){
 	$nmapa = ms_newMapObj($locaplic."/temas/".$_GET["tema"].".map");
-
 	$layer = $nmapa->getlayerbyname($_GET["tema"]);
-
 	$animagif = $layer->getmetadata("animagif");
-	$animagif = json_decode($animagif,true);
+	$animagif = json_decode(str_replace("'",'"',$animagif),true);
 	$_GET["colunat"] = $animagif["colunat"];
 	$_GET["tempo"] = $animagif["tempo"];
 	$_GET["w"] = $animagif["w"];
@@ -110,6 +108,10 @@ if(!in_array($operador,array("=","<",">"))){
 $nulos = explode(",",$nulos);
 $arqtemp = $dir_tmp."/".$nometemp;
 if(file_exists($arqtemp.".gif")){
+	if(getimagesize($arqtemp.".gif") == false){
+		echo "";
+		exit;
+	}
 	$gifBinary = file_get_contents($arqtemp.".gif");
 	//retorna o gif para o navegador
 	header('Content-type: image/gif');
@@ -191,9 +193,6 @@ if($copyright != ""){
 	$label->updatefromstring("LABEL POSITION lr END");
 	$label->updatefromstring('LABEL STYLE GEOMTRANSFORM "labelpoly" COLOR 255 255 255 END END');
 }
-
-//
-$mapa->save($arqtemp.".map");
 //adiciona ao mapa base as camadas do mapfile indicado em $tema
 $nmapa = ms_newMapObj($locaplic."/temas/".$tema.".map");
 $numlayers = $nmapa->numlayers;
@@ -219,8 +218,6 @@ for ($i=0;$i < $numlayers;$i++){
 	cloneInlineSymbol($layern,$nmapa,$mapa);
 	ms_newLayerObj($mapa, $layern);
 }
-
-$mapa->save($arqtemp.".map");
 //aplica a extensao geografica
 $layer = $mapa->getlayerbyname($tema);
 
@@ -272,10 +269,8 @@ $o->set("imagemode",MS_IMAGEMODE_RGBA);
 if($transparente == "sim"){
 	$o->set("transparent",MS_TRUE);
 }
-
+restauraConObj($mapa,$postgis_mapa);
 $mapa->save($arqtemp.".map");
-$mapa = ms_newMapObj($arqtemp.".map");
-restauraCon($arqtemp.".map",$postgis_mapa);
 
 /*
 if(validaAcessoTemas($arqtemp.".map",false) == true){
@@ -295,8 +290,7 @@ foreach($lista as $l){
 	}
 }
 
-//$listaunica = array("201537");
-
+$mapa = ms_newMapObj($arqtemp.".map");
 //cria as imagens para cada periodo
 $layer = $mapa->getlayerbyname($tema);
 
@@ -307,6 +301,11 @@ if($copyright != ""){
 	$classet->title = " ";
 }
 $mapa->moveLayerdown(0);
+
+$mapa->save($arqtemp.".map");
+substituiCon($mapa,$postgis_mapa);
+$mapa = ms_newMapObj($arqtemp.".map");
+$copyright = $mapa->getlayerbyname("copyright");
 
 if($copyright != ""){
 	$c = $copyright->getclass(0);
@@ -323,19 +322,23 @@ if($copyright != ""){
 $imagens = array();
 $duracao = array();
 $objImagem = "";
+
 foreach($listaunica as $d){
+
+	$layer = $mapa->getlayerbyname($tema);
 	if(strtoupper($colunat) == $colunat){
 		$filtro = "(('[$colunat]' $operador '$d'))";
-		if($tipocolunat == "numerico"){
+		if($tipocolunat == "numerico" || $tipocolunat == "numero"){
 			$filtro = "(([$colunat] $operador $d))";
 		}
 	}
 	else{
 		$filtro = "$colunat $operador '$d'";
-		if($tipocolunat == "numerico"){
+		if($tipocolunat == "numerico"  || $tipocolunat == "numero"){
 			$filtro = "$colunat $operador $d";
 		}
 	}
+
 	$layer->setfilter($filtro);
 
 	$nomec = $arqtemp.$d.".png";
@@ -348,16 +351,13 @@ foreach($listaunica as $d){
 		$classe->title = $d;
 	}
 	//$mapa->save($arqtemp."teste.map");
+	$mapa->save($arqtemp.".map");
 	if(!file_exists($nomec)){
 		if($objImagem == ""){
-			//$mapa->save($arqtemp.".map");
-			//echo $arqtemp.".map";
 			$objImagem = $mapa->draw();
 			$objImagem->saveImage($nomec);
 		}
 		else{
-			//$mapa->save($arqtemp.".map");
-			//echo $arqtemp.".map";
 			$i = $mapa->draw();
 			$objImagem->pasteImage($i,-1);
 			$objImagem->saveImage($nomec);
@@ -367,7 +367,10 @@ foreach($listaunica as $d){
 	$duracao[] = $tempo;
 	//$mapa->save($arqtemp.".map");exit;
 }
-
+restauraConObj($mapa,$postgis_mapa);
+$mapa->save($arqtemp.".map");
+unlink($arqtemp.".map");
+$mapa = null;
 //junta as imagens no gif
 
 include("../../pacotes/gifcreator/GifCreator.php");

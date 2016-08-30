@@ -1198,11 +1198,11 @@ i3GEOF.selecao =
 					p,
 					"selecaoPoli",
 					retorna,
-					"xs=" + xs,
-					"ys=" + ys,
-					"tema=" + tema,
-					"tipo=" + $i("i3GEOselecaotipoOperacao").value,
-					"buffer=" + $i("i3GEOselecaotoleranciapt").value);
+					"xs=" + xs
+					+ "&ys=" + ys
+					+ "&tema=" + tema
+					+ "&tipo=" + $i("i3GEOselecaotipoOperacao").value
+					+ "&buffer=" + $i("i3GEOselecaotoleranciapt").value);
 			}
 		},
 		/*

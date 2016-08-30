@@ -459,7 +459,8 @@ class Mapa
 					if (!mb_detect_encoding($f,"UTF-8",true)){
 						$f = mb_convert_encoding($f,"UTF-8","ISO-8859-1");
 					}
-					$ferramentas["animagif"] = json_decode($f);
+					$ferramentas["animagif"] = json_decode(str_replace("'",'"',$f));
+					//var_dump($ferramentas["animagif"]);exit;
 				}
 				$temas[] = array(
 						$oLayer->name,

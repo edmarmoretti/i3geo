@@ -1168,11 +1168,11 @@ i3GEOF.identifica =
 				i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "hidden";
 				i3GEO.Interface.atualizaTema(retorno, tema);
 			}, p =
-				i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=sim&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro", cp =
+				i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=nao&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro", cp =
 				new cpaint();
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');
-			cp.call(p, "insereFiltro", temp, "tema=" + tema, "filtro=" + i3GEO.util.base64encode(filtro));
+			cp.call(p, "insereFiltro", temp, "tema=" + tema + "&filtro=" + filtro);
 		},
 		removeFiltro : function(tema, idjanela) {
 			if (i3GEOF.identifica.propJanelas[idjanela].visibility === "visible") {
@@ -1187,7 +1187,7 @@ i3GEOF.identifica =
 				new cpaint();
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');
-			cp.call(p, "insereFiltro", temp, "tema=" + tema, "filtro=");
+			cp.call(p, "insereFiltro", temp, "tema=" + tema + "&filtro=");
 		},
 		adicionaPontoRegiao : function(idjanela) {
 			var p = i3GEO.configura.locaplic + "/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid=" + i3GEO.configura.sid, tema =

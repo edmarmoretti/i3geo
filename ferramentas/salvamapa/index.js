@@ -98,7 +98,6 @@ i3GEOF.salvaMapa = {
 				local = i3GEO.configura.locaplic+"/../ms_tmp"+local[1];
 				onde.innerHTML = "" +
 					"<a style='line-height:20px;font-size:12px;' href='"+down+"' target='_blank' >"+$trad('baixaArquivo',i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a style='line-height:20px;font-size:12px;' href='"+local+"' target='_blank' >"+$trad('veArquivo',i3GEOF.salvaMapa.dicionario)+"</a><br>" +
 					"<a style='line-height:20px;font-size:12px;' href='"+teste+"' target='_blank' >"+$trad('testaArquivo',i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}

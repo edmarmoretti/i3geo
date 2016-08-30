@@ -11,7 +11,7 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao. Tente fazer login novamente.");exit;
 	}
 }
-$tema = $_GET["tema"];
+$tema = $_POST["tema"];
 error_reporting(0);
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
@@ -44,7 +44,7 @@ switch (strtoupper($funcao))
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($tema);
 		if($l != ""){
-			//$l->setmetadata("animagif",base64_decode($animagif));
+			$l->setmetadata("animagif",$animagif);
 			$mapa->save($map_file);
 		}
 		$arq = $locaplic."/temas/".$tema.".map";
@@ -52,7 +52,7 @@ switch (strtoupper($funcao))
 			$mapa = ms_newMapObj($arq);
 			$l = $mapa->getlayerbyname($tema);
 			if($l != ""){
-				//$l->setmetadata("animagif",base64_decode($animagif));
+				$l->setmetadata("animagif",str_replace("\\","'",$_POST["animagif"]));
 				$mapa->save($arq);
 				removeCabecalho($arq);
 			}
