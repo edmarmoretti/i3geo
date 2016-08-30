@@ -29,6 +29,13 @@ g_traducao_init =
 				es : "Sistema de administraci&oacute;n"
 			}
 		],
+		"adminOld" : [
+				{
+					pt : "Administra&ccedil;&atilde;o (antigo)",
+					en : "Management system (old)",
+					es : "Sistema de administraci&oacute;n (antigo)"
+				}
+			],
 		"3a" : [
 				{
 					pt : "Usu&aacute;rios cadastrados podem criar camadas, organizar o acesso aos dados, inserir novos dados no servidor e executar diversas tarefas administrativas.",
