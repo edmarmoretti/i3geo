@@ -77,11 +77,49 @@ ogc.php?tema=bioma
 ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 
 */
-set_time_limit(0);
-ini_set('memory_limit', '512M');
-include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+include(dirname(__FILE__)."/classesphp/sani_request.php");
+include(dirname(__FILE__)."/ms_configura.php");
+$_GET = array_merge($_GET,$_POST);
+
 if(isset($_GET["BBOX"])){
 	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
+}
+
+if(isset($_GET["tema"])){
+	$tema = $_GET["tema"];
+}
+if($_GET["id_medida_variavel"] != ""){
+	$_GET["id_medida_variavel"] = filter_var ( $_GET["id_medida_variavel"], FILTER_SANITIZE_NUMBER_INT);
+}
+//
+//compatibiliza variaveis
+//
+if(!isset($tema) && isset($_GET["layers"])){
+	$tema = $_GET["layers"];
+}
+if(!isset($tema) && isset($_GET["LAYERS"])){
+	$tema = $_GET["LAYERS"];
+}
+if(!isset($tema) && isset($_GET["LAYER"])){
+	$tema = $_GET["LAYER"];
+}
+if(!isset($tema) && isset($_GET["temas"])){
+	$tema = $_GET["temas"];
+}
+if(isset($_GET["typeName"])){
+	$typename = $_GET["typeName"];
+	if(!isset($tema)){
+		$tema = $typename;
+	}
+}
+if(!isset($tema) && isset($_GET["typename"])){
+	$tema = $_GET["typename"];
+}
+//
+//define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
+//
+if(isset($_GET["id_medida_variavel"]) && $_GET["id_medida_variavel"] != ""){
+	$tema = "ogcmetaestat".$_GET["id_medida_variavel"];
 }
 if(isset($_GET["TileMatrix"])){
 	$_GET["WIDTH"] = 256;
@@ -93,20 +131,30 @@ if(isset($_GET["TileMatrix"])){
 		$res[] = $temp;
 		$temp = $temp / 2;
 	}
-	//$_GET["tms"] = null;
-	$_GET["tms"] = "/wmts/".$_GET["layer"]."/".$_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"].".png";
+	$_GET["tms"] = "/wmts/".$tema."/".$_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"].".png";
 	if($_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"] == "0/0/0" || $_GET["TileCol"] == -1 || $_GET["TileRow"]== -1){
 		return;
 	}
 	$_GET["BBOX"] = $lon1.",".$lat1.",".$lon2.",".$lat2;
 	$_GET["SERVICE"] = "WMS";
 	$_GET["REQUEST"] = "getMap";
+
 }
-$_GET = array_merge($_GET,$_POST);
-$tema = $_GET["tema"];
-if($_GET["id_medida_variavel"] != ""){
-	$_GET["id_medida_variavel"] = filter_var ( $_GET["id_medida_variavel"], FILTER_SANITIZE_NUMBER_INT);
+//
+//verifica se a imagem existe se o cache estiver ligado
+//se existir, carrega e sai
+//
+if(isset($_GET["tms"]) && $_GET["tms"] != "" && $_GET["DESLIGACACHE"] != "sim"){
+	carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
 }
+if($_GET["DESLIGACACHE"] != "sim" && isset($_GET["Z"]) && isset($_GET["X"])){
+	$x = $_GET["X"];
+	$y = $_GET["Y"];
+	$z = $_GET["Z"];
+	carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$tema/$z/$x/$y");
+}
+set_time_limit(0);
+ini_set('memory_limit', '512M');
 //
 //caso nenhum parametros tenha sido enviado
 //
@@ -126,8 +174,7 @@ if(isset($_GET["outputformat"]) && $_GET["outputformat"] != ""){
 	$_GET["OUTPUTFORMAT"] = $_GET["outputformat"];
 }
 $cache = true;
-//require_once(dirname(__FILE__)."/classesphp/carrega_ext.php");
-include(dirname(__FILE__)."/ms_configura.php");
+
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 
 if(isset($logExec) && $logExec["ogc"] == true){
@@ -158,38 +205,6 @@ $protocolo = $protocolo[0];
 $protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
 $protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
-//
-//define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
-//
-
-if(isset($_GET["id_medida_variavel"]) && $_GET["id_medida_variavel"] != ""){
-	$tema = "ogcmetaestat".$_GET["id_medida_variavel"];
-}
-//
-//compatibiliza variaveis
-//
-
-if(!isset($tema) && isset($_GET["layers"])){
-	$tema = $_GET["layers"];
-}
-if(!isset($tema) && isset($_GET["LAYERS"])){
-	$tema = $_GET["LAYERS"];
-}
-if(!isset($tema) && isset($_GET["LAYER"])){
-	$tema = $_GET["LAYER"];
-}
-if(!isset($tema) && isset($_GET["temas"])){
-	$tema = $_GET["temas"];
-}
-if(isset($_GET["typeName"])){
-	$typename = $_GET["typeName"];
-	if(!isset($tema)){
-		$tema = $typename;
-	}
-}
-if(!isset($tema) && isset($_GET["typename"])){
-	$tema = $_GET["typename"];
-}
 
 //
 //garante que layers possam ser especificados de diferentes maneiras
@@ -478,11 +493,6 @@ else{
 						if($temai3geo == false){
 							$l->set("status",MS_OFF);
 						}
-						/*
-						 if($cache == true && strtolower($l->getmetadata('cache')) == 'sim' && $tipo == '' && count($tema) == 1){
-						carregaCacheImagem($_GET['BBOX'],$tx,$_GET['WIDTH'],$_GET['HEIGHT'],$cachedir);
-						}
-						*/
 						$l->setmetadata("ows_title",pegaNome($l));
 						$l->setmetadata("ows_srs",$listaepsg);
 						$l->set("group","");
@@ -690,7 +700,6 @@ else{
 			}
 		}
 		//echo "<pre>".var_dump($codigosTema);exit;
-
 		foreach($codigosTema as $c){
 			$codigoTema = $c["tema"];
 			if(file_exists($locaplic."/temas/".$codigoTema.".map")){
@@ -1116,6 +1125,7 @@ if(strtolower($OUTPUTFORMAT) == "csv"){
 	exit;
 }
 //echo $req->getValue(1);exit;
+ob_clean();
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
 $buffer = ms_iogetStdoutBufferBytes();
@@ -1165,13 +1175,15 @@ function carregaCacheImagem($cachedir,$map,$tms){
 	$nome = str_replace(".png","",$nome).".png";
 	//TODO verificar esses cabecalhos e comparar com geoserver
 	if(file_exists($nome)){
-		header('Content-Length: '.filesize($nome));
+		ob_clean();
+		//header('Content-Length: '.filesize($nome));
+		header('Cache: '.$tms);
 		header('Content-Type: image/png');
-		header('Cache-Control: max-age=3600, must-revalidate');
-		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
-		$etag = md5_file($nome);
-		header('Etag: '.$etag);
+		//header('Cache-Control: max-age=3600, must-revalidate');
+		//header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		//header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+		//$etag = md5_file($nome);
+		//header('Etag: '.$etag);
 		readfile($nome);
 		exit;
 	}
@@ -1206,11 +1218,12 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		imagepng($imgc,$nome);
 	}
 	chmod($nome,0744);
-	header('Content-Length: '.filesize($nome));
+	//header('Content-Length: '.filesize($nome));
+	ob_clean();
 	header('Content-Type: image/png');
-	header('Cache-Control: max-age=3600, must-revalidate');
-	header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-	header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
+	//header('Cache-Control: max-age=3600, must-revalidate');
+	//header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+	//header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
 	readfile($nome);
 	exit;
 }
@@ -1256,19 +1269,22 @@ function renderNocacheTms(){
 		imagepng($imgc,$nomer);
 	}
 	if($i3georendermode == 0 || !isset($i3georendermode)){
-		header('Content-Length: '.filesize($nomer));
+		ob_clean();
+		//header('Content-Length: '.filesize($nomer));
 		header('Content-Type: image/png');
-		header('Cache-Control: max-age=3600, must-revalidate');
-		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-		header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
+		//header('Cache-Control: max-age=3600, must-revalidate');
+		//header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
+		//header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nomer)).' GMT', true, 200);
 		readfile($nomer);
+		exit;
 	}
 	if($i3georendermode == 2){
 		ob_clean();
-		header('Cache-Control: public, max-age=22222222');
-		header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
+		//header('Cache-Control: public, max-age=22222222');
+		//header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 		header("X-Sendfile: $nomer");
 		header("Content-type: image/png");
+		exit;
 	}
 }
 function getfeatureinfoJson(){

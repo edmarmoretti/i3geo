@@ -219,7 +219,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,geol
 inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */
-$i3geoBlFerramentas = array("carregamapa");
+$i3geoBlFerramentas = array("carregamapa","saiku");
 /*
 Variable: $ogrOutput
 
