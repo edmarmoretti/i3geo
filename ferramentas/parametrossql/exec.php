@@ -1,6 +1,7 @@
 <?php
-exit;
-include_once(dirname(__FILE__)."/../inicia.php");
+include(dirname(__FILE__)."/../safe.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+$tema =  basename($_GET["tema"]);
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -130,19 +131,19 @@ switch (strtoupper($funcao))
 	 * Utilizado para pegar a lista de valores que sera apresentada ao usuario
 	 */
 	case "INCLUDEPROG":
-		//evita redirecoina o programa para algum lugar indevido
-		$prog = str_replace(".php","",$prog);
-		$prog = str_replace(".","",$prog).".php";
-		if(file_exists($locaplic."/".$prog)){
-			include($locaplic."/".$prog);
-		}
+		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+		$protocolo = $protocolo[0];
+		$protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
+		$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
+		$urli3geo = str_replace("/ferramentas/parametrossql/exec.php","",$protocolo.$_SERVER["PHP_SELF"]);
+		$handle = curl_init();
+		curl_setopt( $handle, CURLOPT_URL, $urli3geo."/".$_GET["prog"]);
+		curl_setopt( $handle, CURLOPT_HEADER, false );
+		curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+		$retorno = curl_exec( $handle );
+		curl_close( $handle );
+		$retorno = json_decode($retorno,true);
 		break;
 }
-if (!connection_aborted()){
-	cpjson($retorno);
-}
-else{
-	exit();
-}
-
+cpjson($retorno);
 ?>

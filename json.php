@@ -440,7 +440,7 @@ function processaPluginI3geo(){
 							$plugin[] = $temp[0];
 						}
 						elseif ($c["prog"] != ""){
-							$plugin[] = execProg($locaplic."/".$c["prog"]);
+							$plugin[] = execProg($c["prog"]);
 						}
 					}
 				}
@@ -467,9 +467,16 @@ function processaPluginI3geo(){
 }
 //utilizada para obter os dados default quando se utiliza o plugin parametrossql
 function execProg($prog){
-	include($prog);
 	//$retorno variavel deve ser retornada pelo programa $prog
 	//veja como exemplo i3geo/aplicmap/daods/listaano.php
+	global $urli3geo;
+	$handle = curl_init();
+	curl_setopt( $handle, CURLOPT_URL, $urli3geo."/".$prog);
+	curl_setopt( $handle, CURLOPT_HEADER, false );
+	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+	$str = curl_exec( $handle );
+	curl_close( $handle );
+	$retorno = json_decode($str,true);
 	return $retorno[0]["v"];
 }
 function converteenc($texto){

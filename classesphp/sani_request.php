@@ -3,7 +3,7 @@ if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])){
 	exit;
 }
 error_reporting(0);
-$bl = array("password","select","_decode","php","eval","passthru","shell_exec","escapeshellarg","escapeshellcmd","proc_close","proc_open","dl","popen","contents","delete","drop","update","insert","exec","system",";");
+$bl = array("exec ","exec(","password","select","_decode","passthru","shell_exec","escapeshellarg","escapeshellcmd","proc_close","proc_open","dl","popen","contents","delete","drop","update","insert","system",";");
 if (isset($_GET)){
 	foreach(array_keys($_GET) as $k)	{
 		$k = str_ireplace($bl,"",$k);
@@ -16,7 +16,6 @@ if (isset($_GET)){
 	}
 }
 //array(3) { ["cpaint_function"]=> string(8) "criaMapa" ["cpaint_argument"]=> array(1) { [0]=> string(54) ""funcao=criaMapa&&desligar=mundo&interface=openlayers"" } ["cpaint_response_type"]=> string(4) "JSON" }
-
 if (isset($_POST)){
 	if (isset($_POST["cpaint_argument"]) && $_POST["cpaint_argument"][0] != "")
 	{
@@ -28,7 +27,6 @@ if (isset($_POST)){
 		else{
 			$argumento_ = str_replace("\"","",$argumento_);
 		}
-
 		$argumento_ = explode('"',$argumento_);
 		$argumento_ = implode("&",$argumento_);
 		$parametros_ = explode("&",$argumento_);

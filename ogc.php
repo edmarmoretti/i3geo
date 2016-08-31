@@ -78,6 +78,7 @@ ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 
 */
 include(dirname(__FILE__)."/classesphp/sani_request.php");
+include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
 $_GET = array_merge($_GET,$_POST);
 
@@ -768,7 +769,6 @@ else{
 	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
 	//verifica se existem layers com plugin definido e processa conforme o tipo de plugin
-
 	processaPluginI3geo();
 	//
 	//caso seja download ou json ou csv
@@ -1455,7 +1455,7 @@ function exportaCsv(){
 		$linhas[] = implode(",",$items).",wkt";
 	}
 	for ($i = 0; $i < $res_count; $i++){
-		if($versao == 6){
+		if($versao >= 6){
 			$shape = $layer->getShape($layer->getResult($i));
 		}
 		else{
@@ -1497,7 +1497,7 @@ function exportaGeojson(){
 
 	$features = array();
 	for ($i = 0; $i < $res_count; $i++){
-		if($versao == 6){
+		if($versao >= 6){
 			$shape = $layer->getShape($layer->getResult($i));
 		}
 		else{
@@ -1540,7 +1540,6 @@ function converteenc($texto){
 }
 function processaPluginI3geo(){
 	global $oMap, $locaplic;
-	return;
 	$numlayers = $oMap->numlayers;
 	for ($i=0;$i < $numlayers;$i++){
 		$l = $oMap->getlayer($i);
@@ -1573,7 +1572,7 @@ function processaPluginI3geo(){
 								$plugin[] = $temp[0];
 							}
 							elseif ($c["prog"] != ""){
-								$plugin[] = execProg($locaplic."/".$c["prog"]);
+								$plugin[] = execProg($c["prog"]);
 							}
 						}
 					}
@@ -1601,10 +1600,16 @@ function processaPluginI3geo(){
 }
 //utilizada para obter os dados default quando se utiliza o plugin parametrossql
 function execProg($prog){
-	return;
-	include($prog);
 	//$retorno variavel deve ser retornada pelo programa $prog
 	//veja como exemplo i3geo/aplicmap/daods/listaano.php
+	global $urli3geo;
+	$handle = curl_init();
+	curl_setopt( $handle, CURLOPT_URL, $urli3geo."/".$prog);
+	curl_setopt( $handle, CURLOPT_HEADER, false );
+	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+	$str = curl_exec( $handle );
+	curl_close( $handle );
+	$retorno = json_decode($str,true);
 	return $retorno[0]["v"];
 }
 ?>

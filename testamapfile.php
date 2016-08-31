@@ -104,7 +104,7 @@ if ($tipo == "")
 	echo '<script>';
 	echo 'function roda(){window.location.href = "?map="+document.getElementById("nomemap").value;}';
 	echo 'function rodaTabela(){window.location.href = window.location.href+"&tabela";}';
-	echo 'i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";';
+	echo 'i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://" + window.location.host + "/'.basename(dirname(__FILE__)).'";';
 	echo '</script>';
 	echo '<script src="admin/js/core.js"></script>';
 	echo '<script src="admin/dicionario/core.js"></script>';

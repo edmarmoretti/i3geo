@@ -26,4 +26,5 @@ $retorno = array(
 		"v" => "1990"
 	)
 );
+echo json_encode($retorno);
 ?>

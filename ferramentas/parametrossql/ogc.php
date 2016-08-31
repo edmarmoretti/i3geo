@@ -1,5 +1,4 @@
 <?php
-exit;
 /**
 Esse programa e uma adaptacao do codigo i3geo/ogc.php
 E utilizado no mashup (i3geo/mashup) nas camadas que sao configuradas cm o plugin parametrossql
@@ -9,10 +8,12 @@ A diferenca e que esse servico processa o parametro "plugin", aplicando os filtr
 no plugin parametrossql
  */
 $cache = true;
-include(dirname(__FILE__)."/classesphp/sani_request.php");
+include(dirname(__FILE__)."/../../classesphp/sani_request.php");
+include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $_GET = array_merge($_GET,$_POST);
+$plugin = $_GET["plugin"];
 $projDefault = pegaProjecaoDefault();
 
 $tema = basename($_GET["tema"]);
@@ -167,7 +168,6 @@ else{
 		}
 		$chaves = implode(",",$chaves);
 		$filtro = $l->getFilterString();
-
 		$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--"),"",$chaves);
 		$chaves = explode(",",$chaves);
 		$n = count($chaves);
@@ -185,7 +185,7 @@ else{
 						$plugin[] = $temp[0];
 					}
 					elseif ($c["prog"] != ""){
-						$plugin[] = execProg($locaplic."/".$c["prog"]);
+						$plugin[] = execProg($c["prog"]);
 					}
 				}
 			}
@@ -206,7 +206,6 @@ else{
 		if($filtro != ""){
 			$l->setfilter($filtro);
 		}
-
 		$l->set("data",$data);
 		//acrecenta-se um md5 apos o nome caso seja necessario gerar cache
 		if($cache == true){
@@ -577,11 +576,17 @@ function salvaCacheImagem($cachedir,$map,$tms, $plugin, $tema){
 	exit;
 }
 function execProg($prog){
-	$prog = str_replace(".php","",$prog);
-	$prog = str_replace(".","",$prog).".php";
-	include($prog);
 	//$retorno variavel deve ser retornada pelo programa $prog
 	//veja como exemplo i3geo/aplicmap/daods/listaano.php
+	global $urli3geo;
+	$u = str_replace("/ferramentas/parametrossql","",$urli3geo);
+	$handle = curl_init();
+	curl_setopt( $handle, CURLOPT_URL, $u."/".$prog);
+	curl_setopt( $handle, CURLOPT_HEADER, false );
+	curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);
+	$str = curl_exec( $handle );
+	curl_close( $handle );
+	$retorno = json_decode($str,true);
 	return $retorno[0]["v"];
 }
 ?>
