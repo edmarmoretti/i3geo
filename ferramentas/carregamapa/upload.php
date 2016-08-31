@@ -1,4 +1,5 @@
 <?php
+exit;
 require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
@@ -37,13 +38,6 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 	$Arquivo = htmlspecialchars($Arquivo, ENT_QUOTES);
 
 	verificaNome($Arquivo);
-	/*
-	$statusNome = 1;
-	if( (ereg('[^a-zA-Z0-9\.]',$Arquivo)) || (!ereg('\.map$',$Arquivo)) )
-	{$statusNome = 0;}
-	if($statusNome != 1)
-	{echo "<p class='paragrafo' >Arquivo inv&aacute;lido.!";paraAguarde();exit;}
-	*/
 
 	$checkphp = fileContemString($_FILES['i3GEOcarregamapafilemap']['tmp_name'],"<?");
 	if($checkphp == true){
@@ -53,14 +47,15 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 	if($checkphp == true){
 		exit;
 	}
-
 	$nome = basename($Arquivo);
 	$arqtemp = $dirmap."/".$Arquivo;
 	$status =  move_uploaded_file($_FILES['i3GEOcarregamapafilemap']['tmp_name'],$dirmap."/".$Arquivo);
-	if($status != 1)
-	{echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo";paraAguarde();exit;}
-	if($status == 1)
-	{
+	if($status != 1){
+		echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo";
+		paraAguarde();
+		exit;
+	}
+	if($status == 1){
 		echo "<p class='paragrafo' >Arquivo enviado. Verificando o mapa...</p>";
 
 		$mapt = ms_newMapObj($dirmap."/".$Arquivo);
@@ -75,8 +70,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 		$map->save($map_file);
 		$img = $map->draw();
 		$numlayers = $mapt->numlayers;
-		for ($i=0;$i < $numlayers;$i++)
-		{
+		for ($i=0;$i < $numlayers;$i++){
 			$layer = $mapt->getlayer($i);
 			ms_newLayerObj($map, $layer);
 			$layertemp = $map->getlayerbyname($layer->name);
@@ -90,12 +84,13 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 			$layertemp->setmetadata("permitekml","nao");
 			$layertemp->setmetadata("permiteogc","nao");
 			$layertemp->setmetadata("animagif","");
+			$layertemp->setmetadata("tme","");
+			$layertemp->setmetadata("storymap","");
 			$layertemp->setmetadata("editorsql","nao");
 			$layertemp->setmetadata("EDITAVEL","nao");
 			$layertemp->setmetadata("PLUGINI3GEO","");
 			$layertemp->setmetadata("arquivodownload","");
-			if ($testa == 1)
-			{
+			if ($testa == 1){
 				echo "<p class='paragrafo' >Problemas em ".($layer->name).". Removido.</p><br>";
 				$layertemp->set("status",MS_DELETE);
 			}
@@ -111,11 +106,13 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 		echo "<script>window.parent.i3GEO.navega.zoomExt(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,'nenhum','".$extatual."');</script>";
 
 	}
-	else
-	{echo "<p class='paragrafo' >Erro ao enviar o arquivo.";}
+	else{
+		echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
+	}
 }
-else
-{echo "<p class='paragrafo' >Erro ao enviar o arquivo.";}
+else{
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
+}
 paraAguarde();
 function paraAguarde(){
 	echo "<script>window.parent.i3GEOF.carregaMapa.aguarde.visibility='hidden';</script>";

@@ -41,27 +41,27 @@ if (typeof (i3GEOF) === 'undefined') {
 
 /*
  * Classe: i3GEOF.storymap
- * 
+ *
  * Camadas podem ter as definicoes default de parametros armazenadas no metadata storymap Esse metadata e mantido no objeto
  * i3GEO.arvoreDeCamadas.CAMADAS
- * 
+ *
  * Os campos definidos pelo usuario podem ser salvos no mapfile caso o usuario esteja logado
- * 
+ *
  * Veja tambem i3geo/ferramentas/atalhosedicao
  */
 i3GEOF.storymap =
 	{
 		/*
 		 * Variavel: tema
-		 * 
+		 *
 		 * Tema que ser&aacute; utilizado
-		 * 
+		 *
 		 * Type: {string}
 		 */
 		tema : i3GEO.temaAtivo,
 		/*
 		 * Variavel: aguarde
-		 * 
+		 *
 		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 		 */
 		aguarde : "",
@@ -84,9 +84,9 @@ i3GEOF.storymap =
 		},
 		/*
 		 * Function: iniciaDicionario
-		 * 
+		 *
 		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 * 
+		 *
 		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
 		 */
 		iniciaDicionario : function() {
@@ -101,11 +101,11 @@ i3GEOF.storymap =
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
@@ -207,11 +207,11 @@ i3GEOF.storymap =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
@@ -220,7 +220,7 @@ i3GEOF.storymap =
 		},
 		/*
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function(tema) {
@@ -277,7 +277,7 @@ i3GEOF.storymap =
 						+ "&tema="
 						+ i3GEOF.storymap.tema
 						+ "&storymap="
-						+ i3GEO.util.base64encode(j)
+						+ j
 						+ "&funcao=inclui";
 
 				retorno = function(retorno) {

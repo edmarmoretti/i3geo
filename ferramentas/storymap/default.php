@@ -1,24 +1,24 @@
 <?php
-exit;
+include (dirname(__FILE__)."/../../classesphp/sani_request.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),"",false);
 //exemplo: http://localhost/i3geo/ferramentas/storymap/default.php?tema=_lreal&layers=_lbiomashp _llocali
 //temas do i3geo podem ser incluidos em &layers separados por espacos
-	if(empty($_GET["tema"])){
-		echo "&tema nao definido";
-		exit;
-	}
-	//echo dirname(__FILE__)."/../../temas/".$_GET["tema"];
-	if(!file_exists(dirname(__FILE__)."/../../temas/".$_GET["tema"].".map")){
-		echo "&tema nao existe";
-		exit;
-	}
-	//$map_type = "stamen:watercolor";
-	$map_type = "stamen:toner-lite";
-	if($_GET["layers"] != ""){
-		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-		$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].":". $_SERVER['SERVER_PORT'];
-		$url .= str_replace("/ferramentas/storymap/default.php","",$_SERVER["PHP_SELF"]);
-		$map_type = $url."/ogc.php?tema=".strip_tags($_GET["layers"])."&DESLIGACACHE=&Z={z}&X={x}&Y={y}";
-	}
+if(empty($_GET["tema"])){
+	echo "&tema nao definido";
+	exit;
+}
+if(!file_exists(dirname(__FILE__)."/../../temas/".$_GET["tema"].".map")){
+	echo "&tema nao existe";
+	exit;
+}
+$map_type = "stamen:toner-lite";
+if($_GET["layers"] != ""){
+	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].":". $_SERVER['SERVER_PORT'];
+	$url .= str_replace("/ferramentas/storymap/default.php","",$_SERVER["PHP_SELF"]);
+	$map_type = $url."/ogc.php?tema=".strip_tags($_GET["layers"])."&DESLIGACACHE=&Z={z}&X={x}&Y={y}";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">

@@ -1,6 +1,7 @@
 <?php
-exit;
 include_once(dirname(__FILE__)."/../../admin/php/login.php");
+include("../blacklist.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),"",false);
 $funcoesEdicao = array(
 		"REMOVE",
 		"INCLUI"
@@ -10,6 +11,7 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao. Tente fazer login novamente.");exit;
 	}
 }
+$tema = $_POST["tema"];
 error_reporting(0);
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
@@ -37,10 +39,11 @@ switch (strtoupper($funcao))
 		$retorno = "ok";
 	break;
 	case "INCLUI":
+		restauraCon($map_file,$postgis_mapa);
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($tema);
 		if($l != ""){
-			$l->setmetadata("storymap",base64_decode($storymap));
+			$l->setmetadata("storymap",$storymap);
 			$mapa->save($map_file);
 		}
 		$arq = $locaplic."/temas/".$tema.".map";
@@ -48,7 +51,7 @@ switch (strtoupper($funcao))
 			$mapa = ms_newMapObj($arq);
 			$l = $mapa->getlayerbyname($tema);
 			if($l != ""){
-				$l->setmetadata("storymap",base64_decode($storymap));
+				$l->setmetadata("storymap",str_replace("\\","'",$_POST["storymap"]));
 				$mapa->save($arq);
 				removeCabecalho($arq);
 			}
@@ -120,6 +123,5 @@ function removeCabecalho($arq,$symbolset=true)
 			fwrite($handle,$f);
 	}
 	fclose($handle);
-	chmod($arq, 0666);
 }
 ?>

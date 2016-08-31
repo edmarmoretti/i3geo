@@ -124,6 +124,5 @@ function removeCabecalho($arq,$symbolset=true)
 			fwrite($handle,$f);
 	}
 	fclose($handle);
-	chmod($arq, 0666);
 }
 ?>
