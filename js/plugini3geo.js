@@ -104,6 +104,13 @@ i3GEO.pluginI3geo =
 				return false;
 			}
 		},
+		clickArvoreDeCamadas : function(camada) {
+			if (camada.plugini3geo && camada.plugini3geo != "") {
+				return i3GEO.pluginI3geo[camada.plugini3geo.plugin].clickArvoreDeCamadas(camada.name);
+			} else {
+				return false;
+			}
+		},
 		linkAjuda : function(plugin) {
 			return i3GEO.pluginI3geo[plugin].linkAjuda();
 		},
@@ -251,6 +258,9 @@ i3GEO.pluginI3geo =
 			 * utilizado para reabrir o formulario de parametros
 			 */
 			iconeArvoreDeCamadas : function(nomecamada) {
+				return false;
+			},
+			clickArvoreDeCamadas : function(nomecamada) {
 				return false;
 			},
 			googlemaps : {
@@ -519,6 +529,9 @@ i3GEO.pluginI3geo =
 			 * utilizado para reabrir o formulario de parametros
 			 */
 			iconeArvoreDeCamadas : function(nomecamada) {
+				return false;
+			},
+			clickArvoreDeCamadas : function(nomecamada) {
 				return false;
 			},
 			googlemaps : {
@@ -833,6 +846,9 @@ i3GEO.pluginI3geo =
 			iconeArvoreDeCamadas : function(nomecamada) {
 				return false;
 			},
+			clickArvoreDeCamadas : function(nomecamada) {
+				return false;
+			},
 			googlemaps : {
 				aplicaPropriedades : function(camada) {
 					camada.sel = "nao";
@@ -1076,6 +1092,16 @@ i3GEO.pluginI3geo =
 						+ "src='"
 						+ i3GEO.configura.locaplic
 						+ "/imagens/branco.gif' />";
+				return icone;
+			},
+			//link na forma de texto para incluir no menu de contexto
+			clickArvoreDeCamadas : function(nomecamada) {
+				var icone =
+					"<a onclick='i3GEO.util.animaClique(this);"
+						+ "i3GEO.pluginI3geo.parametrossql.buscaParForm(\""
+						+ nomecamada
+						+ "\");return false;'"
+						+ ">Par&acirc;metros</a>"
 				return icone;
 			},
 			buscaParForm : function(nomecamada) {

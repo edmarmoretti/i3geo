@@ -1950,9 +1950,11 @@ i3GEO.arvoreDeCamadas =
 
 			//inclui o icone especifico quando o tema e baseado em algum plugin
 			if (tema.plugini3geo){
-				iconePlugin = i3GEO.pluginI3geo.iconeArvoreDeCamadas(tema);
+				iconePlugin = i3GEO.pluginI3geo.clickArvoreDeCamadas(tema);
 				if(iconePlugin){
-					html += iconePlugin;
+					hash.push({
+						text: iconePlugin
+					});
 				}
 			}
 			//inclui o icone de ferramentas que possuem parametros

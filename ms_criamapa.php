@@ -469,12 +469,7 @@ $_SESSION["i3georendermode"] = $i3georendermode_;
 $_SESSION["saikuUrl"] = $saikuUrl_;
 $_SESSION["logExec"] = $logExec_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
-//
-//pega todas as vari&aacute;veis da sess&atilde;o, mesmo as que foram definidas anteriormente
-//
-foreach(array_keys($_SESSION) as $k){
-	//eval("\$".$k."='".$_SESSION[$k]."';");
-}
+
 //sao arrays
 $postgis_mapa = $postgis_mapa_;
 $_SESSION["statusFerramentas"] = $statusFerramentas_;
@@ -806,11 +801,15 @@ Os temas devem estar em i3geo/temas
 */
 function incluiTemasIniciais(){
 	global $temasa,$mapn,$locaplic;
-	if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN')
-	{$temasdir = $locaplic."\\temas";}
-	else
-	{$temasdir = $locaplic."/temas";}
-	if (!isset($temasa)){$temasa = "";}
+	if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN'){
+		$temasdir = $locaplic."\\temas";
+	}
+	else {
+		$temasdir = $locaplic."/temas";
+	}
+	if (!isset($temasa)){
+		$temasa = "";
+	}
 	$temasa = str_replace(','," ",$temasa);
 	$alayers = explode(" ",$temasa);
 	$existeraster = false;
@@ -899,6 +898,7 @@ function incluiTemasIniciais(){
 						ms_newLayerObj($mapn, $layern);
 					}
 				}
+
 				if($extensao == ".php"){
 					//include_once($arqtemp);
 					//eval($arqt."(\$mapn);");

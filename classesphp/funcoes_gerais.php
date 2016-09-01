@@ -2891,13 +2891,15 @@ function cloneInlineSymbol($layern,$nmapa,$mapa){
 					if($simbolo->inmapfile == MS_TRUE || file_exists($nomesimbolo)){
 						$simbolon = new symbolObj($mapa, $nomesimbolo);
 						$simbolon->set("inmapfile",MS_TRUE);
+
 						$simbolon->setImagePath($simbolo->imagepath);
 						$simbolon->setPoints($simbolo->getPointsArray());
 						//$simbolon->setPattern($simbolo->getPatternArray());
 						$simbolon->set("type",$simbolo->type);
-						$simbolon->set("antialias",$simbolo->antialias);
+						//$simbolon->set("antialias",$simbolo->antialias);
 						$simbolon->set("character",$simbolo->character);
 						$simbolon->set("filled",$simbolo->filled);
+
 						//$simbolon->set("font",$simbolo->font);
 						//$simbolon->set("position",$simbolo->position);
 						$simbolon->set("sizex",$simbolo->sizex);

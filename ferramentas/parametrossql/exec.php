@@ -56,6 +56,7 @@ switch (strtoupper($funcao))
 		Aplica a substituicao de chaves pelos valores enviados no parametro $valores com os valores separados por virgulas na sequencia das chaves
 		*/
 	case "APLICAR":
+		$valores = $_GET["valores"];
 		$map = ms_newMapObj($map_file);
 		//pega o layer
 		$layer = $map->getlayerbyname($tema);
