@@ -241,7 +241,6 @@ if(strtolower($OUTPUTFORMAT) == "kmz"){
 	header("Location:".$urln);
 	exit;
 }
-$ogrOutput = $_GET["ogrOutput"];
 if(strtolower($OUTPUTFORMAT) == "kml" && $ogrOutput == false){
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
