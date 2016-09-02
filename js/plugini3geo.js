@@ -1101,7 +1101,7 @@ i3GEO.pluginI3geo =
 						+ "i3GEO.pluginI3geo.parametrossql.buscaParForm(\""
 						+ nomecamada
 						+ "\");return false;'"
-						+ ">Par&acirc;metros</a>"
+						+ ">Par&acirc;metros</a>";
 				return icone;
 			},
 			buscaParForm : function(nomecamada) {

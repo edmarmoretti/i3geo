@@ -91,14 +91,9 @@ i3GEOF.salvaMapa = {
 		onde = $i(onde);
 		if(onde){
 			try{
-				var map_file = i3GEO.parametros.mapfile,
-					teste = i3GEO.configura.locaplic+"/testamapfile.php?map="+map_file,
-					local = map_file.split("ms_tmp");
-					down = i3GEO.configura.locaplic+"/ferramentas/salvamapa/forcedownload.php?file="+map_file;
-				local = i3GEO.configura.locaplic+"/../ms_tmp"+local[1];
+				var down = i3GEO.configura.locaplic+"/ferramentas/salvamapa/forcedownload.php?g_sid=" + i3GEO.configura.sid;
 				onde.innerHTML = "" +
 					"<a style='line-height:20px;font-size:12px;' href='"+down+"' target='_blank' >"+$trad('baixaArquivo',i3GEOF.salvaMapa.dicionario)+"</a><br>" +
-					"<a style='line-height:20px;font-size:12px;' href='"+teste+"' target='_blank' >"+$trad('testaArquivo',i3GEOF.salvaMapa.dicionario)+"</a>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}

@@ -25,27 +25,7 @@ $nomeImagem = str_replace(".","",$nomeImagem).".png";
 
 if(!file_exists($nomeImagem)){
 	$mapa = ms_newMapObj($base);
-	if (isset($postgis_mapa)){
-		if ($postgis_mapa != ""){
-			$numlayers = $mapa->numlayers;
-			for ($i=0;$i < $numlayers;$i++){
-				$layern = $mapa->getlayer($i);
-				if (!empty($postgis_mapa)){
-					if ($layern->connectiontype == MS_POSTGIS){
-						$lcon = $layern->connection;
-						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
-							if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
-							{$layern->set("connection",$postgis_mapa);
-							}
-							else{
-								$layern->set("connection",$postgis_mapa[$lcon]);
-							}
-						}
-					}
-				}
-			}
-		}
-	}
+	substituiConObj($mapa,$postgis_mapa);
 	$mapa->setsize($_GET["w"],$_GET["h"]);
 	$sca = $mapa->scalebar;
 	$sca->set("status",MS_OFF);
@@ -53,10 +33,6 @@ if(!file_exists($nomeImagem)){
 	$objImagemM->saveImage($nomeImagem);
 }
 ob_clean();
-header('Content-Length: '.filesize($nomeImagem));
 header('Content-Type: image/png');
-header('Cache-Control: public, max-age=22222222');
-header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-//fpassthru(fopen($nomeImagem, 'rb'));
 readfile($nomeImagem);
 ?>
