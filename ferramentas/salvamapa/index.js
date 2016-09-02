@@ -93,7 +93,7 @@ i3GEOF.salvaMapa = {
 			try{
 				var down = i3GEO.configura.locaplic+"/ferramentas/salvamapa/forcedownload.php?g_sid=" + i3GEO.configura.sid;
 				onde.innerHTML = "" +
-					"<a style='line-height:20px;font-size:12px;' href='"+down+"' target='_blank' >"+$trad('baixaArquivo',i3GEOF.salvaMapa.dicionario)+"</a><br>" +
+					"<a style='line-height:20px;font-size:12px;' href='"+down+"' target='_blank' >"+$trad('baixaArquivo',i3GEOF.salvaMapa.dicionario)+"</a><br>";
 			}
 			catch(erro){i3GEO.janela.tempoMsg(erro);}
 		}
