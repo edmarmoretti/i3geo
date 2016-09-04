@@ -221,10 +221,41 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 }
 //$_COOKIE = array();
 //
-//quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute; sendo utilizado como um include em classesphp/mapa_controle.php
+//quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute;
+//sendo utilizado como um include em classesphp/mapa_controle.php
 //
-
+$parurl = array_merge($_GET,$_POST);
 ms_ResetErrorList();
+$base = $parurl["base"];
+$temasa = $parurl["temasa"];
+$layers = $parurl["layers"];
+$desligar = $parurl["desligar"];
+$mapext = $parurl["mapext"];
+$executa = "";//$parurl["executa"];
+$perfil = $parurl["perfil"];
+$caminho = $parurl["caminho"];
+$pontos = $parurl["pontos"];
+$nometemapontos = $parurl["nometemapontos"];
+$linhas = $parurl["linhas"];
+$nometemalinhas = $parurl["nometemalinhas"];
+$poligonos = $parurl["poligonos"];
+$nometemapoligonos = $parurl["nometemapoligonos"];
+$simbolo = $parurl["simbolo"];
+$corsimbolo = $parurl["corsimbolo"];
+$tamanhosimbolo = $parurl["tamanhosimbolo"];
+$wkt = $parurl["wkt"];
+$nometemawkt = $parurl["nometemawkt"];
+$idioma = $parurl["idioma"];
+$kmlurl = $parurl["kmlurl"];
+$url_wms = $parurl["url_wms"];
+$layer_wms = $parurl["layer_wms"];
+$style_wms = $parurl["style_wms"];
+$nome_wms = $parurl["nome_wms"];
+$srs_wms = $parurl["srs_wms"];
+$image_wms = $parurl["image_wms"];
+$versao_wms = $parurl["versao_wms"];
+$gvsigview = $parurl["gvsigview"];
+$restauramapa = $parurl["restauramapa"];
 if(!isset($funcao)){
 	ob_end_clean();
 	/*
@@ -240,38 +271,8 @@ if(!isset($funcao)){
 	 Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
 	 */
 	include_once (dirname(__FILE__)."/classesphp/sani_request.php");
-	$parurl = array_merge($_GET,$_POST);
-	$base = $parurl["base"];
-	$temasa = $parurl["temasa"];
-	$layers = $parurl["layers"];
-	$desligar = $parurl["desligar"];
-	$mapext = $parurl["mapext"];
-	$executa = "";//$parurl["executa"];
+
 	$interface = $parurl["interface"];
-	$perfil = $parurl["perfil"];
-	$caminho = $parurl["caminho"];
-	$pontos = $parurl["pontos"];
-	$nometemapontos = $parurl["nometemapontos"];
-	$linhas = $parurl["linhas"];
-	$nometemalinhas = $parurl["nometemalinhas"];
-	$poligonos = $parurl["poligonos"];
-	$nometemapoligonos = $parurl["nometemapoligonos"];
-	$simbolo = $parurl["simbolo"];
-	$corsimbolo = $parurl["corsimbolo"];
-	$tamanhosimbolo = $parurl["tamanhosimbolo"];
-	$wkt = $parurl["wkt"];
-	$nometemawkt = $parurl["nometemawkt"];
-	$idioma = $parurl["idioma"];
-	$kmlurl = $parurl["kmlurl"];
-	$url_wms = $parurl["url_wms"];
-	$layer_wms = $parurl["layer_wms"];
-	$style_wms = $parurl["style_wms"];
-	$nome_wms = $parurl["nome_wms"];
-	$srs_wms = $parurl["srs_wms"];
-	$image_wms = $parurl["image_wms"];
-	$versao_wms = $parurl["versao_wms"];
-	$gvsigview = $parurl["gvsigview"];
-	$restauramapa = $parurl["restauramapa"];
 }
 
 include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");

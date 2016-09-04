@@ -18,9 +18,9 @@
 			top: 10px;
 		}
 	</style>
-	<script src="../classesjs/i3geo6.js"></script>
+	<script src="../classesjs/i3geonaocompacto.js"></script>
 	<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
-	<link rel="stylesheet" type="text/css" href="../css/black.css">
+	<link rel="stylesheet" type="text/css" href="../css/black6.css">
 </head>
 <body id="i3geo" style='margin-left: 7px; background: white;'>
 	<!-- inclui o nome do usuario logado -->
@@ -48,11 +48,19 @@
 				<table style="width: 100%; height: 28px">
 					<tr>
 						<td class=fundoRodape style="width: 25%">
+							<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
+							<div id=escala style="margin: auto; text-align: right; left: 15px;"></div>
 						</td>
 						<td class=fundoRodape style="width: 5%"></td>
 						<td class=fundoRodape style="width: 40%">
+							<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
+							<div id=localizarxy style="margin: auto; text-align: left; font-size: 10px; display: inline-table"></div>
 						</td>
 						<td class=fundoRodape style="width: 20%">
+							<!-- bot&atilde;o de compartilhamento em redes sociais-->
+							<!--<div id=i3GEOcompartilhar style="width: 170px; margin: auto; text-align: left; padding-top: 1px"></div> -->
+							<!-- aqui ser&aacute; inclu&iacute;do o contador de tempo quando o temporizador de redesenho do mapa estiver ativo -->
+							<div id=tempoRedesenho style="z-index: 100; position: absolute; top: 0px; color: green; background-color: black; width: 50px; display: none"></div>
 						</td>
 						<!-- aqui ser&atilde;o inclu&iacute;das as bandeiras que permitem a troca de idioma -->
 						<td class=fundoRodape style="width: 10%;">

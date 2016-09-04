@@ -9,13 +9,22 @@ MAP
       "TIP"	"CD_LEGENDA"
       "CACHE"	"sim"
       "CLASSE"	"SIM"
+      "olopacity"	""
       "permitekmz"	"sim"
+      "gmopacity"	""
+      "gmstatus"	""
       "ITENSDESC"	"Bioma Teste de acentuação"
       "ESCALA"	"1000000"
       "TILES"	"SIM"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
       "extensao"	"-76 -39 -29 9"
+      "nomeoriginal"	""
+      "olstatus"	""
       "permitedownload"	"sim"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
+      "PLUGINI3GEO"	""
       "metaestat"	""
       "download"	"sim"
       "itembuscarapida"	"CD_LEGENDA"
@@ -38,7 +47,7 @@ MAP
       NAME "CAATINGA"
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
       STYLE
-        COLOR 4 180 226
+        COLOR 247 166 4
         OUTLINECOLOR 255 255 255
       END # STYLE
       TITLE ""

@@ -2,6 +2,13 @@
 include(dirname(__FILE__)."/../safe.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 //
+//o usuario deve ter entrado pelo i3Geo
+//
+if(empty($fingerprint)){
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
+	return;
+}
+//
 //faz uma copia temporaria do mapfile
 //
 $arquivo = dirname($map_file)."/mapfile_".nomeRandomico(6).".map";
@@ -22,18 +29,18 @@ for ($i=0;$i < $c;++$i){
 	if($ct != MS_INLINE && $ct != MS_WMS && $ct != MS_GRATICULE){
 		$l->set("connection","");
 		$l->set("data","");
-	}
-	//
-	//remove os metadata
-	//
-	$hashTable = $l->metadata;
-	$key = null;
-	while ($key = $hashTable->nextkey($key)){
-		if(!in_array(strtolower($key),array("tema","nomeoriginal"))){
-			//echo "Key: ".$key." value: ".$hashTable->get($key)."<br/>";
-			$l->setmetadata($key,"");
-			if($ct != MS_WMS){
-				$remover[] = strtoupper($key);
+		//
+		//remove os metadata
+		//
+		$hashTable = $l->metadata;
+		$key = null;
+		while ($key = $hashTable->nextkey($key)){
+			if(!in_array(strtolower($key),array("tema","nomeoriginal"))){
+				//echo "Key: ".$key." value: ".$hashTable->get($key)."<br/>";
+				$l->setmetadata($key,"");
+				if($ct != MS_WMS){
+					$remover[] = strtoupper($key);
+				}
 			}
 		}
 	}
@@ -54,15 +61,15 @@ function removeCabecalho($arq,$remover){
 	$handle = fopen($arq, "r");
 	if ($handle){
 		$cabeca = array();
-		$cabeca[] = "MAP\n";
+		//$cabeca[] = "MAP\n";
 		$grava = false;
 		while (!feof($handle)){
 			$linha = fgets($handle);
 			if(strpos(strtoupper($linha),"SYMBOLSET") !== false){
-				$cabeca[] = '"..'.explode($pasta,$linha)[1];
+				//$cabeca[] = '"..'.explode($pasta,$linha)[1];
 			}
 			if(strpos(strtoupper($linha),"FONTSET") !== false){
-				$cabeca[] = '"..'.explode($pasta,$linha)[1];
+				//$cabeca[] = '"..'.explode($pasta,$linha)[1];
 			}
 			if(strtoupper(trim($linha)) == "LAYER"){
 				$grava = true;

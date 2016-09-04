@@ -46,7 +46,9 @@ $id = $_GET["id"];
 testaSafeNumerico([$id]);
 
 $codigoMap = $_GET["codigoMap"];
+$codigomap = $_GET["codigomap"];
 $codigoLayer = $_GET["codigoLayer"];
+$nomelayer = $_GET["nomelayer"];
 $movimento = $_GET["movimento"];
 
 $funcoesEdicao = array(

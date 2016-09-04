@@ -1,6 +1,9 @@
 <?php
 include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
+//
+//$fingerprint e usado para verificar se o usuario veio do i3geo
+//
 if(!empty($_GET["g_sid"])){
 	$g_sid = $_GET["g_sid"];
 	session_name("i3GeoPHP");
@@ -24,6 +27,7 @@ if(!empty($_GET["g_sid"])){
 }
 else{
 	$g_sid = "";
+	$fingerprint = "";
 }
 //variaveis mais utilizadas
 $tema = $_GET["tema"];
@@ -32,7 +36,7 @@ $funcao = $_GET["funcao"];
 
 include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 
-if(isset($fingerprint) && !empty($g_sid))	{
+if(!empty($fingerprint) && !empty($g_sid))	{
 	$f = explode(",",$fingerprint);
 	if($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id())){
 		cpjson(". Tentativa de acesso nao permitida. Inicie um novo mapa.");

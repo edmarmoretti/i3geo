@@ -1,18 +1,14 @@
 <?php
-exit;
-require_once(dirname(__FILE__)."/../../classesphp/pega_variaveis.php");
-require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-session_name("i3GeoPHP");
-if (isset($g_sid)){
-	session_id($g_sid);
-}
-session_start();
-$map_file = $_SESSION["map_file"];
-$postgis_mapa = $_SESSION["postgis_mapa"];
-require_once (dirname(__FILE__)."/../../ms_configura.php");
-include("../blacklist.php");
+include(dirname(__FILE__)."/../safe.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+//
+//o usuario deve ter entrado pelo i3Geo
+//
+if(empty($fingerprint)){
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
+	return;
+}
+include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 
 if(isset($logExec) && $logExec["upload"] == true){
 	i3GeoLog("prog: carregamapa filename:" . $_FILES['i3GEOcarregamapafilemap']['name'],$dir_tmp);
@@ -27,8 +23,7 @@ if(isset($logExec) && $logExec["upload"] == true){
 <body bgcolor="white" style="background-color:white">
 <p>
 <?php
-if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES['i3GEOcarregamapafilemap']['name'])) < 200)
-{
+if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES['i3GEOcarregamapafilemap']['name'])) < 200){
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	$dirmap = $dir_tmp;
 	$Arquivo = $_FILES['i3GEOcarregamapafilemap']['name'];
@@ -47,8 +42,6 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 	if($checkphp == true){
 		exit;
 	}
-	$nome = basename($Arquivo);
-	$arqtemp = $dirmap."/".$Arquivo;
 	$status =  move_uploaded_file($_FILES['i3GEOcarregamapafilemap']['tmp_name'],$dirmap."/".$Arquivo);
 	if($status != 1){
 		echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo";
@@ -57,54 +50,98 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 	}
 	if($status == 1){
 		echo "<p class='paragrafo' >Arquivo enviado. Verificando o mapa...</p>";
+		$map = ms_newMapObj($map_file);
+		//
+		//muda o arquivo de simbolo
+		//
+		$s = file_get_contents($dirmap."/".$Arquivo);
+		$s = "MAP\n SYMBOLSET ".$map->symbolsetfilename."\nFONTSET ".$map->fontsetfilename."\n" . $s;
+
+		$handle = fopen($dirmap."/".$Arquivo, "w");
+		fwrite($handle,$s);
+		fclose($handle);
 
 		$mapt = ms_newMapObj($dirmap."/".$Arquivo);
-		$map = ms_newMapObj($map_file);
-
+		unlink($dirmap."/".$Arquivo);
+		//
 		//apaga os layers do mapa atual
+		//
 		$numlayers = $map->numlayers;
 		for ($i=0;$i < $numlayers;$i++)	{
 			$layer = $map->getlayer($i);
 			$layer->set("status",MS_DELETE);
 		}
 		$map->save($map_file);
-		$img = $map->draw();
+		//
+		//copia os layers do mapfile temporario para o mapfile em uso
+		//
 		$numlayers = $mapt->numlayers;
 		for ($i=0;$i < $numlayers;$i++){
-			$layer = $mapt->getlayer($i);
-			ms_newLayerObj($map, $layer);
-			$layertemp = $map->getlayerbyname($layer->name);
-			$st = $layertemp->status;
-			$layertemp->set("status",MS_DEFAULT);
-			$testa = $layertemp->draw($img);
-			$layertemp->set("status",$st);
-			$layertemp->setmetadata("permitekmz","nao");
-			$layertemp->setmetadata("permitedownload","nao");
-			$layertemp->setmetadata("download","nao");
-			$layertemp->setmetadata("permitekml","nao");
-			$layertemp->setmetadata("permiteogc","nao");
-			$layertemp->setmetadata("animagif","");
-			$layertemp->setmetadata("tme","");
-			$layertemp->setmetadata("storymap","");
-			$layertemp->setmetadata("editorsql","nao");
-			$layertemp->setmetadata("EDITAVEL","nao");
-			$layertemp->setmetadata("PLUGINI3GEO","");
-			$layertemp->setmetadata("arquivodownload","");
-			if ($testa == 1){
-				echo "<p class='paragrafo' >Problemas em ".($layer->name).". Removido.</p><br>";
-				$layertemp->set("status",MS_DELETE);
+			$layert = $mapt->getlayer($i);
+			//
+			//verifica se existe o tema em i3geo/temas
+			//
+			$arqoriginal = "";
+			if(file_exists($locaplic."/temas/".$layert->name.".map")){
+				$nomeoriginal = $layert->name;
+				$arqoriginal = $locaplic."/temas/".$layert->name.".map";
+			} elseif (file_exists($locaplic."/temas/".$layert->getmetadata("nomeoriginal").".map")){
+				$nomeoriginal = $layert->getmetadata("nomeoriginal");
+				$arqoriginal = $locaplic."/temas/".$layert->getmetadata("nomeoriginal").".map";
+			}
+			if($arqoriginal != ""){
+				//
+				//o tema existe
+				//
+				$mapo = ms_newMapObj($arqoriginal);
+				$layero = $mapo->getlayerbyname($nomeoriginal);
+				$layero->setmetadata("cache","nao");
+				//
+				//remove as classes do layer original
+				//
+				$nclasses = $layero->numclasses;
+				if ($nclasses > 0){
+					for ($j=0; $j < $nclasses; ++$j){
+						$classe = $layero->getClass($j);
+						$classe->set("status",MS_DELETE);
+					}
+				}
+				//
+				//copia as classes do layer do upload para o original
+				//
+				$nclasses = $layert->numclasses;
+				if ($nclasses > 0){
+					for ($j=0; $j < $nclasses; ++$j){
+						$classe = $layert->getClass($j);
+						//adiciona a classe no original
+						ms_newClassObj($layero, $classe);
+					}
+				}
+				//
+				//ajusta parametros que o usuario pode ter modificado
+				//
+				if($layert->status == 2){
+					$layero->set("status",MS_DEFAULT);
+				}
+				else{
+					$layero->set("status",MS_OFF);
+				}
+
+				$layero->set("opacity",$layert->opacity);
+				$layero->setmetadata("TEMA",$layert->getmetadata("TEMA"));
+				//
+				//adiciona o layer ao mapa atual
+				//
+				ms_newLayerObj($map,$layero);
+			} elseif($layert->connectiontype == MS_INLINE || $layert->connectiontype == MS_WMS || $layert->connectiontype == MS_GRATICULE){
+				ms_newLayerObj($map,$layert);
 			}
 		}
-		$map->setmetadata("CUSTOMIZACOESINIT","");
 		$map->save($map_file);
-		restauraCon($map_file,$postgis_mapa);
-		unlink($dirmap."/".$Arquivo);
-		$e = $mapt->extent;
-		$extatual = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
+		validaAcessoTemas($map_file);
 		echo "<p class='paragrafo' >Ok. redesenhando.";
 		echo "<script>window.parent.i3GEO.atualiza();</script>";
-		echo "<script>window.parent.i3GEO.navega.zoomExt(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,'nenhum','".$extatual."');</script>";
-
+		//echo "<script>window.parent.i3GEO.navega.zoomExt(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,'nenhum','".$extatual."');</script>";
 	}
 	else{
 		echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
