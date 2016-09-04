@@ -1,0 +1,318 @@
+#Este mapfile e utilizado pelo i3geo na instalacao em servidores linux
+#Toda vez que o i3geo e iniciado, esse mapfile e considerado como o mapa basico.
+#Se vc quer alterar a aparência do mapa inicial, edite esse arquivo para refletir
+#o mapa desejado.
+#
+#Se vc quer adicionar temas, dê preferência por editar o arquivo menutemas/menutemas.xml
+#assim, as camadas ficam disponíveis no menu de adicao de temas do i3geo. Nao se esqueca
+#de criar o arquivo mapfile no diretorio i3geo/temas (veja a documentacao no wiki da
+#comunidade i3geo no Portal do Software Publico Brasileiro.
+#
+#Existem varios metadados que podem ser incluidos na definicao de cada LAYER e que sao especificos do i3geo,
+#Esses metadados possibilitam coisas como mostrar ou nao a legenda de um tema no mapa,
+#mostrar ou nao o tema na ferramenta de identificacao, etc.
+#A lista completa de metadados vc pode obter no wiki da comunidade
+#
+MAP
+	#
+	#edite os caminhos caso a aplicacao esteja instalada em um local diferente do default
+	#
+	FONTSET "/var/www/i3geo/symbols/fontes.txt"
+	SYMBOLSET "/var/www/i3geo/symbols/simbolosv7.sym"
+	SHAPEPATH "/var/www/geodados"
+	IMAGECOLOR 104 171 195
+	MAXSIZE 4096
+	#
+	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
+	#Esse tipo nao e adequado para imagens raster, mas o i3geo muda automaticamente
+	#para png1 quando um arquivo raster e adicionado ao mapa
+	#
+	IMAGETYPE AGG_Q
+	#Brasil
+	#EXTENT -76.5125927 -39.3925675209 -29.5851853 9.49014852081
+	EXTENT -140 -60 140 60
+	SIZE 480 500
+	STATUS ON
+	UNITS DD
+	#
+	#tambem e utilizado pelo i3Geo para gerar prefixos em algumas ferramentas, como download
+	#
+	NAME "i3geomap"
+	DEBUG OFF
+	#CONFIG "CPL_DEBUG" "ON"
+	#CONFIG "MS_ERRORFILE" "/tmp/ms_tmp/ms_error.txt"
+	#
+	#utilize o agg apenas com mapserver 5x
+
+	OUTPUTFORMAT
+		NAME 'AGG_Q'
+		DRIVER AGG/PNG
+		IMAGEMODE RGB
+		FORMATOPTION "QUANTIZE_FORCE=ON"
+		FORMATOPTION "QUANTIZE_DITHER=OFF"
+		FORMATOPTION "QUANTIZE_COLORS=256"
+		FORMATOPTION "INTERLACE=OFF"
+	END
+
+	#OUTPUTFORMAT
+		#	NAME svg
+		#	MIMETYPE "image/svg+xml"
+		#	DRIVER cairo/svg
+			##FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+			##FORMATOPTION  "FULL_RESOLUTION=TRUE"
+		#END
+
+	OUTPUTFORMAT
+			NAME jpeg
+			DRIVER "AGG/JPEG"
+			MIMETYPE "image/jpeg"
+			IMAGEMODE RGB
+			EXTENSION jpg
+			FORMATOPTION "INTERLACE=OFF"
+	END
+
+	OUTPUTFORMAT
+		NAME png1
+		MIMETYPE image/png
+		DRIVER AGG/PNG
+		EXTENSION png
+		IMAGEMODE RGB
+		TRANSPARENT FALSE
+		FORMATOPTION "INTERLACE=OFF"
+	END
+
+	OUTPUTFORMAT
+		NAME png2
+		MIMETYPE image/png
+		DRIVER AGG/PNG
+		EXTENSION png
+		IMAGEMODE PC256
+		TRANSPARENT TRUE
+		FORMATOPTION "INTERLACE=OFF"
+	END
+
+
+	PROJECTION
+		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
+	END
+	LEGEND
+		IMAGECOLOR 255 255 255
+		KEYSIZE 12 10
+		KEYSPACING 5 5
+		LABEL
+			SIZE 7
+			FONT "verdana"
+			TYPE truetype
+			BUFFER 0
+			COLOR 0 0 0
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 -2
+			PARTIALS TRUE
+		END
+		POSITION LL
+		STATUS off
+		#edite o caminho se a aplicacao for movida de lugar
+		#TEMPLATE "/var/www/i3geo/aplicmap/legenda.htm"
+	END
+	QUERYMAP
+		#OUTLINECOLOR 255 0 0
+		COLOR 0 255 255
+		SIZE 480 500
+		STATUS on
+		STYLE hilite
+	END
+	REFERENCE
+		COLOR -1 -1 -1
+		EXTENT -75.5728 -37.4751 -30.525 7.57273
+		#-79.8713331401 -41.7736536401 -26.2264448599 11.8712346401
+		#edite o caminho se a aplicacao for movida de lugar
+		IMAGE "/var/www/i3geo/imagens/referencia1.png"
+		OUTLINECOLOR -1 -1 -1
+		SIZE 150 150
+		STATUS off
+		MARKER "ref"
+		MARKERSIZE 8
+		MINBOXSIZE 8
+		MAXBOXSIZE 145
+	END
+	SCALEBAR
+		BACKGROUNDCOLOR 200 200 200
+		COLOR 0 0 0
+		INTERVALS 5
+		LABEL
+			SIZE TINY
+			TYPE BITMAP
+			BUFFER 0
+			COLOR 0 0 0
+			FORCE FALSE
+			MINDISTANCE -1
+			MINFEATURESIZE -1
+			OFFSET 0 0
+			PARTIALS TRUE
+		END
+		POSITION LR
+		SIZE 200 2
+		STATUS embed
+		STYLE 0
+		TRANSPARENT FALSE
+		UNITS KILOMETERS
+	END
+	WEB
+		#edite o caminho se a aplicacao for movida de lugar
+		IMAGEPATH "/tmp/ms_tmp/"
+		IMAGEURL "/ms_tmp/"
+		TEMPLATE ""
+	END
+	LAYER
+		DATA "/var/www/i3geo/aplicmap/dados/mundo"
+		GROUP "mundo"
+		METADATA
+			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
+			"ITENS"	"FIPS_CNTRY,GMI_CNTRY,LONG_NAME,CNTRY_NAME" #itens que serao mostrados na opcao de identificacao
+			"ITENSDESC"	"FIPS,GMI,Nome,Wikipedia" #descricao dos nomes dos itens
+			"ITENSLINK" ",,,http://pt.wikipedia.org/wiki/[CNTRY_NAME]"
+			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
+			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
+			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
+			"cache" "sim"
+			"itembuscarapida" "LONG_NAME"
+		END
+		NAME "mundo"
+		STATUS DEFAULT
+		TEMPLATE "none.htm"
+		TYPE POLYGON
+		CLASS
+			NAME "" #vazio indica que nao sera incluido o nome ao lado do simbolo
+			STYLE
+				COLOR 230 230 230
+				OUTLINECOLOR 255 255 255
+			END
+		END
+	END
+	#
+	#para mostrar o mapa do Brasil, remova os comentarios
+	#
+	#LAYER
+	#	DATA "/var/www/i3geo/aplicmap/dados/estados"
+	#	METADATA
+	#		"CLASSE"	"SIM"
+	#		"TEMA"	"Brasil"
+	#		"ESCALA" "250000" #escala utilizada nas marcas ao lado do tema na legenda
+	#		"IDENTIFICA" "nao"
+	#		"cache" "sim"
+	#		"EXTENSAO" "-97.911949 -39.413578 -8.185829 9.511159"
+	#	END
+	#	NAME "estados"
+	#	SIZEUNITS PIXELS
+	#	STATUS DEFAULT
+	#	TOLERANCE 0
+	#	TOLERANCEUNITS PIXELS
+	#	TRANSPARENCY 100
+	#	TYPE POLYGON
+	#	UNITS METERS
+	#	CLASS
+	#		NAME " "
+	#		STYLE
+	#			COLOR 232 220 201
+	#			MAXSIZE 100
+	#			MINSIZE 1
+	#			SIZE 1
+	#			SYMBOL 0
+	#		END
+	#	END
+	#END
+	#
+	#para mostrar os limites estaduais do Brasil, remova os comentarios
+	#
+	LAYER
+	  NAME estadosl # ok
+	  TYPE line
+	  STATUS DEFAULT
+	  DATA "/var/www/i3geo/aplicmap/dados/estados"
+	  TEMPLATE "estados.htm"
+	  METADATA
+		  ITENS "ESTADO"
+		  ITENSDESC "Estado"
+	  	  TEMA "Limite Estadual"
+		  ESCALA "250000"
+	  	  CLASSE "SIM"
+		  cache "sim"
+	  END
+	  CLASS
+		  NAME " "
+		  STYLE
+			  WIDTH 2
+	          COLOR 255 255 0
+	          OUTLINECOLOR -1 -1 -1
+		  END
+		  STYLE
+	          COLOR 0 0 0
+	          OUTLINECOLOR -1 -1 -1
+		  END
+	  END  # CLASS
+	END  # LAYER
+
+	LAYER
+		METADATA
+			"TEMA"	"NAO"
+			"ESCONDIDO" "SIM"
+			"cache" "nao"
+		END
+		NAME "copyright"
+		SIZEUNITS PIXELS
+		STATUS default
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM FALSE
+		TYPE POINT
+		UNITS METERS
+		CLASS
+			LABEL
+				SIZE TINY
+				TYPE BITMAP
+				BUFFER 0
+				COLOR 50 50 50
+				FORCE FALSE
+				MINDISTANCE -1
+				MINFEATURESIZE -1
+				OFFSET 0 0
+				PARTIALS TRUE
+				POSITION CC
+			END
+		END
+		FEATURE
+			POINTS
+				10 5
+			END
+			TEXT "-    i3Geo"
+		END
+	END
+
+	LAYER
+		METADATA
+			"TEMA"	"Rosa dos ventos"
+			"IDENTIFICA" "nao"
+			"TABELA" "nao"
+			"CLASSE"	"NAO"
+		END
+		NAME "rosadosventos"
+		SIZEUNITS PIXELS
+		STATUS OFF
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM lr
+		TYPE POINT
+		UNITS pixels
+		CLASS
+			SYMBOL 'rosa200'
+			SIZE 90
+		END
+		FEATURE
+			POINTS
+				-70 -70
+			END
+		END
+	END
+END

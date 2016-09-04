@@ -220,13 +220,39 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 	exit;
 }
 //$_COOKIE = array();
+
 //
 //quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute;
 //sendo utilizado como um include em classesphp/mapa_controle.php
 //
+if(!isset($funcao)){
+	ob_end_clean();
+	/*
+	 Carrega as extens&otilde;es PHP
+
+	 Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
+	 A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela pr&oacute;pria inicializa&ccedil;&atilde;o do PHP.
+	 */
+	include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
+	/*
+	 Include dos arquivos PHP.
+
+	 Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
+	 */
+	include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+	include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");
+	$interface = $GET["interface"];
+}
 $parurl = array_merge($_GET,$_POST);
+//
+//$base pode vir do ms_configura ou da URL
+//o ms_configura pode ter sido inserido antes
+//
+if(empty($base) && !empty($parurl["base"])){
+	$base = $parurl["base"];
+}
+
 ms_ResetErrorList();
-$base = $parurl["base"];
 $temasa = $parurl["temasa"];
 $layers = $parurl["layers"];
 $desligar = $parurl["desligar"];
@@ -256,26 +282,6 @@ $image_wms = $parurl["image_wms"];
 $versao_wms = $parurl["versao_wms"];
 $gvsigview = $parurl["gvsigview"];
 $restauramapa = $parurl["restauramapa"];
-if(!isset($funcao)){
-	ob_end_clean();
-	/*
-	 Carrega as extens&otilde;es PHP
-
-	 Carrega as extens&otilde;es utilizadas no programa de inicializa&ccedil;&atilde;o.
-	 A carga das extens&otilde;es geralmente &eacute; necess&aacute;ria nas instala&ccedil;&otilde;es windows (ms4w) ou quando as mesmas n&atilde;o s&atilde;o carregadas pela pr&oacute;pria inicializa&ccedil;&atilde;o do PHP.
-	 */
-	include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
-	/*
-	 Include dos arquivos PHP.
-
-	 Inclui os programas php com fun&ccedil;&otilde;es utilizadas pelo ms_criamapa.php
-	 */
-	include_once (dirname(__FILE__)."/classesphp/sani_request.php");
-
-	$interface = $parurl["interface"];
-}
-
-include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 
 $versao = versao();
 $versao = $versao["principal"];
@@ -287,6 +293,12 @@ $versao = $versao["principal"];
 //
 if(!isset($dir_tmp)){
 	include_once (dirname(__FILE__)."/ms_configura.php");
+	if(!empty($parurl["base"])){
+		$base = $parurl["base"];
+	}
+	if(!empty($parurl["interface"])){
+		$interface = $parurl["interface"];
+	}
 }
 if(isset($logExec) && $logExec["init"] == true){
 	i3GeoLog("prog: ms_criamapa url: ".implode("&",array_merge($_GET,$_POST)),$dir_tmp);
