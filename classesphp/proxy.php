@@ -1,4 +1,5 @@
 <?php
+exit;
 /**
  * Utilize proxy.php para acessar URLs por intermedio do servidor, via CURL
  * Voce pode usar o parametro proxy?url=

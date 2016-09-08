@@ -1151,22 +1151,24 @@ function: pegadata
 
 Retorna o valor do elemento DATA
 */
-	function pegadata()
-	{
-		if(!$this->layer){return "erro";}
+	function pegadata(){
+		if(!$this->layer){
+			return "erro";
+		}
 		$metadata = $this->layer->getmetadata("editorsql");
-		if(strtolower($metadata) != "nao")
-		return $this->layer->data;
-		else
-		return "O layer n&atilde;o permite a alteracao do elemento DATA";
+		if(strtolower($metadata) == "sim"){
+			return $this->layer->data;
+		}
+		else{
+			return "O layer n&atilde;o permite a alteracao do elemento DATA";
+		}
 	}
 /*
 function: alteradata
 
 Altera o valor do elemento DATA
 */
-	function alteradata($data,$removemeta="nao")
-	{
+	function alteradata($data,$removemeta="nao") {
 		if(!$this->layer){return "erro";}
 		$data = str_ireplace("delete","",$data);
 		$data = str_ireplace("insert","",$data);
@@ -1174,7 +1176,7 @@ Altera o valor do elemento DATA
 		$data = str_ireplace("create","",$data);
 		$data = str_ireplace("alter","",$data);
 		$metadata = $this->layer->getmetadata("editorsql");
-		if(strtolower($metadata) != "nao"){
+		if(strtolower($metadata) == "sim"){
 			$this->layer->set("data",$data);
 			$this->layer->setMetaData("cache","");
 			if($removemeta == "sim"){

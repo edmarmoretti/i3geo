@@ -1,4 +1,5 @@
 <?php
+exit;
 /*
 Title: parse_cgi.php
 
