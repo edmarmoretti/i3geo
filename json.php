@@ -92,9 +92,9 @@ $base = str_replace(".map","",$base).".map";
 $testemap = @ms_newMapobj($base);
 if(!$testemap){
 	exit;
+} else {
+	$testemap->save($nomeMapfileTmp);
 }
-
-copy($base,$nomeMapfileTmp);
 $tema = $_GET["tema"];
 $oMap = ms_newMapobj($nomeMapfileTmp);
 $nmap = ms_newMapobj($locaplic."/temas/".$tema.".map");
