@@ -1,4 +1,5 @@
 <?php
+	exit;
 	include_once("class.gvsig2mapfile.php");
 	error_reporting(0);
 	$gm = new gvsig2mapfile("C:\ms4w\Apache\htdocs\i3geo\pacotes\gvsig\gvsig2mapfile\projetoteste.gvp");

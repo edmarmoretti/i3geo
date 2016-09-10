@@ -1,4 +1,5 @@
 <?php
+exit;
 /**
 * The content of this file is (c) 2003-2005 digital media center GmbH
 * All rights reserved

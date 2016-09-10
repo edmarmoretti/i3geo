@@ -28,8 +28,8 @@ foreach ( $hosts as $host ) {
 
 // Get the REST call path from the AJAX application
 // Is it a POST or a GET?
-$url = ($_POST ['csw_host']) ? $_POST ['csw_host'] : $_GET ['csw_host'];
-
+//$url = ($_POST ['csw_host']) ? $_POST ['csw_host'] : $_GET ['csw_host'];
+$url = "http://www.metadados.inde.gov.br/geonetwork/srv/br";
 // Check if $url is a known host
 /*
 if (! in_array ( $url, $allowed_hosts )) {

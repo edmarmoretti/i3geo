@@ -1,4 +1,5 @@
 <?php
+exit;
 // you can pass this script to PHP CLI to convert your file.
 
 // adapt these 2 paths to your files.

@@ -1,5 +1,5 @@
 <?php
-
+exit;
 // Define path to Smarty files (don't forget trailing slash)
 // and load library.  (you'll want to change this value)
 //
@@ -19,7 +19,7 @@ require_once(MAGPIE_DIR.'rss_utils.inc');
 // optionally show lots of debugging info
 # define('MAGPIE_DEBUG', 2);
 
-// optionally flush cache quickly for debugging purposes, 
+// optionally flush cache quickly for debugging purposes,
 // don't do this on a live site
 # define('MAGPIE_CACHE_AGE', 10);
 
@@ -37,16 +37,16 @@ $url = $_GET['rss_url'];
 if ( $url ) {
 	// assign a variable to smarty for use in the template
 	$smarty->assign('rss_url', $url);
-	
+
 	// use MagpieRSS to fetch remote RSS file, and parse it
 	$rss = fetch_rss( $url );
-	
+
 	// if fetch_rss returned false, we encountered an error
 	if ( !$rss ) {
 		$smarty->assign( 'error', magpie_error() );
 	}
 	$smarty->assign('rss', $rss );
-	
+
 	$item = $rss->items[0];
 	$date = parse_w3cdtf( $item['dc']['date'] );
 	$smarty->assign( 'date', $date );

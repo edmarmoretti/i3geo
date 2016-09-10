@@ -1,4 +1,5 @@
 <?php
+exit;
 require_once(dirname(__FILE__)."/../../../classesphp/pega_variaveis.php");
 require_once(dirname(__FILE__)."/../../../classesphp/funcoes_gerais.php");
 $versao = versao();
@@ -31,7 +32,7 @@ if (isset($_FILES['i3GEOuploadfile']['name']))
 		if(!file_exists($base))
 		{$base = $locaplic."/aplicmap/".$base;}
 	}
-	
+
 	$mapn = ms_newMapObj($base);
 
 	//echo "<p>Carregando o arquivo...</p>";

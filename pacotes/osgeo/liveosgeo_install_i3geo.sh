@@ -12,7 +12,7 @@
 # in the "LICENSE.LGPL.txt" file distributed with this software or at
 # web page "http://www.fsf.org/licenses/lgpl.html".
 #
-# Requires: svn apache2 php5 libapache2-mod-php5 cgi-mapserver mapserver-bin php5-mapscript 
+# Requires: svn apache2 php5 libapache2-mod-php5 cgi-mapserver mapserver-bin php5-mapscript
 # php5-gd php5-sqlite php5-curl php5-json php5-odbc php5-pgsql php5-ps php5-xmlrpc php5-xsl php5-imagick php5-mbstring
 #
 # Uninstall:
@@ -25,6 +25,8 @@
 BUILD_DIR=`pwd`
 ####
 
+
+exit
 
 #OSGEO live username is "user"
 if [ -z "$USER_NAME" ] ; then
@@ -51,7 +53,7 @@ ln -s "$TMP_DIR/ms_tmp" "$ROOT_DIR/ms_tmp"
 chown -R www-data:www-data "$TMP_DIR/ms_tmp"
 chown -R www-data:www-data "$ROOT_DIR/ms_tmp"
 chmod -R 755 "$TMP_DIR/ms_tmp"
-chmod -R 755 "$ROOT_DIR/ms_tmp"    
+chmod -R 755 "$ROOT_DIR/ms_tmp"
 
 #add R repository to have the latest version of R
 #cd /etc/apt/

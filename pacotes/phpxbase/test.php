@@ -1,16 +1,17 @@
 <?php
+exit;
 /**
 * ----------------------------------------------------------------
 *			XBase
-*			test.php	
-* 
+*			test.php
+*
 *  Developer        : Erwin Kooi
 *  released at      : Nov 2005
 *  last modified by : Erwin Kooi
 *  date modified    : Jan 2005
-*                                                               
+*
 *  Info? Mail to info@cyane.nl
-* 
+*
 * --------------------------------------------------------------
 *
 * Basic demonstration
@@ -23,7 +24,7 @@
 	require_once "Column.class.php";
 	require_once "Record.class.php";
 	require_once "Table.class.php";
-	
+
 	/* create a table object and open it */
 	$table = new XBaseTable("test/bond.DBF");
 	$table->open();
@@ -42,14 +43,14 @@
 
     /* html output */
     echo "<br /><table border=1>";
-    
+
     /* print column names */
     echo "<tr>";
     foreach ($table->getColumns() as $i=>$c) {
 	    echo "<td>".$c->getName()." (".$c->getType()." ".$c->getLength().")</td>";
     }
     echo "</tr>";
-    
+
     /* print records */
     while ($record=$table->nextRecord()) {
 	    echo "<tr>";

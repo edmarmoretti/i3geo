@@ -1,6 +1,6 @@
 <pre>
 <?php
-
+exit;
 
 # include parseCSV class.
 require_once('../parsecsv.lib.php');

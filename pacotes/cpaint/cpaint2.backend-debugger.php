@@ -1,15 +1,16 @@
-<? 
-/* 
+<?
+exit;
+/*
  CPAINT Backend Debug Interface
 
  released under the terms of the GPL
  see http://www.fsf.org/licensing/licenses/gpl.txt for details
- 
+
  @package    CPAINT
  @access     public
  @author     Paul Sullivan  <wiley14@gmail.com>
  @author     Stephan Tijink <stijink@googlemail.com>
- @copyright  Copyright (c) 2005-2006 Paul Sullivan - http://sf.net/projects/cpaint 
+ @copyright  Copyright (c) 2005-2006 Paul Sullivan - http://sf.net/projects/cpaint
  @version    2.0.3
 */
 
@@ -19,16 +20,16 @@ if (!(isset($_REQUEST["cpaint_function"]))) {
 	<title>CPAINT Debug Interface</title>
 	<style type="text/css">body { background-color: #9999CC; margin-top: 0px; }
 		.style3 { font-family: Arial, Helvetica, sans-serif; font-size: 12px; }
-		.style4 { font-size: 20px; color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;} 
-		.style5 { font-size: 16px;	color: #FFFFFF;	font-family: Arial, Helvetica, sans-serif;	font-weight: bold; } 
-		.style6 { font-size: 12px;	color: #FFFFFF;	font-family: Arial, Helvetica, sans-serif;	font-weight: bold; } 
+		.style4 { font-size: 20px; color: #FFFFFF; font-family: Arial, Helvetica, sans-serif;}
+		.style5 { font-size: 16px;	color: #FFFFFF;	font-family: Arial, Helvetica, sans-serif;	font-weight: bold; }
+		.style6 { font-size: 12px;	color: #FFFFFF;	font-family: Arial, Helvetica, sans-serif;	font-weight: bold; }
 		div, iframe {	margin: 0px; border: 1px solid #9999CC; }
 	</style>
 	<script type="text/javascript">
 		function showForm(divId) {
-			if (document.getElementById(divId).style.display == "block") { 
-				document.getElementById(divId).style.display = "none"; 
-			} else { 
+			if (document.getElementById(divId).style.display == "block") {
+				document.getElementById(divId).style.display = "none";
+			} else {
 				document.getElementById(divId).style.display = "block";
 			}
 		}
@@ -42,15 +43,15 @@ if (!(isset($_REQUEST["cpaint_function"]))) {
 		<tr><td height="10" bgcolor="#9999CC" class="style3"></td></tr>
 		<tr><td bgcolor="#FFFFFF" class="style3"><blockquote>';
 	$debug_html_end = "</blockquote></td></tr></table><br><iframe name=\"results\" class=\"style3\" width=\"100%\" height=\"100%\" scrolling=\"yes\" allowtransparency=\"false\" style=\"background-color:  #FFFFFF\"></iframe></body></html>";
-	
+
 	// get function names and function variables/values
 	$functionArray = getCallableCode();
-	
+
 	$debug_body = "";
 	if (count($functionArray) > 0) {
 		foreach ($functionArray as $func_name=>$func_variables) {
 			$debug_body = $debug_body . "<form method=\"get\" target=\"results\"><a href=\"javascript:showForm('" . $func_name . "_form');\">" . $func_name . "</a><div id=\"" . $func_name . "_form\" style=\"display:  none;\">";
-			
+
 			$debug_body = $debug_body . '<table border="0">';
 			if ( count($func_variables) > 0) {
 				foreach ($func_variables as $var_name=>$var_preset) {
@@ -63,7 +64,7 @@ if (!(isset($_REQUEST["cpaint_function"]))) {
 			$debug_body = $debug_body . "<tr><td colspan=\"3\"><input type=\"hidden\" name=\"cpaint_function\" value=\"" . $func_name . "\"><input type=\"submit\"></td></tr></table></div></form>";
 		}
 	}
-	
+
 	print($debug_html_start . $debug_body . $debug_html_end);
 	die();
 }
@@ -75,7 +76,7 @@ function getCallableCode() {
 		$line = trim($fileLines[$i]);
 		if (substr($line, 0, 9) == "FUNCTION " || substr($line,0,9) == "function ") {
 			$match[] = $line;
-		}		
+		}
 	}
 	for ($i = 0; $i < sizeof($match); $i++) {
 		$line = str_replace("function ", "", $match[$i]);
@@ -83,11 +84,11 @@ function getCallableCode() {
 		$line = str_replace("{", "", $line);
 		$parts = explode("(", $line);
 		$func_name = trim($parts[0]);
-		
+
 		$Tempargs = explode(")", $parts[1]);
 		$args = explode(",", $Tempargs[0]);
 		$argSize = sizeof($args);
-		
+
 		// check args for preset values
 		if ($argSize > 0) {
 			foreach ($args as $arg) {

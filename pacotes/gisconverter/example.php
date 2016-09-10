@@ -1,6 +1,6 @@
 #!/usr/bin/php
 <?php
-
+exit;
 // don't forget, you need php at least 5.3 for gisconverter.php
 if (version_compare(PHP_VERSION, '5.3') < 0) {
     die ('Sorry, you need php at least 5.3 for gisconverter.php');

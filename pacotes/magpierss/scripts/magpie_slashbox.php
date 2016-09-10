@@ -1,5 +1,5 @@
 <?php
-
+exit;
 define('MAGPIE_DIR', '../');
 require_once(MAGPIE_DIR.'rss_fetch.inc');
 
