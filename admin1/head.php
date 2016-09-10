@@ -215,6 +215,8 @@ a, a:focus, a:hover {
 h2 small {
 	color: #767676;
 }
+
+
 </style>
 </head>
 <script id="iconeAguardeTpl" type="x-tmpl-mustache">

@@ -1,6 +1,9 @@
 <?php
 define(I3GEO,true);
 include("validaacesso.php");
+if(simplexml_load_string($_POST["svg"])===FALSE) {
+	die;
+}
 ?>
 <html>
 <head>
@@ -30,6 +33,6 @@ function render(svg, w, h) {
 		Canvas2Image.saveAsPNG(oCanvas,false,w,h);
 	}});
 }
-render('<?php echo $_POST["svg"];?>',<?php echo $_GET["w"];?>,<?php echo $_GET["h"];?>);
+render('<?php echo $_POST["svg"];?>',<?php echo (int) $_GET["w"];?>,<?php echo (int) $_GET["h"];?>);
 </script>
 </html>
