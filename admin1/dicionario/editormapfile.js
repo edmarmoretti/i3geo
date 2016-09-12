@@ -1505,9 +1505,14 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'criaMapfileDesc' : [ {
+		pt : "Ser&aacute; criado um arquivo mapfile na pasta i3geo/temas e registrado no banco de dados de administra&ccedil;&atilde;o. Para facilitar a edi&ccedil;&atilde;o posterior, os mapfiles criados s&atilde;o adicionados na lista de favoritos.",
 		en : "",
 		es : ""
-	} ]
+	} ],
+	'fonteTema' : [{
+		pt : "Link para os metadados",
+		en : "",
+		es : ""
+	}]
 };

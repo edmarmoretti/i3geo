@@ -31,7 +31,8 @@ include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LIMPACACHE"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/mapas" ) === false) {
@@ -41,13 +42,15 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 
-$id_mapa = $_POST["id_mapa"];
-testaSafeNumerico([$id_mapa]);
+$id_mapa = $_POST ["id_mapa"];
+testaSafeNumerico ( [
+		$id_mapa
+] );
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $_POST["publicado_mapa"], $_POST["ordem_mapa"], $_POST["perfil_mapa"], $_POST["ligados_mapa"], $_POST["temas_mapa"], $_POST["desc_mapa"], $_POST["ext_mapa"], $_POST["imagem_mapa"], $_POST["linkdireto_mapa"], $_POST["nome_mapa"], $_POST["outros_mapa"], $dbhw );
+		$novo = adicionar ( $_POST ["publicado_mapa"], $_POST ["ordem_mapa"], $_POST ["perfil_mapa"], $_POST ["ligados_mapa"], $_POST ["temas_mapa"], $_POST ["desc_mapa"], $_POST ["ext_mapa"], $_POST ["imagem_mapa"], $_POST ["linkdireto_mapa"], $_POST ["nome_mapa"], $_POST ["outros_mapa"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -55,12 +58,12 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_mapa, $_POST["publicado_mapa"], $_POST["ordem_mapa"], $_POST["perfil_mapa"], $_POST["ligados_mapa"], $_POST["temas_mapa"], $_POST["desc_mapa"], $_POST["ext_mapa"], $_POST["imagem_mapa"], $_POST["linkdireto_mapa"], $_POST["nome_mapa"], $_POST["outros_mapa"], $_POST["mapfile"] , $dbhw );
+		$novo = alterar ( $id_mapa, $_POST ["publicado_mapa"], $_POST ["ordem_mapa"], $_POST ["perfil_mapa"], $_POST ["ligados_mapa"], $_POST ["temas_mapa"], $_POST ["desc_mapa"], $_POST ["ext_mapa"], $_POST ["imagem_mapa"], $_POST ["linkdireto_mapa"], $_POST ["nome_mapa"], $_POST ["outros_mapa"], $_POST ["mapfile"], $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_mapa  from ".$esquemaadmin."i3geoadmin_mapas WHERE id_mapa = $id_mapa order by ordem_mapa, nome_mapa", $dbh, false );
+		$dados = pegaDados ( "SELECT id_mapa  from " . $esquemaadmin . "i3geoadmin_mapas WHERE id_mapa = $id_mapa order by ordem_mapa, nome_mapa", $dbh, false );
 
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -72,22 +75,26 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$semmapfile = pegaDados("SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from ".$esquemaadmin."i3geoadmin_mapas where mapfile = '' or mapfile is null order by ordem_mapa, nome_mapa", $dbh, false);
-		$commapfile = pegaDados("SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from ".$esquemaadmin."i3geoadmin_mapas where mapfile != '' and mapfile is not null order by ordem_mapa, nome_mapa", $dbh, false);
+		$semmapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where mapfile = '' or mapfile is null order by ordem_mapa, nome_mapa", $dbh, false );
+		$commapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where mapfile != '' and mapfile is not null order by ordem_mapa, nome_mapa", $dbh, false );
 		if ($semmapfile === false || $commapfile === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de mapas" );
 			exit ();
 		}
-		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
+		$perfis = pegaDados ( "SELECT id_perfil, perfil from " . $esquemaadmin . "i3geoadmin_perfis order by perfil", $dbh, false );
 		$dbhw = null;
 		$dbh = null;
-		//pega a lista de temas
-		include("../../../admin/php/classe_arvore.php");
-		$arvore = new Arvore($locaplic);
-		$temas = $arvore->pegaTodosTemas(true);
-		retornaJSON ( array("dados"=>array_merge($semmapfile,$commapfile), "perfis"=>$perfis, "temas"=>$temas) );
+		// pega a lista de temas
+		include ("../../../admin/php/classe_arvore.php");
+		$arvore = new Arvore ( $locaplic );
+		$temas = $arvore->pegaTodosTemas ( true );
+		retornaJSON ( array (
+				"dados" => array_merge ( $semmapfile, $commapfile ),
+				"perfis" => $perfis,
+				"temas" => $temas
+		) );
 		break;
 	case "EXCLUIR" :
 		$retorna = excluir ( $id_mapa, $dbhw );
@@ -100,27 +107,27 @@ switch ($funcao) {
 		retornaJSON ( $id_mapa );
 		exit ();
 		break;
+
 }
 cpjson ( $retorno );
-
-function adicionar( $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $dbhw) {
+function adicionar($publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $dbhw) {
 	global $esquemaadmin;
 	try {
-		$dataCol = array(
-			"publicado_mapa" => '',
-			"ordem_mapa" => 0,
-			"perfil_mapa" => '',
-			"desc_mapa" => '',
-			"ext_mapa" => '',
-			"imagem_mapa" => '',
-			"linkdireto_mapa" => '',
-			"outros_mapa" => '',
-			"temas_mapa" => '',
-			"ligados_mapa" => '',
-			"nome_mapa" => '',
-			"mapfile" => ''
+		$dataCol = array (
+				"publicado_mapa" => '',
+				"ordem_mapa" => 0,
+				"perfil_mapa" => '',
+				"desc_mapa" => '',
+				"ext_mapa" => '',
+				"imagem_mapa" => '',
+				"linkdireto_mapa" => '',
+				"outros_mapa" => '',
+				"temas_mapa" => '',
+				"ligados_mapa" => '',
+				"nome_mapa" => '',
+				"mapfile" => ''
 		);
-		$id_mapa = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_mapas",$dataCol,"nome_mapa","id_mapa");
+		$id_mapa = i3GeoAdminInsertUnico ( $dbhw, "i3geoadmin_mapas", $dataCol, "nome_mapa", "id_mapa" );
 		$retorna = alterar ( $id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, '', $dbhw );
 
 		return $retorna;
@@ -129,34 +136,34 @@ function adicionar( $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $
 	}
 }
 // $papeis deve ser um array
-function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $mapfile ,$dbhw) {
-	global $esquemaadmin;
-	if($convUTF){
-		$nome_mapa = utf8_encode($nome_mapa);
-		$desc_mapa = utf8_encode($desc_mapa);
-		$perfil_menu = utf8_encode($perfil_mapa);
+function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $mapfile, $dbhw) {
+	global $convUTF, $esquemaadmin;
+	if ($convUTF) {
+		$nome_mapa = utf8_encode ( $nome_mapa );
+		$desc_mapa = utf8_encode ( $desc_mapa );
+		$perfil_menu = utf8_encode ( $perfil_mapa );
 	}
-	$perfil_mapa = str_replace(","," ",trim($perfil_mapa));
-	//verifica a consistencia da lista de perfis
-	$perfis = pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbw, false );
-	$p = array();
-	foreach ($perfis as $perfil){
-		$p[] = $perfil["perfil"];
+	$perfil_mapa = str_replace ( ",", " ", trim ( $perfil_mapa ) );
+	// verifica a consistencia da lista de perfis
+	$perfis = pegaDados ( "SELECT perfil from " . $esquemaadmin . "i3geoadmin_perfis order by perfil", $dbw, false );
+	$p = array ();
+	foreach ( $perfis as $perfil ) {
+		$p [] = $perfil ["perfil"];
 	}
-	$perfil_mapa = implode(" ",array_intersect(explode(" ",$perfil_mapa),$p));
+	$perfil_mapa = implode ( " ", array_intersect ( explode ( " ", $perfil_mapa ), $p ) );
 
-	$dataCol = array(
-		"publicado_mapa" => $publicado_mapa,
-		"ordem_mapa" => $ordem_mapa,
-		"desc_mapa" => $desc_mapa,
-		"ext_mapa" => $ext_mapa,
-		"imagem_mapa" => $imagem_mapa,
-		"outros_mapa" => $outros_mapa,
-		"nome_mapa" => $nome_mapa,
-		"linkdireto_mapa" => $linkdireto_mapa,
-		"temas_mapa" => $temas_mapa,
-		"ligados_mapa" => $ligados_mapa,
-		"perfil_mapa" => $perfil_mapa
+	$dataCol = array (
+			"publicado_mapa" => $publicado_mapa,
+			"ordem_mapa" => $ordem_mapa,
+			"desc_mapa" => $desc_mapa,
+			"ext_mapa" => $ext_mapa,
+			"imagem_mapa" => $imagem_mapa,
+			"outros_mapa" => $outros_mapa,
+			"nome_mapa" => $nome_mapa,
+			"linkdireto_mapa" => $linkdireto_mapa,
+			"temas_mapa" => $temas_mapa,
+			"ligados_mapa" => $ligados_mapa,
+			"perfil_mapa" => $perfil_mapa
 	);
 	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_mapas", $dataCol, "WHERE id_mapa = $id_mapa" );
 	if ($resultado === false) {
@@ -172,4 +179,5 @@ function excluir($id_mapa, $dbhw) {
 	}
 	return $resultado;
 }
+
 ?>

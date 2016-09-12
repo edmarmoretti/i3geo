@@ -113,7 +113,7 @@ function adicionar($nome, $dbhw) {
 }
 // $papeis deve ser um array
 function alterar($id_tag, $nome,$dbhw) {
-	global $esquemaadmin;
+	global $convUTF, $esquemaadmin;
 	if($convUTF){
 		$nome = utf8_encode($nome);
 	}

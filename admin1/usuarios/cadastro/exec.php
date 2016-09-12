@@ -192,9 +192,9 @@ function adicionar($ativo, $data_cadastro, $email, $login, $nome_usuario, $senha
 }
 // $papeis deve ser um array
 function alterar($id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
-	global $esquemaadmin;
-	if ($convUTF) {
-		$nome_usuario = utf8_encode ( $nome_usuario );
+	global $convUTF, $esquemaadmin;
+	if ($convUTF != true) {
+		$nome_usuario = utf8_decode ( $nome_usuario );
 	}
 	$dataCol = array (
 			"nome_usuario" => $nome_usuario,

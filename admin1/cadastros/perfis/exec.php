@@ -113,7 +113,7 @@ function adicionar($perfil, $dbhw) {
 }
 // $papeis deve ser um array
 function alterar($id_perfil, $perfil,$dbhw) {
-	global $esquemaadmin;
+	global $convUTF, $esquemaadmin;
 	//pega o nome conforme o ID
 	$original = pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
 	$original = $original[0]["perfil"];

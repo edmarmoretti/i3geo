@@ -129,7 +129,7 @@ function adicionar( $id_atlas, $titulo_prancha, $ordem_prancha, $desc_prancha, $
 }
 // $papeis deve ser um array
 function alterar($id_atlas, $id_prancha, $titulo_prancha, $ordem_prancha, $desc_prancha, $h_prancha, $icone_prancha, $link_prancha, $mapext_prancha, $w_prancha, $dbhw) {
-	global $esquemaadmin;
+	global $convUTF, $esquemaadmin;
 	if($convUTF){
 		$desc_prancha = utf8_encode($desc_prancha);
 		$titulo_prancha = utf8_encode($titulo_prancha);

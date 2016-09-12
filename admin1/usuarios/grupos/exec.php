@@ -151,10 +151,10 @@ function adicionar($nome, $descricao, $usuarios, $dbhw) {
 }
 // $papeis deve ser um array
 function alterar($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
-	global $esquemaadmin;
-	if ($convUTF) {
-		$nome = utf8_encode ( $nome );
-		$descricao = utf8_encode ( $descricao );
+	global $convUTF, $esquemaadmin;
+	if ($convUTF != true) {
+		$nome = utf8_decode ( $nome );
+		$descricao = utf8_decode ( $descricao );
 	}
 	$dataCol = array (
 			"nome" => $nome,

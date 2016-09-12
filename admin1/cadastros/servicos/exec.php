@@ -115,7 +115,7 @@ function adicionar($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 }
 // $papeis deve ser um array
 function alterar($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
-	global $esquemaadmin;
+	global $convUTF, $esquemaadmin;
 	if($convUTF){
 		$nome_ws = utf8_encode($nome_ws);
 		$desc_ws = utf8_encode($desc_ws);

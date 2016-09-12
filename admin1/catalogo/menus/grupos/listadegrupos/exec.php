@@ -124,7 +124,7 @@ function adicionar($nome_grupo, $desc_grupo, $en, $es, $dbhw) {
 }
 // $papeis deve ser um array
 function alterar($id_grupo, $nome_grupo, $desc_grupo, $en, $es, $dbhw) {
-	global $esquemaadmin;
+	global $convUTF, $esquemaadmin;
 	if($convUTF){
 		$nome_grupo = utf8_encode($nome_grupo);
 		$desc_grupo = utf8_encode($desc_grupo);

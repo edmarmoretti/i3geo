@@ -68,24 +68,18 @@ include "../../head.php";
 <div class="panel panel-default" id="form-{{codigo}}">
 	<div class="panel-heading" role="tab">
 		<h4 class="panel-title {{escondido}}">
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{codigo}}"
-			aria-expanded="false" aria-controls="#body-form-{{codigo}}"> {{{codigo}}} <small> {{{nome}}}</small> </a>
+			<a title="{{{favorito}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.registraFavoritos('{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
+				<i class="material-icons">favorite_border</i>
+			</a>
+			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{codigo}}" aria-expanded="false" aria-controls="#body-form-{{codigo}}">
+				&nbsp;
+				<small> {{{arquivoTxt}}}:</small> {{{codigo}}} <small> {{{tituloTxt}}}:</small> {{{nome}}}
+			</a>
 		</h4>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{codigo}}">
-		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_mapa}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-			<div class="row">
-				<div class="col-md-12">
-				</div>
-			</div>
-			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-			</div>
-		</form>
-	</div>
-	<div class="panel-footer">
 		<div>
-			<a title="{{{excluir}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
+			<a title="{{{excluir}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.excluirDialogo('{{codigo}}','{{codigo}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">delete_forever</i>
 			</a>
 			&nbsp;
@@ -93,31 +87,28 @@ include "../../head.php";
 				<i class="material-icons">filter_list</i>
 			</a>
 			&nbsp;
-			<a title="{{{favorito}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.registraFavoritos('{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">favorite_border</i>
-			</a>
-			&nbsp;
+
 			<a title="{{{criaCopia}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">content_copy</i>
 			</a>
 			&nbsp;
-			<a title="{{{limpaCache}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
+			<a title="{{{limpaCache}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.limpaCacheDialogo('{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">layers_clear</i>
 			</a>
 			&nbsp;
-			<a title="{{{editaTema}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">link</i>
+			<a title="{{{editorTxt}}}" href="javascript:void(0)" onclick="window.open('../../../admin/php/editortexto.php?mapfile={{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
+				<i class="material-icons">mode_edit</i>
 			</a>
 			&nbsp;
-			<a title="{{{testaLayer}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
+			<a title="{{{testaLayer}}}" href="javascript:void(0)" onclick="window.open('../../../testamapfile.php?map={{codigo}}.map')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">report</i>
 			</a>
 			&nbsp;
-			<a title="{{{editarI3geo}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
+			<a title="{{{editarI3geo}}}" href="javascript:void(0)" onclick="window.open('../../../interface/black_editor.php?&temaEdicao={{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">settings</i>
 			</a>
 			&nbsp;
-			<a title="{{{testarI3geo}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
+			<a title="{{{testarI3geo}}}" href="javascript:void(0)" onclick="window.open('../../../ms_criamapa.php?temasa={{codigo}}&layers={{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">sending</i>
 			</a>
 		</div>
@@ -125,23 +116,69 @@ include "../../head.php";
 </div>
 </script>
 <script id="templateAdicionarTema" type="x-tmpl-mustache">
-<div class="panel panel-default">
-	<div class="panel-body">
 		<h4>{{{criaMapfile}}}</h4>
-		<form style="" action="#" onsubmit="{{onSalvar}}();return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+		<blockquote>{{{criaMapfileDesc}}}</blockquote>
+		<form id="form-modal-adiciona" style="" action="#" onsubmit="i3GEOadmin.mapfile.adiciona();return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 			<div class="row">
 				<div class="col-md-12">
 					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="codigo" >{{{nomeMap}}}</label>
-						<div class="col-md-8">
+						<label class="col-md-6 control-label" for="codigo" >{{{nomeMap}}}</label>
+						<div class="col-md-6">
 							<input title="{{{nomeMap}}}" type="text" value="" class="form-control" name="codigo" required>
 						</div>
 					</div>
+					<div class="form-group form-group-lg">
+						<label class="col-md-6 control-label" for="titulo" >{{{tituloTema}}}. {{{tituloPt}}}</label>
+						<div class="col-md-6">
+							<input title="{{{tituloTema}}}" type="text" value="" class="form-control" name="titulo" >
+						</div>
+					</div>
+					<div class="form-group form-group-lg">
+						<label class="col-md-6 control-label" for="tituloES" >{{{tituloEs}}}</label>
+						<div class="col-md-6">
+							<input title="{{{tituloEs}}}" type="text" value="" class="form-control" name="tituloES" >
+						</div>
+					</div>
+					<div class="form-group form-group-lg">
+						<label class="col-md-6 control-label" for="tituloEN" >{{{tituloEn}}}</label>
+						<div class="col-md-6">
+							<input title="{{{tituloEn}}}" type="text" value="" class="form-control" name="tituloEN" >
+						</div>
+					</div>
+					<div class="form-group form-group-lg">
+						<label class="col-md-6 control-label" for="desc_tema" >{{{descricaoTxt}}}</label>
+						<div class="col-md-6">
+							<input title="{{{descricaoTxt}}}" type="text" value="" class="form-control" name="desc_tema" >
+						</div>
+					</div>
+					<div class="form-group form-group-lg">
+						<label class="col-md-6 control-label" for="link_tema" >{{{fonteTema}}}</label>
+						<div class="col-md-6">
+							<input title="{{{fonteTema}}}" type="text" value="" class="form-control" name="link_tema" >
+						</div>
+					</div>
+					<div class="form-group form-group-lg">
+						<label class="col-md-6 control-label" for="metaestat">{{{metaestat}}}</label>
+						<div class="col-md-6">
+							<select title="{{{metaestat}}}" class="form-control" name="metaestat">
+								<option value="SIM" >{{{sim}}}</option>
+								<option value="NAO" selected >{{{nao}}}</option>
+							</select>
+						</div>
+					</div>
+					<div class="form-group form-group-lg">
+						<div class="checkbox col-md-12">
+							<label>
+								<input title="{{{permiteOgc}}}" type="checkbox" checked name="acessopublico" /> {{{permiteOgc}}}
+							</label>
+						</div>
+					</div>
 				</div>
+			<div class="pull-right">
+				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salva}}</button>
+			</div>
 			</div>
 		</form>
-	</div>
-</div>
 </script>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../dicionario/editormapfile.js"></script>

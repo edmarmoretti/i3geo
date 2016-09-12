@@ -419,5 +419,15 @@ i3GEOadmin.core.dicionario = {
 		pt : "Editar lista",
 		en : "",
 		es : ""
+	} ],
+    'arquivoTxt' : [ {
+		pt : "Arquivo",
+		en : "",
+		es : ""
+	} ],
+    'tituloTxt' : [ {
+		pt : "T&iacute;tulo",
+		en : "",
+		es : ""
 	} ]
 };

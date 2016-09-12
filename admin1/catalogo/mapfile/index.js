@@ -48,43 +48,14 @@ Obt&eacute;m a lista
 						var filtro = i3GEOadmin.core.valorFiltro();
 						//objeto json com os dados viondos do banco
 						var json = jQuery.parseJSON(data);
-						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
-						//combo com temas
-						var opcoesTema = '<option value="">---</option>' + Mustache.to_html(
-								"{{#data}}" + $("#templateTemas").html() + "{{/data}}",
-								{"data":json["temas"]}
-						);
-						//combo com perfis
-						var opcoesPerfil = '<option value="">---</option>' + Mustache.to_html(
-								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
-								{"data":json["perfis"]}
-						);
-						//lista todas as menus
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
 								$.extend(
 										{},
 										i3GEOadmin.mapfile.dicionario,
 										{
-											"data": json,
-											"onExcluir": "i3GEOadmin.mapfile.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.mapfile.salvarDialogo",//funcao
-											"opcoesPublicado": function(){
-												var hash = {};
-												hash["sim"] = i3GEOadmin.mapfile.dicionario.sim;
-												hash["nao"] = i3GEOadmin.mapfile.dicionario.nao;
-												if(this.publicado_mapa == ""){
-													this.publicado_mapa = "SIM";
-												}
-												hash[this.publicado_mapa + "-sel"] = "selected";
-												return Mustache.to_html(
-														$("#templateOpcoesPublicado").html(),
-														hash
-												);
-											},
-											"opcoesPerfil": opcoesPerfil,
-											"opcoesTema": opcoesTema
+											"data": json
 										}
 								)
 						);
@@ -119,9 +90,7 @@ Obt&eacute;m a lista
 							{},
 							i3GEOadmin.mapfile.dicionario,
 							{
-								"data": "modal",
-								"onExcluir": "i3GEOadmin.core.fechaModalGeral",
-								"onSalvar": "i3GEOadmin.mapfile.salvarDialogo"
+								"data": "modal"
 							}
 					)
 			);
@@ -129,7 +98,7 @@ Obt&eacute;m a lista
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
-			var parametros = $("#form-modal form").serialize();
+			var parametros = $("#form-modal-adiciona").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -138,8 +107,10 @@ Obt&eacute;m a lista
 			)
 			.done(
 					function(data, status){
+						var json = jQuery.parseJSON(data);
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapfile.ondeLista);
+						i3GEOadmin.mapfile.favoritosArray.push(json.codigo);
 						i3GEOadmin.mapfile.lista();
 					}
 			)
@@ -164,13 +135,14 @@ Obt&eacute;m a lista
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=excluir",
-					"id_mapa="+id
+					"codigo="+id
 			)
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#form-" + json).remove();
+						var json = jQuery.parseJSON(data);
+						$("#form-" + json.codigo).remove();
+						i3GEOadmin.mapfile.registraFavoritos(json.codigo);
 					}
 			)
 			.fail(
@@ -179,42 +151,6 @@ Obt&eacute;m a lista
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
 			);
-		},
-		salvarDialogo: function(id){
-			var hash = {
-					"mensagem": i3GEOadmin.mapfile.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.mapfile.salvar('"+id+"')",
-					"botao1": i3GEOadmin.mapfile.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.mapfile.dicionario.nao
-			};
-			i3GEOadmin.core.abreModalConfirma(hash);
-		},
-		salvar: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
-			i3GEOadmin.core.fechaModalGeral();
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=alterar",
-					"id_mapa="+ id+"&"+parametros
-			)
-			.done(
-					function(data, status){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapfile.ondeLista);
-						i3GEOadmin.mapfile.lista();
-					}
-			)
-			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
-			);
-		},
-		addInput: function(id,valor){
-			var i = $("#"+id);
-			$(i.val(i.val() + ' ' + valor));
 		},
 		retornaFavoritosArray: function(){
 			var temp = i3GEO.util.pegaCookie("I3GEOfavoritosEditorMapfile");
@@ -227,6 +163,7 @@ Obt&eacute;m a lista
 			return i3GEOadmin.mapfile.favoritosArray;
 		},
 		registraFavoritos: function(codigoTema){
+			i3GEOadmin.mapfile.favoritosArray.remove("NaN");
 			if(i3GEO.util.in_array(codigoTema,i3GEOadmin.mapfile.favoritosArray)){
 				i3GEOadmin.mapfile.favoritosArray.remove(codigoTema);
 			} else {
@@ -236,16 +173,46 @@ Obt&eacute;m a lista
 			i3GEOadmin.mapfile.montaFavoritos();
 		},
 		montaFavoritos: function(){
-			var mapfile, i, conteudo = [], n, codigo;
+			var mapfile, i, conteudo = [], n, codigo, h;
 			n = i3GEOadmin.mapfile.favoritosArray.length;
 			for (i=0; i<n; i++){
 				codigo = i3GEOadmin.mapfile.favoritosArray[i];
-				mapfile = '<div class="panel panel-default">' + $("#form-" + codigo + " .panel-heading").html();
-				conteudo.push(mapfile);
-				mapfile = '<div class="panel-body">' + $("#form-" + codigo + " .panel-footer").html() + "</div></div>";
-				conteudo.push(mapfile);
+				h = $("#form-" + codigo + " .panel-heading").html();
+				if(h != undefined){
+					mapfile = '<div class="panel panel-default">' + h;
+					conteudo.push(mapfile);
+					mapfile = '<div class="panel-body">' + $("#form-" + codigo + " .panel-body").html() + "</div></div>";
+					conteudo.push(mapfile);
+				}
 			}
 			$("#body-favoritos").html(conteudo.join("\n"));
+		},
+		limpaCacheDialogo: function(codigo){
+			var hash = {
+					"mensagem": i3GEOadmin.mapfile.dicionario.excluiCache,
+					"onBotao1": "i3GEOadmin.mapfile.limpaCache('"+codigo+"')",
+					"botao1": i3GEOadmin.mapfile.dicionario.sim,
+					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"botao2": i3GEOadmin.mapfile.dicionario.nao
+			};
+			i3GEOadmin.core.abreModalConfirma(hash);
+		},
+		limpaCache: function(codigo){
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=limpaCache",
+					"codigo="+codigo
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
 		}
-
 };

@@ -132,7 +132,7 @@ function adicionar( $titulo_atlas, $publicado_atlas, $ordem_atlas, $basemapfile_
 }
 // $papeis deve ser um array
 function alterar($id_atlas, $titulo_atlas, $publicado_atlas, $ordem_atlas, $basemapfile_atlas, $desc_atlas, $h_atlas, $w_atlas, $icone_atlas, $link_atlas, $pranchadefault_atlas, $template_atlas, $tipoguias_atlas, $dbhw) {
-	global $esquemaadmin;
+	global $convUTF, $esquemaadmin;
 	if($convUTF){
 		$desc_atlas = utf8_encode($desc_atlas);
 		$titulo_atlas = utf8_encode($titulo_atlas);

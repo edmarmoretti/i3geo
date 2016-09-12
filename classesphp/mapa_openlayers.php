@@ -503,6 +503,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 	else{
 		$nome = $cachedir.$tms;
 	}
+	$nome = str_replace(".png","",$nome);
 	$nome = $nome.".png";
 	if(!file_exists($nome)){
 		@mkdir(dirname($nome),0744,true);

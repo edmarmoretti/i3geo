@@ -156,15 +156,19 @@ function exclui($tabela,$coluna,$id){
 	}
 }
 //usar esse para nao haver confusao com o nome "exclui"
-function i3GeoAdminExclui($tabela,$coluna,$id){
+function i3GeoAdminExclui($tabela,$coluna,$id,$dbhw="",$close=true){
 	try {
-		include("conexao.php");
+		if($dbh == "" || is_string($dbh)){
+			include(dirname(__FILE__)."/conexao.php");
+		}
 		$sql = "DELETE from $tabela WHERE $coluna = ?";
 		$prep = $dbhw->prepare($sql);
 		$prep->execute(array($id));
 		i3GeoAdminInsertLog($dbhw,$sql,array($id));
-		$dbhw = null;
-		$dbh = null;
+		if($close == true){
+			$dbh = null;
+			$dbhw = null;
+		}
 		return "ok";
 	}
 	catch (PDOException $e) {

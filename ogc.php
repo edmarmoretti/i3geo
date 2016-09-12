@@ -132,7 +132,9 @@ if(isset($_GET["TileMatrix"])){
 		$res[] = $temp;
 		$temp = $temp / 2;
 	}
-	$_GET["tms"] = "/wmts/".$tema."/".$_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"].".png";
+	$_GET["tms"] = "/wmts/".$tema."/".$_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"];
+	$_GET["tms"] = str_replace(".png","",$_GET["tms"]).".png";
+
 	if($_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"] == "0/0/0" || $_GET["TileCol"] == -1 || $_GET["TileRow"]== -1){
 		return;
 	}
