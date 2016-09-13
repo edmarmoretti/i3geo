@@ -79,16 +79,16 @@ include "../../head.php";
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{codigo}}">
 		<div>
-			<a title="{{{excluir}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.excluirDialogo('{{codigo}}','{{codigo}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
+			<a title="{{{excluir}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.excluirDialogo('{{codigo}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">delete_forever</i>
 			</a>
 			&nbsp;
-			<a title="{{{filtraLista}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
+			<a title="{{{filtraLista}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.init($('#corpo'),'{{codigo}}');" class="btn btn-primary btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">filter_list</i>
 			</a>
 			&nbsp;
 
-			<a title="{{{criaCopia}}}" href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}','{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
+			<a title="{{{criaCopia}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.clonaDialogo('{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">content_copy</i>
 			</a>
 			&nbsp;
@@ -214,7 +214,7 @@ include "../../head.php";
 		$.material.init();
 		var inicia = function() {
 			$(".hidden").removeClass('hidden');
-			i3GEOadmin.mapfile.init($("#corpo"));
+			i3GEOadmin.mapfile.init($("#corpo"),"");
 		};
 		i3GEO.login.verificaOperacao("admin/html/editormapfile",i3GEO.configura.locaplic, inicia, "sessao");
 	});

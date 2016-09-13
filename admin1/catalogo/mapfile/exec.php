@@ -85,7 +85,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$retorna = lista ( $dbh );
+		$retorna = lista ( $dbh, $_GET["filtro"], $_GET["palavra"] );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
@@ -247,7 +247,7 @@ function adicionar($locaplic, $link_tema, $codigo, $acessopublico, $metaestat, $
 		return false;
 	}
 }
-function lista($dbh, $filtro = "") {
+function lista($dbh, $filtro = "", $palavra = "") {
 	global $locaplic, $esquemaadmin;
 	$arquivos = array ();
 	if (is_dir ( $locaplic . "/temas" )) {
@@ -256,9 +256,16 @@ function lista($dbh, $filtro = "") {
 			while ( ($file = readdir ( $dh )) !== false ) {
 				if (! stristr ( $file, '.map' ) === FALSE) {
 					$file = str_replace ( ".map", "", $file );
-					$arquivos [] = array (
-							"nome" => $file
-					);
+					//verifica se existe um filtro de palavra
+					if($palavra != ""){
+						if(stripos($file, $palavra) !== false){
+							$arquivos[] = array("nome"=>$file);
+						}
+					} else {
+						$arquivos [] = array (
+								"nome" => $file
+						);
+					}
 				}
 			}
 		}

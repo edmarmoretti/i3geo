@@ -26,9 +26,9 @@ i3GEOadmin.mapfile = {
 		//variavel global indicando o elemento que recebera a lista de menus
 		ondeLista: "",
 		favoritosArray: [],
-		init: function(onde){
+		init: function(onde,palavra){
 			i3GEOadmin.mapfile.ondeLista = onde;
-			i3GEOadmin.mapfile.lista();
+			i3GEOadmin.mapfile.lista(palavra);
 			i3GEOadmin.mapfile.retornaFavoritosArray();
 		},
 		/*
@@ -36,10 +36,11 @@ Function: lista
 
 Obt&eacute;m a lista
 		 */
-		lista: function(){
+		lista: function(palavra){
 			i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapfile.ondeLista);
 			$.post(
-					"exec.php?funcao=lista"
+					"exec.php?funcao=lista",
+					"&palavra=" + palavra
 			)
 			.done(
 					function(data, status){
@@ -206,6 +207,37 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
+		clonaDialogo: function(codigo){
+			var f = '<h4 class="pull-right"></h4><form id="form-modal-adiciona" class="form-horizontal"><div class="form-group form-group-lg"><label class="col-md-6 control-label">'+i3GEOadmin.mapfile.dicionario.nomeArquivo+':</label><div class="col-md-6"><input type="text" class="form-control" name="clonarComo" value="" required ></div></div></form>';
+			var hash = {
+					"mensagem": f,
+					"onBotao1": "i3GEOadmin.mapfile.clona('"+codigo+"')",
+					"botao1": i3GEOadmin.mapfile.dicionario.criaCopia,
+					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"botao2": i3GEOadmin.mapfile.dicionario.cancela
+			};
+			i3GEOadmin.core.abreModalConfirma(hash);
+		},
+		clona: function(codigo){
+			var parametros = $("#form-modal-adiciona").serialize();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=clona",
+					parametros + "&codigo=" + codigo
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.mapfile.init($("#corpo"),"");
 					}
 			)
 			.fail(
