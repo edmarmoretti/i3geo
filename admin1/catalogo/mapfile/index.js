@@ -36,11 +36,14 @@ Function: lista
 
 Obt&eacute;m a lista
 		 */
-		lista: function(palavra){
+		lista: function(palavra,validar){
+			if(!validar){
+				validar = "";
+			}
 			i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapfile.ondeLista);
 			$.post(
 					"exec.php?funcao=lista",
-					"&palavra=" + palavra
+					"&palavra=" + palavra + "&validar=" + validar
 			)
 			.done(
 					function(data, status){
@@ -62,6 +65,7 @@ Obt&eacute;m a lista
 						);
 						i3GEOadmin.mapfile.ondeLista.html(html);
 						i3GEOadmin.mapfile.montaFavoritos();
+						$("#totalMapfiles").html(json.length);
 						//filtro
 						html = Mustache.to_html(
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
@@ -239,7 +243,9 @@ Obt&eacute;m a lista
 			)
 			.done(
 					function(data, status){
+						var json = jQuery.parseJSON(data);
 						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.mapfile.favoritosArray.push(json.codigo);
 						i3GEOadmin.mapfile.init($("#corpo"),"");
 					}
 			)

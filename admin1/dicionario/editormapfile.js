@@ -1519,5 +1519,15 @@ i3GEOadmin.mapfile.dicionario = {
 		pt : "Faz uma c&oacute;pia do mapfile atual com um novo nome e novo t&iacute;tulo",
 		en : "",
 		es : ""
+	}],
+	'filtroTitulo' : [{
+		pt : "Filtro por t&iacute;tulo",
+		en : "",
+		es : ""
+	}],
+	'validar' : [{
+		pt : "Validar",
+		en : "",
+		es : ""
 	}]
 };

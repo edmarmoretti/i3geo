@@ -25,10 +25,33 @@ include "../../head.php";
 				<h2><small>{{{txtTitulo}}}</small></h2>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
-				<div class="form-group">
-					<label class="control-label">{{{filtro}}}</label>
-					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
-					</select>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="control-label">{{{filtroTitulo}}}</label>
+						<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<label class="control-label">{{{validar}}}</label>
+						<select title="{{{validar}}}" onchange="i3GEOadmin.mapfile.lista('',this.value);" id="" class="form-control input-lg">
+							<option value='' ></option>
+							<option value=1 >Sem fonte</option>
+							<option value=12 >T&iacute;tulos diferentes no mapfile e no banco de dados</option>
+							<option value=13 >LAYER com NAME diferente do nome do arquivo mapfile</option>
+							<option value=2 >Nome n&atilde;o definido no banco de dados</option>
+							<option value=3 >Nome definido no banco de dados</option>
+							<option value=4 >Permite download</option>
+							<option value=5 >N&atilde;o permite download</option>
+							<option value=6 >Permite WMS</option>
+							<option value=7 >N&atilde;o permite WMS</option>
+							<option value=8 >Permite KML</option>
+							<option value=9 >N&atilde;o permite KML</option>
+							<option value=10 >Permite KMZ</option>
+							<option value=11 >N&atilde;o permite KMZ</option>
+						</select>
+					</div>
 				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.mapfile.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
@@ -45,6 +68,8 @@ include "../../head.php";
 				</div>
 			</div>
 			<div class="well hidden">
+				<div id="totalMapfiles" class=badge >74</div>
+				<div>&nbsp;</div>
 				<div class="panel panel-default" id="favoritos">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title">

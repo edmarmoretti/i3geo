@@ -88,7 +88,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$retorna = lista ( $dbh, $_GET ["filtro"], $_GET ["palavra"] );
+		$retorna = lista ( $dbh, $_POST ["filtro"], $_POST ["palavra"], $_POST ["validar"] );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
@@ -321,12 +321,11 @@ function adicionar($locaplic, $link_tema, $codigo, $acessopublico, $metaestat, $
 		return true;
 	}
 }
-function lista($dbh, $filtro = "", $palavra = "") {
-	global $locaplic, $esquemaadmin;
+function lista($dbh, $filtro = "", $palavra = "", $validar = "") {
+	global $convUTF, $locaplic, $esquemaadmin;
 	$arquivos = array ();
 	if (is_dir ( $locaplic . "/temas" )) {
 		if ($dh = opendir ( $locaplic . "/temas" )) {
-			$extensao = "";
 			while ( ($file = readdir ( $dh )) !== false ) {
 				if (! stristr ( $file, '.map' ) === FALSE) {
 					$file = str_replace ( ".map", "", $file );
@@ -356,12 +355,16 @@ function lista($dbh, $filtro = "", $palavra = "") {
 
 	$nomes = array ();
 	$ids = array ();
+	$dadosBanco = array ();
 	foreach ( $regs as $reg ) {
+		if ($convUTF != true) {
+			$reg ["nome_tema"] = utf8_decode ( $reg ["nome_tema"] );
+		}
 		$nomes [$reg ["codigo_tema"]] = $reg ["nome_tema"];
 		$ids [$reg ["codigo_tema"]] = $reg ["id_tema"];
+		$dadosBanco [$reg ["id_tema"]] = $reg;
 	}
 	$lista = array ();
-
 	foreach ( $arquivos as $arq ) {
 		$arq = $arq ["nome"];
 		$nT = explode ( ".", $arq );
@@ -370,15 +373,77 @@ function lista($dbh, $filtro = "", $palavra = "") {
 			$n = "";
 		}
 		$id = $ids [$nT [0]];
-		if (! $id) {
+		//o mapfile nao esta registrado no banco
+		if (! $id && empty($validar)) {
 			$id = "";
+		} else {
+			//aplica as validacoes. Se nao passar na validacao $id ficara vazio, para nao mostrar no resultado final
+			switch ($validar) {
+				case 1 :
+					if($dadosBanco[$id]["link_tema"] !== ""){
+						$id = "";
+					}
+				break;
+				case 2 :
+					if($dadosBanco[$id]["nome_tema"] == ""){
+						$id = "-";
+					} else {
+						$id = "";
+					}
+				break;
+				case 3 :
+					if($dadosBanco[$id]["nome_tema"] == ""){
+						$id = "";
+					}
+				break;
+				case 4 :
+					if(strtolower($dadosBanco[$id]["download_tema"]) !== "sim"){
+						$id = "";
+					}
+				break;
+				case 5 :
+					if(strtolower($dadosBanco[$id]["download_tema"]) !== "nao"){
+						$id = "";
+					}
+				break;
+				case 6 :
+					if(strtolower($dadosBanco[$id]["ogc_tema"]) !== "sim"){
+						$id = "";
+					}
+				break;
+				case 7 :
+					if(strtolower($dadosBanco[$id]["ogc_tema"]) !== "nao"){
+						$id = "";
+					}
+				break;
+				case 8 :
+					if(strtolower($dadosBanco[$id]["kml_tema"]) !== "sim"){
+						$id = "";
+					}
+				break;
+				case 9 :
+					if(strtolower($dadosBanco[$id]["kml_tema"]) !== "nao"){
+						$id = "";
+					}
+				break;
+				case 10 :
+					if(strtolower($dadosBanco[$id]["kmz_tema"]) !== "sim"){
+						$id = "";
+					}
+				break;
+				case 11 :
+					if(strtolower($dadosBanco[$id]["kmz_tema"]) !== "nao"){
+						$id = "";
+					}
+				break;
+			}
 		}
 		$imagem = "";
 		if (file_exists ( $locaplic . "/temas/miniaturas/" . $arq . ".map.mini.png" )) {
 			$imagem = $arq . ".map.mini.png";
 		}
 
-		if ($_POST ["checaNomes"] == "true") {
+		if ($validar == 12) {
 			if (file_exists ( $locaplic . "/temas/" . $arq . ".map" )) {
 				$handle = fopen ( $locaplic . "/temas/" . $arq . ".map", "r" );
 				while ( ! feof ( $handle ) ) {
@@ -394,8 +459,11 @@ function lista($dbh, $filtro = "", $palavra = "") {
 								"'",
 								'"'
 						), "", $ntema ) );
-						if ($n != $ntema && $n != utf8_decode ( $ntema ) && $n != "") {
-							$n .= "<span style=color:red;margin-left:5px >" . utf8_decode ( $ntema ) . "</span>";
+						$temp = $n;
+						if ($n != $ntema && utf8_decode($temp) != $ntema && $n != "") {
+							$n .= "<span style=color:red;margin-left:5px >" . utf8_encode($ntema) . "</span>";
+						} else {
+							$n .= "<span style=color:lightslategray;margin-left:5px >" . utf8_encode($ntema) . "</span>";
 						}
 						break;
 					}
@@ -403,7 +471,7 @@ function lista($dbh, $filtro = "", $palavra = "") {
 				fclose ( $handle );
 			}
 		}
-		if ($_POST ["checaNames"] == "true") {
+		if ($validar == 13) {
 			if (file_exists ( $locaplic . "/temas/" . $arq . ".map" )) {
 				$handle = fopen ( $locaplic . "/temas/" . $arq . ".map", "r" );
 				// deve buscar dentro de LAYER pois pode haver simbolos antes
@@ -420,7 +488,7 @@ function lista($dbh, $filtro = "", $palavra = "") {
 								'"'
 						), "", $ntema ) );
 						if ($arq != $ntema) {
-							$n .= "<img style='margin-left:3px;' src='../imagens/face-sad.png' title='Nome do LAYER diferente do nome do arquivo' />";
+							$n .= "<span style=color:red;margin-left:5px >" . $ntema . "</span>";
 						}
 						break;
 					}
@@ -428,22 +496,14 @@ function lista($dbh, $filtro = "", $palavra = "") {
 				fclose ( $handle );
 			}
 		}
-		if (isset ( $filtro ) && $filtro != "" && $n != "") {
+		//se id for vazio, nao consta no banco, por isso, se validar for definido, nao pode ser aplicado
+		if(empty($validar) || (!empty($validar) && $id != "")){
 			$lista [] = array (
 					"id_tema" => $id,
 					"nome" => $n,
 					"codigo" => $arq,
 					"imagem" => $imagem,
-					"extensao" => $extensao
-			);
-		}
-		if (! isset ( $filtro ) || $filtro == "") {
-			$lista [] = array (
-					"id_tema" => $id,
-					"nome" => $n,
-					"codigo" => $arq,
-					"imagem" => $imagem,
-					"extensao" => $extensao
+					"extensao" => ""
 			);
 		}
 	}
