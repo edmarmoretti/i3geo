@@ -217,22 +217,25 @@ Obt&eacute;m a lista
 			);
 		},
 		clonaDialogo: function(codigo){
-			var f = '<h4 class="pull-right"></h4><form id="form-modal-adiciona" class="form-horizontal"><div class="form-group form-group-lg"><label class="col-md-6 control-label">'+i3GEOadmin.mapfile.dicionario.nomeArquivo+':</label><div class="col-md-6"><input type="text" class="form-control" name="clonarComo" value="" required ></div></div></form>';
-			var hash = {
-					"mensagem": f,
-					"onBotao1": "i3GEOadmin.mapfile.clona('"+codigo+"')",
-					"botao1": i3GEOadmin.mapfile.dicionario.criaCopia,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.mapfile.dicionario.cancela
-			};
-			i3GEOadmin.core.abreModalConfirma(hash);
+			var html = Mustache.to_html(
+					"{{#data}}" + $("#templateClonarTema").html() + "{{/data}}",
+					$.extend(
+							{},
+							i3GEOadmin.mapfile.dicionario,
+							{
+								"data": "modal",
+								"codigoAtual": codigo
+							}
+					)
+			);
+			i3GEOadmin.core.abreModalGeral(html);
 		},
-		clona: function(codigo){
+		clona: function(){
 			var parametros = $("#form-modal-adiciona").serialize();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
-					"exec.php?funcao=clona",
-					parametros + "&codigo=" + codigo
+					"exec.php?funcao=clonarmapfile",
+					parametros
 			)
 			.done(
 					function(data, status){

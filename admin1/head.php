@@ -224,9 +224,6 @@ h2 small {
 </script>
 <!-- Template para o Modal de confirmacao -->
 <script id="modalConfirmaTpl" type="x-tmpl-mustache">
-	<button class="btn btn-primary btn-fab btn-fab-mini pull-left">
-		<i class="material-icons">help</i>
-	</button>
 	<h4 class="pull-right">{{{mensagem}}}</h4>
 	<div class="clearfix"></div>
 	<div class="pull-right">

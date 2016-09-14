@@ -1514,5 +1514,10 @@ i3GEOadmin.mapfile.dicionario = {
 		pt : "Link para os metadados",
 		en : "",
 		es : ""
+	}],
+	'clonaMapfile' : [{
+		pt : "Faz uma c&oacute;pia do mapfile atual com um novo nome e novo t&iacute;tulo",
+		en : "",
+		es : ""
 	}]
 };

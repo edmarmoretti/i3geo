@@ -30,7 +30,10 @@ error_reporting ( 0 );
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"LISTA",
-		"ADICIONAR"
+		"ADICIONAR",
+		"EXCLUIR",
+		"LIMPACACHE",
+		"CLONARMAPFILE"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
@@ -56,7 +59,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo ja existe" );
 			exit ();
 		}
-		$novo = adicionar ( $locaplic, $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["titulo"], $_POST ["desc_tema"], $_POST ["tituloEN"], $_post ["tituloES"], $dbhw );
+		$novo = adicionar ( $locaplic, $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["titulo"], $_POST ["desc_tema"], $_POST ["tituloEN"], $_POST ["tituloES"], true, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -85,7 +88,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$retorna = lista ( $dbh, $_GET["filtro"], $_GET["palavra"] );
+		$retorna = lista ( $dbh, $_GET ["filtro"], $_GET ["palavra"] );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
@@ -96,32 +99,99 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LIMPACACHE" :
-		$mapfile = $locaplic."/temas/".$_POST["codigo"].".map";
-		if(!file_exists($mapfile)){
+		$mapfile = $locaplic . "/temas/" . $_POST ["codigo"] . ".map";
+		if (! file_exists ( $mapfile )) {
 			header ( "HTTP/1.1 403 arquivo nao existe" );
 			exit ();
 		}
-		$mapa = ms_newMapObj($mapfile);
-		$nomes = $mapa->getalllayernames();
-		//$cachedir e $dir_tmp vem de ms_configura.php
-		if($cachedir != ""){
+		$mapa = ms_newMapObj ( $mapfile );
+		$nomes = $mapa->getalllayernames ();
+		// $cachedir e $dir_tmp vem de ms_configura.php
+		if ($cachedir != "") {
 			$d = $cachedir;
+		} else {
+			$d = $dir_tmp . "/cache";
 		}
-		else{
-			$d = $dir_tmp."/cache";
-		}
-		foreach($nomes as $nome){
-			$nome = str_replace(".","",$nome);
-			$nome = strip_tags($nome);
-			$nome = htmlspecialchars($nome, ENT_QUOTES);
-			$dirs[] = $d."/".$nome;
-			$dirs[] = $d."/googlemaps/".$nome;
-			$dirs[] = $d."/wmts/".$nome;
-			foreach($dirs as $dir){
-				rrmdir($dir);
+		foreach ( $nomes as $nome ) {
+			$nome = str_replace ( ".", "", $nome );
+			$nome = strip_tags ( $nome );
+			$nome = htmlspecialchars ( $nome, ENT_QUOTES );
+			$dirs [] = $d . "/" . $nome;
+			$dirs [] = $d . "/googlemaps/" . $nome;
+			$dirs [] = $d . "/wmts/" . $nome;
+			foreach ( $dirs as $dir ) {
+				rrmdir ( $dir );
 			}
 		}
-		retornaJSON("ok");
+		retornaJSON ( "ok" );
+		exit ();
+		break;
+	case "CLONARMAPFILE" :
+		$codigo = $_POST ["codigo"];
+		$codigo = str_replace ( " ", "", removeAcentos ( $codigo ) );
+		$codigo = str_replace ( ".", "", $codigo );
+		$codigo = strip_tags ( $codigo );
+		$codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
+
+		$novocodigo = $_POST ["novocodigo"];
+		$novocodigo = str_replace ( " ", "", removeAcentos ( $novocodigo ) );
+		$novocodigo = str_replace ( ".", "", $novocodigo );
+		$novocodigo = strip_tags ( $novocodigo );
+		$novocodigo = htmlspecialchars ( $novocodigo, ENT_QUOTES );
+
+		$arq = $locaplic . "/temas/" . $codigo . ".map";
+		$arqnovo = $locaplic . "/temas/" . $novocodigo . ".map";
+
+		if ($codigo == "" || !file_exists ( $arq )) {
+			header ( "HTTP/1.1 400 arquivo nao existe" );
+			exit ();
+		}
+		if ($novocodigo == "" || file_exists ( $arqnovo )) {
+			header ( "HTTP/1.1 400 arquivo ja existe" );
+			exit ();
+		}
+		//obtem os dados do banco do tema existente
+		$dados = pegaDados ( "SELECT * from " . $esquemaadmin . "i3geoadmin_temas WHERE codigo_tema = '" . $codigo . "'", $dbh, false );
+		if (count ( $dados ) > 0) {
+			//o mapfile esta registrado como um tema no banco de adm
+			$dataCol = array (
+				"link_tema" => $dados [0] ["link_tema"],
+				"kml_tema" => $dados [0] ["kml_tema"],
+				"kmz_tema" => $dados [0] ["kmz_tema"],
+				"ogc_tema" => $dados [0] ["ogc_tema"],
+				"download_tema" => $dados [0] ["download_tema"],
+				"desc_tema" => "",
+				"tipoa_tema" => $dados [0] ["tipoa_tema"],
+				"tags_tema" => '',
+				"nome_tema" => $_POST["titulo"],
+				"codigo_tema" => $novocodigo,
+				"it" => "",
+				"es" => "",
+				"en" => ""
+			);
+			$acessopublico = $dados [0] ["download_tema"];
+		} else {
+			$acessopublico = "";
+		}
+		//faz a copia do mapfile
+		$mapa = ms_newMapObj($arq);
+		$layer = @$mapa->getlayerbyname($codigo);
+		$layer->set("name",$novocodigo);
+		$layer->setmetadata("TEMA",$_POST["titulo"]);
+		$mapa->save($arqnovo);
+		include(dirname(__FILE__)."/../../php/removeCabecalhoMapfile.php");
+		removeCabecalhoMapfile($arqnovo);
+
+		if ($novo === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		} elseif (count ( $dados ) > 0) {
+			//registra no banco de dados caso nao tenha ocorrido erro ao criar o mapfile
+			i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );
+		}
+		retornaJSON ( array (
+				"codigo" => $novocodigo
+		) );
 		exit ();
 		break;
 }
@@ -147,24 +217,24 @@ function excluir($codigo, $dbhw) {
 			return "o tema e utilizado em alguma raiz";
 		}
 	}
-	if (!file_exists ( "$locaplic/temas/" . $codigo . ".map" )) {
+	if (! file_exists ( "$locaplic/temas/" . $codigo . ".map" )) {
 		return "o arquivo mapfile nao existe";
 	}
-	//verifica se pode escrever
-	$handle = fopen("$locaplic/temas/" . $codigo . ".map", "r+");
-	if($handle == false){
+	// verifica se pode escrever
+	$handle = fopen ( "$locaplic/temas/" . $codigo . ".map", "r+" );
+	if ($handle == false) {
 		return "o arquivo nao pode ser apagado verifique as permissoes";
 	}
-	fclose($handle);
-	//tenta excluir do banco
+	fclose ( $handle );
+	// tenta excluir do banco
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_temas", "id_tema", $id, $dbhw, true );
 	if ($resultado === false) {
 		return "nao foi possivel excluir do banco de dados";
 	}
-	unlink("$locaplic/temas/" . $codigo . ".map");
+	unlink ( "$locaplic/temas/" . $codigo . ".map" );
 	return true;
 }
-function adicionar($locaplic, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $dbhw) {
+function adicionar($locaplic, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
 	global $convUTF, $esquemaadmin;
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if (empty ( $acessopublico ) || $acessopublico == "on") {
@@ -220,31 +290,35 @@ function adicionar($locaplic, $link_tema, $codigo, $acessopublico, $metaestat, $
 		$titulo = utf8_decode ( $titulo );
 		$desc_tema = utf8_decode ( $desc_tema );
 	}
-	try {
-		$dataCol = array (
-				"link_tema" => $link_tema,
-				"kml_tema" => $acessopublico,
-				"kmz_tema" => $acessopublico,
-				"ogc_tema" => $acessopublico,
-				"download_tema" => $acessopublico,
-				"desc_tema" => $desc_tema,
-				"tipoa_tema" => $tipoa_tema,
-				"tags_tema" => '',
-				"nome_tema" => $titulo,
-				"codigo_tema" => $codigo,
-				"it" => "",
-				"es" => $tituloES,
-				"en" => $tituloEN
-		);
-		i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );
-		// salva o arquivo mapfile
-		foreach ( $dados as $dado ) {
-			fwrite ( $fp, $dado . "\n" );
+	if($registraBanco == true){
+		try {
+			$dataCol = array (
+					"link_tema" => $link_tema,
+					"kml_tema" => $acessopublico,
+					"kmz_tema" => $acessopublico,
+					"ogc_tema" => $acessopublico,
+					"download_tema" => $acessopublico,
+					"desc_tema" => $desc_tema,
+					"tipoa_tema" => $tipoa_tema,
+					"tags_tema" => '',
+					"nome_tema" => $titulo,
+					"codigo_tema" => $codigo,
+					"it" => "",
+					"es" => $tituloES,
+					"en" => $tituloEN
+			);
+			i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );
+			// salva o arquivo mapfile
+			foreach ( $dados as $dado ) {
+				fwrite ( $fp, $dado . "\n" );
+			}
+			fclose ( $fp );
+			return true;
+		} catch ( PDOException $e ) {
+			return false;
 		}
-		fclose ( $fp );
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
+	} else {
+		return true;
 	}
 }
 function lista($dbh, $filtro = "", $palavra = "") {
@@ -256,10 +330,12 @@ function lista($dbh, $filtro = "", $palavra = "") {
 			while ( ($file = readdir ( $dh )) !== false ) {
 				if (! stristr ( $file, '.map' ) === FALSE) {
 					$file = str_replace ( ".map", "", $file );
-					//verifica se existe um filtro de palavra
-					if($palavra != ""){
-						if(stripos($file, $palavra) !== false){
-							$arquivos[] = array("nome"=>$file);
+					// verifica se existe um filtro de palavra
+					if ($palavra != "") {
+						if (stripos ( $file, $palavra ) !== false) {
+							$arquivos [] = array (
+									"nome" => $file
+							);
 						}
 					} else {
 						$arquivos [] = array (
@@ -374,21 +450,21 @@ function lista($dbh, $filtro = "", $palavra = "") {
 	return $lista;
 }
 function rrmdir($dir) {
-	if (is_dir($dir)) {
-		$objects = scandir($dir);
-		foreach ($objects as $object) {
+	if (is_dir ( $dir )) {
+		$objects = scandir ( $dir );
+		foreach ( $objects as $object ) {
 			if ($object != "." && $object != "..") {
-				if (filetype($dir."/".$object) == "dir") {
-					rrmdir($dir."/".$object);
+				if (filetype ( $dir . "/" . $object ) == "dir") {
+					rrmdir ( $dir . "/" . $object );
 				} else {
-					$object = str_replace(".png","",$object).".png";
-					chmod($dir."/".$object,077);
-					unlink($dir."/".$object);
+					$object = str_replace ( ".png", "", $object ) . ".png";
+					chmod ( $dir . "/" . $object, 077 );
+					unlink ( $dir . "/" . $object );
 				}
 			}
 		}
-		reset($objects);
-		//rmdir($dir);
+		reset ( $objects );
+		// rmdir($dir);
 	}
 }
 ?>
