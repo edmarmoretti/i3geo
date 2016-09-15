@@ -1510,17 +1510,6 @@ i3GEO.arvoreDeTemas = {
 			}
 		}
 		//
-		// wms indi br
-		if (i3GEO.arvoreDeTemas.INCLUIINDIBR === true) {
-			var temp = function() {
-				i3GEOF.vinde.inicia("", i3GEO.arvoreDeTemas.ARVORE);
-			};
-			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/vinde/dependencias.php", temp,
-					"i3GEOF.vinde_script");
-		}
-
-		//
 		// adiciona na arvore a raiz de cada menu
 		//
 		dados = i3GEO.arvoreDeTemas.MENUS;
@@ -1575,6 +1564,16 @@ i3GEO.arvoreDeTemas = {
 			} else if (mais != "") {
 				i3GEO.arvoreDeTemas.adicionaNoNavegacaoDir();
 			}
+		}
+		//
+		// wms indi br
+		if (i3GEO.arvoreDeTemas.INCLUIINDIBR === true) {
+			var temp = function() {
+				i3GEOF.vinde.inicia("", i3GEO.arvoreDeTemas.ARVORE);
+			};
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic
+					+ "/ferramentas/vinde/dependencias.php", temp,
+					"i3GEOF.vinde_script");
 		}
 	},
 	adicionaNoNavegacaoDir : function(drives, arvore) {
