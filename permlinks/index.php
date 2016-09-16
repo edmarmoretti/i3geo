@@ -1,6 +1,7 @@
 <?php
 define ( ONDEI3GEO, ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
+include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
 if (! empty ( $_GET ["customDir"] )) {
 	$customDir = strip_tags ( $_GET ["customDir"] );
 } else if (empty ( $customDir )) {

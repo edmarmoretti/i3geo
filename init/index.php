@@ -20,6 +20,7 @@ if (! empty ( $_GET ["customDir"] )) {
 } else if (empty ( $customDir )) {
 	$customDir = "interface";
 }
+include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
 if (! file_exists ( $dir_tmp )) {
 	@mkdir ( $dir_tmp, 0744 );
 }
