@@ -33,6 +33,7 @@ $temas = $parurl["temas"];
 $layers = $parurl["layers"];
 
 $altura = $parurl["altura"];
+$largura = $parurl["largura"];
 $controles = $parurl["controles"];
 $botoes = $parurl["botoes"];
 $fundo = $parurl["fundo"];
