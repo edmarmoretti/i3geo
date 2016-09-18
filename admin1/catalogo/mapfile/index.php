@@ -53,9 +53,7 @@ include "../../head.php";
 						</select>
 					</div>
 				</div>
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.mapfile.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
-				</div>
+
 				<div class="clearfix"></div>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
@@ -68,8 +66,11 @@ include "../../head.php";
 				</div>
 			</div>
 			<div class="well hidden">
-				<div id="totalMapfiles" class=badge >74</div>
-				<div>&nbsp;</div>
+				<div class="row pull-right">
+					<span id="totalMapfiles" class=badge >74</span>
+					<a onclick="i3GEOadmin.mapfile.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
+				</div>
+				<div class="clearfix"></div>
 				<div class="panel panel-default" id="favoritos">
 					<div class="panel-heading" role="tab">
 						<h4 class="panel-title">

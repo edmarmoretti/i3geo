@@ -16,8 +16,8 @@ include "../../head.php";
 </div>
 <div class="container">
 	<div class="row center-block">
-		<div class="col-md-12">
-			<div class="well hidden" id="titulo">
+		<div class="col-md-12" id="titulo">
+			<div class="well hidden" >
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
@@ -30,9 +30,7 @@ include "../../head.php";
 					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.atlas.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
-				</div>
+
 				<div class="clearfix"></div>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
@@ -45,6 +43,10 @@ include "../../head.php";
 				</div>
 			</div>
 			<div class="well hidden">
+				<div class="row pull-right">
+					<a onclick="i3GEOadmin.atlas.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
+				</div>
+				<div class="clearfix"></div>
 				<div id="corpo">
 				</div>
 			</div>

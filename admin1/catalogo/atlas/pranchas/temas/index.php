@@ -21,8 +21,8 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 </div>
 <div class="container">
 	<div class="row center-block">
-		<div class="col-md-12">
-			<div class="well hidden" id="titulo">
+		<div class="col-md-12" id="titulo">
+			<div class="well hidden" >
 				<h3>{{{txtTituloTema}}}</h3>
 				<h4>{{{txtDescTema}}}</h4>
 				<!-- aqui entra o filtro -->
@@ -31,12 +31,13 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
+				<div class="clearfix"></div>
+			</div>
+			<div class="well hidden">
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.tema.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
-			</div>
-			<div class="well hidden">
 				<div id="corpo">
 				</div>
 			</div>
