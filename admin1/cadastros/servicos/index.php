@@ -60,6 +60,51 @@ include "../../head.php";
 <script id="templateFiltro" type="x-tmpl-mustache">
 <option value="form-{{id_ws}}">{{{nome_ws}}}</option>
 </script>
+<script id="templateFormLista" type="x-tmpl-mustache">
+<form style="" action="#" onsubmit="{{onSalvar}}('{{id_ws}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+	<div class="row">
+		<div class="col-md-12">
+			<h4>{{{nome_ws}}}</h4>
+			<div class="form-group form-group-lg">
+				<label class="col-md-2 control-label" for="nome_ws" >{{{nomeTxt}}}</label>
+				<div class="col-md-10">
+					<input title="{{{nomeTxt}}}" type="text" value="{{{nome_ws}}}" class="form-control" name="nome_ws" required>
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-2 control-label" for="desc_ws">{{{descricaoTxt}}}</label>
+				<div class="col-md-10">
+					<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_ws}}}" class="form-control" name="desc_ws" >
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-2 control-label" for="autor_ws">{{{autor}}}</label>
+				<div class="col-md-10">
+					<input title="{{{autor}}}" type="text" value="{{{autor_ws}}}" class="form-control" name="autor_ws" required>
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-2 control-label" for="link_ws">{{{endereco}}}</label>
+				<div class="col-md-10">
+					<input title="{{{endereco}}}" type="text" value="{{{link_ws}}}" class="form-control" name="link_ws">
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-2 control-label" for="tipo_ws">{{{tipo}}}</label>
+				<div class="col-md-10">
+					<select title="{{{tipo}}}" name="tipo_ws" class="form-control">
+						{{{opcoesTipo}}}
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pull-right">
+		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
+	</div>
+	<div class="clearfix"></div>
+</form>
+</script>
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_ws}}">
 	<div class="panel-heading" role="tab">
@@ -73,49 +118,7 @@ include "../../head.php";
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_ws}}">
-		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_ws}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-			<div class="row">
-				<div class="col-md-12">
-					<h4>{{{nome_ws}}}</h4>
-					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="nome_ws" >{{{nomeTxt}}}</label>
-						<div class="col-md-10">
-							<input title="{{{nomeTxt}}}" type="text" value="{{{nome_ws}}}" class="form-control" name="nome_ws" required>
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="desc_ws">{{{descricaoTxt}}}</label>
-						<div class="col-md-10">
-							<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_ws}}}" class="form-control" name="desc_ws" >
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="autor_ws">{{{autor}}}</label>
-						<div class="col-md-10">
-							<input title="{{{autor}}}" type="text" value="{{{autor_ws}}}" class="form-control" name="autor_ws" required>
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="link_ws">{{{endereco}}}</label>
-						<div class="col-md-10">
-							<input title="{{{endereco}}}" type="text" value="{{{link_ws}}}" class="form-control" name="link_ws">
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="tipo_ws">{{{tipo}}}</label>
-						<div class="col-md-10">
-							<select title="{{{tipo}}}" name="tipo_ws" class="form-control">
-								{{{opcoesTipo}}}
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-		</div>
-		</form>
-
+		{{{templateFormLista}}}
 	</div>
 </div>
 </script>

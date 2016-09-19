@@ -59,6 +59,35 @@ include "../../head.php";
 <script id="templateFiltro" type="x-tmpl-mustache">
 <option value="form-{{id_grupo}}">{{{nome}}}</option>
 </script>
+<script id="templateFormLista" type="x-tmpl-mustache">
+<form style="" action="#" onsubmit="{{onSalvar}}('{{id_grupo}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+	<div class="row">
+		<div class="col-md-4" style="max-height: 230px; overflow-y: auto;">
+			<h4> {{{usuariosv}}}</h4>
+			<div class="form-group form-group-lg" style="padding-left:5px;">{{{inputUsuarios}}}</div>
+		</div>
+		<div class="col-md-8">
+			<h4>{{{grupo}}}</h4>
+			<div class="form-group form-group-lg">
+				<label class="col-md-2 control-label" for="nome" >{{{nomeTxt}}}</label>
+				<div class="col-md-10">
+					<input title="{{{nomeTxt}}}" type="text" value="{{{nome}}}" class="form-control" name="nome" required>
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-2 control-label" for="login">{{{descricaoTxt}}}</label>
+				<div class="col-md-10">
+					<input title="{{{descricaoTxt}}}" type="text" value="{{{descricao}}}" class="form-control" name="descricao">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pull-right">
+		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
+	</div>
+	<div class="clearfix"></div>
+</form>
+</script>
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_grupo}}">
 	<div class="panel-heading" role="tab">
@@ -72,33 +101,7 @@ include "../../head.php";
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_grupo}}">
-		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_grupo}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-			<div class="row">
-				<div class="col-md-4" style="max-height: 230px; overflow-y: auto;">
-					<h4> {{{usuariosv}}}</h4>
-					<div class="form-group form-group-lg" style="padding-left:5px;">{{{inputUsuarios}}}</div>
-				</div>
-				<div class="col-md-8">
-					<h4>{{{grupo}}}</h4>
-					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="nome" >{{{nomeTxt}}}</label>
-						<div class="col-md-10">
-							<input title="{{{nomeTxt}}}" type="text" value="{{{nome}}}" class="form-control" name="nome" required>
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="login">{{{descricaoTxt}}}</label>
-						<div class="col-md-10">
-							<input title="{{{descricaoTxt}}}" type="text" value="{{{descricao}}}" class="form-control" name="descricao">
-						</div>
-					</div>
-				</div>
-			</div>
-		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-		</div>
-		</form>
-
+		{{{templateFormLista}}}
 	</div>
 </div>
 </script>

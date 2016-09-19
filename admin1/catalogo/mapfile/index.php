@@ -105,6 +105,9 @@ include "../../head.php";
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{codigo}}">
 		<div>
+			<a onclick="i3GEOadmin.mapfile.dadosGeraisDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{tituloTxt}}}</a>
+		</div>
+		<div>
 			<a title="{{{excluir}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.excluirDialogo('{{codigo}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">delete_forever</i>
 			</a>
@@ -141,7 +144,7 @@ include "../../head.php";
 	</div>
 </div>
 </script>
-<script id="templateAdicionarTema" type="x-tmpl-mustache">
+<script id="templateManterTema" type="x-tmpl-mustache">
 		<h4>{{{criaMapfile}}}</h4>
 		<blockquote>{{{criaMapfileDesc}}}</blockquote>
 		<form id="form-modal-adiciona" style="" action="#" onsubmit="i3GEOadmin.mapfile.adiciona();return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
@@ -150,52 +153,58 @@ include "../../head.php";
 					<div class="form-group form-group-lg">
 						<label class="col-md-6 control-label" for="codigo" >{{{nomeMap}}}</label>
 						<div class="col-md-6">
-							<input title="{{{nomeMap}}}" type="text" value="" class="form-control" name="codigo" required>
+							<input title="{{{nomeMap}}}" type="text" value="{{{codigo}}}" class="form-control" name="codigo" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<label class="col-md-6 control-label" for="titulo" >{{{tituloTema}}}. {{{tituloPt}}}</label>
+						<label class="col-md-6 control-label" for="titulolegenda" >{{{tituloLegenda}}}</label>
 						<div class="col-md-6">
-							<input title="{{{tituloTema}}}" type="text" value="" class="form-control" name="titulo" >
+							<input title="{{{tituloLegenda}}}" type="text" value="{{{titulolegenda}}}" class="form-control" name="titulolegenda" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<label class="col-md-6 control-label" for="tituloES" >{{{tituloEs}}}</label>
+						<label class="col-md-6 control-label" for="titulo" >{{{tituloTema}}}</label>
 						<div class="col-md-6">
-							<input title="{{{tituloEs}}}" type="text" value="" class="form-control" name="tituloES" >
+							<input placeholder="{{{tituloPt}}}" title="{{{tituloTema}}}" type="text" value="{{{titulo}}}" class="form-control" name="titulo" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<label class="col-md-6 control-label" for="tituloEN" >{{{tituloEn}}}</label>
+						<label class="col-md-6 control-label" for="titulo" ></label>
 						<div class="col-md-6">
-							<input title="{{{tituloEn}}}" type="text" value="" class="form-control" name="tituloEN" >
+							<input placeholder="{{{tituloEs}}}" title="{{{tituloEs}}}" type="text" value="{{{tituloES}}}" class="form-control" name="tituloES" >
+						</div>
+					</div>
+					<div class="form-group form-group-lg">
+						<label class="col-md-6 control-label" for="titulo" ></label>
+						<div class="col-md-6">
+							<input placeholder="{{{tituloEn}}}" title="{{{tituloEn}}}" type="text" value="{{{tituloEN}}}" class="form-control" name="tituloEN" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-6 control-label" for="desc_tema" >{{{descricaoTxt}}}</label>
 						<div class="col-md-6">
-							<input title="{{{descricaoTxt}}}" type="text" value="" class="form-control" name="desc_tema" >
+							<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_tema}}}" class="form-control" name="desc_tema" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-6 control-label" for="link_tema" >{{{fonteTema}}}</label>
 						<div class="col-md-6">
-							<input title="{{{fonteTema}}}" type="text" value="" class="form-control" name="link_tema" >
+							<input title="{{{fonteTema}}}" type="text" value="{{{link_tema}}}" class="form-control" name="link_tema" >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-6 control-label" for="metaestat">{{{metaestat}}}</label>
 						<div class="col-md-6">
 							<select title="{{{metaestat}}}" class="form-control" name="metaestat">
-								<option value="SIM" >{{{sim}}}</option>
-								<option value="NAO" selected >{{{nao}}}</option>
+								<option value="SIM" {{{metaestatsim}}} >{{{sim}}}</option>
+								<option value="NAO" {{{metaestatnao}}} >{{{nao}}}</option>
 							</select>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<div class="checkbox col-md-12">
 							<label>
-								<input title="{{{permiteOgc}}}" type="checkbox" checked name="acessopublico" /> {{{permiteOgc}}}
+								<input title="{{{permiteOgc}}}" type="checkbox" {{acessopublico}} name="acessopublico" /> {{{permiteOgc}}}
 							</label>
 						</div>
 					</div>

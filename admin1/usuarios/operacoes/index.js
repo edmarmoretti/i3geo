@@ -57,6 +57,7 @@ Obt&eacute;m a lista de operacoes
 						var templatePapeis = $("#templateInputPapeis").html();
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
+						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						//lista todas as operacoes
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -108,7 +109,7 @@ Obt&eacute;m a lista de operacoes
 						//monta um template para o modal de inclusao de nova operacao
 						if(i3GEOadmin.operacoes.formAdiciona == ""){
 							html = Mustache.to_html(
-									$("#templateLista").html(),
+									$("#templateFormLista").html(),
 									$.extend(
 											{},
 											i3GEOadmin.operacoes.dicionario,
@@ -148,7 +149,7 @@ Obt&eacute;m a lista de operacoes
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
-			var parametros = $("#form-modal form").serialize();
+			var parametros = $("#modalGeral form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(

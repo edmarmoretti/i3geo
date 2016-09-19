@@ -53,6 +53,7 @@ Obt&eacute;m a lista
 						//objeto json com os dados viondos do banco
 						var json = jQuery.parseJSON(data);
 						var templateLista = $("#templateLista").html();
+						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
 								$.extend(
@@ -90,12 +91,14 @@ Obt&eacute;m a lista
 		},
 		adicionaDialogo: function(){
 			var html = Mustache.to_html(
-					"{{#data}}" + $("#templateAdicionarTema").html() + "{{/data}}",
+					"{{#data}}" + $("#templateManterTema").html() + "{{/data}}",
 					$.extend(
 							{},
 							i3GEOadmin.mapfile.dicionario,
 							{
-								"data": "modal"
+								"data": "modal",
+								"metaestatnao": "selected",
+								"acessopublico": "checked"
 							}
 					)
 			);

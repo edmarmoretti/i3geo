@@ -75,38 +75,42 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 <script id="templateFiltro" type="x-tmpl-mustache">
 <option value="form-{{id_subgrupo}}">{{{nome_subgrupo}}}</option>
 </script>
+<script id="templateFormLista" type="x-tmpl-mustache">
+<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
+	method="post"  >
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="nome">{{{nomeTxt}}} (Pt)</label>
+		<div class="col-md-10">
+			<input type="text" value="{{{nome_subgrupo}}}" class="form-control" name="nome_subgrupo" required>
+		</div>
+	</div>
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="desc_subgrupo">{{{descricaoTxt}}}</label>
+		<div class="col-md-10">
+			<input type="text" value="{{{desc_subgrupo}}}" class="form-control" name="desc_subgrupo" required>
+		</div>
+	</div>
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="es">Es</label>
+		<div class="col-md-10">
+			<input type="text" value="{{{es}}}" class="form-control" name="es" required>
+		</div>
+	</div>
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="en">En</label>
+		<div class="col-md-10">
+			<input type="text" value="{{{en}}}" class="form-control" name="en" required>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</form>
+</script>
 <script id="templateLista" type="x-tmpl-mustache">
 	<div class="panel panel-default" id="form-{{id_subgrupo}}">
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-12">
-					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
-						method="post"  >
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="nome">{{{nomeTxt}}} (Pt)</label>
-							<div class="col-md-10">
-								<input type="text" value="{{{nome_subgrupo}}}" class="form-control" name="nome_subgrupo" required>
-							</div>
-						</div>
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="desc_subgrupo">{{{descricaoTxt}}}</label>
-							<div class="col-md-10">
-								<input type="text" value="{{{desc_subgrupo}}}" class="form-control" name="desc_subgrupo" required>
-							</div>
-						</div>
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="es">Es</label>
-							<div class="col-md-10">
-								<input type="text" value="{{{es}}}" class="form-control" name="es" required>
-							</div>
-						</div>
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="en">En</label>
-							<div class="col-md-10">
-								<input type="text" value="{{{en}}}" class="form-control" name="en" required>
-							</div>
-						</div>
-					</form>
+					{{{templateFormLista}}}
 				</div>
 			</div>
 			<div class="row">
@@ -122,7 +126,6 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 		</div>
 	</div>
 </script>
-
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../../../../dicionario/subgrupos.js"></script>
 <script>

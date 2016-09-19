@@ -51,6 +51,7 @@ Obt&eacute;m a lista
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
+						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						//lista todas as menus
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -81,7 +82,7 @@ Obt&eacute;m a lista
 						//monta um template para o modal de inclusao de novo usuario
 						if(i3GEOadmin.prancha.formAdiciona == ""){
 							html = Mustache.to_html(
-									$("#templateLista").html(),
+									$("#templateFormLista").html(),
 									$.extend(
 											{},
 											i3GEOadmin.prancha.dicionario,
@@ -111,7 +112,7 @@ Obt&eacute;m a lista
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
-			var parametros = $("#form-modal form").serialize();
+			var parametros = $("#modalGeral form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(

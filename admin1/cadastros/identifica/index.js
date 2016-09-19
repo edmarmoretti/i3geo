@@ -49,6 +49,7 @@ Obt&eacute;m a lista de Identifica
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
+						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						//lista todas as Identifica
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -102,7 +103,7 @@ Obt&eacute;m a lista de Identifica
 						//monta um template para o modal de inclusao de novo usuario
 						if(i3GEOadmin.identifica.formAdiciona == ""){
 							html = Mustache.to_html(
-									$("#templateLista").html(),
+									$("#templateFormLista").html(),
 									$.extend(
 											{},
 											i3GEOadmin.identifica.dicionario,
@@ -142,7 +143,7 @@ Obt&eacute;m a lista de Identifica
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adicionar: function(){
-			var parametros = $("#form-modal form").serialize();
+			var parametros = $("#modalGeral form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(

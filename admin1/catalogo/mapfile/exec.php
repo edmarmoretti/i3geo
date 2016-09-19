@@ -59,7 +59,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo ja existe" );
 			exit ();
 		}
-		$novo = adicionar ( $locaplic, $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["titulo"], $_POST ["desc_tema"], $_POST ["tituloEN"], $_POST ["tituloES"], true, $dbhw );
+		$novo = adicionar ( $locaplic, $_POST["titulolegenda"], $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["titulo"], $_POST ["desc_tema"], $_POST ["tituloEN"], $_POST ["tituloES"], true, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -234,13 +234,16 @@ function excluir($codigo, $dbhw) {
 	unlink ( "$locaplic/temas/" . $codigo . ".map" );
 	return true;
 }
-function adicionar($locaplic, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
+function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
 	global $convUTF, $esquemaadmin;
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if (empty ( $acessopublico ) || $acessopublico == "on") {
 		$acessopublico = "SIM";
 	} else {
 		$acessopublico = "SIM";
+	}
+	if(mb_detect_encoding($titulolegenda,'UTF-8, ISO-8859-1') == "UTF-8"){
+		$titulolegenda = utf8_decode($titulolegenda);
 	}
 	$tipoLayer = "line";
 	$dados [] = "MAP";
@@ -258,7 +261,7 @@ function adicionar($locaplic, $link_tema, $codigo, $acessopublico, $metaestat, $
 	$dados [] = '	CONNECTION ""';
 	$dados [] = '	STATUS DEFAULT';
 	$dados [] = '	METADATA';
-	$dados [] = '		TEMA "' . $titulo . '"';
+	$dados [] = '		TEMA "' . $titulolegenda . '"';
 	$dados [] = '		CLASSE "SIM"';
 	$tipoa_tema = "";
 	if (! empty ( $metaestat ) && $metaestat == "SIM") {

@@ -204,6 +204,10 @@ a, a:focus, a:hover {
 	background-color: #de3601;
 }
 
+.form-group.form-group-lg {
+	margin-top: 10px;
+}
+
 .form-group.form-group-lg label.control-label {
 	color: #767676;
 }

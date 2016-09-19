@@ -61,7 +61,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'tituloTema' : [ {
-		pt : "T&iacute;tulo do novo tema",
+		pt : "T&iacute;tulo para o catálogo",
 		en : "",
 		es : ""
 	} ],
@@ -1527,6 +1527,11 @@ i3GEOadmin.mapfile.dicionario = {
 	}],
 	'validar' : [{
 		pt : "Validar",
+		en : "",
+		es : ""
+	}],
+	'tituloLegenda' : [{
+		pt : "T&iacute;tulo para a legenda e &aacute;rvore de camadas",
 		en : "",
 		es : ""
 	}]

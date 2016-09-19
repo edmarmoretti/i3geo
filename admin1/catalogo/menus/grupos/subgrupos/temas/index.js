@@ -168,7 +168,7 @@ i3GEOadmin.temas = {
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adicionaTema: function(){
-			var parametros = $("#form-modal form").serialize();
+			var parametros = $("#modalGeral form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(

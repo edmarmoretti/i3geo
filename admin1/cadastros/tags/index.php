@@ -58,26 +58,31 @@ include "../../head.php";
 <script id="templateFiltro" type="x-tmpl-mustache">
 <option value="form-{{id_tag}}">{{{nome}}}</option>
 </script>
+<script id="templateFormLista" type="x-tmpl-mustache">
+<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
+	method="post"  >
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="nome">Tag</label>
+		<div class="col-md-10">
+			<input title="Tag" type="text" value="{{{nome}}}" class="form-control" name="nome" required>
+		</div>
+	</div>
+	<div class="pull-right">
+		<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tag}}')" class="btn btn-danger"
+			style="color:#e13023;" role="button">{{excluir}}</a>
+		<a href="javascript:void(0)"
+			onclick="{{onSalvar}}('{{id_tag}}')" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</a>
+	</div>
+	<div class="clearfix"></div>
+</form>
+</script>
 <script id="templateLista" type="x-tmpl-mustache">
 	<div class="panel panel-default" id="form-{{id_tag}}">
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-12">
-					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
-						method="post"  >
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="nome">Tag</label>
-							<div class="col-md-10">
-								<input title="Tag" type="text" value="{{{nome}}}" class="form-control" name="nome" required>
-							</div>
-						</div>
-					</form>
-					<div class="pull-right">
-						<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tag}}')" class="btn btn-danger"
-							style="color:#e13023;" role="button">{{excluir}}</a>
-						<a href="javascript:void(0)"
-							onclick="{{onSalvar}}('{{id_tag}}')" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</a>
-					</div>
+					{{{templateFormLista}}}
+
 				</div>
 			</div>
 		</div>

@@ -66,38 +66,42 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 <script id="templateFiltro" type="x-tmpl-mustache">
 <option value="form-{{id_grupo}}">{{{nome_grupo}}}</option>
 </script>
+<script id="templateFormLista" type="x-tmpl-mustache">
+<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
+	method="post"  >
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="nome">{{{nomeTxt}}} (Pt)</label>
+		<div class="col-md-10">
+			<input title="{{{nomeTxt}}}" type="text" value="{{{nome_grupo}}}" class="form-control" name="nome_grupo" required>
+		</div>
+	</div>
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="desc_grupo">{{{descricaoTxt}}}</label>
+		<div class="col-md-10">
+			<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_grupo}}}" class="form-control" name="desc_grupo" required>
+		</div>
+	</div>
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="es">Es</label>
+		<div class="col-md-10">
+			<input title="Espanhol" type="text" value="{{{es}}}" class="form-control" name="es" required>
+		</div>
+	</div>
+	<div class="form-group form-group-lg">
+		<label class="col-md-2 control-label" for="en">En</label>
+		<div class="col-md-10">
+			<input title="Ingles" type="text" value="{{{en}}}" class="form-control" name="en" required>
+		</div>
+	</div>
+	<div class="clearfix"></div>
+</form>
+</script>
 <script id="templateLista" type="x-tmpl-mustache">
 	<div class="panel panel-default" id="form-{{id_grupo}}">
 		<div class="panel-body">
 			<div class="row">
 				<div class="col-md-12">
-					<form style="" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
-						method="post"  >
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="nome">{{{nomeTxt}}} (Pt)</label>
-							<div class="col-md-10">
-								<input title="{{{nomeTxt}}}" type="text" value="{{{nome_grupo}}}" class="form-control" name="nome_grupo" required>
-							</div>
-						</div>
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="desc_grupo">{{{descricaoTxt}}}</label>
-							<div class="col-md-10">
-								<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_grupo}}}" class="form-control" name="desc_grupo" required>
-							</div>
-						</div>
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="es">Es</label>
-							<div class="col-md-10">
-								<input title="Espanhol" type="text" value="{{{es}}}" class="form-control" name="es" required>
-							</div>
-						</div>
-						<div class="form-group form-group-lg">
-							<label class="col-md-2 control-label" for="en">En</label>
-							<div class="col-md-10">
-								<input title="Ingles" type="text" value="{{{en}}}" class="form-control" name="en" required>
-							</div>
-						</div>
-					</form>
+					{{{templateFormLista}}}
 				</div>
 			</div>
 			<div class="row">
