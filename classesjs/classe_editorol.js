@@ -623,6 +623,7 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.mapa.zoomToExtent(b);
 	},
 	mostraLegenda: function(){
+		console.info(i3GEO.editorOL.layersLigados())
 		var layers = i3GEO.editorOL.layersLigados(),
 			nlayers = layers.length,
 			ins = "",i, icone = "",
