@@ -388,8 +388,9 @@ $nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
 
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
-$ogcwsmap = $_GET["ogcwsmap"];
-
+if(empty($ogcwsmap)){
+	$ogcwsmap = $_GET["ogcwsmap"];
+}
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
 	//substituiCon($nomeMapfileTmp,$postgis_mapa);
 	//$oMap = ms_newMapobj($nomeMapfileTmp);
