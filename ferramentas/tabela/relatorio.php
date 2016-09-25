@@ -12,12 +12,14 @@ include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 
 $nomesrel = $_GET["nomesrel"];
+$temarel = $_GET["temarel"];
 $ordemrel = $_GET["ordemrel"];
 $itensrel = $_GET["itensrel"];
 $itemagruparel = $_GET["itemagruparel"];
 
-if (isset($_GET["g_sid"]))
-{session_id($_GET["g_sid"]);}
+if (isset($_GET["g_sid"])){
+	session_id($_GET["g_sid"]);
+}
 session_start();
 
 $map_file = $_SESSION["map_file"];
@@ -61,8 +63,9 @@ else{
 	$t1 = $t1Temp;
 }
 
-if($itemagruparel != ""  && !in_array($itemagruparel,$colunas))
-{$colunas[] = $itemagruparel;}
+if($itemagruparel != ""  && !in_array($itemagruparel,$colunas)){
+	$colunas[] = $itemagruparel;
+}
 
 $temp = explode(",",$itensrel);
 $itensrel = array();
@@ -81,28 +84,38 @@ if($ext && $ext != ""){
 	$extatual = $mapa->extent;
 	$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 }
+
 $layer = $mapa->getlayerbyname($temarel);
 $layer->set("template","none.html");
 //$layer->set("data",$layer->data."options='-c client_encoding=LATIN1'");
 $existesel = "nao";
+
 /*
 if (file_exists($map_file."qy"))
 {$mapa->loadquery($map_file."qy");}
 */
 carregaquery2($map_file,$layer,$mapa);
-if ($layer->getNumresults() > 0){$existesel = "sim";}
-if ($existesel == "nao")
-{$layer->querybyrect($mapa->extent);}
+
+if ($layer->getNumresults() > 0){
+	$existesel = "sim";
+}
+if ($existesel == "nao"){
+	$layer->querybyrect($mapa->extent);
+}
+
 $layer->open();
-if(strtoupper($layer->getmetadata("convcaracter")) == "NAO")
-{$convC = false;}
-else
-{$convC = true;}
+if(strtoupper($layer->getmetadata("convcaracter")) == "NAO"){
+	$convC = false;
+}
+else{
+	$convC = true;
+}
+
 //$registros[] = array();
 $res_count = $layer->getNumresults();
 for ($i = 0; $i < $res_count; $i++){
 	$valitem = array();
-	if($versao == 6){
+	if($versao >= 6){
 		$shape = $layer->getShape($layer->getResult($i));
 	}
 	else{
@@ -117,6 +130,7 @@ for ($i = 0; $i < $res_count; $i++){
 		}
 		$valitem[$item] = $v;
 	}
+
 	if ($itemagruparel != ""){
 		$grupo = $valitem[$itemagruparel];
 	}
@@ -133,6 +147,7 @@ for ($i = 0; $i < $res_count; $i++){
 	}
 }
 $fechou = $layer->close();
+
 restauraCon($map_file,$postgis_mapa);
 
 if(isset($tiporel) && $tiporel == "csv"){

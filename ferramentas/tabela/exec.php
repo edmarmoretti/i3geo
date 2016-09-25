@@ -34,7 +34,7 @@ Calcula estat&iacute;sticas b&aacute;sicas de uma tabela de um tema.
 	case "ESTATISTICA":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_atributos.php");
 		$m = new Atributos($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->estatDescritivas($item,$exclui);
+		$retorno = $m->estatDescritivas($_GET["item"],$_GET["exclui"]);
 	break;
 /*
 Valor: GRAFICOPIZZA

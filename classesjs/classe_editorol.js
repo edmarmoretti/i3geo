@@ -691,7 +691,7 @@ i3GEO.editorOL = {
 		//w.document.close();
 		if(!document.getElementById("panellegendaeditorOL")){
 			YAHOO.namespace("legendaeditorOL.container");
-			YAHOO.legendaeditorOL.container.panel = new YAHOO.widget.Panel("panellegendaeditorOL", {zIndex:20000, iframe:true, width:"auto", visible:false, draggable:true, close:true } );
+			YAHOO.legendaeditorOL.container.panel = new YAHOO.widget.Panel("panellegendaeditorOL", {zIndex:20000, iframe:true, width:"auto", maxHeight:"300px", visible:false, draggable:true, close:true } );
 			YAHOO.legendaeditorOL.container.panel.setBody(ins);
 			YAHOO.legendaeditorOL.container.panel.setHeader($trad("p3"));
 			YAHOO.legendaeditorOL.container.panel.setFooter("");
