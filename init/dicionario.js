@@ -368,8 +368,8 @@ g_traducao_init =
 		"31a" : [
 			{
 				pt : "P&aacute;gina da comunidade de usuários no Portal do Software P&uacute;blico Brasileiro.",
-				en : "",
-				es : ""
+				en : "User community page at Brasilen open source software portal.",
+				es : "P&aacute;gina de la comunidad de usuarios en el Portal de Software Libre Brasile&ntilde;o."
 			}
 		],
 		32 : [
