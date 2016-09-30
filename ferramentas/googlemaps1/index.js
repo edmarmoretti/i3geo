@@ -258,6 +258,7 @@ function criaWMS(){
 	return(cgi+parametros);
 }
 function criaTile(){
+	//depreciar???
 	var cgi = window.parent.i3GEO.util.protocolo()+"://"+window.location.host+window.parent.i3GEO.parametros.cgi+"?";
 	var parametros = "map="+window.parent.i3GEO.parametros.mapfile;
 	parametros += "&map.scalebar=status+off&map_imagecolor=-1 -1 -1&map_transparent=on";

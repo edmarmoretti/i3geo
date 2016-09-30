@@ -48,6 +48,7 @@ i3GEOF.converteMapaKml = {
 	/**
 	 * Susbtitutos para o template
 	 */
+	//TODO verificar funcionamento sem expor mapfile
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.converteMapaKml.dicionario);
 		//lista;

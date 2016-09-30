@@ -341,20 +341,24 @@ function iniciaMapa()
 	$res["mapscale"] = $escalaMapa;
 	$res["mapres"] = $m->mapa->resolution;
 	$res["pixelsize"] = $celula;
+	//TODO depreciar na documentacao e ms_configura
+	/*
 	if ((isset($expoeMapfile)) && ($expoeMapfile == "nao"))
 	{$res["mapfile"] = "";}
 	else
 	{$res["mapfile"] = $map_file;}
-
-	$res["cgi"] = $locmapserv;
+	*/
+	$res["mapfile"] = "";
+	$res["cgi"] = "";//$locmapserv;
 	$res["extentTotal"] = $ext;
-	$res["mapimagem"] = $nomer;
+	$res["mapimagem"] = "";//$nomer;
 	$geoip = "nao";
 	if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat"))
 	{$geoip = "sim";}
 	$res["geoip"] = $geoip;
 	$res["listavisual"] = (file_exists($locaplic."/imagens/visual")) ? implode(",",listaDiretorios($locaplic."/imagens/visual")) : "";
-	$res["utilizacgi"] = $utilizacgi;
+	//TODO depreciar na documentacao
+	$res["utilizacgi"] = "nao";//$utilizacgi;
 	$res["versaoms"] = $versao["principal"];
 	$res["versaomscompleta"] = $versao["completa"];
 	$res["mensagens"] = $m->pegaMensagens();
@@ -370,8 +374,8 @@ function iniciaMapa()
 	$res["tempo"] = microtime(1) - $tempo;
 	$res["embedLegenda"] = $embedLegenda;
 	$res["erro"] = '';
-	$res["mappath"] = $imgo->imagepath;
-	$res["mapurl"] = $imgo->imageurl;
+	$res["mappath"] = "";//$imgo->imagepath;
+	$res["mapurl"] = "";//$imgo->imageurl;
 	$res["navegacaoDir"] = $navegadoresLocais;
 	if($openid == true)
 	{$res["autenticadoopenid"] = "sim";}
