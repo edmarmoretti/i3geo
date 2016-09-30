@@ -2757,5 +2757,12 @@ var g_traducao =
 				en : "",
 				es : ""
 			}
+		],
+   		"tabela" : [
+			{
+				pt : "Tabela",
+				en : "",
+				es : ""
+			}
 		]
 	};

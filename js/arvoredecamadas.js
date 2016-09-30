@@ -809,6 +809,28 @@ i3GEO.arvoreDeCamadas =
 				id : "",
 				status : true,
 				flag : true
+			},
+			"tabelaAtrib" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/configure-shortcuts.png",
+				classe : "arvCamFerramentas",
+				funcao : "i3GEO.tema.dialogo.tabela",
+				title : $trad("tabela"),
+				dica : $trad("t30"),
+				id : "",
+				status : true,
+				flag : true
+			},
+			"editorLegenda" : {
+				tipo : "tema",
+				icone : "imagens/oxygen/16x16/configure-shortcuts.png",
+				classe : "arvCamFerramentas",
+				funcao : "i3GEO.tema.dialogo.editaLegenda",
+				title : $trad("t33"),
+				dica : "",
+				id : "",
+				status : true,
+				flag : true
 			}
 		},
 		/**

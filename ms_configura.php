@@ -1,4 +1,8 @@
 <?php
+//verifica se o pai esta na mesma pasta
+if(!stristr(dirname($_SERVER['SCRIPT_FILENAME']),"/".basename(dirname(__FILE__)))){
+	exit;
+}
 /*
 Title: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
 
