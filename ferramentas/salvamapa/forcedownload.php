@@ -11,7 +11,7 @@ if(empty($fingerprint)){
 //
 //faz uma copia temporaria do mapfile
 //
-$arquivo = dirname($map_file)."/mapfile_".nomeRandomico(6).".map";
+$arquivo = dirname(dirname($map_file))."/mapfile_".nomeRandomico(6).".map";
 $mapa = ms_newMapObj($map_file);
 $mapa->save($arquivo);
 $mapa = ms_newMapObj($arquivo);
