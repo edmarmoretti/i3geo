@@ -382,8 +382,8 @@ g_traducao_init =
 		"32a" : [
 			{
 				pt : "Lista de e-mails da comunidade i3Geo mantida pela <a tabindex='-1' href='http://www.osgeo.org/' target='_blank' >OSGEO </a>. Tire d&uacute;vidas com outros usu&aacute;rios e divulgue assuntos de interesse.",
-				en : "",
-				es : ""
+				en : "I3Geo community email list managed by <a tabindex='-1' href='http://www.osgeo.org/' target='_blank' >OSGEO </a>. Pose your questions and spread issues of mutual interest.",
+				es : "Lista de correos de la comunidad i3Geo administrada por <a tabindex='-1' href='http://www.osgeo.org/' target='_blank' >OSGEO </a>. Comparta dudas con otros usuarios y divulgue asuntos de inter&eacute;s."
 			}
 		],
 		33 : [
