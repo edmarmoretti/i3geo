@@ -49,7 +49,9 @@ include "../init/head.php";
 				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
 
-				<ul class="nav navbar-nav">
+
+			</div>
+							<ul class="nav navbar-nav">
 					<li class="dropdown mega-dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown">Tags
 							<span class="caret"></span>
 					</a>
@@ -58,7 +60,6 @@ include "../init/head.php";
 							<a class="btn btn-info" href="#" onclick="$('.exemplo').hide();$('.{{id}}').fadeIn(600);">{{tag}}</a>
 						</div></li>
 				</ul>
-			</div>
 		</div>
 	</nav>
 	<div class="container-fluid">
