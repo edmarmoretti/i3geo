@@ -496,6 +496,9 @@ else{
 						if($temai3geo == false){
 							$l->set("status",MS_OFF);
 						}
+						else{
+							$l->set("status",MS_DEFAULT);
+						}
 						$l->setmetadata("ows_title",pegaNome($l));
 						$l->setmetadata("ows_srs",$listaepsg);
 						$l->set("group","");

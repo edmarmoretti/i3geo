@@ -24,7 +24,7 @@ LAYER
     END # METADATA
     NAME "testewms"
     OFFSITE 255 255 255
-    STATUS DEFAULT
+    STATUS OFF
     TILEITEM "location"
     TYPE RASTER
     UNITS METERS
