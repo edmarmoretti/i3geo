@@ -39,7 +39,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					<label class="control-label">{{{filtro}}}</label> <select
+					 <select
 						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
@@ -55,7 +55,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			</div>
 			<div class="well hidden">
 				<!-- painel para mostrar os temas na raiz -->
-				<h3 class="panel-heading">
+				<h3 class="panel-heading icon">
 					<a class="collapsed in" role="button" data-toggle="collapse" href="#raiz" aria-expanded="false"
 						aria-controls="#raiz">{{{temasRaizSubgrupo}}}</a>
 				</h3>
@@ -70,7 +70,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			</div>
 			<!-- nos -->
 			<div class="well hidden">
-				<h3 class="panel-heading">
+				<h3 class="panel-heading icon">
 					<a class="in" role="button" data-toggle="collapse" href="#corpo" aria-expanded="false"
 						aria-controls="#raiz">{{{subgrupos}}}</a>
 				</h3>
@@ -91,7 +91,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 </script>
 <script id="templateRaiz" type="x-tmpl-mustache">
 <div class="panel panel-default" data-id="{{id_raiz}}" id="formRaiz-{{id_raiz}}">
-	<div class="panel-heading" role="tab">
+	<div class="panel-heading icon" role="tab">
 		<h3 class="panel-title" {{escondido}}>
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_raiz}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">delete_forever</i>
@@ -144,7 +144,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 </script>
 <script id="templateNos" type="x-tmpl-mustache">
 <div class="panel panel-default" data-id="{{id_n2}}" id="formNo-{{id_n2}}">
-	<div class="panel-heading" role="tab">
+	<div class="panel-heading icon" role="tab">
 		<h3 class="panel-title" {{escondido}}>
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n2}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">delete_forever</i>

@@ -16,8 +16,8 @@ include "../../head.php";
 </div>
 <div class="container">
 	<div class="row center-block">
-		<div class="col-md-12">
-			<div class="well hidden" id="titulo">
+		<div class="col-md-12" id="titulo">
+			<div class="well hidden" >
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
@@ -27,12 +27,8 @@ include "../../head.php";
 
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					<label class="control-label" for="filtro">{{{filtro}}}</label>
 					<select title="{{{filtro}}}" title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
-				</div>
-				<div class="row pull-right">
-					<button onclick="i3GEOadmin.operacoes.adicionaDialogo();" style="color:#008579;" style="color:#008579;" class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</button>
 				</div>
 				<div class="clearfix"></div>
 				<!--Modal ajuda-->
@@ -47,6 +43,10 @@ include "../../head.php";
 				</div>
 			</div>
 			<div class="well hidden">
+				<div class="row pull-right">
+					<button onclick="i3GEOadmin.operacoes.adicionaDialogo();" style="color:#008579;" style="color:#008579;" class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</button>
+				</div>
+				<div class="clearfix"></div>
 				<div id="corpo">
 				</div>
 			</div>
@@ -86,20 +86,25 @@ include "../../head.php";
 </form>
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
-<div class="panel panel-default" id="form-{{id_operacao}}">
-	<div class="panel-heading" role="tab">
-		<h3 class="panel-title {{escondido}}">
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_operacao}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">delete_forever</i>
+<div class="list-group-item" id="form-{{id_operacao}}">
+	<div class="row-content">
+		<h3 class="list-group-item-heading {{escondido}}">
+			{{{codigo}}}
+
+			<a class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button" data-toggle="collapse" href="#body-form-{{id_operacao}}"
+			aria-expanded="false" aria-controls="#body-form-{{id_operacao}}">
+				<i class="material-icons md-18">edit</i>
 			</a>
-			&nbsp;
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_operacao}}"
-			aria-expanded="false" aria-controls="#body-form-{{id_operacao}}"> {{{codigo}}} </a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_operacao}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">delete_forever</i>
+			</a>
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_operacao}}">
 		{{{templateFormLista}}}
 	</div>
+<div class="list-group-separator"></div>
 </div>
 </script>
 <script id="templateInputPapeis" type="x-tmpl-mustache">

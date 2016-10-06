@@ -210,7 +210,7 @@ i3GEOadmin.core = {
 			.attr( "tabIndex", -1 )
 			.appendTo( this.wrapper )
 			.removeClass( "ui-corner-all" )
-			.addClass( "glyphicon glyphicon-chevron-down" )
+			.addClass( "glyphicon glyphicon-search" )
 			.mousedown(function() {
 				wasOpen = input.autocomplete( "widget" ).is( ":visible" );
 			})

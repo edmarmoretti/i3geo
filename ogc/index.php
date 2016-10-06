@@ -96,7 +96,7 @@ include "../init/head.php";
 				{{{camadas}}}
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					<label class="control-label">{{{filtro}}}</label>
+					
 					<select onchange="filtraGrupo(this,'menu{{idmenu}}')" data-grupoFiltro="{{idmenu}}" class="form-control input-lg">
 					</select>
 				</div>

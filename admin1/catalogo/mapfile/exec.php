@@ -259,7 +259,7 @@ function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublic
 	$dados [] = "	TYPE " . $tipoLayer;
 	$dados [] = '	DATA ""';
 	$dados [] = '	CONNECTION ""';
-	$dados [] = '	STATUS DEFAULT';
+	$dados [] = '	STATUS OFF';
 	$dados [] = '	METADATA';
 	$dados [] = '		TEMA "' . $titulolegenda . '"';
 	$dados [] = '		CLASSE "SIM"';

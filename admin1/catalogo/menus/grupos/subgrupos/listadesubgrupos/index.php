@@ -45,7 +45,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				<h4>{{{txtDescGrupos}}}</h4>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					<label class="control-label">{{{filtro}}}</label> <select
+					 <select
 						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>

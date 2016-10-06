@@ -79,6 +79,8 @@ hr {
 	width: 40px;
 }
 
+.material-icons.md-18 { font-size: 18px; }
+
 body {
 	background-color: background-color: rgb(240, 240, 250);;
 }
@@ -161,7 +163,7 @@ body {
 	width: 95%;
 }
 
-.panel-heading [data-toggle="collapse"]:after {
+.panel-heading.icon [data-toggle="collapse"]:after {
 	font-family: 'FontAwesome';
 	content: "\f054";
 	float: right;
@@ -176,7 +178,7 @@ body {
 	transform: rotate(-90deg);
 }
 
-.panel-heading [data-toggle="collapse"].collapsed:after {
+.panel-heading.icon [data-toggle="collapse"].collapsed:after {
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);

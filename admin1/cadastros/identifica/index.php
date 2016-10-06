@@ -28,7 +28,7 @@ include "../../head.php";
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					<label class="control-label">{{{filtro}}}</label>
+					
 					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
@@ -105,7 +105,7 @@ include "../../head.php";
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="panel panel-default" id="form-{{id_i}}">
-	<div class="panel-heading" role="tab">
+	<div class="panel-heading icon" role="tab">
 		<h3 class="panel-title {{escondido}}">
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_i}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">delete_forever</i>
