@@ -525,9 +525,9 @@ $testa - Testa o filtro e retorna uma imagem.
 				//testa o filtro
 				$teste = $layer->querybyattributes($items[0],$filtro,1);
 				if($teste != MS_SUCCESS){
-					$teste = $this->layer->queryByAttributes($itens[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
+					$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
 					if($teste != MS_SUCCESS){
-						$teste = $this->layer->queryByAttributes($itens[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
+						$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
 						$filtro =  mb_convert_encoding($filtro,"UTF-8","ISO-8859-1");
 					}
 					else{
