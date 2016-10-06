@@ -38,7 +38,7 @@ include "../init/head.php";
 	</div>
 	<div class="container">
 		<div class="row center-block">
-			<div class="center-block col-xs-6">
+			<div class="center-block col-xs-12 col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<a class="twitter-timeline tline" href="https://twitter.com/i3geo"
@@ -46,7 +46,7 @@ include "../init/head.php";
 					</div>
 				</div>
 			</div>
-			<div class="center-block col-xs-6">
+			<div class="center-block col-xs-12 col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-body">
 						<a class="twitter-timeline htag" href="https://twitter.com/hashtag/i3geo"
@@ -56,11 +56,11 @@ include "../init/head.php";
 			</div>
 		</div>
 		<div class="row center-block">
-			<div tabindex="-1" class="col-xs-6 text-center">
+			<div tabindex="-1" class="col-xs-12 text-center">
 				<script type='text/javascript'
 					src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
 			</div>
-			<div tabindex="-1" class="col-xs-6 text-center">
+			<div tabindex="-1" class="col-xs-12 text-center">
 				<script type="text/javascript"
 					src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
 			</div>
