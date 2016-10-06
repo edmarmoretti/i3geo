@@ -9,19 +9,6 @@ include_once(dirname(__FILE__)."/../classesphp/sani_request.php");
 include_once(dirname(__FILE__)."/../classesphp/carrega_ext.php");
 include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 error_reporting(0);
-//cria as pastas temporarias caso nao existam
-if (! file_exists ( $dir_tmp )) {
-	@mkdir ( $dir_tmp, 0744 );
-}
-if (file_exists ( $dir_tmp )) {
-	@mkdir ( $dir_tmp . "/comum", 0744 );
-	@mkdir ( $dir_tmp . "/saiku-datasources", 0744 );
-	chmod ( $dir_tmp . "/saiku-datasources", 0744 );
-	@mkdir ( $dir_tmp . "/cache", 0744 );
-	chmod ( $dir_tmp . "/cache", 0744 );
-	@mkdir ( $dir_tmp . "/cache/googlemaps", 0744 );
-	chmod ( $dir_tmp . "/cache/googlemaps", 0744 );
-}
 //variaveis utilizadas
 $parurl = array_merge($_GET,$_POST);
 $desligacache = $parurl["desligacache"];
@@ -53,6 +40,19 @@ $ativarodadomouse = $parurl["ativarodadomouse"];
 $legendahtml = $parurl["legendahtml"];
 $nocache = $parurl["nocache"];
 
+//cria as pastas temporarias caso nao existam
+if (! file_exists ( $dir_tmp )) {
+	@mkdir ( $dir_tmp, 0744 );
+}
+if (file_exists ( $dir_tmp )) {
+	@mkdir ( $dir_tmp . "/comum", 0744 );
+	@mkdir ( $dir_tmp . "/saiku-datasources", 0744 );
+	chmod ( $dir_tmp . "/saiku-datasources", 0744 );
+	@mkdir ( $dir_tmp . "/cache", 0744 );
+	chmod ( $dir_tmp . "/cache", 0744 );
+	@mkdir ( $dir_tmp . "/cache/googlemaps", 0744 );
+	chmod ( $dir_tmp . "/cache/googlemaps", 0744 );
+}
 if(!empty($desligacache)){
 	$DESLIGACACHE = $desligacache;
 }
@@ -267,6 +267,9 @@ if(isset($botoes)){
 	}
 	if(in_array("texto",$botoes)){
 		$objBotoes[] = "'texto':true";
+	}
+	if(in_array("novaaba",$botoes)){
+		$objBotoes[] = "'novaaba':true";
 	}
 	$botoes = "{".implode(",",$objBotoes)."}";
 }
@@ -560,6 +563,7 @@ function ajuda(){
 	fecha
 	corta
 	legenda
+	novaaba
 
 	Para ver a lista de c&oacute;digos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os c&oacute;digos s&atilde;o mostrados em vermelho.
