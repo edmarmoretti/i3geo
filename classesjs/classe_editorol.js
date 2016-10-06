@@ -1077,7 +1077,7 @@ i3GEO.editorOL = {
 				"measure": function(event){
 						var units = event.units,
 							measure = event.measure;
-						alert($trad("d21t")+": " + measure.toFixed(3) + " " + units);
+						alert(measure.toFixed(3) + " " + units);
 				}
 			});
 			controles.push(button);
@@ -1098,7 +1098,7 @@ i3GEO.editorOL = {
 				"measure": function(event){
 						var units = event.units;
 						var measure = event.measure;
-						alert($trad("d21at")+": " + measure.toFixed(3) + " " + units + "2");
+						alert(measure.toFixed(3) + " " + units + "2");
 				}
 			});
 			controles.push(button);
