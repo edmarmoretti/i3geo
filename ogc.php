@@ -499,6 +499,11 @@ else{
 						$l->setmetadata("ows_title",pegaNome($l));
 						$l->setmetadata("ows_srs",$listaepsg);
 						$l->set("group","");
+						//timeout
+						$tout = $l->getmetadata("wms_connectiontimeout");
+						if($tout == ""){
+							$l->setmetadata("wms_connectiontimeout",0);
+						}
 						//essa linha &eacute; necess&aacute;ria pq as vezes no mapfile n&atilde;o tem nenhum layer com o nome igual ao nome do mapfile
 						if(count($ts)==1 && $temai3geo == true){
 							$l->set("name",$tx);
