@@ -433,7 +433,8 @@ if($temas != ""){
 							$link_tema = $dadosTemas[$nomeLayer];
 							$link_tema = $link_tema["link_tema"];
 							$visivel = "false";
-							if($l->status == MS_DEFAULT || in_array($tema,$visiveis)){
+							//if($l->status == MS_DEFAULT || in_array($tema,$visiveis)){
+							if(in_array($tema,$visiveis)){
 								$visivel = "true";
 							}
 							if($l->type != 2 && $l->type != 3){

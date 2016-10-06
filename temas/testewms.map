@@ -18,14 +18,13 @@ LAYER
       "wms_format"	"image/png"
       "wms_connectiontimeout"	"0"
       "wms_tile"	""
-      "tema"	"Mapa Geomorfologico da Folha SE.23 - Belo Horizonte"
+      "tema"	"Teste wms"
       "wms_server_version"	"1.1.1"
-      "wms_crs"	"EPSG:4326"
       "wms_style"	""
     END # METADATA
     NAME "testewms"
     OFFSITE 255 255 255
-    STATUS OFF
+    STATUS DEFAULT
     TILEITEM "location"
     TYPE RASTER
     UNITS METERS
