@@ -691,13 +691,17 @@ i3GEO.editorOL = {
 		//w.document.close();
 		if(!document.getElementById("panellegendaeditorOL")){
 			YAHOO.namespace("legendaeditorOL.container");
-			YAHOO.legendaeditorOL.container.panel = new YAHOO.widget.Panel("panellegendaeditorOL", {zIndex:20000, iframe:true, width:"auto", maxHeight:"300px", visible:false, draggable:true, close:true } );
+			YAHOO.legendaeditorOL.container.panel = new YAHOO.widget.Panel("panellegendaeditorOL", {zIndex:20000, iframe:true, width:"auto", visible:false, draggable:true, close:true } );
 			YAHOO.legendaeditorOL.container.panel.setBody(ins);
 			YAHOO.legendaeditorOL.container.panel.setHeader($trad("p3"));
 			YAHOO.legendaeditorOL.container.panel.setFooter("");
+
 			YAHOO.legendaeditorOL.container.panel.render(document.body);
 			YAHOO.legendaeditorOL.container.panel.show();
 			YAHOO.legendaeditorOL.container.panel.center();
+
+			YAHOO.legendaeditorOL.container.panel.body.style.maxHeight = (parseInt(i3GEO.editorOL.mapa.size.h,10) / 1.2) - 20 + "px";
+			YAHOO.legendaeditorOL.container.panel.body.style.overflow = "auto";
 
 			YAHOO.util.Event.addListener(YAHOO.legendaeditorOL.container.panel.close, "click", function(){
 				YAHOO.legendaeditorOL.container.panel.destroy();
