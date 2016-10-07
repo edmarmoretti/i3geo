@@ -90,9 +90,7 @@ include "../../head.php";
 	<div class="row-content">
 		<h3 class="list-group-item-heading {{escondido}}">
 			{{{codigo}}}
-
-			<a class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button" data-toggle="collapse" href="#body-form-{{id_operacao}}"
-			aria-expanded="false" aria-controls="#body-form-{{id_operacao}}">
+			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_operacao}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button" aria-expanded="false" >
 				<i class="material-icons md-18">edit</i>
 			</a>
 			<span class="pull-right">&nbsp;&nbsp;</span>
@@ -101,9 +99,7 @@ include "../../head.php";
 			</a>
 		</h3>
 	</div>
-	<div class="panel-body panel-collapse collapse" id="body-form-{{id_operacao}}">
-		{{{templateFormLista}}}
-	</div>
+
 <div class="list-group-separator"></div>
 </div>
 </script>

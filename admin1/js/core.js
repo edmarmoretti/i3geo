@@ -152,6 +152,16 @@ i3GEOadmin.core = {
 						}
 					}
 			);
+			$("#corpo .list-group-item").each(
+					function(i,el){
+						if(obj.value == ""){
+							$(el).show();
+						}
+						else {
+							$(el).hide();
+						}
+					}
+			);
 			if(obj.value != ""){
 				$("#"+obj.value).show();
 				$("#body-"+obj.value).collapse('show');

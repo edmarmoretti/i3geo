@@ -31,7 +31,9 @@ include_once(dirname(__FILE__)."/../../../admin/php/login.php");
 $funcoesEdicao = array(
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/operacoes") === false){
@@ -93,26 +95,35 @@ switch ($funcao)
 		retornaJSON($dados);
 		exit;
 	break;
-	case "LISTA":
-		$operacoes = pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geousr_operacoes order by codigo",$dbh,false);
-		$papeis = pegaDados("SELECT P.id_papel, P.nome, P.descricao, OP.id_operacao FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papeis AS P ON OP.id_papel = P.id_papel ",$dbh,false);
-		if($operacoes === false || $papeis === false){
+	case "LISTAUNICO":
+		$operacoes = pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geousr_operacoes where id_operacao = $id_operacao order by codigo",$dbh,false);
+		$papeisoperacao = pegaDados("SELECT P.id_papel, P.nome, P.descricao,OP.id_operacao FROM ".$esquemaadmin."i3geousr_operacoespapeis  AS OP JOIN ".$esquemaadmin."i3geousr_papeis AS P ON OP.id_papel = P.id_papel WHERE OP.id_operacao = $id_operacao ",$dbh,false);
+		if($operacoes === false || $papeisoperacao === false){
 			$dbhw = null;
 			$dbh = null;
 			header("HTTP/1.1 500 erro ao consultar banco de dados");
 			exit;
 		}
-		$o = array();
-		foreach ($operacoes as $operacao){
-			//pega os papeis registrados para cada operacao
-			$p = array();
-			foreach ($papeis as $papel){
-				if($papel["id_operacao"] == $operacao["id_operacao"]){
-					$p[$papel["id_papel"]] = $papel;
-				}
-			}
-			$operacao["papeis"] = $p;
-			$o[] = $operacao;
+		$operacao = $operacoes[0];
+		$operacao["papeis"] = $papeisoperacao[0];
+		//todos os papeis
+		$papeis = pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome",$dbh);
+		$dbhw = null;
+		$dbh = null;
+		if($papeis === false){
+			header("HTTP/1.1 500 erro ao consultar banco de dados");
+			exit;
+		}
+		retornaJSON(array("operacao"=>$operacao,"papeis"=>$papeis));
+		break;
+
+	case "LISTA":
+		$operacoes = pegaDados("SELECT id_operacao,codigo,descricao from ".$esquemaadmin."i3geousr_operacoes order by codigo",$dbh,false);
+		if($operacoes === false){
+			$dbhw = null;
+			$dbh = null;
+			header("HTTP/1.1 500 erro ao consultar banco de dados");
+			exit;
 		}
 		$papeis = pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome",$dbh);
 		$dbhw = null;
@@ -121,7 +132,7 @@ switch ($funcao)
 			header("HTTP/1.1 500 erro ao consultar banco de dados");
 			exit;
 		}
-		retornaJSON(array("operacoes"=>$o,"papeis"=>$papeis));
+		retornaJSON(array("operacoes"=>$operacoes,"papeis"=>$papeis));
 	break;
 	case "EXCLUIR":
 		$retorna = excluir($id_operacao,$dbhw);

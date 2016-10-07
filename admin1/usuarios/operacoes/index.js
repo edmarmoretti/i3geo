@@ -57,7 +57,7 @@ Obt&eacute;m a lista de operacoes
 						var templatePapeis = $("#templateInputPapeis").html();
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
-						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
+						//templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						//lista todas as operacoes
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -67,29 +67,9 @@ Obt&eacute;m a lista de operacoes
 										{
 											"data":json["operacoes"],
 											"onExcluir": "i3GEOadmin.operacoes.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.operacoes.salvarDialogo",//funcao
+											"onEditar": "i3GEOadmin.operacoes.editarDialogo",//funcao
 											"labelCodigo": i3GEOadmin.operacoes.dicionario.codigo,
-											"labelDescricao": i3GEOadmin.operacoes.dicionario.descricao,
-											"inputPapeis": function(){
-												//marca os checkbox
-												var p = this.papeis;
-												$(json["papeis"]).each(
-														function(i,el){
-															if(p && el.id_papel && (p[el.id_papel] || el.id_papel == 1)){
-																json["papeis"][i]["checked"] = "checked";
-															}
-															else{
-																json["papeis"][i]["checked"] = "";
-															}
-														}
-												);
-												return Mustache.to_html(
-														"{{#data}}" + templatePapeis + "{{/data}}",
-														{
-															"data":json["papeis"]
-														}
-												);
-											}
+											"labelDescricao": i3GEOadmin.operacoes.dicionario.descricao
 										}
 								)
 						);
@@ -144,10 +124,64 @@ Obt&eacute;m a lista de operacoes
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
+		editarDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=listaunico",
+					"id_operacao=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						var html = Mustache.to_html(
+								"{{#data}}" + $("#templateFormLista").html() + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.operacoes.dicionario,
+										{
+											"data":json["operacao"],
+											"labelCodigo": i3GEOadmin.operacoes.dicionario.codigo,
+											"labelDescricao": i3GEOadmin.operacoes.dicionario.descricao,
+											"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
+											"onSalvar": "i3GEOadmin.operacoes.salvarDialogo",//funcao
+											"inputPapeis": function(){
+												//marca os checkbox
+												var p = this.papeis;
+												$(json["papeis"]).each(
+														function(i,el){
+															if(p && el.id_papel && (p[el.id_papel] || el.id_papel == 1)){
+																json["papeis"][i]["checked"] = "checked";
+															}
+															else{
+																json["papeis"][i]["checked"] = "";
+															}
+														}
+												);
+												return Mustache.to_html(
+														"{{#data}}" + $("#templateInputPapeis").html() + "{{/data}}",
+														{
+															"data":json["papeis"]
+														}
+												);
+											}
+										}
+								)
+						);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
 		adicionaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.operacoes.formAdiciona);
 		},
-//		os parametros sao obtidos do formulario aberto do modal
+		//os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
 			var parametros = $("#modalGeral form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
