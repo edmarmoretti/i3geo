@@ -289,6 +289,7 @@ function validaSessao(){
 function autenticaUsuario($usuario,$senha){
 	include(dirname(__FILE__)."/conexao.php");
 	$senhamd5 = md5($senha);
+	$senhaHash = password_hash($senha, PASSWORD_DEFAULT);
 	//verifica se o usuario esta cadastrado no ms_configura.php em $i3geomaster
 	//echo "select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1";exit;
 	//exit;
@@ -320,13 +321,29 @@ function autenticaUsuario($usuario,$senha){
 	}
 	else{
 		//verifica se a senha e uma string ou pode ser um md5
+		$ok = false;
+		$dados = array();
 		if(strlen($senha) == 32){
-			$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
+			$dados = pegaDados("select id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
 		}
 		else{
-			$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1",$dbh,false);
+			$dados = pegaDados("select id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1",$dbh,false);
 		}
 		if(count($dados) > 0){
+			$ok = true;
+		}
+		//testa tambem com a nova forma de armazenamento de senha usando password_hash
+		if($ok == false){
+			$usuarios = pegaDados("select senha,id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$dbh,false);
+			foreach($usuarios as $d){
+				if (password_verify($d["senha"], $senhaHash)){
+					$ok = true;
+					$dados = array("id_usuario"=>$d["id_usuario"],"nome_usuario"=>$d["nome_usuario"]);
+				}
+			}
+			$usuarios = null;
+		}
+		if($ok == true){
 			$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
 			$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
 			$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario where id_usuario = ".$dados[0]["id_usuario"],$dbh,false);

@@ -28,6 +28,8 @@ i3GEOadmin.operacoes = {
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
+		//parametros obtidos do formulario de edicao antes de abrir o modal de confirmacao
+		parametrosSalvar: "",
 		/*
 Function: initMenu
 
@@ -147,7 +149,7 @@ Obt&eacute;m a lista de operacoes
 											"onSalvar": "i3GEOadmin.operacoes.salvarDialogo",//funcao
 											"inputPapeis": function(){
 												//marca os checkbox
-												var p = this.papeis;
+												var p = json["operacao"]["papeis"];
 												$(json["papeis"]).each(
 														function(i,el){
 															if(p && el.id_papel && (p[el.id_papel] || el.id_papel == 1)){
@@ -236,35 +238,40 @@ Obt&eacute;m a lista de operacoes
 			);
 		},
 		salvarDialogo: function(id){
+			//os dados do formulario sao obtidos antes de abrir o modal
+			i3GEOadmin.operacoes.parametrosSalvar = $("#form-edicao-" + id).serialize();
 			var hash = {
 					"mensagem": i3GEOadmin.operacoes.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.operacoes.salvar('"+id+"')",
 					"botao1": i3GEOadmin.operacoes.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"onBotao2": "i3GEOadmin.operacoes.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.operacoes.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
 		salvar: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
+			var parametros = i3GEOadmin.operacoes.parametrosSalvar;
+			i3GEOadmin.operacoes.parametrosSalvar = "";
 			i3GEOadmin.core.fechaModalGeral();
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=alterar",
-					"id_operacao="+ id +"&"+parametros
-			)
-			.done(
-					function(data, status){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.operacoes.ondeLista);
-						i3GEOadmin.operacoes.lista();
-					}
-			)
-			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
-			);
+			if(parametros != ""){
+				i3GEOadmin.core.modalAguarde(true);
+				$.post(
+						"exec.php?funcao=alterar",
+						"id_operacao="+ id +"&"+parametros
+				)
+				.done(
+						function(data, status){
+							i3GEOadmin.core.modalAguarde(false);
+							i3GEOadmin.core.iconeAguarde(i3GEOadmin.operacoes.ondeLista);
+							i3GEOadmin.operacoes.lista();
+						}
+				)
+				.fail(
+						function(data){
+							i3GEOadmin.core.modalAguarde(false);
+							i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+						}
+				);
+			}
 		}
 };

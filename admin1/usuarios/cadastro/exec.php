@@ -204,7 +204,8 @@ function alterar($id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usua
 	);
 	// se a senha foi enviada, ela sera trocada
 	if ($senha != "") {
-		$dataCol ["senha"] = md5 ( $senha );
+		//$dataCol ["senha"] = md5 ( $senha );
+		$dataCol["senha"] = password_hash($_GET["senha"], PASSWORD_DEFAULT);
 	}
 	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geousr_usuarios", $dataCol, "WHERE id_usuario = $id_usuario" );
 	if ($resultado === false) {

@@ -105,7 +105,13 @@ switch ($funcao)
 			exit;
 		}
 		$operacao = $operacoes[0];
-		$operacao["papeis"] = $papeisoperacao[0];
+
+		//cria o indice do array conforme o id da operacao
+		$o = array();
+		foreach($papeisoperacao as $op){
+			$o[$op["id_papel"]] = $op;
+		}
+		$operacao["papeis"] = $o;
 		//todos os papeis
 		$papeis = pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome",$dbh);
 		$dbhw = null;

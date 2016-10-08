@@ -65,7 +65,13 @@ error_reporting(0);
 include_once(dirname(__FILE__)."/login.php");
 $funcoesEdicao = array(
 		"ALTERARUSUARIOS",
-		"EXCLUIRUSUARIO"
+		"EXCLUIRUSUARIO",
+		"EXCLUIRPAPELUSUARIO",
+		"PEGADADOSUSUARIO",
+		"PEGAUSUARIOS",
+		"PEGAPAPEISUSUARIO",
+		"ENVIARSENHAEMAIL",
+		"LISTAPAPEIS"
 );
 if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	if(verificaOperacaoSessao("admin/html/usuarios") == false){
@@ -180,7 +186,8 @@ function alterarUsuarios()
 			);
 			//se a senha foi enviada, ela sera trocada
 			if($_GET["senha"] != ""){
-				$dataCol["senha"] = md5($_GET["senha"]);
+				//$dataCol["senha"] = md5($_GET["senha"]);
+				$dataCol["senha"] = password_hash($_GET["senha"], PASSWORD_DEFAULT);
 			}
 			i3GeoAdminUpdate($dbhw,"i3geousr_usuarios",$dataCol,"WHERE id_usuario = $id_usuario");
 			$retorna = $id_usuario;
