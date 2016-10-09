@@ -115,6 +115,11 @@ switch (strtoupper($funcao))
 		$senha = $_POST["senha"];
 
 		$teste = autenticaUsuario($usuario,$senha);
+		if($teste == "muitas tentativas"){
+			logoutUsuario();
+			header ( "HTTP/1.1 403 Muitas tentativas" );
+			exit;
+		}
 		if($teste != false){
 			$_SESSION["usuario"] = $usuario;
 			$_SESSION["id_usuario"] = $teste["usuario"]["id_usuario"];
@@ -290,11 +295,26 @@ function autenticaUsuario($usuario,$senha){
 	include(dirname(__FILE__)."/conexao.php");
 	$senhamd5 = md5($senha);
 	$senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+	//faz um teste de tentativas de acesso
+	$nomeArquivo = $dir_tmp."/a".md5($usuario."testeTentativas").intval(time() / 1000);
+	if(!file_exists($dir_tmp)){
+		return false;
+	}
+	if(file_exists($nomeArquivo)){
+		$tentativas = (int) file_get_contents($nomeArquivo);
+		if($tentativas > 3){
+			return "muitas tentativas";
+		}
+		$tentativas = $tentativas + 1;
+		file_put_contents($nomeArquivo, $tentativas);
+	}
+	else {
+		file_put_contents($nomeArquivo, 1);
+	}
 	//verifica se o usuario esta cadastrado no ms_configura.php em $i3geomaster
 	//echo "select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1";exit;
 	//exit;
 	if(verificaMaster($usuario,$senha) == true){
-
 		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$dbh,false);
 		$op = pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O",$dbh,false);
 		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupos ",$dbh,false);
@@ -317,6 +337,7 @@ function autenticaUsuario($usuario,$senha){
 		$r = array("usuario"=>$master,"papeis"=>$papeis,"operacoes"=>$operacoes,"gruposusr"=>$gruposusr);
 		$dbh = null;
 		$dbhw = null;
+		file_put_contents($nomeArquivo, 1);
 		return $r;
 	}
 	else{
@@ -362,6 +383,7 @@ function autenticaUsuario($usuario,$senha){
 			$r = array("usuario"=>$dados[0],"papeis"=>$papeis,"operacoes"=>$operacoes,"gruposusr"=>$gruposusr);
 			$dbh = null;
 			$dbhw = null;
+			file_put_contents($nomeArquivo, 1);
 			return $r;
 		}
 		else{
