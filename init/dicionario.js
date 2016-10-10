@@ -396,8 +396,8 @@ g_traducao_init =
 		"33a" : [
 			{
 				pt : "Links para aplicativos que podem auxiliar em algumas tarefas de constru&ccedil;&atilde;o de mapas.",
-				en : "",
-				es : ""
+				en : "Tool links that could help you with some map building tasks.",
+				es : "Enlaces de aplicaciones que pueden ayudar en algunas tareas de construcci&oacute;n de mapas."
 			}
 		],
 		34 : [
