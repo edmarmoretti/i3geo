@@ -487,7 +487,10 @@ function salvaCacheImagem(){
 	}
 	$c = $cachedir."/googlemaps/$layer/$z/$x";
 	if(!file_exists($c."/$y.png")){
-		mkdir($cachedir."/googlemaps/$layer/$z/$x",0744,true);
+		if(!file_exists($cachedir."/googlemaps/$layer/$z/$x")){
+			mkdir($cachedir."/googlemaps/$layer/$z/$x",0744,true);
+			chmod($cachedir."/googlemaps/$layer/$z/$x",0744);
+		}
 		$img->saveImage($c."/$y.png");
 		//
 		//corta a imagem gerada para voltar ao tamanho normal
@@ -495,8 +498,6 @@ function salvaCacheImagem(){
 		if($cortePixels > 0){
 			$img = cortaImagemDisco($c."/$y.png",$cortePixels,256);
 		}
-
-		chmod($cachedir."/googlemaps/$layer/$z/$x",0744);
 		chmod($c."/$y.png",0744);
 	}
 	return $c."/$y.png";
