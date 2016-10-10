@@ -2725,7 +2725,13 @@ function validaAcessoTemas($map_file,$salva = true){
 	$existeIndevidos = false;
 	if(count($indevidos) > 0){
 		$existeIndevidos = true;
-		$m = ms_newMapObj($map_file);
+		if(!is_object($map_file)){
+			$m = ms_newMapObj($map_file);
+		}
+		else {
+			$m = $map_file;
+			$salva = false;
+		}
 		foreach($indevidos as $i){
 			$l = $m->getlayerbyname($i);
 			$l->set("status",MS_DELETE);
@@ -2769,24 +2775,14 @@ function listaLayersIndevidos($map_file){
 	error_reporting(0);
 	$indevidos = array();
 	$restritos = listaTemasRestritos();
-	/*
-		array(1) {
-			["_wlocalirestrito"]=>
-			array(1) {
-			[0]=>
-			string(1) "1"
-			}
-		}
-	*/
 	if(count($restritos) > 0){
 		$gruposusr = listaGruposUsrLogin();
-		/*
-		array(1) {
-			[0]=>
-			string(1) "1"
+		if(!is_object($map_file)){
+			$m = ms_newMapObj($map_file);
 		}
-		*/
-		$m = ms_newMapObj($map_file);
+		else {
+			$m = $map_file;
+		}
 		$c = $m->numlayers;
 		for ($i=0;$i < $c;++$i)	{
 			$layer = $m->getlayer($i);

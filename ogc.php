@@ -785,12 +785,11 @@ else{
 	//
 	processaOutputformatMapfile();
 	$nomeMapfileTmp = str_replace(".map","",$nomeMapfileTmp).".map";
+	restauraConObj($oMap,$postgis_mapa);
 	$oMap->save($nomeMapfileTmp);
-	validaAcessoTemas($nomeMapfileTmp,true);
 
-	substituiCon($nomeMapfileTmp,$postgis_mapa);
-	$oMap = ms_newMapobj($nomeMapfileTmp);
-	restauraCon($nomeMapfileTmp,$postgis_mapa);
+	validaAcessoTemas($oMap,true);
+	substituiConObj($oMap,$postgis_mapa);
 }
 
 if(ob_get_contents ()){
