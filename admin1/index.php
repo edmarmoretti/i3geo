@@ -4,13 +4,12 @@ include (dirname ( __FILE__ ) . "/../ms_configura.php");
 error_reporting ( 0 );
 include "head.php";
 ?>
-	<!--admin1/index.php -->
-	<div class="container-fluid">
+	<div class="container-fluid migalha" >
 		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="../init/index.php?home=">i3Geo</a></li>
-				<li class="active">Admin</li>
-			</ol>
+			<div class="btn-group btn-breadcrumb">
+				<a class="btn btn-default" href="../init/index.php?home="><div>i3Geo</div></a>
+				<a class="btn btn-default" style="pointer-events: none"><div>Admin</div></a>
+			</div>
 		</div>
 	</div>
 	<div class="container">

@@ -4,14 +4,14 @@ include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 error_reporting ( 0 );
 include "../../head.php";
 ?>
-<div class="container-fluid">
+<div class="container-fluid migalha">
 	<div class="row">
-		<ol class="breadcrumb">
-			<li><a href="../../init/index.php">i3Geo</a></li>
-			<li><a href="../../index.php">Admin</a></li>
-			<li>Usu&aacute;rios</li>
-			<li class="active">Grupos e usu&aacute;rios</li>
-		</ol>
+		<div class="btn-group btn-breadcrumb">
+			<a class="btn btn-default" href="../../../init/index.php"><div>i3Geo</div></a>
+			<a class="btn btn-default" href="../../index.php"><div>Admin</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Usu&aacute;rios</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Grupos de usu&aacute;rios</div></a>
+		</div>
 	</div>
 </div>
 <div class="container">
