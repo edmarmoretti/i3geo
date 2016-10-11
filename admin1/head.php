@@ -295,12 +295,13 @@ h2 small {
   border-left: 10px solid #adadad;
 }
 
-.btn-breadcrumb a:nth-child(1) { z-index:6; }
-.btn-breadcrumb a:nth-child(2) { z-index:7; }
-.btn-breadcrumb a:nth-child(3) { z-index:4; }
-.btn-breadcrumb a:nth-child(4) { z-index:3; }
-.btn-breadcrumb a:nth-child(5) { z-index:2; }
-.btn-breadcrumb a:nth-child(6) { z-index:1; }
+.btn-breadcrumb a:nth-child(1) { z-index:7; }
+.btn-breadcrumb a:nth-child(2) { z-index:6; }
+.btn-breadcrumb a:nth-child(3) { z-index:5; }
+.btn-breadcrumb a:nth-child(4) { z-index:4; }
+.btn-breadcrumb a:nth-child(5) { z-index:3; }
+.btn-breadcrumb a:nth-child(6) { z-index:2; }
+.btn-breadcrumb a:nth-child(7) { z-index:1; }
 
 
 /* The responsive part */

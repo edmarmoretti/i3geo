@@ -4,17 +4,16 @@ include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 error_reporting ( 0 );
 include "../../head.php";
 ?>
-<div class="container-fluid">
-	<div class="row">
-		<ol class="breadcrumb">
-			<li><a href="../../init/index.php">i3Geo</a></li>
-			<li><a href="../../index.php">Admin</a></li>
-			<li>Upload</li>
-			<li class="active">para o banco de dados</li>
-		</ol>
+	<div class="container-fluid migalha" >
+		<div class="row">
+			<div class="btn-group btn-breadcrumb">
+				<a class="btn btn-default" href="../../../init/index.php"><div>i3Geo</div></a>
+				<a class="btn btn-default" href="../../index.php"><div>Admin</div></a>
+				<a class="btn btn-default" style="pointer-events: none"><div>Upload</div></a>
+				<a class="btn btn-default" style="pointer-events: none"><div>para o banco de dados</div></a>
+			</div>
+		</div>
 	</div>
-
-</div>
 <div class="container-fluid">
 	<div class="row">
 	<iframe src="../../../admin/html/estat_editor_.html" style="width:100%; height:5000px;border:none; scrolling:no; frameborder:0;  marginheight:0; marginwidth:0;" ></iframe>

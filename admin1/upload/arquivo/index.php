@@ -5,16 +5,16 @@ include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 error_reporting ( 0 );
 include "../../head.php";
 ?>
-<div class="container-fluid">
-	<div class="row">
-		<ol class="breadcrumb">
-			<li><a href="../../init/index.php">i3Geo</a></li>
-			<li><a href="../../index.php">Admin</a></li>
-			<li>Upload</li>
-			<li class="active">Arquivo shapefile</li>
-		</ol>
+	<div class="container-fluid migalha" >
+		<div class="row">
+			<div class="btn-group btn-breadcrumb">
+				<a class="btn btn-default" href="../../../init/index.php"><div>i3Geo</div></a>
+				<a class="btn btn-default" href="../../index.php"><div>Admin</div></a>
+				<a class="btn btn-default" style="pointer-events: none"><div>Upload</div></a>
+				<a class="btn btn-default" style="pointer-events: none"><div>Arquivo shapefile</div></a>
+			</div>
+		</div>
 	</div>
-</div>
 <div class="container">
 	<div class="row center-block">
 		<div class="col-md-12">

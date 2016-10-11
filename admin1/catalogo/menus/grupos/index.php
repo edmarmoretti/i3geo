@@ -6,18 +6,18 @@ include "../../../head.php";
 $id_menu = filter_var ( $_GET ["id_menu"], FILTER_SANITIZE_NUMBER_INT );
 $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 ?>
-<div class="container-fluid">
+<div class="container-fluid migalha">
 	<div class="row">
-		<ol class="breadcrumb">
-			<li><a href="../../../init/index.php">i3Geo</a></li>
-			<li><a href="../../../index.php">Admin</a></li>
-			<li>Cat&aacute;logo</li>
-			<li><a href="../index.php">Menus</a></li>
-			<li><a href="../index.php?id_filtro=<?php echo $id_menu; ?>"> <?php echo $nome_menu; ?></a></li>
-			<li class="active">Grupos</li>
-		</ol>
+		<div class="btn-group btn-breadcrumb">
+			<a class="btn btn-default" href="../../../../init/index.php"><div>i3Geo</div></a>
+			<a class="btn btn-default" href="../../../index.php"><div>Admin</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Cat&aacute;logo</div></a>
+			<a class="btn btn-default" href="../index.php"><div>Menus</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Grupos</div></a>
+		</div>
 	</div>
 </div>
+
 <div class="container" id="titulo">
 	<div class="row center-block">
 		<div class="col-md-12">

@@ -17,7 +17,7 @@ define ( ONDEI3GEO, ".." );
 include "../init/head.php";
 ?>
 <body style="padding-top: 55px;" id="topo">
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px;max-height:55px;height:55px;">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="../init/index.php">i3Geo <i class="fa fa-home fa-1x"></i></a>
@@ -29,12 +29,12 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
+	<div class="container-fluid migalha" >
 		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="../init/index.php?home=">i3Geo</a></li>
-				<li class="active">Teste de instala&ccedil;&atilde;o</li>
-			</ol>
+			<div class="btn-group btn-breadcrumb">
+				<a class="btn btn-default" href="../init/index.php?home="><div>i3Geo</div></a>
+				<a class="btn btn-default" style="pointer-events: none"><div>Teste de instala&ccedil;&atilde;o</div></a>
+			</div>
 		</div>
 	</div>
 	<nav class="navbar-fixed-bottom">

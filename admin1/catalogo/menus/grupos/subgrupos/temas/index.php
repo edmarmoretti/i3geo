@@ -10,25 +10,22 @@ $nome_grupo = filter_var ( $_GET ["nome_grupo"], FILTER_SANITIZE_STRING );
 $id_n2 = filter_var ( $_GET ["id_n2"], FILTER_SANITIZE_NUMBER_INT );
 $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 ?>
-<div class="container-fluid">
+<div class="container-fluid migalha">
 	<div class="row">
-		<ol class="breadcrumb">
-			<li><a href="../../../../../init/index.php">i3Geo</a></li>
-			<li><a href="../../../../../index.php">Admin</a></li>
-			<li>Cat&aacute;logo</li>
-			<li><a href="../../../index.php">menus</a></li>
-			<li><a href="../../../index.php?id_filtro=<?php echo $id_menu; ?>">menu: <?php echo $nome_menu; ?></a></li>
-			<li><a href="../../index.php?id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>">grupos</a></li>
-			<li><a
-				href="../../index.php?id_filtro=<?php echo $id_n1; ?>&id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>"> <?php echo $nome_grupo; ?></a></li>
-			<li><a
-				href="../../index.php?id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>&id_grupo=<?php echo $id_grupo; ?>&nome_grupo=<?php echo $nome_grupo; ?>">subgrupos</a></li>
-			<li><a
-				href="../../index.php?id_filtro=<?php echo $id_n2; ?>&id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>&id_grupo=<?php echo $id_grupo; ?>&nome_grupo=<?php echo $nome_grupo; ?>"> <?php echo $nome_subgrupo; ?></a></li>
-			<li class="active">Temas</li>
-		</ol>
+		<div class="btn-group btn-breadcrumb">
+			<a class="btn btn-default" href="../../../../../../init/index.php"><div>i3Geo</div></a>
+			<a class="btn btn-default" href="../../../../../index.php"><div>Admin</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Cat&aacute;logo</div></a>
+			<a class="btn btn-default" href="../../../index.php"><div>Menus</div></a>
+			<a class="btn btn-default" href="../../index.php?id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>"><div>Grupos</div></a>
+			<a class="btn btn-default" href="../index.php?id_menu=<?php echo $id_menu; ?>&nome_menu=<?php echo $nome_menu; ?>&id_n1=<?php echo $id_n1; ?>&nome_grupo=<?php echo $nome_grupo; ?>"><div>Subgrupos</div></a>
+
+			<a class="btn btn-default" style="pointer-events: none"><div>Temas</div></a>
+		</div>
 	</div>
 </div>
+
+
 <div class="container" id="titulo">
 	<div class="row center-block">
 		<div class="col-md-12">

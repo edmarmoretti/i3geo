@@ -10,15 +10,14 @@ if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
 error_reporting ( 0 );
 include "../../head.php";
 ?>
-<!--admin1/index.php -->
-<div class="container-fluid">
+<div class="container-fluid migalha" >
 	<div class="row">
-		<ol class="breadcrumb">
-			<li><a href="../../init/index.php">i3Geo</a></li>
-			<li><a href="../../index.php">Admin</a></li>
-			<li>Ferramentas</li>
-			<li class="active">Cria banco</li>
-		</ol>
+		<div class="btn-group btn-breadcrumb">
+			<a class="btn btn-default" href="../../../init/index.php"><div>i3Geo</div></a>
+			<a class="btn btn-default" href="../../index.php"><div>Admin</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Ferramentas</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Cria banco</div></a>
+		</div>
 	</div>
 </div>
 <div class="container">
