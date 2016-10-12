@@ -251,7 +251,6 @@ Obt&eacute;m a lista de operacoes
 		},
 		salvar: function(id){
 			var parametros = i3GEOadmin.operacoes.parametrosSalvar;
-			i3GEOadmin.operacoes.parametrosSalvar = "";
 			i3GEOadmin.core.fechaModalGeral();
 			if(parametros != ""){
 				i3GEOadmin.core.modalAguarde(true);
@@ -261,6 +260,7 @@ Obt&eacute;m a lista de operacoes
 				)
 				.done(
 						function(data, status){
+							i3GEOadmin.operacoes.parametrosSalvar = "";
 							i3GEOadmin.core.modalAguarde(false);
 							i3GEOadmin.core.iconeAguarde(i3GEOadmin.operacoes.ondeLista);
 							i3GEOadmin.operacoes.lista();
@@ -268,6 +268,7 @@ Obt&eacute;m a lista de operacoes
 				)
 				.fail(
 						function(data){
+							i3GEOadmin.operacoes.parametrosSalvar = "";
 							i3GEOadmin.core.modalAguarde(false);
 							i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 						}

@@ -105,7 +105,6 @@ switch ($funcao)
 			exit;
 		}
 		$operacao = $operacoes[0];
-
 		//cria o indice do array conforme o id da operacao
 		$o = array();
 		foreach($papeisoperacao as $op){

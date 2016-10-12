@@ -31,7 +31,9 @@ include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/usuarios" ) === false) {
@@ -88,7 +90,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$sql = "SELECT * from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = " . $novo;
+		$sql = "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = " . $novo;
 		$dados = pegaDados ( $sql, $dbh );
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -104,10 +106,47 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
+		case "LISTAUNICO" :
+			$usuarios = pegaDados ( "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = $id_usuario order by nome_usuario", $dbh, false );
+			$papeisusuario = pegaDados ( "SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM " . $esquemaadmin . "i3geousr_papelusuario AS UP JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON UP.id_papel = P.id_papel WHERE UP.id_usuario = $id_usuario ", dbh, false );
+			if ($usuarios === false || $papeis === false) {
+				$dbhw = null;
+				$dbh = null;
+				header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+				exit ();
+			}
+			$usuario = $usuarios[0];
+			//cria o indice do array conforme o id da operacao
+			$o = array();
+			foreach($papeisusuario as $op){
+				$o[$op["id_papel"]] = $op;
+			}
+			$usuario["papeis"] = $o;
+			//todos os papeis
+			$papeis = pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", $dbh );
+			$dbhw = null;
+			$dbh = null;
+			if ($papeis === false) {
+				header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+				exit();
+			}
+			retornaJSON ( array (
+					"usuario" => $usuario,
+					"papeis" => $papeis
+			) );
+			break;
 	case "LISTA" :
-		$usuarios = pegaDados ( "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios order by nome_usuario", $dbh, false );
-		$papeis = pegaDados ( "SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM " . $esquemaadmin . "i3geousr_usuarios AS U JOIN " . $esquemaadmin . "i3geousr_papelusuario AS UP ON U.id_usuario = UP.id_usuario JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON UP.id_papel = P.id_papel ", dbh, false );
-		if ($usuarios === false || $papeis === false) {
+		$usuarios = pegaDados ( "SELECT id_usuario,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios order by nome_usuario", $dbh, false );
+		if ($usuarios === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		$papeis = pegaDados("SELECT * from ".$esquemaadmin."i3geousr_papeis order by nome",$dbh);
+		$dbhw = null;
+		$dbh = null;
+		if ($papeis === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -239,12 +278,7 @@ function adicionaPapel($id_usuario, $id_papel, $dbhw) {
 function excluir($id_usuario, $dbhw) {
 	global $esquemaadmin;
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_usuarios", "id_usuario", $id_usuario, $dbhw, false );
-	if ($resultado === false) {
-		return false;
-	}
-	if ($resultado === true) {
-		$resultado = excluirPapeis ( $id_usuario, $dbhw );
-	}
+	$resultado = excluirPapeis ( $id_usuario, $dbhw );
 	return $resultado;
 }
 function excluirPapeis($id_usuario, $dbhw) {

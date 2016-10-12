@@ -99,8 +99,7 @@ include "../../head.php";
 			</a>
 		</h3>
 	</div>
-
-<div class="list-group-separator"></div>
+	<div class="list-group-separator"></div>
 </div>
 </script>
 <script id="templateInputPapeis" type="x-tmpl-mustache">
