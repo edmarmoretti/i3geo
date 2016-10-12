@@ -31,7 +31,9 @@ include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/usuarios" ) === false) {
@@ -89,35 +91,51 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
+		case "LISTAUNICO" :
+			$grupos = pegaDados ( "SELECT id_grupo,nome,descricao from ".$esquemaadmin."i3geousr_grupos order by nome", $dbh, false );
+			$gruposusuarios = pegaDados ( "SELECT U.nome_usuario, U.id_usuario, UP.id_grupo FROM ".$esquemaadmin."i3geousr_grupousuario AS UP JOIN ".$esquemaadmin."i3geousr_usuarios AS U ON U.id_usuario = UP.id_usuario", dbh, false );
+			if ($gruposusuarios === false || $grupos === false) {
+				$dbhw = null;
+				$dbh = null;
+				header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+				exit ();
+			}
+			$grupo = $grupos[0];
+			$o = array ();
+			foreach ( $gruposusuarios as $gp ) {
+				$o[$gp["id_grupo"]] = $gp;
+			}
+			$grupo["usuarios"] = $o;
+			$usuarios = pegaDados ( "SELECT id_usuario, login, nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 order by login", $dbh );
+			$dbhw = null;
+			$dbh = null;
+			if ($usuarios === false) {
+				header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+				exit();
+			}
+			retornaJSON ( array (
+					"grupo" => $grupo,
+					"usuarios" => $usuarios
+			) );
+			break;
 	case "LISTA" :
-		$grupos = pegaDados ( "SELECT id_grupo,nome,descricao from ".$esquemaadmin."i3geousr_grupos order by nome", $dbh, false );
-		$usuarios = pegaDados ( "SELECT U.nome_usuario, U.id_usuario, U.login, UP.id_grupo FROM ".$esquemaadmin."i3geousr_usuarios AS U JOIN ".$esquemaadmin."i3geousr_grupousuario AS UP ON U.id_usuario = UP.id_usuario", dbh, false );
-		if ($usuarios === false || $grupos === false) {
+		$grupos = pegaDados ( "SELECT id_grupo,nome from ".$esquemaadmin."i3geousr_grupos order by nome", $dbh, false );
+		if ($grupos === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$o = array ();
-		foreach ( $grupos as $grupo ) {
-			$p = array ();
-			foreach ( $usuarios as $usuario ) {
-				if ($usuario["id_grupo"] == $grupo["id_grupo"]) {
-					$p[$usuario["id_usuario"]] = $usuario;
-				}
-			}
-			$grupo["usuarios"] = $p;
-			$o[] = $grupo;
-		}
-		$usuarios = pegaDados ( "SELECT id_usuario, login, nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 order by login", $dbh );
+		$usuarios = pegaDados ( "SELECT id_usuario, nome_usuario FROM ".$esquemaadmin."i3geousr_usuarios WHERE ativo = 1 ORDER BY nome_usuario", dbh, false );
 		$dbhw = null;
 		$dbh = null;
 		if ($usuarios === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit();
+			exit ();
 		}
+
 		retornaJSON ( array (
-				"grupos" => $o,
+				"grupos" => $grupos,
 				"usuarios" => $usuarios
 		) );
 		break;
@@ -196,9 +214,7 @@ function excluir($id_grupo, $dbhw) {
 	if ($resultado === false) {
 		return false;
 	}
-	if ($resultado === true) {
-		$resultado = excluirUsuarios ( $id_grupo, $dbhw );
-	}
+	$resultado = excluirUsuarios ( $id_grupo, $dbhw );
 	return $resultado;
 }
 function excluirUsuarios($id_grupo, $dbhw) {

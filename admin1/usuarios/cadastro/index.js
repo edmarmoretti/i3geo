@@ -53,7 +53,7 @@ Obt&eacute;m a lista de usuarios
 						var templatePapeis = $("#templateInputPapeis").html();
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
-						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
+						//templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						//lista todas as usuarios
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",

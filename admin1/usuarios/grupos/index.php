@@ -60,7 +60,7 @@ include "../../head.php";
 <option value="form-{{id_grupo}}">{{{nome}}}</option>
 </script>
 <script id="templateFormLista" type="x-tmpl-mustache">
-<form style="" action="#" onsubmit="{{onSalvar}}('{{id_grupo}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+<form id="form-edicao-{{id_grupo}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_grupo}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 	<div class="row">
 		<div class="col-md-4" style="max-height: 230px; overflow-y: auto;">
 			<h4> {{{usuariosv}}}</h4>
@@ -89,15 +89,17 @@ include "../../head.php";
 </form>
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
-<div class="panel panel-default" id="form-{{id_grupo}}">
-	<div class="panel-heading icon" role="tab">
-		<h3 class="panel-title {{escondido}}">
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_grupo}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">delete_forever</i>
+<div class="list-group-item" id="form-{{id_grupo}}">
+	<div class="row-content">
+		<h3 class="list-group-item-heading {{escondido}}">
+			{{{nome}}}
+			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_grupo}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button" aria-expanded="false" >
+				<i class="material-icons md-18">edit</i>
 			</a>
-			&nbsp;
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_grupo}}"
-			aria-expanded="false" aria-controls="#body-form-{{id_grupo}}"> {{{nome}}} </a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_grupo}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">delete_forever</i>
+			</a>
 		</h3>
 	</div>
 	<div class="panel-body panel-collapse collapse" id="body-form-{{id_grupo}}">
@@ -108,7 +110,7 @@ include "../../head.php";
 <script id="templateInputUsuarios" type="x-tmpl-mustache">
 	<div class="checkbox">
 		<label>
-			<input type="checkbox" {{checked}} name="id_usuario-{{{id_usuario}}}" /> <abbr title="{{{nome_usuario}}}">{{{login}}}</abbr>
+			<input type="checkbox" {{checked}} name="id_usuario-{{{id_usuario}}}" /> <abbr title="{{{nome_usuario}}}">{{{nome_usuario}}}</abbr>
 		</label>
 	</div>
 </script>

@@ -147,32 +147,11 @@ switch ($funcao) {
 		$dbhw = null;
 		$dbh = null;
 		if ($papeis === false) {
-			$dbhw = null;
-			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$o = array ();
-		foreach ( $usuarios as $usuario ) {
-			// pega os papeis registrados para cada operacao
-			$p = array ();
-			foreach ( $papeis as $papel ) {
-				if ($papel["id_usuario"] == $usuario["id_usuario"]) {
-					$p[$papel["id_papel"]] = $papel;
-				}
-			}
-			$usuario["papeis"] = $p;
-			$o[] = $usuario;
-		}
-		$papeis = pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", $dbh );
-		$dbhw = null;
-		$dbh = null;
-		if ($papeis === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit();
-		}
 		retornaJSON ( array (
-				"usuarios" => $o,
+				"usuarios" => $usuarios,
 				"papeis" => $papeis
 		) );
 		break;
