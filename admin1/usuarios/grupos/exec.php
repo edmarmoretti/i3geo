@@ -92,8 +92,8 @@ switch ($funcao) {
 		exit ();
 		break;
 		case "LISTAUNICO" :
-			$grupos = pegaDados ( "SELECT id_grupo,nome,descricao from ".$esquemaadmin."i3geousr_grupos order by nome", $dbh, false );
-			$gruposusuarios = pegaDados ( "SELECT U.nome_usuario, U.id_usuario, UP.id_grupo FROM ".$esquemaadmin."i3geousr_grupousuario AS UP JOIN ".$esquemaadmin."i3geousr_usuarios AS U ON U.id_usuario = UP.id_usuario", dbh, false );
+			$grupos = pegaDados ( "SELECT id_grupo,nome,descricao from ".$esquemaadmin."i3geousr_grupos WHERE id_grupo = $id_grupo", $dbh, false );
+			$gruposusuarios = pegaDados ( "SELECT U.nome_usuario, U.id_usuario, UP.id_grupo FROM ".$esquemaadmin."i3geousr_grupousuario AS UP JOIN ".$esquemaadmin."i3geousr_usuarios AS U ON U.id_usuario = UP.id_usuario WHERE UP.id_grupo = $id_grupo", dbh, false );
 			if ($gruposusuarios === false || $grupos === false) {
 				$dbhw = null;
 				$dbh = null;
@@ -103,7 +103,7 @@ switch ($funcao) {
 			$grupo = $grupos[0];
 			$o = array ();
 			foreach ( $gruposusuarios as $gp ) {
-				$o[$gp["id_grupo"]] = $gp;
+				$o[$gp["id_usuario"]] = $gp;
 			}
 			$grupo["usuarios"] = $o;
 			$usuarios = pegaDados ( "SELECT id_usuario, login, nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 order by login", $dbh );

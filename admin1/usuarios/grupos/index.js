@@ -156,11 +156,11 @@ Obt&eacute;m a lista de grupos
 										{
 											"data": json["grupo"],
 											"onExcluir": "i3GEOadmin.gruposusuarios.excluirDialogo",//funcao
-											"onEditar": "i3GEOadmin.gruposusuarios.salvarDialogo",//funcao
+											"onSalvar": "i3GEOadmin.gruposusuarios.salvarDialogo",//funcao
 											"excluir": i3GEOadmin.gruposusuarios.dicionario.excluir,
 											"inputUsuarios": function(){
 												//marca os checkbox
-												var p = this.usuarios;
+												var p = json["grupo"]["usuarios"];
 												$(json["usuarios"]).each(
 														function(i,el){
 															if(p && el.id_usuario && p[el.id_usuario]){
