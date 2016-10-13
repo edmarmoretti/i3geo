@@ -75,7 +75,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$dados = pegaDados("SELECT id_atlas, titulo_atlas, publicado_atlas, ordem_atlas, basemapfile_atlas, desc_atlas, h_atlas, w_atlas, icone_atlas,  link_atlas, pranchadefault_atlas, template_atlas, tipoguias_atlas from ".$esquemaadmin."i3geoadmin_atlas ORDER BY titulo_atlas, ordem_atlas", $dbh, false);
+		$dados = pegaDados("SELECT id_atlas, titulo_atlas, publicado_atlas, ordem_atlas, basemapfile_atlas, desc_atlas, h_atlas, w_atlas, icone_atlas,  link_atlas, pranchadefault_atlas, template_atlas, tipoguias_atlas from ".$esquemaadmin."i3geoadmin_atlas ORDER BY lower(titulo_atlas), ordem_atlas", $dbh, false);
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;

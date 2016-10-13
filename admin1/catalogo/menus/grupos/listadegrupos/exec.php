@@ -73,7 +73,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_grupos order by nome_grupo", $dbh, false );
+		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_grupos order by lower(nome_grupo)", $dbh, false );
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;

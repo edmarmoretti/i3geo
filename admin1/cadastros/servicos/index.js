@@ -27,6 +27,8 @@ i3GEOadmin.webservices = {
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
+		//parametros obtidos do formulario de edicao antes de abrir o modal de confirmacao
+		parametrosSalvar: "",
 		init: function(onde){
 			i3GEOadmin.webservices.ondeLista = onde;
 			i3GEOadmin.webservices.lista();
@@ -49,7 +51,7 @@ Obt&eacute;m a lista de Webservices
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
-						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
+						//templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						//lista todas as Webservices
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -59,15 +61,7 @@ Obt&eacute;m a lista de Webservices
 										{
 											"data": json,
 											"onExcluir": "i3GEOadmin.webservices.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.webservices.salvarDialogo",//funcao
-											"opcoesTipo": function(){
-												var hash = {};
-												hash[this.tipo_ws + "-sel"] = "selected";
-												return Mustache.to_html(
-														$("#templateOpcoesTipo").html(),
-														hash
-												);
-											}
+											"onEditar": "i3GEOadmin.webservices.editarDialogo"
 										}
 								)
 						);
@@ -111,6 +105,47 @@ Obt&eacute;m a lista de Webservices
 				i3GEOadmin.webservices.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
+		},
+		editarDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=listaunico",
+					"id_ws=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						//lista todas as Webservices
+						var html = Mustache.to_html(
+								"{{#data}}" + $("#templateFormLista").html() + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.webservices.dicionario,
+										{
+											"data": json,
+											"onExcluir": "i3GEOadmin.webservices.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.webservices.salvarDialogo",//funcao
+											"opcoesTipo": function(){
+												var hash = {};
+												hash[this.tipo_ws + "-sel"] = "selected";
+												return Mustache.to_html(
+														$("#templateOpcoesTipo").html(),
+														hash
+												);
+											}
+										}
+								)
+						);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
 		},
 		adicionaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.webservices.formAdiciona);
@@ -169,17 +204,18 @@ Obt&eacute;m a lista de Webservices
 			);
 		},
 		salvarDialogo: function(id){
+			i3GEOadmin.webservices.parametrosSalvar = $("#form-edicao-" + id).serialize();
 			var hash = {
 					"mensagem": i3GEOadmin.webservices.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.webservices.salvar('"+id+"')",
 					"botao1": i3GEOadmin.webservices.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"onBotao2": "i3GEOadmin.webservices.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.webservices.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
 		salvar: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
+			var parametros = i3GEOadmin.webservices.parametrosSalvar;
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -188,6 +224,7 @@ Obt&eacute;m a lista de Webservices
 			)
 			.done(
 					function(data, status){
+						i3GEOadmin.webservices.parametrosSalvar = "";
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.webservices.ondeLista);
 						i3GEOadmin.webservices.lista();
@@ -195,6 +232,7 @@ Obt&eacute;m a lista de Webservices
 			)
 			.fail(
 					function(data){
+						i3GEOadmin.webservices.parametrosSalvar = "";
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}

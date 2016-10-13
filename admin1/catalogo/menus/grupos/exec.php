@@ -103,7 +103,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
+		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by lower(perfil)", $dbh, false );
 		$dbhw = null;
 		$dbh = null;
 		include($locaplic."/admin/php/classe_arvore.php");

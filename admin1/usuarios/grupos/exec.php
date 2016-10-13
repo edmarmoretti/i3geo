@@ -119,7 +119,7 @@ switch ($funcao) {
 			) );
 			break;
 	case "LISTA" :
-		$grupos = pegaDados ( "SELECT id_grupo,nome from ".$esquemaadmin."i3geousr_grupos order by nome", $dbh, false );
+		$grupos = pegaDados ( "SELECT id_grupo,nome from ".$esquemaadmin."i3geousr_grupos order by lower(nome)", $dbh, false );
 		if ($grupos === false) {
 			$dbhw = null;
 			$dbh = null;

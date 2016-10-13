@@ -136,7 +136,7 @@ switch ($funcao) {
 			) );
 			break;
 	case "LISTA" :
-		$usuarios = pegaDados ( "SELECT id_usuario,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios order by nome_usuario", $dbh, false );
+		$usuarios = pegaDados ( "SELECT id_usuario,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios order by lower(nome_usuario)", $dbh, false );
 		if ($usuarios === false) {
 			$dbhw = null;
 			$dbh = null;

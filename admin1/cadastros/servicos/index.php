@@ -61,7 +61,7 @@ include "../../head.php";
 <option value="form-{{id_ws}}">{{{nome_ws}}}</option>
 </script>
 <script id="templateFormLista" type="x-tmpl-mustache">
-<form style="" action="#" onsubmit="{{onSalvar}}('{{id_ws}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+<form id="form-edicao-{{id_ws}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_ws}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 	<div class="row">
 		<div class="col-md-12">
 			<h4>{{{nome_ws}}}</h4>
@@ -106,20 +106,20 @@ include "../../head.php";
 </form>
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
-<div class="panel panel-default" id="form-{{id_ws}}">
-	<div class="panel-heading icon" role="tab">
-		<h3 class="panel-title {{escondido}}">
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_ws}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">delete_forever</i>
+<div class="list-group-item" id="form-{{id_ws}}">
+	<div class="row-content" >
+		<h3 class="list-group-item-heading {{escondido}}">
+			{{{nome_ws}}}
+			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_ws}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button" aria-expanded="false" >
+				<i class="material-icons md-18">edit</i>
 			</a>
-			&nbsp;
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_ws}}"
-			aria-expanded="false" aria-controls="#body-form-{{id_ws}}"> {{{nome_ws}}} </a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_ws}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">delete_forever</i>
+			</a>
 		</h3>
 	</div>
-	<div class="panel-body panel-collapse collapse" id="body-form-{{id_ws}}">
-		{{{templateFormLista}}}
-	</div>
+	<div class="list-group-separator"></div>
 </div>
 </script>
 <script id="templateOpcoesTipo" type="x-tmpl-mustache">

@@ -75,8 +75,8 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTA" :
-		$semmapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where mapfile = '' or mapfile is null order by ordem_mapa, nome_mapa", $dbh, false );
-		$commapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where mapfile != '' and mapfile is not null order by ordem_mapa, nome_mapa", $dbh, false );
+		$semmapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where mapfile = '' or mapfile is null order by ordem_mapa, lower(nome_mapa)", $dbh, false );
+		$commapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where mapfile != '' and mapfile is not null order by ordem_mapa, lower(nome_mapa)", $dbh, false );
 		if ($semmapfile === false || $commapfile === false) {
 			$dbhw = null;
 			$dbh = null;
