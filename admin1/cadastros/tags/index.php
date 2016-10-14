@@ -66,8 +66,7 @@ include "../../head.php";
 		<div class="col-md-12">
 			<h4>Tag</h4>
 			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="nome" >{{{nome}}}</label>
-				<div class="col-md-10">
+				<div class="col-md-12">
 					<input title="{{{nome}}}" type="text" value="{{{nome}}}" class="form-control" name="nome" required>
 				</div>
 			</div>
@@ -94,7 +93,8 @@ include "../../head.php";
 		</h3>
 	</div>
 	<div class="list-group-separator"></div>
-</div></script>
+</div>
+</script>
 
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../dicionario/tags.js"></script>

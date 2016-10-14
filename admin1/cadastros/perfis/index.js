@@ -27,6 +27,8 @@ i3GEOadmin.perfis = {
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
+		//parametros obtidos do formulario de edicao antes de abrir o modal de confirmacao
+		parametrosSalvar: "",
 		init: function(onde){
 			i3GEOadmin.perfis.ondeLista = onde;
 			i3GEOadmin.perfis.lista();
@@ -59,7 +61,7 @@ Obt&eacute;m a lista de perfis
 										{
 											"data": json,
 											"onExcluir": "i3GEOadmin.perfis.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.perfis.salvarDialogo"//funcao
+											"onEditar": "i3GEOadmin.perfis.editarDialogo"//funcao
 										}
 								)
 						);
@@ -101,6 +103,38 @@ Obt&eacute;m a lista de perfis
 				i3GEOadmin.perfis.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
+		},
+		editarDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=listaunico",
+					"id_perfil=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						var html = Mustache.to_html(
+								"{{#data}}" + $("#templateFormLista").html() + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.perfis.dicionario,
+										{
+											"data": json,
+											"onExcluir": "i3GEOadmin.perfis.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.perfis.salvarDialogo"//funcao
+										}
+								)
+						);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
 		},
 		adicionaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.perfis.formAdiciona);
@@ -159,17 +193,18 @@ Obt&eacute;m a lista de perfis
 			);
 		},
 		salvarDialogo: function(id){
+			i3GEOadmin.perfis.parametrosSalvar = $("#form-edicao-" + id).serialize();
 			var hash = {
 					"mensagem": i3GEOadmin.perfis.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.perfis.salvar('"+id+"')",
 					"botao1": i3GEOadmin.perfis.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"onBotao2": "i3GEOadmin.perfis.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.perfis.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
 		salvar: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
+			var parametros = i3GEOadmin.perfis.parametrosSalvar;
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -178,6 +213,7 @@ Obt&eacute;m a lista de perfis
 			)
 			.done(
 					function(data, status){
+						i3GEOadmin.perfis.parametrosSalvar = '';
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.perfis.ondeLista);
 						i3GEOadmin.perfis.lista();
@@ -185,6 +221,7 @@ Obt&eacute;m a lista de perfis
 			)
 			.fail(
 					function(data){
+						i3GEOadmin.perfis.parametrosSalvar = '';
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}

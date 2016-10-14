@@ -82,7 +82,7 @@ switch ($funcao) {
 		}
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $dados );
+		retornaJSON ( $dados[0] );
 		break;
 	case "LISTA" :
 		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by lower(nome)", $dbh, false );
