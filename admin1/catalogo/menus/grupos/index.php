@@ -49,34 +49,32 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					</div>
 				</div>
 			</div>
+		</div>
+	</div>
+	<div class="row center-block">
+		<div class="col-md-6">
 			<div class="well hidden">
 				<!-- painel para mostrar os temas na raiz -->
-				<h3 class="panel-heading icon">
-					<a class="collapsed in" role="button" data-toggle="collapse" href="#raiz" aria-expanded="false"
-						aria-controls="#raiz">{{{temasRaizMenu}}}</a>
-				</h3>
-				<div class="clearfix"></div>
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.grupos.adicionaTemaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionarTema}}}</a>
-				</div>
-				<div class="clearfix"></div>
-				<div id="raiz" class="panel-body panel-collapse collapse"></div>
+				<h4 class="pull-left">
+					{{{temasRaizMenu}}}
+				</h4>
+				<a onclick="i3GEOadmin.grupos.adicionaTemaDialogo();" href="javascript:void(0)"
+					class="btn btn-primary pull-right" role="button" style="color:#008579;">{{{adicionar}}}</a>
 
+				<div class="clearfix"></div>
+				<div id="raiz" class="panel-body"></div>
 			</div>
+		</div>
+		<div class="col-md-6">
 			<!-- nos -->
 			<div class="well hidden">
-				<h3 class="panel-heading icon">
-					<a class="in" role="button" data-toggle="collapse" href="#corpo" aria-expanded="false"
-						aria-controls="#raiz">{{{grupos}}}</a>
-				</h3>
+				<h4 class="pull-left">
+					{{{grupos}}}
+				</h4>
+				<a onclick="i3GEOadmin.grupos.adicionaNoDialogo();" href="javascript:void(0)"
+						class="btn btn-primary pull-right" role="button" style="color:#008579;">{{{adicionar}}}</a>
 				<div class="clearfix"></div>
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.grupos.adicionaNoDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionarGrupo}}}</a>
-				</div>
-				<div class="clearfix"></div>
-				<div id="corpo" class="panel-body panel-collapse in"></div>
+				<div id="corpo" class="panel-body"></div>
 
 			</div>
 		</div>
