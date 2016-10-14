@@ -31,7 +31,9 @@ include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
@@ -69,6 +71,18 @@ switch ($funcao) {
 		}
 		retornaJSON ( $dados );
 		exit ();
+		break;
+	case "LISTAUNICO" :
+		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = $id_tag ", $dbh, false );
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		$dbhw = null;
+		$dbh = null;
+		retornaJSON ( $dados );
 		break;
 	case "LISTA" :
 		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by lower(nome)", $dbh, false );
