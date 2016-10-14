@@ -32,7 +32,9 @@ $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
 		"EXCLUIR",
-		"LIMPACACHE"
+		"LIMPACACHE",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/mapas" ) === false) {
@@ -74,10 +76,12 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
-	case "LISTA" :
-		$semmapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where mapfile = '' or mapfile is null order by ordem_mapa, lower(nome_mapa)", $dbh, false );
-		$commapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where mapfile != '' and mapfile is not null order by ordem_mapa, lower(nome_mapa)", $dbh, false );
-		if ($semmapfile === false || $commapfile === false) {
+	case "LISTAUNICO" :
+		$mapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where id_mapa = $id_mapa AND mapfile = '' or mapfile is null ", $dbh, false );
+		if(count($mapfile) == 0){
+			$mapfile = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where id_mapa = $id_mapa AND mapfile != '' and mapfile is not null ", $dbh, false );
+		}
+		if ($mapfile === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de mapas" );
@@ -91,11 +95,32 @@ switch ($funcao) {
 		$arvore = new Arvore ( $locaplic );
 		$temas = $arvore->pegaTodosTemas ( true );
 		retornaJSON ( array (
-				"dados" => array_merge ( $semmapfile, $commapfile ),
+				"dados" => $mapfile[0],
 				"perfis" => $perfis,
 				"temas" => $temas
 		) );
 		break;
+		case "LISTA" :
+			$mapfiles = pegaDados ( "SELECT id_mapa, nome_mapa from " . $esquemaadmin . "i3geoadmin_mapas order by ordem_mapa, lower(nome_mapa)", $dbh, false );
+			if ($mapfiles === false) {
+				$dbhw = null;
+				$dbh = null;
+				header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de mapas" );
+				exit ();
+			}
+			$perfis = pegaDados ( "SELECT id_perfil, perfil from " . $esquemaadmin . "i3geoadmin_perfis order by perfil", $dbh, false );
+			$dbhw = null;
+			$dbh = null;
+			// pega a lista de temas
+			include ("../../../admin/php/classe_arvore.php");
+			$arvore = new Arvore ( $locaplic );
+			$temas = $arvore->pegaTodosTemas ( true );
+			retornaJSON ( array (
+					"dados" => $mapfiles,
+					"perfis" => $perfis,
+					"temas" => $temas
+			) );
+			break;
 	case "EXCLUIR" :
 		$retorna = excluir ( $id_mapa, $dbhw );
 		$dbhw = null;

@@ -27,6 +27,8 @@ i3GEOadmin.mapas = {
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
+		//parametros obtidos do formulario de edicao antes de abrir o modal de confirmacao
+		parametrosSalvar: "",
 		init: function(onde){
 			i3GEOadmin.mapas.ondeLista = onde;
 			i3GEOadmin.mapas.lista();
@@ -69,22 +71,7 @@ Obt&eacute;m a lista
 										{
 											"data": json["dados"],
 											"onExcluir": "i3GEOadmin.mapas.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.mapas.salvarDialogo",//funcao
-											"opcoesPublicado": function(){
-												var hash = {};
-												hash["sim"] = i3GEOadmin.mapas.dicionario.sim;
-												hash["nao"] = i3GEOadmin.mapas.dicionario.nao;
-												if(this.publicado_mapa == ""){
-													this.publicado_mapa = "SIM";
-												}
-												hash[this.publicado_mapa + "-sel"] = "selected";
-												return Mustache.to_html(
-														$("#templateOpcoesPublicado").html(),
-														hash
-												);
-											},
-											"opcoesPerfil": opcoesPerfil,
-											"opcoesTema": opcoesTema
+											"onEditar": "i3GEOadmin.mapas.editarDialogo"
 										}
 								)
 						);
@@ -138,6 +125,65 @@ Obt&eacute;m a lista
 				i3GEOadmin.mapas.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
+		},
+		editarDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=listaunico",
+					"id_mapa=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						var templateLista = $("#templateFormLista").html();
+						//combo com temas
+						var opcoesTema = '<option value="">---</option>' + Mustache.to_html(
+								"{{#data}}" + $("#templateTemas").html() + "{{/data}}",
+								{"data":json["temas"]}
+						);
+						//combo com perfis
+						var opcoesPerfil = '<option value="">---</option>' + Mustache.to_html(
+								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
+								{"data":json["perfis"]}
+						);
+						//lista todas as menus
+						var html = Mustache.to_html(
+								"{{#data}}" + templateLista + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.mapas.dicionario,
+										{
+											"data": json["dados"],
+											"onExcluir": "i3GEOadmin.mapas.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.mapas.salvarDialogo",//funcao
+											"opcoesPublicado": function(){
+												var hash = {};
+												hash["sim"] = i3GEOadmin.mapas.dicionario.sim;
+												hash["nao"] = i3GEOadmin.mapas.dicionario.nao;
+												if(this.publicado_mapa == ""){
+													this.publicado_mapa = "SIM";
+												}
+												hash[this.publicado_mapa + "-sel"] = "selected";
+												return Mustache.to_html(
+														$("#templateOpcoesPublicado").html(),
+														hash
+												);
+											},
+											"opcoesPerfil": opcoesPerfil,
+											"opcoesTema": opcoesTema
+										}
+								)
+						);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
 		},
 		adicionaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.mapas.formAdiciona);
@@ -196,17 +242,18 @@ Obt&eacute;m a lista
 			);
 		},
 		salvarDialogo: function(id){
+			i3GEOadmin.mapas.parametrosSalvar = $("#form-edicao-" + id).serialize();
 			var hash = {
 					"mensagem": i3GEOadmin.mapas.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.mapas.salvar('"+id+"')",
 					"botao1": i3GEOadmin.mapas.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"onBotao2": "i3GEOadmin.mapas.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.mapas.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
 		salvar: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
+			var parametros = i3GEOadmin.mapas.parametrosSalvar;
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -215,6 +262,7 @@ Obt&eacute;m a lista
 			)
 			.done(
 					function(data, status){
+						i3GEOadmin.mapas.parametrosSalvar = '';
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapas.ondeLista);
 						i3GEOadmin.mapas.lista();
@@ -222,6 +270,7 @@ Obt&eacute;m a lista
 			)
 			.fail(
 					function(data){
+						i3GEOadmin.mapas.parametrosSalvar = '';
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
