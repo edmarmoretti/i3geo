@@ -6,7 +6,7 @@ i3GEOadmin.identifica.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Este programa permite editar a lista de sistemas de identifica&ccedil;&atilde;o. A ferramenta de	identifica&ccedil;&atilde;o utilizada no i3geo, lista os dados do ponto clicado no mapa pelo usu&aacute;rio, com base nas camadas existentes no mapa. Os sistemas de identifica&ccedil;&atilde;o adicionam outras op&ccedil;&otilde;es na janela de identifica&ccedil;&atilde;o, permitindo, por exemplo, o uso de	programas especiais de busca de dados",
+		pt : "A ferramenta de identifica&ccedil;&atilde;o, utilizada nos mapas interativos, lista os dados para o ponto clicado pelo usu&aacute;rio. Os sistemas cadastrados aqui adicionam outras op&ccedil;&otilde;es na janela de identifica&ccedil;&atilde;o, permitindo buscas especiais, que complementam as op&ccedil;&otilde;es padr&atilde;o.",
  		en : "",
 		es : ""
 	} ],

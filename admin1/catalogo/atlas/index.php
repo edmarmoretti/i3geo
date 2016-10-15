@@ -23,7 +23,7 @@ include "../../head.php";
 					<i class="material-icons">help</i>
 				</button>
 				<h2><small>{{{txtTitulo}}}</small></h2>
-				<!--<blockquote>{{{txtDesc}}}</blockquote>-->
+				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
 

@@ -1,5 +1,10 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
 i3GEOadmin.atlas.dicionario = {
+	'txtDesc' : [ {
+		pt : "Um atlas utiliza uma interface especial que mostra uma op&ccedil;&atilde;o para que o usu&aacute;rio escolha pranchas. Cada prancha &eacute; formada por camadas, escolhidas do cat&aacute;logo.",
+		en : "",
+		es : ""
+	} ],
 	'txtTitulo' : [ {
 		pt : "Atlas ",
 		en : "",

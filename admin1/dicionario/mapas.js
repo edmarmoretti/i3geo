@@ -1,6 +1,11 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
 //i3GEOadmin.mapas = {};
 i3GEOadmin.mapas.dicionario = {
+	'txtDesc' : [ {
+		pt : "Mapas recebem um identificador &uacute;nico e usam URLs curtas para inicializa&ccedil;&atilde;o. Os mapas podem ter sido salvos (mapfile salvo no banco de dados) por meio da ferramenta 'salvar mapa' ou podem ser apenas par&acirc;metros definidos ao criar um novo mapa nas op&ccedil;&otilde;es abaixo. Na p&aacute;gina principal do i3Geo existe uma op&ccedil;&atilde;o que permite ao usu&aacute;rio abrir os mapas.",
+		en : "",
+		es : ""
+	} ],
 	'txtTitulo' : [ {
 		pt : "Links para mapas",
 		en : "",

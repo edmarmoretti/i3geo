@@ -11,7 +11,7 @@ i3GEOadmin.operacoes.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Aqui s&atilde;o definidas quais funcionalidades ser&atilde;o controladas e quais pap&eacute;is podem utiliz&aacute;-las. Para que o controle funcione, o c&oacute;digo do i3Geo deve ser modificado para que a valida&ccedil;&atilde;o seja realizada. Usu&aacute;rios administradores podem acessar qualquer opera&ccedil;&atilde;o.",
+		pt : "Aqui s&atilde;o definidas quais funcionalidades s&atilde;o de uso restrito e quais pap&eacute;is podem utiliz&aacute;-las. Cada registro funciona como palavras chave inseridas tamb&eacute;m nos c&oacute;digos do i3Geo. Usu&aacute;rios administradores podem acessar qualquer opera&ccedil;&atilde;o.",
 		en : "",
 		es : ""
 	} ],
