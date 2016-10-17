@@ -31,7 +31,9 @@ include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/atlas" ) === false) {
@@ -74,8 +76,20 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
+	case "LISTAUNICO" :
+		$dados = pegaDados("SELECT id_atlas, titulo_atlas, publicado_atlas, ordem_atlas, basemapfile_atlas, desc_atlas, h_atlas, w_atlas, icone_atlas,  link_atlas, pranchadefault_atlas, template_atlas, tipoguias_atlas from ".$esquemaadmin."i3geoadmin_atlas WHERE id_atlas = $id_atlas", $dbh, false);
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de atlas" );
+			exit ();
+		}
+		$dbhw = null;
+		$dbh = null;
+		retornaJSON ( array("dados"=>$dados[0]) );
+		break;
 	case "LISTA" :
-		$dados = pegaDados("SELECT id_atlas, titulo_atlas, publicado_atlas, ordem_atlas, basemapfile_atlas, desc_atlas, h_atlas, w_atlas, icone_atlas,  link_atlas, pranchadefault_atlas, template_atlas, tipoguias_atlas from ".$esquemaadmin."i3geoadmin_atlas ORDER BY lower(titulo_atlas), ordem_atlas", $dbh, false);
+		$dados = pegaDados("SELECT id_atlas, titulo_atlas, ordem_atlas from ".$esquemaadmin."i3geoadmin_atlas ORDER BY lower(titulo_atlas), ordem_atlas", $dbh, false);
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;

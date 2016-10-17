@@ -19,7 +19,7 @@ i3GEOadmin.prancha.dicionario = {
 		es : ""
 	} ],
     'editarTema' : [ {
-		pt : "Editar temas",
+		pt : "temas",
 		en : "",
 		es : ""
 	} ],

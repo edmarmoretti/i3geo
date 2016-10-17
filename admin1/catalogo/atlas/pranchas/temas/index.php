@@ -7,27 +7,27 @@ $id_prancha = filter_var($_GET["id_prancha"], FILTER_SANITIZE_NUMBER_INT);
 $titulo_prancha = filter_var($_GET["titulo_prancha"], FILTER_SANITIZE_STRING);
 $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 ?>
-<div class="container-fluid">
+<div class="container-fluid migalha">
 	<div class="row">
-		<ol class="breadcrumb">
-			<li><a href="../../../../init/index.php">i3Geo</a></li>
-			<li><a href="../../../../index.php">Admin</a></li>
-			<li>Cat&aacute;logo</li>
-			<li>Atlas</li>
-			<li><a href="../index.php?id_atlas=<?php echo $id_atlas; ?>&id_filtro=<?php echo $id_prancha; ?>">Prancha - <?php echo $titulo_prancha; ?></a></li>
-			<li class="active">Temas</li>
-		</ol>
+		<div class="btn-group btn-breadcrumb">
+			<a class="btn btn-default" href="../../../../../init/index.php"><div>i3Geo</div></a>
+			<a class="btn btn-default" href="../../../../index.php"><div>Admin</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Cat&aacute;logo</div></a>
+			<a class="btn btn-default" href="../../index.php"><div>Atlas</div></a>
+			<a class="btn btn-default" href="../index.php?id_atlas=<?php echo $id_atlas; ?>&id_filtro=<?php echo $id_prancha; ?>"><div>Pranchas</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Temas</div></a>
+		</div>
 	</div>
 </div>
 <div class="container">
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
-				<h3>{{{txtTituloTema}}}</h3>
-				<h4>{{{txtDescTema}}}</h4>
+				<h2>{{{txtTituloTema}}}</h2>
+				<h3><small>Prancha: <?php echo $titulo_prancha; ?></small></h3>
+				<blockquote>{{{txtDescTema}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					
 					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
@@ -48,9 +48,9 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 <option value="form-{{id_tema}}">{{{codigo_tema}}}</option>
 </script>
 <script id="templateFormLista" type="x-tmpl-mustache">
-<form style="" action="#" onsubmit="{{onSalvar}}('{{id_tema}}','{{{codigo_tema}}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+<form id="form-edicao-{{id_tema}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_tema}}','{{{codigo_tema}}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 	<div class="row">
-		<div class="col-md-12 {{esconde}}">
+		<div class="col-md-12">
 			<div class="form-group form-group-lg">
 				<label class="col-md-4 control-label" for="codigo_tema" >{{{codigoTema}}}</label>
 				<div class="col-md-8">
@@ -86,20 +86,22 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 </form>
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
-<div class="panel panel-default" id="form-{{id_tema}}">
-	<div class="panel-heading icon" role="tab">
-		<h3 class="panel-title {{escondido}}">
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">delete_forever</i>
+<div class="list-group-item" id="form-{{id_tema}}">
+	<div class="row-content">
+		<h3 class="list-group-item-heading {{escondido}}">
+			{{{codigo_tema}}}
+
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_tema}}','{{codigo_tema}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">edit</i>
 			</a>
-			&nbsp;
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_tema}}"
-			aria-expanded="false" aria-controls="#body-form-{{id_tema}}"> {{{codigo_tema}}} </a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">delete_forever</i>
+			</a>
 		</h3>
 	</div>
-	<div class="panel-body panel-collapse collapse" id="body-form-{{id_tema}}">
-		{{{templateFormLista}}}
-	</div>
+	<div class="list-group-separator"></div>
 </div>
 </script>
 <script id="templateTemas" type="x-tmpl-mustache">

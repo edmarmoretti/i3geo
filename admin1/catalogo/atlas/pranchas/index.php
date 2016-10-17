@@ -6,15 +6,15 @@ include "../../../head.php";
 $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 ?>
-<div class="container-fluid">
+<div class="container-fluid migalha">
 	<div class="row">
-		<ol class="breadcrumb">
-			<li><a href="../../../init/index.php">i3Geo</a></li>
-			<li><a href="../../../index.php">Admin</a></li>
-			<li>Cat&aacute;logo</li>
-			<li><a href="../index.php?id_filtro=<?php echo $id_atlas; ?>">Atlas - <?php echo $titulo_atlas; ?></a></li>
-			<li class="active">Pranchas</li>
-		</ol>
+		<div class="btn-group btn-breadcrumb">
+			<a class="btn btn-default" href="../../../../init/index.php"><div>i3Geo</div></a>
+			<a class="btn btn-default" href="../../../index.php"><div>Admin</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Cat&aacute;logo</div></a>
+			<a class="btn btn-default" href="../index.php"><div>Atlas</div></a>
+			<a class="btn btn-default" style="pointer-events: none"><div>Pranchas</div></a>
+		</div>
 	</div>
 </div>
 <div class="container">
@@ -26,10 +26,11 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 					<i class="material-icons">help</i>
 				</button>
 				<h2><small>{{{txtTitulo}}}</small></h2>
+				<h3><small>Atlas: <?php echo $titulo_atlas; ?></small></h3>
 				<!--<blockquote>{{{txtDesc}}}</blockquote>-->
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					
+
 					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 					</select>
 				</div>
@@ -59,7 +60,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 <option value="form-{{id_prancha}}">{{{titulo_prancha}}}</option>
 </script>
 <script id="templateFormLista" type="x-tmpl-mustache">
-<form style="" action="#" onsubmit="{{onSalvar}}('{{id_prancha}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+<form id="form-edicao-{{id_prancha}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_prancha}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group form-group-lg">
@@ -133,28 +134,29 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 </form>
 </script>
 <script id="templateLista" type="x-tmpl-mustache">
-<div class="panel panel-default" id="form-{{id_prancha}}">
-	<div class="panel-heading icon" role="tab">
-		<h3 class="panel-title {{escondido}}">
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_prancha}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">delete_forever</i>
+<div class="list-group-item" id="form-{{id_prancha}}">
+	<div class="row-content">
+		<h3 class="list-group-item-heading {{escondido}}">
+			{{{titulo_prancha}}}
+
+			<div class="pull-right">
+			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.prancha.editarTemas('{{id_atlas}}','{{id_prancha}}','{{{titulo_prancha}}}')" href="javascript:void(0)">
+				<i class="material-icons md-18">folder_open</i>
 			</a>
-			&nbsp;
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_prancha}}"
-			aria-expanded="false" aria-controls="#body-form-{{id_prancha}}"> {{{titulo_prancha}}} </a>
+  			<label class=pull-right><h6 style="margin-top: 5px; margin-bottom: 5px;">&nbsp;{{{editarTema}}}</h6></label>
+			</div>
+
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_prancha}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">edit</i>
+			</a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_prancha}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">delete_forever</i>
+			</a>
 		</h3>
 	</div>
-	<div class="panel-body panel-collapse collapse" id="body-form-{{id_prancha}}">
-		{{{templateFormLista}}}
-	</div>
-	<div class="panel-footer {{{escondido}}}" style="padding-top: 0px; padding-bottom: 0px;">
-		<div class="pull-right">
-			<button  style="color:#007a6f;" onclick="i3GEOadmin.prancha.editarTemas('{{id_atlas}}','{{id_prancha}}','{{{titulo_prancha}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
-				<i class="material-icons">folder_open</i> {{{editarTema}}}
-			</button>
-		</div>
-		<div class="clearfix"></div>
-	</div>
+	<div class="list-group-separator"></div>
 </div>
 </script>
 <script type="text/javascript" src="index.js"></script>

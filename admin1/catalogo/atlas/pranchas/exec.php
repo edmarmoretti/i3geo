@@ -31,7 +31,9 @@ include_once (dirname ( __FILE__ ) . "/../../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/atlas" ) === false) {
@@ -74,8 +76,20 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
+	case "LISTAUNICO" :
+		$dados = pegaDados("SELECT id_atlas, id_prancha, titulo_prancha, ordem_prancha, desc_prancha, h_prancha, icone_prancha, link_prancha, mapext_prancha, w_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = '$id_prancha'", $dbh, false);
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de pranchas" );
+			exit ();
+		}
+		$dbhw = null;
+		$dbh = null;
+		retornaJSON ( array("dados"=>$dados[0]) );
+		break;
 	case "LISTA" :
-		$dados = pegaDados("SELECT id_atlas, id_prancha, titulo_prancha, ordem_prancha, desc_prancha, h_prancha, icone_prancha, link_prancha, mapext_prancha, w_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_atlas = '$id_atlas'", $dbh, false);
+		$dados = pegaDados("SELECT id_atlas, id_prancha, titulo_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_atlas = '$id_atlas' ORDER by ordem_prancha", $dbh, false);
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;

@@ -27,6 +27,8 @@ i3GEOadmin.atlas = {
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
+		//parametros obtidos do formulario de edicao antes de abrir o modal de confirmacao
+		parametrosSalvar: "",
 		init: function(onde){
 			i3GEOadmin.atlas.ondeLista = onde;
 			i3GEOadmin.atlas.lista();
@@ -59,28 +61,7 @@ Obt&eacute;m a lista
 										{
 											"data": json["dados"],
 											"onExcluir": "i3GEOadmin.atlas.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.atlas.salvarDialogo",//funcao
-											"opcoesPublicado": function(){
-												var hash = {};
-												hash["sim"] = i3GEOadmin.atlas.dicionario.sim;
-												hash["nao"] = i3GEOadmin.atlas.dicionario.nao;
-												if(this.publicado_atlas == ""){
-													this.publicado_atlas = "SIM";
-												}
-												hash[this.publicado_atlas + "-sel"] = "selected";
-												return Mustache.to_html(
-														$("#templateOpcoesPublicado").html(),
-														hash
-												);
-											},
-											"opcoesTipoGuia": function(){
-												var hash = {};
-												hash[this.tipoguias_atlas + "-sel"] = "selected";
-												return Mustache.to_html(
-														$("#templateOpcoesTipoGuia").html(),
-														hash
-												);
-											}
+											"onEditar": "i3GEOadmin.atlas.editarDialogo"
 										}
 								)
 						);
@@ -134,6 +115,60 @@ Obt&eacute;m a lista
 				i3GEOadmin.atlas.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
+		},
+		editarDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=listaunico",
+					"id_atlas=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						var templateLista = $("#templateFormLista").html();
+						var html = Mustache.to_html(
+								"{{#data}}" + templateLista + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.atlas.dicionario,
+										{
+											"data": json["dados"],
+											"onExcluir": "i3GEOadmin.atlas.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.atlas.salvarDialogo",//funcao
+											"opcoesPublicado": function(){
+												var hash = {};
+												hash["sim"] = i3GEOadmin.atlas.dicionario.sim;
+												hash["nao"] = i3GEOadmin.atlas.dicionario.nao;
+												if(this.publicado_atlas == ""){
+													this.publicado_atlas = "SIM";
+												}
+												hash[this.publicado_atlas + "-sel"] = "selected";
+												return Mustache.to_html(
+														$("#templateOpcoesPublicado").html(),
+														hash
+												);
+											},
+											"opcoesTipoGuia": function(){
+												var hash = {};
+												hash[this.tipoguias_atlas + "-sel"] = "selected";
+												return Mustache.to_html(
+														$("#templateOpcoesTipoGuia").html(),
+														hash
+												);
+											}
+										}
+								)
+						);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
 		},
 		adicionaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.atlas.formAdiciona);
@@ -192,17 +227,18 @@ Obt&eacute;m a lista
 			);
 		},
 		salvarDialogo: function(id){
+			i3GEOadmin.atlas.parametrosSalvar = $("#form-edicao-" + id).serialize();
 			var hash = {
 					"mensagem": i3GEOadmin.atlas.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.atlas.salvar('"+id+"')",
 					"botao1": i3GEOadmin.atlas.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"onBotao2": "i3GEOadmin.atlas.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.atlas.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
 		salvar: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
+			var parametros = i3GEOadmin.atlas.parametrosSalvar;
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -212,6 +248,7 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.atlas.parametrosSalvar = '';
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.atlas.ondeLista);
 						i3GEOadmin.atlas.lista();
 					}
@@ -219,6 +256,7 @@ Obt&eacute;m a lista
 			.fail(
 					function(data){
 						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.atlas.parametrosSalvar = '';
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
 			);

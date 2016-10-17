@@ -28,6 +28,8 @@ i3GEOadmin.prancha = {
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
+		//parametros obtidos do formulario de edicao antes de abrir o modal de confirmacao
+		parametrosSalvar: "",
 		init: function(onde){
 			i3GEOadmin.prancha.ondeLista = onde;
 			i3GEOadmin.prancha.lista();
@@ -51,7 +53,6 @@ Obt&eacute;m a lista
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
-						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						//lista todas as menus
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -61,7 +62,7 @@ Obt&eacute;m a lista
 										{
 											"data": json["dados"],
 											"onExcluir": "i3GEOadmin.prancha.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.prancha.salvarDialogo"//funcao
+											"onEditar": "i3GEOadmin.prancha.editarDialogo"//funcao
 										}
 								)
 						);
@@ -106,6 +107,40 @@ Obt&eacute;m a lista
 				i3GEOadmin.prancha.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
+		},
+		editarDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=listaunico",
+					"id_prancha=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						var templateLista = $("#templateFormLista").html();
+						//lista todas as menus
+						var html = Mustache.to_html(
+								"{{#data}}" + templateLista + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.prancha.dicionario,
+										{
+											"data": json["dados"],
+											"onExcluir": "i3GEOadmin.prancha.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.prancha.salvarDialogo"//funcao
+										}
+								)
+						);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
 		},
 		adicionaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.prancha.formAdiciona);
@@ -164,17 +199,18 @@ Obt&eacute;m a lista
 			);
 		},
 		salvarDialogo: function(id){
+			i3GEOadmin.prancha.parametrosSalvar = $("#form-edicao-" + id).serialize();
 			var hash = {
 					"mensagem": i3GEOadmin.prancha.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.prancha.salvar('"+id+"')",
 					"botao1": i3GEOadmin.prancha.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"onBotao2": "i3GEOadmin.prancha.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.prancha.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
 		salvar: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
+			var parametros = i3GEOadmin.prancha.parametrosSalvar;
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -184,6 +220,7 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.prancha.parametrosSalvar = '';
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.prancha.ondeLista);
 						i3GEOadmin.prancha.lista();
 					}
@@ -191,6 +228,7 @@ Obt&eacute;m a lista
 			.fail(
 					function(data){
 						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.prancha.parametrosSalvar = '';
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
 			);

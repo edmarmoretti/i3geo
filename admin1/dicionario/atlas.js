@@ -171,7 +171,7 @@ i3GEOadmin.atlas.dicionario = {
 		es : ""
 	} ],
     'pranchas' : [ {
-		pt : "editar pranchas",
+		pt : "pranchas",
 		en : "",
 		es : ""
 	} ],
