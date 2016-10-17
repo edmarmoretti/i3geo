@@ -410,15 +410,15 @@ g_traducao_init =
 		"34a" : [
 			{
 				pt : "Aqui s&atilde;o mostrados os mapas que foram salvos e que podem ser abertos como links individuais. Usu&aacute;rios casdatrados podem salvar mapas.",
-				en : "",
-				es : ""
+				en : "Here, saved maps are shown and there are links to open them individually. Only registered users can save maps.",
+				es : "Aqu&iacute; se muestran los mapas que han sido guardados y que pueden ser abiertos como enlaces individuales. Usuarios registrados pueden guardar mapas."
 			}
 		],
 		35 : [
 			{
 				pt : "Bem vindo &agrave; p&aacute;gina principal do i3Geo. Aqui voc&ecirc; encontrar&aacute; os links de acesso aos mapas, documenta&ccedil;&atilde;o, sistema de administra&ccedil;&atilde;o e outros aplicativos. Colabore com o aprimoramento do i3Geo participando da comunidade de usu&aacute;rios!",
-				en : "",
-				es : ""
+				en : "Welcome to i3Geo website. Here, you can find map links, documents, management system and other applications. Contribute to i3Geo improvement by participating in i3Geo user community!",
+				es : "Bienvenido a la página principal de i3Geo. Aquí usted encontrará los enlaces de acceso a los mapas, documentación, sistema de administración y otras aplicaciones. ¡Colabore con el mejoramiento de i3Geo participando en la comunidad de usuarios!"
 			}
 		],
 		36 : [
@@ -452,8 +452,8 @@ g_traducao_init =
 		"comunidade" : [
 			{
 				pt : "Comunidade",
-				en : "",
-				es : ""
+				en : "Community",
+				es : "Comunidad"
 			}
 		]
 	};
