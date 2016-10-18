@@ -31,7 +31,9 @@ include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
@@ -74,8 +76,21 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
+	case "LISTAUNICO" :
+		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus WHERE id_menu = $id_menu ", $dbh, false );
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
+		$dbhw = null;
+		$dbh = null;
+		retornaJSON ( array("dados"=>$dados[0], "perfis"=>$perfis) );
+		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus order by lower(nome_menu)", $dbh, false );
+		$dados = pegaDados ( "SELECT id_menu, nome_menu from ".$esquemaadmin."i3geoadmin_menus order by lower(nome_menu)", $dbh, false );
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;

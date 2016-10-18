@@ -105,8 +105,8 @@ i3GEOadmin.menus.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'txtGrupo' : [ {
+		pt : "grupos",
 		en : "",
 		es : ""
 	} ]
