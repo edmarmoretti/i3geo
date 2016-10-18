@@ -18,7 +18,7 @@ include "../../head.php";
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="well hidden" id="titulo">
-				<button data-toggle="modal" data-target="#previewArvore"
+				<button title="preview" data-toggle="modal" data-target="#previewArvore"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
 					<i class="material-icons">play_circle_outline</i>
 				</button>
@@ -26,7 +26,6 @@ include "../../head.php";
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
-
 				<h2>
 					<small>{{{txtTitulo}}}</small>
 				</h2>
