@@ -678,41 +678,22 @@ function: selecaoInverte
 
 Inverte sele&ccedil;&atilde;o do tema.
 */
-	function selecaoInverte()
-	{
-		if(!$this->layer){return "erro";}
-		$items = pegaItens($this->layer);
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
-		$indxlayer = $this->layer->index;
-
-		/*
-		$res_count = $this->layer->getNumresults();
-		$shp_atual = array();
-		for ($i = 0; $i < $res_count;++$i)
-		{
-			$rc = $this->layer->getResult($i);
-			$shp_atual[] = $rc->shapeindex;
+	function selecaoInverte(){
+		if(!$this->layer){
+			return "erro";
 		}
-		$this->mapa->freequery($indxlayer);
-		*/
 		$shp_atual = array();
-		if($this->qyfileTema != "" && file_exists($this->qyfileTema))
-		{$shp_atual = $this->unserializeQ($this->qyfileTema);}
-
+		if($this->qyfileTema != "" && file_exists($this->qyfileTema)){
+			$shp_atual = $this->unserializeQ($this->qyfileTema);
+		}
 		$this->layer->queryByrect($this->mapa->extent);
 		$res_count = $this->layer->getNumresults();
 		$shp_todos = array();
-		for ($i = 0; $i < $res_count;++$i)
-		{
+		for ($i = 0; $i < $res_count;++$i){
 			$rc = $this->layer->getResult($i);
 			$shp_todos[] = $rc->shapeindex;
 		}
 		$shp = array_diff($shp_todos,$shp_atual);
-		$this->mapa->freequery($indxlayer);
-		foreach ($shp as $indx)
-		{$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-		$this->mapa->savequery($this->qyfile);
 		$this->serializeQ($this->qyfileTema,$shp);
 		return("ok");
 	}
@@ -727,18 +708,13 @@ $shpi - Indices dos registros novos.
 
 $shp_atual - Indices dos elementos j&aacute; selecionados.
 */
-	function selecaoAdiciona($shpi,$shp_atual)
-	{
+	function selecaoAdiciona($shpi,$shp_atual){
 		error_reporting(0);
-		if(!$this->layer){return "erro";}
-		$indxlayer = $this->layer->index;
+		if(!$this->layer){
+			return "erro";
+		}
 		$shp = array_merge($shpi,$shp_atual);
 		$shp = array_unique($shp);
-
-		$this->mapa->freequery($indxlayer);
-		foreach ($shp as $indx)
-		{@$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-		$this->mapa->savequery($this->qyfile);
 		$this->serializeQ($this->qyfileTema,$shp);
 		return("ok");
 	}
@@ -753,17 +729,12 @@ $shpi - Indices dos registros que ser&atilde;o retirados.
 
 $shp_atual - Indices dos elementos j&aacute; selecionados.
 */
-	function selecaoRetira($shpi,$shp_atual)
-	{
-		if(!$this->layer){return "erro";}
-		$indxlayer = $this->layer->index;
-		$this->mapa->freequery($indxlayer);
+	function selecaoRetira($shpi,$shp_atual){
+		if(!$this->layer){
+			return "erro";
+		}
 		$shp = array_diff($shp_atual,$shpi);
 		$shp = array_unique($shp);
-		$this->mapa->freequery($indxlayer);
-		foreach ($shp as $indx)
-		{$this->mapa->querybyindex($indxlayer,-1,$indx,MS_TRUE);}
-		$this->mapa->savequery($this->qyfile);
 		$this->serializeQ($this->qyfileTema,$shp);
 		return("ok");
 	}
@@ -778,17 +749,12 @@ parameters:
 
 $ids - Ids separados por v&iacute;rgula correspondendo aos registros.
 */
-	function incluiSel($ids)
-	{
-		if(!$this->layer){return "erro";}
-		if (file_exists($this->qyfile))
-		{$this->mapa->loadquery($this->qyfile);}
+	function incluiSel($ids){
+		if(!$this->layer){
+			return "erro";
+		}
 		$ids = explode(",",$ids);
-		$indxlayer = $this->layer->index;
 		$ids = array_unique($ids);
-		foreach ($ids as $i)
-		{$this->mapa->queryByIndex($indxlayer, -1, $i);}
-		$this->mapa->savequery($this->qyfile);
 		$this->serializeQ($this->qyfileTema,$ids);
 		return("ok");
 	}
