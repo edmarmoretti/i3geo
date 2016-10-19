@@ -137,8 +137,6 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 <div class="list-group-item" id="form-{{id_prancha}}">
 	<div class="row-content">
 		<h3 class="list-group-item-heading {{escondido}}">
-			{{{titulo_prancha}}}
-
 			<div class="pull-right">
 			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.prancha.editarTemas('{{id_atlas}}','{{id_prancha}}','{{{titulo_prancha}}}')" href="javascript:void(0)">
 				<i class="material-icons md-18">folder_open</i>
@@ -154,6 +152,7 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_prancha}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
+			{{{titulo_prancha}}}
 		</h3>
 	</div>
 	<div class="list-group-separator"></div>

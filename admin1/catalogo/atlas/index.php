@@ -169,7 +169,6 @@ include "../../head.php";
 <div class="list-group-item" id="form-{{id_atlas}}">
 	<div class="row-content">
 		<h3 class="list-group-item-heading {{escondido}}">
-			{{{titulo_atlas}}}
 			<div class="pull-right">
 			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.atlas.editarPranchas('{{id_atlas}}','{{{titulo_atlas}}}')" href="javascript:void(0)">
 				<i class="material-icons md-18">folder_open</i>
@@ -184,6 +183,7 @@ include "../../head.php";
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_atlas}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
+			{{{titulo_atlas}}}
 		</h3>
 	</div>
 	<div class="list-group-separator"></div>

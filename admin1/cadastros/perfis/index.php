@@ -82,7 +82,6 @@ include "../../head.php";
 	<div class="list-group-item" id="form-{{id_perfil}}">
 		<div class="row-content">
 				<h3 class="list-group-item-heading {{escondido}}">
-					{{{perfil}}}
 					<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_perfil}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 						<i class="material-icons md-18">edit</i>
 					</a>
@@ -90,6 +89,7 @@ include "../../head.php";
 					<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_perfil}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 						<i class="material-icons md-18">delete_forever</i>
 					</a>
+					{{{perfil}}}
 				</h3>
 		</div>
 		<div class="list-group-separator"></div>

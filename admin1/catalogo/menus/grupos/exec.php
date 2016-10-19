@@ -35,7 +35,9 @@ $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
 		"EXCLUIR",
-		"ORDENA"
+		"ORDENA",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
@@ -101,6 +103,18 @@ switch ($funcao) {
 		$dbh = null;
 		retornaJSON ( $dados );
 		exit ();
+		break;
+	case "LISTAUNICO" :
+		$dados = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id_n1"));
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		$dbhw = null;
+		$dbh = null;
+		retornaJSON($dados[0]);
 		break;
 	case "LISTA" :
 		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by lower(perfil)", $dbh, false );

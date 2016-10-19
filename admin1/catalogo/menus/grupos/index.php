@@ -69,7 +69,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			<!-- nos -->
 			<div class="well hidden">
 				<h4 class="pull-left">
-					{{{grupos}}}
+					{{{txtGrupos}}}
 				</h4>
 				<a onclick="i3GEOadmin.grupos.adicionaNoDialogo();" href="javascript:void(0)"
 						class="btn btn-primary pull-right" role="button" style="color:#008579;">{{{adicionar}}}</a>
@@ -84,59 +84,92 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 <option value="formNo-{{id_n1}}">{{{nome_grupo}}}</option>
 </script>
 <script id="templateRaiz" type="x-tmpl-mustache">
-<div class="panel panel-default" data-id="{{id_raiz}}" id="formRaiz-{{id_raiz}}">
-	<div class="panel-heading icon" role="tab">
-		<h3 class="panel-title" {{escondido}}>
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_raiz}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">delete_forever</i>
+<div class="list-group-item" data-id="{{id_raiz}}" id="formRaiz-{{id_raiz}}">
+	<div class="row-content">
+		<h3 class="list-group-item-heading {{escondido}}">
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_raiz}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">edit</i>
 			</a>
-			&nbsp;
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-formRaiz-{{id_raiz}}"
-			aria-expanded="false" aria-controls="#body-formRaiz-{{id_raiz}}"> {{{nome_tema}}}
-			<i  class="material-icons move" style="color: gray; display:none;">swap_vert</i>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_raiz}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">delete_forever</i>
 			</a>
+			<span class="nomeitem">
+				<i class="material-icons move" style="color: gray; display:none;position:absolute;left:-5px;">swap_vert</i>
+				{{{nome_tema}}}
+			</span>
 		</h3>
 	</div>
-	<div class="panel-body panel-collapse collapse" id="body-formRaiz-{{id_raiz}}">
-		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_raiz}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="id_tema">{{{tema}}}</label>
-						<div class="col-md-8">
-							<select title="{{{tema}}}" class="form-control" name="id_tema">
-								{{{opcoesTema}}}
-							</select>
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
-						<div class="col-md-8">
-							<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
-						<div class="col-md-4">
-							<input title="{{{perfis}}}" id="perfil_tema-{{id_raiz}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
-						</div>
-						<div class="col-md-4">
-							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_tema-{{id_raiz}}',this.value)">
-								{{{opcoesPerfil}}}
-							</select>
-						</div>
-					</div>
-				</div>
-			</div>
-		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-		</div>
-		</form>
-
-	</div>
+	<div class="list-group-separator"></div>
 </div>
 </script>
+<script id="templateFormRaiz" type="x-tmpl-mustache">
+<form id="form-edicao-raiz-{{id_raiz}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_raiz}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="id_tema">{{{tema}}}</label>
+				<div class="col-md-8">
+					<select title="{{{tema}}}" class="form-control" name="id_tema">
+						{{{opcoesTema}}}
+					</select>
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
+				<div class="col-md-8">
+					<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
+				<div class="col-md-4">
+					<input title="{{{perfis}}}" id="perfil_tema-{{id_raiz}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
+				</div>
+				<div class="col-md-4">
+					<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_tema-{{id_raiz}}',this.value)">
+						{{{opcoesPerfil}}}
+					</select>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="pull-right">
+		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
+	</div>
+	<div class="clearfix"></div>
+</form>
+</script>
 <script id="templateNos" type="x-tmpl-mustache">
+<div class="list-group-item" data-id="{{id_n1}}" id="formNo-{{id_n1}}">
+	<div class="row-content">
+		<h3 class="list-group-item-heading {{escondido}}">
+			<div class="pull-right">
+			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.grupos.editarSubGrupos('{{id_n1}}','{{{nome_grupo}}}')" href="javascript:void(0)">
+				<i class="material-icons md-18">folder_open</i>
+			</a>
+  			<label class=pull-right><h6 style="margin-top: 5px; margin-bottom: 5px;">&nbsp;{{{editarSubgrupos}}}</h6></label>
+			</div>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_n1}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">edit</i>
+			</a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n1}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">delete_forever</i>
+			</a>
+			<span class="nomeitem">
+				<i class="material-icons move" style="color: gray; display:none;position:absolute;left:-5px;">swap_vert</i>
+				{{{nome_grupo}}}
+			</span>
+		</h3>
+	</div>
+	<div class="list-group-separator"></div>
+</div>
+</script>
+
+<script id="templateFormNos" type="x-tmpl-mustache">
 <div class="panel panel-default" data-id="{{id_n1}}" id="formNo-{{id_n1}}">
 	<div class="panel-heading icon" role="tab">
 		<h3 class="panel-title" {{escondido}}>

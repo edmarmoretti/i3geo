@@ -42,7 +42,7 @@ i3GEOadmin.grupos.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "Utilize as op&ccedil;&otilde;es para incluir, adicionar ou alterar os temas existentes na raiz do menu. O menu pode tamb&eacute;m conter grupos, que por sua vez tamb&eacute;m podem conter temas e subgrupos.",
+		pt : "A &aacute;rvore &eacute; composta por n&iacute;veis hier&aacute;rquicos que iniciam com um menu, seguido de grupos e esses por sub-grupos. Na raiz de cada n&iacute;vel podem existir temas, assim como no &uacute;ltimo n&iacute;vel (sub-grupos).",
 		en : "",
 		es : ""
 	} ],
@@ -52,12 +52,17 @@ i3GEOadmin.grupos.dicionario = {
 		es : ""
 	} ],
     'editarSubgrupos' : [ {
-		pt : "Editar subgrupos",
+		pt : "subgrupos",
 		en : "",
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Utilize as op&ccedil;&otilde;es abaixo para criar ou editar temas que ficar&atilde;o na raiz do menu e tamb&eacute;m para editar os subgrupos existentes dentro do grupo atual.",
+		pt : "Utilize as op&ccedil;&otilde;es abaixo para criar ou editar temas que ficar&atilde;o na raiz do menu e tamb&eacute;m para criar ou editar os grupos vinculados.",
+		en : "",
+		es : ""
+	} ],
+    'txtGrupos' : [ {
+		pt : "Grupos vinculados a esse menu",
 		en : "",
 		es : ""
 	} ]
