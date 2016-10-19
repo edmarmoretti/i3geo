@@ -171,12 +171,10 @@ $wkt - string wkt opcional ao uso de xs e ys
 
 $buffer - buffer que ser� aplicado
 */
-	function selecaoPorPoligono($tipo,$xs="",$ys="",$wkt="",$buffer=0)
-	{
+	function selecaoPorPoligono($tipo,$xs="",$ys="",$wkt="",$buffer=0){
 		if(!$this->layer){return "erro";}
 		$this->layer->set("tolerance",0);
-		if ($tipo == "novo")
-		{
+		if ($tipo == "novo"){
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
 		}
@@ -499,8 +497,7 @@ $valor - Valor.
 
 	$tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 	*/
-	function selecaoAtributos2($filtro,$tipo)
-	{
+	function selecaoAtributos2($filtro,$tipo){
 		$items = pegaItens($this->layer);
 		if ($tipo == "novo")
 		{
@@ -531,23 +528,25 @@ $valor - Valor.
 			$filtro = str_replace(")"," ",$filtro);
 		}
 		$teste = $this->layer->querybyattributes($items[0],$filtro,1);
+
 		if($teste != MS_SUCCESS){
-			$teste = $this->layer->queryByAttributes($itens[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
+			$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
 		}
 		if($teste != MS_SUCCESS){
-			$teste = $this->layer->queryByAttributes($itens[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
+			$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
 		}
 		$res_count = $this->layer->getNumresults();
 		$shpi = array();
-		for ($i = 0; $i < $res_count; ++$i)
-		{
+		for ($i = 0; $i < $res_count; ++$i){
 			$result = $this->layer->getResult($i);
 			$shpi[]  = $result->shapeindex;
 		}
-		if ($tipo == "adiciona")
-		{return($this->selecaoAdiciona($shpi,$shp_atual));}
-		if ($tipo == "retira")
-		{return($this->selecaoRetira($shpi,$shp_atual));}
+		if ($tipo == "adiciona"){
+			return($this->selecaoAdiciona($shpi,$shp_atual));
+		}
+		if ($tipo == "retira"){
+			return($this->selecaoRetira($shpi,$shp_atual));
+		}
 		return("ok");
 	}
 /*
@@ -686,6 +685,17 @@ Inverte sele&ccedil;&atilde;o do tema.
 		if($this->qyfileTema != "" && file_exists($this->qyfileTema)){
 			$shp_atual = $this->unserializeQ($this->qyfileTema);
 		}
+		//TODO utilizar atributos qd for postgis para melhorar a performance
+		/*
+		if($this->layer->connectiontype == MS_POSTGIS){
+			$items = pegaItens($this->layer);
+			$this->layer->querybyattributes($items[0],$items[0].' > 0 ',1);
+			echo $this->layer->getNumresults();exit;
+		}
+		else {
+			$this->layer->queryByrect($this->mapa->extent);
+		}
+		*/
 		$this->layer->queryByrect($this->mapa->extent);
 		$res_count = $this->layer->getNumresults();
 		$shp_todos = array();
