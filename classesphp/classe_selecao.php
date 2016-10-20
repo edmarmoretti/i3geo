@@ -518,8 +518,8 @@ $valor - Valor.
 		$shpi = array();
 
 		$filtro = str_replace("|","'",$filtro);
-		if ($this->layer->connectiontype == MS_POSTGIS)
-		{
+
+		if ($this->layer->connectiontype == MS_POSTGIS && $this->v < 7)	{
 			$filtro = str_replace("'[","",$filtro);
 			$filtro = str_replace("[","",$filtro);
 			$filtro = str_replace("]'","",$filtro);
@@ -527,8 +527,8 @@ $valor - Valor.
 			$filtro = str_replace("("," ",$filtro);
 			$filtro = str_replace(")"," ",$filtro);
 		}
-		$teste = $this->layer->querybyattributes($items[0],$filtro,1);
 
+		$teste = $this->layer->querybyattributes($items[0],$filtro,1);
 		if($teste != MS_SUCCESS){
 			$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
 		}
