@@ -170,77 +170,53 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 </script>
 
 <script id="templateFormNos" type="x-tmpl-mustache">
-<div class="panel panel-default" data-id="{{id_n1}}" id="formNo-{{id_n1}}">
-	<div class="panel-heading icon" role="tab">
-		<h3 class="panel-title" {{escondido}}>
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n1}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">delete_forever</i>
-			</a>
-			&nbsp;
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-formNo-{{id_n1}}"
-			aria-expanded="false" aria-controls="#body-formNo-{{id_n1}}"> {{{nome_grupo}}}
-			<i  class="material-icons move" style="color: gray; display:none;">swap_vert</i>
-			</a>
-		</h3>
-	</div>
-	<div class="panel-body panel-collapse collapse" id="body-formNo-{{id_n1}}">
-		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_n1}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="id_grupo">{{{nomeTxt}}}</label>
-						<div class="col-md-6">
-							<select title="{{{nomeTxt}}}" class="form-control" name="id_grupo">
-								{{{opcoesNo}}}
-							</select>
-						</div>
-						<div class="col-md-2">
-							<a onclick="i3GEOadmin.grupos.editarListaDeGrupos('{{id_n1}}','{{{nome_grupo}}}');" href="javascript:void(0)"
-							class="btn btn-primary btn-xs" role="button">{{{editarLista}}}</a>
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
-						<div class="col-md-8">
-							<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="publicado">{{{publicadoTxt}}}</label>
-						<div class="col-md-8">
-							<select title="{{{publicadoTxt}}}" name="publicado" class="form-control">
-								{{{opcoesPublicado}}}
-							</select>
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
-						<div class="col-md-4">
-							<input title="{{{perfis}}}" id="perfil_no-{{id_n1}}" type="text" value="{{{n1_perfil}}}" class="form-control" name="n1_perfil">
-						</div>
-						<div class="col-md-4">
-							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_no-{{id_n1}}',this.value)">
-								{{{opcoesPerfil}}}
-							</select>
-						</div>
-					</div>
+<form id="form-edicao-no-{{id_n1}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_n1}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="id_grupo">{{{nomeTxt}}}</label>
+				<div class="col-md-6">
+					<select title="{{{nomeTxt}}}" class="form-control" name="id_grupo">
+						{{{opcoesNo}}}
+					</select>
+				</div>
+				<div class="col-md-2">
+					<a onclick="i3GEOadmin.grupos.editarListaDeGrupos('{{id_n1}}','{{{nome_grupo}}}');" href="javascript:void(0)"
+					class="btn btn-primary btn-xs" role="button">{{{editarLista}}}</a>
 				</div>
 			</div>
-		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
+				<div class="col-md-8">
+					<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="publicado">{{{publicadoTxt}}}</label>
+				<div class="col-md-8">
+					<select title="{{{publicadoTxt}}}" name="publicado" class="form-control">
+						{{{opcoesPublicado}}}
+					</select>
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
+				<div class="col-md-4">
+					<input title="{{{perfis}}}" id="perfil_no-{{id_n1}}" type="text" value="{{{n1_perfil}}}" class="form-control" name="n1_perfil">
+				</div>
+				<div class="col-md-4">
+					<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.grupos.addInput('perfil_no-{{id_n1}}',this.value)">
+						{{{opcoesPerfil}}}
+					</select>
+				</div>
+			</div>
 		</div>
-		</form>
-
 	</div>
-	<div class="panel-footer {{escondido}}" style="padding-top: 0px; padding-bottom: 0px;">
-		<div class="pull-right">
-			<button style="color:#007a6f;" onclick="i3GEOadmin.grupos.editarSubGrupos('{{id_n1}}','{{{nome_grupo}}}')" class="btn btn-primary btn-xs" style="margin-top: 2px; margin-bottom: 2px;">
-				<i class="material-icons">folder_open</i> {{{editarSubgrupos}}}
-			</button>
-		</div>
-		<div class="clearfix"></div>
+	<div class="pull-right">
+		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 	</div>
-</div>
+	<div class="clearfix"></div>
+</form>
 </script>
 <script id="templateOpcoesPublicado" type="x-tmpl-mustache">
 	<option value="">---</option>

@@ -55,7 +55,7 @@ testaSafeNumerico([$id_menu,$id_n1, $id_grupo]);
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ORDENA" :
-		$ordem = explode(" ",$_POST["ordem"]);
+		$ordem = explode(" ",$_POST["novaordem"]);
 		//verifica se existe a mesma quantidade de registros no banco e na lista de ids
 		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n1 WHERE id_menu = $id_menu", $dbh, false );
 		if(count($dados) != count($ordem)){
@@ -105,7 +105,7 @@ switch ($funcao) {
 		exit ();
 		break;
 	case "LISTAUNICO" :
-		$dados = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id_n1"));
+		$dados = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id_n1");
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;
