@@ -255,7 +255,7 @@ if(strtolower($OUTPUTFORMAT) == "shape-zip" && $ogrOutput == false){
 		ob_end_clean();
 		header('Content-type: application/zip');
 		header('Content-Disposition: attachment; filename='.basename($zip));
-		echo file_get_contents($zip);
+		readfile($zip);
 	}
 	exit;
 }

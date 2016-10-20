@@ -1455,12 +1455,13 @@ $prj {string} - String que sera gravada no arquivo prj
 
 $projetaToMap {boolean} - Projeta os shapes para a projecao do mapa
 
+$shapesSel - (opcional) array com os shapes
+
 Retorno:
 
 {string} - nome do arquivo criado ou false se ocorrer erro
 */
-function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$projetaToMap=true)
-{
+function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$projetaToMap=true,$shapesSel=false){
 	include(dirname(__FILE__)."/../ms_configura.php");
 	$versao = versao();
 	$versao = $versao["principal"];
@@ -1490,7 +1491,6 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$proj
 		$projOutObj = "";
 		$projetaToMap = false;
 	}
-
 	$layer->set("template","none.htm");
 	$diretorio = dirname($dir_tmp);
 	$tipol = MS_SHP_POINT;
@@ -1543,10 +1543,11 @@ function criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand=TRUE,$prj="",$proj
 		$novoshpf = ms_newShapefileObj($nomeshp.".shp", -2);
 		$novoshpf->addShape($shape);
 		$resultadoFinal = true;
-
 	}
 	else{
-		$shapesSel = retornaShapesSelecionados($layer,$map_file,$map,false);
+		if($shapesSel == false){
+			$shapesSel = retornaShapesSelecionados($layer,$map_file,$map,false);
+		}
 		$items = pegaItens($layer);
 		// cria o dbf
 		$def = array();
@@ -1685,6 +1686,7 @@ Include:
 function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 {
 	ini_set("max_execution_time","1800");
+	ini_set('memory_limit', '5000M');
 	$temas = array();
 	if(file_exists($locaplic."/ms_configura.php")){
 		include($locaplic."/ms_configura.php");
@@ -1927,6 +1929,7 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				if(file_exists($sel->qyfile)){
 					$map->loadquery($sel->qyfile);
 					$numSel = $l->getNumresults();
+					$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand,$projecao["prj"]);
 				}
 				//
 				//se nao existir selecao seleciona por box
@@ -1934,12 +1937,11 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 				//
 				if(!file_exists($sel->qyfile)){
 					$box = $rectextent->minx." ".$rectextent->miny." ".$rectextent->maxx." ".$rectextent->maxy;
-					$sel->selecaoBOX("novo",$box);
+					$shapesSel = $sel->selecaoBOX("novo",$box, true);
 					//reaproveita arquivo anterior
 					$nomeRand = false;
+					$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand,$projecao["prj"],true,$shapesSel);
 				}
-
-				$nomeshp = criaSHP($tema,$map_file,$locaplic,$dir_tmp,$nomeRand,$projecao["prj"]);
 				//remove o arquivo de selecao se ele foi criado apenas para pegar todos os elementos
 				if($nomeRand == false){
 					$sel->selecaoLimpa();

@@ -870,8 +870,10 @@ parameters:
 $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 
 $ext - coordenadas separadas por espa&ccedil;os no estilo xmin ymin xmax ymax
+ 
+$retornaShapes - retorna os shapes selecionados. Nesse caso, nao e gerado o arquivo em disco contendo a selecao
 */
-	function selecaoBOX($tipo,$ext)	{
+	function selecaoBOX($tipo,$ext,$retornaShapes=false)	{
 		if ($tipo == "novo"){
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
@@ -906,11 +908,27 @@ $ext - coordenadas separadas por espa&ccedil;os no estilo xmin ymin xmax ymax
 		$ident = $this->layer->queryByRect($rect);
 		if ($ident != 1){
 			$res_count = $this->layer->getNumresults();
+			//echo $res_count;exit;325449
 			$shpi = array();
 			for ($i = 0; $i < $res_count; ++$i)	{
 				$result = $this->layer->getResult($i);
-				$shpi[]  = $result->shapeindex;
+				if($result != MS_FALSE){
+					if($retornaShapes == false){
+						$shpi[]  = $result->shapeindex;
+					}
+					else {
+						if($this->v >= 6){
+							$shpi[] = $this->layer->getshape($result);
+						}
+						else{
+							$shpi[] = $this->layer->getfeature($result->shapeindex,-1);
+						} 
+					}
+				}
 			}
+		}
+		if($retornaShapes == true){
+			return $shpi;
 		}
 		if ($tipo == "adiciona"){
 			return($this->selecaoAdiciona($shpi,$shp_atual));
