@@ -132,7 +132,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 	$original = pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
 	$original = $original[0]["perfil"];
 
-	if($convUTF){
+	if ($convUTF != true){
 		$perfil = utf8_encode($perfil);
 	}
 	$dataCol = array(

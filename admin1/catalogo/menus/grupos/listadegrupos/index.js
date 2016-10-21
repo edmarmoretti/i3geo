@@ -27,6 +27,8 @@ i3GEOadmin.grupos = {
 		ondeLista: "",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
+		//parametros obtidos do formulario de edicao antes de abrir o modal de confirmacao
+		parametrosSalvar: "",
 		init: function(onde){
 			i3GEOadmin.grupos.ondeLista = onde;
 			i3GEOadmin.grupos.lista();
@@ -49,7 +51,6 @@ Obt&eacute;m a lista de grupos
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
-						templateLista = templateLista.replace("{{{templateFormLista}}}",$("#templateFormLista").html());
 						//lista todas as grupos
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -59,7 +60,7 @@ Obt&eacute;m a lista de grupos
 										{
 											"data": json,
 											"onExcluir": "i3GEOadmin.grupos.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.grupos.salvarDialogo"//funcao
+											"onEditar": "i3GEOadmin.grupos.editarDialogo"//funcao
 										}
 								)
 						);
@@ -85,7 +86,7 @@ Obt&eacute;m a lista de grupos
 											{},
 											i3GEOadmin.grupos.dicionario,
 											{
-												"id_tag": "modal",
+												"id_grupo": "modal",
 												"excluir": i3GEOadmin.grupos.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.grupos.adiciona"//funcao
@@ -102,12 +103,46 @@ Obt&eacute;m a lista de grupos
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
+		editarDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=listaunico",
+					"id_grupo=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						//lista todas as grupos
+						var html = Mustache.to_html(
+								"{{#data}}" + $("#templateFormLista").html() + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.grupos.dicionario,
+										{
+											"data": json,
+											"onExcluir": "i3GEOadmin.grupos.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.grupos.salvarDialogo"//funcao
+										}
+								)
+						);
+						i3GEOadmin.grupos.ondeLista.html(html);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
 		adicionaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.grupos.formAdiciona);
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
-			var parametros = $("#modalGeral form").serialize();
+			var parametros = $("#form-edicao-modal").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -159,17 +194,18 @@ Obt&eacute;m a lista de grupos
 			);
 		},
 		salvarDialogo: function(id){
+			i3GEOadmin.grupos.parametrosSalvar = $("#form-edicao-" + id).serialize();
 			var hash = {
 					"mensagem": i3GEOadmin.grupos.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.grupos.salvar('"+id+"')",
 					"botao1": i3GEOadmin.grupos.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"onBotao2": "i3GEOadmin.grupos.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.grupos.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
 		salvar: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
+			var parametros = i3GEOadmin.grupos.parametrosSalvar;
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -178,6 +214,7 @@ Obt&eacute;m a lista de grupos
 			)
 			.done(
 					function(data, status){
+						i3GEOadmin.grupos.parametrosSalvar = '';
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.grupos.ondeLista);
 						i3GEOadmin.grupos.lista();
@@ -185,6 +222,7 @@ Obt&eacute;m a lista de grupos
 			)
 			.fail(
 					function(data){
+						i3GEOadmin.grupos.parametrosSalvar = '';
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}

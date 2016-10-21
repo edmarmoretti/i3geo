@@ -31,7 +31,9 @@ include_once (dirname ( __FILE__ ) . "/../../../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
@@ -72,8 +74,20 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
+	case "LISTAUNICO" :
+		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_grupos WHERE id_grupo = $id_grupo", $dbh, false );
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		$dbhw = null;
+		$dbh = null;
+		retornaJSON ( $dados[0] );
+		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_grupos order by lower(nome_grupo)", $dbh, false );
+		$dados = pegaDados ( "SELECT id_grupo,nome_grupo from ".$esquemaadmin."i3geoadmin_grupos order by lower(nome_grupo)", $dbh, false );
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;
@@ -125,7 +139,7 @@ function adicionar($nome_grupo, $desc_grupo, $en, $es, $dbhw) {
 // $papeis deve ser um array
 function alterar($id_grupo, $nome_grupo, $desc_grupo, $en, $es, $dbhw) {
 	global $convUTF, $esquemaadmin;
-	if($convUTF){
+	if ($convUTF != true){
 		$nome_grupo = utf8_encode($nome_grupo);
 		$desc_grupo = utf8_encode($desc_grupo);
 		$en = utf8_encode($en);

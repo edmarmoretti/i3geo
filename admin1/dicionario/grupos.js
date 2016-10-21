@@ -65,5 +65,15 @@ i3GEOadmin.grupos.dicionario = {
 		pt : "Grupos vinculados a esse menu",
 		en : "",
 		es : ""
+	} ],
+    'txtListaDeGrupos' : [ {
+		pt : "Lista controlada de nomes de grupos",
+		en : "",
+		es : ""
+	} ],
+    'descListaDeGrupos' : [ {
+		pt : "Os nomes de grupos s&atilde;o utilizados para nomear os n&oacute;s da &aacute;rvore do cat&aacute;logo. Cada nome recebe um identificador, de forma que ao ser modificado a &aacute;rvore refletir&aacute; as edi&ccedil;&otilde;es.",
+		en : "",
+		es : ""
 	} ]
 };

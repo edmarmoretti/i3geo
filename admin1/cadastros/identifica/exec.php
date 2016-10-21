@@ -129,7 +129,7 @@ function adicionar($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
 // $papeis deve ser um array
 function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 	global $convUTF, $esquemaadmin;
-	if($convUTF){
+	if ($convUTF != true){
 		$nome_i = utf8_encode($nome_i);
 	}
 	$dataCol = array(

@@ -147,7 +147,7 @@ function adicionar($publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_men
 // $papeis deve ser um array
 function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en,$dbhw) {
 	global $convUTF, $esquemaadmin;
-	if($convUTF){
+	if ($convUTF != true){
 		$nome_menu = utf8_encode($nome_menu);
 		$desc_menu = utf8_encode($desc_menu);
 		$en = utf8_encode($en);
