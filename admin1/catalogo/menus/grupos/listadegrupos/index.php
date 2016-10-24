@@ -104,7 +104,6 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 	</div>
 	<div class="list-group-separator"></div>
 </div>
-
 </script>
 
 <script type="text/javascript" src="index.js"></script>

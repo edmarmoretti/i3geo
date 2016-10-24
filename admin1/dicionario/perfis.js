@@ -11,7 +11,7 @@ i3GEOadmin.perfis.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Os perfis s&atilde;o utilizados para restringir o acesso a determinados temas, grupos, sub-grupos e menus. Ao remover ou modificar um perfil, isso se refletir&aacute; em todas as tabelas onde houver registro do perfil.",
+		pt : "Os perfis s&atilde;o utilizados para restringir o acesso a determinados temas, grupos, subgrupos e menus. Ao remover ou modificar um perfil, isso se refletir&aacute; em todas as tabelas onde houver registro do perfil.",
 		en : "",
 		es : ""
 	} ],

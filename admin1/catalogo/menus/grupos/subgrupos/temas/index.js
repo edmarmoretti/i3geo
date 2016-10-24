@@ -30,6 +30,8 @@ i3GEOadmin.temas = {
 		id_n2: "",
 		nome_subgrupo: "",
 		onde: "",
+		listaDeTemas: "",
+		opcoesPerfil: "",
 		//conteudo html do formulario de adicao na raiz
 		formAdiciona: "",
 		init: function(onde){
@@ -54,6 +56,8 @@ i3GEOadmin.temas = {
 						);
 						//valor do filtro atual
 						var filtro = i3GEOadmin.core.valorFiltro();
+						i3GEOadmin.temas.opcoesPerfil = opcoesPerfil;
+						i3GEOadmin.temas.listaDeTemas = json["temas"];
 						//filtro
 						html = Mustache.to_html(
 								"{{#data}}" + $("#templateFiltro").html() + "{{/data}}",
@@ -67,7 +71,7 @@ i3GEOadmin.temas = {
 							i3GEOadmin.core.defineFiltro(filtro);
 							i3GEOadmin.core.filtra(i3GEOadmin.core.pegaFiltro());
 						}
-						i3GEOadmin.temas.listaTemas(json["dados"],opcoesPerfil,json["temas"]);
+						i3GEOadmin.temas.listaTemas(json["dados"]);
 
 						//torna os paineis ordenavies
 						i3GEOadmin.temas.onde.sortable({
@@ -78,7 +82,7 @@ i3GEOadmin.temas = {
 						});
 
 						//faz com que seja mostrado um icone de ordenamento no mouseover
-						$('.panel').hover(
+						$('.nomeitem').hover(
 						        function(){
 						            $(this).find('.move').fadeIn(400);
 						        },
@@ -95,41 +99,17 @@ i3GEOadmin.temas = {
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
-		listaTemas: function(dados,opcoesPerfil,temas){
-			var template = $("#templateTemas").html();
+		listaTemas: function(dados){
 			var html = Mustache.to_html(
-					"{{#data}}" + template + "{{/data}}",
+					"{{#data}}" + $("#templateTemas").html() + "{{/data}}",
 					$.extend(
 							{},
 							i3GEOadmin.temas.dicionario,
 							{
 								"data": dados,
-								"opcoesPerfil": opcoesPerfil,
+								"opcoesPerfil": i3GEOadmin.temas.opcoesPerfil,
 								"onExcluir": "i3GEOadmin.temas.excluirTemaDialogo",//funcao
-								"onSalvar": "i3GEOadmin.temas.salvarTemaDialogo",//funcao
-								"opcoesTema": function(){
-									var p = this.codigo_tema;
-									var id = "";
-									//marca o selecionado
-									$(temas).each(
-											function(i,el){
-												if(el.codigo_tema == p){
-													temas[i]["selected"] = "selected";
-													id = i;
-												}
-												else{
-													temas[i]["selected"] = "";
-												}
-											}
-									);
-									var html = '<option value="">---</option>' + Mustache.to_html(
-											"{{#data}}" + $("#templateOpcoesTema").html() + "{{/data}}",
-											{"data":temas}
-									);
-									//volta ao normal
-									temas[id]["selected"] = "";
-									return html;
-								}
+								"onEditar": "i3GEOadmin.temas.editarTemaDialogo"
 							}
 					)
 			);
@@ -138,21 +118,21 @@ i3GEOadmin.temas = {
 			//monta um template para o modal de inclusao de novo tema
 			if(i3GEOadmin.temas.formAdiciona == ""){
 				html = Mustache.to_html(
-						$("#templateTemas").html(),
+						$("#templateForm").html(),
 						$.extend(
 								{},
 								i3GEOadmin.temas.dicionario,
 								{
 									"id_n3": "modal",
 									"escondido": "hidden",
-									"opcoesPerfil": opcoesPerfil,
+									"opcoesPerfil": i3GEOadmin.temas.opcoesPerfil,
 									"excluir": i3GEOadmin.temas.dicionario.cancelar,
 									"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 									"onSalvar": "i3GEOadmin.temas.adicionaTema",//funcao
 									"opcoesTema": function(){
 										var html = '<option value="">---</option>' + Mustache.to_html(
 												"{{#data}}" + $("#templateOpcoesTema").html() + "{{/data}}",
-												{"data":temas}
+												{"data":i3GEOadmin.temas.listaDeTemas}
 										);
 										return html;
 									}
@@ -162,13 +142,69 @@ i3GEOadmin.temas = {
 				i3GEOadmin.temas.formAdiciona = html;
 			}
 		},
+		editarTemaDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=listaunico",
+					"id_n3=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						var html = Mustache.to_html(
+								"{{#data}}" + $("#templateForm").html() + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.temas.dicionario,
+										{
+											"data": json,
+											"opcoesPerfil": i3GEOadmin.temas.opcoesPerfil,
+											"onExcluir": "i3GEOadmin.temas.excluirTemaDialogo",//funcao
+											"onSalvar": "i3GEOadmin.temas.salvarTemaDialogo",//funcao
+											"opcoesTema": function(){
+												var p = this.codigo_tema;
+												var id = "";
+												var temas = i3GEOadmin.temas.listaDeTemas;
+												//marca o selecionado
+												$(temas).each(
+														function(i,el){
+															if(el.codigo_tema == p){
+																temas[i]["selected"] = "selected";
+																id = i;
+															}
+															else{
+																temas[i]["selected"] = "";
+															}
+														}
+												);
+												var html = '<option value="">---</option>' + Mustache.to_html(
+														"{{#data}}" + $("#templateOpcoesTema").html() + "{{/data}}",
+														{"data":temas}
+												);
+												//volta ao normal
+												temas[id]["selected"] = "";
+												return html;
+											}
+										}
+								)
+						);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
 		adicionaTemaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.temas.formAdiciona);
-			$("#body-form-modal").collapse('show');
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adicionaTema: function(){
-			var parametros = $("#modalGeral form").serialize();
+			var parametros = $("#form-edicao-modal").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -220,17 +256,18 @@ i3GEOadmin.temas = {
 			);
 		},
 		salvarTemaDialogo: function(id){
+			i3GEOadmin.temas.parametrosSalvar = $("#form-edicao-" + id).serialize();
 			var hash = {
 					"mensagem": i3GEOadmin.temas.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.temas.salvarTema('"+id+"')",
 					"botao1": i3GEOadmin.temas.dicionario.sim,
-					"onBotao2": "i3GEOadmin.core.fechaModalConfirma();",
+					"onBotao2": "i3GEOadmin.temas.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
 					"botao2": i3GEOadmin.temas.dicionario.nao
 			};
 			i3GEOadmin.core.abreModalConfirma(hash);
 		},
 		salvarTema: function(id){
-			var parametros = $("#form-" + id + " form").serialize();
+			var parametros = i3GEOadmin.temas.parametrosSalvar;
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -239,6 +276,7 @@ i3GEOadmin.temas = {
 			)
 			.done(
 					function(data, status){
+						i3GEOadmin.temas.parametrosSalvar = '';
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.temas.onde);
 						i3GEOadmin.temas.lista();
@@ -246,6 +284,7 @@ i3GEOadmin.temas = {
 			)
 			.fail(
 					function(data){
+						i3GEOadmin.temas.parametrosSalvar = '';
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
@@ -255,7 +294,7 @@ i3GEOadmin.temas = {
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 				"exec.php?funcao=ordena",
-				"id_n2=" + i3GEOadmin.temas.id_n2 + "&ordem=" + data.join(" ")
+				"id_n2=" + i3GEOadmin.temas.id_n2 + "&novaordem=" + data.join(" ")
 			)
 			.done(
 					function(data, status){

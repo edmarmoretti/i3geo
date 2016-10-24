@@ -47,7 +47,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.temas.adicionaTemaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionarTema}}}</a>
+						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>
 				</div>
 				<div class="clearfix"></div>
 			</div>
@@ -61,57 +61,62 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 <option value="form-{{id_n3}}">{{{nome_tema}}}</option>
 </script>
 <script id="templateTemas" type="x-tmpl-mustache">
-<div class="panel panel-default" data-id="{{id_n3}}" id="form-{{id_n3}}">
-	<div class="panel-heading icon" role="tab">
-		<h3 class="panel-title" {{escondido}}>
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n3}}')" class="btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">delete_forever</i>
+<div class="list-group-item" data-id="{{id_n3}}" id="form-{{id_n3}}">
+	<div class="row-content">
+		<h3 class="list-group-item-heading {{escondido}}">
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_n3}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">edit</i>
 			</a>
-			&nbsp;
-			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{id_n3}}"
-			aria-expanded="false" aria-controls="#body-form-{{id_n3}}"> {{{nome_tema}}}
-			<i  class="material-icons move" style="color: gray; display:none;">swap_vert</i>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n3}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">delete_forever</i>
 			</a>
+			<span class="nomeitem">
+				<i class="material-icons move" style="color: gray; display:none;position:absolute;left:-5px;">swap_vert</i>
+				{{{nome_tema}}}
+			</span>
 		</h3>
 	</div>
-	<div class="panel-body panel-collapse collapse" id="body-form-{{id_n3}}">
-		<form style="" action="#" onsubmit="{{onSalvar}}('{{id_n3}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-			<div class="row">
-				<div class="col-md-12">
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="id_tema">{{{tema}}}</label>
-						<div class="col-md-8">
-							<select title="{{{tema}}}" class="form-control" name="id_tema">
-								{{{opcoesTema}}}
-							</select>
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
-						<div class="col-md-8">
-							<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
-						<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
-						<div class="col-md-4">
-							<input title="{{{perfis}}}" id="perfil_tema-{{id_n3}}" type="text" value="{{{n3_perfil}}}" class="form-control" name="n3_perfil">
-						</div>
-						<div class="col-md-4">
-							<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.temas.addInput('perfil_tema-{{id_n3}}',this.value)">
-								{{{opcoesPerfil}}}
-							</select>
-						</div>
-					</div>
+	<div class="list-group-separator"></div>
+</div>
+</script>
+<script id="templateForm" type="x-tmpl-mustache">
+<form id="form-edicao-{{id_n3}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_n3}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+	<div class="row">
+		<div class="col-md-12">
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="id_tema">{{{tema}}}</label>
+				<div class="col-md-8">
+					<select title="{{{tema}}}" class="form-control" name="id_tema">
+						{{{opcoesTema}}}
+					</select>
 				</div>
 			</div>
-		<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
+				<div class="col-md-8">
+					<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
+				<div class="col-md-4">
+					<input title="{{{perfis}}}" id="perfil_tema-{{id_n3}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
+				</div>
+				<div class="col-md-4">
+					<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.subgrupos.addInput('perfil_tema-{{id_n3}}',this.value)">
+						{{{opcoesPerfil}}}
+					</select>
+				</div>
+			</div>
 		</div>
-		</form>
-
 	</div>
-</div>
+	<div class="pull-right">
+		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
+	</div>
+	<div class="clearfix"></div>
+</form>
 </script>
 <script id="templateOpcoesPublicado" type="x-tmpl-mustache">
 	<option value="">---</option>

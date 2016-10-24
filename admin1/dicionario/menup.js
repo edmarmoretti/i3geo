@@ -315,5 +315,15 @@ i3GEOadmin.menup.dicionario = {
 		pt : "Cadastros",
 		en : "",
 		es : ""
+	} ],
+	'listaDeGrupos' : [ {
+		pt : "Lista de nomes de grupos",
+		en : "",
+		es : ""
+	} ],
+	'listaDeSubGrupos' : [ {
+		pt : "Lista de nomes de subgrupos",
+		en : "",
+		es : ""
 	} ]
 };

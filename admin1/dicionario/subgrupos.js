@@ -6,7 +6,7 @@ i3GEOadmin.subgrupos.dicionario = {
 		es : ""
 	} ],
     'subgrupos' : [ {
-		pt : "Subgrupos",
+		pt : "Subgrupos vinculados ao grupo",
 		en : "",
 		es : ""
 	} ],
@@ -65,8 +65,18 @@ i3GEOadmin.subgrupos.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'temas' : [ {
+		pt : "temas",
+		en : "",
+		es : ""
+	} ],
+	'txtListaDeSubGrupos' : [ {
+		pt : "Lista controlada de nomes de subgrupos",
+		en : "",
+		es : ""
+	} ],
+    'descListaDeSubGrupos' : [ {
+		pt : "Os nomes de subgrupos s&atilde;o utilizados para nomear os n&oacute;s da &aacute;rvore do cat&aacute;logo. Cada nome recebe um identificador, de forma que ao ser modificado a &aacute;rvore refletir&aacute; as edi&ccedil;&otilde;es.",
 		en : "",
 		es : ""
 	} ]

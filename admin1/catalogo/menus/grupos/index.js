@@ -59,6 +59,7 @@ i3GEOadmin.grupos = {
 						i3GEOadmin.grupos.opcoesPerfil = opcoesPerfil;
 						i3GEOadmin.grupos.listaTemas = json["temas"];
 						i3GEOadmin.grupos.listaTiposGrupos = json["tiposGrupos"];
+
 						i3GEOadmin.grupos.listaRaiz(json["raiz"]);
 						i3GEOadmin.grupos.listaNos(json["grupos"]);
 						//torna os paineis ordenavies

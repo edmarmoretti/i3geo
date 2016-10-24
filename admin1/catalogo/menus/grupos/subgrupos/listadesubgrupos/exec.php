@@ -31,7 +31,9 @@ include_once (dirname ( __FILE__ ) . "/../../../../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
-		"EXCLUIR"
+		"EXCLUIR",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
@@ -72,8 +74,20 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
+	case "LISTAUNICO" :
+		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos WHERE id_subgrupo = $id_subgrupo", $dbh, false );
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		$dbhw = null;
+		$dbh = null;
+		retornaJSON ( $dados[0] );
+		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos order by lower(nome_subgrupo)", $dbh, false );
+		$dados = pegaDados ( "SELECT id_subgrupo,nome_subgrupo from ".$esquemaadmin."i3geoadmin_subgrupos order by lower(nome_subgrupo)", $dbh, false );
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;

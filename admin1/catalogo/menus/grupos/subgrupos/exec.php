@@ -35,7 +35,9 @@ $funcoesEdicao = array (
 		"ADICIONAR",
 		"ALTERAR",
 		"EXCLUIR",
-		"ORDENA"
+		"ORDENA",
+		"LISTA",
+		"LISTAUNICO"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
@@ -54,7 +56,7 @@ testaSafeNumerico([$id_n1,$id_n2,$id_menu,$id_subgrupo]);
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ORDENA" :
-		$ordem = explode(" ",$_POST["ordem"]);
+		$ordem = explode(" ",$_POST["novaordem"]);
 		//verifica se existe a mesma quantidade de registros no banco e na lista de ids
 		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n2 WHERE id_n1 = $id_n1", $dbh, false );
 		if(count($dados) != count($ordem)){
@@ -103,6 +105,19 @@ switch ($funcao) {
 		retornaJSON ( $dados );
 		exit ();
 		break;
+	case "LISTAUNICO" :
+		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id_n2");
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		$dbhw = null;
+		$dbh = null;
+		retornaJSON($dados[0]);
+		break;
+
 	case "LISTA" :
 		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by lower(perfil)", $dbh, false );
 		$dbhw = null;

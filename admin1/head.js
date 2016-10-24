@@ -115,6 +115,10 @@ menuPrincipal = [
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/mapas/index.php' >"+$trad("linkMapas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/atlas/index.php' >"+$trad("atlas",i3GEOadmin.menup.dicionario)+"</a>"
+		},{
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/menus/grupos/listadegrupos/index.php' >"+$trad("listaDeGrupos",i3GEOadmin.menup.dicionario)+"</a>"
+		},{
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/catalogo/menus/grupos/subgrupos/listadesubgrupos/index.php' >"+$trad("listaDeSubGrupos",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]},{
 	html: $trad("cadastros",i3GEOadmin.menup.dicionario),
