@@ -1,0 +1,64 @@
+<!--
+[leg_layer_html opt_flag=1]
+	</div>
+	<div style='display:block;float:left;padding-top: 5px;' id='legendaLayer_[leg_layer_name]' >
+	[if name=TEMA oper=neq value=NAO]
+		<table [if name=CLASSE oper=eq value=NAO] style=display:none;  [/if] >
+			<tr><td style=text-align:left >
+			<img style='position:relative;top:3px;' class='i3GEOLegendaExcluiTema' onclick='i3GEO.mapa.legendaHTML.escondeTema("[leg_layer_name]")' title="Esconde" src="../imagens/oxygen/16x16/edit-delete.png" >
+			<b><span class=legendaTema >
+			<label style='cursor:pointer;' onmouseout='this.getElementsByTagName("div")[0].style.display="none";' onmouseover='this.getElementsByTagName("div")[0].style.display="block";' onclick='i3GEO.tema.dialogo.mudanome("[leg_layer_name]")'>[metadata name=TEMA]
+			<div class='i3GEOiconeEditar' style='display:none;float:right;top:5px;' ></div>
+			</label>
+			</span></b><br>  </td>
+			</tr>
+			[if name=legendawms oper=isset ]
+				<tr><td style=text-align:left ><img src='[metadata name=legendawms]' /></td></tr>
+			[/if]
+			[if name=legendaimg oper=isset ]
+				<tr><td style=text-align:left ><img src='[metadata name=legendaimg]' /></td></tr>
+			[/if]
+		</table>
+	[/if]
+[/leg_layer_html]
+
+[leg_class_html]
+<table style=margin-top:5px;position:relative;left:0px; >
+	[if name=legendaimg oper=isnull ]
+		[if name=CLASSE oper=neq value=NAO]
+				<tr>
+					<td style=text-align:left;vertical-align:middle; >
+						<label class=temaSwitch for='legendack_[leg_layer_name]_[leg_class_index]' >
+							<input type=checkbox CHECKED value=[leg_class_index] name=[leg_layer_name] id='legendack_[leg_layer_name]_[leg_class_index]' onclick='i3GEO.arvoreDeCamadas.inverteStatusClasse(this)' />
+							<div class='temaSlider round' ></div>
+						</label>
+					</td>
+					<td style=text-align:left;vertical-align:middle; >
+						<span style='cursor:pointer;position:relative;top:2px;' onmouseout='this.getElementsByTagName("div")[0].style.display="none";' onmouseover='this.getElementsByTagName("div")[0].style.display="block";' onclick='i3GEO.tema.dialogo.editaClasseLegenda("[leg_layer_name]",[leg_class_index])' >
+						[if name=layer_type oper=eq value=0]
+						<img onclick='i3GEO.tema.dialogo.editaClasseLegenda("[leg_layer_name]",[leg_class_index])' src=[leg_icon  width=30 height=30 ] />
+						[/if]
+						[if name=layer_type oper=eq value=1]
+						<img onclick='i3GEO.tema.dialogo.editaClasseLegenda("[leg_layer_name]",[leg_class_index])' src=[leg_icon  width=30 height=16 ] />
+						[/if]
+						[if name=layer_type oper=eq value=2]
+						<img onclick='i3GEO.tema.dialogo.editaClasseLegenda("[leg_layer_name]",[leg_class_index])' src=[leg_icon  width=30 height=16 ] />
+						[/if]
+						[if name=layer_type oper=eq value=3]
+						<img onclick='i3GEO.tema.dialogo.editaClasseLegenda("[leg_layer_name]",[leg_class_index])' src=[leg_icon  width=30 height=16 ] />
+						[/if]
+						[if name=layer_type oper=eq value=8]
+						<img onclick='i3GEO.tema.dialogo.editaClasseLegenda("[leg_layer_name]",[leg_class_index])' src=[leg_icon  width=30 height=16 ] />
+						[/if]
+					</td>
+					<td style=text-align:left;vertical-align:middle; >
+						<span style="font-size:12px;position:relative;left:2px;" >[leg_class_name]&nbsp;</span>
+						</span>
+						<div class='i3GEOiconeEditar' style='display:none;float:right;top:4px;' ></div>
+					</td>
+				</tr>
+		[/if]
+	[/if]
+</table>
+[/leg_class_html]
+-->

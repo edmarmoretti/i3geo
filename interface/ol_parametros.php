@@ -122,7 +122,7 @@
 				</div>
 				<div id='guia4obj' style='display: none; text-align: left'>
 					<div onclick="i3GEO.guias.guiaMovel.abreFecha('fecha');" style='cursor:pointer; left: 0px; top: 0px; width: 95%; text-align: right; font-size: 14pt;'>X</div>
-					<div id="arvoreLegenda" style='display: block; text-align: left' >Aguarde...</div>
+					<div id="arvoreLegenda" style='display: block; text-align: left' >Aguarde...</div><br><br>
 				</div>
 			</div>
 		</div>

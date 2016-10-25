@@ -62,6 +62,10 @@ menu de contexto da arvore de camadas
 	min-height:200px;
 }
 
+#corpoLegi {
+	overflow: hidden;
+}
+
 /*
 Botao de ligar desligar do tipo chave da legenda
 */
@@ -69,9 +73,8 @@ Botao de ligar desligar do tipo chave da legenda
 .i3GEOcorpoLegi .temaSwitch {
   position: relative;
   display: inline-block;
-  width: 36px;
-  height: 18px;
-  top: 3px;
+  width: 30px;
+  height: 14px;
 }
 
 .i3GEOcorpoLegi .temaSwitch input {
@@ -89,27 +92,30 @@ Botao de ligar desligar do tipo chave da legenda
 }
 
 .i3GEOcorpoLegi .temaSlider:before {
-  position: absolute;
+ position: absolute;
   content: "";
-  height: 14px;
-  width: 14px;
+  height: 12px;
+  width: 12px;
   left: 1px;
-  bottom: 2px;
+  bottom: 1px;
   background-color: white;
+  -webkit-box-shadow: -1px 1px 3px -0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: -1px 1px 3px -0px rgba(0, 0, 0, 0.46);
+  box-shadow: -1px 1px 3px -0px rgba(0, 0, 0, 0.46);
 }
 
 .i3GEOcorpoLegi input:checked + .temaSlider {
-  background-color: rgb(100, 170, 200);
+   background-color: rgb(177, 205, 205);
 }
 
 .i3GEOcorpoLegi input:focus + .temaSlider {
-  box-shadow: 0 0 1px rgb(100, 170, 200);
+  box-shadow: 0 0 1px rgb(224, 235, 235);
 }
 
 .i3GEOcorpoLegi input:checked + .temaSlider:before {
-  -webkit-transform: translateX(20px);
-  -ms-transform: translateX(20px);
-  transform: translateX(20px);
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
 }
 
 .i3GEOcorpoLegi .temaSlider.round {
@@ -120,7 +126,16 @@ Botao de ligar desligar do tipo chave da legenda
   border-radius: 50%;
 }
 
-
+.legendaTema {
+    font-size: 12px;
+    text-align: left;
+}
+.legendaTema label {
+    margin-left: 0px;
+}
+.i3GEOLegendaExcluiTema {
+	display: inline;
+}
 /*
 Botao de ligar desligar do tipo chave da arvore de camadas
 */
