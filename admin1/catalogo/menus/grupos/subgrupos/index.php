@@ -33,7 +33,8 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
-				<h2><small>{{{txtTitulo}}}: <?php echo "$nome_menu -> $nome_grupo"; ?></small></h2>
+
+				<h4><small>{{{menu}}}: </small><?php echo "$nome_menu <small>{{{txtTitulo}}}:</small>  $nome_grupo "; ?></h4>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">

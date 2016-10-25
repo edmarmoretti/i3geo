@@ -24,8 +24,6 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 		</div>
 	</div>
 </div>
-
-
 <div class="container" id="titulo">
 	<div class="row center-block">
 		<div class="col-md-12">
@@ -34,10 +32,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
 					<i class="material-icons">play_circle_outline</i>
 				</button>
-
-				<h2>
-					<small>{{{txtTitulo}}}: <?php echo $nome_subgrupo; ?></small>
-				</h2>
+				<h4><small>{{{menu}}}: </small><?php echo "$nome_menu <small>{{{grupo}}}:</small> $nome_grupo <small>{{{txtTitulo}}}:</small> $nome_subgrupo"; ?></h4>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<!-- aqui entra o filtro -->
 				<div class="form-group">

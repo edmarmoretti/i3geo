@@ -1,8 +1,20 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
-i3GEOadmin.sistemas = {};
+if (typeof (i3GEOadmin.sistemas) === 'undefined') {
+	i3GEOadmin.sistemas = {};
+}
 i3GEOadmin.sistemas.dicionario = {
-	'sistemas' : [ {
-		pt : "Administra&ccedil;&atilde;o do i3geo - sistemas especiais",
+	'txtDescFuncao' : [ {
+		pt : "As fun&ccedil;&otilde;es s&atilde;o programas que ser&atilde;o abertos em janelas flutuantes dentro do mapa",
+		en : "",
+		es : ""
+	} ],
+	'txtTituloFuncao' : [ {
+		pt : "Fun&ccedil;&otilde;es do sistema",
+		en : "",
+		es : ""
+	} ],
+	'txtTitulo' : [ {
+		pt : "Sistemas especiais que adicionam camadas",
 		en : "",
 		es : ""
 	} ],
@@ -11,8 +23,8 @@ i3GEOadmin.sistemas.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'txtAjuda' : [ {
-		pt : "Este programa permite editar a lista de sistemas especiais.<br><br>Sistemas especiais s&atilde;o utilizados para incluir camadas no i3geo tendo como base programas que interagem com o usu&aacute;rio de alguma forma espec&iacute;fica.<br> <br>Cada sistema pode ter um objetivo espec&iacute;fico e uma interface pr&oacute;pria. Normalmente s&atilde;o utilizados para realizar consultas a bancos de dados ou Web Services e gerar a camada para acrescentar ao mapa.<br> <br> Esses sistemas podem por exemplo, consultar bancos de dados estat&iacute;sticos para gerar cartogramas.<br> <br> A lista de sistemas &eacute; baseada no banco admin.db.<br> <br> A lista de IPs dos usu&aacute;rios que podem administrar o i3geo &eacute; definida no arquivo i3geo/ms_configura.php",
+    'txtDesc' : [ {
+		pt : "Sistemas especiais s&atilde;o utilizados para incluir camadas no i3geo tendo como base programas que interagem com o usu&aacute;rio de alguma forma espec&iacute;fica. Cada sistema pode ter um objetivo espec&iacute;fico e uma interface pr&oacute;pria. Normalmente s&atilde;o utilizados para realizar consultas a bancos de dados ou Web Services e gerar a camada para acrescentar ao mapa. Esses sistemas podem por exemplo, consultar bancos de dados estat&iacute;sticos para gerar cartogramas.",
 		en : "",
 		es : ""
 	} ],
@@ -91,8 +103,13 @@ i3GEOadmin.sistemas.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'funcoes' : [ {
+		pt : "fun&ccedil;&otilde;es",
+		en : "",
+		es : ""
+	} ],
+    'perfilAjuda' : [ {
+		pt : "Perfis que podem visualizar esse sistema, separe por espa&ccedil;o e use a lista ao lado",
 		en : "",
 		es : ""
 	} ]

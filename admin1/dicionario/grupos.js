@@ -42,7 +42,7 @@ i3GEOadmin.grupos.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "A &aacute;rvore &eacute; composta por n&iacute;veis hier&aacute;rquicos que iniciam com um menu, seguido de grupos e esses por subgrupos. Na raiz de cada n&iacute;vel podem existir temas, assim como no &uacute;ltimo n&iacute;vel (sub-grupos).",
+		pt : "A &aacute;rvore &eacute; composta por n&iacute;veis hier&aacute;rquicos que iniciam com um menu, seguido de grupos e esses por subgrupos. Na raiz de cada n&iacute;vel podem existir temas, assim como no &uacute;ltimo n&iacute;vel (subgrupos).",
 		en : "",
 		es : ""
 	} ],
