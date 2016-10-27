@@ -393,7 +393,6 @@ i3GEOF.selecao =
 			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "crosshair", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 			i3GEO.barraDeBotoes.ativaIcone("selecao");
 			i3GEOF.selecao.pegaTemasSel();
-			i3GEOF.selecao.mudaicone();
 			var i = $i("i3GEOF.selecao_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;
 			i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
@@ -433,17 +432,7 @@ i3GEOF.selecao =
 		 * Altera as bordas dos &iacute;cones
 		 */
 		mudaicone : function() {
-			$i("i3GEOselecaopt").parentNode.style.backgroundColor = "#F5F5F5";
-			$i("i3GEOselecaoext").parentNode.style.backgroundColor = "#F5F5F5";
-			if ($i("i3GEOselecaobox")) {
-				$i("i3GEOselecaobox").parentNode.style.backgroundColor = "#F5F5F5";
-			}
-			if ($i("i3GEOselecaopoli")) {
-				$i("i3GEOselecaopoli").parentNode.style.backgroundColor = "#F5F5F5";
-			}
-			if ($i("i3GEOselecaoFigura")) {
-				$i("i3GEOselecaoFigura").parentNode.style.backgroundColor = "#F5F5F5";
-			}
+
 		},
 		/*
 		 * Function: pegaTemasSel
@@ -557,28 +546,24 @@ i3GEOF.selecao =
 				}
 				if (obj.value == "i3GEOselecaobox") {
 					i3GEOF.selecao.tipoSel = obj.value;
-					i3GEOF.selecao.mudaicone();
 					obj.style.backgroundColor = "#cedff2";
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					i3GEOF.selecao.box[api].inicia();
 				}
 				if (obj.value == "i3GEOselecaopt") {
 					i3GEOF.selecao.tipoSel = obj.value;
-					i3GEOF.selecao.mudaicone();
 					obj.style.backgroundColor = "#cedff2";
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					i3GEOF.selecao.clique[api].inicia();
 				}
 				if (obj.value == "i3GEOselecaopoli") {
 					i3GEOF.selecao.tipoSel = obj.value;
-					i3GEOF.selecao.mudaicone();
 					obj.style.backgroundColor = "#cedff2";
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					i3GEOF.selecao.poligono[api].inicia();
 				}
 				if (obj.value == "i3GEOselecaofigura") {
 					i3GEOF.selecao.tipoSel = obj.value;
-					i3GEOF.selecao.mudaicone();
 					obj.style.backgroundColor = "#cedff2";
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					i3GEOF.selecao.figura[api].inicia();
@@ -744,7 +729,6 @@ i3GEOF.selecao =
 				i3GEO.janela.abreAguarde("i3GEO.atualiza", $trad("o1"));
 				i3GEO.eventos.cliquePerm.ativa();
 				i3GEO.php.selecaobox(retorna, tema, tipo, box);
-				i3GEOF.selecao.mudaicone();
 			}
 		},
 		/*
@@ -883,7 +867,6 @@ i3GEOF.selecao =
 				};
 				i3GEO.eventos.cliquePerm.ativa();
 				i3GEO.php.selecaopt(retorna, tema, x + " " + y, tipo, tolerancia);
-				i3GEOF.selecao.mudaicone();
 			}
 		},
 		/*
@@ -997,7 +980,6 @@ i3GEOF.selecao =
 				};
 				i3GEO.eventos.cliquePerm.ativa();
 				i3GEO.php.selecaoWkt(retorna, tema, tipo, wkt, $i("i3GEOselecaotoleranciapt").value);
-				i3GEOF.selecao.mudaicone();
 			}
 		},
 		/*
@@ -1188,7 +1170,6 @@ i3GEOF.selecao =
 				};
 				i3GEO.janela.abreAguarde("i3GEO.atualiza", $trad("o1"));
 				i3GEO.eventos.cliquePerm.ativa();
-				i3GEOF.selecao.mudaicone();
 				p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php?g_sid=" + i3GEO.configura.sid + "&funcao=selecaoPoli";
 				cp = new cpaint();
 				// cp.set_debug(2)

@@ -36,9 +36,12 @@ se for igual a "temaswfs", mostra a lista de links WFS
 
 ajuda - (opcional) mostra uma ajuda ao usu&aacute;rio
 
-tema - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo. Se n&atilde;o for definido, ser&atilde;o considerados todos os temas
+tema ou temas - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo. Se n&atilde;o for definido, ser&atilde;o considerados todos os temas
 
 legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
+
+templateLegenda - (opcional) nome de um template HTML para uso em legendas do tipo text/html. Dever ser o caminho relativo a pasta
+onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a documentacao do Mapserver. exemplo &templateLegenda=aplicmap/legenda8.htm
 
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
@@ -434,7 +437,7 @@ else{
 	$extensaoMap = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
 	//gera o mapa
 	if ($tema != ""){
-		$listatema = explode(" ",$tema);
+		$listatema = explode(" ",str_replace(","," ",$tema));
 		//para o caso do tema ser um arquivo mapfile existente em uma pasta qualquer
 		//$temai3geo = true indica que o layer ser&aacute; buscado na pasta i3geo/temas
 		$temai3geo = true;
@@ -453,7 +456,6 @@ else{
 				$extensao = ".gvp";
 			}
 			if($extensao == ".map"){
-
 				//cria o mapfile com base no sistema de metadados estatisticos
 				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
 				if(!isset($_GET["id_medida_variavel"]) && $temai3geo == true){
@@ -490,127 +492,145 @@ else{
 					if($l == ""){
 						$l = $nmap->getlayer(0);
 					}
-					$permite = $l->getmetadata("permiteogc");
-					if(strtolower($permite) != "nao"){
-						//necess&aacute;rio pq o mapfile pode ter todos os layers como default
-						if($temai3geo == false){
-							$l->set("status",MS_OFF);
-						}
-						else{
-							$l->set("status",MS_DEFAULT);
-						}
-						$l->setmetadata("ows_title",pegaNome($l));
-						$l->setmetadata("ows_srs",$listaepsg);
-						$l->set("group","");
-						//timeout
-						$tout = $l->getmetadata("wms_connectiontimeout");
-						if($tout == ""){
-							$l->setmetadata("wms_connectiontimeout",0);
-						}
-						//essa linha &eacute; necess&aacute;ria pq as vezes no mapfile n&atilde;o tem nenhum layer com o nome igual ao nome do mapfile
-						if(count($ts)==1 && $temai3geo == true){
-							$l->set("name",$tx);
-						}
-						$l->setmetadata("gml_include_items","all");
-						$l->set("template","none.htm");
-						$l->set("dump",MS_TRUE);
-						$l->setmetadata("WMS_INCLUDE_ITEMS","all");
-						$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-
-						if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png")){
-							$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
-							$l->setmetadata("wms_attribution_logourl_format","image/png");
-							$l->setmetadata("wms_attribution_logourl_height","50");
-							$l->setmetadata("wms_attribution_logourl_width","50");
-							$l->setmetadata("wms_attribution_logourl_href",$mini);
-						}
-						if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
-							$c = $l->getclass(0);
-							if($c->name == ""){
-								$c->name = " ";
+					//verifica se ja existe layer com mesmo nome
+					if($oMap->getlayerbyname($l->name) == ""){
+						$permite = $l->getmetadata("permiteogc");
+						if(strtolower($permite) != "nao"){
+							//necess&aacute;rio pq o mapfile pode ter todos os layers como default
+							if($temai3geo == false){
+								$l->set("status",MS_OFF);
 							}
-						}
-						//inclui extensao geografica
-						$extensao = $l->getmetadata("EXTENSAO");
-						if($extensao == ""){
-							$extensao = $extensaoMap;
-						}
-						$l->setmetadata("wms_extent",$extensao);
-						if (!empty($postgis_mapa)){
-							if ($l->connectiontype == MS_POSTGIS){
+							else{
+								$l->set("status",MS_DEFAULT);
+							}
+							$l->setmetadata("ows_title",pegaNome($l));
+							$l->setmetadata("ows_srs",$listaepsg);
+							$l->set("group","");
+							//timeout
+							$tout = $l->getmetadata("wms_connectiontimeout");
+							if($tout == ""){
+								$l->setmetadata("wms_connectiontimeout",0);
+							}
+							//essa linha &eacute; necess&aacute;ria pq as vezes no mapfile n&atilde;o tem nenhum layer com o nome igual ao nome do mapfile
+							if(count($ts)==1 && $temai3geo == true){
+								$l->set("name",$tx);
+							}
+							$l->setmetadata("gml_include_items","all");
+							$l->set("template","none.htm");
+							$l->set("dump",MS_TRUE);
+							$l->setmetadata("WMS_INCLUDE_ITEMS","all");
+							$l->setmetadata("WFS_INCLUDE_ITEMS","all");
 
-								$lcon = $l->connection;
-								if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
-									//
-									//o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
-									//
-									if(($lcon == " ") || ($lcon == "")){
-										$l->set("connection",$postgis_mapa);
-										$l->setmetadata("CONEXAOORIGINAL",$lcon);
-									}
-									else{
-										$l->set("connection",$postgis_mapa[$lcon]);
-										$l->setmetadata("CONEXAOORIGINAL",$lcon);
+							if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png")){
+								$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
+								$l->setmetadata("wms_attribution_logourl_format","image/png");
+								$l->setmetadata("wms_attribution_logourl_height","50");
+								$l->setmetadata("wms_attribution_logourl_width","50");
+								$l->setmetadata("wms_attribution_logourl_href",$mini);
+							}
+							if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
+								$c = $l->getclass(0);
+								if($c->name == ""){
+									$c->name = " ";
+								}
+							}
+							//inclui extensao geografica
+							$extensao = $l->getmetadata("EXTENSAO");
+							if($extensao == ""){
+								$extensao = $extensaoMap;
+							}
+							$l->setmetadata("wms_extent",$extensao);
+							if (!empty($postgis_mapa)){
+								if ($l->connectiontype == MS_POSTGIS){
+
+									$lcon = $l->connection;
+									if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
+										//
+										//o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
+										//
+										if(($lcon == " ") || ($lcon == "")){
+											$l->set("connection",$postgis_mapa);
+											$l->setmetadata("CONEXAOORIGINAL",$lcon);
+										}
+										else{
+											$l->set("connection",$postgis_mapa[$lcon]);
+											$l->setmetadata("CONEXAOORIGINAL",$lcon);
+										}
 									}
 								}
 							}
-						}
 
-						autoClasses($l,$oMap);
+							autoClasses($l,$oMap);
 
-						if($versao > 5){
-							$pr = $l->getProcessing();
-							if(!in_array("LABEL_NO_CLIP=True",$pr)){
-								$l->setprocessing("LABEL_NO_CLIP=True");
+							if($versao > 5){
+								$pr = $l->getProcessing();
+								if(!in_array("LABEL_NO_CLIP=True",$pr)){
+									$l->setprocessing("LABEL_NO_CLIP=True");
+								}
+								if(!in_array("POLYLINE_NO_CLIP=True",$pr)){
+									$l->setprocessing("POLYLINE_NO_CLIP=True");
+								}
 							}
-							if(!in_array("POLYLINE_NO_CLIP=True",$pr)){
-								$l->setprocessing("POLYLINE_NO_CLIP=True");
-							}
-						}
 
-						//
-						//verifica se existem parametros de substituicao passados via url
-						//
-						$parametro = $_GET["map_layer_".$l->name."_filter"];
-						//echo $parametro;exit;
-						if(!empty($parametro)){
-							$l->setfilter($parametro);
-							$cache = false;
+							//
+							//verifica se existem parametros de substituicao passados via url
+							//
+							$parametro = $_GET["map_layer_".$l->name."_filter"];
+							//echo $parametro;exit;
+							if(!empty($parametro)){
+								$l->setfilter($parametro);
+								$cache = false;
+							}
+							//muda o title se for vazio
+							$nclass = $l->numclasses;
+							for($i=0;$i<$nclass;$i++){
+								$classe = $l->getclass($i);
+								if($classe->title == ""){
+									$classe->title = $classe->name;
+								}
+							}
+							if($nclass == 1){
+								$classe = $l->getclass(0);
+								if($classe->name == ""){
+									$classe->title = $l->getmetadata("tema");
+									$classe->set("name",$l->getmetadata("tema"));
+								}
+							}
+							ms_newLayerObj($oMap, $l);
 						}
-						ms_newLayerObj($oMap, $l);
-					}
-					else{
-						//a camada nao pode ser usada como servico WMS, entao e enviada uma mensagem
-						$l->set("data","");
-						$l->set("type",MS_POINT);
-						$l->setmetadata("cache","nao");
-						//apaga as classes
-						$nclass = $l->numclasses;
-						for($i=0;$i<$nclass;$i++){
-							$classe = $l->getclass($i);
-							$classe->set("status",MS_DELETE);
+						else{
+							//a camada nao pode ser usada como servico WMS, entao e enviada uma mensagem
+							$l->set("data","");
+							$l->set("type",MS_POINT);
+							$l->setmetadata("cache","nao");
+							//apaga as classes
+							$nclass = $l->numclasses;
+							for($i=0;$i<$nclass;$i++){
+								$classe = $l->getclass($i);
+								$classe->set("status",MS_DELETE);
+							}
+							$l->updatefromstring('
+									LAYER
+									SIZEUNITS PIXELS
+									TRANSFORM FALSE
+									CLASS
+									LABEL
+									SIZE 10
+									TYPE truetype
+									FONT arial
+									COLOR 255 0 0
+									POSITION cc
+									FORCE true
+									END
+									END
+									FEATURE POINTS 100 100 END
+									TEXT "OGC denied" END
+									FEATURE POINTS 100 120 END
+									TEXT "' . $l->name . '" END
+									END
+									');
+							ms_newLayerObj($oMap, $l);
 						}
-						$l->updatefromstring('
-								LAYER
-								SIZEUNITS PIXELS
-								TRANSFORM FALSE
-								CLASS
-								LABEL
-								SIZE 10
-								TYPE truetype
-								FONT arial
-								COLOR 255 0 0
-								POSITION cc
-								FORCE true
-								END
-								END
-								FEATURE POINTS 100 100 END
-								TEXT "OGC denied" END
-								FEATURE POINTS 100 120 END
-								TEXT "' . $l->name . '" END
-								END
-								');
-						ms_newLayerObj($oMap, $l);
 					}
 				}
 			}
@@ -767,7 +787,6 @@ else{
 			}
 		}
 	}
-
 	//
 	//a imagem do mapa recebera a legenda
 	//
@@ -787,11 +806,9 @@ else{
 	$nomeMapfileTmp = str_replace(".map","",$nomeMapfileTmp).".map";
 	restauraConObj($oMap,$postgis_mapa);
 	$oMap->save($nomeMapfileTmp);
-
 	validaAcessoTemas($oMap,true);
 	substituiConObj($oMap,$postgis_mapa);
 }
-
 if(ob_get_contents ()){
 	ob_end_clean();
 }
@@ -955,42 +972,66 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	renderNocacheTms();
 }
 if(strtolower($req->getValueByName("REQUEST")) == "getlegendgraphic"){
-	$l = $oMap->getlayer(0);
-	if($req->getValueByName("LAYER") == ""){
-		$req->setParameter("LAYER",$l->name);
-	}
-	//muda o title se for vazio
-	$nclass = $l->numclasses;
-	for($i=0;$i<$nclass;$i++){
-		$classe = $l->getclass($i);
-		if($classe->title === ""){
-			$classe->title = $classe->name;
-		}
-	}
-	if($req->getValueByName("FORMAT") == ""){
-		$req->setParameter("FORMAT","image/png");
-	}
 	$legenda = $oMap->legend;
 	$legenda->set("status",MS_ON);
-	$l->set("minscaledenom",0);
-	$l->set("maxscaledenom",0);
-	if($req->getValueByName("FORMAT") == "text/html"){
-		//$req->setParameter("FORMAT","image/png");
-		$l = $oMap->getlayerbyname($req->getValueByName("LAYER"));
+	$numlayers = $oMap->numlayers;
+	for ($i=0;$i < $numlayers;$i++){
+		$l = $oMap->getlayer($i);
 		$l->set("status",MS_DEFAULT);
-		//remove offset de simbolos pontuais
+		if($req->getValueByName("LAYER") == ""){
+			$req->setParameter("LAYER",$l->name);
+		}
+
+		//muda o title se for vazio
+		/*
 		$nclass = $l->numclasses;
-		for($cc = 0; $cc < $nclass; $cc++){
-			$classe  = $l->getclass($cc);
-			if($classe->numstyles > 0){
-				$estilo = $classe->getstyle(0);
-				if($estilo->symbolname != "" && file_exists($estilo->symbolname)){
-					$estilo->set("offsetx",0);
-					$estilo->set("offsety",0);
+		for($i=0;$i<$nclass;$i++){
+			$classe = $l->getclass($i);
+			if($classe->title == ""){
+				$classe->title = $classe->name;
+			}
+		}
+		if($nclass == 1){
+			$classe = $l->getclass(0);
+			if($classe->name == ""){
+				$classe->title = $l->getmetadata("tema");
+				$classe->set("name",$l->getmetadata("tema"));
+			}
+		}
+		*/
+		if($req->getValueByName("FORMAT") == ""){
+			$req->setParameter("FORMAT","image/png");
+		}
+		$l->set("minscaledenom",0);
+		$l->set("maxscaledenom",0);
+		if($req->getValueByName("FORMAT") == "text/html"){
+			//remove offset de simbolos pontuais
+			$nclass = $l->numclasses;
+			for($cc = 0; $cc < $nclass; $cc++){
+				$classe  = $l->getclass($cc);
+				if($classe->numstyles > 0){
+					$estilo = $classe->getstyle(0);
+					if($estilo->symbolname != "" && file_exists($estilo->symbolname)){
+						$estilo->set("offsetx",0);
+						$estilo->set("offsety",0);
+					}
 				}
 			}
 		}
-		$legenda->set("template",$locaplic."/aplicmap/legendaOgc.html");
+	}
+	if($req->getValueByName("FORMAT") == "text/html"){
+		//define qual template utilizar
+		if(empty($_GET["templateLegenda"])){
+			$legenda->set("template",$locaplic."/aplicmap/legendaOgc.html");
+		} else {
+			$_GET["templateLegenda"] = str_replace(".htm","",$_GET["templateLegenda"]);
+			$_GET["templateLegenda"] = str_replace(".","",$_GET["templateLegenda"]);
+			if(file_exists($locaplic."/".$_GET["templateLegenda"].".htm")){
+				$legenda->set("template",$locaplic."/".$_GET["templateLegenda"].".htm");
+			} else {
+				$legenda->set("template",$locaplic."/aplicmap/legendaOgc.html");
+			}
+		}
 		$tmparray["my_tag"] = "value_of_my_tag";
 		if($leg = @$oMap->processlegendtemplate($tmparray)){
 			if (function_exists("mb_convert_encoding")){
