@@ -31,14 +31,34 @@ Arquivo: i3geo/ogc.php
 
 Par&acirc;metros:
 
-lista - (opcional) se for igual a "temas", mostra uma lista de links em HTML dos temas dispon&iacute;veis,
-se for igual a "temaswfs", mostra a lista de links WFS
+lista - (opcional) se for igual a 'temas', mostra uma lista de links em HTML dos temas dispon&iacute;veis,
+se for igual a 'temaswfs', mostra a lista de links WFS
 
 ajuda - (opcional) mostra uma ajuda ao usu&aacute;rio
 
 tema ou temas - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo. Se n&atilde;o for definido, ser&atilde;o considerados todos os temas
 
 legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
+
+	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
+
+		legenda_imagecolor - cor RGB do fundo da legenda. Quando especificado,  o mapa deixa de ser transparente. Exemplo: &legenda_imagecolor=255,0,0
+
+		legenda_keysizex - largura da figura de cada classe
+
+		legenda_keysizey - altura da figura de cada classe
+
+		legenda_keyspacingx - distancia entre a figura e o inicio do texto de cada classe
+
+		legenda_keyspacingy - distancia entre as figuras de cada classe
+
+		legenda_position - posicao da legenda no mapa ul|uc|ur|ll|lc|lr
+
+		legenda_outlinecolor - cor RGB do contorno das figuras de cada classe
+
+		legenda_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
+
+		legenda_size - tamanho dos textos
 
 templateLegenda - (opcional) nome de um template HTML para uso em legendas do tipo text/html. Dever ser o caminho relativo a pasta
 onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a documentacao do Mapserver. exemplo &templateLegenda=aplicmap/legenda8.htm
@@ -59,7 +79,7 @@ nao deve ser utilizado junto com tema
 
 restauramapa - ID de um mapa salvo no sistema de administracao. O mapa e restaurado e tratado como WMS
 
-DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
+DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd definido como 'sim', do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
 
 filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
 
@@ -80,6 +100,15 @@ ogc.php?tema=bioma
 ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 
 */
+
+if(count($_GET) == 0){
+ echo "<pre>
+
+
+";
+ exit;
+}
+
 include(dirname(__FILE__)."/classesphp/sani_request.php");
 include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
@@ -441,7 +470,6 @@ else{
 		//para o caso do tema ser um arquivo mapfile existente em uma pasta qualquer
 		//$temai3geo = true indica que o layer ser&aacute; buscado na pasta i3geo/temas
 		$temai3geo = true;
-		//FIXME nao aceita gvp quando o caminho e completo
 		if(file_exists($_GET["tema"]) && !isset($_GET["id_medida_variavel"])){
 			$nmap = ms_newMapobj($_GET["tema"]);
 			$temai3geo = false;
@@ -794,6 +822,54 @@ else{
 	if((isset($legenda)) && (strtolower($legenda) == "sim")){
 		$leg = $oMap->legend;
 		$leg->set("status",MS_EMBED);
+		if(!empty($_GET["legenda_imagecolor"])){
+			$_GET["legenda_imagecolor"] = str_replace(","," ",$_GET["legenda_imagecolor"]);
+			$ncor = explode(" ",$_GET["legenda_imagecolor"]);
+			$cor = $leg->imagecolor;
+			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+			$req->setParameter("TRANSPARENT",0);
+		}
+		if(!empty($_GET["legenda_keysizex"])){
+			$leg->set("keysizex",$_GET["legenda_keysizex"]);
+		}
+		if(!empty($_GET["legenda_keysizey"])){
+			$leg->set("keysizey",$_GET["legenda_keysizey"]);
+		}
+		if(!empty($_GET["legenda_keyspacingx"])){
+			$leg->set("keyspacingx",$_GET["legenda_keyspacingx"]);
+		}
+		//ul|uc|ur|ll|lc|lr
+		if(!empty($_GET["legenda_position"])){
+			if($_GET["legenda_position"] == "ul") $leg->set("position",MS_UL);
+			if($_GET["legenda_position"] == "uc") $leg->set("position",MS_UC);
+			if($_GET["legenda_position"] == "ur") $leg->set("position",MS_UR);
+			if($_GET["legenda_position"] == "ll") $leg->set("position",MS_LL);
+			if($_GET["legenda_position"] == "lc") $leg->set("position",MS_LC);
+			if($_GET["legenda_position"] == "lr") $leg->set("position",MS_LR);
+		}
+		if(!empty($_GET["legenda_keyspacingy"])){
+			$leg->set("keyspacingy",$_GET["legenda_keyspacingy"]);
+		}
+		if(!empty($_GET["legenda_outlinecolor"])){
+			$_GET["legenda_outlinecolor"] = str_replace(","," ",$_GET["legenda_outlinecolor"]);
+			$ncor = explode(" ",$_GET["legenda_outlinecolor"]);
+			$cor = $leg->outlinecolor;
+			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+		}
+		//fonte e size so com truetype
+		if (!empty($_GET["legenda_font"])){
+			$label = $leg->label;
+			$label->updatefromstring("LABEL TYPE TRUETYPE END");
+			$label->set("font",$_GET["legenda_font"]);
+		}
+		if (!empty($_GET["legenda_size"])){
+			$label = $leg->label;
+			$label->updatefromstring("LABEL TYPE TRUETYPE END");
+			if(empty($_GET["legenda_font"])){
+				$label->set("font","arial");
+			}
+			$label->set("size",$_GET["legenda_size"]);
+		}
 	}
 	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
@@ -1223,7 +1299,6 @@ function carregaCacheImagem($cachedir,$map,$tms){
 		$nome = $cachedir.$tms;
 	}
 	$nome = str_replace(".png","",$nome).".png";
-	//TODO verificar esses cabecalhos e comparar com geoserver
 	if(file_exists($nome)){
 		ob_clean();
 		//header('Content-Length: '.filesize($nome));
