@@ -63,6 +63,32 @@ legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 templateLegenda - (opcional) nome de um template HTML para uso em legendas do tipo text/html. Dever ser o caminho relativo a pasta
 onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a documentacao do Mapserver. exemplo &templateLegenda=aplicmap/legenda8.htm
 
+escala - (opcional) mostra a barra de escala no corpo do mapa sim|nao
+
+	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
+
+		escala_color - cor RGB dos trechos principais da barra. Exemplo: &escala_color=255,0,0
+
+		escala_backgroundcolor - cor dos trechos secundários
+
+		escala_outlinecolor - cor do contorno
+
+		escala_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
+
+		escala_size - tamanho dos textos
+
+		escala_position - posicao da legenda no mapa ul|uc|ur|ll|lc|lr
+
+		escala_width - largura da barra em pixels
+
+		escala_height - altura da barra em pixels
+
+		escala_style - estilo da barra 0|1
+
+		escala_intervals - numero de trechos da barra
+
+		escala_units - unidade de medida 0 (INCHES)|1 (FEET)|2 (milhas)|3 (METERS)|4 (KILOMETERS)|5 (DD)|6 (NAUTICALMILES)
+
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
@@ -137,6 +163,32 @@ legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 templateLegenda - (opcional) nome de um template HTML para uso em legendas do tipo text/html. Dever ser o caminho relativo a pasta
 onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a documentacao do Mapserver. exemplo &templateLegenda=aplicmap/legenda8.htm
 
+escala - (opcional) mostra a barra de escala no corpo do mapa sim|nao
+
+	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
+
+		escala_color - cor RGB dos trechos principais da barra. Exemplo: &escala_color=255,0,0
+
+		escala_backgroundcolor - cor dos trechos secundários
+
+		escala_outlinecolor - cor do contorno
+
+		escala_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
+
+		escala_size - tamanho dos textos
+
+		escala_position - posicao da legenda no mapa ul|uc|ur|ll|lc|lr
+
+		escala_width - largura da barra em pixels
+
+		escala_height - altura da barra em pixels
+
+		escala_style - estilo da barra 0|1
+
+		escala_intervals - numero de trechos da barra
+
+		escala_units - unidade de medida 0 (INCHES)|1 (FEET)|2 (milhas)|3 (METERS)|4 (KILOMETERS)|5 (DD)|6 (NAUTICALMILES)
+
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
@@ -172,7 +224,8 @@ ogc.php?lista=temas
 ogc.php?tema=bioma
 
 ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
-";
+
+ 		";
  exit;
 }
 
@@ -936,6 +989,71 @@ else{
 				$label->set("font","arial");
 			}
 			$label->set("size",$_GET["legenda_size"]);
+		}
+	}
+	//
+	//a imagem do mapa recebera a barra de escala
+	//
+	if((isset($_GET["escala"])) && (strtolower($_GET["escala"]) == "sim")){
+		$eb = $oMap->scalebar;
+		$eb->set("status",MS_EMBED);
+		if(!empty($_GET["escala_width"])){
+			$eb->set("width",$_GET["escala_width"]);
+		}
+		if(!empty($_GET["escala_height"])){
+			$eb->set("height",$_GET["escala_height"]);
+		}
+		//0 ou 1
+		if(!empty($_GET["escala_style"])){
+			$eb->set("style",$_GET["escala_style"]);
+		}
+		if(!empty($_GET["escala_intervals"])){
+			$eb->set("intervals",$_GET["escala_intervals"]);
+		}
+		//MS_INCHES, MS_FEET, MS_MILES, MS_METERS, MS_KILOMETERS, MS_DD, MS_PIXELS, MS_NAUTICALMILES
+		if(!empty($_GET["escala_units"])){
+			$eb->set("units",$_GET["escala_units"]);
+		}
+		if(!empty($_GET["escala_color"])){
+			$_GET["escala_color"] = str_replace(","," ",$_GET["escala_color"]);
+			$ncor = explode(" ",$_GET["escala_color"]);
+			$cor = $eb->color;
+			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+		}
+		if(!empty($_GET["escala_backgroundcolor"])){
+			$_GET["escala_backgroundcolor"] = str_replace(","," ",$_GET["escala_backgroundcolor"]);
+			$ncor = explode(" ",$_GET["escala_backgroundcolor"]);
+			$cor = $eb->backgroundcolor;
+			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+		}
+		if(!empty($_GET["escala_outlinecolor"])){
+			$_GET["escala_outlinecolor"] = str_replace(","," ",$_GET["escala_outlinecolor"]);
+			$ncor = explode(" ",$_GET["escala_outlinecolor"]);
+			$cor = $eb->outlinecolor;
+			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+		}
+		//ul|uc|ur|ll|lc|lr
+		if(!empty($_GET["escala_position"])){
+			if($_GET["escala_position"] == "ul") $eb->set("position",MS_UL);
+			if($_GET["escala_position"] == "uc") $eb->set("position",MS_UC);
+			if($_GET["escala_position"] == "ur") $eb->set("position",MS_UR);
+			if($_GET["escala_position"] == "ll") $eb->set("position",MS_LL);
+			if($_GET["escala_position"] == "lc") $eb->set("position",MS_LC);
+			if($_GET["escala_position"] == "lr") $eb->set("position",MS_LR);
+		}
+		//fonte e size so com truetype
+		if (!empty($_GET["escala_font"])){
+			$label = $eb->label;
+			$label->updatefromstring("LABEL TYPE TRUETYPE END");
+			$label->set("font",$_GET["escala_font"]);
+		}
+		if (!empty($_GET["escala_size"])){
+			$label = $eb->label;
+			$label->updatefromstring("LABEL TYPE TRUETYPE END");
+			if(empty($_GET["escala_size"])){
+				$label->set("font","arial");
+			}
+			$label->set("size",$_GET["escala_size"]);
 		}
 	}
 	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
