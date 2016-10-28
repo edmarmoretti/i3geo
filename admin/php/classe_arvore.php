@@ -307,7 +307,7 @@ class Arvore
 							{
 								$down = "nao";
 							}
-							$texto = array("miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
+							$texto = array("codigo_tema"=>$t["codigo_tema"],"miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 							if($procurar == "")
 							{
 								$temasRaizGrupo[] = $texto;
@@ -357,7 +357,7 @@ class Arvore
 									{
 										$down = "nao";
 									}
-									$texto = array("miniatura"=>$miniatura,"tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
+									$texto = array("codigo_tema"=>$tema["codigo_tema"],"miniatura"=>$miniatura,"tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 									if($procurar == "")
 									{
 										$resultado[] = $texto;
@@ -450,7 +450,7 @@ class Arvore
 							{
 								$down = "nao";
 							}
-							$texto = array("miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
+							$texto = array("codigo_tema"=>$t["codigo_tema"],"miniatura"=>$miniatura,"tid"=>$t["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 							$n = intval($t["nacessos"] / $fatorestrela);
 							if($n >= 5){
 								$n = 5;
@@ -491,7 +491,7 @@ class Arvore
 									{
 										$down = "nao";
 									}
-									$texto = array("miniatura"=>$miniatura,"tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
+									$texto = array("codigo_tema"=>$tema["codigo_tema"],"miniatura"=>$miniatura,"tid"=>$tema["codigo_tema"],"nome"=>$this->converte($tema["nome_tema"]),"link"=>$t["link_tema"],"download"=>$down);
 									$n = abs($t["nacessos"] / $fatorestrela);
 									if($n >= 5){
 										$n = 5;
@@ -990,7 +990,8 @@ class Arvore
 		{
 			$kmz = "sim";
 		}
-		return array("tipoa_tema"=>$recordset["tipoa_tema"],"publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>$kmz);
+		//codigo_tema para fins de compatibilidade
+		return array("codigo_tema"=>($recordset["codigo_tema"]),"tipoa_tema"=>$recordset["tipoa_tema"],"publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>$kmz);
 	}
 	/*
 	Function: execSQL

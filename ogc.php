@@ -103,8 +103,75 @@ ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 
 if(count($_GET) == 0){
  echo "<pre>
+Par&acirc;metros:
 
+lista - (opcional) se for igual a 'temas', mostra uma lista de links em HTML dos temas dispon&iacute;veis,
+se for igual a 'temaswfs', mostra a lista de links WFS
 
+ajuda - (opcional) mostra uma ajuda ao usu&aacute;rio
+
+tema ou temas - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo. Se n&atilde;o for definido, ser&atilde;o considerados todos os temas
+
+legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
+
+	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
+
+		legenda_imagecolor - cor RGB do fundo da legenda. Quando especificado,  o mapa deixa de ser transparente. Exemplo: &legenda_imagecolor=255,0,0
+
+		legenda_keysizex - largura da figura de cada classe
+
+		legenda_keysizey - altura da figura de cada classe
+
+		legenda_keyspacingx - distancia entre a figura e o inicio do texto de cada classe
+
+		legenda_keyspacingy - distancia entre as figuras de cada classe
+
+		legenda_position - posicao da legenda no mapa ul|uc|ur|ll|lc|lr
+
+		legenda_outlinecolor - cor RGB do contorno das figuras de cada classe
+
+		legenda_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
+
+		legenda_size - tamanho dos textos
+
+templateLegenda - (opcional) nome de um template HTML para uso em legendas do tipo text/html. Dever ser o caminho relativo a pasta
+onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a documentacao do Mapserver. exemplo &templateLegenda=aplicmap/legenda8.htm
+
+perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
+
+format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
+abrir o mashup do OpenLayers com as camadas definida em temas.
+Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
+
+OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile e csv para download de csv compactado
+
+ows_geomtype - permite definir o tipo de geometria conforme utilizado pelo parametro GEOMETRY do OGR (veja http://gdal.org/drv_csv.html)
+afeta o OUTPUTFORMAT csv. Por default utiliza &ows_geomtype=none para obter um csv sem a coluna geometry. Para obter a geometria utilize &ows_geomtypeAS_WKT
+
+id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
+nao deve ser utilizado junto com tema
+
+restauramapa - ID de um mapa salvo no sistema de administracao. O mapa e restaurado e tratado como WMS
+
+DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd definido como 'sim', do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
+
+filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
+
+Exemplo de filtro
+
+http://localhost/i3geo/ogc.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
+
+no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
+
+Exemplos:
+
+ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
+
+ogc.php?lista=temas
+
+ogc.php?tema=bioma
+
+ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 ";
  exit;
 }
