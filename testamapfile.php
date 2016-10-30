@@ -64,7 +64,6 @@ if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
 	exit ();
 }
 include("classesphp/funcoes_gerais.php");
-
 //$i3geoPermiteLoginIp vem de ms_configura.php
 if(isset($i3geoPermiteLoginIp)){
 	checaLoginIp($i3geoPermiteLoginIp);
@@ -96,8 +95,6 @@ if ($tipo == "")
 	echo '<html><head><META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">';
 	echo '<script src="classesjs/i3geo.js"></script>';
 }
-$arqs = listaArquivos("temas");
-sort($arqs["arquivos"]);
 
 if ($tipo == "")
 {
@@ -111,7 +108,7 @@ if ($tipo == "")
 	echo '</head>';
 	echo '<body class=" yui-skin-sam" style="background: white;"><center>';
 	echo '<div class="bordaSuperior"  >&nbsp;</div>';
-	echo '<div class="mascaraPrincipal" id="divGeral" style=display:none; >';
+	echo '<div class="mascaraPrincipal" id="divGeral" style=display:block; >';
 	echo '<div id=cabecalhoPrincipal></div>';
 	echo '<h1 style="background-color: white; color: black;" >Administra&ccedil;&atilde;o do i3geo - teste de mapfiles </h1>';
 	echo '<form action="testamapfile.php" method="post" id=f   >';
@@ -133,8 +130,12 @@ $map = $_GET["map"];
 
 if (isset($map) && $map != "")
 {
-	if(!isset($solegenda) || $solegenda == ""){$solegenda = "nao";}
+	if(!isset($solegenda) || $solegenda == ""){
+		$solegenda = "nao";
+	}
 	if ($map == "todos"){
+		$arqs = listaArquivos("temas",true,array("map"));
+		sort($arqs["arquivos"]);
 		$tipo = "todos";
 		$conta = 0;
 		echo "<br>N&uacute;mero de mapas = ".(count($arqs["arquivos"]))." Faltam= ".(count($arqs["arquivos"])-$iniciar-10)."<br>";
@@ -349,12 +350,14 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 				//pega simbolos locais e aplica no novo mapa
 				cloneInlineSymbol($layern,$nmapa,$mapa);
 				ms_newLayerObj($mapa, $layern);
+				/*
 				if ($layern->data == ""){
 					$dados = $layern->connection;
 				}
 				else{
 					$dados = $layern->data;
 				}
+				*/
 				$pegarext = $layern->name;
 			}
 			zoomTema($pegarext,$mapa);
@@ -397,10 +400,10 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 
 		$mapa->save($destino);
 		validaAcessoTemas($destino,true);
-
 		//testa a tabela de atributos
-		if(isset($tabela)){
+		if(isset($_GET["tabela"])){
 			include("classesphp/classe_atributos.php");
+
 			$t = new Atributos($destino,$map);
 			restauraCon($destino,$postgis_mapa);
 			$r = $t->itensTexto();
@@ -485,7 +488,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 				{echo "<img src=".$nomer." /><br>";}
 				echo "<img src=".$nomerl." />";
 				if($tipo == "todos"){
-					echo "<br>".$dados."<br>";
+					//echo "<br>".$dados."<br>";
 				}
 				if($map != "todos"){
 					echo "<br><b>Tempo (s): ";
