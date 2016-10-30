@@ -1,0 +1,22 @@
+MAP
+SYMBOLSET ../symbols/simbolosv6.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME "_estadosbr" # ok
+  TYPE line
+  STATUS DEFAULT
+  DATA "/var/www/i3geo/aplicmap/dados/estados.shp"
+  TEMPLATE "none.htm"
+	METADATA
+		"TEMA" "Limite Estadual"
+		"CLASSE" "SIM"
+		"permiteogc"	"sim"
+	END
+  CLASS
+	  NAME ""
+	  STYLE
+          COLOR 0 0 0
+	  END
+  END  # CLASS
+END  # LAYER
+END

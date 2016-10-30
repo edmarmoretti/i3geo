@@ -15,6 +15,7 @@ MAP
 	DEBUG OFF
 	#DEBUG 5
 	#CONFIG "MS_ERRORFILE" "/tmp/ms_tmp/ms_error.txt"
+
 	OUTPUTFORMAT
 		NAME 'png'
 		MIMETYPE "image/png"

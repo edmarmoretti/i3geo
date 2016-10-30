@@ -1,0 +1,33 @@
+MAP
+SYMBOLSET ../symbols/simbolosv6.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+  NAME "gridg"
+  METADATA
+    "DESCRIPTION" "Grid"
+    "TEMA" "Grade"
+  END
+  TYPE LINE
+  STATUS DEFAULT
+  CLASS
+    NAME "Graticule"
+    COLOR 0 0 0
+    LABEL
+      COLOR  255 0 0
+      FONT "arial"
+      TYPE truetype
+      SIZE 8
+      POSITION AUTO
+      PARTIALS FALSE
+      BUFFER 2
+      OUTLINECOLOR 255 255 255
+    END
+  END
+  PROJECTION
+    "init=epsg:4326"
+  END
+  GRID
+    LABELFORMAT "DD"
+  END
+END # Layer
+END

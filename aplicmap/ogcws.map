@@ -22,7 +22,6 @@ MAP
 		TRANSPARENT TRUE
 		FORMATOPTION "INTERLACE=OFF"
 	END
-
 	PROJECTION
 		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
 	END

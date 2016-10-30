@@ -938,123 +938,14 @@ else{
 	//
 	//a imagem do mapa recebera a legenda
 	//
-	$legenda = $_GET["legenda"];
-	if((isset($legenda)) && (strtolower($legenda) == "sim")){
-		$leg = $oMap->legend;
-		$leg->set("status",MS_EMBED);
-		if(!empty($_GET["legenda_imagecolor"])){
-			$_GET["legenda_imagecolor"] = str_replace(","," ",$_GET["legenda_imagecolor"]);
-			$ncor = explode(" ",$_GET["legenda_imagecolor"]);
-			$cor = $leg->imagecolor;
-			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
-			$req->setParameter("TRANSPARENT",0);
-		}
-		if(!empty($_GET["legenda_keysizex"])){
-			$leg->set("keysizex",$_GET["legenda_keysizex"]);
-		}
-		if(!empty($_GET["legenda_keysizey"])){
-			$leg->set("keysizey",$_GET["legenda_keysizey"]);
-		}
-		if(!empty($_GET["legenda_keyspacingx"])){
-			$leg->set("keyspacingx",$_GET["legenda_keyspacingx"]);
-		}
-		//ul|uc|ur|ll|lc|lr
-		if(!empty($_GET["legenda_position"])){
-			if($_GET["legenda_position"] == "ul") $leg->set("position",MS_UL);
-			if($_GET["legenda_position"] == "uc") $leg->set("position",MS_UC);
-			if($_GET["legenda_position"] == "ur") $leg->set("position",MS_UR);
-			if($_GET["legenda_position"] == "ll") $leg->set("position",MS_LL);
-			if($_GET["legenda_position"] == "lc") $leg->set("position",MS_LC);
-			if($_GET["legenda_position"] == "lr") $leg->set("position",MS_LR);
-		}
-		if(!empty($_GET["legenda_keyspacingy"])){
-			$leg->set("keyspacingy",$_GET["legenda_keyspacingy"]);
-		}
-		if(!empty($_GET["legenda_outlinecolor"])){
-			$_GET["legenda_outlinecolor"] = str_replace(","," ",$_GET["legenda_outlinecolor"]);
-			$ncor = explode(" ",$_GET["legenda_outlinecolor"]);
-			$cor = $leg->outlinecolor;
-			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
-		}
-		//fonte e size so com truetype
-		if (!empty($_GET["legenda_font"])){
-			$label = $leg->label;
-			$label->updatefromstring("LABEL TYPE TRUETYPE END");
-			$label->set("font",$_GET["legenda_font"]);
-		}
-		if (!empty($_GET["legenda_size"])){
-			$label = $leg->label;
-			$label->updatefromstring("LABEL TYPE TRUETYPE END");
-			if(empty($_GET["legenda_font"])){
-				$label->set("font","arial");
-			}
-			$label->set("size",$_GET["legenda_size"]);
-		}
+	if((isset($_GET["legenda"])) && (strtolower($_GET["legenda"]) == "sim")){
+		processaLegenda();
 	}
 	//
 	//a imagem do mapa recebera a barra de escala
 	//
 	if((isset($_GET["escala"])) && (strtolower($_GET["escala"]) == "sim")){
-		$eb = $oMap->scalebar;
-		$eb->set("status",MS_EMBED);
-		if(!empty($_GET["escala_width"])){
-			$eb->set("width",$_GET["escala_width"]);
-		}
-		if(!empty($_GET["escala_height"])){
-			$eb->set("height",$_GET["escala_height"]);
-		}
-		//0 ou 1
-		if(!empty($_GET["escala_style"])){
-			$eb->set("style",$_GET["escala_style"]);
-		}
-		if(!empty($_GET["escala_intervals"])){
-			$eb->set("intervals",$_GET["escala_intervals"]);
-		}
-		//MS_INCHES, MS_FEET, MS_MILES, MS_METERS, MS_KILOMETERS, MS_DD, MS_PIXELS, MS_NAUTICALMILES
-		if(!empty($_GET["escala_units"])){
-			$eb->set("units",$_GET["escala_units"]);
-		}
-		if(!empty($_GET["escala_color"])){
-			$_GET["escala_color"] = str_replace(","," ",$_GET["escala_color"]);
-			$ncor = explode(" ",$_GET["escala_color"]);
-			$cor = $eb->color;
-			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
-		}
-		if(!empty($_GET["escala_backgroundcolor"])){
-			$_GET["escala_backgroundcolor"] = str_replace(","," ",$_GET["escala_backgroundcolor"]);
-			$ncor = explode(" ",$_GET["escala_backgroundcolor"]);
-			$cor = $eb->backgroundcolor;
-			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
-		}
-		if(!empty($_GET["escala_outlinecolor"])){
-			$_GET["escala_outlinecolor"] = str_replace(","," ",$_GET["escala_outlinecolor"]);
-			$ncor = explode(" ",$_GET["escala_outlinecolor"]);
-			$cor = $eb->outlinecolor;
-			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
-		}
-		//ul|uc|ur|ll|lc|lr
-		if(!empty($_GET["escala_position"])){
-			if($_GET["escala_position"] == "ul") $eb->set("position",MS_UL);
-			if($_GET["escala_position"] == "uc") $eb->set("position",MS_UC);
-			if($_GET["escala_position"] == "ur") $eb->set("position",MS_UR);
-			if($_GET["escala_position"] == "ll") $eb->set("position",MS_LL);
-			if($_GET["escala_position"] == "lc") $eb->set("position",MS_LC);
-			if($_GET["escala_position"] == "lr") $eb->set("position",MS_LR);
-		}
-		//fonte e size so com truetype
-		if (!empty($_GET["escala_font"])){
-			$label = $eb->label;
-			$label->updatefromstring("LABEL TYPE TRUETYPE END");
-			$label->set("font",$_GET["escala_font"]);
-		}
-		if (!empty($_GET["escala_size"])){
-			$label = $eb->label;
-			$label->updatefromstring("LABEL TYPE TRUETYPE END");
-			if(empty($_GET["escala_size"])){
-				$label->set("font","arial");
-			}
-			$label->set("size",$_GET["escala_size"]);
-		}
+		processaEscala();
 	}
 	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
@@ -1907,6 +1798,122 @@ function processaPluginI3geo(){
 				$l->set("data",$data);
 			}
 		}
+	}
+}
+function processaEscala(){
+	global $oMap, $locaplic, $req;
+	$eb = $oMap->scalebar;
+	$eb->set("status",MS_EMBED);
+	if(!empty($_GET["escala_width"])){
+		$eb->set("width",$_GET["escala_width"]);
+	}
+	if(!empty($_GET["escala_height"])){
+		$eb->set("height",$_GET["escala_height"]);
+	}
+	//0 ou 1
+	if(!empty($_GET["escala_style"])){
+		$eb->set("style",$_GET["escala_style"]);
+	}
+	if(!empty($_GET["escala_intervals"])){
+		$eb->set("intervals",$_GET["escala_intervals"]);
+	}
+	//MS_INCHES, MS_FEET, MS_MILES, MS_METERS, MS_KILOMETERS, MS_DD, MS_PIXELS, MS_NAUTICALMILES
+	if(!empty($_GET["escala_units"])){
+		$eb->set("units",$_GET["escala_units"]);
+	}
+	if(!empty($_GET["escala_color"])){
+		$_GET["escala_color"] = str_replace(","," ",$_GET["escala_color"]);
+		$ncor = explode(" ",$_GET["escala_color"]);
+		$cor = $eb->color;
+		$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+	}
+	if(!empty($_GET["escala_backgroundcolor"])){
+		$_GET["escala_backgroundcolor"] = str_replace(","," ",$_GET["escala_backgroundcolor"]);
+		$ncor = explode(" ",$_GET["escala_backgroundcolor"]);
+		$cor = $eb->backgroundcolor;
+		$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+	}
+	if(!empty($_GET["escala_outlinecolor"])){
+		$_GET["escala_outlinecolor"] = str_replace(","," ",$_GET["escala_outlinecolor"]);
+		$ncor = explode(" ",$_GET["escala_outlinecolor"]);
+		$cor = $eb->outlinecolor;
+		$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+	}
+	//ul|uc|ur|ll|lc|lr
+	if(!empty($_GET["escala_position"])){
+		if($_GET["escala_position"] == "ul") $eb->set("position",MS_UL);
+		if($_GET["escala_position"] == "uc") $eb->set("position",MS_UC);
+		if($_GET["escala_position"] == "ur") $eb->set("position",MS_UR);
+		if($_GET["escala_position"] == "ll") $eb->set("position",MS_LL);
+		if($_GET["escala_position"] == "lc") $eb->set("position",MS_LC);
+		if($_GET["escala_position"] == "lr") $eb->set("position",MS_LR);
+	}
+	//fonte e size so com truetype
+	if (!empty($_GET["escala_font"])){
+		$label = $eb->label;
+		$label->updatefromstring("LABEL TYPE TRUETYPE END");
+		$label->set("font",$_GET["escala_font"]);
+	}
+	if (!empty($_GET["escala_size"])){
+		$label = $eb->label;
+		$label->updatefromstring("LABEL TYPE TRUETYPE END");
+		if(empty($_GET["escala_size"])){
+			$label->set("font","arial");
+		}
+		$label->set("size",$_GET["escala_size"]);
+	}
+}
+function processaLegenda(){
+	global $oMap, $locaplic, $req;
+	$leg = $oMap->legend;
+	$leg->set("status",MS_EMBED);
+	if(!empty($_GET["legenda_imagecolor"])){
+		$_GET["legenda_imagecolor"] = str_replace(","," ",$_GET["legenda_imagecolor"]);
+		$ncor = explode(" ",$_GET["legenda_imagecolor"]);
+		$cor = $leg->imagecolor;
+		$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+		$req->setParameter("TRANSPARENT",0);
+	}
+	if(!empty($_GET["legenda_keysizex"])){
+		$leg->set("keysizex",$_GET["legenda_keysizex"]);
+	}
+	if(!empty($_GET["legenda_keysizey"])){
+		$leg->set("keysizey",$_GET["legenda_keysizey"]);
+	}
+	if(!empty($_GET["legenda_keyspacingx"])){
+		$leg->set("keyspacingx",$_GET["legenda_keyspacingx"]);
+	}
+	//ul|uc|ur|ll|lc|lr
+	if(!empty($_GET["legenda_position"])){
+		if($_GET["legenda_position"] == "ul") $leg->set("position",MS_UL);
+		if($_GET["legenda_position"] == "uc") $leg->set("position",MS_UC);
+		if($_GET["legenda_position"] == "ur") $leg->set("position",MS_UR);
+		if($_GET["legenda_position"] == "ll") $leg->set("position",MS_LL);
+		if($_GET["legenda_position"] == "lc") $leg->set("position",MS_LC);
+		if($_GET["legenda_position"] == "lr") $leg->set("position",MS_LR);
+	}
+	if(!empty($_GET["legenda_keyspacingy"])){
+		$leg->set("keyspacingy",$_GET["legenda_keyspacingy"]);
+	}
+	if(!empty($_GET["legenda_outlinecolor"])){
+		$_GET["legenda_outlinecolor"] = str_replace(","," ",$_GET["legenda_outlinecolor"]);
+		$ncor = explode(" ",$_GET["legenda_outlinecolor"]);
+		$cor = $leg->outlinecolor;
+		$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+	}
+	//fonte e size so com truetype
+	if (!empty($_GET["legenda_font"])){
+		$label = $leg->label;
+		$label->updatefromstring("LABEL TYPE TRUETYPE END");
+		$label->set("font",$_GET["legenda_font"]);
+	}
+	if (!empty($_GET["legenda_size"])){
+		$label = $leg->label;
+		$label->updatefromstring("LABEL TYPE TRUETYPE END");
+		if(empty($_GET["legenda_font"])){
+			$label->set("font","arial");
+		}
+		$label->set("size",$_GET["legenda_size"]);
 	}
 }
 //utilizada para obter os dados default quando se utiliza o plugin parametrossql
