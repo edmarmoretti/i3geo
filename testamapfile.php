@@ -349,7 +349,10 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 				}
 				//pega simbolos locais e aplica no novo mapa
 				cloneInlineSymbol($layern,$nmapa,$mapa);
-				ms_newLayerObj($mapa, $layern);
+
+				$layerAdicionado = ms_newLayerObj($mapa, $layern);
+
+				corrigeLayerGrid($layern,$layerAdicionado);
 				/*
 				if ($layern->data == ""){
 					$dados = $layern->connection;
@@ -447,7 +450,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 		}
 		else{
 			$mapa = ms_newMapObj($destino);
-			restauraCon($destino,$postgis_mapa);
+			restauraConObj($mapa,$postgis_mapa);
 			$objImagem = @$mapa->draw();
 			//corrige o titulo da legenda
 			$numlayers = $mapa->numlayers;

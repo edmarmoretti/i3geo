@@ -744,7 +744,8 @@ else{
 									$classe->set("name",$l->getmetadata("tema"));
 								}
 							}
-							ms_newLayerObj($oMap, $l);
+							$layerAdicionado = ms_newLayerObj($oMap, $l);
+							corrigeLayerGrid($l,$layerAdicionado);
 						}
 						else{
 							//a camada nao pode ser usada como servico WMS, entao e enviada uma mensagem

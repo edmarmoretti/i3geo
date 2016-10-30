@@ -1357,6 +1357,7 @@ class Mapa
 								}
 							}
 						}
+						corrigeLayerGrid($nlayer,$l);
 					}
 				}
 			}

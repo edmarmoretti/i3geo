@@ -1,33 +1,55 @@
 MAP
-SYMBOLSET ../symbols/simbolosv6.sym
-FONTSET   "../symbols/fontes.txt"
-LAYER
-  NAME "gridg"
-  METADATA
-    "DESCRIPTION" "Grid"
-    "TEMA" "Grade"
-  END
-  TYPE LINE
-  STATUS DEFAULT
-  CLASS
-    NAME "Graticule"
-    COLOR 0 0 0
-    LABEL
-      COLOR  255 0 0
-      FONT "arial"
-      TYPE truetype
-      SIZE 8
-      POSITION AUTO
-      PARTIALS FALSE
-      BUFFER 2
-      OUTLINECOLOR 255 255 255
-    END
-  END
-  PROJECTION
-    "init=epsg:4326"
-  END
-  GRID
-    LABELFORMAT "DD"
-  END
-END # Layer
-END
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+  LAYER
+    METADATA
+      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
+      "CACHE"	"nao"
+      "DESCRIPTION"	"Grid"
+      "permitekmz"	"nao"
+      "TILES"	"nao"
+      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "permitedownload"	"sim"
+      "metaestat"	""
+      "download"	"sim"
+      "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "TEMA"	"Grade DMS"
+    END # METADATA
+    NAME "gridg"
+    PROJECTION
+      "proj=longlat"
+      "ellps=WGS84"
+      "datum=WGS84"
+      "no_defs"
+    END # PROJECTION
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME "Graticule"
+      LABEL
+        FONT "arial"
+        SIZE 8
+        BUFFER 2
+        OFFSET 0 0
+        OUTLINECOLOR 255 255 255
+        PARTIALS FALSE
+        POSITION CC
+        SHADOWSIZE 1 1
+        TYPE TRUETYPE
+      END # LABEL
+      STYLE
+        COLOR 200 200 200
+      END # STYLE
+    END # CLASS
+    GRID
+      LABELFORMAT "DDMMSS"
+      MAXINTERVAL 10
+      MININTERVAL 10
+    END # GRID
+  END # LAYER
+
+END # MAP
+

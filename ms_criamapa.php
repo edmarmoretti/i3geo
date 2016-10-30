@@ -908,7 +908,8 @@ function incluiTemasIniciais(){
 							$layern->set("status",$statustemp);
 						}
 						cloneInlineSymbol($layern,$maptemp,$mapn);
-						ms_newLayerObj($mapn, $layern);
+						$layerAdicionado = ms_newLayerObj($mapn, $layern);
+						corrigeLayerGrid($layern,$layerAdicionado);
 					}
 				}
 

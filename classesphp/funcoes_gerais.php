@@ -3107,4 +3107,22 @@ function checaLoginIp($lista){
 		exit ();
 	}
 }
+//
+//corrige layers do tipo GRID
+//bug do mapserver nao permite renderizar grids
+//essa funcao corrige esse problema
+//
+function corrigeLayerGrid($layerOrigem,$layerDestino){
+	if($layerOrigem->connectiontype == MS_GRATICULE){
+		ms_newgridobj($layerDestino);
+		$layerDestino->grid->set("labelformat", $layerOrigem->grid->labelformat);
+		$layerDestino->grid->set("mininterval", $layerOrigem->grid->mininterval);
+		$layerDestino->grid->set("maxinterval", $layerOrigem->grid->maxinterval);
+		$layerDestino->grid->set("minsubdivide", $layerOrigem->grid->minsubdivide);
+		$layerDestino->grid->set("maxsubdivide", $layerOrigem->grid->maxsubdivide);
+		$layerDestino->grid->set("minarcs", $layerOrigem->grid->minarcs);
+		$layerDestino->grid->set("maxarcs", $layerOrigem->grid->maxarcs);
+		//$layerDestino->updatefromstring("LAYER GRID LABELFORMAT '" . $layerOrigem->grid->labelformat . "' END END");
+	}
+}
 ?>
