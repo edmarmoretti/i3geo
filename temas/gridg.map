@@ -1,21 +1,20 @@
 MAP
+#utilizado tambem em ogc.php
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "CACHE"	"nao"
       "DESCRIPTION"	"Grid"
       "permitekmz"	"nao"
       "TILES"	"nao"
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "permitedownload"	"sim"
-      "metaestat"	""
-      "download"	"sim"
-      "permitekml"	"sim"
+      "permitedownload"	"nao"
+      "download"	"nao"
+      "permitekml"	"nao"
       "permiteogc"	"sim"
       "TEMA"	"Grade DMS"
     END # METADATA
+    #nao mude o nome desse layer pois e utilizado em ogc.php
     NAME "gridg"
     PROJECTION
       "proj=longlat"

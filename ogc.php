@@ -89,6 +89,24 @@ escala - (opcional) mostra a barra de escala no corpo do mapa sim|nao
 
 		escala_units - unidade de medida 0 (INCHES)|1 (FEET)|2 (milhas)|3 (METERS)|4 (KILOMETERS)|5 (DD)|6 (NAUTICALMILES)
 
+grade - (opcional) mostra a grade de coordenadas no corpo do mapa sim|nao
+
+	Obs.: a grade utiliza como template o mapfile temas/gridg.map
+
+	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as características:
+
+		grade_labelformat - formato dos textos indicativos das coordenadas da grade DD|DDMM|DDMMSS|C format string (mais detalhes em http://mapserver.org/mapfile/grid.html#grid )
+
+		grade_interval - intervalo entre as linhas da grade
+
+		grade_color - cor RGB da grade. Exemplo: &grade_color=255,0,0
+
+		grade_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
+
+		grade_size - tamanho dos textos
+
+		grade_position - posicao do texto auto|cc|ul|uc|ur|ll|lc|lr
+
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
@@ -130,7 +148,6 @@ ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 if(count($_GET) == 0){
  echo "<pre>
 Par&acirc;metros:
-
 lista - (opcional) se for igual a 'temas', mostra uma lista de links em HTML dos temas dispon&iacute;veis,
 se for igual a 'temaswfs', mostra a lista de links WFS
 
@@ -188,6 +205,24 @@ escala - (opcional) mostra a barra de escala no corpo do mapa sim|nao
 		escala_intervals - numero de trechos da barra
 
 		escala_units - unidade de medida 0 (INCHES)|1 (FEET)|2 (milhas)|3 (METERS)|4 (KILOMETERS)|5 (DD)|6 (NAUTICALMILES)
+
+grade - (opcional) mostra a grade de coordenadas no corpo do mapa sim|nao
+
+	Obs.: a grade utiliza como template o mapfile temas/gridg.map
+
+	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as características:
+
+		grade_labelformat - formato dos textos indicativos das coordenadas da grade DD|DDMM|DDMMSS|C format string (mais detalhes em http://mapserver.org/mapfile/grid.html#grid )
+
+		grade_interval - intervalo entre as linhas da grade
+
+		grade_color - cor RGB da grade. Exemplo: &grade_color=255,0,0
+
+		grade_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
+
+		grade_size - tamanho dos textos
+
+		grade_position - posicao do texto auto|cc|ul|uc|ur|ll|lc|lr
 
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
@@ -595,6 +630,10 @@ else{
 			$temai3geo = false;
 			$nmap->setmetadata("ows_enable_request","*");
 		}
+		//inclui o layer com a grade de coordenadas
+		if((isset($_GET["grade"])) && (strtolower($_GET["grade"]) == "sim") && file_exists($locaplic."/temas/gridg.map")){
+			$listatema[] = "gridg";
+		}
 		foreach ($listatema as $tx){
 			$extensao = ".map";
 			if($temai3geo == true && file_exists($locaplic."/temas/".$tx.".php")){
@@ -947,6 +986,12 @@ else{
 	//
 	if((isset($_GET["escala"])) && (strtolower($_GET["escala"]) == "sim")){
 		processaEscala();
+	}
+	//
+	//aplica os parametros sobre a grade de coordenadas
+	//
+	if((isset($_GET["grade"])) && (strtolower($_GET["grade"]) == "sim")){
+		processaGrade();
 	}
 	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
 	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
@@ -1915,6 +1960,56 @@ function processaLegenda(){
 			$label->set("font","arial");
 		}
 		$label->set("size",$_GET["legenda_size"]);
+	}
+}
+function processaGrade(){
+	global $oMap;
+	//veja o mapfile gridg.map em i3geo/temas
+	$layer = $oMap->getlayerbyname("gridg");
+	if($layer != ""){
+		if(!empty($_GET["grade_labelformat"])){
+			$layer->grid->set("labelformat", $_GET["grade_labelformat"]);
+		}
+		if(!empty($_GET["grade_interval"])){
+			$layer->grid->set("mininterval", $_GET["grade_interval"]);
+			$layer->grid->set("maxinterval", $_GET["grade_interval"]);
+		}
+		$classe = $layer->getclass(0);
+		$estilo = $classe->getstyle(0);
+		$label = $classe->getLabel(0);
+		if(!empty($_GET["grade_position"])){
+			//("MS_AUTO"=>MS_AUTO,"MS_UL"=>MS_UL,"MS_LR"=>MS_LR,"MS_UR"=>MS_UR,"MS_LL"=>MS_LL,
+			//"MS_CR"=>MS_CR,"MS_CL"=>MS_CL,"MS_UC"=>MS_UC,"MS_LC"=>MS_LC,"MS_CC"=>MS_CC);
+			if($_GET["grade_position"] == "auto") $label->set("position",MS_AUTO);
+			if($_GET["grade_position"] == "cc") $label->set("position",MS_CC);
+			if($_GET["grade_position"] == "ul") $label->set("position",MS_UL);
+			if($_GET["grade_position"] == "uc") $label->set("position",MS_UC);
+			if($_GET["grade_position"] == "ur") $label->set("position",MS_UR);
+			if($_GET["grade_position"] == "ll") $label->set("position",MS_LL);
+			if($_GET["grade_position"] == "lc") $label->set("position",MS_LC);
+			if($_GET["grade_position"] == "lr") $label->set("position",MS_LR);
+		}
+		//fonte e size so com truetype
+		if (!empty($_GET["grade_font"])){
+			$label->updatefromstring("LABEL TYPE TRUETYPE END");
+			$label->set("font",$_GET["grade_font"]);
+		}
+		if (!empty($_GET["grade_size"])){
+			$label->updatefromstring("LABEL TYPE TRUETYPE END");
+			if(empty($_GET["grade_font"])){
+				$label->set("font","arial");
+			}
+			$label->set("size",$_GET["grade_size"]);
+		}
+		if(!empty($_GET["grade_color"])){
+			$_GET["grade_color"] = str_replace(","," ",$_GET["grade_color"]);
+			$ncor = explode(" ",$_GET["grade_color"]);
+			$cor = $estilo->color;
+			$cor->setRGB($ncor[0],$ncor[1],$ncor[2]);
+		}
+	}
+	else {
+		echo "Layer gridg nao encontrado"; exit;
 	}
 }
 //utilizada para obter os dados default quando se utiliza o plugin parametrossql
