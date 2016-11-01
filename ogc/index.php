@@ -68,17 +68,17 @@ include "../init/head.php";
 <script id="templateCamadas" type="x-tmpl-mustache">
 <div class="list-group-item">
 	<div class="bs-component btn-group-sm pull-left" data-toggle="modal" data-target="#modalCamada" >
-		<a onclick="mostraLinksServico('{{codigo_tema}}','{{tipo}}','{{disabledogc}}')" class="btn btn-primary btn-fab {{disabledogc}}" href="#">
+		<a title="links OWS" onclick="mostraLinksServico('{{codigo_tema}}','{{tipo}}','{{disabledogc}}')" class="btn btn-primary btn-fab {{disabledogc}}" href="#">
 			<i class="material-icons">launch</i>
 		</a>
-		<a onclick="mostraLinksDownload('{{codigo_tema}}','{{tipo}}','{{disableddown}}')" class="btn btn-primary btn-fab {{disableddown}}" href="#">
+		<a title="download" onclick="mostraLinksDownload('{{codigo_tema}}','{{tipo}}','{{disableddown}}')" class="btn btn-primary btn-fab {{disableddown}}" href="#">
 			<i class="material-icons">file_download</i>
 		</a>
 	</div>
 	<h4>
 		&nbsp;<a onclick="mostraLinksServico('{{codigo_tema}}','{{tipo}}','{{disabledogc}}');$('#modalCamada').modal('show');" href="#">
 		{{{nome_tema}}}{{{nome}}}</a>
-		<a class="{{hidden}}" href="{{link_tema}}{{link}}" target="_blank"><i class="fa fa-link"></i></a>
+		<a title="metadata" class="{{hidden}}" href="{{link_tema}}{{link}}" target="_blank"><i class="fa fa-link"></i></a>
 	</h4>
 </div>
 <div class="list-group-separator"></div>
@@ -96,7 +96,7 @@ include "../init/head.php";
 				{{{camadas}}}
 				<!-- aqui entra o filtro -->
 				<div class="form-group">
-					
+
 					<select onchange="filtraGrupo(this,'menu{{idmenu}}')" data-grupoFiltro="{{idmenu}}" class="form-control input-lg">
 					</select>
 				</div>

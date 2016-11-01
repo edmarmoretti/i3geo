@@ -18,13 +18,14 @@ include "../../head.php";
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
+				<span class="pull-right">&nbsp;&nbsp;</span>
+				<button data-toggle="modal" data-target="#modalFiltro"
+					class="btn btn-primary btn-fab btn-fab-mini pull-right">
+					<i class="material-icons">search</i>
+				</button>
 				<h2><small>{{{txtTitulo}}}</small></h2>
 				<blockquote>{{{txtDesc}}}</blockquote>
-				<!-- aqui entra o filtro -->
-				<div class="form-group">
-					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
-					</select>
-				</div>
+
 
 				<div class="clearfix"></div>
 			</div>

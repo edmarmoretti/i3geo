@@ -23,14 +23,14 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
+				<span class="pull-right">&nbsp;&nbsp;</span>
+				<button data-toggle="modal" data-target="#modalFiltro"
+					class="btn btn-primary btn-fab btn-fab-mini pull-right">
+					<i class="material-icons">search</i>
+				</button>
 				<h2>{{{txtTituloTema}}}</h2>
 				<h3><small>Prancha: <?php echo $titulo_prancha; ?></small></h3>
 				<blockquote>{{{txtDescTema}}}</blockquote>
-				<!-- aqui entra o filtro -->
-				<div class="form-group">
-					<select title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
-					</select>
-				</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="well hidden">

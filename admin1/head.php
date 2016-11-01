@@ -166,6 +166,10 @@ body {
 	width: 95%;
 }
 
+.ui-autocomplete {
+	z-index: 10000;
+}
+
 .panel-heading.icon [data-toggle="collapse"]:after {
 	font-family: 'FontAwesome';
 	content: "\f054";
@@ -391,6 +395,27 @@ h2 small {
 			</div>
 		</div>
 	</nav>
+	<!-- Modal para o filtro -->
+	<div id="modalFiltro" class="modal fade" tabindex="-1">
+			<div class="modal-dialog modal-lg">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+						</button>
+					</div>
+					<div class="modal-body modal-lg" style=height:200px >
+						<!-- aqui entra o filtro -->
+						<div class="form-group">
+							<select title="{{{filtro}}}" title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+							</select>
+						</div>
+						<div class="clearfix"></div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!--Modal de uso geral Varia apenas o body -->
 	<div id="modalGeral" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg">

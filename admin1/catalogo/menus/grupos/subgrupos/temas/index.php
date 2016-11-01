@@ -32,14 +32,13 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
 					<i class="material-icons">play_circle_outline</i>
 				</button>
+				<span class="pull-right">&nbsp;&nbsp;</span>
+				<button data-toggle="modal" data-target="#modalFiltro"
+					class="btn btn-primary btn-fab btn-fab-mini pull-right">
+					<i class="material-icons">search</i>
+				</button>
 				<h4><small>{{{menu}}}: </small><?php echo "$nome_menu <small>{{{grupo}}}:</small> $nome_grupo <small>{{{txtTitulo}}}:</small> $nome_subgrupo"; ?></h4>
 				<blockquote>{{{txtDesc}}}</blockquote>
-				<!-- aqui entra o filtro -->
-				<div class="form-group">
-					 <select
-						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
-					</select>
-				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.temas.adicionaTemaDialogo();" href="javascript:void(0)"
 						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>

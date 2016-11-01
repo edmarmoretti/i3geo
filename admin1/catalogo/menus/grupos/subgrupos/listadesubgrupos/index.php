@@ -28,20 +28,13 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="well hidden" id="titulo">
-				<!--
-				<button data-toggle="modal" data-target="#ajudaPrincipal"
+				<span class="pull-right">&nbsp;&nbsp;</span>
+				<button data-toggle="modal" data-target="#modalFiltro"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
-					<i class="material-icons">help</i>
+					<i class="material-icons">search</i>
 				</button>
-				-->
 				<h2><small>{{{txtListaDeSubGrupos}}}</small></h2>
 				<blockquote>{{{descListaDeSubGrupos}}}</blockquote>
-				<!-- aqui entra o filtro -->
-				<div class="form-group">
-					 <select
-						title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
-					</select>
-				</div>
 				<div class="row pull-right">
 					<a onclick="i3GEOadmin.subgrupos.adicionaDialogo();" href="javascript:void(0)"
 						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>
