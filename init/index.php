@@ -67,11 +67,10 @@ include "head.php";
 						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
 						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
 						<li><a role="button" href="../social/index.php" >Social</a></li>
-						<li class="dropdown "<?php if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false) { echo "style=display:none "; }?>><a role="button"
-						onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');"
-						href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
-						<ul id="i3GEOF_loginusuario" class="dropdown-menu" style="min-width: 280px; padding: 10px; background-color: white;">
-						</ul></li>
+						<li <?php if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false) { echo "style=display:none "; }?>>
+						<a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');"
+						href="#topo" data-toggle="modal" data-target="#modalLogin">Login <i class="material-icons md-18">input</i></a>
+						</li>
 					</ul>
 				</div>
 			</div>
@@ -138,14 +137,12 @@ include "head.php";
 									<a class="btn btn-primary" style="color:#008579;" href="{{{href}}}" role="button" target="{{{target}}}">
 										{{{abrir}}} </a>
 								</div>
-
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-
 	</div>
 	<div tabindex="-1" class="container-fluid"
 		style="background-color: #fff; margin-top: 10px; padding-top: 10px;">
@@ -160,7 +157,20 @@ include "head.php";
 			</div>
 		</div>
 	</div>
+	<div id="modalLogin" class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="i3GEOF_loginusuario">
 
+				</div>
+			</div>
+		</div>
+	</div>
 	<script>
 	//utilizado em ms_configura.php para customizar o local da pasta de inicializacao
 	var customDir = "<?php echo $customDir; ?>";

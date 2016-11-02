@@ -208,6 +208,8 @@ h2 small {
   padding:6px 18px 6px 24px;
 }
 
+.material-icons.md-18 { font-size: 18px; }
+
 /** Default button **/
 .btn-breadcrumb .btn.btn-default:not(:last-child):after {
   border-left: 10px solid rgb(255, 255, 255);
