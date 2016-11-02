@@ -2,8 +2,8 @@
 /**
 * ----------------------------------------------------------------
 *			XBase
-*			XBaseColumn.class.php	
-* 
+*			XBaseColumn.class.php
+*
 *  Developer        : Erwin Kooi
 *  released at      : Nov 2005
 *  last modified by : Erwin Kooi
@@ -12,7 +12,7 @@
 *  You're free to use this code as long as you don't alter it
 *  Copyright (c) 2005 Cyane Dynamic Web Solutions
 *  Info? Mail to info@cyane.nl
-* 
+*
 * --------------------------------------------------------------
 *
 * This class represents a DBF column
@@ -106,3 +106,4 @@ class XBaseColumn {
         return $this->colIndex;
     }
 }
+?>

@@ -2,8 +2,8 @@
 /**
 * ----------------------------------------------------------------
 *			XBase
-*			Record.class.php	
-* 
+*			Record.class.php
+*
 *  Developer        : Erwin Kooi
 *  released at      : Nov 2005
 *  last modified by : Erwin Kooi
@@ -12,7 +12,7 @@
 *  You're free to use this code as long as you don't alter it
 *  Copyright (c) 2005 Cyane Dynamic Web Solutions
 *  Info? Mail to info@cyane.nl
-* 
+*
 * --------------------------------------------------------------
 *
 * This class defines the data access functions to a DBF record
@@ -28,7 +28,7 @@ define ("DBFFIELD_TYPE_DATE","D");		// Date
 define ("DBFFIELD_TYPE_LOGICAL","L");	// Logical - ? Y y N n T t F f (? when not initialized).
 define ("DBFFIELD_TYPE_DATETIME","T");	// DateTime
 
-define ("DBFFIELD_TYPE_INDEX","I");    // Index 
+define ("DBFFIELD_TYPE_INDEX","I");    // Index
 define ("DBFFIELD_IGNORE_0","0");		// ignore this field
 
 
@@ -40,7 +40,7 @@ class XBaseRecord {
     var $deleted;
     var $inserted;
     var $recordIndex;
-    
+
     function XBaseRecord($table, $recordIndex, $rawData=false) {
         $this->table =& $table;
         $this->recordIndex=$recordIndex;
@@ -118,7 +118,7 @@ class XBaseRecord {
             case DBFFIELD_TYPE_LOGICAL : return $this->getBoolean($columnObj);
             case DBFFIELD_TYPE_MEMO : return $this->getMemo($columnObj);
             case DBFFIELD_TYPE_NUMERIC : return $this->getInt($columnObj);
-            case DBFFIELD_TYPE_INDEX : return $this->getIndex($columnObj); 
+            case DBFFIELD_TYPE_INDEX : return $this->getIndex($columnObj);
             case DBFFIELD_IGNORE_0 : return false;
         }
         trigger_error ("cannot handle datatype".$columnObj->getType(), E_USER_ERROR);
@@ -178,13 +178,13 @@ class XBaseRecord {
 		if ($columnObj->getType()!=DBFFIELD_TYPE_INDEX) trigger_error ($columnObj->getName()." is not an Index column", E_USER_ERROR);
 		$s = $this->choppedData[$columnObj->getColIndex()];
 		if (!$s) return false;
-		
+
 		$ret = ord($s[0]);
 		for ($i = 1; $i < $columnObj->length; $i++) {
 			$ret += $i * 256 * ord($s[$i]);
 		}
-		return $ret;   
-	} 
+		return $ret;
+	}
 
     /**
      * -------------------------------------------------------------------------
@@ -265,7 +265,7 @@ class XBaseRecord {
             case '0':
                 $this->forceSetString($columnObj,$value);
                 return;
-            
+
             case true:
                 $this->forceSetString($columnObj,"T");
                 return;
@@ -294,7 +294,7 @@ class XBaseRecord {
         }
         $value = str_replace(",",".",$value);
         //$this->forceSetString($columnObj,intval($value));
-        
+
         /**
         * suggestion from Sergiu Neamt: treat number values as decimals
         **/
@@ -310,3 +310,4 @@ class XBaseRecord {
 	     return ($this->deleted?"*":" ").implode("",$this->choppedData);
      }
 }
+?>

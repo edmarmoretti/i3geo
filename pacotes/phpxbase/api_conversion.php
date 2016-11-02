@@ -144,6 +144,4 @@ function xbase_addInstance(&$i) {
 	$xbase_instances[$result]=&$i;
 	return $result;
 }
-
-
 ?>

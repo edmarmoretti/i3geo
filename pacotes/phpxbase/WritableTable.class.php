@@ -2,8 +2,8 @@
 /**
 * ----------------------------------------------------------------
 *			XBase
-*			WritableTable.class.php	
-* 
+*			WritableTable.class.php
+*
 *  Developer        : Erwin Kooi
 *  released at      : Jan 2005
 *  last modified by : Erwin Kooi
@@ -12,7 +12,7 @@
 *  You're free to use this code as long as you don't alter it
 *  Copyright (c) 2005 Cyane Dynamic Web Solutions
 *  Info? Mail to info@cyane.nl
-* 
+*
 * --------------------------------------------------------------
 *
 * This class extends the main entry to a DBF table file, with writing abilities
@@ -21,7 +21,7 @@
 **/
 
 class XBaseWritableTable extends XBaseTable {
-	
+
 	/* static */
 	function cloneFrom($table) {
 		$result =& new XBaseWritableTable($table->name);
@@ -56,7 +56,7 @@ class XBaseWritableTable extends XBaseTable {
 			$columns[$i]=$column;
 			$i++;
 		}
-		
+
 		$result =& new XBaseWritableTable($filename);
 	    $result->version=131;
 	    $result->modifyDate=time();
@@ -83,7 +83,7 @@ class XBaseWritableTable extends XBaseTable {
     	}
     	return $this->fp!=false;
     }
-    
+
     function writeHeader() {
 	    $this->headerLength=($this->foxpro?296:33) + ($this->getColumnCount()*32);
 	    fseek($this->fp,0);
@@ -100,7 +100,7 @@ class XBaseWritableTable extends XBaseTable {
 	    $this->writeByte($this->mdxFlag);
 	    $this->writeByte($this->languageCode);
 	    $this->writeBytes(str_pad("", 2,chr(0)));
-	    
+
         foreach ($this->columns as $column) {
             $this->writeString(str_pad(substr($column->rawname,0,11), 11,chr(0)));
             $this->writeByte($column->type);
@@ -130,7 +130,7 @@ class XBaseWritableTable extends XBaseTable {
 		$data =& $this->record->serializeRawData();
 		fwrite($this->fp,$data);
 		if ($this->record->inserted) $this->writeHeader();
-		flush($this->fp);
+		//flush($this->fp);
 	}
 	function deleteRecord() {
 		$this->record->deleted=true;
@@ -163,7 +163,7 @@ class XBaseWritableTable extends XBaseTable {
      * private functions
      * -------------------------------------------------------------------------
      */
-     
+
     function writeBytes($buf) {
 	    return fwrite($this->fp,$buf);
     }
@@ -198,3 +198,4 @@ class XBaseWritableTable extends XBaseTable {
 	    return $this->writeShort($t["year"]) + $this->writeChar($t["mon"]) + $this->writeChar($t["mday"]);
     }
 }
+?>

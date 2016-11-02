@@ -2,8 +2,8 @@
 /**
 * ----------------------------------------------------------------
 *			XBase
-*			Table.class.php	
-* 
+*			Table.class.php
+*
 *  Developer        : Erwin Kooi
 *  released at      : Nov 2005
 *  last modified by : Erwin Kooi
@@ -12,7 +12,7 @@
 *  You're free to use this code as long as you don't alter it
 *  Copyright (c) 2005 Cyane Dynamic Web Solutions
 *  Info? Mail to info@cyane.nl
-* 
+*
 * --------------------------------------------------------------
 *
 * This class provides the main entry to a DBF table file.
@@ -59,9 +59,9 @@ class XBaseTable {
     function XBaseTable($name) {
         $this->name=$name;
     }
-    
+
     function open() {
-	    
+
 	    $fn = $this->name;
 	    $this->isStream=strpos($this->name,"://")!==false;
 	    if (!$this->isStream) {
@@ -74,9 +74,9 @@ class XBaseTable {
     	$this->fp = fopen($fn,"rb");
 		$this->readHeader();
 		return $this->fp!=false;
-		
+
 	}
-	
+
 	function readHeader() {
 
         $this->version = $this->readChar();
@@ -95,7 +95,7 @@ class XBaseTable {
         $this->readBytes(2); //reserved
 
         $fieldCount = ($this->headerLength - ($this->foxpro?296:33) ) / 32;
-        
+
         /* some checking */
         if (!$this->isStream && $this->headerLength>filesize($this->name)) trigger_error ($this->name." is not DBF", E_USER_ERROR);
         if (!$this->isStream && $this->headerLength+($this->recordCount*$this->recordByteLength)-500>filesize($this->name)) trigger_error ($this->name." is not DBF", E_USER_ERROR);
@@ -200,7 +200,7 @@ class XBaseTable {
     function getDeleteCount() {
         return $this->deleteCount;
     }
-    
+
     function toHTML($withHeader=true,$tableArgs="border='1'",$trArgs="",$tdArgs="",$thArgs="") {
 	    $result = "<table $tableArgs >\n";
 	    if ($withHeader) {
@@ -262,7 +262,7 @@ class XBaseTable {
 	    $result .= "</table>\n";
 	    return $result;
     }
-    
+
     /**
      * -------------------------------------------------------------------------
      * private functions
@@ -341,3 +341,4 @@ class XBaseTable {
 	    return $this->writeShort($t["year"]) + $this->writeChar($t["mon"]) + $this->writeChar($t["mday"]);
     }
 }
+?>
