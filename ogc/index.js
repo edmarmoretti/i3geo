@@ -264,7 +264,7 @@ function mostraLinksDownload(tema,tipo,disabled){
 				tradLinks["tema"] = tema;
 			}
 			tradLinks["mapfile"] = window.location.protocol + "//" + window.location.host + "/" + retorno.mapfileurl;
-			tradLinks["sldurl"] = tradLinks["url"] + "classesphp/mapa_controle.php?funcao=TEMA2SLD&tema=" + retorno.tema + "&map_file=" + retorno.mapfile;
+			tradLinks["sldurl"] = tradLinks["urli3geo"] + "/ferramentas/legenda/exec.php?funcao=TEMA2SLD&tema=" + retorno.tema + "&map_file=" + retorno.mapfile;
 
 			arqs = retorno.arquivos.split(",");
 			n = arqs.length;

@@ -52,7 +52,6 @@ include "../init/head.php";
 <script id="templateLinksDownload" type="x-tmpl-mustache">
 <h3>Download</h3>
 <p>{{{linkpagina}}}: <a href="{{{url}}}?temaDownload={{{tema}}}">{{{url}}}?temaDownload={{{tema}}}</a>
-<p>{{{map}}}: <a href="{{{mapfile}}}" target="_blank" >{{{mapfile}}}</a></p>
 <p>{{{sld}}}: <a href="{{{sldurl}}}" target="_blank" >{{{sldurl}}}</a>
 <p><a href="{{{urli3geo}}}/fontetema.php?tema={{{tema}}}" target="_blank" >Metadata</a></p>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=shape-zip&bbox=<?php echo $mapext;?>&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}{{{id_medida_variavel}}}" >{{{downwfs}}}</a>
@@ -269,7 +268,8 @@ include "../init/head.php";
 		//g_traducao_ogc vem de dicionario.js
 		tradLinks = i3GEO.idioma.objetoIdioma(g_traducao_ogc);
 		tradLinks["servico"] = servico;
-		tradLinks["url"] = window.location.href.split("?")[0];
+		tradLinks["url"] = window.location.href.split("#")[0];
+		tradLinks["url"] = tradLinks["url"].split("?")[0];
 		tradLinks["urli3geo"] = window.location.href.split("/ogc")[0];
 		//traducao do menu nav
 		html = Mustache.to_html(

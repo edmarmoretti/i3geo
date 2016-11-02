@@ -45,6 +45,12 @@ class Temas
 	*/
 	public $mapa;
 	/*
+	 Variavel: $tema
+
+	 String
+	 */
+	public $tema;
+	/*
 	Variavel: $arquivo
 
 	Arquivo map file
@@ -120,21 +126,24 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 		//error_reporting(0);
 		include(dirname(__FILE__)."/../ms_configura.php");
 		$this->postgis_mapa = $postgis_mapa;
+		if($map_file != ""){
+			$map_file = str_replace(".map","",$map_file).".map";
+			$this->qyfile = str_replace(".map",".qy",$map_file);
+			$this->arquivo = $map_file;
+		}
 
-		$map_file = str_replace(".map","",$map_file).".map";
-		$this->qyfile = str_replace(".map",".qy",$map_file);
-		$this->arquivo = $map_file;
 		if(file_exists($locaplic."/funcoes_gerais.php"))
 			include_once($locaplic."/funcoes_gerais.php");
 		else
 			include_once("funcoes_gerais.php");
 
+		$this->tema = $tema;
 		$this->v = versao();
 		$this->vi = $this->v["inteiro"];
 		$this->v = $this->v["principal"];
 
 		$this->locaplic = $locaplic;
-		if($map_file != "")
+		if($map_file != "" && file_exists($map_file))
 		{
 			$this->mapa = ms_newMapObj($map_file);
 			substituiConObj($this->mapa,$postgis_mapa);
@@ -1126,9 +1135,12 @@ function: sld
 
 Retorna o SLD correspondente a legenda do tema.
 */
-	function sld()
-	{
-		if(!$this->layer){return "erro";}
+	function sld(){
+		if(!$this->layer){
+			//pega o arquivo na pasta temas pois pode ser que esteja tentando gerar o sld diretamente desse arquivo ja que layer nao foi definido
+			$mapa = ms_newMapObj($this->locaplic."/temas/".$this->tema.".map");
+			$this->layer = $mapa->getlayerbyname($this->tema);
+		}
 		$this->layer->set("status",MS_DEFAULT);
 		return $this->layer->generateSLD();
 	}

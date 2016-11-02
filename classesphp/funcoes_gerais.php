@@ -1994,26 +1994,9 @@ function downloadTema2($map_file,$tema,$locaplic,$dir_tmp,$postgis_mapa)
 	//gera um mapfile para download
 	//
 	$nomemapfileurl = "";
-	/*
-	if(file_exists($temasdir."/".$tema.".map")){
-		$maptemp = ms_newMapObj($temasdir."/".$tema.".map");
-		$numlayers = $maptemp->numlayers;
-		for ($i=0;$i < $numlayers;++$i){
-			$gl = $maptemp->getlayer($i);
-			$gl->set("data","");
-			$gl->set("connection","");
-		}
-		$nomemapfile = $dir_tmp."/".nomerandomico(20)."download.map";
 
-		$ext = $maptemp->extent;
-		$ext->setextent($rectextent->minx,$rectextent->miny,$rectextent->maxx,$rectextent->maxy);
-		$maptemp->save($nomemapfile);
-		$nomemapfileurl = str_replace($radtmp."/","",$nomemapfile);
-	}
-	*/
 	return array("tema"=>$tema,"mapfile"=>"","mapfileurl"=>"","arquivos"=>implode(",",$resultado),"nreg"=>$nreg,"datas"=>$dataArquivos, "shape-zip"=>$nomeshp.".zip");
 }
-
 /*
 Function: verificaDBF
 
