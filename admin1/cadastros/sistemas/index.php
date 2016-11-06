@@ -30,8 +30,12 @@ include "../../head.php";
 				<div class="clearfix"></div>
 			</div>
 			<div class="well hidden">
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.sistemas.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
+				<div class="panel-heading">
+					<p class="lead" style="margin:0px;">&nbsp;
+						<a title="{{{adicionar}}}" onclick="i3GEOadmin.sistemas.adicionaDialogo();" href="javascript:void(0)"
+							class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button" ><i class="material-icons ">add</i>
+						</a>
+					</p>
 				</div>
 				<div class="clearfix"></div>
 				<div id="corpo">
@@ -85,7 +89,7 @@ include "../../head.php";
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="list-group-item" id="form-{{id_sistema}}">
 	<div class="row-content">
-		<h3 class="list-group-item-heading {{escondido}}">
+		<h4 class="list-group-item-heading {{escondido}}">
 			<div class="pull-right">
 			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.sistemas.editarFuncoes('{{id_sistema}}','{{{nome_sistema}}}')" href="javascript:void(0)">
 				<i class="material-icons md-18">folder_open</i>
@@ -101,7 +105,7 @@ include "../../head.php";
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
 			&nbsp;{{{nome_sistema}}}
-		</h3>
+		</h4>
 	</div>
 	<div class="list-group-separator"></div>
 </div>

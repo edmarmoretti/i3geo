@@ -45,8 +45,12 @@ $nome_sistema = filter_var($_GET["nome_sistema"], FILTER_SANITIZE_STRING);
 				</div>
 			</div>
 			<div class="well hidden">
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.funcao.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button" >{{{adicionar}}}</a>
+				<div class="panel-heading">
+					<p class="lead" style="margin:0px;">&nbsp;
+						<a title="{{{adicionar}}}" onclick="i3GEOadmin.funcao.adicionaDialogo();" href="javascript:void(0)"
+							class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button" ><i class="material-icons ">add</i>
+						</a>
+					</p>
 				</div>
 				<div class="clearfix"></div>
 				<div id="corpo">
@@ -109,7 +113,7 @@ $nome_sistema = filter_var($_GET["nome_sistema"], FILTER_SANITIZE_STRING);
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="list-group-item" id="form-{{id_funcao}}">
 	<div class="row-content">
-		<h3 class="list-group-item-heading {{escondido}}">
+		<h4 class="list-group-item-heading {{escondido}}">
 			<span class="pull-right">&nbsp;&nbsp;</span>
 			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_funcao}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">edit</i>
@@ -119,7 +123,7 @@ $nome_sistema = filter_var($_GET["nome_sistema"], FILTER_SANITIZE_STRING);
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
 			&nbsp;{{{nome_funcao}}}
-		</h3>
+		</h4>
 	</div>
 	<div class="list-group-separator"></div>
 </div>

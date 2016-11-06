@@ -63,9 +63,12 @@ include "../../head.php";
 				</div>
 			</div>
 			<div class="well hidden">
-				<div class="row pull-right">
-					<span id="totalMapfiles" class=badge >74</span>
-					<a onclick="i3GEOadmin.mapfile.adicionaDialogo();" href="javascript:void(0)" class="btn btn-primary" style="color:#008579;" role="button">{{{adicionar}}}</a>
+				<div class="panel-heading">
+					<p class="lead" style="margin:0px;">&nbsp;
+						<a title="{{{adicionar}}}" onclick="i3GEOadmin.mapfile.adicionaDialogo();" href="javascript:void(0)"
+							class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button" ><i class="material-icons ">add</i>
+						</a>
+					</p>
 				</div>
 				<div class="clearfix"></div>
 				<div class="panel panel-default" id="favoritos">
