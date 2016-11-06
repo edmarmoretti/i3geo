@@ -31,13 +31,17 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 				</button>
 				<h2><small>{{{txtListaDeGrupos}}}</small></h2>
 				<blockquote>{{{descListaDeGrupos}}}</blockquote>
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.grupos.adicionaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>
-				</div>
-				<div class="clearfix"></div>
+
 			</div>
 			<div class="well hidden">
+				<div class="panel-heading">
+					<p class="lead" style="margin:0px;">&nbsp;
+						<a title="{{{adicionar}}}" onclick="i3GEOadmin.grupos.adicionaDialogo();" href="javascript:void(0)"
+							class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button" ><i class="material-icons ">add</i>
+						</a>
+					</p>
+				</div>
+				<div class="clearfix"></div>
 				<div id="corpo"></div>
 			</div>
 		</div>
@@ -86,7 +90,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="list-group-item" id="form-{{id_grupo}}">
 	<div class="row-content">
-		<h3 class="list-group-item-heading {{escondido}}">
+		<h4 class="list-group-item-heading {{escondido}}">
 			<span class="pull-right">&nbsp;&nbsp;</span>
 			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_grupo}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">edit</i>
@@ -97,9 +101,9 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			</a>
 			<span class="nomeitem">
 				<i class="material-icons move" style="color: gray; display:none;position:absolute;left:-5px;">swap_vert</i>
-				{{{nome_grupo}}}
+				&nbsp;{{{nome_grupo}}}
 			</span>
-		</h3>
+		</h4>
 	</div>
 	<div class="list-group-separator"></div>
 </div>

@@ -125,7 +125,7 @@ Obt&eacute;m a lista de grupos
 										}
 								)
 						);
-						i3GEOadmin.subgrupos.ondeLista.html(html);
+						//i3GEOadmin.subgrupos.ondeLista.html(html);
 						i3GEOadmin.core.abreModalGeral(html);
 					}
 			)

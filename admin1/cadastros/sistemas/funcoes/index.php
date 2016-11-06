@@ -118,7 +118,7 @@ $nome_sistema = filter_var($_GET["nome_sistema"], FILTER_SANITIZE_STRING);
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_funcao}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
-			{{{nome_funcao}}}
+			&nbsp;{{{nome_funcao}}}
 		</h3>
 	</div>
 	<div class="list-group-separator"></div>

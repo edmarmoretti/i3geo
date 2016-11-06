@@ -10,7 +10,7 @@ MAP
       "CACHE"	"sim"
       "CLASSE"	"SIM"
       "olopacity"	""
-      "permitekmz"	"sim"
+      "permitekmz"	"nao"
       "gmopacity"	""
       "gmstatus"	""
       "ITENSDESC"	"Bioma Teste de acentuação"

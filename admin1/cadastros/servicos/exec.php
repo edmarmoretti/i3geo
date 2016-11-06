@@ -131,9 +131,9 @@ function adicionar($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 function alterar($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$nome_ws = utf8_encode($nome_ws);
-		$desc_ws = utf8_encode($desc_ws);
-		$autor_ws = utf8_encode($autor_ws);
+		$nome_ws = utf8_decode($nome_ws);
+		$desc_ws = utf8_decode($desc_ws);
+		$autor_ws = utf8_decode($autor_ws);
 	}
 	$dataCol = array(
 		"desc_ws" => $desc_ws,

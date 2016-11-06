@@ -16,8 +16,8 @@ include "../../head.php";
 </div>
 <div class="container">
 	<div class="row center-block">
-		<div class="col-md-12">
-			<div class="well hidden" id="titulo">
+		<div class="col-md-12" id="titulo">
+			<div class="well hidden" >
 				<button title="preview" data-toggle="modal" data-target="#previewArvore"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
 					<i class="material-icons">play_circle_outline</i>
@@ -32,13 +32,9 @@ include "../../head.php";
 					<i class="material-icons">search</i>
 				</button>
 				<h2>
-					<small>{{{txtTitulo}}}</small>
+					<small>{{{menus}}}</small>
 				</h2>
 				<blockquote>{{{txtDesc}}}</blockquote>
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.menus.adicionaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button" style="color: #008579;">{{{adicionar}}}</a>
-				</div>
 				<div class="clearfix"></div>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
@@ -51,6 +47,14 @@ include "../../head.php";
 				</div>
 			</div>
 			<div class="well hidden">
+				<div class="panel-heading">
+					<p class="lead" style="margin:0px;">{{{txtTitulo}}}
+						<a title="{{{adicionar}}}" onclick="i3GEOadmin.menus.adicionaDialogo();" href="javascript:void(0)"
+							class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button" ><i class="material-icons ">add</i>
+						</a>
+					</p>
+				</div>
+				<div class="clearfix"></div>
 				<div id="corpo"></div>
 			</div>
 		</div>
@@ -104,7 +108,7 @@ include "../../head.php";
 			<div class="form-group form-group-lg">
 				<label class="col-md-3 control-label" for="publicado_menu">{{{publicadoTxt}}}</label>
 				<div class="col-md-9">
-					<select title="{{{publicadoTxt}}}" name="publicado_menu" class="form-control"> {{{opcoesPublicado}}}
+					<select title="{{{publicadoTxt}}}" name="publicado_menu" class="form-control" required > {{{opcoesPublicado}}}
 					</select>
 				</div>
 			</div>
@@ -126,7 +130,7 @@ include "../../head.php";
 <script id="templateLista" type="x-tmpl-mustache">
 <div class="list-group-item" id="form-{{id_menu}}">
 	<div class="row-content">
-		<h3 class="list-group-item-heading {{escondido}}">
+		<h4 class="list-group-item-heading {{escondido}}">
 			<div class="pull-right">
 			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.menus.editarGrupos('{{id_menu}}','{{{nome_menu}}}')" href="javascript:void(0)">
 				<i class="material-icons md-18">folder_open</i>
@@ -141,8 +145,8 @@ include "../../head.php";
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_menu}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
-			{{{nome_menu}}}
-		</h3>
+			&nbsp;{{{nome_menu}}}
+		</h4>
 	</div>
 	<div class="list-group-separator"></div>
 </div>

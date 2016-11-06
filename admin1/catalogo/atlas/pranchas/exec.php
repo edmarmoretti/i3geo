@@ -145,8 +145,8 @@ function adicionar( $id_atlas, $titulo_prancha, $ordem_prancha, $desc_prancha, $
 function alterar($id_atlas, $id_prancha, $titulo_prancha, $ordem_prancha, $desc_prancha, $h_prancha, $icone_prancha, $link_prancha, $mapext_prancha, $w_prancha, $dbhw) {
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$desc_prancha = utf8_encode($desc_prancha);
-		$titulo_prancha = utf8_encode($titulo_prancha);
+		$desc_prancha = utf8_decode($desc_prancha);
+		$titulo_prancha = utf8_decode($titulo_prancha);
 	}
 	$dataCol = array(
 			"ordem_prancha"=>$ordem_prancha,

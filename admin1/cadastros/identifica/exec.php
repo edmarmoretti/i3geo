@@ -130,7 +130,7 @@ function adicionar($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
 function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$nome_i = utf8_encode($nome_i);
+		$nome_i = utf8_decode($nome_i);
 	}
 	$dataCol = array(
 		"publicado_i" => $publicado_i,

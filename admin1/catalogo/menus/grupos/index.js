@@ -122,6 +122,7 @@ i3GEOadmin.grupos = {
 								{
 									"id_raiz": "modal",
 									"escondido": "",
+									"ordem": 0,
 									"opcoesPerfil": i3GEOadmin.grupos.opcoesPerfil,
 									"excluir": i3GEOadmin.grupos.dicionario.cancelar,
 									"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
@@ -323,6 +324,7 @@ i3GEOadmin.grupos = {
 								{
 									"id_n1": "modal",
 									"escondido": "hidden",
+									"ordem": 0,
 									"excluir": i3GEOadmin.grupos.dicionario.cancelar,
 									"opcoesPerfil": i3GEOadmin.grupos.opcoesPerfil,
 									"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao

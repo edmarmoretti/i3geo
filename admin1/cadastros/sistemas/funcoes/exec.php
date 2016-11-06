@@ -138,7 +138,7 @@ function adicionar( $id_sistema,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$
 function alterar($id_funcao,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$perfil_funcao, $dbhw) {
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$nome_funcao = utf8_encode($nome_funcao);
+		$nome_funcao = utf8_decode($nome_funcao);
 	}
 	$dataCol = array(
 		"nome_funcao" => $nome_funcao,

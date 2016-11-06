@@ -140,7 +140,7 @@ function adicionar( $publicado_sistema,$nome_sistema,$perfil_sistema, $dbhw) {
 function alterar($id_sistema,$publicado_sistema,$nome_sistema,$perfil_sistema, $dbhw) {
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$nome_sistema = utf8_encode($nome_sistema);
+		$nome_sistema = utf8_decode($nome_sistema);
 	}
 	$dataCol = array(
 			"publicado_sistema" => $publicado_sistema,

@@ -64,7 +64,7 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 			<div class="form-group form-group-lg">
 				<label class="col-md-4 control-label" for="ordem_tema" >{{{ordem}}}</label>
 				<div class="col-md-8">
-					<input title="{{{ordem}}}" type="text" value="{{{ordem_tema}}}" class="form-control" name="ordem_tema" >
+					<input title="{{{ordem}}}" type="text" value="{{{ordem_tema}}}" class="form-control" name="ordem_tema" required >
 				</div>
 			</div>
 		</div>
@@ -97,7 +97,7 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_tema}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
-			{{{codigo_tema}}}
+			&nbsp;{{{codigo_tema}}}
 		</h3>
 	</div>
 	<div class="list-group-separator"></div>

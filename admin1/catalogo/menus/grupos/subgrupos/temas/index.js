@@ -125,10 +125,20 @@ i3GEOadmin.temas = {
 								{
 									"id_n3": "modal",
 									"escondido": "hidden",
+									"ordem": 0,
 									"opcoesPerfil": i3GEOadmin.temas.opcoesPerfil,
 									"excluir": i3GEOadmin.temas.dicionario.cancelar,
 									"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 									"onSalvar": "i3GEOadmin.temas.adicionaTema",//funcao
+									"opcoesPublicado": function(){
+										var hash = {};
+										hash["sim"] = i3GEOadmin.temas.dicionario.sim;
+										hash["nao"] = i3GEOadmin.temas.dicionario.nao;
+										return Mustache.to_html(
+												$("#templateOpcoesPublicado").html(),
+												hash
+										);
+									},
 									"opcoesTema": function(){
 										var html = '<option value="">---</option>' + Mustache.to_html(
 												"{{#data}}" + $("#templateOpcoesTema").html() + "{{/data}}",
@@ -162,6 +172,15 @@ i3GEOadmin.temas = {
 											"opcoesPerfil": i3GEOadmin.temas.opcoesPerfil,
 											"onExcluir": "i3GEOadmin.temas.excluirTemaDialogo",//funcao
 											"onSalvar": "i3GEOadmin.temas.salvarTemaDialogo",//funcao
+											"opcoesPublicado": function(){
+												var hash = {};
+												hash["sim"] = i3GEOadmin.temas.dicionario.sim;
+												hash["nao"] = i3GEOadmin.temas.dicionario.nao;
+												return Mustache.to_html(
+														$("#templateOpcoesPublicado").html(),
+														hash
+												);
+											},
 											"opcoesTema": function(){
 												var p = this.codigo_tema;
 												var id = "";

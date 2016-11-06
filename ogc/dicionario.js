@@ -1,5 +1,5 @@
 //veja em index.js o objeto que utiliza essa traducao
-g_traducao_ogc =
+ogc.dicionario =
 {
 		"acesso" : [{
 			pt : "Endere&ccedil;os de acesso:",

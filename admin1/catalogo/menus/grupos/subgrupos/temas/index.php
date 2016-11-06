@@ -37,16 +37,20 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">search</i>
 				</button>
-				<h4><small>{{{menu}}}: </small><?php echo "$nome_menu <small>{{{grupo}}}:</small> $nome_grupo <small>{{{txtTitulo}}}:</small> $nome_subgrupo"; ?></h4>
+				<h4><?php echo "$nome_menu / $nome_grupo / $nome_subgrupo"; ?></h4>
 				<blockquote>{{{txtDesc}}}</blockquote>
-				<div class="row pull-right">
-					<a onclick="i3GEOadmin.temas.adicionaTemaDialogo();" href="javascript:void(0)"
-						class="btn btn-primary" role="button" style="color:#008579;">{{{adicionar}}}</a>
-				</div>
 				<div class="clearfix"></div>
 			</div>
 			<div class="well hidden">
-				<div id="corpo" class="panel-body panel-collapse in"></div>
+				<div class="panel-heading">
+					<p class="lead" style="margin:0px;">{{txtTitulo}}
+						<a title="{{{adicionar}}}" onclick="i3GEOadmin.temas.adicionaTemaDialogo();" href="javascript:void(0)"
+							class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button" ><i class="material-icons ">add</i>
+						</a>
+					</p>
+				</div>
+				<div class="clearfix"></div>
+				<div id="corpo" class="panel-body"></div>
 			</div>
 		</div>
 	</div>
@@ -57,7 +61,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 <script id="templateTemas" type="x-tmpl-mustache">
 <div class="list-group-item" data-id="{{id_n3}}" id="form-{{id_n3}}">
 	<div class="row-content">
-		<h3 class="list-group-item-heading {{escondido}}">
+		<h4 class="list-group-item-heading {{escondido}}">
 			<span class="pull-right">&nbsp;&nbsp;</span>
 			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_n3}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">edit</i>
@@ -70,7 +74,7 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 				<i class="material-icons move" style="color: gray; display:none;position:absolute;left:-5px;">swap_vert</i>
 				{{{nome_tema}}}
 			</span>
-		</h3>
+		</h4>
 	</div>
 	<div class="list-group-separator"></div>
 </div>
@@ -90,7 +94,15 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 			<div class="form-group form-group-lg">
 				<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
 				<div class="col-md-8">
-					<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem">
+					<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem" required >
+				</div>
+			</div>
+			<div class="form-group form-group-lg">
+				<label class="col-md-4 control-label" for="publicado">{{{publicadoTxt}}}</label>
+				<div class="col-md-8">
+					<select title="{{{publicadoTxt}}}" name="publicado" class="form-control" required >
+						{{{opcoesPublicado}}}
+					</select>
 				</div>
 			</div>
 			<div class="form-group form-group-lg">

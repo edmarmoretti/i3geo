@@ -57,7 +57,7 @@ include "../../head.php";
 			<div class="form-group form-group-lg">
 				<label class="col-md-4 control-label" for="publicado_sistema">{{{publicado}}}</label>
 				<div class="col-md-8">
-					<select title="{{{publicado}}}" name="publicado_sistema" class="form-control">
+					<select title="{{{publicado}}}" name="publicado_sistema" class="form-control" required >
 						{{{opcoesPublicado}}}
 					</select>
 				</div>
@@ -100,7 +100,7 @@ include "../../head.php";
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_sistema}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
-			{{{nome_sistema}}}
+			&nbsp;{{{nome_sistema}}}
 		</h3>
 	</div>
 	<div class="list-group-separator"></div>

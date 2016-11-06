@@ -140,10 +140,10 @@ function adicionar($nome_grupo, $desc_grupo, $en, $es, $dbhw) {
 function alterar($id_grupo, $nome_grupo, $desc_grupo, $en, $es, $dbhw) {
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$nome_grupo = utf8_encode($nome_grupo);
-		$desc_grupo = utf8_encode($desc_grupo);
-		$en = utf8_encode($en);
-		$es = utf8_encode($es);
+		$nome_grupo = utf8_decode($nome_grupo);
+		$desc_grupo = utf8_decode($desc_grupo);
+		$en = utf8_decode($en);
+		$es = utf8_decode($es);
 	}
 	$dataCol = array(
 		"en" => $en,

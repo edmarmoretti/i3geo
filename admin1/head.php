@@ -385,12 +385,9 @@ h2 small {
 				<ul class="nav navbar-nav" id="menuPrincipalTpl">
 				</ul>
 				<ul class="nav navbar-nav">
-					<li class="dropdown"><a
-						onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>/','template_mst_bt.html');"
-						href="#" class="dropdown-toggle" data-toggle="dropdown">Login <span class="caret"></span></a>
-						<ul id="i3GEOF_loginusuario" class="dropdown-menu"
-							style="min-width: 280px; padding: 10px; background-color: white;">
-						</ul></li>
+					<li class="dropdown"><a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>','template_mst_bt.html');"
+						href="#topo" data-toggle="modal" data-target="#modalLogin">Login</a>
+					</li>
 				</ul>
 			</div>
 		</div>
@@ -439,6 +436,20 @@ h2 small {
 					</button>
 				</div>
 				<div class="modal-body" style="overflow: auto; height: 400px;"></div>
+			</div>
+		</div>
+	</div>
+	<div id="modalLogin" class="modal fade" tabindex="-1">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body" id="i3GEOF_loginusuario">
+
+				</div>
 			</div>
 		</div>
 	</div>

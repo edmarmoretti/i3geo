@@ -85,7 +85,7 @@ include "../../head.php";
 			<div class="form-group form-group-lg">
 				<label class="col-md-4 control-label" for="publicado_atlas">{{{publicado}}}</label>
 				<div class="col-md-8">
-					<select title="{{{publicado}}}" name="publicado_atlas" class="form-control">
+					<select title="{{{publicado}}}" name="publicado_atlas" class="form-control" required >
 						{{{opcoesPublicado}}}
 					</select>
 				</div>
@@ -95,7 +95,7 @@ include "../../head.php";
 			<div class="form-group form-group-lg">
 				<label class="col-md-4 control-label" for="ordem_atlas" >{{{ordem}}}</label>
 				<div class="col-md-8">
-					<input title="{{{ordem}}}" type="text" value="{{{ordem_atlas}}}" class="form-control" name="ordem_atlas" >
+					<input title="{{{ordem}}}" type="text" value="{{{ordem_atlas}}}" class="form-control" name="ordem_atlas" required >
 				</div>
 			</div>
 		</div>
@@ -182,7 +182,7 @@ include "../../head.php";
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_atlas}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
-			{{{titulo_atlas}}}
+			&nbsp;{{{titulo_atlas}}}
 		</h3>
 	</div>
 	<div class="list-group-separator"></div>

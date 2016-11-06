@@ -133,7 +133,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 	$original = $original[0]["perfil"];
 
 	if ($convUTF != true){
-		$perfil = utf8_encode($perfil);
+		$perfil = utf8_decode($perfil);
 	}
 	$dataCol = array(
 		"perfil" => $perfil

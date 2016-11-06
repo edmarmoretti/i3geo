@@ -171,7 +171,7 @@ function adicionar($codigo,$descricao,$papeis,$dbhw){
 function alterar($id_operacao,$codigo,$descricao,$papeis,$dbhw){
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$descricao = utf8_encode($descricao);
+		$descricao = utf8_decode($descricao);
 	}
 	$dataCol = array(
 		"codigo" => $codigo,

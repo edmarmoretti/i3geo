@@ -129,7 +129,7 @@ function adicionar($nome, $dbhw) {
 function alterar($id_tag, $nome,$dbhw) {
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$nome = utf8_encode($nome);
+		$nome = utf8_decode($nome);
 	}
 	$dataCol = array(
 		"nome" => $nome

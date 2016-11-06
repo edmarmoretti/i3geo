@@ -148,11 +148,11 @@ function adicionar($publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_men
 function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en,$dbhw) {
 	global $convUTF, $esquemaadmin;
 	if ($convUTF != true){
-		$nome_menu = utf8_encode($nome_menu);
-		$desc_menu = utf8_encode($desc_menu);
-		$en = utf8_encode($en);
-		$es = utf8_encode($es);
-		$perfil_menu = utf8_encode($perfil_menu);
+		$nome_menu = utf8_decode($nome_menu);
+		$desc_menu = utf8_decode($desc_menu);
+		$en = utf8_decode($en);
+		$es = utf8_decode($es);
+		$perfil_menu = utf8_decode($perfil_menu);
 	}
 	$perfil_menu = str_replace(","," ",trim($perfil_menu));
 	//verifica a consistencia da lista de perfis

@@ -163,10 +163,10 @@ function adicionar($publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $t
 // $papeis deve ser um array
 function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $mapfile, $dbhw) {
 	global $convUTF, $esquemaadmin;
-	if ($convUTF) {
-		$nome_mapa = utf8_encode ( $nome_mapa );
-		$desc_mapa = utf8_encode ( $desc_mapa );
-		$perfil_menu = utf8_encode ( $perfil_mapa );
+	if ($convUTF != true) {
+		$nome_mapa = utf8_decode ( $nome_mapa );
+		$desc_mapa = utf8_decode ( $desc_mapa );
+		$perfil_menu = utf8_decode ( $perfil_mapa );
 	}
 	$perfil_mapa = str_replace ( ",", " ", trim ( $perfil_mapa ) );
 	// verifica a consistencia da lista de perfis

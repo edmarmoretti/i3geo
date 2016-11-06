@@ -34,12 +34,14 @@ dbacoes_saude.tb_ubs_det.func_total = 'S' and dbacoes_saude.tb_ubs_det.ano_ubs_d
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "CLASSE"	"SIM"
-      "permitekmz"	"nao"
+      "permitekmz"	"NAO"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "permitedownload"	"nao"
+      "permitedownload"	"NAO"
       "metaestat"	""
-      "permiteogc"	"nao"
-      "permitekml"	"nao"
+      "arquivokmz"	""
+      "arquivodownload"	""
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
       "TEMA"	"Cluster"
       "IDENTIFICA"	"SIM"
     END # METADATA

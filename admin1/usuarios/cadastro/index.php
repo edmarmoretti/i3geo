@@ -130,7 +130,7 @@ include "../../head.php";
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_usuario}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
-			{{{nome_usuario}}}
+			&nbsp;{{{nome_usuario}}}
 		</h3>
 	</div>
 	<div class="list-group-separator"></div>

@@ -325,6 +325,7 @@ i3GEOadmin.subgrupos = {
 								{
 									"id_n2": "modal",
 									"escondido": "hidden",
+									"ordem": 0,
 									"excluir": i3GEOadmin.subgrupos.dicionario.cancelar,
 									"opcoesPerfil": i3GEOadmin.subgrupos.opcoesPerfil,
 									"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
