@@ -40,7 +40,7 @@ JOIN {$esquemaadmin}i3geoadmin_subgrupos AS subgrupo ON n2.id_subgrupo = subgrup
 JOIN (
 	SELECT r.id_n2
 	FROM  {$esquemaadmin}i3geoadmin_n3 AS r, {$esquemaadmin}i3geoadmin_temas AS t
-	WHERE r.id_tema = t.id_tema AND t.ogc_tema != 'NAO' AND r.publicado != 'NAO' AND (n3_perfil = '' OR n3_perfil isnull )
+	WHERE r.id_tema = t.id_tema AND (t.ogc_tema != 'NAO' OR t.download_tema != 'NAO') AND r.publicado != 'NAO' AND (n3_perfil = '' OR n3_perfil isnull )
 	) AS n3 ON  (n3.id_n2 = n2.id_n2 OR n2.id_n2 = 0 )
 
 WHERE n2.publicado != 'NAO' AND (n2.n2_perfil = '' OR n2.n2_perfil isnull )

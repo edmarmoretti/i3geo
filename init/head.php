@@ -83,14 +83,14 @@ hr {
 .navbar-collapse { max-height: 100% !important; }
 
 .btn.btn-fab.btn-fab-mini {
-    font-size: 12px;
-    height: 24px;
-    min-width: 24px;
-    padding-bottom: 5px;
-    padding-left: 5px;
-    padding-right: 5px;
-    padding-top: 5px;
-    width: 24px;
+	font-size: 12px;
+	height: 28px;
+	min-width: 28px;
+	padding-bottom: 6px;
+	padding-left: 6px;
+	padding-right: 6px;
+	padding-top: 6px;
+	width: 28px;
 }
 
 .btn.btn-fab.btn-fab-max {

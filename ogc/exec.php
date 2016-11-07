@@ -78,6 +78,30 @@ ORDER BY lower(n0.nome_menu)
 		}
 		retornaJSON ( array("dados"=>$dados) );
 		break;
+
+	case "LISTATODAS":
+		$sqlCamadas = "
+		SELECT * FROM (SELECT n3.id_tema AS id_tema,t.codigo_tema AS codigo_tema,t.nome_tema AS nome_tema,t.link_tema AS link_tema,
+		lower(t.ogc_tema) AS ogc_tema,lower(t.download_tema) AS download_tema
+		FROM {$esquemaadmin}i3geoadmin_n3 AS n3, {$esquemaadmin}i3geoadmin_temas AS t
+		WHERE n3.id_tema = t.id_tema AND t.ogc_tema != 'NAO' AND n3.publicado != 'NAO' AND (n3_perfil = '' OR n3_perfil isnull )
+		UNION
+		SELECT r.id_tema AS id_tema,t.codigo_tema AS codigo_tema,t.nome_tema AS nome_tema,t.link_tema AS link_tema,
+		lower(t.ogc_tema) AS ogc_tema,lower(t.download_tema) AS download_tema
+		FROM {$esquemaadmin}i3geoadmin_raiz AS r, {$esquemaadmin}i3geoadmin_temas AS t
+		WHERE r.id_tema = t.id_tema AND (t.ogc_tema != 'NAO' OR t.download_tema != 'NAO')) AS u
+		GROUP BY id_tema,codigo_tema,nome_tema,link_tema,ogc_tema,download_tema
+		ORDER BY lower(u.nome_tema)
+		";
+		$camadas = pegaDados ( $sqlCamadas, "", false );
+		if ($camadas === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+
+		retornaJSON ( array("dados"=>"","camadas"=>$camadas) );
+	break;
 }
+
 cpjson ( $retorno );
 ?>

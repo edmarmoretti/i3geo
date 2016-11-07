@@ -64,5 +64,103 @@ Lista de menus
 		},
 		proximoNivel: function(id,nome){
 			window.location.href = "menu/index.php?id_menu=" + id + "&nome_menu=" + nome;
+		},
+		mostraLinksServico: function(codigo_tema){
+			$(".modal-body").html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>');
+			var html;
+			tradLinks["tema"] = codigo_tema;
+			html = Mustache.to_html(
+					$("#templateLinksOgc").html(),
+					tradLinks
+			);
+			$(".modal-body").html(html);
+		},
+		mostraLinksDownload: function(codigo_tema){
+			$(".modal-body").html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>');
+			tradLinks["tema"] = codigo_tema;
+			$.post(
+					"../classesphp/mapa_controle.php",
+					"map_file=&funcao=download3&tema="+codigo_tema
+			)
+			.done(
+					function(data, status){
+						var retorno = jQuery.parseJSON(data).data;
+						var html,arqs,i,n,ins = "";
+						tradLinks["mapfile"] = window.location.protocol + "//" + window.location.host + "/" + retorno.mapfileurl;
+						tradLinks["sldurl"] = tradLinks["urli3geo"] + "/ferramentas/legenda/exec.php?funcao=TEMA2SLD&tema=" + retorno.tema + "&map_file=" + retorno.mapfile;
+						arqs = retorno.arquivos.split(",");
+						n = arqs.length;
+						for (i=0; i<n; i++){
+							ins += "<p><a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[i]+"'>"+arqs[i]+"</a></p>";
+						}
+						tradLinks["shp"] = ins;
+						html = Mustache.to_html(
+								$("#templateLinksDownload").html(),
+								tradLinks
+						);
+						tradLinks["shp"] = "";
+						tradLinks["mapfile"] = "";
+						tradLinks["sldurl"] = "";
+						$(".modal-body").html(html);
+					}
+			)
+			.fail(function(data){
+				ogc.grupo.ondeLista.html('<div class="alert alert-danger alert-dismissible" role="alert">' + data.status + " " +data.statusText + '</div>');
+			});
+		},
+
+		listaCompleta: function (onde){
+			$.post(
+					"exec.php",
+					"funcao=listatodas"
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+						//
+						//monta a lista de camadas
+						//
+						var htmlcamadas = Mustache.to_html(
+								"{{#data}}" + $("#templateCamadas").html() + "{{/data}}",
+								$.extend(
+										{},
+										ogc.menus.dicionario,
+										{
+											"data": json["camadas"],
+											"dominio": "ogc.menus",
+											"disabledlink": function(){
+												if(this.link_tema == ""){
+													return "hidden";
+												}
+												else {
+													return "";
+												}
+											},
+											"disableddown": function(){
+												if(this.download_tema != "nao"){
+													return "";
+												}
+												else {
+													return "hidden";
+												}
+											},
+											"disabledogc": function(){
+												if(this.ogc_tema != "nao"){
+													return "";
+												}
+												else {
+													return "hidden";
+												}
+											}
+										}
+								)
+						);
+						ogc.menus.ondeLista.html(htmlcamadas);
+						$.material.init();
+					}
+			)
+			.fail(function(data){
+				ogc.menus.ondeLista.html('<div class="alert alert-danger alert-dismissible" role="alert">' + data.status + " " +data.statusText + '</div>');
+			});
 		}
 };
