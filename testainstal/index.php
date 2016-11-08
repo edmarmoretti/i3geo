@@ -229,8 +229,6 @@ HTML;
 			echo "Criando a pasta $dir_tmp";
 			if(!file_exists($dir_tmp)){
 				@mkdir ($dir_tmp,0744);
-			}
-			else{
 				chmod($dir_tmp,0744);
 			}
 			if(!file_exists($dir_tmp)){
@@ -248,8 +246,6 @@ HTML;
 			echo "Criando o link simb&oacute;lico $d\n";
 			if(!file_exists($d)){
 				@symlink($dir_tmp,$d);
-			}
-			else{
 				chmod($d,0744);
 			}
 			if(!file_exists($d)){

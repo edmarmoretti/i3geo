@@ -15,6 +15,9 @@
  */
 define ( ONDEI3GEO, ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
+if(empty($dir_tmp)){
+	exit;
+}
 if (! empty ( $_GET ["customDir"] )) {
 	$customDir = strip_tags ( $_GET ["customDir"] );
 } else if (empty ( $customDir )) {
@@ -25,14 +28,25 @@ if (! file_exists ( $dir_tmp )) {
 	@mkdir ( $dir_tmp, 0744 );
 }
 if (file_exists ( $dir_tmp )) {
-	@mkdir ( $dir_tmp . "/comum", 0744 );
-	chmod ( $dir_tmp . "/comum", 0744 );
-	@mkdir ( $dir_tmp . "/saiku-datasources", 0744 );
-	chmod ( $dir_tmp . "/saiku-datasources", 0744 );
-	@mkdir ( $dir_tmp . "/cache", 0744 );
-	chmod ( $dir_tmp . "/cache", 0744 );
-	@mkdir ( $dir_tmp . "/cache/googlemaps", 0744 );
-	chmod ( $dir_tmp . "/cache/googlemaps", 0744 );
+	if(!file_exists($dir_tmp . "/comum")){
+		@mkdir ( $dir_tmp . "/comum", 0744 );
+		chmod ( $dir_tmp . "/comum", 0744 );
+	}
+	if(!file_exists($dir_tmp . "/saiku-datasources")){
+		@mkdir ( $dir_tmp . "/saiku-datasources", 0744 );
+		chmod ( $dir_tmp . "/saiku-datasources", 0744 );
+	}
+	if(!file_exists($dir_tmp . "/cache")){
+		@mkdir ( $dir_tmp . "/cache", 0744 );
+		chmod ( $dir_tmp . "/cache", 0744 );
+	}
+	if(!file_exists($dir_tmp . "/cache/googlemaps")){
+		@mkdir ( $dir_tmp . "/cache/googlemaps", 0744 );
+		chmod ( $dir_tmp . "/cache/googlemaps", 0744 );
+	}
+	foreach(glob($dir_tmp . '/{,.}*.php', GLOB_BRACE) as $f) {
+		unlink ($f);
+	}
 }
 error_reporting ( 0 );
 include "head.php";

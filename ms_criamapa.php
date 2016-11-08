@@ -1398,13 +1398,17 @@ Retorno:
 
 {boleano}
 */
-function criaDirMapa($dir_tmp,$cachedir="")
-{
+function criaDirMapa($dir_tmp,$cachedir=""){
+	if(empty($dir_tmp)){
+		return false;
+	}
 	if(!file_exists($dir_tmp)){
 		@mkdir ($dir_tmp,0744);
 	}
-	if(file_exists($dir_tmp))
-	{
+	if(file_exists($dir_tmp)){
+		foreach(glob($dir_tmp . '/{,.}*.php', GLOB_BRACE) as $f) {
+			unlink ($f);
+		}
 		$tmpdirname = nomeRandomico();
 		$crdir = @mkdir ($dir_tmp."/".$tmpdirname,0744);
 		chmod($dir_tmp."/".$tmpdirname,0744);
@@ -1412,29 +1416,40 @@ function criaDirMapa($dir_tmp,$cachedir="")
 		chmod($dir_tmp."/img".$tmpdirname,0744);
 		$mapfile = $dir_tmp."/".$tmpdirname."/".$tmpdirname.".map";
 		$tmpimgname = "img".$tmpdirname;
-		@mkdir($dir_tmp."/comum",0744);
-		//utilizado para armazenar os arquivos de fonte de dados do SAIKU
-		@mkdir($dir_tmp."/saiku-datasources",0744);
-		chmod($dir_tmp."/saiku-datasources",0744);
+		if(!file_exists($dir_tmp."/comum")){
+			@mkdir($dir_tmp."/comum",0744);
+		}
+		if(!file_exists($dir_tmp."/saiku-datasources")){
+			//utilizado para armazenar os arquivos de fonte de dados do SAIKU
+			@mkdir($dir_tmp."/saiku-datasources",0744);
+			chmod($dir_tmp."/saiku-datasources",0744);
+		}
 		//
 		if($cachedir == ""){
-			@mkdir($dir_tmp."/cache",0744);
-			chmod($dir_tmp."/cache",0744);
-			@mkdir($dir_tmp."/cache/googlemaps",0744);
-			chmod($dir_tmp."/cache/googlemaps",0744);
+			if(!file_exists($dir_tmp."/cache")){
+				@mkdir($dir_tmp."/cache",0744);
+				chmod($dir_tmp."/cache",0744);
+				@mkdir($dir_tmp."/cache/googlemaps",0744);
+				chmod($dir_tmp."/cache/googlemaps",0744);
+			}
 		}
 		else{
-			@mkdir($cachedir,0744);
-			chmod($cachedir,0744);
-			@mkdir($cachedir."/googlemaps",0744);
-			chmod($cachedir."/googlemaps",0744);
+			if(!file_exists($cachedir)){
+				@mkdir($cachedir,0744);
+				chmod($cachedir,0744);
+				@mkdir($cachedir."/googlemaps",0744);
+				chmod($cachedir."/googlemaps",0744);
+			}
 		}
-		if(file_exists($dir_tmp."/".$tmpdirname))
-		return array($mapfile,$tmpdirname,$tmpimgname);
-		else
-		{return false;}
+		if(file_exists($dir_tmp."/".$tmpdirname)){
+			return array($mapfile,$tmpdirname,$tmpimgname);
+		}
+		else{
+			return false;
+		}
 	}
-	else
-	{return false;}
+	else{
+		return false;
+	}
 }
 ?>
