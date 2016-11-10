@@ -1,13 +1,3 @@
-function mostraBotoesBT(men){
-	var html = "";
-	//menu
-	i3GEO.configura = {"locaplic" : ".."};
-	html = Mustache.to_html(
-			"{{#d}}" + $("#botoesTpl").html() + "{{/d}}",
-			{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}
-	);
-	$("#botoesTpl").html(html);
-}
 function mostraBotoesBT(){
 	var r, p;
 
@@ -19,21 +9,15 @@ function mostraBotoesBT(){
 			d.mapas[i] = verificaMapa(d.mapas[i]);
 		}
 		html = Mustache.to_html(
-				"{{#mapas}}" + $("#botoesTpl").html() + "{{/mapas}}",
+				"{{#mapas}}" + $("#templateLista").html() + "{{/mapas}}",
 				d
 		);
 
-		$("#botoesTpl").html(html);
+		$("#corpo").html(html);
 		d.mapas.push({
 			"ID_MAPA": "topo",
 			"NOME": "Topo"
 		});
-		//indice
-		html = Mustache.to_html(
-				"{{#mapas}}" + $("#indiceTpl").html() + "{{/mapas}}",
-				d
-		);
-		$("#indice").html(html);
 		$('[data-toggle="quadroQrcode"]').popover({
 			html: true,
 			placement: "bottom",
@@ -106,6 +90,10 @@ function verificaMapa(mapa){
 	);
 	mapa.subtitulo = html;
 	return mapa;
+}
+function mostraLinks(id){
+	$(".modal-body").html($("#" + id).html());
+	$("#modal").modal('show');
 }
 function alerta(texto,d){
 	if(!d){

@@ -46,17 +46,6 @@ include "../init/head.php";
 	width: 100%;
 }
 
-#indice .bs-docs-sidebar .nav>.active:focus>a, .bs-docs-sidebar .nav>.active:hover>a,
-	.bs-docs-sidebar .nav>.active>a {
-	background-color: transparent;
-	border-left-color: green;
-	border-left-style: solid;
-	border-left-width: 2px;
-	color: green;
-	font-weight: 700;
-	padding-left: 18px;
-}
-
 .panel-heading [data-toggle="collapse"]:after {
 	font-family: 'FontAwesome';
 	content: "\f054";
@@ -103,75 +92,29 @@ include "../init/head.php";
 }
 </style>
 <script id="templateLinks" type="x-tmpl-mustache">
-<div class="row">
-	<div class="col-xs-12 col-sm-3 hidden-xs row-action-primary">
-		<div class="btn-group-sm pull-right" style="height: 60px;">
-				<a class="hidden-sm btn btn-primary btn-fab" href="{{{link}}}">
-				<i class="material-icons">launch</i>
-			</a>
-			<button onclick="i3GEO.util.copyToClipboard('{{{link}}}');alerta('{{copiado}}');" class="btn btn-primary btn-fab" >
-				<i class="material-icons">content_copy</i>
-			</button>
-			<button role="button" data-toggle="quadroQrcode" data-url="{{{link}}}" class="btn btn-primary btn-fab btn-fab-max" >
-				<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-			</button>
-		</div>
-
-	</div>
-	<div class="col-sm-9 row-content" >
-		<h4 class="list-group-item-heading">
-			<a href="{{{link}}}" target="_blank">{{{nome}}}</a>
-		</h4>
-		<p class="list-group-item-text hidden-xs">
-			<a href="{{{link}}}" target="_blank">{{{link}}}</a>
-		</p>
-		<div class="list-group-separator"></div>
-	</div>
-</div>
-
-</script>
-<script id="templateLinksX" type="x-tmpl-mustache">
 <div class="list-group">
-	<div class="hidden-xs row-action-primary">
-		<div class="bs-component btn-group-sm pull-left">
-			<a class="btn btn-primary btn-fab" href="{{{link}}}">
-				<i class="material-icons">launch</i>
-			</a>
-			<button onclick="i3GEO.util.copyToClipboard('{{{link}}}');alerta('{{copiado}}');" class="btn btn-primary btn-fab" >
-				<i class="material-icons">content_copy</i>
-			</button>
-			<button role="button" data-toggle="quadroQrcode" data-url="{{{link}}}" class="btn btn-primary btn-fab btn-fab-max" >
-				<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-			</button>
-		</div>
-	</div>
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
-			<a href="{{{link}}}" target="_blank">{{{nome}}}</a>
+			{{{nome}}}
 		</h4>
 		<p class="list-group-item-text hidden-xs hidden-sm">
 			<a href="{{{link}}}" target="_blank">{{{link}}}</a>
 		</p>
 	</div>
+	<div class="list-group-separator"></div>
 </div>
-<div class="list-group-separator"></div>
 </script>
-<script id="indiceTpl" type="x-tmpl-mustache">
-<li><a href="#affix-{{ID_MAPA}}">{{{NOME}}}</a></li>
-</script>
-<body style="padding-top: 55px; position: relative;" id="affix-topo" data-spy="scroll"
-	data-target="#indiceSpy" data-offset="80">
+<body style="padding-top: 55px; position: relative;" >
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
-				</button>
 				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
 			</div>
+			<ul class="nav navbar-nav">
+				<li><a title="RSS" href="../admin/rssmapas.php"><i class="material-icons ">rss_feed</i></a></li>
+				<li><a title="JSON" href="../admin/rssmapas.php?output=json"><i class="material-icons ">code</i></a></li>
+			</ul>
 		</div>
 	</nav>
 	<!--para as mensagens de alerta-->
@@ -181,67 +124,55 @@ include "../init/head.php";
 			<ol class="breadcrumb">
 				<li><a href="../init/index.php?home=">i3Geo</a></li>
 				<li class="active">Mapas de usu&aacute;rios</li>
-				<li><a title="RSS" href="../admin/rssmapas.php"><i class="material-icons ">rss_feed</i></a>&nbsp;
-					<a title="JSON" href="../admin/rssmapas.php?output=json"><i class="material-icons ">code</i></a>
-				</li>
 			</ol>
 		</div>
 	</div>
-	<div class="container">
-		<!-- Template para criacao dos quadros ver index.js -->
-		<div class="escondido hidden">
-			<div class="row">
-				<div class="col-xs-12 col-sm-9 center-block escondido hidden" id="botoesTpl">
-					<div class="row" id="affix-{{ID_MAPA}}" style="padding-top: 90px; margin-top: -90px;">
-						<div class="col-md-12 center-block">
-							<div id="titulo{{ID_MAPA}}" class="panel-group" role="tablist" aria-multiselectable="true">
-								<div class="panel panel-default">
-									<div class="panel-heading" role="tab" style="background-color: #80cbc4;">
-										<div class="thumbnail visible-xs">
-											<a href="{{{LINK}}}"><img class="img-rounded" src="{{{IMAGEM}}}" /></a>
-										</div>
-										<div class="thumbnail hidden-xs">
-											<a href="{{{LINK}}}"><img class="img-rounded" src="{{{IMAGEM}}}" /></a>
-										</div>
-										<h3 class="panel-title">
-											&nbsp;<a data-parent="#titulo{{ID_MAPA}}" class="collapsed in pull-right" role="button"
-												data-toggle="collapse" href="#corpo{{ID_MAPA}}" aria-expanded="false"
-												aria-controls="#corpo{{ID_MAPA}}">{{{NOME}}}&nbsp;</a>
-										</h3>
-										<div class="bs-component btn-group-sm pull-left hidden-xs">
-											&nbsp;<a target="_blank" class="btn btn-primary btn-fab" href="{{{LINK}}}"> <i
-												class="material-icons">launch</i>
-											</a>
-											<button role="button" data-toggle="quadroQrcode" data-url="{{{LINK}}}"
-												class="btn btn-primary btn-fab btn-fab-max">
-												<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-											</button>
-										</div>
-									</div>
-									<div class="clearfix"></div>
-									<div class="panel-body">
-										<div id="corpo{{ID_MAPA}}" class="panel-collapse collapse list-group" role="tabpanel"
-											aria-multiselectable="true">
-											<div class="list-group">{{{subtitulo}}}</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="col-sm-3 hidden-xs">
-					<nav class="bs-docs-sidebar affix" style="" id="indiceSpy">
-						<ul class="nav nav-pills nav-stacked" role="tablist" id="indice">
 
-						</ul>
-					</nav>
+	<div class="container">
+		<div class="row center-block">
+			<div class="col-md-12">
+				<div class="well" id="corpo">
+					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script>
-	</script>
+	<div id="modal" class="modal fade" tabindex="-1" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body"></div>
+			</div>
+		</div>
+	</div>
+<script id="templateLista" type="x-tmpl-mustache">
+<div class="list-group-item" >
+	<div class="row-content" >
+		<h4 class="list-group-item-heading">
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a onclick="mostraLinks('detalhe_{{ID_MAPA}}')" href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">more_horiz</i>
+			</a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a title="default" href="{{{LINK}}}" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<i class="material-icons md-18">launch</i>
+			</a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
+			<a title="link" role="button" href="javascript:void(0)" data-toggle="quadroQrcode" data-url="{{{LINK}}}" class="btn btn-danger btn-fab btn-fab-mini pull-right">
+				<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
+			</a>
+			<a href="{{{LINK}}}"><img class="img-rounded" src="{{{IMAGEM}}}" />&nbsp;{{{NOME}}}</a>
+		</h4>
+	</div>
+	<div class="list-group-separator"></div>
+</div>
+<!-- dados para o modal -->
+<div style="display:none" id="detalhe_{{ID_MAPA}}">{{{subtitulo}}}</div>
+</script>
 	<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
 	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
 	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
