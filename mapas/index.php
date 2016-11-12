@@ -91,19 +91,7 @@ include "../init/head.php";
 	width: 80px;
 }
 </style>
-<script id="templateLinks" type="x-tmpl-mustache">
-<div class="list-group">
-	<div class="row-content" >
-		<h4 class="list-group-item-heading">
-			{{{nome}}}
-		</h4>
-		<p class="list-group-item-text hidden-xs hidden-sm">
-			<a href="{{{link}}}" target="_blank">{{{link}}}</a>
-		</p>
-	</div>
-	<div class="list-group-separator"></div>
-</div>
-</script>
+
 <body style="padding-top: 55px; position: relative;" >
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
@@ -131,6 +119,13 @@ include "../init/head.php";
 	<div class="container">
 		<div class="row center-block">
 			<div class="col-md-12">
+				<div class="well hidden escondido" >
+					<blockquote id="titulo"></blockquote>
+				</div>
+			</div>
+		</div>
+		<div class="row center-block">
+			<div class="col-md-12">
 				<div class="well" id="corpo">
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
 				</div>
@@ -149,30 +144,10 @@ include "../init/head.php";
 			</div>
 		</div>
 	</div>
-<script id="templateLista" type="x-tmpl-mustache">
-<div class="list-group-item" >
-	<div class="row-content" >
-		<h4 class="list-group-item-heading">
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a onclick="mostraLinks('detalhe_{{ID_MAPA}}')" href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">more_horiz</i>
-			</a>
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a title="default" href="{{{LINK}}}" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">launch</i>
-			</a>
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a title="link" role="button" href="javascript:void(0)" data-toggle="quadroQrcode" data-url="{{{LINK}}}" class="btn btn-danger btn-fab btn-fab-mini pull-right">
-				<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
-			</a>
-			<a href="{{{LINK}}}"><img class="img-rounded" src="{{{IMAGEM}}}" />&nbsp;{{{NOME}}}</a>
-		</h4>
-	</div>
-	<div class="list-group-separator"></div>
-</div>
-<!-- dados para o modal -->
-<div style="display:none" id="detalhe_{{ID_MAPA}}">{{{subtitulo}}}</div>
-</script>
+	<?php
+	include("templates/templatelinks.php");
+	include("templates/templatelista.php");
+	?>
 	<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
 	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
 	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
@@ -185,7 +160,13 @@ include "../init/head.php";
 	<script>
 	$(document).ready(function(){
 		i3GEO.configura = {"locaplic" : window.location.href.split("/mapas")[0],"sid": ""};
-		$(".active").html($trad("mapas",g_traducao_mapas));
+		//traducoes de alguns elementos individualmente
+		$(".active").html(
+			$trad("mapas",g_traducao_mapas)
+		);
+		$("#titulo").html(
+			$trad("txtDesc",g_traducao_mapas)
+		);
 		mostraBotoesBT();
 		$('.escondido').removeClass('hidden');
 		$.material.init();

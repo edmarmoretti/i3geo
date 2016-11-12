@@ -10,9 +10,12 @@ function mostraBotoesBT(){
 		}
 		html = Mustache.to_html(
 				"{{#mapas}}" + $("#templateLista").html() + "{{/mapas}}",
-				d
+				$.extend(
+						{},
+						i3GEO.idioma.objetoIdioma(g_traducao_mapas),
+						d
+				)
 		);
-
 		$("#corpo").html(html);
 		d.mapas.push({
 			"ID_MAPA": "topo",
@@ -32,6 +35,7 @@ function mostraBotoesBT(){
 	//cpJSON vem de classe_php.js
 	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaMapas&g_sid=", "foo", r);
 }
+//define os links adicionais conforme o tipo de mapa
 function verificaMapa(mapa){
 	var link, nome, combo, links = [], html;
 	//imagem dinamica ou nao
