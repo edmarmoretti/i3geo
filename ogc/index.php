@@ -49,6 +49,13 @@ include (ONDEI3GEO."/init/head.php");
 	<div class="container">
 		<div class="row center-block">
 			<div class="col-md-12">
+				<div class="well hidden escondido" >
+					<blockquote id="titulo"></blockquote>
+				</div>
+			</div>
+		</div>
+		<div class="row center-block">
+			<div class="col-md-12">
 				<div class="well" id="corpo">
 					<i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
 				</div>
@@ -76,6 +83,11 @@ include (ONDEI3GEO."/init/head.php");
 		tradLinks["url"] = tradLinks["url"].split("?")[0];
 		tradLinks["urli3geo"] = window.location.href.split("/ogc")[0];
 		tradLinks["mapext"] = "<?php echo $mapext;?>";
+
+		//traducoes de alguns elementos individualmente
+		$("#titulo").html(
+			$trad("txtDesc",ogc.dicionario)
+		);
 
 		var html = Mustache.to_html(
 			$("#menuTpl").html(),

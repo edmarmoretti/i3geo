@@ -100,5 +100,10 @@ ogc.dicionario =
 			pt : "Filtro",
 			en : "",
 			es : ""
+		}],
+		"txtDesc" : [{
+			pt : "Os servi&ccedil;os OGC possibilitam o acesso &agrave;s camadas p&uacute;blicas configuradas no i3Geo por meio de WebServices. As camadas s&atilde;o organizadas em pastas. Navegue pelos links abaixo ou utilize a op&ccedil;&atilde;o de listagem completa de camadas.",
+			en : "",
+			es : ""
 		}]
 };
