@@ -55,89 +55,15 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 		</div>
 	</div>
 </div>
-<script id="templateFiltro" type="x-tmpl-mustache">
-<option value="form-{{id_n3}}">{{{nome_tema}}}</option>
-</script>
-<script id="templateTemas" type="x-tmpl-mustache">
-<div class="list-group-item" data-id="{{id_n3}}" id="form-{{id_n3}}">
-	<div class="row-content">
-		<h4 class="list-group-item-heading {{escondido}}">
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_n3}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">edit</i>
-			</a>
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_n3}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">delete_forever</i>
-			</a>
-			<span class="nomeitem">
-				<i class="material-icons move" style="color: gray; display:none;position:absolute;left:-5px;">swap_vert</i>
-				{{{nome_tema}}}
-			</span>
-		</h4>
-	</div>
-	<div class="list-group-separator"></div>
-</div>
-</script>
-<script id="templateForm" type="x-tmpl-mustache">
-<form id="form-edicao-{{id_n3}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_n3}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-	<div class="row">
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="id_tema">{{{tema}}}</label>
-				<div class="col-md-8">
-					<select title="{{{tema}}}" class="form-control" name="id_tema">
-						{{{opcoesTema}}}
-					</select>
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="ordem">{{{ordemTxt}}}</label>
-				<div class="col-md-8">
-					<input title="{{{ordemTxt}}}" type="text" value="{{{ordem}}}" class="form-control" name="ordem" required >
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="publicado">{{{publicadoTxt}}}</label>
-				<div class="col-md-8">
-					<select title="{{{publicadoTxt}}}" name="publicado" class="form-control" required >
-						{{{opcoesPublicado}}}
-					</select>
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="perfil">{{{perfis}}}</label>
-				<div class="col-md-4">
-					<input title="{{{perfis}}}" id="perfil_tema-{{id_n3}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil">
-				</div>
-				<div class="col-md-4">
-					<select title="{{{perfis}}}" class="form-control" onchange="i3GEOadmin.subgrupos.addInput('perfil_tema-{{id_n3}}',this.value)">
-						{{{opcoesPerfil}}}
-					</select>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="pull-right">
-		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-	</div>
-	<div class="clearfix"></div>
-</form>
-</script>
-<script id="templateOpcoesPublicado" type="x-tmpl-mustache">
-	<option value="">---</option>
-	<option {{SIM-sel}} value="SIM">{{{sim}}}</option>
-	<option {{NAO-sel}} value="NAO">{{{nao}}}</option>
-</script>
-<script id="templateOpcoesNo" type="x-tmpl-mustache">
-	<option {{{selected}}} value="{{{id_subgrupo}}}">{{{nome_subgrupo}}}</option>
-</script>
-<script id="templateOpcoesTema" type="x-tmpl-mustache">
-	<option {{{selected}}} value="{{{id_tema}}}">{{{nome_tema}}} - {{{codigo_tema}}}</option>
-</script>
-<script id="templateOpcoesPerfil" type="x-tmpl-mustache">
-	<option value="{{{perfil}}}">{{{perfil}}}</option>
-</script>
+<?php
+include("../../../../../templates/templateOpcoesPublicado.php");
+include("templates/templateFiltro.php");
+include("templates/templateTemas.php");
+include("templates/templateForm.php");
+include("templates/templateOpcoesNo.php");
+include("templates/templateOpcoesTema.php");
+include("templates/templateOpcoesPerfil.php");
+?>
 <script type="text/javascript" src="../../../../index.js"></script>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../../../../dicionario/temas.js"></script>

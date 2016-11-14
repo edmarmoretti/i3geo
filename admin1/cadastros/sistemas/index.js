@@ -130,6 +130,11 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						var json = jQuery.parseJSON(data);
+						//combo com perfis
+						var opcoesPerfil = '<option value="">---</option>' + Mustache.to_html(
+								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
+								{"data":json["perfis"]}
+						);
 						var templateLista = $("#templateFormLista").html();
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -142,25 +147,15 @@ Obt&eacute;m a lista
 											"onSalvar": "i3GEOadmin.sistemas.salvarDialogo",//funcao
 											"opcoesPublicado": function(){
 												var hash = {};
+												hash[this.publicado_sistema + "-sel"] = "selected";
 												hash["sim"] = i3GEOadmin.sistemas.dicionario.sim;
 												hash["nao"] = i3GEOadmin.sistemas.dicionario.nao;
-												if(this.publicado_sistemas == ""){
-													this.publicado_sistemas = "SIM";
-												}
-												hash[this.publicado_sistemas + "-sel"] = "selected";
 												return Mustache.to_html(
 														$("#templateOpcoesPublicado").html(),
 														hash
 												);
 											},
-											"opcoesTipoGuia": function(){
-												var hash = {};
-												hash[this.tipoguias_sistemas + "-sel"] = "selected";
-												return Mustache.to_html(
-														$("#templateOpcoesTipoGuia").html(),
-														hash
-												);
-											}
+											"opcoesPerfil": opcoesPerfil
 										}
 								)
 						);

@@ -53,6 +53,11 @@ Obt&eacute;m a lista
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
+						//combo com perfis
+						var opcoesPerfil = '<option value="">---</option>' + Mustache.to_html(
+								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
+								{"data":json["perfis"]}
+						);
 						//lista todas as menus
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -90,11 +95,12 @@ Obt&eacute;m a lista
 											{
 												"id_funcao": "modal",
 												"escondido": "hidden",
-												"funcaos": "",
+												"funcao": "",
 												"excluir": i3GEOadmin.funcao.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.funcao.adiciona",//funcao
-												"editarTema": ""
+												"editarTema": "",
+												"opcoesPerfil": opcoesPerfil
 											}
 									)
 							);
@@ -119,6 +125,11 @@ Obt&eacute;m a lista
 					function(data, status){
 						var json = jQuery.parseJSON(data);
 						var templateLista = $("#templateFormLista").html();
+						//combo com perfis
+						var opcoesPerfil = '<option value="">---</option>' + Mustache.to_html(
+								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
+								{"data":json["perfis"]}
+						);
 						//lista todas as menus
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -128,7 +139,8 @@ Obt&eacute;m a lista
 										{
 											"data": json["dados"],
 											"onExcluir": "i3GEOadmin.funcao.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.funcao.salvarDialogo"//funcao
+											"onSalvar": "i3GEOadmin.funcao.salvarDialogo",
+											"opcoesPerfil": opcoesPerfil
 										}
 								)
 						);

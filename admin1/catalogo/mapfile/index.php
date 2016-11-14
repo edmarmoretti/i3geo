@@ -75,7 +75,7 @@ include "../../head.php";
 					<div class="panel-heading icon" role="tab">
 						<h4 class="panel-title">
 							<a class="collapsed in" role="button" data-toggle="collapse" href="#body-favoritos"
-							aria-expanded="false" > <i class="material-icons">favorite_border</i> {{{favoritos}}} </a>
+							aria-expanded="false" > <i class="material-icons">star_border</i> {{{favoritos}}} </a>
 						</h4>
 					</div>
 					<div class="panel-body panel-collapse collapse" id="body-favoritos">
@@ -95,11 +95,11 @@ include "../../head.php";
 	<div class="panel-heading icon" role="tab">
 		<h4 class="panel-title {{escondido}}">
 			<a title="{{{favorito}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.registraFavoritos('{{codigo}}')" class="btn btn-primary btn-fab btn-fab-mini" role="button">
-				<i class="material-icons">favorite_border</i>
+				<i class="material-icons">star_border</i>
 			</a>
 			<a class="collapsed in" role="button" data-toggle="collapse" href="#body-form-{{codigo}}" aria-expanded="false" aria-controls="#body-form-{{codigo}}">
 				&nbsp;
-				<small> {{{arquivoTxt}}}:</small> {{{codigo}}} <small> {{{tituloTxt}}}:</small> {{{nome}}}
+				<strong>{{{nome}}}</strong> <small> {{{arquivoTxt}}}:</small> {{{codigo}}}
 			</a>
 		</h4>
 	</div>

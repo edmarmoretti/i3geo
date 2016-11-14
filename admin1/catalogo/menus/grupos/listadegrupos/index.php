@@ -47,68 +47,11 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 		</div>
 	</div>
 </div>
-<script id="templateFiltro" type="x-tmpl-mustache">
-<option value="form-{{id_grupo}}">{{{nome_grupo}}}</option>
-</script>
-<script id="templateFormLista" type="x-tmpl-mustache">
-<form id="form-edicao-{{id_grupo}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_grupo}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
-	method="post"  >
-	<div class="row">
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="nome">{{{nomeTxt}}} (Pt)</label>
-				<div class="col-md-10">
-					<input title="{{{nomeTxt}}}" type="text" value="{{{nome_grupo}}}" class="form-control" name="nome_grupo" required>
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="desc_grupo">{{{descricaoTxt}}}</label>
-				<div class="col-md-10">
-					<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_grupo}}}" class="form-control" name="desc_grupo" >
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="es">Es</label>
-					<div class="col-md-10">
-						<input title="Espanhol" type="text" value="{{{es}}}" class="form-control" name="es" >
-					</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="en">En</label>
-				<div class="col-md-10">
-					<input title="Ingles" type="text" value="{{{en}}}" class="form-control" name="en" >
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="pull-right">
-		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-	</div>
-	<div class="clearfix"></div>
-</form>
-</script>
-<script id="templateLista" type="x-tmpl-mustache">
-<div class="list-group-item" id="form-{{id_grupo}}">
-	<div class="row-content">
-		<h4 class="list-group-item-heading {{escondido}}">
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_grupo}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">edit</i>
-			</a>
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_grupo}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">delete_forever</i>
-			</a>
-			<span class="nomeitem">
-				<i class="material-icons move" style="color: gray; display:none;position:absolute;left:-5px;">swap_vert</i>
-				&nbsp;{{{nome_grupo}}}
-			</span>
-		</h4>
-	</div>
-	<div class="list-group-separator"></div>
-</div>
-</script>
-
+<?php
+include("templates/templateLista.php");
+include("templates/templateFormLista.php");
+include("templates/templateFiltro.php");
+?>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../../../dicionario/grupos.js"></script>
 <script>

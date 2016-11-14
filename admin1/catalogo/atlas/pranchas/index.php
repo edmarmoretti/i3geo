@@ -59,108 +59,11 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 		</div>
 	</div>
 </div>
-<script id="templateFiltro" type="x-tmpl-mustache">
-<option value="form-{{id_prancha}}">{{{titulo_prancha}}}</option>
-</script>
-<script id="templateFormLista" type="x-tmpl-mustache">
-<form id="form-edicao-{{id_prancha}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_prancha}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-	<div class="row">
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="titulo_prancha" >{{{titulo}}}</label>
-				<div class="col-md-8">
-					<input title="{{{titulo}}}" type="text" value="{{{titulo_prancha}}}" class="form-control" name="titulo_prancha" required>
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="desc_prancha" >{{{descricao}}}</label>
-				<div class="col-md-8">
-					<input title="{{{descricao}}}" type="text" value="{{{desc_prancha}}}" class="form-control" name="desc_prancha" >
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="link_prancha" >{{{linkTxt}}}</label>
-				<div class="col-md-8">
-					<input title="{{{linkTxt}}}" type="text" value="{{{link_prancha}}}" class="form-control" name="link_prancha" >
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="ordem_prancha" >{{{ordem}}}</label>
-				<div class="col-md-8">
-					<input title="{{{ordem}}}" type="text" value="{{{ordem_prancha}}}" class="form-control" name="ordem_prancha" required >
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="h_prancha" >{{{altura}}}</label>
-				<div class="col-md-8">
-					<input title="{{{altura}}}" type="text" value="{{{h_prancha}}}" class="form-control" name="h_prancha" >
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="w_prancha" >{{{largura}}}</label>
-				<div class="col-md-8">
-					<input title="{{{largura}}}" type="text" value="{{{w_prancha}}}" class="form-control" name="w_prancha" >
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="icone_prancha" >{{{icone}}}</label>
-				<div class="col-md-8">
-					<input title="{{{icone}}}" type="text" value="{{{icone_prancha}}}" class="form-control" name="icone_prancha" >
-				</div>
-			</div>
-		</div>
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="mapext_prancha" >{{{extGeo}}}</label>
-				<div class="col-md-8">
-					<input title="{{{extGeo}}}" type="text" value="{{{mapext_prancha}}}" class="form-control" name="mapext_prancha" >
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="pull-right">
-		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-	</div>
-	<div class="clearfix"></div>
-</form>
-</script>
-<script id="templateLista" type="x-tmpl-mustache">
-<div class="list-group-item" id="form-{{id_prancha}}">
-	<div class="row-content">
-		<h4 class="list-group-item-heading {{escondido}}">
-			<div class="pull-right">
-			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.prancha.editarTemas('{{id_atlas}}','{{id_prancha}}','{{{titulo_prancha}}}')" href="javascript:void(0)">
-				<i class="material-icons md-18">folder_open</i>
-			</a>
-  			<label class=pull-right><h6 style="margin-top: 5px; margin-bottom: 5px;">&nbsp;{{{editarTema}}}</h6></label>
-			</div>
-
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_prancha}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">edit</i>
-			</a>
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_prancha}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">delete_forever</i>
-			</a>
-			&nbsp;{{{titulo_prancha}}}
-		</h4>
-	</div>
-	<div class="list-group-separator"></div>
-</div>
-</script>
+<?php
+include("templates/templateLista.php");
+include("templates/templateFormLista.php");
+include("templates/templateFiltro.php");
+?>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../../dicionario/prancha.js"></script>
 <script>

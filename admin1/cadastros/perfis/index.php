@@ -57,46 +57,11 @@ include "../../head.php";
 		</div>
 	</div>
 </div>
-<script id="templateFiltro" type="x-tmpl-mustache">
-<option value="form-{{id_perfil}}">{{{perfil}}}</option>
-</script>
-<script id="templateFormLista" type="x-tmpl-mustache">
-<form id="form-edicao-{{id_perfil}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_perfil}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form"
-	method="post"  >
-	<div class="row">
-		<div class="col-md-12">
-			<h4>{{{txtPerfil}}}</h4>
-			<div class="form-group form-group-lg">
-				<div class="col-md-10">
-					<input title="{{{perfil}}}" type="text" value="{{{perfil}}}" class="form-control" name="perfil" required>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="pull-right">
-		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-	</div>
-	<div class="clearfix"></div>
-</form>
-</script>
-<script id="templateLista" type="x-tmpl-mustache">
-	<div class="list-group-item" id="form-{{id_perfil}}">
-		<div class="row-content">
-				<h4 class="list-group-item-heading {{escondido}}">
-					<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_perfil}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-						<i class="material-icons md-18">edit</i>
-					</a>
-					<span class="pull-right">&nbsp;&nbsp;</span>
-					<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_perfil}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-						<i class="material-icons md-18">delete_forever</i>
-					</a>
-					&nbsp;{{{perfil}}}
-				</h4>
-		</div>
-		<div class="list-group-separator"></div>
-	</div>
-</script>
-
+<?php
+include("templates/templateLista.php");
+include("templates/templateFormLista.php");
+include("templates/templateFiltro.php");
+?>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../dicionario/perfis.js"></script>
 <script>

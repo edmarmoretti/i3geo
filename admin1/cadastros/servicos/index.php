@@ -59,81 +59,12 @@ include "../../head.php";
 		</div>
 	</div>
 </div>
-<script id="templateFiltro" type="x-tmpl-mustache">
-<option value="form-{{id_ws}}">{{{nome_ws}}}</option>
-</script>
-<script id="templateFormLista" type="x-tmpl-mustache">
-<form id="form-edicao-{{id_ws}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_ws}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
-	<div class="row">
-		<div class="col-md-12">
-			<h4>{{{nome_ws}}}</h4>
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="nome_ws" >{{{nomeTxt}}}</label>
-				<div class="col-md-10">
-					<input title="{{{nomeTxt}}}" type="text" value="{{{nome_ws}}}" class="form-control" name="nome_ws" required>
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="desc_ws">{{{descricaoTxt}}}</label>
-				<div class="col-md-10">
-					<input title="{{{descricaoTxt}}}" type="text" value="{{{desc_ws}}}" class="form-control" name="desc_ws" >
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="autor_ws">{{{autor}}}</label>
-				<div class="col-md-10">
-					<input title="{{{autor}}}" type="text" value="{{{autor_ws}}}" class="form-control" name="autor_ws" required>
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="link_ws">{{{endereco}}}</label>
-				<div class="col-md-10">
-					<input title="{{{endereco}}}" type="text" value="{{{link_ws}}}" class="form-control" name="link_ws">
-				</div>
-			</div>
-			<div class="form-group form-group-lg">
-				<label class="col-md-2 control-label" for="tipo_ws">{{{tipo}}}</label>
-				<div class="col-md-10">
-					<select title="{{{tipo}}}" name="tipo_ws" class="form-control">
-						{{{opcoesTipo}}}
-					</select>
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="pull-right">
-		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
-	</div>
-	<div class="clearfix"></div>
-</form>
-</script>
-<script id="templateLista" type="x-tmpl-mustache">
-<div class="list-group-item" id="form-{{id_ws}}">
-	<div class="row-content" >
-		<h4 class="list-group-item-heading {{escondido}}">
-			<a href="javascript:void(0)" onclick="{{onEditar}}('{{id_ws}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button" aria-expanded="false" >
-				<i class="material-icons md-18">edit</i>
-			</a>
-			<span class="pull-right">&nbsp;&nbsp;</span>
-			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_ws}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-				<i class="material-icons md-18">delete_forever</i>
-			</a>
-			&nbsp;{{{nome_ws}}}
-		</h4>
-	</div>
-	<div class="list-group-separator"></div>
-</div>
-</script>
-<script id="templateOpcoesTipo" type="x-tmpl-mustache">
-	<option value="">---</option>
-	<option {{KML-sel}} value="KML">KML</option>
-	<option {{WMS-sel}} value="WMS">WMS</option>
-	<option {{WMS-Tile-sel}} value="WMS-Tile">WMS-Tile</option>
-	<option {{GEORSS-sel}} value="GEORSS">GEORSS</option>
-	<option {{WS-sel}} value="WS">WS</option>
-	<option {{DOWNLOAD-sel}} value="DOWNLOAD">DOWNLOAD</option>
-	<option {{GEOJSON-sel}} value="GEOJSON">GEOJSON</option>
-</script>
+<?php
+include("templates/templateLista.php");
+include("templates/templateFormLista.php");
+include("templates/templateFiltro.php");
+include("templates/templateOpcoesTipo.php");
+?>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../dicionario/webservices.js"></script>
 <script>

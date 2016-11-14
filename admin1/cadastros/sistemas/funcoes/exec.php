@@ -84,9 +84,10 @@ switch ($funcao) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de pranchas" );
 			exit ();
 		}
+		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( array("dados"=>$dados[0]) );
+		retornaJSON ( array("dados"=>$dados[0], "perfis"=>$perfis) );
 		break;
 	case "LISTA" :
 		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema = $id_sistema", $dbh, false);

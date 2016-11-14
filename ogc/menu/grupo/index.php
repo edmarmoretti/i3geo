@@ -25,7 +25,7 @@ include ONDEI3GEO."/init/head.php";
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="../../../init/index.php"><?php echo $mensagemInicia;?> <i
+				<a class="navbar-brand" href="../../../init/index.php?home="><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
 			</div>
 		</div>

@@ -96,10 +96,10 @@ include "../init/head.php";
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
+				<a class="navbar-brand" href="../init/index.php?home="><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
 			</div>
-			<ul class="nav navbar-nav">
+			<ul class="nav navbar-nav sr-only">
 				<li><a title="RSS" href="../admin/rssmapas.php"><i class="material-icons ">rss_feed</i></a></li>
 				<li><a title="JSON" href="../admin/rssmapas.php?output=json"><i class="material-icons ">code</i></a></li>
 			</ul>

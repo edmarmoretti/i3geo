@@ -1526,7 +1526,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	}],
 	'validar' : [{
-		pt : "Validar",
+		pt : "Listar apenas os mapfiles segundo os seguintes crit&eacute;rios",
 		en : "",
 		es : ""
 	}],
