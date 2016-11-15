@@ -5,7 +5,11 @@
 //
 function verificaBlFerramentas($dir,$i3geoBlFerramentas="",$js=true){
 	if($i3geoBlFerramentas == ""){
-		include_once(dirname(__FILE__)."/../ms_configura.php");
+		if(file_exists(dirname(__FILE__)."/../ms_configura.php")){
+			include_once(dirname(__FILE__)."/../ms_configura.php");
+		} else {
+			include_once(dirname(__FILE__)."/../../ms_configura.php");
+		}
 	}
 	if(!empty($i3geoBlFerramentas)){
 		if(in_array($dir,$i3geoBlFerramentas) == true){
