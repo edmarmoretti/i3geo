@@ -26,6 +26,8 @@ i3GEOadmin.mapfile = {
 		//variavel global indicando o elemento que recebera a lista de menus
 		ondeLista: "",
 		favoritosArray: [],
+		formAdiciona: "",
+		parametrosSalvar: "",
 		init: function(onde,palavra){
 			i3GEOadmin.mapfile.ondeLista = onde;
 			i3GEOadmin.mapfile.lista(palavra);
@@ -81,6 +83,28 @@ Obt&eacute;m a lista
 							i3GEOadmin.core.filtra(i3GEOadmin.mapfile.pegaFiltro());
 						}
 
+						//monta um template para o modal de inclusao
+						if(i3GEOadmin.mapfile.formAdiciona == ""){
+							html = Mustache.to_html(
+									$("#templateManterTema").html(),
+									$.extend(
+											{},
+											i3GEOadmin.mapfile.dicionario,
+											{
+												"codigo": "",
+												"escondido": "hidden",
+												"excluir": i3GEOadmin.mapfile.dicionario.cancelar,
+												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
+												"onSalvar": "i3GEOadmin.mapfile.adiciona",
+												"metaestatnao": "selected",
+												"acessopublico": "checked",
+												"criaMapfileTxt": i3GEOadmin.mapfile.dicionario.criaMapfile,
+												"criaMapfileDescTxt": i3GEOadmin.mapfile.dicionario.criaMapfileDesc
+											}
+									)
+							);
+							i3GEOadmin.mapfile.formAdiciona = html;
+						}
 						$.material.init();
 					}
 			)
@@ -89,24 +113,83 @@ Obt&eacute;m a lista
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
 		},
-		adicionaDialogo: function(){
-			var html = Mustache.to_html(
-					"{{#data}}" + $("#templateManterTema").html() + "{{/data}}",
-					$.extend(
-							{},
-							i3GEOadmin.mapfile.dicionario,
-							{
-								"data": "modal",
-								"metaestatnao": "selected",
-								"acessopublico": "checked"
-							}
-					)
+		editarDialogo: function(id){
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			//deve-se usar o codigo e nao o id_tema
+			$.post(
+					"exec.php?funcao=listaunico",
+					"codigo=" + id
+			)
+			.done(
+					function(data, status){
+						var json = jQuery.parseJSON(data);
+
+						var html = Mustache.to_html(
+								"{{#data}}" + $("#templateManterTema").html() + "{{/data}}",
+								$.extend(
+										{},
+										i3GEOadmin.mapfile.dicionario,
+										{
+											"data": json["dados"],
+											"onExcluir": "i3GEOadmin.mapfile.excluirDialogo",//funcao
+											"onSalvar": "i3GEOadmin.mapfile.salvarAlteracaoDialogo",
+											"criaMapfileTxt": i3GEOadmin.mapfile.dicionario.editaMapfile,
+											"criaMapfileDescTxt": i3GEOadmin.mapfile.dicionario.editaMapfileDesc
+										}
+								)
+						);
+						i3GEOadmin.core.abreModalGeral(html);
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
 			);
-			i3GEOadmin.core.abreModalGeral(html);
+		},
+		salvarAlteracaoDialogo: function(codigo,id){
+			i3GEOadmin.mapfile.parametrosSalvar = $("#form-edicao-" + codigo).serialize();
+			var hash = {
+					"mensagem": i3GEOadmin.mapfile.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.mapfile.salva('"+id+"')",
+					"botao1": i3GEOadmin.mapfile.dicionario.sim,
+					"onBotao2": "i3GEOadmin.mapfile.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
+					"botao2": i3GEOadmin.mapfile.dicionario.nao
+			};
+			i3GEOadmin.core.abreModalConfirma(hash);
+		},
+		salva: function(id){
+			var parametros = i3GEOadmin.mapfile.parametrosSalvar;
+			i3GEOadmin.core.fechaModalGeral();
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=alterar",
+					"id_tema=" + id + "&"+parametros
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.mapfile.parametrosSalvar = '';
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapfile.ondeLista);
+						i3GEOadmin.mapfile.lista("","");
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.mapfile.parametrosSalvar = '';
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
+		},
+		adicionaDialogo: function(){
+			i3GEOadmin.core.abreModalGeral(i3GEOadmin.mapfile.formAdiciona);
 		},
 //		os parametros sao obtidos do formulario aberto do modal
 		adiciona: function(){
-			var parametros = $("#form-modal-adiciona").serialize();
+			var parametros = $("#modalGeral form").serialize();
 			i3GEOadmin.core.fechaModalGeral();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -119,7 +202,7 @@ Obt&eacute;m a lista
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.iconeAguarde(i3GEOadmin.mapfile.ondeLista);
 						i3GEOadmin.mapfile.favoritosArray.push(json.codigo);
-						i3GEOadmin.mapfile.lista();
+						i3GEOadmin.mapfile.lista("","");
 					}
 			)
 			.fail(
@@ -160,6 +243,18 @@ Obt&eacute;m a lista
 					}
 			);
 		},
+		salvarDialogo: function(id){
+			i3GEOadmin.mapfile.parametrosSalvar = $("#form-edicao-" + id).serialize();
+			console.info(i3GEOadmin.mapfile.parametrosSalvar);
+			var hash = {
+					"mensagem": i3GEOadmin.mapfile.dicionario.confirma,
+					"onBotao1": "i3GEOadmin.mapfile.salvar('"+id+"')",
+					"botao1": i3GEOadmin.mapfile.dicionario.sim,
+					"onBotao2": "i3GEOadmin.mapfile.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
+					"botao2": i3GEOadmin.mapfile.dicionario.nao
+			};
+			i3GEOadmin.core.abreModalConfirma(hash);
+		},
 		retornaFavoritosArray: function(){
 			var temp = i3GEO.util.pegaCookie("I3GEOfavoritosEditorMapfile");
 			if(temp){
@@ -185,12 +280,9 @@ Obt&eacute;m a lista
 			n = i3GEOadmin.mapfile.favoritosArray.length;
 			for (i=0; i<n; i++){
 				codigo = i3GEOadmin.mapfile.favoritosArray[i];
-				h = $("#form-" + codigo + " .panel-heading").html();
+				h = $("#form-" + codigo).html();
 				if(h != undefined){
-					mapfile = '<div class="panel panel-default">' + h;
-					conteudo.push(mapfile);
-					mapfile = '<div class="panel-body">' + $("#form-" + codigo + " .panel-body").html() + "</div></div>";
-					conteudo.push(mapfile);
+					conteudo.push(h);
 				}
 			}
 			$("#body-favoritos").html(conteudo.join("\n"));

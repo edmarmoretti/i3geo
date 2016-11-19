@@ -1,5 +1,5 @@
 <script id="templateFormLista" type="x-tmpl-mustache">
-		<form id="form-edicao-{{id_i}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_i}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+		<form id="form-edicao-{{id_i}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_i}}');return false;"   class="form-horizontal" role="form" method="post"   >
 			<div class="row">
 				<div class="col-md-12">
 					<h4>{{{nome_i}}}</h4>

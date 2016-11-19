@@ -19,7 +19,9 @@ Salva o mapa acrescentando um novo layer com a grade.
 	case "GRADEDEPOL":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		copiaSeguranca($map_file);
-		if(!isset($tema)){$tema = "";}
+		if(!isset($tema)){
+			$tema = "";
+		}
 		$m = new Analise($map_file,$tema);
 		if($_GET["proj"] == "sim"){
 			$_GET["proj"] = true;
@@ -27,8 +29,7 @@ Salva o mapa acrescentando um novo layer com a grade.
 		else{
 			$_GET["proj"] = false;
 		}
-
-		$retorno = $m->gradeDePol($_GET["dd"],$_GET["px"],$_GET["py"],$locaplic,$_GET["nptx"],$_GET["npty"],$_GET["proj"]);
+		$retorno = $m->gradeDePol($_GET["xdd"],$_GET["ydd"],$_GET["px"],$_GET["py"],$locaplic,$_GET["nptx"],$_GET["npty"],$_GET["proj"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 	break;

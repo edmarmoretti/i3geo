@@ -21,6 +21,7 @@
 if(!isset($locaplic)){
 	$locaplic = dirname(__FILE__)."/../../";
 }
+
 require_once "$locaplic/pacotes/phpxbase/Column.class.php";
 require_once "$locaplic/pacotes/phpxbase/Record.class.php";
 require_once "$locaplic/pacotes/phpxbase/Table.class.php";

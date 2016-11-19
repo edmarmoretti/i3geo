@@ -1,0 +1,27 @@
+MAP
+SYMBOLSET ../symbols/simbolosv6.sym
+FONTSET   "../symbols/fontes.txt"
+LAYER
+	NAME "aaaaaa"
+	TEMPLATE "none.htm"
+	TYPE line
+	DATA ""
+	CONNECTION ""
+	STATUS DEFAULT
+	METADATA
+		TEMA "çççççç"
+		CLASSE "SIM"
+		permiteogc "SIM"
+		permitedownload "SIM"
+		permitekml "SIM"
+		permitekmz "SIM"
+	END
+    CLASS
+        NAME ""
+        STYLE
+        	COLOR 0 0 0
+        	SIZE 12
+        END
+    END
+END
+END

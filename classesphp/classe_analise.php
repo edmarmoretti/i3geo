@@ -1828,10 +1828,12 @@ class Analise
   function gradeDePol($xdd,$ydd,$px,$py,$locaplic,$nptx,$npty,$proj=false)
   {
     set_time_limit(180);
+
     //para manipular dbf
     if($this->dbaseExiste == false){
       include_once dirname(__FILE__)."/../pacotes/phpxbase/api_conversion.php";
     }
+
     $nomegrade = nomeRandomico();
     $nomeshp = $this->diretorio."/".$nomegrade;
     //pega a extens&atilde;o geogr&aacute;fica do mapa
@@ -1873,6 +1875,7 @@ class Analise
     {
       $npty = round(($disty / $ydd),0);
     }
+
     // cria o shapefile
     $novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
     $def = array();

@@ -52,7 +52,7 @@ Sleciona elementos de um tema com base em outro tema.
 		$temas = explode(",",$tema);
 		foreach($temas as $tema){
 			$m = new Selecao($map_file,$tema);
-			$ok[] = $m->selecaoTema($temao,$_GET["tipo"],$_GET["buffer"]);
+			$ok[] = $m->selecaoTema($_GET["temao"],$_GET["tipo"],$_GET["buffer"]);
 		}
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();

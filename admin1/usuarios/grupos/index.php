@@ -57,7 +57,7 @@ include "../../head.php";
 <option value="form-{{id_grupo}}">{{{nome}}}</option>
 </script>
 <script id="templateFormLista" type="x-tmpl-mustache">
-<form id="form-edicao-{{id_grupo}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_grupo}}');return false;" onchange="this.style.boxShadow='2px 2px 5px 0 #009688';" class="form-horizontal" role="form" method="post"   >
+<form id="form-edicao-{{id_grupo}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_grupo}}');return false;"   class="form-horizontal" role="form" method="post"   >
 	<div class="row">
 		<div class="col-md-4" style="max-height: 230px; overflow-y: auto;">
 			<h4> {{{usuariosv}}}</h4>

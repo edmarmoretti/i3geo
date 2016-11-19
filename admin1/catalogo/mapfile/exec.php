@@ -30,10 +30,12 @@ error_reporting ( 0 );
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 $funcoesEdicao = array (
 		"LISTA",
+		"LISTAUNICO",
 		"ADICIONAR",
 		"EXCLUIR",
 		"LIMPACACHE",
-		"CLONARMAPFILE"
+		"CLONARMAPFILE",
+		"ALTERAR"
 );
 if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 	if (verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
@@ -43,13 +45,11 @@ if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 
-// $id_mapa = $_POST["id_mapa"];
-// testaSafeNumerico([$id_mapa]);
+$codigo = $_POST ["codigo"];
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$codigo = $_POST ["codigo"];
 		$codigo = str_replace ( " ", "", removeAcentos ( $codigo ) );
 		$codigo = str_replace ( ".", "", $codigo );
 		$codigo = strip_tags ( $codigo );
@@ -59,13 +59,40 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo ja existe" );
 			exit ();
 		}
-		$novo = adicionar ( $locaplic, $_POST["titulolegenda"], $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["titulo"], $_POST ["desc_tema"], $_POST ["tituloEN"], $_POST ["tituloES"], true, $dbhw );
+		if(empty($_POST["titulolegenda"])){
+			$_POST["titulolegenda"] = $_POST ["nome_tema"];
+		}
+		$novo = adicionar ( $locaplic, $_POST["titulolegenda"], $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["nome_tema"], $_POST ["desc_tema"], $_POST ["en"], $_POST ["es"], true, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 		retornaJSON ( array (
 				"codigo" => $codigo
+		) );
+		exit ();
+		break;
+	case "ALTERAR" :
+		$codigo = str_replace ( " ", "", removeAcentos ( $codigo ) );
+		$codigo = str_replace ( ".", "", $codigo );
+		$codigo = strip_tags ( $codigo );
+		$codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
+		$arq = $locaplic . "/temas/" . $codigo . ".map";
+		if ($codigo == "" || !file_exists ( $arq )) {
+			header ( "HTTP/1.1 400 arquivo nao existe" );
+			exit ();
+		}
+		if(empty($_POST["titulolegenda"])){
+			$_POST["titulolegenda"] = $_POST ["nome_tema"];
+		}
+		//quando e feita a listagem unica, o mapfile ja foi registrado no banco se nao tinha sido antes
+		$novo = alterar ( $locaplic, $_POST["id_tema"], $_POST["titulolegenda"], $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["nome_tema"], $_POST ["desc_tema"], $_POST ["en"], $_POST ["es"], true, $dbhw );
+		if ($novo === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		retornaJSON ( array (
+			"codigo" => $codigo
 		) );
 		exit ();
 		break;
@@ -97,6 +124,71 @@ switch ($funcao) {
 		}
 		retornaJSON ( $retorna );
 		exit ();
+		break;
+	case "LISTAUNICO" :
+		//pega o nome registrado no mapfile
+		if(!file_exists($locaplic."/temas/".$codigo.".map")){
+			header ( "HTTP/1.1 500 erro mapfile nao existe" );
+			exit ();
+		}
+		$mapa = ms_newMapObj ( $locaplic."/temas/".$codigo.".map" );
+		$layer = $mapa->getlayerbyname($codigo);
+		if($layer == ""){
+			header ( "HTTP/1.1 500 erro nao existe LAYER com o nome $codigo" );
+			exit ();
+		}
+		$titulolegenda = $layer->getmetadata("TEMA");
+		$metaestat = $layer->getmetadata("METAESTAT");
+		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' ", $dbh, false );
+		//se nao existir no sistema de admin, faz o registro
+		if(count($dados) == 0){
+			$dataCol = array (
+					"kml_tema" => "SIM",
+					"kmz_tema" => "SIM",
+					"ogc_tema" => "SIM",
+					"download_tema" => "SIM",
+					"desc_tema" => "",
+					"tipoa_tema" => "",
+					"tags_tema" => "",
+					"nome_tema" => $titulolegenda,
+					"codigo_tema" => $codigo,
+					"it" => "",
+					"es" => "",
+					"en" => ""
+			);
+			$id_tema = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_temas",$dataCol,"link_tema","id_tema");
+			$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' AND id_tema = $id_tema ", $dbh, false );
+			if(count($dados) == 0){
+				$dbhw = null;
+				$dbh = null;
+				header ( "HTTP/1.1 500 erro ao registrar no banco de dados" );
+				exit ();
+			}
+		}
+		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+			exit ();
+		}
+		$acessopublico = "";
+		if(strtolower($dados[0]["ogc_tema"]) !== "nao" || strtolower($dados[0]["download_tema"]) !== "nao"){
+			$acessopublico = "checked";
+		}
+		if($metaestat == ""){
+			$dados[0]["metaestatnao"] = "selected";
+		} else {
+			$dados[0]["metaestatsim"] = "selected";
+		}
+		$dados[0]["acessopublico"] = $acessopublico;
+		$dados[0]["metaestat"] = $metaestat;
+		//a pagina e utf e o texto pode ser iso
+		if(mb_detect_encoding($titulolegenda,'UTF-8, ISO-8859-1') == "ISO-8859-1"){
+			$titulolegenda = utf8_encode($titulolegenda);
+		}
+		$dados[0]["titulolegenda"] = $titulolegenda;
+		$dados[0]["codigo"] = $codigo;
+		retornaJSON ( array("dados"=>$dados[0]) );
 		break;
 	case "LIMPACACHE" :
 		$mapfile = $locaplic . "/temas/" . $_POST ["codigo"] . ".map";
@@ -182,10 +274,7 @@ switch ($funcao) {
 		include(dirname(__FILE__)."/../../php/removeCabecalhoMapfile.php");
 		removeCabecalhoMapfile($arqnovo);
 
-		if ($novo === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		} elseif (count ( $dados ) > 0) {
+		if (count ( $dados ) > 0) {
 			//registra no banco de dados caso nao tenha ocorrido erro ao criar o mapfile
 			i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );
 		}
@@ -234,13 +323,79 @@ function excluir($codigo, $dbhw) {
 	unlink ( "$locaplic/temas/" . $codigo . ".map" );
 	return true;
 }
+function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
+	global $convUTF, $esquemaadmin;
+	$arq = $locaplic . "/temas/" . $codigo . ".map";
+	if(!file_exists($locaplic . "/temas/" . $codigo . ".map")){
+		return false;
+	}
+	$mapa = ms_newMapObj($arq);
+	$layer = @$mapa->getlayerbyname($codigo);
+	if($layer == ""){
+		return false;
+	}
+	if(mb_detect_encoding($titulolegenda,'UTF-8, ISO-8859-1') == "UTF-8"){
+		$titulolegenda = utf8_decode($titulolegenda);
+	}
+	if ($convUTF != true) {
+		$titulo = utf8_decode ( $titulo );
+		$desc_tema = utf8_decode ( $desc_tema );
+	}
+
+	if (empty ( $acessopublico ) || $acessopublico == "on") {
+		$acessopublico = "SIM";
+	} else {
+		$acessopublico = "NAO";
+	}
+	$layer->setmetadata("permiteogc",$acessopublico);
+	$layer->setmetadata("permitedownload",$acessopublico);
+	$layer->setmetadata("permitekml",$acessopublico);
+	$layer->setmetadata("permitekmz",$acessopublico);
+	$layer->setmetadata("TEMA",$titulolegenda);
+	if (! empty ( $metaestat ) && $metaestat == "SIM") {
+		$layer->setmetadata("METAESTAT","SIM");
+		$tipoa_tema = "META";
+	} else {
+		$layer->setmetadata("METAESTAT","");
+		$tipoa_tema = "";
+	}
+
+
+	try {
+		$dataCol = array (
+				"link_tema" => $link_tema,
+				"kml_tema" => $acessopublico,
+				"kmz_tema" => $acessopublico,
+				"ogc_tema" => $acessopublico,
+				"download_tema" => $acessopublico,
+				"desc_tema" => $desc_tema,
+				"tipoa_tema" => $tipoa_tema,
+				"tags_tema" => '',
+				"nome_tema" => $titulo,
+				"codigo_tema" => $codigo,
+				"it" => "",
+				"es" => $tituloES,
+				"en" => $tituloEN
+		);
+		$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE id_tema = $id_tema" );
+		if ($resultado === false) {
+			return false;
+		}
+		$mapa->save($arq);
+		include(dirname(__FILE__)."/../../php/removeCabecalhoMapfile.php");
+		removeCabecalhoMapfile($arq);
+		return true;
+	} catch ( PDOException $e ) {
+		return false;
+	}
+}
 function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
 	global $convUTF, $esquemaadmin;
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if (empty ( $acessopublico ) || $acessopublico == "on") {
 		$acessopublico = "SIM";
 	} else {
-		$acessopublico = "SIM";
+		$acessopublico = "NAO";
 	}
 	if(mb_detect_encoding($titulolegenda,'UTF-8, ISO-8859-1') == "UTF-8"){
 		$titulolegenda = utf8_decode($titulolegenda);
