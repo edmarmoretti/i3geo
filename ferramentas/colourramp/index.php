@@ -12,6 +12,8 @@
 	}
 
 	$locaplic = $_GET["locaplic"];
+	$elemento = $_GET["elemento"];
+	$doc = $_GET["doc"];
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
@@ -200,6 +202,7 @@ function aplicarCores()
 		if(inputs[i].parentNode.style.display !== "none")
 		{listaRGB.push(inputs[i].value);}
 	}
+
 	doc.getElementById(elemento).value = listaRGB.join("|");
 	try{
 		doc.getElementById(elemento).onchange.call();
