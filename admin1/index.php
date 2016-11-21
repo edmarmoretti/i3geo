@@ -7,8 +7,8 @@ include "head.php";
 	<div class="container-fluid migalha" >
 		<div class="row">
 			<div class="btn-group btn-breadcrumb">
-				<a class="btn btn-default" href="../init/index.php?home="><div>i3Geo</div></a>
-				<a class="btn btn-default" style="pointer-events: none"><div>Admin</div></a>
+				<a class="btn btn-default" href="../init/index.php?home="><span>i3Geo</span></a>
+				<a class="btn btn-default" style="pointer-events: none"><span>Admin</span></a>
 			</div>
 		</div>
 	</div>

@@ -7,10 +7,10 @@ include "../../head.php";
 <div class="container-fluid migalha">
 	<div class="row">
 		<div class="btn-group btn-breadcrumb">
-			<a class="btn btn-default" href="../../../init/index.php"><div>i3Geo</div></a>
-			<a class="btn btn-default" href="../../index.php"><div>Admin</div></a>
-			<a class="btn btn-default" style="pointer-events: none"><div>Cadastros</div></a>
-			<a class="btn btn-default" style="pointer-events: none"><div>Identifica</div></a>
+			<a class="btn btn-default" href="../../../init/index.php"><span>i3Geo</span></a>
+			<a class="btn btn-default" href="../../index.php"><span>Admin</span></a>
+			<a class="btn btn-default" style="pointer-events: none"><span>Cadastros</span></a>
+			<a class="btn btn-default" style="pointer-events: none"><span>Identifica</span></a>
 		</div>
 	</div>
 </div>

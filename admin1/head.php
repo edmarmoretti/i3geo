@@ -238,6 +238,10 @@ h2 small {
 	margin-top: 0px;"
 }
 
+.migalha span{
+	text-transform: none;
+}
+
 /* Breadcrumbs from http://bootsnipp.com/snippets/featured/triangle-breadcrumbs-arrows */
 .btn-breadcrumb .btn:not(:last-child):after {
   content: " ";
@@ -394,25 +398,25 @@ h2 small {
 	</nav>
 	<!-- Modal para o filtro -->
 	<div id="modalFiltro" class="modal fade" tabindex="-1">
-			<div class="modal-dialog modal-lg">
-				<div class="modal-content">
-					<div class="modal-header">
-						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-							<span aria-hidden="true">&times;</span>
-						</button>
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body modal-lg" style=height:200px >
+					<!-- aqui entra o filtro -->
+					<div class="form-group">
+						<select title="{{{filtro}}}" title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+						</select>
 					</div>
-					<div class="modal-body modal-lg" style=height:200px >
-						<!-- aqui entra o filtro -->
-						<div class="form-group">
-							<select title="{{{filtro}}}" title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
-							</select>
-						</div>
-						<div class="clearfix"></div>
-					</div>
+					<div class="clearfix"></div>
 				</div>
 			</div>
 		</div>
 	</div>
+
 	<!--Modal de uso geral Varia apenas o body -->
 	<div id="modalGeral" class="modal fade" tabindex="-1">
 		<div class="modal-dialog modal-lg">

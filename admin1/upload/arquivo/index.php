@@ -8,10 +8,10 @@ include "../../head.php";
 	<div class="container-fluid migalha" >
 		<div class="row">
 			<div class="btn-group btn-breadcrumb">
-				<a class="btn btn-default" href="../../../init/index.php"><div>i3Geo</div></a>
-				<a class="btn btn-default" href="../../index.php"><div>Admin</div></a>
-				<a class="btn btn-default" style="pointer-events: none"><div>Upload</div></a>
-				<a class="btn btn-default" style="pointer-events: none"><div>Arquivo shapefile</div></a>
+				<a class="btn btn-default" href="../../../init/index.php"><span>i3Geo</span></a>
+				<a class="btn btn-default" href="../../index.php"><span>Admin</span></a>
+				<a class="btn btn-default" style="pointer-events: none"><span>Upload</span></a>
+				<a class="btn btn-default" style="pointer-events: none"><span>Arquivo shapefile</span></a>
 			</div>
 		</div>
 	</div>
@@ -49,19 +49,19 @@ include "../../head.php";
 			<div class="col-md-12">
 				<h4>{{{txtArquivos}}}</h4>
 				<div class="form-group form-group-lg col-md-6">
-					<input name="i3GEOuploadshp" multiple="" type="file"> <input readonly="" class="form-control"
+					<input name="i3GEOuploadshp" type="file"> <input class="form-control"
 						placeholder="SHP" type="text">
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input name="i3GEOuploadshx" multiple="" type="file"> <input readonly="" class="form-control"
+					<input name="i3GEOuploadshx" type="file"> <input class="form-control"
 						placeholder="SHX" type="text">
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input name="i3GEOuploaddbf" multiple="" type="file"> <input readonly="" class="form-control"
+					<input name="i3GEOuploaddbf" type="file"> <input class="form-control"
 						placeholder="DBF" type="text">
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input name="i3GEOuploadprj" multiple="" type="file"> <input readonly="" class="form-control"
+					<input name="i3GEOuploadprj" type="file"> <input class="form-control"
 						placeholder="PRJ (opcional)" type="text">
 				</div>
 			</div>

@@ -9,11 +9,11 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 <div class="container-fluid migalha">
 	<div class="row">
 		<div class="btn-group btn-breadcrumb">
-			<a class="btn btn-default" href="../../../../init/index.php"><div>i3Geo</div></a>
-			<a class="btn btn-default" href="../../../index.php"><div>Admin</div></a>
-			<a class="btn btn-default" style="pointer-events: none"><div>Cat&aacute;logo</div></a>
-			<a class="btn btn-default" href="../index.php"><div>Atlas</div></a>
-			<a class="btn btn-default" style="pointer-events: none"><div>Pranchas</div></a>
+			<a class="btn btn-default" href="../../../../init/index.php"><span>i3Geo</span></a>
+			<a class="btn btn-default" href="../../../index.php"><span>Admin</span></a>
+			<a class="btn btn-default" style="pointer-events: none"><span>Cat&aacute;logo</span></a>
+			<a class="btn btn-default" href="../index.php"><span>Atlas</span></a>
+			<a class="btn btn-default" style="pointer-events: none"><span>Pranchas</span></a>
 		</div>
 	</div>
 </div>

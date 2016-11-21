@@ -10,12 +10,12 @@ $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 <div class="container-fluid migalha">
 	<div class="row">
 		<div class="btn-group btn-breadcrumb">
-			<a class="btn btn-default" href="../../../../../init/index.php"><div>i3Geo</div></a>
-			<a class="btn btn-default" href="../../../../index.php"><div>Admin</div></a>
-			<a class="btn btn-default" style="pointer-events: none"><div>Cat&aacute;logo</div></a>
-			<a class="btn btn-default" href="../../index.php"><div>Atlas</div></a>
-			<a class="btn btn-default" href="../index.php?id_atlas=<?php echo $id_atlas; ?>&id_filtro=<?php echo $id_prancha; ?>"><div>Pranchas</div></a>
-			<a class="btn btn-default" style="pointer-events: none"><div>Temas</div></a>
+			<a class="btn btn-default" href="../../../../../init/index.php"><span>i3Geo</span></a>
+			<a class="btn btn-default" href="../../../../index.php"><span>Admin</span></a>
+			<a class="btn btn-default" style="pointer-events: none"><span>Cat&aacute;logo</span></a>
+			<a class="btn btn-default" href="../../index.php"><span>Atlas</span></a>
+			<a class="btn btn-default" href="../index.php?id_atlas=<?php echo $id_atlas; ?>&id_filtro=<?php echo $id_prancha; ?>"><span>Pranchas</span></a>
+			<a class="btn btn-default" style="pointer-events: none"><span>Temas</span></a>
 		</div>
 	</div>
 </div>
