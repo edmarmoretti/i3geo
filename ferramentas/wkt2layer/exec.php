@@ -17,8 +17,8 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 		include_once("../../classesphp/classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,"");
-		if(!isset($marca)){
-			$marca="";
+		if(!isset($_GET["marca"])){
+			$_GET["marca"]="";
 		}
 		$shp = ms_shapeObjFromWkt($_GET["xy"]);
 		if($shp->type == MS_SHAPE_POINT){
@@ -38,10 +38,10 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 		include_once("../../classesphp/classe_analise.php");
 		$m = new Analise($map_file,"");
 		$nomeLayer = $m->aplicaFuncaoListaWKT(array($_GET["xy"]),"converteSHP",$dir_tmp,$imgdir);
+
 		$l = $m->mapa->getlayerbyname($nomeLayer);
 		$l->setmetadata("tema",$_GET["nometema"]);
 		//verifica projecao
-		//verifica a projecao
 		$shp = ms_shapeObjFromWkt($_GET["xy"]);
 		$c = $shp->getCentroid();
 		$c = $c->x;
@@ -49,7 +49,7 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 			$l->setprojection(pegaProjecaoDefault("proj4"));
 		}
 		else{
-			$l->setprojection($this->mapa->getProjection());
+			$l->setprojection($m->mapa->getProjection());
 		}
 		$m->salva();
 		redesenhaMapa();
