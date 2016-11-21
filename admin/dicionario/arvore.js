@@ -18,8 +18,8 @@ i3GEOadmin.arvore.dicionario = {
 	} ],
     'txtCria' : [ {
 		pt : "<p class=paragrafo>Utilize os bot&otilde;es para criar novos nomes de menus, grupos ou sub-grupos, formando listas de itens.<br>Os itens criados podem ser reaproveitados em v&aacute;rios n&oacute;s da &aacute;rvore.</p>",
-		en : "",
-		es : ""
+		en : "<p class=paragrafo>Use buttons to create new menus, groups and subgroups, building item lists.<br>New items can be reused into several catalog nodes.</p>",
+		es : "<p class=paragrafo>Utilice los botones para para crear nombre nuevos de men&uacute;s, grupos o subgrupos, formando lista de &iacute;tems.<br>Los &iacute;tems creados pueden ser reutilizados en varios nodos del &aacute;rbol.</p>"
 	} ],
     'editaGrupos' : [ {
 		pt : "Editar lista de grupos",
