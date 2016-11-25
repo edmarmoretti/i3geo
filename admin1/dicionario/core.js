@@ -90,26 +90,6 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'editarI3geo' : [ {
-		pt : "editar no i3Geo",
-		en : "",
-		es : ""
-	} ],
-    'testarI3geo' : [ {
-		pt : "testar no i3Geo",
-		en : "",
-		es : ""
-	} ],
-    'editorTxt' : [ {
-		pt : "Editor de textos",
-		en : "",
-		es : ""
-	} ],
-    'abrirI3geo' : [ {
-		pt : "Abrir no i3Geo",
-		en : "",
-		es : ""
-	} ],
     'msgBuscaDados' : [ {
 		pt : " buscando dados",
 		en : "",

@@ -2,7 +2,7 @@
 <div class="list-group-item" id="form-{{codigo}}">
 	<div class="row-content">
 		<h4 class="list-group-item-heading">
-			<a href="javascript:void(0)" onclick="i3GEOadmin.mapfile.maisOpcoesDialogo('{{codigo}}');" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+			<a href="opcoes/index.php?codigo={{codigo}}&id_tema={{id_tema}}" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons  md-18">more_horiz</i>
 			</a>
 			<span class="pull-right">&nbsp;&nbsp;</span>

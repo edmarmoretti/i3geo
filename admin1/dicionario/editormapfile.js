@@ -1,5 +1,25 @@
 //+$trad(1,i3GEOadmin.editormapfile.dicionario)+
 i3GEOadmin.mapfile.dicionario = {
+    'editarI3geo' : [ {
+		pt : "Editar usando o i3Geo",
+		en : "",
+		es : ""
+	} ],
+    'testarI3geo' : [ {
+		pt : "Testar no i3Geo",
+		en : "",
+		es : ""
+	} ],
+    'editorTxt' : [ {
+		pt : "Editar mapfile com editor de textos",
+		en : "",
+		es : ""
+	} ],
+    'abrirI3geo' : [ {
+		pt : "Abrir no i3Geo",
+		en : "",
+		es : ""
+	} ],
 	'txtTitulo' : [ {
 		pt : "Edi&ccedil;&atilde;o de arquivos Mapfiles",
 		en : "",
@@ -116,7 +136,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'limpaCache' : [ {
-		pt : "limpa o cache de imagens se houver",
+		pt : "Limpa o cache de imagens se houver",
 		en : "",
 		es : ""
 	} ],
@@ -127,6 +147,11 @@ i3GEOadmin.mapfile.dicionario = {
 	} ],
     'gruposUsuarios' : [ {
 		pt : "Grupos de usu&aacute;rios que podem utilizar",
+		en : "",
+		es : ""
+	} ],
+    'txtGruposUsuarios' : [ {
+		pt : "Grupos de usu&aacute;rios que podem utilizar essa camada. Os grupos s&atilde;o definidos na op&ccedil;&atilde;o existente no menu principal.",
 		en : "",
 		es : ""
 	} ],
