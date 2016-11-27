@@ -6,7 +6,7 @@ Utilize esse repositório para manter seu código sempre atualizado diariamente.
 
 Arquivos antigos e outras informações, veja em: https://softwarepublico.gov.br/social/i3geo/
 
-Guia completo sobre instalação e administração do software, veja em: http://moodle.gvsig-training.com/mod/book/view.php?id=5025
+Guia completo sobre instalação e administração do software, veja em: https://softwarepublico.gov.br/gitlab/i3geo/i3geo/wikis/home
 
 Sobre segurança: http://moodle.gvsig-training.com/mod/book/view.php?id=5025&chapterid=116
 
