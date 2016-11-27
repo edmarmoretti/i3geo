@@ -28,6 +28,15 @@ Teste a instalação digitando em seu navegador de internet: http://localhost (s
 
 Depois de instalado o MS4W você terá em seu computador a pasta c:\ms4w\Apache\htdocs. Dentro dessa pasta é que o i3Geo deverá ser copiado.
 
+Alguns usuários reportaram problemas ao instalar o Apache em algumas versões do Windows. Nesses casos a seguinte rotina pode resolver o problema:
+
+* No Painel de Controle, digite no campo de pesquisa UAC
+* Escolha a opção “Alterar configurações de Controle de Contas de Usuário”.
+* Na janela que será aberta na sequência, configure para “Nunca notificar“.
+* Reinicie o computador
+* Execute novamente o arquivo apache-install.bat
+* Para confirmar que tudo ocorreu bem, abra o navegador de internet e digite http:\\localhost
+
 ### i3Geo
 
 Para obter o código do i3Geo você tem duas opções, a primeira utiliza simplesmente o download de um arquivo e a segunda utiliza o Git. A vantagem da segunda opção é que você poderá atualizar sua instalação de forma mais fácil.
@@ -53,6 +62,19 @@ git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/i3g
 
 Não esqueça o PONTO no final da linha acima.
 
+### Postgis (opcional)
+
+Para instalar o Postgis siga o roteiro mostrado em http://postgis.net/windows_downloads
+
+Instale também o Pgadmin, que é uma interface gráfica para o Postgis: http://www.pgadmin.org/download/windows.php
+
+Caso deseje, carregue no Postgis o banco de dados do i3GeoSaúde. Esse banco é utilizado em alguns dos tutoriais do i3Geo e pode servir de teste para uso com o SAIKU.
+
+* Primeiro baixe o arquivo https://softwarepublico.gov.br/gitlab/i3geo/i3geosaude/blob/master/databasei3geosaude.backup
+* Abra o Pgadmin e crie uma nova conexão com o banco de dados. Em nome do host utilize "localhost" e o login e senha que você usou na istalação, normalmente "postgres".
+* Utilize as opções do Pgadmin para criar um novo banco de dados chamado i3geosaude. Ao criá-lo, utilize o banco de dados postgres como template e login e senha "postgres".
+* Clicando sobre o novo banco de dados, localize a opção "restore" e faça a carga do banco de dados que foi baixado no início.
+
 ## Linux (baseado em Ubuntu 14.04)
 
 Instale os softwares necesários para configurar o servidor web com PHP5, Mapserver e outros.
@@ -61,21 +83,50 @@ Importante: versões mais novas do Ubuntu utilizam PHP7, nesses casos, o i3Geo n
 
 No terminal, digite a sequência de comandos abaixo.
 
-	sudo apt-get install apache2 apache2-doc apache2-utils cgi-mapserver mapserver-bin sqlite libapache2-mod-php5 php5 php5-common php5-dev php5-curl php5-json php5-gd php5-odbc php5-pgsql php5-sqlite php5-ps php5-xmlrpc php5-xsl php5-imagick php5-mapscript
+```
+sudo apt-get install apache2 apache2-doc apache2-utils cgi-mapserver mapserver-bin sqlite libapache2-mod-php5 php5 php5-common php5-dev php5-curl php5-json php5-gd php5-odbc php5-pgsql php5-sqlite php5-ps php5-xmlrpc php5-xsl php5-imagick php5-mapscript
+sudo apt-get install php5-mbstring
+sudo apt-get install proj-epsg
+sudo a2enmod cgi
+sudo service apache2 restart
+sudo mkdir /var/www/html/i3geo
+sudo mkdir /tmp/ms_tmp
+sudo ln -s /tmp/ms_tmp /var/www/html/ms_tmp
+```
 
-	sudo apt-get install php5-mbstring
+Caso queira usar o software em conjunto com o i3Geo:
 
-	sudo apt-get install proj-epsg
+```
+sudo apt-get install r-cran-spatstat
+sudo apt-get install r-base r-base-core r-cran-maptools
+```
 
-	sudo a2enmod cgi
+### Dependendo da versão do Ubuntu, pode ser ainda necessário isso:
 
-	sudo service apache2 restart
+```
+sudo apt-get install php5-mbstring 
+```
 
-	sudo mkdir /var/www/html/i3geo
+Em alguns casos a mbstring já é instalada junto com o PHP, por isso esse comando pode gerar mensagem de erro sem maiores consequências.
 
-	sudo mkdir /tmp/ms_tmp
+Lista de códigos EPSG, sua ausência faz com que os serviços WMS não funcionem.
 
-	sudo ln -s /tmp/ms_tmp /var/www/html/ms_tmp
+```
+sudo apt-get install proj-epsg
+```
+
+Ativa o modo CGI
+
+```
+sudo a2enmod cgi
+```
+
+Para reiniciar o Apache e efetivar as mudanças
+
+
+```
+sudo service apache2 restart 
+```
 
 Teste a instalação digitando no seu navegador web http://localhost
 
@@ -96,11 +147,11 @@ Após a instalação, digite no navegador web http://localhost/i3geo
 
 * No terminal digite a sequência de comandos:
 
-	sudo apt-get install git-core
-
-	cd /var/www/html/i3geo
-
-	sudo git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/i3geo.git .
+```
+sudo apt-get install git-core
+cd /var/www/html/i3geo
+sudo git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/i3geo.git .
+```
 
 Não esqueça o ponto no final da linha acima.
 
@@ -108,9 +159,12 @@ Não esqueça o ponto no final da linha acima.
 
 Para uso local você pode modificar de forma mais liberal as permissões dos arquivos. No terminal digite:
 
-	sudo chmod -R 777 /var/www/html/i3geo
+```
+sudo chmod -R 777 /var/www/html/i3geo
+sudo chmod -R 777 /var/www/html/ms_tmp
+```
 
-	sudo chmod -R 777 /var/www/html/ms_tmp
+Em ambiente de produção devem ser consideradas as orientações que constam no artigo sobre segurança (ver Wiki).
 
 ### Atualização do código
 
@@ -118,8 +172,54 @@ Válido apenas se você não é um desenvolvedor do i3Geo e não tenha feito che
 
 Abra o terminal e digite os seguintes comandos (no Linux pode ser necessário usar `sudo`):
 
-	git stash
+```
+cd i3geo
+git stash
+git -c http.sslVerify=false pull
+git stash pop
+```
+### Postgis (opcional)
 
-	git -c http.sslVerify=false pull
+Instale o PostgreSQL e Postgis
 
-	git stash pop
+(dependendo da versão do Postgresql pode ser necessário alterar de 9.1 para a versão correta)
+
+```
+apt-get install postgresql postgis pgadmin3
+apt-get install postgresql-9.1-postgis
+```
+
+#### Instalando o banco de dados i3GeoSaude para testes
+
+Observações:
+
+* dependendo da versão do Postgresql pode ser necessário alterar de 9.1 e 1.5 para a versão correta. Veja a pasta /usr/share/postgresql para descobrir a versão instalada)
+
+* pode ser necessário o uso de sudo, exemplo: sudo su postgres -c "createdb i3geosaude"
+
+* você pode primeiro mudar para o usuário postgres e depois executar os comandos. Nesse caso utilize "sudo su postgres" e depois "psql"
+
+* para sair de "psql" digite \d
+
+* usando psql diretamente, termine a linha de comando sempre com ";"
+
+* para entrar em psql no database i3geosaude utilize "psql -d i3geosaude"
+
+* para executar um arquivo SQL utilize "\i arquivo.sql"
+
+Comandos para instalação:
+
+```
+su postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD 'postgres'\""
+su postgres -c "createdb i3geosaude"
+su postgres -c "createlang -d i3geosaude plpgsql"
+su postgres -c "psql -d i3geosaude -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql"
+su postgres -c "psql -d i3geosaude -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql"
+su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON geometry_columns TO PUBLIC;'"
+su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON geography_columns TO PUBLIC;'"
+su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'"
+/usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --schema-only --list "/var/www/databasei3geosaude.backup"
+/usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --data-only --list "/var/www/databasei3geosaude.backup"
+```
+
+(o password é: postgres)
