@@ -23,63 +23,63 @@ i3GEOadmin.arvore.dicionario = {
 	} ],
     'editaGrupos' : [ {
 		pt : "Editar lista de grupos",
-		en : "",
-		es : ""
+		en : "Edit group list",
+		es : "Editar lista de grupos"
 	} ],
     'editaSubgrupos' : [ {
 		pt : "Editar lista de sub-grupos",
-		en : "",
-		es : ""
+		en : "Edit subgroup list",
+		es : "Editar lista de subgrupos"
 	} ],
     'editaMenus' : [ {
 		pt : "Editar lista de menus",
-		en : "",
-		es : ""
+		en : "Edit menu list",
+		es : "Editar lista de men&uacute;s"
 	} ],
     'arvoreCatalogo' : [ {
 		pt : "&Aacute;rvore do cat&aacute;logo:",
-		en : "",
-		es : ""
+		en : "Catalog tree:",
+		es : "&Aacute;rbol de cat&aacute;logo:"
 	} ],
     'adicionaMenu' : [ {
 		pt : "Adicionar um novo menu",
-		en : "",
-		es : ""
+		en : "Add a new menu",
+		es : "Agregar un men&uacute; nuevo"
 	} ],
     'adicionaGrupo' : [ {
 		pt : "Adicionar um novo grupo",
-		en : "",
-		es : ""
+		en : "Add a new group",
+		es : "Agregar un grupo nuevo"
 	} ],
     'adicionaSubgrupo' : [ {
 		pt : "Adicionar um novo subgrupo",
-		en : "",
-		es : ""
+		en : "Add a new subgroup",
+		es : "Agregar un subgrupo nuevo"
 	} ],
     'adicionaNovo' : [ {
 		pt : "Adicionar um novo",
-		en : "",
-		es : ""
+		en : "Add a new",
+		es : "Agregar un nuevo"
 	} ],
     'grupos' : [ {
 		pt : "Grupos",
-		en : "",
-		es : ""
+		en : "Groups",
+		es : "Grupos"
 	} ],
     'raizMenu' : [ {
 		pt : "Temas na raiz do menu",
-		en : "",
-		es : ""
+		en : "Themes of menu root",
+		es : "Temas de la ra&iacute;z del men&uacute;"
 	} ],
     'subgrupos' : [ {
 		pt : "Subgrupos",
-		en : "",
-		es : ""
+		en : "Subgroups",
+		es : "Subgrupos"
 	} ],
     'temas' : [ {
 		pt : "Temas",
-		en : "",
-		es : ""
+		en : "Themes",
+		es : "Temas"
 	} ],
     'editaNo' : [ {
 		pt : " ??? vc precisa editar esse n&oacute;",
