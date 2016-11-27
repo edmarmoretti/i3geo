@@ -10,7 +10,11 @@ Guia completo sobre instalação e administração do software, veja em: https:/
 
 Sobre segurança: http://moodle.gvsig-training.com/mod/book/view.php?id=5025&chapterid=116
 
-# Guia rápido de instalação
+# Guia de instalação
+
+O i3Geo pode ser instalado em diferentes sistemas operacionais Linux e também no Windows. Nesse tutorial será mostrado como instalar no Windows e no Ubuntu.
+
+Os arquivos do i3Geo estão disponíveis no Portal do Software Público Brasileiro (SPB). Para ter acesso a eles é desejável fazer um cadastro. O SPB, utiliza o GIT, um sistema de controle de versões para disponibilizar o código. Assim, para obter os arquivos do i3Geo é necessário ter um cliente GIT. No Windows pode ser utilizado o Tortoise. A utilização do GIT é importante pois você poderá atualizar o software sempre que achar necessário.
 
 ## Windows
 
@@ -41,17 +45,19 @@ Para obter o código do i3Geo você tem duas opções, a primeira utiliza simple
 * Após a instalação, clique com o botão da direita sobre a pasta c:\ms4w\Apache\htdocs e escolha a opção "Git Bash Here"
 * No terminal digite a sequência de comandos:
 
-	mkdir i3geo
+```
+mkdir i3geo
+cd i3geo
+git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/i3geo.git .
+```
 
-	cd i3geo
+Não esqueça o PONTO no final da linha acima.
 
-	git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/i3geo.git .
-
-Não esqueça o ponto no final da linha acima.
-
-## Linux (baseado em Ubuntu)
+## Linux (baseado em Ubuntu 14.04)
 
 Instale os softwares necesários para configurar o servidor web com PHP5, Mapserver e outros.
+
+Importante: versões mais novas do Ubuntu utilizam PHP7, nesses casos, o i3Geo não irá funcionar.
 
 No terminal, digite a sequência de comandos abaixo.
 
