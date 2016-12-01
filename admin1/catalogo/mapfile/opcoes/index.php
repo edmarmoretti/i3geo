@@ -14,6 +14,7 @@ $id_tema = (int) $_GET ["id_tema"];
 			<a class="btn btn-default" style="pointer-events: none"><span>Cat&aacute;logo</span></a>
 			<a class="btn btn-default" href="../index.php" ><span>Mapfiles</span></a>
 			<a class="btn btn-default" style="pointer-events: none"><span>Op&ccedil;&otilde;es</span></a>
+			<a class="btn btn-default" style="pointer-events: none" ><span><?php echo $codigo; ?></span></a>
 		</div>
 	</div>
 </div>

@@ -5,27 +5,15 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"CD_LEGENDA"
       "CACHE"	"sim"
       "CLASSE"	"SIM"
-      "olopacity"	""
       "permitekmz"	"nao"
-      "gmopacity"	""
-      "gmstatus"	""
       "ITENSDESC"	"Bioma Teste de acentuação"
       "ESCALA"	"1000000"
       "TILES"	"NAO"
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "arquivotemaoriginal"	""
       "extensao"	"-76 -39 -29 9"
-      "nomeoriginal"	""
-      "olstatus"	""
       "permitedownload"	"sim"
-      "FILTROORIGINAL"	""
-      "DATAORIGINAL"	""
-      "PLUGINI3GEO"	""
-      "metaestat"	""
       "download"	"sim"
       "itembuscarapida"	"CD_LEGENDA"
       "ITENS"	"CD_LEGENDA"
@@ -98,6 +86,4 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
-
 END # MAP
-
