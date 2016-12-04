@@ -83,53 +83,53 @@ i3GEOadmin.arvore.dicionario = {
 	} ],
     'editaNo' : [ {
 		pt : " ??? vc precisa editar esse n&oacute;",
-		en : "",
-		es : ""
+		en : "You need edit this node",
+		es : "Usted necesita editar este nodo"
 	} ],
     'raizGrupo' : [ {
 		pt : "Temas na raiz do grupo:",
-		en : "",
-		es : ""
+		en : "Themes in the group root:",
+		es : "Temas en las ra&iacute;z del grupo:"
 	} ],
     'msgTema' : [ {
 		pt : " adicionando tema...",
-		en : "",
-		es : ""
+		en : " adding theme...",
+		es : " agregando tema.."
 	} ],
     'msgGrupo' : [ {
 		pt : " adicionando grupo...",
-		en : "",
-		es : ""
+		en : " adding group...",
+		es : " agregando grupo..."
 	} ],
     'msgSubgrupo' : [ {
 		pt : " adicionando subgrupo...",
-		en : "",
-		es : ""
+		en : " adding subgroup...",
+		es : " agregando subgrupo..."
 	} ],
     'escolheGrupo' : [ {
 		pt : "Escolha o grupo para esse n&iacute;vel:",
-		en : "",
-		es : ""
+		en : "Select a group for this level",
+		es : "Seleccione un grupo para este nivel"
 	} ],
     'msgBusca' : [ {
 		pt : "Buscando...",
-		en : "",
-		es : ""
+		en : "Searching...",
+		es : "Buscando..."
 	} ],
     'novoGrupo' : [ {
 		pt : "Ou digite o nome de um novo grupo:",
-		en : "",
-		es : ""
+		en : "Or type a new group name:",
+		es : "O escriba un nombre de un grupo nuevo:"
 	} ],
     'perfilVer' : [ {
 		pt : "Perfis que podem ver:",
-		en : "",
-		es : ""
+		en : "Authorized users:",
+		es : "Pefiles que pueden ver:"
 	} ],
     'publicado' : [ {
 		pt : "Publicado?",
-		en : "",
-		es : ""
+		en : "Published?",
+		es : "Publicado?"
 	} ],
     'escolheSubgrupo' : [ {
 		pt : "Escolha o subgrupo para esse n&iacute;vel:",
