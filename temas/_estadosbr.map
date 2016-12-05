@@ -7,7 +7,6 @@ MAP
       "CLASSE"	"SIM"
       "permitekmz"	"SIM"
       "permitedownload"	"SIM"
-      "METAESTAT"	""
       "permitekml"	"SIM"
       "permiteogc"	"SIM"
       "TEMA"	"Limite Estadualx"
@@ -25,6 +24,4 @@ MAP
       END # STYLE
     END # CLASS
   END # LAYER
-
 END # MAP
-

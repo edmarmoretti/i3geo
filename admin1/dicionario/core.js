@@ -1,5 +1,10 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
 i3GEOadmin.core.dicionario = {
+	'tabela' : [ {
+		pt : "Tabela",
+		en : "",
+		es : ""
+	} ],
 	'inicio' : [ {
 		pt : "In&iacute;cio",
 		en : "",

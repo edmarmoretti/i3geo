@@ -24,7 +24,7 @@
 <div class="list-group-item">
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
-			<a title="{{{editorTxt}}}" onclick="window.open('../../../../admin/php/editortexto.php?mapfile={{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+			<a title="{{{editorTxt}}}" href="../editor/index.php?codigo={{codigo}}" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">sending</i>
 			</a>
 			{{{editorTxt}}}

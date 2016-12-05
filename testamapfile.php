@@ -274,10 +274,12 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 		}
 		if(!stristr($tema, '.map') === FALSE){
 			if(file_exists($mapUrl)){
+				ms_ResetErrorList();
 				if(@ms_newMapObj($mapUrl)){
 					$nmapa = ms_newMapObj($mapUrl);
 				}
 				else{
+
 					echo "Erro no arquivo $mapUrl <br>";
 					$error = ms_GetErrorObj();
 					while($error && $error->code != MS_NOERR){

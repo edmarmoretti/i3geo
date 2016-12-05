@@ -1,5 +1,10 @@
 //+$trad(1,i3GEOadmin.editormapfile.dicionario)+
 i3GEOadmin.mapfile.dicionario = {
+    'ajudaEditor' : [ {
+		pt : "Salve antes de testar. Mais detalhes sobre a edi&ccedil;&atilde;o de mapfiles veja em:",
+		en : "",
+		es : ""
+	} ],
     'editarI3geo' : [ {
 		pt : "Editar usando o i3Geo",
 		en : "",
