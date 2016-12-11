@@ -133,28 +133,28 @@ i3GEOadmin.arvore.dicionario = {
 	} ],
     'escolheSubgrupo' : [ {
 		pt : "Escolha o subgrupo para esse n&iacute;vel:",
-		en : "",
-		es : ""
+		en : "Select a subgroup for this level:",
+		es : "Seleccione un subgrupo para este nivel:"
 	} ],
     'novoSubgrupo' : [ {
 		pt : "Ou digite o nome de um novo subgrupo:",
-		en : "",
-		es : ""
+		en : "Or type a new subgroup name:",
+		es : "O escriba un nombre de un subgrupo nuevo:"
 	} ],
     'escolheTema' : [ {
 		pt : "Escolha o tema para esse n&iacute;vel:",
-		en : "",
-		es : ""
+		en : "Select a theme for this level:",
+		es : "Seleccione un tema para este nivel:"
 	} ],
     'ordem' : [ {
 		pt : "Ordem",
-		en : "",
-		es : ""
+		en : "Order",
+		es : "Orden"
 	} ],
     'tema' : [ {
 		pt : "Tema:",
-		en : "",
-		es : ""
+		en : "Theme:",
+		es : "Tema:"
 	} ],
     'msgNaoExclui' : [ {
 		pt : "Nao foi possivel excluir. Verifique se nao existem menus vinculados a este tema",
