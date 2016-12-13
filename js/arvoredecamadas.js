@@ -689,6 +689,17 @@ i3GEO.arvoreDeCamadas =
 				id : "limpaSelMapa",
 				status : true
 			},
+			"ligaDesligaTema" : {
+				tipo : "tema",
+				icone : "",
+				classe : "arvCamFerramentas",
+				funcao : "i3GEO.arvoreDeCamadas.ligaDesligaClick",
+				title : $trad("ligaDesliga"),
+				dica : "",
+				id : "",
+				status : true,
+				flag : true
+			},
 			"ferramentasTema" : {
 				tipo : "tema",
 				icone : "imagens/oxygen/16x16/configure-shortcuts.png",
@@ -832,6 +843,12 @@ i3GEO.arvoreDeCamadas =
 				status : true,
 				flag : true
 			}
+		},
+		/*
+		 * Utilizado apenas para aplicar o evento de onclick quando e escolhida a opcao de ligar/desligar camada no menu de contexto
+		 */
+		ligaDesligaClick: function(tema){
+			$i(tema+"ckbox").click()
 		},
 		/**
 		 * Function: cria

@@ -2764,5 +2764,12 @@ var g_traducao =
 				en : "",
 				es : ""
 			}
+		],
+   		"ligaDesliga" : [
+			{
+				pt : "Liga/Desliga",
+				en : "",
+				es : ""
+			}
 		]
 	};
