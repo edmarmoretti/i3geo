@@ -28,19 +28,11 @@ error_reporting ( 0 );
 //
 
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
-$funcoesEdicao = array (
-		"ADICIONAR",
-		"ALTERAR",
-		"EXCLUIR",
-		"LISTA",
-		"LISTAUNICO"
-);
-if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/usuarios" ) === false) {
-		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
-		exit ();
-	}
+if (verificaOperacaoSessao ( "admin/html/usuarios" ) === false) {
+	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
+	exit ();
 }
+
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 
 $id_usuario = $_POST["id_usuario"];

@@ -1,4 +1,9 @@
 <?php
+//TODO botoes de copiar, colar, limpar
+//TODO testa mapfile em um modal
+//TODO preview com openlayers
+//TODO editor de cores
+//
 define ( ONDEI3GEO, "../../../.." );
 include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
 error_reporting ( 0 );
@@ -45,7 +50,7 @@ $textoMapfile = textoMapfile ( $codigo );
 					<a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Mapserver</a>
 				</blockquote>
 				<a onclick="i3GEOadmin.editor.salvar()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> {{{salva}}} </a>
-				<a onclick="preview()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> Preview </a>
+				<a onclick="i3GEOadmin.editor.preview()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> Preview </a>
 				<a onclick="window.open('../../../../testamapfile.php?map=<?php echo $codigo;?>.map')" href="javascript:void(0)" class="btn btn-primary" style="color: #008579;" role="button"> {{{testaLayer}}} </a>
 				<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{testarI3geo}}} </a>
 				<a onclick="window.open('../../../../ferramentas/recline/default.php?tema=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>

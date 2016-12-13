@@ -242,7 +242,7 @@ i3GEOF.geolocal =
 			$i("i3GEOFgeolocalListaDePontos").innerHTML = "<table class='lista8' >" + res.join("") + "</table>";
 			$i("i3GEOFgeolocalNcoord").innerHTML = n;
 			if (i3GEO.Interface["ATUAL"] === "openlayers") {
-				if (typeof OpenLayers == "undefined") {
+				if (typeof OpenLayers.Control == "undefined") {
 					api = "ol3";
 				} else {
 					api = "openlayers";

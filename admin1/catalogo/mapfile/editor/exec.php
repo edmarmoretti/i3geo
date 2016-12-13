@@ -73,7 +73,7 @@ function textoMapfile($codigo) {
 	}
 }
 function salvaMapfile() {
-	global $locaplic, $dbhw, $codigo, $gravarTexto;
+	global $locaplic, $dbhw, $codigo, $gravarTexto, $esquemaadmin;
 	if (empty ( $gravarTexto )) {
 		return;
 	}
@@ -169,7 +169,7 @@ function salvaMapfile() {
 			}
 			if ($passou == true) {
 				if (mb_detect_encoding ( $line, 'UTF-8' ) == "UTF-8") {
-					$line = mb_convert_encoding($line,"ISO-8859-1","UTF-8");
+					$line = mb_convert_encoding ( $line, "ISO-8859-1", "UTF-8" );
 				}
 				$novoTexto [] = $line;
 			}
@@ -197,37 +197,36 @@ function salvaMapfile() {
 
 	// cria o objeto map
 	$mapa = ms_newMapObj ( $mapfile );
-	/*
-	 * $layer = $mapa->getlayerbyname ( $codigo );
-	 * if ($layer == "") {
-	 * echo "<br><span style='color:red;'>Atenção: não existe nenhum LAYER com NAME igual a " . $codigo . "</span><br>";
-	 * } else {
-	 * include ("conexao.php");
-	 * // pega o metadata
-	 * $meta = $layer->getmetadata ( "permitedownload" );
-	 * $meta = strtoupper ( $meta );
-	 * if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
-	 * // grava no banco
-	 * $dbhw->query ( "UPDATE " . $esquemaadmin . "i3geoadmin_temas SET download_tema='$meta' WHERE codigo_tema = '$codigo_tema'" );
-	 * }
-	 * $meta = $layer->getmetadata ( "permiteogc" );
-	 * $meta = strtoupper ( $meta );
-	 * if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
-	 * $dbhw->query ( "UPDATE " . $esquemaadmin . "i3geoadmin_temas SET ogc_tema='$meta' WHERE codigo_tema = '$codigo_tema'" );
-	 * }
-	 * $meta = $layer->getmetadata ( "permitekml" );
-	 * $meta = strtoupper ( $meta );
-	 * if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
-	 * $dbhw->query ( "UPDATE " . $esquemaadmin . "i3geoadmin_temas SET kml_tema='$meta' WHERE codigo_tema = '$codigo_tema'" );
-	 * }
-	 * $meta = $layer->getmetadata ( "permitekmz" );
-	 * $meta = strtoupper ( $meta );
-	 * if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
-	 * $dbhw->query ( "UPDATE " . $esquemaadmin . "i3geoadmin_temas SET kmz_tema='$meta' WHERE codigo_tema = '$codigo_tema'" );
-	 * }
-	 * $dbhw = null;
-	 * $dbh = null;
-	 * }
-	 */
+
+	$layer = $mapa->getlayerbyname ( $codigo );
+	if ($layer == "") {
+		return "<br><span style='color:red;'>Atenção: não existe nenhum LAYER com NAME igual a " . $codigo . "</span><br>";
+	} else {
+		// pega o metadata
+		$meta = $layer->getmetadata ( "permitedownload" );
+		$meta = strtoupper ( $meta );
+		$dataCol = array();
+		if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
+			$dataCol["download_tema"] = $meta;
+		}
+		$meta = $layer->getmetadata ( "permiteogc" );
+		$meta = strtoupper ( $meta );
+		if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
+			$dataCol["ogc_tema"] = $meta;
+		}
+		$meta = $layer->getmetadata ( "permitekml" );
+		$meta = strtoupper ( $meta );
+		if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
+			$dataCol["kml_tema"] = $meta;
+		}
+		$meta = $layer->getmetadata ( "permitekmz" );
+		$meta = strtoupper ( $meta );
+		if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
+			$dataCol["kmz_tema"] = $meta;
+		}
+		$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE codigo_tema = '$codigo'" );
+		$dbhw = null;
+		$dbh = null;
+	}
 }
 ?>

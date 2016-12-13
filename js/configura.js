@@ -516,24 +516,9 @@ i3GEO.configura =
 										url : "javascript:i3GEO.mapa.dialogo.selecao();"
 									},
 									{
-										id : "omenudataFerramentas7a",
-										text : "<span class='i3GEOiconeFerramenta i3GEOiconeCongela'></span>" + $trad("x64a"),
-										url : "javascript:i3GEO.mapa.dialogo.congelaMapa();"
-									},
-									{
-										id : "omenudataFerramentas8a",
-										text : "<span class='i3GEOiconeFerramenta i3GEOiconeAutoredesenha'></span>" + $trad("p12"),
-										url : "javascript:i3GEO.mapa.dialogo.autoredesenha()"
-									},
-									{
 										id : "omenudataFerramentas9",
 										text : "<span class='i3GEOiconeFerramenta i3GEOiconeVinde'></span>" + $trad("x85"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"
-									},
-									{
-										id : "omenudataFerramentas10",
-										text : "<span class='i3GEOiconeFerramenta i3GEOiconeGeoLocal'></span>" + $trad("x93"),
-										url : "javascript:i3GEO.mapa.dialogo.geolocal()"
 									},
 									{
 										id : "omenudataFerramentas11",
@@ -774,6 +759,21 @@ i3GEO.configura =
 										id : "omenudataNavegacaoLente",
 										text : $trad("d18t"),
 										url : "javascript:i3GEO.navega.lente.inicia()"
+									},
+									{
+										id : "omenudataFerramentas7a",
+										text : $trad("x64a"),
+										url : "javascript:i3GEO.mapa.dialogo.congelaMapa();"
+									},
+									{
+										id : "omenudataFerramentas8a",
+										text : $trad("p12"),
+										url : "javascript:i3GEO.mapa.dialogo.autoredesenha()"
+									},
+									{
+										id : "omenudataFerramentas10",
+										text : $trad("x93"),
+										url : "javascript:i3GEO.mapa.dialogo.geolocal()"
 									}
 								]
 							]

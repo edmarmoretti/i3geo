@@ -1,12 +1,11 @@
 <?php
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 
-if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/subirshapefile" ) == false) {
-		retornaJSON ( "Vc nao pode realizar essa operacao." );
-		exit ();
-	}
+if (verificaOperacaoSessao ( "admin/html/subirshapefile" ) == false) {
+	retornaJSON ( "Vc nao pode realizar essa operacao." );
+	exit ();
 }
+
 if (isset ( $_GET ["tipo"] )) {
 	$tipo = $_GET ["tipo"];
 }

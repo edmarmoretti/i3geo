@@ -311,7 +311,6 @@ h2 small {
 .btn-breadcrumb a:nth-child(6) { z-index:2; }
 .btn-breadcrumb a:nth-child(7) { z-index:1; }
 
-
 /* The responsive part */
 
 .btn-breadcrumb > * > div {
@@ -356,7 +355,9 @@ h2 small {
     }
 }
 
-
+.btn-breadcrumb a:not([style*="pointer-events: none"]) > span {
+	text-decoration: underline;
+}
 </style>
 </head>
 <script id="iconeAguardeTpl" type="x-tmpl-mustache">

@@ -28,21 +28,11 @@ error_reporting ( 0 );
 //
 
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
-$funcoesEdicao = array (
-		"LISTA",
-		"LISTAUNICO",
-		"ADICIONAR",
-		"EXCLUIR",
-		"LIMPACACHE",
-		"CLONARMAPFILE",
-		"ALTERAR"
-);
-if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
-		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
-		exit ();
-	}
+if (verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
+	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
+	exit ();
 }
+
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
 
 $codigo = $_POST ["codigo"];
