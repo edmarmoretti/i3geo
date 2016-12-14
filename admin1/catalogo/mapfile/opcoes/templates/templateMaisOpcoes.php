@@ -46,7 +46,7 @@
 <div class="list-group-item">
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
-			<a title="{{{testaLayer}}}" onclick="window.open('../../../../testamapfile.php?map={{codigo}}.map')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+			<a title="{{{testaLayer}}}" onclick="i3GEOadmin.opcoesmapfile.testa('{{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons">sending</i>
 			</a>
 			{{{testaLayer}}}

@@ -31,6 +31,10 @@ i3GEOadmin.editor = {
 		salvar: function(){
 			i3GEOadmin.core.iconeAguarde($("#titulo"));
 			$("form").submit();
+		},
+		testa: function(codigo){
+			i3GEOadmin.core.modalAguarde(true);
+			i3GEOadmin.teste.testaImg("../../../..",codigo,"","",$("#modalGeral .modal-body"))
 		}
 
 };

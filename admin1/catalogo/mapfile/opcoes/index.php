@@ -36,6 +36,7 @@ $id_tema = (int) $_GET ["id_tema"];
 include("templates/templateMaisOpcoes.php");
 ?>
 <script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="../teste/index.js"></script>
 <script type="text/javascript" src="../../../dicionario/editormapfile.js"></script>
 <script>
 	$(document).ready(function(){

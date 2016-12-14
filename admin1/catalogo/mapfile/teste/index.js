@@ -23,7 +23,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
  */
 i3GEOadmin.teste = {
-	testaImg: function(locaplic,codigo,ondeMapa,ondeLegenda){
+	testaImg: function(locaplic,codigo,ondeMapa,ondeLegenda,ondeAmbos){
 		if(ondeMapa && ondeMapa != ""){
 			i3GEOadmin.core.iconeAguarde(ondeMapa);
 		}
@@ -43,6 +43,9 @@ i3GEOadmin.teste = {
 					}
 					if(ondeLegenda && ondeLegenda != ""){
 						ondeLegenda.html("<img src='" + json.imgLegenda + "'>");
+					}
+					if(ondeAmbos && ondeAmbos != ""){
+						ondeAmbos.html("<img src='" + json.imgMapa + "'><br><br><img src='" + json.imgLegenda + "'><br><br><p>Time: " + json.tempo + "<br>Erros: " + json.erro);
 					}
 				}
 		)

@@ -225,8 +225,6 @@ function salvaMapfile() {
 			$dataCol["kmz_tema"] = $meta;
 		}
 		$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE codigo_tema = '$codigo'" );
-		$dbhw = null;
-		$dbh = null;
 	}
 }
 ?>

@@ -71,7 +71,7 @@ MAP
       NAME "AMAZÔNIA"
       EXPRESSION ('[CD_LEGENDA]'eq'AMAZÃ”NIA')
       STYLE
-        COLOR 102 177 195
+        COLOR 0 177 0
         OUTLINECOLOR 255 255 255
       END # STYLE
       TITLE ""

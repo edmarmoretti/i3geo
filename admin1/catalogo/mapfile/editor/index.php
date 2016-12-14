@@ -1,6 +1,6 @@
 <?php
 //TODO botoes de copiar, colar, limpar
-//TODO testa mapfile em um modal
+//TODO testa tabela do mapfile em um modal
 //TODO preview com openlayers
 //TODO editor de cores
 //
@@ -51,7 +51,7 @@ $textoMapfile = textoMapfile ( $codigo );
 				</blockquote>
 				<a onclick="i3GEOadmin.editor.salvar()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> {{{salva}}} </a>
 				<a onclick="i3GEOadmin.editor.preview()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> Preview </a>
-				<a onclick="window.open('../../../../testamapfile.php?map=<?php echo $codigo;?>.map')" href="javascript:void(0)" class="btn btn-primary" style="color: #008579;" role="button"> {{{testaLayer}}} </a>
+				<a onclick="i3GEOadmin.editor.testa('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #008579;" role="button"> {{{testaLayer}}} </a>
 				<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{testarI3geo}}} </a>
 				<a onclick="window.open('../../../../ferramentas/recline/default.php?tema=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>
 			</div>
@@ -66,6 +66,7 @@ $textoMapfile = textoMapfile ( $codigo );
 	</div>
 </div>
 <script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="../teste/index.js"></script>
 <script type="text/javascript" src="../../../dicionario/editormapfile.js"></script>
 <script>
 
