@@ -35,6 +35,10 @@ i3GEOadmin.editor = {
 		testa: function(codigo){
 			i3GEOadmin.core.modalAguarde(true);
 			i3GEOadmin.teste.testaImg("../../../..",codigo,"","",$("#modalGeral .modal-body"))
+		},
+		testaTabela: function(codigo){
+			i3GEOadmin.core.modalAguarde(true);
+			i3GEOadmin.teste.testaTabela("../../../..",codigo,$("#modalGeral .modal-body"))
 		}
 
 };

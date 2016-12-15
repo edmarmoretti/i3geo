@@ -1,6 +1,5 @@
 <?php
 //TODO botoes de copiar, colar, limpar
-//TODO testa tabela do mapfile em um modal
 //TODO preview com openlayers
 //TODO editor de cores
 //
@@ -53,7 +52,7 @@ $textoMapfile = textoMapfile ( $codigo );
 				<a onclick="i3GEOadmin.editor.preview()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> Preview </a>
 				<a onclick="i3GEOadmin.editor.testa('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #008579;" role="button"> {{{testaLayer}}} </a>
 				<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{testarI3geo}}} </a>
-				<a onclick="window.open('../../../../ferramentas/recline/default.php?tema=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>
+				<a onclick="i3GEOadmin.editor.testaTabela('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>
 			</div>
 			<form action="index.php?codigo=<?php echo $codigo;?>&id_tema=<?php echo $id_tema;?>" method="post">
 				<TEXTAREA id=editor name=texto class="well form-control" style='font-size: 16px; width: 100%; float: left; border: 2px dotted lightgray;'>

@@ -47,7 +47,11 @@ error_reporting(0);
 //carrega o phpmapscript
 //
 include_once ($locaplic."/classesphp/carrega_ext.php");
+
 include_once ($locaplic."/classesphp/funcoes_gerais.php");
+
+//TODO sera que isso e necessario?
+
 $mapfile = mapfilebase($base,$locaplic);
 
 //

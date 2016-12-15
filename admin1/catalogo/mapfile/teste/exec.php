@@ -28,6 +28,7 @@ error_reporting ( 0 );
 //
 
 include_once (dirname ( __FILE__ ) . "/../../../../admin/php/login.php");
+
 if (verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
@@ -45,22 +46,28 @@ if(!file_exists($tema)){
 	header ( "HTTP/1.1 500 erro mapfile nao encontrado" );
 	exit ();
 }
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "TESTAIMG" :
-		//include($locaplic . "/classesphp/funcoes_gerais.php");
 		$versao = versao();
 		$versao = $versao["principal"];
 		ms_ResetErrorList();
 		$tempo = microtime(true);
-		$retorno = verifica($tema);
+		$retorno = testaMapaImg($tema);
+		retornaJSON ( $retorno );
+		break;
+	case "TESTATABELA" :
+		$versao = versao();
+		$versao = $versao["principal"];
+		ms_ResetErrorList();
+		$tempo = microtime(true);
+		$retorno = testaTabela($tema);
 		retornaJSON ( $retorno );
 		break;
 }
-function verifica($tema){
-	global $locaplic,$postgis_mapa,$versao,$base,$dir_tmp,$tempo;
-
-	if($base == "" or !isset($base)){
+function mapaBase($locaplic,$versao,$base){
+	if($base == "" || !isset($base)){
 		$base = "";
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 			$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
@@ -80,23 +87,104 @@ function verifica($tema){
 			}
 		}
 	}
-	else{
-		if(!file_exists($base)){
-			$base = $locaplic."/aplicmap/".$base;
-		}
-	}
-	//echo $base;exit;
+	return $base;
+}
+function testaTabela($tema){
+	global $locaplic,$postgis_mapa,$versao,$base,$dir_tmp,$tempo;
+
+	$base = mapaBase($locaplic,$versao,$base);
+
 	$mapa = ms_newMapObj($base);
+	$nmapa = ms_newMapObj($tema);
 	error_reporting(0);
 	ms_ResetErrorList();
 
+	$numlayers = $nmapa->numlayers;
+	$dados = "";
+	for ($i=0;$i < $numlayers;$i++){
+		$layern = $nmapa->getlayer($i);
+		$layern->set("status",MS_DEFAULT);
+		error_reporting(0);
+		if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
+			$tipotemp = $layern->type;
+			$tiporep = $layern->getmetadata("tipooriginal");
+			$layern->set("type",MS_LAYER_POLYGON);
+			if ($tiporep == "linear"){
+				$layern->set("type",MS_LAYER_LINE);
+			}
+			if ($tiporep == "pontual"){
+				$layern->set("type",MS_LAYER_POINT);
+			}
+			$sld = $layern->generateSLD();
+			if($sld != ""){
+				$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+			}
+			$layern->set("type",$tipotemp);
+		}
+		$layerAdicionado = ms_newLayerObj($mapa, $layern);
+		$pegarext = $layern->name;
+	}
+
+	zoomTema($pegarext,$mapa);
+	include_once($locaplic."/classesphp/classe_atributos.php");
+
+	$t = new Atributos($mapa,$layern->name);
+
+	$r = $t->itensTexto();
+	$colunas = explode(";",$r["itens"]);
+
+	$ncolunas = count($colunas);
+	$registros = $r["valores"];
+	$nregistros = count($registros);
+	$error = "";
+	$error = ms_GetErrorObj();
+	$tab = "";
+	while($error && $error->code != MS_NOERR){
+		$tab .= "<br>Error in %s: %s<br>";
+		$tab .= $error->routine;
+		$tab .= $error->message;
+		$error = $error->next();
+	}
+	$tab .= "Registros em ISO-8859-1 s&atilde;o convertidos para UTF8<br>";
+	$tab .= "Registros: ".$nregistros;"<br>";
+	$tab .= "<br><b>Tempo leitura (s): ";
+	$tab .= microtime(true) - $tempo;
+	$tab .= "</b>";
+	$tab .= "<table>";
+	$tab .= "<tr>";
+	foreach($colunas as $co){
+		$tab .= "<td><b>".$co."</b></td>";
+	}
+	$tab .= "</tr>";
+	foreach($registros as $reg){
+		$tab .= "<tr>";
+		$cc = explode(";",$reg);
+		foreach($cc as $c){
+			if (mb_detect_encoding ( $c, 'UTF-8, ISO-8859-1' ) == "ISO-8859-1") {
+				$c = utf8_encode ( $c );
+			}
+			$tab .= "<td>".$c."</td>";
+		}
+		$tab .= "</tr>";
+	}
+	$tab .= "</table>";
+	$tab .= "<br><b>Tempo total (montagem da tabela) (s): ";
+	$tab .= microtime(true) - $tempo;
+	$tab .= "</b>";
+	return $tab;
+}
+function testaMapaImg($tema){
+	global $locaplic,$postgis_mapa,$versao,$base,$dir_tmp,$tempo;
+
+	$base = mapaBase($locaplic,$versao,$base);
+	$mapa = ms_newMapObj($base);
+	error_reporting(0);
+	ms_ResetErrorList();
 	try {
 		ms_newMapObj ( $tema );
 	} catch ( Exception $e ) {
 		return array("imgMapa"=>"","imgLegenda"=>"","tempo"=> (microtime(true) - $tempo),"erro"=>"Objeto map nao pode ser criado. Erro fatal.");
 	}
-
-
 	if(@ms_newMapObj($tema)){
 		$nmapa = ms_newMapObj($tema);
 	}
@@ -111,8 +199,8 @@ function verifica($tema){
 		}
 		return array("imgMapa"=>"","imgLegenda"=>"","tempo"=> (microtime(true) - $tempo),"erro"=>$erro);
 	}
-	restauraConObj($mapa,$postgis_mapa);
-	restauraConObj($nmapa,$postgis_mapa);
+	substituiConObj($mapa,$postgis_mapa);
+	substituiConObj($nmapa,$postgis_mapa);
 
 	$numlayers = $nmapa->numlayers;
 	$dados = "";

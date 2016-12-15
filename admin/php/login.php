@@ -63,6 +63,7 @@ error_reporting(0);
 //pega as variaveis passadas com get ou post
 //
 include_once(dirname(__FILE__)."/../safe.php");
+
 include_once(dirname(__FILE__)."/admin.php");
 
 //verifica se o login pode ser realizado

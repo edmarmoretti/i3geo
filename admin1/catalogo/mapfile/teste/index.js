@@ -58,5 +58,30 @@ i3GEOadmin.teste = {
 			}
 			i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 		});
+	},
+	testaTabela: function(locaplic,codigo,onde){
+		if(onde && onde != ""){
+			i3GEOadmin.core.iconeAguarde(onde);
+		}
+		$.post(
+				locaplic+"/admin1/catalogo/mapfile/teste/exec.php?funcao=testaTabela",
+				"codigo=" + codigo
+		)
+		.done(
+				function(data, status){
+					//objeto json com os dados vindos do banco
+					var json = jQuery.parseJSON(data);
+					if(onde && onde != ""){
+						onde.html(json);
+					}
+				}
+		)
+		.fail(function(data){
+			if(onde && onde != ""){
+				onde.html("");
+			}
+
+			i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+		});
 	}
 };

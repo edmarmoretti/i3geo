@@ -1,4 +1,5 @@
 <?php
+echo "Depreciado na versao 7";exit;
 /*
 Testa um mapfile
 

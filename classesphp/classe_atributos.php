@@ -90,7 +90,7 @@ class Atributos
 
 	parameters:
 
-	$map_file - Endere&ccedil;o do mapfile no servidor.
+	$map_file - Endere&ccedil;o do mapfile no servidor ou objeto mapObj.
 
 	$tema - nome do tema
 
@@ -113,12 +113,19 @@ class Atributos
 		$this->v = versao();
 		$this->v = $this->v["principal"];
 		if($map_file != ""){
-			$this->qyfile = str_replace(".map",".qy",$map_file);
+
 			$this->locaplic = $locaplic;
-			$this->mapa = ms_newMapObj($map_file);
+			if(is_string($map_file)){
+				$this->mapa = ms_newMapObj($map_file);
+				$this->arquivo = str_replace(".map","",$map_file).".map";
+				$this->qyfile = str_replace(".map",".qy",$map_file);
+			}
+			else {
+				$this->mapa = $map_file;
+				$this->arquivo = "";
+			}
 			substituiConObj($this->mapa,$postgis_mapa);
 
-			$this->arquivo = str_replace(".map","",$map_file).".map";
 			if($tema != "" && @$this->mapa->getlayerbyname($tema))
 			{
 				$this->layer = $this->mapa->getlayerbyname($tema);
@@ -147,7 +154,9 @@ class Atributos
 			$this->mapa->setProjection($this->projO);
 		}
 		restauraConObj($this->mapa,$this->postgis_mapa);
-		$this->mapa->save($this->arquivo);
+		if($this->arquivo != ""){
+			$this->mapa->save($this->arquivo);
+		}
 	}
 
 	/*
