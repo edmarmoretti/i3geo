@@ -158,27 +158,27 @@ i3GEOadmin.arvore.dicionario = {
 	} ],
     'msgNaoExclui' : [ {
 		pt : "Nao foi possivel excluir. Verifique se nao existem menus vinculados a este tema",
-		en : "",
-		es : ""
+		en : "It can not be exclude. Verify if there are menus tied to this theme",
+		es : "No fue posible excluir. Verifique que no existen men&uacute;s vinculados a este tema"
 	} ],
     'msgGravando' : [ {
 		pt : " gravando o registro do id= ",
-		en : "",
-		es : ""
+		en : " Saving the id= record ",
+		es : " guardando el registro del id= "
 	} ],
     'msgEscolheGrupo' : [ {
 		pt : "Escolha um grupo",
-		en : "",
-		es : ""
+		en : "Choose a group",
+		es : "Escoja un grupo"
 	} ],
     'msgEscolheSubgrupo' : [ {
 		pt : "Escolha um subgrupo",
-		en : "",
-		es : ""
+		en : "Choose a subgroup",
+		es : "Escoja un subgrupo"
 	} ],
     'msgEscolheTema' : [ {
 		pt : "Escolha um tema",
-		en : "",
-		es : ""
+		en : "Choose a theme",
+		es : "Escoja un tema"
 	} ]
 };
