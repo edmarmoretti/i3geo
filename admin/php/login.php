@@ -259,7 +259,6 @@ function verificaPapelSessao($id_papel){
 //verifica se uma determinada operacao esta registrada na variavel SESSION
 //
 function verificaOperacaoSessao($operacao){
-
 	$resultado = false;
 	//a validacao consulta $_SESSION, que e definida no login
 	if(validaSessao()){

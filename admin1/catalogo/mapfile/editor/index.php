@@ -1,6 +1,5 @@
 <?php
 //TODO botoes de copiar, colar, limpar
-//TODO preview com openlayers
 //TODO editor de cores
 //
 define ( ONDEI3GEO, "../../../.." );
@@ -49,8 +48,8 @@ $textoMapfile = textoMapfile ( $codigo );
 					<a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Mapserver</a>
 				</blockquote>
 				<a onclick="i3GEOadmin.editor.salvar()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> {{{salva}}} </a>
-				<a onclick="i3GEOadmin.editor.preview()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> Preview </a>
-				<a onclick="i3GEOadmin.editor.testa('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #008579;" role="button"> {{{testaLayer}}} </a>
+				<a onclick="i3GEOadmin.editor.preview('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="#" role="button"> Preview </a>
+				<a onclick="i3GEOadmin.editor.testar('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #008579;" role="button"> {{{testaLayer}}} </a>
 				<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{testarI3geo}}} </a>
 				<a onclick="i3GEOadmin.editor.testaTabela('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>
 			</div>
@@ -106,6 +105,14 @@ $(document).ready(function(){
 		$.material.init();
 		$("#editor").height(parseInt($("#editortemp").height()) + 50 + "px");
 		$("#editortemp").html("").hide();
+		//
+		//servidor utilizado no preview
+		//
+		var protocolo = window.location.href;
+		protocolo = protocolo.split(":")[0];
+
+		i3GEOadmin.editor.servidorPreview = protocolo + "://" + window.location.host + "/<?php echo basename($locaplic); ?>/admin1/catalogo/mapfile/preview/index.php";
+
 	});
 </script>
 </body>
