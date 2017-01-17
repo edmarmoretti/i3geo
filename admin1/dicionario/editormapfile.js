@@ -141,7 +141,12 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'limpaCache' : [ {
-		pt : "Limpa o cache de imagens se houver",
+		pt : "Limpa o cache de imagens",
+		en : "",
+		es : ""
+	} ],
+    'txtLimpaCache' : [ {
+		pt : "Remove os arquivos de imagem tempor&aacute;rios gerados no processo de renderiza&ccedil;&atilde;o da camada. A gera&ccedil;&atilde;o do cache &eacute; uma op&ccedil;&atilde;o de cada camada. A limpeza pode n&atilde;o funcionar em alguns sistemas, o que exige a interven&ccedil;&atilde;o manual do administrador. A pasta onde o cache &eacute; armazenado &eacute; definida em ms_configura.php.",
 		en : "",
 		es : ""
 	} ],
@@ -150,7 +155,7 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'gruposUsuarios' : [ {
+    'gruposEusuarios' : [ {
 		pt : "Grupos de usu&aacute;rios que podem utilizar",
 		en : "",
 		es : ""
@@ -630,6 +635,11 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'txtDisponibilidade' : [ {
+		pt : "Os dados de uma camada podem ficar dispon&iacute;veis para download ou acess&iacute;veis por meio de servi&ccedil;os OGC. Para uso com o aplicativo 'mashup' os dados devem estar dispon&iacute;veis como servi&ccedil;os OGC.",
+		en : "",
+		es : ""
+	} ],
     'conexao' : [ {
 		pt : "Conex&atilde;o",
 		en : "",
@@ -641,7 +651,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'permiteDownloadTitulo' : [ {
-		pt : "Permite download (METADATA: DOWNLOAD)",
+		pt : "Permite download",
 		en : "",
 		es : ""
 	} ],
@@ -651,7 +661,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'enderecoTitulo' : [ {
-		pt : "Arquivo download (ARQUIVODOWNLOAD)",
+		pt : "Arquivo download",
 		en : "",
 		es : ""
 	} ],
@@ -661,27 +671,27 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'arquivoKmzTitulo' : [ {
-		pt : "Arquivo KML ou KMZ (ARQUIVOKMZ)",
+		pt : "Arquivo KML ou KMZ",
 		en : "",
 		es : ""
 	} ],
     'permiteOgc2' : [ {
-		pt : "Permite acesso via WMS/WFS? (n&atilde;o ocasiona restri&ccedil;&atilde;o em temas do tipo gvSIG)",
+		pt : "Permite acesso via WMS/WFS",
 		en : "",
 		es : ""
 	} ],
     'permiteDownload2' : [ {
-		pt : "Permite o download na aplica&ccedil;&atilde;o datadownload.htm? (n&atilde;o afeta temas do tipo gvSIG) (n&atilde;o afeta a permiss&atilde;o de download definida no item 'disponibilidade' existente em cada layer)",
+		pt : "Mostra essa camada no aplicativo de acesso aos serviços OGC e download",
 		en : "",
 		es : ""
 	} ],
     'permiteKml' : [ {
-		pt : "Permite acesso via kml? (n&atilde;o restringe em temas do tipo gvSIG)",
+		pt : "Permite acesso via kml",
 		en : "",
 		es : ""
 	} ],
     'permiteKmz' : [ {
-		pt : "Permite acesso via kmz (kml com dados vetoriais)? (n&atilde;o restringe em temas do tipo gvSIG)",
+		pt : "Permite acesso via kmz (kml com dados vetoriais)",
 		en : "",
 		es : ""
 	} ],
@@ -1182,11 +1192,6 @@ i3GEOadmin.mapfile.dicionario = {
 	} ],
     'comportamentoLayer' : [ {
 		pt : " Comportamento no mapa",
-		en : "",
-		es : ""
-	} ],
-    'disponibLayer' : [ {
-		pt : " Disponibilidade (download, wms,...)",
 		en : "",
 		es : ""
 	} ],

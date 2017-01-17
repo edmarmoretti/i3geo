@@ -15,6 +15,7 @@ Gera graficos automaticamente para os elementos de um tema
 <Temas->graficotema>
 */
 	case "GRAFICOTEMA":
+		$mesmoTema = $_GET["mesmoTema"];
 		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		copiaSeguranca($map_file);
 		$m = new Temas($map_file,$tema,$locaplic);
@@ -25,7 +26,7 @@ Gera graficos automaticamente para os elementos de um tema
 			$mesmoTema = false;
 		}
 
-		$m->graficotema($_GET["lista"],$_GET["tamanho"],$_GET["tipo"],$_GET["outlinecolor"],$_GET["offset"],$_GET["mesmoTema"]);
+		$m->graficotema($_GET["lista"],$_GET["tamanho"],$_GET["tipo"],$_GET["outlinecolor"],$_GET["offset"],$mesmoTema);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
 		redesenhaMapa();

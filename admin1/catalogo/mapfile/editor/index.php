@@ -1,6 +1,6 @@
 <?php
-//TODO botoes de copiar, colar, limpar
-//TODO editor de cores
+// TODO botoes de copiar, colar, limpar
+// TODO editor de cores
 //
 define ( ONDEI3GEO, "../../../.." );
 include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
@@ -9,7 +9,7 @@ include "../../../head.php";
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
 $id_tema = ( int ) $_GET ["id_tema"];
 include ("exec.php");
-salvaMapfile();
+salvaMapfile ();
 $textoMapfile = textoMapfile ( $codigo );
 ?>
 <div class="container-fluid migalha">
@@ -41,28 +41,34 @@ $textoMapfile = textoMapfile ( $codigo );
 </div>
 <div class="container-fluid">
 	<div class="row center-block">
-		<div class="col-md-12">
-			<div class="well" id="titulo">
-				<blockquote>
-					{{{ajudaEditor}}}
-					<a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Mapserver</a>
-				</blockquote>
-				<a onclick="i3GEOadmin.editor.salvar()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> {{{salva}}} </a>
-				<a onclick="i3GEOadmin.editor.preview('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="#" role="button"> Preview </a>
-				<a onclick="i3GEOadmin.editor.testar('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #008579;" role="button"> {{{testaLayer}}} </a>
-				<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{testarI3geo}}} </a>
-				<a onclick="i3GEOadmin.editor.testaTabela('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>
-			</div>
-			<form action="index.php?codigo=<?php echo $codigo;?>&id_tema=<?php echo $id_tema;?>" method="post">
-				<TEXTAREA id=editor name=texto class="well form-control" style='font-size: 16px; width: 100%; float: left; border: 2px dotted lightgray;'>
-					<?php echo $textoMapfile; ?>
+		<div class="col-md-12 well" id="titulo">
+
+			<blockquote>
+				{{{ajudaEditor}}}
+				<a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Mapserver</a>
+			</blockquote>
+			<a onclick="i3GEOadmin.editor.salvar()" class="btn btn-primary" style="color: #008579;" href="#" role="button"> {{{salva}}} </a>
+			<a onclick="i3GEOadmin.editor.preview('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="#" role="button"> Preview </a>
+			<a onclick="i3GEOadmin.editor.testar('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #008579;" role="button"> {{{testaLayer}}} </a>
+			<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)"
+				role="button"> {{{testarI3geo}}} </a>
+			<a onclick="i3GEOadmin.editor.testaTabela('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #008579;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>
+
+		</div>
+	</div>
+	<div class="row center-block">
+		<div class="col-md-12 well">
+				<form action="index.php?codigo=<?php echo $codigo;?>&id_tema=<?php echo $id_tema;?>" method="post">
+					<TEXTAREA id=editor name=texto style='font-size: 16px; width: 100%; float: left; border: 2px dotted lightgray;'>
+						<?php echo $textoMapfile; ?>
 					</TEXTAREA>
-			</form>
-			<!-- para calcular a altura do textarea -->
-			<pre id="editortemp" style="font-size: 16px; display: block; visibility: hidden;"><?php echo $textoMapfile; ?></pre>
+				</form>
+				<!-- para calcular a altura do textarea -->
+				<pre id="editortemp" style="font-size: 16px; display: block; visibility: hidden;"><?php echo $textoMapfile; ?></pre>
 		</div>
 	</div>
 </div>
+
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../teste/index.js"></script>
 <script type="text/javascript" src="../../../dicionario/editormapfile.js"></script>
@@ -77,8 +83,7 @@ $(document).ready(function(){
 			$(this).parent().siblings().removeClass('open');
 			$(this).parent().toggleClass('open');
 		});
-		//traducao
-		var t = $("#titulo");
+
 		//complementa dicionario
 		i3GEOadmin.mapfile.dicionario = $.extend(
 			{},
@@ -90,13 +95,21 @@ $(document).ready(function(){
 
 		i3GEOadmin.editor.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.mapfile.dicionario);
 
+		//traducao
+		var t = $("#titulo");
 		t.html(
 			Mustache.to_html(
 				t.html(),
 				i3GEOadmin.editor.dicionario
 			)
 		);
-
+		t = $("#ajudantes");
+		t.html(
+			Mustache.to_html(
+				t.html(),
+				i3GEOadmin.editor.dicionario
+			)
+		);
 		var inicia = function() {
 			$(".hidden").removeClass('hidden');
 		};
