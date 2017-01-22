@@ -892,7 +892,7 @@ padding: 0px;
 color: #2F4632;
 margin: 0px;
 text-align: center;
-font-size: 12pt !Important;
+font-size: 10pt !Important;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .ajuda_usuario {

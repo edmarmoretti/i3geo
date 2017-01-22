@@ -59,5 +59,15 @@ i3GEOF.atalhosedicao.dicionario = {
 		pt : "Fei&ccedil;&otilde;es com Gr&aacute;ficos",
 		en : "",
 		es : "Feiciones con Gr&aacute;ficos"
+	}],
+	"mostraClasses" : [{
+		pt : "Mostra as classes na legenda",
+		en : "",
+		es : ""
+	}],
+	"mostraIdentifica" : [{
+		pt : "Mostra na ferramenta de identifica&ccedil;&atilde;o",
+		en : "",
+		es : ""
 	}]
 };

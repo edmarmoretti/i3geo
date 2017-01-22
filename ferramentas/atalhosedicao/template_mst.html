@@ -64,8 +64,16 @@
 	<br>
 	<!-- Opcoes que alteram os metadata do LAYER basta incluir em name o nome do metadata e indicar com true ou false se o valor e do tipo sim|nao. Se for false, o valor e obtido de value -->
 	<p class='paragrafo'>
-		<input id='i3GEOFatalhosedicaoCache' name='cache' onclick='i3GEOF.atalhosedicao.metadata(this,true)' style='cursor: pointer' type='checkbox' id='' />
+		<input id='i3GEOFatalhosedicaoCache' name='cache' onclick='i3GEOF.atalhosedicao.metadata(this,true)' style='cursor: pointer' type='checkbox'  />
 		<label>{{{ativaCache}}}</label>
+	</p>
+	<p class='paragrafo'>
+		<input checked id='i3GEOFatalhosedicaoClasse' name='classe' onclick='i3GEOF.atalhosedicao.metadata(this,true)' style='cursor: pointer' type='checkbox'  />
+		<label>{{{mostraClasses}}}</label>
+	</p>
+	<p class='paragrafo'>
+		<input checked id='i3GEOFatalhosedicaoIdentifica' name='identifica' onclick='i3GEOF.atalhosedicao.metadata(this,true)' style='cursor: pointer' type='checkbox'  />
+		<label>{{{mostraIdentifica}}}</label>
 	</p>
 	<br>
 	<p class='paragrafo'>{{{ferramentas}}}</p>

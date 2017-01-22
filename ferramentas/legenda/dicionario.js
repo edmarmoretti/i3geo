@@ -842,5 +842,19 @@ i3GEOF.legenda.dicionario =
  				en : "",
  				es : ""
  			}
- 		]
+ 		],
+  		"legendaImg" : [
+  			{
+ 				pt : "Imagem que ser&aacute; utilizada no lugar da montagem autom&aacute;tica da legenda",
+ 				en : "",
+ 				es : ""
+ 			}
+ 		],
+  		"offsite" : [
+  			{
+   				pt : "Cor, em imagens, que ser&aacute; considerada como NODATA e renderizada como transparente (RGB separado por v&iacute;rgulas)",
+   				en : "",
+   				es : ""
+   			}
+   		]
 	};

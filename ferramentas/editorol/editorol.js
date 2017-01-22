@@ -57,6 +57,7 @@ if (!i3GEO || typeof (i3GEO) === 'undefined') {
 }
 i3GEO.editorOL =
 	{
+		layerDefault: "",
 		simbologia : {
 			opacidade : 0.8,
 			texto : "",
@@ -613,16 +614,20 @@ i3GEO.editorOL =
 			document.getElementById("i3GEOOLlistaTemasAtivos").value = id;
 		},
 		layerAtivo : function() {
-			var id = document.getElementById("i3GEOOLlistaTemasAtivos");
-			if (id) {
-				id = id.value;
+			if(i3GEO.editorOL.layerDefault && i3GEO.editorOL.layerDefault != ""){
+				return i3GEO.editorOL.layerPorParametro("LAYERS",i3GEO.editorOL.layerDefault);
 			} else {
-				id = i3GEO.temaAtivo;
-			}
-			if (id == "") {
-				return [];
-			} else {
-				return i3GEO.editorOL.layersLigados()[id];
+				var id = document.getElementById("i3GEOOLlistaTemasAtivos");
+				if (id) {
+					id = id.value;
+				} else {
+					id = i3GEO.temaAtivo;
+				}
+				if (id == "") {
+					return [];
+				} else {
+					return i3GEO.editorOL.layersLigados()[id];
+				}
 			}
 		},
 		listaItens : function(layer, idonde, idobj) {
@@ -1572,7 +1577,9 @@ i3GEO.editorOL =
 			temp.className = "editorOLidentificaItemInactive olButton";
 			temp.title = $trad("d7t");
 			temp.onclick = function(){
-				i3GEO.editorOL.criaJanelaAtivaTema();
+				if(i3GEO.editorOL.layerDefault == ""){
+					i3GEO.editorOL.criaJanelaAtivaTema();
+				}
 				i3GEO.eventos.cliquePerm.desativa();
 				i3GEO.editorOL.marcaBotao("editorOLidentifica");
 				var draw = new ol.interaction.Draw({

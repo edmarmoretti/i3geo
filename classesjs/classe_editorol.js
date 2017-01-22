@@ -60,6 +60,7 @@ if(!i3GEO || typeof(i3GEO) === 'undefined'){
 	OpenLayers.Lang.setCode("pt-BR");
 }
 i3GEO.editorOL = {
+	layerDefault: "",
 	simbologia: {
 		opacidade: 0.8,
 		texto: "",
@@ -487,7 +488,11 @@ i3GEO.editorOL = {
 		YAHOO.temaativo.container.panel.setBody(combo);
 		document.getElementById("i3GEOOLlistaTemasAtivos").onchange = function(){
 			if(botaoIdentifica){
-				botaoIdentifica.layers = [i3GEO.editorOL.layersLigados()[this.value]];
+				if(i3GEO.editorOL.layerDefault && i3GEO.editorOL.layerDefault != ""){
+					botaoIdentifica.layers = [i3GEO.editorOL.layersLigados()[i3GEO.editorOL.layerDefault]];
+				} else {
+					botaoIdentifica.layers = [i3GEO.editorOL.layersLigados()[this.value]];
+				}
 			}
 		};
 	},
@@ -532,16 +537,20 @@ i3GEO.editorOL = {
 		document.getElementById("i3GEOOLlistaTemasAtivos").value = id;
 	},
 	layerAtivo: function(){
-		var id = document.getElementById("i3GEOOLlistaTemasAtivos");
-		if(id)
-		{id = id.value;}
-		else
-		{id = i3GEO.temaAtivo;}
-		if(id == ""){
-			return [];
-		}
-		else{
-			return i3GEO.editorOL.layersLigados()[id];
+		if(i3GEO.editorOL.layerDefault && i3GEO.editorOL.layerDefault != ""){
+			return i3GEO.editorOL.layerPorParametro("LAYERS",i3GEO.editorOL.layerDefault);
+		} else {
+			var id = document.getElementById("i3GEOOLlistaTemasAtivos");
+			if(id)
+			{id = id.value;}
+			else
+			{id = i3GEO.temaAtivo;}
+			if(id == ""){
+				return [];
+			}
+			else{
+				return i3GEO.editorOL.layersLigados()[id];
+			}
 		}
 	},
 	listaItens: function(layer,idonde,idobj){
@@ -1164,7 +1173,11 @@ i3GEO.editorOL = {
 						i3GEO.editorOL.removeClone();
 					},
 					beforegetfeatureinfo: function(event){
-						var ativo = [i3GEO.editorOL.layerAtivo()];
+						if(i3GEO.editorOL.layerDefault && i3GEO.editorOL.layerDefault != ""){
+							var ativo = i3GEO.editorOL.layerPorParametro("LAYERS",i3GEO.editorOL.layerDefault);
+						} else {
+							var ativo = [i3GEO.editorOL.layerAtivo()];
+						}
 						//se for TMS tem de pegar o clone wms
 						if(ativo[0].serviceVersion === "&tms=" || ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS" || ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM"){
 							ativo = [i3GEO.editorOL.layertms2wms(ativo[0])];
@@ -1175,6 +1188,9 @@ i3GEO.editorOL = {
 						botaoIdentifica.url = ativo[0].url;
 					},
 					activate: function(){
+						if(i3GEO.editorOL.layerDefault && i3GEO.editorOL.layerDefault != ""){
+							return;
+						}
 						i3GEO.editorOL.criaJanelaAtivaTema();
 					}
 				}

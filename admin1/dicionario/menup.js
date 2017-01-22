@@ -117,7 +117,7 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'editorMapfile' : [ {
-		pt : "Mapfiles",
+		pt : "Mapfiles (camadas para os mapas)",
 		en : "",
 		es : ""
 	} ],

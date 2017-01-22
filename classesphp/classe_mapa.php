@@ -272,7 +272,9 @@ class Mapa
 				"cortepixels",
 				"plugini3geo",
 				"link_tema",
-				"ferramentas"
+				"ferramentas",
+				"legendaimg",
+				"offsite"
 		);
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
@@ -503,7 +505,9 @@ class Mapa
 						$cortepixels,
 						$plugini3geo,
 						$link_tema,
-						$ferramentas
+						$ferramentas,
+						$oLayer->getmetadata("legendaimg"),
+						$oLayer->offsite->red.",".$oLayer->offsite->green.",".$oLayer->offsite->blue
 				);
 			}
 		}

@@ -179,7 +179,9 @@ i3GEOF.salvamapfile = {
 			+ "&codigomap="+nome
 			+ "&maporigem=" + mapfile
 			+ "&nomelayer="+nomelayer
-			+ "&cache=" + tema.cache;
+			+ "&cache=" + tema.cache
+			+ "&classe=" + tema.classe
+			+ "&identifica=" + tema.identifica;
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p,"",temp);

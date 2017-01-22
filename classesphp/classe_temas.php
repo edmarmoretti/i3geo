@@ -600,6 +600,27 @@ $valor - Novo valor da transpar&ecirc;ncia
 			}
 		}
 	}
+	/*
+	 function: mudaOffsite
+
+	 Muda o offsite do tema.
+
+	 parameter:
+	 $valor - Novo valor separado por virgulas
+	 */
+	function mudaOffsite($valor){
+		if($valor == -1 || $valor == "null" || empty($valor)){
+			$valor = "-1,-1,-1";
+		}
+		$cor = $this->layer->offsite;
+		$c = explode(",",$valor);
+		if(count($c) < 3){
+			$c = explode(" ",$valor);
+		}
+		$cor->setrgb($c[0],$c[1],$c[2]);
+		$this->layer->setmetadata("cache","");
+		return("ok");
+	}
 /*
 function: inverteStatusLegenda
 

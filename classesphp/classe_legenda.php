@@ -210,7 +210,14 @@ class Legenda
 			$this->layer->set("type",$tipotemp);
 		}
 	}
+	/*
+	 function: aplicaLegendaImg
 
+	Aplica o metadata legendaimg que define um arquivo de imagem no lugar da criacao automatica da legenda
+	*/
+	function aplicaLegendaImg($imagem){
+		$this->layer->setmetadata("legendaimg",$imagem);
+	}
 	/*
 	 function: criaLegenda
 
@@ -374,7 +381,7 @@ class Legenda
 			//
 			//se for WMS e n&atilde;o tiver classes, tenta pegar a legenda via requisi&ccedil;&atilde;o WMS
 			//
-			if ($nc == 0 && ($c == 7 || $im != ""))	{
+			if ($c == 7)	{
 				if($c == 7){
 					$con = $layer->connection;
 					$ver = $layer->getmetadata("wms_server_version");

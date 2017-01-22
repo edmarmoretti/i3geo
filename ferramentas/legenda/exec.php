@@ -118,6 +118,20 @@ Acrescenta a contagem de elementos em cada classe.
 		$m->salva();
 		$retorno = "ok";
 	break;
+	case "APLICALEGENDAIMG":
+		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
+		$m = new Legenda($map_file,$locaplic,$tema);
+		$m->aplicaLegendaImg($_GET["imagem"]);
+		$m->salva();
+		$retorno = "ok";
+	break;
+	case "APLICAOFFSITE":
+		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
+		$m = new Temas($map_file,$tema);
+		$m->mudaOffsite($_GET["offsite"]);
+		$m->salva();
+		$retorno = "ok";
+	break;
 }
 if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);

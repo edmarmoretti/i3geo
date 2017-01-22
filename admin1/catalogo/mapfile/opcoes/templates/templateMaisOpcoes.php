@@ -24,10 +24,13 @@
 <div class="list-group-item">
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
-			<a title="{{{editarI3geo}}}" onclick="window.open('../../../../interface/black_editor.php?temaEdicao={{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+			<a title="{{{editarI3geo}}}" onclick="window.open('../../../../interface/black_editor.php?&temaEdicao={{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons  md-18">more_horiz</i>
 			</a>
 			{{{editarI3geo}}}
+			<span id="helpBlock" class="help-block">
+				{{{txtEditarI3geo}}}
+			</span>
 		</h4>
 	</div>
 	<div class="list-group-separator"></div>
@@ -80,6 +83,20 @@
 			{{{disponibilidade}}}
 			<span id="helpBlock" class="help-block">
 				{{{txtDisponibilidade}}}
+			</span>
+		</h4>
+	</div>
+	<div class="list-group-separator"></div>
+</div>
+<div class="list-group-item">
+	<div class="row-content" >
+		<h4 class="list-group-item-heading">
+			<a title="{{{comportamentoLayer}}}" href="../comportamento/index.php?codigo={{codigo}}&id_tema={{id_tema}}" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+				<i class="material-icons  md-18">more_horiz</i>
+			</a>
+			{{{comportamentoLayer}}}
+			<span id="helpBlock" class="help-block">
+				{{{txtComportamentoLayer}}}
 			</span>
 		</h4>
 	</div>

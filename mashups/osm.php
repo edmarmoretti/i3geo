@@ -18,6 +18,7 @@ $restauramapa = $parurl["restauramapa"];
 $mapext = $parurl["mapext"];
 $temas = $parurl["temas"];
 $layers = $parurl["layers"];
+$layerDefault = $parurl["layerDefault"];
 
 $altura = $parurl["altura"];
 $largura = $parurl["largura"];
@@ -512,6 +513,7 @@ function ajuda(){
 	legendahtml (true|false) - ativa ou n&atilde;o (default &eacute; false) a gera&ccedil;&atilde;o de legenda do tipo HTML no lugar de imagem png. Legendas HTML podem ser modificadas com base em CSS. A legenda &eacute; constru&iacute;da com o template i3geo/aplicmap/legendaOgc.html.
 	desligacache (sim|nao) - desativa o uso do cache de imagens em disco do lado do servidor, for&ccedil;ando a renderiza&ccedil;&atilde;o dos tiles de cada camada em cada requisi&ccedil;&atilde;o
 	nocache (sim) - evita o uso de imagens em cache existentes no navegador do usu&aacute;rio
+	layerDefault (opcional) - layer que sera utilizado na ferramenta de identificacao. Quando especificado, nao sera mostrada a caixa para a escolha do layer
 
 	Filtros
 
@@ -724,6 +726,9 @@ i3GEO.editorOL.legendahtml = "<?php
 ?>";
 
 <?php
+if(isset($layerDefault) && $layerDefault != ""){
+	echo "i3GEO.editorOL.layerDefault = '".$layerDefault."';\n";
+}
 if(isset($fundo) && $fundo != ""){
 	echo "i3GEO.editorOL.fundo = '".implode(",",$fundo)."';";
 }

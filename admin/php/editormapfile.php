@@ -1162,11 +1162,19 @@ function refazerLayer()
 	global $nomelayer, $codigomap, $locaplic;
 
 	$maporigem = $_GET["maporigem"];
-	$cache = $_GET["cache"];
 
 	error_reporting(0);
+	$cache = $_GET["cache"];
 	if(empty($cache)){
 		$cache = "";
+	}
+	$classe = $_GET["classe"];
+	if(empty($classe)){
+		$classe = "";
+	}
+	$identifica = $_GET["identifica"];
+	if(empty($identifica)){
+		$identifica = "sim";
 	}
 	$mapa = ms_newMapObj($maporigem);
 	$arqtema = $locaplic."/temas/".$codigomap.".map";
@@ -1189,6 +1197,8 @@ function refazerLayer()
 		$nl->setmetadata("FILTROORIGINAL","");
 		$nl->setmetadata("DATAORIGINAL","");
 		$nl->setmetadata("cache",$cache);
+		$nl->setmetadata("classe",$classe);
+		$nl->setmetadata("identifica",$identifica);
 		$numclasses = $nl->numclasses;
 		if ($numclasses > 0)
 		{

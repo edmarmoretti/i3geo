@@ -10,6 +10,11 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'txtEditarI3geo' : [ {
+		pt : "Utilize essa op&ccedil;&atilde;o principalmente para definir a classifica&ccedil;&atilde;o dos dados, textos, simbologia e outras caracter&iacute;sticas que afetam a visualiza&ccedil;&atilde;o da camada.",
+		en : "",
+		es : ""
+	} ],
     'testarI3geo' : [ {
 		pt : "Testar no i3Geo",
 		en : "",
@@ -176,7 +181,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'msgLimpa' : [ {
-		pt : " limpando ",
+		pt : "limpando ",
 		en : "",
 		es : ""
 	} ],
@@ -231,12 +236,12 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'editaCaractGerais' : [ {
-		pt : " Editar caracter&iacute;sticas gerais",
+		pt : "Editar caracter&iacute;sticas gerais",
 		en : "",
 		es : ""
 	} ],
     'editaToponimia' : [ {
-		pt : " Editar topon&iacute;mia",
+		pt : "Editar topon&iacute;mia",
 		en : "",
 		es : ""
 	} ],
@@ -246,12 +251,12 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'msgNovaClasse' : [ {
-		pt : " adicionando uma nova classe",
+		pt : "adicionando uma nova classe",
 		en : "",
 		es : ""
 	} ],
     'msgGeraClasse' : [ {
-		pt : " gerando as classes",
+		pt : "gerando as classes",
 		en : "",
 		es : ""
 	} ],
@@ -315,8 +320,8 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'status' : [ {
-		pt : "Define o estado atual da camada. Geralmente modificado pelo pr&oacute;prio MapServer. Default ativa a camada permanentemente.",
+    'statusTitulo' : [ {
+		pt : "Define o estado de visibilidade da camada. Geralmente modificado pelo pr&oacute;prio i3Geo.",
 		en : "",
 		es : ""
 	} ],
@@ -341,7 +346,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'aplicaExtensaoTitulo' : [ {
-		pt : "Aplica extensao (APLICAEXTENSAO)",
+		pt : "Aplica extensao",
 		en : "",
 		es : ""
 	} ],
@@ -351,17 +356,17 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'comentarioTitulo' : [ {
-		pt : "Permite comentar (PERMITECOMENTARIO)",
+		pt : "Permite comentar",
 		en : "",
 		es : ""
 	} ],
-    'temporizador' : [ {
+    'temporiZador' : [ {
 		pt : "Temporizador (em segundos) para atualiza&ccedil;&atilde;o autom&aacute;tica da camada. A camada ser&aacute; redesenhada continuamente a cada intervalo de tempo definido",
 		en : "",
 		es : ""
 	} ],
     'temporizadorTitulo' : [ {
-		pt : "Temporizador em segundos (METADATA: TEMPORIZADOR)",
+		pt : "Temporizador em segundos",
 		en : "",
 		es : ""
 	} ],
@@ -385,13 +390,13 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'escondido' : [ {
+    'esconDido' : [ {
 		pt : "Indica se o tema &eacute; mostrado no mapa mas n&atilde;o nas listas da legenda e na guia 'temas'",
 		en : "",
 		es : ""
 	} ],
     'escondidoTitulo' : [ {
-		pt : "Escondido (ESCONDIDO)",
+		pt : "Escondido",
 		en : "",
 		es : ""
 	} ],
@@ -401,7 +406,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'transitionTitulo' : [ {
-		pt : "Efeitos de transi&ccedil;&atilde;o zoom (TRANSITIONEFFECT)",
+		pt : "Efeitos de transi&ccedil;&atilde;o zoom",
 		en : "",
 		es : ""
 	} ],
@@ -901,7 +906,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'msgNovoEstilo' : [ {
-		pt : " adicionando um novo estilo",
+		pt : "adicionando um novo estilo",
 		en : "",
 		es : ""
 	} ],
@@ -1176,42 +1181,47 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'conexaoLayer' : [ {
-		pt : " Conex&atilde;o com os dados",
+		pt : "Conex&atilde;o com os dados",
 		en : "",
 		es : ""
 	} ],
     'tituloLayer' : [ {
-		pt : " T&iacute;tulo, escala, extens&atilde;o",
+		pt : "T&iacute;tulo, escala, extens&atilde;o",
 		en : "",
 		es : ""
 	} ],
     'editavelLayer' : [ {
-		pt : " Edit&aacute;vel (define se o tema &eacute; edit&aacute;vel)",
+		pt : "Edit&aacute;vel (define se o tema &eacute; edit&aacute;vel)",
 		en : "",
 		es : ""
 	} ],
     'comportamentoLayer' : [ {
-		pt : " Comportamento no mapa",
+		pt : "Comportamento no mapa",
+		en : "",
+		es : ""
+	} ],
+    'txtComportamentoLayer' : [ {
+		pt : "Par&acirc;metros que definem como a camada ir&aacute; se comportar quando for adicionada ao mapa.",
 		en : "",
 		es : ""
 	} ],
     'miscLayer' : [ {
-		pt : " Miscel&acirc;nea",
+		pt : "Miscel&acirc;nea",
 		en : "",
 		es : ""
 	} ],
     'adicionaClasseLayer' : [ {
-		pt : " Adicionar uma classe",
+		pt : "Adicionar uma classe",
 		en : "",
 		es : ""
 	} ],
     'criaClassesLayer' : [ {
-		pt : " Criar classes automaticamente",
+		pt : "Criar classes automaticamente",
 		en : "",
 		es : ""
 	} ],
     'testaLayer' : [ {
-		pt : " Testar",
+		pt : "Testar",
 		en : "",
 		es : ""
 	} ],
@@ -1221,7 +1231,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'msgAdicionaNovoLayer' : [ {
-		pt : " adicionando um novo layer",
+		pt : "adicionando um novo layer",
 		en : "",
 		es : ""
 	} ],

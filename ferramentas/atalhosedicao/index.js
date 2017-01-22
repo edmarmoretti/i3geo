@@ -160,6 +160,12 @@ i3GEOF.atalhosedicao =
 		if(tema.cache.toLowerCase() === "sim"){
 			$i("i3GEOFatalhosedicaoCache").checked = true;
 		}
+		if(tema.classe.toLowerCase() === "nao"){
+			$i("i3GEOFatalhosedicaoClasses").checked = false;
+		}
+		if(tema.identifica.toLowerCase() === "nao"){
+			$i("i3GEOFatalhosedicaoIdentifica").checked = false;
+		}
 		$i("i3GEOFatalhosedicaoOpacidade").value = tema.transparency;
 	},
 	/*
@@ -222,7 +228,7 @@ i3GEOF.atalhosedicao =
 	 * Para isso, a funcao salvarmapfile deve ser preparada para obter o parametro
 	 * e enviar para a funcao php
 	 * veja em i3GEOF.salvamapfile.salva
-	 * 
+	 *
 	 * conv indica se deve ser feita a conversao de checked para sim/nao
 	 */
 	metadata: function(obj,conv){

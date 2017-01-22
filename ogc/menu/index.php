@@ -46,7 +46,7 @@ include ONDEI3GEO."/init/head.php";
 			</div>
 		</div>
 	</div>
-</div>
+
 <?php include(ONDEI3GEO."/ogc/templates/modal.php");?>
 <?php include(ONDEI3GEO."/ogc/templates/templatelista.php");?>
 <?php include(ONDEI3GEO."/ogc/templates/templatecamadas.php");?>
