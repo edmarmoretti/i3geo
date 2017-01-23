@@ -1535,23 +1535,23 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'iconetema' : [ {
+    'iconeTema' : [ {
 		pt : "&Iacute;cone que ser&aacute; mostrado na &aacute;rvore de camadas. A imagem deve existir na web e deve ser inclu&iacute;do o caminho completo ou relativo em rela&ccedil;&atilde;o ao local da interface HTML do mapa.",
 		en : "",
 		es : ""
 	} ],
     'iconetemaTitulo' : [ {
-		pt : "&Iacute;cone (METADATA: ICONETEMA)",
+		pt : "&Iacute;cone que ilustra o t&iacute;tulo",
 		en : "",
 		es : ""
 	} ],
-    'mensagem' : [ {
+    'Mensagem' : [ {
 		pt : "Mensagem que ser&aacute; mostrada no rodap&eacute; do mapa quando o tema estiver vis&iacute;vel. &Eacute; &uacute;til para apresentar ao usu&aacute;rio observa&ccedil;&otilde;es especiais sobre o uso daquele tema.",
 		en : "",
 		es : ""
 	} ],
     'mensagemTitulo' : [ {
-		pt : "Mensagem (MENSAGEM)",
+		pt : "Mensagem",
 		en : "",
 		es : ""
 	} ],

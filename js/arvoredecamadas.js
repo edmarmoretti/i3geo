@@ -1830,12 +1830,7 @@ i3GEO.arvoreDeCamadas =
 			*/
 			// inicia o div
 			html = "<div class='temaArrastar' id='arrastar_" + tema.name + "'><label class='temaSwitch' for='" + tema.name + "ckbox'  ";
-			//
-			// inclui icone do tema
-			//
-			if (tema.iconetema !== "" && i3GEO.arvoreDeCamadas.ICONETEMA === true) {
-				html += "&nbsp;<img class='i3GEOiconeTema' src='" + tema.iconetema + "' />";
-			}
+
 			//
 			// ajusta as propriedades conforme as caracteristicas de cada plugin
 			// verifica se o tema e do tipo plugin antes
@@ -1845,6 +1840,12 @@ i3GEO.arvoreDeCamadas =
 			//marca se o tema esta selecionado
 			if(tema.sel && tema.sel.toLowerCase() === "sim"){
 				tema.tema = "<span class='i3GEOtemaComSel'>" + tema.tema + "</span>";
+			}
+			//
+			// inclui icone do tema
+			//
+			if (tema.iconetema !== "" && i3GEO.arvoreDeCamadas.ICONETEMA === true) {
+				tema.tema = "<img class='i3GEOiconeTema' src='" + tema.iconetema + "' />" + tema.tema;
 			}
 
 			html +=

@@ -461,7 +461,7 @@ i3GEO.coordenadas =
 					+ "<td class='contemCaixaTipoCoord'>"
 					+ caixa
 					+ "&nbsp;<td>"
-					+ "<td style=width:100px;text-align:right >"
+					+ "<td style=width:120px;text-align:right >"
 					+ titulo
 					+ " X:&nbsp;</td>"
 					+ "<td>"
@@ -767,7 +767,7 @@ i3GEO.coordenadas =
 					}
 				}
 				if (this.formato === "janela") {
-					janela = i3GEO.janela.cria("450px", "120px", "", "", "", "<div class='i3GeoTituloJanela'>"+$trad("x49")+"</div>", "i3GEOJanelaCoordenadas", false, "hd", "", "");
+					janela = i3GEO.janela.cria("510px", "190px", "", "", "", "<div class='i3GeoTituloJanela'>"+$trad("x49")+"</div>", "i3GEOJanelaCoordenadas", false, "hd", "", "");
 					YAHOO.util.Event.addListener(janela[0].close, "click", function() {
 						i3GEO.coordenadas.formato = "bloco", i3GEO.coordenadas.mostraCoordenadas();
 					});
@@ -783,7 +783,7 @@ i3GEO.coordenadas =
 					onde = "i3GEOJanelaCoordenadas_corpo";
 
 					ins +=
-						"<br><a href='#' style='cursor:pointer;color:blue' onclick='new YAHOO.util.KeyListener(document.body,{alt:true,keys:67},{fn: function(type, args, obj){i3GEO.janela.tempoMsg(i3GEO.coordenadas.MODOTEXTO);}}).enable();' >" + "Clique aqui para ativar Alt+C para poder capturar as coordenadas</a>";
+						"<br><a href='#' style='cursor:pointer;color:blue' onclick='new YAHOO.util.KeyListener(document.body,{alt:true,keys:67},{fn: function(type, args, obj){i3GEO.util.copyToClipboard(i3GEO.coordenadas.MODOTEXTO);i3GEO.janela.tempoMsg(i3GEO.coordenadas.MODOTEXTO);}}).enable();' >" + "Clique aqui para ativar Alt+C para poder capturar as coordenadas em mem&oacute;ria</a>";
 				}
 				if (onde !== "" && $i(onde)) {
 					$i(onde).innerHTML = ins;

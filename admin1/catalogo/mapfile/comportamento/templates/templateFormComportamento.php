@@ -101,6 +101,36 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-md-12">
+		<div class="form-group form-group-lg">
+			<div class="col-md-6">
+				<label class="control-label" for="temporizador">
+					{{{iconetemaTitulo}}}
+				</label>
+				<p class="small">
+					{{{iconeTema}}} (metadata: ICONETEMA)
+				</p>
+			</div>
+			<div class="col-md-6">
+				<input type="text" value="{{{iconetema}}}" class="form-control" name="iconetema" >
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="form-group form-group-lg">
+			<div class="col-md-6">
+				<label class="control-label" for="mensagem">
+					{{{mensagemTitulo}}}
+				</label>
+				<p class="small">
+					{{{Mensagem}}} (metadata: MENSAGEM)
+				</p>
+			</div>
+			<div class="col-md-6">
+				<input type="text" value="{{{mensagem}}}" class="form-control" name="mensagem" >
+			</div>
+		</div>
+	</div>
 
 	<div class="pull-right">
 		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>

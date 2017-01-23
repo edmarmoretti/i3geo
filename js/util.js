@@ -3418,12 +3418,24 @@ i3GEO.util =
 		 * {string}
 		 */
 		copyToClipboard : function(texto) {
-			  var aux = document.createElement("input");
-			  aux.setAttribute("value", texto);
-			  document.body.appendChild(aux);
-			  aux.select();
-			  document.execCommand("copy");
-			  document.body.removeChild(aux);
+		    if (window.clipboardData && window.clipboardData.setData) {
+		        // IE specific code path to prevent textarea being shown while dialog is visible.
+		        return clipboardData.setData("Text", texto);
+
+		    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+		        var textarea = document.createElement("textarea");
+		        textarea.textContent = texto;
+		        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+		        document.body.appendChild(textarea);
+		        textarea.select();
+		        try {
+		            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+		        } catch (ex) {
+		            return false;
+		        } finally {
+		            document.body.removeChild(textarea);
+		        }
+		    }
 		}
 	};
 
