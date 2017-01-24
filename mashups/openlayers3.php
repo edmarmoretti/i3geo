@@ -193,6 +193,12 @@ if(isset($botoes)){
 	$botoes = str_replace(" ",",",$botoes);
 	$botoes = strtolower($botoes);
 	$botoes = explode(",",$botoes);
+	if(in_array("grid",$botoes)){
+		$objBotoes[] = "'grid':true";
+	}
+	if(in_array("imprimir",$botoes)){
+		$objBotoes[] = "'imprimir':true";
+	}
 	if(in_array("pan",$botoes)){
 		$objBotoes[] = "'pan':true";
 	}
@@ -604,6 +610,8 @@ function ajuda(){
 	corta
 	legenda
 	novaaba
+	grid
+	imprimir
 
 	Para ver a lista de c&oacute;digos de temas, que podem ser utilizados no par&acirc;metro 'temas', acesse:
 	<a href='../ogc.php?lista=temas' >lista de temas</a>. Os c&oacute;digos s&atilde;o mostrados em vermelho.

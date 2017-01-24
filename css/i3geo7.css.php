@@ -3818,8 +3818,20 @@ background-position:-841px -28px;
 .olControlEditingToolbar1 .editorOLnovaabaItemInactive {
 background-position:-841px -0px;
 }
+.olControlEditingToolbar1 .editorOLgridItemActive {
+background-position:-870px -28px;
+}
+.olControlEditingToolbar1 .editorOLgridItemInactive {
+background-position:-870px -0px;
+}
+.olControlEditingToolbar1 .editorOLimprimirItemActive {
+background-position:-900px -28px;
+}
+.olControlEditingToolbar1 .editorOLimprimirItemInactive {
+background-position:-900px -0px;
+}
 .olControlEditingToolbar1 {
-width:750px;
+width:790px;
 float:right;
 right: 0px;
 }

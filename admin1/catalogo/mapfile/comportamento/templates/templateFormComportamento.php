@@ -104,7 +104,7 @@
 	<div class="col-md-12">
 		<div class="form-group form-group-lg">
 			<div class="col-md-6">
-				<label class="control-label" for="temporizador">
+				<label class="control-label" for="iconetema">
 					{{{iconetemaTitulo}}}
 				</label>
 				<p class="small">

@@ -74,6 +74,7 @@ include("../../../templates/templateOpcoesPublicado.php");
 		);
 
 		i3GEOadmin.core.dicionario = null;
+		g_traducao = null;
 
 		i3GEOadmin.disponibilidade.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.disponibilidade.dicionario);
 		var t = $("#titulo");

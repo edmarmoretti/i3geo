@@ -1515,23 +1515,23 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'escala' : [ {
+    'Escala' : [ {
 		pt : "Denominador da escala da fonte dos dados utilizado pelo tema. &Eacute; utilizado para apresentar a indica&ccedil;&atilde;o de compatibilidade entre a escala do tema e a escala do mapa que est&aacute; sendo visto.",
 		en : "",
 		es : ""
 	} ],
     'escalaTitulo' : [ {
-		pt : "Escala (ESCALA)",
+		pt : "Escala",
 		en : "",
 		es : ""
 	} ],
     'exten' : [ {
-		pt : "Extens&atilde;o geogr&aacute;fica m&aacute;xima do tema, no formato xmin ymin xmax ymax. &Eacute; utilizado na op&ccedil;&atilde;o de 'zoom para o tema'. Quando o tema &eacute; baseado em shapefile, esse metadata n&atilde;o &eacute; necess&aacute;rio, pois o mapserver consegue calcular a extens&atilde;o. J&aacute; em outros tipos de dados, como Postgis, o par&acirc;metro &eacute; necess&aacute;rio. Nesse caso, se n&atilde;o for indicado, o bot&atilde;o de zoom para o tema n&atilde;o ser&aacute; vis&iacute;vel para o usu&aacute;rio",
+		pt : "Extens&atilde;o geogr&aacute;fica m&aacute;xima do tema, no formato xmin ymin xmax ymax. &Eacute; utilizado na op&ccedil;&atilde;o de 'zoom para o tema'. Quando o tema &eacute; baseado em shapefile, esse metadata n&atilde;o &eacute; necess&aacute;rio, pois o mapserver consegue calcular a extens&atilde;o. J&aacute; em outros tipos de dados, como Postgis, o par&acirc;metro &eacute; necess&aacute;rio. Nesse caso, se n&atilde;o for indicado, o bot&atilde;o de zoom para o tema n&atilde;o ser&aacute; vis&iacute;vel para o usu&aacute;rio. Especificar a extens&atilde;o melhora a performance geral do i3Geo.",
 		en : "",
 		es : ""
 	} ],
     'extenTitulo' : [ {
-		pt : "Extensao (EXTENSAO)",
+		pt : "Extensão",
 		en : "",
 		es : ""
 	} ],
@@ -1587,6 +1587,26 @@ i3GEOadmin.mapfile.dicionario = {
 	}],
 	'tituloLegenda' : [{
 		pt : "T&iacute;tulo para a legenda e &aacute;rvore de camadas",
+		en : "",
+		es : ""
+	}],
+	'cdados' : [{
+		pt : "Caracter&iacute;sticas gerais dos dados",
+		en : "",
+		es : ""
+	}],
+	'txtCdados' : [{
+		pt : "Par&acirc;metros que apresentam as caracter&iacute;sticas gerais dos dados, como escala, extens&atilde;o geogr&aacute;fica, codifica&ccedil;&atilde;o de caracteres, etc.",
+		en : "",
+		es : ""
+	}],
+	'tituloEncoding' : [{
+		pt : "Código de caracteres (encoding)",
+		en : "",
+		es : ""
+	}],
+	'txtEncoding' : [{
+		pt : "Para vers&o 7 e posteriores. O Mapserver sempre renderiza etiquetas em UTF-8. Se os dados n&atilde;o est&atilde;o nessa codifica&ccedil;&atilde;o, deve-se especific&aacute;-la aqui para que a convers&atilde;o ocorra de forma correta.",
 		en : "",
 		es : ""
 	}]

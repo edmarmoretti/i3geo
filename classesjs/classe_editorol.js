@@ -133,6 +133,8 @@ i3GEO.editorOL = {
 	kml: [],
 	layersIniciais: [],
 	botoes: {
+		'imprimir': true,
+		'grid': true,
 		'pan':true,
 		'zoombox':true,
 		'zoomtot':true,
@@ -175,6 +177,7 @@ i3GEO.editorOL = {
 		new OpenLayers.Control.KeyboardDefaults(),
 		new OpenLayers.Control.Attribution()
 	],
+	gridProperties: {"autoActivate": false,"intervals": [60,40,20,10,2,1],"targetSize":600},
 	tiles: true,
 	incluilayergrafico: true,
 	ativalayerswitcher: false,
@@ -1592,6 +1595,25 @@ i3GEO.editorOL = {
 				title: $trad("x74"),
 				type: OpenLayers.Control.TYPE_BUTTON
 			});
+			controles.push(button);
+			adiciona = true;
+		}
+		if(botoes.grid===true){
+			i3GEO.editorOL.gridbutton = new OpenLayers.Control.Graticule(i3GEO.editorOL.gridProperties);
+			i3GEO.editorOL.mapa.addControl(i3GEO.editorOL.gridbutton);
+			button = new OpenLayers.Control.Button({
+					displayClass: "editorOLgrid",
+					title: $trad("p10"),
+					type: OpenLayers.Control.TYPE_BUTTON,
+					trigger: function(){
+						if(i3GEO.editorOL.gridbutton.active == true){
+							i3GEO.editorOL.gridbutton.deactivate();
+						} else {
+							i3GEO.editorOL.gridbutton.activate();
+						}
+					}
+				}
+			);
 			controles.push(button);
 			adiciona = true;
 		}

@@ -193,6 +193,8 @@ i3GEO.editorOL =
 		//essa configuracao dos botoes afeta apenas o mashup
 		//para a configuração do editor dentro de um mapa normal, veja i3GEO.barraDebotoes.editor.ativaPainel()
 		botoes : {
+			'imprimir': true,
+			'grid': true,
 			'pan' : true,
 			'zoombox' : true,
 			'zoomtot' : true,
@@ -1571,6 +1573,30 @@ i3GEO.editorOL =
 			};
 			return temp;
 		},
+		botaoImprimir: function(){
+			var temp = document.createElement("div");
+			temp.className = "editorOLimprimirItemInactive olButton";
+			temp.onclick = function(){
+			};
+			return temp;
+		},
+		botaoGrid: function(){
+			var temp = document.createElement("div");
+			temp.className = "editorOLgridItemInactive olButton";
+			temp.onclick = function(){
+				var p = {"map": i3GEO.editorOL.mapa,"targetSize": 200};
+				if(!i3GEO.editorOL.grid){
+					i3GEO.editorOL.grid = new ol.Graticule(p);
+				} else {
+					 if(i3GEO.editorOL.grid.getMap() == null){
+						 i3GEO.editorOL.grid.setMap(i3GEO.editorOL.mapa);
+					 } else {
+						 i3GEO.editorOL.grid.setMap(null);
+					 }
+				}
+			};
+			return temp;
+		},
 		botaoIdentifica: function(){
 			i3GEO.eventos.cliquePerm.desativa();
 			var temp = document.createElement("div");
@@ -1681,6 +1707,12 @@ i3GEO.editorOL =
 			i3GEOpanelEditor.id = "i3GEObarraEdicao";
 			i3GEOpanelEditor.className = "olControlEditingToolbar1 noprint";
 			//cria os icones
+			if (botoes.imprimir === true) {
+				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoImprimir());
+			}
+			if (botoes.grid === true) {
+				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoGrid());
+			}
 			if (botoes.novaaba === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoNovaaba());
 			}

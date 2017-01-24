@@ -28,7 +28,7 @@ $id_tema = (int) $_GET ["id_tema"];
 				<span><?php echo $codigo; ?></span>
 			</a>
 			<a class="btn btn-default" style="pointer-events: none">
-				<span>Comportamento</span>
+				<span>Caracter&iacute;sticas gerais dos dados</span>
 			</a>
 		</div>
 	</div>
@@ -37,8 +37,8 @@ $id_tema = (int) $_GET ["id_tema"];
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
-				<h2><small>{{{comportamentoLayer}}}</small></h2>
-				<blockquote>{{{txtComportamentoLayer}}}</blockquote>
+				<h2><small>{{{cdados}}}</small></h2>
+				<blockquote>{{{txtCdados}}}</blockquote>
 				<div class="clearfix"></div>
 			</div>
 			<div class="well hidden">
@@ -49,9 +49,7 @@ $id_tema = (int) $_GET ["id_tema"];
 	</div>
 </div>
 <?php
-include("templates/templateFormComportamento.php");
-include("../../../templates/templateOpcoesPublicado.php");
-include("../../../templates/templateMsStatus.php");
+include("templates/templateFormCdados.php");
 ?>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../../dicionario/editormapfile.js"></script>
@@ -68,7 +66,7 @@ include("../../../templates/templateMsStatus.php");
 		//traducao
 
 		//complementa dicionario
-		i3GEOadmin.comportamento.dicionario = $.extend(
+		i3GEOadmin.cdados.dicionario = $.extend(
 			{},
 			i3GEOadmin.mapfile.dicionario,
 			i3GEOadmin.core.dicionario
@@ -76,19 +74,17 @@ include("../../../templates/templateMsStatus.php");
 
 		i3GEOadmin.core.dicionario = null;
 		g_traducao = null;
-
-		i3GEOadmin.comportamento.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.comportamento.dicionario);
+		i3GEOadmin.cdados.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.cdados.dicionario);
 		var t = $("#titulo");
 		t.html(
 			Mustache.to_html(
 				t.html(),
-				i3GEOadmin.comportamento.dicionario
+				i3GEOadmin.cdados.dicionario
 			)
 		);
-
 		var inicia = function() {
 			$(".hidden").removeClass('hidden');
-			i3GEOadmin.comportamento.inicia("<?php echo $codigo; ?>","<?php echo $id_tema; ?>");
+			i3GEOadmin.cdados.inicia("<?php echo $codigo; ?>","<?php echo $id_tema; ?>");
 		};
 		i3GEO.login.verificaOperacao("admin/html/editormapfile",i3GEO.configura.locaplic, inicia, "sessao");
 	});

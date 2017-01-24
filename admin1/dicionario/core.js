@@ -1,5 +1,10 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
 i3GEOadmin.core.dicionario = {
+	'notInVersion' : [ {
+		pt : "N&atilde;o dispon&iacute;vel nessa vers&atilde;o do Mapserver",
+		en : "",
+		es : ""
+	} ],
 	'tabela' : [ {
 		pt : "Tabela",
 		en : "",
@@ -412,6 +417,11 @@ i3GEOadmin.core.dicionario = {
 	} ],
     'tituloTxt' : [ {
 		pt : "T&iacute;tulo",
+		en : "",
+		es : ""
+	} ],
+    'calcular' : [ {
+		pt : "Calcular",
 		en : "",
 		es : ""
 	} ]

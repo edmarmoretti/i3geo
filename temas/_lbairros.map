@@ -2,7 +2,7 @@ MAP
   FONTSET "/var/www/i3geo/symbols/fontes.txt"
   SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "i3geosaude"
+    CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros/*FW*//*FW*/) as foo using unique co_bairro using srid=4326"
     METADATA
@@ -12,7 +12,9 @@ MAP
       "iconetema"	""
       "ITENSDESC"	"id,Código bairro,Nome,Distrito,Município"
       "EDITAVEL"	"SIM"
+      "extensao"	"10 10 10 10"
       "ESQUEMATABELAEDITAVEL"	"i3geo_metaestat"
+      "CONEXAOORIGINAL"	"i3geosaude"
       "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
       "TEMA"	"_Bairros POSTGIS"
       "COLUNAGEOMETRIA"	"the_geom"

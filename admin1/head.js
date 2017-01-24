@@ -169,3 +169,4 @@ menuPrincipal = [
 	);
 	$("#menuPrincipalTpl").html(l.join(""));
 }
+g_traducao = null;
