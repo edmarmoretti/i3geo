@@ -3859,9 +3859,11 @@ margin:2px;
 width:29px;
 }
 @media print {
+.olControlEditingToolbar1 {display:none !important;}
 .olControlPanZoomBar {display:none !important;}
 .maximizeDiv {display:none !important;}
 .olControlOverviewMapMaximizeButton {display:none !important;}
+.olControlMousePosition {display:none !important;}
 }
 pre{
 font-family: Verdana, Arial, Helvetica, sans-serif;

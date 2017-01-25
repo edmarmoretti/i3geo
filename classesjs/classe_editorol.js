@@ -1617,6 +1617,15 @@ i3GEO.editorOL = {
 			controles.push(button);
 			adiciona = true;
 		}
+		if(botoes.imprimir===true){
+			button = new OpenLayers.Control.Button({
+				displayClass: "editorOLimprimir",
+				trigger: function(){window.print();},
+				type: OpenLayers.Control.TYPE_BUTTON
+			});
+			controles.push(button);
+			adiciona = true;
+		}
 		//
 		//controle que permite o snap
 		//

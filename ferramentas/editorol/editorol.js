@@ -1577,6 +1577,7 @@ i3GEO.editorOL =
 			var temp = document.createElement("div");
 			temp.className = "editorOLimprimirItemInactive olButton";
 			temp.onclick = function(){
+				window.print();
 			};
 			return temp;
 		},
