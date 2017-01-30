@@ -174,6 +174,13 @@ if ($funcao != "listaEpsg" && $funcao != "pegaTodosTemas" && $funcao != "downloa
 }
 else{
 	$map_file = "";
+	if (isset($g_sid) && $g_sid != ""){
+		session_name("i3GeoPHP");
+		session_id($g_sid);
+		session_start();
+		$perfil = $_SESSION["perfil"];
+		$_pg["perfil"] = $perfil;
+	}
 }
 
 //

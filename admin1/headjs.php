@@ -32,7 +32,7 @@ include (ONDEI3GEO . "/classesjs/compactados/classe_php_compacto.js");
 echo "\n";
 include (ONDEI3GEO . "/classesjs/compactados/mustache.js");
 echo "\n";
-include (ONDEI3GEO . "/admin1/head.js");
+include (ONDEI3GEO . "/admin1/menu.js");
 echo "\n";
 include (ONDEI3GEO . "/admin1/js/core.js");
 echo "\n";

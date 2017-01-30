@@ -12,7 +12,6 @@ MAP
       "iconetema"	""
       "ITENSDESC"	"id,Código bairro,Nome,Distrito,Município"
       "EDITAVEL"	"SIM"
-      "extensao"	"10 10 10 10"
       "ESQUEMATABELAEDITAVEL"	"i3geo_metaestat"
       "CONEXAOORIGINAL"	"i3geosaude"
       "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"

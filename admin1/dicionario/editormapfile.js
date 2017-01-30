@@ -525,13 +525,13 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'cache' : [ {
+    'Cache' : [ {
 		pt : "Ativa ou n&atilde;o a manuten&ccedil;&atilde;o de um cache para armazenar as imagens geradas para montar o mapa. O cache &eacute; mantido no diret&oacute;rio tempor&aacute;rio utilizado pelo i3Geo, na pasta chamada cache. Para cada camada &eacute; criada uma sub-pasta. Para limpar o cache, utilize a op&ccedil;&atilde;o existente junto ao n&oacute; principal desse mapfile. Camadas WMS s&atilde;o acessadas diretamente do servidor de origem quando o cache estiver inativo.",
 		en : "",
 		es : ""
 	} ],
     'cacheTitulo' : [ {
-		pt : "Cache de mapas (CACHE)",
+		pt : "Cache de mapas",
 		en : "",
 		es : ""
 	} ],
@@ -610,13 +610,13 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'tiles' : [ {
+    'Tiles' : [ {
 		pt : "A camada ser&aacute; desenhada em tiles (ladrilhos) de 256x256 pixels. O default &eacute; vazio, nesse caso a camada obedecer&aacute; a l&oacute;gica default de decis&atilde;o para definir se o modo tile ser&aacute; ou n&atilde;o aplicado (depender&aacute; do tipo de layer). Quando for 'nao', o modo tile n&atilde;o ser&aacute; aplicado. Quando 'sim' o modo tile &eacute; sempre aplicado. ",
 		en : "",
 		es : ""
 	} ],
     'tilesTitulo' : [ {
-		pt : "Utiliza o modo TILE (TILES)",
+		pt : "Utiliza o modo TILE",
 		en : "",
 		es : ""
 	} ],
@@ -705,33 +705,33 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'editavel' : [ {
-		pt : "Indica se o tema poder&aacute; ser utilizado nos editores vetoriais e de atributos",
+    'editavelOpt' : [ {
+		pt : "Par&acirc;metros que definem se os dados que comp&otilde;em a camada poder&atilde;o ser editados pelo usu&aacute;rio. &Eacute; necess&aacute;rio informar a tabela que contem os dados e as colunas com geometria e chave prim&aacute;ria. &Eacute; recomend&aacute;vel que se utilizem mapfiles espec&iacute;ficos para edi&ccedil;&atilde;o, mesmo que sejam c&oacute;pias de outro j&aacute; existente.",
 		en : "",
 		es : ""
 	} ],
-    'editavelTitulo' : [ {
-		pt : "O tema pode ser editado? (METADATA: EDITAVEL)",
+    'editavelOptTitulo' : [ {
+		pt : "Edi&ccedil;&atilde;o (apenas para camadas POSTGIS)",
 		en : "",
 		es : ""
 	} ],
     'esquemaBd' : [ {
-		pt : "Esquema do banco de dados onde est&aacute; a tabela que poder&aacute; ser editada",
+		pt : "Esquema no banco de dados onde fica a tabela alvo da edi&ccedil;&atilde;o.",
 		en : "",
 		es : ""
 	} ],
     'esquemaBdTitulo' : [ {
-		pt : "Esquema no banco de dados",
+		pt : "Esquema",
 		en : "",
 		es : ""
 	} ],
     'tabelaBd' : [ {
-		pt : "Tabela do banco que poder&aacute; ser editada",
+		pt : "Tabela que poder&aacute; ser editada.",
 		en : "",
 		es : ""
 	} ],
-    'tabelaBdTitulo' : [ {
-		pt : "Tabela no banco de dados",
+    'tabela' : [ {
+		pt : "Tabela",
 		en : "",
 		es : ""
 	} ],
@@ -746,12 +746,12 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'bdGeom' : [ {
-		pt : "Coluna que contem as geometrias da tabela",
+		pt : "Coluna que contem as geometrias da tabela e que poderá ser editada.",
 		en : "",
 		es : ""
 	} ],
     'bdGeomTitulo' : [ {
-		pt : "Coluna com geometria edit&aacute;vel",
+		pt : "Coluna com geometria",
 		en : "",
 		es : ""
 	} ],
@@ -1191,7 +1191,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'editavelLayer' : [ {
-		pt : "Edit&aacute;vel (define se o tema &eacute; edit&aacute;vel)",
+		pt : "Permite edi&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
@@ -1607,6 +1607,26 @@ i3GEOadmin.mapfile.dicionario = {
 	}],
 	'txtEncoding' : [{
 		pt : "Para vers&o 7 e posteriores. O Mapserver sempre renderiza etiquetas em UTF-8. Se os dados n&atilde;o est&atilde;o nessa codifica&ccedil;&atilde;o, deve-se especific&aacute;-la aqui para que a convers&atilde;o ocorra de forma correta.",
+		en : "",
+		es : ""
+	}],
+	'renderizacao' : [{
+		pt : "Renderiza&ccedil;&atilde;o",
+		en : "",
+		es : ""
+	}],
+	'txtRenderizacao' : [{
+		pt : "Par&acirc;metros que controlam caracter&iacute;sticas gerais de renderiza&ccedil;&atilde;o, como uso de tiles, corte de tiles, etc.",
+		en : "",
+		es : ""
+	}],
+	'maxfeaturesTitulo' : [{
+		pt : "M&aacute;ximo de elementos",
+		en : "",
+		es : ""
+	}],
+	'Maxfeatures' : [{
+		pt : "N&uacute;mero m&aacute;ximo de elementos que podem ser mostrados em cada janela de apresenta&ccedil;&atilde;o (imagem renderizada).",
 		en : "",
 		es : ""
 	}]

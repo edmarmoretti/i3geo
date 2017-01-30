@@ -1,5 +1,5 @@
 <?php
-namespace catalogo\mapfile\cdados;
+namespace catalogo\mapfile\renderizacao;
 /*
  * Licenca:
  *
@@ -41,22 +41,6 @@ $id_tema = ( int ) $_POST ["id_tema"];
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
-	case "CALCULAEXTENSAO" :
-		$codigo = str_replace ( " ", "", removeAcentos ( $codigo ) );
-		$codigo = str_replace ( ".", "", $codigo );
-		$codigo = strip_tags ( $codigo );
-		$codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
-		$arq = $locaplic . "/temas/" . $codigo . ".map";
-		if ($codigo == "" || ! file_exists ( $arq )) {
-			header ( "HTTP/1.1 400 arquivo nao existe" );
-			exit ();
-		}
-		$ret = catalogo/mapfile/cdados/calculaExtensao($locaplic, $id_tema, $codigo);
-		retornaJSON ( array (
-				"ret" => $ret
-		) );
-		exit ();
-		break;
 	case "ALTERAR" :
 		$codigo = str_replace ( " ", "", removeAcentos ( $codigo ) );
 		$codigo = str_replace ( ".", "", $codigo );
@@ -67,7 +51,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo nao existe" );
 			exit ();
 		}
-		$novo = catalogo/mapfile/cdados/alterar ( $locaplic, $id_tema, $codigo, $_POST["escala"], $_POST["extensao"], $_POST["encoding"]);
+		$novo = catalogo/mapfile/renderizacao/alterar ( $locaplic, $id_tema, $codigo, $_POST["cache"], $_POST["tiles"], $_POST["maxfeatures"]);
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao definir as propriedades" );
 			exit ();
@@ -90,24 +74,26 @@ switch ($funcao) {
 			exit ();
 		}
 		$dados = array ();
-		$dados["escala"] = $layer->getmetadata("escala");
-		$dados["extensao"] = $layer->getmetadata("extensao");
-		$versao = versao();
-		$versao = $versao["principal"];
-		if($versao >= 7){
-			$dados["encoding"] = $layer->encoding;
+		$dados["cache"] = strtoupper($layer->getmetadata("cache"));
+		if($dados["cache"] == ""){
+			$dados["cache"] = "NAO";
 		}
-		else {
-			$dados["encoding"] = "notInVersion";
+		$dados["tiles"] = strtoupper($layer->getmetadata("tiles"));
+		if($dados["tiles"] == ""){
+			$dados["tiles"] = "SIM";
 		}
-		$dados["status"] = $layer->status;
+		$dados["cortepixels"] = $layer->getmetadata("cortepixels");
+		$dados["maxfeatures"] = $layer->maxfeatures;
+		if($dados["maxfeatures"] == -1){
+			$dados["maxfeatures"] = "";
+		}
 		retornaJSON ( array (
 				"dados" => $dados
 		) );
 		break;
 }
 cpjson ( $retorno );
-function alterar($locaplic, $id_tema, $codigo, $escala, $extensao, $encoding) {
+function alterar($locaplic, $id_tema, $codigo, $cache, $tiles, $maxfeatures) {
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
 		return false;
@@ -117,13 +103,13 @@ function alterar($locaplic, $id_tema, $codigo, $escala, $extensao, $encoding) {
 	if ($layer == "") {
 		return false;
 	}
-	$layer->setmetadata ( "escala", $escala );
-	$layer->setmetadata ( "extensao", str_replace(","," ",$extensao) );
-	$versao = versao();
-	$versao = $versao["principal"];
-	if($versao >= 7){
-		$layer->set("encoding",$encoding);
+	$layer->setmetadata ( "cache", $cache );
+	$layer->setmetadata ( "cache", $tiles );
+	if(empty($maxfeatures)){
+		$maxfeatures = -1;
 	}
+	$layer->set("maxfeatures",$maxfeatures);
+
 	try {
 		$mapa->save ( $arq );
 		include (dirname ( __FILE__ ) . "/../../../php/removeCabecalhoMapfile.php");
@@ -133,33 +119,5 @@ function alterar($locaplic, $id_tema, $codigo, $escala, $extensao, $encoding) {
 		return false;
 	}
 }
-function calculaExtensao($locaplic, $id_tema, $codigo){
-	global $postgis_mapa;
-	$arq = $locaplic . "/temas/" . $codigo . ".map";
-	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
-		return false;
-	}
-	$mapa = ms_newMapObj ( $arq );
-	substituiConObj($mapa,$postgis_mapa);
-	$extatual = $mapa->extent;
-	$extatual->setextent(-180,-90,180,90);
-	$layer = @$mapa->getlayerbyname ( $codigo );
-	if ($layer == "") {
-		return false;
-	}
-	$original = $layer->getmetadata("extensao");
-	$ret = $layer->getextent();
-	$ret = $ret->minx." ".$ret->miny." ".$ret->maxx." ".$ret->maxy;
-	if($ret != "   "){
-		$layer->setmetadata ( "extensao", $ret);
-	}
-	try {
-		$mapa->save ( $arq );
-		include (dirname ( __FILE__ ) . "/../../../php/removeCabecalhoMapfile.php");
-		removeCabecalhoMapfile ( $arq );
-		return $ret;
-	} catch (Exception $e) {
-		return false;
-	}
-}
+
 ?>

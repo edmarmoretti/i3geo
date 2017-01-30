@@ -1082,6 +1082,10 @@ if(isset($_GET["tms"])){
 	$img = $oMap->draw();
 
 	if($img->imagepath == ""){
+		//tenta mais uma vez
+		$img = $oMap->draw();
+	}
+	if($img->imagepath == ""){
 		exit;
 	}
 	if($cache == true){
@@ -1450,6 +1454,10 @@ function salvaCacheImagem($cachedir,$map,$tms){
 		chmod(dirname($nome),0744);
 	}
 	$img->saveImage($nome);
+	//tenta mais uma vez
+	if(!file_exists($nome)){
+		$img->saveImage($nome);
+	}
 	//
 	//corta a imagem gerada para voltar ao tamanho normal
 	//
