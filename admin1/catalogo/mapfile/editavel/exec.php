@@ -51,7 +51,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo nao existe" );
 			exit ();
 		}
-		$novo = catalogo/mapfile/editavel/alterar ( $locaplic, $id_tema, $codigo, $_POST["cache"], $_POST["tiles"], $_POST["maxfeatures"]);
+		$novo = catalogo/mapfile/editavel/alterar ( $locaplic, $id_tema, $codigo, $_POST["editavel"], $_POST["esquematabelaeditavel"], $_POST["tabelaeditavel"], $_POST["colunaidunico"], $_POST["colunageometria"] );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao definir as propriedades" );
 			exit ();
@@ -135,17 +135,6 @@ outros
 	$dados["palletestep"] = $layer->getmetadata("palletestep");
 	$dados["description_template"] = $layer->getmetadata("description_template");
 	$dados["editorsql"] = $layer->getmetadata("editorsql");
-
-
-
-
-
-
-
-
-
-
-
 		 */
 		retornaJSON ( array (
 				"dados" => $dados
@@ -153,7 +142,7 @@ outros
 		break;
 }
 cpjson ( $retorno );
-function alterar($locaplic, $id_tema, $codigo, $cache, $tiles, $maxfeatures) {
+function alterar($locaplic, $id_tema, $codigo, $editavel, $esquematabelaeditavel, $tabelaeditavel, $colunaidunico, $colunageometria) {
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
 		return false;
@@ -163,13 +152,11 @@ function alterar($locaplic, $id_tema, $codigo, $cache, $tiles, $maxfeatures) {
 	if ($layer == "") {
 		return false;
 	}
-	$layer->setmetadata ( "cache", $cache );
-	$layer->setmetadata ( "cache", $tiles );
-	if(empty($maxfeatures)){
-		$maxfeatures = -1;
-	}
-	$layer->set("maxfeatures",$maxfeatures);
-
+	$layer->setmetadata ( "editavel", $editavel );
+	$layer->setmetadata ( "esquematabelaeditavel", $esquematabelaeditavel );
+	$layer->setmetadata ( "tabelaeditavel", $tabelaeditavel );
+	$layer->setmetadata ( "colunaidunico", $colunaidunico );
+	$layer->setmetadata ( "colunageometria", $colunageometria );
 	try {
 		$mapa->save ( $arq );
 		include (dirname ( __FILE__ ) . "/../../../php/removeCabecalhoMapfile.php");
@@ -179,5 +166,4 @@ function alterar($locaplic, $id_tema, $codigo, $cache, $tiles, $maxfeatures) {
 		return false;
 	}
 }
-
 ?>
