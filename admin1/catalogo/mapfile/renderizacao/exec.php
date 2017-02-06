@@ -1,5 +1,4 @@
 <?php
-namespace catalogo\mapfile\renderizacao;
 /*
  * Licenca:
  *
@@ -51,7 +50,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo nao existe" );
 			exit ();
 		}
-		$novo = catalogo/mapfile/renderizacao/alterar ( $locaplic, $id_tema, $codigo, $_POST["cache"], $_POST["tiles"], $_POST["maxfeatures"]);
+		$novo = alterar ( $locaplic, $id_tema, $codigo, $_POST["cache"], $_POST["tiles"], $_POST["maxfeatures"]);
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao definir as propriedades" );
 			exit ();

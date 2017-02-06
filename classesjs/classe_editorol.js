@@ -1146,11 +1146,14 @@ i3GEO.editorOL = {
 								textoN = texto.split(":");
 							try{
 								if(textoN.length > 1){
-									temp = textoN[2].replace(/\n\r/g, "");
+									textoN.shift();
+									textoN.shift();
+									temp = textoN.join(":");
+									temp = temp.replace(/\n\r/g, "");
 									temp = temp.replace(/'/g, "");
 									temp = temp.replace(/\n/g, "|");
 									temp = temp.replace(/_/g, " ");
-									temp = temp.replace(/=/g, ":");
+									//temp = temp.replace(/=/g, ":");
 									temp = temp.split("|");
 									n = temp.length;
 									for(i=0;i<n;i++){

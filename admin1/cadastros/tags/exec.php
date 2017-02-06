@@ -33,7 +33,7 @@ if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 	exit ();
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
-
+include ("funcoes.php");
 //remove espaco em branco do nome do tag
 $nome = str_replace(" ","",$_POST["nome"]);
 $id_tag = $_POST["id_tag"];
@@ -42,101 +42,49 @@ testaSafeNumerico([$id_tag]);
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $nome, $dbhw );
+		$novo = \admin\cadastros\tags\adicionar( $nome, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_tag, $nome, $dbhw );
+		$novo = \admin\cadastros\tags\alterar ( $id_tag, $nome, $dbhw );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by nome", $dbh, false );
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		retornaJSON ( $dados );
-		exit ();
 		break;
 	case "LISTAUNICO" :
 		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = $id_tag ", $dbh, false );
-		if ($dados === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $dados[0] );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON ( $dados[0] );
+		}
 		break;
 	case "LISTA" :
 		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by lower(nome)", $dbh, false );
-		if ($dados === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $dados );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON ( $dados );
+		}
 		break;
 	case "EXCLUIR" :
-		$retorna = excluir ( $id_tag, $dbhw );
+		$retorna = \admin\cadastros\tags\excluir ( $id_tag, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
+		} else {
+			retornaJSON ( $id_tag );
 		}
-		retornaJSON ( $id_tag );
-		exit ();
 		break;
-}
-cpjson ( $retorno );
-
-// $papeis deve ser um array
-function adicionar($nome, $dbhw) {
-	global $esquemaadmin;
-	try {
-		$dataCol = array(
-			"nome" => ''
-		);
-		$id_tag = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_tags",$dataCol,"nome","id_tag");
-		$retorna = alterar ( $id_tag, $nome,$dbhw );
-
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
-	}
-}
-// $papeis deve ser um array
-function alterar($id_tag, $nome,$dbhw) {
-	global $convUTF, $esquemaadmin;
-	if ($convUTF != true){
-		$nome = utf8_decode($nome);
-	}
-	$dataCol = array(
-		"nome" => $nome
-	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_tags", $dataCol, "WHERE id_tag = $id_tag" );
-	if ($resultado === false) {
-		return false;
-	}
-	return $id_tag;
-}
-function excluir($id_tag, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_tags", "id_tag", $id_tag, $dbhw, false );
-	if ($resultado === false) {
-		return false;
-	}
-	return $resultado;
+	default:
+		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		break;
 }
 ?>

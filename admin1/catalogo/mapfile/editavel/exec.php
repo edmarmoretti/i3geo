@@ -1,5 +1,4 @@
 <?php
-namespace catalogo\mapfile\editavel;
 /*
  * Licenca:
  *
@@ -51,7 +50,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo nao existe" );
 			exit ();
 		}
-		$novo = catalogo/mapfile/editavel/alterar ( $locaplic, $id_tema, $codigo, $_POST["editavel"], $_POST["esquematabelaeditavel"], $_POST["tabelaeditavel"], $_POST["colunaidunico"], $_POST["colunageometria"] );
+		$novo = alterar ( $locaplic, $id_tema, $codigo, $_POST["editavel"], $_POST["esquematabelaeditavel"], $_POST["tabelaeditavel"], $_POST["colunaidunico"], $_POST["colunageometria"] );
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao definir as propriedades" );
 			exit ();

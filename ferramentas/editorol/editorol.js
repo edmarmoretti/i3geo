@@ -1625,7 +1625,9 @@ i3GEO.editorOL =
 						else{
 							url = layer.getSource().getUrl();
 						}
-						xy = evt.target.downPx_;
+
+						//xy = evt.target.downPx_;
+						xy = evt.feature.getGeometry().getFirstCoordinate();
 						retorno = function(r){
 							var valorunico = "", camada = null, texto = "", lonlattexto, xy, temp, temp1, n, i, f = [], textoN = r.split(":");
 							if(i3GEO.arvoreDeCamadas){
@@ -1635,11 +1637,13 @@ i3GEO.editorOL =
 							i3GEO.eventos.cliquePerm.ativo = true;
 							try {
 								if (textoN.length > 1) {
-									temp = textoN[2].replace(/\n\r/g, "");
+									textoN.shift();
+									textoN.shift();
+									temp = textoN.join(":");
 									temp = temp.replace(/'/g, "");
 									temp = temp.replace(/\n/g, "|");
 									temp = temp.replace(/_/g, " ");
-									temp = temp.replace(/=/g, ":");
+									//temp = temp.replace(/=/g, ":");
 									temp = temp.split("|");
 									n = temp.length;
 									for (i = 0; i < n; i++) {
@@ -1647,8 +1651,8 @@ i3GEO.editorOL =
 										temp1 = temp1.replace(/\s+$/, "");
 										if (temp1 != ""){
 											//verifica se a coluna eh o idunico e pega o valor
-											if(camada && camada.colunaidunico != "" && temp1.split(":")[0].trim() == camada.colunaidunico){
-												valorunico = temp1.split(":")[1].trim();
+											if(camada && camada.colunaidunico != "" && temp1.split("=")[0].trim() == camada.colunaidunico){
+												valorunico = temp1.split("=")[1].trim();
 												temp1 = "(*) "+temp1;
 											}
 											f.push(temp1);

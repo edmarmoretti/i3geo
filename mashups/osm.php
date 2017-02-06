@@ -1,4 +1,4 @@
-<?php
+jeto <?php
 /**
  * DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd
  * definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache

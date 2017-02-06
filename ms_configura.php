@@ -225,7 +225,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,geol
 inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */
-$i3geoBlFerramentas = array("saiku");
+$i3geoBlFerramentas = array("saiku","ffff");
 /*
 Variable: $ogrOutput
 

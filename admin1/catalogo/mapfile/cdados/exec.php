@@ -1,5 +1,4 @@
 <?php
-namespace catalogo\mapfile\cdados;
 /*
  * Licenca:
  *
@@ -51,7 +50,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo nao existe" );
 			exit ();
 		}
-		$ret = catalogo/mapfile/cdados/calculaExtensao($locaplic, $id_tema, $codigo);
+		$ret = calculaExtensao($locaplic, $id_tema, $codigo);
 		retornaJSON ( array (
 				"ret" => $ret
 		) );
@@ -67,7 +66,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 400 arquivo nao existe" );
 			exit ();
 		}
-		$novo = catalogo/mapfile/cdados/alterar ( $locaplic, $id_tema, $codigo, $_POST["escala"], $_POST["extensao"], $_POST["encoding"]);
+		$novo = alterar ( $locaplic, $id_tema, $codigo, $_POST["escala"], $_POST["extensao"], $_POST["encoding"]);
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao definir as propriedades" );
 			exit ();
