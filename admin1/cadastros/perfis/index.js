@@ -181,8 +181,7 @@ Obt&eacute;m a lista de perfis
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#form-" + json).remove();
+						i3GEOadmin.perfis.lista();
 					}
 			)
 			.fail(

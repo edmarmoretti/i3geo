@@ -1,5 +1,19 @@
 <?php
 namespace admin\cadastros\tags;
+function listar($dbh, $id_tag = ""){
+	global $esquemaadmin;
+	if($id_tag != ""){
+		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = $id_tag ", $dbh, false );
+		$dados = $dados[0];
+	} else {
+		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by lower(nome)", $dbh, false);
+	}
+	if ($dados === false) {
+		return false;
+	} else {
+		return $dados;
+	}
+}
 function adicionar($nome, $dbhw) {
 	global $esquemaadmin;
 	try {
@@ -7,7 +21,7 @@ function adicionar($nome, $dbhw) {
 				"nome" => ''
 		);
 		$id_tag = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_tags",$dataCol,"nome","id_tag");
-		$retorna = alterar ( $id_tag, $nome,$dbhw );
+		$retorna = \admin\cadastros\tags\alterar ( $id_tag, $nome, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
 		return false;

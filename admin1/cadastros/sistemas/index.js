@@ -83,7 +83,7 @@ Obt&eacute;m a lista
 							i3GEOadmin.core.defineFiltro(filtro);
 							i3GEOadmin.core.filtra(i3GEOadmin.core.pegaFiltro());
 						}
-						//monta um template para o modal de inclusao de novo usuario
+						//monta um template para o modal de inclusao
 						if(i3GEOadmin.sistemas.formAdiciona == ""){
 							html = Mustache.to_html(
 									$("#templateFormLista").html(),
@@ -214,8 +214,7 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#form-" + json).remove();
+						i3GEOadmin.sistemas.lista();
 					}
 			)
 			.fail(

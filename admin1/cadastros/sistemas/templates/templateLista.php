@@ -4,7 +4,7 @@
 		<h4 class="list-group-item-heading {{escondido}}">
 			<div class="pull-right">
 			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.sistemas.editarFuncoes('{{id_sistema}}','{{{nome_sistema}}}')" href="javascript:void(0)">
-				<i class="material-icons md-18">folder_open</i>
+				<i class="material-icons  md-18">more_horiz</i>
 			</a>
   			<label class=pull-right><h6 style="margin-top: 5px; margin-bottom: 5px;">&nbsp;{{{funcoes}}}</h6></label>
 			</div>

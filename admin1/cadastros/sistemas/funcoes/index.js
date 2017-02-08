@@ -199,8 +199,7 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#form-" + json).remove();
+						i3GEOadmin.funcao.lista();
 					}
 			)
 			.fail(
@@ -244,16 +243,5 @@ Obt&eacute;m a lista
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
 			);
-		},
-		editarTemas: function(id_sistema, id_funcao,titulo_funcao){
-			//muda a url para que o usuario possa voltar pelo botao do navegador
-			var u = window.location.origin + window.location.pathname + "?id_sistema=" + id_sistema + "&id_filtro=" + id_funcao;
-			window.history.replaceState(null,null,u);
-			//abre a pagina de edicao
-			window.location.href = "temas/index.php?id_funcao=" + id_funcao + "&titulo_funcao=" + titulo_funcao + "&id_sistema=" + id_sistema;
-		},
-		addInput: function(id,valor){
-			var i = $("#"+id);
-			$(i.val(i.val() + ' ' + valor));
 		}
 };

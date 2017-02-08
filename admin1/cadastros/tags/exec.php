@@ -43,28 +43,32 @@ $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
 		$novo = \admin\cadastros\tags\adicionar( $nome, $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		}
 		break;
 	case "ALTERAR" :
 		$novo = \admin\cadastros\tags\alterar ( $id_tag, $nome, $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		}
 		break;
 	case "LISTAUNICO" :
-		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = $id_tag ", $dbh, false );
+		$dados = \admin\cadastros\tags\listar ( $dbh, $id_tag );
 		$dbhw = null;
 		$dbh = null;
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
-			retornaJSON ( $dados[0] );
+			retornaJSON ( $dados );
 		}
 		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by lower(nome)", $dbh, false );
+		$dados = \admin\cadastros\tags\listar ( $dbh );
 		$dbhw = null;
 		$dbh = null;
 		if ($dados === false) {
@@ -79,8 +83,6 @@ switch ($funcao) {
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-		} else {
-			retornaJSON ( $id_tag );
 		}
 		break;
 	default:

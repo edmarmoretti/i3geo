@@ -33,7 +33,7 @@ if (verificaOperacaoSessao ( "admin/html/identifica" ) === false) {
 	exit ();
 }
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
-
+include ("funcoes.php");
 $id_i = $_POST["id_i"];
 $id = $_POST["id"];
 testaSafeNumerico([$id_i,$id]);
@@ -41,106 +41,52 @@ testaSafeNumerico([$id_i,$id]);
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $_POST["publicado_i"], $_POST["abrir_i"], $_POST["nome_i"], $_POST["target_i"], $dbhw );
+		$novo = \admin\cadastros\identifica\adicionar( $_POST["publicado_i"], $_POST["abrir_i"], $_POST["nome_i"], $_POST["target_i"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_i, $_POST["publicado_i"], $_POST["abrir_i"], $_POST["nome_i"], $_POST["target_i"], $dbhw );
+		$novo = \admin\cadastros\identifica\alterar ( $id_i, $_POST["publicado_i"], $_POST["abrir_i"], $_POST["nome_i"], $_POST["target_i"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id_i order by nome_i", $dbh, false );
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		retornaJSON ( $dados );
-		exit ();
 		break;
 	case "LISTAUNICO" :
-		$d = pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id_i", $dbh, false );
-		if ($d === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
+		$dados = \admin\cadastros\identifica\listar ( $dbh, $id_i );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $d[0] );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON ( $dados );
+		}
 		break;
 	case "LISTA" :
-		$d = pegaDados ( "SELECT id_i, nome_i from ".$esquemaadmin."i3geoadmin_identifica order by lower(nome_i)", $dbh, false );
-		if ($d === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
+		$dados = \admin\cadastros\identifica\listar ( $dbh );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $d );
+		if ($d === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON ( $dados );
+		}
 		break;
 	case "EXCLUIR" :
-		$retorna = excluir ( $id_i, $dbhw );
+		$retorna = \admin\cadastros\identifica\excluir ( $id_i, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		retornaJSON ( $id_i );
-		exit ();
 		break;
-}
-cpjson ( $retorno );
-
-// $papeis deve ser um array
-function adicionar($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
-	global $esquemaadmin;
-	try {
-		$dataCol = array(
-			"publicado_i" => '',
-			"nome_i" => '',
-			"abrir_i" => '',
-			"target_i" => ''
-		);
-		$id_i = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_identifica",$dataCol,"nome_i","id_i");
-		$retorna = alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw);
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
-	}
-}
-// $papeis deve ser um array
-function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
-	global $convUTF, $esquemaadmin;
-	if ($convUTF != true){
-		$nome_i = utf8_decode($nome_i);
-	}
-	$dataCol = array(
-		"publicado_i" => $publicado_i,
-		"nome_i" => $nome_i,
-		"abrir_i" => $abrir_i,
-		"target_i" => $target_i
-	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_identifica", $dataCol, "WHERE id_i = $id_i" );
-	if ($resultado === false) {
-		return false;
-	}
-	return $id_i;
-}
-function excluir($id_i, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_identifica", "id_i", $id_i, $dbhw, false );
-	if ($resultado === false) {
-		return false;
-	}
-	return $resultado;
+	default:
+		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		break;
 }
 ?>

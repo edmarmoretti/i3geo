@@ -30,7 +30,7 @@ if (verificaOperacaoSessao ( "admin/html/webservices" ) === false) {
 }
 
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
-
+include ("funcoes.php");
 $id_ws = $_POST["id_ws"];
 $id = $_POST["id"];
 
@@ -39,150 +39,51 @@ testaSafeNumerico([$id,$id_ws]);
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $_POST["autor_ws"], $_POST["desc_ws"], $_POST["link_ws"], $_POST["nome_ws"], $_POST["tipo_ws"],$dbhw );
+		$novo = \admin\cadastros\servicos\adicionar ( $_POST["autor_ws"], $_POST["desc_ws"], $_POST["link_ws"], $_POST["nome_ws"], $_POST["tipo_ws"],$dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_ws,$_POST["autor_ws"], $_POST["desc_ws"], $_POST["link_ws"], $_POST["nome_ws"], $_POST["tipo_ws"],$dbhw );
+		$novo = \admin\cadastros\servicos\alterar ( $id_ws,$_POST["autor_ws"], $_POST["desc_ws"], $_POST["link_ws"], $_POST["nome_ws"], $_POST["tipo_ws"],$dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by nome_ws", $dbh, false );
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		retornaJSON ( $dados );
-		exit ();
 		break;
 	case "LISTAUNICO" :
-		$ws = pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws ", $dbh, false );
-		if ($ws === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
+		$dados = \admin\cadastros\servicos\listar ( $dbh, id_ws );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $ws[0] );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON ( $dados );
+		}
 		break;
 	case "LISTA" :
-		$ws = pegaDados ( "SELECT id_ws,nome_ws from ".$esquemaadmin."i3geoadmin_ws order by lower (nome_ws)", $dbh, false );
-		if ($ws === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
+		$dados = \admin\cadastros\servicos\listar ( $dbh );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $ws );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON ( $dados );
+		}
 		break;
 	case "EXCLUIR" :
-		$retorna = excluir ( $id_ws, $dbhw );
+		$retorna = \admin\cadastros\servicos\excluir ( $id_ws, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		retornaJSON ( $id_ws );
-		exit ();
 		break;
-}
-cpjson ( $retorno );
-
-// $papeis deve ser um array
-function adicionar($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
-	global $esquemaadmin;
-	try {
-		$dataCol = array(
-			"desc_ws" => '',
-			"nome_ws" => '',
-			"link_ws" => '',
-			"autor_ws" => '',
-			"tipo_ws" => '',
-			"nacessos" => 0,
-			"nacessosok" => 0
-		);
-		$id_ws = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_ws",$dataCol,"nome_ws","id_ws");
-		$retorna = alterar ( $id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw );
-
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
-	}
-}
-// $papeis deve ser um array
-function alterar($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
-	global $convUTF, $esquemaadmin;
-	if ($convUTF != true){
-		$nome_ws = utf8_decode($nome_ws);
-		$desc_ws = utf8_decode($desc_ws);
-		$autor_ws = utf8_decode($autor_ws);
-	}
-	$dataCol = array(
-		"desc_ws" => $desc_ws,
-		"nome_ws" => $nome_ws,
-		"link_ws" => $link_ws,
-		"autor_ws" => $autor_ws,
-		"tipo_ws" => $tipo_ws
-	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_ws", $dataCol, "WHERE id_ws = $id_ws" );
-	if ($resultado === false) {
-		return false;
-	}
-	return $id_ws;
-}
-function excluir($id_ws, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_ws", "id_ws", $id_ws, $dbhw, false );
-	if ($resultado === false) {
-		return false;
-	}
-	return $resultado;
-}
-//usado em wmswfs.php
-function adicionaAcesso($id_ws,$sucesso){
-	global $esquemaadmin;
-	try	{
-		if($id_ws == ""){
-			return;
-		}
-		include("conexao.php");
-		$dados = pegaDados("select * from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws");
-		if(count($dados) == 0){
-			return;
-		};
-		if($dados[0]["nacessos"] == ""){
-			$dados[0]["nacessos"] = 0;
-		}
-		$acessos = $dados[0]["nacessos"] + 1;
-
-		if($sucesso)
-			$ok = $dados[0]["nacessosok"] + 1;
-			else
-				$ok = $dados[0]["nacessosok"];
-
-				if($ok == ""){
-					$ok = 0;
-				}
-				$dataCol = array(
-						"nacessos" => $acessos,
-						"nacessosok" => $ok
-				);
-				i3GeoAdminUpdate($dbhw,"i3geoadmin_ws",$dataCol,"WHERE id_ws = $id_ws");
-				$dbhw = null;
-				$dbh = null;
-	}
-	catch (PDOException $e){
-		return "Error!: ";
-	}
+	default:
+		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		break;
 }
 ?>
