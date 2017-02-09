@@ -33,7 +33,7 @@ if (verificaOperacaoSessao ( "admin/html/atlas" ) === false) {
 	exit ();
 }
 include (dirname ( __FILE__ ) . "/../../../../../admin/php/conexao.php");
-
+include ("funcoes.php");
 $id_atlas = $_POST["id_atlas"];
 $id_prancha = $_POST["id_prancha"];
 $id_tema = $_POST["id_tema"];
@@ -43,122 +43,58 @@ testaSafeNumerico([$id,$id_atlas,$id_prancha]);
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $id_prancha, $_POST["ordem_tema"], $_POST["ligado_tema"], $_POST["codigo_tema"], $dbhw );
+		$novo = \admin\catalogo\atlas\pranchas\temas\adicionar( $id_prancha, $_POST["ordem_tema"], $_POST["ligado_tema"], $_POST["codigo_tema"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_tema, $_POST["ordem_tema"], $_POST["ligado_tema"], $_POST["codigo_tema"], $dbhw );
+		$novo = \admin\catalogo\atlas\pranchas\temas\alterar ( $id_tema, $_POST["ordem_tema"], $_POST["ligado_tema"], $_POST["codigo_tema"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = $id_tema", $dbh, false );
-
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		$dbhw = null;
-		$dbh = null;
-		retornaJSON ( $dados );
-		exit ();
 		break;
 	case "LISTAUNICO" :
-		$dados = pegaDados("SELECT id_tema, ordem_tema, codigo_tema, ligado_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = '$id_tema'", $dbh, false);
-		if ($dados === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de temas de uma prancha" );
-			exit ();
-		}
+		$dados =  \admin\catalogo\atlas\pranchas\temas\listar($dbh, $id_prancha, $id_tema);
 		$dbhw = null;
 		$dbh = null;
-		//pega a lista de temas
-		include("../../../../../admin/php/classe_arvore.php");
-		$arvore = new Arvore($locaplic);
-		$temas = $arvore->pegaTodosTemas(true);
-		retornaJSON ( array("dados"=>$dados[0], "temas"=>$temas) );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de temas de uma prancha" );
+		} else {
+			include("../../../../../admin/php/classe_arvore.php");
+			$arvore = new Arvore($locaplic);
+			$temas = $arvore->pegaTodosTemas(true);
+			retornaJSON ( array("dados"=>$dados, "temas"=>$temas) );
+		}
 		break;
 	case "LISTA" :
-		$dados = pegaDados("SELECT id_tema, codigo_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_prancha = '$id_prancha' ORDER BY ordem_tema", $dbh, false);
-		if ($dados === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de temas de uma prancha" );
-			exit ();
-		}
+		$dados =  \admin\catalogo\atlas\pranchas\temas\listar($dbh, $id_prancha, $id_tema);
 		$dbhw = null;
 		$dbh = null;
-		//pega a lista de temas
-		include("../../../../../admin/php/classe_arvore.php");
-		$arvore = new Arvore($locaplic);
-		$temas = $arvore->pegaTodosTemas(true);
-		retornaJSON ( array("dados"=>$dados, "temas"=>$temas) );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de temas de uma prancha" );
+		} else {
+			//pega a lista de temas
+			include("../../../../../admin/php/classe_arvore.php");
+			$arvore = new Arvore($locaplic);
+			$temas = $arvore->pegaTodosTemas(true);
+			retornaJSON ( array("dados"=>$dados, "temas"=>$temas) );
+		}
 		break;
 	case "EXCLUIR" :
-		$retorna = excluir ( $id_tema, $dbhw );
+		$retorna = \admin\catalogo\atlas\pranchas\temas\excluir ( $id_tema, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		retornaJSON ( $id_tema );
-		exit ();
 		break;
-}
-cpjson ( $retorno );
-
-function adicionar( $id_prancha, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw ) {
-	global $esquemaadmin;
-	try {
-		$dataCol = array(
-			"ordem_tema"=>0,
-			"codigo_tema"=>"",
-			"ligado_tema"=>"",
-			"id_prancha"=>$id_prancha
-		);
-		$id_tema = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_atlast",$dataCol,"codigo_tema","id_tema");
-		$retorna = alterar ( $id_tema, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw );
-
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
-	}
-}
-// $papeis deve ser um array
-function alterar($id_tema, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw) {
-	global $esquemaadmin;
-	//caso a atualizacao ocorra apos insert
-	$dataCol = array(
-			"ordem_tema"=>$ordem_tema,
-			"codigo_tema"=>$codigo_tema,
-			"ligado_tema"=>$ligado_tema
-	);
-	//caso registro ja exista
-	if($codigo_tema == ""){
-		$dataCol = array(
-				"ordem_tema"=>$ordem_tema,
-				"ligado_tema"=>$ligado_tema
-		);
-	}
-
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_atlast", $dataCol, "WHERE id_tema = $id_tema" );
-	if ($resultado === false) {
-		return false;
-	}
-	return $id_tema;
-}
-function excluir($id_tema, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_atlast", "id_tema", $id_tema, $dbhw, false );
-	if ($resultado === false) {
-		return false;
-	}
-	return $resultado;
+	default:
+		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		break;
 }
 ?>

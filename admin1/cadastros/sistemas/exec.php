@@ -89,13 +89,6 @@ switch ($funcao) {
 		retornaJSON ( array("dados"=>$dados, "perfis"=>$perfis) );
 		break;
 	case "EXCLUIR" :
-		$funcoes = pegaDados("SELECT id_sistema from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema = '$id_sistema'");
-		$dbhw = null;
-		$dbh = null;
-		if(count($funcoes) > 0){
-			header ( "HTTP/1.1 500 erro ao excluir. Exclua as funcoes do sistema primeiro" );
-			exit ();
-		}
 		$retorna = \admin\cadastros\sistemas\excluir ( $id_sistema, $dbhw );
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );

@@ -49,6 +49,12 @@ function alterar($id_sistema,$publicado_sistema,$nome_sistema,$perfil_sistema, $
 }
 function excluir($id_sistema, $dbhw) {
 	global $esquemaadmin;
+	include (dirname(__FILE__)."/funcoes/funcoes.php");
+	$funcoes = \admin\cadastros\sistemas\funcoes\listar ( $dbhw, $id_sistema );
+	if(count($funcoes) > 0){
+		header ( "HTTP/1.1 500 erro ao excluir. Exclua as funcoes do sistema primeiro" );
+		exit;
+	}
 	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_sistemas", "id_sistema", $id_sistema, $dbhw, false );
 	if ($resultado === false) {
 		return false;
