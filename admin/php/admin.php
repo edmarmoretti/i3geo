@@ -321,6 +321,9 @@ function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
 		return "UPDATE ID ";
 	}
 }
+//
+//o array $ordem contem a lista de ids na ordem desejada
+//
 function i3GeoAdminOrdena($pdo,$ordem,$tabela,$colunaid){
 	global $esquemaadmin;
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

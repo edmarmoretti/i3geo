@@ -238,8 +238,7 @@ i3GEOadmin.subgrupos = {
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#formRaiz-" + json).remove();
+						i3GEOadmin.subgrupos.lista();
 					}
 			)
 			.fail(
@@ -464,8 +463,7 @@ i3GEOadmin.subgrupos = {
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#formNo-" + json).remove();
+						i3GEOadmin.subgrupos.lista();
 					}
 			)
 			.fail(
@@ -514,7 +512,7 @@ i3GEOadmin.subgrupos = {
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 				"exec.php?funcao=ordena",
-				"id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&ordem=" + data.join(" ")
+				"id_n1=" + i3GEOadmin.subgrupos.id_n1 + "&novaordem=" + data.join(" ")
 			)
 			.done(
 					function(data, status){

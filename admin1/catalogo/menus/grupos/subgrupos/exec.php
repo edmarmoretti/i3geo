@@ -37,7 +37,7 @@ if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 }
 
 include (dirname ( __FILE__ ) . "/../../../../../admin/php/conexao.php");
-
+include ("funcoes.php");
 $id_n1 = $_POST["id_n1"];
 $id_n2 = $_POST["id_n2"];
 $id_menu = $_POST["id_menu"];
@@ -48,138 +48,75 @@ $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ORDENA" :
 		$ordem = explode(" ",$_POST["novaordem"]);
-		//verifica se existe a mesma quantidade de registros no banco e na lista de ids
-		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n2 WHERE id_n1 = $id_n1", $dbh, false );
-		if(count($dados) != count($ordem)){
-			header ( "HTTP/1.1 500 erro numero de registros nao batem" );
-			exit ();
-		}
-		//verifica se os ids existem no mesmo nivel
-		$dados = pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n2 WHERE id_n1 = $id_n1 AND id_n2 IN (" . implode(",",$ordem). ")", $dbh, false );
-		if(count($dados) != count($ordem)){
-			header ( "HTTP/1.1 500 erro ids nao batem" );
-			exit ();
-		}
-
-		$retorna = i3GeoAdminOrdena($dbhw,$ordem,"i3geoadmin_n2","id_n2");
+		$dados = \admin\catalogo\menus\grupos\subgrupos\ordenar($id_n1, $ordem, $dbhw);
 		$dbhw = null;
 		$dbh = null;
-		if ($retorna === false) {
+		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao ordenar" );
-			exit ();
 		}
-		retornaJSON ( $retorna );
-		exit();
+		retornaJSON ( $dados );
 		break;
 	case "ADICIONAR" :
-		$novo = adicionar( $id_subgrupo, $id_n1, $_POST["publicado"], $_POST["n2_perfil"], $_POST["ordem"], $dbhw );
-		if ($novo === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		exit ();
-		break;
-	case "ALTERAR" :
-		$novo = alterar ( $id_n2, $id_subgrupo, $id_menu, $publicado, $_POST["n2_perfil"], $_POST["ordem"], $dbhw );
-		if ($novo === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		$dados = pegaDados ( "SELECT id_n2 from ".$esquemaadmin."i3geoadmin_n2 WHERE id_n2 = $id_n2", $dbh, false );
-
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
+		$novo = \admin\catalogo\menus\grupos\subgrupos\adicionar( $id_subgrupo, $id_n1, $_POST["publicado"], $_POST["n2_perfil"], $_POST["ordem"], $dbhw );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $dados );
-		exit ();
+		if ($novo === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		}
+		break;
+	case "ALTERAR" :
+		$novo = \admin\catalogo\menus\grupos\subgrupos\alterar ( $id_n2, $id_subgrupo, $id_menu, $publicado, $_POST["n2_perfil"], $_POST["ordem"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
+		if ($novo === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		}
 		break;
 	case "LISTAUNICO" :
-		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = $id_n2");
+		$dados = \admin\catalogo\menus\grupos\subgrupos\listar ($dbh,"",$id_n2);
+		$dbhw = null;
+		$dbh = null;
 		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON($dados);
+		}
+		break;
+	case "LISTA" :
+		$subgrupos = \admin\catalogo\menus\grupos\subgrupos\listar ($dbh,$id_n1);
+		if ($subgrupos === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
+		} else {
+			$raiz = \admin\catalogo\menus\grupos\subgrupos\raiz\listar ($dbh,"",$id_n1);
+			include ("../../../../cadastros/perfis/funcoes.php");
+			$perfis = \admin\cadastros\perfis\listar( $dbh );
+			include ("temas/funcoes.php");
+			$temas = \admin\catalogo\menus\grupos\subgrupos\temas\todosTemas($dbh);
+			include ("listadesubgrupos/funcoes.php");
+			$tiposSubGrupos = \admin\catalogo\menus\grupos\subgrupos\listadesubgrupos\listar ($dbh);
+			$dbhw = null;
+			$dbh = null;
+			retornaJSON(array(
+				"raiz"=>$raiz,
+				"subgrupos"=>$subgrupos,
+				"perfis"=>$perfis,
+				"temas"=>$temas,
+				"tiposSubGrupos"=>$tiposSubGrupos
+			));
 		}
-		$dbhw = null;
-		$dbh = null;
-		retornaJSON($dados[0]);
-		break;
-
-	case "LISTA" :
-		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by lower(perfil)", $dbh, false );
-		$dbhw = null;
-		$dbh = null;
-		include($locaplic."/admin/php/classe_arvore.php");
-		$arvore = new Arvore($locaplic);
-		$subgrupos = $arvore->pegaSubgruposGrupo($id_menu,$id_n1);
-		$temas = $arvore->pegaTodosTemas(true);
-		$tiposSubGrupos = $arvore->pegaListaDeTiposSubGrupos();
-		unset($arvore);
-		$subgrupos["perfis"] = $perfis;
-		$subgrupos["temas"] = $temas;
-		$subgrupos["tiposSubGrupos"] = $tiposSubGrupos;
-		retornaJSON($subgrupos);
 		break;
 	case "EXCLUIR" :
-		$r = pegaDados("SELECT id_n3 from ".$esquemaadmin."i3geoadmin_n3 where id_n2 ='$id_n2'");
-		if(count($r) > 0){
-			header ( "HTTP/1.1 500 erro ao excluir. Exclua os subgrupos primeiro" );
-			exit ();
-		}
-		$retorna = excluir ( $id_n2, $dbhw );
+		$retorna = \admin\catalogo\menus\grupos\subgrupos\excluir ( $id_n2, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		retornaJSON ( $id_n2 );
-		exit ();
 		break;
-}
-cpjson ( $retorno );
-
-function adicionar( $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw) {
-	global $esquemaadmin;
-	try {
-		$dataCol = array(
-				"id_n1" => $id_n1,
-				"publicado" => 'NAO',
-				"ordem" => 0,
-				"n2_perfil" => ''
-		);
-		$id_n2 = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_n2",$dataCol,"n2_perfil","id_n2");
-		$retorna = alterar ( $id_n2, $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw );
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
-	}
-}
-// $papeis deve ser um array
-function alterar($id_n2, $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw) {
-	global $esquemaadmin;
-	$dataCol = array(
-			"publicado" => $publicado,
-			"id_subgrupo" => $id_subgrupo,
-			"ordem" => $ordem,
-			"n2_perfil" => $n2_perfil
-	);
-	$resultado = i3GeoAdminUpdate($dbhw,"i3geoadmin_n2",$dataCol,"WHERE id_n2 = $id_n2");
-	if ($resultado === false) {
-		return false;
-	}
-	return $id_n2;
-}
-function excluir($id_n2, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_n2", "id_n2", $id_n2, $dbhw, false );
-	if ($resultado === false) {
-		return false;
-	}
-	return $resultado;
+	default:
+		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		break;
 }
 ?>

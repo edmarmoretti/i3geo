@@ -263,8 +263,7 @@ i3GEOadmin.temas = {
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#form-" + json).remove();
+						i3GEOadmin.temas.lista();
 					}
 			)
 			.fail(
@@ -318,7 +317,6 @@ i3GEOadmin.temas = {
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.temas.ondeNos);
 						i3GEOadmin.temas.lista();
 					}
 			)

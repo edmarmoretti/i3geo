@@ -233,8 +233,7 @@ Obt&eacute;m a lista de menus
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#form-" + json).remove();
+						i3GEOadmin.menus.lista();
 					}
 			)
 			.fail(

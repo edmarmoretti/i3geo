@@ -34,128 +34,60 @@ if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 }
 
 include (dirname ( __FILE__ ) . "/../../../../../../admin/php/conexao.php");
-
+include ("funcoes.php");
 $id_subgrupo = $_POST["id_subgrupo"];
 testaSafeNumerico([$id_subgrupo]);
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $_POST["nome_subgrupo"], $_POST["desc_subgrupo"], $_POST["en"], $_POST["es"], $dbhw );
+		$novo = \admin\catalogo\menus\grupos\subgrupos\listadesubgrupos\adicionar( $_POST["nome_subgrupo"], $_POST["desc_subgrupo"], $_POST["en"], $_POST["es"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
-			$dbhw = null;
-			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_subgrupo, $_POST["nome_subgrupo"], $_POST["desc_subgrupo"], $_POST["en"], $_POST["es"], $dbhw );
+		$novo = \admin\catalogo\menus\grupos\subgrupos\listadesubgrupos\alterar ( $id_subgrupo, $_POST["nome_subgrupo"], $_POST["desc_subgrupo"], $_POST["en"], $_POST["es"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
-			$dbhw = null;
-			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos WHERE id_subgrupo = $id_subgrupo", $dbh, false );
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		retornaJSON ( $dados );
-		exit ();
 		break;
 	case "LISTAUNICO" :
-		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos WHERE id_subgrupo = $id_subgrupo", $dbh, false );
-		if ($dados === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
+		$dados = \admin\catalogo\menus\grupos\subgrupos\listadesubgrupos\listar ($dbh, $id_subgrupo);
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $dados[0] );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON ( $dados );
+		}
 		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT id_subgrupo,nome_subgrupo from ".$esquemaadmin."i3geoadmin_subgrupos order by lower(nome_subgrupo)", $dbh, false );
-		if ($dados === false) {
-			$dbhw = null;
-			$dbh = null;
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
+		$dados = \admin\catalogo\menus\grupos\subgrupos\listadesubgrupos\listar ($dbh);
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( $dados );
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			retornaJSON ( $dados );
+		}
 		break;
 	case "EXCLUIR" :
-		$r = pegaDados("select n2.id_subgrupo from ".$esquemaadmin."i3geoadmin_n3 as n3, ".$esquemaadmin."i3geoadmin_n2 as n2 where n2.id_n2 = n3.id_n3 and n2.id_subgrupo = '$id'");
-		if(count($r) > 0){
-			header ( "HTTP/1.1 500 erro ao excluir. O grupo esta em uso" );
-			exit ();
-		}
-		$retorna = excluir ( $id_subgrupo, $dbhw );
+		$retorna = \admin\catalogo\menus\grupos\subgrupos\listadesubgrupos\excluir ( $id_subgrupo, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		retornaJSON ( $id_subgrupo );
-		exit ();
 		break;
-}
-cpjson ( $retorno );
-
-// $papeis deve ser um array
-function adicionar($nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw) {
-	global $esquemaadmin;
-	try {
-		$dataCol = array(
-			"nome_subgrupo" => $nome_subgrupo,
-			"desc_subgrupo" => "",
-			"en" => "",
-			"es" => "",
-			"it" => ""
-		);
-		$id_subgrupo = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_subgrupos",$dataCol,"nome_subgrupo","id_subgrupo");
-		$retorna = alterar ( $id_subgrupo, $nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw );
-
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
-	}
-}
-// $papeis deve ser um array
-function alterar($id_subgrupo, $nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw) {
-	global $convUTF, $esquemaadmin;
-	if ($convUTF != true){
-		$nome_subgrupo = utf8_decode($nome_subgrupo);
-		$desc_subgrupo = utf8_decode($desc_subgrupo);
-		$en = utf8_decode($en);
-		$es = utf8_decode($es);
-	}
-	$dataCol = array(
-		"en" => $en,
-		"es" => $es,
-		"it" => '',
-		"nome_subgrupo" => $nome_subgrupo,
-		"desc_subgrupo" => $desc_subgrupo
-	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_subgrupos", $dataCol, "WHERE id_subgrupo = $id_subgrupo" );
-	if ($resultado === false) {
-		return false;
-	}
-	return $id_subgrupo;
-}
-function excluir($id_subgrupo, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_subgrupos", "id_subgrupo", $id_subgrupo, $dbhw, false );
-	if ($resultado === false) {
-		return false;
-	}
-	return $resultado;
+	default:
+		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		break;
 }
 ?>

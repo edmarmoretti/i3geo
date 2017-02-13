@@ -238,8 +238,7 @@ i3GEOadmin.grupos = {
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#formRaiz-" + json).remove();
+						i3GEOadmin.grupos.lista();
 					}
 			)
 			.fail(
@@ -463,8 +462,7 @@ i3GEOadmin.grupos = {
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#formNo-" + json).remove();
+						i3GEOadmin.grupos.lista();
 					}
 			)
 			.fail(
