@@ -2,7 +2,7 @@
 namespace admin\catalogo\menus\grupos\subgrupos\temas;
 function todosTemas($dbh){
 	global $esquemaadmin;
-	$dados = pegaDados("select id_tema,desc_tema,nome_tema,codigo_tema  from ".$esquemaadmin."i3geoadmin_temas order by lower(nome_tema) ");
+	$dados = pegaDados("select id_tema,desc_tema,nome_tema,codigo_tema  from ".$esquemaadmin."i3geoadmin_temas order by lower(nome_tema) ", $dbh, false);
 	if ($dados === false) {
 		return false;
 	} else {
@@ -12,10 +12,10 @@ function todosTemas($dbh){
 function listar($dbh, $id_n2 = "", $id_n3 = ""){
 	global $esquemaadmin;
 	if($id_n3 != ""){
-		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = '$id_n3'");
+		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = '$id_n3'", $dbh, false);
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados("SELECT i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n2 = '$id_n2' ORDER BY ordem");
+		$dados = pegaDados("SELECT i3geoadmin_n3.id_n3,i3geoadmin_temas.nome_tema from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n2 = '$id_n2' ORDER BY ordem", $dbh, false);
 	}
 	if ($dados === false) {
 		return false;

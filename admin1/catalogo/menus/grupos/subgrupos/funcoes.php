@@ -3,7 +3,7 @@ namespace admin\catalogo\menus\grupos\subgrupos {
 	function listar($dbh, $id_n1 = "", $id_n2){
 		global $esquemaadmin;
 		if($id_n2 != ""){
-			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = '$id_n2'");
+			$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo where id_n2 = '$id_n2'", $dbh, false);
 			$dados = $dados[0];
 		} else {
 			$dados = pegaDados ( "SELECT  id_n2,i3geoadmin_n2.id_subgrupo,nome_subgrupo,ordem from ".$esquemaadmin."i3geoadmin_n2 LEFT JOIN ".$esquemaadmin."i3geoadmin_subgrupos ON i3geoadmin_n2.id_subgrupo = i3geoadmin_subgrupos.id_subgrupo WHERE id_n1 = '$id_n1' ORDER by ordem", $dbh, false );
@@ -30,7 +30,6 @@ namespace admin\catalogo\menus\grupos\subgrupos {
 		$resultado = i3GeoAdminOrdena($dbhw,$ordem,"i3geoadmin_n2","id_n2");
 		return $resultado;
 	}
-
 	function adicionar( $id_subgrupo, $id_n1, $publicado, $n2_perfil, $ordem, $dbhw) {
 		global $esquemaadmin;
 		try {
@@ -78,13 +77,13 @@ namespace admin\catalogo\menus\grupos\subgrupos {
 	}
 }
 namespace admin\catalogo\menus\grupos\subgrupos\raiz {
-	function listar($dbh, $id_raiz = "", $id_n1 = ""){
+	function listar($dbh, $id_raiz = "", $id_n1 = "", $id_menu = ""){
 		global $esquemaadmin;
 		if($id_raiz != ""){
 			$dados = pegaDados ( "SELECT id_raiz, id_tema, ordem, perfil from ".$esquemaadmin."i3geoadmin_raiz WHERE id_raiz = '$id_raiz' ", $dbh, false );
 			$dados = $dados[0];
 		} else {
-			$dados = pegaDados ( "SELECT id_nivel,ordem,codigo_tema,id_raiz,i3geoadmin_raiz.id_tema, nome_tema FROM ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema  where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_nivel = '$id_n1' order by ordem", $dbh, false );
+			$dados = pegaDados ( "SELECT id_nivel,ordem,codigo_tema,id_raiz,i3geoadmin_raiz.id_tema, nome_tema FROM ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema  where i3geoadmin_raiz.nivel = 1 and i3geoadmin_raiz.id_menu = '$id_menu' and i3geoadmin_raiz.id_nivel = '$id_n1' order by ordem", $dbh, false );
 		}
 		if ($dados === false) {
 			return false;
@@ -119,9 +118,7 @@ namespace admin\catalogo\menus\grupos\subgrupos\raiz {
 					"perfil" => ''
 			);
 			$id_raiz = i3GeoAdminInsertUnico ( $dbhw, "i3geoadmin_raiz", $dataCol, "perfil", "id_raiz" );
-
-			$retorna = alterar ( $id_raiz, $id_tema, $ordem, $perfil, $dbhw );
-
+			$retorna = \admin\catalogo\menus\grupos\subgrupos\raiz\alterar ( $id_raiz, $id_tema, $ordem, $perfil, $dbhw );
 			return $retorna;
 		} catch ( PDOException $e ) {
 			return false;
@@ -130,7 +127,6 @@ namespace admin\catalogo\menus\grupos\subgrupos\raiz {
 	// $papeis deve ser um array
 	function alterar($id_raiz, $id_tema, $ordem, $perfil, $dbhw) {
 		global $esquemaadmin;
-
 		$dataCol = array(
 				"id_tema" => $id_tema,
 				"perfil" => $perfil,

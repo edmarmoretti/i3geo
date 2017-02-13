@@ -89,7 +89,7 @@ switch ($funcao) {
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
-			$raiz = \admin\catalogo\menus\grupos\subgrupos\raiz\listar ($dbh,"",$id_n1);
+			$raiz = \admin\catalogo\menus\grupos\subgrupos\raiz\listar ($dbh,"",$id_n1, $id_menu);
 			include ("../../../../cadastros/perfis/funcoes.php");
 			$perfis = \admin\cadastros\perfis\listar( $dbh );
 			include ("temas/funcoes.php");
