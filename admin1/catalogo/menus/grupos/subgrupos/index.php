@@ -26,7 +26,7 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 			<div class="well hidden">
 				<button data-toggle="modal" data-target="#previewArvore"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
-					<i class="material-icons">play_circle_outline</i>
+					<i class="material-icons">visibility</i>
 				</button>
 
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
@@ -38,8 +38,14 @@ $nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">search</i>
 				</button>
-
-				<h4><?php echo "$nome_menu /  $nome_grupo "; ?></h4>
+				<div class="pull-left panel-heading" >
+				  <small>Menu</small>
+				  <h4><?php echo $nome_menu; ?></h4>
+				</div>
+				<div class="panel-heading">
+				  <small>Grupo</small>
+				  <h4><?php echo $nome_grupo; ?></h4>
+				</div>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">

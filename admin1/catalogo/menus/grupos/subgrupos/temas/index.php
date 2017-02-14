@@ -30,14 +30,25 @@ $nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
 			<div class="well hidden">
 				<button data-toggle="modal" data-target="#previewArvore"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
-					<i class="material-icons">play_circle_outline</i>
+					<i class="material-icons">visibility</i>
 				</button>
 				<span class="pull-right">&nbsp;&nbsp;</span>
 				<button data-toggle="modal" data-target="#modalFiltro"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">search</i>
 				</button>
-				<h4><?php echo "$nome_menu / $nome_grupo / $nome_subgrupo"; ?></h4>
+				<div class="pull-left panel-heading" >
+				  <small>Menu</small>
+				  <h4><?php echo $nome_menu; ?></h4>
+				</div>
+				<div class="pull-left panel-heading">
+				  <small>Grupo</small>
+				  <h4><?php echo $nome_grupo; ?></h4>
+				</div>
+				<div class="panel-heading">
+				  <small>Subgrupo</small>
+				  <h4><?php echo $nome_subgrupo; ?></h4>
+				</div>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<div class="clearfix"></div>
 			</div>

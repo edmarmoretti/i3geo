@@ -34,7 +34,7 @@ if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 }
 
 include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
-
+include ("funcoes.php");
 $id_menu = $_POST["id_menu"];
 testaSafeNumerico([$id_menu]);
 
@@ -45,138 +45,60 @@ if(!isset($idioma) || $idioma == ""){
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $_POST["publicado_menu"], $_POST["perfil_menu"], $_POST["aberto"], $_POST["desc_menu"], $_POST["nome_menu"], $_POST["es"], $_POST["en"], $dbhw );
+		$novo = \admin\catalogo\menus\adicionar( $_POST["publicado_menu"], $_POST["perfil_menu"], $_POST["aberto"], $_POST["desc_menu"], $_POST["nome_menu"], $_POST["es"], $_POST["en"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		exit ();
 		break;
 	case "ALTERAR" :
-		$novo = alterar ( $id_menu, $_POST["publicado_menu"], $_POST["perfil_menu"], $_POST["aberto"], $_POST["desc_menu"], $_POST["nome_menu"], $_POST["es"], $_POST["en"], $dbhw );
+		$novo = \admin\catalogo\menus\alterar ( $id_menu, $_POST["publicado_menu"], $_POST["perfil_menu"], $_POST["aberto"], $_POST["desc_menu"], $_POST["nome_menu"], $_POST["es"], $_POST["en"], $dbhw );
+		$dbhw = null;
+		$dbh = null;
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
-		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus WHERE id_menu = $id_menu order by nome_menu", $dbh, false );
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
-		}
-		$dbhw = null;
-		$dbh = null;
-		retornaJSON ( $dados );
-		exit ();
 		break;
 	case "LISTAUNICO" :
-		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus WHERE id_menu = $id_menu ", $dbh, false );
+		$dados = \admin\catalogo\menus\listar($dbh, $id_menu);
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
+		} else {
+			include ("../../cadastros/perfis/funcoes.php");
+			$perfis = \admin\cadastros\perfis\listar( $dbh );
+			$dbhw = null;
+			$dbh = null;
+			retornaJSON ( array("dados"=>$dados, "perfis"=>$perfis) );
 		}
-		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
-		$dbhw = null;
-		$dbh = null;
-		retornaJSON ( array("dados"=>$dados[0], "perfis"=>$perfis) );
 		break;
 	case "LISTA" :
-		$dados = pegaDados ( "SELECT id_menu, nome_menu from ".$esquemaadmin."i3geoadmin_menus order by lower(nome_menu)", $dbh, false );
+		$dados = \admin\catalogo\menus\listar($dbh);
 		if ($dados === false) {
 			$dbhw = null;
 			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
+		} else {
+			include ("../../cadastros/perfis/funcoes.php");
+			$perfis = \admin\cadastros\perfis\listar( $dbh );
+			$dbhw = null;
+			$dbh = null;
+			retornaJSON ( array("dados"=>$dados, "perfis"=>$perfis) );
 		}
-		$perfis = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbh, false );
-		$dbhw = null;
-		$dbh = null;
-		retornaJSON ( array("dados"=>$dados, "perfis"=>$perfis) );
 		break;
 	case "EXCLUIR" :
-		$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 where id_menu=$id_menu");
-		if(count($r) > 0){
-			header ( "HTTP/1.1 500 erro ao excluir. Exclua os grupos primeiro" );
-			exit ();
-		}
-
-		$retorna = excluir ( $id_menu, $dbhw );
+		$retorna = \admin\catalogo\menus\excluir ( $id_menu, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		retornaJSON ( $id_menu );
-		exit ();
 		break;
-}
-cpjson ( $retorno );
-
-// $papeis deve ser um array
-function adicionar($publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw) {
-	global $esquemaadmin;
-	try {
-		$dataCol = array(
-			"en" => "",
-			"es" => "",
-			"it" => "",
-			"publicado_menu" => "",
-			"aberto" => "SIM",
-			"nome_menu" => "",
-			"desc_menu" => "",
-			"perfil_menu" => ""
-		);
-		$id_menu = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_menus",$dataCol,"nome_menu","id_menu");
-		$retorna = alterar ( $id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en,$dbhw );
-
-		return $retorna;
-	} catch ( PDOException $e ) {
-		return false;
-	}
-}
-// $papeis deve ser um array
-function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en,$dbhw) {
-	global $convUTF, $esquemaadmin;
-	if ($convUTF != true){
-		$nome_menu = utf8_decode($nome_menu);
-		$desc_menu = utf8_decode($desc_menu);
-		$en = utf8_decode($en);
-		$es = utf8_decode($es);
-		$perfil_menu = utf8_decode($perfil_menu);
-	}
-	$perfil_menu = str_replace(","," ",trim($perfil_menu));
-	//verifica a consistencia da lista de perfis
-	$perfis = pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis order by perfil", $dbw, false );
-	$p = array();
-	foreach ($perfis as $perfil){
-		$p[] = $perfil["perfil"];
-	}
-	$perfil_menu = implode(" ",array_intersect(explode(" ",$perfil_menu),$p));
-
-	$dataCol = array(
-		"en" => $en,
-		"es" => $es,
-		"it" => '',
-		"publicado_menu" => $publicado_menu,
-		"aberto" => $aberto,
-		"nome_menu" => $nome_menu,
-		"desc_menu" => $desc_menu,
-		"perfil_menu" => $perfil_menu
-	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_menus", $dataCol, "WHERE id_menu = $id_menu" );
-	if ($resultado === false) {
-		return false;
-	}
-	return $id_menu;
-}
-function excluir($id_menu, $dbhw) {
-	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_menus", "id_menu", $id_menu, $dbhw, false );
-	if ($resultado === false) {
-		return false;
-	}
-	return $resultado;
+	default:
+		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		break;
 }
 ?>

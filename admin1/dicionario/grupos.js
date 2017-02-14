@@ -37,7 +37,7 @@ i3GEOadmin.grupos.dicionario = {
 		es : ""
 	} ],
     'temasRaizMenu' : [ {
-		pt : "Temas na raiz do menu",
+		pt : "Temas do menu",
 		en : "",
 		es : ""
 	} ],

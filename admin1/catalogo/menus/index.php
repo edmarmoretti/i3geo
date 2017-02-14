@@ -20,7 +20,7 @@ include "../../head.php";
 			<div class="well hidden" >
 				<button title="preview" data-toggle="modal" data-target="#previewArvore"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
-					<i class="material-icons">play_circle_outline</i>
+					<i class="material-icons">visibility</i>
 				</button>
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
@@ -32,7 +32,7 @@ include "../../head.php";
 					<i class="material-icons">search</i>
 				</button>
 				<h2>
-					<small>{{{menus}}}</small>
+					<small>{{{txtTitulo}}}</small>
 				</h2>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<div class="clearfix"></div>
@@ -48,7 +48,7 @@ include "../../head.php";
 			</div>
 			<div class="well hidden">
 				<div class="panel-heading">
-					<p class="lead" style="margin:0px;">{{{txtTitulo}}}
+					<p class="lead" style="margin:0px;">&nbsp;
 						<a title="{{{adicionar}}}" onclick="i3GEOadmin.menus.adicionaDialogo();" href="javascript:void(0)"
 							class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button" ><i class="material-icons ">add</i>
 						</a>
