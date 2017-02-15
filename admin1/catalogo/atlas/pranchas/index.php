@@ -98,10 +98,11 @@ include("templates/templateFiltro.php");
 		$.material.init();
 		i3GEOadmin.prancha.id_atlas = <?php echo $id_atlas; ?>;
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.prancha.init($("#corpo"));
 		};
-		i3GEO.login.verificaOperacao("admin/html/prancha",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/prancha",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

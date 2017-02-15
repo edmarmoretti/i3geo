@@ -71,6 +71,15 @@ i3GEOadmin.core = {
 		//valor do filtro utilizado ao iniciar a pagina
 		//usado para enviar parametros pela URL ao iniciar uma pagina
 		initFiltro: "",
+		erroLogin: function(){
+			$("#loginOff").css("display","");
+			$("#loginOn").css("display","none");
+			alert("Login!");
+		},
+		loginOn: function(){
+			$("#loginOff").css("display","none");
+			$("#loginOn").css("display","");
+		},
 		mostraErro: function(erro){
 			var html = '<div class="alert alert-danger alert-dismissible" role="alert">'
 				+ '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'

@@ -89,10 +89,11 @@ include("../../../../templates/templateOpcoesLigado.php");
 		$.material.init();
 		i3GEOadmin.tema.id_prancha = <?php echo $id_prancha; ?>;
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.tema.init($("#corpo"));
 		};
-		i3GEO.login.verificaOperacao("admin/html/atlas",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/atlas",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

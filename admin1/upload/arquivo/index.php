@@ -161,6 +161,7 @@ include "../../head.php";
 		);
 		$.material.init();
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			var t = $("#corpo");
 			t.html(
@@ -171,7 +172,7 @@ include "../../head.php";
 			);
 			i3GEOadmin.uploadshp.listaEpsg();
 		};
-		i3GEO.login.verificaOperacao("admin/html/subirshapefile",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/subirshapefile",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

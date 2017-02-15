@@ -147,10 +147,12 @@ include "../../head.php";
 		);
 		$.material.init();
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.operacoes.init($("#corpo"));
 		};
-		i3GEO.login.verificaOperacao("admin/html/operacoes",i3GEO.configura.locaplic, inicia, "sessao");
+		var semLogin = function(){alert("Login!");}
+		i3GEO.login.verificaOperacao("admin/html/operacoes",i3GEO.configura.locaplic, inicia, "sessao",i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

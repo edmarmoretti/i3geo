@@ -80,10 +80,11 @@ include("templates/templateGrupos.php");
 		);
 		$.material.init();
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.gruposusuarios.init($("#corpo"),"<?php echo $codigo; ?>","<?php echo $id_tema; ?>");
 		};
-		i3GEO.login.verificaOperacao("admin/html/editormapfile",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/editormapfile",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

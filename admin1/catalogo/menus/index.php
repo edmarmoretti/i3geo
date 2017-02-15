@@ -102,6 +102,7 @@ include("../../templates/templateOpcoesAberto.php");
 		);
 		$.material.init();
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			//verifica se foi enviado um parametro de filtro pela url
 			var f = "<?php echo filter_var($_GET["id_filtro"], FILTER_SANITIZE_NUMBER_INT); ?>";
 			if(f != ""){
@@ -110,7 +111,7 @@ include("../../templates/templateOpcoesAberto.php");
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.menus.init($("#corpo"));
 		};
-		i3GEO.login.verificaOperacao("admin/html/menus",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/menus",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

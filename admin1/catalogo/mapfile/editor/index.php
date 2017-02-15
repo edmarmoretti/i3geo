@@ -111,9 +111,10 @@ $(document).ready(function(){
 			)
 		);
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 		};
-		i3GEO.login.verificaOperacao("admin/html/editortexto",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/editortexto",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 
 		$.material.init();
 		$("#editor").height(parseInt($("#editortemp").height()) + 50 + "px");

@@ -391,7 +391,7 @@ h2 small {
 				</ul>
 				<ul class="nav navbar-nav">
 					<li class="dropdown"><a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>','template_mst_bt.html');"
-						href="#topo" data-toggle="modal" data-target="#modalLogin">Login</a>
+						href="#topo" data-toggle="modal" data-target="#modalLogin">Login <i id="loginOff" style="display:none;" class="material-icons md-18">lock</i><i id="loginOn" style="display:none;" class="material-icons md-18">lock_open</i></a>
 					</li>
 				</ul>
 			</div>

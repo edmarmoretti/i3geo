@@ -116,10 +116,11 @@ include("templates/templateOpcoesPerfil.php");
 		i3GEOadmin.temas.nome_subgrupo = "<?php echo $nome_subgrupo; ?>";
 
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.temas.init($("#corpo"));
 		};
-		i3GEO.login.verificaOperacao("admin/html/arvore",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/arvore",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

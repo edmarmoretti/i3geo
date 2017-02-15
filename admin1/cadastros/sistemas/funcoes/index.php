@@ -99,10 +99,11 @@ include("templates/templateFiltro.php");
 		$.material.init();
 		i3GEOadmin.funcao.id_sistema = <?php echo $id_sistema; ?>;
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.funcao.init($("#corpo"));
 		};
-		i3GEO.login.verificaOperacao("admin/html/sistemas",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/sistemas",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

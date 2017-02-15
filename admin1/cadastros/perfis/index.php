@@ -95,10 +95,11 @@ include("templates/templateFiltro.php");
 		);
 		$.material.init();
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.perfis.init($("#corpo"));
 		};
-		i3GEO.login.verificaOperacao("admin/html/perfis",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/perfis",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

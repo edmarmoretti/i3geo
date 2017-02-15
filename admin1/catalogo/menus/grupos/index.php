@@ -130,10 +130,11 @@ include("templates/templateOpcoesTema.php");
 		i3GEOadmin.grupos.id_menu = <?php echo $id_menu; ?>;
 		i3GEOadmin.grupos.nome_menu = "<?php echo $nome_menu; ?>";
 		var inicia = function() {
+			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.grupos.init($("#corpo"),$("#raiz"));
 		};
-		i3GEO.login.verificaOperacao("admin/html/arvore",i3GEO.configura.locaplic, inicia, "sessao");
+		i3GEO.login.verificaOperacao("admin/html/arvore",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>
