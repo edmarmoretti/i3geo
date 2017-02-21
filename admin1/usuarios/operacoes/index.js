@@ -195,7 +195,6 @@ Obt&eacute;m a lista de operacoes
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.operacoes.ondeLista);
 						i3GEOadmin.operacoes.lista();
 					}
 			)
@@ -225,9 +224,7 @@ Obt&eacute;m a lista de operacoes
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data)*1;
-						$("#form-" + json).remove();
-						$("#link-" + json).remove();
+						i3GEOadmin.operacoes.lista();
 					}
 			)
 			.fail(
