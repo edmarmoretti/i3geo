@@ -13,7 +13,7 @@
 /**
  * Cria as pastas temporarias que o i3Geo precisa, caso nao existam
  */
-define ( ONDEI3GEO, ".." );
+define ( "ONDEI3GEO", ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
 if(empty($dir_tmp)){
 	exit;
@@ -193,7 +193,7 @@ include "head.php";
 	<script>
 	$(document).ready(function(){
 		<?php
-		if ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin") {
+		if (!empty ($i3geomaster) && ($i3geomaster [0] ["usuario"] == "admin" && $i3geomaster [0] ["senha"] == "admin")) {
 			echo "var men = '<div class=\'alert alert-danger\' style=\'margin-bottom:0px;\' >' + $" . "trad(19,g_traducao_init) + '</div>';";
 		} else {
 			echo "var men = '';";

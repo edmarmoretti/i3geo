@@ -70,11 +70,11 @@ $image_path="./../image";    /* You must set path to QRcode frame images. */
 $version_ul=40;              /* upper limit for version  */
 /* ------ setting area end ------ */
 
-if($_GET["d"]){
+if(@$_GET["d"]){
 	$qrcode_data_string=@$_GET["d"];
-	$qrcode_data_string .= "&temasa=".$_GET["temasa"]."&layers=".$_GET["layers"];
+	$qrcode_data_string .= "&temasa=".@$_GET["temasa"]."&layers=".@$_GET["layers"];
 }
-if($_GET["u"]){
+if(@$_GET["u"]){
 	$qrcode_data_string=@$_GET["u"];
 }
 $qrcode_error_correct=@$_GET["e"];

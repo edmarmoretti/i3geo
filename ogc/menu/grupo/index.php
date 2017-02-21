@@ -1,5 +1,5 @@
 <?php
-define ( ONDEI3GEO, "../../.." );
+define ( "ONDEI3GEO", "../../.." );
 include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 include_once (dirname(__FILE__)."/../../../classesphp/sani_request.php");
 $id_menu = filter_var ( $_GET ["id_menu"], FILTER_SANITIZE_NUMBER_INT );

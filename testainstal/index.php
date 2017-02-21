@@ -13,7 +13,7 @@
 /**
  * Cria as pastas temporarias que o i3Geo precisa, caso nao existam
  */
-define ( ONDEI3GEO, ".." );
+define ( "ONDEI3GEO", ".." );
 include "../init/head.php";
 ?>
 <body style="padding-top: 55px;" id="topo">

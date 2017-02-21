@@ -1,6 +1,6 @@
 <?php
 // TODO incluir icone para abrir o navegador de arquivos para encontrar a pasta no servidor
-define ( ONDEI3GEO, "../../.." );
+define ( "ONDEI3GEO", "../../.." );
 include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 error_reporting ( 0 );
 include "../../head.php";

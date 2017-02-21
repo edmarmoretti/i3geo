@@ -1,5 +1,5 @@
 <?php
-define ( ONDEI3GEO, ".." );
+define ( "ONDEI3GEO", ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
 if (! empty ( $_GET ["customDir"] )) {
 	$customDir = strip_tags ( $_GET ["customDir"] );

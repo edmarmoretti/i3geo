@@ -1,5 +1,5 @@
 <?php
-define ( ONDEI3GEO, "../../.." );
+define ( "ONDEI3GEO", "../../.." );
 include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 //verifica se o login pode ser realizado
 if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){

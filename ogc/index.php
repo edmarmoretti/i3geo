@@ -1,5 +1,5 @@
 <?php
-define ( ONDEI3GEO, ".." );
+define ( "ONDEI3GEO", ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
 include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
 error_reporting ( 0 );

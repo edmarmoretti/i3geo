@@ -1,5 +1,5 @@
 <?php
-define ( ONDEI3GEO, dirname ( dirname ( __FILE__ ) ) );
+define ( "ONDEI3GEO", dirname ( dirname ( __FILE__ ) ) );
 if (extension_loaded ( 'zlib' )) {
 	ob_start ( 'ob_gzhandler' );
 }

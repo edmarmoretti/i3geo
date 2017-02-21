@@ -1,5 +1,5 @@
 <?php
-define ( ONDEI3GEO, dirname ( dirname ( __FILE__ ) ) );
+define ( "ONDEI3GEO", dirname ( dirname ( __FILE__ ) ) );
 if (extension_loaded ( 'zlib' )) {
 	ob_start ( 'ob_gzhandler' );
 }
@@ -39,8 +39,6 @@ echo "\n";
 include (ONDEI3GEO . "/admin1/dicionario/core.js");
 echo "\n";
 include (ONDEI3GEO . "/admin1/dicionario/menup.js");
-echo "\n";
-include (ONDEI3GEO . "/admin1/dicionario.js");
 echo "\n";
 
 if (extension_loaded ( 'zlib' )) {
