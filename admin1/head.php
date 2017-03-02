@@ -6,8 +6,7 @@
 <meta http-equiv='X-UA-Compatible' content='IE=edge'>
 <meta name='viewport' content='width=device-width, initial-scale=1'>
 <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-<meta name='description'
-	content='Interface Integrada para Internet de ferramentas de geoprocessamento'>
+<meta name='description' content='Interface Integrada para Internet de ferramentas de geoprocessamento'>
 <meta name='author' content='i3Geo'>
 <title>i3Geo</title>
 <?php
@@ -81,7 +80,6 @@ hr {
 
 .material-icons.md-18 {
 	font-size: 18px;
-
 }
 
 body {
@@ -142,7 +140,8 @@ body {
 	position: unset;
 }
 
-.navbar .dropdown-menu li>a, .navbar.navbar-default .dropdown-menu li>a {
+.navbar .dropdown-menu li>a, .navbar.navbar-default .dropdown-menu li>a
+	{
 	font-size: 1em;
 }
 
@@ -221,14 +220,14 @@ a, a:focus, a:hover {
 	color: #767676;
 }
 
-.form-group.form-group-lg .checkbox label, .form-group.form-group-lg .radio label, .form-group.form-group-lg label {
+.form-group.form-group-lg .checkbox label, .form-group.form-group-lg .radio label,
+	.form-group.form-group-lg label {
 	color: #767676;
 }
 
 h2 small {
 	color: #767676;
 }
-
 
 .migalha {
 	background-color: rgb(255, 255, 255);
@@ -324,38 +323,37 @@ h2 small {
 .btn-breadcrumb > *:nth-child(n+2) {
   display:none;
 }
-
 /* === For phones =================================== */
-@media (max-width: 767px) {
-    .btn-breadcrumb > *:nth-last-child(-n+2) {
-        display:block;
-    }
-    .btn-breadcrumb > * div {
-        max-width: 60px;
-    }
+@media ( max-width : 767px) {
+	.btn-breadcrumb>*:nth-last-child(-n+2) {
+		display: block;
+	}
+	.btn-breadcrumb>* div {
+		max-width: 60px;
+	}
 }
 
 /* === For tablets ================================== */
-@media (min-width: 768px) and (max-width:991px) {
-    .btn-breadcrumb > *:nth-last-child(-n+4) {
-        display:block;
-    }
-    .btn-breadcrumb > * div {
-        max-width: 100px;
-    }
+@media ( min-width : 768px) and (max-width:991px) {
+	.btn-breadcrumb>*:nth-last-child(-n+4) {
+		display: block;
+	}
+	.btn-breadcrumb>* div {
+		max-width: 100px;
+	}
 }
 
 /* === For desktops ================================== */
-@media (min-width: 992px) {
-    .btn-breadcrumb > *:nth-last-child(-n+6) {
-        display:block;
-    }
-    .btn-breadcrumb > * div {
-        max-width: 170px;
-    }
+@media ( min-width : 992px) {
+	.btn-breadcrumb>*:nth-last-child(-n+6) {
+		display: block;
+	}
+	.btn-breadcrumb>* div {
+		max-width: 170px;
+	}
 }
 
-.btn-breadcrumb a:not([style*="pointer-events: none"]) > span {
+.btn-breadcrumb a:not ([style*="pointer-events: none"] ) >span {
 	text-decoration: underline;
 }
 </style>
@@ -375,23 +373,24 @@ h2 small {
 </script>
 
 <body style="padding-top: 55px;" id="topo">
-	<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px;max-height:55px;height:55px;">
+	<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px; max-height: 55px; height: 55px;">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button title="icon bar" type="button" class="navbar-toggle collapsed" data-toggle="collapse"
-					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
-						class="icon-bar"></span>
+				<button title="icon bar" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<?php echo ONDEI3GEO; ?>/init/index.php"><?php echo $mensagemInicia;?> <i
-					class="material-icons">home</i></a>
+				<a class="navbar-brand" href="<?php echo ONDEI3GEO; ?>/init/index.php"><?php echo $mensagemInicia;?> <i class="material-icons">home</i>
+				</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
 				<ul class="nav navbar-nav" id="menuPrincipalTpl">
 				</ul>
 				<ul class="nav navbar-nav">
-					<li class="dropdown"><a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>','template_mst_bt.html');"
-						href="#topo" data-toggle="modal" data-target="#modalLogin">Login <i id="loginOff" style="display:none;" class="material-icons md-18">lock</i><i id="loginOn" style="display:none;" class="material-icons md-18">lock_open</i></a>
+					<li class="dropdown">
+						<a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>','template_mst_bt.html');" href="#topo" data-toggle="modal"
+							data-target="#modalLogin">
+							Login <i id="loginOff" style="display: none;" class="material-icons md-18">lock</i><i id="loginOn" style="display: none;" class="material-icons md-18">lock_open</i>
+						</a>
 					</li>
 				</ul>
 			</div>
@@ -406,7 +405,7 @@ h2 small {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body modal-lg" style=height:200px >
+				<div class="modal-body modal-lg" style="height: 200px">
 					<!-- aqui entra o filtro -->
 					<div class="form-group">
 						<select title="{{{filtro}}}" title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
@@ -452,9 +451,7 @@ h2 small {
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
-				<div class="modal-body" id="i3GEOF_loginusuario">
-
-				</div>
+				<div class="modal-body" id="i3GEOF_loginusuario"></div>
 			</div>
 		</div>
 	</div>

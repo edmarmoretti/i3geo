@@ -27,7 +27,7 @@
 			</a>
 			<span class="pull-right">&nbsp;&nbsp;</span>
 
-			&nbsp;<strong>{{{nome}}}</strong> <small> {{{arquivoTxt}}}:</small> {{{codigo}}}
+			&nbsp;<div style="min-width:250px;" class="pull-left"><strong>{{{codigo}}}</strong></div> <small> {{{nome}}}</small>
 		</h4>
 	</div>
 	<div class="list-group-separator"></div>

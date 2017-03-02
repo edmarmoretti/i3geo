@@ -6,6 +6,37 @@ if(verificaOperacaoSessao("admin/php/editortexto") == false){
 }
 
 
+//calcula resolucoes
+$res = array();
+$temp = 0.703125;
+for($i = 0; $i < 40; $i++){
+	$res[] = $temp;
+	$temp = $temp / 2;
+}
+$top_left_minx = -180;
+$top_left_maxy = 90;
+
+$x_size = $res[$_GET["TileMatrix"] - 1] * 256;
+$y_size = $x_size;
+
+$lon1 = $top_left_minx + ($_GET["TileCol"] * $x_size);
+$lat1 = $top_left_maxy - ($_GET["TileRow"] * $y_size) - $y_size;
+$lon2 = $top_left_minx + ($_GET["TileCol"] * $x_size) + $x_size;
+$lat2 = $top_left_maxy - ($_GET["TileRow"] * $y_size);
+
+$_GET["WIDTH"] = 256;
+$_GET["HEIGHT"] = 256;
+
+$_GET["tms"] = "/wmts/".$tema."/".$_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"];
+$_GET["tms"] = str_replace(".png","",$_GET["tms"]).".png";
+
+if($_GET["TileMatrix"]."/".$_GET["TileCol"]."/".$_GET["TileRow"] == "0/0/0" || $_GET["TileCol"] == -1 || $_GET["TileRow"]== -1){
+	return;
+}
+$_GET["BBOX"] = $lon1.",".$lat1.",".$lon2.",".$lat2;
+$_GET["SERVICE"] = "WMS";
+$_GET["REQUEST"] = "getMap";
+
 //
 //pega os endere&ccedil;os para compor a url de chamada do gerador de web services
 //ogc.php
@@ -15,6 +46,7 @@ $protocolo = $protocolo[0];
 $protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
 $protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
+
 //
 //cria o web service
 //
@@ -44,17 +76,15 @@ foreach ($_GET as $k=>$v){
 	}
 }
 $tema = $locaplic . "/temas/" . $_GET["tema"] . ".map";
+
 if(!file_exists($tema)){
 	echo "Erro";
 	exit;
 }
 $req->setParameter("srsName",$req->getValueByName("SRS"));
 $listaepsg = $req->getValueByName("SRS")." EPSG:4618 EPSG:4291 EPSG:4326 EPSG:22521 EPSG:22522 EPSG:22523 EPSG:22524 EPSG:22525 EPSG:29101 EPSG:29119 EPSG:29120 EPSG:29121 EPSG:29122 EPSG:29177 EPSG:29178 EPSG:29179 EPSG:29180 EPSG:29181 EPSG:29182 EPSG:29183 EPSG:29184 EPSG:29185";
-if(isset($_GET["version"]) && !isset($VERSION)){
-	$_GET["VERSION"] = $_GET["version"];
-}
-$req->setParameter("VeRsIoN",$_GET["VERSION"]);
 
+$req->setParameter("VeRsIoN",$_GET["Version"]);
 //
 //compatibiliza chamadas fora do padrao
 //
@@ -93,7 +123,6 @@ $nmap = ms_newMapobj($tema);
 
 $nmap->setmetadata("ows_enable_request","*");
 $l = $nmap->getlayer(0);
-
 
 //$l->setmetadata("ows_title",pegaNome($l));
 $l->setmetadata("ows_srs",$listaepsg);
@@ -152,6 +181,8 @@ if(ob_get_contents ()){
 cloneInlineSymbol($l,$nmap,$oMap);
 
 $l = $oMap->getlayer(0);
+$l->set("status",MS_DEFAULT);
+
 $req->setParameter("LAYERS",$l->name);
 
 if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo"){
@@ -167,7 +198,7 @@ ms_ioinstallstdouttobuffer();
 $req->setParameter("format","image/png");
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
-$oMap->save("/tmp/ms_tmp/teste.map");
+
 if(!isset($OUTPUTFORMAT)){
 	header("Content-type: $contenttype");
 }

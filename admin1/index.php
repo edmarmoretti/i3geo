@@ -46,7 +46,8 @@ include "head.php";
 	<script type="text/javascript" src="js/core.js"></script>
 	<script src="dicionario/principal.js"></script>
 	<script>
-	$(document).ready(function(){
+	var inicia = function() {
+		i3GEOadmin.core.loginOn();
 		core_parseMustacheBody(i3GEOadmin.principal.dicionario);
 		//vem de admin1/index.js
 		iniciaMenuPrincipal();
@@ -58,7 +59,8 @@ include "head.php";
 		});
 		$(".hidden").removeClass('hidden');
 		$.material.init();
-	});
+	};
+	i3GEO.login.verificaOperacao("admin/html/identifica",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	</script>
 </body>
 </html>

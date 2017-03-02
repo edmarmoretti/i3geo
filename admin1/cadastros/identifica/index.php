@@ -80,12 +80,13 @@ include("../../templates/templateOpcoesPublicado.php");
 			)
 		);
 		$.material.init();
-		var inicia = function() {
+		if(i3GEO.login.verificaCookieLogin() == true){
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.identifica.init($("#corpo"));
-		};
-		i3GEO.login.verificaOperacao("admin/html/identifica",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
+		} else {
+			i3GEOadmin.core.erroLogin();
+		}
 	});
 </script>
 </body>

@@ -8,9 +8,24 @@ error_reporting ( 0 );
 include "../../../head.php";
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
 $id_tema = ( int ) $_GET ["id_tema"];
-include ("exec.php");
-salvaMapfile ();
-$textoMapfile = textoMapfile ( $codigo );
+include_once (dirname ( __FILE__ ) . "/../../../../admin/php/login.php");
+include_once (dirname ( __FILE__ ) . "/../../../../admin/php/conexao.php");
+error_reporting ( 0 );
+if (isset ( $_POST ["texto"] )) {
+	$gravarTexto = $_POST ["texto"];
+	$_POST ["texto"] = "";
+}
+$versao = versao ();
+$versao = $versao ["principal"];
+
+if (verificaOperacaoSessao ( "admin/html/editortexto" ) === false) {
+	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
+	exit ();
+}
+error_reporting ( 0 );
+include("funcoes.php");
+\admin\catalogo\mapfile\editor\salvaMapfile ();
+$textoMapfile = \admin\catalogo\mapfile\editor\textoMapfile ( $codigo );
 ?>
 <div class="container-fluid migalha">
 	<div class="row">

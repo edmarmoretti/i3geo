@@ -8,7 +8,6 @@ MAP
       "TIP"	"CD_LEGENDA"
       "cache"	"SIM"
       "CLASSE"	"sim"
-      "temporizador"	""
       "permitekmz"	"SIM"
       "ITENSDESC"	"Teste de acentuação"
       "TILES"	"SIM"
@@ -92,6 +91,4 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
-
 END # MAP
-

@@ -124,7 +124,6 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						var json = jQuery.parseJSON(data);
-
 						var html = Mustache.to_html(
 								"{{#data}}" + $("#templateManterTema").html() + "{{/data}}",
 								$.extend(
@@ -231,9 +230,8 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data);
-						$("#form-" + json.codigo).remove();
-						i3GEOadmin.mapfile.registraFavoritos(json.codigo);
+						i3GEOadmin.mapfile.registraFavoritos(id);
+						i3GEOadmin.mapfile.lista("","");
 					}
 			)
 			.fail(
@@ -282,7 +280,7 @@ Obt&eacute;m a lista
 				codigo = i3GEOadmin.mapfile.favoritosArray[i];
 				h = $("#form-" + codigo).html();
 				if(h != undefined){
-					conteudo.push(h);
+					conteudo.push(h+"&nbsp;");
 				}
 			}
 			$("#body-favoritos").html(conteudo.join("\n"));
