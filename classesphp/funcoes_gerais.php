@@ -2643,6 +2643,7 @@ function retornaShapesSelecionados($objLayer,$map_file,$objMapa,$indexado=false)
 		$sopen = $objLayer->open();
 		if($sopen == MS_FAILURE){return "erro";}
 		$res_count = $objLayer->getNumresults();
+
 		$centroides = array();
 		$shapes = array();
 		//pega um shape especifico

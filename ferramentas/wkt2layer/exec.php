@@ -20,7 +20,8 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 		if(!isset($_GET["marca"])){
 			$_GET["marca"]="";
 		}
-		$shp = ms_shapeObjFromWkt($_GET["xy"]);
+		$wkt = explode("|",$_GET["xy"]);
+		$shp = ms_shapeObjFromWkt($wkt[0]);
 		if($shp->type == MS_SHAPE_POINT){
 			$tipo = "POINT";
 		}
@@ -30,19 +31,22 @@ Insere elementos no mapa como um layer do tipo feature baseado em wkt
 		if($shp->type == MS_SHAPE_POLYGON){
 			$tipo = "POLYGON";
 		}
-		$m->insereFeature($_GET["marca"],$_GET["tipo"],$_GET["xy"],$_GET["texto"],$_GET["position"],$_GET["partials"],$_GET["offsetx"],$_GET["offsety"],$_GET["minfeaturesize"],$_GET["mindistance"],$_GET["force"],$_GET["shadowcolor"],$_GET["shadowsizex"],$_GET["shadowsizey"],$_GET["outlinecolor"],$_GET["cor"],$_GET["sombray"],$_GET["sombrax"],$_GET["sombra"],$_GET["fundo"],$_GET["angulo"],$_GET["tamanho"],$_GET["fonte"],$_GET["wrap"],true,$_GET["nometema"]);
+		foreach($wkt as $w){
+			$m->insereFeature($_GET["marca"],$_GET["tipo"],$w,$_GET["texto"],$_GET["position"],$_GET["partials"],$_GET["offsetx"],$_GET["offsety"],$_GET["minfeaturesize"],$_GET["mindistance"],$_GET["force"],$_GET["shadowcolor"],$_GET["shadowsizex"],$_GET["shadowsizey"],$_GET["outlinecolor"],$_GET["cor"],$_GET["sombray"],$_GET["sombrax"],$_GET["sombra"],$_GET["fundo"],$_GET["angulo"],$_GET["tamanho"],$_GET["fonte"],$_GET["wrap"],true,$_GET["nometema"]);
+		}
 		$m->salva();
 		redesenhaMapa();
 	break;
 	case "SHAPEFILE":
 		include_once("../../classesphp/classe_analise.php");
 		$m = new Analise($map_file,"");
-		$nomeLayer = $m->aplicaFuncaoListaWKT(array($_GET["xy"]),"converteSHP",$dir_tmp,$imgdir);
+		$wkt = explode("|",$_GET["xy"]);
+		$nomeLayer = $m->aplicaFuncaoListaWKT($wkt,"converteSHP",$dir_tmp,$imgdir);
 
 		$l = $m->mapa->getlayerbyname($nomeLayer);
 		$l->setmetadata("tema",$_GET["nometema"]);
 		//verifica projecao
-		$shp = ms_shapeObjFromWkt($_GET["xy"]);
+		$shp = ms_shapeObjFromWkt($wkt[0]);
 		$c = $shp->getCentroid();
 		$c = $c->x;
 		if($c > -181 && $c < 181){

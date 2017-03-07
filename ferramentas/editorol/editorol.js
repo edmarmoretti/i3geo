@@ -2231,7 +2231,7 @@ i3GEO.editorOL =
 						temp = i3GEO.editorOL.merge(linhas);
 					}
 					if (pontos.length > 0) {
-						temp = i3GEO.editorOL.merge(pontos);
+						temp = i3GEO.editorOL.desagrupa(pontos);
 					}
 					if (i3GEO.mapa) {
 						i3GEO.mapa.dialogo.wkt2layer(temp);
@@ -2276,6 +2276,19 @@ i3GEO.editorOL =
 			} else {
 				i3GEO.janela.tempoMsg("Selecione pelo menos dois elementos");
 			}
+		},
+		desagrupa : function(geoms) {
+			var n = geoms.length,
+				w = [],
+				g, m, i,
+				format = new ol.format.WKT();
+			for (i = 0; i < n; i++) {
+				g = format.writeFeatures([geoms[i]]);
+				m = new Wkt.Wkt();
+				m.read(g);
+				w.push(m);
+			}
+			return w.join("\n");
 		},
 		merge : function(geoms) {
 			var n = geoms.length,

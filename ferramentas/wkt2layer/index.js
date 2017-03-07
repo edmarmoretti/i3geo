@@ -165,6 +165,7 @@ i3GEOF.wkt2layer =
 		};
 		par = i3GEOF.wkt2layer.pegaPar();
 		wkt = $i("i3GEOFwkt2layerWkt").value;
+		wkt = wkt.split("\n").join("|");
 		p = i3GEO.configura.locaplic+"/ferramentas/wkt2layer/exec.php?g_sid="+i3GEO.configura.sid+
 				"&funcao=feature&"+par;
 		cp = new cpaint();
@@ -190,6 +191,7 @@ i3GEOF.wkt2layer =
 		};
 		par = i3GEOF.wkt2layer.pegaPar();
 		wkt = $i("i3GEOFwkt2layerWkt").value;
+		wkt = wkt.split("\n").join("|");
 		p = i3GEO.configura.locaplic+"/ferramentas/wkt2layer/exec.php?g_sid="+i3GEO.configura.sid+
 				"&funcao=shapefile&"+par;
 		cp = new cpaint();

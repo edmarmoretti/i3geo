@@ -19,10 +19,12 @@ Executa script R para gerar a imagem.
 	case "ANALISEDISTRIPT":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		copiaSeguranca($map_file);
-		if(!isset($_GET["tema2"]))
-		{$_GET["tema2"] = "";}
-		if(!isset($_GET["limitepontos"]))
-		{$_GET["limitepontos"] = "";}
+		if(!isset($_GET["tema2"])){
+			$_GET["tema2"] = "";
+		}
+		if(!isset($_GET["limitepontos"])){
+			$_GET["limitepontos"] = "";
+		}
 		$m = new Analise($map_file,$tema,$locaplic,$ext);
 		if(empty($_GET["item"])){
 			$_GET["item"] = "";
