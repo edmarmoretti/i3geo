@@ -535,7 +535,7 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'cortepixels' : [ {
+    'Cortepixels' : [ {
 		pt : "Ao desenhar a imagem de um TILE que comp&otilde;e o mapa, a imagem &eacute; extendida e depois cortada para o tamanho correto. Isso evita que s&iacute;mbolos apare&ccedil;am de forma parcial no mapa. Indicado para temas com representa&ccedil;&atilde;o pontual e que tamb&eacute;m utilizem cache, pois pode degradar a performance.",
 		en : "",
 		es : ""

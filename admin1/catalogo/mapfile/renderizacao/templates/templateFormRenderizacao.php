@@ -38,6 +38,21 @@
 	<div class="col-md-12">
 		<div class="form-group form-group-lg">
 			<div class="col-md-6">
+				<label class="control-label" for="cortepixels">
+					{{{cortepixelsTitulo}}}
+				</label>
+				<p class="small">
+					{{{Cortepixels}}}
+				</p>
+			</div>
+			<div class="col-md-6">
+				<input title="{{{cortepixelsTitulo}}}" type="text" value="{{{cortepixels}}}" class="form-control" name="cortepixels" >
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="form-group form-group-lg">
+			<div class="col-md-6">
 				<label class="control-label" for="maxfeatures">
 					{{{maxfeaturesTitulo}}}
 				</label>

@@ -50,7 +50,6 @@ switch ($funcao) {
 		$dados = \admin\catalogo\mapfile\disponibilidade\alterar ($locaplic, $id_tema, $codigo, $_POST["permiteogc"], $_POST["permitedownload"], $_POST["permitekml"], $_POST["permitekmz"], $_POST["download"], $_POST["arquivodownload"], $_POST["arquivokmz"], $dbhw);
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
 		break;
 	case "LISTA" :

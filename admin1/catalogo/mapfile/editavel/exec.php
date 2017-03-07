@@ -34,80 +34,33 @@ if (verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
 }
 
 include (dirname ( __FILE__ ) . "/../../../../admin/php/conexao.php");
+include ("funcoes.php");
 
 $codigo = $_POST ["codigo"];
+$codigo = str_replace ( " ", "", removeAcentos ( $codigo ) );
+$codigo = str_replace ( ".", "", $codigo );
+$codigo = strip_tags ( $codigo );
+$codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
+
 $id_tema = ( int ) $_POST ["id_tema"];
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ALTERAR" :
-		$codigo = str_replace ( " ", "", removeAcentos ( $codigo ) );
-		$codigo = str_replace ( ".", "", $codigo );
-		$codigo = strip_tags ( $codigo );
-		$codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
-		$arq = $locaplic . "/temas/" . $codigo . ".map";
-		if ($codigo == "" || ! file_exists ( $arq )) {
-			header ( "HTTP/1.1 400 arquivo nao existe" );
-			exit ();
-		}
-		$novo = alterar ( $locaplic, $id_tema, $codigo, $_POST["editavel"], $_POST["esquematabelaeditavel"], $_POST["tabelaeditavel"], $_POST["colunaidunico"], $_POST["colunageometria"] );
-		if ($novo === false) {
+		$dados = \admin\catalogo\mapfile\editavel\alterar ( $locaplic, $id_tema, $codigo, $_POST["editavel"], $_POST["esquematabelaeditavel"], $_POST["tabelaeditavel"], $_POST["colunaidunico"], $_POST["colunageometria"] );
+		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao definir as propriedades" );
-			exit ();
 		}
-		retornaJSON ( array (
-				"codigo" => $codigo
-		) );
-		exit ();
 		break;
 	case "LISTA" :
-		// pega o nome registrado no mapfile
-		if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
-			header ( "HTTP/1.1 500 erro mapfile nao existe" );
-			exit ();
-		}
-		$mapa = ms_newMapObj ( $locaplic . "/temas/" . $codigo . ".map" );
-		$layer = $mapa->getlayerbyname ( $codigo );
-		if ($layer == "") {
-			header ( "HTTP/1.1 500 erro nao existe LAYER com o nome $codigo" );
-			exit ();
-		}
-		$dados = array ();
-		$dados["editavel"] = strtoupper($layer->getmetadata("editavel"));
-		if($dados["editavel"] == ""){
-			$dados["editavel"] = "NAO";
-		}
-		$dados["esquematabelaeditavel"] = $layer->getmetadata("esquematabelaeditavel");
-		$dados["tabelaeditavel"] = $layer->getmetadata("tabelaeditavel");
-		$dados["colunaidunico"] = $layer->getmetadata("colunaidunico");
-		$dados["colunageometria"] = $layer->getmetadata("colunageometria");
+		$dados = \admin\catalogo\mapfile\editavel\listar ($locaplic,$codigo);
 		retornaJSON ( array (
 				"dados" => $dados
 		) );
 		break;
+	default:
+		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		break;
 }
-function alterar($locaplic, $id_tema, $codigo, $editavel, $esquematabelaeditavel, $tabelaeditavel, $colunaidunico, $colunageometria) {
-	$arq = $locaplic . "/temas/" . $codigo . ".map";
-	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
-		return false;
-	}
-	$mapa = ms_newMapObj ( $arq );
-	$layer = @$mapa->getlayerbyname ( $codigo );
-	if ($layer == "") {
-		return false;
-	}
-	$layer->setmetadata ( "editavel", $editavel );
-	$layer->setmetadata ( "esquematabelaeditavel", $esquematabelaeditavel );
-	$layer->setmetadata ( "tabelaeditavel", $tabelaeditavel );
-	$layer->setmetadata ( "colunaidunico", $colunaidunico );
-	$layer->setmetadata ( "colunageometria", $colunageometria );
-	try {
-		$mapa->save ( $arq );
-		include (dirname ( __FILE__ ) . "/../../../php/removeCabecalhoMapfile.php");
-		removeCabecalhoMapfile ( $arq );
-		return true;
-	} catch (Exception $e) {
-		return false;
-	}
-}
+
 ?>
