@@ -12,7 +12,7 @@ MAP
       "temporizador"	""
       "ITENSDESC"	"Teste de acentuação"
       "iconetema"	""
-      "ESCALA"	"1000000"
+      "ESCALA"	"250000"
       "TILES"	"SIM"
       "extensao"	"-73.990940816816 -33.74827031115 -34.822855820777 5.272224303909"
       "permitedownload"	"SIM"
