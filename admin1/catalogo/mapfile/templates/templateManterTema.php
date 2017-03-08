@@ -50,7 +50,7 @@
 					<div class="form-group form-group-lg">
 						<label class="col-md-6 control-label" for="metaestat">{{{metaestatTxt}}}</label>
 						<div class="col-md-6">
-							<select title="{{{metaestat}}}" class="form-control" name="metaestat">
+							<select title="{{{Metaestat}}}" class="form-control" name="metaestat">
 								<option value="SIM" {{{metaestatsim}}} >{{{sim}}}</option>
 								<option value="NAO" {{{metaestatnao}}} >{{{nao}}}</option>
 							</select>

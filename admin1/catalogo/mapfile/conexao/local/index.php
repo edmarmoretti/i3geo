@@ -1,34 +1,34 @@
 <?php
-define ( "ONDEI3GEO", "../../../.." );
-include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
+define ( "ONDEI3GEO", "../../../../.." );
+include (dirname ( __FILE__ ) . "/../../../../../ms_configura.php");
 error_reporting ( 0 );
-include "../../../head.php";
+include "../../../../head.php";
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
 $id_tema = (int) $_GET ["id_tema"];
 ?>
 <div class="container-fluid migalha">
 	<div class="row">
 		<div class="btn-group btn-breadcrumb">
-			<a class="btn btn-default" href="../../../../init/index.php">
+			<a class="btn btn-default" href="../../../../../init/index.php">
 				<span>i3Geo</span>
 			</a>
-			<a class="btn btn-default" href="../../../index.php">
+			<a class="btn btn-default" href="../../../../index.php">
 				<span>Admin</span>
 			</a>
 			<a class="btn btn-default" style="pointer-events: none">
 				<span>Cat&aacute;logo</span>
 			</a>
-			<a class="btn btn-default" href="../index.php">
+			<a class="btn btn-default" href="../../index.php">
 				<span>Mapfiles</span>
 			</a>
-			<a class="btn btn-default" href="../opcoes/index.php?codigo=<?php echo $codigo; ?>&id_tema=<?php echo $id_tema; ?>">
+			<a class="btn btn-default" href="../../opcoes/index.php?codigo=<?php echo $codigo; ?>&id_tema=<?php echo $id_tema; ?>">
 				<span>Op&ccedil;&otilde;es</span>
 			</a>
 			<a class="btn btn-default" style="pointer-events: none">
 				<span><?php echo $codigo; ?></span>
 			</a>
 			<a class="btn btn-default" style="pointer-events: none">
-				<span>Edi&ccedil;&atilde;o</span>
+				<span>Conex&atilde;o local</span>
 			</a>
 		</div>
 	</div>
@@ -37,8 +37,8 @@ $id_tema = (int) $_GET ["id_tema"];
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
-				<h2><small>{{{editavelOptTitulo}}}</small></h2>
-				<blockquote>{{{editavelOpt}}}</blockquote>
+				<h2><small>{{{conexaoLocal}}}</small></h2>
+				<blockquote>{{{conexaoLayerLocal}}}</blockquote>
 				<div class="clearfix"></div>
 			</div>
 			<div class="well hidden">
@@ -49,11 +49,11 @@ $id_tema = (int) $_GET ["id_tema"];
 	</div>
 </div>
 <?php
-include("templates/templateFormEditavel.php");
-include("../../../templates/templateOpcoesPublicado.php");
+include("templates/templateFormConexaoLocal.php");
+//include("../../../templates/templateOpcoesPublicado.php");
 ?>
 <script type="text/javascript" src="index.js"></script>
-<script type="text/javascript" src="../../../dicionario/editormapfile.js"></script>
+<script type="text/javascript" src="../../../../dicionario/editormapfile.js"></script>
 <script>
 	$(document).ready(function(){
 		//vem de admin1/index.js
@@ -67,7 +67,7 @@ include("../../../templates/templateOpcoesPublicado.php");
 		//traducao
 
 		//complementa dicionario
-		i3GEOadmin.editavel.dicionario = $.extend(
+		i3GEOadmin.conexaolocal.dicionario = $.extend(
 			{},
 			i3GEOadmin.mapfile.dicionario,
 			i3GEOadmin.core.dicionario
@@ -75,18 +75,18 @@ include("../../../templates/templateOpcoesPublicado.php");
 
 		i3GEOadmin.core.dicionario = null;
 		g_traducao = null;
-		i3GEOadmin.editavel.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.editavel.dicionario);
+		i3GEOadmin.conexaolocal.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.conexaolocal.dicionario);
 		var t = $("#titulo");
 		t.html(
 			Mustache.to_html(
 				t.html(),
-				i3GEOadmin.editavel.dicionario
+				i3GEOadmin.conexaolocal.dicionario
 			)
 		);
 		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
-			i3GEOadmin.editavel.inicia("<?php echo $codigo; ?>","<?php echo $id_tema; ?>");
+			i3GEOadmin.conexaolocal.inicia("<?php echo $codigo; ?>","<?php echo $id_tema; ?>");
 		};
 		i3GEO.login.verificaOperacao("admin/html/editormapfile",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});

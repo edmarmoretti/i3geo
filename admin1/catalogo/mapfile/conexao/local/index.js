@@ -23,7 +23,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
  */
 i3GEOadmin.mapfile = {};
-i3GEOadmin.editavel = {
+i3GEOadmin.conexaolocal = {
 		inicia: function(codigo, id_tema){
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
@@ -35,26 +35,26 @@ i3GEOadmin.editavel = {
 						i3GEOadmin.core.modalAguarde(false);
 						var json = jQuery.parseJSON(data);
 						var hash = {
-								"sim": i3GEOadmin.editavel.dicionario.sim,
-								"nao": i3GEOadmin.editavel.dicionario.nao,
+								"sim": i3GEOadmin.conexaolocal.dicionario.sim,
+								"nao": i3GEOadmin.conexaolocal.dicionario.nao,
 								"NAO-sel" : "",
 								"SIM-sel": ""
 							};
 						$("#corpo").html(
 								Mustache.to_html(
-										$("#templateFormEditavel").html(),
+										$("#templateFormConexaoLocal").html(),
 										$.extend(
 												{},
-												i3GEOadmin.editavel.dicionario,
+												i3GEOadmin.conexaolocal.dicionario,
 												json.dados,
 												{
 													"codigo": codigo,
 													"id_tema": id_tema,
-													"onSalvar": "i3GEOadmin.editavel.salvar",
+													"onSalvar": "i3GEOadmin.conexaolocal.salvar",
 													"editavel": function(){
 														hash["NAO-sel"] = "";
 														hash["SIM-sel"] = "";
-														hash[json.dados.editavel + "-sel"] = "selected";
+														hash[json.dados.conexaolocal + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),
 																hash
@@ -75,7 +75,7 @@ i3GEOadmin.editavel = {
 			);
 		},
 		salvar: function(codigo,id_tema){
-			var parametros = $("#form-edicao-editavel").serialize();
+			var parametros = $("#form-edicao-conexaolocal").serialize();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=alterar",
@@ -83,7 +83,7 @@ i3GEOadmin.editavel = {
 			)
 			.done(
 					function(data, status){
-						i3GEOadmin.editavel.inicia(codigo,id_tema);
+						i3GEOadmin.conexaolocal.inicia(codigo,id_tema);
 					}
 			)
 			.fail(
