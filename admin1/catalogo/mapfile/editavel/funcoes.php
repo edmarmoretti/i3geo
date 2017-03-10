@@ -17,6 +17,7 @@ function listar($locaplic,$codigo){
 	if($dados["editavel"] == ""){
 		$dados["editavel"] = "NAO";
 	}
+	$dados["editavel"] = strtoupper($dados["editavel"]);
 	$dados["esquematabelaeditavel"] = $layer->getmetadata("esquematabelaeditavel");
 	$dados["tabelaeditavel"] = $layer->getmetadata("tabelaeditavel");
 	$dados["colunaidunico"] = $layer->getmetadata("colunaidunico");

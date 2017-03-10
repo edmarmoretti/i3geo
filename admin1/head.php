@@ -323,6 +323,30 @@ h2 small {
 .btn-breadcrumb > *:nth-child(n+2) {
   display:none;
 }
+
+/* botoes de expandir textos do tipo leia-mais */
+a .readMore {
+    display: none;
+}
+
+a .readLess {
+    display: inline;
+}
+
+a.collapsed .readMore {
+    display: inline;
+}
+
+a.collapsed .readLess {
+    display: none;
+}
+.leiaMais:not(.in) {
+    min-height: 2.25em;
+    height: 2.25em;
+    display: block;
+    overflow: hidden;
+
+}
 /* === For phones =================================== */
 @media ( max-width : 767px) {
 	.btn-breadcrumb>*:nth-last-child(-n+2) {

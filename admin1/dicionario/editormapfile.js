@@ -96,7 +96,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'metaestatTxt' : [ {
-		pt : "Esse mapfile baseia-se no sistema de metadados estat&iacute;sticos? Caso escolha sim, a conex&atilde;o com o banco e o sql de acesso aos dados ser&atilde;o constru&iacute;dos de forma din&acirc;mica",
+		pt : "Esse mapfile baseia-se no sistema de metadados estat&iacute;sticos? Caso escolha sim, a conex&atilde;o com o banco e o sql de acesso aos dados ser&atilde;o constru&iacute;dos de forma din&acirc;mica quando a camada for adicionada ao mapa",
 		en : "",
 		es : ""
 	} ],
@@ -546,7 +546,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'Metaestat' : [ {
-		pt : "Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica, como a conex&atilde;o e o SQL de acesso aos dados.",
+		pt : "Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica quando a camada for adicionada ao mapa.",
 		en : "",
 		es : ""
 	} ],

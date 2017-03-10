@@ -34,12 +34,6 @@ i3GEOadmin.editavel = {
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
 						var json = jQuery.parseJSON(data);
-						var hash = {
-								"sim": i3GEOadmin.editavel.dicionario.sim,
-								"nao": i3GEOadmin.editavel.dicionario.nao,
-								"NAO-sel" : "",
-								"SIM-sel": ""
-							};
 						$("#corpo").html(
 								Mustache.to_html(
 										$("#templateFormEditavel").html(),
@@ -52,8 +46,12 @@ i3GEOadmin.editavel = {
 													"id_tema": id_tema,
 													"onSalvar": "i3GEOadmin.editavel.salvar",
 													"editavel": function(){
-														hash["NAO-sel"] = "";
-														hash["SIM-sel"] = "";
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
 														hash[json.dados.editavel + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),

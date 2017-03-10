@@ -424,5 +424,11 @@ i3GEOadmin.core.dicionario = {
 		pt : "Calcular",
 		en : "",
 		es : ""
+	} ],
+    'escolhaDalista' : [ {
+		pt : "Escolha da lista",
+		en : "",
+		es : ""
 	} ]
+
 };

@@ -34,12 +34,6 @@ i3GEOadmin.disponibilidade = {
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
 						var json = jQuery.parseJSON(data);
-						var hash = {
-							"sim": i3GEOadmin.disponibilidade.dicionario.sim,
-							"nao": i3GEOadmin.disponibilidade.dicionario.nao,
-							"NAO-sel" : "",
-							"SIM-sel": ""
-						};
 						$("#corpo").html(
 								Mustache.to_html(
 										$("#templateFormDisponibilidade").html(),
@@ -52,6 +46,12 @@ i3GEOadmin.disponibilidade = {
 													"id_tema": id_tema,
 													"onSalvar": "i3GEOadmin.disponibilidade.salvar",
 													"download": function(){
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
 														hash[json.dados.download + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),
@@ -59,8 +59,12 @@ i3GEOadmin.disponibilidade = {
 														);
 													},
 													"permitedownload": function(){
-														hash["NAO-sel"] = "";
-														hash["SIM-sel"] = "";
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
 														hash[json.dados.permitedownload + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),
@@ -68,8 +72,12 @@ i3GEOadmin.disponibilidade = {
 														);
 													},
 													"permiteogc": function(){
-														hash["NAO-sel"] = "";
-														hash["SIM-sel"] = "";
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
 														hash[json.dados.permiteogc + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),
@@ -77,8 +85,12 @@ i3GEOadmin.disponibilidade = {
 														);
 													},
 													"permitekml": function(){
-														hash["NAO-sel"] = "";
-														hash["SIM-sel"] = "";
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
 														hash[json.dados.permitekml + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),
@@ -86,8 +98,12 @@ i3GEOadmin.disponibilidade = {
 														);
 													},
 													"permitekmz": function(){
-														hash["NAO-sel"] = "";
-														hash["SIM-sel"] = "";
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
 														hash[json.dados.permitekmz + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),

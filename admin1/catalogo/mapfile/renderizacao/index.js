@@ -34,12 +34,6 @@ i3GEOadmin.renderizacao = {
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
 						var json = jQuery.parseJSON(data);
-						var hash = {
-								"sim": i3GEOadmin.renderizacao.dicionario.sim,
-								"nao": i3GEOadmin.renderizacao.dicionario.nao,
-								"NAO-sel" : "",
-								"SIM-sel": ""
-							};
 						$("#corpo").html(
 								Mustache.to_html(
 										$("#templateFormRenderizacao").html(),
@@ -52,8 +46,12 @@ i3GEOadmin.renderizacao = {
 													"id_tema": id_tema,
 													"onSalvar": "i3GEOadmin.renderizacao.salvar",
 													"cache": function(){
-														hash["NAO-sel"] = "";
-														hash["SIM-sel"] = "";
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
 														hash[json.dados.cache + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),
@@ -61,8 +59,12 @@ i3GEOadmin.renderizacao = {
 														);
 													},
 													"tiles": function(){
-														hash["NAO-sel"] = "";
-														hash["SIM-sel"] = "";
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
 														hash[json.dados.tiles + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),

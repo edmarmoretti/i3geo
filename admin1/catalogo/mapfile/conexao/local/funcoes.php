@@ -35,15 +35,21 @@ function listar($locaplic, $codigo) {
 	}
 	$dados ["projection"] = str_replace ( "+i", "i", $dados ["projection"] );
 	$dados ["convcaracter"] = $layer->getmetadata ( "convcaracter" );
+	if(empty($dados ["convcaracter"])){
+		$dados ["convcaracter"] = "NAO";
+	}
+	$dados ["convcaracter"] = strtoupper($dados ["convcaracter"]);
 	// informacoes sobre a integracao com o sistema de metadados estatisticos
 	$dados ["metaestat"] = $layer->getmetadata ( "metaestat" );
 	if ($dados ["metaestat"] == "") {
 		$dados ["metaestat"] = "NAO";
 	}
+	$dados ["metaestat"] = strtoupper($dados ["metaestat"]);
 	$dados ["metaestat_id_medida_variavel"] = $layer->getmetadata ( "metaestat_id_medida_variavel" );
 	return $dados;
 }
-function alterar($locaplic, $id_tema, $codigo, $editavel, $esquematabelaeditavel, $tabelaeditavel, $colunaidunico, $colunageometria) {
+function alterar($locaplic,$codigo,$connection,$connectiontype,$data,$tileindex,$tileitem,$type,$projection,$convcaracter,$metaestat,$metaestat_id_medida_variavel,$dbhw) {
+	global $esquemaadmin;
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if ($codigo == "" || ! file_exists ( $arq )) {
 		header ( "HTTP/1.1 400 arquivo nao existe" );
@@ -54,14 +60,74 @@ function alterar($locaplic, $id_tema, $codigo, $editavel, $esquematabelaeditavel
 	if ($layer == "") {
 		return false;
 	}
-	$layer->setmetadata ( "editavel", $editavel );
-	$layer->setmetadata ( "esquematabelaeditavel", $esquematabelaeditavel );
-	$layer->setmetadata ( "tabelaeditavel", $tabelaeditavel );
-	$layer->setmetadata ( "colunaidunico", $colunaidunico );
-	$layer->setmetadata ( "colunageometria", $colunageometria );
+	if(strtoupper($metaestat) == "SIM"){
+		if(empty($metaestat_id_medida_variavel)){
+			header ( "HTTP/1.1 400 id da medida esta vazio" );
+			exit ();
+		}
+		$connectiontype = 6;
+		$filteritem = "";
+		$filter = "";
+		$data = "";
+		$connection = "";
+		$dataCol = array(
+				"tipoa_tema" => "META"
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigo'");
+		$layer->setmetadata("metaestat","SIM");
+		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL",$metaestat_id_medida_variavel);
+	}
+	else{
+		$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
+		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
+		$layer->setmetadata("metaestat","");
+		$dataCol = array(
+				"tipoa_tema" => ""
+		);
+		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigo'");
+	}
+	//verifica a simbologia
+	//evita que o LAYER falhe ao ser testado por nao ter o simbolo definido
+	if($type == 0){
+		$c = $layer->getClass(0);
+		$e = $c->getStyle(0);
+		if($e->symbolname == ""){
+			$e->set("symbolname","ponto");
+		}
+	}
+	if($type == 1){
+		$c = $layer->getClass(0);
+		$e = $c->getStyle(0);
+		if($e->symbolname == "" || $e->symbolname == "ponto"){
+			$e->set("symbolname","linha");
+		}
+	}
+	if($type == 2){
+		$c = $layer->getClass(0);
+		$e = $c->getStyle(0);
+		if($e->symbolname == "linha" || $e->symbolname == "ponto"){
+			$e->set("symbolname"," ");
+		}
+	}
+	$layer->setmetadata("convcaracter",$convcaracter);
+	$layer->set("connection",$connection);
+	$layer->setconnectiontype($connectiontype);
+	$layer->set("data",$data);
+	$layer->set("tileitem",$tileitem);
+	$layer->set("tileindex",$tileindex);
+	$layer->set("type",$type);
+	$layer->setfilter($filter);
+	$layer->set("filteritem",$filteritem);
+	if($layer->getprojection() == MS_TRUE){
+		$layer->setprojection($projection);
+		if($layer->getprojection() == MS_FALSE && $projection != ""){
+			$layer->setprojection($projection);
+		}
+	}
+
 	try {
 		$mapa->save ( $arq );
-		include (dirname ( __FILE__ ) . "/../../../php/removeCabecalhoMapfile.php");
+		include (dirname ( __FILE__ ) . "/../../../../php/removeCabecalhoMapfile.php");
 		removeCabecalhoMapfile ( $arq );
 		return true;
 	} catch ( Exception $e ) {

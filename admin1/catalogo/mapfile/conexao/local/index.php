@@ -1,4 +1,6 @@
 <?php
+//TODO incluir opcao para listar os arquivos no servidor
+//TODO incluir construtor de sql
 define ( "ONDEI3GEO", "../../../../.." );
 include (dirname ( __FILE__ ) . "/../../../../../ms_configura.php");
 error_reporting ( 0 );
@@ -50,7 +52,9 @@ $id_tema = (int) $_GET ["id_tema"];
 </div>
 <?php
 include("templates/templateFormConexaoLocal.php");
-//include("../../../templates/templateOpcoesPublicado.php");
+include("../../templates/templateTiposLayer.php");
+include("../../templates/templateTiposConexao.php");
+include("../../../../templates/templateOpcoesPublicado.php");
 ?>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../../../dicionario/editormapfile.js"></script>

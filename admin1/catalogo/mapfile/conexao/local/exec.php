@@ -47,7 +47,7 @@ $id_tema = ( int ) $_POST ["id_tema"];
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ALTERAR" :
-		$dados = \admin\catalogo\mapfile\conexao\local\alterar ( $locaplic, $id_tema, $codigo, $_POST["editavel"], $_POST["esquematabelaeditavel"], $_POST["tabelaeditavel"], $_POST["colunaidunico"], $_POST["colunageometria"] );
+		$dados = \admin\catalogo\mapfile\conexao\local\alterar ($locaplic,$codigo,$_POST["connection"],$_POST["connectiontype"],$_POST["data"],$_POST["tileindex"],$_POST["tileitem"],$_POST["type"],$_POST["projection"],$_POST["convcaracter"],$_POST["metaestat"],$_POST["metaestat_id_medida_variavel"],$dbhw);
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao definir as propriedades" );
 		}

@@ -34,12 +34,7 @@ i3GEOadmin.conexaolocal = {
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
 						var json = jQuery.parseJSON(data);
-						var hash = {
-								"sim": i3GEOadmin.conexaolocal.dicionario.sim,
-								"nao": i3GEOadmin.conexaolocal.dicionario.nao,
-								"NAO-sel" : "",
-								"SIM-sel": ""
-							};
+
 						$("#corpo").html(
 								Mustache.to_html(
 										$("#templateFormConexaoLocal").html(),
@@ -51,12 +46,45 @@ i3GEOadmin.conexaolocal = {
 													"codigo": codigo,
 													"id_tema": id_tema,
 													"onSalvar": "i3GEOadmin.conexaolocal.salvar",
-													"editavel": function(){
-														hash["NAO-sel"] = "";
-														hash["SIM-sel"] = "";
-														hash[json.dados.conexaolocal + "-sel"] = "selected";
+													"convcaracter": function(){
+														var hash = {
+																"sim": i3GEOadmin.conexaolocal.dicionario.sim,
+																"nao": i3GEOadmin.conexaolocal.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
+														hash[json.dados.convcaracter + "-sel"] = "selected";
 														return Mustache.to_html(
 																$("#templateOpcoesPublicado").html(),
+																hash
+														);
+													},
+													"metaestat":  function(){
+														var hash = {
+																"sim": i3GEOadmin.conexaolocal.dicionario.sim,
+																"nao": i3GEOadmin.conexaolocal.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
+														hash[json.dados.metaestat + "-sel"] = "selected";
+														return Mustache.to_html(
+																$("#templateOpcoesPublicado").html(),
+																hash
+														);
+													},
+													"type": function(){
+														var hash = {};
+														hash[json.dados.type + "-sel"] = "selected";
+														return Mustache.to_html(
+																$("#templateTiposLayer").html(),
+																hash
+														);
+													},
+													"connectiontype": function(){
+														var hash = {};
+														hash[json.dados.connectiontype + "-sel"] = "selected";
+														return Mustache.to_html(
+																$("#templateTiposConexao").html(),
 																hash
 														);
 													}

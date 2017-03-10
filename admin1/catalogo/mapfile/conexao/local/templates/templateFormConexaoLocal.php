@@ -1,19 +1,40 @@
+<?php
+//combo com os alias de conexao
+if(!isset($postgis_mapa)){
+	include (dirname ( __FILE__ ) . "/../../../../../../ms_configura.php");
+}
+$_chaves = array_keys($postgis_mapa);
+$_combo = "";
+foreach ($_chaves as $_chave){
+	$_combo .= "<li><a href='javascript:formConexaoLocalSelCon(\"".$_chave."\");void(0);'>$_chave</a></li>";
+}
+?>
+<script>
+function formConexaoLocalSelCon(valor){
+	$("[name='connection']").val(valor);
+}
+</script>
 <script id="templateFormConexaoLocal" type="x-tmpl-mustache">
 <form id="form-edicao-conexaolocal" style="" action="#" onsubmit="{{onSalvar}}('{{codigo}}','{{id_tema}}');return false;"   class="form-horizontal" role="form"
 	method="post"  >
-
 	<div class="col-md-12">
 		<div class="form-group form-group-lg">
 			<div class="col-md-6">
 				<label class="control-label" for="type">
 					{{{typeTitulo}}}
 				</label>
-				<p class="small">
-					{{{Type}}}
-				</p>
+				<div id="typeAjuda" class="collapse leiaMais">
+                	<p class="small" >{{{Type}}}</p>
+            	</div>
+            	<a href="#typeAjuda" data-toggle="collapse" class="collapsed">
+                	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
+                	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
+            	</a>
 			</div>
 			<div class="col-md-6">
-				<input title="{{{typeTitulo}}}" type="text" value="{{{type}}}" class="form-control" name="type" >
+				<select title="{{{typeTitulo}}}" name="type" class="form-control">
+					{{{type}}}
+				</select>
 			</div>
 		</div>
 	</div>
@@ -23,9 +44,13 @@
 				<label class="control-label" for="projection">
 					{{{projecao}}}
 				</label>
-				<p class="small">
-					{{{projecaoTitulo}}}
-				</p>
+				<div id="projectionAjuda" class="collapse leiaMais">
+                	<p class="small" >{{{projecaoTitulo}}}</p>
+            	</div>
+            	<a href="#projectionAjuda" data-toggle="collapse" class="collapsed">
+                	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
+                	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
+            	</a>
 			</div>
 			<div class="col-md-6">
 				<input title="{{{projecao}}}" type="text" value="{{{projection}}}" class="form-control" name="projection" >
@@ -38,12 +63,12 @@
 				<label class="control-label" for="connectiontype">
 					{{{connectiontypeTitulo}}}
 				</label>
-				<p class="small">
-					{{{Connectiontype}}}
-				</p>
+               	<p class="small" >{{{Connectiontype}}}</p>
 			</div>
 			<div class="col-md-6">
-				<input title="{{{connectiontypeTitulo}}}" type="text" value="{{{connectiontype}}}" class="form-control" name="connectiontype" >
+				<select title="{{{connectiontypeTitulo}}}" name="connectiontype" class="form-control">
+					{{{connectiontype}}}
+				</select>
 			</div>
 		</div>
 	</div>
@@ -53,28 +78,44 @@
 				<label class="control-label" for="connection">
 					{{{connectionTitulo}}}
 				</label>
-				<p class="small">
-					{{{Connection}}}
-				</p>
+				<div id="connectionAjuda" class="collapse leiaMais">
+                	<p class="small" >{{{Connection}}}</p>
+            	</div>
+            	<a href="#connectionAjuda" data-toggle="collapse" class="collapsed">
+                	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
+                	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
+            	</a>
 			</div>
 			<div class="col-md-6">
-				<input title="{{{connectionTitulo}}}" type="text" value="{{{connection}}}" class="form-control" name="connection" >
+				<input title="{{{connectionTitulo}}}" type="text" value="{{{connection}}}" class="form-control" name="connection" id="connection">
+			</div>
+			<div class="col-md-6">
+				<label class="control-label" for="listaConnection"></label>
+				<div class="btn-group">
+					<a href="javascript:void(0)" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{{escolhaDalista}}} <span class="caret"></span></a>
+					<ul class="dropdown-menu">
+					<?php echo $_combo;?>
+					</ul>
+				</div>
 			</div>
 		</div>
 	</div>
-
 	<div class="col-md-12">
 		<div class="form-group form-group-lg">
 			<div class="col-md-6">
 				<label class="control-label" for="data">
 					{{{dataTitulo}}}
 				</label>
-				<p class="small">
-					{{{Data}}}
-				</p>
+				<div id="dataAjuda" class="collapse leiaMais">
+                	<p class="small" >{{{Data}}}</p>
+            	</div>
+            	<a href="#dataAjuda" data-toggle="collapse" class="collapsed">
+                	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
+                	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
+            	</a>
 			</div>
 			<div class="col-md-6">
-				<input title="{{{dataTitulo}}}" type="text" value="{{{data}}}" class="form-control" name="data" >
+				<textarea style="resize: both;" title="{{{dataTitulo}}}" rows="8" class="form-control" name="data" >{{{data}}}</textarea>
 			</div>
 		</div>
 	</div>
@@ -84,12 +125,12 @@
 				<label class="control-label text-left" for="metaestat">
 					{{{metaestatTitulo}}}
 				</label>
-				<p class="small">
-					{{{Metaestat}}}
-				</p>
+               	<p class="small" >{{{Metaestat}}}</p>
 			</div>
 			<div class="col-md-6">
-				<input title="{{{metaestatTitulo}}}" type="text" value="{{{metaestat}}}" class="form-control" name="metaestat" >
+				<select title="{{{metaestatTitulo}}}" name="metaestat" class="form-control">
+					{{{metaestat}}}
+				</select>
 			</div>
 		</div>
 	</div>
@@ -99,9 +140,7 @@
 				<label class="control-label text-left" for="metaestat_id_medida_variavel">
 					{{{medidaVariavelTitulo}}}
 				</label>
-				<p class="small">
-					{{{medidaVariavel}}}
-				</p>
+               	<p class="small" >{{{medidaVariavel}}}</p>
 			</div>
 			<div class="col-md-6">
 				<input title="{{{medidaVariavelTitulo}}}" type="text" value="{{{metaestat_id_medida_variavel}}}" class="form-control" name="metaestat_id_medida_variavel" >
@@ -114,9 +153,13 @@
 				<label class="control-label" for="tileindex">
 					tileIndex
 				</label>
-				<p class="small">
-					{{{tileIndex}}}
-				</p>
+				<div id="tileindexAjuda" class="collapse leiaMais">
+                	<p class="small" >{{{tileIndex}}}</p>
+            	</div>
+            	<a href="#tileindexAjuda" data-toggle="collapse" class="collapsed">
+                	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
+                	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
+            	</a>
 			</div>
 			<div class="col-md-6">
 				<input title="tileIndex" type="text" value="{{{tileindex}}}" class="form-control" name="tileindex" >
@@ -129,9 +172,7 @@
 				<label class="control-label" for="tileitem">
 					tileItem
 				</label>
-				<p class="small">
-					{{{tileItem}}}
-				</p>
+                	<p class="small" >{{{tileItem}}}</p>
 			</div>
 			<div class="col-md-6">
 				<input title="tileItem" type="text" value="{{{tileitem}}}" class="form-control" name="tileitem" >
@@ -144,12 +185,18 @@
 				<label class="control-label" for="convcaracter">
 					{{{convCaracterTitulo}}}
 				</label>
-				<p class="small">
-					{{{convCaracter}}}
-				</p>
+				<div id="convcaracterAjuda" class="collapse leiaMais">
+                	<p class="small" >{{{convCaracter}}}</p>
+            	</div>
+            	<a href="#convcaracterAjuda" data-toggle="collapse" class="collapsed">
+                	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
+                	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
+            	</a>
 			</div>
 			<div class="col-md-6">
-				<input title="{{{convCaracterTitulo}}}" type="text" value="{{{convcaracter}}}" class="form-control" name="convcaracter" >
+				<select title="{{{convCaracterTitulo}}}" name="convcaracter" class="form-control">
+					{{{convcaracter}}}
+				</select>
 			</div>
 		</div>
 	</div>
