@@ -1,12 +1,11 @@
 <?php
-
 namespace admin\catalogo\mapfile;
 
 function excluir($codigo, $dbhw) {
 	global $locaplic, $esquemaadmin;
 	// pega o id do tema
 	// se o mapfile nao estiver registrado, $id sera vazio
-	$dados = pegaDados ( "SELECT id_tema from " . $esquemaadmin . "i3geoadmin_temas WHERE codigo_tema = '" . $codigo . "'", $dbhw, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_tema from " . $esquemaadmin . "i3geoadmin_temas WHERE codigo_tema = '" . $codigo . "'", $dbhw, false );
 	if (count ( $dados ) > 0) {
 		$id = $dados [0] ["id_tema"];
 	} else {
@@ -14,11 +13,11 @@ function excluir($codigo, $dbhw) {
 	}
 	// verifica se o tema esta em uso
 	if ($id != "") {
-		$r = pegaDados ( "SELECT id_tema from " . $esquemaadmin . "i3geoadmin_n3 where id_tema ='$id'", $dbhw, false );
+		$r = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_tema from " . $esquemaadmin . "i3geoadmin_n3 where id_tema ='$id'", $dbhw, false );
 		if (count ( $r ) > 0) {
 			return "o tema e utilizado em algum subgrupo";
 		}
-		$r = pegaDados ( "SELECT id_tema from " . $esquemaadmin . "i3geoadmin_raiz where id_tema ='$id'", $dbhw, false );
+		$r = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_tema from " . $esquemaadmin . "i3geoadmin_raiz where id_tema ='$id'", $dbhw, false );
 		if (count ( $r ) > 0) {
 			return "o tema e utilizado em alguma raiz";
 		}
@@ -33,7 +32,7 @@ function excluir($codigo, $dbhw) {
 	}
 	fclose ( $handle );
 	// tenta excluir do banco
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_temas", "id_tema", $id, $dbhw, true );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_temas", "id_tema", $id, $dbhw, true );
 	if ($resultado === false) {
 		return "nao foi possivel excluir do banco de dados";
 	}
@@ -93,7 +92,7 @@ function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $aces
 				"es" => $tituloES,
 				"en" => $tituloEN
 		);
-		$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE id_tema = $id_tema" );
+		$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE id_tema = $id_tema" );
 		if ($resultado === false) {
 			return false;
 		}
@@ -186,7 +185,7 @@ function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublic
 					"es" => $tituloES,
 					"en" => $tituloEN
 			);
-			i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );
+			\admin\php\funcoesAdmin\i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );
 			// salva o arquivo mapfile
 			foreach ( $dados as $dado ) {
 				fwrite ( $fp, $dado . "\n" );
@@ -226,12 +225,10 @@ function listar($dbh, $filtro = "", $palavra = "", $validar = "") {
 	foreach($arquivosTemp as $arq){
 		$arquivos[] = array("nome"=>$arq);
 	}
-
 	//
 	// pega o nome de cada tema filtrando a listagem se for o caso
 	//
-	$regs = pegaDados ( "select * from " . $esquemaadmin . "i3geoadmin_temas ", $dbh, false );
-
+	$regs = \admin\php\funcoesAdmin\pegaDados ( "select * from " . $esquemaadmin . "i3geoadmin_temas ", $dbh, false );
 	$nomes = array ();
 	$ids = array ();
 	$dadosBanco = array ();
@@ -402,7 +399,7 @@ function listaUnico($dbh, $codigo) {
 	}
 	$titulolegenda = $layer->getmetadata("TEMA");
 	$metaestat = $layer->getmetadata("METAESTAT");
-	$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' ", $dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' ", $dbh, false );
 	//se nao existir no sistema de admin, faz o registro
 	if(count($dados) == 0){
 		$dataCol = array (
@@ -419,8 +416,8 @@ function listaUnico($dbh, $codigo) {
 				"es" => "",
 				"en" => ""
 		);
-		$id_tema = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_temas",$dataCol,"link_tema","id_tema");
-		$dados = pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' AND id_tema = $id_tema ", $dbh, false );
+		$id_tema = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_temas",$dataCol,"link_tema","id_tema");
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' AND id_tema = $id_tema ", $dbh, false );
 		if(count($dados) == 0){
 			$dbhw = null;
 			$dbh = null;
@@ -499,7 +496,7 @@ function clonarMapfile($codigo,$novocodigo,$titulo,$dbh,$dbhw){
 		exit ();
 	}
 	//obtem os dados do banco do tema existente
-	$dados = pegaDados ( "SELECT * from " . $esquemaadmin . "i3geoadmin_temas WHERE codigo_tema = '" . $codigo . "'", $dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geoadmin_temas WHERE codigo_tema = '" . $codigo . "'", $dbh, false );
 	if (count ( $dados ) > 0) {
 		//o mapfile esta registrado como um tema no banco de adm
 		$dataCol = array (
@@ -531,7 +528,7 @@ function clonarMapfile($codigo,$novocodigo,$titulo,$dbh,$dbhw){
 	removeCabecalhoMapfile($arqnovo);
 	if (count ( $dados ) > 0) {
 		//registra no banco de dados caso nao tenha ocorrido erro ao criar o mapfile
-		i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );
+		\admin\php\funcoesAdmin\i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );
 	}
 }
 function rrmdir($dir) {

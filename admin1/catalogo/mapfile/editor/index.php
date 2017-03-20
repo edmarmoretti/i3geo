@@ -15,10 +15,10 @@ if (isset ( $_POST ["texto"] )) {
 	$gravarTexto = $_POST ["texto"];
 	$_POST ["texto"] = "";
 }
-$versao = versao ();
+$versao = \admin\php\funcoesAdmin\versao ();
 $versao = $versao ["principal"];
 
-if (verificaOperacaoSessao ( "admin/html/editortexto" ) === false) {
+if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editortexto" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }

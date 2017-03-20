@@ -3,13 +3,13 @@ namespace admin\catalogo\mapas;
 function listar($dbh, $id_mapa = ""){
 	global $esquemaadmin;
 	if($id_mapa != ""){
-		$dados = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where id_mapa = $id_mapa AND mapfile = '' or mapfile is null ", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where id_mapa = $id_mapa AND mapfile = '' or mapfile is null ", $dbh, false );
 		if(count($dados) == 0){
-			$dados = pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where id_mapa = $id_mapa AND mapfile != '' and mapfile is not null ", $dbh, false );
+			$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'sim' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where id_mapa = $id_mapa AND mapfile != '' and mapfile is not null ", $dbh, false );
 		}
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados ( "SELECT id_mapa, nome_mapa from " . $esquemaadmin . "i3geoadmin_mapas order by ordem_mapa, lower(nome_mapa)", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_mapa, nome_mapa from " . $esquemaadmin . "i3geoadmin_mapas order by ordem_mapa, lower(nome_mapa)", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;
@@ -34,7 +34,7 @@ function adicionar($publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $t
 				"nome_mapa" => '',
 				"mapfile" => ''
 		);
-		$id_mapa = i3GeoAdminInsertUnico ( $dbhw, "i3geoadmin_mapas", $dataCol, "nome_mapa", "id_mapa" );
+		$id_mapa = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico ( $dbhw, "i3geoadmin_mapas", $dataCol, "nome_mapa", "id_mapa" );
 		$retorna = \admin\catalogo\mapas\alterar ( $id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, '', $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -51,7 +51,7 @@ function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_
 	}
 	$perfil_mapa = str_replace ( ",", " ", trim ( $perfil_mapa ) );
 	// verifica a consistencia da lista de perfis
-	$perfis = pegaDados ( "SELECT perfil from " . $esquemaadmin . "i3geoadmin_perfis order by perfil", $dbw, false );
+	$perfis = \admin\php\funcoesAdmin\pegaDados ( "SELECT perfil from " . $esquemaadmin . "i3geoadmin_perfis order by perfil", $dbw, false );
 	$p = array ();
 	foreach ( $perfis as $perfil ) {
 		$p [] = $perfil ["perfil"];
@@ -71,7 +71,7 @@ function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_
 			"ligados_mapa" => $ligados_mapa,
 			"perfil_mapa" => $perfil_mapa
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_mapas", $dataCol, "WHERE id_mapa = $id_mapa" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_mapas", $dataCol, "WHERE id_mapa = $id_mapa" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -79,7 +79,7 @@ function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_
 }
 function excluir($id_mapa, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_mapas", "id_mapa", $id_mapa, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_mapas", "id_mapa", $id_mapa, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

@@ -1,7 +1,7 @@
 <?php
 error_reporting ( 0 );
 include_once (dirname ( __FILE__ ) . "/../../../../admin/php/login.php");
-if(verificaOperacaoSessao("admin/php/editortexto") == false){
+if(\admin\php\funcoesAdmin\verificaOperacaoSessao("admin/php/editortexto") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
 }
 
@@ -51,7 +51,7 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //cria o web service
 //
 error_reporting(0);
-$versao = versao();
+$versao = \admin\php\funcoesAdmin\versao();
 $versao = $versao["principal"];
 
 

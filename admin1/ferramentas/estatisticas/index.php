@@ -26,11 +26,11 @@ include "../../head.php";
 				<div class="well">
 			<?php
 			include("../../../admin/php/admin.php");
-			$totaltemas = count(pegaDados("select * from ".$esquemaadmin."i3geoadmin_temas"));
-			$temasvalidos = pegaDados("select codigo_tema,nome_tema,download_tema,kml_tema,ogc_tema,link_tema,tags_tema from ".$esquemaadmin."i3geoadmin_temas where codigo_tema <> ''");
-			$temasassocsubgrupos = pegaDados("select id_tema from ".$esquemaadmin."i3geoadmin_n3 group by id_tema");
-			$nacessostema = pegaDados("select b.nome_tema,sum(a.nacessos) as soma,a.codigo_tema from ".$esquemaadmin."i3geoadmin_acessostema as a,".$esquemaadmin."i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema and a.nacessos > 0 group by a.codigo_tema,b.nome_tema");
-			$ntags = pegaDados("select nome from ".$esquemaadmin."i3geoadmin_tags");
+			$totaltemas = count(\admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geoadmin_temas"));
+			$temasvalidos = \admin\php\funcoesAdmin\pegaDados("select codigo_tema,nome_tema,download_tema,kml_tema,ogc_tema,link_tema,tags_tema from ".$esquemaadmin."i3geoadmin_temas where codigo_tema <> ''");
+			$temasassocsubgrupos = \admin\php\funcoesAdmin\pegaDados("select id_tema from ".$esquemaadmin."i3geoadmin_n3 group by id_tema");
+			$nacessostema = \admin\php\funcoesAdmin\pegaDados("select b.nome_tema,sum(a.nacessos) as soma,a.codigo_tema from ".$esquemaadmin."i3geoadmin_acessostema as a,".$esquemaadmin."i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema and a.nacessos > 0 group by a.codigo_tema,b.nome_tema");
+			$ntags = \admin\php\funcoesAdmin\pegaDados("select nome from ".$esquemaadmin."i3geoadmin_tags");
 			$totaltemasvalidos = count($temasvalidos);
 			$codigostemas = array();
 			$ncodigostemas = array();
@@ -43,9 +43,9 @@ include "../../head.php";
 
 			$sql = "select codigo_tema,soma from (select a.codigo_tema, sum(nacessos) as soma from ".$esquemaadmin."i3geoadmin_acessostema as a,".$esquemaadmin."i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema AND nacessos > 0 group by a.codigo_tema) as soma where soma >";
 
-			$nacessosmaiorqueum = count(pegaDados($sql." 0"));
-			$nacessosmaiorquedez = count(pegaDados($sql." 10"));
-			$nacessosmaiorquecem = count(pegaDados($sql." 100"));
+			$nacessosmaiorqueum = count(\admin\php\funcoesAdmin\pegaDados($sql." 0"));
+			$nacessosmaiorquedez = count(\admin\php\funcoesAdmin\pegaDados($sql." 10"));
+			$nacessosmaiorquecem = count(\admin\php\funcoesAdmin\pegaDados($sql." 100"));
 
 			$temasacessos = array();
 			error_reporting(0);

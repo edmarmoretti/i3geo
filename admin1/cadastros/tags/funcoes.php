@@ -3,10 +3,10 @@ namespace admin\cadastros\tags;
 function listar($dbh, $id_tag = ""){
 	global $esquemaadmin;
 	if($id_tag != ""){
-		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = $id_tag ", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = $id_tag ", $dbh, false );
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by lower(nome)", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags order by lower(nome)", $dbh, false);
 	}
 	if ($dados === false) {
 		return false;
@@ -20,7 +20,7 @@ function adicionar($nome, $dbhw) {
 		$dataCol = array(
 				"nome" => ''
 		);
-		$id_tag = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_tags",$dataCol,"nome","id_tag");
+		$id_tag = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_tags",$dataCol,"nome","id_tag");
 		$retorna = \admin\cadastros\tags\alterar ( $id_tag, $nome, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -36,7 +36,7 @@ function alterar($id_tag, $nome, $dbhw) {
 	$dataCol = array(
 			"nome" => $nome
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_tags", $dataCol, "WHERE id_tag = $id_tag" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_tags", $dataCol, "WHERE id_tag = $id_tag" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -44,7 +44,7 @@ function alterar($id_tag, $nome, $dbhw) {
 }
 function excluir($id_tag, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_tags", "id_tag", $id_tag, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_tags", "id_tag", $id_tag, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

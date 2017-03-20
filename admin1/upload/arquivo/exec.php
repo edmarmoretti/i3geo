@@ -1,8 +1,8 @@
 <?php
 include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
 
-if (verificaOperacaoSessao ( "admin/html/subirshapefile" ) == false) {
-	retornaJSON ( "Vc nao pode realizar essa operacao." );
+if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/subirshapefile" ) == false) {
+	\admin\php\funcoesAdmin\retornaJSON ( "Vc nao pode realizar essa operacao." );
 	exit ();
 }
 
@@ -60,7 +60,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	}
 
 	// remove acentos
-	$nomePrefixo = str_replace ( " ", "_", removeAcentos ( str_replace ( ".shp", "", $_FILES ['i3GEOuploadshp'] ['name'] ) ) );
+	$nomePrefixo = str_replace ( " ", "_", \admin\php\funcoesAdmin\removeAcentos ( str_replace ( ".shp", "", $_FILES ['i3GEOuploadshp'] ['name'] ) ) );
 
 	$nomePrefixo = str_replace ( ".", "", $nomePrefixo );
 	$nomePrefixo = strip_tags ( $nomePrefixo );

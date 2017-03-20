@@ -3,10 +3,10 @@ namespace admin\catalogo\atlas\pranchas\temas;
 function listar($dbh, $id_prancha = "", $id_tema = ""){
 	global $esquemaadmin;
 	if($id_tema != ""){
-		$dados = pegaDados("SELECT id_tema, ordem_tema, codigo_tema, ligado_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = '$id_tema'", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT id_tema, ordem_tema, codigo_tema, ligado_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = '$id_tema'", $dbh, false);
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados("SELECT id_tema, codigo_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_prancha = '$id_prancha' ORDER BY ordem_tema", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT id_tema, codigo_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_prancha = '$id_prancha' ORDER BY ordem_tema", $dbh, false);
 	}
 	if ($dados === false) {
 		return false;
@@ -23,7 +23,7 @@ function adicionar( $id_prancha, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw 
 				"ligado_tema"=>"",
 				"id_prancha"=>$id_prancha
 		);
-		$id_tema = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_atlast",$dataCol,"codigo_tema","id_tema");
+		$id_tema = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_atlast",$dataCol,"codigo_tema","id_tema");
 		$retorna = \admin\catalogo\atlas\pranchas\temas\alterar ( $id_tema, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -47,7 +47,7 @@ function alterar($id_tema, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw) {
 		);
 	}
 
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_atlast", $dataCol, "WHERE id_tema = $id_tema" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_atlast", $dataCol, "WHERE id_tema = $id_tema" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -55,7 +55,7 @@ function alterar($id_tema, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw) {
 }
 function excluir($id_tema, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_atlast", "id_tema", $id_tema, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_atlast", "id_tema", $id_tema, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

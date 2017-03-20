@@ -1,40 +1,34 @@
 <?php
-/*
- * Licenca:
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Edmar Moretti
- * Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
- * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
- * GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
- * por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
- * de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
- * Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
- * Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a
- * Free Software Foundation, Inc., no endere&ccedil;o
- * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
-error_reporting ( 0 );
+/****************************************************************/
+include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
 //
-// pega as variaveis passadas com get ou post
+//checa login
+//valida _GET e _POST, juntando em _GET
+//pega algumas variaveis de uso mais comum
+//session_start
 //
-
-include_once (dirname ( __FILE__ ) . "/../../../../admin/php/login.php");
-
-if (verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
+include ($locaplic."/admin1/php/checaLogin.php");
+//funcoes de administracao
+include ($locaplic."/admin1/php/funcoesAdmin.php");
+//
+//carrega outras funcoes e extensoes do PHP
+//
+include ($locaplic."/classesphp/carrega_ext.php");
+//
+//carrega as funcoes locais
+//depende de funcoesAdmin.php
+//
+include ("funcoes.php");
+//
+//conexao com o banco de administracao
+//cria as variaveis $dbh e $dbhw alem de conexaoadmin
+//
+include ($locaplic."/admin1/php/conexao.php");
+/***************************************************************/
+if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-
-include (dirname ( __FILE__ ) . "/../../../../admin/php/conexao.php");
 
 $codigo = str_replace(" ","",$_POST["codigo"]);
 if(empty($codigo)){
@@ -50,20 +44,20 @@ if(!file_exists($tema)){
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "TESTAIMG" :
-		$versao = versao();
+		$versao = \admin\php\funcoesAdmin\versao();
 		$versao = $versao["principal"];
 		ms_ResetErrorList();
 		$tempo = microtime(true);
 		$retorno = testaMapaImg($tema);
-		retornaJSON ( $retorno );
+		\admin\php\funcoesAdmin\retornaJSON ( $retorno );
 		break;
 	case "TESTATABELA" :
-		$versao = versao();
+		$versao = \admin\php\funcoesAdmin\versao();
 		$versao = $versao["principal"];
 		ms_ResetErrorList();
 		$tempo = microtime(true);
 		$retorno = testaTabela($tema);
-		retornaJSON ( $retorno );
+		\admin\php\funcoesAdmin\retornaJSON ( $retorno );
 		break;
 }
 function mapaBase($locaplic,$versao,$base){
@@ -199,8 +193,8 @@ function testaMapaImg($tema){
 		}
 		return array("imgMapa"=>"","imgLegenda"=>"","tempo"=> (microtime(true) - $tempo),"erro"=>$erro);
 	}
-	substituiConObj($mapa,$postgis_mapa);
-	substituiConObj($nmapa,$postgis_mapa);
+	\admin\php\funcoesAdmin\substituiConObj($mapa,$postgis_mapa);
+	\admin\php\funcoesAdmin\substituiConObj($nmapa,$postgis_mapa);
 
 	$numlayers = $nmapa->numlayers;
 	$dados = "";
@@ -269,10 +263,10 @@ function testaMapaImg($tema){
 	if($objImagem->imagepath == ""){
 		return array("imgMapa"=>"","imgLegenda"=>"","tempo"=> (microtime(true) - $tempo),"erro"=>"Erro IMAGEPATH vazio");
 	}
-	$nomec = ($objImagem->imagepath).nomeRandomico()."teste.png";
+	$nomec = ($objImagem->imagepath).\admin\php\funcoesAdmin\nomeRandomico()."teste.png";
 	$objImagem->saveImage($nomec);
 
-	$nomel = ($objImagemLegenda->imagepath).nomeRandomico()."testel.png";
+	$nomel = ($objImagemLegenda->imagepath).\admin\php\funcoesAdmin\nomeRandomico()."testel.png";
 	$objImagemLegenda->saveImage($nomel);
 
 	$erro = "";

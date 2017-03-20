@@ -3,10 +3,10 @@ namespace admin\usuarios\operacoes;
 function listar($dbh, $id_operacao = ""){
 	global $esquemaadmin;
 	if($id_operacao != ""){
-		$dados = pegaDados ( "SELECT id_operacao,codigo,descricao from " . $esquemaadmin . "i3geousr_operacoes where id_operacao = $id_operacao order by codigo", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_operacao,codigo,descricao from " . $esquemaadmin . "i3geousr_operacoes where id_operacao = $id_operacao order by codigo", $dbh, false );
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados ( "SELECT id_operacao,codigo,descricao from " . $esquemaadmin . "i3geousr_operacoes order by codigo", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_operacao,codigo,descricao from " . $esquemaadmin . "i3geousr_operacoes order by codigo", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;
@@ -16,7 +16,7 @@ function listar($dbh, $id_operacao = ""){
 }
 function listaPapeis($dbh){
 	global $esquemaadmin;
-	$dados = pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		exit ();
@@ -26,7 +26,7 @@ function listaPapeis($dbh){
 }
 function listaPapeisOperacao($dbh,$id_operacao){
 	global $esquemaadmin;
-	$dados = pegaDados ( "SELECT P.id_papel, P.nome, P.descricao,OP.id_operacao FROM " . $esquemaadmin . "i3geousr_operacoespapeis  AS OP JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON OP.id_papel = P.id_papel WHERE OP.id_operacao = $id_operacao ", $dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT P.id_papel, P.nome, P.descricao,OP.id_operacao FROM " . $esquemaadmin . "i3geousr_operacoespapeis  AS OP JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON OP.id_papel = P.id_papel WHERE OP.id_operacao = $id_operacao ", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		exit ();
@@ -40,7 +40,7 @@ function adicionar($codigo,$descricao,$papeis,$dbhw){
 		$dataCol = array(
 				"descricao" => ''
 		);
-		$id_operacao = i3GeoAdminInsertUnico($dbhw,"i3geousr_operacoes",$dataCol,"descricao","id_operacao");
+		$id_operacao = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geousr_operacoes",$dataCol,"descricao","id_operacao");
 		$retorna = \admin\usuarios\operacoes\alterar($id_operacao,$codigo,$descricao,$papeis,$dbhw);
 		return $retorna;
 	}
@@ -58,7 +58,7 @@ function alterar($id_operacao,$codigo,$descricao,$papeis,$dbhw){
 			"codigo" => $codigo,
 			"descricao" => $descricao
 	);
-	$resultado = i3GeoAdminUpdate($dbhw,"i3geousr_operacoes",$dataCol,"WHERE id_operacao = $id_operacao");
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geousr_operacoes",$dataCol,"WHERE id_operacao = $id_operacao");
 	if($resultado === false){
 		return false;
 	}
@@ -84,12 +84,12 @@ function adicionaPapel($id_operacao,$id_papel,$dbhw){
 			"id_operacao" => $id_operacao,
 			"id_papel" => $id_papel
 	);
-	$resultado = i3GeoAdminInsert($dbhw,"i3geousr_operacoespapeis",$dataCol);
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminInsert($dbhw,"i3geousr_operacoespapeis",$dataCol);
 	return $resultado;
 }
 function excluir($id_operacao,$dbhw){
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui($esquemaadmin."i3geousr_operacoes","id_operacao",$id_operacao,$dbhw,false);
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui($esquemaadmin."i3geousr_operacoes","id_operacao",$id_operacao,$dbhw,false);
 	if($resultado === false){
 		return false;
 	}
@@ -100,7 +100,7 @@ function excluir($id_operacao,$dbhw){
 }
 function excluirPapeis($id_operacao,$dbhw){
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui($esquemaadmin."i3geousr_operacoespapeis","id_operacao",$id_operacao,$dbhw,false);
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui($esquemaadmin."i3geousr_operacoespapeis","id_operacao",$id_operacao,$dbhw,false);
 	return $resultado;
 }
 ?>

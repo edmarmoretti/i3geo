@@ -3,10 +3,10 @@ namespace admin\cadastros\perfis;
 function listar($dbh, $id_perfil = ""){
 	global $esquemaadmin;
 	if($id_perfil != ""){
-		$dados = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by lower(perfil)", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis order by lower(perfil)", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;
@@ -21,7 +21,7 @@ function adicionar($perfil, $dbhw) {
 		$dataCol = array(
 				"perfil" => ''
 		);
-		$id_perfil = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_perfis",$dataCol,"perfil","id_perfil");
+		$id_perfil = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_perfis",$dataCol,"perfil","id_perfil");
 		$retorna = \admin\cadastros\perfis\alterar ( $id_perfil, $perfil,$dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -31,7 +31,7 @@ function adicionar($perfil, $dbhw) {
 function alterar($id_perfil, $perfil,$dbhw) {
 	global $convUTF, $esquemaadmin;
 	//pega o nome conforme o ID
-	$original = pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
+	$original = \admin\php\funcoesAdmin\pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
 	$original = $original[0]["perfil"];
 
 	if ($convUTF != true){
@@ -40,7 +40,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 	$dataCol = array(
 			"perfil" => $perfil
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_perfis", $dataCol, "WHERE id_perfil = $id_perfil" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_perfis", $dataCol, "WHERE id_perfil = $id_perfil" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -54,7 +54,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 			$dataCol = array(
 					"perfil_mapa" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_mapas",$dataCol,"WHERE id_mapa = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_mapas",$dataCol,"WHERE id_mapa = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_menus WHERE perfil_menu != ''");
@@ -66,7 +66,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 			$dataCol = array(
 					"perfil_menu" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_menus",$dataCol,"WHERE id_menu = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_menus",$dataCol,"WHERE id_menu = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_n1 WHERE n1_perfil != ''");
@@ -78,7 +78,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 			$dataCol = array(
 					"n1_perfil" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_n1",$dataCol,"WHERE id_n1 = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_n1",$dataCol,"WHERE id_n1 = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_n2 WHERE n2_perfil != ''");
@@ -90,7 +90,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 			$dataCol = array(
 					"n2_perfil" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_n2",$dataCol,"WHERE id_n2 = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_n2",$dataCol,"WHERE id_n2 = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_n3 WHERE n3_perfil != ''");
@@ -102,7 +102,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 			$dataCol = array(
 					"n3_perfil" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_n3",$dataCol,"WHERE id_n3 = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_n3",$dataCol,"WHERE id_n3 = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_raiz WHERE perfil != ''");
@@ -114,7 +114,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 			$dataCol = array(
 					"perfil" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_raiz",$dataCol,"WHERE id_raiz = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_raiz",$dataCol,"WHERE id_raiz = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_sistemas WHERE perfil_sistema != ''");
@@ -127,7 +127,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 			$dataCol = array(
 					"perfil_sistema" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_sistemas",$dataCol,"WHERE id_sistema = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_sistemas",$dataCol,"WHERE id_sistema = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_sistemasf WHERE perfil_funcao != ''");
@@ -139,7 +139,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 			$dataCol = array(
 					"perfil_funcao" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_sistemasf",$dataCol,"WHERE id_funcao = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_sistemasf",$dataCol,"WHERE id_funcao = $i");
 		}
 	}
 	return $id_perfil;
@@ -147,9 +147,9 @@ function alterar($id_perfil, $perfil,$dbhw) {
 function excluir($id_perfil, $dbhw) {
 	global $esquemaadmin;
 	//pega o nome conforme o ID
-	$dados = pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
 	$perfil = $dados[0]["perfil"];
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_perfis", "id_perfil", $id_perfil, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_perfis", "id_perfil", $id_perfil, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}
@@ -163,7 +163,7 @@ function excluir($id_perfil, $dbhw) {
 			$dataCol = array(
 					"perfil_mapa" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_mapas",$dataCol,"WHERE id_mapa = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_mapas",$dataCol,"WHERE id_mapa = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_menus");
@@ -175,7 +175,7 @@ function excluir($id_perfil, $dbhw) {
 			$dataCol = array(
 					"perfil_menu" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_menus",$dataCol,"WHERE id_menu = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_menus",$dataCol,"WHERE id_menu = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_n1");
@@ -187,7 +187,7 @@ function excluir($id_perfil, $dbhw) {
 			$dataCol = array(
 					"n1_perfil" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_n1",$dataCol,"WHERE id_n1 = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_n1",$dataCol,"WHERE id_n1 = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_n2");
@@ -199,7 +199,7 @@ function excluir($id_perfil, $dbhw) {
 			$dataCol = array(
 					"n2_perfil" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_n2",$dataCol,"WHERE id_n2 = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_n2",$dataCol,"WHERE id_n2 = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_n3");
@@ -211,7 +211,7 @@ function excluir($id_perfil, $dbhw) {
 			$dataCol = array(
 					"n2_perfil" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_n3",$dataCol,"WHERE id_n3 = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_n3",$dataCol,"WHERE id_n3 = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_raiz");
@@ -223,7 +223,7 @@ function excluir($id_perfil, $dbhw) {
 			$dataCol = array(
 					"perfil" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_raiz",$dataCol,"WHERE id_raiz = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_raiz",$dataCol,"WHERE id_raiz = $i");
 		}
 	}
 	$q = $dbhw->query("select * from ".$esquemaadmin."i3geoadmin_sistemasf");
@@ -235,7 +235,7 @@ function excluir($id_perfil, $dbhw) {
 			$dataCol = array(
 					"perfil_funcao" => $ts
 			);
-			i3GeoAdminUpdate($dbhw,"i3geoadmin_sistemasf",$dataCol,"WHERE id_funcao = $i");
+			\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_sistemasf",$dataCol,"WHERE id_funcao = $i");
 		}
 	}
 	return $resultado;

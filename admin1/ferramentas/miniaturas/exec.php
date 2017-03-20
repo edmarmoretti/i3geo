@@ -22,7 +22,7 @@ include "index.php";
 						}
 					}
 					include_once (dirname(__FILE__)."/../../../admin/php/admin.php");
-					$versao = versao();
+					$versao = \admin\php\funcoesAdmin\versao();
 					$versao = $versao["principal"];
 					//
 					//no caso do programa ser utilizado via URL
@@ -37,7 +37,7 @@ include "index.php";
 							exit;
 						}
 						else{
-							$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+							$continua = \admin\php\funcoesAdmin\verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
 							if($continua === false){
 								echo "<div class='alert alert-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
 								exit;
@@ -89,7 +89,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 {
 	global $locaplic,$versao,$base,$postgis_mapa;
 	if($versao == ""){
-		$versao = versao();
+		$versao = \admin\php\funcoesAdmin\versao();
 		$versao = $versao["principal"];
 	}
 	ms_ResetErrorList();

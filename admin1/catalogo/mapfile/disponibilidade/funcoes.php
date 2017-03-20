@@ -64,7 +64,7 @@ function alterar($locaplic, $id_tema, $codigo, $permiteogc, $permitedownload, $p
 					"ogc_tema" => $permiteogc,
 					"download_tema" => $download
 			);
-			$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE id_tema = $id_tema" );
+			$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE id_tema = $id_tema" );
 			if ($resultado === false) {
 				return false;
 			}

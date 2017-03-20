@@ -209,7 +209,7 @@ function salvaMapfile() {
 		if ($meta != "" && ($meta == "SIM" || $meta == "NAO")) {
 			$dataCol["kmz_tema"] = $meta;
 		}
-		$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE codigo_tema = '$codigo'" );
+		$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE codigo_tema = '$codigo'" );
 	}
 }
 ?>

@@ -73,7 +73,7 @@ function alterar($locaplic,$codigo,$connection,$connectiontype,$data,$tileindex,
 		$dataCol = array(
 				"tipoa_tema" => "META"
 		);
-		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigo'");
+		\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigo'");
 		$layer->setmetadata("metaestat","SIM");
 		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL",$metaestat_id_medida_variavel);
 	}
@@ -84,7 +84,7 @@ function alterar($locaplic,$codigo,$connection,$connectiontype,$data,$tileindex,
 		$dataCol = array(
 				"tipoa_tema" => ""
 		);
-		i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigo'");
+		\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigo'");
 	}
 	//verifica a simbologia
 	//evita que o LAYER falhe ao ser testado por nao ter o simbolo definido

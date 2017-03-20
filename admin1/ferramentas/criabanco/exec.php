@@ -18,7 +18,7 @@ include "index.php";
 						if (empty ( $_POST ["senha"] ) || empty ( $_POST ["usuario"] )) {
 							exit ();
 						} else {
-							$continua = verificaMaster ( $_POST ["usuario"], $_POST ["senha"], $i3geomaster );
+							$continua = \admin\php\funcoesAdmin\verificaMaster ( $_POST ["usuario"], $_POST ["senha"], $i3geomaster );
 							if ($continua === false) {
 								echo "<div class='alert alert-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
 								exit ();
@@ -80,7 +80,7 @@ include "index.php";
 								if (file_exists ( "../../../admin/admin.db" )) {
 									echo "<div class='alert alert-warning'>Arquivo admin/admin.db ja existe. Vc deve apag&aacute;-lo para poder cri&aacute;-lo novamente caso precise</div>";
 								} else {
-									// TODO verificar ao fechar versao - caso tenha havido alteracoes no banco, gerar banco vazio
+									// TODO verificar ao fechar \admin\php\funcoesAdmin\versao - caso tenha havido alteracoes no banco, gerar banco vazio
 									copy ( "../../../admin/admin_vazio.db", "../../../admin/admin.db" );
 									chmod ( "../../../admin/admin.db", 0777 );
 									if (file_exists ( "../../../admin/admin.db" )) {

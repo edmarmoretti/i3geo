@@ -1,43 +1,37 @@
 <?php
-/*
- * Licenca:
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Edmar Moretti
- * Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
- * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
- * GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
- * por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
- * de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
- * Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
- * Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a
- * Free Software Foundation, Inc., no endere&ccedil;o
- * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
-error_reporting ( 0 );
+/****************************************************************/
+include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 //
-// pega as variaveis passadas com get ou post
+//checa login
+//valida _GET e _POST, juntando em _GET
+//pega algumas variaveis de uso mais comum
+//session_start
 //
-
-include_once (dirname ( __FILE__ ) . "/../../../admin/php/login.php");
-if (verificaOperacaoSessao ( "admin/html/usuarios" ) === false) {
+include ($locaplic."/admin1/php/checaLogin.php");
+//funcoes de administracao
+include ($locaplic."/admin1/php/funcoesAdmin.php");
+//
+//carrega outras funcoes e extensoes do PHP
+//
+include ($locaplic."/classesphp/carrega_ext.php");
+//
+//carrega as funcoes locais
+//depende de funcoesAdmin.php
+//
+include ("funcoes.php");
+//
+//conexao com o banco de administracao
+//cria as variaveis $dbh e $dbhw alem de conexaoadmin
+//
+include ($locaplic."/admin1/php/conexao.php");
+/***************************************************************/
+if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/usuarios" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-
-include (dirname ( __FILE__ ) . "/../../../admin/php/conexao.php");
-include ("funcoes.php");
 $id_usuario = $_POST ["id_usuario"];
 $id_grupo = $_POST ["id_grupo"];
-testaSafeNumerico ( [
+\admin\php\funcoesAdmin\testaSafeNumerico ( [
 		$id_usuario,
 		$id_grupo
 ] );
@@ -87,7 +81,7 @@ switch ($funcao) {
 			$usuarios = \admin\usuarios\grupos\listaUsuarios($dbh);
 			$dbhw = null;
 			$dbh = null;
-			retornaJSON ( array (
+			\admin\php\funcoesAdmin\retornaJSON ( array (
 					"grupo" => $grupo,
 					"usuarios" => $usuarios
 			) );
@@ -103,7 +97,7 @@ switch ($funcao) {
 			$usuarios = \admin\usuarios\grupos\listaUsuarios($dbh);
 			$dbhw = null;
 			$dbh = null;
-			retornaJSON ( array (
+			\admin\php\funcoesAdmin\retornaJSON ( array (
 					"grupos" => $grupos,
 					"usuarios" => $usuarios
 			) );

@@ -5,10 +5,10 @@ namespace admin\catalogo\menus;
 function listar($dbh, $id_menu = "") {
 	global $esquemaadmin;
 	if ($id_menu != "") {
-		$dados = pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus WHERE id_menu = $id_menu ", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus WHERE id_menu = $id_menu ", $dbh, false );
 		$dados = $dados [0];
 	} else {
-		$dados = pegaDados ( "SELECT id_menu, nome_menu from ".$esquemaadmin."i3geoadmin_menus order by lower(nome_menu)", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_menu, nome_menu from ".$esquemaadmin."i3geoadmin_menus order by lower(nome_menu)", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;
@@ -29,7 +29,7 @@ function adicionar($publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_men
 				"desc_menu" => "",
 				"perfil_menu" => ""
 		);
-		$id_menu = i3GeoAdminInsertUnico ( $dbhw, "i3geoadmin_menus", $dataCol, "nome_menu", "id_menu" );
+		$id_menu = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico ( $dbhw, "i3geoadmin_menus", $dataCol, "nome_menu", "id_menu" );
 		$retorna = \admin\catalogo\menus\alterar ( $id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -57,7 +57,7 @@ function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $
 			"desc_menu" => $desc_menu,
 			"perfil_menu" => $perfil_menu
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_menus", $dataCol, "WHERE id_menu = $id_menu" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_menus", $dataCol, "WHERE id_menu = $id_menu" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -65,12 +65,12 @@ function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $
 }
 function excluir($id_menu, $dbhw) {
 	global $esquemaadmin;
-	$r = pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 where id_menu=$id_menu");
+	$r = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 where id_menu=$id_menu");
 	if(count($r) > 0){
 		header ( "HTTP/1.1 500 erro ao excluir. Exclua os grupos primeiro" );
 		exit ();
 	}
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_menus", "id_menu", $id_menu, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_menus", "id_menu", $id_menu, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

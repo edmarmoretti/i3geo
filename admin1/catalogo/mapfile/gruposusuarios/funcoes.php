@@ -21,7 +21,7 @@ function listar($dbh,$locaplic,$codigo){
 				on ".$esquemaadmin."i3geoadmin_temas.id_tema = ".$esquemaadmin."i3geousr_grupotema.id_tema
 				where codigo_tema = '".$codigo."' order by lower(nome)
 			";
-		$dados = pegaDados ( $sql, $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( $sql, $dbh, false );
 	} else {
 		$dbhw = null;
 		$dbh = null;
@@ -47,7 +47,7 @@ function adicionar($locaplic,$codigo,$id_grupo, $id_tema, $dbhw) {
 		exit ();
 	}
 	$sql = "select * from ".$esquemaadmin."i3geousr_grupotema where id_tema = $id_tema and id_grupo = $id_grupo";
-	$q = pegaDados($sql, $dbh, false);
+	$q = \admin\php\funcoesAdmin\pegaDados($sql, $dbh, false);
 	if($q){
 		if(count($q) != 0){
 			header ( "HTTP/1.1 500 erro valor ja cadastrado" );
@@ -59,7 +59,7 @@ function adicionar($locaplic,$codigo,$id_grupo, $id_tema, $dbhw) {
 				"id_tema" => $id_tema,
 				"id_grupo" => $id_grupo
 		);
-		$retorna = i3GeoAdminInsert($dbhw,"i3geousr_grupotema",$dataCol);
+		$retorna = \admin\php\funcoesAdmin\i3GeoAdminInsert($dbhw,"i3geousr_grupotema",$dataCol);
 		return $retorna;
 	} catch ( PDOException $e ) {
 		return false;
@@ -71,7 +71,7 @@ function excluir($id_tema, $id_grupo, $dbhw) {
 		$sql = "DELETE from ".$esquemaadmin."i3geousr_grupotema where id_tema = ? and id_grupo = ? ";
 		$prep = $dbhw->prepare($sql);
 		$prep->execute(array($id_tema,$id_grupo));
-		i3GeoAdminInsertLog($dbhw,$sql,array($id_tema,$id_grupo));
+		\admin\php\funcoesAdmin\i3GeoAdminInsertLog($dbhw,$sql,array($id_tema,$id_grupo));
 		return true;
 	} catch ( PDOException $e ) {
 		return false;
@@ -82,7 +82,7 @@ function excluir($id_tema, $id_grupo, $dbhw) {
 
 function listaUsuarios($dbh){
 	global $esquemaadmin;
-	$dados = pegaDados ( "SELECT id_usuario, nome_usuario FROM " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 ORDER BY nome_usuario", dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_usuario, nome_usuario FROM " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 ORDER BY nome_usuario", dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		exit ();
@@ -92,7 +92,7 @@ function listaUsuarios($dbh){
 }
 function listaGruposUsuario($id_grupo,$dbh){
 	global $esquemaadmin;
-	$dados = pegaDados ( "SELECT U.nome_usuario, U.id_usuario, UP.id_grupo FROM " . $esquemaadmin . "i3geousr_grupousuario AS UP JOIN " . $esquemaadmin . "i3geousr_usuarios AS U ON U.id_usuario = UP.id_usuario WHERE UP.id_grupo = $id_grupo", dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT U.nome_usuario, U.id_usuario, UP.id_grupo FROM " . $esquemaadmin . "i3geousr_grupousuario AS UP JOIN " . $esquemaadmin . "i3geousr_usuarios AS U ON U.id_usuario = UP.id_usuario WHERE UP.id_grupo = $id_grupo", dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		exit ();
@@ -112,7 +112,7 @@ function alterar($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
 			"descricao" => $descricao
 	);
 
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geousr_grupos", $dataCol, "WHERE id_grupo = $id_grupo" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geousr_grupos", $dataCol, "WHERE id_grupo = $id_grupo" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -138,13 +138,13 @@ function adicionaUsuario($id_grupo, $id_usuario, $dbhw) {
 			"id_usuario" => $id_usuario,
 			"id_grupo" => $id_grupo
 	);
-	$resultado = i3GeoAdminInsert ( $dbhw, "i3geousr_grupousuario", $dataCol );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminInsert ( $dbhw, "i3geousr_grupousuario", $dataCol );
 	return $resultado;
 }
 
 function excluirUsuarios($id_grupo, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geousr_grupousuario", "id_grupo", $id_grupo, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geousr_grupousuario", "id_grupo", $id_grupo, $dbhw, false );
 	return $resultado;
 }
 ?>

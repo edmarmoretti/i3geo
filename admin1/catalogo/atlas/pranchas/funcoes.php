@@ -3,10 +3,10 @@ namespace admin\catalogo\atlas\pranchas;
 function listar($dbh, $id_atlas = "",$id_prancha = ""){
 	global $esquemaadmin;
 	if($id_prancha != ""){
-		$dados = pegaDados("SELECT id_atlas, id_prancha, titulo_prancha, ordem_prancha, desc_prancha, h_prancha, icone_prancha, link_prancha, mapext_prancha, w_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = '$id_prancha'", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT id_atlas, id_prancha, titulo_prancha, ordem_prancha, desc_prancha, h_prancha, icone_prancha, link_prancha, mapext_prancha, w_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_prancha = '$id_prancha'", $dbh, false);
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados("SELECT id_atlas, id_prancha, titulo_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_atlas = '$id_atlas' ORDER by ordem_prancha", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT id_atlas, id_prancha, titulo_prancha from ".$esquemaadmin."i3geoadmin_atlasp WHERE id_atlas = '$id_atlas' ORDER by ordem_prancha", $dbh, false);
 	}
 	if ($dados === false) {
 		return false;
@@ -29,7 +29,7 @@ function adicionar( $id_atlas, $titulo_prancha, $ordem_prancha, $desc_prancha, $
 				"titulo_prancha"=>'',
 				"id_atlas"=>$id_atlas
 		);
-		$id_prancha = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_atlasp",$dataCol,"titulo_prancha","id_prancha");
+		$id_prancha = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_atlasp",$dataCol,"titulo_prancha","id_prancha");
 		$retorna = \admin\catalogo\atlas\pranchas\alterar ( $id_atlas, $id_prancha, $titulo_prancha, $ordem_prancha, $desc_prancha, $h_prancha, $icone_prancha, $link_prancha, $mapext_prancha, $w_prancha, $dbhw );
 
 		return $retorna;
@@ -54,7 +54,7 @@ function alterar($id_atlas, $id_prancha, $titulo_prancha, $ordem_prancha, $desc_
 			"link_prancha"=>$link_prancha,
 			"titulo_prancha"=>$titulo_prancha
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_atlasp", $dataCol, "WHERE id_prancha = $id_prancha AND id_atlas = $id_atlas" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_atlasp", $dataCol, "WHERE id_prancha = $id_prancha AND id_atlas = $id_atlas" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -68,7 +68,7 @@ function excluir($id_prancha, $dbhw) {
 		header ( "HTTP/1.1 500 erro ao excluir. Exclua os temas da prancha primeiro" );
 		exit;
 	} else {
-		$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_atlasp", "id_prancha", $id_prancha, $dbhw, false );
+		$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_atlasp", "id_prancha", $id_prancha, $dbhw, false );
 		if ($resultado === false) {
 			return false;
 		} else {

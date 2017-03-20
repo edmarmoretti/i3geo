@@ -3,10 +3,10 @@ namespace admin\cadastros\identifica;
 function listar($dbh, $id_i = ""){
 	global $esquemaadmin;
 	if($id_i != ""){
-		$dados = pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id_i", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id_i", $dbh, false );
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados ( "SELECT id_i, nome_i from ".$esquemaadmin."i3geoadmin_identifica order by lower(nome_i)", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_i, nome_i from ".$esquemaadmin."i3geoadmin_identifica order by lower(nome_i)", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;
@@ -23,7 +23,7 @@ function adicionar($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
 				"abrir_i" => '',
 				"target_i" => ''
 		);
-		$id_i = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_identifica",$dataCol,"nome_i","id_i");
+		$id_i = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_identifica",$dataCol,"nome_i","id_i");
 		$retorna = \admin\cadastros\identifica\alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw);
 		return $retorna;
 	} catch ( PDOException $e ) {
@@ -41,7 +41,7 @@ function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 			"abrir_i" => $abrir_i,
 			"target_i" => $target_i
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_identifica", $dataCol, "WHERE id_i = $id_i" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_identifica", $dataCol, "WHERE id_i = $id_i" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -49,7 +49,7 @@ function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 }
 function excluir($id_i, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_identifica", "id_i", $id_i, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_identifica", "id_i", $id_i, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

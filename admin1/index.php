@@ -1,4 +1,21 @@
 <?php
+//
+//marca a sessao PHP para evitar forcar o uso da primeira pagina ao navegar pelos outros itens do sistema de administacao
+//
+session_write_close ();
+session_name ( "i3GeoLogin" );
+if (! empty ( $_COOKIE ["i3geocodigologin"] )) {
+	session_id ( $_COOKIE ["i3geocodigologin"] );
+	session_start ();
+	if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
+		$_COOKIE = array ();
+		$_SESSION = array ();
+		session_destroy ();
+	}
+	else {
+		$_SESSION ["initOk"] = true;
+	}
+}
 define ( "ONDEI3GEO", ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
 error_reporting ( 0 );

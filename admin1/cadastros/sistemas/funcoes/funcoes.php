@@ -4,10 +4,10 @@ namespace admin\cadastros\sistemas\funcoes;
 function listar($dbh, $id_sistema, $id_funcao = ""){
 	global $esquemaadmin;
 	if($id_funcao != ""){
-		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf WHERE id_funcao = '$id_funcao'", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf WHERE id_funcao = '$id_funcao'", $dbh, false);
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema = $id_sistema", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema = $id_sistema", $dbh, false);
 	}
 	if ($dados === false) {
 		return false;
@@ -26,7 +26,7 @@ function adicionar( $id_sistema,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$
 				"abrir_funcao" => '',
 				"id_sistema" => $id_sistema
 		);
-		$id_funcao = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_sistemasf",$dataCol,"nome_funcao","id_funcao");
+		$id_funcao = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_sistemasf",$dataCol,"nome_funcao","id_funcao");
 		$retorna = \admin\cadastros\sistemas\funcoes\alterar ( $id_funcao,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$perfil_funcao, $dbhw );
 
 		return $retorna;
@@ -47,7 +47,7 @@ function alterar($id_funcao,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$perf
 			"h_funcao" => $h_funcao,
 			"abrir_funcao" => $abrir_funcao
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_sistemasf", $dataCol, "WHERE id_funcao = $id_funcao" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_sistemasf", $dataCol, "WHERE id_funcao = $id_funcao" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -55,7 +55,7 @@ function alterar($id_funcao,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$perf
 }
 function excluir($id_funcao, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_sistemasf", "id_funcao", $id_funcao, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_sistemasf", "id_funcao", $id_funcao, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

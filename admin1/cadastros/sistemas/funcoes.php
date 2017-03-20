@@ -3,10 +3,10 @@ namespace admin\cadastros\sistemas;
 function listar($dbh, $id_sistema = ""){
 	global $esquemaadmin;
 	if($id_sistema != ""){
-		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemas WHERE id_sistema = $id_sistema", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemas WHERE id_sistema = $id_sistema", $dbh, false);
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemas ORDER BY lower(nome_sistema)", $dbh, false);
+		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemas ORDER BY lower(nome_sistema)", $dbh, false);
 	}
 	if ($dados === false) {
 		return false;
@@ -22,7 +22,7 @@ function adicionar( $publicado_sistema,$nome_sistema,$perfil_sistema, $dbhw) {
 				"nome_sistema" => '',
 				"perfil_sistema" => ''
 		);
-		$id_sistema = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_sistemas",$dataCol,"nome_sistema","id_sistema");
+		$id_sistema = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_sistemas",$dataCol,"nome_sistema","id_sistema");
 		$retorna = \admin\cadastros\sistemas\alterar ( $id_sistema,$publicado_sistema,$nome_sistema,$perfil_sistema, $dbhw );
 
 		return $retorna;
@@ -41,7 +41,7 @@ function alterar($id_sistema,$publicado_sistema,$nome_sistema,$perfil_sistema, $
 			"nome_sistema" => $nome_sistema,
 			"perfil_sistema" => $perfil_sistema
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_sistemas", $dataCol, "WHERE id_sistema = $id_sistema" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_sistemas", $dataCol, "WHERE id_sistema = $id_sistema" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -55,7 +55,7 @@ function excluir($id_sistema, $dbhw) {
 		header ( "HTTP/1.1 500 erro ao excluir. Exclua as funcoes do sistema primeiro" );
 		exit;
 	}
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_sistemas", "id_sistema", $id_sistema, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_sistemas", "id_sistema", $id_sistema, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

@@ -3,10 +3,10 @@ namespace admin\cadastros\servicos;
 function listar($dbh, $id_ws = ""){
 	global $esquemaadmin;
 	if($id_ws != ""){
-		$dados = pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws ", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws ", $dbh, false );
 		$dados = $dados[0];
 	} else {
-		$dados = pegaDados ( "SELECT id_ws,nome_ws from ".$esquemaadmin."i3geoadmin_ws order by lower (nome_ws)", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_ws,nome_ws from ".$esquemaadmin."i3geoadmin_ws order by lower (nome_ws)", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;
@@ -26,7 +26,7 @@ function adicionar($autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 			"nacessos" => 0,
 			"nacessosok" => 0
 		);
-		$id_ws = i3GeoAdminInsertUnico($dbhw,"i3geoadmin_ws",$dataCol,"nome_ws","id_ws");
+		$id_ws = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_ws",$dataCol,"nome_ws","id_ws");
 		$retorna = \admin\cadastros\servicos\alterar ( $id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw );
 
 		return $retorna;
@@ -48,7 +48,7 @@ function alterar($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 			"autor_ws" => $autor_ws,
 			"tipo_ws" => $tipo_ws
 	);
-	$resultado = i3GeoAdminUpdate ( $dbhw, "i3geoadmin_ws", $dataCol, "WHERE id_ws = $id_ws" );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_ws", $dataCol, "WHERE id_ws = $id_ws" );
 	if ($resultado === false) {
 		return false;
 	}
@@ -56,7 +56,7 @@ function alterar($id_ws,$autor_ws,$desc_ws,$link_ws,$nome_ws,$tipo_ws,$dbhw) {
 }
 function excluir($id_ws, $dbhw) {
 	global $esquemaadmin;
-	$resultado = i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_ws", "id_ws", $id_ws, $dbhw, false );
+	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_ws", "id_ws", $id_ws, $dbhw, false );
 	if ($resultado === false) {
 		return false;
 	}

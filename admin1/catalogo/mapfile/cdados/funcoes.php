@@ -15,7 +15,7 @@ function listar($locaplic,$codigo){
 	$dados = array ();
 	$dados["escala"] = $layer->getmetadata("escala");
 	$dados["extensao"] = $layer->getmetadata("extensao");
-	$versao = versao();
+	$versao = \admin\php\funcoesAdmin\versao();
 	$versao = $versao["principal"];
 	if($versao >= 7){
 		$dados["encoding"] = $layer->encoding;
@@ -38,7 +38,7 @@ function alterar($locaplic, $id_tema, $codigo, $escala, $extensao, $encoding) {
 	}
 	$layer->setmetadata ( "escala", $escala );
 	$layer->setmetadata ( "extensao", str_replace(","," ",$extensao) );
-	$versao = versao();
+	$versao = \admin\php\funcoesAdmin\versao();
 	$versao = $versao["principal"];
 	if($versao >= 7){
 		$layer->set("encoding",$encoding);

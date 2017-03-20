@@ -1,50 +1,41 @@
 <?php
+/****************************************************************/
+include (dirname ( __FILE__ ) . "/../../../../../ms_configura.php");
 //
-//executa as operacoes para os temas na reiz de um menu
+//checa login
+//valida _GET e _POST, juntando em _GET
+//pega algumas variaveis de uso mais comum
+//session_start
 //
-/*
- * Licenca:
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Edmar Moretti
- * Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
- * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
- * GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
- * por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
- * de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
- * Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
- * Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a
- * Free Software Foundation, Inc., no endere&ccedil;o
- * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
-error_reporting ( 0 );
+include ($locaplic."/admin1/php/checaLogin.php");
+//funcoes de administracao
+include ($locaplic."/admin1/php/funcoesAdmin.php");
 //
-// pega as variaveis passadas com get ou post
+//carrega outras funcoes e extensoes do PHP
 //
-
-include_once (dirname ( __FILE__ ) . "/../../../../../admin/php/login.php");
-if (verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
+include ($locaplic."/classesphp/carrega_ext.php");
+//
+//carrega as funcoes locais
+//depende de funcoesAdmin.php
+//
+include ("funcoes.php");
+//
+//conexao com o banco de administracao
+//cria as variaveis $dbh e $dbhw alem de conexaoadmin
+//
+include ($locaplic."/admin1/php/conexao.php");
+/***************************************************************/
+if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-
-include (dirname ( __FILE__ ) . "/../../../../../admin/php/conexao.php");
-include ("funcoes.php");
 
 $id_n1 = $_POST["id_n1"];
 $id_menu = $_POST["id_menu"];
 $id_tema = $_POST["id_tema"];
 $id_raiz = $_POST["id_raiz"];
 
-testaSafeNumerico([$id_n1,$id_menu,$id_tema,$id_raiz]);
+\admin\php\funcoesAdmin\testaSafeNumerico([$id_n1,$id_menu,$id_tema,$id_raiz]);
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
@@ -56,7 +47,7 @@ switch ($funcao) {
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao ordenar" );
 		}
-		retornaJSON ( $dados );
+		\admin\php\funcoesAdmin\retornaJSON ( $dados );
 		break;
 	case "LISTAUNICO" :
 		$dados = \admin\catalogo\menus\grupos\subgrupos\raiz\listar ($dbh,$id_raiz);
@@ -65,7 +56,7 @@ switch ($funcao) {
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
-			retornaJSON ( array("dados"=>$dados) );
+			\admin\php\funcoesAdmin\retornaJSON ( array("dados"=>$dados) );
 		}
 		break;
 	case "ADICIONAR" :
