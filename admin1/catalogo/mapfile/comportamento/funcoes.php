@@ -71,8 +71,7 @@ function alterar($locaplic, $id_tema, $codigo, $aplicaextensao, $permitecomentar
 	$layer->set("status",$status);
 	try {
 		$mapa->save ( $arq );
-		include (dirname ( __FILE__ ) . "/../../../php/removeCabecalhoMapfile.php");
-		removeCabecalhoMapfile ( $arq );
+		\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $arq );
 		return true;
 	} catch (Exception $e) {
 		return false;

@@ -97,8 +97,7 @@ function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $aces
 			return false;
 		}
 		$mapa->save ( $arq );
-		include (dirname ( __FILE__ ) . "/../../php/removeCabecalhoMapfile.php");
-		removeCabecalhoMapfile ( $arq );
+		\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $arq );
 		return true;
 	} catch ( PDOException $e ) {
 		return false;
@@ -524,8 +523,7 @@ function clonarMapfile($codigo,$novocodigo,$titulo,$dbh,$dbhw){
 	$layer->set("name",$novocodigo);
 	$layer->setmetadata("TEMA",$titulo);
 	$mapa->save($arqnovo);
-	include(dirname(__FILE__)."/../../php/removeCabecalhoMapfile.php");
-	removeCabecalhoMapfile($arqnovo);
+	\admin\php\funcoesAdmin\removeCabecalhoMapfile($arqnovo);
 	if (count ( $dados ) > 0) {
 		//registra no banco de dados caso nao tenha ocorrido erro ao criar o mapfile
 		\admin\php\funcoesAdmin\i3GeoAdminInsert ( $dbhw, "i3geoadmin_temas", $dataCol );

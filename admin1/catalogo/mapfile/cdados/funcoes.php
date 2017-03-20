@@ -45,8 +45,7 @@ function alterar($locaplic, $id_tema, $codigo, $escala, $extensao, $encoding) {
 	}
 	try {
 		$mapa->save ( $arq );
-		include (dirname ( __FILE__ ) . "/../../../php/removeCabecalhoMapfile.php");
-		removeCabecalhoMapfile ( $arq );
+		\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $arq );
 		return true;
 	} catch (Exception $e) {
 		return false;
@@ -59,8 +58,8 @@ function calculaExtensao($locaplic, $id_tema, $codigo){
 		return false;
 	}
 	$mapa = ms_newMapObj ( $arq );
-	include (dirname ( __FILE__ ) . "/../../../php/substituiConObj.php");
-	substituiConObj($mapa,$postgis_mapa);
+
+	\admin\php\funcoesAdmin\substituiConObj($mapa,$postgis_mapa);
 	$extatual = $mapa->extent;
 	$extatual->setextent(-180,-90,180,90);
 	$layer = @$mapa->getlayerbyname ( $codigo );
@@ -75,8 +74,7 @@ function calculaExtensao($locaplic, $id_tema, $codigo){
 	}
 	try {
 		$mapa->save ( $arq );
-		include (dirname ( __FILE__ ) . "/../../../php/removeCabecalhoMapfile.php");
-		removeCabecalhoMapfile ( $arq );
+		\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $arq );
 		return $ret;
 	} catch (Exception $e) {
 		return false;

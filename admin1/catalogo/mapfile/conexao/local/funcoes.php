@@ -127,8 +127,7 @@ function alterar($locaplic,$codigo,$connection,$connectiontype,$data,$tileindex,
 
 	try {
 		$mapa->save ( $arq );
-		include (dirname ( __FILE__ ) . "/../../../../php/removeCabecalhoMapfile.php");
-		removeCabecalhoMapfile ( $arq );
+		\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $arq );
 		return true;
 	} catch ( Exception $e ) {
 		return false;
