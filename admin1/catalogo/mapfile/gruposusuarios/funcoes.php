@@ -82,7 +82,7 @@ function excluir($id_tema, $id_grupo, $dbhw) {
 
 function listaUsuarios($dbh){
 	global $esquemaadmin;
-	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_usuario, nome_usuario FROM " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 ORDER BY nome_usuario", dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_usuario, nome_usuario FROM " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 ORDER BY nome_usuario", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		exit ();
@@ -92,7 +92,7 @@ function listaUsuarios($dbh){
 }
 function listaGruposUsuario($id_grupo,$dbh){
 	global $esquemaadmin;
-	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT U.nome_usuario, U.id_usuario, UP.id_grupo FROM " . $esquemaadmin . "i3geousr_grupousuario AS UP JOIN " . $esquemaadmin . "i3geousr_usuarios AS U ON U.id_usuario = UP.id_usuario WHERE UP.id_grupo = $id_grupo", dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT U.nome_usuario, U.id_usuario, UP.id_grupo FROM " . $esquemaadmin . "i3geousr_grupousuario AS UP JOIN " . $esquemaadmin . "i3geousr_usuarios AS U ON U.id_usuario = UP.id_usuario WHERE UP.id_grupo = $id_grupo", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		exit ();

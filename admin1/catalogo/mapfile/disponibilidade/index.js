@@ -47,8 +47,8 @@ i3GEOadmin.disponibilidade = {
 													"onSalvar": "i3GEOadmin.disponibilidade.salvar",
 													"download": function(){
 														var hash = {
-																"sim": i3GEOadmin.comportamento.dicionario.sim,
-																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"sim": i3GEOadmin.disponibilidade.dicionario.sim,
+																"nao": i3GEOadmin.disponibilidade.dicionario.nao,
 																"NAO-sel" : "",
 																"SIM-sel": ""
 															};
@@ -60,8 +60,8 @@ i3GEOadmin.disponibilidade = {
 													},
 													"permitedownload": function(){
 														var hash = {
-																"sim": i3GEOadmin.comportamento.dicionario.sim,
-																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"sim": i3GEOadmin.disponibilidade.dicionario.sim,
+																"nao": i3GEOadmin.disponibilidade.dicionario.nao,
 																"NAO-sel" : "",
 																"SIM-sel": ""
 															};
@@ -73,8 +73,8 @@ i3GEOadmin.disponibilidade = {
 													},
 													"permiteogc": function(){
 														var hash = {
-																"sim": i3GEOadmin.comportamento.dicionario.sim,
-																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"sim": i3GEOadmin.disponibilidade.dicionario.sim,
+																"nao": i3GEOadmin.disponibilidade.dicionario.nao,
 																"NAO-sel" : "",
 																"SIM-sel": ""
 															};
@@ -86,8 +86,8 @@ i3GEOadmin.disponibilidade = {
 													},
 													"permitekml": function(){
 														var hash = {
-																"sim": i3GEOadmin.comportamento.dicionario.sim,
-																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"sim": i3GEOadmin.disponibilidade.dicionario.sim,
+																"nao": i3GEOadmin.disponibilidade.dicionario.nao,
 																"NAO-sel" : "",
 																"SIM-sel": ""
 															};
@@ -99,8 +99,8 @@ i3GEOadmin.disponibilidade = {
 													},
 													"permitekmz": function(){
 														var hash = {
-																"sim": i3GEOadmin.comportamento.dicionario.sim,
-																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"sim": i3GEOadmin.disponibilidade.dicionario.sim,
+																"nao": i3GEOadmin.disponibilidade.dicionario.nao,
 																"NAO-sel" : "",
 																"SIM-sel": ""
 															};

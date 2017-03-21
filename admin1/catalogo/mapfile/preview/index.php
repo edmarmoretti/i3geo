@@ -50,7 +50,7 @@ $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
 //
 //cria o web service
 //
-error_reporting(0);
+error_reporting (E_ALL);
 $versao = \admin\php\funcoesAdmin\versao();
 $versao = $versao["principal"];
 

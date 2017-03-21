@@ -200,6 +200,7 @@ function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublic
 }
 function listar($dbh, $filtro = "", $palavra = "", $validar = "") {
 	global $convUTF, $locaplic, $esquemaadmin;
+
 	$arquivosTemp = array ();
 	if (is_dir ( $locaplic . "/temas" )) {
 		if ($dh = opendir ( $locaplic . "/temas" )) {
@@ -240,18 +241,21 @@ function listar($dbh, $filtro = "", $palavra = "", $validar = "") {
 		$dadosBanco [$reg ["id_tema"]] = $reg;
 	}
 	$lista = array ();
+
 	foreach ( $arquivos as $arq ) {
+
 		$arq = $arq ["nome"];
 		$nT = explode ( ".", $arq );
-		$n = $nomes [$nT [0]];
-		if (! $n) {
-			$n = "";
+		$n = "";
+		if(isset($nomes [$nT [0]])){
+			$n = $nomes [$nT [0]];
 		}
-		$id = $ids [$nT [0]];
 		// o mapfile nao esta registrado no banco
-		if (! $id && empty ( $validar )) {
-			$id = "";
-		} else {
+		$id = "";
+		if(isset($ids [$nT [0]])){
+			$id = $ids [$nT [0]];
+		}
+		if($id != "") {
 			// aplica as validacoes. Se nao passar na validacao $id ficara vazio, para nao mostrar no resultado final
 			switch ($validar) {
 				case 1 :

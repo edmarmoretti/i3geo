@@ -75,13 +75,15 @@ switch ($funcao) {
 	case "LISTA" :
 		$dados = \admin\catalogo\menus\grupos\subgrupos\temas\listar($dbh, $id_n2);
 		$temas = \admin\catalogo\menus\grupos\subgrupos\temas\todosTemas($dbh);
-		$dbhw = null;
-		$dbh = null;
 		if ($dados === false) {
+			$dbhw = null;
+			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
 			include ("../../../../../cadastros/perfis/funcoes.php");
 			$perfis = \admin\cadastros\perfis\listar( $dbh );
+			$dbhw = null;
+			$dbh = null;
 			\admin\php\funcoesAdmin\retornaJSON(array(
 					"dados" => $dados,
 					"perfis" => $perfis,

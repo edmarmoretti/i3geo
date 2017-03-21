@@ -8,7 +8,7 @@ include "index.php";
 				<div class="col-md-12">
 					<div class="well">
 					<?php
-					error_reporting(0);
+					error_reporting (E_ALL);
 					//
 					//carrega o phpmapscript
 					//
@@ -46,7 +46,7 @@ include "index.php";
 						if (ob_get_level() == 0){
 							ob_start();
 						}
-						error_reporting(0);
+						error_reporting (E_ALL);
 						$arqs = listaArquivos("../../../temas",true,array("map","gvp"));
 						$arqs = $arqs["arquivos"];
 						sort($arqs);

@@ -35,7 +35,6 @@ $codigo = str_replace ( " ", "", \admin\php\funcoesAdmin\removeAcentos ( $codigo
 $codigo = str_replace ( ".", "", $codigo );
 $codigo = strip_tags ( $codigo );
 $codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
-
 $id_tema = ( int ) $_POST ["id_tema"];
 
 $funcao = strtoupper ( $funcao );

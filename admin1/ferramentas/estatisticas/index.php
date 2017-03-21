@@ -48,7 +48,7 @@ include "../../head.php";
 			$nacessosmaiorquecem = count(\admin\php\funcoesAdmin\pegaDados($sql." 100"));
 
 			$temasacessos = array();
-			error_reporting(0);
+			error_reporting (E_ALL);
 			foreach($temasvalidos as $tema){
 				$ncodigostemas[$tema["codigo_tema"]]++;
 				$nnomestemas[$tema["nome_tema"]]++;

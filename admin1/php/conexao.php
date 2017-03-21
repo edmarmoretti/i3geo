@@ -1,5 +1,4 @@
 <?php
-
 if(empty($locaplic)){
 	echo "locaplic nao definido em conexao.php";
 	exit;

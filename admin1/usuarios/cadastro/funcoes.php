@@ -26,7 +26,7 @@ function listaPapeis($dbh){
 }
 function listaPapeisUsuario($id_usuario,$dbh){
 	global $esquemaadmin;
-	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM " . $esquemaadmin . "i3geousr_papelusuario AS UP JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON UP.id_papel = P.id_papel WHERE UP.id_usuario = $id_usuario ", dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM " . $esquemaadmin . "i3geousr_papelusuario AS UP JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON UP.id_papel = P.id_papel WHERE UP.id_usuario = $id_usuario ", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		exit ();

@@ -14,8 +14,7 @@ i3GEOadmin.atlas.dicionario = {
     'txtAjudaAtlas' : [ {
 		pt : "<p>O cadastro de Atlas &eacute; utilizado na interface 'Atlas' do i3geo. Essa interface pode ser vista em http://localhost/i3geo/atlas<p>Cada Atlas possu&iacute; uma lista de pranchas e cada prancha uma lista de temas e outros par&acirc;metros.<p>A montagem de cada Atlas &eacute; feito definindo-se os par&acirc;metros de cada n&iacute;vel hier&aacute;rquico, editando-se uma &aacute;rvore cuja raiz &eacute; cada Atlas, seguido pelas pranchas e temas.<p>Para cada Atlas e cada prancha pode ser definido um texto explicativo que ser&aacute; aberto ao iniciar o Atlas ou a prancha.",
 		en : "",
-		es : "<p>El registro del Atlas es utilizado en la interfaz 'Atlas' de i3Geo. Esta interfaz puede ser vista en http://localhost/i3geo/atlas<p>Cada Atlas posee pesta&ntilde;as, cada pesta&ntilde;a posee una lista de temas y otros par&aacute;metros.<p> 
-El montaje de cada Atlas se realiza estableciendo los par&aacute;metros de cada nivel jer&aacute;rquico, editando un &aacute;rbol cuya ra&iacute;z es cada Atlas, seguido por las pesta&ntilde;as y temas.<p>Para cada Atlas y cada pesta&ntilde;a se puede definir un texto explicativo que puede ser abierto al iniciar el Atlas o la pesta&ntilde;a."
+		es : "<p>El registro del Atlas es utilizado en la interfaz 'Atlas' de i3Geo. Esta interfaz puede ser vista en http://localhost/i3geo/atlas<p>Cada Atlas posee pesta&ntilde;as, cada pesta&ntilde;a posee una lista de temas y otros par&aacute;metros.<p> El montaje de cada Atlas se realiza estableciendo los par&aacute;metros de cada nivel jer&aacute;rquico, editando un &aacute;rbol cuya ra&iacute;z es cada Atlas, seguido por las pesta&ntilde;as y temas.<p>Para cada Atlas y cada pesta&ntilde;a se puede definir un texto explicativo que puede ser abierto al iniciar el Atlas o la pesta&ntilde;a."
 	} ],
     'criaAtlas' : [ {
 		pt : "Criar um novo atlas",

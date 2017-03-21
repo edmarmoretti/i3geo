@@ -16,7 +16,7 @@ function listar($dbh, $id_operacao = ""){
 }
 function listaPapeis($dbh){
 	global $esquemaadmin;
-	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		exit ();
