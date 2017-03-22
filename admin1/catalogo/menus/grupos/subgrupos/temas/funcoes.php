@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\menus\grupos\subgrupos\temas;
 function todosTemas($dbh){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados("select id_tema,desc_tema,nome_tema,codigo_tema  from ".$esquemaadmin."i3geoadmin_temas order by lower(nome_tema) ", $dbh, false);
 	if ($dados === false) {
 		return false;
@@ -10,7 +10,7 @@ function todosTemas($dbh){
 	}
 }
 function listar($dbh, $id_n2 = "", $id_n3 = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_n3 != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_n3 LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_n3.id_tema = i3geoadmin_temas.id_tema where id_n3 = '$id_n3'", $dbh, false);
 		$dados = $dados[0];
@@ -24,7 +24,7 @@ function listar($dbh, $id_n2 = "", $id_n3 = ""){
 	}
 }
 function adicionar( $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"id_n2" => $id_n2,
@@ -41,7 +41,7 @@ function adicionar( $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw) {
 }
 // $papeis deve ser um array
 function alterar($id_n3, $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dataCol = array(
 			"publicado" => $publicado,
 			"id_tema" => $id_tema,
@@ -55,7 +55,7 @@ function alterar($id_n3, $id_tema, $id_n2, $publicado, $n3_perfil, $ordem, $dbhw
 	return $id_n3;
 }
 function excluir($id_n3, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_n3", "id_n3", $id_n3, $dbhw, false );
 	if ($resultado === false) {
 		return false;
@@ -63,7 +63,7 @@ function excluir($id_n3, $dbhw) {
 	return $resultado;
 }
 function ordenar($id_n2, $ordem, $dbhw){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	//verifica se existe a mesma quantidade de registros no banco e na lista de ids
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n3 WHERE id_n2 = $id_n2", $dbhw, false );
 	if(count($dados) != count($ordem)){

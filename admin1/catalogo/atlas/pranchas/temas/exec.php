@@ -7,13 +7,13 @@ include (dirname ( __FILE__ ) . "/../../../../../ms_configura.php");
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-include ($locaplic."/admin1/php/checaLogin.php");
+include ("../../../../php/checaLogin.php");
 //funcoes de administracao
-include ($locaplic."/admin1/php/funcoesAdmin.php");
+include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
 //carrega outras funcoes e extensoes do PHP
 //
-include ($locaplic."/classesphp/carrega_ext.php");
+include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
 //
 //carrega as funcoes locais
 //depende de funcoesAdmin.php
@@ -23,7 +23,7 @@ include ("funcoes.php");
 //conexao com o banco de administracao
 //cria as variaveis $dbh e $dbhw alem de conexaoadmin
 //
-include ($locaplic."/admin1/php/conexao.php");
+include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/atlas" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
@@ -62,7 +62,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de temas de uma prancha" );
 		} else {
 			include("../../../../../admin/php/classe_arvore.php");
-			$arvore = new Arvore($locaplic);
+			$arvore = new Arvore($_SESSION["locaplic"]);
 			$temas = $arvore->pegaTodosTemas(true);
 			\admin\php\funcoesAdmin\retornaJSON ( array("dados"=>$dados, "temas"=>$temas) );
 		}
@@ -77,7 +77,7 @@ switch ($funcao) {
 		} else {
 			//pega a lista de temas
 			include("../../../../../admin/php/classe_arvore.php");
-			$arvore = new Arvore($locaplic);
+			$arvore = new Arvore($_SESSION["locaplic"]);
 			$temas = $arvore->pegaTodosTemas(true);
 			\admin\php\funcoesAdmin\retornaJSON ( array("dados"=>$dados, "temas"=>$temas) );
 		}

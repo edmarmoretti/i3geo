@@ -1,16 +1,10 @@
 <?php
-if(empty($locaplic)){
+if(empty($_SESSION["locaplic"])){
 	echo "locaplic nao definido em conexao.php";
 	exit;
 }
 if(!isset($conexaoadmin)){
 	$conexaoadmin = "";
-}
-if(!isset($esquemaadmin)){
-	$esquemaadmin = "";
-}
-if($esquemaadmin != ""){
-	$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 }
 if(!isset($logTransacoes)){
 	$logTransacoes = false;
@@ -20,7 +14,7 @@ if(!isset($logTransacoes)){
 //
 $convUTF = true;
 if($conexaoadmin == ""){
-	$arquivosqlite = $locaplic."/admin/admin.db";
+	$arquivosqlite = $_SESSION["locaplic"]."/admin/admin.db";
 	chmod($arquivosqlite,0774);
 	//echo $arquivosqlite;exit;
 	if(!file_exists($arquivosqlite)){
@@ -55,4 +49,6 @@ if($conexaoadmin == ""){
 else {
 	include($conexaoadmin);
 }
+$_SESSION["convUTF"] = $convUTF;
+unset ($convUTF);
 ?>

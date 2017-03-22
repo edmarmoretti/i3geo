@@ -1,7 +1,8 @@
 <?php
 namespace admin\catalogo\mapfile\editor;
 function textoMapfile($codigo) {
-	global $locaplic, $dbhw;
+	global $dbhw;
+	$locaplic = $_SESSION["locaplic"];
 	$mapfile = $locaplic . "/temas/" . $codigo . ".map";
 	if (! file_exists ( $mapfile )) {
 		return "Arquivo $codigo n&atilde;o existe.";
@@ -58,7 +59,9 @@ function textoMapfile($codigo) {
 	}
 }
 function salvaMapfile() {
-	global $locaplic, $dbhw, $codigo, $gravarTexto, $esquemaadmin;
+	global $dbhw, $codigo, $gravarTexto;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
+	$locaplic = $_SESSION["locaplic"];
 	if (empty ( $gravarTexto )) {
 		return;
 	}

@@ -1,8 +1,7 @@
 <?php
-error_reporting ( 0 );
-if(empty($locaplic)){
-	exit;
-}
+error_reporting ( E_ALL );
+error_log("checaLogin teste",0);
+
 // para nao ocorrer tentativa de uso direto
 if (basename ( __FILE__ ) == basename ( $_SERVER ['SCRIPT_FILENAME'] )) {
 	exit ();
@@ -83,6 +82,10 @@ session_name ( "i3GeoLogin" );
 if (! empty ( $_COOKIE ["i3geocodigologin"] )) {
 	session_id ( $_COOKIE ["i3geocodigologin"] );
 	session_start ();
+	if(empty($_SESSION["locaplic"])){
+		header ( "HTTP/1.1 403 Locaplic nao definido na sessao" );
+		exit;
+	}
 	//verifica tambem se o usuario entrou pela pagina de administracao principal
 	if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"] || $_SESSION ["initOk"] != true ) {
 		$_COOKIE = array ();

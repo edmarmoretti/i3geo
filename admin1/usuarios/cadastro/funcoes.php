@@ -1,7 +1,7 @@
 <?php
 namespace admin\usuarios\cadastro;
 function listar($dbh, $id_usuario = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_usuario != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_usuario,ativo,data_cadastro,email,login,nome_usuario from " . $esquemaadmin . "i3geousr_usuarios WHERE id_usuario = $id_usuario order by nome_usuario", $dbh, false );
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_usuario = ""){
 	}
 }
 function listaPapeis($dbh){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", $dbh );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -25,7 +25,7 @@ function listaPapeis($dbh){
 	}
 }
 function listaPapeisUsuario($id_usuario,$dbh){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT P.id_papel, P.nome, P.descricao, UP.id_usuario FROM " . $esquemaadmin . "i3geousr_papelusuario AS UP JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON UP.id_papel = P.id_papel WHERE UP.id_usuario = $id_usuario ", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -42,7 +42,7 @@ function enviarSenha( $senha, $email ){
 }
 // $papeis deve ser um array
 function adicionar($ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 			"nome_usuario" => '',
@@ -62,7 +62,8 @@ function adicionar($ativo, $data_cadastro, $email, $login, $nome_usuario, $senha
 }
 // $papeis deve ser um array
 function alterar($id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true) {
 		$nome_usuario = utf8_decode ( $nome_usuario );
 	}
@@ -98,7 +99,7 @@ function alterar($id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usua
 	return $id_usuario;
 }
 function adicionaPapel($id_usuario, $id_papel, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dataCol = array (
 			"id_usuario" => $id_usuario,
 			"id_papel" => $id_papel
@@ -107,13 +108,13 @@ function adicionaPapel($id_usuario, $id_papel, $dbhw) {
 	return $resultado;
 }
 function excluir($id_usuario, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geousr_usuarios", "id_usuario", $id_usuario, $dbhw, false );
 	$resultado = \admin\usuarios\cadastro\excluirPapeis ( $id_usuario, $dbhw );
 	return $resultado;
 }
 function excluirPapeis($id_usuario, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geousr_papelusuario", "id_usuario", $id_usuario, $dbhw, false );
 	return $resultado;
 }

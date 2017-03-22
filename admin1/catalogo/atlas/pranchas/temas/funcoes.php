@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\atlas\pranchas\temas;
 function listar($dbh, $id_prancha = "", $id_tema = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_tema != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT id_tema, ordem_tema, codigo_tema, ligado_tema from ".$esquemaadmin."i3geoadmin_atlast WHERE id_tema = '$id_tema'", $dbh, false);
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_prancha = "", $id_tema = ""){
 	}
 }
 function adicionar( $id_prancha, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw ) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"ordem_tema"=>0,
@@ -32,7 +32,7 @@ function adicionar( $id_prancha, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw 
 }
 // $papeis deve ser um array
 function alterar($id_tema, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	//caso a atualizacao ocorra apos insert
 	$dataCol = array(
 			"ordem_tema"=>$ordem_tema,
@@ -54,7 +54,7 @@ function alterar($id_tema, $ordem_tema, $ligado_tema, $codigo_tema, $dbhw) {
 	return $id_tema;
 }
 function excluir($id_tema, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_atlast", "id_tema", $id_tema, $dbhw, false );
 	if ($resultado === false) {
 		return false;

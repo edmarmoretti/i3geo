@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\atlas;
 function listar($dbh, $id_atlas = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_atlas != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT id_atlas, titulo_atlas, publicado_atlas, ordem_atlas, basemapfile_atlas, desc_atlas, h_atlas, w_atlas, icone_atlas,  link_atlas, pranchadefault_atlas, template_atlas, tipoguias_atlas from ".$esquemaadmin."i3geoadmin_atlas WHERE id_atlas = $id_atlas", $dbh, false);
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_atlas = ""){
 	}
 }
 function adicionar( $titulo_atlas, $publicado_atlas, $ordem_atlas, $basemapfile_atlas, $desc_atlas, $h_atlas, $w_atlas, $icone_atlas, $link_atlas, $pranchadefault_atlas, $template_atlas, $tipoguias_atlas, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"publicado_atlas"=>'',
@@ -40,7 +40,8 @@ function adicionar( $titulo_atlas, $publicado_atlas, $ordem_atlas, $basemapfile_
 }
 // $papeis deve ser um array
 function alterar($id_atlas, $titulo_atlas, $publicado_atlas, $ordem_atlas, $basemapfile_atlas, $desc_atlas, $h_atlas, $w_atlas, $icone_atlas, $link_atlas, $pranchadefault_atlas, $template_atlas, $tipoguias_atlas, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true){
 		$desc_atlas = utf8_decode($desc_atlas);
 		$titulo_atlas = utf8_decode($titulo_atlas);
@@ -66,7 +67,7 @@ function alterar($id_atlas, $titulo_atlas, $publicado_atlas, $ordem_atlas, $base
 	return $id_atlas;
 }
 function excluir($id_atlas, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	include (dirname(__FILE__)."/pranchas/funcoes.php");
 	$pranchas = \admin\catalogo\atlas\pranchas\listar($dbhw,$id_atlas);
 	if(count($pranchas) > 0){

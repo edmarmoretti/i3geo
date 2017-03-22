@@ -1,19 +1,19 @@
 <?php
 /****************************************************************/
-include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
+//include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
 //
 //checa login
 //valida _GET e _POST, juntando em _GET
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-include ($locaplic."/admin1/php/checaLogin.php");
+include ("../../../php/checaLogin.php");
 //funcoes de administracao
-include ($locaplic."/admin1/php/funcoesAdmin.php");
+include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
 //carrega outras funcoes e extensoes do PHP
 //
-include ($locaplic."/classesphp/carrega_ext.php");
+include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
 //
 //carrega as funcoes locais
 //depende de funcoesAdmin.php
@@ -23,7 +23,7 @@ include ("funcoes.php");
 //conexao com o banco de administracao
 //cria as variaveis $dbh e $dbhw alem de conexaoadmin
 //
-include ($locaplic."/admin1/php/conexao.php");
+include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
@@ -44,7 +44,7 @@ $id_tema = $_POST["id_tema"];
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = \admin\catalogo\mapfile\gruposusuarios\adicionar( $locaplic, $codigo, $id_grupo, $id_tema, $dbhw );
+		$novo = \admin\catalogo\mapfile\gruposusuarios\adicionar( $_SESSION["locaplic"], $codigo, $id_grupo, $id_tema, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($novo === false) {
@@ -52,7 +52,7 @@ switch ($funcao) {
 		}
 		break;
 	case "LISTA" :
-		$dados = \admin\catalogo\mapfile\gruposusuarios\listar ($dbh,$locaplic,$codigo);
+		$dados = \admin\catalogo\mapfile\gruposusuarios\listar ($dbh,$_SESSION["locaplic"],$codigo);
 		include ("../../../usuarios/grupos/funcoes.php");
 		$grupos = \admin\usuarios\grupos\listar($dbh);
 		$dbhw = null;

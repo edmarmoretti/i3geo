@@ -7,13 +7,13 @@ include (dirname ( __FILE__ ) . "/../../../../../ms_configura.php");
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-include ($locaplic."/admin1/php/checaLogin.php");
+include ("../../../../php/checaLogin.php");
 //funcoes de administracao
-include ($locaplic."/admin1/php/funcoesAdmin.php");
+include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
 //carrega outras funcoes e extensoes do PHP
 //
-include ($locaplic."/classesphp/carrega_ext.php");
+include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
 //
 //carrega as funcoes locais
 //depende de funcoesAdmin.php
@@ -23,7 +23,7 @@ include ("funcoes.php");
 //conexao com o banco de administracao
 //cria as variaveis $dbh e $dbhw alem de conexaoadmin
 //
-include ($locaplic."/admin1/php/conexao.php");
+include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
@@ -41,13 +41,13 @@ $id_tema = ( int ) $_POST ["id_tema"];
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ALTERAR" :
-		$dados = \admin\catalogo\mapfile\conexao\local\alterar ($locaplic,$codigo,$_POST["connection"],$_POST["connectiontype"],$_POST["data"],$_POST["tileindex"],$_POST["tileitem"],$_POST["type"],$_POST["projection"],$_POST["convcaracter"],$_POST["metaestat"],$_POST["metaestat_id_medida_variavel"],$dbhw);
+		$dados = \admin\catalogo\mapfile\conexao\local\alterar ($_SESSION["locaplic"],$codigo,$_POST["connection"],$_POST["connectiontype"],$_POST["data"],$_POST["tileindex"],$_POST["tileitem"],$_POST["type"],$_POST["projection"],$_POST["convcaracter"],$_POST["metaestat"],$_POST["metaestat_id_medida_variavel"],$dbhw);
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao definir as propriedades" );
 		}
 		break;
 	case "LISTA" :
-		$dados = \admin\catalogo\mapfile\conexao\local\listar ($locaplic,$codigo);
+		$dados = \admin\catalogo\mapfile\conexao\local\listar ($_SESSION["locaplic"],$codigo);
 		\admin\php\funcoesAdmin\retornaJSON ( array (
 			"dados" => $dados
 		) );

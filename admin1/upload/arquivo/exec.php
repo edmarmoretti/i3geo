@@ -10,7 +10,7 @@ if (isset ( $_GET ["tipo"] )) {
 	$tipo = $_GET ["tipo"];
 }
 // locaplic e usado para definir a pasta de destino
-if (empty ( $locaplic )) {
+if (empty ( $_SESSION["locaplic"] )) {
 	exit ();
 }
 error_reporting ( 0 );
@@ -33,7 +33,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		echo "Pasta n&atilde;o encontrada";
 		exit ();
 	}
-	$checaDestino = dirname ( $locaplic );
+	$checaDestino = dirname ( $_SESSION["locaplic"] );
 	$dirDestino = str_replace ( $checaDestino, "", $dirDestino );
 	$dirDestino = $checaDestino . "/" . $dirDestino;
 
@@ -46,7 +46,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	flush ();
 	sleep ( 1 );
 	$dirmap = $dirDestino;
-	if (! file_exists ( $dirmap ) || $dirmap == dirname ( $locaplic ) || $dirmap == dirname ( $locaplic )."/") {
+	if (! file_exists ( $dirmap ) || $dirmap == dirname ( $_SESSION["locaplic"] ) || $dirmap == dirname ( $_SESSION["locaplic"] )."/") {
 		echo "<p class='paragrafo' >Pasta n&atilde;o existe no servidor ou o local n&atilde;o &eacute; permitido";
 		exit ();
 	}
@@ -166,7 +166,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		$funcao = "CRIARNOVOMAP";
 		$output = "retorno";
 		$data = $dirmap . "/" . $nomePrefixo . ".shp";
-		include_once ($locaplic . "/admin/php/editormapfile.php");
+		include_once ($_SESSION["locaplic"] . "/admin/php/editormapfile.php");
 		echo "<b><p class='paragrafo' >Criado!!!<br>";
 		echo "Para editar clique: <a href='../../admin/html/editormapfile.html' target=_blank >editar</a>";
 		echo "<script>window.scrollTo(0,10000);i3GEO.util.insereCookie('I3GEOletraAdmin','" . $nomePrefixo . "');</script>";

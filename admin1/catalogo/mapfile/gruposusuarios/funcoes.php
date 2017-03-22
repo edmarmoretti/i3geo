@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\mapfile\gruposusuarios;
 function listar($dbh,$locaplic,$codigo){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if(empty($codigo)){
 		$dbhw = null;
 		$dbh = null;
@@ -35,7 +35,7 @@ function listar($dbh,$locaplic,$codigo){
 	}
 }
 function adicionar($locaplic,$codigo,$id_grupo, $id_tema, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if(!file_exists($locaplic."/temas/".$codigo.".map")){
 		$dbhw = null;
 		$dbh = null;
@@ -66,7 +66,7 @@ function adicionar($locaplic,$codigo,$id_grupo, $id_tema, $dbhw) {
 	}
 }
 function excluir($id_tema, $id_grupo, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$sql = "DELETE from ".$esquemaadmin."i3geousr_grupotema where id_tema = ? and id_grupo = ? ";
 		$prep = $dbhw->prepare($sql);
@@ -81,7 +81,7 @@ function excluir($id_tema, $id_grupo, $dbhw) {
 //apagar
 
 function listaUsuarios($dbh){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_usuario, nome_usuario FROM " . $esquemaadmin . "i3geousr_usuarios WHERE ativo = 1 ORDER BY nome_usuario", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -91,7 +91,7 @@ function listaUsuarios($dbh){
 	}
 }
 function listaGruposUsuario($id_grupo,$dbh){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT U.nome_usuario, U.id_usuario, UP.id_grupo FROM " . $esquemaadmin . "i3geousr_grupousuario AS UP JOIN " . $esquemaadmin . "i3geousr_usuarios AS U ON U.id_usuario = UP.id_usuario WHERE UP.id_grupo = $id_grupo", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -102,7 +102,8 @@ function listaGruposUsuario($id_grupo,$dbh){
 }
 
 function alterar($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true) {
 		$nome = utf8_decode ( $nome );
 		$descricao = utf8_decode ( $descricao );
@@ -133,7 +134,7 @@ function alterar($id_grupo, $nome, $descricao, $usuarios, $dbhw) {
 	return $id_grupo;
 }
 function adicionaUsuario($id_grupo, $id_usuario, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dataCol = array (
 			"id_usuario" => $id_usuario,
 			"id_grupo" => $id_grupo
@@ -143,7 +144,7 @@ function adicionaUsuario($id_grupo, $id_usuario, $dbhw) {
 }
 
 function excluirUsuarios($id_grupo, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geousr_grupousuario", "id_grupo", $id_grupo, $dbhw, false );
 	return $resultado;
 }

@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\menus\grupos {
 	function listar($dbh, $id_menu = "", $id_n1){
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		if($id_n1 != ""){
 			$dados = \admin\php\funcoesAdmin\pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_n1 LEFT JOIN ".$esquemaadmin."i3geoadmin_grupos ON i3geoadmin_n1.id_grupo = i3geoadmin_grupos.id_grupo where id_n1 = $id_n1", $dbh, false);
 			$dados = $dados[0];
@@ -15,7 +15,7 @@ namespace admin\catalogo\menus\grupos {
 		}
 	}
 	function ordenar($id_menu, $ordem, $dbhw){
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_n1 WHERE id_menu = $id_menu", $dbhw, false );
 		if(count($dados) != count($ordem)){
 			header ( "HTTP/1.1 500 erro numero de registros nao batem" );
@@ -31,7 +31,7 @@ namespace admin\catalogo\menus\grupos {
 		return $resultado;
 	}
 	function adicionar( $id_grupo, $id_menu, $publicado, $n1_perfil, $ordem, $dbhw) {
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		try {
 			$dataCol = array(
 					"id_menu" => $id_menu,
@@ -47,7 +47,7 @@ namespace admin\catalogo\menus\grupos {
 		}
 	}
 	function alterar($id_n1, $id_grupo, $id_menu, $publicado, $n1_perfil, $ordem, $dbhw) {
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		$dataCol = array(
 				"publicado" => $publicado,
 				"id_grupo" => $id_grupo,
@@ -61,7 +61,7 @@ namespace admin\catalogo\menus\grupos {
 		return $id_n1;
 	}
 	function excluir($id_n1, $dbhw) {
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		$r = \admin\php\funcoesAdmin\pegaDados("SELECT id_n2 from ".$esquemaadmin."i3geoadmin_n2 where id_n1 ='$id_n1'");
 		if(count($r) > 0){
 			header ( "HTTP/1.1 500 erro ao excluir. Exclua os subgrupos primeiro" );
@@ -81,7 +81,7 @@ namespace admin\catalogo\menus\grupos {
 }
 namespace admin\catalogo\menus\grupos\raiz {
 	function listar($dbh, $id_raiz = "", $id_menu = ""){
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		if($id_raiz != ""){
 			$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_raiz, id_tema, ordem, perfil from ".$esquemaadmin."i3geoadmin_raiz WHERE id_raiz = $id_raiz ", $dbh, false );
 			$dados = $dados[0];
@@ -95,7 +95,7 @@ namespace admin\catalogo\menus\grupos\raiz {
 		}
 	}
 	function ordenar($id_menu, $ordem, $dbhw){
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT ordem from ".$esquemaadmin."i3geoadmin_raiz WHERE nivel = 0 AND id_menu = $id_menu", $dbhw, false );
 		if(count($dados) != count($ordem)){
 			header ( "HTTP/1.1 500 erro numero de registros nao batem" );
@@ -111,7 +111,7 @@ namespace admin\catalogo\menus\grupos\raiz {
 		return $resultado;
 	}
 	function adicionar($id_menu, $id_tema, $ordem, $perfil, $dbhw) {
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		try {
 			$dataCol = array (
 					"id_menu" => $id_menu,
@@ -130,7 +130,7 @@ namespace admin\catalogo\menus\grupos\raiz {
 		}
 	}
 	function alterar($id_raiz, $id_tema, $ordem, $perfil, $dbhw) {
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		$dataCol = array(
 				"id_tema" => $id_tema,
 				"perfil" => $perfil,
@@ -144,7 +144,7 @@ namespace admin\catalogo\menus\grupos\raiz {
 		return $id_raiz;
 	}
 	function excluir($id_raiz, $dbhw) {
-		global $esquemaadmin;
+		$esquemaadmin = $_SESSION["esquemaadmin"];
 		$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_raiz", "id_raiz", $id_raiz, $dbhw, false );
 		if ($resultado === false) {
 			return false;

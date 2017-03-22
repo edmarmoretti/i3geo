@@ -1,7 +1,7 @@
 <?php
 namespace admin\cadastros\sistemas;
 function listar($dbh, $id_sistema = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_sistema != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemas WHERE id_sistema = $id_sistema", $dbh, false);
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_sistema = ""){
 	}
 }
 function adicionar( $publicado_sistema,$nome_sistema,$perfil_sistema, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"publicado_sistema" => '',
@@ -32,7 +32,8 @@ function adicionar( $publicado_sistema,$nome_sistema,$perfil_sistema, $dbhw) {
 }
 // $papeis deve ser um array
 function alterar($id_sistema,$publicado_sistema,$nome_sistema,$perfil_sistema, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true){
 		$nome_sistema = utf8_decode($nome_sistema);
 	}
@@ -48,7 +49,7 @@ function alterar($id_sistema,$publicado_sistema,$nome_sistema,$perfil_sistema, $
 	return $id_sistema;
 }
 function excluir($id_sistema, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	include (dirname(__FILE__)."/funcoes/funcoes.php");
 	$funcoes = \admin\cadastros\sistemas\funcoes\listar ( $dbhw, $id_sistema );
 	if(count($funcoes) > 0){

@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\menus\grupos\subgrupos\listadesubgrupos;
 function listar($dbh, $id_subgrupo = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_subgrupo != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_subgrupos WHERE id_subgrupo = $id_subgrupo", $dbh, false );
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_subgrupo = ""){
 	}
 }
 function adicionar($nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"nome_subgrupo" => $nome_subgrupo,
@@ -33,7 +33,8 @@ function adicionar($nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw) {
 	}
 }
 function alterar($id_subgrupo, $nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true){
 		$nome_subgrupo = utf8_decode($nome_subgrupo);
 		$desc_subgrupo = utf8_decode($desc_subgrupo);
@@ -54,7 +55,7 @@ function alterar($id_subgrupo, $nome_subgrupo, $desc_subgrupo, $en, $es, $dbhw) 
 	return $id_subgrupo;
 }
 function excluir($id_subgrupo, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_n2 WHERE id_subgrupo = $id_subgrupo", $dbhw, false );
 	if(count($dados) > 0){
 		header ( "HTTP/1.1 500 erro ao excluir. Subgrupo em uso" );

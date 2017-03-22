@@ -1,7 +1,7 @@
 <?php
 namespace admin\usuarios\operacoes;
 function listar($dbh, $id_operacao = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_operacao != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_operacao,codigo,descricao from " . $esquemaadmin . "i3geousr_operacoes where id_operacao = $id_operacao order by codigo", $dbh, false );
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_operacao = ""){
 	}
 }
 function listaPapeis($dbh){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_papeis order by nome", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -25,7 +25,7 @@ function listaPapeis($dbh){
 	}
 }
 function listaPapeisOperacao($dbh,$id_operacao){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT P.id_papel, P.nome, P.descricao,OP.id_operacao FROM " . $esquemaadmin . "i3geousr_operacoespapeis  AS OP JOIN " . $esquemaadmin . "i3geousr_papeis AS P ON OP.id_papel = P.id_papel WHERE OP.id_operacao = $id_operacao ", $dbh, false );
 	if ($dados === false) {
 		header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
@@ -35,7 +35,7 @@ function listaPapeisOperacao($dbh,$id_operacao){
 	}
 }
 function adicionar($codigo,$descricao,$papeis,$dbhw){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try{
 		$dataCol = array(
 				"descricao" => ''
@@ -50,7 +50,8 @@ function adicionar($codigo,$descricao,$papeis,$dbhw){
 }
 //$papeis deve ser um array
 function alterar($id_operacao,$codigo,$descricao,$papeis,$dbhw){
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true){
 		$descricao = utf8_decode($descricao);
 	}
@@ -79,7 +80,7 @@ function alterar($id_operacao,$codigo,$descricao,$papeis,$dbhw){
 	return $id_operacao;
 }
 function adicionaPapel($id_operacao,$id_papel,$dbhw){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dataCol = array(
 			"id_operacao" => $id_operacao,
 			"id_papel" => $id_papel
@@ -88,7 +89,7 @@ function adicionaPapel($id_operacao,$id_papel,$dbhw){
 	return $resultado;
 }
 function excluir($id_operacao,$dbhw){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui($esquemaadmin."i3geousr_operacoes","id_operacao",$id_operacao,$dbhw,false);
 	if($resultado === false){
 		return false;
@@ -99,7 +100,7 @@ function excluir($id_operacao,$dbhw){
 	return $resultado;
 }
 function excluirPapeis($id_operacao,$dbhw){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui($esquemaadmin."i3geousr_operacoespapeis","id_operacao",$id_operacao,$dbhw,false);
 	return $resultado;
 }

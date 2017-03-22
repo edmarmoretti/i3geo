@@ -1,19 +1,19 @@
 <?php
 /****************************************************************/
-include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
+//include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
 //
 //checa login
 //valida _GET e _POST, juntando em _GET
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-include ($locaplic."/admin1/php/checaLogin.php");
+include ("../../../php/checaLogin.php");
 //funcoes de administracao
-include ($locaplic."/admin1/php/funcoesAdmin.php");
+include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
 //carrega outras funcoes e extensoes do PHP
 //
-include ($locaplic."/classesphp/carrega_ext.php");
+include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
 //
 //carrega as funcoes locais
 //depende de funcoesAdmin.php
@@ -23,7 +23,7 @@ include ("funcoes.php");
 //conexao com o banco de administracao
 //cria as variaveis $dbh e $dbhw alem de conexaoadmin
 //
-include ($locaplic."/admin1/php/conexao.php");
+include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
@@ -35,7 +35,7 @@ if(empty($codigo)){
 	header ( "HTTP/1.1 500 erro parametro invalido" );
 	exit ();
 }
-$tema = $locaplic."/temas/".$codigo.".map";
+$tema = $_SESSION["locaplic"]."/temas/".$codigo.".map";
 if(!file_exists($tema)){
 	header ( "HTTP/1.1 500 erro mapfile nao encontrado" );
 	exit ();
@@ -64,7 +64,7 @@ function mapaBase($locaplic,$versao,$base){
 	if($base == "" || !isset($base)){
 		$base = "";
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-			$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+			$base = $_SESSION["locaplic"]."/aplicmap/geral1windowsv".$versao.".map";
 		}
 		else{
 			if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
@@ -77,15 +77,17 @@ function mapaBase($locaplic,$versao,$base){
 				$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 			}
 			if($base == ""){
-				$base = $locaplic."/aplicmap/geral1v".$versao.".map";
+				$base = $_SESSION["locaplic"]."/aplicmap/geral1v".$versao.".map";
 			}
 		}
 	}
 	return $base;
 }
 function testaTabela($tema){
-	global $locaplic,$postgis_mapa,$versao,$base,$dir_tmp,$tempo;
-
+	global $versao,$base,$tempo;
+	$dir_tmp = $_SESSION["dir_tmp"];
+	$postgis_mapa = $_SESSION["postgis_mapa"];
+	$locaplic = $_SESSION["locaplic"];
 	$base = mapaBase($locaplic,$versao,$base);
 
 	$mapa = ms_newMapObj($base);
@@ -120,7 +122,7 @@ function testaTabela($tema){
 	}
 
 	zoomTema($pegarext,$mapa);
-	include_once($locaplic."/classesphp/classe_atributos.php");
+	include_once($_SESSION["locaplic"]."/classesphp/classe_atributos.php");
 
 	$t = new Atributos($mapa,$layern->name);
 
@@ -168,9 +170,11 @@ function testaTabela($tema){
 	return $tab;
 }
 function testaMapaImg($tema){
-	global $locaplic,$postgis_mapa,$versao,$base,$dir_tmp,$tempo;
-
-	$base = mapaBase($locaplic,$versao,$base);
+	global $versao,$base,$tempo;
+	$dir_tmp = $_SESSION["dir_tmp"];
+	$postgis_mapa = $_SESSION["postgis_mapa"];
+	$locaplic = $_SESSION["locaplic"];
+	$base = mapaBase($_SESSION["locaplic"],$versao,$base);
 	$mapa = ms_newMapObj($base);
 	error_reporting (E_ALL);
 	ms_ResetErrorList();

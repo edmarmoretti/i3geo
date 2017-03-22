@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\mapas;
 function listar($dbh, $id_mapa = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_mapa != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_mapa, publicado_mapa, ordem_mapa, perfil_mapa, ligados_mapa, temas_mapa, desc_mapa, ext_mapa, imagem_mapa, linkdireto_mapa, nome_mapa, outros_mapa, 'nao' as contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas where id_mapa = $id_mapa AND mapfile = '' or mapfile is null ", $dbh, false );
 		if(count($dados) == 0){
@@ -18,7 +18,7 @@ function listar($dbh, $id_mapa = ""){
 	}
 }
 function adicionar($publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array (
 				"publicado_mapa" => '',
@@ -43,7 +43,8 @@ function adicionar($publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $t
 }
 // $papeis deve ser um array
 function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_mapa, $temas_mapa, $desc_mapa, $ext_mapa, $imagem_mapa, $linkdireto_mapa, $nome_mapa, $outros_mapa, $mapfile, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true) {
 		$nome_mapa = utf8_decode ( $nome_mapa );
 		$desc_mapa = utf8_decode ( $desc_mapa );
@@ -78,7 +79,7 @@ function alterar($id_mapa, $publicado_mapa, $ordem_mapa, $perfil_mapa, $ligados_
 	return $id_mapa;
 }
 function excluir($id_mapa, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_mapas", "id_mapa", $id_mapa, $dbhw, false );
 	if ($resultado === false) {
 		return false;

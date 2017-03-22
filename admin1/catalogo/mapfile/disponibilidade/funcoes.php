@@ -40,7 +40,7 @@ function listar($locaplic,$codigo){
 	return $dados;
 }
 function alterar($locaplic, $id_tema, $codigo, $permiteogc, $permitedownload, $permitekml, $permitekmz, $download, $arquivodownload, $arquivokmz, $dbhw){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if ($codigo == "" || ! file_exists ( $arq )) {
 		header ( "HTTP/1.1 400 arquivo nao existe" );

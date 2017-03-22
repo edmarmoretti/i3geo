@@ -1,6 +1,13 @@
 <?php
-error_reporting ( 0 );
-include_once (dirname ( __FILE__ ) . "/../../../../admin/php/login.php");
+include ("../../../php/checaLogin.php");
+$locaplic = $_SESSION["locaplic"];
+//funcoes de administracao
+include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
+//
+//carrega outras funcoes e extensoes do PHP
+//
+include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
+
 if(\admin\php\funcoesAdmin\verificaOperacaoSessao("admin/php/editortexto") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
 }

@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\menus\grupos\listadegrupos;
 function listar($dbh, $id_grupo = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_grupo != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_grupos WHERE id_grupo = $id_grupo", $dbh, false );
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_grupo = ""){
 	}
 }
 function adicionar($nome_grupo, $desc_grupo, $en, $es, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"nome_grupo" => $nome_grupo,
@@ -32,7 +32,8 @@ function adicionar($nome_grupo, $desc_grupo, $en, $es, $dbhw) {
 	}
 }
 function alterar($id_grupo, $nome_grupo, $desc_grupo, $en, $es, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true){
 		$nome_grupo = utf8_decode($nome_grupo);
 		$desc_grupo = utf8_decode($desc_grupo);
@@ -53,7 +54,7 @@ function alterar($id_grupo, $nome_grupo, $desc_grupo, $en, $es, $dbhw) {
 	return $id_grupo;
 }
 function excluir($id_grupo, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_n WHERE id_grupo = $id_grupo", $dbhw, false );
 	if(count($dados) > 0){
 		header ( "HTTP/1.1 500 erro ao excluir. Grupo em uso" );

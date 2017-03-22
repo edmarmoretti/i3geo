@@ -1,19 +1,19 @@
 <?php
 /****************************************************************/
-include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
+//include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 //
 //checa login
 //valida _GET e _POST, juntando em _GET
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-include ($locaplic."/admin1/php/checaLogin.php");
+include ("../../php/checaLogin.php");
 //funcoes de administracao
-include ($locaplic."/admin1/php/funcoesAdmin.php");
+include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
 //carrega outras funcoes e extensoes do PHP
 //
-include ($locaplic."/classesphp/carrega_ext.php");
+include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
 //
 //carrega as funcoes locais
 //depende de funcoesAdmin.php
@@ -23,7 +23,7 @@ include ("funcoes.php");
 //conexao com o banco de administracao
 //cria as variaveis $dbh e $dbhw alem de conexaoadmin
 //
-include ($locaplic."/admin1/php/conexao.php");
+include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editormapfile" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
@@ -41,7 +41,7 @@ switch ($funcao) {
 		if(empty($_POST["titulolegenda"])){
 			$_POST["titulolegenda"] = $_POST ["nome_tema"];
 		}
-		$novo = \admin\catalogo\mapfile\adicionar ( $locaplic, $_POST["titulolegenda"], $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["nome_tema"], $_POST ["desc_tema"], $_POST ["en"], $_POST ["es"], true, $dbhw );
+		$novo = \admin\catalogo\mapfile\adicionar ( $_SESSION["locaplic"], $_POST["titulolegenda"], $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["nome_tema"], $_POST ["desc_tema"], $_POST ["en"], $_POST ["es"], true, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($novo === false) {
@@ -58,7 +58,7 @@ switch ($funcao) {
 			$_POST["titulolegenda"] = $_POST ["nome_tema"];
 		}
 		//quando e feita a listagem unica, o mapfile ja foi registrado no banco se nao tinha sido antes
-		$novo = \admin\catalogo\mapfile\alterar ( $locaplic, $_POST["id_tema"], $_POST["titulolegenda"], $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["nome_tema"], $_POST ["desc_tema"], $_POST ["en"], $_POST ["es"], true, $dbhw );
+		$novo = \admin\catalogo\mapfile\alterar ( $_SESSION["locaplic"], $_POST["id_tema"], $_POST["titulolegenda"], $_POST ["link_tema"], $codigo, $_POST ["acessopublico"], $_POST ["metaestat"], $_POST ["nome_tema"], $_POST ["desc_tema"], $_POST ["en"], $_POST ["es"], true, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($novo === false) {
@@ -98,7 +98,7 @@ switch ($funcao) {
 		}
 		break;
 	case "LIMPACACHE" :
-		$retorna = \admin\catalogo\mapfile\limpaCache($locaplic, $codigo, $cachedir, $dir_tmp);
+		$retorna = \admin\catalogo\mapfile\limpaCache($_SESSION["locaplic"], $codigo, $cachedir, $dir_tmp);
 		\admin\php\funcoesAdmin\retornaJSON ( "ok" );
 		break;
 	case "CLONARMAPFILE" :

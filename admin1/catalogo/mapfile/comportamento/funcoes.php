@@ -48,7 +48,8 @@ function listar($locaplic,$codigo){
 	return $dados;
 }
 function alterar($locaplic, $id_tema, $codigo, $aplicaextensao, $permitecomentario, $temporizador, $escondido, $transitioneffect, $status, $iconetema, $mensagem){
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
 		return false;

@@ -2,28 +2,48 @@
 // TODO botoes de copiar, colar, limpar
 // TODO editor de cores
 //
+
+/****************************************************************/
+//include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
+//
+//checa login
+//valida _GET e _POST, juntando em _GET
+//pega algumas variaveis de uso mais comum
+//session_start
+//
+include ("../../../php/checaLogin.php");
+//funcoes de administracao
+include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
+//
+//carrega outras funcoes e extensoes do PHP
+//
+include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
+//
+//carrega as funcoes locais
+//depende de funcoesAdmin.php
+//
+include ("funcoes.php");
+//
+//conexao com o banco de administracao
+//cria as variaveis $dbh e $dbhw alem de conexaoadmin
+//
+include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
+/***************************************************************/
 define ( "ONDEI3GEO", "../../../.." );
-include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
-error_reporting ( 0 );
 include "../../../head.php";
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
 $id_tema = ( int ) $_GET ["id_tema"];
-include_once (dirname ( __FILE__ ) . "/../../../../admin/php/login.php");
-include_once (dirname ( __FILE__ ) . "/../../../../admin/php/conexao.php");
-error_reporting ( 0 );
 if (isset ( $_POST ["texto"] )) {
 	$gravarTexto = $_POST ["texto"];
 	$_POST ["texto"] = "";
 }
-$versao = \admin\php\funcoesAdmin\versao ();
-$versao = $versao ["principal"];
 
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editortexto" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-error_reporting ( 0 );
-include("funcoes.php");
+$versao = \admin\php\funcoesAdmin\versao ();
+$versao = $versao ["principal"];
 \admin\catalogo\mapfile\editor\salvaMapfile ();
 $textoMapfile = \admin\catalogo\mapfile\editor\textoMapfile ( $codigo );
 ?>
@@ -140,7 +160,7 @@ $(document).ready(function(){
 		var protocolo = window.location.href;
 		protocolo = protocolo.split(":")[0];
 
-		i3GEOadmin.editor.servidorPreview = protocolo + "://" + window.location.host + "/<?php echo basename($locaplic); ?>/admin1/catalogo/mapfile/preview/index.php";
+		i3GEOadmin.editor.servidorPreview = protocolo + "://" + window.location.host + "/<?php echo basename($_SESSION["locaplic"]); ?>/admin1/catalogo/mapfile/preview/index.php";
 
 	});
 </script>

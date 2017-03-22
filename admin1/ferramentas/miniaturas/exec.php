@@ -53,15 +53,15 @@ include "index.php";
 						foreach ($arqs as $arq){
 							$arq = str_replace(" ","xxxx",$arq);
 							$temp = explode(".",$arq);
-							if(file_exists($locaplic.'/temas/'.$arq) && $temp[(count($temp) - 1)] == "map" && !(strpos($temp[0],"_") === 0) ){
+							if(file_exists($_SESSION["locaplic"].'/temas/'.$arq) && $temp[(count($temp) - 1)] == "map" && !(strpos($temp[0],"_") === 0) ){
 								echo "<div 'class=well'><h4>$arq</h4>";
 								if($tipo == "mini" || $tipo == "todos"){
-									if(!file_exists($locaplic.'/temas/miniaturas/'.$arq.'.mini.png')){
+									if(!file_exists($_SESSION["locaplic"].'/temas/miniaturas/'.$arq.'.mini.png')){
 										verificaMiniatura($arq,"mini");
 									}
 								}
 								if($tipo == "grande"  || $tipo == "todos"){
-									if(!file_exists($locaplic.'/temas/miniaturas/'.$arq.'.grande.png')){
+									if(!file_exists($_SESSION["locaplic"].'/temas/miniaturas/'.$arq.'.grande.png')){
 										verificaMiniatura($arq,"grande");
 									}
 								}
@@ -87,7 +87,9 @@ include "index.php";
 //
 function verificaMiniatura($map,$tipo,$admin=false)
 {
-	global $locaplic,$versao,$base,$postgis_mapa;
+	global $versao,$base;
+	$postgis_mapa = $_SESSION["postgis_mapa"];
+	$locaplic = $_SESSION["locaplic"];
 	if($versao == ""){
 		$versao = \admin\php\funcoesAdmin\versao();
 		$versao = $versao["principal"];
@@ -97,21 +99,21 @@ function verificaMiniatura($map,$tipo,$admin=false)
 	$map = str_replace("\\","/",$map);
 	$map = basename($map);
 	$extensao = ".map";
-	if (file_exists($locaplic.'/temas/'.$map)){
-		$tema = $locaplic.'/temas/'.$map;
+	if (file_exists($_SESSION["locaplic"].'/temas/'.$map)){
+		$tema = $_SESSION["locaplic"].'/temas/'.$map;
 	}
 	else{
-		if (file_exists($locaplic.'/temas/'.$map.'.gvp')){
+		if (file_exists($_SESSION["locaplic"].'/temas/'.$map.'.gvp')){
 			$extensao = ".gvp";
 		}
-		$tema = $locaplic.'/temas/'.$map.$extensao;
+		$tema = $_SESSION["locaplic"].'/temas/'.$map.$extensao;
 	}
 	if ($tema != ""){
 		if(isset($base) && $base != ""){
 			if(file_exists($base))
 			{$f = $base;}
 			else
-			{$f = $locaplic."/aplicmap/".$base.".map";}
+			{$f = $_SESSION["locaplic"]."/aplicmap/".$base.".map";}
 			if(!file_exists($base)){
 				echo "<div class='alert alert-danger'>ARQUIVO $base N&Acirc;O FOI ENCONTRADO. CORRIJA ISSO EM ms_configura.php";
 				exit;
@@ -120,7 +122,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 		else{
 			$f = "";
 			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-				$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
+				$f = $_SESSION["locaplic"]."/aplicmap/geral1windowsv".$versao.".map";
 			}
 			else{
 				if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
@@ -133,7 +135,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 					$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
 				}
 				if($f == ""){
-					$f = $locaplic."/aplicmap/geral1v".$versao.".map";
+					$f = $_SESSION["locaplic"]."/aplicmap/geral1v".$versao.".map";
 				}
 			}
 		}
@@ -153,7 +155,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				$layern->set("status",MS_DEFAULT);
 				cloneInlineSymbol($layern,$nmapa,$mapa);
 				ms_newLayerObj($mapa, $layern);
-				autoClasses($layern,$mapa,$locaplic);
+				autoClasses($layern,$mapa,$_SESSION["locaplic"]);
 				if ($layern->data == ""){
 					$dados = $layern->connection;
 				}
@@ -186,7 +188,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 			zoomTemaMiniatura($pegarext,$mapa);
 		}
 		if($extensao == ".gvp"){
-			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
+			include_once($_SESSION["locaplic"]."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
 			$gm = new gvsig2mapfile($tema);
 			$gvsigview = $gm->getViewsNames();
 			foreach($gvsigview as $v){
@@ -261,7 +263,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 		//copia a imagem
 		//
 		if($admin === true){
-			$dir = $locaplic."/temas/miniaturas";
+			$dir = $_SESSION["locaplic"]."/temas/miniaturas";
 			$mini = $dir."/".$map.".map.mini.png";
 			$grande = $dir."/".$map.".map.grande.png";
 			if(file_exists($mini))

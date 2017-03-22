@@ -1,20 +1,20 @@
 <?php
 error_reporting ( 0 );
 /****************************************************************/
-include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
+//include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 //
 //checa login
 //valida _GET e _POST, juntando em _GET
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-include ($locaplic."/admin1/php/checaLogin.php");
+include ("../../php/checaLogin.php");
 //funcoes de administracao
-include ($locaplic."/admin1/php/funcoesAdmin.php");
+include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
 //carrega outras funcoes e extensoes do PHP
 //
-include ($locaplic."/classesphp/carrega_ext.php");
+include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
 //
 //carrega as funcoes locais
 //depende de funcoesAdmin.php
@@ -24,7 +24,7 @@ include ("funcoes.php");
 //conexao com o banco de administracao
 //cria as variaveis $dbh e $dbhw alem de conexaoadmin
 //
-include ($locaplic."/admin1/php/conexao.php");
+include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
 
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/sistemas" ) === false) {

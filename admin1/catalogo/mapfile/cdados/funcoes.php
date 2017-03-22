@@ -52,7 +52,7 @@ function alterar($locaplic, $id_tema, $codigo, $escala, $extensao, $encoding) {
 	}
 }
 function calculaExtensao($locaplic, $id_tema, $codigo){
-	global $postgis_mapa;
+	$postgis_mapa = $_SESSION["postgis_mapa"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
 		return false;

@@ -1,7 +1,7 @@
 <?php
 namespace admin\cadastros\tags;
 function listar($dbh, $id_tag = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_tag != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = $id_tag ", $dbh, false );
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_tag = ""){
 	}
 }
 function adicionar($nome, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"nome" => ''
@@ -29,7 +29,8 @@ function adicionar($nome, $dbhw) {
 }
 // $papeis deve ser um array
 function alterar($id_tag, $nome, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true){
 		$nome = utf8_decode($nome);
 	}
@@ -43,7 +44,7 @@ function alterar($id_tag, $nome, $dbhw) {
 	return $id_tag;
 }
 function excluir($id_tag, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_tags", "id_tag", $id_tag, $dbhw, false );
 	if ($resultado === false) {
 		return false;

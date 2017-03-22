@@ -2,7 +2,7 @@
 namespace admin\cadastros\sistemas\funcoes;
 
 function listar($dbh, $id_sistema, $id_funcao = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_funcao != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados("SELECT * from ".$esquemaadmin."i3geoadmin_sistemasf WHERE id_funcao = '$id_funcao'", $dbh, false);
 		$dados = $dados[0];
@@ -16,7 +16,7 @@ function listar($dbh, $id_sistema, $id_funcao = ""){
 	}
 }
 function adicionar( $id_sistema,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$perfil_funcao, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"nome_funcao" => '',
@@ -36,7 +36,8 @@ function adicionar( $id_sistema,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$
 }
 // $papeis deve ser um array
 function alterar($id_funcao,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$perfil_funcao, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true){
 		$nome_funcao = utf8_decode($nome_funcao);
 	}
@@ -54,7 +55,7 @@ function alterar($id_funcao,$nome_funcao,$abrir_funcao,$h_funcao,$w_funcao,$perf
 	return $id_funcao;
 }
 function excluir($id_funcao, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_sistemasf", "id_funcao", $id_funcao, $dbhw, false );
 	if ($resultado === false) {
 		return false;

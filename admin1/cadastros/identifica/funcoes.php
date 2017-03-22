@@ -1,7 +1,7 @@
 <?php
 namespace admin\cadastros\identifica;
 function listar($dbh, $id_i = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_i != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_i, publicado_i, abrir_i, nome_i, target_i from ".$esquemaadmin."i3geoadmin_identifica WHERE id_i = $id_i", $dbh, false );
 		$dados = $dados[0];
@@ -15,7 +15,7 @@ function listar($dbh, $id_i = ""){
 	}
 }
 function adicionar($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"publicado_i" => '',
@@ -31,7 +31,8 @@ function adicionar($publicado_i, $abrir_i, $nome_i, $target_i,$dbhw) {
 	}
 }
 function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true){
 		$nome_i = utf8_decode($nome_i);
 	}
@@ -48,7 +49,7 @@ function alterar($id_i, $publicado_i, $abrir_i, $nome_i, $target_i, $dbhw) {
 	return $id_i;
 }
 function excluir($id_i, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminExclui ( $esquemaadmin . "i3geoadmin_identifica", "id_i", $id_i, $dbhw, false );
 	if ($resultado === false) {
 		return false;

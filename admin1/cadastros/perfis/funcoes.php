@@ -1,7 +1,7 @@
 <?php
 namespace admin\cadastros\perfis;
 function listar($dbh, $id_perfil = ""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_perfil != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_perfil, perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
 		$dados = $dados[0];
@@ -16,7 +16,7 @@ function listar($dbh, $id_perfil = ""){
 }
 
 function adicionar($perfil, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
 				"perfil" => ''
@@ -29,7 +29,8 @@ function adicionar($perfil, $dbhw) {
 	}
 }
 function alterar($id_perfil, $perfil,$dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	//pega o nome conforme o ID
 	$original = \admin\php\funcoesAdmin\pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
 	$original = $original[0]["perfil"];
@@ -145,7 +146,7 @@ function alterar($id_perfil, $perfil,$dbhw) {
 	return $id_perfil;
 }
 function excluir($id_perfil, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	//pega o nome conforme o ID
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT perfil from ".$esquemaadmin."i3geoadmin_perfis WHERE id_perfil = $id_perfil", $dbh, false );
 	$perfil = $dados[0]["perfil"];

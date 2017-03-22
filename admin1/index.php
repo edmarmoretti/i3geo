@@ -17,7 +17,27 @@ if (! empty ( $_COOKIE ["i3geocodigologin"] )) {
 	}
 }
 define ( "ONDEI3GEO", ".." );
+//
+//inclui na session as variaveis obtidas do ms_configura.php
+//
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
+$_SESSION["locaplic"] = $locaplic;
+unset ($locaplic);
+//
+//define a variavel que armazena o esquema do banco de administracao
+//
+$_SESSION["esquemaadmin"] = "";
+if($esquemaadmin != ""){
+	$_SESSION["esquemaadmin"] = str_replace(".","",$esquemaadmin).".";
+}
+unset ($esquemaadmin);
+$_SESSION["postgis_mapa"] = $postgis_mapa;
+unset($postgis_mapa);
+$_SESSION["logTransacoes"] = $logTransacoes;
+unset($logTransacoes);
+$_SESSION["dir_tmp"] = $dir_tmp;
+unset($dir_tmp);
+
 error_reporting ( 0 );
 include "head.php";
 ?>

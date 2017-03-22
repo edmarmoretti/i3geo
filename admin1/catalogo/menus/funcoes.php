@@ -3,7 +3,7 @@
 namespace admin\catalogo\menus;
 
 function listar($dbh, $id_menu = "") {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($id_menu != "") {
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_menu, publicado_menu, perfil_menu, aberto, desc_menu, nome_menu, es, en from ".$esquemaadmin."i3geoadmin_menus WHERE id_menu = $id_menu ", $dbh, false );
 		$dados = $dados [0];
@@ -17,7 +17,7 @@ function listar($dbh, $id_menu = "") {
 	}
 }
 function adicionar($publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array (
 				"en" => "",
@@ -38,7 +38,8 @@ function adicionar($publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_men
 }
 // $papeis deve ser um array
 function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $nome_menu, $es, $en, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($convUTF != true) {
 		$nome_menu = utf8_decode ( $nome_menu );
 		$desc_menu = utf8_decode ( $desc_menu );
@@ -64,7 +65,7 @@ function alterar($id_menu, $publicado_menu, $perfil_menu, $aberto, $desc_menu, $
 	return $id_menu;
 }
 function excluir($id_menu, $dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$r = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geoadmin_n1 where id_menu=$id_menu");
 	if(count($r) > 0){
 		header ( "HTTP/1.1 500 erro ao excluir. Exclua os grupos primeiro" );

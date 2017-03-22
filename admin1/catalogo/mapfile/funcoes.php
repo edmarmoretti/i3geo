@@ -2,7 +2,8 @@
 namespace admin\catalogo\mapfile;
 
 function excluir($codigo, $dbhw) {
-	global $locaplic, $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
+	$locaplic = $_SESSION["locaplic"];
 	// pega o id do tema
 	// se o mapfile nao estiver registrado, $id sera vazio
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_tema from " . $esquemaadmin . "i3geoadmin_temas WHERE codigo_tema = '" . $codigo . "'", $dbhw, false );
@@ -40,7 +41,8 @@ function excluir($codigo, $dbhw) {
 	return true;
 }
 function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if ($codigo == "" || ! file_exists ( $arq )) {
 		header ( "HTTP/1.1 400 arquivo nao existe" );
@@ -104,7 +106,8 @@ function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $aces
 	}
 }
 function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
-	global $convUTF, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if ($codigo == "" || file_exists ( $arq )) {
 		header ( "HTTP/1.1 400 arquivo ja existe" );
 		exit ();
@@ -199,8 +202,9 @@ function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublic
 	}
 }
 function listar($dbh, $filtro = "", $palavra = "", $validar = "") {
-	global $convUTF, $locaplic, $esquemaadmin;
-
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
+	$locaplic = $_SESSION["locaplic"];
 	$arquivosTemp = array ();
 	if (is_dir ( $locaplic . "/temas" )) {
 		if ($dh = opendir ( $locaplic . "/temas" )) {
@@ -389,7 +393,9 @@ function listar($dbh, $filtro = "", $palavra = "", $validar = "") {
 	return $lista;
 }
 function listaUnico($dbh, $codigo) {
-	global $convUTF, $locaplic, $esquemaadmin;
+	$convUTF = $_SESSION["convUTF"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
+	$locaplic = $_SESSION["locaplic"];
 	if(!file_exists($locaplic."/temas/".$codigo.".map")){
 		header ( "HTTP/1.1 500 erro mapfile nao existe" );
 		exit ();
@@ -486,7 +492,7 @@ function limpaCache($locaplic, $codigo, $cachedir, $dir_tmp){
 	}
 }
 function clonarMapfile($codigo,$novocodigo,$titulo,$dbh,$dbhw){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	$arqnovo = $locaplic . "/temas/" . $novocodigo . ".map";
 

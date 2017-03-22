@@ -49,7 +49,7 @@ function listar($locaplic, $codigo) {
 	return $dados;
 }
 function alterar($locaplic,$codigo,$connection,$connectiontype,$data,$tileindex,$tileitem,$type,$projection,$convcaracter,$metaestat,$metaestat_id_medida_variavel,$dbhw) {
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if ($codigo == "" || ! file_exists ( $arq )) {
 		header ( "HTTP/1.1 400 arquivo nao existe" );

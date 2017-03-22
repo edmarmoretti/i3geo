@@ -80,7 +80,7 @@ Imprime na saida a string JSON
 */
 function retornaJSON($obj)
 {
-	global $locaplic;
+	$locaplic = $_SESSION["locaplic"];
 	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
 	error_reporting (E_ALL);
 	ob_end_clean();
@@ -215,7 +215,7 @@ function pegaDados($sql,$dbh="",$close=true)
  * @return boolean
  */
 function i3GeoAdminUpdate($pdo,$tabela,$data,$filtro=""){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$keys = array_keys($data);
 	$sset = array();
 	foreach($keys as $k){
@@ -246,7 +246,7 @@ function i3GeoAdminUpdate($pdo,$tabela,$data,$filtro=""){
  * @return boolean
  */
 function i3GeoAdminInsert($pdo,$tabela,$data){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$keys = array_keys($data);
 	$fields = implode(",",$keys);
 	$placeholder = str_repeat("?,",count($keys));
@@ -278,7 +278,7 @@ function i3GeoAdminInsert($pdo,$tabela,$data){
  * @return string
  */
 function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$idtemp = (rand (9000,10000)) * -1;
 	$data[$colTemp] = $idtemp;
@@ -311,7 +311,7 @@ function i3GeoAdminInsertUnico($pdo,$tabela,$data,$colTemp,$colId){
 //o array $ordem contem a lista de ids na ordem desejada
 //
 function i3GeoAdminOrdena($pdo,$ordem,$tabela,$colunaid){
-	global $esquemaadmin;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 	$arr = array();
 	$n = count($ordem) + 1;
@@ -345,7 +345,8 @@ function i3GeoAdminOrdena($pdo,$ordem,$tabela,$colunaid){
 //$logTransacoes vem do ms_configura.php
 //ver tambem classe_metaestat.php
 function i3GeoAdminInsertLog($pdo,$sql,$data=array()){
-	global $esquemaadmin, $logTransacoes;
+	$logTransacoes = $_SESSION["logTransacoes"];
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($logTransacoes == "" || $logTransacoes !== true){
 		return;
 	}
@@ -396,7 +397,8 @@ Retorno:
 */
 function verificaFilhos()
 {
-	global $tabela,$id,$esquemaadmin;
+	global $tabela,$id;
+	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try
 	{
 		$res = false;
@@ -611,51 +613,12 @@ senha {string}
 i3geomaster {array} - vari&aacute;vel existente no ms_configura.php com o cadastro de usu&aacute;rios masters
 */
 function verificaMaster($usuario,$senha,$i3geomaster){
-	global $i3geomaster;
 	foreach($i3geomaster as $teste){
 		if(!empty($usuario) && !empty($senha) && $teste["usuario"] == $usuario && $teste["senha"] == $senha){
 			return true;
 		}
 	}
 	return false;
-}
-function mapfilebase($base,$locaplic){
-	$versao = \admin\php\funcoesAdmin\versao();
-	$versao = $versao["principal"];
-	if(isset($base) && $base != ""){
-		if(file_exists($base))
-		{
-			$f = $base;
-		}
-		else
-		{$f = $locaplic."/aplicmap/".$base.".map";
-		}
-	}
-	else
-	{
-		$f = "";
-		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-		{
-			$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
-		}
-		else
-		{
-			if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
-				$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
-			}
-			if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-				$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
-			}
-			if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-				$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-			}
-			if($f == "")
-			{
-				$f = $locaplic."/aplicmap/geral1v".$versao.".map";
-			}
-		}
-	}
-	return $f;
 }
 function nomeRandomico($n=10)
 {
