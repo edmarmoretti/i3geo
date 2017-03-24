@@ -13,7 +13,7 @@ if (isset ( $_GET ["tipo"] )) {
 if (empty ( $_SESSION["locaplic"] )) {
 	exit ();
 }
-error_reporting ( 0 );
+
 ?>
 <html>
 <head>

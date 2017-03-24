@@ -1,7 +1,7 @@
 <?php
 define ( "ONDEI3GEO", "../../.." );
-include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
-error_reporting ( 0 );
+include ("exec.php");
+
 include "../../head.php";
 ?>
 <div class="container-fluid migalha">
@@ -97,12 +97,9 @@ include("templates/templateOpcoesTipo.php");
 			)
 		);
 		$.material.init();
-		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.webservices.init($("#corpo"));
-		};
-		i3GEO.login.verificaOperacao("admin/html/webservices",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

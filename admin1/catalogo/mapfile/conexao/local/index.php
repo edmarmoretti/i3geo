@@ -2,8 +2,8 @@
 //TODO incluir opcao para listar os arquivos no servidor
 //TODO incluir construtor de sql
 define ( "ONDEI3GEO", "../../../../.." );
-include (dirname ( __FILE__ ) . "/../../../../../ms_configura.php");
-error_reporting ( 0 );
+include ("exec.php");
+
 include "../../../../head.php";
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
 $id_tema = (int) $_GET ["id_tema"];
@@ -87,12 +87,9 @@ include("../../../../templates/templateOpcoesPublicado.php");
 				i3GEOadmin.conexaolocal.dicionario
 			)
 		);
-		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.conexaolocal.inicia("<?php echo $codigo; ?>","<?php echo $id_tema; ?>");
-		};
-		i3GEO.login.verificaOperacao("admin/html/editormapfile",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

@@ -1,7 +1,7 @@
 <?php
 define ( "ONDEI3GEO", "../../.." );
-include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
-error_reporting ( 0 );
+include ("exec.php");
+
 include "../../head.php";
 ?>
 <div class="container-fluid">

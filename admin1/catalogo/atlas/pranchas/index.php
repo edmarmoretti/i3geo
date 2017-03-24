@@ -1,7 +1,7 @@
 <?php
 define ( "ONDEI3GEO", "../../../.." );
-include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
-error_reporting ( 0 );
+include ("exec.php");
+
 include "../../../head.php";
 $id_atlas = filter_var($_GET["id_atlas"], FILTER_SANITIZE_NUMBER_INT);
 $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
@@ -97,12 +97,9 @@ include("templates/templateFiltro.php");
 		);
 		$.material.init();
 		i3GEOadmin.prancha.id_atlas = <?php echo $id_atlas; ?>;
-		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.prancha.init($("#corpo"));
-		};
-		i3GEO.login.verificaOperacao("admin/html/prancha",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

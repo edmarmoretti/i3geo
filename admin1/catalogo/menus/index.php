@@ -1,7 +1,6 @@
 <?php
 define ( "ONDEI3GEO", "../../.." );
-include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
-error_reporting ( 0 );
+include "exec.php";
 include "../../head.php";
 ?>
 <div class="container-fluid migalha">
@@ -101,17 +100,14 @@ include("../../templates/templateOpcoesAberto.php");
 			)
 		);
 		$.material.init();
-		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			//verifica se foi enviado um parametro de filtro pela url
-			var f = "<?php echo filter_var($_GET["id_filtro"], FILTER_SANITIZE_NUMBER_INT); ?>";
+			var f = "<?php if (isset($_GET["id_filtro"])) echo filter_var($_GET["id_filtro"], FILTER_SANITIZE_NUMBER_INT); ?>";
 			if(f != ""){
 				i3GEOadmin.core.initFiltro = "form-" + f;
 			}
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.menus.init($("#corpo"));
-		};
-		i3GEO.login.verificaOperacao("admin/html/menus",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

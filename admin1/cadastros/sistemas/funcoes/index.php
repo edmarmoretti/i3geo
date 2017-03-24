@@ -1,7 +1,7 @@
 <?php
 define ( "ONDEI3GEO", "../../../.." );
-include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
-error_reporting ( 0 );
+include ("exec.php");
+
 include "../../../head.php";
 $id_sistema = filter_var($_GET["id_sistema"], FILTER_SANITIZE_NUMBER_INT);
 $nome_sistema = filter_var($_GET["nome_sistema"], FILTER_SANITIZE_STRING);
@@ -98,12 +98,9 @@ include("templates/templateFiltro.php");
 		);
 		$.material.init();
 		i3GEOadmin.funcao.id_sistema = <?php echo $id_sistema; ?>;
-		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.funcao.init($("#corpo"));
-		};
-		i3GEO.login.verificaOperacao("admin/html/sistemas",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

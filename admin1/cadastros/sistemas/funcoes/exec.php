@@ -1,5 +1,5 @@
 <?php
-error_reporting ( 0 );
+
 /****************************************************************/
 ////include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
 //
@@ -9,6 +9,7 @@ error_reporting ( 0 );
 //session_start
 //
 include ("../../../php/checaLogin.php");
+\admin\php\login\checaLogin();
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //

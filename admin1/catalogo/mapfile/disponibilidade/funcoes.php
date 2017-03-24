@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\mapfile\disponibilidade;
 function listar($locaplic,$codigo){
-	error_reporting(E_ALL);
+	
 
 	// pega o nome registrado no mapfile
 	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {

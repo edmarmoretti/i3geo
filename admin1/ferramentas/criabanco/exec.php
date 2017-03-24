@@ -12,7 +12,7 @@ include "index.php";
 						// echo dirname(__FILE__);
 						$esquemaadmin = "";
 						include ("../../../admin/php/admin.php");
-						error_reporting ( 0 );
+						
 						// valida o usuario e aplica
 						$exts = get_loaded_extensions ();
 						if (empty ( $_POST ["senha"] ) || empty ( $_POST ["usuario"] )) {

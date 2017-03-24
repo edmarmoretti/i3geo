@@ -15,7 +15,7 @@ if(!isset($logTransacoes)){
 $convUTF = true;
 if($conexaoadmin == ""){
 	$arquivosqlite = $_SESSION["locaplic"]."/admin/admin.db";
-	chmod($arquivosqlite,0774);
+	//chmod($arquivosqlite,0774);
 	//echo $arquivosqlite;exit;
 	if(!file_exists($arquivosqlite)){
 		header ( "HTTP/1.1 500 O arquivo admin.db nao existe. Utilize i3geo/admin/criabanco.php para criar o banco de dados SQLITE." );

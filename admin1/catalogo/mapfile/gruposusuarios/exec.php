@@ -8,6 +8,7 @@
 //session_start
 //
 include ("../../../php/checaLogin.php");
+\admin\php\login\checaLogin();
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //

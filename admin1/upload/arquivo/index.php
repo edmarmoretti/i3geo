@@ -1,8 +1,8 @@
 <?php
 // TODO incluir icone para abrir o navegador de arquivos para encontrar a pasta no servidor
 define ( "ONDEI3GEO", "../../.." );
-include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
-error_reporting ( 0 );
+include ("exec.php");
+
 include "../../head.php";
 ?>
 	<div class="container-fluid migalha" >
@@ -160,7 +160,6 @@ include "../../head.php";
 			)
 		);
 		$.material.init();
-		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			var t = $("#corpo");
@@ -171,8 +170,6 @@ include "../../head.php";
 				)
 			);
 			i3GEOadmin.uploadshp.listaEpsg();
-		};
-		i3GEO.login.verificaOperacao("admin/html/subirshapefile",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

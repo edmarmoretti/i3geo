@@ -1,5 +1,6 @@
 <?php
 include ("../../../php/checaLogin.php");
+\admin\php\login\checaLogin();
 $locaplic = $_SESSION["locaplic"];
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");

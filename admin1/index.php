@@ -37,8 +37,14 @@ $_SESSION["logTransacoes"] = $logTransacoes;
 unset($logTransacoes);
 $_SESSION["dir_tmp"] = $dir_tmp;
 unset($dir_tmp);
+$_SESSION["mensagemInicia"] = $mensagemInicia;
+unset($mensagemInicia);
+$_SESSION["i3geoPermiteLoginIp"] = $i3geoPermiteLoginIp;
+unset($i3geoPermiteLoginIp);
+$_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin;
+unset($i3geoPermiteLogin);
 
-error_reporting ( 0 );
+
 include "head.php";
 ?>
 	<div class="container-fluid migalha" >

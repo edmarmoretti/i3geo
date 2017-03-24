@@ -1,7 +1,7 @@
 <?php
 define ( "ONDEI3GEO", "../../../../.." );
-include (dirname ( __FILE__ ) . "/../../../../../ms_configura.php");
-error_reporting ( 0 );
+include ("exec.php");
+
 include "../../../../head.php";
 $id_n1 = filter_var ( $_GET ["id_n1"], FILTER_SANITIZE_NUMBER_INT );
 $nome_grupo = filter_var ( $_GET ["nome_grupo"], FILTER_SANITIZE_STRING );
@@ -138,12 +138,9 @@ include("templates/templateOpcoesTema.php");
 		i3GEOadmin.subgrupos.id_menu = <?php echo $id_menu; ?>;
 		i3GEOadmin.subgrupos.nome_menu = "<?php echo $nome_menu; ?>";
 
-		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 			i3GEOadmin.subgrupos.init($("#corpo"),$("#raiz"));
-		};
-		i3GEO.login.verificaOperacao("admin/html/arvore",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	});
 </script>
 </body>

@@ -4,7 +4,7 @@
 //
 
 /****************************************************************/
-//include (dirname ( __FILE__ ) . "/../../../../ms_configura.php");
+//include ("exec.php");
 //
 //checa login
 //valida _GET e _POST, juntando em _GET
@@ -12,6 +12,7 @@
 //session_start
 //
 include ("../../../php/checaLogin.php");
+\admin\php\login\checaLogin();
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
@@ -145,11 +146,8 @@ $(document).ready(function(){
 				i3GEOadmin.editor.dicionario
 			)
 		);
-		var inicia = function() {
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
-		};
-		i3GEO.login.verificaOperacao("admin/html/editortexto",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 
 		$.material.init();
 		$("#editor").height(parseInt($("#editortemp").height()) + 50 + "px");

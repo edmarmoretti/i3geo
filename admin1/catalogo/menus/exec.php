@@ -7,7 +7,10 @@
 //pega algumas variaveis de uso mais comum
 //session_start
 //
+
 include ("../../php/checaLogin.php");
+
+\admin\php\login\checaLogin();
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
@@ -24,18 +27,19 @@ include ("funcoes.php");
 //cria as variaveis $dbh e $dbhw alem de conexaoadmin
 //
 include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
+
 /***************************************************************/
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-$id_menu = $_POST["id_menu"];
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_menu]);
-
+if(isset($_POST["id_menu"])){
+	$id_menu = $_POST["id_menu"];
+	\admin\php\funcoesAdmin\testaSafeNumerico([$id_menu]);
+}
 if(!isset($idioma) || $idioma == ""){
 	$idioma = "pt";
 }
-
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
