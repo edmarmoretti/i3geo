@@ -3,7 +3,7 @@
 	<div class="row-content">
 		<h4 class="list-group-item-heading {{escondido}}">
 			<div class="pull-right">
-			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.menus.editarGrupos('{{id_menu}}','{{{nome_menu}}}')" href="javascript:void(0)">
+			<a role="button" class="btn btn-danger btn-fab btn-fab-mini pull-left" onclick="i3GEOadmin.menus.editarGrupos('{{id_menu}}')" href="javascript:void(0)">
 				<i class="material-icons md-18">folder_open</i>
 			</a>
   			<label class=pull-right><h6 style="margin-top: 5px; margin-bottom: 5px;">&nbsp;{{{txtGrupo}}}</h6></label>

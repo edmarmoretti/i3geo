@@ -1,14 +1,17 @@
 <?php
 define ( "ONDEI3GEO", "../../../../../.." );
-include (dirname ( __FILE__ ) . "/../../../../../../ms_configura.php");
-
+include ("exec.php");
 include "../../../../../head.php";
+
 $id_menu = filter_var ( $_GET ["id_menu"], FILTER_SANITIZE_NUMBER_INT );
-$nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
+$nome_menu = $_SESSION ["nome_menu"];
 $id_n1 = filter_var ( $_GET ["id_n1"], FILTER_SANITIZE_NUMBER_INT );
-$nome_grupo = filter_var ( $_GET ["nome_grupo"], FILTER_SANITIZE_STRING );
+$nome_grupo = $_SESSION ["nome_grupo"];
 $id_n2 = filter_var ( $_GET ["id_n2"], FILTER_SANITIZE_NUMBER_INT );
-$nome_subgrupo = filter_var ( $_GET ["nome_subgrupo"], FILTER_SANITIZE_STRING );
+include("../funcoes.php");
+$dados = \admin\catalogo\menus\grupos\subgrupos\listar ($dbh, $id_n1, $id_n2);
+$nome_subgrupo = $dados ["nome_subgrupo"];
+$_SESSION["nome_subgrupo"] = $nome_subgrupo;
 ?>
 <div class="container-fluid migalha">
 	<div class="row">
@@ -109,11 +112,8 @@ include("templates/templateOpcoesPerfil.php");
 		);
 		$.material.init();
 		i3GEOadmin.temas.id_menu = <?php echo $id_menu; ?>;
-		i3GEOadmin.temas.nome_menu = "<?php echo $nome_menu; ?>";
 		i3GEOadmin.temas.id_n1 = <?php echo $id_n1; ?>;
-		i3GEOadmin.temas.nome_grupo = "<?php echo $nome_grupo; ?>";
 		i3GEOadmin.temas.id_n2 = <?php echo $id_n2; ?>;
-		i3GEOadmin.temas.nome_subgrupo = "<?php echo $nome_subgrupo; ?>";
 
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');

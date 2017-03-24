@@ -24,11 +24,8 @@ Free Software Foundation, Inc., no endere&ccedil;o
  */
 i3GEOadmin.temas = {
 		id_menu: "",
-		nome_menu: "",
 		id_n1: "",
-		nome_grupo: "",
 		id_n2: "",
-		nome_subgrupo: "",
 		onde: "",
 		listaDeTemas: "",
 		opcoesPerfil: "",

@@ -1,6 +1,6 @@
 <?php
 namespace admin\php\login;
-error_reporting(0);
+error_reporting(E_ALL ^E_NOTICE);
 error_log("checaLogin teste",0);
 
 // junta get e post

@@ -4,7 +4,11 @@ include ("exec.php");
 
 include "../../../head.php";
 $id_menu = filter_var ( $_GET ["id_menu"], FILTER_SANITIZE_NUMBER_INT );
-$nome_menu = filter_var ( $_GET ["nome_menu"], FILTER_SANITIZE_STRING );
+//pega o nome do menu
+include("../funcoes.php");
+$dados = \admin\catalogo\menus\listar ($dbh,$id_menu);
+$nome_menu = $dados["nome_menu"];
+$_SESSION["nome_menu"] = $nome_menu;
 ?>
 <div class="container-fluid migalha">
 	<div class="row">
@@ -128,10 +132,9 @@ include("templates/templateOpcoesTema.php");
 		);
 		$.material.init();
 		i3GEOadmin.grupos.id_menu = <?php echo $id_menu; ?>;
-		i3GEOadmin.grupos.nome_menu = "<?php echo $nome_menu; ?>";
-			i3GEOadmin.core.loginOn();
-			$(".hidden").removeClass('hidden');
-			i3GEOadmin.grupos.init($("#corpo"),$("#raiz"));
+		i3GEOadmin.core.loginOn();
+		$(".hidden").removeClass('hidden');
+		i3GEOadmin.grupos.init($("#corpo"),$("#raiz"));
 	});
 </script>
 </body>
