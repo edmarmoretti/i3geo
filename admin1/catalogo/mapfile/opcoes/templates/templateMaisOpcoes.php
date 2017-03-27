@@ -16,6 +16,20 @@
 <div class="list-group-item">
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
+			<a title="{{{conexaoOgc}}}" href="../conexao/ogc/index.php?codigo={{codigo}}&id_tema={{id_tema}}" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+				<i class="material-icons  md-18">more_horiz</i>
+			</a>
+			{{{conexaoOgc}}}
+			<span id="helpBlock" class="help-block">
+				{{{conexaoLayerOgc}}}
+			</span>
+		</h4>
+	</div>
+	<div class="list-group-separator"></div>
+</div>
+<div class="list-group-item">
+	<div class="row-content" >
+		<h4 class="list-group-item-heading">
 			<a title="{{{testaLayer}}}" onclick="i3GEOadmin.opcoesmapfile.testa('{{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons  md-18">send</i>
 			</a>

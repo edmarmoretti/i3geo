@@ -1634,5 +1634,20 @@ i3GEOadmin.mapfile.dicionario = {
 		pt : "N&uacute;mero m&aacute;ximo de elementos que podem ser mostrados em cada janela de apresenta&ccedil;&atilde;o (imagem renderizada).",
 		en : "",
 		es : ""
-	}]
+	}],
+    'conexaoOgc' : [ {
+		pt : "Conex&atilde;o com serviços OGC (webservices)",
+		en : "",
+		es : ""
+	} ],
+    'conexaoLayerOgc' : [ {
+		pt : "Par&acirc;metros que permitem a conex&atilde;o com dados externos por meio dos padr&otilde;es OGC",
+		en : "",
+		es : ""
+	} ],
+    'conexaoLayerOgcUrl' : [ {
+		pt : "Sobre os parâmetros utilizados, veja detalhes em ",
+		en : "",
+		es : ""
+	} ]
 };
