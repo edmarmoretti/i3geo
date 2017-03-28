@@ -53,7 +53,10 @@ function checaLogin(){
 		session_id ( $_COOKIE ["i3geocodigologin"] );
 		session_start ();
 		if(empty($_SESSION["locaplic"])){
-			header ( "HTTP/1.1 403 Inicie o sistema pela pagina principal" );
+			if(defined("ONDEI3GEO")){
+				header("Location:" . ONDEI3GEO . "/admin1/index.php");
+			}
+			//header ( "HTTP/1.1 403 Inicie o sistema pela pagina principal" );
 			exit;
 		}
 		//verifica tambem se o usuario entrou pela pagina de administracao principal
@@ -71,6 +74,7 @@ function checaLogin(){
 		}
 	} else {
 		header ( "HTTP/1.1 403 Usuario nao logado" );
+		//header("Location:");
 		exit ();
 	}
 	// verifica se o login pode ser realizado

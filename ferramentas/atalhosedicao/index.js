@@ -132,6 +132,7 @@ i3GEOF.atalhosedicao =
 			}
 		});
 		$i("i3GEOFatalhosedicaoTme-button").style.width = "200px";
+
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoStorymap", {
 			onclick : {
 				fn : function() {
@@ -141,6 +142,17 @@ i3GEOF.atalhosedicao =
 			}
 		});
 		$i("i3GEOFatalhosedicaoStorymap-button").style.width = "200px";
+
+
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoAnimagif", {
+			onclick : {
+				fn : function() {
+					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
+					i3GEO.tema.dialogo.animagif(i3GEOF.atalhosedicao.tema);
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoAnimagif-button").style.width = "200px";
 
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoTemaComGrafico", {
 			onclick : {
