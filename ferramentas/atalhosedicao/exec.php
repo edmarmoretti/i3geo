@@ -1,4 +1,5 @@
 <?php
+//TODO verificar login
 include_once(dirname(__FILE__)."/../safe.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 //

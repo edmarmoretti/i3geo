@@ -73,8 +73,11 @@ function checaLogin(){
 			exit ();
 		}
 	} else {
-		header ( "HTTP/1.1 403 Usuario nao logado" );
-		//header("Location:");
+		if(defined("ONDEI3GEO")){
+			header("Location:" . ONDEI3GEO . "/admin1/index.php");
+		} else {
+			header ( "HTTP/1.1 403 Usuario nao logado" );
+		}
 		exit ();
 	}
 	// verifica se o login pode ser realizado

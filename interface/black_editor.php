@@ -19,6 +19,8 @@
 		}
 	</style>
 	<script src="../classesjs/i3geonaocompacto.js"></script>
+	<script src="../admin1/js/core.js"></script>
+	<script type="text/javascript" src="../admin1/dicionario/core.js"></script>
 	<script src="../pacotes/openlayers/OpenLayers2131.js.php"></script>
 	<link rel="stylesheet" type="text/css" href="../css/black6.css">
 </head>

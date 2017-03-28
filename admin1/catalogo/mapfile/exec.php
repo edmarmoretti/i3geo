@@ -114,6 +114,40 @@ switch ($funcao) {
 				"codigo" => $novocodigo
 		) );
 		break;
+	case "PEGAPLUGIN":
+		//utilizado na janela de atalhos de edicao
+		session_write_close ();
+		session_name("i3GeoPHP");
+		session_id($_GET["g_sid"]);
+		session_start();
+		$mapa = ms_newMapObj($_SESSION["map_file"]);
+		$layer = $mapa->getlayerbyname($_GET["codigoLayer"]);
+		\admin\php\funcoesAdmin\retornaJSON($layer->getmetadata("PLUGINI3GEO"));
+		break;
+	case "GRAVAPLUGIN":
+		//utilizado na janela de atalhos de edicao
+		session_write_close ();
+		session_name("i3GeoPHP");
+		session_id($_GET["g_sid"]);
+		session_start();
+		$mapa = ms_newMapObj($_SESSION["map_file"]);
+		$layer = $mapa->getlayerbyname($_GET["codigoLayer"]);
+		$layer->setmetadata("PLUGINI3GEO",$_GET["plugin"]);
+		$mapa->save($_SESSION["map_file"]);
+		\admin\php\funcoesAdmin\retornaJSON("ok");
+		break;
+	case "REMOVEPLUGIN":
+		//utilizado na janela de atalhos de edicao
+		session_write_close ();
+		session_name("i3GeoPHP");
+		session_id($_GET["g_sid"]);
+		session_start();
+		$mapa = ms_newMapObj($_SESSION["map_file"]);
+		$layer = $mapa->getlayerbyname($_GET["codigoLayer"]);
+		$layer->setmetadata("PLUGINI3GEO","");
+		$mapa->save($_SESSION["map_file"]);
+		\admin\php\funcoesAdmin\retornaJSON("ok");
+		break;
 	default:
 		header ( "HTTP/1.1 500 erro funcao nao existe" );
 		break;

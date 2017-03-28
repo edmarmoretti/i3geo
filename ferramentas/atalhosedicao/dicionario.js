@@ -69,5 +69,15 @@ i3GEOF.atalhosedicao.dicionario = {
 		pt : "Mostra na ferramenta de identifica&ccedil;&atilde;o",
 		en : "",
 		es : ""
+	}],
+	"removePlugin" : [{
+		pt : "Remove o plugin",
+		en : "",
+		es : ""
+	}],
+	"plugins" : [{
+		pt : "Plugins que implementam formas especiais de visualiza&ccedil;&atilde;o. A camada pode ter apenas um plugin.",
+		en : "",
+		es : ""
 	}]
 };

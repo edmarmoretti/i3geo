@@ -1023,15 +1023,15 @@ i3GEO.pluginI3geo =
 					config.ativo = "sim";
 				}
 				ins += "<p class='paragrafo'>Abre o formul&aacute;rio quando a camada &eacute; adicionada ao mapa: (true ou false)</p>";
-				ins += "<select style='width:200px' id='parametrosSqlAtivo' ><option value='' ></option>";
+				ins += "<div class='styled-select' style='display:block;width: 200px;' ><select id='parametrosSqlAtivo' ><option value='' ></option>";
 				if (config.ativo === "nao") {
-					ins += "<option value=sim >sim</option><option value=nao selected >nao</option></select>";
+					ins += "<option value=sim >sim</option><option value=nao selected >nao</option></select></div>";
 				} else {
-					ins += "<option value=sim selected >sim</option><option value=nao >nao</option></select>";
+					ins += "<option value=sim selected >sim</option><option value=nao >nao</option></select></div>";
 				}
 
 				ins +=
-					"<table><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td><td>PHP que retorna os valores (opcional)</td></tr>";
+					"<table class='lista4'><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td><td>PHP que retorna os valores (opcional)</td></tr>";
 				for (i = 0; i < n; i++) {
 					ins +=
 						"<tr><td><input name='titulo' type=text size=20 value='" + parametros[i].titulo

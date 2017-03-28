@@ -1,4 +1,10 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
+if (typeof (i3GEOadmin) === 'undefined') {
+	i3GEOadmin = {"core":{}};
+}
+if (typeof (i3GEOadmin.core) === 'undefined') {
+	i3GEOadmin["core"] = {};
+}
 i3GEOadmin.core.dicionario = {
 	'notInVersion' : [ {
 		pt : "N&atilde;o dispon&iacute;vel nessa vers&atilde;o do Mapserver",

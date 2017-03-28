@@ -143,7 +143,6 @@ i3GEOF.atalhosedicao =
 		});
 		$i("i3GEOFatalhosedicaoStorymap-button").style.width = "200px";
 
-
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoAnimagif", {
 			onclick : {
 				fn : function() {
@@ -153,6 +152,38 @@ i3GEOF.atalhosedicao =
 			}
 		});
 		$i("i3GEOFatalhosedicaoAnimagif-button").style.width = "200px";
+
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoParametrossql", {
+			onclick : {
+				fn : function() {
+					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
+					//i3GEO.pluginI3geo.parametrossql.buscaParForm(i3GEOF.atalhosedicao.tema);
+					YAHOO.namespace("admin");
+					YAHOO.namespace("admin.container");
+					core_montaEditor("","450px","500px","","Plugin",true,false,false);
+					var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
+					var montaEditorPlugin = function(retorno){
+						var plugin = "parametrossql";
+						var ins = "<input type=button title='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' value='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' id=salvarPlugin />"
+							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
+						//pega os campos do formulario
+						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
+						var ajuda = "<p>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
+						$i("editor_bd").innerHTML = ins + ajuda;
+
+						new YAHOO.widget.Button("salvarPlugin",{ onclick: { fn: function(){
+							i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),plugin,i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);
+						} }});
+
+						new YAHOO.widget.Button("removerPlugin",{ onclick: { fn: function(){
+							i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);
+						} }});
+					};
+					core_pegaDados("",sUrl,montaEditorPlugin);
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoParametrossql-button").style.width = "200px";
 
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoTemaComGrafico", {
 			onclick : {
@@ -258,5 +289,51 @@ i3GEOF.atalhosedicao =
 		}
 		tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.atalhosedicao.tema);
 		tema[obj.name] = valor;
+	},
+	salvarDadosEditorPlugin: function(onde,plugin,codigoMap,codigoLayer){
+		var campos = onde.getElementsByTagName("input"),
+			n = campos.length,
+			par = [],
+			prog = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=gravaPlugin&g_sid="+i3GEO.configura.sid,
+			i;
+		if(plugin != ""){
+			if(!i3GEO.pluginI3geo[plugin].parametrosFormAdmin){
+				for(i=0; i<n; i++){
+					par.push('"'+campos[i].name+'":"'+campos[i].value+'"');
+				}
+				if(plugin != ""){
+					plugin = '{"plugin":"'+plugin+'","parametros":{' + par.join(",") + '}}';
+				}
+			}
+			else{
+				plugin = i3GEO.pluginI3geo[plugin].parametrosFormAdmin(onde);
+			}
+		}
+		core_carregando("ativa");
+		core_carregando($trad("gravaLayer",i3GEOadmin.core.dicionario)+codigoLayer);
+		var sUrl = prog
+			+ "&codigoMap=" + codigoMap
+			+ "&codigoLayer=" + codigoLayer
+			+ "&plugin=" + plugin;
+		var callback = {
+				success:function(o)	{
+					try	{
+						if(YAHOO.lang.JSON.parse(o.responseText) == "erro") {
+							core_carregando("<span style=color:red >"+ $trad("naoSalva",i3GEOadmin.core.dicionario) +"</span>");
+							setTimeout("core_carregando('desativa')",3000);
+						}
+						else {
+							YAHOO.admin.container.panelEditor.destroy();
+							YAHOO.admin.container.panelEditor = null;
+							core_carregando("desativa");
+						}
+					}
+					catch(e){core_handleFailure(e,o.responseText);}
+				},
+				failure:core_handleFailure,
+				argument: { foo:"foo", bar:"bar" }
+		};
+		core_makeRequest(sUrl,callback,'POST');
 	}
+
 };
