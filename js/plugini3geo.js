@@ -834,8 +834,8 @@ i3GEO.pluginI3geo =
 				}
 				parametros = config.parametros;
 				ins +=
-					"<p>Url do arquivo Kml:<br><input name='url' type='text' value='" + parametros.url
-						+ "'/></p>"
+					"<p>Url do arquivo Kml:<br><div class='i3geoForm i3geoFormIconeEdita'><input name='url' type='text' value='" + parametros.url
+						+ "'/><div></p>"
 						+ "<p>Veja o exemplo utilizado no tema _lmapakml.map</p>";
 				return ins;
 			},
@@ -914,7 +914,8 @@ i3GEO.pluginI3geo =
 				},
 				inicia : function(camada, objMapa) {
 					var layerkml, url, temp;
-					url = i3GEO.configura.locaplic + "/classesphp/proxy.php?url=" + camada.plugini3geo.parametros.url;
+					//url = i3GEO.configura.locaplic + "/classesphp/proxy.php?url=" + camada.plugini3geo.parametros.url;
+					url = i3GEO.configura.locaplic + "/ferramentas/layerkml/getkml.php?tema=" + camada.nomeoriginal;
 					layerkml = new ol.layer.Vector({
 						name : camada.name,
 						isBaseLayer : false,

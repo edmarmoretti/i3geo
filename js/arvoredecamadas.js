@@ -2295,9 +2295,6 @@ i3GEO.arvoreDeCamadas =
 		 * Return: {Array} - lista de camadas
 		 */
 		filtraCamadas : function(propriedade, valor, operador, camadas) {
-			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.arvoreDeCamadas.filtraCamadas()");
-
 			if(!camadas){
 				camadas = i3GEO.arvoreDeCamadas.CAMADAS;
 			}

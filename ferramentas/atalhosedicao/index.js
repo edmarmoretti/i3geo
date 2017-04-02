@@ -185,6 +185,37 @@ i3GEOF.atalhosedicao =
 		});
 		$i("i3GEOFatalhosedicaoParametrossql-button").style.width = "200px";
 
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoLayerkml", {
+			onclick : {
+				fn : function() {
+					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
+					YAHOO.namespace("admin");
+					YAHOO.namespace("admin.container");
+					core_montaEditor("","450px","500px","","Plugin",true,false,false);
+					var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
+					var montaEditorPlugin = function(retorno){
+						var plugin = "layerkml";
+						var ins = "<input type=button title='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' value='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' id=salvarPlugin />"
+							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
+						//pega os campos do formulario
+						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
+						var ajuda = "<p>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
+						$i("editor_bd").innerHTML = ins + ajuda;
+
+						new YAHOO.widget.Button("salvarPlugin",{ onclick: { fn: function(){
+							i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),plugin,i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);
+						} }});
+
+						new YAHOO.widget.Button("removerPlugin",{ onclick: { fn: function(){
+							i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);
+						} }});
+					};
+					core_pegaDados("",sUrl,montaEditorPlugin);
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoLayerkml-button").style.width = "200px";
+
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoTemaComGrafico", {
 			onclick : {
 				fn : function() {
@@ -204,7 +235,7 @@ i3GEOF.atalhosedicao =
 			$i("i3GEOFatalhosedicaoCache").checked = true;
 		}
 		if(tema.classe.toLowerCase() === "nao"){
-			$i("i3GEOFatalhosedicaoClasses").checked = false;
+			$i("i3GEOFatalhosedicaoClasse").checked = false;
 		}
 		if(tema.identifica.toLowerCase() === "nao"){
 			$i("i3GEOFatalhosedicaoIdentifica").checked = false;

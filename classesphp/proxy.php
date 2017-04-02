@@ -50,7 +50,6 @@ if($_GET["tipoRetornoProxy"] == "gml2wkt"){
 
 echo $resultado;
 
-
 function gml2wkt($gml){
 	// Parse GML file
 	include("funcoes_gerais.php");
@@ -85,5 +84,4 @@ function gml2wkt($gml){
 	$wkt = $shape->towkt();
 	return json_encode(array($wkt));
 }
-
 ?>
