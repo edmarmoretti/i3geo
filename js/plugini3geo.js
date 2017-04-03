@@ -229,25 +229,25 @@ i3GEO.pluginI3geo =
 				parametros = config.parametros;
 				ins +=
 					"" + "<p>Coluna que cont&eacute;m os dados:"
-						+ "<br><input name='coluna' type='text' value='"
+						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='coluna' type='text' value='"
 						+ parametros.coluna
-						+ "' size='30'></p>"
+						+ "' size='30'></div></p>"
 						+ "<p>Ou valor num&eacute;rico para cada ponto:"
-						+ "<br><input name='valorPonto' type='text' value='"
+						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='valorPonto' type='text' value='"
 						+ parametros.valorPonto
-						+ "' size='30'></p>"
+						+ "' size='30'></div></p>"
 						+ "<p>Raio de cada ponto em pixels:"
-						+ "<br><input name='radius' type='text' value='"
+						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='radius' type='text' value='"
 						+ parametros.radius
-						+ "' size='30'></p>"
+						+ "' size='30'></div></p>"
 						// + "<p>Valor m&aacute;ximo em cada ponto:"
 						// + "<br><input name='max' type='text' value='"
 						// + parametros.max
 						// + "' size='30'></p>"
 						+ "<p>Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
-						+ "<br><input name='tipoGradiente' type='text' value='"
+						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='tipoGradiente' type='text' value='"
 						+ parametros.tipoGradiente
-						+ "' size='30'></p>"
+						+ "' size='30'></div></p>"
 						+ "<p>Para definir os cortes no gradiente de cores utilize valores entre 0 e 1."
 						+ " As cores s&atilde;o definidas nas classes do LAYER, sendo que o nome define o valor superior do gradiente e COLOR define a cor."
 						+ " Veja o exemplo utilizado no tema _lmapadecalor.map</p>";
@@ -512,13 +512,13 @@ i3GEO.pluginI3geo =
 				parametros = config.parametros;
 				ins +=
 					"" + "<p>Dist&acirc;ncia m&aacute;xima entre ponto em pixels:"
-						+ "<br><input name='gridSize' type='text' value='"
+						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='gridSize' type='text' value='"
 						+ parametros.gridSize
-						+ "' size='30'></p>"
+						+ "' size='30'></div></p>"
 						+ "<p>Tipo de estilos (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
-						+ "<br><input name='tipoEstilos' type='text' value='"
+						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='tipoEstilos' type='text' value='"
 						+ parametros.tipoEstilos
-						+ "' size='30'></p>"
+						+ "' size='30'></div></p>"
 						+ "<p>Os s&iacute;mbolos utilizados podem ser customizados alterando-se as classes do Mapfile</p>"
 						+ "<p>Veja o exemplo utilizado no tema _lmapadecluster.map</p>";
 
@@ -742,7 +742,7 @@ i3GEO.pluginI3geo =
 									'Canvas', 'SVG'
 								],
 								strategies : [
-									new OpenLayers.Strategy.AnimatedCluster({
+									new OpenLayers.Strategy.Cluster({
 										distance : parseInt(camada.plugini3geo.parametros.gridSize, 10)
 									})
 								],
@@ -793,8 +793,7 @@ i3GEO.pluginI3geo =
 							+ "&g_sid="
 							+ i3GEO.configura.sid
 							+ "&tipoEstilos="
-							+ camada.plugini3geo.parametros.tipoEstilos
-							+ "&nomevariavel=markercluster_dados&nomevariavelConfig=markercluster_config";
+							+ camada.plugini3geo.parametros.tipoEstilos;
 					i3GEO.util.scriptTag(p, criaLayer, nomeScript);
 				}
 			}

@@ -34,8 +34,8 @@ if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
 }
 
-echo $nomevariavel.' = ['.implode(",",$resultado).'];';
-echo $nomevariavelConfig.' = '.$gradiente.';';
+echo 'heatmap_dados = ['.implode(",",$resultado).'];';
+echo 'heatmap_config = '.$gradiente.';';
 
 if($carregajs === "sim"){
 	include_once($dir."/../../pacotes/heatmap/src/heatmap.js");
