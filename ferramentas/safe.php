@@ -15,7 +15,6 @@ if(!empty($_GET["g_sid"])){
 	$map_file = $_SESSION["map_file"];
 	$mapext = $_SESSION["mapext"];
 	$locaplic = $_SESSION["locaplic"];
-	$mapext = $_SESSION["mapext"];
 	$ler_extensoes = $_SESSION["ler_extensoes"];
 	$perfil = $_SESSION["perfil"];
 	$interface = $_SESSION["interface"];

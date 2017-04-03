@@ -58,18 +58,6 @@ switch ($funcao) {
 		break;
 }
 /*
- linha do tempo
-
- $dados["ltempoformatodata"] = $layer->getmetadata("ltempoformatodata");
- $dados["ltempoiteminicio"] = $layer->getmetadata("ltempoiteminicio");
- $dados["ltempoitemfim"] = $layer->getmetadata("ltempoitemfim");
- $dados["ltempoitemtitulo"] = $layer->getmetadata("ltempoitemtitulo");
- $dados["ltempoitemdescricao"] = $layer->getmetadata("ltempoitemdescricao");
- $dados["ltempoconvencode"] = $layer->getmetadata("ltempoconvencode");
- $dados["ltempoitemtip"] = $layer->getmetadata("ltempoitemtip");
- $dados["ltempoitemimagem"] = $layer->getmetadata("ltempoitemimagem");
- $dados["ltempoitemicone"] = $layer->getmetadata("ltempoitemicone");
- $dados["ltempoitemlink"] = $layer->getmetadata("ltempoitemlink");
 
  outros
 

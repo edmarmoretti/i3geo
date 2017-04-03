@@ -145,8 +145,8 @@ i3GEO.analise =
 			 */
 			linhaDoTempo : function() {
 				i3GEO.janela.cria(
+					"650px",
 					"450px",
-					"350px",
 					i3GEO.configura.locaplic + "/ferramentas/linhadotempo/index.php",
 					"",
 					"",

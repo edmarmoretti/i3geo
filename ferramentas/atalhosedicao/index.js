@@ -143,6 +143,16 @@ i3GEOF.atalhosedicao =
 		});
 		$i("i3GEOFatalhosedicaoStorymap-button").style.width = "200px";
 
+		new YAHOO.widget.Button("i3GEOFatalhosedicaoLinhadotempo", {
+			onclick : {
+				fn : function() {
+					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
+					i3GEO.analise.dialogo.linhaDoTempo()
+				}
+			}
+		});
+		$i("i3GEOFatalhosedicaoLinhadotempo-button").style.width = "200px";
+
 		new YAHOO.widget.Button("i3GEOFatalhosedicaoAnimagif", {
 			onclick : {
 				fn : function() {

@@ -20,9 +20,11 @@ Timeline_parameters='bundle=true';
 </style>
 </head>
 <body onload="inicializa()" onresize="onResize()">
-<div class=paragrafo id="combotemas" ></div>
+<img onclick="config()" class='ticPropriedades2' style='cursor: pointer;float: left;width: 20px;height: 20px;top: 5px;position: relative;' title='config' src='../../imagens/branco.gif'>
+<div class="styled-select" style="width:90%;" id="combotemas" ></div>
+
 <div class=paragrafo id="totaleventos" ></div>
-<div class=paragrafo id="tl" style="height: 220px; border: 1px solid #aaa;overflow-x:hidden; overflow-y:scroll"> </div>
+<div class=paragrafo id="tl" style="height: 80%; border: 0px solid #aaa;overflow-x:hidden; overflow-y:scroll"> </div>
 
 <script>
 /*
@@ -274,6 +276,16 @@ function onResize() {
          }, 500);
      }
  }
+function config(){
+	i3GEO.configura.locaplic = window.parent.i3GEO.configura.locaplic;
+	window.parent.i3GEO.mapa.ativaTema($i("tema").value);
+	window.parent.i3GEO.util.dialogoFerramenta(
+		"",
+		"linhadotempo",
+		"linhadotempo",
+		"dependencias.php",
+		"i3GEOF.linhadotempo.iniciaJanelaFlutuante()");
+}
 </script>
 </body>
 
