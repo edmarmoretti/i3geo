@@ -1110,14 +1110,6 @@ i3GEO.arvoreDeCamadas =
 				// grupos
 				for (i = 0; i < c; i += 1) {
 					noGrupo = "";
-					/*
-					if (grupoLayers[i].icone && grupoLayers[i].icone === true) {
-						noGrupo +=
-							"<p><input class=inputsb style='cursor:pointer; display: block;' onclick='i3GEO.arvoreDeCamadas.ligaDesligaTemas(\""
-								+ i3GEO.configura.grupoLayers[i].layers
-								+ "\",this.checked)' type=checkbox title='Ligar/desligar temas do grupo' /></p>";
-					}
-					 */
 					noGrupo += "<div class='i3GEOarvCamGrupo'>" + grupoLayers[i].nome + "</div>";
 					d = i3GEO.arvoreDeCamadas.EXPANDIDA;
 					if(grupoLayers[i].expandido && grupoLayers[i].expandido === true){

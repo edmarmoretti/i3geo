@@ -168,7 +168,7 @@ i3GEOF.atalhosedicao =
 							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
 						//pega os campos do formulario
 						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
-						var ajuda = "<p>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
+						var ajuda = "<p class='paragrafo'>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
 						$i("editor_bd").innerHTML = ins + ajuda;
 
 						new YAHOO.widget.Button("salvarPlugin",{ onclick: { fn: function(){
@@ -199,7 +199,7 @@ i3GEOF.atalhosedicao =
 							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
 						//pega os campos do formulario
 						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
-						var ajuda = "<p>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
+						var ajuda = "<p class='paragrafo'>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
 						$i("editor_bd").innerHTML = ins + ajuda;
 
 						new YAHOO.widget.Button("salvarPlugin",{ onclick: { fn: function(){
@@ -229,7 +229,7 @@ i3GEOF.atalhosedicao =
 							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
 						//pega os campos do formulario
 						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
-						var ajuda = "<p>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
+						var ajuda = "<p class='paragrafo'>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
 						$i("editor_bd").innerHTML = ins + ajuda;
 
 						new YAHOO.widget.Button("salvarPlugin",{ onclick: { fn: function(){
@@ -260,7 +260,7 @@ i3GEOF.atalhosedicao =
 							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
 						//pega os campos do formulario
 						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
-						var ajuda = "<p>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
+						var ajuda = "<p class='paragrafo'>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
 						$i("editor_bd").innerHTML = ins + ajuda;
 
 						new YAHOO.widget.Button("salvarPlugin",{ onclick: { fn: function(){

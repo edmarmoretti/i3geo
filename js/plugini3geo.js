@@ -228,15 +228,15 @@ i3GEO.pluginI3geo =
 				}
 				parametros = config.parametros;
 				ins +=
-					"" + "<p>Coluna que cont&eacute;m os dados:"
+					"" + "<p class='paragrafo'>Coluna que cont&eacute;m os dados:"
 						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='coluna' type='text' value='"
 						+ parametros.coluna
 						+ "' size='30'></div></p>"
-						+ "<p>Ou valor num&eacute;rico para cada ponto:"
+						+ "<p class='paragrafo'>Ou valor num&eacute;rico para cada ponto:"
 						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='valorPonto' type='text' value='"
 						+ parametros.valorPonto
 						+ "' size='30'></div></p>"
-						+ "<p>Raio de cada ponto em pixels:"
+						+ "<p class='paragrafo'>Raio de cada ponto em pixels:"
 						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='radius' type='text' value='"
 						+ parametros.radius
 						+ "' size='30'></div></p>"
@@ -244,11 +244,11 @@ i3GEO.pluginI3geo =
 						// + "<br><input name='max' type='text' value='"
 						// + parametros.max
 						// + "' size='30'></p>"
-						+ "<p>Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
+						+ "<p class='paragrafo'>Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
 						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='tipoGradiente' type='text' value='"
 						+ parametros.tipoGradiente
 						+ "' size='30'></div></p>"
-						+ "<p>Para definir os cortes no gradiente de cores utilize valores entre 0 e 1."
+						+ "<p class='paragrafo'>Para definir os cortes no gradiente de cores utilize valores entre 0 e 1."
 						+ " As cores s&atilde;o definidas nas classes do LAYER, sendo que o nome define o valor superior do gradiente e COLOR define a cor."
 						+ " Veja o exemplo utilizado no tema _lmapadecalor.map</p>";
 				return ins;
@@ -511,16 +511,16 @@ i3GEO.pluginI3geo =
 				}
 				parametros = config.parametros;
 				ins +=
-					"" + "<p>Dist&acirc;ncia m&aacute;xima entre ponto em pixels:"
+					"" + "<p class='paragrafo'>Dist&acirc;ncia m&aacute;xima entre ponto em pixels:"
 						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='gridSize' type='text' value='"
 						+ parametros.gridSize
 						+ "' size='30'></div></p>"
-						+ "<p>Tipo de estilos (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
+						+ "<p class='paragrafo'>Tipo de estilos (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
 						+ "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='tipoEstilos' type='text' value='"
 						+ parametros.tipoEstilos
 						+ "' size='30'></div></p>"
-						+ "<p>Os s&iacute;mbolos utilizados podem ser customizados alterando-se as classes do Mapfile</p>"
-						+ "<p>Veja o exemplo utilizado no tema _lmapadecluster.map</p>";
+						+ "<p class='paragrafo'>Os s&iacute;mbolos utilizados podem ser customizados alterando-se as classes do Mapfile</p>"
+						+ "<p class='paragrafo'>Veja o exemplo utilizado no tema _lmapadecluster.map</p>";
 
 				return ins;
 			},
@@ -833,9 +833,9 @@ i3GEO.pluginI3geo =
 				}
 				parametros = config.parametros;
 				ins +=
-					"<p>Url do arquivo Kml:<br><div class='i3geoForm i3geoFormIconeEdita'><input name='url' type='text' value='" + parametros.url
+					"<p class='paragrafo'>Url do arquivo Kml:<br><div class='i3geoForm i3geoFormIconeEdita'><input name='url' type='text' value='" + parametros.url
 						+ "'/><div></p>"
-						+ "<p>Veja o exemplo utilizado no tema _lmapakml.map</p>";
+						+ "<p class='paragrafo'>Veja o exemplo utilizado no tema _lmapakml.map</p>";
 				return ins;
 			},
 			/**

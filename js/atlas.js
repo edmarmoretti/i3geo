@@ -68,7 +68,7 @@ function iniciaAtlas(combow,atlasId)
 		{return;}
 		if(retorno.data.tipoguias == "")
 		{retorno.data.tipoguias = "combo";}
-		
+
 		pai = document.getElementById("guiasAtlas");
 		if(pai){
 			ins = '<ul class="yui-nav" style="border-width:0pt 0pt 2px;border-color:rgb(240,240,240)">';
@@ -171,7 +171,7 @@ function pegaListaDeAtlas()
 			listaAtlas = retorno.data.atlas;
 			if(listaAtlas.length <= 0)
 			{
-				local.innerHTML = retorno.data.tituloinstituicao+"<br><p><b>Nenhum atlas encontrado";
+				local.innerHTML = retorno.data.tituloinstituicao+"<br><p class='paragrafo'><b>Nenhum atlas encontrado";
 				return;
 			}
 			atlasxml = retorno.data.atlasxml;
