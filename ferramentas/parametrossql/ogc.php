@@ -196,7 +196,7 @@ else{
 		$valores = explode(",",strip_tags($valores));
 		for($i = 0; $i < $n; $i++){
 			if($chaves[$i] != ""){
-				$v = $valores[$i];
+				$v = (int) $valores[$i];
 				$data = str_replace($chaves[$i],$v,$data);
 				if($filtro != ""){
 					$filtro = str_replace($chaves[$i],$v,$filtro);

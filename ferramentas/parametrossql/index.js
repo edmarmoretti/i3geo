@@ -35,7 +35,6 @@ if(typeof(i3GEOF) === 'undefined'){
 /*
 Class: i3GEOF.parametrossql
 */
-//TODO incluir a substituicao de parametros tambem no FILTER
 i3GEOF.parametrossql = {
 	/*
 	Variavel: aguarde
