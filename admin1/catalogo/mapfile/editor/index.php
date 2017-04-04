@@ -94,13 +94,14 @@ $textoMapfile = \admin\catalogo\mapfile\editor\textoMapfile ( $codigo );
 	</div>
 	<div class="row center-block">
 		<div class="col-md-12 well">
+				<span style="color:red;"><?php echo $textoMapfile["erro"]; ?></span>
 				<form action="index.php?codigo=<?php echo $codigo;?>&id_tema=<?php echo $id_tema;?>" method="post">
 					<TEXTAREA id=editor name=texto style='font-size: 16px; width: 100%; float: left; border: 2px dotted lightgray;'>
-						<?php echo $textoMapfile; ?>
+						<?php echo $textoMapfile["texto"]; ?>
 					</TEXTAREA>
 				</form>
 				<!-- para calcular a altura do textarea -->
-				<pre id="editortemp" style="font-size: 16px; display: block; visibility: hidden;"><?php echo $textoMapfile; ?></pre>
+				<pre id="editortemp" style="font-size: 16px; display: block; visibility: hidden;"><?php echo $textoMapfile["texto"]; ?></pre>
 		</div>
 	</div>
 </div>

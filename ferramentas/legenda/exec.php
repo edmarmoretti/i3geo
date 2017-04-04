@@ -7,6 +7,39 @@ verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
+	case "PARAMETROSAUTO":
+		$map = ms_newMapObj($map_file);
+		$layer = $map->getlayerbyname($tema);
+		$retorno = array();
+		$retorno["classesitem"] = $layer->getmetadata("classesitem");
+		$retorno["classesnome"] = $layer->getmetadata("classesnome");
+		$retorno["classescor"] = $layer->getmetadata("classescor");
+		$retorno["classessimbolo"] = $layer->getmetadata("classessimbolo");
+		$retorno["classestamanho"] = $layer->getmetadata("classestamanho");
+		$retorno["palletefile"] = $layer->getmetadata("palletefile");
+		$retorno["palletestep"] = $layer->getmetadata("palletestep");
+		$sopen = $layer->open();
+		if($sopen != MS_FAILURE){
+			$items = $layer->getItems();
+		}
+		else{
+			$items = array();
+		}
+		$retorno["colunas"] = implode(",",$items);
+	break;
+	case "SALVAPARAMETROSAUTO":
+		$map = ms_newMapObj($map_file);
+		$layer = $map->getlayerbyname($tema);
+		$layer->setmetadata("classesitem",$_GET["classesitem"]);
+		$layer->setmetadata("classesnome",$_GET["classesnome"]);
+		$layer->setmetadata("classescor",$_GET["classescor"]);
+		$layer->setmetadata("classessimbolo",$_GET["classessimbolo"]);
+		$layer->setmetadata("classestamanho",$_GET["classestamanho"]);
+		$layer->setmetadata("palletefile",$_GET["palletefile"]);
+		$layer->setmetadata("palletestep",$_GET["palletestep"]);
+		$map->save($map_file);
+		$retorno = "ok";
+	break;
 /*
 Valor: TEMA2SLD
 

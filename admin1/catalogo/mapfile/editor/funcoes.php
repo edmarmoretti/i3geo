@@ -23,9 +23,10 @@ function textoMapfile($codigo) {
 		// isso e necessario para manter a consistencia caso o usuario altere manualmente os valores
 		// cria o objeto map
 		$mapa = ms_newMapObj ( $mapfile );
-		$layer = $mapa->getlayerbyname ( $codigo );
+		$layer = @$mapa->getlayerbyname ( $codigo );
+		$erro = "";
 		if ($layer == "") {
-			return "<br><span style='color:red;'>Aten&ccedil;&atilde;o: n&atilde;o existe nenhum LAYER com NAME igual a " . $codigo . "</span><br>";
+			$erro = "Aten&ccedil;&atilde;o: n&atilde;o existe nenhum LAYER com NAME igual a " . $codigo;
 		} else {
 			// pega o metadata
 			$meta = $layer->getmetadata ( "permitedownload" );
@@ -53,10 +54,12 @@ function textoMapfile($codigo) {
 	}
 	$texto = file_get_contents ( $mapfile );
 	if (mb_detect_encoding ( $texto, 'UTF-8, ISO-8859-1' ) == "ISO-8859-1") {
-		return utf8_encode ( $texto );
-	} else {
-		return $texto;
+		$texto =  utf8_encode ( $texto );
 	}
+	return array (
+		"texto" => $texto,
+		"erro"=> $erro
+	);
 }
 function salvaMapfile() {
 	global $dbhw, $codigo, $gravarTexto;

@@ -61,13 +61,7 @@ switch ($funcao) {
 
  outros
 
- $dados["classesitem"] = $layer->getmetadata("classesitem");
- $dados["classesnome"] = $layer->getmetadata("classesnome");
- $dados["classescor"] = $layer->getmetadata("classescor");
- $dados["classessimbolo"] = $layer->getmetadata("classessimbolo");
- $dados["classestamanho"] = $layer->getmetadata("classestamanho");
- $dados["palletefile"] = $layer->getmetadata("palletefile");
- $dados["palletestep"] = $layer->getmetadata("palletestep");
+
  $dados["description_template"] = $layer->getmetadata("description_template");
  $dados["editorsql"] = $layer->getmetadata("editorsql");
  */

@@ -856,5 +856,50 @@ i3GEOF.legenda.dicionario =
    				en : "",
    				es : ""
    			}
-   		]
+   		],
+   	    'autoClasses' : [ {
+   			pt : "&Eacute; poss&iacute;vel a gera&ccedil;&atilde;o de classes automaticamente por meio da defini&ccedil;&atilde;o de colunas na tabela de atributos do tema que armazenam as informa&ccedil;&otilde;es sobre cor, tamanho, etc.",
+   			en : "",
+   			es : ""
+   		} ],
+   		'classesitem' : [ {
+   			pt : "Qual a coluna da tabela que identifica unicamente cada classe. Para cada valor ser&aacute; criada uma classe. O tema que utiliza a gera&ccedil;&atilde;o de classes de forma autom&aacute;tica, deve ter definido apenas uma classe. Essa classe ser&aacute; utilizada como padr&atilde;o para gera&ccedil;&atilde;o das demais.",
+   			en : "",
+   			es : ""
+   		} ],
+   	    'classesnome' : [ {
+   			pt : "Nome da coluna que ser&aacute; utilizada para compor o nome das classes geradas automaticamente.",
+   			en : "",
+   			es : ""
+   		} ],
+   	    'classescor' : [ {
+   			pt : "Nome da coluna que definir&aacute; a cor do s&iacute;mbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
+   			en : "",
+   			es : ""
+   		} ],
+   	    'classessimbolo' : [ {
+   			pt : "Nome da coluna que definir&aacute; o s&iacute;mbolo utilizado em cada classe.",
+   			en : "",
+   			es : ""
+   		} ],
+   	    'classestamanho' : [ {
+   			pt : "Nome da coluna que definir&aacute; o tamanho de cada s&iacute;mbolo.",
+   			en : "",
+   			es : ""
+   		} ],
+   	    'palletefile' : [ {
+   			pt : "Palete de cores. Endere&ccedil;o do arquivo no servidor (opcional)",
+   			en : "",
+   			es : ""
+   		} ],
+   	    'palletestep' : [ {
+   			pt : "Quantas cores em cada n&iacute;vel da palete (opcional)",
+   			en : "",
+   			es : ""
+   		} ],
+   		"colunasTxt" : [ {
+   			pt : "Itens dispon&iacute;veis",
+   			en : "",
+   			es : ""
+   		} ]
 	};
