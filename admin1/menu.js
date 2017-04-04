@@ -27,41 +27,6 @@ menuPrincipal = [
 					html: "<a href='" + i3GEO.configura.locaplic + "/admin1/ferramentas/miniaturas/index.php' >"+$trad("geraMiniatura",i3GEOadmin.menup.dicionario)+"</a>"
 					}
 				]
-			},{
-				html: "RSS, JSON, XML",
-				children:[
-					{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlmetaestatogc.php' >"+$trad("xmlWmsMetaestat",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/rssmapas.php' >"+$trad("verRss",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/rssgrupos.php?output=xml' >"+$trad("rssArvore",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/rssgrupos.php?output=json' >"+$trad("rssArvoreJson",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/rsscomentariostemas.php' >"+$trad("rssComentarios",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlservicosws.php' >"+$trad("xmlWebServ",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlservicosws.php?output=json' >"+$trad("xmlWebServJson",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlservicoswms.php' >"+$trad("xmlWms",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlservicoswms.php?output=json' >"+$trad("xmlWmsJson",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlgeorss.php?output=json' >"+$trad("xmlGeoRssJson",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlmapas.php' >"+$trad("xmlMapas",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/rssmapas.php' >"+$trad("rssMapas",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/rssmapas.php?output=json' >"+$trad("rssMapasJson",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlsistemas.php' >"+$trad("xmlSistAdiciona",i3GEOadmin.menup.dicionario)+"</a>"
-					},{
-					html: "<a href='" + i3GEO.configura.locaplic + "/admin/xmlgeorss.php' >"+$trad("xmlGeoRss",i3GEOadmin.menup.dicionario)+"</a>"
-					}
-				]
 			}
 		]
 	},{

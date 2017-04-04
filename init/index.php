@@ -81,6 +81,7 @@ include "head.php";
 						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
 						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
 						<li><a role="button" href="../social/index.php" >Social</a></li>
+						<li><a role="button" href="../rss/index.php" >RSS</a></li>
 						<li <?php if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false) { echo "style=display:none "; }?>>
 						<a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../','template_mst_bt.html');"
 						href="#topo" data-toggle="modal" data-target="#modalLogin">Login <i class="material-icons md-18">input</i></a>
