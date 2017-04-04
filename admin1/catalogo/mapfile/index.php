@@ -1,4 +1,5 @@
 <?php
+//TODO incluir novamente ou nao a ativacao do metadata editorsql?
 define ( "ONDEI3GEO", "../../.." );
 include ("exec.php");
 

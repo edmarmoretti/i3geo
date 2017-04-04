@@ -41,7 +41,7 @@ $id_tema = ( int ) $_POST ["id_tema"];
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ALTERAR" :
-		$dados = \admin\catalogo\mapfile\disponibilidade\alterar ($_SESSION["locaplic"], $id_tema, $codigo, $_POST["permiteogc"], $_POST["permitedownload"], $_POST["permitekml"], $_POST["permitekmz"], $_POST["download"], $_POST["arquivodownload"], $_POST["arquivokmz"], $dbhw);
+		$dados = \admin\catalogo\mapfile\disponibilidade\alterar ($_SESSION["locaplic"], $id_tema, $codigo, $_POST["permiteogc"], $_POST["permitedownload"], $_POST["permitekml"], $_POST["permitekmz"], $_POST["download"], $_POST["arquivodownload"], $_POST["arquivokmz"], $_POST["description_template"], $dbhw);
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		}

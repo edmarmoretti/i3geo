@@ -116,6 +116,21 @@
 			</div>
 		</div>
 	</div>
+	<div class="col-md-12">
+		<div class="form-group form-group-lg">
+			<div class="col-md-6">
+				<label class="control-label" for="description_template">
+					{{{descriptiontemplateTitulo}}}
+				</label>
+				<p class="small">
+					{{{descriptiontemplate}}} (metadata: description_template)
+				</p>
+			</div>
+			<div class="col-md-6">
+				<input title="{{{arquivoKmzTitulo}}}" type="text" value="{{{description_template}}}" class="form-control" name="description_template" >
+			</div>
+		</div>
+	</div>
 	<div class="pull-right">
 		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 	</div>

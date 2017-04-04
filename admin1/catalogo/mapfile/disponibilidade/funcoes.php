@@ -1,7 +1,7 @@
 <?php
 namespace admin\catalogo\mapfile\disponibilidade;
 function listar($locaplic,$codigo){
-	
+
 
 	// pega o nome registrado no mapfile
 	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
@@ -37,9 +37,10 @@ function listar($locaplic,$codigo){
 	}
 	$dados ["arquivodownload"] = $layer->getmetadata ( "arquivodownload" );
 	$dados ["arquivokmz"] = $layer->getmetadata ( "arquivokmz" );
+	$dados ["description_template"] = $layer->getmetadata ( "description_template" );
 	return $dados;
 }
-function alterar($locaplic, $id_tema, $codigo, $permiteogc, $permitedownload, $permitekml, $permitekmz, $download, $arquivodownload, $arquivokmz, $dbhw){
+function alterar($locaplic, $id_tema, $codigo, $permiteogc, $permitedownload, $permitekml, $permitekmz, $download, $arquivodownload, $arquivokmz, $description_template, $dbhw){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if ($codigo == "" || ! file_exists ( $arq )) {
@@ -57,6 +58,8 @@ function alterar($locaplic, $id_tema, $codigo, $permiteogc, $permitedownload, $p
 	$layer->setmetadata ( "permitekml", $permitekml );
 	$layer->setmetadata ( "permitekmz", $permitekmz );
 	$layer->setmetadata ( "arquivodownload", $arquivodownload );
+	$layer->setmetadata ( "description_template", $description_template );
+
 	$layer->setmetadata ( "arquivokmz", $arquivokmz );
 	if (! empty ( $id_tema )) {
 		try {

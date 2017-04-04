@@ -57,12 +57,4 @@ switch ($funcao) {
 		header ( "HTTP/1.1 500 erro funcao nao existe" );
 		break;
 }
-/*
-
- outros
-
-
- $dados["description_template"] = $layer->getmetadata("description_template");
- $dados["editorsql"] = $layer->getmetadata("editorsql");
- */
 ?>

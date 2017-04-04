@@ -1466,7 +1466,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'descriptiontemplateTitulo' : [ {
-		pt : "KML template (DESCRIPTION_TEMPLATE)",
+		pt : "KML template",
 		en : "",
 		es : ""
 	} ],
