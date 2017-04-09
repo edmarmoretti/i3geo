@@ -1,15 +1,13 @@
 <?php
 /****************************************************************/
-//include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
+////include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 //
 //checa login
 //valida _GET e _POST, juntando em _GET
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-
 include ("../../php/checaLogin.php");
-
 \admin\php\login\checaLogin();
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
@@ -27,23 +25,19 @@ include ("funcoes.php");
 //cria as variaveis $dbh e $dbhw alem de conexaoadmin
 //
 include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
-
 /***************************************************************/
-if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === false) {
+if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-if(isset($_POST["id_menu"])){
-	$id_menu = $_POST["id_menu"];
-	\admin\php\funcoesAdmin\testaSafeNumerico([$id_menu]);
-}
-if(!isset($idioma) || $idioma == ""){
-	$idioma = "pt";
-}
+$id_fonteinfo = $_POST["id_fonteinfo"];
+
+\admin\php\funcoesAdmin\testaSafeNumerico([$id_fonteinfo]);
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = \admin\catalogo\menus\adicionar( $_POST["publicado_menu"], $_POST["perfil_menu"], $_POST["aberto"], $_POST["desc_menu"], $_POST["nome_menu"], $_POST["es"], $_POST["en"], $dbhw );
+		$novo = \admin\metaestat\fontes\adicionar ( $_POST["titulo"], $_POST["link"], $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($novo === false) {
@@ -51,7 +45,7 @@ switch ($funcao) {
 		}
 		break;
 	case "ALTERAR" :
-		$novo = \admin\catalogo\menus\alterar ( $id_menu, $_POST["publicado_menu"], $_POST["perfil_menu"], $_POST["aberto"], $_POST["desc_menu"], $_POST["nome_menu"], $_POST["es"], $_POST["en"], $dbhw );
+		$novo = \admin\metaestat\fontes\alterar ( $id_fonteinfo,$_POST["titulo"],$_POST["link"], $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($novo === false) {
@@ -59,40 +53,31 @@ switch ($funcao) {
 		}
 		break;
 	case "LISTAUNICO" :
-		$dados = \admin\catalogo\menus\listar($dbh, $id_menu);
+		$dados = \admin\metaestat\fontes\listar ( $dbh, $id_fonteinfo );
+		$dbhw = null;
+		$dbh = null;
 		if ($dados === false) {
-			$dbhw = null;
-			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
-			include ("../../cadastros/perfis/funcoes.php");
-			$perfis = \admin\cadastros\perfis\listar( $dbh );
-			$dbhw = null;
-			$dbh = null;
-			\admin\php\funcoesAdmin\retornaJSON ( array("dados"=>$dados, "perfis"=>$perfis) );
+			\admin\php\funcoesAdmin\retornaJSON ( $dados );
 		}
 		break;
 	case "LISTA" :
-		$dados = \admin\catalogo\menus\listar($dbh);
+		$dados = \admin\metaestat\fontes\listar ( $dbh );
+		$dbhw = null;
+		$dbh = null;
 		if ($dados === false) {
-			$dbhw = null;
-			$dbh = null;
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
-			include ("../../cadastros/perfis/funcoes.php");
-			$perfis = \admin\cadastros\perfis\listar( $dbh );
-			$dbhw = null;
-			$dbh = null;
-			\admin\php\funcoesAdmin\retornaJSON ( array("dados"=>$dados, "perfis"=>$perfis) );
+			\admin\php\funcoesAdmin\retornaJSON ( $dados );
 		}
 		break;
 	case "EXCLUIR" :
-		$retorna = \admin\catalogo\menus\excluir ( $id_menu, $dbhw );
+		$retorna = \admin\metaestat\fontes\excluir ( $id_fonteinfo, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-			exit ();
 		}
 		break;
 	default:

@@ -149,7 +149,7 @@ switch ($funcao) {
 		\admin\php\funcoesAdmin\retornaJSON("ok");
 		break;
 	default:
-		header ( "HTTP/1.1 500 erro funcao nao existe" );
+		if(!empty ($funcao)) header ( "HTTP/1.1 500 erro funcao nao existe" );
 		break;
 }
 ?>
