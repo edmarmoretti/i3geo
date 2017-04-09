@@ -6,7 +6,7 @@
 			<div class="form-group form-group-lg" style="padding-left:5px;">{{{inputPapeis}}}</div>
 		</div>
 		<div class="col-md-8">
-			<h4>{{{usuario}}}</h4>
+			<h4>{{{usuarioTxt}}}</h4>
 			<div class="form-group form-group-lg">
 				<label class="col-md-2 control-label" for="nome_usuario" >{{{nome}}}</label>
 				<div class="col-md-10">

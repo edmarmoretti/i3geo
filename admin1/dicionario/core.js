@@ -341,7 +341,7 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'usuario' : [ {
+    'usuarioTxt' : [ {
 		pt : "Usu&aacute;rio",
 		en : "",
 		es : ""

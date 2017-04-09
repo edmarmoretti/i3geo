@@ -1,13 +1,11 @@
-//+$trad(1,i3GEOadmin.editormapfile.dicionario)+
-i3GEOadmin.estat_conexao = {};
-i3GEOadmin.estat_conexao.dicionario = {
-	'estatConexao' : [ {
-		pt : "Metadados estat&iacute;sticos - cadastro de conex&otilde;es com banco	de dados",
+i3GEOadmin.conexoes.dicionario = {
+	'txtTitulo' : [ {
+		pt : "Cadastro de conex&otilde;es com bancos de dados",
 		en : "",
 		es : ""
 	} ],
-    'ajuda' : [ {
-		pt : "<p>Este formul&aacute;rio permite editar a lista de conex&otilde;es que s&atilde;o mostradas nos formul&aacute;rios do sistema de metadados estat&iacute;sticos",
+    'txtDesc' : [ {
+		pt : "Lista de conex&otilde;es que s&atilde;o mostradas nos formul&aacute;rios do sistema de metadados estat&iacute;sticos",
 		en : "",
 		es : ""
 	} ],
@@ -16,28 +14,28 @@ i3GEOadmin.estat_conexao.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'txtAjuda' : [ {
+		pt : "Os par&acirc;metros de algumas das conex&otilde;es s&atilde;o definidas diretamente no arquivo de configura&ccedil;&atilde;o do i3Geo (ms_configura.php) e outras podem ser registradas no banco de dados de administra&ccedil;&atilde;o. No primeiro caso, n&atilde;o &eacute; poss&iacute;vel editar os par&acirc;metros por esse formul&aacute;rio. Por quest&otilde;es de seguran&ccedil;a, a senha de conex&atilde;o n&atilde;o &eacute; mostrada. Para alterar a senha &eacute; necess&aacute;rio editar diretamente o banco de dados de administra&ccedil;&atilde;o do i3Geo ou o arquivo ms_configura.php.",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'bancodedadosTxt' : [ {
+		pt : "Nome do banco de dados",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'hostTxt' : [ {
+		pt : "Endere&ccedil;o do servidor",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'portaTxt' : [ {
+		pt : "Porta",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
+    'usuarioTxt' : [ {
+		pt : "Usu&aacute;rio",
 		en : "",
 		es : ""
 	} ]
