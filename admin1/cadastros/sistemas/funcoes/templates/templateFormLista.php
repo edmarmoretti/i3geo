@@ -3,9 +3,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="nome_funcao" >{{{nome}}}</label>
+				<label class="col-md-4 control-label" for="nome_funcao" >{{{nomeTxt}}}</label>
 				<div class="col-md-8">
-					<input title="{{{titulo}}}" type="text" value="{{{nome_funcao}}}" class="form-control" name="nome_funcao" required>
+					<input title="{{{nomeTxt}}}" type="text" value="{{{nome_funcao}}}" class="form-control" name="nome_funcao" required>
 				</div>
 			</div>
 			<div class="form-group form-group-lg">

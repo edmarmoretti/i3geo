@@ -6,7 +6,7 @@
 			<h4>Tag</h4>
 			<div class="form-group form-group-lg">
 				<div class="col-md-12">
-					<input title="{{{nome}}}" type="text" value="{{{nome}}}" class="form-control" name="nome" required>
+					<input title="tag" type="text" value="{{{nome}}}" class="form-control" name="nome" required>
 				</div>
 			</div>
 		</div>

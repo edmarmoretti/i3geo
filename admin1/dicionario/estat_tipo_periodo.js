@@ -1,23 +1,11 @@
-//+$trad(1,i3GEOadmin.editormapfile.dicionario)+
-i3GEOadmin.estat_tipo_periodo = {};
-i3GEOadmin.estat_tipo_periodo.dicionario = {
-	'estatTipoPeriodo' : [ {
-		pt : "Metadados estat&iacute;sticos - Unidades de medida",
+i3GEOadmin.periodos.dicionario = {
+	'txtTitulo' : [ {
+		pt : "Cadastro dos tipos de per&iacute;odos de tempo",
 		en : "",
 		es : ""
 	} ],
-    'ajuda' : [ {
-		pt : "Ajuda",
-		en : "",
-		es : ""
-	} ],
-    'txtAjuda' : [ {
-		pt : "<p>Este formul&aacute;rio permite editar a lista de per&iacute;odos de tempo que s&atilde;o mostradas nos	formul&aacute;rios do sistema de metadados estat&iacute;sticos",
-		en : "",
-		es : ""
-	} ],
-    'adicionaRegistro' : [ {
-		pt : "Adicionar um novo registro",
+    'txtDesc' : [ {
+		pt : "Tipos de per&iacute;odos que podem ser escolhidos nos formul&aacute;rios de defini&ccedil;&atilde;o das vari&aacute;veis ",
 		en : "",
 		es : ""
 	} ],

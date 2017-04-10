@@ -1,38 +1,26 @@
-//+$trad(1,i3GEOadmin.editormapfile.dicionario)+
-i3GEOadmin.estat_unidade_medida = {};
-i3GEOadmin.estat_unidade_medida.dicionario = {
-	'estatUnidadeMedida' : [ {
-		pt : "Metadados estat&iacute;sticos - Unidades de medida",
+i3GEOadmin.unidades.dicionario = {
+	'txtTitulo' : [ {
+		pt : "Cadastro de unidades de medida",
 		en : "",
 		es : ""
 	} ],
-    'ajuda' : [ {
-		pt : "Ajuda",
+    'txtDesc' : [ {
+		pt : "Tipos de unidades de medida que podem ser escolhidos nos formul&aacute;rios de defini&ccedil;&atilde;o das vari&aacute;veis",
 		en : "",
 		es : ""
 	} ],
-    'txtAjuda' : [ {
-		pt : "<p>Este formul&aacute;rio permite editar a lista de unidades	de medida que s&atilde;o mostradas nos formul&aacute;rios do sistema de metadados estat&iacute;sticos",
+    'siglaTxt' : [ {
+		pt : "Sigla",
 		en : "",
 		es : ""
 	} ],
-    'adicionaRegistro' : [ {
-		pt : "Adicionar um novo registro",
+    'permitesomaTxt' : [ {
+		pt : "Permite somar os valores",
 		en : "",
 		es : ""
 	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
+    'permitemediaTxt' : [ {
+		pt : "Permite calcular m&eacute;dia",
 		en : "",
 		es : ""
 	} ],

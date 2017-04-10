@@ -4,9 +4,9 @@
 				<div class="col-md-12">
 					<h4>{{{nome_i}}}</h4>
 					<div class="form-group form-group-lg">
-						<label class="col-md-2 control-label" for="nome_i" >{{{nome}}}</label>
+						<label class="col-md-2 control-label" for="nome_i" >{{{nomeTxt}}}</label>
 						<div class="col-md-10">
-							<input title="{{{nome}}}" type="text" value="{{{nome_i}}}" class="form-control" name="nome_i" required>
+							<input title="{{{nomeTxt}}}" type="text" value="{{{nome_i}}}" class="form-control" name="nome_i" required>
 						</div>
 					</div>
 					<div class="form-group form-group-lg">

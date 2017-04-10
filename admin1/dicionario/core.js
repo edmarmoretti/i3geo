@@ -236,11 +236,6 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'nome' : [ {
-		pt : "Nome",
-		en : "",
-		es : ""
-	} ],
     'descricaoTxt' : [ {
 		pt : "Descri&ccedil;&atilde;o",
 		en : "",
