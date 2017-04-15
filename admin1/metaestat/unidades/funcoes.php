@@ -34,12 +34,16 @@ function adicionar($nome,$sigla,$permitesoma,$permitemedia, $dbhw) {
 }
 function alterar($codigo_unidade_medida, $nome, $sigla,$permitesoma,$permitemedia, $dbhw) {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];
-		$dataCol = array (
-				"nome" => $nome,
-				"sigla" => $sigla,
-				"permitesoma" => $permitesoma,
-				"permitemedia" => $permitemedia
-		);
+	$convUTF = $_SESSION["convUTF"];
+	if ($convUTF != true){
+		$nome = utf8_decode($nome);
+	}
+	$dataCol = array (
+			"nome" => $nome,
+			"sigla" => $sigla,
+			"permitesoma" => $permitesoma,
+			"permitemedia" => $permitemedia
+	);
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoestat_unidade_medida", $dataCol, "WHERE codigo_unidade_medida = $codigo_unidade_medida" );
 	if ($resultado === false) {
 		return false;

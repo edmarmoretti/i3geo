@@ -32,6 +32,11 @@ function adicionar($nome, $descricao, $dbhw) {
 }
 function alterar($codigo_tipo_periodo, $nome, $descricao, $dbhw) {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];
+	$convUTF = $_SESSION["convUTF"];
+	if ($convUTF != true){
+		$nome = utf8_decode($nome);
+		$descricao = utf8_decode($descricao);
+	}
 	$dataCol = array (
 			"nome" => $nome,
 			"descricao" => $descricao

@@ -11,7 +11,7 @@ i3GEOadmin.core.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'tabela' : [ {
+	'tabelaTxt' : [ {
 		pt : "Tabela",
 		en : "",
 		es : ""

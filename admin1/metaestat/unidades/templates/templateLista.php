@@ -9,7 +9,7 @@
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{codigo_unidade_medida}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
-			{{{nome}}}
+			&nbsp;{{{nome}}}
 		</h4>
 	</div>
 	<div class="list-group-separator"></div>

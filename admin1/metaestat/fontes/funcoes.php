@@ -33,6 +33,12 @@ function adicionar($titulo, $link, $dbhw) {
 }
 function alterar($id_fonteinfo, $titulo, $link, $dbhw) {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];
+
+	$convUTF = $_SESSION["convUTF"];
+	if ($convUTF != true){
+		$titulo = utf8_decode($titulo);
+	}
+
 	$dataCol = array (
 			"titulo" => $titulo,
 			"link" => $link
