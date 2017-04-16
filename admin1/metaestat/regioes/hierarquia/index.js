@@ -132,55 +132,24 @@ Obt&eacute;m a lista de hierarquia
 											"onExcluir": "i3GEOadmin.hierarquia.excluirDialogo",//funcao
 											"onSalvar": "i3GEOadmin.hierarquia.salvarDialogo",
 											"opcoesRegiao": function(){
-												var p = this.codigo_tipo_regiao_pai;
-												var id = "";
-												//marca o selecionado
-												var l = i3GEOadmin.hierarquia.listaDeRegioes;
-												$(l).each(
-													function(i,el){
-														if(el.codigo_tipo_regiao == p){
-															l[i]["selected"] = "selected";
-															id = i;
-														}
-														else{
-															l[i]["selected"] = "";
-														}
-													}
-												);
 												var html = Mustache.to_html(
 														"{{#data}}" + $("#templateOpcoesRegioes").html() + "{{/data}}",
-														{"data":l}
+														{"data":i3GEOadmin.hierarquia.listaDeRegioes}
 													);
-												l[id]["selected"] = "";
 												return html;
 											},
 											"opcoesColuna": function(){
-												var p = this.colunaligacao_regiaopai;
-												var id = "";
-												//marca o selecionado
-												var l = i3GEOadmin.hierarquia.listaDeColunas;
-												$(l).each(
-													function(i,el){
-														if(el.nome == p){
-															l[i]["selected"] = "selected";
-															id = i;
-														}
-														else{
-															l[i]["selected"] = "";
-														}
-													}
-												);
 												var html = Mustache.to_html(
 														"{{#data}}" + $("#templateOpcoesColunas").html() + "{{/data}}",
-														{"data":l}
+														{"data":i3GEOadmin.hierarquia.listaDeColunas}
 													);
-												l[id]["selected"] = "";
 												return html;
 											}
 										}
 								)
 						);
 						i3GEOadmin.core.abreModalGeral(html);
+						i3GEOadmin.core.defineSelecionados("modalGeral",json);
 					}
 			)
 			.fail(

@@ -44,6 +44,13 @@ if(typeof jQuery != 'undefined' ){
 			//valor do filtro utilizado ao iniciar a pagina
 			//usado para enviar parametros pela URL ao iniciar uma pagina
 			initFiltro: "",
+			defineSelecionados: function(idForm,hash){
+				$("#"+idForm + " select").each(
+					function(i){
+						$(this).val(hash[$(this).attr("name")]);
+					}
+				);
+			},
 			erroLogin: function(){
 				$("#loginOff").css("display","");
 				$("#loginOn").css("display","none");
