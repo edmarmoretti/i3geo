@@ -32,12 +32,12 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'cadastroUsuario' : [ {
-		pt : "Cadastro de usu&aacute;rios e rela&ccedil;&atilde;o com pap&eacute;is",
+		pt : "Usu&aacute;rios e rela&ccedil;&atilde;o com pap&eacute;is",
 		en : "",
 		es : ""
 	} ],
 	'cadastroGrupos' : [ {
-		pt : "Cadastro de grupos e rela&ccedil;&atilde;o com usu&aacute;rios",
+		pt : "Grupos e rela&ccedil;&atilde;o com usu&aacute;rios",
 		en : "",
 		es : ""
 	} ],
@@ -52,37 +52,37 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'cadastroVariav' : [ {
-		pt : "Cadastro principal de vari&aacute;veis",
+		pt : "Vari&aacute;veis",
 		en : "",
 		es : ""
 	} ],
 	'cadastroMapas' : [ {
-		pt : "Cadastro de mapas para publica&ccedil;&atilde;o",
+		pt : "Mapas para publica&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
 	'cadastroMedidas' : [ {
-		pt : "Cadastro de unidades de medida",
+		pt : "Unidades de medida",
 		en : "",
 		es : ""
 	} ],
 	'cadastroPeriodos' : [ {
-		pt : "Cadastro de tipos de per&iacute;odos de tempo",
+		pt : "Tipos de per&iacute;odos de tempo",
 		en : "",
 		es : ""
 	} ],
 	'cadastroConexoes' : [ {
-		pt : "Cadastro de conex&otilde;es com banco de dados",
+		pt : "Conex&otilde;es com banco de dados",
 		en : "",
 		es : ""
 	} ],
     'cadastroTabelas' : [ {
-		pt : "Cadastro de tabelas com regi&otilde;es geogr&aacute;ficas",
+		pt : "Tabelas com regi&otilde;es geogr&aacute;ficas",
 		en : "",
 		es : ""
 	} ],
 	'cadastroFonte' : [ {
-		pt : "Cadastro de fontes de informa&ccedil;&atilde;o",
+		pt : "Fontes de informa&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],

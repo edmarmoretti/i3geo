@@ -549,19 +549,19 @@ i3GEOadmin.grupos = {
 		},
 		editarSubGrupos: function(id,titulo){
 			//muda a url para que o usuario possa voltar pelo botao do navegador
-			var u = window.location.origin
-			+ window.location.pathname
-			+ "?id_filtro=" + id + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&id_n1=" + id;
-			window.history.replaceState(null,null,u);
+			//var u = window.location.origin
+			//+ window.location.pathname
+			//+ "?id_filtro=" + id + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&id_n1=" + id;
+			//window.history.replaceState(null,null,u);
 			//abre a pagina de edicao
 			window.location.href = "subgrupos/index.php?id_n1=" + id + "&id_menu=" + i3GEOadmin.grupos.id_menu;
 		},
 		editarListaDeGrupos: function(id,titulo){
 			//muda a url para que o usuario possa voltar pelo botao do navegador
-			var u = window.location.origin
-			+ window.location.pathname
-			+ "?id_filtro=" + id + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&id_n1=" + id;
-			window.history.replaceState(null,null,u);
+			//var u = window.location.origin
+			//+ window.location.pathname
+			//+ "?id_filtro=" + id + "&id_menu=" + i3GEOadmin.grupos.id_menu + "&id_n1=" + id;
+			//window.history.replaceState(null,null,u);
 			//abre a pagina de edicao
 			window.location.href = "listadegrupos/index.php?id_n1=" + id + "&id_menu=" + i3GEOadmin.grupos.id_menu;
 		},

@@ -1,3 +1,6 @@
+if (typeof (i3GEOadmin.variaveis) === 'undefined') {
+	i3GEOadmin.variaveis = {};
+}
 i3GEOadmin.variaveis.dicionario = {
 	'txtTituloVariavel' : [ {
 		pt : "Cadastro de vari&aacute;veis",
@@ -21,6 +24,76 @@ i3GEOadmin.variaveis.dicionario = {
 	} ],
     'nomeVariavelTxt' : [ {
 		pt : "Nome que ser&aacute; utilizado nos menus de escolha da vari&aacute;vel",
+		en : "",
+		es : ""
+	} ],
+    'txtTituloMedida' : [ {
+		pt : "Cadastro de medidas de uma vari&aacute;vel",
+		en : "",
+		es : ""
+	} ],
+    'txtDescMedida' : [ {
+		pt : "As medidas s&atilde;o valores existentes em uma tabela no banco de dados e est&aacute; relacionada &agrave; vari&aacute;vel em foco",
+		en : "",
+		es : ""
+	} ],
+    'txtAjudaMedida' : [ {
+		pt : "Var&iacute;av&eacute;s podem ter mais de uma medida. Cada medida possu&iacute; atributos que indicam onde os dados est&atilde;o localizados no banco de dados e quais suas principais caracter&iacute;sticas. O formul&aacute;rio permite ainda editar outras op&ccedil;&otilde;es que definem como os dados s&atilde;o classificados em um mapa e outras.",
+		en : "",
+		es : ""
+	} ],
+    'nomemedidaTxt' : [ {
+		pt : "Nome da medida",
+		en : "",
+		es : ""
+	} ],
+    'codigo_tipo_periodoTxt' : [ {
+		pt : "Tipo de per&iacute;odo de tempo",
+		en : "",
+		es : ""
+	} ],
+    'codigo_tipo_regiaoTxt' : [ {
+		pt : "Tipo de regi&atilde;o geogr&aacute;fica relacionada",
+		en : "",
+		es : ""
+	} ],
+    'codigo_estat_conexaoTxt' : [ {
+		pt : "Conex&atilde;o com o banco de dados",
+		en : "",
+		es : ""
+	} ],
+    'esquemadbTxt' : [ {
+		pt : "Esquema do banco onde fica a tabela com os dados",
+		en : "",
+		es : ""
+	} ],
+    'tabelaTxt' : [ {
+		pt : "Tabela que cont&eacute;m os dados",
+		en : "",
+		es : ""
+	} ],
+    'colunavalorTxt' : [ {
+		pt : "Coluna da tabela que cont&eacute;m os valores",
+		en : "",
+		es : ""
+	} ],
+    'colunaidunicoTxt' : [ {
+		pt : "Coluna da tabela que cont&eacute;m os identificadores &uacute;nicos de cada registro",
+		en : "",
+		es : ""
+	} ],
+    'colunaidgeoTxt' : [ {
+		pt : "Coluna da tabela que cont&eacute;m os identificadores da regi&atilde;o geogr&aacute;fica relacionada aos valores",
+		en : "",
+		es : ""
+	} ],
+    'filtroTxt' : [ {
+		pt : "Filtro adicional que ser&aacute; inclu&iacute;do na sele&ccedil;&atilde;o dos dados",
+		en : "",
+		es : ""
+	} ],
+    'codigo_unidade_medidaTxt' : [ {
+		pt : "Unidade de medida",
 		en : "",
 		es : ""
 	} ]

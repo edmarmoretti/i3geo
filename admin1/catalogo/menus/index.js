@@ -284,8 +284,8 @@ Obt&eacute;m a lista de menus
 		},
 		editarGrupos: function (id_menu){
 			//muda a url para que o usuario possa voltar pelo botao do navegador
-			var u = window.location.origin + window.location.pathname + "?id_filtro=" + id_menu;
-			window.history.replaceState(null,null,u);
+			//var u = window.location.origin + window.location.pathname + "?id_filtro=" + id_menu;
+			//window.history.replaceState(null,null,u);
 			//abre a pagina de edicao
 			window.location.href = "grupos/index.php?id_menu=" + id_menu;
 		}

@@ -212,7 +212,7 @@ Obt&eacute;m a lista de variaveis
 					}
 			);
 		},
-		editarMedida: function(codigo_variavel){
-			window.location.href = "medida/index.php?codigo_variavel=" + codigo_variavel;
+		editarMedidas: function(codigo_variavel){
+			window.location.href = "medidas/index.php?codigo_variavel=" + codigo_variavel;
 		}
 };

@@ -432,7 +432,7 @@ a.collapsed .readLess {
 				<div class="modal-body modal-lg" style="height: 200px">
 					<!-- aqui entra o filtro -->
 					<div class="form-group">
-						<select title="{{{filtro}}}" title="{{{filtro}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
+						<select title="{{{filtroTxt}}}" title="{{{filtroTxt}}}" onchange="i3GEOadmin.core.filtra(this)" id="filtro" class="form-control input-lg">
 						</select>
 					</div>
 					<div class="clearfix"></div>
