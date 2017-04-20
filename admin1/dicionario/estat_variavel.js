@@ -146,6 +146,21 @@ i3GEOadmin.variaveis.dicionario = {
 		pt : "Escolha a fonte",
 		en : "",
 		es : ""
+	} ],
+    'nomeParametro' : [ {
+		pt : "Nome do par&acirc;metro",
+		en : "",
+		es : ""
+	} ],
+    'colunaPar' : [ {
+		pt : "Coluna existente na tabela relacionada &agrave; medida e que cont&eacute;m os valores do par&acirc;metro",
+		en : "",
+		es : ""
+	} ],
+    'id_paiTxt' : [ {
+		pt : "Par&acirc;metro de hierarquia superior (pai) que deve ser escolhido primeiro nos formul&aacute;rios (opcional)",
+		en : "",
+		es : ""
 	} ]
 
 };

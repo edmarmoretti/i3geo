@@ -430,6 +430,31 @@ i3GEOadmin.core.dicionario = {
 		pt : "Escolha da lista",
 		en : "",
 		es : ""
+	} ],
+    'NonDef' : [ {
+		pt : "N&atilde;o definido",
+		en : "",
+		es : ""
+	} ],
+    'Ano' : [ {
+		pt : "Ano",
+		en : "",
+		es : ""
+	} ],
+    'Mes' : [ {
+		pt : "Mês",
+		en : "",
+		es : ""
+	} ],
+    'Dia' : [ {
+		pt : "Dia",
+		en : "",
+		es : ""
+	} ],
+    'Hora' : [ {
+		pt : "Hora",
+		en : "",
+		es : ""
 	} ]
 
 };
