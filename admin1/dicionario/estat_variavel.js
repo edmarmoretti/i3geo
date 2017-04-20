@@ -96,5 +96,51 @@ i3GEOadmin.variaveis.dicionario = {
 		pt : "Unidade de medida",
 		en : "",
 		es : ""
+	} ],
+    'opcoesMedidas' : [ {
+		pt : "Opções da medida",
+		en : "",
+		es : ""
+	} ],
+    'parametrosTxt' : [ {
+		pt : "Par&acirc;metros",
+		en : "",
+		es : ""
+	} ],
+    'parametrosDesc' : [ {
+		pt : "Os par&acirc;metros s&atilde;o colunas existentes na tabela onde est&atilde;o os valores da medida e que devem ser selecionados pelo usu&aacute;rio, por exemplo, a coluna com valores correspondentes ao ano da medida",
+		en : "",
+		es : ""
+	} ],
+    'classificacoesTxt' : [ {
+		pt : "Classificações",
+		en : "",
+		es : ""
+	} ],
+    'classificacoesDesc' : [ {
+		pt : "As classifica&ccedil;&otilde;es definem como os dados ser&atilde;o representados no mapa, especificando os limites de classe e a simbologia",
+		en : "",
+		es : ""
+	} ],
+    'linksTxt' : [ {
+		pt : "Links",
+		en : "",
+		es : ""
+	} ],
+    'linksDesc' : [ {
+		pt : "Links com informações adicionais sobre os dados ou para aplicativos",
+		en : "",
+		es : ""
+	} ],
+    'fontesTxt' : [ {
+		pt : "Lista de fontes",
+		en : "",
+		es : ""
+	} ],
+    'fontesDesc' : [ {
+		pt : "Links para os metadados. A lista de fontes &eacute; controlada por meio do cadastro de fontes.",
+		en : "",
+		es : ""
 	} ]
+
 };
