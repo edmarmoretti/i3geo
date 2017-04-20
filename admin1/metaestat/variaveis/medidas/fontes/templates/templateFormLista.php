@@ -1,21 +1,13 @@
 <script id="templateFormLista" type="x-tmpl-mustache">
-<form id="form-edicao-{{id_link}}" style="" action="#" onsubmit="{{onSalvar}}('{{id_link}}');return false;"   class="form-horizontal" role="form" method="post"   >
+<form id="form-edicao-modal" style="" action="#" onsubmit="{{onSalvar}}();return false;"   class="form-horizontal" role="form" method="post"   >
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group form-group-lg">
-				<label class="control-label" for="nomemedida" >{{{nomeTxt}}}</label>
+				<label class="control-label" for="id_fonteinfo" >{{{escolhaFonte}}}</label>
 				<div>
-					<input title="{{{nomeTxt}}}" type="text" value="{{{nome}}}" class="form-control" name="nome" >
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row">
-		<div class="col-md-12">
-			<div class="form-group form-group-lg">
-				<label class="control-label" for="link" >Link</label>
-				<div>
-					<input title="URI" type="text" value="{{{link}}}" class="form-control" name="link" >
+					<select class="form-control" name="id_fonteinfo" required >
+						{{{listaDeFontes}}}
+					</select>
 				</div>
 			</div>
 		</div>

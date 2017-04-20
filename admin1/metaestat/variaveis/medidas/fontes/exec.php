@@ -44,14 +44,6 @@ switch ($funcao) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		}
 		break;
-	case "ALTERAR" :
-		$novo = \admin\metaestat\variaveis\medidas\fontes\alterar ( $id_medida_variavel, $id_fonteinfo, $dbhw );
-		$dbhw = null;
-		$dbh = null;
-		if ($novo === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-		}
-		break;
 	case "LISTA" :
 		$dados = \admin\metaestat\variaveis\medidas\fontes\listar ( $dbh,$id_medida_variavel );
 		$dbhw = null;
@@ -65,7 +57,7 @@ switch ($funcao) {
 		}
 		break;
 	case "EXCLUIR" :
-		$retorna = \admin\metaestat\variaveis\medidas\fontes\excluir ( $id_fonteinfo, $dbhw );
+		$retorna = \admin\metaestat\variaveis\medidas\fontes\excluir ( $id_medida_variavel,$id_fonteinfo, $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {

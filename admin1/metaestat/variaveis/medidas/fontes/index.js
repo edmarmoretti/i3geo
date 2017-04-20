@@ -27,6 +27,7 @@ i3GEOadmin.fontesmedida = {
 		ondeLista: "",
 		codigo_variavel: "",
 		id_medida_variavel: "",
+		listaDeFontes:"",
 		//conteudo html do formulario de adicao de operacao
 		formAdiciona: "",
 		//parametros obtidos do formulario de edicao antes de abrir o modal de confirmacao
@@ -52,6 +53,7 @@ Obt&eacute;m a lista de variaveis
 						var json = jQuery.parseJSON(data);
 						//template do form de cada operacao
 						var templateLista = $("#templateLista").html();
+						i3GEOadmin.fontesmedida.listaDeFontes = json.fontes;
 						//lista todas as variaveis
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
@@ -74,11 +76,17 @@ Obt&eacute;m a lista de variaveis
 											{},
 											i3GEOadmin.fontesmedida.dicionario,
 											{
-												"id_fonteinfo": "modal",
 												"escondido": "hidden",
 												"excluir": i3GEOadmin.fontesmedida.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
-												"onSalvar": "i3GEOadmin.fontesmedida.adiciona"
+												"onSalvar": "i3GEOadmin.fontesmedida.adiciona",
+												"listaDeFontes": function(){
+													var html = Mustache.to_html(
+															"{{#data}}" + $("#templateOpcoesFontes").html() + "{{/data}}",
+															{"data":i3GEOadmin.fontesmedida.listaDeFontes}
+														);
+													return html;
+												}
 											}
 									)
 							);
@@ -91,40 +99,6 @@ Obt&eacute;m a lista de variaveis
 				i3GEOadmin.fontesmedida.ondeLista.html("");
 				i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 			});
-		},
-		editarDialogo: function(id){
-			i3GEOadmin.core.fechaModalGeral();
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=listaunico",
-					"id_fonteinfo=" + id
-			)
-			.done(
-					function(data, status){
-						var json = jQuery.parseJSON(data);
-						//lista todas as variaveis
-						var html = Mustache.to_html(
-								"{{#data}}" + $("#templateFormLista").html() + "{{/data}}",
-								$.extend(
-										{},
-										i3GEOadmin.fontesmedida.dicionario,
-										{
-											"data": json,
-											"onExcluir": "i3GEOadmin.fontesmedida.excluirDialogo",//funcao
-											"onSalvar": "i3GEOadmin.fontesmedida.salvarDialogo"
-										}
-								)
-						);
-						i3GEOadmin.core.abreModalGeral(html);
-						i3GEOadmin.core.defineSelecionados("modalGeral",json);
-					}
-			)
-			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
-			);
 		},
 		adicionaDialogo: function(){
 			i3GEOadmin.core.abreModalGeral(i3GEOadmin.fontesmedida.formAdiciona);
@@ -166,7 +140,7 @@ Obt&eacute;m a lista de variaveis
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=excluir",
-					"id_fonteinfo="+id
+					"id_fonteinfo="+id + "&id_medida_variavel=" + i3GEOadmin.fontesmedida.id_medida_variavel
 			)
 			.done(
 					function(data, status){
@@ -176,41 +150,6 @@ Obt&eacute;m a lista de variaveis
 			)
 			.fail(
 					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
-			);
-		},
-		salvarDialogo: function(id){
-			i3GEOadmin.fontesmedida.parametrosSalvar = $("#form-edicao-" + id).serialize();
-			var hash = {
-					"mensagem": i3GEOadmin.fontesmedida.dicionario.confirma,
-					"onBotao1": "i3GEOadmin.fontesmedida.salvar('"+id+"')",
-					"botao1": i3GEOadmin.fontesmedida.dicionario.sim,
-					"onBotao2": "i3GEOadmin.fontesmedida.parametrosSalvar = '';i3GEOadmin.core.fechaModalConfirma();",
-					"botao2": i3GEOadmin.fontesmedida.dicionario.nao
-			};
-			i3GEOadmin.core.abreModalConfirma(hash);
-		},
-		salvar: function(id){
-			var parametros = i3GEOadmin.fontesmedida.parametrosSalvar;
-			i3GEOadmin.core.fechaModalGeral();
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=alterar",
-					"id_medida_variavel=" + i3GEOadmin.fontesmedida.id_medida_variavel + "&id_fonteinfo="+ id +"&"+parametros
-			)
-			.done(
-					function(data, status){
-						i3GEOadmin.fontesmedida.parametrosSalvar = "";
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.iconeAguarde(i3GEOadmin.fontesmedida.ondeLista);
-						i3GEOadmin.fontesmedida.lista();
-					}
-			)
-			.fail(
-					function(data){
-						i3GEOadmin.fontesmedida.parametrosSalvar = "";
 						i3GEOadmin.core.modalAguarde(false);
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}

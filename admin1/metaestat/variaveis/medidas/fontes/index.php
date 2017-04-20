@@ -73,6 +73,7 @@ $_SESSION ["nomemedida"] = $nomemedida;
 <?php
 include ("templates/templateLista.php");
 include ("templates/templateFormLista.php");
+include ("templates/templateOpcoesFontes.php");
 ?>
 <script type="text/javascript" src="../../../../dicionario/estat_variavel.js"></script>
 <script type="text/javascript" src="index.js"></script>

@@ -8,7 +8,7 @@ function listar($dbh, $id_fonteinfo = "") {
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geoestat_fonteinfo WHERE id_fonteinfo = $id_fonteinfo ", $dbh, false );
 		$dados = $dados [0];
 	} else {
-		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geoestat_fonteinfo", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geoestat_fonteinfo order by lower(titulo)", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;

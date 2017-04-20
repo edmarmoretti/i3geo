@@ -141,6 +141,11 @@ i3GEOadmin.variaveis.dicionario = {
 		pt : "Links para os metadados. A lista de fontes &eacute; controlada por meio do cadastro de fontes.",
 		en : "",
 		es : ""
+	} ],
+    'escolhaFonte' : [ {
+		pt : "Escolha a fonte",
+		en : "",
+		es : ""
 	} ]
 
 };
