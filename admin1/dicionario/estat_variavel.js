@@ -122,6 +122,11 @@ i3GEOadmin.variaveis.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'classificacoesAjuda' : [ {
+		pt : "Uma medida pode ter v&aacute;rias classifica&ccedil;&otilde;es. Primeiro crie a classifica&ccedil;&atilde;o, definindo um nome, e depois crie as classes",
+		en : "",
+		es : ""
+	} ],
     'linksTxt' : [ {
 		pt : "Links",
 		en : "",
