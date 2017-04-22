@@ -166,6 +166,61 @@ i3GEOadmin.variaveis.dicionario = {
 		pt : "Par&acirc;metro de hierarquia superior (pai) que deve ser escolhido primeiro nos formul&aacute;rios (opcional)",
 		en : "",
 		es : ""
+	} ],
+    'classesAjuda' : [ {
+		pt : "A classifica&ccedil;&atilde;o pode conter uma ou mais classes. Cada classe possu&iacute; um nome, a express&atilde;o que define a classe e a simbologia. Classes podem ser criadas manualmente ou por meio de uma opera&ccedil;&atilde;o de c&aacute;lculo autom&aacute;tico.",
+		en : "",
+		es : ""
+	} ],
+    'expressaoTxt' : [ {
+		pt : "Expressão que define que valores entram nessa classe, ver detalhes em: <a href=http://mapserver.org/mapfile/expressions.html target=_blank >http://mapserver.org/mapfile/expressions.html</a>",
+		en : "",
+		es : ""
+	} ],
+    'azulTxt' : [ {
+		pt : "Azul (cor do fundo na composi&ccedil;&atilde;o RGB de 0 e 255)",
+		en : "",
+		es : ""
+	} ],
+    'verdeTxt' : [ {
+		pt : "Verde (cor do fundo na composi&ccedil;&atilde;o RGB de 0 e 255)",
+		en : "",
+		es : ""
+	} ],
+    'vermelhoTxt' : [ {
+		pt : "Vermelho (cor do fundo na composi&ccedil;&atilde;o RGB de 0 e 255)",
+		en : "",
+		es : ""
+	} ],
+    'tamanhoTxt' : [ {
+		pt : "Tamanho em pixels do s&iacute;mbolo, quando definido",
+		en : "",
+		es : ""
+	} ],
+    'simboloTxt' : [ {
+		pt : "Nome do s&iacute;mbolo utilizado em pontos (conforme c&oacute;digos de s&iacute;mbolos)",
+		en : "",
+		es : ""
+	} ],
+    'oazulTxt' : [ {
+		pt : "Azul (cor do contorno na composi&ccedil;&atilde;o RGB de 0 e 255)",
+		en : "",
+		es : ""
+	} ],
+    'overdeTxt' : [ {
+		pt : "Verde (cor do contorno na composi&ccedil;&atilde;o RGB de 0 e 255)",
+		en : "",
+		es : ""
+	} ],
+    'overmelhoTxt' : [ {
+		pt : "Vermelho (cor do contorno na composi&ccedil;&atilde;o RGB de 0 e 255)",
+		en : "",
+		es : ""
+	} ],
+    'otamanhoTxt' : [ {
+		pt : "Tamanho em pixels do s&iacute;mbolo do contorno, quando definido",
+		en : "",
+		es : ""
 	} ]
 
 };
