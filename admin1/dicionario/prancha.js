@@ -87,25 +87,5 @@ i3GEOadmin.prancha.dicionario = {
 		pt : "Defina aqui quais os temas que ser&atilde;o mostrados na prancha e suas propriedades. Os temas s&atilde;o os mesmos dispon&iacute;veis no cat&aacute;logo de temas.",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
 	} ]
 };

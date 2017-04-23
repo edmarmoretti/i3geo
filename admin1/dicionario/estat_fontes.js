@@ -8,25 +8,5 @@ i3GEOadmin.fontes.dicionario = {
 		pt : "Links para as fontes originais utilizadas nas vari&aacute;veis",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
 	} ]
 };

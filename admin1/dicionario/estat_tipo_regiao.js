@@ -109,5 +109,4 @@ i3GEOadmin.regioes.dicionario = {
 		en : "",
 		es : ""
 	} ]
-
 };

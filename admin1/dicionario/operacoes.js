@@ -30,11 +30,6 @@ i3GEOadmin.operacoes.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'msgBuscaOperacoes' : [ {
-		pt : "buscando opera&ccedil;&otilde;es...",
-		en : "",
-		es : ""
-	} ],
     'adicionaPapel' : [ {
 		pt : "Adicionar novo papel",
 		en : "",
@@ -60,38 +55,8 @@ i3GEOadmin.operacoes.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'msgErroExclui' : [ {
-		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema",
-		en : "",
-		es : ""
-	} ],
     'papeisv' : [ {
 		pt : "Pap&eacute;is vinculados",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
 		en : "",
 		es : ""
 	} ]

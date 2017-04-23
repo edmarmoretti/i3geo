@@ -119,15 +119,5 @@ i3GEOadmin.usuarios.dicionario = {
 		pt : "N&atilde;o",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
 	} ]
 };

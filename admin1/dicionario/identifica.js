@@ -44,15 +44,5 @@ i3GEOadmin.identifica.dicionario = {
 		pt : "nova aba",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
 	} ]
 };

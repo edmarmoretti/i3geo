@@ -8,25 +8,5 @@ i3GEOadmin.periodos.dicionario = {
 		pt : "Tipos de per&iacute;odos que podem ser escolhidos nos formul&aacute;rios de defini&ccedil;&atilde;o das vari&aacute;veis ",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
 	} ]
 };

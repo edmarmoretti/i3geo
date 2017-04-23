@@ -30,10 +30,5 @@ i3GEOadmin.webservices.dicionario = {
 		pt : "Endere&ccedil;o:",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
 	} ]
 };

@@ -98,11 +98,6 @@ i3GEOadmin.sistemas.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'msgNaoExclui' : [ {
-		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema",
-		en : "",
-		es : ""
-	} ],
     'funcoes' : [ {
 		pt : "fun&ccedil;&otilde;es",
 		en : "",

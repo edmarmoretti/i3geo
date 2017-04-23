@@ -10,58 +10,8 @@ i3GEOadmin.atlas.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'ajuda' : [ {
-		pt : "Ajuda",
-		en : "",
-		es : ""
-	} ],
     'txtAjuda' : [ {
 		pt : "O cadastro de Atlas &eacute; utilizado na interface 'Atlas' do i3geo. Essa interface pode ser vista em http://localhost/i3geo/atlas<p>Cada Atlas possu&iacute; uma lista de pranchas e cada prancha uma lista de temas e outros par&acirc;metros.<p>A montagem de cada Atlas &eacute; feito definindo-se os par&acirc;metros de cada n&iacute;vel hier&aacute;rquico, editando-se uma &aacute;rvore cuja raiz &eacute; cada Atlas, seguido pelas pranchas e temas.<p>Para cada Atlas e cada prancha pode ser definido um texto explicativo que ser&aacute; aberto ao iniciar o Atlas ou a prancha.",
-		en : "",
-		es : ""
-	} ],
-    'criaAtlas' : [ {
-		pt : "Criar um novo atlas",
-		en : "",
-		es : ""
-	} ],
-    'atlasExistente' : [ {
-		pt : "Atlas existentes",
-		en : "",
-		es : ""
-	} ],
-    'msgNovoRegistro' : [ {
-		pt : " adicionando um novo registro",
-		en : "",
-		es : ""
-	} ],
-    'msgBuscaAtlas' : [ {
-		pt : "buscando atlas...",
-		en : "",
-		es : ""
-	} ],
-    'adicionaTema' : [ {
-		pt : "Adicionar novo tema",
-		en : "",
-		es : ""
-	} ],
-    'editeTema' : [ {
-		pt : "Edite para definir o tema!!!",
-		en : "",
-		es : ""
-	} ],
-    'adicionaPrancha' : [ {
-		pt : "Adicionar nova prancha",
-		en : "",
-		es : ""
-	} ],
-    'editePrancha' : [ {
-		pt : "Edite para definir a prancha!!!",
-		en : "",
-		es : ""
-	} ],
-    'editeAtlas' : [ {
-		pt : "Edite para definir o Atlas!!!",
 		en : "",
 		es : ""
 	} ],
@@ -140,28 +90,8 @@ i3GEOadmin.atlas.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'automatica' : [ {
-		pt : "autom&aacute;tica",
-		en : "",
-		es : ""
-	} ],
-    'combo' : [ {
-		pt : "combo",
-		en : "",
-		es : ""
-	} ],
-    'expandida' : [ {
-		pt : "expandida",
-		en : "",
-		es : ""
-	} ],
     'publicado' : [ {
 		pt : "Publicado (os n&atilde;o publicados s&atilde;o mostrados apenas para os usu&aacute;rios administradores)?",
-		en : "",
-		es : ""
-	} ],
-    'msgNaoExclui' : [ {
-		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema",
 		en : "",
 		es : ""
 	} ],
@@ -172,36 +102,6 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'pranchas' : [ {
 		pt : "pranchas",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-    '' : [ {
-		pt : "",
 		en : "",
 		es : ""
 	} ]

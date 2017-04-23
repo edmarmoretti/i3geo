@@ -1,10 +1,5 @@
 //+$trad(1,i3GEOadmin.principal.dicionario)+
 i3GEOadmin.subgrupos.dicionario = {
-	'msgBuscaSubgrupo' : [ {
-		pt : "buscando subgrupos...",
-		en : "",
-		es : ""
-	} ],
     'subgrupos' : [ {
 		pt : "Subgrupos vinculados ao grupo",
 		en : "",

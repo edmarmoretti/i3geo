@@ -23,10 +23,5 @@ i3GEOadmin.unidades.dicionario = {
 		pt : "Permite calcular m&eacute;dia",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
 	} ]
 };

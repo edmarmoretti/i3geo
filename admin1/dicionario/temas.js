@@ -18,10 +18,5 @@ i3GEOadmin.temas.dicionario = {
 		pt : "Temas do subgrupo",
 		en : "",
 		es : ""
-	} ],
-    '' : [ {
-		pt : "",
-		en : "",
-		es : ""
 	} ]
 };
