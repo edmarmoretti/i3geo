@@ -35,9 +35,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="esquemadb" >{{{esquemadbTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{esquemadbTxt}}}" type="text" value="{{{esquemadb}}}" class="form-control" name="esquemadb" >
-				</div>
-			</div>
+					<div class="input-group">
+						<input title="{{{esquemadbTxt}}}" type="text" value="{{{esquemadb}}}" class="form-control" name="esquemadb" >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.regioes.listaEsquemas('esquemadb')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 		</div>
 	</div>
 	<div class="row">

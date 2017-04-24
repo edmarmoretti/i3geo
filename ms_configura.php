@@ -118,6 +118,22 @@ false
 
 */
 $logTransacoes = false;
+/*
+ Variale: $i3geoEsquemasWL
+
+ Lista com nomes dos esquemas, nos bancos de dados acessiveis pelo sistema de administracao, que podem ser utilizados nas listagens de tabelas e colunas.
+
+ O sistema de administracao do i3Geo possui formularios com campos que referem-se a objetos no banco de dados Postgres.
+ Essa variavel e uma lista branca, ou seja, permite o acesso apenas aos esquemas e seus objetos que constam na lista.
+ Essa lista nao impede o uso desses objetos, apenas evita que os mesmos sejam utilizados para gerar opcoes de selecao para o preenchimento dos formularios.
+
+ O usuario dos formularios ainda poderao inserir manualmente os nomes dos objetos mesmo que os esquemas nao constem nessa lista.
+
+ Tipo:
+ {array}
+*/
+$i3geoEsquemasWL = array("public","i3geosaude");
+
 //TODO documentar moodle
 /*
  Variale: $logExec
@@ -134,7 +150,7 @@ $logExec = array(
 	"init" => false, //ms_criamapa mapa_inicia
 	"ogc" => false, //servico ogc
 	"upload" => false, //ferramentas de upload
-	"ferramentas" => false, //todas asferramentas que usam safe.php
+	"ferramentas" => false, //todas as ferramentas que usam safe.php
 	"controle" => false //tudo que passa por mapa_controle.php
 );
 /*

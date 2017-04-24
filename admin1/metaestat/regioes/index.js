@@ -256,5 +256,8 @@ Obt&eacute;m a lista de regioes
 			//window.history.replaceState(null,null,u);
 			//abre a pagina de edicao
 			window.location.href = "hierarquia/index.php?codigo_tipo_regiao=" + codigo_tipo_regiao;
+		},
+		listaEsquemas: function(destino){
+			i3GEOadmin.bdExplorer.listaEsquemas(destino);
 		}
 };
