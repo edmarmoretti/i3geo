@@ -257,7 +257,25 @@ Obt&eacute;m a lista de regioes
 			//abre a pagina de edicao
 			window.location.href = "hierarquia/index.php?codigo_tipo_regiao=" + codigo_tipo_regiao;
 		},
+		listaCodigosConexao: function(destino){
+			i3GEOadmin.bdExplorer.listaCodigosConexao(destino);
+		},
 		listaEsquemas: function(destino){
 			i3GEOadmin.bdExplorer.listaEsquemas(destino);
+		},
+		listaTabelas: function(destino){
+			var esquema = $(".modal-body form input[name='esquemadb']").val();
+			var codigo_estat_conexao = $(".modal-body form input[name='codigo_estat_conexao']").val();
+			if(esquema != "" && codigo_estat_conexao != ""){
+				i3GEOadmin.bdExplorer.listaTabelas(codigo_estat_conexao,esquema,destino);
+			}
+		},
+		listaColunas: function(destino){
+			var codigo_estat_conexao = $(".modal-body form input[name='codigo_estat_conexao']").val();
+			var esquema = $(".modal-body form input[name='esquemadb']").val();
+			var tabela = $(".modal-body form input[name='tabela']").val();
+			if(esquema != "" && codigo_estat_conexao != ""){
+				i3GEOadmin.bdExplorer.listaColunas(codigo_estat_conexao,esquema,tabela,destino);
+			}
 		}
 };

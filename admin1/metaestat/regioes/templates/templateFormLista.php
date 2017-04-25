@@ -5,7 +5,7 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="nome_tipo_regiao" >{{{nome_tipo_regiaoTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{nome_tipo_regiaoTxt}}}" type="text" value="{{{nome_tipo_regiao}}}" class="form-control" name="nome_tipo_regiao" >
+					<input title="{{{nome_tipo_regiaoTxt}}}" type="text" value="{{{nome_tipo_regiao}}}" class="form-control" name="nome_tipo_regiao" required >
 				</div>
 			</div>
 		</div>
@@ -25,8 +25,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="codigo_estat_conexao" >{{{codigo_estat_conexaoTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{codigo_estat_conexaoTxt}}}" type="text" value="{{{codigo_estat_conexao}}}" class="form-control" name="codigo_estat_conexao" >
-				</div>
+					<div class="input-group">
+						<input title="{{{codigo_estat_conexaoTxt}}}" type="text" value="{{{codigo_estat_conexao}}}" class="form-control" name="codigo_estat_conexao" >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.regioes.listaCodigosConexao('codigo_estat_conexao')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -36,7 +43,7 @@
 				<label class="col-md-5 control-label" for="esquemadb" >{{{esquemadbTxt}}}</label>
 				<div class="col-md-7">
 					<div class="input-group">
-						<input title="{{{esquemadbTxt}}}" type="text" value="{{{esquemadb}}}" class="form-control" name="esquemadb" >
+						<input title="{{{esquemadbTxt}}}" type="text" value="{{{esquemadb}}}" class="form-control" name="esquemadb" required >
 						<div class="input-group-btn">
 							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.regioes.listaEsquemas('esquemadb')" href="javascript:void(0)">
 								<i class="material-icons md-18">list</i>
@@ -44,6 +51,7 @@
 						</div>
 					</div>
  				</div>
+			</div>
 		</div>
 	</div>
 	<div class="row">
@@ -51,8 +59,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="tabela" >{{{tabelaTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{tabelaTxt}}}" type="text" value="{{{tabela}}}" class="form-control" name="tabela" >
-				</div>
+					<div class="input-group">
+						<input title="{{{tabelaTxt}}}" type="text" value="{{{tabela}}}" class="form-control" name="tabela" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.regioes.listaTabelas('tabela')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -61,8 +76,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="colunageo" >{{{colunageoTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{colunageoTxt}}}" type="text" value="{{{colunageo}}}" class="form-control" name="colunageo" >
-				</div>
+					<div class="input-group">
+						<input title="{{{colunageoTxt}}}" type="text" value="{{{colunageo}}}" class="form-control" name="colunageo" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.regioes.listaColunas('colunageo')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -81,8 +103,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="identificador" >{{{identificadorTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{identificadorTxt}}}" type="text" value="{{{identificador}}}" class="form-control" name="identificador" >
-				</div>
+					<div class="input-group">
+						<input title="{{{identificadorTxt}}}" type="text" value="{{{identificador}}}" class="form-control" name="identificador" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.regioes.listaColunas('identificador')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -91,8 +120,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="colunanomeregiao" >{{{colunanomeregiaoTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{colunanomeregiaoTxt}}}" type="text" value="{{{colunanomeregiao}}}" class="form-control" name="colunanomeregiao" >
-				</div>
+					<div class="input-group">
+						<input title="{{{colunanomeregiaoTxt}}}" type="text" value="{{{identificador}}}" class="form-control" name="colunanomeregiao" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.regioes.listaColunas('colunanomeregiao')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -111,8 +147,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="colunacentroide" >{{{colunacentroideTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{colunacentroideTxt}}}" type="text" value="{{{colunacentroide}}}" class="form-control" name="colunacentroide" >
-				</div>
+					<div class="input-group">
+						<input title="{{{colunacentroideTxt}}}" type="text" value="{{{identificador}}}" class="form-control" name="colunacentroide" >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.regioes.listaColunas('colunacentroide')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>

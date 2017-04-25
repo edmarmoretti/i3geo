@@ -1,6 +1,5 @@
 <?php
 /****************************************************************/
-////include (dirname ( __FILE__ ) . "/../../../ms_configura.php");
 //
 //checa login
 //valida _GET e _POST, juntando em _GET
@@ -10,13 +9,18 @@
 include ("checaLogin.php");
 \admin\php\login\checaLogin();
 //funcoes de administracao
-include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
+include ("funcoesAdmin.php");
 //
 //carrega outras funcoes e extensoes do PHP
 //
 include ($_SESSION["locaplic"]."/classesphp/carrega_ext.php");
 include ($_SESSION["locaplic"]."/classesphp/classe_bdexplorer.php");
+include ($_SESSION["locaplic"]."/classesphp/classe_metaestat.php");
 /***************************************************************/
+if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) === false) {
+	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
+	exit ();
+}
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "LISTARESQUEMAS" :
@@ -26,6 +30,44 @@ switch ($funcao) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
 			\admin\php\funcoesAdmin\retornaJSON ( $dados );
+		}
+		break;
+	case "LISTARTABELAS" :
+		//pega os parametros de conexao
+		$mt = new \i3geo\classesphp\metaestat\Metaestat();
+		$parametros = $mt->listaConexao((int) $_POST["codigo_estat_conexao"],true,false);
+		$bd = new \i3geo\classesphp\bdexplorer\Bdexplorer($_SESSION["locaplic"],$parametros);
+		$dados = $bd->listaDeTabelas($_POST["esquema"]);
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			\admin\php\funcoesAdmin\retornaJSON ( $dados );
+		}
+		break;
+	case "LISTARCOLUNAS" :
+		//pega os parametros de conexao
+		$mt = new \i3geo\classesphp\metaestat\Metaestat();
+		$parametros = $mt->listaConexao((int) $_POST["codigo_estat_conexao"],true,false);
+		$bd = new \i3geo\classesphp\bdexplorer\Bdexplorer($_SESSION["locaplic"],$parametros);
+		$dados = $bd->listaDeColunas($_POST["esquema"],$_POST["tabela"]);
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			\admin\php\funcoesAdmin\retornaJSON ( $dados );
+		}
+		break;
+	case "LISTARCODIGOSCONEXAO" :
+		//pega os parametros de conexao
+		$mt = new \i3geo\classesphp\metaestat\Metaestat();
+		$dados = $mt->listaConexao("",false,false);
+		if ($dados === false) {
+			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
+		} else {
+			$kv = array();
+			foreach($dados as $d){
+				$kv[] = array("chave"=>$d["bancodedados"],"valor"=>$d["codigo_estat_conexao"]);
+			}
+			\admin\php\funcoesAdmin\retornaJSON ( $kv );
 		}
 		break;
 	default:
