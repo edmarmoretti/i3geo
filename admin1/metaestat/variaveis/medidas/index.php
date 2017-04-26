@@ -74,6 +74,7 @@ include("templates/templateOpcoesUnidade.php");
 ?>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../../dicionario/estat_variavel.js"></script>
+<script type="text/javascript" src="../../../js/bdexplorer.js"></script>
 <script>
 	$(document).ready(function(){
 		//vem de admin1/index.js

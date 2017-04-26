@@ -132,7 +132,7 @@ $logTransacoes = false;
  Tipo:
  {array}
 */
-$i3geoEsquemasWL = array("publicy");
+$i3geoEsquemasWL = array();
 
 //TODO documentar moodle
 /*

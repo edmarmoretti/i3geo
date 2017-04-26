@@ -63,8 +63,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="esquemadb" >{{{esquemadbTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{esquemadbTxt}}}" type="text" value="{{{esquemadb}}}" class="form-control" name="esquemadb" required >
-				</div>
+					<div class="input-group">
+						<input title="{{{esquemadbTxt}}}" type="text" value="{{{esquemadb}}}" class="form-control" name="esquemadb" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.medidas.listaEsquemas('esquemadb')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -73,8 +80,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="tabela" >{{{tabelaTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{tabelaTxt}}}" type="text" value="{{{tabela}}}" class="form-control" name="tabela" required >
-				</div>
+					<div class="input-group">
+						<input title="{{{tabelaTxt}}}" type="text" value="{{{tabela}}}" class="form-control" name="tabela" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.medidas.listaTabelas('tabela')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -83,8 +97,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="colunavalor" >{{{colunavalorTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{colunavalorTxt}}}" type="text" value="{{{colunavalor}}}" class="form-control" name="colunavalor" required >
-				</div>
+					<div class="input-group">
+						<input title="{{{colunavalorTxt}}}" type="text" value="{{{colunavalor}}}" class="form-control" name="colunavalor" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.medidas.listaColunas('colunavalor')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -93,8 +114,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="colunaidunico" >{{{colunaidunicoTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{colunaidunicoTxt}}}" type="text" value="{{{colunaidunico}}}" class="form-control" name="colunaidunico" required >
-				</div>
+					<div class="input-group">
+						<input title="{{{colunaidunicoTxt}}}" type="text" value="{{{colunaidunico}}}" class="form-control" name="colunaidunico" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.medidas.listaColunas('colunaidunico')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
@@ -103,8 +131,15 @@
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="colunaidgeo" >{{{colunaidgeoTxt}}}</label>
 				<div class="col-md-7">
-					<input title="{{{colunaidgeoTxt}}}" type="text" value="{{{colunaidgeo}}}" class="form-control" name="colunaidgeo" >
-				</div>
+					<div class="input-group">
+						<input title="{{{colunaidgeoTxt}}}" type="text" value="{{{colunaidgeo}}}" class="form-control" name="colunaidgeo" required >
+						<div class="input-group-btn">
+							<a role="button" class="btn btn-danger btn-fab btn-fab-mini" style="height: 20px;min-width: 20px;width: 20px;" onclick="i3GEOadmin.medidas.listaColunas('colunaidgeo')" href="javascript:void(0)">
+								<i class="material-icons md-18">list</i>
+							</a>
+						</div>
+					</div>
+ 				</div>
 			</div>
 		</div>
 	</div>
