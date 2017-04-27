@@ -1,26 +1,38 @@
 <?php
-// TODO incluir icone para abrir o navegador de arquivos para encontrar a pasta no servidor
 define ( "ONDEI3GEO", "../../.." );
 include ("exec.php");
-
 include "../../head.php";
+// monta o combo com a lista de pastas para armazenar os arquivos
+$chaves = array_keys ( $_SESSION ["i3geoUploadDataWL"] );
+$comboPastas = '<select name="dirDestino" class="form-control" required><option value=""></option>';
+foreach ( $chaves as $c ) {
+	$comboPastas .= "<option value='$c'>$c</option>";
+}
+$comboPastas .= "</select>";
 ?>
-	<div class="container-fluid migalha" >
-		<div class="row">
-			<div class="btn-group btn-breadcrumb">
-				<a class="btn btn-default" href="../../../init/index.php"><span>i3Geo</span></a>
-				<a class="btn btn-default" href="../../index.php"><span>Admin</span></a>
-				<a class="btn btn-default" style="pointer-events: none"><span>Upload</span></a>
-				<a class="btn btn-default" style="pointer-events: none"><span>Arquivo shapefile</span></a>
-			</div>
+<div class="container-fluid migalha">
+	<div class="row">
+		<div class="btn-group btn-breadcrumb">
+			<a class="btn btn-default" href="../../../init/index.php">
+				<span>i3Geo</span>
+			</a>
+			<a class="btn btn-default" href="../../index.php">
+				<span>Admin</span>
+			</a>
+			<a class="btn btn-default" style="pointer-events: none">
+				<span>Upload</span>
+			</a>
+			<a class="btn btn-default" style="pointer-events: none">
+				<span>Arquivo shapefile</span>
+			</a>
 		</div>
 	</div>
+</div>
 <div class="container">
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="well hidden" id="titulo">
-				<button data-toggle="modal" data-target="#ajudaPrincipal"
-					class="btn btn-primary btn-fab btn-fab-mini pull-right">
+				<button data-toggle="modal" data-target="#ajudaPrincipal" class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
 				</button>
 				<h2>
@@ -42,28 +54,40 @@ include "../../head.php";
 	</div>
 </div>
 <div class="container hidden" id="corpo">
-	<form style="" target="i3GEOuploadiframe"
-		action="exec.php" method="post"
-		ENCTYPE="multipart/form-data" onsubmit="javascript:$('#modalUpload').modal('show');" class="form-horizontal" role="form" method="post">
+	<form style="" target="i3GEOuploadiframe" action="exec.php" method="post" ENCTYPE="multipart/form-data" onsubmit="javascript:$('#modalUpload').modal('show');" class="form-horizontal" role="form"
+		method="post">
 		<div class="row center-block well">
 			<div class="col-md-12">
 				<h4>{{{txtArquivos}}}</h4>
 				<div class="form-group form-group-lg col-md-6">
-					<input name="i3GEOuploadshp" type="file"> <input class="form-control"
-						placeholder="SHP" type="text">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-primary pull-left" onclick="$(this).parent().find('input[type=file]').click();">SHP</button>
+						<input name="i3GEOuploadshp" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+						<span class="form-control"></span>
+					</div>
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input name="i3GEOuploadshx" type="file"> <input class="form-control"
-						placeholder="SHX" type="text">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-primary pull-left" onclick="$(this).parent().find('input[type=file]').click();">SHX</button>
+						<input name="i3GEOuploadshx" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+						<span class="form-control"></span>
+					</div>
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input name="i3GEOuploaddbf" type="file"> <input class="form-control"
-						placeholder="DBF" type="text">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-primary pull-left" onclick="$(this).parent().find('input[type=file]').click();">DBF</button>
+						<input name="i3GEOuploaddbf" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+						<span class="form-control"></span>
+					</div>
 				</div>
 				<div class="form-group form-group-lg col-md-6">
-					<input name="i3GEOuploadprj" type="file"> <input class="form-control"
-						placeholder="PRJ (opcional)" type="text">
+					<div class="input-group-btn">
+						<button type="button" class="btn btn-primary pull-left" onclick="$(this).parent().find('input[type=file]').click();">PRJ</button>
+						<input name="i3GEOuploadprj" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+						<span class="form-control"></span>
+					</div>
 				</div>
+
 			</div>
 		</div>
 		<div class="row center-block well">
@@ -71,8 +95,7 @@ include "../../head.php";
 				<div class="form-group form-group-lg">
 					<label class="col-md-5 control-label" for="dirDestino">{{{pastaArmazenamento}}}</label>
 					<div class="col-md-7">
-						<input title="{{{pastaArmazenamento}}}" type="text" value="" class="form-control"
-							name="dirDestino" required>
+						<?php echo $comboPastas; ?>
 					</div>
 				</div>
 				<div class="form-group form-group-lg">
@@ -117,10 +140,14 @@ include "../../head.php";
 </div>
 <div id="modalUpload" class="modal fade" tabindex="-1">
 	<div class="modal-dialog modal-lg">
+		<div class="modal-header">
+			<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
 		<div class="modal-content">
 			<div class="modal-body modal-lg">
-				<iframe name=i3GEOuploadiframe style="text-align: left; border: 0px solid gray;" width="100%"
-					height="100%"></iframe>
+				<iframe name=i3GEOuploadiframe style="text-align: left; border: 0px solid gray;" width="100%" height="500px"></iframe>
 			</div>
 		</div>
 	</div>

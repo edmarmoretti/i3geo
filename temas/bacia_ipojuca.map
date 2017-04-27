@@ -1,0 +1,79 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  IMAGETYPE "png"
+  NAME "MS"
+  SIZE -1 -1
+  STATUS ON
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  UNITS METERS
+
+  OUTPUTFORMAT
+    NAME "png"
+    MIMETYPE "image/png"
+    DRIVER "AGG/PNG"
+    EXTENSION "png"
+    IMAGEMODE RGB
+    TRANSPARENT FALSE
+  END # OUTPUTFORMAT
+
+  LEGEND
+    KEYSIZE 20 10
+    KEYSPACING 5 5
+    LABEL
+      SIZE MEDIUM
+      OFFSET 0 0
+      SHADOWSIZE 1 1
+      TYPE BITMAP
+    END # LABEL
+    STATUS OFF
+  END # LEGEND
+
+  QUERYMAP
+    SIZE -1 -1
+    STATUS OFF
+    STYLE HILITE
+  END # QUERYMAP
+
+  SCALEBAR
+    INTERVALS 4
+    LABEL
+      SIZE MEDIUM
+      OFFSET 0 0
+      SHADOWSIZE 1 1
+      TYPE BITMAP
+    END # LABEL
+    SIZE 200 3
+    STATUS OFF
+    UNITS MILES
+  END # SCALEBAR
+
+  WEB
+  END # WEB
+
+  LAYER
+    CONNECTION ""
+    DATA "/tmp/ms_tmp/bacia_ipojuca.shp"
+    METADATA
+      "CLASSE"	"SIM"
+      "permitekmz"	"SIM"
+      "permitedownload"	"SIM"
+      "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "TEMA"	"bacia_ipojuca"
+    END # METADATA
+    NAME "bacia_ipojuca"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP

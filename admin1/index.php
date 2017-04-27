@@ -43,8 +43,8 @@ $_SESSION["i3geoPermiteLoginIp"] = $i3geoPermiteLoginIp;
 unset($i3geoPermiteLoginIp);
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin;
 unset($i3geoPermiteLogin);
-
-
+$_SESSION["i3geoUploadDataWL"] = $i3geoUploadDataWL;
+unset($i3geoUploadDataWL);
 include "head.php";
 ?>
 	<div class="container-fluid migalha" >

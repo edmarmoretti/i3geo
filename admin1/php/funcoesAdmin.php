@@ -814,4 +814,20 @@ function removeCabecalhoMapfile($arq,$symbolset=true){
 		return false;
 	}
 }
+function fileContemString($arq,$s){
+	if(!file_exists($arq)){
+		return false;
+	}
+	$handle = fopen($arq, 'r');
+	$valid = false; // init as false
+	while(! feof($handle)) {
+		$buffer = fgets($handle);
+		if (strpos($buffer, $s) !== false) {
+			$valid = TRUE;
+			break; // Once you find the string, you should break out the loop.
+		}
+	}
+	fclose($handle);
+	return $valid;
+}
 ?>

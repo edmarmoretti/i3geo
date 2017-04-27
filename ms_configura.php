@@ -132,7 +132,22 @@ $logTransacoes = false;
  Tipo:
  {array}
 */
-$i3geoEsquemasWL = array();
+$i3geoEsquemasWL = array("publicy");
+/*
+ Variale: $i3geoUploadDataWL
+
+ Lista com as pastas (caminho completo) que podem ser utilizadas para o upload de arquivos shapefile.
+ O upload e uma funcao disponivel no sistema de administracao do i3Geo.
+ Para nao expor o endereco das pastas nos formularios, cada pasta recebe um nome.
+
+ Exemplo:
+
+ $i3geoUploadDataWL = array( "Pasta 1"=>"/tmp/ms_tmp", "Pasta 2"=>"/var/www/data");
+
+ Tipo:
+ {array}
+ */
+$i3geoUploadDataWL = array( "Pasta 1"=>"/tmp/ms_tmp", "Pasta 2"=>"/var/www/data");
 
 //TODO documentar moodle
 /*
