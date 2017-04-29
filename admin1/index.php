@@ -45,6 +45,10 @@ $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin;
 unset($i3geoPermiteLogin);
 $_SESSION["i3geoUploadDataWL"] = $i3geoUploadDataWL;
 unset($i3geoUploadDataWL);
+$_SESSION["i3geoEsquemasWL"] = $i3geoEsquemasWL;
+unset($i3geoEsquemasWL);
+$_SESSION["i3GeoProjDefault"] = $i3GeoProjDefault;
+unset($i3GeoProjDefault);
 include "head.php";
 ?>
 	<div class="container-fluid migalha" >

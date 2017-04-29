@@ -77,7 +77,7 @@ $textoMapfile = \admin\catalogo\mapfile\editor\textoMapfile ( $codigo );
 </div>
 <div class="container-fluid">
 	<div class="row center-block">
-		<div class="col-md-12 well" id="titulo">
+		<div class="col-md-12 well hidden" id="titulo">
 
 			<blockquote>
 				{{{ajudaEditor}}}

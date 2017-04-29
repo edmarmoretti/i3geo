@@ -113,6 +113,7 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	//pega os parametros de conexao
 	include("classe_metaestat.php");
 	$m = new Metaestat();
+
 	$conexao = $m->listaConexao($_POST["i3GEOuploadcodigoconexao"],true);
 	//array(5) { ["codigo_estat_conexao"]=> string(1) "1" ["bancodedados"]=> string(8) "geosaude" ["host"]=> string(9) "localhost" ["porta"]=> string(4) "5432" ["usuario"]=> string(8) "postgres" }
 	//pega as colunas do shapefile
@@ -218,6 +219,10 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 		flush();
 		sleep(1);
 	}
+
+
+
+
 	if($tabelaExiste == true && $_POST["tipoOperacao"] == "criar"){
 		echo "<span style=color:red >A tabela existe. N&atilde;o pode ser criada.</span>";
 		exit;
@@ -237,6 +242,12 @@ if (isset($_FILES['i3GEOuploadshp']['name'])){
 	ob_flush();
 	flush();
 	sleep(1);
+
+
+
+
+
+
 	$srid = 4326;
 	$escapar = "'";
 	$projOutObj = "";

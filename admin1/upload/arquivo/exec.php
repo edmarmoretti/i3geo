@@ -64,9 +64,10 @@ if (! isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 <body bgcolor="white" style="background-color: white; text-align: left;">
 	<p>
 <?php
+ob_flush ();flush (); sleep ( 2 );
 if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	$i3GEOuploadCriaMapfile = $_POST ["i3GEOuploadCriaMapfile"];
-	$dirDestino = $_SESSION ["i3geoUploadDataWL"] [$_POST ["dirDestino"]];
+	$dirDestino = $_SESSION ["i3geoUploadDataWL"] ["arquivos"] [$_POST ["dirDestino"]];
 	$dirDestino = str_replace ( ".", "", $dirDestino );
 	if (empty ( $dirDestino )) {
 		echo "<div class='alert alert-danger' role='alert'>Pasta n&atilde;o encontrada</div>";
@@ -81,9 +82,9 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	}
 
 	echo "<div class='alert alert-success' role='alert'>Carregando o arquivo...</div>";
-	ob_flush ();
-	flush ();
-	sleep ( 1 );
+
+	ob_flush ();flush (); sleep ( 2 );
+
 	$dirmap = $dirDestino;
 	if (! file_exists ( $dirmap ) || $dirmap == dirname ( $_SESSION ["locaplic"] ) || $dirmap == dirname ( $_SESSION ["locaplic"] ) . "/") {
 		echo "<div class='alert alert-danger' role='alert'>Pasta n&atilde;o existe no servidor ou o local n&atilde;o &eacute; permitido</div>";
@@ -145,7 +146,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		exit ();
 	}
 
-	$checkphp = \admin\php\funcoesAdmin\fileContemString ( $dirmap . "/" . $nomePrefixo . ".prj", "<?" );
+	$checkphp = \admin\php\funcoesAdmin\fileContemString ( $dirmap . "/" . $nomePrefixo . ".prj", "<?php" );
 	if ($checkphp == true) {
 		echo "<div class='alert alert-danger' role='alert'>Arquivo prj invalido</div>";
 		unlink ( $dirmap . "/" . $nomePrefixo . ".shp" );
@@ -154,7 +155,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		unlink ( $dirmap . "/" . $nomePrefixo . ".prj" );
 		exit ();
 	}
-	$checkphp = \admin\php\funcoesAdmin\fileContemString ( $dirmap . "/" . $nomePrefixo . ".shx", "<?" );
+	$checkphp = \admin\php\funcoesAdmin\fileContemString ( $dirmap . "/" . $nomePrefixo . ".shx", "<?php" );
 	if ($checkphp == true) {
 		echo "<div class='alert alert-danger' role='alert'>Arquivo shx invalido</div>";
 		unlink ( $dirmap . "/" . $nomePrefixo . ".shp" );
@@ -163,7 +164,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		unlink ( $dirmap . "/" . $nomePrefixo . ".prj" );
 		exit ();
 	}
-	$checkphp = \admin\php\funcoesAdmin\fileContemString ( $dirmap . "/" . $nomePrefixo . ".dbf", "<?" );
+	$checkphp = \admin\php\funcoesAdmin\fileContemString ( $dirmap . "/" . $nomePrefixo . ".dbf", "<?php" );
 	if ($checkphp == true) {
 		echo "<div class='alert alert-danger' role='alert'>Arquivo dbf invalido</div>";
 		unlink ( $dirmap . "/" . $nomePrefixo . ".shp" );
@@ -173,11 +174,14 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		exit ();
 	}
 	echo "<div class='alert alert-success' role='alert'>Arquivo enviado.</div>";
+	ob_flush ();flush (); sleep ( 2 );
 	if ($i3GEOuploadCriaMapfile == "on" && file_exists ( $_SESSION ["locaplic"] . "/temas/" . $nomePrefixo . ".map" )) {
 		echo "<div class='alert alert-danger' role='alert'>Arquivo mapfile com esse nome j&aacute; existe.</div>";
 		$i3GEOuploadCriaMapfile = "";
 	}
 	if ($i3GEOuploadCriaMapfile == "on") {
+		echo "<div class='alert alert-success' role='alert'>Criando mapfile...</div>";
+		ob_flush ();flush (); sleep ( 2 );
 		// verifica se o usuario marcou a opcao de cria mapfile
 		// nesse caso o aplicativo de upload esta sendo executado de dentro do sistema de administracao, e o mapfile devera
 		// ser criado e registrado no sistema
@@ -187,9 +191,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		$en = $nomePrefixo;
 		$es = $nomePrefixo;
 		$sfileObj = ms_newShapefileObj ( $dirmap . "/" . $nomePrefixo . ".shp", - 1 );
-		if (! isset ( $tipo ) || $tipo == "") {
-			$tipo = $sfileObj->type;
-		}
+		$tipo = $sfileObj->type;
 		if ($tipo == 1) {
 			$tipoLayer = MS_LAYER_POINT;
 		}
@@ -207,6 +209,9 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 			$layer = $mapa->getLayerByName ( $codigo );
 			$layer->set ( "data", $data );
 			$layer->set ( "type", $tipoLayer );
+			if(file_exists($dirmap . "/" . $nomePrefixo . ".prj")){
+				$layer->setprojection("AUTO");
+			}
 			$mapa->save ( $_SESSION ["locaplic"] . "/temas/" . $codigo . ".map" );
 			echo "<div class='alert alert-success' role='alert'>Mapfile $nomePrefixo criado!!!</div>";
 		} else {
@@ -229,7 +234,6 @@ function verificaNome($nome) {
 	$extensao = $lista [count ( $lista ) - 1];
 	if (($extensao != "dbf") && ($extensao != "shx") && ($extensao != "shp") && ($extensao != "prj")) {
 		echo "Nome de arquivo inv&aacute;lido. $nome";
-		paraAguarde ();
 		exit ();
 	}
 }

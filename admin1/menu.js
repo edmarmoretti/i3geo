@@ -64,7 +64,7 @@ menuPrincipal = [
 		{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/upload/arquivo/index.php' >"+$trad("enviarShp",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/upload/banco/index.php' >"+$trad("gerenciaBd",i3GEOadmin.menup.dicionario)+"</a>"
+		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/upload/shp2pg/index.php' >"+$trad("shp2pg",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin1/upload/simbolo/index.php' >"+$trad("uploadSimbolo",i3GEOadmin.menup.dicionario)+"</a>"
 		}

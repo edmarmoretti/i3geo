@@ -107,7 +107,7 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'enviarShp' : [ {
-		pt : "Shape file",
+		pt : "Upload de shapefile",
 		en : "",
 		es : ""
 	} ],
@@ -323,6 +323,11 @@ i3GEOadmin.menup.dicionario = {
 	} ],
 	'listaDeSubGrupos' : [ {
 		pt : "Lista de nomes de subgrupos",
+		en : "",
+		es : ""
+	} ],
+	'shp2pg' : [ {
+		pt : "Importar shapefile para Postgis",
 		en : "",
 		es : ""
 	} ]

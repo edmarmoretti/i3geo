@@ -34,6 +34,8 @@ class Bdexplorer{
 	 * Lista branca de esquemas permitidos
 	 */
 	public $i3geoEsquemasWL;
+
+	public $i3geoEsquemasUpload;
 	/**
 	 * Construtor
 	 * Faz o include de conexao.php que por sua vez faz o include de i3geo/ms_configura.php
@@ -55,6 +57,11 @@ class Bdexplorer{
 			$this->i3geoEsquemasWL = array();
 		} else {
 			$this->i3geoEsquemasWL = $i3geoEsquemasWL;
+		}
+		if(!isset($i3geoUploadDataWL) || !is_array($i3geoUploadDataWL)){
+			$this->i3geoEsquemasUpload = array();
+		} else {
+			$this->i3geoEsquemasUpload = $i3geoUploadDataWL["postgis"]["esquemas"];
 		}
 		//se a conexao nao vier como parametro, cria uma nova
 		if(is_array($dbh)){
@@ -79,17 +86,23 @@ class Bdexplorer{
 	function listaDeEsquemas(){
 		return $this->i3geoEsquemasWL;
 	}
-	function validaEsquemas($listaDeEsquemas){
+	function listaDeEsquemasUpload(){
+		return $this->i3geoEsquemasUpload;
+	}
+	function validaEsquemas($listaDeEsquemas,$lista = ""){
+		if($lista == ""){
+			$lista = $this->i3geoEsquemasWL;
+		}
 		$novaLista = array();
 		foreach($listaDeEsquemas as $e){
-			if(in_array($e,$this->i3geoEsquemasWL)){
+			if(in_array($e,$lista)){
 				$novaLista[] = $e;
 			}
 		}
 		return $novaLista;
 	}
-	function validaEsquema($esquema){
-		$lista = $this->validaEsquemas(array($esquema));
+	function validaEsquema($esquema,$lista=""){
+		$lista = $this->validaEsquemas(array($esquema),$lista);
 		if(count($lista) == 0){
 			return false;
 		} else {
@@ -99,6 +112,17 @@ class Bdexplorer{
 	function listaDeTabelas($esquema){
 		$tabelas = array();
 		if($this->validaEsquema($esquema) == true){
+			$sql = "SELECT table_name as tabela FROM information_schema.tables where table_schema = '$esquema' AND table_schema NOT LIKE 'i3geo%' AND table_schema NOT LIKE 'pg_%' AND table_schema NOT LIKE '%_schema%'";
+			$res = $this->execSQL($sql);
+			foreach($res as $r){
+				$tabelas[] = $r["tabela"];
+			}
+		}
+		return $tabelas;
+	}
+	function listaDeTabelasUpload($esquema){
+		$tabelas = array();
+		if($this->validaEsquema($esquema,$this->i3geoEsquemasUpload) == true){
 			$sql = "SELECT table_name as tabela FROM information_schema.tables where table_schema = '$esquema' AND table_schema NOT LIKE 'i3geo%' AND table_schema NOT LIKE 'pg_%' AND table_schema NOT LIKE '%_schema%'";
 			$res = $this->execSQL($sql);
 			foreach($res as $r){

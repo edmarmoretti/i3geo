@@ -136,18 +136,31 @@ $i3geoEsquemasWL = array("publicy");
 /*
  Variale: $i3geoUploadDataWL
 
- Lista com as pastas (caminho completo) que podem ser utilizadas para o upload de arquivos shapefile.
+ Lista com as pastas (caminho completo no sistema de arquivos) ou esquemas em bancos de dados Postgis, que podem ser utilizadas para o
+ upload de arquivos shapefile.
  O upload e uma funcao disponivel no sistema de administracao do i3Geo.
- Para nao expor o endereco das pastas nos formularios, cada pasta recebe um nome.
+ Para nao expor o endereco das pastas nos formularios, cada pasta recebe um apelido.
+
+ No caso dos esquemas, o nome e o mesmo existente no banco. Alem dos esquemas e necessario fornecer os parametros de conexao
+ com o banco de dados que permita a escrita nesses esquemas, pois a conversao de shapefile para Postgis exige a criação de tabela.
+ Esses parametros podem ser diferentes de outros existentes aqui no ms_configura e nao interferem em outras operacoes
 
  Exemplo:
 
- $i3geoUploadDataWL = array( "Pasta 1"=>"/tmp/ms_tmp", "Pasta 2"=>"/var/www/data");
+  $i3geoUploadDataWL = array(
+ 	"arquivos" => array(
+ 		"Pasta 1"=>"/tmp/ms_tmp"
+ 	),
+ 	"postgis" => array(
+ 		"esquemas"=>array("esquema1","esquema2","publicy"),
+ 		"conexao"=>array("user"=> "postgres", "password"=>"postgres", "dbname"=>"i3geosaude", "host"=>"localhost", "port"=>"5432")
+ 	)
+ );
 
  Tipo:
  {array}
  */
-$i3geoUploadDataWL = array( "Pasta 1"=>"/tmp/ms_tmp", "Pasta 2"=>"/var/www/data");
+ $i3geoUploadDataWL = array();
 
 //TODO documentar moodle
 /*
@@ -256,7 +269,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,geol
 inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */
-$i3geoBlFerramentas = array("saiku","ffff");
+$i3geoBlFerramentas = array("saiku");
 /*
 Variable: $ogrOutput
 
@@ -640,7 +653,7 @@ Tipo:
 */
 $utilizacgi = "nao";
 /*
-Variable: expoeMapfile
+Variable: expoeMapfile (depreciado)
 
 Essa vari&aacute;vel controla se o nome do mapfile atual ser&aacute; ou n&atilde;o retornado para a aplica&ccedil;&atilde;o via ajax.
 
@@ -653,22 +666,21 @@ $expoeMapfile = "sim";
 /*
 Variable: conexaoadmin
 
-Arquivo PHP que define a string de conex&atilde;o (PDO) com o banco de dados administrativo.
+Arquivo PHP que define a string de conexao (PDO) com o banco de dados administrativo.
 
-Esse arquivo &eacute; inclu&iacute;do no programa i3geo/admin/conexao.php
+Esse arquivo e incluido no programa i3geo/admin/conexao.php
 
-O banco de dados administrativo &eacute; utilizado para definir coisas como a &aacute;rvore de temas, &aacute;rvore de mapas, etc.
+O banco de dados administrativo e utilizado para definir coisas como a arvore de temas, arvore de mapas, etc.
 
-O banco de dados, originalmente, &eacute; montado em SQLITE, por&eacute;m, em ambientes corporativos, sugere-se o uso de bancos de dados mais robustos.
+O banco de dados, originalmente, e montado em SQLITE, porem, em ambientes corporativos, sugere-se o uso de bancos de dados mais robustos.
 
-Se voc&ecirc; quiser utilizar a conex&atilde;o default, baseado no SQLITE, mantenha essa vari&aacute;vel vazia.
+Se voce quiser utilizar a conexao default, baseado no SQLITE, mantenha essa variavel vazia.
 
-O programa PHP que estabelece a conex&atilde;o deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php e i3geo/admin/php/conexaopostgresql.php para maiores detalhes.
+O programa PHP que estabelece a conexao deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php e i3geo/admin/php/conexaopostgresql.php para maiores detalhes.
 
 Exemplos:
 
 $conexaoadmin = $locaplic."/admin/php/conexaopostgresql.php";
-$conexaoadmin = $locaplic."/admin/php/conexaomma.php";
 
 Tipo:
 {string}
@@ -678,7 +690,7 @@ $conexaoadmin = "";
 /*
 Variable: $esquemaadmin
 
-Indica em qual esquema do banco de dados de administra&ccedil;&atilde;o est&atilde;o armazenadas as tabelas do sistema de administra&ccedil;&atilde;o. Por default, utiliza-se o esquema public.
+Indica em qual esquema do banco de dados de administracao estao armazenadas as tabelas do sistema de administracao. Por default, utiliza-se o esquema public.
 
 Tipo:
 {string}
