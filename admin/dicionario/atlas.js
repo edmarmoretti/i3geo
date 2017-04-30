@@ -45,23 +45,23 @@ El montaje de cada Atlas se realiza estableciendo los par&aacute;metros de cada 
 	} ],
     'editeTema' : [ {
 		pt : "Edite para definir o tema!!!",
-		en : "",
-		es : ""
+		en : "Edit to define the theme!!!",
+		es : "Editar para definir el tema!!!"
 	} ],
     'adicionaPrancha' : [ {
 		pt : "Adicionar nova prancha",
-		en : "",
-		es : ""
+		en : "Add a new table",
+		es : "Agregar una tabla nueva"
 	} ],
     'editePrancha' : [ {
 		pt : "Edite para definir a prancha!!!",
-		en : "",
-		es : ""
+		en : "Edit to define the table",
+		es : "Editar para definir la  tabla"
 	} ],
     'editeAtlas' : [ {
 		pt : "Edite para definir o Atlas!!!",
-		en : "",
-		es : ""
+		en : "Edit to define the Atlas!!!",
+		es : "Edite para definir el Atlas!!!"
 	} ],
     'codigoTema' : [ {
 		pt : "C&oacute;digo do tema:",
