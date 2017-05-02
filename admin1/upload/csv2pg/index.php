@@ -3,7 +3,6 @@ define ( "ONDEI3GEO", "../../.." );
 include ("exec.php");
 include "../../head.php";
 // monta o combo com a lista de pastas para armazenar os arquivos
-
 $comboEsquemas = '<select name="i3GEOuploadEsquemaDestino" class="form-control" required ><option value=""></option>';
 if (!empty ( $_SESSION ["i3geoUploadDataWL"] )) {
 	foreach ( $_SESSION ["i3geoUploadDataWL"]["postgis"]["esquemas"] as $c ) {
@@ -31,7 +30,7 @@ $comboAliasConexao .= "</select>";
 				<span>Upload</span>
 			</a>
 			<a class="btn btn-default" style="pointer-events: none">
-				<span>SHP->Postgis</span>
+				<span>CSV->Postgis</span>
 			</a>
 		</div>
 	</div>
@@ -44,15 +43,15 @@ $comboAliasConexao .= "</select>";
 					<i class="material-icons">help</i>
 				</button>
 				<h2>
-					<small>{{{txtTituloShp2Pg}}}</small>
+					<small>{{{txtTituloCsv2Pg}}}</small>
 				</h2>
-				<blockquote>{{{txtDescShp2Pg}}}</blockquote>
+				<blockquote>{{{txtDescCsv2Pg}}}</blockquote>
 				<!--Modal ajuda-->
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-body">
-								<p>{{{txtAjudaShp2Pg}}}</p>
+								<p>{{{txtAjudaCsv2Pg}}}</p>
 							</div>
 						</div>
 					</div>
@@ -64,26 +63,12 @@ $comboAliasConexao .= "</select>";
 				<div class="row center-block well hidden" id="corpo">
 					<div class="col-md-12">
 						<div class="form-group form-group-lg">
-							<label class="col-md-5 control-label">{{{txtArquivos}}}</label>
+							<label class="col-md-5 control-label">{{{txtArquivoCsv}}}</label>
 							<div class="col-md-7">
 								<div class="form-group form-group-lg col-md-12">
 									<div class="input-group-btn">
-										<button type="button" class="btn btn-primary pull-left" onclick="$(this).parent().find('input[type=file]').click();">SHP</button>
-										<input name="i3GEOuploadshp" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
-										<span class="form-control"></span>
-									</div>
-								</div>
-								<div class="form-group form-group-lg col-md-12">
-									<div class="input-group-btn">
-										<button type="button" class="btn btn-primary pull-left" onclick="$(this).parent().find('input[type=file]').click();">SHX</button>
-										<input name="i3GEOuploadshx" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
-										<span class="form-control"></span>
-									</div>
-								</div>
-								<div class="form-group form-group-lg col-md-12">
-									<div class="input-group-btn">
-										<button type="button" class="btn btn-primary pull-left" onclick="$(this).parent().find('input[type=file]').click();">DBF</button>
-										<input name="i3GEOuploaddbf" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+										<button type="button" class="btn btn-primary pull-left" onclick="$(this).parent().find('input[type=file]').click();">CSV</button>
+										<input name="i3GEOuploadcsv" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
 										<span class="form-control"></span>
 									</div>
 								</div>
@@ -109,15 +94,27 @@ $comboAliasConexao .= "</select>";
 							</div>
 						</div>
 						<div class="form-group form-group-lg">
-							<label class="col-md-5 control-label" for="i3GEOuploadSridOrigem">{{{sridOrigem}}}</label>
+							<label class="col-md-5 control-label" for="i3GEOuploadSridOrigem">{{{sridOrigemCsv}}}</label>
 							<div class="col-md-7">
-								<input type="text" value="<?php echo $_SESSION["i3GeoProjDefault"]["epsg"]; ?>" class="form-control" name="i3GEOuploadSridOrigem" required>
+								<input type="text" value="<?php echo $_SESSION["i3GeoProjDefault"]["epsg"]; ?>" class="form-control" name="i3GEOuploadSridOrigem" >
 							</div>
 						</div>
 						<div class="form-group form-group-lg">
 							<label class="col-md-5 control-label" for="i3GEOuploadSridDestino">{{{sridDestino}}}</label>
 							<div class="col-md-7">
-								<input type="text" value="<?php echo $_SESSION["i3GeoProjDefault"]["epsg"]; ?>" class="form-control" name="i3GEOuploadSridDestino" required>
+								<input type="text" value="<?php echo $_SESSION["i3GeoProjDefault"]["epsg"]; ?>" class="form-control" name="i3GEOuploadSridDestino" >
+							</div>
+						</div>
+						<div class="form-group form-group-lg">
+							<label class="col-md-5 control-label" for="i3GEOuploadColunaX">{{{colunaX}}}</label>
+							<div class="col-md-7">
+								<input type="text" value="" class="form-control" name="i3GEOuploadColunaX">
+							</div>
+						</div>
+						<div class="form-group form-group-lg">
+							<label class="col-md-5 control-label" for="i3GEOuploadColunaY">{{{colunaY}}}</label>
+							<div class="col-md-7">
+								<input type="text" value="" class="form-control" name="i3GEOuploadColunaY">
 							</div>
 						</div>
 						<div class="form-group form-group-lg">
@@ -218,7 +215,7 @@ if (empty ( $_SESSION ["i3geoUploadDataWL"] )) {
 		//traducao
 		var t = $("#titulo");
 		//complementa dicionario
-		i3GEOadmin.shp2pg.dicionario = $.extend(
+		i3GEOadmin.csv2pg.dicionario = $.extend(
 			{},
 			i3GEOadmin.uploadshp.dicionario,
 			i3GEOadmin.core.dicionario
@@ -226,12 +223,12 @@ if (empty ( $_SESSION ["i3geoUploadDataWL"] )) {
 
 		i3GEOadmin.core.dicionario = null;
 
-		i3GEOadmin.shp2pg.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.shp2pg.dicionario);
+		i3GEOadmin.csv2pg.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.csv2pg.dicionario);
 
 		t.html(
 			Mustache.to_html(
 				t.html(),
-				i3GEOadmin.shp2pg.dicionario
+				i3GEOadmin.csv2pg.dicionario
 			)
 		);
 		$.material.init();
@@ -241,7 +238,7 @@ if (empty ( $_SESSION ["i3geoUploadDataWL"] )) {
 			t.html(
 				Mustache.to_html(
 					t.html(),
-					i3GEOadmin.shp2pg.dicionario
+					i3GEOadmin.csv2pg.dicionario
 				)
 			);
 	});

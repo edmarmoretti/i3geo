@@ -330,5 +330,10 @@ i3GEOadmin.menup.dicionario = {
 		pt : "Importar shapefile para Postgis",
 		en : "",
 		es : ""
+	} ],
+	'csv2pg' : [ {
+		pt : "Importar CSV para Postgis",
+		en : "",
+		es : ""
 	} ]
 };

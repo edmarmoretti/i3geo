@@ -146,5 +146,40 @@ i3GEOadmin.uploadshp.dicionario = {
 		pt : "Alias da conex&atilde;o com o banco de dados. Ser&aacute; utilizado apenas para o caso de constru&ccedil;&atilde;o do arquivo mapfile.",
 		en : "",
 		es : ""
+	} ],
+	'txtTituloCsv2Pg' : [ {
+		pt : "Importação de arquivo CSV para Postgis",
+		en : "",
+		es : ""
+	} ],
+	'txtDescCsv2Pg' : [ {
+		pt : "Faz o upload de um arquivo CSV e converte para o banco de dados Postgis existente no servidor web. Permite ainda a convers&atilde;o de colunas com a latitude e longitude em uma coluna do tipo geometria.",
+		en : "",
+		es : ""
+	} ],
+	'txtAjudaCsv2Pg' : [ {
+		pt : "No formul&aacute;rio deve-se indicar o arquivo no formato CSV. O arquivo &eacute; enviado ao servidor e armazenado temporariamente para que a convers&atilde;o para Postgis seja poss&iacute;vel. O resultado do processo ser&aacute; uma tabela no banco de dados no esquema escolhido pelo usu&aacute;rio. O acesso ao banco &eacute; feito por meio do usu&aacute;rio administrativo da aplica&ccedil;&atilde;o i3Geo (o mesmo que gerencia o sistema de administra&ccedil;&atilde;o, veja em ms_configura.php). Esse usu&aacute;rio, definido pelo administrador do servidor, deve ter os direitos de escrita no esquema do banco de dados escolhido para importar os dados.",
+		en : "",
+		es : ""
+	} ],
+	'txtArquivoCsv' : [ {
+		pt : "Escolha o arquivo texto no formato CSV",
+		en : "",
+		es : ""
+	} ],
+	'sridOrigemCsv' : [ {
+		pt : "Código numérico SRID (projeção cartográfica) referente aos dados das colunas x e y caso sejam especificadas",
+		en : "",
+		es : ""
+	} ],
+	'colunaX' : [ {
+		pt : "Nome da coluna no arquivo CSV que contém os valores de coordenadas do eixo x (longitude)",
+		en : "",
+		es : ""
+	} ],
+	'colunaY' : [ {
+		pt : "Nome da coluna no arquivo CSV que contém os valores de coordenadas do eixo y (latitude)",
+		en : "",
+		es : ""
 	} ]
 };

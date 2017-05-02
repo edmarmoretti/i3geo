@@ -213,6 +213,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 				$layer->setprojection("AUTO");
 			}
 			$mapa->save ( $_SESSION ["locaplic"] . "/temas/" . $codigo . ".map" );
+			\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $_SESSION ["locaplic"] . "/temas/" . $codigo . ".map" );
 			echo "<div class='alert alert-success' role='alert'>Mapfile $nomePrefixo criado!!!</div>";
 		} else {
 			echo "<div class='alert alert-danger' role='alert'>Mapfile n&atilde;o pode ser criado criado!!!</div>";

@@ -130,7 +130,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	$shapefileObj = ms_newShapefileObj($_SESSION ["dir_tmp"] . "/" . $nomePrefixo . ".shp",-1);
 	$numshapes = $shapefileObj->numshapes;
 
-	echo "<div class='alert alert-info' role='alert'>Numshapes existentes no SHP: " . $numshapes . "</div>";
+	echo "<div class='alert alert-success' role='alert'>Numshapes existentes no SHP: " . $numshapes . "</div>";
 	ob_flush ();flush (); sleep ( 2 );
 
 	$mapObj = ms_newMapObjFromString("MAP END");
@@ -148,8 +148,8 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		}
 	}
 
-	echo "<div class='alert alert-info' role='alert'>Tipo do SHP: " . $shapefileObj->type . "</div>";
-	echo "<div class='alert alert-info' role='alert'>Colunas: <p><pre>";
+	echo "<div class='alert alert-success' role='alert'>Tipo do SHP: " . $shapefileObj->type . "</div>";
+	echo "<div class='alert alert-success' role='alert'>Colunas: <p><pre>";
 	print_r( $colunas );
 	echo "</pre></p></div>";
 
@@ -173,7 +173,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		}
 		$tipoColuna[$coluna] = $tipo;
 	}
-	echo "<div class='alert alert-info' role='alert'>Tipos das colunas: <p><pre>";
+	echo "<div class='alert alert-success' role='alert'>Tipos das colunas: <p><pre>";
 	print_r( $tipoColuna );
 	echo "</pre></p></div>";
 
@@ -248,7 +248,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	//gera o script para inserir os dados
 	$linhas = array();
 	$insert = "INSERT INTO ".$_POST["i3GEOuploadEsquemaDestino"].".".$_POST["i3GEOuploadNomeTabela"]." (".strtolower(\admin\php\funcoesAdmin\removeAcentos(implode(",",$colunas))).",the_geom)";
-	echo "<div class='alert alert-success' role='alert'>Preparando inclus&atilde;o de dados...</div>";
+	echo "<div class='alert alert-info' role='alert'>Preparando inclus&atilde;o de dados...</div>";
 	ob_flush();
 	flush();
 	sleep(1);
@@ -314,9 +314,9 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	}
 
 	if($_POST["i3GEOuploadApenasScript"] == "on"){
-		echo "<div class='alert alert-info' role='alert'>Sql de inser&ccedil;&atilde;o de dados: <p><pre>";
+		echo "<div class='alert alert-success' role='alert'>Sql de inser&ccedil;&atilde;o de dados: <p><pre>";
 		foreach($linhas as $linha){
-			print_r( $linha )."/n";
+			echo( $linha )."\n";
 		}
 		echo "</pre></p></div>";
 
@@ -337,9 +337,10 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		//para testar com acentuacao diferente
 		$conexao = $_SESSION["i3geoUploadDataWL"]["postgis"]["conexao"];
 		$bdcon = pg_connect('dbname='.$conexao["dbname"].' user='.$conexao["user"].' password='.$conexao["password"].' host='.$conexao["host"].' port='.$conexao["port"]."options='-c client_encoding=LATIN1'");
+		echo "<div class='alert alert-success' role='alert'>Sql de inser&ccedil;&atilde;o de dados com erros ou modificados: <p><pre>";
+
 		foreach($linhas as $linha){
 			try {
-				echo "<div class='alert alert-info' role='alert'>Sql de inser&ccedil;&atilde;o de dados com erros ou modificados: <p><pre>";
 				$res = $dbh->query($linha);
 				if($res == false){
 					$res = pg_query($bdcon,$linha);
@@ -357,11 +358,12 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 						}
 					}
 				}
-				echo "</pre></p></div>";
 			} catch (PDOException $e) {
 				echo "<div class='alert alert-danger' role='alert'>N&atilde;o foi poss&iacute;vel executar os SQLs<p><pre>";
 			}
 		}
+		echo "</pre></p></div>";
+
 		$sql = "select * from ".$_POST["i3GEOuploadEsquemaDestino"].".".$_POST["i3GEOuploadNomeTabela"];
 		$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 		$r = $q->fetchAll();
@@ -386,7 +388,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		if(!in_array($_POST["i3GEOuploadAliasConexao"],array_keys($_SESSION ["postgis_mapa"]))){
 			echo "<div class='alert alert-danger' role='alert'>Alias para a conex&atilde;o com o banco n&atilde;o definida</div>";
 		} else {
-			echo "<div class='alert alert-success' role='alert'>Criando mapfile...</div>";
+			echo "<div class='alert alert-info' role='alert'>Criando mapfile...</div>";
 			ob_flush ();flush (); sleep ( 2 );
 
 			if ($shapefileObj->type == 1) {
@@ -408,13 +410,14 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 				$layer->setconnectiontype(6);
 				$layer->set ( "type", $tipoLayer );
 				$mapa->save ( $_SESSION ["locaplic"] . "/temas/" . $_POST["i3GEOuploadNomeTabela"] . ".map" );
+				\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $_SESSION ["locaplic"] . "/temas/" . $_POST["i3GEOuploadNomeTabela"] . ".map" );
 				echo "<div class='alert alert-success' role='alert'>Mapfile " . $_POST["i3GEOuploadNomeTabela"] ." criado!!!</div>";
 			} else {
 				echo "<div class='alert alert-danger' role='alert'>Mapfile n&atilde;o pode ser criado criado!!!</div>";
 			}
 		}
 	}
-	echo "<div class='alert alert-success' role='alert'>Pode fechar essa janela.</div>";
+	echo "<div class='alert alert-info' role='alert'>Pode fechar essa janela.</div>";
 } else {
 	echo "<div class='alert alert-danger' role='alert'>Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</div>";
 }

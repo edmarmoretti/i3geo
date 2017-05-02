@@ -160,7 +160,7 @@ $i3geoEsquemasWL = array("publicy");
  Tipo:
  {array}
  */
- $i3geoUploadDataWL = array();
+   $i3geoUploadDataWL = array();
 
 //TODO documentar moodle
 /*
