@@ -1,13 +1,6 @@
 <?php
 define ( "ONDEI3GEO", "../../.." );
 include ("exec.php");
-//verifica se o login pode ser realizado
-if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
-	header ( "HTTP/1.1 403 Login desativado" );
-	exit ();
-}
-
-
 include "../../head.php";
 ?>
 	<div class="container-fluid migalha" >
@@ -41,8 +34,8 @@ include "../../head.php";
 				$resultado = $q->fetchAll();
 				echo "</div><div class='well'><h3>SQL no padr&atilde;o SQLITE</span></h3>";
 				foreach($resultado as $r){
-					if(mb_detect_encoding($temasacessos2[$i],'UTF-8, ISO-8859-1') == "UTF-8"){
-						echo "<p>".utf8_decode($r["sql"])."</p>";
+					if(mb_detect_encoding($temasacessos2[$i],'UTF-8, ISO-8859-1') == "ISO-8859-1"){
+						echo "<p>".utf8_encode($r["sql"])."</p>";
 					}
 					else{
 						echo "<p>".$r["sql"]."</p>";
@@ -52,16 +45,16 @@ include "../../head.php";
 				echo "<div class='alert alert-info'><p>Ap&oacute;s criar as tabelas no Postgres, vc deve definir as permiss&otilde;es para os usu&aacute;rios.</p>";
 				echo "<p>Para usar outro banco de dados que n&atilde;o seja o default (SQLITE), voc&ecirc; ter&aacute; de alterar o programa i3geo/admin/php/conexao.php</p></div>";
 				foreach($resultado as $r){
-					if(mb_detect_encoding($r["sql"],'UTF-8, ISO-8859-1') == "UTF-8"){
-						$r["sql"] = utf8_decode($r["sql"]);
+					if(mb_detect_encoding($r["sql"],'UTF-8, ISO-8859-1') == "ISO-8859-1"){
+						$r["sql"] = utf8_encode($r["sql"]);
 					}
 					echo str_ireplace("INTEGER PRIMARY KEY","SERIAL PRIMARY KEY NOT NULL",$r["sql"])."<br>";
 				}
 				echo "</div><div class='well'><h3>Listagem completa</h3>";
 				echo "<pre style='overflow:auto;'>";
 				$resultado = var_dump($resultado);
-				if(mb_detect_encoding($resultado,'UTF-8, ISO-8859-1') == "UTF-8"){
-					$resultado = utf8_decode($resultado);
+				if(mb_detect_encoding($resultado,'UTF-8, ISO-8859-1') == "ISO-8859-1"){
+					$resultado = utf8_encode($resultado);
 				}
 				echo $resultado;
 				$dbh = null;

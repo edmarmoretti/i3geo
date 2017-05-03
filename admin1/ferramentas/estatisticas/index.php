@@ -1,13 +1,6 @@
 <?php
 define ( "ONDEI3GEO", "../../.." );
 include ("exec.php");
-//verifica se o login pode ser realizado
-if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
-	header ( "HTTP/1.1 403 Login desativado" );
-	exit ();
-}
-
-
 include "../../head.php";
 ?>
 	<div class="container-fluid migalha" >
@@ -25,12 +18,11 @@ include "../../head.php";
 			<div class="col-sm-12">
 				<div class="well">
 			<?php
-			include("../../../admin/php/admin.php");
-			$totaltemas = count(\admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geoadmin_temas"));
-			$temasvalidos = \admin\php\funcoesAdmin\pegaDados("select codigo_tema,nome_tema,download_tema,kml_tema,ogc_tema,link_tema,tags_tema from ".$esquemaadmin."i3geoadmin_temas where codigo_tema <> ''");
-			$temasassocsubgrupos = \admin\php\funcoesAdmin\pegaDados("select id_tema from ".$esquemaadmin."i3geoadmin_n3 group by id_tema");
-			$nacessostema = \admin\php\funcoesAdmin\pegaDados("select b.nome_tema,sum(a.nacessos) as soma,a.codigo_tema from ".$esquemaadmin."i3geoadmin_acessostema as a,".$esquemaadmin."i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema and a.nacessos > 0 group by a.codigo_tema,b.nome_tema");
-			$ntags = \admin\php\funcoesAdmin\pegaDados("select nome from ".$esquemaadmin."i3geoadmin_tags");
+			$totaltemas = count(\admin\php\funcoesAdmin\pegaDados("select * from ".$_SESSION["esquemaadmin"]."i3geoadmin_temas"));
+			$temasvalidos = \admin\php\funcoesAdmin\pegaDados("select codigo_tema,nome_tema,download_tema,kml_tema,ogc_tema,link_tema,tags_tema from ".$_SESSION["esquemaadmin"]."i3geoadmin_temas where codigo_tema <> ''");
+			$temasassocsubgrupos = \admin\php\funcoesAdmin\pegaDados("select id_tema from ".$_SESSION["esquemaadmin"]."i3geoadmin_n3 group by id_tema");
+			$nacessostema = \admin\php\funcoesAdmin\pegaDados("select b.nome_tema,sum(a.nacessos) as soma,a.codigo_tema from ".$_SESSION["esquemaadmin"]."i3geoadmin_acessostema as a,".$_SESSION["esquemaadmin"]."i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema and a.nacessos > 0 group by a.codigo_tema,b.nome_tema");
+			$ntags = \admin\php\funcoesAdmin\pegaDados("select nome from ".$_SESSION["esquemaadmin"]."i3geoadmin_tags");
 			$totaltemasvalidos = count($temasvalidos);
 			$codigostemas = array();
 			$ncodigostemas = array();
@@ -41,17 +33,25 @@ include "../../head.php";
 			$nsemlinktemas = 0;
 			$nsemtagstemas = 0;
 
-			$sql = "select codigo_tema,soma from (select a.codigo_tema, sum(nacessos) as soma from ".$esquemaadmin."i3geoadmin_acessostema as a,".$esquemaadmin."i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema AND nacessos > 0 group by a.codigo_tema) as soma where soma >";
+			$sql = "select codigo_tema,soma from (select a.codigo_tema, sum(nacessos) as soma from ".$_SESSION["esquemaadmin"]."i3geoadmin_acessostema as a,".$_SESSION["esquemaadmin"]."i3geoadmin_temas as b where a.codigo_tema = b.codigo_tema AND nacessos > 0 group by a.codigo_tema) as soma where soma >";
 
 			$nacessosmaiorqueum = count(\admin\php\funcoesAdmin\pegaDados($sql." 0"));
 			$nacessosmaiorquedez = count(\admin\php\funcoesAdmin\pegaDados($sql." 10"));
 			$nacessosmaiorquecem = count(\admin\php\funcoesAdmin\pegaDados($sql." 100"));
 
 			$temasacessos = array();
-			error_reporting (E_ALL);
 			foreach($temasvalidos as $tema){
-				$ncodigostemas[$tema["codigo_tema"]]++;
-				$nnomestemas[$tema["nome_tema"]]++;
+				if(in_array($tema["codigo_tema"],array_keys($ncodigostemas))){
+					$ncodigostemas[$tema["codigo_tema"]]++;
+				} else {
+					$ncodigostemas[$tema["codigo_tema"]] = 1;
+				}
+				if(in_array($tema["nome_tema"],array_keys($nnomestemas))){
+					$nnomestemas[$tema["nome_tema"]]++;
+				} else {
+					$nnomestemas[$tema["nome_tema"]] = 1;
+				}
+
 				if(strtolower($tema["download_tema"]) == "sim")
 				{
 					$ndownloadtemas++;
@@ -147,9 +147,9 @@ include "../../head.php";
 			echo "<div class='well'><h4>Acesos por tema</h4><ul>";
 			arsort($temasacessos);
 			$temasacessos2 = array_keys($temasacessos);
-			for($i=0;$i<=count($temasacessos2);$i++){
-				if(mb_detect_encoding($temasacessos2[$i],'UTF-8, ISO-8859-1') == "UTF-8"){
-					echo "<li class='list-group-item'><label class='text-success'>".utf8_decode($temasacessos2[$i])." <span class='badge'> ".$temasacessos[$temasacessos2[$i]]."</span></li>";
+			for($i=0;$i<count($temasacessos2);$i++){
+				if(mb_detect_encoding($temasacessos2[$i],'UTF-8, ISO-8859-1') == "ISO-8859-1"){
+					echo "<li class='list-group-item'><label class='text-success'>".utf8_encode($temasacessos2[$i])." <span class='badge'> ".$temasacessos[$temasacessos2[$i]]."</span></li>";
 				}
 				else{
 					echo "<li class='list-group-item'><label class='text-success'>".$temasacessos2[$i]." <span class='badge'> ".$temasacessos[$temasacessos2[$i]]."</span></li>";

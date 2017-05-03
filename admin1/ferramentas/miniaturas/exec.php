@@ -1,5 +1,10 @@
 <?php
-include "index.php";
+//
+//no caso do programa ser utilizado via URL
+//
+if(empty($_GET["tipo"])){
+	exit;
+}
 ?>
 <div class="container">
 	<div class="row center-block">
@@ -12,42 +17,17 @@ include "index.php";
 					//
 					//carrega o phpmapscript
 					//
-					if (!function_exists('ms_GetVersion')){
-						if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-							if(!@dl('php_mapscript_48.dll'))
-								dl('php_mapscript.dll');
-						}
-						else{
-							dl('php_mapscript.so');
-						}
-					}
-					include_once (dirname(__FILE__)."/../../../admin/php/admin.php");
 					$versao = \admin\php\funcoesAdmin\versao();
 					$versao = $versao["principal"];
-					//
-					//no caso do programa ser utilizado via URL
-					//
-					if(empty($tipo)){
-						exit;
-					}
+
+					$tipo = $_GET["tipo"];
 					if($tipo == "mini" || $tipo == "todos" || $tipo == "grande"){
 						ms_ResetErrorList();
-						//verifica login
-						if(empty($_POST["senha"]) || empty($_POST["usuario"])){
-							exit;
-						}
-						else{
-							$continua = \admin\php\funcoesAdmin\verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
-							if($continua === false){
-								echo "<div class='alert alert-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
-								exit;
-							}
-						}
 						if (ob_get_level() == 0){
 							ob_start();
 						}
 						error_reporting (E_ALL);
-						$arqs = listaArquivos("../../../temas",true,array("map","gvp"));
+						$arqs = listaArquivos("../../../temas",true,array("map"));
 						$arqs = $arqs["arquivos"];
 						sort($arqs);
 						foreach ($arqs as $arq){
@@ -67,8 +47,7 @@ include "index.php";
 								}
 								echo "</div>";
 							}
-							ob_flush();
-							flush();
+							ob_flush(); flush(); sleep(2);
 						}
 						ob_end_flush();
 					}
@@ -162,7 +141,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				else{
 					$dados = $layern->data;
 				}
-				$pegarext = $teman->name;
+				$pegarext = $layern->name;
 			}
 
 			if (isset($postgis_mapa)){
@@ -186,18 +165,6 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				}
 			}
 			zoomTemaMiniatura($pegarext,$mapa);
-		}
-		if($extensao == ".gvp"){
-			include_once($_SESSION["locaplic"]."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
-			$gm = new gvsig2mapfile($tema);
-			$gvsigview = $gm->getViewsNames();
-			foreach($gvsigview as $v){
-				$dataView = $gm->getViewData($v);
-				$mapa = $gm->addLayers($mapa,$v,$dataView["layerNames"]);
-			}
-			$next = $dataView["extent"];
-			$ext = $mapa->extent;
-			$ext->setextent($next[0],$next[1],$next[2],$next[3]);
 		}
 		if ($tipo == "mini"  || $tipo == "todos"){
 			$mapa->setsize(50,50);
@@ -304,5 +271,244 @@ function zoomTemaMiniatura($nomelayer,&$mapa)
 		$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
 	}
 }
+function listaArquivos($diretorio,$seguro=false,$permitido=array("png","PNG","jpg","JPG","tif","tiff","TIF","TIFF","shp","SHP","img"))
+{
+	$docroot = $_SERVER["DOCUMENT_ROOT"];
+	if (!is_dir($diretorio)){
+		$diretorio = "../".$diretorio;
+	}
+	if (is_dir($diretorio)){
+		$dirs = array();
+		$arqs = array();
+		$nomes = array();
+		$urls = array();
+		$exts = array();
+		$d = dir($diretorio);
+		while (($nd = $d->read()) != FALSE)
+		{
+			if ($nd != "." && $nd != ".."){
+				$ext = explode(".",$nd);
+				if (count($ext)>1){
+					if($seguro == true){
+						$buscar = $ext[1];
+						//$permitido = array("png","PNG","jpg","JPG","tif","tiff","TIF","TIFF","shp","SHP","img");
+						if(in_array($buscar,$permitido)){
+							$arqs[] = $nd;
+							$nomes[] = basename($nd);
+							$exts[] = $ext[1];
+							$url = "";
 
+							if(strpos($diretorio,$docroot) === true || strpos($diretorio,$docroot) === 0){
+								$url = str_replace($docroot,"",$diretorio."/".$nd);
+							}
+							$urls[] = $url;
+						}
+					}
+					else{
+						$arqs[] = $nd;
+						$nomes[] = basename($nd);
+						$urls = "";
+						$exts[] = $ext[1];
+					}
+				}
+				if (count($ext)==1){
+					$dirs[] = $nd;
+				}
+			}
+		}
+		sort($dirs);
+		return array("diretorios"=>$dirs,"arquivos"=>$arqs,"nomes"=>$nomes,"urls"=>$urls,"extensoes"=>$exts);
+	}
+	else
+	{return "erro";}
+}
+function cloneInlineSymbol($layern, $nmapa, $mapa) {
+	$numclasses = $layern->numclasses;
+	for($ci = 0; $ci < $numclasses; $ci ++) {
+		$classe = $layern->getclass ( $ci );
+		$numestilos = $classe->numstyles;
+		for($ei = 0; $ei < $numestilos; $ei ++) {
+			$estilo = $classe->getstyle ( $ei );
+			if ($estilo->symbolname != "") {
+				$nomesimbolo = $estilo->symbolname;
+				$simbolo = $nmapa->getSymbolObjectById ( $nmapa->getSymbolByName ( $nomesimbolo ) );
+				if ($simbolo->inmapfile == MS_TRUE || file_exists ( $nomesimbolo )) {
+					$simbolon = new symbolObj ( $mapa, $nomesimbolo );
+					$simbolon->set ( "inmapfile", MS_TRUE );
+
+					$simbolon->setImagePath ( $simbolo->imagepath );
+					$simbolon->setPoints ( $simbolo->getPointsArray () );
+					// $simbolon->setPattern($simbolo->getPatternArray());
+					$simbolon->set ( "type", $simbolo->type );
+					// $simbolon->set("antialias",$simbolo->antialias);
+					$simbolon->set ( "character", $simbolo->character );
+					$simbolon->set ( "filled", $simbolo->filled );
+
+					// $simbolon->set("font",$simbolo->font);
+					// $simbolon->set("position",$simbolo->position);
+					$simbolon->set ( "sizex", $simbolo->sizex );
+					$simbolon->set ( "sizey", $simbolo->sizey );
+					$simbolon->set ( "transparent", $simbolo->transparent );
+					$simbolon->set ( "transparentcolor", $simbolo->transparentcolor );
+					// $simbolon->set("anchorpoint",$simbolo->anchorpoint);
+				}
+			}
+		}
+	}
+}
+function autoClasses(&$nlayer, $mapa, $locaplic = null) {
+	$postgis_mapa = $_SESSION ["postgis_mapa"];
+	;
+	$substituicon = "nao";
+	if ($nlayer->connectiontype == MS_POSTGIS) {
+		if ($nlayer->connection == " ") {
+			$nlayer->set ( "connection", $postgis_mapa );
+			$substituicon = "sim";
+		}
+	}
+	//
+	// gera classes automaticamente (temas vetoriais)
+	if ($nlayer->getmetadata ( "classesitem" ) != "") {
+		$itemnome = $nlayer->getmetadata ( "classesnome" );
+		$itemid = $nlayer->getmetadata ( "classesitem" );
+		$itemcor = $nlayer->getmetadata ( "classescor" );
+		$itemsimbolo = $nlayer->getmetadata ( "classesimbolo" );
+		$itemtamanho = $nlayer->getmetadata ( "classestamanho" );
+		$classeoriginal = $nlayer->getclass ( 0 );
+		//
+		// pega a extensao geografica que devera ser utilizada
+		//
+		$prjMapa = $mapa->getProjection ();
+		$prjTema = $nlayer->getProjection ();
+		$ret = $nlayer->getmetadata ( "extensao" );
+		if ($ret == "") {
+			$ret = $nlayer->getextent ();
+			// reprojeta o retangulo
+			if (($prjTema != "") && ($prjMapa != $prjTema)) {
+				$projInObj = ms_newprojectionobj ( $prjTema );
+				$projOutObj = ms_newprojectionobj ( $prjMapa );
+				$ret->project ( $projInObj, $projOutObj );
+			}
+		} else {
+			$temp = explode ( " ", $ret );
+			$ret = ms_newRectObj ();
+			$ret->setextent ( $temp [0], $temp [1], $temp [2], $temp [3] );
+		}
+		//
+		$sopen = $nlayer->open ();
+		if ($sopen == MS_FAILURE) {
+			return "erro";
+		}
+
+		$status = $nlayer->whichShapes ( $ret );
+		$parametrosClasses = array ();
+		if ($status == 0) {
+			while ( $shape = $nlayer->nextShape () ) {
+				$id = trim ( $shape->values [$itemid] );
+				if (! $parametrosClasses [$id]) {
+					$nome = "";
+					if ($itemnome != "")
+						$nome = trim ( $shape->values [$itemnome] );
+						$cor = "";
+						if ($itemcor != "")
+							$cor = explode ( ",", trim ( $shape->values [$itemcor] ) );
+							if (count ( $cor ) != 3)
+								$cor = explode ( " ", trim ( $shape->values [$itemcor] ) );
+								$tamanho = "";
+								if ($itemtamanho != "")
+									$tamanho = trim ( $shape->values [$itemtamanho] );
+									$simbolo = "";
+									if ($itemsimbolo != "")
+										$simbolo = trim ( $shape->values [$itemsimbolo] );
+										$parametrosClasses [$id] = array (
+												"nome" => $nome,
+												"cor" => $cor,
+												"tamanho" => $tamanho,
+												"simbolo" => $simbolo
+										);
+				}
+			}
+			$fechou = $nlayer->close ();
+			// echo "<pre>";var_dump($parametrosClasses);
+			if (count ( $parametrosClasses ) > 0) {
+				$ids = array_keys ( $parametrosClasses );
+				for($i = 0; $i < count ( $parametrosClasses ); ++ $i) {
+					$p = $parametrosClasses [$ids [$i]];
+					// echo "<pre>";var_dump($p);
+					$nclasse = ms_newClassObj ( $nlayer, $classeoriginal );
+					if ($p ["nome"] != "")
+						$nclasse->set ( "name", $p ["nome"] );
+						$estilo = $nclasse->getstyle ( 0 );
+						if ($p ["cor"] != "") {
+							$cor = $p ["cor"];
+							$ncor = $estilo->color;
+							if ($ncor == "")
+								$ncor = $estilo->outlinecolor;
+								$ncor->setrgb ( $cor [0], $cor [1], $cor [2] );
+						}
+						if ($p ["tamanho"] != "")
+							$estilo->set ( "size", $p ["tamanho"] );
+							if ($p ["simbolo"] != "")
+								$estilo->set ( "symbolname", $p ["simbolo"] );
+								$strE = "('[" . $itemid . "]'eq'" . $ids [$i] . "')";
+								$nclasse->setexpression ( $strE );
+				}
+				$classeoriginal->set ( "status", MS_DELETE );
+			}
+		}
+		if ($substituicon == "sim") {
+			$nlayer->set ( "connection", " " );
+		}
+	}
+	$pf = $nlayer->getmetadata ( "palletefile" );
+	if ($pf != "") {
+		if (! file_exists ( $pf )) {
+			return;
+		}
+		$ps = $nlayer->getmetadata ( "palletesteps" );
+		if ($ps == "")
+			$ps = 8;
+			//
+			// pega os valores do arquivo
+			//
+			$rules = array ();
+			$abre = fopen ( $pf, "r" );
+			$paletteRules = array ();
+			while ( ! feof ( $abre ) ) {
+				$line = trim ( fgets ( $abre ) );
+				$pos = strpos ( $line, "#" );
+				if ($pos === false || $pos > 0) {
+					$paletteEntry = explode ( " ", $line );
+					$rules [] = array (
+							"v0" => $paletteEntry [0],
+							"v1" => $paletteEntry [1],
+							"r0" => $paletteEntry [2],
+							"g0" => $paletteEntry [3],
+							"b0" => $paletteEntry [4],
+							"r1" => $paletteEntry [5],
+							"g1" => $paletteEntry [6],
+							"b1" => $paletteEntry [7]
+					);
+				}
+			}
+			fclose ( $abre );
+			foreach ( $rules as $rule ) {
+				$delta = ceil ( ($rule ["v1"] - $rule ["v0"]) / $ps );
+				$legenda = true;
+				for($value = $rule ["v0"]; $value < $rule ["v1"]; $value += $delta) {
+					$class = ms_newClassObj ( $nlayer );
+					$style = ms_newStyleObj ( $class );
+					if ($legenda) {
+						$class->set ( name, round ( $value, 0 ) );
+						$legenda = true;
+					}
+					$expression = "([pixel] > " . round ( $value, 0 ) . " AND [pixel] <= " . round ( $value + $delta, 0 ) . ")";
+					$class->setExpression ( $expression );
+					$rgb = getRGBpallete ( $rule, $value );
+					$style->color->setRGB ( $rgb [0], $rgb [1], $rgb [2] );
+				}
+			}
+	}
+	return;
+}
 ?>
