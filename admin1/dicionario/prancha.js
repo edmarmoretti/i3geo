@@ -1,15 +1,9 @@
-//+$trad(1,i3GEOadmin.principal.dicionario)+
 if (typeof (i3GEOadmin.prancha) === 'undefined') {
 	i3GEOadmin.prancha = {};
 }
 i3GEOadmin.prancha.dicionario = {
 	'txtTitulo' : [ {
 		pt : "Pranchas",
-		en : "",
-		es : ""
-	} ],
-    'ajuda' : [ {
-		pt : "Ajuda",
 		en : "",
 		es : ""
 	} ],

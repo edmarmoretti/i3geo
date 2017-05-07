@@ -65,11 +65,6 @@ i3GEOadmin.atlas.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'linkAtlas' : [ {
-		pt : "Link para o texto que ser&aacute; mostrado na inicializa&ccedil;&atilde;o do Atlas",
-		en : "",
-		es : ""
-	} ],
     'iconeAtlas' : [ {
 		pt : "&Iacute;cone que ser&aacute; utilizado na montagem da lista de todos os Atlas",
 		en : "",

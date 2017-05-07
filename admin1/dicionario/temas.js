@@ -4,11 +4,6 @@ i3GEOadmin.temas.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'adicionarTema' : [ {
-		pt : "Adicionar tema",
-		en : "",
-		es : ""
-	} ],
     'perfis' : [ {
 		pt : "Perfis que podem ver. Separe por espa&ccedil;os e escolha da lista ao lado.",
 		en : "",

@@ -1,12 +1,6 @@
-//+$trad(1,i3GEOadmin.principal.dicionario)+
 i3GEOadmin.subgrupos.dicionario = {
     'subgrupos' : [ {
 		pt : "Subgrupos vinculados ao grupo",
-		en : "",
-		es : ""
-	} ],
-    'nomePadrao' : [ {
-		pt : "Nome padr&atilde;o:",
 		en : "",
 		es : ""
 	} ],
@@ -25,16 +19,6 @@ i3GEOadmin.subgrupos.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'nomeIt' : [ {
-		pt : "Italiano (opcional):",
-		en : "",
-		es : ""
-	} ],
-    'editarSub' : [ {
-		pt : "Editar temas",
-		en : "",
-		es : ""
-	} ],
     'txtDesc' : [ {
 		pt : "Utilize as opções abaixo para criar ou editar temas que ficarão na raiz do grupo e também para criar ou editar os subgrupos vinculados.",
 		en : "",
@@ -42,11 +26,6 @@ i3GEOadmin.subgrupos.dicionario = {
 	} ],
     'temasRaizSubgrupo' : [ {
 		pt : "Temas do grupo",
-		en : "",
-		es : ""
-	} ],
-    'adicionarSubgrupo' : [ {
-		pt : "Adicionar subgrupo",
 		en : "",
 		es : ""
 	} ],

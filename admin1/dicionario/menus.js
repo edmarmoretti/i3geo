@@ -1,12 +1,6 @@
-//+$trad(1,i3GEOadmin.principal.dicionario)+
 i3GEOadmin.menus.dicionario = {
 	'txtTitulo' : [ {
 		pt : "Menus utilizados no cat&aacute;logo",
-		en : "",
-		es : ""
-	} ],
-    'ajuda' : [ {
-		pt : "Ajuda",
 		en : "",
 		es : ""
 	} ],
@@ -15,28 +9,8 @@ i3GEOadmin.menus.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'adicionaMenu' : [ {
-		pt : "Adicionar um novo menu",
-		en : "",
-		es : ""
-	} ],
     'nomeMenu' : [ {
 		pt : "Nome padr&atilde;o do menu",
-		en : "",
-		es : ""
-	} ],
-    'nomeIn' : [ {
-		pt : "Nome em ingl&ecirc;s (opcional)",
-		en : "",
-		es : ""
-	} ],
-    'nomeEs' : [ {
-		pt : "Nome em espanhol (opcional)",
-		en : "",
-		es : ""
-	} ],
-    'nomeIt' : [ {
-		pt : "Nome em italiano (opcional)",
 		en : "",
 		es : ""
 	} ],
@@ -57,46 +31,6 @@ i3GEOadmin.menus.dicionario = {
 	} ],
     'descricao' : [ {
 		pt : "Descri&ccedil;&atilde;o",
-		en : "",
-		es : ""
-	} ],
-    'nomePadrao' : [ {
-		pt : "Nome padr&atilde;o:",
-		en : "",
-		es : ""
-	} ],
-    'descricao1' : [ {
-		pt : "Descri&ccedil;&atilde;o (opcional):",
-		en : "",
-		es : ""
-	} ],
-    'nomeIn1' : [ {
-		pt : "Nome em ingl&ecirc;s (opcional):",
-		en : "",
-		es : ""
-	} ],
-    'nomeEs1' : [ {
-		pt : "Espanhol (opcional):",
-		en : "",
-		es : ""
-	} ],
-    'nomeIt1' : [ {
-		pt : "Italiano (opcional):",
-		en : "",
-		es : ""
-	} ],
-    'perfil1' : [ {
-		pt : "Perfis (opcional):",
-		en : "",
-		es : ""
-	} ],
-    'publicado1' : [ {
-		pt : "Publicado para todos verem?",
-		en : "",
-		es : ""
-	} ],
-    'iniciaAberto1' : [ {
-		pt : "Inicia aberto na &aacute;rvore?",
 		en : "",
 		es : ""
 	} ],

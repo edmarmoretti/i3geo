@@ -1,12 +1,6 @@
-//+$trad(1,i3GEOadmin.principal.dicionario)+
 i3GEOadmin.perfis.dicionario = {
 	'txtTitulo' : [ {
 		pt : "Perfis de acesso ao cat&aacute;logo",
-		en : "",
-		es : ""
-	} ],
-    'ajuda' : [ {
-		pt : "Ajuda",
 		en : "",
 		es : ""
 	} ],

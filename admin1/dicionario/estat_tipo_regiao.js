@@ -4,11 +4,6 @@ i3GEOadmin.regioes.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'txtHierarquiaTitulo' : [ {
-		pt : "Hierarquia entre regi&otilde;es",
-		en : "",
-		es : ""
-	} ],
     'txtAjuda' : [ {
 		pt : "As regi&otilde;es s&atilde;o utilizadas para espacializar os dados estat&iacute;sticos. Ao definir uma medida de vari&aacute;vel, deve-se escolher qual a regi&atilde;o que ser&aacute; utilizada para a representa&ccedil;&atilde;o dos dados, ou seja, qual a unidade geogr&aacute;fica correspondente aos dados. Regi&otilde;es podem ter tamb&eacute;m uma hierarquia, que permite agregar dados, por exemplo, uma regi&atilde;o denominada 'munic&iacute;pios' pode ser agregada por outra regi&atilde;o denominada 'estados'. Na pr&aacute;tica, uma regi&atilde;o &eacute; uma tabela no banco de dados que cont&eacute;m uma coluna com a geometria correspondente.",
 		en : "",

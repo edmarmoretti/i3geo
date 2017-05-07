@@ -1,5 +1,3 @@
-//+$trad(1,i3GEOadmin.principal.dicionario)+
-//i3GEOadmin.mapas = {};
 i3GEOadmin.mapas.dicionario = {
 	'txtDesc' : [ {
 		pt : "Mapas recebem um identificador &uacute;nico e usam URLs curtas para inicializa&ccedil;&atilde;o. Os mapas podem ter sido salvos (mapfile salvo no banco de dados) por meio da ferramenta 'salvar mapa' ou podem ser apenas par&acirc;metros definidos ao criar um novo mapa nas op&ccedil;&otilde;es abaixo. Na p&aacute;gina principal do i3Geo existe uma op&ccedil;&atilde;o que permite ao usu&aacute;rio abrir os mapas.",
@@ -13,16 +11,6 @@ i3GEOadmin.mapas.dicionario = {
 	} ],
     'txtAjuda' : [ {
 		pt : "Vc pode registrar qualquer link para mapas. A op&ccedil;&atilde;o 'editar' abre um formul&aacute;rio para a cria&ccedil;&atilde;o do link conforme os par&acirc;metros utilizados pelo i3Geo. Voc&ecirc; pode desprezar todos os campos do formul&aacute;rio e incluir apenas o link direto desejado. Pode ser armazenado também um mapfile completo com todas as configura&ccedil;&otilde;es do mapa",
-		en : "",
-		es : ""
-	} ],
-    'ajudaNovo' : [ {
-		pt : "Adicionar um novo",
-		en : "",
-		es : ""
-	} ],
-    'linksExistentes' : [ {
-		pt : "Links existentes:",
 		en : "",
 		es : ""
 	} ],
@@ -78,11 +66,6 @@ i3GEOadmin.mapas.dicionario = {
 	} ],
     'perfis' : [ {
 		pt : "Perfis que podem ver este mapa. Separe por espa&ccedil;os e escolha da lista ao lado.",
-		en : "",
-		es : ""
-	} ],
-    'msgBusca' : [ {
-		pt : "Buscando...",
 		en : "",
 		es : ""
 	} ],

@@ -7,31 +7,6 @@ i3GEOadmin.uploadshp.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'tipoGeom' : [ {
-		pt : "Tipo de geometria",
-		en : "",
-		es : ""
-	} ],
-	'naoConhecido' : [ {
-		pt : "n&atilde;o conhecido",
-		en : "",
-		es : ""
-	} ],
-	'pontual' : [ {
-		pt : "pontual",
-		en : "",
-		es : ""
-	} ],
-	'poligonal' : [ {
-		pt : "poligonal",
-		en : "",
-		es : ""
-	} ],
-	'linear' : [ {
-		pt : "linear",
-		en : "",
-		es : ""
-	} ],
 	'projecao' : [ {
 		pt : "Proje&ccedil;&atilde;o (apenas ser&aacute; utilizado se n&atilde;o for feito o upload de um arquivo .prj)",
 		en : "",
@@ -39,11 +14,6 @@ i3GEOadmin.uploadshp.dicionario = {
 	} ],
 	'envia' : [ {
 		pt : "Enviar",
-		en : "",
-		es : ""
-	} ],
-	'ajudaCaracter' : [ {
-		pt : "N&atilde;o utilize _ no nome do arquivo. Apenas letras e n&uacute;meros s&atilde;o aceitos!!!",
 		en : "",
 		es : ""
 	} ],

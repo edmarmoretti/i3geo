@@ -1,4 +1,3 @@
-//+$trad(1,i3GEOadmin.menu.dicionario)+
 i3GEOadmin.menup = {};
 i3GEOadmin.menup.dicionario = {
 	'configGeral' : [ {
