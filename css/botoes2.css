@@ -991,12 +991,13 @@ button { //
 	padding: 2px;
 	border-radius: 5px 5px 5px 5px;
 	background-image: none;
-	margin-left: 8px;
 	border: solid 1px gray;
 	box-shadow: 0px 1px 3px lightgray;
 	cursor: pointer;
 	widh: 40px;
 	height: 40px;
+	background-color: rgba(0,60,136,.5);
+
 }
 #i3GEOguiaMovel .iconeGuiaMovel{
 	padding: 3px 0px;

@@ -1164,7 +1164,7 @@ i3GEO.guias =
 				temp.style.visibility = "visible";
 				// evita sobreposicao com elementos que tenham onclick
 				temp.style.height = parseInt(temp.style.height) - 20 + "px";
-				i3GEO.util.aparece("i3GEOguiaMovel", 300, 100);
+				//i3GEO.util.aparece("i3GEOguiaMovel", 300, 100);
 				if (i3GEO.guias.guiaMovel.ABERTA === true) {
 					i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
 				}
@@ -1246,7 +1246,7 @@ i3GEO.guias =
 					if ($i("iconeGuia_" + temp.chaves[i])) {
 						ims = $i("iconeGuia_" + temp.chaves[i]).getElementsByTagName("button");
 						if (ims.length > 0) {
-							ims[0].style.backgroundColor = "white";
+							//ims[0].style.backgroundColor = "white";
 							ims[0].style.boxShadow = "none";
 							ims[0].style.margin = "0px";
 							ims[0].style.border = "1px solid gray";
