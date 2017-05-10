@@ -80,7 +80,7 @@ g_traducao_init =
 		],
 		"6a" : [
 			{
-				pt : "Baseado na API do GoogleMaps, esse mapa incorpora as funcionalidades desse popular software, incluindo as camadas de fundo com imagens e cartografia b&aacute;sica.",
+				pt : "Baseado na API do GoogleMaps, esse mapa incorpora as funcionalidades desse popular software, incluindo as camadas de fundo com imagens e cartografia b&aacute;sica. <a tabindex='-1' target='_blank' href='../interface/googlemaps_noite.phtml' >Vers&atilde;o noturna</a>",
 				en : "Based on GoogleMap API, that map includes features of this popular software, including its basemap layers, imagery and basic cartography.",
 				es : "Basado en la API de GoogleMap, ese mapa incorpora las funcionalidades de este software popular, incluyendo las capas de fondo con im&aacute;genes y cartograf&iacute;a b&aacute;sica."
 			}

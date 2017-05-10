@@ -1147,11 +1147,11 @@ i3GEO.Interface =
 							pz = new ol.control.Zoom(openlayers.ZOOM);
 							pz.setMap(i3geoOL);
 						}
-						if (openlayers.GADGETS.ZoomSlider === true && i3GEO.parametros.h > 600) {
+						if (openlayers.GADGETS.ZoomSlider === true && i3GEO.parametros.h > 600 && i3GEO.parametros.w > 500) {
 							pz = new ol.control.ZoomSlider(openlayers.ZOOMSLIDER);
 							pz.setMap(i3geoOL);
 						}
-						if (openlayers.GADGETS.ScaleLine === true && i3GEO.parametros.h > 600) {
+						if (openlayers.GADGETS.ScaleLine === true && i3GEO.parametros.h > 600 && i3GEO.parametros.w > 500) {
 							pz = new ol.control.ScaleLine(openlayers.SCALELINE);
 							pz.setMap(i3geoOL);
 						}
