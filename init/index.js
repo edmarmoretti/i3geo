@@ -105,13 +105,6 @@ botoesIni = [
 	"fa": "cogs",
 	"target": "_self"
 },{
-	"img":"applications-development-web",
-	"href": "../admin",
-	"titulo":$trad("adminOld",g_traducao_init),
-	"subtitulo": "",
-	"fa": "cogs",
-	"target": "_blank"
-},{
 	"img":"folder-image",
 	"href": "../exemplos/index.php",
 	"titulo":$trad(14,g_traducao_init),

@@ -2011,9 +2011,9 @@ var g_traducao =
 		],
 		"x69" : [
 			{
-				pt : "Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea que ser&aacute; aproximada",
-				en : "Press the CTRL key along with the left mouse button and drag to define the area to be approximate",
-				es : "Pulse la tecla CTRL junto con el bot&oacurte;n izquierdo del rat&oacurte;n y arrastre para definir el &aacurte;rea a ser aproximado"
+				pt : "Pressione a tecla SHIFT junto com o bot&atilde;o esquerdo do mouse e arraste para definir a &aacute;rea que ser&aacute; aproximada",
+				en : "Press the SHIFT key along with the left mouse button and drag to define the area to be approximate",
+				es : "Pulse la tecla SHIFT junto con el bot&oacurte;n izquierdo del rat&oacurte;n y arrastre para definir el &aacurte;rea a ser aproximado"
 			}
 		],
 		"x70" : [

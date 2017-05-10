@@ -275,15 +275,9 @@ i3GEO.coordenadas =
 				if ($i(id)) {
 					if (!$i("coordgeotabela")) {
 						$i(id).innerHTML = i3GEO.coordenadas.criaMascaraDMS("coordgeotabela");
-						if (i3GEO.Interface.TABLET === true) {
-							i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
-								"i3GEO.coordenadas.atualizaLocalizarGeo()"
-							]);
-						} else {
 							i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
 								"i3GEO.coordenadas.atualizaLocalizarGeo()"
 							]);
-						}
 					}
 				}
 			} catch (e) {
@@ -769,15 +763,11 @@ i3GEO.coordenadas =
 					if (temp.ativo === true) {
 						if (temp.tipo === "geo") {
 							if (ativaMovimento === true) {
-								if (i3GEO.Interface.TABLET === true) {
-									i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
-										"i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"
-									]);
-								} else {
+
 									i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
 										"i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"
 									]);
-								}
+
 							}
 							if (typeof (x) !== 'undefined') {
 								i3GEO.coordenadas.atualizaLocalizarGeo(
@@ -791,15 +781,9 @@ i3GEO.coordenadas =
 								nomeFunc = "i3GEO.coordenadas.atualizaCodigo";
 							}
 							if (ativaMovimento === true) {
-								if (i3GEO.Interface.TABLET === true) {
-									i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
+								i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
 										nomeFunc + "('" + onde + "','" + tipos[i] + "')"
 									]);
-								} else {
-									i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
-										nomeFunc + "('" + onde + "','" + tipos[i] + "')"
-									]);
-								}
 							}
 							if (typeof (x) !== 'undefined') {
 								eval(nomeFunc + "(onde,tipos[i],x,y);");
@@ -808,15 +792,11 @@ i3GEO.coordenadas =
 					}
 				}
 				if (ativaMovimento === true) {
-					if (i3GEO.Interface.TABLET === true) {
-						i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
-							"i3GEO.coordenadas.limpaModoTexto()"
-						]);
-					} else {
+
 						i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
 							"i3GEO.coordenadas.limpaModoTexto()"
 						]);
-					}
+
 				}
 				if (i3GEO.coordenadas.formato === "bloco") {
 					i3GEO.coordenadas.ativaBloco(onde);

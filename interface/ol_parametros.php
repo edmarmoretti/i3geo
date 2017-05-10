@@ -99,30 +99,49 @@
 		<img src='../imagens/logo_inicio.png'>
 	</div>
 
-	<div id="i3GEOguiaMovel" style="visibility: hidden; position: absolute; display: block; border: 0px solid white; text-align: left; z-index: 2000; background-color: none">
-		<div style="cursor: pointer; position: absolute; top: 10px; width: 30px; z-index: 5000; left: 18px;">
+	<div id="i3GEOguiaMovel"
+		style="visibility: hidden; position: absolute; display: block; border: 0px solid white; text-align: left; z-index: 2000; background-color: none">
+		<div
+			style="cursor: pointer; position: absolute; top: 10px; width: auto; z-index: 5000; ">
 			<div id="iconeGuia_temas"></div>
 			<div id="iconeGuia_adiciona" style="margin-top: 3px;"></div>
 			<div id="iconeGuia_legenda" style="margin-top: 3px;"></div>
 			<div id="iconeGuia_dobraPagina" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_buscaRapida" style="margin-top: 3px;"></div>
 			<div id="iconeGuia_identificaBalao" style="margin-top: 3px;"></div>
 			<div id="iconeGuia_identifica" style="margin-top: 3px;"></div>
+			<!--
+			<div id="iconeGuia_zoomtot" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomanterior" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomli" style="margin-top: 3px;"></div>
+			<div id="iconeGuia_zoomproximo" style="margin-top: 3px;"></div>
+			-->
 		</div>
-		<div id="i3GEOguiaMovelMolde" style="top: 0px; box-shadow: 0 2px 10px 0 #888888; position: absolute; display: none; border: 0px solid white; text-align: left; z-index: 1000; background-color: gray">
-			<div id="i3GEOguiaMovelConteudo" style='top: 10px; overflow: auto; display: none; position: absolute; border-color: gray; border-width: 0px 0 0px 0px; left: 0px; height: 0px; background-color: white'>
+		<!-- veja i3GEO.guias.CONFIGURA -->
+		<div id="i3GEOguiaMovelMolde"
+			style="top: 0px; box-shadow: 0 2px 10px 0 #888888; position: absolute; display: none; border: 0px solid white; text-align: left; z-index: 10000; background-color: gray">
+			<div id="i3GEOguiaMovelConteudo"
+				style='top: 10px; overflow: auto; display: none; position: absolute; border-color: gray; border-width: 0px 0 0px 0px; left: 0px; height: 0px; background-color: white'>
 				<div id='guia1obj' style='display: none;'>
-					<div onclick="i3GEO.guias.guiaMovel.abreFecha('fecha');" style='cursor:pointer; left: 0px; top: 0px; width: 95%; text-align: right; font-size: 14pt;'>X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.guiaMovel.abreFecha('fecha');">X</div>
 					<!-- opcoes como um botao -->
 					<div id="arvoreCamOpcoes" style="text-align:left;"></div>
 					<!--	Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
-					<div id=listaTemas style='top: 15px;'></div>				</div>
+					<div id=listaTemas style='top: 15px;'></div>
+				</div>
 				<div id='guia2obj' style='display: none;'>
-					<div onclick="i3GEO.guias.guiaMovel.abreFecha('fecha');" style='cursor:pointer; left: 0px; top: 0px; width: 95%; text-align: right; font-size: 14pt;'>X</div>
-					<div id="arvoreAdicionaTema" >Aguarde...</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.guiaMovel.abreFecha('fecha');">X</div>
+					<!-- opcoes como um botao -->
+					<div id="arvoreCatOpcoes" style="text-align:left;margin-bottom: 20px;"></div>
+					<div id="arvoreAdicionaTema">Aguarde...</div>
 				</div>
 				<div id='guia4obj' style='display: none; text-align: left'>
-					<div onclick="i3GEO.guias.guiaMovel.abreFecha('fecha');" style='cursor:pointer; left: 0px; top: 0px; width: 95%; text-align: right; font-size: 14pt;'>X</div>
-					<div id="arvoreLegenda" style='display: block; text-align: left' >Aguarde...</div><br><br>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.guiaMovel.abreFecha('fecha');">X</div>
+					<div id="arvoreLegenda" style='display: block; text-align: left'>Aguarde...</div><br><br>
+				</div>
+				<div id='guia7obj' style='display: none; text-align: left'>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.guiaMovel.abreFecha('fecha');">X</div>
+					<div id="buscaRapidaGuia" style='display: block; text-align: left'></div>
 				</div>
 			</div>
 		</div>

@@ -58,36 +58,6 @@ var i3geoOL;
 i3GEO.Interface =
 	{
 		/**
-		 * Propriedade: TABLET
-		 *
-		 * Quando true, s&atilde;o aplicadas configura&ccedil;&otilde;es especiais para uso em tablets.
-		 *
-		 * Altera o posicionamento da barra de bot&otilde;es e comportamento das guias. Veja o exemplo interface/openlayers_t.htm.
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * false
-		 */
-		TABLET : false,
-		/**
-		 * Propriedade: ALTTABLET
-		 *
-		 * Nome do arquivo HTML com a interface alternativa utilizada quando o i3Geo detecta o uso de um dispositivo m&oacute;vel
-		 *
-		 * A detec&ccedil;&atilde;o &eacute; aplicada automaticamente quando essa vari&aacute;vel for definida
-		 *
-		 * Para n&atilde;o aplicar a detec&ccedil;&atilde;o, use i3GEO.Interface.ALTTABLET = ""
-		 *
-		 * Tipo:
-		 *
-		 * {string}
-		 */
-		ALTTABLET : "",
-		/**
 		 * Formato de gera&ccedil;&atilde;o da imagem.
 		 *
 		 * Os formatos devem estar definidos no mapfile geral1windows.map e geral1.map. A defini&ccedil;&atilde;o dessa vari&aacute;vel
@@ -498,14 +468,10 @@ i3GEO.Interface =
 		 */
 		ativaBotoes : function() {
 			if (i3GEO.Interface.STATUS.trocando === false) {
-				if (i3GEO.barraDeBotoes.TIPO === "olhodepeixe" || i3GEO.barraDeBotoes.TIPO === "olhodepeixe1") {
-					i3GEO.barraDeBotoes.inicializaBarra();
-				} else if (i3GEO.barraDeBotoes.TIPO === "yui") {
+				if (i3GEO.barraDeBotoes.TIPO === "yui") {
 					i3GEO.Interface[i3GEO.Interface.ATUAL].ativaBotoes();
 				}
 			}
-			// else
-			// {i3GEO.barraDeBotoes.recria("i3geo_barra2");}
 		},
 		/**
 		 * Section: i3GEO.Interface.OpenLayers
@@ -2070,6 +2036,7 @@ i3GEO.Interface =
 			 * Ativa os botoes da bara de botoes
 			 */
 			ativaBotoes : function() {
+				/*
 				var imagemxy, x2 = 0, y2 = 0;
 				imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 				if ($i("barraDeBotoes2") || i3GEO.barraDeBotoes.AUTO === true) {
@@ -2079,6 +2046,7 @@ i3GEO.Interface =
 				if ($i("barraDeBotoes2") || i3GEO.barraDeBotoes.AUTO === true) {
 					i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2", "i3geo_barra2", false, x2, y2);
 				}
+				*/
 				i3GEO.barraDeBotoes.ativaBotoes();
 			},
 			/**
@@ -2989,6 +2957,7 @@ i3GEO.Interface =
 				return (bbox);
 			},
 			ativaBotoes : function() {
+				/*
 				var imagemxy, x2 = 0, y2 = 0;
 				imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
 				if ($i("barraDeBotoes2") || i3GEO.barraDeBotoes.AUTO === true) {
@@ -2998,6 +2967,7 @@ i3GEO.Interface =
 				if ($i("barraDeBotoes2") || i3GEO.barraDeBotoes.AUTO === true) {
 					i3GEO.barraDeBotoes.inicializaBarra("barraDeBotoes2", "i3geo_barra2", false, x2, y2);
 				}
+				*/
 				i3GEO.barraDeBotoes.ativaBotoes();
 			},
 			aplicaOpacidade : function(opacidade, layer) {
