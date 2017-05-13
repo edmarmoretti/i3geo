@@ -311,7 +311,7 @@ i3GEO.maparef =
 					var temp = function() {
 						i3GEO.coordenadas.atualizaGeo(objposicaocursor.dmsx, objposicaocursor.dmsy, "localizarxygeoProj");
 					};
-					YAHOO.util.Event.addListener($i("imagemReferencia"), "mousemove", temp);
+					$("#imagemReferencia").mousemove(temp);
 				}
 			}
 			i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.maparef.atualiza()"]);
@@ -461,7 +461,7 @@ i3GEO.maparef =
 				//
 				// aplica os eventos de movimenta&ccedil;&atilde;o sobre o box azul
 				//
-				boxrefdd = new YAHOO.util.DD("boxref");
+				//boxrefdd = new YAHOO.util.DD("boxref");
 				//
 				// atualiza o mapa principal quando o box &eacute; modificado manualmente
 				//

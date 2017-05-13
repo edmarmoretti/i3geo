@@ -753,9 +753,9 @@ Retorno:
 
 String contendo vari&aacute;veis no formato javascript
 */
-function retornaReferenciaDinamica($ext="",$w="",$h="")
+function retornaReferenciaDinamica($ext="",$w="",$h="",$zoom=-3,$tipo="mapa")
 {
-	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$zoom,$tipo,$interface,$postgis_mapa;
+	global $nomeImagem,$map_file,$utilizacgi,$locmapserv,$locaplic,$interface,$postgis_mapa;
 	//
 	//adiciona o tema com o web service com o mapa mundi
 	//

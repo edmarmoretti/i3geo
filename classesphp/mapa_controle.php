@@ -838,7 +838,7 @@ switch (strtoupper($funcao))
 		{
 			$ext = "";
 		}
-		$retorno = retornaReferenciaDinamica($ext,$_pg["w"],$_pg["h"]);
+		$retorno = retornaReferenciaDinamica($ext,$_pg["w"],$_pg["h"],$_pg["zoom"],$_pg["tipo"]);
 		break;
 		/*
 		 Valor: MUDAOUTPUTFORMAT
