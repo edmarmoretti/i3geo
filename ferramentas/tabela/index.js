@@ -476,7 +476,7 @@ i3GEOF.tabela =
 			i3GEOF.tabela.LISTAREGATIVO = false;
 			var n, i;
 			par = i3GEO.util.base64decode(par);
-			par = YAHOO.lang.JSON.parse(par);
+			par = JSON.parse(par);
 			n = par.length;
 			for (i = 0; i < n; i++) {
 				i3GEOF.tabela.iniciaJanelaFlutuante(par[i]);

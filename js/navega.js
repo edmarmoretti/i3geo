@@ -186,6 +186,8 @@ i3GEO.navega =
 		/**
 		 * Function: centroDoMapa
 		 *
+		 * Depreciado na versao 7
+		 *
 		 * Obt&eacute;m as coordenadas geogr&aacute;ficas do centro do mapa
 		 *
 		 * Retorno:
@@ -879,7 +881,7 @@ i3GEO.navega =
 				i3GEO.navega.destacaTema.atualiza();
 				janela = i3GEO.janela.cria(160, 50, "", "center", "center", "<div class='i3GeoTituloJanela'>"+$trad("x50") + "</div>", "ativadesativaDestaque");
 				$i(janela[2].id).innerHTML = $trad("x91");
-				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEO.navega.destacaTema.desativa);
+				$( janela[0].close ).click(i3GEO.navega.destacaTema.desativa);
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.navega.destacaTema.atualiza()"]);
 				i3GEO.eventos.adicionaEventos("MOUSEMOVE",["i3GEO.navega.destacaTema.movimenta()"]);
 			},
@@ -1012,8 +1014,7 @@ i3GEO.navega =
 					i3GEO.desenho.removePins("boxOndeGoogle");
 					i3GEO.desenho.removePins("googlemaps");
 				};
-				YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-				//i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.navega.atualizaGoogle('"+idgoogle+"')"]);
+				$( janela[0].close ).click(temp);
 			},
 			/**
 			 * Function: confluence

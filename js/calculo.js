@@ -65,7 +65,6 @@ i3GEO.calculo =
 		 */
 		dms2dd : function(cd, cm, cs) {
 			try {
-				// YAHOO.log("dms2dd", "i3geo");
 				// converte dms em dd
 				var sinal, spm, mpg, dd;
 				sinal = 'positivo';

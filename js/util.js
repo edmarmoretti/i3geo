@@ -180,6 +180,12 @@ i3GEO.util =
 		trim : function(s) {
 			return s.replace(/^\s+|\s+$/gm, '');
 		},
+		generateId : function(pre){
+			if(!pre){
+				var pre = "UniqId";
+			}
+			return pre + String(Date.now())+Math.floor(Math.random()*10000);
+		},
 		/**
 		 * Function: escapeURL
 		 *
@@ -2846,7 +2852,7 @@ i3GEO.util =
 			callback = {
 				success : function(o) {
 					try {
-						funcaoRetorno.call("", YAHOO.lang.JSON.parse(o.responseText));
+						funcaoRetorno.call("", JSON.parse(o.responseText));
 					} catch (e) {
 						falhou(e);
 					}
@@ -3541,17 +3547,16 @@ try {
 			initAnimation : function(header, dir) {
 				var attributes, animation, animationEnd;
 				if (dir === "open") {
-					YAHOO.util.Dom.setStyle(header, "visibility", "hidden");
-					YAHOO.util.Dom.setStyle(header, "height", this.properties.altura);
+					$(header).css({"visibility": "hidden","height": this.properties.altura});
 					YAHOO.util.Dom.addClass(header, "open");
+
 					attributes = {
 						height : {
 							from : 0,
 							to : this.properties.altura
 						}
 					};
-					YAHOO.util.Dom.setStyle(header, "height", 0);
-					YAHOO.util.Dom.setStyle(header, "visibility", "visible");
+					$(header).css({"visibility": "visible","height": 0});
 					animation = new YAHOO.util.Anim(header, attributes);
 					animationEnd = function() {
 						// alert(this.properties.altura+"px")

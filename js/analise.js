@@ -423,7 +423,7 @@ i3GEO.analise =
 							+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo_movel" ></div>'
 							+ '<div style="text-align:left;font-size:10px" >'
 							+ '<span style="color:navy;cursor:pointer;text-align:left;" >'
-							+ '<table class="lista7" style="width:250px">'
+							+ '<table class="lista8" style="width:100%">'
 							+ '<tr>'
 							+ '<td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td>'
 							+ '<td>Raios</td>'
@@ -442,7 +442,7 @@ i3GEO.analise =
 					novoel.style.borderColor = "gray";
 					document.body.appendChild(novoel);
 					janela = new YAHOO.widget.Panel("mostradistancia", {
-						width : "255px",
+						width : "355px",
 						fixedcenter : false,
 						constraintoviewport : true,
 						underlay : "none",
@@ -453,7 +453,7 @@ i3GEO.analise =
 					});
 					YAHOO.i3GEO.janela.manager.register(janela);
 					janela.render();
-					YAHOO.util.Event.addListener(janela.close, "click", i3GEO.analise.medeDistancia.fechaJanela);
+					$(janela.close).click(i3GEO.analise.medeDistancia.fechaJanela);
 				} else {
 					i3GEO.util.defineValor("mostradistancia_calculo", "innerHTML", "");
 					janela = YAHOO.i3GEO.janela.manager.find("mostradistancia");
@@ -488,6 +488,9 @@ i3GEO.analise =
 			 * o processo de fechamento da janela
 			 */
 			fechaJanela : function() {
+				if (typeof (console) !== 'undefined')
+					console.info("i3GEO.analise.medeDistancia.fechaJanela()");
+
 				var janela;
 				i3GEO.eventos.cliquePerm.ativa();
 				janela = YAHOO.i3GEO.janela.manager.find("mostradistancia");
@@ -1091,7 +1094,7 @@ i3GEO.analise =
 					});
 					YAHOO.i3GEO.janela.manager.register(janela);
 					janela.render();
-					YAHOO.util.Event.addListener(janela.close, "click", i3GEO.analise.medeArea.fechaJanela);
+					$(janela.close).click(i3GEO.analise.medeArea.fechaJanela);
 				} else {
 					janela = YAHOO.i3GEO.janela.manager.find("mostraarea");
 				}

@@ -488,7 +488,7 @@ i3GEO.arvoreDeTemas = {
 		temp = function() {
 			delete (i3GEO.arvoreDeTemas.ARVORE);
 		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+		$( janela[0].close ).click(temp);
 		corpo = $i("i3GEOFcatalogo_corpo");
 		corpo.style.backgroundColor = "white";
 		corpo.innerHTML = $trad("o1");

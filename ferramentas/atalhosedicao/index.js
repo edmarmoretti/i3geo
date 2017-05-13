@@ -420,7 +420,7 @@ i3GEOF.atalhosedicao =
 		var callback = {
 				success:function(o)	{
 					try	{
-						if(YAHOO.lang.JSON.parse(o.responseText) == "erro") {
+						if(JSON.parse(o.responseText) == "erro") {
 							core_carregando("<span style=color:red >"+ $trad("naoSalva",i3GEOadmin.core.dicionario) +"</span>");
 							setTimeout("core_carregando('desativa')",3000);
 						}

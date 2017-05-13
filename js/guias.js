@@ -36,7 +36,7 @@ if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 i3GEO.guias =
-	{
+{
 		/**
 		 * Variavel: ATUAL
 		 *
@@ -176,8 +176,8 @@ i3GEO.guias =
 					if (i3GEO.eventos.cliquePerm.ativo === false) {
 						// na opcao de identificacao so e permitido um evento
 						i3GEO.eventos.MOUSECLIQUE = [
-							i3GEO.configura.funcaoTip
-						];
+						                             i3GEO.configura.funcaoTip
+						                             ];
 					} else {
 						// desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
 						i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoIdentifica]);
@@ -207,8 +207,8 @@ i3GEO.guias =
 						}
 						// na opcao de identificacao so e permitido um evento
 						i3GEO.eventos.MOUSECLIQUE = [
-							i3GEO.configura.funcaoIdentifica
-						];
+						                             i3GEO.configura.funcaoIdentifica
+						                             ];
 					} else {
 						// desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
 						i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",[i3GEO.configura.funcaoTip]);
@@ -274,129 +274,129 @@ i3GEO.guias =
 					// TODO retirar os estilos do codigo e incluir em arquivo css
 					var pegaMapas =
 						function(retorno) {
-							var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
-							ins = "<br><div id='banners' style='overflow:auto;text-align:center'>";
-							if (i3GEO.configura.verificaCookieLogin === true) {
+						var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
+						ins = "<br><div id='banners' style='overflow:auto;text-align:center'>";
+						if (i3GEO.configura.verificaCookieLogin === true) {
+							ins +=
+								"<a class='linkMapasEditor' href='" + i3GEO.configura.locaplic
+								+ "/admin/html/mapas.html' target=_blank >"
+								+ $trad("x89")
+								+ "</a><br>";
+						}
+						ins += "<br>";
+						mapa = retorno.data.mapas;
+						ig1lt = mapa.length;
+						ig1 = 0;
+						urlinterface = window.location.origin + window.location.pathname;
+						if (ig1lt > 0) {
+							do {
+								temp = mapa[ig1];
+								nome = temp.NOME;
+								if (temp.PUBLICADO) {
+									if (temp.PUBLICADO.toLowerCase() === "nao") {
+										nome = "<s>" + nome + "</s>";
+									}
+								}
+								lkd = temp.LINK;
+								link = i3GEO.configura.locaplic + "/ms_criamapa.php?temasa=" + temp.TEMAS + "&layers=" + temp.LIGADOS;
+								if (temp.EXTENSAO !== "") {
+									link += "&mapext=" + temp.EXTENSAO;
+								}
+								if (temp.OUTROS !== "") {
+									link += "&" + temp.OUTROS;
+								}
+								if (lkd !== "") {
+									link = lkd;
+								}
 								ins +=
-									"<a class='linkMapasEditor' href='" + i3GEO.configura.locaplic
-										+ "/admin/html/mapas.html' target=_blank >"
-										+ $trad("x89")
-										+ "</a><br>";
-							}
-							ins += "<br>";
-							mapa = retorno.data.mapas;
-							ig1lt = mapa.length;
-							ig1 = 0;
-							urlinterface = window.location.origin + window.location.pathname;
-							if (ig1lt > 0) {
-								do {
-									temp = mapa[ig1];
-									nome = temp.NOME;
-									if (temp.PUBLICADO) {
-										if (temp.PUBLICADO.toLowerCase() === "nao") {
-											nome = "<s>" + nome + "</s>";
-										}
-									}
-									lkd = temp.LINK;
-									link = i3GEO.configura.locaplic + "/ms_criamapa.php?temasa=" + temp.TEMAS + "&layers=" + temp.LIGADOS;
-									if (temp.EXTENSAO !== "") {
-										link += "&mapext=" + temp.EXTENSAO;
-									}
-									if (temp.OUTROS !== "") {
-										link += "&" + temp.OUTROS;
-									}
-									if (lkd !== "") {
-										link = lkd;
-									}
+									"<div style='cursor:pointer; height: 120px;float: left;width:45%;background-color:white;padding:5px;margin:5px;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
+
+								if (temp.IMAGEM && temp.IMAGEM != "") {
 									ins +=
-										"<div style='cursor:pointer; height: 120px;float: left;width:45%;background-color:white;padding:5px;margin:5px;border: 1px solid #F0F0F0;border-radius: 5px;box-shadow: 1px 1px 1px 1px #D3D3D3;' >";
+										"<div style='float:left;margin:2px' ><a href='" + link
+										+ "' style=text-align:center;text-decoration:none; >"
+										+ "<img src='"
+										+ temp.IMAGEM
+										+ "'></a></div>";
+								}
+								// verifica se o mapfile esta salvo no banco
+								// diretamente
+								nome += " (" + temp.ID_MAPA + ")";
+								if (temp.CONTEMMAPFILE == "nao") {
+									ins +=
+										"<div class=paragrafo style='text-align:left;'>" + "<a href='"
+										+ link
+										+ "' style=text-align:left;text-decoration:none; >"
+										+ nome
+										+ "</a></div>";
+								} else {
+									// combo de opcoes para abrir os mapas
+									// salvos
+									// como mapfiles
+									// esses links tambem sao colocados em
+									// admin/php/xml.php geraRSSmapas
+									combo =
+										"<select style='width:170px;' onchange='i3GEO.guias.CONFIGURA.mapas.mostraLink(" + ig1
+										+ ",this.value)'>"
+										+ "<option value=''>"
+										+ $trad("x103")
+										+ ":</option>"
+										+ "<option value='"
+										+ link
+										+ "'>Como foi salvo</option>"
+										+ "<option value='"
+										+ link
+										+ "&interface="
+										+ urlinterface
+										+ "'>Com a interface atual</option>"
+										+ "<option value='"
+										+ i3GEO.configura.locaplic
+										+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
+										+ temp.ID_MAPA
+										+ "&fundo=e_wsm'>Openlayers com todos os botoes</option>"
+										+ "<option value='"
+										+ i3GEO.configura.locaplic
+										+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
+										+ temp.ID_MAPA
+										+ "&fundo=est_wms'>Sem o fundo</option>"
+										+ "<option value='"
+										+ i3GEO.configura.locaplic
+										+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
+										+ temp.ID_MAPA
+										+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais</option>"
+										+ "<option value='"
+										+ i3GEO.configura.locaplic
+										+ "/mashups/osm.php?numzoomlevels=18&restauramapa="
+										+ temp.ID_MAPA
+										+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais e OSM</option>"
+										+ "<option value='"
+										+ i3GEO.configura.locaplic
+										+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
+										+ temp.ID_MAPA
+										+ "&botoes=legenda pan zoombox zoomtot zoomin zoomout'>Botoes de navegacao</option>"
+										+ "</select>";
+									ins +=
+										"<div style='float:left;margin:2px'>" + "<img src='"
+										+ i3GEO.configura.locaplic
+										+ "/ferramentas/salvamapa/geraminiatura.php?w=100&h=67&restauramapa="
+										+ temp.ID_MAPA
+										+ "'></div><div class=paragrafo style='text-align:left;'><a href='"
+										+ link
+										+ "' style=text-align:center;text-decoration:none; >"
+										+ nome
+										+ "</a></div>"
+										+ combo
+										+ "<br><div style='cursor:pointer;' id='i3geoMapasLink_"
+										+ ig1
+										+ "' ></div>";
 
-									if (temp.IMAGEM && temp.IMAGEM != "") {
-										ins +=
-											"<div style='float:left;margin:2px' ><a href='" + link
-												+ "' style=text-align:center;text-decoration:none; >"
-												+ "<img src='"
-												+ temp.IMAGEM
-												+ "'></a></div>";
-									}
-									// verifica se o mapfile esta salvo no banco
-									// diretamente
-									nome += " (" + temp.ID_MAPA + ")";
-									if (temp.CONTEMMAPFILE == "nao") {
-										ins +=
-											"<div class=paragrafo style='text-align:left;'>" + "<a href='"
-												+ link
-												+ "' style=text-align:left;text-decoration:none; >"
-												+ nome
-												+ "</a></div>";
-									} else {
-										// combo de opcoes para abrir os mapas
-										// salvos
-										// como mapfiles
-										// esses links tambem sao colocados em
-										// admin/php/xml.php geraRSSmapas
-										combo =
-											"<select style='width:170px;' onchange='i3GEO.guias.CONFIGURA.mapas.mostraLink(" + ig1
-												+ ",this.value)'>"
-												+ "<option value=''>"
-												+ $trad("x103")
-												+ ":</option>"
-												+ "<option value='"
-												+ link
-												+ "'>Como foi salvo</option>"
-												+ "<option value='"
-												+ link
-												+ "&interface="
-												+ urlinterface
-												+ "'>Com a interface atual</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&fundo=e_wsm'>Openlayers com todos os botoes</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&fundo=est_wms'>Sem o fundo</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/osm.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica'>Com botoes principais e OSM</option>"
-												+ "<option value='"
-												+ i3GEO.configura.locaplic
-												+ "/mashups/openlayers.php?numzoomlevels=18&restauramapa="
-												+ temp.ID_MAPA
-												+ "&botoes=legenda pan zoombox zoomtot zoomin zoomout'>Botoes de navegacao</option>"
-												+ "</select>";
-										ins +=
-											"<div style='float:left;margin:2px'>" + "<img src='"
-												+ i3GEO.configura.locaplic
-												+ "/ferramentas/salvamapa/geraminiatura.php?w=100&h=67&restauramapa="
-												+ temp.ID_MAPA
-												+ "'></div><div class=paragrafo style='text-align:left;'><a href='"
-												+ link
-												+ "' style=text-align:center;text-decoration:none; >"
-												+ nome
-												+ "</a></div>"
-												+ combo
-												+ "<br><div style='cursor:pointer;' id='i3geoMapasLink_"
-												+ ig1
-												+ "' ></div>";
-
-									}
-									ins += "</div>";
-									ig1++;
-								} while (ig1 < ig1lt);
-							}
-							$i(onde).innerHTML = ins + "</div>";
-						};
+								}
+								ins += "</div>";
+								ig1++;
+							} while (ig1 < ig1lt);
+						}
+						$i(onde).innerHTML = ins + "</div>";
+					};
 					if ($i(i3GEO.guias.CONFIGURA.mapas.idconteudo)) {
 						$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = "Aguarde...";
 					}
@@ -622,9 +622,9 @@ i3GEO.guias =
 							if ($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo)) {
 								ins +=
 									'<li><a alt="" title=""><em><div id="' + i3GEO.guias.CONFIGURA[guias[ng]].id
-										+ '" >'
-										+ i3GEO.guias.CONFIGURA[guias[ng]].titulo
-										+ '</div></em></a></li>';
+									+ '" >'
+									+ i3GEO.guias.CONFIGURA[guias[ng]].titulo
+									+ '</div></em></a></li>';
 							}
 						}
 					}
@@ -634,57 +634,6 @@ i3GEO.guias =
 					ins += "</ul>";
 					onde.innerHTML = ins;
 				}
-				if (i3GEO.guias.TIPO === "sanfona") {
-					ins = '<dl id=sanfona' + onde.id + ' class="accordion" >';
-					// verifica a quantidade certa de guias
-					if (i3GEO.guias.ORDEM === "") {
-						for (ng = 0; ng < nguias; ng++) {
-							if ($i(i3GEO.guias.CONFIGURA[guias[ng]].id)) {
-								nguiasreal++;
-							}
-						}
-					} else {
-						nguiasreal = i3GEO.guias.ORDEM.length;
-					}
-
-					if (navn) {
-						altura = i3GEO.parametros.h - (nguiasreal * 25) - 1;
-					} else {
-						altura = i3GEO.parametros.h - (nguiasreal * 23) + 1;
-					}
-					for (ng = 0; ng < nguias; ng++) {
-						if ($i(i3GEO.guias.CONFIGURA[guias[ng]].id)) {
-							id = i3GEO.guias.CONFIGURA[guias[ng]].idconteudo;
-							temp = $i(id);
-							if (temp) {
-								guiaconteudo = temp.innerHTML;
-								temp.innerHTML = "";
-								temp.style.display = "none";
-								temp.id = "";
-								ins +=
-									'<dt style=height:17px id="' + i3GEO.guias.CONFIGURA[guias[ng]].id
-										+ '" >'
-										+ '<table class=accordiontable ><tr><td width="98%" >'
-										+ i3GEO.guias.CONFIGURA[guias[ng]].titulo
-										+ '</td><td width="2%" ><img id="" src="'
-										+ i3GEO.configura.locaplic
-										+ '/imagens/branco.gif" style="width:10px;" /></td></tr></table>'
-										+ '<dd clas=close >'
-										+ '<div class=bd >'
-										+ '<div id="'
-										+ id
-										+ '" >'
-										+ guiaconteudo
-										+ '</div></div></dd>';
-							}
-						}
-					}
-					ins += "</dl>";
-					onde.innerHTML = ins;
-					onde.style.height = altura + "px";
-					YAHOO.lutsr.accordion.init(true, 5, false, "sanfona" + onde.id, altura);
-					i3GEO.guias.ALTURACORPOGUIAS = altura;
-				}
 				for (g = 0; g < nguias; g++) {
 					guia = i3GEO.guias.CONFIGURA[guias[g]];
 					id = guia.id;
@@ -692,22 +641,9 @@ i3GEO.guias =
 					if (guiaconteudo) {
 						if (guia.click === "" || guia.click === undefined) {
 							eval('$i("' + id + '").onclick = function(event){i3GEO.guias.mostra("' + guias[g] + '");}');
-							// atrib = document.createAttribute("nomeGuia");
-							// atrib.value = guias[g];
-							// $i(id).setAttributeNode(atrib);
-							// $i(id).onclick = function(event){
-							// i3GEO.guias.mostra(this.attributes["nomeGuia"].value);
-							// };
 						} else {
 							guiaconteudo.onclick = guia.click;
 						}
-						YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.preventDefault);
-						YAHOO.util.Event.addListener($i(id), "click", YAHOO.util.Event.stopPropagation);
-						YAHOO.util.Event.addFocusListener($i(id), YAHOO.util.Event.preventDefault);
-						guiaconteudo.onmouseover = function() {
-						};
-						guiaconteudo.onmouseout = function() {
-						};
 						temp = $i(guia.idconteudo);
 						if (temp) {
 							temp.style.overflow = "auto";
@@ -726,8 +662,8 @@ i3GEO.guias =
 			} catch (e) {
 			}
 
-				i3GEO.guias.mostra(i3GEO.guias.ATUAL);
-				i3GEO.guias.ativa(i3GEO.guias.ATUAL);
+			i3GEO.guias.mostra(i3GEO.guias.ATUAL);
+			i3GEO.guias.ativa(i3GEO.guias.ATUAL);
 
 		},
 		/**
@@ -781,7 +717,7 @@ i3GEO.guias =
 				temp = $i(this.CONFIGURA[guias[g]].idconteudo);
 				if (temp) {
 
-						temp.style.display = "none";
+					temp.style.display = "none";
 
 				}
 				if ($i(this.CONFIGURA[guias[g]].id) && i3GEO.guias.TIPO !== "movel") {
@@ -837,7 +773,7 @@ i3GEO.guias =
 			if (i3GEO.guias.CONFIGURA[guia]) {
 				temp = $i(i3GEO.guias.CONFIGURA[guia].idconteudo);
 				if (temp) {
-						temp.style.display = "block";
+					temp.style.display = "block";
 					if (i3GEO.guias.TIPO !== "movel") {
 						$i(i3GEO.guias.CONFIGURA[guia].id).parentNode.parentNode.style.backgroundColor = "white";
 					}
@@ -907,52 +843,52 @@ i3GEO.guias =
 				i3GEO.mapa.ajustaPosicao();
 				temp =
 					function(retorno) {
-						// carrega janela
-						var novoel, temp, i, g, guias, nguias, janela;
-						novoel = document.createElement("div");
-						novoel.id = "janelaguias";
-						novoel.style.display = "block";
-						novoel.innerHTML =
-							'<div class="hd">Guias <div onclick ="i3GEO.janela.minimiza(\'conteudojanelaguias\')" id="janelaguias_minimizaCabecalho" class="container-minimiza" ></div></div><div class="bd" id="conteudojanelaguias_corpo" style=padding:0px ></div>';
-						temp = $i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
-						janela = new YAHOO.widget.Panel("janelaguias", {
-							width : "270px",
-							fixedcenter : true,
-							constraintoviewport : false,
-							underlay : "none",
-							close : false,
-							visible : true,
-							draggable : true,
-							modal : false,
-							iframe : true
-						});
-						YAHOO.i3GEO.janela.manager.register(janela);
-						janela.render();
-						janela.show();
-						janela.cfg.setProperty("y", 0);
-						i = $i(i3GEO.guias.IDGUIAS);
-						$i("conteudojanelaguias_corpo").appendChild(i);
-						i.style.borderLeft = "1px solid black";
-						i.style.borderRight = "1px solid black";
-						guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
-						nguias = guias.length;
-						for (g = 0; g < nguias; g++) {
-							if ($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo)) {
-								$i("conteudojanelaguias_corpo").appendChild($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo));
-								temp = $i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style;
-								temp.background = "white";
-								temp.border = "1px solid black";
-								temp.borderTop = "0px solid black";
-								temp.width = "270px";
-								temp.left = "-1px";
-								temp.height = i3GEO.parametros.h - 90 + "px";
-							}
+					// carrega janela
+					var novoel, temp, i, g, guias, nguias, janela;
+					novoel = document.createElement("div");
+					novoel.id = "janelaguias";
+					novoel.style.display = "block";
+					novoel.innerHTML =
+						'<div class="hd">Guias <div onclick ="i3GEO.janela.minimiza(\'conteudojanelaguias\')" id="janelaguias_minimizaCabecalho" class="container-minimiza" ></div></div><div class="bd" id="conteudojanelaguias_corpo" style=padding:0px ></div>';
+					temp = $i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
+					janela = new YAHOO.widget.Panel("janelaguias", {
+						width : "270px",
+						fixedcenter : true,
+						constraintoviewport : false,
+						underlay : "none",
+						close : false,
+						visible : true,
+						draggable : true,
+						modal : false,
+						iframe : true
+					});
+					YAHOO.i3GEO.janela.manager.register(janela);
+					janela.render();
+					janela.show();
+					janela.cfg.setProperty("y", 0);
+					i = $i(i3GEO.guias.IDGUIAS);
+					$i("conteudojanelaguias_corpo").appendChild(i);
+					i.style.borderLeft = "1px solid black";
+					i.style.borderRight = "1px solid black";
+					guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
+					nguias = guias.length;
+					for (g = 0; g < nguias; g++) {
+						if ($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo)) {
+							$i("conteudojanelaguias_corpo").appendChild($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo));
+							temp = $i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style;
+							temp.background = "white";
+							temp.border = "1px solid black";
+							temp.borderTop = "0px solid black";
+							temp.width = "270px";
+							temp.left = "-1px";
+							temp.height = i3GEO.parametros.h - 90 + "px";
 						}
-						i3GEO.atualiza("");
-						i.style.display = "block";
-						i.style.left = "-1px";
-						i.style.width = "270px";
-					};
+					}
+					i3GEO.atualiza("");
+					i.style.display = "block";
+					i.style.left = "-1px";
+					i.style.width = "270px";
+				};
 				i3GEO.php.mudatamanho(temp, a, l);
 			} else {
 				janela = YAHOO.i3GEO.janela.manager.find(id);
@@ -975,14 +911,14 @@ i3GEO.guias =
 		 *
 		 */
 		mostraGuiaFerramenta : function(guia, namespace) {
-			var g, Dom = YAHOO.util.Dom;
+			var g;
 			if (!namespace) {
 				namespace = "guia";
 			}
 			for (g = 0; g < 12; g++) {
-				Dom.setStyle(namespace + g + "obj", "display", "none");
+				$("#" + namespace + g + "obj").css("display", "none");
 			}
-			Dom.setStyle(guia + "obj", "display", "block");
+			$("#" + guia + "obj").css("display", "block");
 		},
 		/**
 		 * Function: ajustaGuiaFerramenta
@@ -1052,7 +988,7 @@ i3GEO.guias =
 				larguraPuxador : 50,
 				alturaPuxador : 280,
 				alturaGuiaMovel : 0,
-				larguraGuiaMovel : 300,
+				larguraGuiaMovel : 350,
 				topGuiaMovel : 0,
 				guias : {
 					icones : [],
@@ -1062,8 +998,8 @@ i3GEO.guias =
 					chaves : []
 				},
 				posicao : [
-					"c", "r"
-				]
+				           "c", "r"
+				           ]
 			},
 			/**
 			 * Valor de posicionamento a esquerda, calculado na inicializa&ccedil;&atilde;o
@@ -1075,96 +1011,22 @@ i3GEO.guias =
 			 * Inicializa a guia m&oacute;vel
 			 */
 			inicia : function() {
-				var posMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA)), centroY = posMapa[1] + (i3GEO.parametros.h / 2), config =
-					i3GEO.guias.guiaMovel.config, temp;
+				var config = i3GEO.guias.guiaMovel.config, temp;
 
+				temp = $i("i3GEOguiaMovel");
+				if(temp){
+					i3GEO.guias.guiaMovel.config.larguraGuiaMovel = parseInt($("#i3GEOguiaMovel").css("width"),10);
+				}
 				if (i3GEO.guias.ALTURACORPOGUIAS === 0 && config.alturaGuiaMovel === 0) {
 					i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.parametros.h;
 				} else {
 					i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.guias.ALTURACORPOGUIAS;
 				}
-				config = i3GEO.guias.guiaMovel.config;
 
-				temp = $i("i3GEOguiaMovel").style;
-				if (config.posicao[1] === "r") {
-					temp.left = (posMapa[0] + i3GEO.parametros.w - config.larguraPuxador) + "px";
-					i3GEO.guias.guiaMovel.left = parseInt(temp.left, 10) + "px";
-				}
-				if (config.posicao[1] === "l") {
-					temp.left = posMapa[0] + "px";
-					i3GEO.guias.guiaMovel.left = parseInt(temp.left, 10) + "px";
-				}
-				if (config.topGuiaMovel === 0) {
-					temp.top = (centroY - ((config.alturaGuiaMovel - 42) / 2)) + "px";
-				} else {
-					temp.top = config.topGuiaMovel + "px";
-				}
-				//temp.width = config.larguraPuxador + "px";
-				temp.height = config.alturaPuxador + "px";
-				// aberta temp.width = config.larguraPuxador +
-				// config.larguraGuiaMovel + "px";
+				$("#i3GEOguiaMovelMolde,#i3GEOguiaMovelConteudo").css("height",i3GEO.guias.guiaMovel.config.alturaGuiaMovel + "px");
 
-				temp = $i("i3GEOguiaMovelMolde").style;
-				temp.top = "0px";
-				if (config.posicao[1] === "r") {
-					temp.right = config.larguraPuxador*-1 + "px";
-				}
-				if (config.posicao[1] === "l") {
-					temp.left = config.larguraPuxador*-1 + "px";
-				}
-
-				temp.height = config.alturaGuiaMovel + "px";
-				temp.backgroundColor = "white";
-
-				if ($i("i3GEOguiaMovelPuxador")) {
-					temp = $i("i3GEOguiaMovelPuxador").style;
-					temp.top = ((config.alturaGuiaMovel - config.alturaPuxador) / 2) + "px";
-					temp.left = "0px";
-					temp.width = config.larguraPuxador + "px";
-					temp.height = config.alturaPuxador + "px";
-				}
-				temp = $i("i3GEOguiaMovelIcones");
-				if (temp) {
-					temp = temp.style;
-					temp.left = "1px";
-					temp.top = "1px";
-					temp.width = (config.larguraGuiaMovel - 1) + "px";
-					temp.zIndex = 5;
-					temp.paddingTop = "2px";
-					//YAHOO.util.Dom.setStyle("i3GEOguiaMovelIcones", "opacity", 0.60);
-				}
-				temp = $i("i3GEOguiaMovelConteudo").style;
-				temp.left = "1px";
-				if (temp.top == "") {
-					temp.top = "38px";
-				}
-				temp.height = (config.alturaGuiaMovel - 39) + "px";
-				temp.width = (config.larguraGuiaMovel - 5) + "px";
-				temp.paddingLeft = "4px";
-
-				//YAHOO.util.Dom.setStyle("i3GEOguiaMovelConteudo", "opacity", 0.70);
-
-				//YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.10);
-				$i("i3GEOguiaMovelMolde").onmouseover = function() {
-					if ($i("i3GEOguiaMovelConteudo").style.display === "block") {
-						//YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.9);
-					}
-					if ($i("i3GEOguiaMovelIcones") && $i("i3GEOguiaMovelIcones").innerHTML === "") {
-						i3GEO.guias.guiaMovel.mostraIcones();
-					}
-				};
-				$i("i3GEOguiaMovelMolde").onmouseout = function() {
-					//YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.90);
-					if ($i("i3GEOguiaMovelIcones") && $i("i3GEOguiaMovelIcones").innerHTML === "") {
-						i3GEO.guias.guiaMovel.mostraIcones();
-					}
-				};
 				i3GEO.guias.guiaMovel.mostraIcones();
-				temp = $i("i3GEOguiaMovel");
-				temp.style.visibility = "visible";
-				// evita sobreposicao com elementos que tenham onclick
-				temp.style.height = parseInt(temp.style.height) - 20 + "px";
-				//i3GEO.util.aparece("i3GEOguiaMovel", 300, 100);
+
 				if (i3GEO.guias.guiaMovel.ABERTA === true) {
 					i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
 				}
@@ -1184,15 +1046,15 @@ i3GEO.guias =
 					if (temp.chaves[i]) {
 						ico =
 							"<button title='" + temp.titulos[i]
-								+ "'  onclick='i3GEO.guias.guiaMovel.ativa(\""
-								+ temp.chaves[i]
-								+ "\")' class=iconeGuiaMovel ><img id='"
-								+ temp.ids[i]
-								+ "' src='"
-								+ i3GEO.configura.locaplic
-								+ "/"
-								+ temp.icones[i]
-								+ "' style='cursor:pointer;' /></button>";
+						+ "'  onclick='i3GEO.guias.guiaMovel.ativa(\""
+						+ temp.chaves[i]
+						+ "\")' class=iconeGuiaMovel ><img id='"
+						+ temp.ids[i]
+						+ "' src='"
+						+ i3GEO.configura.locaplic
+						+ "/"
+						+ temp.icones[i]
+						+ "' style='cursor:pointer;' /></button>";
 						// verifica se existe um id na interface
 						// se existir, o icone e inserido nesse id
 						if (!$i("iconeGuia_" + temp.chaves[i])) {
@@ -1207,17 +1069,11 @@ i3GEO.guias =
 				}
 				ins = "3px";
 				for (i = 0; i < n; i++) {
-					ico = $i(temp.ids[i]);
-					if (ico) {
-						YAHOO.util.Dom.setStyle(ico, "padding", ins);
-					}
+					$("#"+temp.ids[i]).css("padding", ins);
 				}
-
-				//i3GEO.guias.guiaMovel.desativaIcones();
 				if (i3GEO.guias.ATUAL != "") {
 					ico = $i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id);
 					if (ico) {
-						//YAHOO.util.Dom.setStyle(ico, "opacity", 0.9);
 						ico.parentNode.style.boxShadow = "none";
 					}
 				}
@@ -1235,7 +1091,6 @@ i3GEO.guias =
 					ims = ims.getElementsByTagName("button");
 					n = ims.length;
 					for (i = 0; i < n; i++) {
-						//YAHOO.util.Dom.setStyle(ims[i], "opacity", o);
 						ims[i].style.boxShadow = "none";
 					}
 				}
@@ -1255,7 +1110,6 @@ i3GEO.guias =
 							} else {
 								ims[0].style.borderRight = "2px solid white";
 							}
-							//YAHOO.util.Dom.setStyle(ims[0], "opacity", o);
 							ims[0].blur();
 						}
 					}
@@ -1270,7 +1124,6 @@ i3GEO.guias =
 			 */
 			ativa : function(chave) {
 				if (chave === "") {
-					//i3GEO.guias.guiaMovel.desativaIcones();
 					return;
 				}
 				// nao tem conteudo para mostrar
@@ -1280,9 +1133,8 @@ i3GEO.guias =
 				}
 				i3GEO.guias.escondeGuias();
 				//i3GEO.guias.guiaMovel.desativaIcones(0.5);
-				if (i3GEO.guias.ATUAL === chave && $i("i3GEOguiaMovelMolde").style.display === "block") {
+				if (i3GEO.guias.ATUAL === chave && parseInt($("#i3GEOguiaMovelMolde").css("width"),10) > 0) {
 					i3GEO.guias.ATUAL = "";
-					//i3GEO.guias.guiaMovel.desativaIcones(0.9);
 					i3GEO.guias.guiaMovel.abreFecha("fecha");
 				} else {
 					i3GEO.guias.ATUAL = chave;
@@ -1291,20 +1143,10 @@ i3GEO.guias =
 						i3GEO.guias.CONFIGURA[chave].click.call();
 					}
 					i3GEO.guias.mostra(chave);
-
 					var ico = $i(i3GEO.guias.CONFIGURA[chave].id);
 					if (ico) {
 						ico.parentNode.blur();
-						//YAHOO.util.Dom.setStyle(ico.parentNode, "opacity", 0.9);
 						ico.parentNode.style.boxShadow = "none";
-						// verifica se esta fora do lugar normal e muda a borda
-						if ($i("iconeGuia_" + chave)) {
-							if (i3GEO.guias.guiaMovel.config.posicao[1] === "l") {
-								//ico.parentNode.style.borderLeft = "2px solid white";
-							} else {
-								//ico.parentNode.style.borderRight = "2px solid white";
-							}
-						}
 					}
 				}
 			},
@@ -1315,14 +1157,10 @@ i3GEO.guias =
 				var temp = $i("i3GEOguiaMovel").style.top;
 				i3GEO.guias.guiaMovel.config.alturaGuiaMovel = 0;
 				i3GEO.guias.ALTURACORPOGUIAS = 0;
-				if ($i("i3GEOguiaMovelIcones")) {
-					$i("i3GEOguiaMovelIcones").style.display = "none";
-				}
-				$i("i3GEOguiaMovelConteudo").style.display = "none";
-				$i("i3GEOguiaMovelMolde").style.display = "none";
+				$("#i3GEOguiaMovelIcones,#i3GEOguiaMovelConteudo,#i3GEOguiaMovelMolde").css("display","none");
 				i3GEO.guias.escondeGuias();
 				i3GEO.guias.guiaMovel.inicia();
-				$i("i3GEOguiaMovel").style.top = temp;
+				$("#i3GEOguiaMovel").css("top",temp);
 			},
 			/**
 			 * Function: abreFecha
@@ -1330,55 +1168,28 @@ i3GEO.guias =
 			 * Abre ou fecha a guia m&oacute;vel
 			 */
 			abreFecha : function(forca) {
-				var molde = $i("i3GEOguiaMovelMolde"), guia = $i("i3GEOguiaMovel"), attributes, anim, anim1, anim2, temp;
+				var molde = $("#i3GEOguiaMovelMolde");
 				// para efeitos de compatibilidade caso seja chamado com
 				// i3GEO.guias.guiaMovel.abreFecha()
 				if (!forca) {
-					if (molde.style.display === "block") {
-						forca = "fecha";
+					if (parseInt(molde.css("width"),10) <= 10) {
+						forca = "abre";
 					} else {
-						temp = i3GEO.guias.ATUAL;
-						i3GEO.guias.ATUAL = "";
-						i3GEO.guias.guiaMovel.ativa(temp);
-						return;
+						forca = "fecha"
 					}
 				}
 				if (forca === "fecha") {// esconde
-					if ($i("i3GEOguiaMovelIcones")) {
-						$i("i3GEOguiaMovelIcones").style.display = "none";
-					}
-					$i("i3GEOguiaMovelConteudo").style.display = "none";
-					attributes = {
-						width : {
-							to : 0
-						},
-						id : "i3GEOguiaMovelMolde"
-					};
-					anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);
-					anim1.duration = 0.5;
-					anim1.onComplete.subscribe(function() {
-						molde.style.display = "none";
-					});
-					anim1.animate();
-				} else if (molde.style.display != "block") {
-					molde.style.display = "block";
-					attributes = {
-						width : {
-							to : i3GEO.guias.guiaMovel.config.larguraGuiaMovel
-						},
-						id : "i3GEOguiaMovelMolde"
-					};
-					anim1 = new YAHOO.util.Anim(molde, attributes, 1, YAHOO.util.Easing.easeNone);
-					anim1.duration = 0.5;
-					anim1.onComplete.subscribe(function() {
-						if ($i("i3GEOguiaMovelIcones")) {
-							$i("i3GEOguiaMovelIcones").style.display = "block";
-						}
-						$i("i3GEOguiaMovelConteudo").style.display = "block";
-					});
-					//anim.animate();
-					anim1.animate();
+					molde.animate(
+							{ "width": "-10px" },
+							"slow"
+					);
+				} else {
+					$("#i3GEOguiaMovelIcones,#i3GEOguiaMovelConteudo").css("display","block");
+					molde.css("display","block").animate(
+							{ "width": i3GEO.guias.guiaMovel.config.larguraGuiaMovel + "px" },
+							"slow"
+					);
 				}
 			}
 		}
-	};
+};

@@ -874,7 +874,7 @@ i3GEO.arvoreDeCamadas =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.arvoreDeCamadas.cria()");
 
-			if (!YAHOO.lang.isUndefined(funcaoTema)) {
+			if (typeof funcaoTema != 'undefined'){
 				i3GEO.arvoreDeCamadas.ATIVATEMA = funcaoTema;
 			}
 			var novoel, temp;
@@ -914,7 +914,7 @@ i3GEO.arvoreDeCamadas =
 				temp.className = "i3GEOarvCam";
 			}
 
-			if (YAHOO.lang.isUndefined(temas) || temas === "") {
+			if (typeof temas == 'undefined' || temas === "") {
 				temas = i3GEO.arvoreDeCamadas.CAMADAS;
 			}
 			i3GEO.arvoreDeCamadas.atualiza(temas);
@@ -924,7 +924,7 @@ i3GEO.arvoreDeCamadas =
 				eval(i3GEO.arvoreDeCamadas.finaliza);
 			}
 			if (i3GEO.arvoreDeCamadas.FINALIZA !== "") {
-				if (YAHOO.lang.isFunction(i3GEO.arvoreDeCamadas.FINALIZA)) {
+				if (jQuery.isFunction(i3GEO.arvoreDeCamadas.FINALIZA)) {
 					i3GEO.arvoreDeCamadas.FINALIZA.call();
 				} else {
 					if (i3GEO.arvoreDeCamadas.FINALIZA != "") {
@@ -949,7 +949,7 @@ i3GEO.arvoreDeCamadas =
 			i3GEO.arvoreDeCamadas.cria(id);
 			i3GEO.arvoreDeCamadas.atualiza();
 			if (i3GEO.arvoreDeCamadas.FINALIZA !== "") {
-				if (YAHOO.lang.isFunction(i3GEO.arvoreDeCamadas.FINALIZA)) {
+				if (jQuery.isFunction(i3GEO.arvoreDeCamadas.FINALIZA)) {
 					i3GEO.arvoreDeCamadas.FINALIZA.call();
 				} else {
 					if (i3GEO.arvoreDeCamadas.FINALIZA != "") {
@@ -1096,8 +1096,6 @@ i3GEO.arvoreDeCamadas =
 									}
 								}
 							}
-							YAHOO.util.Event.addListener($i("arrastar_" + ltema), "click", YAHOO.util.Event.preventDefault);
-							YAHOO.util.Event.addFocusListener($i("arrastar_" + ltema), YAHOO.util.Event.preventDefault);
 						}
 					} catch (e) {
 						if (typeof (console) !== 'undefined')
@@ -1160,9 +1158,6 @@ i3GEO.arvoreDeCamadas =
 											temaNodeFilho.expand();
 										}
 									}
-
-									YAHOO.util.Event.addListener($i("arrastar_" + ltema), "click", YAHOO.util.Event.preventDefault);
-									YAHOO.util.Event.addFocusListener($i("arrastar_" + ltema), YAHOO.util.Event.preventDefault);
 									incluidos.push(ltema.name);
 								}
 							}
@@ -1197,7 +1192,6 @@ i3GEO.arvoreDeCamadas =
 									enableHighlight : false
 							};
 							temaNode = new YAHOO.widget.HTMLNode(d, grupoNode);
-							// if (i3GEO.arvoreDeCamadas.OPCOESICONES === true) {
 							textoTema = i3GEO.arvoreDeCamadas.montaIconesTema(ltema)[0];
 							temaNodeFilho = new YAHOO.widget.HTMLNode({
 								id : ltema.name,
@@ -1213,9 +1207,6 @@ i3GEO.arvoreDeCamadas =
 									temaNodeFilho.expand();
 								}
 							}
-
-							YAHOO.util.Event.addListener($i("arrastar_" + ltema), "click", YAHOO.util.Event.preventDefault);
-							YAHOO.util.Event.addFocusListener($i("arrastar_" + ltema), YAHOO.util.Event.preventDefault);
 							incluidos.push(ltema.name);
 						}
 
@@ -1270,12 +1261,6 @@ i3GEO.arvoreDeCamadas =
 						hasIcon : true
 					}, root
 			);
-			/*
-			<label class="temaSwitch">
-			  <input type="checkbox" >
-			  <div class="temaSlider round"></div>
-			</label>
-			*/
 			for (i = 0; i < n; i++) {
 				l = c[i].getProperties();
 				temp = "<div><label class='temaSwitch' for='CK" + l.name + "'>";
@@ -1415,33 +1400,31 @@ i3GEO.arvoreDeCamadas =
 			YAHOO.example.DDList = function(id, sGroup, config) {
 				YAHOO.example.DDList.superclass.constructor.call(this, id, sGroup, config);
 				this.logger = this.logger || YAHOO;
-				YAHOO.util.Dom.setStyle(this.getDragEl(), "opacity", 0.67); // The
-				// proxy
-				// is
-				// slightly
-				// transparent
+				$(this.getDragEl()).css("opacity", 0.5);
 				this.goingUp = false;
 				this.lastY = 0;
 			};
 			YAHOO.extend(YAHOO.example.DDList, YAHOO.util.DDProxy, {
 				startDrag : function(x, y) {
-					var dragEl, clickEl, Dom = YAHOO.util.Dom;
+					var dragEl, clickEl;
 					//this.logger.log(this.id + " startDrag");
 					// make the proxy look like the source element
 					dragEl = this.getDragEl();
 					clickEl = this.getEl();
-					Dom.setStyle(clickEl, "visibility", "hidden");
+					$(clickEl).css("visibility", "hidden");
 					if(clickEl.getElementsByTagName("span")){
 						dragEl.innerHTML = clickEl.getElementsByTagName("span")[0].innerHTML;
 					} else{
 						dragEl.innerHTML = clickEl.innerHTML;
 					}
-					Dom.setStyle(dragEl, "color", Dom.getStyle(clickEl, "color"));
-					Dom.setStyle(dragEl, "backgroundColor", Dom.getStyle(clickEl, "backgroundColor"));
-					Dom.setStyle(dragEl, "fontSize", Dom.getStyle(clickEl, "fontSize"));
-					Dom.setStyle(dragEl, "border", "2px solid gray");
-					Dom.setStyle(dragEl, "padding", "5px");
-					Dom.setStyle(dragEl, "z-index", "5000");
+					$(dragEl).css({
+						"color": Dom.getStyle(clickEl, "color"),
+						"backgroundColor": Dom.getStyle(clickEl, "backgroundColor"),
+						"fontSize": Dom.getStyle(clickEl, "fontSize"),
+						 "border": "2px solid gray",
+						 "padding": "5px",
+						 "z-index": "5000"
+					});
 				},
 				endDrag : function(e) {
 					var srcEl, proxy, a, thisid, proxyid;
@@ -1449,7 +1432,7 @@ i3GEO.arvoreDeCamadas =
 					proxy = this.getDragEl();
 					// Show the proxy element and animate it to the
 					// src element's location
-					Dom.setStyle(proxy, "visibility", "");
+					$(proxy).css("visibility", "");
 					a = new YAHOO.util.Motion(proxy, {
 						points : {
 							to : Dom.getXY(srcEl)
@@ -1460,13 +1443,12 @@ i3GEO.arvoreDeCamadas =
 					// Hide the proxy and show the source element
 					// when finished with the animation
 					a.onComplete.subscribe(function() {
-						var Dom = YAHOO.util.Dom;
-						Dom.setStyle(proxyid, "visibility", "hidden");
-						Dom.setStyle(thisid, "visibility", "");
+						$(proxyid).css("visibility", "hidden");
+						$(thisid).css("visibility", "");
 						$i(proxyid).innerHTML = "";
 					});
 					a.animate();
-					YAHOO.util.Dom.setStyle('i3geo_lixeira', 'border', '0px solid blue');
+					$('#i3geo_lixeira').css('border', '0px solid blue');
 				},
 				onDragDrop : function(e, id) {
 					var pt, region, tema, destEl, els, lista, temp, DDM = YAHOO.util.DragDropMgr, Dom = YAHOO.util.Dom;
@@ -1521,15 +1503,12 @@ i3GEO.arvoreDeCamadas =
 						this.goingUp = false;
 					}
 					this.lastY = y;
-					//if (i3GEO.guias.TIPO === "movel") {
-					//	YAHOO.util.Dom.setStyle("i3GEOguiaMovelMolde", "opacity", 0.9);
-					//}
 				},
 				onDragOver : function(e, id) {
 					var destEl;
 					destEl = YAHOO.util.Dom.get(id);
 					var dragEl = this.getDragEl();
-					Dom.setStyle(dragEl, "border", "2px solid blue");
+					$(dragEl).css("border", "2px solid blue");
 					// We are only concerned with list items, we
 					// ignore the dragover
 					// notifications for the list.
@@ -1542,7 +1521,7 @@ i3GEO.arvoreDeCamadas =
 				onDragOut : function(e, id) {
 					$i(id).style.textDecoration = "none";
 					var dragEl = this.getDragEl();
-					Dom.setStyle(dragEl, "border", "2px solid gray");
+					$(dragEl).css("border", "2px solid gray");
 				}
 			});
 			Event.onDOMReady(YAHOO.example.DDApp.init, YAHOO.example.DDApp, true);

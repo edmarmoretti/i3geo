@@ -873,7 +873,7 @@ i3GEO.barraDeBotoes =
 									i3GEO.desenho.googlemaps.destroyFeatures(i3GEO.desenho.googlemaps.shapes);
 								}
 							};
-							YAHOO.util.Event.addListener(janela[0].close, "click", fecha);
+							$( janela[0].close ).click(fecha);
 						};
 					// @TODO incluir o js compactado ao inves do original
 					if (!i3GEO.editorGM) {

@@ -1,11 +1,3 @@
-//XXX alterar a forma de estilizar as linhas de uma tabela usando estilos
-//table tr:nth-child(odd)	{
-//  background-color: #f1f1f1;
-//}
-//table tr:nth-child(even) {
-//  background-color: #ffffff;
-//}
-
 /**
  * Title: i3Geo
  *
@@ -443,7 +435,7 @@ var i3GEO = {
 						// metadata do mapfile
 						//
 						if (retorno.data.customizacoesinit) {
-							preferencias = YAHOO.lang.JSON.parse(retorno.data.customizacoesinit);
+							preferencias = JSON.parse(retorno.data.customizacoesinit);
 							temp = i3GEO.util.base64decode(preferencias.preferenciasbase64);
 							i3GEO.mapa.aplicaPreferencias(temp);
 						}
@@ -616,7 +608,7 @@ var i3GEO = {
 		if ($i("mst")) {
 			$i("mst").style.visibility = "visible";
 		}
-		if (YAHOO.lang.isFunction(i3GEO.finaliza)) {
+		if (jQuery.isFunction(i3GEO.finaliza)) {
 			i3GEO.finaliza.call();
 		} else {
 			if (i3GEO.finaliza != "") {
@@ -819,11 +811,11 @@ var i3GEO = {
 			i3GEO.scrollerWidth = i3GEO.util.getScrollerWidth();
 		}
 		i3GEO.tamanhodoc = [
-			YAHOO.util.Dom.getViewportWidth(),
-			YAHOO.util.Dom.getViewportHeight()
+			window.innerWidth,
+			window.innerHeight
 		];
-		Dw = YAHOO.util.Dom.getDocumentWidth();
-		Dh = YAHOO.util.Dom.getDocumentHeight();
+		Dw = $(document).width();
+		Dh = $(document).height();
 
 		if(Dw > screen.availWidth){
 			Dw = screen.availWidth;
@@ -931,15 +923,6 @@ var i3GEO = {
 				+ "px";
 			temp.style.width = w
 				+ "px";
-			/*
-			YAHOO.util.Event.addListener(
-				temp,
-				"click",
-				YAHOO.util.Event.stopEvent);
-			YAHOO.util.Event.addFocusListener(
-				temp,
-				YAHOO.util.Event.preventDefault);
-			*/
 		}
 		temp = $i(i3GEO.Interface.IDCORPO);
 		if (temp) {
@@ -947,13 +930,6 @@ var i3GEO = {
 				+ "px";
 			temp.style.width = w
 				+ "px";
-			YAHOO.util.Event.addListener(
-				temp,
-				"click",
-				YAHOO.util.Event.stopEvent);
-			YAHOO.util.Event.addFocusListener(
-				temp,
-				YAHOO.util.Event.preventDefault);
 		}
 		temp = $i("mst");
 		if (temp) {

@@ -415,74 +415,6 @@ i3GEO.desenho =
 						return i3GEO.desenho.layergrafico.getSource().getFeatures();
 					};
 				}
-				return;
-				if (!i3GEO.desenho.layergrafico) {
-					var sketchSymbolizers = {
-						"Point" : {
-							fillColor : "rgb(${fillColor})",
-							fillOpacity : "${opacidade}",
-							strokeWidth : "${strokeWidth}",
-							strokeOpacity : "${opacidade}",
-							strokeColor : "rgb(${strokeColor})",
-							label : "${texto}",
-							pointRadius : "${pointRadius}",
-							graphicName : "${graphicName}",
-							fontSize : "${fontSize}",
-							fontColor : "rgb(${fontColor})",
-							fontFamily : "Arial",
-							fontWeight : "normal",
-							labelAlign : "lb",
-							labelXOffset : "3",
-							labelYOffset : "3",
-							externalGraphic : "${externalGraphic}"
-						},
-						"Line" : {
-							strokeWidth : "${strokeWidth}",
-							strokeOpacity : "${opacidade}",
-							strokeColor : "rgb(${strokeColor})"
-						},
-						"Polygon" : {
-							strokeWidth : "${strokeWidth}",
-							strokeOpacity : "${opacidade}",
-							strokeColor : "rgb(${strokeColor})",
-							fillColor : "rgb(${fillColor})",
-							fillOpacity : "${opacidade}",
-							zIndex : 5000
-						}
-					}, style = new OpenLayers.Style(), styleMap1 = new OpenLayers.StyleMap({
-						"default" : style,
-						"vertex" : {
-							strokeOpacity : 1,
-							strokeWidth : 1,
-							fillColor : "white",
-							fillOpacity : 0.45,
-							pointRadius : 4
-						}
-					}, {
-						extendDefault : false
-					});
-					style.addRules([
-						new OpenLayers.Rule({
-							symbolizer : sketchSymbolizers
-						})
-					]);
-					i3GEO.desenho.layergrafico = new OpenLayers.Layer.Vector("Graf", {
-						styleMap : styleMap1,
-						displayInLayerSwitcher : true,
-						visibility : true,
-						vertexRenderIntent : "vertex",
-						eventListeners : {
-							featureclick : function(e) {
-								// log(e.object.name + " says: " + e.feature.id
-								// + " clicked.");
-								if (e.feature.data.click) {
-									e.feature.data.click.call();
-								}
-								return false;
-							}
-						}
-					});
-				}
 			}
 		},
 		/**
@@ -625,4 +557,3 @@ i3GEO.desenho =
 			}
 		}
 	};
-// YAHOO.log("carregou classe desenho", "Classes i3geo");

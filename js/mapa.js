@@ -161,9 +161,6 @@ i3GEO.mapa =
 			novoel.style.zIndex = "5000000";
 			novoel.style.left = i3GEO.parametros.w - 35 + "px";
 			$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
-			YAHOO.util.Event.addListener("i3GEOdobraPagina", "click", YAHOO.util.Event.stopPropagation);
-			YAHOO.util.Event.addListener("i3GEOdobraPagina", "click", YAHOO.util.Event.preventDefault);
-
 		},
 		/**
 		 * Reposiciona o icone do tipo "dobra de pagina"
@@ -185,8 +182,8 @@ i3GEO.mapa =
 			var ativo = true;
 			window.onresize = function() {
 				var Dw, Dh;
-				Dw = YAHOO.util.Dom.getViewportWidth();
-				Dh = YAHOO.util.Dom.getViewportHeight();
+				Dw = window.innerWidth;
+				Dh = window.innerHeight;
 				i3GEO.tamanhodoc = [
 					Dw, Dh
 				];
@@ -396,7 +393,7 @@ i3GEO.mapa =
 		 * Descompacta um layer grafico criado com compactaLayerGrafico
 		 */
 		desCompactaLayerGrafico : function(geometrias) {
-			geometrias = YAHOO.lang.JSON.parse(geometrias);
+			geometrias = JSON.parse(geometrias);
 			// carrega o script do editor vetorial
 			if (geometrias.length > 0) {
 				var inicia = function() {
@@ -962,7 +959,7 @@ i3GEO.mapa =
 			 * Congela a vis&atilde;o atual do mapa mostrando-o em uma janela flutuante
 			 */
 			congelaMapa : function() {
-				var url = "", idjanela = YAHOO.util.Dom.generateId(), cabecalho = function() {
+				var url = "", idjanela = i3GEO.util.generateId(), cabecalho = function() {
 				}, titulo, minimiza = function() {
 					i3GEO.janela.minimiza(idjanela);
 				};

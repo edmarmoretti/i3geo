@@ -108,8 +108,8 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 function inicia(){
 	var mapa = $i("openlayers");
-	mapa.style.width = YAHOO.util.Dom.getViewportWidth() - 30 +"px";
-	mapa.style.height = YAHOO.util.Dom.getViewportHeight() - 30 + "px";
+	mapa.style.width = window.innerWidth - 30 +"px";
+	mapa.style.height = window.innerHeight - 30 + "px";
 	extentAnterior = "";
 	contadorSalva = 0;
 	$i = function(id){return document.getElementById(id);};

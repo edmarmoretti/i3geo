@@ -179,10 +179,7 @@ i3GEO.ajuda =
 		 */
 		abreJanela : function() {
 			try {
-				var nx, ny, corpo, texto, janela, temp, largura = 262, YU = YAHOO.util, pos = [
-					20,
-					i3GEO.parametros.h / 2
-				];
+				var nx, ny, corpo, texto, janela, temp, largura = 262, pos = {left:20,top:i3GEO.parametros.h / 2};
 				if (this.ATIVAJANELA === false) {
 					return;
 				}
@@ -191,16 +188,15 @@ i3GEO.ajuda =
 					largura = parseInt(temp.style.width, 10) - 5;
 				}
 				if (!$i("janelaMenTexto")) {
+
 					corpo = $i(i3GEO.Interface.IDCORPO);
-					if (corpo) {
-						pos = YU.Dom.getXY(corpo);
-					} else {
+					if (!corpo) {
 						corpo = $i(i3GEO.Interface.IDMAPA);
-						if (corpo) {
-							pos = YU.Dom.getXY(corpo);
-						}
 					}
-					nx = pos[0] - largura - 3;
+					if (corpo) {
+						pos = $(corpo).position();
+					}
+					nx = pos.left - largura - 3;
 					ny = i3GEO.parametros.h - 78;
 					texto =
 						'<div id="janelaMenTexto" style="text-align:left;font-size:10px;color:rgb(80,80,80)">' + i3GEO.ajuda.MENSAGEMPADRAO
@@ -211,7 +207,7 @@ i3GEO.ajuda =
 					}
 					janela = i3GEO.janela.cria(largura - 3, 70, "", nx, ny, "&nbsp;", "i3geo_janelaMensagens", false, "hd", "", "", true);
 					janela[2].innerHTML = texto;
-					YU.Event.addListener(janela[0].close, "click", i3GEO.ajuda.fechaJanela);
+					$( janela[0].close ).click(i3GEO.ajuda.fechaJanela);
 					this.ativaCookie();
 
 				}
@@ -305,6 +301,9 @@ i3GEO.ajuda =
 		 * Fecha a janela de ajuda.
 		 */
 		fechaJanela : function() {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.ajuda.fechaJanela()");
+
 			i3GEO.ajuda.desativaCookie();
 			i3GEO.util.removeChild("i3geo_janelaMensagens_c", document.body);
 		},
@@ -318,24 +317,18 @@ i3GEO.ajuda =
 		 * {String} - texto a ser mostrado
 		 */
 		mostraJanela : function(texto) {
-			var j = $i(this.DIVAJUDA), k = $i("janelaMenTexto"), jm = $i("i3geo_janelaMensagens"), Dom = YAHOO.util.Dom, h =
-				parseInt(Dom.getStyle(jm, "height"), 10);
+			var j = $i(this.DIVAJUDA), k = $i("janelaMenTexto"), jm = $i("i3geo_janelaMensagens"),
+			h = parseInt($(jm).css("height"), 10);
 			if (j) {
 				j.innerHTML = texto === "" ? "-" : texto;
 			} else {
-				if (h) {
-					Dom.setY("i3geo_janelaMensagens", Dom.getY(jm) + h);
-				}
 				if (k) {
 					k.innerHTML = texto;
 				}
 				if (this.TRANSICAOSUAVE) {
-					texto !== "" ? Dom.setStyle(jm, "opacity", "1") : Dom.setStyle(jm, "opacity", (this.OPACIDADE / 100));
+					texto !== "" ? $(jm).css("opacity", 1) : $(jm).css( "opacity", this.OPACIDADE / 100);
 				}
-				h = parseInt(Dom.getStyle(jm, "height"), 10);
-				if (h) {
-					Dom.setY(jm, Dom.getY(jm) - h);
-				}
+				h = parseInt($(jm).css("height"), 10);
 			}
 		},
 		/**
@@ -382,6 +375,6 @@ i3GEO.ajuda =
 				"",
 				"",
 				"<div class='i3GeoTituloJanela'>" + $trad("u5c") + "</div>",
-				YAHOO.util.Dom.generateId(null, "redes"));
+				i3GEO.util.generateId("redes"));
 		}
 	};

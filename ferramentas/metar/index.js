@@ -179,7 +179,7 @@ i3GEOF.metar =
 						i3GEOF.metar.aguarde.visibility = "hidden";
 						ins = "<p class=paragrafo >" + $trad('ajuda', i3GEOF.metar.dicionario) + "</p>";
 						try {
-							dados = YAHOO.lang.JSON.parse(o.responseText)[0].weatherObservations;
+							dados = JSON.parse(o.responseText)[0].weatherObservations;
 							ndados = dados.length;
 							ins += "<table class=lista4 >";
 							for (i = 0; i < ndados; i++) {

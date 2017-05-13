@@ -1245,7 +1245,7 @@ i3GEO.Interface =
 				i3GEO.Interface.ativaBotoes();
 				// executa fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o, se
 				// houver
-				if (YAHOO.lang.isFunction(i3GEO.finalizaAPI)) {
+				if (jQuery.isFunction(i3GEO.finalizaAPI)) {
 					i3GEO.finalizaAPI.call();
 				} else {
 					if (i3GEO.finalizaAPI != "") {
@@ -1777,7 +1777,7 @@ i3GEO.Interface =
 				if ($i("ArvoreTituloTema" + name)) {
 					i3GEO.Interface.STATUS.atualizando.push(name);
 					if(i3GEO.Interface.openlayers.FUNDOTEMA != ""){
-						YAHOO.util.Dom.setStyle("ArvoreTituloTema" + name, "background", i3GEO.Interface.openlayers.FUNDOTEMA);
+						$("#ArvoreTituloTema" + name).css("background", i3GEO.Interface.openlayers.FUNDOTEMA);
 					}
 					if (p) {
 						p.style.display = "block";
@@ -1794,7 +1794,7 @@ i3GEO.Interface =
 				i3GEO.Interface.STATUS.atualizando.remove(name);
 				if ($i("ArvoreTituloTema" + name)) {
 					if(i3GEO.Interface.openlayers.FUNDOTEMA != ""){
-						YAHOO.util.Dom.setStyle("ArvoreTituloTema" + name, "background", "");
+						$("#ArvoreTituloTema" + name).css("background", "");
 					}
 					if (p) {
 						p.style.display = "block";
@@ -1970,9 +1970,9 @@ i3GEO.Interface =
 					modoAtual = "move";
 					i3GEO.barraDeBotoes.BOTAOCLICADO = "pan";
 					//nao marca o centro se o campo de coordenadas nao existir
-					if(i3GEO.configura.mostraCentroDoMapa === true && $i("localizarxygeoProjxg")){
-						i3GEO.navega.marcaCentroDoMapa(i3GEO.navega.centroDoMapa());
-					}
+					//if(i3GEO.configura.mostraCentroDoMapa === true && $i("localizarxygeoProjxg")){
+					//	i3GEO.navega.marcaCentroDoMapa(i3GEO.navega.centroDoMapa());
+					//}
 				});
 				i3geoOL.on("click", function(e) {
 					e.stopPropagation();
@@ -1992,9 +1992,9 @@ i3GEO.Interface =
 					// permite que a coordenada do centro mapa seja mostrada no
 					// formul&aacute;rio de coordenadas
 					//
-					xy = i3GEO.navega.centroDoMapa();
-					xy = i3GEO.calculo.dd2dms(xy[0], xy[1]);
-					i3GEO.coordenadas.atualizaGeo(xy[0], xy[1], "localizarxygeoProj");
+					//xy = i3GEO.navega.centroDoMapa();
+					//xy = i3GEO.calculo.dd2dms(xy[0], xy[1]);
+					//i3GEO.coordenadas.atualizaGeo(xy[0], xy[1], "localizarxygeoProj");
 
 					i3GEO.eventos.cliquePerm.status = false;
 					// guarda a extensao geografica atual
@@ -2662,7 +2662,7 @@ i3GEO.Interface =
 					i3GEO.Interface.ativaBotoes();
 					// executa fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o, se
 					// houver
-					if (YAHOO.lang.isFunction(i3GEO.finalizaAPI)) {
+					if (jQuery.isFunction(i3GEO.finalizaAPI)) {
 						i3GEO.finalizaAPI.call();
 					} else {
 						if (i3GEO.finalizaAPI != "") {
@@ -2789,9 +2789,9 @@ i3GEO.Interface =
 				modoAtual = "";
 				google.maps.event.addListener(i3GeoMap, "dragstart", function() {
 					modoAtual = "move";
-					if(i3GEO.configura.mostraCentroDoMapa === true && $i("localizarxygeoProjxg")){
-						i3GEO.navega.marcaCentroDoMapa(i3GEO.navega.centroDoMapa());
-					}
+					//if(i3GEO.configura.mostraCentroDoMapa === true && $i("localizarxygeoProjxg")){
+					//	i3GEO.navega.marcaCentroDoMapa(i3GEO.navega.centroDoMapa());
+					//}
 					i3GEO.eventos.cliquePerm.status = false;
 				});
 				google.maps.event.addListener(i3GeoMap, "dragend", function() {
@@ -2804,9 +2804,9 @@ i3GEO.Interface =
 					// permite que a coordenada do centro mapa seja mostrada no
 					// formul&aacute;rio de coordenadas
 					//
-					xy = i3GEO.navega.centroDoMapa();
-					xy = i3GEO.calculo.dd2dms(xy[0], xy[1]);
-					i3GEO.coordenadas.atualizaGeo(xy[0], xy[1], "localizarxygeoProj");
+					//xy = i3GEO.navega.centroDoMapa();
+					//xy = i3GEO.calculo.dd2dms(xy[0], xy[1]);
+					//i3GEO.coordenadas.atualizaGeo(xy[0], xy[1], "localizarxygeoProj");
 
 					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 				});
@@ -2981,7 +2981,7 @@ i3GEO.Interface =
 						div = i3GEO.Interface.googlemaps.retornaDivLayer(camada.name);
 						if (div) {
 							if (layer == "" || layer == camada.name) {
-								YAHOO.util.Dom.setStyle(div, "opacity", opacidade);
+								$(div).css("opacity", opacidade);
 							}
 						}
 					}

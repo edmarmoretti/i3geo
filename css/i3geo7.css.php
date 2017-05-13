@@ -1514,6 +1514,40 @@ background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll
 background-size: 16px 144px;
 }
 }
+#i3GEOguiaMovel {
+position: absolute;
+display: block;
+border: 0px solid white;
+text-align: left;
+z-index: 20000;
+left: auto;
+right: 2px;
+top: 50px;
+width: 350px;
+}
+#i3GEOguiaMovelMolde {
+background-color: white;
+right:0px;
+top: -50px;
+box-shadow: 0 2px 10px 0 #888888;
+position: absolute;
+display: none;
+border: 0px solid white;
+text-align: left;
+z-index: 10000;
+}
+#i3GEOguiaMovelConteudo {
+width:345px;
+top: 0px;
+overflow: auto;
+display: none;
+position: absolute;
+border-color: gray;
+border-width: 0px 0 0px 0px;
+left: 0px;
+height: 0px;
+padding-left: 4px;
+}
 /* esconde na impressao */
 @media print {
 .noprint {

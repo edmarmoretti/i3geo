@@ -355,12 +355,12 @@ i3GEO.janela =
 			novoel.innerHTML = ins;
 			if (this.TRANSICAOSUAVE && transicao === "sim") {
 				novoel.onmouseover = function() {
-					YAHOO.util.Dom.setStyle(novoel, "opacity", 1);
+					$(novoel).css("opacity", 1);
 				};
 				novoel.onmouseout = function() {
-					YAHOO.util.Dom.setStyle(novoel, "opacity", i3GEO.janela.OPACIDADE / 100);
+					$(novoel).css("opacity", i3GEO.janela.OPACIDADE / 100);
 				};
-				YAHOO.util.Dom.setStyle(novoel, "opacity", 1);
+				$(novoel).css("opacity", 1);
 			}
 			document.body.appendChild(novoel);
 			wdocaiframe = $i(id + "i");
@@ -467,9 +467,11 @@ i3GEO.janela =
 			if (funcaoMinimiza) {
 				$i(id + "_minimizaCabecalho").onclick = funcaoMinimiza;
 			}
+
 			YAHOO.util.Event.addListener(janela.close, "click", i3GEO.janela.fecha, janela, {
 				id : id
 			}, true);
+
 			temp = $i(id + "_c");
 			if(temp && temp.style){
 				temp.style.maxWidth = "90%";
@@ -750,7 +752,7 @@ i3GEO.janela =
 			if (temp) {
 				temp.style.backgroundColor = "";
 			}
-			YAHOO.util.Dom.setStyle(temp, "opacity", i3GEO.janela.OPACIDADEAGUARDE / 100);
+			$(temp).css("opacity", i3GEO.janela.OPACIDADEAGUARDE / 100);
 		},
 		/**
 		 * Function: fechaAguarde
@@ -1058,7 +1060,7 @@ i3GEO.janela =
 			if (!cabecalho) {
 				cabecalho = "";
 			}
-			janela = new YAHOO.widget.SimpleDialog(YAHOO.util.Dom.generateId(), {
+			janela = new YAHOO.widget.SimpleDialog(i3GEO.util.generateId(), {
 				width : parseInt(largura, 10) + "px",
 				height : parseInt(altura, 10) + "px",
 				fixedcenter : true,
@@ -1097,7 +1099,7 @@ i3GEO.janela =
 				console.info("i3GEO.janela.tip()");
 
 			var Nid, novoel, res;
-			Nid = YAHOO.util.Dom.generateId();
+			Nid = i3GEO.util.generateId;
 			// insere div para tips
 			novoel = document.createElement("div");
 			novoel.className = "i3GEObalaoInfo";

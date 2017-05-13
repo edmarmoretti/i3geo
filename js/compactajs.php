@@ -178,6 +178,8 @@ $jsfiles = array(
 "../pacotes/yui290/build/resize/resize_compacto.js",
 "../pacotes/yui290/build/progressbar/progressbar_compacto.js",
 "../pacotes/yui290/build/selector/selector-min.js",
+"../pacotes/jquery/dist/jquery.min.js",
+"../pacotes/jquery/jquery-ui/jquery-ui.min.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
 "compactados/mustache.js",

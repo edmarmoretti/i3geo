@@ -67,6 +67,8 @@ i3GEO.configura =
 		/**
 		 * Propriedade: mostraCentroDoMapa
 		 *
+		 * depreciaod na versao 7
+		 *
 		 * Mostra ou nao o centro do mapa durante o PAN
 		 *
 		 * Tipo:

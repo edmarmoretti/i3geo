@@ -222,9 +222,9 @@ i3GEO.pluginI3geo =
 				if (config === "") {
 					config = configDefault;
 				}
-				config = YAHOO.lang.JSON.parse(config);
+				config = JSON.parse(config);
 				if (config.plugin != "heatmap") {
-					config = YAHOO.lang.JSON.parse(configDefault);
+					config = JSON.parse(configDefault);
 				}
 				parametros = config.parametros;
 				ins +=
@@ -505,9 +505,9 @@ i3GEO.pluginI3geo =
 				if (config === "") {
 					config = configDefault;
 				}
-				config = YAHOO.lang.JSON.parse(config);
+				config = JSON.parse(config);
 				if (config.plugin != "markercluster") {
-					config = YAHOO.lang.JSON.parse(configDefault);
+					config = JSON.parse(configDefault);
 				}
 				parametros = config.parametros;
 				ins +=
@@ -827,9 +827,9 @@ i3GEO.pluginI3geo =
 				if (config === "") {
 					config = configDefault;
 				}
-				config = YAHOO.lang.JSON.parse(config);
+				config = JSON.parse(config);
 				if (config.plugin != "layerkml") {
-					config = YAHOO.lang.JSON.parse(configDefault);
+					config =JSON.parse(configDefault);
 				}
 				parametros = config.parametros;
 				ins +=
@@ -1013,9 +1013,9 @@ i3GEO.pluginI3geo =
 				if (config === "") {
 					config = configDefault;
 				}
-				config = YAHOO.lang.JSON.parse(config);
+				config = JSON.parse(config);
 				if (config.plugin != "parametrossql") {
-					config = YAHOO.lang.JSON.parse(configDefault);
+					config = JSON.parse(configDefault);
 				}
 				parametros = config.parametros;
 				n = 4;
