@@ -63,23 +63,23 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'codigoTema' : [ {
 		pt : "C&oacute;digo do tema:",
-		en : "",
-		es : ""
+		en : "Code of theme :",
+		es : "C&oacute;digo del tema:"
 	} ],
     'temaVisivel' : [ {
 		pt : "Ligado (ao abrir a prancha, esse tema estar&aacute; vis&iacute;vel)?",
-		en : "",
-		es : ""
+		en : "Connected (when opening the table, that theme will be visible)?",
+		es : "&iquest;Conectado (al abrir la table, ese tema estar&aacute; visible)?"
 	} ],
     'titulo' : [ {
 		pt : "T&iacute;tulo:",
-		en : "",
-		es : ""
+		en : "Title:",
+		es : "T&iacute;tulo:"
 	} ],
     'descricao' : [ {
 		pt : "(opcional) Descri&ccedil;&atilde;o:",
-		en : "",
-		es : ""
+		en : "(optional) Description:",
+		es : "(opcional) Descripci&oacute;n:"
 	} ],
     'linkTxt' : [ {
 		pt : "(opcional) Link para o texto que ser&aacute; mostrado na inicializa&ccedil;&atilde;o:",
