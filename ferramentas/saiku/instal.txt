@@ -1,31 +1,33 @@
-Roteiro para instalação e configuração do SAIKU para uso com o i3Geo (testado no Ubuntu).
+Roteiro para instalaÃ§Ã£o e configuraÃ§Ã£o do SAIKU para uso com o i3Geo (testado no Ubuntu).
 
-Para mais informações veja em: http://docs.analytical-labs.com/
+Para mais informaÃ§Ãµes veja em: http://docs.analytical-labs.com/
 
 Importante:
 
-	Por questões de segurança, modifique o arquivo de configuração do Apache incluindo as seguintes diretivas:
+	A integraÃ§Ã£o do SAIKU com o i3GEO Ã© experimental.
+
+	Por questÃµes de seguranÃ§a, modifique o arquivo de configuraÃ§Ã£o do Apache incluindo as seguintes diretivas:
 
 		<Directory /var/www/ms_tmp/saiku-datasources>
 			Order Deny,Allow
 			Deny from All
 		</Directory>
 
-	No caso o texto "/var/www/ms_tmp" deve ser alterado para refletir as configurações do seu servidor, indicando corretamente a pasta temporária
+	No caso o texto "/var/www/ms_tmp" deve ser alterado para refletir as configuraÃ§Ãµes do seu servidor, indicando corretamente a pasta temporÃ¡ria
 
 -------------------
 	Edite o arquivo
 
 	saiku-server/tomcat/webapps/saiku/WEB-INF/users.properties
-	
+
 	Para remover o usuario anonimo ou acrescentar novos usuarios
 -------------------
 
-Utilize uma das opções abaixo para instalar o servidor saiku-server
+Utilize uma das opÃ§Ãµes abaixo para instalar o servidor saiku-server
 
 1) Download do software diretamente de http://meteorite.bi/saiku/download
 
-		- Faça o download do SAIKU Server no endereço: http://meteorite.bi/saiku/download
+		- FaÃ§a o download do SAIKU Server no endereÃ§o: http://meteorite.bi/saiku/download
 
 		- Descompacte os arquivos em uma pasta em seu servidor (no Linux /var por exemplo)
 
@@ -35,14 +37,14 @@ Utilize uma das opções abaixo para instalar o servidor saiku-server
 
 				<Connector port="9090" protocol="HTTP/1.1"
 
-			e modifique o valor da porta se achar necessário
+			e modifique o valor da porta se achar necessÃ¡rio
 
 		- Fontes de dados
 
-			O i3Geo cria arquivos de fontes de dados em uma pasta temporária. Essa pasta é criada quando o i3Geo é inicializado.
-			(/tmp/ms_tmp/saiku-datasources por padrão)
+			O i3Geo cria arquivos de fontes de dados em uma pasta temporÃ¡ria. Essa pasta Ã© criada quando o i3Geo Ã© inicializado.
+			(/tmp/ms_tmp/saiku-datasources por padrÃ£o)
 
-			Para que o SAIKU veja essa pasta é necessário editar o arquivo
+			Para que o SAIKU veja essa pasta Ã© necessÃ¡rio editar o arquivo
 
 			saiku-server/tomcat/webapps/saiku/WEB-INF/saiku-beans.xml
 
@@ -56,19 +58,19 @@ Utilize uma das opções abaixo para instalar o servidor saiku-server
 
 		- Arquivos alterados
 
-			Alguns dos códigos do SAIKU originais foram alterados. As alterações estão na pasta i3geo/ferramentas/saiku/saiku-server
-			O conteúdo dessa pasta deve ser copiado para a pasta onde o saiku for instalado (saiku-server)
+			Alguns dos cÃ³digos do SAIKU originais foram alterados. As alteraÃ§Ãµes estÃ£o na pasta i3geo/ferramentas/saiku/saiku-server
+			O conteÃºdo dessa pasta deve ser copiado para a pasta onde o saiku for instalado (saiku-server)
 
-2) Download via Git do saiku-server com as alterações já realizadas
+2) Download via Git do saiku-server com as alteraÃ§Ãµes jÃ¡ realizadas
 
-		Veja as orientações sobre uso do Git e sobre como obter o código do i3geo. A obtenção do código do saiku-server segue a mesma lógica, no entanto você deve usar como exemplo os comandos abaixo:
-		
+		Veja as orientaÃ§Ãµes sobre uso do Git e sobre como obter o cÃ³digo do i3geo. A obtenÃ§Ã£o do cÃ³digo do saiku-server segue a mesma lÃ³gica, no entanto vocÃª deve usar como exemplo os comandos abaixo:
+
 		mkdir /var/saiku-server
 		cd /var/saiku-server
 		git -c http.sslVerify=false clone http://softwarepublico.gov.br/gitlab/i3geo/saiku-server.git .
-		chmod -R 766 /var/www/saiku-server
 
-Após a obtenção dos arquivos, inicialize o servidor
+
+ApÃ³s a obtenÃ§Ã£o dos arquivos, inicialize o servidor
 
 	Procure na pasta saiku-server o programa start-saiku.bat (para Windows) ou start-saiku.sh para Linux.
 
@@ -80,42 +82,54 @@ Após a obtenção dos arquivos, inicialize o servidor
 
 		http://localhost:9090/
 
-	(Se aparecer a tela de login. Utilize admin como usuário e admin como senha)
+	(Se aparecer a tela de login. Utilize admin como usuÃ¡rio e admin como senha)
 
-Ajustes nas variáveis de inicialização do i3geo/ms_configura.php
+Ajustes nas variÃ¡veis de inicializaÃ§Ã£o do i3geo/ms_configura.php
 
-	No arquivo i3geo/ms_configura.php existem duas variáveis que são utilizadas na integração com o SAIKU.
+	No arquivo i3geo/ms_configura.php existem duas variÃ¡veis que sÃ£o utilizadas na integraÃ§Ã£o com o SAIKU.
 
-	Edite esse arquivo caso seja necessário adaptar os parâmetros conforme suas necessidades.
+	Edite esse arquivo caso seja necessÃ¡rio adaptar os parÃ¢metros conforme suas necessidades.
 
-	Observe principalmente o endereço de acesso ao SAIKU e os parâmetros de conexão com o banco de dados e tabela com a dimensão temporal
+	Observe principalmente o endereÃ§o de acesso ao SAIKU e os parÃ¢metros de conexÃ£o com o banco de dados e tabela com a dimensÃ£o temporal
 
 Banco de dados
 
-	O banco de dados PostgreSQL a ser utilizado pode ser qualquer um já existente e que esteja cadastrado como uma conexão no
-	sistema de metadados estatísticos.
+	O banco de dados PostgreSQL a ser utilizado pode ser qualquer um jÃ¡ existente e que esteja cadastrado como uma conexÃ£o no
+	sistema de metadados estatÃ­sticos.
 
-	Esse banco deve ter as funções Postgis e deve também conter a tabela com a dimensão tempo.
+	Esse banco deve ter as funÃ§Ãµes Postgis e deve tambÃ©m conter a tabela com a dimensÃ£o tempo.
 
 	Essa tabela pode ser obtida fazendo-se o RESTORE do banco de dados default. Para obter o arquivo de backup utilize:
 
 	https://softwarepublico.gov.br/gitlab/i3geo/i3geosaude/blob/master/databasei3geosaude.backup
 
-	Por padrão, esse banco de ve ser restaurado em um DATABASE chamado "i3geosaude" com usuário "postgres" e senha "postgres"
+	Por padrÃ£o, esse banco de ve ser restaurado em um DATABASE chamado "i3geosaude" com usuÃ¡rio "postgres" e senha "postgres"
 
-	Se o banco de dados "i3geosaude" não for utilizado, apenas copie a tabela i3geo_metaestat.dim_tempo
-	para dentro do banco de dados que será utilizado
+	Se o banco de dados "i3geosaude" nÃ£o for utilizado, apenas copie a tabela i3geo_metaestat.dim_tempo
+	para dentro do banco de dados que serÃ¡ utilizado
 
 
 
-Observação:
+ObservaÃ§Ã£o:
 
-Para testar o uso do SAIKU e aprender mais sobre sua instalação, dê preferência ao uso do arquivo de instalação do SVN
+Para testar o uso do SAIKU e aprender mais sobre sua instalaÃ§Ã£o, dÃª preferÃªncia ao uso do arquivo de instalaÃ§Ã£o do SVN
 e utilize o database i3geosaude.
 
-Após se assegurar que está tudo funcionando, faça os ajustes necessários.
+ApÃ³s se assegurar que estÃ¡ tudo funcionando, faÃ§a os ajustes necessÃ¡rios.
 
-O banco de dados de administração do i3Geo, localizado em i3geo/admin/admin.db, contém as definições de variáveis que são compatíveis com
+O banco de dados de administraÃ§Ã£o do i3Geo, localizado em i3geo/admin/admin.db, contÃ©m as definiÃ§Ãµes de variÃ¡veis que sÃ£o compatÃ­veis com
 o banco de dados i3geosaude, permitindo o teste do funcionamento do SAIKU.
 
-Para acionar o SAIKU utilize o menu suspenso do i3Geo (item Análise).
+Para acionar o SAIKU utilize o menu suspenso do i3Geo (item AnÃ¡lise).
+
+Importante:
+
+Altere as permissÃµes da pasta saiku-server de forma a impedir a escrita.
+
+O SAIKU utiliza os arquivos de fonte de dados que sÃ£o criados de forma dinÃ¢mica na pasta ms_tmp/saiku-datasources.
+Esses arquivos apontam para o arquivo XML com o esquema utilizado para construir os cubos, que tambÃ©m sÃ£o criados de forma dinÃ¢mica.
+Como o SAIKU precisa ler esse arquivo XML, o mesmo deve ter permissÃµes de leitura de forma que o Apache consiga carregar esse arquivo XML.
+Ã‰ importante destacar que ao fazer isso o arquivo xml fica exposto, o que pode permitir que um usuÃ¡rio qualquer tenha acesso a esse XML.
+Esse XML contÃ©m os SQL utilizados para acessar o banco de dados. Ao usar o SAIKU Ã© necessÃ¡rio avaliar se essa caracterÃ­stica pode
+apresentar-se como um problema de seguranÃ§a
+

@@ -1,5 +1,16 @@
 <?php
-exit;
+/*
+Importante:
+
+A integração do SAIKU com o i3GEO é experimental.
+
+O SAIKU utiliza os arquivos de fonte de dados que sao criados de forma dinamica na pasta ms_tmp/saiku-datasources.
+Esses arquivos apontam para o arquivo XML com o esquema utilizado para construir os cubos, que tambem sao criados de forma dinamica.
+Como o SAIKU precisa ler esse arquivo XML, o mesmo deve ter permissoes de leitura de forma que o Apache consiga carregar esse arquivo XML.
+E importante destacar que ao fazer isso o arquivo xml fica exposto, o que pode permitir que um usuario qualquer tenha acesso a esse XML.
+Esse XML contem os SQL utilizados para acessar o banco de dados. Ao usar o SAIKU e necessario avaliar se essa caracteristica pode
+apresentar-se como um problema de seguranc
+*/
 //
 //utilize &output=xml para ver o xml
 //
@@ -11,7 +22,10 @@ exit;
  http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=xml
  http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?xmlesquema=&output=xml&regiao=1
  */
-
+//
+//remova essa linhas para poder usar o SAIKU
+//
+echo "Bloqueado. Consulte o administrador.";exit;
 //
 //quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
 //
@@ -31,13 +45,10 @@ $nomeConexao = criaConexaoEsquema();
 $map_file = $_SESSION["map_file"];
 
 $arquivoXmlEsquema = dirname($map_file)."/".str_replace(".txt","",$nomeConexao).".xml";
-
 gravaDataSource();
-
 if(!empty($_GET["xmlesquema"])){
 	imprimeEsquema();
 }
-
 $m = new Metaestat();
 
 //
@@ -207,7 +218,7 @@ function criaConexaoEsquema(){
 	}
 	else{
 		$urlXmlEsquema = $_GET["xmlesquema"];
-		//cria um nome de arquivo reaproveit�vel
+		//cria um nome de arquivo reaproveitável
 		$nomeConexao = md5($_GET["xmlesquema"]);
 	}
 	//$arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
