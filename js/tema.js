@@ -886,4 +886,3 @@ i3GEO.tema =
 			}
 		}
 	};
-// YAHOO.log("carregou classe tema", "Classes i3geo");

@@ -453,6 +453,70 @@ i3GEO.guias =
 					i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.tipo = "normal";
 					i3GEO.gadgets.mostraBuscaRapida("buscaRapidaGuia");
 				}
+			},
+			"ferramentas" : {
+				icone : "imagens/gisicons/tools.png",
+				titulo : $trad("u15a"),
+				id : "guia8",
+				idconteudo : "guia8obj",
+				status: false,
+				template1: '<div class="list-group"><div class="list-group-item"><div class="row-action-primary"><i class="material-icons">folder</i></div><div class="row-content"><a href="javascript:void(0)"><h4 class="list-group-item-text text-center">{{{nome}}}</h4></a></div></div><div class="list-group-separator"></div></div>',
+				template2: '<ul class="breadcrumb"><li><a href="javascript:void(0)"><h4><span class="material-icons">arrow_back</span>{{{nome}}}</h4></a></li></ul>',
+				click : function() {
+					i3GEO.guias.mostra("ferramentas");
+					//verifica se ja foi criada
+					if(i3GEO.guias.CONFIGURA.ferramentas.status === true){
+						return;
+					}
+					i3GEO.guias.CONFIGURA.ferramentas.status = true;
+
+					ondeFerramentas = "listaFerramentas";
+					if (!$i("listaFerramentas")) {
+						ondeFerramentas = "guia8obj";
+					}
+
+					var t,n, i, sub, nomeMenu = "", confm = i3GEO.configura.oMenuData, ins = "", subs =
+						i3GEO.configura.oMenuData.submenus, onde;
+
+					n = confm.menu.length;
+					onde = $( "#listaFerramentas" );
+
+					for (i = 0; i < n; i += 1) {
+						var t = Mustache.to_html(
+							i3GEO.guias.CONFIGURA.ferramentas.template1,
+							{"nome":confm.menu[i].nome}
+						);
+						t = $(t);
+
+						t.find(".list-group-item-text")
+							.data({"nivel":0,"nome":confm.menu[i].nome,"id":confm.menu[i].id})
+							.click(function(){
+								var t = Mustache.to_html(
+										i3GEO.guias.CONFIGURA.ferramentas.template2,
+										$(this).data()
+									);
+								$("#migalhaFerramentas").html(t);
+							});
+
+						onde
+						.append(t);
+					}
+					//$( "#listaFerramentas" ).append(ins);
+
+					/*
+					for (nomeMenu in subs) {
+						if ($i("menulista_" + nomeMenu)) {
+							sub = subs[nomeMenu];
+							n = sub.length;
+							ins = "";
+							for (i = 0; i < n; i++) {
+								ins += "<p class='listaMenuItem' ><a href='" + sub[i].url + "' target='_self'>" + sub[i].text + "</a>";
+							}
+							$i("menulista_" + nomeMenu).innerHTML += ins;
+						}
+					}
+					*/
+				}
 			}
 		},
 		/**

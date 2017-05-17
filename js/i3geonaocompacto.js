@@ -147,13 +147,17 @@ OpenLayers = {
 	"../pacotes/yui290/build/progressbar/assets/skins/sam/progressbar.css",
 	"../css/corrigeyui_geral.css",
 	"../css/janelaflutuante.css",
-	"../mashups/openlayers.css"
+	"../mashups/openlayers.css",
+	"../pacotes/bootstrap/css/bootstrap.min.css",
+	"../pacotes/bootstrap-material-design/dist/css/bootstrap-material-design.min.css"
 	);
 	for (i = 0; i < cssfiles.length; i++)
 	{
 		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
 		allCssTags += currentCssTag;
 	}
+	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons'/>";
+	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>";
 	document.write(allCssTags);
 	document.write(allScriptTags);
 

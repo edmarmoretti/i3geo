@@ -222,6 +222,9 @@ Esse array informa quais dessas ferramentas estao corretamente configuradas.
 As que estiverem marcadas como false nao serao mostradas na interface do mapa interativo
 Sobre essas configuracoes, veja na pasta i3geo/ferramentas e na documentacao do
 sistema de administracao do i3Geo
+
+No caso do SAIKU, verifique tambem se o programa i3geo/ferramentas/saiku/esquemaxml.php nao esta bloqueado (voce deve
+abrir e verificar o inicio desse arquivo). Veja tambem: i3geo/ferramentas/saiku/install.txt
  */
 $statusFerramentas = array(
 	"saiku"=>false,
@@ -269,6 +272,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,geol
 inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */
+//$i3geoBlFerramentas = array("saiku");
 $i3geoBlFerramentas = array("saiku");
 /*
 Variable: $ogrOutput
@@ -328,6 +332,7 @@ $saikuConfigDataSource = array(
 	"password"=>"postgres",
 	"tabelaDimensaoTempo"=>"i3geo_metaestat.dim_tempo"
 );
+
 /*
 	Variable: i3georendermode
 

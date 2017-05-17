@@ -151,7 +151,7 @@ Array.prototype.getUnique = function() {
 	return a;
 };
 i3GEO.util =
-	{
+{
 		/**
 		 * Elementos IMG criados na funcao criaPin
 		 *
@@ -338,7 +338,7 @@ i3GEO.util =
 			}
 			titulo = "<table><tr><td><b>" + titulo + "</b></td><td></td></tr></table>";
 			d = {
-				html : titulo
+					html : titulo
 			};
 			tempNode = new YAHOO.widget.HTMLNode(d, root, true, true);
 			tempNode.enableHighlight = true;
@@ -356,7 +356,7 @@ i3GEO.util =
 						conteudo = linha.text;
 					}
 					d = {
-						html : conteudo
+							html : conteudo
 					};
 					temaNode = new YAHOO.widget.HTMLNode(d, noDestino, false, true);
 					temaNode.enableHighlight = false;
@@ -386,55 +386,55 @@ i3GEO.util =
 		removeAcentos : function(str) {
 			var defaultDiacriticsRemovalMap =
 				[
-					{
-						'base' : 'A',
-						'letters' : /[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F]/g
-					},
-					{
-						'base' : 'C',
-						'letters' : /[\u0043\u24B8\uFF23\u0106\u0108\u010A\u010C\u00C7\u1E08\u0187\u023B\uA73E]/g
-					},
-					{
-						'base' : 'E',
-						'letters' : /[\u0045\u24BA\uFF25\u00C8\u00C9\u00CA\u1EC0\u1EBE\u1EC4\u1EC2\u1EBC\u0112\u1E14\u1E16\u0114\u0116\u00CB\u1EBA\u011A\u0204\u0206\u1EB8\u1EC6\u0228\u1E1C\u0118\u1E18\u1E1A\u0190\u018E]/g
-					},
-					{
-						'base' : 'I',
-						'letters' : /[\u0049\u24BE\uFF29\u00CC\u00CD\u00CE\u0128\u012A\u012C\u0130\u00CF\u1E2E\u1EC8\u01CF\u0208\u020A\u1ECA\u012E\u1E2C\u0197]/g
-					},
-					{
-						'base' : 'O',
-						'letters' : /[\u004F\u24C4\uFF2F\u00D2\u00D3\u00D4\u1ED2\u1ED0\u1ED6\u1ED4\u00D5\u1E4C\u022C\u1E4E\u014C\u1E50\u1E52\u014E\u022E\u0230\u00D6\u022A\u1ECE\u0150\u01D1\u020C\u020E\u01A0\u1EDC\u1EDA\u1EE0\u1EDE\u1EE2\u1ECC\u1ED8\u01EA\u01EC\u00D8\u01FE\u0186\u019F\uA74A\uA74C]/g
-					},
-					{
-						'base' : 'U',
-						'letters' : /[\u0055\u24CA\uFF35\u00D9\u00DA\u00DB\u0168\u1E78\u016A\u1E7A\u016C\u00DC\u01DB\u01D7\u01D5\u01D9\u1EE6\u016E\u0170\u01D3\u0214\u0216\u01AF\u1EEA\u1EE8\u1EEE\u1EEC\u1EF0\u1EE4\u1E72\u0172\u1E76\u1E74\u0244]/g
-					},
-					{
-						'base' : 'a',
-						'letters' : /[\u0061\u24D0\uFF41\u1E9A\u00E0\u00E1\u00E2\u1EA7\u1EA5\u1EAB\u1EA9\u00E3\u0101\u0103\u1EB1\u1EAF\u1EB5\u1EB3\u0227\u01E1\u00E4\u01DF\u1EA3\u00E5\u01FB\u01CE\u0201\u0203\u1EA1\u1EAD\u1EB7\u1E01\u0105\u2C65\u0250]/g
-					},
-					{
-						'base' : 'c',
-						'letters' : /[\u0063\u24D2\uFF43\u0107\u0109\u010B\u010D\u00E7\u1E09\u0188\u023C\uA73F\u2184]/g
-					},
-					{
-						'base' : 'e',
-						'letters' : /[\u0065\u24D4\uFF45\u00E8\u00E9\u00EA\u1EC1\u1EBF\u1EC5\u1EC3\u1EBD\u0113\u1E15\u1E17\u0115\u0117\u00EB\u1EBB\u011B\u0205\u0207\u1EB9\u1EC7\u0229\u1E1D\u0119\u1E19\u1E1B\u0247\u025B\u01DD]/g
-					},
-					{
-						'base' : 'i',
-						'letters' : /[\u0069\u24D8\uFF49\u00EC\u00ED\u00EE\u0129\u012B\u012D\u00EF\u1E2F\u1EC9\u01D0\u0209\u020B\u1ECB\u012F\u1E2D\u0268\u0131]/g
-					},
-					{
-						'base' : 'o',
-						'letters' : /[\u006F\u24DE\uFF4F\u00F2\u00F3\u00F4\u1ED3\u1ED1\u1ED7\u1ED5\u00F5\u1E4D\u022D\u1E4F\u014D\u1E51\u1E53\u014F\u022F\u0231\u00F6\u022B\u1ECF\u0151\u01D2\u020D\u020F\u01A1\u1EDD\u1EDB\u1EE1\u1EDF\u1EE3\u1ECD\u1ED9\u01EB\u01ED\u00F8\u01FF\u0254\uA74B\uA74D\u0275]/g
-					},
-					{
-						'base' : 'u',
-						'letters' : /[\u0075\u24E4\uFF55\u00F9\u00FA\u00FB\u0169\u1E79\u016B\u1E7B\u016D\u00FC\u01DC\u01D8\u01D6\u01DA\u1EE7\u016F\u0171\u01D4\u0215\u0217\u01B0\u1EEB\u1EE9\u1EEF\u1EED\u1EF1\u1EE5\u1E73\u0173\u1E77\u1E75\u0289]/g
-					}
-				];
+				 {
+					 'base' : 'A',
+					 'letters' : /[\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F]/g
+				 },
+				 {
+					 'base' : 'C',
+					 'letters' : /[\u0043\u24B8\uFF23\u0106\u0108\u010A\u010C\u00C7\u1E08\u0187\u023B\uA73E]/g
+				 },
+				 {
+					 'base' : 'E',
+					 'letters' : /[\u0045\u24BA\uFF25\u00C8\u00C9\u00CA\u1EC0\u1EBE\u1EC4\u1EC2\u1EBC\u0112\u1E14\u1E16\u0114\u0116\u00CB\u1EBA\u011A\u0204\u0206\u1EB8\u1EC6\u0228\u1E1C\u0118\u1E18\u1E1A\u0190\u018E]/g
+				 },
+				 {
+					 'base' : 'I',
+					 'letters' : /[\u0049\u24BE\uFF29\u00CC\u00CD\u00CE\u0128\u012A\u012C\u0130\u00CF\u1E2E\u1EC8\u01CF\u0208\u020A\u1ECA\u012E\u1E2C\u0197]/g
+				 },
+				 {
+					 'base' : 'O',
+					 'letters' : /[\u004F\u24C4\uFF2F\u00D2\u00D3\u00D4\u1ED2\u1ED0\u1ED6\u1ED4\u00D5\u1E4C\u022C\u1E4E\u014C\u1E50\u1E52\u014E\u022E\u0230\u00D6\u022A\u1ECE\u0150\u01D1\u020C\u020E\u01A0\u1EDC\u1EDA\u1EE0\u1EDE\u1EE2\u1ECC\u1ED8\u01EA\u01EC\u00D8\u01FE\u0186\u019F\uA74A\uA74C]/g
+				 },
+				 {
+					 'base' : 'U',
+					 'letters' : /[\u0055\u24CA\uFF35\u00D9\u00DA\u00DB\u0168\u1E78\u016A\u1E7A\u016C\u00DC\u01DB\u01D7\u01D5\u01D9\u1EE6\u016E\u0170\u01D3\u0214\u0216\u01AF\u1EEA\u1EE8\u1EEE\u1EEC\u1EF0\u1EE4\u1E72\u0172\u1E76\u1E74\u0244]/g
+				 },
+				 {
+					 'base' : 'a',
+					 'letters' : /[\u0061\u24D0\uFF41\u1E9A\u00E0\u00E1\u00E2\u1EA7\u1EA5\u1EAB\u1EA9\u00E3\u0101\u0103\u1EB1\u1EAF\u1EB5\u1EB3\u0227\u01E1\u00E4\u01DF\u1EA3\u00E5\u01FB\u01CE\u0201\u0203\u1EA1\u1EAD\u1EB7\u1E01\u0105\u2C65\u0250]/g
+				 },
+				 {
+					 'base' : 'c',
+					 'letters' : /[\u0063\u24D2\uFF43\u0107\u0109\u010B\u010D\u00E7\u1E09\u0188\u023C\uA73F\u2184]/g
+				 },
+				 {
+					 'base' : 'e',
+					 'letters' : /[\u0065\u24D4\uFF45\u00E8\u00E9\u00EA\u1EC1\u1EBF\u1EC5\u1EC3\u1EBD\u0113\u1E15\u1E17\u0115\u0117\u00EB\u1EBB\u011B\u0205\u0207\u1EB9\u1EC7\u0229\u1E1D\u0119\u1E19\u1E1B\u0247\u025B\u01DD]/g
+				 },
+				 {
+					 'base' : 'i',
+					 'letters' : /[\u0069\u24D8\uFF49\u00EC\u00ED\u00EE\u0129\u012B\u012D\u00EF\u1E2F\u1EC9\u01D0\u0209\u020B\u1ECB\u012F\u1E2D\u0268\u0131]/g
+				 },
+				 {
+					 'base' : 'o',
+					 'letters' : /[\u006F\u24DE\uFF4F\u00F2\u00F3\u00F4\u1ED3\u1ED1\u1ED7\u1ED5\u00F5\u1E4D\u022D\u1E4F\u014D\u1E51\u1E53\u014F\u022F\u0231\u00F6\u022B\u1ECF\u0151\u01D2\u020D\u020F\u01A1\u1EDD\u1EDB\u1EE1\u1EDF\u1EE3\u1ECD\u1ED9\u01EB\u01ED\u00F8\u01FF\u0254\uA74B\uA74D\u0275]/g
+				 },
+				 {
+					 'base' : 'u',
+					 'letters' : /[\u0075\u24E4\uFF55\u00F9\u00FA\u00FB\u0169\u1E79\u016B\u1E7B\u016D\u00FC\u01DC\u01D8\u01D6\u01DA\u1EE7\u016F\u0171\u01D4\u0215\u0217\u01B0\u1EEB\u1EE9\u1EEF\u1EED\u1EF1\u1EE5\u1E73\u0173\u1E77\u1E75\u0289]/g
+				 }
+				 ];
 			for (var i = 0; i < defaultDiacriticsRemovalMap.length; i++) {
 				str = str.replace(defaultDiacriticsRemovalMap[i].letters, defaultDiacriticsRemovalMap[i].base);
 			}
@@ -471,8 +471,8 @@ i3GEO.util =
 			if (obj) {
 				if (!obj.style) {
 					return [
-						0, 0
-					];
+					        0, 0
+					        ];
 				}
 				var curleft = 0, curtop = 0;
 				if (obj) {
@@ -485,12 +485,12 @@ i3GEO.util =
 					}
 				}
 				return [
-					curleft + document.body.scrollLeft, curtop + document.body.scrollTop
-				];
+				        curleft + document.body.scrollLeft, curtop + document.body.scrollTop
+				        ];
 			} else {
 				return [
-					0, 0
-				];
+				        0, 0
+				        ];
 			}
 		},
 		/**
@@ -547,50 +547,7 @@ i3GEO.util =
 		 *
 		 * {String} - onde esta instalado o i3Geo
 		 */
-		mudaCursor : function(cursores, tipo, idobjeto, locaplic) {
-			var os = [], o, i, c = "", n, cursor = "", ext = ".ff";
-			//
-			// no caso da interface openlayers, o cursor deve ser definido no estilo
-			// do elemento img de cada TILE de cada LAYER
-			// para achar os img faz-se a busca pela classe css utilizada pelo OpenLayers nos img desse tipo
-			//
-			try {
-				if (navm) {
-					ext = ".ie";
-				}
-				os.push(document.getElementById(idobjeto));
-				if (i3GEO.Interface.ATUAL === "openlayers") {
-					os = YAHOO.util.Dom.getElementsByClassName('olTileImage', 'img');
-				}
-				if (i3GEO.Interface.ATUAL === "googlemaps") {
-					os = document.getElementById(idobjeto).firstChild;
-					os = os.getElementsByTagName("div");
-				}
-				n = os.length;
-				if (tipo === "default" || tipo === "pointer"
-					|| tipo === "crosshair"
-					|| tipo === "help"
-					|| tipo === "move"
-					|| tipo === "text") {
-					cursor = tipo;
-				} else {
-					c = eval("cursores." + tipo + ext);
-				}
-				// testa novamente
-				if (c === "default" || c === "pointer" || c === "crosshair" || c === "help" || c === "move" || c === "text") {
-					cursor = c;
-				}
-				if (cursor === "") {
-					cursor = "URL(\"" + locaplic + eval("cursores." + tipo + ext) + "\"),auto";
-				}
-				for (i = 0; i < n; i++) {
-					o = os[i];
-					if (o) {
-						o.style.cursor = cursor;
-					}
-				}
-			} catch (e) {
-			}
+		mudaCursor : function() {
 		},
 		/**
 		 * Cria um elemento div na pagina atual.
@@ -697,13 +654,13 @@ i3GEO.util =
 				onde.appendChild(novoel);
 				i3GEO.util.PINS.push(id);
 				return [
-					true, novoel
-				];
+				        true, novoel
+				        ];
 			}
 			p.style.display = "block";
 			return [
-				false, p
-			];
+			        false, p
+			        ];
 		},
 		/**
 		 * Function: posicionaImagemNoMapa
@@ -736,8 +693,8 @@ i3GEO.util =
 			i.style.top = y - my + "px";
 			i.style.left = x - mx + "px";
 			return [
-				y - my, x - mx
-			];
+			        y - my, x - mx
+			        ];
 		},
 		/**
 		 * Function: escondePin
@@ -814,17 +771,17 @@ i3GEO.util =
 				onch = "";
 			}
 			return "<span class=digitar onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' ><input onchange=\"" + onch
-				+ "\" tabindex='0'  onclick='javascript:this.select();' id='"
-				+ idInput
-				+ "' title='"
-				+ titulo
-				+ "' type='text' size='"
-				+ digitos
-				+ "' class='digitar' value='"
-				+ valor
-				+ "' name='"
-				+ nome
-				+ "' /></span>";
+			+ "\" tabindex='0'  onclick='javascript:this.select();' id='"
+			+ idInput
+			+ "' title='"
+			+ titulo
+			+ "' type='text' size='"
+			+ digitos
+			+ "' class='digitar' value='"
+			+ valor
+			+ "' name='"
+			+ nome
+			+ "' /></span>";
 		},
 		// incluir no onmouseover dos itens com cores
 		$inputTextMudaCor : function(obj) {
@@ -908,7 +865,7 @@ i3GEO.util =
 		abreCor : function(janelaid, elemento, tipo) {
 			if (!i3GEO.configura) {
 				i3GEO.configura = {
-					locaplic : "../"
+						locaplic : "../"
 				};
 			}
 			if (arguments.length === 2) {
@@ -916,7 +873,7 @@ i3GEO.util =
 			}
 			var janela, ins, novoel, wdocaiframe, wsrc =
 				i3GEO.configura.locaplic + "/ferramentas/colorpicker/index.htm?doc=" + janelaid + "&elemento=" + elemento + "&tipo=" + tipo, texto =
-				"Cor", id = "i3geo_janelaCor", classe = "hd";
+					"Cor", id = "i3geo_janelaCor", classe = "hd";
 			if ($i(id)) {
 				YAHOO.i3GEO.janela.manager.find(id).show();
 				return;
@@ -924,7 +881,7 @@ i3GEO.util =
 			ins = '<div id="' + id + '_cabecalho" class="hd">';
 			ins +=
 				"<span><img id='i3geo_janelaCor_imagemCabecalho' style='visibility:hidden;' src=\'" + i3GEO.configura.locaplic
-					+ "/imagens/aguarde.gif\' /></span>";
+				+ "/imagens/aguarde.gif\' /></span>";
 			ins += texto;
 			ins += '</div><div id="i3geo_janelaCor_corpo" class="bd" style="padding:5px">';
 			if (wsrc !== "") {
@@ -1203,8 +1160,8 @@ i3GEO.util =
 		getScrollHeight : function() {
 			var mx = Math.max, d = document;
 			return mx(mx(d.body.scrollHeight, d.documentElement.scrollHeight), mx(d.body.offsetHeight, d.documentElement.offsetHeight), mx(
-				d.body.clientHeight,
-				d.documentElement.clientHeight));
+					d.body.clientHeight,
+					d.documentElement.clientHeight));
 
 			/**
 			 * var maxDisplacement=0; window.scrollTo(0,10000000); if( typeof self.pageYOffset!='undefined' )
@@ -1258,10 +1215,6 @@ i3GEO.util =
 						};
 					} else {
 						script.onload = function() {
-							/*
-							 * if (i3GEO.janela) { i3GEO.janela.fechaAguarde(id + "aguarde"); }
-							 */
-							//if (YAHOO.lang.isFunction(ini)) {
 							if (ini.call) {
 								ini.call();
 							} else {
@@ -1269,9 +1222,6 @@ i3GEO.util =
 							}
 						};
 					}
-					/*
-					 * if (i3GEO.janela) { i3GEO.janela.ESTILOAGUARDE = tipojanela; }
-					 */
 				}
 				script.src = js;
 				if (id !== "") {
@@ -1280,7 +1230,7 @@ i3GEO.util =
 				head.appendChild(script);
 			} else {
 				if (ini !== "") {
-					if (YAHOO.lang.isFunction(ini)) {
+					if (jQuery.isFunction(ini)) {
 						ini.call();
 					} else {
 						eval(ini);
@@ -1407,12 +1357,11 @@ i3GEO.util =
 		 * {String}
 		 */
 		rgb2hex : function(str) {
-			var re = new RegExp(" ", "g"), rgb = str.replace(re, ',');
-			return YAHOO.util.Dom.Color.toHex("rgb(" + rgb + ")");
-			/**
-			 * function hex(x) { var hexDigits = ["0", "1", "2", "3", "4", "5", "6", "7", "8","9", "A", "B", "C", "D", "E", "F"]; return
-			 * hexDigits[(x - x % 16) / 16] + hexDigits[x% 16]; } return "#" + hex(rgb[0]) + hex(rgb[1]) + hex(rgb[2]);
-			 */
+			var rgb = str.split(",");
+			function hex(x) {
+				return ("0" + parseInt(x).toString(16)).slice(-2);
+			}
+			return "#" + hex(rgb[0]) + hex(rgb[1]) + hex(rgb[2]);
 		},
 		/**
 		 * Function: comboTemas
@@ -1463,67 +1412,67 @@ i3GEO.util =
 			var monta, temp, temp1, temp2;
 			monta =
 				function(retorno) {
-					var i, comboTemas = '', n, nome = "", tema;
-					if (yui === true) {
-						comboTemas =
-							'<input type="button" name=' + id + '_button id="' + id + '" value="' + $trad("x33") + '&nbsp;&nbsp;">';
-						id = id + "select";
-						nome = id;
+				var i, comboTemas = '', n, nome = "", tema;
+				if (yui === true) {
+					comboTemas =
+						'<input type="button" name=' + id + '_button id="' + id + '" value="' + $trad("x33") + '&nbsp;&nbsp;">';
+					id = id + "select";
+					nome = id;
+				}
+				if (retorno !== undefined) {
+					if (retorno.data) {
+						retorno = retorno.data;
 					}
-					if (retorno !== undefined) {
-						if (retorno.data) {
-							retorno = retorno.data;
+					n = retorno.length;
+					if (n > 0) {
+						if (multiplo) {
+							comboTemas +=
+								"<select style='" + estilo + "' id='" + id + "' size='4' multiple='multiple' name='" + nome + "'>";
+						} else {
+							comboTemas += "<select style='" + estilo + "' id='" + id + "' name='" + nome + "'>";
 						}
-						n = retorno.length;
-						if (n > 0) {
-							if (multiplo) {
-								comboTemas +=
-									"<select style='" + estilo + "' id='" + id + "' size='4' multiple='multiple' name='" + nome + "'>";
+						if (yui === false || incluiVazio === true) {
+							comboTemas += "<option value=''>----</option>";
+						}
+						for (i = 0; i < n; i++) {
+							if (retorno[i].nome) {
+								nome = retorno[i].nome;
+								tema = retorno[i].tema;
 							} else {
-								comboTemas += "<select style='" + estilo + "' id='" + id + "' name='" + nome + "'>";
+								nome = retorno[i].tema;
+								tema = retorno[i].name;
 							}
-							if (yui === false || incluiVazio === true) {
-								comboTemas += "<option value=''>----</option>";
+							if (retorno[i].escondido !== "sim") {
+								comboTemas += "<option value=" + tema + " >" + nome + "</option>";
 							}
-							for (i = 0; i < n; i++) {
-								if (retorno[i].nome) {
-									nome = retorno[i].nome;
-									tema = retorno[i].tema;
-								} else {
-									nome = retorno[i].tema;
-									tema = retorno[i].name;
-								}
-								if (retorno[i].escondido !== "sim") {
-									comboTemas += "<option value=" + tema + " >" + nome + "</option>";
-								}
-							}
-							comboTemas += "</select>";
-							temp = {
+						}
+						comboTemas += "</select>";
+						temp = {
 								dados : comboTemas,
 								tipo : "dados"
+						};
+					} else {
+						if (tipoCombo === "poligonosSelecionados" || tipoCombo === "selecionados" || tipoCombo === "pontosSelecionados") {
+							temp =
+							{
+									dados : '<div class=alerta >Nenhum tema encontrado. <span style=cursor:pointer;color:blue onclick="i3GEO.mapa.dialogo.selecao()" > Selecionar...</span></div>',
+									tipo : "mensagem"
 							};
 						} else {
-							if (tipoCombo === "poligonosSelecionados" || tipoCombo === "selecionados" || tipoCombo === "pontosSelecionados") {
-								temp =
-									{
-										dados : '<div class=alerta >Nenhum tema encontrado. <span style=cursor:pointer;color:blue onclick="i3GEO.mapa.dialogo.selecao()" > Selecionar...</span></div>',
-										tipo : "mensagem"
-									};
-							} else {
-								temp = {
+							temp = {
 									dados : '<div class=alerta >Nenhum tema encontrado. </div>',
 									tipo : "mensagem"
-								};
-							}
+							};
 						}
-					} else {
-						temp = {
+					}
+				} else {
+					temp = {
 							dados : "<p style=color:red >Ocorreu um erro<br>",
 							tipo : "erro"
-						};
-					}
-					eval("funcao(temp);");
-				};
+					};
+				}
+				eval("funcao(temp);");
+			};
 			if (tipoCombo === "ligados") {
 				if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
 					monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
@@ -1662,25 +1611,25 @@ i3GEO.util =
 					if (!ids) {
 						combo +=
 							"<tr><td><input " + temp
-								+ " onclick="
-								+ funcaoclick
-								+ " size=2 style='top:1px;cursor:pointer' type=checkbox value='"
-								+ valores[i]
-								+ "' /></td><td>"
-								+ nomes[i]
-								+ "</td>";
+							+ " onclick="
+							+ funcaoclick
+							+ " size=2 style='top:1px;cursor:pointer' type=checkbox value='"
+							+ valores[i]
+						+ "' /></td><td>"
+						+ nomes[i]
+						+ "</td>";
 					} else {
 						combo +=
 							"<tr><td><input " + temp
-								+ " id="
-								+ ids[i]
-								+ " onclick="
-								+ funcaoclick
-								+ " size=2 style='top:1px;cursor:pointer' type=checkbox value='"
-								+ valores[i]
-								+ "' /></td><td>"
-								+ nomes[i]
-								+ "</td>";
+							+ " id="
+							+ ids[i]
+						+ " onclick="
+						+ funcaoclick
+						+ " size=2 style='top:1px;cursor:pointer' type=checkbox value='"
+						+ valores[i]
+						+ "' /></td><td>"
+						+ nomes[i]
+						+ "</td>";
 					}
 				}
 				combo += "</table></div>";
@@ -1733,54 +1682,54 @@ i3GEO.util =
 			var monta, temp, temp1, n, i;
 			monta =
 				function(retorno) {
-					try {
-						var i, comboTemas, n, nome;
-						if (retorno !== undefined) {
-							if (retorno.data) {
-								retorno = retorno.data;
-							}
-							n = retorno.length;
-							if (n > 0) {
-								comboTemas = "<table class=lista3 >";
-								for (i = 0; i < n; i++) {
-									if (retorno[i].nome) {
-										nome = retorno[i].nome;
-										tema = retorno[i].tema;
-									} else {
-										nome = retorno[i].tema;
-										tema = retorno[i].name;
-									}
-									comboTemas += "<tr><td><input size=2 style='cursor:pointer' type=checkbox name='" + tema + "' /></td>";
-									comboTemas +=
-										"<td>&nbsp;<input style='text-align:left;width:" + size
-											+ " cursor:text;' onclick='javascript:this.select();' id='"
-											+ prefixo
-											+ tema
-											+ "' type=text value='"
-											+ nome
-											+ "' /></td></tr>";
+				try {
+					var i, comboTemas, n, nome;
+					if (retorno !== undefined) {
+						if (retorno.data) {
+							retorno = retorno.data;
+						}
+						n = retorno.length;
+						if (n > 0) {
+							comboTemas = "<table class=lista3 >";
+							for (i = 0; i < n; i++) {
+								if (retorno[i].nome) {
+									nome = retorno[i].nome;
+									tema = retorno[i].tema;
+								} else {
+									nome = retorno[i].tema;
+									tema = retorno[i].name;
 								}
-								comboTemas += "</table>";
-								temp = {
+								comboTemas += "<tr><td><input size=2 style='cursor:pointer' type=checkbox name='" + tema + "' /></td>";
+								comboTemas +=
+									"<td>&nbsp;<input style='text-align:left;width:" + size
+									+ " cursor:text;' onclick='javascript:this.select();' id='"
+									+ prefixo
+									+ tema
+									+ "' type=text value='"
+									+ nome
+									+ "' /></td></tr>";
+							}
+							comboTemas += "</table>";
+							temp = {
 									dados : comboTemas,
 									tipo : "dados"
-								};
-							} else {
-								temp = {
-									dados : '<div class=alerta >Nenhum tema encontrado.</div>',
-									tipo : "mensagem"
-								};
-							}
+							};
 						} else {
 							temp = {
-								dados : "<p style=color:red >Ocorreu um erro<br>",
-								tipo : "erro"
+									dados : '<div class=alerta >Nenhum tema encontrado.</div>',
+									tipo : "mensagem"
 							};
 						}
-						eval("funcao(temp);");
-					} catch (e) {
+					} else {
+						temp = {
+								dados : "<p style=color:red >Ocorreu um erro<br>",
+								tipo : "erro"
+						};
 					}
-				};
+					eval("funcao(temp);");
+				} catch (e) {
+				}
+			};
 			if (tipoLista === "ligados") {
 				if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
 					monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
@@ -1893,13 +1842,13 @@ i3GEO.util =
 					ins.push("</select>");
 					ins = ins.join('');
 					temp = {
-						dados : ins,
-						tipo : "dados"
+							dados : ins,
+							tipo : "dados"
 					};
 				} else {
 					temp = {
-						dados : '<div class=erro >Ocorreu um erro</div>',
-						tipo : "erro"
+							dados : '<div class=erro >Ocorreu um erro</div>',
+							tipo : "erro"
 					};
 				}
 				eval("funcao(temp)");
@@ -1947,13 +1896,13 @@ i3GEO.util =
 					ins.push("</select>");
 					ins = ins.join('');
 					temp = {
-						dados : ins,
-						tipo : "dados"
+							dados : ins,
+							tipo : "dados"
 					};
 				} else {
 					temp = {
-						dados : '<div class=erro >Ocorreu um erro</erro>',
-						tipo : "erro"
+							dados : '<div class=erro >Ocorreu um erro</erro>',
+							tipo : "erro"
 					};
 				}
 				eval("funcao(temp)");
@@ -2049,21 +1998,21 @@ i3GEO.util =
 			}
 			var monta =
 				function(retorno) {
-					var ins = [], i, temp, n;
-					if (retorno.data !== undefined) {
-						if (ordenacao === "sim") {
-							ins.push("<table class=lista8 ><tr><td></td><td>" + $trad("x64") + "</td><td>Ordem</td>");
-						} else {
-							ins.push("<table class=lista8 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
-						}
-						n = retorno.data.valores.length;
-						for (i = 0; i < n; i++) {
-							ins.push("<tr><td><input size=2 style='cursor:pointer' name='" + retorno.data.valores[i].tema
+				var ins = [], i, temp, n;
+				if (retorno.data !== undefined) {
+					if (ordenacao === "sim") {
+						ins.push("<table class=lista8 ><tr><td></td><td>" + $trad("x64") + "</td><td>Ordem</td>");
+					} else {
+						ins.push("<table class=lista8 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
+					}
+					n = retorno.data.valores.length;
+					for (i = 0; i < n; i++) {
+						ins.push("<tr><td><input size=2 style='cursor:pointer' name='" + retorno.data.valores[i].tema
 								+ "' type=checkbox id='"
 								+ prefixo
 								+ retorno.data.valores[i].item
 								+ "' /></td>");
-							ins.push("<td class='i3geoForm i3geoFormSemIcone'><input style='text-align:left;cursor:text;width:" + size
+						ins.push("<td class='i3geoForm i3geoFormSemIcone'><input style='text-align:left;cursor:text;width:" + size
 								+ "' onclick='javascript:this.select();' id='"
 								+ prefixo
 								+ retorno.data.valores[i].item
@@ -2071,32 +2020,32 @@ i3GEO.util =
 								+ "' type=text value='"
 								+ retorno.data.valores[i].item
 								+ "' /></td>");
-							if (ordenacao === "sim") {
-								ins.push("<td class='i3geoForm100 i3geoFormSemIcone'><input style='text-align:left; cursor:text;' id='ordem_" + prefixo
+						if (ordenacao === "sim") {
+							ins.push("<td class='i3geoForm100 i3geoFormSemIcone'><input style='text-align:left; cursor:text;' id='ordem_" + prefixo
 									+ retorno.data.valores[i].item
 									+ retorno.data.valores[i].tema
 									+ "' type=text size='3' value='"
 									+ i
 									+ "' /></td>");
-							} else {
-								ins.push("<td></td>");
-							}
-							ins.push("</tr>");
+						} else {
+							ins.push("<td></td>");
 						}
-						ins.push("</table>");
-						ins = ins.join('');
-						temp = {
+						ins.push("</tr>");
+					}
+					ins.push("</table>");
+					ins = ins.join('');
+					temp = {
 							dados : ins,
 							tipo : "dados"
-						};
-					} else {
-						temp = {
+					};
+				} else {
+					temp = {
 							dados : '<div class=erro >' + $trad("x66") + '</div>',
 							tipo : "erro"
-						};
-					}
-					funcao.call(this, temp);
-				};
+					};
+				}
+				funcao.call(this, temp);
+			};
 			i3GEO.php.listaItensTema(monta, tema);
 		},
 		/**
@@ -2128,34 +2077,34 @@ i3GEO.util =
 			}
 			var monta =
 				function(retorno) {
-					var ins = [], i, n, temp;
-					if (retorno.data !== undefined) {
-						ins.push("<table class=lista2 >");
-						n = retorno.data.length;
-						for (i = 0; i < n; i++) {
-							ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' " + c
+				var ins = [], i, n, temp;
+				if (retorno.data !== undefined) {
+					ins.push("<table class=lista2 >");
+					n = retorno.data.length;
+					for (i = 0; i < n; i++) {
+						ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' " + c
 								+ " name='"
 								+ prefixo
 								+ "EPSG' type=radio value='"
 								+ retorno.data[i].codigo
 								+ "' /></td>");
-							c = "";
-							ins.push("<td>" + retorno.data[i].nome + "</td></tr>");
-						}
-						ins.push("</table>");
-						ins = ins.join('');
-						temp = {
+						c = "";
+						ins.push("<td>" + retorno.data[i].nome + "</td></tr>");
+					}
+					ins.push("</table>");
+					ins = ins.join('');
+					temp = {
 							dados : ins,
 							tipo : "dados"
-						};
-					} else {
-						temp = {
+					};
+				} else {
+					temp = {
 							dados : '<div class=erro >Ocorreu um erro</div>',
 							tipo : "erro"
-						};
-					}
-					funcao(temp);
-				};
+					};
+				}
+				funcao(temp);
+			};
 			i3GEO.php.listaEpsg(monta);
 		},
 		/**
@@ -2230,18 +2179,18 @@ i3GEO.util =
 			if (anterior !== "") {
 				botoes +=
 					"<td style='text-align:left;'><input id='"
-						+ idatual
-						+ "anterior_' onclick='"
-						+ anterior
-						+ "' type='button' value='&nbsp;&nbsp;' /></td>";
+					+ idatual
+					+ "anterior_' onclick='"
+					+ anterior
+					+ "' type='button' value='&nbsp;&nbsp;' /></td>";
 			}
 			if (proxima !== "") {
 				botoes +=
 					"<td style='text-align:right;'><input id='"
-						+ idatual
-						+ "proxima_' onclick='"
-						+ proxima
-						+ "' type='button' value='&nbsp;&nbsp;' /></td>";
+					+ idatual
+					+ "proxima_' onclick='"
+					+ proxima
+					+ "' type='button' value='&nbsp;&nbsp;' /></td>";
 			}
 			botoes += "</tr></table>";
 
@@ -2427,14 +2376,14 @@ i3GEO.util =
 		abreColourRamp : function(janelaid, elemento, ncores,temaSel, displayComboTemas) {
 			var janela, ins, novoel, wdocaiframe, temp, fix = false, wsrc =
 				i3GEO.configura.locaplic + "/ferramentas/colourramp/index.php?ncores="
-					+ ncores
-					+ "&doc="
-					+ janelaid
-					+ "&elemento="
-					+ elemento
-					+ "&locaplic="
-					+ i3GEO.configura.locaplic, // +janela+"&elemento="+elemento+"&tipo="+tipo,
-			nx = "", texto = "", id = "i3geo_janelaCorRamp", classe = "hd";
+				+ ncores
+				+ "&doc="
+				+ janelaid
+				+ "&elemento="
+				+ elemento
+				+ "&locaplic="
+				+ i3GEO.configura.locaplic, // +janela+"&elemento="+elemento+"&tipo="+tipo,
+				nx = "", texto = "", id = "i3geo_janelaCorRamp", classe = "hd";
 			if(!temaSel){
 				temaSel = "";
 			}
@@ -2447,7 +2396,7 @@ i3GEO.util =
 			ins = '<div id="' + id + '_cabecalho" class="hd">';
 			ins +=
 				"<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'" + i3GEO.configura.locaplic
-					+ "/imagens/aguarde.gif\' /></span>";
+				+ "/imagens/aguarde.gif\' /></span>";
 			if (i3GEO && i3GEO.arvoreDeCamadas) {
 				ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalho' style='top:0px;display:" + displayComboTemas + ";'>   ------</div>";
 			}
@@ -2490,28 +2439,28 @@ i3GEO.util =
 			if ($i("i3geo_janelaCorRampComboCabeca")) {
 				temp =
 					function() {
-						var p, tema = $i("i3geo_janelaCorRampComboCabecaSel").value, funcao = function(retorno) {
-							parent.frames["i3geo_janelaCorRampi"].document.getElementById("ncores").value = retorno.data.length;
-						};
-						if (tema !== "") {
-							i3GEO.mapa.ativaTema(tema);
-							// pega o numero de classes nalegenda do tema escolhido
-							p =
-								i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
-									+ i3GEO.configura.sid
-									+ "&funcao=editalegenda&opcao=edita&tema="
-									+ tema;
-							i3GEO.util.ajaxGet(p, funcao);
-							cp = new cpaint();
-						}
+					var p, tema = $i("i3geo_janelaCorRampComboCabecaSel").value, funcao = function(retorno) {
+						parent.frames["i3geo_janelaCorRampi"].document.getElementById("ncores").value = retorno.data.length;
 					};
+					if (tema !== "") {
+						i3GEO.mapa.ativaTema(tema);
+						// pega o numero de classes nalegenda do tema escolhido
+						p =
+							i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
+							+ i3GEO.configura.sid
+							+ "&funcao=editalegenda&opcao=edita&tema="
+							+ tema;
+						i3GEO.util.ajaxGet(p, funcao);
+						cp = new cpaint();
+					}
+				};
 				i3GEO.janela.comboCabecalhoTemas(
-					"i3geo_janelaCorRampComboCabeca",
-					"i3geo_janelaCorRampComboCabecaSel",
-					"none",
-					"ligados",
-					temp,
-					temaSel);
+						"i3geo_janelaCorRampComboCabeca",
+						"i3geo_janelaCorRampComboCabecaSel",
+						"none",
+						"ligados",
+						temp,
+						temaSel);
 			}
 		},
 		/**
@@ -2682,8 +2631,8 @@ i3GEO.util =
 			}
 			viewportwidth = viewportwidth - i3GEO.util.getScrollerWidth();
 			return [
-				viewportwidth, viewportheight
-			];
+			        viewportwidth, viewportheight
+			        ];
 		},
 		/**
 		 * Function: detectaTablet
@@ -2759,9 +2708,9 @@ i3GEO.util =
 				if (document.implementation.createDocumentType) {
 					var newDoctype =
 						document.implementation.createDocumentType(
-							'html',
-							'-//W3C//DTD XHTML 1.0 Transitional//EN',
-							'http://www.w3.org/TR/html4/loose.dtd');
+								'html',
+								'-//W3C//DTD XHTML 1.0 Transitional//EN',
+						'http://www.w3.org/TR/html4/loose.dtd');
 					// var newDoctype = document.implementation.createDocumentType('HTML');
 					if (document.doctype) {
 						document.doctype.parentNode.replaceChild(newDoctype, document.doctype);
@@ -2850,18 +2799,18 @@ i3GEO.util =
 			falhou = function(e) {
 			};
 			callback = {
-				success : function(o) {
-					try {
-						funcaoRetorno.call("", JSON.parse(o.responseText));
-					} catch (e) {
-						falhou(e);
+					success : function(o) {
+						try {
+							funcaoRetorno.call("", JSON.parse(o.responseText));
+						} catch (e) {
+							falhou(e);
+						}
+					},
+					failure : falhou,
+					argument : {
+						foo : "foo",
+						bar : "bar"
 					}
-				},
-				failure : falhou,
-				argument : {
-					foo : "foo",
-					bar : "bar"
-				}
 			};
 			YAHOO.util.Connect.asyncRequest("GET", sUrl, callback);
 		},
@@ -3140,134 +3089,134 @@ i3GEO.util =
 		base64decode : function(str) {
 			var base64DecodeChars =
 				new Array(
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					62,
-					-1,
-					-1,
-					-1,
-					63,
-					52,
-					53,
-					54,
-					55,
-					56,
-					57,
-					58,
-					59,
-					60,
-					61,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					0,
-					1,
-					2,
-					3,
-					4,
-					5,
-					6,
-					7,
-					8,
-					9,
-					10,
-					11,
-					12,
-					13,
-					14,
-					15,
-					16,
-					17,
-					18,
-					19,
-					20,
-					21,
-					22,
-					23,
-					24,
-					25,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1,
-					26,
-					27,
-					28,
-					29,
-					30,
-					31,
-					32,
-					33,
-					34,
-					35,
-					36,
-					37,
-					38,
-					39,
-					40,
-					41,
-					42,
-					43,
-					44,
-					45,
-					46,
-					47,
-					48,
-					49,
-					50,
-					51,
-					-1,
-					-1,
-					-1,
-					-1,
-					-1);
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						62,
+						-1,
+						-1,
+						-1,
+						63,
+						52,
+						53,
+						54,
+						55,
+						56,
+						57,
+						58,
+						59,
+						60,
+						61,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						0,
+						1,
+						2,
+						3,
+						4,
+						5,
+						6,
+						7,
+						8,
+						9,
+						10,
+						11,
+						12,
+						13,
+						14,
+						15,
+						16,
+						17,
+						18,
+						19,
+						20,
+						21,
+						22,
+						23,
+						24,
+						25,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1,
+						26,
+						27,
+						28,
+						29,
+						30,
+						31,
+						32,
+						33,
+						34,
+						35,
+						36,
+						37,
+						38,
+						39,
+						40,
+						41,
+						42,
+						43,
+						44,
+						45,
+						46,
+						47,
+						48,
+						49,
+						50,
+						51,
+						-1,
+						-1,
+						-1,
+						-1,
+						-1);
 			var c1, c2, c3, c4;
 			var i, len, out;
 
@@ -3350,13 +3299,10 @@ i3GEO.util =
 		 * <script>i3GEO.util.aplicaAquarela("foo");</script>
 		 */
 		aplicaAquarela : function(onde) {
-			var temp = function(obj) {
-				YAHOO.util.Event.addListener(obj, "click", function() {
-					i3GEO.util.abreCor("", obj.firstChild.id);
-				});
-				YAHOO.util.Event.addListener(obj.firstChild, "click", YAHOO.util.Event.stopPropagation);
-			};
-			YAHOO.util.Dom.getElementsByClassName("i3geoFormIconeAquarela", "div", onde, temp);
+			//id pode ter ponto !!!
+			$($i(onde)).find(".i3geoFormIconeAquarela").click(function() {
+				i3GEO.util.abreCor("", this.firstChild.id);
+			});
 		},
 		/**
 		 * Depreciado na versao 6.0
@@ -3424,171 +3370,29 @@ i3GEO.util =
 		 * {string}
 		 */
 		copyToClipboard : function(texto) {
-		    if (window.clipboardData && window.clipboardData.setData) {
-		        // IE specific code path to prevent textarea being shown while dialog is visible.
-		        return clipboardData.setData("Text", texto);
+			if (window.clipboardData && window.clipboardData.setData) {
+				// IE specific code path to prevent textarea being shown while dialog is visible.
+				return clipboardData.setData("Text", texto);
 
-		    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-		        var textarea = document.createElement("textarea");
-		        textarea.textContent = texto;
-		        textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
-		        document.body.appendChild(textarea);
-		        textarea.select();
-		        try {
-		            return document.execCommand("copy");  // Security exception may be thrown by some browsers.
-		        } catch (ex) {
-		            return false;
-		        } finally {
-		            document.body.removeChild(textarea);
-		        }
-		    }
-		}
-	};
-
-// YUI ACCORDION
-// 1/22/2008 - Edwart Visser
-
-// accordion
-
-// REQUIRES: yahoo-dom-event.js, animation-min.js
-
-try {
-	YAHOO.namespace("lutsr");
-	YAHOO.lutsr.accordion =
-		{
-			properties : {
-				animation : true,
-				animationDuration : 10,
-				multipleOpen : false,
-				Id : "sanfona",
-				altura : 200,
-				ativa : 0
-			},
-
-			init : function(animation, animationDuration, multipleOpen, Id, altura, ativa) {
-				if (animation) {
-					this.properties.animation = animation;
-				}
-				if (animationDuration) {
-					this.properties.animationDuration = animationDuration;
-				}
-				if (multipleOpen) {
-					this.properties.multipleOpen = multipleOpen;
-				}
-				if (Id) {
-					this.properties.Id = Id;
-				}
-				if (altura) {
-					this.properties.altura = altura;
-				}
-				if (ativa) {
-					this.properties.ativa = ativa;
-				}
-				var accordionObject = document.getElementById(this.properties.Id), headers;
-				if (accordionObject) {
-					if (accordionObject.nodeName === "DL") {
-						headers = accordionObject.getElementsByTagName("dt");
-						this.attachEvents(headers, 0);
-					}
-				}
-			},
-			attachEvents : function(headers, nr) {
-				var i, headerProperties, parentObj, header;
-				for (i = 0; i < headers.length; i++) {
-					headerProperties = {
-						objRef : headers[i],
-						nr : i,
-						jsObj : this
-					};
-					YAHOO.util.Event.addListener(headers[i], "click", this.clickHeader, headerProperties);
-				}
-				parentObj = headers[this.properties.ativa].parentNode;
-				headers = parentObj.getElementsByTagName("dd");
-				header = headers[this.properties.ativa];
-
-				this.expand(header);
-			},
-
-			clickHeader : function(e, headerProperties) {
-				var parentObj = headerProperties.objRef.parentNode, headers = parentObj.getElementsByTagName("dd"), header =
-					headers[headerProperties.nr], i;
-
-				if (YAHOO.util.Dom.hasClass(header, "open")) {
-					headerProperties.jsObj.collapse(header);
-				} else {
-					if (headerProperties.jsObj.properties.multipleOpen) {
-						headerProperties.jsObj.expand(header);
-					} else {
-						for (i = 0; i < headers.length; i++) {
-							if (YAHOO.util.Dom.hasClass(headers[i], "open")) {
-								headerProperties.jsObj.collapse(headers[i]);
-							}
-						}
-						headerProperties.jsObj.expand(header);
-					}
-				}
-			},
-			collapse : function(header) {
-				YAHOO.util.Dom.removeClass(YAHOO.util.Dom.getPreviousSibling(header), "selected");
-				if (!this.properties.animation) {
-					YAHOO.util.Dom.removeClass(header, "open");
-				} else {
-					this.initAnimation(header, "close");
-				}
-			},
-			expand : function(header) {
-				YAHOO.util.Dom.addClass(YAHOO.util.Dom.getPreviousSibling(header), "selected");
-				if (!this.properties.animation) {
-					YAHOO.util.Dom.addClass(header, "open");
-				} else {
-					this.initAnimation(header, "open");
-				}
-			},
-			initAnimation : function(header, dir) {
-				var attributes, animation, animationEnd;
-				if (dir === "open") {
-					$(header).css({"visibility": "hidden","height": this.properties.altura});
-					YAHOO.util.Dom.addClass(header, "open");
-
-					attributes = {
-						height : {
-							from : 0,
-							to : this.properties.altura
-						}
-					};
-					$(header).css({"visibility": "visible","height": 0});
-					animation = new YAHOO.util.Anim(header, attributes);
-					animationEnd = function() {
-						// alert(this.properties.altura+"px")
-						header.style.height = this.properties.altura + "px";
-					};
-					animation.duration = this.properties.animationDuration;
-					animation.useSeconds = false;
-					animation.onComplete.subscribe(animationEnd);
-					animation.animate();
-				} else if ("close") {
-					attributes = {
-						height : {
-							to : 0
-						}
-					};
-					animationEnd = function() {
-						YAHOO.util.Dom.removeClass(header, "open");
-					};
-					animation = new YAHOO.util.Anim(header, attributes);
-					animation.duration = this.properties.animationDuration;
-					animation.useSeconds = false;
-					animation.onComplete.subscribe(animationEnd);
-					animation.animate();
+			} else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
+				var textarea = document.createElement("textarea");
+				textarea.textContent = texto;
+				textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+				document.body.appendChild(textarea);
+				textarea.select();
+				try {
+					return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+				} catch (ex) {
+					return false;
+				} finally {
+					document.body.removeChild(textarea);
 				}
 			}
-		};
-} catch (e) {
-}
+		}
+};
 
-// alias
-
-// depreciado na versao 6.0
+//alias
+//depreciado na versao 6.0
 var $im = function(g) {
 	return i3GEO.util.$im(g);
 };
