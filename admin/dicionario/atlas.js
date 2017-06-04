@@ -83,18 +83,18 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'linkTxt' : [ {
 		pt : "(opcional) Link para o texto que ser&aacute; mostrado na inicializa&ccedil;&atilde;o:",
-		en : "",
-		es : ""
+		en : "(optional) Link to text to be displayed at startup:",
+		es : "(opcional) Enlace al texto que se mostrar&aacute; en el inicio:"
 	} ],
     'largura' : [ {
 		pt : "Largura da janela do texto inicial:",
-		en : "",
-		es : ""
+		en : "Width of the initial text window:",
+		es : "Ancho de la ventana del texto inicial:"
 	} ],
     'altura' : [ {
 		pt : "Altura",
-		en : "",
-		es : ""
+		en : "Height",
+		es : "Altura"
 	} ],
     'icone' : [ {
 		pt : "(opcional) &Iacute;cone que ser&aacute; utilizado na apresenta&ccedil;&atilde;o da prancha:",
