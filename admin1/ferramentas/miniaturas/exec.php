@@ -13,7 +13,7 @@ if(empty($_GET["tipo"])){
 				<div class="col-md-12">
 					<div class="well">
 					<?php
-					error_reporting (E_ALL);
+					//error_reporting (E_ALL);
 					//
 					//carrega o phpmapscript
 					//
@@ -26,7 +26,7 @@ if(empty($_GET["tipo"])){
 						if (ob_get_level() == 0){
 							ob_start();
 						}
-						error_reporting (E_ALL);
+						//error_reporting (E_ALL);
 						$arqs = listaArquivos("../../../temas",true,array("map"));
 						$arqs = $arqs["arquivos"];
 						sort($arqs);

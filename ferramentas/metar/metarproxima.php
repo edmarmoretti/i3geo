@@ -49,7 +49,7 @@ include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 $y = $_GET["y"];
 $x = $_GET["x"];
-error_reporting(0);
+//error_reporting(0);
 $url = "http://ws.geonames.org/findNearByWeatherXML?username=i3geo&lat=$y&lng=$x&lang=pt";
 
 $xml = simplexml_load_file($url);

@@ -297,6 +297,69 @@ class Legenda
 		$l = implode("<tr>",$pedacos);
 		return (array("legenda"=>$l,"desativar"=>$desligar));
 	}
+	function criaLegendaJson($w=25,$h=25)
+	{
+		$l = "";
+		$numlayers = $this->mapa->numlayers;
+		if($this->nome != ""){
+			//verifica se &eacute; wms ou se o metadata legendaimg est&aacute; definido
+			$c = $this->layer->connectiontype;
+			if ($c == 7 || $this->layer->getmetadata("legendaimg") != ""){
+				return($this->tabelaLegenda());
+			}
+			for ($i=0;$i < $numlayers;++$i){
+				$la = $this->mapa->getlayer($i);
+				if ($la->name != $this->nome)
+				{
+					$la->set("status",MS_OFF);
+				}
+				if ($la->group == $this->nome)
+				{
+					$la->set("status",MS_DEFAULT);
+				}
+				$la->set("minscaledenom",0);
+				$la->set("maxscaledenom",0);
+			}
+			$this->layer->set("status",MS_DEFAULT);
+		}
+		$desligar = array();
+		$legenda = array();
+		for ($i=0;$i < $numlayers;++$i){
+			$la = $this->mapa->getlayer($i);
+			if (strtoupper($la->getmetadata("ESCONDIDO")) == "SIM"){
+				$la->set("status",MS_OFF);
+			}
+			$desligarLayer = array();
+			if($la->status == MS_DEFAULT){
+				$la->set("minscaledenom",0);
+				$la->set("maxscaledenom",0);
+				$nc = $la->numclasses;
+				$classes = array();
+				for ($c = 0;$c < $nc;$c++){
+					$ck = "checked";
+					$classe = $la->getclass($c);
+					if($classe->status == MS_OFF){
+						$ck = "";
+					}
+					//remove o offset em simbolos do tipo imagem
+					if($classe->numstyles > 0){
+						$estilo = $classe->getstyle(0);
+						if($estilo->symbolname != "" && file_exists($estilo->symbolname)){
+							$estilo->set("offsetx",0);
+							$estilo->set("offsety",0);
+						}
+					}
+					$imagem = $classe->createLegendIcon($w,$h)->saveWebImage();
+
+					$classes[] = array("nome"=>$this->converte($classe->name),"img"=>$imagem, "checked"=>$ck, "index" => $c, "layer"=> $la->name );
+				}
+				$legenda[] = array("layer"=>$la->name,"nome"=>$this->converte($la->getmetadata("tema")),"classes"=>$classes);
+			}
+			$desligar[$la->name] = $desligarLayer;
+		}
+		return (array("legenda"=>$legenda));
+	}
+
 	/*
 	 function: legendaGrafica
 
@@ -599,7 +662,7 @@ class Legenda
 	{
 		$versao = versao();
 		$versao = $versao["principal"];
-		error_reporting(0);
+		//error_reporting(0);
 		if ($tipo == 3){
 			$tipo = 2;
 		} //tipo raster
@@ -903,7 +966,7 @@ class Legenda
 	*/
 	function pegaParametrosLegImg()
 	{
-		error_reporting(0);
+		//error_reporting(0);
 		$legenda = $this->mapa->legend;
 		$height = $legenda->height;
 		$width = $legenda->width;

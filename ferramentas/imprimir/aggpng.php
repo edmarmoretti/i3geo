@@ -32,7 +32,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 $mapexten = $_GET["mapexten"];
-error_reporting(0);
+//error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($_GET["g_sid"]))
 {session_id($_GET["g_sid"]);}
@@ -61,7 +61,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 	{dl('php_mapscript.so');}
 }
 require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-error_reporting(0);
+//error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
 $temp = str_replace(".map","xxx.map",$map_file);

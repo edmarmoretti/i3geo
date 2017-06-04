@@ -143,7 +143,7 @@ $xml .= "</Schema>";
 
 //xml pronto!!!!!
 
-error_reporting(0);
+//error_reporting(0);
 ob_end_clean();
 //
 //grava os dados em um arquivo. O usuario pode evitar isso e imprimir direto na tela

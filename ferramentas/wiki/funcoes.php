@@ -9,7 +9,7 @@ include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 $ret = $_GET["ret"];
 require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-error_reporting(0);
+//error_reporting(0);
 $cp = new cpaint();
 $cp->register('listaartigos');
 $cp->start();

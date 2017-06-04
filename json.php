@@ -60,7 +60,7 @@ if($cache == true){
 //
 //pega a versao do Mapserver
 //
-error_reporting(0);
+//error_reporting(0);
 $versao = versao();
 $versao = $versao["principal"];
 if(!isset($base) || $base == ""){

@@ -48,7 +48,7 @@ if (file_exists ( $dir_tmp )) {
 		unlink ($f);
 	}
 }
-error_reporting ( 0 );
+//error_reporting ( 0 );
 include "head.php";
 ?>
 <link href='imagens/sprites.css' rel='stylesheet'>

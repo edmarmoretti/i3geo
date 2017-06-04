@@ -82,7 +82,7 @@ function retornaJSON($obj)
 {
 	$locaplic = $_SESSION["locaplic"];
 	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
-	error_reporting (E_ALL);
+	//error_reporting (E_ALL);
 	ob_end_clean();
 	$j = new Services_JSON();
 	$texto = $j->encode($obj);
@@ -185,7 +185,7 @@ function pegaDados($sql,$dbh="",$close=true)
 	if($dbh == "" || is_string($dbh)){
 		include(dirname(__FILE__)."/conexao.php");
 	}
-	error_reporting (E_ALL);
+	//error_reporting (E_ALL);
 	//$dbh deve ser definido com somente leitura, mas por prevencao:
 	$sql = str_ireplace(array("update","delete","insert","--","drop",";"),"",$sql);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -472,7 +472,7 @@ function nomeRandomico($n=10)
  */
 function substituiCon($map_file,$postgis_mapa)
 {
-	error_reporting (E_ALL);
+	//error_reporting (E_ALL);
 	if (!empty($postgis_mapa) && (file_exists($map_file)))
 	{
 		if(!@ms_newMapObj($map_file)){return false;}
@@ -507,7 +507,7 @@ function substituiCon($map_file,$postgis_mapa)
 	return true;
 }
 function substituiConObj($objMap,$postgis_mapa){
-	error_reporting (E_ALL);
+	//error_reporting (E_ALL);
 	if (!empty($postgis_mapa)){
 		$numlayers = $objMap->numlayers;
 		for ($i=0;$i < $numlayers;++$i){

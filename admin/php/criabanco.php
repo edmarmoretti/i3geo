@@ -59,7 +59,7 @@
 		if(isset($i3geoPermiteLoginIp)){
 			checaLoginIp($i3geoPermiteLoginIp);
 		}
-		error_reporting(0);
+		//error_reporting(0);
 		$tabelas = array(
 				//tabelas gerais do sistema de administracao
 				"CREATE TABLE ".$esquemaadmin."i3geoadmin_grupos (desc_grupo TEXT, id_grupo INTEGER PRIMARY KEY, nome_grupo TEXT, it TEXT, es TEXT, en TEXT)",

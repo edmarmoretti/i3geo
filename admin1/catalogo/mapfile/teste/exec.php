@@ -94,7 +94,7 @@ function testaTabela($tema) {
 
 	$mapa = ms_newMapObj ( $base );
 	$nmapa = ms_newMapObj ( $tema );
-	error_reporting ( E_ALL );
+	//error_reporting ( E_ALL );
 	ms_ResetErrorList ();
 
 	$numlayers = $nmapa->numlayers;
@@ -102,7 +102,7 @@ function testaTabela($tema) {
 	for($i = 0; $i < $numlayers; $i ++) {
 		$layern = $nmapa->getlayer ( $i );
 		$layern->set ( "status", MS_DEFAULT );
-		error_reporting ( E_ALL );
+		//error_reporting ( E_ALL );
 		if ($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata ( "wms_sld_body" ) == "") {
 			$tipotemp = $layern->type;
 			$tiporep = $layern->getmetadata ( "tipooriginal" );
@@ -179,7 +179,7 @@ function testaMapaImg($tema) {
 	$locaplic = $_SESSION ["locaplic"];
 	$base = mapaBase ( $_SESSION ["locaplic"], $versao, $base );
 	$mapa = ms_newMapObj ( $base );
-	error_reporting ( E_ALL );
+	//error_reporting ( E_ALL );
 	ms_ResetErrorList ();
 	try {
 		ms_newMapObj ( $tema );
@@ -219,7 +219,7 @@ function testaMapaImg($tema) {
 		$layern = $nmapa->getlayer ( $i );
 		$layern->set ( "status", MS_DEFAULT );
 		autoClasses ( $layern, $nmapa );
-		error_reporting ( E_ALL );
+		//error_reporting ( E_ALL );
 		if ($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata ( "wms_sld_body" ) == "") {
 			$tipotemp = $layern->type;
 			$tiporep = $layern->getmetadata ( "tipooriginal" );

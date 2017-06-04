@@ -26,7 +26,7 @@ if (file_exists ( $dir_tmp )) {
 		chmod ( $dir_tmp . "/cache/googlemaps", 0744 );
 	}
 }
-error_reporting ( 0 );
+//error_reporting ( 0 );
 include "../init/head.php";
 ?>
 <style>

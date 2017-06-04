@@ -134,7 +134,7 @@ i3GEO.idioma = {
 	 */
 	define : function(codigo) {
 		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.idioma.define()");
+			console.info("i3GEO.idioma.define(" + codigo + ")");
 
 		i3GEO.idioma.ATUAL = codigo;
 		i3GEO.util.insereCookie(
@@ -387,6 +387,8 @@ i3GEO.idioma = {
 			novoel.style.zIndex = 5000;
 		}
 	},
+	//guarda o objeto com os termos traduzidos
+	OBJETOIDIOMA : "",
 	/**
 	 * Function: objetoIdioma
 	 *
@@ -428,12 +430,13 @@ i3GEO.idioma = {
  * {String} - Texto traduzido.
  */
 var $trad = function(id, dic) {
-	if (!dic) {
-		dic = i3GEO.idioma.DICIONARIO;
+	if (!dic || dic == "g_traducao") {
+		return i3GEO.idioma.OBJETOIDIOMA[id];
+	} else {
+		return (i3GEO.idioma.traduzir(
+			id,
+			dic));
 	}
-	return (i3GEO.idioma.traduzir(
-		id,
-		dic));
 };
 //
 (function() {
@@ -460,4 +463,6 @@ var $trad = function(id, dic) {
 	if (typeof ('g_traducao') !== "undefined") {
 		i3GEO.idioma.defineDicionario(g_traducao);
 	}
+	i3GEO.idioma.OBJETOIDIOMA = i3GEO.idioma.objetoIdioma(i3GEO.idioma.DICIONARIO);
+	g_traducao = "";
 })();

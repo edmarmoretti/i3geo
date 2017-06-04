@@ -37,41 +37,7 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.guias =
 {
-		/**
-		 * Variavel: ATUAL
-		 *
-		 * Guia que est&aacute; ativa ou que ser&aacute; ativada ao iniciar o mapa
-		 *
-		 * O nome da guia &eacute; a definida na vari&aacute;vel i3GEO.guias.CONFIGURA
-		 *
-		 * Tipo:
-		 *
-		 * {string}
-		 *
-		 * Default:
-		 *
-		 * temas
-		 */
-		ATUAL : "temas",
-		/**
-		 * Propriedade: ALTURACORPOGUIAS
-		 *
-		 * Altura em pixels que ser&aacute; aplicado em cada guia
-		 *
-		 * Por default, a altura &eacute; calculada automaticamente, mas em alguns casos, pode ser necess&aacute;rio especificar o valor
-		 * para permitir um melhor ajuste do layout do mapa
-		 *
-		 * Mantenha como 0 para que o c&aacute;lculo seja autom&aacute;tico
-		 *
-		 * Tipo:
-		 *
-		 * {numeric}
-		 *
-		 * Default:
-		 *
-		 * 0
-		 */
-		ALTURACORPOGUIAS : 0,
+		LARGURAGUIAMOVEL : 350,
 		/**
 		 * Propriedade: CONFIGURA
 		 *
@@ -192,7 +158,6 @@ i3GEO.guias =
 				id : "guiaIdentifica",
 				idconteudo : "",
 				click : function() {
-					var temp;
 					i3GEO.barraDeBotoes.BOTAOCLICADO = "identifica";
 					if ($i(i3GEO.Interface.IDMAPA)) {
 						$i(i3GEO.Interface.IDMAPA).title = "";
@@ -216,49 +181,6 @@ i3GEO.guias =
 					}
 				}
 			},
-			"temas" : {
-				icone : "imagens/layer.png",
-				titulo : $trad("g4a"),
-				id : "guia1",
-				idconteudo : "guia1obj",
-				click : ""
-			},
-			"adiciona" : {
-				icone : "imagens/catalogo.png",
-				titulo : $trad("g1a"),
-				id : "guia2",
-				idconteudo : "guia2obj",
-				click : function() {
-					var ondeArvore;
-					i3GEO.guias.mostra("adiciona");
-					ondeArvore = "arvoreAdicionaTema";
-					if (!$i("arvoreAdicionaTema")) {
-						ondeArvore = "guia2obj";
-					}
-					// para efeitos de compatibilidade
-					if (document.getElementById("outrasOpcoesAdiciona")) {
-						i3GEO.arvoreDeTemas.OPCOESADICIONAIS.idonde = "outrasOpcoesAdiciona";
-						i3GEO.arvoreDeTemas.OPCOESADICIONAIS.incluiArvore = false;
-					}
-					i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid, i3GEO.configura.locaplic, ondeArvore);
-				}
-			},
-			"legenda" : {
-				icone : "imagens/legenda.png",
-				titulo : $trad("g3"),
-				id : "guia4",
-				idconteudo : "guia4obj",
-				click : function() {
-					i3GEO.guias.mostra("legenda");
-					i3GEO.util.defineValor(i3GEO.mapa.legendaHTML.ID, "innerHTML", "");
-					if($i("arvoreLegenda")){
-						i3GEO.mapa.legendaHTML.cria("arvoreLegenda");
-					}
-					else{
-						i3GEO.mapa.legendaHTML.cria("guia4obj");
-					}
-				}
-			},
 			"mapas" : {
 				icone : "imagens/gisicons/show-links.png",
 				titulo : "Links",
@@ -271,7 +193,6 @@ i3GEO.guias =
 					if (!onde) {
 						onde = i3GEO.guias.CONFIGURA.mapas.idconteudo;
 					}
-					// TODO retirar os estilos do codigo e incluir em arquivo css
 					var pegaMapas =
 						function(retorno) {
 						var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
@@ -400,7 +321,7 @@ i3GEO.guias =
 					if ($i(i3GEO.guias.CONFIGURA.mapas.idconteudo)) {
 						$i(i3GEO.guias.CONFIGURA.mapas.idconteudo).innerHTML = "Aguarde...";
 					}
-					i3GEO.guias.mostra("mapas");
+					//i3GEO.guias.mostra("mapas");
 					i3GEO.php.pegaMapas(pegaMapas);
 					i3GEO.navega.removeCookieExtensao();
 				}
@@ -444,7 +365,7 @@ i3GEO.guias =
 				idconteudo : "guia7obj",
 				status: false,
 				click : function() {
-					i3GEO.guias.mostra("buscaRapida");
+					//i3GEO.guias.mostra("buscaRapida");
 					//verifica se ja foi criada
 					if(i3GEO.guias.CONFIGURA.buscaRapida.status === true){
 						return;
@@ -454,318 +375,320 @@ i3GEO.guias =
 					i3GEO.gadgets.mostraBuscaRapida("buscaRapidaGuia");
 				}
 			},
+			"legenda" : {
+				icone : "imagens/legenda.png",
+				titulo : $trad("g3"),
+				id : "guia4",
+				idconteudo : "guia4obj",
+				idLegenda: "legendaHtml",
+				click : function(obj) {
+					if (typeof (console) !== 'undefined')
+						console.info("click no botao que abre a guia de camadas");
+
+					var f = i3GEO.guias.CONFIGURA.legenda;
+					obj = $(obj);
+					if(obj.attr("data-idconteudo") != undefined){
+						f.idconteudo = obj.attr("data-idconteudo");
+					}
+					if(obj.attr("data-idLegenda") != undefined){
+						f.idLegenda = obj.attr("data-idLegenda");
+					}
+					i3GEO.legenda.inicia({
+						"idOnde": f.idconteudo,
+						"idLegenda": f.idLegenda
+					});
+				}
+			},
+			"temas" : {
+				icone : "imagens/layer.png",
+				titulo : $trad("g4a"),
+				id : "guia1",
+				idconteudo : "guia1obj",
+				idListaDeCamadas : "listaTemas",
+				idTemplateCamada : "guia1objTemplateCamadas",
+				idListaFundo : "listaFundo",
+				idTemplateCamadaFundo : "guia1objTemplateCamadasFundo",
+				click : function(obj){
+					if (typeof (console) !== 'undefined')
+						console.info("click no botao que abre a guia de camadas");
+
+					var f = i3GEO.guias.CONFIGURA.temas;
+					obj = $(obj);
+
+					if(obj.attr("data-idconteudo") != undefined){
+						f.idconteudo = obj.attr("data-idconteudo");
+					}
+					if(obj.attr("data-idListaDeCamadas") != undefined){
+						f.idListaDeCamadas = obj.attr("data-idListaDeCamadas");
+					}
+					if(obj.attr("data-idListaFundo") != undefined){
+						f.idListaFundo = obj.attr("data-idListaFundo");
+					}
+
+					if($("#" + obj.attr("data-idListaDeCamadas")).attr("data-idTemplateCamada") != undefined){
+						f.idTemplateCamada = $("#" + obj.attr("data-idListaDeCamadas")).attr("data-idTemplateCamada");
+					}
+					if($("#" + obj.attr("data-idListaFundo")).attr("data-idTemplateCamada") != undefined){
+						f.idTemplateCamadaFundo = $("#" + obj.attr("data-idListaFundo")).attr("data-idTemplateCamada");
+					}
+					i3GEO.arvoreDeCamadas.inicia({
+						"idOnde" : f.idListaDeCamadas,
+						"idTemplateCamada": f.idTemplateCamada,
+						"idListaFundo": f.idListaFundo,
+						"idTemplateCamadaFundo": f.idTemplateCamadaFundo
+					});
+				}
+			},
+			"adiciona" : {
+				icone : "imagens/catalogo.png",
+				titulo : $trad("g1a"),
+				id : "guia2",
+				idconteudo : "guia2obj",
+				idMenus: "catalogoMenus", //lista de menus
+				idCatalogo: "catalogoPrincipal", //onde vai a lista inicial
+				idNavegacao: "catalogoNavegacao",
+				idMigalha: "catalogoMigalha",
+				click : function(obj) {
+					if (typeof (console) !== 'undefined')
+						console.info("click no botao que abre a guia de adicao de temas");
+
+					var f = i3GEO.guias.CONFIGURA.adiciona;
+
+					if($(obj).attr("data-idconteudo") != undefined){
+						f.idconteudo = $(obj).attr("data-idconteudo");
+					}
+					if($(obj).attr("data-idMenus") != undefined){
+						f.idMenus = $(obj).attr("data-idMenus");
+					}
+					if($(obj).attr("data-idCatalogo") != undefined){
+						f.idCatalogo = $(obj).attr("data-idCatalogo");
+					}
+					if($(obj).attr("data-idNavegacao") != undefined){
+						f.idNavegacao = $(obj).attr("data-idNavegacao");
+					}
+					if($(obj).attr("data-idMigalha") != undefined){
+						f.idMigalha = $(obj).attr("data-idMigalha");
+					}
+
+					var ondeMenus = $( "#" + f.idMenus );
+
+					i3GEO.catalogoMenus.listaMenus({
+						"seletorTemplateDir": ondeMenus.attr("data-templateDir"),
+						"seletorTemplateTema": ondeMenus.attr("data-templateTema"),
+						"idOndeMenus": f.idMenus,
+						"idCatalogoPrincipal": f.idCatalogo,
+						"idCatalogoNavegacao": f.idNavegacao,
+						"idOndeMigalha": f.idMigalha
+					});
+					//antigo
+					//i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid, i3GEO.configura.locaplic, "arvoreAdicionaTema");
+				}
+			},
 			"ferramentas" : {
 				icone : "imagens/gisicons/tools.png",
 				titulo : $trad("u15a"),
 				id : "guia8",
 				idconteudo : "guia8obj",
+				idLista: "listaFerramentas",
+				idMigalha: "migalhaFerramentas",
+				idLinks: "listaFerramentasLinks",
 				status: false,
-				template1: '<div class="list-group"><div class="list-group-item"><div class="row-action-primary"><i class="material-icons">folder</i></div><div class="row-content"><a href="javascript:void(0)"><h4 class="list-group-item-text text-center">{{{nome}}}</h4></a></div></div><div class="list-group-separator"></div></div>',
-				template2: '<ul class="breadcrumb"><li><a href="javascript:void(0)"><h4><span class="material-icons">arrow_back</span>{{{nome}}}</h4></a></li></ul>',
-				click : function() {
-					i3GEO.guias.mostra("ferramentas");
-					//verifica se ja foi criada
-					if(i3GEO.guias.CONFIGURA.ferramentas.status === true){
-						return;
+				click : function(obj) {
+					if (typeof (console) !== 'undefined')
+						console.info("click no botao que abre a guia das ferramentas");
+
+					if($(obj).attr("data-idconteudo") != undefined){
+						i3GEO.guias.CONFIGURA.ferramentas.idconteudo = $(obj).attr("data-idconteudo");
 					}
-					i3GEO.guias.CONFIGURA.ferramentas.status = true;
-
-					ondeFerramentas = "listaFerramentas";
-					if (!$i("listaFerramentas")) {
-						ondeFerramentas = "guia8obj";
+					if($(obj).attr("data-idLista") != undefined){
+						i3GEO.guias.CONFIGURA.ferramentas.idLista = $(obj).attr("data-idLista");
+					}
+					if($(obj).attr("data-idMigalha") != undefined){
+						i3GEO.guias.CONFIGURA.ferramentas.idMigalha = $(obj).attr("data-idMigalha");
+					}
+					if($(obj).attr("data-idLinks") != undefined){
+						i3GEO.guias.CONFIGURA.ferramentas.idLinks = $(obj).attr("data-idLinks");
 					}
 
-					var t,n, i, sub, nomeMenu = "", confm = i3GEO.configura.oMenuData, ins = "", subs =
-						i3GEO.configura.oMenuData.submenus, onde;
+					var f = i3GEO.guias.CONFIGURA.ferramentas,
+						confm = i3GEO.listaDeFerramentas,
+						subs = i3GEO.listaDeFerramentas.submenus,
+						ondeFolder = $( "#" + f.idLista ),
+						ondeLinks = $( "#" + f.idLinks ),
+						template1 = $($(ondeFolder).attr("data-template")).html(),
+						template2 = $($("#" + f.idMigalha).attr("data-template")).html(),
+						template3 = $($(ondeLinks).attr("data-template")).html(),
+						migalha;
+					//mostra a janela
+					//i3GEO.guias.mostra("ferramentas");
 
-					n = confm.menu.length;
-					onde = $( "#listaFerramentas" );
-
-					for (i = 0; i < n; i += 1) {
+					//indica que a janela esta aberta
+					f.status = true;
+					//constroi o texto da migalha com evento click
+					migalha = function (data){
 						var t = Mustache.to_html(
-							i3GEO.guias.CONFIGURA.ferramentas.template1,
-							{"nome":confm.menu[i].nome}
+							template2,
+							{"nome":data.nome}
 						);
-						t = $(t);
+						$("#" + f.idMigalha)
+						.data(data)
+						.html(t)
+						.click(function(event){
+							event.stopImmediatePropagation();
+							$("#" + f.idMigalha).off("click");
+							var data = $(this).data();
+							if((data.nivel - 1) == 0){
+								ondeFolder.fadeOut( "fast", function(){nivel0();ondeFolder.show();});
+							}
+							if((data.nivel - 1) == 1){
+								ondeFolder.fadeOut( "fast", function(){nivel1(data);ondeFolder.show();});
+							}
+							if((data.nivel - 1) == 2){
+								ondeFolder.fadeOut( "fast", function(){nivel2(data);ondeFolder.show();});
+							}
+						});
+					};
+					//monta o nivel 0
+					var nivel0 = function(){
+						var menu = confm.menu,
+							n = menu.length,
+							i,t,data;
 
-						t.find(".list-group-item-text")
-							.data({"nivel":0,"nome":confm.menu[i].nome,"id":confm.menu[i].id})
-							.click(function(){
-								var t = Mustache.to_html(
-										i3GEO.guias.CONFIGURA.ferramentas.template2,
-										$(this).data()
-									);
-								$("#migalhaFerramentas").html(t);
-							});
+						$("#" + f.idMigalha).html("&nbsp;");
+						ondeFolder.html("");
+						ondeLinks.html("");
+						for (i = 0; i < n; i += 1) {
+							if(subs[menu[i].id].length > 0){
+								t = Mustache.to_html(
+									template1,
+									{"nome":menu[i].nome,"descricao":menu[i].descricao}
+								);
+								t = $(t);
+								//quando clica, abre o nivel 1 e muda a migalha
+								data = {"nivel":1,"nome":menu[i].nome,"id":i,"n0": i, "n1":"", "n2": "", "n3": ""};
+								t.find("a")
+									.data(data)
+									.click(function(){
+										$(this).find("a").off("click");
+										var data = $(this).data();
+										//texto da migalha e evento click
+										ondeFolder.fadeOut( "fast", function(){
+											nivel1(data);
+											ondeFolder.show();
+										});
+									});
+								ondeFolder
+								.append(t);
+							}
+						}
+					};
+					//monta o nivel 1
+					var nivel1 = function(data){
+						var menu = confm.submenus[confm.menu[data.n0].id],
+							n = menu.length,
+							i,t,datan;
 
-						onde
-						.append(t);
-					}
-					//$( "#listaFerramentas" ).append(ins);
-
-					/*
-					for (nomeMenu in subs) {
-						if ($i("menulista_" + nomeMenu)) {
-							sub = subs[nomeMenu];
-							n = sub.length;
-							ins = "";
-							for (i = 0; i < n; i++) {
-								ins += "<p class='listaMenuItem' ><a href='" + sub[i].url + "' target='_self'>" + sub[i].text + "</a>";
-							}
-							$i("menulista_" + nomeMenu).innerHTML += ins;
-						}
-					}
-					*/
-				}
-			}
-		},
-		/**
-		 * Propriedade: ORDEM
-		 *
-		 * Ordem de inclus&atilde;o das guias no mapa. Essa op&ccedil;&atilde;o &eacute; mais &uacute;til no caso do tipo sanfona, pois
-		 * nesse caso, a primeira guia &eacute; sempre a que fica ativa. Se esse parametro for uma string vazia, a ordem utilizada
-		 * ser&aacute; a ordem existente em i3GEO.guias.CONFIGURA.
-		 *
-		 * Ao ser definida, apenas as guias indicadas no array ser&atilde;o inclu&iacute;das
-		 *
-		 * Exemplo:
-		 *
-		 * i3GEO.guias.ORDEM = ["temas","adiciona","legenda"];
-		 *
-		 * Tipo:
-		 *
-		 * {array}
-		 */
-		ORDEM : "",
-		/**
-		 * Propriedade: TIPO
-		 *
-		 * Tipo de guia
-		 *
-		 * Quando TIPO = "movel", a inicializa&ccedil;&atilde;o da guia &eacute; feita em i3GEO.inicia Isso &eacute; ne cess&aacute;rio pq a
-		 * guia m&oacute;vel s&oacute; pode ser criada ap&oacute;s o posicionamento do corpo do mapa
-		 *
-		 * Tipo:
-		 *
-		 * {string}
-		 *
-		 * Default:
-		 *
-		 * guia
-		 *
-		 * Values:
-		 *
-		 * guia|sanfona|tablet|movel
-		 */
-		TIPO : "guia",
-		/**
-		 * Propriedade: idguias
-		 *
-		 * ID do elemento DOM, criado pelo YUI, onde ser&atilde;o inseridas as guias
-		 *
-		 * Tipo:
-		 *
-		 * {String}
-		 *
-		 * Default:
-		 *
-		 * guiasYUI
-		 */
-		IDGUIAS : "guiasYUI",
-		/**
-		 * Function: cria
-		 *
-		 * Cria as guias com base na vari&aacute;vel i3GEO.guias.CONFIGURA
-		 *
-		 * As guias podem ser definidas no HTML do mapa, sem necessariamente estarem na vari&aacute;vel configura.<b> As guias, nesse caso,
-		 * devem ter como ID "guia'n'", por exemplo id="guia6". Para cada uma dessas guias deve haver um DIV com o conte&uacute;do. Esse DIV
-		 * deve ter como ID "guia'n'obj", por exemplo id="guia6obj". No caso de ser utilizado a guia m&oacute;vel, com i3GEO.guias.TIPO =
-		 * "movel" , "guia'n" n&atilde;o &eacute; necess&aacute;rio, uma vez que s&atilde;o utilizados os &iacute;cones definidos em
-		 * i3GEO.guias.CONFIGURA
-		 *
-		 * Parametro:
-		 *
-		 * {String} - id do elemento que conter&aacute; as guias
-		 */
-		cria : function(onde) {
-			//
-			// obt&eacute;m outras guias que podem existir no mapa
-			//
-			var nguiasreal = 0, guiaconteudo, id, guia, g, re, ng, tituloguia, i, ins, altura, temp, CONFIGURA = i3GEO.guias.CONFIGURA, guias =
-				i3GEO.util.listaChaves(CONFIGURA), nguias = guias.length;
-
-			//roda a funcao de inicializacao se existir
-			for (ng = 0; ng < 20; ng++) {
-				if(i3GEO.guias.CONFIGURA[guias[ng]] && i3GEO.guias.CONFIGURA[guias[ng]].inicializa){
-					i3GEO.guias.CONFIGURA[guias[ng]].inicializa.call();
-				}
-			}
-			//
-			// no caso de TIPO === "movel", as guias n&atilde;o s&atilde;o
-			// constru&iacute;das de imediato, apenas &eacute; criado um objeto
-			// com os par&acirc;metros necess&aacute;rios para a
-			// cria&ccedil;&atilde;o das guias
-			//
-			if (i3GEO.guias.TIPO === "movel") {
-				i3GEO.guias.IDGUIAS = "i3GEOguiaMovelConteudo";
-				for (ng = 0; ng < 20; ng++) {
-					// icones sem conteudo devem ter um div com id com prefixo "iconeGuia_"
-					if (i3GEO.guias.CONFIGURA[guias[ng]] && ($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo) || $i("iconeGuia_" + guias[ng]))) {
-						i3GEO.guias.guiaMovel.config.guias.ids.push(i3GEO.guias.CONFIGURA[guias[ng]].id);
-						i3GEO.guias.guiaMovel.config.guias.idsconteudos.push(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo);
-						if (i3GEO.guias.CONFIGURA[guias[ng]].icone !== undefined) {
-							i3GEO.guias.guiaMovel.config.guias.icones.push(i3GEO.guias.CONFIGURA[guias[ng]].icone);
-						} else {
-							i3GEO.guias.guiaMovel.config.guias.icones.push("imagens/gisicons/open1.png");
-						}
-						i3GEO.guias.guiaMovel.config.guias.titulos.push(i3GEO.guias.CONFIGURA[guias[ng]].titulo);
-						i3GEO.guias.guiaMovel.config.guias.chaves.push(guias[ng]);
-					}
-				}
-				return;
-			}
-			try {
-				for (g = 0; g < 12; g++) {
-					tituloguia = "";
-					if ($i("guia" + g)) {
-						tituloguia = $i("guia" + g).innerHTML;
-						re = new RegExp("&nbsp;", "g");
-						tituloguia = tituloguia.replace(re, '');
-						for (ng = 0; ng < nguias; ng++) {
-							if (CONFIGURA[guias[ng]].id === "guia" + g) {
-								tituloguia = "";
-							}
-						}
-						if (tituloguia !== "") {
-							i3GEO.guias.CONFIGURA["guia" + g] = [];
-							i3GEO.guias.CONFIGURA["guia" + g].titulo = tituloguia;
-							i3GEO.guias.CONFIGURA["guia" + g].id = "guia" + g;
-							i3GEO.guias.CONFIGURA["guia" + g].idconteudo = "guia" + g + "obj";
-							if ($i('guia' + g).onclick) {
-								i3GEO.guias.CONFIGURA["guia" + g].click = $i("guia" + g).onclick;
-							}
-						}
-					}
-				}
-				if (i3GEO.guias.ORDEM === "") {
-					guias = i3GEO.util.listaChaves(CONFIGURA);
-				} else {
-					guias = i3GEO.guias.ORDEM;
-				}
-				nguias = guias.length;
-				//
-				// verifica o div que cont&eacute;m as guias caso n&atilde;o
-				// tenha
-				// sido passado como parametro
-				//
-				if (arguments.length === 0) {
-					for (ng = 0; ng < nguias; ng++) {
-						if (i3GEO.guias.CONFIGURA[guias[ng]]) {
-							i = $i(i3GEO.guias.CONFIGURA[guias[ng]].id);
-							if (i) {
-								onde = i.parentNode;
-							}
-						}
-					}
-				} else {
-					onde = $i(onde);
-				}
-				if (!onde) {
-					return;
-				}
-				onde.id = i3GEO.guias.IDGUIAS;
-				onde.className = "yui-navset";
-				//
-				// constroi as TAGs para as guias
-				//
-				if (i3GEO.guias.TIPO === "guia") {
-					ins =
-						'<ul class="yui-nav" style="border-width:0pt 0pt 0px;border-color:rgb(240,240,240);border-bottom-color:white;text-align:center;">';
-					for (ng = 0; ng < nguias; ng++) {
-						if ($i(i3GEO.guias.CONFIGURA[guias[ng]].id)) {
-							if ($i(i3GEO.guias.CONFIGURA[guias[ng]].idconteudo)) {
-								ins +=
-									'<li><a alt="" title=""><em><div id="' + i3GEO.guias.CONFIGURA[guias[ng]].id
-									+ '" >'
-									+ i3GEO.guias.CONFIGURA[guias[ng]].titulo
-									+ '</div></em></a></li>';
-							}
-						}
-					}
-					// adiciona uma guia que permite esconder todas as outras
-					// guias
-					// se for do tipo tablet
-					ins += "</ul>";
-					onde.innerHTML = ins;
-				}
-				for (g = 0; g < nguias; g++) {
-					guia = i3GEO.guias.CONFIGURA[guias[g]];
-					id = guia.id;
-					guiaconteudo = $i(id);
-					if (guiaconteudo) {
-						if (guia.click === "" || guia.click === undefined) {
-							eval('$i("' + id + '").onclick = function(event){i3GEO.guias.mostra("' + guias[g] + '");}');
-						} else {
-							guiaconteudo.onclick = guia.click;
-						}
-						temp = $i(guia.idconteudo);
-						if (temp) {
-							temp.style.overflow = "auto";
-							if (i3GEO.guias.TIPO === "guia") {
-								if (i3GEO.guias.ALTURACORPOGUIAS === 0) {
-									temp.style.height = i3GEO.parametros.h + "px";
-								} else {
-									temp.style.height = i3GEO.guias.ALTURACORPOGUIAS + "px";
-								}
+						ondeFolder.html("");
+						ondeLinks.html("");
+						for (i = 0; i < n; i += 1) {
+							datan = {"nivel":2,"nome":menu[i].text,"id":menu[i].id,"n0": data.n0, "n1":i, "n2": "", "n3": ""};
+							if(menu[i].url){
+								t = Mustache.to_html(
+									template3,
+									{"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url}
+								);
+								t = $(t);
+								ondeLinks
+								.append(t);
 							} else {
-								temp.style.height = onde.style.height;
+								t = Mustache.to_html(
+									template1,
+									{"nome":menu[i].text}
+								);
+								t = $(t);
+								t.find("a")
+									.data(datan)
+									.click(function(){
+										$(this).find("a").off("click");
+										var data = $(this).data();
+										var t = Mustache.to_html(
+												template2,
+												data
+											);
+										//texto da migalha e evento click
+										//nivel2(data);
+										ondeFolder.fadeOut( "fast", function(){nivel2(data);ondeFolder.show();});
+									});
+								ondeFolder
+								.append(t);
 							}
 						}
-					}
+						data.nivel = 1;
+						data.nome = confm.menu[data.id].nome;
+						data.n0 = data.id;
+						migalha(data);
+					};
+					var nivel2 = function(data){
+						var menu = confm.submenus[confm.menu[data.n0].id][data.n1].submenu.itemdata[0],
+							n = menu.length,
+							i,t,datan;
+
+						ondeFolder.html("");
+						ondeLinks.html("");
+						for (i = 0; i < n; i += 1) {
+							datan = {"nivel":3,"nome":menu[i].text,"id":menu[i].id,"n0": data.n0, "n1":data.n1, "n2": i, "n3": ""};
+							if(menu[i].url){
+								t = Mustache.to_html(
+									template3,
+									{"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url}
+								);
+								t = $(t);
+								ondeLinks
+								.append(t);
+							} else {
+								t = Mustache.to_html(
+									template1,
+									{"nome":menu[i].text}
+								);
+								t = $(t);
+								t.find("a")
+									.data(datan)
+									.click(function(){
+										$(this).find("a").off("click");
+										var data = $(this).data();
+										var t = Mustache.to_html(
+												template2,
+												data
+											);
+									});
+								ondeFolder
+								.append(t);
+							}
+						}
+						data.nivel = 2;
+						data.id = data.n0;
+						migalha(data);
+					};
+					nivel0();
 				}
-			} catch (e) {
 			}
-
-			i3GEO.guias.mostra(i3GEO.guias.ATUAL);
-			i3GEO.guias.ativa(i3GEO.guias.ATUAL);
-
 		},
 		/**
 		 * Ajusta a altura das guias conforme a altura da imagem do mapa
 		 */
 		ajustaAltura : function() {
+			if (typeof (console) !== 'undefined')
+				console.info("guias.ajustaAltura");
+
 			var guia, guias, nguias, temp, temps, n, i, g, altura = 0;
-			if (i3GEO.guias.ALTURACORPOGUIAS != 0) {
-				altura = i3GEO.guias.ALTURACORPOGUIAS;
-			}
 			guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 			nguias = guias.length;
 			for (g = 0; g < nguias; g++) {
 				guia = $i(this.CONFIGURA[guias[g]].idconteudo);
 				if (guia) {
 					guia.style.overflow = "auto";
-					if (this.TIPO === "guia") {
-						if (altura === 0) {
-							guia.style.height = i3GEO.parametros.h + "px";
-						} else {
-							guia.style.height = altura + "px";
-						}
-
-					}
-					if (this.TIPO === "sanfona") {
-						guia.style.height = altura + "px";
-						temp = $i("guiasYUI");
-						if (temp) {
-							temp.style.height = altura + "px";
-							temps = temp.getElementsByTagName("dd");
-							n = temps.length;
-							for (i = 0; i < n; i++) {
-								if (temps[i].style.visibility == "visible") {
-									temps[i].style.height = altura + "px";
-								}
-							}
-						}
-						YAHOO.lutsr.accordion.properties.altura = altura;
+					if (!guia.style.height) {
+						guia.style.height = i3GEO.parametros.h + "px";
 					}
 				}
 			}
@@ -774,18 +697,16 @@ i3GEO.guias =
 		 * Esconde todas as guias
 		 */
 		escondeGuias : function() {
+			if (typeof (console) !== 'undefined')
+				console.info("guias.escondeGuias");
+
 			var guias, nguias, g, temp, attributes, anim;
 			guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 			nguias = guias.length;
 			for (g = 0; g < nguias; g++) {
 				temp = $i(this.CONFIGURA[guias[g]].idconteudo);
 				if (temp) {
-
 					temp.style.display = "none";
-
-				}
-				if ($i(this.CONFIGURA[guias[g]].id) && i3GEO.guias.TIPO !== "movel") {
-					$i(this.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background = "transparent";
 				}
 			}
 		},
@@ -797,6 +718,9 @@ i3GEO.guias =
 		 * {String} - nome da guia
 		 */
 		mostra : function(guia) {
+			if (typeof (console) !== 'undefined')
+				console.info("guias.mostra");
+
 			// fecha o streetview
 			if (i3GEO.Interface.ATUAL === "googlemaps") {
 				if(typeof i3GeoMap.getStreetView != "undefined"){
@@ -806,454 +730,94 @@ i3GEO.guias =
 			var guias, nguias, g, temp, attributes, anim;
 			guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
 			nguias = guias.length;
-			if (!$i(i3GEO.guias.CONFIGURA[guia].id)) {
-				return;
-			}
 			if (!$i(i3GEO.guias.CONFIGURA[guia].idconteudo)) {
 				return;
-			}
-			if (i3GEO.guias.TIPO !== "movel") {
-				for (g = 0; g < nguias; g++) {
-					if ($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo)) {
-						$i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style.display = "none";
-					}
-					if ($i(i3GEO.guias.CONFIGURA[guias[g]].id)) {
-						$i(i3GEO.guias.CONFIGURA[guias[g]].id).parentNode.parentNode.style.background = "transparent";
-					}
-				}
-			}
-			//
-			// verifica se o nome da guia passado como parametro est&aacute;
-			// correto
-			// ou &eacute; o id da guia
-			//
-			if (i3GEO.guias.CONFIGURA.toString().search(guia) < 0) {
-				for (g = 0; g < nguias; g++) {
-					if (i3GEO.guias.CONFIGURA[guias[g]].id === guia) {
-						guia = guias[g];
-					}
-				}
 			}
 			if (i3GEO.guias.CONFIGURA[guia]) {
 				temp = $i(i3GEO.guias.CONFIGURA[guia].idconteudo);
 				if (temp) {
 					temp.style.display = "block";
-					if (i3GEO.guias.TIPO !== "movel") {
-						$i(i3GEO.guias.CONFIGURA[guia].id).parentNode.parentNode.style.backgroundColor = "white";
-					}
-					i3GEO.guias.ATUAL = guia;
 				}
 			}
 		},
 		/**
-		 * Function: ativa
+		 * Function: inicia
 		 *
-		 * Ativa uma determinada guia
+		 * Inicializa a guia m&oacute;vel
+		 */
+		inicia : function() {
+			if (typeof (console) !== 'undefined')
+				console.info("guias.inicia");
+
+			if($i("i3GEOguiaMovel")){
+				i3GEO.guias.LARGURAGUIAMOVEL = parseInt($("#i3GEOguiaMovel").css("width"),10);
+			}
+			if(!$i("i3GEOguiaMovelMolde").style.height){
+				$("#i3GEOguiaMovelMolde,#i3GEOguiaMovelConteudo").css("height",i3GEO.parametros.h + "px");
+			}
+		},
+		/**
+		 * Ativa o conte&uacute;do de determinada guia
 		 *
 		 * Parametro:
 		 *
-		 * {String} - guia que ser&aacute; ativada
+		 * chave {string} - c&oacute;digo da guia, definido em i3GEO.guias.CONFIGURA
 		 */
-		ativa : function(guia) {
-			try {
-				i3GEO.guias.ATUAL = guia;
-				if (i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click !== "") {
-					i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].click.call();
-				}
-			} catch (e) {
+		ativa : function(chave,obj) {
+			if (typeof (console) !== 'undefined')
+				console.info("guias.ativa");
+
+			// nao tem conteudo para mostrar
+			var f="" ;
+			if (!$i(i3GEO.guias.CONFIGURA[chave].idconteudo)) {
+				f = i3GEO.guias.CONFIGURA[chave].click.apply(f,[obj]);
+				return;
 			}
+			i3GEO.guias.escondeGuias();
+			i3GEO.guias.abreFecha("abre");
+			if (i3GEO.guias.CONFIGURA[chave].click) {
+				f = i3GEO.guias.CONFIGURA[chave].click.apply(f,[obj]);
+			}
+			i3GEO.guias.mostra(chave);
 		},
 		/**
-		 * Libera as guias do local atual, colocando-as em uma janela flutuante sobre o mapa.
+		 * Function: abreFecha
+		 *
+		 * Abre ou fecha a guia m&oacute;vel
 		 */
-		libera : function() {
-			if (!$i("conteudojanelaguias")) {
-				var i, w, pos, a, l, temp;
-				$i(i3GEO.Interface.IDCORPO).style.left = "0px";
-				if ($i(this.IDGUIAS)) {
-					$i(this.IDGUIAS).style.display = "none";
+		abreFecha : function(forca) {
+			if (typeof (console) !== 'undefined')
+				console.info("guias.abreFecha");
+
+			var molde = $("#i3GEOguiaMovelMolde");
+			if (!forca) {
+				if (parseInt(molde.css("width"),10) <= 10) {
+					forca = "abre";
+				} else {
+					forca = "fecha";
 				}
-				i = $i("contemFerramentas");
-				// if(i)
-				// {i.style.display = "none";}
-				w = parseInt($i("contemFerramentas").style.width, 10);
-				$i("contemFerramentas").style.width = "0px";
-				// visual foi depreciado na 4.7
-				// i = $i("visual");
-				// if (i)
-				// {i.style.width="0px";i.innerHTML="";}
-				pos = "px";
-				a = i3GEO.parametros.h;
-				l = i3GEO.parametros.w + w;
-				i3GEO.parametros.h = a;
-				i3GEO.parametros.w = l;
-				// if (navm)
-				// {pos = "";}
-				i = $i(i3GEO.Interface.IDCORPO);
-				if (i) {
-					i.style.width = l + pos;
-					i.style.height = a + pos;
-				}
-				i = $i(i3GEO.Interface.IDMAPA);
-				if (i) {
-					i.style.width = l + pos;
-					i.style.height = a + pos;
-					i.style.clip = 'rect(' + 0 + " " + (l * 1 + 2) + " " + (a * 1 + 2) + " " + 0 + ')';
-				}
-				i = $i("mst");
-				if (i) {
-					i.style.width = l + 1 + pos;
-				}
-				i3GEO.mapa.ajustaPosicao();
-				temp =
-					function(retorno) {
-					// carrega janela
-					var novoel, temp, i, g, guias, nguias, janela;
-					novoel = document.createElement("div");
-					novoel.id = "janelaguias";
-					novoel.style.display = "block";
-					novoel.innerHTML =
-						'<div class="hd">Guias <div onclick ="i3GEO.janela.minimiza(\'conteudojanelaguias\')" id="janelaguias_minimizaCabecalho" class="container-minimiza" ></div></div><div class="bd" id="conteudojanelaguias_corpo" style=padding:0px ></div>';
-					temp = $i("i3geo") ? $i("i3geo").appendChild(novoel) : document.body.appendChild(novoel);
-					janela = new YAHOO.widget.Panel("janelaguias", {
-						width : "270px",
-						fixedcenter : true,
-						constraintoviewport : false,
-						underlay : "none",
-						close : false,
-						visible : true,
-						draggable : true,
-						modal : false,
-						iframe : true
-					});
-					YAHOO.i3GEO.janela.manager.register(janela);
-					janela.render();
-					janela.show();
-					janela.cfg.setProperty("y", 0);
-					i = $i(i3GEO.guias.IDGUIAS);
-					$i("conteudojanelaguias_corpo").appendChild(i);
-					i.style.borderLeft = "1px solid black";
-					i.style.borderRight = "1px solid black";
-					guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
-					nguias = guias.length;
-					for (g = 0; g < nguias; g++) {
-						if ($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo)) {
-							$i("conteudojanelaguias_corpo").appendChild($i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo));
-							temp = $i(i3GEO.guias.CONFIGURA[guias[g]].idconteudo).style;
-							temp.background = "white";
-							temp.border = "1px solid black";
-							temp.borderTop = "0px solid black";
-							temp.width = "270px";
-							temp.left = "-1px";
-							temp.height = i3GEO.parametros.h - 90 + "px";
-						}
-					}
-					i3GEO.atualiza("");
-					i.style.display = "block";
-					i.style.left = "-1px";
-					i.style.width = "270px";
-				};
-				i3GEO.php.mudatamanho(temp, a, l);
+			}
+			if (forca === "fecha") {// esconde
+				molde.animate(
+						{ "width": "-10px" },
+						"slow"
+				);
 			} else {
-				janela = YAHOO.i3GEO.janela.manager.find(id);
-				janela.show();
-				janela.bringToTop();
+				$("#i3GEOguiaMovelIcones,#i3GEOguiaMovelConteudo").css("display","block");
+				molde.css("display","block").animate(
+						{ "width": i3GEO.guias.LARGURAGUIAMOVEL + "px" },
+						"slow"
+				);
 			}
 		},
-		/**
-		 * Mostra uma determinada guia em uma janela do tipo ferramenta.
-		 *
-		 * As guias s&atilde;o constru&iacute;das pelo construtor da ferramenta
-		 *
-		 * Parametros:
-		 *
-		 * {String} - O elemento html cujo id for igual a guia+"obj" ter&aacute; seu estilo (display) definido como block, tornando-o
-		 * vis&iacute;vel
-		 *
-		 * {String} - Todos os elementos html que tiverem como id o namespace, seguindo por um n&uacute;mero e "obj", ter&atilde;o seu
-		 * estilo alterado para none, tornando-se invis&iacute;veis
-		 *
-		 */
 		mostraGuiaFerramenta : function(guia, namespace) {
-			var g;
+			var g, Dom = YAHOO.util.Dom;
 			if (!namespace) {
 				namespace = "guia";
 			}
 			for (g = 0; g < 12; g++) {
-				$("#" + namespace + g + "obj").css("display", "none");
+				Dom.setStyle(namespace + g + "obj", "display", "none");
 			}
-			$("#" + guia + "obj").css("display", "block");
-		},
-		/**
-		 * Function: ajustaGuiaFerramenta
-		 *
-		 * Ajusta as guias de uma janela para que sempre fiquem no topo da janela, aplicando o overflow ao conte&uacute;do das guias
-		 *
-		 * Deve ser utilizado pelas ferramentas ap&oacute;s a janela ter seu conte&uacute;do renderizado.
-		 *
-		 * Veja como exemplo a ferramenta tabela
-		 *
-		 * Paremeters:
-		 *
-		 * {string} - id da janela
-		 *
-		 * {string} - namespace da janela utilizado para definir os elementos DIV onde o conte&uacute;do &eacute; renderizado
-		 *
-		 */
-		ajustaGuiaFerramenta : function(idjanela, namespace) {
-			var c = $i(idjanela + "_corpo"), h, g, temp;
-
-			c.style.overflow = "unset";
-			c.style.overflow = "none";
-
-			h = c.style.height;
-			h = parseInt(h, 10) - 40 + "px";
-			for (g = 0; g < 12; g++) {
-				temp = $i(namespace + "guia" + g + "obj");
-				if (temp) {
-					temp.style.height = h;
-					temp.style.width = "100%";
-					temp.style.overflow = "auto";
-				}
-			}
-		},
-		/**
-		 * Section: guiaMovel
-		 *
-		 * Controla as guias do tipo "movel", que apresenta uma janela retr&aacute;til onde as op&ccedil;&otilde;es s&atilde;o mostradas
-		 */
-		guiaMovel : {
-			/**
-			 * Propriedade: ABERTA
-			 *
-			 * Indica se a guia inicializar&aacute; aberta
-			 *
-			 * Type:
-			 *
-			 * {boolean}
-			 *
-			 * Default:
-			 *
-			 * false
-			 */
-			ABERTA : false,
-			/**
-			 * Propriedade: config
-			 *
-			 * Define os valores de posicionamento dos elementos que comp&otilde;em a guia
-			 *
-			 * Default:
-			 *
-			 * (start code) i3GEO.guias.guiaMovel.config = { larguraPuxador : 50, alturaPuxador : 319, alturaGuiaMovel : 0, larguraGuiaMovel :
-			 * 320, topGuiaMovel : 0, guias : { icones : [], ids : [], idsconteudos : [], titulos : [], chaves : [] }, posicao : [ "c", "r" ] };
-			 * (end)
-			 */
-			config : {
-				larguraPuxador : 50,
-				alturaPuxador : 280,
-				alturaGuiaMovel : 0,
-				larguraGuiaMovel : 350,
-				topGuiaMovel : 0,
-				guias : {
-					icones : [],
-					ids : [],
-					idsconteudos : [],
-					titulos : [],
-					chaves : []
-				},
-				posicao : [
-				           "c", "r"
-				           ]
-			},
-			/**
-			 * Valor de posicionamento a esquerda, calculado na inicializa&ccedil;&atilde;o
-			 */
-			left : 0,
-			/**
-			 * Function: inicia
-			 *
-			 * Inicializa a guia m&oacute;vel
-			 */
-			inicia : function() {
-				var config = i3GEO.guias.guiaMovel.config, temp;
-
-				temp = $i("i3GEOguiaMovel");
-				if(temp){
-					i3GEO.guias.guiaMovel.config.larguraGuiaMovel = parseInt($("#i3GEOguiaMovel").css("width"),10);
-				}
-				if (i3GEO.guias.ALTURACORPOGUIAS === 0 && config.alturaGuiaMovel === 0) {
-					i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.parametros.h;
-				} else {
-					i3GEO.guias.guiaMovel.config.alturaGuiaMovel = i3GEO.guias.ALTURACORPOGUIAS;
-				}
-
-				$("#i3GEOguiaMovelMolde,#i3GEOguiaMovelConteudo").css("height",i3GEO.guias.guiaMovel.config.alturaGuiaMovel + "px");
-
-				i3GEO.guias.guiaMovel.mostraIcones();
-
-				if (i3GEO.guias.guiaMovel.ABERTA === true) {
-					i3GEO.guias.guiaMovel.ativa(i3GEO.guias.ATUAL);
-				}
-			},
-			/**
-			 * Mostra os &iacute;cones que acionam cada guia
-			 */
-			mostraIcones : function() {
-				if ($i("i3GEOguiaMovelIcones") && $i("i3GEOguiaMovelIcones").innerHTML != "") {
-					return;
-				}
-				var n = i3GEO.guias.guiaMovel.config.guias.icones.length, i, temp = i3GEO.guias.guiaMovel.config.guias, ins = "", ico;
-				if (i3GEO.guias.ORDEM !== "") {
-					temp.chaves = i3GEO.guias.ORDEM;
-				}
-				for (i = 0; i < n; i++) {
-					if (temp.chaves[i]) {
-						ico =
-							"<button title='" + temp.titulos[i]
-						+ "'  onclick='i3GEO.guias.guiaMovel.ativa(\""
-						+ temp.chaves[i]
-						+ "\")' class=iconeGuiaMovel ><img id='"
-						+ temp.ids[i]
-						+ "' src='"
-						+ i3GEO.configura.locaplic
-						+ "/"
-						+ temp.icones[i]
-						+ "' style='cursor:pointer;' /></button>";
-						// verifica se existe um id na interface
-						// se existir, o icone e inserido nesse id
-						if (!$i("iconeGuia_" + temp.chaves[i])) {
-							ins += ico;
-						} else {
-							$i("iconeGuia_" + temp.chaves[i]).innerHTML = ico;
-						}
-					}
-				}
-				if ($i("i3GEOguiaMovelIcones")) {
-					$i("i3GEOguiaMovelIcones").innerHTML = ins;
-				}
-				ins = "3px";
-				for (i = 0; i < n; i++) {
-					$("#"+temp.ids[i]).css("padding", ins);
-				}
-				if (i3GEO.guias.ATUAL != "") {
-					ico = $i(i3GEO.guias.CONFIGURA[i3GEO.guias.ATUAL].id);
-					if (ico) {
-						ico.parentNode.style.boxShadow = "none";
-					}
-				}
-			},
-			/**
-			 * Altera a cor do fundo dos &iacute;cones, voltando ao original
-			 */
-			desativaIcones : function(o) {
-				var ims, n, i, temp;
-				if (!o) {
-					o = 0.9;
-				}
-				ims = $i("i3GEOguiaMovelIcones");
-				if (ims) {
-					ims = ims.getElementsByTagName("button");
-					n = ims.length;
-					for (i = 0; i < n; i++) {
-						ims[i].style.boxShadow = "none";
-					}
-				}
-				// verifica se existem icones fora do container
-				n = i3GEO.guias.guiaMovel.config.guias.icones.length;
-				temp = i3GEO.guias.guiaMovel.config.guias;
-				for (i = 0; i < n; i++) {
-					if ($i("iconeGuia_" + temp.chaves[i])) {
-						ims = $i("iconeGuia_" + temp.chaves[i]).getElementsByTagName("button");
-						if (ims.length > 0) {
-							//ims[0].style.backgroundColor = "white";
-							ims[0].style.boxShadow = "none";
-							ims[0].style.margin = "0px";
-							ims[0].style.border = "1px solid gray";
-							if (i3GEO.guias.guiaMovel.config.posicao[1] === "l") {
-								ims[0].style.borderLeft = "2px solid white";
-							} else {
-								ims[0].style.borderRight = "2px solid white";
-							}
-							ims[0].blur();
-						}
-					}
-				}
-			},
-			/**
-			 * Ativa o conte&uacute;do de determinada guia
-			 *
-			 * Parametro:
-			 *
-			 * chave {string} - c&oacute;digo da guia, definido em i3GEO.guias.CONFIGURA
-			 */
-			ativa : function(chave) {
-				if (chave === "") {
-					return;
-				}
-				// nao tem conteudo para mostrar
-				if (!$i(i3GEO.guias.CONFIGURA[chave].idconteudo)) {
-					i3GEO.guias.CONFIGURA[chave].click.call();
-					return;
-				}
-				i3GEO.guias.escondeGuias();
-				//i3GEO.guias.guiaMovel.desativaIcones(0.5);
-				if (i3GEO.guias.ATUAL === chave && parseInt($("#i3GEOguiaMovelMolde").css("width"),10) > 0) {
-					i3GEO.guias.ATUAL = "";
-					i3GEO.guias.guiaMovel.abreFecha("fecha");
-				} else {
-					i3GEO.guias.ATUAL = chave;
-					i3GEO.guias.guiaMovel.abreFecha("abre");
-					if (i3GEO.guias.CONFIGURA[chave].click) {
-						i3GEO.guias.CONFIGURA[chave].click.call();
-					}
-					i3GEO.guias.mostra(chave);
-					var ico = $i(i3GEO.guias.CONFIGURA[chave].id);
-					if (ico) {
-						ico.parentNode.blur();
-						ico.parentNode.style.boxShadow = "none";
-					}
-				}
-			},
-			/**
-			 * Reposiciona a guia m&oacute;vel quando o mapa muda de tamanho
-			 */
-			reposiciona : function() {
-				var temp = $i("i3GEOguiaMovel").style.top;
-				i3GEO.guias.guiaMovel.config.alturaGuiaMovel = 0;
-				i3GEO.guias.ALTURACORPOGUIAS = 0;
-				$("#i3GEOguiaMovelIcones,#i3GEOguiaMovelConteudo,#i3GEOguiaMovelMolde").css("display","none");
-				i3GEO.guias.escondeGuias();
-				i3GEO.guias.guiaMovel.inicia();
-				$("#i3GEOguiaMovel").css("top",temp);
-			},
-			/**
-			 * Function: abreFecha
-			 *
-			 * Abre ou fecha a guia m&oacute;vel
-			 */
-			abreFecha : function(forca) {
-				var molde = $("#i3GEOguiaMovelMolde");
-				// para efeitos de compatibilidade caso seja chamado com
-				// i3GEO.guias.guiaMovel.abreFecha()
-				if (!forca) {
-					if (parseInt(molde.css("width"),10) <= 10) {
-						forca = "abre";
-					} else {
-						forca = "fecha"
-					}
-				}
-				if (forca === "fecha") {// esconde
-					molde.animate(
-							{ "width": "-10px" },
-							"slow"
-					);
-				} else {
-					$("#i3GEOguiaMovelIcones,#i3GEOguiaMovelConteudo").css("display","block");
-					molde.css("display","block").animate(
-							{ "width": i3GEO.guias.guiaMovel.config.larguraGuiaMovel + "px" },
-							"slow"
-					);
-				}
-			}
+			Dom.setStyle(guia + "obj", "display", "block");
 		}
 };

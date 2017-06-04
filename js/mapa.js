@@ -190,9 +190,7 @@ i3GEO.mapa =
 				if (ativo === true) {
 					setTimeout(function() {
 						i3GEO.reCalculaTamanho();
-
-							i3GEO.guias.guiaMovel.reposiciona();
-							i3GEO.guias.guiaMovel.abreFecha("fecha");
+						i3GEO.guias.abreFecha("fecha");
 
 						i3GEO.mapa.reposicionaDobraPagina();
 

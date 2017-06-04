@@ -919,7 +919,7 @@ class Alteraclasse
 	*/
 	function alteracor($idclasse,$cor)
 	{
-		error_reporting(0);
+		//error_reporting(0);
 		if(!$this->layer){
 			return "erro";
 		}
@@ -948,7 +948,7 @@ class Alteraclasse
 	*/
 	function alterageometria($tipo)
 	{
-		error_reporting(0);
+		//error_reporting(0);
 		if(!$this->layer){
 			return "erro";
 		}

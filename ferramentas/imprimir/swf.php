@@ -5,7 +5,7 @@ include("../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),"",false);
 
 $_GET = array_merge($_GET,$_POST);
-error_reporting(0);
+//error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($_GET["g_sid"]))
 {session_id($_GET["g_sid"]);}
@@ -32,7 +32,7 @@ if (array_search( "MapScript", $exts) != TRUE)
 	{dl('php_mapscript.so');}
 }
 require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-error_reporting(0);
+//error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
 $legenda =$map->legend;

@@ -38,7 +38,7 @@ tipoxml - (opcional) quando definido como "kml" ser&aacute; inserido o cabe&cced
 
 idioma - pt|en|es
 */
-error_reporting(0);
+//error_reporting(0);
 include_once ("classesphp/carrega_ext.php");
 include_once ("classesphp/classe_menutemas.php");
 include_once ("ms_configura.php");

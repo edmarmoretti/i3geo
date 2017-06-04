@@ -10,7 +10,7 @@ if(isset($_GET["tipo"])){
 }
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-error_reporting(0);
+//error_reporting(0);
 session_name("i3GeoPHP");
 if(isset($_GET["g_sid"]) && $_GET["g_sid"] != ""){
 	session_id($_GET["g_sid"]);

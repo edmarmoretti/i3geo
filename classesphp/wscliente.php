@@ -52,6 +52,7 @@ include_once("lews/wms_functions.php");
 include_once(dirname(__FILE__)."/../pacotes/cpaint/cpaint2.inc.php");
 include_once("carrega_ext.php");
 include(dirname(__FILE__)."/../ms_configura.php");
+
 $cp = new cpaint();
 
 $onlineresource = $_GET["onlineresource"];
@@ -64,6 +65,7 @@ $rss = $_GET["rss"];
 //busca o getcapabilities de um wms
 //
 $funcao = $_GET["funcao"];
+
 if ($funcao == "getcapabilities")
 {
 	$cp->register('getcapabilities');
@@ -379,9 +381,7 @@ if ($funcao == "listaRSSws")
 {
 	$cp->register('listaRSSws');
 	$cp->start();
-	if(ob_get_contents ()){
-		ob_end_clean();
-	}
+	ob_clean;
 	$cp->return_data();
 	exit;
 }
@@ -493,6 +493,7 @@ Retorno:
 function listaRSSwsARRAY()
 {
 	global $cp,$rss,$locaplic,$tipo;
+
 	if(!isset($tipo)){$tipo = "GEORSS";}
 	include_once("$locaplic/classesphp/funcoes_gerais.php");
 	include_once("$locaplic/admin/php/xml.php");

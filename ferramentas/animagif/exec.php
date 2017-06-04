@@ -203,7 +203,7 @@ for ($i=0;$i < $numlayers;$i++){
 	if (!empty($postgis_mapa)){
 		if ($layern->connectiontype == MS_POSTGIS){
 			$lcon = $layern->connection;
-			error_reporting(0);
+			//error_reporting(0);
 			if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
 				if(($lcon == " ") || ($lcon == "")){
 					$layern->set("connection",$postgis_mapa);

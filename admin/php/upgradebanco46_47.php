@@ -75,7 +75,7 @@ else{
 		exit;
 	}
 }
-error_reporting(0);
+//error_reporting(0);
 //tabelas do controle de usuarios e sistema metaestat
 $tabelas = array(
 		"ALTER TABLE ".$esquemaadmin."i3geoadmin_mapas ADD mapfile TEXT",

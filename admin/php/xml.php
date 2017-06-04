@@ -60,9 +60,12 @@ Retorno:
 
 String na estrutura XML
 */
-function geraXmlSistemas($perfil,$locaplic,$editores)
+function geraXmlSistemas($perfil="",$locaplic="",$editores="")
 {
 	global $esquemaadmin;
+	if(empty($locaplic)){
+		return;
+	}
 	$editor = "nao";//verificaEditores($editores);
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
@@ -554,7 +557,7 @@ function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 function geraXmlAtlas($locaplic,$editores)
 {
 	global $esquemaadmin;
-	error_reporting(0);
+	//error_reporting(0);
 	$dbh = "";
 	include($locaplic."/admin/php/conexao.php");
 
@@ -633,7 +636,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores)
 			if($target == ""){$target = "_self";}
 			$xml .= "  <TARGET>".$target."</TARGET>\n";
 			$xml .= " </FUNCAO>\n";
-		}error_reporting(0);
+		}//error_reporting(0);
 	}
 	$xml .= "</SISTEMAS>\n";
 	$dbh = null;

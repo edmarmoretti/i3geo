@@ -392,38 +392,37 @@ Parametros:
 
 lista - lista com a nova ordem para os temas. A lista cont&eacute;m os nomes dos temas separados por v&iacute;rgula.
 */
-	function reordenatemas($lista)
-	{
+	function reordenatemas($lista){
+		//error_log("kkkk-------".$lista);
 		$nlayers = $this->mapa->numlayers;
 		$lista = explode(",",$lista);
 		$lista = array_reverse($lista);
 		$novaordem = array();
-		foreach ($lista as $l)
-		{
-			for ($i=0;$i<$nlayers;++$i)
-			{
+		foreach ($lista as $l){
+			for ($i=0;$i<$nlayers;++$i){
 				$la = $this->mapa->getlayer($i);
-				if($la->getmetadata("escondido") != "")
-				{
-					if (!in_array($la->index,$novaordem))
-					$novaordem[] = $i;
+				//$la->set("status",MS_DEFAULT);
+				if(strtolower($la->getmetadata("escondido")) == "sim")	{
+					if (!in_array($la->index,$novaordem)){
+						$novaordem[] = $i;
+						//error_log("-------xxx".$la->name);
+					}
 				}
-				else
-				{
+				else{
 					$g = strtoupper($la->group);
 					$n = strtoupper($la->name);
-					if ((strtoupper($l) == $n) || (strtoupper($l) == $g))
-					{$novaordem[] = $i;}
+					if ((strtoupper($l) == $n) || (strtoupper($l) == $g)){
+						$novaordem[] = $i;
+					}
 				}
 			}
 		}
-		for ($i=0;$i<$nlayers;++$i)
-		{
-			if (!in_array($i,$novaordem))
-			{$novaordem[] = $i;}
+		//acrescenta os layers que ficaram de fora
+		for ($i=0;$i<$nlayers;++$i){
+			if (!in_array($i,$novaordem)){
+				$novaordem[] = $i;
+			}
 		}
-		//echo "<pre>";
-		//var_dump($novaordem);
 		$this->mapa->setlayersdrawingorder($novaordem);
 		return "ok";
 	}

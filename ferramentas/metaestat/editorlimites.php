@@ -30,7 +30,7 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
  */
-error_reporting(0);
+//error_reporting(0);
 include_once(dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);

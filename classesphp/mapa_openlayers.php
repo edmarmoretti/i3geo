@@ -64,7 +64,7 @@ include("sani_request.php");
 if (!function_exists('ms_GetVersion')){
 	include_once ("carrega_ext.php");
 }
-error_reporting(0);
+//error_reporting(0);
 inicializa();
 //
 //calcula a extensao geografica com base no x,y,z
@@ -295,6 +295,10 @@ if(isset($_GET["map_size"])){
 
 if(isset($_GET["mapext"])){
 	$mapext = explode(" ",$_GET["mapext"]);
+	//para evitar erro quando o mapa e continuo
+	if($mapext[0] == $mapext[2] && $mapext[1] == $mapext[3]){
+		exit;
+	}
 	$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 }
 //

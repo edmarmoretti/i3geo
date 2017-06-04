@@ -1,4 +1,4 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>input{
+<?php //error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>input{
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 input[type=text], textarea, input[type=number]{

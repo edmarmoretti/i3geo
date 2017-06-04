@@ -27,25 +27,21 @@ if($tipo == "GM"){
 i3GEO.scrollerWidth = 0;
 
 i3GEO.configura.guardaExtensao = true;
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 
 i3GEO.configura.optUsuarioLogado = true;
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.barraDeBotoes.ATIVA = false;
-i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 i3GEO.ajuda.ATIVAJANELA = false;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = false;
+i3GEO.arvoreDeTemas.OPCOESADICIONAIS.inde = true;
+i3GEO.arvoreDeTemas.INCLUIINDIBR = true;
 i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = false;
 i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
 i3GEO.arvoreDeCamadas.MOSTRATITULO = false;
 i3GEO.mapa.AUTORESIZE = true;
-i3GEO.guias.TIPO = "movel";
-i3GEO.guias.guiaMovel.config.topGuiaMovel = 36;
 i3GEO.janela.ativaAlerta();
-i3GEO.finaliza = function() {
-	if ($i("i3GEOlogoMarca")) {
-		$i("i3GEOlogoMarca").style.display = "none";
-	}
+i3GEO.finalizaAPI = function() {
+
 };
 //indica se a opcao de navegacao nas pastas do servidor sera ativada
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;

@@ -58,7 +58,7 @@ cp.set_response_type("JSON")
 cp.call(p,"lente",ajaxabrelente)
 
 */
-error_reporting(0);
+//error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //

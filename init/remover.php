@@ -28,7 +28,7 @@ else{
 		exit;
 	}
 }
-error_reporting(0);
+//error_reporting(0);
 unlink("../index.htm");
 unlink("../index.html");
 if(file_exists("../index.htm") || file_exists("../index.html")){

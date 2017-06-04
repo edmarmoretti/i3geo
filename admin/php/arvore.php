@@ -73,7 +73,6 @@ if($idioma == "")
 	$idioma = "pt";
 }
 
-error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {

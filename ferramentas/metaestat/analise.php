@@ -37,13 +37,16 @@ O par&acirc;metro principal &eacute; "funcao", que define qual opera&ccedil;&ati
 
 Cada opera&ccedil;&atilde;o possu&iacute; seus pr�prios par&acirc;metros, que devem ser enviados tamb&eacute;m na requisi&ccedil;&atilde;o da opera&ccedil;&atilde;o.
 */
-error_reporting(0);
-/**
- * admin.php faz o include de classesphp/pega_variaveis.php
- * esse programa obtem os parametros passado pela URL e os transforma e variaveis do PHP
- */
-include(dirname(__FILE__)."/../../admin/php/admin.php");
-include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
+include(dirname(__FILE__)."/../../classesphp/sani_request.php");
+$_pg = array_merge($_GET,$_POST);
+$funcao = $_pg["funcao"];
+$g_sid = $_pg["g_sid"];
+
+if (empty($g_sid)){
+	exit;
+}
+include(dirname(__FILE__)."/../../classesphp/classe_metaestatinfo.php");
+
 session_name("i3GeoPHP");
 session_id($g_sid);
 session_start();
@@ -64,7 +67,6 @@ if(isset($fingerprint)){
 	}
 }
 $retorno = "";
-
 /**
  * A variavel $funcao define a rotina que sera executada
  * Cada rotina recebe parametros especificos
@@ -130,23 +132,35 @@ switch (strtoupper($funcao)){
 		$retorno = juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formulas);
 	break;
 	case "ADICIONALIMITEREGIAO":
-		if(empty($outlinecolor)){
-			$outlinecolor = "255,0,0";
+		if(empty($_pg["outlinecolor"])){
+			$_pg["outlinecolor"] = "255,0,0";
 		}
-		if(empty($width)){
-			$width = 1;
+		if(empty($_pg["width"])){
+			$_pg["width"] = 1;
 		}
-		if(empty($nomes)){
-			$nomes = "nao";
+		if(empty($_pg["nomes"])){
+			$_pg["nomes"] = "nao";
 		}
-		$retorno = adicionaLimiteRegiao($map_file,$codigo_tipo_regiao,$outlinecolor,$width,$nomes);
+		$retorno = adicionaLimiteRegiao($map_file,$_pg["codigo_tipo_regiao"],$_pg["outlinecolor"],$_pg["width"],$_pg["nomes"]);
 	break;
 }
-if (!connection_aborted()){
-	cpjson($retorno);
+retornaJSON($retorno);
+function retornaJSON($obj){
+	global $locaplic;
+	//if(function_exists("json_encode"))
+	//{echojson(json_encode($obj));}
+	//else
+	//{
+	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
+	//error_reporting(0);
+	ob_end_clean();
+	$j = new Services_JSON();
+	$texto = $j->encode($obj);
+	if (!mb_detect_encoding($texto,"UTF-8",true)){
+		$texto = utf8_encode($texto);
+	}
+	echo $texto;
 }
-else
-{exit();}
 /**
  * Obtem o id da medida da variavel armazenado em um mapfile da pasta i3geo/temas
  * @param unknown $idtema
@@ -174,8 +188,10 @@ function analise_pegaMetadadosMafile($idtema){
  */
 function adicionaLimiteRegiao($map_file,$codigo_tipo_regiao,$outlinecolor,$width,$nomes){
 	global $locaplic,$dir_tmp;
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
+
 	$res = $m->mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor,$width,$nomes,true);
+
 	$mapaNovo = ms_newMapObj($res["mapfile"]);
 	$layerNovo = $mapaNovo->getlayerbyname($res["layer"]);
 	$layerNovo->set("status",MS_DEFAULT);

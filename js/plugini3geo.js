@@ -357,7 +357,6 @@ i3GEO.pluginI3geo =
 				aplicaPropriedades : function(camada) {
 					camada.sel = "nao";
 					camada.download = "nao";
-					camada.AGUARDALEGENDA = false;
 					camada.temporizador = "";
 					camada.copia = false;
 					camada.procurar = false;
@@ -1097,7 +1096,7 @@ i3GEO.pluginI3geo =
 			//link na forma de texto para incluir no menu de contexto
 			clickArvoreDeCamadas : function(nomecamada) {
 				var icone =
-					"<a onclick='i3GEO.util.animaClique(this);"
+					"<p><a class='parametrossql buscaParForm' onclick='"
 						+ "i3GEO.pluginI3geo.parametrossql.buscaParForm(\""
 						+ nomecamada
 						+ "\");return false;'"

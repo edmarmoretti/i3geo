@@ -180,7 +180,7 @@ Retorno:
 */
 	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema="sim")
 	{
-		error_reporting(0);
+		//error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$this->removeToponimia();
 

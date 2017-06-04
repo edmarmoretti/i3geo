@@ -182,7 +182,7 @@ i3GEO.util =
 		},
 		generateId : function(pre){
 			if(!pre){
-				var pre = "UniqId";
+				pre = "UniqId";
 			}
 			return pre + String(Date.now())+Math.floor(Math.random()*10000);
 		},

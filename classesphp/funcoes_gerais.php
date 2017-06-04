@@ -406,10 +406,10 @@ function listaArquivos($diretorio,$seguro=false,$permitido=array("png","PNG","jp
 		{
 			if ($nd != "." && $nd != ".."){
 				$ext = explode(".",$nd);
-				if (count($ext)>1){
+				if (count($ext) == 2){
 					if($seguro == true){
 						$buscar = $ext[1];
-						//$permitido = array("png","PNG","jpg","JPG","tif","tiff","TIF","TIFF","shp","SHP","img");
+						$permitido = array("tif","tiff","TIF","TIFF","shp","SHP","img");
 						if(in_array($buscar,$permitido)){
 							$arqs[] = $nd;
 							$nomes[] = basename($nd);
@@ -429,7 +429,7 @@ function listaArquivos($diretorio,$seguro=false,$permitido=array("png","PNG","jp
 						$exts[] = $ext[1];
 					}
 				}
-				if (count($ext)==1){
+				if (count($ext)==1 && is_dir($diretorio."/".$nd)){
 					$dirs[] = $nd;
 				}
 			}
@@ -536,7 +536,7 @@ Retorno:
 */
 function substituiCon($map_file,$postgis_mapa)
 {
-	error_reporting(0);
+	//error_reporting(0);
 	if (!empty($postgis_mapa) && (file_exists($map_file)))
 	{
 		if(!@ms_newMapObj($map_file)){return false;}
@@ -571,7 +571,7 @@ function substituiCon($map_file,$postgis_mapa)
 	return true;
 }
 function substituiConObj($objMap,$postgis_mapa){
-	error_reporting(0);
+	//error_reporting(0);
 	if (!empty($postgis_mapa)){
 		$numlayers = $objMap->numlayers;
 		for ($i=0;$i < $numlayers;++$i)
@@ -2561,7 +2561,7 @@ $a {string}
 function echojson($a)
 {
 	//ob_clean();
-	error_reporting(0);
+	//error_reporting(0);
 	ob_end_clean();
 	//if(extension_loaded('zlib'))
 	//{ob_start('ob_gzhandler');}
@@ -2851,7 +2851,7 @@ $salva - salva o mapfile com os layers removidos ou nao
 Retorno: boolean indicando se o mapfile contem layers indevidos
 */
 function validaAcessoTemas($map_file,$salva = true){
-	error_reporting(0);
+	//error_reporting(0);
 	$indevidos = listaLayersIndevidos($map_file);
 	$existeIndevidos = false;
 	if(count($indevidos) > 0){
@@ -2884,7 +2884,7 @@ O retorno e um array com a chave sendo o codigo do tema e o valor um array com a
 function listaTemasRestritos(){
 	global $esquemaadmin;
 	include_once(dirname(__FILE__)."/../admin/php/admin.php");
-	error_reporting(0);
+	//error_reporting(0);
 	$res = pegaDados("select id_grupo,codigo_tema from ".$esquemaadmin."i3geousr_grupotema as gt,".$esquemaadmin."i3geoadmin_temas as te where gt.id_tema = te.id_tema");
 	$restritos = array();
 	foreach ($res as $r){
@@ -2903,7 +2903,7 @@ Function: listaLayersIndevidos
 Lista os layers de um mapfile que sao restritos e que nao sao permitidos ao usuario logado
 */
 function listaLayersIndevidos($map_file){
-	error_reporting(0);
+	//error_reporting(0);
 	$indevidos = array();
 	$restritos = listaTemasRestritos();
 	if(count($restritos) > 0){
@@ -2947,7 +2947,7 @@ Function: listaTemasIndevidos
 Lista os temas que sao restritos e que nao sao permitidos ao usuario logado
 */
 function listaTemasIndevidos(){
-	error_reporting(0);
+	//error_reporting(0);
 	$indevidos = array();
 	$restritos = listaTemasRestritos();
 	if(count($restritos) > 0){
@@ -2969,7 +2969,7 @@ Function: listaGruposUsrLogin
 Lista os grupos ao qual pertence o usuario atualmente logado
 */
 function listaGruposUsrLogin(){
-	error_reporting(0);
+	//error_reporting(0);
 	//echo $_COOKIE["i3geocodigologin"];exit;
 	if(empty($_COOKIE["i3geocodigologin"])){
 		return array();
@@ -3135,7 +3135,7 @@ function pegaDadosAdminKey($sql,$subsEsquema){
 	$resultado = array();
 	include(dirname(__FILE__)."/../admin/php/conexao.php");
 	$sql = str_replace($subsEsquema,$esquemaadmin,$sql);
-	error_reporting(0);
+	//error_reporting(0);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
 	if($q){
 		$resultado = $q->fetchAll( PDO::FETCH_GROUP| PDO::FETCH_UNIQUE);

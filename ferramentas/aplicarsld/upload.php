@@ -2,7 +2,7 @@
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-error_reporting(0);
+//error_reporting(0);
 $_GET = array_merge($_GET,$_POST);
 session_name("i3GeoPHP");
 if (isset($_GET["g_sid"]))

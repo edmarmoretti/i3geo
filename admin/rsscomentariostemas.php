@@ -37,7 +37,7 @@ Arquivo:
 i3geo/admin/rsscomentariostemas.php
 */
 
-error_reporting(0);
+//error_reporting(0);
 if(!isset($locaplic)){
 	include(dirname(__FILE__)."/../ms_configura.php");
 }

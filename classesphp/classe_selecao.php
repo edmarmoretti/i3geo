@@ -594,7 +594,7 @@ $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 		}
 		else
 		{
-			error_reporting(0);
+			//error_reporting(0);
 			$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 			$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$pt->x.",x_0=5000000,y_0=10000000");
 
@@ -664,6 +664,10 @@ Limpa a sele&ccedil;&atilde;o do tema.
 				if (file_exists($file)){
 					unlink ($file);
 				}
+				$file = dirname($this->arquivo)."/".$l->name."_qy.map";
+				if (file_exists($file)){
+					unlink ($file);
+				}
 			}
 			if (file_exists($this->qyfile)){
 				unlink ($this->qyfile);
@@ -719,7 +723,7 @@ $shpi - Indices dos registros novos.
 $shp_atual - Indices dos elementos j&aacute; selecionados.
 */
 	function selecaoAdiciona($shpi,$shp_atual){
-		error_reporting(0);
+		//error_reporting(0);
 		if(!$this->layer){
 			return "erro";
 		}
@@ -870,7 +874,7 @@ parameters:
 $tipo - Tipo de opera&ccedil;&atilde;o adiciona|retira|inverte|limpa|novo
 
 $ext - coordenadas separadas por espa&ccedil;os no estilo xmin ymin xmax ymax
- 
+
 $retornaShapes - retorna os shapes selecionados. Nesse caso, nao e gerado o arquivo em disco contendo a selecao
 */
 	function selecaoBOX($tipo,$ext,$retornaShapes=false)	{
@@ -922,7 +926,7 @@ $retornaShapes - retorna os shapes selecionados. Nesse caso, nao e gerado o arqu
 						}
 						else{
 							$shpi[] = $this->layer->getfeature($result->shapeindex,-1);
-						} 
+						}
 					}
 				}
 			}
@@ -986,7 +990,7 @@ $geos - array com os dados
 	$distancia - distancia em metros
 	*/
 	function projetaDistancia($shape,$distancia){
-		error_reporting(0);
+		//error_reporting(0);
 		$pt = $shape->getCentroid();
 		$projInObj = ms_newprojectionobj("proj=longlat,ellps=WGS84,datum=WGS84,no_defs");
 		$projOutObj = ms_newprojectionobj("proj=poly,ellps=GRS67,lat_0=0,lon_0=".$pt->x.",x_0=5000000,y_0=10000000");

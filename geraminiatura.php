@@ -66,7 +66,7 @@ tipo - tipo de imagem que ser&aacute; gerada mini|grande|todos
 
 
 //clearstatcache();
-error_reporting(0);
+//error_reporting(0);
 //set_time_limit(300);
 //ini_set('max_execution_time', 300);
 //
@@ -129,7 +129,7 @@ if($tipo == "mini" || $tipo == "todos" || $tipo == "grande" || $tipo == "")
 		}
 	}
 	if (ob_get_level() == 0) ob_start();
-	error_reporting(0);
+	//error_reporting(0);
 	$arqs = listaArquivos("temas");
 	$arqs = $arqs["arquivos"];
 	sort($arqs);

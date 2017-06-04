@@ -174,5 +174,10 @@ i3GEOadmin.core.dicionario = {
 		pt : "Hora",
 		en : "",
 		es : ""
+	} ],
+    'confirma' : [ {
+		pt : "As altera&ccedil;&otilde;es n&atilde;o poder&atilde;o ser revertidas. Continua?",
+		en : "",
+		es : ""
 	} ]
 };

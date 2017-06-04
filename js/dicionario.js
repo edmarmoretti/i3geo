@@ -330,8 +330,8 @@ var g_traducao =
 		],
 		"u15a" : [
 			{
-				pt : "Ferramentas",
-				en : "Tools",
+				pt : "Caixa de ferramentas",
+				en : "Tool Box",
 				es : "Herramientas"
 			}
 		],
@@ -1339,9 +1339,9 @@ var g_traducao =
 		],
 		"d21t" : [
 			{
-				pt : "dist&acirc;ncia",
-				en : "distance",
-				es : "distancia"
+				pt : "Dist&acirc;ncia",
+				en : "Distance",
+				es : "Distancia"
 			}
 		],
 		"d21a" : [
@@ -1353,9 +1353,9 @@ var g_traducao =
 		],
 		"d21at" : [
 			{
-				pt : "&aacute;rea",
-				en : "area",
-				es : "&aacute;rea"
+				pt : "&Aacute;rea",
+				en : "Area",
+				es : "&Aacute;rea"
 			}
 		],
 		"d22" : [
@@ -2768,6 +2768,104 @@ var g_traducao =
    		"ligaDesliga" : [
 			{
 				pt : "Liga/Desliga",
+				en : "",
+				es : ""
+			}
+		],
+   		"naoPublicado" : [
+  			{
+  				pt : "n&atilde;o publicado",
+  				en : "",
+  				es : ""
+  			}
+  		],
+   		"operacoesMapaTema" : [
+   			{
+   				pt : "Opera&ccedil;&otilde;es sobre o mapa ou tema",
+   				en : "",
+   				es : ""
+   			}
+   		],
+		"descMenuAjuda" : [
+			{
+				pt : "Documenta&ccedil;&atilde;o, redes sociais, tutoriais...",
+				en : "",
+				es : ""
+			}
+		],
+		"descMenuAnalise" : [
+			{
+				pt : "Dist&acirc;ncia, &aacute;rea, buffer, gr&aacute;ficos...",
+				en : "",
+				es : ""
+			}
+		],
+		"descArquivos" : [
+			{
+				pt : "Salvar e carregar mapfile, lista de mapas...",
+				en : "",
+				es : ""
+			}
+		],
+		"descOperacoesMapaTema" : [
+			{
+				pt : "Tabela, legenda, imprimir, uploda, navega&ccedil;&atilde;o...",
+				en : "",
+				es : ""
+			}
+		],
+		"descOgcWms" : [
+			{
+				pt : "Adiciona camada via servi&ccedil;o WMS",
+				en : "",
+				es : ""
+			}
+		],
+		"descLimLoc" : [
+			{
+				pt : "Regi&otilde;es cadastradas no sistema de metadados estat&iacute;sticos",
+				en : "",
+				es : ""
+			}
+		],
+		"descMeta" : [
+			{
+				pt : "Camadas baseadas no sistema de metadados estat&iacute;sticos",
+				en : "",
+				es : ""
+			}
+		],
+		"descMapas" : [
+			{
+				pt : "Mapas prontos para uso, com camadas j&aacute; selecionadas",
+				en : "",
+				es : ""
+			}
+		],
+		"descEstrelas" : [
+			{
+				pt : "Lista de camadas classificadas conforme o n&uacute;mero de acessos",
+				en : "",
+				es : ""
+			}
+		],
+		"descSistemas" : [
+			{
+				pt : "Sistemas com op&ccedil;&otilde;es espec&iacute;ficas e que permitem adicionar camadas ao mapa",
+				en : "",
+				es : ""
+			}
+		],
+		"descDir" : [
+			{
+				pt : "Diret&oacute;rio de arquivos shapefile",
+				en : "",
+				es : ""
+			}
+		],
+		"localiza" : [
+			{
+				pt : "Posi&ccedil;&atilde;o",
 				en : "",
 				es : ""
 			}

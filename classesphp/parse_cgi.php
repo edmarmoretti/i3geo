@@ -51,7 +51,7 @@ Exemplo:
 
 http://localhost/i3geo/classesphp/parse_cgi.php?g_sid=dgge4877dhhhgrjjey&map_size=500 500
 */
-error_reporting(0);
+//error_reporting(0);
 include_once (dirname(__FILE__)."/classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 include_once ("carrega_ext.php");

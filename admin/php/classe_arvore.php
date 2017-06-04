@@ -73,7 +73,7 @@ class Arvore
 		$this->locaplic = $locaplic;
 		$this->filtro = $filtro;
 		$dbh = "";
-		error_reporting(0);
+		//error_reporting(0);
 
 		include($locaplic."/admin/php/conexao.php");
 
@@ -415,6 +415,7 @@ class Arvore
 	function procuraTemasEstrela($nivel,$fatorestrela,$perfil)
 	{
 		$menus = $this->pegaListaDeMenus($perfil);
+
 		$resultado = array();
 		$subgrupo = array();
 		$final = array();
@@ -621,7 +622,7 @@ class Arvore
 
 	{array}
 	*/
-	function pegaTemasRaizGrupo($id_menu,$id_n1,$filtraOgc,$filtraDown)
+	function pegaTemasRaizGrupo($id_menu,$id_n1,$filtraOgc="nao",$filtraDown="nao")
 	{
 		$f = "";
 		if($filtraOgc == "sim" || $filtraDown == "sim"){
@@ -1249,21 +1250,25 @@ class Arvore
 		}
 	}
 	function verificaOperacaoSessao($operacao){
-		session_write_close();
-		session_name("i3GeoLogin");
-		session_id($_COOKIE["i3geocodigologin"]);
-		session_start();
-		$resultado = false;
-		//verifica se e administrador
-		foreach($_SESSION["papeis"] as $p){
-			if($p["id_papel"] == 1){
-				return true;
+		if($_COOKIE["i3geocodigologin"] != ""){
+			session_write_close();
+			session_name("i3GeoLogin");
+			session_id($_COOKIE["i3geocodigologin"]);
+			session_start();
+			$resultado = false;
+			//verifica se e administrador
+			foreach($_SESSION["papeis"] as $p){
+				if($p == 1){
+					return true;
+				}
 			}
+			if(!empty($_SESSION["operacoes"][$operacao])){
+				$resultado = true;
+			}
+			return $resultado;
+		} else {
+			return false;
 		}
-		if(!empty($_SESSION["operacoes"][$operacao])){
-			$resultado = true;
-		}
-		return $resultado;
 	}
 }
 ?>

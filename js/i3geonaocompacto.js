@@ -73,7 +73,7 @@ OpenLayers = {
 	"../pacotes/yui290/build/utilities/utilities.js",
 	"../pacotes/yui290/build/container/container_core.js",
 	"../pacotes/yui290/build/menu/menu-min.js",
-	"../pacotes/yui290/build/logger/logger-min.js",
+	//"../pacotes/yui290/build/logger/logger-min.js",
 	"../pacotes/yui290/build/dragdrop/dragdrop-min.js",
 	"../pacotes/yui290/build/slider/slider-min.js",
 	"../pacotes/yui290/build/animation/animation-min270.js", //a 290 nao funciona direito
@@ -92,6 +92,8 @@ OpenLayers = {
 	"../pacotes/mustache.js-master/mustache.js",
 	"../pacotes/jquery/dist/jquery.min.js",
 	"../pacotes/jquery/jquery-ui/jquery-ui.min.js",
+	"../pacotes/bootstrap/js/bootstrap.min.js",
+	"../pacotes/bootstrap-material-design/dist/js/material.min.js",
 	"ini_i3geo.js",
 	"util.js",
 	"dicionario.js",
@@ -118,11 +120,22 @@ OpenLayers = {
 	"gadgets.js",
 	"login.js",
 	"marcador.js",
-	"plugini3geo.js"
+	"plugini3geo.js",
+	"catalogoMenus.js",
+	"catalogoInde.js",
+	"catalogoOgc.js",
+	"catalogoRegioes.js",
+	"catalogoMetaestat.js",
+	"catalogoMapas.js",
+	"catalogoEstrelas.js",
+	"catalogoSistemas.js",
+	"catalogoDir.js",
+	"legenda.js"
 	);
+	var nocache = new Date().getTime();
 	for (i = 0; i < jsfiles.length; i++)
 	{
-		var currentScriptTag = "<script type='text/javascript' src='" + scriptLocation + jsfiles[i] + "'></script>";
+		var currentScriptTag = "<script type='text/javascript' src='" + scriptLocation + jsfiles[i] + "?" + nocache + "'></script>";
 		allScriptTags += currentScriptTag;
 	}
 	//css
@@ -147,9 +160,7 @@ OpenLayers = {
 	"../pacotes/yui290/build/progressbar/assets/skins/sam/progressbar.css",
 	"../css/corrigeyui_geral.css",
 	"../css/janelaflutuante.css",
-	"../mashups/openlayers.css",
-	"../pacotes/bootstrap/css/bootstrap.min.css",
-	"../pacotes/bootstrap-material-design/dist/css/bootstrap-material-design.min.css"
+	"../mashups/openlayers.css"
 	);
 	for (i = 0; i < cssfiles.length; i++)
 	{

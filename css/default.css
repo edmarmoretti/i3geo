@@ -1,0 +1,390 @@
+/*
+Para Bootstrap
+*/
+a, a:focus, a:hover {
+	color: #008579;
+}
+.alert.alert-warning {
+	background-color: #de3601;
+}
+.form-group.form-group-lg label.control-label {
+	color: #767676;
+}
+.form-group.form-group-lg .checkbox label, .form-group.form-group-lg .radio label,
+	.form-group.form-group-lg label {
+	color: #767676;
+}
+.label, label {
+	color: #767676;
+}
+
+h2 small {
+	color: #767676;
+}
+a .material-icons, a:focus .material-icons, a:hover .material-icons {
+	margin-top: 4px;
+}
+
+hr {
+	margin: 0px;
+}
+
+.list-group.condensed {
+	margin: 4px;
+}
+
+.radio span, label.radio-inline span {
+	top: 4px;
+}
+/*Caso a camada tenha selecat*/
+.camadaSelecionada {
+	color: #4bd5d5 !Important;
+}
+/**************************/
+#i3GEOguiaMovel {
+	position: absolute;
+	display: block;
+	border: 0px solid white;
+	text-align: left;
+	z-index: 20000;
+	left: auto;
+	right: 2px;
+	top: 5px;
+	width: 350px;
+}
+#i3GEOguiaMovelMolde {
+	background-color: white;
+	right:0px;
+	top: -5px;
+	box-shadow: 0 2px 10px 0 #888888;
+	position: absolute;
+	display: none;
+	border: 0px solid white;
+	text-align: left;
+	z-index: 10000;
+}
+#i3GEOguiaMovelConteudo {
+	width:345px;
+	top: 0px;
+	overflow: auto;
+	display: none;
+	position: absolute;
+	border-color: gray;
+	border-width: 0px 0 0px 0px;
+	left: 0px;
+	height: 0px;
+	padding-left: 4px;
+	background-color: white;
+}
+
+.nomeTema {
+	width: 265px;
+	vertical-align: middle;
+}
+/**************************/
+.i3GEOtemaComSel {
+	border-bottom: 1px solid cyan;
+}
+
+.i3GEOfechaGuia {
+	cursor: pointer;
+	left: 0px;
+	top: 0px;
+	width: 95%;
+	min-height: 30px;
+	text-align: right;
+	font-size: 14pt;
+	margin-bottom: 10px;
+	padding: 2px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+/*
+botoes da legenda
+*/
+#legendaOpcoes button, #legendaOpcoes .yui-button, #legendaOpcoes .yuimenu {
+	width: 250px;
+	color: black;
+	border-radius : 0px;
+}
+#legendaOpcoes a {
+	color: black;
+}
+#legendaOpcoes .yui-button {
+	background-image : none;
+	border-radius : 0px;
+}
+#legendaOpcoes .first-child{
+	border-radius : 0px;
+}
+
+.i3GEOcorpoLegi {
+	min-height:200px;
+}
+
+#corpoLegi {
+	overflow: hidden;
+}
+
+/*
+Botao de ligar desligar do tipo chave da legenda
+*/
+
+.i3GEOcorpoLegi .temaSwitch {
+  position: relative;
+  display: inline-block;
+  width: 30px;
+  height: 14px;
+}
+
+.i3GEOcorpoLegi .temaSwitch input {
+	display:none;
+}
+
+.i3GEOcorpoLegi .temaSlider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+}
+
+.i3GEOcorpoLegi .temaSlider:before {
+ position: absolute;
+  content: "";
+  height: 12px;
+  width: 12px;
+  left: 1px;
+  bottom: 1px;
+  background-color: white;
+  -webkit-box-shadow: -1px 1px 3px -0px rgba(0, 0, 0, 0.46);
+  -moz-box-shadow: -1px 1px 3px -0px rgba(0, 0, 0, 0.46);
+  box-shadow: -1px 1px 3px -0px rgba(0, 0, 0, 0.46);
+}
+
+.i3GEOcorpoLegi input:checked + .temaSlider {
+   background-color: rgb(177, 205, 205);
+}
+
+.i3GEOcorpoLegi input:focus + .temaSlider {
+  box-shadow: 0 0 1px rgb(224, 235, 235);
+}
+
+.i3GEOcorpoLegi input:checked + .temaSlider:before {
+  -webkit-transform: translateX(16px);
+  -ms-transform: translateX(16px);
+  transform: translateX(16px);
+}
+
+.i3GEOcorpoLegi .temaSlider.round {
+  border-radius: 34px;
+}
+
+.i3GEOcorpoLegi .temaSlider.round:before {
+  border-radius: 50%;
+}
+
+.legendaTema {
+    font-size: 12px;
+    text-align: left;
+}
+.legendaTema label {
+    margin-left: 0px;
+}
+.i3GEOLegendaExcluiTema {
+	display: inline;
+}
+
+/**/
+#i3GEOcopyright {
+	position: absolute;
+	left: 10px;
+	top: 5px;
+	display: block;
+}
+#buscaRapidaGuia {
+	margin: 5px;
+}
+#buscaRapidaGuia p {
+	font-size: 1.2em;
+    line-height: 1.2;
+    margin-top: 1em;
+}
+
+/*
+Barra de botoes de edicao vetorial do openlayers
+*/
+
+/*
+no caso do OL3
+*/
+.ol-overlaycontainer-stopevent .olControlEditingToolbar1  {
+	left: auto;
+	position: absolute;
+	right: 0;
+	top: 10px;
+}
+
+.ol-zoom {
+	top: 2.8em;
+}
+
+.ol-i3GEOcontrols {
+	top: 2.8em;
+	left: 3em;
+	width: auto;
+}
+
+.ol-touch .ol-zoomslider, .ol-zoomslider {
+	top: 8.2em;
+}
+
+.ol-scale-line {
+	bottom: 2em;
+}
+
+.olControlEditingToolbar1 div {
+	background-image: url(../mashups/openlayers.png);
+	background-repeat: no-repeat;
+	float: right;
+	right: 50px;
+	height: 29px;
+	margin: 2px;
+	width: 29px;
+	cursor: pointer;
+	top: 30px;
+}
+
+/*
+Configuracoes especificas dos elementos que ficam no rodape
+*/
+#seletorIdiomas {
+	float: right;
+}
+
+#escala {
+	width: 100px;
+	left: 7px;
+	text-align: left;
+	position: absolute;
+	bottom: 0px;
+	display: block;
+}
+#escala td {
+	float: left;
+}
+#escala span {
+	border: 0px solid white;
+}
+#escala input {
+	background: rgba(0, 60, 136, 0.5);
+	color: white;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 1em;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+	text-align: center;
+	height: 1.8em;
+}
+#i3GEOcompartilhar {
+	border: 0px solid white;
+	z-index: 20000;
+}
+#i3GEOcompartilhar td {
+	background: rgba(0, 60, 136, 0.5);
+}
+.i3GeoMascaraCoord {
+	width: 100%;
+}
+.i3GeoMascaraCoord td {
+	background: rgba(0, 60, 136, 0.5);
+	color: white;
+}
+.i3GeoMascaraCoord input {
+	background: rgba(0, 60, 136, 0.5);
+	color: white;
+	font-family: Verdana,Arial,Helvetica,sans-serif;
+	font-size: 1em;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+}
+.i3GeoMascaraCoord span {
+	border: 0px solid white;
+}
+.contemCaixaTipoCoord {
+	overflow: hidden;
+	width: 4em;
+	background-color: rgba(0, 60, 136, 0.5);
+}
+.i3GeoMascaraCoord select {
+	border: 0px solid #B4B4B4;
+	left: 0px;
+	width: 4em;
+	background-color: rgba(0, 60, 136, 0.5);
+	box-shadow: none !important;
+	opacity: 0.8 !important;
+	color: white;
+	height: auto;
+}
+.i3GeoMascaraCoord tr {
+	border: 0px solid white;
+}
+#localizarxy {
+	z-index : 50;
+	color: white;
+	position: absolute;
+	bottom: 0px;
+	width: 450px;
+	left: auto;
+	right: 0px;
+	text-align: left;
+	font-size: 1em;
+	display: inline;
+	height: 1.8em;
+}
+#localizarxy input, #localizarxy select {
+	font-size: 1em;
+	height: 1.8em;
+}
+
+
+#menuajudaMenu{
+	color: white;
+}
+.comboTemasCabecalho .yuimenuitemlabel{
+	color: black;
+}
+.comboTemasCabecalho .yuimenuitemlabel:visited{
+	color: black;
+}
+
+.temaArrastar {
+	text-align: left;
+}
+@media print {
+    -webkit-print-color-adjust:exact;
+}
+/* === For phones =================================== */
+@media ( max-width : 767px) {
+#i3GEOguiaMovel {
+	width: 100%;
+}
+#i3GEOguiaMovelConteudo {
+	width:95%;
+}
+.nomeTema {
+	width: 235px;
+	vertical-align: middle;
+}
+/* === For tablets ================================== */
+@media ( min-width : 768px) and (max-width:991px) {
+
+}
+
+/* === For desktops ================================== */
+@media ( min-width : 992px) {
+
+}

@@ -39,24 +39,22 @@ Cada opera&ccedil;&atilde;o possu&iacute; seus proprios par&acirc;metros, que de
 include_once(dirname(__FILE__)."/login.php");
 
 $codigo_estat_conexao = $_GET["codigo_estat_conexao"];//pode ser string ou numerico
-$codigo_variavel = $_GET["codigo_variavel"];
-$codigo_tipo_periodo = $_GET["codigo_tipo_periodo"];
-$codigo_tipo_regiao = $_GET["codigo_tipo_regiao"];
-$codigo_unidade_medida = $_GET["codigo_unidade_medida"];
-$codigo_tipo_regiao_pai = $_GET["codigo_tipo_regiao_pai"];
-$id_medida_variavel = $_GET["id_medida_variavel"];
-$id_classificacao = $_GET["id_classificacao"];
-$id_link = $_GET["id_link"];
-$id_classe = $_GET["id_classe"];
-$id_parametro_medida = $_GET["id_parametro_medida"];
-$id_fonteinfo = $_GET["id_fonteinfo"];
-$id_agregaregiao = $_GET["id_agregaregiao"];
-$id_mapa = $_GET["id_mapa"];
-$id_mapa_grupo = $_GET["id_mapa_grupo"];
-$id_mapa_tema = $_GET["id_mapa_tema"];
-$id_pai = $_GET["id_pai"];
-
-testaSafeNumerico([$codigo_tipo_regiao_pai,$id_pai,$id_mapa_tema,$id_mapa_grupo,$id_mapa,$id_agregaregiao,$codigo_tipo_regiao,$codigo_tipo_periodo,$id_fonteinfo,$codigo_unidade_medida,$codigo_variavel,$id_medida_variavel,$id_classificacao,$id_link,$id_classe,$id_parametro_medida]);
+$codigo_variavel = (int) $_GET["codigo_variavel"];
+$codigo_tipo_periodo = (int) $_GET["codigo_tipo_periodo"];
+$codigo_tipo_regiao = (int) $_GET["codigo_tipo_regiao"];
+$codigo_unidade_medida = (int) $_GET["codigo_unidade_medida"];
+$codigo_tipo_regiao_pai = (int) $_GET["codigo_tipo_regiao_pai"];
+$id_medida_variavel = (int) $_GET["id_medida_variavel"];
+$id_classificacao = (int) $_GET["id_classificacao"];
+$id_link = (int) $_GET["id_link"];
+$id_classe = (int) $_GET["id_classe"];
+$id_parametro_medida = (int) $_GET["id_parametro_medida"];
+$id_fonteinfo = (int) $_GET["id_fonteinfo"];
+$id_agregaregiao = (int) $_GET["id_agregaregiao"];
+$id_mapa = (int) $_GET["id_mapa"];
+$id_mapa_grupo = (int) $_GET["id_mapa_grupo"];
+$id_mapa_tema = (int) $_GET["id_mapa_tema"];
+$id_pai = (int) $_GET["id_pai"];
 
 //lista de funcoes que passam pela validacao de login
 $funcoesEdicao = array(
@@ -140,11 +138,8 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	}
 }
 
-
-
-
 include(dirname(__FILE__)."/classe_metaestat.php");
-error_reporting(0);
+//error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {

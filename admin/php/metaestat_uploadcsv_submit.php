@@ -6,7 +6,7 @@ include_once("login.php");
 if(verificaOperacaoSessao("admin/metaestat/editorbanco") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
 }
-error_reporting(0);
+//error_reporting(0);
 if (ob_get_level() == 0) ob_start();
 
 ?>

@@ -10,7 +10,7 @@ if ($ogcwsmap == "") {
 }
 $map = ms_newMapObj ( $ogcwsmap );
 $mapext = $map->extent->minx . "," . $map->extent->miny . "," . $map->extent->maxx . "," . $map->extent->maxy;
-error_reporting ( 0 );
+//error_reporting ( 0 );
 include ONDEI3GEO."/init/head.php";
 ?>
 <link rel='stylesheet' type='text/css' href='../index.css'>

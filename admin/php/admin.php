@@ -41,7 +41,7 @@ if(!file_exists($dir_tmp)){
 }
 //TODO retirar daqui
 //include_once($locaplic."/classesphp/pega_variaveis.php");
-error_reporting(0);
+//error_reporting(0);
 
 //
 //carrega o phpmapscript
@@ -97,7 +97,7 @@ function retornaJSON($obj)
 	//else
 	//{
 	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
-	error_reporting(0);
+	//error_reporting(0);
 	ob_end_clean();
 	$j = new Services_JSON();
 	$texto = $j->encode($obj);
@@ -199,7 +199,7 @@ function pegaDados($sql,$dbh="",$close=true)
 	if($dbh == "" || is_string($dbh)){
 		include(dirname(__FILE__)."/conexao.php");
 	}
-	error_reporting(0);
+	//error_reporting(0);
 	//$dbh deve ser definido com somente leitura, mas por prevencao:
 	$sql = str_ireplace(array("update","delete","insert","--","drop",";"),"",$sql);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -624,8 +624,10 @@ senha {string}
 
 i3geomaster {array} - vari&aacute;vel existente no ms_configura.php com o cadastro de usu&aacute;rios masters
 */
-function verificaMaster($usuario,$senha,$i3geomaster){
-	global $i3geomaster;
+function verificaMaster($usuario,$senha,$i3geomaster=""){
+	if(empty($i3geomaster)){
+		include(dirname(__FILE__)."/../../ms_configura.php");
+	}
 	foreach($i3geomaster as $teste){
 		if(!empty($usuario) && !empty($senha) && $teste["usuario"] == $usuario && $teste["senha"] == $senha){
 			return true;

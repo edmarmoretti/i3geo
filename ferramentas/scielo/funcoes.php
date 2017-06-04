@@ -1,5 +1,5 @@
 <?php
-error_reporting(0);
+//error_reporting(0);
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 include(dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../blacklist.php");

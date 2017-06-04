@@ -39,7 +39,7 @@ require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 require_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-error_reporting(0);
+//error_reporting(0);
 $e = explode(" ",$_GET["ret"]);
 $url = "http://ws.geonames.org/weatherJSON?username=i3geo&lang=pt&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=10";
 $s = file($url);

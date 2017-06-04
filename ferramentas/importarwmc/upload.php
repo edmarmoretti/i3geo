@@ -1,7 +1,7 @@
 <?php
 require_once(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-error_reporting(0);
+//error_reporting(0);
 session_name("i3GeoPHP");
 if (isset($_POST["g_sid"]))
 {session_id($_POST["g_sid"]);}
@@ -18,7 +18,7 @@ $map_file = $_SESSION["map_file"];
 <p>
 <?php
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
-error_reporting(0);
+//error_reporting(0);
 require_once (dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);

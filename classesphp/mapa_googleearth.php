@@ -37,7 +37,7 @@ i3geo/classesphp/mapa_googleearth.php
 */
 include("sani_request.php");
 //error_reporting(0);
-error_reporting(0);
+//error_reporting(0);
 //para efeitos de compatibilidade
 if (!function_exists('ms_GetVersion')){
 	include_once ("carrega_ext.php");
@@ -103,7 +103,7 @@ function retornaKml(){
 	echo $kml;
 }
 function retornaWms($map_fileX,$postgis_mapa){
-	error_reporting(0);
+	//error_reporting(0);
 	if(isset($_GET["bbox"]))
 	{$_GET["BBOX"] = $_GET["bbox"];}
 	if(isset($_GET["BBOX"]))

@@ -158,7 +158,7 @@ HTML;
 				exit;
 			}
 		}
-		error_reporting(0);
+		//error_reporting(0);
 		$ip = "UNKNOWN";
 		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
 		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");

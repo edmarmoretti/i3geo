@@ -2,7 +2,7 @@
 define ( "ONDEI3GEO", ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
 include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
-error_reporting ( 0 );
+//error_reporting ( 0 );
 // pega a extensao geografica
 if ($ogcwsmap == "") {
 	$ogcwsmap = $locaplic . "/aplicmap/ogcws.map";

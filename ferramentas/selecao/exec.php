@@ -4,6 +4,7 @@ verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
+
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {

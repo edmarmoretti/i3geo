@@ -107,7 +107,7 @@ $final = array(
 $final = json_encode($final);
 $final = json_decode($final);
 
-error_reporting(0);
+//error_reporting(0);
 ob_end_clean();
 if(extension_loaded('zlib')){
 	ob_start('ob_gzhandler');

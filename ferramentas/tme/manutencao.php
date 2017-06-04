@@ -13,7 +13,7 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 		retornaJSON("Vc nao pode realizar essa operacao. Tente fazer login novamente.");exit;
 	}
 }
-error_reporting(0);
+//error_reporting(0);
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //

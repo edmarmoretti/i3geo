@@ -100,7 +100,7 @@ imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias 
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
 		contadorsalva - indica quantas vezes o mapa j&aacute; foi salvo. Permite que uma aplica&ccedil;&atilde;o verifique se o mapa foi alterado ou n&atilde;o.
 		*/
-error_reporting(0);
+//error_reporting(0);
 
 //sleep(5);
 
@@ -108,7 +108,6 @@ error_reporting(0);
 //pega as variaveis passadas com get ou post
 //
 $tempo = microtime(1);
-
 include_once("sani_request.php");
 $_pg = array_merge($_GET,$_POST);
 
@@ -133,6 +132,7 @@ if ($funcao != "listaEpsg" && $funcao != "pegaTodosTemas" && $funcao != "downloa
 	$imgurl = $_SESSION["imgurl"];
 	$tmpurl = $_SESSION["tmpurl"];
 	$map_file = $_SESSION["map_file"];
+	//error_log($map_file);
 	$mapext = $_SESSION["mapext"];
 	$dir_tmp = $_SESSION["dir_tmp"] ;
 	$cachedir = $_SESSION["cachedir"];
@@ -191,7 +191,7 @@ if(isset($interfaceTemp) && $interfaceTemp != ""){
 	$_SESSION["interface"] = $interfaceTemp;
 	$interface = $interfaceTemp;
 }
-error_reporting(0);
+//error_reporting(0);
 //
 //teste de timeout
 //
@@ -211,7 +211,10 @@ if(isset($logExec) && $logExec["controle"] == true){
 if($funcao == "criaMapa"){
 	session_name("i3GeoPHP");
 	unset($GLOBALS);
-	session_destroy();
+	if(session_status() == PHP_SESSION_ACTIVE){
+		//error_log("--------------Apagando a session");
+		session_destroy();
+	}
 	$_COOKIE = array();
 	//
 	//primeiro &eacute; necess&aacute;rio carregar o ms_configura.php para pegar a vari&aacute;vel $locaplic
@@ -240,13 +243,12 @@ if (!isset($map_file))
 	//$cp->set_data(array("erro"=>"linkquebrado"));
 	//$cp->return_data();
 	//cpjson(array("erro"=>"linkquebrado"));
-	ilegal();
 	exit;
 }
 
 include_once("classe_vermultilayer.php");
 include_once("classe_estatistica.php");
-error_reporting(0);
+//error_reporting(0);
 //
 //identifica qual a url do i3geo
 //
@@ -595,45 +597,51 @@ switch (strtoupper($funcao))
 		<Mapa->adicionaTemaSHP>
 		*/
 	case "ADICIONATEMASHP":
-		include_once("classe_mapa.php");
-		copiaSeguranca($map_file);
-		$m = new Mapa($map_file);
-		//valida o caminho do arquivo shapefile
-		$nome = explode("/",$_pg["arq"]);
-		$nome = $nome[0];
-		if(empty($nome)){
-			$retorno = "erro";
-		}
-		else{
-			//remove o nome do caminho
-			$novo = explode("/",$_pg["arq"]);
-			$novo[0] = "";
-			$_pg["arq"] = implode("/",$novo);
-			//
-			include(dirname(__FILE__)."/../ms_configura.php");
-			$d = $navegadoresLocais[0]["drives"];
-			$p = "";
-			foreach($d as $n){
-				if($n["nome"] == $nome){
-					$p = $n["caminho"];
-				}
+		if(!empty($navegadoresLocais)){
+			//verifica se est&aacute; cadastrado
+			$ipcliente = pegaIPcliente();
+			$retorno = array();
+			$ips = array();
+			//pega os nomes de cada ip
+			include("../ms_configura.php");
+			foreach ($navegadoresLocais["ips"] as $n){
+				$ips[] = gethostbyname($n);
+				$ips[] = $n;
 			}
-			if($p != "" && file_exists($p)){
-
-				$retorno = $m->adicionaTemaSHP($p."/".$_pg["arq"]);
-				if ($retorno != "erro")	{
-					$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();
+			if(in_array($ipcliente,$ips)){
+				$drives = $navegadoresLocais["drives"];
+				//pega o caminho
+				//nome
+				$split = explode("/",$_pg["arq"]);
+				if(empty($split[0]) || !in_array($split[0],array_keys($drives))){
+					$retorno = array();
 				}
 				else{
-					$retorno = "erro.Nenhum dado espacializado foi encontrado.";
-				}
 
-			}
-			else{
-				$retorno = "erro";
+					include_once("classe_mapa.php");
+					copiaSeguranca($map_file);
+					$m = new Mapa($map_file);
+					$path = $split[0];
+					$split[0] = "";
+					$shp = implode("/",$split);
+					$shp = explode(".",$shp)[0].".shp";
+					$path = $drives[$path] . $shp;
+
+					$retorno = $m->adicionaTemaSHP($path);
+					if ($retorno != "erro")	{
+						$m->salva();
+						$_SESSION["contadorsalva"]++;
+						redesenhaMapa();
+					}
+					else{
+						$retorno = "erro.Nenhum dado espacializado foi encontrado.";
+					}
+				}
+			} else {
+				$retorno = array();
 			}
 		}
-		break;
+	break;
 		/*
 		 Valor: ADICIONATEMAIMG
 
@@ -642,17 +650,48 @@ switch (strtoupper($funcao))
 		<Mapa->adicionaTemaIMG>
 		*/
 	case "ADICIONATEMAIMG":
-		include_once("classe_mapa.php");
-		copiaSeguranca($map_file);
-		$m = new Mapa($map_file);
-		$retorno = $m->adicionaTemaIMG($_pg["arq"]);
-		if ($retorno != "erro")
-		{
-			$m->salva();$_SESSION["contadorsalva"]++;redesenhaMapa();
-		}
-		else
-		{
-			$retorno = "erro.Nenhum dado espacializado foi encontrado.";
+		if(!empty($navegadoresLocais)){
+			//verifica se est&aacute; cadastrado
+			$ipcliente = pegaIPcliente();
+			$retorno = array();
+			$ips = array();
+			//pega os nomes de cada ip
+			include("../ms_configura.php");
+			foreach ($navegadoresLocais["ips"] as $n){
+				$ips[] = gethostbyname($n);
+				$ips[] = $n;
+			}
+			if(in_array($ipcliente,$ips)){
+				$drives = $navegadoresLocais["drives"];
+				//pega o caminho
+				//nome
+				$split = explode("/",$_pg["arq"]);
+				if(empty($split[0]) || !in_array($split[0],array_keys($drives))){
+					$retorno = array();
+				}
+				else{
+
+					include_once("classe_mapa.php");
+					copiaSeguranca($map_file);
+					$m = new Mapa($map_file);
+					$path = $split[0];
+					$split[0] = "";
+					$shp = implode("/",$split);
+					$path = $drives[$path] . $shp;
+					error_log($path);
+					$retorno = $m->adicionaTemaIMG($path);
+					if ($retorno != "erro")	{
+						$m->salva();
+						$_SESSION["contadorsalva"]++;
+						redesenhaMapa();
+					}
+					else{
+						$retorno = "erro.Nenhum dado espacializado foi encontrado.";
+					}
+				}
+			} else {
+				$retorno = array();
+			}
 		}
 		break;
 		/*
@@ -1734,9 +1773,8 @@ switch (strtoupper($funcao))
 		$editores = $_pg["editores"];
 		$perfil = $_pg["perfil"];
 		$idioma = $_pg["idioma"];
-
 		$m = new Menutemas($map_file,$perfil,$locaplic,$urli3geo,$editores,$idioma);
-		$retorno = $m->procurartemasestrela($nivel,$fatorestrela);
+		$retorno = $m->procurartemasestrela($_pg["nivel"],$_pg["fatorestrela"]);
 		break;
 		/*
 		 Valor: PEGAMAPAS
@@ -2092,6 +2130,7 @@ switch (strtoupper($funcao))
 				}
 			}
 		}
+
 		$retorno = $m->listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista,$dadosDaClasse);
 		$retorno["legenda"] = $legenda;
 		break;
@@ -2427,6 +2466,19 @@ switch (strtoupper($funcao))
 		}
 		$retorno = $r;
 		break;
+	case "CRIALEGENDAJSON":
+		include_once("classe_legenda.php");
+		//para efeitos de compatibilidade com vers&otilde;es anteriores
+		if(isset($_pg["template"])){
+			$_pg["templateLegenda"] = $_pg["template"];
+		}
+		$m = new Legenda($map_file,$locaplic,$_pg["tema"]);
+		$r = $m->criaLegendaJson($_pg["w"],$_pg["h"]);
+		if(!$r){
+			$r = "erro. Legenda nao disponivel";
+		}
+		$retorno = $r;
+		break;
 		/*
 		 Valor: CRIALEGENDAIMAGEM
 
@@ -2541,26 +2593,6 @@ switch (strtoupper($funcao))
 		*/
 	case "CHAVEGOOGLE":
 		$retorno = $googleApiKey;
-		break;
-		/*
-		 Valor: LISTADRIVES
-
-		Pega a lista de drives registrados para o usu&aacute;rio atual.
-
-		A lista de drives &eacute; definida no ms_configura e permite que o usu&aacute;rio navegue pelos arquivos do servidor.
-		*/
-	case "LISTADRIVES":
-		include(dirname(__FILE__)."/../ms_configura.php");
-		//verifica se est&aacute; cadastrado
-		$ipcliente = pegaIPcliente();
-		$retorno = array();
-		foreach ($navegadoresLocais as $n)
-		{
-			if (gethostbyname($n["ip"]) == $ipcliente)
-			{
-				$retorno[] = $n["drives"];
-			}
-		}
 		break;
 		/*
 		 Valor: LISTAINTERFACES

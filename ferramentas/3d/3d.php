@@ -3,7 +3,7 @@
 return;
 require_once("../../classesphp/pega_variaveis.php");
 require_once("../../classesphp/carrega_ext.php");
-error_reporting(0);
+//error_reporting(0);
 set_time_limit(120);
 if (isset($g_sid))
 {session_id($g_sid);}

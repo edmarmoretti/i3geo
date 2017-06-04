@@ -119,7 +119,7 @@ function iniciaMapa()
 	if(!isset($kmlurl)){
 		$kmlurl = "";
 	}
-	error_reporting(0);
+	//error_reporting(0);
 	if(!isset($interface)){
 		$interface = "";
 	}
@@ -191,7 +191,7 @@ function iniciaMapa()
 	$urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
 	//altera o tamanho do query map para ficar igual ao do mapa
 	include_once("classe_mapa.php");
-	error_reporting(0);
+	//error_reporting(0);
 	if(!function_exists("sobeAnno")){
 		include_once("funcoes_gerais.php");
 	}
@@ -203,7 +203,7 @@ function iniciaMapa()
 		$m = new Mapa($map_file);
 		$m->mapa->setsize($w,$h);
 	}
-	error_reporting(0);
+	//error_reporting(0);
 	//
 	//verifica se a legenda deve ser embebida no mapa
 	//

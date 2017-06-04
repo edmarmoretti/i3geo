@@ -57,7 +57,7 @@ function gravaCacheWMS($servico)
 	if($dir_tmp == ""){
 		include(dirname(__FILE__)."/../ms_configura.php");
 	}
-	error_reporting(0);
+	//error_reporting(0);
 	try{
 		$teste = explode("=",$servico);
 		if ( count($teste) > 1 ){
@@ -483,7 +483,7 @@ function listaLayersWMS()
 	include_once(dirname(__FILE__)."/../admin/php/admin.php");
 	include_once(dirname(__FILE__)."/../admin/php/webservices.php");
 
-	error_reporting(0);
+	//error_reporting(0);
 	if($tipo_ws != "WMSMETAESTAT" && $nivel < 2){
 		if($wms_service_request == "erro") {
 			//registra a tentativa de acesso
@@ -591,7 +591,7 @@ function imprimeTag($r,$retorna)
 }
 function pegaTag($layer)
 {
-	error_reporting(0);
+	//error_reporting(0);
 	$noslayer = $layer->childNodes;
 	$resultado = array(
 		"estiloas" => array(),

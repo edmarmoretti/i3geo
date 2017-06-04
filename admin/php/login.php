@@ -58,7 +58,7 @@ cp.set_response_type("JSON")
 cp.call(p,"lente",ajaxabrelente)
 
 */
-error_reporting(0);
+//error_reporting(0);
 //
 //pega as variaveis passadas com get ou post
 //
@@ -76,7 +76,7 @@ if(isset($i3geoPermiteLoginIp)){
 	checaLoginIp($i3geoPermiteLoginIp);
 }
 
-error_reporting(0);
+//error_reporting(0);
 session_write_close();
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login
@@ -315,7 +315,8 @@ function autenticaUsuario($usuario,$senha){
 	//echo "select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1";exit;
 	//exit;
 	if(verificaMaster($usuario,$senha) == true){
-		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$dbh,false);
+		//$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$dbh,false);
+		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papeis ",$dbh,false);
 		$op = pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O",$dbh,false);
 		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupos ",$dbh,false);
 		//var_dump($gr);exit;
@@ -399,6 +400,8 @@ function autenticaUsuario($usuario,$senha){
 function logoutUsuario(){
 	$_COOKIE = array();
 	$_SESSION = array();
-	session_destroy();
+	if(session_status() == PHP_SESSION_ACTIVE){
+		session_destroy();
+	}
 }
 ?>

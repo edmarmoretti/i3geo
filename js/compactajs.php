@@ -133,6 +133,16 @@ packer("interface.js","compactados/interface_compacto.js","Normal");
 packer("ini_i3geo.js","compactados/ini_i3geo_compacto.js","Normal");
 packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
 packer("social.js","compactados/social_compacto.js","Normal");
+packer("catalogoMenus.js","compactados/catalogoMenus_compacto.js","Normal");
+packer("catalogoInde.js","compactados/catalogoInde_compacto.js","Normal");
+packer("catalogoOgc.js","compactados/catalogoOgc_compacto.js","Normal");
+packer("catalogoRegioes.js","compactados/catalogoRegioes_compacto.js","Normal");
+packer("catalogoMetaestat.js","compactados/catalogoMetaestat_compacto.js","Normal");
+packer("catalogoMapas.js","compactados/catalogoMapas_compacto.js","Normal");
+packer("catalogoEstrelas.js","compactados/catalogoEstrelas_compacto.js","Normal");
+packer("catalogoSistemas.js","compactados/catalogoSistemas_compacto.js","Normal");
+packer("catalogoDir.js","compactados/catalogoDir_compacto.js","Normal");
+packer("legenda.js","compactados/legenda_compacto.js","Normal");
 packer("../ferramentas/editorol/editorol.js","../ferramentas/editorol/editorol_compacto.js","Normal");
 packer("../ferramentas/editorgm/editorgm.js","../ferramentas/editorgm/editorgm_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container.js","../pacotes/yui290/build/container/container_compacto.js","Normal");
@@ -180,6 +190,8 @@ $jsfiles = array(
 "../pacotes/yui290/build/selector/selector-min.js",
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
+"../pacotes/bootstrap/js/bootstrap.min.js",
+"../pacotes/bootstrap-material-design/dist/js/material.min.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
 "compactados/mustache.js",
@@ -208,7 +220,17 @@ $jsfiles = array(
 "compactados/social_compacto.js",
 "compactados/login_compacto.js",
 "compactados/marcador_compacto.js",
-"compactados/plugini3geo_compacto.js"
+"compactados/plugini3geo_compacto.js",
+"compactados/catalogoMenus_compacto.js",
+"compactados/catalogoInde_compacto.js",
+"compactados/catalogoOgc_compacto.js",
+"compactados/catalogoRegioes_compacto.js",
+"compactados/catalogoMetaestat_compacto.js",
+"compactados/catalogoMapas_compacto.js",
+"compactados/catalogoEstrelas_compacto.js",
+"compactados/catalogoSistemas_compacto.js",
+"compactados/catalogoDir_compacto.js",
+"compactados/legenda_compacto.js"
 );
 
 $removeQuebra = array();
@@ -422,14 +444,23 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 
 	chmod($final,0777);
 	//gzip
+
 	$abre = fopen($final, "r");
+/*
 	if ($tipo == "js")
-	$buffer = "<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/javascript\"); ?>";
+	$buffer = "<?php //error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/javascript\"); ?>";
 	else
-	$buffer = "<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/css\"); ?>";
+	$buffer = "<?php //error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/css\"); ?>";
+*/
+	if ($tipo == "js")
+		$buffer = "<?php header(\"Content-type: text/javascript\"); ?>";
+	else
+		$buffer = "<?php header(\"Content-type: text/css\"); ?>";
+
 	while (!feof($abre))
 	{$buffer .= fgets($abre);}
 	fclose($abre);
+
 	$buffer .= "\n";
 	$buffer .= "<?php if(extension_loaded('zlib')){ob_end_flush();}?>";
 	$abre = fopen($final.".php", "wt");

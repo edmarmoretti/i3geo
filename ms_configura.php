@@ -495,30 +495,20 @@ O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no s
 navegando pelo sistema de arquivos.
 Isso possibilita o acesso aos dados mesmo que n&atilde;o constem na &aacute;rvore de temas
 
-Caso o usu&aacute;rio n&atilde;o esteja logado, ser&aacute; mostrada para navegacao apenas a pasta i3geo/data
+Se "ips" for vazio, qualquer IP podera acessar os arquivos
 
-Se do lado do cliente a variavel javascript for false e $navegadoresLocais for vazia a op&ccedil;&atilde;o nao ser&aacute; mostrada
-na &aacute;rvore
-
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = false; //inserir no HTML
-
-Portanto, se vc n&atilde;o quiser que essa op&ccedil;&atilde;o seja ativada, mesmo com o usu&aacute;rio logado
-mantenha essa vari&aacute;vel igual a
+Para desabilitar essa funcao, mantenha a variavel vazia:
 
 $navegadoresLocais = "";
 
-Para efeito de compatibilidade, manteve-se a possibilidade de um array com multiplos arrays,
-mas apenas o primeiro e utilizado
-
 Exemplo:
 
-	$navegadoresLocais = array(
-		array(
-			"drives"=>array(
-				array("caminho"=>"/tmp","nome"=>"tmp"),
-				array("caminho"=>"/var/www","nome"=>"www")
-			)
-		)
+$navegadoresLocais = array(
+		"drives"=>array(
+			"dados"=>"/var/www/i3geo/aplicmap/dados",
+			"geodados"=>"/var/www/i3geo/aplicmap"
+		),
+		"ips"=>array("localhost","1.1.1.1")
 	);
 
 Tipo:
@@ -801,13 +791,6 @@ $i3geo_proxy_server = "";
 //valores de variaveis especificas para o sistema operacional em uso
 if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
-	$navegadoresLocais = array(
-		array(
-			"drives"=>array(
-				array("caminho"=>"c:","nome"=>"c:")
-			)
-		)
-	);
 	$dir_tmp = "c:/ms4w/tmp/ms_tmp";
 	$locmapserv = "/cgi-bin/mapserv.exe";
 	$R_path = "c:/r/win/bin/R.exe";
@@ -822,14 +805,6 @@ else //se for linux
 	if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
 		$dir_tmp = "/tmp/ms_tmp";
 	}
-	$navegadoresLocais = array(
-		array(
-			"drives"=>array(
-				array("caminho"=>"/tmp","nome"=>"tmp"),
-				array("caminho"=>"/var/www","nome"=>"www")
-			)
-		)
-	);
 	$locmapserv = "/cgi-bin/mapserv";
 	$R_path = "R";
 	$R_libpath = "";

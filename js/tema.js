@@ -98,11 +98,7 @@ i3GEO.tema =
 					p.parentNode.removeChild(p);
 				}
 				catch(rr){}
-				// atualiza a arvore de temas se for o caso
-				var ck = i3GEO.arvoreDeTemas.buscaCheckbox(tema);
-				if (ck) {
-					ck.checked = false;
-				}
+
 			} catch (e) {
 			}
 			i3GEO.php.excluitema(i3GEO.atualiza, [

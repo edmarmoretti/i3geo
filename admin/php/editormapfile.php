@@ -98,7 +98,7 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	}
 	unlink("$locaplic/temas/teste.txt");
 }
-error_reporting(0);
+//error_reporting(0);
 //define o parametro de output do resultado da funcao
 //algumas funcoes podem ser inseridas com include em outros programas
 //nesse caso, defina output como "retorno"
@@ -285,7 +285,7 @@ switch (strtoupper($funcao))
 		{JSON}
 		*/
 	case "LIMPARCACHEMAPFILE":
-		error_reporting(0);
+		//error_reporting(0);
 		$mapfile = $locaplic."/temas/".$codigoMap.".map";
 		$mapa = ms_newMapObj($mapfile);
 		$nomes = $mapa->getalllayernames();
@@ -1146,7 +1146,7 @@ switch (strtoupper($funcao))
 function clonarMapfile()
 {
 	global $codigomap, $locaplic;
-	error_reporting(0);
+	//error_reporting(0);
 	$arqtema = $locaplic."/temas/".$codigomap.".map";
 	$novotema = $locaplic."/temas/".$_GET["novomap"].".map";
 	copy($arqtema,$novotema);
@@ -1163,7 +1163,7 @@ function refazerLayer()
 
 	$maporigem = $_GET["maporigem"];
 
-	error_reporting(0);
+	//error_reporting(0);
 	$cache = $_GET["cache"];
 	if(empty($cache)){
 		$cache = "";
@@ -1379,7 +1379,7 @@ function autoClassesLayer()
 	global $codigoMap,$codigoLayer,$locaplic,$dir_tmp,$postgis_mapa;
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	include_once("$locaplic/classesphp/classe_alteraclasse.php");
-	error_reporting(0);
+	//error_reporting(0);
 	$nometemp = $dir_tmp."/".nomerandomico().".map";
 
 	$versao = versao();
@@ -2183,7 +2183,7 @@ function pegaClasseGeral()
 {
 	global $codigoMap,$codigoLayer,$locaplic;
 
-	error_reporting(0);
+	//error_reporting(0);
 	$dados = array();
 	$mapfile = $locaplic."/temas/".$codigoMap.".map";
 	$mapa = ms_newMapObj($mapfile);

@@ -51,7 +51,7 @@ include_once(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 $bloqueiaStringConexao = true;
 //
 $forcawms = $_GET["forcawms"];
-error_reporting(0);
+//error_reporting(0);
 if(!isset($forcawms)){$forcawms = "nao";}
 $objcontype[0] = "MS_INLINE";
 $objcontype[1] = "MS_SHAPEFILE";

@@ -22,7 +22,7 @@
  * Free Software Foundation, Inc., no endere&ccedil;o
  * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
  */
-error_reporting ( 0 );
+//error_reporting ( 0 );
 include (dirname(__FILE__)."/../../../../classesphp/sani_request.php");
 include (dirname(__FILE__)."/../../../../admin/php/admin.php");
 

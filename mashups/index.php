@@ -1,7 +1,7 @@
 <?php
 define ( "ONDEI3GEO", ".." );
 include (dirname ( __FILE__ ) . "/../ms_configura.php");
-error_reporting ( 0 );
+//error_reporting ( 0 );
 include "../init/head.php";
 ?>
 <body style="padding-top: 55px;">

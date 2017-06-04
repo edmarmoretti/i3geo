@@ -102,7 +102,7 @@ body {
 				echo "Vc nao pode realizar essa operacao.";
 				exit ();
 			}
-			error_reporting ( 0 );
+			//error_reporting ( 0 );
 			$mapfile = $locaplic . "/temas/" . $_GET ["mapfile"] . ".map";
 			if (! file_exists ( $mapfile )) {
 				echo "Arquivo $mapfile n&atilde;o existe.";

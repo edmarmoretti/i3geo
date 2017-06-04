@@ -313,11 +313,19 @@ var i3GEO = {
 	 * interface &eacute; definida em <i3GEO.Interface.ATUAL>
 	 */
 	cria : function() {
+		$('[data-traduzir="true"]').each(function(){
+			this.innerHTML = Mustache.to_html(
+					this.innerHTML,
+					i3GEO.idioma.OBJETOIDIOMA
+				);
+		});
+		if($i("i3GEOlogoMarcaTemplate")){
+			i3GEO.aguardeLogo.mostra();
+		}
 		if (i3GEO.configura.ajustaDocType === true) {
 			i3GEO.util.ajustaDocType();
 		}
 		var tamanho, temp;
-
 		temp = window.location.href.split("?");
 		if (temp[1]) {
 			temp = temp[1].split("&");
@@ -493,6 +501,18 @@ var i3GEO = {
 								+ temp
 								+ "px";
 						}
+						//
+						//complementa o objeto com os parametros para o menu de ferramentas
+						//
+						// complementa o array com os dados para o menu de
+						// marcadores
+						i3GEO.listaDeFerramentas = i3GEO.marcador.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
+						// inclui opcoes admin
+						if (i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin === true || (i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin != false && i3GEO.parametros.editor === "sim")) {
+							i3GEO.listaDeFerramentas = i3GEO.login.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
+						}
+
+
 						i3GEO.Interface.inicia();
 						//
 						// obtem os parametros que foram armazenados ao salvar o
@@ -533,9 +553,6 @@ var i3GEO = {
 					}
 					if (i3GEO.configura.iniciaJanelaMensagens === true) {
 						i3GEO.ajuda.abreJanela();
-					}
-					if (i3GEO.configura.liberaGuias.toLowerCase() === "sim") {
-						i3GEO.guias.libera();
 					}
 				}
 				i3GEO.aposIniciar();
@@ -615,9 +632,7 @@ var i3GEO = {
 				eval(i3GEO.finaliza);
 			}
 		}
-		if (i3GEO.guias.TIPO === "movel") {
-			i3GEO.guias.guiaMovel.inicia();
-		}
+		i3GEO.guias.inicia();
 		if (i3GEO.mapa.AUTORESIZE === true) {
 			i3GEO.mapa.ativaAutoResize();
 		}
@@ -961,14 +976,8 @@ var i3GEO = {
 					}
 				}
 				break;
-			}
-			;
-			if (i3GEO.guias.TIPO === "sanfona") {
-				i3GEO.guias.ALTURACORPOGUIAS = h
-					- (antigoh - i3GEO.guias.ALTURACORPOGUIAS);
-			} else {
-				i3GEO.guias.ALTURACORPOGUIAS = h;
-			}
+			};
+			i3GEO.guias.ALTURACORPOGUIAS = h;
 			return [
 				w,
 				h
@@ -1001,6 +1010,28 @@ var i3GEO = {
 			i3GEO.parametros.editor = "sim";
 		} else {
 			i3GEO.parametros.editor = "nao";
+		}
+	},
+	aguardeLogo: {
+		obj: "",
+		mostra: function() {
+			i3GEO.aguardeLogo.obj = $(
+					'<div class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:50000;overflow-y:visible;">' +
+					'<div class="modal-dialog modal-m">' +
+					'<div class="modal-content">' +
+					'<div class="modal-header"></div>' +
+					'<div class="modal-body">' +
+					$('#i3GEOlogoMarcaTemplate').html() +
+					'<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
+					'</div>' +
+			'</div></div></div>');
+			i3GEO.aguardeLogo.obj.modal("show");
+			setTimeout(function() {
+				i3GEO.aguardeLogo.obj.modal("hide");
+			}, 4000);
+		},
+		esconde: function () {
+			i3GEO.aguardeLogo.obj.modal("hide");
 		}
 	}
 };

@@ -112,7 +112,7 @@ if(empty($_POST["tipo"])){
 				<div class="col-md-12">
 					<div class="well">
 					<?php
-					error_reporting (E_ALL);
+					//error_reporting (E_ALL);
 					$versao = \admin\php\funcoesAdmin\versao();
 					$versao = $versao["principal"];
 
@@ -122,7 +122,7 @@ if(empty($_POST["tipo"])){
 						if (ob_get_level() == 0){
 							ob_start();
 						}
-						error_reporting (E_ALL);
+						//error_reporting (E_ALL);
 						$arqs = listaArquivos("../../../temas",true,array("map"));
 						$arqs = $arqs["arquivos"];
 						sort($arqs);

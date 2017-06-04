@@ -503,7 +503,7 @@ if(isset($format) && strtolower($format) == "application/openlayers"){
 //
 //pega a versao do Mapserver
 //
-error_reporting(0);
+//error_reporting(0);
 $versao = versao();
 $versao = $versao["principal"];
 

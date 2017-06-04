@@ -55,7 +55,7 @@ $id_i = $_GET["id_i"];
 $id = $_GET["id"];
 testaSafeNumerico([$id_i,$id]);
 
-error_reporting(0);
+//error_reporting(0);
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 switch (strtoupper($funcao))
 {

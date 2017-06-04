@@ -60,7 +60,7 @@ i3geo/classesphp/mapa_googlemaps.php
 
 */
 //error_reporting(0);
-error_reporting(0);
+//error_reporting(0);
 include("sani_request.php");
 //para efeitos de compatibilidade
 if (!function_exists('ms_GetVersion')){

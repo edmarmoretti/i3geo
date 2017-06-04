@@ -687,7 +687,7 @@ g_traducao_ajuda = {
 			pt:"O i3Geo pode usar diferentes interfaces para manipular a navega&ccedil;&atilde;o sobre o mapa. Por padr&atilde;o, &eacute; utilizada uma interface pr&oacute;pria, desenvolvida para o i3Geo, mas pode-se optar pelo uso do OpenLayers, Google Maps ou Google Earth.<br>As funcionalidade do i3Geo s&atilde;o afetadas pela interface escolhida, sendo que algumas opera&ccedil;&otilde;es diferem de uma para outra. A maior parte das funcionalidades s&atilde;o implementadas apenas na interface padr&atilde;o. No caso do Google Earth , que permite a visualiza&ccedil;&atilde;o do mapa em 3d, &eacute; necess&aacute;rio a instala&ccedil;&atilde;o de um plugin espec&iacute;fico.",
 			es: "",
 			en: "",
-			apijs:"i3GEO.configura.oMenuData"
+			apijs:"i3GEO.listaDeFerramentas"
 		},
 		"55": {
 			titulo: {

@@ -4,7 +4,7 @@ include_once("login.php");
 if(verificaOperacaoSessao("admin/metaestat/geral") == false){
 	echo "Vc nao pode realizar essa operacao.";exit;
 }
-error_reporting(0);
+//error_reporting(0);
 ?>
 <html>
 <head>

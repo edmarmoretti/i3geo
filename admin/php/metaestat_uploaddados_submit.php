@@ -1,7 +1,7 @@
 <?php
 $colunasarquivo = "";
 $nomearquivoserv = "";
-error_reporting(0);
+//error_reporting(0);
 include_once(dirname(__FILE__)."/login.php");
 if (isset($_FILES['i3GEOuploadArquivo']['name']))
 {

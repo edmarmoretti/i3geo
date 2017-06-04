@@ -199,7 +199,7 @@ Botao de ligar desligar do tipo chave da arvore de camadas
 #i3GEOcopyright {
 	position: absolute;
 	left: 10px;
-	top: 2.8em;
+	top: 5px;
 	display: block;
 }
 #buscaRapidaGuia {
@@ -259,11 +259,11 @@ no caso do OL3
 }
 
 .ol-zoom {
-	top: 3.8em;
+	top: 2.8em;
 }
 
 .ol-i3GEOcontrols {
-	top: 3.8em;
+	top: 2.8em;
 	left: 3em;
 	width: auto;
 }

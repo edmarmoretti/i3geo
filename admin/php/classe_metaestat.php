@@ -72,7 +72,7 @@ class Metaestat{
 	 * Faz o include de conexao.php que por sua vez faz o include de i3geo/ms_configura.php
 	*/
 	function __construct(){
-		error_reporting(0);
+		//error_reporting(0);
 		include(dirname(__FILE__)."/conexao.php");
 		//vem do include
 		$this->dir_tmp = $dir_tmp;

@@ -123,7 +123,6 @@ array
 			$r["temas"] = $temasR;
 			$final[] = $r;
 		}
-
 		unset($arvore);
 		return ($final);
 	}
@@ -293,7 +292,7 @@ Array
 */
 	function pegaSistemas()
 	{
-		error_reporting(0);
+		//error_reporting(0);
 		include_once($this->locaplic."/admin/php/xml.php");
 		$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic));
 		$sistemas = array();
@@ -339,7 +338,7 @@ Array
 */
 	function pegaSistemasI()
 	{
-		error_reporting(0);
+		//error_reporting(0);
 		include_once($this->locaplic."/admin/php/xml.php");
 
 		$xmlsistemas = simplexml_load_string(geraXmlIdentifica(implode(" ",$this->perfil),$this->locaplic));
@@ -660,21 +659,22 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 		}
 		return ($final);
 	}
-	function verificaPapelSessao($id_papel){
+	function verificaPapelSessao($id_papel=""){
 		if(!empty($_COOKIE["i3geocodigologin"])){
 			session_write_close();
 			session_name("i3GeoLogin");
 			session_id($_COOKIE["i3geocodigologin"]);
 			session_start();
-			//var_dump($_SESSION);exit;
 			if($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"]){
 				return false;
 			}
 			foreach($_SESSION["papeis"] as $p){
-				if($p["id_papel"] == 1 || $p["id_papel"] == $id_papel){
+				if($p == 1 || $p == $id_papel){
+					//error_log("------------------true".json_encode($_SESSION["papeis"]));
 					return true;
 				}
 			}
+			return false;
 		}
 		else{//caso nao exista, retorna um erro
 			return false;

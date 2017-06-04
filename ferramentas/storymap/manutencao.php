@@ -12,7 +12,7 @@ if(in_array(strtoupper($funcao),$funcoesEdicao)){
 	}
 }
 $tema = $_POST["tema"];
-error_reporting(0);
+//error_reporting(0);
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //

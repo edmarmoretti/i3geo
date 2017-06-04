@@ -63,7 +63,7 @@ mapdir - localiza&ccedil;&atilde;o, no servidor, do diretorio com o mapfile temp
 imgdir - localiza&ccedil;&atilde;o, no servidor, das imagens tempor&aacute;rias do mapa atual.
 debug - (pode ser definido como "sim" indica se o erro_reporting deve ser definido como E_ALL
 */
-error_reporting(0);
+//error_reporting(0);
 $tempo = microtime(1);
 //
 // quando as fun&ccedil;&otilde;es abaixo forem utilizadas, &eacute; necess&aacute;rio definir $map_file para que o programa continue.

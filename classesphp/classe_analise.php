@@ -250,7 +250,7 @@ class Analise {
 				break;
 			// delaunay e voronoi
 			case "deldir" :
-				// error_reporting(0);
+				// //error_reporting(0);
 				$this->mapaDeldir ( $nomearq, $dir_tmp, $R_path, $locaplic );
 				$this->deldirDir2shp ( $nomearq . "dirsgs", $dir_tmp, $locaplic );
 				$this->deldirDel2shp ( $nomearq . "delsgs", $dir_tmp, $locaplic );
@@ -1179,7 +1179,7 @@ class Analise {
 			$lineo = $spt->line ( 0 );
 			$pt = $lineo->point ( 0 );
 			// faz a pesquisa
-			// error_reporting(0);
+			// //error_reporting(0);
 			foreach ( $layers as $layer ) {
 				$layer->set ( "template", "none.htm" );
 				$layer->set ( "toleranceunits", MS_PIXELS );
@@ -1270,7 +1270,7 @@ class Analise {
 	 *
 	 */
 	function distanciaptpt($temaorigem, $temadestino, $temaoverlay, $locaplic, $itemorigem = "", $itemdestino = "") {
-		// error_reporting(0);
+		// //error_reporting(0);
 		set_time_limit ( 180 );
 		// para manipular dbf
 		if ($this->dbaseExiste == false) {
@@ -1438,7 +1438,7 @@ class Analise {
 	 */
 	function criaBuffer($distancia, $locaplic, $unir = "nao", $wkt = "", $multiplicar = 1, $itemdistancia = "") {
 		set_time_limit ( 180 );
-		error_reporting ( 0 );
+		//error_reporting ( 0 );
 		if ($this->nome != "") {
 			$items = pegaItens ( $this->layer );
 		} else {
@@ -1580,7 +1580,7 @@ class Analise {
 		if ($this->dbaseExiste == false) {
 			include_once dirname ( __FILE__ ) . "/../pacotes/phpxbase/api_conversion.php";
 		}
-		// error_reporting(0);
+		// //error_reporting(0);
 		$nomeCentro = nomeRandomico ();
 		$nomeshp = $this->diretorio . "/" . $nomeCentro;
 		// pega os shapes selecionados
@@ -2206,7 +2206,7 @@ class Analise {
 	 * $locaplic - Localiza&ccedil;&atilde;o do I3geo
 	 */
 	function nptPol($temaPt, $temaPo, $locaplic, $somaritem = "") {
-		// error_reporting(0);
+		// //error_reporting(0);
 		set_time_limit ( 180 );
 		// para manipular dbf
 		if ($this->dbaseExiste == false) {
@@ -2704,7 +2704,7 @@ class Analise {
 	 * $operacao - Tipo de an&aacute;lise.
 	 */
 	function calculaGeometrias($dir_tmp, $imgdir, $lista, $operacao) {
-		// error_reporting(0);
+		// //error_reporting(0);
 		$lista = explode ( ",", $lista );
 		$dir = $dir_tmp . "/" . $imgdir . "/";
 		foreach ( $lista as $l ) {
@@ -3056,7 +3056,7 @@ class Analise {
 	 * )
 	 * (end)
 	 */
-	// error_reporting(0);
+	// //error_reporting(0);
 	function classesRasterI($minvalor, $maxvalor, $nclasses, $cores) {
 		$resultado = array ();
 		$intervalo = intval ( 250 / $nclasses );

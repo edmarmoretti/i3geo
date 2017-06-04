@@ -227,6 +227,7 @@
 		* @return  void
 		*/
 		function return_data() {
+			error_reporting(0);
 			// send appropriate headers to avoid caching
 			header('Expires: Fri, 14 Mar 1980 20:53:00 GMT');
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');

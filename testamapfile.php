@@ -247,7 +247,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 		}
 		//echo $base;exit;
 		$mapa = ms_newMapObj($base);
-		error_reporting(0);
+		//error_reporting(0);
 		$numlayers = $mapa->numlayers;
 		for ($i=0;$i < $numlayers;$i++){
 			$layern = $mapa->getlayer($i);
@@ -323,7 +323,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 				if (!empty($postgis_mapa)){
 					if ($layern->connectiontype == MS_POSTGIS){
 						$lcon = $layern->connection;
-						error_reporting(0);
+						//error_reporting(0);
 						if (($lcon == " ") || ($lcon == "") || (in_array($lcon,array_keys($postgis_mapa)))){
 							if(($lcon == " ") || ($lcon == "")) //para efeitos de compatibilidade
 							{$layern->set("connection",$postgis_mapa);}
@@ -333,7 +333,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 					}
 				}
 				autoClasses($layern,$nmapa);
-				error_reporting(0);
+				//error_reporting(0);
 				if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
 					$tipotemp = $layern->type;
 					$tiporep = $layern->getmetadata("tipooriginal");

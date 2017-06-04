@@ -1,12 +1,10 @@
 <?php
-namespace i3geo\classesphp\metaestat;
-use PDO;
 /**
- * Classe metaestat
+ * Classe metaestatInfo
  * O construtor da classe faz o include do programa conexao.php que por sua vez faz o include
  * de i3geo/ms_configura.php. Com base nesses programas sao definidas algumas das variaveis globais
 */
-class Metaestat{
+class MetaestatInfo{
 	/**
 	 * Nome do esquema no banco de dados utilizado para armazenar as tabelas
 	 * do sistema de admnistracao. Obtido de ms_configura.php
@@ -37,7 +35,6 @@ class Metaestat{
 	 * Faz o include de conexao.php que por sua vez faz o include de i3geo/ms_configura.php
 	*/
 	function __construct(){
-		error_reporting(0);
 		include(dirname(__FILE__)."/../admin/php/conexao.php");
 		//vem do include
 		$this->dir_tmp = $dir_tmp;
@@ -684,12 +681,15 @@ class Metaestat{
 			$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		}
 		else{
-			$arq = $this->dir_tmp."/".$this->nomecache.nomeRandomico(3).".map";
+			$arq = $this->dir_tmp."/".$this->nomecache . $this->nomeRandomico(3) . ".map";
 		}
+
 		if(!file_exists($arq)){
+
 			$tipolayer = "polygon";
 			//define o tipo correto de layer
 			$dg = $this->listaDadosGeometriaRegiao($codigo_tipo_regiao);
+
 			if(empty($tipolayer)){
 				$tipolayer = "polygon";
 			}
@@ -699,6 +699,7 @@ class Metaestat{
 			if($dg["dimension"] == 1){
 				$tipolayer = "line";
 			}
+
 			$meta = $this->listaTipoRegiao($codigo_tipo_regiao);
 			$titulolayer = $meta["nome_tipo_regiao"];
 			$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
@@ -1014,7 +1015,7 @@ class Metaestat{
 				//var_dump($valores);exit;
 				$min = $valores[0];
 				$max = $valores[$quantidade - 1];
-				include_once(dirname(__FILE__)."/../../classesphp/classe_estatistica.php");
+				include_once(dirname(__FILE__)."/classesphp/classe_estatistica.php");
 				$calc = new estatistica();
 				$calc->calcula($valores);
 				$v = $calc->resultado;
@@ -1275,7 +1276,7 @@ class Metaestat{
 		//obtem as conexoes definidas em ms_configgura.php
 		if($incluiPostgisMapa == true){
 			if(!isset($postgis_mapa)){
-				require(dirname(__FILE__)."/../../ms_configura.php");
+				include(dirname(__FILE__)."/../ms_configura.php");
 			}
 			if(!empty($postgis_mapa)){
 				foreach(array_keys($postgis_mapa) as $key){
@@ -1435,8 +1436,13 @@ class Metaestat{
 	 * Lista os dados de uma ou todas as regioes cadastradas
 	 * @param codigo do tipo de regiao
 	 */
-	function listaTipoRegiao($codigo_tipo_regiao=""){
-		$sql = "select * from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
+	function listaTipoRegiao($codigo_tipo_regiao="",$completo=true){
+		if($completo == true){
+			$colunas = "*";
+		} else {
+			$colunas = "codigo_tipo_regiao,nome_tipo_regiao,descricao_tipo_regiao";
+		}
+		$sql = "select $colunas from ".$this->esquemaadmin."i3geoestat_tipo_regiao ";
 		if($codigo_tipo_regiao != ""){
 			$sql .= "WHERE codigo_tipo_regiao = $codigo_tipo_regiao ";
 		}
@@ -1931,7 +1937,7 @@ class Metaestat{
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
 		$dados = $this->obtemDadosTabelaDB($regiao["codigo_estat_conexao"],$regiao["esquemadb"],$regiao["tabela"],"sim");
 		$tipol = $this->listaPropGeoRegiao($codigo_tipo_regiao);
-		include_once(dirname(__FILE__)."/../../classesphp/classe_shp.php");
+		include_once(dirname(__FILE__)."/classesphp/classe_shp.php");
 		$s = new SHP();
 		//st_dimension returns 0 for POINT, 1 for LINESTRING, 2 for POLYGON
 		//echo MS_SHP_POINT.", ".MS_SHP_ARC.", ".MS_SHP_POLYGON.", ".MS_SHP_MULTIPOINT;
