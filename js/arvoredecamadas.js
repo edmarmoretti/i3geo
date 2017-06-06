@@ -91,30 +91,6 @@ i3GEO.arvoreDeCamadas =
 			animagif: true
 		},
 		/**
-		 * Constant: ARVORE
-		 *
-		 * Objeto com a &aacute;rvore criada com YAHOO.widget.TreeView Pode ser usado para receber m&eacute;todos da API do YAHOO
-		 *
-		 * Tipo:
-		 *
-		 * {YAHOO.widget.TreeView}
-		 */
-		ARVORE : null,
-		/**
-		 * Constant: IDHTML
-		 *
-		 * Armazena o ID do elemento DOM onde a &aacute;rvore foi inserida.
-		 *
-		 * Tipo:
-		 *
-		 * {string}
-		 *
-		 * Default:
-		 *
-		 * "listaTemas"
-		 */
-		IDHTML : "listaTemas",
-		/**
 		 * Constant: CAMADASINICIAIS
 		 *
 		 * O mesmo que CAMADAS mas guarda de forma permanente as camadas que iniciaram o mapa
@@ -141,21 +117,6 @@ i3GEO.arvoreDeCamadas =
 		 * {objeto}
 		 */
 		CAMADAS : "",
-		/**
-		 * Propriedade: TEMPLATELEGENDA
-		 *
-		 * Nome do template HTML que sera usado para compor a legenda de cada tema. O HTML deve ser armazenado em i3geo/aplicmap. Templates
-		 * de legenda seguem a sintaxe definida pelo software Mapserver
-		 *
-		 * Tipo:
-		 *
-		 * {string}
-		 *
-		 * Default:
-		 *
-		 * legenda5.htm
-		 */
-		TEMPLATELEGENDA : "legenda5.htm",
 		/**
 		 * Propriedade: BARRAPROGRESSO
 		 *
@@ -190,12 +151,6 @@ i3GEO.arvoreDeCamadas =
 		 * false
 		 */
 		VERIFICAABRANGENCIATEMAS : false,
-		/*
-		 * Utilizado apenas para aplicar o evento de onclick quando e escolhida a opcao de ligar/desligar camada no menu de contexto
-		 */
-		ligaDesligaClick: function(tema){
-			$i(tema+"ckbox").click();
-		},
 
 		CONFIG : {
 			"idOnde":"",
@@ -294,7 +249,6 @@ i3GEO.arvoreDeCamadas =
 			} else {
 				return;
 			}
-			i3GEO.util.defineValor(i3GEO.arvoreDeCamadas.IDHTML, "innerHTML", "");
 
 			i3GEO.arvoreDeCamadas.CAMADAS = temas;
 			if (i3GEO.arvoreDeCamadas.CAMADASINICIAIS === "") {
@@ -329,10 +283,11 @@ i3GEO.arvoreDeCamadas =
 				}
 			});
 
-			var t = Mustache.to_html(
-					"{{#data}}" + $("#" + config.idTemplateCamada).html() + "{{/data}}",
-					{"data":clone}
-				);
+			var t = Mustache.render(
+				"{{#data}}" + $("#" + config.idTemplateCamada).html() + "{{/data}}",
+				{"data":clone}
+			);
+
 			$("#" + config.idOnde).html(t);
 
 			$("#" + config.idOnde).sortable({
@@ -513,21 +468,8 @@ i3GEO.arvoreDeCamadas =
 		 * {boolean} - marca ou desmarca
 		 */
 		ligaDesligaTemas : function(lista, status) {
-			var c, n, i, aplica = false;
-			lista = lista.split(",");
-			n = lista.length;
-			for (i = 0; i < n; i += 1) {
-				c = i3GEO.arvoreDeCamadas.capturaCheckBox(lista[i]);
-				if (c) {
-					if (c.checked !== status) {
-						aplica = true;
-					}
-					c.checked = status;
-					if (aplica === true) {
-						c.onclick();
-					}
-				}
-			}
+			if (typeof (console) !== 'undefined')
+				console.info("oops i3GEO.arvoreDeCamadas.ligaDesligaTemas()");
 		},
 		/**
 		 * Monta os n&oacute;s filhos do n&oacute; "legenda"
@@ -636,20 +578,8 @@ i3GEO.arvoreDeCamadas =
 		 */
 		atualizaLegenda : function(idtema) {
 			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.arvoreDeCamadas.atualizaLegenda()");
+				console.info("oops i3GEO.arvoreDeCamadas.atualizaLegenda()");
 
-			var node;
-			if (document.getElementById(idtema + "verdiv")) {
-				node = i3GEO.arvoreDeCamadas.ARVORE.getNodeByProperty("id", idtema);
-				if (node) {
-					i3GEO.arvoreDeCamadas.ARVORE.removeChildren(node);
-					this.mostraLegenda(node);
-					// atualiza as janelas individuais com as legendas de cada tema
-					if ($i("janelaLegenda" + idtema + "_corpo")) {
-						i3GEO.tema.mostralegendajanela(idtema, "", "abrejanela");
-					}
-				}
-			}
 		},
 		/**
 		 * Abre uma janela para escolher uma nova cor para o s&iacute;mbolo da classe.
@@ -954,32 +884,7 @@ i3GEO.arvoreDeCamadas =
 		 */
 		capturaCheckBox : function(tema) {
 			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.arvoreDeCamadas.capturaCheckBox()");
-
-			if (!$i(i3GEO.arvoreDeCamadas.IDHTML)) {
-				return;
-			}
-			var nos, n, i, no, cs, csn, j, c;
-			nos = i3GEO.arvoreDeCamadas.ARVORE.getNodesByProperty("tipo", "tema");
-			n = nos.length;
-			i = 0;
-			do {
-				try {
-					no = nos[i].getEl();
-					cs = no.getElementsByTagName("input");
-					csn = cs.length;
-					for (j = 0; j < csn; j += 1) {
-						c = cs[j];
-						if (c.name === "layer" && c.value === tema) {
-							return c;
-						}
-					}
-					i += 1;
-				} catch (e) {
-					i += 1;
-				}
-			} while (i < n);
-			return (null);
+				console.info("oops i3GEO.arvoreDeCamadas.capturaCheckBox()");
 		},
 		/**
 		 * Compara se dois objetos com as camadas s&atilde;o iguais

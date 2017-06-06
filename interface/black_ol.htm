@@ -57,7 +57,22 @@
 
 	<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
 	<div id=localizarxy class="fundoRodape"></div>
-
+	<!-- barra de ícones de navegacao -->
+	<div class="ol-i3GEOcontrols ol-control">
+		<button onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
+			<img style="width:20px;" src="../imagens/gisicons/projection.png">
+		</button>
+		<button onclick="i3GEO.Interface.zoomli()" style="float: left;">
+			<img style="width:20px;" src="../imagens/gisicons/zoom-region.png">
+		</button>
+		<br>
+		<button onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
+			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle1.png">
+		</button>
+		<button onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
+			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
+		</button>
+	</div>
 	<!-- mensagem de copyright -->
 	<div id="i3GEOcopyright">i3Geo</div>
 	<!-- botoes laterais que abrem guias moveis -->

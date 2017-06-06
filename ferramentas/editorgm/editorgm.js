@@ -96,7 +96,7 @@ i3GEO.editorGM =
 			$i(iddiv).innerHTML = i3GEO.editorGM.html();
 			ics = $i(iddiv).getElementsByTagName("button");
 			n = ics.length;
-			i3GEO.barraDeBotoes.ativaBotoes();
+			//i3GEO.barraDeBotoes.ativaBotoes();
 			i3GEO.editorGM.comboRegiaoEditavel();
 			for (i = 0; i < n; i++) {
 				ics[i].style.backgroundColor = "white";
