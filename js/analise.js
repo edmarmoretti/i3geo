@@ -498,7 +498,6 @@ i3GEO.analise =
 					YAHOO.i3GEO.janela.manager.remove(janela);
 					janela.destroy();
 				}
-				i3GEO.barraDeBotoes.ativaIcone("pointer");
 				i3GEO.analise.medeDistancia[i3GEO.Interface["ATUAL"]].fechaJanela();
 				i3GEO.analise.pontos = {};
 			},
@@ -1120,7 +1119,6 @@ i3GEO.analise =
 					YAHOO.i3GEO.janela.manager.remove(janela);
 					janela.destroy();
 				}
-				i3GEO.barraDeBotoes.ativaIcone("pointer");
 				i3GEO.analise.medeArea[i3GEO.Interface["ATUAL"]].fechaJanela();
 			},
 			/**

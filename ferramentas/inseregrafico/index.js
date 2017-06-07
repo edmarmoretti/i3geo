@@ -149,7 +149,6 @@ i3GEOF.insereGrafico = {
 	*/
 	ativaFoco: function(){
 		i3GEO.eventos.cliquePerm.desativa();
-		i3GEO.barraDeBotoes.ativaIcone("inseregrafico");
 		temp = Math.random() + "a";
 		temp = temp.split(".");
 		g_nomepin = "pin"+temp[1];

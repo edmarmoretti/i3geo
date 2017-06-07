@@ -181,7 +181,6 @@ function mostraBotoes(){
 	i3GEO.configura = {"locaplic" : ".."};
 	i3GEO.idioma.IDSELETOR = "bandeiras";
 	i3GEO.idioma.mostraSeletor();
-	//i3GEO.barraDeBotoes.ATIVA = false;
 	var ins = [],i,n = botoesIni.length,texto;
 	for(i=0;i<n;i++){
 		texto = '<div class="r" ><div class="ri" ><a target=_blank href="'+botoesIni[i].href+'" ><img style="max-height:77px;" src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';

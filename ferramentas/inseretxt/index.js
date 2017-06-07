@@ -197,7 +197,6 @@ i3GEOF.inseretxt = {
 		i3GEO.eventos.cliquePerm.desativa();
 		temp = function(){
 			i3GEO.eventos.cliquePerm.ativa();
-			i3GEO.barraDeBotoes.ativaPadrao();
 			i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.inseretxt.cria()"]);
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
@@ -210,7 +209,6 @@ i3GEOF.inseretxt = {
 	ativaFoco: function(){
 		i3GEO.eventos.cliquePerm.desativa();
 		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-		i3GEO.barraDeBotoes.ativaIcone("textofid");
 		if($i("img")){
 			$i("img").style.cursor="pointer";
 		}

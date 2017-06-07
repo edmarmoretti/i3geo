@@ -250,7 +250,6 @@ i3GEO.editorGM =
 		 */
 		ativaFoco : function() {
 			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "crosshair", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
-			i3GEO.barraDeBotoes.ativaIcone("pan");
 			i3GEO.editorGM.mudaicone();
 			i3GEO.Interface.googlemaps.recalcPar();
 		},

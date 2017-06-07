@@ -74,7 +74,11 @@
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
 	</div>
-
+	<!-- mostra uma barra de progresso conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
+	<div id="i3GEOprogressoCamadas" class="progress" style="display:block;position:absolute;top:0px; height:5px;width:0%;margin:auto;">
+		<div class="progress-bar progress-bar-striped active"  role="progressbar" style="width:100%">
+		</div>
+	</div>
 	<!-- mensagem de copyright -->
 	<div id="i3GEOcopyright">i3Geo</div>
 	<!-- botoes laterais que abrem guias moveis -->
@@ -548,7 +552,7 @@
 				<!-- limpa a selecao -->
 				<p><a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')" title="{{{selTitle}}}">{{{selTexto}}}</a>
 				<!-- zoom para a selecao -->
-				<p><a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')" title="{{{zoomselTitle}}}">{{{zoomselTexto}}}</a>
+				<p><a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')" title="{{{zoomselTitle}}}">{{{zoomSelTexto}}}</a>
 				<!-- metadados -->
 				<p><a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')" title="{{{linkTitle}}}">{{{linkTexto}}}</a>
 				<!-- download -->

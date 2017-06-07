@@ -12,7 +12,6 @@ i3GEO.eventos.MOUSECLIQUEPERM = [i3GEO.configura.funcaoTip];
 i3GEO.Interface.openlayers.TILES = true;
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.finaliza = 'if($i("omenudataInterface1")){i3GEOoMenuBar.getMenuItem("omenudataInterface1").cfg.setProperty("text", " ");}';
 i3GEO.configura.mapaRefDisplay = "none";
-i3GEO.barraDeBotoes.TIPO = "olhodepeixe";
 i3GEO.barraDeBotoes.OFFSET = -3;
 i3GEO.configura.oMenuData["submenus"]["janelas"] = [];
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = false;

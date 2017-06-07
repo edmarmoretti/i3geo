@@ -30,7 +30,6 @@ i3GEO.configura.guardaExtensao = true;
 
 i3GEO.configura.optUsuarioLogado = true;
 i3GEO.configura.mapaRefDisplay = "none";
-i3GEO.barraDeBotoes.ATIVA = false;
 i3GEO.ajuda.ATIVAJANELA = false;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = false;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.inde = true;

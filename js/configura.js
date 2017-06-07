@@ -680,8 +680,6 @@ i3GEO.configura =
 						}
 						if (i3GEO.Interface.ATUAL === "googlemaps") {
 							// alert("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse");
-							i3GEO.barraDeBotoes.ativaIcone("pan");
-							i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
 							i3GeoMap.setOptions({
 								draggable : true
 							});
@@ -720,8 +718,6 @@ i3GEO.configura =
 					dica : $trad("d4"),
 					titulo : $trad("d4t"),
 					funcaoonclick : function() {
-						i3GEO.barraDeBotoes.ativaIcone("pan");
-						i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
 						if (i3GEO.Interface.ATUAL === "googlemaps") {
 							i3GeoMap.setOptions({
 								draggable : true
@@ -774,7 +770,6 @@ i3GEO.configura =
 							temp = "identifica";
 							i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 						}
-						i3GEO.barraDeBotoes.ativaIcone("identifica");
 						i3GEO.eventos.cliquePerm.desativa();
 						if (i3GEO.eventos.cliquePerm.ativo === false) {
 							// caso seja um clique para desativar
@@ -811,7 +806,6 @@ i3GEO.configura =
 							temp = "identifica";
 							i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 						}
-						i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
 						if (i3GEO.eventos.cliquePerm.ativo === false) {
 							// na opcao de identificacao so e permitido um evento
 							i3GEO.eventos.MOUSECLIQUE = [
@@ -1010,7 +1004,6 @@ i3GEO.configura =
 					dica : $trad("d22"),
 					titulo : $trad("d22t"),
 					funcaoonclick : function() {
-						i3GEO.barraDeBotoes.ativaIcone("inserexy");
 						i3GEO.mapa.dialogo.cliquePonto();
 					}
 				},
@@ -1030,7 +1023,6 @@ i3GEO.configura =
 					dica : $trad("d24"),
 					titulo : $trad("d24t"),
 					funcaoonclick : function() {
-						i3GEO.barraDeBotoes.ativaIcone("selecao");
 						i3GEO.mapa.dialogo.selecao();
 					}
 				},
@@ -1041,7 +1033,6 @@ i3GEO.configura =
 					dica : $trad("d25"),
 					titulo : $trad("d25t"),
 					funcaoonclick : function() {
-						i3GEO.barraDeBotoes.ativaIcone("textofid");
 						i3GEO.mapa.dialogo.cliqueTexto();
 					}
 				},

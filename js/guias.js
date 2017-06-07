@@ -85,8 +85,6 @@ i3GEO.guias =
 					}
 					if (i3GEO.Interface.ATUAL === "googlemaps") {
 						// alert("Pressione a tecla CTRL junto com o bot&atilde;o esquerdo do mouse");
-						i3GEO.barraDeBotoes.ativaIcone("pan");
-						i3GEO.barraDeBotoes.BOTAOPADRAO = "pan";
 						i3GeoMap.setOptions({
 							draggable : true
 						});
@@ -138,7 +136,6 @@ i3GEO.guias =
 						var temp = "identifica";
 						i3GEO.util.mudaCursor(i3GEO.configura.cursores, temp, i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 					}
-					i3GEO.barraDeBotoes.ativaIcone("identificaBalao");
 					if (i3GEO.eventos.cliquePerm.ativo === false) {
 						// na opcao de identificacao so e permitido um evento
 						i3GEO.eventos.MOUSECLIQUE = [

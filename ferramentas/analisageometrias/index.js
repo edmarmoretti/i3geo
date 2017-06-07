@@ -83,7 +83,6 @@ i3GEOF.analisaGeometrias = {
 			combot += "</select></div>";
 			$i("i3GEOanalisageometriasoperacao").innerHTML = combot;
 			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
-			i3GEO.barraDeBotoes.ativaIcone("selecao");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -156,14 +155,12 @@ i3GEOF.analisaGeometrias = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		i3GEO.barraDeBotoes.ativaIcone("selecao");
 		i3GEOF.analisaGeometrias.comboTemas();
 		var temp = $i(i3GEO.Interface.IDMAPA);
 		if(temp){
 			temp.title = "";
 			temp.style.cursor="pointer";
 		}
-		i3GEO.barraDeBotoes.ativaIcone("selecao");
 	},
 	/*
 	Function: selecionaElemento

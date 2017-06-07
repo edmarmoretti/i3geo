@@ -366,7 +366,6 @@ i3GEOF.selecao =
 				i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS", [
 					"i3GEOF.selecao.criaCombosTemas()"
 				]);
-				i3GEO.barraDeBotoes.ativaPadrao();
 				if(i3GEO.Interface["ATUAL"] === "openlayers"){
 					if (typeof OpenLayers.Control == "undefined") {
 						api = "ol3";
@@ -391,7 +390,6 @@ i3GEOF.selecao =
 		ativaFoco : function() {
 			i3GEO.eventos.cliquePerm.desativa();
 			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "crosshair", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
-			i3GEO.barraDeBotoes.ativaIcone("selecao");
 			i3GEOF.selecao.pegaTemasSel();
 			var i = $i("i3GEOF.selecao_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;

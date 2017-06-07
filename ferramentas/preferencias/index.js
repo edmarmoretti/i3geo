@@ -118,10 +118,6 @@ i3GEOF.preferencias = {
 						tipo: "numero",
 						elemento: "i3GEO.barraDeBotoes.MAXBOTOES"
 					},{
-						titulo: $trad('mostraBarra',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.barraDeBotoes.ATIVA"
-					},{
 						titulo: $trad('deslocamentoVertical',i3GEOF.preferencias.dicionario),
 						tipo: "numero",
 						elemento: "i3GEO.barraDeBotoes.OFFSET"
@@ -130,26 +126,13 @@ i3GEOF.preferencias = {
 						tipo: "select",
 						elemento: "i3GEO.barraDeBotoes.POSICAO",
 						opcoes: ["bottom","top"]
-					},{
-						titulo: $trad('botoes',i3GEOF.preferencias.dicionario),
-						tipo: "multiselect",
-						elemento: "i3GEO.barraDeBotoes.INCLUIBOTAO",
-						opcoes: i3GEO.barraDeBotoes.INCLUIBOTAO
 					}
 				]
 			},{
 				titulo: $trad('arvoreCamadas',i3GEOF.preferencias.dicionario),//arvore de camadas
 				tipo: "arvoreDeCamadas",
 				props: [
-					{
-						titulo: $trad('mostraTitulo',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.MOSTRATITULO"
-					},{
-						titulo: $trad('mostraBarraProgresso',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.arvoreDeCamadas.BARRAPROGRESSO"
-					},{
+				   {
 						titulo: $trad('marcaTema',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS"

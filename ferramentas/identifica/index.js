@@ -345,7 +345,6 @@ i3GEOF.identifica =
 			// funcao que sera executada ao ser clicado no cabe&ccedil;alho da
 			// janela
 			cabecalho = function() {
-				i3GEO.barraDeBotoes.ativaIcone("identifica");
 				i3GEOF.identifica.ativaFoco(id);
 			};
 			minimiza = function() {
@@ -404,7 +403,6 @@ i3GEOF.identifica =
 						i3GEO.eventos.removeEventos("MOUSECLIQUE", [
 							i3GEO.configura.funcaoIdentifica
 						]);
-						i3GEO.barraDeBotoes.ativaIcone(i3GEO.barraDeBotoes.BOTAOPADRAO);
 						i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS", [
 							"i3GEOF.identifica.listaTemas()"
 						]);

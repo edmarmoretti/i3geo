@@ -2262,21 +2262,21 @@ class Atributos
 		}
 
 		if($lks == ""){
-			$lks = array_fill(0, $nitens-1,'');
+			$lks = array_fill(0, count($itens),'');
 		}
 		else{
 			$lks = explode(",",$lks);
 		}
 
 		if($itemimg == ""){
-			$itemimg = array_fill(0, $nitens-1,'');
+			$itemimg = array_fill(0, count($itens),'');
 		}
 		else{
 			$itemimg = explode(",",$itemimg);
 		}
 
 		if($locimg == ""){
-			$locimg = array_fill(0, $nitens-1,'');
+			$locimg = array_fill(0, count($itens),'');
 		}
 		else{
 			$locimg = explode(",",$locimg);

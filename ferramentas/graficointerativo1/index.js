@@ -680,9 +680,6 @@ i3GEOF.graficointerativo1 =
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function(idjanela) {
-			if (i3GEO.Interface) {
-				i3GEO.barraDeBotoes.ativaIcone("graficointerativo1");
-			}
 			var i = $i(idjanela + "_c");
 			if(i){
 				i = i.style;

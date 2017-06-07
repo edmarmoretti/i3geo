@@ -91,16 +91,6 @@ i3GEO.arvoreDeCamadas =
 			animagif: true
 		},
 		/**
-		 * Constant: CAMADASINICIAIS
-		 *
-		 * O mesmo que CAMADAS mas guarda de forma permanente as camadas que iniciaram o mapa
-		 *
-		 * Tipo:
-		 *
-		 * {objeto}
-		 */
-		CAMADASINICIAIS : "",
-		/**
 		 * Variavel: CAMADAS
 		 *
 		 * Objeto com a lista de camadas existentes no mapa. &Eacute; definido na inicializa&ccedil;&atilde;o ou no redesenho do mapa.
@@ -117,22 +107,6 @@ i3GEO.arvoreDeCamadas =
 		 * {objeto}
 		 */
 		CAMADAS : "",
-		/**
-		 * Propriedade: BARRAPROGRESSO
-		 *
-		 * Mostra uma barra na parte superior do mapa que indica o progresso do desenho das camadas do mapa
-		 *
-		 * Funciona apenas na interface Openlayers
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
-		 */
-		BARRAPROGRESSO : true,
 		/**
 		 * Propriedade: VERIFICAABRANGENCIATEMAS
 		 *
@@ -170,26 +144,6 @@ i3GEO.arvoreDeCamadas =
 			}
 			config = i3GEO.arvoreDeCamadas.CONFIG;
 			var novoel, temp;
-			// inclui o div para a barra de progresso
-			if (i3GEO.arvoreDeCamadas.BARRAPROGRESSO === true && i3GEO.Interface.ATUAL === "openlayers") {
-				if (!$i("i3GEOprogressoDiv")) {
-					novoel = document.createElement("div");
-					novoel.id = "i3GEOprogressoDiv";
-					novoel.style.position = "absolute";
-					novoel.style.top = "0px";
-					novoel.style.zIndex = "50000";
-					novoel.style.left = ((i3GEO.parametros.w / 2) - 75) + "px";
-					novoel.style.display = "none";
-					$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
-					i3GEO.arvoreDeCamadas.progressBar = new YAHOO.widget.ProgressBar({
-						height : 5,
-						width : 150,
-						minValue : 1,
-						maxValue : 0,
-						value : 0
-					}).render("i3GEOprogressoDiv");
-				}
-			}
 			if (!$i(config.idOnde)) {
 				return;
 			}
@@ -251,9 +205,6 @@ i3GEO.arvoreDeCamadas =
 			}
 
 			i3GEO.arvoreDeCamadas.CAMADAS = temas;
-			if (i3GEO.arvoreDeCamadas.CAMADASINICIAIS === "") {
-				i3GEO.arvoreDeCamadas.CAMADASINICIAIS = temas;
-			}
 			$.each( i3GEO.arvoreDeCamadas.CAMADAS, function( i,tema ) {
 				i3GEO.pluginI3geo.aplicaPropriedades(tema);
 				camada = {};
@@ -663,7 +614,7 @@ i3GEO.arvoreDeCamadas =
 				camada.sel = "hidden";
 			}
 			if (temaObj.sel.toLowerCase() === "sim"){
-				camada.zoomselTexto = $trad("t5");
+				camada.zoomSelTexto = $trad("t5");
 				camada.zoomselTitle = $trad("t4a");
 			} else {
 				camada.zoomsel = "hidden";
