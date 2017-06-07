@@ -1187,15 +1187,7 @@ i3GEO.util =
 		 */
 		scriptTag : function(js, ini, id, aguarde) {
 			var head, script;
-			/*
-			 * if (!aguarde) { aguarde = false; } var head, script, tipojanela = ""; if (i3GEO.janela) { tipojanela =
-			 * i3GEO.janela.ESTILOAGUARDE; }
-			 */
 			if (!$i(id) || id === "") {
-				/*
-				 * if (i3GEO.janela && aguarde === true) { i3GEO.janela.ESTILOAGUARDE = "reduzida"; i3GEO.janela.abreAguarde(id + "aguarde",
-				 * "Carregando JS"); }
-				 */
 				head = document.getElementsByTagName('head')[0];
 				script = document.createElement('script');
 				script.type = 'text/javascript';
@@ -2282,13 +2274,7 @@ i3GEO.util =
 			}
 			var js = i3GEO.configura.locaplic + "/ferramentas/" + dir + "/" + nomejs;
 			if (!$i("i3GEOF." + nome + "_script")) {
-				// i3GEO.janela.ESTILOAGUARDE = "reduzida";
-				// i3GEO.janela.abreAguarde("i3GEOF." + nome + "_script" + "aguarde", "Carregando JS");
 				i3GEO.util.scriptTag(js, nomefuncao, "i3GEOF." + nome + "_script");
-				/**
-				 * i3GEO.util.multiStep( [i3GEO.janela.abreAguarde,i3GEO.util.scriptTag], [["i3GEOF."+nome+"_script"+"aguarde","Carregando
-				 * JS"],[js,nomefuncao,"i3GEOF."+nome+"_script"]], function(){} );
-				 */
 			} else {
 				i3GEO.util.scriptTag(js, nomefuncao, "i3GEOF." + nome + "_script");
 			}

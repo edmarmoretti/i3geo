@@ -79,9 +79,16 @@ include("../ms_configura.php");
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
 	</div>
-	<!-- mostra uma barra de progresso conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
+	<!-- mostra uma barra de progresso conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas"
+	Essa barra pode tornar o desenho do mapa mais lento
+	-->
 	<div id="i3GEOprogressoCamadas" class="progress" style="display:block;position:absolute;top:0px; height:5px;width:0%;margin:auto;">
 		<div class="progress-bar progress-bar-striped active"  role="progressbar" style="width:100%">
+		</div>
+	</div>
+	<!--barra de aguarde id="i3GEObarraAguarde" -->
+	<div id="i3GEObarraAguarde" class="progress" style="display:block;position:absolute;top:0px; height:5px;width:0%;margin:auto;">
+		<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width:100%">
 		</div>
 	</div>
 	<!-- mensagem de copyright -->
@@ -551,7 +558,7 @@ include("../ms_configura.php");
 				<!-- tabela de atributos -->
 				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}">{{{tabelaTexto}}}</a>
 				<!-- editor de legenda -->
-				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" >{{{editorlegendaTexto}}}</a>
+				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')" >{{{editorlegendaTexto}}}</a>
 				<!-- zoom para o tema -->
 				<p><a class="{{{zoomtema}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoom('{{{name}}}')" title="{{{zoomtemaTitle}}}">{{{zoomtemaTexto}}}</a>
 				<!-- limpa a selecao -->
