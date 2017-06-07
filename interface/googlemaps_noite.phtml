@@ -48,15 +48,6 @@ include("../ms_configura.php");
 	<div id="contemImg" >
 		<div id="corpoMapa" ></div>
 	</div>
-	<!--
-	<table style='width: 100%;cellspacing: 0px;'>
-		<tr>
-			<td id=contemImg style="vertical-align: top; border-width: 0px;">
-				<div id=corpoMapa style="position: relative; "></div>
-			</td>
-		</tr>
-	</table>
-	 -->
 	<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
 	<div id=escala class=fundoRodape style="margin-left: 100px;"></div>
 
@@ -77,6 +68,13 @@ include("../ms_configura.php");
 		<button onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
+	</div>
+	<!-- mostra uma barra de progresso conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas"
+	Essa barra pode tornar o desenho do mapa mais lento
+	-->
+	<div id="i3GEOprogressoCamadas" class="progress" style="display:block;position:absolute;top:0px; height:5px;width:0%;margin:auto;">
+		<div class="progress-bar progress-bar-striped active"  role="progressbar" style="width:100%">
+		</div>
 	</div>
 	<!-- mensagem de copyright -->
 	<div id="i3GEOcopyright">i3Geo</div>

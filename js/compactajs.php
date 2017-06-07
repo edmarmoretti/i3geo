@@ -70,34 +70,46 @@ else{
 	echo "if (typeof (console) !== 'undefined')\n";
 	echo '		console.info("i3GEO.arvoreDeCamadas.atualiza()");';
 	echo "</pre>";
-unlink("../js/teste.txt");
+if(file_exists("../js/teste.txt")){
+	unlink("../js/teste.txt");
+}
 $f = @fopen("../js/teste.txt",w);
 @fclose($f);
 if (!file_exists("../js/teste.txt")){
 	echo "<span style='color:red'>N&atilde;o foi possivel escrever em js";exit;
+} else {
+	unlink("../js/teste.txt");
 }
-unlink("../js/teste.txt");
-unlink("../css/teste.txt");
+if(file_exists("../css/teste.txt")){
+	unlink("../css/teste.txt");
+}
 $f = @fopen("../css/teste.txt",w);
 @fclose($f);
 if (!file_exists("../css/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em css";exit;
+} else {
+	unlink("../css/teste.txt");
 }
-unlink("../css/teste.txt");
-unlink("../pacotes/teste.txt");
+if(file_exists("../pacotes/teste.txt")){
+	unlink("../pacotes/teste.txt");
+}
 $f = @fopen("../pacotes/teste.txt",w);
 @fclose($f);
 if (!file_exists("../pacotes/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em pacotes";exit;
+} else {
+	unlink("../pacotes/teste.txt");
 }
-unlink("../pacotes/teste.txt");
-unlink("../mashups/teste.txt");
+if(file_exists("../mashups/teste.txt")){
+	unlink("../mashups/teste.txt");
+}
 $f = @fopen("../mashups/teste.txt",w);
 @fclose($f);
 if (!file_exists("../mashups/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em mashups";exit;
+} else {
+	unlink("../mashups/teste.txt");
 }
-unlink("../mashups/teste.txt");
 echo "<pre>";
 //
 //compacta os arquivos do i3geo
@@ -289,7 +301,6 @@ foreach ($cssfiles as $f)
 $abre = fopen("../css/i3geo_ferramentas7.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
-chmod("../css/i3geo_ferramentas7.css",0777);
 //
 //compacta os codigos para o Mashup do OpenLayers
 //
@@ -466,7 +477,6 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	$abre = fopen($final.".php", "wt");
 	$escreve = fwrite ($abre,$buffer);
 	$fecha = fclose ($abre);
-	chmod($final.".php",0777);
 }
 ?>
 	<p>Notas importantes:</p>

@@ -293,7 +293,7 @@ function iniciaMapa()
 	$cordefundo = $c->red.",".$c->green.",".$c->blue;
 	//pega o texto de copyright
 	$copyright = "";
-	$lc = $m->mapa->getlayerbyname("copyright");
+	$lc = @$m->mapa->getlayerbyname("copyright");
 	if($lc != "" && $lc->status == MS_DEFAULT ){
 		if($versao["principal"] >= 6){
 			$shape = $lc->getShape(new resultObj(0));
