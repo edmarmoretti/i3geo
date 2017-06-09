@@ -163,7 +163,7 @@ packer("../pacotes/yui290/build/utilities/utilities.js","../pacotes/yui290/build
 packer("../pacotes/yui290/build/treeview/treeview.js","../pacotes/yui290/build/treeview/treeview_compacto.js","Normal");
 packer("../pacotes/yui290/build/carousel/carousel-min.js","../pacotes/yui290/build/carousel/carousel_compacto.js","Normal");
 packer("../pacotes/yui290/build/resize/resize-min.js","../pacotes/yui290/build/resize/resize_compacto.js","Normal");
-packer("../pacotes/yui290/build/progressbar/progressbar-min.js","../pacotes/yui290/build/progressbar/progressbar_compacto.js","Normal");
+//packer("../pacotes/yui290/build/progressbar/progressbar-min.js","../pacotes/yui290/build/progressbar/progressbar_compacto.js","Normal");
 packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
 packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
@@ -256,24 +256,24 @@ salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto7.js","js");
 $cssfiles = array(
 "../css/input.css",
 "../css/geral.css",
-"../css/botoes2.css",
-"../css/documentation.css",
+//"../css/botoes2.css",
+//"../css/documentation.css",
 //"../pacotes/yui290/build/logger/assets/skins/sam/logger.css",
 "../pacotes/yui290/build/fonts/fonts-min.css",
 "../pacotes/yui290/build/reset-fonts-grids/reset-fonts-grids.css",
 "../pacotes/yui290/build/grids/grids-min.css",
 "../pacotes/yui290/build/menu/assets/skins/sam/menu.css",
-"../pacotes/yui290/build/autocomplete/assets/skins/sam/autocomplete.css",
+//"../pacotes/yui290/build/autocomplete/assets/skins/sam/autocomplete.css",
 "../pacotes/yui290/build/container/assets/skins/sam/container.css",
 "../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
-"../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
+//"../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
 //"../pacotes/yui290/build/carousel/assets/skins/sam/carousel.css",
 "../pacotes/yui290/build/slider/assets/skins/sam/slider.css",
 "../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
-"../pacotes/yui290/build/progressbar/assets/skins/sam/progressbar.css",
-"../css/corrigeyui_geral.css",
+//"../pacotes/yui290/build/progressbar/assets/skins/sam/progressbar.css",
+//"../css/corrigeyui_geral.css",
 "../mashups/theme/default/style.css",
-"../css/janelaflutuante.css",
+//"../css/janelaflutuante.css",
 "../mashups/openlayers.css"
 );
 

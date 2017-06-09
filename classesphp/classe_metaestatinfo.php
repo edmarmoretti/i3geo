@@ -91,8 +91,11 @@ class MetaestatInfo{
 	 */
 	function converteTextoArray($texto){
 		try	{
-			if(empty($texto) || strtoupper($texto) == "NULL"){
+			if(empty($texto) || (!is_array($texto) && strtoupper($texto) == "NULL")){
 				return "";
+			}
+			if(!is_array($texto)){
+				return $this->converteTexto($texto);
 			}
 			$chaves = array_keys($texto);
 			if($chaves[0] != "0"){

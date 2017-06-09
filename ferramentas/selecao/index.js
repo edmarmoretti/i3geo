@@ -145,12 +145,6 @@ i3GEOF.selecao =
 				for (i = 0; i < n; i++) {
 					ics[i].style.backgroundColor = "white";
 					ics[i].className = "iconeGuiaMovel";
-					ics[i].onmouseout = function() {
-						this.className = "iconeGuiaMovel iconeGuiaMovelMouseOut";
-					};
-					ics[i].onmouseover = function() {
-						this.className = "iconeGuiaMovel iconeGuiaMovelMouseOver";
-					};
 				}
 			} catch (erro) {
 				i3GEO.janela.tempoMsg(erro);
@@ -378,6 +372,12 @@ i3GEOF.selecao =
 					api = i3GEO.Interface["ATUAL"];
 				}
 				i3GEOF.selecao.removeFiguras[api]();
+				if(api == "ol3"){
+					i3GEOF.selecao.box.ol3.removeControle();
+					i3GEOF.selecao.clique.ol3.removeControle();
+					i3GEOF.selecao.figura.ol3.removeControle();
+					i3GEOF.selecao.poligono.ol3.removeControle();
+				}
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "crosshair", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
@@ -637,6 +637,7 @@ i3GEOF.selecao =
 							})
 						})
 					});
+
 					i3GEOF.selecao.box.ol3.draw.on("boxend",function(evt){
 						var feature, geo, pol = i3GEOF.selecao.box.ol3.draw.getGeometry();
 						if ($i("i3GEOFselecaoMantemFigura").checked === true) {

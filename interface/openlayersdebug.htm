@@ -52,10 +52,10 @@
 		</tr>
 	</table>
 	 -->
-	<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
+	<!-- aqui sera incluida a escala numerica -->
 	<div id=escala class=fundoRodape></div>
 
-	<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
+	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
 	<div id=localizarxy class="fundoRodape"></div>
 
 	<!-- barra de ícones de navegacao -->
@@ -140,14 +140,14 @@
 					<img src="../imagens/gisicons/search.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" >
-				<button title="{{{d7a}}}" class="btn iconeGuiaMovel" style="box-shadow: none; margin:0px;">
-					<img src="../imagens/gisicons/tips.png" style="cursor: pointer;">
+			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;" >
+				<button title="{{{d7a}}}" class="iconeGuiaMovel" style="box-shadow: none;">
+					<img src="../imagens/gisicons/tips.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('identifica',this)" >
-				<button title="{{{d7}}}" class="btn iconeGuiaMovel" style="box-shadow: none;margin:0px;">
-					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer;">
+			<div onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
+				<button title="{{{d7}}}" class="iconeGuiaMovel" style="box-shadow: none;">
+					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
 		</div>
@@ -166,7 +166,6 @@
               			</a>
               			<ul class="dropdown-menu">
 							<li><a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)" >Refresh</a></li>
-							<li><a onclick="i3GEO.mapa.legendaHTML.libera()" href="javascript:void(0)" >{{{t2b}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)" >{{{t3a}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)" >{{{t3b}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)" >{{{t12}}}</a></li>
@@ -174,7 +173,6 @@
 							<li><a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)" >{{{t20}}}</a></li>
 							<li><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)" >{{{p21}}}</a></li>
 							<li><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)" >{{{d12}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.ferramentas()" href="javascript:void(0)" >{{{u15a}}}</a></li>
 							<li><a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)" >{{{t4}}}</a></li>
 						</ul>
 					</div>

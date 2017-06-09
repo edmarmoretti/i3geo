@@ -96,10 +96,12 @@ select option:hover {
 	width: 252px;
 	overflow: hidden;
 	background: #F8F8F8;
-	border: 1px solid #DDDDDD;
+	border: 0px solid #DDDDDD;
 	height: 22px;
 	border-radius: 2px;
 	text-align:left;
+	color: black;
+    font-weight: normal;
 }
 
 .i3geoForm150 {

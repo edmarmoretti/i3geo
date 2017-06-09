@@ -41,6 +41,20 @@ hr {
 	color: #4bd5d5 !Important;
 }
 /**************************/
+
+.iconeGuiaMovel {
+	padding: 2px;
+	border-radius: 5px 5px 5px 5px;
+	background-image: none;
+	border: solid 1px gray;
+	box-shadow: 0px 1px 3px lightgray;
+	cursor: pointer;
+	widh: 40px;
+	height: 40px;
+	background-color: rgba(0,60,136,.5);
+
+}
+
 #i3GEOguiaMovel {
 	position: absolute;
 	display: block;
@@ -364,6 +378,646 @@ Configuracoes especificas dos elementos que ficam no rodape
 .temaArrastar {
 	text-align: left;
 }
+
+
+/* Botoes das janelas flutuantes*/
+
+.yui-skin-sam .yui-button button,.yui-skin-sam .yui-button a {
+	color: #000000;
+	font-size: 95%;
+	line-height: 2;
+	min-height: 1em;
+	padding: 0 10px;
+}
+.yui-skin-sam .yui-button {
+	border-color: #D3D3D3;
+	border-radius: 4px;
+	box-shadow: 0px 0px 0px 0px rgb(230,230,230);
+	border-width: 0px 0;
+}
+.yui-skin-sam .yui-button .first-child {
+	border-color: #D3D3D3;
+	border-radius: 2px;
+	font-weight: initial;
+    border-width: 0 0px;
+    margin: 0 0px;
+}
+
+.comboTemasCabecalho .yuimenuitemlabel {
+		color: black;
+		cursor: default;
+		font-size: 10px;
+		font-weight: normal;
+		padding: 0 0px;
+		text-decoration: none;
+}
+
+.rodar .first-child button {
+	width: 250px;
+}
+.rodar150 .first-child button {
+	width: 150px;
+}
+
+.rodar100 .first-child button {
+	width: 100px;
+}
+
+.rodar0 .first-child button {
+	width: 20px;
+	height: 20px;
+}
+
+.adicionar0 .first-child button {
+	width: 20px;
+	height: 20px;
+}
+
+.enviar .first-child button {
+	width: 250px;
+}
+
+.abrir .first-child button {
+	width: 250px;
+}
+
+.abrir200 .first-child button {
+	width: 200px;
+}
+
+.abrir150 .first-child button {
+	width: 150px;
+}
+
+.abrir100 .first-child button {
+	width: 100px;
+}
+
+//janelas
+
+.bd .lista td, .bd .lista1 td, .bd .lista2 td, .bd .lista3 td, .bd .lista4 td, .bd .lista5 td, .bd .lista6 td, .bd .lista7 td, .bd .lista8 td {
+	color: white;
+}
+
+.bd select {
+	background: white;
+}
+
+.bd div {
+	text-align: left;
+}
+
+.bd p {
+	text-align: left;
+}
+
+.linha {
+	color: white;
+}
+.i3GeoTituloJanela {
+    font-family: trebuchet ms;
+    font-size: 160%;
+    font-weight: bold;
+    color: #FFFFFF;
+    opacity: 1.0;
+    text-align: center;
+    top: 5px;
+    /*margin-top: -30px;*/
+}
+
+.i3GeoIconeJanela{
+	display: none;
+	position: absolute;
+	left: 2px;
+	top: 5px;
+}
+
+.i3GeoAguardeJanela {
+	height: 2px;
+	left: 0;
+	position: absolute;
+	top: 29px;
+	width: 100%;
+	z-index: 102;
+}
+
+.yui-panel-container .yui-resizepanel .bd {
+	overflow: auto;
+	background-color: #fff;
+}
+
+.yui-panel-container.hide-scrollbars .yui-resizepanel .bd {
+	overflow: hidden;
+}
+
+.yui-panel-container.show-scrollbars .yui-resizepanel .bd {
+	overflow: auto;
+}
+
+.yui-panel-container.show-scrollbars .underlay {
+	overflow: visible;
+}
+
+.hd .i3GEOiconeFerramenta{
+	display: none;
+}
+
+.yui3-js-enabled .yui3-scrollview-loading {
+	visibility: hidden;
+}
+
+td {
+	background-color: transparent !important;
+}
+
+.conectarwms {
+	background:
+		url("../imagens/menu-lateral-subitens/catalogo/botao-conexoes.png")
+		no-repeat !important;
+}
+
+.upload {
+	background:
+		url("../imagens/menu-lateral-subitens/catalogo/botao-upload.png ")
+		no-repeat !important;
+}
+
+.download {
+	background:
+		url("../imagens/menu-lateral-subitens/catalogo/botao-download.png")
+		no-repeat !important;
+}
+
+.importarwmc {
+	background:
+		url("../imagens/menu-lateral-subitens/catalogo/botao-importarwmc.png")
+		no-repeat !important;
+}
+
+.nuvemtags {
+	background:
+		url("../imagens/menu-lateral-subitens/catalogo/botao-nuvemdetags.png")
+		no-repeat !important;
+}
+
+.carouselTemas {
+	background:
+		url("../imagens/menu-lateral-subitens/catalogo/botao-minitaturas.png")
+		no-repeat !important;
+}
+
+.buscaInde {
+	background:
+		url("../imagens/menu-lateral-subitens/catalogo/botao-pesquisanainde.png")
+		no-repeat !important;
+}
+
+.iconeMetaestat {
+	background:
+		url("../imagens/menu-lateral-subitens/catalogo/botao-mapacomlegenda.png")
+		no-repeat !important;
+}
+
+/* UTILIZADOS EM VRIOS LOCAIS */
+.ajuda_usuario {
+    background:
+        url("../imagens/menu-lateral-subitens/catalogo/botao-tiny-documentacao.png")
+        no-repeat !important;
+    width: 21px !important;
+    top: 3px;
+}
+
+.styled-select, .styled-select150, .styled-select100, .styled-select200, .styled-select250 {
+    background: none !important;
+    box-shadow: none;
+    border: none;
+    color: black;
+    font-weight: normal;
+}
+
+.styled-select input {
+    font-family: trebuchet ms;
+    font-size: 13px;
+    font-weight: normal;
+    color: #000000;
+    opacity: 1.0;
+    background: white !important;
+    box-shadow: none;
+    border: none;
+}
+
+.tic {
+    background:
+       url("../imagens/menu-lateral-subitens/camadas/botao-buscar.png")
+        scroll 0 0 rgba(0, 0, 0, 0) !important;
+    box-shadow: none;
+    height: 36px;
+    margin-left: 0;
+    width: 36px;
+}
+.ticPropriedades2 {
+    background: none !important;
+}
+
+
+/* JANELAS FLUTUANTES */
+.yui-panel div {
+	background: none !IMPORTANT;
+}
+
+.container-minimiza {
+	background:
+		url("../imagens/janelas-flutuantes/botao-dimensionar-janela.png")
+		no-repeat !important;
+	margin-top: 10px;
+}
+
+.container-minimiza:hover {
+	background:
+		url("../imagens/janelas-flutuantes/botao-dimensionar-janela-hover.png")
+		no-repeat !important;
+}
+
+.yui-skin-sam .container-minimiza {
+	cursor: pointer;
+	height: 15px;
+	position: absolute;
+	right: 35px;
+	top: 3px;
+	width: 25px;
+	z-index: 2001;
+	opacity: .8;
+	filter: alpha(opacity =       80);
+	background:
+		url("../imagens/janelas-flutuantes/botao-dimensionar-janela.png")
+		no-repeat !important;
+	margin-top: 10px;
+}
+
+.yui-skin-sam .container-duplica {
+	background: url("../imagens/janelas-flutuantes/botao-nova-janela.png")
+		no-repeat !important;
+	cursor: pointer;
+	height: 15px;
+	position: absolute;
+	right: 57px;
+	top: 3px;
+	width: 25px;
+	z-index: 2001;
+	opacity: .8;
+	filter: alpha(opacity =       80);
+}
+
+.container-duplica {
+	background: url("../imagens/janelas-flutuantes/botao-nova-janela.png")
+		no-repeat !important;
+	margin-top: 10px;
+}
+
+.container-duplica:hover {
+	background:
+		url("../imagens/janelas-flutuantes/botao-nova-janela-hover.png")
+		no-repeat !important;
+}
+
+.yui-skin-sam .container-close {
+	cursor: pointer;
+	height: 15px;
+	position: absolute;
+	right: 1px;
+	top: 3px;
+	width: 25px;
+	z-index: 2001;
+	opacity: .80;
+	filter: alpha(opacity =       80);
+	background: url("../imagens/janelas-flutuantes/botao-fechar-janela.png")
+		no-repeat !important;
+	margin-top: 10px;
+	margin-left: 5px !important;
+}
+
+.yui-skin-sam .container-close:hover {
+	background:
+		url("../imagens/janelas-flutuantes/botao-fechar-janela-hover.png")
+		no-repeat !important;
+}
+
+.yui-module .yui-overlay .yuimenu .yui-button-menu .yui-menu-button-menu .visible {
+	background-color: #094672;
+}
+
+.yui-skin-sam .yui-panel, #mostradistancia, #executa, #ferramentas, #legenda,#legendai,#corpoLegi,#listaPropriedades, #areaRealce {
+    background-color: #094672;
+    border: 13px none;
+    border-radius: 13px;
+}
+
+.yui-skin-sam .yui-resize .yui-resize-handle-br {
+    background:
+        url("../imagens/janelas-flutuantes/botao-arrastarpararedimensionar.png")
+        no-repeat !important;
+    bottom: 10px;
+    height: 20px;
+    right: 10px;
+    width: 20px;
+}
+
+.yui-skin-sam .yui-resize .yui-resize-handle-br:hover {
+    background:
+        url("../imagens/janelas-flutuantes/botao-arrastarpararedimensionar-hover.png")
+        no-repeat !important;
+}
+
+.i3GeoRodapeJanela {
+	background: none;
+	text-align: left;
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.i3GeoRodapeJanela table {
+	background : none;
+	width : 90%;
+}
+
+.i3GeoRodapeJanela td {
+	border:0px solid white;
+	cursor:pointer;
+	background: none;
+}
+
+.yui-skin-sam .yui-panel .ft {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    border: 13px none;
+    margin-top: 10px;
+    min-height: 30px;
+}
+
+.yui-skin-sam .yui-panel .ft  div{
+    background: none !IMPORTANT;
+}
+
+.yui-skin-sam .yui-panel-container.shadow .underlay {
+	bottom: 0;
+	left: 0;
+	opacity: 0.3;
+	position: absolute;
+	right: 0;
+	top: 0;
+    background: none !IMPORTANT;
+    border: none !IMPORTANT;
+    background-color: none !IMPORTANT;
+    box-shadow: none !IMPORTANT;
+}
+
+.yui-skin-sam .yui-panel .bd {
+	border: 0px;
+	box-shadow: 0 0 0px 0px black;
+	text-align: left;
+	font-size: 10px;
+    background: none repeat scroll 0 0 rgba(255, 255, 255, 0.25) !IMPORTANT;
+}
+
+bd .i3geoFormIconeEdita {
+	border : none;
+}
+
+.bd .paragrafo {
+	color: rgba(255, 255, 255, 0.6);
+}
+
+.yui-skin-sam .yui-panel-container {
+	padding: 0 1px;
+	border-radius: 5px 5px 5px 5px;
+    border: 0px;
+}
+
+.yui-skin-sam .yui-panel .bd .yui-navset {
+	background: none;
+	z-index: 1;
+	border-bottom: 2px solid lightgray;
+}
+
+.yui-skin-sam .bd .yui-navset .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em,.yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button,.yui-skin-sam .bd .yui-button button,.yui-skin-sam .bd .yui-button a,.yui-skin-sam .bd .yui-button .first-child
+	{
+	border-color: lightgray;
+}
+
+.yui-skin-sam .yui-resize .yui-resize-handle-br {
+	right: 0;
+	bottom: 0;
+	height: 8px;
+	width: 8px;
+	position: absolute;
+}
+
+.yui-skin-sam .yui-resize .yui-resize-handle-b {
+	right: 0;
+	bottom: 0;
+	height: 8px;
+	width: 8px;
+	position: absolute;
+}
+
+.yui-skin-sam .yui-navset .yui-nav a, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
+    background: rgba(5, 69, 108, 0.9) !IMPORTANT;
+    border: none;
+    font-family: trebuchet ms;
+    font-size: 13px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.6);
+}
+.yui-skin-sam .yui-navset .yui-nav a :hover{
+	color:white;
+}
+.yui-skin-sam .yui-navset .yui-nav, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav {
+    background: rgba(5, 69, 108, 0.9) !IMPORTANT;
+}
+
+.yui-skin-sam .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em {
+    border: 0px;
+}
+
+.yui-skin-sam .yui-navset .yui-nav li, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav li {
+    margin: 0 -5px 0 0;
+}
+
+.yui-skin-sam .yui-panel .hd {
+	background-color: #F2F2F2;
+	color: #000000;
+	font-size: 93%;
+	font-weight: bold;
+	line-height: 2;
+	height: 40px;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    padding-top: 0px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    text-align: left;
+    border: 0px;
+}
+
+.hd span {
+    font-family: trebuchet ms;
+	color: white;
+	opacity: 1.0;
+}
+
+.yui-panel-container div .bd, .paragrafo > label{
+    background-color: none;
+    padding: 10px;
+    position: relative;
+    font-family: trebuchet ms;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.yui-skin-sam .yui-tt .bd {
+    background-color: rgba(9, 70, 114, 0.75);
+    border-radius: 13px 13px 13px 13px;
+    padding: 10px;
+    margin-top: 10px;
+    position: relative;
+    font-family: trebuchet ms;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 1);
+    z-index: 999999;
+}
+
+.cabecalhoTemas {
+	display: inline-block;
+	overflow: hidden;
+	white-space: nowrap;
+	width: 10em;
+	text-overflow: ellipsis;
+	text-align: left;
+	line-height: 9px;
+	font-size : 10px;
+	color: black !IMPORTANT;
+}
+
+.comboTemasCabecalho {
+	z-index: 100;
+	position: absolute;
+	top: 10px;
+	left: 5px;
+}
+
+.comboTemasCabecalho .yuimenuitemlabel {
+	color: black;
+}
+
+.comboTemasCabecalho .yuimenuitemlabel:visited {
+	color: black;
+}
+
+.comboTemasCabecalho>div {
+	background-color:  #E7EEFF !Important;
+	margin-left: 3px;
+}
+
+.yui-navset {
+    background-color: #222222 !IMPORTANT;
+    opacity: 0.6 !IMPORTANT;
+    border-bottom: 1px solid #A6A8AA;
+    background-image: none !important;
+	/* tab background */
+	z-index: 1; /* 3000 */
+}
+
+.i3geoForm {
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0) !IMPORTANT;
+    color: black;
+    font-weight: normal;
+}
+
+.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
+	width: 100%;
+}
+
+.digitar, .digitar:hover, .digitarOver {
+    background-color: #222222 !IMPORTANT;
+    opacity: 0.9 !IMPORTANT;
+    box-shadow: none !IMPORTANT;
+}
+
+
+.ticfind {
+	background:
+	url("../imagens/barra-inferior/botao-tiny-zoomparacoordenadas.png")
+	scroll 0 0 rgba(0, 0, 0, 0) !important;
+	box-shadow: none;
+	height: 20px;
+    width: 20px;
+	margin-left: 5px;
+}
+
+.ticfind:hover {
+	background:
+		url("../imagens/barra-inferior/botao-tiny-zoomparacoordenadas-hover.png")
+		no-repeat !important;
+	box-shadow: none;
+}
+
+.linha, .linha1 {
+	color: white !important;
+}
+
+.lista2  td {
+    background-color: none;
+    font-family: trebuchet ms;
+    font-size: 13px;
+    font-weight: normal;
+    color: white;
+    opacity: 1.0;
+}
+
+.lista4 .digitar {
+    background-color: white !IMPORTANT;
+    opacity: 0.9 !IMPORTANT;
+    box-shadow: none !IMPORTANT;
+    color: black;
+}
+
+.lista4 .digitar:hover {
+    background-color: white !IMPORTANT;
+    opacity: 0.9 !IMPORTANT;
+    color: black;
+}
+
+.lista4 .digitarOver {
+    background-color: white !IMPORTANT;
+    opacity: 0.9 !IMPORTANT;
+    color: black;
+}
+
+
+.lista8 td, .lista6 td, .lista td {
+	color: white;
+}
+
+.lista8 td{
+	background-color : none;
+	background : none !important;
+}
+
+#slider-bg{
+	border-bottom: 1px solid gray;
+	left: 10px;
+}
+
+#mostraarea_c, #mostradistancia_c {
+	z-index: 100000;
+}
+
+#mostradistancia {
+	background-color : none !IMPORTANT;
+}
+
+
+
+
 @media print {
     -webkit-print-color-adjust:exact;
 }

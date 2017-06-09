@@ -225,7 +225,7 @@ i3GEO.gadgets =
 						"<form id='i3GEOescalanumForm' >"
 						+ "<input type='text' name='' value='"
 						+ parseInt(i3GEO.parametros.mapscale, 10)
-						+ "' class='digitar' size='10' title='' id='i3geo_escalanum' onclick='javascript:this.select();'>"
+						+ "' size='10' title='' id='i3geo_escalanum' onclick='javascript:this.select();'>"
 						+ "</form>";
 
 					onde.innerHTML = ins;

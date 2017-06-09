@@ -1115,7 +1115,6 @@ i3GEO.Interface =
 							}
 						}
 						*/
-
 						if (i3GEO.configura.mapaRefDisplay !== "none") {
 							if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")) {
 								i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");
@@ -1124,11 +1123,6 @@ i3GEO.Interface =
 								i3GEO.maparef.inicia();
 							}
 						}
-						// FIXME lente nao funciona no OSM
-						if (i3GEO.Interface.openlayers.googleLike === true) {
-							i3GEO.barraDeBotoes.INCLUIBOTAO.lentei = false;
-						}
-						//i3GEO.Interface.ativaBotoes();
 					};
 				if (i3GEO.arvoreDeCamadas.ATIVATEMA === "") {
 					i3GEO.arvoreDeCamadas.ATIVATEMA =
@@ -1141,7 +1135,7 @@ i3GEO.Interface =
 				i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 				i3GEO.idioma.mostraSeletor();
 				i3GEO.gadgets.mostraEscalaNumerica();
-				i3GEO.util.arvore("<b>" + $trad("p13") + "</b>", "listaPropriedades", i3GEO.configura.listaDePropriedadesDoMapa);
+				//i3GEO.util.arvore("<b>" + $trad("p13") + "</b>", "listaPropriedades", i3GEO.configura.listaDePropriedadesDoMapa);
 
 				if (i3GEO.parametros.kmlurl !== "") {
 					i3GEO.Interface.openlayers.adicionaKml(true, i3GEO.parametros.kmlurl);

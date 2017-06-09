@@ -351,13 +351,13 @@ i3GEO.coordenadas =
 					+ ' >'
 					+ caixa
 					+ '&nbsp;X:&nbsp;'
-					+ '<input type="text" name="" value="-00" class="digitar" size="3" title="grau" id="' + prefixo + 'xg" onclick="javascript:this.select();">'
-					+ '<input type="text" name="" value="00" class="digitar" size="2" title="minuto" id="' + prefixo + 'xm" onclick="javascript:this.select();">'
-					+ '<input type="text" name="" value="00.00" class="digitar" size="5" title="segundo" id="' + prefixo + 'xs" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="-00" size="3" title="grau" id="' + prefixo + 'xg" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="00" size="2" title="minuto" id="' + prefixo + 'xm" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="00.00" size="5" title="segundo" id="' + prefixo + 'xs" onclick="javascript:this.select();">'
 					+ '&nbsp;Y:&nbsp;'
-					+ '<input type="text" name="" value="-00" class="digitar" size="3" title="grau" id="' + prefixo + 'yg" onclick="javascript:this.select();">'
-					+ '<input type="text" name="" value="00" class="digitar" size="2" title="minuto" id="' + prefixo + 'ym" onclick="javascript:this.select();">'
-					+ '<input type="text" name="" value="00.00" class="digitar" size="5" title="segundo" id="' + prefixo + 'ys" onclick="javascript:this.select();">',
+					+ '<input type="text" name="" value="-00" size="3" title="grau" id="' + prefixo + 'yg" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="00" size="2" title="minuto" id="' + prefixo + 'ym" onclick="javascript:this.select();">'
+					+ '<input type="text" name="" value="00.00" size="5" title="segundo" id="' + prefixo + 'ys" onclick="javascript:this.select();">',
 				temp =
 				'var ' + prefixo
 					+ 'xxx = i3GEO.calculo.dms2dd($i(\''
@@ -442,11 +442,11 @@ i3GEO.coordenadas =
 					+ " class='i3GeoMascaraCoord' >"
 					+ caixa
 					+ "&nbsp;X:&nbsp;"
-					+ '<input type="text" name="" value="00" class="digitar" size="12" title="X" id="' + prefixo + 'X" >'
+					+ '<input type="text" name="" value="00" size="12" title="X" id="' + prefixo + 'X" >'
 					+ "&nbsp;Y:&nbsp;"
-					+ '<input type="text" name="" value="00" class="digitar" size="12" title="Y" id="' + prefixo + 'Y" >'
+					+ '<input type="text" name="" value="00" size="12" title="Y" id="' + prefixo + 'Y" >'
 					+ "&nbsp;Zn:&nbsp;"
-					+ '<input type="text" name="" value="--" class="digitar" size="2" title="Zona" id="' + prefixo + 'ZN" >'
+					+ '<input type="text" name="" value="--" size="2" title="Zona" id="' + prefixo + 'ZN" >'
 					+ "</div>";
 			return ins;
 		},
@@ -477,7 +477,7 @@ i3GEO.coordenadas =
 				"<div id=" + prefixo + " class='i3GeoMascaraCoord' >"
 					+ caixa
 					+ "&nbsp;"
-					+ '<input type="text" name="" value="00" class="digitar" size="12" title="Cod" id="' + prefixo + 'Codigo" >'
+					+ '<input type="text" name="" value="00" size="12" title="Cod" id="' + prefixo + 'Codigo" >'
 					+ "&nbsp;"
 					+ '<img class=ticfind style="margin-left:8px;" title=zoom onclick="'
 					+ funcao

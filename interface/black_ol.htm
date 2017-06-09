@@ -52,11 +52,12 @@
 		</tr>
 	</table>
 	 -->
-	<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
+	<!-- aqui sera incluida a escala numerica -->
 	<div id=escala class=fundoRodape></div>
 
-	<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
+	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
 	<div id=localizarxy class="fundoRodape"></div>
+
 	<!-- barra de ícones de navegacao -->
 	<div class="ol-i3GEOcontrols ol-control">
 		<button onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
@@ -72,6 +73,16 @@
 		<button onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
+	</div>
+	<!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
+	<div id="i3GEOprogressoCamadas" class="progress" style="display:block;position:absolute;top:0px; height:5px;width:0%;margin:auto;">
+		<div class="progress-bar progress-bar-striped active"  role="progressbar" style="width:100%">
+		</div>
+	</div>
+	<!--barra de aguarde id="i3GEObarraAguarde" -->
+	<div id="i3GEObarraAguarde" class="progress" style="display:block;position:absolute;top:0px; height:5px;width:0%;margin:auto;">
+		<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width:100%">
+		</div>
 	</div>
 	<!-- mensagem de copyright -->
 	<div id="i3GEOcopyright">i3Geo</div>
@@ -129,14 +140,14 @@
 					<img src="../imagens/gisicons/search.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" >
-				<button title="{{{d7a}}}" class="btn iconeGuiaMovel" style="box-shadow: none; margin:0px;">
-					<img src="../imagens/gisicons/tips.png" style="cursor: pointer;">
+			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;" >
+				<button title="{{{d7a}}}" class="iconeGuiaMovel" style="box-shadow: none;">
+					<img src="../imagens/gisicons/tips.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('identifica',this)" >
-				<button title="{{{d7}}}" class="btn iconeGuiaMovel" style="box-shadow: none;margin:0px;">
-					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer;">
+			<div onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
+				<button title="{{{d7}}}" class="iconeGuiaMovel" style="box-shadow: none;">
+					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
 		</div>
@@ -155,7 +166,6 @@
               			</a>
               			<ul class="dropdown-menu">
 							<li><a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)" >Refresh</a></li>
-							<li><a onclick="i3GEO.mapa.legendaHTML.libera()" href="javascript:void(0)" >{{{t2b}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)" >{{{t3a}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)" >{{{t3b}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)" >{{{t12}}}</a></li>
@@ -163,7 +173,6 @@
 							<li><a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)" >{{{t20}}}</a></li>
 							<li><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)" >{{{p21}}}</a></li>
 							<li><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)" >{{{d12}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.ferramentas()" href="javascript:void(0)" >{{{u15a}}}</a></li>
 							<li><a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)" >{{{t4}}}</a></li>
 						</ul>
 					</div>
@@ -540,7 +549,7 @@
 				<!-- tabela de atributos -->
 				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}">{{{tabelaTexto}}}</a>
 				<!-- editor de legenda -->
-				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" >{{{editorlegendaTexto}}}</a>
+				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')" >{{{editorlegendaTexto}}}</a>
 				<!-- zoom para o tema -->
 				<p><a class="{{{zoomtema}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoom('{{{name}}}')" title="{{{zoomtemaTitle}}}">{{{zoomtemaTexto}}}</a>
 				<!-- limpa a selecao -->
@@ -588,7 +597,6 @@
 			</div>
 			<hr>
 		</div>
-
 	</script>
 	<script>
 	$.material.init();

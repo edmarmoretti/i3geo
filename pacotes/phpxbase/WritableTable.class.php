@@ -19,7 +19,7 @@
 
 *
 **/
-
+error_reporting(0);
 class XBaseWritableTable extends XBaseTable {
 
 	/* static */

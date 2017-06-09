@@ -35,6 +35,22 @@ include("../ms_configura.php");
 	margin-bottom: 15px;
 }
 
+.ol-i3GEOcontrols {
+    top: 2.8em;
+    left: 1em;
+    width: auto;
+}
+
+#escala {
+	margin-left: 110px;
+	bottom:20px;
+}
+
+#localizarxy {
+	margin-left: 100px;
+	bottom:20px;
+}
+
 </style>
 </head>
 	<!-- As palavras entre {{{}}} sao utilizadas para a traducao. Veja i3geo/js/dicionario.js
@@ -57,11 +73,11 @@ include("../ms_configura.php");
 		</tr>
 	</table>
 	 -->
-	<!-- aqui ser&aacute; inclu&iacute;da a escala num&eacute;rica -->
-	<div id=escala class=fundoRodape style="margin-left: 100px;"></div>
+	<!-- aqui sera incluida a escala numerica -->
+	<div id=escala class=fundoRodape ></div>
 
-	<!-- aqui ser&aacute; inclu&iacute;do o gadget que mostra a coordenada geogr&aacute;fica da posi&ccedil;&atilde;o do mouse -->
-	<div id=localizarxy class="fundoRodape" style="margin-left: 100px;bottom:20px;"></div>
+	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
+	<div id=localizarxy class="fundoRodape" ></div>
 
 	<!-- barra de ícones de navegacao -->
 	<div class="ol-i3GEOcontrols ol-control">
@@ -79,9 +95,7 @@ include("../ms_configura.php");
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
 	</div>
-	<!-- mostra uma barra de progresso conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas"
-	Essa barra pode tornar o desenho do mapa mais lento
-	-->
+	<!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
 	<div id="i3GEOprogressoCamadas" class="progress" style="display:block;position:absolute;top:0px; height:5px;width:0%;margin:auto;">
 		<div class="progress-bar progress-bar-striped active"  role="progressbar" style="width:100%">
 		</div>
@@ -147,14 +161,14 @@ include("../ms_configura.php");
 					<img src="../imagens/gisicons/search.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" >
-				<button title="{{{d7a}}}" class="btn iconeGuiaMovel" style="box-shadow: none; margin:0px;">
-					<img src="../imagens/gisicons/tips.png" style="cursor: pointer;">
+			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;" >
+				<button title="{{{d7a}}}" class="iconeGuiaMovel" style="box-shadow: none;">
+					<img src="../imagens/gisicons/tips.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('identifica',this)" >
-				<button title="{{{d7}}}" class="btn iconeGuiaMovel" style="box-shadow: none;margin:0px;">
-					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer;">
+			<div onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
+				<button title="{{{d7}}}" class="iconeGuiaMovel" style="box-shadow: none;">
+					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
 		</div>
@@ -173,7 +187,6 @@ include("../ms_configura.php");
               			</a>
               			<ul class="dropdown-menu">
 							<li><a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)" >Refresh</a></li>
-							<li><a onclick="i3GEO.mapa.legendaHTML.libera()" href="javascript:void(0)" >{{{t2b}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)" >{{{t3a}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)" >{{{t3b}}}</a></li>
 							<li><a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)" >{{{t12}}}</a></li>
@@ -181,7 +194,6 @@ include("../ms_configura.php");
 							<li><a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)" >{{{t20}}}</a></li>
 							<li><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)" >{{{p21}}}</a></li>
 							<li><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)" >{{{d12}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.ferramentas()" href="javascript:void(0)" >{{{u15a}}}</a></li>
 							<li><a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)" >{{{t4}}}</a></li>
 						</ul>
 					</div>
