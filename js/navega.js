@@ -504,13 +504,31 @@ i3GEO.navega =
 		 *
 		 * {Numeric} - denominador da escala
 		 */
-		aplicaEscala : function(locaplic, sid, escala) {
+		aplicaEscala : function(escala) {
 			if (i3GEO.Interface.ATUAL === "googlemaps") {
 				i3GeoMap.setZoom(i3GEO.Interface.googlemaps.escala2nzoom(escala));
 			}
 			if (i3GEO.Interface.ATUAL === "openlayers") {
 				i3geoOL.zoomToScale(escala, true);
 				i3GEO.parametros.mapscale = parseInt(i3geoOL.getScale(),10);
+			}
+		},
+		atualizaEscalaNumerica : function(escala) {
+			var e = $i("i3GEOescalanum");
+			if (!e) {
+				i3GEO.eventos.removeEventos("NAVEGAMAPA", [
+					"i3GEO.navega.atualizaEscalaNumerica()"
+				]);
+				return;
+			}
+			if (arguments.length === 1) {
+				e.value = escala;
+			} else {
+				if (i3GEO.parametros.mapscale !== "") {
+					e.value = parseInt(i3GEO.parametros.mapscale, 10);
+				} else {
+					e.value = 0;
+				}
 			}
 		},
 		panFixo : function() {

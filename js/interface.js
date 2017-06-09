@@ -1918,7 +1918,7 @@ i3GEO.Interface =
 				i3GEO.parametros.mapexten = bounds[0] + " " + bounds[1] + " " + bounds[2] + " " + bounds[3];
 				i3GEO.parametros.mapscale = escalaAtual;
 				i3GEO.parametros.pixelsize = i3geoOL.getView().getResolution();
-				i3GEO.gadgets.atualizaEscalaNumerica(parseInt(escalaAtual, 10));
+				i3GEO.navega.atualizaEscalaNumerica(parseInt(escalaAtual, 10));
 				if (i3GEO.parametros.mapscale !== escalaAtual) {
 					i3GEO.arvoreDeCamadas.atualizaFarol(escalaAtual);
 				}

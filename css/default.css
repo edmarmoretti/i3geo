@@ -277,7 +277,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 	float: right;
 }
 
-#escala {
+.escalanumerica {
 	width: 100px;
 	left: 7px;
 	text-align: left;
@@ -285,13 +285,13 @@ Configuracoes especificas dos elementos que ficam no rodape
 	bottom: 0px;
 	display: block;
 }
-#escala td {
+.escalanumerica td {
 	float: left;
 }
-#escala span {
+.escalanumerica span {
 	border: 0px solid white;
 }
-#escala input {
+.escalanumerica input {
 	background: rgba(0, 60, 136, 0.5);
 	color: white;
 	font-family: Verdana,Arial,Helvetica,sans-serif;
@@ -716,10 +716,9 @@ td {
     background:
         url("../imagens/janelas-flutuantes/botao-arrastarpararedimensionar.png")
         no-repeat !important;
-    bottom: 10px;
     height: 20px;
-    right: 10px;
     width: 20px;
+    position: absolute;
 }
 
 .yui-skin-sam .yui-resize .yui-resize-handle-br:hover {
@@ -802,13 +801,6 @@ bd .i3geoFormIconeEdita {
 	border-color: lightgray;
 }
 
-.yui-skin-sam .yui-resize .yui-resize-handle-br {
-	right: 0;
-	bottom: 0;
-	height: 8px;
-	width: 8px;
-	position: absolute;
-}
 
 .yui-skin-sam .yui-resize .yui-resize-handle-b {
 	right: 0;

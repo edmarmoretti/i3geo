@@ -41,7 +41,7 @@ include("../ms_configura.php");
     width: auto;
 }
 
-#escala {
+.escalanumerica {
 	margin-left: 110px;
 	bottom:20px;
 }
@@ -73,8 +73,10 @@ include("../ms_configura.php");
 		</tr>
 	</table>
 	 -->
-	<!-- aqui sera incluida a escala numerica -->
-	<div id=escala class=fundoRodape ></div>
+	<!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
+	<form class="escalanumerica" onsubmit="i3GEO.navega.aplicaEscala(this.value)">
+		<input id='i3GEOescalanum' type='text' name='' value='' size='10' title=''  >
+	</form>
 
 	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
 	<div id=localizarxy class="fundoRodape" ></div>

@@ -512,7 +512,6 @@ var i3GEO = {
 							i3GEO.listaDeFerramentas = i3GEO.login.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
 						}
 
-
 						i3GEO.Interface.inicia();
 						//
 						// obtem os parametros que foram armazenados ao salvar o
@@ -613,7 +612,7 @@ var i3GEO = {
 				i3GEO.parametros.w,
 				i3GEO.parametros.h);
 		}
-		i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.janela.fechaAguarde()"]);
+		i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.janela.fechaAguarde()","i3GEO.navega.atualizaEscalaNumerica()"]);
 	},
 	/**
 	 * Executa opera&ccedil;&otilde;es ap&oacute;s o mapa ter sido posicionado
