@@ -1130,7 +1130,7 @@ i3GEO.Interface =
 				}
 				montaMapa();
 
-				i3GEO.coordenadas.mostraCoordenadas();
+				i3GEO.coordenadas.ativaEventos();
 				//i3GEO.gadgets.mostraMenuSuspenso();
 				i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 				i3GEO.idioma.mostraSeletor();

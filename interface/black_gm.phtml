@@ -80,17 +80,19 @@ include("../ms_configura.php");
 
 	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
 	<div class="localizarxy fundoRodape">
-		<div class="i3GeoMascaraCoord" id="localizarxygeoProj" style="display: block;">
+		<div class="i3GeoMascaraCoord" style="display: block;">
 			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
 				<option>DMS:</option>
 				<option value="janela">janela</option>
-				<option value="geoProj">Geo</option>
+				<option value="geoProj">DMS</option>
 				<option value="dd">Déc. de grau</option>
 				<option value="geohash">GeoHash</option>
 				<option value="policonicaSad69">Polic SAD-69</option>
 				<option value="utmSad69Proj">UTM Sad-69</option>
 				<option value="utmSirgas2000Proj">UTM Sirgas</option>
 			</select>
+		</div>
+		<div class="i3GeoMascaraCoord" id="localizarxygeoProj" style="display: block;position: absolute;top: 0px;left: 60px;">
 			X:
 			<input name="" value="-00" size="3" title="grau" id="localizarxygeoProjxg" type="text">
 			<input name="" value="00" size="2" title="minuto" id="localizarxygeoProjxm" type="text">
@@ -101,66 +103,24 @@ include("../ms_configura.php");
 			<input name="" value="00.00" size="5" title="segundo" id="localizarxygeoProjys" type="text">
 			<img class="ticfind" style="margin-left:8px;" title="zoom" onclick="i3GEO.coordenadas.zoomPontoGeo()" src="../imagens/branco.gif">
 		</div>
-		<div id="localizarxydd" class="i3GeoMascaraCoord" style="display: none;">
-			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
-				<option>DMS:</option>
-				<option value="janela">janela</option>
-				<option value="geoProj">Geo</option>
-				<option value="dd">Déc. de grau</option>
-				<option value="geohash">GeoHash</option>
-				<option value="policonicaSad69">Polic SAD-69</option>
-				<option value="utmSad69Proj">UTM Sad-69</option>
-				<option value="utmSirgas2000Proj">UTM Sirgas</option>
-			</select>
+		<div id="localizarxydd" class="i3GeoMascaraCoord" style="display: none;position: absolute;top: 0px;left: 60px;">
 			X: <input name="" value="00" size="12" title="X" id="localizarxyddX" type="text">
 			Y: <input name="" value="00" size="12" title="Y" id="localizarxyddY" type="text">
-			Zn: <input name="" value="--" size="2" title="Zona" id="localizarxyddZN" type="text">
 		</div>
-		<div id="localizarxygeohash" class="i3GeoMascaraCoord" style="display: none;">
+		<div id="localizarxygeohash" class="i3GeoMascaraCoord" style="display: none;position: absolute;top: 0px;left: 60px;">
 			GeoHash <input name="" value="00" size="12" title="Cod" id="localizarxygeohashCodigo" type="text">
 			<img class="ticfind" style="margin-left:8px;" title="zoom" onclick="i3GEO.coordenadas.geohash.zoomCodigo('localizarxygeohashCodigo')" src="../imagens/branco.gif">
 		</div>
-		<div id="localizarxypoliconicaSad69" class="i3GeoMascaraCoord" style="display: none;">
-			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
-				<option>DMS:</option>
-				<option value="janela">janela</option>
-				<option value="geoProj">Geo</option>
-				<option value="dd">Déc. de grau</option>
-				<option value="geohash">GeoHash</option>
-				<option value="policonicaSad69">Polic SAD-69</option>
-				<option value="utmSad69Proj">UTM Sad-69</option>
-				<option value="utmSirgas2000Proj">UTM Sirgas</option>
-			</select>
+		<div id="localizarxypoliconicaSad69" class="i3GeoMascaraCoord" style="display: none;position: absolute;top: 0px;left: 60px;">
 			X: <input name="" value="00" size="12" title="X" id="localizarxypoliconicaSad69X" type="text">
 			Y: <input name="" value="00" size="12" title="Y" id="localizarxypoliconicaSad69Y" type="text">
-			Zn: <input name="" value="--" size="2" title="Zona" id="localizarxypoliconicaSad69ZN" type="text">
 		</div>
-		<div id="localizarxyutmSad69Proj" class="i3GeoMascaraCoord" style="display: none;">
-			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
-				<option>DMS:</option>
-				<option value="janela">janela</option>
-				<option value="geoProj">Geo</option>
-				<option value="dd">Déc. de grau</option>
-				<option value="geohash">GeoHash</option>
-				<option value="policonicaSad69">Polic SAD-69</option>
-				<option value="utmSad69Proj">UTM Sad-69</option>
-				<option value="utmSirgas2000Proj">UTM Sirgas</option>
-			</select>
+		<div id="localizarxyutmSad69Proj" class="i3GeoMascaraCoord" style="display: none;position: absolute;top: 0px;left: 60px;">
 			X: <input name="" value="00" size="12" title="X" id="localizarxyutmSad69ProjX" type="text">
 			Y: <input name="" value="00" size="12" title="Y" id="localizarxyutmSad69ProjY" type="text">
 			Zn: <input name="" value="--" size="2" title="Zona" id="localizarxyutmSad69ProjZN" type="text">
 		</div>
-		<div id="localizarxyutmSirgas2000Proj" class="i3GeoMascaraCoord" style="display: none;">
-			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
-				<option>DMS:</option>
-				<option value="janela">janela</option>
-				<option value="geoProj">Geo</option>
-				<option value="dd">Déc. de grau</option>
-				<option value="geohash">GeoHash</option>
-				<option value="policonicaSad69">Polic SAD-69</option>
-				<option value="utmSad69Proj">UTM Sad-69</option>
-				<option value="utmSirgas2000Proj">UTM Sirgas</option>
-			</select>
+		<div id="localizarxyutmSirgas2000Proj" class="i3GeoMascaraCoord" style="display: none;position: absolute;top: 0px;left: 60px;">
 			X: <input name="" value="00" size="12" title="X" id="localizarxyutmSirgas2000ProjX" type="text">
 			Y: <input name="" value="00" size="12" title="Y" id="localizarxyutmSirgas2000ProjY" type="text">
 			Zn: <input name="" value="--" size="2" title="Zona" id="localizarxyutmSirgas2000ProjZN" type="text">

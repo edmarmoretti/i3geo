@@ -324,6 +324,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 	margin: 0;
 	border: 0px solid white;
 	box-shadow: none;
+	text-align:center;
 }
 .i3GeoMascaraCoord span {
 	border: 0px solid white;
