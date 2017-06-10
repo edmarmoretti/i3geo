@@ -478,30 +478,6 @@ var i3GEO = {
 							i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 						}
 						//
-						// calcula (opcional) o tamanho correto da tabela onde
-						// fica o mapa
-						// se n&atilde;o for feito esse c&aacute;lculo, o mapa
-						// fica ajustado a esquerda
-						//
-						temp = 0;
-						if ($i("contemFerramentas")) {
-							temp = temp
-								+ parseInt(
-									$i("contemFerramentas").style.width,
-									10);
-						}
-						if ($i("ferramentas")) {
-							temp = temp
-								+ parseInt(
-									$i("ferramentas").style.width,
-									10);
-						}
-						if ($i("mst")) {
-							$i("mst").style.width = i3GEO.parametros.w
-								+ temp
-								+ "px";
-						}
-						//
 						//complementa o objeto com os parametros para o menu de ferramentas
 						//
 						// complementa o array com os dados para o menu de
@@ -511,7 +487,6 @@ var i3GEO = {
 						if (i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin === true || (i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin != false && i3GEO.parametros.editor === "sim")) {
 							i3GEO.listaDeFerramentas = i3GEO.login.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
 						}
-
 						i3GEO.Interface.inicia();
 						//
 						// obtem os parametros que foram armazenados ao salvar o
@@ -542,20 +517,10 @@ var i3GEO = {
 							+ retorno.data);
 						return;
 					}
-					//
-					// ativa a janela de mensagens se for o caso
-					//
-					if ($i("ajuda")) // para efeitos de compatibilidade com
-					// as vers&otilde;es anteriores a 4.1
-					{
-						i3GEO.ajuda.DIVAJUDA = "ajuda";
-					}
-					if (i3GEO.configura.iniciaJanelaMensagens === true) {
-						i3GEO.ajuda.abreJanela();
-					}
 				}
 				i3GEO.aposIniciar();
 			} catch (e) {
+
 			}
 		};
 		if (!$i("i3geo")) {
@@ -621,9 +586,6 @@ var i3GEO = {
 	 * Executa tamb&eacute;m o que for definido em i3Geo.finaliza
 	 */
 	aposIniciar : function() {
-		if ($i("mst")) {
-			$i("mst").style.visibility = "visible";
-		}
 		if (jQuery.isFunction(i3GEO.finaliza)) {
 			i3GEO.finaliza.call();
 		} else {

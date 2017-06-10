@@ -516,9 +516,6 @@ i3GEO.navega =
 		atualizaEscalaNumerica : function(escala) {
 			var e = $i("i3GEOescalanum");
 			if (!e) {
-				i3GEO.eventos.removeEventos("NAVEGAMAPA", [
-					"i3GEO.navega.atualizaEscalaNumerica()"
-				]);
 				return;
 			}
 			if (arguments.length === 1) {

@@ -49,7 +49,7 @@ hr {
 	border: solid 1px gray;
 	box-shadow: 0px 1px 3px lightgray;
 	cursor: pointer;
-	widh: 40px;
+	width: 40px;
 	height: 40px;
 	background-color: rgba(0,60,136,.5);
 
@@ -1015,15 +1015,16 @@ bd .i3geoFormIconeEdita {
 }
 /* === For phones =================================== */
 @media ( max-width : 767px) {
-#i3GEOguiaMovel {
-	width: 100%;
-}
-#i3GEOguiaMovelConteudo {
-	width:95%;
-}
-.nomeTema {
-	width: 235px;
-	vertical-align: middle;
+	#i3GEOguiaMovel {
+		width: 100%;
+	}
+	#i3GEOguiaMovelConteudo {
+		width:95%;
+	}
+	.nomeTema {
+		width: 235px;
+		vertical-align: middle;
+	}
 }
 /* === For tablets ================================== */
 @media ( min-width : 768px) and (max-width:991px) {

@@ -1134,7 +1134,7 @@ i3GEO.Interface =
 				//i3GEO.gadgets.mostraMenuSuspenso();
 				i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 				i3GEO.idioma.mostraSeletor();
-				i3GEO.gadgets.mostraEscalaNumerica();
+
 				//i3GEO.util.arvore("<b>" + $trad("p13") + "</b>", "listaPropriedades", i3GEO.configura.listaDePropriedadesDoMapa);
 
 				if (i3GEO.parametros.kmlurl !== "") {
@@ -2523,7 +2523,7 @@ i3GEO.Interface =
 					i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
 					if (i3GEO.Interface.STATUS.trocando === false) {
 						i3GEO.coordenadas.mostraCoordenadas();
-						i3GEO.gadgets.mostraEscalaNumerica();
+
 						//i3GEO.gadgets.mostraMenuLista();
 						i3GEO.idioma.mostraSeletor();
 					}

@@ -74,7 +74,7 @@ include("../ms_configura.php");
 	</table>
 	 -->
 	<!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
-	<form class="escalanumerica" onsubmit="i3GEO.navega.aplicaEscala(this.value)">
+	<form class="escalanumerica" onsubmit="javascript:i3GEO.navega.aplicaEscala($i('i3GEOescalanum').value);return false;">
 		<input id='i3GEOescalanum' type='text' name='' value='' size='10' title=''  >
 	</form>
 
