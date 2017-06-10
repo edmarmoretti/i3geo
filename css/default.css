@@ -346,7 +346,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 .i3GeoMascaraCoord tr {
 	border: 0px solid white;
 }
-#localizarxy {
+.localizarxy {
 	z-index : 50;
 	color: white;
 	position: absolute;
@@ -358,8 +358,9 @@ Configuracoes especificas dos elementos que ficam no rodape
 	font-size: 1em;
 	display: inline;
 	height: 1.8em;
+	background: rgba(0, 60, 136, 0.5);
 }
-#localizarxy input, #localizarxy select {
+.localizarxy input, .localizarxy select {
 	font-size: 1em;
 	height: 1.8em;
 }
@@ -465,6 +466,10 @@ Configuracoes especificas dos elementos que ficam no rodape
 
 .bd div {
 	text-align: left;
+}
+
+.bd a, .bd a:focus, .bd a:hover {
+    color: cyan;
 }
 
 .bd p {

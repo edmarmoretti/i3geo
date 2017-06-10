@@ -262,6 +262,8 @@ i3GEOF.identifica =
 								}
 							});
 						b.addClass("rodar");
+						//TODO corrigir em funcao das mudancas em i3geo.coordenadas
+						/*
 						temp = i3GEO.coordenadas.formato, gh =
 							i3GEO.coordenadas.geohash.encodeGeoHash(
 								i3GEOF.identifica.propJanelas[idjanela].y,
@@ -275,6 +277,7 @@ i3GEOF.identifica =
 						i3GEO.coordenadas.MODOTEXTO += "Geohash: <a href='http://geohash.org/" + gh + "' target=_blank >" + gh + "</a>";
 						$i(idjanela + "i3GEOidentificacoordtexto").innerHTML = i3GEO.coordenadas.MODOTEXTO + "</span>";
 						i3GEO.coordenadas.formato = temp;
+						*/
 					};
 				i3GEOF.identifica.listaTemas("ligados", "", "", idjanela);
 				//
@@ -590,7 +593,7 @@ i3GEOF.identifica =
 				//
 				// monta a lista de temas
 				//
-				linhas += "<span style=color:gray; >" + $trad('verDados', i3GEOF.identifica.dicionario) + "</span>";
+				linhas += "<span>" + $trad('verDados', i3GEOF.identifica.dicionario) + "</span>";
 				linhas1 = "";
 				for (l = 0; l < lista.length; l++) {
 					marcado = "";

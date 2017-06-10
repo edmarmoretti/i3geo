@@ -1529,7 +1529,7 @@ display: none !important;
 .iconesGuiaMovel {
 display: none !important;
 }
-#localizarxy {
+.localizarxy {
 display: none !important;
 }
 .i3GEOfechaGuia {

@@ -644,28 +644,15 @@ i3GEO.coordenadas =
 		mudaTipo : function(obj, onde) {
 			if (obj.value === "janela") {
 				this.formato = "janela";
-				this.mostraCoordenadas();
+				this.mostraCoordenadasJanela();
 				return;
 			}
 			this.padrao = obj.value;
 			obj.selectedIndex = 0;
 			i3GEO.coordenadas.ativaBloco(onde);
 		},
-		/**
-		 * Constr&oacute;i o conjunto de elementos HTML para mostrar as coordenadas e define as fun&ccedil;&otilde;es de
-		 * atualiza&ccedil;&atilde;o.
-		 *
-		 * Parametro:
-		 *
-		 * {boolean} - (opcional) aplica ou n&atilde;o as fun&ccedil;&otilde;es ligadas a movimenta&ccedil;&atilde;o do mouse
-		 *
-		 * {string} - (opcional) id onde o resultado ser&aacute; mostrado (ir&aacute; ignorar os ids definidos em coordenadas.config)
-		 */
-		mostraCoordenadas : function(ativaMovimento, onde, x, y) {
+		mostraCoordenadasJanela : function(ativaMovimento, onde, x, y) {
 			//FIXME As coordenadas metricas nao funcionam em OSM
-			if(i3GEO.parametros.w < 700){
-				return;
-			}
 			if (i3GEO.Interface.openlayers.googleLike === true) {
 				i3GEO.coordenadas.config = {
 					"geoProj" : {
@@ -697,22 +684,123 @@ i3GEO.coordenadas =
 				if (onde === "") {
 					onde = i3GEO.coordenadas.config[tipos[0]].idhtml;
 				}
-				caixa =
-					"<select onchange='javascript:i3GEO.coordenadas.mudaTipo(this,\"" + onde
-						+ "\");' class='i3geoCoordenadasComboTipo' ><option>DMS:</option><option value='janela' >janela</option>";
-				//
-				// cria a caixa de sele&ccedil;&atilde;o
-				//
+				caixa = "";
+
 				for (i = 0; i < n; i += 1) {
 					temp = i3GEO.coordenadas.config[tipos[i]];
 					if (temp.ativo === true) {
-						caixa += "<option value='" + tipos[i] + "'>" + temp.titulo + "</option>";
+						if (temp.tipo === "geo") {
+							ins += i3GEO.coordenadas.criaMascaraDMS(onde + tipos[i], temp.titulo, caixa);
+							if (i3GEO.coordenadas.formato === "separado") {
+								try {
+									$i(temp.idhtml).innerHTML = ins;
+								} catch (e) {
+								}
+								ins = "";
+							}
+						} else {
+							if (temp.tipo === "codigo") {
+								ins += i3GEO.coordenadas.criaMascaraCodigo(onde + tipos[i], temp.titulo, temp.titulo, temp.tipoCodigo);
+							} else {
+								ins += i3GEO.coordenadas.criaMascaraMetrica(onde + tipos[i], temp.titulo, caixa);
+							}
+						}
 					}
 				}
-				caixa += "</select>";
-				if (i3GEO.coordenadas.formato !== "bloco") {
-					caixa = "";
+				if (this.formato === "janela") {
+					janela = i3GEO.janela.cria("510px", "190px", "", "", "", "<div class='i3GeoTituloJanela'>"+$trad("x49")+"</div>", "i3GEOJanelaCoordenadas", false, "hd", "", "");
+					$( janela[0].close ).click(function() {
+						i3GEO.coordenadas.formato = "bloco", i3GEO.coordenadas.mostraCoordenadas();
+					});
+					temp = $i("i3GEOJanelaCoordenadas_corpo");
+					temp.style.backgroundColor = "rgb(0, 60, 136)";
+					temp.style.color = "white";
+					temp.style.fontSize = "12px";
+					temp.style.textAlign = "left";
+					temp = $i("i3GEOJanelaCoordenadas");
+					temp.onmouseover = "";
+					temp.onmouseout = "";
+					if ($i(onde)) {
+						$i(onde).innerHTML = "";
+					}
+					onde = "i3GEOJanelaCoordenadas_corpo";
+					ins += "<br><a href='#' style='cursor:pointer;color:white' onclick='" +
+							"$(document).keypress(function(e) {if(e.altKey && e.which == 99) {" +
+							"i3GEO.util.copyToClipboard(i3GEO.coordenadas.MODOTEXTO);" +
+							"i3GEO.janela.tempoMsg(i3GEO.coordenadas.MODOTEXTO);}});' >" +
+							"Clique aqui para ativar Alt+C para poder capturar as coordenadas em mem&oacute;ria</a>";
+
 				}
+				if (onde !== "" && $i(onde)) {
+					$i(onde).innerHTML = ins;
+				}
+				for (i = 0; i < n; i += 1) {
+					temp = i3GEO.coordenadas.config[tipos[i]];
+					if (temp.ativo === true) {
+						if (temp.tipo === "geo") {
+							if (ativaMovimento === true) {
+
+									i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
+										"i3GEO.coordenadas.atualizaLocalizarGeo('" + onde + tipos[i] + "')"
+									]);
+
+							}
+							if (typeof (x) !== 'undefined') {
+								i3GEO.coordenadas.atualizaLocalizarGeo(
+									onde + tipos[i],
+									i3GEO.calculo.dd2dms(x)[0],
+									i3GEO.calculo.dd2dms(y)[0]);
+							}
+						} else {
+							nomeFunc = "i3GEO.coordenadas.atualizaProj4";
+							if (temp.tipo === "codigo") {
+								nomeFunc = "i3GEO.coordenadas.atualizaCodigo";
+							}
+							if (ativaMovimento === true) {
+								i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
+										nomeFunc + "('" + onde + "','" + tipos[i] + "')"
+									]);
+							}
+							if (typeof (x) !== 'undefined') {
+								eval(nomeFunc + "(onde,tipos[i],x,y);");
+							}
+						}
+					}
+				}
+				if (ativaMovimento === true) {
+
+						i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
+							"i3GEO.coordenadas.limpaModoTexto()"
+						]);
+
+				}
+				if (i3GEO.coordenadas.formato === "bloco") {
+					i3GEO.coordenadas.ativaBloco(onde);
+				}
+			} catch (men) {
+			}
+		},
+		mostraCoordenadas : function(ativaMovimento, onde, x, y) {
+			i3GEO.eventos.adicionaEventos("MOUSEMOVE", [
+				"i3GEO.coordenadas.atualizaLocalizarGeo('localizarxygeoProj')",
+				"i3GEO.coordenadas.atualizaProj4('localizarxy','dd')"
+			]);
+return;
+			try {
+				var tipos = i3GEO.util.listaChaves(i3GEO.coordenadas.config), n = tipos.length, temp, ins = "", i = 0, caixa, janela, nomeFunc;
+				i3GEO.coordenadas.MODOTEXTO = "";
+				if (arguments.length === 0) {
+					ativaMovimento = true;
+					onde = "";
+				}
+				//
+				// cria o HTML
+				//
+				if (onde === "") {
+					onde = i3GEO.coordenadas.config[tipos[0]].idhtml;
+				}
+				caixa = "";
+
 				for (i = 0; i < n; i += 1) {
 					temp = i3GEO.coordenadas.config[tipos[i]];
 					if (temp.ativo === true) {
@@ -918,5 +1006,23 @@ i3GEO.coordenadas =
 				codigo = i3GEO.coordenadas.geohash.decodeGeoHash(codigo);
 				i3GEO.navega.zoomponto(i3GEO.configura.locaplic, i3GEO.configura.sid, codigo.longitude, codigo.latitude);
 			}
+		},
+		zoomPonto: function(){
+			var localizarxygeoProjxxx = i3GEO.calculo.dms2dd(
+					$i('localizarxygeoProjxg').value,
+					$i('localizarxygeoProjxm').value,
+					$i('localizarxygeoProjxs').value
+			);
+			var localizarxygeoProjyyy = i3GEO.calculo.dms2dd(
+					$i('localizarxygeoProjyg').value,
+					$i('localizarxygeoProjym').value,
+					$i('localizarxygeoProjys').value
+			);
+			i3GEO.navega.zoomponto(
+					i3GEO.configura.locaplic,
+					i3GEO.configura.sid,
+					localizarxygeoProjxxx,
+					localizarxygeoProjyyy
+				);
 		}
 	};
