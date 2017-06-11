@@ -98,13 +98,13 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'icone' : [ {
 		pt : "(opcional) &Iacute;cone que ser&aacute; utilizado na apresenta&ccedil;&atilde;o da prancha:",
-		en : "",
-		es : ""
+		en : "(optional) Icon to be used in table presentation:",
+		es : "(opcional) Icono que ser&aacute; utilizado en la presentaci&oacute;n de la tabla:"
 	} ],
     'extGeo' : [ {
 		pt : "Extens&atilde;o geogr&aacute;fica (xmin ymin xmax ymax):",
-		en : "",
-		es : ""
+		en : "Map extent (xmin ymin xmax ymax):",
+		es : "Extensi&oacute;n geogr&aacute;fica (xmin ymin xmax ymax):"
 	} ],
     'mapfileInicia' : [ {
 		pt : "(opcional) Mapfile inicial (mapfile que ser&aacute; usado como base para montagem do mapa inicial. Se n&atilde;o for definido, ser&aacute; usado o default do i3geo. Utilize o endere&ccedil;o completo do aquivo mapfile no servidor.):",
