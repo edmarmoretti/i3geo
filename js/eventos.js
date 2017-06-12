@@ -358,7 +358,7 @@ i3GEO.eventos =
 				}
 			} catch (e) {
 				if (typeof (console) !== 'undefined')
-					console.error(e);
+					console.error("executaEventos " + eventos[f] + e);
 
 				eventos[f] = "";
 			}
@@ -379,6 +379,7 @@ i3GEO.eventos =
 			for(i=0;i<n;i++){
 				i3GEO.eventos[tipo].remove(eventos[i]);
 			}
+			i3GEO.eventos[tipo].remove("");
 			i3GEO.eventos[tipo] = i3GEO.eventos[tipo].getUnique();
 		},
 		/**
@@ -393,6 +394,10 @@ i3GEO.eventos =
 		 * {array} - lista dos nomes dos eventos
 		 */
 		adicionaEventos : function (tipo,eventos){
+			if(eventos == ""){
+				i3GEO.eventos[tipo] = i3GEO.eventos[tipo].getUnique();
+				return;
+			}
 			var i,n = eventos.length;
 			for(i=0;i<n;i++){
 				i3GEO.eventos[tipo].push(eventos[i]);
