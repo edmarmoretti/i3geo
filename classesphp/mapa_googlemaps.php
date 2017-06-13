@@ -7,14 +7,10 @@ das vari&aacute;veis de conex&atilde;o com banco e outras opera&ccedil;&otilde;e
 
 &Eacute; utilizado especificamente nas interfaces que utilizam a biblioteca Googlemaps.
 
-Precisa do codigo da "section" PHP aberta pelo i3Geo ou o codigo para acesso especial indicado no par&acirc;metro telaR
-(veja a ferramenta TELAREMOTA).
 
 Parametros:
 
 g_sid {string} - codigo da "section" PHP
-
-telaR {string} - (opcional) utilizado para autorizar o uso do mapfile aberto (deve estar registrado em $fingerprint (vari&aacute;vel de se&ccedil;&atilde;o)
 
 tipolayer {fundo|} - (opcional) indica que a imagem a ser produzida comp&otilde;e o fundo do mapa
 
@@ -24,7 +20,7 @@ WIDTH {numeric} - largura do mapa
 
 HEIGHT {numeric} - altura do mapa
 
-layer {string} - codigo do layer existente no mapa que ser&aacute; desenhado (ignorado quando telaR for definido)
+layer {string} - codigo do layer existente no mapa que ser&aacute; desenhado
 
 DESLIGACACHE {sim|nao} - for&ccedil;a a n&atilde;o usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
 
@@ -79,7 +75,7 @@ else{
 session_start();
 if(@$_SESSION["fingerprint"]){
 	$f = explode(",",$_SESSION["fingerprint"]);
-	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] && !in_array($_GET["telaR"],$f) ){
+	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] ){
 		ilegal();
 	}
 }
@@ -159,7 +155,7 @@ $ret = $mapa->extent;
 $cache = false;
 $cortePixels = 0;
 $versao = versaoMS();
-if(!isset($_GET["telaR"])){
+
 	//no caso de projecoes remotas, o mapfile nao e alterado
 	$numlayers = $mapa->numlayers;
 	for ($i=0;$i < $numlayers;++$i){
@@ -247,17 +243,8 @@ if(!isset($_GET["telaR"])){
 			}
 		}
 	}
-}
-else{
-	$mapa->setProjection("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
-	$numlayers = $mapa->numlayers;
-	for ($i=0;$i < $numlayers;++$i){
-		$l = $mapa->getlayer($i);
-		if($l->getProjection() == "" ){
-			$l->setProjection("proj=latlong,a=6378137,b=6378137");
-		}
-	}
-}
+
+
 //
 //qd a cahamda e para um WMS, redireciona para ogc.php
 //
@@ -311,12 +298,10 @@ $mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 $o = $mapa->outputformat;
 $o->set("imagemode",MS_IMAGEMODE_RGBA);
 
-if(!isset($_GET["telaR"])){
 	$legenda = $mapa->legend;
 	$legenda->set("status",MS_OFF);
 	$escala = $mapa->scalebar;
 	$escala->set("status",MS_OFF);
-}
 //
 //se o layer nao for do tipo fundo
 //

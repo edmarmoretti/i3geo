@@ -1055,14 +1055,6 @@ i3GEO.mapa =
 				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opacidade()", "opacidademapa", "opacidademapa");
 			},
 			/**
-			 * Function: telaRemota
-			 *
-			 * Abre a janela de dialogo da ferramenta de configuracao de uma tela remota
-			 */
-			telaRemota : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.telaremota()", "telaremota", "telaremota");
-			},
-			/**
 			 * Function: t3d
 			 *
 			 * Abre a janela de dialogo da ferramenta de geracao da visualizacao em 3d

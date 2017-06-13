@@ -311,11 +311,6 @@ i3GEO.listaDeFerramentas = {
 										id : "omenudataInterface9",
 										text : "Download de dados",
 										url : "javascript:var w = window.open(i3GEO.configura.locaplic+'/datadownload.htm')"
-									},
-									{
-										id : "omenudataInterface11",
-										text : $trad("p20"),
-										url : "javascript:i3GEO.mapa.dialogo.telaRemota()"
 									}
 								]
 							]

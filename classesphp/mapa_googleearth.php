@@ -77,9 +77,6 @@ function retornaKml(){
 	//$url = $servidor.'http://localhost:80/cgi-bin/mapserv.exe?map=c:/ms4w/tmp/ms_tmp/rPzBHuOtQa/rPzBHuOtQa.map&amp;width=1500&amp;height=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4618&amp;STYLES=&amp;FORMAT=image/jpeg&amp;TRANSPARENT=TRUE&amp;layers=estadosl';
 	$serv = strtolower($protocolo[0]) . '://'.$_SERVER['SERVER_NAME'] . ($_SERVER['SERVER_PORT'] ? ':'.$_SERVER['SERVER_PORT'] : '') . $_SERVER['PHP_SELF'];
 	$url = $serv."?g_sid=".$_GET["g_sid"]."&amp;WIDTH=1500&amp;HEIGHT=1500&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;STYLES=&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layer=".$_GET["layer"]."&amp;TIPOIMAGEM=".$_GET["TIPOIMAGEM"];
-	if(isset($_GET["telaR"])){
-		$url .= "&amp;telaR=".$_GET["telaR"];
-	}
 	$kml = '
 		<kml xmlns="http://earth.google.com/kml/2.0">
 		  <Document>
@@ -126,7 +123,6 @@ function retornaWms($map_fileX,$postgis_mapa){
 	$qy = file_exists($qyfile);
 	$o = $mapa->outputformat;
 	$o->set("imagemode",MS_IMAGEMODE_RGBA);
-	if(!isset($_GET["telaR"])){//no caso de projecoes remotas, o mapfile nao´e alterado
 		$numlayers = $mapa->numlayers;
 		for ($i=0;$i < $numlayers;++$i)
 		{
@@ -161,25 +157,15 @@ function retornaWms($map_fileX,$postgis_mapa){
 			}
 			$l->set("template","none.htm");
 		}
-	}
-	else{
-		$mapa->selectOutputFormat("jpeg");
-		$of = $mapa->outputformat;
-		$of->set("imagemode",MS_IMAGEMODE_RGBA);
-		$of->set("driver","AGG/PNG");
-		$of->set("transparent",MS_ON);
-	}
 	$mapa->setsize($_GET["WIDTH"],$_GET["HEIGHT"]);
 	if(isset($_GET["mapext"])){
 		$mapext = explode(" ",$_GET["mapext"]);
 		$mapa->setExtent($mapext[0],$mapext[1],$mapext[2],$mapext[3]);
 	}
-	if(!isset($_GET["telaR"])){
 		$legenda = $mapa->legend;
 		$legenda->set("status",MS_OFF);
 		$escala = $mapa->scalebar;
 		$escala->set("status",MS_OFF);
-	}
 	//
 	//se o layer n&atilde;o for do tipo fundo
 	//

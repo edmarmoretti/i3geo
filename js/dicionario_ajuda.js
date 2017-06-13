@@ -1248,19 +1248,6 @@ g_traducao_ajuda = {
 			en: "",
 			apijs:"i3GEO.arvoreDeTemas.dialogo.importarwmc()"
 		},
-		"99": {
-			titulo: {
-				pt: "Tela remota",
-				es: "",
-				en: ""
-			},
-			diretorio:"i3geo/ferramentas/telaremota",
-			categoria:"7",
-			pt:"Cria um link que permite abrir o mapa atual em outro computador ou navegador. O mapa clonado &eacute; atualizado conforme o original for sendo modificado.<br>Essa funcionalidade permite que um mapa seja mostrado em uma tela remota com uma interface diferente da original. &Uacute;til para proje&ccedil;&atilde;o em tel&otilde;es e salas de situa&ccedil;&atilde;o.",
-			es: "",
-			en: "",
-			apijs:"i3GEO.mapa.dialogo.telaRemota()"
-		},
 		"100": {
 			titulo: {
 				pt: "Upload KML",
