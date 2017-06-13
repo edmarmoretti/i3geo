@@ -1,7 +1,7 @@
-//TODO documentar
-//TODO incluir balao de informacoes como um elemento grafico de desenho
-//TODO incluir caixas de texto
-//TODO incluir undo na edicao
+// documentar
+// incluir balao de informacoes como um elemento grafico de desenho
+// incluir caixas de texto
+// incluir undo na edicao
 
 /*
  Editor vetorial de limites para a interface google maps

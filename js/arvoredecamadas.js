@@ -423,100 +423,6 @@ i3GEO.arvoreDeCamadas =
 				console.info("oops i3GEO.arvoreDeCamadas.ligaDesligaTemas()");
 		},
 		/**
-		 * Monta os n&oacute;s filhos do n&oacute; "legenda"
-		 *
-		 * Parametro:
-		 *
-		 * {YAHOO.widget.HTMLNode}
-		 */
-		mostraLegenda : function(node) {
-			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.arvoreDeCamadas.mostraLegenda()");
-
-			var retorna, idtema = node.data.id;
-			retorna =
-				function(retorno) {
-				var original = {
-						data : ""
-				}, i, re, tabela = "", linhas, linha, colunas, incluir, elementos, nelementos, inputs, desativar, nindices;
-				if (retorno.data && retorno.data.legenda) {
-					original = retorno;
-					retorno = retorno.data.legenda;
-					if (retorno[0]) {
-						if ((navn) && (!retorno[0].imagem)) {
-							tabela = retorno;
-						} else {
-							i = retorno[0].imagem;
-							re = new RegExp("tiff", "g");
-							i = i.replace(re, 'png');
-							tabela = "<img src='" + i + "' />";
-						}
-						retorno = "";
-					} else {
-						linhas = retorno.split("#");
-						if (linhas.length > 1) {
-							linhas = retorno.split("|");
-							tabela = "<table>";
-							linha = linhas.length - 1;
-							if (linha >= 0) {
-								do {
-									colunas = linhas[linha].split("#");
-									re = new RegExp("'", "g");
-									tabela +=
-										"<tr style='border-top:1px solid rgb(240,240,240);'><td><img src='" + colunas[4]
-									+ "' </td><td style='text-align:left'>" + colunas[2] + "</td></tr>";
-								} while (linha--);
-							}
-							tabela += "</table><br>";
-						} else if (retorno) {
-							tabela = retorno;
-						}
-					}
-				} else if(retorno && retorno.data){
-					tabela = "<img src='" + retorno.data[0].imagem + "' />";
-				} // o tema &eacute; um wms
-				incluir = "<div style='text-align:left' id='" + idtema + "verdiv" + "'>" + tabela + "</div>";
-				new YAHOO.widget.HTMLNode({
-					html : incluir,
-					enableHighlight : false,
-					expanded : false
-				}, node);
-				node.loadComplete();
-				//
-				// desliga os checkbox que foram desativados
-				// pega os objetos input
-				//
-				elementos = document.getElementById(idtema + "verdiv").getElementsByTagName("input");
-				nelementos = elementos.length;
-				inputs = [];
-				i = 0;
-				if (nelementos > 0) {
-					do {
-						if (elementos[i].type === "checkbox") {
-							inputs.push(elementos[i]);
-						}
-						i++;
-					} while (i < nelementos);
-				}
-				if (original && original.data && original.data.desativar && original.data.desativar[idtema]) {
-					desativar = original.data.desativar[idtema];
-					nindices = desativar.length;
-					i = 0;
-					if (nindices > 0) {
-						do {
-							inputs[desativar[i]].checked = false;
-							i++;
-						} while (i < nindices);
-					}
-				}
-			};
-			if (i3GEO.arvoreDeCamadas.TEMPLATELEGENDA !== "") {
-				i3GEO.php.criaLegendaHTML(retorna, idtema, i3GEO.arvoreDeCamadas.TEMPLATELEGENDA);
-			} else {
-				i3GEO.php.criaLegendaHTML(retorna, idtema);
-			}
-		},
-		/**
 		 * Function: atualizaLegenda
 		 *
 		 * Atualiza a legenda de um tema.
@@ -532,6 +438,7 @@ i3GEO.arvoreDeCamadas =
 				console.info("oops i3GEO.arvoreDeCamadas.atualizaLegenda()");
 
 		},
+		//TODO implementar isso na legenda
 		/**
 		 * Abre uma janela para escolher uma nova cor para o s&iacute;mbolo da classe.
 		 *

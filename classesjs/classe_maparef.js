@@ -502,7 +502,7 @@ i3GEO.maparef =
 		click : function() {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.maparef.click()");
-			//FIXME nao funciona no OSM
+			// nao funciona no OSM
 			if (i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps") {
 				i3GEO.Interface[i3GEO.Interface.ATUAL].pan2ponto(objposicaocursor.ddx, objposicaocursor.ddy);
 			}

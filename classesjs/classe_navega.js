@@ -70,7 +70,7 @@ i3GEO.navega =
 			posicao : 0,
 			emAcao : false
 		},
-		//TODO remover temponavegar
+		// remover temponavegar
 		/**
 		 * Tempo em milisegundos que ser&aacute; esperado para executar uma opera&ccedil;&atilde;o de navega&ccedil;&atilde;o sobre o mapa.
 		 *

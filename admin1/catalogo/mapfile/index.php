@@ -40,7 +40,8 @@ include "../../head.php";
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<div class="col-md-6">
 					<div class="form-group">
-						<label class="control-label">{{{validar}}}</label> <select title="{{{validar}}}" onchange="i3GEOadmin.mapfile.lista('',this.value);" id="" class="form-control input-lg">
+						<label class="control-label">{{{validar}}}</label>
+						<select title="{{{validar}}}" onchange="i3GEOadmin.mapfile.lista('',this.value);" id="" class="form-control input-lg">
 							<option value=''></option>
 							<option value=1>Sem fonte</option>
 							<option value=12>T&iacute;tulos diferentes no mapfile e no banco de dados</option>
@@ -56,6 +57,17 @@ include "../../head.php";
 							<option value=10>Permite KMZ</option>
 							<option value=11>N&atilde;o permite KMZ</option>
 						</select>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="form-group">
+						<div class="input-group ">
+						<label class="control-label" >{{{filtroPrefixo}}}</label>
+							<input class="form-control input-lg" type="text" value="<?php echo $_COOKIE["palavraFiltro"];?>" id="filtroPrefixo">
+							<a onclick="i3GEOadmin.mapfile.aplicaFiltroPalavra();return false;" role="button" type="button" class="pull-right btn btn-danger btn-fab btn-fab-mini" href="javascript:void(0)">
+								<i class="material-icons  md-18">send</i>
+							</a>
+						</div>
 					</div>
 				</div>
 				<div class="clearfix"></div>
@@ -135,7 +147,7 @@ include ("templates/templateClonarTema.php");
 		$.material.init();
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
-			i3GEOadmin.mapfile.init($("#corpo"),"");
+			i3GEOadmin.mapfile.init($("#corpo"),"<?php echo $_COOKIE["palavraFiltro"];?>");
 	});
 </script>
 </body>

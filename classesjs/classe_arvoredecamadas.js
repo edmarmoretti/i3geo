@@ -112,7 +112,7 @@ i3GEO.arvoreDeCamadas =
 		 * {objeto}
 		 */
 		CAMADAS : "",
-		//TODO remover em 7
+		// remover em 7
 		/**
 		 * Propriedade: FINALIZA
 		 *

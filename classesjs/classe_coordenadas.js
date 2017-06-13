@@ -694,7 +694,7 @@ i3GEO.coordenadas =
 		 * {string} - (opcional) id onde o resultado ser&aacute; mostrado (ir&aacute; ignorar os ids definidos em coordenadas.config)
 		 */
 		mostraCoordenadas : function(ativaMovimento, onde, x, y) {
-			//FIXME As coordenadas metricas nao funcionam em OSM
+			// As coordenadas metricas nao funcionam em OSM
 			if(i3GEO.parametros.w < 700){
 				return;
 			}

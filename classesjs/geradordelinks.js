@@ -51,7 +51,7 @@ Veja
 //carrega as depend&ecirc;ncias
 //
 
-//TODO aplicar o padrao de css nos inputs (ver HTML)
+// aplicar o padrao de css nos inputs (ver HTML)
 (function(){
 	var scriptLocation = "";
 	var scripts = document.getElementsByTagName('script');

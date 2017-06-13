@@ -34,7 +34,7 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-//TODO nova ferramenta para definir GEOMTRANSFORM
+// nova ferramenta para definir GEOMTRANSFORM
 i3GEO.tema =
 	{
 		/**

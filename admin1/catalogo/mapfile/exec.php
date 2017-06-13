@@ -36,6 +36,8 @@ $codigo = str_replace ( ".", "", $codigo );
 $codigo = strip_tags ( $codigo );
 $codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
 
+setcookie("palavraFiltro", strip_tags($_POST ["palavra"]));
+
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :

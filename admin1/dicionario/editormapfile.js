@@ -558,5 +558,10 @@ i3GEOadmin.mapfile.dicionario = {
 		pt : "Sobre os parâmetros utilizados, veja detalhes em ",
 		en : "",
 		es : ""
+	} ],
+    'filtroPrefixo' : [ {
+		pt : "Palavra para filtrar a lista de mapfiles",
+		en : "",
+		es : ""
 	} ]
 };

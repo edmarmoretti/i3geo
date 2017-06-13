@@ -1,6 +1,6 @@
-//TODO incluir balao de informacoes como um elemento grafico de desenho
-//TODO incluir caixas de texto
-//TODO incluir undo na edicao
+// incluir balao de informacoes como um elemento grafico de desenho
+// incluir caixas de texto
+// incluir undo na edicao
 
 /*
 Title: Editor vetorial para OpenLayers

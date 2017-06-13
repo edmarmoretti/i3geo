@@ -348,5 +348,9 @@ Obt&eacute;m a lista
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
 			);
+		},
+		aplicaFiltroPalavra: function(){
+			var palavra = $("#filtroPrefixo").val();
+			i3GEOadmin.mapfile.lista(palavra);
 		}
 };
