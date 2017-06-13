@@ -690,8 +690,8 @@
 				<div class="checkbox text-left">
 					<!-- a classe itemLegenda e importante para nao imprimir quando nao estiver checado -->
 					<label class="itemLegenda" >
-						<input class="noprint" type="checkbox" id='legendack_{{name}}_{{index}}' value="{{{index}}}" name="{{{layer}}}" {{{checked}}} onclick="i3GEO.legenda.inverteStatusClasse(this)">
-						<span class="checkbox-material noprint"><span class="check"></span></span> <img src="{{{img}}}" > {{{nome}}}
+						<input class="noprint" type="checkbox" id='legendack_{{layer}}_{{index}}' value="{{{index}}}" name="{{{layer}}}" {{{checked}}} onclick="i3GEO.legenda.inverteStatusClasse(this)">
+						<span class="checkbox-material noprint"><span class="check"></span></span> <img style="cursor:pointer;" onclick="i3GEO.legenda.mudaCorClasse('{{layer}}','{{index}}');return false;" src="{{{img}}}" title="{{{altera}}}"> {{{nome}}}
 					</label>
 				</div>
 				{{/classes}}

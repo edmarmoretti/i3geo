@@ -438,40 +438,6 @@ i3GEO.arvoreDeCamadas =
 				console.info("oops i3GEO.arvoreDeCamadas.atualizaLegenda()");
 
 		},
-		//TODO implementar isso na legenda
-		/**
-		 * Abre uma janela para escolher uma nova cor para o s&iacute;mbolo da classe.
-		 *
-		 * A chamada dessa fun&ccedil;&atilde;o &eacute; definida em aplicmap/legenda2.htm
-		 *
-		 * Parametro:
-		 *
-		 * {Object input} - objeto do tipo INPUT com o id da classe e o id do tema
-		 */
-		escolheCorClasse : function(leg) {
-			// cria um elemento que receber&aacute; a escolha da cor e que
-			// ir&aacute; disparar a fun&ccedil;&atilde;o de mudan&ccedil;a de cor
-			// da classe
-			var obj, novoel;
-			leg = leg.parentNode.getElementsByTagName("input")[0];
-			if (!$i("tempinputcorclasse")) {
-				novoel = document.createElement("input");
-				novoel.id = "tempinputcorclasse";
-				novoel.style.display = "none";
-				novoel.alt = "objeto criado para guardar dados da funcao escolohercorclasse";
-				novoel.onchange = "";
-				document.body.appendChild(novoel);
-			}
-			obj = $i("tempinputcorclasse");
-			obj.value = "";
-			obj.tema = leg.name;
-			obj.idclasse = leg.value;
-			obj.onchange = function() {
-				var obj = $i("tempinputcorclasse");
-				i3GEO.tema.alteracorclasse(obj.tema, obj.idclasse, obj.value);
-			};
-			i3GEO.util.abreCor("", "tempinputcorclasse");
-		},
 		/**
 		 * Monta o texto com o t&iacute;tulo do tema. Esse texto &eacute; o que ser&aacute; mostrado nos n&oacute;s principais da
 		 * &aacute;rvore e cont&eacute;m o checkbox para ligar e desligar o tema.
