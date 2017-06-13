@@ -405,6 +405,7 @@ i3GEO.guias =
 				idTemplateCamada : "guia1objTemplateCamadas",
 				idListaFundo : "listaFundo",
 				idTemplateCamadaFundo : "guia1objTemplateCamadasFundo",
+				verificaAbrangencia : "",
 				click : function(obj){
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao que abre a guia de camadas");
@@ -412,6 +413,9 @@ i3GEO.guias =
 					var f = i3GEO.guias.CONFIGURA.temas;
 					obj = $(obj);
 
+					if(obj.attr("data-verificaAbrangencia") != undefined){
+						f.verificaAbrangencia = obj.attr("data-verificaAbrangencia");
+					}
 					if(obj.attr("data-idconteudo") != undefined){
 						f.idconteudo = obj.attr("data-idconteudo");
 					}
@@ -432,7 +436,8 @@ i3GEO.guias =
 						"idOnde" : f.idListaDeCamadas,
 						"idTemplateCamada": f.idTemplateCamada,
 						"idListaFundo": f.idListaFundo,
-						"idTemplateCamadaFundo": f.idTemplateCamadaFundo
+						"idTemplateCamadaFundo": f.idTemplateCamadaFundo,
+						"verificaAbrangencia": f.verificaAbrangencia
 					});
 				}
 			},

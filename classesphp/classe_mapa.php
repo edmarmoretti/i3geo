@@ -323,15 +323,16 @@ class Mapa
 				//
 				//verifica se o tema pode receber a opera&ccedil;&atilde;o de zoom para o tema
 				//
-				if (($ct != 1) && ($oLayer->getmetadata("extensao") == ""))
-				{
+				if (($ct != 1) && ($oLayer->getmetadata("extensao") == "" && $oLayer->getmetadata("exttema") == "")){
 					$zoomtema = "nao";
 					$exttema = "";
 				}
-				else
-				{
+				else{
 					$zoomtema = "sim";
 					$exttema = $oLayer->getmetadata("extensao");
+					if($exttema == ""){
+						$exttema = $oLayer->getmetadata("extensao");
+					}
 				}
 				//
 				//verifica se existe restri&ccedil;&atilde;o de escala

@@ -2295,6 +2295,9 @@ i3GEO.util =
 		 * boolean
 		 */
 		intersectaBox : function(box1, box2) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.util.intersectaBox()" + box1 + "  " + box2);
+
 			box1 = box1.split(" ");
 			box2 = box2.split(" ");
 			var box1i = box2, box2i = box1, coordx, coordy;

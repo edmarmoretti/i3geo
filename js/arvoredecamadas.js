@@ -107,31 +107,14 @@ i3GEO.arvoreDeCamadas =
 		 * {objeto}
 		 */
 		CAMADAS : "",
-		/**
-		 * Propriedade: VERIFICAABRANGENCIATEMAS
-		 *
-		 * Verifica ou n&atilde;o se um tema da &aacute;rvore est&aacute; dentro da abrang&ecirc;ncia do mapa atual, marcando esses temas na
-		 * &aacute;rvore
-		 *
-		 * A verifica&ccedil;&atilde;o s&oacute; &eacute; feita se o tema possuir a extens&atilde;o geogr&aacute;fica registrada (veja o
-		 * sistema de administra&ccedil;&atilde;o)
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * false
-		 */
-		VERIFICAABRANGENCIATEMAS : false,
-
+		CAMADASINDEXADAS : [], //CAMADAS indexadas pelo name
 		CONFIG : {
-			"idOnde":"",
+			"idOnde":"", //onde a lista sera inserida
 			"aposIniciar": "", //funcao
-			"idTemplateCamada": "",
-			"idListaFundo": "",
-			"idTemplateCamadaFundo": ""
+			"idTemplateCamada": "", //id do template mustache que monta a lista de camadas
+			"idListaFundo": "", //onde a lista de camadas de fundo sera inserida
+			"idTemplateCamadaFundo": "", //id do template para as camadas de fundo
+			"verificaAbrangencia": "" //verifica se a camada esta na abrangencia do mapa e insere essa string como uma classe CSS
 		},
 		inicia : function(config) {
 			if (typeof (console) !== 'undefined')
@@ -146,6 +129,9 @@ i3GEO.arvoreDeCamadas =
 			var novoel, temp;
 			if (!$i(config.idOnde)) {
 				return;
+			}
+			if(config.verificaAbrangencia != ""){
+				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()"]);
 			}
 			i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS);
 
@@ -205,6 +191,7 @@ i3GEO.arvoreDeCamadas =
 			}
 
 			i3GEO.arvoreDeCamadas.CAMADAS = temas;
+			i3GEO.arvoreDeCamadas.CAMADASINDEXADAS = [];
 			$.each( i3GEO.arvoreDeCamadas.CAMADAS, function( i,tema ) {
 				i3GEO.pluginI3geo.aplicaPropriedades(tema);
 				camada = {};
@@ -232,6 +219,7 @@ i3GEO.arvoreDeCamadas =
 				if (tema.escondido.toLowerCase() !== "sim") {
 					clone.push(camada);
 				}
+				i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[camada.name] = tema;
 			});
 
 			var t = Mustache.render(
@@ -871,28 +859,23 @@ i3GEO.arvoreDeCamadas =
 		 * &eacute; mostrado na &aacute;rvore
 		 */
 		verificaAbrangenciaTemas : function() {
-			if (i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS === false) {
-				return;
-			}
-			try {
-				var i = 0, temp, nelementos = i3GEO.arvoreDeCamadas.CAMADAS.length, ltema;
-				if (nelementos > 0) {
-					do {
-						ltema = i3GEO.arvoreDeCamadas.CAMADAS[i];
-						temp = ltema.exttema;
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");
 
-						if (temp !== "") {
-							if (i3GEO.util.intersectaBox(temp, i3GEO.parametros.mapexten) === false) {
-								$i("ArvoreTituloTema" + ltema.name).style.color = "gray";
-							} else {
-								$i("ArvoreTituloTema" + ltema.name).style.color = "black";
-							}
-						}
-						i += 1;
-					} while (i < nelementos);
+			var nos = $("#" + i3GEO.arvoreDeCamadas.CONFIG.idOnde).find("input");
+
+			$.each( nos, function( i,no ) {
+				var ltema = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[no.value];
+				var temp = ltema.exttema;
+				if (temp !== "" && temp != undefined ) {
+					if (i3GEO.util.intersectaBox(temp, i3GEO.parametros.mapexten) === false) {
+						$(no).addClass(i3GEO.arvoreDeCamadas.CONFIG.verificaAbrangencia);
+					} else {
+						$(no).removeClass(i3GEO.arvoreDeCamadas.CONFIG.verificaAbrangencia);
+					}
 				}
-			} catch (e) {
-			}
+
+			});
 		},
 		/**
 		 * Verifica se algum tema est&aacute; marcado com o metadado Aplicaextensao. Retorna a primeira ocorr&ecirc;ncia se houver

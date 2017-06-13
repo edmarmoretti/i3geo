@@ -29,7 +29,9 @@
 	background: none;
 	margin-bottom: 15px;
 }
-
+.foraDoMapa + span > span {
+	background-color: yellow;
+}
 </style>
 </head>
 	<!-- As palavras entre {{{}}} sao utilizadas para a traducao. Veja i3geo/js/dicionario.js
@@ -153,8 +155,11 @@
 			<!-- temas existentes no mapa
 				data-idListaDeCamadas - id onde sera incluida a lista de camadas
 				data-idListaFundo - id onde sera incluida a lista de camadas de fundo (mapa base)
+				data-verificaAbrangencia - se for uma string, faz a verificacao se a camada esta fora da abrangencia atual do mapa,
+					inserindo ou nao a string como uma classe CSS. Pode degradar a performance e depende
+					do metadata existente na camada. Deixe vazio para nao ativar a operacao.
 			-->
-			<div onclick="i3GEO.guias.ativa('temas',this)" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
+			<div onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
 				<button title="{{{g4a}}}" class="iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/layer.png" style="cursor: pointer; padding: 3px;">
 				</button>
