@@ -448,10 +448,62 @@
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
 					<div id="legendaHtml" data-template="#guia4objTemplateLegenda" style='display: block; text-align: left'></div>
 				</div>
-				<div id='guia7obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">X</div>
-					<div id="buscaRapidaGuia" style='display: block; text-align: left'></div>
+				<!-- busca
+				Funcoes de busca por registros. Pode ser feita nos temas existentes no mapa, em um servico de busca e no google
+				No botao que dispara a busca, ficam os parametros de configuracao
+				Esses parametros indicam qual o checkbox que define o tipo de busca, o local onde os dados serao mostrados e o template para formatar o resultado
+				-->
+				<div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
+					<form>
+						<div class="form-group label-floating">
+							<label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>
+							<div class="input-group">
+								<input class="form-control" type="text" value="" name="valorBuscaRapida">
+								<span class="input-group-btn">
+									<a data-idTemplateGoogle="templateBuscaTemasMapa" data-inputGoogle="[name=google]" data-ondeGoogle=".i3GEOresultadoBuscaGoogle" data-idTemplateTemasMapa="templateBuscaTemasMapa" data-inputTemasMapa="[name=temasMapa]" data-ondeTemasMapa=".i3GEOresultadoBuscaTemasMapa" data-idTemplateServicos="templateBuscaServico" data-ondeConteiner="#guia7obj" data-inputOndePalavra="[name=valorBuscaRapida]" data-inputServicosExternos="[name=servicosExternos]" data-ondeServicosExternos=".i3GEOresultadoBuscaServicos" onclick="i3GEO.busca.inicia(this);return false;" role="button" type="button" class="btn btn-warning btn-fab btn-fab-mini" href="javascript:void(0)">
+										<span class="material-icons md-18">send</span>
+									</a>
+								</span>
+							</div>
+						</div>
+						<h4>{{{x37}}}:</h4>
+						<div class="form-inline" style="width:100%;">
+							<div class="list-group condensed">
+								<div class="checkbox text-left">
+								<label>
+									<input checked class="noprint" value="on" type="checkbox" value="" name="servicosExternos" >
+									<span class="checkbox-material noprint"><span class="check"></span></span> {{{x38}}}
+								</label>
+								</div>
+							</div>
+							<div class="list-group condensed">
+								<div class="checkbox text-left">
+								<label>
+									<input class="noprint" value="on" type="checkbox" name="temasMapa">
+									<span class="checkbox-material noprint"><span class="check"></span></span> {{{x39}}}
+								</label>
+								</div>
+							</div>
+							<!-- Apenas para a interface google maps
+							<div class="list-group condensed">
+								<div class="checkbox text-left">
+								<label>
+									<input class="noprint" value="on" type="checkbox" name="google">
+									<span class="checkbox-material noprint"><span class="check"></span></span> Google
+								</label>
+								</div>
+							</div>
+							 -->
+						</div>
+					</form>
+					<hr>
+					<div class="i3GEOresultadoBuscaServicos" ></div>
+					<div class="i3GEOresultadoBuscaTemasMapa" ></div>
+					<div class="i3GEOresultadoBuscaGoogle" ></div>
+					<div class="alert alert-info" role="alert">{{{x40}}}</div>
 				</div>
+
 				<!-- Ferramentas -->
 				<div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
@@ -687,8 +739,24 @@
 			<hr>
 		</div>
 	</script>
+	<script id="templateBuscaServico" type="x-tmpl-mustache">
+		<ul class="nav nav-pills nav-stacked">
+			<h4>{{{tema}}}</h4>
+			{{#lugares}}
+			<li>
+				<a onclick="i3GEO.busca.zoom('{{{limite}}}','{{{layer}}}','{{{gid}}}','{{{nome}}}')" onmouseout="i3GEO.busca.escondexy();" onmouseover="i3GEO.busca.mostraxy('{{{limite}}}','wkt');" href="#" class="list-group-item">{{{nome}}} <small>{{{centroide}}}</small></a>
+			</li>
+			{{/lugares}}
+		</ul>
+	</script>
+	<script id="templateBuscaTemasMapa" type="x-tmpl-mustache">
+		<ul class="nav nav-pills nav-stacked">
+			<li>
+				<a onclick="i3GEO.busca.zoomExt('{{{box}}}')" onmouseout="i3GEO.busca.escondexy();" onmouseover="i3GEO.busca.mostraxy('{{{box}}}','extent');" href="#" class="list-group-item">{{{valor}}}</a>
+			</li>
+		</ul>
+	</script>
 	<script>
-	$.material.init();
 	<!--inicia o mapa-->
 	i3GEO.cria();
 	i3GEO.inicia();

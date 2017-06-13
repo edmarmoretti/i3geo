@@ -360,16 +360,16 @@ i3GEO.guias =
 				titulo : "",
 				id : "guia7",
 				idconteudo : "guia7obj",
-				status: false,
-				click : function() {
-					//i3GEO.guias.mostra("buscaRapida");
-					//verifica se ja foi criada
-					if(i3GEO.guias.CONFIGURA.buscaRapida.status === true){
-						return;
+				idBuscaRapida : "buscaRapidaGuia",
+				click : function(obj) {
+					if (typeof (console) !== 'undefined')
+						console.info("click no botao que abre a guia de camadas");
+
+					var f = i3GEO.guias.CONFIGURA.buscaRapida;
+					obj = $(obj);
+					if(obj.attr("data-idconteudo") != undefined){
+						f.idconteudo = obj.attr("data-idconteudo");
 					}
-					i3GEO.guias.CONFIGURA.buscaRapida.status = true;
-					i3GEO.gadgets.PARAMETROS.mostraBuscaRapida.tipo = "normal";
-					i3GEO.gadgets.mostraBuscaRapida("buscaRapidaGuia");
 				}
 			},
 			"legenda" : {

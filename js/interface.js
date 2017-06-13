@@ -417,7 +417,6 @@ i3GEO.Interface =
 			if ($i("i3GEOcompartilhar")) {
 				i3GEO.social.compartilhar("i3GEOcompartilhar", temp, temp, "semtotal");
 			}
-			gadgets.mostraBuscaRapida();
 			gadgets.mostraVersao();
 			gadgets.mostraEmail();
 			//
