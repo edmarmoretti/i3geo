@@ -453,34 +453,6 @@ i3GEO.arvoreDeTemas = {
 
 	},
 	/**
-	 * Lista os mapas cadastrados
-	 */
-	listaMapasCadastrados : function() {
-		var monta = function(retorno) {
-			var node, nraiz, i, html, tema;
-			retorno = retorno.data.mapas;
-			node = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty(
-					"idmapacadastrado", "raiz");
-			nraiz = retorno.length;
-			for (i = 0; i < nraiz; i += 1) {
-				tema = {
-					"nameInput" : "mapaCadastrado",
-					"tid" : "mapaCadastrado_" + retorno[i].ID_MAPA,
-					"nome" : retorno[i].NOME
-				}, html = i3GEO.arvoreDeTemas.montaTextoTema("gray", tema),
-						new YAHOO.widget.HTMLNode({
-							id_mapaCadastrado : retorno[i].ID_MAPA,
-							html : html,
-							expanded : false,
-							hasIcon : true,
-							enableHighlight : true
-						}, node);
-			}
-			node.loadComplete();
-		};
-		i3GEO.php.pegaMapas(monta);
-	},
-	/**
 	 * Lista as variaveis cadastradas no sistema METAESTAT preenchendo
 	 */
 	listaVariaveisMetaestat : function() {
@@ -703,50 +675,7 @@ i3GEO.arvoreDeTemas = {
 		}
 	},
 	adicionaNoNavegacaoDir : function(drives, arvore) {
-		var temp = function() {
-			var iglt, ig, drive, tempNode;
-			if (!drives) {
-				drives = i3GEO.arvoreDeTemas.DRIVES;
-			}
-			if (!arvore) {
-				arvore = i3GEO.arvoreDeTemas.ARVORE;
-			}
-			if (drives == undefined || drives == "" || drives.length === 0) {
-				arvore.draw();
-				return;
-			}
-			iglt = drives.length;
-			tempNode = new YAHOO.widget.HTMLNode(
-					{
-						html : ""
-								+ $trad("a6")
-								+ "<a class=ajuda_usuario style=left:3px; target=_blank href='"
-								+ i3GEO.configura.locaplic
-								+ "/ajuda_usuario.php?idcategoria=4&idajuda=32' ><b> </b></a>",
-						enableHighlight : false,
-						expanded : false,
-						className : "i3GeoFolder"
-					}, i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("idmais",
-							"idmais"));
-			ig = 0;
-			do {
-				drive = new YAHOO.widget.HTMLNode({
-					listaShp : true,
-					listaImg : true,
-					listaFig : false,
-					html : drives[ig].nome,
-					caminho : drives[ig].caminho,
-					enableHighlight : true,
-					expanded : false,
-					className : "i3GeoFolder"
-				}, tempNode);
-				drive.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
-				ig += 1;
-			} while (ig < iglt);
-			arvore.draw();
-		};
-		i3GEO.arvoreDeTemas.listaDrives(i3GEO.arvoreDeTemas.SID,
-				i3GEO.arvoreDeTemas.LOCAPLIC, temp);
+
 	},
 	/**
 	 * Monta a lista de grupos de um no principal da arvore.
@@ -755,101 +684,7 @@ i3GEO.arvoreDeTemas = {
 	 * sub-grupos.
 	 */
 	montaGrupos : function(node) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.arvoreDeTemas.montaGrupos()");
 
-		var temp = function() {
-			var grupos, c, raiz, nraiz, mostra, i, d, editor, tempNode;
-			grupos = i3GEO.arvoreDeTemas.GRUPOS.grupos;
-			c = grupos.length - 3;
-			raiz = grupos[c].temasraiz;
-			nraiz = raiz.length;
-			for (i = 0; i < nraiz; i += 1) {
-				mostra = true;
-				if (i3GEO.arvoreDeTemas.FILTRADOWNLOAD
-						&& raiz[i].download === "nao") {
-					mostra = false;
-				}
-				if (i3GEO.arvoreDeTemas.FILTRAOGC && raiz[i].ogc === "nao") {
-					mostra = false;
-				}
-				if (mostra && raiz[i].nome != "") {
-					tempNode = new YAHOO.widget.HTMLNode({
-						isLeaf : false,
-						enableHighlight : false,
-						expanded : false,
-						html : i3GEO.arvoreDeTemas.montaTextoTema("gray",
-								raiz[i])
-					}, node);
-				}
-			}
-			for (i = 0; i < c; i += 1) {
-				mostra = true;
-				if (i3GEO.arvoreDeTemas.FILTRADOWNLOAD
-						&& grupos[i].download === "nao") {
-					mostra = false;
-				}
-				if (i3GEO.arvoreDeTemas.FILTRAOGC && grupos[i].ogc === "nao") {
-					mostra = false;
-				}
-				if (i3GEO.parametros.editor === "sim" && i3GEO.configura.optUsuarioLogado == true) {
-					editor = "<img title='Editar subgrupos' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""
-							+ i3GEO.configura.locaplic
-							+ "/admin/html/arvore.html?id_menu="
-							+ node.data.idmenu
-							+ "&id_grupo="
-							+ grupos[i].id_n1
-							+ "\")' style='width:11px;position:relative;left:3px;top:2px;' src='"
-							+ i3GEO.configura.locaplic
-							+ "/imagens/edit.gif' />";
-				} else {
-					editor = "";
-				}
-				if (mostra && grupos[i].nome != undefined) {
-					// se id_n1 existir, significa que os grupos possuem id,
-					// pois sao oriundos do sistema
-					// de administracao
-					// no caso do uso de menu de temas com base em arquivos xml,
-					// o id nao existe
-					// sendo necessario o uso da ordem dos grupos como
-					// identificador
-					if (grupos[i].publicado) {
-						if (grupos[i].publicado === "NAO") {
-							grupos[i].nome = "<span title='nao publicado' style='color:red'>"
-									+ grupos[i].nome + "</span>";
-							if(i3GEO.configura.optUsuarioLogado == false){
-								grupos[i].nome = "";
-							}
-						}
-					}
-					if(grupos[i].nome != ""){
-						d = {
-							html : "<span style='position:relative;'>"
-									+ grupos[i].nome + editor + "</span>",
-							idmenu : node.data.idmenu,
-							className : "i3GeoFolder",
-							idgrupo : i
-						};
-						if (grupos[i].id_n1) {
-							d = {
-								html : grupos[i].nome + editor,
-								idmenu : node.data.idmenu,
-								className : "i3GeoFolder",
-								idgrupo : grupos[i].id_n1
-							};
-						}
-						tempNode = new YAHOO.widget.HTMLNode(d, node, false, true);
-						tempNode.enableHighlight = true;
-						tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaSubGrupos,
-								1);
-						tempNode.isLeaf = false;
-					}
-				}
-			}
-			node.loadComplete();
-		};
-		i3GEO.arvoreDeTemas.listaGrupos(i3GEO.arvoreDeTemas.SID,
-				i3GEO.arvoreDeTemas.LOCAPLIC, node.data.idmenu, temp);
 	},
 	/**
 	 * Monta a lista de sub-grupos de um no do tipo grupo.
@@ -858,175 +693,12 @@ i3GEO.arvoreDeTemas = {
 	 * temas.
 	 */
 	montaSubGrupos : function(node) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.arvoreDeTemas.montaSubGrupos()");
 
-		var temp = function() {
-			var i, c, mostra, d, tempNode, nraiz, subgrupos, raiz, editor;
-			subgrupos = i3GEO.arvoreDeTemas.SUBGRUPOS.subgrupo;
-			c = subgrupos.length;
-			raiz = i3GEO.arvoreDeTemas.SUBGRUPOS.temasgrupo;
-			nraiz = raiz.length;
-			for (i = 0; i < nraiz; i += 1) {
-				mostra = true;
-				if (i3GEO.arvoreDeTemas.FILTRADOWNLOAD
-						&& raiz[i].download === "nao") {
-					mostra = false;
-				}
-				if (i3GEO.arvoreDeTemas.FILTRAOGC && raiz[i].ogc === "nao") {
-					mostra = false;
-				}
-				if (mostra) {
-					tempNode = new YAHOO.widget.HTMLNode({
-						nacessos : raiz[i].nacessos,
-						html : i3GEO.arvoreDeTemas.montaTextoTema("gray",
-								raiz[i]),
-						idtema : raiz[i].tid,
-						fonte : raiz[i].link,
-						ogc : raiz[i].ogc,
-						kmz : raiz[i].kmz,
-						permitecomentario : raiz[i].permitecomentario,
-						download : raiz[i].download,
-						expanded : false,
-						enableHighlight : false,
-						isLeaf : false
-					}, node);
-					tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
-				}
-			}
-			for (i = 0; i < c; i += 1) {
-				mostra = true;
-				if (i3GEO.arvoreDeTemas.FILTRADOWNLOAD
-						&& subgrupos[i].download === "nao") {
-					mostra = false;
-				}
-				if (i3GEO.arvoreDeTemas.FILTRAOGC && subgrupos[i].ogc === "nao") {
-					mostra = false;
-				}
-				// coloca ou nao icone que permite editar no sistema de
-				// administracao
-				if (i3GEO.parametros.editor === "sim" && i3GEO.configura.optUsuarioLogado == true) {
-					editor = "<img title='Editar temas' onclick='i3GEO.arvoreDeTemas.abrejanelaIframe(\"900\",\"500\",\""
-							+ i3GEO.configura.locaplic
-							+ "/admin/html/arvore.html?id_menu="
-							+ node.data.idmenu
-							+ "&id_grupo="
-							+ node.data.idgrupo
-							+ "&id_subgrupo="
-							+ subgrupos[i].id_n2
-							+ "\")' style='width:11px;position:relative;left:3px;top:2px;' src='"
-							+ i3GEO.configura.locaplic
-							+ "/imagens/edit.gif' />";
-				} else {
-					editor = "";
-				}
-				if (mostra && subgrupos[i].nome != undefined) {
-					// se id_n2 existir, significa que os grupos possuem id,
-					// pois sao oriundos do sistema
-					// de administracao
-					// no caso do uso de menu de temas com base em arquivos xml,
-					// o id nao existe
-					// sendo necessario o uso da ordem dos grupos como
-					// identificador
-					if (subgrupos[i].publicado) {
-						if (subgrupos[i].publicado === "NAO") {
-							subgrupos[i].nome = "<span title='nao publicado' style='color:red'>"
-									+ subgrupos[i].nome + "</span>";
-							if(i3GEO.configura.optUsuarioLogado == false){
-								subgrupos[i].nome = "";
-							}
-						}
-					}
-					if(subgrupos[i].nome != ""){
-						d = {
-							html : "<span style='position:relative;'>"
-									+ subgrupos[i].nome + editor + "</span>",
-							idmenu : node.data.idmenu,
-							idgrupo : node.data.idgrupo,
-							className : "i3GeoFolder",
-							idsubgrupo : i
-						};
-						if (subgrupos[i].id_n2) {
-							d = {
-								html : subgrupos[i].nome + editor,
-								idmenu : node.data.idmenu,
-								idgrupo : node.data.idgrupo,
-								idsubgrupo : subgrupos[i].id_n2,
-								className : "i3GeoFolder"
-							};
-						}
-						tempNode = new YAHOO.widget.HTMLNode(d, node, false, true);
-						tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaTemas, 1);
-						tempNode.isLeaf = false;
-						tempNode.enableHighlight = true;
-					}
-				}
-			}
-			node.loadComplete();
-		};
-		i3GEO.arvoreDeTemas.listaSubGrupos(i3GEO.arvoreDeTemas.SID,
-				i3GEO.arvoreDeTemas.LOCAPLIC, node.data.idmenu,
-				node.data.idgrupo, temp);
 	},
 	/**
 	 * Monta a lista de temas de um no.
 	 */
 	montaTemas : function(node) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.arvoreDeTemas.montaTemas()");
-
-		var temp = function() {
-			var i, cor, temas, c, mostra, tempNode;
-			temas = i3GEO.arvoreDeTemas.TEMAS.temas;
-			c = temas.length;
-			cor = "rgb(51, 102, 102)";
-			for (i = 0; i < c; i += 1) {
-				mostra = true;
-				if (i3GEO.arvoreDeTemas.FILTRADOWNLOAD
-						&& temas[i].download === "nao") {
-					mostra = false;
-				}
-				if (i3GEO.arvoreDeTemas.FILTRAOGC && temas[i].ogc === "nao") {
-					mostra = false;
-				}
-				if (mostra) {
-					if (temas[i].publicado) {
-						if (temas[i].publicado === "NAO") {
-							temas[i].nome = "<span title='nao publicado' style='color:red' >"
-									+ temas[i].nome + "</span>";
-							if(i3GEO.configura.optUsuarioLogado == false){
-								temas[i].nome = "";
-							}
-						}
-					}
-					if(temas[i].nome != ""){
-						tempNode = new YAHOO.widget.HTMLNode({
-							nacessos : temas[i].nacessos,
-							html : i3GEO.arvoreDeTemas
-									.montaTextoTema(cor, temas[i]),
-							idtema : temas[i].tid,
-							fonte : temas[i].link,
-							ogc : temas[i].ogc,
-							kmz : temas[i].kmz,
-							download : temas[i].download,
-							permitecomentario : temas[i].permitecomentario,
-							tipoa_tema : temas[i].tipoa_tema,
-							bookmark : "sim",
-							expanded : false,
-							isLeaf : false,
-							enableHighlight : false
-						}, node);
-						tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.propTemas, 1);
-						cor = (cor === "rgb(51, 102, 102)") ? "rgb(47, 70, 50)"
-								: "rgb(51, 102, 102)";
-					}
-				}
-			}
-			node.loadComplete();
-		};
-		i3GEO.arvoreDeTemas.listaTemas(i3GEO.arvoreDeTemas.SID,
-				i3GEO.arvoreDeTemas.LOCAPLIC, node.data.idmenu,
-				node.data.idgrupo, node.data.idsubgrupo, temp);
 	},
 	/**
 	 * Inclui na arvore o navegador de diretorios
@@ -1036,74 +708,6 @@ i3GEO.arvoreDeTemas = {
 	 * {node} - no onde sera criada a lista
 	 */
 	montaDir : function(node) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.arvoreDeTemas.montaDir()");
-
-		var montaLista = function(retorno) {
-			var ig, conteudo, dirs, tempNode, arquivos, prefixo = "", funcaoClick = "i3GEO.util.adicionaSHP";
-			dirs = retorno.data.diretorios;
-			if (!node.data.retornaDir) {
-				node.data.retornaDir = false;
-			}
-			for (ig = 0; ig < dirs.length; ig += 1) {
-				if (node.data.funcaoClick) {
-					funcaoClick = node.data.funcaoClick;
-				}
-				if (node.data.retornaDir === true) {
-					prefixo = "<input type=radio onclick='i3GEOF.navegarquivos.retorna(\""
-							+ node.data.caminho + "/" + dirs[ig] + "\")' />";
-				}
-
-				tempNode = new YAHOO.widget.HTMLNode({
-					html : prefixo + dirs[ig],
-					caminho : node.data.caminho + "/" + dirs[ig],
-					expanded : false,
-					enableHighlight : false,
-					listaImg : node.data.listaImg,
-					listaFig : node.data.listaFig,
-					listaShp : node.data.listaShp,
-					retornaDir : node.data.retornaDir,
-					funcaoClick : funcaoClick,
-					className : "i3GeoFolder"
-				}, node);
-				tempNode.setDynamicLoad(i3GEO.arvoreDeTemas.montaDir, 1);
-			}
-			arquivos = retorno.data.arquivos;
-			for (ig = 0; ig < arquivos.length; ig += 1) {
-				conteudo = arquivos[ig];
-				if (node.data.funcaoClick) {
-					funcaoClick = node.data.funcaoClick;
-				}
-				if ((node.data.listaFig === true && (conteudo.search(".png") > 1
-						|| conteudo.search(".jpg") > 1 || conteudo
-						.search(".PNG") > 1))
-						|| (node.data.listaImg === true && (conteudo
-								.search(".img") > 1
-								|| conteudo.search(".tif") > 1 || conteudo
-								.search(".TIF") > 1))
-						|| (node.data.listaShp === true && (conteudo
-								.search(".shp") > 1 || conteudo.search(".SHP") > 1))) {
-					conteudo = "<a href='#' title='" + $trad("g2")
-							+ "' onclick='" + funcaoClick + "(\""
-							+ node.data.caminho + "/" + conteudo + "\")' >"
-							+ conteudo + "</a>";
-					// if (retorno.data.urls && retorno.data.urls[ig] != "") {
-					// conteudo += "&nbsp;<img
-					// src='"+i3GEO.configura.locaplic+"/.."+retorno.data.urls[ig]+"'
-					// style='height:20px;width:20px'/>";
-					// }
-					new YAHOO.widget.HTMLNode({
-						isLeaf : true,
-						enableHighlight : false,
-						expanded : false,
-						html : conteudo,
-						caminho : node.data.caminho + "/" + conteudo
-					}, node);
-				}
-			}
-			node.loadComplete();
-		};
-		i3GEO.php.listaarquivos(montaLista, node.data.caminho);
 	},
 	/**
 	 * Monta o texto com o titulo do tema.
@@ -1189,141 +793,6 @@ i3GEO.arvoreDeTemas = {
 	 * {Object} - objeto com o no que foi clicado
 	 */
 	propTemas : function(node) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.arvoreDeTemas.propTemas()");
-
-		var html, lkmini, lkmini1, lkgrcode, lkgrcode1, n, ogc;
-		if (node.data.fonte && node.data.fonte !== ""
-				&& node.data.fonte !== " ") {
-			new YAHOO.widget.HTMLNode({
-				isLeaf : true,
-				enableHighlight : false,
-				expanded : false,
-				html : "<a title='' href='" + node.data.fonte
-						+ "' target='_blank' >Fonte</a>"
-			}, node);
-		}
-		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.mini === true) {
-			lkmini = i3GEO.arvoreDeTemas.LOCAPLIC + "/testamapfile.php?map="
-					+ node.data.idtema + ".map&tipo=mini";
-			lkmini1 = i3GEO.arvoreDeTemas.LOCAPLIC + "/testamapfile.php?map="
-					+ node.data.idtema + ".map&tipo=grande";
-			new YAHOO.widget.HTMLNode(
-					{
-						isLeaf : true,
-						enableHighlight : false,
-						expanded : false,
-						html : "<a title='' onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="
-								+ lkmini
-								+ " />\")' href='"
-								+ lkmini1
-								+ "' target='blank' >Miniatura</a>"
-					}, node);
-		}
-		if (node.data.ogc && node.data.ogc !== "nao") {
-			if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.kml === true) {
-				html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""
-						+ node.data.idtema + "\",\"kml\")' >Kml</a>";
-				if (node.data.kmz.toLowerCase() === "sim") {
-					html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.abreKml(\""
-							+ node.data.idtema + "\",\"kmz\")' >Kml</a>";
-				}
-				new YAHOO.widget.HTMLNode({
-					isLeaf : true,
-					enableHighlight : false,
-					expanded : false,
-					html : html
-				}, node);
-			}
-			ogc = i3GEO.arvoreDeTemas.LOCAPLIC + "/ogc.php?tema="
-					+ node.data.idtema + "&service=wms&request=getcapabilities";
-			new YAHOO.widget.HTMLNode({
-				isLeaf : true,
-				enableHighlight : false,
-				expanded : false,
-				html : "<a title='getcapabilities' href='" + ogc
-						+ "' target='blank' >WMS - OGC</a>"
-			}, node);
-		}
-		if (node.data.download && node.data.download.toLowerCase() !== "nao"
-				&& i3GEO.arvoreDeTemas.TIPOBOTAO !== "download") {
-			html = "<a href='" + i3GEO.configura.locaplic
-					+ "/datadownload.htm?" + node.data.idtema
-					+ "' target='_blank'>Download</a>";
-			new YAHOO.widget.HTMLNode({
-				isLeaf : true,
-				enableHighlight : false,
-				expanded : false,
-				html : html
-			}, node);
-		}
-		if (node.data.permitecomentario
-				&& node.data.permitecomentario !== "nao"
-				&& i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios === true) {
-			html = "<a href='#' title='' onclick='i3GEO.tema.dialogo.comentario(\""
-					+ node.data.idtema
-					+ "\",\"comentario\")' >"
-					+ $trad("x19")
-					+ "</a>";
-			new YAHOO.widget.HTMLNode({
-				isLeaf : true,
-				enableHighlight : false,
-				expanded : false,
-				html : html
-			}, node);
-		}
-		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.qrcode === true) {
-			lkgrcode = i3GEO.arvoreDeTemas.LOCAPLIC
-					+ "/pacotes/qrcode/php/qr_html.php?host=" + location.host
-					+ "&d=" + i3GEO.arvoreDeTemas.LOCAPLIC
-					+ "/ms_criamapa.php?interface="
-					+ i3GEO.parametros.interfacePadrao + "&temasa="
-					+ node.data.idtema + "&layers=" + node.data.idtema;
-			lkgrcode1 = i3GEO.arvoreDeTemas.LOCAPLIC
-					+ "/pacotes/qrcode/php/qr_img.php?host=" + location.host
-					+ "&d=" + i3GEO.arvoreDeTemas.LOCAPLIC
-					+ "/ms_criamapa.php?interface="
-					+ i3GEO.parametros.interfacePadrao + "&temasa="
-					+ node.data.idtema + "&layers=" + node.data.idtema;
-			new YAHOO.widget.HTMLNode(
-					{
-						isLeaf : true,
-						enableHighlight : false,
-						expanded : false,
-						html : "<a title='' onmouseover='i3GEO.ajuda.mostraJanela(\"<img src="
-								+ lkgrcode1
-								+ " />\")' href='"
-								+ lkgrcode
-								+ "' target='blank' >Qrcode</a>"
-					}, node);
-		}
-		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.estrelas === true) {
-			n = parseInt(node.data.nacessos
-					/ (i3GEO.arvoreDeTemas.FATORESTRELA * 1), 10);
-			if (n >= 5) {
-				n = 5;
-			}
-			html = (n > 0) ? "<img src='" + i3GEO.configura.locaplic
-					+ "/imagens/e" + n + ".png" + "'/>" : "<img src='"
-					+ i3GEO.configura.locaplic + "/imagens/e0.png'/>";
-			new YAHOO.widget.HTMLNode({
-				isLeaf : true,
-				enableHighlight : false,
-				expanded : false,
-				html : html
-			}, node);
-		}
-		if (i3GEO.arvoreDeTemas.OPCOESADICIONAIS.bookmark === true) {
-			html = i3GEO.social.bookmark(i3GEO.configura.locaplic
-					+ "/ms_criamapa.php?layers=" + node.data.idtema);
-			new YAHOO.widget.HTMLNode({
-				isLeaf : true,
-				enableHighlight : false,
-				expanded : false,
-				html : html
-			}, node);
-		}
-		node.loadComplete();
 	},
 	/**
 	 * Function: desativaCheckbox
@@ -1393,113 +862,6 @@ i3GEO.arvoreDeTemas = {
 		return (lista);
 	},
 	/**
-	 * Depreciado na versao 4.4
-	 *
-	 * Procura temas na arvore de temas (a busca e feita no servidor e nao na
-	 * arvore atual).
-	 *
-	 * Parametro:
-	 *
-	 * {String}
-	 */
-	buscaTema : function(palavra) {
-		if (palavra === "") {
-			return;
-		}
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.arvoreDeTemas.buscaTema()");
-
-		var busca, root, nodePalavra = "";
-		resultadoProcurar = function(retorno) {
-			var mostra, tempNode, d, conta, ig, ngSgrupo, tempn, sg, ngTema, tempng, st, lk = "";
-			if (!retorno.data) {
-				i3GEO.janela.tempoMsg("Ocorreu um erro");
-			} else {
-				retorno = retorno.data;
-				conta = 0;
-				if ((retorno !== "erro") && (typeof (retorno) !== 'undefined')) {
-					ig = retorno.length - 1;
-					if (ig >= 0) {
-						do {
-							ngSgrupo = retorno[ig].subgrupos;
-							tempn = ngSgrupo.length;
-							for (sg = 0; sg < tempn; sg += 1) {
-								ngTema = ngSgrupo[sg].temas;
-								tempng = ngTema.length;
-								for (st = 0; st < tempng; st += 1) {
-									mostra = true;
-									if (i3GEO.arvoreDeTemas.FILTRADOWNLOAD
-											&& ngTema[st].download === "nao") {
-										mostra = false;
-									}
-									if (i3GEO.arvoreDeTemas.FILTRAOGC
-											&& ngTema[st].ogc === "nao") {
-										mostra = false;
-									}
-									if (mostra) {
-										d = i3GEO.arvoreDeTemas.montaTextoTema(
-												"gray", ngTema[st]);
-										if (ngTema[st].link !== " ") {
-											lk = "<a href='"
-													+ ngTema[st].link
-													+ "' target='blank'>&nbsp;fonte</a>";
-										}
-										d += "<td style='text-allign:left'> ("
-												+ (ngSgrupo[sg].subgrupo)
-												+ ") " + lk + "</td>";
-										tempNode = new YAHOO.widget.HTMLNode(d,
-												nodePalavra, false, true);
-										tempNode.isLeaf = true;
-										tempNode.enableHighlight = false;
-									}
-									conta += 1;
-								}
-							}
-						} while (ig--);
-					} else {
-						d = "<span style='color:red'>Nada encontrado<br><br></span>";
-						tempNode = new YAHOO.widget.HTMLNode(d, nodePalavra,
-								false, true);
-						tempNode.isLeaf = true;
-						tempNode.enableHighlight = false;
-					}
-				}
-			}
-			nodePalavra.loadComplete();
-		};
-		//
-		// funcao que sera executada para buscar os temas
-		//
-		busca = function() {
-			i3GEO.php.procurartemas2(resultadoProcurar, i3GEO.util
-					.removeAcentos(palavra));
-		};
-		//
-		// recolhe todos os nos e acrescenta um novo
-		//
-		i3GEO.arvoreDeTemas.ARVORE.collapseAll();
-		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
-		if (!i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("id",
-				"temasEncontrados")) {
-			tempNode = new YAHOO.widget.HTMLNode({
-				html : "Temas encontrados",
-				id : "temasEncontrados"
-			}, root, false, true);
-			tempNode.enableHighlight = false;
-		} else {
-			tempNode = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("id",
-					"temasEncontrados");
-		}
-		nodePalavra = new YAHOO.widget.HTMLNode({
-			html : palavra
-		}, tempNode, false, true);
-		nodePalavra.enableHighlight = false;
-		i3GEO.arvoreDeTemas.ARVORE.draw();
-		tempNode.expand();
-		nodePalavra.setDynamicLoad(busca, 1);
-		nodePalavra.expand();
-	},
-	/**
 	 * Function: buscaTema2
 	 *
 	 * Procura temas na arvore de temas (a busca e feita no servidor e nao na
@@ -1553,41 +915,12 @@ i3GEO.arvoreDeTemas = {
 										+ (ngSgrupo[sg].grupo) + ")" + lk
 										+ "</td>";
 							}
-							new YAHOO.widget.HTMLNode({
-								enableHighlight : false,
-								isLeaf : true,
-								html : d,
-								expanded : false
-							}, nodePalavra);
+							//aqui vai a saida. antes era arvore
 						}
 						conta += 1;
 					}
 				}
 			};
-			if (!retorno.data) {
-				i3GEO.janela.tempoMsg("Ocorreu um erro");
-			} else {
-				retorno = retorno.data;
-				conta = 0;
-				if ((retorno !== "erro") && (typeof (retorno) !== 'undefined')) {
-					ig = retorno.length - 1;
-					if (ig >= 0) {
-						do {
-							montaTexto([ retorno[ig] ]);
-							montaTexto(retorno[ig].subgrupos);
-						} while (ig--);
-					} else {
-						new YAHOO.widget.HTMLNode(
-								{
-									enableHighlight : false,
-									isLeaf : true,
-									expanded : false,
-									html : "<span style='color:red'>Nada encontrado<br><br></span>"
-								}, nodePalavra);
-					}
-				}
-			}
-			nodePalavra.loadComplete();
 		};
 
 		//
@@ -1597,32 +930,6 @@ i3GEO.arvoreDeTemas = {
 			i3GEO.php.procurartemas2(resultadoProcurar, i3GEO.util
 					.removeAcentos(palavra));
 		};
-		//
-		// recolhe todos os nos e acrescenta um novo
-		//
-		i3GEO.arvoreDeTemas.ARVORE.collapseAll();
-		root = i3GEO.arvoreDeTemas.ARVORE.getRoot();
-		if (!i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("id",
-				"temasEncontrados")) {
-			tempNode = new YAHOO.widget.HTMLNode({
-				enableHighlight : false,
-				expanded : false,
-				html : "Temas encontrados",
-				id : "temasEncontrados"
-			}, root);
-		} else {
-			tempNode = i3GEO.arvoreDeTemas.ARVORE.getNodeByProperty("id",
-					"temasEncontrados");
-		}
-		nodePalavra = new YAHOO.widget.HTMLNode({
-			enableHighlight : false,
-			expanded : false,
-			html : palavra
-		}, tempNode);
-		i3GEO.arvoreDeTemas.ARVORE.draw();
-		tempNode.expand();
-		nodePalavra.setDynamicLoad(busca, 1);
-		nodePalavra.expand();
 	},
 	/**
 	 * Function: adicionaTemas
@@ -1981,30 +1288,7 @@ i3GEO.arvoreDeTemas = {
 			combo(temas);
 		}
 	},
-	/**
-	 * Abre uma janela flutuante contendo um iframe
-	 *
-	 * Parametros:
-	 *
-	 * {string} - largura
-	 *
-	 * {string} - altura
-	 *
-	 * {string} - src do iframe
-	 */
-	abrejanelaIframe : function(w, h, s) {
-		var i = parseInt(Math.random() * 100, 10), janelaeditor = i3GEO.janela
-				.cria(w, h, s, i, 10, s, "janela" + i, false), wdocaiframe = "";
-		wdocaiframe = $i("janela" + i + "i");
-		if (wdocaiframe) {
-			wdocaiframe.style.width = "100%";
-			wdocaiframe.style.height = "100%";
-		}
-		YAHOO.util.Event.addListener(janelaeditor[0].close, "click",
-				i3GEO.arvoreDeTemas.atualiza, janelaeditor[0].panel, {
-					id : janelaeditor[0].id
-				}, true);
-	},
+
 	/**
 	 * Section: i3GEO.arvoreDeTemas.dialogo
 	 *

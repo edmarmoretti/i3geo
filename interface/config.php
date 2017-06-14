@@ -47,6 +47,8 @@ i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
 i3GEO.janela.TRANSICAOSUAVE = true;
 //desliga a camada com o mapa mundi
 i3GEO.configura.mashuppar = "&desligar=mundo";
+//i3GEO.configura.guardaExtensao = false;
+//i3GEO.configura.mashuppar = "&mapext=-75 -22 -40 7";
 (function() {
 	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === false){
 		var eng = new ol.layer.Tile(

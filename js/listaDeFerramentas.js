@@ -565,11 +565,13 @@ i3GEO.listaDeFerramentas = {
 										text : $trad("d15t"),
 										url : "javascript:i3GEO.navega.dialogo.google()"
 									},
+									/*
 									{
 										id : "omenudataNavegacao3",
 										text : $trad("d9t"),
 										url : "javascript:i3GEO.maparef.inicia()"
 									},
+									*/
 									{
 										id : "omenudataNavegacao4",
 										text : $trad("d8t"),

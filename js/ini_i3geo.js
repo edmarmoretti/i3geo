@@ -482,7 +482,7 @@ var i3GEO = {
 						//
 						// complementa o array com os dados para o menu de
 						// marcadores
-						i3GEO.listaDeFerramentas = i3GEO.marcador.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
+						//i3GEO.listaDeFerramentas = i3GEO.marcador.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
 						// inclui opcoes admin
 						if (i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin === true || (i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin != false && i3GEO.parametros.editor === "sim")) {
 							i3GEO.listaDeFerramentas = i3GEO.login.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);

@@ -45,15 +45,6 @@
 	<div id="contemImg" >
 		<div id="corpoMapa" ></div>
 	</div>
-	<!--
-	<table style='width: 100%;cellspacing: 0px;'>
-		<tr>
-			<td id=contemImg style="vertical-align: top; border-width: 0px;">
-				<div id=corpoMapa style="position: relative; "></div>
-			</td>
-		</tr>
-	</table>
-	 -->
 	<!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
 	<form class="escalanumerica hidden-xs" onsubmit="javascript:i3GEO.navega.aplicaEscala($i('i3GEOescalanum').value);return false;">
 		<input id='i3GEOescalanum' type='text' name='' value='' size='10' title=''  >
@@ -122,6 +113,13 @@
 		</button>
 		<button onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
+		</button>
+		<br>
+		<button data-template="#guia8objTemplateLink" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
+			<img style="width:20px;" src="../imagens/gisicons/save1.png">
+		</button>
+		<button onclick="i3GEO.maparef.inicia()" style="float: left;">
+			<img style="width:20px;" src="../imagens/gisicons/map-reference.png">
 		</button>
 	</div>
 	<!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
@@ -583,12 +581,13 @@
 				<a role="button" class="btn btn-default btn-fab btn-fab-mini" href="{{{url}}}" target="{{{target}}}">
 					<span class="material-icons md-18">launch</span>
 				</a>
-				<label class="nomeTema" >
+				<label class="nomeTemaCurto" >
 					<a href="{{{url}}}" target="{{{target}}}" ><h4>
 					{{{nome}}}
 					</h4></a>
 					<h6>{{{descricao}}}</h6>
 				</label>
+				{{{opcional}}}
 			</div>
 		</div>
 		<hr>
@@ -719,7 +718,6 @@
 		</ul>
 	</script>
 	<script>
-	//$.material.init();
 	<!--inicia o mapa-->
 	i3GEO.cria();
 	i3GEO.inicia();

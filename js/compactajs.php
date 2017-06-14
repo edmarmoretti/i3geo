@@ -203,6 +203,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/selector/selector-min.js",
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
+//"../pacotes/jquery/jquery-ui/jquery.ui-contextmenu.min.js",
 "../pacotes/bootstrap/js/bootstrap.min.js",
 "../pacotes/bootstrap-material-design/dist/js/material.min.js",
 "compactados/wicket.js",

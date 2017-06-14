@@ -92,6 +92,7 @@ OpenLayers = {
 	"../pacotes/mustache.js-master/mustache.js",
 	"../pacotes/jquery/dist/jquery.min.js",
 	"../pacotes/jquery/jquery-ui/jquery-ui.min.js",
+	//"../pacotes/jquery/jquery-ui/jquery.ui-contextmenu.min.js",
 	"../pacotes/bootstrap/js/bootstrap.min.js",
 	"../pacotes/bootstrap-material-design/dist/js/material.min.js",
 	"ini_i3geo.js",

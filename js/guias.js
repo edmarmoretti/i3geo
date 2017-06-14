@@ -597,7 +597,7 @@ i3GEO.guias =
 							if(menu[i].url){
 								t = Mustache.to_html(
 									template3,
-									{"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url}
+									{"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url,"opcional": menu[i].opcional}
 								);
 								t = $(t);
 								ondeLinks
@@ -642,7 +642,7 @@ i3GEO.guias =
 							if(menu[i].url){
 								t = Mustache.to_html(
 									template3,
-									{"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url}
+									{"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url,"opcional": menu[i].opcional}
 								);
 								t = $(t);
 								ondeLinks
@@ -812,6 +812,7 @@ i3GEO.guias =
 				);
 			}
 		},
+		//usado nas ferramentas
 		mostraGuiaFerramenta : function(guia, namespace) {
 			var g, Dom = YAHOO.util.Dom;
 			if (!namespace) {

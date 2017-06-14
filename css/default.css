@@ -95,6 +95,10 @@ hr {
 	width: 265px;
 	vertical-align: middle;
 }
+.nomeTemaCurto {
+	width: 230px;
+	vertical-align: middle;
+}
 /**************************/
 .i3GEOtemaComSel {
 	border-bottom: 1px solid cyan;
@@ -470,7 +474,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 
 .bd a, .bd a:focus, .bd a:hover {
-    color: cyan;
+    color: #9ceaea;;
 }
 
 .bd p {

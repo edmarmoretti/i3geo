@@ -64,22 +64,13 @@ include("../ms_configura.php");
 	<div id="contemImg" >
 		<div id="corpoMapa" ></div>
 	</div>
-	<!--
-	<table style='width: 100%;cellspacing: 0px;'>
-		<tr>
-			<td id=contemImg style="vertical-align: top; border-width: 0px;">
-				<div id=corpoMapa style="position: relative; "></div>
-			</td>
-		</tr>
-	</table>
-	 -->
 	<!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
-	<form class="escalanumerica" onsubmit="javascript:i3GEO.navega.aplicaEscala($i('i3GEOescalanum').value);return false;">
+	<form class="escalanumerica hidden-xs" onsubmit="javascript:i3GEO.navega.aplicaEscala($i('i3GEOescalanum').value);return false;">
 		<input id='i3GEOescalanum' type='text' name='' value='' size='10' title=''  >
 	</form>
 
 	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
-	<div class="localizarxy fundoRodape">
+	<div class="localizarxy fundoRodape hidden-xs hidden-sm">
 		<div class="i3GeoMascaraCoord" style="display: block;">
 			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
 				<option>DMS:</option>
@@ -142,6 +133,13 @@ include("../ms_configura.php");
 		<button onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
+		<br>
+		<button data-template="#guia8objTemplateLink" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
+			<img style="width:20px;" src="../imagens/gisicons/save1.png">
+		</button>
+		<button onclick="i3GEO.maparef.inicia()" style="float: left;">
+			<img style="width:20px;" src="../imagens/gisicons/map-reference.png">
+		</button>
 	</div>
 	<!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
 	<div id="i3GEOprogressoCamadas" class="progress" style="display:block;position:absolute;top:0px; height:5px;width:0%;margin:auto;">
@@ -174,8 +172,11 @@ include("../ms_configura.php");
 			<!-- temas existentes no mapa
 				data-idListaDeCamadas - id onde sera incluida a lista de camadas
 				data-idListaFundo - id onde sera incluida a lista de camadas de fundo (mapa base)
+				data-verificaAbrangencia - se for uma string, faz a verificacao se a camada esta fora da abrangencia atual do mapa,
+					inserindo ou nao a string como uma classe CSS. Pode degradar a performance e depende
+					do metadata existente na camada. Deixe vazio para nao ativar a operacao.
 			-->
-			<div onclick="i3GEO.guias.ativa('temas',this)" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
+			<div onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
 				<button title="{{{g4a}}}" class="iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/layer.png" style="cursor: pointer; padding: 3px;">
 				</button>
@@ -204,7 +205,7 @@ include("../ms_configura.php");
 					<img src="../imagens/googlemaps.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('buscaRapida',this)" style="margin-top: 3px;">
+			<div onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" style="margin-top: 3px;">
 				<button class="iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/gisicons/search.png" style="cursor: pointer; padding: 3px;">
 				</button>
@@ -465,7 +466,7 @@ include("../ms_configura.php");
 								</label>
 								</div>
 							</div>
-							<!-- Apenas para a interface google maps-->
+							<!-- Apenas para a interface google maps
 							<div class="list-group condensed">
 								<div class="checkbox text-left">
 								<label>
@@ -474,6 +475,7 @@ include("../ms_configura.php");
 								</label>
 								</div>
 							</div>
+							 -->
 						</div>
 					</form>
 					<hr>
@@ -482,7 +484,6 @@ include("../ms_configura.php");
 					<div class="i3GEOresultadoBuscaGoogle" ></div>
 					<div class="alert alert-info" role="alert">{{{x40}}}</div>
 				</div>
-
 				<!-- Ferramentas -->
 				<div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
@@ -512,7 +513,6 @@ include("../ms_configura.php");
 							<h6>{{{localiza}}}</h6>
 						</div>
 					</div>
-
 					<div class="clearfix"></div>
 					<hr>
 					<div id="migalhaFerramentas" data-template="#guia8objTemplateMigalha" style='display: block; text-align: left;'></div>
@@ -600,12 +600,13 @@ include("../ms_configura.php");
 				<a role="button" class="btn btn-default btn-fab btn-fab-mini" href="{{{url}}}" target="{{{target}}}">
 					<span class="material-icons md-18">launch</span>
 				</a>
-				<label class="nomeTema" >
+				<label class="nomeTemaCurto" >
 					<a href="{{{url}}}" target="{{{target}}}" ><h4>
 					{{{nome}}}
 					</h4></a>
 					<h6>{{{descricao}}}</h6>
 				</label>
+				{{{opcional}}}
 			</div>
 		</div>
 		<hr>

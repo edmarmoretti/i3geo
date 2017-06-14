@@ -2529,9 +2529,6 @@ i3GEO.Interface =
 					if (i3GEO.Interface.STATUS.trocando === true && $i(i3GEO.arvoreDeCamadas.IDHTML)) {
 						$i(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";
 					}
-					if (i3GEO.Interface.STATUS.trocando === false) {
-						i3GEO.util.arvore("<b>" + $trad("p13") + "</b>", "listaPropriedades", i3GEO.configura.listaDePropriedadesDoMapa);
-					}
 					if (i3GEO.arvoreDeCamadas.ATIVATEMA === "") {
 						i3GEO.arvoreDeCamadas.ATIVATEMA = "i3GEO.Interface.ligaDesliga(this)";
 					}

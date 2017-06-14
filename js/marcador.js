@@ -1,30 +1,30 @@
 /**
  * Title: Marcador
- * 
+ *
  * Gerencia os marcadores espaciais que o usuario pode definir e compartilhar
- * 
+ *
  * Os marcadores sao mantidos como cookies
- * 
+ *
  * Namespace:
- * 
+ *
  * i3GEO.marcador
- * 
+ *
  *  Veja:
  *
  * <http://localhost/i3geo/classesjs/classe_marcador.js>
   */
 /**
  * Licen&ccedil;a
- * 
+ *
  * GPL2
- * 
+ *
  * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- * 
+ *
  * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- * 
+ *
  * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
  * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- * 
+ *
  * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
  * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
  * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
@@ -36,9 +36,35 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.marcador =
 	{
+		IDONDE: "",
+		TEMPLATE: "",
+		inicia: function(obj){
+			if($(obj).attr("data-template") != undefined){
+				i3GEO.marcador.TEMPLATE = $($(obj).attr("data-template")).html();
+			}
+			var janela =
+				i3GEO.janela.cria(
+					"380px",
+					"400px",
+					"",
+					"",
+					"",
+					"<div class='i3GeoTituloJanela'>" + $trad("x79") + "</div>",
+					"i3GEOmarcador",
+					false,
+					"hd",
+					"",
+					"",
+					"",
+					true,
+					i3GEO.configura.locaplic + "/imagens/oxygen/16x16/games-config-custom.png"
+				);
+			i3GEO.marcador.IDONDE = janela[2].id;
+			i3GEO.marcador.redesenha();
+		},
 		/**
 		 * Function: prompt
-		 * 
+		 *
 		 * Pergunta ao usuario o nome do marcador e armazena O Cookie utilizado chama-se marcadoresDoI3Geo
 		 */
 		prompt : function() {
@@ -64,10 +90,11 @@ i3GEO.marcador =
 			i3GEO.marcador.redesenha();
 		},
 		redesenha : function() {
-			var m = i3GEOoMenuBar.getMenu("i3GeoMenuMarcador");
-			m.clearContent();
-			m.addItems(i3GEO.marcador.itensMenu());
-			m.render();
+			var t = Mustache.to_html(
+				"{{#data}}" + i3GEO.marcador.TEMPLATE + "{{/data}}",
+				{"data":i3GEO.marcador.itensMenu()}
+			);
+			$("#" + i3GEO.marcador.IDONDE).html(t);
 		},
 		exporta : function() {
 			var c = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), texto;
@@ -128,7 +155,7 @@ i3GEO.marcador =
 		},
 		/**
 		 * Adiciona os itens no objeto menu suspenso no processo de nicializacao do i3geo
-		 * 
+		 *
 		 * @param objeto
 		 *            com os parametros ja existentes no menu
 		 * @return objeto com os parametros complementados
@@ -147,20 +174,16 @@ i3GEO.marcador =
 		itensMenu : function() {
 			var itens = [], cookie = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), valores, n, i, temp;
 			itens.push({
-				id : "omenudataMarcadorSalva",
-				text : $trad("x82"),
+				nome : $trad("x82"),
 				url : "javascript:i3GEO.marcador.prompt()"
 			}, {
-				id : "omenudataMarcadorExporta",
-				text : $trad("x80"),
+				nome : $trad("x80"),
 				url : "javascript:i3GEO.marcador.exporta()"
 			}, {
-				id : "omenudataMarcadorImporta",
-				text : $trad("x81"),
+				nome : $trad("x81"),
 				url : "javascript:i3GEO.marcador.importa()"
 			}, {
-				id : "omenudataMarcadorExportaShp",
-				text : $trad("x84"),
+				nome : $trad("x84"),
 				url : "javascript:i3GEO.marcador.exportaShp()"
 			});
 			if (cookie) {
@@ -170,11 +193,10 @@ i3GEO.marcador =
 					temp = valores[i].split("|");
 					if (temp.length === 2) {
 						itens.push({
-							id : "omenudataMarcador" + i,
-							text : "<img title='" + $trad("x62") + "' src='" + i3GEO.configura.locaplic
-								+ "/imagens/branco.gif' class=x onclick='i3GEO.marcador.remove(\"" + temp[0]
-								+ "\")' />&nbsp;<span style='color:blue;background-color:white;'>" + temp[0] + "</span>",
-							url : "javascript:i3GEO.marcador.recuperaZoom('" + temp[0] + "')"
+							nome : temp[0],
+							url : "javascript:i3GEO.marcador.recuperaZoom('" + temp[0] + "')",
+							opcional: "<a href='javascript:void(0)' onclick='i3GEO.marcador.remove(\"" + temp[0]
+								+ "\")' class='btn btn-danger btn-fab btn-fab-mini' role='button'><span class='material-icons md-18'>delete_forever</span></a>"
 						});
 					}
 				}
