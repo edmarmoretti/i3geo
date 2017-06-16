@@ -382,7 +382,7 @@ i3GEO.mapa =
 					geometrias.push(g);
 				}
 			}
-			g = YAHOO.lang.JSON.stringify(geometrias);
+			g = JSON.stringify(geometrias);
 			return i3GEO.util.base64encode(g);
 		},
 		/**
@@ -474,7 +474,7 @@ i3GEO.mapa =
 							eval(temp[0] + " = " + temp[1] + ";");
 						} else if (pint + "px" == temp[1]) {
 							eval(temp[0] + " = '" + temp[1] + "';");
-						} else if (YAHOO.lang.isNumber(pint)) {
+						} else if ($.isNumeric(pint)) {
 							eval(temp[0] + " = " + temp[1] + ";");
 						} else {
 							eval(temp[0] + " = '" + temp[1] + "';");

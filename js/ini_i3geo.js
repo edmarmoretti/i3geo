@@ -756,27 +756,13 @@ var i3GEO = {
 	 * Return: {array} - [w,h]
 	 */
 	calculaTamanho : function() {
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.calculaTamanho()");
+
 		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, Dw, Dh;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
-		temp = $i("contemFerramentas");
-		if (temp
-			&& temp.style
-			&& temp.style.width) {
-			menos += parseInt(
-				$i("contemFerramentas").style.width,
-				10);
-		}
-		temp = $i("ferramentas");
-		if (temp
-			&& temp.style
-			&& temp.style.width) {
-			menos += parseInt(
-				$i("ferramentas").style.width,
-				10);
-		}
-
 		if (i3GEO.configura.autotamanho === true) {
 			if (window.top === window.self) {// nao se aplica em iframe
 				window.resizeTo(
@@ -859,30 +845,13 @@ var i3GEO = {
 	 * Return: {array} - [w,h]
 	 */
 	reCalculaTamanho : function() {
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.reCalculaTamanho()");
+
 		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, antigoh = i3GEO.parametros.h;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
-		//se for mobile
-		//if(i3GEO.Interface.ALTTABLET === "" && DetectaMobile("DetectMobileLong") === true){
-		//	menos = 20;
-		//}
-		temp = $i("contemFerramentas");
-		if (temp
-			&& temp.style
-			&& temp.style.width) {
-			menos += parseInt(
-				$i("contemFerramentas").style.width,
-				10);
-		}
-		temp = $i("ferramentas");
-		if (temp
-			&& temp.style
-			&& temp.style.width) {
-			menos += parseInt(
-				$i("ferramentas").style.width,
-				10);
-		}
 		document.body.style.width = "100%";
 		temp = i3GEO.util.tamanhoBrowser();
 		novow = temp[0];
@@ -893,7 +862,7 @@ var i3GEO = {
 			+ "px";
 		w = novow
 			- menos
-			- diminuix;
+			- diminuix + i3GEO.util.getScrollerWidth();
 		h = novoh
 			- diminuiy;
 

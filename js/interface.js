@@ -1911,6 +1911,7 @@ i3GEO.Interface =
 			recalcPar : function() {
 				if (typeof (console) !== 'undefined')
 					console.info("i3GEO.interface.openlayers.recalcpar()");
+
 				i3GEOtouchesPosMapa = "";
 				var bounds = i3geoOL.getExtent().toBBOX().split(","),
 					escalaAtual = i3geoOL.getScale();

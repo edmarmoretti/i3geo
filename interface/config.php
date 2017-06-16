@@ -4,6 +4,7 @@
 ?>
 i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://"
 + window.location.host + "/i3geo";
+//ajusta o tamanho do navegador ao tamanho da tela
 i3GEO.configura.autotamanho = false;
 i3GEO.Interface.IDCORPO = "contemImg";
 i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
