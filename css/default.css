@@ -42,6 +42,24 @@ hr {
 }
 /**************************/
 
+.mais {
+	background-image: URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -800px;
+	width: 17px;
+	height: 9px;
+	cursor: pointer;
+}
+
+.menos {
+	background-image: URL('../imagens/sprite.png');
+	background-repeat: no-repeat;
+	background-position: 0px -825px;
+	width: 17px;
+	height: 9px;
+	cursor: pointer;
+}
+
 .iconeGuiaMovel {
 	padding: 2px;
 	border-radius: 5px 5px 5px 5px;

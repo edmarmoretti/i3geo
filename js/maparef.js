@@ -174,7 +174,7 @@ i3GEO.maparef =
 		 *
 		 * 50
 		 */
-		RIGHT : 70,
+		RIGHT : 120,
 		W : function() {
 			var w = parseInt(i3GEO.parametros.w, 10) / 5;
 			if (w < 150) {
@@ -259,7 +259,7 @@ i3GEO.maparef =
 				$i("i3geo_winRef").style.display = "block";
 				this.PERMITEDESLOCAR ? temp = "shadow" : temp = "none";
 				janela = new YAHOO.widget.Panel("i3geo_winRef", {
-					height : i3GEO.maparef.H() + 27 + "px",
+					height : i3GEO.maparef.H() + 47 + "px",
 					width : i3GEO.maparef.W() + 6 + "px",
 					fixedcenter : false,
 					constraintoviewport : false,
@@ -282,7 +282,7 @@ i3GEO.maparef =
 				janela.render();
 				janela.show();
 				try {
-					janela.header.style.height = "20px";
+					janela.header.style.height = "40px";
 				} catch (e) {
 				}
 				;
@@ -317,9 +317,6 @@ i3GEO.maparef =
 			i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.maparef.atualiza()"]);
 			this.atualiza(true);
 			$i("i3geo_winRef_h").className = "hd2";
-			if (navm) {
-				$i("i3geo_winRef_h").style.width = i3GEO.maparef.W() + 6 + "px";
-			}
 		},
 		/**
 		 * Function: atualiza
