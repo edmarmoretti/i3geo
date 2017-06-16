@@ -132,7 +132,9 @@ OpenLayers = {
 	"catalogoSistemas.js",
 	"catalogoDir.js",
 	"legenda.js",
-	"busca.js"
+	"busca.js",
+	"template.js",
+	"caixaDeFerramentas.js"
 	);
 	var nocache = new Date().getTime();
 	for (i = 0; i < jsfiles.length; i++)

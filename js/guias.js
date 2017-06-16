@@ -384,15 +384,12 @@ i3GEO.guias =
 
 					var f = i3GEO.guias.CONFIGURA.legenda;
 					obj = $(obj);
-					if(obj.attr("data-idconteudo") != undefined){
-						f.idconteudo = obj.attr("data-idconteudo");
-					}
 					if(obj.attr("data-idLegenda") != undefined){
 						f.idLegenda = obj.attr("data-idLegenda");
 					}
 					i3GEO.legenda.inicia({
-						"idOnde": f.idconteudo,
-						"idLegenda": f.idLegenda
+						"idLegenda": f.idLegenda,
+						"templateLegenda": $("#" + f.idLegenda).attr("data-template")
 					});
 				}
 			},
@@ -402,9 +399,7 @@ i3GEO.guias =
 				id : "guia1",
 				idconteudo : "guia1obj",
 				idListaDeCamadas : "listaTemas",
-				idTemplateCamada : "guia1objTemplateCamadas",
 				idListaFundo : "listaFundo",
-				idTemplateCamadaFundo : "guia1objTemplateCamadasFundo",
 				verificaAbrangencia : "",
 				click : function(obj){
 					if (typeof (console) !== 'undefined')
@@ -425,18 +420,14 @@ i3GEO.guias =
 					if(obj.attr("data-idListaFundo") != undefined){
 						f.idListaFundo = obj.attr("data-idListaFundo");
 					}
-
-					if($("#" + obj.attr("data-idListaDeCamadas")).attr("data-idTemplateCamada") != undefined){
-						f.idTemplateCamada = $("#" + obj.attr("data-idListaDeCamadas")).attr("data-idTemplateCamada");
-					}
 					if($("#" + obj.attr("data-idListaFundo")).attr("data-idTemplateCamada") != undefined){
 						f.idTemplateCamadaFundo = $("#" + obj.attr("data-idListaFundo")).attr("data-idTemplateCamada");
 					}
 					i3GEO.arvoreDeCamadas.inicia({
 						"idOnde" : f.idListaDeCamadas,
-						"idTemplateCamada": f.idTemplateCamada,
+						"templateCamada": $("#" + f.idListaDeCamadas).attr("data-template"),
 						"idListaFundo": f.idListaFundo,
-						"idTemplateCamadaFundo": f.idTemplateCamadaFundo,
+						"templateCamadaFundo": $("#" + f.idListaFundo).attr("data-template"),
 						"verificaAbrangencia": f.verificaAbrangencia
 					});
 				}
@@ -475,15 +466,13 @@ i3GEO.guias =
 					var ondeMenus = $( "#" + f.idMenus );
 
 					i3GEO.catalogoMenus.listaMenus({
-						"seletorTemplateDir": ondeMenus.attr("data-templateDir"),
-						"seletorTemplateTema": ondeMenus.attr("data-templateTema"),
+						"templateDir": ondeMenus.attr("data-templateDir"),
+						"templateTema": ondeMenus.attr("data-templateTema"),
 						"idOndeMenus": f.idMenus,
 						"idCatalogoPrincipal": f.idCatalogo,
 						"idCatalogoNavegacao": f.idNavegacao,
 						"idOndeMigalha": f.idMigalha
 					});
-					//antigo
-					//i3GEO.arvoreDeTemas.cria(i3GEO.configura.sid, i3GEO.configura.locaplic, "arvoreAdicionaTema");
 				}
 			},
 			"ferramentas" : {
@@ -512,166 +501,16 @@ i3GEO.guias =
 						i3GEO.guias.CONFIGURA.ferramentas.idLinks = $(obj).attr("data-idLinks");
 					}
 
-					var f = i3GEO.guias.CONFIGURA.ferramentas,
-						confm = i3GEO.listaDeFerramentas,
-						subs = i3GEO.listaDeFerramentas.submenus,
-						ondeFolder = $( "#" + f.idLista ),
-						ondeLinks = $( "#" + f.idLinks ),
-						template1 = $($(ondeFolder).attr("data-template")).html(),
-						template2 = $($("#" + f.idMigalha).attr("data-template")).html(),
-						template3 = $($(ondeLinks).attr("data-template")).html(),
-						migalha;
-					//mostra a janela
-					//i3GEO.guias.mostra("ferramentas");
+					var f = i3GEO.guias.CONFIGURA.ferramentas;
 
-					//indica que a janela esta aberta
-					f.status = true;
-					//constroi o texto da migalha com evento click
-					migalha = function (data){
-						var t = Mustache.to_html(
-							template2,
-							{"nome":data.nome}
-						);
-						$("#" + f.idMigalha)
-						.data(data)
-						.html(t)
-						.click(function(event){
-							event.stopImmediatePropagation();
-							$("#" + f.idMigalha).off("click");
-							var data = $(this).data();
-							if((data.nivel - 1) == 0){
-								ondeFolder.fadeOut( "fast", function(){nivel0();ondeFolder.show();});
-							}
-							if((data.nivel - 1) == 1){
-								ondeFolder.fadeOut( "fast", function(){nivel1(data);ondeFolder.show();});
-							}
-							if((data.nivel - 1) == 2){
-								ondeFolder.fadeOut( "fast", function(){nivel2(data);ondeFolder.show();});
-							}
-						});
-					};
-					//monta o nivel 0
-					var nivel0 = function(){
-						var menu = confm.menu,
-							n = menu.length,
-							i,t,data;
-
-						$("#" + f.idMigalha).html("&nbsp;");
-						ondeFolder.html("");
-						ondeLinks.html("");
-						for (i = 0; i < n; i += 1) {
-							if(subs[menu[i].id].length > 0){
-								t = Mustache.to_html(
-									template1,
-									{"nome":menu[i].nome,"descricao":menu[i].descricao}
-								);
-								t = $(t);
-								//quando clica, abre o nivel 1 e muda a migalha
-								data = {"nivel":1,"nome":menu[i].nome,"id":i,"n0": i, "n1":"", "n2": "", "n3": ""};
-								t.find("a")
-									.data(data)
-									.click(function(){
-										$(this).find("a").off("click");
-										var data = $(this).data();
-										//texto da migalha e evento click
-										ondeFolder.fadeOut( "fast", function(){
-											nivel1(data);
-											ondeFolder.show();
-										});
-									});
-								ondeFolder
-								.append(t);
-							}
-						}
-					};
-					//monta o nivel 1
-					var nivel1 = function(data){
-						var menu = confm.submenus[confm.menu[data.n0].id],
-							n = menu.length,
-							i,t,datan;
-
-						ondeFolder.html("");
-						ondeLinks.html("");
-						for (i = 0; i < n; i += 1) {
-							datan = {"nivel":2,"nome":menu[i].text,"id":menu[i].id,"n0": data.n0, "n1":i, "n2": "", "n3": ""};
-							if(menu[i].url){
-								t = Mustache.to_html(
-									template3,
-									{"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url,"opcional": menu[i].opcional}
-								);
-								t = $(t);
-								ondeLinks
-								.append(t);
-							} else {
-								t = Mustache.to_html(
-									template1,
-									{"nome":menu[i].text}
-								);
-								t = $(t);
-								t.find("a")
-									.data(datan)
-									.click(function(){
-										$(this).find("a").off("click");
-										var data = $(this).data();
-										var t = Mustache.to_html(
-												template2,
-												data
-											);
-										//texto da migalha e evento click
-										//nivel2(data);
-										ondeFolder.fadeOut( "fast", function(){nivel2(data);ondeFolder.show();});
-									});
-								ondeFolder
-								.append(t);
-							}
-						}
-						data.nivel = 1;
-						data.nome = confm.menu[data.id].nome;
-						data.n0 = data.id;
-						migalha(data);
-					};
-					var nivel2 = function(data){
-						var menu = confm.submenus[confm.menu[data.n0].id][data.n1].submenu.itemdata[0],
-							n = menu.length,
-							i,t,datan;
-
-						ondeFolder.html("");
-						ondeLinks.html("");
-						for (i = 0; i < n; i += 1) {
-							datan = {"nivel":3,"nome":menu[i].text,"id":menu[i].id,"n0": data.n0, "n1":data.n1, "n2": i, "n3": ""};
-							if(menu[i].url){
-								t = Mustache.to_html(
-									template3,
-									{"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url,"opcional": menu[i].opcional}
-								);
-								t = $(t);
-								ondeLinks
-								.append(t);
-							} else {
-								t = Mustache.to_html(
-									template1,
-									{"nome":menu[i].text}
-								);
-								t = $(t);
-								t.find("a")
-									.data(datan)
-									.click(function(){
-										$(this).find("a").off("click");
-										var data = $(this).data();
-										var t = Mustache.to_html(
-												template2,
-												data
-											);
-									});
-								ondeFolder
-								.append(t);
-							}
-						}
-						data.nivel = 2;
-						data.id = data.n0;
-						migalha(data);
-					};
-					nivel0();
+					i3GEO.caixaDeFerramentas.inicia({
+						"idOndeFolder": $( "#" + f.idLista ),
+						"idOndeLinks": $( "#" + f.idLinks ),
+						"idOndeMigalha" : f.idMigalha,
+						"templateFolder" : $( "#" + f.idLista ).attr("data-template"),
+						"templateMigalha" : $("#" + f.idMigalha).attr("data-template"),
+						"templateLinks" : $( "#" + f.idLinks ).attr("data-template")
+					});
 				}
 			}
 		},

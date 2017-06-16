@@ -15,9 +15,15 @@ i3GEO.legenda =
 	 * posicao apos mover
 	 */
 	POSICAO: "",
-	CONFIG: {
-		"idOnde":"",
-		"idLegenda": ""
+	config: {
+		"idLegenda": "legendaHtml",
+		"templateLegenda": "templates/legenda.html"
+	},
+	carregaTemplates: function(){
+		$.get(i3GEO.legenda.config.templateLegenda, function(template) {
+			i3GEO.template.legenda = template;
+			i3GEO.legenda.inicia();
+		});
 	},
 	inicia : function(config) {
 		if (typeof (console) !== 'undefined')
@@ -25,17 +31,22 @@ i3GEO.legenda =
 
 		if(config){
 			$.each( config, function( i,v ) {
-				i3GEO.legenda.CONFIG[i] = v;
+				i3GEO.legenda.config[i] = v;
 			});
 		}
-		config = i3GEO.legenda.CONFIG;
-		if (!$i(config.idOnde)) {
-			return;
+
+		if(!i3GEO.template.legenda){
+			i3GEO.legenda.carregaTemplates();
+		} else {
+			config = i3GEO.legenda.config;
+			if (!$i(config.idLegenda)) {
+				return;
+			}
+			i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
+			   "i3GEO.legenda.atualiza()"
+			]);
+			i3GEO.legenda.atualiza();
 		}
-		i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
-		   "i3GEO.legenda.atualiza()"
-		]);
-		i3GEO.legenda.atualiza();
 	},
 	/**
 	 * Function: atualiza
@@ -43,8 +54,8 @@ i3GEO.legenda =
 	 * Atualiza o elemento HTML do mapa utilizado para mostrar a legenda
 	 */
 	atualiza : function() {
-		var idleg = $i(i3GEO.legenda.CONFIG.idLegenda);
-		var tamanho = $($("#" + i3GEO.legenda.CONFIG.idLegenda).attr("data-template")).attr("data-size").split(",");
+		var idleg = $i(i3GEO.legenda.config.idLegenda);
+		var tamanho = $("#" + i3GEO.legenda.config.idLegenda).attr("data-size").split(",");
 
 		if (idleg && idleg.style.display === "block") {
 			i3GEO.php.criaLegendaJSON(i3GEO.legenda.montaLegenda, "", tamanho[0], tamanho[1]);
@@ -54,13 +65,13 @@ i3GEO.legenda =
 		var legenda = "",
 			t,idleg;
 
-		idleg = $i(i3GEO.legenda.CONFIG.idLegenda);
+		idleg = $i(i3GEO.legenda.config.idLegenda);
 		idleg.innerHTML = $trad("o1");
 
 		if (retorno.data.legenda != "") {
 			$(".legendaTemaSolto").remove();
 			t = Mustache.to_html(
-					"{{#data}}" + $($("#" + i3GEO.legenda.CONFIG.idLegenda).attr("data-template")).html() + "{{/data}}",
+					"{{#data}}" + i3GEO.template.legenda + "{{/data}}",
 					{
 						"data":retorno.data.legenda,
 						"altera": $trad("p9")
@@ -68,7 +79,7 @@ i3GEO.legenda =
 				);
 			idleg.innerHTML = t;
 
-			$("#" + i3GEO.legenda.CONFIG.idLegenda).find(".draggable").draggable({
+			$("#" + i3GEO.legenda.config.idLegenda).find(".draggable").draggable({
 				helper: "clone",
 				appendTo: "body",
 				start: function(event, ui) {
@@ -81,7 +92,7 @@ i3GEO.legenda =
 					$(this).show();
 		        }
 			});
-			$("#" + i3GEO.legenda.CONFIG.idLegenda + " img").bind('click',function (e) {
+			$("#" + i3GEO.legenda.config.idLegenda + " img").bind('click',function (e) {
 	            e.stopPropagation();
 	        },false);
 		} else {

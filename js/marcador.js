@@ -38,29 +38,42 @@ i3GEO.marcador =
 	{
 		IDONDE: "",
 		TEMPLATE: "",
+		config: {
+			"template": "templates/ferramentasLink.html"
+		},
+		carregaTemplates: function(){
+			$.get(i3GEO.marcador.config.template, function(template) {
+				i3GEO.template.marcador = template;
+				i3GEO.marcador.inicia();
+			});
+		},
 		inicia: function(obj){
-			if($(obj).attr("data-template") != undefined){
-				i3GEO.marcador.TEMPLATE = $($(obj).attr("data-template")).html();
+			if(obj && $(obj).attr("data-template") != undefined){
+				i3GEO.marcador.config.template = $(obj).attr("data-template");
 			}
-			var janela =
-				i3GEO.janela.cria(
-					"380px",
-					"400px",
-					"",
-					"",
-					"",
-					"<div class='i3GeoTituloJanela'>" + $trad("x79") + "</div>",
-					"i3GEOmarcador",
-					false,
-					"hd",
-					"",
-					"",
-					"",
-					true,
-					i3GEO.configura.locaplic + "/imagens/oxygen/16x16/games-config-custom.png"
-				);
-			i3GEO.marcador.IDONDE = janela[2].id;
-			i3GEO.marcador.redesenha();
+			if(!i3GEO.template.marcador){
+				i3GEO.marcador.carregaTemplates();
+			} else {
+				var janela =
+					i3GEO.janela.cria(
+						"380px",
+						"400px",
+						"",
+						"",
+						"",
+						"<div class='i3GeoTituloJanela'>" + $trad("x79") + "</div>",
+						"i3GEOmarcador",
+						false,
+						"hd",
+						"",
+						"",
+						"",
+						true,
+						i3GEO.configura.locaplic + "/imagens/oxygen/16x16/games-config-custom.png"
+					);
+				i3GEO.marcador.IDONDE = janela[2].id;
+				i3GEO.marcador.redesenha();
+			}
 		},
 		/**
 		 * Function: prompt
@@ -91,7 +104,7 @@ i3GEO.marcador =
 		},
 		redesenha : function() {
 			var t = Mustache.to_html(
-				"{{#data}}" + i3GEO.marcador.TEMPLATE + "{{/data}}",
+				"{{#data}}" + i3GEO.template.marcador + "{{/data}}",
 				{"data":i3GEO.marcador.itensMenu()}
 			);
 			$("#" + i3GEO.marcador.IDONDE).html(t);

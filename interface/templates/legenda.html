@@ -1,0 +1,19 @@
+		<div class="draggable list-group condensed" style="background-color: white;">
+			<div class="row-content text-left">
+				<label class="nomeTema" style="cursor:move;">
+					<h4>
+					{{{nome}}}
+					</h4>
+				</label>
+				{{#classes}}
+				<div class="checkbox text-left">
+					<!-- a classe itemLegenda e importante para nao imprimir quando nao estiver checado -->
+					<label class="itemLegenda" >
+						<input class="noprint" type="checkbox" id='legendack_{{layer}}_{{index}}' value="{{{index}}}" name="{{{layer}}}" {{{checked}}} onclick="i3GEO.legenda.inverteStatusClasse(this)">
+						<span class="checkbox-material noprint"><span class="check"></span></span> <img style="cursor:pointer;" onclick="i3GEO.legenda.mudaCorClasse('{{layer}}','{{index}}');return false;" src="{{{img}}}" title="{{{altera}}}"> {{{nome}}}
+					</label>
+				</div>
+				{{/classes}}
+			</div>
+			<hr>
+		</div>

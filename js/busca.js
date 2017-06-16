@@ -11,13 +11,41 @@ i3GEO.busca = {
 		"inputOndePalavra": "",
 		"ondeServicosExternos": "",
 		"inputServicosExternos": "",
-		"idTemplateServicos": "",
 		"inputTemasMapa": "",
 		"ondeTemasMapa": "",
-		"idTemplateTemasMapa":"",
 		"inputGoogle": "",
 		"ondeGoogle": "",
-		"idTemplateGoogle":""
+		"templateTemasMapa":"",
+		"templateServico": "",
+		"templateGoogle":""
+	},
+	nget: 0,
+	carregaTemplates: function(){
+		if(i3GEO.busca.nget == 0){
+			i3GEO.busca.nget = 2;
+			if(!i3GEO.template.buscaEmTemas){
+				$.get(i3GEO.busca.config.templateTemasMapa, function(template) {
+					i3GEO.template.buscaEmTemas = template;
+					i3GEO.busca.nget = i3GEO.busca.nget - 1;
+					if(i3GEO.busca.nget == 0){
+						i3GEO.busca.inicia();
+					}
+				});
+			} else {
+				i3GEO.busca.nget = i3GEO.busca.nget - 1;
+			}
+			if(!i3GEO.template.buscaEmServico){
+				$.get(i3GEO.busca.config.templateServico, function(template) {
+					i3GEO.template.buscaEmServico = template;
+					i3GEO.busca.nget = i3GEO.busca.nget - 1;
+					if(i3GEO.busca.nget == 0){
+						i3GEO.busca.inicia();
+					}
+				});
+			} else {
+				i3GEO.busca.nget = i3GEO.busca.nget - 1;
+			}
+		}
 	},
 	aguarde: function(){
 		return '<div class="alert alert-warning" role="alert">' + $trad("o1") + '</div>';
@@ -27,39 +55,45 @@ i3GEO.busca = {
 			console.info("i3GEO.busca.inicia");
 
 		var palavra="", config = i3GEO.busca.config;
-		obj = $(obj);
-		if(obj.attr("data-ondeConteiner") != undefined){
-			config.ondeConteiner = obj.attr("data-ondeConteiner");
+		if(obj){
+			obj = $(obj);
+			if(obj.attr("data-ondeConteiner") != undefined){
+				config.ondeConteiner = obj.attr("data-ondeConteiner");
+			}
+			if(obj.attr("data-ondeServicosExternos") != undefined){
+				config.ondeServicosExternos = obj.attr("data-ondeServicosExternos");
+			}
+			if(obj.attr("data-inputServicosExternos") != undefined){
+				config.inputServicosExternos = obj.attr("data-inputServicosExternos");
+			}
+			if(obj.attr("data-inputTemasMapa") != undefined){
+				config.inputTemasMapa = obj.attr("data-inputTemasMapa");
+			}
+			if(obj.attr("data-inputTemasMapa") != undefined){
+				config.ondeTemasMapa = obj.attr("data-ondeTemasMapa");
+			}
+			if(obj.attr("data-inputGoogle") != undefined){
+				config.inputGoogle = obj.attr("data-inputGoogle");
+			}
+			if(obj.attr("data-inputGoogle") != undefined){
+				config.ondeGoogle = obj.attr("data-ondeGoogle");
+			}
+			if(obj.attr("data-inputOndePalavra") != undefined){
+				config.inputOndePalavra = obj.attr("data-inputOndePalavra");
+			}
+			if(obj.attr("data-templateGoogle") != undefined){
+				config.templateGoogle = obj.attr("data-templateGoogle");
+			}
+			if(obj.attr("data-templateTemasMapa") != undefined){
+				config.templateTemasMapa = obj.attr("data-templateTemasMapa");
+			}
+			if(obj.attr("data-templateServico") != undefined){
+				config.templateServico = obj.attr("data-templateServico");
+			}
 		}
-		if(obj.attr("data-ondeServicosExternos") != undefined){
-			config.ondeServicosExternos = obj.attr("data-ondeServicosExternos");
-		}
-		if(obj.attr("data-inputServicosExternos") != undefined){
-			config.inputServicosExternos = obj.attr("data-inputServicosExternos");
-		}
-		if(obj.attr("data-idTemplateServicos") != undefined){
-			config.idTemplateServicos = obj.attr("data-idTemplateServicos");
-		}
-		if(obj.attr("data-inputTemasMapa") != undefined){
-			config.inputTemasMapa = obj.attr("data-inputTemasMapa");
-		}
-		if(obj.attr("data-inputTemasMapa") != undefined){
-			config.ondeTemasMapa = obj.attr("data-ondeTemasMapa");
-		}
-		if(obj.attr("data-idTemplateTemasMapa") != undefined){
-			config.idTemplateTemasMapa = obj.attr("data-idTemplateTemasMapa");
-		}
-		if(obj.attr("data-inputGoogle") != undefined){
-			config.inputGoogle = obj.attr("data-inputGoogle");
-		}
-		if(obj.attr("data-inputGoogle") != undefined){
-			config.ondeGoogle = obj.attr("data-ondeGoogle");
-		}
-		if(obj.attr("data-idTemplateGoogle") != undefined){
-			config.idTemplateGoogle = obj.attr("data-idTemplateGoogle");
-		}
-		if(obj.attr("data-inputOndePalavra") != undefined){
-			config.inputOndePalavra = obj.attr("data-inputOndePalavra");
+		if(!i3GEO.template.buscaEmTemas || !i3GEO.template.buscaEmServico){
+			i3GEO.busca.carregaTemplates();
+		} else {
 			var palavra = $(config.ondeConteiner).find(config.inputOndePalavra).val();
 			if(palavra != ""){
 				i3GEO.busca.PALAVRA = i3GEO.util.removeAcentos(palavra);
@@ -80,10 +114,7 @@ i3GEO.busca = {
 				$(config.ondeConteiner).find(config.inputGoogle).html(i3GEO.busca.aguarde());
 				i3GEO.busca.google(i3GEO.busca.PALAVRA);
 			}
-		} else {
-			return false;
 		}
-
 	},
 	resultadoTemas : function(retorno) {
 		if (typeof (console) !== 'undefined')
@@ -93,7 +124,7 @@ i3GEO.busca = {
 		try {
 			if (retorno.data) {
 				t = Mustache.to_html(
-						"{{#data}}" + $("#" + i3GEO.busca.config.idTemplateTemasMapa).html() + "{{/data}}",
+						"{{#data}}" + i3GEO.template.buscaEmTemas + "{{/data}}",
 						{"data":retorno.data}
 					);
 				$(config.ondeConteiner).find(config.ondeTemasMapa).html(t);
@@ -110,7 +141,7 @@ i3GEO.busca = {
 		try {
 			if (retorno.data) {
 				t = Mustache.to_html(
-						"{{#data}}" + $("#" + i3GEO.busca.config.idTemplateGoogle).html() + "{{/data}}",
+						"{{#data}}" + i3GEO.template.buscaEmTemas + "{{/data}}",
 						{"data":retorno.data}
 					);
 				$(config.ondeConteiner).find(config.ondeGoogle).html(t);
@@ -127,7 +158,7 @@ i3GEO.busca = {
 		try {
 			if (retorno.data) {
 				t = Mustache.to_html(
-						"{{#data}}" + $("#" + i3GEO.busca.config.idTemplateServicos).html() + "{{/data}}",
+						"{{#data}}" + i3GEO.template.buscaEmServico + "{{/data}}",
 						{"data":retorno.data.geonames}
 					);
 				$(config.ondeConteiner).find(config.ondeServicosExternos).html(t);

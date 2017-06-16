@@ -1,0 +1,8 @@
+		<ul class="nav nav-pills nav-stacked">
+			<h4>{{{tema}}}</h4>
+			{{#lugares}}
+			<li>
+				<a onclick="i3GEO.busca.zoom('{{{limite}}}','{{{layer}}}','{{{gid}}}','{{{nome}}}')" onmouseout="i3GEO.busca.escondexy();" onmouseover="i3GEO.busca.mostraxy('{{{limite}}}','wkt');" href="#" class="list-group-item">{{{nome}}} <small>{{{centroide}}}</small></a>
+			</li>
+			{{/lugares}}
+		</ul>

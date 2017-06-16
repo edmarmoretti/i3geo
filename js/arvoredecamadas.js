@@ -108,13 +108,41 @@ i3GEO.arvoreDeCamadas =
 		 */
 		CAMADAS : "",
 		CAMADASINDEXADAS : [], //CAMADAS indexadas pelo name
-		CONFIG : {
-			"idOnde":"", //onde a lista sera inserida
+		config : {
+			"idOnde": "listaTemas", //onde a lista sera inserida
 			"aposIniciar": "", //funcao
-			"idTemplateCamada": "", //id do template mustache que monta a lista de camadas
+			"templateCamada": "templates/camada.html", //template mustache que monta a lista de camadas
 			"idListaFundo": "", //onde a lista de camadas de fundo sera inserida
-			"idTemplateCamadaFundo": "", //id do template para as camadas de fundo
+			"templateCamadaFundo": "templates/camadaFundo.html", //template para as camadas de fundo
 			"verificaAbrangencia": "" //verifica se a camada esta na abrangencia do mapa e insere essa string como uma classe CSS
+		},
+		nget: 0,
+		carregaTemplates: function(){
+			if(i3GEO.arvoreDeCamadas.nget == 0){
+				i3GEO.arvoreDeCamadas.nget = 2;
+				if(!i3GEO.template.camada){
+					$.get(i3GEO.arvoreDeCamadas.config.templateCamada, function(template) {
+						i3GEO.template.camada = template;
+						i3GEO.arvoreDeCamadas.nget = i3GEO.arvoreDeCamadas.nget - 1;
+						if(i3GEO.arvoreDeCamadas.nget == 0){
+							i3GEO.arvoreDeCamadas.inicia();
+						}
+					});
+				} else {
+					i3GEO.arvoreDeCamadas.nget = i3GEO.arvoreDeCamadas.nget - 1;
+				}
+				if(!i3GEO.template.tema){
+					$.get(i3GEO.arvoreDeCamadas.config.templateCamadaFundo, function(template) {
+						i3GEO.template.camadaFundo = template;
+						i3GEO.arvoreDeCamadas.nget = i3GEO.arvoreDeCamadas.nget - 1;
+						if(i3GEO.arvoreDeCamadas.nget == 0){
+							i3GEO.arvoreDeCamadas.inicia();
+						}
+					});
+				} else {
+					i3GEO.arvoreDeCamadas.nget = i3GEO.arvoreDeCamadas.nget - 1;
+				}
+			}
 		},
 		inicia : function(config) {
 			if (typeof (console) !== 'undefined')
@@ -122,22 +150,27 @@ i3GEO.arvoreDeCamadas =
 
 			if(config){
 				$.each( config, function( i,v ) {
-					i3GEO.arvoreDeCamadas.CONFIG[i] = v;
+					i3GEO.arvoreDeCamadas.config[i] = v;
 				});
 			}
-			config = i3GEO.arvoreDeCamadas.CONFIG;
-			var novoel, temp;
-			if (!$i(config.idOnde)) {
-				return;
-			}
-			if(config.verificaAbrangencia != ""){
-				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()"]);
-			}
-			i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS);
 
-			if (config.aposIniciar !== "") {
-				if (jQuery.isFunction(config.aposIniciar)) {
-					config.aposIniciar.call();
+			if(!i3GEO.template.camada || !i3GEO.template.camadaFundo){
+				i3GEO.arvoreDeCamadas.carregaTemplates();
+			} else {
+				config = i3GEO.arvoreDeCamadas.config;
+				var novoel, temp;
+				if (!$i(config.idOnde)) {
+					return;
+				}
+				if(config.verificaAbrangencia != ""){
+					i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()"]);
+				}
+				i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS);
+
+				if (config.aposIniciar !== "") {
+					if (jQuery.isFunction(config.aposIniciar)) {
+						config.aposIniciar.call();
+					}
 				}
 			}
 		},
@@ -169,7 +202,7 @@ i3GEO.arvoreDeCamadas =
 			}
 			var clone = [],
 				camada = {},
-				config = i3GEO.arvoreDeCamadas.CONFIG,
+				config = i3GEO.arvoreDeCamadas.config,
 				temp;
 			//
 			// essa verificacao &eacute; necessaria quando a arvore &eacute; criada
@@ -223,7 +256,7 @@ i3GEO.arvoreDeCamadas =
 			});
 
 			var t = Mustache.render(
-				"{{#data}}" + $("#" + config.idTemplateCamada).html() + "{{/data}}",
+				"{{#data}}" + i3GEO.template.camada + "{{/data}}",
 				{"data":clone}
 			);
 
@@ -265,7 +298,7 @@ i3GEO.arvoreDeCamadas =
 						clone.push(camada);
 					});
 					var t = Mustache.to_html(
-							"{{#data}}" + $("#" + config.idTemplateCamadaFundo).html() + "{{/data}}",
+							"{{#data}}" + i3GEO.template.camadaFundo + "{{/data}}",
 							{"data":clone}
 						);
 					$("#" + config.idListaFundo).html(t);
@@ -655,7 +688,7 @@ i3GEO.arvoreDeCamadas =
 		 * {Array} - array de arrays com os c&oacute;digos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
 		 */
 		listaLigadosDesligados : function(tipo) {
-			if (!$i(i3GEO.arvoreDeCamadas.CONFIG.idOnde)) {
+			if (!$i(i3GEO.arvoreDeCamadas.config.idOnde)) {
 				return [[],[],[]];
 			}
 			if (arguments.length === 0) {
@@ -664,7 +697,7 @@ i3GEO.arvoreDeCamadas =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.arvoreDeCamadas.listaLigadosDesligados()");
 
-			var nos = $("#" + i3GEO.arvoreDeCamadas.CONFIG.idOnde).find("input"),
+			var nos = $("#" + i3GEO.arvoreDeCamadas.config.idOnde).find("input"),
 			ligados = [], desligados = [], todos = [];
 
 			$.each( nos, function( i,no ) {
@@ -862,16 +895,16 @@ i3GEO.arvoreDeCamadas =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()");
 
-			var nos = $("#" + i3GEO.arvoreDeCamadas.CONFIG.idOnde).find("input");
+			var nos = $("#" + i3GEO.arvoreDeCamadas.config.idOnde).find("input");
 
 			$.each( nos, function( i,no ) {
 				var ltema = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[no.value];
 				var temp = ltema.exttema;
 				if (temp !== "" && temp != undefined ) {
 					if (i3GEO.util.intersectaBox(temp, i3GEO.parametros.mapexten) === false) {
-						$(no).addClass(i3GEO.arvoreDeCamadas.CONFIG.verificaAbrangencia);
+						$(no).addClass(i3GEO.arvoreDeCamadas.config.verificaAbrangencia);
 					} else {
-						$(no).removeClass(i3GEO.arvoreDeCamadas.CONFIG.verificaAbrangencia);
+						$(no).removeClass(i3GEO.arvoreDeCamadas.config.verificaAbrangencia);
 					}
 				}
 

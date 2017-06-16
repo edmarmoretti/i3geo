@@ -10,7 +10,7 @@ include("../ms_configura.php");
 	content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 <title>i3GEO - GM</title>
 <script type="text/javascript"
-	src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry&key=<?php echo $googleApiKey; ?>"></script>
+	src="https://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry&key=<?php echo $googleApiKey; ?>"></script>
 
 <script src="../js/i3geo.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
@@ -134,7 +134,7 @@ include("../ms_configura.php");
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
 		<br>
-		<button data-template="#guia8objTemplateLink" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
+		<button data-template="templates/ferramentasLink.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/save1.png">
 		</button>
 		<button onclick="i3GEO.maparef.inicia()" style="float: left;">
@@ -195,6 +195,7 @@ include("../ms_configura.php");
 					<img src="../imagens/catalogo.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
+			<!-- legenda -->
 			<div onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" style="margin-top: 3px;">
 				<button title="{{{g3}}}" class="iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/legenda.png" style="cursor: pointer; padding: 3px;">
@@ -205,6 +206,7 @@ include("../ms_configura.php");
 					<img src="../imagens/googlemaps.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
+			<!-- Busca -->
 			<div onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" style="margin-top: 3px;">
 				<button class="iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/gisicons/search.png" style="cursor: pointer; padding: 3px;">
@@ -247,7 +249,7 @@ include("../ms_configura.php");
 						</ul>
 					</div>
 					<!-- Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
-					<div id="listaTemas" style="overflow:none;" data-idTemplateCamada="guia1objTemplateCamadas"></div>
+					<div id="listaTemas" style="overflow:none;" data-template="templates/camada.html"></div>
 					<!-- Esta div acrescenta a lista de de camadas de fundo
 					A lista de camadas de fundo e obtida da variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS
 					Essa variavel e definida via javascript, e no caso das interfaces padrao do i3Geo, e definida
@@ -260,7 +262,7 @@ include("../ms_configura.php");
 						</a>
 						<div style="margin-left:0px;" class="collapse text-left" id="collapseFundo">
 							<form>
-								<div id="listaFundo" class="form-group" data-idTemplateCamada="guia1objTemplateCamadasFundo"></div>
+								<div id="listaFundo" class="form-group" data-template="templates/camadaFundo.html"></div>
 							</form>
 						</div>
 					</div>
@@ -269,7 +271,7 @@ include("../ms_configura.php");
 				<div id='guia2obj' data-traduzir="true" style='display: none; text-align:left;'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();"><span class="pull-left">{{{g1a}}}</span> X</div>
 					<!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
-					<div id="catalogoMigalha" data-template="#guia2objTemplateMigalha"></div>
+					<div id="catalogoMigalha" data-template="templates/catalogoMigalha.html"></div>
 					<div id="catalogoNavegacao"></div>
 					<!-- Opcoes -->
 					<div id="catalogoPrincipal">
@@ -330,15 +332,15 @@ include("../ms_configura.php");
 							"idCatalogoNavegacao": "catalogoNavegacao",
 							"idOndeMigalha": "catalogoMigalha"
 						-->
-						<div id="catalogoMenus" data-templateDir="#guia2objTemplateDir" data-templateTema="#guia2objTemplateTema"></div>
+						<div id="catalogoMenus" data-templateDir="templates/dir.html" data-templateTema="templates/tema.html"></div>
 
 						<div id="arvoreAdicionaTema"></div>
 
 						<!--
 						As funcoes de inicializacao recebem um objeto com parametros. Que por padrao sao:
 						config: {
-							'seletorTemplateDir': '#guia2objTemplateDir',
-							'seletorTemplateTema': '#guia2objTemplateTema',
+							'templateDir': 'templates/dir.html',
+							'templateTema': 'templates/tema.html',
 							'idCatalogoPrincipal': 'catalogoPrincipal',
 							'idCatalogoNavegacao': 'catalogoNavegacao',
 							'idOndeMigalha': 'catalogoMigalha'
@@ -346,7 +348,7 @@ include("../ms_configura.php");
 
 						exemplo:
 
-						onclick="i3GEO.catalogoInde.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})"
+						onclick="i3GEO.catalogoInde.inicia({'templateDir': 'templates/dir.html','templateTema': 'templates/tema.html','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})"
 						-->
 
 						<!-- servicos da INDE brasileira -->
@@ -427,7 +429,7 @@ include("../ms_configura.php");
 				<!-- Legenda -->
 				<div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
-					<div id="legendaHtml" data-template="#guia4objTemplateLegenda" style='display: block; text-align: left'></div>
+					<div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: block; text-align: left'></div>
 				</div>
 				<!-- busca
 				Funcoes de busca por registros. Pode ser feita nos temas existentes no mapa, em um servico de busca e no google
@@ -442,7 +444,18 @@ include("../ms_configura.php");
 							<div class="input-group">
 								<input class="form-control" type="text" value="" name="valorBuscaRapida">
 								<span class="input-group-btn">
-									<a data-idTemplateGoogle="templateBuscaTemasMapa" data-inputGoogle="[name=google]" data-ondeGoogle=".i3GEOresultadoBuscaGoogle" data-idTemplateTemasMapa="templateBuscaTemasMapa" data-inputTemasMapa="[name=temasMapa]" data-ondeTemasMapa=".i3GEOresultadoBuscaTemasMapa" data-idTemplateServicos="templateBuscaServico" data-ondeConteiner="#guia7obj" data-inputOndePalavra="[name=valorBuscaRapida]" data-inputServicosExternos="[name=servicosExternos]" data-ondeServicosExternos=".i3GEOresultadoBuscaServicos" onclick="i3GEO.busca.inicia(this);return false;" role="button" type="button" class="btn btn-warning btn-fab btn-fab-mini" href="javascript:void(0)">
+									<a onclick="i3GEO.busca.inicia(this);return false;"
+									data-templateGoogle="templates/buscaEmTemas.html"
+									data-inputGoogle="[name=google]"
+									data-ondeGoogle=".i3GEOresultadoBuscaGoogle"
+									data-templateTemasMapa="templates/buscaEmTemas.html"
+									data-inputTemasMapa="[name=temasMapa]"
+									data-ondeTemasMapa=".i3GEOresultadoBuscaTemasMapa"
+									data-templateServico="templates/buscaEmServico.html"
+									data-ondeConteiner="#guia7obj"
+									data-inputOndePalavra="[name=valorBuscaRapida]"
+									data-inputServicosExternos="[name=servicosExternos]"
+									data-ondeServicosExternos=".i3GEOresultadoBuscaServicos" role="button" type="button" class="btn btn-warning btn-fab btn-fab-mini" href="javascript:void(0)">
 										<span class="material-icons md-18">send</span>
 									</a>
 								</span>
@@ -466,7 +479,7 @@ include("../ms_configura.php");
 								</label>
 								</div>
 							</div>
-							<!-- Apenas para a interface google maps
+							<!-- Apenas para a interface google maps -->
 							<div class="list-group condensed">
 								<div class="checkbox text-left">
 								<label>
@@ -475,7 +488,7 @@ include("../ms_configura.php");
 								</label>
 								</div>
 							</div>
-							 -->
+
 						</div>
 					</form>
 					<hr>
@@ -515,9 +528,9 @@ include("../ms_configura.php");
 					</div>
 					<div class="clearfix"></div>
 					<hr>
-					<div id="migalhaFerramentas" data-template="#guia8objTemplateMigalha" style='display: block; text-align: left;'></div>
-					<div id="listaFerramentasLinks" data-template="#guia8objTemplateLink" style='display: block; text-align: left'></div>
-					<div id="listaFerramentas" data-template="#guia8objTemplateFolder" style='display: block; text-align: left'></div>
+					<div id="migalhaFerramentas" data-template="templates/ferramentasMigalha.html" style='display: block; text-align: left;'></div>
+					<div id="listaFerramentasLinks" data-template="templates/ferramentasLink.html" style='display: block; text-align: left'></div>
+					<div id="listaFerramentas" data-template="templates/ferramentasFolder.html" style='display: block; text-align: left'></div>
 				</div>
 			</div>
 		</div>
@@ -543,198 +556,6 @@ include("../ms_configura.php");
 		<img class="img-thumbnail" src="../imagens/pspb.png" style="width:50px">
 		<div>&nbsp;</div>
 	</div>
-	</script>
-	<!-- para a lista de itens da arvore do catalogo (menus, grupos, etc) -->
-	<script id="guia2objTemplateDir" type="x-tmpl-mustache">
-		<div class="list-group condensed">
-			<div class="row-content text-left">
-				<a onclick="{{{onclick}}}" role="button" class="btn btn-warning btn-fab btn-fab-mini" href="javascript:void(0)">
-					<span class="material-icons md-18">folder_open</span>
-				</a>
-				<label class="nomeTema" >
-					<a onclick="{{{onclick}}}" href="javascript:void(0)"><h4>
-					{{{nome}}}
-					</h4></a>
-					<h6>{{{descricao}}} {{{link}}}</h6>
-				</label>
-			</div>
-		</div>
-		<hr>
-	</script>
-	<script id="guia2objTemplateTema" type="x-tmpl-mustache">
-		<div class="list-group condensed">
-			<div class="row-content text-left">
-				<a onclick="{{{onclick}}}" role="button" class="btn btn-default btn-fab btn-fab-mini" href="javascript:void(0)">
-					<span class="material-icons md-18">visibility</span>
-				</a>
-				<label class="nomeTema" >
-					<a onclick="{{{onclick}}}" href="javascript:void(0)"><h4>
-					{{{nome}}}
-					</h4></a>
-					<h6>{{{descricao}}} {{{link}}}</h6>
-				</label>
-			</div>
-		</div>
-		<hr>
-	</script>
-	<!-- Para a lista de ferramentas -->
-	<script id="guia8objTemplateFolder" type="x-tmpl-mustache">
-		<div class="list-group condensed">
-			<div class="row-content text-left">
-				<a role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)">
-					<span class="material-icons md-18">folder_open</span>
-				</a>
-				<label class="nomeTema" >
-					<a><h4>
-					{{{nome}}}
-					</h4></a>
-					<h6>{{{descricao}}}</h6>
-				</label>
-			</div>
-		</div>
-		<hr>
-	</script>
-	<script id="guia8objTemplateLink" type="x-tmpl-mustache">
-		<div class="list-group condensed">
-			<div class="row-content text-left">
-				<a role="button" class="btn btn-default btn-fab btn-fab-mini" href="{{{url}}}" target="{{{target}}}">
-					<span class="material-icons md-18">launch</span>
-				</a>
-				<label class="nomeTemaCurto" >
-					<a href="{{{url}}}" target="{{{target}}}" ><h4>
-					{{{nome}}}
-					</h4></a>
-					<h6>{{{descricao}}}</h6>
-				</label>
-				{{{opcional}}}
-			</div>
-		</div>
-		<hr>
-	</script>
-	<!-- Para a migalha da lista de ferramentas -->
-	<script id="guia8objTemplateMigalha" type="x-tmpl-mustache">
-		<ul class="breadcrumb">
-			<li>
-				<a href="javascript:void(0)">
-					<h4>
-						<span class="material-icons">arrow_back</span>
-						{{{nome}}}
-					</h4>
-				</a>
-			</li>
-		</ul>
-	</script>
-	<!-- Para a migalha do catalogo -->
-	<script id="guia2objTemplateMigalha" type="x-tmpl-mustache">
-		<ul class="breadcrumb">
-			<li>
-				<a href="javascript:void(0)" onclick="{{{onclick}}}">
-					<h4>
-						<span class="material-icons">arrow_back</span>
-						{{{nome}}}
-					</h4>
-				</a>
-			</li>
-		</ul>
-	</script>
-	<script id="guia1objTemplateCamadas" type="x-tmpl-mustache">
-		<div class="list-group condensed" style="cursor:move;">
-			<div class="checkbox text-left">
-				<label class="{{{classeCss}}}" style="width:270px">
-					<input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}" {{{checked}}} onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
-					<span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} {{{tema}}}
-				</label>
-				<a data-target="#collapse{{{name}}}" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px;padding-top: 0px;padding-bottom: 0px;" type="button" data-toggle="collapse" >
-  					<span class="caret noprint"></span>
-				</a>
-			</div>
-			<div style="margin-left:30px;" class="collapse text-left" id="collapse{{{name}}}">
-				<!-- icones que trazem informacoes sobre o tema -->
-				<!-- farol que indica a relacao com a escala do mapa -->
-				<span title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color:{{{farol}}};"></span>
-				<!-- indica se os elementos da camada sao dependentes da escala do mapa -->
-				<span title="{{{contextoescalaTitle}}}" class="glyphicon glyphicon-alert {{{contextoescala}}}" style="color:orange;" ></span>
-				<!-- links para formularios que sao especificos de cada plugin do i3Geo  e de ferramentas salvas na camada-->
-				{{{iconeFerramentas}}}
-				{{{iconePlugin}}}
-
-				<!-- links -->
-				<!-- ferramentas -->
-				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.atalhoscamada('{{{name}}}')" title="{{{ferramentasTitle}}}">{{{ferramentasTexto}}}</a>
-				<!-- remover -->
-				<p><a href="javascript:void(0)" onclick="i3GEO.tema.exclui('{{{name}}}',true)" title="{{{removerTitle}}}">{{{removerTexto}}}</a>
-				<!-- sobe -->
-				<p><a href="javascript:void(0)" onclick="i3GEO.tema.sobe('{{{name}}}')" title="{{{sobeTitle}}}">{{{sobeTexto}}}</a>
-				<!-- desce -->
-				<p><a href="javascript:void(0)" onclick="i3GEO.tema.desce('{{{name}}}')" title="{{{desceTitle}}}">{{{desceTexto}}}</a>
-				<!-- tabela de atributos -->
-				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}">{{{tabelaTexto}}}</a>
-				<!-- editor de legenda -->
-				<p><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')" >{{{editorlegendaTexto}}}</a>
-				<!-- zoom para o tema -->
-				<p><a class="{{{zoomtema}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoom('{{{name}}}')" title="{{{zoomtemaTitle}}}">{{{zoomtemaTexto}}}</a>
-				<!-- limpa a selecao -->
-				<p><a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')" title="{{{selTitle}}}">{{{selTexto}}}</a>
-				<!-- zoom para a selecao -->
-				<p><a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')" title="{{{zoomselTitle}}}">{{{zoomSelTexto}}}</a>
-				<!-- metadados -->
-				<p><a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')" title="{{{linkTitle}}}">{{{linkTexto}}}</a>
-				<!-- download -->
-				<p><a class="{{{download}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.download('{{{name}}}')" title="{{{downloadTitle}}}">{{{downloadTexto}}}</a>
-				<!-- ogc -->
-				<p><a class="{{{permiteogc}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.ogcwindow('{{{name}}}')" >{{{permiteogcTexto}}}</a>
-			</div>
-		<div class="clearfix"></div>
-		<hr>
-		</div>
-	</script>
-	<script id="guia1objTemplateCamadasFundo" type="x-tmpl-mustache">
-		<div class="list-group condensed">
-			<div class="radio radio-primary text-left">
-				<label>
-					<input class="noprint" type="radio" value="{{{value}}}" name="{{{name}}}" {{{checked}}} onclick="i3GEO.Interface.openlayers.ativaFundo('{{{value}}}');">
-					<span class="circle noprint"></span><span class="check"></span> {{{title}}}
-				</label>
-			</div>
-		</div>
-	</script>
-	<script id="guia4objTemplateLegenda" data-size="35,25" type="x-tmpl-mustache">
-		<div class="draggable list-group condensed" style="background-color: white;">
-			<div class="row-content text-left">
-				<label class="nomeTema" style="cursor:move;">
-					<h4>
-					{{{nome}}}
-					</h4>
-				</label>
-				{{#classes}}
-				<div class="checkbox text-left">
-					<!-- a classe itemLegenda e importante para nao imprimir quando nao estiver checado -->
-					<label class="itemLegenda" >
-						<input class="noprint" type="checkbox" id='legendack_{{layer}}_{{index}}' value="{{{index}}}" name="{{{layer}}}" {{{checked}}} onclick="i3GEO.legenda.inverteStatusClasse(this)">
-						<span class="checkbox-material noprint"><span class="check"></span></span> <img style="cursor:pointer;" onclick="i3GEO.legenda.mudaCorClasse('{{layer}}','{{index}}');return false;" src="{{{img}}}" title="{{{altera}}}"> {{{nome}}}
-					</label>
-				</div>
-				{{/classes}}
-			</div>
-			<hr>
-		</div>
-	</script>
-	<script id="templateBuscaServico" type="x-tmpl-mustache">
-		<ul class="nav nav-pills nav-stacked">
-			<h4>{{{tema}}}</h4>
-			{{#lugares}}
-			<li>
-				<a onclick="i3GEO.busca.zoom('{{{limite}}}','{{{layer}}}','{{{gid}}}','{{{nome}}}')" onmouseout="i3GEO.busca.escondexy();" onmouseover="i3GEO.busca.mostraxy('{{{limite}}}','wkt');" href="#" class="list-group-item">{{{nome}}} <small>{{{centroide}}}</small></a>
-			</li>
-			{{/lugares}}
-		</ul>
-	</script>
-	<script id="templateBuscaTemasMapa" type="x-tmpl-mustache">
-		<ul class="nav nav-pills nav-stacked">
-			<li>
-				<a onclick="i3GEO.busca.zoomExt('{{{box}}}')" onmouseout="i3GEO.busca.escondexy();" onmouseover="i3GEO.busca.mostraxy('{{{box}}}','extent');" href="#" class="list-group-item">{{{valor}}}</a>
-			</li>
-		</ul>
 	</script>
 	<script>
 	<!--inicia o mapa-->

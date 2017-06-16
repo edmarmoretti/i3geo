@@ -5,19 +5,58 @@ i3GEO.catalogoMenus = {
 	GRUPO: "",
 	SUBGRUPO: "",
 	config: {
-		"seletorTemplateDir": "#guia2objTemplateDir",
-		"seletorTemplateTema": "#guia2objTemplateTema",
+		"templateDir": "templates/dir.html",
+		"templateTema": "templates/tema.html",
 		"idOndeMenus": "catalogoMenus",
 		"idCatalogoPrincipal": "catalogoPrincipal",
 		"idCatalogoNavegacao": "catalogoNavegacao",
 		"idOndeMigalha": "catalogoMigalha"
+	},
+	nget: 0,
+	carregaTemplates: function(){
+		if(i3GEO.catalogoMenus.nget == 0){
+			i3GEO.catalogoMenus.nget = 3;
+			if(!i3GEO.template.dir){
+				$.get(i3GEO.catalogoMenus.config.templateDir, function(template) {
+					i3GEO.template.dir = template;
+					i3GEO.catalogoMenus.nget = i3GEO.catalogoMenus.nget - 1;
+					if(i3GEO.catalogoMenus.nget == 0){
+						i3GEO.catalogoMenus.listaMenus();
+					}
+				});
+			} else {
+				i3GEO.catalogoMenus.nget = i3GEO.catalogoMenus.nget - 1;
+			}
+			if(!i3GEO.template.tema){
+				$.get(i3GEO.catalogoMenus.config.templateTema, function(template) {
+					i3GEO.template.tema = template;
+					i3GEO.catalogoMenus.nget = i3GEO.catalogoMenus.nget - 1;
+					if(i3GEO.catalogoMenus.nget == 0){
+						i3GEO.catalogoMenus.listaMenus();
+					}
+				});
+			} else {
+				i3GEO.catalogoMenus.nget = i3GEO.catalogoMenus.nget - 1;
+			}
+			if(!i3GEO.template.catalogoMigalha){
+				$.get($("#" + i3GEO.catalogoMenus.config.idOndeMigalha).attr("data-template"), function(template) {
+					i3GEO.template.catalogoMigalha = template;
+					i3GEO.catalogoMenus.nget = i3GEO.catalogoMenus.nget - 1;
+					if(i3GEO.catalogoMenus.nget == 0){
+						i3GEO.catalogoMenus.listaMenus();
+					}
+				});
+			} else {
+				i3GEO.catalogoMenus.nget = i3GEO.catalogoMenus.nget - 1;
+			}
+		}
 	},
 	aguarde: function(){
 		$("#" + i3GEO.catalogoMenus.config.idOndeMenus).html($trad("o1"));
 	},
 	atualizaMigalha: function(nome,onclick){
 		var t = Mustache.to_html(
-				$($("#" + i3GEO.catalogoMenus.config.idOndeMigalha).attr("data-template")).html(),
+				i3GEO.template.catalogoMigalha,
 				{"nome":nome,"onclick":onclick}
 			);
 		$("#" + i3GEO.catalogoMenus.config.idOndeMigalha).html(t);
@@ -54,44 +93,46 @@ i3GEO.catalogoMenus = {
 				i3GEO.catalogoMenus.config[i] = v;
 			});
 		}
-		config = i3GEO.catalogoMenus.config;
-
 		i3GEO.catalogoMenus.aguarde();
+		if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
+			i3GEO.catalogoMenus.carregaTemplates();
+		} else {
+			config = i3GEO.catalogoMenus.config;
+			//para efeitos de compatibilidade
+			if(i3GEO.arvoreDeTemas && i3GEO.arvoreDeTemas.IDSMENUS && i3GEO.arvoreDeTemas.IDSMENUS.length > 0){
+				i3GEO.catalogoMenus.IDSMENUS = i3GEO.arvoreDeTemas.IDSMENUS;
+			}
 
-		//para efeitos de compatibilidade
-		if(i3GEO.arvoreDeTemas && i3GEO.arvoreDeTemas.IDSMENUS && i3GEO.arvoreDeTemas.IDSMENUS.length > 0){
-			i3GEO.catalogoMenus.IDSMENUS = i3GEO.arvoreDeTemas.IDSMENUS;
+			var montaMenus = function(dados){
+				var menus = dados.data,
+					clone = [],
+					n = i3GEO.catalogoMenus.IDSMENUS.length,
+					t;
+
+				//ajusta o nome
+				//verifica se o menu esta na lista de ids definidos em i3GEO.catalogoMenus.IDSMENUS
+				$.each( menus, function( i,v ) {
+					if (n === 0 || i3GEO.catalogoMenus.IDSMENUS.indexOf(v.idmenu) >= 0 || i3GEO.catalogoMenus.IDSMENUS.indexOf(v.idmenu*1) >= 0){
+						v.nome = v.nomemenu;
+						v.descricao = v.desc;
+						v.onclick = "i3GEO.catalogoMenus.listaGrupos(" + v.idmenu + ",'" + v.nome + "')";
+						if(v.publicado.toLowerCase() == "nao"){
+							v.nome = v.nome + " <small>(" + $trad("naoPublicado") + ")<small>";
+						}
+						//inclui apenas se o menu estiver marcado como publicado ou se o usuario estiver logado
+						if(i3GEO.configura.optUsuarioLogado == true || v.publicado.toLowerCase() != "nao"){
+							clone.push(v);
+						}
+					}
+				});
+				t = Mustache.to_html(
+					"{{#data}}" + i3GEO.template.dir + "{{/data}}",
+					{"data":clone}
+				);
+				$("#" + config.idOndeMenus).html(t);
+			};
+			i3GEO.php.pegalistademenus(montaMenus);
 		}
-
-		var montaMenus = function(dados){
-			var menus = dados.data,
-				clone = [],
-				n = i3GEO.catalogoMenus.IDSMENUS.length,
-				t;
-
-			//ajusta o nome
-			//verifica se o menu esta na lista de ids definidos em i3GEO.catalogoMenus.IDSMENUS
-			$.each( menus, function( i,v ) {
-				if (n === 0 || i3GEO.catalogoMenus.IDSMENUS.indexOf(v.idmenu) >= 0 || i3GEO.catalogoMenus.IDSMENUS.indexOf(v.idmenu*1) >= 0){
-					v.nome = v.nomemenu;
-					v.descricao = v.desc;
-					v.onclick = "i3GEO.catalogoMenus.listaGrupos(" + v.idmenu + ",'" + v.nome + "')";
-					if(v.publicado.toLowerCase() == "nao"){
-						v.nome = v.nome + " <small>(" + $trad("naoPublicado") + ")<small>";
-					}
-					//inclui apenas se o menu estiver marcado como publicado ou se o usuario estiver logado
-					if(i3GEO.configura.optUsuarioLogado == true || v.publicado.toLowerCase() != "nao"){
-						clone.push(v);
-					}
-				}
-			});
-			t = Mustache.to_html(
-				"{{#data}}" + $(config.seletorTemplateDir).html() + "{{/data}}",
-				{"data":clone}
-			);
-			$("#" + config.idOndeMenus).html(t);
-		};
-		i3GEO.php.pegalistademenus(montaMenus);
 	},
 	listaGrupos: function(idmenu, nomeMigalha){
 		if (typeof (console) !== 'undefined')
@@ -125,7 +166,7 @@ i3GEO.catalogoMenus = {
 				}
 			});
 			g = Mustache.to_html(
-				"{{#data}}" + $(config.seletorTemplateDir).html() + "{{/data}}",
+				"{{#data}}" + i3GEO.template.dir + "{{/data}}",
 				{"data":clone}
 			);
 			//monta a lista de temas
@@ -141,7 +182,7 @@ i3GEO.catalogoMenus = {
 				clone.push(v);
 			});
 			t = Mustache.to_html(
-				"{{#data}}" + $(config.seletorTemplateTema).html() + "{{/data}}",
+				"{{#data}}" + i3GEO.template.tema + "{{/data}}",
 				{"data":clone}
 			);
 			$("#" + config.idCatalogoNavegacao).html(t + g);
@@ -182,7 +223,7 @@ i3GEO.catalogoMenus = {
 				}
 			});
 			g = Mustache.to_html(
-				"{{#data}}" + $(i3GEO.catalogoMenus.config.seletorTemplateDir).html() + "{{/data}}",
+				"{{#data}}" + i3GEO.template.dir + "{{/data}}",
 				{"data":clone}
 			);
 			//monta a lista de temas
@@ -199,7 +240,7 @@ i3GEO.catalogoMenus = {
 				clone.push(v);
 			});
 			t = Mustache.to_html(
-				"{{#data}}" + $(i3GEO.catalogoMenus.config.seletorTemplateTema).html() + "{{/data}}",
+				"{{#data}}" + i3GEO.template.tema + "{{/data}}",
 				{"data":clone}
 			);
 
@@ -241,7 +282,7 @@ i3GEO.catalogoMenus = {
 				clone.push(v);
 			});
 			t = Mustache.to_html(
-				"{{#data}}" + $(i3GEO.catalogoMenus.config.seletorTemplateTema).html() + "{{/data}}",
+				"{{#data}}" + i3GEO.template.tema + "{{/data}}",
 				{"data":clone}
 			);
 
