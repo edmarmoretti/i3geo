@@ -247,7 +247,7 @@ $jsfiles = array(
 "compactados/catalogoDir_compacto.js",
 "compactados/legenda_compacto.js",
 "compactados/busca_compacto.js",
-"compactados/caixaDeFerramentas.js",
+"compactados/caixaDeFerramentas_compacto.js",
 "template.js"
 );
 

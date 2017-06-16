@@ -80,6 +80,10 @@ if(typeof YAHOO != "undefined" ){
  * Section: i3GEO
  */
 var i3GEO = {
+	init: function(){
+		i3GEO.cria();
+		i3GEO.inicia();
+	},
 	/**
 	 * Constant: tamanhodoc
 	 * Largura e altura do navegador ap&oacute;s a inicializa&ccedil;&atilde;o
