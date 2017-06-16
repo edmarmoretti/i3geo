@@ -126,22 +126,6 @@ i3GEO.configura =
 		 */
 		tipoimagem : "nenhum",
 		/**
-		 * Propriedade: ajustaDocType
-		 *
-		 * Ajusta ou n&atilde;o a declara&ccedil;&atilde;o DOCTYPE do documento HTML. O ajuste &eacute; necess&aacute;rio para que algumas
-		 * op&ccedil;&otilde;es funcionem adequadamente. Caso vc deseje usar um DOCTYPE espec&iacute;fico, utilize false. O ajuste do
-		 * DOCTYPE n&atilde;o funciona no navegador IE.
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
-		 */
-		ajustaDocType : false,
-		/**
 		 * Propriedade: tipotip
 		 *
 		 * Tipo de tip que &eacute; mostrado na fun&ccedil;&atilde;o de identifica&ccedil;&atilde;o quando o usu&aacute;rio estaciona o

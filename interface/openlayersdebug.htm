@@ -42,7 +42,9 @@
 	<div id="i3GEONomeLogin"
 		style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
 	-->
-	<!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps -->
+	<!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
+	Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
+	-->
 	<div id="mapai3Geo" >
 	</div>
 	<!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
@@ -51,7 +53,7 @@
 	</form>
 
 	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
-	<div class="localizarxy fundoRodape hidden-xs hidden-sm">
+	<div class="localizarxy fundoRodape hidden-xs hidden-sm" >
 		<div class="i3GeoMascaraCoord" style="display: block;">
 			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
 				<option>DMS:</option>

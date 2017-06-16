@@ -304,7 +304,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 	left: 7px;
 	text-align: left;
 	position: absolute;
-	bottom: 0px;
+	bottom: 2px;
 	display: block;
 }
 .escalanumerica td {
@@ -373,10 +373,10 @@ Configuracoes especificas dos elementos que ficam no rodape
 	z-index : 50;
 	color: white;
 	position: absolute;
-	bottom: 0px;
+	bottom: 2px;
 	width: 450px;
-	left: auto;
-	right: 0px;
+	//right: auto;
+	left: 120px;
 	text-align: left;
 	font-size: 1em;
 	display: inline;

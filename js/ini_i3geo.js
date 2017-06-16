@@ -80,10 +80,6 @@ if(typeof YAHOO != "undefined" ){
  * Section: i3GEO
  */
 var i3GEO = {
-	init: function(){
-		i3GEO.cria();
-		i3GEO.inicia();
-	},
 	/**
 	 * Constant: tamanhodoc
 	 * Largura e altura do navegador ap&oacute;s a inicializa&ccedil;&atilde;o
@@ -305,6 +301,10 @@ var i3GEO = {
 	 * Tipo: {string}
 	 */
 	contadorAtualiza : 0,
+	init: function(){
+		i3GEO.cria();
+		i3GEO.inicia();
+	},
 	/**
 	 * Function: cria
 	 *
@@ -317,6 +317,8 @@ var i3GEO = {
 	 * interface &eacute; definida em <i3GEO.Interface.ATUAL>
 	 */
 	cria : function() {
+		//calcula a largura da barra de rolagem para adicionar ao tamanho do mapa
+		i3GEO.scrollerWidth = i3GEO.util.getScrollerWidth();
 		$('[data-traduzir="true"]').each(function(){
 			this.innerHTML = Mustache.to_html(
 					this.innerHTML,
@@ -325,9 +327,6 @@ var i3GEO = {
 		});
 		if($i("i3GEOlogoMarcaTemplate")){
 			i3GEO.aguardeLogo.mostra();
-		}
-		if (i3GEO.configura.ajustaDocType === true) {
-			i3GEO.util.ajustaDocType();
 		}
 		var tamanho, temp;
 		temp = window.location.href.split("?");
@@ -363,10 +362,22 @@ var i3GEO = {
 		//
 		// calcula o tamanho do mapa
 		//
-		tamanho = i3GEO.calculaTamanho();
-		i3GEO.Interface.cria(
-			tamanho[0],
-			tamanho[1]);
+
+		temp = $i(i3GEO.Interface.IDCORPO);
+
+		if (temp && temp.style && temp.style.width && temp.style.height) {
+			i3GEO.Interface.cria(
+					parseInt(temp.style.width,10),
+					parseInt(temp.style.height,10)
+			);
+
+		} else {
+			tamanho = i3GEO.calculaTamanho();
+			i3GEO.Interface.cria(
+					tamanho[0],
+					tamanho[1]
+			);
+		}
 
 	},
 	/**
@@ -759,78 +770,25 @@ var i3GEO = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.calculaTamanho()");
 
-		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, Dw, Dh;
+		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, antigoh = i3GEO.parametros.h;
 		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
 		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
-		if (i3GEO.configura.autotamanho === true) {
-			if (window.top === window.self) {// nao se aplica em iframe
-				window.resizeTo(
-					screen.availWidth,
-					screen.availHeight);
-				window.moveTo(
-					0,
-					0);
-			}
-		}
-		if (i3GEO.scrollerWidth === "") {
-			i3GEO.scrollerWidth = i3GEO.util.getScrollerWidth();
-		}
-		i3GEO.tamanhodoc = [
-			window.innerWidth,
-			window.innerHeight
-		];
-		Dw = $(document).width();
-		Dh = $(document).height();
+		document.body.style.width = "100%";
+		temp = i3GEO.util.tamanhoBrowser();
+		novow = temp[0];
+		novoh = temp[1];
+		temp = (antigoh - (novoh - diminuiy));
 
-		if(Dw > screen.availWidth){
-			Dw = screen.availWidth;
-		}
-		if (Dh > screen.availHeight){
-			Dh = screen.availHeight - 20;
-		}
-
-		novow = Dw
-			- i3GEO.scrollerWidth;
-		novoh = Dh;
-		document.body.style.width = novow
-			+ "px";
 		document.body.style.height = novoh
 			+ "px";
 
 		w = novow
 			- menos
-			- diminuix;
+			- diminuix + i3GEO.scrollerWidth;
 		h = novoh
 			- diminuiy;
 
-		temp = $i("corpoMapa");
-		if (temp) {
-			if (temp.style) {
-				if (temp.style.width) {
-					w = parseInt(
-						temp.style.width,
-						10);
-					h = parseInt(
-						temp.style.width,
-						10);
-					i3GEO.parametros.w = w;
-				}
-				if (temp.style.height) {
-					h = parseInt(
-						temp.style.height,
-						10);
-					i3GEO.parametros.h = h;
-				}
-			}
-		}
-		temp = $i("contemImg");
-		if (temp) {
-			temp.style.height = h
-				+ "px";
-			temp.style.width = w
-				+ "px";
-		}
 		i3GEO.parametros.w = w;
 		i3GEO.parametros.h = h;
 		return [
@@ -862,7 +820,7 @@ var i3GEO = {
 			+ "px";
 		w = novow
 			- menos
-			- diminuix + i3GEO.util.getScrollerWidth();
+			- diminuix + i3GEO.scrollerWidth;
 		h = novoh
 			- diminuiy;
 
@@ -872,17 +830,6 @@ var i3GEO = {
 				+ "px";
 			temp.style.width = w
 				+ "px";
-		}
-		temp = $i(i3GEO.Interface.IDCORPO);
-		if (temp) {
-			temp.style.height = h
-				+ "px";
-			temp.style.width = w
-				+ "px";
-		}
-		temp = $i("mst");
-		if (temp) {
-			temp.style.width = "100%";
 		}
 
 		i3GEO.parametros.w = w;
