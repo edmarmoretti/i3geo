@@ -59,7 +59,7 @@
 				<option>DMS:</option>
 				<option value="janela">janela</option>
 				<option value="geoProj">DMS</option>
-				<option value="dd">Déc. de grau</option>
+				<option value="dd">Dec. de grau</option>
 				<option value="geohash">GeoHash</option>
 				<option value="policonicaSad69">Polic SAD-69</option>
 				<option value="utmSad69Proj">UTM Sad-69</option>
@@ -101,7 +101,7 @@
 		</div>
 	</div>
 
-	<!-- barra de ícones de navegacao -->
+	<!-- barra de icones de navegacao -->
 	<div class="ol-i3GEOcontrols ol-control">
 		<button onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/projection.png">
@@ -290,7 +290,7 @@
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
 								</li>
 								<li>
-								<a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatísticos</a>
+								<a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
 								</li>
 								<li><a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
 								</li>
@@ -518,8 +518,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- templates -->
-
 	<!--  para mostrar o banner de abertura, basta ter esse ID -->
 	<script id="i3GEOlogoMarcaTemplate" type="x-tmpl-mustache">
 	<div>
@@ -541,9 +539,77 @@
 	</div>
 	</script>
 	<script>
+	var parametrosMapa = {
+		//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
+		//Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Você pode utilizar essa opcao para abrir um mapa com as camadas que você quiser, mas para evitar redundâncias, prefira o uso de &temasa
+		mapfilebase: "", //base: "",
+		//lista com os nomes dos layers existentes em mapfilebase que serao desligados
+		//util para evitar que determinadas camadas default sejam mostradas em determinados tipos de interface
+		layersoff: "", //desligar
+		//extensao geografica do mapa
+		//deve ser definida em coordenadas no formato decimos de grau e na projecao geografica na sequencia xmin ymin xmax ymax
+		mapext: [], //mapext como string
+		//perfil utilizado para restringir os menus de temas mostrando apenas os que correspondem a determinado perfil
+		perfil: "",
+		//layers que serao adicionados ao mapa.
+		//Cada layer corresponde ao nome do mapfile existente na pasta i3geo/temas sem a extensao '.map'
+		layers: {
+			//array com a lista dos layers que serao adicionados e ligados (visiveis)
+			on:[], //temasa
+			//array com a lista dos layers que serao adicionados mas nao ligados
+			off:[], //layers
+		},
+
+		//lista de coordenadas x e y que serao adicionadas como pontos no mapa.
+		pontos: "",
+		//nome do tema de pontos
+		nometemapontos: "",
+		//lista de coordenadas x e y que serao adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ',', por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
+		linhas: "",
+		//nome do tema de linhas
+		nometemalinhas: "",
+		//lista de coordenadas x e y que serao adicionadas como poligonos no mapa. As coordenadas dos vertices de poligonos diferentes devem ser separadas por ','.
+		poligonos: "",
+		//nome do tema de poligonos
+		nometemapoligonos: "",
+		//nome do simbolo que sera utilizado para desenhar os elementos inseridos (veja arquivo de simbolos em i3geo/symbols)
+		simbolo: "",
+		//cor do simbolo definido em RGB separados por espaco ou virgula
+		corsimbolo: "",
+		//tamanho do simbolo em pixels
+		tamanhosimbolo: "",
+		//insere elementos no mapa com coordenadas definidas em wkt
+		wkt: "",
+		//nome do tema em wkt
+		nometemawkt: "",
+		//url de um arquivo KML que sera incluido no mapa. Valido apenas na interface google maps
+		kmlurl: "",
+		//endereco de um WMS (sera incluido como uma camada no mapa)
+		url_wms: "",
+		//nome do layer
+		layer_wms: "",
+		//estilo do layer
+		style_wms: "",
+		//nome da camada (titulo)
+		nome_wms: "",
+		//codigo da projecao
+		srs_wms: "",
+		//tipo de imagem disponivel
+		image_wms: "",
+		//Versao do WMS (necessario quando da inclusao de uma camada WMS diretamente pela URL)
+		versao_wms: "",
+		//filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
+		//Exemplo de filtro
+		//http://localhost/i3geo/ms_criamapa.php?layers=_lbiomashp&temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))
+		//no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'")
+		filtros: ""
+	};
 	//inicia o mapa
 	//Veja config.php
-	i3GEO.init();
+	//
+	//o primeiro parametro permite alterar o mapa, inserindo camadas e outras definicoes
+	//
+	i3GEO.init(parametrosMapa);
 	</script>
 </body>
 
