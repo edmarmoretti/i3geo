@@ -108,8 +108,8 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'mapfileInicia' : [ {
 		pt : "(opcional) Mapfile inicial (mapfile que ser&aacute; usado como base para montagem do mapa inicial. Se n&atilde;o for definido, ser&aacute; usado o default do i3geo. Utilize o endere&ccedil;o completo do aquivo mapfile no servidor.):",
-		en : "",
-		es : ""
+		en : "(optional) Initial mapfile (mapfile that will be used as base for initial map building. If it is not defined, the default i3Geo mapfile will be used. On the server use a mapfile full path):",
+		es : "(opcional) Mapfile inicial (mapfile que ser&aacute; utilizado como base para el montaje del mapa inicial. Si no es definido, ser&aacute; utilizado &eacute;l predeterminado de i3Geo. Utilice la direcci&oacute;n completa del archivo mapfile en el servidor):"
 	} ],
     'linkAtlas' : [ {
 		pt : "(opcional) Link para o texto que ser&aacute; mostrado na inicializa&ccedil;&atilde;o do Atlas:",
