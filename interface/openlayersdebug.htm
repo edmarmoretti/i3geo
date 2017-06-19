@@ -559,53 +559,66 @@
 			//array com a lista dos layers que serao adicionados mas nao ligados
 			off:[], //layers
 		},
-
-		//lista de coordenadas x e y que serao adicionadas como pontos no mapa.
-		pontos: "",
-		//nome do tema de pontos
-		nometemapontos: "",
-		//lista de coordenadas x e y que serao adicionadas como linhas no mapa. As coordenadas de linhas diferentes devem ser separadas por ',', por exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
-		linhas: "",
-		//nome do tema de linhas
-		nometemalinhas: "",
-		//lista de coordenadas x e y que serao adicionadas como poligonos no mapa. As coordenadas dos vertices de poligonos diferentes devem ser separadas por ','.
-		poligonos: "",
-		//nome do tema de poligonos
-		nometemapoligonos: "",
-		//nome do simbolo que sera utilizado para desenhar os elementos inseridos (veja arquivo de simbolos em i3geo/symbols)
-		simbolo: "",
-		//cor do simbolo definido em RGB separados por espaco ou virgula
-		corsimbolo: "",
-		//tamanho do simbolo em pixels
-		tamanhosimbolo: "",
+		//lista de coordenadas x e y que serao adicionadas como pontos no mapa
+		points: {
+			//array com a lista de coordenadas
+			coord: [], //pontos
+			//titulo da nova camada
+			title: "" //nometemapontos
+		},
+		//lista de coordenadas x e y que serao adicionadas como linhas no mapa
+		lines: {
+			//array de arrays com a lista de coordenadas de cada linha
+			coord: [[]],
+			//titulo da nova camada
+			title:""
+		},
+		//lista de coordenadas x e y que serao adicionadas como poligonos no mapa
+		polygons: {
+			//array de arrays com a lista de coordenadas de cada poligono. A primeira coordenada deve ser igual a ultima.
+			coord: [[]], //poligonos
+			//titulo da nova camada
+			title:"" //nometemapoligonos
+		},
 		//insere elementos no mapa com coordenadas definidas em wkt
-		wkt: "",
-		//nome do tema em wkt
-		nometemawkt: "",
-		//url de um arquivo KML que sera incluido no mapa. Valido apenas na interface google maps
-		kmlurl: "",
+		wkt: {
+			//string no formato wkt
+			coord: "", //wkt
+			//titulo da nova camada
+			title: "" //nometemawkt
+		},
+		//simbolo que sera utilizado para desenhar os elementos inseridos
+		symbol: {
+			//codigo do simbolo conforme definido em i3geo/symbols
+			name: "", //simbolo
+			color: "", //corsimbolo
+			//em pixels
+			size: "", //tamanhosimbolo
+		},
+		//arquivo KML que sera incluido no mapa. Valido apenas na interface google maps
+		kml: {
+			url: "" //kmlurl
+		},
 		//endereco de um WMS (sera incluido como uma camada no mapa)
-		url_wms: "",
-		//nome do layer
-		layer_wms: "",
-		//estilo do layer
-		style_wms: "",
-		//nome da camada (titulo)
-		nome_wms: "",
-		//codigo da projecao
-		srs_wms: "",
-		//tipo de imagem disponivel
-		image_wms: "",
-		//Versao do WMS (necessario quando da inclusao de uma camada WMS diretamente pela URL)
-		versao_wms: "",
-		//filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
-		//Exemplo de filtro
-		//http://localhost/i3geo/ms_criamapa.php?layers=_lbiomashp&temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))
-		//no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'")
-		filtros: ""
+		wms: {
+			url: "", //url_wms
+			layer: "", //layer_wms
+			style: "", //style_wms
+			title: "", //nome_wms
+			srs: "", //srs_wms
+			imagetype: "", //image_wms
+			version: "", //versao_wms
+		},
+		//filtros que serao aplicados aos layers. Utilize a expressaso conforme definido na documentacao
+		//do mapserver, exemplo
+		//{layer: "bioma",expression: "(('[CD_LEGENDA]'='CAATINGA'))"} ou {layer: "bioma",expression: "cd_legenda='CAATINGA'"}
+		filters: [{
+			layer: "",
+			expression: ""
+		}]
 	};
 	//inicia o mapa
-	//Veja config.php
+	//Veja tambem config.php
 	//
 	//o primeiro parametro permite alterar o mapa, inserindo camadas e outras definicoes
 	//

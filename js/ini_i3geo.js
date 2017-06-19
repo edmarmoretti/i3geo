@@ -301,9 +301,23 @@ var i3GEO = {
 	 * Tipo: {string}
 	 */
 	contadorAtualiza : 0,
-	init: function(){
+	//atalho para as funcoes cria e inicia com a possibilidade de aplicacao de parametros
+	init: function(parametrosMapa){
+		var mashuppar;
+		if(parametrosMapa && parametrosMapa != ""){
+			mashuppar = i3GEO.parametrosMapa2mashuppar(parametrosMapa);
+		} else {
+			mashuppar = "";
+		}
 		i3GEO.cria();
 		i3GEO.inicia();
+	},
+	//mashuppar e um parametro antigo usado no i3geo para alterar o mapa de inicializacao
+	//os parametros utilizados sao os mesmos disponiveis em ms_criamapa.php
+	//na versao 7 os nomes dos parametros foram modificados para facilitar seu uso
+	//essa funcao faz a conversao dessa nova nomenclatura para poder compatibilizar com a sintaxe utilizada em mashuppar
+	parametrosMapa2mashuppar: function(parametrosMapa){
+
 	},
 	/**
 	 * Function: cria

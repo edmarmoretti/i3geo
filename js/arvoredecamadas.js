@@ -131,7 +131,7 @@ i3GEO.arvoreDeCamadas =
 				} else {
 					i3GEO.arvoreDeCamadas.nget = i3GEO.arvoreDeCamadas.nget - 1;
 				}
-				if(!i3GEO.template.tema){
+				if(!i3GEO.template.camadaFundo){
 					$.get(i3GEO.arvoreDeCamadas.config.templateCamadaFundo, function(template) {
 						i3GEO.template.camadaFundo = template;
 						i3GEO.arvoreDeCamadas.nget = i3GEO.arvoreDeCamadas.nget - 1;
@@ -254,7 +254,6 @@ i3GEO.arvoreDeCamadas =
 				}
 				i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[camada.name] = tema;
 			});
-
 			var t = Mustache.render(
 				"{{#data}}" + i3GEO.template.camada + "{{/data}}",
 				{"data":clone}
