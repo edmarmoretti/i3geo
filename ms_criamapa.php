@@ -543,7 +543,7 @@ if (!isset ($map_reference_extent)){
 }
 if(!isset($interface)){
 	if(!isset($interfacePadrao)){
-		$interfacePadrao = "black_ol.htm";
+		$interfacePadrao = "ol.htm";
 	}
 	$interface = $interfacePadrao;
 }
@@ -649,7 +649,7 @@ adaptaLayers($tmpfname,$versao);
 if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat")){
 	require_once(dirname(__FILE__)."/ms_registraip.php");
 }
-//echo $tmpfname;exit;
+
 if ($interface != "mashup"){
 	abreInterface($interface,$caminho,$tempo);
 }
@@ -715,21 +715,24 @@ function abreInterface($interface,$caminho,$tempo){
 	$nomeInterface = explode(".",basename($interface));
 	//$_SESSION["interface"] = $nomeInterface[0];
 	if (count(explode(".php",$interface)) > 1){
-		if(file_exists($caminho."interface/".$interface))
-		{include_once($caminho."interface/".$interface);}
-		else
-		{include_once($interface);}
+		if(file_exists($caminho."interface/".$interface)){
+			include_once($caminho."interface/".$interface);
+		}
 		exit;
 	}
 	else{
-		if(file_exists($caminho."interface/".$interface))
-		{$urln = $caminho."interface/".$interface."?".session_id();}
-		else
-		{$urln = $interface."?".session_id();}
-		if(!headers_sent())
-		{header("Location:".$urln);}
-		else
-		{echo "<meta http-equiv='refresh' content='0;url=$urln'>";}
+		if(file_exists($caminho."interface/".$interface)){
+			$urln = $caminho."interface/".$interface."?".session_id();
+		}
+		else{
+			$urln = $interface."?".session_id();
+		}
+		if(!headers_sent()){
+			header("Location:".$urln);
+		}
+		else{
+			echo "<meta http-equiv='refresh' content='0;url=$urln'>";
+		}
 	}
 }
 /*
@@ -841,43 +844,43 @@ function incluiTemasIniciais(){
 				echo "<br>Problemas com a camada $arqtemp<br>";
 			}
 			else{
-					$maptemp = @ms_newMapObj($arqtemp);
-					for($i=0;$i<($maptemp->numlayers);++$i){
-						//error_reporting(0);
-						$layern = $maptemp->getLayer($i);
-						if($layern->type == MS_LAYER_RASTER)
-						{$existeraster = true;}
-						if ($layern->name == "estadosl"){
-							$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");
-						}
-						$layern->setmetadata("nomeoriginal",$layern->name);
-						$nNome = str_replace(".map","",basename($arqtemp));
-						$layern->setmetadata("arquivotemaoriginal",$nNome);
-						autoClasses($layern,$mapn);
-						//
-						//necess&aacute;rio para n&atilde;o alterar a extens&atilde;o do mapa por esse par&acirc;metro
-						//
-						$layern->setmetadata("aplicaextensao","");
-						//cria e aplica sld se for wms e existirem classes
-						if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
-							$tipotemp = $layern->type;
-							$statustemp = $layern->status;
-							$tiporep = $layern->getmetadata("tipooriginal");
-							$layern->set("type",MS_LAYER_POLYGON);
-							if ($tiporep == "linear")
-							{$layern->set("type",MS_LAYER_LINE);}
-							if ($tiporep == "pontual")
-							{$layern->set("type",MS_LAYER_POINT);}
-							$layern->set("status",MS_DEFAULT);
-							$sld = $layern->generateSLD();
-							if($sld != "")
-							$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
-							$layern->set("type",$tipotemp);
-							$layern->set("status",$statustemp);
-						}
-						cloneInlineSymbol($layern,$maptemp,$mapn);
-						$layerAdicionado = ms_newLayerObj($mapn, $layern);
-						corrigeLayerGrid($layern,$layerAdicionado);
+				$maptemp = @ms_newMapObj($arqtemp);
+				for($i=0;$i<($maptemp->numlayers);++$i){
+					//error_reporting(0);
+					$layern = $maptemp->getLayer($i);
+					if($layern->type == MS_LAYER_RASTER)
+					{$existeraster = true;}
+					if ($layern->name == "estadosl"){
+						$layern->set("data",$locaplic."/aplicmap/dados/estados.shp");
+					}
+					$layern->setmetadata("nomeoriginal",$layern->name);
+					$nNome = str_replace(".map","",basename($arqtemp));
+					$layern->setmetadata("arquivotemaoriginal",$nNome);
+					autoClasses($layern,$mapn);
+					//
+					//necess&aacute;rio para n&atilde;o alterar a extens&atilde;o do mapa por esse par&acirc;metro
+					//
+					$layern->setmetadata("aplicaextensao","");
+					//cria e aplica sld se for wms e existirem classes
+					if($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata("wms_sld_body") == ""){
+						$tipotemp = $layern->type;
+						$statustemp = $layern->status;
+						$tiporep = $layern->getmetadata("tipooriginal");
+						$layern->set("type",MS_LAYER_POLYGON);
+						if ($tiporep == "linear")
+						{$layern->set("type",MS_LAYER_LINE);}
+						if ($tiporep == "pontual")
+						{$layern->set("type",MS_LAYER_POINT);}
+						$layern->set("status",MS_DEFAULT);
+						$sld = $layern->generateSLD();
+						if($sld != "")
+						$layern->setmetadata("wms_sld_body",str_replace('"',"'",$sld));
+						$layern->set("type",$tipotemp);
+						$layern->set("status",$statustemp);
+					}
+					cloneInlineSymbol($layern,$maptemp,$mapn);
+					$layerAdicionado = ms_newLayerObj($mapn, $layern);
+					corrigeLayerGrid($layern,$layerAdicionado);
 				}
 			}
 		}

@@ -705,7 +705,7 @@ A interface padr&atilde;o &eacute; utilizada quando n&atilde;o &eacute; definida
 Tipo:
 {string}
 */
-$interfacePadrao = "black_ol.htm";
+$interfacePadrao = "ol.htm";
 /*
 Variable: customDir
 
