@@ -485,11 +485,11 @@ $para - linha|poligono
 		$this->layer->set("template","none.htm");
 		$diretorio = dirname($this->arquivo);
 		$tipol = MS_SHP_ARC;
-		$tipos = MS_SHAPE_LINE;
+		//$tipos = MS_SHAPE_LINE;
 		if ($para == "poligono")
 		{
 			$tipol = MS_SHP_POLYGON;
-			$tipos = MS_SHAPE_POLYGON;
+			//$tipos = MS_SHAPE_POLYGON;
 		}
 		$novonomelayer = nomeRandomico();
 		$nomeshp = $diretorio."/".$novonomelayer;

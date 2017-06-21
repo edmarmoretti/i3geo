@@ -215,6 +215,7 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 //quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute;
 //sendo utilizado como um include em classesphp/mapa_controle.php
 //
+
 if(!isset($funcao)){
 	ob_end_clean();
 	/*
@@ -243,35 +244,35 @@ if(empty($base) && !empty($parurl["base"])){
 }
 
 ms_ResetErrorList();
-$temasa = $parurl["temasa"];
-$layers = $parurl["layers"];
-$desligar = $parurl["desligar"];
-$mapext = $parurl["mapext"];
+$temasa = @$parurl["temasa"];
+$layers = @$parurl["layers"];
+$desligar = @$parurl["desligar"];
+$mapext = @$parurl["mapext"];
 $executa = "";//$parurl["executa"];
-$perfil = $parurl["perfil"];
-$caminho = $parurl["caminho"];
-$pontos = $parurl["pontos"];
-$nometemapontos = $parurl["nometemapontos"];
-$linhas = $parurl["linhas"];
-$nometemalinhas = $parurl["nometemalinhas"];
-$poligonos = $parurl["poligonos"];
-$nometemapoligonos = $parurl["nometemapoligonos"];
-$simbolo = $parurl["simbolo"];
-$corsimbolo = $parurl["corsimbolo"];
-$tamanhosimbolo = $parurl["tamanhosimbolo"];
-$wkt = $parurl["wkt"];
-$nometemawkt = $parurl["nometemawkt"];
-$idioma = $parurl["idioma"];
-$kmlurl = $parurl["kmlurl"];
-$url_wms = $parurl["url_wms"];
-$layer_wms = $parurl["layer_wms"];
-$style_wms = $parurl["style_wms"];
-$nome_wms = $parurl["nome_wms"];
-$srs_wms = $parurl["srs_wms"];
-$image_wms = $parurl["image_wms"];
-$versao_wms = $parurl["versao_wms"];
-$gvsigview = $parurl["gvsigview"];
-$restauramapa = $parurl["restauramapa"];
+$perfil = @$parurl["perfil"];
+$caminho = @$parurl["caminho"];
+$pontos = @$parurl["pontos"];
+$nometemapontos = @$parurl["nometemapontos"];
+$linhas = @$parurl["linhas"];
+$nometemalinhas = @$parurl["nometemalinhas"];
+$poligonos = @$parurl["poligonos"];
+$nometemapoligonos = @$parurl["nometemapoligonos"];
+$simbolo = @$parurl["simbolo"];
+$corsimbolo = @$parurl["corsimbolo"];
+$tamanhosimbolo = @$parurl["tamanhosimbolo"];
+$wkt = @$parurl["wkt"];
+$nometemawkt = @$parurl["nometemawkt"];
+$idioma = @$parurl["idioma"];
+$kmlurl = @$parurl["kmlurl"];
+$url_wms = @$parurl["url_wms"];
+$layer_wms = @$parurl["layer_wms"];
+$style_wms = @$parurl["style_wms"];
+$nome_wms = @$parurl["nome_wms"];
+$srs_wms = @$parurl["srs_wms"];
+$image_wms = @$parurl["image_wms"];
+$versao_wms = @$parurl["versao_wms"];
+$gvsigview = @$parurl["gvsigview"];
+$restauramapa = @$parurl["restauramapa"];
 
 $versao = versao();
 $versao = $versao["principal"];
@@ -335,7 +336,7 @@ Prepara as vari&aacute;veis que ser&atilde;o incluidas na se&ccedil;&atilde;o
 
 As vari&aacute;veis v&ecirc;m do arquivo ms_configura.php e s&atilde;o armazenadas em uma se&ccedil;&atilde;o com nome espec&iacute;fico para o i3geo.
 */
-if (!isset($mapext)){
+if (!isset($mapext) || empty($mapext)){
 	$mapext="";
 }
 else{
@@ -353,7 +354,7 @@ $locaplic_ = $locaplic;
 $R_path_ = $R_path;
 $mapext_ = $mapext;
 
-$debug_ = $debug;
+$debug_ = @$debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
 $tituloInstituicao_ = $tituloInstituicao;
@@ -525,12 +526,6 @@ else{
 }
 
 /*
-Utiliza um projeto gvSig para compor o mapa
-*/
-if(!empty($gvsiggvp)){
-	incluiMapaGvsig($gvsiggvp,$gvsigview);
-}
-/*
 Par&acirc;metros adicionais.
 
 Processa os par&acirc;metros para a inicializa&ccedil;&atilde;o verificando se foram passados pela URL ou n&atilde;o.
@@ -665,6 +660,7 @@ Adapta os dados de cada layer.
 Faz altera&ccedil;&otilde;es em cada layer caso sejam necess&aacute;rias.
 */
 function adaptaLayers($tmpfname,$versao){
+	global $parurl;
 	$mapa = ms_newMapObj($tmpfname);
 	$path = $mapa->shapepath;
 	$numlayers = $mapa->numlayers;
@@ -703,7 +699,7 @@ function adaptaLayers($tmpfname,$versao){
 		//
 		//verifica se deve aplicar filtro
 		//
-		$filtro = $_GET["map_layer_".$layer->name."_filter"];
+		$filtro = @$parurl["map_layer_".$layer->name."_filter"];
 		if(!empty($filtro)){
 			$layer->setmetadata("CACHE","nao");
 			$layer->setfilter($filtro);
@@ -822,25 +818,8 @@ function incluiTemasIniciais(){
 		if ($arqt == "")
 		{continue;}
 		$extensao = ".map";
-		$arqt = str_replace(".gvp","",$arqt);
-		if(file_exists($arqt.".gvp")){
-			$extensao = ".gvp";
-			$arqt = $arqt.".gvp";
-		}
 		if(file_exists($arqt)){
 			$arqtemp = $arqt;
-		}
-		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."php"))){
-			//$extensao = ".php";
-		}
-		elseif (file_exists($temasdir."/".$arqt.".php")){
-			//$extensao = ".php";
-		}
-		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir."\\".$arqt."gvp"))){
-			$extensao = ".gvp";
-		}
-		elseif (file_exists($temasdir."/".$arqt.".gvp")){
-			$extensao = ".gvp";
 		}
 		if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($locaplic."\\aplicmap\\".$arqt.$extensao))){
 			$arqtemp = $locaplic."\\aplicmap\\".$arqt.$extensao;
@@ -862,7 +841,6 @@ function incluiTemasIniciais(){
 				echo "<br>Problemas com a camada $arqtemp<br>";
 			}
 			else{
-				if($extensao == ".map"){
 					$maptemp = @ms_newMapObj($arqtemp);
 					for($i=0;$i<($maptemp->numlayers);++$i){
 						//error_reporting(0);
@@ -900,34 +878,9 @@ function incluiTemasIniciais(){
 						cloneInlineSymbol($layern,$maptemp,$mapn);
 						$layerAdicionado = ms_newLayerObj($mapn, $layern);
 						corrigeLayerGrid($layern,$layerAdicionado);
-					}
-				}
-
-				if($extensao == ".php"){
-					//include_once($arqtemp);
-					//eval($arqt."(\$mapn);");
-				}
-				if($extensao == ".gvp"){
-					include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
-					$gm = new gvsig2mapfile($arqtemp);
-					$gvsigview = $gm->getViewsNames();
-					foreach($gvsigview as $v){
-						$dataView = $gm->getViewData($v);
-						$mapn = $gm->addLayers($mapn,$v,$dataView["layerNames"]);
-					}
-					$next = $dataView["extent"];
-					$ext = $mapn->extent;
-					$ext->setextent($next[0],$next[1],$next[2],$next[3]);
 				}
 			}
 		}
-	}
-	//
-	//muda para RGB para melhorar o desenho da imagem raster
-	//
-	if($existeraster){
-		//$of = $mapn->outputformat;
-		//$of->set("imagemode",MS_IMAGEMODE_RGB);
 	}
 	erroCriacao();
 }
@@ -1077,27 +1030,32 @@ function inserePontosUrl()
 	//cria o shape file
 	//
 	$tipol = MS_SHP_POINT;
-	$nomeshp = $dir_tmp."/".$imgdir."/pontosins";
+	$nomeshp = $dir_tmp."/".$imgdir."/".nomeRandomico();
 	// cria o dbf
 	$def = array();
 	$items = array("COORD");
 	foreach ($items as $ni)
 	{$def[] = array($ni,"C","254");}
-	if(!function_exists(dbase_create))
-	{xbase_create($nomeshp.".dbf", $def);}
-	else
-	{dbase_create($nomeshp.".dbf", $def);}
+	if(!function_exists(dbase_create)){
+		xbase_create($nomeshp.".dbf", $def);
+	}
+	else{
+		dbase_create($nomeshp.".dbf", $def);
+	}
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
 	$pontos = explode(" ",trim($pontos));
-	if(count($pontos) == 1)
-	{$pontos = explode(",",trim($pontos[0]));}
-	foreach ($pontos as $p)
-	{if (is_numeric($p)){$pontosn[] = $p;}}
+	if(count($pontos) == 1){
+		$pontos = explode(",",trim($pontos[0]));
+	}
+	foreach ($pontos as $p){
+		if (is_numeric($p)){
+			$pontosn[] = $p;
+		}
+	}
 	$pontos = $pontosn;
-	for ($ci = 0;$ci < count($pontos);$ci=$ci+2)
-	{
+	for ($ci = 0;$ci < count($pontos);$ci=$ci+2){
 		$reg = array();
 		$reg[] = $pontos[$ci]." ".$pontos[$ci+1];
 		$shape = ms_newShapeObj($tipol);
@@ -1159,41 +1117,45 @@ function insereLinhasUrl()
 	//cria o shape file
 	//
 	$tipol = MS_SHP_ARC;
-	$nomeshp = $dir_tmp."/".$imgdir."/linhains";
+	$nomeshp = $dir_tmp."/".$imgdir."/".nomeRandomico();
 	// cria o dbf
 	$def = array();
 	$items = array("COORD");
-	foreach ($items as $ni)
-	{$def[] = array($ni,"C","254");}
-	if(!function_exists(dbase_create))
-	{xbase_create($nomeshp.".dbf", $def);}
-	else
-	{dbase_create($nomeshp.".dbf", $def);}
+	foreach ($items as $ni){
+		$def[] = array($ni,"C","254");
+	}
+	if(!function_exists(dbase_create)){
+		xbase_create($nomeshp.".dbf", $def);
+	}
+	else{
+		dbase_create($nomeshp.".dbf", $def);
+	}
 	$dbname = $nomeshp.".dbf";
 	$db=xbase_open($dbname,2);
 	$novoshpf = ms_newShapefileObj($nomeshp, $tipol);
 	$linhas = explode(",",trim($linhas));
 	$pontosLinhas = array(); //guarda os pontos de cada linha em arrays
-	foreach ($linhas as $l)
-	{
+	foreach ($linhas as $l){
 		$tempPTs = explode(" ",trim($l));
 		$temp = array();
-		foreach ($tempPTs as $p)
-		if (is_numeric($p)){$temp[] = $p;}
+		foreach ($tempPTs as $p){
+			if (is_numeric($p)){
+				$temp[] = $p;
+			}
+		}
 		$pontosLinhas[] = $temp;
 	}
-	foreach ($pontosLinhas as $ptsl)
-	{
+	foreach ($pontosLinhas as $ptsl){
 		$linhas = $ptsl;
-		$shape = ms_newShapeObj($tipol);
+		$shape = ms_newShapeObj(MS_SHAPE_LINE);
 		$linha = ms_newLineObj();
 		$reg = array();
-		$reg[] = "";
-		for ($ci = 0;$ci < count($linhas);$ci=$ci+2)
-		{
+		$reg[] = implode(",",$ptsl);
+		for ($ci = 0;$ci < count($linhas);$ci=$ci+2){
 			$linha->addXY($linhas[$ci],$linhas[$ci+1]);
-			$shape->add($linha);
+
 		}
+		$shape->add($linha);
 		$novoshpf->addShape($shape);
 		xbase_add_record($db,$reg);
 	}
@@ -1215,12 +1177,14 @@ function insereLinhasUrl()
 	$classe->set("name"," ");
 	$estilo = ms_newStyleObj($classe);
 
-	if(!isset($simbolo))
-	{$simbolo = "linha";}
-	$estilo->set("symbolname",$simbolo);
-	if(!isset($tamanhosimbolo))
-	{$tamanhosimbolo = 6;}
-	$estilo->set("size",$tamanhosimbolo);
+	if(isset($simbolo)){
+		$simbolo = "linha";
+		$estilo->set("symbolname",$simbolo);
+	}
+	if(!isset($tamanhosimbolo)){
+		$tamanhosimbolo = 4;
+	}
+	$estilo->set("width",$tamanhosimbolo);
 	$cor = $estilo->color;
 	if(!isset($corsimbolo))
 	{$corsimbolo ="255,0,0";}
@@ -1248,7 +1212,7 @@ function inserePoligonosUrl()
 	//cria o shape file
 	//
 	$tipol = MS_SHP_POLYGON;
-	$nomeshp = $dir_tmp."/".$imgdir."/poligonosins";
+	$nomeshp = $dir_tmp."/".$imgdir."/".nomeRandomico();
 	// cria o dbf
 	$def = array();
 	$items = array("COORD");
@@ -1274,14 +1238,13 @@ function inserePoligonosUrl()
 	foreach ($pontosLinhas as $ptsl)
 	{
 		$linhas = $ptsl;
-		$shape = ms_newShapeObj($tipol);
+		$shape = ms_newShapeObj(MS_SHAPE_POLYGON);
 		$linha = ms_newLineObj();
 		$reg = array();
 		$reg[] = "";
 		for ($ci = 0;$ci < count($linhas);$ci=$ci+2)
 		{
 			$linha->addXY($linhas[$ci],$linhas[$ci+1]);
-
 		}
 		$shape->add($linha);
 		$novoshpf->addShape($shape);

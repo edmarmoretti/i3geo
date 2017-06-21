@@ -303,11 +303,13 @@ var i3GEO = {
 	contadorAtualiza : 0,
 	//atalho para as funcoes cria e inicia com a possibilidade de aplicacao de parametros
 	init: function(parametrosMapa){
-		var mashuppar;
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.init()");
+
 		if(parametrosMapa && parametrosMapa != ""){
-			mashuppar = i3GEO.parametrosMapa2mashuppar(parametrosMapa);
+			i3GEO.configura.mashuppar = i3GEO.parametrosMapa2mashuppar(parametrosMapa);
 		} else {
-			mashuppar = "";
+			i3GEO.configura.mashuppar = "";
 		}
 		i3GEO.cria();
 		i3GEO.inicia();
@@ -316,8 +318,115 @@ var i3GEO = {
 	//os parametros utilizados sao os mesmos disponiveis em ms_criamapa.php
 	//na versao 7 os nomes dos parametros foram modificados para facilitar seu uso
 	//essa funcao faz a conversao dessa nova nomenclatura para poder compatibilizar com a sintaxe utilizada em mashuppar
-	parametrosMapa2mashuppar: function(parametrosMapa){
+	parametrosMapa2mashuppar: function(p){
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.parametrosMapa2mashuppar()");
 
+		var par = [];
+		if(p.mapfilebase && p.mapfilebase != ""){
+			par.push("&base="+p.mapfilebase);
+		}
+		if(p.mapext && p.mapext != "" && p.mapext.length == 4){
+			par.push("&mapext="+p.mapext.join(","));
+		}
+		if(p.perfil && p.perfil != ""){
+			par.push("&perfil="+p.perfil);
+		}
+		if(p.layers){
+			if(p.layers.add && p.layers.add.length > 0){
+				par.push("&temasa="+p.layers.add.join(","));
+			}
+			if(p.layers.on && p.layers.on.length > 0){
+				par.push("&layers="+p.layers.on.join(","));
+			}
+			if(p.layers.off && p.layers.off.length > 0){
+				par.push("&desligar="+p.layers.off.join(","));
+			}
+		}
+		if(p.points && p.points.length > 0){
+			par.push("&nometemapontos="+p.points.title);
+			par.push("&pontos="+p.points.coord.join(","));
+		}
+		if(p.lines){
+			var n = [];
+			jQuery.each( p.lines.coord, function(index, value) {
+				if(value.length > 0){
+					n.push(value.join(" "));
+				}
+			});
+			if(n.length > 0){
+				par.push("&nometemalinhas="+p.lines.title);
+				par.push("&linhas="+n.join(","));
+			}
+		}
+		if(p.polygons){
+			var n = [];
+			jQuery.each( p.polygons.coord, function(index, value) {
+				if(value.length > 0){
+					n.push(value.join(" "));
+				}
+			});
+			if(n.length > 0){
+				par.push("&nometemapoligonos="+p.polygons.title);
+				par.push("&poligonos="+n.join(","));
+			}
+		}
+		if(p.wkt && p.wkt.coord != ""){
+			par.push("&nometemawkt="+p.wkt.title);
+			par.push("&wkt="+p.wkt.coord);
+		}
+		if(p.symbol){
+			if(p.symbol.name != ""){
+				par.push("&simbolo="+p.symbol.name);
+			}
+			if(p.symbol.color != ""){
+				par.push("&corsimbolo="+p.symbol.color);
+			}
+			if(p.symbol.size != ""){
+				par.push("&tamanhosimbolo="+p.symbol.size);
+			}
+		}
+		if(p.kml && p.kml.url != ""){
+			par.push("&kmlurl="+p.kml.url);
+		}
+		if(p.wms && p.wms.url != ""){
+			if(p.wms.url != ""){
+				par.push("&url_wms="+p.wms.url);
+			}
+			if(p.wms.layer != ""){
+				par.push("&layer_wms="+p.wms.layer);
+			}
+			if(p.wms.style != ""){
+				par.push("&style_wms="+p.wms.style);
+			}
+			if(p.wms.title != ""){
+				par.push("&nome_wms="+p.wms.title);
+			}
+			if(p.wms.srs != ""){
+				par.push("&srs_wms="+p.wms.srs);
+			}
+			if(p.wms.imagetype != ""){
+				par.push("&image_wms="+p.wms.imagetype);
+			}
+			if(p.wms.version != ""){
+				par.push("&versao_wms="+p.wms.version);
+			}
+		}
+		if(p.filters){
+			var n = [];
+			jQuery.each( p.filters, function(index, value) {
+				if(value.layer != ""){
+					n.push("&map_layer_" + value.layer + "_filter=" + value.expression);
+				}
+			});
+			if(n.length > 0){
+				par.push(n.join(""));
+			}
+		}
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.parametrosMapa2mashuppar() " + par.join(""));
+
+		return par.join("");
 	},
 	/**
 	 * Function: cria

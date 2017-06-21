@@ -542,33 +542,33 @@
 	var parametrosMapa = {
 		//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
 		//Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Você pode utilizar essa opcao para abrir um mapa com as camadas que você quiser, mas para evitar redundâncias, prefira o uso de &temasa
-		mapfilebase: "", //base: "",
-		//lista com os nomes dos layers existentes em mapfilebase que serao desligados
-		//util para evitar que determinadas camadas default sejam mostradas em determinados tipos de interface
-		layersoff: "", //desligar
+		mapfilebase: "",
 		//extensao geografica do mapa
 		//deve ser definida em coordenadas no formato decimos de grau e na projecao geografica na sequencia xmin ymin xmax ymax
-		mapext: [], //mapext como string
+		mapext: [],
 		//perfil utilizado para restringir os menus de temas mostrando apenas os que correspondem a determinado perfil
 		perfil: "",
 		//layers que serao adicionados ao mapa.
 		//Cada layer corresponde ao nome do mapfile existente na pasta i3geo/temas sem a extensao '.map'
 		layers: {
 			//array com a lista dos layers que serao adicionados e ligados (visiveis)
-			on:[], //temasa
+			add:["_lbiomashp"],
 			//array com a lista dos layers que serao adicionados mas nao ligados
-			off:[], //layers
+			on:["_lbiomashp"],
+			//array com os layers desligados
+			off: []
 		},
 		//lista de coordenadas x e y que serao adicionadas como pontos no mapa
 		points: {
 			//array com a lista de coordenadas
-			coord: [], //pontos
+			coord: [],
 			//titulo da nova camada
-			title: "" //nometemapontos
+			title: ""
 		},
 		//lista de coordenadas x e y que serao adicionadas como linhas no mapa
 		lines: {
 			//array de arrays com a lista de coordenadas de cada linha
+			//exemplo [[-54,-12,-50,-12],[-50,-1,-50,-2,-50,-3]]
 			coord: [[]],
 			//titulo da nova camada
 			title:""
@@ -576,42 +576,44 @@
 		//lista de coordenadas x e y que serao adicionadas como poligonos no mapa
 		polygons: {
 			//array de arrays com a lista de coordenadas de cada poligono. A primeira coordenada deve ser igual a ultima.
-			coord: [[]], //poligonos
+			//exemplo [[-50,-1,-48,-2,-50,-3,-50,-1]]
+			coord: [[]],
 			//titulo da nova camada
-			title:"" //nometemapoligonos
+			title:""
 		},
 		//insere elementos no mapa com coordenadas definidas em wkt
 		wkt: {
 			//string no formato wkt
-			coord: "", //wkt
+			coord: "",
 			//titulo da nova camada
-			title: "" //nometemawkt
+			title: ""
 		},
 		//simbolo que sera utilizado para desenhar os elementos inseridos
 		symbol: {
 			//codigo do simbolo conforme definido em i3geo/symbols
-			name: "", //simbolo
-			color: "", //corsimbolo
+			name: "",
+			//em rgb, exemplo "0 255 0"
+			color: "",
 			//em pixels
-			size: "", //tamanhosimbolo
+			size: ""
 		},
 		//arquivo KML que sera incluido no mapa. Valido apenas na interface google maps
 		kml: {
-			url: "" //kmlurl
+			url: ""
 		},
 		//endereco de um WMS (sera incluido como uma camada no mapa)
 		wms: {
-			url: "", //url_wms
-			layer: "", //layer_wms
-			style: "", //style_wms
-			title: "", //nome_wms
-			srs: "", //srs_wms
-			imagetype: "", //image_wms
-			version: "", //versao_wms
+			url: "",
+			layer: "",
+			style: "",
+			title: "",
+			srs: "",
+			imagetype: "",
+			version: ""
 		},
 		//filtros que serao aplicados aos layers. Utilize a expressaso conforme definido na documentacao
 		//do mapserver, exemplo
-		//{layer: "bioma",expression: "(('[CD_LEGENDA]'='CAATINGA'))"} ou {layer: "bioma",expression: "cd_legenda='CAATINGA'"}
+		//{layer: "_lbiomashp",expression: "(('[CD_LEGENDA]'='CAATINGA'))"} ou {layer: "_lbiomashp",expression: "cd_legenda='CAATINGA'"}
 		filters: [{
 			layer: "",
 			expression: ""
