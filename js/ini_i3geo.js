@@ -328,6 +328,7 @@ var i3GEO = {
 		}
 		if(p.mapext && p.mapext != "" && p.mapext.length == 4){
 			par.push("&mapext="+p.mapext.join(","));
+			i3GEO.configura.guardaExtensao = false;
 		}
 		if(p.perfil && p.perfil != ""){
 			par.push("&perfil="+p.perfil);

@@ -487,6 +487,10 @@ Configuracoes especificas dos elementos que ficam no rodape
 	background: white;
 }
 
+.bd textarea {
+	color: black;
+}
+
 .bd div {
 	text-align: left;
 }
