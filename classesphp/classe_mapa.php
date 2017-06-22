@@ -1382,31 +1382,24 @@ class Mapa
 	*/
 	function excluiTemas($temas)
 	{
-		if (file_exists($this->qyfile))
-		{
+		if (file_exists($this->qyfile)){
 			unlink($this->qyfile);
 		}
 		$temas = explode(",",$temas);
-		foreach ($temas as $nome)
-		{
-			if ($layer = @$this->mapa->getlayerbyname($nome))
-			{
+		foreach ($temas as $nome){
+			if ($layer = @$this->mapa->getlayerbyname($nome)){
 				$grupo = $layer->group;
 				$layer->set("status",MS_DELETE);
 				$lgs = $this->mapa->getLayersIndexByGroup($grupo);
-				if($lgs && $grupo != "")
-				{
-					foreach ($lgs as $lg)
-					{
+				if($lgs && $grupo != ""){
+					foreach ($lgs as $lg){
 						$ll = $this->mapa->getlayer($lg);
 						$ll->set("status",MS_DELETE);
 					}
 				}
 				$lgs = $this->mapa->getLayersIndexByGroup($nome);
-				if ($lgs)
-				{
-					foreach ($lgs as $lg)
-					{
+				if ($lgs){
+					foreach ($lgs as $lg){
 						$ll = $this->mapa->getlayer($lg);
 						$ll->set("status",MS_DELETE);
 					}

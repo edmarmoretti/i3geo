@@ -25,7 +25,7 @@ i3GEOF.atalhoscamada.dicionario = {
 	],
 	"copia" : [
 		{
-			pt : "Cria uma c&oacute;pia da camada",
+			pt : "c&oacute;pia da camada",
 			en : "",
 			es : "Crea una copia de la capa",
 			it : ""

@@ -19,7 +19,25 @@ i3GEOF.atalhoscamada =
 	 * Susbtitutos para o template
 	 */
 	mustacheHash : function(idjanela) {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.atalhoscamada.dicionario);
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.atalhoscamada.dicionario),
+			tema = i3GEOF.atalhoscamada.propJanelas[idjanela].tema,
+			ltema = i3GEO.arvoreDeCamadas.pegaTema(tema),
+			funcoes,vetor=false;
+
+		if ((ltema.type < 3) && (ltema.connectiontype !== 7)){
+			vetor = true;
+		}
+		//
+		// ajusta as propriedades e funcoes caso a camada seja um plugin
+		//
+		ltema = i3GEO.pluginI3geo.aplicaPropriedades(ltema);
+		// inclui no objeto o parametro de verificacao
+		// e necessario clonar para nao alterar o original
+		funcoes = i3GEO.util.cloneObj(i3GEO.arvoreDeCamadas.FUNCOES);
+		funcoes.plugini3geo = ltema.plugini3geo;
+		funcoes = i3GEO.pluginI3geo.aplicaPropriedades(funcoes);
+
+		//constroi o hash para substituir no template
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		dicionario["procurar"] = $trad("t23");
 		dicionario["topo"] = $trad("t25");
@@ -35,8 +53,25 @@ i3GEOF.atalhoscamada =
 		dicionario["wms"] = "WMS-OGC";
 		dicionario["salvamapfile"] = $trad("t44");
 		dicionario["tme"] = $trad("t49");
+		dicionario["topo"] = $trad("x56");
 		dicionario["idjanela"] = idjanela;
 		dicionario["idjanelaA"] = '"'+idjanela+'"';
+		dicionario["tema"] = tema;
+
+		//decide se o botao deve aparecer ou nao
+		dicionario["procurarHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["topoHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["topoHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["etiquetasHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["filtroHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["tabelaHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["selecaoHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["graficoHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["StoryMapHidden"] = (vetor == true) ? "":"hidden";
+		dicionario["legendaHidden"] = (ltema.type < 4 || ltema.type === 8) ? "":"hidden";
+		dicionario["destacaHidden"] = (i3GEO.Interface.ATUAL == "openlayers") ? "":"hidden";
+		dicionario["wmsHidden"] = (ltema.permiteogc.toLowerCase() !== "nao") ? "":"hidden";
+
 		return dicionario;
 	},
 	/*
@@ -49,209 +84,13 @@ i3GEOF.atalhoscamada =
 	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	 */
 	inicia : function(iddiv, idjanela) {
-		var tema, temp, b, ltema, funcoes = i3GEO.arvoreDeCamadas.FUNCOES;
-
-		tema = i3GEOF.atalhoscamada.propJanelas[idjanela].tema;
-		ltema = i3GEO.arvoreDeCamadas.pegaTema(tema);
-
-		//
-		// ajusta as propriedades e funcoes caso a camada seja um plugin
-		//
-		ltema = i3GEO.pluginI3geo.aplicaPropriedades(ltema);
-		// inclui no objeto o parametro de verificacao
-		// e necessario clonar para nao alterar o original
-		funcoes = i3GEO.util.cloneObj(funcoes);
-		funcoes.plugini3geo = ltema.plugini3geo;
-		funcoes = i3GEO.pluginI3geo.aplicaPropriedades(funcoes);
-
+		if(i3GEOF.atalhoscamada.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/atalhoscamada/template_mst.html", function(template) {
+				i3GEOF.atalhoscamada.MUSTACHE = template;
+				i3GEOF.atalhoscamada.inicia(iddiv, idjanela);
+			});
+		}
 		$i(iddiv).innerHTML = i3GEOF.atalhoscamada.html(idjanela);
-
-		if( i3GEO.login.verificaCookieLogin()){
-			if (funcoes.sql === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaSql", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.editorsql(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-			if (i3GEO.parametros.editor.toLowerCase() === "sim"  && i3GEO.configura.optUsuarioLogado == true ) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaSalva", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.salvaMapfile(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-		}
-
-		if (funcoes.tme === true) {
-			b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaTme", {
-				onclick : {
-					fn : function() {
-						i3GEO.tema.dialogo.tme(tema);
-					}
-				}
-			});
-			b.addClass("abrir");
-		}
-
-		if (funcoes.wms === true
-			&& ltema.permiteogc.toLowerCase() !== "nao") {
-			b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaWms", {
-				onclick : {
-					fn : function() {
-						i3GEO.tema.dialogo.mostraWms(tema);
-					}
-				}
-			});
-			b.addClass("abrir");
-		}
-
-		if (funcoes.comentar === true
-			&& ltema.permitecomentario.toLowerCase() !== "nao"
-			&& i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios === true) {
-			b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaComentar", {
-				onclick : {
-					fn : function() {
-						i3GEO.tema.dialogo.comentario(tema);
-					}
-				}
-			});
-			b.addClass("abrir");
-		}
-
-		if (funcoes.destacar === true
-			&& i3GEO.Interface.ATUAL !== "googlemaps"
-			&& i3GEO.Interface.ATUAL !== "googleearth") {
-			b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaDestaca", {
-				onclick : {
-					fn : function() {
-						i3GEO.navega.destacaTema.inicia(tema);
-					}
-				}
-			});
-			b.addClass("abrir");
-		}
-		b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaCopia", {
-			onclick : {
-				fn : function() {
-					i3GEO.tema.copia(tema);
-				}
-			}
-		});
-		b.addClass("rodar");
-
-		if ((ltema.type < 3) && (ltema.connectiontype !== 7)){
-			if (funcoes.procurar === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaProcurar", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.procuraratrib(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-			if (funcoes.toponimia === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaTopo", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.toponimia(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-			if (funcoes.etiquetas === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaEtiquetas", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.etiquetas(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-			if (funcoes.filtrar === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaFiltro", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.filtro(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-			if (funcoes.tabela === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaTabela", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.tabela(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-			if (funcoes.selecao === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaSelecao", {
-					onclick : {
-						fn : function() {
-							i3GEO.mapa.dialogo.selecao();
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-			if (funcoes.grafico === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaGrafico", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.graficotema(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-			if (funcoes.storymap === true) {
-				b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaStoryMap", {
-					onclick : {
-						fn : function() {
-							i3GEO.tema.dialogo.storymap(tema);
-						}
-					}
-				});
-				b.addClass("abrir");
-			}
-		}
-		if ((ltema.type < 4 || ltema.type === 8)
-			&& funcoes.editorlegenda === true) {
-			b = new YAHOO.widget.Button(idjanela+"i3GEOFatalhoscamadaEditaLegenda", {
-				onclick : {
-					fn : function() {
-						i3GEO.tema.dialogo.editaLegenda(tema);
-					}
-				}
-			});
-			b.addClass("abrir");
-		}
-		if (funcoes.compartilhar === true
-			&& ltema.permitecomentario.toLowerCase() !== "nao") {
-			temp = i3GEO.configura.locaplic
-				+ "/ms_criamapa.php?layers="
-				+ ltema.name
-				+ "&temasa="
-				+ ltema.name;
-			$i("i3GEOFatalhoscamadaCompartilhar").innerHTML = i3GEO.social.compartilhar(
-				"",
-				temp,
-				temp,
-				"semtotal");
-		}
 	},
 	/*
 	 * Function: html

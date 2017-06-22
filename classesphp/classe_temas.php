@@ -684,6 +684,7 @@ Copia um tema
 			$layer->setmetadata("cache","");
 			$novoname = "copia".nomerandomico();
 			$layer->set("name",$novoname);
+			$layer->set("group","");
 		}
 		return ("ok");
 	}

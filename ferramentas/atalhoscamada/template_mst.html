@@ -29,55 +29,17 @@
 	</div>
 	<br>
 	<div id='i3GEOFatalhoscamadaMenu' ></div>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaProcurar' type='button' value='{{{procurar}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaCopia' type='button' value='{{{copia}}}' />
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaTopo' type='button' value='{{{topo}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaEtiquetas' type='button' value='{{{etiquetas}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaFiltro' type='button' value='{{{filtro}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaTabela' type='button' value='{{{tabela}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaSelecao' type='button' value='{{{selecao}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaGrafico' type='button' value='{{{grafico}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaEditaLegenda' type='button' value='{{{editaLegenda}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaDestaca' type='button' value='{{{destaca}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaComentar' type='button' value='{{{comentar}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaWms' type='button' value='{{{wms}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaTme' type='button' value='{{{tme}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaStoryMap' type='button' value='StoryMap' style='display:none;'/>
-	</p>
-	<hr>
-	<p>Login:</p>
-	<br>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaSql' type='button' value='{{{sql}}}' style='display:none;'/>
-	</p>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOFatalhoscamadaSalva' type='button' value='{{{salvamapfile}}}' style='display:none;'/>
-	</p>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.procuraratrib('{{tema}}')" class='{{procurarHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{procurar}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.copia('{{tema}}')" class='btn btn-primary btn-lg btn-block btn-raised'>{{{copia}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.toponimia('{{tema}}')" class='{{topoHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{topo}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.etiquetas('{{tema}}')" class='{{etiquetasHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{etiquetas}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.filtro('{{tema}}')" class='{{filtroHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{filtro}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.tabela('{{tema}}')" class='{{tabelaHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{tabela}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.selecao()" class='{{selecaoHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{selecao}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.graficotema('{{tema}}')" class='{{graficoHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{grafico}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.editaLegenda('{{tema}}')" class='{{legendaHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{editaLegenda}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.navega.destacaTema.inicia('{{tema}}')" class='{{destacaHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{destaca}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.mostraWms('{{tema}}')" class='{{wmsHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{wms}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.tme('{{tema}}')" class='{{tmeHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{tme}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.storymap('{{tema}}')" class='{{StoryMapHidden}} btn btn-primary btn-lg btn-block btn-raised'>StoryMap</a>
 </div>
