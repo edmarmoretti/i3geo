@@ -710,7 +710,6 @@ i3GEO.Interface =
 			},
 			balao : function(texto, completo, x, y, botaoMais, botaoProp) {
 				var icone, painel, b, cabecalho, conteudo, p = i3GEO.Interface.openlayers.BALAOPROP, removeBaloes;
-
 				if(botaoMais === undefined){
 					botaoMais = true;
 				}

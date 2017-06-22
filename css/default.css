@@ -375,7 +375,6 @@ Configuracoes especificas dos elementos que ficam no rodape
 	position: absolute;
 	bottom: 2px;
 	width: 450px;
-	//right: auto;
 	left: 120px;
 	text-align: left;
 	font-size: 1em;
@@ -476,8 +475,46 @@ Configuracoes especificas dos elementos que ficam no rodape
 .abrir100 .first-child button {
 	width: 100px;
 }
+/*balao de info*/
+.i3GEOiconeMais {
+	background-image: url("../imagens/oxygen/16x16/draw-cross.png");
+	width: 16px;
+	height: 16px;
+	float: left;
+	cursor: pointer;
+	background-repeat: no-repeat;
+}
 
-//janelas
+.i3GEOiconeFerramentas {
+	background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
+	width: 16px;
+	height: 16px;
+	float: left;
+	cursor: pointer;
+	background-repeat: no-repeat;
+}
+.i3GEOiconeAberto {
+	background-image: URL('../imagens/oxygen/16x16/document-decrypt.png');
+	cursor: pointer;
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    float: left;
+}
+.i3GEOiconeFechado {
+	background-image: URL('../imagens/oxygen/16x16/document-encrypt.png');
+	cursor: pointer;
+    background-repeat: no-repeat;
+    width: 16px;
+    height: 16px;
+    float: left;
+}
+.i3GEOiconeXis {
+  background-image: url("../imagens/oxygen/16x16/edit-delete.png");
+  cursor: pointer;
+}
+
+/* janelas */
 
 .bd .lista td, .bd .lista1 td, .bd .lista2 td, .bd .lista3 td, .bd .lista4 td, .bd .lista5 td, .bd .lista6 td, .bd .lista7 td, .bd .lista8 td {
 	color: white;
