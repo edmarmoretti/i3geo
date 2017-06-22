@@ -300,7 +300,7 @@ switch (strtoupper($funcao))
 			$dirs[] = $d."/".$nome;
 			$dirs[] = $d."/googlemaps/".$nome;
 			foreach($dirs as $dir){
-				rrmdir($dir);
+				rename($dir,$dir."_removido");
 			}
 		}
 		retornaJSON("ok");
@@ -2568,16 +2568,20 @@ function removeCabecalho($arq,$symbolset=true)
 		}
 	}
 	fclose($handle);
-	chmod($arq, 0666);
+	//chmod($arq, 0666);
 }
 function rrmdir($dir) {
 	if (is_dir($dir)) {
-		chmod($dir,0777);
+		//chmod($dir,0777);
 		$objects = scandir($dir);
 		foreach ($objects as $object) {
 			if ($object != "." && $object != "..") {
-				chmod($dir."/".$object,0777);
-				if (filetype($dir."/".$object) == "dir") rrmdir($dir."/".$object); else unlink($dir."/".$object);
+				//chmod($dir."/".$object,0777);
+				if (filetype($dir."/".$object) == "dir"){
+					rrmdir($dir."/".$object);
+				} else {
+					rename($dir."/".$object,$dir."/".$object."_removido");
+				}
 			}
 		}
 		reset($objects);

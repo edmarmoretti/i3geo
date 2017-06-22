@@ -465,11 +465,13 @@ $arq {string} - Nome do arquivo que ser&aacute; gravado
 function gravaDados($dados,$arq)
 {
 	$fp = fopen($arq,"w");
-	foreach ($dados as $dado)
-	{
-		fwrite($fp,$dado."\n");
+	if($fp != false){
+		foreach ($dados as $dado)
+		{
+			fwrite($fp,$dado."\n");
+		}
+		fclose($fp);
 	}
-	fclose($fp);
 }
 /*
 Function: listaTrueType

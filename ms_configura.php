@@ -816,7 +816,7 @@ else //se for linux
  *
  * Para trocar, altere a linha abaixo
  */
-if(empty($_COOKIE["i3geolingua"])){
+if(empty($_COOKIE["i3geolingua"]) && array_key_exists('HTTP_ACCEPT_LANGUAGE',$_SERVER)){
 	$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 	$l = "pt";
 	if($lang == "en" || $lang == "es"){

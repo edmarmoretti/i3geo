@@ -1210,7 +1210,7 @@ class MetaestatInfo{
 	 * @param codigo da variavel
 	 * @param id da medida de variavel
 	 */
-	function listaMedidaVariavel($codigo_variavel,$id_medida_variavel=""){
+	function listaMedidaVariavel($codigo_variavel="",$id_medida_variavel=""){
 		$sql = "SELECT i3geoestat_medida_variavel.*,i3geoestat_variavel.nome as nome_variavel,i3geoestat_unidade_medida.permitemedia,i3geoestat_unidade_medida.permitesoma,i3geoestat_unidade_medida.nome as unidade_medida ";
 		$sql .= "FROM ".$this->esquemaadmin."i3geoestat_variavel ";
 		$sql .= "JOIN ".$this->esquemaadmin."i3geoestat_medida_variavel ";

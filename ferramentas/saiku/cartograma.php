@@ -1,11 +1,11 @@
 <?php
-exit;
 if(empty($_POST["g_sid"])){
 	echo "erro";
 	exit;
 }
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
+//include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
+include(dirname(__FILE__)."/../../classesphp/classe_metaestatinfo.php");
 include_once(dirname(__FILE__)."/../../classesphp/classe_estatistica.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
@@ -15,6 +15,9 @@ if(isset($statusFerramentas) && $statusFerramentas["saiku"] != true){
 }
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
+//error_reporting(E_ALL);
+
 //pega o filtro da sessao PHP aberta pelo i3Geo
 session_name("i3GeoPHP");
 session_id($_POST["g_sid"]);
@@ -51,7 +54,7 @@ else{
 		echo "Nao foi possivel determinar o codigo da regiao ou localidade no sistema Metaestat";
 		exit;
 	}
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 
 	$meta = $m->listaTipoRegiao($codigo_tipo_regiao);
 	$titulolayer = $meta["nome_tipo_regiao"];

@@ -64,7 +64,7 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"saiku_free_small",
-	"href": "../ferramentas/saiku/esquemaxml.php?locaplic="+window.location.href.replace("/init/index.php",""),
+	"href": "../ferramentas/saiku/startsaiku.php?locaplic="+window.location.href.replace("/init/index.php",""),
 	"titulo":$trad(25,g_traducao_init),
 	"subtitulo": $trad("25a",g_traducao_init),
 	"fa": "bar-chart",

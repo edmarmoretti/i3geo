@@ -1,59 +1,34 @@
 <?php
-/*
-Importante:
-
-A integração do SAIKU com o i3GEO é experimental.
-
-O SAIKU utiliza os arquivos de fonte de dados que sao criados de forma dinamica na pasta ms_tmp/saiku-datasources.
-Esses arquivos apontam para o arquivo XML com o esquema utilizado para construir os cubos, que tambem sao criados de forma dinamica.
-Como o SAIKU precisa ler esse arquivo XML, o mesmo deve ter permissoes de leitura de forma que o Apache consiga carregar esse arquivo XML.
-E importante destacar que ao fazer isso o arquivo xml fica exposto, o que pode permitir que um usuario qualquer tenha acesso a esse XML.
-Esse XML contem os SQL utilizados para acessar o banco de dados. Ao usar o SAIKU e necessario avaliar se essa caracteristica pode
-apresentar-se como um problema de seguranc
-*/
-//
-//utilize &output=xml para ver o xml
-//
-//utilize &xmlesquema=  caso o XML ja exista
-//
-//utilize $regiao para obter o xml de uma so regiao
-//
-/**
- http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=xml
- http://localhost/i3geo/ferramentas/saiku/esquemaxml.php?xmlesquema=&output=xml&regiao=1
- */
-//
-//remova essa linhas para poder usar o SAIKU
-//
-echo "Bloqueado. Consulte o administrador.";exit;
-//
-//quando o saiku e iniciado de fora do i3geo, e necessario inicializar um mapfile para uso como base dos mapas
-//
-criaMapfileInicial();
-
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
+//include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
+include(dirname(__FILE__)."/../../classesphp/classe_metaestatinfo.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
 if(isset($statusFerramentas) && $statusFerramentas["saiku"] != true){
 	exit;
 }
+//testa pra ver se a requisicao esta vindo de um local autorizado
+if(parse_url($saikuUrl)["host"] != gethostbyaddr($_SERVER['REMOTE_ADDR'])){
+	echo "Servidor requisitante nao permitido";
+}
 $urlXmlEsquema = "";
-$nomeConexao = criaConexaoEsquema();
-
-$map_file = $_SESSION["map_file"];
-
-$arquivoXmlEsquema = dirname($map_file)."/".str_replace(".txt","",$nomeConexao).".xml";
+/*
+if(empty($_GET["output"])){
+	$map_file = $_SESSION["map_file"];
+	$arquivoXmlEsquema = dirname($map_file)."/".str_replace(".txt","",$nomeConexao).".xml";
+}
 gravaDataSource();
-if(!empty($_GET["xmlesquema"])){
+if(!empty($_GET["output"])){
 	imprimeEsquema();
 }
-$m = new Metaestat();
+*/
+$m = new MetaestatInfo();
 
 //
 //obtem do mapfile em uso os layers que sao do sistema metaestat, sao regioes e que possuem selecao
 //
+/*
 if(empty($_GET["regiao"])){
 	$s = pegaSelecaoRegioes();
 	$selecaoRegiao = $s["selecaoRegiao"];
@@ -62,7 +37,6 @@ if(empty($_GET["regiao"])){
 else{
 	$codigo_tipo_regiao = $_GET["regiao"];
 }
-//verifica se o cubo usa uma regiao especifica ou todas
 if($codigo_tipo_regiao == ""){
 	$regioes = $m->listaTipoRegiao();
 }
@@ -70,10 +44,7 @@ else{
 	$regioes = array($m->listaTipoRegiao($codigo_tipo_regiao));
 }
 $s = "";
-
-if(empty($saikuConfigDataSource['tabelaDimensaoTempo'])){
-	$saikuConfigDataSource['tabelaDimensaoTempo'] = "i3geo_metaestat.dim_tempo";
-}
+*/
 
 $medidas = $m->listaMedidaVariavel();
 
@@ -85,9 +56,7 @@ $todasAsRegioes = $m->listaTipoRegiao();
 foreach($todasAsRegioes as $R){
 	$chavesRegiao[$R["codigo_tipo_regiao"]] = $R;
 }
-
 //inicia montagem do XML
-
 //
 //cria as dimensoes de tipo temporal
 //
@@ -149,14 +118,16 @@ ob_end_clean();
 //grava os dados em um arquivo. O usuario pode evitar isso e imprimir direto na tela
 //usando output "xml"
 //
-if($_GET["output"] != "xml"){
+/*
+if(empty($_GET["output"]) || (!empty($_GET["output"]) && $_GET["output"] != "xml")){
 	gravaDados(array($xml),$arquivoXmlEsquema);
 }
+*/
 imprimeEsquema();
 
 
 //////////////////////////////////////////////////////////////////////////////////////////
-function caminhoRegiao($hs,$chavesRegiao,$h,$regiaoInicial,$caminho)
+function caminhoRegiao($hs,$chavesRegiao,$h,$regiaoInicial,$caminho=array())
 {
 	foreach($hs as $n){
 		if($n["codigo_tipo_regiao"] == $regiaoInicial){
@@ -170,27 +141,19 @@ function caminhoRegiao($hs,$chavesRegiao,$h,$regiaoInicial,$caminho)
 	return $caminho;
 }
 function converte($texto){
-	$texto = str_replace("&","&amp;",htmlentities($texto,ENT_NOQUOTES,mb_detect_encoding($texto)));
+	$texto = str_replace("&","&amp;",htmlentities($texto,ENT_NOQUOTES,'UTF-8'));
 	return $texto;
 }
 function imprimeEsquema(){
 	global $saikuUrl,$nomeConexao,$xml;
-	if($_GET["output"] == "xml"){
-		if(!empty($_GET["xmlesquema"])){
-			echo header("Content-type: application/xml");
-			header("Location:".$_GET["xmlesquema"]);
-		}
-		else{
-			imprimeXml($xml);
-		}
+	@ob_end_clean();
+	header("Content-type: application/xml");
+	if(!empty($_GET["xmlesquema"])){
+		header("Location:".$_GET["xmlesquema"]);
 	}
 	else{
-		header("Location:".$saikuUrl."/?nomeConexao=".$nomeConexao."&locaplic=".$_GET["locaplic"]."&g_sid=".$_GET["g_sid"]."&mapext=".$_GET["mapext"]."&origem=".$_GET["origem"]."&regiao=".$_GET["regiao"]);
+		echo $xml;
 	}
-}
-function imprimeXml($xml){
-	echo header("Content-type: application/xml");
-	echo $xml;
 }
 function criaMapfileInicial(){
 	global $mapext;
@@ -209,17 +172,19 @@ function criaConexaoEsquema(){
 	global $dir_tmp, $urlXmlEsquema;
 	$nomeConexao = nomeRandomico();
 	//pega a sessao PHP aberta pelo i3Geo ou ms_criamapa.php
-	session_name("i3GeoPHP");
-	session_id($_GET["g_sid"]);
-	session_start();
-	$map_file = $_SESSION["map_file"];
-	if(empty($_GET["xmlesquema"])){
-		$urlXmlEsquema = $_SESSION["tmpurl"].basename(dirname($map_file))."/".$nomeConexao.".xml";
-	}
-	else{
-		$urlXmlEsquema = $_GET["xmlesquema"];
-		//cria um nome de arquivo reaproveitável
-		$nomeConexao = md5($_GET["xmlesquema"]);
+	if(!empty($_GET["g_sid"])){
+		session_name("i3GeoPHP");
+		session_id($_GET["g_sid"]);
+		session_start();
+		$map_file = $_SESSION["map_file"];
+		if(empty($_GET["xmlesquema"])){
+			$urlXmlEsquema = $_SESSION["tmpurl"].basename(dirname($map_file))."/".$nomeConexao.".xml";
+		}
+		else{
+			$urlXmlEsquema = $_GET["xmlesquema"];
+			//cria um nome de arquivo reaproveitável
+			$nomeConexao = md5($_GET["xmlesquema"]);
+		}
 	}
 	//$arquivoXmlEsquema = dirname($map_file)."/".$nomeConexao.".xml";
 	return $nomeConexao.".txt";
@@ -251,7 +216,11 @@ function gravaDataSource(){
 	);
 	*/
 	global $arquivoXmlEsquema,$saikuConfigDataSource,$nomeConexao,$urlXmlEsquema,$dir_tmp;
+
 	$nomeDatasource = $dir_tmp."/saiku-datasources/".$nomeConexao;
+	//nao funciona como url
+	//error_reporting(E_ALL);
+	$urlXmlEsquema = "http//localhost/i3geo/ferramentas/saiku/esquemaxml.php?output=xml";
 	if(!file_exists($arquivoXmlEsquema)){
 		$stringDatasource = "
 		type={$saikuConfigDataSource["type"]}
@@ -406,10 +375,12 @@ function sqlDasRegioes($regiao,$caminho,$chavesRegiao){
 function dimensoesGeo(){
 	global $chavesRegiao, $m, $selecaoRegiao, $regioes, $filhosDaRegiao, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao;
 	//essas variaveis sao globais e usadas em outras funcoes
-	foreach($regioes as $regiao){
-		$filhosDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
-		$VirtualCubeDimensionDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
-		$VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
+	if(!empty($regioes)){
+		foreach($regioes as $regiao){
+			$filhosDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
+			$VirtualCubeDimensionDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
+			$VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]] = array();
+		}
 	}
 	//xml normal
 	$xml1 = "";
@@ -602,25 +573,26 @@ function dimensoesTabelas(){
 		$VirtualCubeDimension[] = "
 		<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />
 		";
-
-		array_push(
-				$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
-				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
-				);
-		array_push(
-				$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
-				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
-				);
-
-		array_push(
-				$VirtualCubeDimensionDaMedida[$c["nome_variavel"]],
-				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
-				);
-		array_push(
-				$VirtualCubeDimensionDaMedida[$c["nome_variavel"]],
-				"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
-				);
-
+		if(array_key_exists($c["codigo_tipo_regiao"],$VirtualCubeDimensionDaRegiao)){
+			array_push(
+					$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
+					"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
+					);
+			array_push(
+					$VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],
+					"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
+					);
+		}
+		if(array_key_exists($c["nome_variavel"],$VirtualCubeDimensionDaMedida)){
+			array_push(
+					$VirtualCubeDimensionDaMedida[$c["nome_variavel"]],
+					"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}' />"
+					);
+			array_push(
+					$VirtualCubeDimensionDaMedida[$c["nome_variavel"]],
+					"<VirtualCubeDimension name='codigo_tipo_regiao_{$c["codigo_tipo_regiao"]}_geocod' />"
+					);
+		}
 
 		//verifica as dimensoes do tipo tempo
 		$dimEnsoes = array();
@@ -643,11 +615,12 @@ function dimensoesTabelas(){
 				<DimensionUsage foreignKey='".implode("_",$parComposto)."_' name='Tempo' source='Tempo'/>
 				";
 				$dimEnsoes[] = $u;
-				array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='Tempo' />");
+				if(array_key_exists($c["codigo_tipo_regiao"],$VirtualCubeDimensionDaRegiao)){
+					array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='Tempo' />");
+				}
 			}
 			//outros parametros
 			$outrosParametros = array();
-
 			foreach($parametros as $parametro){
 				$k = $parametro["esquemadb"]."_".$parametro["tabela"]."_".$parametro["coluna"];
 				if($parametro["tipo"] > 5 || $parametro["tipo"] == 0){
@@ -655,7 +628,9 @@ function dimensoesTabelas(){
 					$VirtualCubeDimension[] = "<VirtualCubeDimension name='{$k}' />";
 					$u = "<DimensionUsage foreignKey='".$parametro["coluna"]."' name='{$k}' source='{$k}'/>";
 					$dimEnsoes[] = $u;
-					array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='{$k}' />");
+					if(array_key_exists($c["codigo_tipo_regiao"],$VirtualCubeDimensionDaRegiao)){
+						array_push($VirtualCubeDimensionDaRegiao[$c["codigo_tipo_regiao"]],"<VirtualCubeDimension name='{$k}' />");
+					}
 				}
 			}
 
@@ -722,13 +697,14 @@ function dimensoesTabelas(){
 			";
 		}
 		//inclui as dimensoes filhas
-		foreach($filhosDaRegiao[$c["codigo_tipo_regiao"]] as $fr){
-			$xml .= "
-			<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."' source='codigo_tipo_regiao_".$fr."'/>
-			<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."_geocod' source='codigo_tipo_regiao_".$fr."_geocod'/>
-			";
+		if(array_key_exists($c["codigo_tipo_regiao"],$filhosDaRegiao)){
+			foreach($filhosDaRegiao[$c["codigo_tipo_regiao"]] as $fr){
+				$xml .= "
+				<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."' source='codigo_tipo_regiao_".$fr."'/>
+				<DimensionUsage foreignKey='codigoreg' name='codigo_tipo_regiao_".$fr."_geocod' source='codigo_tipo_regiao_".$fr."_geocod'/>
+				";
+			}
 		}
-
 		$xml .= implode(" ",array_unique($dimEnsoes));
 
 		//inclui cada elemento em medida
@@ -753,7 +729,9 @@ function dimensoesTabelas(){
 			<VirtualCubeMeasure cubeName='Tabela: {$c["esquemadb"]}{$c["tabela"]}' name='[Measures].[id_medida_variavel_".$medida["id_medida_variavel"]."]'/>
 			";
 			$VirtualCubeMeasure[] = $u;
-			array_push($VirtualCubeMeasureDaRegiao[$c["codigo_tipo_regiao"]],$u);
+			if(array_key_exists($c["codigo_tipo_regiao"],$VirtualCubeMeasureDaRegiao)){
+				array_push($VirtualCubeMeasureDaRegiao[$c["codigo_tipo_regiao"]],$u);
+			}
 			//verifica em qual variavel entra
 			//<VirtualCubeMeasure cubeName='Tabela: idsustb_indicador' name='[Measures].[id_medida_variavel_12]'/>
 			$u = "<VirtualCubeMeasure cubeName='Tabela: {$c["esquemadb"]}{$c["tabela"]}' name='[Measures].[id_medida_variavel_".$medida["id_medida_variavel"]."]'/>";
@@ -778,18 +756,20 @@ function cuboTodas(){
 function cuboRegioes(){
 	global $regioes, $VirtualCubeDimensionDaRegiao, $VirtualCubeMeasureDaRegiao, $filhosDaRegiao;
 	$xml = "";
-	foreach($regioes as $regiao){
-		//inclui os parametros para a regiao de acordo com os filhos que possui
-		$d = $VirtualCubeDimensionDaRegiao[$regiao["codigo_tipo_regiao"]];
-		$mm = $VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]];
-		foreach($filhosDaRegiao[$regiao["codigo_tipo_regiao"]] as $f){
-			$mm = array_merge($mm,$VirtualCubeMeasureDaRegiao[$f]);
-		}
-		if(count(array_unique($mm)) > 0){
-			$xml .= '<VirtualCube name="Regi&amp;atilde;o: '.converte($regiao["nome_tipo_regiao"]).'" >';
-			$xml .= implode(" ",array_unique($d));
-			$xml .= implode(" ",array_unique($mm));
-			$xml .= '</VirtualCube>';
+	if(!empty($regioes)){
+		foreach($regioes as $regiao){
+			//inclui os parametros para a regiao de acordo com os filhos que possui
+			$d = $VirtualCubeDimensionDaRegiao[$regiao["codigo_tipo_regiao"]];
+			$mm = $VirtualCubeMeasureDaRegiao[$regiao["codigo_tipo_regiao"]];
+			foreach($filhosDaRegiao[$regiao["codigo_tipo_regiao"]] as $f){
+				$mm = array_merge($mm,$VirtualCubeMeasureDaRegiao[$f]);
+			}
+			if(count(array_unique($mm)) > 0){
+				$xml .= '<VirtualCube name="Regi&amp;atilde;o: '.converte($regiao["nome_tipo_regiao"]).'" >';
+				$xml .= implode(" ",array_unique($d));
+				$xml .= implode(" ",array_unique($mm));
+				$xml .= '</VirtualCube>';
+			}
 		}
 	}
 	return $xml;
