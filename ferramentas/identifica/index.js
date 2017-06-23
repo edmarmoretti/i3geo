@@ -846,7 +846,7 @@ i3GEOF.identifica =
 				i3GEO.configura.sid,
 				i3GEOF.identifica.propJanelas[idjanela].temaAtivo,
 				i3GEO.parametros.mapexten,
-				"");
+				"nao");
 		},
 		/*
 		 * Function: mostraDadosSistema

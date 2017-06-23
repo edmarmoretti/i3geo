@@ -109,7 +109,20 @@ i3GEOadmin.comportamento = {
 																$("#templateMsStatus").html(),
 																hash
 														);
-													}
+													},
+													"wkttip": function(){
+														var hash = {
+																"sim": i3GEOadmin.comportamento.dicionario.sim,
+																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"NAO-sel" : "",
+																"SIM-sel": ""
+															};
+														hash[json.dados.wkttip + "-sel"] = "selected";
+														return Mustache.to_html(
+																$("#templateOpcoesPublicado").html(),
+																hash
+														);
+													},
 												}
 										)
 								)

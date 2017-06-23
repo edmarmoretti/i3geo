@@ -709,6 +709,9 @@ i3GEO.Interface =
 				}
 			},
 			balao : function(texto, completo, x, y, botaoMais, botaoProp) {
+				if (typeof (console) !== 'undefined')
+					console.info("monta o balao de identificacao e mostra na tela");
+
 				var icone, painel, b, cabecalho, conteudo, p = i3GEO.Interface.openlayers.BALAOPROP, removeBaloes;
 				if(botaoMais === undefined){
 					botaoMais = true;
@@ -724,6 +727,9 @@ i3GEO.Interface =
 						t.getElement().parentNode.innerHTML = "";
 					}
 					i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
+					if(i3GEO.desenho.layergrafico){
+						i3GEO.desenho[i3GEO.Interface.ATUAL].removePins();
+					}
 					return false;
 				};
 				if (p.classeCadeado === "i3GEOiconeAberto") {

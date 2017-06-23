@@ -131,7 +131,23 @@
 			</div>
 		</div>
 	</div>
-
+	<div class="col-md-12">
+		<div class="form-group form-group-lg">
+			<div class="col-md-6">
+				<label class="control-label" for="wkttip">
+					{{{WkttipTitulo}}}
+				</label>
+				<p class="small">
+					{{{Wkttip}}} (metadata: WKTTIP)
+				</p>
+			</div>
+			<div class="col-md-6">
+				<select name="wkttip" class="form-control" >
+					{{{wkttip}}}
+				</select>
+			</div>
+		</div>
+	</div>
 	<div class="pull-right">
 		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 	</div>

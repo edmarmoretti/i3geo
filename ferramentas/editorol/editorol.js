@@ -850,7 +850,7 @@ i3GEO.editorOL =
 				"&filter=<Filter><Intersects><PropertyName>Geometry</PropertyName><gml:Polygon><gml:outerBoundaryIs><gml:LinearRing><gml:posList>" + poligono
 					+ "</gml:posList></gml:LinearRing></gml:outerBoundaryIs></gml:Polygon></Intersects></Filter>";
 			retorno = function(r){
-				var fs,c,format, f, n, i;
+				var fs,c,format, f, n, i, idunico;
 				format = new ol.format.WKT();
 				fs = format.readFeatures(r[0]);
 				n = fs.length;
@@ -868,7 +868,8 @@ i3GEO.editorOL =
 							})
 						})
 					);
-					f.setId(i3GEO.util.uid());
+					idunico = i3GEO.util.uid();
+					f.setId(idunico);
 					f.setProperties({
 						idUnico : idunico
 					});

@@ -1201,7 +1201,7 @@ class Atributos
 		}
 		if (count($resultados) > 0)
 		{
-			$res = $this->retornaI2($listatemas,$resultados,$this->mapa);
+			$res = $this->retornaI2($listatemas,$resultados,$this->mapa,$xy);
 			return($res);
 		}
 		else
@@ -1337,7 +1337,7 @@ class Atributos
 			$listatemas = $ltemp;
 		}
 		if (count($resultados) > 0)	{
-			$res = $this->retornaI2($listatemas,$resultados,$this->mapa);
+			$res = $this->retornaI2($listatemas,$resultados,$this->mapa,$xy);
 			return($res);
 		}
 		else{
@@ -1357,7 +1357,7 @@ class Atributos
 
 	$map - Objeto Map.
 	*/
-	function retornaI2($listatemas,$resultados,$map)
+	function retornaI2($listatemas,$resultados,$map,$xy)
 	{
 		$final = array();
 		foreach ($listatemas as $tema){
@@ -1429,7 +1429,7 @@ class Atributos
 				}
 			}
 			$codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
-			$final[] = array("tema"=>$tema,"tiposalva"=>$tiposalva,"nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
+			$final[] = array("xy"=>$xy,"tema"=>$tema,"tiposalva"=>$tiposalva,"nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
 		}
 		return $final;
 	}
@@ -2100,6 +2100,7 @@ class Atributos
 	$etip  {booblean} - indica se a solicita&ccedil;&atilde;o &eacute; para obten&ccedil;&atilde;o dos dados do tipo etiqueta
 	*/
 	function identificaQBP3($tema="",$x=0,$y=0,$map_file="",$resolucao=0,$item="",$tiporetorno="",$etip=false,$ext="",$wkt="nao"){
+		//$wkt = "sim";
 		if($map_file == ""){
 			$mapa = $this->mapa;
 			$map_file = $this->arquivo;
@@ -2432,7 +2433,7 @@ class Atributos
 							$conta = $conta + 1;
 						}
 
-						if($wkt == "sim"){
+						if($wkt == "sim" || strtolower($layer->getmetadata("wkttip")) == "sim"){
 							$arraytemp = array(
 									"alias"=>"wkt",
 									"valor"=>$shape->towkt(),
@@ -2440,7 +2441,7 @@ class Atributos
 									"img"=>"",
 									"tip"=>""
 							);
-							$valori[] = $arraytemp;
+							$valori["wkt"] = $arraytemp;
 						}
 						$resultado[] = $valori;
 					}

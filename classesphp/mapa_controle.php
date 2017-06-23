@@ -2029,16 +2029,15 @@ switch (strtoupper($funcao))
 			$resolucao = 5;
 		}
 		include_once("classe_atributos.php");
-		if(!isset($ext))
-		{
+		if(!isset($ext)){
 			$ext = "";
 		}
-		if(!isset($wkt))
-		{
+		if(!isset($wkt)){
 			$wkt = "nao";
 		}
 		$m = new Atributos($map_file,$tema,"",$ext);
 		$retorno = $m->identifica3($opcao,$xy,$resolucao,$ext,$listaDeTemas,$wkt);
+		//$retorno["xy"] = $xy;
 		break;
 		/*
 		 Valor: IDENTIFICAUNICO

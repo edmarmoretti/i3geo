@@ -1016,7 +1016,7 @@ i3GEO.php =
 		 *
 		 * Identifica um ponto no mapa
 		 */
-		identifica3 : function(funcao, x, y, resolucao, opcao, locaplic, sid, tema, ext, listaDeTemas) {
+		identifica3 : function(funcao, x, y, resolucao, opcao, locaplic, sid, tema, ext, listaDeTemas, wkt) {
 			if(x === null || y === null){
 				return;
 			}
@@ -1027,12 +1027,14 @@ i3GEO.php =
 				ext = "";
 				listaDeTemas = "";
 				resolucao = 5;
+				wkt = "nao";
 			}
 			if (arguments.length === 5) {
 				locaplic = i3GEO.configura.locaplic;
 				sid = i3GEO.configura.sid;
 				ext = "";
 				listaDeTemas = "";
+				wkt = "nao";
 			}
 			if (listaDeTemas === undefined) {
 				listaDeTemas = "";
@@ -1040,7 +1042,7 @@ i3GEO.php =
 			// verifica se nao e necessario alterar as coordenadas
 			ext = i3GEO.util.extOSM2Geo(ext);
 			var p = locaplic + "/classesphp/mapa_controle.php", par =
-				"funcao=identifica3&opcao=" + opcao + "&xy=" + x + "," + y + "&resolucao=" + resolucao + "&g_sid=" + sid + "&ext=" + ext
+				"funcao=identifica3&wkt=" + wkt + "&opcao=" + opcao + "&xy=" + x + "," + y + "&resolucao=" + resolucao + "&g_sid=" + sid + "&ext=" + ext
 					+ "&listaDeTemas=" + listaDeTemas;
 			if (opcao !== "tip") {
 				par += "&tema=" + tema;

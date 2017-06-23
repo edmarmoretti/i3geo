@@ -509,6 +509,7 @@ if(!isset($base) || $base == ""){
 		}
 	}
 }
+//error_log($base);
 //if(!isset($estadosl))
 //{$estadosl = "estadosl";}
 /*

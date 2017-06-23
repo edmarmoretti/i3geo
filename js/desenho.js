@@ -372,14 +372,15 @@ i3GEO.desenho =
 					namespace = "pin";
 				}
 				if (i3GEO.desenho.layergrafico) {
-					var features, n, f, i;
+					var features, n, f, i, remover = [];
 					features = i3GEO.desenho.layergrafico.getSource().getFeatures();
 					n = features.length;
 					for (i = 0; i < n; i++) {
-						f = features[i];
-						if (f && f.getProperties().origem === namespace) {
-							i3GEO.desenho.layergrafico.getSource().removeFeature(f);
-						}
+						remover.push(features[i]);
+					}
+					n = remover.length;
+					for (i = 0; i < n; i++) {
+						i3GEO.desenho.layergrafico.getSource().removeFeature(remover[i]);
 					}
 				}
 			},

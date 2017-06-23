@@ -1388,6 +1388,9 @@ i3GEO.mapa =
 			 * Essa e a funcao padrao definida em i3GEO.configura
 			 */
 			verificaTipDefault : function(e) {
+				if (typeof (console) !== 'undefined')
+					console.info("i3GEO.mapa.dialogo.verificaTipDefault()");
+
 				if (i3GEO.barraDeBotoes.BOTAOCLICADO !== "identificaBalao" && i3GEO.eventos.cliquePerm.ativo === false) {
 					return;
 				}
@@ -1396,7 +1399,7 @@ i3GEO.mapa =
 				} else {
 					i3GEO.eventos.cliquePerm.status = false;
 				}
-				var ntemas, etiquetas, j, retorna, x = objposicaocursor.ddx, y = objposicaocursor.ddy;
+				var ntemas, etiquetas, j, x = objposicaocursor.ddx, y = objposicaocursor.ddy;
 				if(x === -1 || y === -1){
 					return;
 				}
@@ -1413,118 +1416,9 @@ i3GEO.mapa =
 				if (etiquetas === false) {
 					return;
 				}
-				retorna =
-					function(retorno) {
-					var textoCompleto = "", textoSimples = "", textoTempCompleto = "", textoTempSimples = "", classeCor, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
-						i3GEO.configura, tipotip = configura.tipotip;
-					i3GEO.eventos.cliquePerm.status = true;
-					mostra = false;
-					retorno = retorno.data;
-					if (retorno !== "") {
-						res = "";
-						temas = retorno;
-						if (!temas) {
-							return;
-						}
-						ntemas = temas.length;
-						for (j = 0; j < ntemas; j += 1) {
-							titulo = temas[j].nome;
-							if (tipotip != "simples") {
-								titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b></div>";
-							} else {
-								titulo = "";
-							}
-							tips = temas[j].resultado.todosItens;
-							ntips = tips.length;
-							ins = "";
-							textoTempCompleto = "";
-							textoTempSimples = "";
-							ds = temas[j].resultado.dados;
-							if (ds !== " " && ds[0] && ds[0] != " ") {
-								try {
-									nds = ds.length;
-									classeCor = "toolTipBalaoTexto";
-									for (s = 0; s < nds; s += 1) {
-										textoTempCompleto += "<div class='" + classeCor + "'>";
-										textoTempSimples += "<div class='" + classeCor + "'>";
-										for (r = 0; r < ntips; r += 1) {
-											try {
-												temp = "";
-												var alias = ds[s][tips[r]].alias;
-												var valor = ds[s][tips[r]].valor;
-												var link = ds[s][tips[r]].link;
-												var img = ds[s][tips[r]].img;
-												if (valor !== "" && link === "") {
-													temp += "<span>" + alias + " :" + valor + "</span><br>";
-												}
-												if (valor !== "" && link !== "") {
-													temp +=
-														"<span>" + alias
-															+ " : <a style='color:blue;cursor:pointer' target=_blanck href='"
-															+ link
-															+ "' >"
-															+ valor
-															+ "</a></span><br>";
-												}
-												if (img !== "") {
-													temp += img + "<br>";
-												}
-												if (tipotip != "completo" && ds[s][tips[r]].tip.toLowerCase() === "sim") {
-													textoTempSimples += temp;
-												}
-												textoTempCompleto += temp;
-												mostra = true;
-											} catch (e) {
-											}
-										}
-										if (classeCor === "toolTipBalaoTexto") {
-											classeCor = "toolTipBalaoTexto1";
-										} else {
-											classeCor = "toolTipBalaoTexto";
-										}
-										textoTempCompleto += "</div>";
-										textoTempSimples += "</div>";
-									}
-
-								} catch (e) {
-								}
-							}
-							if (textoTempSimples !== "") {
-								textoCompleto += titulo + textoTempCompleto;
-								textoSimples += titulo + textoTempSimples;
-							}
-						}
-						if (mostra === true) {
-							if (tipotip != "simples") {
-								res = textoSimples;
-							} else {
-								res = textoCompleto;
-							}
-							if (tipotip === "balao") {
-								i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, textoCompleto, x, y);
-							} else {
-								// tipotip pode ser um elemento DOM
-								n = $i(tipotip);
-								if (!n) {
-									n = i3GEO.janela.tip();
-									n = $i(n);
-									n.style.textAlign = "left";
-									n.innerHTML += res;
-								} else {
-									n.innerHTML = res;
-								}
-							}
-						}
-					}
-					if ($i(i3GEO.Interface.IDMAPA)) {
-						$i(i3GEO.Interface.IDMAPA).title = "";
-						temp = "identifica";
-						i3GEO.util.mudaCursor(configura.cursores, temp, i3GEO.Interface.IDMAPA, configura.locaplic);
-					}
-				};
 				// alert("identifica "+objposicaocursor.ddx+" "+objposicaocursor.ddy)
 				i3GEO.php.identifica3(
-					retorna,
+					i3GEO.mapa.montaTip,
 					x,
 					y,
 					i3GEO.mapa.RESOLUCAOTIP,
@@ -1532,7 +1426,147 @@ i3GEO.mapa =
 					i3GEO.configura.locaplic,
 					i3GEO.configura.sid,
 					"ligados",
-					i3GEO.parametros.mapexten);
+					i3GEO.parametros.mapexten,
+					"",
+					"nao");
 			}
+		},
+		montaTip: function (retorno){
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.mapa.montaTip()");
+
+			var textoCompleto = "", textoSimples = "", textoTempCompleto = "", textoTempSimples = "", x, y, classeCor, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
+				i3GEO.configura, tipotip = configura.tipotip, wkts = [];
+
+			i3GEO.eventos.cliquePerm.status = true;
+			mostra = false;
+			retorno = retorno.data;
+			temp = retorno[0].xy.split(",");
+			x = temp[0]*1;
+			y = temp[1]*1;
+			if (retorno !== "") {
+				res = "";
+				temas = retorno;
+				if (!temas) {
+					return;
+				}
+				ntemas = temas.length;
+				for (j = 0; j < ntemas; j += 1) {
+					titulo = temas[j].nome;
+					if (tipotip != "simples") {
+						titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b></div>";
+					} else {
+						titulo = "";
+					}
+					tips = temas[j].resultado.todosItens;
+					ntips = tips.length;
+					ins = "";
+					textoTempCompleto = "";
+					textoTempSimples = "";
+					ds = temas[j].resultado.dados;
+					if (ds !== " " && ds[0] && ds[0] != " ") {
+						try {
+							nds = ds.length;
+							classeCor = "toolTipBalaoTexto";
+							for (s = 0; s < nds; s += 1) {
+								textoTempCompleto += "<div class='" + classeCor + "'>";
+								textoTempSimples += "<div class='" + classeCor + "'>";
+								for (r = 0; r < ntips; r += 1) {
+									try {
+										temp = "";
+										var alias = ds[s][tips[r]].alias;
+										var valor = ds[s][tips[r]].valor;
+										var link = ds[s][tips[r]].link;
+										var img = ds[s][tips[r]].img;
+										if (valor !== "" && link === "") {
+											temp += "<span>" + alias + " :" + valor + "</span><br>";
+										}
+										if (valor !== "" && link !== "") {
+											temp +=
+												"<span>" + alias
+													+ " : <a style='color:blue;cursor:pointer' target=_blanck href='"
+													+ link
+													+ "' >"
+													+ valor
+													+ "</a></span><br>";
+										}
+										if (img !== "") {
+											temp += img + "<br>";
+										}
+										if (tipotip != "completo" && ds[s][tips[r]].tip.toLowerCase() === "sim") {
+											textoTempSimples += temp;
+										}
+										textoTempCompleto += temp;
+										mostra = true;
+									} catch (e) {}
+								}
+								if (classeCor === "toolTipBalaoTexto") {
+									classeCor = "toolTipBalaoTexto1";
+								} else {
+									classeCor = "toolTipBalaoTexto";
+								}
+								textoTempCompleto += "</div>";
+								textoTempSimples += "</div>";
+								//insere o wkt se existir
+								if(ds[s].wkt && ds[s].wkt.valor != ""){
+									wkts.push(ds[s].wkt.valor);
+								}
+							}
+						} catch (e) {
+						}
+					}
+					if (textoTempSimples !== "") {
+						textoCompleto += titulo + textoTempCompleto;
+						textoSimples += titulo + textoTempSimples;
+					}
+				}
+				if (mostra === true) {
+					if (tipotip != "simples") {
+						res = textoSimples;
+					} else {
+						res = textoCompleto;
+					}
+					if (tipotip === "balao") {
+						i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, textoCompleto, x, y);
+					} else {
+						// tipotip pode ser um elemento DOM
+						n = $i(tipotip);
+						if (!n) {
+							n = i3GEO.janela.tip();
+							n = $i(n);
+							n.style.textAlign = "left";
+							n.innerHTML += res;
+						} else {
+							n.innerHTML = res;
+						}
+					}
+				}
+			}
+			if (typeof (console) !== 'undefined')
+				console.info("adicionando WKT");
+
+			n = wkts.length;
+			if(n > 0){
+				i3GEO.desenho[i3GEO.Interface.ATUAL].criaLayerGrafico();
+				var g, format, f, idunico,c = i3GEO.desenho.layergrafico.getSource();
+				if(i3GEO.Interface.ATUAL == "openlayers"){
+					format = new ol.format.WKT();
+					for(r = 0; r < n; r += 1){
+						f = format.readFeatures(wkts[r]);
+						f = f[0];
+						//idunico = i3GEO.util.uid();
+						//f.setId(idunico);
+						f.setProperties({
+							//idUnico : idunico,
+							origem : "pin"
+						});
+						g = f.getGeometry();
+						g = i3GEO.util.projGeo2OSM(g);
+						f.setGeometry(g);
+						c.addFeature(f);
+					}
+				}
+			}
+
 		}
 	};

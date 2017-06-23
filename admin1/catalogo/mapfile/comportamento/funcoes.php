@@ -45,9 +45,13 @@ function listar($locaplic,$codigo){
 		$mensagem = utf8_encode($mensagem);
 	}
 	$dados["status"] = $layer->status;
+	$dados["wkttip"] = $layer->getmetadata("wkttip");
+	if (empty ( $dados ["wkttip"] )) {
+		$dados ["wkttip"] = "NAO";
+	}
 	return $dados;
 }
-function alterar($locaplic, $id_tema, $codigo, $aplicaextensao, $permitecomentario, $temporizador, $escondido, $transitioneffect, $status, $iconetema, $mensagem){
+function alterar($locaplic, $id_tema, $codigo, $aplicaextensao, $permitecomentario, $temporizador, $escondido, $transitioneffect, $status, $iconetema, $mensagem, $wkttip){
 	$convUTF = $_SESSION["convUTF"];
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
@@ -69,6 +73,7 @@ function alterar($locaplic, $id_tema, $codigo, $aplicaextensao, $permitecomentar
 		$mensagem = utf8_decode($mensagem);
 	}
 	$layer->setmetadata ( "mensagem", $mensagem );
+	$layer->setmetadata ( "wkttip", $wkttip );
 	$layer->set("status",$status);
 	try {
 		$mapa->save ( $arq );

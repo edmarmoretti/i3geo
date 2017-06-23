@@ -563,5 +563,15 @@ i3GEOadmin.mapfile.dicionario = {
 		pt : "Palavra para filtrar a lista de mapfiles",
 		en : "",
 		es : ""
+	} ],
+    'WkttipTitulo' : [ {
+		pt : "Mostra a geometria ao clicar no mapa com a ferramenta de identifica&ccedil;&atilde;o (tip)",
+		en : "",
+		es : ""
+	} ],
+    'Wkttip' : [ {
+		pt : "Mostra a geometria",
+		en : "",
+		es : ""
 	} ]
 };
