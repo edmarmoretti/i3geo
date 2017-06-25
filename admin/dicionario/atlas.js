@@ -113,13 +113,13 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'linkAtlas' : [ {
 		pt : "(opcional) Link para o texto que ser&aacute; mostrado na inicializa&ccedil;&atilde;o do Atlas:",
-		en : "",
-		es : ""
+		en : "(optional) Link to the text that will be shown at the Atlas beginning:",
+		es : "(opcional) Link para el texto que ser&aacute; mostrado en el inicio del Atlas:"
 	} ],
     'iconeAtlas' : [ {
 		pt : "(opcional) &Iacute;cone que ser&aacute; utilizado na montagem da lista de todos os Atlas:",
-		en : "",
-		es : ""
+		en : "(optional) Icon that will be used to build a list of every Atlas:",
+		es : "(opcional) Icono que ser&aacute; utilizado en la creaci&oacute;n de la lista de todos los Atlas:"
 	} ],
     'template' : [ {
 		pt : "(opcional) Template HTML (se n&atilde;o for especificado, ser&aacute; usado o default do i3geo. Utilize o caminho completo do arquivo html no servidor):",
