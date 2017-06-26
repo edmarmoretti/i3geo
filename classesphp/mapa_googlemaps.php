@@ -62,12 +62,16 @@ include("sani_request.php");
 if (!function_exists('ms_GetVersion')){
 	include_once ("carrega_ext.php");
 }
-clearstatcache();
+
 //verifica&ccedil;&atilde;o de seguran&ccedil;a
+ini_set("session.use_cookies", 0);
 $_SESSION = array();
 session_name("i3GeoPHP");
 if(@$_GET["g_sid"]){
 	session_id($_GET["g_sid"]);
+}
+elseif (@$_COOKIE["i3GeoPHP"]){
+	session_id($_COOKIE["i3GeoPHP"]);
 }
 else{
 	ilegal();
@@ -405,13 +409,13 @@ if(trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum"){
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
 	imagesavealpha($img, true);
-	ob_clean();
-	echo header("Content-type: image/png \n\n");
+	cabecalhoImagem($nomer);
 	imagepng($img);
 }
 else{
 	if($cache == true){
 		$nomer = salvaCacheImagem();
+		cabecalhoImagem($nomer);
 		carregaCacheImagem();
 	}
 	else{
@@ -432,8 +436,7 @@ else{
 				imagealphablending($img, false);
 				imagesavealpha($img, true);
 			}
-			ob_clean();
-			echo header("Content-type: image/png \n\n");
+			cabecalhoImagem($nomer);
 			imagepng($img);
 			imagedestroy($img);
 			exit;
@@ -452,16 +455,32 @@ else{
 			if($cortePixels > 0){
 				$img = cortaImagemDisco($nomer,$cortePixels,256);
 			}
-			ob_clean();
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
+			cabecalhoImagem($nomer);
 			header("X-Sendfile: $nomer");
-			header("Content-type: image/png");
 		}
 	}
 	exit;
 }
-//$cachedir e definido no ms_configura.php
+function cabecalhoImagem($nome){
+	if(ob_get_contents()){
+		ob_clean();
+	}
+	$lastModified=filemtime($nome);
+	//set last-modified header
+	header("Last-Modified: ".gmdate("D, d M Y H:i:s", $lastModified)." GMT");
+	//make sure caching is turned on
+	header('Cache-Control: public,max-age=86400'); //24 horas
+	header("Content-type: image/png");
+	header("Etag: " . md5($nome));
+	//check if page has changed. If not, send 304 and exit
+	if (array_key_exists('HTTP_IF_MODIFIED_SINCE', $_SERVER)) {
+		$if_modified_since = strtotime(preg_replace('/;.*$/', '', $_SERVER['HTTP_IF_MODIFIED_SINCE']));
+		if ($if_modified_since >= $lastModified) { // Is the Cached version the most recent?
+			header($_SERVER['SERVER_PROTOCOL'].' 304 Not Modified');
+			exit();
+		}
+	}
+}
 function salvaCacheImagem(){
 	global $img,$cachedir,$x,$y,$z,$map_fileX,$cortePixels;
 	$layer = $_GET["layer"];
@@ -498,19 +517,12 @@ function carregaCacheImagem(){
 	$c = $cachedir."/googlemaps/$layer/$z/$x";
 	$nome = $c."/$y.png";
 	if(file_exists($nome)){
+		cabecalhoImagem($nome);
 		if($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)){
-			header('Content-Length: '.filesize($nome));
-			header('Content-Type: image/png');
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-			//fpassthru(fopen($nome, 'rb'));
 			readfile($nome);
 		}
 		else{
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			header("X-Sendfile: $nome");
-			header("Content-type: image/png");
 		}
 		exit;
 	}

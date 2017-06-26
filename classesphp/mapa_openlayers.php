@@ -414,8 +414,7 @@ if($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum"){
 	$img = imagecreatefrompng($nomer);
 	imagealphablending($img, false);
 	imagesavealpha($img, true);
-	ob_clean();
-	echo header("Content-type: image/png \n\n");
+	cabecalhoImagem($nomer);
 	imagepng($img);
 	imagedestroy($img);
 }
@@ -423,22 +422,11 @@ else{
 	if($cache == true && $_GET["cache"] != "nao"){
 		//cache ativo. Salva a imagem em cache
 		$nomer = salvaCacheImagem($cachedir,$map_fileX,$_GET["tms"]);
+		cabecalhoImagem($nomer);
 		if($_SESSION["i3georendermode"] == 2){
-			ob_clean();
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			header("X-Sendfile: $nomer");
-			header("Content-type: image/png");
 		}
 		else{
-			ob_clean();
-			header('Content-Length: '.filesize($nomer));
-			header('Content-Type: image/png');
-			//header('Cache-Control: max-age=3600, must-revalidate');
-			//header('Expires: ' . gmdate('D, d M Y H:i:s', time()+24*60*60) . ' GMT');
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-			//fpassthru(fopen($nomer, 'rb'));
 			readfile($nomer);
 		}
 	}
@@ -462,8 +450,7 @@ else{
 				imagealphablending($img, false);
 				imagesavealpha($img, true);
 			}
-			ob_clean();
-			echo header("Content-type: image/png \n\n");
+			cabecalhoImagem($nomer);
 			imagepng($img);
 			imagedestroy($img);
 			exit;
@@ -482,11 +469,28 @@ else{
 			if($cortePixels > 0){
 				$img = cortaImagemDisco($nomer,$cortePixels,256);
 			}
-			ob_clean();
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
+			cabecalhoImagem($nomer);
 			header("X-Sendfile: $nomer");
-			header("Content-type: image/png");
+		}
+	}
+}
+function cabecalhoImagem($nome){
+	if(ob_get_contents()){
+		ob_clean();
+	}
+	$lastModified=filemtime($nome);
+	//set last-modified header
+	header("Last-Modified: ".gmdate("D, d M Y H:i:s", $lastModified)." GMT");
+	//make sure caching is turned on
+	header('Cache-Control: public,max-age=86400'); //24 horas
+	header("Content-type: image/png");
+	header("Etag: " . md5($nome));
+	//check if page has changed. If not, send 304 and exit
+	if (array_key_exists('HTTP_IF_MODIFIED_SINCE', $_SERVER)) {
+		$if_modified_since = strtotime(preg_replace('/;.*$/', '', $_SERVER['HTTP_IF_MODIFIED_SINCE']));
+		if ($if_modified_since >= $lastModified) { // Is the Cached version the most recent?
+			header($_SERVER['SERVER_PROTOCOL'].' 304 Not Modified');
+			exit();
 		}
 	}
 }
@@ -505,6 +509,7 @@ function salvaCacheImagem($cachedir,$map,$tms){
 			@mkdir(dirname($nome),0744,true);
 			chmod(dirname($nome),0744);
 		}
+		error_log("salvando imagem");
 		$img->saveImage($nome);
 		//
 		//corta a imagem gerada para voltar ao tamanho normal
@@ -525,21 +530,12 @@ function carregaCacheImagem($cachedir,$map,$tms,$i3georendermode=0){
 	}
 	$nome = $nome.".png";
 	if(file_exists($nome)){
+		cabecalhoImagem($nome);
 		if($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)){
-			header('Content-Length: '.filesize($nome));
-			header('Content-Type: image/png');
-			//header('Cache-Control: max-age=3600, must-revalidate');
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
-			//header('Last-Modified: '.gmdate('D, d M Y H:i:s', filemtime($nome)).' GMT', true, 200);
-			//fpassthru(fopen($nome, 'rb'));
 			readfile($nome);
 		}
 		else{
-			header('Cache-Control: public, max-age=22222222');
-			header('Expires: ' . gmdate('D, d M Y H:i:s', time()+48*60*60) . ' GMT');
 			header("X-Sendfile: $nome");
-			header("Content-type: image/png");
 		}
 		exit;
 	}
@@ -581,12 +577,14 @@ function filtraImg($nomer,$tipoimagem){
 	}
 }
 function inicializa(){
-	clearstatcache();
+	ini_set("session.use_cookies", 0);
 	session_name("i3GeoPHP");
 	if(@$_GET["g_sid"]){
 		session_id($_GET["g_sid"]);
 	}
-	else{
+	elseif (@$_COOKIE["i3GeoPHP"]){
+		session_id($_COOKIE["i3GeoPHP"]);
+	} else {
 		ilegal();
 	}
 	session_start();

@@ -54,6 +54,9 @@ i3GEO.legenda =
 	 * Atualiza o elemento HTML do mapa utilizado para mostrar a legenda
 	 */
 	atualiza : function() {
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.legenda.atualiza()");
+
 		var idleg = $i(i3GEO.legenda.config.idLegenda);
 		var tamanho = $("#" + i3GEO.legenda.config.idLegenda).attr("data-size").split(",");
 
@@ -62,6 +65,9 @@ i3GEO.legenda =
 		}
 	},
 	montaLegenda : function(retorno){
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.legenda.montaLegenda()");
+
 		var legenda = "",
 			t,idleg;
 

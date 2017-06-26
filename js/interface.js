@@ -1388,7 +1388,8 @@ i3GEO.Interface =
 					url = configura.locaplic + "/classesphp/mapa_openlayers.php?";
 					projectionExtent = ol.proj.get('EPSG:4326').getExtent();
 				}
-				url += "g_sid=" + i3GEO.configura.sid + "&TIPOIMAGEM=" + configura.tipoimagem;
+				//url += "g_sid=" + i3GEO.configura.sid + "&TIPOIMAGEM=" + configura.tipoimagem;
+				url += "TIPOIMAGEM=" + configura.tipoimagem;
 
 				size = ol.extent.getWidth(projectionExtent) / 256;
 				resolutions = new Array(40);
@@ -2596,9 +2597,8 @@ i3GEO.Interface =
 					new google.maps.ImageMapType({
 						getTileUrl : function(coord, zoom) {
 							var url =
-								i3GEO.configura.locaplic + "/classesphp/mapa_googlemaps.php?g_sid="
-									+ i3GEO.configura.sid
-									+ "&cache="
+								i3GEO.configura.locaplic + "/classesphp/mapa_googlemaps.php?"
+									+ "cache="
 									+ cache
 									+ "&Z="
 									+ zoom
