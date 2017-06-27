@@ -58,9 +58,9 @@ i3GEO.legenda =
 			console.info("i3GEO.legenda.atualiza()");
 
 		var idleg = $i(i3GEO.legenda.config.idLegenda);
-		var tamanho = $("#" + i3GEO.legenda.config.idLegenda).attr("data-size").split(",");
 
-		if (idleg && idleg.style.display === "block") {
+		if (idleg && idleg.style.display !== "none") {
+			var tamanho = $("#" + i3GEO.legenda.config.idLegenda).attr("data-size").split(",");
 			i3GEO.php.criaLegendaJSON(i3GEO.legenda.montaLegenda, "", tamanho[0], tamanho[1]);
 		}
 	},

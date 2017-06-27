@@ -639,6 +639,7 @@ i3GEO.guias =
 				}
 			}
 			if (forca === "fecha") {// esconde
+				i3GEO.guias.escondeGuias();
 				molde.animate(
 						{ "width": "-10px" },
 						"slow"
