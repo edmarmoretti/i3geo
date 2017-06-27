@@ -560,11 +560,6 @@ var i3GEO = {
 				} else {
 					if (retorno.data.variaveis) {
 						i3GEO.parametros = retorno.data.variaveis;
-						//verifica se o login e possivel em funcao da variavel variaveis i3geoPermiteLogin
-						//definida no ms_configura.php
-						if(i3GEO.gadgets && i3GEO.parametros.i3geoPermiteLogin && i3GEO.parametros.i3geoPermiteLogin == "nao" ){
-							i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = false;
-						}
 						//
 						// converte string em n&uacute;mero
 						//
@@ -623,7 +618,7 @@ var i3GEO = {
 						// marcadores
 						//i3GEO.listaDeFerramentas = i3GEO.marcador.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
 						// inclui opcoes admin
-						if (i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin === true || (i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin != false && i3GEO.parametros.editor === "sim")) {
+						if (i3GEO.parametros.editor === "sim") {
 							i3GEO.listaDeFerramentas = i3GEO.login.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
 						}
 						i3GEO.Interface.inicia();

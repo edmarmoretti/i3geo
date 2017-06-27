@@ -599,12 +599,6 @@ i3GEO.configura =
 		funcoesBotoes : {
 			"botoes" : [
 				{
-					iddiv : "historicozoom",
-					tipo : "",
-					dica : "",
-					constroiconteudo : 'i3GEO.gadgets.mostraHistoricoZoom()'
-				},
-				{
 					// Ativa o bot&atilde;o que realiza a opera&ccedil;&atilde;o de zoom para a extens&atilde;o total do mapa.
 					iddiv : "zoomtot",
 					tipo : "",

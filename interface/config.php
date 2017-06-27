@@ -7,7 +7,6 @@ i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://"
 //ajusta o tamanho do navegador ao tamanho da tela
 i3GEO.configura.autotamanho = false;
 i3GEO.Interface.IDCORPO = "mapai3Geo";
-i3GEO.gadgets.PARAMETROS.mostraMenuSuspenso.permiteLogin = true;
 
 i3GEO.Interface.openlayers.TILES = true;
 

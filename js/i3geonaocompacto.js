@@ -118,7 +118,7 @@ OpenLayers = {
 	"arvoredetemas.js",
 	"barradebotoes.js",
 	"coordenadas.js",
-	"gadgets.js",
+	//"gadgets.js",
 	"login.js",
 	"marcador.js",
 	"plugini3geo.js",

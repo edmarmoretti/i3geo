@@ -417,8 +417,6 @@ i3GEO.Interface =
 			if ($i("i3GEOcompartilhar")) {
 				i3GEO.social.compartilhar("i3GEOcompartilhar", temp, temp, "semtotal");
 			}
-			gadgets.mostraVersao();
-			gadgets.mostraEmail();
 			//
 			// esse id &eacute; utilizado apenas para manter o mapa n&atilde;o
 			// vis&iacute;vel at&eacute; que tudo seja montado
@@ -1136,7 +1134,6 @@ i3GEO.Interface =
 				montaMapa();
 
 				i3GEO.coordenadas.ativaEventos();
-				//i3GEO.gadgets.mostraMenuSuspenso();
 				i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 				i3GEO.idioma.mostraSeletor();
 
@@ -2519,11 +2516,6 @@ i3GEO.Interface =
 					i3GEO.Interface.googlemaps.criaLayers();
 					i3GeoMapOverlay.setMap(i3GeoMap);
 					i3GEO.Interface.googlemaps.registraEventos();
-					// se o mapa est&aacute; no modo de troca de interface, alguns
-					// elementos n&atilde;o precisam ser inseridos novamente
-					if (i3GEO.Interface.STATUS.trocando === false) {
-						i3GEO.gadgets.mostraInserirKml();
-					}
 					i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
 					if (i3GEO.Interface.STATUS.trocando === false) {
 						//	i3GEO.coordenadas.mostraCoordenadas();

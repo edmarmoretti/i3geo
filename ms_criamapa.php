@@ -650,7 +650,6 @@ adaptaLayers($tmpfname,$versao);
 if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat")){
 	require_once(dirname(__FILE__)."/ms_registraip.php");
 }
-
 if ($interface != "mashup"){
 	abreInterface($interface,$caminho,$tempo);
 }
@@ -881,6 +880,7 @@ function incluiTemasIniciais(){
 					}
 					cloneInlineSymbol($layern,$maptemp,$mapn);
 					$layerAdicionado = ms_newLayerObj($mapn, $layern);
+					//echo $layern->name;
 					corrigeLayerGrid($layern,$layerAdicionado);
 				}
 			}

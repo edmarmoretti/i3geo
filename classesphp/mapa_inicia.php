@@ -137,10 +137,11 @@ function iniciaMapa()
 				$layer->setmetadata("olstatus","OFF");
 			}
 			$layer->setmetadata("olopacity",$layer->opacity);
+			//error_log($layer->name);
 		}
 		$m->save($map_file);
 	}
-	if($interface == "googlemaps" || $interface == "googleearth")
+	if($interface == "googlemaps")
 	{
 		$m = ms_newMapObj($map_file);
 		$e = $m->extent;
@@ -248,28 +249,6 @@ function iniciaMapa()
 	$arqsel = (file_exists($qyfile)) ? true : false;
 	$m = New Mapa($map_file,$locaplic);
 	$temas = $m->parametrosTemas();
-	//$m->ligaDesligaTemas("",implode(",",$m->nomes),"nao");
-	//
-	//&eacute; necess&aacute;rio um mapa para compor o fundo apenas com o imagecolor e sem nenhuma outra camada
-	//utilizado em algumas interfaces
-	//
-	/*
-	$nomefundo = str_replace(".map","fundo.map",$map_file);
-	$m->mapa->save($nomefundo);
-	$mf = ms_newMapObj($nomefundo);
-	$numlayers = $mf->numlayers;
-	for($i = 0;$i < $numlayers;++$i)
-	{
-		$l = $mf->getLayer($i);
-		$l->set("status",MS_DELETE);
-	}
-	$of = $mf->outputformat;
-	$of->set("driver","GD/PNG");
-	$versao = versao();
-	$temp = $mf->scalebar;
-	$temp->set("status",MS_OFF);
-	$mf->save($nomefundo);
-	*/
 	$versao = versao();
 	$temp = $m->mapa->scalebar;
 	$temp->set("status",MS_OFF);
@@ -334,7 +313,6 @@ function iniciaMapa()
 				$res["editor"] = "sim";
 			}
 		}
-
 	}
 	//
 	$res["mapexten"] = $ext;
