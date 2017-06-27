@@ -1859,6 +1859,7 @@ i3GEO.Interface =
 					}
 					var xy;
 					modoAtual = "";
+					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
 					i3GEO.Interface.openlayers.recalcPar();
 					i3GEO.Interface.STATUS.pan = false;
 					i3GEO.eventos.navegaMapa();
@@ -1866,7 +1867,7 @@ i3GEO.Interface =
 
 					i3GEO.eventos.cliquePerm.status = false;
 					// guarda a extensao geografica atual
-					i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
+
 					i3GEO.Interface.STATUS.pan = false;
 				});
 				i3geoOL.on("pointermove", function(e) {

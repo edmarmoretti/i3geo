@@ -81,7 +81,7 @@ i3GEO.navega =
 		 */
 		registraExt : function(ext) {
 			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.navega.registraExt("+ ext +")");
+				console.info("i3GEO.navega.registraExt()");
 
 			if(i3GEO.navega.EXTENSOES.emAcao == false){
 				var l = i3GEO.navega.EXTENSOES.lista,
@@ -91,12 +91,14 @@ i3GEO.navega =
 					l.shift();
 				}
 				n = l.length;
-				if(n > 0){
-					if(l[n-1] === ext){
-						return;
-					}
+				if(n > 0 && l[n-1] === ext){
+					return;
 				}
 				l.push(ext);
+
+				if (typeof (console) !== 'undefined')
+					console.info(ext);
+
 			} else {
 				i3GEO.navega.EXTENSOES.emAcao = false;
 			}
@@ -115,7 +117,7 @@ i3GEO.navega =
 					e = l.pop();
 					i3GEO.navega.zoomExt("", "", "", e);
 					if(r.length > 10){
-						r.pop();
+						r.shift();
 					}
 					if(r.length > 0 && r[r.length -1] === e){
 						return;
