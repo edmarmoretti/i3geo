@@ -38,7 +38,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-// TODO incluir opcao para gerar imagem via canvas apenas do corpo do mapa
 i3GEO.mapa =
 	{
 		/**
@@ -520,7 +519,6 @@ i3GEO.mapa =
 				}
 			}
 		},
-		// TODO incluir opcao para escolha do template da legenda
 		/**
 		 * Section: i3GEO.mapa.legendaHTML
 		 *
