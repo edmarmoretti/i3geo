@@ -134,7 +134,7 @@ packer("navega.js","compactados/navega_compacto.js","Normal");
 packer("coordenadas.js","compactados/coordenadas_compacto.js","Normal");
 //packer("gadgets.js","compactados/gadgets_compacto.js","Normal");
 packer("eventos.js","compactados/eventos_compacto.js","Normal");
-packer("barradebotoes.js","compactados/barradebotoes_compacto.js","Normal");
+packer("editor.js","compactados/editor_compacto.js","Normal");
 packer("guias.js","compactados/guias_compacto.js","Normal");
 packer("selecao.js","compactados/selecao_compacto.js","Normal");
 packer("mapa.js","compactados/mapa_compacto.js","Normal");
@@ -230,7 +230,7 @@ $jsfiles = array(
 "compactados/navega_compacto.js",
 "compactados/eventos_compacto.js",
 "compactados/arvoredetemas_compacto.js",
-"compactados/barradebotoes_compacto.js",
+"compactados/editor_compacto.js",
 "compactados/coordenadas_compacto.js",
 //"compactados/gadgets_compacto.js",
 "compactados/social_compacto.js",

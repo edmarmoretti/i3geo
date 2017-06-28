@@ -1844,7 +1844,6 @@ i3GEO.Interface =
 				i3geoOL.on("pointerdrag", function(e) {
 					i3GEO.Interface.STATUS.pan = true;
 					modoAtual = "move";
-					i3GEO.barraDeBotoes.BOTAOCLICADO = "pan";
 				});
 				i3geoOL.on("click", function(e) {
 					e.stopPropagation();

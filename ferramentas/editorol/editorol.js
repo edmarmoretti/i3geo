@@ -1057,7 +1057,7 @@ i3GEO.editorOL =
 			temp.className = "editorOLzoomboxItemInactive olButton";
 			temp.title = "zoombox";
 			temp.onclick = function(){
-				i3GEO.barraDeBotoes.defBotao("zoomli").funcaoonclick();
+				i3GEO.navega.zoomli();
 			};
 			return temp;
 		},
@@ -1108,7 +1108,7 @@ i3GEO.editorOL =
 			temp.className = "editorOLdistanciaItemInactive olButton";
 			temp.onclick = function(){
 				i3GEO.editorOL.marcaBotao("editorOLdistancia");
-				i3GEO.barraDeBotoes.defBotao("mede").funcaoonclick();
+				i3GEO.analise.medeDistancia.inicia();
 			};
 			return temp;
 		},
@@ -1117,7 +1117,7 @@ i3GEO.editorOL =
 			temp.className = "editorOLareaItemInactive olButton";
 			temp.onclick = function(){
 				i3GEO.editorOL.marcaBotao("editorOLarea");
-				i3GEO.barraDeBotoes.defBotao("area").funcaoonclick();
+				i3GEO.analise.medeArea.inicia();
 			};
 			return temp;
 		},

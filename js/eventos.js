@@ -198,9 +198,7 @@ i3GEO.eventos =
 		 *
 		 * i3GEO.configura.funcaoTip
 		 */
-		MOUSECLIQUEPERM : [
-			i3GEO.configura.funcaoTip
-		],
+		MOUSECLIQUEPERM : ["i3GEO.mapa.dialogo.verificaTipDefault()"],
 		/**
 		 * Timer utilizado pelo contador do mouse parado
 		 *

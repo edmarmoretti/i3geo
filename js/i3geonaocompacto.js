@@ -116,7 +116,7 @@ OpenLayers = {
 	"social.js",
 	"eventos.js",
 	"arvoredetemas.js",
-	"barradebotoes.js",
+	"editor.js",
 	"coordenadas.js",
 	//"gadgets.js",
 	"login.js",

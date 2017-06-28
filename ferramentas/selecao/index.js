@@ -251,7 +251,7 @@ i3GEOF.selecao =
 					+ '/imagens/gisicons/grafico-perfil.png" /></button>'
 					+ '	<button title="'
 					+ $trad('editor', i3GEOF.selecao.dicionario)
-					+ '"  onclick="i3GEO.util.animaClique(this);i3GEO.barraDeBotoes.editor.inicia()"><img src="'
+					+ '"  onclick="i3GEO.util.animaClique(this);i3GEO.editor.inicia()"><img src="'
 					+ i3GEO.configura.locaplic
 					+ '/imagens/gisicons/edit.png" /></button>'
 					+ '	<div style=margin-left:8px;text-align:left;  >'

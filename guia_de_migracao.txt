@@ -55,9 +55,6 @@ manipulam o menu suspenso devem ser revisados para verificar o funcionamento nes
 
 - o código dos editores vetoriais para as interfaces Openlayers e Googlemaps foram movidos para a pasta i3geo/classesjs
 
-- foi aumentado o número de botões padrão da barra de botões para 13 se você quiser manter em 12, utilize em seu javascript:
-	i3GEO.barraDeBotoes.MAXBOTOES = 12;
-
 - a ordem dos botões na barra de botões foi alterada para mostrar primeiro o botão da barra de edição
 
 - as funções de desenho de elementos gráficos utilizados pela interface GoogleEarth foram movidos de classesjs/classe_interface.js

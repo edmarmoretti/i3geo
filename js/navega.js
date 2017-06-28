@@ -77,6 +77,20 @@ i3GEO.navega =
 		 */
 		timerNavega : null,
 		/**
+		 * Ativa a funcao de navegacao do tipo pan
+		 */
+		ativaPan: function(){
+			if (i3GEO.Interface.ATUAL === "googlemaps") {
+				i3GeoMap.setOptions({
+					draggable : true
+				});
+			}
+			if (i3GEO.Interface.ATUAL === "openlayers") {
+				marcadorZoom = "";
+				i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);
+			}
+		},
+		/**
 		 * Registra uma extensao na variavel EXTENSOES
 		 */
 		registraExt : function(ext) {

@@ -237,6 +237,38 @@ i3GEO.mapa =
 				i3GEO.janela.tempoMsg("Ocorreu um erro. i3GEO.mapa.ajustaPosicao " + e);
 			}
 		},
+		ativaIdentifica: function(){
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.mapa.ativaIdentifica()");
+
+			i3GEO.eventos.MOUSECLIQUE = ["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"];
+			i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
+			i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.verificaTipDefault()"]);
+			i3GEO.eventos.cliquePerm.ativa();
+		},
+		ativaIdentificaBalao: function(){
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.mapa.ativaIdentificaBalao()");
+
+			if (i3GEO.arvoreDeCamadas.filtraCamadas("etiquetas", "", "diferente", i3GEO.arvoreDeCamadas.CAMADAS) === "") {
+				i3GEO.janela.tempoMsg($trad("d31"));
+				return;
+			}
+			i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
+			i3GEO.eventos.MOUSECLIQUE = ["i3GEO.mapa.dialogo.verificaTipDefault()"];
+			/*
+			if (i3GEO.eventos.cliquePerm.ativo === false) {
+				// na opcao de identificacao so e permitido um evento
+				i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
+				i3GEO.eventos.MOUSECLIQUE = ["i3GEO.mapa.dialogo.verificaTipDefault()"];
+			} else {
+				// desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
+				i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
+				i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.verificaTipDefault()"]);
+			}
+			*/
+			i3GEO.eventos.cliquePerm.ativa();
+		},
 		/**
 		 * Function: ativaTema
 		 *
@@ -398,7 +430,7 @@ i3GEO.mapa =
 					if(!i3GEO.desenho.layergrafico){
 						i3GEO.editorOL.criaLayerGrafico();
 					}
-					i3GEO.barraDeBotoes.editor[i3GEO.Interface.ATUAL].ativaPainel();
+					i3GEO.editor[i3GEO.Interface.ATUAL].ativaPainel();
 					var n = geometrias.length, i;
 					for (i = 0; i < n; i++) {
 						i3GEO.editorOL.adicionaFeatureWkt(geometrias[i].geometria, geometrias[i].atributos);
@@ -1348,19 +1380,14 @@ i3GEO.mapa =
 			 *
 			 */
 			cliqueIdentificaDefault : function(x, y) {
-				// FIXIT nada elegante
-				// evita clicar sobre a barra do googlemaps
-				if (objposicaocursor.imgx < 70) {
-					return;
-				}
+				if (typeof (console) !== 'undefined')
+					console.info("i3GEO.mapa.cliqueIdentificaDefault()");
+
 				// evita ativar a ferramenta se o botao nao estiver ativo
 				// e estiver no modo de clique permanente
-				if (i3GEO.barraDeBotoes.BOTAOCLICADO !== "identifica" && i3GEO.eventos.cliquePerm.ativo === false) {
+				if (i3GEO.eventos.cliquePerm.ativo === false) {
 					return;
 				}
-				i3GEO.eventos.removeEventos("MOUSEPARADO", [
-					"verificaTip()"
-				]);
 				// javascript nao foi carregado
 				if (typeof (i3GEOF.identifica) === 'undefined') {
 					// javascript que sera carregado
@@ -1391,9 +1418,10 @@ i3GEO.mapa =
 				if (typeof (console) !== 'undefined')
 					console.info("i3GEO.mapa.dialogo.verificaTipDefault()");
 
-				if (i3GEO.barraDeBotoes.BOTAOCLICADO !== "identificaBalao" && i3GEO.eventos.cliquePerm.ativo === false) {
+				if(i3GEO.eventos.cliquePerm.ativo == false){
 					return;
 				}
+
 				if (i3GEO.eventos.cliquePerm.status === false) {
 					return;
 				} else {

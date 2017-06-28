@@ -121,7 +121,7 @@ i3GEOF.melhorcaminho = {
 		//cria a janela flutuante
 		titulo = "<div class='i3GeoTituloJanela'>" + $trad("melhorcaminho")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=14' ><b> </b></a></div>";
 		cabecalho = function(){
-			i3GEO.barraDeBotoes.execBotao("pan");
+			i3GEO.navega.ativaPan();
 		};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.melhorcaminho");

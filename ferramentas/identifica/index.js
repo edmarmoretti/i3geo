@@ -403,18 +403,12 @@ i3GEOF.identifica =
 					i3GEOF.identifica.janelas.remove(id);
 					i3GEOF.identifica.propJanelas[id] = null;
 					if (i3GEOF.identifica.janelas.length === 0) {
-						i3GEO.eventos.removeEventos("MOUSECLIQUE", [
-							i3GEO.configura.funcaoIdentifica
-						]);
+						i3GEO.eventos.removeEventos("MOUSECLIQUE", ["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
 						i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS", [
 							"i3GEOF.identifica.listaTemas()"
 						]);
-						i3GEO.eventos.removeEventos("MOUSECLIQUEPERM", [
-							i3GEO.configura.funcaoIdentifica
-						]);
-						i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM", [
-							i3GEO.configura.funcaoTip
-						]);
+						i3GEO.eventos.removeEventos("MOUSECLIQUEPERM", ["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
+						i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM", ["i3GEO.mapa.dialogo.verificaTipDefault()"]);
 						// reativa o evento default
 						i3GEO.eventos.cliquePerm.ativa();
 					}
@@ -478,16 +472,12 @@ i3GEOF.identifica =
 			titulo = "<div class='i3GeoTituloJanela'>" + $trad('move', i3GEOF.identifica.dicionario) + "</div>";
 			i3GEO.janela.cria("250px", "100px", "", "", "", titulo, "i3GEOF.movePonto", false, "hd", "", "");
 			$i("i3GEOF.movePonto_corpo").style.backgroundColor = "white";
-			i3GEO.eventos.removeEventos("MOUSECLIQUEPERM", [
-				i3GEO.configura.funcaoIdentifica
-			]);
+			i3GEO.eventos.removeEventos("MOUSECLIQUEPERM", ["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
 			i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
 				"i3GEOF.identifica.atualizaJanelaMoverPonto()"
 			]);
 			temp = function() {
-				i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
-					i3GEO.configura.funcaoIdentifica
-				]);
+				i3GEO.eventos.adicionaEventos("MOUSECLIQUE", ["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 			$i("i3GEOF.movePonto_corpo").innerHTML =
