@@ -124,7 +124,7 @@ i3GEO.catalogoSistemas = {
 					if(v.PUBLICADO.toLowerCase() != "nao"){
 						v.nome = v.nome + " <small>(" + $trad("naoPublicado") + ")<small>";
 					}
-					if(i3GEO.configura.optUsuarioLogado == true || v.PUBLICADO.toLowerCase() != "nao"){
+					if(v.PUBLICADO.toLowerCase() != "nao"){
 						clone.push(v);
 					}
 				});

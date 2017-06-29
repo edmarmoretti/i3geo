@@ -197,7 +197,7 @@ i3GEOF.identifica =
 				i3GEOF.identifica.mostraSistemasAdicionais = mostraSistemasAdicionais;
 				// se o usu&aacute;rio for editor, for&ccedil;a mostrar a lista
 				// de sistemas
-				if (i3GEO.parametros.editor.toLowerCase() == "sim" && i3GEO.configura.optUsuarioLogado == true) {
+				if (i3GEO.parametros.editor.toLowerCase() == "sim") {
 					i3GEOF.identifica.mostraSistemasAdicionais == true;
 				}
 				i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOidentificaguia1", idjanela + "i3GEOidentificaguia");
@@ -727,7 +727,7 @@ i3GEOF.identifica =
 
 						}
 						if (divins) {
-							if (i3GEO.parametros.editor.toLowerCase() == "sim" && i3GEO.configura.optUsuarioLogado == true) {
+							if (i3GEO.parametros.editor.toLowerCase() == "sim") {
 								temp =
 									"<p class=paragrafo ><a href='#' title='Op&ccedil;&atilde;o vis&iacute;vel apenas para quem &eacute; editor' style=color:red onclick=\"i3GEOF.identifica.abrejanelaIframe('1050','500','" + i3GEO.configura.locaplic
 										+ "/admin/html/webservices.html');\" >Editar a lista de sistemas adicionais</a></p>";

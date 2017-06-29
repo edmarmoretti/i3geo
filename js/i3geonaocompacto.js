@@ -168,7 +168,7 @@ OpenLayers = {
 	);
 	for (i = 0; i < cssfiles.length; i++)
 	{
-		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
+		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i]  + "?" + nocache + "'/>";
 		allCssTags += currentCssTag;
 	}
 	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons'/>";

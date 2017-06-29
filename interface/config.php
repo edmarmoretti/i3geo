@@ -28,7 +28,6 @@ i3GEO.scrollerWidth = 0;
 
 i3GEO.configura.guardaExtensao = true;
 
-i3GEO.configura.optUsuarioLogado = true;
 i3GEO.configura.mapaRefDisplay = "none";
 i3GEO.ajuda.ATIVAJANELA = false;
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = false;

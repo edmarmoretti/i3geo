@@ -1244,7 +1244,7 @@ i3GEO.Interface =
 				};
 				node = new YAHOO.widget.HTMLNode(d, root, true, true);
 				node.enableHighlight = false;
-				if (i3GEO.parametros.editor === "sim" && i3GEO.configura.optUsuarioLogado == true) {
+				if (i3GEO.parametros.editor === "sim") {
 					d =
 						new YAHOO.widget.HTMLNode(
 							{
@@ -3041,7 +3041,7 @@ i3GEO.Interface =
 				};
 				node = new YAHOO.widget.HTMLNode(d, root, true, true);
 				node.enableHighlight = false;
-				if (i3GEO.parametros.editor === "sim" && i3GEO.configura.optUsuarioLogado == true) {
+				if (i3GEO.parametros.editor === "sim") {
 					d =
 						new YAHOO.widget.HTMLNode(
 							{

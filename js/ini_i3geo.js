@@ -302,7 +302,7 @@ var i3GEO = {
 	 */
 	contadorAtualiza : 0,
 	//atalho para as funcoes cria e inicia com a possibilidade de aplicacao de parametros
-	init: function(parametrosMapa){
+	init: function(parametrosMapa,configMapa){
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.init()");
 
@@ -311,29 +311,49 @@ var i3GEO = {
 		} else {
 			i3GEO.configura.mashuppar = "";
 		}
+		if(configMapa && configMapa != ""){
+			i3GEO.configMapa(configMapa);
+		}
 		i3GEO.cria();
 		i3GEO.inicia();
+		delete i3GEO.parametrosMapa2mashuppar;
+		delete i3GEO.configMapa;
+		delete i3GEO.cria;
+		delete i3GEO.inicia;
+		delete i3GEO.init;
 	},
+	//
+	//Muitos parametros de configuracao podem ser utilizados para controlar o funcionamento da interface
+	//Essa funcao centraliza esses parametros para facilitar a customizacao
+	//Os parametros sao entao aplicados nos objetos corretos
+	//
+	configMapa : function(c){
+		i3GEO.configura.guardaExtensao = (c.hasOwnProperty("saveExtension") && c.saveExtension == true) ? true:false;
+		//TODO implementar composite para versao 7 do Mapserver
+		i3GEO.configura.tipoimagem = (c.hasOwnProperty("posRenderType") && c.posRenderType != "") ? c.posRenderType:"nenhum";
+	},
+	//
 	//mashuppar e um parametro antigo usado no i3geo para alterar o mapa de inicializacao
 	//os parametros utilizados sao os mesmos disponiveis em ms_criamapa.php
 	//na versao 7 os nomes dos parametros foram modificados para facilitar seu uso
 	//essa funcao faz a conversao dessa nova nomenclatura para poder compatibilizar com a sintaxe utilizada em mashuppar
+	//
 	parametrosMapa2mashuppar: function(p){
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.parametrosMapa2mashuppar()");
 
 		var par = [];
-		if(p.mapfilebase && p.mapfilebase != ""){
+		if(p.hasOwnProperty("mapfilebase") && p.mapfilebase != ""){
 			par.push("&base="+p.mapfilebase);
 		}
-		if(p.mapext && p.mapext != "" && p.mapext.length == 4){
+		if(p.hasOwnProperty("mapext") && p.mapext != "" && p.mapext.length == 4){
 			par.push("&mapext="+p.mapext.join(","));
 			i3GEO.configura.guardaExtensao = false;
 		}
-		if(p.perfil && p.perfil != ""){
+		if(p.hasOwnProperty("perfil") && p.perfil != ""){
 			par.push("&perfil="+p.perfil);
 		}
-		if(p.layers){
+		if(p.hasOwnProperty("layers")){
 			if(p.layers.add && p.layers.add.length > 0){
 				par.push("&temasa="+p.layers.add.join(","));
 			}
@@ -344,11 +364,11 @@ var i3GEO = {
 				par.push("&desligar="+p.layers.off.join(","));
 			}
 		}
-		if(p.points && p.points.length > 0){
+		if(p.hasOwnProperty("points") && p.points.length > 0){
 			par.push("&nometemapontos="+p.points.title);
 			par.push("&pontos="+p.points.coord.join(","));
 		}
-		if(p.lines){
+		if(p.hasOwnProperty("lines")){
 			var n = [];
 			jQuery.each( p.lines.coord, function(index, value) {
 				if(value.length > 0){
@@ -360,7 +380,7 @@ var i3GEO = {
 				par.push("&linhas="+n.join(","));
 			}
 		}
-		if(p.polygons){
+		if(p.hasOwnProperty("polygons")){
 			var n = [];
 			jQuery.each( p.polygons.coord, function(index, value) {
 				if(value.length > 0){
@@ -372,11 +392,11 @@ var i3GEO = {
 				par.push("&poligonos="+n.join(","));
 			}
 		}
-		if(p.wkt && p.wkt.coord != ""){
+		if(p.hasOwnProperty("wkt") && p.wkt.coord != ""){
 			par.push("&nometemawkt="+p.wkt.title);
 			par.push("&wkt="+p.wkt.coord);
 		}
-		if(p.symbol){
+		if(p.hasOwnProperty("symbol")){
 			if(p.symbol.name != ""){
 				par.push("&simbolo="+p.symbol.name);
 			}
@@ -390,7 +410,7 @@ var i3GEO = {
 		if(p.kml && p.kml.url != ""){
 			par.push("&kmlurl="+p.kml.url);
 		}
-		if(p.wms && p.wms.url != ""){
+		if(p.hasOwnProperty("wms") && p.wms.url != ""){
 			if(p.wms.url != ""){
 				par.push("&url_wms="+p.wms.url);
 			}
@@ -413,7 +433,7 @@ var i3GEO = {
 				par.push("&versao_wms="+p.wms.version);
 			}
 		}
-		if(p.filters){
+		if(p.hasOwnProperty("filters")){
 			var n = [];
 			jQuery.each( p.filters, function(index, value) {
 				if(value.layer != ""){
@@ -1032,6 +1052,7 @@ var i3GEO = {
 		},
 		esconde: function () {
 			i3GEO.aguardeLogo.obj.modal("hide");
+			delete i3GEO.aguardeLogo;
 		}
 	}
 };

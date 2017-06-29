@@ -24,90 +24,11 @@
  * <http://localhost/i3geo/classesjs/classe_configura.js>
  *
  */
-
- /**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
- * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite
- * 330, Boston, MA 02111-1307 USA.
- */
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 i3GEO.configura =
 	{
-		/**
-		 * Propriedade : optUsuarioLogado
-		 *
-		 * Por default, quando o usuário estiver logado, sao mostradas opcoes especiais na arvore de temas e outros componente
-		 *
-		 * Mudando essa propriedade para false, essas opcoes nao serao mostradas nas seguintes ferramentas:
-		 *
-		 * arvore de temas
-		 * arvore kml
-		 * animagif
-		 * atalhoscamada
-		 * conectarwms
-		 * identifica
-		 * tme
-		 */
-		optUsuarioLogado : true,
-		/**
-		 * Propriedade: guardaExtensao
-		 *
-		 * Indica se a extensao geografica do mapa sera armazenada como um cookie
-		 *
-		 * Se for true a extensao geografica e armazenada sempre que o evento de navegacoa no mapa for disparado
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * {true}
-		 */
-		guardaExtensao : true,
-		/**
-		 * Propriedade: grupoLayers
-		 *
-		 * Lista de grupos e seus respectivos layers, para montagem da &aacute;rvore de camadas.
-		 *
-		 * Se essa propriedade estiver definida, as camadas ser&atilde;o agrupadas na &aacute;rvore de camadas conforme os grupos definidos.
-		 *
-		 * Layers que n&atilde;o constarem nessa propriedade ser&atilde;o inclu&iacute;dos no grupo "outros"
-		 *
-		 * Ao definir grupos, a &aacute;rvore n&atilde;o conter&aacute; as op&ccedil;&otilde;es de mudan&ccedil;a da prdem de desenho das
-		 * camadas ( veja http://localhost/i3geo/exemplos/legenda2.htm )
-		 *
-		 * Por exemplo i3GEO.configura.grupoLayers = [ {nome:"Grupo 1",icone:true,dinamico:true,expandido:true,layers:["zee","estadosl"]},
-		 * {nome:"Grupo 2",icone:false,dinamico:true,expandido:false,layers:["mundo"]} ];
-		 *
-		 * Onde "icone" indica se o &iacute;cone de ligar/desligar todos os temas do grupo ser&aacute; mostrado, "dinamico" significa que o
-		 * n&oacute; pode ser expandido ou n&atilde;o, e "expandido" significa que o n&oacute; inicia aberto se a &aacute;rvore for
-		 * din&acirc;mica
-		 *
-		 * Type:
-		 *
-		 * {Objeto}
-		 *
-		 * Default:
-		 *
-		 * ""
-		 */
-		grupoLayers : "",
 		/**
 		 * Propriedade: tipoimagem
 		 *
@@ -732,5 +653,49 @@ i3GEO.configura =
 			"buscainde" : {
 				"csw" : "http://www.metadados.inde.gov.br/geonetwork/srv/br"
 			}
-		}
+		},
+		/**
+		 * Propriedade: grupoLayers
+		 *
+		 * Lista de grupos e seus respectivos layers, para montagem da &aacute;rvore de camadas.
+		 *
+		 * Se essa propriedade estiver definida, as camadas ser&atilde;o agrupadas na &aacute;rvore de camadas conforme os grupos definidos.
+		 *
+		 * Layers que n&atilde;o constarem nessa propriedade ser&atilde;o inclu&iacute;dos no grupo "outros"
+		 *
+		 * Ao definir grupos, a &aacute;rvore n&atilde;o conter&aacute; as op&ccedil;&otilde;es de mudan&ccedil;a da prdem de desenho das
+		 * camadas ( veja http://localhost/i3geo/exemplos/legenda2.htm )
+		 *
+		 * Por exemplo i3GEO.configura.grupoLayers = [ {nome:"Grupo 1",icone:true,dinamico:true,expandido:true,layers:["zee","estadosl"]},
+		 * {nome:"Grupo 2",icone:false,dinamico:true,expandido:false,layers:["mundo"]} ];
+		 *
+		 * Onde "icone" indica se o &iacute;cone de ligar/desligar todos os temas do grupo ser&aacute; mostrado, "dinamico" significa que o
+		 * n&oacute; pode ser expandido ou n&atilde;o, e "expandido" significa que o n&oacute; inicia aberto se a &aacute;rvore for
+		 * din&acirc;mica
+		 *
+		 * Type:
+		 *
+		 * {Objeto}
+		 *
+		 * Default:
+		 *
+		 * ""
+		 */
+		grupoLayers : "",
+		/**
+		 * Propriedade: guardaExtensao
+		 *
+		 * Indica se a extensao geografica do mapa sera armazenada como um cookie
+		 *
+		 * Se for true a extensao geografica e armazenada sempre que o evento de navegacoa no mapa for disparado
+		 *
+		 * Tipo:
+		 *
+		 * {boolean}
+		 *
+		 * Default:
+		 *
+		 * {true}
+		 */
+		guardaExtensao : true
 	};

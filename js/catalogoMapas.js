@@ -84,7 +84,7 @@ i3GEO.catalogoMapas = {
 					v.nome = v.NOME;
 				}
 				//inclui apenas se o menu estiver marcado como publicado ou se o usuario estiver logado
-				if(i3GEO.configura.optUsuarioLogado == true || v.PUBLICADO.toLowerCase() != "nao"){
+				if(v.PUBLICADO.toLowerCase() != "nao"){
 					clone.push(v);
 				}
 			});

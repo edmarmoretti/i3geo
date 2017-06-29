@@ -464,5 +464,6 @@ var $trad = function(id, dic) {
 		i3GEO.idioma.defineDicionario(g_traducao);
 	}
 	i3GEO.idioma.OBJETOIDIOMA = i3GEO.idioma.objetoIdioma(i3GEO.idioma.DICIONARIO);
-	g_traducao = "";
+	delete g_traducao;
+	delete i3GEO.idioma.DICIONARIO;
 })();
