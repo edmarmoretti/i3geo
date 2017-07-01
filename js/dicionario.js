@@ -2876,5 +2876,19 @@ g_traducao =
 				en : "",
 				es : ""
 			}
+		],
+		"volta" : [
+  			{
+  				pt : "volta",
+  				en : "",
+  				es : ""
+  			}
+  		],
+		"avanca" : [
+			{
+				pt : "avan&ccedil;a",
+				en : "",
+				es : ""
+			}
 		]
 	};

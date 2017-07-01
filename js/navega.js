@@ -44,39 +44,6 @@ i3GEO.navega =
 			emAcao : false
 		},
 		/**
-		 * Tempo em milisegundos que ser&aacute; esperado para executar uma opera&ccedil;&atilde;o de navega&ccedil;&atilde;o sobre o mapa.
-		 *
-		 * Controla o lapso de tempo utilizado para disparar as fun&ccedil;&otilde;es do tipo navega&ccedil;&atilde;o
-		 *
-		 * Tipo:
-		 *
-		 * {Numeric}
-		 *
-		 * Default:
-		 *
-		 * 600
-		 */
-		TEMPONAVEGAR : 600,
-		/**
-		 * Propriedade: FATORZOOM
-		 *
-		 * Valor utilizado nas opera&ccedil;&otilde;es de zoom in e out. Fator de zoom.
-		 *
-		 * Tipo:
-		 *
-		 * {Numeric}
-		 *
-		 * Default:
-		 *
-		 * 2
-		 */
-		FATORZOOM : 2,
-		/**
-		 * Objeto do tipo timer utilizado no contador de tempo para o delay de execu&ccedil;&atilde;o das fun&ccedil;&otilde;es de
-		 * navega&ccedil;&atilde;o
-		 */
-		timerNavega : null,
-		/**
 		 * Ativa a funcao de navegacao do tipo pan
 		 */
 		ativaPan: function(){

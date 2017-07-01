@@ -249,7 +249,6 @@ i3GEO.editorGM =
 		 * Atualiza a ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function() {
-			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "crosshair", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 			i3GEO.editorGM.mudaicone();
 			i3GEO.Interface.googlemaps.recalcPar();
 		},
@@ -420,7 +419,6 @@ i3GEO.editorGM =
 				i3GEO.eventos.adicionaEventos("MOUSECLIQUE", [
 					"i3GEO.editorGM.capturaPoligonoTema.captura()"
 				]);
-				i3GEO.util.mudaCursor(i3GEO.configura.cursores, "crosshair", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 			},
 			desativa : function() {
 			},
@@ -601,7 +599,6 @@ i3GEO.editorGM =
 		 */
 		digitalizaPol : function(botao) {
 			i3GEO.editorGM.mudaicone(botao);
-			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 			i3GEO.editorGM.drawingManager.setOptions({
 				drawingMode : google.maps.drawing.OverlayType.POLYGON
 			});
@@ -614,7 +611,6 @@ i3GEO.editorGM =
 		 */
 		digitalizaPt : function(botao) {
 			i3GEO.editorGM.mudaicone(botao);
-			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 			i3GEO.editorGM.drawingManager.setOptions({
 				drawingMode : google.maps.drawing.OverlayType.MARKER
 			});
@@ -627,7 +623,6 @@ i3GEO.editorGM =
 		 */
 		seleciona : function(botao) {
 			i3GEO.editorGM.mudaicone(botao);
-			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 			i3GEO.editorGM.drawingManager.setOptions({
 				drawingMode : null
 			});

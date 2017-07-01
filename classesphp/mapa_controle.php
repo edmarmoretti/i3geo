@@ -295,7 +295,6 @@ switch (strtoupper($funcao))
 	case "INICIA":
 		include_once("mapa_inicia.php");
 		$kmlurl = $_pg["kmlurl"];
-		$embedLegenda = $_pg["embedLegenda"];
 		$w = $_pg["w"];
 		$h = $_pg["h"];
 		iniciaMapa();
@@ -2468,9 +2467,6 @@ switch (strtoupper($funcao))
 	case "CRIALEGENDAJSON":
 		include_once("classe_legenda.php");
 		//para efeitos de compatibilidade com vers&otilde;es anteriores
-		if(isset($_pg["template"])){
-			$_pg["templateLegenda"] = $_pg["template"];
-		}
 		$m = new Legenda($map_file,$locaplic,$_pg["tema"]);
 		$r = $m->criaLegendaJson($_pg["w"],$_pg["h"]);
 		if(!$r){

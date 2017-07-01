@@ -147,7 +147,6 @@ i3GEOF.analisaGeometrias = {
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		i3GEOF.analisaGeometrias.inicia(divid);
-		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"pointer",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
 	},
 	/*
 	Function: ativaFoco

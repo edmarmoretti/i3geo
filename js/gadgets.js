@@ -64,7 +64,7 @@ i3GEO.gadgets =
 		 *
 		 * i3GEO.gadgets.PARAMETROS = { "mostraInserirKml" : { idhtml : "inserirKml" }, "mostraEscalaNumerica" : { idhtml : "escala" },
 		 * "mostraEscalaGrafica" : { idhtml : "escalaGrafica" }, "mostraBuscaRapida" : { idhtml : "buscaRapida", servicosexternos : true,
-		 * temasmapa : false, google : true }, "mostraVisual" : { idhtml : "" }, "mostraHistoricoZoom" : { idhtml : "historicozoom" },
+		 * temasmapa : false, google : true }, "mostraHistoricoZoom" : { idhtml : "historicozoom" },
 		 * "mostraMenuSuspenso" : { permiteLogin : true, marcadores : true, idhtml : "menus", deslocaEsquerda : 0, parametrosYUI : { iframe :
 		 * false, autosubmenudisplay : false, showdelay : 200, hidedelay : 500, lazyload : false } }, "mostraMenuLista" : { idhtml :
 		 * "menuLista" }, "mostraVersao" : { idhtml : "versaoi3geo" }, "mostraEmail" : { idhtml : "emailInstituicao" } };

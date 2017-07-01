@@ -1,17 +1,9 @@
 <?php
 //utilizado para facilitar a carga de javascript das interfaces do i3geo
 //tipo pode ser OL|OSM|GM (openlayers, OSM, google maps)
-?>
-i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://"
-+ window.location.host + "/i3geo";
-//ajusta o tamanho do navegador ao tamanho da tela
-i3GEO.configura.autotamanho = false;
-i3GEO.Interface.IDCORPO = "mapai3Geo";
 
-i3GEO.Interface.openlayers.TILES = true;
-
-<?php
 $tipo = filter_var($_GET["tipo"], FILTER_SANITIZE_STRING, FILTER_FLAG_STRIP_HIGH);
+//e necessario definir isso pq os parametros de config ficam mais adiante no script em linha da interface
 if($tipo == "OL"){
 	echo 'i3GEO.Interface.ATUAL = "openlayers";';
 	echo 'i3GEO.Interface.openlayers.googleLike = false;';
@@ -24,29 +16,15 @@ if($tipo == "GM"){
 	echo 'i3GEO.Interface.ATUAL = "googlemaps";';
 }
 ?>
-i3GEO.scrollerWidth = 0;
-
-i3GEO.configura.guardaExtensao = true;
-
-i3GEO.configura.mapaRefDisplay = "none";
-i3GEO.ajuda.ATIVAJANELA = false;
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.comentarios = false;
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.inde = true;
-i3GEO.arvoreDeTemas.INCLUIINDIBR = true;
-i3GEO.arvoreDeCamadas.VERIFICAABRANGENCIATEMAS = false;
-i3GEO.arvoreDeCamadas.MOSTRALISTAKML = false;
-i3GEO.arvoreDeCamadas.MOSTRATITULO = false;
-i3GEO.mapa.AUTORESIZE = true;
 i3GEO.janela.ativaAlerta();
 i3GEO.finalizaAPI = function() {
-
+	//i3GEO.maparef.inicia();
+	//
+	//(largura, altura, topo, esquerda);
+	//i3GEO.mapa.legendaHTML.libera("sim", 302, 300, 50, 100);
+	//i3GEO.mapa.dialogo.locregiao(215, "", 150, 150);
+	//i3GEO.mapa.dialogo.metaestat(215, "", 150, 150);
 };
-//indica se a opcao de navegacao nas pastas do servidor sera ativada
-i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
-i3GEO.janela.TRANSICAOSUAVE = true;
-
-//i3GEO.configura.guardaExtensao = false;
-
 (function() {
 	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === false){
 		var eng = new ol.layer.Tile(
@@ -214,24 +192,3 @@ i3GEO.janela.TRANSICAOSUAVE = true;
 			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ osm, aquarela, toner, tonerlite, layMapQuestAerial ];
 	}
 })();
-//para a interface googlemaps
-if(i3GEO.Interface.ATUAL === "googlemaps"){
-	i3GEO.configura.diminuiyM = 1;
-	i3GEO.configura.diminuiyN = 1;
-	i3GEO.Interface.googlemaps.MAPOPTIONS = {
-		scaleControl : true,
-		mapTypeControl:true,
-		mapTypeControlOptions: {
-			position:google.maps.ControlPosition.LEFT_BOTTOM
-		},
-		zoomControl:true,
-		zoomControlOptions: {
-			style:google.maps.ZoomControlStyle.SMALL,
-			position:google.maps.ControlPosition.LEFT_CENTER
-		},
-		streetViewControl:true,
-		streetViewControlOptions: {
-			position:google.maps.ControlPosition.LEFT_CENTER
-		}
-	};
-}

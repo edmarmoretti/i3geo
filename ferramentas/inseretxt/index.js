@@ -208,10 +208,6 @@ i3GEOF.inseretxt = {
 	*/
 	ativaFoco: function(){
 		i3GEO.eventos.cliquePerm.desativa();
-		i3GEO.util.mudaCursor(i3GEO.configura.cursores,"crosshair",i3GEO.Interface.IDMAPA,i3GEO.configura.locaplic);
-		if($i("img")){
-			$i("img").style.cursor="pointer";
-		}
 	},
 	/*
 	Function: corj

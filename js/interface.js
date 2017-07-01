@@ -58,94 +58,6 @@ var i3geoOL;
 i3GEO.Interface =
 	{
 		/**
-		 * Formato de gera&ccedil;&atilde;o da imagem.
-		 *
-		 * Os formatos devem estar definidos no mapfile geral1windows.map e geral1.map. A defini&ccedil;&atilde;o dessa vari&aacute;vel
-		 * n&atilde;o afeta a interface padr&atilde;o, que utiliza a defini&ccedil;&atilde;o que estiver ativa nos mapfiles de
-		 * inicializa&ccedil;&atilde;o.
-		 *
-		 * Tipo:
-		 *
-		 * {MAPSERVER OUTPUTFORMAT}
-		 *
-		 * Default:
-		 *
-		 * AGG_Q
-		 */
-		OUTPUTFORMAT : "AGG_Q",
-		/**
-		 * Propriedade: BARRABOTOESTOP
-		 *
-		 * Distancia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao topo do mapa.
-		 *
-		 * Tipo:
-		 *
-		 * {number}
-		 *
-		 * Default:
-		 *
-		 * 12
-		 */
-		BARRABOTOESTOP : 12,
-		/**
-		 * Propriedade: BARRABOTOESLEFT
-		 *
-		 * Distancia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
-		 *
-		 * Tipo:
-		 *
-		 * {number}
-		 *
-		 * Default:
-		 *
-		 * 3
-		 */
-		BARRABOTOESLEFT : 3,
-		/**
-		 * Propriedade: BARRADEZOOMRIGHT
-		 *
-		 * Distancia da barra de bot&otilde;es em rela&ccedil;&atilde;o ao lado direito do mapa.
-		 *
-		 * Utilizado para ajustar a barra de zoom
-		 *
-		 * Tipo:
-		 *
-		 * {number}
-		 *
-		 * Default
-		 *
-		 * 50
-		 */
-		BARRADEZOOMRIGHT : 0,
-		/**
-		 * Propriedade: BARRADEZOOMTOP
-		 *
-		 * Distancia da barra de zoom em rela&ccedil;&atilde;o ao topo do mapa.
-		 *
-		 * Tipo:
-		 *
-		 * {number}
-		 *
-		 * Default:
-		 *
-		 * 20
-		 */
-		BARRADEZOOMTOP : 20,
-		/**
-		 * Propriedade: BARRADEZOOMLEFT
-		 *
-		 * Distancia da barra de zoom em rela&ccedil;&atilde;o ao lado esquerdo do mapa.
-		 *
-		 * Tipo:
-		 *
-		 * {number}
-		 *
-		 * Default:
-		 *
-		 * 10
-		 */
-		BARRADEZOOMLEFT : 10,
-		/**
 		 * Propriedade: ATUAL
 		 *
 		 * Interface utilizada na cria&ccedil;&atilde;o e controle do mapa.
@@ -187,10 +99,6 @@ i3GEO.Interface =
 		 * corpoMapa
 		 */
 		IDCORPO : "openlayers",
-		/**
-		 * depreciado na versao 6.0
-		 */
-		ATIVAMENUCONTEXTO : false,
 		/**
 		 * Variavel: IDMAPA
 		 *
@@ -247,9 +155,6 @@ i3GEO.Interface =
 					i3GEO.janela.fechaAguarde("googleMapsAguarde");
 					i3GEO.arvoreDeCamadas.CAMADAS = [];
 					i3GEO.atualiza();
-					if(i3GEO.Interface.atual2gm.insereIcone === true){
-						i3GEO.mapa.insereDobraPagina("openlayers", i3GEO.configura.locaplic + "/imagens/dobraopenlayers.png");
-					}
 				};
 				i3GEO.php.converte2googlemaps(temp);
 			}
@@ -287,9 +192,6 @@ i3GEO.Interface =
 					i3GEO.janela.fechaAguarde("OpenLayersAguarde");
 					i3GEO.arvoreDeCamadas.CAMADAS = [];
 					i3GEO.atualiza();
-					if(i3GEO.Interface.atual2ol.insereIcone === true){
-						i3GEO.mapa.insereDobraPagina("googlemaps", i3GEO.configura.locaplic + "/imagens/dobragooglemaps.png");
-					}
 					i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
 				};
 				i3GEO.php.converte2openlayers(temp);
@@ -483,7 +385,6 @@ i3GEO.Interface =
 		 * Cria o objeto i3geoOL que pode receber os m&eacute;todos da API do OpenLayers
 		 */
 		openlayers : {
-			// TODO incluir na ferramenta de propriedades
 			/**
 			 * Propriedade: parametrosMap
 			 *
@@ -510,38 +411,6 @@ i3GEO.Interface =
 
 			},
 			/**
-			 * Propriedade: interacoes
-			 *
-			 * Interacoes utilizadas no mapa.
-			 *
-			 * http://openlayers.org/en/v3.4.0/apidoc/ol.interaction.Interaction.html?unstable=true
-			 *
-			 * Parametros do objeto Map.options.interactions do OpenLayers
-			 *
-			 * Se for um array vazio, as interacoes default sao adicionadas na funcao de i3GEO.Interface.openlayers.cria
-			 *
-			 * Tipo:
-			 *
-			 * {array}
-			 */
-			interacoes : [],
-			/**
-			 * Propriedade: FUNDOTEMA
-			 *
-			 * Estilo "background" do nome do tema na &aacute;rvore de camadas enquanto o mesmo est&aacute; sendo carregado.
-			 *
-			 * Permite destacar o nome do tema que est&aacute; em processo de carregamento
-			 *
-			 * Tipo:
-			 *
-			 * {string}
-			 *
-			 * Default:
-			 *
-			 * yellow
-			 */
-			FUNDOTEMA : "",
-			/**
 			 * Propriedade: TILES
 			 *
 			 * Indica se por default ser&aacute; utilizado o modo de navega&ccedil;&atilde;o em tiles em todas as camadas do mapa
@@ -560,105 +429,6 @@ i3GEO.Interface =
 			 */
 			TILES : true,
 			/**
-			 * Propriedade: GADGETS
-			 *
-			 * Lista dos controles espec&iacute;ficos da API do OpenLayers que ser&atilde;o inseridos ou n&atilde;o no mapa
-			 *
-			 * Tipo:
-			 *
-			 * {object}
-			 *
-			 * Default:
-			 *
-			 * {ZoomSlider:true,Zoom: false,LayerSwitcher:true,ScaleLine:true,OverviewMap:false}
-			 */
-			GADGETS : {
-				ZoomSlider : true,
-				Zoom : true,
-				ScaleLine : true,
-				OverviewMap : false
-			},
-			/**
-			 * Propriedade: SCALELINE
-			 *
-			 * Propriedades da API do OL3 para o controle de barra de escala
-			 *
-			 * http://openlayers.org/en/v3.4.0/apidoc/ol.control.ScaleLine.html
-			 *
-			 * Tipo:
-			 *
-			 * {object}
-			 *
-			 * Default: {}
-			 */
-			SCALELINE : {
-
-			},
-			/**
-			 * Propriedade: ZOOM
-			 *
-			 * Propriedades da API do OL3 para o controle de zoom
-			 *
-			 * http://openlayers.org/en/v3.4.0/apidoc/ol.control.Zoom.html
-			 *
-			 * Tipo:
-			 *
-			 * {object}
-			 *
-			 * Default: {}
-			 */
-			ZOOM : {
-
-			},
-			/**
-			 * Propriedade: ZOOMSLIDER
-			 *
-			 * Propriedades da API do OL3 para o controle de zoomBar
-			 *
-			 * http://openlayers.org/en/v3.4.0/apidoc/ol.control.ZoomSlider.html
-			 *
-			 * Tipo:
-			 *
-			 * {object}
-			 *
-			 * Default: {}
-			 */
-			ZOOMSLIDER : {
-
-			},
-			/**
-			 * Propriedade: MINEXTENT
-			 *
-			 * Menor extens&atilde;o geogr&aacute;fica que pode ser mostrada no mapa
-			 *
-			 * Tipo:
-			 *
-			 * {array}
-			 *
-			 * Default:
-			 *
-			 * [-0.0003, -0.0003, 0.0003, 0.0003]
-			 */
-			MINEXTENT : [
-				-0.0003, -0.0003, 0.0003, 0.0003
-			],
-			/**
-			 * Propriedade: MAXEXTENT
-			 *
-			 * Maior extens&atilde;o geogr&aacute;fica que pode ser mostrada no mapa
-			 *
-			 * Tipo:
-			 *
-			 * {array}
-			 *
-			 * Default:
-			 *
-			 * [-180, -90, 180, 90]
-			 */
-			MAXEXTENT : [
-				-180, -90, 180, 90
-			],
-			/**
 			 * Propriedades: LAYERSADICIONAIS
 			 *
 			 * Objetos do tipo LAYER que ser&atilde;o adicionados ap&oacute;s a crioa&ccedil;&atilde;o de todos os layers default.
@@ -669,12 +439,6 @@ i3GEO.Interface =
 			 *
 			 */
 			LAYERSADICIONAIS : [],
-			/**
-			 * Propriedade: LAYERFUNDO
-			 *
-			 * Nome do layer do tipo baselayer que sera ativado
-			 */
-			LAYERFUNDO : "",
 			/**
 			 * Propriedade: googleLike
 			 *
@@ -763,8 +527,8 @@ i3GEO.Interface =
 					icone.style.left = "3px";
 					icone.onclick = function() {
 						i3GEO.janela.prompt($trad("tolerancia"), function() {
-							i3GEO.mapa.RESOLUCAOTIP = $i("i3GEOjanelaprompt").value;
-						}, i3GEO.mapa.RESOLUCAOTIP);
+							i3GEO.configura.ferramentas.identifica.resolution = $i("i3GEOjanelaprompt").value;
+						}, i3GEO.configura.ferramentas.identifica.resolution);
 						return false;
 					};
 					cabecalho.appendChild(icone);
@@ -922,18 +686,6 @@ i3GEO.Interface =
 			cria : function(w, h) {
 				var f, ins, i = $i(i3GEO.Interface.IDCORPO);
 
-				if(i3GEO.Interface.openlayers.interacoes.length === 0){
-					i3GEO.Interface.openlayers.interacoes = [
-						new ol.interaction.DoubleClickZoom(),
-						new ol.interaction.KeyboardPan(),
-						new ol.interaction.KeyboardZoom(),
-						new ol.interaction.MouseWheelZoom(),
-						new ol.interaction.PinchRotate(),
-						new ol.interaction.PinchZoom(),
-						new ol.interaction.DragZoom(),
-						new ol.interaction.DragPan()
-					];
-				}
 				if (i) {
 					f = $i("openlayers");
 					if (!f) {
@@ -947,6 +699,7 @@ i3GEO.Interface =
 					}
 				}
 				i3GEO.Interface.IDMAPA = "openlayers";
+				i3GEO.Interface.openlayers.parametrosMap.target = "openlayers";
 				if (i3GEO.Interface.openlayers.googleLike === false) {
 					i3GEO.Interface.openlayers.parametrosView.projection = "EPSG:4326";
 				}
@@ -956,7 +709,6 @@ i3GEO.Interface =
 				i3GEO.Interface.openlayers.parametrosMap.view = new ol.View(
 					i3GEO.Interface.openlayers.parametrosView
 				);
-				i3GEO.Interface.openlayers.parametrosMap.interactions = i3GEO.Interface.openlayers.interacoes;
 				//
 				// cria o objeto mapa
 				//
@@ -1080,52 +832,13 @@ i3GEO.Interface =
 				//
 				var montaMapa =
 					function() {
-						var at, pz, temp, layers, i, texto, estilo, layersn, openlayers = i3GEO.Interface.openlayers;
+						var openlayers = i3GEO.Interface.openlayers;
 						i3geoOL.updateSize();
-
 						openlayers.registraEventos();
 						openlayers.zoom2ext(i3GEO.parametros.mapexten);
-
 						// corrige o posicionamento da barra de botoes
 						$i("openlayers").getElementsByClassName("ol-overlaycontainer-stopevent")[0].style.position = "unset";
-
-						// controles de navegacao
-						if (openlayers.GADGETS.Zoom === true) {
-							pz = new ol.control.Zoom(openlayers.ZOOM);
-							pz.setMap(i3geoOL);
-						}
-						if (openlayers.GADGETS.ZoomSlider === true && i3GEO.parametros.h > 600 && i3GEO.parametros.w > 500) {
-							pz = new ol.control.ZoomSlider(openlayers.ZOOMSLIDER);
-							pz.setMap(i3geoOL);
-						}
-						if (openlayers.GADGETS.ScaleLine === true && i3GEO.parametros.h > 600 && i3GEO.parametros.w > 500) {
-							pz = new ol.control.ScaleLine(openlayers.SCALELINE);
-							pz.setMap(i3geoOL);
-						}
-						at = new ol.control.Attribution({
-							collapsible: false
-						});
-						at.setMap(i3geoOL);
-
 						openlayers.criaLayers();
-
-						//TODO layerSwitcher talvez volte um dia https://twitter.com/RemiBovard/status/525028570780139520
-						/*
-						else {
-							if (openlayers.GADGETS.LayerSwitcher === true && i3GEO.arvoreDeCamadas.INCLUILFUNDO === false) {
-								// nao existe no OL3
-								// i3geoOL.addControl(new OpenLayers.Control.LayerSwitcher());
-							}
-						}
-						*/
-						if (i3GEO.configura.mapaRefDisplay !== "none") {
-							if (i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay")) {
-								i3GEO.configura.mapaRefDisplay = i3GEO.util.pegaCookie("i3GEO.configura.mapaRefDisplay");
-							}
-							if (i3GEO.configura.mapaRefDisplay === "block") {
-								i3GEO.maparef.inicia();
-							}
-						}
 					};
 				if (i3GEO.arvoreDeCamadas.ATIVATEMA === "") {
 					i3GEO.arvoreDeCamadas.ATIVATEMA =
@@ -1134,15 +847,11 @@ i3GEO.Interface =
 				montaMapa();
 
 				i3GEO.coordenadas.ativaEventos();
-				i3GEO.ajuda.ativaLetreiro(i3GEO.parametros.mensagens);
 				i3GEO.idioma.mostraSeletor();
-
-				//i3GEO.util.arvore("<b>" + $trad("p13") + "</b>", "listaPropriedades", i3GEO.configura.listaDePropriedadesDoMapa);
 
 				if (i3GEO.parametros.kmlurl !== "") {
 					i3GEO.Interface.openlayers.adicionaKml(true, i3GEO.parametros.kmlurl);
 				}
-				//i3GEO.Interface.ativaBotoes();
 				// executa fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o, se
 				// houver
 				if (jQuery.isFunction(i3GEO.finalizaAPI)) {
@@ -1152,9 +861,6 @@ i3GEO.Interface =
 						eval(i3GEO.finalizaAPI);
 					}
 				}
-				// verifica se nas preferencias existem ferramentas que devem ser
-				// abertas
-				i3GEO.configura.iniciaFerramentas.executa();
 			},
 			/**
 			 * Aplica um valor de opacidade aos layers do mapa
@@ -1412,7 +1118,6 @@ i3GEO.Interface =
 					tilePixelRatio : 1,
 					preload : Infinity,
 					projection : 'EPSG:4326'
-				// pode ser 0
 				};
 				if (i3GEO.Interface.openlayers.googleLike === true) {
 					opcoes.projection = 'EPSG:3857';
@@ -1486,24 +1191,28 @@ i3GEO.Interface =
 								} else {
 									// verifica se havera apenas um tile
 									// 10 e do tipo grid de coordenadas
-									if (camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim"
-										|| camada.connectiontype === 10
-										|| (camada.type === 0 && camada.cache === "nao")
-										|| camada.type === 8) {
+									if(i3GEO.Interface.openlayers.TILES == false){
 										opcoes.singleTile = true;
 									} else {
-										temp =
-											camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile =
-												!(i3GEO.Interface.openlayers.TILES);
-									}
-									if (camada.tiles === "nao") {
-										opcoes.singleTile = true;
-									}
-									// se for definido a expansao e corte da imagem,
-									// ou cache
-									// e necessario usar tile
-									if (camada.tiles === "sim" || camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
-										opcoes.singleTile = false;
+										if (camada.tiles === "nao" || camada.escondido.toLowerCase() === "sim"
+											|| camada.connectiontype === 10
+											|| (camada.type === 0 && camada.cache === "nao")
+											|| camada.type === 8) {
+											opcoes.singleTile = true;
+										} else {
+											temp =
+												camada.type === 3 ? opcoes.singleTile = false : opcoes.singleTile =
+													!(i3GEO.Interface.openlayers.TILES);
+										}
+										if (camada.tiles === "nao") {
+											opcoes.singleTile = true;
+										}
+										// se for definido a expansao e corte da imagem,
+										// ou cache
+										// e necessario usar tile
+										if (camada.tiles === "sim" || camada.cache === "sim" || (camada.cortepixels && camada.cortepixels > 0)) {
+											opcoes.singleTile = false;
+										}
 									}
 
 									if (camada.cache) {
@@ -1604,9 +1313,6 @@ i3GEO.Interface =
 				}
 				else if (i3GEO.parametros.copyright != "" && $i("i3GEOcopyright")){
 					$i("i3GEOcopyright").innerHTML = i3GEO.parametros.copyright;
-				}
-				if (i3GEO.Interface.openlayers.LAYERFUNDO != "") {
-					i3GEO.Interface.openlayers.ativaFundo(i3GEO.Interface.openlayers.LAYERFUNDO);
 				}
 			},
 			/**
@@ -1749,7 +1455,6 @@ i3GEO.Interface =
 
 				baseLayers = i3geoOL.getLayersBase();
 				n = baseLayers.length;
-				i3GEO.Interface.openlayers.LAYERFUNDO = "";
 				// desliga todos
 				for (i = 0; i < n; i++) {
 					baseLayers[i].setVisible(false);
@@ -1757,7 +1462,6 @@ i3GEO.Interface =
 				for (i = 0; i < n; i++) {
 					if (baseLayers[i].get("name") === nome) {
 						baseLayers[i].setVisible(true);
-						i3GEO.Interface.openlayers.LAYERFUNDO = nome;
 					}
 				}
 			},
@@ -2362,8 +2066,8 @@ i3GEO.Interface =
 				elem.style.marginLeft = "5px";
 				elem.onclick = function() {
 					i3GEO.janela.prompt($trad("tolerancia"), function() {
-						i3GEO.mapa.RESOLUCAOTIP = $i("i3GEOjanelaprompt").value;
-					}, i3GEO.mapa.RESOLUCAOTIP);
+						i3GEO.configura.ferramentas.identifica.resolution = $i("i3GEOjanelaprompt").value;
+					}, i3GEO.configura.ferramentas.identifica.resolution);
 				};
 				temp.appendChild(elem);
 				elem = document.createElement("img");
@@ -2468,18 +2172,7 @@ i3GEO.Interface =
 				}
 				montaMapa = function(retorno) {
 					var sw, ne, estilo, dobra = $i("i3GEOdobraPagina");
-					if (i3GEO.Interface.googlemaps.ESTILOS && i3GEO.Interface.googlemaps.ESTILOPADRAO != "") {
-						i3GEO.Interface.googlemaps.MAPOPTIONS.mapTypeId = i3GEO.Interface.googlemaps.ESTILOPADRAO;
-					}
-					// verifica o posicionamento da barra de zoom
-					if (i3GEO.Interface.BARRADEZOOMRIGHT != 0) {
-						i3GEO.Interface.googlemaps.MAPOPTIONS.zoomControlOptions = {
-							position : google.maps.ControlPosition.RIGHT_TOP
-						};
-						i3GEO.Interface.googlemaps.MAPOPTIONS.panControlOptions = {
-							position : google.maps.ControlPosition.RIGHT_TOP
-						};
-					}
+
 					try {
 						i3GeoMap = new google.maps.Map($i(i3GEO.Interface.IDMAPA), i3GEO.Interface.googlemaps.MAPOPTIONS);
 					} catch (e) {
@@ -2538,7 +2231,6 @@ i3GEO.Interface =
 							eval(i3GEO.finalizaAPI);
 						}
 					}
-					i3GEO.configura.iniciaFerramentas.executa();
 					// ajusta a extensao geografica do mapa
 					google.maps.event.addListenerOnce(i3GeoMap, 'idle', function() {
 						var z = i3GeoMap.getZoom();

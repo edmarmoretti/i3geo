@@ -535,14 +535,6 @@ i3GEO.eventos =
 					i3GEO.eventos.cliquePerm.status = true;
 					i3GEO.eventos.posicaoMouseMapa(exy);
 					try {
-						try {
-							clearTimeout(i3GEO.eventos.TIMERPARADO);
-						} catch (e) {}
-						i3GEO.eventos.TIMERPARADO = setTimeout(function() {
-							i3GEO.eventos.mouseParado();
-						}, i3GEO.configura.tempoMouseParado);
-					} catch (e) {}
-					try {
 						i3GEO.eventos.mousemoveMapa();
 					} catch (e) {}
 				};

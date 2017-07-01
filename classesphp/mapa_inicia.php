@@ -54,8 +54,6 @@ $navegadoresLocais - array que indica quais usu&aacute;rios podem navegar no ser
 
 $cp - Objeto CPAINT.
 
-$embedLegenda - inclui a legenda no corpo do mapa sim|nao
-
 $map_file - Arquivo map file.
 
 $mapext - Extens&atilde;o geogr&aacute;fica do mapa.
@@ -102,7 +100,7 @@ Retorno:
 */
 function iniciaMapa()
 {
-	global $googleApiKey,$i3geoPermiteLogin, $dir_tmp, $logExec, $postgis_mapa,$statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$embedLegenda,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
+	global $googleApiKey,$i3geoPermiteLogin, $dir_tmp, $logExec, $postgis_mapa,$statusFerramentas,$saikuUrl,$emailInstituicao,$openid,$interfacePadrao,$mensagemInicia,$kmlurl,$tituloInstituicao,$tempo,$navegadoresLocais,$locaplic,$map_file,$mapext,$w,$h,$R_path,$locmapserv,$utilizacgi,$expoeMapfile,$interface;
 	//
 	//verifica se algum tema e restrito a determinado usuario
 	//as funcoes de validacao encontram-se em funcoes_gerais.php
@@ -209,28 +207,12 @@ function iniciaMapa()
 	//verifica se a legenda deve ser embebida no mapa
 	//
 	$legenda = $m->mapa->legend;
-	$embedLegenda == "sim" ? $legenda->set("status",MS_EMBED) : $legenda->set("status",MS_OFF);
+	$legenda->set("status",MS_OFF);
 	//
 	//salva as altera&ccedil;&otilde;es feitas
 	//
 	$m->mapa->setmetadata("ows_enable_request","*");
 	$m->salva();
-	//prepara a legenda para incluir no mapa, preenchendo os nomes das classes em branco
-	if (strtolower($embedLegenda) == "sim")
-	{
-		foreach ($m->layers as $l)
-		{
-			if (($l->data != "") && (strtoupper($l->getmetadata("escondido")) != "SIM") && (strtolower($l->getmetadata("tema")) != "nao"))
-			{
-				if ($l->numclasses > 0)
-				{
-					$classe = $l->getclass(0);
-					if (($classe->name == "") || ($classe->name == " "))
-					{$classe->set("name",$l->getmetadata("tema"));}
-				}
-			}
-		}
-	}
 	//
 	//cuidado ao mexer aqui
 	//o mapa precisa ser salvo para registrar a extens&atilde;o geogr&aacute;fica
@@ -345,12 +327,10 @@ function iniciaMapa()
 	$res["kmlurl"] = $kmlurl;
 	$res["mensageminicia"] = $mensagemInicia;
 	$res["interfacePadrao"] = $interfacePadrao;
-	$res["embedLegenda"] =	$embedLegenda;
 	$res["w"] = $w;
 	$res["h"] = $h;
 	$res["titulo"] = $tituloInstituicao;
 	$res["tempo"] = microtime(1) - $tempo;
-	$res["embedLegenda"] = $embedLegenda;
 	$res["erro"] = '';
 	$res["mappath"] = "";//$imgo->imagepath;
 	$res["mapurl"] = "";//$imgo->imageurl;

@@ -88,11 +88,6 @@ i3GEO.guias =
 						i3GeoMap.setOptions({
 							draggable : true
 						});
-						i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
-					}
-					if (i3GEO.Interface.ATUAL === "openlayers") {
-						//i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
-						// i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLzoom);
 					}
 				}
 			},
@@ -517,6 +512,7 @@ i3GEO.guias =
 					temp.style.display = "none";
 				}
 			}
+			$("#i3GEOguiaMovelConteudo").css("display","none");
 		},
 		/**
 		 * Mostra no mapa uma determinada guia
@@ -545,6 +541,7 @@ i3GEO.guias =
 				temp = $i(i3GEO.guias.CONFIGURA[guia].idconteudo);
 				if (temp) {
 					temp.style.display = "block";
+					$("#i3GEOguiaMovelMolde,#i3GEOguiaMovelConteudo").css("display","block");
 				}
 			}
 		},
@@ -612,8 +609,8 @@ i3GEO.guias =
 						"slow"
 				);
 			} else {
-				$("#i3GEOguiaMovelIcones,#i3GEOguiaMovelConteudo").css("display","block");
-				molde.css("display","block").animate(
+				$("#i3GEOguiaMovelIcones").css("display","block");
+				molde.animate(
 						{ "width": i3GEO.guias.LARGURAGUIAMOVEL + "px" },
 						"slow"
 				);

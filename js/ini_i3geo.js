@@ -132,7 +132,6 @@ var i3GEO = {
 	 *
 	 * geoip {sim|nao} - indica se o geoip est&aacute; instalado
 	 *
-	 * listavisual {String} - (depreciado) lista de visuais dispon&iacute;veis
 	 *
 	 * utilizacgi {sim|nao} - indica se o mapa atual est&aacute; no modo CGI
 	 *
@@ -173,9 +172,6 @@ var i3GEO = {
 	 * interfacePadrao {String} - interface padr&atilde;o definida em
 	 * ms_configura
 	 *
-	 * embedLegenda {String} - sim|nao indica se na inicializa&ccedil;&atilde;o
-	 * a legenda foi inserida no conte&uacute;do do mapa ou n&atilde;o
-	 *
 	 * celularef {Numeric} - tamanho da c&eacute;lula do mapa de
 	 * refer&ecirc;ncia
 	 *
@@ -202,7 +198,6 @@ var i3GEO = {
 		extentTotal : "",
 		mapimagem : "",
 		geoip : "",
-		listavisual : "", // depreciado
 		utilizacgi : "",
 		versaoms : "",
 		versaomscompleta : "",
@@ -217,7 +212,6 @@ var i3GEO = {
 		kmlurl : "",
 		mensageminicia : "",
 		interfacePadrao : "openlayers.htm",
-		embedLegenda : "nao",
 		autenticadoopenid : "nao",
 		cordefundo : "",
 		copyright : "",
@@ -253,7 +247,6 @@ var i3GEO = {
 	 * 		if ($i("i3GEOlogoMarca")) {
 	 * 			$i("i3GEOlogoMarca").style.display = "none";
 	 * 		}
-	 * 		i3GEO.mapa.insereDobraPagina("googlemaps","../imagens/dobragooglemaps.png");
 	 * 	};
 	 *
 	 * (end)
@@ -331,6 +324,38 @@ var i3GEO = {
 		i3GEO.configura.guardaExtensao = (c.hasOwnProperty("saveExtension") && c.saveExtension == true) ? true:false;
 		//TODO implementar composite para versao 7 do Mapserver
 		i3GEO.configura.tipoimagem = (c.hasOwnProperty("posRenderType") && c.posRenderType != "") ? c.posRenderType:"nenhum";
+		if(c.hasOwnProperty("toolTipSize") && c.toolTipSize.length > 1){
+			i3GEO.configura.alturatip = c.toolTipSize[0];
+			i3GEO.configura.larguratip = c.toolTipSize[1];
+		}
+		i3GEO.configura.locaplic = (c.hasOwnProperty("i3GeoServer") && c.i3GeoServer != "") ? c.i3GeoServer:i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";
+		if(c.hasOwnProperty("tools")){
+			i3GEO.configura.ferramentas = c.tools;
+		}
+		i3GEO.Interface.IDCORPO = (c.hasOwnProperty("mapBody") && c.mapBody != "") ? c.mapBody:"mapai3Geo";
+		if(c.hasOwnProperty("components")){
+			i3GEO.arvoreDeTemas.IDSMENUS = (c.components.hasOwnProperty("idsMenus")) ? c.components.idsMenus : [];
+			i3GEO.catalogoMenus.IDSMENUS = (c.components.hasOwnProperty("idsMenus")) ? c.components.idsMenus : [];
+			i3GEO.busca.SERVICO = (c.components.hasOwnProperty("searchService")) ? c.components.searchService : "";
+			i3GEO.busca.SERVICOWMS = (c.components.hasOwnProperty("searchWms")) ? c.components.searchWms : "";
+			if(c.components.referenceMapPosition){
+				i3GEO.maparef.TOP = c.components.referenceMapPosition[0];
+				i3GEO.maparef.RIGHT = c.components.referenceMapPosition[1];
+			}
+		}
+		if(c.hasOwnProperty("openLayers") && c.mapType !== "GM" ){
+			i3GEO.Interface.ATUAL = "openlayers";
+			i3GEO.Interface.openlayers.googleLike = (c.mapType == "OSM") ? true:false;
+			//TODO singletile nao funciona
+			i3GEO.Interface.openlayers.TILES = (c.hasOwnProperty("singleTile") && c.singleTile != "") ? !c.singleTile:true;
+			i3GEO.Interface.openlayers.parametrosMap = c.openLayers.MapOptions;
+			i3GEO.Interface.openlayers.parametrosView = c.openLayers.ViewOptions;
+		}
+		if(c.hasOwnProperty("googleMaps") && c.mapType == "GM"){
+			i3GEO.Interface.ATUAL = "googlemaps";
+			i3GEO.Interface.googlemaps.ESTILOPADRAO = c.googleMaps.MapOptions.mapTypeId;
+			i3GEO.Interface.googlemaps.MAPOPTIONS = c.googleMaps.MapOptions;
+		}
 	},
 	//
 	//mashuppar e um parametro antigo usado no i3geo para alterar o mapa de inicializacao
@@ -628,9 +653,6 @@ var i3GEO = {
 
 						i3GEO.arvoreDeCamadas.registaCamadas(retorno.data.temas);
 
-						if (retorno.data.variaveis.navegacaoDir.toLowerCase() === "sim") {
-							i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = true;
-						}
 						//
 						//complementa o objeto com os parametros para o menu de ferramentas
 						//
@@ -727,7 +749,6 @@ var i3GEO = {
 			}
 			i3GEO.php.inicia(
 				montaMapa,
-				i3GEO.configura.embedLegenda,
 				i3GEO.parametros.w,
 				i3GEO.parametros.h);
 		}
@@ -748,9 +769,7 @@ var i3GEO = {
 			}
 		}
 		i3GEO.guias.inicia();
-		if (i3GEO.mapa.AUTORESIZE === true) {
-			i3GEO.mapa.ativaAutoResize();
-		}
+		i3GEO.mapa.ativaAutoResize();
 	},
 	/**
 	 * Function: atualiza
@@ -910,23 +929,19 @@ var i3GEO = {
 			console.info("i3GEO.calculaTamanho()");
 
 		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, antigoh = i3GEO.parametros.h;
-		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
-		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
 		document.body.style.width = "100%";
 		temp = i3GEO.util.tamanhoBrowser();
 		novow = temp[0];
 		novoh = temp[1];
-		temp = (antigoh - (novoh - diminuiy));
+		temp = (antigoh - novoh);
 
 		document.body.style.height = novoh
 			+ "px";
 
 		w = novow
-			- menos
-			- diminuix + i3GEO.scrollerWidth;
-		h = novoh
-			- diminuiy;
+			- menos + i3GEO.scrollerWidth;
+		h = novoh;
 
 		i3GEO.parametros.w = w;
 		i3GEO.parametros.h = h;
@@ -946,22 +961,18 @@ var i3GEO = {
 			console.info("i3GEO.reCalculaTamanho()");
 
 		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, antigoh = i3GEO.parametros.h;
-		diminuix = (navm) ? i3GEO.configura.diminuixM : i3GEO.configura.diminuixN;
-		diminuiy = (navm) ? i3GEO.configura.diminuiyM : i3GEO.configura.diminuiyN;
 		menos = 0;
 		document.body.style.width = "100%";
 		temp = i3GEO.util.tamanhoBrowser();
 		novow = temp[0];
 		novoh = temp[1];
-		temp = (antigoh - (novoh - diminuiy));
+		temp = antigoh - novoh;
 
 		document.body.style.height = novoh
 			+ "px";
 		w = novow
-			- menos
-			- diminuix + i3GEO.scrollerWidth;
-		h = novoh
-			- diminuiy;
+			- menos + i3GEO.scrollerWidth;
+		h = novoh;
 
 		temp = $i(i3GEO.Interface.IDMAPA);
 		if (temp) {

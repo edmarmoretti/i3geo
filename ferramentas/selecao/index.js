@@ -380,7 +380,6 @@ i3GEOF.selecao =
 				}
 			};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "crosshair", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 		},
 		/*
 		 * Function: ativaFoco
@@ -389,7 +388,6 @@ i3GEOF.selecao =
 		 */
 		ativaFoco : function() {
 			i3GEO.eventos.cliquePerm.desativa();
-			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "crosshair", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 			i3GEOF.selecao.pegaTemasSel();
 			var i = $i("i3GEOF.selecao_c").style;
 			i3GEO.janela.ULTIMOZINDEX++;
@@ -950,7 +948,6 @@ i3GEOF.selecao =
 				inicia : function() {
 					var n, i, evtclick = null;
 					i3GEO.eventos.cliquePerm.desativa();
-					i3GEO.util.mudaCursor(i3GEO.configura.cursores, "pointer", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
 					i3GEO.editorGM.drawingManager.setOptions({
 						drawingMode : null
 					});

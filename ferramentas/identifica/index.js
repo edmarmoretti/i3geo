@@ -430,8 +430,6 @@ i3GEOF.identifica =
 		 */
 		ativaFoco : function(id) {
 			i3GEOF.identifica.listaTemas("ligados");
-			i3GEO.util.mudaCursor(i3GEO.configura.cursores, "identifica", i3GEO.Interface.IDMAPA, i3GEO.configura.locaplic);
-			// i3GEOF.identifica.mostraImagemPonto(id);
 		},
 		mostraImagemPonto : function(id) {
 			if (i3GEO.Interface.ATUAL === "googleearth") {

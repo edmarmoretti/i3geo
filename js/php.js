@@ -1222,10 +1222,10 @@ i3GEO.php =
 		 *
 		 * <INICIA>
 		 */
-		inicia : function(funcao, embedLegenda, w, h) {
+		inicia : function(funcao, w, h) {
 			// i3GEO.php.verifica();
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-				"funcao=inicia&embedLegenda=" + embedLegenda + "&w=" + w + "&h=" + h + "&g_sid=" + i3GEO.configura.sid + "&interface=", cp =
+				"funcao=inicia&w=" + w + "&h=" + h + "&g_sid=" + i3GEO.configura.sid + "&interface=", cp =
 				new cpaint();
 			// muda a interface na criacao
 			if (i3GEO.Interface.openlayers.googleLike === true) {

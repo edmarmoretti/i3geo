@@ -7,7 +7,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 <title>i3GEO - OpenLayers</title>
 <script src="../pacotes/ol3/ol.js"></script>
-<script src="../js/i3geonaocompacto.js"></script>
+<script src="../js/i3geo.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
@@ -29,7 +29,9 @@
 	background: none;
 	margin-bottom: 15px;
 }
-
+.foraDoMapa + span > span {
+	background-color: yellow;
+}
 </style>
 </head>
 	<!-- As palavras entre {{{}}} sao utilizadas para a traducao. Veja i3geo/js/dicionario.js
@@ -40,7 +42,9 @@
 	<div id="i3GEONomeLogin"
 		style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
 	-->
-	<!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps -->
+	<!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
+	Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
+	-->
 	<div id="mapai3Geo" >
 	</div>
 	<!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
@@ -49,13 +53,13 @@
 	</form>
 
 	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
-	<div class="localizarxy fundoRodape hidden-xs hidden-sm">
+	<div class="localizarxy fundoRodape hidden-xs hidden-sm" >
 		<div class="i3GeoMascaraCoord" style="display: block;">
 			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
 				<option>DMS:</option>
 				<option value="janela">janela</option>
 				<option value="geoProj">DMS</option>
-				<option value="dd">Déc. de grau</option>
+				<option value="dd">Dec. de grau</option>
 				<option value="geohash">GeoHash</option>
 				<option value="policonicaSad69">Polic SAD-69</option>
 				<option value="utmSad69Proj">UTM Sad-69</option>
@@ -96,27 +100,26 @@
 			Zn: <input name="" value="--" size="2" title="Zona" id="localizarxyutmSirgas2000ProjZN" type="text">
 		</div>
 	</div>
-
-	<!-- barra de ícones de navegacao -->
-	<div class="ol-i3GEOcontrols ol-control">
-		<button onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
+	<!-- barra de icones de navegacao -->
+	<div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
+		<button title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/projection.png">
 		</button>
 		<button onclick="i3GEO.Interface.zoomli()" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/zoom-region.png">
 		</button>
 		<br>
-		<button onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
+		<button title="{{{volta}}}" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle1.png">
 		</button>
-		<button onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
+		<button title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
 		<br>
-		<button data-template="templates/ferramentasLink.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
+		<button title="{{{x79}}}" data-template="templates/ferramentasLink.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/save1.png">
 		</button>
-		<button onclick="i3GEO.maparef.inicia()" style="float: left;">
+		<button title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/map-reference.png">
 		</button>
 	</div>
@@ -286,7 +289,7 @@
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
 								</li>
 								<li>
-								<a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatísticos</a>
+								<a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
 								</li>
 								<li><a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
 								</li>
@@ -514,8 +517,6 @@
 			</div>
 		</div>
 	</div>
-	<!-- templates -->
-
 	<!--  para mostrar o banner de abertura, basta ter esse ID -->
 	<script id="i3GEOlogoMarcaTemplate" type="x-tmpl-mustache">
 	<div>
@@ -537,102 +538,204 @@
 	</div>
 	</script>
 	<script>
-	//inicia o mapa
-	//Veja config.php
-	var parametrosMapa = {
-		//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
-		//Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Você pode utilizar essa opcao para abrir um mapa com as camadas que você quiser, mas para evitar redundâncias, prefira o uso de &temasa
-		mapfilebase: "",
-		//extensao geografica do mapa
-		//deve ser definida em coordenadas no formato decimos de grau e na projecao geografica na sequencia xmin ymin xmax ymax
-		//exemplo [-77,-26,-30,6]
-		mapext: [],
-		//perfil utilizado para restringir os menus de temas mostrando apenas os que correspondem a determinado perfil
-		perfil: "",
-		//layers que serao adicionados ao mapa.
-		//Cada layer corresponde ao nome do mapfile existente na pasta i3geo/temas sem a extensao '.map'
-		layers: {
-			//array com a lista dos layers que serao adicionados e ligados (visiveis)
-			add: [],
-			//array com a lista dos layers que serao adicionados mas nao ligados
-			on: [],
-			//array com os layers desligados
-			off: []
-		},
-		//lista de coordenadas x e y que serao adicionadas como pontos no mapa
-		points: {
-			//array com a lista de coordenadas
-			coord: [],
-			//titulo da nova camada
-			title: ""
-		},
-		//lista de coordenadas x e y que serao adicionadas como linhas no mapa
-		lines: {
-			//array de arrays com a lista de coordenadas de cada linha
-			//exemplo [[-54,-12,-50,-12],[-50,-1,-50,-2,-50,-3]]
-			coord: [[]],
-			//titulo da nova camada
-			title:""
-		},
-		//lista de coordenadas x e y que serao adicionadas como poligonos no mapa
-		polygons: {
-			//array de arrays com a lista de coordenadas de cada poligono. A primeira coordenada deve ser igual a ultima.
-			//exemplo [[-50,-1,-48,-2,-50,-3,-50,-1]]
-			coord: [[]],
-			//titulo da nova camada
-			title:""
-		},
-		//insere elementos no mapa com coordenadas definidas em wkt
-		wkt: {
-			//string no formato wkt
-			coord: "",
-			//titulo da nova camada
-			title: ""
-		},
-		//simbolo que sera utilizado para desenhar os elementos inseridos
-		symbol: {
-			//codigo do simbolo conforme definido em i3geo/symbols
-			name: "",
-			//em rgb, exemplo "0 255 0"
-			color: "",
-			//em pixels
-			size: ""
-		},
-		//arquivo KML que sera incluido no mapa. Valido apenas na interface google maps
-		kml: {
-			url: ""
-		},
-		//endereco de um WMS (sera incluido como uma camada no mapa)
-		wms: {
-			url: "",
-			layer: "",
-			style: "",
-			title: "",
-			srs: "",
-			imagetype: "",
-			version: ""
-		},
-		//filtros que serao aplicados aos layers. Utilize a expressaso conforme definido na documentacao
-		//do mapserver, exemplo
-		//{layer: "_lbiomashp",expression: "(('[CD_LEGENDA]'='CAATINGA'))"} ou {layer: "_lbiomashp",expression: "cd_legenda='CAATINGA'"}
-		filters: [{
-			layer: "",
-			expression: ""
-		}]
-	};
-	//inicia o mapa
-	//Veja tambem config.php
-	//
-	//o primeiro parametro permite alterar o mapa, inserindo camadas e outras definicoes
-	//
-	i3GEO.init(parametrosMapa);
+	(function() {
+		var parametrosMapa = {
+			//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
+			//Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Você pode utilizar essa opcao para abrir um mapa com as camadas que você quiser, mas para evitar redundâncias, prefira o uso de &temasa
+			mapfilebase: "",
+			//extensao geografica do mapa
+			//deve ser definida em coordenadas no formato decimos de grau e na projecao geografica na sequencia xmin ymin xmax ymax
+			//exemplo [-77,-26,-30,6]
+			mapext: [],
+			//perfil utilizado para restringir os menus de temas mostrando apenas os que correspondem a determinado perfil
+			perfil: "",
+			//layers que serao adicionados ao mapa.
+			//Cada layer corresponde ao nome do mapfile existente na pasta i3geo/temas sem a extensao '.map'
+			layers: {
+				//array com a lista dos layers que serao adicionados e ligados (visiveis)
+				add: [],
+				//array com a lista dos layers que serao adicionados mas nao ligados
+				on: [],
+				//array com os layers desligados
+				off: []
+			},
+			//lista de coordenadas x e y que serao adicionadas como pontos no mapa
+			points: {
+				//array com a lista de coordenadas
+				coord: [],
+				//titulo da nova camada
+				title: ""
+			},
+			//lista de coordenadas x e y que serao adicionadas como linhas no mapa
+			lines: {
+				//array de arrays com a lista de coordenadas de cada linha
+				//exemplo [[-54,-12,-50,-12],[-50,-1,-50,-2,-50,-3]]
+				coord: [[]],
+				//titulo da nova camada
+				title:""
+			},
+			//lista de coordenadas x e y que serao adicionadas como poligonos no mapa
+			polygons: {
+				//array de arrays com a lista de coordenadas de cada poligono. A primeira coordenada deve ser igual a ultima.
+				//exemplo [[-50,-1,-48,-2,-50,-3,-50,-1]]
+				coord: [[]],
+				//titulo da nova camada
+				title:""
+			},
+			//insere elementos no mapa com coordenadas definidas em wkt
+			wkt: {
+				//string no formato wkt
+				coord: "",
+				//titulo da nova camada
+				title: ""
+			},
+			//simbolo que sera utilizado para desenhar os elementos inseridos
+			symbol: {
+				//codigo do simbolo conforme definido em i3geo/symbols
+				name: "",
+				//em rgb, exemplo "0 255 0"
+				color: "",
+				//em pixels
+				size: ""
+			},
+			//arquivo KML que sera incluido no mapa. Valido apenas na interface google maps
+			kml: {
+				url: ""
+			},
+			//endereco de um WMS (sera incluido como uma camada no mapa)
+			wms: {
+				url: "",
+				layer: "",
+				style: "",
+				title: "",
+				srs: "",
+				imagetype: "",
+				version: ""
+			},
+			//filtros que serao aplicados aos layers. Utilize a expressaso conforme definido na documentacao
+			//do mapserver, exemplo
+			//{layer: "_lbiomashp",expression: "(('[CD_LEGENDA]'='CAATINGA'))"} ou {layer: "_lbiomashp",expression: "cd_legenda='CAATINGA'"}
+			filters: [{
+				layer: "",
+				expression: ""
+			}]
+		};
+		var config = {
+			//id do elemento HTML onde o corpo do mapa sera renderizado
+			mapBody : "mapai3Geo",
+			//tipo de mapa. Pode ser:
+			//OL - utiliza o OpenLayers e coordenadas geograficas
+			//OSM - utiliza o OpenLayers e o OpenStreetMap como fundo, em projecao semelhante ao GoogleMaps
+			//GM - utiliza o GoogleMaps como motor de controle do mapa
+			mapType : "OL",
+			//armazena em um cookie a ultima extensao geografica do mapa e utiliza essa extensao quando o mapa for aberto
+			saveExtension : true,
+			//aplica um filtro de cores apos a renderizacao da imagem de cada camada que compoe o mapa cinza|sepiaclara|sepianormal
+			posRenderType : "",
+			//Altura e largura do tooltip (balao identifica)
+			toolTipSize : ["100px","200px"],
+			//Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
+			//Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
+			i3GeoServer : "",
+			//parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas
+			components : {
+				//lista com os codigos dos menus que serao considerados na montagem do catalogo de temas
+				idsMenus : [],
+				//webservice utilizado na opcao de encontrar lugares
+				searchService : "http://mapas.mma.gov.br/webservices/geonames.php",
+				//webservice wms que faz a apresentacao do lugar encontrado por searchService
+				searchWms : "http://mapas.mma.gov.br/webservices/geonameswms.php",
+				//posicao do mapa de referencia, em pixels [top,right]
+				referenceMapPosition : [4,120]
+			},
+			//parametros de configuracao das ferramentas que sao acionadas sob demanda
+			//ferramentas localizadas em i3geo/ferramentas
+			tools : {
+				//ferramenta de busca de camadas em um servico CSW
+				buscainde : {
+					//endereco do servico no padrao CSW
+					csw : "http://www.metadados.inde.gov.br/geonetwork/srv/br"
+				},
+				//ferramenta de identificacao
+				identifica : {
+					//resolucao em pixels para busca de elementos
+					resolution : 8
+				}
+			},
+			//configuracoes especificas para a interface que utiliza o OpenLayers
+			openLayers : {
+				//utiliza ou nao tiles ao renderizar as camadas do mapa
+				//a utilizacao de tiles pode ser definida em cada camada, mas se essa propriedade for true, a definicao das camadas nao serao consideradas
+				singleTile : false,
+				//opcoes de inicializacao do mapa conforme definido na API do OpenLayers
+				MapOptions : {
+					layers : [],
+					controls : [
+						new ol.control.Zoom(),
+						new ol.control.ZoomSlider(),
+						new ol.control.ScaleLine(),
+						new ol.control.Attribution({
+							collapsible: false
+						})
+					],
+					loadTilesWhileAnimating : true,
+					loadTilesWhileInteracting : true,
+					//os objetos devem ser comentados na interface googleMaps
+					interactions : [
+						new ol.interaction.DoubleClickZoom(),
+						new ol.interaction.KeyboardPan(),
+						new ol.interaction.KeyboardZoom(),
+						new ol.interaction.MouseWheelZoom(),
+						new ol.interaction.PinchRotate(),
+						new ol.interaction.PinchZoom(),
+						new ol.interaction.DragZoom(),
+						new ol.interaction.DragPan()
+					]
+				},
+				//opcoes para o objeto view, que e uma instancia de MapOptions
+				ViewOptions : {
 
-	i3GEOF.metaestat.INTERFACE = "flutuante";
-	i3GEOF.metaestat.CONEXAODEFAULT = 1;
-	i3GEOF.metaestat.TOP = 50;
-	i3GEOF.metaestat.LEFT = 100;
-	i3GEO.eventos.MOUSECLIQUEPERM = [ "i3GEO.mapa.dialogo.verificaTipDefault()" ];
-	i3GEOF.metaestat.inicia();
+				}
+			},
+			//configuracoes especificas para a interface GoogleMaps
+			googleMaps : {
+				//opcoes de inicializacao do mapa conforme definido na API do GoogleMaps
+				MapOptions : {
+					//estilo que sera utilizado no mapa
+					//pode ser um desses: roadmap, satellite, hybrid, terrain, Red, Countries, Night, Blue, Greyscale, No roads, Mixed, Chilled
+					//ver i3GEO.Interface.googleMaps.ESTILOS
+					mapTypeId : "roadmap",
+					scaleControl : true,
+					mapTypeControl : true,
+					mapTypeControlOptions: {
+						//position : google.maps.ControlPosition.LEFT_BOTTOM
+					},
+					zoomControl:true,
+					zoomControlOptions: {
+						//style : google.maps.ZoomControlStyle.SMALL,
+						//position : google.maps.ControlPosition.LEFT_CENTER
+					},
+					streetViewControl : true,
+					streetViewControlOptions: {
+						//position : google.maps.ControlPosition.LEFT_CENTER
+					}
+				}
+			}
+		};
+		//
+		//inicia o mapa
+		//Veja tambem config.php
+		//
+		//O primeiro parametro permite alterar o mapa, inserindo camadas e outras definicoes que afetam o corpo do mapa
+		//O segundo parametro inclui configuracoes que afetam o funcionamento da interface que controla a visualizacao do mapa
+		//
+		i3GEO.init(parametrosMapa,config);
+		i3GEOF.metaestat.INTERFACE = "flutuante";
+		i3GEOF.metaestat.CONEXAODEFAULT = 1;
+		i3GEOF.metaestat.TOP = 50;
+		i3GEOF.metaestat.LEFT = 100;
+		i3GEOF.metaestat.inicia();
+	})();
 	</script>
 </body>
 

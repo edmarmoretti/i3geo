@@ -359,8 +359,8 @@ $i3georendermode = 0;
 	Exemplo:
 
 	$linkedinoauth = array(
-		"consumerkey" => "0oQ30ge-ggKarx4HGaXVK118n8mekMBbFYTrC-agGV9hvxUXfeWwS1q7ZMvD-8LL",
-		"consumersecret" => "nRGXfHp1XNMt0eCG7tWJpoCcXX1uoZseDtgiU-CRy1ajqipo4KpjjZdDUXmqZGQA"
+		"consumerkey" => "",
+		"consumersecret" => ""
 	);
 
 	Tipo:
@@ -383,16 +383,16 @@ $linkedinoauth = "";
 	Exemplo:
 
 	$facebookoauth = array(
-		"consumerkey" => "136279263094148",
-		"consumersecret" => "679fc4a007b1d289377fa8af8f7086b6"
+		"consumerkey" => "",
+		"consumersecret" => ""
 	);
 
 	Tipo:
 	{array}
 */
 $facebookoauth = array(
-	"consumerkey" => "136279263094148",
-	"consumersecret" => "679fc4a007b1d289377fa8af8f7086b6"
+	"consumerkey" => "",
+	"consumersecret" => ""
 );
 /*
 	Variavel: twitteroauth
@@ -416,8 +416,8 @@ $facebookoauth = array(
 	Exemplo:
 
 	$twitteroauth = array(
-		"consumerkey" => "vUvBcsOULjS0ewxuSvbS6w",
-		"consumersecret" => "0Hj6uCyycDCeNOgzTUF1bBSel75KtfbnCS4bxWVqaxk",
+		"consumerkey" => "",
+		"consumersecret" => "",
 		"requesttokenurl" => "https://twitter.com/oauth/request_token",
 		"accesstokenurl" => "https://twitter.com/oauth/access_token",
 		"authorizeurl" => "https://twitter.com/oauth/authorize"
@@ -427,8 +427,8 @@ $facebookoauth = array(
 	{array}
 */
 $twitteroauth = array(
-	"consumerkey" => "vUvBcsOULjS0ewxuSvbS6w",
-	"consumersecret" => "0Hj6uCyycDCeNOgzTUF1bBSel75KtfbnCS4bxWVqaxk",
+	"consumerkey" => "",
+	"consumersecret" => "",
 	"requesttokenurl" => "https://twitter.com/oauth/request_token",
 	"accesstokenurl" => "https://twitter.com/oauth/access_token",
 	"authorizeurl" => "https://twitter.com/oauth/authorize"

@@ -116,6 +116,7 @@ i3GEO.editor =
 				$i("i3GEOjanelaEditor_corpo").style.textAlign = "left";
 				return divid;
 			},
+			//TODO utilizar uma janela flutuante ao inves de uma fila de icones
 			ativaPainel : function(idjanela) {
 				i3GEO.editorOL.fundo = "";// i3GEO.editorOL &eacute; criado pelo script carregado
 				i3GEO.editorOL.mapa = i3geoOL;

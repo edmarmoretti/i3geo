@@ -82,20 +82,6 @@ if (navigator.appName.substring(0, 1) === 'M') {
 if (opera === true) {
 	navn = true;
 }
-/**
- * Nome da ultima operacao que foi executada. (depreciado)
- *
- * Dependendo do tipo de operacao sao aplicadas as atualizacoes necessarias aos componentes do mapa. Por exemplo, redesenha o corpo do mapa,
- * atualiza a lista de temas, etc.
- *
- * Essas operacoes sao controladas pela funcao ajaxiniciaparametros.
- */
-var g_operacao = "";
-/**
- * Depreciado - Tipo de acao que esta sendo executada. Quando o usuario clica no mapa, essa variavel e pesquisada para definir o tipo de
- * operacao que deve ser executada. E definida quando o usuario seleciona uma determinada ferramenta do i3Geo.
- */
-var g_tipoacao = "zoomli";
 
 /**
  * Function: $i
@@ -460,23 +446,7 @@ i3GEO.util =
 			}
 		},
 		/**
-		 * Function: mudaCursor
-		 *
-		 * Altera o cursor do ponteiro do mouse.
-		 *
-		 * Os cursores disponiveis sao definidos por default em classe_configura.js
-		 *
-		 * Exemplo i3GEO.util.mudaCursor("","crosshair")
-		 *
-		 * Parametros:
-		 *
-		 * {i3GEO.configura.cursores} - objeto JSON com as URIs de cada cursor (veja i3GEO.configura.cursores)
-		 *
-		 * {String} - tipo de cursor disponivel em cursores
-		 *
-		 * {String} - id do objeto que tera o estilo alterado para o cursor desejado
-		 *
-		 * {String} - onde esta instalado o i3Geo
+		 * depreciado
 		 */
 		mudaCursor : function() {
 		},

@@ -69,132 +69,6 @@ YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
 i3GEO.janela =
 	{
 		/**
-		 * Propriedade: ESTILOABD
-		 *
-		 * Estilo que ser&aacute; aplicado ao elemento body da janela (class='bd')
-		 *
-		 * Tipo:
-		 *
-		 * {String}
-		 *
-		 * Default:
-		 *
-		 * display:block;padding:5px 1px 5px 1px;
-		 */
-		ESTILOBD : "display:block;padding:5px 5px 5px 5px;",
-		/**
-		 * Propriedade: ESTILOAGUARDE
-		 *
-		 * Estilo da janela de aguarde
-		 *
-		 * Pode ser normal|reduzida|minima|nenhum
-		 *
-		 * Utilize nenhum para nunca mostrar a janela
-		 *
-		 * Tipo:
-		 *
-		 * {String}
-		 *
-		 * Default:
-		 *
-		 * normal
-		 */
-		ESTILOAGUARDE : "normal",
-		/**
-		 * Propriedade: AGUARDEMODAL
-		 *
-		 * Indica se a janela de aguarde ser&aacute; do tipo MODAL, ou seja, se ir&aacute; ou n&atilde;o bloquear as op&ccedil;&otilde;es do
-		 * mapa.
-		 *
-		 * Tipo:
-		 *
-		 * {Boolean}
-		 *
-		 * Default:
-		 *
-		 * false
-		 */
-		AGUARDEMODAL : false,
-		/**
-		 * Lista com os nomes das fun&ccedil;&otilde;es que ser&atilde;o executadas antes de abrir a janela.
-		 *
-		 * Este &eacute; um array que pode ser modificado utilizando-se as fun&ccedil;&otilde;es javascript de manipula&ccedil;&atilde;o de
-		 * arrays.
-		 *
-		 * Tipo:
-		 *
-		 * {Array}
-		 *
-		 * Default:
-		 *
-		 * i3GEO.janela.prepara()
-		 */
-		ANTESCRIA : [
-			"i3GEO.janela.prepara()"
-		],
-		/**
-		 * Lista com os nomes das fun&ccedil;&otilde;es que ser&atilde;o executadas antes de fechar a janela.
-		 *
-		 * Este &eacute; um array que pode ser modificado utilizando-se as fun&ccedil;&otilde;es javascript de manipula&ccedil;&atilde;o de
-		 * arrays.
-		 *
-		 * Tipo:
-		 *
-		 * {Array}
-		 */
-		ANTESFECHA : [],
-		/**
-		 * Propriedade: TRANSICAOSUAVE
-		 *
-		 * Altera a transpar&ecirc;ncia das janelas quando o mouse sobrep&otilde;e e quando sai (n&atilde;o &eacute; ativado no navegador
-		 * IE)
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * true
-		 */
-		TRANSICAOSUAVE : true,
-		/**
-		 * Propriedade: OPACIDADE
-		 *
-		 * Valor da opacidade min&iacute;ma utilizada quando TRANSICAOSUAVE for igual a true.
-		 *
-		 * Varia de 0 a 100
-		 *
-		 * Tipo:
-		 *
-		 * {numeric}
-		 *
-		 * Default:
-		 *
-		 * 65
-		 */
-		OPACIDADE : 65,
-		/**
-		 * Propriedade: OPACIDADEAGUARDE
-		 *
-		 * Valor da opacidade da janela de aguarde.
-		 *
-		 * Varia de 0 a 100
-		 *
-		 * Tipo:
-		 *
-		 * {numeric}
-		 *
-		 * Default:
-		 *
-		 * 50
-		 */
-		OPACIDADEAGUARDE : 50,
-		/**
-		 * Lista os tips inseridos no mapa, possibilitando sua remo&ccedil;&atilde;o em lote
-		 */
-		TIPS : [],
-		/**
 		 * Cada vez que uma janela flutuante &eacute; criada, esse valor &eacute; acrescido de 1
 		 */
 		ULTIMOZINDEX : 5,
@@ -271,13 +145,10 @@ i3GEO.janela =
 		 * {Array} Array contendo objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 		 */
 		cria : function(wlargura, waltura, wsrc, nx, ny, texto, id, modal, classe, funcaoCabecalho, funcaoMinimiza, funcaoAposRedim,
-			dimensionavel, icone, funcaoDuplica, transicao) {
+			dimensionavel, icone, funcaoDuplica) {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.cria()");
 
-			if (!transicao) {
-				transicao = "sim";
-			}
 			if (!dimensionavel) {
 				dimensionavel = true;
 			}
@@ -291,16 +162,7 @@ i3GEO.janela =
 				janela.bringToTop();
 				return;
 			}
-			if (navm && !chro) {
-				this.TRANSICAOSUAVE = false;
-			}
-			// executa as fun&ccedil;&otilde;es default de antes de qualquer
-			// cria&ccedil;&atilde;o de janela
-			if (this.ANTESCRIA) {
-				for (i = 0; i < this.ANTESCRIA.length; i++) {
-					eval(this.ANTESCRIA[i]);
-				}
-			}
+			i3GEO.janela.prepara();
 			// define os parametros default
 			if (!classe || classe == "") {
 				classe = "hd";
@@ -343,7 +205,7 @@ i3GEO.janela =
 			if (funcaoMinimiza) {
 				ins += "<div id='" + id + "_minimizaCabecalho' class='container-minimiza'></div>";
 			}
-			ins += '</div><div id="' + id + '_corpo" class="bd" style="' + this.ESTILOBD + '">';
+			ins += '</div><div id="' + id + '_corpo" class="bd" style="display:block;padding:5px 5px 5px 5px;">';
 			if (wsrc !== "") {
 				ins += '<iframe name="' + id + 'i" id="' + id + 'i" valign="top" style="border:0px white solid;width:100%"></iframe>';
 			}
@@ -353,15 +215,6 @@ i3GEO.janela =
 			novoel.id = id;
 			novoel.style.display = "block";
 			novoel.innerHTML = ins;
-			if (this.TRANSICAOSUAVE && transicao === "sim") {
-				novoel.onmouseover = function() {
-					$(novoel).css("opacity", 1);
-				};
-				novoel.onmouseout = function() {
-					$(novoel).css("opacity", i3GEO.janela.OPACIDADE / 100);
-				};
-				$(novoel).css("opacity", 1);
-			}
 			document.body.appendChild(novoel);
 			wdocaiframe = $i(id + "i");
 			if (wdocaiframe) {
@@ -438,14 +291,14 @@ i3GEO.janela =
 				janela.moveTo(nx, ny + 50);
 			}
 			YAHOO.i3GEO.janela.manager.register(janela);
-			if (this.TRANSICAOSUAVE) {
+
 				janela.cfg.setProperty("effect", [
 					{
 						effect : YAHOO.widget.ContainerEffect.FADE,
 						duration : 0.5
 					}
 				]);
-			}
+
 			janela.cfg.setProperty("zIndex", [
 				4
 			]);
@@ -605,7 +458,7 @@ i3GEO.janela =
 			return t;
 		},
 		/**
-		 * Aplica a op&ccedil;&atilde;o definida em ANTESFECHA e elimina alguns objetos que s&atilde;o comumente adicionados por algumas
+		 * Elimina alguns objetos que s&atilde;o comumente adicionados por algumas
 		 * opera&ccedil;&otilde;es do i3geo como box, pin
 		 *
 		 * Parametros:
@@ -622,12 +475,6 @@ i3GEO.janela =
 			// esconde elementos gr&aacute;ficos q a ferramenta pode ter aberto
 			// i3GEO.util.escondePin();
 			i3GEO.util.escondeBox();
-			// executa fun&ccedil;&otilde;es default
-			if (i3GEO.janela.ANTESFECHA) {
-				for (i = 0; i < i3GEO.janela.ANTESFECHA.length; i++) {
-					eval(i3GEO.janela.ANTESFECHA[i]);
-				}
-			}
 			if (i3GEO.janela.id) {
 				id = i3GEO.janela.id;
 			} else {
@@ -1038,84 +885,6 @@ i3GEO.janela =
 			janela.bringToTop();
 			janela.show();
 			return janela;
-		},
-		/**
-		 * Cria um DIV e posiciona sobre o mapa na posi&ccedil;&atilde;o do mouse.
-		 *
-		 * Return:
-		 *
-		 * ID do DIV criado
-		 */
-		tip : function() {
-			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.janela.tip()");
-
-			var Nid, novoel, res;
-			Nid = i3GEO.util.generateId;
-			// insere div para tips
-			novoel = document.createElement("div");
-			novoel.className = "i3GEObalaoInfo";
-			novoel.id = Nid;
-			document.body.appendChild(novoel);
-			i3GEO.janela.TIPS.push($i(Nid));
-			//
-			// monta o TIP com o id &uacute;nico criado
-			// quando o mapa &eacute; redesenhado, esses elementos s&atilde;o
-			// exclu&iacute;dos do mapa
-			//
-			res = "<div id='" + Nid + "cabecatip' style='text-align:left;background-color:rgb(240,240,240)'></div>";
-			novoel.innerHTML = "<table style='text-align:left'><tr><td style='text-align:left'>" + res + "</td></tr></table>";
-			ist = novoel.style;
-			ist.top = objposicaocursor.telay - 9 + "px";
-			ist.left = objposicaocursor.telax - 5 + "px";
-			ist.display = "block";
-			//
-			// registra a fun&ccedil;&atilde;o de elimina&ccedil;&atilde;o dos
-			// tips
-			//
-			i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
-				"i3GEO.janela.excluiTips('todos')"
-			]);
-			return (Nid);
-		},
-		/**
-		 * Exclui os tips armazenados na vari&aacute;vel i3GEO.janela.TIPS
-		 *
-		 * Parametro:
-		 *
-		 * tipo {String} - todos|naofixos tipos de tips que ser&atilde;o exclu&iacute;dos
-		 */
-		excluiTips : function(tipo) {
-			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.janela.excluiTips()");
-
-			var ot, i;
-			if (arguments.length === 0) {
-				tipo = "todos";
-			}
-			if (i3GEO.janela.TIPS.length > 0) {
-				ot = i3GEO.janela.TIPS.length - 1;
-				if (ot >= 0) {
-					do {
-						if (tipo === 'todos') {
-							if (i3GEO.janela.TIPS[ot]) {
-								i = $i(i3GEO.janela.TIPS[ot].id);
-								document.body.removeChild(i);
-							}
-						}
-						if (tipo === 'naofixos') {
-							if ($i(i3GEO.janela.TIPS[ot])) {
-								if ($i(i3GEO.janela.TIPS[ot].id + "cabecatip").innerHTML !== "") {
-									document.body.removeChild($i(i3GEO.janela.TIPS[ot].id));
-								}
-							}
-						}
-					} while (ot--);
-					if (tipo === "todos") {
-						i3GEO.janela.TIPS = [];
-					}
-				}
-			}
 		},
 		slider : function(funcao, inicial) {
 			var scaleFactor, bottomConstraint, topConstraint, janela, novoel, Event, slider = "", bg, thumb;

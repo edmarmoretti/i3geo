@@ -69,34 +69,6 @@ i3GEO.mapa =
 		 */
 		TEMASINICIAIS : "",
 		/**
-		 * Propriedade: AUTORESIZE
-		 *
-		 * Indica se o tamanho do mapa sera ajustado toda vez que o navegador for redimensionado
-		 *
-		 * Tipo:
-		 *
-		 * {boolean}
-		 *
-		 * Default:
-		 *
-		 * false
-		 */
-		AUTORESIZE : false,
-		/**
-		 * Propriedade: RESOLUCAOTIP
-		 *
-		 * Resolu&ccedil;&atilde;o de busca utilizada no bal&atilde;o de identifica&ccedil;&atilde;o
-		 *
-		 * Tipo:
-		 *
-		 * {numeric}
-		 *
-		 * Default:
-		 *
-		 * 12
-		 */
-		RESOLUCAOTIP : 8,
-		/**
 		 * Armazena o nome dos objetos geoXml adicionados ao mapa pela API do google maps
 		 *
 		 * Tipo {Array}
@@ -118,61 +90,6 @@ i3GEO.mapa =
 			);
 		},
 		/**
-		 * Function: insereDobraPagina
-		 *
-		 * Insere o icone do tipo "dobra de pagina" que permite alterar o renderizador do mapa
-		 *
-		 * Parametros:
-		 *
-		 * {string} - tipo de icone googlemaps|openlayers
-		 *
-		 * {string} - endereco da imagem que sera utilizada no icone
-		 */
-		insereDobraPagina : function(tipo, imagem) {
-			if (i3GEO.parametros.w < 700) {
-				return;
-			}
-			var novoel = $i("i3GEOdobraPagina");
-			if (!novoel) {
-				novoel = document.createElement("img");
-			}
-			novoel.src = imagem;
-			novoel.id = "i3GEOdobraPagina";
-			if (tipo === "googlemaps") {
-				novoel.onclick = function(evt) {
-					i3GEO.Interface.atual2gm.inicia();
-				};
-			}
-			if (tipo === "openlayers") {
-				novoel.onclick = function(evt) {
-					//fecha o streetview
-					if(i3GEO.Interface.ATUAL === "googlemaps" && i3GeoMap.getStreetView().getVisible() === true){
-						i3GeoMap.getStreetView().setVisible(false);
-					}
-					else{
-						i3GEO.Interface.atual2ol.inicia();
-					}
-				};
-			}
-			novoel.style.cursor = "pointer";
-			novoel.style.position = "absolute";
-			novoel.style.top = i3GEO.parametros.h - 35 + "px";
-			novoel.style.zIndex = "5000000";
-			novoel.style.left = i3GEO.parametros.w - 35 + "px";
-			$i(i3GEO.Interface.IDMAPA).appendChild(novoel);
-		},
-		/**
-		 * Reposiciona o icone do tipo "dobra de pagina"
-		 */
-		reposicionaDobraPagina : function() {
-			var novoel = $i("i3GEOdobraPagina");
-			if (!novoel) {
-				return;
-			}
-			novoel.style.top = i3GEO.parametros.h - 35 + "px";
-			novoel.style.left = i3GEO.parametros.w - 35 + "px";
-		},
-		/**
 		 * Ativa o redimensionamento automatico do mapa sempre que o navegador for redimensionado
 		 *
 		 * e definido como um evento do elemento window
@@ -190,51 +107,11 @@ i3GEO.mapa =
 					setTimeout(function() {
 						i3GEO.reCalculaTamanho();
 						i3GEO.guias.abreFecha("fecha");
-
-						i3GEO.mapa.reposicionaDobraPagina();
-
 						ativo = true;
 					}, 2000);
 				}
 				ativo = false;
 			};
-		},
-		/**
-		 * Ajusta o posicionamento do corpo do mapa
-		 *
-		 * Esse ajuste e necessario na inicializacao, uma vez que o mapa utiliza style.position='absolute'
-		 *
-		 * Parameters:
-		 *
-		 * elemento {String} - id do elemento HTML que devera ser ajustado e que contem o mapa
-		 */
-		ajustaPosicao : function(elemento) {
-			if (arguments.length === 0) {
-				return;
-			}
-			var imagemxi = 0, imagemyi = 0, dc = $i(elemento), c;
-			if (!dc) {
-				return;
-			}
-			try {
-				while ((dc.offsetParent) && (dc.offsetParent.id !== "i3geo")) {
-					dc = dc.offsetParent;
-					imagemxi += dc.offsetLeft;
-					imagemyi += dc.offsetTop;
-				}
-				c = $i(i3GEO.Interface.IDCORPO);
-				if (c) {
-					c.style.position = "absolute";
-					if (navm) {
-						i3GEO.util.$left(i3GEO.Interface.IDCORPO, imagemxi - 1);
-					} else {
-						i3GEO.util.$left(i3GEO.Interface.IDCORPO, imagemxi);
-					}
-					i3GEO.util.$top(i3GEO.Interface.IDCORPO, imagemyi);
-				}
-			} catch (e) {
-				i3GEO.janela.tempoMsg("Ocorreu um erro. i3GEO.mapa.ajustaPosicao " + e);
-			}
 		},
 		ativaIdentifica: function(){
 			if (typeof (console) !== 'undefined')
@@ -322,7 +199,6 @@ i3GEO.mapa =
 					retorno = retorno.variaveis;
 				}
 				if ((retorno === "erro") || (typeof (retorno) === 'undefined')) {
-					i3GEO.mapa.ajustaPosicao();
 					i3GEO.janela.fechaAguarde();
 					i3GEO.mapa.recupera.inicia();
 				}
@@ -361,7 +237,6 @@ i3GEO.mapa =
 			 * Inicia a tentativa de recuperacao
 			 */
 			inicia : function() {
-				i3GEO.mapa.ajustaPosicao();
 				i3GEO.janela.fechaAguarde();
 				if (this.recupera.TENTATIVA === 0) {
 					this.recupera.TENTATIVA++;
@@ -509,10 +384,6 @@ i3GEO.mapa =
 							eval(temp[0] + " = " + temp[1] + ";");
 						} else {
 							eval(temp[0] + " = '" + temp[1] + "';");
-						}
-						// algumas propriedades usam cookies
-						if (temp[0] == "i3GEO.configura.mapaRefDisplay") {
-							i3GEO.util.insereCookie("i3GEO.configura.mapaRefDisplay", temp[1]);
 						}
 					} catch (e) {
 					}
@@ -710,20 +581,6 @@ i3GEO.mapa =
 						}
 					}
 				}
-			},
-			/**
-			 * Faz a chamada em AJAX que gera a legenda
-			 *
-			 * O resultado e processado pela funcao passada como parametro
-			 *
-			 * O template utilizado para gerar a legenda &eacute; definido em i3GEO.configura.templateLegenda
-			 *
-			 * Parametro:
-			 *
-			 * funcao {function} - funcao que recebera o resultado da chamada AJAX. O objeto CPAINT e enviado como parametro.
-			 */
-			obtem : function(funcao) {
-				i3GEO.php.criaLegendaHTML(funcao, "", i3GEO.configura.templateLegenda);
 			},
 			/**
 			 * Liga ou desliga um unico tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
@@ -1368,7 +1225,6 @@ i3GEO.mapa =
 			 *
 			 * Abre a janela de dialogo da ferramenta identifica
 			 *
-			 * Veja tamb&eacute;m i3GEO.configura.tipotip
 			 *
 			 * Parametros:
 			 *
@@ -1447,7 +1303,7 @@ i3GEO.mapa =
 					i3GEO.mapa.montaTip,
 					x,
 					y,
-					i3GEO.mapa.RESOLUCAOTIP,
+					i3GEO.configura.ferramentas.identifica.resolution,
 					"tip",
 					i3GEO.configura.locaplic,
 					i3GEO.configura.sid,
@@ -1462,7 +1318,7 @@ i3GEO.mapa =
 				console.info("i3GEO.mapa.montaTip()");
 
 			var textoCompleto = "", textoSimples = "", textoTempCompleto = "", textoTempSimples = "", x, y, classeCor, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
-				i3GEO.configura, tipotip = configura.tipotip, wkts = [];
+				i3GEO.configura, wkts = [];
 
 			i3GEO.eventos.cliquePerm.status = true;
 			mostra = false;
@@ -1479,11 +1335,7 @@ i3GEO.mapa =
 				ntemas = temas.length;
 				for (j = 0; j < ntemas; j += 1) {
 					titulo = temas[j].nome;
-					if (tipotip != "simples") {
-						titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b></div>";
-					} else {
-						titulo = "";
-					}
+					titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b></div>";
 					tips = temas[j].resultado.todosItens;
 					ntips = tips.length;
 					ins = "";
@@ -1519,7 +1371,7 @@ i3GEO.mapa =
 										if (img !== "") {
 											temp += img + "<br>";
 										}
-										if (tipotip != "completo" && ds[s][tips[r]].tip.toLowerCase() === "sim") {
+										if (ds[s][tips[r]].tip.toLowerCase() === "sim") {
 											textoTempSimples += temp;
 										}
 										textoTempCompleto += temp;
@@ -1547,25 +1399,8 @@ i3GEO.mapa =
 					}
 				}
 				if (mostra === true) {
-					if (tipotip != "simples") {
-						res = textoSimples;
-					} else {
-						res = textoCompleto;
-					}
-					if (tipotip === "balao") {
-						i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, textoCompleto, x, y);
-					} else {
-						// tipotip pode ser um elemento DOM
-						n = $i(tipotip);
-						if (!n) {
-							n = i3GEO.janela.tip();
-							n = $i(n);
-							n.style.textAlign = "left";
-							n.innerHTML += res;
-						} else {
-							n.innerHTML = res;
-						}
-					}
+					res = textoSimples;
+					i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, textoCompleto, x, y);
 				}
 			}
 			if (typeof (console) !== 'undefined')
@@ -1580,10 +1415,7 @@ i3GEO.mapa =
 					for(r = 0; r < n; r += 1){
 						f = format.readFeatures(wkts[r]);
 						f = f[0];
-						//idunico = i3GEO.util.uid();
-						//f.setId(idunico);
 						f.setProperties({
-							//idUnico : idunico,
 							origem : "pin"
 						});
 						g = f.getGeometry();
