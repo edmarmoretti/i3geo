@@ -123,8 +123,8 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'template' : [ {
 		pt : "(opcional) Template HTML (se n&atilde;o for especificado, ser&aacute; usado o default do i3geo. Utilize o caminho completo do arquivo html no servidor):",
-		en : "",
-		es : ""
+		en : "(optional) HTML template (if not specified, it will be used the i3Geo default. Use full path of HTML file on the server):",
+		es : "(opcional) Plantilla HTML (si no es especificada, ser&aacute; utilizada la predeterminada de i3Geo. Utilice la ruta completa del archivo HTML en el servidor):"
 	} ],
     'pranchaInicia' : [ {
 		pt : "Prancha inicial (ser&aacute; mostrada quando iniciar o atlas):",
