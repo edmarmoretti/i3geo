@@ -517,13 +517,12 @@
 			</div>
 		</div>
 	</div>
-	<!--  para mostrar o banner de abertura, basta ter esse ID -->
+	<!--  para mostrar o banner de abertura -->
 	<script id="i3GEOlogoMarcaTemplate" type="x-tmpl-mustache">
 	<div>
 		<table>
 			<tr>
 				<td>
-
 					<h4 >i3Geo - Software livre para cria&ccedil;&atilde;o de mapas
 						interativos e geoprocessamento</h4>
 					<h4 >Baseado no Mapserver, &eacute; licenciado sob GPL e integra o
@@ -538,6 +537,8 @@
 	</div>
 	</script>
 	<script>
+	//ativa o banner de inicializacao
+	i3GEO.janela.tempoMsg($i("i3GEOlogoMarcaTemplate").innerHTML,4000);
 	(function() {
 		var parametrosMapa = {
 			//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)

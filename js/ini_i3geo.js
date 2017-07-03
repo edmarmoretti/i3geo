@@ -494,9 +494,6 @@ var i3GEO = {
 					i3GEO.idioma.OBJETOIDIOMA
 				);
 		});
-		if($i("i3GEOlogoMarcaTemplate")){
-			i3GEO.aguardeLogo.mostra();
-		}
 		var tamanho, temp;
 		temp = window.location.href.split("?");
 		if (temp[1]) {
@@ -1041,29 +1038,6 @@ var i3GEO = {
 			i3GEO.parametros.editor = "sim";
 		} else {
 			i3GEO.parametros.editor = "nao";
-		}
-	},
-	aguardeLogo: {
-		obj: "",
-		mostra: function() {
-			i3GEO.aguardeLogo.obj = $(
-					'<div class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:50000;overflow-y:visible;">' +
-					'<div class="modal-dialog modal-m">' +
-					'<div class="modal-content">' +
-					'<div class="modal-header"></div>' +
-					'<div class="modal-body">' +
-					$('#i3GEOlogoMarcaTemplate').html() +
-					'<div class="progress progress-striped active" style="margin-bottom:0;"><div class="progress-bar" style="width: 100%"></div></div>' +
-					'</div>' +
-			'</div></div></div>');
-			i3GEO.aguardeLogo.obj.modal("show");
-			setTimeout(function() {
-				i3GEO.aguardeLogo.obj.modal("hide");
-			}, 4000);
-		},
-		esconde: function () {
-			i3GEO.aguardeLogo.obj.modal("hide");
-			delete i3GEO.aguardeLogo;
 		}
 	}
 };
