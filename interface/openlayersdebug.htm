@@ -411,6 +411,8 @@
 				<!-- Legenda -->
 				<div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
+					<a href='javascript:void(0)' onclick="i3GEO.legenda.janela()" class='btn btn-default btn-lg btn-block btn-raised'>{{{x11}}}</a>
+
 					<div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: block; text-align: left'></div>
 				</div>
 				<!-- busca
@@ -643,9 +645,12 @@
 				//i3GEO.maparef.inicia();
 				//
 				//(largura, altura, topo, esquerda);
-				//i3GEO.mapa.legendaHTML.libera("sim", 302, 300, 50, 100);
 				//i3GEO.mapa.dialogo.locregiao(215, "", 150, 150);
 				//i3GEO.mapa.dialogo.metaestat(215, "", 150, 150);
+
+				//i3GEO.legenda.inicia({
+				//	"janela": true
+				//});
 			},
 			//parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas
 			components : {

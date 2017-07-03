@@ -160,7 +160,10 @@ botoes da legenda
 #corpoLegi {
 	overflow: hidden;
 }
-
+/* cor do fundo da janela da legenda quando flutuante */
+#wlegenda_corpo {
+	background-color : white !Important;
+}
 /*
 Botao de ligar desligar do tipo chave da legenda
 */

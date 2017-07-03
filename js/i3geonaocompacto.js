@@ -72,7 +72,7 @@ OpenLayers = {
 	"../pacotes/yui290/build/dom/dom-min.js",
 	"../pacotes/yui290/build/utilities/utilities.js",
 	"../pacotes/yui290/build/container/container_core.js",
-	//"../pacotes/yui290/build/menu/menu-min.js",
+	"../pacotes/yui290/build/menu/menu-min.js",
 	//"../pacotes/yui290/build/logger/logger-min.js",
 	"../pacotes/yui290/build/dragdrop/dragdrop-min.js",
 	"../pacotes/yui290/build/slider/slider-min.js",

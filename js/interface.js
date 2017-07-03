@@ -1441,7 +1441,7 @@ i3GEO.Interface =
 						+ "&adicionar=nao&g_sid="
 						+ i3GEO.configura.sid;
 				b.onerror = function() {
-					i3GEO.mapa.legendaHTML.atualiza();
+					i3GEO.legenda.atualiza();
 				};
 			},
 			/**
@@ -2463,7 +2463,7 @@ i3GEO.Interface =
 				indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(obj.value);
 
 				temp = function() {
-					i3GEO.mapa.legendaHTML.atualiza();
+					i3GEO.legenda.atualiza();
 				};
 				plugin = i3GEO.pluginI3geo.existeObjeto(obj.value);
 

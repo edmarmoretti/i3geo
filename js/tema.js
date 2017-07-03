@@ -318,54 +318,6 @@ i3GEO.tema =
 			i3GEO.php.copiatema(i3GEO.atualiza, idtema);
 		},
 		/**
-		 * Function: mostralegendajanela
-		 *
-		 * Mostra a legenda de um tema em uma janela flutuante especifica
-		 *
-		 * Na configuracao padrao, essa funcao e disparada quando o usuario estaciona o ouse sobre o nome de um tema na arvore de camadas
-		 *
-		 * O uso normal seria nas opcoes onmouseover e onmouseout
-		 *
-		 * Exemplo:
-		 *
-		 * onmouseover = i3GEO.tema.mostralegendajanela(idtema,nome,"ativatimer")
-		 *
-		 * onmouseout = i3GEO.tema.mostralegendajanela(idtema,nome,"desaativatimer")
-		 *
-		 * onclick = i3GEO.tema.mostralegendajanela(idtema,nome,"abrejanela")
-		 *
-		 * Parametros:
-		 *
-		 * {String} - codigo do tema
-		 *
-		 * {String} - nome completo do tema que sera mostrado no cabecalho da janela
-		 *
-		 * {ativatimer|desativatimer|abrejanela} - tipo de operacao que sera executada
-		 */
-		mostralegendajanela : function(idtema, nome, tipoOperacao) {
-			if (tipoOperacao === "ativatimer") {
-				mostralegendajanelaTimer = setTimeout("i3GEO.tema.mostralegendajanela('" + idtema + "','" + nome + "','abrejanela')", 4000);
-			}
-			if (tipoOperacao === "abrejanela") {
-				try {
-					clearTimeout(mostralegendajanelaTimer);
-				} catch (e) {
-				}
-				if (!$i("janelaLegenda" + idtema)) {
-					var janela = i3GEO.janela.cria("250px", "", "", "", "", nome, "janelaLegenda" + idtema, false);
-					janela[2].style.textAlign = "left";
-					janela[2].style.background = "white";
-					janela[2].innerHTML = $trad("o1");
-				}
-				i3GEO.php.criaLegendaHTML(function(retorno) {
-					$i("janelaLegenda" + idtema + "_corpo").innerHTML = retorno.data.legenda;
-				}, idtema, "legenda3.htm");
-			}
-			if (tipoOperacao === "desativatimer") {
-				clearTimeout(mostralegendajanelaTimer);
-			}
-		},
-		/**
 		 * Function: temporizador
 		 *
 		 * Aplica um temporizador para que a camada seja redesenhada em determinado intervalo de tempo.

@@ -1612,7 +1612,7 @@ g_traducao =
 		],
 		"x11" : [
 			{
-				pt : "Mostra a legenda em uma janela",
+				pt : "Abre em uma janela",
 				en : "Show the legend in a window",
 				es : "Muestra una leyenda en una ventana"
 			}

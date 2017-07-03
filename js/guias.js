@@ -351,7 +351,8 @@ i3GEO.guias =
 					}
 					i3GEO.legenda.inicia({
 						"idLegenda": f.idLegenda,
-						"templateLegenda": $("#" + f.idLegenda).attr("data-template")
+						"templateLegenda": $("#" + f.idLegenda).attr("data-template"),
+						"janela": false
 					});
 				}
 			},
