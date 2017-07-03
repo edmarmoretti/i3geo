@@ -136,7 +136,7 @@ packer("coordenadas.js","compactados/coordenadas_compacto.js","Normal");
 packer("eventos.js","compactados/eventos_compacto.js","Normal");
 packer("editor.js","compactados/editor_compacto.js","Normal");
 packer("guias.js","compactados/guias_compacto.js","Normal");
-packer("selecao.js","compactados/selecao_compacto.js","Normal");
+//packer("selecao.js","compactados/selecao_compacto.js","Normal");
 packer("mapa.js","compactados/mapa_compacto.js","Normal");
 packer("desenho.js","compactados/desenho_compacto.js","Normal");
 packer("tema.js","compactados/tema_compacto.js","Normal");
@@ -318,7 +318,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/utilities/utilities_compacto.js",
 "../pacotes/yui290/build/container/container_core_compacto.js",
 "../pacotes/yui290/build/menu/menu-min.js",
-"../pacotes/yui290/build/logger/logger-min.js",
+//"../pacotes/yui290/build/logger/logger-min.js",
 "../pacotes/yui290/build/dragdrop/dragdrop-min.js",
 "../pacotes/yui290/build/slider/slider-min.js",
 "../pacotes/yui290/build/animation/animation-min270.js",

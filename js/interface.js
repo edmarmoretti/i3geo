@@ -396,6 +396,7 @@ i3GEO.Interface =
 				target : "openlayers",
 				layers : [],
 				controls : [],
+				interactions : [],
 				loadTilesWhileAnimating : true,
 				loadTilesWhileInteracting : true
 			},
