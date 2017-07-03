@@ -261,8 +261,7 @@ var i3GEO = {
 	 *
 	 * Fun&ccedil;&atilde;o que ser&aacute; executada ap&oacute;s a API
 	 * utilizada (Openlayers ou Googlemaps) ter sido inicializada e o objeto com
-	 * o mapa ter sido criado. Pode ser uma string tamb&eacute;m, que
-	 * ser&aacute; avaliada com "eval".
+	 * o mapa ter sido criado.
 	 *
 	 * Tipo:
 	 *
@@ -333,6 +332,7 @@ var i3GEO = {
 			i3GEO.configura.ferramentas = c.tools;
 		}
 		i3GEO.Interface.IDCORPO = (c.hasOwnProperty("mapBody") && c.mapBody != "") ? c.mapBody:"mapai3Geo";
+		i3GEO.finalizaAPI = (c.hasOwnProperty("afterStart") && c.afterStart != "") ? c.afterStart:"";
 		if(c.hasOwnProperty("components")){
 			i3GEO.arvoreDeTemas.IDSMENUS = (c.components.hasOwnProperty("idsMenus")) ? c.components.idsMenus : [];
 			i3GEO.catalogoMenus.IDSMENUS = (c.components.hasOwnProperty("idsMenus")) ? c.components.idsMenus : [];

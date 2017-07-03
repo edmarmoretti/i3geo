@@ -856,10 +856,6 @@ i3GEO.Interface =
 				// houver
 				if (jQuery.isFunction(i3GEO.finalizaAPI)) {
 					i3GEO.finalizaAPI.call();
-				} else {
-					if (i3GEO.finalizaAPI != "") {
-						eval(i3GEO.finalizaAPI);
-					}
 				}
 			},
 			/**

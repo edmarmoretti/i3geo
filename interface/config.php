@@ -17,14 +17,7 @@ if($tipo == "GM"){
 }
 ?>
 i3GEO.janela.ativaAlerta();
-i3GEO.finalizaAPI = function() {
-	//i3GEO.maparef.inicia();
-	//
-	//(largura, altura, topo, esquerda);
-	//i3GEO.mapa.legendaHTML.libera("sim", 302, 300, 50, 100);
-	//i3GEO.mapa.dialogo.locregiao(215, "", 150, 150);
-	//i3GEO.mapa.dialogo.metaestat(215, "", 150, 150);
-};
+
 (function() {
 	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === false){
 		var eng = new ol.layer.Tile(
