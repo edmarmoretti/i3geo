@@ -33,6 +33,10 @@ hr {
 	margin: 4px;
 }
 
+.withripple.condensed,.pager.condensed {
+	margin: 0px;
+}
+
 .radio span, label.radio-inline span {
 	top: 4px;
 }

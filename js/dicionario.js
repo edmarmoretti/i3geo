@@ -2884,6 +2884,13 @@ g_traducao =
   				es : ""
   			}
   		],
+		"continua" : [
+		  			{
+		  				pt : "continua",
+		  				en : "",
+		  				es : ""
+		  			}
+		  		],
 		"avanca" : [
 			{
 				pt : "avan&ccedil;a",

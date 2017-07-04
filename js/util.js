@@ -2067,57 +2067,16 @@ i3GEO.util =
 				$i(container).removeChild(temp);
 			}
 			$i(container).style.backgroundColor = "white";
-
-			botoes = "<table><tr style='width:100%'>";
+			botoes = "<ul class='proximoAnterior pager condensed' style='width:95%;margin-bottom: 2px;'>";
 			if (anterior !== "") {
 				botoes +=
-					"<td style='text-align:left;'><input id='"
-					+ idatual
-					+ "anterior_' onclick='"
-					+ anterior
-					+ "' type='button' value='&nbsp;&nbsp;' /></td>";
+					"<li><a onclick='" + anterior + "()' class='pull-left withripple condensed' href='javascript:void(0)'>" + $trad("volta") + "</a></li>";
 			}
 			if (proxima !== "") {
 				botoes +=
-					"<td style='text-align:right;'><input id='"
-					+ idatual
-					+ "proxima_' onclick='"
-					+ proxima
-					+ "' type='button' value='&nbsp;&nbsp;' /></td>";
+					"<li><a onclick='" + proxima + "()' class='pull-right withripple condensed' href='javascript:void(0)'>" + $trad("continua") + "</a></li>";
 			}
-			botoes += "</tr></table>";
-
-			var ativaBotoes = function(anterior, proxima, idatual) {
-				var i;
-				new YAHOO.widget.Button(idatual + "anterior_", {
-					onclick : {
-						fn : function() {
-							eval(anterior + "()");
-						},
-						lazyloadmenu : true
-					}
-				});
-				new YAHOO.widget.Button(idatual + "proxima_", {
-					onclick : {
-						fn : function() {
-							eval(proxima + "()");
-						},
-						lazyloadmenu : true
-					}
-				});
-				i = $i(idatual + "proxima_-button");
-				if (i) {
-					i.style.backgroundImage = "url('" + i3GEO.configura.locaplic + "/imagens/player_avanca.png')";
-					i.style.backgroundRepeat = "no-repeat";
-					i.style.backgroundPosition = "center center";
-				}
-				i = $i(idatual + "anterior_-button");
-				if (i) {
-					i.style.backgroundImage = "url('" + i3GEO.configura.locaplic + "/imagens/player_volta.png')";
-					i.style.backgroundRepeat = "no-repeat";
-					i.style.backgroundPosition = "center center";
-				}
-			};
+			botoes += "</ul>";
 			if (onde) {
 				$i(onde).innerHTML = botoes;
 			} else {
@@ -2128,8 +2087,6 @@ i3GEO.util =
 				ndiv.innerHTML = texto;
 				$i(container).appendChild(ndiv);
 			}
-			ativaBotoes(anterior, proxima, idatual);
-
 			temp = $i(container).getElementsByTagName("div");
 			nids = temp.length;
 			for (i = 0; i < nids; i++) {
