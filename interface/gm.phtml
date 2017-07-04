@@ -426,9 +426,9 @@ include("../ms_configura.php");
 				</div>
 				<!-- Legenda -->
 				<div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
-					<a href='javascript:void(0)' onclick="i3GEO.legenda.janela()" class='btn btn-primary btn-sm btn-raised'>{{{x11}}}</a>
-					<div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: block; text-align: left'></div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
+					<a href='javascript:void(0)' onclick="i3GEO.legenda.inicia({'janela':true})" class='btn btn-primary btn-sm btn-raised'>{{{x11}}}</a>
+					<div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: none; text-align: left'></div>
 				</div>
 				<!-- busca
 				Funcoes de busca por registros. Pode ser feita nos temas existentes no mapa, em um servico de busca e no google

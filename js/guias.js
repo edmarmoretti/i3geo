@@ -349,6 +349,9 @@ i3GEO.guias =
 					if(obj.attr("data-idLegenda") != undefined){
 						f.idLegenda = obj.attr("data-idLegenda");
 					}
+					//necessario para a legenda nao ser atualizada nos eventos desnecessariamente
+					$i(f.idLegenda).style.display = "block";
+					i3GEO.legenda.CAMADAS = "";
 					i3GEO.legenda.inicia({
 						"idLegenda": f.idLegenda,
 						"templateLegenda": $("#" + f.idLegenda).attr("data-template"),
@@ -627,5 +630,6 @@ i3GEO.guias =
 				Dom.setStyle(namespace + g + "obj", "display", "none");
 			}
 			Dom.setStyle(guia + "obj", "display", "block");
-		}
+		},
+		ajustaGuiaFerramenta : function(){}
 };

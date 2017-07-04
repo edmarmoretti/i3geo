@@ -177,6 +177,13 @@ i3GEO.arvoreDeCamadas =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.arvoreDeCamadas.atualiza()");
 
+			if(i3GEO.template.camada == undefined){
+				if (typeof (console) !== 'undefined')
+					console.info("template da arvore de camadas nao carregado");
+
+				return;
+			}
+
 			if (arguments.length === 0) {
 				temas = i3GEO.arvoreDeCamadas.CAMADAS;
 				i3GEO.arvoreDeCamadas.CAMADAS = "";

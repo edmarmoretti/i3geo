@@ -121,20 +121,19 @@ i3GEOF.tabela =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv, idjanela) {
-			var b, onButtonClick = function(p_sType, p_aArgs, botao) {
-				var oMenuItem = p_aArgs[1];
-				if (oMenuItem) {
-					if (oMenuItem.value != "") {
-						i3GEO.mapa.ativaTema(oMenuItem.value);
-						botao.set("label", "<span class='cabecalhoTemas' >" + oMenuItem.cfg.getProperty("text") + "</span>&nbsp;&nbsp;");
-						i3GEOF.tabela.propJanelas[idjanela].tema = oMenuItem.value;
+			var b, onButtonClick = function(evt) {
+				var botao = evt.target;
+				if (botao) {
+					if (botao.value != "") {
+						i3GEO.mapa.ativaTema(botao.value);
+						i3GEOF.tabela.propJanelas[idjanela].tema = botao.value;
 						$i(idjanela + "_corpo").innerHTML = "";
 						i3GEOF.tabela.inicia(iddiv, idjanela);
 					}
 				}
 			};
 			if (!$i(idjanela + "i3GEOFtabelaComboCabecaSel")) {
-				i3GEO.janela.comboCabecalhoTemas(
+				i3GEO.janela.comboCabecalhoTemasBs(
 					idjanela + "i3GEOFtabelaComboCabeca",
 					idjanela + "i3GEOFtabelaComboCabecaSel",
 					"tabela",
@@ -336,7 +335,7 @@ i3GEOF.tabela =
 						+ "I' style='left:10px;'>"
 						+ "<div  id='"
 						+ id
-						+ "i3GEOFtabelaComboCabeca' class='comboTemasCabecalho' style='left:0px;'>   ------</div>"
+						+ "i3GEOFtabelaComboCabeca' class='comboTemasCabecalhoBs form-group form-group-md' >   ------</div>"
 						+ "<div class='i3GeoTituloJanela'>" + $trad('tabela', i3GEOF.tabela.dicionario)
 						+ "<a class=ajuda_usuario target=_blank href='"
 						+ i3GEO.configura.locaplic

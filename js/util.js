@@ -1283,7 +1283,7 @@ i3GEO.util =
 		 *
 		 * {boolean} - (opcional) inclui um option vazio
 		 */
-		comboTemas : function(id, funcao, onde, nome, multiplo, tipoCombo, estilo, yui, incluiVazio) {
+		comboTemas : function(id, funcao, onde, nome, multiplo, tipoCombo, estilo, yui, incluiVazio, classe) {
 			if (onde && onde !== "") {
 				i3GEO.util.defineValor(onde, "innerHTML", "<span style=color:red;font-size:10px; >buscando temas...</span>");
 			}
@@ -1301,6 +1301,9 @@ i3GEO.util =
 			}
 			if (!incluiVazio) {
 				incluiVazio = false;
+			}
+			if(!classe){
+				classe = "";
 			}
 			var monta, temp, temp1, temp2;
 			monta =
@@ -1320,9 +1323,9 @@ i3GEO.util =
 					if (n > 0) {
 						if (multiplo) {
 							comboTemas +=
-								"<select style='" + estilo + "' id='" + id + "' size='4' multiple='multiple' name='" + nome + "'>";
+								"<select class='" + classe + "' style='" + estilo + "' id='" + id + "' size='4' multiple='multiple' name='" + nome + "'>";
 						} else {
-							comboTemas += "<select style='" + estilo + "' id='" + id + "' name='" + nome + "'>";
+							comboTemas += "<select class='" + classe + "' style='" + estilo + "' id='" + id + "' name='" + nome + "'>";
 						}
 						if (yui === false || incluiVazio === true) {
 							comboTemas += "<option value=''>----</option>";

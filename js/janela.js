@@ -920,7 +920,7 @@ i3GEO.janela =
 					if (!onButtonClick) {
 						onButtonClick =
 							function(p_sType, p_aArgs) {
-								var oMenuItem = p_aArgs[1]; // MenuItem instance
+								var oMenuItem = p_aArgs[1];
 								if (oMenuItem) {
 									i3GEO.mapa.ativaTema(oMenuItem.value);
 									if (oMenuItem.value === "") {
@@ -930,7 +930,6 @@ i3GEO.janela =
 										botao.set("label", "<span class='cabecalhoTemas' >" + oMenuItem.cfg.getProperty("text")
 											+ "</span>&nbsp;&nbsp;");
 									}
-
 									if (i3GEOF[ferramenta]) {
 										i3GEOF[ferramenta].tema = oMenuItem.value;
 										if ($i("i3GEOF." + ferramenta + "_corpo")) {
@@ -952,7 +951,64 @@ i3GEO.janela =
 						]);
 					}
 					botao.getMenu().subscribe("click", onButtonClick, botao);
-				}, temp.id, "", false, tipo, "", true, true);
+				}, temp.id, "", false, tipo, "", true, true, "");
+			}
+		},
+		comboCabecalhoTemasBs : function(idDiv, idCombo, ferramenta, tipo, onButtonClick, temaSel) {
+			var temp = $i(idDiv);
+			// tenta pegar o tema que ja foi escolhido antes
+			if (!temaSel) {
+				temaSel = "";
+			}
+			if (temaSel == "" && i3GEOF[ferramenta] && i3GEOF[ferramenta].tema && i3GEOF[ferramenta].tema != "") {
+				// o tema escolhido pode estar definido na variavel da ferramenta
+				temaSel = i3GEOF[ferramenta].tema;
+			} else {
+				temaSel = i3GEO.temaAtivo;
+			}
+			if (temp) {
+				i3GEO.util.comboTemas(temp.id + "Sel", function(retorno) {
+					var tema, container = $i(idDiv), botao;
+					container.innerHTML = retorno.dados;
+					botao = $i(temp.id + "Sel");
+
+					if (temaSel != "") {
+						tema = i3GEO.arvoreDeCamadas.pegaTema(temaSel);
+						if (tema && tema != undefined) {
+							botao.value = tema.name;
+						} else {
+							botao.value= "";
+						}
+					} else {
+						botao.value= "";
+					}
+					//
+					// a busca nao funciona com parametros dentro de parenteses
+					// por isso e necessario zerar o array
+					//
+					if (i3GEO.eventos.ATUALIZAARVORECAMADAS.length > 20) {
+						i3GEO.eventos.ATUALIZAARVORECAMADAS = [];
+					}
+					i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS", [
+						"i3GEO.janela.comboCabecalhoTemas('" + idDiv + "','" + idCombo + "','" + ferramenta + "','" + tipo + "')"
+					]);
+					if (!onButtonClick) {
+						onButtonClick = function(botao){
+							i3GEO.mapa.ativaTema(botao.value);
+							if(botao.value == ""){
+								i3GEO.temaAtivo = "";
+							}
+							if (i3GEOF[ferramenta]) {
+								i3GEOF[ferramenta].tema = botao.value;
+								if ($i("i3GEOF." + ferramenta + "_corpo")) {
+									$i("i3GEOF." + ferramenta + "_corpo").innerHTML = "";
+									eval("i3GEOF." + ferramenta + ".inicia('i3GEOF." + ferramenta + "_corpo');");
+								}
+							}
+						};
+					}
+					botao.onchange = onButtonClick;
+				}, temp.id, "", false, tipo, "font-size: 12px;width: 95%;color:white;", false, true, "form-control");
 			}
 		}
 	};
