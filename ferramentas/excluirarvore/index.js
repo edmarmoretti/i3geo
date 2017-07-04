@@ -86,7 +86,7 @@ i3GEOF.excluirarvore = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		var camadas = i3GEO.arvoreDeCamadas.CAMADASINICIAIS,
+		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
 			n = camadas.length,
 			temp;
 		i3GEOF.excluirarvore.iddiv = iddiv;
@@ -126,7 +126,7 @@ i3GEOF.excluirarvore = {
 		while(n > 0){
 			n -= 1;
 			if(camadas[n].tema !== "")
-			{ins += "<tr><td><input id='excluirC_"+camadas[n].name+"' CHECKED class=inputsb style='cursor:pointer' type=checkbox value='"+camadas[n].name+"' /></td><td><span style=background:white id='i3GEOanima"+camadas[n].name+"'>"+camadas[n].tema+"</span></td></tr>";}
+			{ins += "<tr><td><input id='excluirC_"+camadas[n].name+"' CHECKED class=inputsb style='cursor:pointer' type=checkbox value='"+camadas[n].name+"' /></td><td><span id='i3GEOanima"+camadas[n].name+"'>"+camadas[n].tema+"</span></td></tr>";}
 		}
 		ins += "</table><br>";
 		return ins;

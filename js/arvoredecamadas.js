@@ -88,6 +88,7 @@ i3GEO.arvoreDeCamadas =
 		 * {objeto}
 		 */
 		CAMADAS : "",
+		FILTRO : "",
 		CAMADASINDEXADAS : [], //CAMADAS indexadas pelo name
 		config : {
 			"idOnde": "listaTemas", //onde a lista sera inserida
@@ -207,6 +208,7 @@ i3GEO.arvoreDeCamadas =
 			i3GEO.arvoreDeCamadas.CAMADAS = temas;
 			i3GEO.arvoreDeCamadas.CAMADASINDEXADAS = [];
 			$.each( i3GEO.arvoreDeCamadas.CAMADAS, function( i,tema ) {
+				var mostra = true;
 				i3GEO.pluginI3geo.aplicaPropriedades(tema);
 				camada = {};
 				camada.name = tema.name;
@@ -222,16 +224,42 @@ i3GEO.arvoreDeCamadas =
 				} else {
 					camada.classeCss = "";
 				}
-				i3GEO.arvoreDeCamadas.montaIconesTema(tema,camada);
-				i3GEO.arvoreDeCamadas.montaOpcoesTema(tema,camada);
-				//
-				// inclui icone do tema
-				//
-				if (tema.iconetema !== "") {
-					camada.iconetema = "<img class='i3GEOiconeTema' src='" + tema.iconetema + "' />";
+				//aplica o filtro
+				if (i3GEO.arvoreDeCamadas.FILTRO !== "") {
+					if (i3GEO.arvoreDeCamadas.FILTRO === "desligados" && camada.checked == "checked") {
+						mostra = false;
+					}
+					if (i3GEO.arvoreDeCamadas.FILTRO === "ligados" && camada.checked == "") {
+						mostra = false;
+					}
+					if (i3GEO.arvoreDeCamadas.FILTRO === "selecionados" && tema.sel.toLowerCase() !== "sim") {
+						mostra = false;
+					}
+					if (i3GEO.arvoreDeCamadas.FILTRO === "download" && tema.download.toLowerCase() !== "sim") {
+						mostra = false;
+					}
+					if (i3GEO.arvoreDeCamadas.FILTRO === "wms" && tema.connectiontype * 1 !== 7) {
+						mostra = false;
+					}
+					if (i3GEO.arvoreDeCamadas.FILTRO === "raster" && tema.type * 1 !== 3) {
+						mostra = false;
+					}
+					if (i3GEO.arvoreDeCamadas.FILTRO === "toponimia" && tema.type * 1 !== 4) {
+						mostra = false;
+					}
 				}
-				if (tema.escondido.toLowerCase() !== "sim") {
-					clone.push(camada);
+				if(mostra == true){
+					i3GEO.arvoreDeCamadas.montaIconesTema(tema,camada);
+					i3GEO.arvoreDeCamadas.montaOpcoesTema(tema,camada);
+					//
+					// inclui icone do tema
+					//
+					if (tema.iconetema !== "") {
+						camada.iconetema = "<img class='i3GEOiconeTema' src='" + tema.iconetema + "' />";
+					}
+					if (tema.escondido.toLowerCase() !== "sim") {
+						clone.push(camada);
+					}
 				}
 				i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[camada.name] = tema;
 			});
@@ -625,11 +653,9 @@ i3GEO.arvoreDeCamadas =
 			}
 			if (tipo === "ligartodos") {
 				t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("marca");
-				return;
 			}
 			if (tipo === "desligartodos") {
 				t = i3GEO.arvoreDeCamadas.listaLigadosDesligados("desmarca");
-				return;
 			}
 			//
 			// zera o contador de tempo
