@@ -89,6 +89,7 @@ i3GEOF.atalhoscamada =
 				i3GEOF.atalhoscamada.MUSTACHE = template;
 				i3GEOF.atalhoscamada.inicia(iddiv, idjanela);
 			});
+			return;
 		}
 		$i(iddiv).innerHTML = i3GEOF.atalhoscamada.html(idjanela);
 	},

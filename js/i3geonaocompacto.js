@@ -47,8 +47,6 @@ OpenLayers = {
 			}
 		}
 };
-
-
 (function(){
 	var scriptLocation = "";
 	var scripts = document.getElementsByTagName('script');
@@ -72,7 +70,7 @@ OpenLayers = {
 	"../pacotes/yui290/build/dom/dom-min.js",
 	"../pacotes/yui290/build/utilities/utilities.js",
 	"../pacotes/yui290/build/container/container_core.js",
-	"../pacotes/yui290/build/menu/menu-min.js",
+	//"../pacotes/yui290/build/menu/menu-min.js",
 	//"../pacotes/yui290/build/logger/logger-min.js",
 	"../pacotes/yui290/build/dragdrop/dragdrop-min.js",
 	"../pacotes/yui290/build/slider/slider-min.js",
@@ -81,7 +79,7 @@ OpenLayers = {
 	"../pacotes/yui290/build/element/element-min.js",
 	"../pacotes/yui290/build/tabview/tabview-min.js",
 	"../pacotes/cpaint/cpaint2.inc.js",
-	"../pacotes/yui290/build/treeview/treeview.js",
+	//"../pacotes/yui290/build/treeview/treeview.js",
 	"../pacotes/yui290/build/button/button-min.js",
 	"../pacotes/yui290/build/json/json-min.js",
 	"../pacotes/yui290/build/resize/resize-min.js",
@@ -153,7 +151,7 @@ OpenLayers = {
 	"../pacotes/yui290/build/fonts/fonts-min.css",
 	"../pacotes/yui290/build/reset-fonts-grids/reset-fonts-grids.css",
 	"../pacotes/yui290/build/grids/grids-min.css",
-	"../pacotes/yui290/build/menu/assets/skins/sam/menu.css",
+	//"../pacotes/yui290/build/menu/assets/skins/sam/menu.css",
 	//"../pacotes/yui290/build/autocomplete/assets/skins/sam/autocomplete.css",
 	"../pacotes/yui290/build/container/assets/skins/sam/container.css",
 	"../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",

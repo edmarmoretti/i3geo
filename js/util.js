@@ -2062,14 +2062,21 @@ i3GEO.util =
 		 * {string} - (opcional) id onde os botoes serao colocados
 		 */
 		proximoAnterior : function(anterior, proxima, texto, idatual, container, mantem, onde) {
-			var temp = $i(idatual), botoes = "", ndiv = document.createElement("div"), nids, i;
+			var c,temp = $i(idatual), botoes = "", ndiv = document.createElement("div"), nids, i;
 			if (!mantem) {
 				mantem = false;
 			}
-			if (temp && mantem == false) {
-				$i(container).removeChild(temp);
+			c = $i(container);
+			if(!c){
+				return;
 			}
-			$i(container).style.backgroundColor = "white";
+
+			if (temp && mantem == false && c) {
+				c.removeChild(temp);
+			}
+			if(c && c.style){
+				c.style.backgroundColor = "white";
+			}
 			botoes = "<ul class='proximoAnterior pager condensed' style='width:95%;margin-bottom: 2px;'>";
 			if (anterior !== "") {
 				botoes +=
@@ -2088,9 +2095,9 @@ i3GEO.util =
 			if (!document.getElementById(idatual)) {
 				ndiv.id = idatual;
 				ndiv.innerHTML = texto;
-				$i(container).appendChild(ndiv);
+				c.appendChild(ndiv);
 			}
-			temp = $i(container).getElementsByTagName("div");
+			temp = c.getElementsByTagName("div");
 			nids = temp.length;
 			for (i = 0; i < nids; i++) {
 				temp[i].style.display = "none";

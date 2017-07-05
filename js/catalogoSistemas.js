@@ -97,6 +97,7 @@ i3GEO.catalogoSistemas = {
 		i3GEO.catalogoSistemas.aguarde();
 		if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
 			i3GEO.catalogoSistemas.carregaTemplates();
+			return;
 		} else {
 			i3GEO.catalogoSistemas.MIGALHA = [
 			{"nome":"","onclick":"i3GEO.catalogoSistemas.mostraCatalogoPrincipal()"},

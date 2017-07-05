@@ -72,11 +72,14 @@ i3GEOF.buffer = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.buffer.html();
-			i3GEOF.buffer.t0();
+		if(i3GEOF.buffer.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/buffer/template_mst.html", function(template) {
+				i3GEOF.buffer.MUSTACHE = template;
+				$i(iddiv).innerHTML += i3GEOF.buffer.html();
+				i3GEOF.buffer.t0();
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

@@ -138,6 +138,7 @@ i3GEO.arvoreDeCamadas =
 
 			if(!i3GEO.template.camada || !i3GEO.template.camadaFundo){
 				i3GEO.arvoreDeCamadas.carregaTemplates();
+				return;
 			} else {
 				config = i3GEO.arvoreDeCamadas.config;
 				var novoel, temp;

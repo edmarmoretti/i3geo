@@ -94,7 +94,21 @@ i3GEOF.opacidademapa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemasBs("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","opacidademapa","ligados");
+		if (!$i("i3GEOFopacidademapaComboCabecaSel")) {
+			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","opacidademapa","ligados",function(evt){
+				var botao = evt.target;
+				if (botao) {
+					if (botao.value != "") {
+						i3GEO.mapa.ativaTema(botao.value);
+						i3GEOF.opacidademapa.tema = botao.value;
+						$i(iddiv).innerHTML = "";
+						i3GEOF.opacidademapa.inicia(iddiv);
+					} else {
+						$i(iddiv).innerHTML = "";
+					}
+				}
+			});
+		}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.opacidademapa.html();
 		}

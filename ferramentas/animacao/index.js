@@ -69,6 +69,13 @@ i3GEOF.animacao = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.animacao.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/animacao/template_mst.html", function(template) {
+				i3GEOF.animacao.MUSTACHE = template;
+				i3GEOF.animacao.inicia(iddiv);
+			});
+			return;
+		}
 		i3GEOF.animacao.aguarde.visibility = "visible";
 		$i(iddiv).innerHTML = i3GEOF.animacao.html();
 		i3GEOF.animacao.listaDeCamadas();

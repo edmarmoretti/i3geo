@@ -45,7 +45,21 @@ i3GEOF.toponimia = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemasBs("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela");
+		if (!$i("i3GEOFtoponimiaComboCabecaSel")) {
+			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela",function(evt){
+				var botao = evt.target;
+				if (botao) {
+					if (botao.value != "") {
+						i3GEO.mapa.ativaTema(botao.value);
+						i3GEOF.toponimia.tema = botao.value;
+						$i(iddiv).innerHTML = "";
+						i3GEOF.toponimia.inicia(iddiv);
+					} else {
+						$i(iddiv).innerHTML = "";
+					}
+				}
+			});
+		}
 		if(i3GEOF.toponimia.tema === ""){
 			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
@@ -146,10 +160,6 @@ i3GEOF.toponimia = {
 		i3GEOF.toponimia.aguarde = $i("i3GEOF.toponimia_imagemCabecalho").style;
 		$i("i3GEOF.toponimia_corpo").style.backgroundColor = "white";
 		i3GEOF.toponimia.inicia(divid);
-		temp = function(){
-			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",['i3GEO.janela.comboCabecalhoTemas("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela")']);
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: corj

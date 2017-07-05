@@ -31,6 +31,7 @@ i3GEO.legenda =
 			}
 			if(!i3GEO.template.legenda){
 				i3GEO.legenda.carregaTemplates();
+				return;
 			} else {
 				config = i3GEO.legenda.config;
 				if (!$i(config.idLegenda)) {

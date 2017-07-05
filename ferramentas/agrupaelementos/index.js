@@ -69,11 +69,15 @@ i3GEOF.agrupaElementos = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.agrupaElementos.html();
-			i3GEOF.agrupaElementos.t0();
+		if(i3GEOF.agrupaElementos.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/agrupaelementos/template_mst.html", function(template) {
+				i3GEOF.agrupaElementos.MUSTACHE = template;
+				i3GEOF.agrupaElementos.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML = i3GEOF.agrupaElementos.html();
+		i3GEOF.agrupaElementos.t0();
 	},
 	/*
 	Function: html

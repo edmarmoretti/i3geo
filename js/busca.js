@@ -93,6 +93,7 @@ i3GEO.busca = {
 		}
 		if(!i3GEO.template.buscaEmTemas || !i3GEO.template.buscaEmServico){
 			i3GEO.busca.carregaTemplates();
+			return;
 		} else {
 			var palavra = $(config.ondeConteiner).find(config.inputOndePalavra).val();
 			if(palavra != ""){

@@ -116,6 +116,7 @@ i3GEO.catalogoRegioes = {
 		i3GEO.catalogoRegioes.DADOS = "";
 		if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
 			i3GEO.catalogoRegioes.carregaTemplates();
+			return;
 		} else {
 			i3GEO.catalogoRegioes.MIGALHA = [
 			{"nome":"","onclick":"i3GEO.catalogoRegioes.mostraCatalogoPrincipal()"},

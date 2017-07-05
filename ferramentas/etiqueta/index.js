@@ -68,8 +68,21 @@ i3GEOF.etiqueta = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela");
-
+		if (!$i("i3GEOFetiquetaComboCabecaSel")) {
+			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela",function(evt){
+				var botao = evt.target;
+				if (botao) {
+					if (botao.value != "") {
+						i3GEO.mapa.ativaTema(botao.value);
+						i3GEOF.etiqueta.tema = botao.value;
+						$i(iddiv).innerHTML = "";
+						i3GEOF.etiqueta.inicia(iddiv);
+					} else {
+						$i(iddiv).innerHTML = "";
+					}
+				}
+			});
+		}
 		if(i3GEOF.etiqueta.tema === ""){
 			$i(iddiv).innerHTML = "";
 			return;
@@ -141,10 +154,6 @@ i3GEOF.etiqueta = {
 		i3GEOF.etiqueta.aguarde = $i("i3GEOF.etiqueta_imagemCabecalho").style;
 		$i("i3GEOF.etiqueta_corpo").style.backgroundColor = "white";
 		i3GEOF.etiqueta.inicia(divid);
-		temp = function(){
-			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",['i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela")']);
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: ativaFoco

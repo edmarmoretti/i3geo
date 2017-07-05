@@ -96,7 +96,21 @@ i3GEOF.graficoTema = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemasBs("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela");
+		if (!$i("i3GEOFgraficotemaComboCabecaSel")) {
+			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela",function(evt){
+				var botao = evt.target;
+				if (botao) {
+					if (botao.value != "") {
+						i3GEO.mapa.ativaTema(botao.value);
+						i3GEOF.graficoTema.tema = botao.value;
+						$i(iddiv).innerHTML = "";
+						i3GEOF.graficoTema.inicia(iddiv);
+					} else {
+						$i(iddiv).innerHTML = "";
+					}
+				}
+			});
+		}
 		if(i3GEOF.graficoTema.tema === ""){
 			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
@@ -171,10 +185,6 @@ i3GEOF.graficoTema = {
 		i3GEOF.graficoTema.aguarde = $i("i3GEOF.graficoTema_imagemCabecalho").style;
 		$i("i3GEOF.graficoTema_corpo").style.backgroundColor = "white";
 		i3GEOF.graficoTema.inicia(divid);
-		temp = function(){
-			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",['i3GEO.janela.comboCabecalhoTemas("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","tabela","ligadosComTabela")']);
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 	/*
 	Function: montaListaItens

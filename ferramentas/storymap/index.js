@@ -110,7 +110,21 @@ i3GEOF.storymap =
 		 */
 		inicia : function(iddiv) {
 			var camada = "";
-			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFstoComboCabeca", "i3GEOFstoComboCabecaSel", "storymap", "ligadosComTabela");
+			if (!$i("i3GEOFstoComboCabecaSel")) {
+				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFstoComboCabeca", "i3GEOFstoComboCabecaSel", "storymap", "ligadosComTabela",function(evt){
+					var botao = evt.target;
+					if (botao) {
+						if (botao.value != "") {
+							i3GEO.mapa.ativaTema(botao.value);
+							i3GEOF.storymap.tema = botao.value;
+							$i(iddiv).innerHTML = "";
+							i3GEOF.storymap.inicia(iddiv);
+						} else {
+							$i(iddiv).innerHTML = "";
+						}
+					}
+				});
+			}
 			if (i3GEOF.storymap.tema === "") {
 				return;
 			}

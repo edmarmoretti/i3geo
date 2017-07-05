@@ -32,13 +32,21 @@ i3GEOF.analisaGeometrias = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.analisaGeometrias.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/analisageometrias/template_mst.html", function(template) {
+				i3GEOF.analisaGeometrias.MUSTACHE = template;
+				i3GEOF.analisaGeometrias.inicia(iddiv);
+			});
+			return;
+		}
+		//try{
 			var b, combot;
 			$i(iddiv).innerHTML += i3GEOF.analisaGeometrias.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");
 			//eventos das guias
-			$i("i3GEOanalisageometrias1").onclick = function()
-			{i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");};
+			$i("i3GEOanalisageometrias1").onclick = function(){
+				i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");
+			};
 			$i("i3GEOanalisageometrias2").onclick = function(){
 				if($i("i3GEOanalisageometrias2obj").style.display === "block")
 				{return;}
@@ -83,8 +91,8 @@ i3GEOF.analisaGeometrias = {
 			combot += "</select></div>";
 			$i("i3GEOanalisageometriasoperacao").innerHTML = combot;
 			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		//}
+		//catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

@@ -114,6 +114,7 @@ i3GEO.catalogoInde = {
 		i3GEO.catalogoInde.aguarde();
 		if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
 			i3GEO.catalogoInde.carregaTemplates();
+			return;
 		} else {
 			i3GEO.catalogoInde.DADOS = "";
 

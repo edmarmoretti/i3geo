@@ -53,6 +53,7 @@ i3GEO.marcador =
 			}
 			if(!i3GEO.template.marcador){
 				i3GEO.marcador.carregaTemplates();
+				return;
 			} else {
 				var janela =
 					i3GEO.janela.cria(

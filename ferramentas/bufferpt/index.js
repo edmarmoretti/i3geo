@@ -78,19 +78,23 @@ i3GEOF.bufferpt = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.bufferpt.html();
-			new YAHOO.widget.Button(
-				"i3GEObufferptbotao2",
-				{onclick:{fn: i3GEOF.bufferpt.atualizaBox}}
-			);
-			var b = new YAHOO.widget.Button(
-				"i3GEObufferptbotao1",
-				{onclick:{fn: i3GEOF.bufferpt.executa}}
-			);
-			b.addClass("rodar");
+		if(i3GEOF.bufferpt.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/bufferpt/template_mst.html", function(template) {
+				i3GEOF.bufferpt.MUSTACHE = template;
+				i3GEOF.bufferpt.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.bufferpt.html();
+		new YAHOO.widget.Button(
+			"i3GEObufferptbotao2",
+			{onclick:{fn: i3GEOF.bufferpt.atualizaBox}}
+		);
+		var b = new YAHOO.widget.Button(
+			"i3GEObufferptbotao1",
+			{onclick:{fn: i3GEOF.bufferpt.executa}}
+		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: html

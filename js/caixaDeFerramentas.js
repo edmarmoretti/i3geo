@@ -62,6 +62,7 @@ i3GEO.caixaDeFerramentas = {
 			i3GEO.caixaDeFerramentas.aguarde();
 			if(!i3GEO.template.ferramentasFolder || !i3GEO.template.ferramentasLinks || !i3GEO.template.ferramentasMigalha){
 				i3GEO.caixaDeFerramentas.carregaTemplates();
+				return;
 			} else {
 				i3GEO.caixaDeFerramentas.nivel0();
 			}

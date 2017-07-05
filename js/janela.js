@@ -985,16 +985,6 @@ i3GEO.janela =
 					} else {
 						botao.value= "";
 					}
-					//
-					// a busca nao funciona com parametros dentro de parenteses
-					// por isso e necessario zerar o array
-					//
-					if (i3GEO.eventos.ATUALIZAARVORECAMADAS.length > 20) {
-						i3GEO.eventos.ATUALIZAARVORECAMADAS = [];
-					}
-					i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS", [
-						"i3GEO.janela.comboCabecalhoTemas('" + idDiv + "','" + idCombo + "','" + ferramenta + "','" + tipo + "')"
-					]);
 					if (!onButtonClick) {
 						onButtonClick = function(botao){
 							i3GEO.mapa.ativaTema(botao.value);

@@ -98,6 +98,7 @@ i3GEO.catalogoEstrelas = {
 		i3GEO.catalogoEstrelas.aguarde();
 		if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
 			i3GEO.catalogoEstrelas.carregaTemplates();
+			return;
 		} else {
 			i3GEO.catalogoEstrelas.MIGALHA = [
 			{"nome":"","onclick":"i3GEO.catalogoEstrelas.mostraCatalogoPrincipal()"},

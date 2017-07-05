@@ -96,6 +96,7 @@ i3GEO.catalogoMenus = {
 		i3GEO.catalogoMenus.aguarde();
 		if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
 			i3GEO.catalogoMenus.carregaTemplates();
+			return;
 		} else {
 			config = i3GEO.catalogoMenus.config;
 			//para efeitos de compatibilidade
