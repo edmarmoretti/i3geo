@@ -358,10 +358,10 @@ i3GEOF.identifica =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<div class='i3GeoTituloJanela'>" + $trad("d7t")
-					+ "<a class=ajuda_usuario target=_blank href='"
+				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=8&idajuda=70' ><b> </b></a></div>";
+					+ "/ajuda_usuario.php?idcategoria=8&idajuda=70' >" + $trad("d7t")
+					+ "</a>";
 			janela =
 				i3GEO.janela.cria(
 					"470px",

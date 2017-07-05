@@ -110,7 +110,7 @@ i3GEOF.storymap =
 		 */
 		inicia : function(iddiv) {
 			var camada = "";
-			i3GEO.janela.comboCabecalhoTemas("i3GEOFstoComboCabeca", "i3GEOFstoComboCabecaSel", "storymap", "ligadosComTabela");
+			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFstoComboCabeca", "i3GEOFstoComboCabecaSel", "storymap", "ligadosComTabela");
 			if (i3GEOF.storymap.tema === "") {
 				return;
 			}
@@ -224,7 +224,12 @@ i3GEOF.storymap =
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function(tema) {
-			i3GEOF.storymap.tema = tema;
+			if(tema && tema != ""){
+				i3GEOF.storymap.tema = tema;
+				i3GEO.temaAtivo = tema;
+			} else {
+				i3GEOF.storymap.tema = i3GEO.temaAtivo;
+			}
 			var minimiza, cabecalho, janela, divid, temp, titulo;
 			if ($i("i3GEOF.storymap")) {
 				i3GEOF.storymap.inicia("i3GEOF.storymap_corpo");
@@ -237,10 +242,10 @@ i3GEOF.storymap =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<span class='i3GEOiconeFerramenta i3GEOiconeStorymap'></span>" + "<div  id='i3GEOFstoComboCabeca' class='comboTemasCabecalho'>   ------</div>"
-					+ "<div class='i3GeoTituloJanela'>Storymap </span><a class=ajuda_usuario target=_blank href='"
+				"<div id='i3GEOFstoComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div>"
+					+ "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=5&idajuda=108' ><b> </b></a></div>";
+					+ "/ajuda_usuario.php?idcategoria=5&idajuda=108' >Storymap</a>";
 			janela = i3GEO.janela.cria("380px", "320px", "", "", "", titulo, "i3GEOF.storymap", false, "hd", cabecalho, minimiza, "", true);
 			divid = janela[2].id;
 			i3GEOF.storymap.aguarde = $i("i3GEOF.storymap_imagemCabecalho").style;

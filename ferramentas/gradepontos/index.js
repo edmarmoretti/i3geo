@@ -117,7 +117,7 @@ i3GEOF.gradeDePontos = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>" + $trad("u8")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=15' ><b> </b></a></div>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=15' >" + $trad("u8")+"</a>";
 		cabecalho = function(){
 			i3GEO.navega.ativaPan();
 		};

@@ -150,8 +150,8 @@ i3GEO.analise =
 					i3GEO.configura.locaplic + "/ferramentas/linhadotempo/index.php",
 					"",
 					"",
-					"<div class='i3GeoTituloJanela'>Linha do tempo<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-						+ "/ajuda_usuario.php?idcategoria=3&idajuda=88' ><b> </b></a></div>",
+					"</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic
+						+ "/ajuda_usuario.php?idcategoria=3&idajuda=88' >Linha do tempo</a>",
 					"i3GEOF.linhaDoTempo",
 					false,
 					"hd",

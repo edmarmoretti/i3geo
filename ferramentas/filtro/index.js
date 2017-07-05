@@ -88,7 +88,7 @@ i3GEOF.filtro = {
 			modoCalculadora = false;
 		}
 		if(modoCalculadora === false){
-			i3GEO.janela.comboCabecalhoTemas("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
+			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela");
 			if(i3GEOF.filtro.tema === ""){
 				$i(iddiv).innerHTML = "";
 				return;
@@ -175,7 +175,7 @@ i3GEOF.filtro = {
 		}
 		//cria a janela flutuante
 		if(modoCalculadora === false){
-			titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeFiltro'></span><div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalho'>   ------</div><div class='i3GeoTituloJanela'>"+$trad("t29")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' ><b> </b></a></div>";
+			titulo = "<div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' style='right:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=38' >"+$trad("t29")+"</a>";
 		}
 		janela = i3GEO.janela.cria(
 			"600px",

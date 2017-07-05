@@ -77,9 +77,8 @@ i3GEOF.busca = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");
+		i3GEO.janela.comboCabecalhoTemasBs("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");
 		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
 		try{
@@ -90,7 +89,6 @@ i3GEOF.busca = {
 				{onclick:{fn: i3GEOF.busca.procurar}}
 			);
 			b.addClass("rodar");
-		i3GEO.janela.comboCabecalhoTemas("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela");
 		}
 		catch(erro){alert(erro);}
 	},
@@ -127,9 +125,10 @@ i3GEOF.busca = {
 			i3GEO.janela.minimiza("i3GEOF.busca");
 		};
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeBusca'></span><div  id='i3GEOFbuscaComboCabeca' class='comboTemasCabecalho'>   ------</div>&nbsp;<a class=ajuda_usuario style='margin-left:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' ><b> </b></a>";
+		titulo = "<div  id='i3GEOFbuscaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div>"
+			+ "<a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >"+$trad("t23")+"</a>";
 		janela = i3GEO.janela.cria(
-			"290px",
+			"320px",
 			"330px",
 			"",
 			"",

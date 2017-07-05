@@ -128,12 +128,10 @@ i3GEOF.geolocal =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<span class='i3GEOiconeFerramenta i3GEOiconeGeoLocal'></span><div class='i3GeoTituloJanela'>" + $trad(
-					'localizaUsuario',
-					i3GEOF.geolocal.dicionario)
-					+ "<a class=ajuda_usuario target=_blank href='"
+				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=6&idajuda=118' ><b> </b></a></div>";
+					+ "/ajuda_usuario.php?idcategoria=6&idajuda=118' >"
+					+ $trad('localizaUsuario',i3GEOF.geolocal.dicionario) + "</a>";
 			janela = i3GEO.janela.cria("310", "230", "", "", "", titulo, "i3GEOF.geolocal", false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;
 			$i("i3GEOF.geolocal_corpo").style.backgroundColor = "white";

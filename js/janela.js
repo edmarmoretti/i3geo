@@ -965,6 +965,9 @@ i3GEO.janela =
 				temaSel = i3GEOF[ferramenta].tema;
 			} else {
 				temaSel = i3GEO.temaAtivo;
+				if (i3GEOF[ferramenta] && i3GEOF[ferramenta].tema) {
+					i3GEOF[ferramenta].tema = temaSel;
+				}
 			}
 			if (temp) {
 				i3GEO.util.comboTemas(temp.id + "Sel", function(retorno) {

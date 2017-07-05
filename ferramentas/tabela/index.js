@@ -321,25 +321,22 @@ i3GEOF.tabela =
 					i3GEOF.tabela.ativaFoco(id);
 				};
 				minimiza = function() {
-					i3GEO.janela.iconiza(id,120,"i3GEOFtabelaRodape" + id);
+					i3GEO.janela.minimiza(id);
 				};
 				duplica = function() {
 					i3GEOF.tabela.iniciaJanelaFlutuante();
 				};
 				// cria a janela flutuante
 				titulo =
-					"<span class='i3GEOiconeFerramenta i3GEOiconeTabela' title='" + $trad('tabela', i3GEOF.tabela.dicionario)
-						+ "'></span>"
-						+ "<div id='"
+					"<div id='"
 						+ id
-						+ "I' style='left:10px;'>"
+						+ "I' style='left:5px;'>"
 						+ "<div  id='"
 						+ id
-						+ "i3GEOFtabelaComboCabeca' class='comboTemasCabecalhoBs form-group form-group-md' >   ------</div>"
-						+ "<div class='i3GeoTituloJanela'>" + $trad('tabela', i3GEOF.tabela.dicionario)
-						+ "<a class=ajuda_usuario target=_blank href='"
+						+ "i3GEOFtabelaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px' >   ------</div></div></div>"
+						+ "<a class='i3GeoTituloJanelaBs' style='right:90px;' target=_blank href='"
 						+ i3GEO.configura.locaplic
-						+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' ><b> </b></a></div></div></div>";
+						+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' >"+$trad('tabela', i3GEOF.tabela.dicionario)+"</a>";
 
 				janela = i3GEO.janela.cria("570px", "400px", "", "", "", titulo, id, false, "hd", cabecalho, minimiza, function() {
 					i3GEO.guias.ajustaGuiaFerramenta(id, id + "i3GEOtabela");

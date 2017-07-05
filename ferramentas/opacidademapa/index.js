@@ -94,7 +94,7 @@ i3GEOF.opacidademapa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemas("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","opacidademapa","ligados");
+		i3GEO.janela.comboCabecalhoTemasBs("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","opacidademapa","ligados");
 		try{
 			$i(iddiv).innerHTML = i3GEOF.opacidademapa.html();
 		}
@@ -144,9 +144,9 @@ i3GEOF.opacidademapa = {
 		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeOpacidadeMapa'></span><div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalho'>------</div>&nbsp;&nbsp;&nbsp;<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' ><b> </b></a>";
+		titulo = "<div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>------</div></div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=102' >"+$trad("t20")+"</a>";
 		janela = i3GEO.janela.cria(
-			"230px",
+			"340px",
 			"40px",
 			"",
 			"",

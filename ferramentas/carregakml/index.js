@@ -121,7 +121,7 @@ i3GEOF.carregakml = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.carregakml");
 		};
-		titulo = "<div class='i3GeoTituloJanela'>Kml<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=105' ><b> </b></a></div>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=105' >Kml</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"160px",

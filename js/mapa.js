@@ -545,11 +545,9 @@ i3GEO.mapa =
 							+ i3GEO.configura.sid
 							+ "&ext="
 							+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-					titulo =
-						"<div class='i3GeoTituloJanela'><span class='i3GEOiconeFerramenta i3GEOiconeCongela'></span>" + "Mapa"
-							+ "<a class=ajuda_usuario target=_blank href='"
+					titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 							+ i3GEO.configura.locaplic
-							+ "/ajuda_usuario.php?idcategoria=6&idajuda=123' ><b> </b></a></div>";
+							+ "/ajuda_usuario.php?idcategoria=6&idajuda=123' >Mapa</a>";
 					i3GEO.janela.cria("500px", "350px", url, "", "", titulo, idjanela, false, "hd", cabecalho, minimiza, "", "", "", "", false);
 				}
 			},

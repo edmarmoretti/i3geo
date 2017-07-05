@@ -8,7 +8,7 @@ i3GEOF.opcoesFundo =
 	{
 		/*
 		 * Variavel: aguarde
-		 * 
+		 *
 		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 		 */
 		aguarde : "",
@@ -27,11 +27,11 @@ i3GEOF.opcoesFundo =
 		},
 		/*
 		 * Function: inicia
-		 * 
+		 *
 		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 * 
+		 *
 		 * Parametro:
-		 * 
+		 *
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
@@ -66,11 +66,11 @@ i3GEOF.opcoesFundo =
 		},
 		/*
 		 * Function: html
-		 * 
+		 *
 		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 * 
+		 *
 		 * Retorno:
-		 * 
+		 *
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
@@ -79,7 +79,7 @@ i3GEOF.opcoesFundo =
 		},
 		/*
 		 * Function: iniciaJanelaFlutuante
-		 * 
+		 *
 		 * Cria a janela flutuante para controle da ferramenta.
 		 */
 		iniciaJanelaFlutuante : function() {
@@ -94,10 +94,10 @@ i3GEOF.opcoesFundo =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<div class='i3GeoTituloJanela'>" + $trad("p9")
-					+ "<a class=ajuda_usuario target=_blank href='"
+				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=1&idajuda=6' ><b> </b></a></div>";
+					+ "/ajuda_usuario.php?idcategoria=1&idajuda=6' >" + $trad("p9")
+					+ "</a>";
 			janela = i3GEO.janela.cria("210px", "80px", "", "", "", titulo, "i3GEOF.opcoesFundo", false, "hd", cabecalho, "");
 			divid = janela[2].id;
 			$i("i3GEOF.opcoesFundo_corpo").style.backgroundColor = "white";
@@ -107,7 +107,7 @@ i3GEOF.opcoesFundo =
 		},
 		/*
 		 * Function: corj
-		 * 
+		 *
 		 * Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
 		 */
 		corj : function(obj) {
@@ -115,9 +115,9 @@ i3GEOF.opcoesFundo =
 		},
 		/*
 		 * Function: executa
-		 * 
+		 *
 		 * Aplica a nova cor
-		 * 
+		 *
 		 * A cor do fundo na interface Openlayers &eacute; definida por meio de estilo, mas &eacute; necess&aacute;rio persistir a cor no
 		 * mapfile existente no servidor.
 		 */

@@ -150,8 +150,7 @@ i3GEOF.upload = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.upload");
 		};
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeUpload'></span>"
-			+ "<div class='i3GeoTituloJanela'>" + $trad("a2")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' ><b> </b></a></div>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=27' >" + $trad("a2")+"</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"480px",

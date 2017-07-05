@@ -68,7 +68,7 @@ i3GEOF.etiqueta = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		i3GEO.janela.comboCabecalhoTemas("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela");
+		i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela");
 
 		if(i3GEOF.etiqueta.tema === ""){
 			$i(iddiv).innerHTML = "";
@@ -121,7 +121,7 @@ i3GEOF.etiqueta = {
 			i3GEO.janela.minimiza("i3GEOF.etiqueta");
 		};
 		//cria a janela flutuante
-		titulo = "<span class='i3GEOiconeFerramenta i3GEOiconeEtiqueta'></span><div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalho'>   ------</div><div class='i3GeoTituloJanela'>"+$trad("d7at")+"</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' ><b> </b></a></div>";
+		titulo = "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >"+$trad("d7at")+"</a>";
 		janela = i3GEO.janela.cria(
 			"510px",
 			"300px",

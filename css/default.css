@@ -560,7 +560,13 @@ Configuracoes especificas dos elementos que ficam no rodape
     top: 5px;
     /*margin-top: -30px;*/
 }
-
+.i3GeoTituloJanelaBs {
+	opacity: 1.0;
+	position: absolute;
+	top: 8px;
+	right: 65px;
+	color: #008579;
+}
 .i3GeoIconeJanela{
 	display: none;
 	position: absolute;
@@ -606,58 +612,10 @@ td {
 	background-color: transparent !important;
 }
 
-.conectarwms {
-	background:
-		url("../imagens/menu-lateral-subitens/catalogo/botao-conexoes.png")
-		no-repeat !important;
-}
-
-.upload {
-	background:
-		url("../imagens/menu-lateral-subitens/catalogo/botao-upload.png ")
-		no-repeat !important;
-}
-
-.download {
-	background:
-		url("../imagens/menu-lateral-subitens/catalogo/botao-download.png")
-		no-repeat !important;
-}
-
-.importarwmc {
-	background:
-		url("../imagens/menu-lateral-subitens/catalogo/botao-importarwmc.png")
-		no-repeat !important;
-}
-
-.nuvemtags {
-	background:
-		url("../imagens/menu-lateral-subitens/catalogo/botao-nuvemdetags.png")
-		no-repeat !important;
-}
-
-.carouselTemas {
-	background:
-		url("../imagens/menu-lateral-subitens/catalogo/botao-minitaturas.png")
-		no-repeat !important;
-}
-
-.buscaInde {
-	background:
-		url("../imagens/menu-lateral-subitens/catalogo/botao-pesquisanainde.png")
-		no-repeat !important;
-}
-
-.iconeMetaestat {
-	background:
-		url("../imagens/menu-lateral-subitens/catalogo/botao-mapacomlegenda.png")
-		no-repeat !important;
-}
-
 /* UTILIZADOS EM VRIOS LOCAIS */
 .ajuda_usuario {
     background:
-        url("../imagens/menu-lateral-subitens/catalogo/botao-tiny-documentacao.png")
+        url("../imagens/janelas-flutuantes/botao-tiny-documentacao-hover.png")
         no-repeat !important;
     width: 21px !important;
     top: 3px;

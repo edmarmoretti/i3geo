@@ -575,11 +575,9 @@ i3GEOF.graficointerativo1 =
 					i3GEOF.graficointerativo1.iniciaJanelaFlutuante();
 				};
 				titulo =
-					"<span class='i3GEOiconeFerramenta i3GEOiconeGrafico' title='"+$trad("t37b")+"'></span>"
-					+ "<div id='" + idjanela + "I' style='left:10px;'>"
-					+ "<div class='i3GeoTituloJanela'>" + $trad("t37b")
-					+ "<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' ><b> </b></a></div></div></div>";
+					"</div><div id='" + idjanela + "I' style='left:10px;'>"
+					+ "</div><a style='right:90px;' class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic
+					+ "/ajuda_usuario.php?idcategoria=3&idajuda=84' >" + $trad("t37b") + "</a>";
 
 				janela =
 					i3GEO.janela.cria(

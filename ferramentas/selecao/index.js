@@ -336,14 +336,12 @@ i3GEOF.selecao =
 				i3GEO.janela.iconiza("i3GEOF.selecao",100);
 			};
 			titulo =
-				"<span class='i3GEOiconeFerramenta i3GEOiconeSelecao' title='" + $trad("x51")
-					+ "'></span>"
-					+ "<div id='i3GEOF.selecaoI' style='left:10px;'>"
-					+ "<div class='i3GeoTituloJanela'>"
-					+ $trad("x51")
-					+ "<a class=ajuda_usuario target=_blank href='"
+				"</div><div id='i3GEOF.selecaoI' style='left:10px;'>"
+					+ "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=5&idajuda=48a' ><b> </b></a></div></div></div>";
+					+ "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >"
+					+ $trad("x51")
+					+ "</a>";
 			janela = i3GEO.janela.cria("510px", "230px", "", "", "", titulo, "i3GEOF.selecao", false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;
 			i3GEOF.selecao.aguarde = $i("i3GEOF.selecao_imagemCabecalho").style;

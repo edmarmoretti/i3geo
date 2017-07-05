@@ -105,7 +105,7 @@ i3GEOF.buscainde = {
 			i3GEO.janela.minimiza("i3GEOF.buscainde");
 		};
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>CSW<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=109&idajuda=8' ><b> </b></a></div>";
+		titulo = "/div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=109&idajuda=8' >CSW</a><";
 		janela = i3GEO.janela.cria(
 			"550px",
 			"350px",

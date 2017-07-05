@@ -47,8 +47,8 @@ i3GEO.listaDeFerramentas = {
 					},
 					{
 						id : "omenudataAjudamenu4",
-						text : $trad("u4"),
-						url : "http://www.softwarepublico.gov.br/dotlrn/clubs/i3geo/file-storage/index?folder%5fid=22667525",
+						text : "Youtube",
+						url : "https://www.youtube.com/results?search_query=i3geo",
 						target : "_blank"
 					},
 					{
@@ -60,18 +60,14 @@ i3GEO.listaDeFerramentas = {
 					{
 						id : "omenudataAjudamenu1",
 						text : $trad("x67"),
-						url : "http://www.softwarepublico.gov.br/spb/ver-comunidade?community_id=1444332",
+						url : "https://softwarepublico.gov.br/social/i3geo",
 						target : "_blank"
 					},
 					{
 						id : "omenudataAjudamenu7",
-						text : $trad("u5b"),
-						url : "javascript:i3GEO.ajuda.abreDoc('/ajuda_usuario.php')"
-					},
-					{
-						id : "omenudataAjudamenu8",
-						text : $trad("u5c"),
-						url : "javascript:i3GEO.ajuda.redesSociais()"
+						text : "Git",
+						url : "https://softwarepublico.gov.br/gitlab/groups/i3geo",
+						target : "_blank"
 					}
 				],
 				"analise" : [
@@ -498,12 +494,15 @@ i3GEO.listaDeFerramentas = {
 										id : "omenudataFerramentas1e",
 										text : $trad("x57"),
 										url : "javascript:i3GEO.mapa.dialogo.metaestat()"
-									},
+									}
+									/* TODO ver se reativa isso
+									,
 									{
 										id : "omenudataFerramentas4e",
 										text : $trad("x71"),
 										url : "javascript:i3GEO.mapa.dialogo.metaestatListaMapas()"
 									}
+									*/
 								]
 							]
 						}
@@ -520,12 +519,14 @@ i3GEO.listaDeFerramentas = {
 										id : "omenudataFerramentas14",
 										text : $trad("conexaoServicoGeo"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"
-									},
+									}
+									/* TODO reativar?,
 									{
 										id : "omenudataFerramentas9i",
 										text : $trad("x85"),
 										url : "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"
 									}
+									*/
 								]
 							]
 						}

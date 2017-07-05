@@ -387,6 +387,7 @@ padding-right: 11px;
 .botoesLegendaFlutuante {
 font-size: 10px;
 }
+/*
 .legendaExpImagemPng .first-child button {
 background: url(../imagens/oxygen/16x16/image-x-generic.png) 5% 50% no-repeat;
 width: 60px;
@@ -399,6 +400,7 @@ width: 80px;
 background: url(../imagens/oxygen/16x16/layer-visible-off.png) 5% 50% no-repeat;
 width: 90px;
 }
+*/
 .i3GEOconteudoLegendaClass{
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
@@ -412,6 +414,7 @@ top: -5px;
 .i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
 display: none;
 }
+/*
 .i3GEOarvCat input[type=checkbox]+label:before {
 color: white;
 content: "";
@@ -434,6 +437,7 @@ position: absolute;
 left: -25px;
 cursor : pointer;
 }
+*/
 .i3GEOarvCat label {
 left:12px;
 }
@@ -527,6 +531,7 @@ margin-left: 3px;
 width: 11px;
 height: 11px;
 }
+/*
 .i3GEOarvCamTemaIco .arvCamFerramentas, .i3GEOarvCamTemaIcoIE .Ferramentas {
 background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
 }
@@ -564,6 +569,7 @@ background-image: url("../imagens/gisicons/zoom-layer.png");
 .i3GEOarvCamTemaIco .pluginParametrossql, .i3GEOarvCamTemaIcoIE .pluginParametrossql {
 background-image: url("../imagens/gisicons/settings.png");
 }
+*/
 .i3GEObalaoInfo {
 position : absolute;
 textAlign : left;
@@ -878,6 +884,7 @@ text-align: center;
 font-size: 10pt !Important;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+/*
 .ajuda_usuario {
 background-image: url(../imagens/oxygen/16x16/dialog-information.png);
 background-position: 0px 0px;
@@ -890,6 +897,7 @@ font-size: 14px;
 background-size: 14px 14px;
 vertical-align: middle;
 }
+*/
 #buscaRapida .ajuda_usuario {
 top: 1px;
 display: inline-block;
@@ -897,6 +905,7 @@ height: 14px;
 width: 14px;
 left: 2px;
 }
+/*
 .executar {
 cursor: pointer;
 color: white;
@@ -909,6 +918,7 @@ background-position: right;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10px;
 }
+*/
 .legendatemas {
 cursor: pointer;
 text-align: left;
@@ -1058,7 +1068,7 @@ font-size: 8px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .verdeclaro {
-background-image: url(../imagens/i3geo1bw.jpg);
+/*background-image: url(../imagens/i3geo1bw.jpg);*/
 padding: 0px;
 background-color: #d5e9c1;
 margin: 0px;
@@ -1287,6 +1297,7 @@ position: absolute;
 left: -1;
 top: 0px
 }
+/*
 #vertBGDiv {
 position: relative;
 top: 0px;
@@ -1295,6 +1306,7 @@ left: 0px;
 background: url(../imagens/zoombar.png) no-repeat;
 height: 78px;
 }
+*/
 #googlemapsdiv {
 -moz-user-select: -moz-none;
 -khtml-user-select: none;
@@ -1490,12 +1502,14 @@ white-space: nowrap;
 text-overflow: ellipsis;
 font-size: 12px;
 appearance: none;
+/*
 background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
 background-size: 16px 144px;
 }
+*/
 }
 /* esconde na impressao */
 @media print {

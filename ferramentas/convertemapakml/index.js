@@ -88,7 +88,7 @@ i3GEOF.converteMapaKml = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.converteMapaKml");
 		};
-		titulo = "<div class='i3GeoTituloJanela'>Kml<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=13' ><b> </b></a></div>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=13' >Kml</a>";
 		janela = i3GEO.janela.cria(
 			"440px",
 			"325px",

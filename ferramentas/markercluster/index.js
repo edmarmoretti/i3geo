@@ -104,10 +104,10 @@ i3GEOF.markercluster = {
 			return;
 		}
 		// cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>" + $trad("x104")
-				+ "<a class=ajuda_usuario target=_blank href='"
+		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 				+ i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=3&idajuda=122' ><b> </b></a></div>";
+				+ "/ajuda_usuario.php?idcategoria=3&idajuda=122' >" + $trad("x104")
+				+ "</a>";
 		cabecalho = function() {
 		};
 		janela = i3GEO.janela.cria(

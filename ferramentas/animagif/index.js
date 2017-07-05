@@ -106,7 +106,7 @@ i3GEOF.animagif =
 	 */
 	inicia : function(iddiv) {
 		var camada = "", temp;
-		i3GEO.janela.comboCabecalhoTemas("i3GEOFanimagifComboCabeca", "i3GEOFanimagifComboCabecaSel", "animagif", "ligadosComTabela");
+		i3GEO.janela.comboCabecalhoTemasBs("i3GEOFanimagifComboCabeca", "i3GEOFanimagifComboCabecaSel", "animagif", "ligadosComTabela");
 		if(i3GEOF.animagif.tema === ""){
 			return;
 		}
@@ -227,7 +227,12 @@ i3GEOF.animagif =
 	 * Cria a janela flutuante para controle da ferramenta.
 	 */
 	iniciaJanelaFlutuante : function(tema) {
-		i3GEOF.animagif.tema = tema;
+		if(tema && tema != ""){
+			i3GEOF.animagif.tema = tema;
+			i3GEO.temaAtivo = tema;
+		} else {
+			i3GEOF.animagif.tema = i3GEO.temaAtivo;
+		}
 		var minimiza, cabecalho, janela, divid, temp, titulo;
 		if ($i("i3GEOF.animagif")) {
 			i3GEOF.animagif.inicia("i3GEOF.animagif_corpo");
@@ -241,10 +246,11 @@ i3GEOF.animagif =
 		};
 		// cria a janela flutuante
 		titulo =
-			"<span class='i3GEOiconeFerramenta i3GEOiconeanimagif'></span>" + "<div  id='i3GEOFanimagifComboCabeca' class='comboTemasCabecalho'>   ------</div>"
-			+ "<div class='i3GeoTituloJanela'>animagif </span><a class=ajuda_usuario target=_blank href='"
+			"<div id='i3GEOFanimagifComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div>"
+			+"<a class='i3GeoTituloJanelaBs' target=_blank href='"
 			+ i3GEO.configura.locaplic
-			+ "/ajuda_usuario.php?idcategoria=5&idajuda=130' ><b> </b></a></div>";
+			+ "/ajuda_usuario.php?idcategoria=5&idajuda=130' >animagif</a>";
+
 		janela = i3GEO.janela.cria("380px", "380px", "", "", "", titulo, "i3GEOF.animagif", false, "hd", cabecalho, minimiza, "", true);
 		divid = janela[2].id;
 		i3GEOF.animagif.aguarde = $i("i3GEOF.animagif_imagemCabecalho").style;

@@ -79,7 +79,7 @@ i3GEOF.linhadotempo = {
 			i3GEO.janela.minimiza("i3GEOF.linhadotempo");
 		};
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>" + $trad("opt",i3GEOF.linhadotempo.dicionario)+"</div>";
+		titulo = "</div><div class='i3GeoTituloJanelaBs'>" + $trad("opt",i3GEOF.linhadotempo.dicionario)+"</div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"500px",

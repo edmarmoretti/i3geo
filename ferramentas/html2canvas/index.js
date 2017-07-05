@@ -43,7 +43,7 @@ i3GEOF.html2canvas = {
 			i3GEO.janela.minimiza("i3GEOF.html2canvas");
 		};
 		// cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>img</div>";
+		titulo = "</div><div class='i3GeoTituloJanelaBs'>img</div>";
 		i3GEO.janela.cria(
 			"400px",
 			"230px",

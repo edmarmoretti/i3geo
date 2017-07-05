@@ -125,10 +125,9 @@ i3GEOF.legenda =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
-			i3GEO.janela.comboCabecalhoTemas("i3GEOFlegendaComboCabeca", "i3GEOFlegendaComboCabecaSel", "legenda", "ligados");
+			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFlegendaComboCabeca", "i3GEOFlegendaComboCabecaSel", "legenda", "ligados");
 			if (i3GEO.temaAtivo === "") {
-				$i(iddiv).innerHTML = "";// '<p style="position: relative; top: 0px; font-size: 15px; text-align:
-				// left;">'+$trad("x33")+'</p>';
+				$i(iddiv).innerHTML = "";
 				return;
 			}
 			try {
@@ -453,20 +452,18 @@ i3GEOF.legenda =
 				i3GEOF.legenda.ativaFoco();
 			};
 			minimiza = function() {
-				i3GEO.janela.iconiza("i3GEOF.legenda",120,"i3GEOFlegendaCabecalhoI");
+				i3GEO.janela.minimiza("i3GEOF.legenda");
 				i3GEOF.legenda.ativaAplicar("none");
 			};
 			// cria a janela flutuante
 			titulo =
-				"<span class='i3GEOiconeFerramenta i3GEOiconeLegenda' title='" + $trad("t33")
-					+ "'></span>"
-					+ "<div id='i3GEOF.legendaI' style='left:10px;'>"
-					+ "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalho' style='left:0px;'>   ------</div>"
-					+ "<div class='i3GeoTituloJanela'>"
-					+ $trad("t33")
-					+ "<a class=ajuda_usuario target=_blank href='"
+				"<div id='i3GEOF.legendaI' style='left:5px;'>"
+					+ "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px'>   ------</div></div>"
+					+ "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' ><b> </b></a></div></div></div>";
+					+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' > "
+					+ $trad("t33")
+					+"</a>";
 			janela =
 				i3GEO.janela.cria("590px", "350px", "", "", "", titulo, "i3GEOF.legenda", false, "hd", cabecalho, minimiza, function() {
 					i3GEO.guias.ajustaGuiaFerramenta("i3GEOF.legenda", "i3GEOlegenda");
