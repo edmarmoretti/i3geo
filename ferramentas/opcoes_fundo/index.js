@@ -35,6 +35,13 @@ i3GEOF.opcoesFundo =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
+			if(i3GEOF.opcoesFundo.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/opcoes_fundo/template_mst.html", function(template) {
+					i3GEOF.opcoesFundo.MUSTACHE = template;
+					i3GEOF.opcoesFundo.inicia(iddiv);
+				});
+				return;
+			}
 			try {
 				i3GEOF.opcoesFundo.aguarde.visibility = "visible";
 				$i(iddiv).innerHTML += i3GEOF.opcoesFundo.html();

@@ -67,6 +67,13 @@ i3GEOF.uploadgpx = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.uploadgpx.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/uploadgpx/template_mst.html", function(template) {
+				i3GEOF.uploadgpx.MUSTACHE = template;
+				i3GEOF.uploadgpx.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.uploadgpx.html();
 			var b = new YAHOO.widget.Button(

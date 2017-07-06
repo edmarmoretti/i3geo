@@ -88,12 +88,15 @@ i3GEOF.heatmap =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
-			try {
-				$i(iddiv).innerHTML += i3GEOF.heatmap.html();
-				i3GEOF.heatmap.t0();
-			} catch (erro) {
-				i3GEO.janela.tempoMsg(erro);
+			if(i3GEOF.heatmap.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/heatmap/template_mst.html", function(template) {
+					i3GEOF.heatmap.MUSTACHE = template;
+					i3GEOF.heatmap.inicia(iddiv);
+				});
+				return;
 			}
+			$i(iddiv).innerHTML += i3GEOF.heatmap.html();
+			i3GEOF.heatmap.t0();
 		},
 		/**
 		 * Function: html

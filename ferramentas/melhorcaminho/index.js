@@ -84,11 +84,15 @@ i3GEOF.melhorcaminho = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.melhorcaminho.html();
-			i3GEOF.melhorcaminho.t0();
+		if(i3GEOF.melhorcaminho.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/melhorcaminho/template_mst.html", function(template) {
+				i3GEOF.melhorcaminho.MUSTACHE = template;
+				i3GEOF.melhorcaminho.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.melhorcaminho.html();
+		i3GEOF.melhorcaminho.t0();
 	},
 	/*
 	Function: html

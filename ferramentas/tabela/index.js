@@ -121,6 +121,13 @@ i3GEOF.tabela =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv, idjanela) {
+			if(i3GEOF.tabela.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/tabela/template_mst.html", function(template) {
+					i3GEOF.tabela.MUSTACHE = template;
+					i3GEOF.tabela.inicia(iddiv);
+				});
+				return;
+			}
 			var b, onButtonClick = function(evt) {
 				var botao = evt.target;
 				if (botao) {

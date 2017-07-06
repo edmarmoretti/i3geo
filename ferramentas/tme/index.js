@@ -116,6 +116,13 @@ i3GEOF.tme =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
+			if(i3GEOF.tme.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/tme/template_mst.html", function(template) {
+					i3GEOF.tme.MUSTACHE = template;
+					i3GEOF.tme.inicia(iddiv);
+				});
+				return;
+			}
 			var camada = "";
 			if (!$i("i3GEOFtmeComboCabecaSel")) {
 				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFtmeComboCabeca", "i3GEOFtmeComboCabecaSel", "tme", "ligadosComTabela",function(evt){

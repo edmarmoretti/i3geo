@@ -80,7 +80,13 @@ i3GEOF.perfil = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.perfil.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/perfil/template_mst.html", function(template) {
+				i3GEOF.perfil.MUSTACHE = template;
+				i3GEOF.perfil.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML += i3GEOF.perfil.html();
 			i3GEOF.perfil.comboTemas();
 			var b = new YAHOO.widget.Button(
@@ -88,8 +94,6 @@ i3GEOF.perfil = {
 				{onclick:{fn: i3GEOF.perfil.criaPerfil}}
 			);
 			b.addClass("rodar");
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

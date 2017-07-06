@@ -69,28 +69,32 @@ i3GEOF.carregakml = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML = i3GEOF.carregakml.html();
-			var b, monta = function(retorno){
-				var raiz,nraiz,i,combo;
-				raiz = retorno.data.canais;
-				nraiz = raiz.length;
-				combo = "<select onchange='javascript:$i(\"i3GEOcarregakmlurl\").value = this.value;'>";
-				combo += "<option value=''>---</option>";
-				for (i=0;i<nraiz; i++){
-					combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
-				}
-				combo += "</select>";
-				$i("i3GEOcarregakmlCombo").innerHTML = combo;
-			};
-			i3GEO.php.listaRSSwsARRAY(monta,"KML");
-			b = new YAHOO.widget.Button(
-				"i3GEOcarregakmlbotao1",
-				{onclick:{fn: i3GEOF.carregakml.adiciona}}
-			);
-			b.addClass("rodar");
+		if(i3GEOF.carregakml.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/carregakml/template_mst.html", function(template) {
+				i3GEOF.carregakml.MUSTACHE = template;
+				i3GEOF.carregakml.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML = i3GEOF.carregakml.html();
+		var b, monta = function(retorno){
+			var raiz,nraiz,i,combo;
+			raiz = retorno.data.canais;
+			nraiz = raiz.length;
+			combo = "<select onchange='javascript:$i(\"i3GEOcarregakmlurl\").value = this.value;'>";
+			combo += "<option value=''>---</option>";
+			for (i=0;i<nraiz; i++){
+				combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
+			}
+			combo += "</select>";
+			$i("i3GEOcarregakmlCombo").innerHTML = combo;
+		};
+		i3GEO.php.listaRSSwsARRAY(monta,"KML");
+		b = new YAHOO.widget.Button(
+			"i3GEOcarregakmlbotao1",
+			{onclick:{fn: i3GEOF.carregakml.adiciona}}
+		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: html

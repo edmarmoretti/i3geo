@@ -72,12 +72,15 @@ i3GEOF.markercluster = {
 	 * ferramenta
 	 */
 	inicia : function(iddiv) {
-		try {
-			$i(iddiv).innerHTML += i3GEOF.markercluster.html();
-			i3GEOF.markercluster.t0();
-		} catch (erro) {
-			i3GEO.janela.tempoMsg(erro);
+		if(i3GEOF.markercluster.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/markercluster/template_mst.html", function(template) {
+				i3GEOF.markercluster.MUSTACHE = template;
+				i3GEOF.markercluster.inicia(iddiv);
+			});
+			return;
 		}
+		$i(iddiv).innerHTML += i3GEOF.markercluster.html();
+		i3GEOF.markercluster.t0();
 	},
 	/**
 	 * Function: html

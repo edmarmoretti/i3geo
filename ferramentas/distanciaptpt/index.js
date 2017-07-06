@@ -70,11 +70,15 @@ i3GEOF.distanciaptpt = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.distanciaptpt.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/distanciaptpt/template_mst.html", function(template) {
+				i3GEOF.distanciaptpt.MUSTACHE = template;
+				i3GEOF.distanciaptpt.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML += i3GEOF.distanciaptpt.html();
 			i3GEOF.distanciaptpt.t0();
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

@@ -45,6 +45,13 @@ i3GEOF.toponimia = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.toponimia.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/toponimia/template_mst.html", function(template) {
+				i3GEOF.toponimia.MUSTACHE = template;
+				i3GEOF.toponimia.inicia(iddiv);
+			});
+			return;
+		}
 		if (!$i("i3GEOFtoponimiaComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela",function(evt){
 				var botao = evt.target;

@@ -71,6 +71,13 @@ i3GEOF.parametrossql = {
 	camada - objeto contendo os dados do plugin
 	*/
 	inicia: function(iddiv,camada){
+		if(i3GEOF.parametrossql.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/parametrossql/template_mst.html", function(template) {
+				i3GEOF.parametrossql.MUSTACHE = template;
+				i3GEOF.parametrossql.inicia(iddiv);
+			});
+			return;
+		}
 		$i(iddiv).innerHTML = i3GEOF.parametrossql.html();
 		var b,
 			f = i3GEOF.parametrossql.formulario(camada);

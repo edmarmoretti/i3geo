@@ -125,6 +125,13 @@ i3GEOF.legenda =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
+			if(i3GEOF.legenda.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/legenda/template_mst.html", function(template) {
+					i3GEOF.legenda.MUSTACHE = template;
+					i3GEOF.legenda.inicia(iddiv);
+				});
+				return;
+			}
 			if (!$i("i3GEOFlegendaComboCabecaSel")) {
 				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFlegendaComboCabeca", "i3GEOFlegendaComboCabecaSel", "legenda", "ligados",function(evt){
 					var botao = evt.target;

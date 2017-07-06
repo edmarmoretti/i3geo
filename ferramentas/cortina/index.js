@@ -85,12 +85,14 @@ i3GEOF.cortina = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		//if(navm)
-		//{i3GEO.janela.tempoMsg("Esta ferramenta nao funciona adequadamente no Internet Explorer. Experimente usar o Firefox");}
-		try{
-			$i(iddiv).innerHTML = i3GEOF.cortina.html();
+		if(i3GEOF.cortina.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/cortina/template_mst.html", function(template) {
+				i3GEOF.cortina.MUSTACHE = template;
+				i3GEOF.cortina.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML = i3GEOF.cortina.html();
 		i3GEOF.cortina.criaslide();
 		i3GEOF.cortina.comboTemas();
 	},

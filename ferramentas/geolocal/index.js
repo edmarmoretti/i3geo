@@ -76,6 +76,13 @@ i3GEOF.geolocal =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
+			if(i3GEOF.geolocal.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/geolocal/template_mst.html", function(template) {
+					i3GEOF.geolocal.MUSTACHE = template;
+					i3GEOF.geolocal.inicia(iddiv);
+				});
+				return;
+			}
 			var ics, n, i;
 			// se nao permitir a localizacao, retorna uma mensagem
 			if (navigator.geolocation) {

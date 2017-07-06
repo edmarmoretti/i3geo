@@ -63,6 +63,13 @@ i3GEOF.salvaMapa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.salvaMapa.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/salvamapa/template_mst.html", function(template) {
+				i3GEOF.salvaMapa.MUSTACHE = template;
+				i3GEOF.salvaMapa.inicia(iddiv);
+			});
+			return;
+		}
 		$i(iddiv).innerHTML = i3GEOF.salvaMapa.html();
 		var temp = function(dados){
 				i3GEOF.salvaMapa.htmlMapaLocal("i3GEOFsalvaMapaLocal");

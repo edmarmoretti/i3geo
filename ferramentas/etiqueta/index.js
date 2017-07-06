@@ -68,6 +68,13 @@ i3GEOF.etiqueta = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.etiqueta.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/etiqueta/template_mst.html", function(template) {
+				i3GEOF.etiqueta.MUSTACHE = template;
+				i3GEOF.etiqueta.inicia(iddiv);
+			});
+			return;
+		}
 		if (!$i("i3GEOFetiquetaComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela",function(evt){
 				var botao = evt.target;

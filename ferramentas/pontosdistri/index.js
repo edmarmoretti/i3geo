@@ -35,6 +35,13 @@ i3GEOF.pontosDistri = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.pontosDistri.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/pontosdistri/template_mst.html", function(template) {
+				i3GEOF.pontosDistri.MUSTACHE = template;
+				i3GEOF.pontosDistri.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			var b;
 			$i(iddiv).innerHTML += i3GEOF.pontosDistri.html();

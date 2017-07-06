@@ -72,6 +72,13 @@ i3GEOF.wiki = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.wiki.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/wiki/template_mst.html", function(template) {
+				i3GEOF.wiki.MUSTACHE = template;
+				i3GEOF.wiki.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.wiki.html();
 			i3GEOF.wiki.ativaFoco();

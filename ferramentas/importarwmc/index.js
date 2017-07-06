@@ -75,14 +75,20 @@ i3GEOF.importarwmc = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.importarwmc.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/importarwmc/template_mst.html", function(template) {
+				i3GEOF.importarwmc.MUSTACHE = template;
+				i3GEOF.importarwmc.inicia(iddiv);
+			});
+			return;
+		}
+
 			$i(iddiv).innerHTML += i3GEOF.importarwmc.html();
 			new YAHOO.widget.Button(
 				"i3GEOimportarwmcbotao1",
 				{onclick:{fn: i3GEOF.importarwmc.submete}}
 			);
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+
 	},
 	/*
 	Function: html

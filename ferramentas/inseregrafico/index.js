@@ -66,6 +66,13 @@ i3GEOF.insereGrafico = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.insereGrafico.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/inseregrafico/template_mst.html", function(template) {
+				i3GEOF.insereGrafico.MUSTACHE = template;
+				i3GEOF.insereGrafico.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.insereGrafico.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOinseregraficoguia1","i3GEOinseregraficoguia");

@@ -395,6 +395,13 @@ i3GEOF.graficointerativo1 =
 		 * ["n;x","'Argentina';33796870","'Paraguay';4773464","'Brazil';151525400","'Chile';13772710"]
 		 */
 		inicia : function(iddiv, idjanela) {
+			if(i3GEOF.graficointerativo1.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/graficointerativo1/template_mst.html", function(template) {
+					i3GEOF.graficointerativo1.MUSTACHE = template;
+					i3GEOF.graficointerativo1.inicia(iddiv, idjanela);
+				});
+				return;
+			}
 			var b;
 			$i(iddiv).innerHTML += i3GEOF.graficointerativo1.html(idjanela);
 			$i(idjanela + "i3GEOgraficointerativo1Acumula").checked = i3GEOF.graficointerativo1.propJanelas[idjanela].acumula;

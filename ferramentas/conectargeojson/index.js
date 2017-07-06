@@ -70,9 +70,13 @@ i3GEOF.conectargeojson = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		if(navm)
-		{i3GEO.janela.tempoMsg($trad('msgNavegador',i3GEOF.conectargeojson.dicionario));}
-		try{
+		if(i3GEOF.conectargeojson.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/conectargeojson/template_mst.html", function(template) {
+				i3GEOF.conectargeojson.MUSTACHE = template;
+				i3GEOF.conectargeojson.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML = i3GEOF.conectargeojson.html();
 			var b,monta = function(retorno){
 				var raiz,nraiz,i,combo;
@@ -92,8 +96,6 @@ i3GEOF.conectargeojson = {
 				{onclick:{fn: i3GEOF.conectargeojson.adiciona}}
 			);
 			b.addClass("rodar");
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

@@ -71,6 +71,13 @@ i3GEOF.editorsql = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.editorsql.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/editorsql/template_mst.html", function(template) {
+				i3GEOF.editorsql.MUSTACHE = template;
+				i3GEOF.editorsql.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.editorsql.html();
 			new YAHOO.widget.Button(

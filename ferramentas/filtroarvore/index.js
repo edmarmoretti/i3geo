@@ -33,10 +33,14 @@ i3GEOF.filtroarvore = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.filtroarvore.html();
+		if(i3GEOF.filtroarvore.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/filtroarvore/template_mst.html", function(template) {
+				i3GEOF.filtroarvore.MUSTACHE = template;
+				i3GEOF.filtroarvore.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.filtroarvore.html();
 	},
 	/*
 	Function: html

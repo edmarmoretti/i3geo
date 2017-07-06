@@ -23,6 +23,13 @@ i3GEOF.distancia =
 
 		},
 		inicia : function(iddiv) {
+			if(i3GEOF.distancia.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/distancia/template_mst.html", function(template) {
+					i3GEOF.distancia.MUSTACHE = template;
+					i3GEOF.distancia.inicia(iddiv);
+				});
+				return;
+			}
 			i3GEO.eventos.cliquePerm.desativa();
 			$i(iddiv).innerHTML += i3GEOF.distancia.html();
 			i3GEOF.distancia[i3GEO.Interface["ATUAL"]].inicia();

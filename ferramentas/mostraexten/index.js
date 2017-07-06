@@ -67,7 +67,14 @@ i3GEOF.mostraExten = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.mostraExten.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/mostraexten/template_mst.html", function(template) {
+				i3GEOF.mostraExten.MUSTACHE = template;
+				i3GEOF.mostraExten.inicia(iddiv);
+			});
+			return;
+		}
+
 			$i(iddiv).innerHTML += i3GEOF.mostraExten.html();
 			var b =new YAHOO.widget.Button(
 				"i3GEOmostraExtenbotao1",
@@ -75,8 +82,7 @@ i3GEOF.mostraExten = {
 			);
 			b.addClass("rodar");
 			i3GEOF.mostraExten.ativaFoco();
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+
 	},
 	/*
 	Function: html

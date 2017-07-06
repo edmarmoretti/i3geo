@@ -33,6 +33,13 @@ i3GEOF.linhadotempo = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.linhadotempo.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/linhadotempo/template_mst.html", function(template) {
+				i3GEOF.linhadotempo.MUSTACHE = template;
+				i3GEOF.linhadotempo.inicia(iddiv);
+			});
+			return;
+		}
 		var b,box;
 		if(iddiv){
 			i3GEOF.linhadotempo.iddiv = iddiv;

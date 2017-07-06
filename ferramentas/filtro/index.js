@@ -84,6 +84,13 @@ i3GEOF.filtro = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv,modoCalculadora,idRetorno){
+		if(i3GEOF.filtro.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/filtro/template_mst.html", function(template) {
+				i3GEOF.filtro.MUSTACHE = template;
+				i3GEOF.filtro.inicia(iddiv,modoCalculadora,idRetorno);
+			});
+			return;
+		}
 		if(modoCalculadora === undefined){
 			modoCalculadora = false;
 		}

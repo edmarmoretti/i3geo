@@ -186,6 +186,13 @@ i3GEOF.identifica =
 		 * idjanela {string}
 		 */
 		inicia : function(tema, x, y, iddiv, mostraLinkGeohack, mostraSistemasAdicionais, idjanela) {
+			if(i3GEOF.identifica.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/identifica/template_mst.html", function(template) {
+					i3GEOF.identifica.MUSTACHE = template;
+					i3GEOF.identifica.inicia(tema, x, y, iddiv, mostraLinkGeohack, mostraSistemasAdicionais, idjanela);
+				});
+				return;
+			}
 			try {
 				$i(iddiv).innerHTML += i3GEOF.identifica.html(idjanela);
 				i3GEOF.identifica.propJanelas[idjanela].tema = tema;
@@ -358,7 +365,7 @@ i3GEOF.identifica =
 			};
 			// cria a janela flutuante
 			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
+				"</div><a class='i3GeoTituloJanelaBs' style='right:90px;' target=_blank href='"
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=8&idajuda=70' >" + $trad("d7t")
 					+ "</a>";

@@ -33,6 +33,13 @@ i3GEOF.opcoesQuery = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.opcoesQuery.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/opcoes_querymap/template_mst.html", function(template) {
+				i3GEOF.opcoesQuery.MUSTACHE = template;
+				i3GEOF.opcoesQuery.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			i3GEOF.opcoesQuery.aguarde.visibility = "visible";
 			$i(iddiv).innerHTML += i3GEOF.opcoesQuery.html();

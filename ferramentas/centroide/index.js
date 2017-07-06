@@ -68,11 +68,15 @@ i3GEOF.centroide = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.centroide.html();
-			i3GEOF.centroide.t0();
+		if(i3GEOF.centroide.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/centroide/template_mst.html", function(template) {
+				i3GEOF.centroide.MUSTACHE = template;
+				i3GEOF.centroide.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.centroide.html();
+		i3GEOF.centroide.t0();
 	},
 	/*
 	Function: html

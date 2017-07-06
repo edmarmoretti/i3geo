@@ -94,6 +94,13 @@ i3GEOF.nuvemtags = {
 	dados {JSON} - dados para o gr&aacute;fico (opcional)
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.nuvemtags.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/nuvemtags/template_mst.html", function(template) {
+				i3GEOF.nuvemtags.MUSTACHE = template;
+				i3GEOF.nuvemtags.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.nuvemtags.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOnuvemtagsguia1","i3GEOnuvemtagsguia");

@@ -68,6 +68,13 @@ i3GEOF.opcoesTamanho = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.opcoesTamanho.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/opcoes_tamanho/template_mst.html", function(template) {
+				i3GEOF.opcoesTamanho.MUSTACHE = template;
+				i3GEOF.opcoesTamanho.inicia(iddiv);
+			});
+			return;
+		}
 		var b,box;
 		try{
 			$i(iddiv).innerHTML += i3GEOF.opcoesTamanho.html();

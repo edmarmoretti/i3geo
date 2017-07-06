@@ -20,16 +20,7 @@ echo "\n";
 /**
  * Inclui o template mustache do HTML usado para criar o conteudo da janela
  */
-/*
-echo 'i3GEOF.agrupaElementos.MUSTACHE = "';
-$texto = file_get_contents("template_mst.html");
-$texto = str_replace("\n", "", $texto);
-$texto = str_replace("\r", "", $texto);
-$texto = str_replace("\t", "", $texto);
-$texto = str_replace('"', "'", $texto);
-echo $texto;
-echo '";';
-*/
+
 if(extension_loaded('zlib')){
 	ob_end_flush();
 }

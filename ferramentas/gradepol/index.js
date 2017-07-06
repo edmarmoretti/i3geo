@@ -83,11 +83,15 @@ i3GEOF.gradeDePoligonos = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.gradeDePoligonos.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/gradepol/template_mst.html", function(template) {
+				i3GEOF.gradeDePoligonos.MUSTACHE = template;
+				i3GEOF.gradeDePoligonos.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML += i3GEOF.gradeDePoligonos.html();
 			i3GEOF.gradeDePoligonos.t0();
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

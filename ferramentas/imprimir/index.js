@@ -84,6 +84,13 @@ i3GEOF.imprimir = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.imprimir.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/imprimir/template_mst.html", function(template) {
+				i3GEOF.imprimir.MUSTACHE = template;
+				i3GEOF.imprimir.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.imprimir.html();
 

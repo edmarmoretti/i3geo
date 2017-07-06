@@ -41,6 +41,13 @@ i3GEOF.mmscale = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.mmscale.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/mmscale/template_mst.html", function(template) {
+				i3GEOF.mmscale.MUSTACHE = template;
+				i3GEOF.mmscale.inicia(iddiv);
+			});
+			return;
+		}
 		if (!$i("i3GEOFmmscaleComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFmmscaleComboCabeca","i3GEOFmmscaleComboCabecaSel","mmscale","ligados",function(evt){
 				var botao = evt.target;

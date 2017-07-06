@@ -68,11 +68,14 @@ i3GEOF.outputformat = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.outputformat.html();
+		if(i3GEOF.outputformat.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/outputformat/template_mst.html", function(template) {
+				i3GEOF.outputformat.MUSTACHE = template;
+				i3GEOF.outputformat.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
-
+		$i(iddiv).innerHTML += i3GEOF.outputformat.html();
 	},
 	/*
 	Function: html

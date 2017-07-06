@@ -68,11 +68,15 @@ i3GEOF.centromassa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.centromassa.html();
-			i3GEOF.centromassa.t0();
+		if(i3GEOF.centromassa.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/centromassa/template_mst.html", function(template) {
+				i3GEOF.centromassa.MUSTACHE = template;
+				i3GEOF.centromassa.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.centromassa.html();
+		i3GEOF.centromassa.t0();
 	},
 	/*
 	Function: html

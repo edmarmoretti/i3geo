@@ -68,16 +68,20 @@ i3GEOF.carregaMapa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.carregaMapa.html();
-			document.body.scrollTop = document.documentElement.scrollTop = 0;
-			var b = new YAHOO.widget.Button(
-				"i3GEOcarregamapabotao1",
-				{onclick:{fn: i3GEOF.carregaMapa.submete}}
-			);
-			b.addClass("rodar");
+		if(i3GEOF.carregaMapa.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/carregamapa/template_mst.html", function(template) {
+				i3GEOF.carregaMapa.MUSTACHE = template;
+				i3GEOF.carregaMapa.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.carregaMapa.html();
+		document.body.scrollTop = document.documentElement.scrollTop = 0;
+		var b = new YAHOO.widget.Button(
+			"i3GEOcarregamapabotao1",
+			{onclick:{fn: i3GEOF.carregaMapa.submete}}
+		);
+		b.addClass("rodar");
 	},
 	/*
 	Function: html

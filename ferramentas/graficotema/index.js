@@ -96,6 +96,13 @@ i3GEOF.graficoTema = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.graficoTema.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/graficoTema/template_mst.html", function(template) {
+				i3GEOF.graficoTema.MUSTACHE = template;
+				i3GEOF.graficoTema.inicia(iddiv);
+			});
+			return;
+		}
 		if (!$i("i3GEOFgraficotemaComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela",function(evt){
 				var botao = evt.target;

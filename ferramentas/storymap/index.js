@@ -109,6 +109,13 @@ i3GEOF.storymap =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
+			if(i3GEOF.storymap.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/storymap/template_mst.html", function(template) {
+					i3GEOF.storymap.MUSTACHE = template;
+					i3GEOF.storymap.inicia(iddiv);
+				});
+				return;
+			}
 			var camada = "";
 			if (!$i("i3GEOFstoComboCabecaSel")) {
 				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFstoComboCabeca", "i3GEOFstoComboCabecaSel", "storymap", "ligadosComTabela",function(evt){

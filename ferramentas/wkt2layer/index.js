@@ -42,6 +42,13 @@ i3GEOF.wkt2layer =
 	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	 */
 	inicia : function(iddiv,wkt,texto) {
+		if(i3GEOF.wkt2layer.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/wkt2layer/template_mst.html", function(template) {
+				i3GEOF.wkt2layer.MUSTACHE = template;
+				i3GEOF.wkt2layer.inicia(iddiv);
+			});
+			return;
+		}
 		$i(iddiv).innerHTML = i3GEOF.wkt2layer.html(wkt,texto);
 		new YAHOO.widget.Button("i3GEOFwkt2layerShp", {
 			onclick : {

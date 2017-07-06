@@ -72,6 +72,13 @@ i3GEOF.vinde = {
 	arvore {YAHOO.widget.TreeView} (opcional) arvore onde o no da inde sera criado
 	*/
 	inicia: function(iddiv,arvore){
+		if(i3GEOF.vinde.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/vinde/template_mst.html", function(template) {
+				i3GEOF.vinde.MUSTACHE = template;
+				i3GEOF.vinde.inicia(iddiv);
+			});
+			return;
+		}
 		if($i("i3GEOF.vinde_imagemCabecalho")){
 			i3GEOF.vinde.aguarde.visibility = "visible";
 		}

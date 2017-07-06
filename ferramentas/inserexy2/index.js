@@ -70,6 +70,13 @@ i3GEOF.inserexy = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.inserexy.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/inserexy2/template_mst.html", function(template) {
+				i3GEOF.inserexy.MUSTACHE = template;
+				i3GEOF.inserexy.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			var b;
 			$i(iddiv).innerHTML += i3GEOF.inserexy.html();

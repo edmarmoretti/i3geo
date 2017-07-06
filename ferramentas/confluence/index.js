@@ -69,7 +69,13 @@ i3GEOF.confluence = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.confluence.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/confluence/template_mst.html", function(template) {
+				i3GEOF.confluence.MUSTACHE = template;
+				i3GEOF.confluence.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML += i3GEOF.confluence.html();
 			i3GEOF.confluence.ativaFoco();
 			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
@@ -79,12 +85,7 @@ i3GEOF.confluence = {
 					confluenceDragend = google.maps.event.addListener(i3GeoMap, "dragend", function() {i3GEOF.confluence.lista();});
 					confluenceZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {i3GEOF.confluence.lista();});
 			}
-			if(i3GEO.Interface.ATUAL === "googleearth"){
-					confluenceDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {i3GEOF.confluence.lista();});
-			}
 			i3GEOF.confluence.lista();
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

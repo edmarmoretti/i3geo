@@ -37,6 +37,13 @@ i3GEOF.opcoesEscala = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.opcoesEscala.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/opcoes_escala/template_mst.html", function(template) {
+				i3GEOF.opcoesEscala.MUSTACHE = template;
+				i3GEOF.opcoesEscala.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.opcoesEscala.html();
 			var b = new YAHOO.widget.Button(

@@ -69,11 +69,15 @@ i3GEOF.pontoEmPoligono = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.pontoEmPoligono.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/pontoempoligono/template_mst.html", function(template) {
+				i3GEOF.pontoEmPoligono.MUSTACHE = template;
+				i3GEOF.pontoEmPoligono.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML += i3GEOF.pontoEmPoligono.html();
 			i3GEOF.pontoEmPoligono.t0();
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

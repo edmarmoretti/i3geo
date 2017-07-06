@@ -69,6 +69,13 @@ i3GEOF.tipoimagem = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.tipoimagem.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/tipoimagem/template_mst.html", function(template) {
+				i3GEOF.tipoimagem.MUSTACHE = template;
+				i3GEOF.tipoimagem.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			var temp,f,b;
 

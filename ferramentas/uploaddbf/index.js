@@ -61,7 +61,13 @@ i3GEOF.uploaddbf = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.uploaddbf.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/uploaddbf/template_mst.html", function(template) {
+				i3GEOF.uploaddbf.MUSTACHE = template;
+				i3GEOF.uploaddbf.inicia(iddiv);
+			});
+			return;
+		}try{
 			$i(iddiv).innerHTML += i3GEOF.uploaddbf.html();
 			var b = new YAHOO.widget.Button(
 				"i3GEOuploaddbfbotao1",

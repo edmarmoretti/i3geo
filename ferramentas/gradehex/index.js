@@ -83,11 +83,16 @@ i3GEOF.gradeDeHex = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.gradeDeHex.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/gradehex/template_mst.html", function(template) {
+				i3GEOF.gradeDeHex.MUSTACHE = template;
+				i3GEOF.gradeDeHex.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML += i3GEOF.gradeDeHex.html();
 			i3GEOF.gradeDeHex.t0();
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+
 	},
 	/*
 	Function: html

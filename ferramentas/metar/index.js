@@ -74,7 +74,13 @@ i3GEOF.metar =
 		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 		 */
 		inicia : function(iddiv) {
-			try {
+			if(i3GEOF.metar.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/metar/template_mst.html", function(template) {
+					i3GEOF.metar.MUSTACHE = template;
+					i3GEOF.metar.inicia(iddiv);
+				});
+				return;
+			}
 				$i(iddiv).innerHTML += i3GEOF.metar.html();
 				i3GEOF.metar.ativaFoco();
 				if (i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth") {
@@ -94,9 +100,7 @@ i3GEOF.metar =
 					});
 				}
 				i3GEOF.metar.lista();
-			} catch (erro) {
-				i3GEO.janela.tempoMsg(erro);
-			}
+
 		},
 		/*
 		 * Function: html

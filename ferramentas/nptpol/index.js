@@ -68,11 +68,15 @@ i3GEOF.nptpol = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.nptpol.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/nptpol/template_mst.html", function(template) {
+				i3GEOF.nptpol.MUSTACHE = template;
+				i3GEOF.nptpol.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML += i3GEOF.nptpol.html();
 			i3GEOF.nptpol.t0();
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html

@@ -64,6 +64,13 @@ i3GEOF.uploadkml = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.uploadkml.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/uploadkml/template_mst.html", function(template) {
+				i3GEOF.uploadkml.MUSTACHE = template;
+				i3GEOF.uploadkml.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.uploadkml.html();
 			var b = new YAHOO.widget.Button(

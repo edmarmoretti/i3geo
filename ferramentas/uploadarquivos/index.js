@@ -28,6 +28,13 @@ i3GEOF.uploadarquivos =
 	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	 */
 	inicia : function(iddiv) {
+		if(i3GEOF.uploadarquivos.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/uploadarquivos/template_mst.html", function(template) {
+				i3GEOF.uploadarquivos.MUSTACHE = template;
+				i3GEOF.uploadarquivos.inicia(iddiv);
+			});
+			return;
+		}
 		$i(iddiv).innerHTML = i3GEOF.uploadarquivos.html();
 		new YAHOO.widget.Button("i3GEOFuploadarquivosShp", {
 			onclick : {

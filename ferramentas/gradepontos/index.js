@@ -83,11 +83,17 @@ i3GEOF.gradeDePontos = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.gradeDePontos.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/gradepontos/template_mst.html", function(template) {
+				i3GEOF.gradeDePontos.MUSTACHE = template;
+				i3GEOF.gradeDePontos.inicia(iddiv);
+			});
+			return;
+		}
+
 			$i(iddiv).innerHTML += i3GEOF.gradeDePontos.html();
 			i3GEOF.gradeDePontos.t0();
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+
 	},
 	/*
 	Function: html

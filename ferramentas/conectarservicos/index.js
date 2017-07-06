@@ -35,6 +35,13 @@ i3GEOF.conectarservicos =
 	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	 */
 	inicia : function(iddiv) {
+		if(i3GEOF.conectarservicos.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/conectarservicos/template_mst.html", function(template) {
+				i3GEOF.conectarservicos.MUSTACHE = template;
+				i3GEOF.conectarservicos.inicia(iddiv);
+			});
+			return;
+		}
 		$i(iddiv).innerHTML = i3GEOF.conectarservicos.html();
 		new YAHOO.widget.Button("i3GEOFconectarservicosKml", {
 			onclick : {

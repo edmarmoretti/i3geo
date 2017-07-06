@@ -72,10 +72,13 @@ i3GEOF.buscainde = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.buscainde.html();
+		if(i3GEOF.buscainde.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/buscainde/template_mst.html", function(template) {
+				i3GEOF.buscainde.MUSTACHE = template;
+				$i(iddiv).innerHTML += i3GEOF.buscainde.html();
+			});
+			return;
 		}
-		catch(erro){alert(erro);}
 	},
 	/*
 	Function: html
@@ -105,7 +108,7 @@ i3GEOF.buscainde = {
 			i3GEO.janela.minimiza("i3GEOF.buscainde");
 		};
 		//cria a janela flutuante
-		titulo = "/div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=109&idajuda=8' >CSW</a><";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=109&idajuda=8' >CSW</a>";
 		janela = i3GEO.janela.cria(
 			"550px",
 			"350px",

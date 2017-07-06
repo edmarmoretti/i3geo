@@ -68,6 +68,13 @@ i3GEOF.mascara = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.mascara.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/mascara/template_mst.html", function(template) {
+				i3GEOF.mascara.MUSTACHE = template;
+				i3GEOF.mascara.inicia(iddiv);
+			});
+			return;
+		}
 		i3GEOF.mascara.aguarde.visibility = "visible";
 		$i(iddiv).innerHTML = i3GEOF.mascara.html();
 		i3GEOF.mascara.selMascara();

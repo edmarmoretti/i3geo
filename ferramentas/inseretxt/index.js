@@ -87,6 +87,13 @@ i3GEOF.inseretxt = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.inseretxt.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/inseretxt/template_mst.html", function(template) {
+				i3GEOF.inseretxt.MUSTACHE = template;
+				i3GEOF.inseretxt.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.inseretxt.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia1","i3GEOinseretxtguia");

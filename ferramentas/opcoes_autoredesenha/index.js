@@ -69,6 +69,13 @@ i3GEOF.opcoesTempo = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.opcoesTempo.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/opcoes_autoredesenha/template_mst.html", function(template) {
+				i3GEOF.opcoesTempo.MUSTACHE = template;
+				i3GEOF.opcoesTempo.inicia(iddiv);
+			});
+			return;
+		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.opcoesTempo.html();
 			var b = new YAHOO.widget.Button(

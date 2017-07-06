@@ -36,7 +36,13 @@ i3GEOF.gradeCoord = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
+		if(i3GEOF.gradeCoord.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/gradecoord/template_mst.html", function(template) {
+				i3GEOF.gradeCoord.MUSTACHE = template;
+				i3GEOF.gradeCoord.inicia(iddiv);
+			});
+			return;
+		}
 			$i(iddiv).innerHTML += i3GEOF.gradeCoord.html();
 			i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef");
 			var b = new YAHOO.widget.Button(
@@ -45,8 +51,6 @@ i3GEOF.gradeCoord = {
 			);
 			b.addClass("rodar");
 			i3GEO.util.aplicaAquarela("i3GEOF.gradeCoord_corpo");
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
 	/*
 	Function: html
