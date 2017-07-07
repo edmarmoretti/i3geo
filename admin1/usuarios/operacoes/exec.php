@@ -26,11 +26,9 @@ include ("funcoes.php");
 //
 include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
-if (in_array ( strtoupper ( $funcao ), $funcoesEdicao )) {
-	if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/operacoes" ) === false) {
-		header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
-		exit ();
-	}
+if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/operacoes" ) === false) {
+	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
+	exit ();
 }
 $id = $_POST ["id"];
 $id_operacao = $_POST ["id_operacao"];

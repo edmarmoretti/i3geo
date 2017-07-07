@@ -556,13 +556,18 @@ i3GEO.mapa =
 			 *
 			 * Abre a janela de dialogo da ferramenta de cartogramas estatisticos METAESTAT
 			 */
-			metaestat : function(largura, altura, topo, esquerda) {
+			metaestat : function(largura, altura, topo, esquerda, Interface, conexao) {
 				var temp = function() {
 					i3GEOF.metaestat.MULTIPARAMETROS = true;
-					// i3GEOF.metaestat.inicia(largura, altura, topo, esquerda);
-					i3GEOF.metaestat.comum.iniciaDicionario(null, largura, altura, topo, esquerda);
+					if(Interface){
+						i3GEOF.metaestat.INTERFACE = Interface;
+					}
+					if(conexao){
+						i3GEOF.metaestat.CONEXAODEFAULT = conexao;
+					}
+					i3GEOF.metaestat.principal.inicia(null, largura, altura, topo, esquerda);
 				};
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()", "metaestat", "metaestat", "index.js", temp);
+				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()", "metaestat", "metaestat", "dependencias.php", temp);
 			},
 			/**
 			 * Function: metaestatListaMapas

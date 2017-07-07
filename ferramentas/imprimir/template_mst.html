@@ -1,59 +1,34 @@
-<style>
-.yui-button#i3GEOFimprimirPdf button {
-	background: url('../imagens/oxygen/16x16/application-pdf.png') 5% 50% no-repeat;
-	width: 200px;
-}
-.yui-button#i3GEOFimprimirTiff button {
-	background: url('../imagens/oxygen/16x16/application-x-mswinurl.png') 5% 50% no-repeat;
-	width: 200px;
-}
-.yui-button#i3GEOFimprimirAgg button {
-	background: url('../imagens/oxygen/16x16/applications-graphics.png') 5% 50% no-repeat;
-	width: 200px;
-}
-.yui-button#i3GEOFimprimirJpg button {
-	background: url('../imagens/oxygen/16x16/applications-graphics.png') 5% 50% no-repeat;
-	width: 200px;
-}
-.yui-button#i3GEOFimprimirSvg button {
-	background: url('../imagens/oxygen/16x16/application-xhtml+xml.png') 5% 50% no-repeat;
-	width: 200px;
-}
-
-</style>
 <div style='margin-left: 5px'>
+	<label class='paragrafo'>{{{escolha}}}
+	</label>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/a4lpaisagempdf.htm');" class='btn btn-primary btn-lg btn-block btn-raised'>
+	A4 com margens pdf
+	</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/geotif.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>
+	Geo Tiff
+	</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/aggpng.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>
+	Agg/Png alta qualidade
+	</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/jpeg.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>
+	JPEG
+	</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/svg.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>
+	Svg - vetorial
+	</a>
 
-	<p class=paragrafo >
-	{{{escolha}}}
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirPdf' type='button' value='A4 com margens pdf' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirTiff' type='button' value='Geo Tiff' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirAgg' type='button' value='Agg/Png alta qualidade' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirJpg' type='button' value='JPEG' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirSvg' type='button' value='Svg - vetorial' />
-	</p>
-	<p class='paragrafo'>
-		{{{config}}}:
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirLegenda' type='button' value='{{{legenda}}}' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirEscala' type='button' value='{{{escala}}}' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirTamanho' type='button' value='{{{tamanho}}}' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFimprimirLogo' type='button' value='{{{logo}}}' />
-	</p>
+	<label class='paragrafo'>{{{config}}}
+	</label>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.opcoesLegenda();" class='btn btn-primary btn-lg btn-block btn-raised'>
+	{{{legenda}}}
+	</a>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.opcoesEscala();" class='btn btn-primary btn-lg btn-block btn-raised'>
+	{{{escala}}}
+	</a>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.tamanho()" class='btn btn-primary btn-lg btn-block btn-raised'>
+	{{{tamanho}}}
+	</a>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.ativaLogo()" class='btn btn-primary btn-lg btn-block btn-raised'>
+	{{{logo}}}
+	</a>
 </div>

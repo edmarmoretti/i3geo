@@ -1350,10 +1350,6 @@ background-color: rgb(220, 220, 220);
 width: 95%;
 padding: 5px;
 }
-#i3geoCartoParametros_corpo select {
-box-shadow: 0 1px 5px lightgray;
-height: 20px;
-}
 #editor_bd p {
 margin-top: 15px;
 }

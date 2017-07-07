@@ -3,7 +3,11 @@ define ( "ONDEI3GEO", "../../.." );
 include ("exec.php");
 include "../../head.php";
 // monta o combo com a lista de pastas para armazenar os arquivos
-$chaves = array_keys ( $_SESSION ["i3geoUploadDataWL"]["arquivos"] );
+if(is_array($_SESSION ["i3geoUploadDataWL"]["arquivos"])){
+	$chaves = array_keys ( $_SESSION ["i3geoUploadDataWL"]["arquivos"] );
+} else {
+	$chaves = array();
+}
 $comboPastas = '<select name="dirDestino" class="form-control" required><option value=""></option>';
 foreach ( $chaves as $c ) {
 	$comboPastas .= "<option value='$c'>$c</option>";

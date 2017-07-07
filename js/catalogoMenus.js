@@ -139,7 +139,7 @@ i3GEO.catalogoMenus = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.catalogoMenus.listaGrupos");
 
-		i3GEO.catalogoMenus.aguarde();
+		//i3GEO.catalogoMenus.aguarde();
 
 		$("#i3GEOguiaMovelConteudo").scrollTop(0);
 		i3GEO.catalogoMenus.MENU = nomeMigalha;
@@ -200,7 +200,7 @@ i3GEO.catalogoMenus = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.catalogoMenus.listaSubGrupos");
 
-		i3GEO.catalogoMenus.aguarde();
+		//i3GEO.catalogoMenus.aguarde();
 		i3GEO.catalogoMenus.GRUPO = nomeMigalha;
 		i3GEO.catalogoMenus.escondeCatalogoPrincipal();
 
@@ -259,7 +259,7 @@ i3GEO.catalogoMenus = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.catalogoMenus.listaTemasSubgrupo");
 
-		i3GEO.catalogoMenus.aguarde();
+		//i3GEO.catalogoMenus.aguarde();
 		i3GEO.catalogoMenus.SUBGRUPO = nomeMigalha;
 		i3GEO.catalogoMenus.escondeCatalogoPrincipal();
 

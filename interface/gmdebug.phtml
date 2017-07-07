@@ -245,8 +245,8 @@ include("../ms_configura.php");
 							<div class="input-group">
 								<input id="i3GEObuscatema" class="form-control" type="text" value="">
 								<span class="input-group-btn">
-									<a onclick="i3GEO.arvoreDeTemas.buscaTema2($i('i3GEObuscatema').value);return false;" role="button" type="button" class="btn btn-warning btn-fab btn-fab-mini" href="javascript:void(0)">
-										<span class="material-icons md-18">send</span>
+									<a onclick="i3GEO.arvoreDeTemas.buscaTema2($i('i3GEObuscatema').value);return false;" role="button" type="button" class="btn btn-warning btn-fab btn-fab-max" href="javascript:void(0)">
+										<span class="material-icons ">send</span>
 									</a>
 								</span>
 							</div>
@@ -279,7 +279,7 @@ include("../ms_configura.php");
 
 						<!-- servicos da INDE brasileira -->
 						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoInde.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)"><span class="material-icons md-18">folder_open</span></a>
+							<a onclick="i3GEO.catalogoInde.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
 							<label style="width: 265px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoInde.inicia()" role="button" href="javascript:void(0)">
 								<h4>INDE-Br</h4></a>
@@ -288,7 +288,7 @@ include("../ms_configura.php");
 						</div></div><hr>
 						<!-- lista de wms cadastrados no sistema de administracao -->
 						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)"><span class="material-icons md-18">folder_open</span></a>
+							<a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
 							<label style="width: 265px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
 								<h4>OGC-WMS</h4></a>
@@ -297,7 +297,7 @@ include("../ms_configura.php");
 						</div></div><hr>
 						<!--  regioes cadastradas no sistema de metadados -->
 						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoRegioes.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)"><span class="material-icons md-18">folder_open</span></a>
+							<a onclick="i3GEO.catalogoRegioes.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
 							<label style="width: 265px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoRegioes.inicia()" role="button" href="javascript:void(0)">
 								<h4>{{{x87}}}</h4></a>
@@ -306,7 +306,7 @@ include("../ms_configura.php");
 						</div></div><hr>
 						<!--  camadas que vem do sistema de metadados estatisticos -->
 						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)"><span class="material-icons md-18">folder_open</span></a>
+							<a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
 							<label style="width: 265px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" href="javascript:void(0)">
 								<h4>{{{x57}}}</h4></a>
@@ -315,7 +315,7 @@ include("../ms_configura.php");
 						</div></div><hr>
 						<!--  mapas cadastrados no sistema de administracao (nao funcional)
 						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)"><span class="material-icons md-18">folder_open</span></a>
+							<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
 							<label style="width: 265px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" href="javascript:void(0)">
 								<h4>{{{x90}}}</h4></a>
@@ -325,7 +325,7 @@ include("../ms_configura.php");
 						-->
 						<!--  camadas por estrelas -->
 						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)"><span class="material-icons md-18">folder_open</span></a>
+							<a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
 							<label style="width: 265px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" href="javascript:void(0)">
 								<h4>{{{t46}}}</h4></a>
@@ -334,7 +334,7 @@ include("../ms_configura.php");
 						</div></div><hr>
 						<!--  sistemas que adicionam camadas -->
 						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoSistemas.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)"><span class="material-icons md-18">folder_open</span></a>
+							<a onclick="i3GEO.catalogoSistemas.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
 							<label style="width: 265px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoSistemas.inicia()" role="button" href="javascript:void(0)">
 								<h4>{{{a11}}}</h4></a>
@@ -343,7 +343,7 @@ include("../ms_configura.php");
 						</div></div><hr>
 						<!--  navegacao em diretorios -->
 						<div class="list-group condensed"><div class="row-content text-left">
-								<a onclick="i3GEO.catalogoDir.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)"><span class="material-icons md-18">folder_open</span></a>
+								<a onclick="i3GEO.catalogoDir.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
 								<label style="width: 265px;vertical-align: middle;">
 									<a onclick="i3GEO.catalogoDir.inicia()" role="button" href="javascript:void(0)">
 									<h4>{{{a6}}}</h4></a>
@@ -366,25 +366,25 @@ include("../ms_configura.php");
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
 					<div class="form-inline" style="width:100%;">
 						<div class="text-center form-group" style="margin:4px;">
-							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.medeArea.inicia();" role="button" class="btn btn-success btn-fab btn-fab-mini" href="javascript:void(0)">
+							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.medeArea.inicia();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
 							<img style="margin-top:4px;" src="../imagens/gisicons/area-measure.png">
 							</a>
 							<h6>{{{d21at}}}</h6>
 						</div>
 						<div class="text-center form-group" style="margin:4px;">
-							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.medeDistancia.inicia();" role="button" class="btn btn-success btn-fab btn-fab-mini" href="javascript:void(0)">
+							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.medeDistancia.inicia();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
 							<img style="margin-top:4px;" src="../imagens/gisicons/length-measure.png">
 							</a>
 							<h6>{{{d21t}}}</h6>
 						</div>
 						<div class="text-center form-group" style="margin:4px;">
-							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.selecao();" role="button" class="btn btn-success btn-fab btn-fab-mini" href="javascript:void(0)">
+							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.selecao();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
 							<img style="margin-top:4px;" src="../imagens/gisicons/select.png">
 							</a>
 							<h6>{{{d24t}}}</h6>
 						</div>
 						<div class="text-center form-group" style="margin:4px;">
-							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.geolocal();" role="button" class="btn btn-success btn-fab btn-fab-mini" href="javascript:void(0)">
+							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.geolocal();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
 							<img style="margin-top:4px;" src="../imagens/gisicons/layer-gps.png">
 							</a>
 							<h6>{{{localiza}}}</h6>
@@ -426,8 +426,8 @@ include("../ms_configura.php");
 	<script id="guia2objTemplateDir" type="x-tmpl-mustache">
 		<div class="list-group condensed">
 			<div class="row-content text-left">
-				<a onclick="{{{onclick}}}" role="button" class="btn btn-warning btn-fab btn-fab-mini" href="javascript:void(0)">
-					<span class="material-icons md-18">folder_open</span>
+				<a onclick="{{{onclick}}}" role="button" class="btn btn-warning btn-fab btn-fab-max" href="javascript:void(0)">
+					<span class="material-icons ">folder_open</span>
 				</a>
 				<label class="nomeTema" >
 					<a onclick="{{{onclick}}}" href="javascript:void(0)"><h4>
@@ -442,8 +442,8 @@ include("../ms_configura.php");
 	<script id="guia2objTemplateTema" type="x-tmpl-mustache">
 		<div class="list-group condensed">
 			<div class="row-content text-left">
-				<a onclick="{{{onclick}}}" role="button" class="btn btn-default btn-fab btn-fab-mini" href="javascript:void(0)">
-					<span class="material-icons md-18">visibility</span>
+				<a onclick="{{{onclick}}}" role="button" class="btn btn-default btn-fab btn-fab-max" href="javascript:void(0)">
+					<span class="material-icons ">visibility</span>
 				</a>
 				<label class="nomeTema" >
 					<a onclick="{{{onclick}}}" href="javascript:void(0)"><h4>
@@ -459,8 +459,8 @@ include("../ms_configura.php");
 	<script id="guia8objTemplateFolder" type="x-tmpl-mustache">
 		<div class="list-group condensed">
 			<div class="row-content text-left">
-				<a role="button" class="btn btn-primary btn-fab btn-fab-mini" href="javascript:void(0)">
-					<span class="material-icons md-18">folder_open</span>
+				<a role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+					<span class="material-icons ">folder_open</span>
 				</a>
 				<label class="nomeTema" >
 					<a><h4>
@@ -475,8 +475,8 @@ include("../ms_configura.php");
 	<script id="guia8objTemplateLink" type="x-tmpl-mustache">
 		<div class="list-group condensed">
 			<div class="row-content text-left">
-				<a role="button" class="btn btn-default btn-fab btn-fab-mini" href="{{{url}}}" target="{{{target}}}">
-					<span class="material-icons md-18">launch</span>
+				<a role="button" class="btn btn-default btn-fab btn-fab-max" href="{{{url}}}" target="{{{target}}}">
+					<span class="material-icons ">launch</span>
 				</a>
 				<label class="nomeTema" >
 					<a href="{{{url}}}" target="{{{target}}}" ><h4>

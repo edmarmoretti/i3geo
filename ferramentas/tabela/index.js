@@ -124,7 +124,7 @@ i3GEOF.tabela =
 			if(i3GEOF.tabela.MUSTACHE == ""){
 				$.get(i3GEO.configura.locaplic + "/ferramentas/tabela/template_mst.html", function(template) {
 					i3GEOF.tabela.MUSTACHE = template;
-					i3GEOF.tabela.inicia(iddiv);
+					i3GEOF.tabela.inicia(iddiv, idjanela);
 				});
 				return;
 			}

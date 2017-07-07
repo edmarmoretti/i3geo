@@ -93,81 +93,6 @@ i3GEOF.imprimir = {
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.imprimir.html();
-
-			new YAHOO.widget.Button("i3GEOFimprimirPdf", {
-				onclick : {
-					fn : function() {
-						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/a4lpaisagempdf.htm";
-						i3GEOF.imprimir.abreI(url);
-					}
-				}
-			});
-			new YAHOO.widget.Button("i3GEOFimprimirTiff", {
-				onclick : {
-					fn : function() {
-						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/geotif.php";
-						i3GEOF.imprimir.abreI(url,"interna");
-					}
-				}
-			});
-			new YAHOO.widget.Button("i3GEOFimprimirAgg", {
-				onclick : {
-					fn : function() {
-						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/aggpng.php";
-						i3GEOF.imprimir.abreI(url,"interna");
-					}
-				}
-			});
-			new YAHOO.widget.Button("i3GEOFimprimirJpg", {
-				onclick : {
-					fn : function() {
-						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/jpeg.php";
-						i3GEOF.imprimir.abreI(url,"interna");
-					}
-				}
-			});
-			new YAHOO.widget.Button("i3GEOFimprimirSvg", {
-				onclick : {
-					fn : function() {
-						var url = i3GEO.configura.locaplic+"/ferramentas/imprimir/svg.php";
-						i3GEOF.imprimir.abreI(url,"interna");
-					}
-				}
-			});
-			//opcoes
-			var b = new YAHOO.widget.Button("i3GEOFimprimirLegenda", {
-				onclick : {
-					fn : function() {
-						i3GEO.mapa.dialogo.opcoesLegenda();
-					}
-				}
-			});
-			b.addClass("abrir200");
-			var b = new YAHOO.widget.Button("i3GEOFimprimirEscala", {
-				onclick : {
-					fn : function() {
-						i3GEO.mapa.dialogo.opcoesEscala();
-					}
-				}
-			});
-			b.addClass("abrir200");
-			var b = new YAHOO.widget.Button("i3GEOFimprimirTamanho", {
-				onclick : {
-					fn : function() {
-						i3GEO.mapa.dialogo.tamanho();
-					}
-				}
-			});
-			b.addClass("abrir200");
-			var b = new YAHOO.widget.Button("i3GEOFimprimirLogo", {
-				onclick : {
-					fn : function() {
-						i3GEO.mapa.dialogo.ativaLogo();
-					}
-				}
-			});
-			b.addClass("abrir200");
-
 			var temp = function(retorno){
 				g_legendaHTML = retorno.data.legenda;
 			};
@@ -204,10 +129,10 @@ i3GEOF.imprimir = {
 			i3GEO.janela.minimiza("i3GEOF.imprimir");
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' >" + $trad("d12") + "</a>";
+		titulo = "</div><a style='right:30px;' class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=49' >" + $trad("d12") + "</a>";
 		janela = i3GEO.janela.cria(
+			"280px",
 			"250px",
-			"230px",
 			"",
 			"",
 			"",

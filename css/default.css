@@ -1,4 +1,29 @@
 /*
+Botoes material
+*/
+.material-icons.md-18 {
+	font-size: 18px;
+}
+.btn.btn-fab.btn-fab-mini {
+	font-size: 12px;
+	height: 28px;
+	min-width: 28px;
+	padding-bottom: 2px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top: 2px;
+	width: 28px;
+}
+.btn.btn-fab.btn-fab-max {
+	height: 40px;
+	min-width: 40px;
+	width: 40px;
+}
+.form-group .form-control {
+	font-size: 12px;
+	color:white;
+}
+/*
 Para Bootstrap
 */
 a, a:focus, a:hover {
@@ -22,7 +47,7 @@ h2 small {
 	color: #767676;
 }
 a .material-icons, a:focus .material-icons, a:hover .material-icons {
-	margin-top: 4px;
+	margin-top: 3px;
 }
 
 hr {

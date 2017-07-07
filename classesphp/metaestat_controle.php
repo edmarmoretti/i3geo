@@ -2,7 +2,6 @@
 //
 //o aplicativo que abre a janela para acesso a lista de variaveis, nao necessita da variavel de sessao
 //
-
 include ("sani_request.php");
 $_pg = array_merge ( $_GET, $_POST );
 $funcao = $_pg ["funcao"];
@@ -35,6 +34,18 @@ include (dirname ( __FILE__ ) . "/classe_metaestatinfo.php");
 $retorno = "";
 
 switch (strtoupper ( $funcao )) {
+	case "RELATORIOCOMPLETO" :
+		$m = new MetaestatInfo();
+		if(empty($_pg ["codigo_variavel"])){
+			$_pg ["codigo_variavel"] = "";
+		}
+		$dados = $m->relatorioCompleto($_pg ["codigo_variavel"],$_pg ["dadosGerenciais"]);
+		if(empty($_pg["detalhes"])){
+			$_pg["detalhes"] = "sim";
+		}
+		$dados = $m->formataRelatorioHtml($dados,$_pg["detalhes"]);
+		retornaJSON($dados);
+		break;
 	case "LISTATIPOREGIAO" :
 		$m = new MetaestatInfo ();
 		$retorno = $m->listaTipoRegiao ( $_pg ["codigo_tipo_regiao"], false );
