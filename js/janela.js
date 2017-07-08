@@ -149,7 +149,7 @@ i3GEO.janela =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.cria()");
 
-			if (!dimensionavel) {
+			if (arguments.length < 13 ) {
 				dimensionavel = true;
 			}
 			if (!icone) {
@@ -205,7 +205,7 @@ i3GEO.janela =
 			if (funcaoMinimiza) {
 				ins += "<div id='" + id + "_minimizaCabecalho' class='container-minimiza'></div>";
 			}
-			ins += '</div><div id="' + id + '_corpo" class="bd" style="display:block;padding:5px 5px 5px 5px;">';
+			ins += '</div><div id="' + id + '_corpo" class="bd" style="display:block;padding:0px">';
 			if (wsrc !== "") {
 				ins += '<iframe name="' + id + 'i" id="' + id + 'i" valign="top" style="border:0px white solid;width:100%"></iframe>';
 			}
@@ -258,7 +258,7 @@ i3GEO.janela =
 					dragOnly : true,
 					keylisteners : null
 				});
-				if (YAHOO.util.Resize) {
+				if (YAHOO.util.Resize && dimensionavel == true) {
 					var resize = new YAHOO.util.Resize(id, {
 						handles : [
 							'br'

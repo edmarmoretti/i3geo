@@ -264,7 +264,9 @@ i3GEOF.metaestat = {
 						false,
 						"hd",
 						cabecalho,
-						minimiza
+						minimiza,
+						"",
+						false
 				);
 				janela = janela[0];
 				YAHOO.i3GEO.janela.manager.register(janela);
@@ -401,7 +403,9 @@ i3GEOF.metaestat = {
 					false,
 					"hd",
 					cabecalho,
-					minimiza
+					minimiza,
+					"",
+					false
 				);
 				$i("i3GEOF.junta_corpo").style.backgroundColor = "white";
 				n = retorno.data.length;
@@ -827,7 +831,9 @@ i3GEOF.metaestat = {
 					false,
 					"hd",
 					cabecalho,
-					minimiza
+					minimiza,
+					"",
+					false
 				);
 				$i("i3GEOF.filtraperiodo_corpo").style.backgroundColor = "white";
 				ins = "" +
@@ -1039,7 +1045,9 @@ i3GEOF.metaestat = {
 						true,
 						"hd",
 						cabecalho,
-						minimiza
+						minimiza,
+						"",
+						false
 				);
 				janela = janela[0];
 				YAHOO.i3GEO.janela.manager.register(janela);
@@ -1589,7 +1597,9 @@ i3GEOF.metaestat = {
 						false,
 						"hd",
 						cabecalho,
-						minimiza
+						minimiza,
+						"",
+						false
 				);
 				janela = janela[0];
 				YAHOO.i3GEO.janela.manager.register(janela);
@@ -2409,7 +2419,7 @@ i3GEOF.metaestat = {
 					"<br><div id='i3geoCartoParametrosMedidasVariavel'></div>" +
 					"<p class=paragrafo >"+$trad('ajudaAdicionaVariavel',i3GEOF.metaestat.dicionario) + "</p>";
 
-				i3GEOF.metaestat.principal.botaoAdicionaCamada();
+				//i3GEOF.metaestat.principal.botaoAdicionaCamada();
 				i3GEOF.metaestat.classes.comboRegiao(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);
 				i3GEOF.metaestat.classes.comboTipoClassificacao();
 				i3GEOF.metaestat.parametros.lista(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);
@@ -2468,7 +2478,9 @@ i3GEOF.metaestat = {
 						modal,
 						"hd",
 						cabecalho,
-						minimiza
+						minimiza,
+						"",
+						false
 				);
 				janela = janela[0];
 				if(!YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros")){
@@ -2615,22 +2627,7 @@ i3GEOF.metaestat = {
 		 * Define como funcao de onclick i3GEOF.metaestat.comum.adicionaCamada()
 		 */
 		botaoAdicionaCamada: function(largura){
-			i3GEOF.metaestat.log("i3GEOF.metaestat.principal.botaoAdicionaCamada()");
-			if(!largura){
-				largura = i3GEOF.metaestat.LARGURA - 15;
-			}
-			var b = $i("i3GEOcartoBotaoAdicionaCamada");
-			if(!b){
-				YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros").setFooter('<input type="button" id="i3GEOcartoBotaoAdicionaCamada" value="'+$trad('adicionaCamada',i3GEOF.metaestat.dicionario)+'" class="paragrafo" style="width:200px;cursor:pointer;color:blue" />');
-			}
-			if(!$i("i3GEOcartoBotaoAdicionaCamada-button")){
-				b = new YAHOO.widget.Button(
-						"i3GEOcartoBotaoAdicionaCamada",
-						{onclick:{fn: i3GEOF.metaestat.comum.adicionaCamada}}
-				);
-				b.addClass("rodar");
-				$i("i3GEOcartoBotaoAdicionaCamada-button").style.width = largura + "px";
-			}
+
 		},
 		/**
 		 * Formata o botao que abre a janela de opcoes de analis e define a funcao que sera executada
@@ -2780,7 +2777,7 @@ i3GEOF.metaestat = {
 			if(combo.value != ""){
 				//i3GEOF.metaestat.classes.inicia();
 				i3GEOF.metaestat.parametros.lista(combo.value);
-				i3GEOF.metaestat.principal.botaoAdicionaCamada();
+				//i3GEOF.metaestat.principal.botaoAdicionaCamada();
 			}
 			i3GEOF.metaestat.classes.zeraParametros();
 		},

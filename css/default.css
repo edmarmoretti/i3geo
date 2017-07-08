@@ -23,9 +23,16 @@ Botoes material
 	font-size: 12px;
 	color:white;
 }
+
 /*
 Para Bootstrap
 */
+
+span.affix {
+	background-color: #477596;
+	z-index: 1;
+}
+
 a, a:focus, a:hover {
 	color: #008579;
 }
@@ -1099,6 +1106,12 @@ bd .i3geoFormIconeEdita {
 	.nomeTema {
 		width: 235px;
 		vertical-align: middle;
+	}
+	.ol-zoomslider {
+		display: none;
+	}
+	.ol-scale-line {
+		bottom: 0;
 	}
 }
 /* === For tablets ================================== */
