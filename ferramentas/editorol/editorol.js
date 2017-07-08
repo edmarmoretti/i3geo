@@ -1134,7 +1134,7 @@ i3GEO.editorOL =
 				//adiciona a interacao para poder ser removida
 				i3GEO.editorOL.interacoes.push(draw);
 				//desativa ol.interaction.DoubleClickZoom
-				i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				draw.on("drawend", function(evt) {
 					evt.feature.setStyle(
 						new ol.style.Style({
@@ -1172,7 +1172,7 @@ i3GEO.editorOL =
 				});
 				//adiciona a interacao para poder ser removida
 				i3GEO.editorOL.interacoes.push(draw);
-				i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				draw.on("drawend", function(evt) {
 					var simbolo, url;
 					url = i3GEO.editorOL.simbologia.externalGraphic;
@@ -1229,7 +1229,7 @@ i3GEO.editorOL =
 				*/
 				//adiciona a interacao para poder ser removida
 				i3GEO.editorOL.interacoes.push(draw);
-				i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				draw.on("drawend", function(evt) {
 					evt.feature.setStyle(
 						new ol.style.Style({
@@ -1267,7 +1267,7 @@ i3GEO.editorOL =
 				});
 				//adiciona a interacao para poder ser removida
 				i3GEO.editorOL.interacoes.push(draw);
-				i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				draw.on("drawend", function(evt) {
 					var texto = window.prompt("Texto", "");
 					evt.feature.setStyle(
@@ -1307,7 +1307,7 @@ i3GEO.editorOL =
 				var sel = new ol.interaction.Select();
 				//adiciona a interacao para poder ser removida
 				i3GEO.editorOL.interacoes.push(sel);
-				i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				sel.on("select", function(evt) {
 					var s,i, n, id, f;
 					n = evt.selected.length;
@@ -1446,7 +1446,7 @@ i3GEO.editorOL =
 					});
 					//adiciona a interacao para poder ser removida
 					i3GEO.editorOL.interacoes.push(draw);
-					i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+					i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 					i3geoOL.addInteraction(draw);
 				}
 				else{
@@ -1472,7 +1472,7 @@ i3GEO.editorOL =
 					});
 					//adiciona a interacao para poder ser removida
 					i3GEO.editorOL.interacoes.push(draw);
-					i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+					i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 					draw.on("drawend", function(evt) {
 						var temp, f, c, format, fwkt, cwkt;
 						f = evt.feature;
@@ -1615,7 +1615,7 @@ i3GEO.editorOL =
 				});
 				//adiciona a interacao para poder ser removida
 				i3GEO.editorOL.interacoes.push(draw);
-				i3GEO.Interface.openlayers.interacoes[0].setActive(false);
+				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				draw.on("drawend", function(evt) {
 					var xy, p, retorno, url, layer, tema = $i("i3GEOOLlistaTemasAtivos");
 					if(tema){
