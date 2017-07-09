@@ -160,16 +160,25 @@ hr {
 
 .i3GEOfechaGuia {
 	cursor: pointer;
-	left: 0px;
+	right: 25px;
 	top: 0px;
-	width: 95%;
-	min-height: 30px;
+	width: 325px;
+	min-height: 40px;
 	text-align: right;
 	font-size: 14pt;
 	margin-bottom: 10px;
 	padding: 2px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: fixed;
+	background-color: white;
+	z-index: 5;
 }
+/*utilizado para nao sobrepor com o icone de fechar guias, que e fixed*/
+.separadorCabecalhoGuias{
+	height: 40px;
+}
+
+
 /*
 botoes da legenda
 */

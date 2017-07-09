@@ -40,7 +40,9 @@
 	<div id="i3GEONomeLogin"
 		style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
 	-->
-	<!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps -->
+	<!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
+	Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
+	-->
 	<div id="mapai3Geo" >
 	</div>
 	<!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
@@ -49,13 +51,13 @@
 	</form>
 
 	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
-	<div class="localizarxy fundoRodape hidden-xs hidden-sm">
+	<div class="localizarxy fundoRodape hidden-xs hidden-sm" >
 		<div class="i3GeoMascaraCoord" style="display: block;">
 			<select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
 				<option>DMS:</option>
 				<option value="janela">janela</option>
 				<option value="geoProj">DMS</option>
-				<option value="dd">Déc. de grau</option>
+				<option value="dd">Dec. de grau</option>
 				<option value="geohash">GeoHash</option>
 				<option value="policonicaSad69">Polic SAD-69</option>
 				<option value="utmSad69Proj">UTM Sad-69</option>
@@ -96,27 +98,26 @@
 			Zn: <input name="" value="--" size="2" title="Zona" id="localizarxyutmSirgas2000ProjZN" type="text">
 		</div>
 	</div>
-
-	<!-- barra de ícones de navegacao -->
-	<div class="ol-i3GEOcontrols ol-control">
-		<button onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
+	<!-- barra de icones de navegacao -->
+	<div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
+		<button title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/projection.png">
 		</button>
 		<button onclick="i3GEO.Interface.zoomli()" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/zoom-region.png">
 		</button>
 		<br>
-		<button onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
+		<button title="{{{volta}}}" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle1.png">
 		</button>
-		<button onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
+		<button title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
 		<br>
-		<button data-template="templates/ferramentasLink.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
+		<button class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="templates/ferramentasLink.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/save1.png">
 		</button>
-		<button onclick="i3GEO.maparef.inicia()" style="float: left;">
+		<button class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/map-reference.png">
 		</button>
 	</div>
@@ -180,7 +181,7 @@
 					<img src="../imagens/legenda.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('dobraPagina',this)" style="margin-top: 3px;">
+			<div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('dobraPagina',this)" style="margin-top: 3px;">
 				<button title="{{{trocaInterface}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/googlemaps.png" style="cursor: pointer; padding: 3px;">
 				</button>
@@ -196,7 +197,7 @@
 					<img src="../imagens/gisicons/tips.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
+			<div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
 				<button title="{{{d7}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer; padding: 3px;">
 				</button>
@@ -210,9 +211,10 @@
 				<!-- camadas existentes no mapa -->
 				<div id='guia1obj' data-traduzir="true" style='display: none;'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g4a}}}</span>X</div>
-					<div class="btn-group noprint" >
-              			<a href="javascript:void(0)" class="btn btn-default btn-raised" style="width: 250px;">{{{opcoes}}}</a>
-             			<a href="javascript:void(0)" data-target="#" class="btn btn-default btn-raised dropdown-toggle" data-toggle="dropdown">
+					<div class="separadorCabecalhoGuias">&nbsp;</div>
+					<div class="noprint" >
+             			<a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+             				{{{opcoes}}}
              				<span class="caret"></span>
               			</a>
               			<ul class="dropdown-menu">
@@ -249,14 +251,15 @@
 				<!-- Catalogo de temas -->
 				<div id='guia2obj' data-traduzir="true" style='display: none; text-align:left;'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();"><span class="pull-left">{{{g1a}}}</span> X</div>
+					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
 					<div id="catalogoMigalha" data-template="templates/catalogoMigalha.html"></div>
 					<div id="catalogoNavegacao"></div>
 					<!-- Opcoes -->
 					<div id="catalogoPrincipal">
-						<div class="btn-group noprint" >
-	              			<a href="javascript:void(0)" class="btn btn-default btn-raised" style="width: 250px;">{{{opcoes}}}</a>
-	             			<a href="javascript:void(0)" data-target="#" class="btn btn-default btn-raised dropdown-toggle" data-toggle="dropdown">
+						<div class="noprint" >
+	             			<a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
+	             				{{{opcoes}}}
 	             				<span class="caret"></span>
 	              			</a>
 	              			<ul class="dropdown-menu">
@@ -286,7 +289,7 @@
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
 								</li>
 								<li>
-								<a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatísticos</a>
+								<a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
 								</li>
 								<li><a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
 								</li>
@@ -407,8 +410,10 @@
 				</div>
 				<!-- Legenda -->
 				<div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
-					<div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: block; text-align: left'></div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
+					<div class="separadorCabecalhoGuias">&nbsp;</div>
+					<a href='javascript:void(0)' onclick="i3GEO.legenda.inicia({'janela':true})" >{{{x11}}}</a>
+					<div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: none; text-align: left'></div>
 				</div>
 				<!-- busca
 				Funcoes de busca por registros. Pode ser feita nos temas existentes no mapa, em um servico de busca e no google
@@ -417,6 +422,7 @@
 				-->
 				<div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
+					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<form>
 						<div class="form-group label-floating">
 							<label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>
@@ -479,6 +485,7 @@
 				<!-- Ferramentas -->
 				<div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
+					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<div class="form-inline" style="width:100%;">
 						<div class="text-center form-group" style="margin:4px;">
 							<a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.area();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
