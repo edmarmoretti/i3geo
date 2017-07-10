@@ -99,10 +99,11 @@ include "../init/head.php";
 		$("#mensagemLogin").html(men);
 		</script>
 		<?php
+		
 		if(empty($_POST["senha"]) || empty($_POST["usuario"])){
-
 			//opcoes de criacao de pastas
 			if (strtoupper(substr(PHP_OS, 0, 3) != 'WIN')){
+				
 				$d = dirname(dirname(__FILE__));
 echo <<<HTML
 		<div class="alert alert-danger" role="alert">
@@ -145,7 +146,7 @@ echo <<<HTML
 		</script>
 HTML;
 			}
-			exit;
+			//exit;
 		}
 		else{
 			$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
@@ -158,7 +159,8 @@ HTML;
 				exit;
 			}
 		}
-		//error_reporting(0);
+		
+		error_reporting(E_ALL);
 		$ip = "UNKNOWN";
 		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
 		else if(getenv("HTTP_X_FORWARDED_FOR")) $ip = getenv("HTTP_X_FORWARDED_FOR");
