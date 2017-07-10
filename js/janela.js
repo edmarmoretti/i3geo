@@ -291,7 +291,6 @@ i3GEO.janela =
 				janela.moveTo(nx, ny + 50);
 			}
 			YAHOO.i3GEO.janela.manager.register(janela);
-
 				janela.cfg.setProperty("effect", [
 					{
 						effect : YAHOO.widget.ContainerEffect.FADE,
@@ -585,8 +584,8 @@ i3GEO.janela =
 		tempoMsg : function(texto, tempo) {
 			if(!i3GEO.janela.tempoModal){
 				i3GEO.janela.tempoModal = $(
-					'<div class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:50000;overflow-y:visible;">' +
-					'<div class="modal-dialog modal-m">' +
+					'<div class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:500000;overflow-y:visible;">' +
+					'<div class="modal-dialog">' +
 					'<div class="modal-content">' +
 					'<div class="modal-body" >' +
 					'<div id="i3GEOMensagemTempoModal" >' +

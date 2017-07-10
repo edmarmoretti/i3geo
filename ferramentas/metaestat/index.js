@@ -123,93 +123,14 @@ i3GEOF.metaestat = {
 	 * Funcoes e variaveis que controlam as opcoes de analise (botoes da janela de analise)
 	 */
 	analise: {
-		/**
-		 * Objeto que define os botoes da ferramenta
-		 * Exemplo:
-		 * i3GEOF.metaestat.analise.botoes = [{
-				titulo:"Focar o mapa em um determinado limite geogr&aacute;fico",
-				onclick:"i3GEO.mapa.dialogo.locregiao()",
-				icone: "imagens/gisicons/open-street-maps.png"
-			}];
-		*/
-		botoes: [{
-				titulo:"Focar o mapa em um determinado limite geogr&aacute;fico",
-				onclick:"i3GEO.mapa.dialogo.locregiao()",
-				icone: "imagens/gisicons/open-street-maps.png"
-			},{
-				titulo: "Mostrar no mapa os limites geogr&aacute;ficos cadastrados",
-				onclick: "i3GEOF.metaestat.analise.mostraRegiao()",
-				icone: "imagens/gisicons/open-street-maps-show.png"
-			},{
-				titulo: "Mostrar apenas os dados de determinado limite geogr&aacute;fico",
-				onclick: "i3GEO.mapa.dialogo.filtraregiao()",
-				icone: "imagens/gisicons/open-street-maps-filtro.png"
-			},{
-				titulo: "Mostrar apenas os dados de um per&iacute;odo de tempo",
-				onclick: "i3GEOF.metaestat.analise.filtraPeriodo.inicia()",
-				icone: "imagens/gisicons/open-street-maps-filtrotime.png"
-			},{
-				titulo: "Tabela de atributos",
-				onclick: "i3GEO.tema.dialogo.tabela()",
-				icone: "imagens/gisicons/table.png"
-			},{
-				titulo: "Gr&aacute;fico interativo",
-				onclick: "i3GEO.analise.dialogo.graficoInterativo1()",
-				icone: "imagens/oxygen/22x22/view_statistics.png"
-			},{
-				titulo: "Opacidade",
-				onclick: "i3GEO.mapa.dialogo.opacidade()",
-				icone: "imagens/gisicons/layer-opacity.png"
-			},{
-				titulo: "Anima&ccedil;&atilde;o",
-				onclick: "i3GEOF.metaestat.analise.ativaAnimacao()",
-				icone: "imagens/gisicons/player-forward.png"
-			},{
-				titulo: "Alterar classifica&ccedil;&atilde;o",
-				onclick: "i3GEOF.metaestat.analise.alteraClasses()",
-				icone: "imagens/gisicons/calculator.png"
-			},{
-				titulo: "Alterar cores",
-				onclick: "i3GEOF.metaestat.analise.alteraCores()",
-				icone: "imagens/gisicons/24-to-8-bits.png"
-			},{
-				titulo: $trad("t42"),
-				onclick: "i3GEO.tema.dialogo.cortina()",
-				icone: "imagens/gisicons/mapset.png"
-			},{
-				titulo: $trad("t49"),
-				onclick: "i3GEOF.metaestat.analise.ativaTme()",
-				icone: "imagens/gisicons/3d-light.png"
-			},{
-				titulo: "Estat&iacute;sticas gerais",
-				onclick: "i3GEOF.metaestat.analise.estatistica()",
-				icone: "imagens/gisicons/stats.png"
-			},{
-				titulo: "Ativa/Desativa contorno dos limites geogr&aacute;ficos",
-				onclick: "i3GEOF.metaestat.analise.contorno()",
-				icone: "imagens/gisicons/boundary-remove-add.png"
-			},{
-				titulo: "Altera a forma de representa&ccedil;&atilde;o gr&aacute;fica",
-				onclick: "i3GEOF.metaestat.analise.alteraRep()",
-				icone: "imagens/gisicons/shape.png"
-			},{
-				titulo: "Mapa de calor",
-				onclick: "i3GEOF.metaestat.analise.calor()",
-				icone: "imagens/gisicons/dem.png"
-			},{
-				titulo: "Congela vis&atilde;o",
-				onclick: "i3GEO.mapa.dialogo.congelaMapa()",
-				icone: "imagens/gisicons/mapset-add.png"
-			},{
-				titulo: "Mostra os valores como textos no mapa",
-				onclick: "i3GEOF.metaestat.analise.toponimia()",
-				icone: "imagens/gisicons/label.png"
-			},{
-				titulo: "Junta dados das camadas",
-				onclick: "i3GEOF.metaestat.analise.juntaMedidasVariaveis.inicia()",
-				icone: "imagens/gisicons/layer-group-add.png"
-			}
-		],
+		MUSTACHE : "",
+		mustacheHash : function() {
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.metaestat.dicionario);
+			dicionario["locaplic"] = i3GEO.configura.locaplic;
+			dicionario["t42"] = $trad("t42");
+			dicionario["t49"] = $trad("t49");
+			return dicionario;
+		},
 		/**
 		 * Inicia a ferramenta ativando os componentes da interface
 		 * Executa as funcoes i3GEOF.metaestat.analise.abreJanela() e i3GEOF.metaestat.analise.comboCamadas()
@@ -217,6 +138,15 @@ i3GEOF.metaestat = {
 		 */
 		inicia: function(iddiv){
 			i3GEOF.metaestat.log("i3GEOF.metaestat.analise.inicia()");
+
+			if(i3GEOF.metaestat.analise.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/metaestat/template_analise_mst.html", function(template) {
+					i3GEOF.metaestat.analise.MUSTACHE = template;
+					i3GEOF.metaestat.analise.inicia(iddiv);
+				});
+				return;
+			}
+
 			var ics,n,i;
 			if(!iddiv || !$i(iddiv)){
 				iddiv = "i3geoCartoAnalise_corpo";
@@ -254,8 +184,8 @@ i3GEOF.metaestat = {
 					i3GEO.janela.minimiza("i3geoCartoAnalise");
 				};
 				janela = i3GEO.janela.cria(
-						"270px",
-						"170px",
+						"280px",
+						"300px",
 						"",
 						"",
 						"",
@@ -285,15 +215,8 @@ i3GEOF.metaestat = {
 		 * @return HTML
 		 */
 		html: function(){
-			var ins = '<div id="i3geoCartoAnaliseContainer" style="margin-left:5px;line-height:25px">',
-				b = i3GEOF.metaestat.analise.botoes,
-				n = b.length,
-				i;
-			ins += '<div id="i3geoCartoAnaliseCamadas" style="top:-5px;height:50px;display:none"></div>';
-			for(i=0;i<n;i++){
-				ins += '<button title="'+b[i].titulo+'" onclick="'+b[i].onclick+'"><img src="'+i3GEO.configura.locaplic+"/"+b[i].icone+'" /></button>';
-			}
-			ins += '</div><input type=hidden  value="" id="listaColourRampAnaliseMetaestat" onchange="i3GEOF.metaestat.analise.aplicaColourRamp()" />'; //utilizado pelo seletor de colourramp
+			i3GEOF.metaestat.log("i3GEOF.metaestat.principal.html()");
+			var ins = Mustache.render(i3GEOF.metaestat.analise.MUSTACHE, i3GEOF.metaestat.analise.mustacheHash());
 			return ins;
 		},
 		/**
