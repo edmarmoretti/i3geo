@@ -144,7 +144,7 @@ include "../../head.php";
 					</li>";
 
 			echo "</ul></div>";
-			echo "<div class='well'><h4>Acesos por tema</h4><ul>";
+			echo "<div class='well'><h4>Acessos por tema</h4><ul>";
 			arsort($temasacessos);
 			$temasacessos2 = array_keys($temasacessos);
 			for($i=0;$i<count($temasacessos2);$i++){
