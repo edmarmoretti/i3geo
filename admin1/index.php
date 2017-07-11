@@ -31,6 +31,11 @@ if($esquemaadmin != ""){
 	$_SESSION["esquemaadmin"] = str_replace(".","",$esquemaadmin).".";
 }
 unset ($esquemaadmin);
+$_SESSION["conexaoadmin"] = "";
+if($conexaoadmin != ""){
+	$_SESSION["conexaoadmin"] = $conexaoadmin;
+}
+unset ($conexaoadmin);
 $_SESSION["postgis_mapa"] = $postgis_mapa;
 unset($postgis_mapa);
 $_SESSION["logTransacoes"] = $logTransacoes;

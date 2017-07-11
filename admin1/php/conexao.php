@@ -3,6 +3,7 @@ if(empty($_SESSION["locaplic"])){
 	echo "locaplic nao definido em conexao.php";
 	exit;
 }
+$conexaoadmin = $_SESSION["conexaoadmin"];
 if(!isset($conexaoadmin)){
 	$conexaoadmin = "";
 }

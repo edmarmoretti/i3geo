@@ -180,12 +180,12 @@ Array originada de fetchAll
 */
 function pegaDados($sql,$dbh="",$close=true)
 {
+	//error_reporting (E_ALL);
 	$resultado = array();
 	//is_string para efeitos de compatibilidade
 	if($dbh == "" || is_string($dbh)){
 		include(dirname(__FILE__)."/conexao.php");
 	}
-	//error_reporting (E_ALL);
 	//$dbh deve ser definido com somente leitura, mas por prevencao:
 	$sql = str_ireplace(array("update","delete","insert","--","drop",";"),"",$sql);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -202,7 +202,7 @@ function pegaDados($sql,$dbh="",$close=true)
 			$dbh = null;
 			$dbhw = null;
 		}
-		throw new Exception(" erro admin.php funcao \admin\php\funcoesAdmin\pegaDados");
+		//throw new Exception(" erro admin.php funcao \admin\php\funcoesAdmin\pegaDados");
 	}
 }
 /**

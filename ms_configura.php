@@ -681,7 +681,7 @@ Tipo:
 {string}
 
 */
-$conexaoadmin = "";
+$conexaoadmin = "";//"/var/www/conexaoms.php";
 /*
 Variable: $esquemaadmin
 
