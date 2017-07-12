@@ -1,10 +1,10 @@
 <!-- Guias -->
-<div id='{{{idjanela}}}' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px;'>
+<div id='{{{idjanela}}}' class='yui-navset' style='top: 0px; cursor: pointer; left: 2px;'>
 	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
 		<li>
 			<div id='{{{idjanela}}}i3GEOtabelaguia6' style='text-align: center; left: 0px;'>
-				<a>
-					<em><img class='ticPropriedades2' style='height: 14px' title='{{{propriedades}}}' src='{{{locaplic}}}/imagens/branco.gif'></em>
+				<a title='{{{propriedades}}}'>
+					<em><span class="material-icons">settings</span></em>
 				</a>
 			</div>
 		</li>
@@ -35,47 +35,60 @@
 <!-- Local onde a tabela e renderizada -->
 <div id='{{{idjanela}}}i3GEOtabelaresultadotab' style='background-color: #F2F2F2; position: relative; top: 5px; left: 0px'></div>
 <!-- Guia Propriedades -->
-<div id='{{{idjanela}}}i3GEOtabelaguia6obj' style='width: 99%'>
-	<table summary='' class='lista2'>
-		<tr>
-			<td>
-				<input style='cursor: pointer; border: 0px solid white;' onclick='i3GEOF.tabela.pegaRegistros({{{idjanelaA}}})' type='checkbox' id='{{{idjanela}}}i3GEOtabelatipolista' />
-			</td>
-			<td>
-				<span class='paragrafo'>{{{atuatab}}}</span>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input style='cursor: pointer; border: 0px solid white;' onclick='i3GEOF.tabela.pegaRegistros({{{idjanelaA}}})' type='checkbox' id='{{{idjanela}}}i3GEOtabelalegenda' />
-			</td>
-			<td>
-				<span class='paragrafo'>{{{colleg}}}</span>
-			</td>
-		</tr>
-	</table>
+<div id='{{{idjanela}}}i3GEOtabelaguia6obj' style='width: 99%;padding-left:5px;'>
+	<div class="checkbox text-left">
+		<label style="padding:12px;">
+			<input id='{{{idjanela}}}i3GEOtabelatipolista' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros('{{{idjanela}}}')">
+			<span class="checkbox-material noprint"><span class="check"></span></span> {{{atuatab}}}
+		</label>
+	</div>
+	<div class="checkbox text-left">
+		<label style="padding:12px;">
+			<input id='{{{idjanela}}}i3GEOtabelalegenda' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros('{{{idjanela}}}')">
+			<span class="checkbox-material noprint"><span class="check"></span></span> {{{colleg}}}
+		</label>
+	</div>
+	<div class="checkbox text-left">
+		<label style="padding:12px;">
+			<input checked id='i3GEOFtabelaRodape{{{idjanela}}}' type="checkbox" onclick="i3GEOF.tabela.propJanelas['{{{idjanela}}}'].atualiza = this.checked;">
+			<span class="checkbox-material noprint"><span class="check"></span></span> {{{atualizaAoNavegar}}}
+		</label>
+	</div>
 </div>
 <!-- Registros da tabela -->
-<div id='{{{idjanela}}}i3GEOtabelaguia1obj' style='width: 99%'>
+<div id='{{{idjanela}}}i3GEOtabelaguia1obj' style='width: 99%;padding-left:5px;'>
 	<div id='{{{idjanela}}}i3GEOtabelacombot' style='position: relative; top: 5px; left: 0px; display: none;'></div>
-	<input title='{{{sellinhas}}}' id='{{{idjanela}}}i3GEOtabelabotao2' size='25' type='button' value='{{{atvsel}}}' />
-	<input title='{{{limpselmap}}}' id='{{{idjanela}}}i3GEOtabelabotao3' size='25' type='button' value='{{{limpsel}}}' />
-	<input title='{{{criatemasel}}}' id='{{{idjanela}}}i3GEOtabelabotao6' size='30' type='button' value='{{{criatema}}}' />
-	<input id='{{{idjanela}}}i3GEOtabelaGraficoI' type='button' value='{{{grafico}}}' />
-	<input title='{{{vinctab}}}' id='{{{idjanela}}}i3GEOtabelabotaoVinculos' size='30' type='button' value='{{{vinculos}}}' />
-	<div id='{{{idjanela}}}i3GEOtabelacontador' style='padding:2px 0px 3px 0px;background-color: rgb(240, 240, 240); width: 100%; position: relative; top: 15px; left: 0px; text-align: left; height: 25px;'>
-		{{{de}}}&nbsp;
-		<img style='cursor: pointer;position:relative;top:2px;' onclick='i3GEOF.tabela.menos({{{idjanelaA}}})' src='{{{locaplic}}}/imagens/oxygen/16x16/media-seek-backward.png' />&nbsp;
-		{{{ini}}} {{{ate}}} &nbsp;
-		<img style='cursor: pointer;position:relative;top:2px;' onclick='i3GEOF.tabela.mais({{{idjanelaA}}})' src='{{{locaplic}}}/imagens/oxygen/16x16/media-seek-forward.png' />
-		&nbsp;{{{fim}}}&nbsp;
-		<img title='{{{vertodos}}}' style='cursor: pointer; position: relative;top:2px;' onclick='i3GEOF.tabela.todos({{{idjanelaA}}})' src='{{{locaplic}}}/imagens/oxygen/16x16/media-skip-forward.png' />
-		&nbsp;<input title='{{{atuareg}}}' id='{{{idjanela}}}i3GEOtabelabotaoLista' size='25' style='position: relative;' type='button' value='{{{listar}}}' />
+
+	<a href='javascript:void(0)' onclick="i3GEOF.tabela.ativaSelecao('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{atvsel}}}</a>
+	<a title='{{{limpselmap}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.limpaSelecao('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{limpsel}}}</a>
+	<a title='{{{criatemasel}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.criaNovoTema('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{criatema}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.ativaTema(i3GEOF.tabela.propJanelas['{{{idjanela}}}'].tema);i3GEO.analise.dialogo.graficoInterativo1();" class='btn btn-primary btn-sm btn-raised'>{{{grafico}}}</a>
+	<a title='{{{vinctab}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.vinculos.iniciaJanelaFlutuante()" class='btn btn-primary btn-sm btn-raised'>{{{vinculos}}}</a>
+
+	<div>
+		{{{de}}} &nbsp;
+		<input id="{{{idjanela}}}i3GEOtabelainicio" size="5" value="1" type="text"> &nbsp;
+		{{{ate}}} &nbsp;
+		<input id="{{{idjanela}}}i3GEOtabelafim" size="5" value="20" type="text">&nbsp;
+
+		<button onclick='i3GEOF.tabela.menos("{{{idjanela}}}")' class="btn btn-xs" style="margin:2px;padding:2px;">
+			<span class="material-icons">remove_circle_outline</span>
+		</button>
+		<button onclick='i3GEOF.tabela.mais("{{{idjanela}}}")' class="btn btn-xs" style="margin:2px;padding:2px;">
+			<span class="material-icons">add_circle_outline</span>
+		</button>
+		<button title='{{{vertodos}}}' onclick='i3GEOF.tabela.todos("{{{idjanela}}}")' class="btn btn-xs" style="margin:2px;padding:2px;">
+			<span class="material-icons">last_page</span>
+		</button>
+		<button title='{{{atuareg}}}' onclick='i3GEOF.tabela.pegaRegistros("{{{idjanela}}}")' class="btn btn-xs" style="margin:2px;padding:2px;">
+			<span class="material-icons">refresh</span>
+		</button>
 	</div>
-	<div id='{{{idjanela}}}i3GEOtabelaregistros' style='position: relative; top: 20px; left: 2px; text-align: left;'></div>
+
+	<div id='{{{idjanela}}}i3GEOtabelaregistros' style='top: 10px;'></div>
 </div>
 <!-- Estatisticas -->
-<div id='{{{idjanela}}}i3GEOtabelaguia3obj' style='display: none; width: 95%;'>
+<div id='{{{idjanela}}}i3GEOtabelaguia3obj' style='display: none; width: 95%;padding-left:5px;'>
 	<p class='paragrafo'>
 		<label>{{{itemcalc}}}:</label>
 	<div class='styled-select' id='{{{idjanela}}}i3GEOtabelaitensGuia3'></div>
@@ -95,7 +108,7 @@
 	</div>
 </div>
 <!-- Relatorio -->
-<div id='{{{idjanela}}}i3GEOtabelaguia5obj' style='width: 95%; display: none;'>
+<div id='{{{idjanela}}}i3GEOtabelaguia5obj' style='width: 95%; display: none;padding-left:5px;'>
 	<p class='paragrafo'>{{{itensrel}}}:
 	<p class='paragrafo'>
 	<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' class='digitar' style='text-align: left; overflow: auto; height: 80px'></div>

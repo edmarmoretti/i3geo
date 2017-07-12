@@ -671,14 +671,14 @@ i3GEO.util =
 			if (!onch) {
 				onch = "";
 			}
-			return "<span class=digitar onmouseover='javascript:this.className=\"digitarOver\";' onmouseout='javascript:this.className=\"digitar\";' ><input onchange=\"" + onch
-			+ "\" tabindex='0'  onclick='javascript:this.select();' id='"
+			return "<span ><input onchange=\"" + onch
+			+ "\" tabindex='0'  id='"
 			+ idInput
 			+ "' title='"
 			+ titulo
 			+ "' type='text' size='"
 			+ digitos
-			+ "' class='digitar' value='"
+			+ "' value='"
 			+ valor
 			+ "' name='"
 			+ nome
