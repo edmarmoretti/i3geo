@@ -1689,7 +1689,10 @@ i3GEO.util =
 		 *
 		 * {string} - estilo CSS em linha
 		 */
-		comboItens : function(id, tema, funcao, onde, nome, alias, estilo) {
+		comboItens : function(id, tema, funcao, onde, nome, alias, estilo, classe) {
+			if(!classe){
+				classe = "";
+			}
 			if (!estilo) {
 				estilo = "";
 			} else {
@@ -1699,7 +1702,7 @@ i3GEO.util =
 				alias = "sim";
 			}
 			if (arguments.length > 3 && $i(onde)) {
-				$i(onde).innerHTML = "<span style=color:red;font-size:10px; >buscando itens...</span>";
+				$i(onde).innerHTML = "<span>buscando itens...</span>";
 			}
 			if (arguments.length !== 5) {
 				nome = "";
@@ -1709,7 +1712,7 @@ i3GEO.util =
 				var ins, temp, i, nm;
 				if (retorno.data !== undefined) {
 					ins = [];
-					ins.push("<select " + estilo + " id='" + id + "' name='" + nome + "'>");
+					ins.push("<select class='" + classe + "' " + estilo + " id='" + id + "' name='" + nome + "'>");
 					ins.push("<option value='' >---</option>");
 					temp = retorno.data.valores.length;
 					for (i = 0; i < temp; i++) {

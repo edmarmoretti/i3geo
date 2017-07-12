@@ -485,10 +485,22 @@ i3GEOF.legenda =
 					+ "/ajuda_usuario.php?idcategoria=5&idajuda=41' > "
 					+ $trad("t33")
 					+"</a>";
-			janela =
-				i3GEO.janela.cria("590px", "350px", "", "", "", titulo, "i3GEOF.legenda", false, "hd", cabecalho, minimiza, function() {
-					i3GEO.guias.ajustaGuiaFerramenta("i3GEOF.legenda", "i3GEOlegenda");
-				}, true, "", "", "nao");
+			janela = i3GEO.janela.cria(
+				"590px",
+				"350px",
+				"",
+				"",
+				"",
+				titulo,
+				"i3GEOF.legenda",
+				false,
+				"hd",
+				cabecalho,
+				minimiza,
+				function() {i3GEO.guias.ajustaGuiaFerramenta("i3GEOF.legenda", "i3GEOlegenda");},
+				true
+			);
+
 			divid = janela[2].id;
 			i3GEOF.legenda.aguarde = $i("i3GEOF.legenda_imagemCabecalho").style;
 			$i("i3GEOF.legenda_corpo").style.backgroundColor = "white";

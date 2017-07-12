@@ -6,7 +6,7 @@ input[type=text], textarea, input[type=number]{
     user-select: text;
 }
 
-.bd input[type=text] {
+.bd.i3geo6 input[type=text] {
 	color: white;
 	background: none !IMPORTANT;
 
@@ -15,6 +15,20 @@ input[type=text], textarea, input[type=number]{
 	text-align: center;
 	cursor: text;
 	height: 22px;
+
+}
+
+.bd.i3geo6 input[type=text] {
+	color: white;
+	background: none !IMPORTANT;
+	padding: 0;
+	border: 1px solid rgb(180, 180, 180);
+	text-align: center;
+	cursor: text;
+	height: 22px;
+}
+
+.bd input[type=text] {
 
 }
 

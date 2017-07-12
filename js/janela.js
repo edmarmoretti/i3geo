@@ -145,12 +145,15 @@ i3GEO.janela =
 		 * {Array} Array contendo objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 		 */
 		cria : function(wlargura, waltura, wsrc, nx, ny, texto, id, modal, classe, funcaoCabecalho, funcaoMinimiza, funcaoAposRedim,
-			dimensionavel, icone, funcaoDuplica) {
+			dimensionavel, icone, funcaoDuplica, opacidade, classeAdicional) {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.cria()");
 
 			if (arguments.length < 13 ) {
 				dimensionavel = true;
+			}
+			if(arguments.length < 17){
+				classeAdicional = "i3geo6";
 			}
 			if (!icone) {
 				icone = "";
@@ -187,7 +190,7 @@ i3GEO.janela =
 			// cria as marca&ccedil;&otilde;es html para a janela
 			temp = navm ? 0 : 2;
 			wlargurA = parseInt(wlargura, 10) + temp + "px";
-			ins = '<div id="' + id + '_cabecalho" class="' + classe + '" >';
+			ins = '<div id="' + id + '_cabecalho" class="' + classe + ' ' + classeAdicional + '" >';
 			if (i3GEO.configura !== undefined) {
 				ins +=
 					"<img id='" + id
@@ -199,18 +202,18 @@ i3GEO.janela =
 				ins += "<img class='i3GeoIconeJanela' src='" + icone + "' >";
 			}
 			ins += "<span style='font-size:10px;'>" + texto + "</span>";
-			if (funcaoDuplica) {
+			if (funcaoDuplica && funcaoDuplica != "") {
 				ins += "<div id='" + id + "_duplicaJanela' class='container-duplica'></div>";
 			}
-			if (funcaoMinimiza) {
+			if (funcaoMinimiza && funcaoDuplica != "") {
 				ins += "<div id='" + id + "_minimizaCabecalho' class='container-minimiza'></div>";
 			}
-			ins += '</div><div id="' + id + '_corpo" class="bd" style="display:block;padding:0px">';
+			ins += '</div><div id="' + id + '_corpo" class="bd ' + classeAdicional + '" style="display:block;padding:0px">';
 			if (wsrc !== "") {
 				ins += '<iframe name="' + id + 'i" id="' + id + 'i" valign="top" style="border:0px white solid;width:100%"></iframe>';
 			}
 			ins += '</div>';
-			ins += '<div class="ft"></div>';
+			ins += '<div class="ft ' + classeAdicional + '"></div>';
 			novoel = document.createElement("div");
 			novoel.id = id;
 			novoel.style.display = "block";

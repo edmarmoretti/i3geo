@@ -190,24 +190,6 @@ i3GEOF.tabela =
 
 
 
-				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotaoLista", {
-					onclick : {
-						fn : function() {
-							i3GEOF.tabela.pegaRegistros(idjanela);
-						}
-					}
-				});
-				b.addClass("rodar100");
-
-				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao4", {
-					onclick : {
-						fn : function() {
-							i3GEOF.tabela.estatistica(idjanela);
-						}
-					}
-				});
-				b.addClass("abrir");
-
 				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao7", {
 					onclick : {
 						fn : function() {
@@ -224,8 +206,6 @@ i3GEOF.tabela =
 					}
 				});
 				b.addClass("abrir");
-
-				i3GEO.util.mensagemAjuda(idjanela + "i3GEOtabelamen1", $i(idjanela + "i3GEOtabelamen1").innerHTML);
 
 				if (i3GEO.parametros.r.toLowerCase() !== "sim") {
 					$i(idjanela + "i3GEOtabelaguia4obj").innerHTML = $trad("x22");
@@ -303,9 +283,25 @@ i3GEOF.tabela =
 						+ i3GEO.configura.locaplic
 						+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' >"+$trad('tabela', i3GEOF.tabela.dicionario)+"</a>";
 
-				janela = i3GEO.janela.cria("570px", "400px", "", "", "", titulo, id, false, "hd", cabecalho, minimiza, function() {
-					i3GEO.guias.ajustaGuiaFerramenta(id, id + "i3GEOtabela");
-				}, true, "", duplica, "nao");
+				janela = i3GEO.janela.cria(
+					"570px",
+					"400px",
+					"",
+					"",
+					"",
+					titulo,
+					id,
+					false,
+					"hd",
+					cabecalho,
+					minimiza,
+					function() { i3GEO.guias.ajustaGuiaFerramenta(id, id + "i3GEOtabela");},
+					true,
+					"",
+					duplica,
+					"",
+					""
+				);
 				divid = janela[2].id;
 				if (i3GEOF.tabela.janelas.length > 1) {
 					temp = janela[0].cfg.config;
@@ -366,11 +362,6 @@ i3GEOF.tabela =
 				});
 				tabelaZoomend = google.maps.event.addListener(i3GeoMap, "zoomend", function() {
 					i3GEOF.tebela.atualizaListaDeRegistros();
-				});
-			}
-			if (i3GEO.Interface.ATUAL === "googleearth" && !tabelaDragend) {
-				tabelaDragend = google.earth.addEventListener(i3GeoMap.getView(), "viewchangeend", function() {
-					i3GEOF.tabela.atualizaListaDeRegistros();
 				});
 			}
 		},
@@ -1175,7 +1166,7 @@ i3GEOF.tabela =
 				} else {
 					$i(idjanela + "i3GEOtabelaitensGuia3").innerHTML = retorno.dados;
 				}
-			}, idjanela + "i3GEOtabelaitensGuia3", "");
+			}, idjanela + "i3GEOtabelaitensGuia3", "","sim","","form-control");
 		},
 		estatistica : function(idjanela) {
 			if ($i(idjanela + "i3GEOtabelaComboItensGuia3").value === "") {
@@ -1193,9 +1184,10 @@ i3GEOF.tabela =
 						if (retorno.data.indices) {
 							n = retorno.data.indices.length;
 							for (i = 0; i < n; i++) {
-								nome = eval("retorno.data.variaveis." + retorno.data.indices[i]);
-								valor = eval("retorno.data.valores." + retorno.data.indices[i]);
-								ins += "<p style='text-align:left'> <span style='color:gray'>" + nome + ": </span>" + valor + "</p>";
+								nome =retorno.data.variaveis[retorno.data.indices[i]];
+								valor = retorno.data.valores[retorno.data.indices[i]];
+								ins += '<div class="row-content"><h4 class="list-group-item-heading">'+nome+'</h4><p class="list-group-item-text">'+valor+'</p></div>';
+								ins += '<div class="list-group-separator">&nbsp;</div>';
 							}
 						}
 					} else {

@@ -65,6 +65,11 @@ hr {
 	margin: 4px;
 }
 
+.form-group.condensed {
+	margin: 0px;
+	padding: 0px;
+}
+
 .withripple.condensed,.pager.condensed {
 	margin: 0px;
 }
@@ -567,24 +572,42 @@ Configuracoes especificas dos elementos que ficam no rodape
 .bd .lista td, .bd .lista1 td, .bd .lista2 td, .bd .lista3 td, .bd .lista4 td, .bd .lista5 td, .bd .lista6 td, .bd .lista7 td, .bd .lista8 td {
 	color: white;
 }
+.bd.i3geo6 .lista td, .bd.i3geo6 .lista1 td, .bd.i3geo6 .lista2 td, .bd.i3geo6 .lista3 td, .bd.i3geo6 .lista4 td, .bd.i3geo6 .lista5 td, .bd.i3geo6 .lista6 td, .bd.i3geo6 .lista7 td, .bd.i3geo6 .lista8 td {
+	color: white;
+}
 
 .bd select {
+	background: white;
+}
+.bd.i3geo6 select {
 	background: white;
 }
 
 .bd textarea {
 	color: black;
 }
+.bd.i3geo6 textarea {
+	color: black;
+}
 
 .bd div {
+	text-align: left;
+}
+.bd.i3geo6 div {
 	text-align: left;
 }
 
 .bd a, .bd a:focus, .bd a:hover {
     color: #9ceaea;;
 }
+.bd.i3geo6 a, .bd.i3geo6 a:focus, .bd.i3geo6 a:hover {
+    color: #9ceaea;;
+}
 
 .bd p {
+	text-align: left;
+}
+.bd.i3geo6 p {
 	text-align: left;
 }
 
@@ -865,6 +888,9 @@ bd .i3geoFormIconeEdita {
 .bd .paragrafo {
 	color: rgba(255, 255, 255, 0.6);
 }
+.bd.i3geo6 .paragrafo {
+	color: rgba(255, 255, 255, 0.6);
+}
 
 .yui-skin-sam .yui-panel-container {
 	padding: 0 1px;
@@ -929,6 +955,20 @@ bd .i3geoFormIconeEdita {
     text-align: left;
     border: 0px;
 }
+.yui-skin-sam .yui-panel .hd.i3geo6 {
+	background-color: #F2F2F2;
+	color: #000000;
+	font-size: 93%;
+	font-weight: bold;
+	line-height: 2;
+	height: 40px;
+    background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
+    padding-top: 0px;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    text-align: left;
+    border: 0px;
+}
 
 .hd span {
     font-family: trebuchet ms;
@@ -936,7 +976,23 @@ bd .i3geoFormIconeEdita {
 	opacity: 1.0;
 }
 
+.hd.i3geo6 span {
+    font-family: trebuchet ms;
+	color: white;
+	opacity: 1.0;
+}
+
 .yui-panel-container div .bd, .paragrafo > label{
+    background-color: none;
+    padding: 10px;
+    position: relative;
+    font-family: trebuchet ms;
+    font-size: 14px;
+    font-weight: bold;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+.yui-panel-container div .bd.i3geo6, .bd.paragrafo > label{
     background-color: none;
     padding: 10px;
     position: relative;
