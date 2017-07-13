@@ -185,27 +185,9 @@ i3GEOF.tabela =
 							} else {
 								$i(idjanela + "i3GEOtabelaagrupamento").innerHTML = retorno.dados;
 							}
-						}, idjanela + "i3GEOtabelaagrupamento", "");
+						}, idjanela + "i3GEOtabelaagrupamento", "","sim","","form-control");
 					};
 
-
-
-				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao7", {
-					onclick : {
-						fn : function() {
-							i3GEOF.tabela.relatorioTabela(idjanela);
-						}
-					}
-				});
-				b.addClass("abrir");
-				b = new YAHOO.widget.Button(idjanela + "i3GEOtabelabotao5", {
-					onclick : {
-						fn : function() {
-							i3GEOF.tabela.relatorioTexto(idjanela);
-						}
-					}
-				});
-				b.addClass("abrir");
 
 				if (i3GEO.parametros.r.toLowerCase() !== "sim") {
 					$i(idjanela + "i3GEOtabelaguia4obj").innerHTML = $trad("x22");

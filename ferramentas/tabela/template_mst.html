@@ -109,33 +109,40 @@
 </div>
 <!-- Relatorio -->
 <div id='{{{idjanela}}}i3GEOtabelaguia5obj' class='container-fluid'>
-	<p class='paragrafo'>{{{itensrel}}}:
-	<p class='paragrafo'>
-	<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' class='digitar' style='text-align: left; overflow: auto; height: 80px'></div>
-	<br>
-
-	<p class='paragrafo'>{{{itensagr}}}:
-	<p class='paragrafo'>
-	<div id='{{{idjanela}}}i3GEOtabelaagrupamento' class='styled-select'></div>
-	<br>
-
-	<p class='paragrafo'>{{{excvalor}}} :
-	<p class='paragrafo'>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' id='{{{idjanela}}}i3GEOtabelaexcestat' value='' />
+	<div class='form-group condensed' >
+		<label class="control-label">{{{itensrel}}}</label>
+		<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' style='overflow: auto; height: 120px; top:10px;'></div>
 	</div>
-	<br>
 
-	<p class='paragrafo'>
-		<input style='cursor: pointer' type='checkbox' id='{{{idjanela}}}i3GEOtabelacalculaarea' />
-		<label>{{{incarea}}}</label> &nbsp;&nbsp;
-		<input style='cursor: pointer' type='checkbox' id='{{{idjanela}}}i3GEOtabelacalculaestat' />
-		<label>{{{incestat}}}</label> <br>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOtabelabotao7' size='30' type='button' value='{{{relat}}}' />
-		<br>
-	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOtabelabotao5' size='25' type='button' value='{{{relattext}}}' />
+	<div class='form-group condensed' >
+		<label class="control-label">{{{itensagr}}}</label>
+		<div id='{{{idjanela}}}i3GEOtabelaagrupamento'></div>
+	</div>
+
+	<div class='form-group condensed' >
+		<label class="control-label">{{{excvalor}}}</label>
+		<div>
+			<input class="form-control input-lg" type='text' id='{{{idjanela}}}i3GEOtabelaexcestat' value='' />
+		</div>
+	</div>
+
+	<div class="checkbox text-left">
+		<label style="padding:12px;">
+			<input id='{{{idjanela}}}i3GEOtabelacalculaarea' type="checkbox">
+			<span class="checkbox-material noprint"><span class="check"></span></span> {{{incarea}}}
+		</label>
+	</div>
+
+	<div class="checkbox text-left">
+		<label style="padding:12px;">
+			<input id='{{{idjanela}}}i3GEOtabelacalculaestat' type="checkbox">
+			<span class="checkbox-material noprint"><span class="check"></span></span> {{{incestat}}}
+		</label>
+	</div>
+
+	<button onclick="i3GEOF.tabela.relatorioTabela('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{relat}}}</button>
+	<button onclick="i3GEOF.tabela.relatorioTexto('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{relattext}}}</button>
+
 	<form method='post' style='display: none' id='{{{idjanela}}}i3GEOtabelarelatorio' action='{{{locaplic}}}/ferramentas/tabela/relatorio.php' target='_blank'>
 		<input type='hidden' id='{{{idjanela}}}i3GEOtabelaarearelh' name='arearel' value='nao' />
 		<input type='hidden' id='{{{idjanela}}}i3GEOtabelastatrelh' name='statrel' value='nao' />

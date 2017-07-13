@@ -1890,32 +1890,28 @@ i3GEO.util =
 				var ins = [], i, temp, n;
 				if (retorno.data !== undefined) {
 					if (ordenacao === "sim") {
-						ins.push("<table class=lista8 ><tr><td></td><td>" + $trad("x64") + "</td><td>Ordem</td>");
+						ins.push("<table class=lista7 ><tr><td></td><td>" + $trad("x64") + "</td><td>Ordem</td>");
 					} else {
-						ins.push("<table class=lista8 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
+						ins.push("<table class=lista7 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
 					}
 					n = retorno.data.valores.length;
 					for (i = 0; i < n; i++) {
-						ins.push("<tr><td><input size=2 style='cursor:pointer' name='" + retorno.data.valores[i].tema
-								+ "' type=checkbox id='"
-								+ prefixo
-								+ retorno.data.valores[i].item
-								+ "' /></td>");
-						ins.push("<td class='i3geoForm i3geoFormSemIcone'><input style='text-align:left;cursor:text;width:" + size
-								+ "' onclick='javascript:this.select();' id='"
+						ins.push("<tr><td><div class='checkbox text-left'><label><input name='" + retorno.data.valores[i].tema + "' id='" + prefixo + retorno.data.valores[i].item +"' type='checkbox'><span class='checkbox-material noprint'><span class='check'></span></span></label></div>" + "</td>");
+						ins.push("<td><div class='form-group condensed' ><input class='form-control' style='width:" + size
+								+ "' id='"
 								+ prefixo
 								+ retorno.data.valores[i].item
 								+ retorno.data.valores[i].tema
 								+ "' type=text value='"
 								+ retorno.data.valores[i].item
-								+ "' /></td>");
+								+ "' /></div></td>");
 						if (ordenacao === "sim") {
-							ins.push("<td class='i3geoForm100 i3geoFormSemIcone'><input style='text-align:left; cursor:text;' id='ordem_" + prefixo
+							ins.push("<td><div class='form-group condensed' ><input class='form-control' id='ordem_" + prefixo
 									+ retorno.data.valores[i].item
 									+ retorno.data.valores[i].tema
 									+ "' type=text size='3' value='"
 									+ i
-									+ "' /></td>");
+									+ "' /></div></td>");
 						} else {
 							ins.push("<td></td>");
 						}

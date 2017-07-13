@@ -681,7 +681,7 @@ Tipo:
 {string}
 
 */
-$conexaoadmin = "";//"/var/www/conexaoms.php"
+$conexaoadmin = "";//"/var/www/conexaoms.php";
 /*
 Variable: $esquemaadmin
 
@@ -690,7 +690,7 @@ Indica em qual esquema do banco de dados de administracao estao armazenadas as t
 Tipo:
 {string}
 */
-$esquemaadmin = "";//"public"
+$esquemaadmin = "";//"public";
 /*
 Variable: interfacePadrao
 
