@@ -2403,7 +2403,11 @@ i3GEOF.metaestat = {
 						cabecalho,
 						minimiza,
 						"",
-						false
+						true,
+						"",
+						"",
+						"",
+						""
 				);
 				janela = janela[0];
 				if(!YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros")){

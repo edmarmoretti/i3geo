@@ -78,10 +78,10 @@ $retorno = "";
  */
 switch (strtoupper($funcao)){
 	case "PEGAMETADADOSMAPFILE":
-		$retorno = analise_pegaMetadadosMafile($idtema);
+		$retorno = analise_pegaMetadadosMafile($_pg["idtema"]);
 	break;
 	case "APLICAFILTROREGIAO":
-		$retorno = analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao);
+		$retorno = analise_aplicafiltroregiao($map_file,$_pg["codigo_tipo_regiao"],$_pg["codigo_regiao"]);
 	break;
 	case "LISTACAMADASMETAESTAT":
 		$retorno = analise_listaCamadasMetaestat($map_file);
@@ -90,46 +90,46 @@ switch (strtoupper($funcao)){
 		$retorno = analise_listaCamadasFiltroTempo($map_file);
 	break;
 	case "APLICAFILTROTEMPO":
-		$retorno = analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf);
+		$retorno = analise_aplicaFiltroTempo($map_file,$_pg["tema"],$_pg["pari"],$_pg["vali"],$_pg["parf"],$_pg["valf"]);
 	break;
 	case "REMOVEFILTROTEMPO":
-		$retorno = analise_removeFiltroTempo($map_file,$tema);
+		$retorno = analise_removeFiltroTempo($map_file,$_pg["tema"]);
 	break;
 	case "LISTAFILTROTEMPO":
-		$retorno = listaFiltroTempoRaiz($map_file,$nivel);
+		$retorno = listaFiltroTempoRaiz($map_file,$_pg["nivel"]);
 	break;
 	case "PEGADADOSTME":
-		$retorno = pegaDadosTME($map_file,$tema);
+		$retorno = pegaDadosTME($map_file,$_pg["tema"]);
 	break;
 	case "ALTERACONTORNO":
-		$retorno = alteraContorno($map_file,$tema);
+		$retorno = alteraContorno($map_file,$_pg["tema"]);
 	break;
 	case "CLASSES2CIRCULOS":
-		$retorno = classes2circulos($map_file,$tema,"variatamanho");
+		$retorno = classes2circulos($map_file,$_pg["tema"],"variatamanho");
 	break;
 	case "CLASSES2CIRCULOS1":
-		$retorno = classes2circulos($map_file,$tema,"variacor");
+		$retorno = classes2circulos($map_file,$_pg["tema"],"variacor");
 	break;
 	case "CLASSES2CIRCULOS2":
-		$retorno = classes2circulos($map_file,$tema,"continuo");
+		$retorno = classes2circulos($map_file,$_pg["tema"],"continuo");
 	break;
 	case "CLASSES2PONTOS":
-		$retorno = classes2preenchimento($map_file,$tema,"ponto");
+		$retorno = classes2preenchimento($map_file,$_pg["tema"],"ponto");
 	break;
 	case "CLASSES2HACH":
-		$retorno = classes2preenchimento($map_file,$tema,"hachurea");
+		$retorno = classes2preenchimento($map_file,$_pg["tema"],"hachurea");
 	break;
 	case "CLASSES2OPACIDADE":
-		$retorno = classes2preenchimento($map_file,$tema,"opacidade");
+		$retorno = classes2preenchimento($map_file,$_pg["tema"],"opacidade");
 	break;
 	case "CALOR":
-		$retorno = mapaDeCalor($map_file,$tema);
+		$retorno = mapaDeCalor($map_file,$_pg["tema"]);
 	break;
 	case "LISTALAYERSAGRUPADOS":
 		$retorno = listaLayersAgrupados($map_file);
 	break;
 	case "JUNTAMEDIDASVARIAVEIS":
-		$retorno = juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formulas);
+		$retorno = juntaMedidasVariaveis($map_file,$_pg["layerNames"],$_pg["nome"],$_pg["colunascalc"],$_pg["formulas"]);
 	break;
 	case "ADICIONALIMITEREGIAO":
 		if(empty($_pg["outlinecolor"])){
@@ -237,7 +237,7 @@ function mapaDeCalor($map_file,$tema){
 	}
 	$layer->set("status",MS_OFF);
 	$mapa->save($map_file);
-	$meta = new Metaestat();
+	$meta = new MetaestatInfo();
 	$medidavariavel = $meta->listaMedidaVariavel("",$layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"));
 	include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 	$m = new Analise($map_file,$tema,$locaplic,$ext);
@@ -339,7 +339,7 @@ function classes2circulos($map_file,$tema,$tipo){
 	$layer->set("opacity",50);
 
 	$layer->set("name",$nome);
-	$meta = new Metaestat();
+	$meta = new MetaestatInfo();
 	if($layer->type != MS_LAYER_POINT){
 		$layer->set("type",0);
 		$regiao = $meta->listaTipoRegiao($layer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"));
@@ -457,7 +457,7 @@ function pegaDadosTME($map_file,$tema){
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
 	$id_medida_variavel = $layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 
 	if($id_medida_variavel != ""){
 		$variavel = $m->listaMedidaVariavel("",$id_medida_variavel);
@@ -476,7 +476,7 @@ function pegaDadosTME($map_file,$tema){
 function listaFiltroTempoRaiz($map_file,$nivel){
 	$mapa = ms_newMapObj($map_file);
 	$layers = analise_listaLayersMetaestat($mapa);
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 	//pega os parametros de tempo
 	$filtros = array();
 	foreach($layers as $l){
@@ -502,7 +502,7 @@ function listaFiltroTempoRaiz($map_file,$nivel){
 function analise_listaCamadasFiltroTempo($map_file){
 	$mapa = ms_newMapObj($map_file);
 	$layers = analise_listaLayersMetaestat($mapa);
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 	//pega os parametros de tempo
 	$camadas = array();
 	foreach($layers as $l){
@@ -539,7 +539,7 @@ function analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf){
 	$layer = $mapa->getlayerbyname($tema);
 	$id_medida_variavel = $layer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
 	$data = $layer->data;
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 	//pega os parametros de tempo inicial
 	$par = explode(",",$pari);
 	$val = explode(",",$vali);
@@ -638,7 +638,7 @@ function analise_listaLayersRegiao($layers,$codigo_tipo_regiao){
  */
 function analise_aplicafiltroregiao($map_file,$codigo_tipo_regiao,$codigo_regiao){
 	//echo $codigo_tipo_regiao;exit;
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 	$mapa = ms_newMapObj($map_file);
 	$layersm = analise_listaLayersMetaestat($mapa);
 	if(count($layersm) > 0){
@@ -705,7 +705,7 @@ function juntaMedidasVariaveis($map_file,$layerNames,$nome,$colunascalc,$formula
 	$layernames = explode(",",$layerNames);
 	$sqlLayers = array();
 	$conta = 0;
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 	$colunasValor = array();
 	$colunasIdentificador = array();
 	$sqls = array();
@@ -818,7 +818,7 @@ function listaLayersAgrupados($map_file){
 	$tipos[2] = "poligono";
 	$mapa = ms_newMapObj($map_file);
 	$layers = analise_listaLayersMetaestat($mapa,true);
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 	$camadas = array();
 	foreach($layers as $l){
 		$codigo_tipo_regiao = $l->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO");

@@ -1,21 +1,29 @@
-<?php header("Content-type: text/css"); ?>input{
-font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-input[type=text], textarea, input[type=number]{
+<?php header("Content-type: text/css"); ?>input[type=text], textarea, input[type=number]{
 -webkit-user-select: text;
 -khtml-user-select: text;
 -moz-user-select: text;
 -o-user-select: text;
 user-select: text;
 }
-.bd input[type=text] {
-color: #2F4632;
-background-color: rgb(250, 250, 250);
+.bd.i3geo6 input[type=text] {
+color: white;
+background: none !IMPORTANT;
 padding: 0;
 border: 1px solid rgb(180, 180, 180);
 text-align: center;
 cursor: text;
 height: 22px;
+}
+.bd.i3geo6 input[type=text] {
+color: white;
+background: none !IMPORTANT;
+padding: 0;
+border: 1px solid rgb(180, 180, 180);
+text-align: center;
+cursor: text;
+height: 22px;
+}
+.bd input[type=text] {
 }
 input[type=number] {
 font-size: 12px;

@@ -205,7 +205,7 @@ i3GEO.janela =
 			if (funcaoDuplica && funcaoDuplica != "") {
 				ins += "<div id='" + id + "_duplicaJanela' class='container-duplica'></div>";
 			}
-			if (funcaoMinimiza && funcaoDuplica != "") {
+			if (funcaoMinimiza && funcaoMinimiza != "") {
 				ins += "<div id='" + id + "_minimizaCabecalho' class='container-minimiza'></div>";
 			}
 			ins += '</div><div id="' + id + '_corpo" class="bd ' + classeAdicional + '" style="display:block;padding:0px">';
@@ -313,13 +313,13 @@ i3GEO.janela =
 
 			YAHOO.util.Event.addListener($i(id + '_corpo'), "click", YAHOO.util.Event.stopPropagation);
 			// finaliza
-			if (funcaoDuplica) {
+			if (funcaoDuplica && funcaoDuplica != "") {
 				$i(id + '_duplicaJanela').onclick = funcaoDuplica;
 			}
-			if (funcaoCabecalho) {
+			if (funcaoCabecalho && funcaoCabecalho != "") {
 				$i(id + '_cabecalho').onclick = funcaoCabecalho;
 			}
-			if (funcaoMinimiza) {
+			if (funcaoMinimiza && funcaoMinimiza != "") {
 				$i(id + "_minimizaCabecalho").onclick = funcaoMinimiza;
 			}
 
