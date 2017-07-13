@@ -295,7 +295,7 @@ i3GEO.login = {
 				}
 				if (i3GEO.parametros) {
 					i3GEO.parametros.editor = "nao";
-					i3GEO.arvoreDeTemas.atualiza();
+					i3GEO.catalogoMenus.listaMenus();
 				}
 			}
 		}

@@ -121,9 +121,9 @@ i3GEO.catalogoMenus = {
 							v.nome = v.nome + " <small>(" + $trad("naoPublicado") + ")<small>";
 						}
 						//inclui apenas se o menu estiver marcado como publicado ou se o usuario estiver logado
-						if(v.publicado.toLowerCase() != "nao"){
+						//if(v.publicado.toLowerCase() != "nao"){
 							clone.push(v);
-						}
+						//}
 					}
 				});
 				t = Mustache.to_html(

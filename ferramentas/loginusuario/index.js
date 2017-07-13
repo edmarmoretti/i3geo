@@ -202,7 +202,7 @@ i3GEOF.loginusuario = {
 				}
 				if(i3GEO.parametros){
 					i3GEO.parametros.editor = "nao";
-					i3GEO.arvoreDeTemas.atualiza();
+					i3GEO.catalogoMenus.listaMenus();
 				}
 			}
 			else{
@@ -227,7 +227,7 @@ i3GEOF.loginusuario = {
 				}
 				if(i3GEO.parametros){
 					i3GEO.parametros.editor = retorno.data.editor;
-					i3GEO.arvoreDeTemas.atualiza();
+					i3GEO.catalogoMenus.listaMenus();
 				}
 			}
 		};
