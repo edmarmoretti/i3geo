@@ -3,7 +3,7 @@ MAP
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
     CONNECTION ""
-    DATA "locali.shp"
+    DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
       "CLASSE"	"SIM"
@@ -27,23 +27,47 @@ MAP
     #
     CLASS
       NAME "0.45"
-      COLOR 0 0 255
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 0 0 255
+      END
     END # CLASS
     CLASS
       NAME "0.55"
-      COLOR 0 255 255
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 0 255 255
+      END
+
     END # CLASS
     CLASS
       NAME "0.65"
-      COLOR 0 255 0
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 0 255 0
+      END
+
     END # CLASS
     CLASS
       NAME "0.95"
-      COLOR 255 255 0
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 255 255 0
+      END
+
     END # CLASS
     CLASS
       NAME "1"
-      COLOR 255 0 0
+      STYLE
+        SYMBOL "ponto"
+        SIZE 8
+        COLOR 255 0 0
+      END
+
     END # CLASS
   END # LAYER
 

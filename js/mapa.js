@@ -237,8 +237,11 @@ i3GEO.mapa =
 			 * Inicia a tentativa de recuperacao
 			 */
 			inicia : function() {
+				if (typeof (console) !== 'undefined')
+					console.info("i3GEO.mapa.inicia()");
+
 				i3GEO.janela.fechaAguarde();
-				if (this.recupera.TENTATIVA === 0) {
+				if (this.recupera && this.recupera.TENTATIVA === 0) {
 					this.recupera.TENTATIVA++;
 					this.recupera.restaura();
 				}

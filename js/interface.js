@@ -1132,6 +1132,9 @@ i3GEO.Interface =
 						// verifica se a camada contem um plugin do i3geo
 						// caso tenha, direciona para a classe_i3geoplugin
 						if (camada.plugini3geo && camada.plugini3geo != "" && camada.plugini3geo.parametros != undefined) {
+							if (typeof (console) !== 'undefined')
+								console.info("i3GEO.pluginI3geo.inicia()" + camada);
+
 							i3GEO.pluginI3geo.inicia(camada);
 							continue;
 						} else {

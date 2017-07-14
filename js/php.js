@@ -1166,6 +1166,9 @@ i3GEO.php =
 		 * desenha o corpo do mapa
 		 */
 		corpo : function(funcao, tipoimagem) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.php.corpo()");
+
 			i3GEO.php.verifica();
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 				"funcao=corpo&tipoimagem=" + tipoimagem + "&g_sid=" + i3GEO.configura.sid + "&interface=" + i3GEO.Interface.ATUAL;

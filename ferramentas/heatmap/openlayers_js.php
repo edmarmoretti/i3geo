@@ -62,8 +62,4 @@ if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 echo 'heatmap_dados = ['.implode(",",$resultado).'];';
 echo 'heatmap_config = '.$gradiente.';';
 
-if($_GET["carregajs"] === "sim"){
-	include_once($dir."/../../pacotes/heatmap/src/heatmap.js");
-	include_once($dir."/../../pacotes/heatmap/src/heatmap-openlayers.js");
-}
 ?>

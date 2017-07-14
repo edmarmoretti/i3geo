@@ -794,6 +794,9 @@ var i3GEO = {
 	 * chamada &eacute; armazenada em i3GEO.parametros
 	 */
 	atualiza : function(retorno) {
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.atualiza()");
+
 		var corpoMapa, erro, mapscale, temp;
 		if (i3GEO.contadorAtualiza > 1) {
 			i3GEO.contadorAtualiza--;
@@ -827,15 +830,15 @@ var i3GEO = {
 		// igual a anterior para efeitos de compatibilidade com outras
 		// vers&otilde;es do i3geo
 		//
-		if (retorno === "") {
-			corpoMapa.call();
-			return;
-		}
+		//if (retorno === "") {
+		//	corpoMapa.call();
+		//	return;
+		//}
 		//
 		// se retorno.data n&atilde;o existir, &eacute; pq ocorreu um erro
 		//
 		if (!retorno.data) {
-			alert(retorno);
+			alert("Ocorreu um erro ao carregar o mapa" + retorno);
 			i3GEO.mapa.recupera.inicia();
 			// corpoMapa.call();
 			return;
