@@ -24,19 +24,19 @@
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
         <property key="gdbmsname" value="gdbms5b0cee56_13a95b59633__7ffe"/>
-        <property key="file" value="/var/www/i3geo/aplicmap/dados/estados.dbf"/>
+        <property key="file" value="estados.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
         <property key="gdbmsname" value="gdbms5b0cee56_13a95b59633__7fff"/>
-        <property key="file" value="/var/www/i3geo/aplicmap/dados/estados.dbf"/>
+        <property key="file" value="estados.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
         <property key="gdbmsname" value="gdbms5b0cee56_13a95b59633__8000"/>
-        <property key="file" value="/var/www/i3geo/aplicmap/dados/mundo.dbf"/>
+        <property key="file" value="mundo.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>
@@ -97,8 +97,8 @@
                     <property key="transparency" value="255"/>
                     <property key="isInTOC" value="true"/>
                     <property key="type" value="vectorial"/>
-                    <property key="absolutePath" value="/var/www/i3geo/aplicmap/dados/mundo.shp"/>
-                    <property key="file" value="/var/www/i3geo/aplicmap/dados/mundo.shp"/>
+                    <property key="absolutePath" value="mundo.shp"/>
+                    <property key="file" value="mundo.shp"/>
                     <property key="recordset-name" value="gdbms5b0cee56_13a95b59633__8000"/>
                     <property key="driverName" value="gvSIG shp driver"/>
                     <property key="isLabeled" value="false"/>
@@ -156,8 +156,8 @@
                     <property key="transparency" value="255"/>
                     <property key="isInTOC" value="true"/>
                     <property key="type" value="vectorial"/>
-                    <property key="absolutePath" value="/var/www/i3geo/aplicmap/dados/estados.shp"/>
-                    <property key="file" value="/var/www/i3geo/aplicmap/dados/estados.shp"/>
+                    <property key="absolutePath" value="estados.shp"/>
+                    <property key="file" value="estados.shp"/>
                     <property key="recordset-name" value="gdbms5b0cee56_13a95b59633__7fff"/>
                     <property key="driverName" value="gvSIG shp driver"/>
                     <property key="isLabeled" value="false"/>

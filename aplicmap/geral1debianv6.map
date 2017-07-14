@@ -19,7 +19,7 @@ MAP
 	#
 	FONTSET "/var/www/i3geo/symbols/fontes.txt"
 	SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
-	SHAPEPATH "/var/www/geodados"
+	SHAPEPATH "/var/www/i3geo/aplicmap/dados"
 	IMAGECOLOR 104 171 195
 	MAXSIZE 4096
 	#
@@ -165,7 +165,7 @@ MAP
 		TEMPLATE ""
 	END
 	LAYER
-		DATA "/var/www/i3geo/aplicmap/dados/mundo"
+		DATA "mundo.shp"
 		GROUP "mundo"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda

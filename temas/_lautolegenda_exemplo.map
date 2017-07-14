@@ -2,7 +2,7 @@
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
-    DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
+    DATA "biomas.shp"
     METADATA
       "cache"	"SIM"
       "ltempoitemdescricao"	""

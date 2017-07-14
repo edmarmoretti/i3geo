@@ -2,7 +2,7 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
-    DATA "/var/www/i3geo/aplicmap/dados/estados.shp"
+    DATA "estados.shp"
     METADATA
       "CLASSE"	"SIM"
       "permitekmz"	"SIM"

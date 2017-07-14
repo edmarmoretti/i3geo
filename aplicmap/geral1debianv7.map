@@ -19,7 +19,7 @@ MAP
 	#
 	FONTSET "/var/www/i3geo/symbols/fontes.txt"
 	SYMBOLSET "/var/www/i3geo/symbols/simbolosv7.sym"
-	SHAPEPATH "/var/www/geodados"
+	SHAPEPATH "/var/www/i3geo/aplicmap/dados"
 	IMAGECOLOR 104 171 195
 	MAXSIZE 4096
 	#
@@ -166,7 +166,7 @@ MAP
 		TEMPLATE ""
 	END
 	LAYER
-		DATA "/var/www/i3geo/aplicmap/dados/mundo"
+		DATA "mundo.shp"
 		GROUP "mundo"
 		METADATA
 			"CLASSE"	"SIM" #o simbolo sera mostrado na legenda
@@ -176,7 +176,6 @@ MAP
 			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
-
 			"cache" "sim"
 			"itembuscarapida" "LONG_NAME"
 		END

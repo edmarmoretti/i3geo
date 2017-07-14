@@ -2,7 +2,7 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
-    CONNECTION "/var/www/i3geo/aplicmap/dados/ucsfi.gml"
+    CONNECTION "ucsfi.gml"
     #CONNECTION "/tmp/ms_tmp/gml_UGJUDdOMyt.gml"
     CONNECTIONTYPE OGR
     METADATA

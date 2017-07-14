@@ -2,7 +2,7 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
-    CONNECTION "/var/www/i3geo/aplicmap/dados/teste.kml"
+    CONNECTION "teste.kml"
     CONNECTIONTYPE OGR
     DATA "Trovit"
     METADATA

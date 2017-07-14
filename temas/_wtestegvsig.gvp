@@ -24,7 +24,7 @@
     <xml-tag>
         <property key="type" value="otherDriverFile"/>
         <property key="gdbmsname" value="gdbms5b0cee56_13a95b59633__7ffe"/>
-        <property key="file" value="/var/www/i3geo/aplicmap/dados/estados.dbf"/>
+        <property key="file" value="estados.dbf"/>
         <property key="driverName" value="gdbms dbf driver"/>
     </xml-tag>
     <xml-tag>

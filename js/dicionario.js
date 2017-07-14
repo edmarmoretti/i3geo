@@ -2885,15 +2885,22 @@ g_traducao =
   			}
   		],
 		"continua" : [
-		  			{
-		  				pt : "continua",
-		  				en : "",
-		  				es : ""
-		  			}
-		  		],
+  			{
+  				pt : "continua",
+  				en : "",
+  				es : ""
+  			}
+  		],
 		"avanca" : [
 			{
 				pt : "avan&ccedil;a",
+				en : "",
+				es : ""
+			}
+		],
+		"tipvazio" : [
+			{
+				pt : "N&atilde;o existe nenhuma camada no mapa que permita mostrar etiquetas",
 				en : "",
 				es : ""
 			}

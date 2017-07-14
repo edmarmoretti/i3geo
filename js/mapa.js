@@ -1016,6 +1016,10 @@ i3GEO.mapa =
 
 			i3GEO.eventos.cliquePerm.status = true;
 			mostra = false;
+			if(retorno == ""){
+				i3GEO.janela.tempoMsg($trad("tipvazio"));
+				return;
+			}
 			retorno = retorno.data;
 			temp = retorno[0].xy.split(",");
 			x = temp[0]*1;

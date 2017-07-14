@@ -3,7 +3,7 @@ MAP
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
     CONNECTION ""
-    DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
+    DATA "biomas.shp"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"NAO"

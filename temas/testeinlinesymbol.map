@@ -20,7 +20,7 @@ ANCHORPOINT 1 0.5
 END
 
   LAYER
-    DATA "/var/www/i3geo/aplicmap/dados/sc22/RODOVIA_PAVIMENTADA.shp"
+    DATA "sc22/RODOVIA_PAVIMENTADA.shp"
     METADATA
       "CLASSE"	"SIM"
       "TEMA"	"Teste simbolo em linha"
