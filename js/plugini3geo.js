@@ -380,7 +380,7 @@ i3GEO.pluginI3geo =
 		        			   var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php",criaLayer;
 		        			   criaLayer = function() {
 		        					if (typeof (console) !== 'undefined')
-		        						console.info("i3GEO.plugini3geo.openlayers.heatmap.inicia()");
+		        						console.info("criaLayer heatmap");
 
 		        				   var v = true, temp, heatmap, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [];
 		        				   // para uso com o mashup
@@ -403,10 +403,10 @@ i3GEO.pluginI3geo =
 		        					   source: new ol.source.Vector({
 		        						   features : nudata
 		        					   }),
-		        					   blur: parseInt(camada.plugini3geo.parametros.max, 10),
-			        				   //title: camada.tema,
-			        				   //opacity: camada.transparency,
-		        					   radius: camada.plugini3geo.parametros.radius,
+		        					   blur: camada.plugini3geo.parametros.max * 1,
+			        				   title: camada.tema,
+			        				   opacity: (camada.transparency * 1) / 100,
+		        					   radius: camada.plugini3geo.parametros.radius * 1,
 			        				   name : camada.name,
 			        				   isBaseLayer : false,
 			        				   visible : v

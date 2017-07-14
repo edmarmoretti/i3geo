@@ -74,6 +74,54 @@ function heatmapMapfile(){
 function heatmapGradiente($map_file,$layer,$tipoGradiente){
 	if($tipoGradiente == "default"){
 		$gradiente = '{"gradient":{"0.45" : "rgb(0,0,255)","0.55" : "rgb(0,255,255)","0.65" : "rgb(0,255,0)","0.95" : "yellow","1.0" : "rgb(255,0,0)"}}';
+		$mapa = ms_newMapObj($map_file);
+		$l = $mapa->getlayerbyname($layer);
+		$nc = $l->numclasses;
+		for ($c = 0;$c < $nc;$c++){
+			$classe = $l->getclass($c);
+			$classe->set("status",MS_DELETE);
+		}
+		$classe = ms_newClassObj($l);
+		$classe->set("name","0.45");
+		$novoestilo = ms_newStyleObj($classe);
+		$novoestilo->set("symbolname","ponto");
+		$novoestilo->set("size","8");
+		$cor = $novoestilo->color;
+		$cor->setRGB(0,0,255);
+
+		$classe = ms_newClassObj($l);
+		$classe->set("name","0.55");
+		$novoestilo = ms_newStyleObj($classe);
+		$novoestilo->set("symbolname","ponto");
+		$novoestilo->set("size","8");
+		$cor = $novoestilo->color;
+		$cor->setRGB(0,255,255);
+
+		$classe = ms_newClassObj($l);
+		$classe->set("name","0.65");
+		$novoestilo = ms_newStyleObj($classe);
+		$novoestilo->set("symbolname","ponto");
+		$novoestilo->set("size","8");
+		$cor = $novoestilo->color;
+		$cor->setRGB(0,255,0);
+
+		$classe = ms_newClassObj($l);
+		$classe->set("name","0.95");
+		$novoestilo = ms_newStyleObj($classe);
+		$novoestilo->set("symbolname","ponto");
+		$novoestilo->set("size","8");
+		$cor = $novoestilo->color;
+		$cor->setRGB(255,0,255);
+
+		$classe = ms_newClassObj($l);
+		$classe->set("name","1");
+		$novoestilo = ms_newStyleObj($classe);
+		$novoestilo->set("symbolname","ponto");
+		$novoestilo->set("size","8");
+		$cor = $novoestilo->color;
+		$cor->setRGB(255,255,0);
+
+		$mapa->save($map_file);
 	}
 	else{
 		$gradiente = array();
