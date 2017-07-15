@@ -74,8 +74,8 @@ i3GEO.pluginI3geo =
 		            * Veja em i3geo/classesphp/classe_mapa.php funcao parametrostemas
 		            */
 		           inicia : function(camada) {
-		       			if (typeof (console) !== 'undefined')
-		       				console.info("i3GEO.pluginI3geo.inicia()");
+		        	   if (typeof (console) !== 'undefined')
+		        		   console.info("i3GEO.pluginI3geo.inicia()");
 
 		        	   if(camada.plugini3geo){
 		        		   if (i3GEO.janela) {
@@ -379,8 +379,8 @@ i3GEO.pluginI3geo =
 		        		   inicia : function(camada, objMapa) {
 		        			   var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php",criaLayer;
 		        			   criaLayer = function() {
-		        					if (typeof (console) !== 'undefined')
-		        						console.info("criaLayer heatmap");
+		        				   if (typeof (console) !== 'undefined')
+		        					   console.info("criaLayer heatmap");
 
 		        				   var v = true, temp, heatmap, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [];
 		        				   // para uso com o mashup
@@ -404,12 +404,12 @@ i3GEO.pluginI3geo =
 		        						   features : nudata
 		        					   }),
 		        					   blur: camada.plugini3geo.parametros.max * 1,
-			        				   title: camada.tema,
-			        				   opacity: (camada.transparency * 1) / 100,
+		        					   title: camada.tema,
+		        					   opacity: (camada.transparency * 1) / 100,
 		        					   radius: camada.plugini3geo.parametros.radius * 1,
-			        				   name : camada.name,
-			        				   isBaseLayer : false,
-			        				   visible : v
+		        					   name : camada.name,
+		        					   isBaseLayer : false,
+		        					   visible : v
 		        				   });
 		        				   i3GEO.pluginI3geo.OBJETOS[camada.name] = heatmap;
 		        				   objMapa.addLayer(heatmap);
@@ -609,138 +609,111 @@ i3GEO.pluginI3geo =
 		        			   return [];
 		        		   },
 		        		   inicia : function(camada, objMapa) {
+		        			   if (typeof (console) !== 'undefined')
+		        				   console.info("i3GEO.pluginI3geo.markercluster.openlayers.inicia()");
+
+		        			   // para uso com o mashup
+		        			   if (!objMapa) {
+		        				   objMapa = i3geoOL;
+		        			   }
 		        			   var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/openlayers_js.php", carregaJs =
 		        				   "nao", criaLayer;
-		        			   criaLayer =
-		        				   function() {
-		        				   var layerListeners, logMax, logMin, classes, min, max, markercluster, marcas, lonlat, n, i, style, nestilos, intervalo, regra, regras =
+		        			   criaLayer = function() {
+
+		        				   if (typeof (console) !== 'undefined')
+		        					   console.info("criando layer markercluster");
+
+		        				   var layerListeners, logMax, logMin, classes, min, max, markercluster = {}, marcas, lonlat, n, i, style, nestilos, intervalo, regra, regras =
 		        					   [];
 
-		        				   nestilos = markercluster_config.estilos.length;
-		        				   n = markercluster_dados.length;
-
-		        				   classes = Array();
-		        				   logMax = Math.log(n) / Math.LN10; // max decimal logarithm (or base
-		        				   // 10)
-		        				   logMin = Math.log(1) / Math.LN10;
-		        				   intervalo = (logMax - logMin) / nestilos;
-		        				   // we compute log bounds
-		        				   for (i = 0; i < nestilos; i++) {
-		        					   if (i == 0) {
-		        						   classes[i] = logMin;
-		        					   } else {
-		        						   classes[i] = classes[i - 1] + intervalo;
-		        					   }
-		        				   }
-		        				   // we compute antilog
-		        				   classes = classes.map(function(x) {
-		        					   return Math.pow(10, x);
-		        				   });
-		        				   // and we finally add max value
-		        				   classes.push(n);
-
-		        				   // ponto sozinho
-		        				   regra = new OpenLayers.Rule({
-		        					   filter : new OpenLayers.Filter.Comparison({
-		        						   type : OpenLayers.Filter.Comparison.LESS_THAN,
-		        						   property : "count",
-		        						   value : 2
-		        					   }),
-		        					   symbolizer : {
-		        						   externalGraphic : markercluster_config.ponto.url,
-		        						   graphicWidth : markercluster_config.ponto.width,
-		        						   graphicHeight : markercluster_config.ponto.height,
-		        						   graphicYOffset : (markercluster_config.ponto.height / 2) * -1
-		        					   }
-		        				   });
-		        				   regras.push(regra);
-		        				   min = 2;
-		        				   for (i = 0; i < nestilos; i++) {
-		        					   max = classes[i + 1];
-		        					   regra = new OpenLayers.Rule({
-		        						   filter : new OpenLayers.Filter.Comparison({
-		        							   type : OpenLayers.Filter.Comparison.BETWEEN,
-		        							   property : "count",
-		        							   lowerBoundary : min,
-		        							   upperBoundary : max
-		        						   }),
-		        						   symbolizer : {
-		        							   externalGraphic : markercluster_config.estilos[i].url,
-		        							   graphicWidth : markercluster_config.estilos[i].width,
-		        							   graphicHeight : markercluster_config.estilos[i].height,
-		        							   label : "${count}",
-		        							   labelOutlineWidth : 1,
-		        							   fontColor : "#000000",
-		        							   fontOpacity : 1,
-		        							   fontSize : "12px"
-		        						   }
-		        					   });
-		        					   regras.push(regra);
-		        					   min = max;
-		        				   }
-
-		        				   // Create a Style that uses the three previous rules
-		        				   style = new OpenLayers.Style(null, {
-		        					   rules : regras
-		        				   });
-		        				   // para uso com o mashup
-		        				   if (!objMapa) {
-		        					   objMapa = i3geoOL;
-		        				   }
-
-		        				   layerListeners = {
-		        						   featureclick : function(e) {
-		        							   if (e.feature.cluster.length > 1) {
-		        								   objMapa.setCenter([
-		        								                      e.feature.geometry.x, e.feature.geometry.y
-		        								                      ], objMapa.getZoom() + 1, false, false);
-		        								   // objMapa.zoomIn();
-		        							   }
-		        							   return false;
-		        						   }
-		        				   };
-
-		        				   markercluster = new OpenLayers.Layer.Vector(camada.name, {
-		        					   renderers : [
-		        					                'Canvas', 'SVG'
-		        					                ],
-		        					                strategies : [
-		        					                              new OpenLayers.Strategy.Cluster({
-		        					                            	  distance : parseInt(camada.plugini3geo.parametros.gridSize, 10)
-		        					                              })
-		        					                              ],
-		        					                              styleMap : new OpenLayers.StyleMap(style),
-		        					                              eventListeners : layerListeners
-		        				   });
-		        				   objMapa.addLayer(markercluster);
-
 		        				   marcas = [];
+		        				   n = markercluster_dados.length;
 		        				   for (i = 0; i < n; i++) {
-		        					   lonlat = new OpenLayers.LonLat(markercluster_dados[i].lng, markercluster_dados[i].lat);
-		        					   if (i3GEO.Interface.openlayers.googleLike === true) {
-		        						   lonlat.transform(new OpenLayers.Projection("EPSG:4326"), new OpenLayers.Projection("EPSG:900913"));
-		        					   }
-		        					   marcas.push(new OpenLayers.Feature.Vector(new OpenLayers.Geometry.Point(lonlat.lon, lonlat.lat)));
+		        					   //console.info([markercluster_dados[i].lng * 1,markercluster_dados[i].lat * 1])
+		        					   marcas.push(
+		        							   new ol.Feature({
+		        								   geometry: new ol.geom.Point([markercluster_dados[i].lng * 1,markercluster_dados[i].lat * 1]),
+		        								   weight: markercluster_dados[i].count
+		        							   })
+		        					   );
 		        				   }
-		        				   markercluster.addFeatures(marcas);
+
+		        				   var source = new ol.source.Vector({
+		        					   features: marcas
+		        				   });
+
+		        				   var clusterSource = new ol.source.Cluster({
+		        					   distance: camada.plugini3geo.parametros.gridSize,
+		        					   source: source
+		        				   });
+		        				   var styleCache = {};
+		        				   var v = true;
+		        				   if(camada.status === "0"){
+		        					   v = false;
+		        				   }
+		        				   markercluster = new ol.layer.Vector({
+		        					   opacity: (camada.transparency * 1) / 100,
+		        					   title: camada.tema,
+		        					   name : camada.name,
+		        					   isBaseLayer : false,
+		        					   visible : v,
+		        					   source: clusterSource,
+		        					   style: function(feature) {
+		        						   var size = feature.get('features').length;
+		        						   var r = 10;
+		        						   if(size > 9){
+		        							   r = 7 * (size + "").length;
+		        						   }
+		        						   var style = styleCache[size];
+		        						   if (!style) {
+		        							   if(size == 1){
+		        								   style = new ol.style.Style({
+		        									   image: new ol.style.Circle({
+		        										   radius: 6,
+		        										   stroke: new ol.style.Stroke({
+		        											   color: camada.plugini3geo.parametros.strokecolor
+		        										   }),
+		        										   fill: new ol.style.Fill({
+		        											   color: camada.plugini3geo.parametros.color
+		        										   })
+		        									   })
+		        								   });
+		        								   styleCache[size] = style;
+
+		        							   } else {
+		        								   style = new ol.style.Style({
+		        									   image: new ol.style.Circle({
+		        										   radius: r,
+		        										   stroke: new ol.style.Stroke({
+		        											   color: camada.plugini3geo.parametros.strokecolor
+		        										   }),
+		        										   fill: new ol.style.Fill({
+		        											   color: camada.plugini3geo.parametros.color
+		        										   })
+		        									   }),
+		        									   text: new ol.style.Text({
+		        										   text: size.toString(),
+		        										   fill: new ol.style.Fill({
+		        											   color: '#fff'
+		        										   }),
+		        										   stroke: new ol.style.Stroke({
+		        											   color: 'rgba(0, 0, 0, 0.6)',
+		        											   width: 3
+		        										   })
+		        									   })
+		        								   });
+		        								   styleCache[size] = style;
+		        							   }
+		        						   }
+		        						   return style;
+		        					   }
+		        				   });
 
 		        				   i3GEO.janela.fechaAguarde("aguardePlugin");
-		        				   i3GEO.eventos.cliquePerm.ativo = false;
 
-		        				   markercluster.ligaCamada = function() {
-		        					   i3GEO.eventos.cliquePerm.ativo = false;
-		        				   };
-		        				   markercluster.desLigaCamada = function() {
-		        					   i3GEO.eventos.cliquePerm.ativo = true;
-		        				   };
-		        				   markercluster.removeCamada = function() {
-		        					   i3GEO.eventos.cliquePerm.ativo = true;
-		        				   };
-		        				   markercluster.atualizaCamada = function() {
-		        					   i3GEO.eventos.cliquePerm.ativo = false;
-		        				   };
 		        				   i3GEO.pluginI3geo.OBJETOS[camada.name] = markercluster;
 		        				   markercluster_dados = null;
+		        				   objMapa.addLayer(markercluster);
 		        			   };
 		        			   // se o script nao existir carrega o codigo e os dados
 		        			   // caso contrario, carrega apenas os dados no script

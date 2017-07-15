@@ -16,7 +16,7 @@ MAP
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "permitedownload"	"NAO"
       "metaestat"	""
-      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"tipoEstilos":"default","gridSize":"50"}}'
+      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"strokecolor":"#fff","color":"#3399CC","gridSize":"50"}}'
       "arquivodownload"	""
       "arquivokmz"	""
       "permiteogc"	"NAO"
@@ -31,27 +31,11 @@ MAP
     TYPE POINT
     UNITS METERS
     CLASS
-      NAME "Ponto"
+      NAME " "
       STYLE
-        SIZE 20
-      END # STYLE
-    END # CLASS
-    CLASS
-      NAME "Cluster 1"
-      STYLE
-        SIZE 35
-      END # STYLE
-    END # CLASS
-    CLASS
-      NAME "Cluster 2"
-      STYLE
-        SIZE 45
-      END # STYLE
-    END # CLASS
-    CLASS
-      NAME "Cluster 3"
-      STYLE
-        SIZE 55
+      	SYMBOL "ponto"
+      	SIZE 8
+        COLOR "#3399CC"
       END # STYLE
     END # CLASS
   END # LAYER

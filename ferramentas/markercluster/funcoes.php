@@ -89,4 +89,5 @@ function markerclusterEstilos($map_file,$layer,$tipoEstilos){
 	}
 	return $tipoEstilos;
 }
+
 ?>
