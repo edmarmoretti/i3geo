@@ -275,3 +275,203 @@ if(typeof jQuery != 'undefined' ){
 		});
 	})( jQuery );
 }
+/**
+Function: core_montaEditor
+
+Monta uma janela flutuante com um formul&aacute;rio.
+
+O editor possui um div com id=editor_bd que deve ser usado para incluir o formul&aacute;rio.
+
+Parameters:
+
+funcaoOK - string com o nome da fun&ccedil;&atilde;o que ser&aacute; executada quando o bot&atilde;o OK for pressionado.
+
+funcaoClose - nome da funcao que ser&aacute; executada quando a janela for fechada. Pode ser "" para escapar.
+
+titulo - titulo da janela
+
+modal - boolean
+
+bsalva - boolean botao salvar
+
+bcancela - boolean botao cancelar
+*/
+function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
+{
+	if(!funcaoOK){
+		funcaoOK = "";
+	}
+	if(!w){
+		w = "400px";
+	}
+	if(!h){
+		h = "354px";
+	}
+	if(modal == undefined){
+		modal = false;
+	}
+	if(bsalva == undefined){
+		bsalva = true;
+	}
+	if(bcancela  == undefined){
+		bcancela = true;
+	}
+	if(!titulo){
+		titulo = "Editor";
+	}
+	if(!funcaoClose){
+		funcaoClose = "";
+	}
+	if(!$i("janela_editor"))
+	{
+		var ins = "", temp = "", lb,
+			salvai = "<input id=okcancel_checkboxOK type='buttom' value='Salva' />",
+			cancelai = "<input id=okcancel_checkboxCANCEL type='buttom' value='Cancela' />",
+			novoel = document.createElement("div");
+		novoel.id =  "janela_editor";
+		ins = '<div class="hd"><div id="okcancel_checkbox" ></div></div>' +
+			"<div class='bd' style='height:"+h+";overflow:auto'>" +
+			"<div id='editor_bd'></div>";
+		novoel.innerHTML = ins;
+		document.body.appendChild(novoel);
+		if(funcaoOK != "")
+		{
+			lb = $i("okcancel_checkbox");
+			if(bsalva === true){
+				temp += salvai;
+			}
+			if(bcancela === true){
+				temp += cancelai;
+			}
+			lb.innerHTML = temp + '<span style="margin-left:10px;position:relative;top:-5px">'+titulo+'</span>';
+			if(bsalva === true){
+				new YAHOO.widget.Button(
+					"okcancel_checkboxOK",
+					{onclick:{fn: function(){
+						if(YAHOO.lang.isFunction(funcaoOK)){
+							funcaoOK.call();
+						}
+						else{
+							eval(funcaoOK);
+						}
+					}}}
+				);
+				var temp = $i("okcancel_checkbox");
+				temp.style.top = "2px";
+				temp.style.position = "relative";
+				var temp = $i("okcancel_checkboxOK-button");
+				temp.style.height = "23px";
+			}
+			if(bcancela === true){
+				new YAHOO.widget.Button(
+					"okcancel_checkboxCANCEL",
+					{onclick:{fn: function(){
+						YAHOO.admin.container.panelEditor.destroy();
+						YAHOO.admin.container.panelEditor = null;
+					}}}
+				);
+			}
+		}
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:"contained",close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor.render();
+	}
+	else
+	{
+		if($i("editor_bd"))
+		{$i("editor_bd").innerHTML == "?";}
+	}
+	var fecha = function()
+	{
+		try{
+			YAHOO.admin.container.panelEditor.destroy();
+			YAHOO.admin.container.panelEditor = null;
+		}
+		catch(e){}
+		try{
+			if(YAHOO.lang.isFunction(funcaoClose)){
+				funcaoClose.call();
+			}
+			else if(funcaoClose != ""){
+				eval(funcaoClose+"()");
+			}
+		}
+		catch(e){};
+	};
+	YAHOO.util.Event.addListener(YAHOO.admin.container.panelEditor.close, "click", fecha);
+	YAHOO.admin.container.panelEditor.show();
+	//registra a janela no gerenciador de janelas default da classe i3GEO.janela caso ela exista
+	try{
+		YAHOO.i3GEO.janela.manager.register(YAHOO.admin.container.panelEditor);
+	}
+	catch(e){}
+}
+/*
+Function: core_pegaDados
+
+Busca dados no servidor via Ajax e executa uma fun&ccedil;&atilde;o de retorno com os daods
+
+Parameters:
+
+mensagem - mensagem que ser&aacute; mostrada na tela
+
+sUrl - url do programa que ser&aacute; executado no servidor
+
+funcaoRetorno - funcao que ser&aacute; executada ao terminar a busca pelos dados
+*/
+function core_pegaDados(mensagem,sUrl,funcaoRetorno)
+{
+	var callback =
+	{
+			success:function(o)
+			{
+				if(funcaoRetorno != ""){
+					if(YAHOO.lang.isFunction(funcaoRetorno)){
+						funcaoRetorno.call("",YAHOO.lang.JSON.parse(o.responseText));
+					}
+					else{
+						eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");
+					}
+				}
+			},
+			argument: { foo:"foo", bar:"bar" }
+	};
+	core_makeRequest(sUrl,callback);
+}
+/*
+Function: core_makeRequest
+
+Executa uma chamada em ajax.
+
+Parameters:
+
+sUrl - url que ser&aacute; executada
+
+callback - fun&ccedil;&atilde;o que processar&aacute; o retorno
+
+tipo - GET ou POST
+
+postpar - parametros quando o tipo for post
+*/
+function core_makeRequest(sUrl,callback,tipo,postpar)
+{
+	sUrl = escape(sUrl);
+	re = new RegExp("%3F", "g");
+	sUrl = sUrl.replace(re,'?');
+	re = new RegExp("%3D", "g");
+	sUrl = sUrl.replace(re,'=');
+	re = new RegExp("%26", "g");
+	sUrl = sUrl.replace(re,'&');
+
+	re = new RegExp("%3A", "g");
+	sUrl = sUrl.replace(re,':');
+
+	if(arguments.length == 2)
+	{tipo = "GET";}
+	if(postpar){
+		//YAHOO.util.Connect.setDefaultPostHeader('application/json;charset=ISO-8859-1');
+		YAHOO.util.Connect.asyncRequest('POST', sUrl, callback, postpar);
+	}
+	else{
+		YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);
+	}
+}

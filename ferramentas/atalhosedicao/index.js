@@ -147,7 +147,7 @@ i3GEOF.atalhosedicao =
 			onclick : {
 				fn : function() {
 					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
-					i3GEO.analise.dialogo.linhaDoTempo()
+					i3GEO.analise.dialogo.linhaDoTempo();
 				}
 			}
 		});
@@ -175,7 +175,7 @@ i3GEOF.atalhosedicao =
 					var montaEditorPlugin = function(retorno){
 						var plugin = "parametrossql";
 						var ins = "<input type=button title='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' value='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' id=salvarPlugin />"
-							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
+							+ "<input type=button title='"+ $trad("removePlugin",i3GEOF.atalhosedicao.dicionario) +"' value='"+ $trad("removePlugin",i3GEOF.atalhosedicao.dicionario) +"' id=removerPlugin />";
 						//pega os campos do formulario
 						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
 						var ajuda = "<p class='paragrafo'>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
@@ -206,7 +206,7 @@ i3GEOF.atalhosedicao =
 					var montaEditorPlugin = function(retorno){
 						var plugin = "layerkml";
 						var ins = "<input type=button title='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' value='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' id=salvarPlugin />"
-							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
+							+ "<input type=button title='"+ $trad("removePlugin",i3GEOF.atalhosedicao.dicionario) +"' value='"+ $trad("removePlugin",i3GEOF.atalhosedicao.dicionario) +"' id=removerPlugin />";
 						//pega os campos do formulario
 						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
 						var ajuda = "<p class='paragrafo'>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
@@ -231,12 +231,12 @@ i3GEOF.atalhosedicao =
 					i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
 					YAHOO.namespace("admin");
 					YAHOO.namespace("admin.container");
-					core_montaEditor("","450px","500px","","Plugin",true,false,false);
+					core_montaEditor("","450px","500px","","Plugin",false,false,false);
 					var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 					var montaEditorPlugin = function(retorno){
 						var plugin = "markercluster";
 						var ins = "<input type=button title='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' value='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' id=salvarPlugin />"
-							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
+							+ "<input type=button title='"+ $trad("removePlugin",i3GEOF.atalhosedicao.dicionario) +"' value='"+ $trad("removePlugin",i3GEOF.atalhosedicao.dicionario) +"' id=removerPlugin />";
 						//pega os campos do formulario
 						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
 						var ajuda = "<p class='paragrafo'>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
@@ -249,6 +249,7 @@ i3GEOF.atalhosedicao =
 						new YAHOO.widget.Button("removerPlugin",{ onclick: { fn: function(){
 							i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);
 						} }});
+						i3GEO.util.aplicaAquarela("editor_bd");
 					};
 					core_pegaDados("",sUrl,montaEditorPlugin);
 				}
@@ -267,7 +268,7 @@ i3GEOF.atalhosedicao =
 					var montaEditorPlugin = function(retorno){
 						var plugin = "heatmap";
 						var ins = "<input type=button title='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' value='"+ $trad("salva",i3GEOadmin.core.dicionario) +"' id=salvarPlugin />"
-							+ "<input type=button title='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' value='"+ $trad("remove",i3GEOadmin.core.dicionario) +"' id=removerPlugin />";
+							+ "<input type=button title='"+ $trad("removePlugin",i3GEOF.atalhosedicao.dicionario) +"' value='"+ $trad("removePlugin",i3GEOF.atalhosedicao.dicionario) +"' id=removerPlugin />";
 						//pega os campos do formulario
 						ins += i3GEO.pluginI3geo.formAdmin(plugin,retorno);
 						var ajuda = "<p class='paragrafo'>Mais informa&ccedil;&otilde;es:<br><a href='"+i3GEO.pluginI3geo.linkAjuda(plugin)+"' target=_blank >" + i3GEO.pluginI3geo.linkAjuda(plugin) + "</a></p>";
@@ -393,6 +394,10 @@ i3GEOF.atalhosedicao =
 		tema[obj.name] = valor;
 	},
 	salvarDadosEditorPlugin: function(onde,plugin,codigoMap,codigoLayer){
+		//TODO redesenhar a camada no caso dos plugins
+		if (typeof (console) !== 'undefined')
+			   console.info("salvarDadosEditorPlugin");
+
 		var campos = onde.getElementsByTagName("input"),
 			n = campos.length,
 			par = [],
@@ -411,8 +416,6 @@ i3GEOF.atalhosedicao =
 				plugin = i3GEO.pluginI3geo[plugin].parametrosFormAdmin(onde);
 			}
 		}
-		core_carregando("ativa");
-		core_carregando($trad("gravaLayer",i3GEOadmin.core.dicionario)+codigoLayer);
 		var sUrl = prog
 			+ "&codigoMap=" + codigoMap
 			+ "&codigoLayer=" + codigoLayer
@@ -421,18 +424,14 @@ i3GEOF.atalhosedicao =
 				success:function(o)	{
 					try	{
 						if(JSON.parse(o.responseText) == "erro") {
-							core_carregando("<span style=color:red >"+ $trad("naoSalva",i3GEOadmin.core.dicionario) +"</span>");
-							setTimeout("core_carregando('desativa')",3000);
 						}
 						else {
 							YAHOO.admin.container.panelEditor.destroy();
 							YAHOO.admin.container.panelEditor = null;
-							core_carregando("desativa");
 						}
 					}
 					catch(e){core_handleFailure(e,o.responseText);}
 				},
-				failure:core_handleFailure,
 				argument: { foo:"foo", bar:"bar" }
 		};
 		core_makeRequest(sUrl,callback,'POST');

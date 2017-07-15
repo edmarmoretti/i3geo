@@ -29,7 +29,9 @@
 	background: none;
 	margin-bottom: 15px;
 }
-
+.foraDoMapa + span > span {
+	background-color: yellow;
+}
 </style>
 </head>
 	<!-- As palavras entre {{{}}} sao utilizadas para a traducao. Veja i3geo/js/dicionario.js
@@ -547,7 +549,8 @@
 	<script>
 	//ativa o banner de inicializacao
 	i3GEO.janela.tempoMsg($i("i3GEOlogoMarcaTemplate").innerHTML,4000);
-	var parametrosMapa = {
+	(function() {
+		var parametrosMapa = {
 			//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
 			//Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Você pode utilizar essa opcao para abrir um mapa com as camadas que você quiser, mas para evitar redundâncias, prefira o uso de &temasa
 			mapfilebase: "",
@@ -628,12 +631,126 @@
 				expression: ""
 			}]
 		};
+		var config = {
+			//id do elemento HTML onde o corpo do mapa sera renderizado
+			mapBody : "mapai3Geo",
+			//tipo de mapa. Pode ser:
+			//OL - utiliza o OpenLayers e coordenadas geograficas
+			//OSM - utiliza o OpenLayers e o OpenStreetMap como fundo, em projecao semelhante ao GoogleMaps
+			//GM - utiliza o GoogleMaps como motor de controle do mapa
+			mapType : "OSM",
+			//armazena em um cookie a ultima extensao geografica do mapa e utiliza essa extensao quando o mapa for aberto
+			saveExtension : true,
+			//aplica um filtro de cores apos a renderizacao da imagem de cada camada que compoe o mapa cinza|sepiaclara|sepianormal
+			posRenderType : "",
+			//Altura e largura do tooltip (balao identifica)
+			toolTipSize : ["100px","200px"],
+			//Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
+			//Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
+			i3GeoServer : "",
+			//Funcao que sera executada apos a inicializacao do mapa
+			afterStart : function(){
+				//i3GEO.maparef.inicia();
+				//
+				//(largura, altura, topo, esquerda);
+				//i3GEO.mapa.legendaHTML.libera("sim", 302, 300, 50, 100);
+				//i3GEO.mapa.dialogo.locregiao(215, "", 150, 150);
+				//i3GEO.mapa.dialogo.metaestat(215, "", 150, 150);
+			},
+			//parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas
+			components : {
+				//lista com os codigos dos menus que serao considerados na montagem do catalogo de temas
+				idsMenus : [],
+				//webservice utilizado na opcao de encontrar lugares
+				searchService : "http://mapas.mma.gov.br/webservices/geonames.php",
+				//webservice wms que faz a apresentacao do lugar encontrado por searchService
+				searchWms : "http://mapas.mma.gov.br/webservices/geonameswms.php",
+				//posicao do mapa de referencia, em pixels [top,right]
+				referenceMapPosition : [4,120]
+			},
+			//parametros de configuracao das ferramentas que sao acionadas sob demanda
+			//ferramentas localizadas em i3geo/ferramentas
+			tools : {
+				//ferramenta de busca de camadas em um servico CSW
+				buscainde : {
+					//endereco do servico no padrao CSW
+					csw : "http://www.metadados.inde.gov.br/geonetwork/srv/br"
+				},
+				//ferramenta de identificacao
+				identifica : {
+					//resolucao em pixels para busca de elementos
+					resolution : 8
+				}
+			},
+			//configuracoes especificas para a interface que utiliza o OpenLayers
+			openLayers : {
+				//utiliza ou nao tiles ao renderizar as camadas do mapa
+				//a utilizacao de tiles pode ser definida em cada camada, mas se essa propriedade for true, a definicao das camadas nao serao consideradas
+				singleTile : false,
+				//opcoes de inicializacao do mapa conforme definido na API do OpenLayers
+				MapOptions : {
+					layers : [],
+					controls : [
+						new ol.control.Zoom(),
+						new ol.control.ZoomSlider(),
+						new ol.control.ScaleLine(),
+						new ol.control.Attribution({
+							collapsible: false
+						})
+					],
+					loadTilesWhileAnimating : true,
+					loadTilesWhileInteracting : true,
+					//os objetos devem ser comentados na interface googleMaps
+					interactions : [
+						new ol.interaction.DoubleClickZoom(),
+						new ol.interaction.KeyboardPan(),
+						new ol.interaction.KeyboardZoom(),
+						new ol.interaction.MouseWheelZoom(),
+						new ol.interaction.PinchRotate(),
+						new ol.interaction.PinchZoom(),
+						new ol.interaction.DragZoom(),
+						new ol.interaction.DragPan()
+					]
+				},
+				//opcoes para o objeto view, que e uma instancia de MapOptions
+				ViewOptions : {
+
+				}
+			},
+			//configuracoes especificas para a interface GoogleMaps
+			googleMaps : {
+				//opcoes de inicializacao do mapa conforme definido na API do GoogleMaps
+				MapOptions : {
+					//estilo que sera utilizado no mapa
+					//pode ser um desses: roadmap, satellite, hybrid, terrain, Red, Countries, Night, Blue, Greyscale, No roads, Mixed, Chilled
+					//ver i3GEO.Interface.googleMaps.ESTILOS
+					mapTypeId : "roadmap",
+					scaleControl : true,
+					mapTypeControl : true,
+					mapTypeControlOptions: {
+						//position : google.maps.ControlPosition.LEFT_BOTTOM
+					},
+					zoomControl:true,
+					zoomControlOptions: {
+						//style : google.maps.ZoomControlStyle.SMALL,
+						//position : google.maps.ControlPosition.LEFT_CENTER
+					},
+					streetViewControl : true,
+					streetViewControlOptions: {
+						//position : google.maps.ControlPosition.LEFT_CENTER
+					}
+				}
+			}
+		};
+		//
 		//inicia o mapa
 		//Veja tambem config.php
 		//
-		//o primeiro parametro permite alterar o mapa, inserindo camadas e outras definicoes
+		//O primeiro parametro permite alterar o mapa, inserindo camadas e outras definicoes que afetam o corpo do mapa
+		//O segundo parametro inclui configuracoes que afetam o funcionamento da interface que controla a visualizacao do mapa
 		//
-		i3GEO.init(parametrosMapa);
+		i3GEO.init(parametrosMapa,config);
+	})();
 	</script>
 </body>
 

@@ -59,5 +59,20 @@ i3GEOF.markercluster.dicionario = {
 		pt : "Opacidade:",
 		en : "",
 		es : ""
+	} ],
+	'color' : [ {
+		pt : "Cor do fundo:",
+		en : "",
+		es : ""
+	} ],
+	'strokecolor' : [ {
+		pt : "Cor do contorno:",
+		en : "",
+		es : ""
+	} ],
+	'textcolor' : [ {
+		pt : "Cor do texto:",
+		en : "",
+		es : ""
 	} ]
 };

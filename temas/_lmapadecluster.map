@@ -7,25 +7,36 @@ MAP
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
-      "cache"	""
+      "cache"	"nao"
       "ltempoitemdescricao"	""
       "CLASSE"	"SIM"
+      "olopacity"	""
       "ltempoiteminicio"	""
       "ltempoitemtip"	""
       "permitekmz"	"NAO"
+      "gmopacity"	""
+      "gmstatus"	""
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
+      "nomeoriginal"	""
+      "olstatus"	""
       "permitedownload"	"NAO"
+      "FILTROORIGINAL"	""
       "metaestat"	""
-      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"strokecolor":"#fff","color":"#3399CC","gridSize":"50"}}'
+      "PLUGINI3GEO"	'{"plugin":"markercluster","parametros":{"tipoEstilos": "default","textcolor":"#fff","strokecolor":"#fff","color":"#3399CC","gridSize":"50"}}'
+      "DATAORIGINAL"	""
       "arquivodownload"	""
       "arquivokmz"	""
       "permiteogc"	"NAO"
       "permitekml"	"SIM"
       "TEMA"	"Localidades (usar com mapa de cluster)"
       "cortepixels"	"0"
+      "identifica"	"sim"
     END # METADATA
     NAME "_lmapadecluster"
-    STATUS OFF
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"
     TYPE POINT
@@ -33,10 +44,11 @@ MAP
     CLASS
       NAME " "
       STYLE
-      	SYMBOL "ponto"
-      	SIZE 8
-        COLOR "#3399CC"
+        COLOR 51 153 204
+        SIZE 8
+        SYMBOL "ponto"
       END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 

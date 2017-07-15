@@ -33,7 +33,7 @@ $tipoEstilos = markerclusterEstilos($map_file,$layer,$tipoEstilos);
 echo 'markercluster_dados = ['.implode(",",$resultado).'];';
 echo 'markercluster_config = '.$tipoEstilos.';';
 
-if($carregajs === "sim"){
+if($_GET["carregajs"] === "sim"){
 	include_once($dir."/../../pacotes/markercluster/google/markerclusterer.js");
 }
 ?>

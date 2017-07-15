@@ -209,7 +209,7 @@ Math.ceil10(55.51, -1); // 55.6
 Math.ceil10(51, 1); // 60
 Math.ceil10(-55.59, -1); // -55.5
 Math.ceil10(-59, 1); // -50
-*/
+ */
 
 i3GEO.util =
 {
@@ -839,6 +839,9 @@ i3GEO.util =
 		 * {String} - opcional pode ser definido como rgb,rgbSep (separado por espacos em branco) ou hex indicando o tipo de retorno da cor
 		 */
 		abreCor : function(janelaid, elemento, tipo) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.util.abreCor() " + elemento);
+
 			if (!i3GEO.configura) {
 				i3GEO.configura = {
 						locaplic : "../"
@@ -1331,6 +1334,22 @@ i3GEO.util =
 			}
 			return "#" + hex(rgb[0]) + hex(rgb[1]) + hex(rgb[2]);
 		},
+		hex2rgb : function(colour) {
+			var r,g,b;
+			if ( colour.charAt(0) == '#' ) {
+				colour = colour.substr(1);
+			}
+			if ( colour.length == 3 ) {
+				colour = colour.substr(0,1) + colour.substr(0,1) + colour.substr(1,2) + colour.substr(1,2) + colour.substr(2,3) + colour.substr(2,3);
+			}
+			r = colour.charAt(0) + '' + colour.charAt(1);
+			g = colour.charAt(2) + '' + colour.charAt(3);
+			b = colour.charAt(4) + '' + colour.charAt(5);
+			r = parseInt( r,16 );
+			g = parseInt( g,16 );
+			b = parseInt( b ,16);
+			return r + ',' + g + ',' + b ;
+		},
 		/**
 		 * Function: comboTemas
 		 *
@@ -1584,13 +1603,13 @@ i3GEO.util =
 							+ "<label style='width:90%'>"
 							+"	<input " + temp + "type='checkbox' value='"+valores[i]+"' onclick="+funcaoclick+" >"
 							+"	<span class='checkbox-material'><span class='check'></span></span> " + nomes[i]
-							+"</label></li>";
+						+"</label></li>";
 					} else {
 						combo += "<li class='checkbox text-left'>"
 							+ "<label style='width:90%'>"
 							+"	<input " + temp + "type='checkbox' id="+ids[i]+" value='"+valores[i]+"' onclick="+funcaoclick+" >"
 							+"	<span class='checkbox-material'><span class='check'></span></span> " + nomes[i]
-							+"</label></li>";
+						+"</label></li>";
 					}
 				}
 				combo += "</div>";
@@ -2143,10 +2162,12 @@ i3GEO.util =
 			}
 			botoes = "<ul class='proximoAnterior pager condensed' style='width:95%;margin-bottom: 2px;'>";
 			if (anterior !== "") {
+				anterior = anterior.replace("()","");
 				botoes +=
 					"<li><a onclick='" + anterior + "()' class='pull-left withripple condensed' href='javascript:void(0)'>" + $trad("volta") + "</a></li>";
 			}
 			if (proxima !== "") {
+				proxima = proxima.replace("()","");
 				botoes +=
 					"<li><a onclick='" + proxima + "()' class='pull-right withripple condensed' href='javascript:void(0)'>" + $trad("continua") + "</a></li>";
 			}
@@ -3222,7 +3243,11 @@ i3GEO.util =
 		aplicaAquarela : function(onde) {
 			//id pode ter ponto !!!
 			$($i(onde)).find(".i3geoFormIconeAquarela").click(function() {
-				i3GEO.util.abreCor("", this.firstChild.id);
+				if(this.firstChild){
+					i3GEO.util.abreCor("", this.firstChild.id);
+				} else {
+					i3GEO.util.abreCor("", this.id);
+				}
 			});
 		},
 		/**

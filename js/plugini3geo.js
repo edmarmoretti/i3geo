@@ -464,7 +464,7 @@ i3GEO.pluginI3geo =
 		        	   },
 		        	   formAdmin : function(config) {
 		        		   var parametros, ins = "", configDefault =
-		        			   '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","gridSize":50}}';
+		        			   '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","textcolor":"#fff","strokecolor":"#fff","color":"#3399CC","gridSize":"50"}}';
 		        		   if (config === "") {
 		        			   config = configDefault;
 		        		   }
@@ -475,17 +475,31 @@ i3GEO.pluginI3geo =
 		        		   parametros = config.parametros;
 		        		   ins +=
 		        			   "" + "<p class='paragrafo'>Dist&acirc;ncia m&aacute;xima entre ponto em pixels:"
-		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='gridSize' type='text' value='"
+		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input id='MCgridSize' type='text' value='"
 		        			   + parametros.gridSize
 		        			   + "' size='30'></div></p>"
 		        			   + "<p class='paragrafo'>Tipo de estilos (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
-		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='tipoEstilos' type='text' value='"
+		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input id='MCtipoEstilos' type='text' value='"
 		        			   + parametros.tipoEstilos
 		        			   + "' size='30'></div></p>"
-		        			   + "<p class='paragrafo'>Os s&iacute;mbolos utilizados podem ser customizados alterando-se as classes do Mapfile</p>"
+		        			   + "<p class='paragrafo'>Cor de fundo dos clusters"
+		        			   + "<br><div class='i3geoForm100 i3geoFormIconeAquarela'><input id='MCcolor' type='text' value='"
+		        			   + i3GEO.util.hex2rgb(parametros.color)
+		        			   + "' ></div></p>"
+		        			   + "<p class='paragrafo'>Cor do contorno"
+		        			   + "<br><div class='i3geoForm100 i3geoFormIconeAquarela'><input id='MCstrokecolor' type='text' value='"
+		        			   + i3GEO.util.hex2rgb(parametros.strokecolor)
+		        			   + "' ></div></p>"
+		        			   + "<p class='paragrafo'>Cor do texto"
+		        			   + "<br><div class='i3geoForm100 i3geoFormIconeAquarela'><input id='MCtextcolor' type='text' value='"
+		        			   + i3GEO.util.hex2rgb(parametros.textcolor)
+		        			   + "' ></div></p>"
 		        			   + "<p class='paragrafo'>Veja o exemplo utilizado no tema _lmapadecluster.map</p>";
 
 		        		   return ins;
+		        	   },
+		        	   parametrosFormAdmin : function(onde) {
+		        		   return '{"plugin":"markercluster","parametros":{"tipoEstilos": "'+$i("MCtipoEstilos").value+'","textcolor":"'+i3GEO.util.rgb2hex($i("MCtextcolor").value)+'","strokecolor":"'+i3GEO.util.rgb2hex($i("MCstrokecolor").value)+'","color":"'+i3GEO.util.rgb2hex($i("MCcolor").value)+'","gridSize":"'+$i("MCgridSize").value+'"}}';;
 		        	   },
 		        	   /**
 		        	    * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas Esse icone e
@@ -522,6 +536,9 @@ i3GEO.pluginI3geo =
 		        			   var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/googlemaps_js.php", carregaJs =
 		        				   "nao", criaLayer;
 		        			   criaLayer = function() {
+			        			   if (typeof (console) !== 'undefined')
+			        				   console.info("i3GEO.pluginI3geo.markercluster.googlemaps.inicia()");
+
 		        				   var markercluster, marcas, latLng, marker, n, i;
 		        				   n = markercluster_dados.length;
 		        				   marcas = [];
@@ -632,7 +649,7 @@ i3GEO.pluginI3geo =
 		        					   //console.info([markercluster_dados[i].lng * 1,markercluster_dados[i].lat * 1])
 		        					   marcas.push(
 		        							   new ol.Feature({
-		        								   geometry: new ol.geom.Point([markercluster_dados[i].lng * 1,markercluster_dados[i].lat * 1]),
+		        								   geometry: i3GEO.util.projGeo2OSM(new ol.geom.Point([markercluster_dados[i].lng * 1,markercluster_dados[i].lat * 1])),
 		        								   weight: markercluster_dados[i].count
 		        							   })
 		        					   );
@@ -694,11 +711,11 @@ i3GEO.pluginI3geo =
 		        									   text: new ol.style.Text({
 		        										   text: size.toString(),
 		        										   fill: new ol.style.Fill({
-		        											   color: '#fff'
+		        											   color: camada.plugini3geo.parametros.textcolor
 		        										   }),
 		        										   stroke: new ol.style.Stroke({
 		        											   color: 'rgba(0, 0, 0, 0.6)',
-		        											   width: 3
+		        											   width: 1
 		        										   })
 		        									   })
 		        								   });

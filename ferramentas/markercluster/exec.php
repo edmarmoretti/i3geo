@@ -10,7 +10,7 @@ switch (strtoupper($funcao))
 /*
 Valor: CRIAMARKERCLUSTER
 
-Adiciona ao mapa uma nova camada para calculo do mapa de calor
+Adiciona ao mapa uma nova camada para calculo do mapa de cluster
 */
 	case "CRIAMARKERCLUSTER":
 		$nameLayer = "markercluster".nomeRandomico();
@@ -18,9 +18,11 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$layer = $map->getlayerbyname($tema);
 		$novolayer = ms_newLayerObj($map, $layer);
 		$novolayer->setmetadata("tema",$titulo);
-		$parametros = '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","opacity":"'.$_GET["opacidade"].'","gridSize":"'.$_GET["gridSize"].'"}}';
+		$parametros = '{"plugin":"markercluster","parametros":{"tipoEstilos":"default","color":"'.$_GET["color"].'","strokecolor":"'.$_GET["strokecolor"].'","textcolor":"'.$_GET["textcolor"].'","tipoEstilos": "default","opacity":"'.$_GET["opacidade"].'","gridSize":"'.$_GET["gridSize"].'"}}';
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
+		$novolayer->setmetadata("tema",$_GET["titulo"]);
+		$novolayer->set("opacity",$_GET["opacidade"]);
 		$novolayer->set("group","");
 		$map->save($map_file);
 		$retorno = $nameLayer;

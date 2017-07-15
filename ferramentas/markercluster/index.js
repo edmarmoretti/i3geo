@@ -80,6 +80,7 @@ i3GEOF.markercluster = {
 			return;
 		}
 		$i(iddiv).innerHTML += i3GEOF.markercluster.html();
+		i3GEO.util.aplicaAquarela("i3GEOF.markercluster_corpo");
 		i3GEOF.markercluster.t0();
 	},
 	/**
@@ -175,7 +176,7 @@ i3GEOF.markercluster = {
 				"i3GEOmarkerclusterresultado",
 				true,
 				"i3GEOF.markercluster_rodape");
-		i3GEOF.markercluster.comboItens();
+		//i3GEOF.markercluster.comboItens();
 	},
 	t3 : function() {
 		i3GEO.util.proximoAnterior(
@@ -228,7 +229,13 @@ i3GEOF.markercluster = {
 					+ "&opacidade="
 					+ $i("i3GEOmarkerclusterOpacidade").value
 					+ "&gridSize="
-					+ $i("i3GEOmarkerclusterRaio").value;
+					+ $i("i3GEOmarkerclusterRaio").value
+					+ "&color="
+					+ i3GEO.util.rgb2hex($i("i3GEOmarkerclusterColor").value)
+					+ "&strokecolor="
+					+ i3GEO.util.rgb2hex($i("i3GEOmarkerclusterStrokecolor").value)
+					+ "&textcolor="
+					+ $i("i3GEOmarkerclusterTextcolor").value;
 
 			cp = new cpaint();
 			cp.set_response_type("JSON");
