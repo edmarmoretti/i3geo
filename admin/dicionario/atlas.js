@@ -128,13 +128,13 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'pranchaInicia' : [ {
 		pt : "Prancha inicial (ser&aacute; mostrada quando iniciar o atlas):",
-		en : "",
-		es : ""
+		en : "Startup table (it will be shown when atlas starts):",
+		es : "Tabla inicial (Ser&aacute; mostrada cuando se inicie el atlas):"
 	} ],
     'tipoGuia' : [ {
 		pt : "Tipo da apresenta&ccedil;&atilde;o das guias:",
-		en : "",
-		es : ""
+		en : "Types of guide presentation:",
+		es : "Tipo de presentaci&oacute;n de las gu&iacute;as:"
 	} ],
     'automatica' : [ {
 		pt : "autom&aacute;tica",
