@@ -98,20 +98,23 @@ botoesIni = [
 	"fa": "cogs",
 	"target": "_self"
 },{
-	"img":"folder-image",
-	"href": "../exemplos/index.php",
-	"titulo":$trad(14,g_traducao_init),
-	"subtitulo": $trad("14a",g_traducao_init),
-	"fa": "cogs",
-	"target": "_self"
-},{
 	"img":"applications-development",
 	"href": "../utilitarios/index.php",
 	"titulo":$trad(33,g_traducao_init),
 	"subtitulo": $trad("33a",g_traducao_init),
 	"fa": "wrench",
 	"target": "_self"
-},{
+},
+/*
+{
+	"img":"folder-image",
+	"href": "../exemplos/index.php",
+	"titulo":$trad(14,g_traducao_init),
+	"subtitulo": $trad("14a",g_traducao_init),
+	"fa": "cogs",
+	"target": "_self"
+},
+{
 	"img":"guiamigracao",
 	"href": "../guia_de_migracao.txt",
 	"titulo":$trad(17,g_traducao_init),
@@ -132,7 +135,9 @@ botoesIni = [
 	"subtitulo": $trad("28a",g_traducao_init),
 	"fa": "book",
 	"target": "_self"
-},{
+},
+*/
+{
 	"img":"tools-report-bug",
 	"href":"https://softwarepublico.gov.br/gitlab/i3geo/i3geo/issues",
 	"titulo":$trad(16,g_traducao_init),
@@ -144,7 +149,7 @@ botoesIni = [
 	"href":"https://softwarepublico.gov.br/gitlab/groups/i3geo",
 	"titulo":$trad(30,g_traducao_init),
 	"subtitulo": $trad("30a",g_traducao_init),
-	"fa": "group",
+	"fa": "book",
 	"target": "_self"
 },{
 	"img":"logo_psp",
