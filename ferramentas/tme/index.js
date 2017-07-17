@@ -295,10 +295,6 @@ i3GEOF.tme =
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function() {
-			// i3GEO.php.listaItensTema(i3GEOF.tme.montaListaItens,i3GEOF.tme.tema);
-			var i = $i("i3GEOF.tme_c").style;
-			i3GEO.janela.ULTIMOZINDEX++;
-			i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 		},
 		salvaParametros: function(){
 			//monta a string JSON que sera enviada para gravacao

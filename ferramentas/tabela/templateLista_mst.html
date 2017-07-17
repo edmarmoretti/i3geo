@@ -1,0 +1,43 @@
+<table id="{{{idjanela}}}i3GEOtabelatabelai" class="lista8">
+	<tr>
+		{{#cabecalho}}
+		<td accessKey="{{idcoluna}}" >
+			<button title="{{{t12}}}" onclick='i3GEOF.tabela.excluiColuna(this,"{{idcoluna}}","{{idjanela}}")' class="{{classe}} btn btn-xs" style="margin: 2px; padding: 2px;">
+				<span class="material-icons">delete</span>
+			</button>
+			<button title="{{{ordena}}}" onclick='i3GEOF.tabela.ordenaColuna(this,"{{idcoluna}}","{{idjanela}}")' class="{{classe}} btn btn-xs" style="margin: 2px; padding: 2px;">
+				<span class="material-icons">sort</span>
+			</button>
+			<span class="{{classe}}" title="{{{item}}}"> {{{alias}}} </span>
+		</td>
+		{{/cabecalho}}
+	</tr>
+	{{#linhas}}
+	<tr>
+		<td>
+			<button onclick='i3GEOF.tabela.excluiLinha(this,"{{idjanela}}")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+				<span class="material-icons">delete</span>
+			</button>
+		</td>
+		<td>
+			<button title="zoom" onclick='i3GEOF.tabela.zoomExt("{{{ext}}}","{{idjanela}}")' class="{{classezoom}} btn btn-xs" style="margin: 2px; padding: 2px;">
+				<span class="material-icons">gps_fixed</span>
+			</button>
+		</td>
+		<td>
+			<div class="checkbox text-left">
+				<label style="margin:0px;">
+					<input {{stat}} onclick='i3GEOF.tabela.registraLinha(this,"{{idjanela}}")' type="checkbox" name="{{indice}}" >
+					<span class="checkbox-material noprint">
+						<span class="check"></span>
+					</span>
+				</label>
+			</div>
+		</td>
+		<td>
+			<img class="{{classelegenda}}" title="{{{nomeClasse}}}" src="{{{imagemClasse}}}" />
+		</td>
+		{{{colunas}}}
+	</tr>
+	{{/linhas}}
+</table>

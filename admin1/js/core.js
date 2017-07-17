@@ -74,7 +74,6 @@ if(typeof jQuery != 'undefined' ){
 				$("#"+id+" .modal-body").html(conteudo);
 				if($("#"+id).css("display") == "none"){
 					$("#"+id).modal("show");
-
 					$.material.init();
 				}
 			},
@@ -89,6 +88,7 @@ if(typeof jQuery != 'undefined' ){
 				i3GEOadmin.core.fechaModal("modalGeral");
 			},
 			abreModalConfirma: function(hash){
+				//modalConfirmaTpl fica em head.php
 				var conteudo = Mustache.to_html(
 						$("#modalConfirmaTpl").html(),
 						hash

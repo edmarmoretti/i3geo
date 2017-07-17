@@ -2904,5 +2904,12 @@ g_traducao =
 				en : "",
 				es : ""
 			}
-		]
+		],
+		"erroTpl" : [
+  			{
+  				pt : "Erro ao carregar um template",
+  				en : "",
+  				es : ""
+  			}
+  		]
 	};

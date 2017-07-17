@@ -174,11 +174,7 @@ i3GEOF.busca = {
 	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 	*/
 	ativaFoco: function(){
-		if(i3GEOF.busca.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.busca.tema) === "")
-		{alert($trad('erroTema',i3GEOF.busca.dicionario));}
-		var i = $i("i3GEOF.busca_c").style;
-		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
+
 	},
 	/*
 	Function: montaListaItens

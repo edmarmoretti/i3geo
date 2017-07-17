@@ -161,9 +161,6 @@ i3GEOF.metar =
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function() {
-			var i = $i("i3GEOF.metar_c").style;
-			i3GEO.janela.ULTIMOZINDEX++;
-			i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 		},
 		/*
 		 * Function: lista

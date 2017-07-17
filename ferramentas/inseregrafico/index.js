@@ -159,9 +159,6 @@ i3GEOF.insereGrafico = {
 		temp = Math.random() + "a";
 		temp = temp.split(".");
 		g_nomepin = "pin"+temp[1];
-		var i = $i("i3GEOF.insereGrafico_c").style;
-		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: insere

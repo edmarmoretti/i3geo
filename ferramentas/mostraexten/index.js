@@ -149,9 +149,6 @@ i3GEOF.mostraExten = {
 	*/
 	ativaFoco: function(){
 		$i("i3GEOmostraExtenatual").innerHTML = i3GEO.parametros.mapexten;
-		var i = $i("i3GEOF.mostraExten_c").style;
-		i3GEO.janela.ULTIMOZINDEX++;
-		i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 	},
 	/*
 	Function: executa

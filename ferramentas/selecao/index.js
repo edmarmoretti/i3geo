@@ -387,9 +387,6 @@ i3GEOF.selecao =
 		ativaFoco : function() {
 			i3GEO.eventos.cliquePerm.desativa();
 			i3GEOF.selecao.pegaTemasSel();
-			var i = $i("i3GEOF.selecao_c").style;
-			i3GEO.janela.ULTIMOZINDEX++;
-			i.zIndex = 51000 + i3GEO.janela.ULTIMOZINDEX;
 			if (i3GEO.Interface.ATUAL != "openlayers") {
 				i3GEO.Interface[i3GEO.Interface.ATUAL].recalcPar();
 			}

@@ -512,12 +512,7 @@ i3GEOF.legenda =
 		 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
 		 */
 		ativaFoco : function() {
-			if (i3GEOF.legenda.tema !== "" && i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda.tema) === "") {
-				i3GEO.janela.tempoMsg($trad('temaInexistente', i3GEOF.legenda.dicionario));
-			}
-			var i = $i("i3GEOF.legenda_c").style;
-			i.zIndex = i3GEO.janela.ULTIMOZINDEX;
-			i3GEO.janela.ULTIMOZINDEX++;
+
 		},
 		ativaAplicar : function(tipo) {
 			var b = $i("i3GEOlegendabotao10");

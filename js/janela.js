@@ -610,6 +610,42 @@ i3GEO.janela =
 			}, tempo);
 		},
 		/**
+		 * Function: tempoMsg
+		 *
+		 * Abre uma janela com uma mensagem temporaria
+		 *
+		 * Parametros:
+		 *
+		 * {String} - texto da janela
+		 *
+		 * {segundos}
+		 */
+		closeModal: false,
+		closeMsg : function(texto) {
+			if(!i3GEO.janela.closeModal){
+				i3GEO.janela.closeModal = $(
+					'<div class="modal fade" data-keyboard="false" tabindex="-1" role="dialog" aria-hidden="true" style="z-index:500000;overflow-y:visible;">' +
+					'	<div class="modal-dialog">' +
+					'		<div class="modal-content">' +
+					'			<div class="modal-header">' +
+			        '				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>' +
+					'			</div>' +
+					'			<div id="i3GEOMensagemCloseModal" class="modal-body text-left" >' +
+					texto +
+					'			</div>' +
+					'		</div>' +
+					'	</div>' +
+					'</div>'
+				);
+			} else {
+				$("#i3GEOMensagemCloseModal").html(texto);
+				i3GEO.janela.closeModal.modal("show");
+				return;
+			}
+			i3GEO.janela.closeModal.modal("show");
+		},
+
+		/**
 		 * Function: ativaAlerta
 		 *
 		 * Substitui a janel&ccedil;a de alerta padr&atilde;o do sistema operacional por uma outra customizada
