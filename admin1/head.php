@@ -16,7 +16,7 @@ echo "
 	<link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/pacotes/jquery/jquery-ui/jquery-ui.min.css'>
     <!-- Material Design fonts -->
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/css/font/material-icons.css'>
     <!-- Bootstrap core CSS -->
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
     <!-- Bootstrap Material Design -->

@@ -123,7 +123,7 @@ OpenLayers = {
 			}
 		}
 	}
-	document.write("<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons'/>");
+	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/font/material-icons.css'/>");
 	document.write("<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>");
 	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../pacotes/yui290/build/button/assets/skins/sam/button.css'></link>");
 	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/i3geo7.css.php'></link>");

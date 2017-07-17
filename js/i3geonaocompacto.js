@@ -169,7 +169,7 @@ OpenLayers = {
 		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i]  + "?" + nocache + "'/>";
 		allCssTags += currentCssTag;
 	}
-	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons'/>";
+	allCssTags += "<link rel='stylesheet' type='text/css' href='../css/font/material-icons.css'/>";
 	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>";
 	document.write(allCssTags);
 	document.write(allScriptTags);
