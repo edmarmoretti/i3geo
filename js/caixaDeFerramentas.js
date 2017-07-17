@@ -11,44 +11,19 @@ i3GEO.caixaDeFerramentas = {
 			"templateMigalha" : "templates/ferramentasMigalha.html",
 			"templateLinks" : "templates/ferramentasLink.html"
 		},
-		nget: 0,
 		carregaTemplates: function(){
-			if(i3GEO.caixaDeFerramentas.nget == 0){
-				i3GEO.caixaDeFerramentas.nget = 3;
-				if(!i3GEO.template.ferramentasFolder){
-					$.get(i3GEO.caixaDeFerramentas.config.templateFolder, function(template) {
-						i3GEO.template.ferramentasFolder = template;
-						i3GEO.caixaDeFerramentas.nget = i3GEO.caixaDeFerramentas.nget - 1;
-						if(i3GEO.caixaDeFerramentas.nget == 0){
-							i3GEO.caixaDeFerramentas.inicia();
-						}
-					});
-				} else {
-					i3GEO.caixaDeFerramentas.nget = i3GEO.caixaDeFerramentas.nget - 1;
-				}
-				if(!i3GEO.template.ferramentasLinks){
-					$.get(i3GEO.caixaDeFerramentas.config.templateLinks, function(template) {
-						i3GEO.template.ferramentasLinks = template;
-						i3GEO.caixaDeFerramentas.nget = i3GEO.caixaDeFerramentas.nget - 1;
-						if(i3GEO.caixaDeFerramentas.nget == 0){
-							i3GEO.caixaDeFerramentas.inicia();
-						}
-					});
-				} else {
-					i3GEO.caixaDeFerramentas.nget = i3GEO.caixaDeFerramentas.nget - 1;
-				}
-				if(!i3GEO.template.ferramentasMigalha){
-					$.get(i3GEO.caixaDeFerramentas.config.templateMigalha, function(template) {
-						i3GEO.template.ferramentasMigalha = template;
-						i3GEO.caixaDeFerramentas.nget = i3GEO.caixaDeFerramentas.nget - 1;
-						if(i3GEO.caixaDeFerramentas.nget == 0){
-							i3GEO.caixaDeFerramentas.inicia();
-						}
-					});
-				} else {
-					i3GEO.caixaDeFerramentas.nget = i3GEO.caixaDeFerramentas.nget - 1;
-				}
-			}
+			var t1 = i3GEO.caixaDeFerramentas.config.templateFolder,
+				t2 = i3GEO.caixaDeFerramentas.config.templateLinks,
+				t3 = i3GEO.caixaDeFerramentas.config.templateMigalha;
+			$.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
+				i3GEO.template.ferramentasFolder = r1[0];
+				i3GEO.template.ferramentasLinks = r2[0];
+				i3GEO.template.ferramentasMigalha = r3[0];
+				i3GEO.caixaDeFerramentas.inicia();
+			}).fail(function() {
+			    i3GEO.janela.closeMsg($trad("erroTpl"));
+			    return;
+			});
 		},
 		aguarde: function(){
 			//$("#" + i3GEO.caixaDeFerramentas.config.idFolder).html($trad("o1"));

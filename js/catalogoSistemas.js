@@ -8,44 +8,19 @@ i3GEO.catalogoSistemas = {
 		'idCatalogoNavegacao': 'catalogoNavegacao',
 		'idOndeMigalha': 'catalogoMigalha'
 	},
-	nget: 0,
 	carregaTemplates: function(){
-		if(i3GEO.catalogoSistemas.nget == 0){
-			i3GEO.catalogoSistemas.nget = 3;
-			if(!i3GEO.template.dir){
-				$.get(i3GEO.catalogoSistemas.config.templateDir, function(template) {
-					i3GEO.template.dir = template;
-					i3GEO.catalogoSistemas.nget = i3GEO.catalogoSistemas.nget - 1;
-					if(i3GEO.catalogoSistemas.nget == 0){
-						i3GEO.catalogoSistemas.inicia();
-					}
-				});
-			} else {
-				i3GEO.catalogoSistemas.nget = i3GEO.catalogoSistemas.nget - 1;
-			}
-			if(!i3GEO.template.tema){
-				$.get(i3GEO.catalogoSistemas.config.templateTema, function(template) {
-					i3GEO.template.tema = template;
-					i3GEO.catalogoSistemas.nget = i3GEO.catalogoSistemas.nget - 1;
-					if(i3GEO.catalogoSistemas.nget == 0){
-						i3GEO.catalogoSistemas.inicia();
-					}
-				});
-			} else {
-				i3GEO.catalogoSistemas.nget = i3GEO.catalogoSistemas.nget - 1;
-			}
-			if(!i3GEO.template.catalogoMigalha){
-				$.get($("#" + i3GEO.catalogoSistemas.config.idOndeMigalha).attr("data-template"), function(template) {
-					i3GEO.template.catalogoMigalha = template;
-					i3GEO.catalogoSistemas.nget = i3GEO.catalogoSistemas.nget - 1;
-					if(i3GEO.catalogoSistemas.nget == 0){
-						i3GEO.catalogoSistemas.inicia();
-					}
-				});
-			} else {
-				i3GEO.catalogoSistemas.nget = i3GEO.catalogoSistemas.nget - 1;
-			}
-		}
+		var t1 = i3GEO.catalogoSistemas.config.templateDir,
+			t2 = i3GEO.catalogoSistemas.config.templateTema,
+			t3 = $("#" + i3GEO.catalogoSistemas.config.idOndeMigalha).attr("data-template");
+		$.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
+			i3GEO.template.dir = r1[0];
+			i3GEO.template.tema = r2[0];
+			i3GEO.template.catalogoMigalha = r3[0];
+			i3GEO.caixaDeFerramentas.inicia();
+		}).fail(function() {
+		    i3GEO.janela.closeMsg($trad("erroTpl"));
+		    return;
+		});
 	},
 	aguarde: function(){
 		$("#" + i3GEO.catalogoSistemas.config.idCatalogoNavegacao).html($trad("o1"));

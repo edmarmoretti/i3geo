@@ -9,44 +9,19 @@ i3GEO.catalogoEstrelas = {
 		'valorEstrela': 5,
 		'numEstrelas' : 3
 	},
-	nget: 0,
 	carregaTemplates: function(){
-		if(i3GEO.catalogoEstrelas.nget == 0){
-			i3GEO.catalogoEstrelas.nget = 3;
-			if(!i3GEO.template.dir){
-				$.get(i3GEO.catalogoEstrelas.config.templateDir, function(template) {
-					i3GEO.template.dir = template;
-					i3GEO.catalogoEstrelas.nget = i3GEO.catalogoEstrelas.nget - 1;
-					if(i3GEO.catalogoEstrelas.nget == 0){
-						i3GEO.catalogoEstrelas.inicia();
-					}
-				});
-			} else {
-				i3GEO.catalogoEstrelas.nget = i3GEO.catalogoEstrelas.nget - 1;
-			}
-			if(!i3GEO.template.tema){
-				$.get(i3GEO.catalogoEstrelas.config.templateTema, function(template) {
-					i3GEO.template.tema = template;
-					i3GEO.catalogoEstrelas.nget = i3GEO.catalogoEstrelas.nget - 1;
-					if(i3GEO.catalogoEstrelas.nget == 0){
-						i3GEO.catalogoEstrelas.inicia();
-					}
-				});
-			} else {
-				i3GEO.catalogoEstrelas.nget = i3GEO.catalogoEstrelas.nget - 1;
-			}
-			if(!i3GEO.template.catalogoMigalha){
-				$.get($("#" + i3GEO.catalogoEstrelas.config.idOndeMigalha).attr("data-template"), function(template) {
-					i3GEO.template.catalogoMigalha = template;
-					i3GEO.catalogoEstrelas.nget = i3GEO.catalogoEstrelas.nget - 1;
-					if(i3GEO.catalogoEstrelas.nget == 0){
-						i3GEO.catalogoEstrelas.inicia();
-					}
-				});
-			} else {
-				i3GEO.catalogoEstrelas.nget = i3GEO.catalogoEstrelas.nget - 1;
-			}
-		}
+		var t1 = i3GEO.catalogoEstrelas.config.templateDir,
+			t2 = i3GEO.catalogoEstrelas.config.templateTema,
+			t3 = $("#" + i3GEO.catalogoEstrelas.config.idOndeMigalha).attr("data-template");
+		$.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
+			i3GEO.template.dir = r1[0];
+			i3GEO.template.tema = r2[0];
+			i3GEO.template.catalogoMigalha = r3[0];
+			i3GEO.catalogoEstrelas.inicia();
+		}).fail(function() {
+		    i3GEO.janela.closeMsg($trad("erroTpl"));
+		    return;
+		});
 	},
 	aguarde: function(){
 		$("#" + i3GEO.catalogoEstrelas.config.idCatalogoNavegacao).html($trad("o1"));
