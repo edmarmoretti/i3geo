@@ -26,9 +26,9 @@ i3GEOF.atalhosedicao.dicionario = {
 		es : "Textos (toponimia)"
 	} ],
 	'etiqueta' : [ {
-		pt : "Etiquetas, busca rapida, alias",
+		pt : "Etiquetas, busca...",
 		en : "",
-		es : "Etiqueta, busqueda r&aacute;pida, alias"
+		es : "Etiqueta, busqueda..."
 	} ],
 	'filtro' : [ {
 		pt : "Filtro de atributos",
@@ -56,9 +56,9 @@ i3GEOF.atalhosedicao.dicionario = {
 		es : "Herramientas con par&aacute;metros que pueden ser almazenados en el mapfile del tema"
 	} ],
 	"temacomgrafico" : [{
-		pt : "Fei&ccedil;&otilde;es com Gr&aacute;ficos",
+		pt : "Gr&aacute;ficos",
 		en : "",
-		es : "Feiciones con Gr&aacute;ficos"
+		es : "Gr&aacute;ficos"
 	}],
 	"mostraClasses" : [{
 		pt : "Mostra as classes na legenda",
