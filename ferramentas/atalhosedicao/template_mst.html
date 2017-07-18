@@ -1,4 +1,4 @@
-<div style='margin-left: 5px;width:95%;'>
+<div class='container-fluid'>
 	<a onclick="i3GEOF.atalhosedicao.salva()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{salva}}}
 	</a>
@@ -20,12 +20,14 @@
 	<a onclick="i3GEOF.atalhosedicao.temaComGrafico();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{temacomgrafico}}}
 	</a>
-	<label>{{{opacidade}}}</label>
-	<div class="form-group condensed" >
-		<form onsubmit='i3GEO.tema.mudatransp(i3GEOF.atalhosedicao.tema,this[0].value);return false;'>
-			<input id="i3GEOFatalhosedicaoOpacidade" class="form-control" type='text' value='{{{transparency}}}' />
+
+	<div class="form-group label-static" >
+		<label class="control-label">{{{opacidade}}}</label>
+		<form onsubmit="i3GEO.tema.mudatransp(i3GEOF.atalhosedicao.tema,this[0].value);return false;">
+			<input id="i3GEOFatalhosedicaoOpacidade" class="form-control input-lg" type='text' value='{{{transparency}}}' />
 		</form>
 	</div>
+
 	<!-- Opcoes que alteram os metadata do LAYER basta incluir em name o nome do metadata e indicar com true ou false se o valor e do tipo sim|nao. Se for false, o valor e obtido de value -->
 	<div class="checkbox text-left">
 		<label>
@@ -33,6 +35,7 @@
 			<span class="checkbox-material noprint"><span class="check"></span></span> {{{ativaCache}}}
 		</label>
 	</div>
+
 	<div class="checkbox text-left">
 		<label>
 			<input id='i3GEOFatalhosedicaoClasse' type="checkbox" name='classe' onclick="i3GEOF.atalhosedicao.metadata(this,true)">

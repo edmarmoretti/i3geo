@@ -141,6 +141,12 @@ i3GEOF.imprimir = {
 			false,
 			"hd",
 			cabecalho,
+			"",
+			"",
+			true,
+			"",
+			"",
+			"",
 			""
 		);
 		divid = janela[2].id;

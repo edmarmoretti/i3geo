@@ -144,7 +144,10 @@ i3GEOF.atalhoscamada =
 				minimiza,
 				"",
 				true,
-				i3GEO.configura.locaplic + "/imagens/oxygen/16x16/games-config-custom.png"
+				"",
+				"",
+				"",
+				""
 			);
 		divid = janela[2].id;
 		if (i3GEOF.atalhoscamada.janelas.length > 1) {

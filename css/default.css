@@ -24,7 +24,13 @@ Botoes material
 	color:white;
 	background-color: #477596;
 }
-.form-group.label-floating.is-focused > label, .form-group.label-floating.is-empty.is-focused > label, .form-group.condensed.is-focused > label, .form-group.is-focused > label {
+.form-group .help-block {
+    margin-top: 0;
+    font-size: 10px;
+    color: #BDBDBD;
+    font-weight: initial;
+}
+.form-group.label-floating.is-focused > label, .form-group.label-static.is-focused > label, .form-group.label-floating.is-empty.is-focused > label, .form-group.condensed.is-focused > label, .form-group.is-focused > label {
 	color: #BDBDBD;
 }
 /*
@@ -159,6 +165,7 @@ hr {
 
 #i3GEOguiaMovel .form-control {
     background-color: transparent;
+    color: #BDBDBD;
 }
 
 .nomeTema {

@@ -211,8 +211,8 @@ i3GEOF.atalhosedicao =
 			titulo = "</div><div class='i3GeoTituloJanelaBs'>" + i3GEO.temaAtivo + "</div>";
 			janela =
 				i3GEO.janela.cria(
-						"250px",
 						"300px",
+						"350px",
 						"",
 						"",
 						"",

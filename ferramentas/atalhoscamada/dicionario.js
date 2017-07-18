@@ -9,12 +9,20 @@ i3GEOF.atalhoscamada.dicionario = {
 	],
 	"temporizador" : [
 		{
-			pt : "Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada. Para ignorar ou cancelar, deixe em branco",
-			en : "Interval in seconds after which the layer will be updated. To ignore, leave blank",
-			es : "Intervalo en segundos despues del cual la capa ser&aacute; actualizada. Para ignorar, deje en blanco.",
-			it : "Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada. Para ignorar, deixe em branco"
+			pt : "Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada",
+			en : "Interval in seconds after which the layer will be updated",
+			es : "Intervalo en segundos despues del cual la capa ser&aacute; actualizada",
+			it : "Intervalo em segundos ap&oacute;s o qual a camada ser&aacute; atualizada"
 		}
 	],
+	"temporizadorHelp" : [
+  		{
+  			pt : "Para ignorar ou cancelar, deixe em branco",
+  			en : "To ignore, leave blank",
+  			es : "Para ignorar, deje en blanco.",
+  			it : "Para ignorar, deixe em branco"
+  		}
+  	],
 	"mudanome" : [
 		{
 			pt : "Muda o nome atual do tema. Utilize para melhorar a legenda do mapa.",

@@ -1,34 +1,26 @@
-<div style='margin-left: 5px;width:95%;'>
-	<div id='i3GEOFatalhoscamadaCompartilhar'></div>
-	<br>
-	<label>{{{opacidade}}}&nbsp;
-		<a class=ajuda_usuario target=_blank href='{{{locaplic}}}/ajuda_usuario.php?idcategoria=5&idajuda=42' ><b> </b></a>
-	</label>
-	<div class="form-group condensed" >
+<div class='container-fluid'>
+	<div class="form-group label-static" >
+		<label class="control-label">{{{opacidade}}}</label>
 		<form onsubmit='i3GEOF.atalhoscamada.mudaOpacidade(this,{{{idjanelaA}}});return false;'>
-			<input class="form-control" type='text' value='' />
+			<input class="form-control input-lg" type='text' value='' />
 		</form>
 	</div>
-	<br>
-	<label>{{{temporizador}}}&nbsp;
-		<a class=ajuda_usuario target=_blank href='{{{locaplic}}}/ajuda_usuario.php?idcategoria=5&idajuda=101' ><b> </b></a>
-	</label>
-	<div class="form-group condensed" >
+
+	<div class="form-group label-static" >
+		<label class="control-label">{{{temporizador}}}</label>
 		<form onsubmit='i3GEOF.atalhoscamada.temporizador(this,{{{idjanelaA}}});return false;'>
-			<input class="form-control" type='text' value='' />
+			<input class="form-control input-lg" type='text' value='' />
 		</form>
+		<p class="help-block">{{{temporizadorHelp}}}</p>
 	</div>
-	<br>
-	<label>{{{mudanome}}}&nbsp;
-		<a class=ajuda_usuario target=_blank href='{{{locaplic}}}/ajuda_usuario.php?idcategoria=5&idajuda=43' ><b> </b></a>
-	</label>
-	<div class="form-group condensed" >
+
+	<div class="form-group label-static" >
+		<label class="control-label">{{{mudanome}}}</label>
 		<form onsubmit='i3GEOF.atalhoscamada.mudaNome(this,{{{idjanelaA}}});return false;'>
-			<input class="form-control" type='text' value='' />
+			<input class="form-control input-lg" type='text' value='' />
 		</form>
 	</div>
-	<br>
-	<div id='i3GEOFatalhoscamadaMenu' ></div>
+
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.procuraratrib('{{tema}}')" class='{{procurarHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{procurar}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.copia('{{tema}}')" class='btn btn-primary btn-lg btn-block btn-raised'>{{{copia}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.toponimia('{{tema}}')" class='{{topoHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{topo}}}</a>

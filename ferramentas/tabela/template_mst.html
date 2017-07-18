@@ -37,19 +37,19 @@
 <!-- Guia Propriedades -->
 <div id='{{{idjanela}}}i3GEOtabelaguia6obj' class="container-fluid">
 	<div class="checkbox text-left">
-		<label style="padding:12px;">
+		<label>
 			<input id='{{{idjanela}}}i3GEOtabelatipolista' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros('{{{idjanela}}}')">
 			<span class="checkbox-material noprint"><span class="check"></span></span> {{{atuatab}}}
 		</label>
 	</div>
 	<div class="checkbox text-left">
-		<label style="padding:12px;">
+		<label>
 			<input id='{{{idjanela}}}i3GEOtabelalegenda' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros('{{{idjanela}}}')">
 			<span class="checkbox-material noprint"><span class="check"></span></span> {{{colleg}}}
 		</label>
 	</div>
 	<div class="checkbox text-left">
-		<label style="padding:12px;">
+		<label>
 			<input checked id='i3GEOFtabelaRodape{{{idjanela}}}' type="checkbox" onclick="i3GEOF.tabela.propJanelas['{{{idjanela}}}'].atualiza = this.checked;">
 			<span class="checkbox-material noprint"><span class="check"></span></span> {{{atualizaAoNavegar}}}
 		</label>
@@ -96,9 +96,7 @@
 <!-- label-floating -->
 	<div class='form-group label-floating is-empty' >
 		<label class="control-label" for="{{{idjanela}}}i3GEOtabelafiltro1">{{{excluicalc}}}</label>
-
 		<input class="form-control input-lg" type='text' id='{{{idjanela}}}i3GEOtabelafiltro1' value='' />
-
 	</div>
 
 	<button onclick="i3GEOF.tabela.estatistica('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{calc}}}</button>
@@ -112,7 +110,7 @@
 <!-- Relatorio -->
 <div id='{{{idjanela}}}i3GEOtabelaguia5obj' class='container-fluid'>
 	<div class='form-group condensed' >
-		<label class="control-label">{{{itensrel}}}</label>
+		<label>{{{itensrel}}}</label>
 		<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' style='overflow: auto; height: 120px; top:10px;'></div>
 	</div>
 	<div class='form-group condensed' >
@@ -120,22 +118,20 @@
 		<div id='{{{idjanela}}}i3GEOtabelaagrupamento'></div>
 	</div>
 
-	<div class='form-group condensed' >
-		<label class="control-label">{{{excvalor}}}</label>
-		<div>
-			<input class="form-control input-lg" type='text' id='{{{idjanela}}}i3GEOtabelaexcestat' value='' />
-		</div>
+	<div class='form-group label-floating is-empty' >
+		<label class="control-label" for="{{{idjanela}}}i3GEOtabelaexcestat">{{{excvalor}}}</label>
+		<input class="form-control input-lg" type='text' id='{{{idjanela}}}i3GEOtabelaexcestat' value='' />
 	</div>
 
 	<div class="checkbox text-left">
-		<label style="padding:12px;">
+		<label>
 			<input id='{{{idjanela}}}i3GEOtabelacalculaarea' type="checkbox">
 			<span class="checkbox-material noprint"><span class="check"></span></span> {{{incarea}}}
 		</label>
 	</div>
 
 	<div class="checkbox text-left">
-		<label style="padding:12px;">
+		<label>
 			<input id='{{{idjanela}}}i3GEOtabelacalculaestat' type="checkbox">
 			<span class="checkbox-material noprint"><span class="check"></span></span> {{{incestat}}}
 		</label>

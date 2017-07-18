@@ -16,14 +16,14 @@ i3GEOF.atalhosedicao.dicionario = {
 		es : "Guardar mapfile"
 	} ],
 	'tabela' : [ {
-		pt : "Tabela de atributos",
+		pt : "Tabela",
 		en : "",
-		es : "Tabla de atributos"
+		es : "Tabla"
 	} ],
 	'texto' : [ {
-		pt : "Textos (topon&iacute;mia)",
+		pt : "Topon&iacute;mia",
 		en : "",
-		es : "Textos (toponimia)"
+		es : "Ttoponimia"
 	} ],
 	'etiqueta' : [ {
 		pt : "Etiquetas, busca...",
@@ -31,9 +31,9 @@ i3GEOF.atalhosedicao.dicionario = {
 		es : "Etiqueta, busqueda..."
 	} ],
 	'filtro' : [ {
-		pt : "Filtro de atributos",
+		pt : "Filtro",
 		en : "",
-		es : "Filtro de atributos"
+		es : "Filtro"
 	} ],
 	'opacidade' : [ {
 		pt : "Opacidade (0 a 100)",
