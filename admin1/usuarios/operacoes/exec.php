@@ -55,6 +55,10 @@ if ($funcao == "ADICIONAR" || $funcao == "ALTERAR") {
 }
 switch ($funcao) {
 	case "ADICIONAR" :
+		if($_POST ["codigo"] == ""){
+			header ( "HTTP/1.1 500 codigo nao pode ser vazio" );
+			exit;
+		}
 		$novo = \admin\usuarios\operacoes\adicionar ( $_POST ["codigo"], $_POST ["descricao"], $papeis, $dbhw );
 		$dbhw = null;
 		$dbh = null;

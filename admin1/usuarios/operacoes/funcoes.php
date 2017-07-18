@@ -36,6 +36,13 @@ function listaPapeisOperacao($dbh,$id_operacao){
 }
 function adicionar($codigo,$descricao,$papeis,$dbhw){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
+
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_operacoes WHERE codigo = '". $codigo . "'", $dbhw, false );
+	if (count($dados) > 0) {
+		header ( "HTTP/1.1 403 operacao ja existe" );
+		exit ();
+	}
+
 	try{
 		$dataCol = array(
 				"descricao" => ''

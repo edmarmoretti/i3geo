@@ -192,7 +192,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				$error = "";
 				$error = ms_GetErrorObj();
 				while($error && $error->code != MS_NOERR){
-					echo "<div class='alert alert-danger'>Error in %s: %s</div>", $error->routine, $error->message;
+					echo "<div class='alert alert-danger'>O sistema retornou o seguinte erro: Error in %s: %s</div>", $error->routine, $error->message;
 					$error = $error->next();
 				}
 				return;
@@ -209,7 +209,7 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				$error = "";
 				$error = ms_GetErrorObj();
 				while($error && $error->code != MS_NOERR){
-					echo "<div class='alert alert-danger'>Error in %s: %s</div>", $error->routine, $error->message;
+					echo "<div class='alert alert-danger'>O sistema retornou o seguinte erro: Error in %s: %s</div>", $error->routine, $error->message;
 					$error = $error->next();
 				}
 				return;
