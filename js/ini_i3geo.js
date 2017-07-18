@@ -295,6 +295,7 @@ var i3GEO = {
 	contadorAtualiza : 0,
 	//atalho para as funcoes cria e inicia com a possibilidade de aplicacao de parametros
 	init: function(parametrosMapa,configMapa){
+		$.material.init();
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.init()");
 

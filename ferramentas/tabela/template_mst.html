@@ -93,12 +93,14 @@
 		<label class="control-label">{{{itemcalc}}}</label>
 		<div id='{{{idjanela}}}i3GEOtabelaitensGuia3'></div>
 	</div>
-	<div class='form-group condensed' >
-		<label class="control-label">{{{excluicalc}}}</label>
-		<div>
-			<input class="form-control input-lg" type='text' id='{{{idjanela}}}i3GEOtabelafiltro1' value='' />
-		</div>
+<!-- label-floating -->
+	<div class='form-group label-floating is-empty' >
+		<label class="control-label" for="{{{idjanela}}}i3GEOtabelafiltro1">{{{excluicalc}}}</label>
+
+		<input class="form-control input-lg" type='text' id='{{{idjanela}}}i3GEOtabelafiltro1' value='' />
+
 	</div>
+
 	<button onclick="i3GEOF.tabela.estatistica('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{calc}}}</button>
 
 	<div id='{{{idjanela}}}i3GEOtabelaoperacoes' style='font-size: 12px; text-align: left; position: relative; top: 15px; left: 0px;'></div>
@@ -113,7 +115,6 @@
 		<label class="control-label">{{{itensrel}}}</label>
 		<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' style='overflow: auto; height: 120px; top:10px;'></div>
 	</div>
-
 	<div class='form-group condensed' >
 		<label class="control-label">{{{itensagr}}}</label>
 		<div id='{{{idjanela}}}i3GEOtabelaagrupamento'></div>

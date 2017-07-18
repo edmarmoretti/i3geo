@@ -1,37 +1,3 @@
-<style>
-.yui-button#i3GEOFatalhosedicaoSalva button {
-	background: url(../imagens/oxygen/16x16/document-save.png) 5% 50%
-		no-repeat;
-}
-
-.yui-button#i3GEOFatalhosedicaoLegenda button {
-	background: url(../imagens/oxygen/16x16/format-list-unordered.png) 5%
-		50% no-repeat;
-}
-
-.yui-button#i3GEOFatalhosedicaoTabela button {
-	background: url(../imagens/oxygen/16x16/view-form-table.png) 5% 50%
-		no-repeat;
-}
-
-.yui-button#i3GEOFatalhosedicaoTexto button {
-	background: url(../imagens/oxygen/16x16/draw-text.png) 5% 50% no-repeat;
-}
-
-.yui-button#i3GEOFatalhosedicaoEtiqueta button {
-	background: url(../imagens/oxygen/16x16/feed-subscribe.png) 5% 50%
-		no-repeat;
-}
-
-.yui-button#i3GEOFatalhosedicaoFiltro button {
-	background: url(../imagens/oxygen/16x16/view-filter.png) 5% 50%
-		no-repeat;
-}
-.yui-button#i3GEOFatalhosedicaoTemaComGrafico button {
-	background: url(../imagens/gisicons/layer-vector-chart-add.png) 5% 50%
-		no-repeat;
-}
-</style>
 <div style='margin-left: 5px;width:95%;'>
 	<a onclick="i3GEOF.atalhosedicao.salva()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{salva}}}
@@ -54,7 +20,7 @@
 	<a onclick="i3GEOF.atalhosedicao.temaComGrafico();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{temacomgrafico}}}
 	</a>
-	<label class='paragrafo'>{{{opacidade}}}&nbsp;</label>
+	<label>{{{opacidade}}}</label>
 	<div class="form-group condensed" >
 		<form onsubmit='i3GEO.tema.mudatransp(i3GEOF.atalhosedicao.tema,this[0].value);return false;'>
 			<input id="i3GEOFatalhosedicaoOpacidade" class="form-control" type='text' value='{{{transparency}}}' />

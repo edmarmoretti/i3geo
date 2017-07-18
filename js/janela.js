@@ -392,7 +392,7 @@ i3GEO.janela =
 		 */
 		minimiza : function(id, min) {
 			var temp = $i(id + "_corpo"), n, i, m = YAHOO.i3GEO.janela.manager.find(id), c = $i(id), t = "min", r = YAHOO.util.Resize.getResizeById(id),
-			rodape = $i(id + "_rodape");
+			rodape = $i(id + "_rodape"), tipo = "";
 
 			if (temp) {
 				if (temp.style.display === "block") {
@@ -404,6 +404,10 @@ i3GEO.janela =
 					if (min) {
 						c.style.width = min;
 					}
+					tipo = "none";
+					if(r){
+						r.lock();
+					}
 				} else {
 					temp.style.display = "block";
 					if (m) {
@@ -411,51 +415,27 @@ i3GEO.janela =
 					}
 					c.style.width = m.winicial;
 					t = "max";
+					tipo = "block";
+					if(r){
+						r.unlock();
+					}
 				}
 			}
 			temp = $i(id + "_c");
 			if (temp) {
-				temp = temp.getElementsByTagName("div");
-				n = temp.length;
-				for (i = 0; i < n; i++) {
-					if (temp[i].className === "underlay" || temp[i].className === "bd") {
-						if (temp[i].style.display === "none") {
-							temp[i].style.display = "block";
-						} else {
-							temp[i].style.display = "none";
-						}
-					}
-				}
+				$(temp).find(".comboTemasCabecalhoBs,.ft,.yui-resize-handle,.underlay,.bd").css("display",tipo);
 			}
 			temp = $i(id + "_corpo");
 			if (temp) {
-				if (temp.style.display === "none") {
-					temp.style.display = "block";
-					if(r){
-						r.unlock();
-					}
-					if(rodape){
-						rodape.style.display = "block";
-					}
-				} else {
-					temp.style.display = "none";
-					if(r){
-						r.lock();
-					}
-					if(rodape){
-						rodape.style.display = "none";
-					}
-				}
-
+				temp.style.display = tipo;
 			}
 			temp = $i(id);
 			if (temp) {
-				if (temp.style.display === "none") {
+				if (tipo === "block") {
 					temp.style.height = "100%";
 				} else {
 					temp.style.height = "10%";
 				}
-
 			}
 			return t;
 		},

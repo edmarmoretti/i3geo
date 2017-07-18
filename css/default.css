@@ -24,7 +24,9 @@ Botoes material
 	color:white;
 	background-color: #477596;
 }
-
+.form-group.label-floating.is-focused > label, .form-group.label-floating.is-empty.is-focused > label, .form-group.condensed.is-focused > label, .form-group.is-focused > label {
+	color: #BDBDBD;
+}
 /*
 Para Bootstrap
 */
@@ -48,7 +50,7 @@ a, a:focus, a:hover {
 	color: #767676;
 }
 .label, label {
-	color: #767676;
+	color: white;
 }
 
 h2 small {
@@ -149,6 +151,14 @@ hr {
 	height: 0px;
 	padding-left: 4px;
 	background-color: white;
+}
+
+#i3GEOguiaMovel label {
+    color: #BDBDBD;
+}
+
+#i3GEOguiaMovel .form-control {
+    background-color: transparent;
 }
 
 .nomeTema {
@@ -1038,12 +1048,17 @@ bd .i3geoFormIconeEdita {
 .comboTemasCabecalhoBs {
 	z-index: 100;
 	position: absolute;
-	top: -30px;
+	top: 0px;
 	left: 0px;
 	width: auto;
 	max-width:85%;
-}
 
+	margin: 0px;
+}
+/* .form-group .form-control*/
+.comboTemasCabecalhoBs > select {
+	background-color: #094672 !Important;
+}
 
 .comboTemasCabecalho .yuimenuitemlabel {
 	color: black;
