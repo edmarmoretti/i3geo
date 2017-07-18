@@ -146,7 +146,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group form-group-lg">
-				<label class="col-md-5 control-label" for="filtro" >{{{filtroTxt}}}</label>
+				<label class="col-md-5 control-label" for="filtro" >{{{filtroTxt1}}}</label>
 				<div class="col-md-7">
 					<input title="{{{filtroTxt}}}" type="text" value="{{{filtro}}}" class="form-control" name="filtro" >
 				</div>

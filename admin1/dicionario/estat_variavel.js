@@ -87,8 +87,8 @@ i3GEOadmin.variaveis.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'filtroTxt' : [ {
-		pt : "Filtro adicional que ser&aacute; inclu&iacute;do na sele&ccedil;&atilde;o dos dados",
+    'filtroTxt1' : [ {
+		pt : "Filtro adicional que ser&aacute; inclu&iacute;do na sele&ccedil;&atilde;o dos dados. Utilize a sintaxe SQL, por exemplo: nomedacoluna = 'a' AND nomedacoluna1 = 2 ",
 		en : "",
 		es : ""
 	} ],
