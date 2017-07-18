@@ -99,11 +99,11 @@ include "../init/head.php";
 		$("#mensagemLogin").html(men);
 		</script>
 		<?php
-		
+
 		if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 			//opcoes de criacao de pastas
 			if (strtoupper(substr(PHP_OS, 0, 3) != 'WIN')){
-				
+
 				$d = dirname(dirname(__FILE__));
 echo <<<HTML
 		<div class="alert alert-danger" role="alert">
@@ -159,7 +159,7 @@ HTML;
 				exit;
 			}
 		}
-		
+
 		error_reporting(E_ALL);
 		$ip = "UNKNOWN";
 		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
@@ -181,9 +181,7 @@ echo <<<HTML
 		</div>
 		<div class="alert alert-info" role="alert">
 		Para mais informa&ccedil;&otilde;es sobre a instala&ccedil;&atilde;o de pacotes complementares,
-		como o SAIKU e ferramentas que precisam de softwares espec&iacute;ficos, veja o link
-		<a href='http://moodle.gvsig-training.com/course/view.php?id=11' >http://moodle.gvsig-training.com/course/view.php?id=11
-		</a></div>
+		como o SAIKU e ferramentas que precisam de softwares espec&iacute;ficos</div>
 		<div class="alert alert-success" role="alert">
 			<li>Seu endere&ccedil;o IP <span class="label label-default">$ip</span></li>
 			<li>Sistema operacional <span class="label label-default">$os</span></li>

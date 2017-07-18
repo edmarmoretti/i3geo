@@ -20,11 +20,6 @@ i3GEOadmin.principal.dicionario = {
 		en : "",
 		es : ""
 	} ],
-    'msgSqlite' : [ {
-		pt : "Se vc est&aacute; usando o banco de dados SQLITE, voc&ecirc; pode acessar	diretamente as tabelas por meio de formul&aacute;rios ",
-		en : "",
-		es : ""
-	} ],
     'veja' : [ {
 		pt : "Veja tamb&eacute;m:",
 		en : "",

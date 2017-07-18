@@ -140,13 +140,6 @@ botoesIni = [
 	"fa": "book",
 	"target": "_self"
 },{
-	"img":"gvsigtraining.png",
-	"href":"http://moodle.gvsig-training.com/course/view.php?id=11",
-	"titulo":$trad(28,g_traducao_init),
-	"subtitulo": $trad("28a",g_traducao_init),
-	"fa": "book",
-	"target": "_self"
-},{
 	"img":"tools-report-bug.png",
 	"href":"https://softwarepublico.gov.br/gitlab/i3geo/i3geo/issues",
 	"titulo":$trad(16,g_traducao_init),

@@ -75,13 +75,6 @@ include "head.php";
 							{{msgCadastraUsr}}
 						</p>
 						<p>
-							<a href="http://moodle.gvsig-training.com/course/view.php?id=11"
-								target="_blank">{{manualAdmin}}</a>
-						</p>
-						<p>
-							{{msgSqlite}} <a
-								href='../pacotes/phpliteadmin/phpliteadmin.php'>(link)</a>.
-							{{veja}}<br><br>
 							<a href="../documentacao/diagramas/mer_banco_de_dados_de_administracao.png"
 								target="_new">{{merBdAdmin}}</a><br>
 							<a href="../documentacao/diagramas/cadastrodeusuarios/dbdocs/index.html"
