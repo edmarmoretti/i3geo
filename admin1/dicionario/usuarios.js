@@ -43,5 +43,20 @@ i3GEOadmin.usuarios.dicionario = {
 		pt : "N&atilde;o",
 		en : "",
 		es : ""
+	} ],
+    'labelNovaSenha' : [ {
+		pt : "Nova senha",
+		en : "",
+		es : ""
+	} ],
+    'labelDataCadastro' : [ {
+		pt : "Data do cadastro",
+		en : "",
+		es : ""
+	} ],
+    'labelAtivo' : [ {
+		pt : "Ativo?",
+		en : "",
+		es : ""
 	} ]
 };

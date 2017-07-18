@@ -114,8 +114,8 @@ switch (strtoupper($funcao))
 	case "LOGIN":
 		$usuario = $_POST["usuario"];
 		$senha = $_POST["senha"];
-
 		$teste = autenticaUsuario($usuario,$senha);
+
 		if($teste == "muitas tentativas"){
 			logoutUsuario();
 			header ( "HTTP/1.1 403 Muitas tentativas" );
@@ -293,8 +293,11 @@ function validaSessao(){
 //
 function autenticaUsuario($usuario,$senha){
 	include(dirname(__FILE__)."/conexao.php");
+	error_reporting(0);
 	$senhamd5 = md5($senha);
+
 	$senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+
 	//faz um teste de tentativas de acesso
 	$nomeArquivo = $dir_tmp."/a".md5($usuario."testeTentativas").intval(time() / 1000);
 	if(!file_exists($dir_tmp)){
@@ -347,21 +350,15 @@ function autenticaUsuario($usuario,$senha){
 		$dados = array();
 		if(strlen($senha) == 32){
 			$dados = pegaDados("select id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
+			if(count($dados) == 1 && $dados[0]["senha"] == $senhamd5 && $dados[0]["login"] == $usuario){
+				$ok = true;
+			}
 		}
 		else{
-			$dados = pegaDados("select id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1",$dbh,false);
-		}
-		if(count($dados) > 0){
-			$ok = true;
-		}
-		//testa tambem com a nova forma de armazenamento de senha usando password_hash
-		if($ok == false){
 			$usuarios = pegaDados("select senha,id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$dbh,false);
-			foreach($usuarios as $d){
-				if (password_verify($d["senha"], $senhaHash)){
-					$ok = true;
-					$dados = array("id_usuario"=>$d["id_usuario"],"nome_usuario"=>$d["nome_usuario"]);
-				}
+			if (count($usuarios) == 1 && password_verify($senha,$usuarios[0]["senha"])){
+				$ok = true;
+				$dados[] = array("id_usuario"=>$usuarios[0]["id_usuario"],"nome_usuario"=>$usuarios[0]["nome_usuario"]);
 			}
 			$usuarios = null;
 		}
