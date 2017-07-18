@@ -74,8 +74,9 @@ if(typeof jQuery != 'undefined' ){
 				$("#"+id+" .modal-body").html(conteudo);
 				if($("#"+id).css("display") == "none"){
 					$("#"+id).modal("show");
-					$.material.init();
+					//$.material.init();
 				}
+				$.material.init();
 			},
 			fechaModalGeral: function(){
 				i3GEOadmin.core.fechaModal("modalGeral");
