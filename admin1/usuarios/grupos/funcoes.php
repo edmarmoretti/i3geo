@@ -36,6 +36,11 @@ function listaGruposUsuario($id_grupo,$dbh){
 }
 function adicionar($nome, $descricao, $usuarios, $dbhw) {
 	$esquemaadmin = $_SESSION["esquemaadmin"];
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_grupos WHERE nome = '". $nome . "'", $dbhw, false );
+	if (count($dados) > 0) {
+		header ( "HTTP/1.1 403 grupo ja existe" );
+		exit ();
+	}
 	try {
 		$dataCol = array (
 				"nome" => '',

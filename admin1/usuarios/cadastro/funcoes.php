@@ -43,6 +43,13 @@ function enviarSenha( $senha, $email ){
 // $papeis deve ser um array
 function adicionar($ativo, $data_cadastro, $email, $login, $nome_usuario, $senha, $papeis, $dbhw) {
 	$esquemaadmin = $_SESSION["esquemaadmin"];
+
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geousr_usuarios WHERE login = '". $login . "'", $dbhw, false );
+	if (count($dados) > 0) {
+		header ( "HTTP/1.1 403 login ja existe" );
+		exit ();
+	}
+
 	try {
 		$dataCol = array(
 			"nome_usuario" => '',
