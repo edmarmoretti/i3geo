@@ -35,7 +35,7 @@
 	<div class="row">
 		<div class="col-md-12">
 			<div class="form-group form-group-lg">
-				<label class="col-md-4 control-label" for="tipo" >{{{colunaPar}}}</label>
+				<label class="col-md-4 control-label" for="tipo" >{{{tipoColunaPar}}}</label>
 				<div class="col-md-8">
 					<select class="form-control" name="tipo">
 						<option {{0-sel}} value="0">{{{NonDef}}}</option>

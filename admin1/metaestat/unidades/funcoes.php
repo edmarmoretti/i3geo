@@ -25,7 +25,7 @@ function adicionar($nome,$sigla,$permitesoma,$permitemedia, $dbhw) {
 				"permitemedia" => ''
 		);
 		$codigo_unidade_medida = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico ( $dbhw, "i3geoestat_unidade_medida", $dataCol, "nome", "codigo_unidade_medida" );
-		$retorna = \admin\metaestat\unidades\alterar ( $codigo_unidade_medida, $nome, $descricao, $dbhw );
+		$retorna = \admin\metaestat\unidades\alterar ( $codigo_unidade_medida,$nome,$sigla,$permitesoma,$permitemedia,$dbhw );
 
 		return $retorna;
 	} catch ( PDOException $e ) {

@@ -63,7 +63,7 @@ i3GEOadmin.variaveis.dicionario = {
 		es : ""
 	} ],
     'esquemadbTxt' : [ {
-		pt : "Esquema do banco onde fica a tabela com os dados",
+		pt : "Esquema do banco onde fica a tabela com os dados. Apenas os esquemas configurados previamente no ms_configura s&atilde;o mostrados na lista. Outros esquemas podem ser utilizados, mas &eacute; necess&aacute;rio conhecer o seu nome. A listagem de nomes de tabelas e colunas tamb&eacute;m s&atilde;o restringidas pela lista registrada de esquemas.",
 		en : "",
 		es : ""
 	} ],
@@ -159,6 +159,11 @@ i3GEOadmin.variaveis.dicionario = {
 	} ],
     'colunaPar' : [ {
 		pt : "Coluna existente na tabela relacionada &agrave; medida e que cont&eacute;m os valores do par&acirc;metro",
+		en : "",
+		es : ""
+	} ],
+    'tipoColunaPar' : [ {
+		pt : "Tipo do par&acirc;metro",
 		en : "",
 		es : ""
 	} ],
