@@ -3256,4 +3256,20 @@ function corrigeLayerGrid($layerOrigem,$layerDestino){
 		//$layerDestino->updatefromstring("LAYER GRID LABELFORMAT '" . $layerOrigem->grid->labelformat . "' END END");
 	}
 }
+function corrigeLayerPath($l,$map){
+	//apenas para shapefile
+	if($l->connectiontype == MS_SHAPEFILE){
+		//error_log($map->shapepath);
+		if($map->shapepath != ""){
+			//o nome do arquivo pode conter .shp ou nao
+			if(file_exists($map->shapepath."/".$l->data)){
+				$l->set("data",$map->shapepath."/".$l->data);
+			}
+			if(file_exists($map->shapepath."/".$l->data.".shp")){
+				$l->set("data",$map->shapepath."/".$l->data.".shp");
+			}
+			//error_log($l->data);
+		}
+	}
+}
 ?>

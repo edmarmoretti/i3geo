@@ -1166,7 +1166,7 @@ i3GEO.arvoreDeTemas = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.arvoreDeTemas.montaArvore()");
 
-		var mais = "", tempNode, tempNode1, retorno, root, insp, outrasOpcoes, dados, c, i, j, conteudo, editor;
+		var mais = "", tempNode, tempNode1, retorno, root, insp, outrasOpcoes, dados, c, i, j, conteudo = "", editor;
 		(function() {
 			function changeIconMode() {
 				buildTree();

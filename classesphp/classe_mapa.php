@@ -1363,6 +1363,7 @@ class Mapa
 							}
 						}
 						corrigeLayerGrid($nlayer,$l);
+						corrigeLayerPath($l,$this->mapa);
 					}
 				}
 			}

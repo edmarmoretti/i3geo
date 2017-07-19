@@ -635,7 +635,6 @@ i3GEO.editorOL = {
 		i3GEO.editorOL.mapa.zoomToExtent(b);
 	},
 	mostraLegenda: function(){
-		console.info(i3GEO.editorOL.layersLigados())
 		var layers = i3GEO.editorOL.layersLigados(),
 			nlayers = layers.length,
 			ins = "",i, icone = "",
@@ -1179,10 +1178,11 @@ i3GEO.editorOL = {
 						i3GEO.editorOL.removeClone();
 					},
 					beforegetfeatureinfo: function(event){
+						var ativo = [];
 						if(i3GEO.editorOL.layerDefault && i3GEO.editorOL.layerDefault != ""){
-							var ativo = i3GEO.editorOL.layerPorParametro("LAYERS",i3GEO.editorOL.layerDefault);
+							ativo = i3GEO.editorOL.layerPorParametro("LAYERS",i3GEO.editorOL.layerDefault);
 						} else {
-							var ativo = [i3GEO.editorOL.layerAtivo()];
+							ativo = [i3GEO.editorOL.layerAtivo()];
 						}
 						//se for TMS tem de pegar o clone wms
 						if(ativo[0].serviceVersion === "&tms=" || ativo[0].CLASS_NAME == "OpenLayers.Layer.TMS" || ativo[0].CLASS_NAME == "OpenLayers.Layer.OSM"){

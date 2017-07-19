@@ -40,6 +40,7 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.mapa =
 	{
+		BALAOATIVO: true,
 		/**
 		 * Propriedade: TEMASINICIAISLIGADOS
 		 *
@@ -132,17 +133,6 @@ i3GEO.mapa =
 			}
 			i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
 			i3GEO.eventos.MOUSECLIQUE = ["i3GEO.mapa.dialogo.verificaTipDefault()"];
-			/*
-			if (i3GEO.eventos.cliquePerm.ativo === false) {
-				// na opcao de identificacao so e permitido um evento
-				i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
-				i3GEO.eventos.MOUSECLIQUE = ["i3GEO.mapa.dialogo.verificaTipDefault()"];
-			} else {
-				// desativa as outras operacoes de clique, mas apenas se nao for a mesma que ativa o identifica
-				i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
-				i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.verificaTipDefault()"]);
-			}
-			*/
 			i3GEO.eventos.cliquePerm.ativa();
 		},
 		/**
@@ -969,6 +959,12 @@ i3GEO.mapa =
 				if (typeof (console) !== 'undefined')
 					console.info("i3GEO.mapa.dialogo.verificaTipDefault()");
 
+				if(i3GEO.mapa.BALAOATIVO == false){
+					if (typeof (console) !== 'undefined')
+						console.info("balao desativado");
+
+					return;
+				}
 				if(i3GEO.eventos.cliquePerm.ativo == false){
 					return;
 				}
@@ -978,6 +974,7 @@ i3GEO.mapa =
 				} else {
 					i3GEO.eventos.cliquePerm.status = false;
 				}
+
 				var ntemas, etiquetas, j, x = objposicaocursor.ddx, y = objposicaocursor.ddy;
 				if(x === -1 || y === -1){
 					return;

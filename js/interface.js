@@ -1528,6 +1528,8 @@ i3GEO.Interface =
 			 * Registra os eventos que capturam o posicionamento do mouse e outros
 			 */
 			registraEventos : function() {
+				if (typeof (console) !== 'undefined')
+					console.info("registraEventos openlayers");
 				// essa variavel guarda a posicao do mapa na tela
 				// e usada em vercoes com dispositivo touche para melhorar a performance
 				i3GEOtouchesPosMapa = "";
@@ -1567,13 +1569,14 @@ i3GEO.Interface =
 					i3GEO.Interface.STATUS.pan = false;
 					i3GEO.eventos.navegaMapa();
 					i3GEO.util.escondePin();
-
 					i3GEO.eventos.cliquePerm.status = false;
 					// guarda a extensao geografica atual
-
 					i3GEO.Interface.STATUS.pan = false;
 				});
 				i3geoOL.on("pointermove", function(e) {
+					//if (typeof (console) !== 'undefined')
+					//	console.info("pointermove");
+
 					if (modoAtual === "move") {
 						return;
 					}

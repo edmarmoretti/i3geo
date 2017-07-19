@@ -356,6 +356,7 @@ function verifica($map,$solegenda,$tabela,$cache="sim"){
 				$layerAdicionado = ms_newLayerObj($mapa, $layern);
 
 				corrigeLayerGrid($layern,$layerAdicionado);
+				corrigeLayerPath($layerAdicionado,$mapa);
 				/*
 				if ($layern->data == ""){
 					$dados = $layern->connection;

@@ -785,6 +785,7 @@ else{
 							}
 							$layerAdicionado = ms_newLayerObj($oMap, $l);
 							corrigeLayerGrid($l,$layerAdicionado);
+							corrigeLayerGrid ( $layerAdicionado,$oMap );
 						}
 						else{
 							//a camada nao pode ser usada como servico WMS, entao e enviada uma mensagem

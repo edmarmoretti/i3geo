@@ -704,6 +704,7 @@ function adaptaLayers($tmpfname,$versao){
 			$layer->setmetadata("CACHE","nao");
 			$layer->setfilter($filtro);
 		}
+		corrigeLayerPath($layer,$mapa);
 	}
 	$mapa->save($tmpfname);
 	erroCriacao();

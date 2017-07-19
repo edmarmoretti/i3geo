@@ -339,6 +339,7 @@ var i3GEO = {
 			i3GEO.catalogoMenus.IDSMENUS = (c.components.hasOwnProperty("idsMenus")) ? c.components.idsMenus : [];
 			i3GEO.busca.SERVICO = (c.components.hasOwnProperty("searchService")) ? c.components.searchService : "";
 			i3GEO.busca.SERVICOWMS = (c.components.hasOwnProperty("searchWms")) ? c.components.searchWms : "";
+			i3GEO.mapa.BALAOATIVO = (c.components.hasOwnProperty("info")) ? c.components.info : true;
 			if(c.components.referenceMapPosition){
 				i3GEO.maparef.TOP = c.components.referenceMapPosition[0];
 				i3GEO.maparef.RIGHT = c.components.referenceMapPosition[1];

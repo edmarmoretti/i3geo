@@ -241,6 +241,7 @@ function testaMapaImg($tema) {
 
 		$layerAdicionado = ms_newLayerObj ( $mapa, $layern );
 
+		corrigeLayerGrid ( $layerAdicionado,$mapa );
 		corrigeLayerGrid ( $layern, $layerAdicionado );
 		$pegarext = $layern->name;
 	}
