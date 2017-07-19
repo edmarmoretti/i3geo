@@ -462,6 +462,8 @@ i3GEO.Interface =
 					duration : 250
 				},
 				minWidth : '200px',
+				modal: false,
+				simple: true,
 				baloes : []
 			},
 			zoomli: function() {
@@ -1415,6 +1417,9 @@ i3GEO.Interface =
 			 * Liga ou desliga um layer
 			 */
 			ligaDesliga : function(obj) {
+				if (typeof (console) !== 'undefined')
+					console.info("i3GEO.Interface.openlayers.ligaDesliga()");
+
 				var layers = i3geoOL.getLayersByName(obj.value), desligar = "", ligar = "", b;
 				if (layers.length > 0) {
 					layers[0].setVisibility(obj.checked);
@@ -1433,19 +1438,7 @@ i3GEO.Interface =
 					desligar = obj.value;
 					i3GEO.arvoreDeCamadas.alteraPropCamadas("status", "0", obj.value);
 				}
-				// i3GEO.php.ligatemas(temp,desligar,ligar);
-				// beacons pattern
-				b = new Image();
-				b.src =
-					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?funcao=ligatemasbeacon&desligar="
-						+ desligar
-						+ "&ligar="
-						+ ligar
-						+ "&adicionar=nao&g_sid="
-						+ i3GEO.configura.sid;
-				b.onerror = function() {
-					i3GEO.legenda.atualiza();
-				};
+				i3GEO.php.ligatemas(i3GEO.legenda.atualiza,desligar,ligar);
 			},
 			/**
 			 * Define um dos layers existentes no mapa como baselayer
@@ -1997,6 +1990,8 @@ i3GEO.Interface =
 			posfixo : 0,
 			BALAOPROP : {
 				removeAoAdicionar : true,
+				modal: false,
+				simple: true,
 				classeCadeado : "i3GEOiconeAberto",
 				baloes : []
 			},

@@ -340,9 +340,20 @@ var i3GEO = {
 			i3GEO.busca.SERVICO = (c.components.hasOwnProperty("searchService")) ? c.components.searchService : "";
 			i3GEO.busca.SERVICOWMS = (c.components.hasOwnProperty("searchWms")) ? c.components.searchWms : "";
 			i3GEO.mapa.BALAOATIVO = (c.components.hasOwnProperty("info")) ? c.components.info : true;
+			i3GEO.mapa.INFOTEMPLATE = (c.components.hasOwnProperty("infoTemplate") && c.components.infoTemplate != "") ? c.components.infoTemplate : i3GEO.configura.locaplic + i3GEO.mapa.INFOTEMPLATE;
 			if(c.components.referenceMapPosition){
 				i3GEO.maparef.TOP = c.components.referenceMapPosition[0];
 				i3GEO.maparef.RIGHT = c.components.referenceMapPosition[1];
+			}
+			if(c.components.tooltip){
+				var p = i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP;
+				p.removeAoAdicionar = (c.components.tooltip.hasOwnProperty("removeAoAdicionar")) ? c.components.tooltip.removeAoAdicionar : true;
+				p.autoPan = (c.components.tooltip.hasOwnProperty("autoPan")) ? c.components.tooltip.autoPan : true;
+				p.modal = (c.components.tooltip.hasOwnProperty("modal")) ? c.components.tooltip.modal : false;
+				p.simple = (c.components.tooltip.hasOwnProperty("simple")) ? c.components.tooltip.simple : true;
+				p.minWidth = (c.components.tooltip.hasOwnProperty("minWidth")) ? c.components.tooltip.minWidth : '';
+				p.url = (c.components.tooltip.hasOwnProperty("url")) ? c.components.tooltip.url : '200px';
+				p.autoPanAnimation = (c.components.tooltip.hasOwnProperty("autoPanAnimation")) ? c.components.tooltip.autoPanAnimation : p.autoPanAnimation;
 			}
 		}
 		if(c.hasOwnProperty("openLayers") && c.mapType !== "GM" ){
