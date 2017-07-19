@@ -324,10 +324,7 @@ var i3GEO = {
 		i3GEO.configura.guardaExtensao = (c.hasOwnProperty("saveExtension") && c.saveExtension == true) ? true:false;
 		//TODO implementar composite para versao 7 do Mapserver
 		i3GEO.configura.tipoimagem = (c.hasOwnProperty("posRenderType") && c.posRenderType != "") ? c.posRenderType:"nenhum";
-		if(c.hasOwnProperty("toolTipSize") && c.toolTipSize.length > 1){
-			i3GEO.configura.alturatip = c.toolTipSize[0];
-			i3GEO.configura.larguratip = c.toolTipSize[1];
-		}
+
 		i3GEO.configura.locaplic = (c.hasOwnProperty("i3GeoServer") && c.i3GeoServer != "") ? c.i3GeoServer:i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";
 		if(c.hasOwnProperty("tools")){
 			i3GEO.configura.ferramentas = c.tools;
@@ -350,10 +347,16 @@ var i3GEO = {
 				p.removeAoAdicionar = (c.components.tooltip.hasOwnProperty("removeAoAdicionar")) ? c.components.tooltip.removeAoAdicionar : true;
 				p.autoPan = (c.components.tooltip.hasOwnProperty("autoPan")) ? c.components.tooltip.autoPan : true;
 				p.modal = (c.components.tooltip.hasOwnProperty("modal")) ? c.components.tooltip.modal : false;
+				p.url = (c.components.tooltip.hasOwnProperty("url")) ? c.components.tooltip.url : "";
+				p.templateModal = (c.components.tooltip.hasOwnProperty("templateModal")) ? c.components.tooltip.templateModal : "";
 				p.simple = (c.components.tooltip.hasOwnProperty("simple")) ? c.components.tooltip.simple : true;
 				p.minWidth = (c.components.tooltip.hasOwnProperty("minWidth")) ? c.components.tooltip.minWidth : '';
 				p.url = (c.components.tooltip.hasOwnProperty("url")) ? c.components.tooltip.url : '200px';
 				p.autoPanAnimation = (c.components.tooltip.hasOwnProperty("autoPanAnimation")) ? c.components.tooltip.autoPanAnimation : p.autoPanAnimation;
+				if(c.components.tooltip.hasOwnProperty("toolTipSize")){
+					i3GEO.configura.alturatip = c.components.tooltip.toolTipSize[0];
+					i3GEO.configura.larguratip = c.components.tooltip.toolTipSize[1];
+				}
 			}
 		}
 		if(c.hasOwnProperty("openLayers") && c.mapType !== "GM" ){

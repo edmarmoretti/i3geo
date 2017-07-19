@@ -644,8 +644,6 @@
 			saveExtension : true,
 			//aplica um filtro de cores apos a renderizacao da imagem de cada camada que compoe o mapa cinza|sepiaclara|sepianormal
 			posRenderType : "",
-			//Altura e largura do tooltip (balao identifica)
-			toolTipSize : ["100px","200px"],
 			//Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
 			//Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
 			i3GeoServer : "",
@@ -683,9 +681,15 @@
 					//o resultado sera mostrado em uma janela do tipo modal
 					modal : false,
 					//url que sera utilizada para obter os dados via $.get. Deve estar no mesmo dominio do i3Geo.
-					//Ao final da url serao inseridos os parametros &xx=&yy= em decioms de grau
+					//Ao final da url serao inseridos os parametros &xx=&yy= com valores em decimos de grau
 					//use apenas se modal for true
+					//exemplo: http://i3geo.saude.gov.br/i3geo/sage_tabelas/odm/odm6.php?
 					url: "",
+					//template que sera usado para compor o resultado da busca de dados
+					//se for vazio, serao utilizadas as outras opcoes
+					//se contiver a string {{{url}}} a mesma sera substituida por url
+					//exemplo: "<iframe style='width:400px;height:190px;border:0px white solid' src='{{{url}}}'></iframe>"
+					templateModal: "",
 					//serao mostrados todos os dados ou apenas aqueles definidos na configuracao da camada
 					simple: true,
 					removeAoAdicionar : true,
@@ -694,7 +698,9 @@
 					autoPanAnimation : {
 						duration : 250
 					},
-					minWidth : '200px'
+					minWidth : '200px',
+					//Altura e largura do tooltip (balao)
+					toolTipSize : ["100px","200px"]
 				}
 			},
 			//parametros de configuracao das ferramentas que sao acionadas sob demanda

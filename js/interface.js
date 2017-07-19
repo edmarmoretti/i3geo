@@ -455,6 +455,8 @@ i3GEO.Interface =
 			 */
 			googleLike : false,
 			BALAOPROP : {
+				url: "",
+				templateModal: "",
 				removeAoAdicionar : true,
 				classeCadeado : "i3GEOiconeAberto",
 				autoPan : true,
@@ -1989,6 +1991,8 @@ i3GEO.Interface =
 			 */
 			posfixo : 0,
 			BALAOPROP : {
+				url: "",
+				templateModal: "",
 				removeAoAdicionar : true,
 				modal: false,
 				simple: true,
