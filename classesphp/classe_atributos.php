@@ -1238,7 +1238,6 @@ class Atributos
 				$temas = $this->mapa->getalllayernames();
 			}
 			foreach ($temas as $tem){
-
 				$vermultilayer = new vermultilayer();
 				$vermultilayer->verifica($this->arquivo,$tem);
 				if ($vermultilayer->resultado == 1) {
@@ -1292,7 +1291,7 @@ class Atributos
 				$listatemas[] = $this->nome;
 			}
 			foreach ($listatemas as $tema){
-				$resultados[$tema] = $this->identificaQBP3($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt);
+				$resultados[$tema] = $this->identificaQBP3($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt,true);
 			}
 		}
 		//pesquisa todos os temas acrescentados no mapa
@@ -1317,7 +1316,6 @@ class Atributos
 				$l = $this->mapa->getlayerbyname($tema);
 				$resultados[$tema] = $this->identificaQBP3($tema,$xyarray[0],$xyarray[1],"",$resolucao,"","",false,$ext,$wkt);
 			}
-			//var_dump($resultados);
 		}
 		//pesquisa apenas os temas com tip
 		if ($opcao == "tip"){
@@ -2100,8 +2098,7 @@ class Atributos
 
 	$etip  {booblean} - indica se a solicita&ccedil;&atilde;o &eacute; para obten&ccedil;&atilde;o dos dados do tipo etiqueta
 	*/
-	function identificaQBP3($tema="",$x=0,$y=0,$map_file="",$resolucao=0,$item="",$tiporetorno="",$etip=false,$ext="",$wkt="nao"){
-		//$wkt = "sim";
+	function identificaQBP3($tema="",$x=0,$y=0,$map_file="",$resolucao=0,$item="",$tiporetorno="",$etip=false,$ext="",$wkt="nao",$todosItens = false){
 		if($map_file == ""){
 			$mapa = $this->mapa;
 			$map_file = $this->arquivo;
@@ -2113,7 +2110,6 @@ class Atributos
 			$extmapa = $mapa->extent;
 			$e = explode(" ",$ext);
 			$extmapa->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
-			//$mapa->save($this->arquivo);
 		}
 		if($tema == ""){
 			$layer = $this->layer;
@@ -2168,10 +2164,7 @@ class Atributos
 			$res = str_replace("INFOFORMAT","INFO_FORMAT",$res);
 			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
 			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
-			//echo $res." ".$res2;exit;
-
 			$resposta = file($res);
-			//var_dump($resposta);exit;
 			$n = array();
 			if(strtoupper($formatoinfo) != "TEXT/HTML" && strtoupper($formatoinfo) != "MIME"){
 				foreach($resposta as $r){
@@ -2190,7 +2183,6 @@ class Atributos
 				}
 				//caso esri
 				if(count($n) > 0 && $n[0] == ""){
-					//error_reporting(0);
 					$resposta = file($res);
 					$cabecalho = str_replace('"   "','"|"',$resposta[0]);
 					$cabecalho = explode("|",$cabecalho);
@@ -2208,7 +2200,6 @@ class Atributos
 					}
 				}
 			}
-			//var_dump($n);exit;
 			$id = nomeRandomico();
 			if(count($n) == 0 && strtoupper($formatoinfo) != "TEXT/HTML"){
 				$formatoinfo = "MIME";
@@ -2255,28 +2246,24 @@ class Atributos
 		else{
 			$itens = explode(",",$itens);
 		}
-
 		if($itensdesc == ""){
 			$itensdesc = $itensLayer;
-		}//array_fill(0, $nitens-1,'');}
+		}
 		else{
 			$itensdesc = explode(",",$itensdesc);
 		}
-
 		if($lks == ""){
 			$lks = array_fill(0, count($itens),'');
 		}
 		else{
 			$lks = explode(",",$lks);
 		}
-
 		if($itemimg == ""){
 			$itemimg = array_fill(0, count($itens),'');
 		}
 		else{
 			$itemimg = explode(",",$itemimg);
 		}
-
 		if($locimg == ""){
 			$locimg = array_fill(0, count($itens),'');
 		}
@@ -2286,7 +2273,7 @@ class Atributos
 		$tips = str_replace(" ",",",$tips);
 		$tips = explode(",",$tips);
 		//o retorno deve ser do tipo TIP
-		if($etip == true){
+		if($etip == true || $todosItens = true){
 			$temp = array_combine($itens,$itensdesc);
 			$templ = array_combine($itens,$lks);
 			$tempimg = array_combine($itens,$itemimg);
@@ -2296,7 +2283,7 @@ class Atributos
 			$lks = array();
 			$itemimg = array();
 			$locimg = array();
-			//foreach($tips as $t){
+
 			foreach($itensLayer as $t){
 				$itens[] = $t;
 				if($temp[$t] != ""){
