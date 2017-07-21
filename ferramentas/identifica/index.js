@@ -211,7 +211,7 @@ i3GEOF.identifica =
 					if (botao.value != "") {
 						i3GEO.mapa.ativaTema(botao.value);
 						i3GEOF.identifica.propJanelas[idjanela].tema = botao.value;
-						i3GEOF.identifica.buscaDadosTema(botao.value, x, y, idjanela);
+						i3GEOF.identifica.buscaDadosTema(botao.value, i3GEOF.identifica.propJanelas[idjanela].x, i3GEOF.identifica.propJanelas[idjanela].y, idjanela);
 					}
 				}
 			};
@@ -537,8 +537,8 @@ i3GEOF.identifica =
 		 */
 		montaListaSistemas : function(retorno) {
 			var l, divins, ig, sistema, pub, exec, temp, t, linhas = [], ltema, i, idjanela, n = i3GEOF.identifica.janelas.length;
-			if (retorno !== undefined) {
-				if (i3GEOF.identifica.sistemasAdicionais.length == 0) {
+			if (retorno !== undefined ) {
+				if (retorno.data && i3GEOF.identifica.sistemasAdicionais.length == 0) {
 					sis = retorno.data;
 					for (ig = 0; ig < sis.length; ig++) {
 						if (sis[ig].PUBLICADO && sis[ig].PUBLICADO.toLowerCase() == "sim" ) {
@@ -657,7 +657,7 @@ i3GEOF.identifica =
 		},
 		buscaDadosTemaJanela : function(idjanela, resolucao, opcao) {
 			i3GEOF.identifica.mostraImagemPonto(idjanela);
-			var temp = function(retorno) {
+			var f = function(retorno) {
 				// i3GEOF.identifica.dadosIdentifica = retorno.data;
 				if (retorno !== undefined) {
 					i3GEOF.identifica.mostraDadosTema(retorno.data, idjanela);
@@ -673,7 +673,7 @@ i3GEOF.identifica =
 			// importante: os temas editaveis nao utilizam alias em seus nomes
 			// se o usuario estiver logado
 			i3GEO.php.identifica3(
-					temp,
+					f,
 					i3GEOF.identifica.propJanelas[idjanela].x,
 					i3GEOF.identifica.propJanelas[idjanela].y,
 					resolucao,

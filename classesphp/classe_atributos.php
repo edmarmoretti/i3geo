@@ -2421,7 +2421,7 @@ class Atributos
 							$conta = $conta + 1;
 						}
 
-						if($wkt == "sim" || strtolower($layer->getmetadata("wkttip")) == "sim"){
+						if($wkt == "sim" && strtolower($layer->getmetadata("wkttip")) == "sim"){
 							$arraytemp = array(
 									"alias"=>"wkt",
 									"valor"=>$shape->towkt(),

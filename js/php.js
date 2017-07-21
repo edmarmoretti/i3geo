@@ -1017,6 +1017,9 @@ i3GEO.php =
 		 * Identifica um ponto no mapa
 		 */
 		identifica3 : function(funcao, x, y, resolucao, opcao, locaplic, sid, tema, ext, listaDeTemas, wkt) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.php.identifica3()");
+
 			if(x === null || y === null){
 				return;
 			}
@@ -1048,6 +1051,7 @@ i3GEO.php =
 				par += "&tema=" + tema;
 			}
 			cpJSON.call(p, "identifica", funcao, par);
+			return;
 		},
 		/**
 		 * Function: reiniciaMapa

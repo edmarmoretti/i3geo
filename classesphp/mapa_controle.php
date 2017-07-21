@@ -2036,7 +2036,6 @@ switch (strtoupper($funcao))
 		}
 		$m = new Atributos($map_file,$tema,"",$ext);
 		$retorno = $m->identifica3($opcao,$xy,$resolucao,$ext,$listaDeTemas,$wkt);
-		//$retorno["xy"] = $xy;
 		break;
 		/*
 		 Valor: IDENTIFICAUNICO

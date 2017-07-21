@@ -1021,7 +1021,7 @@ i3GEO.mapa =
 						"ligados",
 						i3GEO.parametros.mapexten,
 						"",
-				"nao");
+				"sim");
 			}
 		},
 		montaTip: function (retorno){
