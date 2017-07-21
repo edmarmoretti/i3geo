@@ -24,7 +24,7 @@ body {
 <!--begin custom header content for this example-->
 
 <style type="text/css">
-	#container { position: relative; padding: 6px; background-color: #eeeeee; width: 300px; height:200px; }
+	#container { position: relative; padding: 6px; background-color: #477596; width: 340px; height:220px; }
 	.yui-picker-controls li {padding: 01px;}
 </style>
 <!--end custom header content for this example-->
@@ -34,7 +34,7 @@ body {
 <!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
 <div id="container">
 </div>
-<button onclick="aplicarCor()" style="position:absolute;top:188px"  >aplicar</button>
+<button onclick="aplicarCor()" style="position:absolute;top:198px"  >aplicar</button>
 <!--We'll use these to trigger interactions with the Color Picker
 API -->
 <script type="text/javascript">
@@ -56,8 +56,10 @@ API -->
 			picker.on("rgbChange", onRgbChange);
 			document.getElementById("yui-picker-swatch").style.display = "none";
 			document.getElementById("yui-picker-controls").style.top = "0px";
-			document.getElementById("yui-picker-websafe-swatch").style.left = "245px";
-			document.getElementById("yui-picker-websafe-swatch").style.top = "185px";
+			document.getElementById("yui-picker-websafe-swatch").style.left = "85px";
+			document.getElementById("yui-picker-websafe-swatch").style.top = "199px";
+			document.getElementById("yui-picker-websafe-swatch").style.width = "100px";
+
 			Event.on("reset", "click", function(e) {
 				picker.setValue([255, 255, 255], false);
 

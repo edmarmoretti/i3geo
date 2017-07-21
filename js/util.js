@@ -881,14 +881,14 @@ i3GEO.util =
 			if (wdocaiframe) {
 				wdocaiframe.style.display = "block";
 				wdocaiframe.src = wsrc;
-				wdocaiframe.style.height = "230px";
-				wdocaiframe.style.width = "325px";
+				wdocaiframe.style.height = "250px";
+				wdocaiframe.style.width = "355px";
 				wdocaiframe.style.border = "0px solid white";
 			}
 			janela = new YAHOO.widget.Panel(id, {
 				height : "290px",
 				modal : false,
-				width : "350px",
+				width : "360px",
 				fixedcenter : true,
 				constraintoviewport : false,
 				visible : true,
