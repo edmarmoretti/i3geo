@@ -11,7 +11,7 @@ i3GEOF.identifica.dicionario = {
 		es : ""
 	} ],
 	'temasVisiveis' : [ {
-		pt : "Temas vis&iacute;veis",
+		pt : "Resultado",
 		en : "",
 		es : ""
 	} ],
@@ -36,7 +36,7 @@ i3GEOF.identifica.dicionario = {
 		es : ""
 	} ],
 	'resolucaoBusca' : [ {
-		pt : "Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&aacute; utilizado na busca de dados",
+		pt : "Resolu&ccedil;&atilde;o de busca - n&uacute;mero de pixels, no entorno do ponto clicado no mapa, que ser&atilde;o utilizados na busca de dados",
 		en : "",
 		es : ""
 	} ],
@@ -137,11 +137,6 @@ i3GEOF.identifica.dicionario = {
 	} ],
 	'atualizaJanela' : [ {
 		pt : "Atualiza essa janela",
-		en : "",
-		es : ""
-	} ],
-	'resultado' : [ {
-		pt : "Resultado",
 		en : "",
 		es : ""
 	} ]

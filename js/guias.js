@@ -299,6 +299,9 @@ i3GEO.guias =
 					}
 				},
 				click : function() {
+					if (typeof (console) !== 'undefined')
+						console.info("i3GEO.guias dobraPagina.click");
+
 					i3GEO.Interface.atual2gm.insereIcone = false;
 					i3GEO.Interface.atual2ol.insereIcone = false;
 					if (i3GEO.Interface.ATUAL === "googlemaps") {
@@ -314,7 +317,7 @@ i3GEO.guias =
 						i3GEO.Interface.atual2gm.inicia();
 						i3GEO.guias.CONFIGURA.dobraPagina.icone = "imagens/openlayers.png";
 					}
-					$i("guia6").src = i3GEO.configura.locaplic + "/" + i3GEO.guias.CONFIGURA.dobraPagina.icone;
+					$i("iconeTrocaInterface").src = i3GEO.configura.locaplic + "/" + i3GEO.guias.CONFIGURA.dobraPagina.icone;
 				}
 			},
 			"buscaRapida" : {

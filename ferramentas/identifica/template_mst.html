@@ -1,57 +1,44 @@
-<div id='{{{idjanelaA}}}i3GEOidentificaguiasYUI' class='yui-navset' style='overflow: hidden;top: 0px; cursor: pointer; left: 0px;'>
+<!-- Guias -->
+<div id='{{{idjanela}}}i3GEOidentificaguiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; margin-left: 2px;'>
 	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
 		<li>
-			<div id='{{{idjanelaA}}}i3GEOidentificaguia3' style='text-align: center; left: 0px;'>
-				<a>
-					<em><img class='ticPropriedades2' style='height: 14px' title='{{{propriedades}}}' src='{{{locaplic}}}/imagens/branco.gif'> </em>
+			<div id='{{{idjanela}}}i3GEOidentificaguia3' style='text-align: center; left: 0px;'>
+				<a title='{{{propriedades}}}'>
+					<em><span class="material-icons">settings</span></em>
 				</a>
 			</div>
 		</li>
 		<li>
-			<div id='{{{idjanelaA}}}i3GEOidentificaguia1' style='text-align: center; left: 0px;'>
-				<a><em>{{{temasVisiveis}}}</em></a>
+			<div id='{{{idjanela}}}i3GEOidentificaguia1' style='text-align: center; left: 0px;'>
+				<a>
+					<em>{{{resultado}}}</em>
+				</a>
 			</div>
 		</li>
 		<li>
-			<div id='{{{idjanelaA}}}i3GEOidentificaguia2' style='text-align: center; left: 0px;'>
-				<a><em>{{{todos}}}</em></a>
-			</div>
-		</li>
-		<li>
-			<div id='{{{idjanelaA}}}i3GEOidentificaguia4' style='text-align: center; left: 0px;'>
-				<a><em>{{{etiquetas}}}</em></a>
-			</div>
-		</li>
-		<li>
-			<div id='{{{idjanelaA}}}i3GEOidentificaguia5' style='text-align: center; left: 0px;'>
-				<a><em>XY/buffer</em></a>
+			<div id='{{{idjanela}}}i3GEOidentificaguia5' style='text-align: center; left: 0px;'>
+				<a>
+					<em>XY/buffer</em>
+				</a>
 			</div>
 		</li>
 	</ul>
 </div>
-<div class='guiaobj' id='{{{idjanelaA}}}i3GEOidentificaguia1obj' style='overflow:auto;width:97%;height:90%;left: 1px;'>
-	<div id='{{{idjanelaA}}}i3GEOidentificatemaativo' class='geralFerramentas' style='overflow: hidden; display: block; position: relative; top: -5px; left: 0px; width: 150px'>
-		<div style='left: 0px; width: 150px; text-align: left;' id='{{{idjanelaA}}}i3GEOidentificalistaTemas'></div>
-		<div style='left: 0px; width: 150px; text-align: left;' id='{{{idjanelaA}}}i3GEOidentificalistaSistemas'></div>
+<!-- Resultado -->
+<div class='container-fluid' id='{{{idjanela}}}i3GEOidentificaguia1obj'></div>
+
+<!-- propriedades -->
+<div class='container-fluid' id='{{{idjanela}}}i3GEOidentificaguia3obj'>
+	<div class='form-group label-fixed'>
+		<label class="control-label" for="{{{idjanela}}}i3GEOtabelafiltro1">{{{resolucaoBusca}}}</label>
+		<input class="form-control input-lg" type='text' id='{{{idjanela}}}i3GEOidentificaresolucao' value='10' />
 	</div>
-	<div id='{{{idjanelaA}}}i3GEOidentificaocorrencia' style='overflow: hidden; font-size: 10px; display: block; position: absolute; top: 5px; left: 165px; width: 60%'></div>
+
+	<div id='{{{idjanela}}}i3GEOidentificalistaSistemas'></div>
 </div>
-<div class='guiaobj' id='{{{idjanelaA}}}i3GEOidentificaguia2obj' style='left: 1px'></div>
-<div class='guiaobj' id='{{{idjanelaA}}}i3GEOidentificaguia3obj' style='left: 1px; top: 10px; display: none; font-size: 12px; overflow: hidden'>
-	{{{resolucaoBusca}}}:<br> <br>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' value='10' id='{{{idjanelaA}}}i3GEOidentificaresolucao' />
-	</div>
-	<br> <br>
-</div>
-<div class='guiaobj' id='{{{idjanelaA}}}i3GEOidentificaguia4obj' style='left: 1px; top: 10px; display: none; font-size: 12px; overflow: hidden'>
-	{{{mostraEtiquetas}}} <br> <br> <input id='{{{idjanelaA}}}i3GEOidentificabotao1' size='20' type='button' value='{{{configuraEtiqueta}}}' />
-</div>
-<div class='guiaobj' id='{{{idjanelaA}}}i3GEOidentificaguia5obj' style='overflow:auto;width:97%;height:90%;left: 1px; display: none; font-size: 12px;'>
-	<b>{{{valorPonto}}}<br></b>
-	<div id='{{{idjanelaA}}}i3GEOidentificacoord'></div>
-	<br>
-	<input id='{{{idjanelaA}}}i3GEOidentificabotao2' size='20' type='button' value='{{{criaBuffer}}}' /><br>
-	<br>
-	<div id='{{{idjanelaA}}}i3GEOidentificacoordtexto' style='text-align: left'></div>
+<!-- coordenadas e buffer -->
+<div class='container-fluid' id='{{{idjanela}}}i3GEOidentificaguia5obj'>
+	<h5>{{{valorPonto}}}</h5>
+	<div id='{{{idjanela}}}i3GEOidentificacoord'></div>
+	<a href='javascript:void(0)' onclick="i3GEOF.identifica.buffer('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{criaBuffer}}}</a>
 </div>

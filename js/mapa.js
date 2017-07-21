@@ -933,13 +933,14 @@ i3GEO.mapa =
 				// javascript nao foi carregado
 				if (typeof (i3GEOF.identifica) === 'undefined') {
 					// javascript que sera carregado
-					var js = i3GEO.configura.locaplic + "/ferramentas/identifica/dependencias.php", temp = function() {
-						if (x) {
-							i3GEOF.identifica.criaJanelaFlutuante(x, y);
-						} else {
-							i3GEOF.identifica.criaJanelaFlutuante(objposicaocursor.ddx, objposicaocursor.ddy);
-						}
-					};
+					var js = i3GEO.configura.locaplic + "/ferramentas/identifica/dependencias.php",
+						temp = function() {
+							if (x) {
+								i3GEOF.identifica.criaJanelaFlutuante(x, y);
+							} else {
+								i3GEOF.identifica.criaJanelaFlutuante(objposicaocursor.ddx, objposicaocursor.ddy);
+							}
+						};
 					// carrega o script
 					i3GEO.util.scriptTag(js, temp, "i3GEOF.identifica_script");
 				} else {

@@ -30,7 +30,7 @@ Botoes material
     color: #BDBDBD;
     font-weight: initial;
 }
-.form-group.label-floating.is-focused > label, .form-group.label-static.is-focused > label, .form-group.label-floating.is-empty.is-focused > label, .form-group.condensed.is-focused > label, .form-group.is-focused > label {
+.form-group.label-fixed.is-focused > label,.form-group.label-floating.is-focused > label, .form-group.label-static.is-focused > label, .form-group.label-floating.is-empty.is-focused > label, .form-group.condensed.is-focused > label, .form-group.is-focused > label {
 	color: #BDBDBD;
 }
 /*

@@ -1163,9 +1163,9 @@ g_traducao =
 		],
 		"d7t" : [
 			{
-				pt : "Clique para identificar",
-				en : "Click to identify",
-				es : "Click para identificar"
+				pt : "Info",
+				en : "Info",
+				es : "Info"
 			}
 		],
 		"d7a" : [

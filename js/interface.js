@@ -129,7 +129,6 @@ i3GEO.Interface =
 			insereIcone: true,
 			inicia : function() {
 				i3GEO.Interface.STATUS.trocando = true;
-				i3GEO.janela.ESTILOAGUARDE = "normal";
 				try {
 					if (google) {
 						i3GEO.Interface.atual2gm.initemp();
@@ -142,17 +141,37 @@ i3GEO.Interface =
 				// AJAX API is loaded successfully. Now lets load the maps api
 				google.load("maps", "3", {
 					callback : "i3GEO.Interface.atual2gm.initemp",
-					other_params : "sensor=false&key=" + i3GEO.parametros.googleApiKey
+					other_params : "key=" + i3GEO.parametros.googleApiKey
 				});
 			},
 			initemp : function() {
+				if (typeof (console) !== 'undefined')
+					console.info("i3GEO.Interface.atual2gm.initemp()");
+
 				var temp = function() {
 					$i(i3GEO.Interface.IDCORPO).innerHTML = "";
 					i3GEO.Interface.ATUAL = "googlemaps";
 					i3GEO.Interface.cria(i3GEO.parametros.w, i3GEO.parametros.h);
-					// i3GEO.Interface.googlemaps.cria();
+
+					i3GEO.Interface.googlemaps.MAPOPTIONS = {
+						mapTypeId : "roadmap",
+						scaleControl : true,
+						mapTypeControl : true,
+						mapTypeControlOptions: {
+							position : google.maps.ControlPosition.LEFT_BOTTOM
+						},
+						zoomControl:true,
+						zoomControlOptions: {
+							style : google.maps.ZoomControlStyle.SMALL,
+							position : google.maps.ControlPosition.LEFT_CENTER
+						},
+						streetViewControl : true,
+						streetViewControlOptions: {
+							position : google.maps.ControlPosition.LEFT_CENTER
+						}
+					};
+
 					i3GEO.Interface.googlemaps.inicia();
-					i3GEO.janela.fechaAguarde("googleMapsAguarde");
 					i3GEO.arvoreDeCamadas.CAMADAS = [];
 					i3GEO.atualiza();
 				};

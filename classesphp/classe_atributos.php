@@ -1238,6 +1238,7 @@ class Atributos
 				$temas = $this->mapa->getalllayernames();
 			}
 			foreach ($temas as $tem){
+
 				$vermultilayer = new vermultilayer();
 				$vermultilayer->verifica($this->arquivo,$tem);
 				if ($vermultilayer->resultado == 1) {
@@ -1250,7 +1251,7 @@ class Atributos
 				}
 				else{
 					$l = $this->mapa->getlayerbyname($tem);
-					if (($l->getmetadata("escondido") == "") && ($l->getmetadata("identifica") != "nao")){
+					if ((strtolower($l->getmetadata("escondido")) != "sim") && ($l->getmetadata("identifica") != "nao")){
 						$listatemas[] = $tem;
 					}
 				}

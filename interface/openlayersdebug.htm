@@ -187,7 +187,7 @@
 			</div>
 			<div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('dobraPagina',this)" style="margin-top: 3px;">
 				<button title="{{{trocaInterface}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/googlemaps.png" style="cursor: pointer; padding: 3px;">
+					<img id="iconeTrocaInterface" src="../imagens/googlemaps.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
 			<!-- Busca -->
@@ -430,7 +430,7 @@
 				<div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
 					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
-					<form>
+					<form onSubmit="return false;" >
 						<div class="form-group label-floating">
 							<label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>
 							<div class="input-group">
