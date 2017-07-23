@@ -138,18 +138,18 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'automatica' : [ {
 		pt : "autom&aacute;tica",
-		en : "",
-		es : ""
+		en : "automatic",
+		es : "autom&aacute;tica"
 	} ],
     'combo' : [ {
 		pt : "combo",
-		en : "",
-		es : ""
+		en : "combo",
+		es : "combo"
 	} ],
     'expandida' : [ {
 		pt : "expandida",
-		en : "",
-		es : ""
+		en : "expanded",
+		es : "expandida"
 	} ],
     'publicado' : [ {
 		pt : "Publicado (os n&atilde;o publicados s&atilde;o mostrados apenas para os usu&aacute;rios administradores)?",
