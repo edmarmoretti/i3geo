@@ -672,7 +672,7 @@ function pegaValoresM($mapa,$layer,$itens,$exclui="nulo",$selecionados="nao",$ch
 	$prjMapa = $mapa->getProjection();
 	$prjTema = $layer->getProjection();
 	$layer->set("template","none.htm");
-	$layer->setfilter("");
+	//$layer->setfilter("");
 
 	$indicesel = array();
 	//pega os valores dos indices dos elementos selecionados para comparacao posterior

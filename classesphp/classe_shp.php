@@ -409,7 +409,7 @@ array - xy
 		//error_reporting(0);
 		if(!$this->layer){return "erro";}
 		$this->layer->set("template","none.htm");
-		$this->layer->setfilter("");
+		//$this->layer->setfilter("");
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);
 		$xy = array();
 		foreach($shapes as $shape)

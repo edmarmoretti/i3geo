@@ -328,7 +328,7 @@ class Atributos
 			$this->mapa = extPadrao($this->mapa);
 		}
 		$this->layer->set("template","none.htm");
-		$this->layer->setfilter("");
+		//$this->layer->setfilter("");
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
 		$items = pegaItens($this->layer,$this->mapa);
 
@@ -408,7 +408,7 @@ class Atributos
 			$this->mapa = extPadrao($this->mapa);
 		}
 		$this->layer->set("template","none.htm");
-		$this->layer->setfilter("");
+		//$this->layer->setfilter("");
 		if ($this->layer->data == ""){
 			return "erro. O tema n&atilde;o tem tabela";
 		}
@@ -590,7 +590,7 @@ class Atributos
 			return "erro";
 		}
 		$this->layer->set("template","none.htm");
-		$this->layer->setfilter("");
+		//$this->layer->setfilter("");
 		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO"){
 			$convC = false;
 		}
@@ -658,7 +658,7 @@ class Atributos
 			$this->mapa = extPadrao($this->mapa);
 		}
 		$this->layer->set("template","none.htm");
-		$this->layer->setfilter("");
+		//$this->layer->setfilter("");
 		if ($this->layer->data == ""){
 			return "erro. O tema n&atilde;o tem tabela";
 		}
@@ -766,7 +766,7 @@ class Atributos
 			}
 			$filtro = $l->getfilterstring();
 			if ($filtro != ""){
-				$l->setfilter("");
+				//$l->setfilter("");
 			}
 			$sopen = $l->open();
 			if($sopen == MS_FAILURE){
@@ -858,7 +858,7 @@ class Atributos
 		$valores = array();
 		$filtro = $this->layer->getfilterstring();
 		if ($filtro != ""){
-			$this->layer->setfilter("");
+			//$this->layer->setfilter("");
 		}
 		//le o arquivo de query se existir e checa se existe sele&ccedil;&atilde;o para o tema
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa);

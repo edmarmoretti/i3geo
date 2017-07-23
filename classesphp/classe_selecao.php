@@ -785,7 +785,7 @@ $dir_tmp - localiza&ccedil;&atilde;o do diret&oacute;rio tempor&aacute;rio
 	function selecao2tema($locaplic,$dir_tmp)
 	{
 		if(!$this->layer){return "erro";}
-		$this->layer->setfilter("");
+		//$this->layer->setfilter("");
 		$nomeshp = criaSHP($this->nome,$this->arquivo,$locaplic,$dir_tmp,true,"",false);
 		$novolayer = criaLayer($this->mapa,$this->layer->type,MS_DEFAULT,"Sele&ccedil;&atilde;o de ".(pegaNome($this->layer))." (".$this->nome.")",$metaClasse="SIM");
 		if($this->layer->getprojection() != ""){

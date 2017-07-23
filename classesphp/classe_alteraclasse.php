@@ -1169,7 +1169,7 @@ class Alteraclasse
 	function pegaValores($mapa,$layer,$item,$numerico=false,$ignorar="")
 	{
 		$layer->set("template","none.htm");
-		$layer->setfilter("");
+		//$layer->setfilter("");
 		$versao = versao();
 		$versao = $versao["principal"];
 		$ignorararray = explode(",",$ignorar);
