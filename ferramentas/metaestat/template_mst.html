@@ -1,19 +1,21 @@
-<div style="margin-left: 5px;">
+<div class="metaestat" style="margin-left: 5px;">
 	<!--  usar span pq div tem Important -->
-	<span class="affix" style="width:270px" data-spy="affix" data-target="#i3geoCartoParametros_corpo" >
+	<div class="affix" style="width:270px" data-spy="affix" data-target="#i3geoCartoParametros_corpo" >
 		<span style="display:block;visibility:hidden" id="aguardeMetaestat">
 			<span class="progress" style="display:block; height:5px;width:100%;margin:0px;">
 				<span class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="margin:0px;width:100%">
 				</span>
 			</span>
 		</span>
-		<a href='javascript:void(0)' onclick="i3GEOF.metaestat.editor.inicia()" class='btn btn-primary btn-sm btn-raised'>{{{edicao}}}</a>
-		<a href='javascript:void(0)' onclick="i3GEOF.metaestat.analise.inicia()" class='btn btn-primary btn-sm btn-raised'>{{{analise}}}</a>
-		<a href='javascript:void(0)' onclick="i3GEOF.metaestat.principal.atualiza()" class='btn btn-primary btn-fab btn-fab-mini'><span class="material-icons md-18">refresh</span></a>
+		<span class="botoes">
+			<a href='javascript:void(0)' onclick="i3GEOF.metaestat.editor.inicia()" class='btn btn-primary btn-sm btn-raised'>{{{edicao}}}</a>
+			<a href='javascript:void(0)' onclick="i3GEOF.metaestat.analise.inicia()" class='btn btn-primary btn-sm btn-raised'>{{{analise}}}</a>
+			<a href='javascript:void(0)' onclick="i3GEOF.metaestat.principal.atualiza()" class='btn btn-primary btn-fab btn-fab-mini'><span class="material-icons md-18">refresh</span></a>
+		</span>
 		<a onclick="i3GEOF.metaestat.comum.adicionaCamada()" class='btn btn-danger btn-fab btn-fab-mini' href='javascript:void(0)' >
 			<span class="material-icons md-18">add</span>
 		</a>
-	</span>
+	</div>
 	<div style="top: 52px;">
 		<p class='paragrafo'>{{{selecionaVariavel}}}
 		</p>

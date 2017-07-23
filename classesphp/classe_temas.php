@@ -92,6 +92,7 @@ class Temas
 	Nome do arquivo de sele&ccedil;&atilde;o (.qy)
 	*/
 	public $qyfile;
+	public $qyfileTema;
 	/*
 	Variavel: $v
 
@@ -129,6 +130,7 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 		if($map_file != ""){
 			$map_file = str_replace(".map","",$map_file).".map";
 			$this->qyfile = str_replace(".map",".qy",$map_file);
+			$this->qyfileTema = dirname($map_file)."/".$tema."_qy.map";
 			$this->arquivo = $map_file;
 		}
 
@@ -508,13 +510,20 @@ $testa - Testa o filtro e retorna uma imagem.
 */
 	function insereFiltro($filtro,$testa="",$base64="nao")
 	{
+		$this->selecaoLimpa();
 		if($base64 == "sim"){
 			//$filtro = base64_decode($filtro);
 		}
+		$filtro = str_ireplace("select ","",$filtro);
+		$filtro = str_ireplace(" where ","",$filtro);
+		$filtro = str_ireplace("update","",$filtro);
+		$filtro = str_ireplace("delete","",$filtro);
 		foreach($this->indices as $indice){
 			$layer = $this->mapa->getlayer($indice);
 			$items = pegaItens($layer);
-			if(!$layer){return "erro";}
+			if(!$layer){
+				return "erro";
+			}
 			$layer->setmetadata("cache","");
 			$fil = $layer->getFilterString();
 			$filtro = str_replace("|","'",$filtro);
@@ -544,11 +553,6 @@ $testa - Testa o filtro e retorna uma imagem.
 				}
 				if($teste == MS_SUCCESS){
 					$layer->setfilter($filtro);
-				}
-				$v = versao();
-				//corrige bug do mapserver
-				if (($v["completa"] == "4.10.0") && ($layer->connectiontype == MS_POSTGIS)){
-					$layer->setfilter("\"".$filtro."\"");
 				}
 			}
 			if ($testa == ""){
@@ -1390,6 +1394,43 @@ Adiciona LABEL em uma classe de um tema
 				}
 			}
 		}
+	}
+	function selecaoLimpa(){
+		//apaga o arquivo do i3geo com os ids selecionados
+		if(file_exists($this->qyfileTema)){
+			unlink($this->qyfileTema);
+		}
+		//limpa de um tema
+		if ($this->nome != ""){
+			if(!$this->layer){
+				return "erro";
+			}
+			if (file_exists($this->qyfile)){
+				$this->mapa->loadquery($this->qyfile);
+				$indxlayer = $this->layer->index;
+				$this->mapa->freequery($indxlayer);
+				$this->mapa->savequery($this->qyfile);
+			}
+		}
+		elseif ($this->nome == ""){
+			//limpa de todos os temas
+			$c = $this->mapa->numlayers;
+			for ($i=0;$i < $c;$i++){
+				$l = $this->mapa->getlayer($i);
+				$file = dirname($this->arquivo)."/".$l->name.".php";
+				if (file_exists($file)){
+					unlink ($file);
+				}
+				$file = dirname($this->arquivo)."/".$l->name."_qy.map";
+				if (file_exists($file)){
+					unlink ($file);
+				}
+			}
+			if (file_exists($this->qyfile)){
+				unlink ($this->qyfile);
+			}
+		}
+		return("ok");
 	}
 }
 ?>

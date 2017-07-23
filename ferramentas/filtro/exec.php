@@ -17,7 +17,7 @@ Pega a string do filtro de um tema.
 	case "PEGAFILTRO":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		$m = new Temas($map_file,$tema);
-		$retorno = $m->pegaFiltro();
+		$retorno = base64_encode($m->pegaFiltro());
 	break;
 /*
 Valor: INSEREFILTRO
@@ -34,7 +34,7 @@ Inclui um filtro no tema.
 			$_GET["testa"]="";
 		}
 		$m->insereFiltro("");
-		$retorno = $m->insereFiltro($_GET["filtro"],$_GET["testa"],"sim");
+		$retorno = $m->insereFiltro(base64_decode($_GET["filtro"]),$_GET["testa"],$_GET["base64"]);
 		if(strtolower($testa) != "sim"){
 			$m->salva();
 			$_SESSION["contadorsalva"]++;

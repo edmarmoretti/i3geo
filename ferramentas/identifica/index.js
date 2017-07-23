@@ -191,7 +191,7 @@ i3GEOF.identifica =
 			if(i3GEOF.identifica.MUSTACHE == ""){
 				var t1 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_mst.html",
 				t2 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_sistemas_mst.html",
-				t3 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_dados_mst.html";;
+				t3 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_dados_mst.html";
 
 				$.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
 					i3GEOF.identifica.MUSTACHE = r1[0];
@@ -963,15 +963,15 @@ i3GEOF.identifica =
 				return;
 			}
 			i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "visible";
-			var filtro = "(|[" + item + "]| = |" + valor + "|)", temp = function(retorno) {
+			var filtro = "('[" + item + "]' = '" + valor + "')", temp = function(retorno) {
 				i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "hidden";
 				i3GEO.Interface.atualizaTema(retorno, tema);
 			}, p =
-				i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=nao&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro", cp =
+				i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=sim&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro", cp =
 					new cpaint();
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');
-			cp.call(p, "insereFiltro", temp, "tema=" + tema + "&filtro=" + filtro);
+			cp.call(p, "insereFiltro", temp, "tema=" + tema + "&filtro=" + i3GEO.util.base64encode(filtro));
 		},
 		removeFiltro : function(tema, idjanela) {
 			if (i3GEOF.identifica.propJanelas[idjanela].visibility === "visible") {

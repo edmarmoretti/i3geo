@@ -1784,6 +1784,9 @@ i3GEO.util =
 		 * {string} - estilo CSS em linha
 		 */
 		comboItens : function(id, tema, funcao, onde, nome, alias, estilo, classe) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.util.comboItens()");
+
 			if(!classe){
 				classe = "";
 			}
@@ -1798,11 +1801,14 @@ i3GEO.util =
 			if (arguments.length > 3 && $i(onde)) {
 				$i(onde).innerHTML = "<span>buscando itens...</span>";
 			}
-			if (arguments.length !== 5) {
+			if (arguments.length < 5) {
 				nome = "";
 			}
 
 			var monta = function(retorno) {
+				if (typeof (console) !== 'undefined')
+					console.info("monta combo");
+
 				var ins, temp, i, nm;
 				if (retorno.data !== undefined) {
 					ins = [];
@@ -1834,7 +1840,11 @@ i3GEO.util =
 							tipo : "erro"
 					};
 				}
-				eval("funcao(temp)");
+				if (jQuery.isFunction(funcao)) {
+					funcao.call(this, temp);
+				} else {
+					eval("funcao(temp)");
+				}
 			};
 			i3GEO.php.listaItensTema(monta, tema);
 		},
@@ -1857,19 +1867,34 @@ i3GEO.util =
 		 *
 		 * {String} - id do elemento HTML que recebera o combo. e utilizado apenas para inserir uma mensagem de aguarde.
 		 */
-		comboValoresItem : function(id, tema, itemTema, funcao, onde) {
+		comboValoresItem : function(id, tema, itemTema, funcao, onde, classe) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.util.comboValoresItem()");
+
 			if (arguments.length === 5) {
 				$i(onde).innerHTML = "<span style=color:red;font-size:10px; >buscando valores...</span>";
 			}
+			if (arguments.length < 6) {
+				classe = "";
+			}
 			var monta = function(retorno) {
+				if (typeof (console) !== 'undefined')
+					console.info("monta");
+
 				var ins = [], i, pares, j, valoresSort = [];
 				if (retorno.data !== undefined) {
-					ins.push("<select  id=" + id + " >");
+					ins.push("<select class='" + classe + "' id=" + id + " >");
 					ins.push("<option value='' >---</option>");
-					for (i = 0; i < retorno.data[1].registros.length; i++) {
-						pares = retorno.data[1].registros[i].valores;
-						for (j = 0; j < pares.length; j++) {
-							valoresSort.push(pares[j].valor);
+					if(retorno.data[1].registros){
+						for (i = 0; i < retorno.data[1].registros.length; i++) {
+							pares = retorno.data[1].registros[i].valores;
+							for (j = 0; j < pares.length; j++) {
+								valoresSort.push(pares[j].valor);
+							}
+						}
+					} else {
+						for (i = 0; i < retorno.data.length; i++) {
+							valoresSort.push(retorno.data[i]);
 						}
 					}
 					valoresSort.sort();
@@ -1888,7 +1913,11 @@ i3GEO.util =
 							tipo : "erro"
 					};
 				}
-				eval("funcao(temp)");
+				if (jQuery.isFunction(funcao)) {
+					funcao.call(this, temp);
+				} else {
+					eval("funcao(temp)");
+				}
 			};
 			i3GEO.php.listaValoresItensTema(monta, tema, itemTema);
 		},
