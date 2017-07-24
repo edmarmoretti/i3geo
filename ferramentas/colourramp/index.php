@@ -19,11 +19,13 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+
 <script type="text/javascript" src="<?php echo $locaplic;?>/classesjs/i3geo.js"></script>
+<link rel='stylesheet' type='text/css' href='<?php echo $locaplic;?>/css/i3geo6.css'/>
 <style>
 body{
-	background-color:white;
 	padding:0;
+	background-color: white;
 }
 #imagens {
 	border:1px solid #EBEBEB;
@@ -110,7 +112,7 @@ p .boom {
 </style>
 <title></title>
 </head>
-<body class=" yui-skin-sam" style="margin:0px;width:253px;" >
+<body class=" yui-skin-sam" style="margin:0px;width:253px;text-align:left;" >
 <p class=paragrafo style="position:relative;left:6px;width:100%;" >
 Quantas cores voc&ecirc; quer gerar? <input id=ncores type=text size=3 value=<?php echo $_GET["ncores"]; ?> /><br>
 Clique para escolher o modelo de cores
@@ -126,9 +128,7 @@ Clique para escolher o modelo de cores
 <p style="position:relative;left:6px;top:5px;text-align:left;" >
 <input id=voltar size="22" type="button" value="Aplicar cores">&nbsp;
 </p>
-<div class="paragrafo" style="border:1px solid #EBEBEB;position:relative;top:0px;position:relative;left:6px;width:250px;height:80px;overflow:auto;" >
 <b>Para atualizar a lista de cores geradas, clique novamente sobre a barra de cor.</b> Voc&ecirc; pode tamb&eacute;m definir os limites inicial e final (use a barra deslizante) e alterar os valores obtidos editando diretamente o RGB
-</div>
 <script>
 new YAHOO.widget.Button(
 	"voltar",

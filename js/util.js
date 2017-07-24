@@ -2364,12 +2364,9 @@ i3GEO.util =
 				janela.bringToTop();
 				return;
 			}
-			ins = '<div id="' + id + '_cabecalho" class="hd">';
-			ins +=
-				"<span><img id='i3geo_janelaCorRamp_imagemCabecalho' style='visibility:hidden;' src=\'" + i3GEO.configura.locaplic
-				+ "/imagens/aguarde.gif\' /></span>";
+			ins = '<div id="' + id + '_cabecalho" class="hd" style="left:10px;">';
 			if (i3GEO && i3GEO.arvoreDeCamadas) {
-				ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalho' style='top:0px;display:" + displayComboTemas + ";'>   ------</div>";
+				ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px;top:0px;display:" + displayComboTemas + ";'>   ------</div>";
 			}
 			ins += "&nbsp;&nbsp;&nbsp;" + texto;
 			ins += '</div><div id="i3geo_janelaCorRamp_corpo" class="bd" style="padding:5px">';
@@ -2387,7 +2384,7 @@ i3GEO.util =
 			wdocaiframe = $i("i3geo_janelaCorRampi");
 			wdocaiframe.style.display = "block";
 			wdocaiframe.src = wsrc;
-			wdocaiframe.style.height = "380px";
+			wdocaiframe.style.height = "400px";
 			wdocaiframe.style.width = "100%";
 			wdocaiframe.style.border = "0px solid white";
 
@@ -2395,9 +2392,9 @@ i3GEO.util =
 				fix = true;
 			}
 			janela = new YAHOO.widget.Panel(id, {
-				height : "430px",
+				height : "480px",
 				modal : false,
-				width : "280px",
+				width : "295px",
 				fixedcenter : fix,
 				constraintoviewport : true,
 				visible : true,
@@ -2425,7 +2422,7 @@ i3GEO.util =
 						cp = new cpaint();
 					}
 				};
-				i3GEO.janela.comboCabecalhoTemas(
+				i3GEO.janela.comboCabecalhoTemasBs(
 						"i3geo_janelaCorRampComboCabeca",
 						"i3geo_janelaCorRampComboCabecaSel",
 						"none",

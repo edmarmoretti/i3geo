@@ -590,7 +590,8 @@ class Atributos
 			return "erro";
 		}
 		$this->layer->set("template","none.htm");
-		//$this->layer->setfilter("");
+		$filtro = $this->layer->getfilterstring();
+		$this->layer->setfilter("");
 		if(strtoupper($this->layer->getmetadata("convcaracter")) == "NAO"){
 			$convC = false;
 		}
@@ -627,6 +628,7 @@ class Atributos
 		}
 		$valoresunicos = array_unique($valoresunicos);
 		sort($valoresunicos);
+		$this->layer->setfilter($filtro);
 		return($valoresunicos);
 	}
 	/*
