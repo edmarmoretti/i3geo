@@ -485,6 +485,7 @@ i3GEO.janela =
 					// destroy remove os listeners!!!!
 					janela = $i(id + "_c");
 					janela.parentNode.removeChild(janela);
+					YAHOO.util.Resize.getResizeById(id).destroy();
 				}
 			}
 		},
