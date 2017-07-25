@@ -164,28 +164,21 @@ i3GEOF.legenda.dicionario =
 		],
 		'consideraElementosVisisveis' : [
 			{
-				pt : "marque para considerar nos c&aacute;lculos apenas os elementos vis&iacute;veis na extens&atilde;o geogr&aacute;fica atual, caso contr&aacute;rio, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica inicial do mapa",
+				pt : "marque para considerar apenas os elementos vis&iacute;veis na extens&atilde;o geogr&aacute;fica atual, caso contr&aacute;rio, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica inicial do mapa",
 				en : "",
 				es : ""
 			}
 		],
 		'ignoraValores' : [
 			{
-				pt : "Ao obter os dados para gerar as classes, ignorar os valores listados abaixo (separe com v&iacute;rgula)",
+				pt : "Ao gerar as classes, ignorar os valores (separe com v&iacute;rgula)",
 				en : "",
 				es : ""
 			}
 		],
 		'transformaGeom' : [
 			{
-				pt : "Tipo de transforma&ccedil;&atilde;o",
-				en : "",
-				es : ""
-			}
-		],
-		'alteraGeom' : [
-			{
-				pt : "Altera a geometria. Transforma a representa&ccedil;&atilde;o geom&eacute;trica dos elementos do tema. Ap&oacute;s alterar esse par&acirc;metro, pode ser necess&aacute;rio modificar as caracter&iacute;sticas do s&iacute;mbolo.",
+				pt : "Transforma a representa&ccedil;&atilde;o geom&eacute;trica dos elementos do tema. Ap&oacute;s alterar esse par&acirc;metro, pode ser necess&aacute;rio modificar as caracter&iacute;sticas do s&iacute;mbolo.",
 				en : "",
 				es : ""
 			}
@@ -225,6 +218,13 @@ i3GEOF.legenda.dicionario =
 				es : ""
 			}
 		],
+		'alteraGeom' : [
+			{
+				pt : "Altera geometria",
+				en : "",
+				es : ""
+			}
+		],
 		'alteraTipoGeom' : [
 			{
 				pt : "Altera o tipo de representa&ccedil;&atilde;o do tema. Se for poligonal, passa para linear e vice-versa.",
@@ -255,28 +255,21 @@ i3GEOF.legenda.dicionario =
 		],
 		'cadaOcorrenciaUnicoSimbolo' : [
 			{
-				pt : "Item utilizado para obter as ocorr&ecirc;ncias &uacute;nicas",
+				pt : "Cada ocorr&ecirc;ncia de um valor para o item selecionado, ser&aacute; desenhado com o mesmo s&iacute;mbolo",
 				en : "",
 				es : ""
 			}
 		],
 		'valorUnico' : [
 			{
-				pt : "Calcular valor &uacute;nico. Cada ocorr&ecirc;ncia de um valor para o item selecionado, ser&aacute; desenhado com o mesmo s&iacute;mbolo.",
+				pt : "Calcular valor &uacute;nico",
 				en : "",
 				es : ""
 			}
 		],
-		'classesFixas' : [
- 			{
- 				pt : "Cria classes para um item num&eacute;rico utilizando um n&uacute;mero fixo de classes",
- 				en : "",
- 				es : ""
- 			}
- 		],
 		'criaClassesItemNumerico' : [
 			{
-				pt : "Item que ser&aacute; utilizado para obter os valores",
+				pt : "Cria classes para um item num&eacute;rico utilizando um n&uacute;mero fixo de classes",
 				en : "",
 				es : ""
 			}
@@ -288,30 +281,16 @@ i3GEOF.legenda.dicionario =
 				es : ""
 			}
 		],
-		'tipoCalculo' : [
-   			{
-   				pt : "Tipo de c&aacute;lculo",
-   				en : "",
-   				es : ""
-   			}
-   		],
 		'intervalosIguais' : [
 			{
-				pt : "Intervalos iguais",
+				pt : "Calcular intervalos iguais",
 				en : "",
 				es : ""
 			}
 		],
-		'calcularQuartil' : [
- 			{
- 				pt : "Quartis. Cria classes para um item num&eacute;rico utilizando quartis",
- 				en : "",
- 				es : ""
- 			}
- 		],
 		'criaQuartis' : [
 			{
-				pt : "Item que ser&aacute; utilizado para obter os valores",
+				pt : "Cria classes para um item num&eacute;rico utilizando os quartis",
 				en : "",
 				es : ""
 			}
@@ -346,21 +325,14 @@ i3GEOF.legenda.dicionario =
 		],
 		"etiquetasClasse" : [
 			{
-				pt : "Defini&ccedil;&atilde;o do texto que ser&aacute; mostrado em cada elemento do mapa pertencente &agrave; classe escolhida",
-				en : "",
-				es : ""
-			}
-		],
-		'removeLabels' : [
-			{
-				pt : "Remove os textos",
+				pt : "Textos da classe (labels)",
 				en : "",
 				es : ""
 			}
 		],
 		'itemComTexto' : [
 			{
-				pt : "Item que ser&aacute; utilizado como fonte para obten&ccedil;&atilde;o dos textos",
+				pt : "Item com o texto",
 				en : "",
 				es : ""
 			}
@@ -388,14 +360,14 @@ i3GEOF.legenda.dicionario =
 		],
 		'estilos' : [
 			{
-				pt : "Estilos. Cada s&iacute;mbolo pode ser formado por um ou mais estilos. Utilize as op&ccedil;&otilde;es abaixo para criar ou remover os estilos do s&iacute;mbolo utilizado na classe atual.",
+				pt : "Estilos",
 				en : "",
 				es : ""
 			}
 		],
 		'ajudaEstilo' : [
 			{
-				pt : "Utilize -1,-1,-1 para anular uma cor. A cor deve ser definida no formato vermelho,verde,azul. Para criar linhas tracejadas utilize o s&iacute;mbolo 0 ou vazio e digite um padr&atilde;o de repeti&ccedil;&atilde;o como por exemplo 2 10 2 10 ",
+				pt : "Cada s&iacute;mbolo pode ser formado por um ou mais estilos. Utilize -1,-1,-1 para anular uma cor. A cor deve ser definida no formato vermelho,verde,azul. Para criar linhas tracejadas utilize o s&iacute;mbolo 0 ou vazio e digite um padr&atilde;o de repeti&ccedil;&atilde;o como por exemplo 2 10 2 10 ",
 				en : "",
 				es : ""
 			}
@@ -535,7 +507,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'selecionaProcesso' : [
 			{
-				pt : "Selecione um processo para adicionar",
+				pt : "selecione o processo",
 				en : "",
 				es : ""
 			}
@@ -598,7 +570,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'estiloEdicao' : [
 			{
-				pt : "Estilo em edi&ccedil;&atilde;o (ap&oacute;s adicionar ou excluir um estilo, acione o bot&atilde;o de aplicar altera&ccedil;&otilde;es)",
+				pt : "Estilo em edi&ccedil;&atilde;o",
 				en : "",
 				es : ""
 			}
@@ -619,7 +591,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'tamanhoEspacamento' : [
 			{
-				pt : "Tamanho / espa&ccedil;amento. Defina um valor para a cor ou um item da tabela de atributos que contm os valores para cada elemento.",
+				pt : "Tamanho / espa&ccedil;amento",
 				en : "",
 				es : ""
 			}
@@ -654,7 +626,9 @@ i3GEOF.legenda.dicionario =
 		],
 		'simbolo' : [
 			{
-				pt : "Nome do s&iacute;mbolo. Voc&ecirc; pode tamb&eacute;m usar o caminho absoluto de uma imagem PNG existente no servidor ou clicar em um dos s&iacute;mbolos mostrados abaixo.",
+				pt : "Nome do s&iacute;mbolo<br>Voc&ecirc; pode tamb&eacute;m usar o caminho absoluto de uma imagem PNG existente no servidor ou clicar em " + "um dos s&iacute;mbolos mostrados abaixo. <a href='"
+					+ i3GEO.configura.locaplic
+					+ "/admin/html/subirsimbolo.html' target=_blank >Clique aqui para upload dessa imagem</a>",
 				en : "",
 				es : ""
 			}
@@ -689,14 +663,21 @@ i3GEOF.legenda.dicionario =
 		],
 		'quebrasNaturais' : [
 			{
-				pt : "Quebras naturais",
+				pt : "Calcular quebras naturais",
+				en : "",
+				es : ""
+			}
+		],
+		'calcularQuartil' : [
+			{
+				pt : "Calcular quartis",
 				en : "",
 				es : ""
 			}
 		],
 		'calcularQuantil' : [
 			{
-				pt : "Quantis",
+				pt : "Calcular quantis",
 				en : "",
 				es : ""
 			}
@@ -780,14 +761,14 @@ i3GEOF.legenda.dicionario =
 		],
 		"metade" : [
  			{
- 				pt : "Metade. Classifica os dados em duas classes, a primeira concentra os registros que somados correspondem &agrave; primeira metade do total e a segunda classe corresponde &agrave; segunda metade",
+ 				pt : "Metade",
  				en : "",
  				es : ""
  			}
  		],
 		"duasmetades" : [
   			{
-  				pt : "Coluna utilizada para obter os valores",
+  				pt : "Classifica os dados em duas classes, a primeira concentra os registros que somados correspondem &agrave; primeira metade do total e a segunda classe corresponde &agrave; segunda metade",
   				en : "",
   				es : ""
   			}
@@ -820,13 +801,6 @@ i3GEOF.legenda.dicionario =
   				es : ""
   			}
   		],
-		"clusterAjuda" : [
-   			{
-   				pt : "Faz a representa&ccedil;&atilde;o dos dados na forma de clusters. Cada cluster agrupa elementos pr&oacute;ximos e mostra as quantidades existentes. A proximidade depende da escala do mapa.",
-   				en : "",
-   				es : ""
-   			}
-   		],
   		"ClusterMaxdistance" : [
    			{
   				pt : "Dist&acirc;ncia (pixels) m&aacute;xima entre os pontos que ser&aacute; considerada para permitir o agrupamento",
@@ -878,13 +852,13 @@ i3GEOF.legenda.dicionario =
  		],
   		"offsite" : [
   			{
-   				pt : "Cor que ser&aacute; considerada como NODATA e renderizada como transparente no caso de camadas do tipo imagem (RGB separado por v&iacute;rgulas)",
+   				pt : "Cor, em imagens, que ser&aacute; considerada como NODATA e renderizada como transparente (RGB separado por v&iacute;rgulas)",
    				en : "",
    				es : ""
    			}
    		],
    	    'autoClasses' : [ {
-   			pt : "A gera&ccedil;&atilde;o de classes pode ser feita automaticamente por meio da defini&ccedil;&atilde;o de colunas, existentes na tabela de atributos do tema, e que armazenem as informa&ccedil;&otilde;es sobre cor, tamanho, etc.",
+   			pt : "&Eacute; poss&iacute;vel a gera&ccedil;&atilde;o de classes automaticamente por meio da defini&ccedil;&atilde;o de colunas na tabela de atributos do tema que armazenam as informa&ccedil;&otilde;es sobre cor, tamanho, etc.",
    			en : "",
    			es : ""
    		} ],
@@ -924,32 +898,7 @@ i3GEOF.legenda.dicionario =
    			es : ""
    		} ],
    		"colunasTxt" : [ {
-   			pt : "Colunas dispon&iacute;veis",
-   			en : "",
-   			es : ""
-   		} ],
-   		"inverte" : [ {
-   			pt : "Inverte as cores",
-   			en : "",
-   			es : ""
-   		} ],
-   		"calculaTamanho" : [ {
-   			pt : "Varia a textura ou tamanho",
-   			en : "",
-   			es : ""
-   		} ],
-   		"existentes" : [ {
-   			pt : "Processos existentes",
-   			en : "",
-   			es : ""
-   		} ],
-   		"edicaoEstilo" : [ {
-   			pt : "Edi&ccedil;&atilde;o do estilo escolhido",
-   			en : "",
-   			es : ""
-   		} ],
-   		"corContorno" : [ {
-   			pt : "Cor do contorno",
+   			pt : "Itens dispon&iacute;veis",
    			en : "",
    			es : ""
    		} ]

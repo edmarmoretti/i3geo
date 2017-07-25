@@ -594,6 +594,12 @@ Configuracoes especificas dos elementos que ficam no rodape
 	color: white;
 }
 
+.bd hr {
+	border-top: 2px dashed gray;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
+
 .bd select {
 	background: white;
 }

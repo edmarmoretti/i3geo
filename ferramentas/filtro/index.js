@@ -304,6 +304,7 @@ i3GEOF.filtro = {
 			if(modoCalculadora === true){
 				i3GEOF.filtro.aguarde.visibility = "hidden";
 				$i(idRetorno).value = i3GEOF.filtro.formataMapserver();
+				i3GEO.janela.destroi("i3GEOF.filtro");
 			}
 			else{
 				p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";

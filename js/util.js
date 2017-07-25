@@ -1782,6 +1782,8 @@ i3GEO.util =
 		 * {string} sim|nao indica se para os nomes dos itens sera usado o alias (default= sim)
 		 *
 		 * {string} - estilo CSS em linha
+		 *
+		 * {string} - classe css
 		 */
 		comboItens : function(id, tema, funcao, onde, nome, alias, estilo, classe) {
 			if (typeof (console) !== 'undefined')
