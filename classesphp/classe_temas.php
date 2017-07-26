@@ -272,20 +272,21 @@ Altera a representacao de um tema.
 Temas poligonais s&atilde;o transformados em lineares, e lineares em poligonais.
 A mudan&ccedil;a &eacute; feita apenas na representa&ccedil;&atilde;o do layer.
 */
-	function alteraRepresentacao()
-	{
+	function alteraRepresentacao(){
 		$retorno = "ok";
-		foreach ($this->grupo as $l)
-		{
+		foreach ($this->grupo as $l){
+
 			$l = $this->mapa->getlayerbyname($l);
-			if (($l->type == 1) || ($l->type == MS_LAYER_LINE)) //se for do tipo linear
-			{$l->set("type",MS_LAYER_POLYGON);}
-			elseif (($l->type == 2) || ($l->type == MS_LAYER_POLYGON)) //se for do tipo poligonal
-			{$l->set("type",MS_LAYER_LINE);}
-			if (($l->type < 1) || ($l->type > 2))
-			{$retorno = "erro. O tipo desse tema nao pode ser alterado";}
-			if ($this->layer)
-			{
+			if (($l->type == 1) || ($l->type == MS_LAYER_LINE)){
+				$l->set("type",MS_LAYER_POLYGON);
+			}
+			elseif (($l->type == 2) || ($l->type == MS_LAYER_POLYGON)){
+				$l->set("type",MS_LAYER_LINE);
+			}
+			if (($l->type < 1) || ($l->type > 2)){
+				$retorno = "erro. O tipo desse tema nao pode ser alterado";
+			}
+			if ($this->layer){
 				$this->layer->setMetaData("cache","");
 			}
 		}

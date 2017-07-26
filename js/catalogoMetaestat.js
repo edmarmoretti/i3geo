@@ -16,7 +16,7 @@ i3GEO.catalogoMetaestat = {
 			i3GEO.template.dir = r1[0];
 			i3GEO.template.tema = r2[0];
 			i3GEO.template.catalogoMigalha = r3[0];
-			i3GEO.caixaDeFerramentas.inicia();
+			i3GEO.catalogoMetaestat.inicia();
 		}).fail(function() {
 		    i3GEO.janela.closeMsg($trad("erroTpl"));
 		    return;
