@@ -211,7 +211,7 @@ class Alteraclasse
 
 		$nomes = $this->converteTexto($nomes);
 		$nomes = explode(";",$nomes);
-		//$exps = mb_convert_encoding($exps,"ISO-8859-1","UTF-8");
+		$exps = mb_convert_encoding($exps,"ISO-8859-1","UTF-8");
 		$exps = explode(";",$exps);
 		//pega os layers existentes no array ids e armazena no array t
 		$c = count($ids);
