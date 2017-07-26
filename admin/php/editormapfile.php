@@ -1159,7 +1159,7 @@ function clonarMapfile()
 }
 function refazerLayer()
 {
-	global $nomelayer, $codigomap, $locaplic;
+	global $nomelayer, $codigomap, $locaplic, $dir_tmp, $cachedir;
 
 	$maporigem = $_GET["maporigem"];
 
@@ -1210,6 +1210,11 @@ function refazerLayer()
 		}
 		$mapatema->save($arqtema);
 		removeCabecalho($arqtema);
+		//apaga o cache
+		include($locaplic."/admin1/php/funcoesAdmin.php");
+		\admin\php\funcoesAdmin\limpaCacheImg($locaplic, $codigomap, $cachedir, $dir_tmp);
+
+
 		return array("data"=>"ok");
 	}
 	return "erro";
@@ -2501,8 +2506,10 @@ function removeCabecalho($arq,$symbolset=true)
 	$nomeMapfileTmp = $dir_tmp."/ogc_".md5($arq).".map";
 	$nomeMapfileTmp = str_replace(",","",$nomeMapfileTmp);
 	$nomeMapfileTmp = str_replace(" ","",$nomeMapfileTmp);
-	chmod($nomeMapfileTmp,0777);
-	unlink($nomeMapfileTmp);
+	if(file_exists($nomeMapfileTmp)){
+		chmod($nomeMapfileTmp,0777);
+		unlink($nomeMapfileTmp);
+	}
 	//echo $nomeMapfileTmp;exit;
 	//remove o cache OGC
 	$handle = fopen($arq, "r");

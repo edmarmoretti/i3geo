@@ -42,6 +42,8 @@ $_SESSION["logTransacoes"] = $logTransacoes;
 unset($logTransacoes);
 $_SESSION["dir_tmp"] = $dir_tmp;
 unset($dir_tmp);
+$_SESSION["cachedir"] = $cachedir;
+unset($cachedir);
 $_SESSION["mensagemInicia"] = $mensagemInicia;
 unset($mensagemInicia);
 $_SESSION["i3geoPermiteLoginIp"] = $i3geoPermiteLoginIp;

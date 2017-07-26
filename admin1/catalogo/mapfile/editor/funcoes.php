@@ -217,6 +217,9 @@ function salvaMapfile() {
 		}
 		$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geoadmin_temas", $dataCol, "WHERE codigo_tema = '$codigo'" );
 	}
+
 	\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $mapfile );
+	\admin\php\funcoesAdmin\limpaCacheImg($locaplic, $codigo, $_SESSION["cachedir"], $_SESSION["dir_tmp"]);
+
 }
 ?>

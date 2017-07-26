@@ -830,4 +830,54 @@ function fileContemString($arq,$s){
 	fclose($handle);
 	return $valid;
 }
+function limpaCacheImg($locaplic, $codigo, $cachedir, $dir_tmp){
+	if(empty($dir_tmp)){
+		return false;
+	}
+	$mapfile = $locaplic . "/temas/" . $codigo . ".map";
+	if (! file_exists ( $mapfile )) {
+		return false;
+	}
+	$mapa = ms_newMapObj ( $mapfile );
+	$nomes = $mapa->getalllayernames ();
+	if ($cachedir != "") {
+		$d = $cachedir;
+	} else {
+		$d = $dir_tmp . "/cache";
+	}
+	foreach ( $nomes as $nome ) {
+		$nome = str_replace ( ".", "", $nome );
+		$nome = strip_tags ( $nome );
+		$nome = htmlspecialchars ( $nome, ENT_QUOTES );
+		$dirs [] = $d . "/" . $nome;
+		$dirs [] = $d . "/googlemaps/" . $nome;
+		$dirs [] = $d . "/wmts/" . $nome;
+		foreach ( $dirs as $dir ) {
+			\admin\php\funcoesAdmin\rrmdirImg ( $dir );
+		}
+	}
+	$nome = $nomes[0];
+	if(file_exists($d . "/" . $nome) || file_exists($d . "/googlemaps/" . $nome) || file_exists($d . "/wmts/" . $nome)){
+		return false;
+	} else {
+		return true;
+	}
+}
+function rrmdirImg($dir) {
+	if (is_dir ( $dir )) {
+		$objects = scandir ( $dir );
+		foreach ( $objects as $object ) {
+			if ($object != "." && $object != "..") {
+				if (filetype ( $dir . "/" . $object ) == "dir") {
+					\admin\php\funcoesAdmin\rrmdirImg ( $dir . "/" . $object );
+				} else {
+					$object = str_replace ( ".png", "", $object ) . ".png";
+					chmod ( $dir . "/" . $object, 077 );
+					unlink ( $dir . "/" . $object );
+				}
+			}
+		}
+		reset ( $objects );
+	}
+}
 ?>
