@@ -1,4 +1,4 @@
-<div id='i3GEOfiltroguiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px; margin-left: 2px;'>
+<div id='i3GEOfiltroguiasYUI' class='yui-navset {{{escondeGuias}}}' style='top: 0px; cursor: pointer; left: 0px; margin-left: 2px;'>
 	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
 		<li>
 			<div id='i3GEOfiltroguia1' style='text-align: center; left: 0px;'>
@@ -27,7 +27,7 @@
 <div id='i3GEOfiltroguia1obj' style='display: none;' class='container-fluid'>
 
 	<button onclick="i3GEOF.filtro.aplicaFiltro('nao',{{{modoCalculadora}}},'{{{idRetorno}}}')" class='btn btn-primary btn-sm btn-raised'>{{{inclui}}}</button>
-	<button onclick="i3GEOF.filtro.limpaFiltro()" class='btn btn-primary btn-sm btn-raised'>{{{remove}}}</button>
+	<button onclick="i3GEOF.filtro.limpaFiltro()" class='btn btn-primary btn-sm btn-raised {{{escondeGuias}}}'>{{{remove}}}</button>
 
 	<!-- as linhas sao baseadas no template template_linhafiltro_mst.html -->
 	<div id='i3GEOfiltropar'>
@@ -48,7 +48,7 @@
 
 	</div>
 
-	<h5 class="alert alert-info">{{{ajuda}}}</h5>
+	<h5 class="alert alert-info {{{escondeGuias}}}">{{{ajuda}}}</h5>
 
 </div>
 <!-- digitar -->

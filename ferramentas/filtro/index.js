@@ -39,6 +39,9 @@ i3GEOF.filtro = {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.filtro.dicionario);
 		dicionario["modoCalculadora"] = modoCalculadora;
 		dicionario["idRetorno"] = idRetorno;
+		if(modoCalculadora == true){
+			dicionario["escondeGuias"] = "hidden";
+		}
 		return dicionario;
 	},
 	/*
@@ -303,7 +306,10 @@ i3GEOF.filtro = {
 			}
 			if(modoCalculadora === true){
 				i3GEOF.filtro.aguarde.visibility = "hidden";
-				$i(idRetorno).value = i3GEOF.filtro.formataMapserver();
+				temp = i3GEOF.filtro.formataMapserver();
+				re = new RegExp("'", "g");
+				temp = temp.replace(re, '"');
+				$i(idRetorno).value = temp;
 				i3GEO.janela.destroi("i3GEOF.filtro");
 			}
 			else{

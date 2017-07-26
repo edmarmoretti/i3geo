@@ -480,7 +480,6 @@ class Legenda
 					if (function_exists("mb_convert_encoding"))	{
 						$nomeexp = mb_convert_encoding($nomeexp,"UTF-8","ISO-8859-1");
 					}
-
 					$linhas[] = array("tema"=>$l,"idclasse"=>$c,"nomeclasse"=>$nomeclasse,"expressao"=>$nomeexp,"imagem"=>$i,"proc"=>"","minScale"=>$classe->minscaledenom,"maxScale"=>$classe->maxscaledenom);
 				}
 				if (($totaliza=="sim") && ($nc > 1)){
