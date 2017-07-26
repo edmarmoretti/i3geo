@@ -29,7 +29,7 @@ $id_tema = (int) $_GET ["id_tema"];
 				<span><?php echo $codigo; ?></span>
 			</a>
 			<a class="btn btn-default" style="pointer-events: none">
-				<span>Conex&atilde;o local</span>
+				<span>Conex&atilde;o externa</span>
 			</a>
 		</div>
 	</div>

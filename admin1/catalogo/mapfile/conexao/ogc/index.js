@@ -69,7 +69,7 @@ i3GEOadmin.ogc = {
 			);
 		},
 		salvar: function(codigo,id_tema){
-			var parametros = $("#form-edicao-ogc").serialize();
+			var parametros = $("#form-edicao-conexaoogc").serialize();
 			i3GEOadmin.core.modalAguarde(true);
 			$.post(
 					"exec.php?funcao=alterar",

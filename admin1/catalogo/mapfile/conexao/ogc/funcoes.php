@@ -53,9 +53,9 @@ function alterar($locaplic,$codigo,$connection,$connectiontype,$ows_srs,$ows_nam
 	$layer->set("type",$type);
 	$metas = array("_srs","_name","_server_version","_format","_auth_username","_auth_password","_auth_type","_connectiontimeout","_latlonboundingbox","_proxy_auth_type","_proxy_host","_proxy_port","_proxy_type","_proxy_username","_proxy_password","_sld_body","_sld_url","_style","_bgcolor","_transparent","_time","_tile");
 	foreach ($metas as $m){
-		$layer->setmetadata("wms".$m,"ows".$m);
-		$layer->setmetadata("wfs".$m,"ows".$m);
-		$layer->setmetadata("ows".$m,"ows".$m);
+		$layer->setmetadata("wms".$m,${"ows".$m});
+		$layer->setmetadata("wfs".$m,${"ows".$m});
+		$layer->setmetadata("ows".$m,${"ows".$m});
 	}
 	try {
 		$mapa->save ( $arq );

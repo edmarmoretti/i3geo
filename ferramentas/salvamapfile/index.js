@@ -102,7 +102,7 @@ i3GEOF.salvamapfile = {
 					}
 					var ins = "<p class=paragrafo >"+$trad('ajuda',i3GEOF.salvamapfile.dicionario) +
 					'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > '+$trad('concluido',i3GEOF.salvamapfile.dicionario)+'</span></p>' +
-					'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="'+$trad('salva',i3GEOF.salvamapfile.dicionario)+'"  />&nbsp;&nbsp;<input size=20 id=i3GEOsalvamapfilebotao2 type=button value="'+$trad('testa',i3GEOF.salvamapfile.dicionario)+'"  />';
+					'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="'+$trad('salva',i3GEOF.salvamapfile.dicionario)+'"  />';
 					$i(iddiv).innerHTML = ins;
 					new YAHOO.widget.Button(
 						"i3GEOsalvamapfilebotao1",

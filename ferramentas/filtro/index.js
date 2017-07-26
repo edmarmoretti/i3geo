@@ -41,7 +41,10 @@ i3GEOF.filtro = {
 		dicionario["idRetorno"] = idRetorno;
 		if(modoCalculadora == true){
 			dicionario["escondeGuias"] = "hidden";
+		} else {
+			dicionario["escondeGuias"] = "";
 		}
+		i3GEOF.filtro.dicionario["escondeGuias"] = dicionario["escondeGuias"];
 		return dicionario;
 	},
 	/*
@@ -224,7 +227,7 @@ i3GEOF.filtro = {
 		ntr.id = "linhaFiltro"+i3GEOF.filtro.CONTADOR;
 		temp = Mustache.render(
 				"{{#data}}" + i3GEOF.filtro.MUSTACHELINHAFILTRO + "{{/data}}",
-				{"data":{"comboTemas": i3GEOF.filtro.comboTemas,"contador": i3GEOF.filtro.CONTADOR}}
+				{"data":{"comboTemas": i3GEOF.filtro.comboTemas,"contador": i3GEOF.filtro.CONTADOR, "escondeGuias": i3GEOF.filtro.dicionario["escondeGuias"]}}
 		);
 		$(ntr).html(temp);
 		tabela = $i("i3GEOfiltroparametros");

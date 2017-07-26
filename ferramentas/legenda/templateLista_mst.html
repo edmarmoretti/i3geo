@@ -1,7 +1,7 @@
 <!-- para o caso de vetores -->
 <div class="{{{hidden2}}}">
 	<button onclick="i3GEOF.legenda.mudaLegenda()" class='btn btn-primary btn-sm btn-raised'>{{{aplicaAlteracao}}}</button>
-	<button onclick="i3GEOF.legenda.adicionaClasse()" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>{{{adicionaClasse}}}</button>
+	<button id="botaoAdicionaClasse" onclick="i3GEOF.legenda.adicionaClasse()" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>{{{adicionaClasse}}}</button>
 	<h5 class="alert alert-info">{{{clicaSimbolo}}}</h5>
 	<table id="i3GEOlegendalegenda" class="lista8" style="background-color: #89afd4;">
 		<tr>
@@ -44,13 +44,13 @@
 			</td>
 			<td style="padding: 5px;">
 				<div class='form-group label-fixed condensed'>
-					<input id="i3GEOlegendaid_{{{id}}}" style="width: 200px;" value="{{{nome}}}" name="nome" title="{{{novoNome}}}" tabindex="0" class="form-control input-lg" type='text' />
+					<input onchange="$('#botaoAdicionaClasse').prop('disabled', true);" id="i3GEOlegendaid_{{{id}}}" style="width: 200px;" value="{{{nome}}}" name="nome" title="{{{novoNome}}}" tabindex="0" class="form-control input-lg" type='text' />
 				</div>
 			</td>
 			<td style="padding: 5px;">
 				<div class='form-group label-fixed condensed'>
 					<!-- id necessario para o construtor de filtro -->
-					<input id="i3GEOlegendaid_exp{{{id}}}" style="width: 200px;" value='{{{exp}}}' name="expressao" tabindex="0" class="form-control input-lg" type='text' />
+					<input onchange="$('#botaoAdicionaClasse').prop('disabled', true);" id="i3GEOlegendaid_exp{{{id}}}" style="width: 200px;" value='{{{exp}}}' name="expressao" tabindex="0" class="form-control input-lg" type='text' />
 				</div>
 			</td>
 			<td>

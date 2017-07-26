@@ -243,7 +243,7 @@ Obt&eacute;m a lista
 		},
 		salvarDialogo: function(id){
 			i3GEOadmin.mapfile.parametrosSalvar = $("#form-edicao-" + id).serialize();
-			console.info(i3GEOadmin.mapfile.parametrosSalvar);
+			//console.info(i3GEOadmin.mapfile.parametrosSalvar);
 			var hash = {
 					"mensagem": i3GEOadmin.mapfile.dicionario.confirma,
 					"onBotao1": "i3GEOadmin.mapfile.salvar('"+id+"')",
