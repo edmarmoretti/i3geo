@@ -495,6 +495,7 @@ function limpaCache($locaplic, $codigo, $cachedir, $dir_tmp){
 }
 function clonarMapfile($codigo,$novocodigo,$titulo,$dbh,$dbhw){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
+	$locaplic = $_SESSION["locaplic"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	$arqnovo = $locaplic . "/temas/" . $novocodigo . ".map";
 
