@@ -61,7 +61,7 @@ function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $aces
 		$desc_tema = utf8_decode ( $desc_tema );
 	}
 
-	if (empty ( $acessopublico ) || $acessopublico == "on") {
+	if ($acessopublico == "on") {
 		$acessopublico = "SIM";
 	} else {
 		$acessopublico = "NAO";
@@ -108,13 +108,13 @@ function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $aces
 function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
 	$convUTF = $_SESSION["convUTF"];
 	$esquemaadmin = $_SESSION["esquemaadmin"];
+
+	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if ($codigo == "" || file_exists ( $arq )) {
 		header ( "HTTP/1.1 400 arquivo ja existe" );
 		exit ();
 	}
-	$arq = $locaplic . "/temas/" . $codigo . ".map";
-
-	if (empty ( $acessopublico ) || $acessopublico == "on") {
+	if ($acessopublico == "on") {
 		$acessopublico = "SIM";
 	} else {
 		$acessopublico = "NAO";
