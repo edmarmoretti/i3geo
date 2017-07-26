@@ -144,7 +144,7 @@ $comboPastas .= "</select>";
 	</div>
 </div>
 <?php
-if (empty ( $_SESSION ["i3geoUploadDataWL"] )) {
+if (empty ( $_SESSION ["i3geoUploadDataWL"] ) || (is_array($_SESSION ["i3geoUploadDataWL"]) && count($_SESSION ["i3geoUploadDataWL"]) == 0)) {
 	echo "<script>iniciaMenuPrincipal();i3GEOadmin.core.mostraErro('Nenhuma pasta cadastrada para upload nas configura&ccedil;&otilde;es do i3Geo (ms_configura)');</script>";
 	exit ();
 }

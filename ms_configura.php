@@ -132,7 +132,7 @@ $logTransacoes = false;
  Tipo:
  {array}
 */
-$i3geoEsquemasWL = array("public","i3geo_metaestat");
+$i3geoEsquemasWL = array();
 /*
  Variale: $i3geoUploadDataWL
 
@@ -160,7 +160,7 @@ $i3geoEsquemasWL = array("public","i3geo_metaestat");
  Tipo:
  {array}
  */
-$i3geoUploadDataWL = array("public","i3geo_metaestat");
+$i3geoUploadDataWL = array();
 
 //TODO documentar moodle
 /*

@@ -2127,9 +2127,9 @@ switch (strtoupper($funcao))
 				}
 			}
 		}
-
 		$retorno = $m->listaRegistros($itemtema,$tipo,$unico,$inicio,$fim,$tipolista,$dadosDaClasse);
 		$retorno["legenda"] = $legenda;
+
 		break;
 		/*
 		 Valor: LISTAUNICA

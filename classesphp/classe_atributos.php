@@ -523,7 +523,6 @@ class Atributos
 						$indx  = $result->shapeindex;
 						$shape = $this->layer->getfeature($indx,-1);
 					}
-
 					foreach ($items as $item){
 						$valori = "";
 						if(@$shape->values[$item]){

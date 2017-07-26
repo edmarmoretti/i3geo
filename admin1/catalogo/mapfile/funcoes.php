@@ -139,6 +139,7 @@ function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublic
 	$dados [] = '	STATUS DEFAULT';
 	$dados [] = '	METADATA';
 	$dados [] = '		TEMA "' . $titulolegenda . '"';
+	$dados [] = '		convcaracter "SIM"';
 	$dados [] = '		CLASSE "SIM"';
 	$tipoa_tema = "";
 	if (! empty ( $metaestat ) && $metaestat == "SIM") {
