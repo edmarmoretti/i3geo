@@ -45,15 +45,18 @@ i3GEOF.wkt2layer =
 		if(i3GEOF.wkt2layer.MUSTACHE == ""){
 			$.get(i3GEO.configura.locaplic + "/ferramentas/wkt2layer/template_mst.html", function(template) {
 				i3GEOF.wkt2layer.MUSTACHE = template;
-				i3GEOF.wkt2layer.inicia(iddiv);
+				i3GEOF.wkt2layer.inicia(iddiv,wkt,texto);
 			});
 			return;
 		}
 		$i(iddiv).innerHTML = i3GEOF.wkt2layer.html(wkt,texto);
+		$i("i3GEOFwkt2layerWkt").value = wkt;
+
 		new YAHOO.widget.Button("i3GEOFwkt2layerShp", {
 			onclick : {
 				fn : function() {
 					var wkt = $i("i3GEOFwkt2layerWkt").value;
+					wkt = $.trim(wkt.replace(/[\t\n]+/g,' '));
 					if(wkt.length < 5){
 						i3GEO.janela.tempoMsg($trad("mensagem",i3GEOF.wkt2layer.dicionario));
 					}
@@ -67,6 +70,7 @@ i3GEOF.wkt2layer =
 			onclick : {
 				fn : function() {
 					var wkt = $i("i3GEOFwkt2layerWkt").value;
+					wkt = $.trim(wkt.replace(/[\t\n]+/g,' '));
 					if(wkt.length < 5){
 						i3GEO.janela.tempoMsg($trad("mensagem",i3GEOF.wkt2layer.dicionario));
 					}
@@ -97,7 +101,6 @@ i3GEOF.wkt2layer =
 	 */
 	iniciaJanelaFlutuante : function(wkt,texto) {
 		var cabecalho, janela, divid, titulo;
-
 		if ($i("i3GEOF.wkt2layer")) {
 			return;
 		}
@@ -198,6 +201,7 @@ i3GEOF.wkt2layer =
 		};
 		par = i3GEOF.wkt2layer.pegaPar();
 		wkt = $i("i3GEOFwkt2layerWkt").value;
+		wkt = $.trim(wkt.replace(/[\t]+/g,' '));
 		wkt = wkt.split("\n").join("|");
 		p = i3GEO.configura.locaplic+"/ferramentas/wkt2layer/exec.php?g_sid="+i3GEO.configura.sid+
 				"&funcao=shapefile&"+par;
