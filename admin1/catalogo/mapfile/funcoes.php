@@ -141,6 +141,7 @@ function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublic
 	$dados [] = '		TEMA "' . $titulolegenda . '"';
 	$dados [] = '		convcaracter "SIM"';
 	$dados [] = '		CLASSE "SIM"';
+	$dados [] = '		TILES "SIM"';
 	$tipoa_tema = "";
 	if (! empty ( $metaestat ) && $metaestat == "SIM") {
 		$dados [] = '		METAESTAT "SIM"';
