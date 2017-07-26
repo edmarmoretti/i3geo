@@ -132,7 +132,7 @@ $logTransacoes = false;
  Tipo:
  {array}
 */
-$i3geoEsquemasWL = array();
+$i3geoEsquemasWL = array("public","i3geo_metaestat");
 /*
  Variale: $i3geoUploadDataWL
 
@@ -152,7 +152,7 @@ $i3geoEsquemasWL = array();
  		"Pasta 1"=>"/tmp/ms_tmp"
  	),
  	"postgis" => array(
- 		"esquemas"=>array("esquema1","esquema2","publicy"),
+ 		"esquemas"=>array("esquema1","i3geo_metaestat","public"),
  		"conexao"=>array("user"=> "postgres", "password"=>"postgres", "dbname"=>"i3geosaude", "host"=>"localhost", "port"=>"5432")
  	)
  );
@@ -160,7 +160,7 @@ $i3geoEsquemasWL = array();
  Tipo:
  {array}
  */
-$i3geoUploadDataWL = array();
+$i3geoUploadDataWL = array("public","i3geo_metaestat");
 
 //TODO documentar moodle
 /*

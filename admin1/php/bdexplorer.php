@@ -15,7 +15,7 @@ include ("funcoesAdmin.php");
 //
 include ($_SESSION ["locaplic"] . "/classesphp/carrega_ext.php");
 include ($_SESSION ["locaplic"] . "/classesphp/classe_bdexplorer.php");
-include ($_SESSION ["locaplic"] . "/classesphp/classe_metaestat.php");
+include ($_SESSION ["locaplic"] . "/classesphp/classe_metaestatinfo.php");
 /**
  * ************************************************************
  */
@@ -48,7 +48,7 @@ switch ($funcao) {
 		if (empty ( $_POST ["codigo_estat_conexao"] )) {
 			$parametros = $dbh;
 		} else {
-			$mt = new \i3geo\classesphp\metaestat\Metaestat ();
+			$mt = new MetaestatInfo ();
 			$parametros = $mt->listaConexao ( ( int ) $_POST ["codigo_estat_conexao"], true, false );
 		}
 		$bd = new \i3geo\classesphp\bdexplorer\Bdexplorer ( $_SESSION ["locaplic"], $parametros );
@@ -74,7 +74,7 @@ switch ($funcao) {
 		break;
 	case "LISTARCOLUNAS" :
 		// pega os parametros de conexao
-		$mt = new \i3geo\classesphp\metaestat\Metaestat ();
+		$mt = new MetaestatInfo ();
 		$parametros = $mt->listaConexao ( ( int ) $_POST ["codigo_estat_conexao"], true, false );
 		$bd = new \i3geo\classesphp\bdexplorer\Bdexplorer ( $_SESSION ["locaplic"], $parametros );
 		$dados = $bd->listaDeColunas ( $_POST ["esquema"], $_POST ["tabela"] );
@@ -86,7 +86,7 @@ switch ($funcao) {
 		break;
 	case "LISTARCODIGOSCONEXAO" :
 		// pega os parametros de conexao
-		$mt = new \i3geo\classesphp\metaestat\Metaestat ();
+		$mt = new MetaestatInfo ();
 		$dados = $mt->listaConexao ( "", false, false );
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );

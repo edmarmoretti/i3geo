@@ -35,7 +35,7 @@ function adicionar($nome_tipo_regiao,$descricao_tipo_regiao,$codigo_estat_conexa
 			"apelidos"=>''
 		);
 		$codigo_tipo_regiao = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico ( $dbhw, "i3geoestat_tipo_regiao", $dataCol, "nome_tipo_regiao", "codigo_tipo_regiao" );
-		$retorna = \admin\metaestat\regioes\alterar ( $codigo_tipo_regiao, $nome, $descricao, $dbhw );
+		$retorna = \admin\metaestat\regioes\alterar ( $codigo_tipo_regiao, $nome_tipo_regiao,$descricao_tipo_regiao,$codigo_estat_conexao,$esquemadb,$tabela,$colunageo,$data,$identificador,$colunanomeregiao,$srid,$colunacentroide,$colunasvisiveis,$apelidos,$dbhw );
 
 		return $retorna;
 	} catch ( PDOException $e ) {

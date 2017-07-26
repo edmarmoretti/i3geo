@@ -37,7 +37,7 @@ $codigo_tipo_regiao = $_POST["codigo_tipo_regiao"];
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = \admin\metaestat\regioes\adicionar ( $_POST["codigo_tipo_regiao"], $_POST["nome_tipo_regiao"],$_POST["descricao_tipo_regiao"],$_POST["codigo_estat_conexao"],$_POST["esquemadb"],$_POST["tabela"],$_POST["colunageo"],$_POST["data"],$_POST["identificador"],$_POST["colunanomeregiao"],$_POST["srid"],$_POST["colunacentroide"],$_POST["colunasvisiveis"],$_POST["apelidos"], $dbhw );
+		$novo = \admin\metaestat\regioes\adicionar ( $_POST["nome_tipo_regiao"],$_POST["descricao_tipo_regiao"],$_POST["codigo_estat_conexao"],$_POST["esquemadb"],$_POST["tabela"],$_POST["colunageo"],$_POST["data"],$_POST["identificador"],$_POST["colunanomeregiao"],$_POST["srid"],$_POST["colunacentroide"],$_POST["colunasvisiveis"],$_POST["apelidos"], $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($novo === false) {
@@ -45,7 +45,7 @@ switch ($funcao) {
 		}
 		break;
 	case "ALTERAR" :
-		$novo = \admin\metaestat\regioes\alterar ( $codigo_tipo_regiao,$_POST["codigo_tipo_regiao"], $_POST["nome_tipo_regiao"],$_POST["descricao_tipo_regiao"],$_POST["codigo_estat_conexao"],$_POST["esquemadb"],$_POST["tabela"],$_POST["colunageo"],$_POST["data"],$_POST["identificador"],$_POST["colunanomeregiao"],$_POST["srid"],$_POST["colunacentroide"],$_POST["colunasvisiveis"],$_POST["apelidos"], $dbhw );
+		$novo = \admin\metaestat\regioes\alterar ( $codigo_tipo_regiao, $_POST["nome_tipo_regiao"],$_POST["descricao_tipo_regiao"],$_POST["codigo_estat_conexao"],$_POST["esquemadb"],$_POST["tabela"],$_POST["colunageo"],$_POST["data"],$_POST["identificador"],$_POST["colunanomeregiao"],$_POST["srid"],$_POST["colunacentroide"],$_POST["colunasvisiveis"],$_POST["apelidos"], $dbhw );
 		$dbhw = null;
 		$dbh = null;
 		if ($novo === false) {
