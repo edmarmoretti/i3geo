@@ -160,15 +160,7 @@ $i3geoEsquemasWL = array();
  Tipo:
  {array}
  */
-$i3geoUploadDataWL = $i3geoUploadDataWL = array(
- 	"arquivos" => array(
- 		"Pasta 1"=>"/tmp/ms_tmp"
- 	),
- 	"postgis" => array(
- 		"esquemas"=>array("esquema1","i3geo_metaestat","public"),
- 		"conexao"=>array("user"=> "postgres", "password"=>"postgres", "dbname"=>"i3geosaude", "host"=>"localhost", "port"=>"5432")
- 	)
- );
+$i3geoUploadDataWL = "";
 
 //TODO documentar moodle
 /*
