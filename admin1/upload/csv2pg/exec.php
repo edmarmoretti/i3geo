@@ -436,8 +436,9 @@ if (isset ( $_FILES ['i3GEOuploadcsv'] ['name'] )) {
 				$layer->setconnectiontype ( 6 );
 				$layer->set ( "type", $tipoLayer );
 				$c = $layer->getclass(0);
-				$s = $c->getsymbol(0);
-				$s->set("symbol","ponto");
+				$s = $c->getstyle(0);
+				//$s = $st->getsymbol(0);
+				$s->set("symbolname","ponto");
 				$mapa->save ( $_SESSION ["locaplic"] . "/temas/" . $_POST ["i3GEOuploadNomeTabela"] . ".map" );
 				\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $_SESSION ["locaplic"] . "/temas/" . $_POST ["i3GEOuploadNomeTabela"] . ".map" );
 				echo "<div class='alert alert-success' role='alert'>Mapfile " . $_POST ["i3GEOuploadNomeTabela"] . " criado!!!</div>";
