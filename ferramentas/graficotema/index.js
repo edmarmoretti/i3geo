@@ -97,7 +97,7 @@ i3GEOF.graficoTema = {
 	*/
 	inicia: function(iddiv){
 		if(i3GEOF.graficoTema.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/graficoTema/template_mst.html", function(template) {
+			$.get(i3GEO.configura.locaplic + "/ferramentas/graficotema/template_mst.html", function(template) {
 				i3GEOF.graficoTema.MUSTACHE = template;
 				i3GEOF.graficoTema.inicia(iddiv);
 			});
@@ -181,7 +181,7 @@ i3GEOF.graficoTema = {
 			"",
 			titulo,
 			"i3GEOF.graficoTema",
-			true,
+			false,
 			"hd",
 			"",
 			"",
