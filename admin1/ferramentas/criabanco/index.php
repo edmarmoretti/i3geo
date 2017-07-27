@@ -1,13 +1,13 @@
 <?php
 define ( "ONDEI3GEO", "../../.." );
-include ("exec.php");
+if(!function_exists("listaSql")){
+	include ("exec.php");
+}
 //verifica se o login pode ser realizado
 if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
 	header ( "HTTP/1.1 403 Login desativado" );
 	exit ();
 }
-
-
 include "../../head.php";
 ?>
 <div class="container-fluid migalha" >

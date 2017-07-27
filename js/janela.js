@@ -475,6 +475,9 @@ i3GEO.janela =
 		 * id {string} - id da janela
 		 */
 		destroi : function(id) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.janela.destroi() " + id);
+
 			if(typeof(YAHOO) != "undefined"){
 				var janela = YAHOO.i3GEO.janela.manager.find(id);
 				i3GEO.util.removeScriptTag(id + "_script");

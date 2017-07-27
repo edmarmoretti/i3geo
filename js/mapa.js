@@ -559,6 +559,7 @@ i3GEO.mapa =
 					if(conexao){
 						i3GEOF.metaestat.CONEXAODEFAULT = conexao;
 					}
+					i3GEOF.metaestat.INTERFACE = "flutuante";
 					i3GEOF.metaestat.principal.inicia(null, largura, altura, topo, esquerda);
 				};
 				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()", "metaestat", "metaestat", "dependencias.php", temp);

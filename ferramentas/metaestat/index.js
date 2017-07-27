@@ -2296,11 +2296,6 @@ i3GEOF.metaestat = {
 		mustacheHash : function() {
 			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.metaestat.dicionario);
 			dicionario["locaplic"] = i3GEO.configura.locaplic;
-			if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
-				dicionario["escondeBotoes"] = "hidden";
-			} else {
-				dicionario["escondeBotoes"] = "";
-			}
 			return dicionario;
 		},
 		/**
@@ -2314,12 +2309,16 @@ i3GEOF.metaestat = {
 		 *
 		 */
 		inicia: function(iddiv, largura, altura, topo, esquerda){
+			var template = "template_mst.html";
+			if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
+				template = "templatesimples_mst.html";
+			}
 			i3GEOF.metaestat.log("i3GEOF.metaestat.principal.inicia()");
 			if(!iddiv || !$i(iddiv)){
 				iddiv = "i3geoCartoParametros_corpo";
 			}
 			if(i3GEOF.metaestat.principal.MUSTACHE == ""){
-				$.get(i3GEO.configura.locaplic + "/ferramentas/metaestat/template_mst.html", function(template) {
+				$.get(i3GEO.configura.locaplic + "/ferramentas/metaestat/" + template, function(template) {
 					i3GEOF.metaestat.principal.MUSTACHE = template;
 					i3GEOF.metaestat.principal.inicia(iddiv, largura, altura, topo, esquerda);
 				});
@@ -2352,6 +2351,7 @@ i3GEOF.metaestat = {
 				i3GEOF.metaestat.classes.comboTipoClassificacao();
 				i3GEOF.metaestat.parametros.lista(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);
 			}
+			i3GEOF.metaestat.principal.MUSTACHE = "";
 		},
 		/**
 		 * Atualiza os componentes da interface

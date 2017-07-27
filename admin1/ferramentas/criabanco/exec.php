@@ -12,7 +12,7 @@ include "index.php";
 						// echo dirname(__FILE__);
 						$esquemaadmin = "";
 						include ("../../../admin/php/admin.php");
-						
+
 						// valida o usuario e aplica
 						$exts = get_loaded_extensions ();
 						if (empty ( $_POST ["senha"] ) || empty ( $_POST ["usuario"] )) {
@@ -118,7 +118,7 @@ include "index.php";
 						}
 						echo "<h4>Inserindo os registros default<h4>";
 						if ($_POST ["mostraSoSQL"] != "on") {
-							$teste = lista ( "select * from " . $esquemaadmin . "i3geousr_papeis", "id_papel" );
+							$teste = listaSql ( "select * from " . $esquemaadmin . "i3geousr_papeis", "id_papel" );
 						} else {
 							$teste = array ();
 						}
@@ -138,7 +138,7 @@ include "index.php";
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papeis VALUES ('Podem administrar o sistema METAESTAT','5', 'adminmetaestat')";
 
 						if ($_POST ["mostraSoSQL"] != "on") {
-							$teste = lista ( "select * from " . $esquemaadmin . "i3geousr_usuarios", "id_usuario" );
+							$teste = listaSql ( "select * from " . $esquemaadmin . "i3geousr_usuarios", "id_usuario" );
 						} else {
 							$teste = array ();
 						}
@@ -147,7 +147,7 @@ include "index.php";
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_usuarios VALUES(1,'','',0,'admingeral','admingeral','admingeral')";
 
 						if ($_POST ["mostraSoSQL"] != "on") {
-							$teste = lista ( "select * from " . $esquemaadmin . "i3geousr_papelusuario", "id_usuario", "id_papel" );
+							$teste = listaSql ( "select * from " . $esquemaadmin . "i3geousr_papelusuario", "id_usuario", "id_papel" );
 						} else {
 							$teste = array ();
 						}
@@ -155,7 +155,7 @@ include "index.php";
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papelusuario VALUES(1,1)";
 
 						if ($_POST ["mostraSoSQL"] != "on") {
-							$teste = lista ( "select * from " . $esquemaadmin . "i3geousr_operacoes", "id_operacao" );
+							$teste = listaSql ( "select * from " . $esquemaadmin . "i3geousr_operacoes", "id_operacao" );
 						} else {
 							$teste = array ();
 						}
@@ -199,7 +199,7 @@ include "index.php";
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES('19', 'admin/metaestat/editorbanco', 'permite gerenciar as tabelas do banco')";
 
 						if ($_POST ["mostraSoSQL"] != "on") {
-							$teste = lista ( "select * from " . $esquemaadmin . "i3geousr_operacoespapeis", "id_operacao", "id_papel" );
+							$teste = listaSql ( "select * from " . $esquemaadmin . "i3geousr_operacoespapeis", "id_operacao", "id_papel" );
 						} else {
 							$teste = array ();
 						}
@@ -251,7 +251,7 @@ include "index.php";
 </body>
 </html>
 <?php
-function lista($sql, $coluna, $coluna1 = "") {
+function listaSql($sql, $coluna, $coluna1 = "") {
 	global $dbh;
 	$lista = array ();
 	$q = $dbh->query ( $sql, PDO::FETCH_ASSOC );

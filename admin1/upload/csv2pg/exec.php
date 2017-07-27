@@ -235,7 +235,7 @@ if (isset ( $_FILES ['i3GEOuploadcsv'] ['name'] )) {
 		if (! empty ( $_POST ["i3GEOuploadColunaX"] ) && ! empty ( $_POST ["i3GEOuploadColunaY"] )) {
 			$sqltabela [] = "CREATE INDEX " . $_POST ["i3GEOuploadNomeTabela"] . "_indx_thegeom ON " . $_POST ["i3GEOuploadEsquemaDestino"] . "." . $_POST ["i3GEOuploadNomeTabela"] . " USING gist (the_geom )";
 		}
-		if (! empty ( $_POST ["comentarioShp"] )) {
+		if (! empty ( $_POST ["i3GEOuploadComentario"] )) {
 			$enc = mb_detect_encoding ( $texto );
 			$_POST ["i3GEOuploadComentario"] = mb_convert_encoding ( $_POST ["i3GEOuploadComentario"], $encodingdb, $enc );
 			$sqltabela [] = "COMMENT ON TABLE " . $_POST ["i3GEOuploadEsquemaDestino"] . "." . $_POST ["i3GEOuploadNomeTabela"] . " IS '" . $_POST ["i3GEOuploadComentario"] . "'";

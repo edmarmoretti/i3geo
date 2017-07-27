@@ -1,0 +1,35 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "i3geosaude"
+    CONNECTIONTYPE POSTGIS
+    DATA "the_geom from (select * from public.murilo) as foo using unique id using srid=4326"
+    METADATA
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "TILES"	"SIM"
+      "permitedownload"	"NAO"
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"murilo"
+    END # METADATA
+    NAME "murilo"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POINT
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 0 0 0
+        SIZE 12
+        SYMBOL "ponto"
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

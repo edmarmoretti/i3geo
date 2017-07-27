@@ -218,7 +218,7 @@ function testaMapaImg($tema) {
 	for($i = 0; $i < $numlayers; $i ++) {
 		$layern = $nmapa->getlayer ( $i );
 		$layern->set ( "status", MS_DEFAULT );
-		autoClasses ( $layern, $nmapa );
+		autoClassesLocal ( $layern, $nmapa );
 		//error_reporting ( E_ALL );
 		if ($layern->classitem != "" && $layern->connectiontype == 7 && $layern->numclasses > 0 && $layern->getmetadata ( "wms_sld_body" ) == "") {
 			$tipotemp = $layern->type;
@@ -237,12 +237,12 @@ function testaMapaImg($tema) {
 			$layern->set ( "type", $tipotemp );
 		}
 		// pega simbolos locais e aplica no novo mapa
-		cloneInlineSymbol ( $layern, $nmapa, $mapa );
+		cloneInlineSymbolLocal ( $layern, $nmapa, $mapa );
 
 		$layerAdicionado = ms_newLayerObj ( $mapa, $layern );
 
-		corrigeLayerGrid ( $layerAdicionado,$mapa );
-		corrigeLayerGrid ( $layern, $layerAdicionado );
+		corrigeLayerGridLocal ( $layerAdicionado,$mapa );
+		corrigeLayerGridLocal ( $layern, $layerAdicionado );
 		$pegarext = $layern->name;
 	}
 	zoomTema ( $pegarext, $mapa );
@@ -342,7 +342,7 @@ function zoomTema($nomelayer, &$mapa) {
 		$extatual->setextent ( $ret [0], $ret [1], $ret [2], $ret [3] );
 	}
 }
-function autoClasses(&$nlayer, $mapa, $locaplic = null) {
+function autoClassesLocal(&$nlayer, $mapa, $locaplic = null) {
 	$postgis_mapa = $_SESSION ["postgis_mapa"];
 	;
 	$substituicon = "nao";
@@ -490,14 +490,14 @@ function autoClasses(&$nlayer, $mapa, $locaplic = null) {
 				}
 				$expression = "([pixel] > " . round ( $value, 0 ) . " AND [pixel] <= " . round ( $value + $delta, 0 ) . ")";
 				$class->setExpression ( $expression );
-				$rgb = getRGBpallete ( $rule, $value );
+				$rgb = getRGBpalleteLocal ( $rule, $value );
 				$style->color->setRGB ( $rgb [0], $rgb [1], $rgb [2] );
 			}
 		}
 	}
 	return;
 }
-function getRGBpallete($rule, $value) {
+function getRGBpalleteLocal($rule, $value) {
 	$escala = ($value - $rule ["v0"]) / ($rule ["v1"] - $rule ["v0"]);
 	$r = $rule ["r0"] + round ( ($rule ["r1"] - $rule ["r0"]) * $escala, 0 );
 	$g = $rule ["g0"] + round ( ($rule ["g1"] - $rule ["g0"]) * $escala, 0 );
@@ -508,7 +508,7 @@ function getRGBpallete($rule, $value) {
 			$b
 	);
 }
-function cloneInlineSymbol($layern, $nmapa, $mapa) {
+function cloneInlineSymbolLocal($layern, $nmapa, $mapa) {
 	$numclasses = $layern->numclasses;
 	for($ci = 0; $ci < $numclasses; $ci ++) {
 		$classe = $layern->getclass ( $ci );
@@ -542,7 +542,7 @@ function cloneInlineSymbol($layern, $nmapa, $mapa) {
 		}
 	}
 }
-function corrigeLayerGrid($layerOrigem,$layerDestino){
+function corrigeLayerGridLocal($layerOrigem,$layerDestino){
 	if($layerOrigem->connectiontype == MS_GRATICULE){
 		ms_newgridobj($layerDestino);
 		$layerDestino->grid->set("labelformat", $layerOrigem->grid->labelformat);

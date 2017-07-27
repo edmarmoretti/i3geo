@@ -33,11 +33,11 @@ i3GEOadmin.editor = {
 		},
 		testar: function(codigo){
 			i3GEOadmin.core.modalAguarde(true);
-			i3GEOadmin.teste.testaImg("../../../..",codigo,"","",$("#modalGeral .modal-body"))
+			i3GEOadmin.teste.testaImg("../../../..",codigo,"","",$("#modalGeral .modal-body"));
 		},
 		testaTabela: function(codigo){
 			i3GEOadmin.core.modalAguarde(true);
-			i3GEOadmin.teste.testaTabela("../../../..",codigo,$("#modalGeral .modal-body"))
+			i3GEOadmin.teste.testaTabela("../../../..",codigo,$("#modalGeral .modal-body"));
 		},
 		preview: function(codigo){
 			i3GEOadmin.core.modalAguarde(true);

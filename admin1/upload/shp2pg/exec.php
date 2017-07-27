@@ -137,7 +137,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	$layer = ms_newLayerObj($mapObj);
 	$layer->set("data",$_SESSION ["dir_tmp"] . "/" . $nomePrefixo . ".shp");
 	if(file_exists($_SESSION ["dir_tmp"] . "/" . $nomePrefixo . ".prj")){
-		$layer->setprojection("AUTO");
+		//$layer->setprojection("AUTO");
 	}
 	$layer->open();
 	$colunasTemp = $layer->getItems();
@@ -227,7 +227,7 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 		$sqltabela[] = $sql;
 		$sqltabela[] = "ALTER TABLE ".$_POST["i3GEOuploadEsquemaDestino"].".".$_POST["i3GEOuploadNomeTabela"]." OWNER TO ".$conexao["user"];
 		$sqltabela[] = "CREATE INDEX ".$_POST["i3GEOuploadNomeTabela"]."_indx_thegeom ON ".$_POST["i3GEOuploadEsquemaDestino"].".".$_POST["i3GEOuploadNomeTabela"]." USING gist (the_geom )";
-		if(!empty($_POST["comentarioShp"])){
+		if(!empty($_POST["i3GEOuploadComentario"])){
 			$enc = mb_detect_encoding($texto);
 			$_POST["i3GEOuploadComentario"] = mb_convert_encoding($_POST["i3GEOuploadComentario"],$encodingdb,$enc);
 			$sqltabela[] = "COMMENT ON TABLE ".$_POST["i3GEOuploadEsquemaDestino"].".".$_POST["i3GEOuploadNomeTabela"]." IS '".$_POST["i3GEOuploadComentario"]."'";
@@ -261,12 +261,11 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	$layer->setProjection("init=epsg:".$_POST["i3GEOuploadSridOrigem"]);
 	$projInObj = $layer->getProjection();
 	$projOutObj = $mapObj->getProjection();
-
 	for ($i=0; $i<$numshapes;$i++){
 		$s = $layer->getShape(new resultObj($i));
-		//projeta o shape se existir .prj
+		//projeta o shape
 		if($_POST["i3GEOuploadSridDestino"] != $_POST["i3GEOuploadSridOrigem"]){
-			$s->project($projInObj, $projOutObj);
+			$s->project(ms_newProjectionObj($projInObj), ms_newProjectionObj($projOutObj));
 		}
 		$vs = array();
 		foreach($colunas as $coluna){
@@ -409,6 +408,11 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 				$layer->set("connection",$_POST["i3GEOuploadAliasConexao"]);
 				$layer->setconnectiontype(6);
 				$layer->set ( "type", $tipoLayer );
+				if($shapefileObj->type == 1){
+					$classe = $layer->getclass(0);
+					$estilo = $classe->getstyle(0);
+					$estilo->set("symbolname","ponto");
+				}
 				$mapa->save ( $_SESSION ["locaplic"] . "/temas/" . $_POST["i3GEOuploadNomeTabela"] . ".map" );
 				\admin\php\funcoesAdmin\removeCabecalhoMapfile ( $_SESSION ["locaplic"] . "/temas/" . $_POST["i3GEOuploadNomeTabela"] . ".map" );
 				echo "<div class='alert alert-success' role='alert'>Mapfile " . $_POST["i3GEOuploadNomeTabela"] ." criado!!!</div>";
