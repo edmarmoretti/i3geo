@@ -82,6 +82,7 @@ i3GEOF.tme =
 		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 		 */
 		MUSTACHE : "",
+		MUSTACHELISTA : "",
 		/**
 		 * Susbtitutos para o template
 		 */
@@ -117,9 +118,16 @@ i3GEOF.tme =
 		 */
 		inicia : function(iddiv) {
 			if(i3GEOF.tme.MUSTACHE == ""){
-				$.get(i3GEO.configura.locaplic + "/ferramentas/tme/template_mst.html", function(template) {
-					i3GEOF.tme.MUSTACHE = template;
+				var t1 = i3GEO.configura.locaplic + "/ferramentas/tme/template_mst.html",
+				t2 = i3GEO.configura.locaplic + "/ferramentas/tme/templateLista_mst.html";
+
+				$.when( $.get(t1),$.get(t2) ).done(function(r1,r2) {
+					i3GEOF.tme.MUSTACHE = r1[0];
+					i3GEOF.tme.MUSTACHELISTA = r2[0];
 					i3GEOF.tme.inicia(iddiv);
+				}).fail(function() {
+				    i3GEO.janela.closeMsg($trad("erroTpl"));
+				    return;
 				});
 				return;
 			}
@@ -143,7 +151,9 @@ i3GEOF.tme =
 				return;
 			}
 			$i(iddiv).innerHTML = i3GEOF.tme.html();
-			i3GEOF.tme.rodape();
+			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
+				$(".hidden").removeClass("hidden");
+			}
 			try {
 				//
 				// verifica se a camada possui definicao dos parametros
@@ -174,71 +184,36 @@ i3GEOF.tme =
 				$i("i3GEOTMEoutlinecolor").value = i3GEOF.tme.OUTLINECOLOR;
 				$i("i3GEOTMEnumvertices").value = i3GEOF.tme.NUMVERTICES;
 				// combo para escolher a coluna com os nomes das regioes
-				i3GEO.util.comboItens("i3GEOTMEregioes", i3GEOF.tme.tema, function(retorno) {
-					if ($i("i3GEOTMEregioeslista")) {
-						$i("i3GEOTMEregioeslista").innerHTML = retorno.dados;
-					}
-					if (i3GEOF.tme.ITEMNOMEREGIOES != "") {
-						$i("i3GEOTMEregioes").value = i3GEOF.tme.ITEMNOMEREGIOES;
-					}
-					// lista para escolher as colunas com os valores
-					var temp = function(r) {
-						i3GEOF.tme.montaListaItens(r);
-						// se os parametros da ferramenta estiverem definidos na camada
-						if (camada != "" && camada.ferramentas.tme && camada.ferramentas.tme.exec === "sim") {
-							i3GEOF.tme.ativa();
+				i3GEO.util.comboItens(
+					"i3GEOTMEregioes",
+					i3GEOF.tme.tema,
+					function(retorno) {
+						if ($i("i3GEOTMEregioeslista")) {
+							$i("i3GEOTMEregioeslista").innerHTML = retorno.dados;
 						}
-					};
-					i3GEO.php.listaItensTema(temp, i3GEOF.tme.tema);
-				}, "i3GEOTMEregioeslista");
-				i3GEO.util.mensagemAjuda("i3GEOtmemen1", $i("i3GEOtmemen1").innerHTML);
+						if (i3GEOF.tme.ITEMNOMEREGIOES != "") {
+							$i("i3GEOTMEregioes").value = i3GEOF.tme.ITEMNOMEREGIOES;
+						}
+						// lista para escolher as colunas com os valores
+						var temp = function(r) {
+							i3GEOF.tme.montaListaItens(r);
+							// se os parametros da ferramenta estiverem definidos na camada
+							if (camada != "" && camada.ferramentas.tme && camada.ferramentas.tme.exec === "sim") {
+								i3GEOF.tme.ativa();
+							}
+						};
+						i3GEO.php.listaItensTema(temp, i3GEOF.tme.tema);
+					},
+					"i3GEOTMEregioeslista",
+					"",
+					"sim",
+					"",
+					"form-control"
+				);
+
 				i3GEOF.tme.ativaFoco();
 			} catch (erro) {
 				i3GEO.janela.tempoMsg(erro);
-			}
-		},
-		rodape : function() {
-			var ins =
-				'<input class="paragrafo" id="i3GEOtmebotao1" type="button" value="' + $trad('geraKml', i3GEOF.tme.dicionario)
-					+ '" style="cursor:pointer;color:blue"/>';
-			if (i3GEO.login.verificaCookieLogin() === true) {
-				ins +=
-					'<input class="paragrafo" style="margin-top:3px;" id="i3GEOtmebotaoSalva" type="button" value="' + $trad(
-						'salvaParametros',
-						i3GEOF.tme.dicionario)
-						+ '" style="cursor:pointer;color:blue"/>';
-				ins +=
-					'<input class="paragrafo" style="margin-top:3px;" id="i3GEOtmebotaoRemove" type="button" value="' + $trad(
-						'removeParametros',
-						i3GEOF.tme.dicionario)
-						+ '" style="cursor:pointer;color:blue"/>';
-			}
-			YAHOO.i3GEO.janela.manager.find("i3GEOF.tme").setFooter(ins);
-
-			var b = new YAHOO.widget.Button("i3GEOtmebotao1", {
-				onclick : {
-					fn : i3GEOF.tme.ativa
-				}
-			});
-			b.addClass("rodar");
-			$i("i3GEOtmebotao1-button").style.width = "350px";
-			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
-				$i("parametrosComLogin").style.display = 'block';
-				b = new YAHOO.widget.Button("i3GEOtmebotaoSalva", {
-					onclick : {
-						fn : i3GEOF.tme.salvaParametros
-					}
-				});
-				b.addClass("rodar");
-				$i("i3GEOtmebotaoSalva-button").style.width = "350px";
-
-				b = new YAHOO.widget.Button("i3GEOtmebotaoRemove", {
-					onclick : {
-						fn : i3GEOF.tme.removeParametros
-					}
-				});
-				b.addClass("rodar");
-				$i("i3GEOtmebotaoRemove-button").style.width = "350px";
 			}
 		},
 		/*
@@ -279,11 +254,29 @@ i3GEOF.tme =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div>"
+				"<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div>"
 					+ "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=5&idajuda=108' >tme</a>";
-			janela = i3GEO.janela.cria("380px", "320px", "", "", "", titulo, "i3GEOF.tme", false, "hd", cabecalho, minimiza, "", true);
+			janela = i3GEO.janela.cria(
+				"380px",
+				"320px",
+				"",
+				"",
+				"",
+				titulo,
+				"i3GEOF.tme",
+				false,
+				"hd",
+				cabecalho,
+				minimiza,
+				"",
+				true,
+				"",
+				"",
+				"",
+				""
+			);
 			divid = janela[2].id;
 			i3GEOF.tme.aguarde = $i("i3GEOF.tme_imagemCabecalho").style;
 			$i("i3GEOF.tme_corpo").style.backgroundColor = "white";
@@ -368,18 +361,28 @@ i3GEOF.tme =
 		 * A lista &eacute; inserida no elemento html com id "i3GEOtmelistai"
 		 */
 		montaListaItens : function(retorno) {
-			var ins, i, n, item, litens;
+			var ins, i, n, item, litens,temp = {}, mustache = [];
 			try {
 				ins = [];
-				ins.push("<table class=lista >");
+				ins.push("<table>");
 				n = retorno.data.valores.length;
 				for (i = 0; i < n; i++) {
-					item = retorno.data.valores[i].item;
-					ins.push("<tr><td><input size=2 style='cursor:pointer' type=checkbox id=i3GEOtme" + item + " /></td>");
-					ins.push("<td>&nbsp;" + item + "</td>");
+					temp = {};
+					temp.item = retorno.data.valores[i].item;
+					mustache.push(temp);
 				}
-				$i("i3GEOtmelistai").innerHTML = ins.join("");
-				ins.push("</table>");
+
+				ins = Mustache.render(
+						i3GEOF.tme.MUSTACHELISTA,
+						$.extend(
+								{},
+								{
+									"linhas" :  mustache,
+								},
+								i3GEOF.tme.DICIONARIO
+						)
+				);
+				$i("i3GEOtmelistai").innerHTML = ins;
 				//
 				// marca as colunas default
 				//
@@ -439,22 +442,14 @@ i3GEOF.tme =
 					function(retorno) {
 						i3GEOF.tme.aguarde.visibility = "hidden";
 						var ext, url, ins =
-							"<p class=paragrafo >" + $trad('arquivoDownload', i3GEOF.tme.dicionario)
-								+ "<br><a href='"
+							"<h5>" + $trad('arquivoDownload', i3GEOF.tme.dicionario)
+								+ "</h5><a href='"
 								+ retorno.data.url
 								+ "' target=new >"
 								+ retorno.data.url
-								+ "</a><br>";
+								+ "</a>";
 						ext = i3GEO.parametros.mapexten;
 						ext = i3GEO.util.extOSM2Geo(ext);
-						url = i3GEO.configura.locaplic + "/ms_criamapa.php?interface=googleearth.phtml&kmlurl=" + retorno.data.url;
-						ins +=
-							"<br>" + $trad('abreNoI3geo', i3GEOF.tme.dicionario)
-								+ "<br><a href='"
-								+ url
-								+ "' target='new' >"
-								+ url
-								+ "</a><br>";
 						url =
 							i3GEO.configura.locaplic + "/ferramentas/cesium/kml3d.php?kmlurl="
 								+ retorno.data.url
@@ -462,12 +457,12 @@ i3GEOF.tme =
 								+ retorno.data.legenda
 								+ "&mapext=" + ext;
 						ins +=
-							"<br>" + $trad('abreNoCesium', i3GEOF.tme.dicionario)
-								+ "<br><a href='"
+							"<<h5>" + $trad('abreNoCesium', i3GEOF.tme.dicionario)
+								+ "</h5><a href='"
 								+ url
 								+ "' target='new' >"
 								+ url
-								+ "</a><br>";
+								+ "</a>";
 
 						$i("i3GEOTMEresultado").innerHTML = ins;
 						$i("i3GEOTMEresultado").scrollIntoView(true);
