@@ -671,7 +671,6 @@ function ajuda(){
 <script src="../js/configura.js"></script>
 <script src="../js/compactados/mustache.js"></script>
 <script src="../js/interface.js"></script>
-<script src="../js/barradebotoes.js"></script>
 <script src="../js/eventos.js"></script>
 <script src="../js/plugini3geo.js"></script>
 <script src="../ferramentas/editorol/editorol.js"></script>
@@ -796,16 +795,16 @@ Popup do identifica no openlayers 3
 <body class=" yui-skin-sam">
 	<?php
 	if(isset($largura) && $largura != ""){
-		echo '<div id=i3geoMapa style="width:'.$largura.'px;height:'.$altura.'px;"></div>';
+		echo '<div id=openlayers style="width:'.$largura.'px;height:'.$altura.'px;"></div>';
 	}
 	else{
-		echo '<div id=i3geoMapa style="width:0;height:0"></div>';
+		echo '<div id=openlayers style="width:0;height:0"></div>';
 	}
 
 	?>
 	<div id=i3geoSelTemaAtivo style="height: 15em; z-index: 3000; display: none" class=" yui-skin-sam"></div>
 	<script>
-var m = document.getElementById("i3geoMapa");
+var m = document.getElementById("openlayers");
 if(parseInt(m.style.width,10) === 0){
 	var t = i3GEO.util.tamanhoBrowser();
 	m.style.width = (t[0]-10)+"px";
