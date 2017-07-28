@@ -658,6 +658,16 @@ table {
 	margin: 0px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+td {
+	background-color: white;
+	border: 0px solid gray;
+	padding: 0px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: center;
+	font-size: 10pt !Important;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
 div {
 	border: 0px solid #FFFFFF;
@@ -676,16 +686,7 @@ H1 {
 	color: #004080;
 }
 
-td {
-	background-color: white;
-	border: 0px solid gray;
-	padding: 0px;
-	color: #2F4632;
-	margin: 0px;
-	text-align: center;
-	font-size: 10pt !Important;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-}
+
 /*
 .ajuda_usuario {
 	background-image: url(../imagens/oxygen/16x16/dialog-information.png);

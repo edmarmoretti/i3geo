@@ -873,6 +873,29 @@ td {
 	background: none;
 }
 
+.bd table {
+	border: 0px solid #FFFFFF;
+	padding: 0px;
+	margin: 0px;
+	width: 100%;
+	max-width: 100%;
+	font-weight: unset;
+}
+
+.bd table tr:first-of-type td {
+   padding: 20px;
+}
+
+.bd td {
+	border: 0px solid #89afd4;
+	padding: 0px;
+	color: white;
+	margin: 0px;
+	text-align: center;
+	border-top: 3px solid #89afd4;
+	font-weight: initial;
+}
+
 .yui-skin-sam .yui-panel .ft {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 13px none;

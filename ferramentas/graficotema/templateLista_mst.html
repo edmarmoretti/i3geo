@@ -1,0 +1,24 @@
+<table class=lista8>
+	<tr>
+	</tr>
+	{{#linhas}}
+	<tr>
+		<td>
+			<div class="checkbox condensed">
+				<label>
+					<input name="{{{item}}}" type=checkbox id="i3GEOgraficotema{{{item}}}" />
+					<span class="checkbox-material noprint">
+						<span class="check"></span>
+					</span>
+				</label>
+			</div>
+		</td>
+		<td>{{{item}}}</td>
+		<td>
+			<div class='form-group condensed'>
+				<input class="form-control input i3geoFormIconeAquarela" type='text' id="i3GEOgraficotema{{{item}}}cor" value='{{{rcor}}}' />
+			</div>
+		</td>
+	</tr>
+	{{/linhas}}
+</table>

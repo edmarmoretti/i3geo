@@ -1,4 +1,4 @@
-<div id='i3GEOgraficotemaguiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px;'>
+<div id='i3GEOgraficotemaguiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px; margin-left: 2px;'>
 	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
 		<li>
 			<div id='i3GEOgraficotemaguia1' style='text-align: center; left: 0px;'>
@@ -15,44 +15,40 @@
 	</ul>
 </div>
 <br>
-<div class='guiaobj' id='i3GEOgraficotemaguia1obj' style='left: 1px; 90%; display: none;'>
-	<div id='i3GEOgraficotemacombot' style='display: none; position: relative; top: 5px; left: 0px;'></div>
-	<p class='paragrafo'>
-		<b>{{{selecionaItens}}}</b><br> <br>
-	<div id='i3GEOgraficotemalistai' class='digitar' style='text-align: left; left: 0px; top: 0px; 330 px; height: 80px; overflow: auto; display: block;'>{{{selecionaTema}}}</div>
-	<br> <br>
-	<p class='paragrafo'>
-		<input id='i3GEOgraficotemabotao1' size='35' type='button' value='{{{criaGrafico}}}' />
-	<div id='i3GEOgraficotemamen1' style='top: 10px; left: 1px'>
-		<p class='paragrafo'>{{{compoeGrafico}}}
-	</div>
+<div class='container-fluid' id='i3GEOgraficotemaguia1obj' >
+	<h5>{{{selecionaItens}}}</h5>
+	<div id='i3GEOgraficotemalistai'></div>
+
+	<button onclick="i3GEOF.graficoTema.criaNovoTema()" class='btn btn-primary btn-sm btn-raised'>{{{criaGrafico}}}</button>
+	<h5 class="alert alert-info">
+		{{{compoeGrafico}}}
+	</h5>
 </div>
-<div class='guiaobj' id='i3GEOgraficotemaguia2obj' style='left: 1px; display: none;'>
-	<p class='paragrafo'>{{{tipo}}}:</p>
-	<div class='styled-select'>
-		<select id='i3GEOgraficotematipo'>
+<div class='container-fluid' id='i3GEOgraficotemaguia2obj' >
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOgraficotematipo">{{{tipo}}}</label>
+		<div class="input-group">
+		<select class="form-control" id="i3GEOgraficotematipo">
 			<option value='PIE'>{{{pizza}}}</option>
 			<option value='BAR'>{{{barras}}}</option>
 		</select>
+		</div>
 	</div>
-	<br>
-	<p class='paragrafo'>{{{largura}}}:</p>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' id='i3GEOgraficotemalargura' value='50' />
+	<div class='form-group label-fixed condensed' >
+		<label class="control-label" for="i3GEOgraficotemalargura">{{{largura}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOgraficotemalargura' value='50' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{altura}}}:</p>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' id='i3GEOgraficotemaaltura' value='50' />
+	<div class='form-group label-fixed condensed' >
+		<label class="control-label" for="i3GEOgraficotemaaltura">{{{altura}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOgraficotemaaltura' value='50' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{deslocamentoFatias}}}:</p>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' id='i3GEOgraficotemaoffset' value='0' />
+	<div class='form-group label-fixed condensed' >
+		<label class="control-label" for="i3GEOgraficotemaoffset">{{{deslocamentoFatias}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOgraficotemaoffset' value='0' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{corContorno}}}:</p>
-	<div class='i3geoForm100 i3geoFormIconeAquarela'>
-		<input type='text' id='i3GEOgraficotemaoutlinecolor' value='0,0,0' />
+	<div class='form-group label-fixed condensed' >
+		<label class="control-label" for="i3GEOgraficotemaoutlinecolor">{{{corContorno}}}</label>
+		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOgraficotemaoutlinecolor' value='0,0,0' />
 	</div>
+
 </div>

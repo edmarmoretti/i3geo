@@ -60,6 +60,7 @@ i3GEOF.graficoTema = {
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
 	MUSTACHE : "",
+	MUSTACHELISTA : "",
 	/**
 	 * Susbtitutos para o template
 	 */
@@ -97,12 +98,20 @@ i3GEOF.graficoTema = {
 	*/
 	inicia: function(iddiv){
 		if(i3GEOF.graficoTema.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/graficotema/template_mst.html", function(template) {
-				i3GEOF.graficoTema.MUSTACHE = template;
+			var t1 = i3GEO.configura.locaplic + "/ferramentas/graficotema/template_mst.html",
+			t2 = i3GEO.configura.locaplic + "/ferramentas/graficotema/templateLista_mst.html";
+
+			$.when( $.get(t1),$.get(t2) ).done(function(r1,r2) {
+				i3GEOF.graficoTema.MUSTACHE = r1[0];
+				i3GEOF.graficoTema.MUSTACHELISTA = r2[0];
 				i3GEOF.graficoTema.inicia(iddiv);
+			}).fail(function() {
+			    i3GEO.janela.closeMsg($trad("erroTpl"));
+			    return;
 			});
 			return;
 		}
+
 		if (!$i("i3GEOFgraficotemaComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela",function(evt){
 				var botao = evt.target;
@@ -130,12 +139,7 @@ i3GEOF.graficoTema = {
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficotemaguia1","i3GEOgraficotemaguia");};
 			$i("i3GEOgraficotemaguia2").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficotemaguia2","i3GEOgraficotemaguia");};
-			var b = new YAHOO.widget.Button(
-				"i3GEOgraficotemabotao1",
-				{onclick:{fn: i3GEOF.graficoTema.criaNovoTema}}
-			);
-			b.addClass("rodar");
-			i3GEO.util.mensagemAjuda("i3GEOgraficotemamen1",$i("i3GEOgraficotemamen1").innerHTML);
+
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de escolha
 			//
@@ -172,7 +176,7 @@ i3GEOF.graficoTema = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFgraficotemaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' style='right:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >"+$trad("t37a")+"</a>";
+		titulo = "<div  id='i3GEOFgraficotemaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' style='right:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >"+$trad("t37a")+"</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"330px",
@@ -186,7 +190,11 @@ i3GEOF.graficoTema = {
 			"",
 			"",
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		i3GEOF.graficoTema.aguarde = $i("i3GEOF.graficoTema_imagemCabecalho").style;
@@ -201,18 +209,28 @@ i3GEOF.graficoTema = {
 	A lista &eacute; inserida no elemento html com id "i3GEOgraficotemalistai"
 	*/
 	montaListaItens: function(retorno){
-		var ins,i,n;
+		var ins,i,n, temp = {}, mustache = [];
 		try{
 			ins = [];
 			ins.push("<table class=lista8 >");
 			n = retorno.data.valores.length;
 			for (i=0;i<n; i++){
-				ins.push("<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name="+retorno.data.valores[i].item+" type=checkbox id=i3GEOgraficotema"+retorno.data.valores[i].item+" /></td>");
-				ins.push("<td>&nbsp;"+retorno.data.valores[i].item+"</td>");
-				ins.push("<td><div class='i3geoForm100 i3geoFormIconeAquarela' ><input  id=i3GEOgraficotema"+retorno.data.valores[i].item+"cor type=text size=13 value="+i3GEO.util.randomRGB()+" /></td></tr>");
+				temp = {};
+				temp.item = retorno.data.valores[i].item;
+				temp.rcor = i3GEO.util.randomRGB();
+				mustache.push(temp);
 			}
-			ins.push("</table>");
-			$i("i3GEOgraficotemalistai").innerHTML = ins.join("");
+			ins = Mustache.render(
+					i3GEOF.graficoTema.MUSTACHELISTA,
+					$.extend(
+							{},
+							{
+								"linhas" :  mustache,
+							},
+							i3GEOF.graficoTema.DICIONARIO
+					)
+			);
+			$i("i3GEOgraficotemalistai").innerHTML = ins;
 			i3GEO.util.aplicaAquarela("i3GEOgraficotemalistai");
 		}
 		catch(e)
