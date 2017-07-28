@@ -1,77 +1,91 @@
-<div style='text-align: left; background: yellow;'
-	id='i3GEOANIMAGIFresultado'></div>
-<div style='display: none;' id='parametrosComLogin'>
-	<p class='paragrafo'>
-		<input type='checkbox' id='ativaAoAdic' /><label>{{{ativaAoAdic}}}</label>
-	<p class='paragrafo'>
-		<input type='checkbox' id='execAoAdic' /><label>{{{execAoAdic}}}</label>
+<div class='container-fluid i3GEOanimagif'>
+	<div class="checkbox text-left hidden">
+		<label>
+			<input checked id='ativaAoAdic' type="checkbox">
+			<span class="checkbox-material noprint"><span class="check"></span></span> {{{ativaAoAdic}}}
+		</label>
+	</div>
+	<div class="checkbox text-left hidden">
+		<label>
+			<input checked id='execAoAdic' type="checkbox">
+			<span class="checkbox-material noprint"><span class="check"></span></span> {{{execAoAdic}}}
+		</label>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOANIMAGIFcolunatSel">{{{colunat}}}</label>
+		<div class="input-group">
+		<div id='i3GEOANIMAGIFcolunatSel'></div>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" >{{{tipocolunat}}}</label>
+		<div id='i3GEOANIMAGIFtipocolunat' class="input-group">
+			<select class="form-control">
+				<option value='numero'>{{{numerico}}}</option>
+				<option value='string'>{{{texto}}}</option>
+			</select>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOANIMAGIFtempo">{{{tempo}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFtempo' value='40' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOANIMAGIFw">{{{w}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFw' value='500' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOANIMAGIFh">{{{h}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFh' value='500' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" >{{{cache}}}</label>
+		<div id='i3GEOANIMAGIFcache' class="input-group">
+			<select class="form-control">
+			<option value='sim'>{{{sim}}}</option>
+			<option value='nao'>{{{nao}}}</option>
+			</select>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOANIMAGIFextensao">{{{extensao}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFextensao' value='' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" >{{{legenda}}}</label>
+		<div id='i3GEOANIMAGIFlegenda' class="input-group">
+			<select class="form-control">
+			<option value='sim'>{{{sim}}}</option>
+			<option value='nao'>{{{nao}}}</option>
+			</select>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" >{{{transparencia}}}</label>
+		<div id='i3GEOANIMAGIFtransparencia' class="input-group">
+			<select class="form-control">
+			<option value='sim'>{{{sim}}}</option>
+			<option value='nao'>{{{nao}}}</option>
+			</select>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" >{{{operador}}}</label>
+		<div id='i3GEOANIMAGIFoperador' class="input-group">
+			<select class="form-control">
+			<option value=''>=</option>
+			<option value='lt'>lt</option>
+			<option value='gt'>gt</option>
+			</select>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOANIMAGIFnulos">{{{nulos}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFnulos' value='' />
+	</div>
+
+	<button onclick='i3GEOF.animagif.ativa()' class='btn btn-primary btn-sm btn-raised'>{{{geragif}}}</button>
+	<button onclick='i3GEOF.animagif.salvaParametros()' class='btn btn-primary btn-sm btn-raised hidden'>{{{salvaParametros}}}</button>
+	<button onclick='i3GEOF.animagif.removeParametros()' class='btn btn-primary btn-sm btn-raised hidden'>{{{removeParametros}}}</button>
+
 </div>
-<p class='paragrafo'>{{{colunat}}}
-<div id='i3GEOANIMAGIFcolunatSel' class='styled-select'></div>
-<br>
-<p class='paragrafo'>{{{tipocolunat}}}
-<div id='i3GEOANIMAGIFtipocolunat' class='styled-select'>
-	<select>
-		<option value='numero'>{{{numerico}}}</option>
-		<option value='string'>{{{texto}}}</option>
-	</select>
-</div>
-<br>
-<p class='paragrafo'>{{{tempo}}}
-<div class='i3geoForm i3geoFormIconeNumero'>
-	<input type='number' value='40' id='i3GEOANIMAGIFtempo' />
-</div>
-<br>
-<p class='paragrafo'>{{{w}}}
-<div class='i3geoForm i3geoFormIconeNumero'>
-	<input type='number' value='500' id='i3GEOANIMAGIFw' />
-</div>
-<br>
-<p class='paragrafo'>{{{h}}}
-<div class='i3geoForm i3geoFormIconeNumero'>
-	<input type='number' value='500' id='i3GEOANIMAGIFh' />
-</div>
-<br>
-<p class='paragrafo'>{{{cache}}}
-<div id='i3GEOANIMAGIFcache' class='styled-select'>
-	<select>
-		<option value='sim'>{{{sim}}}</option>
-		<option value='nao'>{{{nao}}}</option>
-	</select>
-</div>
-<br>
-<p class='paragrafo'>{{{extensao}}}
-<div class='i3geoForm i3geoFormIconeEdita'>
-	<input type='text' value='' id='i3GEOANIMAGIFextensao' />
-</div>
-<br>
-<p class='paragrafo'>{{{legenda}}}
-<div id='i3GEOANIMAGIFlegenda' class='styled-select'>
-	<select>
-		<option value='sim'>{{{sim}}}</option>
-		<option value='nao'>{{{nao}}}</option>
-	</select>
-</div>
-<br>
-<p class='paragrafo'>{{{transparencia}}}
-<div id='i3GEOANIMAGIFtransparencia' class='styled-select'>
-	<select>
-		<option value='sim'>{{{sim}}}</option>
-		<option value='nao'>{{{nao}}}</option>
-	</select>
-</div>
-<br>
-<p class='paragrafo'>{{{operador}}}
-<div class='styled-select' id='i3GEOANIMAGIFoperador'>
-	<select >
-		<option value=''>=</option>
-		<option value='lt'>lt</option>
-		<option value='gt'>gt</option>
-	</select>
-</div>
-<br>
-<p class='paragrafo'>{{{nulos}}}
-<div class='i3geoForm i3geoFormIconeEdita'>
-	<input type='text' value='' id='i3GEOANIMAGIFnulos' />
-</div>
-<br><br>

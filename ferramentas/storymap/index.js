@@ -137,7 +137,7 @@ i3GEOF.storymap =
 			}
 			$i(iddiv).innerHTML = i3GEOF.storymap.html();
 			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
-				$(".hidden").removeClass("hidden");
+				$(".i3GEOstorymap").find(".hidden").removeClass("hidden");
 			}
 			try {
 				//

@@ -152,7 +152,7 @@ i3GEOF.tme =
 			}
 			$i(iddiv).innerHTML = i3GEOF.tme.html();
 			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
-				$(".hidden").removeClass("hidden");
+				$(".i3GEOTME").find(".hidden").removeClass("hidden");
 			}
 			try {
 				//

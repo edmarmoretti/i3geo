@@ -125,7 +125,9 @@ i3GEOF.animagif =
 			return;
 		}
 		$i(iddiv).innerHTML = i3GEOF.animagif.html();
-		i3GEOF.animagif.rodape();
+		if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
+			$(".i3GEOanimagif").find(".hidden").removeClass("hidden");
+		}
 		//
 		// verifica se a camada possui definicao dos parametros
 		//
@@ -159,15 +161,33 @@ i3GEOF.animagif =
 				temp = $i("i3GEOANIMAGIFnulos");
 				temp.value = camada.ferramentas.animagif.nulos;
 				// combo para escolher a coluna com as datas
-				i3GEO.util.comboItens("i3GEOanimagifcolunat", i3GEOF.animagif.tema, function(retorno) {
-					$i("i3GEOANIMAGIFcolunatSel").innerHTML = retorno.dados;
-					temp = $i("i3GEOANIMAGIFcolunatSel").getElementsByTagName("select")[0];
-					temp.value = camada.ferramentas.animagif.colunat;
-				}, "i3GEOanimagifcolunatSel");
+				i3GEO.util.comboItens(
+					"i3GEOanimagifcolunat",
+					i3GEOF.animagif.tema,
+					function(retorno) {
+						$i("i3GEOANIMAGIFcolunatSel").innerHTML = retorno.dados;
+						temp = $i("i3GEOANIMAGIFcolunatSel").getElementsByTagName("select")[0];
+						temp.value = camada.ferramentas.animagif.colunat;
+					},
+					"i3GEOanimagifcolunatSel",
+					"",
+					"sim",
+					"",
+					"form-control"
+				);
 			} else if (camada != "") {
-				i3GEO.util.comboItens("i3GEOanimagifcolunat", i3GEOF.animagif.tema, function(retorno) {
-					$i("i3GEOANIMAGIFcolunatSel").innerHTML = retorno.dados;
-				}, "i3GEOanimagifcolunatSel");
+				i3GEO.util.comboItens(
+					"i3GEOanimagifcolunat",
+					i3GEOF.animagif.tema,
+					function(retorno) {
+						$i("i3GEOANIMAGIFcolunatSel").innerHTML = retorno.dados;
+					},
+					"i3GEOanimagifcolunatSel",
+					"",
+					"sim",
+					"",
+					"form-control"
+				);
 				$i("i3GEOANIMAGIFextensao").value = i3GEO.parametros.mapexten;
 			}
 		} else{
@@ -177,50 +197,6 @@ i3GEOF.animagif =
 			$i("i3GEOANIMAGIFextensao").value = i3GEO.parametros.mapexten;
 		}
 		i3GEOF.animagif.ativaFoco();
-	},
-	rodape : function() {
-		var ins =
-			'<input class="paragrafo" id="i3GEOanimagifbotao1" type="button" value="' + $trad('geragif', i3GEOF.animagif.dicionario)
-			+ '" style="cursor:pointer;color:blue"/>';
-		if (i3GEO.login.verificaCookieLogin() === true) {
-			ins +=
-				'<input class="paragrafo" style="margin-top:3px;" id="i3GEOanimagifbotaoSalva" type="button" value="' + $trad(
-					'salvaParametros',
-					i3GEOF.animagif.dicionario)
-					+ '" style="cursor:pointer;color:blue"/>';
-			ins +=
-				'<input class="paragrafo" style="margin-top:3px;" id="i3GEOanimagifbotaoRemove" type="button" value="' + $trad(
-					'removeParametros',
-					i3GEOF.animagif.dicionario)
-					+ '" style="cursor:pointer;color:blue"/>';
-		}
-		YAHOO.i3GEO.janela.manager.find("i3GEOF.animagif").setFooter(ins);
-
-		var b = new YAHOO.widget.Button("i3GEOanimagifbotao1", {
-			onclick : {
-				fn : i3GEOF.animagif.ativa
-			}
-		});
-		b.addClass("rodar");
-		$i("i3GEOanimagifbotao1-button").style.width = "350px";
-		if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
-			$i("parametrosComLogin").style.display = 'block';
-			b = new YAHOO.widget.Button("i3GEOanimagifbotaoSalva", {
-				onclick : {
-					fn : i3GEOF.animagif.salvaParametros
-				}
-			});
-			b.addClass("rodar");
-			$i("i3GEOanimagifbotaoSalva-button").style.width = "350px";
-
-			b = new YAHOO.widget.Button("i3GEOanimagifbotaoRemove", {
-				onclick : {
-					fn : i3GEOF.animagif.removeParametros
-				}
-			});
-			b.addClass("rodar");
-			$i("i3GEOanimagifbotaoRemove-button").style.width = "350px";
-		}
 	},
 	/*
 	 * Function: html
@@ -260,12 +236,30 @@ i3GEOF.animagif =
 		};
 		// cria a janela flutuante
 		titulo =
-			"<div id='i3GEOFanimagifComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div>"
+			"<div id='i3GEOFanimagifComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div>"
 			+"<a class='i3GeoTituloJanelaBs' target=_blank href='"
 			+ i3GEO.configura.locaplic
 			+ "/ajuda_usuario.php?idcategoria=5&idajuda=130' >animagif</a>";
 
-		janela = i3GEO.janela.cria("380px", "380px", "", "", "", titulo, "i3GEOF.animagif", false, "hd", cabecalho, minimiza, "", true);
+		janela = i3GEO.janela.cria(
+			"380px",
+			"380px",
+			"",
+			"",
+			"",
+			titulo,
+			"i3GEOF.animagif",
+			false,
+			"hd",
+			cabecalho,
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			""
+		);
 		divid = janela[2].id;
 		i3GEOF.animagif.aguarde = $i("i3GEOF.animagif_imagemCabecalho").style;
 		$i("i3GEOF.animagif_corpo").style.backgroundColor = "white";
