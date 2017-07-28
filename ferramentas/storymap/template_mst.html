@@ -1,32 +1,50 @@
-<div style='display: block;' id='parametrosComLoginSto'>
-<p class='paragrafo'>{{{cabecalho}}}
-<div class='i3geoForm i3geoFormIconeEdita'>
-	<input type='text' value='' id='i3GEOStocabecalho' />
-</div>
-<br>
-<p class='paragrafo'>{{{texto}}}
-<div class='i3geoForm i3geoFormIconeEdita'>
-	<input type='text' value='' id='i3GEOStotexto' />
-</div>
-<br>
-<p class='paragrafo'>{{{colcabecalho}}}</p>
-<div class='styled-select' id='i3GEOstocolcabecalho'></div>
-<br>
-<p class='paragrafo'>{{{coltexto}}}</p>
-<div class='styled-select' id='i3GEOstocoltexto'></div>
-<br>
-<p class='paragrafo'>{{{collocal}}}</p>
-<div class='styled-select' id='i3GEOstocollocal'></div>
-<br>
-<p class='paragrafo'>{{{colmedia}}}</p>
-<div class='styled-select' id='i3GEOstocolmedia'></div>
-<br>
-<p class='paragrafo'>{{{collon}}}</p>
-<div class='styled-select' id='i3GEOstocollon'></div>
-<br>
-<p class='paragrafo'>{{{collat}}}</p>
-<div class='styled-select' id='i3GEOstocollat'></div>
-<br>
-</div>
+<div class='container-fluid'>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOStocabecalho">{{{cabecalho}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOStocabecalho' value='' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOStotexto">{{{texto}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOStotexto' value='' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOstocolcabecalho">{{{colcabecalho}}}</label>
+		<div class="input-group">
+		<div id='i3GEOstocolcabecalho'></div>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOstocoltexto">{{{coltexto}}}</label>
+		<div class="input-group">
+		<div id='i3GEOstocoltexto'></div>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOstocollocal">{{{collocal}}}</label>
+		<div class="input-group">
+		<div id='i3GEOstocollocal'></div>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOstocolmedia">{{{colmedia}}}</label>
+		<div class="input-group">
+		<div id='i3GEOstocolmedia'></div>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOstocollon">{{{collon}}}</label>
+		<div class="input-group">
+		<div id='i3GEOstocollon'></div>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOstocollat">{{{collat}}}</label>
+		<div class="input-group">
+		<div id='i3GEOstocollat'></div>
+		</div>
+	</div>
 
-
+	<button onclick='window.open(i3GEO.configura.locaplic + "/ferramentas/storymap/default.php?layers=&tema=" + i3GEOF.storymap.tema);' class='btn btn-primary btn-sm btn-raised'>{{{aplicar}}}</button>
+	<button onclick='i3GEOF.storymap.salvaParametros()' class='btn btn-primary btn-sm btn-raised hidden'>{{{salvaParametros}}}</button>
+	<button onclick='i3GEOF.storymap.removeParametros()' class='btn btn-primary btn-sm btn-raised hidden'>{{{removeParametros}}}</button>
+</div>

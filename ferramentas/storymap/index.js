@@ -136,7 +136,9 @@ i3GEOF.storymap =
 				return;
 			}
 			$i(iddiv).innerHTML = i3GEOF.storymap.html();
-			i3GEOF.storymap.rodape();
+			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
+				$(".hidden").removeClass("hidden");
+			}
 			try {
 				//
 				// verifica se a camada possui definicao dos parametros
@@ -149,7 +151,7 @@ i3GEOF.storymap =
 					var combo = function(dados, idonde) {
 						var n, i, ins;
 						n = dados.length;
-						ins = "<select id='" + idonde + "Combo' >";
+						ins = "<select class='form-control' id='" + idonde + "Combo' >";
 						ins += "<option value='' >---</option>";
 						for (i = 0; i < n; i++) {
 							ins += "<option value='" + dados[i]["item"] + "' >" + dados[i]["item"] + "</option>";
@@ -178,52 +180,6 @@ i3GEOF.storymap =
 				i3GEO.php.listaItensTema(temp, i3GEOF.storymap.tema);
 			} catch (erro) {
 				i3GEO.janela.tempoMsg(erro);
-			}
-		},
-		rodape : function() {
-			var ins =
-				'<input class="paragrafo" id="i3GEOstobotao1" type="button" value="' + $trad('aplicar', i3GEOF.storymap.dicionario)
-					+ '" style="cursor:pointer;color:blue"/>';
-			if (i3GEO.login.verificaCookieLogin() === true) {
-				ins +=
-					'<input class="paragrafo" style="margin-top:3px;" id="i3GEOstobotaoSalva" type="button" value="' + $trad(
-						'salvaParametros',
-						i3GEOF.storymap.dicionario)
-						+ '" style="cursor:pointer;color:blue"/>';
-				ins +=
-					'<input class="paragrafo" style="margin-top:3px;" id="i3GEOstobotaoRemove" type="button" value="' + $trad(
-						'removeParametros',
-						i3GEOF.storymap.dicionario)
-						+ '" style="cursor:pointer;color:blue"/>';
-			}
-			YAHOO.i3GEO.janela.manager.find("i3GEOF.storymap").setFooter(ins);
-
-			var b = new YAHOO.widget.Button("i3GEOstobotao1", {
-				onclick : {
-					fn : function() {
-						window.open(i3GEO.configura.locaplic + "/ferramentas/storymap/default.php?layers=&tema=" + i3GEOF.storymap.tema);
-					}
-				}
-			});
-			b.addClass("rodar");
-			$i("i3GEOstobotao1-button").style.width = "350px";
-			if (i3GEO.login.verificaCookieLogin() === true) {
-				$i("parametrosComLoginSto").style.display = 'block';
-				b = new YAHOO.widget.Button("i3GEOstobotaoSalva", {
-					onclick : {
-						fn : i3GEOF.storymap.salvaParametros
-					}
-				});
-				b.addClass("rodar");
-				$i("i3GEOstobotaoSalva-button").style.width = "350px";
-
-				b = new YAHOO.widget.Button("i3GEOstobotaoRemove", {
-					onclick : {
-						fn : i3GEOF.storymap.removeParametros
-					}
-				});
-				b.addClass("rodar");
-				$i("i3GEOstobotaoRemove-button").style.width = "350px";
 			}
 		},
 		/*
@@ -263,11 +219,29 @@ i3GEOF.storymap =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<div id='i3GEOFstoComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div>"
+				"<div id='i3GEOFstoComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div>"
 					+ "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=5&idajuda=108' >Storymap</a>";
-			janela = i3GEO.janela.cria("380px", "320px", "", "", "", titulo, "i3GEOF.storymap", false, "hd", cabecalho, minimiza, "", true);
+			janela = i3GEO.janela.cria(
+				"380px",
+				"320px",
+				"",
+				"",
+				"",
+				titulo,
+				"i3GEOF.storymap",
+				false,
+				"hd",
+				cabecalho,
+				minimiza,
+				"",
+				true,
+				"",
+				"",
+				"",
+				""
+			);
 			divid = janela[2].id;
 			i3GEOF.storymap.aguarde = $i("i3GEOF.storymap_imagemCabecalho").style;
 			$i("i3GEOF.storymap_corpo").style.backgroundColor = "white";
