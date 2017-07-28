@@ -50,6 +50,7 @@ i3GEOF.etiqueta = {
 	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
 	MUSTACHE : "",
+	MUSTACHELISTA : "",
 	/**
 	 * Susbtitutos para o template
 	 */
@@ -69,12 +70,20 @@ i3GEOF.etiqueta = {
 	*/
 	inicia: function(iddiv){
 		if(i3GEOF.etiqueta.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/etiqueta/template_mst.html", function(template) {
-				i3GEOF.etiqueta.MUSTACHE = template;
+			var t1 = i3GEO.configura.locaplic + "/ferramentas/etiqueta/template_mst.html",
+			t2 = i3GEO.configura.locaplic + "/ferramentas/etiqueta/templateLista_mst.html";
+
+			$.when( $.get(t1),$.get(t2) ).done(function(r1,r2) {
+				i3GEOF.etiqueta.MUSTACHE = r1[0];
+				i3GEOF.etiqueta.MUSTACHELISTA = r2[0];
 				i3GEOF.etiqueta.inicia(iddiv);
+			}).fail(function() {
+				i3GEO.janela.closeMsg($trad("erroTpl"));
+				return;
 			});
 			return;
 		}
+
 		if (!$i("i3GEOFetiquetaComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela",function(evt){
 				var botao = evt.target;
@@ -96,16 +105,7 @@ i3GEOF.etiqueta = {
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.etiqueta.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOetiquetabotao1",
-				{onclick:{fn: i3GEOF.etiqueta.ativa}}
-			);
-			b.addClass("rodar150");
-			b = new YAHOO.widget.Button(
-				"i3GEOetiquetabotao2",
-				{onclick:{fn: i3GEOF.etiqueta.desativa}}
-			);
-			b.addClass("rodar150");
+
 			i3GEOF.etiqueta.ativaFoco();
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
@@ -141,7 +141,7 @@ i3GEOF.etiqueta = {
 			i3GEO.janela.minimiza("i3GEOF.etiqueta");
 		};
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >"+$trad("d7at")+"</a>";
+		titulo = "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >"+$trad("d7at")+"</a>";
 		janela = i3GEO.janela.cria(
 			"510px",
 			"300px",
@@ -155,7 +155,11 @@ i3GEOF.etiqueta = {
 			cabecalho,
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		i3GEOF.etiqueta.aguarde = $i("i3GEOF.etiqueta_imagemCabecalho").style;
@@ -190,68 +194,62 @@ i3GEOF.etiqueta = {
 	*/
 	montaListaItens: function(retorno){
 		var funcao = function(dadosItens){
-			var ins,i,n,itensatuais,item,ck = '',lista;
+			var mustache = [], ins,i,n,itensatuais,item, ck = '',lista, temp;
 			lista = dadosItens.data;
 			try{
 				itensatuais = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
 				itensatuais = itensatuais.etiquetas.split(",");
-				ins = [];
-				ins.push("<table class='lista8' >");
-				ins.push("<tr><td>Coluna</td><td>Identifica</td><td>Tip</td><td>Busca</td><td>Alias</td><td>Link</td>");
 				n = retorno.data.valores.length;
 				for (i=0;i<n; i++){
-
-					ins.push("<tr>");
-					//nome da coluna
+					temp = {};
 					item = retorno.data.valores[i].item;
-					ins.push("<td>&nbsp;"+item+"</td>");
-					//itens
+					temp.item = item;
 					if(i3GEO.util.in_array(item,lista.itens) || i3GEO.util.in_array(item,itensatuais) || lista.itembuscarapida[item]){
-						ck = "checked";
+						temp.ckIdentifica = "checked";
 					}
 					else{
-						ck = "";
+						temp.ckIdentifica = "";
 					}
-					ins.push("<td><input onclick='i3GEOF.etiqueta.ativaLinha(this)' style='cursor:pointer' id='etiqueta_"+item+"' "+ck+" type='checkbox' value='"+item+"' name='identifica' /></td>");
-
-					//etiquetas tip
 					if(i3GEO.util.in_array(item,itensatuais)){
-						ck = "checked";
+						temp.ckEtiquetaTip = "checked";
 					}
 					else{
-						ck = "";
+						temp.ckEtiquetaTip = "";
 					}
-					ins.push("<td><input disabled style='cursor:pointer' "+ck+" type='checkbox' value='"+item+"' name='etiquetaTip' /></td>");
 					//buscarapida
 					if(lista.itembuscarapida === item){
-						ck = "checked";
+						temp.ckBuscaRapida = "checked";
 					}
 					else{
-						ck = "";
+						temp.ckBuscaRapida = "";
 					}
-					ins.push("<td><input style='cursor:pointer' value='"+item+"' type='radio' "+ck+" name='itembuscarapida' /></td>");
-					//alias dos itens
 					if(lista.itensdesc[item]){
-						ck = lista.itensdesc[item];
+						temp.ckitensdesc = lista.itensdesc[item];
 					}
 					else{
-						ck = item;
+						temp.ckitensdesc = item;
 					}
-					ins.push("<td><div class='i3geoForm150 i3geoFormIconeEdita' ><input disabled type='text' value='"+ck+"' name='itensdesc' /></div></td>");
 					//links
 					if(lista.itenslink[item]){
-						ck = lista.itenslink[item];
+						temp.ckitem = lista.itenslink[item];
 					}
 					else{
-						ck = "";
+						temp.ckitem = "";
 					}
-					ins.push("<td><div class='i3geoForm150 i3geoFormIconeEdita' ><input disabled type='text' value='"+ck+"' name='itenslink' /></div></td>");
-
-
-					ins.push("</tr>");
+					mustache.push(temp);
 				}
-				ins.push("</table>");
-				$i("i3GEOetiquetalistai").innerHTML = ins.join("");
+				ins = Mustache.render(
+						i3GEOF.etiqueta.MUSTACHELISTA,
+						$.extend(
+								{},
+								{
+									"linhas" :  mustache,
+								},
+								i3GEOF.etiqueta.DICIONARIO
+						)
+				);
+				$i("i3GEOetiquetalistai").innerHTML = ins;
+
 				//enable
 				lista = $i("i3GEOetiquetalistai").getElementsByTagName("input");
 				n = lista.length;
@@ -294,19 +292,19 @@ i3GEOF.etiqueta = {
 			n = inputs.length;
 		for (i=0;i<n; i++){
 			it = inputs[i];
-			if (it.disabled === false && it.checked === true && it.name === "etiquetaTip"){
+			if (it.checked === true && it.name === "etiquetaTip"){
 				tips.push(it.value);
 			}
-			if (it.disabled === false && it.checked === true && it.name === "identifica"){
+			if (it.checked === true && it.name === "identifica"){
 				itens.push(it.value);
 			}
-			if (it.disabled === false && it.name === "itensdesc"){
+			if (it.name === "itensdesc"){
 				itensdesc.push(it.value);
 			}
-			if (it.disabled === false && it.name === "itenslink"){
+			if (it.name === "itenslink"){
 				itenslink.push(it.value);
 			}
-			if (it.checked === true && it.name === "itembuscarapida"){
+			if (it.name === "itembuscarapida"){
 				itembuscarapida = it.value;
 			}
 		}

@@ -1,0 +1,57 @@
+<div>
+	<table class="lista8" style="background-color: #89afd4;">
+		<tr>
+			<td>Coluna</td>
+			<td>Identifica</td>
+			<td>Tip</td>
+			<td>Busca</td>
+			<td>Alias</td>
+			<td>Link</td>
+		<tr>{{#linhas}}
+		<tr>
+			<td>{{{item}}}</td>
+			<td>
+				<div class="checkbox condensed">
+					<label>
+						<input {{{ckIdentifica}}} value="{{{item}}}" type="checkbox" name="identifica" />
+						<span class="checkbox-material noprint">
+							<span class="check"></span>
+						</span>
+					</label>
+				</div>
+			</td>
+			<td>
+				<div class="checkbox condensed">
+					<label>
+						<input {{{ckEtiquetaTip}}} type='checkbox' value="{{{item}}}" name='etiquetaTip' />
+						<span class="checkbox-material noprint">
+							<span class="check"></span>
+						</span>
+					</label>
+				</div>
+			</td>
+			<td>
+				<div class="radio radio-primary condensed">
+					<label>
+						<input {{{ckBuscaRapida}}} type='radio' value="{{{item}}}" name='itembuscarapida' />
+						<span class="circle">
+							<span class="check"></span>
+						</span>
+					</label>
+				</div>
+			</td>
+			<td>
+				<div class='form-group condensed'>
+					<input class="form-control input" type='text' name='itensdesc' value='{{{ckitensdesc}}}' />
+				</div>
+			</td>
+			<td>
+				<div class='form-group condensed'>
+					<input class="form-control input" type='text' name='itenslink' value='{{{ckitem}}}' />
+				</div>
+			</td>
+
+		</tr>
+		{{/linhas}}
+	</table>
+</div>
