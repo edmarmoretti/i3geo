@@ -90,7 +90,7 @@ i3GEOF.toponimia.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'deslocamentoSombraFundo' : [ {
+	'deslocamentoSombra' : [ {
 		pt : "Deslocamento da sombra",
 		en : "",
 		es : ""

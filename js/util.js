@@ -1934,12 +1934,14 @@ i3GEO.util =
 		 *
 		 * {String} - id do elemento HTML que recebera o combo. e utilizado apenas para inserir uma mensagem de aguarde.
 		 */
-		comboFontes : function(id, onde) {
-			$i(onde).innerHTML = "<span style=color:red >buscando fontes...</span>";
+		comboFontes : function(id, onde, classe) {
+			if(!classe){
+				classe= "";
+			}
 			var monta = function(retorno) {
 				var ins = "", temp, i, dados;
 				if (retorno.data !== undefined) {
-					ins += "<select  id='" + id + "'>";
+					ins += "<select class='" + classe + "' id='" + id + "'>";
 					ins += "<option value='bitmap' >bitmap</option>";
 					dados = retorno.data.split(",");
 					temp = dados.length;

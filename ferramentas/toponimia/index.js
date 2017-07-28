@@ -33,6 +33,10 @@ i3GEOF.toponimia = {
 		dicionario["asp"] = '"';
 		dicionario["sim"] = $trad("x14");
 		dicionario["nao"] = $trad("x15");
+		var versao = i3GEO.parametros.versaomscompleta.split(".");
+		if(parseInt(versao[0],10) <= 6 && parseInt(versao[1],10) == 0){
+			dicionario["removeToponimia"] = "";
+		}
 		return dicionario;
 	},
 	/*
@@ -83,25 +87,6 @@ i3GEOF.toponimia = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOtoponimiaguia3","i3GEOtoponimiaguia");
 				i3GEOF.toponimia.testa();
 			};
-			var b,versao;
-			versao = i3GEO.parametros.versaomscompleta.split(".");
-
-			b = new YAHOO.widget.Button(
-				"i3GEOtoponimiabotao1",
-				{onclick:{fn: i3GEOF.toponimia.cria}}
-			);
-			b.addClass("rodar150");
-
-			if(parseInt(versao[0],10) <= 6 && parseInt(versao[1],10) == 0){
-				$i("i3GEOtoponimiabotao2").style.display = "none";
-			}
-			else{
-				b = new YAHOO.widget.Button(
-					"i3GEOtoponimiabotao2",
-					{onclick:{fn: i3GEOF.toponimia.remove}}
-				);
-				b.addClass("rodar150");
-			}
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de escolha
 			//
@@ -114,9 +99,12 @@ i3GEOF.toponimia = {
 					$i("i3GEOtoponimiaListaItens").value = i3GEOF.toponimia.ATIVAITEM;
 				},
 				"i3GEOtoponimiaDivListaItens",
-				""
+				"",
+				"",
+				"",
+				"form-control"
 			);
-			i3GEO.util.comboFontes("i3GEOtoponimiaListaFonte","i3GEOtoponimiaDivListaFonte");
+			i3GEO.util.comboFontes("i3GEOtoponimiaListaFonte","i3GEOtoponimiaDivListaFonte","form-control");
 			i3GEO.util.aplicaAquarela("i3GEOF.toponimia_corpo");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
@@ -146,7 +134,7 @@ i3GEOF.toponimia = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div>"
+		titulo = "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div>"
 			+ "</div><a class='i3GeoTituloJanelaBs' style='right:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=36' >" + $trad("x56")+"</a>";
 		janela = i3GEO.janela.cria(
 			"410px",
@@ -161,7 +149,11 @@ i3GEOF.toponimia = {
 			"",
 			"",
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		i3GEOF.toponimia.aguarde = $i("i3GEOF.toponimia_imagemCabecalho").style;
