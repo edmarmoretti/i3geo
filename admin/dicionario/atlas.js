@@ -153,13 +153,13 @@ i3GEOadmin.atlas.dicionario = {
 	} ],
     'publicado' : [ {
 		pt : "Publicado (os n&atilde;o publicados s&atilde;o mostrados apenas para os usu&aacute;rios administradores)?",
-		en : "",
-		es : ""
+		en : "Publish (the unpublished ones are shown for administrator users only)?",
+		es : "Publicado (los no publicados se muestran solo para los usuarios administradores)?"
 	} ],
     'msgNaoExclui' : [ {
 		pt : "N&atilde;o foi poss&iacute;vel excluir. Verifique se n&atilde;o existem menus vinculados a este tema",
-		en : "",
-		es : ""
+		en : "Impossible to eliminate. Check if there are no menus tied to this theme",
+		es : "No se pudo eliminar. Compruebe que no hay men&uacute;s vinculados a este tema"
 	} ],
     '' : [ {
 		pt : "",
