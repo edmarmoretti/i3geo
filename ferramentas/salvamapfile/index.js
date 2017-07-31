@@ -93,25 +93,18 @@ i3GEOF.salvamapfile = {
 					i3GEOF.salvamapfile.aguarde.visibility = "hidden";
 					var nome = retorno.data.nomeoriginal;
 					if(nome == ""){
-						$i(iddiv).innerHTML = "<p class=paragrafo >"+$trad('naoExisteMapfile',i3GEOF.salvamapfile.dicionario)+"<a href='"+i3GEO.configura.locaplic+"/admin/html/editormapfile.html' target=_blank >link</a>";
+						$i(iddiv).innerHTML = "<h5 class='alert alert-danger'>"+$trad('naoExisteMapfile',i3GEOF.salvamapfile.dicionario)+"</h5>";
 						return;
 					}
 					if(nome == undefined){
-						$i(iddiv).innerHTML = "<p class=paragrafo >"+$trad('naosalva',i3GEOF.salvamapfile.dicionario);
+						$i(iddiv).innerHTML = "<h5 class='alert alert-danger'>"+$trad('naosalva',i3GEOF.salvamapfile.dicionario)+"</h5>";
 						return;
 					}
-					var ins = "<p class=paragrafo >"+$trad('ajuda',i3GEOF.salvamapfile.dicionario) +
-					'<span id="i3GEOsalvamapconcluido" style=display:none;color:red  > '+$trad('concluido',i3GEOF.salvamapfile.dicionario)+'</span></p>' +
-					'<br><p class=paragrafo ><input size=20 id=i3GEOsalvamapfilebotao1 type=button value="'+$trad('salva',i3GEOF.salvamapfile.dicionario)+'"  />';
-					$i(iddiv).innerHTML = ins;
-					new YAHOO.widget.Button(
-						"i3GEOsalvamapfilebotao1",
-						{onclick:{fn: function(){i3GEOF.salvamapfile.salva(nome,retorno.data.mapfile,retorno.data.nomelayer);}}}
-					);
-					new YAHOO.widget.Button(
-						"i3GEOsalvamapfilebotao2",
-						{onclick:{fn: function(){window.open(i3GEO.configura.locaplic+"/testamapfile.php?map="+nome);}}}
-					);
+					var ins = "<h5>"+$trad('ajuda',i3GEOF.salvamapfile.dicionario) + "</h5>" +
+					"<h5 class='alert alert-success' style='display:none;' id='i3GEOsalvamapconcluido' >"+$trad('concluido',i3GEOF.salvamapfile.dicionario)+"</h5>" +
+					'<br><button onclick="i3GEOF.salvamapfile.salva(\'' + nome + '\',\'' + retorno.data.mapfile + '\',\'' + retorno.data.nomelayer + '\');" class="btn btn-primary btn-sm btn-raised">'+$trad('salva',i3GEOF.salvamapfile.dicionario)+'</button>';
+					$i(iddiv).innerHTML = "<div class='container-fluid'>" + ins + "</div>";
+
 				};
 			cp.set_response_type("JSON");
 			cp.call(p,"",retorno);
@@ -135,8 +128,8 @@ i3GEOF.salvamapfile = {
 		//cria a janela flutuante
 		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=92' >" + $trad("x55")+" <i>"+i3GEO.temaAtivo+"</i></a>";
 		janela = i3GEO.janela.cria(
-			"330px",
-			"130px",
+			"340px",
+			"160px",
 			"",
 			"",
 			"",
@@ -148,7 +141,10 @@ i3GEOF.salvamapfile = {
 			minimiza,
 			"",
 			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/document-save.png"
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.salvamapfile_corpo").style.backgroundColor = "white";

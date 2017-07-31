@@ -3,7 +3,6 @@ MAP
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
     CONNECTION ""
-    #o caminho aqui tem de ser completo
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
@@ -11,17 +10,26 @@ MAP
       "cache"	"nao"
       "CLASSE"	"SIM"
       "LTEMPOITEMDESCRICAO"	"TIPO"
+      "olopacity"	""
       "LTEMPOITEMINICIO"	"ANOCRIA"
       "permitekmz"	"sim"
       "LTEMPOITEMTIP"	"ANOCRIA"
+      "gmopacity"	""
+      "gmstatus"	""
       "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
       "LTEMPOITEMTITULO"	"NOMELOC"
       "ITENSLINK"	",,,"
       "TILES"	"SIM"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "arquivotemaoriginal"	""
+      "nomeoriginal"	""
+      "olstatus"	""
       "permitedownload"	"sim"
       "LTEMPOFORMATODATA"	"iso8601"
+      "FILTROORIGINAL"	""
       "permitecomentario"	"SIM"
+      "DATAORIGINAL"	""
+      "PLUGINI3GEO"	""
       "metaestat"	""
       "download"	"SIM"
       "itembuscarapida"	"NOMELOC"
@@ -31,13 +39,13 @@ MAP
       "transitioneffect"	"NAO"
       "TEMA"	"Localidades (usar com timeline) para teste"
       "cortepixels"	"40"
+      "identifica"	"sim"
       "LTEMPOCONVENCODE"	"SIM"
-      #"CONVCARACTER" "NAO"
     END # METADATA
     NAME "_llocali"
     PROCESSING "LABEL_NO_CLIP=True"
     PROCESSING "POLYLINE_NO_CLIP=True"
-    STATUS OFF
+    STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"
     TYPE POINT

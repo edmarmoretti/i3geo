@@ -50,11 +50,11 @@ i3GEOF.atalhosedicao =
 			var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 			var montaEditorPlugin = function(retorno){
 				i3GEO.pluginI3geo.parametrossql.formAdmin(
-					retorno,
-					"editor_bd",
-					i3GEO.temaAtivo,
-					'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"parametrossql",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);',
-					'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);'
+						retorno,
+						"editor_bd",
+						i3GEO.temaAtivo,
+						'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"parametrossql",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);',
+						'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);'
 				);
 			};
 			core_pegaDados("",sUrl,montaEditorPlugin);
@@ -68,11 +68,11 @@ i3GEOF.atalhosedicao =
 			var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 			var montaEditorPlugin = function(retorno){
 				i3GEO.pluginI3geo.layerkml.formAdmin(
-					retorno,
-					"editor_bd",
-					i3GEO.temaAtivo,
-					'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"layerkml",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);',
-					'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);'
+						retorno,
+						"editor_bd",
+						i3GEO.temaAtivo,
+						'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"layerkml",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);',
+						'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);'
 				);
 			};
 			core_pegaDados("",sUrl,montaEditorPlugin);
@@ -85,11 +85,11 @@ i3GEOF.atalhosedicao =
 			var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 			var montaEditorPlugin = function(retorno){
 				i3GEO.pluginI3geo.markercluster.formAdmin(
-					retorno,
-					"editor_bd",
-					i3GEO.temaAtivo,
-					'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"markercluster",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);',
-					'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);'
+						retorno,
+						"editor_bd",
+						i3GEO.temaAtivo,
+						'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"markercluster",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);',
+						'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);'
 				);
 			};
 			core_pegaDados("",sUrl,montaEditorPlugin);
@@ -102,11 +102,11 @@ i3GEOF.atalhosedicao =
 			var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 			var montaEditorPlugin = function(retorno){
 				i3GEO.pluginI3geo.heatmap.formAdmin(
-					retorno,
-					"editor_bd",
-					i3GEO.temaAtivo,
-					'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"heatmap",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);',
-					'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);'
+						retorno,
+						"editor_bd",
+						i3GEO.temaAtivo,
+						'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"heatmap",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);',
+						'i3GEOF.atalhosedicao.salvarDadosEditorPlugin($i("editor_bd"),"",i3GEOF.atalhosedicao.tema,i3GEOF.atalhosedicao.tema);'
 				);
 			};
 			core_pegaDados("",sUrl,montaEditorPlugin);
@@ -262,6 +262,9 @@ i3GEOF.atalhosedicao =
 							else {
 								YAHOO.admin.container.panelEditor.destroy();
 								YAHOO.admin.container.panelEditor = null;
+								i3GEO.Interface.openlayers.removeTodosOsLayers();
+								i3GEO.arvoreDeCamadas.CAMADAS = [];
+								i3GEO.atualiza();
 							}
 						}
 						catch(e){core_handleFailure(e,o.responseText);}
@@ -270,5 +273,4 @@ i3GEOF.atalhosedicao =
 			};
 			core_makeRequest(sUrl,callback,'POST');
 		}
-
 };

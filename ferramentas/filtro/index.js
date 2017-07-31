@@ -185,6 +185,7 @@ i3GEOF.filtro = {
 			""
 		);
 		divid = janela[2].id;
+		janela[0].bringToTop();
 		i3GEOF.filtro.aguarde = $i("i3GEOF.filtro_imagemCabecalho").style;
 		$i("i3GEOF.filtro_corpo").style.backgroundColor = "white";
 		i3GEOF.filtro.inicia(divid,modoCalculadora,idRetorno);

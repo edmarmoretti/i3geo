@@ -120,6 +120,7 @@ i3GEOF.aplicarsld = {
 			minimiza
 		);
 		divid = janela[2].id;
+		janela[0].bringToTop();
 		$i("i3GEOF.aplicarsld_corpo").style.backgroundColor = "white";
 		i3GEOF.aplicarsld.aguarde = $i("i3GEOF.aplicarsld_imagemCabecalho").style;
 		i3GEOF.aplicarsld.inicia(divid);

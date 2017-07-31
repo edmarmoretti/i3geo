@@ -347,7 +347,6 @@ i3GEOF.legenda =
 					"",
 					""
 			);
-
 			divid = janela[2].id;
 			i3GEOF.legenda.aguarde = $i("i3GEOF.legenda_imagemCabecalho").style;
 			$i("i3GEOF.legenda_corpo").style.backgroundColor = "white";
