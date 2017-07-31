@@ -2275,6 +2275,7 @@ class Atributos
 		$tips = explode(",",$tips);
 		//o retorno deve ser do tipo TIP
 		if($etip == true || $todosItens = true){
+			$itensMetadata = $itens;
 			$temp = array_combine($itens,$itensdesc);
 			$templ = array_combine($itens,$lks);
 			$tempimg = array_combine($itens,$itemimg);
@@ -2284,32 +2285,33 @@ class Atributos
 			$lks = array();
 			$itemimg = array();
 			$locimg = array();
-
 			foreach($itensLayer as $t){
-				$itens[] = $t;
-				if($temp[$t] != ""){
-					$itensdesc[] = $temp[$t];
-				}
-				else{
-					$itensdesc[] = $t;
-				}
-				if($templ[$t] != ""){
-					$lks[] = $templ[$t];
-				}
-				else{
-					$lks[] = "";
-				}
-				if($tempimg[$t] != ""){
-					$itemimg[] = $tempimg[$t];
-				}
-				else{
-					$itemimg[] = "";
-				}
-				if($temploc[$t] != ""){
-					$locimg[] = $temploc[$t];
-				}
-				else{
-					$locimg[] = "";
+				if(in_array($t,$itensMetadata)){
+					$itens[] = $t;
+					if($temp[$t] != ""){
+						$itensdesc[] = $temp[$t];
+					}
+					else{
+						$itensdesc[] = $t;
+					}
+					if($templ[$t] != ""){
+						$lks[] = $templ[$t];
+					}
+					else{
+						$lks[] = "";
+					}
+					if($tempimg[$t] != ""){
+						$itemimg[] = $tempimg[$t];
+					}
+					else{
+						$itemimg[] = "";
+					}
+					if($temploc[$t] != ""){
+						$locimg[] = $temploc[$t];
+					}
+					else{
+						$locimg[] = "";
+					}
 				}
 			}
 		}
