@@ -1206,7 +1206,7 @@ h1 {
 	width: 95%;
 	padding: 5px;
 }
-
+/*
 #editor_bd p {
 	margin-top: 15px;
 }
@@ -1219,6 +1219,7 @@ h1 {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 }
+*/
 /* usado pelos graficos interativos (CCC2)*/
 .tipsy {
 	pointer-events: none;

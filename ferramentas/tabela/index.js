@@ -837,7 +837,7 @@ i3GEOF.tabela =
 					vals = retorno.data[1].registros[i].valores;
 					linha.colunas = "";
 					for (j = 0; j < vals.length; j++) {
-						linha.colunas += "<td style='min-width: 150px;' >" + vals[j].valor + "</td>";
+						linha.colunas += "<td style='min-width: 150px;' title='" + vals[j].item + "' >" + vals[j].valor + "</td>";
 					}
 					mustache.linhas.push(linha);
 				}

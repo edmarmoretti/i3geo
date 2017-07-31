@@ -1,0 +1,28 @@
+<div class='container-fluid'>
+	<h5 class="alert alert-info">
+		Veja o exemplo utilizado no tema _lmapadecluster.map. Mais informa&ccedil;&otilde;es:
+		<a href='{{{linkAjuda}}}' target=_blank>{{{linkAjuda}}}</a>
+	</h5>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="MCgridSize">Dist&acirc;ncia m&aacute;xima entre ponto em pixels</label>
+		<input class="form-control input-lg" type='text' id='MCgridSize' value='{{{gridSize}}}' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="MCtipoEstilos">Tipo de estilos (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal)</label>
+		<input class="form-control input-lg" type='text' id='MCtipoEstilos' value='{{{tipoEstilos}}}' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="MCcolor">Cor de fundo dos clusters</label>
+		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='MCcolor' value='{{{color}}}' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="MCstrokecolor">Cor do contorno</label>
+		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='MCstrokecolor' value='{{{strokecolor}}}' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="MCtextcolor">Cor do texto</label>
+		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='MCtextcolor' value='{{{textcolor}}}' />
+	</div>
+	<button onclick='{{{salvaPlugin}}}' class='btn btn-primary btn-sm btn-raised'>{{{salva}}}</button>
+	<button onclick='{{{removePlugin}}}' class='btn btn-primary btn-sm btn-raised'>{{{remove}}}</button>
+</div>

@@ -877,13 +877,12 @@ td {
 	border: 0px solid #FFFFFF;
 	padding: 0px;
 	margin: 0px;
-	width: 100%;
 	max-width: 100%;
 	font-weight: unset;
 }
 
 .bd table tr:first-of-type td {
-   padding: 20px;
+   padding: 5px;
 }
 
 .bd td {
@@ -891,7 +890,7 @@ td {
 	padding: 0px;
 	color: white;
 	margin: 0px;
-	text-align: center;
+	text-align: left;
 	border-top: 3px solid #89afd4;
 	font-weight: initial;
 }

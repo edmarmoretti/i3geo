@@ -1,3 +1,19 @@
+<?php
+//verifica login
+session_write_close ();
+session_name ( "i3GeoLogin" );
+if(empty($_COOKIE ["i3geocodigologin"])){
+	exit;
+}
+session_id ( $_COOKIE ["i3geocodigologin"] );
+session_start ();
+if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
+	$_COOKIE = array ();
+	$_SESSION = array ();
+	session_destroy ();
+	exit;
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,7 +23,7 @@
 	content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 <title>i3GEO - OpenLayers</title>
 <script src="../pacotes/ol3/ol.js"></script>
-<script src="../js/i3geo.js"></script>
+<script src="../js/i3geonaocompacto.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->

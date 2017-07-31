@@ -867,6 +867,16 @@ padding: 0px;
 margin: 0px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+td {
+background-color: white;
+border: 0px solid gray;
+padding: 0px;
+color: #2F4632;
+margin: 0px;
+text-align: center;
+font-size: 10pt !Important;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 div {
 border: 0px solid #FFFFFF;
 font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -881,16 +891,6 @@ font-style: normal;
 font-size: 14px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 color: #004080;
-}
-td {
-background-color: white;
-border: 0px solid gray;
-padding: 0px;
-color: #2F4632;
-margin: 0px;
-text-align: center;
-font-size: 10pt !Important;
-font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 /*
 .ajuda_usuario {
@@ -1358,6 +1358,7 @@ background-color: rgb(220, 220, 220);
 width: 95%;
 padding: 5px;
 }
+/*
 #editor_bd p {
 margin-top: 15px;
 }
@@ -1369,6 +1370,7 @@ color: #426252;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10px;
 }
+*/
 /* usado pelos graficos interativos (CCC2)*/
 .tipsy {
 pointer-events: none;

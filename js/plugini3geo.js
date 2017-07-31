@@ -93,8 +93,13 @@ i3GEO.pluginI3geo =
 		           /**
 		            * Retorna o HTML com o formulario para editar os parametros do plugin
 		            */
-		           formAdmin : function(plugin, configString) {
-		        	   return i3GEO.pluginI3geo[plugin].formAdmin(configString);
+		           formAdmin : function(plugin, configString, onde) {
+		        	   var html = i3GEO.pluginI3geo[plugin].formAdmin(configString,onde);
+		        	   if(!onde){
+		        		   return html;
+		        	   } else {
+		        		   return false;
+		        	   }
 		           },
 		           /**
 		            * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas Esse icone e
@@ -462,8 +467,20 @@ i3GEO.pluginI3geo =
 		        	   linkAjuda : function() {
 		        		   return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=122";
 		        	   },
-		        	   formAdmin : function(config) {
-		        		   var parametros, ins = "", configDefault =
+		        	   formAdmin : function(config,onde,tema,salva,remove) {
+		        		   if(!i3GEO.template.markercluster){
+		        			   var t1 = i3GEO.configura.locaplic + "/js/templates/markerclusterForm_mst.html";
+		        			   $.get(t1).done(function(r1) {
+		        				   i3GEO.template.markercluster = r1;
+
+		        				   i3GEO.pluginI3geo.markercluster.formAdmin(config,onde,tema,salva,remove);
+		        			   }).fail(function() {
+		        				   i3GEO.janela.closeMsg($trad("erroTpl"));
+		        				   return;
+		        			   });
+		        			   return;
+		        		   }
+		        		   var mustache,parametros, ins = "", configDefault =
 		        			   '{"plugin":"markercluster","parametros":{"tipoEstilos": "default","textcolor":"#fff","strokecolor":"#fff","color":"#3399CC","gridSize":"50"}}';
 		        		   if (config === "") {
 		        			   config = configDefault;
@@ -473,33 +490,34 @@ i3GEO.pluginI3geo =
 		        			   config = JSON.parse(configDefault);
 		        		   }
 		        		   parametros = config.parametros;
-		        		   ins +=
-		        			   "" + "<p class='paragrafo'>Dist&acirc;ncia m&aacute;xima entre ponto em pixels:"
-		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input id='MCgridSize' type='text' value='"
-		        			   + parametros.gridSize
-		        			   + "' size='30'></div></p>"
-		        			   + "<p class='paragrafo'>Tipo de estilos (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
-		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input id='MCtipoEstilos' type='text' value='"
-		        			   + parametros.tipoEstilos
-		        			   + "' size='30'></div></p>"
-		        			   + "<p class='paragrafo'>Cor de fundo dos clusters"
-		        			   + "<br><div class='i3geoForm100 i3geoFormIconeAquarela'><input id='MCcolor' type='text' value='"
-		        			   + i3GEO.util.hex2rgb(parametros.color)
-		        			   + "' ></div></p>"
-		        			   + "<p class='paragrafo'>Cor do contorno"
-		        			   + "<br><div class='i3geoForm100 i3geoFormIconeAquarela'><input id='MCstrokecolor' type='text' value='"
-		        			   + i3GEO.util.hex2rgb(parametros.strokecolor)
-		        			   + "' ></div></p>"
-		        			   + "<p class='paragrafo'>Cor do texto"
-		        			   + "<br><div class='i3geoForm100 i3geoFormIconeAquarela'><input id='MCtextcolor' type='text' value='"
-		        			   + i3GEO.util.hex2rgb(parametros.textcolor)
-		        			   + "' ></div></p>"
-		        			   + "<p class='paragrafo'>Veja o exemplo utilizado no tema _lmapadecluster.map</p>";
-
-		        		   return ins;
+		        		   mustache = {
+		        				   "gridSize": parametros.gridSize,
+		        				   "tipoEstilos": parametros.tipoEstilos,
+		        				   "color": i3GEO.util.hex2rgb(parametros.color),
+		        				   "strokecolor": i3GEO.util.hex2rgb(parametros.strokecolor),
+		        				   "textcolor": i3GEO.util.hex2rgb(parametros.textcolor),
+		        				   "linkAjuda": i3GEO.pluginI3geo.linkAjuda("markercluster"),
+		        				   "tema": tema,
+		        				   "salvaPlugin": salva,
+		        				   "removePlugin": remove
+		        		   };
+		        		   ins = Mustache.render(
+		        				   i3GEO.template.markercluster,
+		        				   $.extend(
+		        						   {},
+		        						   mustache,
+		        						   i3GEO.idioma.OBJETOIDIOMA
+		        				   )
+		        		   );
+		        		   if($i(onde)){
+		        			   $i(onde).innerHTML = ins;
+		        			   return false;
+		        		   } else {
+		        			   return ins;
+		        		   }
 		        	   },
 		        	   parametrosFormAdmin : function(onde) {
-		        		   return '{"plugin":"markercluster","parametros":{"tipoEstilos": "'+$i("MCtipoEstilos").value+'","textcolor":"'+i3GEO.util.rgb2hex($i("MCtextcolor").value)+'","strokecolor":"'+i3GEO.util.rgb2hex($i("MCstrokecolor").value)+'","color":"'+i3GEO.util.rgb2hex($i("MCcolor").value)+'","gridSize":"'+$i("MCgridSize").value+'"}}';;
+		        		   return '{"plugin":"markercluster","parametros":{"tipoEstilos": "'+$i("MCtipoEstilos").value+'","textcolor":"'+i3GEO.util.rgb2hex($i("MCtextcolor").value)+'","strokecolor":"'+i3GEO.util.rgb2hex($i("MCstrokecolor").value)+'","color":"'+i3GEO.util.rgb2hex($i("MCcolor").value)+'","gridSize":"'+$i("MCgridSize").value+'"}}';
 		        	   },
 		        	   /**
 		        	    * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas Esse icone e
@@ -536,8 +554,8 @@ i3GEO.pluginI3geo =
 		        			   var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/googlemaps_js.php", carregaJs =
 		        				   "nao", criaLayer;
 		        			   criaLayer = function() {
-			        			   if (typeof (console) !== 'undefined')
-			        				   console.info("i3GEO.pluginI3geo.markercluster.googlemaps.inicia()");
+		        				   if (typeof (console) !== 'undefined')
+		        					   console.info("i3GEO.pluginI3geo.markercluster.googlemaps.inicia()");
 
 		        				   var markercluster, marcas, latLng, marker, n, i;
 		        				   n = markercluster_dados.length;
@@ -960,8 +978,22 @@ i3GEO.pluginI3geo =
 		        	   linkAjuda : function() {
 		        		   return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=127";
 		        	   },
-		        	   formAdmin : function(config) {
-		        		   var n, i, parametros, ins = "", configDefault =
+		        	   formAdmin : function(config,onde,tema,salva,remove) {
+			        	   if (typeof (console) !== 'undefined')
+			        		   console.info("i3GEO.pluginI3geo.parametrossql.formAdmin()");
+
+		        		   if(!i3GEO.template.parametrossql){
+		        			   var t1 = i3GEO.configura.locaplic + "/js/templates/parametrossqlForm_mst.html";
+		        			   $.get(t1).done(function(r1) {
+		        				   i3GEO.template.parametrossql = r1;
+		        				   i3GEO.pluginI3geo.parametrossql.formAdmin(config,onde,tema,salva,remove);
+		        			   }).fail(function() {
+		        				   i3GEO.janela.closeMsg($trad("erroTpl"));
+		        				   return;
+		        			   });
+		        			   return;
+		        		   }
+		        		   var linhas=[],temp,mustache, n, i, parametros, ins = "", configDefault =
 		        			   '{"plugin":"parametrossql","ativo":"sim","parametros":[{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""}]}';
 		        		   if (config === "") {
 		        			   config = configDefault;
@@ -971,48 +1003,46 @@ i3GEO.pluginI3geo =
 		        			   config = JSON.parse(configDefault);
 		        		   }
 		        		   parametros = config.parametros;
-		        		   n = 4;
+		        		   n = parametros.length;
 		        		   if (config.ativo == undefined) {
-		        			   config.ativo = "sim";
-		        		   }
-		        		   ins += "<p class='paragrafo'>Abre o formul&aacute;rio quando a camada &eacute; adicionada ao mapa: (true ou false)</p>";
-		        		   ins += "<div class='styled-select' style='display:block;width: 200px;' ><select id='parametrosSqlAtivo' ><option value='' ></option>";
-		        		   if (config.ativo === "nao") {
-		        			   ins += "<option value=sim >sim</option><option value=nao selected >nao</option></select></div>";
+		        			   config.ativoSim = "selected";
+		        			   config.ativoNao = "";
 		        		   } else {
-		        			   ins += "<option value=sim selected >sim</option><option value=nao >nao</option></select></div>";
+		        			   config.ativoSim = "";
+		        			   config.ativoNao = "selected";
 		        		   }
-
-		        		   ins +=
-		        			   "<table class='lista4'><tr><td>T&iacute;tulo</td><td>Chave</td><td>Tipo (input ou select)</td><td>Valores</td><td>PHP que retorna os valores (opcional)</td></tr>";
 		        		   for (i = 0; i < n; i++) {
-		        			   ins +=
-		        				   "<tr><td><input name='titulo' type=text size=20 value='" + parametros[i].titulo
-		        				   + "' /></td>"
-		        				   + "<td><input name='chave' type=text size=20 value='"
-		        				   + parametros[i].chave
-		        				   + "' /></td>"
-		        				   + "<td><input name='tipo' type=text size=20 value='"
-		        				   + parametros[i].tipo
-		        				   + "' /></td> "
-		        				   + "<td><input name='valores' type=text size=20 value='"
-		        				   + parametros[i].valores
-		        				   + "' /></td> "
-		        				   + "<td><input name='prog' type=text size=20 value='"
-		        				   + parametros[i].prog
-		        				   + "' /></td> "
-		        				   + "<td></tr>";
+		        			   temp = {};
+		        			   temp.titulo = parametros[i].titulo;
+		        			   temp.chave = parametros[i].chave;
+		        			   temp.tipo = parametros[i].tipo;
+		        			   temp.valores = parametros[i].valores;
+		        			   temp.prog = parametros[i].prog;
+		        			   linhas.push(temp);
 		        		   }
-		        		   ins +=
-		        			   "</table>" + "<p class='paragrafo'>As chaves s&atilde;o palavras que devem existir no SQL definido em DATA e/ou no filtro (FILTER)."
-		        			   + "<br>O usu&aacute;rio ir&aacute; fornecer os valores que ser&atilde;o ent&atilde;o utilizados para substituir as chaves de forma din&acirc;mica"
-		        			   + "<br>Ser&aacute; mostrado ao usu&aacute;rio um formul&aacute;rio com op&ccedil;&otilde;es. Cada op&ccedil;&atilde;o conter&aacute; um t&iacute;tulo e um campo de formul&aacute;rio"
-		        			   + "<br>Cada campo de formul&aacute;rio pode ser dos tipos input (para digitar um valor) ou select (caixa de op&ccedil;&otilde;es)."
-		        			   + "<br>Em valores deve ser definida a lista ou o valor default que ser&aacute; mostrado. No caso de listas, utilize v&iacute;rgula para separar os valores. Os valores devem sempre ser inteiros."
-		        			   + "<br>Em ativo, &eacute; indicado com sim ou nao se o formul&aacute;rio ser&aacute; aberto quando a camada for adicionada ao mapa."
-		        			   + "<br>Como opcional, pode ser definido o endere&ccedil;o de um programa PHP que retorna a lista de nomes e valores que ser&atilde;o utilizados para preencher "
-		        			   + "o campo de escolha. Para mais informa&ccedil;&otilde;es, veja o mapfile i3geo/temas/_llocaliphp.map. O caminho desse arquivo PHP &eacute; relativo &agrave; pasta i3geo.";
-		        		   return ins;
+		        		   mustache = {
+		        				   "ativo": config.ativo,
+		        				   "tema": tema,
+		        				   "linhas": linhas,
+		        				   "sim": config.sim,
+		        				   "nao": config.nao,
+		        				   "salvaPlugin": salva,
+		        				   "removePlugin": remove
+		        		   };
+		        		   ins = Mustache.render(
+		        				   i3GEO.template.parametrossql,
+		        				   $.extend(
+		        						   {},
+		        						   mustache,
+		        						   i3GEO.idioma.OBJETOIDIOMA
+		        				   )
+		        		   );
+		        		   if($i(onde)){
+		        			   $i(onde).innerHTML = ins;
+		        			   return false;
+		        		   } else {
+		        			   return ins;
+		        		   }
 		        	   },
 		        	   // pega os valores do formulario quando e aberto no sistema de
 		        	   // administracao

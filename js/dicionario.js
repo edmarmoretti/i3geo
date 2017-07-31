@@ -2911,5 +2911,12 @@ g_traducao =
   				en : "",
   				es : ""
   			}
-  		]
+  		],
+		"remove" : [
+			{
+				pt : "Remove",
+				en : "Remove",
+				es : "Eliminar"
+			}
+		]
 	};

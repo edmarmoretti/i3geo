@@ -1,0 +1,70 @@
+<div class='container-fluid'>
+	<h5 class="alert alert-info">
+		As chaves s&atilde;o palavras que devem existir no SQL definido em DATA e/ou no filtro (FILTER).
+		<br>
+		O usu&aacute;rio ir&aacute; fornecer os valores que ser&atilde;o ent&atilde;o utilizados para substituir as chaves de forma din&acirc;mica
+		<br>
+		Ser&aacute; mostrado ao usu&aacute;rio um formul&aacute;rio com op&ccedil;&otilde;es. Cada op&ccedil;&atilde;o conter&aacute; um t&iacute;tulo e um campo de formul&aacute;rio
+		<br>
+		Cada campo de formul&aacute;rio pode ser dos tipos input (para digitar um valor) ou select (caixa de op&ccedil;&otilde;es).
+		<br>
+		Em valores deve ser definida a lista ou o valor default que ser&aacute; mostrado. No caso de listas, utilize v&iacute;rgula para separar os valores. Os valores devem sempre ser inteiros.
+		<br>
+		Em ativo, &eacute; indicado com sim ou nao se o formul&aacute;rio ser&aacute; aberto quando a camada for adicionada ao mapa.
+		<br>
+		Como opcional, pode ser definido o endere&ccedil;o de um programa PHP que retorna a lista de nomes e valores que ser&atilde;o utilizados para preencher o campo de escolha. Para mais
+		informa&ccedil;&otilde;es, veja o mapfile i3geo/temas/_llocaliphp.map. O caminho desse arquivo PHP &eacute; relativo &agrave; pasta i3geo.
+	</h5>
+
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="parametrosSqlAtivo">Abre o formul&aacute;rio quando a camada &eacute; adicionada ao mapa: (true ou false)</label>
+		<div class="input-group">
+			<select class="form-control" id="parametrosSqlAtivo">
+				<option value=''></option>
+				<option {{ativoSim}} value=sim>sim</option>
+				<option {{ativoNao}} value=nao>nao</option>
+			</select>
+		</div>
+	</div>
+
+	<table style="width: 800px;max-width: unset;">
+		<tr>
+			<td>T&iacute;tulo</td>
+			<td>Chave</td>
+			<td>Tipo (input ou select)</td>
+			<td>Valores</td>
+			<td>PHP que retorna os valores (opcional)</td>
+		</tr>
+		{{#linhas}}
+		<tr>
+			<td style="padding-right:15px;">
+				<div class='form-group label-fixed condensed'>
+					<input name='titulo' class="form-control input-lg" type='text' value='{{{titulo}}}' />
+				</div>
+			</td>
+			<td style="padding-right:15px;">
+				<div class='form-group label-fixed condensed'>
+					<input name='chave' class="form-control input-lg" type='text' value='{{{chave}}}' />
+				</div>
+			</td>
+			<td style="padding-right:15px;">
+				<div class='form-group label-fixed condensed'>
+					<input name='tipo' class="form-control input-lg" type='text' value='{{{tipo}}}' />
+				</div>
+			</td>
+			<td style="padding-right:15px;">
+				<div class='form-group label-fixed condensed'>
+					<input name='valores' class="form-control input-lg" type='text' value='{{{valores}}}' />
+				</div>
+			</td>
+			<td style="padding-right:15px;">
+				<div class='form-group label-fixed condensed'>
+					<input name='prog' class="form-control input-lg" type='text' value='{{{prog}}}' />
+				</div>
+			</td>
+		</tr>
+		{{/linhas}}
+	</table>
+	<button onclick='{{{salvaPlugin}}}' class='btn btn-primary btn-sm btn-raised'>{{{salva}}}</button>
+	<button onclick='{{{removePlugin}}}' class='btn btn-primary btn-sm btn-raised'>{{{remove}}}</button>
+</div>
