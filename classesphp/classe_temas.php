@@ -1256,6 +1256,7 @@ Adiciona LABEL em uma classe de um tema
 			}
 			else{
 				$s = "CLASS LABEL TEXT '".$texto."' END END";
+				//$s = "CLASS LABEL TEXT '[".$texto."]' END END";
 				$novac->updateFromString($s);
 			}
 		}

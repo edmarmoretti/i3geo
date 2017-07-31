@@ -176,7 +176,7 @@ $novotema sim|nao Cria um novo tema ou n&atilde;o, nesse &uacute;ltimo caso, a t
 
 Retorno:
 
-{string} - c�digo do layer criado
+{string} - codigo do layer criado
 */
 	function criaToponimia($item,$position,$partials,$offsetx,$offsety,$minfeaturesize,$mindistance,$force,$shadowcolor,$shadowsizex,$shadowsizey,$outlinecolor,$cor,$sombray,$sombrax,$sombra,$fundo,$angulo,$tamanho,$fonte,$tipo,$wrap,$novotema="sim")
 	{
@@ -216,7 +216,6 @@ Retorno:
 		}
 		else
 		{
-			//$novac = $this->layer->getclass(0);
 			$nomer = $this->layer->name;
 		}
 		if(!($this->vi >= 60200)){
@@ -226,7 +225,6 @@ Retorno:
 		for ($i=0; $i < $nclasses; ++$i){
 			$novac = $this->layer->getclass($i);
 			if($this->vi >= 60200){
-				//$indiceLabel = $novac->addLabel(new labelObj());
 				$s = "CLASS LABEL TEXT '[".$item."]' END END";
 				$novac->updateFromString($s);
 				$label = $novac->getLabel($indiceLabel);
@@ -279,8 +277,6 @@ Retorno:
 			corE($label,$cor,"color");
 			corE($label,$fundo,"backgroundcolor");
 			corE($label,$sombra,"backgroundshadowcolor",$sombrax,$sombray);
-			//$label->set("backgroundshadowsizex",$sombrax);
-			//$label->set("backgroundshadowsizey",$sombray);
 			corE($label,$outlinecolor,"outlinecolor");
 			corE($label,$shadowcolor,"shadowcolor");
 			$label->set("shadowsizex",$shadowsizex);

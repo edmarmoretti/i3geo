@@ -67,7 +67,7 @@ Adiciona LABEL em uma classe de um layer
 		include_once(dirname(__FILE__)."/../../classesphp/classe_temas.php");
 		$m = new Temas($map_file,$tema);
 		$l = $m->mapa->getlayerbyname($tema);
-		if(empty($item))
+		if(empty($_GET["item"]))
 		{$retorno = "erro";}
 		else{
 			//$l->set("labelitem",$item);
