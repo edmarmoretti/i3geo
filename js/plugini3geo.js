@@ -223,10 +223,19 @@ i3GEO.pluginI3geo =
 		        	   linkAjuda : function() {
 		        		   return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=121";
 		        	   },
-		        	   formAdmin : function(config) {
-		        		   // {"plugin":"heatmap","parametros":{"coluna":"","radius":15,"max":10}}
-		        		   var parametros, ins = "", configDefault =
-		        			   '{"plugin":"heatmap","parametros":{"tipoGradiente": "default","valorPonto":1,"coluna":"","radius":15}}';
+		        	   formAdmin : function(config,onde,tema,salva,remove) {
+		        		   if(!i3GEO.template.heatmap){
+		        			   var t1 = i3GEO.configura.locaplic + "/js/templates/heatmapForm_mst.html";
+		        			   $.get(t1).done(function(r1) {
+		        				   i3GEO.template.heatmap = r1;
+		        				   i3GEO.pluginI3geo.heatmap.formAdmin(config,onde,tema,salva,remove);
+		        			   }).fail(function() {
+		        				   i3GEO.janela.closeMsg($trad("erroTpl"));
+		        				   return;
+		        			   });
+		        			   return;
+		        		   }
+		        		   var mustache,parametros, ins = "", configDefault = '{"plugin":"heatmap","parametros":{"tipoGradiente": "default","valorPonto":1,"coluna":"","radius":15}}';
 		        		   if (config === "") {
 		        			   config = configDefault;
 		        		   }
@@ -235,31 +244,30 @@ i3GEO.pluginI3geo =
 		        			   config = JSON.parse(configDefault);
 		        		   }
 		        		   parametros = config.parametros;
-		        		   ins +=
-		        			   "" + "<p class='paragrafo'>Coluna que cont&eacute;m os dados:"
-		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='coluna' type='text' value='"
-		        			   + parametros.coluna
-		        			   + "' size='30'></div></p>"
-		        			   + "<p class='paragrafo'>Ou valor num&eacute;rico para cada ponto:"
-		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='valorPonto' type='text' value='"
-		        			   + parametros.valorPonto
-		        			   + "' size='30'></div></p>"
-		        			   + "<p class='paragrafo'>Raio de cada ponto em pixels:"
-		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='radius' type='text' value='"
-		        			   + parametros.radius
-		        			   + "' size='30'></div></p>"
-		        			   // + "<p>Valor m&aacute;ximo em cada ponto:"
-		        			   // + "<br><input name='max' type='text' value='"
-		        			   // + parametros.max
-		        			   // + "' size='30'></p>"
-		        			   + "<p class='paragrafo'>Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal):"
-		        			   + "<br><div class='i3geoForm i3geoFormIconeEdita'><input name='tipoGradiente' type='text' value='"
-		        			   + parametros.tipoGradiente
-		        			   + "' size='30'></div></p>"
-		        			   + "<p class='paragrafo'>Para definir os cortes no gradiente de cores utilize valores entre 0 e 1."
-		        			   + " As cores s&atilde;o definidas nas classes do LAYER, sendo que o nome define o valor superior do gradiente e COLOR define a cor."
-		        			   + " Veja o exemplo utilizado no tema _lmapadecalor.map</p>";
-		        		   return ins;
+		        		   mustache = {
+		        				   "coluna": parametros.coluna,
+		        				   "valorPonto": parametros.valorPonto,
+		        				   "radius" : parametros.radius,
+		        				   "tipoGradiente": parametros.tipoGradiente,
+		        				   "linkAjuda": i3GEO.pluginI3geo.linkAjuda("layerkml"),
+		        				   "tema": tema,
+		        				   "salvaPlugin": salva,
+		        				   "removePlugin": remove
+		        		   };
+		        		   ins = Mustache.render(
+		        				   i3GEO.template.heatmap,
+		        				   $.extend(
+		        						   {},
+		        						   mustache,
+		        						   i3GEO.idioma.OBJETOIDIOMA
+		        				   )
+		        		   );
+		        		   if($i(onde)){
+		        			   $i(onde).innerHTML = ins;
+		        			   return false;
+		        		   } else {
+		        			   return ins;
+		        		   }
 		        	   },
 		        	   /**
 		        	    * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas Esse icone e
@@ -793,21 +801,48 @@ i3GEO.pluginI3geo =
 		        		   // http://localhost/i3geo/aplicmap/dados/sundials.kml
 		        		   // http://dev.openlayers.org/examples/kml/sundials.kml
 		        	   },
-		        	   formAdmin : function(config) {
-		        		   var parametros, ins = "", configDefault = '{"plugin":"layerkml","parametros":{"url": ""}}';
+		        	   formAdmin : function(config,onde,tema,salva,remove) {
+		        		   if(!i3GEO.template.layerkml){
+		        			   var t1 = i3GEO.configura.locaplic + "/js/templates/layerkmlForm_mst.html";
+		        			   $.get(t1).done(function(r1) {
+		        				   i3GEO.template.layerkml = r1;
+		        				   i3GEO.pluginI3geo.layerkml.formAdmin(config,onde,tema,salva,remove);
+		        			   }).fail(function() {
+		        				   i3GEO.janela.closeMsg($trad("erroTpl"));
+		        				   return;
+		        			   });
+		        			   return;
+		        		   }
+		        		   var mustache,parametros, ins = "", configDefault = '{"plugin":"layerkml","parametros":{"url": ""}}';
 		        		   if (config === "") {
 		        			   config = configDefault;
 		        		   }
 		        		   config = JSON.parse(config);
 		        		   if (config.plugin != "layerkml") {
-		        			   config =JSON.parse(configDefault);
+		        			   config = JSON.parse(configDefault);
 		        		   }
 		        		   parametros = config.parametros;
-		        		   ins +=
-		        			   "<p class='paragrafo'>Url do arquivo Kml:<br><div class='i3geoForm i3geoFormIconeEdita'><input name='url' type='text' value='" + parametros.url
-		        			   + "'/><div></p>"
-		        			   + "<p class='paragrafo'>Veja o exemplo utilizado no tema _lmapakml.map</p>";
-		        		   return ins;
+		        		   mustache = {
+		        				   "url": parametros.url,
+		        				   "linkAjuda": i3GEO.pluginI3geo.linkAjuda("layerkml"),
+		        				   "tema": tema,
+		        				   "salvaPlugin": salva,
+		        				   "removePlugin": remove
+		        		   };
+		        		   ins = Mustache.render(
+		        				   i3GEO.template.layerkml,
+		        				   $.extend(
+		        						   {},
+		        						   mustache,
+		        						   i3GEO.idioma.OBJETOIDIOMA
+		        				   )
+		        		   );
+		        		   if($i(onde)){
+		        			   $i(onde).innerHTML = ins;
+		        			   return false;
+		        		   } else {
+		        			   return ins;
+		        		   }
 		        	   },
 		        	   /**
 		        	    * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas Esse icone e
@@ -979,8 +1014,8 @@ i3GEO.pluginI3geo =
 		        		   return i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=127";
 		        	   },
 		        	   formAdmin : function(config,onde,tema,salva,remove) {
-			        	   if (typeof (console) !== 'undefined')
-			        		   console.info("i3GEO.pluginI3geo.parametrossql.formAdmin()");
+		        		   if (typeof (console) !== 'undefined')
+		        			   console.info("i3GEO.pluginI3geo.parametrossql.formAdmin()");
 
 		        		   if(!i3GEO.template.parametrossql){
 		        			   var t1 = i3GEO.configura.locaplic + "/js/templates/parametrossqlForm_mst.html";

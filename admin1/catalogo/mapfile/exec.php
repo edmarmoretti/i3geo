@@ -134,8 +134,8 @@ switch ($funcao) {
 		session_start();
 		$mapa = ms_newMapObj($_SESSION["map_file"]);
 		$layer = $mapa->getlayerbyname($_GET["codigoLayer"]);
-		$plugin = json_encode($_GET["plugin"]);
-		$layer->setmetadata("PLUGINI3GEO",$plugin);
+		//$plugin = json_encode($_GET["plugin"]);
+		$layer->setmetadata("PLUGINI3GEO",$_GET["plugin"]);
 		$mapa->save($_SESSION["map_file"]);
 		\admin\php\funcoesAdmin\retornaJSON("ok");
 		break;

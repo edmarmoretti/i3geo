@@ -1,0 +1,26 @@
+<div class='container-fluid'>
+	<h5 class="alert alert-info">
+		Para definir os cortes no gradiente de cores utilize valores entre 0 e 1. As cores s&atilde;o definidas nas classes do LAYER, sendo que o nome define o valor superior do gradiente e COLOR define a
+		cor.Veja o exemplo utilizado no tema _lmapadecalor.map. Mais informa&ccedil;&otilde;es:
+		<a href='{{{linkAjuda}}}' target=_blank>{{{linkAjuda}}}</a>
+	</h5>
+	<div class='form-group label-fixed condensed' >
+		<label class="control-label" >Coluna que cont&eacute;m os dados</label>
+		<input name='coluna' class="form-control input-lg" type='text' value='{{{coluna}}}' />
+	</div>
+	<div class='form-group label-fixed condensed' >
+		<label class="control-label" >Ou valor num&eacute;rico para cada ponto</label>
+		<input name='valorPonto' class="form-control input-lg" type='text' value='{{{valorPonto}}}' />
+	</div>
+	<div class='form-group label-fixed condensed' >
+		<label class="control-label" >Raio de cada ponto em pixels</label>
+		<input name='radius' class="form-control input-lg" type='text' value='{{{radius}}}' />
+	</div>
+
+	<div class='form-group label-fixed condensed' >
+		<label class="control-label" >Tipo de gradiente (deixe vazio para utilizar as classes definidas no Layer ou escreva 'default' para usar o normal)</label>
+		<input name='tipoGradiente' class="form-control input-lg" type='text' value='{{{tipoGradiente}}}' />
+	</div>
+	<button onclick='{{{salvaPlugin}}}' class='btn btn-primary btn-sm btn-raised'>{{{salva}}}</button>
+	<button onclick='{{{removePlugin}}}' class='btn btn-primary btn-sm btn-raised'>{{{remove}}}</button>
+</div>
