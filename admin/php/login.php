@@ -295,8 +295,9 @@ function autenticaUsuario($usuario,$senha){
 	include(dirname(__FILE__)."/conexao.php");
 	error_reporting(0);
 	$senhamd5 = md5($senha);
-
-	$senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+	if(function_exists("password_hash")){
+		$senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+	}
 
 	//faz um teste de tentativas de acesso
 	$nomeArquivo = $dir_tmp."/a".md5($usuario."testeTentativas").intval(time() / 1000);
@@ -348,7 +349,8 @@ function autenticaUsuario($usuario,$senha){
 		//verifica se a senha e uma string ou pode ser um md5
 		$ok = false;
 		$dados = array();
-		if(strlen($senha) == 32){
+		//por causa das versoes antigas do PHP
+		if(strlen($senha) == 32 || !function_exists("password_hash") ){
 			$dados = pegaDados("select id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
 			if(count($dados) == 1 && $dados[0]["senha"] == $senhamd5 && $dados[0]["login"] == $usuario){
 				$ok = true;
