@@ -121,7 +121,7 @@ i3GEO.tema =
 		fonte : function(tema, popup, link) {
 			i3GEO.mapa.ativaTema(tema);
 			if(!link){
-				link = i3GEO.configura.locaplic + "/admin/abrefontemapfile.php?tema=" + tema;
+				link = i3GEO.configura.locaplic + "/ferramentas/abrefontemapfile.php?tema=" + tema;
 			}
 			if (!popup) {
 				window.open(link);

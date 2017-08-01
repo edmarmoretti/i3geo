@@ -16,37 +16,7 @@ i3GEOF.download.dicionario = {
 		es : "N&uacute;mero de registros"
 	} ],
 	'pagdownload' : [ {
-		pt : "Acesse a p&aacute;gina de download, que cont&eacute;m mais op&ccedil;&otilde;es:",
-		en : "",
-		es : ""
-	} ],
-	5 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	6 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	7 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	8 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	9 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	10 : [ {
-		pt : "",
+		pt : "Acesse aqui a p&aacute;gina de download, que cont&eacute;m mais op&ccedil;&otilde;es",
 		en : "",
 		es : ""
 	} ]
