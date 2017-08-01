@@ -84,10 +84,7 @@ i3GEOF.importarwmc = {
 		}
 
 			$i(iddiv).innerHTML += i3GEOF.importarwmc.html();
-			new YAHOO.widget.Button(
-				"i3GEOimportarwmcbotao1",
-				{onclick:{fn: i3GEOF.importarwmc.submete}}
-			);
+
 
 	},
 	/*
@@ -129,7 +126,12 @@ i3GEOF.importarwmc = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.importarwmc_corpo").style.backgroundColor = "white";

@@ -273,10 +273,12 @@ i3GEOF.nuvemtags = {
 				}
 			}}
 		);
+		/*
 		$i("i3GEOnuvemtagsbotao1-button").style.minHeight = "1em";
 		$i("i3GEOnuvemtagsbotao1-button").style.padding = "0px 15px";
 		$i("i3GEOnuvemtagsbotao2-button").style.minHeight = "1em";
 		$i("i3GEOnuvemtagsbotao2-button").style.padding = "0px 15px";
+		*/
 		i3GEOF.nuvemtags.aguarde.visibility = "hidden";
 	},
 	/*
