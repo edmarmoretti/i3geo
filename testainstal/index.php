@@ -146,7 +146,7 @@ echo <<<HTML
 		</script>
 HTML;
 			}
-			//exit;
+			exit;
 		}
 		else{
 			$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);

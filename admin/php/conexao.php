@@ -96,7 +96,12 @@ if($conexaoadmin == ""){
 		die();
 	}
 }
-else
-	include($conexaoadmin);
-
+else {
+	if(file_exists($conexaoadmin)){
+		include($conexaoadmin);
+	} else {
+		echo "Arquivo de conexao nao existe";
+		exit;
+	}
+}
 ?>
