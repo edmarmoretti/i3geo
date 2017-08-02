@@ -37,7 +37,7 @@ $id_grupo = $_POST["id_grupo"];
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :
-		$novo = adicionar( $_POST["nome_grupo"], $_POST["desc_grupo"], $_POST["en"], $_POST["es"], $dbhw );
+		$novo = \admin\catalogo\menus\grupos\listadegrupos\adicionar( $_POST["nome_grupo"], $_POST["desc_grupo"], $_POST["en"], $_POST["es"], $dbhw );
 		if ($novo === false) {
 			$dbhw = null;
 			$dbh = null;

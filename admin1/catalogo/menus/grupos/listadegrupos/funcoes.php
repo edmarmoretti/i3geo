@@ -18,7 +18,7 @@ function adicionar($nome_grupo, $desc_grupo, $en, $es, $dbhw) {
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	try {
 		$dataCol = array(
-				"nome_grupo" => $nome_grupo,
+				"nome_grupo" => "",
 				"desc_grupo" => "",
 				"en" => "",
 				"es" => "",
@@ -63,6 +63,7 @@ function excluir($id_grupo, $dbhw) {
 		if ($resultado === false) {
 			return false;
 		}
+		return $resultado;
 	}
 }
 ?>

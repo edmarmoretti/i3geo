@@ -26,10 +26,6 @@ $_SESSION["nome_menu"] = $nome_menu;
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="well hidden">
-				<button data-toggle="modal" data-target="#previewArvore"
-					class="btn btn-primary btn-fab btn-fab-mini pull-right" style="left:10px">
-					<i class="material-icons">visibility</i>
-				</button>
 				<button data-toggle="modal" data-target="#ajudaPrincipal"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">help</i>
