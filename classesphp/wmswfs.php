@@ -53,7 +53,7 @@ Return:
 */
 function gravaCacheWMS($servico)
 {
-	global $dir_tmp;
+	global $dir_tmp, $i3geo_proxy_server;
 	if($dir_tmp == ""){
 		include(dirname(__FILE__)."/../ms_configura.php");
 	}
@@ -75,14 +75,25 @@ function gravaCacheWMS($servico)
 			$wms_service_request .= "&VERSION=1.1.1";
 		}
 		$nome = $dir_tmp."/wms".md5($servico).".xml";
+		//echo ($wms_service_request);exit;
 		if(!file_exists($nome)){
-			$wms_capabilities = file($wms_service_request);
-			if( !$wms_capabilities ){
+			//$wms_capabilities = file($wms_service_request);
+			$curl = curl_init();
+			curl_setopt ($curl, CURLOPT_URL, $wms_service_request);
+			curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+			curl_setopt($curl, CURLOPT_HEADER, 0);
+			if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
+				curl_setopt($curl, CURLOPT_PROXY, $i3geo_proxy_server);
+			}
+			$wms_capabilities = curl_exec($curl);
+			curl_close ($curl);
+			if( !$wms_capabilities || $wms_capabilities == ""){
 				return "erro";
 			}
 			else{
 				$fp = fopen($nome, 'w');
-				fwrite($fp, implode("",$wms_capabilities));
+				//fwrite($fp, implode("",$wms_capabilities));
+				fwrite($fp,$wms_capabilities);
 				fclose($fp);
 			}
 		}
