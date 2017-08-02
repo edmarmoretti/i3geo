@@ -7,24 +7,15 @@ MAP
     METADATA
       "TIP"	"CD_LEGENDA"
       "cache"	"sim"
-      "olopacity"	""
       "CLASSE"	"sim"
       "permitekmz"	"SIM"
-      "gmopacity"	""
-      "gmstatus"	""
       "ITENSDESC"	"Teste de acentuação"
       "TILES"	"SIM"
       "ESCALA"	"250000"
       "editavel"	""
-      "arquivotemaoriginal"	""
       "extensao"	"-73.990940816816 -33.74827031115 -34.822855820777 5.272224303909"
-      "olstatus"	""
-      "nomeoriginal"	""
       "permitedownload"	"SIM"
-      "FILTROORIGINAL"	""
       "permitecomentario"	"NAO"
-      "DATAORIGINAL"	""
-      "PLUGINI3GEO"	""
       "escondido"	"NAO"
       "download"	"SIM"
       "esquematabelaeditavel"	""
@@ -105,6 +96,5 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
-
 END # MAP
-
+					

@@ -47,8 +47,8 @@ i3GEOadmin.editavel = {
 													"onSalvar": "i3GEOadmin.editavel.salvar",
 													"editavel": function(){
 														var hash = {
-																"sim": i3GEOadmin.comportamento.dicionario.sim,
-																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"sim": i3GEOadmin.editavel.dicionario.sim,
+																"nao": i3GEOadmin.editavel.dicionario.nao,
 																"NAO-sel" : "",
 																"SIM-sel": ""
 															};

@@ -78,7 +78,7 @@ if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
 {$itensrel[] = $itemagruparel;}
 
 $mapa = ms_newMapObj($map_file);
-substituiConObj($temp,$postgis_mapa);
+substituiConObj($mapa,$postgis_mapa);
 if($ext && $ext != ""){
 	$e = explode(" ",$ext);
 	$extatual = $mapa->extent;
@@ -150,7 +150,7 @@ $fechou = $layer->close();
 
 restauraCon($map_file,$postgis_mapa);
 
-if(isset($tiporel) && $tiporel == "csv"){
+if(isset($_GET["tiporel"]) && $_GET["tiporel"] == "csv"){
 	echo "<pre>";
 	echo implode(";",explode(",",$nomesrel));
 	if($arearel == "true")

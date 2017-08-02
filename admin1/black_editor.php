@@ -583,7 +583,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 			//GM - utiliza o GoogleMaps como motor de controle do mapa
 			mapType : "OL",
 			//armazena em um cookie a ultima extensao geografica do mapa e utiliza essa extensao quando o mapa for aberto
-			saveExtension : true,
+			saveExtension : false,
 			//aplica um filtro de cores apos a renderizacao da imagem de cada camada que compoe o mapa cinza|sepiaclara|sepianormal
 			posRenderType : "",
 			//Altura e largura do tooltip (balao identifica)

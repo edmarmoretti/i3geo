@@ -304,7 +304,7 @@ i3GEOF.etiqueta = {
 			if (it.name === "itenslink"){
 				itenslink.push(it.value);
 			}
-			if (it.name === "itembuscarapida"){
+			if (it.name === "itembuscarapida" && it.checked === true){
 				itembuscarapida = it.value;
 			}
 		}
