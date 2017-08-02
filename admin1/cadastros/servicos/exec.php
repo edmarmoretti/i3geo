@@ -54,7 +54,7 @@ switch ($funcao) {
 		}
 		break;
 	case "LISTAUNICO" :
-		$dados = \admin\cadastros\servicos\listar ( $dbh, id_ws );
+		$dados = \admin\cadastros\servicos\listar ( $dbh, $id_ws );
 		$dbhw = null;
 		$dbh = null;
 		if ($dados === false) {
