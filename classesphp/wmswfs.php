@@ -474,16 +474,16 @@ Retorno:
 function listaLayersWMS()
 {
 	global $servico,$nivel,$id_ws,$nomelayer,$tipo_ws;
+
 	if(!isset($nomelayer)){
 		$nomelayer = "undefined";
 	}
-
 	//para o caso do sistema de metadados estatisticos
 	$wms_service_request = gravaCacheWMS($servico);
 	include_once(dirname(__FILE__)."/../admin/php/admin.php");
 	include_once(dirname(__FILE__)."/../admin/php/webservices.php");
 
-	//error_reporting(0);
+
 	if($tipo_ws != "WMSMETAESTAT" && $nivel < 2){
 		if($wms_service_request == "erro") {
 			//registra a tentativa de acesso

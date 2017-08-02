@@ -39,7 +39,7 @@ function mostraBotoesBT(){
 function verificaMapa(mapa){
 	var link, nome, combo, links = [], html;
 	//imagem dinamica ou nao
-	if(mapa.IMAGEM == ""){
+	if(mapa.IMAGEM == "" && mapa.CONTEMMAPFILE == "sim"){
 		mapa.IMAGEM = i3GEO.configura.locaplic
 		+ "/ferramentas/salvamapa/geraminiatura.php?w=100&h=90&restauramapa="
 		+ mapa.ID_MAPA;
