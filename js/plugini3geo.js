@@ -412,6 +412,9 @@ i3GEO.pluginI3geo =
 		        				   if(camada.status === "0"){
 		        					   v = false;
 		        				   }
+		        				   if(!camada.plugini3geo.parametros.max){
+		        					   camada.plugini3geo.parametros.max = 10;
+		        				   }
 		        				   heatmap = new ol.layer.Heatmap({
 		        					   source: new ol.source.Vector({
 		        						   features : nudata
@@ -662,7 +665,6 @@ i3GEO.pluginI3geo =
 		        			   var nomeScript = "markercluster_script", p = i3GEO.configura.locaplic + "/ferramentas/markercluster/openlayers_js.php", carregaJs =
 		        				   "nao", criaLayer;
 		        			   criaLayer = function() {
-
 		        				   if (typeof (console) !== 'undefined')
 		        					   console.info("criando layer markercluster");
 
@@ -680,11 +682,9 @@ i3GEO.pluginI3geo =
 		        							   })
 		        					   );
 		        				   }
-
 		        				   var source = new ol.source.Vector({
 		        					   features: marcas
 		        				   });
-
 		        				   var clusterSource = new ol.source.Cluster({
 		        					   distance: camada.plugini3geo.parametros.gridSize,
 		        					   source: source
@@ -751,9 +751,7 @@ i3GEO.pluginI3geo =
 		        						   return style;
 		        					   }
 		        				   });
-
 		        				   i3GEO.janela.fechaAguarde("aguardePlugin");
-
 		        				   i3GEO.pluginI3geo.OBJETOS[camada.name] = markercluster;
 		        				   markercluster_dados = null;
 		        				   objMapa.addLayer(markercluster);

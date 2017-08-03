@@ -69,7 +69,7 @@ html, body {
 
 </head>
 <body>
-	<div id="storymap"></div>
+	<div id="storymap">Carregando...</div>
 	<!-- JavaScript-->
 	<script src="../../pacotes/knightlab/StoryMapJS/compiled/js/storymap.js"></script>
 	<script>

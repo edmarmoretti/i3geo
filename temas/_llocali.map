@@ -41,6 +41,7 @@ MAP
       "cortepixels"	"40"
       "identifica"	"sim"
       "LTEMPOCONVENCODE"	"SIM"
+      "storymap"	""
     END # METADATA
     NAME "_llocali"
     PROCESSING "LABEL_NO_CLIP=True"

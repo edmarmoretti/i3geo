@@ -8,8 +8,7 @@ function markerclusterDados($map_file){
 	include_once($dir."/../../classesphp/classe_atributos.php");
 	$m = new Atributos($map_file,$layer);
 	$registros = $m->listaRegistrosXY($coluna, "brasil", "tudo");
-	//TODO remover
-	$registros = array_slice($registros,0,50);
+	//$registros = array_slice($registros,0,50);
 	$n = count($registros);
 	$resultado = array();
 	if(empty($coluna)){
