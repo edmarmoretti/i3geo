@@ -212,7 +212,7 @@ i3GEO.legenda =
 			$("#tempinputcorclasse").attr({"tema":tema,"idclasse":idclasse});
 			i3GEO.util.abreCor("", "tempinputcorclasse");
 		},
-		janela : function(largura, altura, topo, esquerda) {
+		janela : function(largura, altura, topo, esquerda, atualiza) {
 			if (!largura) {
 				largura = 360;
 			}
@@ -243,7 +243,25 @@ i3GEO.legenda =
 				+ "<div class='i3GeoTituloJanela' id='legendaTituloI'>"
 				+ $trad("p3")
 				+ "</div>";
-			janela = i3GEO.janela.cria(largura + "px", altura + "px", "", "", "", titulo, "wlegenda", false, "hd", cabecalho, minimiza,"","","","","nao");
+			janela = i3GEO.janela.cria(
+					largura + "px",
+					altura + "px",
+					"",
+					"",
+					"",
+					titulo,
+					"wlegenda",
+					false,
+					"hd",
+					cabecalho,
+					minimiza,
+					"",
+					"",
+					"",
+					"",
+					"nao",
+					""
+				);
 
 			temp = function() {
 				i3GEO.legenda.IDS.remove("wlegenda_corpo");
@@ -255,5 +273,8 @@ i3GEO.legenda =
 				janela.moveTo(esquerda, topo);
 			}
 			i3GEO.legenda.CAMADAS = "";
+			if(atualiza == true){
+				i3GEO.legenda.atualiza();
+			}
 		}
 };

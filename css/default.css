@@ -172,6 +172,11 @@ hr {
 	width: 265px;
 	vertical-align: middle;
 }
+.nomeTemaLegenda {
+	width: 265px;
+	vertical-align: middle;
+	color: black;
+}
 .nomeTemaCurto {
 	width: 230px;
 	vertical-align: middle;
