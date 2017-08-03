@@ -558,6 +558,8 @@ $testa - Testa o filtro e retorna uma imagem.
 			}
 			if ($testa == ""){
 				$layer->setMetaData("cache","");
+			} else {
+				$layer->set("status",MS_DEFAULT);
 			}
 		}
 		if ($testa != ""){

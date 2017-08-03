@@ -305,7 +305,7 @@ i3GEO.janela =
 				4
 			]);
 			janela.render();
-			janela.bringToTop();
+
 
 			if (ifr === true) {
 				janela.iframe.style.zIndex = 4;
@@ -330,13 +330,14 @@ i3GEO.janela =
 			temp = $i(id + "_c");
 			if(temp && temp.style){
 				temp.style.maxWidth = "90%";
-				temp.style.zIndex = 50000;
+				//temp.style.zIndex = 50000;
 			}
 			temp = $i(id);
 			if(temp && temp.style){
 				temp.style.maxWidth = "100%";
 			}
 			temp = $i(id + "_corpo");
+			janela.bringToTop();
 			return ([
 				janela, $i(id + "_cabecalho"), temp
 			]);

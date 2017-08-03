@@ -107,10 +107,12 @@ i3GEOF.filtro = {
 					i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia2","i3GEOfiltroguia");
 					i3GEOF.filtro.pegaFiltro();
 				};
+				/*
 				$i("i3GEOfiltroguia3").onclick = function(){
 					i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia3","i3GEOfiltroguia");
 					i3GEOF.filtro.aplicaFiltro("sim");
 				};
+				*/
 			}
 			//
 			//pega a lista de itens e chama a fun&ccedil;&atilde;o de montagem das op&ccedil;&otilde;es de cria&ccedil;&atilde;o do filtro

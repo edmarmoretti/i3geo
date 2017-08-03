@@ -35,7 +35,7 @@ Inclui um filtro no tema.
 		}
 		$m->insereFiltro("");
 		$retorno = $m->insereFiltro(base64_decode($_GET["filtro"]),$_GET["testa"],$_GET["base64"]);
-		if(strtolower($testa) != "sim"){
+		if(strtolower($_GET["testa"]) != "sim"){
 			$m->salva();
 			$_SESSION["contadorsalva"]++;
 			redesenhaMapa();
