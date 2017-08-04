@@ -81,7 +81,7 @@ i3GEO.listaDeFerramentas = {
 									{
 										id : "omenudataMedirArea",
 										text : $trad("d21at"),
-										url : "javascript:i3GEO.analise.analise.area()"
+										url : "javascript:i3GEO.analise.dialogo.area()"
 									},
 									{
 										id : "omenudataMedirDist",

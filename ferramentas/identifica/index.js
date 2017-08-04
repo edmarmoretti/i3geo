@@ -204,7 +204,6 @@ i3GEOF.identifica =
 				});
 				return;
 			}
-
 			var b, onButtonClick = function(evt) {
 				var botao = evt.target;
 				if (botao) {

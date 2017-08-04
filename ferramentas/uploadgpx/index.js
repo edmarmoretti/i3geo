@@ -77,11 +77,7 @@ i3GEOF.uploadgpx = {
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.uploadgpx.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOuploadgpxbotao1",
-				{onclick:{fn: i3GEOF.uploadgpx.submete}}
-			);
-			b.addClass("rodar");
+
 			i3GEO.util.radioEpsg(
 				function(retorno)
 				{$i("i3GEOuploadgpxListaepsg").innerHTML = retorno.dados;},
@@ -132,7 +128,11 @@ i3GEOF.uploadgpx = {
 			cabecalho,
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploadgpx_corpo").style.backgroundColor = "white";

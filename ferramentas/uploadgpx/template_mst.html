@@ -1,22 +1,24 @@
-<form id='i3GEOuploadgpxf' target='i3GEOuploadgpxiframe' action='{{{locaplic}}}/ferramentas/uploadgpx/upload.php' method='post' ENCTYPE='multipart/form-data'>
-	<fieldset class='subbloco'>
-		<p class='paragrafo'>
-			{{{arquivoGpx}}} <br> <br>
-			<input type='file' size='18' name='i3GEOuploadgpx' style='top: 0px; left: 0px; cursor: pointer;'>
-		</p>
-	</fieldset>
-	<fieldset class='subbloco'>
-		<p class='paragrafo'>{{{projecao}}}:</p>
-		<div id='i3GEOuploadgpxListaepsg' style='width: 98%; text-align: left; border: 1px solid gray; left: 0px; overflow: auto; height: 60px'></div>
-	</fieldset>
-	<fieldset class='subbloco'>
-		<p class='paragrafo'>
-			<input id='i3GEOuploadgpxbotao1' type='button' value='{{{criaCamada}}}' size='12' name='submit'>
-			<input type='hidden' name='g_sid' value='{{{sid}}}'>
-			<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
-		</p>
-	</fieldset>
-</form>
-<fieldset class='subbloco'>
+<div class='container-fluid'>
+	<h5></h5>
+
+	<form class="form-horizontal" role="form" id='i3GEOuploadgpxf' target='i3GEOuploadgpxiframe' action='{{{locaplic}}}/ferramentas/uploadgpx/upload.php' method='post' ENCTYPE='multipart/form-data'>
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">{{{arquivoGpx}}}</button>
+			<input name="i3GEOuploadgpx" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<span class="form-control"></span>
+		</div>
+		<br>
+		<div class='form-group label-fixed condensed'>
+			<label class="control-label" for="tipo">{{{projecao}}}</label>
+			<div class="input-group"></div>
+			<div id=i3GEOuploadgpxListaepsg style="text-align: left; overflow: auto; height: 70px; margin-top: 8px;"></div>
+		</div>
+		<hr />
+		<button name="submit" onclick="i3GEOF.uploadgpx.submete()" class='btn btn-primary btn-sm btn-raised'>{{{criaCamada}}}</button>
+
+		<input type='hidden' name='g_sid' value='{{{sid}}}'>
+		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+
+	</form>
 	<iframe name='i3GEOuploadgpxiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
-</fieldset>
+</div>

@@ -74,11 +74,7 @@ i3GEOF.uploadkml = {
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.uploadkml.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOuploadkmlbotao1",
-				{onclick:{fn: i3GEOF.uploadkml.submete}}
-			);
-			b.addClass("rodar");
+
 			i3GEO.util.radioEpsg(
 				function(retorno)
 				{$i("i3GEOuploadkmlListaepsg").innerHTML = retorno.dados;},
@@ -129,7 +125,11 @@ i3GEOF.uploadkml = {
 			cabecalho,
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploadkml_corpo").style.backgroundColor = "white";

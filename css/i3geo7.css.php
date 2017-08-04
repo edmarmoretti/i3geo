@@ -1218,10 +1218,15 @@ background-color: white;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 z-index: 1000;
 }
-#listaTemas,#legenda,#legendai,#corpoLegi,#listaPropriedades {
+#legenda,#legendai,#corpoLegi,#listaPropriedades {
 overflow: auto;
 background-color: white;
 text-align: left;
+}
+#listaTemas{
+background-color: white;
+text-align: left;
+overflow: none;
 }
 #ferr1 {
 background-color: rgb(255, 255, 255);

@@ -1,28 +1,28 @@
 <div class='container-fluid'>
 	<h5 class="alert alert-info">{{{ajudaCaracter}}}</h5>
 
-	<form class="form-horizontal" role="form" id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">
+	<form class="form-horizontal" role="form" id=i3GEOuploadf target="i3GEOuploadiframe" action="{{{locaplic}}}/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">SHP</button>
-			<input name="i3GEOuploadshp" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<input name="i3GEOuploadshp" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
 			<span class="form-control"></span>
 		</div>
 		<br>
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">SHX</button>
-			<input name="i3GEOuploadshx" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<input name="i3GEOuploadshx" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
 			<span class="form-control"></span>
 		</div>
 		<br>
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">DBF</button>
-			<input name="i3GEOuploaddbf" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<input name="i3GEOuploaddbf" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
 			<span class="form-control"></span>
 		</div>
 		<br>
 		<div class="input-group-btn">
 			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">PRJ (opcional)</button>
-			<input name="i3GEOuploadprj" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<input name="i3GEOuploadprj" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
 			<span class="form-control"></span>
 		</div>
 		<br>

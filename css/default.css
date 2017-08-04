@@ -1211,14 +1211,11 @@ bd .i3geoFormIconeEdita {
 	background-color : none !IMPORTANT;
 }
 
-
-
-
 @media print {
     -webkit-print-color-adjust:exact;
 }
 /* === For phones =================================== */
-@media ( max-width : 767px) {
+@media ( max-width : 779px) {
 	#i3GEOguiaMovel {
 		width: 100%;
 	}
@@ -1235,6 +1232,10 @@ bd .i3geoFormIconeEdita {
 	.ol-scale-line {
 		bottom: 0;
 	}
+}
+/* === For meio phones =================================== */
+@media ( min-width : 480px) and (max-width:767px) {
+
 }
 /* === For tablets ================================== */
 @media ( min-width : 768px) and (max-width:991px) {
