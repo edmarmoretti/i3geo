@@ -1,7 +1,7 @@
 <?php
 define ( I3GEO, true );
-include ("validaacesso.php");
-include ("../ms_configura.php");
+include ("../validaacesso.php");
+include ("../../ms_configura.php");
 $csw = "http://www.metadados.inde.gov.br/geonetwork/srv/br";
 
 ?>
@@ -10,15 +10,13 @@ $csw = "http://www.metadados.inde.gov.br/geonetwork/srv/br";
 <head>
 <title>Buscar metadados na INDE</title>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-
 <link rel="stylesheet" type="text/css" href="lib/css/cswclient.css" />
-
 <script type="text/javascript" src="./lib/scripts/sarissa.js"></script>
 <script type="text/javascript" src="./lib/scripts/sarissa_ieemu_xpath.js"></script>
 <script type="text/javascript" src="./lib/scripts/cswclient.js"></script>
 
 </head>
-<body class="clearfix" style="font-family: Verdana, Arial, Tahoma, Helvetica, sans-serif; font-size: 11px">
+<body class="clearfix" style="background-color:white;font-family: Verdana, Arial, Tahoma, Helvetica, sans-serif; font-size: 11px">
 	<div id="query-container">
 		<div class="csw-main">
 			<div class="csw-content">
