@@ -20,7 +20,11 @@ i3GEOF.distancia =
 		 * Susbtitutos para o template
 		 */
 		mustacheHash : function() {
-
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.distancia.dicionario);
+			dicionario["sid"] = i3GEO.configura.sid;
+			dicionario["locaplic"] = i3GEO.configura.locaplic;
+			dicionario["caixaDeEstilos"] = i3GEO.desenho.caixaEstilos();
+ 			return dicionario;
 		},
 		inicia : function(iddiv) {
 			if(i3GEOF.distancia.MUSTACHE == ""){
@@ -33,27 +37,12 @@ i3GEOF.distancia =
 			i3GEO.eventos.cliquePerm.desativa();
 			$i(iddiv).innerHTML += i3GEOF.distancia.html();
 			i3GEOF.distancia[i3GEO.Interface["ATUAL"]].inicia();
-			//
-			// botao que abre a ferramenta de calculo de perfis.
-			// pontosdistobj contem as coordenadas dos pontos
-			//
-			new YAHOO.widget.Button("i3GEObotaoPerfil", {
-				onclick : {
-					fn : function() {
-						var js = i3GEO.configura.locaplic + "/ferramentas/perfil/dependencias.php", temp = function() {
-							i3GEOF.perfil.iniciaJanelaFlutuante(i3GEO.analise.pontos);
-						};
-						i3GEO.util.scriptTag(js, temp, "i3GEOF.perfil_script");
-					}
-				}
-			});
-			new YAHOO.widget.Button("i3GEObotaoDistWkt", {
-				onclick : {
-					fn : function() {
-						i3GEO.mapa.dialogo.wkt2layer(i3GEOF.distancia.ultimoWkt, i3GEOF.distancia.ultimaMedida);
-					}
-				}
-			});
+		},
+		perfil: function (){
+			var js = i3GEO.configura.locaplic + "/ferramentas/perfil/dependencias.php", temp = function() {
+				i3GEOF.perfil.iniciaJanelaFlutuante(i3GEO.analise.pontos);
+			};
+			i3GEO.util.scriptTag(js, temp, "i3GEOF.perfil_script");
 		},
 		/*
 		 * Function: html
@@ -65,25 +54,7 @@ i3GEOF.distancia =
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
-			var ins = '<div class="bd" style="text-align:left;padding:3px;" >'
-			+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo" ></div>'
-			+ '<div style="text-align:left;padding:3px;" id="mostradistancia_calculo_movel" ></div>'
-			+ '<div style="text-align:left;font-size:10px" >'
-			+ '<span style="color:navy;cursor:pointer;text-align:left;" >'
-			+ '<table class="lista8" style="width:100%">'
-			+ '<tr>'
-			+ '<td><input style="cursor:pointer" type="checkbox" id="pararraios" checked /></td>'
-			+ '<td>Raios</td>'
-			+ '<td>&nbsp;</td>'
-			+ '<td><input style="cursor:pointer" type="checkbox" id="parartextos" checked /></td>'
-			+ '<td>Textos<td>'
-			+ '<td>&nbsp;Estilo:</td>'
-			+ '<td><div class=styled-select style="width:85px;">'
-			+ i3GEO.desenho.caixaEstilos()
-			+ '</div></td></tr>'
-			+ '<tr><td></td><td></td>'
-			+ '<td></td><td></td><td></td><td></td><td>&nbsp;<input id=i3GEObotaoPerfil size="22" type="button" value="perfil"></td><td>&nbsp;<input id=i3GEObotaoDistWkt size="22" type="button" value="incorporar"></td></tr></table></span>'
-			+ '</div>'
+			var ins = Mustache.render(i3GEOF.distancia.MUSTACHE, i3GEOF.distancia.mustacheHash());
 			return ins;
 		},
 		/*
@@ -104,7 +75,25 @@ i3GEOF.distancia =
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=6&idajuda=50' >" + $trad("distAprox") + "</a>";
 			janela =
-				i3GEO.janela.cria("355px", "auto", "", "", "", titulo, "i3GEOF.distancia", false, "hd", cabecalho, minimiza, "", true, "", "", "nao");
+				i3GEO.janela.cria(
+						"355px",
+						"auto",
+						"",
+						"",
+						"",
+						titulo,
+						"i3GEOF.distancia",
+						false,
+						"hd",
+						cabecalho,
+						minimiza,
+						"",
+						true,
+						"",
+						"",
+						"nao",
+						""
+				);
 			divid = janela[2].id;
 			i3GEOF.distancia.inicia(divid);
 			temp =
@@ -379,20 +368,18 @@ i3GEOF.distancia =
 				var mostra = $i("mostradistancia_calculo"), texto;
 				if (mostra) {
 					texto =
-						"<b>" + $trad("x96")
-							+ ":</b> "
+						"total <br>" + $trad("x96")
+							+ " km: "
 							+ total.toFixed(3)
-							+ " km"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x96")
-							+ ":</b> "
+							+ " m: "
 							+ (total * 1000).toFixed(2)
-							+ " m"
 							+ "<br>"
 							+ $trad("x25")
 							+ ": "
 							+ i3GEO.calculo.metododistancia;
-					mostra.innerHTML = texto;
+					mostra.innerHTML = texto + "<hr>";
 				}
 			},
 			/**
@@ -402,18 +389,16 @@ i3GEOF.distancia =
 				var mostra = $i("mostradistancia_calculo_movel"), texto;
 				if (mostra) {
 					texto =
-						"<b>" + $trad("x95")
-							+ ":</b> "
+						"parcial <br>" + $trad("x95")
+							+ " km: "
 							+ trecho.toFixed(3)
-							+ " km"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x97")
-							+ ":</b> "
+							+ " km: "
 							+ (parcial + trecho).toFixed(3)
-							+ " km"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x23")
-							+ " (DMS):</b> "
+							+ " (DMS): "
 							+ direcao;
 					mostra.innerHTML = texto;
 				}

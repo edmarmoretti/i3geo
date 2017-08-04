@@ -134,7 +134,7 @@ i3GEO.desenho =
 		 */
 		caixaEstilos : function() {
 			var lista = i3GEO.util.listaChaves(i3GEO.desenho.estilos), n = lista.length, i, caixa, sel;
-			caixa = "<select onchange='i3GEO.desenho.definePadrao(this.value)'>";
+			caixa = "<select class='form-control' onchange='i3GEO.desenho.definePadrao(this.value)'>";
 			for (i = 0; i < n; i += 1) {
 				sel = "";
 				if (lista[i] === i3GEO.desenho.estiloPadrao) {
