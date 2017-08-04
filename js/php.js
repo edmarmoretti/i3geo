@@ -1216,11 +1216,15 @@ i3GEO.php =
 		criamapa : function(funcao, parametros) {
 			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par = "funcao=criaMapa&" + parametros, cp = new cpaint();
 			cp.set_response_type("JSON");
+			//se for true da pau
+			cp.set_async(true);
+			/*
 			if (i3GEO.util.versaoNavegador() === "FF3") {
 				cp.set_async(true);
 			} else {
 				cp.set_async(false);
 			}
+			*/
 			cp.set_transfer_mode("POST");
 			cp.call(p, "criaMapa", funcao, par);
 		},
@@ -1241,11 +1245,14 @@ i3GEO.php =
 				par += i3GEO.Interface.ATUAL;
 			}
 			cp.set_response_type("JSON");
+			cp.set_async(true);
+			/*
 			if (i3GEO.util.versaoNavegador() === "FF3") {
 				cp.set_async(true);
 			} else {
 				cp.set_async(false);
 			}
+			*/
 			cp.set_transfer_mode("POST");
 			cp.call(p, "iniciaMapa", funcao, par);
 		},

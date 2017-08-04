@@ -311,8 +311,8 @@ var i3GEO = {
 		i3GEO.inicia();
 		delete i3GEO.parametrosMapa2mashuppar;
 		delete i3GEO.configMapa;
-		delete i3GEO.cria;
-		delete i3GEO.inicia;
+		//delete i3GEO.cria;
+		//delete i3GEO.inicia;
 		delete i3GEO.init;
 	},
 	//
@@ -560,7 +560,6 @@ var i3GEO = {
 					tamanho[1]
 			);
 		}
-
 	},
 	/**
 	 * Function: inicia
@@ -765,7 +764,7 @@ var i3GEO = {
 				i3GEO.parametros.w,
 				i3GEO.parametros.h);
 		}
-		i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.janela.fechaAguarde()","i3GEO.navega.atualizaEscalaNumerica()"]);
+		//i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.janela.fechaAguarde()","i3GEO.navega.atualizaEscalaNumerica()"]);
 	},
 	/**
 	 * Executa opera&ccedil;&otilde;es ap&oacute;s o mapa ter sido posicionado
