@@ -1048,10 +1048,15 @@ H1 {
 	z-index: 1000;
 }
 
-#listaTemas,#legenda,#legendai,#corpoLegi,#listaPropriedades {
+#legenda,#legendai,#corpoLegi,#listaPropriedades {
 	overflow: auto;
 	background-color: white;
 	text-align: left;
+}
+#listaTemas{
+	background-color: white;
+	text-align: left;
+	overflow: none;
 }
 
 #ferr1 {

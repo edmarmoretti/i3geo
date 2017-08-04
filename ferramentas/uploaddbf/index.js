@@ -42,6 +42,7 @@ i3GEOF.uploaddbf = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
+	MUSTACHE: "",
 	/**
 	 * Susbtitutos para o template
 	 */
@@ -67,21 +68,20 @@ i3GEOF.uploaddbf = {
 				i3GEOF.uploaddbf.inicia(iddiv);
 			});
 			return;
-		}try{
-			$i(iddiv).innerHTML += i3GEOF.uploaddbf.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOuploaddbfbotao1",
-				{onclick:{fn: i3GEOF.uploaddbf.submete}}
-			);
-			b.addClass("rodar");
-			i3GEO.util.radioEpsg(
-				function(retorno)
-				{$i("i3GEOuploaddbfListaepsg").innerHTML = retorno.dados;},
-				"i3GEOuploaddbfListaepsg",
-				"uploaddbf"
-			);
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.uploaddbf.html();
+		var b = new YAHOO.widget.Button(
+			"i3GEOuploaddbfbotao1",
+			{onclick:{fn: i3GEOF.uploaddbf.submete}}
+		);
+		b.addClass("rodar");
+		i3GEO.util.radioEpsg(
+			function(retorno){
+				$i("i3GEOuploaddbfListaepsg").innerHTML = retorno.dados;
+			},
+			"i3GEOuploaddbfListaepsg",
+			"uploaddbf"
+		);
 	},
 	/*
 	Function: html

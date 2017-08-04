@@ -57,6 +57,7 @@ i3GEOF.uploadgpx = {
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
 	},
+	MUSTACHE: "",
 	/*
 	Function: inicia
 

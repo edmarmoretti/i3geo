@@ -54,6 +54,7 @@ i3GEOF.uploadkml = {
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
 		return dicionario;
 	},
+	MUSTACHE: "",
 	/*
 	Function: inicia
 

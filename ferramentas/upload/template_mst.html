@@ -1,0 +1,56 @@
+<div class='container-fluid'>
+	<h5 class="alert alert-info">{{{ajudaCaracter}}}</h5>
+
+	<form class="form-horizontal" role="form" id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">SHP</button>
+			<input name="i3GEOuploadshp" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<span class="form-control"></span>
+		</div>
+		<br>
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">SHX</button>
+			<input name="i3GEOuploadshx" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<span class="form-control"></span>
+		</div>
+		<br>
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">DBF</button>
+			<input name="i3GEOuploaddbf" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<span class="form-control"></span>
+		</div>
+		<br>
+		<div class="input-group-btn">
+			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">PRJ (opcional)</button>
+			<input name="i3GEOuploadprj" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<span class="form-control"></span>
+		</div>
+		<br>
+		<div class='form-group label-fixed condensed'>
+			<label class="control-label" for="tipo">{{{tipoGeom}}}</label>
+			<div class="input-group">
+				<select class="form-control" id="tipo" name="tipo">
+					<option value="">{{{naoConhecido}}}</option>
+					<option value="1">{{{pontual}}}</option>
+					<option value="5">{{{poligonal}}}</option>
+					<option value="3">{{{linear}}}</option>
+				</select>
+			</div>
+		</div>
+
+		<div class='form-group label-fixed condensed'>
+			<label class="control-label" for="tipo">{{{projecao}}}</label>
+			<div class="input-group"></div>
+			<div  id=i3GEOuploadListaepsg style="text-align: left; overflow: auto; height: 70px; margin-top:8px;"></div>
+		</div>
+
+		<hr />
+		<button name="submit" onclick="i3GEOF.upload.submete()" class='btn btn-primary btn-sm btn-raised'>{{{envia}}}</button>
+
+		<input type=hidden name=g_sid value="{{{sid}}}">
+		<input type="hidden" name="MAX_FILE_SIZE" value="1000000">
+	</form>
+
+	<iframe name=i3GEOuploadiframe style="text-align: left; border: 1px solid gray;" width="98%" height="60px"></iframe>
+
+</div>

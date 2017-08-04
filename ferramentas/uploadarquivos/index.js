@@ -39,8 +39,8 @@ i3GEOF.uploadarquivos =
 		},
 		shp: function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/upload/index.js",
-					"i3GEOF.upload.criaJanelaFlutuante()",
+					+ "/ferramentas/upload/dependencias.php",
+					"i3GEOF.upload.iniciaJanelaFlutuante()",
 			"i3GEOF.upload_script");
 		},
 		dbfcsv: function() {

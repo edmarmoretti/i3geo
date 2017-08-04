@@ -42,30 +42,15 @@ i3GEOF.upload = {
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.upload.iniciaDicionario();
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.upload.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/upload/dicionario.js",
-				"i3GEOF.upload.iniciaJanelaFlutuante()",
-				"i3GEOF.upload.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.upload.iniciaJanelaFlutuante();
-		}
+	MUSTACHE: "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.upload.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		dicionario["sid"] = i3GEO.configura.sid;
+		return dicionario;
 	},
 	/*
 	Function: inicia
@@ -77,23 +62,22 @@ i3GEOF.upload = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.upload.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOuploadbotao1",
-				{onclick:{fn: i3GEOF.upload.submete}}
-			);
-			b.addClass("rodar");
-			i3GEO.util.radioEpsg(
-				function(retorno){
-					$i("i3GEOuploadListaepsg").innerHTML = retorno.dados;
-				},
-				"i3GEOuploadListaepsg",
-				"upload",
-				"nao"
-			);
+		if(i3GEOF.upload.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/upload/template_mst.html", function(template) {
+				i3GEOF.upload.MUSTACHE = template;
+				i3GEOF.upload.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.upload.html();
+		i3GEO.util.radioEpsg(
+			function(retorno){
+				$i("i3GEOuploadListaepsg").innerHTML = retorno.dados;
+			},
+			"i3GEOuploadListaepsg",
+			"upload",
+			"nao"
+		);
 	},
 	/*
 	Function: html
@@ -105,35 +89,7 @@ i3GEOF.upload = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '<form id=i3GEOuploadf target="i3GEOuploadiframe" action="'+i3GEO.configura.locaplic+'/ferramentas/upload/upload.php" method="post" ENCTYPE="multipart/form-data">' +
-		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" >shp: <br><input type="file" size=22 name="i3GEOuploadshp" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >shx: <br><input type="file" size=22 name="i3GEOuploadshx" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >dbf: <br><input type="file" size=22 name="i3GEOuploaddbf" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'<p class="paragrafo" >prj (opcional): <br><input type="file" size=22 name="i3GEOuploadprj" style="top:0px;left:0px;cursor:pointer;"></p>' +
-		'</fieldset>';
-		ins += '<fieldset class=subbloco >' +
-		'<p class="paragrafo" >'+$trad('tipoGeom',i3GEOF.upload.dicionario)+': </p>' +
-		'	<div class=styled-select >' +
-		'	<select id=tipo name=tipo >' +
-		'	<option value="">'+$trad('naoConhecido',i3GEOF.upload.dicionario)+'</option>' +
-		'	<option value="1">'+$trad('pontual',i3GEOF.upload.dicionario)+'</option>' +
-		'	<option value="5">'+$trad('poligonal',i3GEOF.upload.dicionario)+'</option>' +
-		'	<option value="3">'+$trad('linear',i3GEOF.upload.dicionario)+'</option>' +
-		'	</select>' +
-		'</div>' +
-		'<br><p class=paragrafo >'+$trad('projecao',i3GEOF.upload.dicionario)+':</p>' +
-		'<div id=i3GEOuploadListaepsg width="98%" style="text-align:left;border:1px solid gray;left:0px;overflow:auto;height:60px"></div>' +
-		'</fieldset>' +
-		'<fieldset class=subbloco >' +
-		'<p class="paragrafo" ><input id=i3GEOuploadbotao1 type="button" value="'+$trad('envia',i3GEOF.upload.dicionario)+'" size=12 name="submit">' +
-		'<input type=hidden name=g_sid value="'+i3GEO.configura.sid+'" >' +
-		'<input type="hidden" name="MAX_FILE_SIZE" value="1000000">' +
-		'</form>' +
-
-		"<p class='paragrafo' style=color:red >"+$trad('ajudaCaracter',i3GEOF.upload.dicionario)+"</p>" +
-		'<iframe name=i3GEOuploadiframe style="text-align:left;border:1px solid gray;" width="98%" height="60px"></iframe>' +
-		'</fieldset>';
+		var ins = Mustache.render(i3GEOF.upload.MUSTACHE, i3GEOF.upload.mustacheHash());
 		return ins;
 	},
 	/*
@@ -164,7 +120,11 @@ i3GEOF.upload = {
 			cabecalho,
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.upload_corpo").style.backgroundColor = "white";
