@@ -20,24 +20,22 @@ i3GEOF.area =
 		 * Susbtitutos para o template
 		 */
 		mustacheHash : function() {
-
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.area.dicionario);
+			dicionario["sid"] = i3GEO.configura.sid;
+			dicionario["locaplic"] = i3GEO.configura.locaplic;
+			return dicionario;
 		},
 		inicia : function(iddiv) {
+			if(i3GEOF.area.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/area/template_mst.html", function(template) {
+					i3GEOF.area.MUSTACHE = template;
+					i3GEOF.area.inicia(iddiv);
+				});
+				return;
+			}
 			i3GEO.eventos.cliquePerm.desativa();
 			$i(iddiv).innerHTML += i3GEOF.area.html();
 			i3GEOF.area[i3GEO.Interface["ATUAL"]].inicia();
-			//
-			// botao que abre a ferramenta de calculo de perfis.
-			// pontosdistobj contem as coordenadas dos pontos
-			//
-			new YAHOO.widget.Button("i3GEObotaoAreaWkt", {
-				onclick : {
-					fn : function() {
-						i3GEO.mapa.dialogo.wkt2layer(i3GEOF.area.ultimoWkt, i3GEOF.area.ultimaMedida);
-					}
-				}
-			});
-
 		},
 		/*
 		 * Function: html
@@ -49,13 +47,7 @@ i3GEOF.area =
 		 * String com o c&oacute;digo html
 		 */
 		html : function() {
-			var ins = '<div class="bd" style="text-align:left;padding:3px;font-size:10px" >'
-			// + '<label class=paragrafo style="float:left;top:5px;position:relative;">Estilo:</label>'
-			// + '<div class=styled-select style="width:70px;">' + i3GEO.desenho.caixaEstilos() + '</div><br>'
-			+ '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo" ></div>'
-			+ '<div style="text-align:left;padding:3px;font-size:10px" id="mostraarea_calculo_parcial" ></div>'
-			+ '<br><input id=i3GEObotaoAreaWkt size="22" type="button" value="incorporar">'
-			+ '</div>';
+			var ins = Mustache.render(i3GEOF.area.MUSTACHE, i3GEOF.area.mustacheHash());
 			return ins;
 		},
 		/*
@@ -72,12 +64,29 @@ i3GEOF.area =
 			minimiza = "";
 			// cria a janela flutuante
 			titulo =
-				"</div>"
-					+ "<a class='i3GeoTituloJanelaBs' target=_blank href='"
+				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
 					+ i3GEO.configura.locaplic
 					+ "/ajuda_usuario.php?idcategoria=6&idajuda=51' >"+$trad("areaAprox")+"</a>";
 			janela =
-				i3GEO.janela.cria("220px", "auto", "", "", "", titulo, "i3GEOF.area", false, "hd", cabecalho, minimiza, "", true, "", "", "nao");
+				i3GEO.janela.cria(
+						"250px",
+						"auto",
+						"",
+						"",
+						"",
+						titulo,
+						"i3GEOF.area",
+						false,
+						"hd",
+						cabecalho,
+						minimiza,
+						"",
+						true,
+						"",
+						"",
+						"nao",
+						""
+					);
 			divid = janela[2].id;
 			i3GEOF.area.inicia(divid);
 			temp =
@@ -319,25 +328,22 @@ i3GEOF.area =
 				var mostra = $i("mostraarea_calculo"), texto;
 				if (mostra) {
 					texto =
-						"<b>" + $trad("d21at")
-							+ ":</b> "
+						"total <br>" + $trad("d21at")
+							+ " km2: "
 							+ (area / 1000000).toFixed(3)
-							+ " km2"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("d21at")
-							+ ":</b> "
+							+ " ha: "
 							+ (area / 10000).toFixed(2)
-							+ " ha"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x98")
-							+ ":</b> "
+							+ " km: "
 							+ (per).toFixed(2)
-							+ " km"
 							+ "<br>"
 							+ $trad("x25")
 							+ ": "
 							+ i3GEO.calculo.metododistancia;
-					mostra.innerHTML = texto;
+					mostra.innerHTML = texto + "<hr>";
 					i3GEOF.area.ultimaMedida = (area / 1000000).toFixed(3) + " km2";
 				}
 			},
@@ -348,28 +354,24 @@ i3GEOF.area =
 				var mostra = $i("mostraarea_calculo_parcial"), texto;
 				if (mostra) {
 					texto =
-						"<b>" + $trad("d21at")
-							+ ":</b> "
+						"parcial <br>" + $trad("d21at")
+							+ " km2:"
 							+ (area / 1000000).toFixed(3)
-							+ " km2"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("d21at")
-							+ ":</b> "
+							+ " ha: "
 							+ (area / 10000).toFixed(2)
-							+ " ha"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x95")
-							+ ":</b> "
+							+ " km: "
 							+ trecho.toFixed(3)
-							+ " km"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x98")
-							+ ":</b> "
+							+ " km: "
 							+ (per).toFixed(3)
-							+ " km"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x23")
-							+ " (DMS):</b> "
+							+ " (DMS):"
 							+ direcao;
 					mostra.innerHTML = texto;
 				}
@@ -544,25 +546,22 @@ i3GEOF.area =
 				var mostra = $i("mostraarea_calculo"), texto;
 				if (mostra) {
 					texto =
-						"<b>" + $trad("d21at")
-							+ ":</b> "
+						"total<br>" + $trad("d21at")
+							+ " km2: "
 							+ (area / 1000000).toFixed(3)
-							+ " km2"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("d21at")
-							+ ":</b> "
+							+ " ha: "
 							+ (area / 10000).toFixed(2)
-							+ " ha"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x98")
-							+ ":</b> "
+							+ " km: "
 							+ (per).toFixed(2)
-							+ " km"
 							+ "<br>"
 							+ $trad("x25")
 							+ ": "
 							+ i3GEO.calculo.metododistancia;
-					mostra.innerHTML = texto;
+					mostra.innerHTML = texto + "<hr>";
 					i3GEOF.area.ultimaMedida = (area / 1000000).toFixed(3) + " km2";
 				}
 			},
@@ -573,28 +572,24 @@ i3GEOF.area =
 				var mostra = $i("mostraarea_calculo_parcial"), texto;
 				if (mostra) {
 					texto =
-						"<b>" + $trad("d21at")
-							+ ":</b> "
+						"parcial<br>" + $trad("d21at")
+							+ " km2: "
 							+ (area / 1000000).toFixed(3)
-							+ " km2"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("d21at")
-							+ ":</b> "
+							+ " ha: "
 							+ (area / 10000).toFixed(2)
-							+ " ha"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x95")
-							+ ":</b> "
+							+ " km: "
 							+ trecho.toFixed(3)
-							+ " km"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x98")
-							+ ":</b> "
+							+ " km: "
 							+ (per).toFixed(3)
-							+ " km"
-							+ "<br><b>"
+							+ "<br>"
 							+ $trad("x23")
-							+ " (DMS):</b> "
+							+ " (DMS): "
 							+ direcao;
 					mostra.innerHTML = texto;
 				}
