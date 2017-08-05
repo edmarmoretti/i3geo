@@ -35,7 +35,8 @@ i3GEOF.distancia =
 				return;
 			}
 			i3GEO.eventos.cliquePerm.desativa();
-			$i(iddiv).innerHTML += i3GEOF.distancia.html();
+			$i(iddiv).innerHTML = i3GEOF.distancia.html();
+			//$('.collapse').collapse();
 			i3GEOF.distancia[i3GEO.Interface["ATUAL"]].inicia();
 		},
 		perfil: function (){
