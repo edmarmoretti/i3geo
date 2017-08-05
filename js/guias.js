@@ -125,7 +125,9 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao identifica balao");
 
+					$('.iconeGuiaMovel').tooltip('destroy');
 					i3GEO.mapa.ativaIdentificaBalao();
+
 				}
 			},
 			"identifica" : {
@@ -137,7 +139,9 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao identifica");
 
+					$('.iconeGuiaMovel').tooltip('destroy');
 					i3GEO.mapa.ativaIdentifica();
+
 				}
 			},
 			"mapas" : {
@@ -152,6 +156,7 @@ i3GEO.guias =
 					if (!onde) {
 						onde = i3GEO.guias.CONFIGURA.mapas.idconteudo;
 					}
+					$('.iconeGuiaMovel').tooltip('destroy');
 					var pegaMapas =
 						function(retorno) {
 						var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
@@ -302,6 +307,7 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("i3GEO.guias dobraPagina.click");
 
+					$('.iconeGuiaMovel').tooltip('destroy');
 					i3GEO.Interface.atual2gm.insereIcone = false;
 					i3GEO.Interface.atual2ol.insereIcone = false;
 					if (i3GEO.Interface.ATUAL === "googlemaps") {
@@ -330,6 +336,7 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao que abre a guia de camadas");
 
+					$('.iconeGuiaMovel').tooltip('destroy');
 					var f = i3GEO.guias.CONFIGURA.buscaRapida;
 					obj = $(obj);
 					if(obj.attr("data-idconteudo") != undefined){
@@ -347,6 +354,7 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao que abre a guia de camadas");
 
+					$('.iconeGuiaMovel').tooltip('destroy');
 					var f = i3GEO.guias.CONFIGURA.legenda;
 					obj = $(obj);
 					if(obj.attr("data-idLegenda") != undefined){
@@ -374,6 +382,7 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao que abre a guia de camadas");
 
+					$('.iconeGuiaMovel').tooltip('destroy');
 					var f = i3GEO.guias.CONFIGURA.temas;
 					obj = $(obj);
 
@@ -414,6 +423,7 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao que abre a guia de adicao de temas");
 
+					$('.iconeGuiaMovel').tooltip('destroy');
 					var f = i3GEO.guias.CONFIGURA.adiciona;
 
 					if($(obj).attr("data-idconteudo") != undefined){
@@ -457,6 +467,7 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao que abre a guia das ferramentas");
 
+					$('.iconeGuiaMovel').tooltip('destroy');
 					if($(obj).attr("data-idconteudo") != undefined){
 						i3GEO.guias.CONFIGURA.ferramentas.idconteudo = $(obj).attr("data-idconteudo");
 					}

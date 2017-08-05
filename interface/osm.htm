@@ -147,7 +147,7 @@
 				data-idMigalha - id do DIV que sera utilizado para mostrar o link de retorno ao nivel anterior
 			-->
 			<div data-idconteudo="guia8obj" data-idLinks="listaFerramentasLinks" data-idMigalha="migalhaFerramentas" data-idLista="listaFerramentas" onclick="i3GEO.guias.ativa('ferramentas',this)">
-				<button title="{{{u15a}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
+				<button title="{{{iconeFerramentas}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/gisicons/tools.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
@@ -159,7 +159,7 @@
 					do metadata existente na camada. Deixe vazio para nao ativar a operacao.
 			-->
 			<div onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
-				<button title="{{{g4a}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
+				<button title="{{{iconeMapa}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/layer.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
@@ -173,13 +173,13 @@
 				i3GEO.catalogoMenus.IDSMENUS - (array) apenas os menus com idmenu que constem nessa lista serao mostrados. Por default e vazio.
 			-->
 			<div onclick="i3GEO.guias.ativa('adiciona',this)"  data-idconteudo="guia2obj" data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus" style="margin-top: 3px;">
-				<button title="{{{g1a}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
+				<button title="{{{iconeCatalogo}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/catalogo.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
 			<!-- legenda -->
 			<div onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" style="margin-top: 3px;">
-				<button title="{{{g3}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
+				<button title="{{{iconeLegenda}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/legenda.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
@@ -195,12 +195,12 @@
 				</button>
 			</div>
 			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;" >
-				<button title="{{{d7a}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
+				<button title="{{{iconeBalao}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/gisicons/tips.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
 			<div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
-				<button title="{{{d7}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
+				<button title="{{{iconeIdentifica}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
@@ -212,7 +212,7 @@
 			<div id="i3GEOguiaMovelConteudo" >
 				<!-- camadas existentes no mapa -->
 				<div id='guia1obj' data-traduzir="true" style='display: none;'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g4a}}}</span>X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{iconeMapa}}}</span>X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<div class="noprint" >
              			<a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
@@ -252,7 +252,7 @@
 				</div>
 				<!-- Catalogo de temas -->
 				<div id='guia2obj' data-traduzir="true" style='display: none; text-align:left;'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();"><span class="pull-left">{{{g1a}}}</span> X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();"><span class="pull-left">{{{iconeCatalogo}}}</span> X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
 					<div id="catalogoMigalha" data-template="templates/catalogoMigalha.html"></div>
@@ -417,7 +417,7 @@
 				</div>
 				<!-- Legenda -->
 				<div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{iconeLegenda}}}</span>X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<a href='javascript:void(0)' onclick="i3GEO.legenda.inicia({'janela':true})" >{{{x11}}}</a>
 					<div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: none; text-align: left'></div>
@@ -428,7 +428,7 @@
 				Esses parametros indicam qual o checkbox que define o tipo de busca, o local onde os dados serao mostrados e o template para formatar o resultado
 				-->
 				<div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{iconeFerramentas}}}</span> X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<form onSubmit="return false;" >
 						<div class="form-group label-floating">
@@ -491,7 +491,7 @@
 				</div>
 				<!-- Ferramentas -->
 				<div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{iconeFerramentas}}}</span> X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<div class="form-inline" style="width:100%;">
 						<div class="text-center form-group" style="margin:4px;">

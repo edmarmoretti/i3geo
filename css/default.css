@@ -1,4 +1,14 @@
 /*
+tooltip dos botoes da guia movel
+*/
+.iconeGuiaMovel + .tooltip > .tooltip-inner {
+	right: 0px;
+	width: 120px;
+	min-height: 30px;
+}
+
+
+/*
 Botoes material
 */
 .material-icons.md-18 {

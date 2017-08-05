@@ -2918,5 +2918,35 @@ g_traducao =
 				en : "Remove",
 				es : "Eliminar"
 			}
-		]
+		],
+		"iconeFerramentas" : [{
+			pt : "Caixa de ferramentas",
+			en : "",
+			es : ""
+		}],
+		"iconeMapa" : [{
+			pt : "Camadas inclu&iacute;das",
+			en : "",
+			es : ""
+		}],
+		"iconeCatalogo" : [{
+			pt : "Incluir mais camadas",
+			en : "",
+			es : ""
+		}],
+		"iconeLegenda" : [{
+			pt : "Legenda do mapa",
+			en : "",
+			es : ""
+		}],
+		"iconeBalao" : [{
+			pt : "Info resumida",
+			en : "",
+			es : ""
+		}],
+		"iconeIdentifica" : [{
+			pt : "Info completa",
+			en : "",
+			es : ""
+		}]
 	};
