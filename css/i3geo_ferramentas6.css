@@ -1,6 +1,3 @@
-input{
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-}
 input[type=text], textarea, input[type=number]{
 	-webkit-user-select: text;
     -khtml-user-select: text;
@@ -9,15 +6,30 @@ input[type=text], textarea, input[type=number]{
     user-select: text;
 }
 
-input[type=text] {
-	font-size: 10px;
-	color: #2F4632;
-	background-color: rgb(250, 250, 250);
+.bd.i3geo6 input[type=text] {
+	color: white;
+	background: none !IMPORTANT;
+
 	padding: 0;
 	border: 1px solid rgb(180, 180, 180);
 	text-align: center;
 	cursor: text;
 	height: 22px;
+
+}
+
+.bd.i3geo6 input[type=text] {
+	color: white;
+	background: none !IMPORTANT;
+	padding: 0;
+	border: 1px solid rgb(180, 180, 180);
+	text-align: center;
+	cursor: text;
+	height: 22px;
+}
+
+.bd input[type=text] {
+
 }
 
 input[type=number] {
@@ -97,10 +109,12 @@ select option:hover {
 	width: 252px;
 	overflow: hidden;
 	background: #F8F8F8;
-	border: 1px solid #DDDDDD;
+	border: 0px solid #DDDDDD;
 	height: 22px;
 	border-radius: 2px;
 	text-align:left;
+	color: black;
+    font-weight: normal;
 }
 
 .i3geoForm150 {
@@ -305,6 +319,7 @@ para nao selecionar
     -o-user-select: text;
     user-select: text;
 }
+
 #i3GEOlogoMarca {
 	display: block;
 	top: 4em;
@@ -407,11 +422,9 @@ Utilizado na janela do buscador INDE
 	width:95%;
 	padding:2;
 	vertical-align:top;
-	background-color:#ffffff;
 }
 
 .mensagemAjuda th {
-	background-color: #cedff2;
 	font-family:Verdana, Arial, Helvetica, sans-serif;
 	font-size: 8pt;
 	border: 1px solid #B1CDEB;
@@ -423,6 +436,7 @@ Utilizado na janela do buscador INDE
 .botoesLegendaFlutuante {
 	font-size: 10px;
 }
+/*
 .legendaExpImagemPng .first-child button {
 	background: url(../imagens/oxygen/16x16/image-x-generic.png) 5% 50% no-repeat;
 	width: 60px;
@@ -435,6 +449,7 @@ Utilizado na janela do buscador INDE
 	background: url(../imagens/oxygen/16x16/layer-visible-off.png) 5% 50% no-repeat;
 	width: 90px;
 }
+*/
 
 .i3GEOconteudoLegendaClass{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -452,7 +467,7 @@ Utilizado na janela do buscador INDE
 .i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
 	display: none;
 }
-
+/*
 .i3GEOarvCat input[type=checkbox]+label:before {
     color: white;
     content: "";
@@ -476,7 +491,7 @@ Utilizado na janela do buscador INDE
     left: -25px;
     cursor : pointer;
 }
-
+*/
 .i3GEOarvCat label {
 	left:12px;
 }
@@ -580,7 +595,7 @@ Utilizado na janela do buscador INDE
 	width: 11px;
 	height: 11px;
 }
-
+/*
 .i3GEOarvCamTemaIco .arvCamFerramentas, .i3GEOarvCamTemaIcoIE .Ferramentas {
 	background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
 }
@@ -623,7 +638,7 @@ Utilizado na janela do buscador INDE
 .i3GEOarvCamTemaIco .pluginParametrossql, .i3GEOarvCamTemaIcoIE .pluginParametrossql {
 	background-image: url("../imagens/gisicons/settings.png");
 }
-
+*/
 .i3GEObalaoInfo {
 	position : absolute;
 	textAlign : left;
@@ -724,14 +739,14 @@ fieldset {
 	border: 0px solid gray;
 	border-radius: 5px 5px 5px 5px;
 	box-shadow: 0 1px 3px gray;
-	background-color: rgb(250, 250, 250);
+	background: transparent;
 	margin: 15px;
 }
 
 legend {
 	font-weight: bold;
 	cursor: pointer;
-	background-color: white;
+	background: transparent;
 	color: navy;
 	text-align: left;
 	font-size: 10px;
@@ -743,10 +758,6 @@ legend {
 	line-height: 15px;
 	margin-bottom: 9px;
 	text-align: left;
-}
-
-.paragrafo label {
-	font-size: 12px;
 }
 
 .paragrafo input[type=checkbox] {
@@ -942,7 +953,6 @@ A:hover {
 img {
 	border: 0px solid #FFFFFF;
 	border-width: 0;
-	cursor: pointer
 }
 
 table {
@@ -952,25 +962,21 @@ table {
 	margin: 0px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+td {
+	background-color: white;
+	border: 0px solid gray;
+	padding: 0px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: center;
+	font-size: 10pt !Important;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
 
 div {
-	text-align: center;
 	border: 0px solid #FFFFFF;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	position: relative;
-}
-
-i {
-	color: #660000;
-	BACKGROUND-COLOR: #ffffcc;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-
-P {
-	COLOR: #2F4632;
-	text-align: center;
-	font-size: 10px;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
 H1 {
@@ -984,17 +990,8 @@ H1 {
 	color: #004080;
 }
 
-td {
-	background-color: white;
-	border: 0px solid gray;
-	padding: 0px;
-	color: #2F4632;
-	margin: 0px;
-	text-align: center;
-	font-size: 10pt !Important;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-}
 
+/*
 .ajuda_usuario {
 	background-image: url(../imagens/oxygen/16x16/dialog-information.png);
 	background-position: 0px 0px;
@@ -1007,7 +1004,7 @@ td {
 	background-size: 14px 14px;
 	vertical-align: middle;
 }
-
+*/
 #buscaRapida .ajuda_usuario {
 	top: 1px;
 	display: inline-block;
@@ -1015,7 +1012,7 @@ td {
 	width: 14px;
 	left: 2px;
 }
-
+/*
 .executar {
 	cursor: pointer;
 	color: white;
@@ -1028,7 +1025,7 @@ td {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 }
-
+*/
 .legendatemas {
 	cursor: pointer;
 	text-align: left;
@@ -1193,7 +1190,7 @@ td {
 }
 
 .verdeclaro {
-	background-image: url(../imagens/i3geo1bw.jpg);
+	/*background-image: url(../imagens/i3geo1bw.jpg);*/
 	padding: 0px;
 	background-color: #d5e9c1;
 	margin: 0px;
@@ -1355,10 +1352,15 @@ td {
 	z-index: 1000;
 }
 
-#listaTemas,#legenda,#legendai,#corpoLegi,#listaPropriedades {
+#legenda,#legendai,#corpoLegi,#listaPropriedades {
 	overflow: auto;
 	background-color: white;
 	text-align: left;
+}
+#listaTemas{
+	background-color: white;
+	text-align: left;
+	overflow: none;
 }
 
 #ferr1 {
@@ -1455,7 +1457,7 @@ h1 {
 	left: -1;
 	top: 0px
 }
-
+/*
 #vertBGDiv {
 	position: relative;
 	top: 0px;
@@ -1464,7 +1466,7 @@ h1 {
 	background: url(../imagens/zoombar.png) no-repeat;
 	height: 78px;
 }
-
+*/
 #googlemapsdiv {
 	-moz-user-select: -moz-none;
 	-khtml-user-select: none;
@@ -1513,12 +1515,7 @@ h1 {
 	width: 95%;
 	padding: 5px;
 }
-
-#i3geoCartoParametros_corpo select {
-	box-shadow: 0 1px 5px lightgray;
-	height: 20px;
-}
-
+/*
 #editor_bd p {
 	margin-top: 15px;
 }
@@ -1531,6 +1528,7 @@ h1 {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10px;
 }
+*/
 /* usado pelos graficos interativos (CCC2)*/
 .tipsy {
 	pointer-events: none;
@@ -1684,12 +1682,14 @@ h1 {
 	text-overflow: ellipsis;
 	font-size: 12px;
 	appearance: none;
+	/*
   background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
   @media (-webkit-min-device-pixel-ratio: 2),
     (min-resolution: 192dpi) {
       background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
       background-size: 16px 144px;
     }
+   */
 }
 
 /* esconde na impressao */
@@ -1721,12 +1721,24 @@ h1 {
 	#i3GEOcompartilhar {
 		display: none !important;
 	}
-	#i3GEOguiaMovel {
+	.iconesGuiaMovel {
 		display: none !important;
 	}
-	#localizarxy {
+	.localizarxy {
 		display: none !important;
 	}
+	.i3GEOfechaGuia {
+		display: none !important;
+	}
+	input[type="radio"] {
+		display: none !important;
+	}
+	input[type="checkbox"] {
+		display: none !important;
+	}
+	.legenda > label + input[type="checkbox"]:disabled {
+		display: none !important;
+ 	}
 }
 
 /*

@@ -1,6 +1,3 @@
-input{
-font-family: Verdana, Arial, Helvetica, sans-serif;
-}
 input[type=text], textarea, input[type=number]{
 -webkit-user-select: text;
 -khtml-user-select: text;
@@ -8,15 +5,25 @@ input[type=text], textarea, input[type=number]{
 -o-user-select: text;
 user-select: text;
 }
-input[type=text] {
-font-size: 10px;
-color: #2F4632;
-background-color: rgb(250, 250, 250);
+.bd.i3geo6 input[type=text] {
+color: white;
+background: none !IMPORTANT;
 padding: 0;
 border: 1px solid rgb(180, 180, 180);
 text-align: center;
 cursor: text;
 height: 22px;
+}
+.bd.i3geo6 input[type=text] {
+color: white;
+background: none !IMPORTANT;
+padding: 0;
+border: 1px solid rgb(180, 180, 180);
+text-align: center;
+cursor: text;
+height: 22px;
+}
+.bd input[type=text] {
 }
 input[type=number] {
 font-size: 12px;
@@ -87,10 +94,12 @@ background: white none repeat scroll 0 0;
 width: 252px;
 overflow: hidden;
 background: #F8F8F8;
-border: 1px solid #DDDDDD;
+border: 0px solid #DDDDDD;
 height: 22px;
 border-radius: 2px;
 text-align:left;
+color: black;
+font-weight: normal;
 }
 .i3geoForm150 {
 width: 150px;
@@ -374,10 +383,8 @@ padding: 5px;
 width:95%;
 padding:2;
 vertical-align:top;
-background-color:#ffffff;
 }
 .mensagemAjuda th {
-background-color: #cedff2;
 font-family:Verdana, Arial, Helvetica, sans-serif;
 font-size: 8pt;
 border: 1px solid #B1CDEB;
@@ -388,6 +395,7 @@ padding-right: 11px;
 .botoesLegendaFlutuante {
 font-size: 10px;
 }
+/*
 .legendaExpImagemPng .first-child button {
 background: url(../imagens/oxygen/16x16/image-x-generic.png) 5% 50% no-repeat;
 width: 60px;
@@ -400,6 +408,7 @@ width: 80px;
 background: url(../imagens/oxygen/16x16/layer-visible-off.png) 5% 50% no-repeat;
 width: 90px;
 }
+*/
 .i3GEOconteudoLegendaClass{
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
@@ -413,6 +422,7 @@ top: -5px;
 .i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
 display: none;
 }
+/*
 .i3GEOarvCat input[type=checkbox]+label:before {
 color: white;
 content: "";
@@ -435,6 +445,7 @@ position: absolute;
 left: -25px;
 cursor : pointer;
 }
+*/
 .i3GEOarvCat label {
 left:12px;
 }
@@ -528,6 +539,7 @@ margin-left: 3px;
 width: 11px;
 height: 11px;
 }
+/*
 .i3GEOarvCamTemaIco .arvCamFerramentas, .i3GEOarvCamTemaIcoIE .Ferramentas {
 background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
 }
@@ -565,6 +577,7 @@ background-image: url("../imagens/gisicons/zoom-layer.png");
 .i3GEOarvCamTemaIco .pluginParametrossql, .i3GEOarvCamTemaIcoIE .pluginParametrossql {
 background-image: url("../imagens/gisicons/settings.png");
 }
+*/
 .i3GEObalaoInfo {
 position : absolute;
 textAlign : left;
@@ -655,13 +668,13 @@ padding: 10px;
 border: 0px solid gray;
 border-radius: 5px 5px 5px 5px;
 box-shadow: 0 1px 3px gray;
-background-color: rgb(250, 250, 250);
+background: transparent;
 margin: 15px;
 }
 legend {
 font-weight: bold;
 cursor: pointer;
-background-color: white;
+background: transparent;
 color: navy;
 text-align: left;
 font-size: 10px;
@@ -672,9 +685,6 @@ font-size: 12px;
 line-height: 15px;
 margin-bottom: 9px;
 text-align: left;
-}
-.paragrafo label {
-font-size: 12px;
 }
 .paragrafo input[type=checkbox] {
 position: relative;
@@ -849,7 +859,6 @@ outline : none;
 img {
 border: 0px solid #FFFFFF;
 border-width: 0;
-cursor: pointer
 }
 table {
 text-align: center;
@@ -857,33 +866,6 @@ border: 0px solid #FFFFFF;
 padding: 0px;
 margin: 0px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-div {
-text-align: center;
-border: 0px solid #FFFFFF;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-position: relative;
-}
-i {
-color: #660000;
-BACKGROUND-COLOR: #ffffcc;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-P {
-COLOR: #2F4632;
-text-align: center;
-font-size: 10px;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-}
-H1 {
-COLOR: #2F4632;
-text-align: left;
-text-decoration: none;
-font-weight: normal;
-font-style: normal;
-font-size: 14px;
-font-family: Verdana, Arial, Helvetica, sans-serif;
-color: #004080;
 }
 td {
 background-color: white;
@@ -895,6 +877,22 @@ text-align: center;
 font-size: 10pt !Important;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+div {
+border: 0px solid #FFFFFF;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+position: relative;
+}
+H1 {
+COLOR: #2F4632;
+text-align: left;
+text-decoration: none;
+font-weight: normal;
+font-style: normal;
+font-size: 14px;
+font-family: Verdana, Arial, Helvetica, sans-serif;
+color: #004080;
+}
+/*
 .ajuda_usuario {
 background-image: url(../imagens/oxygen/16x16/dialog-information.png);
 background-position: 0px 0px;
@@ -907,6 +905,7 @@ font-size: 14px;
 background-size: 14px 14px;
 vertical-align: middle;
 }
+*/
 #buscaRapida .ajuda_usuario {
 top: 1px;
 display: inline-block;
@@ -914,6 +913,7 @@ height: 14px;
 width: 14px;
 left: 2px;
 }
+/*
 .executar {
 cursor: pointer;
 color: white;
@@ -926,6 +926,7 @@ background-position: right;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10px;
 }
+*/
 .legendatemas {
 cursor: pointer;
 text-align: left;
@@ -1075,7 +1076,7 @@ font-size: 8px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .verdeclaro {
-background-image: url(../imagens/i3geo1bw.jpg);
+/*background-image: url(../imagens/i3geo1bw.jpg);*/
 padding: 0px;
 background-color: #d5e9c1;
 margin: 0px;
@@ -1217,10 +1218,15 @@ background-color: white;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 z-index: 1000;
 }
-#listaTemas,#legenda,#legendai,#corpoLegi,#listaPropriedades {
+#legenda,#legendai,#corpoLegi,#listaPropriedades {
 overflow: auto;
 background-color: white;
 text-align: left;
+}
+#listaTemas{
+background-color: white;
+text-align: left;
+overflow: none;
 }
 #ferr1 {
 background-color: rgb(255, 255, 255);
@@ -1304,6 +1310,7 @@ position: absolute;
 left: -1;
 top: 0px
 }
+/*
 #vertBGDiv {
 position: relative;
 top: 0px;
@@ -1312,6 +1319,7 @@ left: 0px;
 background: url(../imagens/zoombar.png) no-repeat;
 height: 78px;
 }
+*/
 #googlemapsdiv {
 -moz-user-select: -moz-none;
 -khtml-user-select: none;
@@ -1355,10 +1363,7 @@ background-color: rgb(220, 220, 220);
 width: 95%;
 padding: 5px;
 }
-#i3geoCartoParametros_corpo select {
-box-shadow: 0 1px 5px lightgray;
-height: 20px;
-}
+/*
 #editor_bd p {
 margin-top: 15px;
 }
@@ -1370,6 +1375,7 @@ color: #426252;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 10px;
 }
+*/
 /* usado pelos graficos interativos (CCC2)*/
 .tipsy {
 pointer-events: none;
@@ -1507,12 +1513,14 @@ white-space: nowrap;
 text-overflow: ellipsis;
 font-size: 12px;
 appearance: none;
+/*
 background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
 @media (-webkit-min-device-pixel-ratio: 2),
 (min-resolution: 192dpi) {
 background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
 background-size: 16px 144px;
 }
+*/
 }
 /* esconde na impressao */
 @media print {
@@ -1543,10 +1551,22 @@ display: none !important;
 #i3GEOcompartilhar {
 display: none !important;
 }
-#i3GEOguiaMovel {
+.iconesGuiaMovel {
 display: none !important;
 }
-#localizarxy {
+.localizarxy {
+display: none !important;
+}
+.i3GEOfechaGuia {
+display: none !important;
+}
+input[type="radio"] {
+display: none !important;
+}
+input[type="checkbox"] {
+display: none !important;
+}
+.legenda > label + input[type="checkbox"]:disabled {
 display: none !important;
 }
 }
@@ -2419,12 +2439,12 @@ cursor: pointer;
 padding: 2px;
 border-radius: 5px 5px 5px 5px;
 background-image: none;
-margin-left: 8px;
 border: solid 1px gray;
 box-shadow: 0px 1px 3px lightgray;
 cursor: pointer;
 widh: 40px;
 height: 40px;
+background-color: rgba(0,60,136,.5);
 }
 #i3GEOguiaMovel .iconeGuiaMovel{
 padding: 3px 0px;
@@ -2933,33 +2953,6 @@ cursor: pointer;
 height: 22px;
 width: 18px;
 }
-.i3GeoFolder .ygtvtp,
-.i3GeoFolder .ygtvtph,
-.i3GeoFolder .ygtvtm,
-.i3GeoFolder .ygtvtmh,
-.i3GeoFolder .ygtvlm,
-.i3GeoFolder .ygtvlmh,
-.i3GeoFolder .ygtvtm,
-.i3GeoFolder .ygtvtmh,
-.i3GeoFolder .ygtvlp,
-.i3GeoFolder .ygtvlph{
-width: 38px;
-background-image: url(../pacotes/yui290/build/assets/skins/sam/treeview-sprite-folder.gif);
-}
-.i3GeoFolder .ygtvloading{
-width: 38px;
-}
-.ygtvhtml {
-text-align: left;
-}
-.ygtvitem {
-text-align: left;
-}
-td.ygtvcell {
-border: 0;
-padding: 0;
-padding-right: 3px;
-}
 .yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
 background: #d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x;
 border: solid #a3a3a3;
@@ -2978,80 +2971,6 @@ background-color: white;
 .yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus {
 background: #bfdaff url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1300px; /* selected tab background */
 outline: 0;
-}
-.yui-skin-sam .yui-button button,.yui-skin-sam .yui-button a {
-color: #000000;
-font-size: 95%;
-line-height: 2;
-min-height: 1em;
-padding: 0 10px;
-}
-.yui-skin-sam .yui-button {
-border-color: #D3D3D3;
-border-radius: 6px;
-box-shadow: 0px 0px 0px 0px rgb(230,230,230);
-}
-.yui-skin-sam .yui-button .first-child {
-border-color: #D3D3D3;
-border-radius: 7px;
-}
-.ygtvcontent {
-font-size: 1em;
-padding: 0 3px 10px 0;
-}
-.ygtvcell {
-font-size: 1em;
-padding: 0 3px 5px 0;
-}
-.comboTemasCabecalho .yuimenuitemlabel {
-color: black;
-cursor: default;
-font-size: 10px;
-font-weight: normal;
-padding: 0 0px;
-text-decoration: none;
-}
-.rodar .first-child button {
-background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
-width: 250px;
-}
-.rodar150 .first-child button {
-background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
-width: 150px;
-}
-.rodar100 .first-child button {
-background: url(../imagens/oxygen/16x16/run-build.png) 5% 50% no-repeat;
-width: 100px;
-}
-.rodar0 .first-child button {
-background: url("../imagens/oxygen/16x16/run-build.png") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
-width: 20px;
-height: 20px;
-}
-.adicionar0 .first-child button {
-background: url("../imagens/oxygen/16x16/list-add.png") no-repeat scroll 50% 50% rgba(0, 0, 0, 0);
-width: 20px;
-height: 20px;
-}
-.enviar .first-child button {
-background: url(../imagens/oxygen/16x16/svn-commit.png) 5% 50% no-repeat;
-width: 250px;
-}
-.abrir .first-child button {
-background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
-width: 250px;
-}
-.abrir200 .first-child button {
-background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
-width: 200px;
-}
-.abrir150 .first-child button {
-background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
-width: 150px;
-}
-.abrir100 .first-child button {
-background: url(../imagens/oxygen/16x16/task-delegate.png) 5% 50% no-repeat;
-width: 100px;
 }
 div.olMap {
 z-index: 0;
@@ -3509,7 +3428,7 @@ font-size: 93%;
 font-weight: bold;
 line-height: 2;
 padding: 0 10px;
-height: 30px;
+height: 40px;
 }
 .yui-skin-sam .yui-panel .hd1 {
 background: transparent

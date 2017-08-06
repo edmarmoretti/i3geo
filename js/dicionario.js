@@ -2948,5 +2948,10 @@ g_traducao =
 			pt : "Info completa",
 			en : "",
 			es : ""
+		}],
+		"indeOk" : [{
+			pt : "Cat&aacute;logo da INDE j&aacute; est&aacute; dispon&iacute;vel",
+			en : "",
+			es : ""
 		}]
 	};

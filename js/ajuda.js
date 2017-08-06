@@ -60,5 +60,21 @@ i3GEO.ajuda =
 				"",
 				"<div class='i3GeoTituloJanela'>" + $trad("u5c") + "</div>",
 				i3GEO.util.generateId("redes"));
+		},
+		ferramenta : function(idcategoria,idajuda){
+			var url = i3GEO.configura.locaplic + "/ferramentas/ajuda_usuario.php?"
+				+ "idcategoria="
+				+ idcategoria
+				+ "&idajuda="
+				+ idajuda;
+			$.get(url).done(function(data) {
+				var json = jQuery.parseJSON(data);
+				var texto = json[i3GEO.idioma.ATUAL];
+				var titulo = json["titulo"][i3GEO.idioma.ATUAL];
+				i3GEO.janela.closeMsg(texto);
+			}).fail(function() {
+
+			    return;
+			});
 		}
 	};

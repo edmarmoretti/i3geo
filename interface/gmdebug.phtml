@@ -662,6 +662,26 @@ include("../ms_configura.php");
 			//Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
 			//Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
 			i3GeoServer : "",
+			//Funcao que sera executada apos a inicializacao do mapa
+			afterStart : function(){
+				$('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});
+				$('.iconeGuiaMovel').tooltip('show');
+				//setTimeout(function() {
+				//	$('.iconeGuiaMovel').tooltip('destroy');
+				//}, 30000);
+				//i3GEO.maparef.inicia();
+				//
+				//(largura, altura, topo, esquerda);
+				//i3GEO.mapa.dialogo.locregiao(215, "", 150, 150);
+				//i3GEO.mapa.dialogo.metaestat(215, "", 150, 150);
+
+				//abre a legenda do mapa em uma janela flutuante
+				//i3GEO.legenda.inicia({
+				//"idLegenda": "legendaHtml",
+				//"templateLegenda": "templates/legenda.html",
+				//"janela": true
+				//});
+			},
 			//parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas
 			components : {
 				//define se ao clicar no mapa sera feita a busca de atributos nas camadas existentes no mapa

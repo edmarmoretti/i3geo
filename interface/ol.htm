@@ -649,6 +649,8 @@
 			i3GeoServer : "",
 			//Funcao que sera executada apos a inicializacao do mapa
 			afterStart : function(){
+				$('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});
+				$('.iconeGuiaMovel').tooltip('show');
 				//i3GEO.maparef.inicia();
 				//
 				//(largura, altura, topo, esquerda);

@@ -106,6 +106,9 @@ i3GEO.catalogoInde = {
 			$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).show();
 
 			var lista = function(dados){
+				if(i3GEO.catalogoInde.DADOS == ""){
+					i3GEO.janela.tempoMsg($trad("indeOk"));
+				}
 				i3GEO.catalogoInde.DADOS = dados;
 				var clone = [],
 					t;

@@ -1,4 +1,4 @@
-<?php error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>#abreJanelaLegenda,#localizar,#barraedicao,#abregoogleearth,#uploadgpx,#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
+<?php //error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header("Content-type: text/css"); ?>#abreJanelaLegenda,#localizar,#barraedicao,#abregoogleearth,#uploadgpx,#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
 {
 margin: 2px;
 cursor: pointer;
@@ -867,12 +867,12 @@ cursor: pointer;
 padding: 2px;
 border-radius: 5px 5px 5px 5px;
 background-image: none;
-margin-left: 8px;
 border: solid 1px gray;
 box-shadow: 0px 1px 3px lightgray;
 cursor: pointer;
 widh: 40px;
 height: 40px;
+background-color: rgba(0,60,136,.5);
 }
 #i3GEOguiaMovel .iconeGuiaMovel{
 padding: 3px 0px;

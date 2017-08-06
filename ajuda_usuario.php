@@ -44,12 +44,13 @@ idajuda - id da funcionalidade. Lista apenas uma funcionalidade
 */
 include_once (dirname(__FILE__)."/classesphp/sani_request.php");
 include("ms_configura.php");
+$dicionario = file_get_contents("js/dicionario_ajuda.json");
+$dicionario = json_decode($dicionario,true);
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-
 <script type="text/javascript" src="classesjs/i3geo.js"></script>
 <link rel="stylesheet" type="text/css" href="admin/html/admin.css">
 <style>
@@ -168,8 +169,12 @@ A:hover {
 	<div id=resultado style='margin:10px;'>
 	</div>
 </div>
-<script language="JavaScript" type="text/javascript" src="classesjs/dicionario_ajuda.js"></script>
+<!-- <script language="JavaScript" type="text/javascript" src="classesjs/dicionario_ajuda.js"></script>-->
 <script>
+
+g_traducao_ajuda = <?php echo json_encode($dicionario["dicionario_ajuda"]); ?>;
+g_traducao_ajuda_categorias = <?php echo json_encode($dicionario["dicionario_ajuda"]["categorias"]); ?>;
+
 i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://"
 + window.location.host + "/i3geo";
 i3GEO.idioma.IDSELETOR = "bandeiras";
