@@ -147,7 +147,7 @@ i3GEOF.busca = {
 		};
 		//cria a janela flutuante
 		titulo = "<div  id='i3GEOFbuscaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div>"
-			+ "<a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=35' >"+$trad("t23")+"</a>";
+			+ "<a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(35)' href='javascript:void(0)' >"+$trad("t23")+"</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"330px",

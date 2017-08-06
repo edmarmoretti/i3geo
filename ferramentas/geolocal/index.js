@@ -135,9 +135,7 @@ i3GEOF.geolocal =
 			};
 			// cria a janela flutuante
 			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
-					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=6&idajuda=118' >"
+				"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(118)' >"
 					+ $trad('localizaUsuario',i3GEOF.geolocal.dicionario) + "</a>";
 			janela = i3GEO.janela.cria("310", "230", "", "", "", titulo, "i3GEOF.geolocal", false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;

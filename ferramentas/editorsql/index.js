@@ -134,7 +134,7 @@ i3GEOF.editorsql = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=86' >" + $trad("t41")+"</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(86)' >" + $trad("t41")+"</a>";
 		janela = i3GEO.janela.cria(
 			"550px",
 			"360px",

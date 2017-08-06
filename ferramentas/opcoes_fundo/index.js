@@ -101,9 +101,7 @@ i3GEOF.opcoesFundo =
 			};
 			// cria a janela flutuante
 			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
-					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=1&idajuda=6' >" + $trad("p9")
+				"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(6)' >" + $trad("p9")
 					+ "</a>";
 			janela = i3GEO.janela.cria("210px", "80px", "", "", "", titulo, "i3GEOF.opcoesFundo", false, "hd", cabecalho, "");
 			divid = janela[2].id;

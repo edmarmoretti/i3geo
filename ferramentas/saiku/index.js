@@ -141,8 +141,7 @@ i3GEOF.saiku =
 			};
 			// cria a janela flutuante
 			titulo =
-				"<div class='i3GeoTituloJanela'>Saiku<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=4&idajuda=117' ><b> </b></a></div>";
+				"<div class='i3GeoTituloJanela'>Saiku<a class=ajuda_usuario href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(117)' ><b> </b></a></div>";
 			janela =
 				i3GEO.janela.cria(
 					"400px",

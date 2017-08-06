@@ -196,7 +196,7 @@ i3GEOF.inserexy = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.inserexy");
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=83' >" + $trad("d22t")+"</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(83)' >" + $trad("d22t")+"</a>";
 		janela = i3GEO.janela.cria(
 			"520px",
 			"310px",

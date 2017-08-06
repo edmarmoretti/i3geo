@@ -128,7 +128,7 @@ i3GEOF.converteMapaWS = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.converteMapaWS");
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=12' >WMS</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(12)' >WMS</a>";
 		janela = i3GEO.janela.cria(
 			"440px",
 			"290px",

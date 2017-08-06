@@ -121,7 +121,7 @@ i3GEOF.gradeDePoligonos = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=14' >" + $trad("u7")+"</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(14)' >" + $trad("u7")+"</a>";
 		cabecalho = function(){
 			i3GEO.navega.ativaPan();
 		};

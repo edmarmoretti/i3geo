@@ -126,7 +126,7 @@ i3GEOF.conectargeojson = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.conectargeojson");
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=106' >GeoJson</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(106)' >GeoJson</a>";
 		janela = i3GEO.janela.cria(
 			"360px",
 			"150px",

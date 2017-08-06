@@ -114,7 +114,7 @@ i3GEOF.mostraExten = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.mostraExten");
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=55' >" + $trad("d8t")+"</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(55)' >" + $trad("d8t")+"</a>";
 		janela = i3GEO.janela.cria(
 			"370px",
 			"320px",

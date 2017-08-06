@@ -106,7 +106,7 @@ i3GEOF.uploaddbf = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.uploaddbf");
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=4&idajuda=26' >" + $trad("a2b")+"</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(26)' >" + $trad("a2b")+"</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"480px",

@@ -598,17 +598,7 @@ i3GEO.janela =
 				i3GEO.janela.tempoModal.modal("hide");
 			}, tempo);
 		},
-		/**
-		 * Function: tempoMsg
-		 *
-		 * Abre uma janela com uma mensagem temporaria
-		 *
-		 * Parametros:
-		 *
-		 * {String} - texto da janela
-		 *
-		 * {segundos}
-		 */
+
 		closeModal: false,
 		closeMsg : function(texto) {
 			if(!i3GEO.janela.closeModal){

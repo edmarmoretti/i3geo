@@ -255,9 +255,7 @@ i3GEOF.tme =
 			// cria a janela flutuante
 			titulo =
 				"<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div>"
-					+ "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
-					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=5&idajuda=108' >tme</a>";
+					+ "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(108)' >tme</a>";
 			janela = i3GEO.janela.cria(
 				"380px",
 				"320px",

@@ -652,7 +652,7 @@ i3GEOF.preferencias = {
 			i3GEO.janela.minimiza("i3GEOF.preferencias");
 		};
 		//cria a janela flutuante
-		titulo = "<div class='i3GeoTituloJanela'>" + $trad("x86")+"<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=1&idajuda=115' ><b> </b></a></div>";
+		titulo = "<div class='i3GeoTituloJanela'>" + $trad("x86")+"<a class=ajuda_usuario href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(115)' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"300px",

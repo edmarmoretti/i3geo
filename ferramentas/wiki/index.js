@@ -127,7 +127,7 @@ i3GEOF.wiki = {
 			i3GEO.janela.minimiza("i3GEOF.wiki");
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=73' >Wikip&eacute;dia</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(73)' >Wikip&eacute;dia</a>";
 		janela = i3GEO.janela.cria(
 			"250px",
 			"190px",

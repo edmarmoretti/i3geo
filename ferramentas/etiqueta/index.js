@@ -141,7 +141,7 @@ i3GEOF.etiqueta = {
 			i3GEO.janela.minimiza("i3GEOF.etiqueta");
 		};
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=37' >"+$trad("d7at")+"</a>";
+		titulo = "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(37)' >"+$trad("d7at")+"</a>";
 		janela = i3GEO.janela.cria(
 			"510px",
 			"300px",

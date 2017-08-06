@@ -106,7 +106,7 @@ i3GEOF.carregaMapa = {
 		if($i("i3GEOF.carregaMapa")){
 			return;
 		}
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=11' >" + $trad("u18")+"</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(11)' >" + $trad("u18")+"</a>";
 		janela = i3GEO.janela.cria(
 			"340px",
 			"240px",

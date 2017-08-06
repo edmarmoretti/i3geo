@@ -134,8 +134,7 @@ i3GEOF.metar =
 			};
 			// cria a janela flutuante
 			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=8&idajuda=87' >Metar</a>";
+				"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(87)' >Metar</a>";
 			janela = i3GEO.janela.cria("250px", "190px", "", "", "", titulo, "i3GEOF.metar", false, "hd", cabecalho, minimiza);
 			divid = janela[2].id;
 			i3GEOF.metar.aguarde = $i("i3GEOF.metar_imagemCabecalho").style;

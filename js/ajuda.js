@@ -61,10 +61,8 @@ i3GEO.ajuda =
 				"<div class='i3GeoTituloJanela'>" + $trad("u5c") + "</div>",
 				i3GEO.util.generateId("redes"));
 		},
-		ferramenta : function(idcategoria,idajuda){
+		ferramenta : function(idajuda){
 			var url = i3GEO.configura.locaplic + "/ferramentas/ajuda_usuario.php?"
-				+ "idcategoria="
-				+ idcategoria
 				+ "&idajuda="
 				+ idajuda;
 			$.get(url).done(function(data) {

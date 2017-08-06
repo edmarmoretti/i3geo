@@ -103,7 +103,7 @@ i3GEOF.agrupaElementos = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=3&idajuda=25' >" + $trad("u26") + "</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(25)' href='javascript:void(0)' >" + $trad("u26") + "</a>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.agrupaElementos");

@@ -260,9 +260,7 @@ i3GEOF.tabela =
 						+ "<div  id='"
 						+ id
 						+ "i3GEOFtabelaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px' >   ------</div></div></div>"
-						+ "<a class='i3GeoTituloJanelaBs' style='right:90px;' target=_blank href='"
-						+ i3GEO.configura.locaplic
-						+ "/ajuda_usuario.php?idcategoria=5&idajuda=39' >"+$trad('tabela', i3GEOF.tabela.dicionario)+"</a>";
+						+ "<a class='i3GeoTituloJanelaBs' style='right:90px;' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(39)' >"+$trad('tabela', i3GEOF.tabela.dicionario)+"</a>";
 
 				janela = i3GEO.janela.cria(
 					"570px",
@@ -422,9 +420,7 @@ i3GEOF.tabela =
 				// cria a janela flutuante
 				titulo =
 					"<div class='i3GeoTituloJanela'>" + $trad("vinculos", i3GEOF.tabela.dicionario)
-						+ "<a class=ajuda_usuario target=_blank href='"
-						+ i3GEO.configura.locaplic
-						+ "/ajuda_usuario.php?idcategoria=5&idajuda=120' ><b> </b></a></div>";
+						+ "<a class=ajuda_usuario href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(120)' ><b> </b></a></div>";
 				janela =
 					i3GEO.janela.cria(
 						"300px",

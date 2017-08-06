@@ -2394,7 +2394,7 @@ i3GEOF.metaestat = {
 				if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
 					modal = true;
 				}
-				titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=9&idajuda=124' >" + $trad("x57")+"</a>";
+				titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(124)' >" + $trad("x57")+"</a>";
 				janela = i3GEO.janela.cria(
 						i3GEOF.metaestat.LARGURA+50+"px",
 						i3GEOF.metaestat.ALTURA+"px",

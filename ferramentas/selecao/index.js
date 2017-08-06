@@ -337,9 +337,7 @@ i3GEOF.selecao =
 			};
 			titulo =
 				"</div><div id='i3GEOF.selecaoI' style='left:10px;'>"
-					+ "</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
-					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=5&idajuda=48a' >"
+					+ "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(\"48a\")' >"
 					+ $trad("x51")
 					+ "</a>";
 			janela = i3GEO.janela.cria("510px", "230px", "", "", "", titulo, "i3GEOF.selecao", false, "hd", cabecalho, minimiza);

@@ -64,9 +64,7 @@ i3GEOF.area =
 			minimiza = "";
 			// cria a janela flutuante
 			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' target=_blank href='"
-					+ i3GEO.configura.locaplic
-					+ "/ajuda_usuario.php?idcategoria=6&idajuda=51' >"+$trad("areaAprox")+"</a>";
+				"</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(51)' href='javascript:void(0)' >"+$trad("areaAprox")+"</a>";
 			janela =
 				i3GEO.janela.cria(
 						"250px",

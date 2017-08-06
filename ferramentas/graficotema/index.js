@@ -176,7 +176,7 @@ i3GEOF.graficoTema = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFgraficotemaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' style='right:40px;' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=8&idajuda=40' >"+$trad("t37a")+"</a>";
+		titulo = "<div  id='i3GEOFgraficotemaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' style='right:40px;' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(40)' >"+$trad("t37a")+"</a>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"330px",

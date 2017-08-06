@@ -237,9 +237,7 @@ i3GEOF.animagif =
 		// cria a janela flutuante
 		titulo =
 			"<div id='i3GEOFanimagifComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div>"
-			+"<a class='i3GeoTituloJanelaBs' target=_blank href='"
-			+ i3GEO.configura.locaplic
-			+ "/ajuda_usuario.php?idcategoria=5&idajuda=130' >animagif</a>";
+			+"<a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(130)' href='javascript:void(0)' >animagif</a>";
 
 		janela = i3GEO.janela.cria(
 			"380px",

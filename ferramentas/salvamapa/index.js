@@ -161,7 +161,7 @@ i3GEOF.salvaMapa = {
 		if ($i("i3GEOF.salvaMapa")) {
 			return;
 		}
-		titulo = "</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=10' >" + $trad("u17")+"</a>";
+		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(10)' >" + $trad("u17")+"</a>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"180px",

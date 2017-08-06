@@ -157,7 +157,7 @@ i3GEOF.download = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.download");
 		};
-		titulo = "<div class='i3GeoTituloJanela'>Download<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=2&idajuda=82' ><b> </b></a></div>";
+		titulo = "<div class='i3GeoTituloJanela'>Download<a class=ajuda_usuario href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(82)' ><b> </b></a></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"200px",

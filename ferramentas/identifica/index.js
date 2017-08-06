@@ -333,9 +333,7 @@ i3GEOF.identifica =
 				+ "<div  id='"
 				+ id
 				+ "i3GEOFidentificaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px' >   ------</div></div></div>"
-				+ "<a class='i3GeoTituloJanelaBs' style='right:90px;' target=_blank href='"
-				+ i3GEO.configura.locaplic
-				+ "/ajuda_usuario.php?idcategoria=8&idajuda=70' >" + $trad("d7t") + "</a>";
+				+ "<a class='i3GeoTituloJanelaBs' style='right:90px;' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(70)' >" + $trad("d7t") + "</a>";
 
 			janela =
 				i3GEO.janela.cria(
