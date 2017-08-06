@@ -3,38 +3,38 @@ i3GEOadmin.core = {};
 i3GEOadmin.core.dicionario = {
 	'inicio' : [ {
 		pt : "In&iacute;cio",
-		en : "",
-		es : ""
+		en : "Start",
+		es : "Inicio"
 	} ],
 	'menus' : [ {
 		pt : "Menus",
-		en : "",
-		es : ""
+		en : "Menus",
+		es : "Men&uacute;s"
 	} ],
     'arvore' : [ {
 		pt : "&Aacute;rvore de temas",
-		en : "",
-		es : ""
+		en : "Theme tree",
+		es : "&Aacute;rvore de temas"
 	} ],
     'mapfiles' : [ {
 		pt : "Mapfiles",
-		en : "",
-		es : ""
+		en : "Mapfiles",
+		es : "Mapfiles"
 	} ],
     'login' : [ {
 		pt : "Login",
-		en : "",
-		es : ""
+		en : "Login",
+		es : "Iniciar sesi&oacute;n"
 	} ],
     'arvoreCompleta' : [ {
 		pt : "&Aacute;rvore completa",
-		en : "",
-		es : ""
+		en : "Complete tree",
+		es : "&Aacute;rbol completo"
 	} ],
     'conexoes' : [ {
 		pt : "Conex&otilde;es",
-		en : "",
-		es : ""
+		en : "Connections",
+		es : "Conexiones"
 	} ],
     'regioes' : [ {
 		pt : "Regi&otilde;es",
