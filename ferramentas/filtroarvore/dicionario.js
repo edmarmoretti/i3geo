@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.filtroarvore.dicionario)+
 i3GEOF.filtroarvore.dicionario = {
 	'selecionaFiltro' : [ {
-		pt : "Escolha o tipo de filtro ou nenhum para n&atilde;o filtrar",
+		pt : "Escolha o tipo de filtro",
 		en : "",
 		es : ""
 	} ],

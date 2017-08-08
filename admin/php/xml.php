@@ -603,7 +603,7 @@ function geraXmlAtlas($locaplic,$editores)
 	$dbhw = null;
 	return $xml;
 }
-function geraXmlIdentifica($perfil,$locaplic,$editores)
+function geraXmlIdentifica($perfil,$locaplic,$editores="")
 {
 	global $esquemaadmin;
 	$editor = "nao";//$editor = verificaEditores($editores);
