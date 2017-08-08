@@ -59,30 +59,17 @@ i3GEOF.opacidademapa = {
 	{YAHOO.panel}
 	*/
 	janela: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.opacidademapa.iniciaDicionario();
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.opacidademapa.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/opacidademapa/dicionario.js",
-				"i3GEOF.opacidademapa.iniciaJanelaFlutuante()",
-				"i3GEOF.opacidademapa.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.opacidademapa.iniciaJanelaFlutuante();
-		}
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.opacidademapa.dicionario);
+		dicionario["locaplic"] = i3GEO.configura.locaplic;
+		return dicionario;
 	},
 	/*
 	Function: inicia
@@ -94,6 +81,18 @@ i3GEOF.opacidademapa = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
+		if(i3GEOF.opacidademapa.MUSTACHE == ""){
+			var t1 = i3GEO.configura.locaplic + "/ferramentas/opacidademapa/template_mst.html";
+
+			$.get(t1).done(function(r1) {
+				i3GEOF.opacidademapa.MUSTACHE = r1;
+				i3GEOF.opacidademapa.inicia(iddiv);
+			}).fail(function() {
+			    i3GEO.janela.closeMsg($trad("erroTpl"));
+			    return;
+			});
+			return;
+		}
 		if (!$i("i3GEOFopacidademapaComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","opacidademapa","ligados",function(evt){
 				var botao = evt.target;
@@ -125,17 +124,7 @@ i3GEOF.opacidademapa = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = "";
-		if(navm){
-			ins += '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/bg-h.gif) no-repeat -108px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
-				'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/thumb-n.gif"></div>' +
-				'</div>';
-		}
-		else{
-			ins += '<div id="slider-bg" class="yui-h-slider" style="background: url('+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/bg-h.gif) no-repeat 5px 0;height: 28px;width: 210px;" tabindex="-1" title="Slider">' +
-				'<div id="slider-thumb" class="yui-slider-thumb"><img src="'+i3GEO.configura.locaplic+'/pacotes/yui290/build/slider/assets/thumb-n.gif"></div>' +
-				'</div>';
-		}
+		var ins = Mustache.render(i3GEOF.opacidademapa.MUSTACHE, i3GEOF.opacidademapa.mustacheHash());
 		return ins;
 	},
 	/*
@@ -158,10 +147,10 @@ i3GEOF.opacidademapa = {
 		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>------</div></div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(102)' >"+$trad("t20")+"</a>";
+		titulo = "<div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>------</div></div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(102)' >"+$trad("t20")+"</a>";
 		janela = i3GEO.janela.cria(
-			"340px",
-			"40px",
+			"360px",
+			"60px",
 			"",
 			"",
 			"",
@@ -182,9 +171,6 @@ i3GEOF.opacidademapa = {
 		$i("i3GEOF.opacidademapa_corpo").style.textAlign = "left";
 		i3GEOF.opacidademapa.aguarde = $i("i3GEOF.opacidademapa_imagemCabecalho").style;
 		i3GEOF.opacidademapa.inicia(divid);
-		if(i3GEO.Interface.ATUAL == "googleearth"){
-			$i('i3GEOFopacidademapaComboCabeca').style.display = "none";
-		}
 	},
 	/*
 	Function: criaslide
@@ -192,14 +178,10 @@ i3GEOF.opacidademapa = {
 	Cria a barra deslizante com base em YAHOO.widget.Slider
 	*/
 	criaslide: function(){
-		i3GEOF.opacidademapa.slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 200, 0);
-		i3GEOF.opacidademapa.slider.setValue(200,false);
+		i3GEOF.opacidademapa.slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 300, 0);
+		i3GEOF.opacidademapa.slider.setValue(300,false);
 		i3GEOF.opacidademapa.slider.subscribe("change", function(offsetFromStart) {
-			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 200,i3GEOF.opacidademapa.tema);
+			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 300,i3GEOF.opacidademapa.tema);
 		});
-		if(navm){
-			$i("slider-bg").style.left = "-100px";
-			$i("i3GEOF.opacidademapa_corpo").style.background = "url("+i3GEO.configura.locaplic+"/pacotes/yui290/build/slider/assets/bg-h.gif) white no-repeat 10px 0px";
-		}
 	}
 };

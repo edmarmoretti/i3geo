@@ -620,7 +620,8 @@ i3GEO.mapa =
 						"animacao",
 						"animacao",
 						"dependencias.php",
-				"i3GEOF.animacao.iniciaJanelaFlutuante()");
+						"i3GEOF.animacao.iniciaJanelaFlutuante()"
+				);
 			},
 			/**
 			 * Function: opacidade
@@ -628,7 +629,13 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta de definicao da transparencia das camadas principais do mapa
 			 */
 			opacidade : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.opacidade()", "opacidademapa", "opacidademapa");
+				i3GEO.util.dialogoFerramenta(
+						"i3GEO.mapa.dialogo.opacidade()",
+						"opacidademapa",
+						"opacidademapa",
+						"dependencias.php",
+						"i3GEOF.opacidademapa.iniciaJanelaFlutuante()"
+					);
 			},
 			/**
 			 * Function: t3d
