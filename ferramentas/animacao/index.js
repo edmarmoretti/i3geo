@@ -79,7 +79,6 @@ i3GEOF.animacao = {
 		i3GEOF.animacao.aguarde.visibility = "visible";
 		$i(iddiv).innerHTML = i3GEOF.animacao.html();
 		i3GEOF.animacao.listaDeCamadas();
-		i3GEO.util.mensagemAjuda("i3GEOanimacaomen1",$i("i3GEOanimacaomen1").innerHTML);
 		i3GEOF.animacao.aguarde.visibility = "hidden";
 	},
 	/*
@@ -100,13 +99,16 @@ i3GEOF.animacao = {
 			camadas = i3GEO.arvoreDeCamadas.CAMADAS;
 		}
 		var n = camadas.length,
-			ins = "<table style='width:95%' class='lista8'>";
+			ins = "";
 		while(n > 0){
 			n -= 1;
-			if(camadas[n].tema !== "")
-			{ins += "<tr><td><input class=inputsb style='cursor:pointer' type=checkbox value='"+camadas[n].name+"' /></td><td><span id='i3GEOanima"+camadas[n].name+"'>"+camadas[n].tema+"</span></td></tr>";}
+			if(camadas[n].tema !== ""){
+				ins += '<div class="checkbox text-left"><label>';
+				ins += '	<input checked id="" type="checkbox" value="'+camadas[n].name+'">';
+				ins += '	<span class="checkbox-material noprint"><span class="check" id="i3GEOanima' + camadas[n].name + '"></span></span> ' + camadas[n].tema;
+				ins += '</label></div>';
+			}
 		}
-		ins += "</table>";
 		$i("i3GEOFanimacaoLista").innerHTML = ins;
 	},
 	/*
@@ -126,8 +128,8 @@ i3GEOF.animacao = {
 		//cria a janela flutuante
 		titulo = "</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(107)' href='javascript:void(0)' >" + $trad("p21")+"</a>";
 		janela = i3GEO.janela.cria(
-			"210px",
-			"80px",
+			"410px",
+			"250px",
 			"",
 			"",
 			"",
