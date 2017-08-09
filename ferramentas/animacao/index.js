@@ -140,7 +140,11 @@ i3GEOF.animacao = {
 			cabecalho,
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.animacao_corpo").style.backgroundColor = "white";

@@ -526,6 +526,7 @@ $testa - Testa o filtro e retorna uma imagem.
 				return "erro";
 			}
 			$layer->setmetadata("cache","");
+			$layer->set("template","none.htm");
 			$fil = $layer->getFilterString();
 			$filtro = str_replace("|","'",$filtro);
 			if ($layer->connectiontype == MS_POSTGIS){
@@ -541,18 +542,22 @@ $testa - Testa o filtro e retorna uma imagem.
 			}
 			else{
 				//testa o filtro
-				$teste = $layer->querybyattributes($items[0],$filtro,1);
-				if($teste != MS_SUCCESS){
-					$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
+				if(mb_convert_encoding($filtro,"UTF-8","ISO-8859-1") != mb_convert_encoding($filtro,"ISO-8859-1","UTF-8")){
+					$teste = $layer->querybyattributes($items[0],$filtro,1);
 					if($teste != MS_SUCCESS){
-						$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
-						$filtro =  mb_convert_encoding($filtro,"UTF-8","ISO-8859-1");
+						$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
+						if($teste != MS_SUCCESS){
+							$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
+							$filtro =  mb_convert_encoding($filtro,"UTF-8","ISO-8859-1");
+						}
+						else{
+							$filtro = mb_convert_encoding($filtro,"ISO-8859-1","UTF-8");
+						}
 					}
-					else{
-						$filtro = mb_convert_encoding($filtro,"ISO-8859-1","UTF-8");
+					if($teste == MS_SUCCESS){
+						$layer->setfilter($filtro);
 					}
-				}
-				if($teste == MS_SUCCESS){
+				} else {
 					$layer->setfilter($filtro);
 				}
 			}

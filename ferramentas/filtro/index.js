@@ -193,11 +193,6 @@ i3GEOF.filtro = {
 		i3GEOF.filtro.inicia(divid,modoCalculadora,idRetorno);
 
 	},
-	/*
-	Function: adicionaLinhaFiltro
-
-	Adiciona uma nova linha de filtro
-	*/
 	removeLinha : function(obj,id){
 		var linha = $i("linhaFiltro"+id);
 		linha.parentNode.removeChild(linha);

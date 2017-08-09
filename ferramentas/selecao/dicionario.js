@@ -170,28 +170,13 @@ i3GEOF.selecao.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	35 : [ {
-		pt : "",
+	"fonte" : [ {
+		pt : "Escolha um ou mais temas que ser&atilde;o alvo da sele&ccedil;&atilde;o",
 		en : "",
 		es : ""
 	} ],
-	36 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	37 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	38 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	39 : [ {
-		pt : "",
+	"opsel" : [ {
+		pt : "Op&ccedil;&otilde;es de sele&ccedil;&atilde;o. Clique no &iacute;cone para ativar.",
 		en : "",
 		es : ""
 	} ]

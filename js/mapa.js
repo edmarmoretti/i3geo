@@ -888,7 +888,13 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta selecao
 			 */
 			selecao : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.selecao()", "selecao", "selecao");
+				i3GEO.util.dialogoFerramenta(
+						"i3GEO.mapa.dialogo.selecao()",
+						"selecao",
+						"selecao",
+						"dependencias.php",
+						"i3GEOF.selecao.iniciaJanelaFlutuante()"
+				);
 			},
 			/**
 			 * Function: cliquePonto
