@@ -533,6 +533,57 @@ class MetaestatInfo{
 				$classificacoes = $this->listaClassificacaoMedida($id_medida_variavel);
 				$classes = $this->listaClasseClassificacao($classificacoes[0]["id_classificacao"]);
 			}
+			if($classes == false){
+				$valores = $this->dadosMedidaVariavel($id_medida_variavel,$filtro." AND ".$meta["colunavalor"]." > 0 ");
+				$valores = array_column($valores,$meta["colunavalor"]);
+				$item = $meta["colunavalor"];
+				$classes = array();
+				$cores = array();
+				//cores baseadas em colorbrewer
+				$cores[] = array(array(179,205,227),array(140,150,198),array(136,86,167),array(129,15,124));
+				$cores[] = array(array(178,226,226),array(102,194,164),array(44,162,95),array(0,109,44));
+				$cores[] = array(array(186,228,188),array(123,204,196),array(67,162,202),array(8,104,172));
+				$cores[] = array(array(253,204,138),array(252,141,89),array(227,74,51),array(179,0,0));
+				$cores[] = array(array(189,201,225),array(116,169,207),array(43,140,190),array(4,90,141));
+				$cores[] = array(array(189,201,225),array(103,169,207),array(28,144,153),array(1,108,89));
+				$cores[] = array(array(215,181,216),array(223,101,176),array(221,28,119),array(152,0,67));
+				$cores[] = array(array(251,180,185),array(247,104,161),array(197,27,138),array(122,1,119));
+				$cores[] = array(array(194,230,153),array(120,198,121),array(49,163,84),array(0,104,55));
+				$cores[] = array(array(255,255,178),array(254,204,92),array(253,141,60),array(240,59,32));
+				$cores = $cores[mt_rand(0,9)];
+				include_once("classe_estatistica.php");
+				$estat = new estatistica();
+				$estat->calcula($valores);
+				$calc = $estat->resultado;
+				$titulo = array();
+				//adiciona as classes novas
+				$expressao[] = "([".$item."]<=".($calc["quartil1"]).")";
+				$titulo[] = "Quartil 1: <=".$calc["quartil1"];
+				$expressao[] = "(([".$item."]>".($calc["quartil1"]).")and([".$item."]<=".($calc["quartil2"])."))";
+				$titulo[] = "Quartil 2: >".$calc["quartil1"]." e <= ".$calc["quartil2"];
+				if($calc["quartil3"] != 0){
+					$expressao[] = "(([".$item."]>".($calc["quartil2"]).")and([".$item."]<=".($calc["quartil3"])."))";
+					$titulo[] = "Quartil 3: >".$calc["quartil2"]." e <= ".$calc["quartil3"];
+					$expressao[] = "([".$item."]>".($calc["quartil3"]).")";
+					$titulo[] = "Quartil 4: >".$calc["quartil3"];
+				}
+				$classes[] = array(
+						"expressao"=>"([".$item."]= 0)",
+						"titulo"=>"0",
+						"verde"=>100,
+						"vermelho"=>100,
+						"azul"=>100
+				);
+				for ($i=0;$i < count($expressao);++$i){
+					$classes[] = array(
+						"expressao"=>$expressao[$i],
+						"titulo"=>$titulo[$i],
+						"verde"=>$cores[$i][1],
+						"vermelho"=>$cores[$i][0],
+						"azul"=>$cores[$i][2]
+					);
+				}
+			}
 			if(!empty($titulolayer)){
 				$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
 			}
@@ -559,12 +610,14 @@ class MetaestatInfo{
 			$dados[] = 'FONTSET   "'.$this->locaplic.'/symbols/fontes.txt"';
 			//inclui os simbolos que podem ser definidos como imagens
 			foreach($classes as $classe){
-				if(file_exists($classe["simbolo"])){
-					$dados[] = "SYMBOL";
-					$dados[] = '	NAME "'.$classe["simbolo"].'"';
-					$dados[] = '			TYPE pixmap';
-					$dados[] = '	IMAGE "'.$classe["simbolo"].'"';
-					$dados[] = "END";
+				if(!empty($classe["simbolo"])){
+					if(file_exists($classe["simbolo"])){
+						$dados[] = "SYMBOL";
+						$dados[] = '	NAME "'.$classe["simbolo"].'"';
+						$dados[] = '			TYPE pixmap';
+						$dados[] = '	IMAGE "'.$classe["simbolo"].'"';
+						$dados[] = "END";
+					}
 				}
 			}
 			$dados[] = "LAYER";
@@ -926,8 +979,8 @@ class MetaestatInfo{
 			$sqlf .= " limit ".$limite;
 		}
 		$sqlf = str_replace(",  FROM"," FROM",$sqlf);
-		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 		//echo $sqlf;exit;
+		$metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
 		if(!empty($metaVariavel["codigo_estat_conexao"])){
 			$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
 			$dbhold = $this->dbh;

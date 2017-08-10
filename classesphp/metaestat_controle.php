@@ -171,7 +171,11 @@ switch (strtoupper ( $funcao )) {
 		break;
 	case "LISTACLASSIFICACAOMEDIDA" :
 		$m = new MetaestatInfo ();
-		retornaJSON ( $m->listaClassificacaoMedida ( $_pg ["id_medida_variavel"], $_pg ["id_classificacao"] ) );
+		$lista = $m->listaClassificacaoMedida ( $_pg ["id_medida_variavel"], $_pg ["id_classificacao"] );
+		if(count($lista) == 0){
+			$lista = array(array("id_classificacao"=>"","nome"=>"default"));
+		}
+		retornaJSON ( $lista );
 		exit ();
 		break;
 	case "MAPFILEMEDIDAVARIAVEL" :
