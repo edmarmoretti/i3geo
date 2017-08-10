@@ -416,7 +416,6 @@ function packer($src,$out,$tipo="None")
 	$time = sprintf('%.4f', ($t2 - $t1) );
 	echo 'script ', $src, ' packed in ' , $out, ', in ', $time, ' s.', "\n";
 	file_put_contents($out, $packed);
-	chmod($out,0777);
 }
 function salvatudojs($jsfiles,$buffer,$final,$tipo)
 {
