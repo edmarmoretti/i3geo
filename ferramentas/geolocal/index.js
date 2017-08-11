@@ -47,6 +47,7 @@ i3GEOF.geolocal =
 		 * Objetos capturados
 		 */
 		posicoes : [],
+		contador : 0,
 		tempo : null,
 		/*
 		 * Variavel: aguarde
@@ -58,6 +59,7 @@ i3GEOF.geolocal =
 		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 		 */
 		MUSTACHE : "",
+		MUSTACHELISTA : "",
 		/**
 		 * Susbtitutos para o template
 		 */
@@ -77,29 +79,23 @@ i3GEOF.geolocal =
 		 */
 		inicia : function(iddiv) {
 			if(i3GEOF.geolocal.MUSTACHE == ""){
-				$.get(i3GEO.configura.locaplic + "/ferramentas/geolocal/template_mst.html", function(template) {
-					i3GEOF.geolocal.MUSTACHE = template;
+				var t1 = i3GEO.configura.locaplic + "/ferramentas/geolocal/template_mst.html",
+				t2 = i3GEO.configura.locaplic + "/ferramentas/geolocal/template_lista_mst.html";
+
+				$.when( $.get(t1),$.get(t2) ).done(function(r1,r2) {
+					i3GEOF.geolocal.MUSTACHE = r1[0];
+					i3GEOF.geolocal.MUSTACHELISTA = r2[0];
 					i3GEOF.geolocal.inicia(iddiv);
+				}).fail(function() {
+				    i3GEO.janela.closeMsg($trad("erroTpl"));
+				    return;
 				});
 				return;
 			}
-			var ics, n, i;
 			// se nao permitir a localizacao, retorna uma mensagem
 			if (navigator.geolocation) {
 				$i(iddiv).innerHTML = i3GEOF.geolocal.html();
 				$i("i3GEOFgeolocalFormTempo").onsubmit = i3GEOF.geolocal.capturaTempo;
-				ics = $i(iddiv).getElementsByTagName("button");
-				n = ics.length;
-				for (i = 0; i < n; i++) {
-					ics[i].style.backgroundColor = "white";
-					ics[i].className = "iconeGuiaMovel iconeGuiaMovelMouseOut";
-					ics[i].onmouseout = function() {
-						this.className = "iconeGuiaMovel iconeGuiaMovelMouseOut";
-					};
-					ics[i].onmouseover = function() {
-						this.className = "iconeGuiaMovel iconeGuiaMovelMouseOver";
-					};
-				}
 				i3GEOF.geolocal.capturaCoordenada();
 			} else {
 				$i(iddiv).innerHTML = $trad('msgNavegador', i3GEOF.geolocal.dicionario);
@@ -136,7 +132,7 @@ i3GEOF.geolocal =
 			// cria a janela flutuante
 			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad('localizaUsuario',i3GEOF.geolocal.dicionario) + "</span></div>";
 			janela = i3GEO.janela.cria(
-					"310",
+					"410",
 					"230",
 					"",
 					"",
@@ -182,12 +178,14 @@ i3GEOF.geolocal =
 			}
 			i3GEOF.geolocal.aguarde.visibility = "visible";
 			var retorno = function(position) {
-				i3GEOF.geolocal.posicoes.push(position);
+				position.id = i3GEOF.geolocal.contador;
+				i3GEOF.geolocal.posicoes[i3GEOF.geolocal.contador] = position;
+				i3GEOF.geolocal.contador = i3GEOF.geolocal.contador + 1;
 				var n = parseInt($i("i3GEOFgeolocalMaximo").value, 10);
 				if (n > 0 && i3GEOF.geolocal.posicoes.length > n) {
 					i3GEOF.geolocal.posicoes.splice(0, (i3GEOF.geolocal.posicoes.length - n));
 				}
-				i3GEOF.geolocal.listaCoord();
+				i3GEOF.geolocal.listaCoord(position);
 			};
 			navigator.geolocation.getCurrentPosition(retorno, i3GEOF.geolocal.erro);
 		},
@@ -229,38 +227,25 @@ i3GEOF.geolocal =
 			i3GEOF.geolocal.aguarde.visibility = "hidden";
 		},
 		listaCoord : function(position) {
-			var ps = i3GEOF.geolocal.posicoes, n = ps.length, i, ins = "", res = [
-				"<tr><td></td><td></td><td></td><td><b>Latitude</b></td><td><b>Longitude</b></td></tr>"
-			];
-			for (i = (n - 1); i >= 0; i--) {
-				ins =
-					"<tr>" + '<td><img title="' + $trad('limpa', i3GEOF.geolocal.dicionario)
-						+ '" src="'
-						+ i3GEO.configura.locaplic
-						+ '/imagens/x.gif" onclick="i3GEOF.geolocal.excluiLinha('
-						+ i
-						+ ')" style="cursor:pointer"></td>'
-						+ '<td><img onmouseout="i3GEOF.geolocal.escondexy()" onmouseover="i3GEOF.geolocal.mostraxy('
-						+ i
-						+ ')" title="pan" src="'
-						+ i3GEO.configura.locaplic
-						+ '/imagens/o.gif" onclick="i3GEOF.geolocal.panLinha('
-						+ i
-						+ ')" style="cursor:pointer"></td>'
-						+ '<td><img title="info" src="'
-						+ i3GEO.configura.locaplic
-						+ '/imagens/oxygen/16x16/help-about.png" onclick="i3GEOF.geolocal.info('
-						+ i
-						+ ')" style="cursor:pointer"></td>'
-						+ "<td>"
-						+ ps[i].coords.latitude
-						+ "</td><td>"
-						+ ps[i].coords.longitude
-						+ "</td></tr>";
-				res.push(ins);
-			}
-			$i("i3GEOFgeolocalListaDePontos").innerHTML = "<table class='lista8' >" + res.join("") + "</table>";
-			$i("i3GEOFgeolocalNcoord").innerHTML = n;
+			var ps = i3GEOF.geolocal.posicoes;
+			var dados = {
+				"limpa": $trad('limpa', i3GEOF.geolocal.dicionario),
+				"locaplic": i3GEO.configura.locaplic,
+				"longitude": position.coords.longitude,
+				"latitude": position.coords.latitude,
+				"id": position.id
+			};
+			var ntr = document.createElement("tr");
+			ntr.id = "linhaGeolocal"+position.id;
+			var temp = Mustache.render(
+					"{{#data}}" + i3GEOF.geolocal.MUSTACHELISTA + "{{/data}}",
+					{"data":dados}
+			);
+			$(ntr).html(temp);
+			var tabela = $i("i3GEOFgeolocalListaDePontos");
+			tabela.appendChild(ntr);
+			$i("i3GEOFgeolocalNcoord").innerHTML = ps.length;
+
 			if (i3GEO.Interface["ATUAL"] === "openlayers") {
 				if (typeof OpenLayers.Control == "undefined") {
 					api = "ol3";
@@ -285,11 +270,15 @@ i3GEOF.geolocal =
 				api = i3GEO.Interface["ATUAL"];
 			}
 			i3GEOF.geolocal[api].removeLayer();
-			i3GEOF.geolocal.listaCoord();
+			var tabela = $i("i3GEOFgeolocalListaDePontos");
+			var cabecalho = tabela.getElementsByTagName("tr");
+			tabela.innerHtml = "";
+			tabela.appendChild(cabecalho);
 		},
 		excluiLinha : function(i) {
-			i3GEOF.geolocal.posicoes.splice(i, 1);
-			i3GEOF.geolocal.listaCoord();
+			i3GEOF.geolocal.posicoes[i] = "";
+			var linha = $i("linhaGeolocal"+i);
+			linha.parentNode.removeChild(linha);
 		},
 		panLinha : function(i) {
 			var posicao = i3GEOF.geolocal.posicoes[i];

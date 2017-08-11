@@ -1,24 +1,36 @@
-<button title='{{{capturaCoord}}}' onclick='i3GEOF.geolocal.capturaCoordenada()'>
-	<img src='{{{locaplic}}}/imagens/gisicons/gps.png' />
-</button>
-<button title='{{{limpa}}}' onclick='i3GEOF.geolocal.limpa()'>
-	<img src='{{{locaplic}}}/imagens/gisicons/erase.png' />
-</button>
-<button title='{{{shp}}}' onclick='i3GEOF.geolocal.criaShp()'>
-	<img src='{{{locaplic}}}/imagens/gisicons/layer-gps-create.png' />
-</button>
-<img title='{{{paraCaptura}}}' onclick='i3GEOF.geolocal.paraTempo()' style='top: -3px; left: 10px; position: relative;' src='{{{locaplic}}}/imagens/oxygen/16x16/clock.png'>
-&nbsp;
-<form id='i3GEOFgeolocalFormTempo' style='left: 162px; position: absolute; top: 10px; width: 30px;'>
-	<div class='i3geoForm100 i3geoFormIconeNumero' >
-		<input type='number' id='i3GEOFgeolocalTempo' title={{{intervalo}}} value='0' />
+<div class='container-fluid'>
+	<button onclick="i3GEOF.geolocal.capturaCoordenada()" class='btn btn-primary btn-sm btn-raised'>{{{capturaCoord}}}</button>
+	<table id='i3GEOFgeolocalListaDePontos'>
+		<tr>
+			<td></td>
+			<td></td>
+			<td></td>
+			<td>Latitude</td>
+			<td>Longitude</td>
+		</tr>
+	</table>
+	<button onclick="$('#i3GEOFgeolocalExpande').collapse('toggle')" role="button" class="btn btn-default btn-xs">
+		<span class="text-primary readMore">
+			<i class="material-icons">keyboard_arrow_down</i>
+		</span>
+		<span class="text-primary readLess">
+			<i class="material-icons">keyboard_arrow_up</i>
+		</span>
+	</button>
+	<div id="i3GEOFgeolocalExpande" class="collapse">
+		<button onclick="i3GEOF.geolocal.limpa()" class='btn btn-primary btn-sm btn-raised'>{{{limpa}}}</button>
+		<button onclick="i3GEOF.geolocal.paraTempo()" class='btn btn-primary btn-sm btn-raised'>{{{paraCaptura}}}</button>
+		<button onclick="i3GEOF.geolocal.criaShp()" class='btn btn-primary btn-sm btn-raised'>{{{shp}}}</button>
+		<form id='i3GEOFgeolocalFormTempo'>
+			<div class='form-group label-fixed condensed'>
+				<label class="control-label" for="{{{idjanela}}}i3GEOtabelaexcestat">{{{intervalo}}}</label>
+				<input class="form-control input-lg" type='text' id='i3GEOFgeolocalTempo' value='0' />
+			</div>
+		</form>
+		<div class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{maximoPontos}}}</label>
+			<input class="form-control input-lg" type='text' id='i3GEOFgeolocalMaximo' value='' />
+		</div>
+		<h5 id='i3GEOFgeolocalNcoord' class="alert alert-info"></h5>
 	</div>
-</form>
-<div style='height: 130px; overflow: auto; top: 10px; text-align: center; position: relative; cursor: pointer; padding: 5px;' id='i3GEOFgeolocalListaDePontos'></div>
-<br>
-<div id='i3GEOFgeolocalNcoord' style='width: 30px; position: absolute;'></div>
-<br>
-<p class='paragrafo' style='float: left; margin-right: 5px; top: 3px; position: relative;'>{{{maximoPontos}}}
-<div class='i3geoForm100 i3geoFormIconeNumero' style='position: relative; margin-left: 5px;'>
-	<input type='number' id='i3GEOFgeolocalMaximo' value='' />
 </div>

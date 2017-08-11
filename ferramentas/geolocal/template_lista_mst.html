@@ -1,0 +1,18 @@
+<td>
+	<button onclick='i3GEOF.geolocal.excluiLinha(' {{{id}}}')' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+		<span class="material-icons">clear</span>
+	</button>
+</td>
+<td>
+	<button onclick="i3GEOF.geolocal.panLinha('{{{id}}}')" onmouseout="i3GEOF.geolocal.escondexy()" onmouseover="i3GEOF.geolocal.mostraxy('{{{id}}}')" title="pan" class="btn btn-xs"
+		style="margin: 2px; padding: 2px;">
+		<span class="material-icons">gps_fixed</span>
+	</button>
+</td>
+<td>
+	<button onclick="i3GEOF.geolocal.info('{{{id}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+		<span class="material-icons">info</span>
+	</button>
+</td>
+<td>{{{latitude}}}</td>
+<td>{{{longitude}}}</td>
