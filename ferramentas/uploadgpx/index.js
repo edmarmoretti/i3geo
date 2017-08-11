@@ -112,9 +112,9 @@ i3GEOF.uploadgpx = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.uploadgpx");
+			i3GEO.janela.minimiza("i3GEOF.uploadgpx",200);
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(103)' >GPX</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >GPX</span></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"330px",
@@ -132,7 +132,8 @@ i3GEOF.uploadgpx = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"103"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploadgpx_corpo").style.backgroundColor = "white";

@@ -104,9 +104,9 @@ i3GEOF.upload = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.upload");
+			i3GEO.janela.minimiza("i3GEOF.upload",200);
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(27)' >" + $trad("a2")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("a2") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"480px",
@@ -124,7 +124,8 @@ i3GEOF.upload = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"27"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.upload_corpo").style.backgroundColor = "white";

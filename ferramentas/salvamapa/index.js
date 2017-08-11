@@ -161,7 +161,7 @@ i3GEOF.salvaMapa = {
 		if ($i("i3GEOF.salvaMapa")) {
 			return;
 		}
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(10)' >" + $trad("u17")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u17") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"180px",
@@ -176,7 +176,11 @@ i3GEOF.salvaMapa = {
 			"",
 			"",
 			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/document-save.png"
+			"",
+			"",
+			"",
+			"",
+			"10"
 		);
 		divid = janela[2].id;
 		i3GEOF.salvaMapa.aguarde = $i("i3GEOF.salvaMapa_imagemCabecalho").style;

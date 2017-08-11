@@ -205,11 +205,11 @@ i3GEOF.vinde = {
 			return;
 		}
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.vinde");
+			i3GEO.janela.minimiza("i3GEOF.vinde",200);
 		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(114)' >" + $trad('indeBrasil',i3GEOF.vinde.dicionario) + "</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad('indeBrasil',i3GEOF.vinde.dicionario)+"</span></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"320px",
@@ -223,7 +223,12 @@ i3GEOF.vinde = {
 			"",
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			"",
+			"114"
 		);
 		divid = janela[2].id;
 		i3GEOF.vinde.janela = janela[0];

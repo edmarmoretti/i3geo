@@ -88,10 +88,10 @@ i3GEOF.uploadarquivos =
 			cabecalho = function() {
 			};
 			minimiza = function() {
-				i3GEO.janela.minimiza("i3GEOF.uploadarquivos");
+				i3GEO.janela.minimiza("i3GEOF.uploadarquivos",200);
 			};
 			// cria a janela flutuante
-			titulo = "</div><div class='i3GeoTituloJanelaBs'>" + $trad("upload",i3GEOF.uploadarquivos.dicionario) + "</div>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("upload",i3GEOF.uploadarquivos.dicionario) + "</span></div>";
 			janela =
 				i3GEO.janela.cria(
 						"230px",

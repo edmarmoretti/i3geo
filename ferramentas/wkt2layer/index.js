@@ -107,7 +107,7 @@ i3GEOF.wkt2layer =
 		cabecalho = function() {
 		};
 		// cria a janela flutuante
-		titulo = "</div><div class='i3GeoTituloJanelaBs'>" + $trad("wkt2layer",i3GEOF.wkt2layer.dicionario) + "</div>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("wkt2layer",i3GEOF.wkt2layer.dicionario) + "</span></div>";
 		janela =
 			i3GEO.janela.cria(
 				"280px",

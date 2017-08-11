@@ -123,10 +123,10 @@ i3GEOF.salvamapfile = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.salvamapfile");
+			i3GEO.janela.minimiza("i3GEOF.salvamapfile",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(92)' >" + $trad("x55")+" <i>"+i3GEO.temaAtivo+"</i></a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x55") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"340px",
 			"160px",
@@ -144,7 +144,8 @@ i3GEOF.salvamapfile = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"92"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.salvamapfile_corpo").style.backgroundColor = "white";

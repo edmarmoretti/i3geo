@@ -140,8 +140,7 @@ i3GEOF.saiku =
 				i3GEO.janela.minimiza("i3GEOF.saiku");
 			};
 			// cria a janela flutuante
-			titulo =
-				"<div class='i3GeoTituloJanela'>Saiku<a class=ajuda_usuario href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(117)' ><b> </b></a></div>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >Saiku</span></div>";
 			janela =
 				i3GEO.janela.cria(
 					"400px",
@@ -157,7 +156,12 @@ i3GEOF.saiku =
 					minimiza,
 					"",
 					true,
-					i3GEO.configura.locaplic + "/imagens/oxygen/16x16/accessories-calculator.png");
+					"",
+					"",
+					"",
+					"",
+					"117"
+				);
 			divid = janela[2].id;
 			$i("i3GEOF.saiku_corpo").style.backgroundColor = "white";
 			$i("i3GEOF.saiku_corpo").style.textAlign = "left";

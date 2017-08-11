@@ -127,7 +127,7 @@ i3GEOF.parametrossql = {
 				cabecalho = function(){
 				};
 				//cria a janela flutuante
-				titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(35)' >Parametros</a>";
+				titulo = "<span class='i3GeoTituloJanelaBsNolink' >Parametros</span></div>";
 				janela = i3GEO.janela.cria(
 					"290px",
 					"auto",
@@ -141,7 +141,12 @@ i3GEOF.parametrossql = {
 					cabecalho,
 					"",
 					"",
-					true
+					true,
+					"",
+					"",
+					"",
+					"",
+					"35"
 				);
 				divid = janela[2].id;
 				temp = $i("i3GEOF.parametrossql_corpo").style;

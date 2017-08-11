@@ -124,10 +124,10 @@ i3GEOF.wiki = {
 			i3GEOF.wiki.ativaFoco();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.wiki");
+			i3GEO.janela.minimiza("i3GEOF.wiki",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(73)' >Wikip&eacute;dia</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Wikip&eacute;dia</span></div>";
 		janela = i3GEO.janela.cria(
 			"250px",
 			"190px",
@@ -139,7 +139,14 @@ i3GEOF.wiki = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"73"
 		);
 		divid = janela[2].id;
 		i3GEOF.wiki.aguarde = $i("i3GEOF.wiki_imagemCabecalho").style;

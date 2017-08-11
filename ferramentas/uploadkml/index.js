@@ -109,9 +109,9 @@ i3GEOF.uploadkml = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.uploadkml");
+			i3GEO.janela.minimiza("i3GEOF.uploadkml",200);
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(104)' >KML</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >KML</span></div>";
 		janela = i3GEO.janela.cria(
 			"450px",
 			"460px",
@@ -129,7 +129,8 @@ i3GEOF.uploadkml = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"104"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.uploadkml_corpo").style.backgroundColor = "white";

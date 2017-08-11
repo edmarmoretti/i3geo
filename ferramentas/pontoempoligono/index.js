@@ -103,10 +103,10 @@ i3GEOF.pontoEmPoligono = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(18)' >" + $trad("u13")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u13") + "</span></div>";
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.pontoEmPoligono");
+			i3GEO.janela.minimiza("i3GEOF.pontoEmPoligono",200);
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
@@ -122,7 +122,11 @@ i3GEOF.pontoEmPoligono = {
 			minimiza,
 			"",
 			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			"",
+			"",
+			"",
+			"",
+			"18"
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.pontoEmPoligono_rodape class='i3GeoRodapeJanela' ></div>");
