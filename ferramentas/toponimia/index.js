@@ -56,27 +56,28 @@ i3GEOF.toponimia = {
 			});
 			return;
 		}
-		if (!$i("i3GEOFtoponimiaComboCabecaSel")) {
-			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela",function(evt){
-				var botao = evt.target;
-				if (botao) {
-					if (botao.value != "") {
-						i3GEO.mapa.ativaTema(botao.value);
-						i3GEOF.toponimia.tema = botao.value;
-						$i(iddiv).innerHTML = "";
-						i3GEOF.toponimia.inicia(iddiv);
-					} else {
-						$i(iddiv).innerHTML = "";
-					}
-				}
-			});
-		}
+
 		if(i3GEOF.toponimia.tema === ""){
-			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
+			//$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
 			return;
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.toponimia.html();
+			if (!$i("i3GEOFtoponimiaComboCabecaSel")) {
+				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela",function(evt){
+					var botao = evt.target;
+					if (botao) {
+						if (botao.value != "") {
+							i3GEO.mapa.ativaTema(botao.value);
+							i3GEOF.toponimia.tema = botao.value;
+							$i(iddiv).innerHTML = "";
+							i3GEOF.toponimia.inicia(iddiv);
+						} else {
+							$i(iddiv).innerHTML = "";
+						}
+					}
+				});
+			}
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOtoponimiaguia1","i3GEOtoponimiaguia");
 			//eventos das guias
 			$i("i3GEOtoponimiaguia1").onclick = function()
@@ -134,8 +135,8 @@ i3GEOF.toponimia = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFtoponimiaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div>"
-			+ "</div><a class='i3GeoTituloJanelaBs' style='right:40px;' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(36)' >" + $trad("x56")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("x56")+"</span></div>";
+
 		janela = i3GEO.janela.cria(
 			"410px",
 			"260px",
@@ -153,7 +154,8 @@ i3GEOF.toponimia = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"36"
 		);
 		divid = janela[2].id;
 		i3GEOF.toponimia.aguarde = $i("i3GEOF.toponimia_imagemCabecalho").style;

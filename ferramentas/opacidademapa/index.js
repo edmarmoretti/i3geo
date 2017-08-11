@@ -93,23 +93,24 @@ i3GEOF.opacidademapa = {
 			});
 			return;
 		}
-		if (!$i("i3GEOFopacidademapaComboCabecaSel")) {
-			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","opacidademapa","ligados",function(evt){
-				var botao = evt.target;
-				if (botao) {
-					if (botao.value != "") {
-						i3GEO.mapa.ativaTema(botao.value);
-						i3GEOF.opacidademapa.tema = botao.value;
-						$i(iddiv).innerHTML = "";
-						i3GEOF.opacidademapa.inicia(iddiv);
-					} else {
-						$i(iddiv).innerHTML = "";
-					}
-				}
-			});
-		}
+
 		try{
 			$i(iddiv).innerHTML = i3GEOF.opacidademapa.html();
+			if (!$i("i3GEOFopacidademapaComboCabecaSel")) {
+				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFopacidademapaComboCabeca","i3GEOFopacidademapaComboCabecaSel","opacidademapa","ligados",function(evt){
+					var botao = evt.target;
+					if (botao) {
+						if (botao.value != "") {
+							i3GEO.mapa.ativaTema(botao.value);
+							i3GEOF.opacidademapa.tema = botao.value;
+							$i(iddiv).innerHTML = "";
+							i3GEOF.opacidademapa.inicia(iddiv);
+						} else {
+							//$i(iddiv).innerHTML = "";
+						}
+					}
+				});
+			}
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 		i3GEOF.opacidademapa.criaslide();
@@ -143,14 +144,14 @@ i3GEOF.opacidademapa = {
 			return;
 		}
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.opacidademapa");
+			i3GEO.janela.minimiza("i3GEOF.opacidademapa",200);
 		};
 		var janela,divid,titulo;
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFopacidademapaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>------</div></div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(102)' >"+$trad("t20")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("t20")+"</span></div>";
 		janela = i3GEO.janela.cria(
 			"360px",
-			"60px",
+			"120px",
 			"",
 			"",
 			"",
@@ -161,7 +162,12 @@ i3GEOF.opacidademapa = {
 			"",
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			"",
+			"102"
 		);
 		divid = janela[2].id;
 		i3GEOF.opacidademapa.janela = janela[0];

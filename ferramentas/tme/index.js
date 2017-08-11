@@ -132,6 +132,11 @@ i3GEOF.tme =
 				return;
 			}
 			var camada = "";
+
+			if(i3GEOF.tme.tema === ""){
+				return;
+			}
+			$i(iddiv).innerHTML = i3GEOF.tme.html();
 			if (!$i("i3GEOFtmeComboCabecaSel")) {
 				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFtmeComboCabeca", "i3GEOFtmeComboCabecaSel", "tme", "ligadosComTabela",function(evt){
 					var botao = evt.target;
@@ -147,10 +152,6 @@ i3GEOF.tme =
 					}
 				});
 			}
-			if(i3GEOF.tme.tema === ""){
-				return;
-			}
-			$i(iddiv).innerHTML = i3GEOF.tme.html();
 			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
 				$(".i3GEOTME").find(".hidden").removeClass("hidden");
 			}
@@ -253,9 +254,7 @@ i3GEOF.tme =
 				i3GEO.janela.minimiza("i3GEOF.tme");
 			};
 			// cria a janela flutuante
-			titulo =
-				"<div  id='i3GEOFtmeComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div>"
-					+ "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(108)' >tme</a>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >TME</span></div>";
 			janela = i3GEO.janela.cria(
 				"380px",
 				"320px",
@@ -273,7 +272,8 @@ i3GEOF.tme =
 				"",
 				"",
 				"",
-				""
+				"",
+				"108"
 			);
 			divid = janela[2].id;
 			i3GEOF.tme.aguarde = $i("i3GEOF.tme_imagemCabecalho").style;

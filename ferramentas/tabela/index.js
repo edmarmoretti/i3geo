@@ -136,13 +136,15 @@ i3GEOF.tabela =
 				});
 				return;
 			}
+			$i(iddiv).innerHTML = i3GEOF.tabela.html(idjanela);
+
 			var b, onButtonClick = function(evt) {
 				var botao = evt.target;
 				if (botao) {
 					if (botao.value != "") {
 						i3GEO.mapa.ativaTema(botao.value);
 						i3GEOF.tabela.propJanelas[idjanela].tema = botao.value;
-						$i(idjanela + "_corpo").innerHTML = "";
+						//$i(idjanela + "_corpo").innerHTML = "";
 						i3GEOF.tabela.inicia(iddiv, idjanela);
 					}
 				}
@@ -156,10 +158,10 @@ i3GEOF.tabela =
 					onButtonClick);
 			}
 			if (i3GEOF.tabela.propJanelas[idjanela].tema === "") {
-				$i(iddiv).innerHTML = "";
+				//$i(iddiv).innerHTML = "";
 				return;
 			}
-			$i(iddiv).innerHTML = i3GEOF.tabela.html(idjanela);
+
 			i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOtabelaguia1", idjanela + "i3GEOtabelaguia");
 			// eventos das guias
 			$i(idjanela + "i3GEOtabelaguia6").onclick = function() {
@@ -247,20 +249,13 @@ i3GEOF.tabela =
 					i3GEOF.tabela.ativaFoco(id);
 				};
 				minimiza = function() {
-					i3GEO.janela.minimiza(id);
+					i3GEO.janela.minimiza(id,200);
 				};
 				duplica = function() {
 					i3GEOF.tabela.iniciaJanelaFlutuante();
 				};
 				// cria a janela flutuante
-				titulo =
-					"<div id='"
-						+ id
-						+ "I' style='left:5px;'>"
-						+ "<div  id='"
-						+ id
-						+ "i3GEOFtabelaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px' >   ------</div></div></div>"
-						+ "<a class='i3GeoTituloJanelaBs' style='right:90px;' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(39)' >"+$trad('tabela', i3GEOF.tabela.dicionario)+"</a>";
+				titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad('tabela', i3GEOF.tabela.dicionario)+"</span></div>";
 
 				janela = i3GEO.janela.cria(
 					"570px",
@@ -279,7 +274,8 @@ i3GEOF.tabela =
 					"",
 					duplica,
 					"",
-					""
+					"",
+					"39"
 				);
 				divid = janela[2].id;
 				if (i3GEOF.tabela.janelas.length > 1) {

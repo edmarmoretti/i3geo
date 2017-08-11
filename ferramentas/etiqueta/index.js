@@ -84,21 +84,6 @@ i3GEOF.etiqueta = {
 			return;
 		}
 
-		if (!$i("i3GEOFetiquetaComboCabecaSel")) {
-			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela",function(evt){
-				var botao = evt.target;
-				if (botao) {
-					if (botao.value != "") {
-						i3GEO.mapa.ativaTema(botao.value);
-						i3GEOF.etiqueta.tema = botao.value;
-						$i(iddiv).innerHTML = "";
-						i3GEOF.etiqueta.inicia(iddiv);
-					} else {
-						$i(iddiv).innerHTML = "";
-					}
-				}
-			});
-		}
 		if(i3GEOF.etiqueta.tema === ""){
 			$i(iddiv).innerHTML = "";
 			return;
@@ -106,6 +91,21 @@ i3GEOF.etiqueta = {
 		try{
 			$i(iddiv).innerHTML += i3GEOF.etiqueta.html();
 
+			if (!$i("i3GEOFetiquetaComboCabecaSel")) {
+				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela",function(evt){
+					var botao = evt.target;
+					if (botao) {
+						if (botao.value != "") {
+							i3GEO.mapa.ativaTema(botao.value);
+							i3GEOF.etiqueta.tema = botao.value;
+							$i(iddiv).innerHTML = "";
+							i3GEOF.etiqueta.inicia(iddiv);
+						} else {
+							//$i(iddiv).innerHTML = "";
+						}
+					}
+				});
+			}
 			i3GEOF.etiqueta.ativaFoco();
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
@@ -141,7 +141,7 @@ i3GEOF.etiqueta = {
 			i3GEO.janela.minimiza("i3GEOF.etiqueta");
 		};
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFetiquetaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(37)' >"+$trad("d7at")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("d7at")+"</span></div>";
 		janela = i3GEO.janela.cria(
 			"510px",
 			"300px",
@@ -159,7 +159,8 @@ i3GEOF.etiqueta = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"37"
 		);
 		divid = janela[2].id;
 		i3GEOF.etiqueta.aguarde = $i("i3GEOF.etiqueta_imagemCabecalho").style;

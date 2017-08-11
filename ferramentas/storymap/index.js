@@ -117,6 +117,11 @@ i3GEOF.storymap =
 				return;
 			}
 			var camada = "";
+
+			if (i3GEOF.storymap.tema === "") {
+				return;
+			}
+			$i(iddiv).innerHTML = i3GEOF.storymap.html();
 			if (!$i("i3GEOFstoComboCabecaSel")) {
 				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFstoComboCabeca", "i3GEOFstoComboCabecaSel", "storymap", "ligadosComTabela",function(evt){
 					var botao = evt.target;
@@ -132,10 +137,6 @@ i3GEOF.storymap =
 					}
 				});
 			}
-			if (i3GEOF.storymap.tema === "") {
-				return;
-			}
-			$i(iddiv).innerHTML = i3GEOF.storymap.html();
 			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
 				$(".i3GEOstorymap").find(".hidden").removeClass("hidden");
 			}
@@ -218,9 +219,8 @@ i3GEOF.storymap =
 				i3GEO.janela.minimiza("i3GEOF.storymap");
 			};
 			// cria a janela flutuante
-			titulo =
-				"<div id='i3GEOFstoComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div>"
-					+ "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(108)' >Storymap</a>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >Storymap</span></div>";
+
 			janela = i3GEO.janela.cria(
 				"380px",
 				"320px",
@@ -238,7 +238,8 @@ i3GEOF.storymap =
 				"",
 				"",
 				"",
-				""
+				"",
+				"108"
 			);
 			divid = janela[2].id;
 			i3GEOF.storymap.aguarde = $i("i3GEOF.storymap_imagemCabecalho").style;

@@ -106,6 +106,10 @@ i3GEOF.animagif =
 	 */
 	inicia : function(iddiv) {
 		var camada = "", temp;
+		if(i3GEOF.animagif.tema === ""){
+			return;
+		}
+		$i(iddiv).innerHTML = i3GEOF.animagif.html();
 		if (!$i("i3GEOFanimagifComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFanimagifComboCabeca", "i3GEOFanimagifComboCabecaSel", "animagif", "ligadosComTabela",function(evt){
 				var botao = evt.target;
@@ -116,15 +120,11 @@ i3GEOF.animagif =
 						$i(iddiv).innerHTML = "";
 						i3GEOF.animagif.inicia(iddiv);
 					} else {
-						$i(iddiv).innerHTML = "";
+						//$i(iddiv).innerHTML = "";
 					}
 				}
 			});
 		}
-		if(i3GEOF.animagif.tema === ""){
-			return;
-		}
-		$i(iddiv).innerHTML = i3GEOF.animagif.html();
 		if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
 			$(".i3GEOanimagif").find(".hidden").removeClass("hidden");
 		}
@@ -235,9 +235,7 @@ i3GEOF.animagif =
 			i3GEO.janela.minimiza("i3GEOF.animagif");
 		};
 		// cria a janela flutuante
-		titulo =
-			"<div id='i3GEOFanimagifComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div>"
-			+"<a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(130)' href='javascript:void(0)' >animagif</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >animagif</span></div>";
 
 		janela = i3GEO.janela.cria(
 			"380px",
@@ -256,7 +254,8 @@ i3GEOF.animagif =
 			"",
 			"",
 			"",
-			""
+			"",
+			"130"
 		);
 		divid = janela[2].id;
 		i3GEOF.animagif.aguarde = $i("i3GEOF.animagif_imagemCabecalho").style;

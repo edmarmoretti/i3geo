@@ -1422,7 +1422,7 @@ i3GEO.util =
 							comboTemas += "<select class='" + classe + "' style='" + estilo + "' id='" + id + "' name='" + nome + "'>";
 						}
 						if (yui === false || incluiVazio === true) {
-							comboTemas += "<option value=''>----</option>";
+							comboTemas += "<option value=''>"+$trad("x92")+"</option>";
 						}
 						for (i = 0; i < n; i++) {
 							if (retorno[i].nome) {

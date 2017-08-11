@@ -74,29 +74,31 @@ i3GEOF.filtro = {
 		if(modoCalculadora === undefined){
 			modoCalculadora = false;
 		}
-		if(modoCalculadora === false){
-			if (!$i("i3GEOFfiltroComboCabecaSel")) {
-				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela",function(evt){
-					var botao = evt.target;
-					if (botao) {
-						if (botao.value != "") {
-							i3GEO.mapa.ativaTema(botao.value);
-							i3GEOF.filtro.tema = botao.value;
-							$i(iddiv).innerHTML = "";
-							i3GEOF.filtro.inicia(iddiv);
-						} else {
-							$i(iddiv).innerHTML = "";
-						}
-					}
-				});
-			}
-			if(i3GEOF.filtro.tema === ""){
-				$i(iddiv).innerHTML = "";
-				return;
-			}
-		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.filtro.html(modoCalculadora,idRetorno);
+
+			if(modoCalculadora === false){
+				if (!$i("i3GEOFfiltroComboCabecaSel")) {
+					i3GEO.janela.comboCabecalhoTemasBs("i3GEOFfiltroComboCabeca","i3GEOFfiltroComboCabecaSel","filtro","ligadosComTabela",function(evt){
+						var botao = evt.target;
+						if (botao) {
+							if (botao.value != "") {
+								i3GEO.mapa.ativaTema(botao.value);
+								i3GEOF.filtro.tema = botao.value;
+								$i(iddiv).innerHTML = "";
+								i3GEOF.filtro.inicia(iddiv);
+							} else {
+								//$i(iddiv).innerHTML = "";
+							}
+						}
+					});
+				}
+				if(i3GEOF.filtro.tema === ""){
+					//$i(iddiv).innerHTML = "";
+					return;
+				}
+			}
+
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOfiltroguia1","i3GEOfiltroguia");
 			if(modoCalculadora === false){
 				//eventos das guias
@@ -165,7 +167,7 @@ i3GEOF.filtro = {
 		}
 		//cria a janela flutuante
 		if(modoCalculadora === false){
-			titulo = "<div  id='i3GEOFfiltroComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' style='right:40px;' onclick='i3GEO.ajuda.ferramenta(38)' href='javascript:void(0)'  >"+$trad("t29")+"</a>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("t29")+"</span></div>";
 		}
 		janela = i3GEO.janela.cria(
 			"600px",
@@ -184,7 +186,8 @@ i3GEOF.filtro = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"38"
 		);
 		divid = janela[2].id;
 		janela[0].bringToTop();

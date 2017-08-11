@@ -112,27 +112,29 @@ i3GEOF.graficoTema = {
 			return;
 		}
 
-		if (!$i("i3GEOFgraficotemaComboCabecaSel")) {
-			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela",function(evt){
-				var botao = evt.target;
-				if (botao) {
-					if (botao.value != "") {
-						i3GEO.mapa.ativaTema(botao.value);
-						i3GEOF.graficoTema.tema = botao.value;
-						$i(iddiv).innerHTML = "";
-						i3GEOF.graficoTema.inicia(iddiv);
-					} else {
-						$i(iddiv).innerHTML = "";
-					}
-				}
-			});
-		}
+
 		if(i3GEOF.graficoTema.tema === ""){
-			$i(iddiv).innerHTML = "";//'<p style="position: relative; top: 0px; font-size: 15px; text-align: left;">'+$trad("x33")+'</p>';
-			return;
+			//$i(iddiv).innerHTML = "";			return;
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.graficoTema.html();
+
+			if (!$i("i3GEOFgraficotemaComboCabecaSel")) {
+				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela",function(evt){
+					var botao = evt.target;
+					if (botao) {
+						if (botao.value != "") {
+							i3GEO.mapa.ativaTema(botao.value);
+							i3GEOF.graficoTema.tema = botao.value;
+							$i(iddiv).innerHTML = "";
+							i3GEOF.graficoTema.inicia(iddiv);
+						} else {
+							//$i(iddiv).innerHTML = "";
+						}
+					}
+				});
+			}
+
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficotemaguia1","i3GEOgraficotemaguia");
 			//eventos das guias
 			$i("i3GEOgraficotemaguia1").onclick = function()
@@ -176,7 +178,7 @@ i3GEOF.graficoTema = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFgraficotemaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:15px;'>   ------</div></div><a class='i3GeoTituloJanelaBs' style='right:40px;' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(40)' >"+$trad("t37a")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("t37a")+"</span></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"330px",
@@ -194,7 +196,8 @@ i3GEOF.graficoTema = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"40"
 		);
 		divid = janela[2].id;
 		i3GEOF.graficoTema.aguarde = $i("i3GEOF.graficoTema_imagemCabecalho").style;

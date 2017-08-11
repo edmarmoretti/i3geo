@@ -77,19 +77,7 @@ i3GEOF.busca = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		var onButtonClick = function(evt){
-			var botao = evt.target;
-			if (botao) {
-				if (botao.value != "") {
-					i3GEO.mapa.ativaTema(botao.value);
-					i3GEOF.busca.tema = botao.value;
-					$i(iddiv).innerHTML = "";
-					i3GEOF.busca.inicia(iddiv);
-				} else {
-					$i(iddiv).innerHTML = "";
-				}
-			}
-		};
+
 		if(i3GEOF.busca.MUSTACHE == ""){
 			$.get(i3GEO.configura.locaplic + "/ferramentas/busca/template_mst.html", function(template) {
 				i3GEOF.busca.MUSTACHE = template;
@@ -97,14 +85,29 @@ i3GEOF.busca = {
 			});
 			return;
 		}
-		if (!$i("i3GEOFbuscaComboCabecaSel")) {
-			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela",onButtonClick);
-		}
 		if(i3GEO.temaAtivo === ""){
 			return;
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.busca.html();
+
+			var onButtonClick = function(evt){
+				var botao = evt.target;
+				if (botao) {
+					if (botao.value != "") {
+						i3GEO.mapa.ativaTema(botao.value);
+						i3GEOF.busca.tema = botao.value;
+						$i(iddiv).innerHTML = "";
+						i3GEOF.busca.inicia(iddiv);
+					} else {
+						//$i(iddiv).innerHTML = "";
+					}
+				}
+			};
+			if (!$i("i3GEOFbuscaComboCabecaSel")) {
+				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFbuscaComboCabeca","i3GEOFbuscaComboCabecaSel","busca","ligadosComTabela",onButtonClick);
+			}
+
 			i3GEO.php.listaItensTema(i3GEOF.busca.montaListaItens,i3GEOF.busca.tema);
 			var b = new YAHOO.widget.Button(
 				"i3GEObuscabotao1",
@@ -146,8 +149,8 @@ i3GEOF.busca = {
 			i3GEO.janela.minimiza("i3GEOF.busca");
 		};
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFbuscaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div></div>"
-			+ "<a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(35)' href='javascript:void(0)' >"+$trad("t23")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("t23")+"</span></div>";
+
 		janela = i3GEO.janela.cria(
 			"320px",
 			"330px",
@@ -161,7 +164,12 @@ i3GEOF.busca = {
 			cabecalho,
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			"",
+			"35"
 		);
 		divid = janela[2].id;
 		i3GEOF.busca.aguarde = $i("i3GEOF.busca_imagemCabecalho").style;

@@ -135,7 +135,6 @@ i3GEOF.legenda =
 				var t1 = i3GEO.configura.locaplic + "/ferramentas/legenda/template_mst.html",
 				t2 = i3GEO.configura.locaplic + "/ferramentas/legenda/templateLista_mst.html",
 				t3 = i3GEO.configura.locaplic + "/ferramentas/legenda/templateFormEstilo_mst.html";
-
 				$.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
 					i3GEOF.legenda.MUSTACHE = r1[0];
 					i3GEOF.legenda.MUSTACHELISTA = r2[0];
@@ -147,27 +146,27 @@ i3GEOF.legenda =
 				});
 				return;
 			}
-			if (!$i("i3GEOFlegendaComboCabecaSel")) {
-				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFlegendaComboCabeca", "i3GEOFlegendaComboCabecaSel", "legenda", "ligados",function(evt){
-					var botao = evt.target;
-					if (botao) {
-						if (botao.value != "") {
-							i3GEO.mapa.ativaTema(botao.value);
-							i3GEOF.legenda.tema = botao.value;
-							$i(iddiv).innerHTML = "";
-							i3GEOF.legenda.inicia(iddiv);
-						} else {
-							$i(iddiv).innerHTML = "";
-						}
-					}
-				});
-			}
 			if (i3GEO.temaAtivo === "") {
 				$i(iddiv).innerHTML = "";
 				return;
 			}
 			try {
 				$i(iddiv).innerHTML += i3GEOF.legenda.html();
+				if (!$i("i3GEOFlegendaComboCabecaSel")) {
+					i3GEO.janela.comboCabecalhoTemasBs("i3GEOFlegendaComboCabeca", "i3GEOFlegendaComboCabecaSel", "legenda", "ligados",function(evt){
+						var botao = evt.target;
+						if (botao) {
+							if (botao.value != "") {
+								i3GEO.mapa.ativaTema(botao.value);
+								i3GEOF.legenda.tema = botao.value;
+								$i(iddiv).innerHTML = "";
+								i3GEOF.legenda.inicia(iddiv);
+							} else {
+								//$i(iddiv).innerHTML = "";
+							}
+						}
+					});
+				}
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1", "i3GEOlegendaguia");
 				// eventos das guias
 				$i("i3GEOlegendaguia8").onclick = function() {
@@ -320,12 +319,8 @@ i3GEOF.legenda =
 				i3GEO.janela.minimiza("i3GEOF.legenda");
 			};
 			// cria a janela flutuante
-			titulo =
-				"<div id='i3GEOF.legendaI' style='left:5px;'>"
-				+ "<div  id='i3GEOFlegendaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px'>   ------</div></div>"
-				+ "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(41)' > "
-				+ $trad("t33")
-				+"</a>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("t33")+"</span></div>";
+
 			janela = i3GEO.janela.cria(
 					"590px",
 					"350px",
@@ -343,7 +338,8 @@ i3GEOF.legenda =
 					"",
 					"",
 					"",
-					""
+					"",
+					"41"
 			);
 			divid = janela[2].id;
 			i3GEOF.legenda.aguarde = $i("i3GEOF.legenda_imagemCabecalho").style;
@@ -444,7 +440,7 @@ i3GEOF.legenda =
 										i3GEOF.legenda.DICIONARIO
 								)
 						);
-						$i("i3GEOlegendaguia1obj").innerHTML = ins;
+						$i("i3GEOlegendaguia1objLegenda").innerHTML = ins;
 					} else {
 						ajuda = i3GEOF.legenda.DICIONARIO['ajudaEscalaCores']
 						+ "<p>"
@@ -476,7 +472,7 @@ i3GEOF.legenda =
 										i3GEOF.legenda.DICIONARIO
 								)
 						);
-						$i("i3GEOlegendaguia1obj").innerHTML = ins;
+						$i("i3GEOlegendaguia1objLegenda").innerHTML = ins;
 					}
 				} else {
 					$i("i3GEOlegendaresultado").innerHTML = "<p style=color:red >Erro<br>";

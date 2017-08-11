@@ -48,6 +48,11 @@ i3GEOF.mmscale = {
 			});
 			return;
 		}
+		if(i3GEO.temaAtivo === ""){
+			//$i(iddiv).innerHTML = "";
+			return;
+		}
+		$i(iddiv).innerHTML += i3GEOF.mmscale.html();
 		if (!$i("i3GEOFmmscaleComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFmmscaleComboCabeca","i3GEOFmmscaleComboCabecaSel","mmscale","ligados",function(evt){
 				var botao = evt.target;
@@ -63,12 +68,6 @@ i3GEOF.mmscale = {
 				}
 			});
 		}
-
-		if(i3GEO.temaAtivo === ""){
-			$i(iddiv).innerHTML = "";
-			return;
-		}
-		$i(iddiv).innerHTML += i3GEOF.mmscale.html();
 		var b = new YAHOO.widget.Button(
 			"i3GEOmmscalebotao1",
 			{onclick:{fn: i3GEOF.mmscale.aplica}}
@@ -102,8 +101,8 @@ i3GEOF.mmscale = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "<div  id='i3GEOFmmscaleComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px; left:5px;'>   ------</div>"
-		+ "</div><a class='i3GeoTituloJanelaBs' style='right:40px;' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(128)' >" + $trad("p4")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("p4")+"</span></div>";
+
 		janela = i3GEO.janela.cria(
 			"330px",
 			"260px",
@@ -117,7 +116,12 @@ i3GEOF.mmscale = {
 			"",
 			"",
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			"",
+			"128"
 		);
 		divid = janela[2].id;
 		i3GEOF.mmscale.aguarde = $i("i3GEOF.mmscale_imagemCabecalho").style;

@@ -214,18 +214,19 @@ i3GEOF.identifica =
 					}
 				}
 			};
-			if (!$i(idjanela + "i3GEOFidentificaComboCabecaSel")) {
-				i3GEO.janela.comboCabecalhoTemasBs(
-						idjanela + "i3GEOFidentificaComboCabeca",
-						idjanela + "i3GEOFidentificaComboCabecaSel",
-						"identifica",
-						"ligados",
-						onButtonClick);
-			}
+
 
 
 			try {
 				$i(iddiv).innerHTML += i3GEOF.identifica.html(idjanela);
+				if (!$i(idjanela + "i3GEOFidentificaComboCabecaSel")) {
+					i3GEO.janela.comboCabecalhoTemasBs(
+							idjanela + "i3GEOFidentificaComboCabeca",
+							idjanela + "i3GEOFidentificaComboCabecaSel",
+							"identifica",
+							"ligados",
+							onButtonClick);
+				}
 				i3GEOF.identifica.propJanelas[idjanela].tema = tema;
 				i3GEOF.identifica.propJanelas[idjanela].temaAtivo = tema;
 				i3GEOF.identifica.propJanelas[idjanela].x = x;
@@ -326,14 +327,7 @@ i3GEOF.identifica =
 				i3GEOF.identifica.iniciaJanelaFlutuante(i3GEOF.identifica.propJanelas[id].x, i3GEOF.identifica.propJanelas[id].y);
 			};
 			// cria a janela flutuante
-			titulo =
-				"<div id='"
-				+ id
-				+ "I' style='left:5px;'>"
-				+ "<div  id='"
-				+ id
-				+ "i3GEOFidentificaComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px' >   ------</div></div></div>"
-				+ "<a class='i3GeoTituloJanelaBs' style='right:90px;' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(70)' >" + $trad("d7t") + "</a>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("d7t")+"</span></div>";
 
 			janela =
 				i3GEO.janela.cria(
@@ -353,7 +347,8 @@ i3GEOF.identifica =
 						i3GEO.configura.locaplic + "/imagens/oxygen/16x16/telepathy-kde.png",
 						duplica,
 						"",
-						""
+						"",
+						"70"
 				);
 			divid = janela[2].id;
 			if (i3GEOF.identifica.janelas.length > 1) {
