@@ -58,8 +58,7 @@ i3GEOF.conectarservicos =
 					+ "/ferramentas/conectargeorss/index.htm",
 					"",
 					"",
-					$trad("x47")
-					+ "&nbsp;<a class=ajuda_usuario target=_blank href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(29)' ><b> </b></a>",
+					"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x47") + "</span></div>",
 					"i3GEO.conectargeorss",
 					false,
 					"hd",
@@ -67,6 +66,10 @@ i3GEOF.conectarservicos =
 					"",
 					"",
 					true
+					"",
+					"",
+					"",
+					"29"
 			);
 		},
 		wmst: function(){

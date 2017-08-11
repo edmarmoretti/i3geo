@@ -194,9 +194,9 @@ i3GEOF.inserexy = {
 			i3GEOF.inserexy.ativaFoco();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.inserexy");
+			i3GEO.janela.minimiza("i3GEOF.inserexy",200);
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(83)' >" + $trad("d22t")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d22t") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"520px",
 			"310px",
@@ -210,7 +210,12 @@ i3GEOF.inserexy = {
 			cabecalho,
 			minimiza,
 			"",
-			false
+			false,
+			"",
+			"",
+			"",
+			"",
+			"83"
 		);
 		divid = janela[2].id;
 		i3GEOF.inserexy.aguarde = $i("i3GEOF.inserexy_imagemCabecalho").style;

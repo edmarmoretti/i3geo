@@ -130,12 +130,30 @@ i3GEOF.metar =
 				i3GEOF.metar.ativaFoco();
 			};
 			minimiza = function() {
-				i3GEO.janela.minimiza("i3GEOF.metar");
+				i3GEO.janela.minimiza("i3GEOF.metar",200);
 			};
 			// cria a janela flutuante
-			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(87)' >Metar</a>";
-			janela = i3GEO.janela.cria("250px", "190px", "", "", "", titulo, "i3GEOF.metar", false, "hd", cabecalho, minimiza);
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >Metar</span></div>";
+			janela = i3GEO.janela.cria(
+					"250px",
+					"190px",
+					"",
+					"",
+					"",
+					titulo,
+					"i3GEOF.metar",
+					false,
+					"hd",
+					cabecalho,
+					minimiza,
+					"",
+					true,
+					"",
+					"",
+					"",
+					"",
+					"87"
+			);
 			divid = janela[2].id;
 			i3GEOF.metar.aguarde = $i("i3GEOF.metar_imagemCabecalho").style;
 			i3GEOF.metar.inicia(divid);

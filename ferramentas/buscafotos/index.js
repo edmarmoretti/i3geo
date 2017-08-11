@@ -175,10 +175,10 @@ i3GEOF.buscaFotos = {
 			i3GEOF.buscaFotos.ativaFoco();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.buscaFotos");
+			i3GEO.janela.minimiza("i3GEOF.buscaFotos",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(74)' href='javascript:void(0)' >Fotos</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Fotos</span></div>";
 		janela = i3GEO.janela.cria(
 			"430px",
 			"250px",
@@ -193,7 +193,11 @@ i3GEOF.buscaFotos = {
 			minimiza,
 			"",
 			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/edit-find.png"
+			"",
+			"",
+			"",
+			"",
+			"74"
 		);
 		divid = janela[2].id;
 		i3GEOF.buscaFotos.aguarde = $i("i3GEOF.buscaFotos_imagemCabecalho").style;

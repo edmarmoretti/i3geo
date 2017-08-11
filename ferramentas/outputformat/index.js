@@ -105,7 +105,7 @@ i3GEOF.outputformat = {
 			i3GEO.janela.minimiza("i3GEOF.outputformat");
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(89)' >" + $trad("p15")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p15") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"260px",
@@ -117,7 +117,14 @@ i3GEOF.outputformat = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"89"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.outputformat_corpo").style.backgroundColor = "white";

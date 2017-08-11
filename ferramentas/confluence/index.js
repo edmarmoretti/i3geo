@@ -116,10 +116,10 @@ i3GEOF.confluence = {
 			i3GEOF.confluence.ativaFoco();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.confluence");
+			i3GEO.janela.minimiza("i3GEOF.confluence",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(75)' >Confluence</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Confluence</span></div>";
 		janela = i3GEO.janela.cria(
 			"250px",
 			"190px",
@@ -131,7 +131,14 @@ i3GEOF.confluence = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"75"
 		);
 		divid = janela[2].id;
 		i3GEOF.confluence.aguarde = $i("i3GEOF.confluence_imagemCabecalho").style;

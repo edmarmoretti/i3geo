@@ -102,10 +102,10 @@ i3GEOF.centromassa = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(94)' >Centro de massa</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Centro de massa</span></div>";
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.centromassa");
+			i3GEO.janela.minimiza("i3GEOF.centromassa",200);
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
@@ -121,7 +121,10 @@ i3GEOF.centromassa = {
 			minimiza,
 			"",
 			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.centromassa_rodape class='i3GeoRodapeJanela' ></div>");

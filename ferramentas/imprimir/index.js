@@ -126,10 +126,10 @@ i3GEOF.imprimir = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.imprimir");
+			i3GEO.janela.minimiza("i3GEOF.imprimir",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a style='right:30px;' class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(49)' >" + $trad("d12") + "</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d12") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"280px",
 			"250px",
@@ -147,7 +147,8 @@ i3GEOF.imprimir = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"49"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.imprimir_corpo").style.backgroundColor = "white";

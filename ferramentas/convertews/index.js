@@ -128,7 +128,7 @@ i3GEOF.converteMapaWS = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.converteMapaWS");
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(12)' >WMS</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >WMS</span></div>";
 		janela = i3GEO.janela.cria(
 			"440px",
 			"290px",
@@ -140,7 +140,14 @@ i3GEOF.converteMapaWS = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"12"
 		);
 		divid = janela[2].id;
 		i3GEOF.converteMapaWS.aguarde = $i("i3GEOF.converteMapaWS_imagemCabecalho").style;

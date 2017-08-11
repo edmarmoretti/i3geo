@@ -114,7 +114,7 @@ i3GEOF.mostraExten = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.mostraExten");
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(55)' >" + $trad("d8t")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d8t") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"370px",
 			"320px",
@@ -129,7 +129,11 @@ i3GEOF.mostraExten = {
 			minimiza,
 			"",
 			true,
-			i3GEO.configura.locaplic + "/imagens/oxygen/16x16/internet-web-browser.png"
+			"",
+			"",
+			"",
+			"",
+			"55"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.mostraExten_corpo").style.backgroundColor = "white";

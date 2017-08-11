@@ -102,10 +102,10 @@ i3GEOF.centroide = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(21)' >" + $trad("u11")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u11") + "</span></div>";
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.centroide");
+			i3GEO.janela.minimiza("i3GEOF.centroide",200);
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
@@ -121,7 +121,11 @@ i3GEOF.centroide = {
 			minimiza,
 			"",
 			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			"",
+			"",
+			"",
+			"",
+			"21"
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.centroide_rodape class='i3GeoRodapeJanela' ></div>");

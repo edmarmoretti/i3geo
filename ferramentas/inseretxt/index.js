@@ -180,9 +180,9 @@ i3GEOF.inseretxt = {
 			i3GEOF.inseretxt.ativaFoco();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.inseretxt");
+			i3GEO.janela.minimiza("i3GEOF.inseretxt",200);
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(83)' >" + $trad("d25t")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d25t") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"360px",
 			"250px",
@@ -194,7 +194,14 @@ i3GEOF.inseretxt = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"83"
 		);
 		divid = janela[2].id;
 		i3GEOF.inseretxt.aguarde = $i("i3GEOF.inseretxt_imagemCabecalho").style;

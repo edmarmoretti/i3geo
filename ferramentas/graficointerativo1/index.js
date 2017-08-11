@@ -581,10 +581,7 @@ i3GEOF.graficointerativo1 =
 				duplica = function() {
 					i3GEOF.graficointerativo1.iniciaJanelaFlutuante();
 				};
-				titulo =
-					"</div><div id='" + idjanela + "I' style='left:10px;'>"
-					+ "</div><a style='right:90px;' class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(84)' >" + $trad("t37b") + "</a>";
-
+				titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t37b") + "</span></div>";
 				janela =
 					i3GEO.janela.cria(
 						i3GEOF.graficointerativo1.propJanelas[idjanela].w,
@@ -602,7 +599,10 @@ i3GEOF.graficointerativo1 =
 						true,
 						"",
 						duplica,
-						"nao");
+						"nao",
+						"",
+						"84"
+					);
 				divid = janela[2].id;
 				if (i3GEOF.graficointerativo1.janelas.length > 1) {
 					temp = janela[0].cfg.config;

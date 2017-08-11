@@ -139,7 +139,7 @@ i3GEOF.bufferpt = {
 			i3GEO.janela.minimiza("i3GEOF.bufferpt");
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(3)' href='javascript:void(0)' >" + $trad("u10")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u10") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"290px",
 			"130px",
@@ -154,7 +154,10 @@ i3GEOF.bufferpt = {
 			"",
 			"",
 			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			"",
+			"",
+			"",
+			"",
 		);
 		divid = janela[2].id;
 		i3GEOF.bufferpt.aguarde = $i("i3GEOF.bufferpt_imagemCabecalho").style;

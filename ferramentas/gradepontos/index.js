@@ -123,12 +123,12 @@ i3GEOF.gradeDePontos = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(15)' >" + $trad("u8")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u8") + "</span></div>";
 		cabecalho = function(){
 			i3GEO.navega.ativaPan();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.gradeDePontos");
+			i3GEO.janela.minimiza("i3GEOF.gradeDePontos",200);
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
@@ -143,8 +143,7 @@ i3GEOF.gradeDePontos = {
 			cabecalho,
 			minimiza,
 			"",
-			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			false
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.gradeDePontos_rodape class='i3GeoRodapeJanela' ></div>");

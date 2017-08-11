@@ -185,13 +185,9 @@ i3GEOF.selecao =
 				i3GEOF.selecao.ativaFoco();
 			};
 			minimiza = function() {
-				i3GEO.janela.iconiza("i3GEOF.selecao",100);
+				i3GEO.janela.minimiza("i3GEOF.selecao",200);
 			};
-			titulo =
-				"</div><div id='i3GEOF.selecaoI' style='left:10px;'>"
-					+ "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(\"48a\")' >"
-					+ $trad("x51")
-					+ "</a>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x51") + "</span></div>";
 			janela = i3GEO.janela.cria(
 					"510px",
 					"230px",
@@ -209,7 +205,8 @@ i3GEOF.selecao =
 					"",
 					"",
 					"",
-					""
+					"",
+					"48a"
 			);
 			divid = janela[2].id;
 			i3GEOF.selecao.aguarde = $i("i3GEOF.selecao_imagemCabecalho").style;

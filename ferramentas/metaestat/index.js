@@ -181,7 +181,7 @@ i3GEOF.metaestat = {
 				cabecalho = function(){
 				};
 				minimiza = function(){
-					i3GEO.janela.minimiza("i3geoCartoAnalise");
+					i3GEO.janela.minimiza("i3geoCartoAnalise",200);
 				};
 				janela = i3GEO.janela.cria(
 						"280px",
@@ -189,7 +189,7 @@ i3GEOF.metaestat = {
 						"",
 						"",
 						"",
-						"</div><div class='i3GeoTituloJanelaBs' >" + $trad('analise',i3GEOF.metaestat.dicionario) + "</div>",
+						"<span class='i3GeoTituloJanelaBsNolink' >" + $trad('analise',i3GEOF.metaestat.dicionario) + "</span></div>"
 						"i3geoCartoAnalise",
 						false,
 						"hd",

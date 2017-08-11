@@ -102,10 +102,10 @@ i3GEOF.nptpol = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(19)' >" + $trad("u12")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u12") + "</span></div>";
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.nptpol");
+			i3GEO.janela.minimiza("i3GEOF.nptpol",200);
 		};
 		janela = i3GEO.janela.cria(
 			"420px",
@@ -121,7 +121,11 @@ i3GEOF.nptpol = {
 			minimiza,
 			"",
 			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			"",
+			"",
+			"",
+			"",
+			"19"
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.nptpol_rodape class='i3GeoRodapeJanela' ></div>");

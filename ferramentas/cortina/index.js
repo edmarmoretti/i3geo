@@ -137,7 +137,7 @@ i3GEOF.cortina = {
 		var janela,divid,temp,titulo;
 		i3GEOF.cortina.tema = tema;
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(90)' >" + $trad("t42")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t42") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"230px",
 			"60px",
@@ -149,7 +149,14 @@ i3GEOF.cortina = {
 			false,
 			"hd",
 			"",
-			""
+			"",
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"90"
 		);
 		divid = janela[2].id;
 		i3GEOF.cortina.janela = janela[0];

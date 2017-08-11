@@ -105,10 +105,10 @@ i3GEOF.buscainde = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.buscainde");
+			i3GEO.janela.minimiza("i3GEOF.buscainde",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(8)' href='javascript:void(0)' >CSW</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >CSW</span></div>";
 		janela = i3GEO.janela.cria(
 			"550px",
 			"350px",
@@ -123,7 +123,11 @@ i3GEOF.buscainde = {
 			minimiza,
 			"",
 			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/edit-find.png"
+			"",
+			"",
+			"",
+			"",
+			"8"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.buscainde_corpo").style.backgroundColor = "white";

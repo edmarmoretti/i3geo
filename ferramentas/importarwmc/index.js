@@ -112,8 +112,9 @@ i3GEOF.importarwmc = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.importarwmc");
+			i3GEO.janela.minimiza("i3GEOF.importarwmc",200);
 		};
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x53") + "</span></div>";
 		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(98)' >" + $trad("x53")+"</a>";
 		janela = i3GEO.janela.cria(
 			"320px",
@@ -131,7 +132,8 @@ i3GEOF.importarwmc = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"98"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.importarwmc_corpo").style.backgroundColor = "white";

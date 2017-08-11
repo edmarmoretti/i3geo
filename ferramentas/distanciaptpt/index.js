@@ -104,10 +104,10 @@ i3GEOF.distanciaptpt = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(17)' >" + $trad("u11a")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u11a") + "</span></div>";
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.distanciaptpt");
+			i3GEO.janela.minimiza("i3GEOF.distanciaptpt",200);
 		};
 		janela = i3GEO.janela.cria(
 			"410px",
@@ -123,7 +123,11 @@ i3GEOF.distanciaptpt = {
 			minimiza,
 			"",
 			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			"",
+			"",
+			"",
+			"",
+			"17"
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.distanciaptpt_rodape class='i3GeoRodapeJanela' ></div>");

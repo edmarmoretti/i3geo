@@ -108,8 +108,7 @@ i3GEOF.markercluster = {
 			return;
 		}
 		// cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(122)' >" + $trad("x104")
-				+ "</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x104") + "</span></div>";
 		cabecalho = function() {
 		};
 		janela = i3GEO.janela.cria(
@@ -125,12 +124,16 @@ i3GEOF.markercluster = {
 				function() {
 				},
 				function() {
-					i3GEO.janela.minimiza("i3GEOF.markercluster");
+					i3GEO.janela.minimiza("i3GEOF.markercluster",200);
 				},
 				"",
 				false,
-				i3GEO.configura.locaplic
-						+ "/imagens/oxygen/16x16/accessories-calculator.png");
+				"",
+				"",
+				"",
+				"",
+				"122"
+			);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.markercluster_rodape class='i3GeoRodapeJanela' ></div>");
 		i3GEOF.markercluster.aguarde = $i("i3GEOF.markercluster_imagemCabecalho").style;

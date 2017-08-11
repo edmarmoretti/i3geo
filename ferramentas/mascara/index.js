@@ -131,10 +131,10 @@ i3GEOF.mascara = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.mascara");
+			i3GEO.janela.minimiza("i3GEOF.mascara",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(129)' >" + $trad("mascara")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("mascara") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"310px",
 			"220px",
@@ -148,7 +148,12 @@ i3GEOF.mascara = {
 			cabecalho,
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			"",
+			"129"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.mascara_corpo").style.backgroundColor = "white";

@@ -128,7 +128,8 @@ i3GEOF.atalhoscamada =
 			i3GEO.janela.minimiza(id);
 		};
 		// cria a janela flutuante
-		titulo = "</div><div class='i3GeoTituloJanelaBs'>" + ltema.tema + "</div>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + ltema.tema + "</span></div>";
+
 		janela =
 			i3GEO.janela.cria(
 				"280px",

@@ -145,7 +145,7 @@ i3GEO.janela =
 		 * {Array} Array contendo objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 		 */
 		cria : function(wlargura, waltura, wsrc, nx, ny, texto, id, modal, classe, funcaoCabecalho, funcaoMinimiza, funcaoAposRedim,
-			dimensionavel, icone, funcaoDuplica, opacidade, classeAdicional) {
+			dimensionavel, icone, funcaoDuplica, opacidade, classeAdicional, idajuda) {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.janela.cria()");
 
@@ -201,7 +201,11 @@ i3GEO.janela =
 			if (icone != "") {
 				ins += "<img class='i3GeoIconeJanela' src='" + icone + "' >";
 			}
-			ins += "<span style='font-size:10px;'>" + texto + "</span>";
+			if(idajuda){
+				ins += texto;
+			} else {
+				ins += "<span style='font-size:10px;'>" + texto + "</span>";
+			}
 			if (funcaoDuplica && funcaoDuplica != "") {
 				ins += "<div id='" + id + "_duplicaJanela' class='container-duplica'></div>";
 			}
@@ -213,7 +217,11 @@ i3GEO.janela =
 				ins += '<iframe name="' + id + 'i" id="' + id + 'i" valign="top" style="border:0px white solid;width:100%"></iframe>';
 			}
 			ins += '</div>';
-			ins += '<div class="ft ' + classeAdicional + '"></div>';
+			if(idajuda){
+				ins += '<div class="ft ' + classeAdicional + '"><i onclick="i3GEO.ajuda.ferramenta(\''+idajuda+'\')" class="material-icons iconeAjudaFerramentas" >help</i></div>';
+			} else {
+				ins += '<div class="ft ' + classeAdicional + '"></div>';
+			}
 			novoel = document.createElement("div");
 			novoel.id = id;
 			novoel.style.display = "block";
@@ -283,8 +291,8 @@ i3GEO.janela =
 					}, janela, true);
 					if (funcaoAposRedim && funcaoAposRedim != "") {
 						resize.on('endResize', function(args) {
-							funcaoAposRedim.call();
 							i3GEO.janela.minimiza();
+							funcaoAposRedim.call();
 						}, janela, true);
 					}
 					resize.getProxyEl().style.height = "0px";
@@ -393,7 +401,7 @@ i3GEO.janela =
 		 */
 		minimiza : function(id, min) {
 			var temp = $i(id + "_corpo"), n, i, m = YAHOO.i3GEO.janela.manager.find(id), c = $i(id), t = "min", r = YAHOO.util.Resize.getResizeById(id),
-			rodape = $i(id + "_rodape"), tipo = "";
+			tipo = "";
 
 			if (temp) {
 				if (temp.style.display === "block") {
@@ -403,7 +411,7 @@ i3GEO.janela =
 					}
 					m.winicial = c.style.width;
 					if (min) {
-						c.style.width = min;
+						c.style.width = parseInt(min,10)+"px";
 					}
 					tipo = "none";
 					if(r){

@@ -1,3 +1,12 @@
+ .iconeAjudaFerramentas {
+    cursor: help;
+    margin-left: 0px;
+    color: white;
+    opacity: 0.5;
+    position: absolute;
+    left: 5px;
+    bottom: 3px;
+}
 /*
 tooltip dos botoes da guia movel
 */
@@ -670,6 +679,15 @@ Configuracoes especificas dos elementos que ficam no rodape
 	right: 65px;
 	color: #008579;
 }
+.i3GeoTituloJanelaBsNolink {
+	opacity: 1.0;
+	position: absolute;
+	margin: 5px;
+	font-size: 14px;
+	font-weight: initial;
+	color: #008579 !Important;
+}
+
 .i3GeoIconeJanela{
 	display: none;
 	position: absolute;
@@ -913,7 +931,7 @@ td {
 .yui-skin-sam .yui-panel .ft {
     background: none repeat scroll 0 0 rgba(0, 0, 0, 0);
     border: 13px none;
-    margin-top: 10px;
+    margin-top: 0px;
     min-height: 30px;
 }
 

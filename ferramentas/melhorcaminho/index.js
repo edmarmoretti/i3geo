@@ -122,12 +122,12 @@ i3GEOF.melhorcaminho = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(14)' >" + $trad("melhorcaminho")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("melhorcaminho") + "</span></div>";
 		cabecalho = function(){
 			i3GEO.navega.ativaPan();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.melhorcaminho");
+			i3GEO.janela.minimiza("i3GEOF.melhorcaminho",200);
 		};
 		janela = i3GEO.janela.cria(
 			"430px",
@@ -143,7 +143,11 @@ i3GEOF.melhorcaminho = {
 			minimiza,
 			"",
 			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			"",
+			"",
+			"",
+			"",
+			"14"
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.melhorcaminho_rodape class='i3GeoRodapeJanela' ></div>");

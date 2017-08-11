@@ -143,10 +143,10 @@ i3GEOF.excluirarvore = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.excluirarvore");
+			i3GEO.janela.minimiza("i3GEOF.excluirarvore",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(110)' >" + $trad("t12")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t12") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"350px",
@@ -158,7 +158,14 @@ i3GEOF.excluirarvore = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"110"
 		);
 		i3GEOF.excluirarvore.aguarde = $i("i3GEOF.excluirarvore_imagemCabecalho").style;
 		divid = janela[2].id;

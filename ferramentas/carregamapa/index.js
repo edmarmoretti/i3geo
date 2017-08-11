@@ -106,7 +106,7 @@ i3GEOF.carregaMapa = {
 		if($i("i3GEOF.carregaMapa")){
 			return;
 		}
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(11)' >" + $trad("u18")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u18") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"340px",
 			"240px",
@@ -116,7 +116,16 @@ i3GEOF.carregaMapa = {
 			titulo,
 			"i3GEOF.carregaMapa",
 			true,
-			"hd"
+			"hd",
+			"",
+			"",
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"11"
 		);
 		divid = janela[2].id;
 		i3GEOF.carregaMapa.aguarde = $i("i3GEOF.carregaMapa_imagemCabecalho").style;

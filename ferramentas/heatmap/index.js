@@ -122,14 +122,32 @@ i3GEOF.heatmap =
 				return;
 			}
 			// cria a janela flutuante
-			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(121)' >" +  $trad("x102") + "</a>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x102") + "</span></div>";
 			cabecalho = function() {
 			};
-			janela = i3GEO.janela.cria("400px", "250px", "", "", "", titulo, "i3GEOF.heatmap", false, "hd", function() {
-			}, function() {
-				i3GEO.janela.minimiza("i3GEOF.heatmap");
-			}, "", false, i3GEO.configura.locaplic + "/imagens/oxygen/16x16/accessories-calculator.png");
+			janela = i3GEO.janela.cria(
+					"400px",
+					"250px",
+					"",
+					"",
+					"",
+					titulo,
+					"i3GEOF.heatmap",
+					false,
+					"hd",
+					function() {
+					},
+					function() {
+						i3GEO.janela.minimiza("i3GEOF.heatmap",200);
+					},
+					"",
+					false,
+					"",
+					"",
+					"",
+					"",
+					"121"
+			);
 			divid = janela[2].id;
 			janela[0].setFooter("<div id=i3GEOF.heatmap_rodape class='i3GeoRodapeJanela' ></div>");
 			i3GEOF.heatmap.aguarde = $i("i3GEOF.heatmap_imagemCabecalho").style;

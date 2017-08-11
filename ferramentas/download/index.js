@@ -155,9 +155,9 @@ i3GEOF.download = {
 		{tema = i3GEO.temaAtivo;}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.download");
+			i3GEO.janela.minimiza("i3GEOF.download",200);
 		};
-		titulo = "<div class='i3GeoTituloJanela'>Download<a class=ajuda_usuario href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(82)' ><b> </b></a></div>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' ></span></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"200px",
@@ -172,7 +172,11 @@ i3GEOF.download = {
 			minimiza,
 			"",
 			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/download.png"
+			"",
+			"",
+			"",
+			"",
+			"82"
 		);
 		divid = janela[2].id;
 		i3GEOF.download.aguarde = $i("i3GEOF.download_imagemCabecalho").style;

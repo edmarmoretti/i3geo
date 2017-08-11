@@ -89,7 +89,7 @@ i3GEOF.opcoesQuery = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesQuery");
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(5)' >" + $trad("p8")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p8") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"220px",
 			"80px",
@@ -101,7 +101,14 @@ i3GEOF.opcoesQuery = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"5"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesQuery_corpo").style.backgroundColor = "white";

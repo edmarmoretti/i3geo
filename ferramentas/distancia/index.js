@@ -71,8 +71,7 @@ i3GEOF.distancia =
 			cabecalho = "";
 			minimiza = "";
 			// cria a janela flutuante
-			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(50)' >" + $trad("distAprox") + "</a>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("distAprox") + "</span></div>";
 			janela =
 				i3GEO.janela.cria(
 						"355px",
@@ -91,7 +90,8 @@ i3GEOF.distancia =
 						"",
 						"",
 						"nao",
-						""
+						"",
+						"50"
 				);
 			divid = janela[2].id;
 			i3GEOF.distancia.inicia(divid);

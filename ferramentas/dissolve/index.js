@@ -103,7 +103,7 @@ i3GEOF.dissolve = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(22)' >" + $trad("u25")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u25") + "</span></div>";
 		cabecalho = function(){};
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.dissolve");
@@ -122,7 +122,11 @@ i3GEOF.dissolve = {
 			minimiza,
 			"",
 			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			"",
+			"",
+			"",
+			"",
+			"22"
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.dissolve_rodape class='i3GeoRodapeJanela' ></div>");

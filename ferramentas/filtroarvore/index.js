@@ -70,7 +70,7 @@ i3GEOF.filtroarvore = {
 			i3GEO.janela.minimiza("i3GEOF.filtroarvore");
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(97)' >" + $trad("t29")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t29") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"270px",
 			"160px",
@@ -88,7 +88,8 @@ i3GEOF.filtroarvore = {
 			"",
 			"",
 			"",
-			""
+			"",
+			"97"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.filtroarvore_corpo").style.backgroundColor = "white";

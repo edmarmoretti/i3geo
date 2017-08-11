@@ -97,13 +97,30 @@ i3GEOF.opcoesFundo =
 			cabecalho = function() {
 			};
 			minimiza = function() {
-				i3GEO.janela.minimiza("i3GEOF.opcoesFundo");
+				i3GEO.janela.minimiza("i3GEOF.opcoesFundo",200);
 			};
 			// cria a janela flutuante
-			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(6)' >" + $trad("p9")
-					+ "</a>";
-			janela = i3GEO.janela.cria("210px", "80px", "", "", "", titulo, "i3GEOF.opcoesFundo", false, "hd", cabecalho, "");
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p9") + "</span></div>";
+			janela = i3GEO.janela.cria(
+					"210px",
+					"80px",
+					"",
+					"",
+					"",
+					titulo,
+					"i3GEOF.opcoesFundo",
+					false,
+					"hd",
+					cabecalho,
+					minimiza,
+					"",
+					true,
+					"",
+					"",
+					"",
+					"",
+					"6"
+				);
 			divid = janela[2].id;
 			$i("i3GEOF.opcoesFundo_corpo").style.backgroundColor = "white";
 			$i("i3GEOF.opcoesFundo_corpo").style.textAlign = "left";

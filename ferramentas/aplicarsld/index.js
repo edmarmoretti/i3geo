@@ -103,9 +103,10 @@ i3GEOF.aplicarsld = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.aplicarsld");
+			i3GEO.janela.minimiza("i3GEOF.aplicarsld",200);
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(91)' href='javascript:void(0)' >" + $trad("t43") +"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t43") + "</span></div>";
+
 		janela = i3GEO.janela.cria(
 			"320px",
 			"280px",
@@ -117,7 +118,14 @@ i3GEOF.aplicarsld = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"91"
 		);
 		divid = janela[2].id;
 		janela[0].bringToTop();

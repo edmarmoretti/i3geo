@@ -126,7 +126,7 @@ i3GEOF.conectargeojson = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.conectargeojson");
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(106)' >GeoJson</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >GeoJson</span></div>";
 		janela = i3GEO.janela.cria(
 			"360px",
 			"150px",
@@ -141,7 +141,11 @@ i3GEOF.conectargeojson = {
 			minimiza,
 			"",
 			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/application-x-smb-workgroup.png"
+			"",
+			"",
+			"",
+			"",
+			"106"
 		);
 		divid = janela[2].id;
 		i3GEOF.conectargeojson.aguarde = $i("i3GEOF.conectargeojson_imagemCabecalho").style;

@@ -123,10 +123,10 @@ i3GEOF.animacao = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.animacao");
+			i3GEO.janela.iconiza("i3GEOF.animacao",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(107)' href='javascript:void(0)' >" + $trad("p21")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p21") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"410px",
 			"250px",
@@ -144,7 +144,8 @@ i3GEOF.animacao = {
 			"",
 			"",
 			"",
-			""
+			"",
+			107
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.animacao_corpo").style.backgroundColor = "white";

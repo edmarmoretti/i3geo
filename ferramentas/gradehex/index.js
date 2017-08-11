@@ -122,12 +122,12 @@ i3GEOF.gradeDeHex = {
 			return;
 		}
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(16)' >"+$trad("u9")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u9") + "</span></div>";
 		cabecalho = function(){
 			i3GEO.navega.ativaPan();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.gradeDeHex");
+			i3GEO.janela.minimiza("i3GEOF.gradeDeHex",200);
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
@@ -142,8 +142,7 @@ i3GEOF.gradeDeHex = {
 			cabecalho,
 			minimiza,
 			"",
-			false,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			false
 		);
 		divid = janela[2].id;
 		janela[0].setFooter("<div id=i3GEOF.gradeDeHex_rodape class='i3GeoRodapeJanela' ></div>");

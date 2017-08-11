@@ -131,13 +131,30 @@ i3GEOF.geolocal =
 			cabecalho = function() {
 			};
 			minimiza = function() {
-				i3GEO.janela.minimiza("i3GEOF.geolocal");
+				i3GEO.janela.minimiza("i3GEOF.geolocal",200);
 			};
 			// cria a janela flutuante
-			titulo =
-				"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(118)' >"
-					+ $trad('localizaUsuario',i3GEOF.geolocal.dicionario) + "</a>";
-			janela = i3GEO.janela.cria("310", "230", "", "", "", titulo, "i3GEOF.geolocal", false, "hd", cabecalho, minimiza);
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad('localizaUsuario',i3GEOF.geolocal.dicionario) + "</span></div>";
+			janela = i3GEO.janela.cria(
+					"310",
+					"230",
+					"",
+					"",
+					"",
+					titulo,
+					"i3GEOF.geolocal",
+					false,
+					"hd",
+					cabecalho,
+					minimiza,
+					"",
+					true,
+					"",
+					"",
+					"",
+					"",
+					"118"
+			);
 			divid = janela[2].id;
 			$i("i3GEOF.geolocal_corpo").style.backgroundColor = "white";
 			$i("i3GEOF.geolocal_corpo").style.textAlign = "left";

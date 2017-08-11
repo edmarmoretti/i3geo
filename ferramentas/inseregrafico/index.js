@@ -120,10 +120,10 @@ i3GEOF.insereGrafico = {
 			i3GEOF.insereGrafico.ativaFoco();
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.insereGrafico");
+			i3GEO.janela.minimiza("i3GEOF.insereGrafico",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(80)' >" + $trad("t37")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t37") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"320px",
@@ -135,7 +135,14 @@ i3GEOF.insereGrafico = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"80"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.insereGrafico_corpo").style.backgroundColor = "white";

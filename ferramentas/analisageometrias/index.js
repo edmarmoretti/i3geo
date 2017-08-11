@@ -40,6 +40,7 @@ i3GEOF.analisaGeometrias = {
 			return;
 		}
 		//try{
+		i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			var b, combot;
 			$i(iddiv).innerHTML += i3GEOF.analisaGeometrias.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");
@@ -90,7 +91,6 @@ i3GEOF.analisaGeometrias = {
 			combot += "<option value='limpa' >"+$trad('limpa',i3GEOF.analisaGeometrias.dicionario)+"</option>";
 			combot += "</select></div>";
 			$i("i3GEOanalisageometriasoperacao").innerHTML = combot;
-			i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 		//}
 		//catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -125,7 +125,7 @@ i3GEOF.analisaGeometrias = {
 			i3GEO.janela.minimiza("i3GEOF.analisaGeometrias");
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' onclick='i3GEO.ajuda.ferramenta(23)' href='javascript:void(0)' >" + $trad("u6")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u6") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"500px",
 			"300px",
@@ -139,8 +139,7 @@ i3GEOF.analisaGeometrias = {
 			cabecalho,
 			minimiza,
 			"",
-			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/accessories-calculator.png"
+			true
 		);
 		divid = janela[2].id;
 		i3GEOF.analisaGeometrias.aguarde = $i("i3GEOF.analisaGeometrias_imagemCabecalho").style;

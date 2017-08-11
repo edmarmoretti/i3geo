@@ -123,9 +123,9 @@ i3GEOF.carregakml = {
 		cabecalho = function(){
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.carregakml");
+			i3GEO.janela.minimiza("i3GEOF.carregakml",200);
 		};
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(105)' >Kml</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >KML</span></div>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"160px",
@@ -140,7 +140,11 @@ i3GEOF.carregakml = {
 			minimiza,
 			"",
 			true,
-			i3GEO.configura.locaplic+"/imagens/oxygen/16x16/application-x-smb-workgroup.png"
+			"",
+			"",
+			"",
+			"",
+			"105"
 		);
 		divid = janela[2].id;
 		i3GEOF.carregakml.aguarde = $i("i3GEOF.carregakml_imagemCabecalho").style;

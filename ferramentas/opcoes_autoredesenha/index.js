@@ -119,7 +119,7 @@ i3GEOF.opcoesTempo = {
 			i3GEO.janela.minimiza("i3GEOF.opcoesTempo");
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(9)' >" + $trad("p12")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p12") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"110px",
@@ -133,7 +133,12 @@ i3GEOF.opcoesTempo = {
 			cabecalho,
 			minimiza,
 			"",
-			true
+			true,
+			"",
+			"",
+			"",
+			"",
+			"9"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesTempo_corpo").style.backgroundColor = "white";

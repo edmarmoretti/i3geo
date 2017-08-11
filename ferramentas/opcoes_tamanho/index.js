@@ -126,10 +126,10 @@ i3GEOF.opcoesTamanho = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.opcoesTamanho");
+			i3GEO.janela.minimiza("i3GEOF.opcoesTamanho",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(4)' >" + $trad("p5")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p5") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"190px",
 			"130px",
@@ -141,7 +141,14 @@ i3GEOF.opcoesTamanho = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"4"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesTamanho_corpo").style.backgroundColor = "white";

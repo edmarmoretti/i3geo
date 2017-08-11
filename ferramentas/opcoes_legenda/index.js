@@ -89,10 +89,10 @@ i3GEOF.opcoesLegenda = {
 		}
 		cabecalho = function(){};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.opcoesLegenda");
+			i3GEO.janela.minimiza("i3GEOF.opcoesLegenda",200);
 		};
 		//cria a janela flutuante
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(2)' >" + $trad("t18b")+"</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t18b") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"320px",
 			"390px",
@@ -104,7 +104,14 @@ i3GEOF.opcoesLegenda = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"2"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.opcoesLegenda_corpo").style.backgroundColor = "white";
