@@ -997,7 +997,7 @@ i3GEO.janela =
 			if (temp) {
 				i3GEO.util.comboTemas(temp.id + "Sel", function(retorno) {
 					var tema, container = $i(idDiv), botao;
-					container.innerHTML = retorno.dados;
+					container.innerHTML += retorno.dados;
 					botao = $i(temp.id + "Sel");
 
 					if (temaSel != "") {
@@ -1026,7 +1026,7 @@ i3GEO.janela =
 						};
 					}
 					botao.onchange = onButtonClick;
-				}, temp.id, "", false, tipo, "font-size: 12px;width: 95%;color:white;", false, true, "form-control");
+				}, temp.id, "", false, tipo, "font-size: 12px;width: 95%;color:white;", false, true, "form-control comboTema");
 			}
 		}
 	};

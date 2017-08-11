@@ -1379,7 +1379,7 @@ i3GEO.util =
 		 */
 		comboTemas : function(id, funcao, onde, nome, multiplo, tipoCombo, estilo, yui, incluiVazio, classe) {
 			if (onde && onde !== "") {
-				i3GEO.util.defineValor(onde, "innerHTML", "<span style=color:red;font-size:10px; >buscando temas...</span>");
+				//i3GEO.util.defineValor(onde, "innerHTML", "<span style=color:red;font-size:10px; >buscando temas...</span>");
 			}
 			if (!nome) {
 				nome = "";
