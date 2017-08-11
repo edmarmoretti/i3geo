@@ -1,12 +1,12 @@
 //+$trad(1,i3GEOF.salvaMapa.dicionario)+
 i3GEOF.salvaMapa.dicionario = {
 	'salvaMapa' : [ {
-		pt : "Clique aqui para salvar o mapa",
+		pt : "Salvar o mapa",
 		en : "",
 		es : ""
 	} ],
 	'listaMapas' : [ {
-		pt : "Clique aqui para ver a lista de mapas",
+		pt : "Ver a lista de mapas",
 		en : "",
 		es : ""
 	} ],
@@ -16,7 +16,7 @@ i3GEOF.salvaMapa.dicionario = {
 		es : ""
 	} ],
 	'baixaArquivo' : [ {
-		pt : "Clique aqui para baixar o arquivo",
+		pt : "Baixar o arquivo",
 		en : "",
 		es : ""
 	} ],
