@@ -65,7 +65,7 @@ i3GEOF.conectarservicos =
 					"",
 					"",
 					"",
-					true
+					true,
 					"",
 					"",
 					"",

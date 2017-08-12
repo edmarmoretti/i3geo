@@ -351,9 +351,9 @@ g_traducao =
 		],
 		"u18" : [
 			{
-				pt : "Carregar mapfile local",
-				en : "Load mapfile",
-				es : "Cargar mapfile"
+				pt : "Carregar mapa",
+				en : "Load map",
+				es : "Cargar mapa"
 			}
 		],
 		"u19" : [

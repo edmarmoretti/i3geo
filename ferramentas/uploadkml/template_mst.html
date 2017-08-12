@@ -3,9 +3,9 @@
 	<h5 class="alert alert-info">{{{ajuda2}}}</h5>
 	<form class="form-horizontal" role="form" id='i3GEOuploadkmlf' target='i3GEOuploadkmliframe' action='{{{locaplic}}}/ferramentas/uploadkml/upload.php' method='post' ENCTYPE='multipart/form-data'>
 		<div class="input-group-btn">
-			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">KML</button>
+			<button style="margin-right:10px;"  type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">KML</button>
 			<input name="i3GEOuploadkml" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
-			<span class="form-control"></span>
+			<span class="form-control upload"></span>
 		</div>
 		<br>
 		<div class='form-group label-fixed condensed'>

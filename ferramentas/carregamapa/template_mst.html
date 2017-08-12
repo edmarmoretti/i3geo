@@ -1,14 +1,16 @@
-<form id='i3GEOcarregamapaf' target='i3GEOcarregamaiframe' action='{{{locaplic}}}/ferramentas/carregamapa/upload.php' method='post' ENCTYPE='multipart/form-data'>
-	<p class='paragrafo'>
-		{{{insereArquivo}}} <br> <br>
-	<p class='paragrafo'>
-		<input type='file' name='i3GEOcarregamapafilemap' size='22' style='top: 0px; left: 0px; cursor: pointer;'>
-		<br> <br>
-	<p class='paragrafo'>
-		<input id='i3GEOcarregamapabotao1' type='button' value='{{{carregaArquivo}}}' size='12' name='submit'>
+<div class='container-fluid'>
+	<h5></h5>
+	<form class="form-horizontal" role="form" id='i3GEOcarregamapaf' target='i3GEOcarregamaiframe' action='{{{locaplic}}}/ferramentas/carregamapa/upload.php' method='post' ENCTYPE='multipart/form-data'>
+		<div class="input-group-btn">
+			<button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">{{{arquivo}}}</button>
+			<input name="i3GEOcarregamapafilemap" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+			<span class="form-control upload">{{{insereArquivo}}}</span>
+		</div>
 		<br>
+		<button name="submit" onclick="i3GEOF.carregaMapa.submete()" class='btn btn-primary btn-sm btn-raised'>{{{carregaArquivo}}}</button>
 		<input type='hidden' name='g_sid' value='{{{sid}}}'>
 		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
-</form>
-<br>
-<iframe name='i3GEOcarregamaiframe' width='98%' height='70px' style='text-align: left; border: 1px solid gray;'></iframe>
+	</form>
+
+	<iframe name='i3GEOcarregamaiframe' width='98%' height='70px' style='text-align: left; border: 1px solid gray;'></iframe>
+</div>

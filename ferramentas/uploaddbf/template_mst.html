@@ -2,9 +2,9 @@
 <h5></h5>
 	<form class="form-horizontal" role="form" id='i3GEOuploaddbff' target='i3GEOuploaddbfiframe' action='{{{locaplic}}}/ferramentas/uploaddbf/upload.php' method='post' ENCTYPE='multipart/form-data'>
 		<div class="input-group-btn">
-			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">{{{arquivo}}}</button>
+			<button style="margin-right:10px;" type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">{{{arquivo}}}</button>
 			<input name="i3GEOuploaddbffile" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
-			<span class="form-control"></span>
+			<span class="form-control upload"></span>
 		</div>
 		<br>
 		<div class='form-group label-fixed condensed'>

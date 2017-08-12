@@ -77,11 +77,7 @@ i3GEOF.carregaMapa = {
 		}
 		$i(iddiv).innerHTML += i3GEOF.carregaMapa.html();
 		document.body.scrollTop = document.documentElement.scrollTop = 0;
-		var b = new YAHOO.widget.Button(
-			"i3GEOcarregamapabotao1",
-			{onclick:{fn: i3GEOF.carregaMapa.submete}}
-		);
-		b.addClass("rodar");
+
 	},
 	/*
 	Function: html

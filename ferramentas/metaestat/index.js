@@ -189,7 +189,7 @@ i3GEOF.metaestat = {
 						"",
 						"",
 						"",
-						"<span class='i3GeoTituloJanelaBsNolink' >" + $trad('analise',i3GEOF.metaestat.dicionario) + "</span></div>"
+						"<span class='i3GeoTituloJanelaBsNolink' >" + $trad('analise',i3GEOF.metaestat.dicionario) + "</span></div>",
 						"i3geoCartoAnalise",
 						false,
 						"hd",
