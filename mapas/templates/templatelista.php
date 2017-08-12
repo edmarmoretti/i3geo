@@ -8,7 +8,7 @@
 					<i class="material-icons md-18">more_horiz</i>
 				</a>
 				<span class="pull-right">&nbsp;&nbsp;</span>
-				<a title="{{{linkDefault}}}" href="{{{LINK}}}" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+				<a title="{{{linkDefault}}}" href="{{{LINK}}}" target="_blank" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 					<i class="material-icons md-18">launch</i>
 				</a>
 				<span class="pull-right">&nbsp;&nbsp;</span>

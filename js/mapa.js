@@ -509,16 +509,17 @@ i3GEO.mapa =
 					return;
 				}
 				if (i3GEO.guias.CONFIGURA["mapas"]) {
-					var janela, divid;
-					if ($i("i3GEOFsalvaMapaLista")) {
-						return;
-					}
-					janela = i3GEO.janela.cria("600px", "350px", "", "", "", "", "i3GEOFsalvaMapaLista", false, "hd");
-					divid = janela[2].id;
-					// a funcao que mostra a lista de mapas e a mesma que pode
-					// ser utilizada ao incluir a lista de mapas
-					// como uma guia
-					i3GEO.guias.CONFIGURA["mapas"].click.call(this, divid);
+					var temp, janela, id = "listaMapa" + Math.random();
+					janela = i3GEO.janela.cria(
+						"800px",
+						"500px",
+						i3GEO.configura.locaplic
+						+ "/mapas/indexnomenu.php",
+						"",
+						"",
+						"<span class='i3GeoTituloJanelaBsNolink' ></span></div>",
+						id
+					);
 				} else {
 					window.open(i3GEO.configura.locaplic + "/admin/rssmapas.php", "_blank");
 				}

@@ -3,7 +3,7 @@
 	<div class="list-group-separator"></div>
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
-			{{{nome}}}
+			<a href="{{{link}}}" target="_blank">{{{nome}}}</a>
 		</h4>
 		<p class="list-group-item-text hidden-xs hidden-sm">
 			<a href="{{{link}}}" target="_blank">{{{link}}}</a>

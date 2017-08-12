@@ -983,9 +983,17 @@ i3GEO.navega =
 					console.info("i3GEO.navega.dialogo.google()");
 
 				var temp, janela, idgoogle = "googlemaps" + Math.random();
-				janela = i3GEO.janela.cria((i3GEO.parametros.w / 2.5) + 25 + "px", (i3GEO.parametros.h / 2.5) + 18 + "px", i3GEO.configura.locaplic
-					+ "/ferramentas/googlemaps1/index.php", "", "", "</div><a class=i3GeoTituloJanelaBs target=_blank href='"
-					+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=68' >Google maps</a>", idgoogle);
+				janela = i3GEO.janela.cria(
+						(i3GEO.parametros.w / 2.5) + 25 + "px",
+						(i3GEO.parametros.h / 2.5) + 18 + "px",
+						i3GEO.configura.locaplic
+						+ "/ferramentas/googlemaps1/index.php",
+						"",
+						"",
+						"</div><a class=i3GeoTituloJanelaBs target=_blank href='"
+						+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=68' >Google maps</a>",
+						idgoogle
+				);
 
 				temp = function() {
 					i3GEO.desenho.removePins("boxOndeGoogle");
