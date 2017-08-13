@@ -51,12 +51,8 @@ i3GEOF.converteMapaKml = {
 	//TODO verificar funcionamento sem expor mapfile
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.converteMapaKml.dicionario);
-		//lista;
-		//lista = i3GEO.arvoreDeCamadas.CAMADAS;
-		//tema = lista[0].name;
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["parametrosMapfile"] = i3GEO.parametros.mapfile;
-		dicionario["tema"] = "";
+		dicionario["sid"] = i3GEO.configura.sid;
 		return dicionario;
 	},
 
@@ -73,6 +69,16 @@ i3GEOF.converteMapaKml = {
 	html:function(divid) {
 		var ins = Mustache.render(i3GEOF.converteMapaKml.MUSTACHE, i3GEOF.converteMapaKml.mustacheHash());
 		$i(divid).innerHTML += ins;
+	},
+	inicia: function(divid){
+		if(i3GEOF.converteMapaKml.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/convertemapakml/template_mst.html", function(template) {
+				i3GEOF.converteMapaKml.MUSTACHE = template;
+				i3GEOF.converteMapaKml.inicia(divid);
+			});
+			return;
+		}
+		i3GEOF.converteMapaKml.html(divid);
 	},
 	/*
 	Function: iniciaJanelaFlutuante
@@ -110,6 +116,6 @@ i3GEOF.converteMapaKml = {
 			"13"
 		);
 		divid = janela[2].id;
-		i3GEOF.converteMapaKml.html(divid);
+		i3GEOF.converteMapaKml.inicia(divid);
 	}
 };

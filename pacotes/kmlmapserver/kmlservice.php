@@ -26,6 +26,14 @@ http://10.1.1.34:80/i3geo/pacotes/kmlmapserver/kmlservice.php?map=bioma&typename
 */
 error_reporting(0);
 set_time_limit(0);
+//para o caso do mapa ser o que esta em uso
+if(!empty($_GET["sid"])){
+	session_name("i3GeoPHP");
+	session_id($_GET["sid"]);
+	session_start();
+	$_GET["map"] = $_SESSION["map_file"];
+	$_REQUEST["map"] = $_SESSION["map_file"];
+}
 include 'classes/kmlserver.class.php';
 $server = new KmlServer();
 ?>

@@ -109,33 +109,26 @@ class LayerServer {
 		* your encoding is different, you can set it through CGI style parameters
 		*/
 		var $encoding;
-
 		/**
 		* send networklink
 		* wether folder should contain networklinks instead of real geometries
 		* it is automatically set when all layers are requested
 		*/
 		var $_networklink;
-
-
 		/**
 		* Initialize
 		*
 		*/
 		function LayerServer(){
 			$this->errors = array();
-				// Load request parameters
-				$this->get_request();
-
-				$this->style_counter = 0;
-
-				// Load map
-				if(!$this->has_error()) {
-					$this->load_map();
-				}
-
+			// Load request parameters
+			$this->get_request();
+			$this->style_counter = 0;
+			// Load map
+			if(!$this->has_error()) {
+				$this->load_map();
+			}
 		}
-
 		/**
 		* Run the server and sends data
 		* @return string or void
@@ -975,28 +968,21 @@ class LayerServer {
 		function set_error($message, $layer = 'Error'){
 				$this->errors[$layer][] = $message;
 		}
-
-
 		/**
 		* Load the map and create the map instance
 		*/
 		function load_map(){
-				if(!file_exists($this->map) && is_readable($this->map)){
-						$this->set_error('Cannot read mapfile '. $this->map);
-				} else {
+			if(!file_exists($this->map) && is_readable($this->map)){
+				$this->set_error('Cannot read mapfile '. $this->map);
+			} else {
 			$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 			$servidor = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'];
 			$temp = $this->map;
-			if(file_exists(dirname(__FILE__)."/ms_configura.php")){
-				include(dirname(__FILE__)."/ms_configura.php");
-			}
-			if(file_exists(dirname(__FILE__)."/../../ms_configura.php")){
-				include(dirname(__FILE__)."/../../ms_configura.php");
-			}
 			if(file_exists(dirname(__FILE__)."/../../../ms_configura.php")){
 				include(dirname(__FILE__)."/../../../ms_configura.php");
+			} else {
+				include(dirname(__FILE__)."/../../ms_configura.php");
 			}
-			
 			if(!file_exists($this->map)){
 				$maptemp = ms_newMapObj($locaplic."/temas/".$this->map.".map");
 				//if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
@@ -1131,8 +1117,12 @@ class LayerServer {
 		if($k != ""){
 			return $k;
 		}
-		include(dirname(__FILE__)."/../../ms_configura.php");
-				return  $dir_tmp.'/'. md5($_SERVER['QUERY_STRING']) . ($this->_zipped ? '.kmz' : '.kml');
+		if(file_exists(dirname(__FILE__)."/../../../ms_configura.php")){
+			include(dirname(__FILE__)."/../../../ms_configura.php");
+		} else {
+			include(dirname(__FILE__)."/../../ms_configura.php");
+		}
+		return  $dir_tmp.'/'. md5($_SERVER['QUERY_STRING']) . ($this->_zipped ? '.kmz' : '.kml');
 		}
 
 		/**
