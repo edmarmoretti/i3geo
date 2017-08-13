@@ -60,31 +60,14 @@ i3GEOF.converteMapaWS = {
 	/**
 	 * Susbtitutos para o template
 	 */
-	mustacheHash : function() {
+	mustacheHash : function(enderecowms,enderecowmc) {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.converteMapaWS.dicionario);
 		dicionario["nomewms"] = enderecowms;
 		dicionario["nomewmc"] = enderecowmc;
-		dicionario["divid"] = $i(divid).innerHTML;
+		dicionario["bbox"] = i3GEO.parametros.mapexten.split(" ").join(",");
+		dicionario["w"] = i3GEO.parametros.w;
+		dicionario["h"] = i3GEO.parametros.h;
 		return dicionario;
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.converteMapaWS.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/convertews/dicionario.js",
-				"i3GEOF.converteMapaWS.iniciaJanelaFlutuante()",
-				"i3GEOF.converteMapaWS.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.converteMapaWS.iniciaJanelaFlutuante();
-		}
 	},
 	/*
 	Function: html
@@ -96,19 +79,31 @@ i3GEOF.converteMapaWS = {
 	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 
 	*/
-	html:function(divid,enderecowms,enderecowmc){
-		try{
-			var ins = '<div style=margin-left:5px; ><p class="paragrafo" >'+$trad('ajudaDesktop',i3GEOF.converteMapaWS.dicionario)+' <a href="http://www.gvsig.gva.es/" target=blank > gvSig</a>' +
-			'<p class="paragrafo" >' + $trad('ajudaWms',i3GEOF.converteMapaWS.dicionario) +
-			'<p class="paragrafo" >' + $trad('ajudaWmc',i3GEOF.converteMapaWS.dicionario) + '<a href=\"'+enderecowmc+'\" target=_blank >'+$trad('wmc',i3GEOF.converteMapaWS.dicionario)+'</a>' +
-			'<p class="paragrafo" ><b>WMS: </b></p>' +
-			'<p class="paragrafo" > <textarea cols="55" rows="3" style=cursor:pointer onclick="javascript:this.select()">' +
-			enderecowms + '</textarea></p>' +
-			'<p class="paragrafo" >' +
-			'<a href="' + enderecowms + '&request=getcapabilities&version=1.1.0&service=wms" target=blank >'+$trad('testa',i3GEOF.converteMapaWS.dicionario)+'<br></div>';
-			$i(divid).innerHTML += ins;
-			i3GEOF.converteMapaWS.aguarde.visibility = "hidden";
-		}catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.converteMapaWS.aguarde.visibility = "hidden";}
+	html:function(enderecowms,enderecowmc){
+		var ins = Mustache.render(i3GEOF.converteMapaWS.MUSTACHE, i3GEOF.converteMapaWS.mustacheHash(enderecowms,enderecowmc));
+		return ins;
+	},
+	inicia: function(divid){
+		if(i3GEOF.converteMapaWS.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/convertews/template_mst.html", function(template) {
+				i3GEOF.converteMapaWS.MUSTACHE = template;
+				i3GEOF.converteMapaWS.inicia(divid);
+			});
+			return;
+		}
+		var temp = function(retorno){
+			var enderecowms = $trad('erroWms',i3GEOF.converteMapaWS.dicionario),
+				enderecowmc = $trad('erroWms',i3GEOF.converteMapaWS.dicionario);
+			if (retorno.data != undefined){
+				enderecowms = i3GEO.configura.locaplic+retorno.data.wms+"&";
+				enderecowmc = window.location.protocol+"//"+window.location.host+retorno.data.wmc+"&";
+			}
+			$i(divid).innerHTML = i3GEOF.converteMapaWS.html(enderecowms,enderecowmc);
+		};
+		var p = i3GEO.configura.locaplic+"/ferramentas/convertews/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=convertewmswmc";
+		var cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"converteWMSWMC",temp);
 	},
 	/*
 	Function: iniciaJanelaFlutuante
@@ -131,7 +126,7 @@ i3GEOF.converteMapaWS = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >WMS</span></div>";
 		janela = i3GEO.janela.cria(
 			"440px",
-			"290px",
+			"310px",
 			"",
 			"",
 			"",
@@ -150,20 +145,6 @@ i3GEOF.converteMapaWS = {
 			"12"
 		);
 		divid = janela[2].id;
-		i3GEOF.converteMapaWS.aguarde = $i("i3GEOF.converteMapaWS_imagemCabecalho").style;
-		i3GEOF.converteMapaWS.aguarde.visibility = "visible";
-		temp = function(retorno){
-			var enderecowms = $trad('erroWms',i3GEOF.converteMapaWS.dicionario),
-				enderecowmc = $trad('erroWms',i3GEOF.converteMapaWS.dicionario);
-			if (retorno.data != undefined){
-				enderecowms = i3GEO.configura.locaplic+retorno.data.wms+"&";
-				enderecowmc = window.location.protocol+"//"+window.location.host+retorno.data.wmc+"&";
-			}
-			i3GEOF.converteMapaWS.html(divid,enderecowms,enderecowmc);
-		};
-		p = i3GEO.configura.locaplic+"/ferramentas/convertews/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=convertewmswmc&h="+window.location.host;
-		cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"converteWMSWMC",temp);
+		i3GEOF.converteMapaWS.inicia(divid);
 	}
 };

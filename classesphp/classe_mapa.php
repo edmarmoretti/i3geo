@@ -1684,7 +1684,7 @@ class Mapa
 	*/
 	function converteWS($locaplic,$h)
 	{
-		$nomeurl = "/ogc.php?tema=".$this->arquivo;
+		$nomeurl = "/ogc.php?sid=".$this->arquivo;
 		return($nomeurl);
 	}
 	/*
@@ -1704,33 +1704,27 @@ class Mapa
 
 	Endere&ccedil;o do WMC
 	*/
-	function converteWMC($locmapserv,$h)
+	function converteWMC($locmapserv,$urli3geo)
 	{
-		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-		$protocolo = $protocolo[0];
-		$protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
-		$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
-		$urli3geo = str_replace("/classesphp/mapa_controle.php","",$protocolo.$_SERVER["PHP_SELF"]);
+		$r = nomeRandomico(5);
+		$nomews = str_replace(".map",$r."wmc.map",$this->arquivo);
 
-		$nomews = str_replace(".map","wmc.map",$this->arquivo);
 		$nomeurl = $locmapserv."?map=".$nomews;
 		$nomeogc = $urli3geo."/ogc.php?tema=".$nomews;
 		$w = $this->mapa->web;
 		$w->set("template","");
 		// adiciona os parametros no nivel do mapa
 		$this->mapa->setmetadata("wms_title","i3Geo");
-		$this->mapa->setmetadata("wms_onlineresource","http://".$h.$nomeurl);
+		$this->mapa->setmetadata("wms_onlineresource","http://".$nomeurl);
 		$projecao = pegaProjecaoDefault("epsg");
 		$this->mapa->setmetadata("wms_srs","EPSG:".$projecao);
 		$this->mapa->setmetadata("wms_getcontext_enabled","1");
-		foreach ($this->layers as $layer)
-		{
+		foreach ($this->layers as $layer){
 			if($layer->connectiontype != 7 && $layer->connectiontype != 9){
 				$n = pegaNome($layer);
 				$layer->setmetadata("wms_title",$n);
 				$codigo = $layer->getmetadata("nomeoriginal");
-				if($codigo == "")
-				{
+				if($codigo == ""){
 					$codigo = $layer->name;
 				}
 				$layer->setmetadata("wms_server_version","1.0.0");
@@ -1742,14 +1736,14 @@ class Mapa
 				$layer->setmetadata("wms_format","image/png");
 				$layer->setmetadata("wms_formatlist","image/gif,image/png,image/png; mode=24bit,image/jpeg,image/wbmp,image/tiff");
 				$layer->set("dump",MS_TRUE);
-				$layer->set("status","ON");
+				$layer->set("status",MS_DEFAULT);
 				$layer->set("template","none.htm");
 				$c = $layer->getclass(0);
 				if ($c->name == "")
 				{
 					$c->name = " ";
 				}
-				if($layer->connectiontype != "WS_WMS" && $layer->getmetadata("permiteogc") == "" && $layer->getmetadata("TEMALOCAL") == ""){
+				if($layer->connectiontype != "WS_WMS" && strtolower($layer->getmetadata("permiteogc")) != "nao" && $layer->getmetadata("TEMALOCAL") == ""){
 					if(ms_GetVersionInt() > 50201)
 					{
 						$layer->setconnectiontype(MS_WMS);

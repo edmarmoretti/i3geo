@@ -18,10 +18,6 @@ i3GEO.listaDeFerramentas = {
 					descricao: $trad("descArquivos"),
 					id : "arquivos"
 				},
-				//{
-				//	nome : $trad("d32"),
-				//	id : "interface"
-				//},
 				{
 					nome : $trad("operacoesMapaTema"),
 					descricao:  $trad("descOperacoesMapaTema"),

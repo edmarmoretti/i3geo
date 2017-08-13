@@ -733,11 +733,6 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta convertews
 			 */
 			convertews : function() {
-				if (i3GEO.parametros.mapfile === "") {
-					i3GEO.janela
-					.tempoMsg("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");
-					return;
-				}
 				i3GEO.util.dialogoFerramenta(
 						"i3GEO.mapa.dialogo.convertews()",
 						"convertews",
@@ -751,10 +746,6 @@ i3GEO.mapa =
 			 * Abre a janela de dialogo da ferramenta convertemapakml
 			 */
 			convertekml : function() {
-				if (i3GEO.parametros.mapfile === "") {
-					alert("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");
-					return;
-				}
 				i3GEO.util.dialogoFerramenta(
 						"i3GEO.mapa.dialogo.convertekml()",
 						"convertemapakml",

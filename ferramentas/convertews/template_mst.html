@@ -1,20 +1,15 @@
-<div style='margin-left: 5px;'>
-	<p class='paragrafo'>
-		{{{ajudaDesktop}}} <a href='http://www.gvsig.gva.es/' target='blank'>
-			gvSig</a>
-	<p class='paragrafo'>{{{ajudaWms}}}
-	<p class='paragrafo'>
-		{{{ajudaWmc}}}<a href='\{{{nomewmc}}}\' target='_blank'>{{{wmc}}}</a>
-	<p class='paragrafo'>
+<div class='container-fluid'>
+	<h5>{{{ajudaDesktop}}}</h5>
+	<h5>{{{ajudaWms}}}</h5>
+	<h5>{{{ajudaWmc}}}</h5>
+	<a href='{{{nomewmc}}}' target='_blank'>{{{wmc}}}</a>
+	<h5>
 		<b>WMS: </b>
-	</p>
-	<p class='paragrafo'>
-		<textarea cols='55' rows='3' style='cursor: pointer'
-			onclick='javascript:this.select()'>
-			{{{nomewms}}} </textarea>
-	</p>
-	<p class='paragrafo'>
-		<a
-			href='{{{nomewms}}}&request=getcapabilities&version=1.1.0&service=wms'
-			target=blank>{{{testa}}}</a><br>
+	</h5>
+	<a href='{{{nomewms}}}' target='_blank'>{{{nomewms}}}</a>
+	<br>
+	<a href='{{{nomewms}}}&request=getcapabilities&version=1.1.0&service=wms' target=blank>{{{testa}}} GetCapabilities</a>
+	<br>
+	<a href='{{{nomewms}}}&request=getmap&version=1.1.0&service=wms&WIDTH={{{w}}}&HEIGHT={{{h}}}&BBOX={{{bbox}}}' target=blank>{{{testa}}} getMap</a>
+
 </div>

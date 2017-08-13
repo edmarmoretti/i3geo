@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.converteMapaWS.dicionario)+
 i3GEOF.converteMapaWS.dicionario = {
 	'ajudaDesktop' : [ {
-		pt : "Voc&ecirc; pode utilizar o endere&ccedil;o em softwares de geoprocessamento instalados em seu computador, como por exemplo, o",
+		pt : "Voc&ecirc; pode utilizar o endere&ccedil;o em softwares de geoprocessamento instalados em seu computador, como por exemplo, o gvSIG ou QGIS",
 		en : "",
 		es : "Usted puede utilizar la direcci&oacute;n en el software de geoprocesamiento instalado en su ordenador, como por ejemplo: el"
 	} ],
