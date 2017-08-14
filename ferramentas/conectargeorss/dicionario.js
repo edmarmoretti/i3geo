@@ -31,7 +31,7 @@ i3GEOF.conectargeorss.dicionario = {
 		es : ""
 	} ],
 	'sel' : [ {
-		pt : "Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo. Utilize as guias acima para ver o resultado da conex&atilde;o",
+		pt : "Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo",
 		en : "",
 		es : ""
 	} ]

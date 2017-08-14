@@ -168,8 +168,12 @@ i3GEOF.conectargeorss = {
 		if (retorno.data != undefined){
 			retorno = retorno.data;
 			for (i=0;i<retorno.length; i++){
-				ins += "<div class='list-group condensed'><div class='row-content text-left'>" +
-					"<label class='nomeTema'><a onclick='i3GEOF.conectargeorss.adiciona(\""+i+"\");return false;' href='javascript:void(0)'><h4>" + retorno[i].title + "</h4></a></label></div></div>";
+				ins += "<div class='list-group condensed'><div class='row-content text-left'>"
+				+ "<a onclick='i3GEOF.conectargeorss.adiciona(\""+i+"\");return false;' role='button' class='btn btn-default btn-fab btn-fab-max' href='javascript:void(0)'>"
+				+ "<span class='material-icons'>visibility</span></a><label style='width:200px;' class='nomeTema' >"
+				+ "<a onclick='i3GEOF.conectargeorss.adiciona(\""+i+"\");return false;' href='javascript:void(0)'><h4>"
+				+ retorno[i].title +
+				+ "</h4></a></label></div></div>";
 			}
 			$i("resultadoget").innerHTML = ins;
 		}

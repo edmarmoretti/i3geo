@@ -20,16 +20,6 @@ i3GEOF.conectarwms.dicionario = {
 		en : "",
 		es : "Servicio no definido"
 	} ],
-	'listaLayers' : [ {
-		pt : "Lista as camadas do WMS",
-		en : "",
-		es : ""
-	} ],
-	'sel' : [ {
-		pt : "Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo",
-		en : "",
-		es : ""
-	} ],
 	5 : [ {
 		pt : "Ooops! Problemas ao acessar o servi&ccedil;o.",
 		en : "",

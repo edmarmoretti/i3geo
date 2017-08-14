@@ -75,26 +75,10 @@ i3GEOF.conectarservicos =
 			);
 		},
 		wms: function(){
-			i3GEO.janela.cria(
-					"440px",
-					"400px",
-					i3GEO.configura.locaplic + "/ferramentas/conectarwms/index.htm",
-					"",
-					"",
-					"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("a4") + "</span></div>",
-					"i3GEO.conectarwms",
-					false,
-					"hd",
-					"",
-					"",
-					"",
-					false,
-					"",
-					"",
-					"nao",
-					"",
-					"28"
-			);
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic
+					+ "/ferramentas/conectarwms/dependencias.php",
+					"i3GEOF.conectarwms.iniciaJanelaFlutuante()",
+			"i3GEOF.conectarwms_script");
 		},
 		kml: function() {
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic

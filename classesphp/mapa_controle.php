@@ -1855,6 +1855,7 @@ switch (strtoupper($funcao))
 		*/
 	case "TEMASWMS":
 		include_once("wmswfs.php");
+		error_reporting(0);
 		$servico = $_pg["servico"];
 		restauraCon($map_file,$postgis_mapa);
 		$retorno = temaswms();
