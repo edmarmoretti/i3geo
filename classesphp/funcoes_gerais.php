@@ -1323,8 +1323,7 @@ $dir_tmp - Diret&oacute;rio onde o arquivo ser&aacute; criado.
 
 $locaplic - Localiza&ccedil;&atilde;o do I3geo
 */
-function georssCanais($servico,$map_file,$dir_tmp,$locaplic)
-{
+function georssCanais($servico,$map_file,$dir_tmp,$locaplic){
 	$xml = simplexml_load_file($servico);
 	//var_dump($xml);
 	foreach($xml->channel as $c){

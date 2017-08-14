@@ -81,7 +81,7 @@ i3GEOF.carregakml = {
 			var raiz,nraiz,i,combo;
 			raiz = retorno.data.canais;
 			nraiz = raiz.length;
-			combo = "<select onchange='javascript:$i(\"i3GEOcarregakmlurl\").value = this.value;'>";
+			combo = "<select class='form-control' onchange='javascript:$i(\"i3GEOcarregakmlurl\").value = this.value;'>";
 			combo += "<option value=''>---</option>";
 			for (i=0;i<nraiz; i++){
 				combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
@@ -90,11 +90,6 @@ i3GEOF.carregakml = {
 			$i("i3GEOcarregakmlCombo").innerHTML = combo;
 		};
 		i3GEO.php.listaRSSwsARRAY(monta,"KML");
-		b = new YAHOO.widget.Button(
-			"i3GEOcarregakmlbotao1",
-			{onclick:{fn: i3GEOF.carregakml.adiciona}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: html
@@ -128,7 +123,7 @@ i3GEOF.carregakml = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >KML</span></div>";
 		janela = i3GEO.janela.cria(
 			"320px",
-			"160px",
+			"180px",
 			"",
 			"",
 			"",

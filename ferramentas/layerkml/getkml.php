@@ -1,10 +1,20 @@
 <?php
+define(I3GEO,true);
+include("../../pacotes/validaacesso.php");
+
 include_once(dirname(__FILE__)."/../safe.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-
+$ch = curl_init();
 $arq = $locaplic."/temas/" . $_GET["tema"] . ".map";
+//nao e um arquivo e sim uma url
 if(!file_exists($arq)){
-	exit;
+	//$url = str_replace(".kml","",$_GET["tema"]).".kml";
+	session_name("i3GeoPHP");
+	session_id($_GET["sid"]);
+	session_start();
+	$arq = $_SESSION["map_file"];
+	//por questoes de seguranca
+	curl_setopt($ch, CURLOPT_TIMEOUT, 30);
 }
 $map = ms_newMapObj($arq);
 $layer = $map->getlayerbyname($_GET["tema"]);
@@ -15,7 +25,6 @@ $plugin = $layer->getmetadata("PLUGINI3GEO");
 $a = json_decode($plugin);
 $url = $a->parametros->url;
 
-$ch = curl_init();
 if(!$ch){
 	echo "erro curl_init";
 	exit;

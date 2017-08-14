@@ -918,7 +918,7 @@ i3GEO.pluginI3geo =
 		        		   inicia : function(camada, objMapa) {
 		        			   var layerkml, url, temp;
 		        			   //url = i3GEO.configura.locaplic + "/classesphp/proxy.php?url=" + camada.plugini3geo.parametros.url;
-		        			   url = i3GEO.configura.locaplic + "/ferramentas/layerkml/getkml.php?tema=" + camada.nomeoriginal;
+		        			   url = i3GEO.configura.locaplic + "/ferramentas/layerkml/getkml.php?sid=" + i3GEO.configura.sid + "&tema=" + camada.nomeoriginal;
 		        			   layerkml = new ol.layer.Vector({
 		        				   name : camada.name,
 		        				   isBaseLayer : false,

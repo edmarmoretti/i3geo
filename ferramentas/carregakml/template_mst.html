@@ -1,11 +1,11 @@
-<p class='paragrafo'>{{{insereKml}}}:</p>
-<br>
-<div class='i3geoForm i3geoFormIconeEdita'>
-	<input type='text' value='' id='i3GEOcarregakmlurl' />
+<div class='container-fluid'>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOcarregakmlurl">{{{insereKml}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOcarregakmlurl' value='' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<div style="width: 100%;"  class="input-group" id='i3GEOcarregakmlCombo'>
+		</div>
+	</div>
+	<button onclick="i3GEOF.carregakml.adiciona()" class='btn btn-primary btn-sm btn-raised'>{{{botao}}}</button>
 </div>
-<br>
-<br>
-<div id='i3GEOcarregakmlCombo' class='styled-select' ></div>
-<br>
-<p class='paragrafo'>
-<input id='i3GEOcarregakmlbotao1' type='button' value='{{{botao}}}' />

@@ -1,189 +1,180 @@
-/*
-Title: Conex&atilde;o com georss
-
-Acrescenta ao mapa um novo tema com base em um endere&ccedil;o de GEORSS
-
-GEORSS &eacute; um servi&ccedil;o de not&iacute;cias que traz a coordenada geogr&aacute;fica da ocorr&ecirc;ncia (ou envelope).
-O usu&aacute;rio pode indicar o endere&ccedil;o ou escolher de uma lista. A lista &eacute; pr&eacute;-definida por meio do sistema de administra&ccedil;&atilde;o
-do i3Geo.
-
-Veja:
-
-<ADICIONATEMAGEORSS>
-
-Arquivo:
-
-i3geo/ferramentas/conectargeorss/index.js
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-
-//parametrosURL();
-
-
-//variaveis globais
-i3GEOF = {conectargeorss: {}};
-
-g_tipo = ""; //tipo de tema
-g_tema = ""; //tema selecionado do ws
-g_legenda = ""; //legenda do tema
-g_nometema = ""; //nome do tema
-g_sid = window.parent.i3GEO.configura.sid;
-
-i3GEO.guias.mostraGuiaFerramenta("guia1");
-
-$i("guia1").onclick = function(){
-	i3GEO.guias.mostraGuiaFerramenta("guia1");
-	$i("resultadoget").innerHTML = "";
-};
-$i("guia2").onclick = function(){
-	clickGuia2();
-};
-
-/*
-Function: clickGuia2
-
-Faz a busca dos RSS cadastrados no sistema de administra&ccedil;&atilde;o do i3Geo
-
-Veja:
-
-<GEORSSCANAIS>
-*/
-function clickGuia2()
-{
-	i3GEO.guias.mostraGuiaFerramenta("guia2");
-	$i("resultadoget").innerHTML = "";
-	if ($i("servico").value == ""){i3GEO.janela.tempoMsg($trad('msgServico',i3GEOF.conectargeorss.dicionario));}
-	else{
-		$i("guia2obj").style.display="block";
-		aguarde("block");
-		var p = g_locaplic+"/classesphp/mapa_controle.php?g_sid="+g_sid+"&funcao=georssCanais&servico="+$i("servico").value;
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"georssCanais",listaCanais);
-	}
+if(typeof(i3GEOF) === 'undefined'){
+	var i3GEOF = {};
 }
-function registraws(nome,id_ws)
-{
-	$i("servico").value = nome;
-	if(arguments.length == 2)
-	g_idws = id_ws;
-	else
-	g_idws = "";
-	clickGuia2();
-}
+
 /*
-Function: listaCanais
-
-Monta a lista com os canais existentes no RSS escolhido
-
-Parametro:
-
-retorno {JSON} - retorno da fun&ccedil;&atilde;o clickGuia2
+Classe: i3GEOF.conectargeorss
 */
-function listaCanais(retorno)
-{
-	var i,ins = "<p class='paragrafo'>"+ $trad('selecionaItem',i3GEOF.conectargeorss.dicionario)+"</p>";
-	if (retorno.data != undefined)
-	{
-		retorno = retorno.data;
-		for (i=0;i<retorno.length; i++)
-		{
-			ins += "<p class='paragrafo'><input style='cursor:pointer;' onclick=adicionatema('"+i+"') type=radio name=cn value=mapa >&nbsp;<b>"+retorno[i].title+ "</b></p>";
-			ins += "<a href="+retorno[i].link+" target=blank >"+retorno[i].link+"</a>";
-			ins += "<br><i>"+$trad('descricao',i3GEOF.conectargeorss.dicionario)+"</i> "+retorno[i].description;
-			ins += "<br><i>"+$trad('categoria',i3GEOF.conectargeorss.dicionario)+" </i>"+retorno[i].category;
+i3GEOF.conectargeorss = {
+	IDWS: "",
+	/*
+	Variavel: aguarde
+
+	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
+	*/
+	aguarde: "",
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.conectargeorss.dicionario);
+		return dicionario;
+	},
+	/*
+	Function: inicia
+
+	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
+
+	Parametro:
+
+	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
+	*/
+	inicia: function(iddiv){
+		if(i3GEOF.conectargeorss.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/conectargeorss/template_mst.html", function(template) {
+				i3GEOF.conectargeorss.MUSTACHE = template;
+				i3GEOF.conectargeorss.inicia(iddiv);
+			});
+			return;
 		}
-		$i("resultadoget").innerHTML = ins;
-	}
-	else
-	{
-		$i("resultadoget").innerHTML = "<p style=color:red >"+$trad('erro',i3GEOF.conectargeorss.dicionario)+"<br>";
-	}
-	aguarde("none");
-}
-/*
-Function: adicionatema
+		$i(iddiv).innerHTML = i3GEOF.conectargeorss.html();
+		var b, monta = function(retorno){
+			if (retorno.data.rss.search(/Erro/gi) != -1){
+				i3GEO.janela.tempoMsg("OOps! Ocorreu um erro\n"+retorno.data);
+				return;
+			}
+			var canais = retorno.data.canais;
+			var ncanais = canais.length;
+			var i, ins = "";
+			ins += "<select class='form-control' onchange='i3GEOF.conectargeorss.registraws(this.value)' style='width:100%;' >";
+			ins += "<option value='' >---</option>";
+			for (i = 0; i < ncanais; i++) {
+				var caso = canais[i];
+				var valor = "'" + caso.link + "','"	+ caso.id_ws + "'";
+				ins += "<option value=" + valor + " >"+caso.title+"</option>";
+			}
+			ins += "</select>";
+			document.getElementById("RSSgeo").innerHTML = ins;
+		};
 
-Adiciona ao mapa um tema com base no canal RSS escolhido
+		var p = i3GEO.configura.locaplic + "/classesphp/wscliente.php?funcao=listaRSSwsARRAY&rss=&tipo=GEORSS";
+		var cp = new cpaint();
+		cp.set_response_type("JSON");
+		cp.call(p,"listaRSSwsARRAY",monta);
+	},
+	/*
+	Function: html
 
-Veja:
+	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
 
-<ADICIONATEMAGEORSS>
+	Retorno:
 
-Parametro:
+	String com o c&oacute;digo html
+	*/
+	html:function() {
+		var ins = Mustache.render(i3GEOF.conectargeorss.MUSTACHE, i3GEOF.conectargeorss.mustacheHash());
+		return ins;
+	},
+	/*
+	Function: iniciaJanelaFlutuante
 
-id {string} - id do canal (conforme a ordem que aparece no RSS
-*/
-function adicionatema(id)
-{
-	aguarde("block");
-	var redesenha = function()
-	{
-		aguarde("none");
-		window.parent.i3GEO.atualiza();
-	};
-	var p = g_locaplic+"/ferramentas/conectargeorss/exec.php?g_sid="+g_sid+"&funcao=adicionaTemaGeoRSS&canal="+id+"&servico="+$i("servico").value;
-	var cp = new cpaint();
-	//cp.set_debug(2)
-	cp.set_response_type("JSON");
-	cp.call(p,"adicionaTemaGeoRSS",redesenha);
-}
-/*
-Function abrejanelaIframe
-
-Abre uma janela flutuante contendo um iframe
-
-Parametros:
-
-w {string} - largura
-
-h {string} - altura
-
-s {string} - src do iframe
-*/
-function abrejanelaIframe(){
-	var s = window.parent.i3GEO.configura.locaplic+"/admin/html/webservices.html?tipo=GEORSS";
-	var janelaeditor = window.parent.i3GEO.janela.cria(
-			"700",
-			"500",
-			s,
-			parseInt(Math.random()*100,10),
-			10,
-			s,
-			"janela"+window.parent.i3GEO.util.randomRGB(),
+	Cria a janela flutuante para controle da ferramenta.
+	*/
+	iniciaJanelaFlutuante: function(){
+		var minimiza,cabecalho,janela,divid,titulo;
+		if($i("i3GEOF.conectargeorss")){
+			return;
+		}
+		//cria a janela flutuante
+		minimiza = function(){
+			i3GEO.janela.minimiza("i3GEOF.conectargeorss",200);
+		};
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x47") + "</span></div>";
+		janela = i3GEO.janela.cria(
+			"320px",
+			"280px",
+			"",
+			"",
+			"",
+			titulo,
+			"i3GEOF.conectargeorss",
 			false,
 			"hd",
 			"",
-			"",
+			minimiza,
 			"",
 			true,
-			g_locaplic+"/imagens/oxygen/16x16/application-x-smb-workgroup.png"
+			"",
+			"",
+			"",
+			"",
+			"29"
 		);
-	YAHOO.util.Event.addListener(janelaeditor[0].close, "click", iniciaListaGEORSS,janelaeditor[0].panel,{id:janelaeditor[0].id},true);
-}
-function aguarde(valor){
-	if(document.getElementById("aguarde"))
-	document.getElementById("aguarde").style.display = valor;
-}
+		divid = janela[2].id;
+		i3GEOF.conectargeorss.aguarde = $i("i3GEOF.conectargeorss_imagemCabecalho").style;
+		$i("i3GEOF.conectargeorss_corpo").style.backgroundColor = "white";
+		i3GEOF.conectargeorss.inicia(divid);
+	},
+	adiciona: function(id){
+		var url, temp, cp, p;
+		if(i3GEOF.conectargeorss.aguarde.visibility === "visible"){
+			return;
+		}
+		if($i("servicoGeorss").value !== ""){
+			i3GEOF.conectargeorss.aguarde.visibility = "visible";
+			temp = function(retorno){
+				i3GEOF.conectargeorss.aguarde.visibility = "hidden";
+				i3GEO.atualiza();
+			};
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			p = i3GEO.configura.locaplic+"/ferramentas/conectargeorss/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=adicionaTemaGeoRSS&canal="+id+"&servico="+$i("servicoGeorss").value;
+			cp.call(p,"foo",temp);
+		}
+	},
+	listaCanais: function(){
+		if(i3GEOF.conectargeorss.aguarde.visibility === "visible"){
+			return;
+		}
+		$i("resultadoget").innerHTML = "";
+		if ($i("servicoGeorss").value == ""){
+			i3GEO.janela.tempoMsg($trad('msgServico',i3GEOF.conectargeorss.dicionario));
+		}
+		else{
+			i3GEOF.conectargeorss.aguarde.visibility = "visible";
+			var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=georssCanais&servico="+$i("servicoGeorss").value;
+			var cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"georssCanais",i3GEOF.conectargeorss.montaCanais);
+		}
+	},
+	registraws: function(nome,id_ws){
+		$i("servicoGeorss").value = nome;
+		if(arguments.length == 2){
+			i3GEOF.conectargeorss.IDWS = id_ws;
+		}
+		else {
+			i3GEOF.conectargeorss.IDWS = "";
+		}
+		i3GEOF.conectargeorss.listaCanais();
+	},
+	montaCanais: function(retorno){
+		var i,ins = "<h5>"+ $trad('selecionaItem',i3GEOF.conectargeorss.dicionario)+"</h5>";
+		i3GEOF.conectargeorss.aguarde.visibility = "hidden";
+		if (retorno.data != undefined){
+			retorno = retorno.data;
+			for (i=0;i<retorno.length; i++){
+				ins += "<div class='list-group condensed'><div class='row-content text-left'>" +
+					"<label class='nomeTema'><a onclick='i3GEOF.conectargeorss.adiciona(\""+i+"\");return false;' href='javascript:void(0)'><h4>" + retorno[i].title + "</h4></a></label></div></div>";
+			}
+			$i("resultadoget").innerHTML = ins;
+		}
+		else{
+			$i("resultadoget").innerHTML = "<h5 class='alert alert-danger'>"+$trad('erro',i3GEOF.conectargeorss.dicionario)+"</h5>";
+		}
+	}
+};

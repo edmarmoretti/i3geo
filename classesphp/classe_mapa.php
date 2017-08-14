@@ -1843,8 +1843,8 @@ class Mapa
 	$locaplic - Localiza&ccedil;&atilde;o do I3geo
 	$canal - Identificador do canal (ordem em que est&aacute; no RSS)
 	*/
-	function adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal)
-	{
+	function adicionaTemaGeoRSS($servico,$dir_tmp,$locaplic,$canal){
+		error_reporting(0);
 		$xml = simplexml_load_file($servico);
 		$conta = 0;
 		foreach($xml->channel as $c){

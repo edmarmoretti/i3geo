@@ -51,33 +51,16 @@ i3GEOF.conectarservicos =
 			"i3GEOF.conectargeojson_script");
 		},
 		georss: function(){
-			i3GEO.janela.cria(
-					"400px",
-					"300px",
-					i3GEO.configura.locaplic
-					+ "/ferramentas/conectargeorss/index.htm",
-					"",
-					"",
-					"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x47") + "</span></div>",
-					"i3GEO.conectargeorss",
-					false,
-					"hd",
-					"",
-					"",
-					"",
-					true,
-					"",
-					"",
-					"",
-					"29"
-			);
+			i3GEO.util.scriptTag(i3GEO.configura.locaplic
+					+ "/ferramentas/conectargeorss/dependencias.php",
+					"i3GEOF.conectargeorss.iniciaJanelaFlutuante()",
+			"i3GEOF.conectargeorss_script");
 		},
 		wmst: function(){
 			i3GEO.janela.cria(
 					"600px",
 					"400px",
-					i3GEO.configura.locaplic
-					+ "/ferramentas/wmstime/index.htm",
+					i3GEO.configura.locaplic + "/ferramentas/wmstime/index.htm",
 					"",
 					"",
 					$trad("x46")
@@ -93,20 +76,24 @@ i3GEOF.conectarservicos =
 		},
 		wms: function(){
 			i3GEO.janela.cria(
+					"440px",
 					"400px",
-					"300px",
-					i3GEO.configura.locaplic
-					+ "/ferramentas/conectarwms/index.htm",
+					i3GEO.configura.locaplic + "/ferramentas/conectarwms/index.htm",
 					"",
 					"",
-					"</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(28)' >" + $trad("a4") + "</a>",
+					"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("a4") + "</span></div>",
 					"i3GEO.conectarwms",
 					false,
 					"hd",
 					"",
 					"",
 					"",
-					true
+					false,
+					"",
+					"",
+					"nao",
+					"",
+					"28"
 			);
 		},
 		kml: function() {
@@ -141,7 +128,7 @@ i3GEOF.conectarservicos =
 			cabecalho = function() {
 			};
 			// cria a janela flutuante
-			titulo = "</div><div class='i3GeoTituloJanelaBs'>" + $trad("conexao",i3GEOF.conectarservicos.dicionario)+"</div>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("conexao",i3GEOF.conectarservicos.dicionario) + "</span></div>";
 			janela =
 				i3GEO.janela.cria(
 						"230px",
@@ -156,7 +143,11 @@ i3GEOF.conectarservicos =
 						cabecalho,
 						"",
 						"",
-						true
+						true,
+						"",
+						"",
+						"",
+						""
 				);
 			divid = janela[2].id;
 			$i("i3GEOF.conectarservicos_corpo").style.backgroundColor = "white";

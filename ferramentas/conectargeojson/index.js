@@ -82,7 +82,7 @@ i3GEOF.conectargeojson = {
 				var raiz,nraiz,i,combo;
 				raiz = retorno.data.canais;
 				nraiz = raiz.length;
-				combo = "<select onchange='javascript:$i(\"i3GEOconectargeojsonurl\").value = this.value;'>";
+				combo = "<select class='form-control' onchange='javascript:$i(\"i3GEOconectargeojsonurl\").value = this.value;'>";
 				combo += "<option value=''>---</option>";
 				for (i=0;i<nraiz; i++){
 					combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
@@ -129,7 +129,7 @@ i3GEOF.conectargeojson = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >GeoJson</span></div>";
 		janela = i3GEO.janela.cria(
 			"360px",
-			"150px",
+			"180px",
 			"",
 			"",
 			"",

@@ -1,9 +1,11 @@
-<p class="paragrafo">{{{insereEndereco}}}</p>
-<div class="i3geoForm i3geoFormIconeEdita">
-	<input id=i3GEOconectargeojsonurl type="text" value=""  />
+<div class='container-fluid'>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOconectargeojsonurl">{{{insereEndereco}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOconectargeojsonurl' value='' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<div style="width: 100%;"  class="input-group" id='i3GEOconectargeojsonCombo'>
+		</div>
+	</div>
+	<button onclick="i3GEOF.conectargeojson.adiciona()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
 </div>
-<p class=paragrafo >
-<div id='i3GEOconectargeojsonCombo' class='styled-select' ></div>
-<br>
-<p class=paragrafo >
-<input id='i3GEOconectargeojsonbotao1' type='button' value='{{{aplica}}}' />

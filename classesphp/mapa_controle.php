@@ -108,9 +108,9 @@ debug - (pode ser definido como "sim" indica se o erro_reporting deve ser defini
 //pega as variaveis passadas com get ou post
 //
 $tempo = microtime(1);
+
 include_once("sani_request.php");
 $_pg = array_merge($_GET,$_POST);
-
 $interface = $_pg["interface"];
 $funcao = $_pg["funcao"];
 $g_sid = $_pg["g_sid"];
@@ -277,6 +277,7 @@ if($funcao != "recuperamapa" && $funcao != "TEMA2SLD")
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
+
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
@@ -1854,6 +1855,7 @@ switch (strtoupper($funcao))
 		*/
 	case "TEMASWMS":
 		include_once("wmswfs.php");
+		$servico = $_pg["servico"];
 		restauraCon($map_file,$postgis_mapa);
 		$retorno = temaswms();
 	break;

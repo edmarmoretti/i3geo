@@ -24,5 +24,15 @@ i3GEOF.conectargeorss.dicionario = {
 		pt : "Ocorreu um erro",
 		en : "",
 		es : "Ocurri&oacute un error"
+	} ],
+	'listacanais' : [ {
+		pt : "Lista os canais",
+		en : "",
+		es : ""
+	} ],
+	'sel' : [ {
+		pt : "Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo. Utilize as guias acima para ver o resultado da conex&atilde;o",
+		en : "",
+		es : ""
 	} ]
 };

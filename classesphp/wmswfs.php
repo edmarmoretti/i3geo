@@ -340,17 +340,18 @@ Retorno:
 function temaswms()
 {
 	global $servico,$id_ws;
+	//para admin1/cadastros/servicos/exec.php
+	$_GET["funcao"] = "lista";
 	$wms_service_request = gravaCacheWMS($servico);
 	# -------------------------------------------------------------
 	# Test that the capabilites file has successfully downloaded.
 	#
 	//$wms_service_request = "c://temp//teste.xml";
-	include_once(dirname(__FILE__)."/../admin/php/admin.php");
-
-	if(file_exists(dirname(__FILE__)."/../admin1/cadastros/servicoes/exec.php")){
-		include_once(dirname(__FILE__)."/../admin1/cadastros/servicoes/exec.php");
+	if(file_exists(dirname(__FILE__)."/../admin1/cadastros/servicos/exec.php")){
+		include_once(dirname(__FILE__)."/../admin1/cadastros/servicos/exec.php");
 	}
 	else{
+		include_once(dirname(__FILE__)."/../admin/php/admin.php");
 		include_once(dirname(__FILE__)."/../admin/php/webservices.php");
 	}
 

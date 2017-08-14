@@ -7,8 +7,10 @@
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-include ("../../php/checaLogin.php");
-\admin\php\login\checaLogin();
+if($_GET["funcao"] != "lista"){
+	include (dirname(__FILE__)."/../../php/checaLogin.php");
+	\admin\php\login\checaLogin();
+}
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
@@ -26,7 +28,7 @@ include ("funcoes.php");
 //
 include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
-if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/webservices" ) === false) {
+if ($_GET["funcao"] != "lista" && \admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/webservices" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
