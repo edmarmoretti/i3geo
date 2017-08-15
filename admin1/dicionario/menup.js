@@ -216,7 +216,7 @@ i3GEOadmin.menup.dicionario = {
 		es : ""
 	} ],
 	'webServ' : [ {
-		pt : "Web services e links para download",
+		pt : "Endere&ccedil;os de servi&ccedil;os (utilizados nas ferramentas de conex&atilde;o com dados externos)",
 		en : "",
 		es : ""
 	} ],

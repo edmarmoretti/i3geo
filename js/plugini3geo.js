@@ -522,6 +522,7 @@ i3GEO.pluginI3geo =
 		        		   );
 		        		   if($i(onde)){
 		        			   $i(onde).innerHTML = ins;
+		        			   i3GEO.util.aplicaAquarela(onde);
 		        			   return false;
 		        		   } else {
 		        			   return ins;
