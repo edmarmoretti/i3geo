@@ -331,29 +331,35 @@ class Legenda
 			}
 			$desligarLayer = array();
 			if($la->status == MS_DEFAULT){
-				$la->set("minscaledenom",0);
-				$la->set("maxscaledenom",0);
-				$nc = $la->numclasses;
-				$classes = array();
-				for ($c = 0;$c < $nc;$c++){
-					$ck = "checked";
-					$classe = $la->getclass($c);
-					if($classe->status == MS_OFF){
-						$ck = "";
-					}
-					//remove o offset em simbolos do tipo imagem
-					if($classe->numstyles > 0){
-						$estilo = $classe->getstyle(0);
-						if($estilo->symbolname != "" && file_exists($estilo->symbolname)){
-							$estilo->set("offsetx",0);
-							$estilo->set("offsety",0);
+				if($la->getmetadata("legendaimg") != ""){
+					$classes = array();
+					$classes[] = array("nome"=>"","img"=>$la->getmetadata("legendaimg"), "checked"=>"checked", "index" => 0, "layer"=> $la->name );
+					$legenda[] = array("layer"=>$la->name,"nome"=>$this->converte($la->getmetadata("tema")),"classes"=>$classes);
+				} else {
+					$la->set("minscaledenom",0);
+					$la->set("maxscaledenom",0);
+					$nc = $la->numclasses;
+					$classes = array();
+					for ($c = 0;$c < $nc;$c++){
+						$ck = "checked";
+						$classe = $la->getclass($c);
+						if($classe->status == MS_OFF){
+							$ck = "";
 						}
-					}
-					$imagem = $classe->createLegendIcon($w,$h)->saveWebImage();
+						//remove o offset em simbolos do tipo imagem
+						if($classe->numstyles > 0){
+							$estilo = $classe->getstyle(0);
+							if($estilo->symbolname != "" && file_exists($estilo->symbolname)){
+								$estilo->set("offsetx",0);
+								$estilo->set("offsety",0);
+							}
+						}
+						$imagem = $classe->createLegendIcon($w,$h)->saveWebImage();
 
-					$classes[] = array("nome"=>$this->converte($classe->name),"img"=>$imagem, "checked"=>$ck, "index" => $c, "layer"=> $la->name );
+						$classes[] = array("nome"=>$this->converte($classe->name),"img"=>$imagem, "checked"=>$ck, "index" => $c, "layer"=> $la->name );
+					}
+					$legenda[] = array("layer"=>$la->name,"nome"=>$this->converte($la->getmetadata("tema")),"classes"=>$classes);
 				}
-				$legenda[] = array("layer"=>$la->name,"nome"=>$this->converte($la->getmetadata("tema")),"classes"=>$classes);
 			}
 			$desligar[$la->name] = $desligarLayer;
 		}

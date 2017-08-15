@@ -8,14 +8,22 @@ MAP
       "TIP"	"CD_LEGENDA"
       "cache"	"sim"
       "CLASSE"	"sim"
+      "olopacity"	""
       "permitekmz"	"SIM"
+      "gmopacity"	""
+      "gmstatus"	""
       "ITENSDESC"	"Teste de acentuação"
       "TILES"	"SIM"
       "ESCALA"	"250000"
       "editavel"	""
+      "arquivotemaoriginal"	""
       "extensao"	"-73.990940816816 -33.74827031115 -34.822855820777 5.272224303909"
+      "nomeoriginal"	""
+      "olstatus"	""
       "permitedownload"	"SIM"
+      "FILTROORIGINAL"	""
       "permitecomentario"	"NAO"
+      "DATAORIGINAL"	""
       "escondido"	"NAO"
       "download"	"SIM"
       "esquematabelaeditavel"	""
@@ -30,6 +38,7 @@ MAP
       "colunageometria"	""
       "identifica"	"sim"
       "tabelaeditavel"	""
+      "legendaimg"	"https://mancilha.files.wordpress.com/2008/09/teste2.png"
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
@@ -96,5 +105,6 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
+
 END # MAP
-					
+

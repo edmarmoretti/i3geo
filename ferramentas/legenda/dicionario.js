@@ -871,7 +871,7 @@ i3GEOF.legenda.dicionario =
  		],
   		"legendaImg" : [
   			{
- 				pt : "Imagem que ser&aacute; utilizada no lugar da montagem autom&aacute;tica da legenda",
+ 				pt : "URL de uma imagem que ser&aacute; utilizada no lugar da montagem autom&aacute;tica da legenda",
  				en : "",
  				es : ""
  			}
