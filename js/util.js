@@ -1378,6 +1378,9 @@ i3GEO.util =
 		 * {boolean} - (opcional) inclui um option vazio
 		 */
 		comboTemas : function(id, funcao, onde, nome, multiplo, tipoCombo, estilo, yui, incluiVazio, classe) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.util.comboTemas()");
+
 			if (onde && onde !== "") {
 				//i3GEO.util.defineValor(onde, "innerHTML", "<span style=color:red;font-size:10px; >buscando temas...</span>");
 			}
@@ -1409,6 +1412,10 @@ i3GEO.util =
 					id = id + "select";
 					nome = id;
 				}
+				if (retorno == undefined || retorno.length == 0) {
+					retorno = {"data": [{"tema":"","nome":"---"}]};
+					incluiVazio = false;
+				}
 				if (retorno !== undefined) {
 					if (retorno.data) {
 						retorno = retorno.data;
@@ -1421,7 +1428,7 @@ i3GEO.util =
 						} else {
 							comboTemas += "<select class='" + classe + "' style='" + estilo + "' id='" + id + "' name='" + nome + "'>";
 						}
-						if (yui === false || incluiVazio === true) {
+						if (incluiVazio === true) {
 							comboTemas += "<option value=''>"+$trad("x92")+"</option>";
 						}
 						for (i = 0; i < n; i++) {
@@ -1478,6 +1485,14 @@ i3GEO.util =
 					monta(temp1.concat(temp2));
 				} else {
 					i3GEO.php.listaTemas(monta, "ligados", i3GEO.configura.locaplic, i3GEO.configura.sid);
+				}
+			}
+			if (tipoCombo === "comTabela") {
+				if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
+					temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 3, "menor", i3GEO.arvoreDeCamadas.CAMADAS);
+					temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
+					temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
+					monta(temp1.concat(temp2));
 				}
 			}
 			if (tipoCombo === "locais") {

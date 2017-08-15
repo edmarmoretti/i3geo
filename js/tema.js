@@ -488,6 +488,13 @@ i3GEO.tema =
 			 *
 			 */
 			cortina : function(tema) {
+				if(idtema && idtema != ""){
+					var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+					if(t.status < 2){
+						i3GEO.janela.tempoMsg($trad("deveLigada"));
+						return;
+					}
+				}
 				i3GEO.mapa.ativaTema(tema);
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.tema.dialogo.cortina()",
@@ -583,6 +590,13 @@ i3GEO.tema =
 			 * {objeto} - propriedades (ver ferramentas/graficotema/index.js funcao iniciaJanelaFlutuante)
 			 */
 			graficotema : function(idtema,propriedades) {
+				if(idtema && idtema != ""){
+					var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+					if(t.status < 2){
+						i3GEO.janela.tempoMsg($trad("deveLigada"));
+						return;
+					}
+				}
 				i3GEO.mapa.ativaTema(idtema);
 				var temp = function(){
 					i3GEOF.graficoTema.iniciaJanelaFlutuante(propriedades);
@@ -604,6 +618,13 @@ i3GEO.tema =
 			 * {string} - codigo do tema
 			 */
 			toponimia : function(idtema) {
+				if(idtema && idtema != ""){
+					var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+					if(t.status < 2){
+						i3GEO.janela.tempoMsg($trad("deveLigada"));
+						return;
+					}
+				}
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.tema.dialogo.toponimia()",
@@ -626,6 +647,13 @@ i3GEO.tema =
 			 * {string} - id do elemento que recebera o filtro
 			 */
 			filtro : function(idtema,modoCalculadora,idRetorno) {
+				if(idtema && idtema != ""){
+					var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+					if(t.status < 2){
+						i3GEO.janela.tempoMsg($trad("deveLigada"));
+						return;
+					}
+				}
 				i3GEO.mapa.ativaTema(idtema);
 				var temp = function(){
 					i3GEOF.filtro.iniciaJanelaFlutuante(modoCalculadora,idRetorno);
@@ -665,6 +693,13 @@ i3GEO.tema =
 			 * {string} - id que identifica o tema conforme definido no map file
 			 */
 			tabela : function(idtema) {
+				if(idtema && idtema != ""){
+					var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+					if(t.status < 2){
+						i3GEO.janela.tempoMsg($trad("deveLigada"));
+						return;
+					}
+				}
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.tema.dialogo.tabela()",
@@ -683,6 +718,13 @@ i3GEO.tema =
 			 * {string} - id que identifica o tema conforme definido no map file
 			 */
 			etiquetas : function(idtema) {
+				if(idtema && idtema != ""){
+					var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+					if(t.status < 2){
+						i3GEO.janela.tempoMsg($trad("deveLigada"));
+						return;
+					}
+				}
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.tema.dialogo.etiquetas()",
@@ -701,6 +743,13 @@ i3GEO.tema =
 			 * {string} - id que identifica o tema conforme definido no map file
 			 */
 			editaLegenda : function(idtema) {
+				if(idtema && idtema != ""){
+					var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+					if(t.status < 2){
+						i3GEO.janela.tempoMsg($trad("deveLigada"));
+						return;
+					}
+				}
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.tema.dialogo.editaLegenda()",
@@ -719,6 +768,11 @@ i3GEO.tema =
 			 * {string} - id que identifica o tema conforme definido no map file
 			 */
 			editaClasseLegenda : function(idtema,idclasse) {
+				var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+				if(t.status < 2){
+					i3GEO.janela.tempoMsg($trad("deveLigada"));
+					return;
+				}
 				i3GEO.mapa.ativaTema(idtema);
 				var temp = function() {
 					i3GEOF.legenda.aposIniciar = function(){

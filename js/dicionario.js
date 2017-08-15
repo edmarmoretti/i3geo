@@ -2953,5 +2953,10 @@ g_traducao =
 			pt : "Cat&aacute;logo da INDE j&aacute; est&aacute; dispon&iacute;vel",
 			en : "",
 			es : ""
+		}],
+		"deveLigada" : [{
+			pt : "A camada deve estar vis&iacute;vel",
+			en : "",
+			es : ""
 		}]
 	};

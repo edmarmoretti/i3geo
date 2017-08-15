@@ -144,7 +144,6 @@ i3GEOF.tabela =
 					if (botao.value != "") {
 						i3GEO.mapa.ativaTema(botao.value);
 						i3GEOF.tabela.propJanelas[idjanela].tema = botao.value;
-						//$i(idjanela + "_corpo").innerHTML = "";
 						i3GEOF.tabela.inicia(iddiv, idjanela);
 					}
 				}
@@ -154,7 +153,7 @@ i3GEOF.tabela =
 					idjanela + "i3GEOFtabelaComboCabeca",
 					idjanela + "i3GEOFtabelaComboCabecaSel",
 					"tabela",
-					"ligadosComTabela",
+					"comTabela",
 					onButtonClick);
 			}
 			if (i3GEOF.tabela.propJanelas[idjanela].tema === "") {
