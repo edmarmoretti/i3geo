@@ -14,13 +14,13 @@
 					<div class="form-group form-group-lg">
 						<label class="col-md-6 control-label" for="titulolegenda" >{{{tituloLegenda}}}</label>
 						<div class="col-md-6">
-							<input title="{{{tituloLegenda}}}" type="text" value="{{{titulolegenda}}}" class="form-control" name="titulolegenda" >
+							<input title="{{{tituloLegenda}}}" type="text" value="{{{titulolegenda}}}" class="form-control" name="titulolegenda" required >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
 						<label class="col-md-6 control-label" for="nome_tema" >{{{tituloTema}}}</label>
 						<div class="col-md-6">
-							<input placeholder="{{{tituloPt}}}" title="{{{tituloTema}}}" type="text" value="{{{nome_tema}}}" class="form-control" name="nome_tema" >
+							<input placeholder="{{{tituloPt}}}" title="{{{tituloTema}}}" type="text" value="{{{nome_tema}}}" class="form-control" name="nome_tema" required >
 						</div>
 					</div>
 					<div class="form-group form-group-lg">

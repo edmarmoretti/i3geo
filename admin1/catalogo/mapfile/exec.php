@@ -91,7 +91,7 @@ switch ($funcao) {
 		\admin\php\funcoesAdmin\retornaJSON ( $retorna );
 		break;
 	case "LISTAUNICO" :
-		$retorna = \admin\catalogo\mapfile\listaUnico ( $dbh, $codigo );
+		$retorna = \admin\catalogo\mapfile\listaUnico ( $dbhw, $codigo );
 		$dbhw = null;
 		$dbh = null;
 		if ($retorna === false) {

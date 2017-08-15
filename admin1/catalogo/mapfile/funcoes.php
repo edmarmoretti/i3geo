@@ -394,7 +394,8 @@ function listar($dbh, $filtro = "", $palavra = "", $validar = "") {
 	}
 	return $lista;
 }
-function listaUnico($dbh, $codigo) {
+//usar dbhw pois pode ser necessario adicionar o registro
+function listaUnico($dbhw, $codigo) {
 	$convUTF = $_SESSION["convUTF"];
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$locaplic = $_SESSION["locaplic"];
@@ -410,7 +411,7 @@ function listaUnico($dbh, $codigo) {
 	}
 	$titulolegenda = $layer->getmetadata("TEMA");
 	$metaestat = $layer->getmetadata("METAESTAT");
-	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' ", $dbh, false );
+	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' ", $dbhw, false );
 	//se nao existir no sistema de admin, faz o registro
 	if(count($dados) == 0){
 		$dataCol = array (
@@ -428,7 +429,7 @@ function listaUnico($dbh, $codigo) {
 				"en" => ""
 		);
 		$id_tema = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico($dbhw,"i3geoadmin_temas",$dataCol,"link_tema","id_tema");
-		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' AND id_tema = $id_tema ", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' AND id_tema = $id_tema ", $dbhw, false );
 		if(count($dados) == 0){
 			$dbhw = null;
 			$dbh = null;
