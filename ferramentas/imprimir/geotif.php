@@ -65,68 +65,31 @@ require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 //error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
-$temp = str_replace(".map","",$map_file)."xxx.map";
-$map->save($temp);
-substituiCon($temp,$postgis_mapa);
+substituiConObj($map,$postgis_mapa);
 $of = $map->outputformat;
 $of->set("driver","GDAL/GTiff");
 $of->set("imagemode","RGB");
 $map = ms_newMapObj($temp);
-if($map->getmetadata("interface") == "googlemaps")
-{
+if($map->getmetadata("interface") == "googlemaps"){
 	$proj4 = pegaProjecaoDefault("proj4");
 	$map->setProjection($proj4);
 	$map->set("units",MS_METERS);
 	$map->preparequery();
 	$map->set("scaledenom",$map->scaledenom * 100000);
 }
-//$legenda =$map->legend;
-//$legenda->set("status",MS_EMBED);
-//altera o nome das classes vazias
-$temas = $map->getalllayernames();
-foreach ($temas as $tema)
-{
-	$layer = $map->getlayerbyname($tema);
-	if (($layer->data != "") && (strtolower($layer->getmetadata("escondido")) != "sim") && (strtolower($layer->getmetadata("tema")) != "nao"))
-	{
-		if ($layer->numclasses > 0)
-		{
-			$classe = $layer->getclass(0);
-			if (($classe->name == "") || ($classe->name == " "))
-			{$classe->set("name",$layer->getmetadata("tema"));}
-		}
-	}
-	if ($layer->getmetadata("classe") == "NAO")
-	{
-		$nclasses = $layer->numclasses;
-		if ($nclasses > 0)
-		{
-			for($i=0;$i<$nclasses;$i++)
-			{
-				$classe = $layer->getclass($i);
-				$classe->set("name","classeNula");
-			}
-		}
-	}
-}
-$map->save($temp);
-removeLinha("classeNula",$temp);
-$map = ms_newMapObj($temp);
-substituiCon($temp,$postgis_mapa);
 $o = $map->outputformat;
 if($mapexten != ""){
 	$ext = explode(" ",$mapexten);
 	$extatual = $map->extent;
 	$extatual->setextent($ext[0],$ext[1],$ext[2],$ext[3]);
 }
-//$legenda = $map->legend;
-//$legenda->set("status",MS_EMBED);
 $o->set("imagemode",MS_IMAGEMODE_RGB);
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 //mapa
 $imgo = $map->draw();
-if($imgo->imagepath == "")
-{echo "Erro IMAGEPATH vazio";exit;}
+if($imgo->imagepath == ""){
+	echo "Erro IMAGEPATH vazio";exit;
+}
 $nomer = ($imgo->imagepath)."mapa".$nomes.".tif";
 $imgo->saveImage($nomer);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
@@ -135,12 +98,24 @@ $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageu
 $numlayers = $map->numlayers;
 for ($j=0;$j < $numlayers;$j++){
 	$l = $map->getlayer($j);
-	if($l->type != 3 && $l->type != 4){
-		$nclass = $l->numclasses;
-		for($i=0;$i<$nclass;$i++){
-			$classe = $l->getclass($i);
-			if($classe->title === ""){
-				$classe->title = $classe->name;
+	if ($l->getmetadata("classe") == "NAO"){
+		$l->set("status",MS_OFF);
+	} else {
+		if (($l->data != "") && (strtolower($l->getmetadata("escondido")) != "sim") && (strtolower($l->getmetadata("tema")) != "nao")){
+			if ($l->numclasses > 0){
+				$classe = $l->getclass(0);
+				if (($classe->name == "") || ($classe->name == " ")){
+					$classe->set("name",$layer->getmetadata("tema"));
+				}
+			}
+		}
+		if($l->type != 3 && $l->type != 4){
+			$nclass = $l->numclasses;
+			for($i=0;$i<$nclass;$i++){
+				$classe = $l->getclass($i);
+				if($classe->title === ""){
+					$classe->title = $classe->name;
+				}
 			}
 		}
 	}

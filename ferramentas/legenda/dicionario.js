@@ -52,7 +52,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'mostraClassesLegenda' : [
 			{
-				pt : "Mostra as classes desse tema na legenda do mapa",
+				pt : "Ao imprimir, mostra as classes desse tema na legenda do mapa ",
 				en : "",
 				es : ""
 			}

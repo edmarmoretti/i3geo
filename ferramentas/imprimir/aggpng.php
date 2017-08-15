@@ -128,11 +128,27 @@ if($imgo->imagepath == "")
 $nomer = ($imgo->imagepath)."mapa".$nomes.".png";
 $imgo->saveImage($nomer);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
+//escala
+$imgo = $map->drawscalebar();
+$nomer = ($imgo->imagepath)."escala".$nomes.".png";
+$imgo->saveImage($nomer);
+$nomeescala = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
+//refer&ecirc;ncia
+$o = $map->reference->outlinecolor;
+$o->setrgb(255,0,0);
+$map->preparequery();
+$imgo = $map->drawreferencemap();
+$nomer = ($imgo->imagepath)."ref".$nomes.".png";
+$imgo->saveImage($nomer);
+$nomeref = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
 //legenda
 //corrige o titulo da legenda
 $numlayers = $map->numlayers;
 for ($j=0;$j < $numlayers;$j++){
 	$l = $map->getlayer($j);
+	if(strtoupper($l->getmetadata("classe")) == "NAO"){
+		$l->set("status",MS_OFF);
+	}
 	if($l->type != 3 && $l->type != 4){
 		$nclass = $l->numclasses;
 		for($i=0;$i<$nclass;$i++){
@@ -147,20 +163,6 @@ $imgo = $map->drawlegend();
 $nomer = ($imgo->imagepath)."legenda".$nomes.".png";
 $imgo->saveImage($nomer);
 $nomelegenda = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
-//escala
-$imgo = $map->drawscalebar();
-$nomer = ($imgo->imagepath)."escala".$nomes.".png";
-$imgo->saveImage($nomer);
-$nomeescala = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
-//refer&ecirc;ncia
-$o = $map->reference->outlinecolor;
-$o->setrgb(255,0,0);
-$map->preparequery();
-$imgo = $map->drawreferencemap();
-$nomer = ($imgo->imagepath)."ref".$nomes.".png";
-$imgo->saveImage($nomer);
-$nomeref = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
-
 
 echo "<p>Utilize a op&ccedil;&atilde;o de altera&ccedil;&atilde;o das propriedades do mapa para ajustar a legenda, tamanho e outras caracter&iacute;sticas antes de gerar os arquivos.</p>";
 echo "<p>Arquivos gerados:</p>";

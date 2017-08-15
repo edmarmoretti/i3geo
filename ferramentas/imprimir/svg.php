@@ -65,10 +65,7 @@ require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $nomes = nomeRandomico();
 
 $map = ms_newMapObj($map_file);
-$temp = str_replace(".map","xxx.map",$map_file);
-$map->save($temp);
-substituiCon($temp,$postgis_mapa);
-$map = ms_newMapObj($temp);
+substituiConObj($map,$postgis_mapa);
 if($map->getmetadata("interface") == "googlemaps")
 {
 	$proj4 = pegaProjecaoDefault("proj4");
@@ -85,57 +82,30 @@ if($leb->type == "MS_BITMAP"){
 	$leb->set("type",MS_TRUETYPE);
 	$leb->set("font","Arial");
 }
-//altera o nome das classes vazias
+//legenda
+//corrige o titulo da legenda
 $numlayers = $map->numlayers;
-for ($i=0;$i < $numlayers;$i++)
-{
-	$layer = $map->getlayer($i);
-	if (($layer->data != "") && (strtolower($layer->getmetadata("escondido")) != "sim") && (strtolower($layer->getmetadata("tema")) != "sim"))
-	{
-		if ($layer->numclasses > 0)
-		{
-			$classe = $layer->getclass(0);
-			if (($classe->name == "") || ($classe->name == " "))
-			{$classe->set("name",$layer->getmetadata("tema"));}
-		}
-	}
-	if ($layer->getmetadata("classe") == "NAO")
-	{
-		$nclasses = $layer->numclasses;
-		if ($nclasses > 0)
-		{
-			for($j=0;$j<$nclasses;$j++)
-			{
-				$classe = $layer->getclass($j);
-				$classe->set("name","classeNula");
-			}
-		}
-	}
-
-	$nclasses = $layer->numclasses;
-	if ($nclasses > 0){
-		for($j=0;$j<$nclasses;$j++){
-			$classe = $layer->getclass($j);
-			$leb = false;
-			if($v["inteiro"] >= 60200){
-				if($classe->numlabels > 0){
-					$leb = $classe->getLabel(0);
+for ($j=0;$j < $numlayers;$j++){
+	$l = $map->getlayer($j);
+		if (($l->data != "") && (strtolower($l->getmetadata("escondido")) != "sim") && (strtolower($l->getmetadata("tema")) != "nao")){
+			if ($l->numclasses > 0){
+				$classe = $l->getclass(0);
+				if (($classe->name == "") || ($classe->name == " ")){
+					$classe->set("name",$layer->getmetadata("tema"));
 				}
 			}
-			else{
-				$leb = $classe->label;
-			}
-			if($leb != false && $leb->type == MS_BITMAP){
-				$leb->set("type",MS_TRUETYPE);
-				$leb->set("font","Arial");
+		}
+		if($l->type != 3 && $l->type != 4){
+			$nclass = $l->numclasses;
+			for($i=0;$i<$nclass;$i++){
+				$classe = $l->getclass($i);
+				if($classe->title === ""){
+					$classe->title = $classe->name;
+				}
 			}
 		}
-	}
 }
-$map->save($temp);
-removeLinha("classeNula",$temp);
-$map = ms_newMapObj($temp);
-substituiCon($temp,$postgis_mapa);
+
 $o = $map->outputformat;
 if($mapexten != ""){
 	$ext = explode(" ",$mapexten);

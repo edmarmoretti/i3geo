@@ -257,7 +257,7 @@ i3GEO.tema =
 		 * {string} - codigo do tema
 		 */
 		invertestatuslegenda : function(idtema) {
-			i3GEO.janela.tempoMsg($trad("x17"));
+			//i3GEO.janela.tempoMsg($trad("x17"));
 			i3GEO.mapa.ativaTema(idtema);
 			i3GEO.php.invertestatuslegenda(function(retorno) {
 				i3GEO.atualiza(retorno);

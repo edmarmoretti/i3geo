@@ -35,6 +35,7 @@ require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 //error_reporting(0);
 $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
+substituiConObj($map,$postgis_mapa);
 $legenda =$map->legend;
 $legenda->set("status",MS_EMBED);
 //altera o nome das classes vazias
@@ -64,9 +65,9 @@ foreach ($temas as $tema)
 		}
 	}
 }
-$map->save($temp);
+
 removeLinha("classeNula",$temp);
-$map = ms_newMapObj($temp);
+
 $of = $map->outputformat;
 $of->set("driver","swf");
 $of->set("imagemode","PC256");

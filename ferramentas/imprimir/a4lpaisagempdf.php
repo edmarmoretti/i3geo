@@ -106,14 +106,13 @@ $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 $pathMapa = $dir_tmp."/".basename($imgo->imageurl)."/".basename($nomer);
 $nomeImagem = nomeRandomico();
 $legenda = $map->legend;
-//$legenda->set("keysizex",20);
-//$legenda->set("keysizey",20);
-//$label = $legenda->label;
-//$label->set("size",14);
 //corrige o titulo da legenda
 $numlayers = $map->numlayers;
 for ($j=0;$j < $numlayers;$j++){
 	$l = $map->getlayer($j);
+	if(strtoupper($l->getmetadata("classe")) == "NAO"){
+		$l->set("status",MS_OFF);
+	}
 	if($l->type != 3 && $l->type != 4){
 		$nclass = $l->numclasses;
 		for($i=0;$i<$nclass;$i++){
