@@ -288,6 +288,9 @@ i3GEOF.tme =
 		ativaFoco : function() {
 		},
 		salvaParametros: function(){
+			if(i3GEOF.tme.aguarde.visibility == "visible"){
+				return;
+			}
 			//monta a string JSON que sera enviada para gravacao
 			//'{"titulo":"População","colnome":"CNTRY_NAME","colsdata":["POP_CNTRY"],"lmax":"100000","amax":"2000000","auto":"sim","exec":"sim"}'
 			var j, colsdata = i3GEOF.tme.pegaItensMarcados(), auto = "nao", exec = "nao";
@@ -318,38 +321,35 @@ i3GEOF.tme =
 				+ exec
 				+ '"}';
 
-			i3GEO.janela.confirma($trad("incluiPar", i3GEOF.tme.dicionario), 300, $trad("x14"),
-				"", function() {
-					p = i3GEO.configura.locaplic + "/ferramentas/tme/manutencao.php";
-					par = "&g_sid=" + i3GEO.configura.sid
-						+ "&tema=" + i3GEOF.tme.tema
-						+ "&tme=" + i3GEO.util.base64encode(j)
-						+ "&funcao=incluitme";
+				p = i3GEO.configura.locaplic + "/ferramentas/tme/manutencao.php";
+				par = "&g_sid=" + i3GEO.configura.sid
+					+ "&tema=" + i3GEOF.tme.tema
+					+ "&tme=" + i3GEO.util.base64encode(j)
+					+ "&funcao=incluitme";
 
-					retorno =
-						function(retorno) {
-							i3GEO.janela.fechaAguarde("tme");
-						};
-					i3GEO.janela.abreAguarde("tme", $trad("o1"));
-					cpJSON.call(p, "foo", retorno, par);
-				});
+				retorno =
+					function(retorno) {
+					i3GEOF.tme.aguarde.visibility = "hidden";
+					};
+				i3GEOF.tme.aguarde.visibility = "visible";
+				cpJSON.call(p, "foo", retorno, par);
 
 		},
 		removeParametros: function(){
-			i3GEO.janela.confirma($trad("removePar", i3GEOF.tme.dicionario), 300, $trad("x14"),
-				"", function() {
-					p = i3GEO.configura.locaplic + "/ferramentas/tme/manutencao.php";
-					par = "&g_sid=" + i3GEO.configura.sid
-						+ "&tema=" + i3GEOF.tme.tema
-						+ "&funcao=removetme";
+			if(i3GEOF.tme.aguarde.visibility == "visible"){
+				return;
+			}
+			p = i3GEO.configura.locaplic + "/ferramentas/tme/manutencao.php";
+			par = "&g_sid=" + i3GEO.configura.sid
+				+ "&tema=" + i3GEOF.tme.tema
+				+ "&funcao=removetme";
 
-					retorno =
-						function(retorno) {
-							i3GEO.janela.fechaAguarde("tme");
-						};
-					i3GEO.janela.abreAguarde("tme", $trad("o1"));
-					cpJSON.call(p, "foo", retorno, par);
-				});
+			retorno =
+				function(retorno) {
+				i3GEOF.tme.aguarde.visibility = "hidden";
+				};
+			i3GEOF.tme.aguarde.visibility = "visible";
+			cpJSON.call(p, "foo", retorno, par);
 		},
 		/*
 		 * Function: montaListaItens

@@ -250,6 +250,9 @@ i3GEOF.storymap =
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 		},
 		salvaParametros : function() {
+			if(i3GEOF.storymap.aguarde.visibility == "visible"){
+				return;
+			}
 			var j;
 			j =
 				'{"cabecalho":"' + $i("i3GEOStocabecalho").value
@@ -269,7 +272,6 @@ i3GEOF.storymap =
 					+ $i("i3GEOstocollatCombo").value
 					+ '"}';
 
-			i3GEO.janela.confirma($trad("incluiPar", i3GEOF.storymap.dicionario), 300, $trad("x14"), "", function() {
 				p = i3GEO.configura.locaplic + "/ferramentas/storymap/manutencao.php";
 				par =
 					"&g_sid=" + i3GEO.configura.sid
@@ -280,23 +282,23 @@ i3GEOF.storymap =
 						+ "&funcao=inclui";
 
 				retorno = function(retorno) {
-					i3GEO.janela.fechaAguarde("storymap");
+					i3GEOF.storymap.aguarde.visibility = "hidden";
 				};
-				i3GEO.janela.abreAguarde("storymap", $trad("o1"));
+				i3GEOF.storymap.aguarde.visibility = "visible";
 				cpJSON.call(p, "foo", retorno, par);
-			});
 
 		},
 		removeParametros : function() {
-			i3GEO.janela.confirma($trad("removePar", i3GEOF.storymap.dicionario), 300, $trad("x14"), "", function() {
-				p = i3GEO.configura.locaplic + "/ferramentas/storymap/manutencao.php";
+			if(i3GEOF.storymap.aguarde.visibility == "visible"){
+				return;
+			}
+			p = i3GEO.configura.locaplic + "/ferramentas/storymap/manutencao.php";
 				par = "&g_sid=" + i3GEO.configura.sid + "&tema=" + i3GEOF.storymap.tema + "&funcao=remove";
 
 				retorno = function(retorno) {
-					i3GEO.janela.fechaAguarde("storymap");
+					i3GEOF.storymap.aguarde.visibility = "hidden";
 				};
-				i3GEO.janela.abreAguarde("storymap", $trad("o1"));
+				i3GEOF.storymap.aguarde.visibility = "visible";
 				cpJSON.call(p, "foo", retorno, par);
-			});
 		}
 	};

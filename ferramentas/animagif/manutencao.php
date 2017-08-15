@@ -20,22 +20,24 @@ $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
 	case "REMOVE":
+		$retorno = "erro";
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($tema);
 		if($l != ""){
-			$l->setmetadata("tme","");
+			$l->setmetadata("animagif","");
 			$mapa->save($map_file);
+			$retorno = "ok";
 		}
-		$retorno = "ok";
 	break;
 	case "INCLUI":
+		$retorno = "erro";
 		$mapa = ms_newMapObj($map_file);
 		$l = $mapa->getlayerbyname($tema);
 		if($l != ""){
 			$l->setmetadata("animagif",str_replace("\\","'",$_POST["animagif"]));
 			$mapa->save($map_file);
+			$retorno = "ok";
 		}
-		$retorno = "ok";
 	break;
 }
 cpjson($retorno);
