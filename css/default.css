@@ -1,3 +1,13 @@
+/*
+Utilizado no elemento select
+*/
+.careti {
+	float: right;
+	position: relative;
+	top: -20px;
+	z-index: 2;
+}
+
 .iconeAjudaFerramentas {
     cursor: help;
     margin-left: 0px;
