@@ -3343,6 +3343,17 @@ i3GEO.util =
 			m = m.replace(re, '&');
 			return m;
 		},
+		checaHtmlVazio: function(id){
+			var i = $i(id);
+			if(!i){
+				return null;
+			}
+			if(i.innerHTML.replace(/^\s+|\s+$/, '') == ""){
+				return true;
+			} else {
+				return false;
+			}
+		},
 		/**
 		 * Function: uid
 		 *

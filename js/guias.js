@@ -441,7 +441,6 @@ i3GEO.guias =
 					if($(obj).attr("data-idMigalha") != undefined){
 						f.idMigalha = $(obj).attr("data-idMigalha");
 					}
-
 					var ondeMenus = $( "#" + f.idMenus );
 
 					i3GEO.catalogoMenus.listaMenus({
@@ -480,7 +479,9 @@ i3GEO.guias =
 					if($(obj).attr("data-idLinks") != undefined){
 						i3GEO.guias.CONFIGURA.ferramentas.idLinks = $(obj).attr("data-idLinks");
 					}
-
+					if(i3GEO.util.checaHtmlVazio(i3GEO.guias.CONFIGURA.ferramentas.idLista) == false || i3GEO.util.checaHtmlVazio(i3GEO.guias.CONFIGURA.ferramentas.idLinks) == false){
+						return;
+					}
 					var f = i3GEO.guias.CONFIGURA.ferramentas;
 
 					i3GEO.caixaDeFerramentas.inicia({
