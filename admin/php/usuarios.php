@@ -148,7 +148,12 @@ function enviarSenhaEmail(){
 	$novaSenha = rand(9000,1000000);
 	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where id_usuario = $id_usuario and ativo = 1");
 	if(count($dados) > 0){
-		$senha = md5($novaSenha);
+		//$senha = md5($novaSenha);
+		if(!function_exists("password_hash")){
+			$senha = md5($novaSenha);
+		} else {
+			$senha = password_hash($novaSenha, PASSWORD_DEFAULT);
+		}
 		$sql = "UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='$senha' WHERE id_usuario = $id_usuario";
 		$dbhw->query($sql);
 		i3GeoAdminInsertLog($dbhw,$sql);
@@ -186,8 +191,11 @@ function alterarUsuarios()
 			);
 			//se a senha foi enviada, ela sera trocada
 			if($_GET["senha"] != ""){
-				//$dataCol["senha"] = md5($_GET["senha"]);
-				$dataCol["senha"] = password_hash($_GET["senha"], PASSWORD_DEFAULT);
+				if(!function_exists("password_hash")){
+					$dataCol["senha"] = md5($_GET["senha"]);
+				} else {
+					$dataCol["senha"] = password_hash($_GET["senha"], PASSWORD_DEFAULT);
+				}
 			}
 			i3GeoAdminUpdate($dbhw,"i3geousr_usuarios",$dataCol,"WHERE id_usuario = $id_usuario");
 			$retorna = $id_usuario;

@@ -85,7 +85,7 @@ function alterar($id_usuario, $ativo, $data_cadastro, $email, $login, $nome_usua
 		if(!function_exists("password_hash")){
 			$dataCol ["senha"] = md5 ( $senha );
 		} else {
-			$dataCol["senha"] = password_hash($_GET["senha"], PASSWORD_DEFAULT);
+			$dataCol["senha"] = password_hash($senha, PASSWORD_DEFAULT);
 		}
 	}
 	$resultado = \admin\php\funcoesAdmin\i3GeoAdminUpdate ( $dbhw, "i3geousr_usuarios", $dataCol, "WHERE id_usuario = $id_usuario" );

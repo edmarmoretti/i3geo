@@ -57,11 +57,11 @@ switch ($funcao) {
 		$dbhw = null;
 		$dbh = null;
 		if ($novo != false) {
-			if (strtolower ( $enviaSenha ) == "on") {
-				if ($senha == "" || $email == "") {
+			if (strtolower ( $_POST["enviaSenha"] ) == "on") {
+				if ($_POST["senha"] == "" || $_POST["email"] == "") {
 					header ( "HTTP/1.1 500 para enviar a senha &eacute; necess&aacute;rio preencher o valor de senha e e-mail" );
 				} else {
-					$dados = \admin\usuarios\cadastro\enviarSenha ( $senha, $email );
+					$dados = \admin\usuarios\cadastro\enviarSenha ( $_POST["senha"], $_POST["email"] );
 				}
 			}
 		} else {
@@ -75,11 +75,11 @@ switch ($funcao) {
 		if ($novo === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
-			if (strtolower ( $enviaSenha ) == "on") {
-				if ($senha == "" || $email == "") {
+			if (strtolower ( $_POST["enviaSenha"] ) == "on") {
+				if ($_POST["senha"] == "" || $_POST["email"] == "") {
 					$dados = header ( "HTTP/1.1 500 para enviar a senha &eacute; necess&aacute;rio preencher o valor de senha e e-mail" );
 				} else {
-					$dados = \admin\usuarios\cadastro\enviarSenha ( $senha, $email );
+					$dados = \admin\usuarios\cadastro\enviarSenha ( $_POST["senha"], $_POST["email"] );
 				}
 			}
 		}

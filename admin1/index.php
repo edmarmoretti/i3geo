@@ -107,7 +107,12 @@ include "head.php";
 		$(".hidden").removeClass('hidden');
 		$.material.init();
 	};
-	i3GEO.login.verificaOperacao("admin/html/identifica",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
+	if(i3GEO.login.verificaCookieLogin() == true){
+		inicia();
+	} else {
+		i3GEOadmin.core.erroLogin();
+	}
+	//i3GEO.login.verificaOperacao("admin/html/identifica",i3GEO.configura.locaplic, inicia, "sessao" ,i3GEOadmin.core.erroLogin);
 	</script>
 </body>
 </html>

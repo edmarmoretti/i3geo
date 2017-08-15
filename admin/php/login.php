@@ -115,7 +115,6 @@ switch (strtoupper($funcao))
 		$usuario = $_POST["usuario"];
 		$senha = $_POST["senha"];
 		$teste = autenticaUsuario($usuario,$senha);
-
 		if($teste == "muitas tentativas"){
 			logoutUsuario();
 			header ( "HTTP/1.1 403 Muitas tentativas" );
@@ -351,7 +350,7 @@ function autenticaUsuario($usuario,$senha){
 		$dados = array();
 		//por causa das versoes antigas do PHP
 		if(strlen($senha) == 32 || !function_exists("password_hash") ){
-			$dados = pegaDados("select id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
+			$dados = pegaDados("select senha,login,id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
 			if(count($dados) == 1 && $dados[0]["senha"] == $senhamd5 && $dados[0]["login"] == $usuario){
 				$ok = true;
 			}

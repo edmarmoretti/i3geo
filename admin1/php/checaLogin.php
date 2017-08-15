@@ -37,6 +37,17 @@ if (isset ( $_GET )) {
 		}
 	}
 }
+if (isset ( $_POST )) {
+	foreach ( array_keys ( $_POST ) as $k ) {
+		$k = str_ireplace ( $bl, "", $k );
+		$k = filter_var ( $k, FILTER_SANITIZE_STRING );
+		if ($_POST [$k] != "''") {
+			$v = strip_tags ( $_POST [$k] );
+			$v = str_ireplace ( $bl, "", $v );
+			$_POST [$k] = trim ( $v );
+		}
+	}
+}
 // variaveis mais comuns
 $funcao = isset($_GET['funcao']) ? $_GET['funcao'] : '';
 $perfil = isset($_GET['perfil']) ? $_GET['perfil'] : '';
