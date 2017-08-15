@@ -38,7 +38,6 @@ MAP
       "colunaidunico"	""
       "identifica"	"sim"
       "tabelaeditavel"	""
-      "legendaimg"	"https://mancilha.files.wordpress.com/2008/09/teste2.png"
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"

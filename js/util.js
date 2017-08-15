@@ -2385,7 +2385,7 @@ i3GEO.util =
 			}
 			ins = '<div id="' + id + '_cabecalho" class="hd" style="left:10px;">';
 			if (i3GEO && i3GEO.arvoreDeCamadas) {
-				ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px;top:0px;display:" + displayComboTemas + ";'>   ------</div>";
+				ins += "<div  id='i3geo_janelaCorRampComboCabeca' class='comboTemasCabecalhoBs form-group' style='width:200px;top:0px;display:none;'>   ------</div>";
 			}
 			ins += "&nbsp;&nbsp;&nbsp;" + texto;
 			ins += '</div><div id="i3geo_janelaCorRamp_corpo" class="bd" style="padding:5px">';
