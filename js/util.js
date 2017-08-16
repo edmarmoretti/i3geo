@@ -3288,7 +3288,7 @@ i3GEO.util =
 			//id pode ter ponto !!!
 			$($i(onde)).find(".i3geoFormIconeAquarela").click(function() {
 				if(this.firstChild){
-					i3GEO.util.abreCor("", this.firstChild.id);
+					i3GEO.util.abreCor("", $(this).find("input")[0].id);
 				} else {
 					i3GEO.util.abreCor("", this.id);
 				}
