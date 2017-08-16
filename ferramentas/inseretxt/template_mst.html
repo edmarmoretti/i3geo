@@ -1,49 +1,55 @@
-<div id='i3GEOinseretxtguiasYUI' class='yui-navset' style='top: 0px; cursor: pointer; left: 0px;'>
+<div class='yui-navset' style='top: 0px; cursor: pointer; margin-left: 2px;'>
 	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
 		<li>
 			<div id='i3GEOinseretxtguia3' style='text-align: center; left: 0px;'>
-				<a> <em> <img class='ticPropriedades2' style='height: 14px' title='{{{propriedades}}}' src='{{{locaplic}}}/imagens/branco.gif'>
-				</em>
+				<a>
+					<em><span class="material-icons">settings</span></em>
 				</a>
 			</div>
 		</li>
 		<li>
 			<div id='i3GEOinseretxtguia1' style='text-align: center; left: 0px;'>
-				<a> <em>{{{digita}}}</em>
+				<a>
+					<em>{{{digita}}}</em>
 				</a>
 			</div>
 		</li>
 		<li>
 			<div id='i3GEOinseretxtguia2' style='text-align: center; left: 0px;'>
-				<a> <em>{{{captura}}}</em>
+				<a>
+					<em>{{{captura}}}</em>
 				</a>
 			</div>
 		</li>
 	</ul>
 </div>
 <br>
-<div class='guiaobj' id='i3GEOinseretxtguia1obj' style='left: 1px; display: none;'>
-	<p class='paragrafo'>{{{insereTexto}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' id='i3GEOinseretxttexto' value='' />
+<div class="container-fluid" id='i3GEOinseretxtguia1obj'>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOinseretxttexto">{{{insereTexto}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOinseretxttexto' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>
-		<input class='inputsb' style='cursor: pointer' type='checkbox' id='i3GEOinseretxttextoconector'> {{{insereConector}}}
-	</p>
-	<div id='i3GEOinseretxtmen1' style='text-align: left;'>
-		<p class='paragrafo'>{{{ajuda}}}
+
+	<div class="checkbox text-left">
+		<label>
+			<input checked id='i3GEOinseretxttextoconector' type="checkbox">
+			<span class="checkbox-material noprint">
+				<span class="check"></span>
+			</span>
+			{{{insereConector}}}
+		</label>
 	</div>
+	<h5 class="alert alert-info">{{{ajuda}}}</h5>
 </div>
-<div class='guiaobj' id='i3GEOinseretxtguia2obj' style='left: 1px; display: none;'>
-	<p class='paragrafo'>{{{selecionaTema}}}
-	<div id='i3GEOinseretxtDivComboTemas' class='styled-select'>{{{msgAguarde}}}...</div>
-	<br>
-	<p class='paragrafo'>{{{selecionaItem}}}:</p>
-	<div id='i3GEOinseretxtDivComboItens' class='styled-select'></div>
-	<br> <br>
-	<div id='i3GEOinseretxtmen2' style='text-align: left;'>
-		<p class='paragrafo'>{{{ajuda2}}}</p>
+<div class="container-fluid" id='i3GEOinseretxtguia2obj'>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="">{{{selecionaTema}}}</label>
+		<div style="width: 100%;" class="input-group" id='i3GEOinseretxtDivComboTemas'></div>
 	</div>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="">{{{selecionaItem}}}</label>
+		<div style="width: 100%;" class="input-group" id='i3GEOinseretxtDivComboItens'></div>
+	</div>
+	<h5 class="alert alert-info">{{{ajuda2}}}</h5>
 </div>
-<div class='guiaobj' id='i3GEOinseretxtguia3obj' style='left: 1px; display: none;'></div>
+<div class="container-fluid" id='i3GEOinseretxtguia3obj'></div>

@@ -110,15 +110,19 @@ i3GEOF.inseretxt = {
 				 		$i("i3GEOinseretxtDivComboTemas").style.display = "block";
 				 		if ($i("i3GEOinseretxtComboTemas")){
 				 			$i("i3GEOinseretxtComboTemas").onchange = function(){
-				 				$i("i3GEOinseretxtDivComboItens").innerHTML = "<p class=paragrafo style=color:red >"+$trad('msgAguarde',i3GEOF.inseretxt.dicionario)+"...</p>";
 								i3GEO.mapa.ativaTema($i("i3GEOinseretxtComboTemas").value);
 				 				//combodeitens
 								i3GEO.util.comboItens(
 									"i3GEOinseretxtComboItens",
 									i3GEO.temaAtivo,
 									function(retorno){
-							 			$i("i3GEOinseretxtDivComboItens").innerHTML = "<p class=paragrafo >"+retorno.dados+"</p>";
-									}
+							 			$i("i3GEOinseretxtDivComboItens").innerHTML = retorno.dados;
+									},
+									"i3GEOinseretxtComboItens",
+									"",
+									"",
+									"",
+									"form-control"
 								);
 				 			};
 						}
@@ -131,7 +135,10 @@ i3GEOF.inseretxt = {
 					"",
 					false,
 					"ligados",
-					"display:block"
+					"",
+					false,
+					true,
+					"form-control"
 				);
 			};
 			$i("i3GEOinseretxtguia3").onclick = function(){
@@ -143,9 +150,6 @@ i3GEOF.inseretxt = {
 					false
 				);
 			};
-			i3GEO.util.mensagemAjuda("i3GEOinseretxtmen1",$i("i3GEOinseretxtmen1").innerHTML);
-			i3GEO.util.mensagemAjuda("i3GEOinseretxtmen2",$i("i3GEOinseretxtmen2").innerHTML);
-			//i3GEO.util.comboFontes("i3GEOinseretxtListaFonte","i3GEOinseretxtDivListaFonte");
 			i3GEOF.inseretxt.ativaFoco();
 		}
 		catch(erro){
@@ -282,14 +286,19 @@ i3GEOF.inseretxt = {
 				};
 				tema = $i("i3GEOinseretxtComboTemas").value;
 				item = $i("i3GEOinseretxtComboItens").value;
-				if(i3GEOF.inseretxt.contaPontos == 0)
-				{i3GEO.php.identificaunico(temp,objposicaocursor.ddx+","+objposicaocursor.ddy,tema,item);}
+				if(item == ""){
+					i3GEOF.inseretxt.contaPontos = 0;
+					return;
+				}
+				if(i3GEOF.inseretxt.contaPontos == 0){
+					i3GEO.php.identificaunico(temp,objposicaocursor.ddx+","+objposicaocursor.ddy,tema,item);
+				}
 				else{
 					i3GEOF.inseretxt.iniciaInsere();
 				}
 
 			}
-		}catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.inseretxt.aguarde.visibility = "hidden";}
+		}catch(e){i3GEO.janela.tempoMsg("Erro: ");i3GEOF.inseretxt.aguarde.visibility = "hidden";}
 	},
 	iniciaInsere: function(){
 		var texto = $i("i3GEOinseretxttexto").value;
@@ -303,7 +312,7 @@ i3GEOF.inseretxt = {
 					i3GEOF.inseretxt.contaPontos = 1;
 					i3GEOF.inseretxt.pontoi = objposicaocursor.ddx+" "+objposicaocursor.ddy;
 					i3GEOF.inseretxt.aguarde.visibility = "hidden";
-					i3GEO.janela.tempoMsg($trad('clicaFimConcetor',i3GEOF.inseretxt.dicionario));
+					i3GEO.janela.tempoMsg($trad('clicaFimConcetor',i3GEOF.inseretxt.dicionario),1000);
 					return;
 				}
 				if(i3GEOF.inseretxt.contaPontos == 1){
