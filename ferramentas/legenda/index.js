@@ -230,8 +230,8 @@ i3GEOF.legenda =
 		},
 		propriedadesLabels: function() {
 			i3GEO.util.scriptTag(
-					i3GEO.configura.locaplic + "/ferramentas/opcoes_label/index.js",
-					"i3GEOF.proplabel.criaJanelaFlutuante(false)",
+					i3GEO.configura.locaplic + "/ferramentas/opcoes_label/dependencias.php",
+					"i3GEOF.proplabel.iniciaJanelaFlutuante(false)",
 					"i3GEOFproplabel",
 					false);
 		},

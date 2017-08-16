@@ -144,8 +144,8 @@ i3GEOF.inseretxt = {
 			$i("i3GEOinseretxtguia3").onclick = function(){
 				//i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia3","i3GEOinseretxtguia");
 				i3GEO.util.scriptTag(
-					i3GEO.configura.locaplic+"/ferramentas/opcoes_label/index.js",
-					"i3GEOF.proplabel.criaJanelaFlutuante(true)",
+					i3GEO.configura.locaplic+"/ferramentas/opcoes_label/dependencias.php",
+					"i3GEOF.proplabel.iniciaJanelaFlutuante(true)",
 					"i3GEOFproplabel",
 					false
 				);
