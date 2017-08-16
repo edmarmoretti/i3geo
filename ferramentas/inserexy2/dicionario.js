@@ -66,7 +66,7 @@ i3GEOF.inserexy.dicionario = {
 		es : ""
 	} ],
 	'direcao' : [ {
-		pt : "Dire&ccedil;&atilde;o",
+		pt : "&Acirc;ngulo (grau, minuto e segundo)",
 		en : "",
 		es : ""
 	} ],

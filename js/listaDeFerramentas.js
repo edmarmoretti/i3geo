@@ -348,11 +348,6 @@ i3GEO.listaDeFerramentas = {
 										url : "javascript:i3GEO.mapa.dialogo.selecao();"
 									},
 									{
-										id : "omenudataFerramentas9",
-										text : $trad("x85"),
-										url : "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"
-									},
-									{
 										id : "omenudataFerramentas11",
 										text : $trad("d22t"),
 										url : "javascript:i3GEO.mapa.dialogo.cliquePonto()"

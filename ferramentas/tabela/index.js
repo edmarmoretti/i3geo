@@ -156,11 +156,6 @@ i3GEOF.tabela =
 					"comTabela",
 					onButtonClick);
 			}
-			if (i3GEOF.tabela.propJanelas[idjanela].tema === "") {
-				//$i(iddiv).innerHTML = "";
-				return;
-			}
-
 			i3GEO.guias.mostraGuiaFerramenta(idjanela + "i3GEOtabelaguia1", idjanela + "i3GEOtabelaguia");
 			// eventos das guias
 			$i(idjanela + "i3GEOtabelaguia6").onclick = function() {

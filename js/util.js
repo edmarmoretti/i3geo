@@ -1403,8 +1403,7 @@ i3GEO.util =
 				classe = "";
 			}
 			var monta, temp, temp1, temp2;
-			monta =
-				function(retorno) {
+			monta =	function(retorno) {
 				var i, comboTemas = '', n, nome = "", tema;
 				if (yui === true) {
 					comboTemas =
@@ -1412,7 +1411,7 @@ i3GEO.util =
 					id = id + "select";
 					nome = id;
 				}
-				if (retorno == undefined || retorno.length == 0) {
+				if (retorno == undefined || retorno.length == 0 || (retorno.data && retorno.data.length == 0)) {
 					retorno = {"data": [{"tema":"","nome":"---"}]};
 					incluiVazio = false;
 				}
