@@ -39,10 +39,7 @@ $nomes = nomeRandomico();
 //substitui a string de conex&atilde;o com o banco em cada layer se for necess&aacute;rio
 //
 $map = ms_newMapObj($map_file);
-$temp = str_replace(".map","xxx.map",$map_file);
-$map->save($temp);
-$map = ms_newMapObj($temp);
-restauraCon($temp,$postgis_mapa);
+substituiConObj($map,$postgis_mapa);
 if($map->getmetadata("interface") == "googlemaps"){
 	$proj4 = pegaProjecaoDefault("proj4");
 	$map->setProjection($proj4);
@@ -83,10 +80,7 @@ foreach ($temas as $tema)
 		}
 	}
 }
-$map->save($temp);
-removeLinha("classeNula",$temp);
-$map = ms_newMapObj($temp);
-substituiCon($temp,$postgis_mapa);
+
 $o = $map->outputformat;
 if($mapexten != ""){
 	$ext = explode(" ",$mapexten);
