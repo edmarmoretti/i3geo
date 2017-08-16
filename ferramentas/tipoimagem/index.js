@@ -76,31 +76,15 @@ i3GEOF.tipoimagem = {
 			});
 			return;
 		}
-		try{
-			var temp,f,b;
+			var f;
 
 			$i(iddiv).innerHTML += i3GEOF.tipoimagem.html();
-			b = new YAHOO.widget.Button(
-				"i3GEOFtipoImagemListaDeFiltrosOk",
-				{onclick:{fn: i3GEOF.tipoimagem.aplicar}}
-			);
-			b.addClass("rodar");
-			temp = $i("i3GEOFtipoImagemListaDeFiltrosOk-button").style;
-			temp.minHeight = "1.5em";
-			temp.padding = "0px 5px";
 
 			f = i3GEO.configura.tipoimagem;
-			if(f == 'nenhum')
-			{f = "";}
+			if(f == 'nenhum'){
+				f = "";
+				}
 			$i("i3GEOFtipoImagemListaDeFiltros").value = f;
-
-			var temp = function(retorno){
-				g_legendaHTML = retorno.data.legenda;
-			};
-			i3GEO.php.criaLegendaHTML(temp,"","legendaseminput.htm");
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
-
 	},
 	/*
 	Function: html

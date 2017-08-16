@@ -1,17 +1,18 @@
-<div style='margin-left: 5px'>
-	<p class='paragrafo'>{{{selecionaFiltro}}}</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' size='29' value='' id='i3GEOFtipoImagemListaDeFiltros' style='position: relative; top: -2px' />
+<div class="container-fluid">
+	<h5>{{{selecionaFiltro}}}</h5>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOFtipoImagemListaDeFiltros">{{{selecionaFiltro}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOFtipoImagemListaDeFiltros' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>
-		<input id='i3GEOFtipoImagemListaDeFiltrosOk' type='button' value='{{{aplica}}}' size='20' />
-	</p>
-	<br> <br>
+	<button onclick="i3GEOF.tipoimagem.aplicar()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
+
+
+
 	<table class='lista6' style='width: 200px'>
 		<tr>
 			<td>
-				<input onclick='javascript:$i({{{asp}}}i3GEOFtipoImagemListaDeFiltros{{{asp}}}).value = {{{asp}}}{{{asp}}}' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='nenhum'>
+				<input onclick='javascript:$i({{{asp}}}i3GEOFtipoImagemListaDeFiltros{{{asp}}}).value = {{{asp}}}{{{asp}}}' style='cursor: pointer; border: 0px solid white;' type='radio'
+					name='i3GEOtipoimagemtipo' value='nenhum'>
 			</td>
 			<td>{{{nenhum}}}</td>
 			<td>
