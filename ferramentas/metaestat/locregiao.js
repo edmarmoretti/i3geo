@@ -113,12 +113,7 @@ i3GEOF.locregiao = {
 	inicia: function(divid){
 		$i(divid).innerHTML = i3GEOF.locregiao.html();
 		i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
-		//ativa os botoes de filtro
-		var b = new YAHOO.widget.Button(
-			"i3geoLocregiaoFiltroRemove",
-			{onclick:{fn: function(){i3GEOF.locregiao.removeFiltro();}}}
-		);
-		b.addClass("rodar150");
+
 		if(i3GEOF.locregiao.ATIVAFILTRO === true){
 			$i("i3geoLocregiaoBotoesFiltro").style.display = "block";
 		}
@@ -151,7 +146,7 @@ i3GEOF.locregiao = {
 			return;
 		}
 		if (!largura) {
-			largura = 215;
+			largura = 300;
 		}
 		if (!altura) {
 			altura = "";
@@ -172,7 +167,7 @@ i3GEOF.locregiao = {
 		else{
 			titulo = $trad("x59");
 		}
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(111)' >" + titulo + "</a>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+titulo+"</span></div>";
 		janela = i3GEO.janela.cria(
 			largura + "px",
 			altura,
@@ -184,7 +179,14 @@ i3GEOF.locregiao = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"111"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.locregiao_corpo").style.backgroundColor = "white";
@@ -204,12 +206,17 @@ i3GEOF.locregiao = {
 	 */
 	html: function(){
 		var ins = "" +
-		'<div id="i3geoLocregiaoBotoesFiltro" style="display:none" >' +
-		'	<input id=i3geoLocregiaoFiltroRemove type="button" value="Remove o filtro" />' +
-		'<br><br></div>' +
-		'<div id="i3geoLocregiaoContainer" style="margin-left:5px;">' +
-		'	<input type=checkbox id=i3geoLocregiaoNavegaAutoCk checked style="cursor:pointer;position:relative;top:3px;"/> Navega&ccedil;&atilde;o autom&aacute;tica<br><br>' +
-		'	<div class="paragrafo" id="i3geoLocregiaoTipoRegiao" >' +
+		'<div  class="container-fluid">' +
+		'	<div id="i3geoLocregiaoBotoesFiltro" style="display:none" >' +
+		'		<button onclick="i3GEOF.locregiao.removeFiltro()" class="btn btn-primary btn-sm btn-raised">Remove o filtro</button>' +
+		'	</div>' +
+		'	<div id="i3geoLocregiaoContainer">' +
+		'		<div class="checkbox text-left"><label>' +
+		'			<input checked id="i3geoLocregiaoNavegaAutoCk" type="checkbox" >' +
+		'			<span class="checkbox-material noprint"><span class="check"></span></span> Navega&ccedil;&atilde;o autom&aacute;tica'+
+		'		</label></div>' +
+		'		<div class="paragrafo" id="i3geoLocregiaoTipoRegiao" >' +
+		'		</div>' +
 		'	</div>' +
 		'</div>';
 		return ins;
@@ -242,7 +249,7 @@ i3GEOF.locregiao = {
 	 * @param codigo da regiao pai da regiao selecionada
 	 */
 	comboHierarquiaRegioesOnChange: function(combo,codigoregiaopai,codigo_tipo_regiao,valorregiaopai){
-		var onde = combo.parentNode.parentNode.getElementsByTagName("div")[1];
+		var onde = combo.parentNode.parentNode.parentNode.getElementsByTagName("div")[2];
 		i3GEOF.locregiao.PENULTIMO_CODIGO_REGIAO = i3GEOF.locregiao.ULTIMO_CODIGO_REGIAO;
 		i3GEOF.locregiao.PENULTIMO_CODIGO_TIPO_REGIAO = i3GEOF.locregiao.ULTIMO_CODIGO_TIPO_REGIAO;
 		if(valorregiaopai){
@@ -285,20 +292,24 @@ i3GEOF.locregiao = {
 			var onc= "",
 			ins = '',
 			i,n,icone;
+			//<span class="material-icons">filter_list</span>
 			if(i3GEOF.locregiao.ATIVAFILTRO === true){
-				icone = "<img title='Aplica filtro' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/view-filter.png' style='position:relative;cursor:pointer;top:3px;left:5px' onclick='i3GEOF.locregiao.aplicaFiltro(this.parentNode.firstChild.firstChild.value,"+dados.regiaopai+")' />";
+				icone = '<span style="cursor:pointer;" onclick="i3GEOF.locregiao.aplicaFiltro(this.parentNode.firstChild.firstChild.value,'+dados.regiaopai+')" class="material-icons" title="Aplica filtro">filter_list</span>';
 			}
 			else{
-				icone = "<img title='Zoom para...' src='"+i3GEO.configura.locaplic+"/imagens/ic_zoom.png' style='position:relative;cursor:pointer;top:3px;left:5px' onclick='i3GEOF.locregiao.zoom(this.parentNode.firstChild.firstChild.value)' />";
+				icone = '<span style="cursor:pointer;" onclick="i3GEOF.locregiao.zoom(this.parentNode.firstChild.firstChild.value)" class="material-icons" title="Zoom para...">gps_fixed</span>';
 			}
 			if(dados.valores == ""){
 				n = dados.regioes.length;
 				onc = 'i3GEOF.locregiao.comboHierarquiaRegioesOnChange(this,this.value)';
-				ins += "<div class=styled-select style='width:180px;float:left;'><select onchange=\'"+onc+"\'><option value=''>---</option>";
+				ins += "<div  class='form-group label-fixed condensed'>";
+				ins += "<div class='input-group'><select style='width: 230px;' class='form-control' onchange=\'"+onc+"\'><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += "<option value='"+dados.regioes[i].codigo_tipo_regiao+"'>"+dados.regioes[i].nome_tipo_regiao+"</option>";
 				}
-				ins += "</select></div><br><br><div class='paragrafo'></div>";
+				ins += "</select></div></div>";
+				ins += "<div class='form-inline'></div>";
+
 			}
 			else{
 				n = dados.valores.length;
@@ -308,11 +319,13 @@ i3GEOF.locregiao = {
 				else{
 					onc = 'i3GEOF.locregiao.zoom(this.value)';
 				}
-				ins += "<div class=styled-select style='width:180px;float:left;'><select onchange=\'"+onc+"\'><option value=''>---</option>";
+				ins += "<div class='form-group label-fixed condensed'>";
+				ins += "<div class='input-group'><select style='width: 230px;' class='form-control' onchange=\'"+onc+"\'><option value=''>---</option>";
 				for(i=0;i<n;i++){
 					ins += "<option value='"+dados.valores[i].identificador_regiao+";"+dados.valores[i].ext+"'>"+dados.valores[i].nome_regiao+"</option>";
 				}
-				ins += "</select></div>"+icone+"<br><br><div class='paragrafo'></div>";
+				ins += "</select></div>" + icone + "</div>";
+				ins += "<div class='form-inline'></div>";
 			}
 			if(objonde){
 				objonde.innerHTML = ins;
