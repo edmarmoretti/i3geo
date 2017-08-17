@@ -74,15 +74,8 @@ i3GEOF.mostraExten = {
 			});
 			return;
 		}
-
-			$i(iddiv).innerHTML += i3GEOF.mostraExten.html();
-			var b =new YAHOO.widget.Button(
-				"i3GEOmostraExtenbotao1",
-				{onclick:{fn: i3GEOF.mostraExten.executa}}
-			);
-			b.addClass("rodar");
-			i3GEOF.mostraExten.ativaFoco();
-
+		$i(iddiv).innerHTML += i3GEOF.mostraExten.html();
+		i3GEOF.mostraExten.ativaFoco();
 	},
 	/*
 	Function: html
