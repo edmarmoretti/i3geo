@@ -34,5 +34,10 @@ i3GEOF.wkt2layer.dicionario = {
 		pt : "Conclu&iacute;do!!! A camada foi adicionada ao mapa.",
 		en : "",
 		es : ""
+	} ],
+	'wkt' : [ {
+		pt : "Cole ou digite o WKT aqui",
+		en : "",
+		es : ""
 	} ]
 };

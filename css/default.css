@@ -656,7 +656,9 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 
 .bd textarea {
-	color: black;
+	font-size: 12px;
+	color:inherit;
+	font-weight: 400;
 }
 .bd.i3geo6 textarea {
 	color: black;

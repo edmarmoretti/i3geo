@@ -1,42 +1,18 @@
-<style>
-.yui-button#i3GEOFwkt2layerShp button {
-	background: url('../imagens/gisicons/shape.png') 5% 50% no-repeat;
-	width: 200px;
-}
-
-.yui-button#i3GEOFwkt2layerInterno button {
-	background: url('../imagens/gisicons/layer-vector-create.png') 5% 50%
-		no-repeat;
-	width: 200px;
-}
-</style>
-<div style='margin-left: 5px'>
-	<p class='paragrafo'>
-		<b>WKT: </b>
-	</p>
-	<p class='paragrafo'>
-		<textarea id='i3GEOFwkt2layerWkt' cols='30' rows='3'>
-			{{{wkt}}} </textarea>
-	</p>
-	<br>
-	<p class='paragrafo'>{{{nometema}}}</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' title='' id='i3GEOFwkt2layerTitulo' />
+<div class='container-fluid'>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="">WKT</label>
+		<textarea class="form-control input-lg" id='i3GEOFwkt2layerWkt' rows='3'>{{{wkt}}}</textarea>
 	</div>
-	<br>
-	<p class='paragrafo'>{{{shapefile}}}</p>
-	<p class='paragrafo'>
-		<input id='i3GEOFwkt2layerShp' type='button' value='Shape File' />
-	</p>
-	<br>
-	<p class='paragrafo'>{{{feature}}}</p>
-
-	<p class='paragrafo'>
-		<input id='i3GEOFwkt2layerInterno' type='button' value='Feature' />
-	</p>
-	<br><p class='paragrafo'>{{{texto}}}</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='{{{valortexto}}}' title='' id='i3GEOFwkt2layerTexto' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="">{{{nometema}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOFwkt2layerTitulo' value='' />
 	</div>
-	<br><br>
+	<h5>{{{shapefile}}}</h5>
+	<button onclick="i3GEOF.wkt2layer.layer()" class='btn btn-primary btn-sm btn-raised'>Shape File</button>
+	<h5>{{{feature}}}</h5>
+	<button onclick="i3GEOF.wkt2layer.feature()" class='btn btn-primary btn-sm btn-raised'>Feature</button>
+	<h5>{{{texto}}}</h5>
+	<div class='form-group label-fixed condensed' >
+		<input class="form-control input-lg" type='text' id='i3GEOFwkt2layerTexto' value='{{{valortexto}}}' />
+	</div>
 </div>
