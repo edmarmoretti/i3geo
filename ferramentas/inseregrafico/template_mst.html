@@ -1,47 +1,50 @@
-<div id='i3GEOinseregraficoguiasYUI' class='yui-navset'
-	style='top: 0px; cursor: pointer; left: 0px;'>
-	<ul class='yui-nav'
-		style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
-		<li><div id='i3GEOinseregraficoguia1'
-				style='text-align: center; left: 0px;'>
-				<a><em>{{{fonteDados}}}</em></a>
-			</div></li>
-		<li><div id='i3GEOinseregraficoguia2'
-				style='text-align: center; left: 0px;'>
-				<a><em>{{{propriedades}}}</em></a>
-			</div></li>
+<div id='i3GEOinseregraficoguiasYUI' class='yui-navset {{{escondeGuias}}}' style='top: 0px; cursor: pointer; left: 0px; margin-left: 2px;'>
+	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
+		<li>
+			<div id='i3GEOinseregraficoguia2' style='text-align: center; left: 0px;'>
+				<a title='{{{propriedades}}}'>
+					<em><span class="material-icons">settings</span></em>
+				</a>
+			</div>
+		</li>
+
+		<li>
+			<div id='i3GEOinseregraficoguia1' style='text-align: center; left: 0px;'>
+				<a>
+					<em>{{{fonteDados}}}</em>
+				</a>
+			</div>
+		</li>
+
 	</ul>
 </div>
-<br>
-<div class='guiaobj' id='i3GEOinseregraficoguia1obj'
-	style='left: 1px; display: none;'>
-	<p class='paragrafo'>Escolha o tema com os dados:
-	<div id='i3GEOinseregraficotemasi' class='styled-select'
-		style='display: block;'>{{{msgAguarde}}}...</div>
-	<div id='i3GEOinseregraficolistai' class='digitar'
-		style='left: 0px; top: 20px; 330 px; height: 80px; overflow: auto; display: block;'>{{{selecionaTema}}}</div>
-	<br> <br> <br>
-	<p class='paragrafo'>
-		<input id='i3GEOinseregraficobotao1' size='35' type='button'
-			value='mostrar legenda no mapa' />
-	<div id='i3GEOinseregraficomen1' style='top: 10px; left: 1px'>
-		<p class='paragrafo'>{{{selecionaItens}}}
+<div class="container-fluid" id='i3GEOinseregraficoguia1obj'>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOtoponimiaDivListaFonte">Escolha o tema com os dados</label>
+		<div style="width: 100%;" class="input-group">
+			<div id='i3GEOinseregraficotemasi'></div>
+		</div>
 	</div>
+	<h5 class="alert alert-info">{{{selecionaItens}}}</h5>
+
+	<div id='i3GEOinseregraficolistai'>{{{selecionaTema}}}</div>
+
+	<button onclick="i3GEOF.insereGrafico.legenda()" class='btn btn-primary btn-sm btn-raised'>Legenda</button>
+
+	<h5 class="alert alert-info">{{{selecionaItens}}}</h5>
 </div>
-<div class='guiaobj' id='i3GEOinseregraficoguia2obj'
-	style='left: 1px; display: none;'>
-	<p class='paragrafo'>Tamanho do c&iacute;rculo:</p>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' value='50' id='i3GEOinseregraficow' />
+<div class="container-fluid" id='i3GEOinseregraficoguia2obj'>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOinseregraficow">Tamanho do c&iacute;rculo</label>
+		<input class="form-control input-lg" type='text' id='i3GEOinseregraficow' value='50' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{inclinacaoCirculo}}}:</p>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' value='1.5' id='i3GEOinseregraficoinclinacao' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOinseregraficoinclinacao">{{inclinacaoCirculo}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOinseregraficoinclinacao' value='1.5' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{tamanhoSombra}}}:</p>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' value='5' id='i3GEOinseregraficosombra' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOinseregraficosombra">{{tamanhoSombra}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOinseregraficosombra' value='5' />
 	</div>
+
 </div>
