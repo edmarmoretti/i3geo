@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.busca.dicionario)+
 i3GEOF.busca.dicionario = {
 	'digita' : [ {
-		pt : "digite aqui o texto...",
+		pt : "Texto para busca",
 		en : "",
 		es : "digite aqu&iacute; el texto..."
 	} ],
@@ -65,18 +65,13 @@ i3GEOF.busca.dicionario = {
 		en : "",
 		es : "localiza"
 	} ],
-	14 : [ {
-		pt : "",
+	'onde' : [ {
+		pt : "Buscar na camada",
 		en : "",
 		es : ""
 	} ],
-	15 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	16 : [ {
-		pt : "",
+	'opecoes' : [ {
+		pt : "Op&ccedil;&otilde;es",
 		en : "",
 		es : ""
 	} ]

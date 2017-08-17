@@ -412,7 +412,7 @@ i3GEO.listaDeFerramentas = {
 									{
 										id : "omenudataFerramentas2b",
 										text : $trad("t23"),
-										url : "javascript:i3GEO.tema.dialogo.procuraratrib()"
+										url : "javascript:i3GEO.tema.dialogo.procuraratrib()" //feramentas/busca
 									},
 									{
 										id : "omenudataFerramentas3b",

@@ -109,11 +109,6 @@ i3GEOF.busca = {
 			}
 
 			i3GEO.php.listaItensTema(i3GEOF.busca.montaListaItens,i3GEOF.busca.tema);
-			var b = new YAHOO.widget.Button(
-				"i3GEObuscabotao1",
-				{onclick:{fn: i3GEOF.busca.procurar}}
-			);
-			b.addClass("rodar");
 		}
 		catch(erro){alert(erro);}
 	},
@@ -195,18 +190,14 @@ i3GEOF.busca = {
 		var ins = "",
 			i,
 			n;
-		try{
-			ins += ("<table class=lista >");
-			n = retorno.data.valores.length;
-			for (i=0;i<n; i++){
-				ins += "<tr><td><input size=2 style='cursor:pointer;border:0px solid white;' name='"+retorno.data.valores[i].item+","+retorno.data.valores[i].tema+"' type=checkbox /></td>";
-				ins += "<td>&nbsp;" + retorno.data.valores[i].item + "</td></tr>";
-			}
-			ins += "</table>";
-			$i("i3GEObuscalistai").innerHTML = ins;
+		n = retorno.data.valores.length;
+		for (i=0;i<n; i++){
+			ins += '<div class="checkbox text-left"><label>'
+				+ '<input type="checkbox" name="' +retorno.data.valores[i].item+","+retorno.data.valores[i].tema+ '">'
+				+ '<span class="checkbox-material noprint"><span class="check"></span></span> ' + retorno.data.valores[i].item
+				+ '</label></div>';
 		}
-		catch(e)
-		{$i("i3GEObuscalistai").innerHTML = "<p style=color:red >"+$trad('erro',i3GEOF.busca.dicionario)+"<br>"+e;}
+		$i("i3GEObuscalistai").innerHTML = ins;
 	},
 	/*
 	Function: procurar
@@ -295,7 +286,14 @@ i3GEOF.busca = {
 			posicaotop  = parseInt($i("i3GEOF.busca_c").style.top,10)+(i3GEOF.busca.nbuscas*10);
 
 		i3GEOF.busca.nbuscas++;
-		i3GEO.janela.cria("200px","200px","",posicaoleft+290,posicaotop,"<div class='i3GeoTituloJanela'>" + palavra + "</div>",idJanela);
+		i3GEO.janela.cria(
+				"300px",
+				"350px",
+				"",
+				posicaoleft+290,posicaotop,
+				"<div class='i3GeoTituloJanela'>" + palavra + "</div>",
+				idJanela
+			);
 		if (retorno.data !== undefined)
 		{
 			nlinhas = retorno.data.length;
@@ -306,18 +304,22 @@ i3GEOF.busca = {
 					valores = (linhas[linha].box).split(" ");
 					x = (valores[0] * 1) + ((((valores[0] * -1) - (valores[2] * -1)) / 2) * 1);
 					y = (valores[1] * 1) + ((((valores[1] * -1) - (valores[3] * -1)) / 2) * 1);
-					ins.push("<table><tr><td onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+linhas[linha].box+"\")' style='cursor:pointer;color:navy'>zoom&nbsp;</td><td onclick='i3GEO.navega.zoomponto(\"\",\"\","+x+","+y+")' style='color:navy;cursor:pointer;'>&nbsp;"+$trad('localiza',i3GEOF.busca.dicionario)+"</td></tr></table>");
+
+					ins.push("<button title='zoom' onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+linhas[linha].box+"\")' class='btn btn-xs' ><span class='material-icons'>gps_fixed</span></button>");
+					ins.push("<button title='pin' onclick='i3GEO.navega.zoomponto(\"\",\"\","+x+","+y+")'' class='btn btn-xs' ><span class='material-icons'>room</span></button>");
 					for (i=0;i<linhas[linha].valores.length; i++){
 						er = new RegExp(palavra, "gi");
 						tr = (linhas[linha].valores[i].valor).replace(er,"<span style=color:red;text-align:left >"+palavra+"</span>");
-						ins.push("<div style=width:150px;text-align:left;left:5px; >"+ linhas[linha].valores[i].item + ": " + tr + "</div><br>");
+						ins.push("<h5>"+ linhas[linha].valores[i].item + " : " + tr + "</h5>");
+						ins.push("<hr>");
 						naoEncontrado = "";
 					}
 				}
 			}
-			$i(idJanela+"_corpo").innerHTML = "<div style='position:relative;top:0px;left:0px;width:160;overflow:auto;'>"+naoEncontrado+ins.join("")+"</div>";
+			$i(idJanela+"_corpo").innerHTML =" <div class='container-fluid'>"+naoEncontrado+ins.join("")+"</div></div>";
 		}
-		else
-		{$i(idJanela+"_corpo").innerHTML = "<p style=color:red >"+$trad('erro',i3GEOF.busca.dicionario)+"<br>";}
+		else{
+			$i(idJanela+"_corpo").innerHTML = "<h5 class='alert alert-warning'>"+$trad('erro',i3GEOF.busca.dicionario)+"</h5>";
+		}
 	}
 };

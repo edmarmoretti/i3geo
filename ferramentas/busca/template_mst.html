@@ -1,47 +1,47 @@
-<div style='margin-left: 5px;'>
+<div class='container-fluid'>
+	<h5>{{{onde}}}</h5>
+	<div id='i3GEOFbuscaComboCabeca' class='form-group condensed' style='width: 100%'>
+		<span class="material-icons iconeComboTemas">playlist_add_check</span>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEObuscapalavra">{{{digita}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEObuscapalavra' value='' />
+	</div>
+	<button onclick="i3GEOF.busca.procurar()" class='btn btn-primary btn-sm btn-raised'>{{{procura}}}</button>
+	<h5>{{{opcoes}}}</h5>
 
-	<div  id='i3GEOFbuscaComboCabeca' class='form-group condensed' style='width:100%'>
-	<span class="material-icons iconeComboTemas">playlist_add_check</span>
+	<div class="radio radio-primary condensed">
+		<label>
+			<input type='radio' id="i3GEObuscaqualquer" name='i3GEObuscatipo' checked />
+			<span class="circle"> </span>
+			<span class="check"></span>
+			{{{busca}}}
+		</label>
 	</div>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' title='{{{digita}}}' id='i3GEObuscapalavra' />
+	<div class="radio radio-primary condensed">
+		<label>
+			<input type='radio' id="i3GEObuscaexata" name='i3GEObuscatipo' />
+			<span class="circle"></span>
+			<span class="check"></span>
+			{{{busca2}}}
+		</label>
 	</div>
-	<br>
-	<p class='paragrafo'>
-		<input id='i3GEObuscabotao1' size='20' type='button' value='{{{procura}}}' />
-		<br>
-	<table summary='Lista de opcoes' class='lista3' style='width:250px;'>
-		<tr>
-			<td>
-				<input style='cursor: pointer; border: 0px solid white;' type='radio' id='i3GEObuscaqualquer' name='i3GEObuscatipo' checked />
-			</td>
-			<td>{{{busca}}}</td>
-		</tr>
-		<tr>
-			<td>
-				<input style='cursor: pointer; border: 0px solid white;' type='radio' id='i3GEObuscaexata' name='i3GEObuscatipo' />
-			</td>
-			<td>{{{busca2}}}</td>
-		</tr>
-		<tr>
-			<td></td>
-			<td>&nbsp;</td>
-		</tr>
-		<tr>
-			<td>
-				<input style='cursor: pointer; border: 0px solid white;' type='radio' id='i3GEObuscamapa' name='i3GEObuscaonde' checked />
-			</td>
-			<td>{{{busca3}}}</td>
-		</tr>
-		<tr>
-			<td>
-				<input style='cursor: pointer; border: 0px solid white;' type='radio' id='i3GEObuscaregiao' name='i3GEObuscaonde' />
-			</td>
-			<td>{{{busca4}}}</td>
-		</tr>
-	</table>
-	<br>
-	<p class='paragrafo'>
-		<b>{{{busca5}}}</b>
-	<div id='i3GEObuscalistai' class='digitar' style='text-align: left; width: 250px; overflow: auto; height: 115px'></div>
+	<div class="radio radio-primary condensed">
+		<label>
+			<input type='radio' id="i3GEObuscamapa" name='i3GEObuscaonde' checked />
+			<span class="circle"> </span>
+			<span class="check"></span>
+			{{{busca3}}}
+		</label>
+	</div>
+	<div class="radio radio-primary condensed">
+		<label>
+			<input type='radio' id="i3GEObuscaregiao" name='i3GEObuscaonde' />
+			<span class="circle"> </span>
+			<span class="check"></span>
+			{{{busca4}}}
+		</label>
+	</div>
+	<h5>{{{busca5}}}</h5>
+	<div id='i3GEObuscalistai'></div>
 </div>
