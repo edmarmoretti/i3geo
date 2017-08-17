@@ -129,8 +129,8 @@ i3GEOF.wiki = {
 		//cria a janela flutuante
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Wikip&eacute;dia</span></div>";
 		janela = i3GEO.janela.cria(
-			"250px",
-			"190px",
+			"450px",
+			"220px",
 			"",
 			"",
 			"",
@@ -196,10 +196,12 @@ i3GEOF.wiki = {
 		};
 		cp = new cpaint();
 		cp.set_response_type("JSON");
-		if(i3GEO.parametros.mapexten)
-		{ext = i3GEO.parametros.mapexten;}
-		else
-		{ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";} //apenas para exemplo
+		if(i3GEO.parametros.mapexten){
+			ext = i3GEO.parametros.mapexten;
+		}
+		else{
+			ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";
+		} //apenas para exemplo
 		p = i3GEO.configura.locaplic+"/ferramentas/wiki/funcoes.php?funcao=listaartigos&ret="+ext;
 		cp.call(p,"listaartigos",mostrar);
 
