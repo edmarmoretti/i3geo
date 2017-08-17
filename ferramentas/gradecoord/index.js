@@ -44,7 +44,7 @@ i3GEOF.gradeCoord = {
 			return;
 		}
 			$i(iddiv).innerHTML += i3GEOF.gradeCoord.html();
-			i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef");
+			i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef","form-control");
 			var b = new YAHOO.widget.Button(
 				"i3GEOgradeCoordbotao1",
 				{onclick:{fn: i3GEOF.gradeCoord.executa}}

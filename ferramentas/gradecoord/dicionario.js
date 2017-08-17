@@ -69,5 +69,10 @@ i3GEOF.gradeCoord.dicionario = {
 		pt : "Entre com a dist&acirc;ncia entre as linhas",
 		en : "",
 		es : ""
+	} ],
+	'textos' : [ {
+		pt : "Inclui textos",
+		en : "",
+		es : ""
 	} ]
 };
