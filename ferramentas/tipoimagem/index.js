@@ -153,7 +153,7 @@ i3GEOF.tipoimagem = {
 				f.push($( this ).prop("name"));
 			});
 			if(f.length == 0){
-				f = ["nenhum"];
+				f.push("nenhum");
 			}
 			i3GEO.configura.tipoimagem = f.join(" ");
 			i3GEO.Interface.alteraParametroLayers("TIPOIMAGEM",f.join(" "));
