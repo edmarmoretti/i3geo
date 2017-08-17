@@ -937,11 +937,11 @@ td {
 	max-width: 100%;
 	font-weight: unset;
 }
-
+/*
 .bd table tr:first-of-type td {
    padding: 5px;
 }
-
+*/
 .bd td {
 	border: 0px solid #89afd4;
 	padding: 0px;

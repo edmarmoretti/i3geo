@@ -1,104 +1,153 @@
 <div class="container-fluid">
 	<h5>{{{selecionaFiltro}}}</h5>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOFtipoImagemListaDeFiltros">{{{selecionaFiltro}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOFtipoImagemListaDeFiltros' value='' />
-	</div>
 	<button onclick="i3GEOF.tipoimagem.aplicar()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
-
-
-
-	<table class='lista6' style='width: 200px'>
-		<tr>
-			<td>
-				<input onclick='javascript:$i({{{asp}}}i3GEOFtipoImagemListaDeFiltros{{{asp}}}).value = {{{asp}}}{{{asp}}}' style='cursor: pointer; border: 0px solid white;' type='radio'
-					name='i3GEOtipoimagemtipo' value='nenhum'>
-			</td>
-			<td>{{{nenhum}}}</td>
-			<td>
-				<img onclick='javascript:$i({{{asp}}}i3GEOFtipoImagemListaDeFiltros{{{asp}}}).value = {{{asp}}}{{{asp}}}' src='{{{locaplic}}}/imagens/filtro_nenhum.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}cinza{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='cinza'>
-			</td>
-			<td>{{{tonsCinza}}}</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}cinza{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_cinza.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepiaclara{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='sepiaclara'>
-			</td>
-			<td>{{{sepiaClara}}}</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepiaclara{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_sepiaclara.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepianormal{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='sepianormal'>
-			</td>
-			<td>{{{sepiaNormal}}}</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}sepianormal{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_sepianormal.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}negativo{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='negativo'>
-			</td>
-			<td>{{{negativo}}}</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}negativo{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_negativo.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}detectaBordas{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='detectaBordas'>
-			</td>
-			<td>{{{detectaBordas}}}</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}detectaBordas{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_detectabordas.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}embassa{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='embassa'>
-			</td>
-			<td>emboss</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}embassa{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_embassa.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}gaussian_blur{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='gaussian_blur'>
-			</td>
-			<td>gaussian blur</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}gaussian_blur{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_gaussianblur.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}selective_blur{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='selective_blur'>
-			</td>
-			<td>selective blur</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}selective_blur{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_selectiveblur.png' />
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<input onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}mean_removal{{{asp}}})' style='cursor: pointer; border: 0px solid white;' type='radio' name='i3GEOtipoimagemtipo' value='mean_removal'>
-			</td>
-			<td>mean removal</td>
-			<td>
-				<img onclick='i3GEOF.tipoimagem.adicionar({{{asp}}}mean_removal{{{asp}}})' src='{{{locaplic}}}/imagens/filtro_meanremoval.png' />
-			</td>
-		</tr>
-	</table>
+	<div id="tipoimagemForm">
+		<table>
+			<tbody></tbody>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_cinza.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='cinza' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							{{{tonsCinza}}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_sepiaclara.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='sepiaclara' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							{{{sepiaClara}}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_sepianormal.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='sepianormal' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							{{{sepiaNormal}}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_negativo.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='negativo' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							{{{negativo}}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_detectabordas.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='detectaBordas' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							{{{detectaBordas}}}
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_embassa.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='embassa' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							emboss
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_gaussianblur.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='gaussian_blur' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							gaussian blur
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_selectiveblur.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='selective_blur' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							selective blur
+						</label>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<img class="img-rounded" src='{{{locaplic}}}/imagens/filtro_meanremoval.png' />
+				</td>
+				<td>
+					<div class="checkbox text-left">
+						<label>
+							<input name='mean_removal' type="checkbox">
+							<span class="checkbox-material noprint">
+								<span class="check"></span>
+							</span>
+							mean removal
+						</label>
+					</div>
+				</td>
+			</tr>
+		</table>
+	</div>
 </div>
