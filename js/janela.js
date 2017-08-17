@@ -214,7 +214,7 @@ i3GEO.janela =
 			}
 			ins += '</div><div id="' + id + '_corpo" class="bd ' + classeAdicional + '" style="display:block;padding:0px">';
 			if (wsrc !== "") {
-				ins += '<iframe name="' + id + 'i" id="' + id + 'i" valign="top" style="border:0px white solid;width:100%"></iframe>';
+				ins += '<div class="container-fluid"><iframe name="' + id + 'i" id="' + id + 'i" valign="top" style="border:0px white solid;width:100%"></iframe></div>';
 			}
 			ins += '</div>';
 			if(idajuda){

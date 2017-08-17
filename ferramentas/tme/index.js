@@ -462,7 +462,7 @@ i3GEOF.tme =
 								+ url
 								+ "</a>";
 
-						$i("i3GEOTMEresultado").innerHTML = ins;
+						$("#i3GEOTMEresultado").removeClass("hidden").html(ins);
 						$i("i3GEOTMEresultado").scrollIntoView(true);
 
 					};

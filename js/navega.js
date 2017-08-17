@@ -990,9 +990,19 @@ i3GEO.navega =
 						+ "/ferramentas/googlemaps1/index.php",
 						"",
 						"",
-						"</div><a class=i3GeoTituloJanelaBs target=_blank href='"
-						+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=7&idajuda=68' >Google maps</a>",
-						idgoogle
+						"<span class='i3GeoTituloJanelaBsNolink' >Google maps</span></div>",
+						idgoogle,
+						false,
+						"hd",
+						"",
+						"",
+						"",
+						false,
+						"",
+						"",
+						"",
+						"",
+						"68"
 				);
 
 				temp = function() {
