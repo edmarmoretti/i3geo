@@ -434,11 +434,13 @@ i3GEO.listaDeFerramentas = {
 										text : $trad("t33"),
 										url : "javascript:i3GEO.tema.dialogo.editaLegenda()"
 									},
+									/*
 									{
 										id : "omenudataFerramentas7b",
 										text : $trad("t42"),
 										url : "javascript:i3GEO.tema.dialogo.cortina()"
 									},
+									*/
 									{
 										id : "omenudataFerramentas8b",
 										text : $trad("t37a"),

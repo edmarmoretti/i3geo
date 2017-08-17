@@ -487,15 +487,16 @@ i3GEO.tema =
 			 * {string} - codigo do tema escolhido
 			 *
 			 */
-			cortina : function(tema) {
+			cortina : function(idtema) {
 				if(idtema && idtema != ""){
 					var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 					if(t.status < 2){
 						i3GEO.janela.tempoMsg($trad("deveLigada"));
 						return;
 					}
+					i3GEO.mapa.ativaTema(idtema);
 				}
-				i3GEO.mapa.ativaTema(tema);
+
 				i3GEO.util.dialogoFerramenta(
 					"i3GEO.tema.dialogo.cortina()",
 					"cortina",

@@ -126,21 +126,24 @@ i3GEOF.cortina = {
 		if($i("i3GEOF.cortina")){
 			return;
 		}
-		if(tema == undefined)
-		{tema = i3GEO.temaAtivo;}
-		else
-		{i3GEO.mapa.ativaTema(tema);}
+		if(tema == undefined){
+			tema = i3GEO.temaAtivo;
+			i3GEOF.cortina.tema = tema;
+		}
+		else{
+			i3GEO.mapa.ativaTema(tema);
+			i3GEOF.cortina.tema = tema;
+		}
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.cortina");
-			//i3GEOF.cortina.slider.setValue(0,false);
+			i3GEO.janela.minimiza("i3GEOF.cortina",200);
 		};
 		var janela,divid,temp,titulo;
-		i3GEOF.cortina.tema = tema;
+
 		//cria a janela flutuante
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t42") + "</span></div>";
 		janela = i3GEO.janela.cria(
-			"230px",
-			"60px",
+			"240px",
+			"120px",
 			"",
 			"",
 			"",
@@ -228,18 +231,21 @@ i3GEOF.cortina = {
 
 	Zera a barra do slide
 	*/
+	//TODO openlayers usa canvas e nao div, o que impede de funcionar
 	reiniciaSlide: function(){
 		var layer;
 		i3GEOF.cortina.slider.setValue(0,false);
 		if(i3GEO.Interface.ATUAL === "openlayers"){
 			layer = i3geoOL.getLayersByName(i3GEOF.cortina.tema)[0];
-			if(layer)
-			{i3GEOF.cortina.estilo = layer.div.style;}
+			if(layer){
+				i3GEOF.cortina.estilo = layer.div.style;
+			}
 		}
 		if(i3GEO.Interface.ATUAL === "googlemaps"){
 			layer = i3GEO.Interface.googlemaps.retornaDivLayer(i3GEOF.cortina.tema);
-			if(layer)
-			{i3GEOF.cortina.estilo = layer.style;}
+			if(layer){
+				i3GEOF.cortina.estilo = layer.style;
+			}
 		}
 		i3GEOF.cortina.slider.subscribe("change", function(offsetFromStart) {
 			var t=0,
@@ -268,14 +274,14 @@ i3GEOF.cortina = {
 		 		$i("i3GEOcortinaTemasDiv").style.display = "block";
 		 		if ($i("i3GEOcortinatemas")){
 		 			$i("i3GEOcortinatemas").onchange = function(){
-						if(i3GEOF.cortina.estilo)
-						{i3GEOF.cortina.estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";}
+						if(i3GEOF.cortina.estilo){
+							i3GEOF.cortina.estilo.clip = "rect(0px,"+i3GEO.parametros.w+"px,"+i3GEO.parametros.h+"px,0px)";
+						}
 						var t = $i("i3GEOcortinatemas").value;
 						i3GEO.mapa.ativaTema(t);
 						i3GEOF.cortina.tema = t;
 						i3GEOF.cortina.reiniciaSlide();
 		 			};
-					$i("i3GEOcortinatemas").style = "210px";
 				}
 				if(i3GEO.temaAtivo !== ""){
 					$i("i3GEOcortinatemas").value = i3GEO.temaAtivo;
@@ -285,7 +291,11 @@ i3GEOF.cortina = {
 			"i3GEOcortinaTemasDiv",
 			"",
 			false,
-			"ligados"
+			"ligados",
+			"",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	}
 };
