@@ -45,12 +45,6 @@ i3GEOF.opcoesFundo =
 			try {
 				i3GEOF.opcoesFundo.aguarde.visibility = "visible";
 				$i(iddiv).innerHTML += i3GEOF.opcoesFundo.html();
-				var b = new YAHOO.widget.Button("i3GEOopcoesFundobotao1", {
-					onclick : {
-						fn : i3GEOF.opcoesFundo.executa
-					}
-				});
-				b.addClass("rodar150");
 				i3GEO.util.aplicaAquarela("i3GEOF.opcoesFundo_corpo");
 				var p =
 					i3GEO.configura.locaplic + "/ferramentas/opcoes_fundo/exec.php?g_sid=" + i3GEO.configura.sid + "&funcao=pegacorfundo", cp =
@@ -67,7 +61,7 @@ i3GEOF.opcoesFundo =
 			} catch (erro) {
 				i3GEO.janela.tempoMsg(erro);
 			}
-			if (i3GEO.Interface.ATUAL === "googlemaps" || i3GEO.Interface.ATUAL === "googleearth") {
+			if (i3GEO.Interface.ATUAL === "googlemaps") {
 				i3GEO.janela.tempoMsg($trad('ajuda', i3GEOF.opcoesFundo.dicionario));
 			}
 		},
@@ -102,8 +96,8 @@ i3GEOF.opcoesFundo =
 			// cria a janela flutuante
 			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p9") + "</span></div>";
 			janela = i3GEO.janela.cria(
-					"210px",
-					"80px",
+					"300px",
+					"150px",
 					"",
 					"",
 					"",
@@ -122,18 +116,8 @@ i3GEOF.opcoesFundo =
 					"6"
 				);
 			divid = janela[2].id;
-			$i("i3GEOF.opcoesFundo_corpo").style.backgroundColor = "white";
-			$i("i3GEOF.opcoesFundo_corpo").style.textAlign = "left";
 			i3GEOF.opcoesFundo.aguarde = $i("i3GEOF.opcoesFundo_imagemCabecalho").style;
 			i3GEOF.opcoesFundo.inicia(divid);
-		},
-		/*
-		 * Function: corj
-		 *
-		 * Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
-		 */
-		corj : function(obj) {
-			i3GEO.util.abreCor("", obj);
 		},
 		/*
 		 * Function: executa
