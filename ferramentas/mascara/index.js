@@ -79,11 +79,6 @@ i3GEOF.mascara = {
 		$i(iddiv).innerHTML = i3GEOF.mascara.html();
 		i3GEOF.mascara.selMascara();
 		i3GEOF.mascara.listaDeCamadas();
-		var b = new YAHOO.widget.Button(
-			"i3GEOmascarabotao1",
-			{onclick:{fn: i3GEOF.mascara.aplicar}}
-		);
-		b.addClass("rodar");
 		i3GEOF.mascara.aguarde.visibility = "hidden";
 	},
 	/*
@@ -102,7 +97,7 @@ i3GEOF.mascara = {
 	listaDeCamadas: function(marcar){
 		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
 			n = camadas.length, c,
-			ins = "<table style='width:95%' class='lista8'>";
+			ins = "";
 		if(!marcar){
 			marcar = [];
 		}
@@ -113,7 +108,11 @@ i3GEOF.mascara = {
 				if(marcar.indexOf(camadas[n].tema) >= 0){
 					c = "checked";
 				}
-				ins += "<tr><td><input class=inputsb style='cursor:pointer' " + c + " type=checkbox value='"+camadas[n].name+"' /></td><td><span style=background:white id='i3GEOanima"+camadas[n].name+"'>"+camadas[n].tema+"</span></td></tr>";
+				ins += '<div class="checkbox text-left"><label>'
+					+ '<input name="' + camadas[n].name + '" type="checkbox" ' + c + ' >'
+					+ '<span class="checkbox-material noprint"><span class="check"></span></span>&nbsp;'
+					+ camadas[n].tema
+					+ '</label></div>';
 			}
 		}
 		ins += "</table>";
@@ -180,7 +179,8 @@ i3GEOF.mascara = {
 			"",
 			" ",
 			false,
-			true
+			true,
+			"form-control comboTema"
 		);
 	},
 	listaTemas: function(){
@@ -190,7 +190,7 @@ i3GEOF.mascara = {
 		while(n > 0){
 			n -= 1;
 			if(cs[n].checked === true){
-				temp.push(cs[n].value);
+				temp.push(cs[n].name);
 			}
 		}
 		return temp;
@@ -198,7 +198,11 @@ i3GEOF.mascara = {
 	aplicar : function(){
 		var tema = $i("i3GEOFmascaraSelTema").value,
 			mascarar = i3GEOF.mascara.listaTemas(), p, fim, cp;
-		if(tema === "" || i3GEOF.mascara.aguarde.visibility === "visible"){
+		if(i3GEOF.mascara.aguarde.visibility === "visible"){
+			return;
+		}
+		if(tema === ""){
+			i3GEO.janela.tempoMsg($trad("tema",i3GEOF.mascara.dicionario));
 			return;
 		}
 		i3GEOF.mascara.aguarde.visibility = "visible";

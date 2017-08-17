@@ -14,5 +14,10 @@ i3GEOF.mascara.dicionario = {
 		pt : "Aplicar m&aacute;scara",
 		en : "",
 		es : ""
+	} ],
+	'tema' : [ {
+		pt : "Escolha um tema",
+		en : "",
+		es : ""
 	} ]
 };
