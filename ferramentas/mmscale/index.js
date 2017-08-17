@@ -68,11 +68,6 @@ i3GEOF.mmscale = {
 				}
 			});
 		}
-		var b = new YAHOO.widget.Button(
-			"i3GEOmmscalebotao1",
-			{onclick:{fn: i3GEOF.mmscale.aplica}}
-		);
-		b.addClass("rodar");
 		i3GEOF.mmscale.atual();
 	},
 	/*

@@ -1,20 +1,16 @@
-<div style='margin-left: 5px'>
-	<div  id='i3GEOFmmscaleComboCabeca' class='form-group condensed' style='width:100%'>
-	<span class="material-icons iconeComboTemas">playlist_add_check</span>
+<div class='container-fluid'>
+	<div id='i3GEOFmmscaleComboCabeca' class='form-group condensed' style='width: 100%'>
+		<span class="material-icons iconeComboTemas">playlist_add_check</span>
 	</div>
+	<h5>{{{minscale}}}</h5>
+	<div class='form-group label-fixed condensed'>
+		<input class="form-control input-lg" type='text' id='i3GEOmmscaleMinscale' value='' />
+	</div>
+	<h5>{{{maxscale}}}</h5>
+	<div class='form-group label-fixed condensed'>
+		<input class="form-control input-lg" type='text' id='i3GEOmmscaleMaxscale' value='' />
+	</div>
+	<button onclick="i3GEOF.mmscale.aplica()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
 
-	<p class='paragrafo'>{{{cancelar}}}:</p>
-	<p class='paragrafo'>{{{minscale}}}:</p>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' value='' id='i3GEOmmscaleMinscale' />
-	</div>
-	<br>
-	<p class='paragrafo'>{{{maxscale}}}:</p>
-	<div class='i3geoForm i3geoFormIconeNumero'>
-		<input type='number' value='' id='i3GEOmmscaleMaxscale' />
-	</div>
-	<br>
-	<p class='paragrafo'>
-		<input id='i3GEOmmscalebotao1' size='35' type='button' value='{{{aplica}}}' />
-	</p>
+	<h5 class="alert alert-info">{{{cancelar}}}</h5>
 </div>
