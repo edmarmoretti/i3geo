@@ -109,7 +109,7 @@ i3GEOF.nptpol = {
 		};
 		janela = i3GEO.janela.cria(
 			"420px",
-			"180px",
+			"280px",
 			"",
 			"",
 			"",
@@ -148,11 +148,6 @@ i3GEOF.nptpol = {
 	},
 	t2: function(){
 		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","","","i3GEOF.nptpol.t2","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
-		var b = new YAHOO.widget.Button(
-			"i3GEOnptpolbotao1",
-			{onclick:{fn: i3GEOF.nptpol.calcula}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: calcula
@@ -225,7 +220,10 @@ i3GEOF.nptpol = {
 			"",
 			false,
 			"pontos",
-			" "
+			" ",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -256,7 +254,10 @@ i3GEOF.nptpol = {
 			"",
 			false,
 			"poligonos",
-			" "
+			" ",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -279,7 +280,11 @@ i3GEOF.nptpol = {
 					$i("i3GEOnptpolondeItens").innerHTML = retorno.dados;
 					$i("i3GEOnptpolondeItens").style.display = "block";
 				},
-				"i3GEOnptpolondeItens"
+				"i3GEOnptpolondeItens",
+				"",
+				"",
+				"",
+				"form-control comboTema"
 			);
 		}
 		else{
