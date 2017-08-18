@@ -7,7 +7,7 @@ require_once(dirname(__FILE__)."/../../ms_configura.php");
 include("../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 require_once(dirname(__FILE__)."/../../pacotes/phpflickr/phpFlickr.php");
-//error_reporting(0);
+error_reporting(0);
 
 
 $funcao = $_GET["funcao"];

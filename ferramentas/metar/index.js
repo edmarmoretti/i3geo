@@ -135,8 +135,8 @@ i3GEOF.metar =
 			// cria a janela flutuante
 			titulo = "<span class='i3GeoTituloJanelaBsNolink' >Metar</span></div>";
 			janela = i3GEO.janela.cria(
-					"250px",
-					"190px",
+					"350px",
+					"210px",
 					"",
 					"",
 					"",
@@ -195,37 +195,43 @@ i3GEOF.metar =
 					success : function(o) {
 						var ins, dados, ndados, i, temp, temp1;
 						i3GEOF.metar.aguarde.visibility = "hidden";
-						ins = "<p class=paragrafo >" + $trad('ajuda', i3GEOF.metar.dicionario) + "</p>";
+						ins = "<h5 class='alert alert-info'>" + $trad('ajuda', i3GEOF.metar.dicionario) + "</h5>";
 						try {
 							dados = JSON.parse(o.responseText)[0].weatherObservations;
 							ndados = dados.length;
-							ins += "<table class=lista4 >";
 							for (i = 0; i < ndados; i++) {
 								temp = "i3GEOF.metar.mostraxy(" + dados[i].lng + "," + dados[i].lat + ")";
 								temp1 =
 									"i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid," + dados[i].lng + ","
 										+ dados[i].lat + ")";
-								ins +=
-									"<tr><td style=background:yellow ><b>" + $trad('estacao', i3GEOF.metar.dicionario)
-										+ "</b></td><td style=background:yellow ><b>" + dados[i].stationName + "</b></td></tr>"
-										+ "<tr><td></td><td><a href='#' onclick='" + temp1 + "' onmouseover='" + temp
+
+								ins += "<h4>" + dados[i].stationName
+										+ "</h4><a href='#' onclick='" + temp1 + "' onmouseover='" + temp
 										+ "' onmouseout='i3GEO.util.escondeBox()' >long: " + dados[i].lng + ", lat: " + dados[i].lat
-										+ "</a></td></tr>" + "<tr><td>" + $trad('temperatura', i3GEOF.metar.dicionario) + "</td><td>"
-										+ dados[i].temperature + " C</td></tr>" + "<tr><td>" + $trad('condicao', i3GEOF.metar.dicionario)
-										+ "</td><td>" + dados[i].weatherCondition + "</td></tr>" + "<tr><td>"
-										+ $trad('observacao', i3GEOF.metar.dicionario) + "</td><td>" + dados[i].observation + "</td></tr>"
-										+ "<tr><td>" + $trad('nuvens', i3GEOF.metar.dicionario) + "</td><td>" + dados[i].clouds
-										+ "</td></tr>" + "<tr><td>" + $trad('direcaoVento', i3GEOF.metar.dicionario) + "</td><td>"
-										+ dados[i].windDirection + "</td></tr>" + "<tr><td>"
-										+ $trad('pontoOrvalho', i3GEOF.metar.dicionario) + "</td><td>" + dados[i].dewPoint + " C</td></tr>"
-										+ "<tr><td>" + $trad('velocidadeVento', i3GEOF.metar.dicionario) + "</td><td>" + dados[i].windSpeed
-										+ " mph</td></tr>" + "<tr><td>" + $trad('humidade', i3GEOF.metar.dicionario) + "</td><td>"
-										+ dados[i].humidity + " %</td></tr>" + "<tr><td>" + $trad('data', i3GEOF.metar.dicionario)
-										+ "</td><td>" + dados[i].datetime + "</td></tr>" + "<tr><td>"
-										+ $trad('pressao', i3GEOF.metar.dicionario) + "</td><td>" + dados[i].hectoPascAltimeter
-										+ " hpa</td></tr>" + "<tr><td>ICAO</td><td>" + dados[i].ICAO + "</td></tr>";
+										+ "</a>"
+										+ "<h5>" + $trad('temperatura', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].temperature + " C&nbsp</h5>"
+										+ "<h5>" + $trad('condicao', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].weatherCondition + "</h5>"
+										+ "<h5>" + $trad('observacao', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].observation + "&nbsp;</h5>"
+										+ "<h5>" + $trad('nuvens', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].clouds + "&nbsp;</h5>"
+										+ "<h5>" + $trad('direcaoVento', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].windDirection + "&nbsp;<h5>"
+										+ "<h5>" + $trad('pontoOrvalho', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].dewPoint + " C&nbsp;</h5>"
+										+ "<h5>" + $trad('velocidadeVento', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].windSpeed + " mph&nbsp;</h5>"
+										+ "<h5>" + $trad('humidade', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].humidity + " %&nbsp;</h5>"
+										+ "<h5>" + $trad('data', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].datetime + "&nbsp;</h5>"
+										+ "<h5>" + $trad('pressao', i3GEOF.metar.dicionario) + ":&nbsp;"
+										+ dados[i].hectoPascAltimeter + " hpa&nbsp;</h5>"
+										+ "<h5>ICAO" + dados[i].ICAO + "&nbsp;</h5><hr>";
 							}
-							$i("i3GEOmetarLista").innerHTML = ins + "</table>";
+							$i("i3GEOmetarLista").innerHTML = ins;
 						} catch (e) {
 							$i("i3GEOmetarLista").innerHTML = ins;
 						}
