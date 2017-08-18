@@ -1,23 +1,26 @@
-<div style='padding: 5px; background-color: #F2F2F2; top: 0px; left: 0px; display: block; width: 98%;' id='i3GEOcentromassaresultado'>
-<div id='i3GEOFgradeDePontost0'>
-	<img class='i3GeoExemploImg'
-		src='{{{locaplic}}}/ferramentas/centromassa/exemplo.png'/>
-	<p class='paragrafo'>{{{ajuda}}}</p>
-	<p class='paragrafo'>{{{ajuda2}}}</p>
+<div class='container-fluid' id='i3GEOcentromassaresultado'>
+	<div id='i3GEOFgradeDePontost0'>
+		<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/centromassa/exemplo.png' />
+		<h5>{{{ajuda}}}</h5>
+		<h5>{{{ajuda2}}}</h5>
+	</div>
+	<div id='i3GEOF.centromassa.t1'>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{selecionaTema}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<div id='i3GEOcentromassaDivPontos'></div>
+			</div>
+		</div>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{selecionaItem}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<div id='i3GEOondeItens'></div>
+			</div>
+		</div>
+	</div>
+	<div id='i3GEOF.centromassa.t2'>
+		<h5>{{{ajuda3}}}</h5>
+		<button onclick=" i3GEOF.centromassa.calcula()" class='btn btn-primary btn-sm btn-raised'>{{{calcula}}}</button>
+		<h5 id='i3GEOcentromassafim'></h5>
+	</div>
 </div>
-<div id='i3GEOF.centromassa.t1'>
-	<p class='paragrafo'>
-		{{{selecionaTema}}}</p>
-	<div class='styled-select' id='i3GEOcentromassaDivPontos'></div>
-	<br>
-	<p class='paragrafo'>
-		{{{selecionaItem}}}</p>
-	<div id='i3GEOondeItens' class='styled-select'></div>
-</div>
-<div id='i3GEOF.centromassa.t2'>
-	<p class='paragrafo'>
-		{{{ajuda3}}} <br>
-		<br>
-		<input id='i3GEOcentromassabotao1' type='button' value='{{{calcula}}}'/></div>
-</div>
-<div style='top: 10px; left: 0px; display: block; width: 98%; color: red' id='i3GEOcentromassafim'></div>

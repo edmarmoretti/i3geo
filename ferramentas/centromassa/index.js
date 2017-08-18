@@ -109,7 +109,7 @@ i3GEOF.centromassa = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"150px",
+			"250px",
 			"",
 			"",
 			"",
@@ -147,11 +147,6 @@ i3GEOF.centromassa = {
 	},
 	t2: function(){
 		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","","","i3GEOF.centromassa.t2","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
-		var b = new YAHOO.widget.Button(
-			"i3GEOcentromassabotao1",
-			{onclick:{fn: i3GEOF.centromassa.calcula}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: calcula
@@ -230,7 +225,10 @@ i3GEOF.centromassa = {
 			"",
 			false,
 			"pontos",
-			" "
+			" ",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -251,7 +249,11 @@ i3GEOF.centromassa = {
 				$i("i3GEOondeItens").innerHTML = retorno.dados;
 				$i("i3GEOondeItens").style.display = "block";
 			},
-			"i3GEOondeItens"
+			"i3GEOondeItens",
+			"",
+			"",
+			"",
+			"form-control comboTema"
 		);
 	}
 };
