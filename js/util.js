@@ -2200,7 +2200,6 @@ i3GEO.util =
 			if(!c){
 				return;
 			}
-
 			if (temp && mantem == false && c) {
 				c.removeChild(temp);
 			}

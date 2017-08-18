@@ -262,7 +262,13 @@ i3GEO.analise =
 			 * Ferramenta grade de pol&iacute;gonos
 			 */
 			gradePol : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.gradePol()", "gradepol", "gradeDePoligonos");
+				i3GEO.util.dialogoFerramenta(
+						"i3GEO.analise.dialogo.gradePol()",
+						"gradepol",
+						"gradeDePoligonos",
+						"dependencias.php",
+						"i3GEOF.gradeDePoligonos.iniciaJanelaFlutuante()"
+					);
 			},
 			/**
 			 * Function: gradeHex
