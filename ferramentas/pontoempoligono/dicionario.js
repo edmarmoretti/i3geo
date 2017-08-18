@@ -16,7 +16,7 @@ i3GEOF.pontoEmPoligono.dicionario = {
 		es : ""
 	} ],
 	'selecionaTemaPontos' : [ {
-		pt : "Escolha o tema que cont&eacute;m os pontos:",
+		pt : "Escolha o tema que cont&eacute;m os pontos",
 		en : "",
 		es : ""
 	} ],
@@ -26,7 +26,7 @@ i3GEOF.pontoEmPoligono.dicionario = {
 		es : ""
 	} ],
 	'SelecionaTemaCruzamento' : [ {
-		pt : "Escolha os temas que ser&atilde;o utilizados para cruzar com os pontos:",
+		pt : "Escolha os temas que ser&atilde;o utilizados para cruzar com os pontos",
 		en : "",
 		es : ""
 	} ],

@@ -1605,6 +1605,9 @@ i3GEO.util =
 		 */
 		checkCombo : function(id, nomes, valores, estilo, funcaoclick, ids, idschecked) {
 			var temp, i, combo = "", n = valores.length;
+			if(!funcaoclick){
+				funcaoclick = "";
+			}
 			if (n > 0) {
 				combo = "<div id=" + id + " style='" + estilo + "'>";
 				for (i = 0; i < n; i++) {
@@ -1668,7 +1671,7 @@ i3GEO.util =
 		 */
 		checkTemas : function(id, funcao, onde, nome, tipoLista, prefixo, size) {
 			if (arguments.length > 2) {
-				$i(onde).innerHTML = "<span style=color:red;font-size:10px; >buscando temas...</span>";
+				$i(onde).innerHTML = "buscando temas...";
 			}
 			if (arguments.length === 3) {
 				nome = "";
@@ -1677,14 +1680,14 @@ i3GEO.util =
 			monta =
 				function(retorno) {
 				try {
-					var i, comboTemas, n, nome;
+					var i, comboTemas, n, nome, listaNomes = [], listaValores = [];
 					if (retorno !== undefined) {
 						if (retorno.data) {
 							retorno = retorno.data;
 						}
 						n = retorno.length;
 						if (n > 0) {
-							comboTemas = "<table class=lista3 >";
+							comboTemas = "";
 							for (i = 0; i < n; i++) {
 								if (retorno[i].nome) {
 									nome = retorno[i].nome;
@@ -1693,6 +1696,8 @@ i3GEO.util =
 									nome = retorno[i].tema;
 									tema = retorno[i].name;
 								}
+								listaNomes.push(nome);
+								listaValores.push(tema);
 								comboTemas += "<tr><td><input size=2 style='cursor:pointer' type=checkbox name='" + tema + "' /></td>";
 								comboTemas +=
 									"<td>&nbsp;<input style='text-align:left;width:" + size
@@ -1703,7 +1708,7 @@ i3GEO.util =
 									+ nome
 									+ "' /></td></tr>";
 							}
-							comboTemas += "</table>";
+
 							temp = {
 									dados : comboTemas,
 									tipo : "dados"
@@ -1720,7 +1725,7 @@ i3GEO.util =
 								tipo : "erro"
 						};
 					}
-					eval("funcao(temp);");
+					eval("funcao(temp,listaNomes,listaValores);");
 				} catch (e) {
 				}
 			};
