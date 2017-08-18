@@ -1,36 +1,46 @@
-<div style='padding: 5px; background-color: #F2F2F2; top: 0px; left: 0px; display: block; width: 90%;' id='i3GEOdistanciaptptresultado'>
+<div class='container-fluid' id='i3GEOdistanciaptptresultado'>
 	<div id='i3GEOFgradeDePontost0'>
-		<img class='i3GeoExemploImg' src='{{{locaplic}}}/ferramentas/distanciaptpt/exemplo.png' />
-		<p class='paragrafo'>{{{ajuda}}}
-		<p class='paragrafo'>{{{ajuda2}}}
-		<p class='paragrafo'>{{{ajuda3}}}
+		<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/distanciaptpt/exemplo.png' />
+		<h5>{{{ajuda}}}</h5>
+		<h5>{{{ajuda2}}}</h5>
+		<h5>{{{ajuda3}}}</h5>
 	</div>
 	<div id='i3GEOF.distanciaptpt.t1'>
-		<p class='paragrafo'>
-			{{{temaOrigem}}}</p>
-		<div class='styled-select' id='i3GEOdistanciaptptSelTemasOrigem'></div>
-		<br>
-		<p class='paragrafo'>
-			{{{temaDestino}}}</p>
-		<div class='styled-select' id='i3GEOdistanciaptptSelTemasDestino'></div>
-		<br>
-		<p class='paragrafo'>
-			{{{distMax}}}</p>
-		<div class='i3geoForm i3geoFormIconeEdita'>
-			<input type='text' value='100000' id='i3GEOFdistanciaptptdistancia'>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{temaOrigem}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<div id='i3GEOdistanciaptptSelTemasOrigem'></div>
+			</div>
+		</div>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{temaDestino}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<div id='i3GEOdistanciaptptSelTemasDestino'></div>
+			</div>
+		</div>
+		<div class='form-group label-fixed condensed' >
+			<label class="control-label" for="">{{{distMax}}}</label>
+			<input class="form-control input-lg" type='text' id='i3GEOFdistanciaptptdistancia' value='100000' />
 		</div>
 	</div>
 	<div id='i3GEOF.distanciaptpt.t2'>
-		<p class='paragrafo'>{{{selecionaAtributos}}}</p>
-		<p class='paragrafo'>{{{atributoOrigem}}}</p>
-		<div class='styled-select' id='i3GEOondeItensTemaOrigem'>{{{aguarde}}}</div>
-		<br>
-		<p class='paragrafo'>{{{atributoDestino}}}</p>
-		<div class='styled-select' id='i3GEOondeItensTemaDestino'>{{{aguarde}}}</div>
+		<h5>{{{selecionaAtributos}}}</h5>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{atributoOrigem}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<div id='i3GEOondeItensTemaOrigem'></div>
+			</div>
+		</div>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{atributoDestino}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<div id='i3GEOondeItensTemaDestino'></div>
+			</div>
+		</div>
+
 	</div>
 	<div id='i3GEOF.distanciaptpt.t3'>
-		<p class='paragrafo'>
-			{{{msgTema}}} <br> <br> <input id='i3GEOdistanciaptptbotao1' type='button' value='{{{calcula}}}'/>
+		<button onclick="i3GEOF.distanciaptpt.calcula()" class='btn btn-primary btn-sm btn-raised'>{{{calcula}}}</button>
+		<h5 id='i3GEOdistanciaptptfim'></h5>
 	</div>
 </div>
-<div style='top: 10px; left: 0px; display: block; width: 98%; color: red' id='i3GEOdistanciaptptfim'></div>

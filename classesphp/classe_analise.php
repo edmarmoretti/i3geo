@@ -1270,12 +1270,13 @@ class Analise {
 	 *
 	 */
 	function distanciaptpt($temaorigem, $temadestino, $temaoverlay, $locaplic, $itemorigem = "", $itemdestino = "") {
-		// //error_reporting(0);
+
 		set_time_limit ( 180 );
 		// para manipular dbf
 		if ($this->dbaseExiste == false) {
 			include_once dirname ( __FILE__ ) . "/../pacotes/phpxbase/api_conversion.php";
 		}
+		//error_reporting(E_ALL);
 		// define o nome do novo shapefile que ser&aacute; criado
 		$nomefinal = nomeRandomico ();
 		$nomeshp = $this->diretorio . "/" . $nomefinal;
@@ -1318,6 +1319,8 @@ class Analise {
 		$projInObj = $layerorigem->getProjection ();
 		if ($projInObj == "") {
 			$projInObj = ms_newprojectionobj ( "proj=longlat,ellps=WGS84,datum=WGS84,no_defs" );
+		} else {
+			$projInObj = ms_newprojectionobj($projInObj);
 		}
 		$projOutObj = ms_newprojectionobj ( "proj=poly,ellps=GRS67,lat_0=" . $rect->miny . ",lon_0=" . $rect->minx . ",x_0=5000000,y_0=10000000" );
 		$origemdestino = array ();
@@ -1327,6 +1330,7 @@ class Analise {
 		if (count ( $shapesdestino ) == 0) {
 			return "erro";
 		}
+
 		$novoshpf = ms_newShapefileObj ( $nomeshp, MS_SHP_ARC );
 		// cria o dbf
 		$def [] = array (
@@ -1358,16 +1362,19 @@ class Analise {
 			$db = xbase_open ( $dbname, 2 );
 		else
 			$db = dbase_open ( $dbname, 2 );
+
 		foreach ( $shapesorigem as $sorigem ) {
 			if ($itemorigem != "") {
 				$valororigem = $sorigem->values [$itemorigem];
 			} else {
 				$valororigem = "";
 			}
+
 			foreach ( $shapesdestino as $sdestino ) {
 				$linha = ms_newLineObj ();
 				$linha->add ( $sorigem->getCentroid () );
 				$linha->add ( $sdestino->getCentroid () );
+
 				if ($itemdestino != "") {
 					$valordestino = $sdestino->values [$itemdestino];
 				} else {
@@ -1376,8 +1383,11 @@ class Analise {
 				$ShapeObj = ms_newShapeObj ( MS_SHAPE_LINE );
 				$ShapeObj->add ( $linha );
 				$novoshpf->addShape ( $ShapeObj );
+
 				$ShapeObj->project ( $projInObj, $projOutObj );
+
 				$distancia = $ShapeObj->getLength ();
+
 				$registro = array (
 						$distancia,
 						$valororigem,
@@ -1389,11 +1399,14 @@ class Analise {
 					dbase_add_record ( $db, $registro );
 			}
 		}
+
 		if ($this->dbaseExiste == false)
 			xbase_close ( $db );
 		else
 			dbase_close ( $db );
-			// adiciona no mapa atual o novo tema
+
+
+		// adiciona no mapa atual o novo tema
 		$novolayer = criaLayer ( $this->mapa, MS_LAYER_LINE, MS_DEFAULT, ("Distancias (" . $nomefinal . ")"), $metaClasse = "SIM" );
 		$novolayer->set ( "data", $nomeshp . ".shp" );
 		$novolayer->setmetadata ( "DOWNLOAD", "SIM" );

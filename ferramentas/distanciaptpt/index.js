@@ -111,7 +111,7 @@ i3GEOF.distanciaptpt = {
 		};
 		janela = i3GEO.janela.cria(
 			"410px",
-			"180px",
+			"240px",
 			"",
 			"",
 			"",
@@ -171,7 +171,6 @@ i3GEOF.distanciaptpt = {
 	<DISTANCIAPTPT>
 	*/
 	calcula: function(){
-		try{
 			if(i3GEOF.distanciaptpt.aguarde.visibility === "visible")
 			{return;}
 			var distancia = $i("i3GEOFdistanciaptptdistancia").value,
@@ -181,12 +180,13 @@ i3GEOF.distanciaptpt = {
 				p,
 				cp;
 			if ((distancia*1 > 0) && (temaOrigem != "") && (temaDestino != "")){
-				i3GEOF.distanciaptpt.aguarde.visibility = "visible";
+				//i3GEOF.distanciaptpt.aguarde.visibility = "visible";
 				fim = function(retorno){
 					if (retorno.data==undefined )
 					{$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >"+$trad('erroTempo',i3GEOF.distanciaptpt.dicionario);}
-					else
-					{i3GEO.atualiza();}
+					else{
+						i3GEO.atualiza();
+					}
 					i3GEOF.distanciaptpt.aguarde.visibility = "hidden";
 				};
 				p = i3GEO.configura.locaplic+"/ferramentas/distanciaptpt/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=distanciaptpt&temaorigem="+temaOrigem+"&temadestino="+temaDestino+"&distancia="+distancia+"&itemorigem="+$i("i3GEOFdistanciaptptItemOrigem").value+"&itemdestino="+$i("i3GEOFdistanciaptptItemDestino").value+"&ext="+i3GEO.parametros.mapexten;
@@ -194,10 +194,9 @@ i3GEOF.distanciaptpt = {
 				cp.set_response_type("JSON");
 				cp.call(p,"distanciaptpt",fim);
 			}
-			else
-			{$i("i3GEOdistanciaptptfim").innerHTML = $trad('erroParametro',i3GEOF.distanciaptpt.dicionario);}
-		}
-		catch(e){$i("i3GEOdistanciaptptfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.distanciaptpt.aguarde.visibility = "hidden";}
+			else{
+				$i("i3GEOdistanciaptptfim").innerHTML = $trad('erroParametro',i3GEOF.distanciaptpt.dicionario);
+			}
 	},
 	/*
 	Function: comboTemasOrigem
@@ -214,7 +213,6 @@ i3GEOF.distanciaptpt = {
 			"i3GEOdistanciaptpttemasComSel",
 			function(retorno){
 				$i("i3GEOdistanciaptptSelTemasOrigem").innerHTML = retorno.dados;
-				$i("i3GEOdistanciaptptSelTemasOrigem").style.display = "block";
 				if ($i("i3GEOdistanciaptpttemasComSel")){
 					$i("i3GEOdistanciaptpttemasComSel").onchange = function(){
 						i3GEO.mapa.ativaTema($i("i3GEOdistanciaptpttemasComSel").value);
@@ -228,7 +226,10 @@ i3GEOF.distanciaptpt = {
 			"",
 			false,
 			"pontosSelecionados",
-			" "
+			"",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -246,7 +247,6 @@ i3GEOF.distanciaptpt = {
 			"i3GEOdistanciaptpttemas",
 			function(retorno){
 				$i("i3GEOdistanciaptptSelTemasDestino").innerHTML = retorno.dados;
-				$i("i3GEOdistanciaptptSelTemasDestino").style.display = "block";
 				if ($i("i3GEOdistanciaptpttemas")){
 					$i("i3GEOdistanciaptpttemas").onchange = function(){
 						i3GEO.mapa.ativaTema($i("i3GEOdistanciaptpttemas").value);
@@ -260,7 +260,10 @@ i3GEOF.distanciaptpt = {
 			"",
 			false,
 			"pontos",
-			" "
+			"",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -281,7 +284,11 @@ i3GEOF.distanciaptpt = {
 				$i("i3GEOondeItensTemaOrigem").innerHTML = retorno.dados;
 				$i("i3GEOondeItensTemaOrigem").style.display = "block";
 			},
-			"i3GEOondeItensTemaOrigem"
+			"i3GEOondeItensTemaOrigem",
+			"",
+			"",
+			"",
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -302,7 +309,11 @@ i3GEOF.distanciaptpt = {
 				$i("i3GEOondeItensTemaDestino").innerHTML = retorno.dados;
 				$i("i3GEOondeItensTemaDestino").style.display = "block";
 			},
-			"i3GEOondeItensTemaDestino"
+			"i3GEOondeItensTemaDestino",
+			"",
+			"",
+			"",
+			"form-control comboTema"
 		);
 	}
 };
