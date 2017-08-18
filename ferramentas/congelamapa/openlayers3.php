@@ -56,7 +56,7 @@ $urllayer = "../../ogc.php?tema=".$novo_mapfile;
 <script src="../../pacotes/ol3/ol.js"></script>
 <link rel="stylesheet" type="text/css" href="../../pacotes/ol3/ol.css">
 </head>
-<body style="background-color: white">
+<body>
 	<div id=mapa style="width: 470px; height: 330px"></div>
 	<script>
 var source = new ol.source.ImageWMS({

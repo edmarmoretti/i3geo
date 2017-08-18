@@ -122,7 +122,7 @@ i3GEOF.opcoesTempo = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p12") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
-			"110px",
+			"160px",
 			"",
 			"",
 			"",
