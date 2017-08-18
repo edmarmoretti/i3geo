@@ -591,11 +591,13 @@ i3GEO.listaDeFerramentas = {
 										text : $trad("d17t"),
 										url : "javascript:i3GEO.navega.dialogo.confluence()"
 									},
+									/*
 									{
 										id : "omenudataNavegacaoLente",
 										text : $trad("d18t"),
 										url : "javascript:i3GEO.navega.lente.inicia()"
 									},
+									*/
 									{
 										id : "omenudataFerramentas7a",
 										text : $trad("x64a"),
