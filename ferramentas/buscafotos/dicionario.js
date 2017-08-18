@@ -31,9 +31,9 @@ i3GEOF.buscaFotos.dicionario = {
 		es : "Continuar"
 	} ],
 	'ajudaFlickr' : [ {
-		pt : "Este produto usa a API do Flickr, mas n&atilde;o &eacute; endossado nem certificado pelo Flickr.",
+		pt : "Este produto usa APIs de diferentes servi&ccedil;os, mas n&atilde;o &eacute; endossado nem certificado por esses",
 		en : "",
-		es : "Este producto usa la API de Flickr, pero no est&aacute; aprobado ni certificado por Flickr."
+		es : ""
 	} ],
 	'opcoes' : [ {
 		pt : "Op&ccedil;&otilde;es: Se nenhum par&acirc;metro for definido, ser&atilde;o consideradas apenas as fotos inclu&iacute;das nas &uacute;ltimas 12 horas.",
@@ -110,18 +110,13 @@ i3GEOF.buscaFotos.dicionario = {
 		en : "",
 		es : "Nada encontrado en esta regi&aacute;n "
 	} ],
-	23 : [ {
-		pt : "",
+	"fotos" : [ {
+		pt : "Fotos",
 		en : "",
 		es : ""
 	} ],
-	24 : [ {
-		pt : "",
-		en : "",
-		es : ""
-	} ],
-	25 : [ {
-		pt : "",
+	"parflickr" : [ {
+		pt : "Par&acirc;metros que afetam o servi&ccedil;o do Flicker",
 		en : "",
 		es : ""
 	} ]

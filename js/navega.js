@@ -966,7 +966,13 @@ i3GEO.navega =
 			 * armazenamento de fotografias
 			 */
 			buscaFotos : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.navega.dialogo.buscaFotos()", "buscafotos", "buscaFotos");
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.navega.dialogo.buscaFotos()",
+					"buscafotos",
+					"buscaFotos",
+					"dependencias.php",
+					"i3GEOF.buscaFotos.iniciaJanelaFlutuante()"
+				);
 			},
 			/**
 			 * Function: google

@@ -49,37 +49,23 @@ i3GEOF.buscaFotos = {
 	Objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
 	*/
 	aguarde: "",
+	/**
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
+	 */
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.buscaFotos.dicionario);
+		return dicionario;
+	},
 	/*
 	Propriedade: chaveFlicker
 
 	C&oacute;digo de acesso aos web services do Flicker
 	*/
 	chaveFlicker: "b170cde3c3064ca44b1ae0fbe747575d",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.buscaFotos.iniciaDicionario();
-	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.buscaFotos.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/buscafotos/dicionario.js",
-				"i3GEOF.buscaFotos.iniciaJanelaFlutuante()",
-				"i3GEOF.buscaFotos.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.buscaFotos.iniciaJanelaFlutuante();
-		}
-	},
 	/*
 	Function: inicia
 
@@ -92,29 +78,35 @@ i3GEOF.buscaFotos = {
 	pagina {integer} - (opcional) p&aacute;gina que ser&aacute; mostrada. Se for definida a janela de busca ser&aacute; mostrada j&aacute; de in&iacute;cio por meio do servi&ccedil;o do panoramio
 	*/
 	inicia: function(iddiv,busca){
-		try{
-			$i(iddiv).innerHTML += i3GEOF.buscaFotos.html();
-			new YAHOO.widget.Button("i3GEObuscafotosbotao1",{onclick:{fn: function(){
-				i3GEOF.buscaFotos.busca("1");
-			}}});
-			new YAHOO.widget.Button("i3GEObuscafotosbotao2",{onclick:{fn: function(){
-				i3GEOF.buscaFotos.mostraMenu();
-			}}});
-			new YAHOO.widget.Button("i3GEObuscafotosbotao3",{onclick:{fn: function(){
-				i3GEO.parametros.mapscale = 300000;
-				i3GEO.navega.aplicaEscala(i3GEO.configura.locaplic,i3GEO.configura.sid,300000);
-				i3GEOF.buscaFotos.mostraMenu();
-			}}});
-
-			i3GEOF.buscaFotos.ativaFoco();
-			i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.buscaFotos.busca('1')");
-			if(busca){
-				i3GEOF.buscaFotos.mostraMenu();
-				$i("i3GEObuscafotosbuscapanoramio").checked = true;
-				i3GEOF.buscaFotos.busca(busca);
-			}
+		if(i3GEOF.buscaFotos.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/buscafotos/template_mst.html", function(template) {
+				i3GEOF.buscaFotos.MUSTACHE = template;
+				i3GEOF.buscaFotos.inicia(iddiv,busca);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML += i3GEOF.buscaFotos.html();
+
+		i3GEO.guias.mostraGuiaFerramenta("i3GEObuscafotosguia2", "i3GEObuscafotosguia");
+		// eventos das guias
+		$i("i3GEObuscafotosguia2").onclick = function() {
+			i3GEO.guias.mostraGuiaFerramenta("i3GEObuscafotosguia2", "i3GEObuscafotosguia");
+		};
+		$i("i3GEObuscafotosguia1").onclick = function() {
+			i3GEO.guias.mostraGuiaFerramenta("i3GEObuscafotosguia1", "i3GEObuscafotosguia");
+		};
+
+
+		new YAHOO.widget.Button("i3GEObuscafotosbotao1",{onclick:{fn: function(){
+			i3GEOF.buscaFotos.busca("1");
+		}}});
+		i3GEOF.buscaFotos.ativaFoco();
+		i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.buscaFotos.busca('1')");
+		if(busca){
+			$i("i3GEObuscafotosbuscapanoramio").checked = true;
+			i3GEOF.buscaFotos.busca(busca);
+		}
+
 	},
 	/*
 	Function: html
@@ -126,38 +118,7 @@ i3GEOF.buscaFotos = {
 	String com o c&oacute;digo html
 	*/
 	html:function(){
-		var ins = '';
-		ins += '<div id=i3GEObuscafotosaviso style="display:block;padding:5px;" >';
-		ins += '<p class="paragrafo" >'+$trad('ajuda',i3GEOF.buscaFotos.dicionario);
-		ins += '<p class="paragrafo" >'+$trad('ajuda2',i3GEOF.buscaFotos.dicionario);
-		ins += '<p class="paragrafo" >'+$trad('ajuda3',i3GEOF.buscaFotos.dicionario);
-    	if(i3GEO.parametros.mapscale > 30000001){
-    		ins += '<p class="paragrafo" >'+$trad('msgForaEscala',i3GEOF.buscaFotos.dicionario);
-    		ins += '<p class="paragrafo" ><input id=i3GEObuscafotosbotao3 size=20  type=button value="'+$trad('ajusta',i3GEOF.buscaFotos.dicionario)+'" />';
-    	}
-    	else{
-    		ins += '<p><input  id=i3GEObuscafotosbotao2 size=20  type=button value="'+$trad('continua',i3GEOF.buscaFotos.dicionario)+'" />';
-    	}
-		ins += '</div>';
-		ins += '<div id=i3GEObuscafotosbusca style="display:none;padding:5px;" >';
-		ins += '	<div id="i3GEObuscafotosf" style="display:none">';
-		ins += '		<p class="paragrafo" ><i>'+$trad('ajudaFlickr',i3GEOF.buscaFotos.dicionario)+'</i>';
-		ins += '		<p class="paragrafo" >'+$trad('opcoes',i3GEOF.buscaFotos.dicionario);
-		ins += $trad('maxRegistros',i3GEOF.buscaFotos.dicionario);
-		ins += $trad('ajudaAno',i3GEOF.buscaFotos.dicionario);
-		ins += '		<p class="paragrafo" >'+$trad('texto',i3GEOF.buscaFotos.dicionario)+': <br><div class="i3geoForm i3geoFormIconeEdita"><input type=text size=30 value="" id="i3GEObuscafotostexto" /></div>';
-		ins += '		<br><p class="paragrafo" >'+$trad('anoInicial',i3GEOF.buscaFotos.dicionario)+': <br><div class="i3geoForm i3geoFormIconeEdita"><input type=text size=10 value="2015" id="i3GEObuscafotosai" /></div>';
-		ins += '		<br><p class="paragrafo" >'+$trad('anoFinal',i3GEOF.buscaFotos.dicionario)+': <br><div class="i3geoForm i3geoFormIconeEdita"><input type=text size=10 value="2015" id="i3GEObuscafotosaf" /></div><br><br>';
-		ins += '		<input  id=i3GEObuscafotosbotao1 size=20  type=button value="'+$trad('procuraFotos',i3GEOF.buscaFotos.dicionario)+'" />';
-		ins += '	</div>';
-		ins += '	<div class="paragrafo">';
-		ins += '	<input type=radio onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=flickr id=i3GEObuscafotosbuscaflickr  /><label><a href="http://www.flickr.com" target="_blank" >Flickr</a></label>';
-		ins += '	<input type=radio onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=panoramio id=i3GEObuscafotosbuscapanoramio /><label><a href="http://www.panoramio.com" target="_blank" >Panoramio</a></label>';
-		ins += '	<input type=radio onclick="i3GEOF.buscaFotos.esconde(this)" name=buscador value=locr id=i3GEObuscafotosbuscalocr /><label><a href="http://www.locr.com" target="_blank" >Locr</a></label>';
-		ins += '	</div>';
-		ins += '	<div id="i3GEObuscafotospaginas" style="top:10px;"></div><br>';
-		ins += '	<div style="top:0px;left:5px;display:block;width:95%;overflow:auto"  id="i3GEObuscafotosresultadofotos" ></div><br>';
-		ins += '</div>';
+		var ins = Mustache.render(i3GEOF.buscaFotos.MUSTACHE, i3GEOF.buscaFotos.mustacheHash());
 		return ins;
 	},
 	/*
@@ -181,7 +142,7 @@ i3GEOF.buscaFotos = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Fotos</span></div>";
 		janela = i3GEO.janela.cria(
 			"430px",
-			"250px",
+			"350px",
 			"",
 			"",
 			"",
@@ -215,15 +176,6 @@ i3GEOF.buscaFotos = {
 	*/
 	ativaFoco: function(){
 
-	},
-	/*
-	Function: mostraMenu
-
-	Mostra o menu de escolha do provedor de fotos e esconde o aviso inicial
-	*/
-	mostraMenu: function(){
-		$i("i3GEObuscafotosbusca").style.display = "block";
-		$i("i3GEObuscafotosaviso").style.display = "none";
 	},
 	/*
 	Function: esconde
@@ -267,25 +219,15 @@ i3GEOF.buscaFotos = {
 		cp = new cpaint();
 		cp.set_response_type("JSON");
 		if($i("i3GEObuscafotosbuscaflickr").checked){
-			$i("i3GEObuscafotosf").style.display="block";
 			p = i3GEO.configura.locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotosflickr&ret="+m+"&key="+i3GEOF.buscaFotos.chaveFlicker+"&texto="+texto+"&ai="+ai+"&af="+af+"&page="+pagina;
 			cp.call(p,"listafotosflickr",i3GEOF.buscaFotos.listafotosflickr);
 		}
 		if($i("i3GEObuscafotosbuscapanoramio").checked){
-			$i("i3GEObuscafotosf").style.display="none";
 			$i("i3GEObuscafotospaginas").innerHTML = parseInt(pagina,10)+15;
 			ai = pagina;
 			af = parseInt(pagina,10)+15;
 			p = i3GEO.configura.locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotospanoramio&ret="+m+"&ai="+ai+"&af="+af;
 			cp.call(p,"listafotospanoramio",i3GEOF.buscaFotos.listafotospanoramio);
-		}
-		if($i("i3GEObuscafotosbuscalocr").checked){
-			$i("i3GEObuscafotosf").style.display="none";
-			$i("i3GEObuscafotospaginas").innerHTML = parseInt(pagina,10)+15;
-			ai = pagina;
-			af = parseInt(pagina,10)+15;
-			p = i3GEO.configura.locaplic+"/ferramentas/buscafotos/funcoes.php?funcao=listafotoslocr&ret="+m+"&ai="+ai+"&af="+af;
-			cp.call(p,"listafotoslocr",i3GEOF.buscaFotos.listafotoslocr);
 		}
 	},
 	/*
@@ -303,8 +245,6 @@ i3GEOF.buscaFotos = {
 	Mostra a imagem que localiza a foto no mapa
 	*/
 	mostraxy: function(xy){
-		if(i3GEO.Interface.ATUAL === "googleearth")
-		{return;}
 		xy = xy.split(",");
 		if(i3GEOF.buscaFotos.MARCA === false){
 			i3GEOF.buscaFotos.MARCA = i3GEO.desenho.addPin(xy[1]*1,xy[0]*1,"","",i3GEO.configura.locaplic+'/imagens/google/foto.png',"foto");
@@ -320,37 +260,41 @@ i3GEOF.buscaFotos = {
 	*/
 	listafotospanoramio: function(retorno){
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
-		if (retorno.data===undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad('erroTempo',i3GEOF.buscaFotos.dicionario);return;}
+		if (retorno.data===undefined ){
+			i3GEO.janela.tempoMsg($trad('erroTempo',i3GEOF.buscaFotos.dicionario));
+			return;
+		}
 		eval("var data = "+retorno.data);
-		var ins = "",res,i,t,p;
-		if(!retorno.data)
-		{ins += "<br><span style=color:red>"+$trad('erroAcessoDados',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";return;}
-		res = data.count;
+		var ins = "",res,i,t,p,j,f;
+		if(!retorno.data){
+			i3GEO.janela.tempoMsg($trad('erroAcessoDados',i3GEOF.buscaFotos.dicionario));
+			return;
+		}
+		data = data.results;
+		res = data.length;
 		ins = "";
-		if (res === 1)
-		{ins += "<br><span style=color:red>"+$trad('erroNadaEncontrado',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
-		else
-		{
+		if (res === 1){
+			i3GEO.janela.tempoMsg($trad('erroNadaEncontrado',i3GEOF.buscaFotos.dicionario));
+		}
+		else{
+			ins += "<h5>"+$trad('fotosEncontradas',i3GEOF.buscaFotos.dicionario)+"</h5>";
 			for (i=0;i<res;i++)	{
-				if(data.photos[i]){
-					ins += "<img src='"+data.photos[i].photo_file_url+"' ";
-					ins += " onmouseout='i3GEOF.buscaFotos.escondexy()' ";
-					ins += " onmouseover='i3GEOF.buscaFotos.mostraxy(\""+data.photos[i].latitude+","+data.photos[i].longitude+"\")'";
-					ins += " onclick='javascript:window.open(\""+data.photos[i].owner_url+"\")' ";
-					t = data.photos[i].owner_name+" - "+data.photos[i].photo_title;
-					ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";
+				if(data[i].photos){
+					f = data[i].photos.length;
+					for(j=0;j<f;j++){
+						ins += "<img class='img-rounded' src='https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference="+data[i].photos[j].photo_reference+"&key=" + i3GEO.parametros.googleApiKey+"'";
+						ins += " onmouseout='i3GEOF.buscaFotos.escondexy()' ";
+						ins += " onmouseover='i3GEOF.buscaFotos.mostraxy(\"" + data[i].geometry.location.lat + "," + data[i].geometry.location.lng + "\")'";
+						ins += " onclick='javascript:window.open(\""+data[i].photos[j].html_attributions[0]+"\")' ";
+						t = data[i].name;
+						ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";
+					}
 				}
 			}
 		}
-		$i("i3GEObuscafotosresultadofotos").innerHTML = ins+"<br><br>";
-		p = parseInt($i("i3GEObuscafotospaginas").innerHTML,10);
-		if(res > 15){
-			ins = "<span onclick='i3GEOF.buscaFotos.busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >"+$trad('maisFotos',i3GEOF.buscaFotos.dicionario)+"&nbsp;</span>";
-			$i("i3GEObuscafotospaginas").innerHTML = ins;
-		}
-		else
-		{$i("i3GEObuscafotospaginas").innerHTML = "";}
+		$i("i3GEObuscafotospaginas").innerHTML = "";
+		$i("i3GEObuscafotosresultadofotos").innerHTML = ins;
+
 	},
 	/*
 	Function: listafotosflickr
@@ -365,77 +309,36 @@ i3GEOF.buscaFotos = {
 			i,
 			t,
 			p;
-		if (retorno.data===undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad('erroTempo',i3GEOF.buscaFotos.dicionario);return;}
-		if((!retorno.data) || (retorno.data === ""))
-		{ins = "<br><span style=color:red>"+$trad('erroAcessoDados',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";$i("i3GEObuscafotosresultadofotos").innerHTML = ins;return;}
+		if (retorno.data===undefined ){
+			i3GEO.janela.tempoMsg($trad('erroTempo',i3GEOF.buscaFotos.dicionario));
+			return;
+		}
+		if((!retorno.data) || (retorno.data === "")){
+			i3GEO.janela.tempoMsg($trad('erroAcessoDados',i3GEOF.buscaFotos.dicionario));
+			return;
+		}
 		data = retorno.data.photo;
 		res = data.length;
 		ins = "";
-		ins += "<span><b>"+$trad('fotosEncontradas',i3GEOF.buscaFotos.dicionario)+":</span><br><br>";
-		if (res === 0)
-		{ins += "<br><span style=color:red>"+$trad('erroNadaEncontrado2',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
-		else
-		{
-			for (i=0;i<res;i++){
-				ins += "<img src='http://farm"+data[i].farm+".static.flickr.com/"+data[i].server+"/"+data[i].id+"_"+data[i].secret+"_s.jpg' ";
-				ins += " onmouseout='i3GEOF.buscaFotos.escondexy()' ";
-				ins += " onmouseover='i3GEOF.buscaFotos.mostraxy(\""+data[i].latitude+","+data[i].longitude+"\")'";
-				ins += " onclick='javascript:window.open(\"http://www.flickr.com/photos/"+data[i].owner+"/"+data[i].id+"\")' ";
-				t = data[i].title;
-				ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";
-			}
+		ins += "<h5>"+$trad('fotosEncontradas',i3GEOF.buscaFotos.dicionario)+"</h5>";
+		if (res === 0){
+			i3GEO.janela.tempoMsg($trad('erroNadaEncontrado2',i3GEOF.buscaFotos.dicionario));
+			return;
+		}
+		for (i=0;i<res;i++){
+			ins += "<img class='img-rounded' src='http://farm"+data[i].farm+".static.flickr.com/"+data[i].server+"/"+data[i].id+"_"+data[i].secret+"_s.jpg' ";
+			ins += " onmouseout='i3GEOF.buscaFotos.escondexy()' ";
+			ins += " onmouseover='i3GEOF.buscaFotos.mostraxy(\""+data[i].latitude+","+data[i].longitude+"\")'";
+			ins += " onclick='javascript:window.open(\"http://www.flickr.com/photos/"+data[i].owner+"/"+data[i].id+"\")' ";
+			t = data[i].title;
+			ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";
 		}
 		$i("i3GEObuscafotosresultadofotos").innerHTML = ins;
 		p = retorno.data.pages;
 		ins = "";
 		for (i=0;i<p;i++){
-			ins += "<span onclick='i3GEOF.buscaFotos.busca(\""+i+"\")' style='cursor:pointer;text-decoration:underline' >"+i+"&nbsp;</span>";
+			ins += "<li><a onclick='i3GEOF.buscaFotos.busca(\""+i+"\")' href='javascript:void(0)'>" + i + "</a></li>";
 		}
-		$i("i3GEObuscafotospaginas").innerHTML = ins;
-	},
-	/*
-	Function: listafotoslocr
-
-	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Locr
-	*/
-	listafotoslocr: function(retorno){
-		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
-		var ins = "",
-			res,
-			i,
-			t,
-			p;
-		if (retorno.data === undefined )
-		{$i("i3GEObuscafotosresultadofotos").innerHTML = $trad('erroTempo',i3GEOF.buscaFotos.dicionario);return;}
-		eval("var data = "+retorno.data);
-		if(!retorno.data)
-		{ins += "<br><span style=color:red>"+$trad('erroAcessoDados',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";return;}
-		res = data.photos.length;
-		ins = "";
-		ins += "<span><b>"+$trad(21,i3GEOF.buscaFotos.dicionario)+":</span><br><br>";
-		if (res === 0)
-		{ins += "<br><span style=color:red>"+$trad('erroNadaEncontrado',i3GEOF.buscaFotos.dicionario)+"</span><br><br>";}
-		else{
-			for (i=0;i<res;i++){
-				if(data.photos[i]){
-					ins += "<img src='"+data.photos[i].photo_file_url+"' ";
-					ins += " onmouseout='i3GEOF.buscaFotos.escondexy()' ";
-					ins += " onmouseover='i3GEOF.buscaFotos.mostraxy(\""+data.photos[i].latitude+","+data.photos[i].longitude+"\")'";
-					ins += " onclick='javascript:window.open(\""+data.photos[i].owner_url+"\")' "	;
-					t = data.photos[i].owner_name+" - "+data.photos[i].photo_title;
-					ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";
-				}
-			}
-		}
-		$i("i3GEObuscafotosresultadofotos").innerHTML = ins;
-		p = parseInt($i("i3GEObuscafotospaginas").innerHTML,10);
-		if(res > 15)
-		{
-			ins = "<span onclick='busca(\""+p+"\")' style='cursor:pointer;text-decoration:underline' >"+$trad('maisFotos',i3GEOF.buscaFotos.dicionario)+"&nbsp;</span>";
-			$i("i3GEObuscafotospaginas").innerHTML = ins;
-		}
-		else
-		{$i("i3GEObuscafotospaginas").innerHTML = "";}
+		$i("i3GEObuscafotospaginas").innerHTML = "<nav><ul class='pagination pagination-sm'>" + ins + "</ul></nav>";
 	}
 };

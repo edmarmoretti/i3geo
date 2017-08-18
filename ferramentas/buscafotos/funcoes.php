@@ -45,11 +45,14 @@ function listafotosflickr()
 }
 function listafotospanoramio()
 {
-	global $ret, $cp,$ai,$af,$i3geo_proxy_server;
+	global $ret, $cp,$ai,$af,$i3geo_proxy_server,$googleApiKey;
 	$ret = explode(" ",$ret);
+
+	$lat = $ret[3] - (($ret[3] - $ret[1]) / 2);
+	$long = $ret[2] - (($ret[2] - $ret[0]) / 2);
 	$resultado = "";
 	$curl = curl_init();
-	curl_setopt ($curl, CURLOPT_URL, "http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail");
+	curl_setopt ($curl, CURLOPT_URL, "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$long&radius=25000&key=".$googleApiKey);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 	if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
 		curl_setopt($curl, CURLOPT_PROXY, $i3geo_proxy_server);
@@ -57,10 +60,6 @@ function listafotospanoramio()
 	$recent = curl_exec($curl);
 	curl_close ($curl);
 
-	//$recent = file_get_contents("http://www.panoramio.com/map/get_panoramas.php?order=upload_date&set=public&from=".$ai."&to=".$af."&minx=".$ret[0]."&miny=".$ret[1]."&maxx=".$ret[2]."&maxy=".$ret[3]."&size=thumbnail");
-	$recent = str_replace("\n","",$recent);
-	$recent = str_replace("'","",$recent);
-	$recent = str_replace('"',"'",$recent);
 	$cp->set_data($recent);
 }
 function listafotoslocr()
