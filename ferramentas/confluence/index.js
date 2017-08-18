@@ -78,7 +78,7 @@ i3GEOF.confluence = {
 		}
 			$i(iddiv).innerHTML += i3GEOF.confluence.html();
 			i3GEOF.confluence.ativaFoco();
-			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
+			if(i3GEO.Interface.ATUAL !== "googlemaps"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.confluence.lista()");
 			}
 			if(i3GEO.Interface.ATUAL === "googlemaps"){
@@ -152,9 +152,6 @@ i3GEOF.confluence = {
 				google.maps.event.removeListener(confluenceDragend);
 				google.maps.event.removeListener(confluenceZoomend);
 			}
-			if(i3GEO.Interface.ATUAL === "googleearth"){
-				google.earth.removeEventListener(confluenceDragend);
-			}
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
@@ -196,46 +193,45 @@ i3GEOF.confluence = {
 	Lista os pontos de conflu&ecirc;ncia
 	*/
 	lista: function(){
-		try{
-			var ins = "",i,j,ext,xini,yini,xfim,yfim,xs,dx,ys = [];
-			if(i3GEO.parametros.mapexten){
-				ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-			}
-			else{
-				ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";
-			} //apenas para exemplo
-			ext = ext.split(" ");
-			xini = parseInt(ext[0],10);
-			yini = parseInt(ext[1],10);
-			xfim = parseInt(ext[2],10);
-			yfim = parseInt(ext[3],10);
-			xs = [];
-			dx = xfim - xini;
-			if ((dx > 1) || (dx < -1)){
-				for (i=xini;i<xfim;i++){
-					xs.push(i);
-				}
-				ys = [];
-				for (i=yini;i<yfim;i++){
-					ys.push(i);
-				}
-			}
-			ins = "<p class='paragrafo' >"+$trad('ajuda',i3GEOF.confluence.dicionario)+"</p>";
-			if(xs.length === 0){
-				ins += "<br><br>"+$trad('msgCoordenada',i3GEOF.confluence.dicionario)+" <br><br>"+$trad('msgZoom',i3GEOF.confluence.dicionario);
-			}
-			else{
-				for (i=0;i<xs.length;i++){
-					for (j=0;j<ys.length;j++){
-						ins += "<br><a onmouseover='i3GEOF.confluence.mostraxy(\""+ys[j]+","+xs[i]+"\")' href='http://www.confluence.org/confluence.php?lat="+ys[j]+"&lon="+xs[i]+" ' target=blank >Long. "+xs[i]+" Lat."+ys[j]+"</a><br>";
-					}
-				}
-			}
-			$i("i3GEOconfluenceLista").innerHTML = ins+"<br><br>";
-			i3GEOF.confluence.aguarde.visibility = "hidden";
+		if(i3GEO.parametros.mapscale > 9000000){
+			$i("i3GEOconfluenceLista").innerHTML = "<h5 class='alert alert-warning'>" + $trad('msgZoom',i3GEOF.confluence.dicionario) + "</h5>";
+			return;
 		}
-		catch(e){
-			return true;
+		var ins = "",i,j,ext,xini,yini,xfim,yfim,xs,dx,ys = [];
+		if(i3GEO.parametros.mapexten){
+			ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		}
+		else{
+			ext = "-49.1774741355 -16.379556709 -47.2737662565 -14.9806872512";
+		} //apenas para exemplo
+		ext = ext.split(" ");
+		xini = parseInt(ext[0],10);
+		yini = parseInt(ext[1],10);
+		xfim = parseInt(ext[2],10);
+		yfim = parseInt(ext[3],10);
+		xs = [];
+		dx = xfim - xini;
+		if ((dx > 1) || (dx < -1)){
+			for (i=xini;i<xfim;i++){
+				xs.push(i);
+			}
+			ys = [];
+			for (i=yini;i<yfim;i++){
+				ys.push(i);
+			}
+		}
+		ins = "<h5>"+$trad('ajuda',i3GEOF.confluence.dicionario)+"</h5>";
+		if(xs.length === 0){
+			ins += "<h5 class='alert alert-info'>"+$trad('msgCoordenada',i3GEOF.confluence.dicionario)+"<br>"+$trad('msgZoom',i3GEOF.confluence.dicionario) + "</h5>";
+		}
+		else{
+			for (i=0;i<xs.length;i++){
+				for (j=0;j<ys.length;j++){
+					ins += "<p><a onmouseover='i3GEOF.confluence.mostraxy(\""+ys[j]+","+xs[i]+"\")' href='http://www.confluence.org/confluence.php?lat="+ys[j]+"&lon="+xs[i]+" ' target=blank >Long. "+xs[i]+" Lat."+ys[j]+"</a></p>";
+				}
+			}
+		}
+		$i("i3GEOconfluenceLista").innerHTML = ins+"<hr>";
+		i3GEOF.confluence.aguarde.visibility = "hidden";
 	}
 };

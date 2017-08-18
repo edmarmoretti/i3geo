@@ -11,7 +11,7 @@ i3GEOF.confluence.dicionario = {
 		es : ""
 	} ],
 	'msgZoom' : [ {
-		pt : "Talvez vc precise afastar mais o zoom ou deslocar o mapa.",
+		pt : "Voc&ecirc; precisa alterar o zoom para aproximar mais o mapa",
 		en : "",
 		es : ""
 	} ]
