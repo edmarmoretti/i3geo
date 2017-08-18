@@ -61,12 +61,6 @@ i3GEOF.gradeDePoligonos = {
 		return dicionario;
 	},
 	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.gradeDePoligonos.iniciaDicionario();
-	},
-	/*
 	Function: inicia
 
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante

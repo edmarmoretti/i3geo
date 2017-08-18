@@ -74,5 +74,10 @@ i3GEOF.gradeDePontos.dicionario = {
 		pt : "Metros",
 		en : "",
 		es : ""
+	} ],
+	'distancia' : [ {
+		pt : "Dist&acirc;ncia entre c&eacute;lulas",
+		en : "",
+		es : ""
 	} ]
 };
