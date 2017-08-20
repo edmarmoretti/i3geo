@@ -2468,11 +2468,12 @@ class Analise {
 		if ($this->dbaseExiste == false) {
 			include_once dirname ( __FILE__ ) . "/../pacotes/phpxbase/api_conversion.php";
 		}
+		error_reporting(E_ALL);
 		$shapes = retornaShapesSelecionados ( $this->layer, $this->arquivo, $this->mapa );
 		$indices = array ();
 		foreach ( $shapes as $shape ) {
 			if ($item != "") {
-				$valor = $shape->values [$item];
+				$valor = "V" . $shape->values [$item];
 			} else {
 				$valor = "nenhum";
 			}
@@ -2480,18 +2481,20 @@ class Analise {
 				$indices [$valor] = array (
 						$shape
 				);
-			} else
-				$indices [$valor] = array_merge ( $indices [$valor], array (
-						$shape
-				) );
+			} else {
+				array_push ( $indices [$valor], $shape );
+			}
 		}
 		$dissolve = array ();
+
 		foreach ( $indices as $shapes ) {
 			foreach ( $shapes as $shape ) {
-				if ($item != "")
-					$valor = $shape->values [$item];
-				else
+				if ($item != ""){
+					$valor = "V".$shape->values [$item];
+				}
+				else{
 					$valor = "nenhum";
+				}
 				if (! isset ( $dissolve [$valor] )) {
 					$dissolve [$valor] = $shape;
 				} else {
@@ -2508,6 +2511,7 @@ class Analise {
 				}
 			}
 		}
+
 		//
 		// cria o novo shapefile
 		//

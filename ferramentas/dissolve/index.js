@@ -110,7 +110,7 @@ i3GEOF.dissolve = {
 		};
 		janela = i3GEO.janela.cria(
 			"400px",
-			"160px",
+			"250px",
 			"",
 			"",
 			"",
@@ -148,17 +148,11 @@ i3GEOF.dissolve = {
 		i3GEOF.dissolve.comboTemasSel();
 	},
 	t2: function(){
-
 		i3GEO.util.proximoAnterior("i3GEOF.dissolve.t1()","i3GEOF.dissolve.t3()","","i3GEOF.dissolve.t2","i3GEOdissolveresultado",true,"i3GEOF.dissolve_rodape");
 		i3GEOF.dissolve.comboItem();
 	},
 	t3: function(){
 		i3GEO.util.proximoAnterior("i3GEOF.dissolve.t2()","","","i3GEOF.dissolve.t3","i3GEOdissolveresultado",true,"i3GEOF.dissolve_rodape");
-		var b = new YAHOO.widget.Button(
-			"i3GEOdissolvebotao1",
-			{onclick:{fn: i3GEOF.dissolve.criadissolve}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: criadissolve
@@ -170,6 +164,10 @@ i3GEOF.dissolve = {
 	<DISSOLVEPOLIGONO>
 	*/
 	criadissolve: function(){
+		if($i("i3GEOdissolvetemasComSel").value == ""){
+			i3GEO.janela.tempoMsg($trad("escolhaTema",i3GEOF.dissolve.dicionario));
+			return;
+		}
 		try{
 			if(i3GEOF.dissolve.aguarde.visibility === "visible")
 			{return;}
@@ -222,7 +220,10 @@ i3GEOF.dissolve = {
 			"",
 			false,
 			"poligonosSelecionados",
-			" "
+			" ",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -243,7 +244,11 @@ i3GEOF.dissolve = {
 				$i("i3GEOdissolveDivItem").innerHTML = retorno.dados;
 				$i("i3GEOdissolveDivItem").style.display = "block";
 			},
-			"i3GEOdissolveDivItem"
+			"i3GEOdissolveDivItem",
+			"",
+			"",
+			"",
+			"form-control comboTema"
 		);
 	}
 };

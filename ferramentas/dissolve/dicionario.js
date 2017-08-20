@@ -29,5 +29,10 @@ i3GEOF.dissolve.dicionario = {
 		pt : "Erro. A opera&ccedil;&atilde;o demorou muito.",
 		en : "",
 		es : "Error. La operaci&oacute;n demoro mucho"
+	} ],
+	'escolhaTema' : [ {
+		pt : "Escolha um tema",
+		en : "",
+		es : ""
 	} ]
 };

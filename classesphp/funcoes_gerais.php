@@ -2561,11 +2561,9 @@ $a {string}
 */
 function echojson($a)
 {
-	//ob_clean();
-	//error_reporting(0);
-	ob_end_clean();
-	//if(extension_loaded('zlib'))
-	//{ob_start('ob_gzhandler');}
+	if(ob_get_contents ()){
+		ob_end_clean();
+	}
 	header("Content-type: text/html");
 	echo $a;
 	//if(extension_loaded('zlib'))
