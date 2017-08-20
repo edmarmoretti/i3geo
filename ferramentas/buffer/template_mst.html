@@ -1,40 +1,45 @@
-<div style='padding: 5px; background-color: #F2F2F2; top: 0px; left: 0px; display: block; width: 98%;' id='i3GEObufferresultado'>
+<div class='container-fluid' id='i3GEObufferresultado'>
 	<div id='i3GEOFgradeDePontost0'>
-		<img class='i3GeoExemploImg' src='{{{locaplic}}}/ferramentas/buffer/exemplo.png' />
-		<p class='paragrafo'>{{{descricao}}}
-		<p class='paragrafo'>{{{descricao2}}}
+		<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/buffer/exemplo.png' />
+		<h5>{{{descricao}}}</h5>
+		<h5>{{{descricao2}}}</h5>
 	</div>
 	<div id='i3GEOF.buffer.t1'>
-		<p class='paragrafo'>{{{selecionaTema}}}:</p>
-		<div id='i3GEObufferSelTemas' class='styled-select'></div>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{selecionaTema}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<div id='i3GEObufferSelTemas'></div>
+			</div>
+		</div>
 	</div>
 	<div id='i3GEOF.buffer.t2'>
-		<p class='paragrafo'>
-			{{{entorno}}} <br>
-		<div class='i3geoForm i3geoFormIconeNumero' style='display: block'>
-			<input id='i3GEObufferd' type=number value='0' />
+		<div class='form-group label-fixed condensed'>
+			<label class="control-label" for="i3GEObufferd">{{{entorno}}}</label>
+			<input class="form-control input-lg" type='text' id='i3GEObufferd' value='0' />
 		</div>
-		<br>
-		<p class='paragrafo'>
-			{{{entornoAtributo}}} </p>
-		<div id='i3GEObufferondeItens' class='styled-select'></div>
-		<br>
-		<p class='paragrafo'>
-			{{{agregaElementos}}} <br>
-		</p>
-		<div class='styled-select' >
-			<select id=i3GEObufferunir>
-				<option value=nao selected>{{{nao}}}</option>
-				<option value=sim>{{{sim}}}</option>
-			</select>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{entornoAtributo}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<div id='i3GEObufferondeItens'></div>
+			</div>
 		</div>
-		<br>
-		<br>
+		<div class='form-group label-fixed condensed'>
+			<label class="control-label" for="i3GEObufferdfator">{{{multiplica}}}</label>
+			<input class="form-control input-lg" type='text' id='i3GEObufferdfator' value='1' />
+		</div>
+		<div style="width: 100%;" class='form-group label-fixed condensed'>
+			<label class="control-label" for="">{{{agregaElementos}}}</label>
+			<div style="width: 100%;" class="input-group">
+				<select class="form-control" id="i3GEObufferunir">
+					<option value=nao selected>{{{nao}}}</option>
+					<option value=sim>{{{sim}}}</option>
+				</select>
+			</div>
+		</div>
 	</div>
 	<div id='i3GEOF.buffer.t3'>
-		<p class='paragrafo'>{{{adicionaTemaEntorno}}}
-		<br><br>
-		<input id='i3GEObufferbotao1' type='button' value='{{{criaEntorno}}}' />
+		<h5>{{{adicionaTemaEntorno}}}</h5>
+		<button onclick="i3GEOF.buffer.criaBuffer()" class='btn btn-primary btn-sm btn-raised'>{{{criaEntorno}}}</button>
+		<h5 id='i3GEObufferfim'></h5>
 	</div>
 </div>
-<div style='top: 10px; left: 0px; display: block; width: 98%; color: red' id='i3GEObufferfim'></div>

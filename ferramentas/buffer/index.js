@@ -151,11 +151,6 @@ i3GEOF.buffer = {
 	},
 	t3: function(){
 		i3GEO.util.proximoAnterior("i3GEOF.buffer.t2()","","","i3GEOF.buffer.t3","i3GEObufferresultado",true,"i3GEOF.buffer_rodape");
-		var b = new YAHOO.widget.Button(
-			"i3GEObufferbotao1",
-			{onclick:{fn: i3GEOF.buffer.criaBuffer}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: criaBuffer
@@ -167,39 +162,40 @@ i3GEOF.buffer = {
 	<CRIABUFFER>
 	*/
 	criaBuffer: function(){
-		try{
-			if(i3GEOF.buffer.aguarde.visibility === "visible")
-			{return;}
-			var distancia = $i("i3GEObufferd").value,
-				tema = $i("i3GEObuffertemasComSel").value,
-				multiplicar = $i("i3GEObufferdfator").value*1,
-				itemdistancia = $i("i3GEObuffertemasItem").value,
-				p,
-				fim,
-				cp;
-			if (distancia*1 !== 0 || itemdistancia != ""){
-				i3GEOF.buffer.aguarde.visibility = "visible";
-				fim = function(retorno){
-					i3GEOF.buffer.aguarde.visibility = "hidden";
-					if (retorno.data === undefined )
-					{$i("i3GEObufferfim").innerHTML = $trad('erroTempo',i3GEOF.buffer.dicionario);}
-					else
-					{i3GEO.atualiza();}
-				};
-				p = i3GEO.configura.locaplic+"/ferramentas/buffer/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=criabuffer&tema="+tema+"&unir="+$i("i3GEObufferunir").value;
-				if(itemdistancia != ""){
-					p += "&distancia=0&itemdistancia="+itemdistancia+"&multiplicar="+multiplicar;
-				}else{
-					p += "&distancia=" + distancia*1 + "&itemdistancia=&multiplicar=1";
-				}
-				cp = new cpaint();
-				cp.set_response_type("JSON");
-				cp.call(p,"criaBuffer",fim);
-			}
-			else
-			{i3GEO.janela.tempoMsg($trad('erroDistancia',i3GEOF.buffer.dicionario));}
+		if(i3GEOF.buffer.aguarde.visibility === "visible"){
+			return;
 		}
-		catch(e){$i("i3GEObufferfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.buffer.aguarde.visibility = "hidden";}
+		var distancia = $i("i3GEObufferd").value,
+			tema = $i("i3GEObuffertemasComSel").value,
+			multiplicar = $i("i3GEObufferdfator").value*1,
+			itemdistancia = $i("i3GEObuffertemasItem").value,
+			p,
+			fim,
+			cp;
+		if (distancia*1 !== 0 || itemdistancia != ""){
+			i3GEOF.buffer.aguarde.visibility = "visible";
+			fim = function(retorno){
+				i3GEOF.buffer.aguarde.visibility = "hidden";
+				if (retorno.data === undefined ){
+					$i("i3GEObufferfim").innerHTML = $trad('erroTempo',i3GEOF.buffer.dicionario);
+				}
+				else{
+					i3GEO.atualiza();
+				}
+			};
+			p = i3GEO.configura.locaplic+"/ferramentas/buffer/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=criabuffer&tema="+tema+"&unir="+$i("i3GEObufferunir").value;
+			if(itemdistancia != ""){
+				p += "&distancia=0&itemdistancia="+itemdistancia+"&multiplicar="+multiplicar;
+			}else{
+				p += "&distancia=" + distancia*1 + "&itemdistancia=&multiplicar=1";
+			}
+			cp = new cpaint();
+			cp.set_response_type("JSON");
+			cp.call(p,"criaBuffer",fim);
+		}
+		else{
+			i3GEO.janela.tempoMsg($trad('erroDistancia',i3GEOF.buffer.dicionario));
+		}
 	},
 	/*
 	Function: comboTemasSel
@@ -215,7 +211,6 @@ i3GEOF.buffer = {
 			"i3GEObuffertemasComSel",
 			function(retorno){
 				$i("i3GEObufferSelTemas").innerHTML = retorno.dados;
-				$i("i3GEObufferSelTemas").style.display = "block";
 				if ($i("i3GEObuffertemasComSel")){
 					$i("i3GEObuffertemasComSel").onchange = function(){
 						i3GEO.mapa.ativaTema($i("i3GEObuffertemasComSel").value);
@@ -230,7 +225,10 @@ i3GEOF.buffer = {
 			"",
 			false,
 			"selecionados",
-			" "
+			" ",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -248,12 +246,13 @@ i3GEOF.buffer = {
 			"i3GEObuffertemasItem",
 			$i("i3GEObuffertemasComSel").value,
 			function(retorno){
-				$i("i3GEObufferondeItens").innerHTML = "<div class=styled-select >" + retorno.dados + "</div>"
-				+ "<br><br><p class=paragrafo >" + $trad('multiplica',i3GEOF.buffer.dicionario)
-				+" <div class='i3geoForm i3geoFormIconeEdita' ><input id='i3GEObufferdfator' type=text value='1'/></div>";
-				$i("i3GEObufferondeItens").style.display = "block";
+				$i("i3GEObufferondeItens").innerHTML = retorno.dados;
 			},
-			"i3GEObufferondeItens"
+			"i3GEObufferondeItens",
+			"",
+			"",
+			"",
+			"form-control comboTema"
 		);
 	}
 };

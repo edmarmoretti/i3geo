@@ -16,7 +16,7 @@ i3GEOF.buffer.dicionario = {
 		es : "Tema, con selecci&oacute;n, que ser&aacute; utilizado"
 	} ],
 	'entorno' : [ {
-		pt : "Dist&acirc;ncia do entorno em metros:",
+		pt : "Dist&acirc;ncia do entorno em metros",
 		en : "",
 		es : "Distancia del entorno en metros"
 	} ],
@@ -46,12 +46,12 @@ i3GEOF.buffer.dicionario = {
 		es : "Distancia invalida"
 	} ],
 	'entornoAtributo' : [ {
-		pt : "Ou um item da tabela de atributos que cont&eacute;m as dist&acirc;ncias:",
+		pt : "Ou um item da tabela de atributos que cont&eacute;m as dist&acirc;ncias",
 		en : "",
 		es : "O un item de la tabla de atributos que contiene las distancias"
 	} ],
 	'multiplica' : [ {
-		pt : "Multiplicado por:",
+		pt : "Caso tenha escolhido um item, multiplicar os valores por",
 		en : "",
 		es : "Multiplicado por"
 	} ]
