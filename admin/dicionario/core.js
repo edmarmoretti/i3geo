@@ -38,23 +38,23 @@ i3GEOadmin.core.dicionario = {
 	} ],
     'regioes' : [ {
 		pt : "Regi&otilde;es",
-		en : "",
-		es : ""
+		en : "Regions",
+		es : "Regiones"
 	} ],
     'operacoes' : [ {
 		pt : "Opera&ccedil;&otilde;es",
-		en : "",
-		es : ""
+		en : "Operations",
+		es : "Operaciones"
 	} ],
     'usuarios' : [ {
 		pt : "Usu&aacute;rios",
-		en : "",
-		es : ""
+		en : "Users",
+		es : "Usuarios"
 	} ],
     'gruposUsuarios' : [ {
 		pt : "Grupos e Usu&aacute;rios",
-		en : "",
-		es : "",
+		en : "Groups and Users",
+		es : "Grupos y Usuarios",
 	} ],
     'atalhos' : [ {
 		pt : "Atalhos",
