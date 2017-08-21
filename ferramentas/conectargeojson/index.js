@@ -91,11 +91,6 @@ i3GEOF.conectargeojson = {
 				$i("i3GEOconectargeojsonCombo").innerHTML = combo;
 			};
 			i3GEO.php.listaRSSwsARRAY(monta,"GEOJSON");
-			b = new YAHOO.widget.Button(
-				"i3GEOconectargeojsonbotao1",
-				{onclick:{fn: i3GEOF.conectargeojson.adiciona}}
-			);
-			b.addClass("rodar");
 	},
 	/*
 	Function: html

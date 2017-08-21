@@ -78,16 +78,6 @@ i3GEOF.opcoesTempo = {
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.opcoesTempo.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOopcoesTempobotao1",
-				{onclick:{fn: i3GEOF.opcoesTempo.executa}}
-			);
-			b.addClass("rodar100");
-			b = new YAHOO.widget.Button(
-				"i3GEOopcoesTempobotao2",
-				{onclick:{fn: i3GEO.navega.autoRedesenho.desativa}}
-			);
-			b.addClass("rodar100");
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},

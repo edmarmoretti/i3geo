@@ -45,11 +45,6 @@ i3GEOF.gradeCoord = {
 		}
 			$i(iddiv).innerHTML += i3GEOF.gradeCoord.html();
 			i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef","form-control");
-			var b = new YAHOO.widget.Button(
-				"i3GEOgradeCoordbotao1",
-				{onclick:{fn: i3GEOF.gradeCoord.executa}}
-			);
-			b.addClass("rodar");
 			i3GEO.util.aplicaAquarela("i3GEOF.gradeCoord_corpo");
 	},
 	/*

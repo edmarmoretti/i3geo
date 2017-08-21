@@ -95,11 +95,6 @@ i3GEOF.buscaFotos = {
 		$i("i3GEObuscafotosguia1").onclick = function() {
 			i3GEO.guias.mostraGuiaFerramenta("i3GEObuscafotosguia1", "i3GEObuscafotosguia");
 		};
-
-
-		new YAHOO.widget.Button("i3GEObuscafotosbotao1",{onclick:{fn: function(){
-			i3GEOF.buscaFotos.busca("1");
-		}}});
 		i3GEOF.buscaFotos.ativaFoco();
 		i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.buscaFotos.busca('1')");
 		if(busca){

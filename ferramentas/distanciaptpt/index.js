@@ -155,11 +155,6 @@ i3GEOF.distanciaptpt = {
 	},
 	t3: function(){
 		i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t2()","","","i3GEOF.distanciaptpt.t3","i3GEOdistanciaptptresultado",true,"i3GEOF.distanciaptpt_rodape");
-		var b = new YAHOO.widget.Button(
-			"i3GEOdistanciaptptbotao1",
-			{onclick:{fn: i3GEOF.distanciaptpt.calcula}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: calcula

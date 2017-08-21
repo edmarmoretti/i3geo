@@ -103,21 +103,6 @@ i3GEOF.inserexy = {
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia6","i3GEOinserexyguia");
 			};
 
-			b = new YAHOO.widget.Button(
-				"i3GEOinserexybotao3",
-				{onclick:{fn: i3GEOF.inserexy.wkt}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOinserexybotao4",
-				{onclick:{fn: i3GEOF.inserexy.criaPol}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOinserexybotao5",
-				{onclick:{fn: i3GEOF.inserexy.criaLin}}
-			);
-			b.addClass("rodar");
 			i3GEOF.inserexy.ativaFoco();
 			i3GEOF.inserexy.montaComboLocal();
 			i3GEO.util.radioEpsg(

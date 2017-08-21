@@ -423,19 +423,6 @@ i3GEO.mapa =
 				"i3GEOF.mascara.iniciaJanelaFlutuante()");
 			},
 			/**
-			 * Function: ferramentas
-			 *
-			 * Abre a janela de di&aacute;logo com as ferramentas que atuam sobre o mapa
-			 */
-			ferramentas : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.arvoreDeCamadas.dialogo.ferramentas()",
-						"atalhosmapa",
-						"atalhosmapa",
-						"dependencias.php",
-				"i3GEOF.atalhosmapa.iniciaJanelaFlutuante()");
-			},
-			/**
 			 * Function: html2canvas
 			 *
 			 * Abre uma janela com a conversão de um objeto HTML em PNG
