@@ -147,11 +147,6 @@ i3GEOF.centroide = {
 	},
 	t2: function(){
 		i3GEO.util.proximoAnterior("i3GEOF.centroide.t2()","","","i3GEOF.centroide.t3","i3GEOcentroideresultado",true,"i3GEOF.centroide_rodape");
-		var b = new YAHOO.widget.Button(
-			"i3GEOcentroidebotao1",
-			{onclick:{fn: i3GEOF.centroide.criacentroide}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: criacentroide
@@ -199,7 +194,6 @@ i3GEOF.centroide = {
 			"i3GEOcentroidetemasComSel",
 			function(retorno){
 				$i("i3GEOcentroideSelTemas").innerHTML = retorno.dados;
-				$i("i3GEOcentroideSelTemas").style.display = "block";
 				if ($i("i3GEOcentroidetemasComSel")){
 					$i("i3GEOcentroidetemasComSel").onchange = function(){
 						i3GEO.mapa.ativaTema($i("i3GEOcentroidetemasComSel").value);
@@ -214,7 +208,10 @@ i3GEOF.centroide = {
 			"",
 			false,
 			"selecionados",
-			" "
+			" ",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	}
 };
