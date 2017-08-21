@@ -43,11 +43,6 @@ i3GEOF.opcoesQuery = {
 		try{
 			i3GEOF.opcoesQuery.aguarde.visibility = "visible";
 			$i(iddiv).innerHTML += i3GEOF.opcoesQuery.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOopcoesQuerybotao1",
-				{onclick:{fn: i3GEOF.opcoesQuery.executa}}
-			);
-			b.addClass("rodar150");
 			i3GEO.util.aplicaAquarela("i3GEOF.opcoesQuery");
 			var p = i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaquerymapcor",
 				cp = new cpaint(),
