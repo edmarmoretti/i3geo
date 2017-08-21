@@ -30,53 +30,34 @@ Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica G
 GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
+ */
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 /*
 Classe: i3GEOF.excluirarvore
 
-*/
+ */
 i3GEOF.excluirarvore = {
-	/*
+		/*
 	Variavel: aguarde
 
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
-	aguarde: "",
-	/*
+		 */
+		aguarde: "",
+		MUSTACHE : "",
+		/*
 	Variavel: iddiv
 
 	Guarda o id do div definido na fun&ccedil;&atilde;o "inicia".
-	*/
-	iddiv: "",
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.excluirarvore.iniciaDicionario();
-	},
-	/*
-	Function: iniciaDicionario
+		 */
+		iddiv: "",
+		mustacheHash : function() {
+			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.excluirarvore.dicionario);
+			return dicionario;
+		},
 
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.excluirarvore.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/excluirarvore/dicionario.js",
-				"i3GEOF.excluirarvore.iniciaJanelaFlutuante()",
-				"i3GEOF.excluirarvore.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.excluirarvore.iniciaJanelaFlutuante();
-		}
-	},
-	/*
+		/*
 	Function: inicia
 
 	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
@@ -84,30 +65,38 @@ i3GEOF.excluirarvore = {
 	Parametro:
 
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
-			n = camadas.length,
-			temp;
-		i3GEOF.excluirarvore.iddiv = iddiv;
-		try{
+		 */
+		inicia: function(iddiv){
+			if(i3GEOF.excluirarvore.MUSTACHE == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/excluirarvore/template_mst.html", function(template) {
+					i3GEOF.excluirarvore.MUSTACHE = template;
+					i3GEOF.excluirarvore.inicia(iddiv);
+				});
+				return;
+			}
+
+			i3GEOF.excluirarvore.iddiv = iddiv;
+
 			$i(iddiv).innerHTML = i3GEOF.excluirarvore.html();
-			new YAHOO.widget.Button(
-				"i3GEOexcluirbotao1",
-				{onclick:{fn: i3GEOF.excluirarvore.lote}}
-			);
-		}
-		catch(erro){
-			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)"]);
-		}
-		while(n > 0){
-			n -= 1;
-			temp = $i("excluirC_"+camadas[n].name);
-			if(temp)
-			{temp.checked = false;}
-		}
-	},
-	/*
+
+			i3GEOF.excluirarvore.lista();
+		},
+		lista: function(){
+			var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
+			n = camadas.length, ins = "";
+			while(n > 0){
+				n -= 1;
+				if(camadas[n].tema !== ""){
+					ins += '<div class="checkbox text-left"><label>'
+						+ '<input name="' + camadas[n].name + '" type="checkbox">'
+						+ '<span class="checkbox-material noprint"><span class="check"></span></span> '
+						+ camadas[n].tema
+						+ '</label></div>';
+				}
+			}
+			$i("i3GEOFexcluirarvoreLista").innerHTML = ins;
+		},
+		/*
 	Function: html
 
 	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
@@ -115,99 +104,90 @@ i3GEOF.excluirarvore = {
 	Retorno:
 
 	String com o c&oacute;digo html
-	*/
-	html:function(){
-		var camadas = i3GEO.arvoreDeCamadas.CAMADAS,
-			n = camadas.length,
-			ins = "";
-
-		ins = "<p class=paragrafo ><input id=i3GEOexcluirbotao1 type='buttom' value='"+$trad('removeMapa',i3GEOF.excluirarvore.dicionario)+"' /></p>" +
-			"<table id='i3GEOFexcluirarvoreLista' style='width:95%' class='lista8'>";
-		while(n > 0){
-			n -= 1;
-			if(camadas[n].tema !== "")
-			{ins += "<tr><td><input id='excluirC_"+camadas[n].name+"' CHECKED class=inputsb style='cursor:pointer' type=checkbox value='"+camadas[n].name+"' /></td><td><span id='i3GEOanima"+camadas[n].name+"'>"+camadas[n].tema+"</span></td></tr>";}
-		}
-		ins += "</table><br>";
-		return ins;
-	},
-	/*
+		 */
+		html:function(){
+			var ins = Mustache.render(i3GEOF.excluirarvore.MUSTACHE, i3GEOF.excluirarvore.mustacheHash());
+			return ins;
+		},
+		/*
 	Function: iniciaJanelaFlutuante
 
 	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo,cabecalho,minimiza;
-		if($i("i3GEOF.excluirarvore")){
-			return;
-		}
-		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.excluirarvore",200);
-		};
-		//cria a janela flutuante
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t12") + "</span></div>";
-		janela = i3GEO.janela.cria(
-			"300px",
-			"350px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.excluirarvore",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			true,
-			"",
-			"",
-			"",
-			"",
-			"110"
-		);
-		i3GEOF.excluirarvore.aguarde = $i("i3GEOF.excluirarvore_imagemCabecalho").style;
-		divid = janela[2].id;
-		$i("i3GEOF.excluirarvore_corpo").style.backgroundColor = "white";
-		$i("i3GEOF.excluirarvore_corpo").style.textAlign = "left";
-		temp = function(){
-			if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)") > 0)
-			{i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)");}
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.excluirarvore.inicia(i3GEOF.excluirarvore.iddiv)"]);
-		i3GEOF.excluirarvore.inicia(divid);
-	},
-	/*
+		 */
+		iniciaJanelaFlutuante: function(){
+			var janela,divid,temp,titulo,cabecalho,minimiza;
+			if($i("i3GEOF.excluirarvore")){
+				return;
+			}
+			cabecalho = function(){};
+			minimiza = function(){
+				i3GEO.janela.minimiza("i3GEOF.excluirarvore",200);
+			};
+			//cria a janela flutuante
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t12") + "</span></div>";
+			janela = i3GEO.janela.cria(
+					"300px",
+					"350px",
+					"",
+					"",
+					"",
+					titulo,
+					"i3GEOF.excluirarvore",
+					false,
+					"hd",
+					cabecalho,
+					minimiza,
+					"",
+					true,
+					"",
+					"",
+					"",
+					"",
+					"110"
+			);
+			i3GEOF.excluirarvore.aguarde = $i("i3GEOF.excluirarvore_imagemCabecalho").style;
+			divid = janela[2].id;
+			temp = function(){
+				if(i3GEO.eventos.ATUALIZAARVORECAMADAS.toString().search("i3GEOF.excluirarvore.lista()") >= 0){
+					i3GEO.eventos.ATUALIZAARVORECAMADAS.remove("i3GEOF.excluirarvore.lista()");
+				}
+			};
+			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
+			i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.excluirarvore.lista()"]);
+			i3GEOF.excluirarvore.inicia(divid);
+		},
+		/*
 	Function: lote
 
 	Executa uma opera&ccedil;&atilde;o em lote sobre as camadas mostradas no mapa
 
-	*/
-	lote: function(objeto){
-		var lista = [],
+		 */
+		lote: function(objeto){
+			var lista = [],
 			temp,
-			camadas = i3GEO.arvoreDeCamadas.CAMADAS,
+			camadas = $i("i3GEOFexcluirarvoreLista").getElementsByTagName("input"),
 			n = camadas.length;
-		if(i3GEOF.excluirarvore.aguarde.visibility === "visible")
-		{return;}
-		i3GEOF.excluirarvore.aguarde.visibility = "visible";
-		while(n > 0){
-			n -= 1;
-			temp = $i("excluirC_"+camadas[n].name);
-			if(temp && temp.checked === true)
-			{lista.push(temp.value);}
+			if(i3GEOF.excluirarvore.aguarde.visibility === "visible"){
+				return;
+			}
+			i3GEOF.excluirarvore.aguarde.visibility = "visible";
+			while(n > 0){
+				n -= 1;
+				if(camadas[n].checked === true){
+					lista.push(camadas[n].name);
+				}
+			}
+			temp = function(){
+				i3GEOF.excluirarvore.aguarde.visibility = "hidden";
+				i3GEO.atualiza();
+
+			};
+			if(lista.length > 0){
+				i3GEO.php.excluitema(temp,lista);
+			}
+			else{
+				i3GEO.janela.tempoMsg($trad('selecionaCamada',i3GEOF.excluirarvore.dicionario));
+				i3GEOF.excluirarvore.aguarde.visibility = "hidden";
+			}
 		}
-		temp = function(){
-			i3GEOF.excluirarvore.aguarde.visibility = "hidden";
-			i3GEO.atualiza();
-		};
-		if(lista.length > 0)
-		{i3GEO.php.excluitema(temp,lista);}
-		else{
-			i3GEO.janela.tempoMsg($trad('selecionaCamada',i3GEOF.excluirarvore.dicionario));
-			i3GEOF.excluirarvore.aguarde.visibility = "hidden";
-		}
-	}
 };

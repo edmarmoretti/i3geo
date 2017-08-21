@@ -320,6 +320,7 @@ i3GEO.arvoreDeCamadas =
 					$("#" + config.idListaFundo).html(t);
 				}
 			}
+			i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);
 			/*
 
 		//
@@ -993,11 +994,12 @@ i3GEO.arvoreDeCamadas =
 			 */
 			filtro : function() {
 				i3GEO.util.dialogoFerramenta(
-						"i3GEO.arvoreDeCamadas.dialogo.filtro()",
-						"filtroarvore",
-						"filtroarvore",
-						"dependencias.php",
-				"i3GEOF.filtroarvore.iniciaJanelaFlutuante()");
+					"i3GEO.arvoreDeCamadas.dialogo.filtro()",
+					"filtroarvore",
+					"filtroarvore",
+					"dependencias.php",
+					"i3GEOF.filtroarvore.iniciaJanelaFlutuante()"
+				);
 			},
 			/**
 			 * Function: excluir
@@ -1005,7 +1007,13 @@ i3GEO.arvoreDeCamadas =
 			 * Abre a janela de di&aacute;logo para o usu&aacute;rio escolher os temas que ser&atilde;o exclu&iacute;dos da &aacute;rvore
 			 */
 			excluir : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.arvoreDeCamadas.dialogo.excluir()", "excluirarvore", "excluirarvore");
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.arvoreDeCamadas.dialogo.excluir()",
+					"excluirarvore",
+					"excluirarvore",
+					"dependencias.php",
+					"i3GEOF.excluirarvore.iniciaJanelaFlutuante()"
+				);
 			}
 		}
 };

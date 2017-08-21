@@ -126,15 +126,11 @@ Clique para escolher o modelo de cores
 <p style="text-align:center;width:250px"><span id="demo_range" >0-255</span></p>
 <div id=cores ></div>
 <p style="position:relative;left:6px;top:5px;text-align:left;" >
-<input id=voltar size="22" type="button" value="Aplicar cores">&nbsp;
+<input id=voltar size="22" type="button" onclick="aplicarCores()" value="Aplicar cores">&nbsp;
 </p>
-<b>Para atualizar a lista de cores geradas, clique novamente sobre a barra de cor.</b> Voc&ecirc; pode tamb&eacute;m definir os limites inicial e final (use a barra deslizante) e alterar os valores obtidos editando diretamente o RGB
+<br>
+<p>Para atualizar a lista de cores geradas, clique novamente sobre a barra de cor. Voc&ecirc; pode tamb&eacute;m definir os limites inicial e final (use a barra deslizante) e alterar os valores obtidos editando diretamente o RGB</p>
 <script>
-new YAHOO.widget.Button(
-	"voltar",
-	{onclick:{fn: function(){aplicarCores();}}}
-);
-$i("voltar-button").style.width = "250px"
 var lista = "<?php echo $lista;?>";
 lista = lista.split(",");
 var n = lista.length;
