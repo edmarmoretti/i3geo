@@ -1,20 +1,20 @@
-<div style='width: 90%; margin: auto;'>
-	<p class='paragrafo'>
-		{{{ativo}}}: <b><i>{{{usuarioLogado}}}</i></b>
-	<p class='paragrafo'>{{{usuario}}}:</p>
-	<p class="paragrafo">{{{tentativas}}}</p>
-	<div class='i3geoForm i3geoFormIconeUsuario'>
-		<input id=i3geousuario type=text value=''/>
+<div class='container-fluid'>
+	<h5>{{{ativo}}}: {{{usuarioLogado}}}</h5>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="">{{{usuario}}}</label>
+		<input class="form-control input-lg" type='text' id='i3geousuario' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{senha}}}:</p>
-	<div class='i3geoForm i3geoFormIconeSenha'>
-		<input id=i3geosenha type=password value='' /><br>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="">{{{senha}}}</label>
+		<input class="form-control input-lg" type='password' id='i3geosenha' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>
-		<input id=i3GEOFloginusuario size=20 type=button value='{{{enviar}}}' />&nbsp;
-		<input id=i3GEOFlogoutusuario size=20 type=button value='Logout' />
-	<p class='paragrafo' onclick='i3GEOF.loginusuario.recuperarSenha()' style='cursor: pointer; color: blue;'>{{{recuperar}}}</p>
-	<p class='paragrafo' onclick='i3GEOF.loginusuario.alterarSenha()' style='cursor: pointer; color: blue;'>{{{alterar}}}</p>
+	<div class="form-group condensed">
+		<button onclick="i3GEOF.loginusuario.enviar()" class='btn btn-primary btn-sm btn-raised'>{{{enviar}}}</button>
+		<button onclick="i3GEO.login.dialogo.abreLogout()" class='btn btn-primary btn-sm btn-raised'>Logout</button>
+	</div>
+	<div class="form-group condensed">
+		<button onclick="i3GEOF.loginusuario.recuperarSenha()" class='btn btn-primary btn-sm btn-raised'>{{{recuperar}}}</button>
+		<button onclick="i3GEOF.loginusuario.alterarSenha()" class='btn btn-primary btn-sm btn-raised'>{{{alterar}}}</button>
+	</div>
+	<h5 class="alert alert-info">{{{tentativas}}}</h5>
 </div>

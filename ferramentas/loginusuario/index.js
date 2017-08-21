@@ -107,16 +107,6 @@ i3GEOF.loginusuario = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML = i3GEOF.loginusuario.html();
-			if(typeof(YAHOO) != "undefined"){
-				new YAHOO.widget.Button(
-					"i3GEOFloginusuario",
-					{onclick:{fn: i3GEOF.loginusuario.enviar}}
-				);
-				new YAHOO.widget.Button(
-					"i3GEOFlogoutusuario",
-					{onclick:{fn: i3GEO.login.dialogo.abreLogout}}
-				);
-			}
 		}
 		catch(erro){alert(erro);}
 	},
@@ -152,7 +142,7 @@ i3GEOF.loginusuario = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF_loginusuario");
 		};
-		titulo = "<img style='position:relative;left:0px;top:5px;' src='"+i3GEO.configura.locaplic+"/imagens/oxygen/16x16/dialog-password.png' >&nbsp;Login";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Login</span></div>";
 		janela = i3GEO.janela.cria(
 			"270px",
 			"",
@@ -166,7 +156,11 @@ i3GEOF.loginusuario = {
 			cabecalho,
 			minimiza,
 			"",
-			false
+			false,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
 		janela[0].cfg.setProperty("constraintoviewport",false);

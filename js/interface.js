@@ -563,7 +563,8 @@ i3GEO.Interface =
 					icone.className = "i3GEOiconeMais";
 					icone.style.left = "9px";
 					icone.onclick = function() {
-						i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
+						i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y);
+						//i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
 						return false;
 					};
 					cabecalho.appendChild(icone);
