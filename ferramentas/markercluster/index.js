@@ -188,12 +188,6 @@ i3GEOF.markercluster = {
 				"i3GEOmarkerclusterresultado",
 				true,
 				"i3GEOF.markercluster_rodape");
-		var b = new YAHOO.widget.Button("i3GEOmarkerclusterbotao1", {
-			onclick : {
-				fn : i3GEOF.markercluster.criamarkercluster
-			}
-		});
-		b.addClass("rodar");
 	},
 	/**
 	 * Function: criamarkercluster
@@ -279,7 +273,11 @@ i3GEOF.markercluster = {
 				"",
 				false,
 				"ligados",
-				"display:block");
+				" ",
+				false,
+				true,
+				"form-control comboTema"
+			);
 	},
 	/**
 	 * Function: comboItens
@@ -299,6 +297,11 @@ i3GEOF.markercluster = {
 					$i("i3GEOmarkerclusterondeItens").innerHTML = retorno.dados;
 					$i("i3GEOmarkerclusterondeItens").style.display = "block";
 				},
-				"i3GEOmarkerclusterondeItens");
+				"i3GEOmarkerclusterondeItens",
+				"",
+				"",
+				"",
+				"form-control comboTema"
+		);
 	}
 };
