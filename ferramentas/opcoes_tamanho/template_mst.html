@@ -1,20 +1,12 @@
-<div style='margin-left: 5px'>
-	<p class='paragrafo'>{{{largura}}}:</p>
-	<div class='i3geoForm150 i3geoFormIconeEdita'>
-		<input type='text' value='{{{Tamanhol}}}' id='i3GEOopcoesTamanhol' />
+<div class='container-fluid'>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesTamanhol">{{{largura}}}</label>
+		<input class="form-control input-lg " type='text' id='i3GEOopcoesTamanhol' value='{{{Tamanhol}}}' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{altura}}}:</p>
-	<div class='i3geoForm150 i3geoFormIconeEdita'>
-		<input type='text' value='{{{Tamanhoa}}}' id='i3GEOopcoesTamanhoa' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesTamanhoa">{{{altura}}}</label>
+		<input class="form-control input-lg " type='text' id='i3GEOopcoesTamanhoa' value='{{{Tamanhoa}}}' />
 	</div>
-
-	<br>
-	<p class='paragrafo'>{{{valor}}}</p>
-	<p class='paragrafo'>
-		<input id='i3GEOopcoesTamanhobotao2' size='16' type='button' value='{{{testa}}}' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOopcoesTamanhobotao1' size='16' type='button' value='{{{aplica}}}' />
-	</p>
+	<h5>{{{valor}}}</h5>
+	<button onclick="i3GEOF.opcoesTamanho.executa()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
 </div>

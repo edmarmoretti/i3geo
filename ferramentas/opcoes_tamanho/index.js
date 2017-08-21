@@ -77,26 +77,7 @@ i3GEOF.opcoesTamanho = {
 		}
 		var b,box;
 		try{
-			$i(iddiv).innerHTML += i3GEOF.opcoesTamanho.html();
-			b = new YAHOO.widget.Button(
-				"i3GEOopcoesTamanhobotao2",
-				{onclick:{fn: i3GEOF.opcoesTamanho.atualizaBox}}
-			);
-			b.addClass("rodar150");
-			b = new YAHOO.widget.Button(
-				"i3GEOopcoesTamanhobotao1",
-				{onclick:{fn: i3GEOF.opcoesTamanho.executa}}
-			);
-			b.addClass("rodar150");
-			i3GEO.util.criaBox("boxg");
-			var pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
-			box = $i("boxg");
-			box.style.left = pos[0] + "px";
-			box.style.top = pos[1] + "px";
-			box.style.width = i3GEO.parametros.w + "px";
-			box.style.height = i3GEO.parametros.h + "px";
-			box.style.display = "block";
-			box.style.zIndex = 2;
+			$i(iddiv).innerHTML = i3GEOF.opcoesTamanho.html();
 			i3GEO.janela.tempoMsg($trad('msg',i3GEOF.opcoesTamanho.dicionario));
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
@@ -131,8 +112,8 @@ i3GEOF.opcoesTamanho = {
 		//cria a janela flutuante
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p5") + "</span></div>";
 		janela = i3GEO.janela.cria(
-			"190px",
-			"130px",
+			"210px",
+			"240px",
 			"",
 			"",
 			"",
@@ -191,18 +172,5 @@ i3GEOF.opcoesTamanho = {
 			cp.set_response_type("JSON");
 			cp.call(p,"mudatamanho",temp);
 		}
-	},
-	/*
-	Function: atualizaBox
-
-	Atualiza o tamanho do box que mostra previamente o tamanho do mapa
-	*/
-	atualizaBox: function(){
-		var box = $i("boxg");
-			l = $i("i3GEOopcoesTamanhol").value,
-			a = $i("i3GEOopcoesTamanhoa").value;
-		box.style.width = l+"px";
-		box.style.height = a+"px";
 	}
-
 };
