@@ -213,12 +213,6 @@ i3GEOF.heatmap =
 				"i3GEOheatmapresultado",
 				true,
 				"i3GEOF.heatmap_rodape");
-			var b = new YAHOO.widget.Button("i3GEOheatmapbotao1", {
-				onclick : {
-					fn : i3GEOF.heatmap.criaheatmap
-				}
-			});
-			b.addClass("rodar");
 		},
 		/**
 		 * Function: criaheatmap
@@ -245,11 +239,9 @@ i3GEOF.heatmap =
 				p =
 					i3GEO.configura.locaplic + "/ferramentas/heatmap/exec.php?g_sid=" + i3GEO.configura.sid + "&funcao=criaheatmap"
 						+ "&tema=" + $i("i3GEOheatmaptemasComSel").value
-						// + "&multiplicar="
-						// + $i("i3GEOheatmapdfator").value
 						+ "&coluna=" + $i("i3GEOheatmaptemasItem").value + "&valorPonto=" + $i("i3GEOheatmapd").value + "&titulo="
 						+ $i("i3GEOheatmapTitulo").value + "&opacidade=" + $i("i3GEOheatmapOpacidade").value + "&raio="
-						+ $i("i3GEOheatmapRaio").value;// + "&raio=" + $i("i3GEOheatmapMax").value;
+						+ $i("i3GEOheatmapRaio").value;
 
 				cp = new cpaint();
 				cp.set_response_type("JSON");
@@ -269,19 +261,30 @@ i3GEOF.heatmap =
 		 * <i3GEO.util.comboTemas>
 		 */
 		comboTemasSel : function() {
-			i3GEO.util.comboTemas("i3GEOheatmaptemasComSel", function(retorno) {
-				$i("i3GEOheatmapSelTemas").innerHTML = retorno.dados;
-				$i("i3GEOheatmapSelTemas").style.display = "block";
-				if ($i("i3GEOheatmaptemasComSel")) {
-					$i("i3GEOheatmaptemasComSel").onchange = function() {
-						i3GEO.mapa.ativaTema($i("i3GEOheatmaptemasComSel").value);
-					};
-				}
-				if (i3GEO.temaAtivo !== "") {
-					$i("i3GEOheatmaptemasComSel").value = i3GEO.temaAtivo;
-					$i("i3GEOheatmaptemasComSel").onchange.call();
-				}
-			}, "i3GEOheatmapSelTemas", "", false, "ligados", "display:block;");
+			i3GEO.util.comboTemas(
+				"i3GEOheatmaptemasComSel",
+				function(retorno) {
+					$i("i3GEOheatmapSelTemas").innerHTML = retorno.dados;
+					$i("i3GEOheatmapSelTemas").style.display = "block";
+					if ($i("i3GEOheatmaptemasComSel")) {
+						$i("i3GEOheatmaptemasComSel").onchange = function() {
+							i3GEO.mapa.ativaTema($i("i3GEOheatmaptemasComSel").value);
+						};
+					}
+					if (i3GEO.temaAtivo !== "") {
+						$i("i3GEOheatmaptemasComSel").value = i3GEO.temaAtivo;
+						$i("i3GEOheatmaptemasComSel").onchange.call();
+					}
+				},
+				"i3GEOheatmapSelTemas",
+				"",
+				false,
+				"ligados",
+				" ",
+				false,
+				true,
+				"form-control comboTema"
+			);
 		},
 		/**
 		 * Function: comboItens
@@ -294,12 +297,18 @@ i3GEOF.heatmap =
 		 *
 		 */
 		comboItens : function() {
-			i3GEO.util.comboItens("i3GEOheatmaptemasItem", $i("i3GEOheatmaptemasComSel").value, function(retorno) {
-				$i("i3GEOheatmapondeItens").innerHTML = retorno.dados;
-				// + " "
-				//+ $trad('multiplica', i3GEOF.heatmap.dicionario)
-				//+ " <input  class=digitar id='i3GEOheatmapdfator' type=text size=10 value='1'/>";
-				$i("i3GEOheatmapondeItens").style.display = "block";
-			}, "i3GEOheatmapondeItens");
+			i3GEO.util.comboItens(
+				"i3GEOheatmaptemasItem",
+				$i("i3GEOheatmaptemasComSel").value,
+				function(retorno) {
+					$i("i3GEOheatmapondeItens").innerHTML = retorno.dados;
+					$i("i3GEOheatmapondeItens").style.display = "block";
+				},
+				"i3GEOheatmapondeItens",
+				"",
+				"",
+				"",
+				"form-control comboTema"
+			);
 		}
 	};
