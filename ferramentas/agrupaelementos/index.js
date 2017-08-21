@@ -152,11 +152,6 @@ i3GEOF.agrupaElementos = {
 	},
 	t3: function(){
 		i3GEO.util.proximoAnterior("i3GEOF.agrupaElementos.t2()","","","i3GEOF.agrupaElementos.t3","i3GEOagrupaelementosresultado",true,"i3GEOF.agrupaElementos_rodape");
-		var b = new YAHOO.widget.Button(
-			"i3GEOagrupaelementosbotao1",
-			{onclick:{fn: i3GEOF.agrupaElementos.criaAgrupamento}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: criaAgrupamento
@@ -225,7 +220,10 @@ i3GEOF.agrupaElementos = {
 			"",
 			false,
 			"selecionados",
-			" "
+			" ",
+			false,
+			true,
+			"form-control comboTema"
 		);
 	},
 	/*
@@ -251,7 +249,10 @@ i3GEOF.agrupaElementos = {
 				}
 			},
 			"i3GEOagrupaelementosSelItens",
-			""
+			"",
+			"",
+			"",
+			"form-control comboTema"
 		);
 	}
 };
