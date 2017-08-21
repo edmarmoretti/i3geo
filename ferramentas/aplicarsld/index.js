@@ -71,10 +71,6 @@ i3GEOF.aplicarsld = {
 	inicia: function(iddiv){
 		try{
 			$i(iddiv).innerHTML += i3GEOF.aplicarsld.html();
-			new YAHOO.widget.Button(
-				"i3GEOaplicarsldbotao1",
-				{onclick:{fn: i3GEOF.aplicarsld.submete}}
-			);
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
@@ -108,7 +104,7 @@ i3GEOF.aplicarsld = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("t43") + "</span></div>";
 
 		janela = i3GEO.janela.cria(
-			"320px",
+			"400px",
 			"280px",
 			"",
 			"",
