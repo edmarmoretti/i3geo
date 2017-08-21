@@ -46,16 +46,6 @@ i3GEOF.opcoesEscala = {
 		}
 		try{
 			$i(iddiv).innerHTML += i3GEOF.opcoesEscala.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOopcoesEscalabotao1",
-				{onclick:{fn: i3GEOF.opcoesEscala.executa}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOopcoesEscalabotao2",
-				{onclick:{fn: i3GEOF.opcoesEscala.testa}}
-			);
-			b.addClass("rodar");
 			i3GEOF.opcoesEscala.parametrosAtuais();
 			i3GEO.util.aplicaAquarela("i3GEOF.opcoesEscala_corpo");
 		}
@@ -177,7 +167,6 @@ i3GEOF.opcoesEscala = {
 						$i("i3GEOopcoesEscalaocor").value = ocor;
 					}
 					i3GEOF.opcoesEscala.aguarde.visibility = "hidden";
-					i3GEOF.opcoesEscala.testa();
 				}catch(e){
 					i3GEO.janela.tempoMsg("Erro. "+e);
 					i3GEOF.opcoesEscala.aguarde.visibility = "hidden";
@@ -218,7 +207,7 @@ i3GEOF.opcoesEscala = {
 		i3GEOF.opcoesEscala.aguarde.visibility = "visible";
 		var temp = function(retorno){
 				i3GEOF.opcoesEscala.aguarde.visibility = "hidden";
-				$i("i3GEOopcoesEscalateste").src = retorno.data;
+				i3GEO.janela.closeMsg("<img  src='" + retorno.data + "'  />");
 			},
 			par = i3GEOF.opcoesEscala.parametrosFormulario(),
 			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_escala/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=testaescalagrafica"+par,

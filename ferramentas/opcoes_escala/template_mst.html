@@ -1,66 +1,61 @@
-<div style='margin-left: 5px'>
-	<p class='paragrafo'>{{{incluiNoMapa}}}:</p>
-	<div class='styled-select'>
-		<select id='i3GEOopcoesEscalastatus'>
-			<option value=3>{{{sim}}}</option>
-			<option value=1>{{{nao}}}</option>
-			<option value=0>---</option>
-		</select>
+<div class='container-fluid'>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalastatus">{{{incluiNoMapa}}}</label>
+		<div style="width: 100%;" class="input-group">
+			<select class="form-control" id="i3GEOopcoesEscalastatus">
+				<option value='3'>{{{sim}}}</option>
+				<option value='1'>{{{nao}}}</option>
+				<option value='0'>---</option>
+			</select>
+		</div>
 	</div>
-	<br>
-	<p class='paragrafo'>{{{largura}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' id='i3GEOopcoesEscalaw' value='' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalaw">{{{largura}}}</label>
+		<input class="form-control input-lg " type='text' id='i3GEOopcoesEscalaw' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{altura}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' id='i3GEOopcoesEscalah' value='' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalah">{{{altura}}}</label>
+		<input class="form-control input-lg " type='text' id='i3GEOopcoesEscalah' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{unidade}}}:</p>
-	<div class='styled-select'>
-		<select id='i3GEOopcoesEscalaunidade'>
-			<option value='3' selected>Metros</option>
-			<option value='4'>Km</option>
-		</select>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalaunidade">{{{unidade}}}</label>
+		<div style="width: 100%;" class="input-group">
+			<select class="form-control" id="i3GEOopcoesEscalaunidade">
+				<option value='3' selected>Metros</option>
+				<option value='4'>Km</option>
+			</select>
+		</div>
 	</div>
-	<br>
-	<p class='paragrafo'>{{{estilo}}}:</p>
-	<div class='styled-select'>
-		<select id='i3GEOopcoesEscalaestilo'>
-			<option value='0' selected>{{{bloco}}}</option>
-			<option value='1'>{{{linear}}}</option>
-			<option value='2'>{{{semBarra}}}</option>
-		</select>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalaestilo">{{{estilo}}}</label>
+		<div style="width: 100%;" class="input-group">
+			<select class="form-control" id="i3GEOopcoesEscalaestilo">
+				<option value='0' selected>{{{bloco}}}</option>
+				<option value='1'>{{{linear}}}</option>
+				<option value='2'>{{{semBarra}}}</option>
+			</select>
+		</div>
 	</div>
-	<br>
-	<p class='paragrafo'>{{{intervalos}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' id='i3GEOopcoesEscalaintervalos' value='' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalaintervalos">{{{intervalos}}}</label>
+		<input class="form-control input-lg " type='text' id='i3GEOopcoesEscalaintervalos' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{cor}}}:</p>
-	<div class='i3geoForm100 i3geoFormIconeAquarela'>
-		<input type='text' id='i3GEOopcoesEscalacor' value='' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalacor">{{{cor}}}</label>
+		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOopcoesEscalacor' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{fundo}}}:</p>
-	<div class='i3geoForm100 i3geoFormIconeAquarela'>
-		<input type='text' id='i3GEOopcoesEscalabcor' value='' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalabcor">{{{fundo}}}</label>
+		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOopcoesEscalabcor' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>{{{contorno}}}:</p>
-	<div class='i3geoForm100 i3geoFormIconeAquarela'>
-		<input type='text' id='i3GEOopcoesEscalaocor' value='' />
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOopcoesEscalaocor">{{{contorno}}}</label>
+		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOopcoesEscalaocor' value='' />
 	</div>
-	<br>
-	<p class='paragrafo'>
-		<input id='i3GEOopcoesEscalabotao1' size='20' type='button' value='{{{aplica}}}' />
-	</p>
-	<p class='paragrafo'>
-		<input id='i3GEOopcoesEscalabotao2' size='20' type='button' value='{{{testa}}}' />
-	</p>
-	<br>
+	<button onclick="i3GEOF.opcoesEscala.executa()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
+	<button onclick="i3GEOF.opcoesEscala.testa()" class='btn btn-primary btn-sm btn-raised'>{{{testa}}}</button>
+
+
+
 	<img src='' id='i3GEOopcoesEscalateste' />
 </div>
