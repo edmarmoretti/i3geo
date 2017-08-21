@@ -86,15 +86,6 @@ i3GEOF.bufferpt = {
 			return;
 		}
 		$i(iddiv).innerHTML += i3GEOF.bufferpt.html();
-		new YAHOO.widget.Button(
-			"i3GEObufferptbotao2",
-			{onclick:{fn: i3GEOF.bufferpt.atualizaBox}}
-		);
-		var b = new YAHOO.widget.Button(
-			"i3GEObufferptbotao1",
-			{onclick:{fn: i3GEOF.bufferpt.executa}}
-		);
-		b.addClass("rodar");
 	},
 	/*
 	Function: html
@@ -142,7 +133,7 @@ i3GEOF.bufferpt = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u10") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"290px",
-			"130px",
+			"230px",
 			"",
 			"",
 			"",
