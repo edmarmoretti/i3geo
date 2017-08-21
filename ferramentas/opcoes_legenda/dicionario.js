@@ -81,7 +81,7 @@ i3GEOF.opcoesLegenda.dicionario = {
 		es : ""
 	} ],
 	'fonte' : [ {
-		pt : "Fonte: (teste a fonte mais adequada para apresenta&ccedil;&atilde;o correta da acentua&ccedil;&atilde;o)",
+		pt : "Fonte tipogr&aacute;fica",
 		en : "",
 		es : ""
 	} ],

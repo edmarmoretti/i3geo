@@ -46,17 +46,7 @@ i3GEOF.opcoesLegenda = {
 		}
 		try{
 			$i(iddiv).innerHTML = i3GEOF.opcoesLegenda.html();
-			var b = new YAHOO.widget.Button(
-				"i3GEOopcoesLegendabotao1",
-				{onclick:{fn: i3GEOF.opcoesLegenda.executa}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOopcoesLegendabotao2",
-				{onclick:{fn: i3GEOF.opcoesLegenda.testa}}
-			);
-			b.addClass("rodar");
-			i3GEO.util.comboFontes("i3GEOopcoesLegendafonte","i3GEOopcoesLegendafontef");
+			i3GEO.util.comboFontes("i3GEOopcoesLegendafonte","i3GEOopcoesLegendafontef","form-control");
 			i3GEOF.opcoesLegenda.parametrosAtuais();
 			i3GEO.util.aplicaAquarela("i3GEOF.opcoesLegenda_corpo");
 		}
@@ -229,8 +219,7 @@ i3GEOF.opcoesLegenda = {
 		var temp = function(retorno){
 				i3GEOF.opcoesLegenda.aguarde.visibility = "hidden";
 				eval(retorno.data);
-				$i("i3GEOopcoesLegendatesteLegenda").src = legimagem;
-				$i("i3GEOopcoesLegendatesteLegenda").style.display = "block";
+				i3GEO.janela.closeMsg("<img  src='" + legimagem + "'  />");
 			},
 			par = i3GEOF.opcoesLegenda.parametrosFormulario(),
 			p = i3GEO.configura.locaplic+"/ferramentas/opcoes_legenda/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=testaLegenda"+par,
