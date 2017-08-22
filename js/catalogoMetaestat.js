@@ -143,7 +143,9 @@ i3GEO.catalogoMetaestat = {
 	adiciona : function(id_medida_variavel,nomemedida){
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.mapa.dialogo.metaestat()",
-			"metaestat", "metaestat", "index.js",
+			"metaestat",
+			"metaestat",
+			"dependencias.php",
 			"i3GEOF.metaestat.inicia('flutuanteSimples',''," + id_medida_variavel + ")"
 		);
 	}

@@ -1,17 +1,10 @@
 <div class="metaestat" style="margin-left: 5px;">
-	<!--  usar span pq div tem Important -->
-	<div class="affix" style="width: 290px;z-index: 1000000;background-color:#477596 !IMPORTANT;" data-spy="affix" data-target="#i3geoCartoParametros_corpo" >
-		<span style="display:block;visibility:hidden" id="aguardeMetaestat">
-			<span class="progress" style="display:block; height:5px;width:100%;margin:0px;">
-				<span class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="margin:0px;width:100%">
-				</span>
-			</span>
-		</span>
-		<button onclick="i3GEOF.metaestat.comum.adicionaCamada()" class='btn btn-primary btn-sm btn-raised'>{{{10}}}</button>
-	</div>
-	<div style="top: 52px;">
-		<div class="form-group" style="margin: 0px;" id="i3geoCartoVariaveis"></div>
-		<div class="form-group" style="margin: 0px;" id="i3geoCartoMedidasVariavel"></div>
-		<div class="form-group" style="margin: 0px;" id="i3geoCartoParametrosMedidasVariavel"></div>
-	</div>
+	<h5 class="alert alert-info">{{{ajudaAdicionaVariavel}}}</h5>
+	<button onclick="i3GEOF.metaestat.comum.adicionaCamada()" class='btn btn-primary btn-sm btn-raised'>{{{10}}}</button>
+	<div class="form-group" style="margin: 0px;" id='i3geoCartoRegioesMedidasVariavel'>{{{aguarde}}}</div>
+	<div class="form-group" style="margin: 0px;" id='i3geoCartoTipoClassificacao'>{{{aguarde}}}</div>
+	<div class="form-group" style="margin: 0px;" id='i3geoCartoParametrosMedidasVariavel'></div>
+	<input type=hidden value='{{{ID_MEDIDA_VARIAVEL}}}' id='i3geoCartoComboMedidasVariavel' />
+	<input type=hidden value='0' id='i3geoCartoComboVariavel' />
+	<input type=hidden value='0' id='i3geoCartoComboTipoRep' />
 </div>

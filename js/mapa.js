@@ -616,11 +616,25 @@ i3GEO.mapa =
 			 */
 			filtraregiao : function() {
 				i3GEO.util.dialogoFerramenta(
-						"i3GEO.mapa.dialogo.filtraregiao()",
-						"metaestat",
-						"locregiao",
-						"locregiao.js",
-				"i3GEOF.locregiao.abreComFiltro()");
+					"i3GEO.mapa.dialogo.filtraregiao()",
+					"metaestat",
+					"locregiao",
+					"locregiao.js",
+					"i3GEOF.locregiao.abreComFiltro()"
+				);
+			},
+			/**
+			 * Function: filtraperiodo
+			 * Utilizado com camadas metaestat
+			 */
+			filtraperiodo : function() {
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.mapa.dialogo.filtraperiodo()",
+					"filtraperiodo",
+					"filtraperiodo",
+					"dependencias.php",
+					"i3GEOF.filtraperiodo.iniciaJanelaFlutuante()"
+				);
 			},
 			/**
 			 * Function: animacao

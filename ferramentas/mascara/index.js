@@ -75,11 +75,9 @@ i3GEOF.mascara = {
 			});
 			return;
 		}
-		i3GEOF.mascara.aguarde.visibility = "visible";
 		$i(iddiv).innerHTML = i3GEOF.mascara.html();
 		i3GEOF.mascara.selMascara();
 		i3GEOF.mascara.listaDeCamadas();
-		i3GEOF.mascara.aguarde.visibility = "hidden";
 	},
 	/*
 	Function: html

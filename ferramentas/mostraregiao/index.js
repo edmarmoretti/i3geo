@@ -1,5 +1,8 @@
 /*
-Title: Ferramenta que permite mostrar os limites de um tipo de regi&atilde;o baseada no cadastro do m&oacute;dulo METAESTAT
+Title: Ferramenta que permite mostrar os limites de um tipo de regi&atilde;o baseada no cadastro
+do m&oacute;dulo METAESTAT
+
+Nao esta em uso
 
 A regiao e mostrada como uma nova camada no mapa
 

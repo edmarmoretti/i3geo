@@ -534,6 +534,8 @@ function analise_listaCamadasFiltroTempo($map_file){
  * @param lista com os valores dos parametros de parf
  * @return string
  */
+
+//TODO esse filtro nao pode ser aplicado pois ja pode ter sido escolhido um filtro de tempo quando a camada foi criada
 function analise_aplicaFiltroTempo($map_file,$tema,$pari,$vali,$parf,$valf){
 	$mapa = ms_newMapObj($map_file);
 	$layer = $mapa->getlayerbyname($tema);
