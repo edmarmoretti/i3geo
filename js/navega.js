@@ -848,16 +848,39 @@ i3GEO.navega =
 					$i("img_d").style.width = i3GEO.parametros.w + "px";
 					$i("img_d").style.height = i3GEO.parametros.h + "px";
 					$i("div_d").style.clip = 'rect(0px 75px 75px 0px)';
-					novoeli = document.createElement("div");
-					novoeli.id = "div_di";
-					novoel.appendChild(novoeli);
-					$i("div_di").innerHTML = "<p style='position:absolute;top:0px;left:0px'>+-</p>";
+					//novoeli = document.createElement("div");
+					//novoeli.id = "div_di";
+					//novoel.appendChild(novoeli);
+					//$i("div_di").innerHTML = "<p style='position:absolute;top:0px;left:0px'>+-</p>";
 				}
 				i3GEO.navega.destacaTema.TEMA = tema;
 				i3GEO.navega.destacaTema.ESTAATIVO = "sim";
 				i3GEO.navega.destacaTema.atualiza();
-				janela = i3GEO.janela.cria(160, 50, "", "center", "center", "<div class='i3GeoTituloJanela'>"+$trad("x50") + "</div>", "ativadesativaDestaque");
-				$i(janela[2].id).innerHTML = $trad("x91");
+				janela = i3GEO.janela.cria(
+					200,
+					150,
+					"",
+					"center",
+					"center",
+					"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x50") + "</span></div>",
+					"ativadesativaDestaque",
+					false,
+					"hd",
+					"",
+					"",
+					"",
+					true,
+					"",
+					"",
+					"",
+					""
+				);
+				$i(janela[2].id).innerHTML = "<div class='container-fluid'>"
+					+ "<h5 class='alert alert-info'>" + $trad("x91") + "</h5>"
+					+ "<div class='form-group condensed'>"
+					+ "<button onclick='i3GEO.navega.destacaTema.TAMANHO = i3GEO.navega.destacaTema.TAMANHO + 20' class='btn btn-xs' style='margin:2px;padding:2px;'><span class='material-icons'>add_circle_outline</span></button>"
+					+ "<button onclick='i3GEO.navega.destacaTema.TAMANHO = i3GEO.navega.destacaTema.TAMANHO - 20' class='btn btn-xs' style='margin:2px;padding:2px;'><span class='material-icons'>remove_circle_outline</span></button>"
+					+ "</div></div>";
 				$( janela[0].close ).click(i3GEO.navega.destacaTema.desativa);
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.navega.destacaTema.atualiza()"]);
 				i3GEO.eventos.adicionaEventos("MOUSEMOVE",["i3GEO.navega.destacaTema.movimenta()"]);

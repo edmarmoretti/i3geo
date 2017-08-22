@@ -38,5 +38,13 @@ i3GEOF.atalhoscamada.dicionario = {
 			es : "Crea una copia de la capa",
 			it : ""
 		}
-	]
+	],
+	"contorno" : [
+	   		{
+	   			pt : "Ativa/desativa contorno",
+	   			en : "",
+	   			es : "",
+	   			it : ""
+	   		}
+	   	]
 };

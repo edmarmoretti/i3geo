@@ -69,6 +69,7 @@ i3GEOF.atalhoscamada =
 		dicionario["graficoHidden"] = (vetor == true) ? "":"hidden";
 		dicionario["StoryMapHidden"] = (vetor == true) ? "":"hidden";
 		dicionario["legendaHidden"] = (ltema.type < 4 || ltema.type === 8) ? "":"hidden";
+		dicionario["noPolygonHidden"] = (ltema.type === 2) ? "":"hidden";
 		dicionario["destacaHidden"] = (i3GEO.Interface.ATUAL == "openlayers") ? "":"hidden";
 		dicionario["wmsHidden"] = (ltema.permiteogc.toLowerCase() !== "nao") ? "":"hidden";
 
