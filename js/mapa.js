@@ -128,10 +128,11 @@ i3GEO.mapa =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.mapa.ativaIdentificaBalao()");
 
-			if (i3GEO.arvoreDeCamadas.filtraCamadas("etiquetas", "", "diferente", i3GEO.arvoreDeCamadas.CAMADAS) === "") {
-				i3GEO.janela.tempoMsg($trad("d31"));
-				return;
-			}
+			//if (i3GEO.arvoreDeCamadas.filtraCamadas("etiquetas", "", "diferente", i3GEO.arvoreDeCamadas.CAMADAS) === "") {
+			//	i3GEO.janela.tempoMsg($trad("d31"));
+			//	return;
+			//}
+
 			i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
 			i3GEO.eventos.MOUSECLIQUE = ["i3GEO.mapa.dialogo.verificaTipDefault()"];
 			i3GEO.eventos.cliquePerm.ativa();
@@ -1007,7 +1008,7 @@ i3GEO.mapa =
 					i3GEO.eventos.cliquePerm.status = false;
 				}
 
-				var ntemas, etiquetas, j, x = objposicaocursor.ddx, y = objposicaocursor.ddy;
+				var ntemas, etiquetas, j, x = objposicaocursor.ddx, y = objposicaocursor.ddy, temp;
 				if(x === -1 || y === -1){
 					return;
 				}
@@ -1040,8 +1041,11 @@ i3GEO.mapa =
 					}
 					return;
 				}
+				temp = function(retorno){
+					i3GEO.mapa.montaTip(retorno,x,y);
+				};
 				i3GEO.php.identifica3(
-						i3GEO.mapa.montaTip,
+						temp,
 						x,
 						y,
 						i3GEO.configura.ferramentas.identifica.resolution,
@@ -1054,7 +1058,7 @@ i3GEO.mapa =
 				"sim");
 			}
 		},
-		montaTip: function (retorno){
+		montaTip: function (retorno,xx,yy){
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.mapa.montaTip()");
 
@@ -1064,20 +1068,30 @@ i3GEO.mapa =
 			i3GEO.eventos.cliquePerm.status = true;
 			mostra = false;
 			if(retorno == ""){
-				i3GEO.janela.tempoMsg($trad("tipvazio"));
-				return;
+				//i3GEO.janela.tempoMsg($trad("tipvazio"));
+				//return;
 			}
-			retorno = retorno.data;
-			temp = retorno[0].xy.split(",");
-			x = temp[0]*1;
-			y = temp[1]*1;
+			if(retorno.data){
+				retorno = retorno.data;
+				temp = retorno[0].xy.split(",");
+				x = temp[0]*1;
+				y = temp[1]*1;
+			} else {
+				x = xx;
+				y = yy;
+				mostra = true;
+				textoSimples = $trad("balaoVazio");
+				textoCompleto="";
+				wkt = [];
+			}
 			if (retorno !== "") {
 				res = "";
+				ntemas = 0;
 				temas = retorno;
-				if (!temas) {
-					return;
+				if (temas) {
+					ntemas = temas.length;
 				}
-				ntemas = temas.length;
+
 				for (j = 0; j < ntemas; j += 1) {
 					titulo = temas[j].nome;
 					titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b></div>";

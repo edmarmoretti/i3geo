@@ -2097,7 +2097,8 @@ i3GEO.Interface =
 				elem.className = "i3GEOiconeMais";
 				elem.style.marginLeft = "7px";
 				elem.onclick = function() {
-					i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
+					i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y);
+					//i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
 					return false;
 				};
 				temp.appendChild(elem);

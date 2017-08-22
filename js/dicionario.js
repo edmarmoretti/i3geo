@@ -2958,5 +2958,10 @@ g_traducao =
 			pt : "A camada deve estar vis&iacute;vel",
 			en : "",
 			es : ""
+		}],
+		"balaoVazio" : [{
+			pt : "N&atilde;o foram encontrados dados nas camadas dispon&iacute;veis. Experimente utilizar o &iacute;cone de mais informa&ccedil;&otilde;es",
+			en : "",
+			es : ""
 		}]
 	};
