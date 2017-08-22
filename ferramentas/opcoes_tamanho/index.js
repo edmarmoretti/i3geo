@@ -140,7 +140,6 @@ i3GEOF.opcoesTamanho = {
 			i3GEO.util.escondeBox();
 		};
 		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-
 	},
 	/*
 	Function: executa

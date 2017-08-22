@@ -52,7 +52,7 @@ i3GEOF.metaestat.dicionario = {
 		es : ""
 	} ],
 	"10" : [ {
-		pt : "Nova camada",
+		pt : "Adiciona",
 		en : "",
 		es : ""
 	} ],
@@ -98,6 +98,11 @@ i3GEOF.metaestat.dicionario = {
 	} ],
 	'selecionaCamada' : [ {
 		pt : "Escolha uma camada",
+		en : "",
+		es : ""
+	} ],
+	'ajuda1' : [ {
+		pt : "Ap&oacute;s escolher os par&acirc;metros, clique no bot&atilde;o Adiciona",
 		en : "",
 		es : ""
 	} ]

@@ -70,11 +70,11 @@ i3GEOF.metaestat = {
 	/**
 	 * Largura em pixels da janela flutuante com os componentes da ferramenta
 	 */
-	LARGURA: 270,
+	LARGURA: 350,
 	/**
 	 * Altura em pixels da janela flutuante com os componentes da ferramenta
 	 */
-	ALTURA: 250,
+	ALTURA: 280,
 	/**
 	 * guarda a lista de camadas que foram adicionadas ao mapa
 	 */
@@ -184,8 +184,8 @@ i3GEOF.metaestat = {
 					i3GEO.janela.minimiza("i3geoCartoAnalise",200);
 				};
 				janela = i3GEO.janela.cria(
-						"280px",
-						"300px",
+						"320px",
+						"350px",
 						"",
 						"",
 						"",
@@ -196,7 +196,11 @@ i3GEOF.metaestat = {
 						cabecalho,
 						minimiza,
 						"",
-						false
+						false,
+						"",
+						"",
+						"",
+						""
 				);
 				janela = janela[0];
 				YAHOO.i3GEO.janela.manager.register(janela);
@@ -2326,7 +2330,7 @@ i3GEOF.metaestat = {
 			}
 			//interface default
 			if(i3GEOF.metaestat.INTERFACE == "flutuante"){
-				i3GEOF.metaestat.principal.abreJanela();
+				i3GEOF.metaestat.principal.abreJanela(largura, altura, topo, esquerda);
 				$i(iddiv).innerHTML = i3GEOF.metaestat.principal.html();
 				i3GEOF.metaestat.principal.opcoesVariaveis();
 			}
@@ -2394,7 +2398,7 @@ i3GEOF.metaestat = {
 				if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
 					modal = true;
 				}
-				titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(124)' >" + $trad("x57")+"</a>";
+				titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x57") + "</span></div>";
 				janela = i3GEO.janela.cria(
 						i3GEOF.metaestat.LARGURA+50+"px",
 						i3GEOF.metaestat.ALTURA+"px",
@@ -2408,11 +2412,12 @@ i3GEOF.metaestat = {
 						cabecalho,
 						minimiza,
 						"",
-						true,
+						false,
 						"",
 						"",
 						"",
-						""
+						"",
+						"124"
 				);
 				janela = janela[0];
 				if(!YAHOO.i3GEO.janela.manager.find("i3geoCartoParametros")){

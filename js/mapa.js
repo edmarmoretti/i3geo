@@ -569,7 +569,13 @@ i3GEO.mapa =
 					i3GEOF.metaestat.INTERFACE = "flutuante";
 					i3GEOF.metaestat.principal.inicia(null, largura, altura, topo, esquerda);
 				};
-				i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.metaestat()", "metaestat", "metaestat", "dependencias.php", temp);
+				i3GEO.util.dialogoFerramenta(
+						"i3GEO.mapa.dialogo.metaestat()",
+						"metaestat",
+						"metaestat",
+						"dependencias.php",
+						temp
+					);
 			},
 			/**
 			 * Function: metaestatListaMapas
