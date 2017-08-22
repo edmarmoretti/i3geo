@@ -46,5 +46,13 @@ i3GEOF.atalhoscamada.dicionario = {
 	   			es : "",
 	   			it : ""
 	   		}
-	   	]
+	   	],
+	"cores" : [
+   		{
+   			pt : "Esquema de cores",
+   			en : "",
+   			es : "",
+   			it : ""
+   		}
+   	]
 };

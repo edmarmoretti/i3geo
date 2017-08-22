@@ -205,5 +205,28 @@ i3GEOF.atalhoscamada =
 	},
 	mudaNome : function(f,idjanela){
 		i3GEO.tema.mudanome(i3GEOF.atalhoscamada.propJanelas[idjanela].tema,f[0].value);
+	},
+	mudaCor : function(idjanela){
+		var tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.atalhoscamada.propJanelas[idjanela].tema);
+		var el = idjanela+i3GEOF.atalhoscamada.propJanelas[idjanela].tema;
+		i3GEO.util.abreColourRamp(idjanela+"cr", el, tema.numclasses,i3GEOF.atalhoscamada.propJanelas[idjanela].tema, false);
+	},
+	aplicaColourRamp : function(idjanela) {
+		var tema = i3GEOF.atalhoscamada.propJanelas[idjanela].tema;
+		var lista = $i(idjanela+tema);
+		if (lista.value != "") {
+			var cores = lista.value, ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten), temp = function() {
+				i3GEO.Interface.atualizaTema("", tema);
+			}, p =
+				i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="
+				+ i3GEO.configura.sid
+				+ "&funcao=alteraclasse&opcao=aplicacoresrgb&ext="
+				+ ext
+				+ "&tema="
+				+ tema, cp = new cpaint();
+			cp.set_transfer_mode('POST');
+			cp.set_response_type("JSON");
+			cp.call(p, "foo", temp, "cores=" + cores);
+		}
 	}
 };

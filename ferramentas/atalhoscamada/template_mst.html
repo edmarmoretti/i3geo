@@ -30,9 +30,11 @@
 	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.selecao()" class='{{selecaoHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{selecao}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.graficotema('{{tema}}')" class='{{graficoHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{grafico}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.editaLegenda('{{tema}}')" class='{{legendaHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{editaLegenda}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.atalhoscamada.mudaCor('{{{idjanela}}}')" class='{{noPolygonHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{cores}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.navega.destacaTema.inicia('{{tema}}')" class='{{destacaHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{destaca}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.contorno('{{tema}}')" class='{{noPolygonHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{contorno}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.mostraWms('{{tema}}')" class='{{wmsHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{wms}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.tme('{{tema}}')" class='{{tmeHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{tme}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.storymap('{{tema}}')" class='{{StoryMapHidden}} btn btn-primary btn-lg btn-block btn-raised'>StoryMap</a>
 </div>
+<input type='hidden' onchange="i3GEOF.atalhoscamada.aplicaColourRamp('{{{idjanela}}}')" id="{{{idjanela}}}{{tema}}" value='' />

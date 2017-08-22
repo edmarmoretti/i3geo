@@ -274,7 +274,8 @@ class Mapa
 				"link_tema",
 				"ferramentas",
 				"legendaimg",
-				"offsite"
+				"offsite",
+				"numclasses"
 		);
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
@@ -508,7 +509,8 @@ class Mapa
 						$link_tema,
 						$ferramentas,
 						$oLayer->getmetadata("legendaimg"),
-						$oLayer->offsite->red.",".$oLayer->offsite->green.",".$oLayer->offsite->blue
+						$oLayer->offsite->red.",".$oLayer->offsite->green.",".$oLayer->offsite->blue,
+						$oLayer->numclasses
 				);
 			}
 		}
