@@ -41,7 +41,7 @@ i3GEOF.atalhoscamada.dicionario = {
 	],
 	"contorno" : [
 	   		{
-	   			pt : "Ativa/desativa contorno",
+	   			pt : "Contorno (+-)",
 	   			en : "",
 	   			es : "",
 	   			it : ""

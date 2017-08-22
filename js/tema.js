@@ -318,6 +318,17 @@ i3GEO.tema =
 			i3GEO.php.copiatema(i3GEO.atualiza, idtema);
 		},
 		/**
+		 * Liga ou desliga o contorno das classes
+		 */
+		contorno: function(idtema) {
+			var temp = function(){
+				i3GEO.atualiza();
+				i3GEO.Interface.atualizaTema("", idtema);
+				i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
+			};
+			i3GEO.php.contorno(temp, idtema);
+		},
+		/**
 		 * Function: temporizador
 		 *
 		 * Aplica um temporizador para que a camada seja redesenhada em determinado intervalo de tempo.

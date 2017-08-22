@@ -946,6 +946,19 @@ i3GEO.php =
 			cpJSON.call(p, "mudanome", retorno, par);
 		},
 		/**
+		 * Function: contorno
+		 *
+		 * Liga ou desliga o contorno das classes
+		 */
+		contorno : function(funcao,tema) {
+			i3GEO.php.verifica();
+			var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
+				"funcao=contorno&tema=" + tema + "&g_sid=" + i3GEO.configura.sid, retorno = function(retorno) {
+				funcao.call(funcao, retorno);
+			};
+			cpJSON.call(p, "foo", retorno, par);
+		},
+		/**
 		 * Function: adicionaTemaWMS
 		 *
 		 * Adiciona tema WMS

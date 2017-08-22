@@ -1268,6 +1268,21 @@ switch (strtoupper($funcao))
 		redesenhaMapa();
 		break;
 		/*
+		 Valor: MUDANOME
+
+		 Altera o nome do tema
+
+		 <Temas->mudaNome>
+		 */
+	case "CONTORNO":
+		include_once("classe_temas.php");
+		$m = new Temas($map_file,$_pg["tema"]);
+		$m->contorno();
+		$m->salva();
+		$_SESSION["contadorsalva"]++;
+		redesenhaMapa();
+		break;
+		/*
 		 Section: Classes
 
 		Edita as caracter&iacute;sticas das classes de um tema.
