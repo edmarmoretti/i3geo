@@ -1,0 +1,26 @@
+<div class='container-fluid'>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="">{{{regiao}}}</label>
+		<div style="width: 100%;" class="input-group">
+			<div id="i3geomostraregiaoTipoRegiao"></div>
+		</div>
+	</div>
+	<div class="checkbox text-left">
+		<label>
+			<input checked id='i3geomostraregiaoNomes' type="checkbox">
+			<span class="checkbox-material noprint">
+				<span class="check"></span>
+			</span>
+			{{{nomes}}}
+		</label>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3geomostraregiaoOutlinecolor">{{{cor}}}</label>
+		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3geomostraregiaoOutlinecolor' value='255,0,0' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3geomostraregiaoWidth">{{{largura}}}</label>
+		<input class="form-control input-lg" type='text' id='i3geomostraregiaoWidth' value='1' />
+	</div>
+	<button onclick="i3GEOF.mostraregiao.aplica()" class='btn btn-primary btn-sm btn-raised'>{{{aplicar}}}</button>
+</div>

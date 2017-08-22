@@ -477,16 +477,13 @@ i3GEOF.metaestat = {
 		 * Executa i3GEOF.mostraregiao.iniciaJanelaFlutuante();
 		 */
 		mostraRegiao: function(){
-			if(typeof(i3GEOF.mostraregiao) === 'undefined'){
-				i3GEO.util.scriptTag(
-						i3GEO.configura.locaplic+"/ferramentas/metaestat/mostraregiao.js",
-						"i3GEOF.mostraregiao.iniciaJanelaFlutuante()",
-						"i3GEOF.mostraregiao_script"
-				);
-			}
-			else{
-				i3GEOF.mostraregiao.iniciaJanelaFlutuante();
-			}
+			i3GEO.util.dialogoFerramenta(
+				"i3GEOF.metaestat.analise.mostraRegiao()",
+				"mostraregiao",
+				"mostraregiao",
+				"dependencias.php",
+				"i3GEOF.mostraregiao.iniciaJanelaFlutuante()"
+			);
 		},
 		/**
 		 * Ativa a ferramenta que permite ativar/desativar o contorno dos limites utilizados em uma camada

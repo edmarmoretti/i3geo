@@ -41,59 +41,33 @@ Classe: i3GEOF.mostraregiao
 Permite que o usu&aacute;rio escolha um tipo de regi&atilde;o para incluir no mapa
  */
 i3GEOF.mostraregiao = {
+	aguarde: "",
 	/**
-	 * Ativa/desativa o indicador de aguarde
+	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 	 */
-	aguarde: function(obj){
-		if(!obj){
-			return "<img style='display:block;z-index:2' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
-		}
-		var i = $i(obj.id+"_imagem");
-		if(!i){
-			obj.innerHTML = "<img id='"+obj.id+"_imagem' style='display:block;z-index:2' src=\'"+i3GEO.configura.locaplic+"/imagens/aguarde.gif\' />";
-		}
-		else{
-			if(i.style.display == "block"){
-				i.style.display = "none";
-			}
-			else{
-				i.style.display = "block";
-			}
-		}
-	},
-	//para efeitos de compatibilidade
-	criaJanelaFlutuante: function(){
-		i3GEOF.mostraregiao.iniciaDicionario();
+	MUSTACHE : "",
+	/**
+	 * Susbtitutos para o template
+	 */
+	mustacheHash : function() {
+		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.mostraregiao.dicionario);
+		return dicionario;
 	},
 	/**
 	 * Inicia a ferramenta ativando as opcoes
 	 * Executa i3GEOF.mostraregiao.comboRegioes
 	 */
 	inicia: function(divid){
+		if(i3GEOF.mostraregiao.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/mostraregiao/template_mst.html", function(template) {
+				i3GEOF.mostraregiao.MUSTACHE = template;
+				i3GEOF.mostraregiao.inicia(divid);
+			});
+			return;
+		}
 		$i(divid).innerHTML = i3GEOF.mostraregiao.html();
+		i3GEO.util.aplicaAquarela("i3GEOF.mostraregiao_corpo");
 		i3GEOF.mostraregiao.comboRegioes($i("i3geomostraregiaoTipoRegiao"));
-		YAHOO.i3GEO.janela.manager.find("i3GEOF.mostraregiao").setFooter('<input id=i3geomostraregiaoAplica type="button" value="'+$trad("p14")+'" />');
-		new YAHOO.widget.Button(
-			"i3geomostraregiaoAplica",
-			{onclick:{fn: function(){i3GEOF.mostraregiao.aplica();}}}
-		);
-		$i("i3geomostraregiaoAplica-button").style.width = "180px";
-	},
-	/**
-	 * Carrega o dicionario com a traducao
-	 * Executa i3GEOF.mostraregiao.iniciaJanelaFlutuante();
-	 */
-	iniciaDicionario: function(){
-		if(!i3GEOF.metaestat || typeof(i3GEOF.metaestat.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/metaestat/dicionario.js",
-				"i3GEOF.mostraregiao.iniciaJanelaFlutuante()",
-				"i3GEOF.metaestat.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.mostraregiao.iniciaJanelaFlutuante();
-		}
 	},
 	/**
 	 * Abre a janela flutuante com o conteudo da ferramenta
@@ -107,12 +81,12 @@ i3GEOF.mostraregiao = {
 		cabecalho = function(){
 		};
 		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.mostraregiao");
+			i3GEO.janela.minimiza("i3GEOF.mostraregiao",200);
 		};
 		//cria a janela flutuante
-		titulo = "Limites &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("limites",i3GEOF.mostraregiao.dicionario)+"</span></div>";
 		janela = i3GEO.janela.cria(
-			"210px",
+			"300px",
 			"",
 			"",
 			"",
@@ -122,12 +96,17 @@ i3GEOF.mostraregiao = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+			"",
+			true,
+			"",
+			"",
+			"",
+			""
 		);
 		divid = janela[2].id;
-		$i("i3GEOF.mostraregiao_corpo").style.backgroundColor = "white";
+		i3GEOF.mostraregiao.aguarde = $i("i3GEOF.mostraregiao_imagemCabecalho").style;
 		i3GEOF.mostraregiao.inicia(divid);
-		i3GEO.janela.tempoMsg("Utilize a guia lateral para ligar/desligar camadas que j&aacute; estejam no mapa");
 	},
 	/**
 	 * HTML com o conteudo da ferramenta
@@ -135,15 +114,7 @@ i3GEOF.mostraregiao = {
 	 * @return HTML
 	 */
 	html: function(){
-		var ins = "" +
-		'<div class="paragrafo" id="i3geomostraregiaoTipoRegiao" >' +
-		'</div>' +
-		'<p class=paragrafo ><input type=checkbox id="i3geomostraregiaoNomes" style="cursor:pointer;position:relative;top:2px;" /> Inclui nomes</p>' +
-		'<p class=paragrafo >Contorno:</p>' +
-		'Cor: &nbsp;' + $inputText("","","i3geomostraregiaoOutlinecolor","",12,"255,0,0") +
-		'&nbsp;<img alt="aquarela.gif" style=position:relative;top:2px;cursor:pointer src="'+i3GEO.configura.locaplic+'/imagens/aquarela.gif" onclick="i3GEOF.mostraregiao.corj(\'i3geomostraregiaoOutlinecolor\')" /> ' +
-		'<br><br>Largura: &nbsp;' + $inputText("","","i3geomostraregiaoWidth","",3,"1") +
-		'<br><br>' ;
+		var ins = Mustache.render(i3GEOF.mostraregiao.MUSTACHE, i3GEOF.mostraregiao.mustacheHash());
 		return ins;
 	},
 	/**
@@ -151,18 +122,15 @@ i3GEOF.mostraregiao = {
 	 * Executa i3GEO.php.listaTipoRegiao
 	 */
 	comboRegioes: function(objonde){
-		if(objonde){
-			i3GEOF.mostraregiao.aguarde(objonde);
-		}
 		var temp = function(regioes){
 			var ins = '',
 			i,n;
 			n = regioes.length;
-			ins += "<select id='i3geomostraregiaoComboTipoRegiao' style='width:90%' ><option value=''>---</option>";
+			ins += "<select class='form-control' id='i3geomostraregiaoComboTipoRegiao' ><option value=''>---</option>";
 			for(i=0;i<n;i++){
 				ins += "<option value='"+regioes[i].codigo_tipo_regiao+"'>"+regioes[i].nome_tipo_regiao+"</option>";
 			}
-			ins += "</select><br>";
+			ins += "</select>";
 			if(objonde){
 				objonde.innerHTML = ins;
 			}
@@ -175,15 +143,18 @@ i3GEOF.mostraregiao = {
 	 * Executa ferramentas/metaestat/analise.php?funcao=adicionaLimiteRegiao
 	 */
 	aplica: function(){
+		if(i3GEOF.mostraregiao.aguarde.visibility === "visible")
+		{return;}
+
+
 		var combo = $i("i3geomostraregiaoComboTipoRegiao"),
 			nomes = $i("i3geomostraregiaoNomes");
 		if (combo.value === ""){
-			i3GEO.janela.tempoMsg("Escolha um limite geogr&aacute;fico");
 			return;
 		}
-		i3GEO.janela.abreAguarde("aguardeMostraRegiao","Aguarde...");
+		i3GEOF.mostraregiao.aguarde.visibility = "visible";
 		var temp = function(retorno){
-			i3GEO.janela.fechaAguarde("aguardeMostraRegiao");
+			i3GEOF.mostraregiao.aguarde.visibility = "hidden";
 			i3GEO.atualiza();
 
 		};
@@ -193,9 +164,6 @@ i3GEOF.mostraregiao = {
 		else{
 			nomes = "nao";
 		}
-		i3GEO.janela.AGUARDEMODAL = true;
-		i3GEO.janela.abreAguarde("aguardeMostraRegiao","Aplicando...");
-		i3GEO.janela.AGUARDEMODAL = false;
 		p = i3GEO.configura.locaplic+"/ferramentas/metaestat/analise.php?funcao=adicionaLimiteRegiao"+
 			"&codigo_tipo_regiao="+combo.value+
 			"&g_sid="+i3GEO.configura.sid+
@@ -204,11 +172,5 @@ i3GEOF.mostraregiao = {
 			"&nomes="+nomes;
 		i3GEO.util.ajaxGet(p,temp);
 		//i3GEO.php.mapfileTipoRegiao(temp,combo.value,$i("i3geomostraregiaoOutlinecolor").value,$i("i3geomostraregiaoWidth").value,nomes);
-	},
-	/**
-	 * Abre a janela de dialogo para escolha da cor que sera usada para desenhar a regiao
-	 */
-	corj: function(obj){
-		i3GEO.util.abreCor("",obj);
 	}
 };
