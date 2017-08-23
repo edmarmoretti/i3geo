@@ -435,6 +435,21 @@ i3GEO.analise =
 					"area",
 					"dependencias.php",
 					"i3GEOF.area.iniciaJanelaFlutuante()");
+			},
+			juntamedidasvariavel : function(tema) {
+				if(!tema){
+					tema = i3GEO.temaAtivo;
+				}
+				var temp = function(){
+					i3GEOF.juntamedidasvariavel.iniciaJanelaFlutuante(tema);
+				};
+				i3GEO.util.dialogoFerramenta(
+					"i3GEO.analise.dialogo.juntamedidasvariavel()",
+					"juntamedidasvariavel",
+					"juntamedidasvariavel",
+					"dependencias.php",
+					temp
+				);
 			}
 		}
 	};

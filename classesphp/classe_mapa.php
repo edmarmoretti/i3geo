@@ -275,7 +275,8 @@ class Mapa
 				"ferramentas",
 				"legendaimg",
 				"offsite",
-				"numclasses"
+				"numclasses",
+				"id_medida_variavel"
 		);
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
@@ -510,7 +511,8 @@ class Mapa
 						$ferramentas,
 						$oLayer->getmetadata("legendaimg"),
 						$oLayer->offsite->red.",".$oLayer->offsite->green.",".$oLayer->offsite->blue,
-						$oLayer->numclasses
+						$oLayer->numclasses,
+						$oLayer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL")
 				);
 			}
 		}

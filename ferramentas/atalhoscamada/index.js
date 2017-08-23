@@ -72,6 +72,7 @@ i3GEOF.atalhoscamada =
 		dicionario["noPolygonHidden"] = (ltema.type === 2) ? "":"hidden";
 		dicionario["destacaHidden"] = (i3GEO.Interface.ATUAL == "openlayers") ? "":"hidden";
 		dicionario["wmsHidden"] = (ltema.permiteogc.toLowerCase() !== "nao") ? "":"hidden";
+		dicionario["metaestatHidden"] = (parseInt(ltema.id_medida_variavel,10) > 0) ? "":"hidden";
 
 		return dicionario;
 	},
@@ -228,5 +229,9 @@ i3GEOF.atalhoscamada =
 			cp.set_response_type("JSON");
 			cp.call(p, "foo", temp, "cores=" + cores);
 		}
+	},
+	//juncao de tabelas advindas do sistema de metadados
+	juncao: function(idjanela){
+		i3GEO.analise.dialogo.juntamedidasvariavel(i3GEOF.atalhoscamada.propJanelas[idjanela].tema);
 	}
 };

@@ -54,5 +54,13 @@ i3GEOF.atalhoscamada.dicionario = {
    			es : "",
    			it : ""
    		}
-   	]
+   	],
+	"juncao" : [
+  		{
+  			pt : "Jun&ccedil;&atilde;o de camadas",
+  			en : "",
+  			es : "",
+  			it : ""
+  		}
+  	]
 };
