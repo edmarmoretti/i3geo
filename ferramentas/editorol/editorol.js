@@ -59,6 +59,7 @@ i3GEO.editorOL =
 	{
 		MUSTACHESALVAGEOMETRIAS: "",
 		MUSTACHEFERRAMENTAS: "",
+		MUSTACHEPROPRIEDADES: "",
 		layerDefault: "",
 		simbologia : {
 			opacidade : 0.8,
@@ -1833,9 +1834,9 @@ i3GEO.editorOL =
 			}
 			i3GEO.editorOL.idsSelecionados = [];
 		},
-		mudaSimbolo : function(estilo, id) {
+		mudaSimbolo : function(estilo, obj) {
 			var s, i, nsel, f;
-			i3GEO.editorOL.simbologia[estilo] = $i(id).value;
+			i3GEO.editorOL.simbologia[estilo] = obj.value;
 			nsel = i3GEO.editorOL.idsSelecionados.length;
 			s = i3GEO.desenho.layergrafico.getSource();
 			for(i=0; i<nsel; i++){
@@ -1951,55 +1952,29 @@ i3GEO.editorOL =
 		},
 		// obtido de openlayers.org
 		propriedades : function() {
+			if(i3GEO.editorOL.MUSTACHEPROPRIEDADES == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/editorol/templatePropriedades_mst.html", function(template) {
+					i3GEO.editorOL.MUSTACHEPROPRIEDADES = template;
+					i3GEO.editorOL.propriedades();
+				});
+				return;
+			}
 			if (!document.getElementById("panelpropriedadesEditor")) {
 				YAHOO.namespace("editorOL.container");
 				YAHOO.editorOL.container.panel = new YAHOO.widget.Panel("panelpropriedadesEditor", {
-					zIndex : 20000,
 					iframe : true,
 					width : "350px",
-					height : "250px",
+					height : "300px",
+					overflow: "auto",
 					visible : false,
 					draggable : true,
 					close : true
 				});
-				var ins =
-					"" + '<p class=paragrafo ><b>Estilos (utilize a cor no formato r,g,b):</b></p>'
-					+ '<p class=paragrafo >Cor do contorno</p>'
-					+ '<div class="i3geoForm100 i3geoFormIconeAquarela" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeColor\',\'i3GEOEditorOLcorContorno\');return false;" type="text" id="i3GEOEditorOLcorContorno" value="' + i3GEO.editorOL.simbologia.strokeColor + '" />'
-					+ '</div>'
-					+ '<br><p class=paragrafo >Cor do preenchimento</p>'
-					+ '<div class="i3geoForm100 i3geoFormIconeAquarela" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'fillColor\',\'i3GEOEditorOLcorPre\');return false;" type="text" id="i3GEOEditorOLcorPre" value="' + i3GEO.editorOL.simbologia.fillColor + '" />'
-					+ '</div>'
-					+ '<br><p class=paragrafo >Cor da fonte</p>'
-					+ '<div class="i3geoForm100 i3geoFormIconeAquarela" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'fontColor\',\'i3GEOEditorOLcorFonte\');return false;" type="text" id="i3GEOEditorOLcorFonte" value="' + i3GEO.editorOL.simbologia.fontColor + '" />'
-					+ '</div>'
-					+ '<br><p class=paragrafo >Tamanho da fonte</p>'
-					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'fontSize\',\'i3GEOEditorOLfontsize\');return false;" type="text" id="i3GEOEditorOLfontsize" value="' + i3GEO.editorOL.simbologia.fontSize + '" />'
-					+ '</div>'
-					+ '<br><p class=paragrafo >Opacidade (de 0 a 1)</p>'
-					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'opacidade\',\'i3GEOEditorOLopacidade\');return false;" type="text" id="i3GEOEditorOLopacidade" value="' + i3GEO.editorOL.simbologia.opacidade + '" />'
-					+ '</div>'
-					+ '<br><p class=paragrafo >Largura da linha/contorno</p>'
-					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'strokeWidth\',\'i3GEOEditorOLlarguraLinha\');return false;" type="text" id="i3GEOEditorOLlarguraLinha" value="' + i3GEO.editorOL.simbologia.strokeWidth + '" />'
-					+ '</div>'
-					+ '<br><p class=paragrafo >Url de uma imagem</p>'
-					+ '<div class="i3geoForm i3geoFormIconeEdita" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'externalGraphic\',\'i3GEOEditorOLexternalGraphic\');return false;" type="text" id="i3GEOEditorOLexternalGraphic" value="' + i3GEO.editorOL.simbologia.externalGraphic + '" />'
-					+ '</div>'
-					+ '<br><p class=paragrafo >Largura da imagem</p>'
-					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicWidth\',\'i3GEOEditorOLgraphicWidth\');return false;" type="text" id="i3GEOEditorOLgraphicWidth" value="' + i3GEO.editorOL.simbologia.graphicWidth + '" />'
-					+ '</div>'
-					+ '<br><p class=paragrafo >Altura da imagem</p>'
-					+ '<div class="i3geoForm100 i3geoFormIconeEdita" >'
-					+ '<input onchange="i3GEO.editorOL.mudaSimbolo(\'graphicHeight\',\'i3GEOEditorOLgraphicHeight\');return false;" type="text" id="i3GEOEditorOLgraphicHeight" value="' + i3GEO.editorOL.simbologia.graphicHeight + '" />'
-					+ '</div>';
+
+				var ins = Mustache.render(i3GEO.editorOL.MUSTACHEPROPRIEDADES, i3GEO.editorOL.simbologia);
+				//TODO traduzir
+				YAHOO.editorOL.container.panel.setBody(ins);
+
 
 						//TODO implementar ao atualizar OL3
 						/*
@@ -2036,10 +2011,11 @@ i3GEO.editorOL =
 						+ '	</tr>'
 						+ '</table>';
 						*/
-				YAHOO.editorOL.container.panel.setBody(ins);
+
+
 				if (i3GEO && typeof i3GEO != undefined && i3GEO != "") {
 					YAHOO.editorOL.container.panel
-						.setHeader("Propriedades<div id='panelpropriedadesEditor_minimizaCabecalho' class='container-minimiza'></div>");
+						.setHeader("<span class='i3GeoTituloJanelaBsNolink'>Propriedades</span>");
 				} else {
 					YAHOO.editorOL.container.panel.setHeader("Propriedades");
 				}
@@ -2050,12 +2026,6 @@ i3GEO.editorOL =
 				YAHOO.editorOL.container.panel.center();
 				YAHOO.util.Event.addListener(YAHOO.editorOL.container.panel.close, "click", function() {
 				});
-				temp = $i("panelpropriedadesEditor_minimizaCabecalho");
-				if (temp) {
-					temp.onclick = function() {
-						i3GEO.janela.minimiza("panelpropriedadesEditor");
-					};
-				}
 				i3GEO.util.aplicaAquarela("panelpropriedadesEditor");
 			}
 			YAHOO.editorOL.container.panel.show();
@@ -2162,12 +2132,7 @@ i3GEO.editorOL =
 				YAHOO.editorOL.ferramentas.panel.center();
 				YAHOO.util.Event.addListener(YAHOO.editorOL.ferramentas.panel.close, "click", function() {
 				});
-				temp = $i("panelferramentasEditor_minimizaCabecalho");
-				if (temp) {
-					temp.onclick = function() {
-						i3GEO.janela.minimiza("panelferramentasEditor");
-					};
-				}
+
 			} else {
 				YAHOO.editorOL.ferramentas.panel.render(document.body);
 			}
