@@ -57,6 +57,7 @@ if (!i3GEO || typeof (i3GEO) === 'undefined') {
 }
 i3GEO.editorOL =
 	{
+		MUSTACHESALVAGEOMETRIAS: "",
 		layerDefault: "",
 		simbologia : {
 			opacidade : 0.8,
@@ -882,6 +883,13 @@ i3GEO.editorOL =
 			cpJSON.call(u, "foo", retorno, "");
 		},
 		salvaGeometrias : function() {
+			if(i3GEO.editorOL.MUSTACHESALVAGEOMETRIAS == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/editorol/templateSalvaGeometrias_mst.html", function(template) {
+					i3GEO.editorOL.MUSTACHESALVAGEOMETRIAS = template;
+					i3GEO.editorOL.salvaGeometrias();
+				});
+				return;
+			}
 			var n = i3GEO.editorOL.idsSelecionados.length,
 				ins = "";
 			if (n > 0) {
@@ -897,12 +905,12 @@ i3GEO.editorOL =
 						YAHOO.salvaGeometrias.container.panel = new YAHOO.widget.Panel("panelsalvageometrias", {
 							zIndex : 2000,
 							iframe : false,
-							width : "250px",
+							width : "350px",
 							visible : false,
 							draggable : true,
 							close : true
 						});
-						YAHOO.salvaGeometrias.container.panel.setHeader($trad("u6"));
+						YAHOO.salvaGeometrias.container.panel.setHeader("<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u6") + "</span>");
 						YAHOO.salvaGeometrias.container.panel.setBody("");
 						YAHOO.salvaGeometrias.container.panel.setFooter("");
 						YAHOO.salvaGeometrias.container.panel.render(document.body);
@@ -914,17 +922,25 @@ i3GEO.editorOL =
 					} catch (e) {
 					}
 				}
-				ins += "<p class=paragrafo >" + n + " " + $trad("geosel") + "</p>";
-				ins +=
-					"<p class=paragrafo ><a href='#' onclick='i3GEO.editorOL.listaGeometriasSel()' >" + $trad("listar")
-						+ "</a>&nbsp;&nbsp;";
+				var hash = {
+					"n" : n,
+					"geosel" : $trad("geosel"),
+					"listar" : $trad("listar"),
+					"nomeFuncaoSalvarHidden" : "hidden",
+					"incorpoHidden": "hidden"
+				};
 				if (i3GEO.editorOL.nomeFuncaoSalvar && i3GEO.editorOL.nomeFuncaoSalvar != "") {
-					ins += "<a href='#' onclick='" + i3GEO.editorOL.nomeFuncaoSalvar + "' >" + $trad("sdados") + "</a>&nbsp;&nbsp;";
+					hash.nomeFuncaoSalvar = i3GEO.editorOL.nomeFuncaoSalvar;
+					hash.sdados = $trad("sdados");
+					hash.nomeFuncaoSalvarHidden = "";
 				}
 				if (typeof i3geoOL !== "undefined") {
-					ins += "<a href='#' onclick='i3GEO.editorOL.incorporar()' >" + $trad("incorpo") + "</a></p>";
-					ins += "<p class=paragrafo>" + $trad("ajudaEditorOlSalva") + "</p>";
+					hash.incorpo = $trad("incorpo");
+					hash.ajudaEditorOlSalva =  $trad("ajudaEditorOlSalva");
+					hash.incorpoHidden = "";
 				}
+				ins = Mustache.render(i3GEO.editorOL.MUSTACHESALVAGEOMETRIAS, hash);
+
 				YAHOO.salvaGeometrias.container.panel.setBody(ins);
 			} else {
 				i3GEO.janela.tempoMsg($trad("selum"));
