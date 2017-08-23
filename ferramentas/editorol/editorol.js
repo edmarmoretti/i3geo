@@ -58,6 +58,7 @@ if (!i3GEO || typeof (i3GEO) === 'undefined') {
 i3GEO.editorOL =
 	{
 		MUSTACHESALVAGEOMETRIAS: "",
+		MUSTACHEFERRAMENTAS: "",
 		layerDefault: "",
 		simbologia : {
 			opacidade : 0.8,
@@ -2126,6 +2127,13 @@ i3GEO.editorOL =
 			temp.innerHTML = ins;
 		},
 		ferramentas : function() {
+			if(i3GEO.editorOL.MUSTACHEFERRAMENTAS == ""){
+				$.get(i3GEO.configura.locaplic + "/ferramentas/editorol/templateFerramentas_mst.html", function(template) {
+					i3GEO.editorOL.MUSTACHEFERRAMENTAS = template;
+					i3GEO.editorOL.ferramentas();
+				});
+				return;
+			}
 			var b, ins;
 			if (!document.getElementById("panelferramentasEditor")) {
 				YAHOO.namespace("editorOL.ferramentas");
@@ -2133,37 +2141,21 @@ i3GEO.editorOL =
 					zIndex : 20000,
 					iframe : true,
 					width : "300px",
-					height : "150px",
 					visible : false,
 					draggable : true,
 					close : true
 				});
-				ins =
-					"" + '<p class=paragrafo >'
-						+ $trad("opsel")
-						+ ':</p>'
-						+ '<div class=styled-select >'
-						+ '<select id="panelferramentasEditorOpcoes">'
-						+ '	<option value="">---</option>'
-						+ '	<option value=union >Uni&atilde;o</option>';
+				var hash = {
+					"opsel": $trad("opsel"),
+					"p14": $trad("p14"),
+					"hidden": "hidden"
+				};
 				if (i3GEO.php) {
-					ins +=
-						'	<option value=intersection >Intersec&ccedil;&atilde;o</option>' + '	<option value=convexhull >Convex hull</option>'
-							+ '	<option value=boundary >Bordas</option>'
-							+ '	<option value=difference >Diferen&ccedil;a</option>'
-							+ '	<option value=symdifference >Diferen&ccedil;a sim&eacute;trica</option>';
+					hash.hidden = "";
 				}
-				ins += '</select></p>';
-				ins += '</div>';
-				ins += '<br><p class=paragrafo ><input id="panelferramentasEditorAplicar" type="button" value="' + $trad("p14") + '" />';
-
+				ins = Mustache.render(i3GEO.editorOL.MUSTACHEFERRAMENTAS, hash);
 				YAHOO.editorOL.ferramentas.panel.setBody(ins);
-				if (i3GEO && typeof i3GEO != undefined && i3GEO != "") {
-					YAHOO.editorOL.ferramentas.panel
-						.setHeader("Ferramentas <div id='panelferramentasEditor_minimizaCabecalho' class='container-minimiza'></div>");
-				} else {
-					YAHOO.editorOL.ferramentas.panel.setHeader("Ferramentas");
-				}
+				YAHOO.editorOL.ferramentas.panel.setHeader("<span class='i3GeoTituloJanelaBsNolink' >Ferramentas</span>");
 
 				YAHOO.editorOL.ferramentas.panel.setFooter("");
 				YAHOO.editorOL.ferramentas.panel.render(document.body);
@@ -2176,20 +2168,10 @@ i3GEO.editorOL =
 						i3GEO.janela.minimiza("panelferramentasEditor");
 					};
 				}
-				b = new YAHOO.widget.Button(
-					"panelferramentasEditorAplicar",{
-					onclick:{
-						fn:	function(){
-							i3GEO.editorOL.processageo($i("panelferramentasEditorOpcoes").value);
-						}
-					}
-				});
-				b.addClass("rodar");
 			} else {
 				YAHOO.editorOL.ferramentas.panel.render(document.body);
 			}
 			YAHOO.editorOL.ferramentas.panel.show();
-
 		},
 		//TODO implementar ao atualizar OL3
 		snap : function() {

@@ -1,0 +1,18 @@
+<div class='container-fluid'>
+	<h5>{{{opsel}}}</h5>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOtoponimiaDivListaFonte">{{{fonte}}}</label>
+		<div style="width: 100%;" class="input-group">
+			<select class="form-control" id="panelferramentasEditorOpcoes">
+				<option value="">---</option>
+				<option value=union>Uni&atilde;o</option>
+				<option class="{{{hidden}}}" value=intersection>Intersec&ccedil;&atilde;o</option>
+				<option value=convexhull>Convex hull</option>
+				<option class="{{{hidden}}}" value=boundary>Bordas</option>
+				<option class="{{{hidden}}}" value=difference>Diferen&ccedil;a</option>
+				<option class="{{{hidden}}}" value=symdifference>Diferen&ccedil;a sim&eacute;trica</option>
+			</select>
+		</div>
+	</div>
+	<button onclick="i3GEO.editorOL.processageo($i('panelferramentasEditorOpcoes').value)" class='btn btn-primary btn-sm btn-raised'>{{{p14}}}</button>
+</div>
