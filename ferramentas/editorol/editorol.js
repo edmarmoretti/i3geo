@@ -2038,16 +2038,16 @@ i3GEO.editorOL =
 			if (!document.getElementById("panellistagEditor")) {
 				YAHOO.namespace("editorOL.listaGeometrias");
 				YAHOO.editorOL.listaGeometrias.panel = new YAHOO.widget.Panel("panellistagEditor", {
-					zIndex : 20000,
 					iframe : true,
-					width : "320px",
+					width : "380px",
+					height : "300px",
 					visible : false,
 					draggable : true,
 					close : true
 				});
 				if (i3GEO && typeof i3GEO != undefined && i3GEO != "") {
 					YAHOO.editorOL.listaGeometrias.panel
-						.setHeader($trad("u6") + " <div id='panellistagEditor_minimizaCabecalho' class='container-minimiza'></div>");
+						.setHeader("<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u6") + "</span>" );
 				} else {
 					YAHOO.editorOL.listaGeometrias.panel.setHeader($trad("u6"));
 				}
@@ -2057,44 +2057,26 @@ i3GEO.editorOL =
 				YAHOO.util.Event.addListener(YAHOO.editorOL.listaGeometrias.panel.close, "click", function() {
 					YAHOO.editorOL.listaGeometrias.panel.destroy();
 				});
-				temp = $i("panellistagEditor_minimizaCabecalho");
-				if (temp) {
-					temp.onclick = function() {
-						i3GEO.janela.minimiza("panellistagEditor");
-					};
-				}
 			} else {
 				YAHOO.editorOL.listaGeometrias.panel.render(document.body);
 			}
-			var id, temp, geos = i3GEO.desenho.layergrafico.getSource().getFeatures(), n = geos.length, ins = "<table class=lista4 >";
-			ins += "<tr><td><i>" + $trad("u6") + "</i></td><td><i>" + $trad("opcoes") + "</i></td><td></td></tr>";
-
+			var id, temp, geos = i3GEO.desenho.layergrafico.getSource().getFeatures(), n = geos.length, ins = "";
+			ins += '<div class="container-fluid" style="height:100%;overflow:auto;">';
 			while (n > 0) {
 				n -= 1;
 				id = geos[n].getId();
 				if(id){
-					ins +=
-						"<tr><td>" + id
-							+ "</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.marcaBotao();i3GEO.editorOL.selFeature(\""
-							+ id
-							+ "\")'>seleciona</td><td style='cursor:pointer;color:blue' onclick='javascript:i3GEO.editorOL.unselFeature(\""
-							+ id
-							+ "\")'>limpa</td></tr>";
+					ins += '<a title="Seleciona" onclick="i3GEO.editorOL.selFeature(\'' + id + '\')" href="javascript:void(0)">'
+						+ id + "</a>";
 				}
 			}
-			ins += "</table>";
+			ins += "</div>";
 			if (geos.length === 0) {
-				ins = $trad("meneditor2");
+				ins = '<div class="container-fluid" style="height:100%;overflow:auto;">' + $trad("meneditor2") + "</div>";
 			}
+			YAHOO.editorOL.listaGeometrias.panel.setBody(ins);
 			YAHOO.editorOL.listaGeometrias.panel.show();
-			if (i3GEO.configura) {
-				temp = $i("panellistagEditor").getElementsByTagName("div")[2];
-			} else {
-				temp = $i("panellistagEditor").getElementsByTagName("div")[1];
-			}
-			temp.style.overflow = "auto";
-			temp.style.height = "100px";
-			temp.innerHTML = ins;
+
 		},
 		ferramentas : function() {
 			if(i3GEO.editorOL.MUSTACHEFERRAMENTAS == ""){
