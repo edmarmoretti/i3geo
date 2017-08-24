@@ -205,6 +205,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/selector/selector-min.js",
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
+"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
 //"../pacotes/jquery/jquery-ui/jquery.ui-contextmenu.min.js",
 "../pacotes/bootstrap/js/bootstrap.min.js",
 "../pacotes/bootstrap-material-design/dist/js/material.min.js",
@@ -279,6 +280,7 @@ $cssfiles = array(
 "../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
 //"../pacotes/yui290/build/progressbar/assets/skins/sam/progressbar.css",
 //"../css/corrigeyui_geral.css",
+"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css",
 "../mashups/theme/default/style.css",
 //"../css/janelaflutuante.css",
 "../mashups/openlayers.css"
