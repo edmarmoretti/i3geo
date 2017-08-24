@@ -110,6 +110,7 @@ i3GEOF.animagif =
 			return;
 		}
 		$i(iddiv).innerHTML = i3GEOF.animagif.html();
+
 		if (!$i("i3GEOFanimagifComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFanimagifComboCabeca", "i3GEOFanimagifComboCabecaSel", "animagif", "ligadosComTabela",function(evt){
 				var botao = evt.target;

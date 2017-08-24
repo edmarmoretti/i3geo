@@ -76,7 +76,9 @@ i3GEOF.agrupaElementos = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML = i3GEOF.agrupaElementos.html();
+		$i(iddiv).innerHTML += i3GEOF.agrupaElementos.html();
+		i3GEO.janela.applyScrollBar("#" + iddiv +" .customScrollBar");
+
 		i3GEOF.agrupaElementos.t0();
 	},
 	/*

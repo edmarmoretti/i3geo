@@ -2209,7 +2209,7 @@ i3GEO.util =
 				c.removeChild(temp);
 			}
 			if(c && c.style){
-				c.style.backgroundColor = "white";
+				//c.style.backgroundColor = "white";
 			}
 			botoes = "<ul class='proximoAnterior pager condensed' style='width:95%;margin-bottom: 2px;'>";
 			if (anterior !== "") {

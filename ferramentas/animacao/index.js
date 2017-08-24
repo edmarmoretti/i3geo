@@ -78,6 +78,7 @@ i3GEOF.animacao = {
 		}
 		i3GEOF.animacao.aguarde.visibility = "visible";
 		$i(iddiv).innerHTML = i3GEOF.animacao.html();
+
 		i3GEOF.animacao.listaDeCamadas();
 		i3GEOF.animacao.aguarde.visibility = "hidden";
 	},
