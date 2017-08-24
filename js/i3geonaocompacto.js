@@ -80,7 +80,7 @@ OpenLayers = {
 	"../pacotes/yui290/build/tabview/tabview-min.js",
 	"../pacotes/cpaint/cpaint2.inc.js",
 	//"../pacotes/yui290/build/treeview/treeview.js",
-	"../pacotes/yui290/build/button/button-min.js",
+	//"../pacotes/yui290/build/button/button-min.js",
 	"../pacotes/yui290/build/json/json-min.js",
 	"../pacotes/yui290/build/resize/resize-min.js",
 	//"../pacotes/yui290/build/progressbar/progressbar-min.js",

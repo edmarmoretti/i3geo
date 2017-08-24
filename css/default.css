@@ -801,9 +801,13 @@ td {
 }
 
 
-/* JANELAS FLUTUANTES */
+/* JANELAS FLUTUANTES
 .yui-panel div {
 	background: none !IMPORTANT;
+}
+*/
+.yui-panel div {
+	background: none;
 }
 
 .container-minimiza {

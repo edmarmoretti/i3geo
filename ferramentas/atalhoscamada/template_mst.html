@@ -1,4 +1,4 @@
-<div class='container-fluid'>
+<div class='container-fluid' style="height: 100%; overflow: auto; padding-right: 1px;">
 	<div class="form-group label-static" >
 		<label class="control-label">{{{opacidade}}}</label>
 		<form onsubmit='i3GEOF.atalhoscamada.mudaOpacidade(this,{{{idjanelaA}}});return false;'>
@@ -20,7 +20,6 @@
 			<input class="form-control input-lg" type='text' value='' />
 		</form>
 	</div>
-
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.procuraratrib('{{tema}}')" class='{{procurarHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{procurar}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.copia('{{tema}}')" class='btn btn-primary btn-lg btn-block btn-raised'>{{{copia}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.toponimia('{{tema}}')" class='{{topoHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{topo}}}</a>

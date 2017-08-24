@@ -302,12 +302,12 @@ i3GEO.janela =
 				janela.moveTo(nx, ny + 50);
 			}
 			YAHOO.i3GEO.janela.manager.register(janela);
-				janela.cfg.setProperty("effect", [
-					{
-						effect : YAHOO.widget.ContainerEffect.FADE,
-						duration : 0.5
-					}
-				]);
+			janela.cfg.setProperty("effect", [
+				{
+					effect : YAHOO.widget.ContainerEffect.FADE,
+					duration : 0.5
+				}
+			]);
 
 			janela.cfg.setProperty("zIndex", [
 				4
