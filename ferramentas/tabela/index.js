@@ -141,6 +141,8 @@ i3GEOF.tabela =
 			}
 			$i(iddiv).innerHTML = i3GEOF.tabela.html(idjanela);
 
+			i3GEO.janela.applyScrollBar("#" + iddiv +" .customScrollBar",{advanced:{ autoExpandHorizontalScroll: 2 }});
+
 			var b, onButtonClick = function(evt) {
 				var botao = evt.target;
 				if (botao) {

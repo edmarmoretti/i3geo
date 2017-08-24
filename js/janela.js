@@ -71,9 +71,10 @@ i3GEO.janela =
 		//Config do plugin que controla a barra de rolagem
 		scrollBar: {
 			theme: "inset-2",
-			axis: "y",
+			axis: "yx",
 			scrollbarPosition: "inside",
-			scrollButtons:{ enable: false }
+			scrollButtons:{ enable: false },
+			advanced:{ autoExpandHorizontalScroll: true }
 		},
 		/**
 		 * Cada vez que uma janela flutuante &eacute; criada, esse valor &eacute; acrescido de 1
