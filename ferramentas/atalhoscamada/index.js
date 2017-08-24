@@ -94,12 +94,15 @@ i3GEOF.atalhoscamada =
 			return;
 		}
 		$i(iddiv).innerHTML = i3GEOF.atalhoscamada.html(idjanela);
+		i3GEO.janela.applyScrollBar("#" + idjanela + " .container-fluid");
+		/*
 		$("#" + idjanela + " .container-fluid").mCustomScrollbar({
 			theme: "inset-2",
 			axis: "y",
 			scrollbarPosition: "inside",
 			scrollButtons:{ enable: false }
 		});
+		*/
 	},
 	/*
 	 * Function: html

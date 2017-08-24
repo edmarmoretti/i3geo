@@ -68,10 +68,28 @@ YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
 // TODO criar janela que permita inserir um link e salva-la junto com o mapa
 i3GEO.janela =
 	{
+		//Config do plugin que controla a barra de rolagem
+		scrollBar: {
+			theme: "inset-2",
+			axis: "y",
+			scrollbarPosition: "inside",
+			scrollButtons:{ enable: false }
+		},
 		/**
 		 * Cada vez que uma janela flutuante &eacute; criada, esse valor &eacute; acrescido de 1
 		 */
 		ULTIMOZINDEX : 5,
+		//aplica a estilizacao da barra de rolagem
+		applyScrollBar: function(seletor,config) {
+			var a = i3GEO.janela.scrollBar;
+			if(config){
+				a = i3GEO.util.cloneObj(i3GEO.janela.scrollBar);
+				$.each( config, function( key, value ) {
+					 a[key] = value;
+				});
+			}
+			$(seletor).mCustomScrollbar(a);
+		},
 		/**
 		 * Executa fun&ccedil;&otilde;es default antes de abrir a janela
 		 */

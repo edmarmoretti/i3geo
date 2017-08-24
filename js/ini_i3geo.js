@@ -342,6 +342,9 @@ var i3GEO = {
 				i3GEO.maparef.TOP = c.components.referenceMapPosition[0];
 				i3GEO.maparef.RIGHT = c.components.referenceMapPosition[1];
 			}
+			if(c.components.scrollBar){
+				i3GEO.janela.scrollBar = c.components.scrollBar;
+			}
 			if(c.components.tooltip){
 				var p = i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP;
 				p.removeAoAdicionar = (c.components.tooltip.hasOwnProperty("removeAoAdicionar")) ? c.components.tooltip.removeAoAdicionar : true;
