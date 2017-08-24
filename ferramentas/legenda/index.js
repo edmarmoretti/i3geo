@@ -1426,7 +1426,7 @@ i3GEOF.legenda =
 						i3GEOF.legenda.tema,
 						function(retorno) {
 							if ($i("i3GEOlegendaitensLabel")) {
-								$i("i3GEOlegendaitensLabel").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+								$i("i3GEOlegendaitensLabel").innerHTML = retorno.dados ;
 							}
 						},
 						"i3GEOlegendaitensLabel",
@@ -1451,7 +1451,7 @@ i3GEOF.legenda =
 						sct = "<option value=" + l[1] + "  />" + l[1] + "</option>";
 						combo += sct;
 					}
-					combo += "</select><b class='caret careti' ></b></div>";
+					combo += "</select></div>";
 					$i("i3GEOlegendacomboestilos").innerHTML = combo;
 
 
@@ -1600,7 +1600,7 @@ i3GEOF.legenda =
 						"",
 						i3GEOF.legenda.tema, function(retorno) {
 							if ($i("i3GEOlegendaComboSize")) {
-								$i("i3GEOlegendaComboSize").innerHTML = retorno.dados.replace("id=''"," onchange='$i(\"i3GEOlegendasizes\").value = this.value'") + '<b class="caret careti" ></b>';
+								$i("i3GEOlegendaComboSize").innerHTML = retorno.dados.replace("id=''"," onchange='$i(\"i3GEOlegendasizes\").value = this.value'");
 							}
 						},
 						"",
@@ -1952,28 +1952,28 @@ i3GEOF.legenda =
 					i3GEOF.legenda.tema,
 					function(retorno) {
 						if ($i("i3GEOlegendaitensValorUnico")) {
-							$i("i3GEOlegendaitensValorUnico").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+							$i("i3GEOlegendaitensValorUnico").innerHTML = retorno.dados ;
 						}
 						if ($i("i3GEOlegendaClassesValorUnico")) {
-							$i("i3GEOlegendaClassesValorUnico").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+							$i("i3GEOlegendaClassesValorUnico").innerHTML = retorno.dados;
 						}
 						if ($i("i3GEOlegendaitensMetade")) {
-							$i("i3GEOlegendaitensMetade").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+							$i("i3GEOlegendaitensMetade").innerHTML = retorno.dados;
 						}
 						if ($i("i3GEOlegendaitensMetadeId")) {
-							$i("i3GEOlegendaitensMetadeId").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+							$i("i3GEOlegendaitensMetadeId").innerHTML = retorno.dados;
 						}
 						if ($i("i3GEOlegendaitensMedia")) {
-							$i("i3GEOlegendaitensMedia").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+							$i("i3GEOlegendaitensMedia").innerHTML = retorno.dados;
 						}
 						if ($i("i3GEOlegendaitensValorClass")) {
-							$i("i3GEOlegendaitensValorClass").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+							$i("i3GEOlegendaitensValorClass").innerHTML = retorno.dados;
 						}
 						if ($i("i3GEOlegendaitensCluster")) {
-							$i("i3GEOlegendaitensCluster").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+							$i("i3GEOlegendaitensCluster").innerHTML = retorno.dados;
 						}
 						if ($i("i3GEOlegendaitensValorQuartil")) {
-							$i("i3GEOlegendaitensValorQuartil").innerHTML = retorno.dados + '<b class="caret careti" ></b>';
+							$i("i3GEOlegendaitensValorQuartil").innerHTML = retorno.dados;
 						}
 					},
 					"",

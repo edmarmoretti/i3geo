@@ -156,7 +156,7 @@ OpenLayers = {
 	"../pacotes/yui290/build/container/assets/skins/sam/container.css",
 	"../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
 	//"../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
-	"../pacotes/yui290/build/button/assets/skins/sam/button.css",
+	//"../pacotes/yui290/build/button/assets/skins/sam/button.css",
 	"../pacotes/yui290/build/slider/assets/skins/sam/slider.css",
 	"../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
 	//"../pacotes/yui290/build/progressbar/assets/skins/sam/progressbar.css",

@@ -1849,7 +1849,7 @@ i3GEO.util =
 							ins.push("<option value='" + retorno.data.valores[i].item + "' >" + nm + "</option>");
 						}
 					}
-					ins.push("</select>");
+					ins.push("</select><b class='caret careti' ></b>");
 					ins = ins.join('');
 					temp = {
 							dados : ins,
@@ -1922,7 +1922,7 @@ i3GEO.util =
 					for (j = 0; j < valoresSort.length; j++) {
 						ins.push('<option value="' + valoresSort[j] + '" >' + valoresSort[j] + '</option>');
 					}
-					ins.push("</select>");
+					ins.push("</select><b class='caret careti' ></b>");
 					ins = ins.join('');
 					temp = {
 							dados : ins,
@@ -1967,7 +1967,7 @@ i3GEO.util =
 					for (i = 0; i < temp; i++) {
 						ins += "<option value='" + dados[i] + "' >" + dados[i] + "</option>";
 					}
-					ins += "</select>";
+					ins += "</select><b class='caret careti' ></b>";
 				}
 				$i(onde).innerHTML = ins;
 			};
@@ -2001,7 +2001,7 @@ i3GEO.util =
 			} else {
 				combo += "<option value=FALSE >" + $trad("x15") + "</option>";
 			}
-			combo += "</select>";
+			combo += "</select><b class='caret careti' ></b>";
 			return (combo);
 		},
 		/**
@@ -2164,7 +2164,7 @@ i3GEO.util =
 					for (i = 0; i < n; i++) {
 						ins.push("<option value='" + retorno.data[i].codigo + "'>" + retorno.data[i].nome + "</option>");
 					}
-					ins.push("</select>");
+					ins.push("</select><b class='caret careti' ></b>");
 					ins = ins.join('');
 					onde.innerHTML = ins;
 					$i(idCombo).value = valorDefault;
