@@ -157,6 +157,7 @@ i3GEOF.distancia =
 							  color: 'rgba(255, 153, 0, 0.8)'
 						})
 					});
+				i3GEO.desenho.estiloPadrao = "normal";
 				var m = i3GEOF.distancia.openlayers;
 				i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 				m.removeControle();
@@ -169,6 +170,14 @@ i3GEOF.distancia =
 						origem : "medeDistancia"
 					});
 					var m = i3GEOF.distancia.openlayers;
+					evt.feature.setStyle(
+						new ol.style.Style({
+							stroke: new ol.style.Stroke({
+								color: i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao].linecolor,
+								width: 5
+							})
+						})
+					);
 					i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 					m.draw.setActive(false);
 					m.draw.setActive(true);
@@ -268,6 +277,7 @@ i3GEOF.distancia =
 						circ.setProperties({
 							origem : "medeDistanciaExcluir"
 						});
+
 						circ.setStyle(
 							new ol.style.Style({
 								stroke: new ol.style.Stroke({
@@ -277,6 +287,7 @@ i3GEOF.distancia =
 								zIndex: 2
 							})
 						);
+
 						i3GEO.desenho.layergrafico.getSource().addFeature(circ);
 					}
 					// desenha ponto

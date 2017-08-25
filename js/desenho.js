@@ -65,7 +65,7 @@ i3GEO.desenho =
 		estilos : {
 			"normal" : {
 				fillcolor : '#ffffff',
-				linecolor : '#000000',
+				linecolor : '#ffcc33',
 				linewidth : '2',
 				circcolor : '#ffffff',
 				textcolor : '#787A78'

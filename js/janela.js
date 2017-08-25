@@ -370,10 +370,10 @@ i3GEO.janela =
 			temp = $i(id + "_corpo");
 
 			janela.bringToTop();
-
-			i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBar"});
-			i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBarXY",advanced:{ autoExpandHorizontalScroll: false }});
-
+			if(waltura !== "auto"){
+				i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBar"});
+				i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBarXY",advanced:{ autoExpandHorizontalScroll: false }});
+			}
 			return ([
 				janela, $i(id + "_cabecalho"), temp
 			]);
