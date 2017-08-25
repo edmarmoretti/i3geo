@@ -2963,5 +2963,10 @@ g_traducao =
 			pt : "N&atilde;o foram encontrados dados nas camadas dispon&iacute;veis. Experimente utilizar o &iacute;cone de mais informa&ccedil;&otilde;es",
 			en : "",
 			es : ""
+		}],
+		"umaLigada" : [{
+			pt : "Pelo menos uma camada deve estar ligada no mapa",
+			en : "",
+			es : ""
 		}]
 	};
