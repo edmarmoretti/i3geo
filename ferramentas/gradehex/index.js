@@ -77,7 +77,7 @@ i3GEOF.gradeDeHex = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML += i3GEOF.gradeDeHex.html();
+			$i(iddiv).innerHTML = i3GEOF.gradeDeHex.html();
 			i3GEOF.gradeDeHex.t0();
 	},
 	/*

@@ -1,31 +1,12 @@
-<div class='container-fluid customScrollBar'>
-	<h5>{{{escolha}}}
-	</h5>
-	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/a4lpaisagempdf.htm');" class='btn btn-primary btn-lg btn-block btn-raised'>
-	A4 com margens pdf
-	</a>
-	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/geotif.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>
-	Geo Tiff
-	</a>
-	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/aggpng.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>
-	Agg/Png
-	</a>
-	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/jpeg.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>
-	JPEG
-	</a>
-	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/svg.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>
-	Svg - vetorial
-	</a>
-
-	<h5>{{{config}}}
-	</h5>
-	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.opcoesLegenda();" class='btn btn-primary btn-lg btn-block btn-raised'>
-	{{{legenda}}}
-	</a>
-	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.opcoesEscala();" class='btn btn-primary btn-lg btn-block btn-raised'>
-	{{{escala}}}
-	</a>
-	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.tamanho()" class='btn btn-primary btn-lg btn-block btn-raised'>
-	{{{tamanho}}}
-	</a>
+<div class='container-fluid customScrollBar' style="height: 100%; overflow: auto; padding-right: 1px;">
+	<h5>{{{escolha}}}</h5>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/a4lpaisagempdf.htm');" class='btn btn-primary btn-lg btn-block btn-raised'>A4 pdf</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/geotif.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>Geo Tiff</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/aggpng.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>Agg/Png</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/jpeg.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>JPEG</a>
+	<a href='javascript:void(0)' onclick="i3GEOF.imprimir.abreI('{{{locaplic}}}/ferramentas/imprimir/svg.php','interna');" class='btn btn-primary btn-lg btn-block btn-raised'>Svg - vetorial</a>
+	<h5>{{{config}}}</h5>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.opcoesLegenda();" class='btn btn-primary btn-lg btn-block btn-raised'>{{{legenda}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.opcoesEscala();" class='btn btn-primary btn-lg btn-block btn-raised'>{{{escala}}}</a>
+	<a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.tamanho()" class='btn btn-primary btn-lg btn-block btn-raised'>{{{tamanho}}}</a>
 </div>

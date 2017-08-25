@@ -76,7 +76,7 @@ i3GEOF.confluence = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML += i3GEOF.confluence.html();
+			$i(iddiv).innerHTML = i3GEOF.confluence.html();
 			i3GEOF.confluence.ativaFoco();
 			if(i3GEO.Interface.ATUAL !== "googlemaps"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.confluence.lista()");

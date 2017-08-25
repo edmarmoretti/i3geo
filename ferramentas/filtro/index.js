@@ -75,7 +75,7 @@ i3GEOF.filtro = {
 			modoCalculadora = false;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.filtro.html(modoCalculadora,idRetorno);
+			$i(iddiv).innerHTML = i3GEOF.filtro.html(modoCalculadora,idRetorno);
 
 			if(modoCalculadora === false){
 				if (!$i("i3GEOFfiltroComboCabecaSel")) {

@@ -62,7 +62,7 @@ i3GEOF.toponimia = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.toponimia.html();
+			$i(iddiv).innerHTML = i3GEOF.toponimia.html();
 			if (!$i("i3GEOFtoponimiaComboCabecaSel")) {
 				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFtoponimiaComboCabeca","i3GEOFtoponimiaComboCabecaSel","toponimia","ligadosComTabela",function(evt){
 					var botao = evt.target;

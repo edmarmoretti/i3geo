@@ -79,7 +79,7 @@ i3GEOF.markercluster = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.markercluster.html();
+		$i(iddiv).innerHTML = i3GEOF.markercluster.html();
 		i3GEO.util.aplicaAquarela("i3GEOF.markercluster_corpo");
 		i3GEOF.markercluster.t0();
 	},

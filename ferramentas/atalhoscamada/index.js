@@ -94,7 +94,7 @@ i3GEOF.atalhoscamada =
 			return;
 		}
 		$i(iddiv).innerHTML = i3GEOF.atalhoscamada.html(idjanela);
-		i3GEO.janela.applyScrollBar("#" + iddiv +" .customScrollBar");
+		//i3GEO.janela.applyScrollBar(iddiv,".customScrollBar");
 	},
 	/*
 	 * Function: html
@@ -128,7 +128,7 @@ i3GEOF.atalhoscamada =
 		cabecalho = function() {
 		};
 		minimiza = function() {
-			i3GEO.janela.minimiza(id);
+			i3GEO.janela.minimiza(id,200);
 		};
 		// cria a janela flutuante
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + ltema.tema + "</span></div>";
@@ -162,7 +162,7 @@ i3GEOF.atalhoscamada =
 				temp.y.value
 					+ (i3GEOF.atalhoscamada.janelas.length * 15));
 		}
-		janela[2].style.backgroundColor = "white";
+
 		temp = function() {
 			i3GEOF.atalhoscamada.janelas.remove(id);
 			i3GEOF.atalhoscamada.propJanelas[id] = null;
@@ -171,7 +171,7 @@ i3GEOF.atalhoscamada =
 			janela[0].close,
 			"click",
 			temp);
-		janela[0].bringToTop();
+
 		i3GEOF.atalhoscamada.inicia(divid, id);
 	},
 	/**

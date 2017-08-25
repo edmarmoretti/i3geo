@@ -75,7 +75,7 @@ i3GEOF.buscainde = {
 		if(i3GEOF.buscainde.MUSTACHE == ""){
 			$.get(i3GEO.configura.locaplic + "/ferramentas/buscainde/template_mst.html", function(template) {
 				i3GEOF.buscainde.MUSTACHE = template;
-				$i(iddiv).innerHTML += i3GEOF.buscainde.html();
+				$i(iddiv).innerHTML = i3GEOF.buscainde.html();
 			});
 			return;
 		}

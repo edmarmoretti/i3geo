@@ -76,7 +76,7 @@ i3GEOF.dissolve = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.dissolve.html();
+		$i(iddiv).innerHTML = i3GEOF.dissolve.html();
 		i3GEOF.dissolve.t0();
 	},
 	/*

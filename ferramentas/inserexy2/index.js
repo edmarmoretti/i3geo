@@ -79,7 +79,7 @@ i3GEOF.inserexy = {
 		}
 
 			var b;
-			$i(iddiv).innerHTML += i3GEOF.inserexy.html();
+			$i(iddiv).innerHTML = i3GEOF.inserexy.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia1","i3GEOinserexyguia");
 			//eventos das guias
 			$i("i3GEOinserexyguia0").onclick = function(){

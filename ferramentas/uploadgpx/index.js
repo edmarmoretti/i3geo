@@ -76,7 +76,7 @@ i3GEOF.uploadgpx = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.uploadgpx.html();
+			$i(iddiv).innerHTML = i3GEOF.uploadgpx.html();
 
 			i3GEO.util.radioEpsg(
 				function(retorno)

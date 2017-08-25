@@ -95,7 +95,7 @@ i3GEOF.heatmap =
 				});
 				return;
 			}
-			$i(iddiv).innerHTML += i3GEOF.heatmap.html();
+			$i(iddiv).innerHTML = i3GEOF.heatmap.html();
 			i3GEOF.heatmap.t0();
 		},
 		/**

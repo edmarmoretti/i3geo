@@ -78,7 +78,7 @@ i3GEOF.tipoimagem = {
 			}
 			var f;
 
-			$i(iddiv).innerHTML += i3GEOF.tipoimagem.html();
+			$i(iddiv).innerHTML = i3GEOF.tipoimagem.html();
 			if(i3GEO.configura.tipoimagem != "nenhum"){
 				var aplica = i3GEO.configura.tipoimagem.split(" ");
 				$( "#tipoimagemForm input" ).each(function( index ) {

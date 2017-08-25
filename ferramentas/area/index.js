@@ -34,7 +34,7 @@ i3GEOF.area =
 				return;
 			}
 			i3GEO.eventos.cliquePerm.desativa();
-			$i(iddiv).innerHTML += i3GEOF.area.html();
+			$i(iddiv).innerHTML = i3GEOF.area.html();
 			i3GEOF.area[i3GEO.Interface["ATUAL"]].inicia();
 		},
 		/*

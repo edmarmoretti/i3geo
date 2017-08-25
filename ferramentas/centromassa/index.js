@@ -75,7 +75,7 @@ i3GEOF.centromassa = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.centromassa.html();
+		$i(iddiv).innerHTML = i3GEOF.centromassa.html();
 		i3GEOF.centromassa.t0();
 	},
 	/*

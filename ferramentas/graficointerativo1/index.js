@@ -403,7 +403,7 @@ i3GEOF.graficointerativo1 =
 				return;
 			}
 			var b;
-			$i(iddiv).innerHTML += i3GEOF.graficointerativo1.html(idjanela);
+			$i(iddiv).innerHTML = i3GEOF.graficointerativo1.html(idjanela);
 			$i(idjanela + "i3GEOgraficointerativo1Acumula").checked = i3GEOF.graficointerativo1.propJanelas[idjanela].acumula;
 			$i(idjanela + "i3GEOgraficointerativo1Relativa").checked = i3GEOF.graficointerativo1.propJanelas[idjanela].relativa;
 			$i(idjanela + "i3GEOgraficointerativo1DadosPuros").checked = i3GEOF.graficointerativo1.propJanelas[idjanela].dadospuros;

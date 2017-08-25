@@ -85,7 +85,7 @@ i3GEOF.buscaFotos = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.buscaFotos.html();
+		$i(iddiv).innerHTML = i3GEOF.buscaFotos.html();
 
 		i3GEO.guias.mostraGuiaFerramenta("i3GEObuscafotosguia2", "i3GEObuscafotosguia");
 		// eventos das guias

@@ -95,7 +95,7 @@ i3GEOF.inseretxt = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.inseretxt.html();
+			$i(iddiv).innerHTML = i3GEOF.inseretxt.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia1","i3GEOinseretxtguia");
 			//eventos das guias
 			$i("i3GEOinseretxtguia1").onclick = function(){

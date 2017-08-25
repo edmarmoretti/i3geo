@@ -44,7 +44,7 @@ i3GEOF.opcoesFundo =
 			}
 			try {
 				i3GEOF.opcoesFundo.aguarde.visibility = "visible";
-				$i(iddiv).innerHTML += i3GEOF.opcoesFundo.html();
+				$i(iddiv).innerHTML = i3GEOF.opcoesFundo.html();
 				i3GEO.util.aplicaAquarela("i3GEOF.opcoesFundo_corpo");
 				var p =
 					i3GEO.configura.locaplic + "/ferramentas/opcoes_fundo/exec.php?g_sid=" + i3GEO.configura.sid + "&funcao=pegacorfundo", cp =

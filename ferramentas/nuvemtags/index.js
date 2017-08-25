@@ -102,7 +102,7 @@ i3GEOF.nuvemtags = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.nuvemtags.html();
+			$i(iddiv).innerHTML = i3GEOF.nuvemtags.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOnuvemtagsguia1","i3GEOnuvemtagsguia");
 			//eventos das guias
 			$i("i3GEOnuvemtagsguia1").onclick = function(){

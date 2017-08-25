@@ -1,4 +1,20 @@
 /*
+Para a barra de rolagem
+*/
+.customScrollBar {
+	height: 100%;
+	overflow: auto;
+	padding-right: 1px;
+}
+.customScrollBarXY {
+	height: calc(100% - 39px);
+	overflow: auto;
+}
+.customScrollBar .mCSB_container {
+	max-width: 100%;
+	padding-right: 5px !Important;
+}
+/*
 Utilizado no elemento select
 */
 .careti {
@@ -175,7 +191,7 @@ hr {
 	left: auto;
 	right: 2px;
 	top: 5px;
-	width: 350px;
+	width: 380px;
 }
 #i3GEOguiaMovelMolde {
 	background-color: white;
@@ -189,7 +205,7 @@ hr {
 	z-index: 10000;
 }
 #i3GEOguiaMovelConteudo {
-	width:345px;
+	width:355px;
 	top: 0px;
 	overflow: auto;
 	display: none;
@@ -233,7 +249,7 @@ hr {
 	cursor: pointer;
 	right: 25px;
 	top: 0px;
-	width: 325px;
+	width: 355px;
 	min-height: 40px;
 	text-align: right;
 	font-size: 14pt;

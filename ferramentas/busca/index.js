@@ -89,7 +89,7 @@ i3GEOF.busca = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.busca.html();
+			$i(iddiv).innerHTML = i3GEOF.busca.html();
 
 			var onButtonClick = function(evt){
 				var botao = evt.target;

@@ -45,7 +45,7 @@ i3GEOF.opcoesEscala = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.opcoesEscala.html();
+			$i(iddiv).innerHTML = i3GEOF.opcoesEscala.html();
 			i3GEOF.opcoesEscala.parametrosAtuais();
 			i3GEO.util.aplicaAquarela("i3GEOF.opcoesEscala_corpo");
 		}

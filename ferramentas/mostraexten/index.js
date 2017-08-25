@@ -74,7 +74,7 @@ i3GEOF.mostraExten = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.mostraExten.html();
+		$i(iddiv).innerHTML = i3GEOF.mostraExten.html();
 		i3GEOF.mostraExten.ativaFoco();
 	},
 	/*

@@ -74,7 +74,7 @@ i3GEOF.insereGrafico = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.insereGrafico.html();
+			$i(iddiv).innerHTML = i3GEOF.insereGrafico.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOinseregraficoguia1","i3GEOinseregraficoguia");
 			//eventos das guias
 			$i("i3GEOinseregraficoguia1").onclick = function()

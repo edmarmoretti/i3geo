@@ -77,7 +77,7 @@ i3GEOF.gradeDePoligonos = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML += i3GEOF.gradeDePoligonos.html();
+			$i(iddiv).innerHTML = i3GEOF.gradeDePoligonos.html();
 			i3GEOF.gradeDePoligonos.t0();
 	},
 	/*

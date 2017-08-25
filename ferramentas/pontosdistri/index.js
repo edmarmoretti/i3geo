@@ -44,7 +44,7 @@ i3GEOF.pontosDistri = {
 		}
 		try{
 			var b;
-			$i(iddiv).innerHTML += i3GEOF.pontosDistri.html();
+			$i(iddiv).innerHTML = i3GEOF.pontosDistri.html();
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOpontosDistriguia1","i3GEOpontosDistriguia");
 			//eventos das guias
 			$i("i3GEOpontosDistriguia1").onclick = function()

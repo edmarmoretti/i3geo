@@ -92,7 +92,10 @@ i3GEOF.imprimir = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.imprimir.html();
+			$i(iddiv).innerHTML = i3GEOF.imprimir.html();
+
+			//i3GEO.janela.applyScrollBar(iddiv,".customScrollBar");
+
 			var temp = function(retorno){
 				g_legendaHTML = retorno.data.legenda;
 			};
@@ -132,7 +135,7 @@ i3GEOF.imprimir = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d12") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"280px",
-			"250px",
+			"300px",
 			"",
 			"",
 			"",
@@ -141,7 +144,7 @@ i3GEOF.imprimir = {
 			false,
 			"hd",
 			cabecalho,
-			"",
+			minimiza,
 			"",
 			true,
 			"",
@@ -151,8 +154,6 @@ i3GEOF.imprimir = {
 			"49"
 		);
 		divid = janela[2].id;
-		$i("i3GEOF.imprimir_corpo").style.backgroundColor = "white";
-		$i("i3GEOF.imprimir_corpo").style.textAlign = "left";
 		i3GEOF.imprimir.aguarde = $i("i3GEOF.imprimir_imagemCabecalho").style;
 		i3GEOF.imprimir.inicia(divid);
 	},

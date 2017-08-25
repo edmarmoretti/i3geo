@@ -52,7 +52,7 @@ i3GEOF.mmscale = {
 			//$i(iddiv).innerHTML = "";
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.mmscale.html();
+		$i(iddiv).innerHTML = i3GEOF.mmscale.html();
 		if (!$i("i3GEOFmmscaleComboCabecaSel")) {
 			i3GEO.janela.comboCabecalhoTemasBs("i3GEOFmmscaleComboCabeca","i3GEOFmmscaleComboCabecaSel","mmscale","ligados",function(evt){
 				var botao = evt.target;

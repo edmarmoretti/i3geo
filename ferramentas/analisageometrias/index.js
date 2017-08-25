@@ -42,7 +42,7 @@ i3GEOF.analisaGeometrias = {
 		//try{
 		i3GEOF.analisaGeometrias.aguarde.visibility = "hidden";
 			var b, combot;
-			$i(iddiv).innerHTML += i3GEOF.analisaGeometrias.html();
+			$i(iddiv).innerHTML = i3GEOF.analisaGeometrias.html();
 
 			i3GEO.guias.mostraGuiaFerramenta("i3GEOanalisageometrias1","i3GEOanalisageometrias");
 			//eventos das guias

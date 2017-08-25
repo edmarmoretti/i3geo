@@ -73,7 +73,7 @@ i3GEOF.uploadkml = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.uploadkml.html();
+			$i(iddiv).innerHTML = i3GEOF.uploadkml.html();
 
 			i3GEO.util.radioEpsg(
 				function(retorno)

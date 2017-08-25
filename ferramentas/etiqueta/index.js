@@ -89,7 +89,7 @@ i3GEOF.etiqueta = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.etiqueta.html();
+			$i(iddiv).innerHTML = i3GEOF.etiqueta.html();
 
 			if (!$i("i3GEOFetiquetaComboCabecaSel")) {
 				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela",function(evt){

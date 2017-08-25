@@ -70,7 +70,7 @@ i3GEO.janela =
 	{
 		//Config do plugin que controla a barra de rolagem
 		scrollBar: {
-			theme: "inset-2",
+			theme: "3d-dark",
 			axis: "yx",
 			scrollbarPosition: "inside",
 			scrollButtons:{ enable: false },
@@ -81,7 +81,7 @@ i3GEO.janela =
 		 */
 		ULTIMOZINDEX : 5,
 		//aplica a estilizacao da barra de rolagem
-		applyScrollBar: function(seletor,config) {
+		applyScrollBar: function(iddiv,seletor,config) {
 			var a = i3GEO.janela.scrollBar;
 			if(config){
 				a = i3GEO.util.cloneObj(i3GEO.janela.scrollBar);
@@ -89,7 +89,12 @@ i3GEO.janela =
 					 a[key] = value;
 				});
 			}
-			$(seletor).mCustomScrollbar(a);
+			var i = $($i(iddiv));
+			if(seletor && selector != ""){
+				i.find(seletor).mCustomScrollbar(a);
+			} else {
+				i.mCustomScrollbar(a);
+			}
 		},
 		/**
 		 * Executa fun&ccedil;&otilde;es default antes de abrir a janela
@@ -333,7 +338,6 @@ i3GEO.janela =
 			]);
 			janela.render();
 
-
 			if (ifr === true) {
 				janela.iframe.style.zIndex = 4;
 			}
@@ -364,7 +368,12 @@ i3GEO.janela =
 				temp.style.maxWidth = "100%";
 			}
 			temp = $i(id + "_corpo");
+
 			janela.bringToTop();
+
+			i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBar"});
+			i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBarXY",advanced:{ autoExpandHorizontalScroll: false }});
+
 			return ([
 				janela, $i(id + "_cabecalho"), temp
 			]);

@@ -70,7 +70,7 @@ i3GEOF.aplicarsld = {
 	*/
 	inicia: function(iddiv){
 		try{
-			$i(iddiv).innerHTML += i3GEOF.aplicarsld.html();
+			$i(iddiv).innerHTML = i3GEOF.aplicarsld.html();
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},

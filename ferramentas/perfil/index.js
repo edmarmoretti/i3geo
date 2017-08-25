@@ -87,7 +87,7 @@ i3GEOF.perfil = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML += i3GEOF.perfil.html();
+			$i(iddiv).innerHTML = i3GEOF.perfil.html();
 			i3GEOF.perfil.comboTemas();
 			var b = new YAHOO.widget.Button(
 				"i3GEOperfilbotao1",

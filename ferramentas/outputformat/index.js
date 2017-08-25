@@ -75,7 +75,7 @@ i3GEOF.outputformat = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.outputformat.html();
+		$i(iddiv).innerHTML = i3GEOF.outputformat.html();
 	},
 	/*
 	Function: html

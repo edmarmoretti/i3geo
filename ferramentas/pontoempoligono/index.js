@@ -77,7 +77,7 @@ i3GEOF.pontoEmPoligono = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML += i3GEOF.pontoEmPoligono.html();
+			$i(iddiv).innerHTML = i3GEOF.pontoEmPoligono.html();
 			i3GEOF.pontoEmPoligono.t0();
 	},
 	/*

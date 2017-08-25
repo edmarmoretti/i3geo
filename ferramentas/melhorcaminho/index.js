@@ -91,7 +91,7 @@ i3GEOF.melhorcaminho = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.melhorcaminho.html();
+		$i(iddiv).innerHTML = i3GEOF.melhorcaminho.html();
 		i3GEOF.melhorcaminho.t0();
 	},
 	/*

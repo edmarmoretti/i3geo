@@ -512,7 +512,7 @@ i3GEOF.preferencias = {
 	*/
 	inicia: function(iddiv){
 		try{
-			$i(iddiv).innerHTML += i3GEOF.preferencias.html();
+			$i(iddiv).innerHTML = i3GEOF.preferencias.html();
 			new YAHOO.widget.Button(
 				"i3GEOpreferenciasbotao1",
 				{onclick:{fn: i3GEOF.preferencias.limpa}}

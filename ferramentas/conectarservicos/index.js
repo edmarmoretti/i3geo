@@ -43,6 +43,7 @@ i3GEOF.conectarservicos =
 				return;
 			}
 			$i(iddiv).innerHTML = i3GEOF.conectarservicos.html();
+			//i3GEO.janela.applyScrollBar("#" + iddiv +" .customScrollBar");
 		},
 		geojson: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
@@ -106,7 +107,7 @@ i3GEOF.conectarservicos =
 		 */
 		iniciaJanelaFlutuante : function() {
 			var cabecalho, janela, divid, titulo;
-			if($i("i3GEOF.conectarservicos")){
+			if($i("i3GEOF-conectarservicos")){
 				return;
 			}
 			cabecalho = function() {
@@ -115,13 +116,13 @@ i3GEOF.conectarservicos =
 			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("conexao",i3GEOF.conectarservicos.dicionario) + "</span></div>";
 			janela =
 				i3GEO.janela.cria(
-						"230px",
-						"270px",
+						"280px",
+						"300px",
 						"",
 						"",
 						"",
 						titulo,
-						"i3GEOF.conectarservicos",
+						"i3GEOF-conectarservicos",
 						false,
 						"hd",
 						cabecalho,
@@ -134,7 +135,6 @@ i3GEOF.conectarservicos =
 						""
 				);
 			divid = janela[2].id;
-			$i("i3GEOF.conectarservicos_corpo").style.backgroundColor = "white";
 			i3GEOF.conectarservicos.inicia(divid);
 		}
 };

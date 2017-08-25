@@ -117,7 +117,7 @@ i3GEOF.graficoTema = {
 			//$i(iddiv).innerHTML = "";			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.graficoTema.html();
+			$i(iddiv).innerHTML = i3GEOF.graficoTema.html();
 
 			if (!$i("i3GEOFgraficotemaComboCabecaSel")) {
 				i3GEO.janela.comboCabecalhoTemasBs("i3GEOFgraficotemaComboCabeca","i3GEOFgraficotemaComboCabecaSel","graficoTema","ligadosComTabela",function(evt){

@@ -43,7 +43,7 @@ i3GEOF.gradeCoord = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML += i3GEOF.gradeCoord.html();
+			$i(iddiv).innerHTML = i3GEOF.gradeCoord.html();
 			i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef","form-control");
 			i3GEO.util.aplicaAquarela("i3GEOF.gradeCoord_corpo");
 	},

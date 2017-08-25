@@ -81,7 +81,7 @@ i3GEOF.metar =
 				});
 				return;
 			}
-				$i(iddiv).innerHTML += i3GEOF.metar.html();
+				$i(iddiv).innerHTML = i3GEOF.metar.html();
 				i3GEOF.metar.ativaFoco();
 				if (i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth") {
 					i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.metar.lista()");

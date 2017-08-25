@@ -78,7 +78,7 @@ i3GEOF.gradeDePontos = {
 			return;
 		}
 
-			$i(iddiv).innerHTML += i3GEOF.gradeDePontos.html();
+			$i(iddiv).innerHTML = i3GEOF.gradeDePontos.html();
 			i3GEOF.gradeDePontos.t0();
 	},
 	/*

@@ -77,7 +77,7 @@ i3GEOF.opcoesTempo = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.opcoesTempo.html();
+			$i(iddiv).innerHTML = i3GEOF.opcoesTempo.html();
 		}
 		catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},

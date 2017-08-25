@@ -80,7 +80,7 @@ i3GEOF.wiki = {
 			return;
 		}
 		try{
-			$i(iddiv).innerHTML += i3GEOF.wiki.html();
+			$i(iddiv).innerHTML = i3GEOF.wiki.html();
 			i3GEOF.wiki.ativaFoco();
 			if(i3GEO.Interface.ATUAL !== "googlemaps" && i3GEO.Interface.ATUAL !== "googleearth"){
 				i3GEO.eventos.NAVEGAMAPA.push("i3GEOF.wiki.lista()");

@@ -148,7 +148,7 @@ i3GEOF.legenda =
 			}
 
 			try {
-				$i(iddiv).innerHTML += i3GEOF.legenda.html();
+				$i(iddiv).innerHTML = i3GEOF.legenda.html();
 				if (!$i("i3GEOFlegendaComboCabecaSel")) {
 					i3GEO.janela.comboCabecalhoTemasBs("i3GEOFlegendaComboCabeca", "i3GEOFlegendaComboCabecaSel", "legenda", "ligados",function(evt){
 						var botao = evt.target;

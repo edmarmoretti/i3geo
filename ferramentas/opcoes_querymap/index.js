@@ -42,7 +42,7 @@ i3GEOF.opcoesQuery = {
 		}
 		try{
 			i3GEOF.opcoesQuery.aguarde.visibility = "visible";
-			$i(iddiv).innerHTML += i3GEOF.opcoesQuery.html();
+			$i(iddiv).innerHTML = i3GEOF.opcoesQuery.html();
 			i3GEO.util.aplicaAquarela("i3GEOF.opcoesQuery");
 			var p = i3GEO.configura.locaplic+"/ferramentas/opcoes_querymap/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaquerymapcor",
 				cp = new cpaint(),

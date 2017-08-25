@@ -83,7 +83,7 @@ i3GEOF.importarwmc = {
 			return;
 		}
 
-			$i(iddiv).innerHTML += i3GEOF.importarwmc.html();
+			$i(iddiv).innerHTML = i3GEOF.importarwmc.html();
 
 
 	},

@@ -40,7 +40,7 @@ i3GEOF.filtroarvore = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.filtroarvore.html();
+		$i(iddiv).innerHTML = i3GEOF.filtroarvore.html();
 	},
 	/*
 	Function: html

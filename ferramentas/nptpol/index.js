@@ -75,7 +75,7 @@ i3GEOF.nptpol = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML += i3GEOF.nptpol.html();
+			$i(iddiv).innerHTML = i3GEOF.nptpol.html();
 			i3GEOF.nptpol.t0();
 	},
 	/*

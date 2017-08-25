@@ -75,7 +75,7 @@ i3GEOF.buffer = {
 		if(i3GEOF.buffer.MUSTACHE == ""){
 			$.get(i3GEO.configura.locaplic + "/ferramentas/buffer/template_mst.html", function(template) {
 				i3GEOF.buffer.MUSTACHE = template;
-				$i(iddiv).innerHTML += i3GEOF.buffer.html();
+				$i(iddiv).innerHTML = i3GEOF.buffer.html();
 				i3GEOF.buffer.t0();
 			});
 			return;

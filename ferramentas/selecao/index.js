@@ -96,7 +96,7 @@ i3GEOF.selecao =
 			}
 			var b, i, n, ics;
 
-				$i(iddiv).innerHTML += i3GEOF.selecao.html();
+				$i(iddiv).innerHTML = i3GEOF.selecao.html();
 				i3GEO.guias.mostraGuiaFerramenta("i3GEOselecaoguia1", "i3GEOselecaoguia");
 				// eventos das guias
 				$i("i3GEOselecaoguia4").onclick = function() {

@@ -80,7 +80,7 @@ i3GEOF.proplabel = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.proplabel.html(conector);
+		$i(iddiv).innerHTML = i3GEOF.proplabel.html(conector);
 		i3GEO.util.aplicaAquarela("i3GEOF.proplabel_corpo");
 		i3GEO.util.comboFontes("i3GEOproplabelListaFonte","i3GEOproplabelDivListaFonte","form-control");
 	},

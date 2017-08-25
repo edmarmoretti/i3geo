@@ -75,7 +75,7 @@ i3GEOF.centroide = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.centroide.html();
+		$i(iddiv).innerHTML = i3GEOF.centroide.html();
 		i3GEOF.centroide.t0();
 	},
 	/*

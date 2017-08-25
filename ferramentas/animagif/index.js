@@ -233,7 +233,7 @@ i3GEOF.animagif =
 			i3GEOF.animagif.ativaFoco();
 		};
 		minimiza = function() {
-			i3GEO.janela.minimiza("i3GEOF.animagif");
+			i3GEO.janela.minimiza("i3GEOF.animagif",200);
 		};
 		// cria a janela flutuante
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >animagif</span></div>";

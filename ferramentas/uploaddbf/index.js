@@ -69,7 +69,7 @@ i3GEOF.uploaddbf = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.uploaddbf.html();
+		$i(iddiv).innerHTML = i3GEOF.uploaddbf.html();
 
 		i3GEO.util.radioEpsg(
 			function(retorno){

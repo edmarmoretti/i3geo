@@ -82,7 +82,7 @@ i3GEOF.saiku =
 		 */
 		inicia : function(iddiv) {
 			try {
-				$i(iddiv).innerHTML += i3GEOF.saiku.html();
+				$i(iddiv).innerHTML = i3GEOF.saiku.html();
 				var b = new YAHOO.widget.Button("i3GEOFsaikubotao1", {
 					onclick : {
 						fn : i3GEOF.saiku.aplicar

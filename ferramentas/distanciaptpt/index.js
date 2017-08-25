@@ -77,7 +77,7 @@ i3GEOF.distanciaptpt = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML += i3GEOF.distanciaptpt.html();
+			$i(iddiv).innerHTML = i3GEOF.distanciaptpt.html();
 			i3GEOF.distanciaptpt.t0();
 	},
 	/*

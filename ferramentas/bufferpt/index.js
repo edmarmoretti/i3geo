@@ -85,7 +85,7 @@ i3GEOF.bufferpt = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.bufferpt.html();
+		$i(iddiv).innerHTML = i3GEOF.bufferpt.html();
 	},
 	/*
 	Function: html

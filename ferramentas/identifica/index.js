@@ -218,7 +218,7 @@ i3GEOF.identifica =
 
 
 			try {
-				$i(iddiv).innerHTML += i3GEOF.identifica.html(idjanela);
+				$i(iddiv).innerHTML = i3GEOF.identifica.html(idjanela);
 				if (!$i(idjanela + "i3GEOFidentificaComboCabecaSel")) {
 					i3GEO.janela.comboCabecalhoTemasBs(
 							idjanela + "i3GEOFidentificaComboCabeca",

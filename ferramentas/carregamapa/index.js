@@ -75,7 +75,7 @@ i3GEOF.carregaMapa = {
 			});
 			return;
 		}
-		$i(iddiv).innerHTML += i3GEOF.carregaMapa.html();
+		$i(iddiv).innerHTML = i3GEOF.carregaMapa.html();
 		document.body.scrollTop = document.documentElement.scrollTop = 0;
 
 	},
