@@ -157,6 +157,6 @@ i3GEOF.tipoimagem = {
 			}
 			i3GEO.configura.tipoimagem = f.join(" ");
 			i3GEO.Interface.alteraParametroLayers("TIPOIMAGEM",f.join(" "));
-			i3GEO.Interface.openlayers.atualizaMapa();
+			i3GEO.Interface.atualizaMapa();
 		}
 };

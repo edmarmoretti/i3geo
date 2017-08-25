@@ -87,7 +87,7 @@ i3GEOF.opcoesQuery = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p8") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"220px",
-			"80px",
+			"120px",
 			"",
 			"",
 			"",
@@ -112,13 +112,6 @@ i3GEOF.opcoesQuery = {
 		i3GEOF.opcoesQuery.inicia(divid);
 	},
 	/*
-	Function: corj
-
-	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
-	*/
-	corj: function(obj)
-	{i3GEO.util.abreCor("",obj);},
-	/*
 	Function: executa
 
 	Aplica os parametros definidos
@@ -133,7 +126,7 @@ i3GEOF.opcoesQuery = {
 		i3GEOF.opcoesQuery.aguarde.visibility = "visible";
 		var temp = function(){
 				i3GEOF.opcoesQuery.aguarde.visibility = "hidden";
-				i3GEO.atualiza();
+				i3GEO.Interface.atualizaMapa();
 			},
 			cor = $i("i3GEOopcoesQuerycor").value,
 			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=querymapcor&cor="+cor,

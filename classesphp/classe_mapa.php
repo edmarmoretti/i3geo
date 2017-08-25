@@ -1016,17 +1016,14 @@ class Mapa
 	$cor - RGB separado por v&iacute;rgula. Se a cor for vazia, retorna a cor atual.
 
 	*/
-	function corQM($cor)
-	{
+	function corQM($cor){
 		$c = $this->mapa->querymap->color;
-		if ($cor != "")
-		{
+		if ($cor != ""){
 			$cores = explode(",",$cor);
 			$c->setrgb($cores[0],$cores[1],$cores[2]);
 			$retorno = "ok";
 		}
-		else
-		{
+		else{
 			$retorno = $c->red.",".$c->green.",".$c->blue;
 		}
 		return ($retorno);
