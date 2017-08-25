@@ -525,8 +525,7 @@ i3GEO.arvoreDeCamadas =
 				camada.sel = "hidden";
 			}
 			if (temaObj.sel.toLowerCase() === "sim"){
-				camada.zoomSelTexto = $trad("t5");
-				camada.zoomselTitle = $trad("t4a");
+				camada.zoomSelTexto = $trad("t4a");
 			} else {
 				camada.zoomsel = "hidden";
 			}

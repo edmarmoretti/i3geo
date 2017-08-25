@@ -190,7 +190,7 @@ i3GEOF.selecao =
 			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x51") + "</span></div>";
 			janela = i3GEO.janela.cria(
 					"510px",
-					"230px",
+					"270px",
 					"",
 					"",
 					"",
@@ -1088,13 +1088,10 @@ i3GEOF.selecao =
 			var itemTema = $("#linhaFiltro" + id + " [name='coluna']").val();
 			i3GEO.util.comboValoresItem(
 				"i3GEOselecaocbitens",
-				i3GEOF.selecao.tema,
+				i3GEO.temaAtivo,
 				itemTema,
 				function(retorno){
-					$i("i3GEOselecaovalores").innerHTML = "<label class='control-label'>" +
-						$trad('selecionaValor',i3GEOF.selecao.dicionario) +
-						":</label>" +
-						retorno.dados;
+					$i("i3GEOselecaovalores").innerHTML = retorno.dados;
 					if ($i("i3GEOselecaocbitens")){
 						$i("i3GEOselecaocbitens").onchange = function() {
 							$("#linhaFiltro" + id + " [name='valor']").val(this.value);
@@ -1138,35 +1135,26 @@ i3GEOF.selecao =
 			}
 			try {
 				i3GEOF.selecao.aguarde.visibility = "visible";
-				var filtro = "", g, ipt, i, ii, nos, s, itemsel, valor, operador, conector, temp;
-				if (navm) {
-					ii = 2;
-				} else {
-					ii = 0;
-				}
+				var filtro = "",g,ipt,i,nos,s,itemsel,operador,valor;
 				g = $i("i3GEOselecaoparametros");
 				ipt = g.getElementsByTagName("tr");
-				if (ipt.length > 0) {
-					for (i = ii; i < ipt.length; i++) {
-						nos = ipt[i].childNodes;
-						s = nos[2].getElementsByTagName("select");
-						itemsel = s[0].value;
-						s = nos[3].getElementsByTagName("select");
-						operador = s[0].value;
-						s = nos[4].getElementsByTagName("input");
-						valor = s[0].value;
-						s = nos[6].getElementsByTagName("select");
-						conector = s[0].value;
-						if (valor * 1) {
-							filtro = filtro + "([" + itemsel + "] " + operador + " " + valor + ")";
-						} else {
-							filtro = filtro + "(|[" + itemsel + "]| " + operador + " |" + valor + "|)";
+				if (ipt.length > 0){
+					for (i=0;i<ipt.length; i++){
+						itemsel = $(ipt[i]).find("[name='coluna']").val();
+						operador = $(ipt[i]).find("[name='operador']").val();
+						valor = $(ipt[i]).find("[name='valor']").val();
+						conector = $(ipt[i]).find("[name='conector']").val();
+						if (valor*1){
+							filtro = filtro + "(["+itemsel+"] "+operador+" "+valor+")";
 						}
-						if ((i + 1) != ipt.length) // tem conector
-						{
+						else{
+							filtro = filtro + "('["+itemsel+"]' "+operador+" '"+valor+"')";
+						}
+						if ((i + 1) != ipt.length){
 							filtro = filtro + conector;
-						} else {
-							filtro = "(" + filtro + ")";
+						}
+						else{
+							filtro = "("+filtro+")";
 						}
 					}
 				}
