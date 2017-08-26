@@ -17,6 +17,9 @@ Para a barra de rolagem
 .mCS-inset-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
 	background-color: #094672;
 }
+.customScrollBar .mCSB_scrollTools {
+	margin-right: 5px;
+}
 
 /*
 Utilizado no elemento select
