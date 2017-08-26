@@ -197,6 +197,10 @@ i3GEOF.buscaFotos = {
 
 	*/
 	busca: function(pagina){
+		if(i3GEO.parametros.mapscale > 3000000){
+			i3GEO.janela.tempoMsg($trad('msgZoom',i3GEOF.buscaFotos.dicionario));
+			return;
+		}
 		i3GEOF.buscaFotos.aguarde.visibility = "visible";
 		$i("i3GEObuscafotosresultadofotos").innerHTML = $trad('msgAguarde',i3GEOF.buscaFotos.dicionario);
 		$i("i3GEObuscafotospaginas").innerHTML = "";
@@ -254,6 +258,10 @@ i3GEOF.buscaFotos = {
 	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Panoramio
 	*/
 	listafotospanoramio: function(retorno){
+		if(i3GEO.parametros.mapscale > 3000000){
+			i3GEO.janela.tempoMsg($trad('msgZoom',i3GEOF.buscaFotos.dicionario));
+			return;
+		}
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
 		if (retorno.data===undefined ){
 			i3GEO.janela.tempoMsg($trad('erroTempo',i3GEOF.buscaFotos.dicionario));
@@ -297,6 +305,10 @@ i3GEOF.buscaFotos = {
 	Monta a apresenta&ccedil;&atilde;o das fotos obtidas do servidor Flickr
 	*/
 	listafotosflickr: function(retorno){
+		if(i3GEO.parametros.mapscale > 3000000){
+			i3GEO.janela.tempoMsg($trad('msgZoom',i3GEOF.buscaFotos.dicionario));
+			return;
+		}
 		i3GEOF.buscaFotos.aguarde.visibility = "hidden";
 		var data,
 			res,

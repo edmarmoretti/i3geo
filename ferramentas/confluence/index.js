@@ -177,8 +177,6 @@ i3GEOF.confluence = {
 	Indica a conflu&ecirc;ncia no mapa
 	*/
 	mostraxy: function(xy){
-		if(i3GEO.Interface.ATUAL === "googleearth")
-		{return;}
 		xy = xy.split(",");
 		if(i3GEOF.confluence.MARCA === false){
 			i3GEOF.confluence.MARCA = i3GEO.desenho.addPin(xy[1]*1,xy[0]*1,"","",i3GEO.configura.locaplic+'/imagens/google/confluence.png',"confluence");

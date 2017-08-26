@@ -1116,7 +1116,7 @@ i3GEO.mapa =
 										var link = ds[s][tips[r]].link;
 										var img = ds[s][tips[r]].img;
 										if (valor !== "" && link === "") {
-											temp += "<span>" + alias + " :" + valor + "</span><br>";
+											temp += "<span>" + alias + ": " + valor + "</span><br>";
 										}
 										if (valor !== "" && link !== "") {
 											temp +=

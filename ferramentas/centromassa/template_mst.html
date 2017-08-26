@@ -1,26 +1,28 @@
-<div class='container-fluid customScrollBar' id='i3GEOcentromassaresultado'>
-	<div id='i3GEOFgradeDePontost0'>
-		<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/centromassa/exemplo.png' />
-		<h5>{{{ajuda}}}</h5>
-		<h5>{{{ajuda2}}}</h5>
-	</div>
-	<div id='i3GEOF.centromassa.t1'>
-		<div style="width: 100%;" class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{selecionaTema}}}</label>
-			<div style="width: 100%;" class="input-group">
-				<div id='i3GEOcentromassaDivPontos'></div>
+<div class='container-fluid customScrollBar'>
+	<div id='i3GEOcentromassaresultado'>
+		<div id='i3GEOFgradeDePontost0'>
+			<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/centromassa/exemplo.png' />
+			<h5>{{{ajuda}}}</h5>
+			<h5>{{{ajuda2}}}</h5>
+		</div>
+		<div id='i3GEOF.centromassa.t1'>
+			<div style="width: 100%;" class='form-group label-fixed condensed'>
+				<label class="control-label" for="">{{{selecionaTema}}}</label>
+				<div style="width: 100%;" class="input-group">
+					<div id='i3GEOcentromassaDivPontos'></div>
+				</div>
+			</div>
+			<div style="width: 100%;" class='form-group label-fixed condensed'>
+				<label class="control-label" for="">{{{selecionaItem}}}</label>
+				<div style="width: 100%;" class="input-group">
+					<div id='i3GEOondeItens'></div>
+				</div>
 			</div>
 		</div>
-		<div style="width: 100%;" class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{selecionaItem}}}</label>
-			<div style="width: 100%;" class="input-group">
-				<div id='i3GEOondeItens'></div>
-			</div>
+		<div id='i3GEOF.centromassa.t2'>
+			<h5>{{{ajuda3}}}</h5>
+			<button onclick=" i3GEOF.centromassa.calcula()" class='btn btn-primary btn-sm btn-raised'>{{{calcula}}}</button>
+			<h5 id='i3GEOcentromassafim'></h5>
 		</div>
-	</div>
-	<div id='i3GEOF.centromassa.t2'>
-		<h5>{{{ajuda3}}}</h5>
-		<button onclick=" i3GEOF.centromassa.calcula()" class='btn btn-primary btn-sm btn-raised'>{{{calcula}}}</button>
-		<h5 id='i3GEOcentromassafim'></h5>
 	</div>
 </div>

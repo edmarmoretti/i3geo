@@ -77,7 +77,6 @@ i3GEOF.agrupaElementos = {
 			return;
 		}
 		$i(iddiv).innerHTML = i3GEOF.agrupaElementos.html();
-
 		i3GEOF.agrupaElementos.t0();
 	},
 	/*

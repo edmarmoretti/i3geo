@@ -119,5 +119,10 @@ i3GEOF.buscaFotos.dicionario = {
 		pt : "Par&acirc;metros que afetam o servi&ccedil;o do Flicker",
 		en : "",
 		es : ""
+	} ],
+	'msgZoom' : [ {
+		pt : "Voc&ecirc; precisa alterar o zoom para aproximar mais o mapa (no m&iacute;nimo 1:3.000.000)",
+		en : "",
+		es : ""
 	} ]
 };

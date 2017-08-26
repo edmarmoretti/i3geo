@@ -1,47 +1,49 @@
-<div class='container-fluid customScrollBar' id='i3GEOmarkerclusterresultado'>
-	<div id='i3GEOFgradeDePontost0'>
-		<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/markercluster/exemplo.png' />
-		<h5>{{{ajuda}}}</h5>
-		<h5>{{{ajuda2}}}</h5>
-	</div>
-	<div id='i3GEOF.markercluster.t1'>
-		<div style="width: 100%;" class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{selecionaTema}}}</label>
-			<div style="width: 100%;" class="input-group">
-				<div id='i3GEOmarkerclusterSelTemas'></div>
+<div class='container-fluid customScrollBar'>
+	<div id='i3GEOmarkerclusterresultado'>
+		<div id='i3GEOFgradeDePontost0'>
+			<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/markercluster/exemplo.png' />
+			<h5>{{{ajuda}}}</h5>
+			<h5>{{{ajuda2}}}</h5>
+		</div>
+		<div id='i3GEOF.markercluster.t1'>
+			<div style="width: 100%;" class='form-group label-fixed condensed'>
+				<label class="control-label" for="">{{{selecionaTema}}}</label>
+				<div style="width: 100%;" class="input-group">
+					<div id='i3GEOmarkerclusterSelTemas'></div>
+				</div>
 			</div>
 		</div>
-	</div>
-	<div id='i3GEOF.markercluster.t2'>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="i3GEOmarkerclusterTitulo">{{{tituloNovaCamada}}}</label>
-			<input class="form-control input-lg" type='text' id='i3GEOmarkerclusterTitulo' value='Mapa de agrupamento' />
+		<div id='i3GEOF.markercluster.t2'>
+			<div class='form-group label-fixed condensed'>
+				<label class="control-label" for="i3GEOmarkerclusterTitulo">{{{tituloNovaCamada}}}</label>
+				<input class="form-control input-lg" type='text' id='i3GEOmarkerclusterTitulo' value='Mapa de agrupamento' />
+			</div>
+			<div class='form-group label-fixed condensed'>
+				<label class="control-label" for="i3GEOmarkerclusterRaio">{{{raio}}}</label>
+				<input class="form-control input-lg" type='text' id='i3GEOmarkerclusterRaio' value='50' />
+			</div>
+			<div class='form-group label-fixed condensed'>
+				<label class="control-label" for="i3GEOmarkerclusterOpacidade">{{{opacidade}}}</label>
+				<input class="form-control input-lg" type='text' id='i3GEOmarkerclusterOpacidade' value='50' />
+			</div>
+			<div class='form-group label-fixed condensed'>
+				<label class="control-label" for="i3GEOmarkerclusterColor">{{{color}}}</label>
+				<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOmarkerclusterColor' value='255,255,255' />
+			</div>
+			<div class='form-group label-fixed condensed'>
+				<label class="control-label" for="i3GEOmarkerclusterStrokecolor">{{{strokecolor}}}</label>
+				<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOmarkerclusterStrokecolor' value='255,255,255' />
+			</div>
+			<div class='form-group label-fixed condensed'>
+				<label class="control-label" for="i3GEOmarkerclusterTextcolor">{{{textcolor}}}</label>
+				<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOmarkerclusterTextcolor' value='0,0,0' />
+			</div>
 		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="i3GEOmarkerclusterRaio">{{{raio}}}</label>
-			<input class="form-control input-lg" type='text' id='i3GEOmarkerclusterRaio' value='50' />
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="i3GEOmarkerclusterOpacidade">{{{opacidade}}}</label>
-			<input class="form-control input-lg" type='text' id='i3GEOmarkerclusterOpacidade' value='50' />
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="i3GEOmarkerclusterColor">{{{color}}}</label>
-			<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOmarkerclusterColor' value='255,255,255' />
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="i3GEOmarkerclusterStrokecolor">{{{strokecolor}}}</label>
-			<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOmarkerclusterStrokecolor' value='255,255,255' />
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="i3GEOmarkerclusterTextcolor">{{{textcolor}}}</label>
-			<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOmarkerclusterTextcolor' value='0,0,0' />
-		</div>
-	</div>
-	<div id='i3GEOF.markercluster.t3'>
-		<h5>{{{adicionaTema}}}</h5>
-		<button onclick="i3GEOF.markercluster.criamarkercluster()" class='btn btn-primary btn-sm btn-raised'>{{{criaCamada}}}</button>
+		<div id='i3GEOF.markercluster.t3'>
+			<h5>{{{adicionaTema}}}</h5>
+			<button onclick="i3GEOF.markercluster.criamarkercluster()" class='btn btn-primary btn-sm btn-raised'>{{{criaCamada}}}</button>
 
-		<h5 id='i3GEOmarkerclusterfim'></h5>
+			<h5 id='i3GEOmarkerclusterfim'></h5>
+		</div>
 	</div>
 </div>
