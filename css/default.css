@@ -12,8 +12,12 @@ Para a barra de rolagem
 }
 .customScrollBar .mCSB_container {
 	max-width: 100%;
-	padding-right: 5px !Important;
+	padding-right: 1px !Important;
 }
+.mCS-inset-2.mCSB_scrollTools .mCSB_dragger .mCSB_dragger_bar {
+	background-color: #094672;
+}
+
 /*
 Utilizado no elemento select
 */

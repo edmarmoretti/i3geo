@@ -73,14 +73,15 @@ i3GEO.janela =
 			theme: "3d-dark",
 			axis: "yx",
 			scrollbarPosition: "inside",
-			scrollButtons:{ enable: false },
-			advanced:{ autoExpandHorizontalScroll: true }
+			advanced:{ autoExpandHorizontalScroll: true },
+			scrollButtons:{ enable: true }
 		},
 		/**
 		 * Cada vez que uma janela flutuante &eacute; criada, esse valor &eacute; acrescido de 1
 		 */
 		ULTIMOZINDEX : 5,
 		//aplica a estilizacao da barra de rolagem
+		//https://github.com/malihu/malihu-custom-scrollbar-plugin
 		applyScrollBar: function(iddiv,seletor,config) {
 			var a = i3GEO.janela.scrollBar;
 			if(config){
