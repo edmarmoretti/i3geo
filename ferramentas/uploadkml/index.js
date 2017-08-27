@@ -143,8 +143,13 @@ i3GEOF.uploadkml = {
 	Submete o arquivo ao servidor.
 	*/
 	submete: function(){
-		if(i3GEOF.uploadkml.aguarde.visibility==="visible")
-		{return;}
+		if($i("layerkml").value == ""){
+			i3GEO.janela.tempoMsg($trad("nomeLayerKml",i3GEOF.uploadkml.dicionario));
+			return;
+		}
+		if(i3GEOF.uploadkml.aguarde.visibility==="visible"){
+			return;
+		}
 		i3GEOF.uploadkml.aguarde.visibility="visible";
 		$i("i3GEOuploadkmlf").submit();
 	}

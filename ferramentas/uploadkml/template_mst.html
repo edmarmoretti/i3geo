@@ -10,7 +10,7 @@
 		<br>
 		<div class='form-group label-fixed condensed'>
 			<label class="control-label" for="">{{{nomeLayerKml}}}</label>
-			<input class="form-control input-lg" type='text' name="layerkml" value='' />
+			<input class="form-control input-lg" type='text' name="layerkml" id="layerkml" value='' />
 		</div>
 		<div class='form-group label-fixed condensed'>
 			<label class="control-label" for="tipo">{{{projecao}}}</label>
@@ -18,9 +18,10 @@
 			<div id=i3GEOuploadkmlListaepsg style="text-align: left; overflow: auto; height: 70px; margin-top: 8px;"></div>
 		</div>
 		<hr />
-		<button name="submit" onclick="i3GEOF.uploadkml.submete()" class='btn btn-primary btn-sm btn-raised'>{{{criaCamada}}}</button>
+
 		<input type='hidden' name='g_sid' value='{{{sid}}}'>
 		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
 	</form>
+	<button onclick="i3GEOF.uploadkml.submete()" class='btn btn-primary btn-sm btn-raised'>{{{criaCamada}}}</button>
 	<iframe name='i3GEOuploadkmliframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
 </div>

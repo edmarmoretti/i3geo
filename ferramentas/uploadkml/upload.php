@@ -23,7 +23,7 @@ if (ob_get_level() == 0) ob_start();
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
 <?php
-if (isset($_FILES['i3GEOuploadkml']['name']) && strlen(basename($_FILES['i3GEOuploadkml']['name'])) < 200 )
+if (isset($_FILES['i3GEOuploadkml']['name']) && strlen(basename($_FILES['i3GEOuploadkml']['name'])) < 200 && !empty($_GET["layerkml"]) )
 {
 	$checkphp = fileContemString($_FILES['i3GEOuploadkml']['tmp_name'],"<?php");
 	if($checkphp == true){
@@ -124,7 +124,7 @@ if (isset($_FILES['i3GEOuploadkml']['name']) && strlen(basename($_FILES['i3GEOup
 }
 else
 {
-	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo. Verifique os par&acirc;metros enviados. Talvez o tamanho do arquivo seja maior do que o permitido.</p>";
 }
 restauraCon($map_file,$postgis_mapa);
 paraAguarde();
