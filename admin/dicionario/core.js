@@ -58,63 +58,63 @@ i3GEOadmin.core.dicionario = {
 	} ],
     'atalhos' : [ {
 		pt : "Atalhos",
-		en : "",
-		es : ""
+		en : "Shortcut",
+		es : "Accesos directos"
 	} ],
     'sobe' : [ {
 		pt : "sobe",
-		en : "",
-		es : ""
+		en : "up",
+		es : "sube"
 	} ],
     'desce' : [ {
 		pt : "desce",
-		en : "",
-		es : ""
+		en : "goes down",
+		es : "desciende"
 	} ],
     'editar' : [ {
 		pt : "editar",
-		en : "",
-		es : ""
+		en : "edit",
+		es : "editar"
 	} ],
     'excluir' : [ {
 		pt : "excluir",
-		en : "",
-		es : ""
+		en : "exclude",
+		es : "excluir"
 	} ],
     'testar' : [ {
 		pt : "testar!",
-		en : "",
-		es : ""
+		en : "test!",
+		es : "probar!"
 	} ],
     'testarRapido' : [ {
 		pt : "teste rapido",
-		en : "",
-		es : ""
+		en : "quick test",
+		es : "prueba r&aacute;pida"
 	} ],
     'editarI3geo' : [ {
 		pt : "editar no i3Geo",
-		en : "",
-		es : ""
+		en : "edit on i3Geo",
+		es : "modificar en i3Geo"
 	} ],
     'testarI3geo' : [ {
 		pt : "testar no i3Geo",
-		en : "",
-		es : ""
+		en : "test on i3Geo",
+		es : "probar en i3Geo"
 	} ],
     'editorTxt' : [ {
 		pt : "Editor de textos",
-		en : "",
-		es : ""
+		en : "Text editor",
+		es : "Editor de Textos"
 	} ],
     'abrirI3geo' : [ {
 		pt : "Abrir no i3Geo",
-		en : "",
-		es : ""
+		en : "Open on i3Geo",
+		es : "Abrir en i3Geo"
 	} ],
     'msgBuscaDados' : [ {
 		pt : " buscando dados",
-		en : "",
-		es : ""
+		en : " searching data",
+		es : " buscando datos"
 	} ],
     'msgModificaOrdem' : [ {
 		pt : " modificando a ordem no banco de dados",
