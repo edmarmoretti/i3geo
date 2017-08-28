@@ -92,6 +92,7 @@ i3GEO.navega =
 
 			var l = i3GEO.navega.EXTENSOES.lista,
 				r = i3GEO.navega.EXTENSOES.redo,
+				a = i3GEO.parametros.mapexten,
 				e;
 			if(l.length > 0){
 				if(l.length > 1){
@@ -102,21 +103,26 @@ i3GEO.navega =
 					}
 					if(r.length > 0 && r[r.length -1] === e){
 						return;
+					} else {
+						r.push(a);
 					}
-					r.push(e);
 				}
 			} else {
 				l.push(i3GEO.parametros.mapexten);
 			}
 		},
 		extensaoProximo : function() {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.navega.extensaoProximo()" + i3GEO.navega.EXTENSOES.lista.length);
+
 			var l = i3GEO.navega.EXTENSOES.lista,
 			r = i3GEO.navega.EXTENSOES.redo,
+			a = i3GEO.parametros.mapexten,
 			e;
 
 			i3GEO.navega.EXTENSOES.emAcao = true;
 
-			if(r.length > 1){
+			if(r.length > 0){
 				i3GEO.navega.zoomExt("", "", "", r[r.length-1]);
 				e = r.pop();
 				if(l.length > 10){
@@ -125,7 +131,7 @@ i3GEO.navega =
 				if(l.length > 0 && l[l.length -1] === e){
 					return;
 				}
-				l.push(e);
+				l.push(a);
 			}
 		},
 		/**
