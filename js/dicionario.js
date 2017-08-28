@@ -2973,5 +2973,10 @@ g_traducao =
 			pt : "Essa op&ccedil;&atilde;o necessita de uma API do Google Maps. Consulte o administrador do sistema. O c&oacute;digo da API deve constar no arquivo de configura&ccedil;&atilde;o do i3Geo.",
 			en : "",
 			es : ""
+		}],
+		"graticule" : [{
+			pt : "Grade de coordenadas (ativa e desativa)",
+			en : "",
+			es : ""
 		}]
 	};

@@ -239,6 +239,10 @@ i3GEO.Interface =
 		redesenha : function() {
 			i3GEO.Interface[i3GEO.Interface.ATUAL].redesenha();
 		},
+		//ativa a grade de coordenadas
+		grade : function(){
+			i3GEO.Interface[i3GEO.Interface.ATUAL].grade();
+		},
 		/**
 		 * Function: aplicaOpacidade
 		 *
@@ -486,6 +490,29 @@ i3GEO.Interface =
 				modal: false,
 				simple: true,
 				baloes : []
+			},
+			//objeto com a grade de coordenadas
+			GRADE: "",
+			grade: function(){
+				if(i3GEO.Interface.openlayers.GRADE == ""){
+					i3GEO.Interface.openlayers.GRADE = new ol.Graticule({
+						// the style to use for the lines, optional.
+						strokeStyle: new ol.style.Stroke({
+							color: 'rgba(105,105,105,0.9)',
+							width: 2,
+							lineDash: [0.5, 4]
+						}),
+						showLabels: true,
+						targetSize: 200
+					});
+					i3GEO.Interface.openlayers.GRADE.setMap(i3geoOL);
+					return;
+				}
+				if(i3GEO.Interface.openlayers.GRADE.getMap() == null){
+					i3GEO.Interface.openlayers.GRADE.setMap(i3geoOL);
+				} else {
+					i3GEO.Interface.openlayers.GRADE.setMap(null);
+				}
 			},
 			zoomli: function() {
 				if (DetectaMobile("DetectMobileLong")) {
@@ -2018,6 +2045,9 @@ i3GEO.Interface =
 				simple: true,
 				classeCadeado : "i3GEOiconeAberto",
 				baloes : []
+			},
+			grade : function(){
+				return false;
 			},
 			barraProgressoStart : function() {
 				var p = $i("i3GEOprogressoCamadas");

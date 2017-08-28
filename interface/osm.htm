@@ -6,13 +6,13 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 <title>i3GEO - OpenLayers</title>
-<script src="../pacotes/ol3/ol.js"></script>
+<script src="../pacotes/ol4/ol.js"></script>
 <script src="../js/i3geo.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
 <script src="config.php?tipo=OSM"></script>
-<link rel="stylesheet" type="text/css" href="../pacotes/ol3/ol.css">
+<link rel="stylesheet" type="text/css" href="../pacotes/ol4/ol.css">
 <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap-material-design/dist/css/ripples.min.css">-->
@@ -117,9 +117,13 @@
 			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
 		</button>
 		<br>
+		<button title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" style="float: left;">
+			<img style="width:16px;" src="../imagens/gisicons/graticule.png">
+		</button>
 		<button class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="templates/ferramentasLink.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/save1.png">
 		</button>
+		<br>
 		<button class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
 			<img style="width:20px;" src="../imagens/gisicons/map-reference.png">
 		</button>
