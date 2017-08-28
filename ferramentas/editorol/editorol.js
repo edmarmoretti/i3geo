@@ -1448,12 +1448,12 @@ i3GEO.editorOL =
 			i3GEO.eventos.cliquePerm.desativa();
 			var temp = document.createElement("div");
 			temp.className = "editorOLeditaItemInactive olButton";
-			temp.title = $trad("dpol");
+			temp.title = $trad("modf");
 			temp.onclick = function(){
 				i3GEO.editorOL.featuresBackup = [];
 				var draw, nsel, f, c;
 				nsel = i3GEO.editorOL.idsSelecionados.length;
-				if(nsel > 0){
+				if(nsel == 1){
 					i3GEO.editorOL.marcaBotao("editorOLedita");
 					f = i3GEO.desenho.layergrafico.getSource().getFeatureById(i3GEO.editorOL.idsSelecionados[nsel - 1]);
 					i3GEO.editorOL.featuresBackup.push(f.clone());
@@ -2066,7 +2066,9 @@ i3GEO.editorOL =
 				n -= 1;
 				id = geos[n].getId();
 				if(id){
-					ins += '<h5><a title="Seleciona" onclick="i3GEO.editorOL.selFeature(\'' + id + '\')" href="javascript:void(0)">'
+					ins += '<h5>'
+						+ '<button title="Unsel" onclick="i3GEO.editorOL.unselFeature(\'' + id + '\')" class="btn btn-xs" style="margin:2px;padding:2px;"><span class="material-icons">clear</span></button>'
+						+ '<a title="Sel" onclick="i3GEO.editorOL.selFeature(\'' + id + '\')" href="javascript:void(0)">'
 						+ id + "</a></h5>";
 				}
 			}
@@ -2427,7 +2429,7 @@ i3GEO.editorOL =
 			s = i3GEO.desenho.layergrafico.getSource();
 			f = s.getFeatureById(id);
 			if(f){
-				if(f.getStyle().getSrc()){
+				if(f.getStyle() && f.getStyle().getSrc){
 					f.getStyle().setSrc(f.getProperties().externalGraphic);
 					f.getStyle().setSize([f.getProperties().graphicWidth,f.getProperties().graphicHeight]);
 				}
