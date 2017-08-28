@@ -220,17 +220,17 @@ i3GEOF.tabela.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'selecionaTabela' : [ {
+	"selecionaTabela" : [ {
 		pt : "Escolha uma tabela",
 		en : "",
 		es : ""
 	} ],
-	'selecionaSegundaTabela' : [ {
+	"selecionaSegundaTabela" : [ {
 		pt : "Escolha uma segunda tabela",
 		en : "",
 		es : ""
 	} ],
-	'criaVinculo' : [ {
+	"criaVinculo" : [ {
 		pt : "Criar v&iacute;nculo",
 		en : "",
 		es : ""
@@ -242,6 +242,11 @@ i3GEOF.tabela.dicionario = {
 	} ],
 	'idDaTabela' : [ {
 		pt : "Identificador da tabela",
+		en : "",
+		es : ""
+	} ],
+	'selUmReg' : [ {
+		pt : "Selecione pelo menos um registro",
 		en : "",
 		es : ""
 	} ]

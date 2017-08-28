@@ -33,21 +33,19 @@
 </div>
 <!-- Guia Propriedades -->
 <div id='{{{idjanela}}}i3GEOtabelaguia6obj' class="container-fluid">
-	<div class="checkbox text-left">
+	<div class="radio radio-primary condensed text-left">
 		<label>
-			<input id='{{{idjanela}}}i3GEOtabelatipolista' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros('{{{idjanela}}}')">
-			<span class="checkbox-material noprint">
-				<span class="check"></span>
-			</span>
+			<input name="classOuSel" id='{{{idjanela}}}i3GEOtabelatipolista' type="radio" onclick="i3GEOF.tabela.pegaRegistros('{{{idjanela}}}')">
+			<span class="circle"></span>
+			<span class="check"></span>
 			{{{atuatab}}}
 		</label>
 	</div>
-	<div class="checkbox text-left">
+	<div class="radio radio-primary condensed text-left">
 		<label>
-			<input id='{{{idjanela}}}i3GEOtabelalegenda' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros('{{{idjanela}}}')">
-			<span class="checkbox-material noprint">
-				<span class="check"></span>
-			</span>
+			<input name="classOuSel" id='{{{idjanela}}}i3GEOtabelalegenda' type="radio" onclick="i3GEOF.tabela.pegaRegistros('{{{idjanela}}}')">
+			<span class="circle"></span>
+			<span class="check"></span>
 			{{{colleg}}}
 		</label>
 	</div>
@@ -62,7 +60,7 @@
 	</div>
 </div>
 <!-- Registros da tabela -->
-<div id='{{{idjanela}}}i3GEOtabelaguia1obj' class='container-fluid customScrollBarXY'>
+<div id='{{{idjanela}}}i3GEOtabelaguia1obj' class='container-fluid '>
 	<div id='{{{idjanela}}}i3GEOFtabelaComboCabeca' class='form-group condensed' style='width: 450px'>
 		<span class="material-icons iconeComboTemas">playlist_add_check</span>
 	</div>
@@ -97,7 +95,7 @@
 	<div id='{{{idjanela}}}i3GEOtabelaregistros' style='top: 10px;'></div>
 </div>
 <!-- Estatisticas -->
-<div id='{{{idjanela}}}i3GEOtabelaguia3obj' style='display: none;' class='container-fluid customScrollBarXY'>
+<div id='{{{idjanela}}}i3GEOtabelaguia3obj' style='display: none;' class='container-fluid '>
 	<div class='form-group condensed'>
 		<label class="control-label">{{{itemcalc}}}</label>
 		<div id='{{{idjanela}}}i3GEOtabelaitensGuia3'></div>
@@ -115,7 +113,7 @@
 	<h5 class="alert alert-info">{{{paraqueas}}}</h5>
 </div>
 <!-- Relatorio -->
-<div id='{{{idjanela}}}i3GEOtabelaguia5obj' class='container-fluid customScrollBarXY'>
+<div id='{{{idjanela}}}i3GEOtabelaguia5obj' class='container-fluid '>
 	<div class='form-group condensed'>
 		<label>{{{itensrel}}}</label>
 		<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' style='overflow: auto; height: 120px; top: 10px;'></div>

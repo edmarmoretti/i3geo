@@ -260,7 +260,7 @@ i3GEOF.tabela =
 					+ "</span></div>";
 
 				janela = i3GEO.janela.cria(
-					"570px",
+					"610px",
 					"400px",
 					"",
 					"",
@@ -911,8 +911,8 @@ i3GEOF.tabela =
 		ordenaColuna : function(coluna, cid, idjanela) {
 			i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility = "visible";
 			try {
-				var tabela = $i(idjanela + "i3GEOtabelatabelai"), trs = tabela.getElementsByTagName("tr"), ntrs = trs.length, tds, nt, conta =
-					0, psort = [], t, psortfim, npsortfim, ins, p, e;
+				var tabela = $i(idjanela + "i3GEOtabelatabelai"), trs = tabela.getElementsByTagName("tr"),
+					ntrs = trs.length, tds, nt, conta = 0, psort = [], t, psortfim, npsortfim, ins, p, e;
 				// pega o indice correto
 				tds = coluna.parentNode.parentNode.getElementsByTagName("td");
 				nt = tds.length;
@@ -924,20 +924,21 @@ i3GEOF.tabela =
 				}
 				for (t = 0; t < ntrs; t++) {
 					if (t < ntrs) {
-						if (trs[t].childNodes[cid].innerHTML) {
-							if (trs[t].childNodes[cid].innerHTML !== "undefined") {
-								psort[conta] = trs[t].childNodes[cid].innerHTML + "+" + conta;
+						//if (trs[t].childNodes[cid].innerHTML) {
+							//if (trs[t].getElementsByTagName("td")[cid].innerHTML !== "undefined") {
+								psort[conta] = trs[t].getElementsByTagName("td")[cid].innerHTML + "@$" + conta;
 								conta = conta + 1;
-							}
-						}
+							//}
+						//}
 					}
 				}
+
 				// recosntroi a tabela
 				psortfim = psort.sort();
 				ins = "<table id=" + idjanela + "i3GEOtabelatabelai class=lista8 >";
 				npsortfim = psortfim.length;
 				for (p = 0; p < npsortfim; p++) {
-					e = psortfim[p].split("+")[1] * 1;
+					e = psortfim[p].split("@$")[1] * 1;
 					if (trs[e] !== undefined) {
 						ins += "<tr>" + trs[e].innerHTML + "</tr>";
 					}
@@ -1043,6 +1044,12 @@ i3GEOF.tabela =
 		 * Cria um novo tema contendo a sele&ccedil;&atilde;o existente
 		 */
 		criaNovoTema : function(idjanela) {
+			var camada = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.tabela.propJanelas[idjanela].tema);
+			if(camada.nsel == 0){
+				i3GEO.janela.tempoMsg($trad("selUmReg",i3GEOF.tabela.dicionario));
+				return;
+			}
+
 			if (i3GEOF.tabela.propJanelas[idjanela].aguarde.visibility === "visible") {
 				return;
 			}

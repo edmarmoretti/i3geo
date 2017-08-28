@@ -449,6 +449,7 @@ class Atributos
 			$alias = $items;
 		}
 		$shapes = retornaShapesSelecionados($this->layer,$this->arquivo,$this->mapa,true);
+		//error_reporting(E_ALL);
 		$res_count = count($shapes);
 		$resultadoFinal[] = array("totalSelecionados"=>$res_count,"itens"=>$items,"alias"=>$alias);
 		$registros = array();
@@ -484,12 +485,18 @@ class Atributos
 				}
 				$classe = "";
 				if($dadosDaClasse == "sim"){
-					$indice = $this->layer->getClassIndex($shape);
-					$nome = $this->layer->getclass($indice)->name;
-					$classe = array(
-							"indice"=>$indice,
-							"nome"=>$nome
-					);
+					$indice = @$this->layer->getClassIndex($shape);
+					if($indice >= 0){
+						$classei = @$this->layer->getclass($indice);
+						$nome = $classei->name;
+						if($convC == true && $nome != ""){
+							$nome = $this->converte($nome);
+						}
+						$classe = array(
+								"indice"=>$indice,
+								"nome"=>$nome
+						);
+					}
 				}
 				$ext = $this->extensaoShape($shape);
 				$registros[] = array("indice"=>$indx,"valores"=>$valitem,"status"=>$chk,"classe"=>$classe,"ext"=>$ext);
@@ -553,6 +560,9 @@ class Atributos
 						}
 						else{
 							$nome = "";
+						}
+						if($convC == true && $nome != ""){
+							$nome = $this->converte($nome);
 						}
 						$classe = array(
 								"indice"=>$indice,
