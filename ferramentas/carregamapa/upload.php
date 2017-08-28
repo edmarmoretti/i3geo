@@ -5,7 +5,7 @@ verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 //o usuario deve ter entrado pelo i3Geo
 //
 if(empty($fingerprint)){
-	echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo. (1)";
 	return;
 }
 include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
@@ -144,11 +144,11 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 		//echo "<script>window.parent.i3GEO.navega.zoomExt(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,'nenhum','".$extatual."');</script>";
 	}
 	else{
-		echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
+		echo "<p class='paragrafo' >Erro ao enviar o arquivo. (2)";
 	}
 }
 else{
-	echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
+	echo "<p class='paragrafo' >Erro ao enviar o arquivo. (3)";
 }
 paraAguarde();
 function paraAguarde(){

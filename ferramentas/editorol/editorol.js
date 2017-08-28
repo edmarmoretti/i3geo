@@ -2066,8 +2066,8 @@ i3GEO.editorOL =
 				n -= 1;
 				id = geos[n].getId();
 				if(id){
-					ins += '<a title="Seleciona" onclick="i3GEO.editorOL.selFeature(\'' + id + '\')" href="javascript:void(0)">'
-						+ id + "</a>";
+					ins += '<h5><a title="Seleciona" onclick="i3GEO.editorOL.selFeature(\'' + id + '\')" href="javascript:void(0)">'
+						+ id + "</a></h5>";
 				}
 			}
 			ins += "</div>";
