@@ -2067,9 +2067,9 @@ g_traducao =
 		],
 		"x76" : [
 			{
-				pt : "O tema j&aacute; existe no mapa. Adiciona novamente?",
-				en : "Layer already exists in the map. Add again?",
-				es : "El tema ya existe en el mapa. Añade otra vez?"
+				pt : "O tema j&aacute; existe no mapa.",
+				en : "Layer already exists in the map.",
+				es : "El tema ya existe en el mapa."
 			}
 		],
 		"x77" : [

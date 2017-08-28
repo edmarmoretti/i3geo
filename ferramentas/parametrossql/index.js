@@ -55,8 +55,9 @@ i3GEOF.parametrossql = {
 	/**
 	 * Susbtitutos para o template
 	 */
-	mustacheHash : function() {
+	mustacheHash : function(camada) {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.parametrossql.dicionario);
+		dicionario["camada"] = camada.name;
 		return dicionario;
 	},
 	/*
@@ -74,24 +75,17 @@ i3GEOF.parametrossql = {
 		if(i3GEOF.parametrossql.MUSTACHE == ""){
 			$.get(i3GEO.configura.locaplic + "/ferramentas/parametrossql/template_mst.html", function(template) {
 				i3GEOF.parametrossql.MUSTACHE = template;
-				i3GEOF.parametrossql.inicia(iddiv);
+				i3GEOF.parametrossql.inicia(iddiv,camada);
 			});
 			return;
 		}
-		$i(iddiv).innerHTML = i3GEOF.parametrossql.html();
+		$i(iddiv).innerHTML = i3GEOF.parametrossql.html(camada);
 		var b,
 			f = i3GEOF.parametrossql.formulario(camada);
 		i3GEOF.parametrossql.tema = camada.name;
 		//i3GEOFparametrosSQLForm e definido no template mustache
 		$i("i3GEOFparametrosSQLForm").innerHTML = f;
 		i3GEOF.parametrossql.buscaSelect(camada);
-
-		b = new YAHOO.widget.Button(
-			"i3GEOFparametrosSqlAplicar",
-			{onclick:{fn: function(){i3GEOF.parametrossql.aplicar(camada);}}}
-		);
-		b.addClass("rodar");
-
 	},
 	/*
 	Function: html
@@ -102,8 +96,8 @@ i3GEOF.parametrossql = {
 
 	String com o c&oacute;digo html
 	*/
-	html:function() {
-		var ins = Mustache.render(i3GEOF.parametrossql.MUSTACHE, i3GEOF.parametrossql.mustacheHash());
+	html:function(camada) {
+		var ins = Mustache.render(i3GEOF.parametrossql.MUSTACHE, i3GEOF.parametrossql.mustacheHash(camada));
 		return ins;
 	},
 	/*
@@ -149,9 +143,6 @@ i3GEOF.parametrossql = {
 					"35"
 				);
 				divid = janela[2].id;
-				temp = $i("i3GEOF.parametrossql_corpo").style;
-				temp.paddingLeft = "0px";
-				temp.paddingRight = "0px";
 				i3GEOF.parametrossql.aguarde = $i("i3GEOF.parametrossql_imagemCabecalho").style;
 				YAHOO.util.Event.addListener(janela[0].close, "click", i3GEOF.parametrossql.cancela);
 				i3GEOF.parametrossql.inicia(divid,camada);
@@ -251,7 +242,6 @@ i3GEOF.parametrossql = {
 		for(i=0; i<n; i++){
 			p = parametros[i];
 			if(p.tipo != "" && p.titulo){
-				ins += "<p class='paragrafo'>"+p.titulo+":</p>";
 				//prog pode ser um php que precisa ser obtido via ajax
 				//nesse caso e inserido um div com um id para permitir o preenchimento posterior
 				if(p.prog === ""){
@@ -261,18 +251,22 @@ i3GEOF.parametrossql = {
 							+ "</div><br>";
 					}
 					if(p.tipo === "select"){
-						ins += "<div class='styled-select' >"
+						ins += "<div style='width: 100%;' class='form-group label-fixed condensed'>"
+							+ "<label class='control-label' for=''>"
+							+ p.titulo
+							+ "</label><div style='width: 100%;' class='input-group'>"
 							+ "<select name='"+p.chave+"' >";
 						l = p.valores.split(",");
 						nj = l.length;
 						for(j=0; j<nj; j++){
 							ins += "<option value='"+ l[j] +"'>"+ l[j] +"</option>";
 						}
-						ins += "</select></div><br>";
+						ins += "</select><b class='caret careti'></b></div></div>";
 					}
 				}
 				else{
-					ins += "<div class='styled-select' id='i3GeoPlugin_"+p.chave+"' >Auarde...</div>";
+					ins += "<h5>"+p.titulo+"</h5>";
+					ins += "<div id='i3GeoPlugin_"+p.chave+"' >Auarde...</div>";
 				}
 			}
 		}
@@ -295,13 +289,16 @@ i3GEOF.parametrossql = {
 	ajaxSelect : function(onde,plugin){
 		var p,cp,temp;
 		temp = function(retorno){
-			var i,n,ins;
-			ins = "<select name='"+plugin.chave+"' >";
+			var i,n,ins = "";
+			ins += "<div style='width: 100%;' class='form-group label-fixed condensed'>"
+				+ "<div style='width: 100%;' class='input-group'>"
+				+ "<select  class='form-control' name='" +plugin.chave+ "' >";
+
 			n = retorno.data.length;
 			for(i=0; i<n; i++){
 				ins += "<option value='"+ retorno.data[i].v +"'>"+ retorno.data[i].n +"</option>";
 			}
-			ins += "</select>";
+			ins += "</select><b class='caret careti'></b></div></div>";
 			onde.innerHTML = ins;
 		};
 		p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
@@ -334,7 +331,7 @@ i3GEOF.parametrossql = {
 			};
 			p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
 				+ "&funcao=aplicar"
-				+ "&tema=" + camada.name
+				+ "&tema=" + camada
 				+ "&chaves=" + chaves.join(",")
 				+ "&valores=" + valores.join(",");
 			cp = new cpaint();
@@ -343,7 +340,7 @@ i3GEOF.parametrossql = {
 		}
 		else if(i3GEO.editorOL.mapa){
 			//pega o layer
-			temp = i3GEO.editorOL.layerPorParametro("LAYERS",camada.name);
+			temp = i3GEO.editorOL.layerPorParametro("LAYERS",camada);
 			//muda os parametros
 			n = temp.length;
 			for (i = 0; i < n; i++){

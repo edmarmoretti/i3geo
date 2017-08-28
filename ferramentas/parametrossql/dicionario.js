@@ -4,5 +4,10 @@ i3GEOF.parametrossql.dicionario = {
 		pt : "digite aqui o texto...",
 		en : "",
 		es : ""
+	} ],
+	'aplicar' : [ {
+		pt : "Aplicar",
+		en : "",
+		es : ""
 	} ]
 };

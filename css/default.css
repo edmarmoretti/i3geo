@@ -4,7 +4,7 @@ Para a barra de rolagem
 .customScrollBar {
 	height: 100%;
 	overflow: auto;
-	padding-right: 1px;
+	padding-right: 5px;
 }
 .customScrollBarXY {
 	height: calc(100% - 39px);
@@ -18,7 +18,7 @@ Para a barra de rolagem
 	background-color: #094672;
 }
 .customScrollBar .mCSB_scrollTools {
-	margin-right: 5px;
+	margin-right: 0px;
 }
 
 /*

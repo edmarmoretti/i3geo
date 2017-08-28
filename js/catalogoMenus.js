@@ -54,7 +54,8 @@ i3GEO.catalogoMenus = {
 
 		// confirma se o tema existe no mapa
 		if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
-			i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, true);
+			i3GEO.janela.tempoMsg($trad("x76"));
+			//i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, true);
 		} else {
 			i3GEO.php.adtema(i3GEO.atualiza, tid);
 		}
