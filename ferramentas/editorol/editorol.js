@@ -1548,7 +1548,7 @@ i3GEO.editorOL =
 			temp.onclick = function(){
 				if(i3GEO.configura && i3GEO.configura.locaplic){
 					i3GEO.janela.cria("400px", "200px", i3GEO.configura.locaplic
-						+ "/mashups/openlayers_ajuda.php?completo=none", "", "", $trad("s1"), "editorOlAjuda");
+						+ "/ferramentas/editorol/openlayers_ajuda.php?completo=none", "", "", "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("s1")+"</span></div>", "editorOlAjuda");
 				}
 				else{
 					window.open("openlayers_ajuda.php");

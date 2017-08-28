@@ -152,6 +152,12 @@ i3GEOF.perfil = {
 		i3GEOF.perfil.aguarde = $i("i3GEOF.perfil_imagemCabecalho").style;
 		i3GEOF.perfil.inicia(divid);
 	},
+	ativaFonteGoogle: function(obj){
+		if(obj.checked == true){
+			$i("i3GEOFperfilTemasSel").value = "";
+			$i("i3GEOFperfilDivComboItens").innerHTML = "";
+		}
+	},
 	/*
 	Function: criaPerfil
 
