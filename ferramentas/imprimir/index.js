@@ -176,7 +176,15 @@ i3GEOF.imprimir = {
 		url = url+"?g_sid="+i3GEO.configura.sid+"&interface="+interf+"&mapexten="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 		var id = "imprimir"+Math.random();
 		if(tipoAbertura){
-			i3GEO.janela.cria("350px","350px",url,"","","<div class='i3GeoTituloJanela'>Arquivos</div>",id);
+			i3GEO.janela.cria(
+				"350px",
+				"350px",
+				url,
+				"",
+				"",
+				"<div class='i3GeoTituloJanela'>Arquivos</div>",
+				id
+			);
 		}
 		else{
 			window.open(url);

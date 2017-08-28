@@ -66,47 +66,44 @@ $nomes = nomeRandomico();
 
 $map = ms_newMapObj($map_file);
 substituiConObj($map,$postgis_mapa);
-if($map->getmetadata("interface") == "googlemaps")
-{
+if($map->getmetadata("interface") == "googlemaps"){
 	$proj4 = pegaProjecaoDefault("proj4");
 	$map->setProjection($proj4);
 	$map->set("units",MS_METERS);
 	$map->preparequery();
 	$map->set("scaledenom",$map->scaledenom * 100000);
 }
+
 $v = versao();
 
-$leb = $eb->label;
-
-if($leb->type == "MS_BITMAP"){
-	$leb->set("type",MS_TRUETYPE);
-	$leb->set("font","Arial");
-}
 //legenda
 //corrige o titulo da legenda
 $numlayers = $map->numlayers;
 for ($j=0;$j < $numlayers;$j++){
 	$l = $map->getlayer($j);
-		if (($l->data != "") && (strtolower($l->getmetadata("escondido")) != "sim") && (strtolower($l->getmetadata("tema")) != "nao")){
-			if ($l->numclasses > 0){
-				$classe = $l->getclass(0);
-				if (($classe->name == "") || ($classe->name == " ")){
-					$classe->set("name",$layer->getmetadata("tema"));
-				}
+	//para evitar fontes bitmap
+	if($l->name == "copyright"){
+		$l->set("status",MS_DELETE);
+	}
+	if (($l->data != "") && (strtolower($l->getmetadata("escondido")) != "sim") && (strtolower($l->getmetadata("tema")) != "nao")){
+		if ($l->numclasses > 0){
+			$classe = $l->getclass(0);
+			if (($classe->name == "") || ($classe->name == " ")){
+				$classe->set("name",$l->getmetadata("tema"));
 			}
 		}
-		if($l->type != 3 && $l->type != 4){
-			$nclass = $l->numclasses;
-			for($i=0;$i<$nclass;$i++){
-				$classe = $l->getclass($i);
-				if($classe->title === ""){
-					$classe->title = $classe->name;
-				}
+	}
+	if($l->type != 3 && $l->type != 4){
+		$nclass = $l->numclasses;
+		for($i=0;$i<$nclass;$i++){
+			$classe = $l->getclass($i);
+			if($classe->title === ""){
+				$classe->title = $classe->name;
 			}
 		}
+	}
 }
 
-$o = $map->outputformat;
 if($mapexten != ""){
 	$ext = explode(" ",$mapexten);
 	$extatual = $map->extent;
@@ -116,8 +113,10 @@ $map->selectOutputFormat("svg");
 $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 //mapa
 $imgo = $map->draw();
-if($imgo->imagepath == "")
-{echo "Erro IMAGEPATH vazio";exit;}
+if($imgo->imagepath == ""){
+	echo "Erro IMAGEPATH vazio";
+	exit;
+}
 $nomer = ($imgo->imagepath)."mapa".$nomes.".svg";
 $imgo->saveImage($nomer);
 $nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);

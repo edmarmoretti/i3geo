@@ -108,7 +108,7 @@ for ($j=0;$j < $numlayers;$j++){
 			if ($l->numclasses > 0){
 				$classe = $l->getclass(0);
 				if (($classe->name == "") || ($classe->name == " ")){
-					$classe->set("name",$layer->getmetadata("tema"));
+					$classe->set("name",$l->getmetadata("tema"));
 				}
 			}
 		}

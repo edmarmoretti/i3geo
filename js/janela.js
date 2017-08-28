@@ -371,7 +371,7 @@ i3GEO.janela =
 			temp = $i(id + "_corpo");
 
 			janela.bringToTop();
-			if(waltura !== "auto"){
+			if(waltura !== "auto" && wsrc == ""){
 				i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBar"});
 				i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBarXY",advanced:{ autoExpandHorizontalScroll: false }});
 			}

@@ -69,7 +69,7 @@ substituiConObj($map,$postgis_mapa);
 $of = $map->outputformat;
 $of->set("driver","GDAL/GTiff");
 $of->set("imagemode","RGB");
-$map = ms_newMapObj($temp);
+
 if($map->getmetadata("interface") == "googlemaps"){
 	$proj4 = pegaProjecaoDefault("proj4");
 	$map->setProjection($proj4);
@@ -105,7 +105,7 @@ for ($j=0;$j < $numlayers;$j++){
 			if ($l->numclasses > 0){
 				$classe = $l->getclass(0);
 				if (($classe->name == "") || ($classe->name == " ")){
-					$classe->set("name",$layer->getmetadata("tema"));
+					$classe->set("name",$l->getmetadata("tema"));
 				}
 			}
 		}
