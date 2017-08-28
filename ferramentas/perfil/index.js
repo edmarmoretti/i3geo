@@ -89,11 +89,6 @@ i3GEOF.perfil = {
 		}
 			$i(iddiv).innerHTML = i3GEOF.perfil.html();
 			i3GEOF.perfil.comboTemas();
-			var b = new YAHOO.widget.Button(
-				"i3GEOperfilbotao1",
-				{onclick:{fn: i3GEOF.perfil.criaPerfil}}
-			);
-			b.addClass("rodar");
 	},
 	/*
 	Function: html
@@ -167,16 +162,20 @@ i3GEOF.perfil = {
 	<DADOSPERFILRELEVO>
 	*/
 	criaPerfil: function(){
-		try{
-			if(i3GEOF.perfil.aguarde.visibility === "visible")
-			{return;}
+			if(i3GEOF.perfil.aguarde.visibility === "visible"){
+				return;
+			}
 			var fim = function(retorno){
 				i3GEOF.perfil.aguarde.visibility = "hidden";
-				if (retorno.data === undefined )
-				{$i("i3GEOperfilfim").innerHTML = "Erro.";return;}
+				if (retorno.data === undefined ){
+					//$i("i3GEOperfilfim").innerHTML = "Erro.";
+					return;
+				}
 				else{
-					if(retorno.data.status != "OK")
-					{$i("i3GEOperfilfim").innerHTML = $trad('erroServico',i3GEOF.perfil.dicionario);return;}
+					if(retorno.data.status != "OK"){
+						$i("i3GEOperfilfim").innerHTML = $trad('erroServico',i3GEOF.perfil.dicionario);
+						return;
+					}
 					i3GEOF.perfil.converteDados(retorno.data.results);
 					if(!$i("i3GEOF.graficointerativo1_script")){
 						var js = i3GEO.configura.locaplic+"/ferramentas/graficointerativo1/dependencias.php";
@@ -189,7 +188,6 @@ i3GEOF.perfil = {
 					if($i("i3GEOFperfilFonteGoogle").checked === true && i3GEO.Interface.ATUAL !== "googlemaps"){
 						i3GEO.navega.dialogo.google(i3GEOF.perfil.listaPontos(true).split(","));
 					}
-
 				}
 			};
 			if($i("i3GEOFperfilFonteGoogle").checked === true){
@@ -206,9 +204,6 @@ i3GEOF.perfil = {
 				i3GEOF.perfil.aguarde.visibility = "visible";
 				i3GEO.php.dadosPerfilRelevo(fim,$i("i3GEOFperfilTemasSel").value,pontos,$i("i3GEOFperfilAmostragem").value,$i("i3GEOFperfilComboItens").value);
 			}
-
-		}
-		catch(e){$i("i3GEOperfilfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.perfil.aguarde.visibility = "hidden";}
 	},
 	/*
 	Function: iniciaGrafico
@@ -291,8 +286,13 @@ i3GEOF.perfil = {
 								"i3GEOFperfilComboItens",
 								i3GEO.temaAtivo,
 								function(retorno){
-									$i("i3GEOFperfilDivComboItens").innerHTML = "<p class=paragrafo >"+$trad('itemValores',i3GEOF.perfil.dicionario)+"</p><div class=styled-select >"+retorno.dados+"</div>";
-								}
+									$i("i3GEOFperfilDivComboItens").innerHTML = retorno.dados;
+								},
+								"",
+								"",
+								"",
+								"",
+								"form-control"
 							);
 						}
 						else
@@ -308,7 +308,10 @@ i3GEOF.perfil = {
 			"",
 			false,
 			"ligados",
-			"display:block"
+			"",
+			false,
+			true,
+			"form-control"
 		);
 	}
 };

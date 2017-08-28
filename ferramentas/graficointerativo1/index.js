@@ -492,14 +492,7 @@ i3GEOF.graficointerativo1 =
 
 			i3GEOF.graficointerativo1.ativaFoco(idjanela);
 			i3GEOF.graficointerativo1.comboTemas(idjanela);
-			b = new YAHOO.widget.Button(idjanela + "i3GEOgraficointerativo1botao1", {
-				onclick : {
-					fn : function() {
-						i3GEOF.graficointerativo1.obterDados(idjanela);
-					}
-				}
-			});
-			b.addClass("rodar");
+
 			if (i3GEOF.graficointerativo1.propJanelas[idjanela].dados != "") {
 				i3GEOF.graficointerativo1.montaTabelaDados(idjanela, i3GEOF.graficointerativo1.propJanelas[idjanela].dados);
 				$i(idjanela + "i3GEOgraficointerativo1guia4").onclick.call();
@@ -596,7 +589,7 @@ i3GEOF.graficointerativo1 =
 						cabecalho,
 						minimiza,
 						mudaTamanhoGrafico,
-						true,
+						false,
 						"",
 						duplica,
 						"nao",

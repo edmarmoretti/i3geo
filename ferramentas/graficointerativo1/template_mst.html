@@ -52,10 +52,10 @@
 		</li>
 	</ul>
 </div>
-<div class='container-fluid customScrollBar' style="height: calc(100% - 39px); overflow: auto;">
+<div class='container-fluid ' style="height: calc(100% - 39px); overflow: auto;">
 
 <!-- Guia com a lista de tipos de graficos -->
-<div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia1obj' style='left: 1px; display: none;'>
+<div class='guiaobj' id='{{{idjanela}}}i3GEOgraficointerativo1guia1obj' style='left: 1px;'>
 	<p class='paragrafo'>
 		<b>{{{escolhatipo}}} :</b>
 	</p>
@@ -187,7 +187,7 @@
 		<label>{{{geracor}}}</label>
 	</p>
 	<p class='paragrafo'>
-		<input id='{{{idjanela}}}i3GEOgraficointerativo1botao1' type='button' value='{{{obterdados}}}' />
+		<input onclick='i3GEOF.graficointerativo1.obterDados("{{{idjanela}}}")' id='{{{idjanela}}}i3GEOgraficointerativo1botao1' type='button' value='{{{obterdados}}}' />
 	</p>
 	<div id='{{{idjanela}}}i3GEOgraficointerativo1Dados'></div>
 	<div class='paragrafo' id='{{{idjanela}}}i3GEOgraficointerativo1AjudaPizza'>{{{seescolher}}}</div>

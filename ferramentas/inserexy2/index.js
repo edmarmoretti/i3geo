@@ -159,7 +159,7 @@ i3GEOF.inserexy = {
 			cabecalho,
 			minimiza,
 			"",
-			false,
+			true,
 			"",
 			"",
 			"",
@@ -278,7 +278,7 @@ i3GEOF.inserexy = {
 			if (retorno.data != undefined){
 				var ins = [],i;
 				for (i=0;i<retorno.data.length; i++)
-				{ins.push("<div style='font-size:12px'>"+retorno.data[i].x+" "+retorno.data[i].y+"</div><br>");}
+				{ins.push("<div class='pontosInseridos' style='font-size:12px'>"+retorno.data[i].x+" "+retorno.data[i].y+"</div><br>");}
 				$i("i3GEOinserexyguia6obj").innerHTML = ins.join("");
 			}
 			else
@@ -338,7 +338,7 @@ i3GEOF.inserexy = {
 			xsv = xsv.replace(regv,".");
 			direcao = i3GEO.calculo.dms2dd(xgv,xmv,xsv);
 			//pega o &uacute;ltimo ponto
-			divs = $i("i3GEOinserexyguia6obj").getElementsByTagName("div");
+			divs = $i("i3GEOinserexyguia6obj").getElementsByClassName("i3GEOinserexyguia6obj");
 			divs = divs[divs.length - 1];
 			divs = divs.innerHTML.split(" ");
 			x = divs[0];
@@ -453,8 +453,9 @@ i3GEOF.inserexy = {
 	<i3GEO.php.insereSHP>
 	*/
 	adiciona: function(xy,fonte){
-		if(i3GEOF.inserexy.aguarde.visibility === "visible")
-		{return;}
+		if(i3GEOF.inserexy.aguarde.visibility === "visible"){
+			return;
+		}
 		var tema,
 			item = "",
 			valoritem = "",
@@ -472,7 +473,7 @@ i3GEOF.inserexy = {
 		n = xyn.length;
 		temp = "";
 		for(i=0;i<n;i = i + 2){
-			temp += "<div style='font-size:12px' >" + xyn[i]+" "+xyn[i+1] + "</div><br>";
+			temp += "<div class='pontosInseridos' style='font-size:12px' >" + xyn[i]+" "+xyn[i+1] + "</div><br>";
 		}
 		$i("i3GEOinserexyguia6obj").innerHTML += temp;
 		if($i("i3GEOinserexyItem") && $i("i3GEOinserexyvalorItem")){
@@ -554,7 +555,7 @@ i3GEOF.inserexy = {
 		{return;}
 		i3GEOF.inserexy.aguarde.visibility = "visible";
 		try{
-			var divs = $i("i3GEOinserexyguia6obj").getElementsByTagName("div"),
+			var divs = $i("i3GEOinserexyguia6obj").getElementsByClassName("pontosInseridos"),
 				n = divs.length,
 				xy = [],
 				cp = new cpaint(),
@@ -562,9 +563,9 @@ i3GEOF.inserexy = {
 				mostra = function(retorno){
 					i3GEOF.inserexy.aguarde.visibility = "hidden";
 					if (retorno.data !== undefined){
-						var ins = "<textarea style=width:470px;height:80px >"+retorno.data[0]+"</textarea><br>";
-						ins += "<textarea style=width:470px;height:80px >"+retorno.data[1]+"</textarea><br>";
-						ins += "<textarea style=width:470px;height:80px >"+retorno.data[2]+"</textarea><br>";
+						var ins = "<textarea class='form-control input-lg' style=height:80px >"+retorno.data[0]+"</textarea><br>";
+						ins += "<textarea class='form-control input-lg' style=height:80px >"+retorno.data[1]+"</textarea><br>";
+						ins += "<textarea class='form-control input-lg' style=height:80px >"+retorno.data[2]+"</textarea><br>";
 						$i("i3GEOinserexywktres").innerHTML = "<p class=paragrafo >"+ins+"</p>";
 					}
 					else
@@ -584,28 +585,26 @@ i3GEOF.inserexy = {
 	Cria um gr&aacute;fico de perfil com base nos dados inseridos
 	*/
 	graficoPerfil: function(){
-		try{
-			var divs = $i("i3GEOinserexyguia6obj").getElementsByTagName("div"),
-				js = i3GEO.configura.locaplic+"/ferramentas/perfil/index.js.php",
-				n = divs.length,
-				x = [],
-				y = [],
-				xy,
-				i;
-			for (i=0;i<n;i++){
-				xy = divs[i].innerHTML.split(" ");
-				x.push(xy[0]);
-				y.push(xy[1]);
-			}
-			if(x.length == 0)
-			{i3GEO.janela.tempoMsg($trad('msgNenhumPontoEncontrado',i3GEOF.inserexy.dicionario));return;}
-			pontosdistobj = {
-				xpt: x,
-				ypt: y
-			};
-			i3GEO.util.scriptTag(js,"i3GEOF.perfil.criaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
-
+		var divs = $i("i3GEOinserexyguia6obj").getElementsByClassName("pontosInseridos"),
+			js = i3GEO.configura.locaplic+"/ferramentas/perfil/dependencias.php",
+			n = divs.length,
+			x = [],
+			y = [],
+			xy,
+			i;
+		for (i=0;i<n;i++){
+			xy = divs[i].innerHTML.split(" ");
+			x.push(xy[0]);
+			y.push(xy[1]);
 		}
-		catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
+		if(x.length == 0){
+			i3GEO.janela.tempoMsg($trad('msgNenhumPontoEncontrado',i3GEOF.inserexy.dicionario));
+			return;
+		}
+		pontosdistobj = {
+			xpt: x,
+			ypt: y
+		};
+		i3GEO.util.scriptTag(js,"i3GEOF.perfil.iniciaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
 	}
 };

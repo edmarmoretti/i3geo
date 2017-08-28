@@ -1,19 +1,31 @@
-<p class='paragrafo'>{{{fonteDadosZ}}}
-<p class='paragrafo'>
-	<input onclick='if(this.checked == true){$i({{{asp}}}i3GEOFperfilTemasSel{{{asp}}}).value = {{{asp}}}{{{asp}}};$i({{{asp}}}i3GEOFperfilDivComboItens{{{asp}}}).innerHTML = {{{asp}}}{{{asp}}};}' style='cursor: pointer' checked type='radio' name='i3GEOFperfilFonte' id='i3GEOFperfilFonteGoogle' />
-	<label style='position:relative;top:-2px;'>Google</label> <br>
-<p class='paragrafo'>{{{ouTemaMapa}}}</p>
-<div class='styled-select' id='i3GEOFperfilTemas'></div>
-<br>
-<div id='i3GEOFperfilDivComboItens'></div>
-<br>
-<br>
-<p class='paragrafo'>{{{numeroPontosLinha}}}</p>
-<div class='i3geoForm i3geoFormIconeEdita'>
-	<input type='text' id='i3GEOFperfilAmostragem' value='20' />
+<div class='container-fluid customScrollBar'>
+	<h5>{{{fonteDadosZ}}}</h5>
+	<div class="radio radio-primary condensed">
+		<label>
+			<input onclick='if(this.checked == true){$i({{{asp}}}i3GEOFperfilTemasSel{{{asp}}}).value = {{{asp}}}{{{asp}}};$i({{{asp}}}i3GEOFperfilDivComboItens{{{asp}}}).innerHTML = {{{asp}}}{{{asp}}};}'
+				type='radio' value="" name='i3GEOFperfilFonte' id='i3GEOFperfilFonteGoogle' />
+			<span class="circle"></span>
+			<span class="check"></span>
+			Google
+		</label>
+	</div>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="">{{{ouTemaMapa}}}</label>
+		<div style="width: 100%;" class="input-group">
+			<div id='i3GEOFperfilTemas'></div>
+		</div>
+	</div>
+	<div style="width: 100%;" class='form-group label-fixed condensed'>
+		<label class="control-label" for="">{{{itemValores}}}</label>
+		<div style="width: 100%;" class="input-group">
+			<div id='i3GEOFperfilDivComboItens'></div>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class="control-label" for="i3GEOFperfilAmostragem">{{{numeroPontosLinha}}}</label>
+		<input class="form-control input-lg" type='text' id='i3GEOFperfilAmostragem' value='20' />
+	</div>
+	<button onclick="i3GEOF.perfil.criaPerfil()" class='btn btn-primary btn-sm btn-raised'>{{{criaGrafico}}}</button>
+
+	<div style='text-align: left' id='i3GEOperfilfim'></div>
 </div>
-<br>
-<p class='paragrafo'>
-	<input id='i3GEOperfilbotao1' type='button' value='{{{criaGrafico}}}' />
-	<br> <br>
-<div style='text-align:left' id='i3GEOperfilfim' ></div>
