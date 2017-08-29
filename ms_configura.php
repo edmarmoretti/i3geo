@@ -673,6 +673,8 @@ Se voce quiser utilizar a conexao default, baseado no SQLITE, mantenha essa vari
 
 O programa PHP que estabelece a conexao deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php e i3geo/admin/php/conexaopostgresql.php para maiores detalhes.
 
+Para criar o banco de dados de administracao utilize http://nome_do_host/i3geo/admin1/ferramentas/criabanco/index.php
+
 Exemplos:
 
 $conexaoadmin = $locaplic."/admin/php/conexaopostgresql.php";
@@ -681,7 +683,7 @@ Tipo:
 {string}
 
 */
-$conexaoadmin = "";//"/var/www/conexaoms.php";
+$conexaoadmin = "";
 /*
 Variable: $esquemaadmin
 

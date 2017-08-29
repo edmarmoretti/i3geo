@@ -9,9 +9,7 @@ include "index.php";
 					<div class="well">
 						<?php
 						$funcao = "";
-						// echo dirname(__FILE__);
-						$esquemaadmin = "";
-						include ("../../../admin/php/admin.php");
+						include ("../../../admin1/php/funcoesAdmin.php");
 
 						// valida o usuario e aplica
 						$exts = get_loaded_extensions ();
@@ -23,6 +21,9 @@ include "index.php";
 								echo "<div class='alert alert-warning'>Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster</div>";
 								exit ();
 							}
+						}
+						if($esquemaadmin != ""){
+							$esquemaadmin = $esquemaadmin.".";
 						}
 						$tabelas = array (
 								// tabelas gerais do sistema de administracao
