@@ -196,16 +196,16 @@ i3GEO.editorOL =
 		//essa configuracao dos botoes afeta apenas o mashup
 		//para a configuração do editor dentro de um mapa normal, veja i3GEO.barraDebotoes.editor.ativaPainel()
 		botoes : {
-			'imprimir': true,
-			'grid': true,
-			'pan' : true,
-			'zoombox' : true,
-			'zoomtot' : true,
-			'zoomin' : true,
-			'zoomout' : true,
-			'distancia' : true,
-			'area' : true,
-			'identifica' : true,
+			'imprimir': false,
+			'grid': false,
+			'pan' : false,
+			'zoombox' : false,
+			'zoomtot' : false,
+			'zoomin' : false,
+			'zoomout' : false,
+			'distancia' : false,
+			'area' : false,
+			'identifica' : false,
 			'linha' : true,
 			'ponto' : true,
 			'poligono' : true,
@@ -214,7 +214,7 @@ i3GEO.editorOL =
 			'listag' : true,
 			'corta' : true,
 			'apaga' : true,
-			'procura' : true,
+			'procura' : false,
 			'selecao' : true,
 			'selecaotudo' : true,
 			'salva' : true,
@@ -224,7 +224,7 @@ i3GEO.editorOL =
 			'tools' : true,
 			'undo' : false,
 			'frente' : false,
-			'legenda' : true,
+			'legenda' : false,
 			'rodadomouse' : true,
 			'novaaba' : false
 		},
@@ -376,7 +376,7 @@ i3GEO.editorOL =
 			//i3GEO.editorOL.criaJanelaBusca();
 			i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
 			if (i3GEO.editorOL.ativalayerswitcher === true) {
-				i3GEO.editorOL.ativaLayerSwitcher();
+				//i3GEO.editorOL.ativaLayerSwitcher();
 			}
 			if (i3GEO.editorOL.ativarodadomouse === false) {
 				i3GEO.editorOL.desativaRodaDoMouse();
@@ -1732,40 +1732,40 @@ i3GEO.editorOL =
 			i3GEOpanelEditor.className = "olControlEditingToolbar1 noprint";
 			//cria os icones
 			if (botoes.imprimir === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoImprimir());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoImprimir());
 			}
 			if (botoes.grid === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoGrid());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoGrid());
 			}
 			if (botoes.novaaba === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoNovaaba());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoNovaaba());
 			}
 			if (botoes.procura === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoProcura());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoProcura());
 			}
 			if (botoes.pan === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoPan());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoPan());
 			}
 			if (botoes.zoombox === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoZoomBox());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoZoomBox());
 			}
 			if (botoes.zoomtot === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoZoomTot());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoZoomTot());
 			}
 			if (botoes.zoomin === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoZoomIn());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoZoomIn());
 			}
 			if (botoes.zoomout === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoZoomOut());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoZoomOut());
 			}
 			if (botoes.legenda === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoLegenda());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoLegenda());
 			}
 			if (botoes.distancia === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoDistancia());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoDistancia());
 			}
 			if (botoes.area === true) {
-				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoArea());
+				//i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoArea());
 			}
 			if (botoes.identifica === true) {
 				i3GEOpanelEditor.appendChild(i3GEO.editorOL.botaoIdentifica());

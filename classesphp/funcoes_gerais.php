@@ -2179,23 +2179,20 @@ Retorno:
 
 {objeto} layer modificado
 */
-function autoClasses(&$nlayer,$mapa,$locaplic=null)
-{
-	$postgis_mapa = "";
-	$substituicon = "nao";
-	include(dirname(__FILE__)."/../ms_configura.php");
-	if ($nlayer->connectiontype == MS_POSTGIS)
-	{
-		if ($nlayer->connection == " ")
-		{
-			$nlayer->set("connection",$postgis_mapa);
-			$substituicon = "sim";
+function autoClasses(&$nlayer,$mapa,$locaplic=null){
+	if($nlayer->getmetadata("classesitem") != ""){
+		$postgis_mapa = "";
+		$substituicon = "nao";
+		include(dirname(__FILE__)."/../ms_configura.php");
+		if ($nlayer->connectiontype == MS_POSTGIS){
+			if ($nlayer->connection == " "){
+				$nlayer->set("connection",$postgis_mapa);
+				$substituicon = "sim";
+			}
 		}
-	}
-	//
-	//gera classes automaticamente (temas vetoriais)
-	if($nlayer->getmetadata("classesitem") != "")
-	{
+		//
+		//gera classes automaticamente (temas vetoriais)
+
 		$itemnome = $nlayer->getmetadata("classesnome");
 		$itemid = $nlayer->getmetadata("classesitem");
 		$itemcor = $nlayer->getmetadata("classescor");
@@ -2208,36 +2205,31 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 		$prjMapa = $mapa->getProjection();
 		$prjTema = $nlayer->getProjection();
 		$ret = $nlayer->getmetadata("extensao");
-		if ($ret == "")
-		{
+		if ($ret == ""){
 			$ret = $nlayer->getextent();
 			//reprojeta o retangulo
-			if (($prjTema != "") && ($prjMapa != $prjTema))
-			{
+			if (($prjTema != "") && ($prjMapa != $prjTema))	{
 				$projInObj = ms_newprojectionobj($prjTema);
 				$projOutObj = ms_newprojectionobj($prjMapa);
 				$ret->project($projInObj, $projOutObj);
 			}
 		}
-		else
-		{
+		else{
 			$temp = explode(" ",$ret);
 			$ret = ms_newRectObj();
 			$ret->setextent($temp[0],$temp[1],$temp[2],$temp[3]);
 		}
 		//
 		$sopen = $nlayer->open();
-		if($sopen == MS_FAILURE){return "erro";}
-
+		if($sopen == MS_FAILURE){
+			return "erro";
+		}
 		$status = $nlayer->whichShapes($ret);
 		$parametrosClasses = array();
-		if ($status == 0)
-		{
-			while ($shape = $nlayer->nextShape())
-			{
+		if ($status == 0){
+			while ($shape = $nlayer->nextShape()){
 				$id = trim($shape->values[$itemid]);
-				if (!$parametrosClasses[$id])
-				{
+				if (!$parametrosClasses[$id]){
 					$nome = "";
 					if($itemnome != "")
 					$nome = trim($shape->values[$itemnome]);
@@ -2257,19 +2249,16 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 			}
 			$fechou = $nlayer->close();
 			//echo "<pre>";var_dump($parametrosClasses);
-			if (count($parametrosClasses) > 0)
-			{
+			if (count($parametrosClasses) > 0){
 				$ids = array_keys($parametrosClasses);
-				for($i=0;$i < count($parametrosClasses);++$i)
-				{
+				for($i=0;$i < count($parametrosClasses);++$i){
 					$p = $parametrosClasses[$ids[$i]];
 					//echo "<pre>";var_dump($p);
 					$nclasse = ms_newClassObj($nlayer,$classeoriginal);
 					if($p["nome"] != "")
 					$nclasse->set("name",$p["nome"]);
 					$estilo = $nclasse->getstyle(0);
-					if($p["cor"] != "")
-					{
+					if($p["cor"] != ""){
 						$cor = $p["cor"];
 						$ncor = $estilo->color;
 						if($ncor == "")
@@ -2286,11 +2275,12 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 				$classeoriginal->set("status",MS_DELETE);
 			}
 		}
-		if($substituicon == "sim"){$nlayer->set("connection"," ");}
+		if($substituicon == "sim"){
+			$nlayer->set("connection"," ");
+		}
 	}
 	$pf = $nlayer->getmetadata("palletefile");
-	if($pf != "")
-	{
+	if($pf != ""){
 		if(!file_exists($pf)){return;}
 		$ps = $nlayer->getmetadata("palletesteps");
 		if ($ps == "") $ps=8;
@@ -2320,14 +2310,12 @@ function autoClasses(&$nlayer,$mapa,$locaplic=null)
 			}
 		}
 		fclose($abre);
-		foreach($rules as $rule)
-		{
+		foreach($rules as $rule){
 			$delta = ceil(($rule["v1"]-$rule["v0"])/$ps);
 			$legenda=true;
-			for($value=$rule["v0"]; $value<$rule["v1"]; $value+=$delta)
-			{
-					$class = ms_newClassObj($nlayer);
-					$style = ms_newStyleObj($class);
+			for($value=$rule["v0"]; $value<$rule["v1"]; $value+=$delta){
+				$class = ms_newClassObj($nlayer);
+				$style = ms_newStyleObj($class);
 				if ($legenda)
 				{
 					$class->set(name,round($value,0));

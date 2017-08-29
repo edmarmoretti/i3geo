@@ -37,6 +37,12 @@ switch (strtoupper($funcao))
 		$layer->setmetadata("classestamanho",$_GET["classestamanho"]);
 		$layer->setmetadata("palletefile",$_GET["palletefile"]);
 		$layer->setmetadata("palletestep",$_GET["palletestep"]);
+		$layer->setmetadata("cache","nao");
+		$layer->setmetadata("TILES","nao");
+
+		autoClasses($layer,$map,$locaplic);
+		$layer->setmetadata("classesnome","");
+		$layer->setmetadata("palletefile","");
 		$map->save($map_file);
 		$retorno = "ok";
 	break;

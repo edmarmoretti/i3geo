@@ -203,7 +203,7 @@ $versao = versaoMS();
 			$l->set("maxscaledenom",$l->maxscaledenom * 100000);
 			$l->set("minscaledenom",$l->minscaledenom * 100000);
 			$l->set("symbolscaledenom",$l->symbolscaledenom * 100000);
-			if ($l->getmetadata("classesnome") != ""){
+			if ($l->getmetadata("classesnome") != "" || $l->getmetadata("palletefile") != ""){
 				autoClasses($l,$mapa);
 			}
 			if(!empty($postgis_mapa)){

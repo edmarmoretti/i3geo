@@ -1553,7 +1553,9 @@ i3GEO.Interface =
 							});
 						}
 					}
+					source.refresh();
 				}
+
 				if (retorno === "") {
 					return;
 				}

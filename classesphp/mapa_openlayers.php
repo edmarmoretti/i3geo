@@ -207,9 +207,10 @@ $mapa = ms_newMapObj($map_fileX);
 			}
 		}
 		if($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != ""){
-			if ($l->getmetadata("classesnome") != ""){
-				if(!function_exists("autoClasses"))
-				{include_once("funcoes_gerais.php");}
+			if ($l->getmetadata("classesnome") != "" || $l->getmetadata("palletefile") != ""){
+				if(!function_exists("autoClasses")){
+					include_once("funcoes_gerais.php");
+				}
 				autoClasses($l,$mapa);
 			}
 			//
@@ -330,8 +331,9 @@ $o->set("imagemode",MS_IMAGEMODE_RGBA);
 //
 //se o layer nao for do tipo fundo
 //
-if($_GET["tipolayer"] != "fundo")
-{$o->set("transparent",MS_TRUE);}
+if($_GET["tipolayer"] != "fundo"){
+	$o->set("transparent",MS_TRUE);
+}
 
 //
 //se o layer foi marcado para corte altera os parametros para ampliar o mapa

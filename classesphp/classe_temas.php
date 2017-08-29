@@ -1204,6 +1204,15 @@ Retorna o SLD correspondente a legenda do tema.
 			$this->layer = $mapa->getlayerbyname($this->tema);
 		}
 		$this->layer->set("status",MS_DEFAULT);
+		if($this->layer->type != 3 && $this->layer->type != 4){
+			$nclass = $this->layer->numclasses;
+			for($j=0;$j<$nclass;$j++){
+				$classe = $this->layer->getclass($j);
+				if($classe->title === ""){
+					$classe->title = $classe->name;
+				}
+			}
+		}
 		return $this->layer->generateSLD();
 	}
 /*
