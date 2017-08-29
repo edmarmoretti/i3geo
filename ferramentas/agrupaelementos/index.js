@@ -252,7 +252,7 @@ i3GEOF.agrupaElementos = {
 			"",
 			"",
 			"",
-			"form-control comboTema"
+			"form-control"
 		);
 	}
 };

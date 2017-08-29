@@ -294,6 +294,7 @@ i3GEO.janela =
 					dragOnly : true,
 					keylisteners : null
 				});
+			}
 				if (YAHOO.util.Resize && dimensionavel == true) {
 					var resize = new YAHOO.util.Resize(id, {
 						handles : [
@@ -322,7 +323,7 @@ i3GEO.janela =
 					}
 					resize.getProxyEl().style.height = "0px";
 				}
-			}
+
 			if (nx !== "" && nx !== "center") {
 				janela.moveTo(nx, ny + 50);
 			}
