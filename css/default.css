@@ -86,6 +86,17 @@ Botoes material
 	color:white;
 	background-color: #477596;
 }
+.form-group label {
+	color: white;
+}
+
+.form-group.label-static label.control-label {
+    top: -50px;
+    left: 0;
+    font-size: 13px;
+    line-height: 1.07142857;
+}
+
 .form-control.upload {
 	font-size: 12px;
 	color:inherit;
@@ -723,6 +734,7 @@ Configuracoes especificas dos elementos que ficam no rodape
     top: 5px;
     /*margin-top: -30px;*/
 }
+
 .i3GeoTituloJanelaBs {
 	opacity: 1.0;
 	position: absolute;
@@ -730,13 +742,14 @@ Configuracoes especificas dos elementos que ficam no rodape
 	right: 65px;
 	color: #008579;
 }
+
 .i3GeoTituloJanelaBsNolink {
 	opacity: 1.0;
 	position: absolute;
 	margin: 5px;
 	font-size: 14px;
 	font-weight: initial;
-	color: #008579 !Important;
+	color: #00D53D !Important;
 }
 
 .i3GeoIconeJanela{
