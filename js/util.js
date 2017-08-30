@@ -1442,7 +1442,7 @@ i3GEO.util =
 								comboTemas += "<option value=" + tema + " >" + nome + "</option>";
 							}
 						}
-						comboTemas += "</select>";
+						comboTemas += "</select><span class='material-icons iconeComboTemas'>playlist_add_check</span>";
 						temp = {
 								dados : comboTemas,
 								tipo : "dados"

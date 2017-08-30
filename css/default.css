@@ -3,12 +3,13 @@ Para a barra de rolagem
 */
 .customScrollBar {
 	height: 100%;
-	overflow: auto;
+	overflow: hidden;
 	padding-right: 5px;
 }
 .customScrollBarXY {
 	height: calc(100% - 39px);
-	overflow: auto;
+	overflow: hidden;
+	padding-right: 5px;
 }
 .customScrollBar .mCSB_container {
 	max-width: 100%;
@@ -47,6 +48,7 @@ Utilizado no elemento select
 	top: 10px;
 	right: 0px;
 	bottom: 0px;
+	z-index: 10;
 }
 /*
 tooltip dos botoes da guia movel
