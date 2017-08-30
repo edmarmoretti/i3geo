@@ -1,4 +1,10 @@
 /*
+Barra de botoes de navegacao
+*/
+.ol-control button {
+	font-size: 1.5em;
+}
+/*
 Para a barra de rolagem
 */
 .customScrollBar {
@@ -91,7 +97,7 @@ Botoes material
 }
 
 .form-group.label-static label.control-label {
-    top: -50px;
+    top: -40px;
     left: 0;
     font-size: 13px;
     line-height: 1.07142857;
