@@ -1,3 +1,10 @@
+.ol-attribution li {
+    display: block;
+    list-style: none;
+    line-height: inherit;
+    text-align: left;
+    padding: 5px;
+}
 /*
 Barra de botoes de navegacao
 */

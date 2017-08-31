@@ -31,7 +31,7 @@ i3GEO.janela.ativaAlerta();
 								url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
 								attributions : [ new ol.Attribution(
 										{
-											html : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
+											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
 										}) ]
 							})
 				});
@@ -46,7 +46,7 @@ i3GEO.janela.ativaAlerta();
 								url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
 								attributions : [ new ol.Attribution(
 										{
-											html : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
+											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
 										}) ]
 							})
 				});
@@ -61,7 +61,7 @@ i3GEO.janela.ativaAlerta();
 								url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
 								attributions : [ new ol.Attribution(
 										{
-											html : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
+											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
 										}) ]
 							})
 				});
@@ -76,7 +76,7 @@ i3GEO.janela.ativaAlerta();
 								url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
 								attributions : [ new ol.Attribution(
 										{
-											html : 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
+											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
 										}) ]
 							})
 				});
@@ -114,7 +114,7 @@ i3GEO.janela.ativaAlerta();
 								},
 								attributions : [ new ol.Attribution(
 										{
-											html : '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
+											html : '&copy; <a  href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
 										}) ]
 							})
 				});
@@ -122,7 +122,7 @@ i3GEO.janela.ativaAlerta();
 		                                                bra, tms ];
 	}
 	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === true){
-			var attribOSMData = 'Map Data: &copy; <a href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
+			var attribOSMData = 'Map Data: &copy; <a  href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
 			var attribMapQuestAerial = 'Map Data: &copy; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
 			var attribStamen = 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA';
 
