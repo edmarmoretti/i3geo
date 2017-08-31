@@ -796,8 +796,7 @@ i3GEO.janela =
                 },
                 constraintoviewport : true,
                 buttons : b,
-                icon : YAHOO.widget.SimpleDialog.ICON_HELP,
-                text : "<p class=paragrafo >" + pergunta
+                text : pergunta
             });
             YAHOO.i3GEO.janela.managerAguarde.register(janela);
             janela.setHeader(" ");
@@ -826,7 +825,7 @@ i3GEO.janela =
             if (!valorDefault) {
                 valorDefault = "";
             }
-            var i = "<div class='form-group label-fixed condensed' ><label class='control-label' for='i3GEOjanelaprompt'>"+pergunta+"</label><input class='form-control input-lg' type='text' id='i3GEOjanelaprompt' value='"+ valorDefault +"' /></div>";
+            var i = "<div class='form-group label-fixed condensed' ><label class='control-label' for='i3GEOjanelaprompt'></label><input placeholder='"+pergunta+"' class='form-control input-lg' type='text' id='i3GEOjanelaprompt' value='"+ valorDefault +"' /></div>";
 
             i3GEO.janela.confirma(i, "", "", "", funcaoOk);
         },
