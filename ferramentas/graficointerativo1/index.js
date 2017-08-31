@@ -1331,13 +1331,12 @@ i3GEOF.graficointerativo1 =
 			ntrs = trs.length;
 
 			function sortNumber(a, b) {
-				return a - b;
+				return a.split("@$")[0]*1 - b.split("@$")[0]*1;;
 			}
 			for (t = 1; t < ntrs; t++) {
 				temp = trs[t].getElementsByTagName("input");
 				if (temp) {
-					psort.push(temp[cid].value);
-					chaves[temp[cid].value] = t;
+					psort.push(temp[cid].value + "@$" + t);
 					if (temp[cid].value * 1) {
 						numero = true;
 					}
@@ -1352,7 +1351,7 @@ i3GEOF.graficointerativo1 =
 			ins = "<tr>" + trs[0].innerHTML + "</tr>";
 			ntrs = psort.length;
 			for (p = 0; p < ntrs; p++) {
-				e = chaves[psort[p]];
+				e = psort[p].split("@$")[1]*1;
 				if (trs[e] !== undefined) {
 					ins += "<tr>" + trs[e].innerHTML + "</tr>";
 				}

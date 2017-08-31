@@ -2480,9 +2480,9 @@ g_traducao =
 		],
 		"selum" : [
 			{
-				pt : "Selecione pelo menos um elemento",
-				en : "Select at least one element",
-				es : "Seleccione al menos un elemento"
+				pt : "Selecione pelo um elemento",
+				en : "Select one element",
+				es : "Seleccione un elemento"
 			}
 		],
 		"atrib" : [
