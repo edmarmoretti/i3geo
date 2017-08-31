@@ -2480,7 +2480,7 @@ g_traducao =
 		],
 		"selum" : [
 			{
-				pt : "Selecione pelo um elemento",
+				pt : "Selecione uma ou mais geometrias",
 				en : "Select one element",
 				es : "Seleccione un elemento"
 			}
