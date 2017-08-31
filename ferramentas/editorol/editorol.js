@@ -2041,6 +2041,7 @@ i3GEO.editorOL =
 					iframe : true,
 					width : "380px",
 					height : "300px",
+					overflow: "auto",
 					visible : false,
 					draggable : true,
 					close : true
@@ -2061,7 +2062,7 @@ i3GEO.editorOL =
 				YAHOO.editorOL.listaGeometrias.panel.render(document.body);
 			}
 			var id, temp, geos = i3GEO.desenho.layergrafico.getSource().getFeatures(), n = geos.length, ins = "";
-			ins += '<div class="container-fluid" style="height:100%;overflow:auto;">';
+			ins += '<div class="container-fluid" style="height:210px;overflow:auto">';
 			while (n > 0) {
 				n -= 1;
 				id = geos[n].getId();
@@ -2074,7 +2075,7 @@ i3GEO.editorOL =
 			}
 			ins += "</div>";
 			if (geos.length === 0) {
-				ins = '<div class="container-fluid" style="height:100%;overflow:auto;">' + $trad("meneditor2") + "</div>";
+				ins = '<div class="container-fluid" >' + $trad("meneditor2") + "</div>";
 			}
 			YAHOO.editorOL.listaGeometrias.panel.setBody(ins);
 			YAHOO.editorOL.listaGeometrias.panel.show();
