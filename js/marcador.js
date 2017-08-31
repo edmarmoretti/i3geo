@@ -39,7 +39,7 @@ i3GEO.marcador =
 		IDONDE: "",
 		TEMPLATE: "",
 		config: {
-			"template": "templates/ferramentasLink.html"
+			"template": "templates/ferramentasSend.html"
 		},
 		carregaTemplates: function(){
 			$.get(i3GEO.marcador.config.template, function(template) {
@@ -62,7 +62,7 @@ i3GEO.marcador =
 						"",
 						"",
 						"",
-						"<div class='i3GeoTituloJanela'>" + $trad("x79") + "</div>",
+						"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x79") + "</span></div>",
 						"i3GEOmarcador",
 						false,
 						"hd",
@@ -70,7 +70,10 @@ i3GEO.marcador =
 						"",
 						"",
 						true,
-						i3GEO.configura.locaplic + "/imagens/oxygen/16x16/games-config-custom.png"
+		                "",
+		                "",
+		                "",
+		                ""
 					);
 				i3GEO.marcador.IDONDE = janela[2].id;
 				i3GEO.marcador.redesenha();
@@ -108,7 +111,7 @@ i3GEO.marcador =
 				"{{#data}}" + i3GEO.template.marcador + "{{/data}}",
 				{"data":i3GEO.marcador.itensMenu()}
 			);
-			$("#" + i3GEO.marcador.IDONDE).html(t);
+			$("#" + i3GEO.marcador.IDONDE).html("<div class='container-fluid'>" + t + "</div>");
 		},
 		exporta : function() {
 			var c = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), texto;
