@@ -57,6 +57,8 @@ i3GEOF.atalhoscamada =
 		dicionario["idjanela"] = idjanela;
 		dicionario["idjanelaA"] = '"'+idjanela+'"';
 		dicionario["tema"] = tema;
+		dicionario["nomeCamada"] = ltema.tema;
+		dicionario["opaCamada"] = ltema.transparency;
 
 		//decide se o botao deve aparecer ou nao
 		dicionario["procurarHidden"] = (vetor == true) ? "":"hidden";

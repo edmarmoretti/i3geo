@@ -25,7 +25,7 @@ i3GEOF.atalhoscamada.dicionario = {
   	],
 	"mudanome" : [
 		{
-			pt : "Muda o nome atual do tema. Utilize para melhorar a legenda do mapa.",
+			pt : "Muda o nome da camada",
 			en : "Rename layer. Use it for make a better legend of the map",
 			es : "Renombrar el nombre actual del tema. Utilice para mejorar la leyenda del mapa.",
 			it : "Cambia il nome del tema corrente. Utilizzare per migliorare la legenda della mappa."
@@ -33,7 +33,7 @@ i3GEOF.atalhoscamada.dicionario = {
 	],
 	"copia" : [
 		{
-			pt : "c&oacute;pia da camada",
+			pt : "C&oacute;pia da camada",
 			en : "",
 			es : "Crea una copia de la capa",
 			it : ""

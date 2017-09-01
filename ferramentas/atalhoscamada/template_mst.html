@@ -2,7 +2,7 @@
 	<div class="form-group label-static" >
 		<label class="control-label">{{{opacidade}}}</label>
 		<form onsubmit='i3GEOF.atalhoscamada.mudaOpacidade(this,{{{idjanelaA}}});return false;'>
-			<input class="form-control input-lg" type='text' value='' />
+			<input class="form-control input-lg" type='text' value='{{{opaCamada}}}' />
 		</form>
 	</div>
 
@@ -17,7 +17,7 @@
 	<div class="form-group label-static" >
 		<label class="control-label">{{{mudanome}}}</label>
 		<form onsubmit='i3GEOF.atalhoscamada.mudaNome(this,{{{idjanelaA}}});return false;'>
-			<input class="form-control input-lg" type='text' value='' />
+			<input class="form-control input-lg" type='text' value='{{{nomeCamada}}}' />
 		</form>
 	</div>
 	<a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.procuraratrib('{{tema}}')" class='{{procurarHidden}} btn btn-primary btn-lg btn-block btn-raised'>{{{procurar}}}</a>
