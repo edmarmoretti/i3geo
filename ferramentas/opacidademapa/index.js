@@ -171,8 +171,9 @@ i3GEOF.opacidademapa = {
 		);
 		divid = janela[2].id;
 		i3GEOF.opacidademapa.janela = janela[0];
-		if(mx != undefined)
-		{janela[0].moveTo(mx,my);}
+		if(mx != undefined){
+		    janela[0].moveTo(mx,my);
+		}
 		$i("i3GEOF.opacidademapa_corpo").style.backgroundColor = "white";
 		$i("i3GEOF.opacidademapa_corpo").style.textAlign = "left";
 		i3GEOF.opacidademapa.aguarde = $i("i3GEOF.opacidademapa_imagemCabecalho").style;
@@ -181,13 +182,22 @@ i3GEOF.opacidademapa = {
 	/*
 	Function: criaslide
 
-	Cria a barra deslizante com base em YAHOO.widget.Slider
+	Cria a barra deslizante
 	*/
 	criaslide: function(){
-		i3GEOF.opacidademapa.slider = YAHOO.widget.Slider.getHorizSlider($i("slider-bg"),$i("slider-thumb"), 0, 300, 0);
-		i3GEOF.opacidademapa.slider.setValue(300,false);
-		i3GEOF.opacidademapa.slider.subscribe("change", function(offsetFromStart) {
-			i3GEO.Interface.aplicaOpacidade(offsetFromStart / 300,i3GEOF.opacidademapa.tema);
-		});
+	    var opacidade = 1,
+	        s = $i("i3GEOFopacidademapaSlide");
+
+	    if(i3GEOF.opacidademapa.tema != ""){
+    	    if(i3GEO.Interface.ATUAL == "openlayers"){
+    	        opacidade = i3geoOL.getLayersByName(i3GEOF.opacidademapa.tema)[0].getOpacity();
+    	    } else {
+                opacidade = $(i3GEO.Interface.googlemaps.retornaDivLayer(camada.name)).css("opacity");
+    	    }
+	    }
+	    s.value = opacidade;
+	    s.onchange = function(e){
+	        i3GEO.Interface.aplicaOpacidade(e.target.value,i3GEOF.opacidademapa.tema);
+	    };
 	}
 };

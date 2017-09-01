@@ -882,49 +882,6 @@ i3GEO.janela =
             janela.show();
             return janela;
         },
-        slider : function(funcao, inicial) {
-            var scaleFactor, bottomConstraint, topConstraint, janela, novoel, Event, slider = "", bg, thumb;
-            janela = i3GEO.janela.cria(230, 200, "", "", "", "<div class='i3GeoTituloJanela'>"+$trad("t20")+"</div>", "opacidadeG");
-            novoel = document.createElement("div");
-            novoel.id = "slider-bg";
-            novoel.tabindex = "-1";
-            novoel.innerHTML =
-                '<div style="cursor:default;position:absolute;top:4px" id="slider-thumb"><img src="' + i3GEO.configura.locaplic
-                + '/imagens/thumb-n.gif"></div>';
-            janela[2].appendChild(novoel);
-            Event = YAHOO.util.Event;
-            bg = "slider-bg";
-            thumb = "slider-thumb";
-            novoel.style.position = "relative";
-            novoel.style.background = 'url(' + i3GEO.configura.locaplic + '/imagens/bg-fader.gif) 5px 0 no-repeat';
-            novoel.style.height = "28px";
-            novoel.style.width = "228px";
-            // The slider can move 0 pixels up
-            topConstraint = 0;
-            // The slider can move 200 pixels down
-            bottomConstraint = 200;
-            // Custom scale factor for converting the pixel offset into a real
-            // value
-            scaleFactor = 1;
-            // The amount the slider moves when the value is changed with the
-            // arrow
-            // keys
-            Event.onDOMReady(function() {
-                slider = YAHOO.widget.Slider.getHorizSlider(bg, thumb, topConstraint, bottomConstraint, 20);
-                slider.setValue(parseInt(inicial, 10));
-                slider.getRealValue = function() {
-                    return Math.round(this.getValue() * scaleFactor);
-                };
-                slider.subscribe("slideEnd", function(offsetFromStart) {
-                    var actualValue = slider.getRealValue();
-                    eval(funcao + "(" + actualValue + ")");
-                });
-            });
-            // Use setValue to reset the value to white:
-            Event.on("putval", "click", function(e) {
-                slider.setValue(100, false); // false here means to animate if possible
-            });
-        },
         /**
          * Adiciona no cabe&ccedil;alho da janela um combo com a lista de temas para janelas abertas por ferramentas
          *
