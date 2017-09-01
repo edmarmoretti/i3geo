@@ -1114,6 +1114,7 @@ bd .i3geoFormIconeEdita {
     padding-left: 10px;
     text-align: left;
     border: 0px;
+    overflow: hidden;
 }
 .yui-skin-sam .yui-panel .hd.i3geo6 {
 	background-color: #F2F2F2;
