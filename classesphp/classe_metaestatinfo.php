@@ -219,7 +219,6 @@ class MetaestatInfo{
 		//
 		//registros da medida da variavel
 		$dados = $this->listaMedidaVariavel("",$id_medida_variavel);
-
 		if(!empty($dados["filtro"])){
 			if($filtro == ""){
 				$filtro = $dados["filtro"];
@@ -252,6 +251,10 @@ class MetaestatInfo{
 		}
 		else{
 			$dadosgeo = $this->listaTipoRegiao($dados["codigo_tipo_regiao"]);
+		}
+		if(empty($dadosgeo)){
+			echo "Erro ao obter os dados do tipo de regiao";
+			exit;
 		}
 		if($tipolayer != "point"){
 			$colunageo = $dadosgeo["colunageo"];

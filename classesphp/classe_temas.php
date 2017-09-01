@@ -690,18 +690,21 @@ $valor - Novo nome.
 			$c = $ll->getclass($i);
 			$e = $c->getstyle(0);
 			$cor = $e->outlinecolor;
-			if( $c->getmetadata("CORORIGINAL") == "" && $cor == -1){
+			if( $c->getmetadata("CORORIGINAL") == "" && $cor->red == -1){
 				$cor->setrgb(255,255,255);
-			}
-			$hex = $cor->red.",".$cor->green.",".$cor->blue;
-			if( $c->getmetadata("CORORIGINAL") == ""){
+				$hex = $cor->red.",".$cor->green.",".$cor->blue;
 				$c->setmetadata("CORORIGINAL",$hex);
-			}
-			if($e->outlinecolor->red == -1){
-				$hex = explode(",",$c->getmetadata("CORORIGINAL"));
-				$cor->setRgb($hex[0],$hex[1],$hex[2]);
 			} else {
-				$cor->setrgb(-1,-1,-1);
+				$hex = $cor->red.",".$cor->green.",".$cor->blue;
+				if( $c->getmetadata("CORORIGINAL") == ""){
+					$c->setmetadata("CORORIGINAL",$hex);
+				}
+				if($e->outlinecolor->red == -1){
+					$hex = explode(",",$c->getmetadata("CORORIGINAL"));
+					$cor->setRgb($hex[0],$hex[1],$hex[2]);
+				} else {
+					$cor->setrgb(-1,-1,-1);
+				}
 			}
 		}
 		return ("ok");
