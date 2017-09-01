@@ -668,12 +668,15 @@ $valor - Novo nome.
 		$valor = str_replace("|",";",$valor);
 		$valor = html_entity_decode($valor);
 
-		foreach ($this->grupo as $lg)
-		{
+		foreach ($this->grupo as $lg){
 			$ll = $this->mapa->getlayerbyname($lg);
 			$meta = $ll->getmetadata("tema");
-			if (($meta != "") && ($meta != "NAO"))
-			{$ll->setmetadata("tema",$valor);}
+			if (($meta != "") && ($meta != "NAO")){
+				if (mb_detect_encoding ( $valor, 'UTF-8, ISO-8859-1' ) == "UTF-8") {
+					$valor = utf8_decode ( $valor );
+				}
+				$ll->setmetadata("tema",$valor);
+			}
 		}
 		return ("ok");
 	}
