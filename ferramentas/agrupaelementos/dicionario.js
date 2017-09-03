@@ -2,7 +2,7 @@
 i3GEOF.agrupaElementos.dicionario = {
 	'descricao' : [ {
 		pt : "Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; gerando um pol&iacute;gono para cada grupo (pol&iacute;gonos convexos).",
-		en : "",
+		en : "This tool transforms several selected features of a theme into a single feature, generating a polygon for each group (convex polygons).",
 		es : "Esta herramienta transforma varios elementos seleccionados de un tema en un &uacute;nico generando un pol&iacute;gono para cada grupo (pol&iacute;gonos convexos)."
 	} ],
 	'descricao2' : [ {
