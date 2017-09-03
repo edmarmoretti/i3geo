@@ -174,7 +174,7 @@ i3GEOF.area =
 					var m = i3GEOF.area.openlayers,
 						sketch = evt.feature;
 					m.estilo = sketch.getStyle();
-					m.numpontos = 1;
+					m.numpontos = 2;
 					m.featureListener = sketch.getGeometry().on('change', function(evt) {
 						var ponto,
 							geom = evt.target,
@@ -349,7 +349,7 @@ i3GEOF.area =
 			 * Mostra o valor do trecho entre o ultimo ponto clicado e a posicao do mouse
 			 */
 			mostraParcial : function(trecho, per, area, direcao) {
-				var mostra = $i("mostraarea_calculo_parcial"), texto;
+			    var mostra = $i("mostraarea_calculo_parcial"), texto;
 				if (mostra) {
 					texto =
 						"parcial <br>" + $trad("d21at")
