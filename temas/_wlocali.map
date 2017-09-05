@@ -4,41 +4,39 @@ MAP
   LAYER
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\locali.shp"
+    FILTER (([ANOCRIA] = subsano))
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "LTEMPOITEMIMAGEM"	""
+      "cache"	"nao"
       "TIP"	"TIPO,ANOCRIA,NOMELOC"
-      "LTEMPOITEMDESCRICAO"	"TIPO"
+      "olopacity"	""
       "CLASSE"	"SIM"
-      "palletestep"	""
+      "LTEMPOITEMDESCRICAO"	"TIPO"
       "LTEMPOITEMINICIO"	"ANOCRIA"
-      "temporizador"	""
-      "LTEMPOITEMTIP"	"ANOCRIA"
       "permitekmz"	"sim"
-      "description_template"	""
+      "LTEMPOITEMTIP"	"ANOCRIA"
+      "gmopacity"	""
+      "gmstatus"	""
       "LTEMPOITEMTITULO"	"NOMELOC"
-      "iconetema"	""
-      "LTEMPOITEMLINK"	""
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "palletefile"	""
-      "LTEMPOFORMATODATA"	"iso8601"
+      "arquivotemaoriginal"	""
+      "olstatus"	""
+      "nomeoriginal"	""
       "permitedownload"	"sim"
-      "LTEMPOITEMICONE"	""
-      "permitecomentario"	""
-      "metaestat"	""
+      "LTEMPOFORMATODATA"	"iso8601"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
       "itembuscarapida"	"NOMELOC"
-      "arquivokmz"	""
-      "arquivodownload"	""
-      "transitioneffect"	"NAO"
-      "permiteogc"	"sim"
       "permitekml"	"sim"
+      "permiteogc"	"sim"
+      "transitioneffect"	"NAO"
       "TEMA"	"Localidades (usar com timeline)"
+      "identifica"	"sim"
       "LTEMPOCONVENCODE"	"SIM"
-      "editorsql"	""
-      "legendaimg"	""
-      "LTEMPOITEMFIM"	""
+      "PLUGINI3GEO"	'{"plugin":"parametrossql","ativo":"sim","parametros":[{"titulo" : "Ano de criação","chave" : "subsano","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "xxx","chave" : "xxx","tipo" : "input","valores" : "","prog" : "aplicmap/dados/listaano.php"},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""},{"titulo" : "","chave" : "","tipo" : "input","valores" : "","prog" : ""}]}'
+
     END # METADATA
     NAME "_wlocali"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
     STATUS DEFAULT
     TEMPLATE "none.htm"
     TILEITEM "location"
@@ -54,6 +52,7 @@ MAP
         SIZE 4
         SYMBOL "ponto"
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
       NAME "Cidade"
@@ -65,6 +64,7 @@ MAP
         SIZE 6
         SYMBOL "ponto"
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
       NAME "Capital"
@@ -76,6 +76,7 @@ MAP
         SIZE 6
         SYMBOL "capital"
       END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 

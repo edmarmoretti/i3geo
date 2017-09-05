@@ -106,7 +106,7 @@ i3GEOF.parametrossql = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/
 	iniciaJanelaFlutuante: function(camada){
-		//verifica se deve ser aberto o formulario
+        //verifica se deve ser aberto o formulario
 		if(camada.plugini3geo.ativo != undefined && camada.plugini3geo.ativo === "nao"){
 			i3GEOF.parametrossql.iniciaDefault(camada);
 		}
