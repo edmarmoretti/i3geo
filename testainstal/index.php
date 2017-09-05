@@ -102,7 +102,7 @@ include "../init/head.php";
 
 		if(empty($_POST["senha"]) || empty($_POST["usuario"])){
 			//opcoes de criacao de pastas
-			if (strtoupper(substr(PHP_OS, 0, 3) != 'WIN')){
+			//if (strtoupper(substr(PHP_OS, 0, 3) != 'WIN')){
 
 				$d = dirname(dirname(__FILE__));
 echo <<<HTML
@@ -145,7 +145,7 @@ echo <<<HTML
 		$.material.init();
 		</script>
 HTML;
-			}
+			//}
 			exit;
 		}
 		else{
