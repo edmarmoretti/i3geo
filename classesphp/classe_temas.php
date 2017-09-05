@@ -1286,7 +1286,7 @@ function: adicionaLabel
 Adiciona LABEL em uma classe de um tema
 */
 	function adicionaLabel($novac,$wrap,$fonte,$tamanho,$angulo,$fundo,$sombra,$cor,$outlinecolor,$shadowcolor,$shadowsizex,$shadowsizey,$force,$mindistance,$minfeaturesize,$offsetx,$offsety,$partials,$position,$texto=""){
-		if($this->vi >= 60300){
+        if($this->vi >= 60300){
 			while($novac->numlabels > 0){
 				$novac->removeLabel(0);
 			}
@@ -1307,7 +1307,6 @@ Adiciona LABEL em uma classe de um tema
 			}
 			else{
 				$s = "CLASS LABEL TEXT '".$texto."' END END";
-				//$s = "CLASS LABEL TEXT '[".$texto."]' END END";
 				$novac->updateFromString($s);
 			}
 		}
@@ -1316,6 +1315,7 @@ Adiciona LABEL em uma classe de um tema
 		}
 		else{
 			$label = $novac->label;
+            $novac->settext("'".$texto."'");
 		}
 		if($wrap != ""){
 			$label->set("maxlength",1);
@@ -1370,10 +1370,19 @@ Adiciona LABEL em uma classe de um tema
 		}
 	}
 	function removeLabel($iclasse){
-		$classe = $this->layer->getclass($iclasse);
-		while($classe->numlabels > 0){
-			$classe->removeLabel(0);
-		}
+        $classe = $this->layer->getclass($iclasse);
+		if($this->vi >= 60300){
+            while($classe->numlabels > 0){
+                $classe->removeLabel(0);
+            }
+        } else {
+            $label = $classe->label;
+            $label->set("type",MS_TRUETYPE);
+			$label->set("font","arial");
+            $label->set("size",0);
+            $label->removeBinding(0); 
+            $classe->settext($texto);            
+        }
 		/*
 		$nlabel = $classe->numlabels;
 		for($i=0;$i<$nlabel;$i++){

@@ -22,7 +22,8 @@ if (isset($_POST)){
 		//var_dump( $_POST["cpaint_argument"]);exit;
 		$argumento_ = $_POST["cpaint_argument"][0];
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-			$argumento_ = str_replace("\\\"","",$argumento_);
+			//$argumento_ = str_replace("\\\"","",$argumento_);
+            $argumento_ = str_replace("\"","",$argumento_);
 		}
 		else{
 			$argumento_ = str_replace("\"","",$argumento_);

@@ -5,23 +5,31 @@ MAP
     CONNECTION ""
     DATA "c:\ms4w\apache\htdocs\i3geo\aplicmap\dados\biomas.shp"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	"SIM"
+      "cache"	"sim"
+      "olopacity"	""
       "CLASSE"	"SIM"
       "permitekmz"	"nao"
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
+      "gmopacity"	""
+      "gmstatus"	""
+      "arquivotemaoriginal"	""
+      "olstatus"	""
+      "nomeoriginal"	""
       "permitedownload"	"sim"
-      "metaestat"	""
-      "permiteogc"	"sim"
+      "FILTROORIGINAL"	""
+      "DATAORIGINAL"	""
       "permitekml"	"sim"
-      "convcaracter"	""
+      "permiteogc"	"sim"
       "TEMA"	"Biomas shapefile (acentuação)"
       "cortepixels"	"0"
+      "identifica"	"sim"
     END # METADATA
     NAME "_wbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
-    STATUS OFF
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
     TEMPLATE "none.htm"
+    TILEITEM "location"
     OPACITY 50
     TYPE POLYGON
     UNITS METERS
@@ -30,60 +38,66 @@ MAP
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
       STYLE
         ANGLE 0
-        COLOR 252 141 223
+        COLOR 172 140 72
         OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
-      NAME "PAMPA"
-      EXPRESSION ('[CD_LEGENDA]'eq'PAMPA')
+      NAME "PAMPA area > 5"
+      EXPRESSION ('[CD_LEGENDA]'eq'PAMPA area > 5')
       STYLE
         ANGLE 0
-        COLOR 36 240 107
+        COLOR 221 227 35
         OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
       NAME "CERRADO"
       EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
       STYLE
         ANGLE 0
-        COLOR 71 98 5
+        COLOR 214 217 135
         OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
       NAME "PANTANAL"
       EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
       STYLE
         ANGLE 0
-        COLOR 61 221 64
+        COLOR 17 117 80
         OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
-      NAME "AMAZÔNIA"
-      EXPRESSION ('[CD_LEGENDA]'eq'AMAZÔNIA')
+      NAME "AMAZÃ”NIA"
+      EXPRESSION ('[CD_LEGENDA]'eq'AMAZÃ”NIA')
       STYLE
         ANGLE 0
-        COLOR 90 100 208
+        COLOR 14 41 134
         OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
+      TITLE ""
     END # CLASS
     CLASS
-      NAME "MATA ATLÂNTICA"
-      EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLÂNTICA')
+      NAME "MATA ATLÃ‚NTICA"
+      EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLÃ‚NTICA')
       STYLE
         ANGLE 0
-        COLOR 63 33 71
+        COLOR 203 76 243
         OFFSET 0 0
         OUTLINECOLOR 255 255 255
       END # STYLE
+      TITLE ""
     END # CLASS
   END # LAYER
 

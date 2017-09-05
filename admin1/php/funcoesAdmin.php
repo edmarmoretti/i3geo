@@ -872,8 +872,9 @@ function rrmdirImg($dir) {
 					\admin\php\funcoesAdmin\rrmdirImg ( $dir . "/" . $object );
 				} else {
 					$object = str_replace ( ".png", "", $object ) . ".png";
-					chmod ( $dir . "/" . $object, 077 );
-					unlink ( $dir . "/" . $object );
+					$file_name = $dir . "/" . $object;
+                    chmod ( realpath($file_name), 0777 );
+                    unlink(realpath($file_name));
 				}
 			}
 		}
