@@ -6,9 +6,8 @@ require_once(dirname(__FILE__)."/../../pacotes/cpaint/cpaint2.inc.php");
 require_once(dirname(__FILE__)."/../../ms_configura.php");
 include("../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-require_once(dirname(__FILE__)."/../../pacotes/phpflickr/phpFlickr.php");
 error_reporting(0);
-
+require_once(dirname(__FILE__)."/../../pacotes/phpflickr/phpFlickr.php");
 
 $funcao = $_GET["funcao"];
 $key = $_GET["key"];
@@ -52,14 +51,22 @@ function listafotospanoramio()
 	$long = $ret[2] - (($ret[2] - $ret[0]) / 2);
 	$resultado = "";
 	$curl = curl_init();
-	curl_setopt ($curl, CURLOPT_URL, "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$long&radius=25000&key=".$googleApiKey);
+    $u = "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$long&radius=50000&key=".$googleApiKey;
+    $recent = file_get_contents($u);
+    /*
+	curl_setopt ($curl, CURLOPT_URL, "https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=$lat,$long&radius=50000&key=".$googleApiKey);
 	curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 120);
 	if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
 		curl_setopt($curl, CURLOPT_PROXY, $i3geo_proxy_server);
 	}
 	$recent = curl_exec($curl);
 	curl_close ($curl);
-
+    */
+	$recent = str_replace("\n","",$recent);
+	$recent = str_replace("\t","",$recent);
+	$recent = str_replace("'","",$recent);
+	$recent = str_replace('"',"'",$recent);
 	$cp->set_data($recent);
 }
 function listafotoslocr()

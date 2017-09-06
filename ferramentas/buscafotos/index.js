@@ -197,7 +197,11 @@ i3GEOF.buscaFotos = {
 
 	*/
 	busca: function(pagina){
-		if(i3GEO.parametros.mapscale > 3000000){
+		if(i3GEO.parametros.googleApiKey == ""){
+            i3GEO.janela.tempoMsg($trad("precisaApiGM"));
+            return;
+        }
+        if(i3GEO.parametros.mapscale > 3000000){
 			i3GEO.janela.tempoMsg($trad('msgZoom',i3GEOF.buscaFotos.dicionario));
 			return;
 		}
@@ -288,9 +292,10 @@ i3GEOF.buscaFotos = {
 						ins += "<img class='img-rounded' src='https://maps.googleapis.com/maps/api/place/photo?maxwidth=200&photoreference="+data[i].photos[j].photo_reference+"&key=" + i3GEO.parametros.googleApiKey+"'";
 						ins += " onmouseout='i3GEOF.buscaFotos.escondexy()' ";
 						ins += " onmouseover='i3GEOF.buscaFotos.mostraxy(\"" + data[i].geometry.location.lat + "," + data[i].geometry.location.lng + "\")'";
-						ins += " onclick='javascript:window.open(\""+data[i].photos[j].html_attributions[0]+"\")' ";
+						//ins += " onclick='javascript:window.open(\""+data[i].photos[j].html_attributions[0]+"\")' ";
 						t = data[i].name;
-						ins += "title='"+t+"' style='margin:3px;cursor:pointer;' />";
+						ins += " title='"+t+"' style='margin:3px;cursor:pointer;' />";
+                        ins += "<h5>" + data[i].photos[j].html_attributions[0] + "</h5><hr>";
 					}
 				}
 			}
