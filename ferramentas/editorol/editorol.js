@@ -194,7 +194,7 @@ i3GEO.editorOL =
         kml : [],
         layersIniciais : [],
         //essa configuracao dos botoes afeta apenas o mashup
-        //para a configuração do editor dentro de um mapa normal, veja i3GEO.barraDebotoes.editor.ativaPainel()
+        //para a configuração do editor dentro de um mapa normal, veja i3GEO.editor.ativaPainel()
         botoes : {
             'imprimir': false,
             'grid': false,
