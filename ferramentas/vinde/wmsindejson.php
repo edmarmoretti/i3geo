@@ -12,9 +12,11 @@ if(!file_exists($arq)){
 		echo "erro curl_init";
 		exit;
 	}
+    set_time_limit(0);
 	curl_setopt($ch, CURLOPT_URL, "http://www.visualizador.inde.gov.br/");
 	curl_setopt($ch, CURLOPT_HEADER, 0);
 	curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 120);
 	if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
 		curl_setopt($ch, CURLOPT_PROXY, $i3geo_proxy_server);
 	}
