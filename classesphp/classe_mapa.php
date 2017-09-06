@@ -1663,7 +1663,6 @@ class Mapa
 		$c = $layer->offsite;
 		$c->setrgb(255,255,255);
 		$of = $this->mapa->outputformat;
-		//$of->set("imagemode",MS_IMAGEMODE_RGB);
 		$this->salva();
 	}
 	/*

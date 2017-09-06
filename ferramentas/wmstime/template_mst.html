@@ -1,1 +1,89 @@
-<div id='i3GEOwikiLista' style='display: block; background-color: white; text-align: left; padding: 5px;'></div>
+<div class='yui-navset' style='height: 38px; top: 0px; cursor: pointer; margin-left: 2px;'>
+	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
+		<li>
+			<div id='i3GEOwmstimeguia1' style='text-align: center; left: 0px;'>
+				<a>
+					<em><span class="material-icons">settings</span></em>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div id='i3GEOwmstimeguia2' style='text-align: center; left: 0px;'>
+				<a>
+					<em>{{{17}}}</em>
+				</a>
+			</div>
+		</li>
+	</ul>
+</div>
+<div class='container-fluid ' id='i3GEOwmstimeguia1obj'>
+	<div style='width: 100%;' class='form-group label-fixed condensed'>
+		<label class='control-label' for=''>{{{1}}}</label>
+		<div style='width: 100%;' class='input-group'>
+			<div id='i3GEOFwmstimelistaDeServicos'></div>
+		</div>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class='control-label' for='i3GEOFwmstimeiServico'></label>
+		<input class='form-control input-lg' type='text' id='i3GEOFwmstimeiServico' value='' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class='control-label' for=''>Metadados</label>
+		<h5 class='alert alert-info' id='WMS_descricao'></h5>
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class='control-label' for='WMS_anoinicio'>{{{2}}}</label>
+		<input class='form-control input-lg' type='text' id='WMS_anoinicio' value='0' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class='control-label' for='WMS_anofim'>{{{3}}}</label>
+		<input class='form-control input-lg' type='text' id='WMS_anofim' value='0' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class='control-label' for='WMS_mesinicio'>{{{4}}}</label>
+		<input class='form-control input-lg' type='text' id='WMS_mesinicio' value='nulo' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class='control-label' for='WMS_mesfim'>{{{5}}}</label>
+		<input class='form-control input-lg' type='text' id='WMS_mesfim' value='nulo' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class='control-label' for='WMS_diainicio'>{{{6}}}</label>
+		<input class='form-control input-lg' type='text' id='WMS_diainicio' value='nulo' />
+	</div>
+	<div class='form-group label-fixed condensed'>
+		<label class='control-label' for='WMS_diafim'>{{{7}}}</label>
+		<input class='form-control input-lg' type='text' id='WMS_diafim' value='nulo' />
+	</div>
+	<div style='width: 100%;' class='form-group label-fixed condensed'>
+		<label class='control-label' for=''>{{{8}}}</label>
+		<div style='width: 100%;' class='input-group'>
+			<div id='divumaImagemPor'></div>
+		</div>
+	</div>
+	<button onclick='i3GEOF.wmstime.iniciaImagens()' class='btn btn-primary btn-sm btn-raised'>{{{9}}}</button>
+</div>
+<div class='container-fluid ' id='i3GEOwmstimeguia2obj'>
+	<div id=i3GEOFwmstimeimagensLidas style="display: block;"></div>
+	<div id="i3GEOFwmstimeimagens"></div>
+
+	<div id=i3GEOFwmstimemarcaTempo style="display: none; position: absolute; cursor: pointer"></div>
+	<div id=i3GEOFwmstimemarcaData style="display: block; position: absolute; text-align: center"></div>
+	<div class='form-group condensed' style="top: 40px;">
+		<button title='inicia' onclick='i3GEOF.wmstime.iniciarFilme()' class='btn btn-xs' style='margin: 2px; padding: 2px;'>
+			<i class="material-icons">play_circle_outline</i>
+		</button>
+		<button title='pausa' onclick='i3GEOF.wmstime.pausarFilme()' class='btn btn-xs' style='margin: 2px; padding: 2px;'>
+			<i class="material-icons">pause_circle_outline</i>
+		</button>
+		<button title='rebobina' onclick='i3GEOF.wmstime.rebobina()' class='btn btn-xs' style='margin: 2px; padding: 2px;'>
+			<i class="material-icons">replay</i>
+		</button>
+		<button title='mais rapido' onclick='i3GEOF.wmstime.maisrapido()' class='btn btn-xs' style='margin: 2px; padding: 2px;'>
+			<i class="material-icons">add_circle_outline</i>
+		</button>
+		<button title='mais lento' onclick='i3GEOF.wmstime.maislento()' class='btn btn-xs' style='margin: 2px; padding: 2px;'>
+			<i class="material-icons">remove_circle_outline</i>
+		</button>
+	</div>
+</div>

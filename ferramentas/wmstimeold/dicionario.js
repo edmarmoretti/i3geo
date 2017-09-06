@@ -1,4 +1,5 @@
 //+$trad(1,i3GEOF.wmstime.dicionario)+
+i3GEOF.wmstime = {};
 i3GEOF.wmstime.dicionario = {
 	1 : [ {
 		pt : "Escolha o servi&ccedil;o de fornecimento de dados (WMS-T)",
@@ -79,10 +80,5 @@ i3GEOF.wmstime.dicionario = {
 		pt : "clique para adicionar ao mapa",
 		en : "",
 		es : ""
-	} ],
-    17 : [ {
-        pt : "Imagens",
-        en : "",
-        es : ""
-    } ]
+	} ]
 };

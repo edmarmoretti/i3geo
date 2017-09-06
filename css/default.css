@@ -137,6 +137,10 @@ span.affix {
 a, a:focus, a:hover {
 	color: #008579;
 }
+.alert.alert-info {
+    background-color: #03a9f4;
+    color: #002733;
+}
 .alert.alert-warning {
 	background-color: #de3601;
 }

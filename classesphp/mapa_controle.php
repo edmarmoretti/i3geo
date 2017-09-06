@@ -839,15 +839,11 @@ switch (strtoupper($funcao))
 		include_once("classe_mapa.php");
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
+
 		$m->adicionatemawms($_pg["tema"],$_pg["servico"],$_pg["nome"],$_pg["proj"],$_pg["formato"],$locaplic,$_pg["tipo"],$_pg["versao"],$_pg["nomecamada"],$dir_tmp,$imgdir,$imgurl,$_pg["tiporep"],$_pg["suportasld"],$_pg["formatosinfo"],$_pg["time"],$_pg["tile"]);
-		$teste = "ok";//testaMapa($map_file,$postgis_mapa);
-		if ($teste == "ok")
-		{
-			$retorno = "ok";$_SESSION["contadorsalva"]++;
-		}
-		else
-		{$retorno = array("erro"=>"A camada nao pode ser adicionada. ".$teste);
-		}
+
+		$_SESSION["contadorsalva"]++;
+		redesenhaMapa();
 		break;
 		/*
 		 Valor: REFERENCIA

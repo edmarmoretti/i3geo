@@ -58,22 +58,10 @@ i3GEOF.conectarservicos =
 			"i3GEOF.conectargeorss_script");
 		},
 		wmst: function(){
-			i3GEO.janela.cria(
-					"600px",
-					"400px",
-					i3GEO.configura.locaplic + "/ferramentas/wmstime/index.htm",
-					"",
-					"",
-					$trad("x46")
-					+ "&nbsp;<a class=ajuda_usuario href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(76)'><b> </b></a>",
-					"i3GEO.conectarwmst",
-					false,
-					"hd",
-					"",
-					"",
-					"",
-					true
-			);
+            i3GEO.util.scriptTag(i3GEO.configura.locaplic
+                    + "/ferramentas/wmstime/dependencias.php",
+                    "i3GEOF.wmstime.iniciaJanelaFlutuante()",
+            "i3GEOF.wmstime_script");
 		},
 		wms: function(){
 			i3GEO.util.scriptTag(i3GEO.configura.locaplic
