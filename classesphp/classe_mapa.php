@@ -1083,13 +1083,13 @@ class Mapa
 		//{unlink ($this->qyfile);}
 		//tem erro na vers&atilde;o 6 do Mapserver. J&aacute; abri um ticket no trac da OSGEO
 		$nlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Grade de coordenadas","SIM");
+        $nlayer->setconnectiontype(null);
 		ms_newgridobj($nlayer);
-
 		$nlayer->grid->set("labelformat", "DDMMSS");
 		$nlayer->grid->set("maxinterval", $intervalo);
 		$classe = $nlayer->getclass(0);
 		$classe->set("name","");
-		$estilo =$classe->getstyle(0);
+		$estilo = $classe->getstyle(0);
 		$estilo->set("maxsize",100);
 		$estilo->set("minsize",1);
 		$estilo->set("size",$larguralinha);
@@ -1101,8 +1101,8 @@ class Mapa
 		}
 		if($incluitexto == "sim"){
 			if($this->vi >= 60300){
-				//$classe->addLabel(new labelObj());
-				//$label = $classe->getLabel(0);
+				$classe->addLabel(new labelObj());
+				$label = $classe->getLabel(0);
 				$s = "CLASS LABEL  END END";
 				$classe->updateFromString($s);
 				$label = $classe->getLabel($indiceLabel);

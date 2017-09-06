@@ -321,6 +321,7 @@ function iniciaMapa()
 	$res["utilizacgi"] = "nao";//$utilizacgi;
 	$res["versaoms"] = $versao["principal"];
 	$res["versaomscompleta"] = $versao["completa"];
+    $res["versaoint"] = $versao["inteiro"];
 	$res["mensagens"] = $m->pegaMensagens();
 	$res["r"] = (isset($R_path)) ? "sim" : "nao";
 	$res["extentref"] = "";

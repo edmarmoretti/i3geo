@@ -12,7 +12,7 @@ switch (strtoupper($funcao))
 		copiaSeguranca($map_file);
 		$m = new Mapa($map_file);
 		$m->gradeCoord($_GET["intervalo"],$_GET["corlinha"],$_GET["larguralinha"],$_GET["tipolinha"],$_GET["tamanhotexto"],$_GET["fonte"],$_GET["cortexto"],$_GET["incluitexto"],$_GET["mascara"],$_GET["shadowcolor"],$_GET["shadowsizex"],$_GET["shadowsizey"]);
-		$m->salva();
+        $m->salva();
 		$retorno = "ok";
 	break;
 }

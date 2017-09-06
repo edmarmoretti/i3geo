@@ -43,9 +43,12 @@ i3GEOF.gradeCoord = {
 			});
 			return;
 		}
-			$i(iddiv).innerHTML = i3GEOF.gradeCoord.html();
-			i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef","form-control");
-			i3GEO.util.aplicaAquarela("i3GEOF.gradeCoord_corpo");
+		if(i3GEO.parametros.versaoint < 60400){
+            i3GEO.janela.tempoMsg($trad("versaoAntiga"));
+        }
+        $i(iddiv).innerHTML = i3GEOF.gradeCoord.html();
+		i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef","form-control");
+		i3GEO.util.aplicaAquarela("i3GEOF.gradeCoord_corpo");
 	},
 	/*
 	Function: html

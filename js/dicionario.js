@@ -2978,5 +2978,10 @@ g_traducao =
 			pt : "Grade de coordenadas (ativa e desativa)",
 			en : "",
 			es : ""
+		}],
+		"versaoAntiga" : [{
+			pt : "Essa op&ccedil;&atilde;o pode n&atilde;o funcionar corretamente devido a vers&atilde;o do sistema (Mapserver)",
+			en : "",
+			es : ""
 		}]
 	};
