@@ -1840,7 +1840,7 @@ i3GEOF.graficointerativo1 =
 				var n = i3GEOF.graficointerativo1.janelas.length,
 					ins = "",
 					i;
-				ins += "<select onchange='i3GEOF.graficointerativo1.composicao.adiciona(\"" + idjanela + "\",this.value)'>"
+				ins += "<select class='form-control' onchange='i3GEOF.graficointerativo1.composicao.adiciona(\"" + idjanela + "\",this.value)'>"
 					+ "<option value=''>---</option>";
 
 				for(i = 0; i < n; i++){
