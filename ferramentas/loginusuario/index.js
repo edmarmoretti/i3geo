@@ -145,7 +145,7 @@ i3GEOF.loginusuario = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Login</span></div>";
 		janela = i3GEO.janela.cria(
 			"270px",
-			"",
+			"auto",
 			"",
 			"",
 			"",

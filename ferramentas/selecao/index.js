@@ -189,7 +189,7 @@ i3GEOF.selecao =
 			};
 			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x51") + "</span></div>";
 			janela = i3GEO.janela.cria(
-					"510px",
+					"570px",
 					"270px",
 					"",
 					"",

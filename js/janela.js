@@ -174,6 +174,10 @@ i3GEO.janela =
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.janela.cria()");
 
+            if(waltura && waltura == ""){
+                waltura = "auto";
+            }
+
             if (arguments.length < 13 ) {
                 dimensionavel = true;
             }
