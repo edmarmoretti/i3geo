@@ -9,7 +9,7 @@
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=kmz&bbox={{mapext}}&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}" >{{{kmz}}}</a>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=kml&bbox={{mapext}}&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}" >{{{kml}}}</a>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=geojson&bbox={{mapext}}&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}" >GeoJson</a>
-<p><a target=blank href="../ferramentas/recline/default.php?tema={{{tema}}}" >{{{explore}}}</a>
+<p><a target=blank href="{{{urli3geo}}}/ferramentas/recline/default.php?tema={{{tema}}}" >{{{explore}}}</a>
 <h4>Shape file</h4>
 {{{shp}}}
 </script>
