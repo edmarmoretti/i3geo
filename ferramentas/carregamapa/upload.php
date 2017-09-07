@@ -55,7 +55,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 		//muda o arquivo de simbolo
 		//
 		$s = file_get_contents($dirmap."/".$Arquivo);
-		$s = "MAP\n SYMBOLSET ".$map->symbolsetfilename."\nFONTSET ".$map->fontsetfilename."\n" . $s;
+		$s = "MAP\n SYMBOLSET '".$map->symbolsetfilename."'\nFONTSET '".$map->fontsetfilename."'\n" . $s;
 
 		$handle = fopen($dirmap."/".$Arquivo, "w");
 		fwrite($handle,$s);
