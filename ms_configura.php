@@ -797,6 +797,7 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 	$locmapserv = "/cgi-bin/mapserv.exe";
 	$R_path = "c:/r/win/bin/R.exe";
 	$R_libpath = "c:/r/win/library";
+    $ogrOutput = false;
 }
 else //se for linux
 {

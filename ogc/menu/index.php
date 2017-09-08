@@ -12,6 +12,7 @@ $map = ms_newMapObj ( $ogcwsmap );
 $mapext = $map->extent->minx . "," . $map->extent->miny . "," . $map->extent->maxx . "," . $map->extent->maxy;
 //error_reporting ( 0 );
 include ONDEI3GEO."/init/head.php";
+//echo ms_GetVersionInt();exit;
 ?>
 <link rel='stylesheet' type='text/css' href='../index.css'>
 <body style="padding-top: 55px;" id="topo">
