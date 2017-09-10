@@ -7,13 +7,13 @@ i3GEOF.agrupaElementos.dicionario = {
 	} ],
 	'descricao2' : [ {
 		pt : "Para definir quais elementos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema. Os elementos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo. Caso n&atilde;o tenha sido escolhido nenhum item, todas os elementos ser&atilde;o agrupados em um s&oacute;.",
-		en : "",
-		es : "Para definir cuales elementos deben ser unidos unos con otros es, necesario escojer un &iacute;tem de la tabla de atributos del tema. Los elementos que poseen el mismo valor ser&aacute;n considerados en el mismo grupo. En caso que ning&uacute;n item haya sido escogido, todos los elementos ser&aacute;n agrupados en uno &uacute;nico"
+		en : "You need to choose an item from the table of attribute of a theme to define features that should link each other. Those features that have similar values will be included in the same group. In case you do not choose an item, all features will be grouped into a single group.",
+		es : "Para definir cu&aacute;les elementos deben ser unidos unos con otros es necesario escoger un &iacute;tem de la tabla de atributos del tema. Los elementos que poseen el mismo valor ser&aacute;n considerados en el mismo grupo. En caso que ning&uacute;n &iacute;tem haya sido escogido, todos los elementos ser&aacute;n agrupados en uno solo."
 	} ],
 	'descricao3' : [ {
 		pt : "O resultado final ser&aacute; um novo tema com elementos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido.",
-		en : "",
-		es : "El resultado final ser&aacute; un nuevo tema con elementos diferentes de los originales y cuya tabla de atributos contendr&aacute; apenas el %iacute;tem escogido"
+		en : "Final result will be a new theme with features different from the originals and whose table of attributes will contain only the selected item.",
+		es : "El resultado final ser&aacute; un nuevo tema con elementos diferentes de los originales y cuya tabla de atributos contendr&aacute; solamente el &iacute;tem escogido."
 	} ],
 	'selecionaTema' : [ {
 		pt : "Tema que cont&eacute;m os elementos (pelo menos um elemento deve estar selecionado)",
