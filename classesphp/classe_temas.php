@@ -1314,8 +1314,8 @@ Adiciona LABEL em uma classe de um tema
 			$label = $novac->getLabel(0);
 		}
 		else{
-			$label = $novac->label;
-            $novac->settext("'".$texto."'");
+            $label = $novac->label;
+            $novac->settext($texto);
 		}
 		if($wrap != ""){
 			$label->set("maxlength",1);
