@@ -346,7 +346,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/upload",
 			"categoria":"4",
-			"pt":"Permite que um arquivo do tipo shapefile seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo shapefile ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados. Um shapefile &eacute; composto basicamente por tr&ecirc;s tipos de arquivos (dbf, shp e shx), todos devem ser submetidos.<br>N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;velcom essas restri&ccedil;&otilde;es.",
+			"pt":"Permite que um arquivo do tipo shapefile seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo shapefile ser&aacute; armazenado no servidor onde o i3Geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados. Um shapefile &eacute; composto basicamente por tr&ecirc;s tipos de arquivos (dbf, shp e shx), todos devem ser submetidos.<br>A inclusão de um arquivo prj é opcional. Caso ele seja incluído o sistema irá utilizá-lo para definir o sistema de referência da camada. Se o arquivo não for incluído o usuário deverá informar o sistema de referência a partir da lista no formulário.<br>N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;vel com essas restri&ccedil;&otilde;es.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.arvoreDeTemas.dialogo.upload()"
@@ -359,7 +359,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/conectarwms",
 			"categoria":"4",
-			"pt":"Uma conex&atilde;o WMS permite que dados dispon&iacute;veis em outros servidores sejam inclu&iacute;dos como camadas no i3Geo. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o WMS. Ap&oacute;s um servi&ccedil;o ser escolhido, a lista de camadas dispon&iacute;veis &eacute; mostrada na guia 'Temas'.<br>Camadas obtidas por meio de conex&atilde;o WMS n&atilde;o permitem que algumas opera&ccedil;&otilde;es dispon&iacute;veis no i3Geo sejam executadas, como por exemplo a altera&ccedil;&atilde;o na legenda, sele&ccedil;&atilde;o, entre outras. Quando um servidor apresentar problemas, a camada n&atilde;o poder&aacute; ser adicionada.",
+			"pt":"Uma conex&atilde;o WMS permite que dados dispon&iacute;veis em outros servidores sejam inclu&iacute;dos como camadas no i3Geo. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o WMS. Ap&oacute;s um servi&ccedil;o ser escolhido, a lista de camadas dispon&iacute;veis &eacute; mostrada na guia 'Camadas inclu&iacute;das'.<br>Camadas obtidas por meio de conex&atilde;o WMS n&atilde;o permitem que algumas opera&ccedil;&otilde;es dispon&iacute;veis no i3Geo sejam executadas, como por exemplo a altera&ccedil;&atilde;o na legenda, sele&ccedil;&atilde;o, entre outras. Quando um servidor apresentar problemas, a camada n&atilde;o poder&aacute; ser adicionada.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.arvoreDeTemas.dialogo.conectaservico()"
@@ -372,7 +372,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/conectargeorss",
 			"categoria":"4",
-			"pt":"Uma conex&atilde;o GeoRSS permite obter a localiza&ccedil;&atilde;o de conte&uacute;dos dispon&iacute;veis no formato RSS com coordenadas geogr&aacute;ficas inclu&iacute;das. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o GeoRSS.<br>A camada adicionada ao mapa baseia-se em um arquivo shapefile criado temporariamente pelo i3Geo. Caso o servi&ccedil;o GeoRSS sofrer altera&ccedil;&otilde;es, como a inclus&atilde;o de um novo item, &eacute; necess&aacute;rio fazer novamente a conex&atilde;o para que a camada reflita a altera&ccedil;&atilde;o.",
+			"pt":"Uma conex&atilde;o GeoRSS permite obter a localiza&ccedil;&atilde;o de conte&uacute;dos dispon&iacute;veis no formato RSS com coordenadas geogr&aacute;ficas inclu&iacute;das. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o GeoRSS.<br>A camada adicionada ao mapa baseia-se em um arquivo shapefile criado temporariamente pelo i3Geo. Caso o servi&ccedil;o GeoRSS sofra altera&ccedil;&otilde;es, como a inclus&atilde;o de um novo item, &eacute; necess&aacute;rio fazer novamente a conex&atilde;o para que a camada reflita a altera&ccedil;&atilde;o.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.arvoreDeTemas.dialogo.conectaservico()"
@@ -944,7 +944,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/buscafotos",
 			"categoria":"8",
-			"pt":"Existem v&aacute;rios servi&ccedil;os na Internet que permitem cadastrar e visualizar fotos georreferenciadas. Essa ferramenta procura fotos para a regi&atilde;o de abrang&ecirc;ncia do mapa nos servi&ccedil;os Panor&acirc;mio, Flicker e Locr.<br>Para maior performance, o mapa deve estar na escala 1:150.000 ou maior.Ao passar o mouse sobre a foto, a sua localiza&ccedil;&atilde;o &eacute; mostrada no mapa.",
+			"pt":"Existem v&aacute;rios servi&ccedil;os na Internet que permitem cadastrar e visualizar fotos georreferenciadas. Essa ferramenta procura fotos para a regi&atilde;o de abrang&ecirc;ncia do mapa nos servi&ccedil;os Panor&acirc;mio, Flicker e Locr.<br>Para maior performance, o mapa deve estar na escala 1:150.000 ou maior.Ao passar o mouse sobre a foto, a sua localiza&ccedil;&atilde;o &eacute; mostrada no mapa.<br>Essa op&ccedil;&atilde;o necessita de uma API do Google Maps. Consulte o administrador do sistema. O c&oacute;digo da API deve constar no arquivo de configura&ccedil;&atilde;o do i3Geo.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.configura"
@@ -1061,7 +1061,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/graficointerativo1",
 			"categoria":"3",
-			"pt":"Gerador de representa&ccedil;&atilde;o gr&aacute;fica de dados tabulares. Abre uma janela flutuante onde o usu&aacute;rio pode escolher os dados e o tipo de gr&aacute;fico desejado. Os dados s&atilde;o baseados em um dos temas existentes no mapa.<br>Existem v&aacute;rias op&ccedil;&otilde;es de tratamento dos dados que permitem, por exemplo, mostrar os percentuais ou os dados brutos. Pode-se ainda ativar a navega&ccedil;&atilde;o din&acirc;mica, o que permite atualizar o gr&aacute;fico conforme &eacute; feita a navega&ccedil;&atilde;o sobre o mapa.",
+			"pt":"Gerador de representa&ccedil;&atilde;o gr&aacute;fica de dados tabulares. Abre uma janela flutuante onde o usu&aacute;rio pode escolher os dados e o tipo de gr&aacute;fico desejado. Os dados s&atilde;o baseados em um dos temas existentes no mapa.<br>Existem v&aacute;rias op&ccedil;&otilde;es de tratamento dos dados que permitem, por exemplo, mostrar os percentuais ou os dados brutos. Pode-se ainda ativar a navega&ccedil;&atilde;o din&acirc;mica, o que permite atualizar o gr&aacute;fico conforme &eacute; feita a navega&ccedil;&atilde;o sobre o mapa.<br>O usu&aacute;rio deve escolher primeiramente qual tipo de gr&aacute;fico quer criar, depois insere os valores dos eixos x e y. O gr&aacute;fico ser&aacute; gerado na janela. Por fim, o usu&aacute;rio pode salv&aacute;-lo como uma imagem .png ou um arquivo .csv.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.analise.dialogo.graficoInterativo1()"
@@ -1295,7 +1295,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/uploadgpx",
 			"categoria":"4",
-			"pt":"Permite que um arquivo do tipo GPX, normalmente gerado por programas que utilizam GPS, seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo GPX ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados.<br>N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;velcom essas restri&ccedil;&otilde;es.",
+			"pt":"Permite que um arquivo do tipo GPX, normalmente gerado por programas que utilizam GPS, seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo GPX ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados.<br>N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;vel com essas restri&ccedil;&otilde;es.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.arvoreDeTemas.dialogo.uploadgpx()"
@@ -1308,7 +1308,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/uploadkml",
 			"categoria":"4",
-			"pt":"Permite que um arquivo do tipo KML, seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo GPX ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados.<br>N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;velcom essas restri&ccedil;&otilde;es.",
+			"pt":"Permite que um arquivo do tipo KML, seja enviado ao servidor e inclu&iacute;do no mapa como uma nova camada. O arquivo GPX ser&aacute; armazenado no servidor onde o i3geo est&aacute; instalado e permanecer&aacute; l&aacute; at&eacute; que os arquivos tempor&aacute;rios sejam apagados.<br>N&atilde;o utilize essa op&ccedil;&atilde;o se existir alguma restri&ccedil;&atilde;o ao uso do arquivo e se a pol&iacute;tica de acesso aos dados, definidas pela entidade que hospeda o i3geo, n&atilde;o for compat&iacute;vel com essas restri&ccedil;&otilde;es.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.arvoreDeTemas.dialogo.uploadkml()"
@@ -1321,7 +1321,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/carregakml",
 			"categoria":"4",
-			"pt":"Cria um novo layer com base no endere&ccedil;o (url) de um arquivo KML. O layer &eacute; baseado em uma conex&atilde;o OGR.<br>S&atilde;o criadas 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os pol&iacute;gonos. N&atilde;o necessariamente existir&atilde;o elementos nas tr&ecirc;s camadas.",
+			"pt":"Cria um novo layer com base no endere&ccedil;o (url) de um arquivo KML ou a partir de um registro na lista de conex&otilde;es KML predefinida no sistema de administra&ccedil;&atilde;o. O layer &eacute; baseado em uma conex&atilde;o OGR.<br>S&atilde;o criadas 3 novas camadas no mapa, uma para pontos, uma para linhas e outra para os pol&iacute;gonos. N&atilde;o necessariamente existir&atilde;o elementos nas tr&ecirc;s camadas.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.arvoreDeTemas.carregakml()"
@@ -1360,7 +1360,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/tme",
 			"categoria":"5",
-			"pt":"Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes em http://thematicmapping.org/<br>Os par&acirc;metros utilizaados nessa ferramenta podem ser armazenados (por usu&aacute;rios cadastrados) no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos. As op&ccedil;&otilde;es que possibilitam isso s&atilde;o mostradas apenas quando o usu&aacute;rio estiver logado.",
+			"pt":"Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes <a href='http://thematicmapping.org/' target=_blank >aqui</a>.<br>Os par&acirc;metros utilizaados nessa ferramenta podem ser armazenados (por usu&aacute;rios cadastrados) no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos. As op&ccedil;&otilde;es que possibilitam isso s&atilde;o mostradas apenas quando o usu&aacute;rio estiver logado.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.tema.dialogo.tme()"
@@ -1490,7 +1490,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/geolocal",
 			"categoria":"6",
-			"pt":"Captura as coordenadas da posi&ccedil;&atilde;o atual do usu&aacute;rio. As coordenadas s&atilde;o capturadas individualmente ou por um intervalo de tempo. Os dados s&atilde;o mostrados em uma lista e no mapa.",
+			"pt":"Captura as coordenadas da posi&ccedil;&atilde;o atual do usu&aacute;rio a partir do navegador. As coordenadas s&atilde;o capturadas individualmente ou por um intervalo de tempo. Os dados s&atilde;o mostrados em uma lista e no mapa.<br>&Eacute; necess&aacute;rio que o usu&aacute;rio permita ao navegador identificar a sua localiza&ccedil;&atilde;o.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.mapa.dialogo.geolocal()"
