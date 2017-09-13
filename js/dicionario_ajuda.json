@@ -463,7 +463,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/toponimia",
 			"categoria":"5",
-			"pt":"A topon&iacute;mia s&atilde;o os textos mostrados no mapa que identificam lugares ou elementos que constituem um tema. Os textos s&atilde;o baseados na tabela de atributos de cada tema, que cont&ecirc;m os dados descritivos de cada elemento.<br>Ao inserir uma topon&iacute;mia, um novo tema &eacute; adicionado ao mapa, podendo ser exclu&iacute;do ou movimentado. Dessa forma &eacute; poss&iacute;vel incluir mais de um tema com a topon&iacute;mia. Ao inserir a topon&iacute;mia deve-se escolher o item da tabela de atributos e, caso necess&aacute;rio, pode-se modificar as op&ccedil;&otilde;es padr&atilde;o de simbologia utilizadas nos textos, como fonte, cor, m&aacute;scara, etc. &Eacute; poss&iacute;vel ainda testar as op&ccedil;&otilde;es antes de concluir a inclus&atilde;o da topon&iacute;mia.",
+			"pt":"As topon&iacute;mias s&atilde;o os textos mostrados no mapa que identificam lugares ou elementos que constituem um tema. Os textos s&atilde;o baseados na tabela de atributos de cada tema, que cont&ecirc;m os dados descritivos de cada elemento.<br>Ao inserir uma topon&iacute;mia, um novo tema &eacute; adicionado ao mapa, podendo ser exclu&iacute;do ou movimentado. Dessa forma &eacute; poss&iacute;vel incluir mais de um tema com a topon&iacute;mia. Ao inserir a topon&iacute;mia deve-se escolher o item da tabela de atributos e, caso necess&aacute;rio, pode-se modificar as op&ccedil;&otilde;es padr&atilde;o de simbologia utilizadas nos textos, como fonte, cor, m&aacute;scara, etc. &Eacute; poss&iacute;vel ainda testar as op&ccedil;&otilde;es antes de concluir a inclus&atilde;o da topon&iacute;mia.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.tema.dialogo.toponimia()"
@@ -476,7 +476,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/etiqueta",
 			"categoria":"5",
-			"pt":"As etiquetas s&atilde;o textos descritivos mostrados no mapa quando o mouse &eacute; estacionado por alguns instantes sobre um elemento ou utilizando a ferramenta etiqueta presente na barra de bot&otilde;es. Cada tema pode ter uma etiqueta ativa, sendo esta baseada em um item da tabela de atributos do tema.<br>Para ver as etiquetas, ative a opera&ccedil;&atilde;o de identifica&ccedil;&atilde;o.",
+			"pt":"As etiquetas s&atilde;o textos descritivos mostrados no mapa quando o usu&aacute;rio clica sobre um elemento no mapa utilizando a ferramenta etiqueta presente na barra de bot&otilde;es. Esta ferramenta configura quais itens da tabela de atributos do tema estar&atilde;o presentes na apresenta&ccedil;&atilde;o da etiqueta.<br>&Eacute; tamb&eacute;m por aqui que o usu&aacute;rio define o item que ser&aacute; objeto de busca pela ferramenta equivalente e os itens que estar&atilde;o vis&iacute;veis na janela &lsquo;Identifica&rsquo;, que s&atilde;o as informa&ccedil;&otilde;es mais detalhadas dispon&iacute;veis a partir do &iacute;cone &lsquo;+&rsquo; na janela da etiqueta.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.tema.dialogo.etiquetas()"
@@ -489,7 +489,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/filtro",
 			"categoria":"5",
-			"pt":"Filtrar um tema significa definir um crit&eacute;rio para que um determinado elemento seja mostrado. Esse crit&eacute;rio &eacute; baseado nos dados descritivos (tabela de atributos). Um filtro &eacute; uma express&atilde;o que relaciona os itens da tabela de atributos e seus valores, por exemplo, 'UF' = 'SP', onde 'UF' &eacute; o nome da coluna (item) e 'SP' &eacute; o valor. As express&otilde;es podem ser definidas por meio de um 'construtor' (guia default da ferramenta) ou digitando-se diretamente a express&atilde;o. Veja <a href='http://mapserver.org/mapfile/expressions.html#mapserver-expressions' >como</a>.<br>Cada tema pode ter apenas um filtro. O filtro apenas deixa de mostrar os dados no mapa, ou seja, os dados continuam na tabela de atributos. Antes de aplicar um filtro, pode-se test&aacute;-lo para verificar seu efeito. O construtor de express&otilde;es permite a utiliza&ccedil;&atilde;o de mais de uma coluna, para isso, deve-se adicionar novas linhas e escolher um conector, como 'e' ou 'ou'. Por exemplo, em um tema com os munic&iacute;pios pode-se mostrar apenas aqueles de determinados estados escolhendo-se 'colun' = 'valor' 'e' 'coluna' = 'valor'.",
+			"pt":"Filtrar um tema significa definir um crit&eacute;rio para que um determinado elemento seja mostrado. Esse crit&eacute;rio &eacute; baseado nos dados descritivos (tabela de atributos). Um filtro &eacute; uma express&atilde;o que relaciona os itens da tabela de atributos e seus valores, por exemplo, 'UF' = 'SP', onde 'UF' &eacute; o nome da coluna (item) e 'SP' &eacute; o valor. As express&otilde;es podem ser definidas por meio de um 'construtor' (guia default da ferramenta) ou digitando-se diretamente a express&atilde;o. Veja <a href='http://mapserver.org/mapfile/expressions.html#mapserver-expressions' target='_blank'>como</a>.<br>O usu&aacute;rio pode construir o filtro manualmente, digitando os nomes dos campos e os valores que deseja filtrar, ou por meio do editor de express&otilde;es. Para utilizar o editor de express&otilde;es o usu&aacute;rio deve definir primeiramente o tema e o campo que deseja filtrar. Ao ativar o editor de express&otilde;es os valores &uacute;nicos do campo selecionado ser&atilde;o mostrados numa lista para que o usu&aacute;rio possa compor a express&atilde;o.<br>Cada tema pode ter apenas um filtro. O filtro apenas deixa de mostrar os dados no mapa, ou seja, os dados continuam na tabela de atributos. Antes de aplicar um filtro, pode-se test&aacute;-lo para verificar seu efeito. O construtor de express&otilde;es permite a utiliza&ccedil;&atilde;o de mais de uma coluna, para isso, deve-se adicionar novas linhas e escolher um conector, como 'e' ou 'ou'. Por exemplo, em um tema com os munic&iacute;pios pode-se mostrar apenas aqueles de determinados estados escolhendo-se 'coluna' = 'valor' 'e' 'coluna' = 'valor'.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.tema.dialogo.filtro()"
@@ -502,7 +502,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/tabela",
 			"categoria":"5",
-			"pt":"Cada tema possui informa&ccedil;&otilde;es descritivas associadas a cada elemento, esses dados s&atilde;o conhecidos como 'tabela de atributos'. Essa op&ccedil;&atilde;o mostra os dados existentes na tabela e permite a realiza&ccedil;&atilde;o de uma s&eacute;rie de opera&ccedil;&otilde;es diretamente sobre os registros existentes, como por exemplo, sele&ccedil;&atilde;o, zoom, relat&oacute;rios e gr&aacute;ficos.<br>Como o n&uacute;mero de registros de um tema pode ser grande, os dados s&atilde;o mostrados em p&aacute;ginas. Ao lado de cada registro existe uma caixa que permite marcar os registros. Os registros marcados s&atilde;o mostrados na guia 'Marcados'. As opera&ccedil;&otilde;es dispon&iacute;veis nessa ferramenta atuam sobre todos os elementos da tabela ou sobre os selecinados. Para selecionar os elementos marcados, utilize a op&ccedil;&atilde;o 'Ativa sele&ccedil;&atilde;o' na guia 'Marcados'.",
+			"pt":"Cada tema possui informa&ccedil;&otilde;es descritivas associadas a cada elemento, esses dados s&atilde;o conhecidos como 'tabela de atributos'. Essa op&ccedil;&atilde;o mostra os dados existentes na tabela e permite a realiza&ccedil;&atilde;o de uma s&eacute;rie de opera&ccedil;&otilde;es diretamente sobre os registros existentes, como por exemplo, sele&ccedil;&atilde;o, zoom, estat&iacute;sticas, relat&oacute;rios e gr&aacute;ficos.<br>&Eacute; poss&iacute;vel ao usu&aacute;rio remover registros da visualiza&ccedil;&atilde;o da tabela, aproximar a visualiza&ccedil;&atilde;o do mapa para um elemento espec&iacute;fico, remover e ordenar as colunas da tabela. Ao lado de cada registro existe uma caixa que permite marcar os registros. Os registros marcados podem ser selecionados a partir do bot&atilde;o &lsquo;Selecionar&rsquo; e utilizados para criar um novo tema.<br>Como o n&uacute;mero de registros de um tema pode ser grande, os dados s&atilde;o mostrados em p&aacute;ginas.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.tema.dialogo.tabela()"
@@ -632,7 +632,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/selecao.js",
 			"categoria":"5",
-			"pt":"Selecionar elementos consiste em destacar um sub-conjunto do conjunto total de componentes de um tema. Algumas opera&ccedil;&otilde;es do i3Geo atuam sobre o conjunto selecionado, como buffer, exporta&ccedil;&atilde;o, etc. Os elementos selecionados s&atilde;o mostrados em uma cor especial, diferente daquela definida na legenda do tema. Os temas que possuem elementos selecionados s&atilde;o marcados com um &iacute;cone circular mostrado junto ao nome na lista de camadas. A janela de op&ccedil;&otilde;es para sele&ccedil;&atilde;o, al&eacute;m das op&ccedil;&otilde;es de tipo de opera&ccedil;&atilde;o, permite gerar gr&aacute;ficos din&acirc;micos e criar um novo tema com base nos elementos selecionados.<br>Existem v&aacute;rias maneiras de fazer a sele&ccedil;&atilde;o: clicando-se sobre cada elemento, desenhando-se um ret&acirc;ngulo ou pol&iacute;gono no mapa, definindo-se uma express&atilde;o que ir&aacute; buscar os elementos aderentes (com base na tabela de atributos) ou cruzando-se um tema com outro. Tendo-se um conjunto j&aacute; definido, novos elementos podem ser acrescentados ou retirados da sele&ccedil;&atilde;o.",
+			"pt":"Selecionar elementos consiste em destacar um subconjunto do conjunto total de componentes de um tema. Algumas opera&ccedil;&otilde;es do i3Geo atuam sobre o conjunto selecionado, como buffer, exporta&ccedil;&atilde;o, etc. Os elementos selecionados s&atilde;o mostrados em uma cor especial, diferente daquela definida na legenda do tema. Os temas que possuem elementos selecionados s&atilde;o marcados com uma cor diferente no nome na lista de camadas. A janela de op&ccedil;&otilde;es para sele&ccedil;&atilde;o, al&eacute;m das op&ccedil;&otilde;es de tipo de opera&ccedil;&atilde;o, permite gerar gr&aacute;ficos din&acirc;micos e criar um novo tema com base nos elementos selecionados.<br>Para realizar uma sele&ccedil;&atilde;o &eacute; necess&aacute;rio, primeiramente, escolher o tema que ser&aacute; objeto da sele&ccedil;&atilde;o. Existem v&aacute;rias maneiras de fazer a sele&ccedil;&atilde;o: clicando-se sobre cada elemento, desenhando-se um ret&acirc;ngulo ou pol&iacute;gono no mapa, definindo-se uma express&atilde;o que ir&aacute; buscar os elementos aderentes (com base na tabela de atributos) ou cruzando-se um tema com outro. Tendo-se um conjunto j&aacute; definido, novos elementos podem ser acrescentados ou retirados da sele&ccedil;&atilde;o.<br>Nas propriedades da sele&ccedil;&atilde;o o usu&aacute;rio pode definir a toler&acirc;ncia das opera&ccedil;&otilde;es de sele&ccedil;&atilde;o que utilizam cliques no mapa e a cor dos elementos selecionados.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.selecao.janelaOpcoes()"
@@ -1282,7 +1282,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/opacidademapa",
 			"categoria":"7",
-			"pt":"Altera a opacidade do mapa de forma interativa. Aplica-se aos temas que n&atilde;o est&atilde;o definidos como 'fundo'. A altera&ccedil;&atilde;o &eacute; feita diretamente no objeto HTML, sendo que o efeito &eacute; imediato.",
+			"pt":"Altera a opacidade da camada selecionada de forma interativa. Aplica-se aos temas que n&atilde;o est&atilde;o definidos como 'fundo'. A altera&ccedil;&atilde;o &eacute; feita diretamente no objeto HTML, sendo que o efeito &eacute; imediato.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.mapa.dialogo.opacidade()"
@@ -1650,6 +1650,19 @@
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.tema.dialogo.animagif()"
+		},
+		"131": {
+			"titulo": {
+				"pt": "Par&acirc;metros",
+				"es": "",
+				"en": ""
+			},
+			"diretorio":"i3geo/ferramentas/parametrossql",
+			"categoria":"5",
+			"pt": "Os par&acirc;metros s&atilde;o definidos pelo administrador do sistema para retornar uma cl&aacute;usula espec&iacute;fica da camada, como um filtro. Dessa forma, o usu&aacute;rio deve escolher quais par&acirc;metros deseja passar para a camada para visualizar apenas a parte do dado que lhe interessa.",
+			"es": "",
+			"en": "",
+			"apijs":""
 		}
 	},
 	"categorias": {

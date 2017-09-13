@@ -140,7 +140,7 @@ i3GEOF.parametrossql = {
 					"",
 					"",
 					"",
-					"35"
+					"131"
 				);
 				divid = janela[2].id;
 				i3GEOF.parametrossql.aguarde = $i("i3GEOF.parametrossql_imagemCabecalho").style;
