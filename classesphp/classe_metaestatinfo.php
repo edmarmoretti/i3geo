@@ -327,13 +327,13 @@ class MetaestatInfo{
 		if($suportaWMST == true && $direto == false){
 			$sqlDadosMedidaVariavel = "SELECT $sqlWMST as dimtempo,".$dados["colunaidgeo"]." AS cod_regiao,".$nomevalorcalculado." AS valorcalculado FROM ".$dados["esquemadb"].".".$dados["tabela"];
 		}
-		if(!empty ($filtro) && $direto == false){
+		if(!empty ($filtro)){
 			$sqlDadosMedidaVariavel .=	" WHERE ".$filtro . " AND ".$nomevalorcalculado." IS NOT NULL ";
 		}
 		else{
 			$sqlDadosMedidaVariavel .=	" WHERE ".$nomevalorcalculado." IS NOT NULL ";
 		}
-		if($suportaWMST != true && $direto == false){
+		if($suportaWMST != true && $direto == false && $tipoconta != ""){
 			$sqlDadosMedidaVariavel .= " /*FA*//*FA*/ /*FAT*//*FAT*/ GROUP BY cod_regiao ";
 		}
 		$sqlagrupamento = "";
@@ -570,13 +570,15 @@ class MetaestatInfo{
 					$expressao[] = "([".$item."]>".($calc["quartil3"]).")";
 					$titulo[] = "Quartil 4: >".$calc["quartil3"];
 				}
-				$classes[] = array(
-						"expressao"=>"([".$item."]= 0)",
-						"titulo"=>"0",
-						"verde"=>100,
-						"vermelho"=>100,
-						"azul"=>100
-				);
+				if($calc["quartil1"] > 0){
+					$classes[] = array(
+							"expressao"=>"([".$item."] = 0)",
+							"titulo"=>"0",
+							"verde"=>100,
+							"vermelho"=>100,
+							"azul"=>100
+					);
+				}
 				for ($i=0;$i < count($expressao);++$i){
 					$classes[] = array(
 						"expressao"=>$expressao[$i],
