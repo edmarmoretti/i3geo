@@ -71,18 +71,23 @@ include "head.php";
 			<div class="col-sm-12 hidden">
 
 						<div class="well">
-						<h1>{{adminI3geo}}</h1>
-						<p>{{msgVerMapserv}}
-						<p>
-							{{msgCadastraUsr}}
-						</p>
+						<h1>{{{adminI3geo}}}</h1>
+						<p>{{{msgBemVindo}}}</p>
+						<p>{{{msgLogin}}}</p>
+						<p>{{{msgFerramentas}}}</p>
+						<p>{{{msgUsr}}}</p>
+						<p>{{{msgMetaestat}}}</p>
+						<p>{{{msgUpload}}}</p>
+						<p>{{{msgCatalogo}}}</p>
+						<p>{{{msgSqlite}}}</p>
+						<p>{{{msgCadastro}}}</p>
 						<p>
 							<a href="../documentacao/diagramas/mer_banco_de_dados_de_administracao.png"
-								target="_new">{{merBdAdmin}}</a><br>
+								target="_blank">{{merBdAdmin}}</a><br>
 							<a href="../documentacao/diagramas/cadastrodeusuarios/dbdocs/index.html"
-								target="_new">{{merBdUsr}}</a><br>
+								target="_blank">{{merBdUsr}}</a><br>
 							<a href="../documentacao/diagramas/metaestat/dbdocs/index.html"
-			                   target="_new">{{{merBdMetaestat}}}</a><br>
+			                   target="_blank">{{{merBdMetaestat}}}</a><br>
 						</p>
 						</div>
 						<div class="alert alert-warning">{{{leiaMe}}}</div>
