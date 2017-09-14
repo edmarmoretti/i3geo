@@ -645,7 +645,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/imprimir",
 			"categoria":"6",
-			"pt":"Utilize essa op&ccedil;&atilde;o para gerar uma p&aacute;gina espec&iacute;fica para impress&atilde;o do mapa. Na janela de op&ccedil;&otilde;es deve-se escolher o tipo de p&aacute;gina desejada, que pode variar desde p&aacute;ginas padronizadas em PDF at&eacute; aplicativos onde o mapa &eacute; montado de forma interativa.",
+			"pt":"Utilize essa op&ccedil;&atilde;o para gerar uma p&aacute;gina espec&iacute;fica para impress&atilde;o do mapa. Existem v&aacute;rias sa&iacute;das que voc&ecirc; pode utilizar para imprimir o mapa ou simplesmente salv&aacute;-lo como uma imagem. <br>Na op&ccedil;&atilde;o &lsquo;A4 PDF&rsquo; voc&ecirc; ter&aacute; um mapa completo em PDF constru&iacute;do em um modelo predefinido. Nas op&ccedil;&otilde;es &lsquo;GEO TIFF&rsquo;, &lsquo;AGG/PNG&rsquo;, e &lsquo;JPEG&rsquo; voc&ecirc; ter&aacute; sa&iacute;das individuais para cada elemento do mapa (Mapa, barra de escala, mapa de refer&ecirc;ncia e legenda) em formatos de imagem que voc&ecirc; pode utilizar para compor o mapa em outras ferramentas. J&aacute; a op&ccedil;&atilde;o &lsquo;SVG &ndash; VETORIAL&rsquo; te retornar&aacute; a imagem do mapa em um formato vetorial.<br>Voc&ecirc; pode ainda configurar as formas de apresenta&ccedil;&atilde;o da legenda, escala e o tamanho do mapa.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.configura.funcoesBotoes"
@@ -1048,10 +1048,23 @@
 			},
 			"diretorio":"i3geo/ferramentas/inseretxt",
 			"categoria":"5",
-			"pt":"Insere textos em local do mapa de forma interativa.<br>Voc&ecirc; pode inserir um texto espec&iacute;fico no mapa simplesmente digitando o texto na janela da ferramenta e clicando no local desejado no mapa, ou ainda utilizar os atributos de uma camada para capturar o texto da regi&atilde;o clicada.",
+			"pt":"Insere textos em local do mapa de forma interativa.<br>Voc&ecirc; pode inserir um texto espec&iacute;fico no mapa simplesmente digitando o texto na janela da ferramenta e clicando no local desejado no mapa, ou ainda utilizar os atributos de uma camada para capturar o texto da regi&atilde;o clicada.<br>Na guia 'Propriedades' voc&ecirc; pode alterar algumas configura&ccedil;&otilde;es do texto, como cor, tamanho, fonte etc.",
 			"es": "",
 			"en": "",
 			"apijs":"i3GEO.mapa.dialogo.cliqueTexto()"
+		},
+		"83a": {
+			"titulo": {
+				"pt": "Inserir ponto interativamente",
+				"es": "",
+				"en": ""
+			},
+			"diretorio":"i3geo/ferramentas/inserexy2",
+			"categoria":"5",
+			"pt":"Insere pontos em local do mapa de forma interativa.<br>Para inserir pontos &eacute; necess&aacute;rio selecionar um tema edit&aacute;vel. Caso seu mapa n&atilde;o possua nenhum tema edit&aacute;vel ou queira criar um novo, clique em &lsquo;Criar um tema edit&aacute;vel&rsquo;.<br>Existem 4 formas de se inserir pontos no mapa:<br>1- Manualmente, na guia &lsquo;Tema&rsquo;, incluindo os pontos no mapa a partir de cliques na localiza&ccedil;&atilde;o desejada;<br>2 - Na guia &lsquo;Direc/dist&rsquo; informando um &acirc;ngulo e uma dist&acirc;ncia em km a partir de um ponto inicial;<br>3 - Digitando os valores das coordenadas x e y na guia &lsquo;Digitar&rsquo;;<br>4 - Colando uma lista de pares de coordenadas x e y separadas por espa&ccedil;o e com sinal de negativo para coordenadas oeste e sul na guia &lsquo;Colar&rsquo;.<br>Para alterar a proje&ccedil;&atilde;o das coordenadas inseridas acesse a guia &lsquo;Configura&ccedil;&otilde;es&rsquo;. A proje&ccedil;&atilde;o padr&atilde;o &eacute; WGS 84.<br>Voc&ecirc; pode ainda converter a lista de coordenadas criadas para uma lista em formato WKT ou utilizar os pontos para criar temas lineares e poligonares. Na guia &lsquo;Coordenadas&rsquo; voc&ecirc; pode ver a lista de pares de coordenadas criados por voc&ecirc;.",
+			"es": "",
+			"en": "",
+			"apijs":""
 		},
 		"84": {
 			"titulo": {

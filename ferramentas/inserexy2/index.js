@@ -164,7 +164,7 @@ i3GEOF.inserexy = {
                     "",
                     "",
                     "",
-                    "83"
+                    "83a"
             );
             divid = janela[2].id;
             i3GEOF.inserexy.aguarde = $i("i3GEOF.inserexy_imagemCabecalho").style;
