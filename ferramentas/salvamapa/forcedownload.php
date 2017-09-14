@@ -1,12 +1,41 @@
 <?php
+require __DIR__ . '/../../pacotes/composer/vendor/autoload.php';
+use Defuse\Crypto\Crypto;
+use Defuse\Crypto\Key;
+use Defuse\Crypto\File;
+
 include(dirname(__FILE__)."/../safe.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 //
 //o usuario deve ter entrado pelo i3Geo
 //
 if(empty($fingerprint)){
-	echo "<p class='paragrafo' >Erro ao enviar o arquivo.";
 	return;
+}
+//
+//verifica se deve ser utilizado o metodo de criptografia
+//
+include(dirname(__FILE__)."/../../ms_configura.php");
+if(isset($i3geoKeys)){
+	if(	$i3geoKeys["salvaMapfile"] != "" ){
+		$keyAscii = $i3geoKeys["salvaMapfile"];
+		$key = Key::loadFromAsciiSafeString($keyAscii);
+		/*
+		 $secret_data = "teste";
+		 $ciphertext = Crypto::encrypt($secret_data, $key);
+		 $data = Crypto::decrypt($ciphertext, $key);
+		 echo $ciphertext;
+		 echo $data;
+		 */
+		$inputFilename = $map_file;
+		$outputFilename = dirname(dirname($map_file))."/mapfile_".nomeRandomico(6).".map";
+		File::encryptFile($inputFilename, $outputFilename, $key);
+		//File::decryptFile($outputFilename, $outputFilename.".map", $key);
+		header("Content-Type:text/plain");
+		header('Content-Disposition: attachment; filename="'.basename($outputFilename).'"');
+		readfile($outputFilename);
+		return;
+	}
 }
 //
 //faz uma copia temporaria do mapfile

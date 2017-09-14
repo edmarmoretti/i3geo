@@ -422,6 +422,19 @@ class MetaestatInfo{
 		);
 	}
 	/**
+	 * Retorna o sql de uma string obtida do elemento data de um layer mapserver
+	 * Remove a referencia a coluna geo
+	 * @param string obtida de DATA de um LAYER mapserver
+	 */
+	function dataLayer2sql ($data){
+		//remove marcadores geo
+		$sqlf = explode("/*SE*/",$data);
+		$sqlf = explode("/*SG*/",$sqlf[1]);
+		$sqlf = $sqlf[0]." ".$sqlf[2];
+		$sqlf = str_replace(",  FROM"," FROM",$sqlf);
+		return $sqlf;
+	}
+	/**
 	 * Retorna os ids das regioes que permitem partir de uma regiao filha chegar a uma regiao pai
 	 * Usado para descobrir que regioes devem ser sequencialmente agregadas
 	 * @param partir da regiao

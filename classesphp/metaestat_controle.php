@@ -34,6 +34,10 @@ include (dirname ( __FILE__ ) . "/classe_metaestatinfo.php");
 $retorno = "";
 
 switch (strtoupper ( $funcao )) {
+	case "LAYERS2CSV" :
+		$layers = explode(",",$_pg["layers"]);
+		$map = ms_newMapObj($map_file);
+		break;
 	case "RELATORIOCOMPLETO" :
 		$m = new MetaestatInfo();
 		if(empty($_pg ["codigo_variavel"])){

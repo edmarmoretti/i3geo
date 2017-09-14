@@ -68,6 +68,30 @@ array(array("usuario"=>"admin", "senha"=>"adminx"));
 $i3geomaster = array(
 	array("usuario"=>"admin", "senha"=>"admin")
 );
+/*
+Variable: i3geoKeys
+
+Chaves utilizadas para criptografar/descriptografar arquivos ou strings.
+
+As chaves devem ser geradas por meio do aplicativo php-encryption.
+
+Para gerar uma chave veja o tutorial: https://github.com/defuse/php-encryption/blob/master/docs/Tutorial.md#scenario-1-keep-data-secret-from-the-database-administrator
+
+i3geoKeys e um array onde o indice corresponde a funcionalidade onde a criptografia sera utilizada
+
+Para decidir sobre o uso ou nao da criptografia, veja a documentacao: https://github.com/defuse/php-encryption
+
+Funcionalidades:
+
+salvaMapfile - utilizado na opcao de download do arquivo mapfile em uso para posterior upload.
+Se a chave nao existir a opcao de download/upload ira funcionar no modo padrao.
+Nesse caso as informacoes de conexao e fontes de dados (DATA) sao removidas do mapfile e a recuperaco do mapa,
+via upload, ira remover LAYERS que nao forem encontrados na pasta i3geo/temas.
+Quando a chave for especificada, o mapfile nao e alterado ao ser feito o download, mantendo suas caracteristicas originais.
+*/
+$i3geoKeys = array(
+	"salvaMapfile"=>"def00000881f5d29aa8604e109797766cd26754c4cc06be02c09163810a78a8a59564bdfd00170d20cdce0e8ac5342db0286d243f78de63b8b26f52d9bc55ee53080bd68"
+);
 //TODO documentar no moodle
 /*
 Variable: $i3geoPermiteLogin

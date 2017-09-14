@@ -1,4 +1,8 @@
 <?php
+require __DIR__ . '/../../pacotes/composer/vendor/autoload.php';
+use Defuse\Crypto\Key;
+use Defuse\Crypto\File;
+
 include(dirname(__FILE__)."/../safe.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 //
@@ -34,15 +38,25 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 
 	verificaNome($Arquivo);
 
-	$checkphp = fileContemString($_FILES['i3GEOcarregamapafilemap']['tmp_name'],"<?");
-	if($checkphp == true){
-		exit;
+	if(isset($i3geoKeys) && $i3geoKeys["salvaMapfile"] != ""){
+		$status =  move_uploaded_file($_FILES['i3GEOcarregamapafilemap']['tmp_name'],$dirmap."/".$Arquivo."temp.map");
+		$keyAscii = $i3geoKeys["salvaMapfile"];
+		$key = Key::loadFromAsciiSafeString($keyAscii);
+		$inputFilename = $dirmap."/".$Arquivo."temp.map";
+		$outputFilename = $dirmap."/".$Arquivo;
+		File::decryptFile($inputFilename, $outputFilename, $key);
 	}
-	$checkphp = fileContemString($_FILES['i3GEOcarregamapafilemap']['tmp_name'],".php");
-	if($checkphp == true){
-		exit;
+	else {
+		$checkphp = fileContemString($_FILES['i3GEOcarregamapafilemap']['tmp_name'],"<?");
+		if($checkphp == true){
+			exit;
+		}
+		$checkphp = fileContemString($_FILES['i3GEOcarregamapafilemap']['tmp_name'],".php");
+		if($checkphp == true){
+			exit;
+		}
+		$status =  move_uploaded_file($_FILES['i3GEOcarregamapafilemap']['tmp_name'],$dirmap."/".$Arquivo);
 	}
-	$status =  move_uploaded_file($_FILES['i3GEOcarregamapafilemap']['tmp_name'],$dirmap."/".$Arquivo);
 	if($status != 1){
 		echo "<p class='paragrafo' >Ocorreu um erro no envio do arquivo";
 		paraAguarde();
