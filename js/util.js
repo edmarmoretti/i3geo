@@ -892,7 +892,8 @@ i3GEO.util =
 				fixedcenter : true,
 				constraintoviewport : false,
 				visible : true,
-				iframe : false
+				iframe : false,
+                strings: {close: "<span class='material-icons'>cancel</span>"}
 			});
 			YAHOO.i3GEO.janela.manager.register(janela);
 			janela.render();
@@ -2420,7 +2421,8 @@ i3GEO.util =
 				fixedcenter : fix,
 				constraintoviewport : true,
 				visible : true,
-				iframe : false
+				iframe : false,
+                strings: {close: "<span class='material-icons'>cancel</span>"}
 			});
 
 			YAHOO.i3GEO.janela.manager.register(janela);

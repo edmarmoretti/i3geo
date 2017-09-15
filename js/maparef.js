@@ -161,7 +161,8 @@ i3GEO.maparef =
 					visible : true,
 					draggable : true,
 					modal : false,
-					iframe : false
+					iframe : false,
+                    strings: {close: "<span class='material-icons'>cancel</span>"}
 				});
 				YAHOO.i3GEO.janela.manager.register(janela);
 

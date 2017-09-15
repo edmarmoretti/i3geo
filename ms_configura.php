@@ -68,6 +68,7 @@ array(array("usuario"=>"admin", "senha"=>"adminx"));
 $i3geomaster = array(
 	array("usuario"=>"admin", "senha"=>"admin")
 );
+//TODO remover chave ao fechar a versao
 /*
 Variable: i3geoKeys
 
@@ -88,9 +89,11 @@ Se a chave nao existir a opcao de download/upload ira funcionar no modo padrao.
 Nesse caso as informacoes de conexao e fontes de dados (DATA) sao removidas do mapfile e a recuperaco do mapa,
 via upload, ira remover LAYERS que nao forem encontrados na pasta i3geo/temas.
 Quando a chave for especificada, o mapfile nao e alterado ao ser feito o download, mantendo suas caracteristicas originais.
+
+Exemplo de chave: def00000881f5d29aa8604e109797766cd26754c4cc06be02c09163810a78a8a59564bdfd00170d20cdce0e8ac5342db0286d243f78de63b8b26f52d9bc55ee53080bd68
 */
 $i3geoKeys = array(
-	"salvaMapfile"=>"def00000881f5d29aa8604e109797766cd26754c4cc06be02c09163810a78a8a59564bdfd00170d20cdce0e8ac5342db0286d243f78de63b8b26f52d9bc55ee53080bd68"
+	"salvaMapfile"=>""
 );
 //TODO documentar no moodle
 /*

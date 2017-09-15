@@ -50,7 +50,7 @@
 				<div class="col-md-2"></div>
 				<div class="checkbox col-md-10">
 					<label>
-						<input title="{{{enviaSenha}}}" type="checkbox" checked name="enviaSenha" /> {{{enviaSenha}}}
+						<input title="{{{enviaSenha}}}" type="checkbox" name="enviaSenha" /> {{{enviaSenha}}}
 					</label>
 				</div>
 			</div>

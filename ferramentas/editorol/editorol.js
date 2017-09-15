@@ -524,7 +524,8 @@ i3GEO.editorOL =
                 width : "250px",
                 visible : false,
                 draggable : true,
-                close : true
+                close : true,
+                strings: {close: "<span class='material-icons'>cancel</span>"}
             });
             YAHOO.procura.container.panel.setHeader("Encontre no mapa");
             YAHOO.procura.container.panel.setBody(ins);
@@ -575,7 +576,8 @@ i3GEO.editorOL =
                     width : "250px",
                     visible : false,
                     draggable : true,
-                    close : true
+                    close : true,
+                    strings: {close: "<span class='material-icons'>cancel</span>"}
                 });
                 YAHOO.temaativo.container.panel.setBody("");
                 if (i3GEO && typeof i3GEO != undefined && i3GEO != "") {
@@ -793,7 +795,8 @@ i3GEO.editorOL =
                     width : "auto",
                     visible : false,
                     draggable : true,
-                    close : true
+                    close : true,
+                    strings: {close: "<span class='material-icons'>cancel</span>"}
                 });
                 YAHOO.legendaeditorOL.container.panel.setBody(ins);
                 YAHOO.legendaeditorOL.container.panel.setHeader($trad("p3"));
@@ -910,7 +913,8 @@ i3GEO.editorOL =
                             width : "350px",
                             visible : false,
                             draggable : true,
-                            close : true
+                            close : true,
+                            strings: {close: "<span class='material-icons'>cancel</span>"}
                         });
                         YAHOO.salvaGeometrias.container.panel.setHeader("<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u6") + "</span>");
                         YAHOO.salvaGeometrias.container.panel.setBody("");
@@ -1987,7 +1991,8 @@ i3GEO.editorOL =
                     overflow: "auto",
                     visible : false,
                     draggable : true,
-                    close : true
+                    close : true,
+                    strings: {close: "<span class='material-icons'>cancel</span>"}
                 });
 
                 var ins = Mustache.render(i3GEO.editorOL.MUSTACHEPROPRIEDADES, i3GEO.editorOL.simbologia);
@@ -2063,7 +2068,8 @@ i3GEO.editorOL =
                     overflow: "auto",
                     visible : false,
                     draggable : true,
-                    close : true
+                    close : true,
+                    strings: {close: "<span class='material-icons'>cancel</span>"}
                 });
                 if (i3GEO && typeof i3GEO != undefined && i3GEO != "") {
                     YAHOO.editorOL.listaGeometrias.panel
@@ -2117,7 +2123,8 @@ i3GEO.editorOL =
                     width : "300px",
                     visible : false,
                     draggable : true,
-                    close : true
+                    close : true,
+                    strings: {close: "<span class='material-icons'>cancel</span>"}
                 });
                 var hash = {
                         "opsel": $trad("opsel"),
