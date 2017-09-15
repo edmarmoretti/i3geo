@@ -38,7 +38,7 @@ i3GEOadmin.variaveis.dicionario = {
 		es : ""
 	} ],
     'txtAjudaMedida' : [ {
-		pt : "Var&iacute;av&eacute;s podem ter mais de uma medida. Cada medida possu&iacute; atributos que indicam onde os dados est&atilde;o localizados no banco de dados e quais suas principais caracter&iacute;sticas. O formul&aacute;rio permite ainda editar outras op&ccedil;&otilde;es que definem como os dados s&atilde;o classificados em um mapa e outras.",
+		pt : "Var&iacute;av&eacute;s podem ter mais de uma medida. Cada medida possu&iacute; atributos que indicam onde os dados est&atilde;o localizados no banco de dados e quais suas principais caracter&iacute;sticas. Nas op&ccedil;&otilde;es da medida &eacute; poss&iacute;vel configurar par&acirc;metros para a medida, criar classifica&ccedil;&otilde;es e simbologias, al&eacute;m cadastrar links e fontes de dados",
 		en : "",
 		es : ""
 	} ],

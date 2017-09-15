@@ -10,7 +10,7 @@ i3GEOadmin.usuarios.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "<p>Cada usu&aacute;rio pode possuir pap&eacute;is. Os pap&eacute;is s&atilde;o utilizados para definir as opera&ccedil;&otilde;es que podem ser executadas.<p>Apenas administradores podem acessar esses dados.",
+		pt : "Para criar um novo usu&aacute;rio clique no &iacute;cone 'Adicionar'. Inclua o nome, login, senha e e-mail e atribua um ou mais pap&eacute;is ao novo usu&aacute;rio.",
 		en : "",
 		es : ""
 	} ],

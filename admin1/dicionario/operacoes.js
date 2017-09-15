@@ -10,7 +10,7 @@ i3GEOadmin.operacoes.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "Os tipos de pap&eacute;is s&atilde;o pr&eacute;-definidos e s&atilde;o atribu&iacute;dos aos usu&aacute;rios individualmente. Para definir os pap&eacute;is de cada usu&aacute;rio, utilize o editor de usu&aacute;rios.",
+		pt : "Os tipos de pap&eacute;is s&atilde;o predefinidos e s&atilde;o atribu&iacute;dos aos usu&aacute;rios individualmente. Para definir os pap&eacute;is de cada usu&aacute;rio, utilize o editor de usu&aacute;rios.",
 		en : "",
 		es : ""
 	} ],

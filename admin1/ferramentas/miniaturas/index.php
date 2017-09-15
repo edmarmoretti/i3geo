@@ -44,8 +44,8 @@ include "../../head.php";
 			<div class="row">
 				<div class="col-md-12">
 					<div class="well">
-						<h3>Gera imagens miniaturas de cada tema para abastecer a pasta i3geo/temas/miniaturas</h3>
-						<h4>O usu&aacute;rio e a senha devem estar cadastrados em i3geo/ms_configura.php</h4>
+						<h3>Gera imagens miniaturas de cada tema para abastecer a pasta <samp>i3geo/temas/miniaturas</samp></h3>
+						<h4>O usu&aacute;rio e a senha devem estar cadastrados em <samp>i3geo/ms_configura.php</samp></h4>
 					</div>
 					<div class="well">
 						<form class="form" role="form" method="post" action="index.php">
@@ -67,7 +67,7 @@ include "../../head.php";
 						</form>
 					</div>
 					<div class="alert alert-info">
-					As miniaturas s&atilde;o geradas na pasta tempor&aacute;ria do servidor (ms_tmp). Depois de criadas, &eacute; necess&aacute;rio copi&aacute;-las para a pasta i3geo/temas/miniaturas. Apenas s&atilde;o processados os temas cujas miniaturas ainda n&atilde;o existirem.
+					As miniaturas s&atilde;o geradas na pasta tempor&aacute;ria do servidor (<samp>ms_tmp</samp>). Depois de criadas, &eacute; necess&aacute;rio copi&aacute;-las para a pasta <samp>i3geo/temas/miniaturas</samp>. Apenas s&atilde;o processados os temas cujas miniaturas ainda n&atilde;o existirem.
 					</div>
 				</div>
 			</div>

@@ -31,8 +31,8 @@ include "../../head.php";
 				<div class="col-md-12">
 					<div class="well">
 						<h3>Cria o banco de dados de administra&ccedil;&atilde;o conforme as
-							configura&ccedil;&otilde;es de conex&atilde;o existentes em i3geo/ms_configura.php</h3>
-						<h4>O usu&aacute;rio e a senha devem estar cadastrados em i3geo/ms_configura.php</h4>
+							configura&ccedil;&otilde;es de conex&atilde;o existentes em <samp>i3geo/ms_configura.php</samp></h3>
+						<h4>O usu&aacute;rio e a senha devem estar cadastrados em <samp>i3geo/ms_configura.php</samp></h4>
 					</div>
 					<div class="well">
 						<form class="form" role="form" method="post" action="exec.php">
