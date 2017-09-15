@@ -162,7 +162,7 @@ Obt&eacute;m a lista de usuarios
 												var p = this.papeis;
 												$(json["papeis"]).each(
 														function(i,el){
-															if(p && el.id_papel && (p[el.id_papel] || el.id_papel == 1)){
+															if(p && el.id_papel && (p[el.id_papel])){
 																json["papeis"][i]["checked"] = "checked";
 															}
 															else{
