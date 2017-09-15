@@ -866,60 +866,49 @@ td {
 }
 
 .container-minimiza {
-	background:
-		url("../imagens/janelas-flutuantes/botao-dimensionar-janela.png")
-		no-repeat !important;
-	margin-top: 10px;
+	background: none !important;
 }
 
 .container-minimiza:hover {
-	background:
-		url("../imagens/janelas-flutuantes/botao-dimensionar-janela-hover.png")
-		no-repeat !important;
+	background: none !important;
 }
 
 .yui-skin-sam .container-minimiza {
-	cursor: pointer;
-	height: 15px;
-	position: absolute;
-	right: 35px;
-	top: 3px;
-	width: 25px;
-	z-index: 2001;
-	opacity: .8;
-	filter: alpha(opacity =       80);
-	background:
-		url("../imagens/janelas-flutuantes/botao-dimensionar-janela.png")
-		no-repeat !important;
-	margin-top: 10px;
+    cursor: pointer;
+    position: absolute;
+    right: 32px;
+    z-index: 2001;
+    margin-left: 5px !important;
+    opacity: .60;
+    filter: alpha(opacity = 80);
+    background: none !important;
+    text-indent: 0px !important;
+    color: white;
+    top: 3px;
 }
 
 .yui-skin-sam .container-duplica {
-	background: url("../imagens/janelas-flutuantes/botao-nova-janela.png")
-		no-repeat !important;
-	cursor: pointer;
-	height: 15px;
-	position: absolute;
-	right: 57px;
-	top: 3px;
-	width: 25px;
-	z-index: 2001;
-	opacity: .8;
-	filter: alpha(opacity =       80);
+    cursor: pointer;
+    position: absolute;
+    right: 61px;
+    z-index: 2001;
+    margin-left: 5px !important;
+    opacity: .60;
+    filter: alpha(opacity = 80);
+    background: none !important;
+    text-indent: 0px !important;
+    color: white;
+    top: 3px;
 }
 
 .container-duplica {
-	background: url("../imagens/janelas-flutuantes/botao-nova-janela.png")
-		no-repeat !important;
-	margin-top: 10px;
+	background: none !important;
 }
 
 .container-duplica:hover {
-	background:
-		url("../imagens/janelas-flutuantes/botao-nova-janela-hover.png")
-		no-repeat !important;
+	background: none !important;
 }
-
+/*
 .yui-skin-sam .container-close {
 	cursor: pointer;
 	height: 15px;
@@ -934,8 +923,20 @@ td {
 	opacity: .80;
 	filter: alpha(opacity = 80);
 	background: url("../imagens/janelas-flutuantes/botao-fechar-janela.png") no-repeat !important;
-
-
+}
+*/
+.yui-skin-sam .container-close {
+    cursor: pointer;
+    position: absolute;
+    right: 1px;
+    z-index: 2001;
+    margin-left: 5px !important;
+    opacity: .60;
+    filter: alpha(opacity = 80);
+    background: none !important;
+    text-indent: 0px !important;
+    color: white;
+    top: 0px;
 }
 /*
 .yui-skin-sam .container-close::after {
@@ -944,9 +945,7 @@ td {
 }
 */
 .yui-skin-sam .container-close:hover {
-	background:
-		url("../imagens/janelas-flutuantes/botao-fechar-janela-hover.png")
-		no-repeat !important;
+	background: none !important;
 }
 
 .yui-module .yui-overlay .yuimenu .yui-button-menu .yui-menu-button-menu .visible {

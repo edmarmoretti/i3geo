@@ -228,7 +228,7 @@ i3GEO.janela =
                     + "/imagens/aguarde2.gif\' />";
             }
             if (icone != "") {
-                ins += "<img class='i3GeoIconeJanela' src='" + icone + "' >";
+                //ins += "<img class='i3GeoIconeJanela' src='" + icone + "' >";
             }
             if(idajuda){
                 ins += texto;
@@ -236,10 +236,10 @@ i3GEO.janela =
                 ins += "<span style='font-size:10px;'>" + texto + "</span>";
             }
             if (funcaoDuplica && funcaoDuplica != "") {
-                ins += "<div id='" + id + "_duplicaJanela' class='container-duplica'></div>";
+                ins += "<div id='" + id + "_duplicaJanela' class='container-duplica'><span class='material-icons'>add_circle_outline</span></div>";
             }
             if (funcaoMinimiza && funcaoMinimiza != "") {
-                ins += "<div id='" + id + "_minimizaCabecalho' class='container-minimiza'></div>";
+                ins += "<div id='" + id + "_minimizaCabecalho' class='container-minimiza'><span class='material-icons'>aspect_ratio</span></div>";
             }
             ins += '</div><div id="' + id + '_corpo" class="bd ' + classeAdicional + '" style="display:block;padding:0px">';
             if (wsrc !== "") {
@@ -282,7 +282,8 @@ i3GEO.janela =
                     visible : true,
                     monitorresize : false,
                     dragOnly : true,
-                    keylisteners : null
+                    keylisteners : null,
+                    strings: {close: "<span class='material-icons'>cancel</span>"}
                 });
             } else {
                 janela = new YAHOO.widget.Panel(id, {
@@ -296,7 +297,8 @@ i3GEO.janela =
                     visible : true,
                     monitorresize : false,
                     dragOnly : true,
-                    keylisteners : null
+                    keylisteners : null,
+                    strings: {close: "<span class='material-icons'>cancel</span>"}
                 });
             }
             if (YAHOO.util.Resize && dimensionavel == true) {
