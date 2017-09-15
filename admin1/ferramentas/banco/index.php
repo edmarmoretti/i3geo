@@ -32,7 +32,7 @@ include "../../head.php";
 				}
 				$q = $dbh->query("select * from sqlite_master",PDO::FETCH_ASSOC);
 				$resultado = $q->fetchAll();
-				echo "</div><div class='well'><h3>SQL no padr&atilde;o SQLITE</span></h3>";
+				echo "</div><div class='well'><h3>SQL no padr&atilde;o SQLite</span></h3>";
 				foreach($resultado as $r){
 					if(mb_detect_encoding($temasacessos2[$i],'UTF-8, ISO-8859-1') == "ISO-8859-1"){
 						echo "<p>".utf8_encode($r["sql"])."</p>";
@@ -41,9 +41,9 @@ include "../../head.php";
 						echo "<p>".$r["sql"]."</p>";
 					}
 				}
-				echo "</div><div class='well'><h3>SQL no padr&atilde;o POSTGRES</h3>";
-				echo "<div class='alert alert-info'><p>Ap&oacute;s criar as tabelas no Postgres, vc deve definir as permiss&otilde;es para os usu&aacute;rios.</p>";
-				echo "<p>Para usar outro banco de dados que n&atilde;o seja o default (SQLITE), voc&ecirc; ter&aacute; de alterar o programa i3geo/admin/php/conexao.php</p></div>";
+				echo "</div><div class='well'><h3>SQL no padr&atilde;o PostgreSQL</h3>";
+				echo "<div class='alert alert-info'><p>Ap&oacute;s criar as tabelas no PostgreSQL, voc&ecirc; deve definir as permiss&otilde;es para os usu&aacute;rios.</p>";
+				echo "<p>Para usar outro banco de dados que n&atilde;o seja o default (SQLite), voc&ecirc; ter&aacute; de alterar a vari&aacute;vel <code>conexaoadmin</code> do programa <samp>i3geo/ms_configura.php</samp></p></div>";
 				foreach($resultado as $r){
 					if(mb_detect_encoding($r["sql"],'UTF-8, ISO-8859-1') == "ISO-8859-1"){
 						$r["sql"] = utf8_encode($r["sql"]);
