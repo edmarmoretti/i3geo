@@ -17,18 +17,18 @@ i3GEOF.agrupaElementos.dicionario = {
 	} ],
 	'selecionaTema' : [ {
 		pt : "Tema que cont&eacute;m os elementos (pelo menos um elemento deve estar selecionado)",
-		en : "",
-		es : "Tema que contiene los elementos (por lo menos un elemento debe estar seleccionado) "
+		en : "Theme that contains features (at least one feature should be selected)",
+		es : "Tema que contiene los elementos (al menos un elemento debe estar seleccionado)"
 	} ],
 	'selecionaAtributo' : [ {
 		pt : "Escolha o item da tabela de atributos que ser&aacute; utilizado para agregar. (opcional)",
-		en : "",
+		en : "Choose an item from the attribute table that will be used to add. (optional)",
 		es : "Elija el &iacute;tem de la tabla de atributos que ser&aacute; utilizada para adicionar. (opcional)"
 	} ],
 	'adicionaAgrupamento' : [ {
 		pt : "O tema com o agrupamento ser&aacute; adicionado ao mapa atual.",
-		en : "",
-		es : "El tema con el que el agrupamiento ser&aacute; adicionado al mapa actual"
+		en : "The theme with which the group will be added to the current map.",
+		es : "El tema con el que el grupo ser&aacute; adicionado al mapa actual."
 	} ],
 	'erroTempo' : [ {
 		pt : "Erro. A opera&ccedil;&atilde;o demorou muito.",
