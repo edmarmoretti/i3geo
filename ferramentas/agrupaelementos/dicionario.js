@@ -32,22 +32,22 @@ i3GEOF.agrupaElementos.dicionario = {
 	} ],
 	'erroTempo' : [ {
 		pt : "Erro. A opera&ccedil;&atilde;o demorou muito.",
-		en : "",
-		es : "Error. La operaci&oacute;n tard&oacute; mucho tiempo"
+		en : "Error. Too long time execution.",
+		es : "Error. La operaci&oacute;n tard&oacute; mucho tiempo."
 	} ],
 	'erroTema' : [ {
 		pt : "Tema invalido",
-		en : "",
+		en : "Invalid theme",
 		es : "Tema invalido"
 	} ],
 	'erroItem' : [ {
 		pt : "erro ao ler os itens do tema de origem",
-		en : "",
+		en : "error when reading items of themes of origin",
 		es : "error al leer los &iacute;tems del tema de origen"
 	} ],
 	'criaAgrupamento' : [ {
 		pt : "Criar agrupamento",
-		en : "",
-		es : "Crear agrupamiento"
+		en : "Create group",
+		es : "Crear grupo"
 	} ]
 };
