@@ -1,4 +1,4 @@
-/**
+/*
  * Title: Utilit&aacute;rios
  *
  * Fun&ccedil;&otilde;es de uso geral

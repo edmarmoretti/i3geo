@@ -1,5 +1,5 @@
 alert("Essa opcao nao esta implementada");
-return;
+
 /*
 Title: Ferramenta que permite filtrar camadas baseada no cadastro
 do m&oacute;dulo METAESTAT
