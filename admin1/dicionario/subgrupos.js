@@ -19,6 +19,11 @@ i3GEOadmin.subgrupos.dicionario = {
 		en : "",
 		es : ""
 	} ],
+	'txtAjuda' : [ {
+		pt : "Aqui &eacute; poss&iacute;vel criar subgrupos de camadas ou inserir temas na raiz do grupo.",
+		en : "",
+		es : ""
+	} ],
     'txtDesc' : [ {
 		pt : "Utilize as opções abaixo para criar ou editar temas que ficarão na raiz do grupo e também para criar ou editar os subgrupos vinculados.",
 		en : "",

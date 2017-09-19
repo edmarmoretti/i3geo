@@ -10,7 +10,7 @@ i3GEOadmin.grupos.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "A &aacute;rvore &eacute; composta por n&iacute;veis hier&aacute;rquicos que iniciam com um menu, seguido de grupos e esses por subgrupos. Na raiz de cada n&iacute;vel podem existir temas, assim como no &uacute;ltimo n&iacute;vel (subgrupos).",
+		pt : "Aqui &eacute; poss&iacute;vel criar grupos de camadas ou inserir temas na raiz do menu.",
 		en : "",
 		es : ""
 	} ],
