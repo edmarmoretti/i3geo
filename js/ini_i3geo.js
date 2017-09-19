@@ -363,12 +363,16 @@ var i3GEO = {
 			}
 		}
 		if(c.hasOwnProperty("openLayers") && c.mapType !== "GM" ){
+			var d = c.openLayers;
 			i3GEO.Interface.ATUAL = "openlayers";
 			i3GEO.Interface.openlayers.googleLike = (c.mapType == "OSM") ? true:false;
 			//TODO singletile nao funciona
-			i3GEO.Interface.openlayers.TILES = (c.hasOwnProperty("singleTile") && c.singleTile != "") ? !c.singleTile:true;
-			i3GEO.Interface.openlayers.parametrosMap = c.openLayers.MapOptions;
-			i3GEO.Interface.openlayers.parametrosView = c.openLayers.ViewOptions;
+			i3GEO.Interface.openlayers.TILES = (d.hasOwnProperty("singleTile") && d.singleTile != "") ? !d.singleTile:true;
+			i3GEO.Interface.openlayers.parametrosMap = d.MapOptions;
+			i3GEO.Interface.openlayers.parametrosView = d.ViewOptions;
+			if(d.hasOwnProperty("editorButtons") && d.editorButtons != ""){
+				i3GEO.editor.botoes = d.editorButtons;
+			}
 		}
 		if(c.hasOwnProperty("googleMaps") && c.mapType == "GM"){
 			i3GEO.Interface.ATUAL = "googlemaps";
