@@ -132,6 +132,10 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
   http://localhost/i3geo/ms_criamapa.php?temasa=_lbiomashp&map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&temasa=_lbiomashp
 
   no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
+
+ largura - largura em pixel do mapa
+
+ altura - altura em pixels do mapa
 */
 
 if(isset($_GET["ajuda"])){
@@ -206,6 +210,9 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 
   no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
 
+ largura - largura em pixel do mapa
+
+ altura - altura em pixels do mapa
 	";
 	exit;
 }
@@ -610,6 +617,11 @@ $projecao = pegaProjecaoDefault("proj4");
 if($projecao != ""){
 	$mapn->setProjection($projecao);
 }
+//aplica o tamanho do mapa
+if(isset($parurl["largura"]) && isset($parurl["altura"])){
+    $mapn->setsize($parurl["largura"],$parurl["altura"]);
+}
+
 $tmpfname = str_replace(".map","",$tmpfname).".map";
 $salvo = $mapn->save($tmpfname);
 
@@ -723,10 +735,10 @@ function abreInterface($interface,$caminho,$tempo){
 	}
 	else{
 		if(file_exists($caminho."interface/".$interface)){
-			$urln = $caminho."interface/".$interface."?".session_id();
+			$urln = $caminho."interface/".$interface."?&".session_id();
 		}
 		else{
-			$urln = $interface."?".session_id();
+			$urln = $interface."?&".session_id();
 		}
 		if(!headers_sent()){
 			header("Location:".$urln);
@@ -1350,7 +1362,7 @@ Parametro:
 
 $dir_tmp {string} - Diret&oacute;rio tempor&aacute;rio (no servidor) utilizado pelo mapserver.
 
-$$cachedir {string} - Diret&oacute;rio de cache tempor&aacute;rio definido no ms_configura.php
+$cachedir {string} - Diret&oacute;rio de cache tempor&aacute;rio definido no ms_configura.php
 
 Retorno:
 

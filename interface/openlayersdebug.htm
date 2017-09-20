@@ -563,6 +563,7 @@
 	//ativa o banner de inicializacao
 	i3GEO.janela.tempoMsg($i("i3GEOlogoMarcaTemplate").innerHTML,4000);
 	(function() {
+		//parametros aplicados na criacao do arquivo mapfile
 		var parametrosMapa = {
 			//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
 			//Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Voce pode utilizar essa opcao para abrir um mapa com as camadas que voce quiser, mas para evitar redundâncias, prefira o uso de &temasa
@@ -642,7 +643,9 @@
 			filters: [{
 				layer: "",
 				expression: ""
-			}]
+			}],
+			//id de um mapa salvo e que sera recuperado
+			restoreMapId : ""
 		};
 		var config = {
 			//id do elemento HTML onde o corpo do mapa sera renderizado
@@ -659,6 +662,11 @@
 			//Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
 			//Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
 			i3GeoServer : "",
+			//opacidade default para camadas que nao sejam do tipo linha ou ponto
+			//a opacidade sera aplicada ao objeto HTML e nao ao LAYER original
+			//se for vazio, sera utilizado o valor definido no LAYER original
+			//Nao se aplica na interface googlemaps
+			layerOpacity: "",
 			//Funcao que sera executada apos a inicializacao do mapa
 			afterStart : function(){
 				$('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});

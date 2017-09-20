@@ -299,21 +299,16 @@ var i3GEO = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.init()");
 
+		if(configMapa && configMapa != ""){
+			i3GEO.configMapa(configMapa);
+		}
 		if(parametrosMapa && parametrosMapa != ""){
 			i3GEO.configura.mashuppar = i3GEO.parametrosMapa2mashuppar(parametrosMapa);
 		} else {
 			i3GEO.configura.mashuppar = "";
 		}
-		if(configMapa && configMapa != ""){
-			i3GEO.configMapa(configMapa);
-		}
 		i3GEO.cria();
 		i3GEO.inicia();
-		delete i3GEO.parametrosMapa2mashuppar;
-		delete i3GEO.configMapa;
-		//delete i3GEO.cria;
-		//delete i3GEO.inicia;
-		delete i3GEO.init;
 	},
 	//
 	//Muitos parametros de configuracao podem ser utilizados para controlar o funcionamento da interface
@@ -329,6 +324,10 @@ var i3GEO = {
 		if(c.hasOwnProperty("tools")){
 			i3GEO.configura.ferramentas = c.tools;
 		}
+		if(c.hasOwnProperty("layerOpacity") && c.hasOwnProperty("layerOpacity") != ""){
+			i3GEO.Interface.LAYEROPACITY = c.layerOpacity;
+		}
+
 		i3GEO.Interface.IDCORPO = (c.hasOwnProperty("mapBody") && c.mapBody != "") ? c.mapBody:"mapai3Geo";
 		i3GEO.finalizaAPI = (c.hasOwnProperty("afterStart") && c.afterStart != "") ? c.afterStart:"";
 		if(c.hasOwnProperty("components")){
@@ -390,7 +389,7 @@ var i3GEO = {
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.parametrosMapa2mashuppar()");
 
-		var par = [];
+		var par = [],temp;
 		if(p.hasOwnProperty("mapfilebase") && p.mapfilebase != ""){
 			par.push("&base="+p.mapfilebase);
 		}
@@ -492,6 +491,18 @@ var i3GEO = {
 				par.push(n.join(""));
 			}
 		}
+		if(p.hasOwnProperty("restoreMapId") && p.restoreMapId != ""){
+			par.push("&restauramapa="+p.restoreMapId);
+		}
+
+		temp = $i(i3GEO.Interface.IDCORPO);
+		if(temp && temp.style && temp.style.width){
+			par.push("&largura="+parseInt(temp.style.width,10));
+		}
+		if(temp && temp.style && temp.style.height){
+			par.push("&altura="+parseInt(temp.style.height,10));
+		}
+
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.parametrosMapa2mashuppar() " + par.join(""));
 
@@ -518,11 +529,10 @@ var i3GEO = {
 				);
 		});
 		var tamanho, temp;
-		temp = window.location.href.split("?");
+		temp = window.location.href.split("?&");
 		if (temp[1]) {
 			temp = temp[1].split("&");
-			if (temp[0]
-				&& temp[0] != "") {
+			if (temp[0] && temp[0] != "" && temp.length == 1) {
 				i3GEO.configura.sid = temp[0];
 				//
 				// O # precisa ser removido, caso contrario, a opcao de reload
@@ -553,7 +563,6 @@ var i3GEO = {
 		//
 
 		temp = $i(i3GEO.Interface.IDCORPO);
-
 		if (temp && temp.style && temp.style.width && temp.style.height) {
 			i3GEO.Interface.cria(
 					parseInt(temp.style.width,10),
@@ -597,6 +606,9 @@ var i3GEO = {
 		i3GEO.mapa.aplicaPreferencias();
 		montaMapa = function(retorno) {
 			try {
+				delete i3GEO.parametrosMapa2mashuppar;
+				delete i3GEO.configMapa;
+				delete i3GEO.init;
 				var temp, nomecookie = "i3geoOLUltimaExtensao", preferencias = "";
 				// verifica se existe bloqueio em funcao da senha no
 				// ms_configura.php
@@ -951,6 +963,16 @@ var i3GEO = {
 			console.info("i3GEO.calculaTamanho()");
 
 		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, antigoh = i3GEO.parametros.h;
+
+		temp = $i(i3GEO.Interface.IDCORPO);
+		if(temp && temp.style && temp.style.width && temp.style.height){
+			i3GEO.parametros.w = parseInt(temp.style.width,10);
+			i3GEO.parametros.h = parseInt(temp.style.height,10);
+			return [
+				i3GEO.parametros.w,
+				i3GEO.parametros.h
+			];
+		}
 		menos = 0;
 		document.body.style.width = "100%";
 		temp = i3GEO.util.tamanhoBrowser();
@@ -983,6 +1005,15 @@ var i3GEO = {
 			console.info("i3GEO.reCalculaTamanho()");
 
 		var diminuix, diminuiy, menos, novow, novoh, w, h, temp, antigoh = i3GEO.parametros.h;
+		temp = $i(i3GEO.Interface.IDCORPO);
+		if(temp && temp.style && temp.style.width && temp.style.height){
+			i3GEO.parametros.w = parseInt(temp.style.width,10);
+			i3GEO.parametros.h = parseInt(temp.style.height,10);
+			return [
+				i3GEO.parametros.w,
+				i3GEO.parametros.h
+			];
+		}
 		menos = 0;
 		document.body.style.width = "100%";
 		temp = i3GEO.util.tamanhoBrowser();

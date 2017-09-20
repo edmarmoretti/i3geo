@@ -57,7 +57,11 @@ var i3geoOL;
 
 i3GEO.Interface =
 {
-        /**
+        /*
+         * Opacidade default dos layers de tipo imagem ou poligonais
+         */
+		LAYEROPACITY : "",
+		/**
          * Propriedade: ATUAL
          *
          * Interface utilizada na cria&ccedil;&atilde;o e controle do mapa.
@@ -736,7 +740,7 @@ i3GEO.Interface =
              * i3geoOL = new ol.Map()
              */
             cria : function(w, h) {
-                var f, ins, i = $i(i3GEO.Interface.IDCORPO);
+            	var f, ins, i = $i(i3GEO.Interface.IDCORPO);
 
                 if (i) {
                     f = $i("openlayers");
@@ -1346,6 +1350,9 @@ i3GEO.Interface =
                         if (layer && layer != "") {
                             if (camada.escondido.toLowerCase() === "sim") {
                                 layer.preload = 0;
+                            }
+                            if(camada.type > 1 && i3GEO.Interface.LAYEROPACITY != ""){
+                            	layer.setOpacity(i3GEO.Interface.LAYEROPACITY);
                             }
                             i3geoOL.addLayer(layer);
                             i3GEO.Interface.aposAdicNovaCamada(camada);
