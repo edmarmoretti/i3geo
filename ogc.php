@@ -488,7 +488,7 @@ if(!empty($_GET["restauramapa"])){
 //para operar como o Geoserver, abre o openlayers
 //
 if(isset($format) && strtolower($format) == "application/openlayers"){
-	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica,legenda";
+	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica,legenda&ativarodadomouse=true";
 	//caso exista o openlayers3
 	//if(file_exists(dirname(__FILE__)."/mashups/openlayers3.php")){
 	//	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers3.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica,legenda";
