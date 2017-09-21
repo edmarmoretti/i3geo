@@ -15,6 +15,7 @@ if(count($parurl) == 0){
     ajuda();
     exit;
 }
+
 if (isset($parurl["opacidade"])) {
     $opacidade = $parurl["opacidade"] * 1;
 } else {
@@ -1122,7 +1123,7 @@ function ajuda()
 				//$('.iconeGuiaMovel').tooltip('show');
 				$("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
 				adicionaBotoesEditor();
-				$i("openlayers").style.backgroundColor = "rgb(255,255,255)";
+				$i("openlayers").style.backgroundColor = "rgb(245,245,245)";
 			},
 			//parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas, balao de info, etc
 			components : {
