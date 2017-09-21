@@ -136,6 +136,8 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
  largura - largura em pixel do mapa
 
  altura - altura em pixels do mapa
+
+ DESLIGACACHE - sim|nao forca o desligamento do cache em todos os layers
 */
 
 if(isset($_GET["ajuda"])){

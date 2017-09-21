@@ -42,7 +42,7 @@ i3GEOadmin.editor = {
 		preview: function(codigo){
 			i3GEOadmin.core.modalAguarde(true);
 			var w = $("#modalGeral .modal-body").width() - 20;
-			var p = "<iframe style='width:" + w + "px;height:650px;border:0px solid white;' src='../../../../mashups/openlayers3.php?servidor=" + i3GEOadmin.editor.servidorPreview + "&fundo=e_wsm&nocache=sim&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&botoes=identifica&largura=" + (w - 40) + "&altura=600&temas=" + codigo + "'>";
+			var p = "<iframe style='width:" + w + "px;height:650px;border:0px solid white;' src='../../../../mashups/openlayers.php?fundo=wsm&DESLIGACACHE=sim&controles=navigation,panzoombar,scaleline,mouseposition&ativarodadomouse=true&botoes=identifica&largura=" + (w - 40) + "&altura=600&temas=" + codigo + "'>";
 			$("#modalGeral .modal-body").html(p);
 		}
 };

@@ -1898,35 +1898,13 @@ i3GEO.editorOL =
 			if (i3GEO.editorOL.pontos.length === 0) {
 				return;
 			}
-			var f, SHADOW_Z_INDEX = 10, MARKER_Z_INDEX = 11, layer = new OpenLayers.Layer.Vector("pontos", {
-				styleMap : new OpenLayers.StyleMap({
-					externalGraphic : i3GEO.editorOL.marca,
-					backgroundGraphic : "../pacotes/openlayers/img/marker_shadow.png",
-					backgroundXOffset : 0,
-					backgroundYOffset : -7,
-					graphicZIndex : MARKER_Z_INDEX,
-					backgroundGraphicZIndex : SHADOW_Z_INDEX,
-					pointRadius : 10
-				}),
-				isBaseLayer : false,
-				rendererOptions : {
-					yOrdering : true
-				},
-				displayInLayerSwitcher : true,
-				visibility : true
-			}), index, x = [], y = [], features = [];
+			var x,y,index = 0;
 			for (index = 0; index < i3GEO.editorOL.pontos.length; index = index + 2) {
-				x.push(i3GEO.editorOL.pontos[index]);
-				y.push(i3GEO.editorOL.pontos[index + 1]);
+				x = i3GEO.editorOL.pontos[index];
+				y = i3GEO.editorOL.pontos[index + 1];
+				i3GEO.desenho.addPin(x, y, 27, 27, i3GEO.editorOL.marca);
+				//x, y, w, h, imagem, namespace, centro, funcaoclick
 			}
-			for (index = 0; index < x.length; index++) {
-				f = new OpenLayers.Geometry.Point(x[index], y[index]);
-				f = i3GEO.util.projGeo2OSM(f);
-				f = new OpenLayers.Feature.Vector(f);
-				features.push(f);
-			}
-			layer.addFeatures(features);
-			i3GEO.editorOL.mapa.addLayer(layer);
 		},
 		adicionaKml : function() {
 			var temp, n, i, id, url;

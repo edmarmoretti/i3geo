@@ -307,7 +307,6 @@ var i3GEO = {
 		} else {
 			i3GEO.configura.mashuppar = "";
 		}
-		console.info(i3GEO.configura.mashuppar);
 		i3GEO.cria();
 		i3GEO.inicia();
 	},
@@ -412,9 +411,12 @@ var i3GEO = {
 				par.push("&desligar="+p.layers.off.join(","));
 			}
 		}
-		if(p.hasOwnProperty("points") && p.points.length > 0){
+		if(p.hasOwnProperty("points") && p.points.coord.length > 0){
 			par.push("&nometemapontos="+p.points.title);
 			par.push("&pontos="+p.points.coord.join(","));
+		}
+		if(p.hasOwnProperty("cacheOff") && p.cacheOff == "sim"){
+			par.push("&DESLIGACACHE=sim");
 		}
 		if(p.hasOwnProperty("lines")){
 			var n = [];
