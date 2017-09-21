@@ -10,6 +10,7 @@ Barra de botoes de navegacao
 */
 .ol-control button {
 	font-size: 1.5em;
+	margin: 2px;
 }
 /*
 Para a barra de rolagem

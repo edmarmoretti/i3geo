@@ -307,6 +307,7 @@ var i3GEO = {
 		} else {
 			i3GEO.configura.mashuppar = "";
 		}
+		console.info(i3GEO.configura.mashuppar);
 		i3GEO.cria();
 		i3GEO.inicia();
 	},

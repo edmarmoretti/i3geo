@@ -52,7 +52,7 @@
 <div class="list-group-item">
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
-			<a title="{{{editarI3geo}}}" onclick="window.open('../../../../admin1/black_editor.php?&temaEdicao={{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+			<a title="{{{editarI3geo}}}" onclick="window.open('../../../../admin1/black_editor.php?temaEdicao={{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons  md-18">more_horiz</i>
 			</a>
 			{{{editarI3geo}}}
