@@ -85,7 +85,6 @@ No terminal, digite a sequência de comandos abaixo.
 
 ```
 sudo apt-get install apache2 apache2-doc apache2-utils cgi-mapserver mapserver-bin sqlite libapache2-mod-php5 php5 php5-common php5-dev php5-curl php5-json php5-gd php5-odbc php5-pgsql php5-sqlite php5-ps php5-xmlrpc php5-xsl php5-imagick php5-mapscript
-sudo apt-get install php5-mbstring
 sudo apt-get install proj-epsg
 sudo a2enmod cgi
 sudo service apache2 restart
@@ -104,7 +103,7 @@ sudo apt-get install r-base r-base-core r-cran-maptools
 ### Dependendo da versão do Ubuntu, pode ser ainda necessário isso:
 
 ```
-sudo apt-get install php5-mbstring 
+sudo apt-get install php5-mbstring
 ```
 
 Em alguns casos a mbstring já é instalada junto com o PHP, por isso esse comando pode gerar mensagem de erro sem maiores consequências.
@@ -125,10 +124,61 @@ Para reiniciar o Apache e efetivar as mudanças
 
 
 ```
-sudo service apache2 restart 
+sudo service apache2 restart
 ```
 
 Teste a instalação digitando no seu navegador web http://localhost
+
+## Linux (baseado em Ubuntu 16)
+
+As versões mais recentes do Ubuntu utilizam como padrão o PHP 7, que é incompatível com o Mapserver e i3Geo.
+
+Nesses casos é necessário adicionar um repositório de código que contenha o PHP 5 e compilar o Mapserver, o que pode ser feito seguindo-se o roteiro:
+
+Digite no terminal Linux:
+
+```
+sudo add-apt-repository ppa:ondrej/php
+sudo apt-get update
+sudo apt-get install apache2
+sudo apt-get install php5.6
+sudo apt-get install php5.6-memcached php5.6-cli php5.6-mbstring php5.6-mcrypt php5.6-xml php5.6-curl php5.6-json php5.6-gd php5.6-odbc php5.6-pgsql php5.6-sqlite php5.6-ps php5.6-xmlrpc php5.6-xsl php5.6-imagick
+sudo apt-get install memcached
+a2enmod rewrite
+sudo a2enmod cgi
+sudo service apache2 restart
+wget http://download.osgeo.org/mapserver/mapserver-7.0.6.tar.gz
+tar xvf mapserver-7.0.6.tar.gz
+cd mapserver-7.0.6/
+sudo apt-get install cmake
+mkdir build
+cd build
+apt-get install libfreetype6-dev
+apt-get install php5.6-dev
+apt-get install libproj-dev
+apt-get install libfribidi-dev
+apt-get install libharfbuzz-dev
+apt-get install libcairo-dev
+apt-get install libgdal-dev
+cmake -DCMAKE_INSTALL_PREFIX=/opt \
+        -DCMAKE_PREFIX_PATH=/usr/local/pgsql/91:/usr/local:/opt \
+        -DWITH_CLIENT_WFS=ON \
+        -DWITH_CLIENT_WMS=ON \
+        -DWITH_CURL=ON \
+        -DWITH_SOS=OFF \
+        -DWITH_PHP=ON \
+        -DWITH_FCGI=OFF \
+        -DWITH_PYTHON=OFF \
+        -DWITH_SVGCAIRO=OFF \
+        -DWITH_GIF=OFF \
+        ../ >../configure.out.txt
+make
+make install
+echo extension=php_mapscript.so>/etc/php/5.6/mods-available/mapscript.ini
+phpenmod mapscript
+service apache2 restart
+
+```
 
 ### i3Geo
 
