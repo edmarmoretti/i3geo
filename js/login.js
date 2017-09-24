@@ -184,14 +184,14 @@ i3GEO.login = {
 		// verificacao rapida, busca apenas na sessao do usuario ja aberta
 		if (!tipo || tipo === "sessao") {
 			p = locaplic
-				+ "/admin/php/login.php?funcao=validaoperacaosessao";
+				+ "/admin1/php/login.php?funcao=validaoperacaosessao";
 		}
 		// verifica no banoc de dados, o que considera qualquer mudanca no banco
 		// feita apos o usuario ter aberto a sessao
 		//XXX implementar funcao validaoperacaobanco
 		if (tipo === "banco") {
 			p = locaplic
-				+ "/admin/php/login.php?funcao=validaoperacaobanco";
+				+ "/admin1/php/login.php?funcao=validaoperacaobanco";
 		}
 		cp = new cpaint();
 		cp.set_response_type("JSON");

@@ -439,7 +439,7 @@ senha {string}
 i3geomaster {array} - vari&aacute;vel existente no ms_configura.php com o cadastro de usu&aacute;rios masters
 */
 function verificaMaster($usuario,$senha,$i3geomaster){
-	foreach($i3geomaster as $teste){
+    foreach($i3geomaster as $teste){
 		if(!empty($usuario) && !empty($senha) && $teste["usuario"] == $usuario && $teste["senha"] == $senha){
 			return true;
 		}

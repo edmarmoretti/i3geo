@@ -1,91 +1,50 @@
 <?php
-/*
-Title: funcoes_login.php
-
-Controle das requisi&ccedil;&otilde;es em Ajax utilizadas para gerenciar login de usu&aacute;rio e controle de acesso
-
-Recebe as requisi&ccedil;&otilde;es feitas em JavaScript (AJAX) e retorna o resultado para a interface.
-
-O par&acirc;metro "funcao" define qual a opera&ccedil;&atilde;o que ser&aacute; executada. Esse par&acirc;metro &eacute; verificado em um bloco "switch ($funcao)".
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Edmar Moretti
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-
-Arquivo:
-
-i3geo/classesphp/funcoes_login.php
-
-Parametros:
-
-funcao - op&ccedil;&atilde;o que ser&aacute; executada (veja abaixo a lista de Valores que esse par&acirc;metro pode assumir).
-
-Retorno:
-
-O resultado da opera&ccedil;&atilde;o ser&aacute; retornado em um objeto CPAINT.
-
-A constru&ccedil;&atilde;o da string JSON &eacute; feita preferencialmente pelas fun&ccedil;&otilde;es nativas do PHP.
-Para efeitos de compatibilidade, uma vez que at&eacute; a vers&atilde;o 4.2 a string JSON era construida pelo CPAINT,
-o objeto CPAINT ainda &eacute; definido, por&eacute;m, a fun&ccedil;&atilde;o cpjson verifica se as fun&ccedil;&otilde;es nativas do PHPO (json)
-est&atilde;o instaladas, se estiverem, utiliza-se a fun&ccedil;&atilde;o nativa, se n&atilde;o, utiliza-se o CPAINT para gerar o JSON.
-
-Exemplo de chamada CPAINT (Ajax) do lado do cliente (javascript):
-
-var p = "classesphp/mapa_controle.php?funcao=crialente&resolucao=1.5&g_sid="+g_sid
-
-var cp = new cpaint()
-
-cp.set_response_type("JSON")
-
-cp.call(p,"lente",ajaxabrelente)
-
-*/
-//error_reporting(0);
-//
-//pega as variaveis passadas com get ou post
-//
-include_once(dirname(__FILE__)."/../safe.php");
-
-include_once(dirname(__FILE__)."/admin.php");
-
+include(dirname(__FILE__)."/../../ms_configura.php");
+include(dirname(__FILE__)."/funcoesAdmin.php");
 //verifica se o login pode ser realizado
-if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
+if ($i3geoPermiteLogin == false) {
 	header ( "HTTP/1.1 403 Login desativado" );
 	exit ();
 }
-//$i3geoPermiteLoginIp vem de ms_configura.php
-if(isset($i3geoPermiteLoginIp)){
-	checaLoginIp($i3geoPermiteLoginIp);
+// checa a lista branca de IPs
+if (! empty ( $i3geoPermiteLoginIp )) {
+    $ipaddress = '';
+    if (getenv ( 'HTTP_CLIENT_IP' ))
+        $ipaddress = getenv ( 'HTTP_CLIENT_IP' );
+        else if (getenv ( 'HTTP_X_FORWARDED_FOR' ))
+            $ipaddress = getenv ( 'HTTP_X_FORWARDED_FOR' );
+            else if (getenv ( 'HTTP_X_FORWARDED' ))
+                $ipaddress = getenv ( 'HTTP_X_FORWARDED' );
+                else if (getenv ( 'HTTP_FORWARDED_FOR' ))
+                    $ipaddress = getenv ( 'HTTP_FORWARDED_FOR' );
+                    else if (getenv ( 'HTTP_FORWARDED' ))
+                        $ipaddress = getenv ( 'HTTP_FORWARDED' );
+                        else if (getenv ( 'REMOTE_ADDR' ))
+                            $ipaddress = getenv ( 'REMOTE_ADDR' );
+                            else
+                                $ipaddress = 'UNKNOWN';
+                                if (! in_array ( $ipaddress, $i3geoPermiteLoginIp )) {
+                                    header ( "HTTP/1.1 403 Login nao permitido para o ip" );
+                                    exit ();
+                                }
 }
-
+if(!function_exists("cpjson")){
+    include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
+}
 //error_reporting(0);
 session_write_close();
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login
+include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
+
 if(!empty($_POST["usuario"]) && !empty($_POST["senha"])){
-	logoutUsuario();
+    logoutUsuario();
 	session_regenerate_id();
 	$_SESSION = array();
 	session_start();
 	$funcao = "login";
+	$_SESSION["locaplic"] = $locaplic;
+	$_SESSION["conexaoadmin"] = $conexaoadmin;
 }
 else{//se nao, verifica se o login ja existe realmente
 	if(!empty($_COOKIE["i3geocodigologin"])){
@@ -101,6 +60,7 @@ else{//se nao, verifica se o login ja existe realmente
 		cpjson("erro");
 	}
 }
+
 //var_dump($_SESSION);exit;
 $retorno = "logout"; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
@@ -114,7 +74,7 @@ switch (strtoupper($funcao))
 	case "LOGIN":
 		$usuario = $_POST["usuario"];
 		$senha = $_POST["senha"];
-		$teste = autenticaUsuario($usuario,$senha);
+		$teste = autenticaUsuario($usuario,$senha,$dir_tmp,$i3geomaster);
 		if($teste == "muitas tentativas"){
 			logoutUsuario();
 			header ( "HTTP/1.1 403 Muitas tentativas" );
@@ -210,7 +170,7 @@ switch (strtoupper($funcao))
 }
 function alterarSenha($usuario,$novaSenha){
 	include(dirname(__FILE__)."/conexao.php");
-	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where senha = '".md5($_SESSION["senha"])."' and login = '$usuario' and ativo = 1",$locaplic);
+	$dados = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where senha = '".md5($_SESSION["senha"])."' and login = '$usuario' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
 		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='".md5($novaSenha)."' WHERE login = '$usuario'");
 		$_SESSION["senha"] = $novaSenha;
@@ -227,7 +187,7 @@ function alterarSenha($usuario,$novaSenha){
 function recuperarSenha($usuario){
 	include(dirname(__FILE__)."/conexao.php");
 	$novaSenha = rand(9000,1000000);
-	$dados = pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$locaplic);
+	$dados = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
 		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='".md5($novaSenha)."' WHERE login = '$usuario'");
 		$to      = $dados[0]["email"];
@@ -290,7 +250,7 @@ function validaSessao(){
 //faz a autenticacao de um usuario baseado no login e senha
 //registra as operacoes, papeis e grupos do usuario na SESSION
 //
-function autenticaUsuario($usuario,$senha){
+function autenticaUsuario($usuario,$senha,$dir_tmp,$i3geomaster){
 	include(dirname(__FILE__)."/conexao.php");
 	error_reporting(0);
 	$senhamd5 = md5($senha);
@@ -314,14 +274,15 @@ function autenticaUsuario($usuario,$senha){
 	else {
 		file_put_contents($nomeArquivo, 1);
 	}
+
 	//verifica se o usuario esta cadastrado no ms_configura.php em $i3geomaster
 	//echo "select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and (senha = '$senhamd5' or senha = '$senha') and ativo = 1";exit;
 	//exit;
-	if(verificaMaster($usuario,$senha) == true){
+	if(\admin\php\funcoesAdmin\verificaMaster($usuario,$senha,$i3geomaster) == true){
 		//$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$dbh,false);
-		$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papeis ",$dbh,false);
-		$op = pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O",$dbh,false);
-		$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupos ",$dbh,false);
+	    $pa = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geousr_papeis ",$dbh,false);
+	    $op = \admin\php\funcoesAdmin\pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O",$dbh,false);
+	    $gr = \admin\php\funcoesAdmin\pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupos ",$dbh,false);
 		//var_dump($gr);exit;
 		$operacoes = array();
 		foreach($op as $o){
@@ -350,13 +311,13 @@ function autenticaUsuario($usuario,$senha){
 		$dados = array();
 		//por causa das versoes antigas do PHP
 		if(strlen($senha) == 32 || !function_exists("password_hash") ){
-			$dados = pegaDados("select senha,login,id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
+		    $dados = \admin\php\funcoesAdmin\pegaDados("select senha,login,id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and senha = '$senhamd5' and ativo = 1",$dbh,false);
 			if(count($dados) == 1 && $dados[0]["senha"] == $senhamd5 && $dados[0]["login"] == $usuario){
 				$ok = true;
 			}
 		}
 		else{
-			$usuarios = pegaDados("select senha,id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$dbh,false);
+		    $usuarios = \admin\php\funcoesAdmin\pegaDados("select senha,id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$dbh,false);
 			if (count($usuarios) == 1 && password_verify($senha,$usuarios[0]["senha"])){
 				$ok = true;
 				$dados[] = array("id_usuario"=>$usuarios[0]["id_usuario"],"nome_usuario"=>$usuarios[0]["nome_usuario"]);
@@ -364,9 +325,9 @@ function autenticaUsuario($usuario,$senha){
 			$usuarios = null;
 		}
 		if($ok == true){
-			$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
-			$op = pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
-			$gr = pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario where id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
+		    $pa = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario where id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
+		    $op = \admin\php\funcoesAdmin\pegadados("SELECT O.codigo, PU.id_usuario FROM ".$esquemaadmin."i3geousr_operacoes AS O JOIN ".$esquemaadmin."i3geousr_operacoespapeis AS OP ON O.id_operacao = OP.id_operacao JOIN ".$esquemaadmin."i3geousr_papelusuario AS PU ON OP.id_papel = PU.id_papel	WHERE id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
+		    $gr = \admin\php\funcoesAdmin\pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupousuario where id_usuario = ".$dados[0]["id_usuario"],$dbh,false);
 			$operacoes = array();
 			foreach($op as $o){
 				$operacoes[$o["codigo"]] = true;

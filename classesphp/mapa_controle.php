@@ -227,7 +227,9 @@ if($funcao == "criaMapa"){
 	//chdir($locaplic);
 	$interfaceTemp = $interface;
 	$interface = "mashup";
+
 	include_once(dirname(__FILE__)."/../ms_criamapa.php");
+
 	$_SESSION["interface"] = $interfaceTemp;
 	$temp = $_SESSION["map_file"];
 	$id = session_id();

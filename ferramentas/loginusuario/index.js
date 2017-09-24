@@ -225,7 +225,7 @@ i3GEOF.loginusuario = {
 				}
 			}
 		};
-		p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=login";
+		p = i3GEO.configura.locaplic+"/admin1/php/login.php?funcao=login";
 		cp = new cpaint();
 		cp.set_transfer_mode("POST");
 		cp.set_response_type("JSON");
@@ -246,7 +246,7 @@ i3GEOF.loginusuario = {
 				alert($trad("x31"));
 			}
 		};
-		p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=recuperarSenha";
+		p = i3GEO.configura.locaplic+"/admin1/php/login.php?funcao=recuperarSenha";
 		cp = new cpaint();
 		cp.set_transfer_mode("POST");
 		cp.set_response_type("JSON");
@@ -269,7 +269,7 @@ i3GEOF.loginusuario = {
 			}
 		};
 		if(novaSenha != ""){
-			p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=alterarSenha";
+			p = i3GEO.configura.locaplic+"/admin1/php/login.php?funcao=alterarSenha";
 			cp = new cpaint();
 			cp.set_transfer_mode("POST");
 			cp.set_response_type("JSON");

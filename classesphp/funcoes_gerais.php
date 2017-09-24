@@ -2716,7 +2716,7 @@ Return:
 */
 function verificaPapelUsuario($id_papel)
 {
-	include_once(dirname(__FILE__)."/../admin/php/login.php");
+	include_once(dirname(__FILE__)."/../admin1/php/login.php");
 	$r = verificaPapelSessao($id_papel);
 	return $r;
 }
@@ -2838,7 +2838,7 @@ $salva - salva o mapfile com os layers removidos ou nao
 Retorno: boolean indicando se o mapfile contem layers indevidos
 */
 function validaAcessoTemas($map_file,$salva = true){
-	//error_reporting(0);
+	//error_reporting(E_ALL);
 	$indevidos = listaLayersIndevidos($map_file);
 	$existeIndevidos = false;
 	if(count($indevidos) > 0){
@@ -3034,7 +3034,7 @@ function restauraMapaAdmin($id_mapa,$dir_tmp){
 	if (filter_var($id_mapa, FILTER_VALIDATE_INT) === false){
 		exit;
 	}
-	include(dirname(__FILE__)."/classesphp/conexao.php");
+	include(dirname(__FILE__)."/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
@@ -3120,7 +3120,7 @@ Array originada de fetchAll
 function pegaDadosAdminKey($sql,$subsEsquema){
 	//pegaDadosAdminKey("select codigo_tema,link_tema from __esq__i3geoadmin_temas","__esq__");
 	$resultado = array();
-	include(dirname(__FILE__)."/classesphp/conexao.php");
+	include(dirname(__FILE__)."/conexao.php");
 	$sql = str_replace($subsEsquema,$esquemaadmin,$sql);
 	//error_reporting(0);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);

@@ -423,7 +423,6 @@ if(!isset($i3geoPermiteLogin)){
 else{
 	$i3geoPermiteLogin_ = $i3geoPermiteLogin;
 }
-
 /*
 Inicia a se&ccedil;&atilde;o
 
@@ -661,9 +660,9 @@ if(isset($url_wms)){
 
 adaptaLayers($tmpfname,$versao);
 
-if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat")){
-	require_once(dirname(__FILE__)."/ms_registraip.php");
-}
+//if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat")){
+//	require_once(dirname(__FILE__)."/ms_registraip.php");
+//}
 if ($interface != "mashup"){
 	abreInterface($interface,$caminho,$tempo);
 }
@@ -727,8 +726,7 @@ function adaptaLayers($tmpfname,$versao){
 Redireciona para o HTML definido em $interface, abrindo o mapa
 */
 function abreInterface($interface,$caminho,$tempo){
-	$nomeInterface = explode(".",basename($interface));
-	//$_SESSION["interface"] = $nomeInterface[0];
+    $nomeInterface = explode(".",basename($interface));
 	if (count(explode(".php",$interface)) > 1){
 		if(file_exists($caminho."interface/".$interface)){
 			include_once($caminho."interface/".$interface);
@@ -1319,31 +1317,7 @@ function incluiTemaWms()
 Projeto gvsig
 */
 function incluiMapaGvsig($gvsiggvp,$gvsigview=""){
-	global $mapn,$locaplic;
-	include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
-	$gm = new gvsig2mapfile($gvsiggvp);
-	if(empty($gvsigview)){
-		$gvsigview = $gm->getViewsNames();
-		//$gvsigview = $gvsigview[0];
-	}
-	else{
-		$gvsigview = str_replace(" ",",",$gvsigview);
-		$gvsigview = explode(",",$gvsigview);
-	}
-	$numlayers = $mapn->numlayers;
-	for ($i=0;$i < $numlayers;$i++){
-		$layer = $mapn->getlayer($i);
-		$layer->set("status",MS_DELETE);
-	}
-	foreach($gvsigview as $v){
-		if($v != ""){
-			$dataView = $gm->getViewData($v);
-			$mapn = $gm->addLayers($mapn,$gvsigview,$dataView["layerNames"]);
-		}
-	}
-	$next = $dataView["extent"];
-	$ext = $mapn->extent;
-	$ext->setextent($next[0],$next[1],$next[2],$next[3]);
+
 }
 /*
 Captura e mostra os erros de processamento do mapserver

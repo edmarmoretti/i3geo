@@ -147,7 +147,7 @@ include "head.php";
 		$(window).on("scroll click",
 			function(){
 				$("#mensagemLogin").fadeOut(300);
-				$("#jumbotron").fadeOut(300)
+				$("#jumbotron").fadeOut(300);
 			}
 		);
 		//verifica se deve ou nao esconder a mensagem de boas vindas verificando o parametro enviado pela url
