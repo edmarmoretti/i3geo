@@ -258,6 +258,16 @@ $statusFerramentas = array(
 	"melhorcaminho"=>false
 );
 /*
+Variable: $i3GeoRegistraAcesso
+
+Permite ou nao registrar no banco de dados quando uma camada e adicionada ao mapa, possibilitando a geracao de estatisticas.
+
+Quando true, e necessario que exista um usuario com permissao de escrita no banco de dados de administracao, o que pode nao ser desejado em ambientes de producao.
+
+Afeta apenas as estatisticas de acesso.
+ */
+$i3GeoRegistraAcesso = false;
+/*
 Variable: $i3geoBlFerramentas
 
 Lista de ferramentas que sao bloqueadas, impedindo sua execucao.
@@ -514,7 +524,6 @@ Tipo:
 {string}
 */
 $metaestatTemplates = "/ferramentas/metaestat/templates";
-
 /*
 Variable: navegadoresLocais
 
@@ -690,7 +699,7 @@ Variable: conexaoadmin
 
 Arquivo PHP que define a string de conexao (PDO) com o banco de dados administrativo.
 
-Esse arquivo e incluido no programa i3geo/admin/conexao.php
+Esse arquivo e incluido no programa conexao.php
 
 O banco de dados administrativo e utilizado para definir coisas como a arvore de temas, arvore de mapas, etc.
 
@@ -698,7 +707,7 @@ O banco de dados, originalmente, e montado em SQLITE, porem, em ambientes corpor
 
 Se voce quiser utilizar a conexao default, baseado no SQLITE, mantenha essa variavel vazia.
 
-O programa PHP que estabelece a conexao deve retornar objetos com nomes padronizados. Veja o arquivo i3geo/admin/conexao.php e i3geo/admin/php/conexaopostgresql.php para maiores detalhes.
+O programa PHP que estabelece a conexao deve retornar objetos com nomes padronizados. Veja o arquivo classesphp/conexao.php, admin1/php/conexao.php e i3geo/admin1/php/conexaopostgresql.php para maiores detalhes.
 
 Para criar o banco de dados de administracao utilize http://nome_do_host/i3geo/admin1/ferramentas/criabanco/index.php
 

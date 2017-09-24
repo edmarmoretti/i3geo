@@ -55,8 +55,8 @@ if (!i3GEO || typeof (i3GEO) === 'undefined') {
 		navm = true;
 	}
 }
-i3GEO.editorOL =
-{
+i3GEO.editorOL = {
+		interacoes: "",
 		MUSTACHESALVAGEOMETRIAS: "",
 		MUSTACHEFERRAMENTAS: "",
 		MUSTACHEPROPRIEDADES: "",
@@ -84,150 +84,13 @@ i3GEO.editorOL =
 			//map : i3geoOL,
 			visible : false
 		}),
-		e_oce : new ol.layer.Tile({
-			title : "ESRI Ocean Basemap",
-			visible : false,
-			isBaseLayer : true,
-			name : "oce",
-			source : new ol.source.TileArcGISRest({
-				url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
-				attributions: [
-					new ol.Attribution({
-						html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
-					})
-					]
-			})
-		}),
-		e_ims : new ol.layer.Tile({
-			title : "ESRI Imagery World 2D",
-			visible : false,
-			isBaseLayer : true,
-			name : "ims",
-			source : new ol.source.TileArcGISRest({
-				url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
-				attributions: [
-					new ol.Attribution({
-						html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
-					})
-					]
-			})
-		}),
-		e_wsm : new ol.layer.Tile({
-			title : "ESRI World Street Map",
-			visible : false,
-			isBaseLayer : true,
-			name : "wsm",
-			source : new ol.source.TileArcGISRest({
-				url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
-				attributions: [
-					new ol.Attribution({
-						html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
-					})
-					]
-			})
-		}),
-		ol_mma : new ol.layer.Tile({
-			title : "Base carto MMA",
-			visible : false,
-			isBaseLayer : true,
-			name : "bra",
-			source : new ol.source.TileWMS({
-				url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
-				params : {
-					'layers' : "baseraster",
-					'srs' : "EPSG:4326",
-					'format' : "image/png"
-				}
-			})
-		}),
-		e_tms : new ol.layer.Tile({
-			title : "OSGEO",
-			visible : false,
-			isBaseLayer : true,
-			name : "tms",
-			source : new ol.source.TileWMS({
-				url : "http://tilecache.osgeo.org/wms-c/Basic.py/",
-				params : {
-					'layers' : "basic",
-					'type' : "png",
-					'srs' : "EPSG:4326",
-					'format' : "image/png",
-					'VERSION' : '1.1.1'
-				},
-				attributions: [
-					new ol.Attribution({
-						html: '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
-					})
-					]
-			})
-		}),
-		top_wms : new ol.layer.Tile({
-			title : "Topon&iacute;mia MMA",
-			visible : false,
-			isBaseLayer : true,
-			name : "bra",
-			source : new ol.source.TileWMS({
-				url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&",
-				params : {
-					'layers' : "base",
-					'srs' : "EPSG:4326",
-					'format' : "image/png"
-				}
-			})
-		}),
-		est_wms : new ol.layer.Tile({
-			title : "Estados do Brasil",
-			visible : false,
-			isBaseLayer : true,
-			name : "bra",
-			source : new ol.source.TileWMS({
-				url : "http://mapas.mma.gov.br/i3geo/ogc.php?tema=estadosl&",
-				params : {
-					'layers' : "estadosl",
-					'srs' : "EPSG:4326",
-					'format' : "image/png"
-				}
-			})
-		}),
-		fundo: "e_ims,e_wsm,ol_mma,ol_wms,top_wms,est_wms,e_oce",
+		fundo: "",
 		nomeFuncaoSalvar : "i3GEO.editorOL.salvaGeo()",
 		kml : [],
 		layersIniciais : [],
 		//essa configuracao dos botoes afeta apenas o mashup
 		//para a configuração do editor dentro de um mapa normal, veja i3GEO.editor.ativaPainel()
-		botoes : {
-			'imprimir': false,
-			'grid': false,
-			'pan' : false,
-			'zoombox' : false,
-			'zoomtot' : false,
-			'zoomin' : false,
-			'zoomout' : false,
-			'distancia' : false,
-			'area' : false,
-			'identifica' : false,
-			'linha' : true,
-			'ponto' : true,
-			'poligono' : true,
-			'texto' : true,
-			'edita' : true,
-			'listag' : true,
-			'corta' : true,
-			'apaga' : true,
-			'procura' : false,
-			'selecao' : true,
-			'selecaotudo' : true,
-			'salva' : true,
-			'ajuda' : true,
-			'propriedades' : true,
-			'fecha' : false,
-			'tools' : true,
-			'undo' : false,
-			'frente' : false,
-			'legenda' : false,
-			'rodadomouse' : true,
-			'novaaba' : false
-		},
+		botoes : {},
 		pontos : [],
 		marca : "../pacotes/openlayers/img/marker-gold.png",
 		controles : [],
@@ -281,136 +144,6 @@ i3GEO.editorOL =
 
 			i3GEO.Interface.openlayers.cria();
 			i3GEO.editorOL.mapa = i3geoOL;
-
-			// ativabotoes e boolean
-			if(i3GEO.editorOL.controles.length === 0){
-				i3GEO.editorOL.controles = [
-					new ol.interaction.DoubleClickZoom(),
-					new ol.interaction.KeyboardPan(),
-					new ol.interaction.KeyboardZoom(),
-					new ol.interaction.MouseWheelZoom(),
-					new ol.interaction.PinchRotate(),
-					new ol.interaction.PinchZoom(),
-					new ol.interaction.DragZoom(),
-					new ol.interaction.DragPan(),
-					new ol.control.Zoom(),
-					new ol.control.ZoomSlider(),
-					new ol.control.ScaleLine()
-					];
-			}
-			var alayers = [], fundo = (i3GEO.editorOL.fundo).split(","), nfundo = fundo.length, ncontroles =
-				i3GEO.editorOL.controles.length, i, n, temp;
-
-			if (i3GEO.editorOL.ativarodadomouse === "false") {
-				i3GEO.editorOL.ativarodadomouse = false;
-			}
-			if (i3GEO.editorOL.ativarodadomouse === "true") {
-				i3GEO.editorOL.ativarodadomouse = true;
-			}
-			if (i3GEO.editorOL.legendahtml === "false") {
-				i3GEO.editorOL.legendahtml = false;
-			}
-			if (i3GEO.editorOL.legendahtml === "true") {
-				i3GEO.editorOL.legendahtml = true;
-			}
-
-			if (i3GEO.editorOL.incluilayergrafico === "false") {
-				i3GEO.editorOL.incluilayergrafico = false;
-			}
-			if (i3GEO.editorOL.incluilayergrafico === "true") {
-				i3GEO.editorOL.incluilayergrafico = true;
-			}
-			if (i3GEO.editorOL.incluilayergrafico === true) {
-				if (!i3GEO.desenho.layergrafico) {
-					i3GEO.editorOL.criaLayerGrafico();
-				}
-			} else {
-				i3GEO.desenho.layergrafico = "";
-				i3GEO.editorOL.botoes.linha = false;
-				i3GEO.editorOL.botoes.ponto = false;
-				i3GEO.editorOL.botoes.poligono = false;
-				i3GEO.editorOL.botoes.texto = false;
-				i3GEO.editorOL.botoes.edita = false;
-				i3GEO.editorOL.botoes.listag = false;
-				i3GEO.editorOL.botoes.corta = false;
-				i3GEO.editorOL.botoes.apaga = false;
-				i3GEO.editorOL.botoes.selecao = false;
-				i3GEO.editorOL.botoes.selecaotudo = false;
-				i3GEO.editorOL.botoes.salva = false;
-				i3GEO.editorOL.botoes.propriedades = false;
-				i3GEO.editorOL.botoes.fecha = false;
-				i3GEO.editorOL.botoes.tools = false;
-				i3GEO.editorOL.botoes.undo = false;
-				i3GEO.editorOL.botoes.frente = false;
-				i3GEO.editorOL.botoes.novaaba = false;
-			}
-			for (i = 0; i < ncontroles; i++) {
-				i3GEO.editorOL.mapa.addControl(i3GEO.editorOL.controles[i]);
-			}
-			if (i3GEO.editorOL.fundo != "") {
-				for (i = nfundo - 1; i >= 0; i--) {
-					if (fundo[i] != "" && i3GEO.editorOL[fundo[i]]) {
-						alayers.push(i3GEO.editorOL[fundo[i]]);
-						i3GEO.editorOL[fundo[i]].setVisibility(true);
-					}
-				}
-			}
-			i3GEO.editorOL.mapa.addLayers(alayers);
-			if (i3GEO.editorOL.layersIniciais !== "") {
-				n = i3GEO.editorOL.layersIniciais.length;
-				for (i = 0; i < n; i++) {
-					// singleTile deve ser definido em cada layer
-					// i3GEO.editorOL.layersIniciais[i].singleTile = single;
-					i3GEO.editorOL.mapa.addLayer(i3GEO.editorOL.layersIniciais[i]);
-				}
-			}
-			if (!i3GEO.desenho.layergrafico && i3GEO.editorOL.incluilayergrafico === true) {
-				i3GEO.editorOL.mapa.addLayers([
-					i3GEO.desenho.layergrafico
-					]);
-			}
-			i3GEO.editorOL.adicionaKml();
-			i3GEO.editorOL.adicionaMarcas();
-
-			i3GEO.editorOL.coordenadas();
-			//i3GEO.editorOL.criaJanelaBusca();
-			i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
-			if (i3GEO.editorOL.ativalayerswitcher === true) {
-				//i3GEO.editorOL.ativaLayerSwitcher();
-			}
-			if (i3GEO.editorOL.ativarodadomouse === false) {
-				i3GEO.editorOL.desativaRodaDoMouse();
-			}
-			//TODO testar numzoom
-			/*
-			if (i3GEO.editorOL.numzoom !== "") {
-				i3GEO.editorOL.mapa.getView().setOptions({
-					minResolution : i3GEO.editorOL.minresolution,
-					maxResolution :
-				});
-			}
-			 */
-			if (i3GEO.editorOL.maxext !== "") {
-				i3GEO.editorOL.mapa.getView().setProperties({
-					extent : i3GEO.editorOL.maxext
-				});
-			}
-			if (i3GEO.editorOL.mapext != "") {
-				var m = i3GEO.util.extGeo2OSM(i3GEO.editorOL.mapext);
-				i3GEO.editorOL.mapa.zoomToExtent(m);
-			}
-			//i3GEO.editorOL.sobeLayersGraficos();
-			// evita que botoes de opcoes propaguem
-			// o mashup utiliza esse tipo de botao junto ao nome do layer
-			temp = i3GEO.editorOL.pegaControle("OpenLayers.Control.LayerSwitcher");
-			if (temp) {
-				temp = temp.dataLayersDiv.getElementsByTagName("label");
-				n = temp.length;
-				for (i = 0; i < n; i++) {
-					// YAHOO.util.Event.addListener(temp[i], "click", YAHOO.util.Event.stopEvent);
-					temp[i].onclick = "";
-				}
-			}
 		},
 		criaLayerGrafico : function() {
 			i3GEO.desenho.openlayers.criaLayerGrafico();
@@ -1065,16 +798,9 @@ i3GEO.editorOL =
 			}
 			i3GEO.editorOL.removeInteracoes();
 		},
-		//interacoes criadas ao ativar algum botao
-		//usado para remover as interacoes
-		interacoes : [],
 		removeInteracoes: function(){
-			var i, n;
-			n = i3GEO.editorOL.interacoes.length;
-			for(i = 0; i < n; i++){
-				i3geoOL.removeInteraction(i3GEO.editorOL.interacoes[i]);
-			}
-			i3GEO.editorOL.interacoes = [];
+			i3geoOL.removeInteraction(i3GEO.editorOL.interacoes);
+			i3GEO.editorOL.interacoes = "";
 		},
 		botaoProcura : function(){
 			var temp = document.createElement("div");
@@ -1164,6 +890,40 @@ i3GEO.editorOL =
 			};
 			return temp;
 		},
+		desenhaLinha: function(drawendcallback){
+			i3GEO.editorOL.removeInteracoes();
+			var draw = new ol.interaction.Draw({
+				type : "LineString"
+			});
+			//adiciona a interacao para poder ser removida
+			i3GEO.editorOL.interacoes = draw;
+			//desativa ol.interaction.DoubleClickZoom
+			i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+			draw.on("drawend", function(evt) {
+				evt.feature.setStyle(
+						new ol.style.Style({
+							stroke: new ol.style.Stroke({
+								color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
+								width: i3GEO.editorOL.simbologia.strokeWidth
+							}),
+							fill: new ol.style.Fill({
+								color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
+							})
+						})
+				);
+				evt.feature.setId(i3GEO.util.uid());
+				i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
+				draw.setActive(false);
+				draw.setActive(true);
+				if (document.getElementById("panellistagEditor")) {
+					i3GEO.editorOL.listaGeometrias();
+				}
+			});
+			if(drawendcallback){
+				draw.on("drawend",drawendcallback);
+			}
+			i3geoOL.addInteraction(draw);
+		},
 		botaoLinha: function(){
 			var temp = document.createElement("div");
 			temp.className = "editorOLlinhaItemInactive olButton";
@@ -1171,36 +931,56 @@ i3GEO.editorOL =
 			temp.onclick = function(){
 				i3GEO.eventos.cliquePerm.desativa();
 				i3GEO.editorOL.marcaBotao("editorOLlinha");
-				var draw = new ol.interaction.Draw({
-					type : "LineString"
-				});
-				//adiciona a interacao para poder ser removida
-				i3GEO.editorOL.interacoes.push(draw);
-				//desativa ol.interaction.DoubleClickZoom
-				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
-				draw.on("drawend", function(evt) {
-					evt.feature.setStyle(
-							new ol.style.Style({
-								stroke: new ol.style.Stroke({
-									color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
-									width: i3GEO.editorOL.simbologia.strokeWidth
-								}),
-								fill: new ol.style.Fill({
-									color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
-								})
-							})
-					);
-					evt.feature.setId(i3GEO.util.uid());
-					i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
-					draw.setActive(false);
-					draw.setActive(true);
-					if (document.getElementById("panellistagEditor")) {
-						i3GEO.editorOL.listaGeometrias();
-					}
-				});
-				i3geoOL.addInteraction(draw);
+				i3GEO.editorOL.desenhaLinha();
 			};
 			return temp;
+		},
+		desenhaPonto: function(drawendcallback){
+			i3GEO.editorOL.removeInteracoes();
+			var draw = new ol.interaction.Draw({
+				type : "Point"
+			});
+			//adiciona a interacao para poder ser removida
+			i3GEO.editorOL.interacoes = draw;
+			i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+			draw.on("drawend", function(evt) {
+				var simbolo, url;
+				url = i3GEO.editorOL.simbologia.externalGraphic;
+				if(url === ""){
+					simbolo = new ol.style.Circle({
+						radius: i3GEO.editorOL.simbologia.pointRadius,
+						fill: new ol.style.Fill({
+							color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
+						}),
+						stroke: new ol.style.Stroke({
+							color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
+							width: i3GEO.editorOL.simbologia.pointRadius / 3
+						})
+					});
+				}
+				else{
+					simbolo = new ol.style.Icon({
+						src : url,
+						size : [i3GEO.editorOL.simbologia.graphicWidth,i3GEO.editorOL.simbologia.graphicHeight]
+					});
+				}
+				evt.feature.setStyle(
+						new ol.style.Style({
+							image: simbolo
+						})
+				);
+				evt.feature.setId(i3GEO.util.uid());
+				i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
+				draw.setActive(false);
+				draw.setActive(true);
+				if (document.getElementById("panellistagEditor")) {
+					i3GEO.editorOL.listaGeometrias();
+				}
+			});
+			if(drawendcallback){
+				draw.on("drawend",drawendcallback);
+			}
+			i3geoOL.addInteraction(draw);
 		},
 		botaoPonto: function(){
 			i3GEO.eventos.cliquePerm.desativa();
@@ -1208,51 +988,43 @@ i3GEO.editorOL =
 			temp.className = "editorOLpontoItemInactive olButton";
 			temp.title = $trad("dponto");
 			temp.onclick = function(){
-				i3GEO.eventos.cliquePerm.desativa();
 				i3GEO.editorOL.marcaBotao("editorOLponto");
-				var draw = new ol.interaction.Draw({
-					type : "Point"
-				});
-				//adiciona a interacao para poder ser removida
-				i3GEO.editorOL.interacoes.push(draw);
-				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
-				draw.on("drawend", function(evt) {
-					var simbolo, url;
-					url = i3GEO.editorOL.simbologia.externalGraphic;
-					if(url === ""){
-						simbolo = new ol.style.Circle({
-							radius: i3GEO.editorOL.simbologia.pointRadius,
-							fill: new ol.style.Fill({
-								color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
-							}),
-							stroke: new ol.style.Stroke({
-								color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
-								width: i3GEO.editorOL.simbologia.pointRadius / 3
-							})
-						});
-					}
-					else{
-						simbolo = new ol.style.Icon({
-							src : url,
-							size : [i3GEO.editorOL.simbologia.graphicWidth,i3GEO.editorOL.simbologia.graphicHeight]
-						});
-					}
-					evt.feature.setStyle(
-							new ol.style.Style({
-								image: simbolo
-							})
-					);
-					evt.feature.setId(i3GEO.util.uid());
-					i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
-					draw.setActive(false);
-					draw.setActive(true);
-					if (document.getElementById("panellistagEditor")) {
-						i3GEO.editorOL.listaGeometrias();
-					}
-				});
-				i3geoOL.addInteraction(draw);
+				i3GEO.editorOL.desenhaPonto();
 			};
 			return temp;
+		},
+		desenhaPoligono: function(drawendcallback){
+			i3GEO.editorOL.removeInteracoes();
+			var draw = new ol.interaction.Draw({
+				type : "Polygon"
+			});
+			//adiciona a interacao para poder ser removida
+			i3GEO.editorOL.interacoes = draw;
+			i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+			draw.on("drawend", function(evt) {
+				evt.feature.setStyle(
+						new ol.style.Style({
+							stroke: new ol.style.Stroke({
+								color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
+								width: i3GEO.editorOL.simbologia.strokeWidth
+							}),
+							fill: new ol.style.Fill({
+								color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
+							})
+						})
+				);
+				evt.feature.setId(i3GEO.util.uid());
+				i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
+				draw.setActive(false);
+				draw.setActive(true);
+				if (document.getElementById("panellistagEditor")) {
+					i3GEO.editorOL.listaGeometrias();
+				}
+			});
+			if(drawendcallback){
+				draw.on("drawend",drawendcallback);
+			}
+			i3geoOL.addInteraction(draw);
 		},
 		botaoPoligono: function(){
 			i3GEO.eventos.cliquePerm.desativa();
@@ -1261,39 +1033,7 @@ i3GEO.editorOL =
 			temp.title = $trad("dpol");
 			temp.onclick = function(){
 				i3GEO.editorOL.marcaBotao("editorOLpoligono");
-				var draw = new ol.interaction.Draw({
-					type : "Polygon"
-				});
-				/*
-				snap = new ol.interaction.Snap({
-					source: i3GEO.desenho.layergrafico.getSource()
-				});
-				i3GEO.editorOL.interacoes.push(snap);
-				 */
-				//adiciona a interacao para poder ser removida
-				i3GEO.editorOL.interacoes.push(draw);
-				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
-				draw.on("drawend", function(evt) {
-					evt.feature.setStyle(
-							new ol.style.Style({
-								stroke: new ol.style.Stroke({
-									color: 'rgba(' + i3GEO.editorOL.simbologia.strokeColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')',
-									width: i3GEO.editorOL.simbologia.strokeWidth
-								}),
-								fill: new ol.style.Fill({
-									color: 'rgba(' + i3GEO.editorOL.simbologia.fillColor + ',' + i3GEO.editorOL.simbologia.opacidade + ')'
-								})
-							})
-					);
-					evt.feature.setId(i3GEO.util.uid());
-					i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
-					draw.setActive(false);
-					draw.setActive(true);
-					if (document.getElementById("panellistagEditor")) {
-						i3GEO.editorOL.listaGeometrias();
-					}
-				});
-				i3geoOL.addInteraction(draw);
+				i3GEO.editorOL.desenhaPoligono();
 			};
 			return temp;
 		},
@@ -1304,12 +1044,13 @@ i3GEO.editorOL =
 			temp.title = $trad("dtexto");
 			temp.onclick = function(){
 				i3GEO.eventos.cliquePerm.desativa();
+				i3GEO.editorOL.removeInteracoes();
 				i3GEO.editorOL.marcaBotao("editorOLtexto");
 				var draw = new ol.interaction.Draw({
 					type : "Point"
 				});
 				//adiciona a interacao para poder ser removida
-				i3GEO.editorOL.interacoes.push(draw);
+				i3GEO.editorOL.interacoes = draw;
 				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				draw.on("drawend", function(evt) {
 					var texto = window.prompt("Texto", "");
@@ -1347,9 +1088,10 @@ i3GEO.editorOL =
 			temp.title = $trad("d24t");
 			temp.onclick = function(){
 				i3GEO.editorOL.marcaBotao("editorOLselecao");
+				i3GEO.editorOL.removeInteracoes();
 				var sel = new ol.interaction.Select();
 				//adiciona a interacao para poder ser removida
-				i3GEO.editorOL.interacoes.push(sel);
+				i3GEO.editorOL.interacoes = sel;
 				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				sel.on("select", function(evt) {
 					var s,i, n, id, f;
@@ -1479,6 +1221,7 @@ i3GEO.editorOL =
 				var draw, nsel, f, c;
 				nsel = i3GEO.editorOL.idsSelecionados.length;
 				if(nsel == 1){
+					i3GEO.editorOL.removeInteracoes();
 					i3GEO.editorOL.marcaBotao("editorOLedita");
 					f = i3GEO.desenho.layergrafico.getSource().getFeatureById(i3GEO.editorOL.idsSelecionados[nsel - 1]);
 					i3GEO.editorOL.featuresBackup.push(f.clone());
@@ -1488,7 +1231,7 @@ i3GEO.editorOL =
 						features: c
 					});
 					//adiciona a interacao para poder ser removida
-					i3GEO.editorOL.interacoes.push(draw);
+					i3GEO.editorOL.interacoes = draw;
 					i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 					i3geoOL.addInteraction(draw);
 				}
@@ -1508,13 +1251,14 @@ i3GEO.editorOL =
 				if (nsel != 1) {
 					alert("Selecione primeiro um elemento para ser cortado");
 				} else {
+					i3GEO.editorOL.removeInteracoes();
 					i3GEO.janela.tempoMsg("Desenhe um pol&iacute;gono");
 					i3GEO.editorOL.marcaBotao("editorOLcorta");
 					var draw = new ol.interaction.Draw({
 						type : "Polygon"
 					});
 					//adiciona a interacao para poder ser removida
-					i3GEO.editorOL.interacoes.push(draw);
+					i3GEO.editorOL.interacoes = draw;
 					i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 					draw.on("drawend", function(evt) {
 						var temp, f, c, format, fwkt, cwkt;
@@ -1648,16 +1392,18 @@ i3GEO.editorOL =
 			temp.className = "editorOLidentificaItemInactive olButton";
 			temp.title = $trad("d7t");
 			temp.onclick = function(){
+
 				if(i3GEO.editorOL.layerDefault == ""){
 					i3GEO.editorOL.criaJanelaAtivaTema();
 				}
 				i3GEO.eventos.cliquePerm.desativa();
+				i3GEO.editorOL.removeInteracoes();
 				i3GEO.editorOL.marcaBotao("editorOLidentifica");
 				var draw = new ol.interaction.Draw({
 					type : "Point"
 				});
 				//adiciona a interacao para poder ser removida
-				i3GEO.editorOL.interacoes.push(draw);
+				i3GEO.editorOL.interacoes = draw;
 				i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
 				draw.on("drawend", function(evt) {
 					var xy, p, retorno, url, layer, tema = $i("i3GEOOLlistaTemasAtivos");

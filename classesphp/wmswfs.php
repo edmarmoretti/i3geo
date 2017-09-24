@@ -359,6 +359,7 @@ function temaswms() {
 	// Test that the capabilites file has successfully downloaded.
 	//
 	// $wms_service_request = "c://temp//teste.xml";
+
 	if (file_exists ( dirname ( __FILE__ ) . "/../admin1/cadastros/servicos/exec.php" )) {
 		include_once (dirname ( __FILE__ ) . "/../admin1/cadastros/servicos/exec.php");
 	} else {
@@ -369,15 +370,8 @@ function temaswms() {
 	// error_reporting(0);
 	if ($wms_service_request == "erro") {
 		// Cannot download the capabilities file.
-		// registra a tentativa de acesso
-		if (isset ( $id_ws )) {
-			adicionaAcesso ( $id_ws, false );
-		}
 		$cp->set_data ( "Erro de acesso" );
 		return;
-	} elseif (isset ( $id_ws )) {
-		if ($id_ws != "")
-			adicionaAcesso ( $id_ws, true );
 	}
 	$handle = fopen ( $wms_service_request, "r" );
 	$wms_capabilities = fread ( $handle, filesize ( $wms_service_request ) );
@@ -508,22 +502,12 @@ function listaLayersWMS() {
 	}
 	// para o caso do sistema de metadados estatisticos
 	$wms_service_request = gravaCacheWMS ( $servico );
-	include_once (dirname ( __FILE__ ) . "/../admin/php/admin.php");
-	include_once (dirname ( __FILE__ ) . "/../admin/php/webservices.php");
-
 	if ($tipo_ws != "WMSMETAESTAT" && $nivel < 2) {
 		if ($wms_service_request == "erro") {
-			// registra a tentativa de acesso
-			if (isset ( $id_ws )) {
-				adicionaAcesso ( $id_ws, false );
-			}
 			$cp->set_data ( "Erro de acesso" );
 			return;
-		} elseif (isset ( $id_ws )) {
-			adicionaAcesso ( $id_ws, true );
 		}
 	}
-
 	$handle = fopen ( $wms_service_request, "r" );
 	$wms_capabilities = fread ( $handle, filesize ( $wms_service_request ) );
 	fclose ( $handle );

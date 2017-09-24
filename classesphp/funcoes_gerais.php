@@ -3034,7 +3034,7 @@ function restauraMapaAdmin($id_mapa,$dir_tmp){
 	if (filter_var($id_mapa, FILTER_VALIDATE_INT) === false){
 		exit;
 	}
-	include(dirname(__FILE__)."/../admin/php/conexao.php");
+	include(dirname(__FILE__)."/classesphp/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
@@ -3120,7 +3120,7 @@ Array originada de fetchAll
 function pegaDadosAdminKey($sql,$subsEsquema){
 	//pegaDadosAdminKey("select codigo_tema,link_tema from __esq__i3geoadmin_temas","__esq__");
 	$resultado = array();
-	include(dirname(__FILE__)."/../admin/php/conexao.php");
+	include(dirname(__FILE__)."/classesphp/conexao.php");
 	$sql = str_replace($subsEsquema,$esquemaadmin,$sql);
 	//error_reporting(0);
 	$q = $dbh->query($sql,PDO::FETCH_ASSOC);

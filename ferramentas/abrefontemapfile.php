@@ -57,7 +57,7 @@ body {
 		echo "Nenhum tema definido.";exit;
 	}
 	$dbh = "";
-	include($locaplic."/admin/php/conexao.php");
+	include($locaplic."/classesphp/conexao.php");
 	$r = pegaDados("select link_tema from ".$esquemaadmin."i3geoadmin_temas where codigo_tema = '$tema'");
 	error_reporting(0);
 	$link = $r[0]["link_tema"];

@@ -335,7 +335,7 @@ HTML;
 			echo permissoesarquivo($locaplic."/admin/admin.db");
 			echo "</span></div>";
 		}
-		include_once("../admin/php/conexao.php");
+		include_once("../classesphp/conexao.php");
 		echo "<h4>Verificando banco de dados de administra&ccedil;&atilde;o</h4>";
 		echo "<pre>";
 		//TODO Verificar ao fechar versao - verificar tabelas
@@ -383,7 +383,7 @@ HTML;
 				"i3geoestat_medida_variavel_link" => "link,id_medida_variavel,nome,id_link",
 				"i3geoestat_parametro_medida" => "id_parametro_medida,coluna,nome,descricao,id_pai,id_medida_variavel,tipo"
 		);
-		include_once("../admin/php/conexao.php");
+		include_once("../classesphp/conexao.php");
 		if(!empty($esquemaadmin)){
 			$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 		}

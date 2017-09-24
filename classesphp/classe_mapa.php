@@ -73,6 +73,7 @@ class Mapa
 	Returns the MapServer version number (x.y.z) as an integer (x*10000 + y*100 + z). (New in v5.0) e.g. V5.4.3 would return 50403
 	*/
 	public $vi;
+	public $i3GeoRegistraAcesso;
 	/*
 	 Function: __construct
 
@@ -85,7 +86,9 @@ class Mapa
 	function __construct($map_file,$locaplic="")
 	{
 		include(dirname(__FILE__)."/../ms_configura.php");
-  		$this->postgis_mapa = $postgis_mapa;
+
+		$this->postgis_mapa = $postgis_mapa;
+		$this->i3GeoRegistraAcesso = $i3GeoRegistraAcesso;
 
 		if (!function_exists('ms_newMapObj')) {
 			return false;
@@ -1103,7 +1106,7 @@ class Mapa
 		}
 		if($incluitexto == "sim"){
 			if($this->vi >= 60300){
-				$classe->addLabel(new labelObj());
+			    $classe->addLabel(new labelObj());
 				$label = $classe->getLabel(0);
 				$s = "CLASS LABEL  END END";
 				$classe->updateFromString($s);
@@ -1190,7 +1193,7 @@ class Mapa
 		$temas = explode(",",$temas);
 		$zoomlayer = "";
 		foreach ($temas as $nome){
-			$this->adicionaAcesso($nome,$locaplic);
+		    $this->adicionaAcesso($nome,$locaplic,$this->i3GeoRegistraAcesso);
 			$nomemap = "";
 			//
 			//verifica se o tema &eacute; um arquivo php
@@ -1209,53 +1212,7 @@ class Mapa
 				}
 			}
 			if($extensao == ".gvp"){
-				if (file_exists($locaplic."/temas/".$nome.".gvp")){
-					$nomemap = $locaplic."/temas/".$nome.".gvp";
-				}
-				if (file_exists($nome)){
-					$nomemap = $nome;
-				}
-				if (file_exists($nome.".gvp")){
-					$nomemap = $nome.".gvp";
-				}
-				if ($nomemap != ""){
-					include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
-					$gm = new gvsig2mapfile($nomemap);
-					$gvsigview = $gm->getViewsNames();
-					foreach($gvsigview as $gv){
-						$dataView = $gm->getViewData($gv);
-						$adicionar = array();
-						foreach($dataView["layerNames"] as $t){
-							if(!in_array($t,$this->nomes)){
-								$adicionar[] = $t;
-							}
-						}
-						$this->mapa = $gm->addLayers($this->mapa,$gv,$adicionar);
-					}
-					foreach($adicionar as $nome){
-						$l = $this->mapa->getlayerbyname($nome);
-						//reposiciona o layer se for o caso
-						if ($l->group == ""){
-							$ltipo = $l->type;
-							if (($ltipo == 2) || ($ltipo == 3)){//poligono = 2
-								$indicel = $l->index;
-								$numlayers = $this->mapa->numlayers;
-								$nummove = 0;
-								for ($i = $numlayers-1;$i > 0;$i--){
-									$layerAbaixo = $this->mapa->getlayer($i);
-									$tipo = $layerAbaixo->type;
-									if (($tipo != 2) && ($tipo != 3)){
-										$nummove++;
-									}
-								}
-								for ($i=0;$i<($nummove);++$i){
-									$indicel = $l->index;
-									$this->mapa->movelayerup($indicel);
-								}
-							}
-						}
-					}
-				}
+                return;
 			}
 			if($extensao == ".map"){
 				if (file_exists($locaplic."/temas/".$nome.".map")){
@@ -1538,10 +1495,12 @@ class Mapa
 		if($versao == ""){
 			$versao = "1.1.1";
 		}
-		if(file_exists($this->locaplic."/classesphp/wmswfs.php"))
+		if(file_exists($this->locaplic."/classesphp/wmswfs.php")){
 			include_once($this->locaplic."/classesphp/wmswfs.php");
-		else
+		}
+		else {
 			include_once("wmswfs.php");
+		}
 		//limpa selecao
 		if (file_exists($this->qyfile))
 		{
@@ -2080,10 +2039,13 @@ class Mapa
 		}
 		return("ok");
 	}
-	function adicionaAcesso($codigo_tema,$locaplic)
+	function adicionaAcesso($codigo_tema,$locaplic,$i3GeoRegistraAcesso=false)
 	{
-		$resultado = array();
-		include("$locaplic/admin/php/conexao.php");
+	    if($i3GeoRegistraAcesso == false){
+	        return;
+	    }
+	    $resultado = array();
+		include("$locaplic/classesphp/conexao.php");
 		if(!empty($esquemaadmin)){
 			$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 		}

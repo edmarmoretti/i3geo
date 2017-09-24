@@ -11,6 +11,11 @@ include_once (dirname(__FILE__) . "/../classesphp/funcoes_gerais.php");
 // error_reporting(0);
 // variaveis utilizadas
 $parurl = array_merge($_GET, $_POST);
+if(count($parurl) == 0){
+    ajuda();
+    exit;
+}
+
 if (isset($parurl["opacidade"])) {
     $opacidade = $parurl["opacidade"] * 1;
 } else {
@@ -36,6 +41,18 @@ if(!isset($parurl["visiveis"])){
 }
 $visiveis = explode(",", str_replace(" ", ",", $parurl["visiveis"]));
 $off = array_diff($temas, $visiveis);
+//filtros
+$filtros = array();
+foreach($temas as $tema){
+    if(isset($parurl["map_layer_".$tema."_filter"])){
+        $filtros[] = array(
+            "layer"=>$tema,
+            "expression"=>$parurl["map_layer_".$tema."_filter"]
+        );
+    }
+}
+$filtros = json_encode($filtros);
+
 $estilo = "";
 if (isset($parurl["altura"])) {
     $estilo .= ";height:" . $parurl["altura"] . "px";
@@ -69,6 +86,11 @@ if (isset($controles)) {
     if (in_array("overviewmap", $controles)) {
         $objControles[] = "new ol.control.OverviewMap()";
     }
+} else {
+    $objControles[] = "new ol.control.Zoom()";
+    $objControles[] = "new ol.control.ZoomSlider()";
+    $objControles[] = "new ol.control.ScaleLine()";
+    $objControles[] = "new ol.control.MousePosition({coordinateFormat : function(c){return ol.coordinate.toStringHDMS(c);}})";
 }
 $botoes = $parurl["botoes"];
 //
@@ -214,7 +236,36 @@ if (isset($botoes)) {
     }
     $botoes = "{" . implode(",", $objBotoes) . "}";
 } else {
-    $botoes = "{}";
+    $objBotoes[] = "'imprimir':true";
+    $objBotoesHtml["zoombox"] = "";
+    $objBotoesHtml["analise"] = "";
+    $objBotoesHtml["camadas"] = "";
+    $objBotoesHtml["catalogo"] = "";
+    $objBotoesHtml["legenda"] = "";
+    $objBotoesHtml["procura"] = "";
+    $objBotoesHtml["identifica"] = "";
+    $objBotoesHtml["zoomtot"] = "";
+    $objBotoesHtml["zoomanterior"] = "";
+    $objBotoesHtml["zoomproximo"] = "";
+    $objBotoesHtml["grid"] = "";
+    $objBotoesHtml["marcador"] = "";
+    $objBotoes[] = "'distancia':true";
+    $objBotoes[] = "'area':true";
+    $objBotoes[] = "'linha':true";
+    $objBotoes[] = "'ponto':true";
+    $objBotoes[] = "'poligono':true";
+    $objBotoes[] = "'edita':true";
+    $objBotoes[] = "'listag':true";
+    $objBotoes[] = "'corta':true";
+    $objBotoes[] = "'apaga':true";
+    $objBotoes[] = "'salva':true";
+    $objBotoes[] = "'tools':true";
+    $objBotoes[] = "'undo':true";
+    $objBotoes[] = "'propriedades':true";
+    $objBotoes[] = "'frente':true";
+
+    $botoes = "{" . implode(",", $objBotoes) . "}";
+
 }
 if (isset($parurl["kml"])) {
     $kml = $parurl["kml"];
@@ -255,11 +306,11 @@ if(isset($parurl["tiles"])){
 else{
     $tiles = "true";
 }
-if(isset($parurl["ativarodadomouse"]) && $parurl["ativarodadomouse"] == "true"){
-    $ativarodadomouse = "new ol.interaction.MouseWheelZoom(),";
+if(isset($parurl["ativarodadomouse"]) && $parurl["ativarodadomouse"] == "false"){
+    $ativarodadomouse = "";
 }
 else{
-    $ativarodadomouse = "";
+    $ativarodadomouse = "new ol.interaction.MouseWheelZoom(),";
 }
 $legendahtml = $parurl["legendahtml"];
 $layerDefault = $parurl["layerDefault"];
@@ -434,6 +485,13 @@ function ajuda()
 	left: 3.5em;
 	width: auto;
 	max-width: 70px;
+}
+
+.ol-mouse-position {
+    left: 10px;
+    position: absolute;
+    bottom: 5px;
+    top: auto;
 }
 </style>
 </head>
@@ -1034,10 +1092,7 @@ function ajuda()
 			//filtros que serao aplicados aos layers. Utilize a expressaso conforme definido na documentacao
 			//do mapserver, exemplo
 			//{layer: "_lbiomashp",expression: "(('[CD_LEGENDA]'='CAATINGA'))"} ou {layer: "_lbiomashp",expression: "cd_legenda='CAATINGA'"}
-			filters: [{
-				layer: "",
-				expression: ""
-			}],
+			filters: <?php echo $filtros;?>,
 			//id de um mapa salvo e que sera recuperado
 			restoreMapId : <?php echo $restauramapa;?>,
             cacheOff : '<?php echo $DESLIGACACHE;?>'
@@ -1068,6 +1123,7 @@ function ajuda()
 				//$('.iconeGuiaMovel').tooltip('show');
 				$("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
 				adicionaBotoesEditor();
+				$i("openlayers").style.backgroundColor = "rgb(245,245,245)";
 			},
 			//parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas, balao de info, etc
 			components : {

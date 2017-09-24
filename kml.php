@@ -42,7 +42,7 @@ idioma - pt|en|es
 include_once ("classesphp/carrega_ext.php");
 include_once ("classesphp/classe_menutemas.php");
 include_once ("ms_configura.php");
-include_once ("admin/php/conexao.php");
+include_once ("classesphp/conexao.php");
 $encoding = "ISO-8859-1";
 if($convUTF == true){
 	$encoding = "UTF-8";
@@ -94,7 +94,7 @@ foreach($menus as $menu){
 	else{
 		$coluna = $idioma;
 	}
-	
+
 	$sql = "select id_raiz,i3geoadmin_raiz.id_tema,$coluna as nome_tema,tipoa_tema,codigo_tema,kmz_tema FROM ".$esquemaadmin."i3geoadmin_raiz LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = i3geoadmin_raiz.id_tema where (lower(i3geoadmin_temas.tipoa_tema) != 'wms' or i3geoadmin_temas.tipoa_tema is null) and (lower(i3geoadmin_temas.kml_tema) != 'nao' or i3geoadmin_temas.kml_tema isnull) and i3geoadmin_temas.tipoa_tema != 'WMS' and i3geoadmin_temas.kml_tema != 'nao' and i3geoadmin_raiz.id_menu='$id_menu' and i3geoadmin_raiz.nivel = 0 and i3geoadmin_raiz.id_nivel = 0 order by ordem";
 	$temas = pegaDados($sql);
 	if(count($temas) > 0){
@@ -102,14 +102,14 @@ foreach($menus as $menu){
 			$xml .= kml_tema_bd($tema);
 		}
 	}
-	
+
 	if($idioma == "pt"){
 		$coluna = "nome_grupo";
 	}
 	else{
 		$coluna = $idioma;
 	}
-	
+
 	$grupos = pegaDados("SELECT $coluna as nome_grupo,n1.id_n1,n1.id_grupo,gr.desc_grupo from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as gr where (lower(n1.publicado) != 'nao' or n1.publicado is null) and n1.id_menu = '$id_menu' and n1.id_grupo = gr.id_grupo order by gr.nome_grupo");
 	foreach($grupos as $grupo){
 		$xml .= kml_cabecalho($grupo["nome_grupo"],$grupo["desc_grupo"]);
@@ -203,7 +203,7 @@ function kml_tema_bd($tema){
 	$legenda = "<a href='$urli3geo/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg' >Legenda </a>";
 	$urlLegenda = $urli3geo."/ogc.php?tema=$id&layer=$id&request=getlegendgraphic&service=wms&format=image/jpeg";
 	$href = "$urli3geo/ogc.php?tema=$id&amp;width=800&amp;height=800&amp;VERSION=1.1.1&amp;REQUEST=GetMap&amp;SRS=EPSG:4326&amp;STYLES=&amp;BGCOLOR=0xFFFFFF&amp;FORMAT=image/png&amp;TRANSPARENT=TRUE&amp;layers=$id";
-	
+
 	$xml .= kml_servico($nome,$fonte,$legenda,$desc,$href,$urlLegenda);
 
 	if(strtolower($tema["kmz_tema"]) == "sim"){
