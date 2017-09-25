@@ -1,7 +1,6 @@
 <?php
 namespace admin\php\funcoesAdmin;
 use PDO;
-use Services_JSON;
 use PDOException;
 //
 // verifica se um determinado papel esta registrado na variavel SESSION
@@ -35,7 +34,6 @@ function testaSafeNumerico($valores) {
 		}
 	}
 }
-
 function verificaOperacaoSessao($operacao) {
 	$resultado = false;
 	// a validacao consulta $_SESSION, que e definida no login

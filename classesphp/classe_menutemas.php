@@ -248,7 +248,7 @@ array
 		{$this->xml = simplexml_load_file($locmapas);}
 		else
 		{
-			include_once($this->locaplic."/admin/php/xml.php");
+			include_once($this->locaplic."/classesphp/xml.php");
 			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic));
 		}
 		//print_r($this->xml);exit;
@@ -293,7 +293,7 @@ Array
 	function pegaSistemas()
 	{
 		//error_reporting(0);
-		include_once($this->locaplic."/admin/php/xml.php");
+		include_once($this->locaplic."/classesphp/xml.php");
 		$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic));
 		$sistemas = array();
 		foreach($xmlsistemas->SISTEMA as $s)
@@ -339,7 +339,7 @@ Array
 	function pegaSistemasI()
 	{
 		//error_reporting(0);
-		include_once($this->locaplic."/admin/php/xml.php");
+		include_once($this->locaplic."/classesphp/xml.php");
 
 		$xmlsistemas = simplexml_load_string(geraXmlIdentifica(implode(" ",$this->perfil),$this->locaplic));
 		$sistemas = array();
@@ -371,7 +371,7 @@ $procurar - String que ser&aacute; procurada.
 */
 	function procurartemas($procurar)
 	{
-		include_once($this->locaplic."/admin/php/xml.php");
+		include_once($this->locaplic."/classesphp/xml.php");
 		$tipo = "";
 		$this->xml = "";
 		if($this->menutemas != "")
@@ -536,7 +536,7 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 */
 	function listaTags($rss="",$nrss="")
 	{
-		include_once($this->locaplic."/admin/php/xml.php");
+		include_once($this->locaplic."/classesphp/xml.php");
 		$tipo = "";
 		//carrega os t&iacute;tulos e links do rss especificado
 		$noticiasRSS = array(); //guarda as not&iacute;cias originais do RRS

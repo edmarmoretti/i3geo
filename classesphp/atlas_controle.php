@@ -116,7 +116,7 @@ if ($map_file != ""){
 }
 
 
-include($locaplic."/admin/php/xml.php");
+include($locaplic."/classesphp/xml.php");
 
 $xml = geraXmlAtlas($locaplic,$editores);
 

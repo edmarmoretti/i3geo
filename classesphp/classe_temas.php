@@ -1105,7 +1105,7 @@ tema - codigo do tema
 */
 	function fonteTema($tema)
 	{
-		include_once($this->locaplic."/admin/php/xml.php");
+		include_once($this->locaplic."/classesphp/xml.php");
 		require($this->locaplic."/classesphp/classe_menutemas.php");
 			$menutemas = new Menutemas("","","",$this->locaplic);
 		$linkfonte = "erro";
@@ -1380,8 +1380,8 @@ Adiciona LABEL em uma classe de um tema
             $label->set("type",MS_TRUETYPE);
 			$label->set("font","arial");
             $label->set("size",0);
-            $label->removeBinding(0); 
-            $classe->settext($texto);            
+            $label->removeBinding(0);
+            $classe->settext($texto);
         }
 		/*
 		$nlabel = $classe->numlabels;

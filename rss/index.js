@@ -1,48 +1,45 @@
 botoesIni = [
              {
-            	 "link": "../admin/xmlmetaestatogc.php",
+            	 "link": "xmlmetaestatogc.php",
             	 "corpo": $trad("xmlWmsMetaestat",g_traducao_rss)
              },{
-            	 "link": "../admin/rssmapas.php",
+            	 "link": "rssmapas.php",
             	 "corpo": $trad("verRss",g_traducao_rss)
              },{
-            	 "link": "../admin/rssgrupos.php?output=xml",
+            	 "link": "rssgrupos.php?output=xml",
             	 "corpo": $trad("rssArvore",g_traducao_rss)
              },{
-            	 "link": "../admin/rssgrupos.php?output=json",
+            	 "link": "rssgrupos.php?output=json",
             	 "corpo": $trad("rssArvoreJson",g_traducao_rss)
              },{
-            	 "link": "../admin/rsscomentariostemas.php",
-            	 "corpo": $trad("rssComentarios",g_traducao_rss)
-             },{
-            	 "link": "../admin/xmlservicosws.php",
+            	 "link": "xmlservicosws.php",
             	 "corpo": $trad("xmlWebServ",g_traducao_rss)
              },{
-            	 "link": "../admin/xmlservicosws.php?output=json",
+            	 "link": "xmlservicosws.php?output=json",
             	 "corpo": $trad("xmlWebServJson",g_traducao_rss)
              },{
-            	 "link": "../admin/xmlservicoswms.php",
+            	 "link": "xmlservicoswms.php",
             	 "corpo": $trad("xmlWms",g_traducao_rss)
              },{
-            	 "link": "../admin/xmlservicoswms.php?output=json",
+            	 "link": "xmlservicoswms.php?output=json",
             	 "corpo": $trad("xmlWmsJson",g_traducao_rss)
              },{
-            	 "link": "../admin/xmlgeorss.php?output=json",
+            	 "link": "xmlgeorss.php?output=json",
             	 "corpo": $trad("xmlGeoRssJson",g_traducao_rss)
              },{
-            	 "link": "../admin/xmlmapas.php",
+            	 "link": "xmlmapas.php",
             	 "corpo": $trad("xmlMapas",g_traducao_rss)
              },{
-            	 "link": "../admin/rssmapas.php",
+            	 "link": "rssmapas.php",
             	 "corpo": $trad("rssMapas",g_traducao_rss)
              },{
-            	 "link": "../admin/rssmapas.php?output=json",
+            	 "link": "rssmapas.php?output=json",
             	 "corpo": $trad("rssMapasJson",g_traducao_rss)
              },{
-            	 "link": "../admin/xmlsistemas.php",
+            	 "link": "xmlsistemas.php",
             	 "corpo": $trad("xmlSistAdiciona",g_traducao_rss)
              },{
-            	 "link": "../admin/xmlgeorss.php",
+            	 "link": "xmlgeorss.php",
             	 "corpo": $trad("xmlGeoRss",g_traducao_rss)
              }
              ];

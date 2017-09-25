@@ -421,7 +421,7 @@ function listaRSSws2()
 	global $cp,$rss,$locaplic,$tipo;
 	if(!isset($tipo)){$tipo = "GEORSS";}
 	include_once("$locaplic/classesphp/funcoes_gerais.php");
-	include_once("$locaplic/admin/php/xml.php");
+	include_once("$locaplic/classesphp/xml.php");
 	include_once("$locaplic/ms_configura.php");
 	$rsss = explode("|",$rss);
 	if(count($rsss) == 0){$rsss = array(" ");}
@@ -496,7 +496,7 @@ function listaRSSwsARRAY()
 
 	if(!isset($tipo)){$tipo = "GEORSS";}
 	include_once("$locaplic/classesphp/funcoes_gerais.php");
-	include_once("$locaplic/admin/php/xml.php");
+	include_once("$locaplic/classesphp/xml.php");
 	include_once("$locaplic/ms_configura.php");
 	$rsss = explode("|",$rss);
 	if(count($rsss) == 0){
