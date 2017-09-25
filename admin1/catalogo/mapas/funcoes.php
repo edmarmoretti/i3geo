@@ -1,5 +1,6 @@
 <?php
 namespace admin\catalogo\mapas;
+use PDOException;
 function listar($dbh, $id_mapa = ""){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_mapa != ""){

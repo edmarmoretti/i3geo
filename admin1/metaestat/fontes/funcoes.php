@@ -1,6 +1,6 @@
 <?php
-
 namespace admin\metaestat\fontes;
+use PDOException;
 
 function listar($dbh, $id_fonteinfo = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

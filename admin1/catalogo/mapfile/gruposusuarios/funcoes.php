@@ -1,5 +1,6 @@
 <?php
 namespace admin\catalogo\mapfile\gruposusuarios;
+use PDOException;
 function listar($dbh,$locaplic,$codigo){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if(empty($codigo)){

@@ -1,6 +1,6 @@
 <?php
 namespace admin\cadastros\sistemas\funcoes;
-
+use PDOException;
 function listar($dbh, $id_sistema, $id_funcao = ""){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_funcao != ""){

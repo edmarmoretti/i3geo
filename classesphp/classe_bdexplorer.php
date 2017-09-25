@@ -8,6 +8,7 @@
 */
 namespace i3geo\classesphp\bdexplorer;
 use PDO;
+use PDOException;
 class Bdexplorer{
 	/**
 	 * Nome do esquema no banco de dados utilizado para armazenar as tabelas

@@ -1,5 +1,6 @@
 <?php
 namespace admin\metaestat\variaveis\medidas\links;
+use PDOException;
 
 function listar($dbh, $id_medida_variavel, $id_link = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

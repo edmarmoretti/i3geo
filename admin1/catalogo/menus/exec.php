@@ -35,7 +35,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === f
 }
 if(isset($_POST["id_menu"])){
 	$id_menu = $_POST["id_menu"];
-	\admin\php\funcoesAdmin\testaSafeNumerico([$id_menu]);
+	\admin\php\funcoesAdmin\testaSafeNumerico(array($id_menu));
 }
 if(!isset($idioma) || $idioma == ""){
 	$idioma = "pt";

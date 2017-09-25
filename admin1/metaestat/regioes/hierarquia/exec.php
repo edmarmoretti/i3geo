@@ -36,10 +36,10 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === f
 $codigo_tipo_regiao = $_POST ["codigo_tipo_regiao"];
 $id_agregaregiao = $_POST ["id_agregaregiao"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico ( [
+\admin\php\funcoesAdmin\testaSafeNumerico ( array(
 		$codigo_tipo_regiao,
 		$id_agregaregiao
-] );
+) );
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

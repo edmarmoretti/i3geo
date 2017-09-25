@@ -37,7 +37,7 @@ $id = $_POST["id"];
 $id_sistema = $_POST["id_sistema"];
 $id_funcao = $_POST["id_funcao"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$id,$id_sistema,$id_funcao]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id,$id_sistema,$id_funcao));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

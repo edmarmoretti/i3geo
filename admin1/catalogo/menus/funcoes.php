@@ -1,6 +1,6 @@
 <?php
-
 namespace admin\catalogo\menus;
+use PDOException;
 
 function listar($dbh, $id_menu = "") {
 	$esquemaadmin = $_SESSION["esquemaadmin"];

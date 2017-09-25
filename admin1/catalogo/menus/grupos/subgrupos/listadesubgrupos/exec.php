@@ -32,7 +32,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === f
 }
 
 $id_subgrupo = $_POST["id_subgrupo"];
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_subgrupo]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_subgrupo));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

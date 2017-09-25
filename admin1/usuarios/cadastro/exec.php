@@ -34,10 +34,10 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/usuarios" ) ===
 $id_usuario = $_POST ["id_usuario"];
 $id_papel = $_POST ["id_papel"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico ( [
+\admin\php\funcoesAdmin\testaSafeNumerico ( array(
 		$id_usuario,
 		$id_papel
-] );
+) );
 
 $funcao = strtoupper ( $funcao );
 // converte os parametros de definicao dos papeis em um array

@@ -1,5 +1,6 @@
 <?php
 namespace admin\metaestat\unidades;
+use PDOException;
 
 function listar($dbh, $codigo_unidade_medida = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

@@ -1,6 +1,6 @@
 <?php
 namespace admin\catalogo\mapfile;
-
+use PDOException;
 function excluir($codigo, $dbhw) {
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$locaplic = $_SESSION["locaplic"];

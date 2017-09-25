@@ -33,7 +33,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === f
 //remove espaco em branco do nome do tag
 $nome = str_replace(" ","",$_POST["nome"]);
 $id_tag = $_POST["id_tag"];
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_tag]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_tag));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

@@ -1,6 +1,6 @@
 <?php
 namespace admin\metaestat\variaveis\medidas\classificacoes\classes;
-
+use PDOException;
 function listar($dbh, $id_classificacao, $id_classe = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];
 	if ($id_classe != "") {

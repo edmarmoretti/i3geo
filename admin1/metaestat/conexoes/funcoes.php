@@ -1,6 +1,6 @@
 <?php
-
 namespace admin\metaestat\conexoes;
+use PDOException;
 
 function listar($dbh, $codigo_estat_conexao = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

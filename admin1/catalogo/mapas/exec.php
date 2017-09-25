@@ -31,9 +31,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/mapas" ) === fa
 	exit ();
 }
 $id_mapa = $_POST ["id_mapa"];
-\admin\php\funcoesAdmin\testaSafeNumerico ( [
-		$id_mapa
-] );
+\admin\php\funcoesAdmin\testaSafeNumerico ( array($id_mapa) );
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

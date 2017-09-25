@@ -1,6 +1,6 @@
 <?php
-
 namespace admin\metaestat\regioes\hierarquia;
+use PDOException;
 
 function listar($dbh, $codigo_tipo_regiao, $id_agregaregiao = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

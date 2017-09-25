@@ -48,7 +48,7 @@ include_once(dirname(__FILE__)."/login.php");
 $id_ws = $_GET["id_ws"];
 $id = $_GET["id"];
 
-testaSafeNumerico([$id,$id_ws]);
+testaSafeNumerico(array($id,$id_ws));
 
 $funcoesEdicao = array(
 		"ALTERARWS",

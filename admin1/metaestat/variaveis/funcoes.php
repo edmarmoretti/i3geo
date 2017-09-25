@@ -1,5 +1,6 @@
 <?php
 namespace admin\metaestat\variaveis;
+use PDOException;
 
 function listar($dbh, $codigo_variavel = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

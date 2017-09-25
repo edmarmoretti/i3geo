@@ -1,5 +1,6 @@
 <?php
 namespace admin\catalogo\menus\grupos\subgrupos {
+    use PDOException;
 	function listar($dbh, $id_n1 = "", $id_n2){
 		$esquemaadmin = $_SESSION["esquemaadmin"];
 		if($id_n2 != ""){
@@ -77,6 +78,7 @@ namespace admin\catalogo\menus\grupos\subgrupos {
 	}
 }
 namespace admin\catalogo\menus\grupos\subgrupos\raiz {
+    use PDOException;
 	function listar($dbh, $id_raiz = "", $id_n1 = "", $id_menu = ""){
 		$esquemaadmin = $_SESSION["esquemaadmin"];
 		if($id_raiz != ""){

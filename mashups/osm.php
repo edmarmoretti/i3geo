@@ -11,11 +11,11 @@ include_once (dirname(__FILE__) . "/../classesphp/funcoes_gerais.php");
 // error_reporting(0);
 // variaveis utilizadas
 $parurl = array_merge($_GET, $_POST);
-if(count($parurl) == 0){
+if (count($parurl) == 0) {
     ajuda();
-    exit;
+    exit();
 }
-if(!isset($parurl["fundo"])){
+if (! isset($parurl["fundo"])) {
     $parurl["fundo"] = "osm";
 }
 if (isset($parurl["opacidade"])) {
@@ -38,18 +38,18 @@ if (! isset($parurl["temas"]) && isset($parurl["layers"])) {
     $parurl["temas"] = $parurl["layers"];
 }
 $temas = explode(",", str_replace(" ", ",", $parurl["temas"]));
-if(!isset($parurl["visiveis"])){
+if (! isset($parurl["visiveis"])) {
     $parurl["visiveis"] = $parurl["temas"];
 }
 $visiveis = explode(",", str_replace(" ", ",", $parurl["visiveis"]));
 $off = array_diff($temas, $visiveis);
-//filtros
+// filtros
 $filtros = array();
-foreach($temas as $tema){
-    if(isset($parurl["map_layer_".$tema."_filter"])){
+foreach ($temas as $tema) {
+    if (isset($parurl["map_layer_" . $tema . "_filter"])) {
         $filtros[] = array(
-            "layer"=>$tema,
-            "expression"=>$parurl["map_layer_".$tema."_filter"]
+            "layer" => $tema,
+            "expression" => $parurl["map_layer_" . $tema . "_filter"]
         );
     }
 }
@@ -267,7 +267,6 @@ if (isset($botoes)) {
     $objBotoes[] = "'frente':true";
 
     $botoes = "{" . implode(",", $objBotoes) . "}";
-
 }
 if (isset($parurl["kml"])) {
     $kml = $parurl["kml"];
@@ -297,21 +296,19 @@ if (isset($parurl["pontos"])) {
 } else {
     $pontos = "";
 }
-if(isset($parurl["marca"])){
+if (isset($parurl["marca"])) {
     $marca = $parurl["marca"];
 } else {
-	$marca = "../pacotes/openlayers/img/marker-gold.png";
+    $marca = "../pacotes/openlayers/img/marker-gold.png";
 }
-if(isset($parurl["tiles"])){
+if (isset($parurl["tiles"])) {
     $tiles = $parurl["tiles"];
+} else {
+    $tiles = "true";
 }
-else{
-	$tiles = "true";
-}
-if(isset($parurl["ativarodadomouse"]) && $parurl["ativarodadomouse"] == "false"){
+if (isset($parurl["ativarodadomouse"]) && $parurl["ativarodadomouse"] == "false") {
     $ativarodadomouse = "";
-}
-else{
+} else {
     $ativarodadomouse = "new ol.interaction.MouseWheelZoom(),";
 }
 $legendahtml = $parurl["legendahtml"];
@@ -485,10 +482,10 @@ function ajuda()
 }
 
 .ol-mouse-position {
-    left: 10px;
-    position: absolute;
-    bottom: 5px;
-    top: auto;
+	left: 10px;
+	position: absolute;
+	bottom: 5px;
+	top: auto;
 }
 </style>
 </head>
@@ -696,34 +693,34 @@ function ajuda()
                                     <p>
                                         <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.atualiza()">Refresh</a> -->
                                     </p>
-                                    <li class="divider"></p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()">{{{a15}}}</a>
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.uploadarquivo()">{{{a14}}}</a>
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">{{{a3}}}</a>
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.importarwmc()">{{{a3a}}}</a>
-                                        </p>
-                                        <p>
-                                            <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a> -->
-                                        </p>
-                                        <p>
-                                            <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a> -->
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
-                                        </p>
-                                        <p>
-                                            <a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
-                                        </p>
+                                    <li class="divider"></li>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()">{{{a15}}}</a>
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.uploadarquivo()">{{{a14}}}</a>
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">{{{a3}}}</a>
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.importarwmc()">{{{a3a}}}</a>
+                                    </p>
+                                    <p>
+                                        <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a> -->
+                                    </p>
+                                    <p>
+                                        <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a> -->
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
+                                    </p>
+                                    <p>
+                                        <a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
+                                    </p>
 
                                 </div>
                             </div>

@@ -1,5 +1,6 @@
 <?php
 namespace admin\metaestat\variaveis\medidas\parametros;
+use PDOException;
 
 function listar($dbh, $id_medida_variavel, $id_parametro_medida = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

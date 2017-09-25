@@ -626,7 +626,8 @@ switch (strtoupper($funcao))
 					$path = $split[0];
 					$split[0] = "";
 					$shp = implode("/",$split);
-					$shp = explode(".",$shp)[0].".shp";
+					$shp = explode(".",$shp);
+					$shp = $shp[0].".shp";
 					$path = $drives[$path] . $shp;
 
 					$retorno = $m->adicionaTemaSHP($path);

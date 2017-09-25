@@ -1,5 +1,6 @@
 <?php
 namespace admin\metaestat\variaveis\medidas\classificacoes;
+use PDOException;
 
 function listar($dbh, $id_medida_variavel, $id_classificacao = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

@@ -36,7 +36,7 @@ $id_menu = $_POST["id_menu"];
 $id_tema = $_POST["id_tema"];
 $id_raiz = $_POST["id_raiz"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_n1,$id_menu,$id_tema,$id_raiz]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_n1,$id_menu,$id_tema,$id_raiz));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

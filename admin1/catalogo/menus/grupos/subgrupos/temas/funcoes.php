@@ -1,5 +1,6 @@
 <?php
 namespace admin\catalogo\menus\grupos\subgrupos\temas;
+use PDOException;
 function todosTemas($dbh){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$dados = \admin\php\funcoesAdmin\pegaDados("select id_tema,desc_tema,nome_tema,codigo_tema  from ".$esquemaadmin."i3geoadmin_temas order by lower(nome_tema) ", $dbh, false);

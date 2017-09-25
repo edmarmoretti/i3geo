@@ -1,5 +1,6 @@
 <?php
 namespace admin\catalogo\menus\grupos\listadegrupos;
+use PDOException;
 function listar($dbh, $id_grupo = ""){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_grupo != ""){

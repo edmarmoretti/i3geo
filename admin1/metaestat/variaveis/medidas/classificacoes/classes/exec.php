@@ -33,7 +33,7 @@ $id_classificacao = $_POST["id_classificacao"];
 $id_medida_variavel = $_POST["id_medida_variavel"];
 $id_classe = $_POST["id_classe"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_medida_variavel,$id_classificacao, $id_classe]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_medida_variavel,$id_classificacao, $id_classe));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

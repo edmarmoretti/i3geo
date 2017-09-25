@@ -1,5 +1,6 @@
 <?php
 namespace admin\catalogo\mapfile\disponibilidade;
+use PDOException;
 function listar($locaplic,$codigo){
 
 

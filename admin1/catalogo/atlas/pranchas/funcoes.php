@@ -1,5 +1,6 @@
 <?php
 namespace admin\catalogo\atlas\pranchas;
+use PDOException;
 function listar($dbh, $id_atlas = "",$id_prancha = ""){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_prancha != ""){

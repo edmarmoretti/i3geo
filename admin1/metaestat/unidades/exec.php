@@ -32,7 +32,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) =
 }
 $codigo_unidade_medida = $_POST["codigo_unidade_medida"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$codigo_unidade_medida]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($codigo_unidade_medida));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

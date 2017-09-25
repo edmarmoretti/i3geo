@@ -34,7 +34,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/arvore" ) === f
 $id_n2 = $_POST["id_n2"];
 $id_n3 = $_POST["id_n3"];
 $id_tema = $_POST["id_tema"];
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_tema,$id_n2,$id_n3]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_tema,$id_n2,$id_n3));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

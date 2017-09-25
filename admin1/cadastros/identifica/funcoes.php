@@ -1,5 +1,6 @@
 <?php
 namespace admin\cadastros\identifica;
+use PDOException;
 function listar($dbh, $id_i = ""){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_i != ""){

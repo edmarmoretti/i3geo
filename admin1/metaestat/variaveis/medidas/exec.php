@@ -33,7 +33,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) =
 $codigo_variavel = $_POST["codigo_variavel"];
 $id_medida_variavel = $_POST["id_medida_variavel"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$codigo_variavel,$id_medida_variavel]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($codigo_variavel,$id_medida_variavel));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

@@ -35,7 +35,7 @@ $id_n1 = $_POST["id_n1"];
 $id_n2 = $_POST["id_n2"];
 $id_menu = $_POST["id_menu"];
 $id_subgrupo = $_POST["id_subgrupo"];
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_n1,$id_n2,$id_menu,$id_subgrupo]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_n1,$id_n2,$id_menu,$id_subgrupo));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

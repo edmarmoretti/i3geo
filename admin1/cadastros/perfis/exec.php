@@ -37,7 +37,7 @@ if(!isset($idioma) || $idioma == ""){
 $perfil = str_replace(" ","",$perfil);
 
 $id_perfil = $_POST["id_perfil"];
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_perfil]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_perfil));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

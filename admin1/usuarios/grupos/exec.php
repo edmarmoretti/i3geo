@@ -32,10 +32,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/usuarios" ) ===
 }
 $id_usuario = $_POST ["id_usuario"];
 $id_grupo = $_POST ["id_grupo"];
-\admin\php\funcoesAdmin\testaSafeNumerico ( [
-		$id_usuario,
-		$id_grupo
-] );
+\admin\php\funcoesAdmin\testaSafeNumerico ( array($id_usuario,$id_grupo) );
 
 $funcao = strtoupper ( $funcao );
 // converte os parametros de definicao dos papeis em um array

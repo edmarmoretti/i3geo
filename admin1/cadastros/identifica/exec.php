@@ -32,7 +32,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/identifica" ) =
 }
 $id_i = $_POST["id_i"];
 $id = $_POST["id"];
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_i,$id]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_i,$id));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

@@ -32,7 +32,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) =
 }
 $codigo_tipo_regiao = $_POST["codigo_tipo_regiao"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$codigo_tipo_regiao]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($codigo_tipo_regiao));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

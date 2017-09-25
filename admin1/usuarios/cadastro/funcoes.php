@@ -1,5 +1,7 @@
 <?php
 namespace admin\usuarios\cadastro;
+use PDOException;
+
 function listar($dbh, $id_usuario = ""){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_usuario != ""){

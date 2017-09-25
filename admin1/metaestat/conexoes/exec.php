@@ -32,7 +32,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) =
 }
 $codigo_estat_conexao = $_POST["codigo_estat_conexao"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$codigo_estat_conexao]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($codigo_estat_conexao));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

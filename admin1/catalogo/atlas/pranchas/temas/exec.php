@@ -35,7 +35,7 @@ $id_atlas = $_POST["id_atlas"];
 $id_prancha = $_POST["id_prancha"];
 $id_tema = $_POST["id_tema"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$id,$id_atlas,$id_prancha]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id,$id_atlas,$id_prancha));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

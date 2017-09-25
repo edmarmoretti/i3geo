@@ -7,10 +7,9 @@
 //pega algumas variaveis de uso mais comum
 //session_start
 //
-if($_GET["funcao"] != "lista"){
-	include (dirname(__FILE__)."/../../php/checaLogin.php");
-	\admin\php\login\checaLogin();
-}
+include (dirname(__FILE__)."/../../php/checaLogin.php");
+\admin\php\login\checaLogin();
+
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
@@ -35,7 +34,7 @@ if ($_GET["funcao"] != "lista" && \admin\php\funcoesAdmin\verificaOperacaoSessao
 $id_ws = $_POST["id_ws"];
 $id = $_POST["id"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$id,$id_ws]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id,$id_ws));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

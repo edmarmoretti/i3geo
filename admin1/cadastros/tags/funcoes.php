@@ -1,5 +1,6 @@
 <?php
 namespace admin\cadastros\tags;
+use PDOException;
 function listar($dbh, $id_tag = ""){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_tag != ""){

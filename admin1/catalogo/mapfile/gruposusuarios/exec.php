@@ -40,7 +40,7 @@ $codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
 $id_grupo = $_POST["id_grupo"];
 $id_tema = $_POST["id_tema"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_grupo,$id_tema]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_grupo,$id_tema));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

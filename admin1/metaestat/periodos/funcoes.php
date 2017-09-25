@@ -1,5 +1,6 @@
 <?php
 namespace admin\metaestat\periodos;
+use PDOException;
 
 function listar($dbh, $codigo_tipo_periodo = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

@@ -32,7 +32,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) =
 }
 $codigo_tipo_periodo = $_POST["codigo_tipo_periodo"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$codigo_tipo_periodo]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($codigo_tipo_periodo));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

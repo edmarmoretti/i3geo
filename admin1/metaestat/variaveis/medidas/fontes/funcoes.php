@@ -1,5 +1,6 @@
 <?php
 namespace admin\metaestat\variaveis\medidas\fontes;
+use PDOException;
 
 function listar($dbh, $id_medida_variavel) {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];

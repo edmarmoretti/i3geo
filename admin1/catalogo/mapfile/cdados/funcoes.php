@@ -1,5 +1,6 @@
 <?php
 namespace admin\catalogo\mapfile\cdados;
+use Exception;
 function listar($locaplic,$codigo){
 	// pega o nome registrado no mapfile
 	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {

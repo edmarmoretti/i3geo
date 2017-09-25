@@ -328,10 +328,6 @@ if($temas != ""){
 		$ferramentas = array();
 		//TODO implementar para gvsig
 		if(file_exists($locaplic."/temas/".$tema.".gvp")){
-			include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
-			$gm = new gvsig2mapfile($locaplic."/temas/".$tema.".gvp");
-			$gvsigview = $gm->getViewsNames();
-			$objOpenLayers[] = 'new OpenLayers.Layer.WMS( "'.$gvsigview[0].'", "'.$servidor.'?'.$nocache.'tema='.$tema.'&DESLIGACACHE='.$DESLIGACACHE.'&",{layers:"'.$tema.'",transparent: "true", format: "image/png"},{singleTile:false,visibility:true,isBaseLayer:false, ferramentas :'.$ferramentas.')';
 		}
 		else{
 			$nomeMap = "";

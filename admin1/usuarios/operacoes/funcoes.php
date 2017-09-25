@@ -1,5 +1,6 @@
 <?php
 namespace admin\usuarios\operacoes;
+use PDOException;
 function listar($dbh, $id_operacao = ""){
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_operacao != ""){

@@ -1,7 +1,7 @@
 <?php
 namespace admin\metaestat\regioes;
 use PDO;
-
+use PDOException;
 function listar($dbh, $codigo_tipo_regiao = "") {
 	$esquemaadmin = $_SESSION ["esquemaadmin"];
 	if ($codigo_tipo_regiao != "") {

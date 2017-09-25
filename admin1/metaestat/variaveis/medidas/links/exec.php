@@ -32,7 +32,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editormapfile" 
 $id_link = $_POST["id_link"];
 $id_medida_variavel = $_POST["id_medida_variavel"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico([$id_medida_variavel,$id_link]);
+\admin\php\funcoesAdmin\testaSafeNumerico(array($id_medida_variavel,$id_link));
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {

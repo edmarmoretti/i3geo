@@ -34,11 +34,11 @@ $id = $_POST ["id"];
 $id_operacao = $_POST ["id_operacao"];
 $id_papel = $_POST ["id_papel"];
 
-\admin\php\funcoesAdmin\testaSafeNumerico ( [
+\admin\php\funcoesAdmin\testaSafeNumerico ( array(
 		$id,
 		$id_operacao,
 		$id_papel
-] );
+) );
 
 $funcao = strtoupper ( $funcao );
 // converte os parametros de definicao dos papeis em um array
