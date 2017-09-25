@@ -32,12 +32,12 @@ function dadosmapa($loc=""){
 		$loc = dirname(__FILE__)."/../../../..";
 	}
 	include($loc."/admin/php/admin.php");
-	include($loc."/admin/php/classe_metaestat.php");
+	include($loc."/classesphp/classe_metaestatinfo.php");
 	if(empty($id)){
 		echo "id nao definido";
 		exit;
 	}
-	$m = new Metaestat();
+	$m = new MetaestatInfo();
 	$dadosmapa = $m->listaMapas($id);
 	if(count($dadosmapa) == 0){
 		echo "Erro. Nenhum um mapa encontrado";

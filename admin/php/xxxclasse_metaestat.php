@@ -1,4 +1,5 @@
 <?php
+exit;
 /*
 Title: classe_metaestat.php
 

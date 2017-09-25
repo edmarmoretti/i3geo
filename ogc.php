@@ -655,8 +655,8 @@ else{
 				}
 				if(isset($_GET["id_medida_variavel"])){
 					$temai3geo = false;
-					include("admin/php/classe_metaestat.php");
-					$m = new Metaestat();
+					include("classesphp/classe_metaestatinfo.php");
+					$m = new MetaestatInfo();
 					$m->nomecache = "ogcmetaestat".$_GET["id_medida_variavel"];
 					$mapfileMetaestat = $m->mapfileMedidaVariavel($_GET["id_medida_variavel"],"",1,"","","","","","",true);
 					$nmap = ms_newMapobj($mapfileMetaestat["mapfile"]);
@@ -823,56 +823,7 @@ else{
 					}
 				}
 			}
-
 			if($extensao == ".gvp"){
-				include_once($locaplic."/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
-				$gm = new gvsig2mapfile($locaplic."/temas/".$tx.".gvp");
-				$gvsigview = $gm->getViewsNames();
-				foreach($gvsigview as $gv){
-					$dataView = $gm->getViewData($gv);
-					$oMap = $gm->addLayers($oMap,$gv,$dataView["layerNames"]);
-				}
-				$numlayers = $oMap->numlayers;
-				$lys = array();
-				//$layers[] = "default";
-				for ($i=0;$i < $numlayers;$i++){
-					$l = $oMap->getlayer($i);
-					$l->setmetadata("gml_include_items","all");
-					$l->set("dump",MS_TRUE);
-					$l->setmetadata("WMS_INCLUDE_ITEMS","all");
-					$l->setmetadata("WFS_INCLUDE_ITEMS","all");
-					$l->setmetadata("ows_srs",$listaepsg);
-					$l->setmetadata("ows_title",$l->getmetadata("TEMA"));
-					$l->set("status",MS_OFF);
-					$lys[] = $l->name;
-					if(file_exists($locaplic."/temas/miniaturas/".$tx.".map.mini.png")){
-						$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$tx.".map.mini.png";
-						$l->setmetadata("wms_attribution_logourl_format","image/png");
-						$l->setmetadata("wms_attribution_logourl_height","50");
-						$l->setmetadata("wms_attribution_logourl_width","50");
-						$l->setmetadata("wms_attribution_logourl_href",$mini);
-					}
-					if($l->type == MS_LAYER_RASTER && $l->numclasses > 0){
-						$c = $l->getclass(0);
-						if($c->name == ""){
-							$c->name = " ";
-						}
-					}
-					//inclui extensao geografica
-					$extensao = $l->getmetadata("EXTENSAO");
-					if($extensao == ""){
-						$extensao = $extensaoMap;
-					}
-					$l->setmetadata("wms_extent",$extensao);
-					//
-					//numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
-					//
-					if ($l->getmetadata("cortepixels") != ""){
-						$cortePixels = $l->getmetadata("cortepixels");
-					}
-				}
-				$req->setParameter("LAYERS", implode(",",$lys));
-				$req->setParameter("STYLES", "");
 			}
 		}
 	}

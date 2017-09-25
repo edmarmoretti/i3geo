@@ -1,6 +1,5 @@
 <?php
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-//include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 include(dirname(__FILE__)."/../../classesphp/classe_metaestatinfo.php");
 if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");

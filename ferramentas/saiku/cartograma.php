@@ -4,7 +4,6 @@ if(empty($_POST["g_sid"])){
 	exit;
 }
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-//include(dirname(__FILE__)."/../../admin/php/classe_metaestat.php");
 include(dirname(__FILE__)."/../../classesphp/classe_metaestatinfo.php");
 include_once(dirname(__FILE__)."/../../classesphp/classe_estatistica.php");
 if(!isset($dir_tmp)){

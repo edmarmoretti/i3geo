@@ -1051,8 +1051,8 @@ switch (strtoupper($funcao))
 		$tema = $_pg["tema"];
 		$codigo_tipo_regiao = $_pg["codigo_tipo_regiao"];
 		if(isset($codigo_tipo_regiao) && $codigo_tipo_regiao != ""){
-			include(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
-			$m = new Metaestat();
+			include(dirname(__FILE__)."/classe_metaestatinfo.php");
+			$m = new MetaestatInfo();
 			$m->nomecache = "ogcmetaestatreg".$codigo_tipo_regiao;
 			$tema = $m->mapfileTipoRegiao($codigo_tipo_regiao);
 			$tema = str_replace(".map","",$tema["mapfile"]);
@@ -1060,8 +1060,8 @@ switch (strtoupper($funcao))
 		//pode ser uma medida de uma variavel
 		$id_medida_variavel = $_pg["id_medida_variavel"];
 		if(isset($id_medida_variavel) && $id_medida_variavel != ""){
-			include(dirname(__FILE__)."/../admin/php/classe_metaestat.php");
-			$m = new Metaestat();
+			include(dirname(__FILE__)."/classe_metaestatinfo.php");
+			$m = new MetaestatInfo();
 			$m->nomecache = "ogcmetaestat".$id_medida_variavel;
 			$tema = $m->mapfileMedidaVariavel($id_medida_variavel,"",1,"","","","","","",true);
 			$tema = str_replace(".map","",$tema["mapfile"]);

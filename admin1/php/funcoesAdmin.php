@@ -344,7 +344,6 @@ function i3GeoAdminOrdena($pdo,$ordem,$tabela,$colunaid){
 	return true;
 }
 //$logTransacoes vem do ms_configura.php
-//ver tambem classe_metaestat.php
 function i3GeoAdminInsertLog($pdo,$sql,$data=array()){
 	$logTransacoes = $_SESSION["logTransacoes"];
 	$esquemaadmin = $_SESSION["esquemaadmin"];
