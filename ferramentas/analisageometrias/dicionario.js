@@ -2,42 +2,42 @@
 i3GEOF.analisaGeometrias.dicionario = {
 		'adiciona': [{
 			pt:"Adiciona",
-			en:"",
-			es:"Adiciona"
+			en:"Add",
+			es:"Agrega"
 		}],
 		'retira': [{
 			pt:"Retira",
-			en:"",
+			en:"Withdraw",
 			es:"Retira"
 		}],
 		'inverte': [{
 			pt:"Inverte",
-			en:"",
+			en:"Invert",
 			es:"Invierte"
 		}],
 		'limpa': [{
 			pt:"Limpa",
-			en:"",
+			en:"Clear",
 			es:"Limpia"
 		}],
 		'captura': [{
 			pt:"Capturar",
-			en:"",
+			en:"Capture",
 			es:"Capturar"
 		}],
 		'lista': [{
 			pt:"Listar e escolher",
-			en:"",
+			en:"List and choose",
 			es:"Listar y elegir"
 		}],
 		'analisa': [{
 			pt:"Analisar",
-			en:"",
+			en:"Analyse",
 			es:"Analizar"
 		}],
 		'escolheTema': [{
 			pt:"Escolha o tema que receber&aacute; a sele&ccedil;&atilde;o",
-			en:"",
+			en:"Choose the theme that will receive the selection",
 			es:"Elegir el tema que recibir&aacute; la selecci&oacute;n"
 		}],
 		'tipoSelecao': [{
