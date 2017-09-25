@@ -51,7 +51,6 @@ i3GEOF.atalhoscamada =
 		dicionario["sql"] = $trad("t41");
 		dicionario["comentar"] = $trad("t45");
 		dicionario["wms"] = "WMS-OGC";
-		dicionario["salvamapfile"] = $trad("t44");
 		dicionario["tme"] = $trad("t49");
 		dicionario["topo"] = $trad("x56");
 		dicionario["idjanela"] = idjanela;
@@ -181,7 +180,6 @@ i3GEOF.atalhoscamada =
 	 * Esse parametro e usado na hora de salvar o mapa
 	 * Para isso, a funcao salvarmapfile deve ser preparada para obter o parametro
 	 * e enviar para a funcao php
-	 * veja em i3GEOF.salvamapfile.salva
 	 *
 	 * conv indica se deve ser feita a conversao de checked para sim/nao
 	 */

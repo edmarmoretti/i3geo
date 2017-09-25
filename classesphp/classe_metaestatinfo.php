@@ -505,7 +505,7 @@ class MetaestatInfo{
 		//Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
 		//O codigo_tipo_regiao e marcado com o metadata METAESTAT_CODIGO_TIPO_REGIAO
 		//O id da medida da variavel e marcado com o metadata METAESTAT_ID_MEDIDA_VARIAVEL
-		//outros metadados tambem sao utilizados, veja em admin/php/editormapfile.php
+
 		$arq = $this->dir_tmp."/".$this->nomecache.".map";
 		if(!file_exists($arq)){
 			$meta = $this->listaMedidaVariavel("",$id_medida_variavel);
