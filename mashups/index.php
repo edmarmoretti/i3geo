@@ -30,13 +30,13 @@ include "../init/head.php";
 							<p>Mashups s&atilde;o pequenos programas que podem ser facilmente inseridos em p&aacute;ginas
 								HTML e que mostram determinados conte&uacute;dos.</p>
 							<p>No caso do i3Geo, os mashups mostram mapas tendo como base o conjunto de temas existentes
-								no diret&oacute;rio i3geo/temas.</p>
+								no diret&oacute;rio <samp>i3geo/temas</samp>.</p>
 						</fieldset>
 						<fieldset>
 							<legend>OpenLayers</legend>
 							<p>
 								O <a href="http://openlayers.org" target=_blank>OpenLayers</a> &eacute; uma biblioteca em
-								javascript bastante popular. Possu&iacute; uma interface simples mas que pode conter um
+								javascript bastante popular. Possui uma interface simples mas que pode conter um
 								grande n&uacute;mero de funcionalidades.
 							</p>
 							<p>
@@ -45,14 +45,14 @@ include "../init/head.php";
 							<p>
 								Para usar o Open Street Map (OSM) utilize o endere&ccedil;o <a target=_blank href="osm.php">i3geo/mashups/osm.php</a>
 							</p>
-							<p>Nos exemplos, basta substituir openlayers.php por osm.php:</p>
+							<p>Nos exemplos, basta substituir <samp>openlayers.php</samp> por <samp>osm.php</samp>:</p>
 							<p class="m">
 								Windows: <a target=_blank href="osm.php?temas=_wbiomashp&largura=800&altura=500">osm.php?temas=_wbiomashp&amp;largura=800&amp;altura=500</a>
 							</p>
 							<p class="m">
 								Linux: <a target=_blank href="osm.php?temas=_lbiomashp&largura=800&altura=500">osm.php?temas=_lbiomashp&amp;largura=800&amp;altura=500</a>
 							</p>
-							<p>O gerador de Web Services do i3GEO pode ser utilizado para abrir o mashup.</p>
+							<p>O gerador de Web Services do i3Geo pode ser utilizado para abrir o mashup.</p>
 							<p class="m">
 								Windows: <a target=_blank
 									href="../ogc.php?temas=_wbiomashp&format=application/openlayers&bbox=-54,-14,-50,-10">ogc.php?temas=_wbiomashp&amp;format=application/openlayers&amp;bbox=-54,-14,-50,-10</a>
@@ -65,10 +65,10 @@ include "../init/head.php";
 						<fieldset>
 							<legend>Filtro</legend>
 							<p>
-								Cada tema pode receber filtros seguindo-se a sintaxe &amp;map_layer_{codigo do tema}_filter=<br>
+								Cada tema pode receber filtros seguindo-se a sintaxe <code>&amp;map_layer_{codigo do tema}_filter=</code><br>
 								Em camadas com origem em arquivos shapefile o valor do filtro segue o padr&atilde;o
-								(('[nome_da_coluna]'='valor_do_registro'))<br> Camadas baseadas em Postgis seguem o
-								padr&atilde;o nome_da_coluna=valor_do_registro.
+								<code>(('[nome_da_coluna]'='valor_do_registro'))</code><br> Camadas baseadas em Postgis seguem o
+								padr&atilde;o <code>nome_da_coluna=valor_do_registro</code>.
 							</p>
 							<p class="m">
 								Windows: <a target=_blank
