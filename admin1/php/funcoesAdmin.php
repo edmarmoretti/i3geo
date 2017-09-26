@@ -2,6 +2,7 @@
 namespace admin\php\funcoesAdmin;
 use PDO;
 use PDOException;
+use Services_JSON;
 //
 // verifica se um determinado papel esta registrado na variavel SESSION
 //

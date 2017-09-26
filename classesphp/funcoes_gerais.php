@@ -2892,6 +2892,7 @@ Lista os layers de um mapfile que sao restritos e que nao sao permitidos ao usua
 function listaLayersIndevidos($map_file){
 	//error_reporting(0);
 	$indevidos = array();
+
 	$restritos = listaTemasRestritos();
 	if(count($restritos) > 0){
 		$gruposusr = listaGruposUsrLogin();

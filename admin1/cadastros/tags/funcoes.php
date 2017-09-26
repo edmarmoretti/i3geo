@@ -2,7 +2,8 @@
 namespace admin\cadastros\tags;
 use PDOException;
 function listar($dbh, $id_tag = ""){
-	$esquemaadmin = $_SESSION["esquemaadmin"];
+
+    $esquemaadmin = $_SESSION["esquemaadmin"];
 	if($id_tag != ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_tag, nome from ".$esquemaadmin."i3geoadmin_tags WHERE id_tag = $id_tag ", $dbh, false );
 		$dados = $dados[0];

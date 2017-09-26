@@ -93,7 +93,7 @@ function retornaJSON($obj)
 	//else
 	//{
 	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
-	//error_reporting(0);
+	error_reporting(0);
 	ob_end_clean();
 	$j = new Services_JSON();
 	$texto = $j->encode($obj);
@@ -190,11 +190,10 @@ Array originada de fetchAll
 */
 function pegaDados($sql,$dbh="",$close=true)
 {
-	error_reporting(0);
 	$resultado = array();
 	//is_string para efeitos de compatibilidade
 	if($dbh == "" || is_string($dbh)){
-		include(dirname(__FILE__)."/../../admin1/php/conexao.php");
+		include(dirname(__FILE__)."/../../admin/php/conexao.php");
 	}
 	error_reporting(0);
 	//$dbh deve ser definido com somente leitura, mas por prevencao:

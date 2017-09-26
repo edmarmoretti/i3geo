@@ -45,6 +45,7 @@ if(!empty($_POST["usuario"]) && !empty($_POST["senha"])){
 	$funcao = "login";
 	$_SESSION["locaplic"] = $locaplic;
 	$_SESSION["conexaoadmin"] = $conexaoadmin;
+	$_SESSION["esquemaadmin"] = str_replace(".","",$esquemaadmin).".";
 }
 else{//se nao, verifica se o login ja existe realmente
 	if(!empty($_COOKIE["i3geocodigologin"])){
@@ -251,7 +252,7 @@ function validaSessao(){
 //registra as operacoes, papeis e grupos do usuario na SESSION
 //
 function autenticaUsuario($usuario,$senha,$dir_tmp,$i3geomaster){
-	include(dirname(__FILE__)."/conexao.php");
+    include(dirname(__FILE__)."/conexao.php");
 	error_reporting(0);
 	$senhamd5 = md5($senha);
 	if(function_exists("password_hash")){
