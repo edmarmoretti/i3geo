@@ -1103,7 +1103,7 @@ i3GEOF.identifica =
 				}
 				i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + ins + "</div>", "");
 			};
-			p = i3GEO.configura.locaplic + "/admin/php/metaestat.php?funcao=LISTATODOSATRIBUTOSMEDIDAVARIAVELXY", cpJSON.call(
+			p = i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=LISTATODOSATRIBUTOSMEDIDAVARIAVELXY", cpJSON.call(
 					p,
 					"foo",
 					temp,

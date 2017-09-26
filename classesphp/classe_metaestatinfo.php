@@ -189,7 +189,7 @@ class MetaestatInfo{
 	 * Executa um SQL no banco de dados definido em uma conexao cadastrada no sistema de admnistracao
 	 * @param codigo da conexao
 	 * @param tring sql
-	 * @return resultado de execSQL
+	 * @return string
 	*/
 	function execSQLDB($codigo_estat_conexao,$sql){
 		$buscar = array("drop","update","insert","delete");
@@ -929,7 +929,7 @@ class MetaestatInfo{
 	 * Complementa um mapfile resumido inserindo seus layers em um mapfile completo, contendo todos os elementos necessarios para uso
 	 * Usado na geracao de WMS e outros servicos
 	 * @param mapfile resumido
-	 * @return nome do arquivo com o mapfile completo
+	 * @return string
 	 */
 	function mapfileCompleto($mapfile){
 		$f = $this->base;
@@ -983,7 +983,7 @@ class MetaestatInfo{
 	 * @param coluna de agrupamento
 	 * @param limite do numero de registros
 	 * @param le os dados diretamente da tabela sem nenhum tipo de agrupamento, seja por data ou outro parametro
-	 * @return execSQL
+	 * @return string
 	 */
 	function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = "",$limite="",$direto=false){
 		set_time_limit(0);
@@ -1014,7 +1014,7 @@ class MetaestatInfo{
 	 * Lista as ocorrencias de valores em uma coluna de uma medida de variavel
 	 * @param id da medida de variavel
 	 * @param coluna
-	 * @return execSQL
+	 * @return array
 	 */
 	function valorUnicoMedidaVariavel($id_medida_variavel,$coluna){
 		$sqlf = $this->sqlMedidaVariavel($id_medida_variavel,0,$coluna);
@@ -1651,7 +1651,7 @@ class MetaestatInfo{
 	/**
 	 * Lista os esquemas em um banco de dados
 	 * @param codigo da conexao
-	 * @return execSQLDB
+	 * @return array
 	 */
 	function esquemasConexao($codigo_estat_conexao){
 		return $this->execSQLDB($codigo_estat_conexao,"SELECT oid,nspname as esquema FROM pg_namespace WHERE nspname NOT LIKE 'pg_%' AND nspname NOT LIKE '%_schema%' group by nspname,oid order by nspname");
@@ -1661,7 +1661,7 @@ class MetaestatInfo{
 	 * @param codigo da conexao
 	 * @param nome do esquema
 	 * @param sim|nao exclui da lista as tabelas que contem geometria
-	 * @return execSQLDB
+	 * @return string
 	 */
 	function tabelasEsquema($codigo_estat_conexao,$nome_esquema,$excluigeom=""){
 		$sql = "SELECT table_name as tabela FROM information_schema.tables where table_schema = '$nome_esquema' AND table_schema NOT LIKE 'i3geo%' AND table_schema NOT LIKE 'pg_%' AND table_schema NOT LIKE '%_schema%'";
@@ -1677,7 +1677,7 @@ class MetaestatInfo{
 	 * @param nome da tabela
 	 * @param tipo de coluna (opcional)
 	 * @param tipo de tratamento do parametro tipo, pode ser =|!=
-	 * @return execSQLDB
+	 * @return string
 	 */
 	function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo="",$tipotratamento="="){
 		$colunas = array();
@@ -1695,7 +1695,7 @@ class MetaestatInfo{
 	 * @param codigo da conexao
 	 * @param nome do esquema
 	 * @param nome da tabela
-	 * @return execSQLDB
+	 * @return string
 	 */
 	function comentarioTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela){
 		$colunas = array();
@@ -1720,7 +1720,7 @@ class MetaestatInfo{
 	 * @param nome do esquema
 	 * @param nome da tabela
 	 * @param nome da coluna (opcional)
-	 * @return execSQLDB
+	 * @return string
 	 */
 	function descreveColunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$nome_coluna=""){
 		if($nome_coluna == ""){
@@ -1738,7 +1738,7 @@ class MetaestatInfo{
 	 * @param nome da tabela
 	 * @param sim|nao inclui o WKT da geometria de colunas geo
 	 * @param (opcional) numero de registros que serao listados
-	 * @return execSQLDB
+	 * @return array
 	 */
 	function obtemDadosTabelaDB($codigo_estat_conexao,$nome_esquema,$nome_tabela,$geo="nao",$nreg=""){
 		$desccolunas = $this->descreveColunasTabela($codigo_estat_conexao, $nome_esquema, $nome_tabela);
@@ -2003,9 +2003,9 @@ class MetaestatInfo{
 		return array("dados"=>$r,"aliascolunas"=>$alias,"colunas"=>$colunas,"descricao"=>$descricao);
 	}
 	/**
-	 * Converte um tipo de regiao em shapefile
+	 * Converte um tipo de regiao em shapefile e retorna o nome do arquivo
 	 * @param codigo do tipo de regiao
-	 * @return nome do arquivo criado
+	 * @return string
 	 */
 	function regiao2shp($codigo_tipo_regiao){
 		$regiao = $this->listaTipoRegiao($codigo_tipo_regiao);

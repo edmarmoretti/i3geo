@@ -1083,96 +1083,6 @@ i3GEOF.metaestat = {
             i3GEOF.metaestat.ID_MEDIDA_VARIAVEL = $i("i3geoCartoComboMedidaVariavelEditor").value;
         },
         /**
-         * Calcula os intervalos de classe com base na tecnica de quartis
-         * Altera uma classificacao ja existente
-         * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
-         * Executa admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quartil
-         */
-        quartis: function(){
-            var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
-            id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
-            cores = $i("listaColourRampEditor").value,
-            p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=quartil&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid,
-            temp = function(retorno){
-                core_carregando("desativa");
-                //fecha o editor
-                if(retorno == "erro"){
-                    alert("N&atilde;o foi poss&iacute;vel gerar as classes. Verifique se j&aacute; existem dados para essa medida");
-                }
-                else{
-                    YAHOO.i3GEO.janela.manager.find("i3geoCartoEditor").destroy();
-                }
-            };
-            if(cores == ""){
-                i3GEO.janela.tempoMsg("Escolha as cores primeiro. Depois acione a op&ccedil;&atilde;o de classifica&ccedil;&atilde;o novamente");
-                $i("listaColourRampEditor").onchange = function(){i3GEOF.metaestat.editor.quartis();};
-                i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
-                return;
-            }
-            core_carregando("ativa");
-            i3GEO.util.ajaxGet(p,temp);
-        },
-        /**
-         * Calcula os intervalos de classe com base na tecnica de intervalos iguais
-         * Altera uma classificacao ja existente
-         * O usuario deve definir o menor e o maior valor
-         * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
-         * Executa admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais5mm
-         */
-        intervalosIguaisMM: function(){
-            var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
-                id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
-                cores = $i("listaColourRampEditor").value,
-                p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguaismm" +
-                    "&numintervalos="+$i("i3GEOFmetaestatEditorNumInt").value +
-                    "&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+
-                    "&min="+$i("i3GEOFmetaestatEditorVmin").value +
-                    "&max="+$i("i3GEOFmetaestatEditorVmax").value +
-                    "&g_sid="+i3GEO.configura.sid,
-                temp = function(retorno){
-                    core_carregando("desativa");
-                    YAHOO.i3GEO.janela.manager.find("i3geoCartoEditor").destroy();
-                };
-            if(cores == ""){
-                alert("Escolha as cores primeiro");
-                $i("listaColourRampEditor").onchange = function(){i3GEOF.metaestat.editor.intervalosIguaisMM();};
-                i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
-                return;
-            }
-            core_carregando("ativa");
-            i3GEO.util.ajaxGet(p,temp);
-        },
-        /**
-         * Calcula os intervalos de classe com base na tecnica de intervalos iguais
-         * Altera uma classificacao ja existente
-         * O menor e maior valor sao calculados com base nos valores da medida da variavel
-         * E necessario definir as cores das classes. Caso o usuario nao as tenha escolhido, e aberta a janela para escolha
-         * Executa admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais5mm
-         */
-        intervalosIguais: function(){
-            var id_medida_variavel = $i("i3geoCartoComboMedidaVariavelEditor").value,
-            id_classificacao = $i("i3geoCartoComboClassificacoesEditor").value,
-            cores = $i("listaColourRampEditor").value,
-            p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=calculaClassificacao&tipo=intiguais&numintervalos="+$i("i3GEOFmetaestatEditorNumInt").value+"&cores="+cores+"&id_classificacao="+id_classificacao+"&id_medida_variavel="+id_medida_variavel+"&g_sid="+i3GEO.configura.sid,
-            temp = function(retorno){
-                core_carregando("desativa");
-                if(retorno == "erro"){
-                    alert("N&atilde;o foi poss&iacute;vel gerar as classes. Verifique se j&aacute; existem dados para essa medida");
-                }
-                else{
-                    YAHOO.i3GEO.janela.manager.find("i3geoCartoEditor").destroy();
-                }
-            };
-            if(cores == ""){
-                alert("Escolha as cores primeiro");
-                $i("listaColourRampEditor").onchange = function(){i3GEOF.metaestat.editor.intervalosIguais();};
-                i3GEO.util.abreColourRamp("","listaColourRampEditor",5);
-                return;
-            }
-            core_carregando("ativa");
-            i3GEO.util.ajaxGet(p,temp);
-        },
-        /**
          * Ativa o botao de upload
          * Ao ser clicado, abre uma janela flutuante com as opcoes de download
          * @param id do elemento DOM utilizado para compor o botao
@@ -2054,7 +1964,7 @@ i3GEOF.metaestat = {
         },
         /**
          * Abre uma nova janela do navegador para download dos dados de uma medida de uma variavel
-         * Executa admin/php/metaestat.php?funcao=dadosMedidaVariavel que retorna os dados em CSV
+         * Executa ?funcao=dadosMedidaVariavel que retorna os dados em CSV
          */
         downloadMedida: function(){
             i3GEOF.metaestat.log("i3GEOF.metaestat.principal.downloadMedida()");
@@ -2063,7 +1973,7 @@ i3GEOF.metaestat = {
                 return;
             }
             if(window.confirm("Confirma o download dos dados")){
-                var p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=dadosMedidaVariavel" +
+                var p = i3GEO.configura.locaplic+"/classesphp/metaestat_controle.php?funcao=dadosMedidaVariavel" +
                     "&todasascolunas=1&formato=csv&id_medida_variavel="+$i("i3geoCartoComboMedidasVariavel").value;
                 window.open(p);
             }

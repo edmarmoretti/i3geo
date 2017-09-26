@@ -70,8 +70,8 @@ i3GEOF.listamapas = {
 	},
 	/**
 	 * Retorna o HTML com o conteudo da ferramenta
-	 * Executa admin/php/metaestat.php?funcao=listaTemplatesMapa para obter os templates disponiveis para uso nos mapas
-	 * Executa admin/php/metaestat.php?funcao=listaMapas para obter a lista de mapas
+	 * Executa funcao=listaTemplatesMapa para obter os templates disponiveis para uso nos mapas
+	 * Executa funcao=listaMapas para obter a lista de mapas
 	 * @param id do DIV que recebera o conteudo
 	 */
 	html: function(divid){
@@ -102,10 +102,10 @@ i3GEOF.listamapas = {
 						}
 						$i(divid).innerHTML = ins;
 					},
-					p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaMapas";
+					p = i3GEO.configura.locaplic+"/classesphp/metaestat_controle.php?funcao=listaMapas";
 				i3GEO.util.ajaxGet(p,listaMapas);
 			},
-			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaTemplatesMapa";
+			p = i3GEO.configura.locaplic+"/classesphp/metaestat_controle.php?funcao=listaTemplatesMapa";
 		i3GEO.util.ajaxGet(p,listaTemplates);
 	}
 };

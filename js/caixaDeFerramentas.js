@@ -88,6 +88,9 @@ i3GEO.caixaDeFerramentas = {
 			f.idOndeFolder.html("");
 			f.idOndeLinks.html("");
 			for (i = 0; i < n; i += 1) {
+				if(menu[i].Interface && menu[i].Interface != i3GEO.Interface.ATUAL){
+					continue;
+				}
 				if(subs[menu[i].id].length > 0){
 					t = Mustache.to_html(
 							i3GEO.template.ferramentasFolder,
@@ -122,6 +125,9 @@ i3GEO.caixaDeFerramentas = {
 			f.idOndeFolder.html("");
 			f.idOndeLinks.html("");
 			for (i = 0; i < n; i += 1) {
+				if(menu[i].Interface && menu[i].Interface != i3GEO.Interface.ATUAL){
+					continue;
+				}
 				datan = {"nivel":2,"nome":menu[i].text,"id":menu[i].id,"n0": data.n0, "n1":i, "n2": "", "n3": ""};
 				if(menu[i].url){
 					t = Mustache.to_html(
@@ -170,6 +176,9 @@ i3GEO.caixaDeFerramentas = {
 			f.idOndeFolder.html("");
 			f.idOndeLinks.html("");
 			for (i = 0; i < n; i += 1) {
+				if(menu[i].Interface && menu[i].Interface != i3GEO.Interface.ATUAL){
+					continue;
+				}
 				datan = {"nivel":3,"nome":menu[i].text,"id":menu[i].id,"n0": data.n0, "n1":data.n1, "n2": i, "n3": ""};
 				if(menu[i].url){
 					t = Mustache.to_html(

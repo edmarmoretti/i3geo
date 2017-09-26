@@ -140,7 +140,7 @@ i3GEOF.navegapostgis = {
 					i3GEOF.navegapostgis.montaArvore(i3GEOF.navegapostgis.conexao);
 				}
 			},
-		p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=listaConexao&formato=json",
+		p = i3GEO.configura.locaplic+"/classesphp/metaestat_controle.php?funcao=listaConexao&formato=json",
 		botao = $i("i3GEOFnavegapostgisAplicar");
 		if(botao){
 			botao.style.position = "absolute";
@@ -291,7 +291,7 @@ i3GEOF.navegapostgis = {
 			i3GEOF.navegapostgis.ARVORE.draw();
 
 		},
-		p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=esquemasConexao&formato=json&codigo_estat_conexao="+conexao;
+		p = i3GEO.configura.locaplic+"/classesphp/metaestat_controle?funcao=esquemasConexao&formato=json&codigo_estat_conexao="+conexao;
 		cpJSON.call(p,"foo",funcao);
 	},
 	listaTabelas: function(node){
@@ -318,7 +318,7 @@ i3GEOF.navegapostgis = {
 				}
 				node.loadComplete();
 			},
-			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=tabelasEsquema&formato=json&nome_esquema="+esquema+"&codigo_estat_conexao="+conexao;
+			p = i3GEO.configura.locaplic+"/classesphp/metaestat_controle.php?funcao=tabelasEsquema&formato=json&nome_esquema="+esquema+"&codigo_estat_conexao="+conexao;
 		i3GEOF.navegapostgis.esquema = esquema;
 		cpJSON.call(p,"foo",funcao);
 	},
@@ -370,7 +370,7 @@ i3GEOF.navegapostgis = {
 				$i("i3GEOFnavegapostgisColunas").innerHTML = ins;
 				i3GEOF.navegapostgis.geraSql();
 			},
-			p = i3GEO.configura.locaplic+"/admin/php/metaestat.php?funcao=descreveColunasTabela&formato=json&nome_tabela="+tabela+"&nome_esquema="+i3GEOF.navegapostgis.esquema+"&codigo_estat_conexao="+i3GEOF.navegapostgis.conexao;
+			p = i3GEO.configura.locaplic+"/classesphp/metaestat_controle.php?funcao=descreveColunasTabela&formato=json&nome_tabela="+tabela+"&nome_esquema="+i3GEOF.navegapostgis.esquema+"&codigo_estat_conexao="+i3GEOF.navegapostgis.conexao;
 		cpJSON.call(p,"foo",funcao);
 	},
 	geraSql: function(){
