@@ -86,7 +86,15 @@ class vermultilayer
 	*/
 	function verifica($mapfile,$tema) //$mapfile = arquivo .map, $tema = nome do layer
 	{
-		include(dirname(__FILE__)."/../ms_configura.php");
+	    $this->resultado = 0;
+	    $this->temas = array();
+	    $this->layers = array();
+	    $this->nomes = array();
+	    $this->nomesvisiveis = array();
+	    $this->temasvisiveis = array();
+	    return;
+
+	    include(dirname(__FILE__)."/../ms_configura.php");
 		$this->postgis_mapa = $postgis_mapa;
 
 		$map = ms_newMapObj($mapfile);

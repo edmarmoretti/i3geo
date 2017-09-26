@@ -18,7 +18,9 @@ if(!empty($_GET["g_sid"])){
 	$ler_extensoes = $_SESSION["ler_extensoes"];
 	$perfil = $_SESSION["perfil"];
 	$interface = $_SESSION["interface"];
-	$kmlurl = $_SESSION["kmlurl"];
+	if(isset($_SESSION["kmlurl"])){
+	    $kmlurl = $_SESSION["kmlurl"];
+	}
 	$mapdir = $_SESSION["mapdir"];
 	$imgdir = $_SESSION["imgdir"];
 	$contadorsalva = $_SESSION["contadorsalva"];
@@ -30,7 +32,10 @@ else{
 }
 //variaveis mais utilizadas
 $tema = $_GET["tema"];
-$ext = $_GET["ext"];
+if(isset($_GET["ext"])){
+   $ext = $_GET["ext"];
+}
+
 $funcao = $_GET["funcao"];
 
 include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
@@ -93,7 +98,7 @@ function redesenhaMapa()
 	$res["mappath"] = "";
 	$res["mapurl"] = "";
 	$res["mensagens"] = $m->pegaMensagens();
-	$res["tempo"] = microtime(1) - $tempo;
+	$res["tempo"] = "";
 	restauraCon($map_file,$postgis_mapa);
 	ob_clean();
 	if ($par == "")

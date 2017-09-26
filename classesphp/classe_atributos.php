@@ -284,7 +284,7 @@ class Atributos
 						$convC = true;
 					}
 					foreach($items as $i){
-						if($aliasc[$i]){
+						if(isset($aliasc[$i])){
 							if($convC){
 								$alias[$i] = $this->converte($aliasc[$i]);
 							}
@@ -432,7 +432,7 @@ class Atributos
 				$convC = true;
 			}
 			foreach($items as $i){
-				if($aliasc[$i]){
+				if(isset($aliasc[$i])){
 					if($convC){
 						$alias[] = $this->converte($aliasc[$i]);
 					}

@@ -402,6 +402,7 @@ class Mapa
 				$wmsformat = "";
 				$wmssrs = "";
 				$wmstile = "";
+				$wmsname = "";
 				if($ct == 7 && strtoupper($oLayer->getmetadata("cache")) != "SIM"){
 					$wmsurl = ($oLayer->connection)."&layers=".($oLayer->getmetadata("wms_name"))."&style=".($oLayer->getmetadata("wms_style"));
 					$tempo = $oLayer->getmetadata("wms_time");

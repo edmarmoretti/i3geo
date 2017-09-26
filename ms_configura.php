@@ -863,4 +863,5 @@ if(empty($_COOKIE["i3geolingua"]) && array_key_exists('HTTP_ACCEPT_LANGUAGE',$_S
 	}
 	setcookie('i3geolingua', $l, time()+60*60*24*365, '/');
 }
+error_reporting(E_ALL);
 ?>

@@ -39,7 +39,7 @@ i3geo/classesphp/xml.php
 //
 
 if (!isset($esquemaadmin)){
-	include_once(dirname(__FILE__)."/../../ms_configura.php");
+	include_once(dirname(__FILE__)."/../ms_configura.php");
 }
 if(!empty($esquemaadmin)){
 	$esquemaadmin = str_replace(".","",$esquemaadmin).".";

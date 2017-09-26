@@ -574,7 +574,7 @@ function substituiCon($map_file,$postgis_mapa)
 }
 function substituiConObj($objMap,$postgis_mapa){
 	//error_reporting(0);
-	if (!empty($postgis_mapa)){
+    if (!empty($postgis_mapa)  && is_object($objMap) == true){
 		$numlayers = $objMap->numlayers;
 		for ($i=0;$i < $numlayers;++$i)
 		{

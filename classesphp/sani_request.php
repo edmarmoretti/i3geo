@@ -41,7 +41,7 @@ if (isset($_POST)){
 				$valor_ = str_replace("'","*#*",$valor_);
 				$valor_ = trim($valor_);
 				$parametro = filter_var($parametro, FILTER_SANITIZE_STRING);
-				$valor = filter_var($valor, FILTER_SANITIZE_STRING);
+				$valor_ = filter_var($valor_, FILTER_SANITIZE_STRING);
 				$_POST[$parametro] = str_replace('*#*',"'",$valor_);
 			}
 		}
