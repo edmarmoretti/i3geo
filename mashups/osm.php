@@ -375,7 +375,7 @@ function ajuda()
 	Quando for vazio, o ultimo layer sera considerado como o layer de fundo
 	Os seguintes fundos podem usados nessa lista: (lista completa na variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS que pode ser verificada por meio do console javascript do navegador)
 
-	osm, aquarela, toner, tonerlite, layMapQuestAerial
+	osm, aquarela, toner, tonerlite
 
 	.controles - lista com os nomes dos controles que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os controles ser&atilde;o adicionados
 	   navigation

@@ -345,12 +345,12 @@ function ajuda()
 	<pre><b>
 	Mashup OpenLayers
 	Par&acirc;metros:
-	.restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+	.restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin1/catalogo/mapas/index.php)
 	.opacidade - opacidade (de 0 a 1) aplicada aos temas do tipo poligonal ou raster (default 1)
 	.kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
 	.temas - lista com os temas (mapfiles) do i3Geo que ser&atilde;o inclu&iacute;dos no mapa. Pode ser inclu&iacute;do um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e tamb&eacute;m o par&acirc;metro &layers
 	.visiveis - lista de temas (mesmos nomes do par&acirc;metro temas) que iniciar&atilde;o como vis&iacute;veis no mapa. Se n&atilde;o for definido, todos os temas ser&atilde;o vis&iacute;veis.
-	.numzoomlevels - n&uacute;mero de n&iacute;veis de zoom, default=12
+	.numzoomlevels - n&uacute;mero de n&iacute;veis de zoom
 	.maxextent - extens&atilde;o geogr&aacute;fica m&aacute;xima do mapa (xmin,ymin,xmax,ymax)
 	.mapext - extens&atilde;o geogr&aacute;fica inicial do mapa (xmin,ymin,xmax,ymax)
 	.largura - lagura do mapa em pixels
@@ -377,11 +377,9 @@ function ajuda()
 	Os seguintes fundos podem usados nessa lista: (lista completa na variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS que pode ser verificada por meio do console javascript do navegador)
 
 	eng
-    oce - ESRI Ocean Basemap
+	oce - ESRI Ocean Basemap
 	ims - ESRI Imagery World 2D
 	wsm - ESRI World Street Map
-	mma - base cartogr&aacute;fica do Brasil
-	wms - base mundial da Meta Carta
 
 	.controles - lista com os nomes dos controles que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os controles ser&atilde;o adicionados
 	   navigation
