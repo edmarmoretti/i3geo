@@ -8,7 +8,7 @@ include_once (dirname(__FILE__) . "/../ms_configura.php");
 include_once (dirname(__FILE__) . "/../classesphp/sani_request.php");
 include_once (dirname(__FILE__) . "/../classesphp/carrega_ext.php");
 include_once (dirname(__FILE__) . "/../classesphp/funcoes_gerais.php");
-// error_reporting(0);
+error_reporting(0);
 // variaveis utilizadas
 $parurl = array_merge($_GET, $_POST);
 if(count($parurl) == 0){
@@ -60,14 +60,15 @@ if (isset($parurl["altura"])) {
 if (isset($parurl["largura"])) {
     $estilo .= ";width:" . $parurl["largura"] . "px";
 }
-$controles = $parurl["controles"];
+
 //
 // define quais controles ser&atilde;o mostrados no mapa
 //
 $objControles = array(
     "new ol.control.Attribution({collapsible: true})"
 );
-if (isset($controles)) {
+if (isset($parurl["controles"])) {
+    $controles = $parurl["controles"];
     $controles = str_replace(" ", ",", $controles);
     $controles = strtolower($controles);
     $controles = explode(",", $controles);
@@ -87,18 +88,19 @@ if (isset($controles)) {
         $objControles[] = "new ol.control.OverviewMap()";
     }
 } else {
+    $controles = "";
     $objControles[] = "new ol.control.Zoom()";
     $objControles[] = "new ol.control.ZoomSlider()";
     $objControles[] = "new ol.control.ScaleLine()";
     $objControles[] = "new ol.control.MousePosition({coordinateFormat : function(c){return ol.coordinate.toStringHDMS(c);}})";
 }
-$botoes = $parurl["botoes"];
 //
 // define quais botoes ser&atilde;o mostrados no mapa
 //
 $objBotoes = array();
 $objBotoesHtml = array();
-if (isset($botoes)) {
+if (isset($parurl["botoes"])) {
+    $botoes = $parurl["botoes"];
     $botoes = str_replace(" ", ",", $botoes);
     $botoes = strtolower($botoes);
     $botoes = explode(",", $botoes);
@@ -312,7 +314,13 @@ if(isset($parurl["ativarodadomouse"]) && $parurl["ativarodadomouse"] == "false")
 else{
     $ativarodadomouse = "new ol.interaction.MouseWheelZoom(),";
 }
+if(!isset($parurl["legendahtml"])){
+    $parurl["legendahtml"] = "";
+}
 $legendahtml = $parurl["legendahtml"];
+if(!isset($parurl["layerDefault"])){
+    $parurl["layerDefault"] = "";
+}
 $layerDefault = $parurl["layerDefault"];
 // cria as pastas temporarias caso nao existam
 if (! file_exists($dir_tmp)) {

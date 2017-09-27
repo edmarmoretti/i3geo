@@ -10,6 +10,12 @@ if ($ogcwsmap == "") {
 $map = ms_newMapObj ( $ogcwsmap );
 $mapext = $map->extent->minx . "," . $map->extent->miny . "," . $map->extent->maxx . "," . $map->extent->maxy;
 include (ONDEI3GEO."/init/head.php");
+if(!isset($_GET["temaOgc"])){
+    $_GET["temaOgc"] = "";
+}
+if(!isset($_GET["temaDownload"])){
+    $_GET["temaDownload"] = "";
+}
 ?>
 <link rel='stylesheet' type='text/css' href='index.css'>
 <body style="padding-top: 55px;" id="topo">

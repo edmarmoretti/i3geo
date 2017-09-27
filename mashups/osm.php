@@ -8,7 +8,7 @@ include_once (dirname(__FILE__) . "/../ms_configura.php");
 include_once (dirname(__FILE__) . "/../classesphp/sani_request.php");
 include_once (dirname(__FILE__) . "/../classesphp/carrega_ext.php");
 include_once (dirname(__FILE__) . "/../classesphp/funcoes_gerais.php");
-// error_reporting(0);
+error_reporting(0);
 // variaveis utilizadas
 $parurl = array_merge($_GET, $_POST);
 if (count($parurl) == 0) {

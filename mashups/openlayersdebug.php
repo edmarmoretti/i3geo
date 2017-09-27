@@ -8,7 +8,7 @@ include_once (dirname(__FILE__) . "/../ms_configura.php");
 include_once (dirname(__FILE__) . "/../classesphp/sani_request.php");
 include_once (dirname(__FILE__) . "/../classesphp/carrega_ext.php");
 include_once (dirname(__FILE__) . "/../classesphp/funcoes_gerais.php");
-// error_reporting(0);
+//error_reporting(0);
 // variaveis utilizadas
 $parurl = array_merge($_GET, $_POST);
 if(count($parurl) == 0){
@@ -60,14 +60,15 @@ if (isset($parurl["altura"])) {
 if (isset($parurl["largura"])) {
     $estilo .= ";width:" . $parurl["largura"] . "px";
 }
-$controles = $parurl["controles"];
+
 //
 // define quais controles ser&atilde;o mostrados no mapa
 //
 $objControles = array(
     "new ol.control.Attribution({collapsible: true})"
 );
-if (isset($controles)) {
+if (isset($parurl["controles"])) {
+    $controles = $parurl["controles"];
     $controles = str_replace(" ", ",", $controles);
     $controles = strtolower($controles);
     $controles = explode(",", $controles);
@@ -87,18 +88,19 @@ if (isset($controles)) {
         $objControles[] = "new ol.control.OverviewMap()";
     }
 } else {
+    $controles = "";
     $objControles[] = "new ol.control.Zoom()";
     $objControles[] = "new ol.control.ZoomSlider()";
     $objControles[] = "new ol.control.ScaleLine()";
     $objControles[] = "new ol.control.MousePosition({coordinateFormat : function(c){return ol.coordinate.toStringHDMS(c);}})";
 }
-$botoes = $parurl["botoes"];
 //
 // define quais botoes ser&atilde;o mostrados no mapa
 //
 $objBotoes = array();
 $objBotoesHtml = array();
-if (isset($botoes)) {
+if (isset($parurl["botoes"])) {
+    $botoes = $parurl["botoes"];
     $botoes = str_replace(" ", ",", $botoes);
     $botoes = strtolower($botoes);
     $botoes = explode(",", $botoes);
@@ -312,7 +314,13 @@ if(isset($parurl["ativarodadomouse"]) && $parurl["ativarodadomouse"] == "false")
 else{
     $ativarodadomouse = "new ol.interaction.MouseWheelZoom(),";
 }
+if(!isset($parurl["legendahtml"])){
+    $parurl["legendahtml"] = "";
+}
 $legendahtml = $parurl["legendahtml"];
+if(!isset($parurl["layerDefault"])){
+    $parurl["layerDefault"] = "";
+}
 $layerDefault = $parurl["layerDefault"];
 // cria as pastas temporarias caso nao existam
 if (! file_exists($dir_tmp)) {
@@ -338,19 +346,21 @@ if (file_exists($dir_tmp)) {
 if (empty($opacidade)) {
     $opacidade = 1;
 }
-
+if(!isset($parurl["fundo"])){
+    $parurl["fundo"] = "";
+}
 function ajuda()
 {
     echo "
 	<pre><b>
 	Mashup OpenLayers
 	Par&acirc;metros:
-	.restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+	.restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin1/catalogo/mapas/index.php)
 	.opacidade - opacidade (de 0 a 1) aplicada aos temas do tipo poligonal ou raster (default 1)
 	.kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
 	.temas - lista com os temas (mapfiles) do i3Geo que ser&atilde;o inclu&iacute;dos no mapa. Pode ser inclu&iacute;do um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e tamb&eacute;m o par&acirc;metro &layers
 	.visiveis - lista de temas (mesmos nomes do par&acirc;metro temas) que iniciar&atilde;o como vis&iacute;veis no mapa. Se n&atilde;o for definido, todos os temas ser&atilde;o vis&iacute;veis.
-	.numzoomlevels - n&uacute;mero de n&iacute;veis de zoom, default=12
+	.numzoomlevels - n&uacute;mero de n&iacute;veis de zoom
 	.maxextent - extens&atilde;o geogr&aacute;fica m&aacute;xima do mapa (xmin,ymin,xmax,ymax)
 	.mapext - extens&atilde;o geogr&aacute;fica inicial do mapa (xmin,ymin,xmax,ymax)
 	.largura - lagura do mapa em pixels
@@ -377,11 +387,9 @@ function ajuda()
 	Os seguintes fundos podem usados nessa lista: (lista completa na variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS que pode ser verificada por meio do console javascript do navegador)
 
 	eng
-    oce - ESRI Ocean Basemap
+	oce - ESRI Ocean Basemap
 	ims - ESRI Imagery World 2D
 	wsm - ESRI World Street Map
-	mma - base cartogr&aacute;fica do Brasil
-	wms - base mundial da Meta Carta
 
 	.controles - lista com os nomes dos controles que ser&atilde;o adicionados ao mapa. Se n&atilde;o for definido, todos os controles ser&atilde;o adicionados
 	   navigation
