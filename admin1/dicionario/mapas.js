@@ -10,7 +10,7 @@ i3GEOadmin.mapas.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "Vc pode registrar qualquer link para mapas. A op&ccedil;&atilde;o 'editar' abre um formul&aacute;rio para a cria&ccedil;&atilde;o do link conforme os par&acirc;metros utilizados pelo i3Geo. Voc&ecirc; pode desprezar todos os campos do formul&aacute;rio e incluir apenas o link direto desejado. Pode ser armazenado também um mapfile completo com todas as configura&ccedil;&otilde;es do mapa",
+		pt : "No formul&aacute;rio de edi&ccedil;&atilde;o de mapas voc&ecirc; pode definir os par&acirc;metros de um mapa, com temas, imagem etc. H&aacute; ainda a op&ccedil;&atilde;o de incluir um link direto para o mapa, o que vai desprezar todos os demais campos editados.",
 		en : "",
 		es : ""
 	} ],

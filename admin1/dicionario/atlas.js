@@ -11,7 +11,7 @@ i3GEOadmin.atlas.dicionario = {
 		es : ""
 	} ],
     'txtAjuda' : [ {
-		pt : "O cadastro de Atlas &eacute; utilizado na interface 'Atlas' do i3geo. Essa interface pode ser vista em http://localhost/i3geo/atlas<p>Cada Atlas possu&iacute; uma lista de pranchas e cada prancha uma lista de temas e outros par&acirc;metros.<p>A montagem de cada Atlas &eacute; feito definindo-se os par&acirc;metros de cada n&iacute;vel hier&aacute;rquico, editando-se uma &aacute;rvore cuja raiz &eacute; cada Atlas, seguido pelas pranchas e temas.<p>Para cada Atlas e cada prancha pode ser definido um texto explicativo que ser&aacute; aberto ao iniciar o Atlas ou a prancha.",
+		pt : "O cadastro de Atlas &eacute; utilizado na interface 'Atlas' do i3Geo. Essa interface pode ser vista em http://localhost/i3geo/atlas</p><p>Cada Atlas possui uma lista de pranchas e cada prancha uma lista de temas e outros par&acirc;metros.</p><p>A montagem de cada Atlas &eacute; feito definindo-se os par&acirc;metros de cada n&iacute;vel hier&aacute;rquico, editando-se uma &aacute;rvore cuja raiz &eacute; cada Atlas, seguido pelas pranchas e temas.</p><p>Para cada Atlas e cada prancha pode ser definido um texto explicativo que ser&aacute; aberto ao iniciar o Atlas ou a prancha.</p><p>Nessa primeira tela &eacute; mostrada a edi&ccedil;&atilde;o de Atlas.",
 		en : "",
 		es : ""
 	} ],
@@ -61,7 +61,7 @@ i3GEOadmin.atlas.dicionario = {
 		es : ""
 	} ],
     'mapfileInicia' : [ {
-		pt : "Mapfile inicial (mapfile que ser&aacute; usado como base para montagem do mapa inicial. Se n&atilde;o for definido, ser&aacute; usado o default do i3geo. Utilize o endere&ccedil;o completo do aquivo mapfile no servidor.)",
+		pt : "Mapfile inicial (mapfile que ser&aacute; usado como base para montagem do mapa inicial. Se n&atilde;o for definido, ser&aacute; usado o default do i3Geo. Utilize o endere&ccedil;o completo do aquivo mapfile no servidor.)",
 		en : "",
 		es : ""
 	} ],
@@ -71,7 +71,7 @@ i3GEOadmin.atlas.dicionario = {
 		es : ""
 	} ],
     'template' : [ {
-		pt : "Template HTML (se n&atilde;o for especificado, ser&aacute; usado o default do i3geo. Utilize o caminho completo do arquivo html no servidor)",
+		pt : "Template HTML (se n&atilde;o for especificado, ser&aacute; usado o default do i3Geo. Utilize o caminho completo do arquivo html no servidor)",
 		en : "",
 		es : ""
 	} ],
