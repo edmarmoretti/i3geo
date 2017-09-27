@@ -54,7 +54,8 @@ if(typeof jQuery != 'undefined' ){
 			erroLogin: function(){
 				$("#loginOff").css("display","");
 				$("#loginOn").css("display","none");
-				alert("Login!");
+				//alert("Login!");
+				i3GEOadmin.core.mostraErro($trad("erroLogin",i3GEOadmin.principal.dicionario));
 			},
 			loginOn: function(){
 				$("#loginOff").css("display","none");

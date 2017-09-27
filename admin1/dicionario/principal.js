@@ -79,6 +79,11 @@ i3GEOadmin.principal.dicionario = {
 		pt : "Entre uma vers&atilde;o e outra do i3Geo o banco de dados de administra&ccedil;&atilde;o pode sofrer altera&ccedil;&otilde;es. Consulte o documento <samp>i3geo/guia_de_migracao.txt</samp> para verificar os detalhes.",
 		en : "",
 		es : ""
+	} ],
+    'erroLogin' : [ {
+		pt : "&Eacute; necess&aacute;rio fazer login",
+		en : "",
+		es : ""
 	} ]
 
 };
