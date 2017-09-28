@@ -118,6 +118,28 @@ i3GEO.janela.ativaAlerta();
 										}) ]
 							})
 				});
+       /*
+       var esus = new ol.layer.Tile(
+				{
+					title : "ESUS Gestor",
+					visible : true,
+					isBaseLayer : true,
+					name : "osm",
+					source : new ol.source.TileWMS(
+							{
+								url : "http://192.168.1.112/mapcache/wms",
+								params : {
+									'layers' : "osm",
+									'srs' : "EPSG:4326",
+									'format' : "image/png"
+								},
+                                attributions : [ new ol.Attribution(
+                                        {
+                                            html : '&copy; </a>'
+                                        }) ]
+							})
+				});
+         */
 		i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ eng, oce, ims, wsm,
 		                                                bra, tms ];
 	}
