@@ -106,6 +106,7 @@ hr {
 body{
 	background-color: rgb(240,240,240);
 }
+
 /* conforme regra de acessibilidade */
 .navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary {
     background-color: #008579;
@@ -245,7 +246,9 @@ h2 small {
 .btn-breadcrumb > *:nth-child(n+2) {
   display:none;
 }
-
+.navbar {
+    font-size: 1.8rem;
+}
 /* === For phones =================================== */
 @media (max-width: 767px) {
     .btn-breadcrumb > *:nth-last-child(-n+2) {
@@ -254,6 +257,7 @@ h2 small {
     .btn-breadcrumb > * div {
         max-width: 60px;
     }
+
 }
 
 /* === For tablets ================================== */
@@ -274,6 +278,7 @@ h2 small {
     .btn-breadcrumb > * div {
         max-width: 170px;
     }
+
 }
 
 </style>

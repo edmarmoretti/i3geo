@@ -74,12 +74,12 @@ include "head.php";
 				<!-- template para permitir a traducao -->
 				<div id="menuTpl" class="hidden">
 					<ul class="nav navbar-nav">
-						<li class="fa"><a href="#" tabindex='-1' ><span id="bandeiras"></span></a></li>
-						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
+						<li class="fa visible-lg"><a href="#" tabindex='-1' ><span id="bandeiras"></span></a></li>
+						<li class="visible-lg"><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
 						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">OGC/Download</a></li>
 						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>
-						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
-						<li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
+						<li class="visible-lg"><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
+						<li class="visible-lg"><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
 						<li><a role="button" href="../social/index.php" >Social</a></li>
 						<li><a role="button" href="../rss/index.php" >RSS</a></li>
 						<li <?php if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false) { echo "style=display:none "; }?>>
@@ -90,7 +90,6 @@ include "head.php";
 				</div>
 			</div>
 		</div>
-
 	</nav>
 	<nav class="navbar-fixed-bottom">
 		<div class="container-fluid hidden">
@@ -109,12 +108,12 @@ include "head.php";
 		</div>
 	</nav>
 
-	<div class="container" id="conteudoPrincipal" tabindex="-1">
+	<div class="container-fluid" id="conteudoPrincipal" tabindex="-1">
 		<div class="row center-block">
 			<!-- Template para criacao dos quadros ver index.js -->
 			<div id="botoesTpl" class="hidden">
 				<div class="cartao {{{fa}}} col-xs-12 center-block"
-					style="width: 260px; min-width: 260px; max-width: 260px;">
+					style="width: 30rem; min-width: 30rem; max-width: 30rem;">
 					<div class="panel panel-default">
 						<div class="panel-body" tabindex="-1" >
 							<!--
@@ -124,14 +123,14 @@ include "head.php";
 								</a>
 							</div>
 							-->
-							<div class="thumbnail" role="button" style="height: 90px;">
+							<div class="thumbnail" role="button" style="height: 90px; width: 200px;margin:auto;">
 								<a tabindex="-1" target="{{{target}}}" href="{{{href}}}"> <img alt="{{{titulo}}}" tabindex="-1" class="img-rounded {{{img}}}"
 									style="height: 100%; width: 100%" src="../imagens/branco.gif" />
 								</a>
 							</div>
 
 							<h4 style="height: 40px;">{{{titulo}}}</h4>
-							<h5 tabindex="-1" class="hidden-xs" style="height: 100px;">{{{subtitulo}}}</h5>
+							<h5 tabindex="-1" class="hidden-xs" style="height: 10rem;font-size: 1.7rem;">{{{subtitulo}}}</h5>
 
 						</div>
 						<div class="panel-footer text-right"
@@ -205,7 +204,7 @@ include "head.php";
 		$(window).on("scroll click",
 			function(){
 				$("#mensagemLogin").fadeOut(300);
-				$("#jumbotron").fadeOut(300)
+				$("#jumbotron").fadeOut(300);
 			}
 		);
 		//verifica se deve ou nao esconder a mensagem de boas vindas verificando o parametro enviado pela url
