@@ -308,7 +308,7 @@ pg_restore --host localhost --port 5432 --username postgres --dbname i3geosaude 
 (o password é: postgres)
 
 
-#### Chave utilizada pela API do GoogleMaps
+## Chave utilizada pela API do GoogleMaps
 
 Devidos às restrições de uso da API do GoogleMaps, é necessário registrar uma chave no site do Google para o seu endereço de servidor para que as funcionalidades do i3Geo que utilizam essa API funcionem. Veja como fazer em: http://code.google.com/apis/maps/signup.html.
 
