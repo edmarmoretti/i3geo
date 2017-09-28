@@ -2983,5 +2983,10 @@ g_traducao =
 			pt : "Essa op&ccedil;&atilde;o pode n&atilde;o funcionar corretamente devido a vers&atilde;o do sistema (Mapserver)",
 			en : "",
 			es : ""
+		}],
+		"camadasDeFundo" : [{
+			pt : "Camadas de fundo",
+			en : "",
+			es : ""
 		}]
 	};
