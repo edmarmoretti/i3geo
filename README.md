@@ -74,6 +74,16 @@ git -c http.sslVerify=false pull
 git stash pop
 ```
 
+Observação:
+
+* Pode ser que você precise registrar um usuário no Git antes de executar um stash. Para isso execute os seguintes comandos:
+
+```
+git config --global user.email seuemail@example.com
+git config --global user.name "Seu Nome"
+```
+
+
 ### PostGIS (opcional)
 
 Para instalar o PostGIS siga o roteiro mostrado em http://postgis.net/windows_downloads
@@ -240,6 +250,17 @@ git stash
 git -c http.sslVerify=false pull
 git stash pop
 ```
+
+Observação:
+
+* Pode ser que você precise registrar um usuário no Git antes de executar um stash. Para isso execute os seguintes comandos:
+
+```
+cd /var/www/html/i3geo
+git config --global user.email seuemail@example.com
+git config --global user.name "Seu Nome"
+```
+
 ### PostGIS (opcional)
 
 Instale o PostgreSQL e PostGIS
@@ -255,33 +276,40 @@ apt-get install postgresql-9.1-postgis
 
 Observações:
 
-* dependendo da versão do PostgreSQL pode ser necessário alterar de 9.1 e 1.5 para a versão correta. Veja a pasta /usr/share/postgresql para descobrir a versão instalada)
+* Pependendo da versão do PostgreSQL alguns comandos podem ser diferentes. Veja a pasta /usr/share/postgresql para descobrir a versão instalada)
 
-* pode ser necessário o uso de sudo, exemplo: sudo su postgres -c "createdb i3geosaude"
+* Pode ser necessário o uso de sudo, exemplo: sudo su - postgres -c "createdb i3geosaude"
 
-* você pode primeiro mudar para o usuário postgres e depois executar os comandos. Nesse caso utilize "sudo su postgres" e depois "psql"
+* Você pode primeiro mudar para o usuário postgres e depois executar os comandos. Nesse caso utilize "sudo su postgres" e depois "psql"
 
-* para sair de "psql" digite \d
+* Para sair de "psql" digite \d
 
-* usando psql diretamente, termine a linha de comando sempre com ";"
+* Usando psql diretamente, termine a linha de comando sempre com ";"
 
-* para entrar em psql no database i3geosaude utilize "psql -d i3geosaude"
+* Para entrar em psql no database i3geosaude utilize "psql -d i3geosaude"
 
-* para executar um arquivo SQL utilize "\i arquivo.sql"
+* Para executar um arquivo SQL utilize "\i arquivo.sql"
+
+* Pode ser que ao final do processo, ele seja executado apesar de ter encontrado erros. Isso se deve a diferenças de versões do PostgreSQL e PostGIS, e pode ser ignorado.
 
 Comandos para instalação:
 
 ```
-su postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD 'postgres'\""
-su postgres -c "createdb i3geosaude"
-su postgres -c "createlang -d i3geosaude plpgsql"
-su postgres -c "psql -d i3geosaude -f /usr/share/postgresql/9.1/contrib/postgis-1.5/postgis.sql"
-su postgres -c "psql -d i3geosaude -f /usr/share/postgresql/9.1/contrib/postgis-1.5/spatial_ref_sys.sql"
-su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON geometry_columns TO PUBLIC;'"
-su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON geography_columns TO PUBLIC;'"
-su postgres -c "psql -d i3geosaude -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'"
-/usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --schema-only --list "/var/www/databasei3geosaude.backup"
-/usr/bin/pg_restore --host localhost --port 5432 --username "postgres" --dbname "i3geosaude" --data-only --list "/var/www/databasei3geosaude.backup"
+su - postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD 'postgres'\""
+su - postgres -c "createdb i3geosaude"
+su - postgres -c "createlang -d i3geosaude plpgsql"
+su - postgres -c "psql -d i3geosaude -c 'CREATE EXTENSION postgis;'"
+su - postgres -c "psql -d i3geosaude -c 'GRANT ALL ON geometry_columns TO PUBLIC;'"
+su - postgres -c "psql -d i3geosaude -c 'GRANT ALL ON geography_columns TO PUBLIC;'"
+su - postgres -c "psql -d i3geosaude -c 'GRANT ALL ON spatial_ref_sys TO PUBLIC;'"
+pg_restore --host localhost --port 5432 --username postgres --dbname i3geosaude /var/www/databasei3geosaude.backup
 ```
 
 (o password é: postgres)
+
+
+#### Chave utilizada pela API do GoogleMaps
+
+Devidos às restrições de uso da API do GoogleMaps, é necessário registrar uma chave no site do Google para o seu endereço de servidor para que as funcionalidades do i3Geo que utilizam essa API funcionem. Veja como fazer em: http://code.google.com/apis/maps/signup.html.
+
+A chave deve ser incluída na variável $googleApiKey do arquivo i3geo/ms_configura.php.
