@@ -232,6 +232,10 @@ hr {
 	display: inline-grid;
 }
 
+.iconesGuiaMovel.ol-control>div {
+	font-size:2rem;
+}
+
 #i3GEOguiaMovel {
 	position: absolute;
 	display: block;
@@ -1343,7 +1347,7 @@ bd .i3geoFormIconeEdita {
     -webkit-print-color-adjust:exact;
 }
 /* === For phones =================================== */
-@media ( max-width : 779px) {
+@media ( max-width : 480px) {
 	#i3GEOguiaMovel {
 		width: 100%;
 	}
@@ -1360,6 +1364,10 @@ bd .i3geoFormIconeEdita {
 	.ol-scale-line {
 		bottom: 0;
 	}
+	.tooltip-inner,.ol-i3GEOcontrols.ol-control {
+		display: none;
+	}
+
 }
 /* === For meio phones =================================== */
 @media ( min-width : 480px) and (max-width:767px) {
