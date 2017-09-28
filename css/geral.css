@@ -623,7 +623,7 @@ caption {
 span {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
-
+/*
 body {
 	background-color: black;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -631,7 +631,7 @@ body {
 	margin: 0px;
 	z-index: 1000;
 }
-
+*/
 A {
 	text-align: left;
 	font-size: 11pt;

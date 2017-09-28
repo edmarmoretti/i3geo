@@ -214,10 +214,22 @@ hr {
 	border: solid 1px gray;
 	box-shadow: 0px 1px 3px lightgray;
 	cursor: pointer;
-	width: 40px;
-	height: 40px;
 	background-color: rgba(0,60,136,.5);
 	margin: 0px;
+}
+
+.iconesGuiaMovel {
+	font-size: 1.8rem;
+	right:0px;
+	border-radius:4px;
+	padding:2px;
+	cursor: pointer;
+	position: absolute;
+	top: 5px;
+	width: auto;
+	z-index: 5000;
+	background-color: rgba(255,255,255,.4);
+	display: inline-grid;
 }
 
 #i3GEOguiaMovel {
@@ -299,7 +311,7 @@ hr {
 }
 /*utilizado para nao sobrepor com o icone de fechar guias, que e fixed*/
 .separadorCabecalhoGuias{
-	height: 40px;
+	height: 10px;
 }
 
 
@@ -436,16 +448,19 @@ no caso do OL3
 
 .ol-zoom {
 	top: 2.8em;
+	font-size: 1.8rem;
 }
 
 .ol-i3GEOcontrols {
 	top: 2.8em;
 	left: 3.5em;
 	width: auto;
+	font-size: 1.8rem;
 }
 
 .ol-touch .ol-zoomslider, .ol-zoomslider {
 	top: 8.2em;
+	font-size: 1.8rem;
 }
 
 .ol-scale-line {

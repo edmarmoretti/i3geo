@@ -15,7 +15,7 @@ include("../ms_configura.php");
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
-<script src="config.php?tipo=OL"></script>
+<script src="config.php?tipo=GM"></script>
 
 <link rel="stylesheet" type="text/css" href="../pacotes/ol3/ol.css">
 <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap/css/bootstrap.min.css">
@@ -61,10 +61,7 @@ include("../ms_configura.php");
 	-->
 	<div id="mapai3Geo" >
 	</div>
-	<!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
-	<form class="escalanumerica hidden-xs" onsubmit="javascript:i3GEO.navega.aplicaEscala($i('i3GEOescalanum').value);return false;">
-		<input id='i3GEOescalanum' type='text' name='' value='' size='10' title=''  >
-	</form>
+
 
 	<!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
 	<div class="localizarxy fundoRodape hidden-xs hidden-sm" >
@@ -165,14 +162,14 @@ include("../ms_configura.php");
 		<!-- configuracao para todos os botoes
 			data-idconteudo - id do DIV que contem o conteudo da guia e que sera mostrado ao ser clicado
 		-->
-		<div class="iconesGuiaMovel" data-traduzir="true" style="right:0px;border-radius:4px; padding:2px;cursor: pointer; position: absolute; top: 5px; width: auto; z-index: 5000; background-color: rgba(255,255,255,.4);">
+		<div class="iconesGuiaMovel  ol-control" data-traduzir="true">
 			<!-- ferramentas
 				data-idLista - id do DIV dentro de idconteudo que sera utilizado para mostrar as "pastas" que abrem o proximo nivel
 				data-idLinks - id do DIV dentro de idconteudo que sera utilizado para mostrar a lista de links que abre cada ferramenta
 				data-idMigalha - id do DIV que sera utilizado para mostrar o link de retorno ao nivel anterior
 			-->
-			<div data-idconteudo="guia8obj" data-idLinks="listaFerramentasLinks" data-idMigalha="migalhaFerramentas" data-idLista="listaFerramentas" onclick="i3GEO.guias.ativa('ferramentas',this)">
-				<button title="{{{iconeFerramentas}}}" class="btn btn-default iconeGuiaMovel" style="color:white;box-shadow: none;">
+			<div style="font-size:2rem" data-idconteudo="guia8obj" data-idLinks="listaFerramentasLinks" data-idMigalha="migalhaFerramentas" data-idLista="listaFerramentas" onclick="i3GEO.guias.ativa('ferramentas',this)">
+				<button title="{{{iconeFerramentas}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
 					<i class="material-icons">business_center</i>
 				</button>
 			</div>
@@ -183,8 +180,8 @@ include("../ms_configura.php");
 					inserindo ou nao a string como uma classe CSS. Pode degradar a performance e depende
 					do metadata existente na camada. Deixe vazio para nao ativar a operacao.
 			-->
-			<div onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
-				<button title="{{{iconeMapa}}}" class="btn btn-default iconeGuiaMovel" style="color:white;box-shadow: none;">
+			<div style="font-size:2rem" onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
+				<button title="{{{iconeMapa}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
 					<i class="material-icons"><i class="material-icons">visibility</i></i>
 				</button>
 			</div>
@@ -197,30 +194,30 @@ include("../ms_configura.php");
 				Variaveis javascript:
 				i3GEO.catalogoMenus.IDSMENUS - (array) apenas os menus com idmenu que constem nessa lista serao mostrados. Por default e vazio.
 			-->
-			<div onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj" data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus" style="margin-top: 3px;">
-				<button title="{{{iconeCatalogo}}}" class="btn btn-default iconeGuiaMovel" style="color:white;box-shadow: none;">
+			<div style="font-size:2rem" onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj" data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus" style="margin-top: 3px;">
+				<button title="{{{iconeCatalogo}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
 					<i class="material-icons">layers</i>
 				</button>
 			</div>
 			<!-- legenda -->
-			<div onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" style="margin-top: 3px;">
-				<button title="{{{iconeLegenda}}}" class="btn btn-default iconeGuiaMovel" style="color:white;box-shadow: none;">
+			<div style="font-size:2rem" onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" style="margin-top: 3px;">
+				<button title="{{{iconeLegenda}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
 					<i class="material-icons">view_list</i>
 				</button>
 			</div>
-			<div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('dobraPagina',this)" style="margin-top: 3px;">
-				<button title="{{{trocaInterface}}}" class="btn btn-default iconeGuiaMovel" style="color:white;box-shadow: none;">
+			<div style="font-size:2rem" class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('dobraPagina',this)" style="margin-top: 3px;">
+				<button title="{{{trocaInterface}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
 					<i class="material-icons">compare_arrows</i>
 				</button>
 			</div>
 			<!-- Busca -->
-			<div onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" style="margin-top: 3px;">
-				<button class="btn btn-default iconeGuiaMovel" style="color:white;box-shadow: none;">
+			<div style="font-size:2rem" onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" style="margin-top: 3px;">
+				<button class="iconeGuiaMovel" style="color:white;box-shadow: none;">
 					<i class="material-icons">search</i>
 				</button>
 			</div>
-			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;" >
-				<button title="{{{iconeBalao}}}" class="btn btn-default iconeGuiaMovel" style="color:white;box-shadow: none;">
+			<div style="font-size:2rem" onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;" >
+				<button title="{{{iconeBalao}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
 					<i class="material-icons">location_on</i>
 				</button>
 			</div>
@@ -239,25 +236,27 @@ include("../ms_configura.php");
 			<div id="i3GEOguiaMovelConteudo" >
 				<!-- camadas existentes no mapa -->
 				<div id='guia1obj' data-traduzir="true" style='display: none;'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{iconeMapa}}}</span>X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
+					<span class="pull-left">{{{iconeMapa}}}</span>X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
-					<div class="noprint" >
-             			<a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
-             				{{{opcoes}}}
-             				<span class="caret"></span>
-              			</a>
-              			<ul class="dropdown-menu">
-							<li><a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)" >Refresh</a></li>
-							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)" >{{{t3a}}}</a></li>
-							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)" >{{{t3b}}}</a></li>
-							<li><a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)" >{{{t12}}}</a></li>
-							<li><a onclick="i3GEO.arvoreDeCamadas.dialogo.filtro()" href="javascript:void(0)" >{{{t2a}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)" >{{{t20}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)" >{{{p21}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)" >{{{d12}}}</a></li>
-							<li><a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)" >{{{t4}}}</a></li>
-						</ul>
+					<div class="list-group condensed noprint" >
+             			<label>{{{opcoes}}}</label>
+             			<a data-target="#opcoesGuia1" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px;padding-top: 0px;padding-bottom: 0px;" type="button" data-toggle="collapse" >
+	  						<span class="caret"></span>
+						</a>
+              			<div class="text-left collapse" id="opcoesGuia1" style="margin-left: 30px;">
+							<p><a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)" >Refresh</a></p>
+							<p><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)" >{{{t3a}}}</a></p>
+							<p><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)" >{{{t3b}}}</a></p>
+							<p><a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)" >{{{t12}}}</a></p>
+							<p><a onclick="i3GEO.arvoreDeCamadas.dialogo.filtro()" href="javascript:void(0)" >{{{t2a}}}</a></p>
+							<p><a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)" >{{{t20}}}</a></p>
+							<p><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)" >{{{p21}}}</a></p>
+							<p><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)" >{{{d12}}}</a></p>
+							<p><a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)" >{{{t4}}}</a></p>
+						</div>
 					</div>
+					<hr>
 					<!-- Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
 					<div id="listaTemas" style="overflow:none;" data-template="templates/camada.html"></div>
 					<!-- Esta div acrescenta a lista de de camadas de fundo
@@ -286,48 +285,48 @@ include("../ms_configura.php");
 					<div id="catalogoNavegacao"></div>
 					<!-- Opcoes -->
 					<div id="catalogoPrincipal">
-						<div class="noprint" >
-	             			<a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
-	             				{{{opcoes}}}
-	             				<span class="caret"></span>
-	              			</a>
-	              			<ul class="dropdown-menu">
-	 							<li>
+						<div class="list-group condensed noprint" >
+	             			<label>{{{opcoes}}}</label>
+             				<a data-target="#opcoesGuia2" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px;padding-top: 0px;padding-bottom: 0px;" type="button" data-toggle="collapse" >
+	  							<span class="caret"></span>
+							</a>
+	              			<div class="text-left collapse" id="opcoesGuia2" style="margin-left: 30px;">
+	 							<p>
 								<a href="javascript:void(0)" onclick="i3GEO.login.dialogo.abreLogin()">Login/Logout</a>
-								</li>
-
-	 							<li>
+								</p>
+	 							<p>
 								<!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.atualiza()">Refresh</a> -->
-								</li>
-								<li class="divider"></li>
-								<li>
+								</p>
+								<li class="divider"></p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()" >{{{a15}}}</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.uploadarquivo()">{{{a14}}}</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">{{{a3}}}</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.importarwmc()">{{{a3a}}}</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a> -->
-								</li>
-								<li>
+								</p>
+								<p>
 								<!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a> -->
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
-								</li>
-								<li><a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
-								</li>
-							</ul>
+								</p>
+								<p><a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
+								</p>
+							</div>
 						</div>
+						<hr>
 						<!-- busca tema no catalogo
 						<div class="form-group label-floating">
 							<label class="control-label" for="i3GEObuscatema">{{{a1}}}</label>
@@ -555,13 +554,12 @@ include("../ms_configura.php");
 			</div>
 		</div>
 	</div>
-	<!--  para mostrar o banner de abertura, basta ter esse ID -->
+	<!--  para mostrar o banner de abertura -->
 	<script id="i3GEOlogoMarcaTemplate" type="x-tmpl-mustache">
 	<div>
 		<table>
 			<tr>
 				<td>
-
 					<h4 >i3Geo - Software livre para cria&ccedil;&atilde;o de mapas
 						interativos e geoprocessamento</h4>
 					<h4 >Baseado no Mapserver, &eacute; licenciado sob GPL e integra o
@@ -576,7 +574,10 @@ include("../ms_configura.php");
 	</div>
 	</script>
 	<script>
+	//ativa o banner de inicializacao
+	i3GEO.janela.tempoMsg($i("i3GEOlogoMarcaTemplate").innerHTML,4000);
 	(function() {
+		//parametros aplicados na criacao do arquivo mapfile
 		var parametrosMapa = {
 			//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
 			//Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Voce pode utilizar essa opcao para abrir um mapa com as camadas que voce quiser, mas para evitar redundâncias, prefira o uso de &temasa
@@ -656,7 +657,9 @@ include("../ms_configura.php");
 			filters: [{
 				layer: "",
 				expression: ""
-			}]
+			}],
+			//id de um mapa salvo e que sera recuperado
+			restoreMapId : ""
 		};
 		var config = {
 			//id do elemento HTML onde o corpo do mapa sera renderizado
@@ -673,10 +676,16 @@ include("../ms_configura.php");
 			//Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
 			//Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
 			i3GeoServer : "",
+			//opacidade default para camadas que nao sejam do tipo linha ou ponto
+			//a opacidade sera aplicada ao objeto HTML e nao ao LAYER original
+			//se for vazio, sera utilizado o valor definido no LAYER original
+			//Nao se aplica na interface googlemaps
+			layerOpacity: "",
 			//Funcao que sera executada apos a inicializacao do mapa
 			afterStart : function(){
 				$('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});
 				$('.iconeGuiaMovel').tooltip('show');
+				$("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
 				//setTimeout(function() {
 				//	$('.iconeGuiaMovel').tooltip('destroy');
 				//}, 30000);
@@ -693,8 +702,13 @@ include("../ms_configura.php");
 				//"janela": true
 				//});
 			},
-			//parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas
+			//parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas, balao de info, etc
 			components : {
+				//define se ao clicar no mapa sera feita a busca de atributos nas camadas existentes no mapa
+				info: true,
+				//template mustache usado para o balao de info
+				//se for vazio, utiliza o default interface/templates/info.html
+				infoTemplate: "",
 				//define se ao clicar no mapa sera feita a busca de atributos nas camadas existentes no mapa
 				info: true,
 				//lista com os codigos dos menus que serao considerados na montagem do catalogo de temas
@@ -730,6 +744,14 @@ include("../ms_configura.php");
 					minWidth : '200px',
 					//Altura e largura do tooltip (balao)
 					toolTipSize : ["100px","200px"]
+				},
+				//barra de rolagem - ver plugin jquery https://github.com/malihu/malihu-custom-scrollbar-plugin
+				scrollBar: {
+					theme: "inset-2",
+					axis: "yx",
+					scrollbarPosition: "inside",
+					scrollButtons:{ enable: true },
+					advanced:{ autoExpandHorizontalScroll: true }
 				}
 			},
 			//parametros de configuracao das ferramentas que sao acionadas sob demanda
@@ -755,6 +777,7 @@ include("../ms_configura.php");
 				MapOptions : {
 					layers : [],
 					controls : [
+
 					],
 					loadTilesWhileAnimating : true,
 					loadTilesWhileInteracting : true,

@@ -837,6 +837,7 @@ position: relative;
 span {
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+/*
 body {
 background-color: black;
 font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -844,6 +845,7 @@ font-size: 12px;
 margin: 0px;
 z-index: 1000;
 }
+*/
 A {
 text-align: left;
 font-size: 11pt;
