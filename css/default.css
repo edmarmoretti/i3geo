@@ -95,6 +95,9 @@ Botoes material
 	min-width: 40px;
 	width: 40px;
 }
+.btn.btn-fab.btn-fab-max>span {
+	height: 18px;
+}
 .form-group .form-control {
 	font-size: 12px;
 	color:white;
@@ -158,9 +161,6 @@ a, a:focus, a:hover {
 
 h2 small {
 	color: #767676;
-}
-a .material-icons, a:focus .material-icons, a:hover .material-icons {
-	margin-top: 3px;
 }
 
 hr {
