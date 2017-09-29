@@ -308,14 +308,18 @@ i3GEOF.metaestat = {
                         "",
                         "",
                         "",
-                        "</div><div class='i3GeoTituloJanelaBs'>" + $trad('classes',i3GEOF.metaestat.dicionario) + "</div>",
+                        "<span class='i3GeoTituloJanelaBsNolink' >" + $trad('classes',i3GEOF.metaestat.dicionario) + "</span></div>",
                         "i3geoCartoClasses",
                         true,
                         "hd",
                         cabecalho,
                         minimiza,
                         "",
-                        false
+                        false,
+            			"",
+            			"",
+            			"",
+            			""
                 );
                 janela = janela[0];
                 YAHOO.i3GEO.janela.manager.register(janela);
@@ -435,12 +439,12 @@ i3GEOF.metaestat = {
                 var n = dados.length,
                 ins = '<h5>'+$trad('selecionaTipoClassificacao',i3GEOF.metaestat.dicionario)+'</h5>',
                 i;
-                //ins += "<div class=styled-select style='"+(i3GEOF.metaestat.LARGURA - 30)+"px;'>";
-                ins += "<select class='form-control' id='i3geoCartoComboTipoClassificacao' onchange='i3GEOF.metaestat.classes.comboTipoClassificacaoOnchange(this)'><option value=''>---</option>";
+                ins += "<div style='width: 100%;' class='input-group'>";
+                ins += "<select class='form-control' id='i3geoCartoComboTipoClassificacao' onchange='i3GEOF.metaestat.classes.comboTipoClassificacaoOnchange(this)'>";
                 for(i=0;i<n;i++){
                     ins += "<option title='"+dados[i].observacao+"' value='"+dados[i].id_classificacao+"'>"+dados[i].nome+"</option>";
                 }
-                ins += "</select>";
+                ins += "</select><b class='caret careti'></b></div>";
                 //{"id_classificacao":"1","nome":"Pela media","id_medida_variavel":"1","observacao":""}
                 if(onde){
                     onde.innerHTML = ins;
@@ -472,12 +476,12 @@ i3GEOF.metaestat = {
                 var n = dados.length,
                 ins = '<h5>'+$trad('selecionaTipoLimiteGeog',i3GEOF.metaestat.dicionario)+'</h5>',
                 i;
-                //ins += "<div class=styled-select style='"+(i3GEOF.metaestat.LARGURA - 30)+"px;'>";
-                ins += "<select class='form-control' id='i3geoCartoComboRegioesMedidasVariavel' ><option value=''>---</option>";
+                ins += "<div style='width: 100%;' class='input-group'>";
+                ins += "<select class='form-control' id='i3geoCartoComboRegioesMedidasVariavel' >";
                 for(i=0;i<n;i++){
                     ins += "<option title='"+dados[i].observacao+"' value='"+dados[i].codigo_tipo_regiao+"'>"+dados[i].nome_tipo_regiao+"</option>";
                 }
-                ins += "</select>";
+                ins += "</select><b class='caret careti'></b></div>";
                 if(onde){
                     onde.innerHTML = ins;
                 }
