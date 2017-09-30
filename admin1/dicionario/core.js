@@ -7,177 +7,177 @@ if (typeof (i3GEOadmin.core) === 'undefined') {
 i3GEOadmin.core.dicionario = {
 	'tabelaTxt' : [ {
 		pt : "Tabela",
-		en : "",
-		es : ""
+		en : "Table",
+		es : "Tabla"
 	} ],
     'login' : [ {
 		pt : "Login",
-		en : "",
-		es : ""
+		en : "Login",
+		es : "Iniciar sesi&oacute;n"
 	} ],
     'gruposUsuarios' : [ {
 		pt : "Grupos e Usu&aacute;rios",
-		en : "",
-		es : ""
+		en : "Groups and Users",
+		es : "Grupos y Usuarios"
 	} ],
     'excluir' : [ {
 		pt : "excluir",
-		en : "",
-		es : ""
+		en : "exclude",
+		es : "excluir"
 	} ],
     'enviar' : [ {
 		pt : "Enviar",
-		en : "",
-		es : ""
+		en : "Send",
+		es : "Enviar"
 	} ],
     'adicionar' : [ {
 		pt : "Adicionar",
-		en : "",
-		es : ""
+		en : "Add",
+		es : "Agregar"
 	} ],
     'nomeArquivo' : [ {
 		pt : "Nome do novo arquivo:",
-		en : "",
-		es : ""
+		en : "New file name",
+		es : "Nombre del archivo nuevo"
 	} ],
     'classes' : [ {
 		pt : "classes",
-		en : "",
-		es : ""
+		en : "classes",
+		es : "clases"
 	} ],
     'salva' : [ {
 		pt : "Salvar",
-		en : "",
-		es : ""
+		en : "Save",
+		es : "Guardar"
 	} ],
     'descricaoTxt' : [ {
 		pt : "Descri&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "Description",
+		es : "Descripci&oacute;n"
 	} ],
     'grupo' : [ {
 		pt : "Grupo",
-		en : "",
-		es : ""
+		en : "Group",
+		es : "Grupo"
 	} ],
     'grupos' : [ {
 		pt : "Grupos",
-		en : "",
-		es : ""
+		en : "Groups",
+		es : "Grupos"
 	} ],
     'nao' : [ {
 		pt : "n&atilde;o",
-		en : "",
-		es : ""
+		en : "no",
+		es : "no"
 	} ],
     'sim' : [ {
 		pt : "sim",
-		en : "",
-		es : ""
+		en : "yes",
+		es : "s&iacute;"
 	} ],
     'salvar' : [ {
 		pt : "Salvar",
-		en : "",
-		es : ""
+		en : "Save",
+		es : "Guardar"
 	} ],
     'usuarioTxt' : [ {
 		pt : "Usu&aacute;rio",
-		en : "",
-		es : ""
+		en : "User",
+		es : "Usuario"
 	} ],
     'senha' : [ {
 		pt : "Senha",
-		en : "",
-		es : ""
+		en : "Password",
+		es : "Contrase&ntilde;a"
 	} ],
     'filtroTxt' : [ {
 		pt : "Filtro",
-		en : "",
-		es : ""
+		en : "Filter",
+		es : "Filtro"
 	} ],
     'tipo' : [ {
 		pt : "Tipo",
-		en : "",
-		es : ""
+		en : "Type",
+		es : "Tipo"
 	} ],
     'publicado' : [ {
 		pt : "Publicado",
-		en : "",
-		es : ""
+		en : "Published",
+		es : "Publicado"
 	} ],
     'txtPerfil' : [ {
 		pt : "Perfil",
-		en : "",
-		es : ""
+		en : "Profile",
+		es : "Perfil"
 	} ],
     'tema' : [ {
 		pt : "Tema",
-		en : "",
-		es : ""
+		en : "Theme",
+		es : "Tema"
 	} ],
     'ordemTxt' : [ {
 		pt : "Ordem de apresenta&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "Presentation order",
+		es : "Orden de presentaci&oacute;n"
 	} ],
     'publicadoTxt' : [ {
 		pt : "Publicado para todos verem?",
-		en : "",
-		es : ""
+		en : "Do you want to publish it so that everybody can see it?",
+		es : "&iquest;Publicado para que todos lo puedan ver?"
 	} ],
     'nomeTxt' : [ {
 		pt : "Nome",
-		en : "",
-		es : ""
+		en : "Name",
+		es : "Nombre"
 	} ],
     'editarLista' : [ {
 		pt : "Editar lista",
-		en : "",
-		es : ""
+		en : "Edit list",
+		es : "Editar lista"
 	} ],
     'tituloTxt' : [ {
 		pt : "T&iacute;tulo",
-		en : "",
-		es : ""
+		en : "Title",
+		es : "T&iacute;tulo"
 	} ],
     'calcular' : [ {
 		pt : "Calcular",
-		en : "",
-		es : ""
+		en : "Calculate",
+		es : "Calcular"
 	} ],
     'escolhaDalista' : [ {
 		pt : "Escolha da lista",
-		en : "",
-		es : ""
+		en : "Choose from list",
+		es : "Escoja de la lista"
 	} ],
     'NonDef' : [ {
 		pt : "N&atilde;o definido",
-		en : "",
-		es : ""
+		en : "Undefined",
+		es : "No definido"
 	} ],
     'Ano' : [ {
 		pt : "Ano",
-		en : "",
-		es : ""
+		en : "Year",
+		es : "A&ntilde;o"
 	} ],
     'Mes' : [ {
-		pt : "Mês",
-		en : "",
-		es : ""
+		pt : "M&ecirc;s",
+		en : "Month",
+		es : "Mes"
 	} ],
     'Dia' : [ {
 		pt : "Dia",
-		en : "",
-		es : ""
+		en : "Day",
+		es : "D&iacute;a"
 	} ],
     'Hora' : [ {
 		pt : "Hora",
-		en : "",
-		es : ""
+		en : "Hour",
+		es : "Hora"
 	} ],
     'confirma' : [ {
 		pt : "As altera&ccedil;&otilde;es n&atilde;o poder&atilde;o ser revertidas. Continua?",
-		en : "",
-		es : ""
+		en : "This action cannot be undone. Do you want to continue?",
+		es : "Los cambios no podr&aacute;n ser revertidos. &iquest;Quiere continuar?"
 	} ]
 };
