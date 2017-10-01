@@ -3030,7 +3030,6 @@ function cloneInlineSymbol($layern,$nmapa,$mapa){
 }
 //
 //recupera um mapfile armazenado no banco de dados de administracao
-//ver admin/php/mapas.php salvaMapfile
 function restauraMapaAdmin($id_mapa,$dir_tmp){
 	if (filter_var($id_mapa, FILTER_VALIDATE_INT) === false){
 		exit;

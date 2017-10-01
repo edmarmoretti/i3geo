@@ -35,10 +35,10 @@ if(!isset($idioma) || $idioma == ""){
 }
 //remove espaco em branco do nome do perfil
 $perfil = str_replace(" ","",$perfil);
-
-$id_perfil = $_POST["id_perfil"];
-\admin\php\funcoesAdmin\testaSafeNumerico(array($id_perfil));
-
+if(isset($_POST["id_perfil"])){
+    $id_perfil = $_POST["id_perfil"];
+    \admin\php\funcoesAdmin\testaSafeNumerico(array($id_perfil));
+}
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :

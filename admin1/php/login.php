@@ -31,7 +31,7 @@ if (! empty ( $i3geoPermiteLoginIp )) {
 if(!function_exists("cpjson")){
     include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 }
-//error_reporting(0);
+error_reporting(0);
 session_write_close();
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login
@@ -45,7 +45,11 @@ if(!empty($_POST["usuario"]) && !empty($_POST["senha"])){
 	$funcao = "login";
 	$_SESSION["locaplic"] = $locaplic;
 	$_SESSION["conexaoadmin"] = $conexaoadmin;
-	$_SESSION["esquemaadmin"] = str_replace(".","",$esquemaadmin).".";
+	if($esquemaadmin != ""){
+	   $_SESSION["esquemaadmin"] = str_replace(".","",$esquemaadmin).".";
+	} else {
+	    $_SESSION["esquemaadmin"] = "";
+	}
 }
 else{//se nao, verifica se o login ja existe realmente
 	if(!empty($_COOKIE["i3geocodigologin"])){
@@ -73,7 +77,8 @@ switch (strtoupper($funcao))
 
 	*/
 	case "LOGIN":
-		$usuario = $_POST["usuario"];
+	    error_log("admin1/php/login.php",0);
+	    $usuario = $_POST["usuario"];
 		$senha = $_POST["senha"];
 		$teste = autenticaUsuario($usuario,$senha,$dir_tmp,$i3geomaster);
 		if($teste == "muitas tentativas"){
@@ -281,10 +286,11 @@ function autenticaUsuario($usuario,$senha,$dir_tmp,$i3geomaster){
 	//exit;
 	if(\admin\php\funcoesAdmin\verificaMaster($usuario,$senha,$i3geomaster) == true){
 		//$pa = pegaDados("select * from ".$esquemaadmin."i3geousr_papelusuario ",$dbh,false);
+	    error_log("verificaMaster OK",0);
 	    $pa = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geousr_papeis ",$dbh,false);
 	    $op = \admin\php\funcoesAdmin\pegadados("SELECT O.codigo FROM ".$esquemaadmin."i3geousr_operacoes AS O",$dbh,false);
 	    $gr = \admin\php\funcoesAdmin\pegadados("SELECT * from ".$esquemaadmin."i3geousr_grupos ",$dbh,false);
-		//var_dump($gr);exit;
+
 		$operacoes = array();
 		foreach($op as $o){
 			$operacoes[$o["codigo"]] = true;

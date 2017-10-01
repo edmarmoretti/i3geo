@@ -244,23 +244,21 @@ array
 		//necess&aacute;rio por conta da inclusao do conexao.php
 		$locaplic = $this->locaplic;
 		$perfilgeral = implode(" ",$this->perfil);
-		if($locmapas != "")
-		{$this->xml = simplexml_load_file($locmapas);}
-		else
-		{
+		if($locmapas != "")	{
+		    $this->xml = simplexml_load_file($locmapas);
+		}
+		else{
 			include_once($this->locaplic."/classesphp/xml.php");
 			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic));
 		}
 		//print_r($this->xml);exit;
 		$mapas = array();
 		//pega os sistemas checando os perfis
-		foreach($this->xml->MAPA as $s)
-		{
+		foreach($this->xml->MAPA as $s){
 			$ps = $this->ixml($s,"PERFIL");
 			$perfis = str_replace(","," ",$ps);
 			$perfis = explode(" ",$perfis);
-			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
-			{
+			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == "")){
 				$n = $this->ixml($s,"NOME");
 				$i = $this->ixml($s,"IMAGEM");
 				$t = $this->ixml($s,"TEMAS");

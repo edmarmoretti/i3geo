@@ -6,26 +6,6 @@ if (! empty ( $_GET ["customDir"] )) {
 } else if (empty ( $customDir )) {
 	$customDir = "interface";
 }
-if (! file_exists ( $dir_tmp )) {
-	@mkdir ( $dir_tmp, 0744 );
-}
-if (file_exists ( $dir_tmp )) {
-	if (! file_exists ( $dir_tmp . "/comum" )) {
-		@mkdir ( $dir_tmp . "/comum", 0744 );
-	}
-	if (! file_exists ( $dir_tmp . "/saiku-datasources" )) {
-		@mkdir ( $dir_tmp . "/saiku-datasources", 0744 );
-		chmod ( $dir_tmp . "/saiku-datasources", 0744 );
-	}
-	if (! file_exists ( $dir_tmp . "/cache" )) {
-		@mkdir ( $dir_tmp . "/cache", 0744 );
-		chmod ( $dir_tmp . "/cache", 0744 );
-	}
-	if (! file_exists ( $dir_tmp . "/cache/googlemaps" )) {
-		@mkdir ( $dir_tmp . "/cache/googlemaps", 0744 );
-		chmod ( $dir_tmp . "/cache/googlemaps", 0744 );
-	}
-}
 //error_reporting ( 0 );
 include "../init/head.php";
 ?>
@@ -149,12 +129,12 @@ include "../init/head.php";
 	include("templates/templatelista.php");
 	?>
 	<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
-	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_login_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_php_compacto.js'></script>
-	<script src='../classesjs/compactados/mustache.js'></script>
+	<script src='../js/compactados/dicionario_compacto.js'></script>
+	<script src='../js/compactados/util_compacto.js'></script>
+	<script src='../js/compactados/idioma_compacto.js'></script>
+	<script src='../js/compactados/login_compacto.js'></script>
+	<script src='../js/compactados/php_compacto.js'></script>
+	<script src='../js/compactados/mustache.js'></script>
 	<script src='dicionario.js'></script>
 	<script src='index.js'></script>
 	<script>

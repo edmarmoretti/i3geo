@@ -626,7 +626,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
 	$dbh = "";
-	include($locaplic."/admin/php/conexao.php");
+	include($locaplic."/classesphp/conexao.php");
 	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 	else

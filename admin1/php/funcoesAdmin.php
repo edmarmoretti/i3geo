@@ -36,7 +36,7 @@ function testaSafeNumerico($valores) {
 	}
 }
 function verificaOperacaoSessao($operacao) {
-	$resultado = false;
+    $resultado = false;
 	// a validacao consulta $_SESSION, que e definida no login
 	if (\admin\php\funcoesAdmin\validaSessao ()) {
 		// verifica se e administrador, caso positivo, permite qq operacao

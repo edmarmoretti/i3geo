@@ -1697,10 +1697,21 @@ i3GEO.php =
 			} else {
 				tabelas = "";
 			}
-			var url = (window.location.href.split("?")[0]), p = i3GEO.configura.locaplic + "/admin/php/mapas.php?";
-			par =
-				"funcao=salvaMapfile" + "&url=" + url.replace("#", "") + "&arqmapfile=" + i3GEO.parametros.mapfile + "&nome_mapa=" + titulo
-					+ "&id_mapa=" + id_mapa + "&ext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+			var url = (window.location.href.split("?")[0]),
+				p = i3GEO.configura.locaplic + "/admin/php/mapas.php?";
+			var par =
+				"funcao=salvaMapfile"
+				+ "&url="
+				+ url.replace("#", "")
+				+ "&arqmapfile="
+				+ i3GEO.parametros.mapfile
+				+ "&nome_mapa="
+				+ titulo
+				+ "&id_mapa="
+				+ id_mapa
+				+ "&ext="
+				+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten
+			);
 
 			cp = new cpaint();
 			cp.set_transfer_mode('POST');

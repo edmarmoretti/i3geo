@@ -14,6 +14,9 @@ $esquemaadmin = $_SESSION["esquemaadmin"];
 if(!isset($esquemaadmin)){
     $esquemaadmin = "";
 }
+if($esquemaadmin == "."){
+    $esquemaadmin = "";
+}
 //
 //indica se deve ser feita a convers&atilde;o para UTF8 ao gravar os dados
 //
