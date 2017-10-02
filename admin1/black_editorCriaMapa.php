@@ -691,11 +691,6 @@ $id_mapa = $_GET["id_mapa"] * 1;
             components : {
                 //define se ao clicar no mapa sera feita a busca de atributos nas camadas existentes no mapa
                 info: true,
-                //template mustache usado para o balao de info
-                //se for vazio, utiliza o default interface/templates/info.html
-                infoTemplate: "",
-                //define se ao clicar no mapa sera feita a busca de atributos nas camadas existentes no mapa
-                info: true,
                 //lista com os codigos dos menus que serao considerados na montagem do catalogo de temas
                 idsMenus : [],
                 //webservice utilizado na opcao de encontrar lugares
