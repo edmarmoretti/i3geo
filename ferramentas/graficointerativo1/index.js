@@ -312,7 +312,7 @@ i3GEOF.graficointerativo1 =
 		 * Retorna um objeto contendo os valores de todos os parametros utilizados no grafico de tal forma que um grafico possa ser
 		 * renderizado novamente
 		 *
-		 * A funcao i3GEO.php.salvaMapaBanco utiliza retornaConfig e cria um objeto que ira armazenar os parametros de cada janela
+		 * A funcao que salva o mapa no banco de adm utiliza retornaConfig e cria um objeto que ira armazenar os parametros de cada janela
 		 */
 		retornaConfig : function(idjanela,novoid) {
 			// as chaves do objeto correspondem ao ID de cada elemento

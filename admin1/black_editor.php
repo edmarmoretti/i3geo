@@ -15,30 +15,25 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 }
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
 <meta http-equiv="Category" content="i3Geo Mapa interativo MMA geoprocessamento sig mobile">
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 <title>i3GEO - OpenLayers</title>
-<script src="../pacotes/ol3/ol.js"></script>
-<script src="../js/i3geonaocompacto.js"></script>
+<script src="../pacotes/ol4/ol.js"></script>
+<script src="../js/i3geo.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
 <script src="../interface/config.php?tipo=OL"></script>
-<script src="../admin1/js/core.js"></script>
-<link rel="stylesheet" type="text/css" href="../pacotes/ol3/ol.css">
+<link rel="stylesheet" type="text/css" href="../pacotes/ol4/ol.css">
 <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
 <!-- <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap-accessibility-plugin/plugins/js/bootstrap-accessibility.min.js"> -->
 <link rel="stylesheet" type="text/css" href="../css/default.css">
 <style>
-.ol-attribution img {
-	display: none;
-}
-
 .ol-attribution.ol-uncollapsible {
 	height: 2.1em;
 	right: 24px;
@@ -118,25 +113,36 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 	</div>
 	<!-- barra de icones de navegacao -->
 	<div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
-		<button title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
-			<img style="width:20px;" src="../imagens/gisicons/projection.png">
+		<button  title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
+			<!--<img style="width:20px;" src="../imagens/gisicons/projection.png">-->
+			<i class="material-icons">public</i>
 		</button>
 		<button onclick="i3GEO.Interface.zoomli()" style="float: left;">
-			<img style="width:20px;" src="../imagens/gisicons/zoom-region.png">
+			<!--<img style="width:20px;" src="../imagens/gisicons/zoom-region.png">-->
+			<i class="material-icons">zoom_in</i>
 		</button>
 		<br>
 		<button title="{{{volta}}}" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
-			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle1.png">
+			<!--<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle1.png">-->
+			<i class="material-icons">undo</i>
 		</button>
 		<button title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
-			<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">
+			<!--<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">-->
+			<i class="material-icons">redo</i>
 		</button>
 		<br>
-		<button class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="../interface/templates/ferramentasLink.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
-			<img style="width:20px;" src="../imagens/gisicons/save1.png">
+		<button title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" style="float: left;">
+			<!--<img style="width:16px;" src="../imagens/gisicons/graticule.png">-->
+			<i class="material-icons">grid_on</i>
 		</button>
+		<button class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="../interface/templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
+			<!--<img style="width:20px;" src="../imagens/gisicons/save1.png">-->
+			<i class="material-icons">bookmark_border</i>
+		</button>
+		<br>
 		<button class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
-			<img style="width:20px;" src="../imagens/gisicons/map-reference.png">
+			<!--<img style="width:20px;" src="../imagens/gisicons/map-reference.png">-->
+			<i class="material-icons">picture_in_picture</i>
 		</button>
 	</div>
 	<!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
@@ -156,15 +162,15 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 		<!-- configuracao para todos os botoes
 			data-idconteudo - id do DIV que contem o conteudo da guia e que sera mostrado ao ser clicado
 		-->
-		<div class="iconesGuiaMovel" data-traduzir="true" style="right:0px;border-radius:4px; padding:2px;cursor: pointer; position: absolute; top: 5px; width: auto; z-index: 5000; background-color: rgba(255,255,255,.4);">
+		<div class="iconesGuiaMovel  ol-control" data-traduzir="true">
 			<!-- ferramentas
 				data-idLista - id do DIV dentro de idconteudo que sera utilizado para mostrar as "pastas" que abrem o proximo nivel
 				data-idLinks - id do DIV dentro de idconteudo que sera utilizado para mostrar a lista de links que abre cada ferramenta
 				data-idMigalha - id do DIV que sera utilizado para mostrar o link de retorno ao nivel anterior
 			-->
 			<div data-idconteudo="guia8obj" data-idLinks="listaFerramentasLinks" data-idMigalha="migalhaFerramentas" data-idLista="listaFerramentas" onclick="i3GEO.guias.ativa('ferramentas',this)">
-				<button title="{{{u15a}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/gisicons/tools.png" style="cursor: pointer; padding: 3px;">
+				<button title="{{{iconeFerramentas}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
+					<i class="material-icons">business_center</i>
 				</button>
 			</div>
 			<!-- temas existentes no mapa
@@ -175,8 +181,8 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 					do metadata existente na camada. Deixe vazio para nao ativar a operacao.
 			-->
 			<div onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
-				<button title="{{{g4a}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/layer.png" style="cursor: pointer; padding: 3px;">
+				<button title="{{{iconeMapa}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
+					<i class="material-icons"><i class="material-icons">visibility</i></i>
 				</button>
 			</div>
 			<!-- catalogo de adicao de temas ao mapa
@@ -188,38 +194,40 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 				Variaveis javascript:
 				i3GEO.catalogoMenus.IDSMENUS - (array) apenas os menus com idmenu que constem nessa lista serao mostrados. Por default e vazio.
 			-->
-			<div onclick="i3GEO.guias.ativa('adiciona',this)"  data-idconteudo="guia2obj" data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus" style="margin-top: 3px;">
-				<button title="{{{g1a}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/catalogo.png" style="cursor: pointer; padding: 3px;">
+			<div onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj" data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus" style="margin-top: 3px;">
+				<button title="{{{iconeCatalogo}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
+					<i class="material-icons">layers</i>
 				</button>
 			</div>
 			<!-- legenda -->
 			<div onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" style="margin-top: 3px;">
-				<button title="{{{g3}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/legenda.png" style="cursor: pointer; padding: 3px;">
+				<button title="{{{iconeLegenda}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
+					<i class="material-icons">view_list</i>
 				</button>
 			</div>
 			<div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('dobraPagina',this)" style="margin-top: 3px;">
-				<button title="{{{trocaInterface}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/googlemaps.png" style="cursor: pointer; padding: 3px;">
+				<button title="{{{trocaInterface}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
+					<i class="material-icons">compare_arrows</i>
 				</button>
 			</div>
 			<!-- Busca -->
 			<div onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" style="margin-top: 3px;">
-				<button class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/gisicons/search.png" style="cursor: pointer; padding: 3px;">
+				<button class="iconeGuiaMovel" style="color:white;box-shadow: none;">
+					<i class="material-icons">search</i>
 				</button>
 			</div>
 			<div onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;" >
-				<button title="{{{d7a}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/gisicons/tips.png" style="cursor: pointer; padding: 3px;">
+				<button title="{{{iconeBalao}}}" class="iconeGuiaMovel" style="color:white;box-shadow: none;">
+					<i class="material-icons">location_on</i>
 				</button>
 			</div>
+			<!-- A opcao de identificacao esta integrada ao balao de informacoes, mas pode aparecer aqui tambem
 			<div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
-				<button title="{{{d7}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
+				<button title="{{{iconeIdentifica}}}" class="iconeGuiaMovel" style="box-shadow: none;">
 					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer; padding: 3px;">
 				</button>
 			</div>
+			-->
 		</div>
 		<!-- veja i3GEO.guias.CONFIGURA -->
 		<!-- Os IDs sao definidos no botao que ativa a guia veja: "i3GEOguiaMovel" -->
@@ -228,25 +236,27 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 			<div id="i3GEOguiaMovelConteudo" >
 				<!-- camadas existentes no mapa -->
 				<div id='guia1obj' data-traduzir="true" style='display: none;'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g4a}}}</span>X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
+					<span class="pull-left">{{{iconeMapa}}}</span>X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
-					<div class="noprint" >
-             			<a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
-             				{{{opcoes}}}
-             				<span class="caret"></span>
-              			</a>
-              			<ul class="dropdown-menu">
-							<li><a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)" >Refresh</a></li>
-							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)" >{{{t3a}}}</a></li>
-							<li><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)" >{{{t3b}}}</a></li>
-							<li><a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)" >{{{t12}}}</a></li>
-							<li><a onclick="i3GEO.arvoreDeCamadas.dialogo.filtro()" href="javascript:void(0)" >{{{t2a}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)" >{{{t20}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)" >{{{p21}}}</a></li>
-							<li><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)" >{{{d12}}}</a></li>
-							<li><a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)" >{{{t4}}}</a></li>
-						</ul>
+					<div class="list-group condensed noprint" >
+             			<label>{{{opcoes}}}</label>
+             			<a data-target="#opcoesGuia1" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px;padding-top: 0px;padding-bottom: 0px;" type="button" data-toggle="collapse" >
+	  						<span class="caret"></span>
+						</a>
+              			<div class="text-left collapse" id="opcoesGuia1" style="margin-left: 30px;">
+							<p><a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)" >Refresh</a></p>
+							<p><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)" >{{{t3a}}}</a></p>
+							<p><a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)" >{{{t3b}}}</a></p>
+							<p><a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)" >{{{t12}}}</a></p>
+							<p><a onclick="i3GEO.arvoreDeCamadas.dialogo.filtro()" href="javascript:void(0)" >{{{t2a}}}</a></p>
+							<p><a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)" >{{{t20}}}</a></p>
+							<p><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)" >{{{p21}}}</a></p>
+							<p><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)" >{{{d12}}}</a></p>
+							<p><a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)" >{{{t4}}}</a></p>
+						</div>
 					</div>
+					<hr>
 					<!-- Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
 					<div id="listaTemas" style="overflow:none;" data-template="../interface/templates/camada.html"></div>
 					<!-- Esta div acrescenta a lista de de camadas de fundo
@@ -255,7 +265,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 					no programa interface/config.php
 					-->
 					<div class="list-group condensed">
-						<label>Camadas de fundo</label>
+						<label>{{{camadasDeFundo}}}</label>
 						<a data-target="#collapseFundo" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px;padding-top: 0px;padding-bottom: 0px;" type="button" data-toggle="collapse" >
 	  						<span class="caret"></span>
 						</a>
@@ -268,56 +278,56 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 				</div>
 				<!-- Catalogo de temas -->
 				<div id='guia2obj' data-traduzir="true" style='display: none; text-align:left;'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();"><span class="pull-left">{{{g1a}}}</span> X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();"><span class="pull-left">{{{iconeCatalogo}}}</span> X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
 					<div id="catalogoMigalha" data-template="../interface/templates/catalogoMigalha.html"></div>
 					<div id="catalogoNavegacao"></div>
 					<!-- Opcoes -->
 					<div id="catalogoPrincipal">
-						<div class="noprint" >
-	             			<a href="javascript:void(0)" data-target="#" class="dropdown-toggle" data-toggle="dropdown">
-	             				{{{opcoes}}}
-	             				<span class="caret"></span>
-	              			</a>
-	              			<ul class="dropdown-menu">
-	 							<li>
+						<div class="list-group condensed noprint" >
+	             			<label>{{{opcoes}}}</label>
+             				<a data-target="#opcoesGuia2" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px;padding-top: 0px;padding-bottom: 0px;" type="button" data-toggle="collapse" >
+	  							<span class="caret"></span>
+							</a>
+	              			<div class="text-left collapse" id="opcoesGuia2" style="margin-left: 30px;">
+	 							<p>
 								<a href="javascript:void(0)" onclick="i3GEO.login.dialogo.abreLogin()">Login/Logout</a>
-								</li>
-
-	 							<li>
-								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.atualiza()">Refresh</a>
-								</li>
-								<li class="divider"></li>
-								<li>
+								</p>
+	 							<p>
+								<!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.atualiza()">Refresh</a> -->
+								</p>
+								<li class="divider"></p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()" >{{{a15}}}</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.uploadarquivo()">{{{a14}}}</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">{{{a3}}}</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.importarwmc()">{{{a3a}}}</a>
-								</li>
-								<li>
-								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a>
-								</li>
-								<li>
-								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a>
-								</li>
-								<li>
+								</p>
+								<p>
+								<!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a> -->
+								</p>
+								<p>
+								<!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a> -->
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
-								</li>
-								<li>
+								</p>
+								<p>
 								<a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
-								</li>
-								<li><a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
-								</li>
-							</ul>
+								</p>
+								<p><a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
+								</p>
+							</div>
 						</div>
-						<!-- busca tema no catalogo -->
+						<hr>
+						<!-- busca tema no catalogo
 						<div class="form-group label-floating">
 							<label class="control-label" for="i3GEObuscatema">{{{a1}}}</label>
 							<div class="input-group">
@@ -329,6 +339,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 								</span>
 							</div>
 						</div>
+						 -->
 						<!-- A lista de menus e uma funcao de i3GEO.guias.CONFIGURA.adiciona
 							Nessa funcao ficam tambem os parametros:
 							"idOndeMenus": "catalogoMenus",
@@ -358,7 +369,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						<!-- servicos da INDE brasileira -->
 						<div class="list-group condensed"><div class="row-content text-left">
 							<a onclick="i3GEO.catalogoInde.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 265px;vertical-align: middle;">
+							<label style="width: 255px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoInde.inicia()" role="button" href="javascript:void(0)">
 								<h4>INDE-Br</h4></a>
 								<h6>Infraestrutura Nacional de Dados Espaciais do Brasil</h6>
@@ -367,7 +378,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						<!-- lista de wms cadastrados no sistema de administracao -->
 						<div class="list-group condensed"><div class="row-content text-left">
 							<a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 265px;vertical-align: middle;">
+							<label style="width: 255px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
 								<h4>OGC-WMS</h4></a>
 								<h6>{{{descOgcWms}}}</h6>
@@ -376,7 +387,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						<!--  regioes cadastradas no sistema de metadados -->
 						<div class="list-group condensed"><div class="row-content text-left">
 							<a onclick="i3GEO.catalogoRegioes.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 265px;vertical-align: middle;">
+							<label style="width: 255px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoRegioes.inicia()" role="button" href="javascript:void(0)">
 								<h4>{{{x87}}}</h4></a>
 								<h6>{{{descLimLoc}}}</h6>
@@ -385,7 +396,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						<!--  camadas que vem do sistema de metadados estatisticos -->
 						<div class="list-group condensed"><div class="row-content text-left">
 							<a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 265px;vertical-align: middle;">
+							<label style="width: 255px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" href="javascript:void(0)">
 								<h4>{{{x57}}}</h4></a>
 								<h6>{{{descMeta}}}</h6>
@@ -394,7 +405,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						<!--  mapas cadastrados no sistema de administracao (nao funcional)
 						<div class="list-group condensed"><div class="row-content text-left">
 							<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 265px;vertical-align: middle;">
+							<label style="width: 255px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" href="javascript:void(0)">
 								<h4>{{{x90}}}</h4></a>
 								<h6>{{{descMapas}}}</h6>
@@ -404,7 +415,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						<!--  camadas por estrelas -->
 						<div class="list-group condensed"><div class="row-content text-left">
 							<a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 265px;vertical-align: middle;">
+							<label style="width: 255px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" href="javascript:void(0)">
 								<h4>{{{t46}}}</h4></a>
 								<h6>{{{descEstrelas}}}</h6>
@@ -413,7 +424,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						<!--  sistemas que adicionam camadas -->
 						<div class="list-group condensed"><div class="row-content text-left">
 							<a onclick="i3GEO.catalogoSistemas.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 265px;vertical-align: middle;">
+							<label style="width: 255px;vertical-align: middle;">
 								<a onclick="i3GEO.catalogoSistemas.inicia()" role="button" href="javascript:void(0)">
 								<h4>{{{a11}}}</h4></a>
 								<h6>{{{descSistemas}}}</h6>
@@ -422,7 +433,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						<!--  navegacao em diretorios -->
 						<div class="list-group condensed"><div class="row-content text-left">
 								<a onclick="i3GEO.catalogoDir.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-								<label style="width: 265px;vertical-align: middle;">
+								<label style="width: 255px;vertical-align: middle;">
 									<a onclick="i3GEO.catalogoDir.inicia()" role="button" href="javascript:void(0)">
 									<h4>{{{a6}}}</h4></a>
 									<h6>{{{descDir}}}</h6>
@@ -432,7 +443,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 				</div>
 				<!-- Legenda -->
 				<div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{g3}}}</span>X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{iconeLegenda}}}</span>X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<a href='javascript:void(0)' onclick="i3GEO.legenda.inicia({'janela':true})" >{{{x11}}}</a>
 					<div id="legendaHtml" data-template="../interface/templates/legenda.html" data-size="35,25" style='display: none; text-align: left'></div>
@@ -443,9 +454,9 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 				Esses parametros indicam qual o checkbox que define o tipo de busca, o local onde os dados serao mostrados e o template para formatar o resultado
 				-->
 				<div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{t23}}}</span> X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
-					<form>
+					<form onSubmit="return false;" >
 						<div class="form-group label-floating">
 							<label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>
 							<div class="input-group">
@@ -506,7 +517,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 				</div>
 				<!-- Ferramentas -->
 				<div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
-					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{u15a}}}</span> X</div>
+					<div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');"><span class="pull-left">{{{iconeFerramentas}}}</span> X</div>
 					<div class="separadorCabecalhoGuias">&nbsp;</div>
 					<div class="form-inline" style="width:100%;">
 						<div class="text-center form-group" style="margin:4px;">
@@ -543,7 +554,6 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 			</div>
 		</div>
 	</div>
-
 	<!--  para mostrar o banner de abertura -->
 	<script id="i3GEOlogoMarcaTemplate" type="x-tmpl-mustache">
 	<div>
@@ -567,12 +577,85 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 	//ativa o banner de inicializacao
 	i3GEO.janela.tempoMsg($i("i3GEOlogoMarcaTemplate").innerHTML,4000);
 	(function() {
+		//parametros aplicados na criacao do arquivo mapfile
 		var parametrosMapa = {
+							//arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
+			//Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Voce pode utilizar essa opcao para abrir um mapa com as camadas que voce quiser, mas para evitar redundâncias, prefira o uso de &temasa
+			mapfilebase: "",
+			//extensao geografica do mapa
+			//deve ser definida em coordenadas no formato decimos de grau e na projecao geografica na sequencia xmin ymin xmax ymax
+			//exemplo [-77,-26,-30,6]
+			mapext: [],
+			//perfil utilizado para restringir os menus de temas mostrando apenas os que correspondem a determinado perfil
+			perfil: "",
+			//layers que serao adicionados ao mapa.
+
 				layers: {
 					add: ["<?php echo strip_tags($_GET["temaEdicao"]); ?>"],
 					on: ["<?php echo strip_tags($_GET["temaEdicao"]); ?>"],
 					off: []
-				}
+				},
+							points: {
+				//array com a lista de coordenadas
+				coord: [],
+				//titulo da nova camada
+				title: ""
+			},
+			//lista de coordenadas x e y que serao adicionadas como linhas no mapa
+			lines: {
+				//array de arrays com a lista de coordenadas de cada linha
+				//exemplo [[-54,-12,-50,-12],[-50,-1,-50,-2,-50,-3]]
+				coord: [[]],
+				//titulo da nova camada
+				title:""
+			},
+			//lista de coordenadas x e y que serao adicionadas como poligonos no mapa
+			polygons: {
+				//array de arrays com a lista de coordenadas de cada poligono. A primeira coordenada deve ser igual a ultima.
+				//exemplo [[-50,-1,-48,-2,-50,-3,-50,-1]]
+				coord: [[]],
+				//titulo da nova camada
+				title:""
+			},
+			//insere elementos no mapa com coordenadas definidas em wkt
+			wkt: {
+				//string no formato wkt
+				coord: "",
+				//titulo da nova camada
+				title: ""
+			},
+			//simbolo que sera utilizado para desenhar os elementos inseridos
+			symbol: {
+				//codigo do simbolo conforme definido em i3geo/symbols
+				name: "",
+				//em rgb, exemplo "0 255 0"
+				color: "",
+				//em pixels
+				size: ""
+			},
+			//arquivo KML que sera incluido no mapa. Valido apenas na interface google maps
+			kml: {
+				url: ""
+			},
+			//endereco de um WMS (sera incluido como uma camada no mapa)
+			wms: {
+				url: "",
+				layer: "",
+				style: "",
+				title: "",
+				srs: "",
+				imagetype: "",
+				version: ""
+			},
+			//filtros que serao aplicados aos layers. Utilize a expressaso conforme definido na documentacao
+			//do mapserver, exemplo
+			//{layer: "_lbiomashp",expression: "(('[CD_LEGENDA]'='CAATINGA'))"} ou {layer: "_lbiomashp",expression: "cd_legenda='CAATINGA'"}
+			filters: [{
+				layer: "",
+				expression: ""
+			}],
+			//id de um mapa salvo e que sera recuperado
+			restoreMapId : ""
 		};
 		var config = {
 			//id do elemento HTML onde o corpo do mapa sera renderizado
@@ -593,9 +676,79 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 			i3GeoServer : "",
 			//Funcao que sera executada apos a inicializacao do mapa
 			afterStart : function(){
+				$('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});
+				$('.iconeGuiaMovel').tooltip('show');
+				$("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
+
 				i3GEO.mapa.ativaTema("<?php echo strip_tags($_GET["temaEdicao"]); ?>");
 				i3GEO.mapa.dialogo.atalhosedicao();
 			},
+            //parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas, balao de info, etc
+            components : {
+                //define se ao clicar no mapa sera feita a busca de atributos nas camadas existentes no mapa
+                info: true,
+                //template mustache usado para o balao de info
+                //se for vazio, utiliza o default interface/templates/info.html
+                infoTemplate: "",
+                //define se ao clicar no mapa sera feita a busca de atributos nas camadas existentes no mapa
+                info: true,
+                //lista com os codigos dos menus que serao considerados na montagem do catalogo de temas
+                idsMenus : [],
+                //webservice utilizado na opcao de encontrar lugares
+                searchService : "http://mapas.mma.gov.br/webservices/geonames.php",
+                //webservice wms que faz a apresentacao do lugar encontrado por searchService
+                searchWms : "http://mapas.mma.gov.br/webservices/geonameswms.php",
+                //posicao do mapa de referencia, em pixels [top,right]
+                referenceMapPosition : [4,120],
+                //propriedades do balao de informacoes mostrado quando o usuario clica no mapa
+                tooltip : {
+                    //o resultado sera mostrado em uma janela do tipo modal
+                    modal : false,
+                    //url que sera utilizada para obter os dados via $.get. Deve estar no mesmo dominio do i3Geo.
+                    //Ao final da url serao inseridos os parametros &xx=&yy= com valores em decimos de grau
+                    //use apenas se modal for true
+                    //exemplo: http://i3geo.saude.gov.br/i3geo/sage_tabelas/odm/odm6.php?
+                    url: "",
+                    //template que sera usado para compor o resultado da busca de dados
+                    //se for vazio, serao utilizadas as outras opcoes
+                    //se contiver a string {{{url}}} a mesma sera substituida por url
+                    //exemplo: "<iframe style='width:400px;height:190px;border:0px white solid' src='{{{url}}}'></iframe>"
+                    templateModal: "",
+                    //serao mostrados todos os dados ou apenas aqueles definidos na configuracao da camada
+                    simple: true,
+                    removeAoAdicionar : true,
+                    //parametros exclusivos da interface openlayers
+                    autoPan : true,
+                    autoPanAnimation : {
+                        duration : 250
+                    },
+                    minWidth : '200px',
+                    //Altura e largura do tooltip (balao)
+                    toolTipSize : ["100px","200px"]
+                },
+                //barra de rolagem - ver plugin jquery https://github.com/malihu/malihu-custom-scrollbar-plugin
+                scrollBar: {
+                    theme: "inset-2",
+                    axis: "yx",
+                    scrollbarPosition: "inside",
+                    scrollButtons:{ enable: true },
+                    advanced:{ autoExpandHorizontalScroll: true }
+                }
+            },
+            //parametros de configuracao das ferramentas que sao acionadas sob demanda
+            //ferramentas localizadas em i3geo/ferramentas
+            tools : {
+                //ferramenta de busca de camadas em um servico CSW
+                buscainde : {
+                    //endereco do servico no padrao CSW
+                    csw : "http://www.metadados.inde.gov.br/geonetwork/srv/br"
+                },
+                //ferramenta de identificacao
+                identifica : {
+                    //resolucao em pixels para busca de elementos
+                    resolution : 8
+                }
+            },
 			//configuracoes especificas para a interface que utiliza o OpenLayers
 			openLayers : {
 				//utiliza ou nao tiles ao renderizar as camadas do mapa
@@ -609,7 +762,7 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 						new ol.control.ZoomSlider(),
 						new ol.control.ScaleLine(),
 						new ol.control.Attribution({
-							collapsible: false
+							collapsible: true
 						})
 					],
 					loadTilesWhileAnimating : true,

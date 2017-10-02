@@ -10,18 +10,8 @@ i3GEOF.salvaMapa.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'editaListaMapas' : [ {
-		pt : "Clique aqui para editar a lista de mapas",
-		en : "",
-		es : ""
-	} ],
 	'baixaArquivo' : [ {
 		pt : "Baixar o arquivo",
-		en : "",
-		es : ""
-	} ],
-	'testaArquivo' : [ {
-		pt : "Clique aqui para testar",
 		en : "",
 		es : ""
 	} ],
@@ -30,23 +20,8 @@ i3GEOF.salvaMapa.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'atualizaIdMapa' : [ {
-		pt : "ID do mapa que ser&aacute; atualizado (opcional).<br>Se for um mapa novo, deixe em branco",
-		en : "",
-		es : ""
-	} ],
-	'tituloMapa' : [ {
-		pt : "T&iacute;tulo do mapa",
-		en : "",
-		es : ""
-	} ],
 	'ajuda' : [ {
 		pt : "Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente. Gr&aacute;ficos e desenhos tamb&eacute;m s&atilde;o salvos.",
-		en : "",
-		es : ""
-	} ],
-	'ajuda2' : [ {
-		pt : "Existem duas maneiras de fazer isso, conforme explicado a seguir.",
 		en : "",
 		es : ""
 	} ],
@@ -62,11 +37,6 @@ i3GEOF.salvaMapa.dicionario = {
 	} ],
 	'salvaArquivo' : [ {
 		pt : "Clique no link abaixo com o bot&atilde;o direito do mouse e salve o arquivo em seu computador. Para carregar o mapa salvo utilize a op&ccedil;&atilde;o de carregar mapa.",
-		en : "",
-		es : ""
-	} ],
-	'cadastraMapa' : [ {
-		pt : "Fa&ccedil;a login e cadastre o mapa atual no banco de dados existente no servidor web. Com isso o mapa ser&aacute; salvo de forma permanente e outros usu&aacute;rios poder&atilde;o utiliz&aacute;-lo. Consulte o admnistrador do site que voc&ecirc; est&aacute; utilizando para saber mais sobre a pol&iacute;tica de uso do mapa que for salvo",
 		en : "",
 		es : ""
 	} ],

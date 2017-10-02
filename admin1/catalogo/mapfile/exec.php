@@ -30,14 +30,16 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editormapfile" 
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-$codigo = $_POST ["codigo"];
-$codigo = str_replace ( " ", "", \admin\php\funcoesAdmin\removeAcentos ( $codigo ) );
-$codigo = str_replace ( ".", "", $codigo );
-$codigo = strip_tags ( $codigo );
-$codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
-
-setcookie("palavraFiltro", strip_tags($_POST ["palavra"]));
-
+if(isset($_POST ["codigo"])){
+    $codigo = $_POST ["codigo"];
+    $codigo = str_replace ( " ", "", \admin\php\funcoesAdmin\removeAcentos ( $codigo ) );
+    $codigo = str_replace ( ".", "", $codigo );
+    $codigo = strip_tags ( $codigo );
+    $codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
+}
+if(isset($_POST ["palavra"])){
+    setcookie("palavraFiltro", strip_tags($_POST ["palavra"]));
+}
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ADICIONAR" :

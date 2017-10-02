@@ -78,5 +78,10 @@ i3GEOadmin.mapas.dicionario = {
 		pt : "Link direto para abertura do mapa (despreza os outros par&acirc;metros)",
 		en : "",
 		es : ""
+	} ],
+    'criaEditaMapa' : [ {
+		pt : "Voc&ecirc; pode tamb&eacute;m criar um novo mapa ou editar um existente utilizando a interface interativa. Essa op&ccedil;&atilde;o permite salvar o mapfile completo no banco de dados, dessa forma &eacute; poss&iacute;vel, por exemplo, alterar a legenda padr&atilde;o das camadas, adicionar camadas e servi&ccedil;os WMS, etc.",
+		en : "",
+		es : ""
 	} ]
 };

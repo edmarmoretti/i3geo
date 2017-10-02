@@ -7,7 +7,10 @@ session_name ( "i3GeoLogin" );
 if (! empty ( $_COOKIE ["i3geocodigologin"] )) {
 	session_id ( $_COOKIE ["i3geocodigologin"] );
 	session_start ();
-	if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
+	if(!isset($_SESSION ["usuario"])){
+	    $_SESSION ["usuario"] = "";
+	}
+	if ($_SESSION ["usuario"] ==  "" || $_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 		$_COOKIE = array ();
 		$_SESSION = array ();
 		session_destroy ();

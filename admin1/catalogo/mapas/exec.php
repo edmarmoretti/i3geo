@@ -32,11 +32,12 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao("admin/html/mapas") === false
     header("HTTP/1.1 403 Vc nao pode realizar essa operacao");
     exit();
 }
-$id_mapa = $_POST["id_mapa"];
-\admin\php\funcoesAdmin\testaSafeNumerico(array(
-    $id_mapa
-));
-
+if(isset($_POST["id_mapa"])){
+    $id_mapa = $_POST["id_mapa"];
+    \admin\php\funcoesAdmin\testaSafeNumerico(array(
+        $id_mapa
+    ));
+}
 $funcao = strtoupper($funcao);
 switch ($funcao) {
     case "ADICIONAR":

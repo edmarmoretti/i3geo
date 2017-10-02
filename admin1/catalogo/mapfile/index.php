@@ -2,8 +2,10 @@
 //TODO incluir novamente ou nao a ativacao do metadata editorsql?
 define ( "ONDEI3GEO", "../../.." );
 include ("exec.php");
-
 include "../../head.php";
+if(!isset($_COOKIE["palavraFiltro"])){
+    $_COOKIE["palavraFiltro"] = "";
+}
 ?>
 <div class="container-fluid migalha">
 	<div class="row">

@@ -198,7 +198,7 @@ i3GEOF.atalhosedicao =
 						""
 				);
 			divid = janela[2].id;
-			janela[0].moveTo(100,60);
+			janela[0].moveTo(180,60);
 			$i("i3GEOF.atalhosedicao_corpo").style.backgroundColor = "white";
 			i3GEOF.atalhosedicao.inicia(divid, "i3GEOF.atalhosedicao");
 		},

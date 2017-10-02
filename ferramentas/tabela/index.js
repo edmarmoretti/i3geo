@@ -373,7 +373,7 @@ i3GEOF.tabela =
          * Retorna um objeto contendo os valores de todos os parametros utilizados na tabela de tal forma que possa ser renderizado
          * novamente
          *
-         * A funcao i3GEO.php.salvaMapaBanco utiliza retornaConfig e cria um objeto que ira armazenar os parametros de cada janela
+         * A funcao que salva o mapa no banco utiliza retornaConfig e cria um objeto que ira armazenar os parametros de cada janela
          */
         retornaConfig : function(idjanela, novoid) {
             // as chaves do objeto correspondem ao ID de cada elemento

@@ -465,6 +465,10 @@ $_SESSION["mensagemInicia"] = $mensagemInicia_;
 $_SESSION["interfacePadrao"] = $interfacePadrao_;
 $_SESSION["logExec"] = $logExec_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
+if(!isset($customDir)){
+    $customDir = "";
+}
+$_SESSION["customDir"] = $customDir;
 if(isset($interface_)){
 	$_SESSION["interface"] = $interface_;
 }
