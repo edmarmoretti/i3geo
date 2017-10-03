@@ -761,7 +761,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 	color: white;
 }
 .i3GeoTituloJanela {
-    font-family: trebuchet ms;
+    font-family: arial;
     font-size: 160%;
     font-weight: bold;
     color: #FFFFFF;
@@ -851,7 +851,7 @@ td {
 }
 
 .styled-select input {
-    font-family: trebuchet ms;
+    font-family: arial;
     font-size: 13px;
     font-weight: normal;
     color: #000000;
@@ -1087,8 +1087,10 @@ bd .i3geoFormIconeEdita {
 }
 
 .yui-skin-sam .bd .yui-navset .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,.yui-skin-sam .bd .yui-navset .yui-nav a em,.yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,.yui-skin-sam .bd .yui-button,.yui-skin-sam .bd .yui-button button,.yui-skin-sam .bd .yui-button a,.yui-skin-sam .bd .yui-button .first-child
-	{
+{
 	border-color: lightgray;
+	font-family: arial;
+	font-size: 1.6rem;
 }
 
 
@@ -1103,7 +1105,7 @@ bd .i3geoFormIconeEdita {
 .yui-skin-sam .yui-navset .yui-nav a, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
     background: rgba(5, 69, 108, 0.9) !IMPORTANT;
     border: none;
-    font-family: trebuchet ms;
+    font-family: arial;
     font-size: 13px;
     font-weight: bold;
     color: rgba(255, 255, 255, 0.6);
@@ -1154,13 +1156,13 @@ bd .i3geoFormIconeEdita {
 }
 
 .hd span {
-    font-family: trebuchet ms;
+    font-family: arial;
 	color: white;
 	opacity: 1.0;
 }
 
 .hd.i3geo6 span {
-    font-family: trebuchet ms;
+    font-family: arial;
 	color: white;
 	opacity: 1.0;
 }
@@ -1169,7 +1171,7 @@ bd .i3geoFormIconeEdita {
     background-color: none;
     padding: 10px;
     position: relative;
-    font-family: trebuchet ms;
+    font-family: arial;
     font-size: 14px;
     font-weight: bold;
     color: rgba(255, 255, 255, 0.6);
@@ -1179,7 +1181,7 @@ bd .i3geoFormIconeEdita {
     background-color: none;
     padding: 10px;
     position: relative;
-    font-family: trebuchet ms;
+    font-family: arial;
     font-size: 14px;
     font-weight: bold;
     color: rgba(255, 255, 255, 0.6);
@@ -1191,7 +1193,7 @@ bd .i3geoFormIconeEdita {
     padding: 10px;
     margin-top: 10px;
     position: relative;
-    font-family: trebuchet ms;
+    font-family: arial;
     font-size: 14px;
     font-weight: bold;
     color: rgba(255, 255, 255, 1);
@@ -1294,7 +1296,7 @@ bd .i3geoFormIconeEdita {
 
 .lista2  td {
     background-color: none;
-    font-family: trebuchet ms;
+    font-family: arial;
     font-size: 13px;
     font-weight: normal;
     color: white;
