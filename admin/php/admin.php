@@ -193,7 +193,7 @@ function pegaDados($sql,$dbh="",$close=true)
 	$resultado = array();
 	//is_string para efeitos de compatibilidade
 	if($dbh == "" || is_string($dbh)){
-		include(dirname(__FILE__)."/../../admin/php/conexao.php");
+		include(dirname(__FILE__)."/../../classesphp/conexao.php");
 	}
 	error_reporting(0);
 	//$dbh deve ser definido com somente leitura, mas por prevencao:

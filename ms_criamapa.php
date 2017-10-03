@@ -241,7 +241,10 @@ if(!isset($funcao)){
 	 */
 	include_once (dirname(__FILE__)."/classesphp/sani_request.php");
 	include_once (dirname(__FILE__)."/classesphp/funcoes_gerais.php");
-	$interface = $GET["interface"];
+	if(!isset($_GET["interface"])){
+	    $_GET["interface"] = "";
+	}
+	$interface = $_GET["interface"];
 }
 $parurl = array_merge($_GET,$_POST);
 //
@@ -372,10 +375,7 @@ $expoeMapfile_ = $expoeMapfile;
 $googleApiKey_ = $googleApiKey;
 $mensagemInicia_ = $mensagemInicia;
 $interfacePadrao_ = $interfacePadrao;
-if(isset($interface)){
-	$interface_ = $interface;
-}
-else{
+if(empty($interface)){
 	$interface_ = $interfacePadrao;
 }
 if(isset($kmlurl)){
@@ -554,7 +554,7 @@ if (!isset ($map_reference_image)){
 if (!isset ($map_reference_extent)){
 	$map_reference_extent = $map->reference->extent->minx." ".$map->reference->extent->miny." ".$map->reference->extent->maxx." ".$map->reference->extent->maxy;
 }
-if(!isset($interface)){
+if(empty($interface)){
 	if(!isset($interfacePadrao)){
 		$interfacePadrao = "ol.htm";
 	}
@@ -668,7 +668,7 @@ adaptaLayers($tmpfname,$versao);
 //	require_once(dirname(__FILE__)."/ms_registraip.php");
 //}
 if ($interface != "mashup"){
-	abreInterface($interface,$caminho,$tempo);
+	abreInterface($interface,$caminho);
 }
 
 /*
@@ -729,7 +729,7 @@ function adaptaLayers($tmpfname,$versao){
 /*
 Redireciona para o HTML definido em $interface, abrindo o mapa
 */
-function abreInterface($interface,$caminho,$tempo){
+function abreInterface($interface,$caminho){
     $nomeInterface = explode(".",basename($interface));
 	if (count(explode(".php",$interface)) > 1){
 		if(file_exists($caminho."interface/".$interface)){
