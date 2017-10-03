@@ -525,6 +525,7 @@ i3GEO.Interface =
                     i3GEO.janela.tempoMsg($trad("zoomliShift"));
                 }
             },
+            //ver i3GEO.mapa
             balao : function(texto, completo, x, y, botaoMais, botaoProp) {
                 if (typeof (console) !== 'undefined')
                     console.info("monta o balao de identificacao e mostra na tela");

@@ -81,7 +81,10 @@ tooltip dos botoes da guia movel
 	width: 120px;
 	min-height: 30px;
 }
-
+.toolTipBalaoTexto label{
+	color: black;
+	font-size: 12px;
+}
 
 /*
 Botoes material

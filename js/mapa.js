@@ -1115,13 +1115,14 @@ i3GEO.mapa =
 										var valor = ds[s][tips[r]].valor;
 										var link = ds[s][tips[r]].link;
 										var img = ds[s][tips[r]].img;
+										var estilo = "tooltip-"+temas[j].tema;
 										if (valor !== "" && link === "") {
-											temp += "<span>" + alias + ": " + valor + "</span><br>";
+											temp += "<span class='"+estilo+"'><label>" + alias + ": </label>" + valor + "</span><br>";
 										}
 										if (valor !== "" && link !== "") {
 											temp +=
-												"<span>" + alias
-												+ " : <a style='color:blue;cursor:pointer' target=_blanck href='"
+												"<span class='"+estilo+"'><label>" + alias
+												+ " : </label><a style='color:blue;cursor:pointer' target=_blanck href='"
 												+ link
 												+ "' >"
 												+ valor
