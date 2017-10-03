@@ -13,6 +13,10 @@
 //
 include ("../../../php/checaLogin.php");
 \admin\php\login\checaLogin();
+
+
+//$k = filter_var ( $k, FILTER_SANITIZE_STRING );
+
 //funcoes de administracao
 include ($_SESSION["locaplic"]."/admin1/php/funcoesAdmin.php");
 //
@@ -30,6 +34,7 @@ include ("funcoes.php");
 //
 include ($_SESSION["locaplic"]."/admin1/php/conexao.php");
 /***************************************************************/
+
 define ( "ONDEI3GEO", "../../../.." );
 include "../../../head.php";
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
@@ -102,7 +107,7 @@ $textoMapfile = \admin\catalogo\mapfile\editor\textoMapfile ( $codigo );
 				</form>
 				<!-- para calcular a altura do textarea -->
 				<pre id="editortemp" style="font-size: 16px; display: block; visibility: hidden;"><?php echo $textoMapfile["texto"]; ?></pre>
-		</div>
+        </div>
 	</div>
 </div>
 

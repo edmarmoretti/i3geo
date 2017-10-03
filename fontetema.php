@@ -39,7 +39,7 @@ fontetema.php?tema=bioma
 
 */
 include(dirname(__FILE__)."/ms_configura.php");
-include(dirname(__FILE__)."/admin/php/classe_arvore.php");
+include(dirname(__FILE__)."/classesphp/classe_arvore.php");
 
 include_once (dirname(__FILE__)."/classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);

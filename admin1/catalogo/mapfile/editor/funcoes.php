@@ -3,7 +3,7 @@ namespace admin\catalogo\mapfile\editor;
 
 function textoMapfile($codigo)
 {
-    global $dbhw;
+    global $dbhw, $esquemaadmin;
     $locaplic = $_SESSION["locaplic"];
     $mapfile = $locaplic . "/temas/" . $codigo . ".map";
     if (! file_exists($mapfile)) {

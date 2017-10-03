@@ -1744,7 +1744,7 @@ switch (strtoupper($funcao)) {
      * Pega a lista de todos os temas que nao possuem restricoes de acesso
      */
     case "PEGATODOSTEMAS":
-        include ("../admin/php/classe_arvore.php");
+        include ("../classesphp/classe_arvore.php");
         $idioma = $_pg["idioma"];
 
         $arvore = new Arvore($locaplic, $idioma);

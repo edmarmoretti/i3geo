@@ -5,7 +5,7 @@ Title: classe_menutemas.php
 Manipula&ccedil;&atilde;o dos temas do arquivo menutemas.xml ou sistema de administra&ccedil;&atilde;o
 
 Quando o i3Geo est&aacute; configurado para acessar o sistema de administra&ccedil;&atilde;o, os m&eacute;todos desta classe
-passam a utilizar a classe i3geo/admin/php/classe_arvore.php
+passam a utilizar a classe i3geo/classesphp/classe_arvore.php
 
 Lista temas, grupos,etc.
 
@@ -113,7 +113,7 @@ array
 		$locaplic = $this->locaplic;
 		if(!isset($this->locaplic))
 		{return "locaplic nao foi definido";}
-		include_once($this->locaplic."/admin/php/classe_arvore.php");
+		include_once($this->locaplic."/classesphp/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$resultado = $arvore->pegaListaDeMenus($this->perfil,$filtraOgc,$filtraDown);
 		$final = array();
@@ -155,7 +155,7 @@ array
 		else
 		{$tipo = "gruposeraiz";}
 		$tempm = $this->pegaListaDeMenus($filtraOgc,$filtraDown);
-		include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
+		include_once(dirname(__FILE__)."/../classesphp/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma,$this->filtro);
 		foreach($tempm as $menu)
 		{
@@ -192,7 +192,7 @@ array
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
 			{
-				include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
+				include_once(dirname(__FILE__)."/../classesphp/classe_arvore.php");
 				$arvore = new Arvore($this->locaplic,$this->idioma,$this->filtro);
 				$subGrupos = $arvore->formataSubgruposGrupo($idmenu,$codgrupo,$this->perfil);
 				unset($arvore);
@@ -219,7 +219,7 @@ array
 */
 	function pegaListaDeTemas($grupo,$subgrupo,$idmenu)
 	{
-		include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
+		include_once(dirname(__FILE__)."/../classesphp/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$temas = $arvore->formataTemasSubgrupo($subgrupo,$this->perfil);
 		unset($arvore);
@@ -384,7 +384,7 @@ $procurar - String que ser&aacute; procurada.
 		}
 		else
 		{
-			include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
+			include_once(dirname(__FILE__)."/../classesphp/classe_arvore.php");
 			$arvore = new Arvore($this->locaplic,$this->idioma);
 			$temas = $arvore->procuraTemas($procurar,$this->perfil);
 			unset($arvore);
@@ -495,7 +495,7 @@ $procurar - String que ser&aacute; procurada.
 */
 	function procurartemas2($procurar)
 	{
-		include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
+		include_once(dirname(__FILE__)."/../classesphp/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$temas = $arvore->procuraTemas($procurar,$this->perfil);
 		unset($arvore);
@@ -514,7 +514,7 @@ $fatorestrela - valor para normalizar o total de acessos com o valor da estrela
 */
 	function procurartemasestrela($nivel,$fatorestrela)
 	{
-		include_once(dirname(__FILE__)."/../admin/php/classe_arvore.php");
+		include_once(dirname(__FILE__)."/../classesphp/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
 		$temas = $arvore->procuraTemasEstrela($nivel,$fatorestrela,$this->perfil);
 		unset($arvore);

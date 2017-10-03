@@ -81,7 +81,7 @@ switch ($funcao) {
             $dbhw = null;
             $dbh = null;
             // pega a lista de temas
-            include ("../../../admin/php/classe_arvore.php");
+            include ("../../../classesphp/classe_arvore.php");
             $arvore = new Arvore($_SESSION["locaplic"]);
             $temas = $arvore->pegaTodosTemas(true);
             \admin\php\funcoesAdmin\retornaJSON(array(
@@ -103,7 +103,7 @@ switch ($funcao) {
             $dbhw = null;
             $dbh = null;
             // pega a lista de temas
-            include ("../../../admin/php/classe_arvore.php");
+            include ("../../../classesphp/classe_arvore.php");
             $arvore = new Arvore($_SESSION["locaplic"]);
             $temas = $arvore->pegaTodosTemas(true);
             \admin\php\funcoesAdmin\retornaJSON(array(

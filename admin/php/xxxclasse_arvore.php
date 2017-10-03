@@ -28,7 +28,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo:
 
-i3geo/admin/php/classe_arvore.php
+i3geo/classesphp/classe_arvore.php
 */
 /*
 Classe: Arvore
@@ -75,15 +75,9 @@ class Arvore
 		$dbh = "";
 		//error_reporting(0);
 
-		include($locaplic."/admin/php/conexao.php");
+		include($locaplic."/classesphp/conexao.php");
 
-		$this->esquemaadmin = "";
-		if(!empty($esquemaadmin)){
-			$this->esquemaadmin = str_replace(".","",$esquemaadmin).".";
-		}
-		if(!isset($convUTF)){
-			$convUTF = true;
-		}
+		$this->esquemaadmin = $esquemaadmin;
 		$this->convUTF = $convUTF;
 		$this->dbh = $dbh;
 

@@ -62,7 +62,7 @@ switch ($funcao) {
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de temas de uma prancha" );
 		} else {
-			include("../../../../../admin/php/classe_arvore.php");
+			include("../../../../../classesphp/classe_arvore.php");
 			$arvore = new Arvore($_SESSION["locaplic"]);
 			$temas = $arvore->pegaTodosTemas(true);
 			\admin\php\funcoesAdmin\retornaJSON ( array("dados"=>$dados, "temas"=>$temas) );
@@ -77,7 +77,7 @@ switch ($funcao) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados tabela de temas de uma prancha" );
 		} else {
 			//pega a lista de temas
-			include("../../../../../admin/php/classe_arvore.php");
+			include("../../../../../classesphp/classe_arvore.php");
 			$arvore = new Arvore($_SESSION["locaplic"]);
 			$temas = $arvore->pegaTodosTemas(true);
 			\admin\php\funcoesAdmin\retornaJSON ( array("dados"=>$dados, "temas"=>$temas) );
