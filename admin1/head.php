@@ -347,6 +347,9 @@ a.collapsed .readLess {
     overflow: hidden;
 
 }
+.navbar {
+    font-size: 1.8rem;
+}
 /* === For phones =================================== */
 @media ( max-width : 767px) {
 	.btn-breadcrumb>*:nth-last-child(-n+2) {

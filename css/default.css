@@ -64,6 +64,15 @@ Utilizado no elemento select
 	bottom: 0px;
 	z-index: 10;
 }
+h5 {
+    font-size: 1.6rem;
+}
+.form-group.label-floating.is-focused label.control-label, .form-group.label-floating:not(.is-empty) label.control-label, .form-group.label-static label.control-label {
+    top: -30px;
+    left: 0;
+    font-size: 1.6rem;
+    line-height: 1.07142857;
+}
 /*
 tooltip dos botoes da guia movel
 */
@@ -77,6 +86,13 @@ tooltip dos botoes da guia movel
 /*
 Botoes material
 */
+
+.form-group label.control-label {
+    font-size: 1.6rem;
+    opacity: 0.9;
+}
+
+
 .material-icons.md-18 {
 	font-size: 18px;
 }
@@ -99,7 +115,7 @@ Botoes material
 	height: 15px;
 }
 .form-group .form-control {
-	font-size: 12px;
+	font-size: 1.5rem;
 	color:white;
 	background-color: #477596;
 }
@@ -110,12 +126,12 @@ Botoes material
 .form-group.label-static label.control-label {
     top: -40px;
     left: 0;
-    font-size: 13px;
+    font-size: 1.5rem;
     line-height: 1.07142857;
 }
 
 .form-control.upload {
-	font-size: 12px;
+	font-size: 1.5rem;
 	color:inherit;
 	font-weight: 400;
 }
