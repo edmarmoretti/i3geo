@@ -68,7 +68,7 @@ function formularioInsere()
 function listaComentarios()
 {
 	$locaplic = "../..";
-	include(dirname(__FILE__)."/../../admin/php/conexao.php");
+	include(dirname(__FILE__)."/../../classesphp/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}
@@ -100,7 +100,7 @@ function listaComentarios()
 function gravaComentario()
 {
 	//necess&aacute;rio para os includes do admin.php
-	include_once(dirname(__FILE__)."/../../admin/php/conexao.php");
+	include_once(dirname(__FILE__)."/../../classesphp/conexao.php");
 	if(!empty($esquemaadmin)){
 		$esquemaadmin = str_replace(".","",$esquemaadmin).".";
 	}

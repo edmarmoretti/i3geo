@@ -71,7 +71,7 @@ function geraXmlSistemas($perfil="",$locaplic="",$editores="")
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
 	$dbh = "";
-	include($locaplic."/admin/php/conexao.php");
+	include($locaplic."/classesphp/conexao.php");
 	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 	else
@@ -239,7 +239,7 @@ Retorno:
 
 RSS
 */
-function geraXmlWS($locaplic,$output)
+function geraXmlWS($locaplic,$output="xml")
 {
 	global $esquemaadmin;
 	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'WS' and nome_ws <> ''";
@@ -471,7 +471,7 @@ function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 	}
 	//var_dump($_SERVER);exit;
 	$dbh = "";
-	include($locaplic."/admin/php/conexao.php");
+	include($locaplic."/classesphp/conexao.php");
 	if($convUTF){
 		$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 	} else {
@@ -507,7 +507,11 @@ function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 		$xml .= "<author>".xmlTexto_prepara($row["autor_ws"])."</author>\n";
 		$xml .= "<nacessos></nacessos>\n";
 		$xml .= "<nacessosok></nacessosok>\n";
+		if(!isset($row["id_ws"])){
+		    $row["id_ws"] = "";
+		}
 		$xml .= "<id>".xmlTexto_prepara($row["id_ws"])."</id>\n";
+
 		$xml .= "<tipo>".$row["tipo_ws"]."</tipo>\n";
 		$xml .= "</item>\n";
 		$jsonItems[] = array(
@@ -535,7 +539,7 @@ function geraXmlAtlas($locaplic,$editores)
 	global $esquemaadmin;
 	//error_reporting(0);
 	$dbh = "";
-	include($locaplic."/admin/php/conexao.php");
+	include($locaplic."/classesphp/conexao.php");
 
 	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
@@ -587,7 +591,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores="")
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);
 	$dbh = "";
-	include($locaplic."/admin/php/conexao.php");
+	include($locaplic."/classesphp/conexao.php");
 	if($convUTF)
 	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
 	else
@@ -672,7 +676,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 			$xml .= " <OUTROS><![CDATA[".$outros."]]></OUTROS>\n";
 			$linkdireto = xmlTexto_prepara($row["linkdireto_mapa"]);
 			if(empty($linkdireto)){
-				$linkdireto = $url."/ms_criamapa.php?mapext=".$extensao."&perfil=".$perfil."&temasa=".$temas."&layers=".$ligados.$row["outros_mapa"];
+			    $linkdireto = $url."/ms_criamapa.php?mapext=".$extensao."&perfil=".$perfil."&temasa=".$row["temas_mapa"]."&layers=".$row["ligados_mapa"].$row["outros_mapa"];
 				$linkdireto = xmlTexto_prepara($linkdireto);
 			}
 			$xml .= " <LINKDIRETO><![CDATA[".$linkdireto."]]></LINKDIRETO>\n";
@@ -693,7 +697,7 @@ function geraXmlMapas($perfil,$locaplic,$editores)
 	return $xml;
 }
 //mostra apenas os mapas que possuem outros_mapa definido, o que e tipico do sistema de metadados estatisticos
-function geraRSSmapas($locaplic,$output)
+function geraRSSmapas($locaplic,$output="xml")
 {
 	global $esquemaadmin;
 	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
@@ -725,7 +729,7 @@ function geraXmlMenutemas($perfil,$id_menu,$tipo,$locaplic)
 	global $esquemaadmin;
 	xml_testaNum([$id_menu]);
 	$dbh = "";
-	include($locaplic."/admin/php/conexao.php");
+	include($locaplic."/classesphp/conexao.php");
 	if (!isset($perfil)){$perfil = "";}
 	$perfil = str_replace(","," ",$perfil);
 	$perfil = explode(" ",$perfil);

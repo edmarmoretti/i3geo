@@ -43,5 +43,8 @@ if(!isset($_GET["perfil"])){
     $_GET["perfil"] = "";
 }
 echo header("Content-type: application/xml");
+if(!isset($_GET["editores"])){
+    $_GET["editores"] = "";
+}
 echo geraXmlMapas($_GET["perfil"],$locaplic,$_GET["editores"]);
 ?>
