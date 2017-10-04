@@ -82,8 +82,8 @@ include "head.php";
 						<p>{{{msgMetaestat}}}</p>
 						<p>{{{msgUpload}}}</p>
 						<p>{{{msgCatalogo}}}</p>
-						<p>{{{msgSqlite}}}</p>
 						<p>{{{msgCadastro}}}</p>
+						<p>{{{msgSqlite}}}</p>
 						<p>
 							<a href="../documentacao/diagramas/mer_banco_de_dados_de_administracao.png"
 								target="_blank">{{merBdAdmin}}</a><br>

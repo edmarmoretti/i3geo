@@ -45,7 +45,7 @@ i3GEOadmin.principal.dicionario = {
 		en : "",
 		es : ""
 	} ],
-	'msgCatalogo' : [ {
+	'msgCadastro' : [ {
 		pt : "Em <kbd>Cadastros</kbd> &eacute; onde s&atilde;o realizadas as configura&ccedil;&otilde;es de conex&otilde;es com servi&ccedil;os e sistemas externos que podem ser utilizados como camadas ou como configura&ccedil;&otilde;es adicionais para os temas.",
 		en : "",
 		es : ""
