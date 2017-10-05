@@ -146,7 +146,7 @@ i3GEO.catalogoMetaestat = {
 			"metaestat",
 			"metaestat",
 			"dependencias.php",
-			"i3GEOF.metaestat.inicia('flutuanteSimples',''," + id_medida_variavel + ")"
+			"i3GEOF.metaestat.inicia('flutuanteSimples',''," + id_medida_variavel + ",'" + nomemedida + "')"
 		);
 	}
 };

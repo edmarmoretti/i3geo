@@ -54,6 +54,7 @@ i3GEOF.metaestat = {
      * guarda o valor do codigo da ultima medidda da variavel escolhida ou passada como parametro na inicializacao
      */
     ID_MEDIDA_VARIAVEL: "",
+    NOME_MEDIDA_VARIAVEL: "",
     /**
      * codigo da conexao com o banco de dados que sera utilizada como default
      * e utilizado em customizacoes da interface, como o geosaude, permitindo acessar as listas de esquemas e tabelas
@@ -104,8 +105,11 @@ i3GEOF.metaestat = {
      * @param codigo da variavel que aparecera como selecionada no combo de selecao de variaveis. Default ""
      * @param codigo da medida da variavel que aparecera como selecionada no combo de selecao de medidas. Default ""
      */
-    inicia: function(Interface,codigo_variavel,id_medida_variavel){
+    inicia: function(Interface,codigo_variavel,id_medida_variavel,nome_medida_variavel){
         i3GEOF.metaestat.log("i3GEOF.metaestat.inicia()");
+        if(nome_medida_variavel){
+        	i3GEOF.metaestat.NOME_MEDIDA_VARIAVEL = nome_medida_variavel;
+        }
         if(Interface && Interface != ""){
             i3GEOF.metaestat.INTERFACE = Interface;
         }
@@ -623,32 +627,43 @@ i3GEOF.metaestat = {
         defineTitulo: function(){
             i3GEOF.metaestat.log("i3GEOF.metaestat.comum.defineTitulo()");
             //se nao tiver parametros, filtro e vazio
-            if(i3GEOF.metaestat.parametros.dados.length == 0 || i3GEOF.metaestat.INTERFACE === "flutuanteSimples"){
+            if(i3GEOF.metaestat.parametros.dados.length == 0){
                 return "";
             }
             //deixa vazio para que o titulo seja definido pelo PHP que monta o mapfile
-            if(i3GEOF.metaestat.comum.tipoRep[1] == ""){
+            if(i3GEOF.metaestat.comum.tipoRep[0] == ""){
                 return "";
             }
             var i,n,c,titulo="",
-            t=[],
-            dados = i3GEOF.metaestat.parametros.dados;
+            	t=[],
+            	dados = i3GEOF.metaestat.parametros.dados;
             if($i("i3geoCartoComboVariavel") && $i("i3geoCartoComboVariavel").options){
                 titulo = $i("i3geoCartoComboVariavel").options[$i("i3geoCartoComboVariavel").selectedIndex].label +" - ";
+            } else {
+            	titulo = i3GEOF.metaestat.parametros.dados[0].nomemedida;
             }
-            titulo += $i("i3geoCartoComboMedidasVariavel").options[$i("i3geoCartoComboMedidasVariavel").selectedIndex].label +" - "+
-            i3GEOF.metaestat.comum.tipoRep[1] +" - "+
-            i3GEOF.metaestat.comum.tipoClassificacao[1] + " - " +
-            i3GEOF.metaestat.comum.tipoRegiao[1];
+            if($i("i3geoCartoComboRegioesMedidasVariavel")){
+            	t.push($i("i3geoCartoComboRegioesMedidasVariavel").options[$i("i3geoCartoComboRegioesMedidasVariavel").selectedIndex].label);
+            } else {
+            	t.push(i3GEOF.metaestat.comum.tipoRegiao[1]);
+            }
+            if($i("i3geoCartoComboTipoClassificacao")){
+            	t.push($i("i3geoCartoComboTipoClassificacao").options[$i("i3geoCartoComboTipoClassificacao").selectedIndex].label);
+            } else {
+            	t.push(i3GEOF.metaestat.comum.tipoClassificacao[1]);
+            }
+            if(i3GEOF.metaestat.comum.tipoRep && i3GEOF.metaestat.comum.tipoRep[1] != ""){
+            	t.push(i3GEOF.metaestat.comum.tipoRep[1]);
+            }
+            dados = $i("i3geoCartoParametrosMedidasVariavel").getElementsByTagName("input");
             n = dados.length;
             for(i=0;i<n;i++){
-                c = $i("comboparametro_"+dados[i].id_parametro_medida+"_"+dados[i].id_pai);
-                if(c && c.value != ""){
-                    t.push(dados[i].nome+" = "+c.value);
+                if(dados[i].checked){
+                	t.push(dados[i].value);
                 }
             }
             if(t.length > 0){
-                return titulo+" - "+t.join(", ");
+                return titulo +" (" + t.join("/") + ")";
             }
             else{
                 return titulo;
