@@ -270,15 +270,19 @@ hr {
 	background-color: white;
 	right:0px;
 	top: -5px;
-	box-shadow: 0 2px 10px 0 #888888;
+	/*box-shadow: 0 2px 10px 0 #888888;*/
 	position: absolute;
 	display: none;
 	border: 0px solid white;
 	text-align: left;
 	z-index: 10000;
 }
+.guiaOverflow{
+	padding-left: 10px;
+}
 #i3GEOguiaMovelConteudo {
-	width:355px;
+	/*width:355px;*/
+	width: 100%;
 	top: 0px;
 	overflow: auto;
 	display: none;
@@ -287,7 +291,7 @@ hr {
 	border-width: 0px 0 0px 0px;
 	left: 0px;
 	height: 0px;
-	padding-left: 4px;
+	padding-left: 0px;
 	background-color: white;
 }
 
@@ -319,18 +323,26 @@ hr {
 }
 
 .i3GEOfechaGuia {
-    cursor: pointer;
-    top: 0px;
-    min-height: 40px;
-    text-align: right;
-    font-size: 14pt;
-    margin-bottom: 10px;
-    padding: 2px;
-    font-family: Verdana, Arial, Helvetica, sans-serif;
-    position: fixed;
-    background-color: white;
-    z-index: 5;
-    position: relative;
+	cursor: pointer;
+	top: 0px;
+	min-height: 40px;
+	text-align: left;
+	padding: 2px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: fixed;
+	background-color: rgba(0,60,136,.5);
+	z-index: 5;
+	position: relative;
+}
+.i3GEOfechaGuia button{
+	color: #fff;
+	font-size: 2rem;
+	font-weight: 700;
+	text-decoration: none;
+	background: none;
+	border: none;
+	padding: 4px;
+	width: 100%;
 }
 /*utilizado para nao sobrepor com o icone de fechar guias, que e fixed*/
 .separadorCabecalhoGuias{

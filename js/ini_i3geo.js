@@ -1012,6 +1012,7 @@ var i3GEO = {
 		if(temp && temp.style && temp.style.width && temp.style.height){
 			i3GEO.parametros.w = parseInt(temp.style.width,10);
 			i3GEO.parametros.h = parseInt(temp.style.height,10);
+			i3GEO.eventos.resizeMapa();
 			return [
 				i3GEO.parametros.w,
 				i3GEO.parametros.h
@@ -1065,6 +1066,7 @@ var i3GEO = {
 				break;
 			};
 			i3GEO.guias.ALTURACORPOGUIAS = h;
+			i3GEO.eventos.resizeMapa();
 			return [
 				w,
 				h

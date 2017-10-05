@@ -75,6 +75,16 @@ i3GEO.eventos =
 	{
 		CONTATOUCH : 0,
 		/**
+		 * Variavel: RESIZE
+		 *
+		 * Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando o navegador muda de tamanho.
+		 *
+		 * Tipo:
+		 *
+		 * {Array}
+		 */
+		RESIZE : [],
+		/**
 		 * Variavel: SELECAO
 		 *
 		 * Armazena as fun&ccedil;&otilde;es (eventos) que ser&atilde;o executadas quando uma operação de seleção e concluida.
@@ -326,6 +336,17 @@ i3GEO.eventos =
 		 */
 		mousecliqueMapa : function() {
 			i3GEO.eventos.executaEventos(this.MOUSECLIQUE);
+		},
+		/**
+		 * Function: resizeMapa
+		 *
+		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSECLIQUE.
+		 */
+		resizeMapa : function() {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.eventos.resizeMapa");
+
+			i3GEO.eventos.executaEventos(this.RESIZE);
 		},
 		/**
 		 * Executa a pilha de nomes de funcoes ou funcoes armazenados em um array
