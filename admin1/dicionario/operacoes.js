@@ -5,7 +5,7 @@ i3GEOadmin.operacoes.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Aqui s&atilde;o definidas quais funcionalidades s&atilde;o de uso restrito e quais pap&eacute;is podem utiliz&aacute;-las. Cada registro funciona como palavras chave inseridas tamb&eacute;m nos c&oacute;digos do i3Geo. Usu&aacute;rios administradores podem acessar qualquer opera&ccedil;&atilde;o.",
+		pt : "Aqui s&atilde;o definidos quais pap&eacute;is podem executar certas funcionalidades. Nessa op&ccedil;&atilde;o o administrador do sistema pode definir uma palavra-chave que deve ser inclu&iacute;da no c&oacute;digo da funcionalidade que se deseja restringir o acesso. As funcionalidades que tenham essa palavra-chave inclu&iacute;da em seu c&oacute;digo (arquivo <samp>exec.php</samp>) ser&atilde;o acess&iacute;veis apenas &agrave;queles usu&aacute;rios cujos pap&eacute;is batam com os v&iacute;nculos exigidos. Administradores podem acessar qualquer funcionalidade.",
 		en : "",
 		es : ""
 	} ],

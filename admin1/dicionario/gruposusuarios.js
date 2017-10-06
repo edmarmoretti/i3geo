@@ -5,7 +5,7 @@ i3GEOadmin.gruposusuarios.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Cadastre aqui os grupos e adicione usuários a eles. Cada usu&aacute;rio pode pertencer a um ou mais grupos. Os grupos s&atilde;o utilizados na defini&ccedil;&atilde;o das permiss&otilde;es de usu&aacute;rios para acesso a dados ou mapas",
+		pt : "Cadastre aqui os grupos e adicione usuários a eles. Cada usu&aacute;rio pode pertencer a um ou mais grupos. Os grupos s&atilde;o utilizados na defini&ccedil;&atilde;o das permiss&otilde;es de usu&aacute;rios para acesso a dados ou mapas.",
 		en : "",
 		es : ""
 	} ],

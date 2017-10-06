@@ -28,7 +28,7 @@ i3GEOadmin.uploadshp.dicionario = {
 		es : ""
 	} ],
 	'txtDesc' : [ {
-		pt : "Envie e armazene no servidor arquivos no formato shapefile. Os arquivos poder&atilde;o ser utilizados para incluir camadas no cat&aacute;logo de temas ou utilizados de outras maneiras para compor mapas.",
+		pt : "Aqui &eacute; poss&iacute;vel subir um arquivo shapefile (.shp, .shx, .dbf e .prj) diretamente para o servidor onde est&aacute; instalado o i3Geo. Caso n&atilde;o seja inclu&iacute;do um arquivo .prj, o usu&aacute;rio pode informar a proje&ccedil;&atilde;o no momento da subida a partir de uma lista. Tamb&eacute;m &eacute; poss&iacute;vel escolher se se deseja criar um mapfile para o tema automaticamente.</p><p>&Eacute; preciso configurar a vari&aacute;vel <code>$i3geoUploadDataWL</code> do arquivo <samp>i3geo/ms_configura.php</samp> com as pastas no servidor que podem receber arquivos.",
 		en : "",
 		es : ""
 	} ],
@@ -43,17 +43,17 @@ i3GEOadmin.uploadshp.dicionario = {
 		es : ""
 	} ],
 	'txtTituloShp2Pg' : [ {
-		pt : "Importação de arquivo shapefile para Postgis",
+		pt : "Importação de arquivo shapefile para PostGIS",
 		en : "",
 		es : ""
 	} ],
 	'txtDescShp2Pg' : [ {
-		pt : "Faz o upload de um arquivo shapefile e converte para o banco de dados Postgis existente no servidor web.",
+		pt : "Aqui &eacute; poss&iacute;vel subir uma camada shapefile (.shp, .shx, .dbf) diretamente para um banco PostGIS. O usu&aacute;rio deve escolher o esquema e incluir o nome de uma tabela. Caso j&aacute; exista uma tabela com o mesmo nome, &eacute; poss&iacute;vel escolher se se quer inserir novos registros na tabela ou apagar os registros existentes e inserir novos. &Eacute; poss&iacute;vel fazer a reproje&ccedil;&atilde;o do arquivo shapefile incluindo a proje&ccedil;&atilde;o de destino diferente da de origem. Tamb&eacute;m &eacute; poss&iacute;vel escolher se se deseja criar um mapfile para o tema automaticamente.<p></p>&Eacute; preciso configurar a vari&aacute;vel <code>$i3geoUploadDataWL</code> do arquivo <samp>i3geo/ms_configura.php</samp> com a string de conex&atilde;o com banco e esquema.",
 		en : "",
 		es : ""
 	} ],
 	'txtAjudaShp2Pg' : [ {
-		pt : "No formul&aacute;rio deve-se indicar os arquivos nos formatos SHP, SHX e DBF que formam o SHAPEFILE. O arquivo &eacute; enviado ao servidor e armazenado temporariamente para que a convers&atilde;o para Postgis seja poss&iacute;vel. O resultado do processo ser&aacute; uma tabela no banco de dados no esquema escolhido pelo usu&aacute;rio. O acesso ao banco &eacute; feito por meio do usu&aacute;rio administrativo da aplica&ccedil;&atilde;o i3Geo (o mesmo que gerencia o sistema de administra&ccedil;&atilde;o, veja em ms_configura.php). Esse usu&aacute;rio, definido pelo administrador do servidor, deve ter os direitos de escrita no esquema do banco de dados escolhido para importar os dados.",
+		pt : "No formul&aacute;rio deve-se indicar os arquivos nos formatos SHP, SHX e DBF que formam o SHAPEFILE. O arquivo &eacute; enviado ao servidor e armazenado temporariamente para que a convers&atilde;o para PostGIS seja poss&iacute;vel. O resultado do processo ser&aacute; uma tabela no banco de dados no esquema escolhido pelo usu&aacute;rio. O acesso ao banco &eacute; feito por meio do usu&aacute;rio administrativo da aplica&ccedil;&atilde;o i3Geo (o mesmo que gerencia o sistema de administra&ccedil;&atilde;o, veja em ms_configura.php). Esse usu&aacute;rio, definido pelo administrador do servidor, deve ter os direitos de escrita no esquema do banco de dados escolhido para importar os dados.",
 		en : "",
 		es : ""
 	} ],
@@ -118,17 +118,17 @@ i3GEOadmin.uploadshp.dicionario = {
 		es : ""
 	} ],
 	'txtTituloCsv2Pg' : [ {
-		pt : "Importação de arquivo CSV para Postgis",
+		pt : "Importação de arquivo CSV para PostGIS",
 		en : "",
 		es : ""
 	} ],
 	'txtDescCsv2Pg' : [ {
-		pt : "Faz o upload de um arquivo CSV e converte para o banco de dados Postgis existente no servidor web. Permite ainda a convers&atilde;o de colunas com a latitude e longitude em uma coluna do tipo geometria.",
+		pt : "Aqui &eacute; poss&iacute;vel subir um arquivo .csv como uma camada geogr&aacute;fica em um banco PostGIS. O usu&aacute;rio deve escolher o esquema, as colunas que representam as coordenadas x (longitude) e y (latitude) e incluir o nome de uma tabela. Caso j&aacute; exista uma tabela com o mesmo nome, &eacute; poss&iacute;vel escolher se se quer inserir novos registros na tabela ou apagar os registros existentes e inserir novos. Tamb&eacute;m &eacute; poss&iacute;vel escolher se se deseja criar um mapfile para o tema automaticamente.<p></p>&Eacute; preciso configurar a vari&aacute;vel <code>$i3geoUploadDataWL</code> do arquivo <samp>i3geo/ms_configura.php</samp> com a string de conex&atilde;o com banco e esquema.",
 		en : "",
 		es : ""
 	} ],
 	'txtAjudaCsv2Pg' : [ {
-		pt : "No formul&aacute;rio deve-se indicar o arquivo no formato CSV. O arquivo &eacute; enviado ao servidor e armazenado temporariamente para que a convers&atilde;o para Postgis seja poss&iacute;vel. O resultado do processo ser&aacute; uma tabela no banco de dados no esquema escolhido pelo usu&aacute;rio. O acesso ao banco &eacute; feito por meio do usu&aacute;rio administrativo da aplica&ccedil;&atilde;o i3Geo (o mesmo que gerencia o sistema de administra&ccedil;&atilde;o, veja em ms_configura.php). Esse usu&aacute;rio, definido pelo administrador do servidor, deve ter os direitos de escrita no esquema do banco de dados escolhido para importar os dados.",
+		pt : "No formul&aacute;rio deve-se indicar o arquivo no formato CSV. O arquivo &eacute; enviado ao servidor e armazenado temporariamente para que a convers&atilde;o para PostGIS seja poss&iacute;vel. O resultado do processo ser&aacute; uma tabela no banco de dados no esquema escolhido pelo usu&aacute;rio. O acesso ao banco &eacute; feito por meio do usu&aacute;rio administrativo da aplica&ccedil;&atilde;o i3Geo (o mesmo que gerencia o sistema de administra&ccedil;&atilde;o, veja em ms_configura.php). Esse usu&aacute;rio, definido pelo administrador do servidor, deve ter os direitos de escrita no esquema do banco de dados escolhido para importar os dados.",
 		en : "",
 		es : ""
 	} ],

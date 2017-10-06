@@ -5,7 +5,7 @@ i3GEOadmin.usuarios.dicionario = {
 		es : ""
 	} ],
 	'txtDesc' : [ {
-		pt : "Cadastre aqui os usu&aacute;rios que podem fazer login. Os pap&eacute;is s&atilde;o utilizados para controlar as opera&ccedil;&otilde;es administrativas que o usu&aacute;rio poder&aacute; executar. Usu&aacute;rios podem tamb&eacute;m pertencer a determinados grupos. Os grupos s&atilde;o utilizados para controlar o acesso &agrave;s camadas nos mapas.</p><p>Utilize o editor de grupos para definir de quais grupos os usu&aacute;rios fazem parte.</p>",
+		pt : "Cadastre aqui os usu&aacute;rios que podem fazer login. Quando um usu&aacute;rio &eacute; criado &eacute; necess&aacute;rio vincul&aacute;-lo a um ou mais pap&eacute;is, que ter&atilde;o permiss&otilde;es e responsabilidades diferentes dentro do sistema. Os pap&eacute;is s&atilde;o utilizados para controlar as opera&ccedil;&otilde;es administrativas que o usu&aacute;rio poder&aacute; executar. Usu&aacute;rios podem tamb&eacute;m pertencer a determinados grupos. Os grupos s&atilde;o utilizados para controlar o acesso &agrave;s camadas nos mapas.</p><p>Utilize o editor de grupos para definir de quais grupos os usu&aacute;rios fazem parte.</p>",
 		en : "",
 		es : ""
 	} ],

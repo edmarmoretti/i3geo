@@ -5,7 +5,7 @@ i3GEOadmin.conexoes.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Lista de conex&otilde;es que s&atilde;o mostradas nos formul&aacute;rios do sistema de metadados estat&iacute;sticos",
+		pt : "Aqui s&atilde;o cadastradas as conex&otilde;es com os bancos de dados que ser&atilde;o utilizados pelo sistema de metadados estat&iacute;sticos. Por quest&otilde;es de seguran&ccedil;a, a senha de conex&atilde;o n&atilde;o &eacute; mostrada. Para alterar a senha &eacute; necess&aacute;rio editar diretamente o banco de dados de administra&ccedil;&atilde;o do i3Geo ou o arquivo <samp>ms_configura.php</samp>.",
 		en : "",
 		es : ""
 	} ],

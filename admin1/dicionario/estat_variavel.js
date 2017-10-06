@@ -8,7 +8,7 @@ i3GEOadmin.variaveis.dicionario = {
 		es : ""
 	} ],
 	'txtDescVariavel' : [ {
-		pt : "As vari&aacute;veis s&atilde;o agrupamentos de medidas e recebem um nome e uma descri&ccedil;&atilde;o",
+		pt : "Aqui s&atilde;o criados os conjuntos de dados do sistema de metadados estat&iacute;sticos, chamadas de vari&aacute;veis. As vari&aacute;veis cont&eacute;m Medidas, que s&atilde;o os dados em si.",
 		en : "",
 		es : ""
 	} ],
@@ -33,7 +33,7 @@ i3GEOadmin.variaveis.dicionario = {
 		es : ""
 	} ],
     'txtDescMedida' : [ {
-		pt : "As medidas s&atilde;o valores existentes em uma tabela no banco de dados e est&aacute; relacionada &agrave; vari&aacute;vel em foco",
+		pt : "As medidas s&atilde;o valores existentes em uma tabela no banco de dados e est&aacute; relacionada &agrave; vari&aacute;vel em foco. Cada medida de vari&aacute;vel possui atributos (metadados) que indicam onde os dados est&atilde;o localizados no banco de dados e quais suas principais caracter&iacute;sticas. Nas op&ccedil;&otilde;es da medida &eacute; poss&iacute;vel configurar par&acirc;metros para a medida, criar classifica&ccedil;&otilde;es e simbologias, al&eacute;m de cadastrar links e fontes de dados.",
 		en : "",
 		es : ""
 	} ],
