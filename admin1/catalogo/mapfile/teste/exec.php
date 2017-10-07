@@ -181,6 +181,17 @@ function testaMapaImg($tema) {
 	$mapa = ms_newMapObj ( $base );
 	//error_reporting ( E_ALL );
 	ms_ResetErrorList ();
+	$erroComplemento = "";
+	//verificacoes de compatibilidade Mapserver
+	if($versao >= 7){
+	    $teste = file_get_contents($tema);
+	    if (stripos($teste, 'ANNOTATION') !== false) {
+	        $erroComplemento .= " Verifique se o LAYER e do tipo ANNOTATION";
+	    }
+	    if (stripos($teste, 'Cluster:FeatureCount') !== false) {
+	        $erroComplemento .= " Verifique se existe Cluster:FeatureCount e troque por Cluster_FeatureCount";
+	    }
+	}
 	try {
 		ms_newMapObj ( $tema );
 	} catch ( Exception $e ) {
@@ -188,7 +199,7 @@ function testaMapaImg($tema) {
 				"imgMapa" => "",
 				"imgLegenda" => "",
 				"tempo" => (microtime ( true ) - $tempo),
-				"erro" => "Objeto map nao pode ser criado. Erro fatal."
+		    "erro" => "Objeto map nao pode ser criado. Erro fatal. ".$erroComplemento
 		);
 	}
 	if (@ms_newMapObj ( $tema )) {
@@ -206,7 +217,7 @@ function testaMapaImg($tema) {
 				"imgMapa" => "",
 				"imgLegenda" => "",
 				"tempo" => (microtime ( true ) - $tempo),
-				"erro" => $erro
+		    "erro" => $erro." ".$erroComplemento
 		);
 	}
 	\admin\php\funcoesAdmin\substituiConObj ( $mapa, $postgis_mapa );
@@ -279,7 +290,7 @@ function testaMapaImg($tema) {
 				"imgMapa" => "",
 				"imgLegenda" => "",
 				"tempo" => (microtime ( true ) - $tempo),
-				"erro" => $erro
+		    "erro" => $erro." ".$erroComplemento
 		);
 	}
 	if ($objImagem->imagepath == "") {
@@ -287,7 +298,7 @@ function testaMapaImg($tema) {
 				"imgMapa" => "",
 				"imgLegenda" => "",
 				"tempo" => (microtime ( true ) - $tempo),
-				"erro" => "Erro IMAGEPATH vazio"
+		    "erro" => "Erro IMAGEPATH vazio. ".$erroComplemento
 		);
 	}
 	$nomec = ($objImagem->imagepath) . \admin\php\funcoesAdmin\nomeRandomico () . "teste.png";
@@ -309,7 +320,7 @@ function testaMapaImg($tema) {
 			"imgMapa" => ($objImagem->imageurl) . basename ( $nomec ),
 			"imgLegenda" => ($objImagemLegenda->imageurl) . basename ( $nomel ),
 			"tempo" => (microtime ( true ) - $tempo),
-			"erro" => $erro
+	    "erro" => $erro." ".$erroComplemento
 	);
 }
 function zoomTema($nomelayer, &$mapa) {
