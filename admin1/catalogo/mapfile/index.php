@@ -39,7 +39,17 @@ if(!isset($_COOKIE["palavraFiltro"])){
 				<h2>
 					<small>{{{txtTitulo}}}</small>
 				</h2>
-				<blockquote>{{{txtDesc}}}</blockquote>
+				<blockquote>
+                    {{{txtDesc}}}
+                    <div id="expandeTxt" class="collapse">
+                        {{{txtDesc1}}}
+                        {{{txtCompatibilidade}}}
+                    </div>
+                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                        <span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
+                        <span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
+                    </a>
+                </blockquote>
 				<div class="col-md-6">
 					<div class="form-group">
 						<label class="control-label">{{{validar}}}</label>

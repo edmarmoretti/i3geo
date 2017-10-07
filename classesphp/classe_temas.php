@@ -582,7 +582,6 @@ parameter:
 $valor - Novo valor da transpar&ecirc;ncia
 */
 	function mudaTransparencia($valor){
-		$v = versao();
 		foreach ($this->grupo as $lg){
 			$ll = $this->mapa->getlayerbyname($lg);
 			$ll->setmetaData("cache","");
@@ -597,7 +596,8 @@ $valor - Novo valor da transpar&ecirc;ncia
 			if($this->v >= 7){
 				//$ll->composite->opacity = $valor;
 				//$ll->set("opacity",$valor);
-				//$ll->updateFromString('LAYER COMPOSITE OPACITY '.$valor.'END END');
+				$ll->updateFromString('LAYER COMPOSITE OPACITY '.$valor.'END END');
+				/*
 				$numclasses = $ll->numclasses;
 				for($i=0;$i<$numclasses;++$i){
 					$classe = $this->layer->getclass($i);
@@ -607,6 +607,7 @@ $valor - Novo valor da transpar&ecirc;ncia
 						$estilo->set("opacity",$valor);
 					}
 				}
+				*/
 				return("ok");
 			}
 		}

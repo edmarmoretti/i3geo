@@ -40,7 +40,12 @@ i3GEOadmin.mapfile.dicionario = {
 		es : ""
 	} ],
     'txtDesc' : [ {
-		pt : "Aqui s&atilde;o criados os arquivos mapfiles. Mapfiles s&atilde;o arquivos de configura&ccedil;&atilde;o que definem as camadas que podem ser adicionadas a um mapa e ao cat&aacute;logo de temas. Os mapfiles criados aqui s&atilde;o armazenados na pasta <samp>i3geo/temas</samp> e registrados no banco de dados de administra&ccedil;&atilde;o. Ao se editar um mapfile priorize faz&ecirc;-lo por aqui para que as altera&ccedil;&otilde;es realizadas sejam registradas.</p><p>Utilize as op&ccedil;&otilde;es do mapfile para definir as configura&ccedil;&otilde;es de seu tema como conex&atilde;o com os dados, criar classes, s&iacute;mbolos e estilos, incluir par&acirc;metros e testar as camadas criadas. </p><p>Para incluir um tema no cat&aacute;logo utilize a op&ccedil;&atilde;o &Aacute;rvore de Temas no menu superior.",
+		pt : "Aqui s&atilde;o criados os arquivos mapfiles. Mapfiles s&atilde;o arquivos de configura&ccedil;&atilde;o que definem as camadas que podem ser adicionadas a um mapa e ao cat&aacute;logo de temas. Os mapfiles criados aqui s&atilde;o armazenados na pasta <samp>i3geo/temas</samp> e registrados no banco de dados de administra&ccedil;&atilde;o. Ao se editar um mapfile priorize faz&ecirc;-lo por aqui para que as altera&ccedil;&otilde;es realizadas sejam registradas.</p>",
+		en : "",
+		es : ""
+	} ],
+    'txtDesc1' : [ {
+		pt : "<p>Utilize as op&ccedil;&otilde;es do mapfile para definir as configura&ccedil;&otilde;es de seu tema como conex&atilde;o com os dados, criar classes, s&iacute;mbolos e estilos, incluir par&acirc;metros e testar as camadas criadas. </p><p>Para incluir um tema no cat&aacute;logo utilize a op&ccedil;&atilde;o &Aacute;rvore de Temas no menu superior.",
 		en : "",
 		es : ""
 	} ],
@@ -571,6 +576,11 @@ i3GEOadmin.mapfile.dicionario = {
 	} ],
     'Wkttip' : [ {
 		pt : "Mostra a geometria",
+		en : "",
+		es : ""
+	} ],
+    'txtCompatibilidade' : [ {
+		pt : "<p><b>Mudan&ccedil;as na vers&atilde;o 7 do Mapserver</b></p><li>N&atilde;o permite o uso do tipo de layer ANNOTATION. Voc&ecirc; deve substituir por um dos tipos permitidos (POINT, LINE, POLYGON...).</li><li>Ao usar CLUSTER substitua Cluster:FeatureCount por Cluster_FeatureCount.</li>",
 		en : "",
 		es : ""
 	} ]
