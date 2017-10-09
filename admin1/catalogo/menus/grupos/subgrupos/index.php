@@ -38,11 +38,11 @@ $nome_menu = $_SESSION["nome_menu"];
 				</button>
 				<div class="pull-left panel-heading" >
 				  <small>Menu</small>
-				  <h4><?php echo $nome_menu; ?></h4>
+				  <h4 class="text-info"><?php echo $nome_menu; ?></h4>
 				</div>
 				<div class="panel-heading">
 				  <small>Grupo</small>
-				  <h4><?php echo $nome_grupo; ?></h4>
+				  <h4 class="text-info"><?php echo $nome_grupo; ?></h4>
 				</div>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">

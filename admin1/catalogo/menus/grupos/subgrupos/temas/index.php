@@ -38,15 +38,15 @@ $_SESSION["nome_subgrupo"] = $nome_subgrupo;
 				</button>
 				<div class="pull-left panel-heading" >
 				  <small>Menu</small>
-				  <h4><?php echo $nome_menu; ?></h4>
+				  <h4 class="text-info"><?php echo $nome_menu; ?></h4>
 				</div>
 				<div class="pull-left panel-heading">
 				  <small>Grupo</small>
-				  <h4><?php echo $nome_grupo; ?></h4>
+				  <h4 class="text-info"><?php echo $nome_grupo; ?></h4>
 				</div>
 				<div class="panel-heading">
 				  <small>Subgrupo</small>
-				  <h4><?php echo $nome_subgrupo; ?></h4>
+				  <h4 class="text-info"><?php echo $nome_subgrupo; ?></h4>
 				</div>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<div class="clearfix"></div>

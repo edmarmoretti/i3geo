@@ -371,6 +371,7 @@ i3GEOadmin.subgrupos = {
 											"onSalvar": "i3GEOadmin.subgrupos.salvarNoDialogo",//funcao
 											"opcoesPublicado": function(){
 												var hash = {};
+
 												hash[this.publicado + "-sel"] = "selected";
 												hash["sim"] = i3GEOadmin.subgrupos.dicionario.sim;
 												hash["nao"] = i3GEOadmin.subgrupos.dicionario.nao;

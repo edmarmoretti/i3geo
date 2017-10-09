@@ -171,6 +171,7 @@ i3GEOadmin.temas = {
 											"onSalvar": "i3GEOadmin.temas.salvarTemaDialogo",//funcao
 											"opcoesPublicado": function(){
 												var hash = {};
+												hash[this.publicado + "-sel"] = "selected";
 												hash["sim"] = i3GEOadmin.temas.dicionario.sim;
 												hash["nao"] = i3GEOadmin.temas.dicionario.nao;
 												return Mustache.to_html(

@@ -327,8 +327,8 @@ function i3GeoAdminOrdena($pdo,$ordem,$tabela,$colunaid){
 		);
 	}
 	//whitespace + appends included in example for readability
-	$template =   "UPDATE '".$esquemaadmin . $tabela."' "
-		. "   SET 'ordem' = CASE "
+	$template =   "UPDATE ".$esquemaadmin . $tabela." "
+		. "   SET ordem = CASE "
 		. "     %s "
 		. "   END "
 		. " WHERE " . $colunaid . " IN (%s);";

@@ -410,6 +410,9 @@ function listaUnico($dbhw, $codigo) {
 		exit ();
 	}
 	$titulolegenda = $layer->getmetadata("TEMA");
+	if ($convUTF != false) {
+	    $titulolegenda = utf8_decode ( $titulolegenda );
+	}
 	$metaestat = $layer->getmetadata("METAESTAT");
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' ", $dbhw, false );
 	//se nao existir no sistema de admin, faz o registro

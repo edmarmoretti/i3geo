@@ -37,7 +37,7 @@ $_SESSION["nome_menu"] = $nome_menu;
 				</button>
 				<div class="panel-heading" >
 				  <small>Menu</small>
-				  <h4><?php echo $nome_menu; ?></h4>
+				  <h4 class="text-info"><?php echo $nome_menu; ?></h4>
 				</div>
 				<blockquote>{{{txtDesc}}}</blockquote>
 
