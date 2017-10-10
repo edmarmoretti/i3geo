@@ -32,8 +32,8 @@ include "../init/head.php";
 	<div class="container-fluid migalha" >
 		<div class="row">
 			<div class="btn-group btn-breadcrumb">
-				<a class="btn btn-default" href="../init/index.php?home="><div>i3Geo</div></a>
-				<a class="btn btn-default" style="pointer-events: none"><div>Teste de instala&ccedil;&atilde;o</div></a>
+				<a class="btn btn-default" href="../init/index.php?home=">i3Geo</a>
+				<a class="btn btn-default" style="pointer-events: none">Teste de instala&ccedil;&atilde;o</a>
 			</div>
 		</div>
 	</div>
@@ -194,6 +194,9 @@ HTML;
 		$versao = versao();
 		$versao = $versao["principal"];
 		$exts = get_loaded_extensions();
+		if(!function_exists("ms_GetVersion")){
+		    echo '<div class="alert alert-danger" role="alert">Verifique se PHP-Mapscript está instalado</div>';
+		}
 		echo "<h3>MapServer:</h3><pre>";
 		echo ms_GetVersion();
 		echo "</pre>";

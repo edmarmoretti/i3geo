@@ -110,6 +110,12 @@ include "head.php";
 
 	<div class="container-fluid" id="conteudoPrincipal" tabindex="-1">
 		<div class="row center-block">
+<?php
+    include_once("../classesphp/carrega_ext.php");
+    if(!function_exists("ms_GetVersion")){
+        echo '<div class="alert alert-danger" role="alert">Verifique se PHP-Mapscript está instalado</div>';
+    }
+?>
 			<!-- Template para criacao dos quadros ver index.js -->
 			<div id="botoesTpl" class="hidden">
 				<div class="cartao {{{fa}}} col-xs-12 center-block"
@@ -227,6 +233,5 @@ include "head.php";
 		$.material.init();
 	});
 	</script>
-
 </body>
 </html>
