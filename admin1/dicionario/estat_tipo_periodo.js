@@ -1,7 +1,7 @@
 i3GEOadmin.periodos.dicionario = {
 	'txtTitulo' : [ {
 		pt : "Cadastro dos tipos de per&iacute;odos de tempo",
-		en : "Registration of time period types",
+		en : "Register of time period types",
 		es : "Registro de los tipos de per&iacute;odos de tiempo"
 	} ],
     'txtDesc' : [ {
