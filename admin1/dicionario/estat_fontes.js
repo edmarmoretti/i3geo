@@ -1,7 +1,7 @@
 i3GEOadmin.fontes.dicionario = {
 	'txtTitulo' : [ {
 		pt : "Cadastro de links para fontes de informa&ccedil;&otilde;es",
-		en : "Registration of links to information sources",
+		en : "Register of links to information sources",
 		es : "Registro de enlaces a fuentes de informaci&oacute;n"
 	} ],
     'txtDesc' : [ {
