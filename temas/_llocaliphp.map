@@ -7,7 +7,7 @@ MAP
     FILTER (([ANOCRIA] = subsano))
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "cache"	"SIM"
+      "cache"	"NAO"
       "LTEMPOITEMIMAGEM"	""
       "TIP"	"TIPO,NOMELOC,ANOCRIA"
       "olopacity"	""

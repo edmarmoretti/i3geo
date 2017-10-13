@@ -70,7 +70,7 @@ switch (strtoupper($funcao))
 					$retorno = "erro";
 				}
 				if($c != ""){
-					$cs = json_decode($c,true);
+					$cs = json_decode(utf8_encode($c),true);
 					$cs = $cs["parametros"];
 					$chaves = array();
 					foreach($cs as $c){
