@@ -61,7 +61,7 @@ include "../init/head.php";
 </ul>
 </script>
 
-<body style="padding-top: 55px; position: relative;">
+<body style="padding-top: 65px; position: relative;">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -86,14 +86,14 @@ include "../init/head.php";
 	</nav>
 	<!--para as mensagens de alerta-->
 	<div class="navbar-fixed-top alert alert-success text-center" style="padding: 0px;"></div>
-	<div class="container-fluid">
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="../init/index.php?home=">i3Geo</a></li>
-				<li class="active">Perm links</li>
-			</ol>
-		</div>
-	</div>
+	    <div class="container-fluid migalha">
+        <div class="row">
+            <div class="btn-group btn-breadcrumb">
+                <a class="btn btn-default" href="../init/index.php?home=">i3Geo</a>
+                <a class="btn btn-default" style="pointer-events: none">Perm links</a>
+            </div>
+        </div>
+    </div>
 	<div class="container">
 		<div class="jumbotron">
 			<h1>Construtor de links</h1>

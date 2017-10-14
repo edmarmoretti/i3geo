@@ -350,6 +350,11 @@ a.collapsed .readLess {
 .navbar {
     font-size: 1.8rem;
 }
+#navbar {
+    min-height: 60px;
+    max-height: 60px;
+    height: 60px;
+}
 /* === For phones =================================== */
 @media ( max-width : 767px) {
 	.btn-breadcrumb>*:nth-last-child(-n+2) {

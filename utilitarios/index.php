@@ -17,7 +17,7 @@ include "../init/head.php";
 	margin: auto;
 }
 </style>
-<body style="padding-top: 55px;">
+<body style="padding-top: 60px;">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -26,14 +26,15 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="../init/index.php?home=">i3Geo</a></li>
-				<li class="active">Utilit&aacute;rios</li>
-			</ol>
-		</div>
-	</div>
+        <div class="container-fluid migalha">
+        <div class="row">
+            <div class="btn-group btn-breadcrumb">
+                <a class="btn btn-default" href="../init/index.php?home=">i3Geo</a>
+                <a class="btn btn-default" style="pointer-events: none">Utilit&aacute;rios</a>
+            </div>
+        </div>
+    </div>
+
 	<div class="container">
 		<div class="row center-block">
 			<div class="col-sm-12 hidden">
