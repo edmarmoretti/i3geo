@@ -44,36 +44,10 @@ include "../init/head.php";
 	<div class="container-fluid">
 		<?php
 		//TODO Incluir opcoes para carregar as listas default do i3Geo como sistemas de identificacao e WMS
-		/*
-		 Testa a instala&ccedil;&atilde;o do i3Geo
-
-		Executa testes e aponta erros na instala&ccedil;&atilde;o.
-
-		Licenca
-
-		GPL2
-
-		i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-		Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-		Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-		Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-		e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-		GNU conforme publicada pela Free Software Foundation;
-
-		Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-		por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-		de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-		Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-		Voc&ecirc; deve ter recebido uma cópia da Licen&ccedil;a P&uacute;blica Geral do
-			GNU junto com este programa; se n&atilde;o, escreva para a
-		Free Software Foundation, Inc., no endere&ccedil;o
-		59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-
-		*/
-		$locaplic = dirname(dirname(__FILE__));
-		include_once("../admin/php/admin.php");
+		include("../ms_configura.php");
+		include ($locaplic."/classesphp/carrega_ext.php");
+		include ($locaplic."/classesphp/funcoes_gerais.php");
+		include ("../admin1/php/funcoesAdmin.php");
 		//verifica se o login pode ser realizado
 		if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
 			header ( "HTTP/1.1 403 Login desativado" );
@@ -84,9 +58,9 @@ include "../init/head.php";
 			checaLoginIp($i3geoPermiteLoginIp);
 		}
 		?>
-		<script src='../classesjs/compactados/dicionario_compacto.js'></script>
-		<script src='../classesjs/compactados/classe_util_compacto.js'></script>
-		<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
+		<script src='../js/compactados/dicionario_compacto.js'></script>
+		<script src='../js/compactados/util_compacto.js'></script>
+		<script src='../js/compactados/idioma_compacto.js'></script>
 		<script src='../init/dicionario.js'></script>
 		<script>
 		<?php
@@ -99,11 +73,7 @@ include "../init/head.php";
 		$("#mensagemLogin").html(men);
 		</script>
 		<?php
-
 		if(empty($_POST["senha"]) || empty($_POST["usuario"])){
-			//opcoes de criacao de pastas
-			//if (strtoupper(substr(PHP_OS, 0, 3) != 'WIN')){
-
 				$d = dirname(dirname(__FILE__));
 echo <<<HTML
 		<div class="alert alert-danger" role="alert">
@@ -149,7 +119,7 @@ HTML;
 			exit;
 		}
 		else{
-			$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+		    $continua = \admin\php\funcoesAdmin\verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
 			if($continua == false){
 echo <<<HTML
 				<div class="alert alert-danger" role="alert">
@@ -159,7 +129,6 @@ HTML;
 				exit;
 			}
 		}
-
 		error_reporting(E_ALL);
 		$ip = "UNKNOWN";
 		if (getenv("HTTP_CLIENT_IP")) $ip = getenv("HTTP_CLIENT_IP");
@@ -189,8 +158,6 @@ echo <<<HTML
 		</div>
 HTML;
 
-		include_once("../classesphp/carrega_ext.php");
-		include_once("../classesphp/funcoes_gerais.php");
 		$versao = versao();
 		$versao = $versao["principal"];
 		$exts = get_loaded_extensions();
@@ -216,6 +183,7 @@ HTML;
 		if (get_cfg_var("safe_mode") == 1){
 			echo '<div class="alert alert-warning" role="alert">Problema: safe_mode no php.ini deveria estar como Off. O i3Geo n&atilde;o ir&aacute; funcionar!!!</div>';
 		}
+//TODO ao fechar versao verificar esses acentos
 echo <<<HTML
 		<h3>Acentua&ccedil;&atilde;o</h3>
 		<pre>
@@ -227,7 +195,7 @@ Caso contr&aacute;rio, verifique os par&acirc;metros de configura&ccedil;&atilde
 		</pre>
 HTML;
 		//executa as opcoes linux definidas no formulario
-		echo "<h3>Aplicando as operações opcionais</h3><pre>";
+		echo "<h3>Aplicando as opera&ccedil;&otilde;es opcionais</h3><pre>";
 		if(!empty($_POST["criaPastaMstmp"]) && $_POST["criaPastaMstmp"] == "on"){
 			echo "Criando a pasta $dir_tmp";
 			if(!file_exists($dir_tmp)){
@@ -328,7 +296,6 @@ echo <<<HTML
 		<li>dir_tmp <span class="label label-default">$dir_tmp</span></li>
 		<li>locmapserv <span class="label label-default">$locmapserv</span></li>
 		<li>Localiza&ccedil;&atilde;o deste PHP <span class="label label-default">$loceste</span></li>
-		<li>O diretorio de arquivos SESSION tempor&aacute;rio <span class="label label-default">$spath</span></li>
 		</div>
 HTML;
 		echo "<h3>Banco de administra&ccedil;&atilde;o</h3>";
@@ -677,7 +644,6 @@ HTML;
 	</div>
 <script>
 $.material.init();
-$("html").niceScroll();
 </script>
 </body>
 </html>

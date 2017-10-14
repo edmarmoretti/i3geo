@@ -286,7 +286,9 @@ i3GEO.login = {
 			var r = confirm($trad("x26"));
 			if (r == true) {
 				i3GEO.login.anulaCookie();
-				i3GEO.janela.destroi("i3GEOF.loginusuario");
+				if(i3GEO.janela){
+					i3GEO.janela.destroi("i3GEOF.loginusuario");
+				}
 				if ($i(i3GEO.login.divnomelogin)) {
 					$i(i3GEO.login.divnomelogin).innerHTML = "";
 				}
@@ -295,7 +297,9 @@ i3GEO.login = {
 				}
 				if (i3GEO.parametros) {
 					i3GEO.parametros.editor = "nao";
-					i3GEO.catalogoMenus.listaMenus();
+					if(i3GEO.catalogoMenus){
+						i3GEO.catalogoMenus.listaMenus();
+					}
 				}
 			}
 		}
