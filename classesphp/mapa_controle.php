@@ -1595,12 +1595,16 @@ switch (strtoupper($funcao)) {
      */
     case "PEGALISTADEMENUS":
         include_once ("classe_menutemas.php");
-        if(isset($_pg["editores"])){
+        if (isset($_pg["editores"])) {
             $editores = $_pg["editores"];
         } else {
             $editores = "";
         }
-        $perfil = $_pg["perfil"];
+        if (isset($_pg["perfil"])) {
+            $perfil = $_pg["perfil"];
+        } else {
+            $perfil = "";
+        }
         $idioma = $_pg["idioma"];
         $filtraOgc = $_pg["filtraOgc"];
         $filtraDown = $_pg["filtraDown"];
@@ -1619,14 +1623,14 @@ switch (strtoupper($funcao)) {
      */
     case "PEGALISTADEGRUPOS":
         include_once ("classe_menutemas.php");
-        if(isset($_pg["editores"])){
+        if (isset($_pg["editores"])) {
             $editores = $_pg["editores"];
         } else {
             $editores = "";
         }
         $perfil = $_pg["perfil"];
         $idioma = $_pg["idioma"];
-        if(isset($_pg["filtro"])){
+        if (isset($_pg["filtro"])) {
             $filtro = $_pg["filtro"];
         } else {
             $filtro = "";
@@ -1811,9 +1815,16 @@ switch (strtoupper($funcao)) {
      */
     case "PEGAMAPAS":
         include_once ("classe_menutemas.php");
-        $perfil = $_pg["perfil"];
-        $idioma = $_pg["idioma"];
-
+        if (isset($_pg["perfil"])) {
+            $perfil = $_pg["perfil"];
+        } else {
+            $perfil = "";
+        }
+        if (isset($_pg["idioma"])) {
+            $idioma = $_pg["idioma"];
+        } else {
+            $idioma = "pt";
+        }
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $idioma);
         $retorno = $m->pegaListaDeMapas($locmapas);
         break;
@@ -2114,10 +2125,10 @@ switch (strtoupper($funcao)) {
         $inicio = $_pg["inicio"];
         $fim = $_pg["fim"];
         $tipolista = $_pg["tipolista"];
-        if(isset($_pg["itemtema"])){
+        if (isset($_pg["itemtema"])) {
             $itemtema = $_pg["itemtema"];
         }
-        if(isset($_pg["unico"])){
+        if (isset($_pg["unico"])) {
             $unico = $_pg["unico"];
         }
         $dadosDaClasse = $_pg["dadosDaClasse"];
@@ -2638,11 +2649,13 @@ switch (strtoupper($funcao)) {
                 ))) {
                     // verifica se tem a carga do js i3geo.js
                     $a = $p . "/" . $nomes[$i];
-                    $handle = fopen($a, "r");
-                    $conteudo = fread($handle, filesize($a));
-                    fclose($handle);
-                    if (strstr($conteudo, "i3geo.js")) {
-                        $retorno[] = "../" . basename($p) . "/" . $nomes[$i];
+                    if(file_exists($a)){
+                        $handle = fopen($a, "r");
+                        $conteudo = fread($handle, filesize($a));
+                        fclose($handle);
+                        if (strstr($conteudo, "i3geo.js")) {
+                            $retorno[] = "../" . basename($p) . "/" . $nomes[$i];
+                        }
                     }
                 }
             }

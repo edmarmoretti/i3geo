@@ -4,8 +4,8 @@ include (dirname ( __FILE__ ) . "/../ms_configura.php");
 //error_reporting ( 0 );
 include "../init/head.php";
 ?>
-<body style="padding-top: 55px;">
-	<nav class="navbar navbar-default navbar-fixed-top">
+<body style="padding-top: 60px;">
+	<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
@@ -13,14 +13,14 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="../init/index.php?home=">i3Geo</a></li>
-				<li class="active">Mashups</li>
-			</ol>
-		</div>
-	</div>
+    <div class="container-fluid migalha">
+        <div class="row">
+            <div class="btn-group btn-breadcrumb">
+                <a class="btn btn-default" href="../init/index.php?home=">i3Geo</a>
+                <a class="btn btn-default" style="pointer-events: none">Mashups</a>
+            </div>
+        </div>
+    </div>
 	<div class="container">
 		<div class="row center-block">
 			<div class="col-sm-12">

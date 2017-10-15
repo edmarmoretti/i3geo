@@ -21,7 +21,7 @@ include "head.php";
 						class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#">
-				<i class="material-icons">home</i></a>
+				<i class="fa fa-home fa-1x"></i></a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
 				<!-- template para permitir a traducao -->

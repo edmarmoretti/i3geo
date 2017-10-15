@@ -3044,6 +3044,9 @@ function restauraMapaAdmin($id_mapa,$dir_tmp){
 	$dbhw = null;
 	$mapasalvo = $mapasalvo[0];
 	$base = "";
+	if(!isset($mapasalvo["publicado"])){
+	    $mapasalvo["publicado"] = "";
+	}
 	if(strtoupper($mapasalvo["publicado"]) != "NAO"){
 		$base = $dir_tmp."/".nomeRandomico()."_restaurado.map";
 		$baseh = fopen($base,'w');

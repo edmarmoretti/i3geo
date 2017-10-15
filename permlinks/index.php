@@ -61,8 +61,8 @@ include "../init/head.php";
 </ul>
 </script>
 
-<body style="padding-top: 65px; position: relative;">
-	<nav class="navbar navbar-default navbar-fixed-top">
+<body style="padding-top: 60px; position: relative;">
+	<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"

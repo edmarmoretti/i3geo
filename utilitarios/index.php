@@ -18,7 +18,7 @@ include "../init/head.php";
 }
 </style>
 <body style="padding-top: 60px;">
-	<nav class="navbar navbar-default navbar-fixed-top">
+	<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<a class="navbar-brand" href="../init/index.php?home="><?php echo $mensagemInicia;?> <i

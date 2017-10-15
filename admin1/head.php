@@ -411,7 +411,7 @@ a.collapsed .readLess {
 				<button title="icon bar" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="<?php echo ONDEI3GEO; ?>/init/index.php"><?php echo $_SESSION["mensagemInicia"];?> <i class="material-icons">home</i>
+				<a class="navbar-brand" href="<?php echo ONDEI3GEO; ?>/init/index.php"><?php echo $_SESSION["mensagemInicia"];?> <i class="fa fa-home fa-1x"></i>
 				</a>
 			</div>
 			<div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">

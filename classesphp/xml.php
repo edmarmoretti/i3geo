@@ -623,7 +623,7 @@ function geraXmlIdentifica($perfil,$locaplic,$editores="")
 	$dbhw = null;
 	return $xml;
 }
-function geraXmlMapas($perfil,$locaplic,$editores)
+function geraXmlMapas($perfil,$locaplic,$editores="")
 {
 	global $esquemaadmin;
 	if (!isset($perfil)){$perfil = "";}
