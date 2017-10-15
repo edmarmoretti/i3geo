@@ -23,8 +23,9 @@
  * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
  */
 //error_reporting ( 0 );
-include (dirname(__FILE__)."/../../../../classesphp/sani_request.php");
-include (dirname(__FILE__)."/../../../../admin/php/admin.php");
+ include (dirname(__FILE__)."/../../../../classesphp/sani_request.php");
+ include (dirname(__FILE__)."/../../../../classesphp/conexao.php");
+ include (dirname(__FILE__)."/../../../../classesphp/funcoes_gerais.php");
 
 if(!isset($idioma) || $idioma == ""){
 	$idioma = "pt";
@@ -43,14 +44,13 @@ AND (t.ogc_tema != 'NAO' OR t.download_tema != 'NAO')
 ORDER BY lower(t.nome_tema)
 ";
 
-		$camadas = pegaDados ( $sqlCamadas, "", false );
+		$camadas = pegaDadosAdmin ( $sqlCamadas, $dbh );
 		if ($camadas === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 
-		retornaJSON ( array("dados"=>"","camadas"=>$camadas) );
+		retornaJSONutf8 ( array("dados"=>"","camadas"=>$camadas) );
 		break;
 }
-cpjson ( $retorno );
 ?>

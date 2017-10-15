@@ -24,7 +24,8 @@
  */
 //error_reporting ( 0 );
 include (dirname(__FILE__)."/../classesphp/sani_request.php");
-include (dirname(__FILE__)."/../admin/php/admin.php");
+include (dirname(__FILE__)."/../classesphp/conexao.php");
+include (dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 
 if(!isset($idioma) || $idioma == ""){
 	$idioma = "pt";
@@ -69,14 +70,14 @@ WHERE n0.publicado_menu != 'NAO' AND (n0.perfil_menu = '' OR n0.perfil_menu isnu
 GROUP BY n0.nome_menu,n0.id_menu
 ORDER BY lower(n0.nome_menu)
 ";
-		$dados = pegaDados ( $sql, "", false );
+		$dados = pegaDadosAdmin ( $sql, $dbh );
 		$dbhw = null;
 		$dbh = null;
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		retornaJSON ( array("dados"=>$dados) );
+		retornaJSONutf8 ( array("dados"=>$dados) );
 		break;
 
 	case "LISTATODAS":
@@ -93,15 +94,13 @@ ORDER BY lower(n0.nome_menu)
 		GROUP BY id_tema,codigo_tema,nome_tema,link_tema,ogc_tema,download_tema
 		ORDER BY lower(u.nome_tema)
 		";
-		$camadas = pegaDados ( $sqlCamadas, "", false );
+		$camadas = pegaDadosAdmin ( $sqlCamadas, $dbh );
 		if ($camadas === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
 
-		retornaJSON ( array("dados"=>"","camadas"=>$camadas) );
+		retornaJSONutf8 ( array("dados"=>"","camadas"=>$camadas) );
 	break;
 }
-
-cpjson ( $retorno );
 ?>

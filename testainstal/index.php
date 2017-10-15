@@ -17,6 +17,8 @@ define("ONDEI3GEO", "..");
 include ("../ms_configura.php");
 include ($locaplic . "/classesphp/carrega_ext.php");
 include ($locaplic . "/classesphp/funcoes_gerais.php");
+//aqui e feito o include de admin1. Poderia ser feito de classesphp
+//mas caso a pasta admin1 nao existir, o programa nao roda, o que e desejado que ocorra
 include ("../admin1/php/funcoesAdmin.php");
 include ("../init/head.php");
 

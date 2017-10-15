@@ -16,8 +16,8 @@ $mapext = $map->extent->minx . "," . $map->extent->miny . "," . $map->extent->ma
 include ONDEI3GEO."/init/head.php";
 ?>
 <link rel='stylesheet' type='text/css' href='../../index.css'>
-<body style="padding-top: 55px;" id="topo">
-	<nav class="navbar navbar-default navbar-fixed-top">
+<body style="padding-top: 60px;" id="topo">
+	<nav id="navbar" class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
 				<button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -30,16 +30,16 @@ include ONDEI3GEO."/init/head.php";
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="../../../init/index.php?home=">i3Geo</a></li>
-				<li><a href="../../index.php">OGC</a></li>
-				<li><a href="../index.php?id_menu=<?php echo $id_menu ; ?>&nome_menu=<?php echo $nome_menu ; ?>"><?php echo $nome_menu ; ?></a></li>
-				<li class="active"><?php echo $nome_grupo ; ?></li>
-			</ol>
-		</div>
-	</div>
+    <div class="container-fluid migalha">
+        <div class="row">
+            <div class="btn-group btn-breadcrumb">
+                <a class="btn btn-default" href="../../../init/index.php?home=">i3Geo</a>
+                <a class="btn btn-default" href="../../index.php">OGC</a>
+                <a class="btn btn-default" href="../index.php?id_menu=<?php echo $id_menu ; ?>&nome_menu=<?php echo $nome_menu ; ?>"><?php echo $nome_menu ; ?></a>
+                <a class="btn btn-default" style="pointer-events: none"><?php echo $nome_grupo ; ?></a>
+            </div>
+        </div>
+    </div>
 	<div class="container">
 		<div class="row center-block">
 			<div class="col-md-12">

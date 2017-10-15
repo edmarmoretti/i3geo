@@ -360,13 +360,6 @@ function temaswms() {
 	//
 	// $wms_service_request = "c://temp//teste.xml";
 
-	if (file_exists ( dirname ( __FILE__ ) . "/../admin1/cadastros/servicos/exec.php" )) {
-		//include_once (dirname ( __FILE__ ) . "/../admin1/cadastros/servicos/exec.php");
-	} else {
-		//include_once (dirname ( __FILE__ ) . "/../admin/php/admin.php");
-		//include_once (dirname ( __FILE__ ) . "/../admin/php/webservices.php");
-	}
-
 	// error_reporting(0);
 	if ($wms_service_request == "erro") {
 		// Cannot download the capabilities file.

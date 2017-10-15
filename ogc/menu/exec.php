@@ -24,7 +24,8 @@
  */
 //error_reporting ( 0 );
 include (dirname(__FILE__)."/../../classesphp/sani_request.php");
-include (dirname(__FILE__)."/../../admin/php/admin.php");
+include (dirname(__FILE__)."/../../classesphp/conexao.php");
+include (dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 
 if(!isset($idioma) || $idioma == ""){
 	$idioma = "pt";
@@ -60,7 +61,7 @@ WHERE n1.publicado != 'NAO' AND (n1.n1_perfil = '' OR n1.n1_perfil isnull )
 GROUP BY grupo.nome_grupo,n1.id_n1
 ORDER BY lower(grupo.nome_grupo)
 ";
-		$dados = pegaDados ( $sql, "", false );
+		$dados = pegaDadosAdmin ( $sql, $dbh );
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -72,11 +73,10 @@ ORDER BY lower(grupo.nome_grupo)
 			(r.perfil = '' OR r.perfil isnull )
 			ORDER BY lower(t.nome_tema)
 		";
-		$camadas = pegaDados ( $sqlCamadas, "", false );
+		$camadas = pegaDadosAdmin ( $sqlCamadas, $dbh );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( array("dados"=>$dados,"camadas"=>$camadas) );
+		retornaJSONutf8 ( array("dados"=>$dados,"camadas"=>$camadas) );
 		break;
 }
-cpjson ( $retorno );
 ?>

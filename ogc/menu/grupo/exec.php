@@ -23,8 +23,9 @@
  * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
  */
 //error_reporting ( 0 );
-include (dirname(__FILE__)."/../../../classesphp/sani_request.php");
-include (dirname(__FILE__)."/../../../admin/php/admin.php");
+ include (dirname(__FILE__)."/../../../classesphp/sani_request.php");
+ include (dirname(__FILE__)."/../../../classesphp/conexao.php");
+ include (dirname(__FILE__)."/../../../classesphp/funcoes_gerais.php");
 
 if(!isset($idioma) || $idioma == ""){
 	$idioma = "pt";
@@ -47,7 +48,7 @@ WHERE n2.publicado != 'NAO' AND (n2.n2_perfil = '' OR n2.n2_perfil isnull )
 GROUP BY subgrupo.nome_subgrupo,n2.id_n2
 ORDER BY lower(subgrupo.nome_subgrupo)
 ";
-		$dados = pegaDados ( $sql, "", false );
+		$dados = pegaDadosAdmin ( $sql, $dbh );
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
@@ -59,11 +60,10 @@ ORDER BY lower(subgrupo.nome_subgrupo)
 			(r.perfil = '' OR r.perfil isnull )
 			ORDER BY lower(t.nome_tema)
 		";
-		$camadas = pegaDados ( $sqlCamadas, "", false );
+		$camadas = pegaDadosAdmin ( $sqlCamadas, $dbh );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSON ( array("dados"=>$dados,"camadas"=>$camadas) );
+		retornaJSONutf8 ( array("dados"=>$dados,"camadas"=>$camadas) );
 		break;
 }
-cpjson ( $retorno );
 ?>

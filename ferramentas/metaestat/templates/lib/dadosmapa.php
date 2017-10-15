@@ -31,7 +31,7 @@ function dadosmapa($loc=""){
 	if($loc == ""){
 		$loc = dirname(__FILE__)."/../../../..";
 	}
-	include($loc."/admin/php/admin.php");
+	include ($loc."/classesphp/conexao.php");
 	include($loc."/classesphp/classe_metaestatinfo.php");
 	if(empty($id)){
 		echo "id nao definido";
