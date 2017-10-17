@@ -3,12 +3,6 @@ GUIA DE UPDATES e UPGRADES
 -------------------------------------------------------------------------------------------------
 Para a versão 7.0
 
-Caso você receba a mensagem "Alerta! Projecao diferente da esperada":
-	Verifique os parâmetros javascript da sua interface e certifique-se que a linha
-	"i3GEO.Interface.openlayers.googleLike = true;"
-	esteja inserida ANTES da linha
-	"i3GEO.cria();"
-
 Inclusão da variável $ogrOutput em ms_configura.php, que indica se o OGR esta corretamente instalado, permitindo o seu uso nos servicos OGC de exportacao de dados
 
 Inclusão da variável $logTransacoes em ms_configura.php para ativar/desativar o log de transações com o banco de dados de administração
@@ -18,6 +12,9 @@ Os programas javascript do core do i3Geo agora ficam na pasta i3geo/js
 O aplicativo datadownload foi removido
 
 As funcionalidades de download foram concentrados no aplicativo de acesso aos webservices OGC
+
+A string de conexão com o sistema de metadados estatísticos deve ser definida em ms_configura.php e não mais no banco de dados de administração
+
 -------------------------------------------------------------------------------------------------
 Para a versão 6.0
 

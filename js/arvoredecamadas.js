@@ -283,7 +283,7 @@ i3GEO.arvoreDeCamadas =
                 axis: "y",
                 revert: true,
                 update: function( event, ui ) {
-                    var els = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
+                	var els = i3GEO.arvoreDeCamadas.listaLigadosDesligadosArvore(config.idOnde);
                     var lista = els[2].join(",");
                     var temp = function(retorno) {
                         i3GEO.atualiza(retorno);
@@ -687,8 +687,7 @@ i3GEO.arvoreDeCamadas =
         /**
          * Function: listaLigadosDesligados
          *
-         * Lista os temas que est&atilde;o ligados e os que est&atilde;o desligados tendo como fonte de busca os checkbox existentes na
-         * &aacute;rvore.
+         * Lista os temas que est&atilde;o ligados e os que est&atilde;o desligados tendo como fonte de busca o objeto CAMADAS.
          *
          * Esse m&eacute;todo &eacute; mais demorado pois varre a &aacute;rvore toda. Por&eacute;m, obt&eacute;m o status verdadeiro do
          * tema.
@@ -716,6 +715,47 @@ i3GEO.arvoreDeCamadas =
                 camada = camadas[i];
                 todos.push(camada["name"]);
                 if (parseInt(camada["status"],10) === 2) {
+                    ligados.push(camada["name"]);
+                } else {
+                    desligados.push(camada["name"]);
+                }
+            }
+            return ([
+                ligados,
+                desligados,
+                todos
+            ]);
+        },
+        /**
+         * Function: listaLigadosDesligadosArvore
+         *
+         * Lista os temas que est&atilde;o ligados e os que est&atilde;o desligados tendo como fonte de busca o HTML onde esta a lista de camadas.
+         *
+         * Esse m&eacute;todo &eacute; mais demorado pois varre a &aacute;rvore toda. Por&eacute;m, obt&eacute;m o status verdadeiro do
+         * tema.
+         *
+         * Parametro:
+         *
+         * {String} - mantem|marca|desmarca marca, desmarca ou mant&eacute;m o checkbox ap&oacute;s identificar seu status atual
+         *
+         * Return:
+         *
+         * {Array} - array de arrays com os c&oacute;digos dos temas [0]=ligados [1]=desligados [2]=todos na ordem encontrada
+         */
+        listaLigadosDesligadosArvore : function(onde) {
+            if (typeof (console) !== 'undefined')
+                console.info("i3GEO.arvoreDeCamadas.listaLigadosDesligadosArvore()");
+
+            if (!i3GEO.arvoreDeCamadas.CAMADAS) {
+                return [[],[],[]];
+            }
+            var n,i, ligados = [], desligados = [], todos = [], camada, camadas;
+            camadas = $i(onde).getElementsByTagName("input");
+            n = camadas.length;
+            for(i=0; i<n; i++){
+                camada = camadas[i];
+                todos.push(camada.value);
+                if (camada.checked == true) {
                     ligados.push(camada["name"]);
                 } else {
                     desligados.push(camada["name"]);

@@ -42,8 +42,10 @@ i3geo/js/compactajs.php
 */
 //
 //
-$locaplic = dirname(__FILE__)."/..";
-include_once(dirname(__FILE__)."/../admin/php/admin.php");
+include ("../ms_configura.php");
+include ($locaplic . "/classesphp/carrega_ext.php");
+include ($locaplic . "/classesphp/funcoes_gerais.php");
+include ("../admin1/php/funcoesAdmin.php");
 //verifica se o login pode ser realizado
 if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
 	header ( "HTTP/1.1 403 Login desativado" );
@@ -53,14 +55,14 @@ if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
 if(isset($i3geoPermiteLoginIp)){
 	checaLoginIp($i3geoPermiteLoginIp);
 }
-include_once(dirname(__FILE__)."/../admin/php/conexao.php");
+include_once("../classesphp/conexao.php");
 
 if(empty($_POST["senha"]) || empty($_POST["usuario"])){
-	formularioLoginMaster("compactajs.php");
+	\admin\php\funcoesAdmin\formularioLoginMaster("compactajs.php");
 	exit;
 }
 else{
-	$continua = verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
+	$continua = \admin\php\funcoesAdmin\verificaMaster($_POST["usuario"],$_POST["senha"],$i3geomaster);
 	if($continua == false){
 		echo "Usu&aacute;rio n&atilde;o registrado em i3geo/ms_configura.php na vari&aacute;vel i3geomaster";
 		exit;
