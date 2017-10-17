@@ -239,7 +239,8 @@ switch (strtoupper($funcao)) {
         break;
     case "LISTACONEXAO":
         $m = new MetaestatInfo();
-        retornaJSON($m->listaConexao($_pg["codigo_estat_conexao"]));
+        //retornaJSON($m->listaConexao($_pg["codigo_estat_conexao"]));
+        retornaJSON($m->listaConexaoMetaestat());
         exit();
         break;
     case "ESQUEMASCONEXAO":

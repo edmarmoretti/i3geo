@@ -92,8 +92,9 @@ function colunasRegiao($dbh,$codigo_tipo_regiao){
 	//parametros da regiao
 	$regiao = \admin\metaestat\regioes\listar($dbh, $codigo_tipo_regiao);
 	//parametros de conexao
-	$c = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geoestat_conexao WHERE codigo_estat_conexao = " . $regiao["codigo_estat_conexao"], $dbh, false );
-	$c = $c[0];
+	//$c = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from " . $esquemaadmin . "i3geoestat_conexao WHERE codigo_estat_conexao = " . $regiao["codigo_estat_conexao"], $dbh, false );
+	//$c = $c[0];
+	$c = \admin\php\funcoesAdmin\listaConexaoMetaestat();
 	$dbhBD = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
 
 	$sql = "SELECT a.attnum,a.attname AS field,t.typname AS type,a.attlen AS length,a.atttypmod AS lengthvar,a.attnotnull AS notnull,p.nspname as esquema FROM pg_class c,pg_attribute a,pg_type t,pg_namespace p WHERE c.relname = '" . $regiao["tabela"] . "' and p.nspname = '" . $regiao["esquemadb"] . "' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid and c.relnamespace = p.oid ORDER BY a.attname";

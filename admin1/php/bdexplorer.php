@@ -49,7 +49,8 @@ switch ($funcao) {
 			$parametros = $dbh;
 		} else {
 			$mt = new MetaestatInfo ();
-			$parametros = $mt->listaConexao ( ( int ) $_POST ["codigo_estat_conexao"], true, false );
+			//$parametros = $mt->listaConexao ( ( int ) $_POST ["codigo_estat_conexao"], true, false );
+			$parametros = $mt->listaConexaoMetaestat();
 		}
 		$bd = new \i3geo\classesphp\bdexplorer\Bdexplorer ( $_SESSION ["locaplic"], $parametros );
 		$dados = $bd->listaDeTabelas ( $_POST ["esquema"] );
@@ -75,7 +76,8 @@ switch ($funcao) {
 	case "LISTARCOLUNAS" :
 		// pega os parametros de conexao
 		$mt = new MetaestatInfo ();
-		$parametros = $mt->listaConexao ( ( int ) $_POST ["codigo_estat_conexao"], true, false );
+		//$parametros = $mt->listaConexao ( ( int ) $_POST ["codigo_estat_conexao"], true, false );
+		$parametros = $mt->listaConexaoMetaestat();
 		$bd = new \i3geo\classesphp\bdexplorer\Bdexplorer ( $_SESSION ["locaplic"], $parametros );
 		$dados = $bd->listaDeColunas ( $_POST ["esquema"], $_POST ["tabela"] );
 		if ($dados === false) {
@@ -86,8 +88,10 @@ switch ($funcao) {
 		break;
 	case "LISTARCODIGOSCONEXAO" :
 		// pega os parametros de conexao
+	    \admin\php\funcoesAdmin\retornaJSON ( array() );
+	    /*
 		$mt = new MetaestatInfo ();
-		$dados = $mt->listaConexao ( "", false, false );
+		$dados = $mt->listaConexaoMetaestat();
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		} else {
@@ -100,6 +104,7 @@ switch ($funcao) {
 			}
 			\admin\php\funcoesAdmin\retornaJSON ( $kv );
 		}
+		*/
 		break;
 	default :
 		if (! empty ( $funcao ))

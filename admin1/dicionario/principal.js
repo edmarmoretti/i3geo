@@ -80,6 +80,11 @@ i3GEOadmin.principal.dicionario = {
 		en : "",
 		es : ""
 	} ],
+    'leiaMe1' : [ {
+		pt : "Na vers&atilde;o 7 do i3Geo, a op&ccedil;&atilde;o de cadastro de conex&otilde;es com o banco de dados foi removida. A string de conex&atilde;o deve ser definida no arquivo i3geo/ms_configura.php por meio da vari&aacute;vel $postgis_mapa (veja detalhes nesse mesmo arquivo).",
+		en : "",
+		es : ""
+	} ],
     'erroLogin' : [ {
 		pt : "&Eacute; necess&aacute;rio fazer login",
 		en : "",

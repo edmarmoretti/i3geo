@@ -651,6 +651,10 @@ $postgis_mapa = array(
 
 No exemplo, vc pode usar "teste" ou "conexao2" no seu mapfile veja em i3geo/temas/testesubstring.map
 
+A chave "metaestat" e utilizada pelo sistema de metadados estatisticos e indica o local onde as tabelas
+com os dados estatisticos estao armazenadas. Ate a versao 6.0, a definicao da conexao era feita por meio
+do banco de dados de administracao
+
 Se vc n&atilde;o quiser usar essa substitui&ccedil;&atilde;o, deixe como est&aacute; ou use
 
 $postgis_mapa = ""
@@ -662,7 +666,7 @@ Tipo:
 $postgis_mapa = array(
 		"teste"=>"user=postgres password=postgres dbname=teste host=localhost port=5432",
 		"postgres"=>"user=postgres password=postgres dbname=postgres host=localhost port=5432",
-		"i3geosaude"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'",
+		"metaestat"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'",
 		"i3geosaudeUtf"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
 );
 /*

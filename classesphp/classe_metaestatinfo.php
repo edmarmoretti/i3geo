@@ -194,7 +194,8 @@ class MetaestatInfo{
     function execSQLDB($codigo_estat_conexao,$sql){
         $buscar = array("drop","update","insert","delete");
         $sql = str_ireplace($buscar,"",$sql);
-        $c = $this->listaConexao($codigo_estat_conexao,true);
+        //$c = $this->listaConexao($codigo_estat_conexao,true);
+        $c = $this->listaConexaoMetaestat();
         $dbhold = $this->dbh;
         $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
         $this->dbh = $dbh;
@@ -513,7 +514,8 @@ class MetaestatInfo{
             if($meta["codigo_tipo_regiao"] == $codigo_tipo_regiao || empty($codigo_tipo_regiao) ){
                 $agruparpor = "";
             }
-            $dconexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+            //$dconexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+            $dconexao = $this->listaConexaoMetaestat();
             $conexao = "user=".$dconexao["usuario"]." password=".$dconexao["senha"]." dbname=".$dconexao["bancodedados"]." host=".$dconexao["host"]." port=".$dconexao["porta"]."";
             $sql = $this->sqlMedidaVariavel(
                 $id_medida_variavel,
@@ -642,7 +644,8 @@ class MetaestatInfo{
             $dados[] = '	NAME "'.$this->nomecache.'"';
             $dados[] = "	TYPE $tipolayer";
             $dados[] = '	DATA "'.$sqlf.'"';
-            $dados[] = '	CONNECTION "'.$conexao.'"';
+            //$dados[] = '	CONNECTION "'.$conexao.'"';
+            $dados[] = '	CONNECTION "metaestat"';
             $dados[] = '	CONNECTIONTYPE POSTGIS';
             $dados[] = '	STATUS OFF';
             $dados[] = '	TEMPLATE "none.htm"';
@@ -777,7 +780,8 @@ class MetaestatInfo{
             $meta = $this->listaTipoRegiao($codigo_tipo_regiao);
             $titulolayer = $meta["nome_tipo_regiao"];
             $titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
-            $conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+            //$conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+            $conexao = $this->listaConexaoMetaestat();
             $conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
             $colunageo = $meta["colunageo"];
             $srid = $meta["srid"];
@@ -1000,7 +1004,8 @@ class MetaestatInfo{
         //echo $sqlf;exit;
         $metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
         if(!empty($metaVariavel["codigo_estat_conexao"])){
-            $c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
+            //$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
+            $c = $this->listaConexaoMetaestat();
             $dbhold = $this->dbh;
             $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
             $this->dbh = $dbh;
@@ -1021,7 +1026,8 @@ class MetaestatInfo{
         $sqlf = $sqlf["sqlagrupamento"];
         $metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
         if(!empty($metaVariavel["codigo_estat_conexao"])){
-            $c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
+            //$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
+            $c = $this->listaConexaoMetaestat();
             $dbhold = $this->dbh;
             $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
             $this->dbh = $dbh;
@@ -1317,6 +1323,38 @@ class MetaestatInfo{
         }
         return $regioes;
     }
+    function listaConexaoMetaestat(){
+        if(!isset($_SESSION["postgis_mapa"])){
+            include(dirname(__FILE__)."/../ms_configura.php");
+        } else {
+            $postgis_mapa = $_SESSION["postgis_mapa"];
+        }
+        if(isset($postgis_mapa["metaestat"])){
+            $m = $postgis_mapa["metaestat"];
+            if($m == ""){
+                return false;
+            }
+            $lista = explode(" ",$m);
+            $con = array();
+            foreach($lista as $l){
+                $teste = explode("=",$l);
+                $con[trim($teste[0])] = trim($teste[1]);
+            }
+            $c = array(
+                "codigo_estat_conexao" => "metaestat",
+                "bancodedados" => $con["dbname"],
+                "host" => $con["host"],
+                "porta" => $con["port"],
+                "usuario" => $con["user"],
+                "senha" => $con["password"],
+                "options" => $con["options"],
+                "fonte" => "ms_configura"
+            );
+            return $c;
+        } else {
+            return false;
+        }
+    }
     /**
      * Lista os dados de uma conexao ou de todas
      * @param id da conexao
@@ -1494,7 +1532,8 @@ class MetaestatInfo{
     function listaPropGeoRegiao($codigo_tipo_regiao){
         //st_dimension returns 0 for POINT, 1 for LINESTRING, 2 for POLYGON
         $regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
-        $c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        //$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        $c = $this->listaConexaoMetaestat();
         $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
         $c = $regiao["colunageo"];
         $sql = "select st_dimension(".$regiao["colunageo"].") as st_dimension from ".$regiao["esquemadb"].".".$regiao["tabela"]." limit 1";
@@ -1578,7 +1617,8 @@ class MetaestatInfo{
     function listaDadosRegiao($codigo_tipo_regiao,$codigo_tipo_regiaopai="",$valorregiaopai=""){
         //pega a tabela, esquema e conexao para acessar os dados da regiao
         $regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
-        $c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        //$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        $c = $this->listaConexaoMetaestat();
         $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
         $c = $regiao["colunageo"];
         $bbox = "ST_XMin($c)||' '||ST_YMin($c)||' '||ST_XMax($c)||' '||ST_YMax($c) as ext ";
@@ -1603,7 +1643,8 @@ class MetaestatInfo{
     function listaDadosGeometriaRegiao($codigo_tipo_regiao){
         //pega a tabela, esquema e conexao para acessar os dados da regiao
         $regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
-        $c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        //$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        $c = $this->listaConexaoMetaestat();
         $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
         $c = $regiao["colunageo"];
         $s = "ST_dimension($c) as dimension ";
@@ -1952,7 +1993,8 @@ class MetaestatInfo{
     function xy2regiao($codigo_tipo_regiao,$x,$y){
         //pega a tabela, esquema e conexao para acessar os dados da regiao
         $regiao = $this->listaTipoRegiao($codigo_tipo_regiao);
-        $c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        //$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        $c = $this->listaConexaoMetaestat();
         $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
         $sql = "select ".$regiao["identificador"]." as identificador_regiao,".$regiao["colunanomeregiao"]." as nomeregiao from i3geo_metaestat.".$regiao["tabela"]." WHERE ST_within(ST_GeomFromText('POINT($x $y)',".$regiao["srid"]."),".$regiao["colunageo"].")";
         $q = $dbh->query($sql,PDO::FETCH_ASSOC);
@@ -1974,7 +2016,8 @@ class MetaestatInfo{
      */
     function listaAtributosMedidaVariavelRegiao ($identificador_regiao,$id_medida_variavel){
         $medida = $this->listaMedidaVariavel("",$id_medida_variavel);
-        $c = $this->listaConexao($medida["codigo_estat_conexao"],true);
+        //$c = $this->listaConexao($medida["codigo_estat_conexao"],true);
+        $c = $this->listaConexaoMetaestat();
         if($medida["colunavalor"] == ""){
             return "";
         }

@@ -3,6 +3,38 @@ namespace admin\php\funcoesAdmin;
 use PDO;
 use PDOException;
 use Services_JSON;
+
+function listaConexaoMetaestat(){
+    if(!isset($_SESSION["postgis_mapa"])){
+        include(dirname(__FILE__)."/../../ms_configura.php");
+    } else {
+        $postgis_mapa = $_SESSION["postgis_mapa"];
+    }
+    if(isset($postgis_mapa["metaestat"])){
+        $m = $postgis_mapa["metaestat"];
+        if($m == ""){
+            return false;
+        }
+        $lista = explode(" ",$m);
+        $con = array();
+        foreach($lista as $l){
+            $teste = explode("=",$l);
+            $con[trim($teste[0])] = trim($teste[1]);
+        }
+        $c = array(
+            "codigo_estat_conexao" => "metaestat",
+            "bancodedados" => $con["dbname"],
+            "host" => $con["host"],
+            "porta" => $con["port"],
+            "usuario" => $con["user"],
+            "senha" => $con["password"],
+            "fonte" => "ms_configura"
+        );
+        return $c;
+    } else {
+        return false;
+    }
+}
 //
 // verifica se um determinado papel esta registrado na variavel SESSION
 //

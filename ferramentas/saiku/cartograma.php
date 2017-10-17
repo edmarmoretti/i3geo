@@ -62,7 +62,8 @@ else{
 		exit;
 	}
 	$titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
-	$conexao = $m->listaConexao($meta["codigo_estat_conexao"],true);
+	//$conexao = $m->listaConexao($meta["codigo_estat_conexao"],true);
+	$conexao = $m->listaConexaoMetaestat();
 	$conexao = "user=".$conexao["usuario"]." password=".$conexao["senha"]." dbname=".$conexao["bancodedados"]." host=".$conexao["host"]." port=".$conexao["porta"]."";
 	$colunageo = $meta["colunageo"];
 	$sqlColunaGeo = $meta["colunageo"];

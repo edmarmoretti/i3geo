@@ -94,6 +94,7 @@ include "head.php";
 						</p>
 						</div>
 						<div class="alert alert-warning">{{{leiaMe}}}</div>
+                        <div class="alert alert-warning">{{{leiaMe1}}}</div>
 
 			</div>
 		</div>
