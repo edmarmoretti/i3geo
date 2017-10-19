@@ -1338,18 +1338,7 @@ ms_ioresethandlers();
 //
 //fun&ccedil;&otilde;es
 //
-function ogc_pegaListaDeMenus(){
-	global $perfil,$locaplic,$urli3geo;
-	if(!isset($perfil)){
-		$perfil = "";
-	}
-	$m = new Menutemas("",$perfil,$locsistemas,$locaplic,"",$urli3geo);
-	foreach($m->pegaListaDeMenus() as $menu)
-	{
-		$menus[] = $urli3geo."/admin/xmlmenutemas.php?id_menu=".$menu["idmenu"];
-	}
-	return $menus;
-}
+
 function ogc_imprimeAjuda(){
 	echo "<pre><b>Construtor de web services do I3Geo.</b><br><br>";
 	echo "Esse programa usa os arquivos mapfiles existentes em <br>";

@@ -509,7 +509,7 @@ i3GEO.mapa =
 						id
 					);
 				} else {
-					window.open(i3GEO.configura.locaplic + "/admin/rssmapas.php", "_blank");
+					window.open(i3GEO.configura.locaplic + "/rss/rssmapas.php", "_blank");
 				}
 			},
 			/**

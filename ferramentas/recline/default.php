@@ -50,7 +50,7 @@ if(@ms_newMapObj($f)){
 <head>
 <meta charset="utf-8" />
 <title>Recline.js Multiview</title>
-<link rel="stylesheet" type="text/css" href="../../admin/html/admin.css">
+
 <!-- you do not have to use bootstrap but we use it by default -->
 
 <link rel="stylesheet" href="../../pacotes/knightlab/recline/vendor/bootstrap/3.2.0/css/bootstrap.css">

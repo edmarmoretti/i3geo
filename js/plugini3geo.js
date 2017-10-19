@@ -1080,7 +1080,7 @@ i3GEO.pluginI3geo =
 		        	   },
 		        	   // pega os valores do formulario quando e aberto no sistema de
 		        	   // administracao
-		        	   // ver i3geo/admin/editormapfile.js funcao salvarDadosEditorPlugin
+
 		        	   parametrosFormAdmin : function(onde) {
 		        		   var campo = 0, nlinhas = 4, ncampos = 5, campos = onde.getElementsByTagName("input"), par = [], temp = [], i, j;
 		        		   for (j = 0; j < nlinhas; j++) {

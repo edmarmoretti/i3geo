@@ -4,7 +4,6 @@ Title: rssmapas
 
 Monta um arquivo XML, no padr&atilde;o RSS, contendo a lista de links para outros mapas.
 
-<http://localhost/i3geo/admin/rssmapas.php>
 
 Licenca:
 
@@ -30,7 +29,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo:
 
-i3geo/admin/rssmapas.php
 */
 error_reporting(0);
 if(!isset($locaplic)){

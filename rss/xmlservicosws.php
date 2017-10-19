@@ -4,7 +4,6 @@ Title: xmlservicosws
 
 Monta um arquivo XML, no padr&atilde;o RSS, contendo a lista de links para Web Services convencionais.
 
-<http://localhost/i3geo/admin/xmlservicosws.php>
 
 <geraXmlWS>
 
@@ -30,9 +29,7 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Arquivo:
 
-i3geo/admin/xmlservicosws.php
 */
 
 error_reporting(0);

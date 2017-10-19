@@ -123,7 +123,7 @@ image_wms - tipo de imagem dispon&iacute;vel
 
 versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o de uma camada WMS diretamente pela URL)
 
-restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente
 
 filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
 
@@ -202,7 +202,7 @@ image_wms - tipo de imagem dispon&iacute;vel
 
 versao_wms - Vers&atilde;o do WMS (necess&aacute;rio quando da inclus&atilde;o de uma camada WMS diretamente pela URL)
 
-restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente
 
 filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
 

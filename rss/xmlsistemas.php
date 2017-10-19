@@ -4,7 +4,7 @@ Title: xmlsistemas
 
 Monta um arquivo XML, no padr&atilde;o RSS, contendo a lista de sistemas adicionais que s&atilde;o mostrados na &aacute;rvore de adi&ccedil;&atilde;o de novos temas ao mapa.
 
-<http://localhost/i3geo/admin/xmlsistemas.php>
+
 
 <geraXmlSistemas>
 
@@ -32,7 +32,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo:
 
-i3geo/admin/xmlsistemas.php
+
 */
 error_reporting(0);
 if(!isset($locaplic)){

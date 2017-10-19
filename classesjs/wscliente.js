@@ -87,9 +87,9 @@ loc_i3geo - endere&ccedil;o web onde est&aacute; instalado o i3geo.
 
 corpo - id do div principal onde as mensagens ser&atilde;o mostradas no navegador
 
-enderecows - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;&atilde;o feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o ws 
+enderecows - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;&atilde;o feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o ws
 
-enderecowms - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;&atilde;o feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o wms 
+enderecowms - id do elemento html do tipo input que receber&aacute; o valor da sele&ccedil;&atilde;o feita pelo usu&aacute;rio ao clicar em um endere&ccedil;o wms
 
 rssws - array com a lista de endere&ccedil;os dos servi&ccedil;os RSS com a lista de webservices convencionais
 
@@ -122,19 +122,19 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 	Guarda o valor do parametro rsswms
 	*/
 	this.rsswms = rsswms;
-	/* 
+	/*
 	Tipo de servi&ccedil;o wms ativo
 	*/
 	this.tipo = "";
-	/* 
+	/*
 	C&oacute;digo do tema wms escolhido
 	*/
 	this.tema = "";
-	/* 
+	/*
 	Nome do tema wms escolhido
 	*/
 	this.nometema = "";
-	/* 
+	/*
 	Fun&ccedil;&atilde;o do ws escolhida.
 	*/
 	this.funcao = "";
@@ -190,7 +190,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		}
 	};
 	/*
-	Ativa uma op&ccedil;&atilde;o escolhida pelo usu&aacute;rio, mostrando o seu respectivo texto no navegador. &Eacute; utilizado nas op&ccedil;&otilde;es que apresentam textos explicativos. 
+	Ativa uma op&ccedil;&atilde;o escolhida pelo usu&aacute;rio, mostrando o seu respectivo texto no navegador. &Eacute; utilizado nas op&ccedil;&otilde;es que apresentam textos explicativos.
 
 	O conte&uacute;do do div (id) &eacute; lido e inclu&iacute;do na div corpo
 
@@ -507,45 +507,7 @@ function i3geo_wscliente_configura(loc_i3geo,corpo,enderecows,enderecowms,rssws,
 		else
 		$i(this.corpo).innerHTML = "<p>Nenhum servi&ccedil;o foi escolhido.</p>";
 	};
-	/*
-	Lista os parametros de uma fun&ccedil;&atilde;o para o usu&aacute;rio digitar os valores.
 
-	Parametros:
-
-	funcao - fun&ccedil;&atilde;o que ser&aacute; chamada
-
-	*/
-	this.selParFuncao = function(funcao)
-	{
-		var WCmostraParFuncoes = function (retorno)
-		{
-			aguardeTotal("none");
-			if (retorno.data == ""){$i3geo_wscliente.chamadados(retorno.data);}
-			else
-			{
-				var pars = retorno.data.split("|");
-				var ins = "<p>Digite os valores dos par&acirc;metros e depois em clique em 'Aplicar'.<br>";
-				ins += '<p><input type="button" class=executar value="Aplicar&nbsp;&nbsp;" onclick=$i3geo_wscliente.chamadados(\"'+retorno.data+'\") />';
-				ins += '<br><div style="text-align:left;height:260px;overflow:auto;width:555px;" >';
-				for (var i=0;i<pars.length; i++)
-				{
-					var temp = pars[i].split("#");
-					ins+= "<br>"+temp[0]+"&nbsp("+temp[1]+")<input type=text style=width:140px; value='' id=xxx"+temp[0]+" /><br>";
-				}
-				$i($i3geo_wscliente.corpo).innerHTML = ins+"</div>";
-			}
-			$i("RSSws").style.display="none";
-			$i("RSSwms").style.display="none";
-			$i($i3geo_wscliente.corpo).style.display="block";
-		};
-		aguardeTotal("block");
-		this.funcao = funcao;
-		var p = this.loc_i3geo+"/classesphp/wscliente.php?funcao=parfuncoesws&servico="+$i(this.enderecows).value+"&funcaows="+funcao+"&g_sid=";
-		var cp = new cpaint();
-		//cp.set_debug(2)
-		cp.set_response_type("JSON");
-		cp.call(p,"parFuncoesws",WCmostraParFuncoes);
-	};
 	/*
 	Busca os dados de uma fun&ccedil;&atilde;o de um servi&ccedil;o
 

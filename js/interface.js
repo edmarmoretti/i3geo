@@ -1003,17 +1003,7 @@ i3GEO.Interface =
                 };
                 node = new YAHOO.widget.HTMLNode(d, root, true, true);
                 node.enableHighlight = false;
-                if (i3GEO.parametros.editor === "sim") {
-                    d =
-                        new YAHOO.widget.HTMLNode(
-                                {
-                                    html : "<a style='color:red' title='op&ccedil;&atilde;o vis&iacute;vel apenas para editores' href='../admin/html/webservices.html' target=blank >Editar cadastro</a>",
-                                    idmenu : "",
-                                    enableHighlight : false,
-                                    expanded : false
-                                },
-                                node);
-                }
+
             },
             /**
              * Adiciona a arvore um no com arquivos kml
@@ -2801,17 +2791,7 @@ i3GEO.Interface =
                              };
                              node = new YAHOO.widget.HTMLNode(d, root, true, true);
                              node.enableHighlight = false;
-                             if (i3GEO.parametros.editor === "sim") {
-                                 d =
-                                     new YAHOO.widget.HTMLNode(
-                                             {
-                                                 html : "<a style='color:red' title='op&ccedil;&atilde;o vis&iacute;vel apenas para editores' href='../admin/html/webservices.html' target=blank >Editar cadastro</a>",
-                                                 idmenu : "",
-                                                 enableHighlight : false,
-                                                 expanded : false
-                                             },
-                                             node);
-                             }
+
                          },
                          /**
                           * Ativa ou desativa uma camada do n&oacute; de layers KML

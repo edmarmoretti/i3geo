@@ -5,7 +5,7 @@ Title: metarproxima
 Acessa o Web Service do Geonames que busca esta&ccedil;&otilde;es meteorol&oacute;gicas da rede METAR mais pr&oacute;ximas de um ponto.
 
 Esse programa &eacute; utilizado na ferramenta de identifica&ccedil;&atilde;o e seu uso deve ser habilitado por meio do sistema
-de administra&ccedil;&atilde;o do i3Geo. Para isso, utilize http://localhost/i3geo/admin/html/identifica.html e insira
+de administra&ccedil;&atilde;o do i3Geo. Para isso, utilize o sistema de administracao e insira
 "../ferramentas/metar/metarproxima.php" em uma nova linha na coluna "programa".
 
 Licenca:

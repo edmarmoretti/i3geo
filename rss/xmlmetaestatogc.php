@@ -4,9 +4,7 @@ Title: rssmetaestatogc
 
 Monta um arquivo XML no padr&atilde;o RSS contendo a lista servicos OGC baseados no sistema de metadados estatisticos.
 
-<http://localhost/i3geo/admin/rssmetaestatogc.php>
 
-<geraRSStemasOgc>
 
 Licenca:
 
@@ -30,9 +28,7 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Arquivo:
 
-i3geo/admin/rssmetaestatogc.php
 */
 error_reporting(0);
 if(!isset($locaplic)){

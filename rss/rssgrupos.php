@@ -4,8 +4,6 @@ Title: rssgrupos
 
 Monta um arquivo XML no padr&atilde;o RSS contendo a lista de grupos cadastrados.
 
-<http://localhost/i3geo/admin/rssgrupos.php>
-
 Licenca:
 
 GPL2
@@ -28,9 +26,7 @@ GNU junto com este programa; se n&atilde;o, escreva para a
 Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 
-Arquivo:
 
-i3geo/admin/rssgrupos.php
 */
 error_reporting(0);
 if(!isset($locaplic)){

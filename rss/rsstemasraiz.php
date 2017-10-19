@@ -4,7 +4,6 @@
  *
  * Monta um arquivo XML no padr&atilde;o RSS contendo a lista de temas inseridos na raiz de um determinado n&iacute;vel.
  *
- * <http://localhost/i3geo/admin/rsstemasrais.php?id=1&nivel=1>
  *
  * <geraRSStemasRaiz>
  *
@@ -38,7 +37,7 @@
  *
  * Arquivo:
  *
- * i3geo/admin/rsstemasraiz.php
+ *
  */
 error_reporting(0);
 if (! isset($locaplic)) {

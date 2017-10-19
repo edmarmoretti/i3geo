@@ -161,13 +161,7 @@ i3GEO.guias =
 						function(retorno) {
 						var ins, mapa, ig1lt, ig1, nome, lkd, link, temp, combo, urlinterface;
 						ins = "<br><div id='banners' style='overflow:auto;text-align:center'>";
-						if (i3GEO.configura.verificaCookieLogin === true) {
-							ins +=
-								"<a class='linkMapasEditor' href='" + i3GEO.configura.locaplic
-								+ "/admin/html/mapas.html' target=_blank >"
-								+ $trad("x89")
-								+ "</a><br>";
-						}
+
 						ins += "<br>";
 						mapa = retorno.data.mapas;
 						ig1lt = mapa.length;

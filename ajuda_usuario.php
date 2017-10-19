@@ -52,7 +52,6 @@ $dicionario = json_decode($dicionario,true);
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <script type="text/javascript" src="classesjs/i3geo.js"></script>
-<link rel="stylesheet" type="text/css" href="admin/html/admin.css">
 <style>
 .ajuda_usuario {
 	margin-left: 10px;

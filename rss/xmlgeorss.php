@@ -4,7 +4,7 @@ Title: xmlgeorss
 
 Monta um arquivo XML no padr&atilde;o RSS contendo a lista de links no padr&atilde;o GEORSS cadastrados no sistema.
 
-<http://localhost/i3geo/admin/xmlgeorss.php>
+
 
 <geraXmlGeorss>
 
@@ -32,7 +32,7 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
 Arquivo:
 
-i3geo/admin/xmlgeorss.php
+
 */
 error_reporting(0);
 if(!isset($locaplic)){

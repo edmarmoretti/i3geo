@@ -2996,31 +2996,6 @@ i3GEO.util =
 			i3GEO.util.dialogoFerramenta("i3GEO.util.navegadorDir()", "navegarquivos", "navegarquivos", "index.js", temp);
 		},
 		/**
-		 * Function: navegadorPostgis
-		 *
-		 * Abre o navegador de de tabelas existentes no banco de dados Postgis
-		 *
-		 * Parametro:
-		 *
-		 * {objeto} - objeto input que recebera de volta o valor do arquivo escolhido
-		 *
-		 * {numerico} - codigo da conexao com o banco de dados cadastrado no sistema de metadados estatisticos
-		 *
-		 * {string} - opcional. Tipo de retorno esquema|tabela|sql
-		 */
-		navegadorPostgis : function(obj, conexao, tipo) {
-			if (!obj) {
-				conexao = "";
-			}
-			if (!tipo) {
-				tipo = "sql";
-			}
-			var temp = function() {
-				i3GEOF.navegapostgis.iniciaDicionario(obj, conexao, tipo);
-			};
-			i3GEO.util.dialogoFerramenta("i3GEO.util.navegadorPostgis()", "navegapostgis", "navegapostgis", "index.js", temp);
-		},
-		/**
 		 * Function base64encode
 		 *
 		 * Atalho para a funcao que codifica uma string em base64

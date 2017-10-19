@@ -497,7 +497,7 @@ function ajuda(){
 	<pre><b>
 	Mashup OpenLayers
 	Par&acirc;metros:
-	restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/html/mapas.html)
+	restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente
 	opacidade - opacidade (de 0 a 1) aplicada aos temas do tipo poligonal ou raster (default 1)
 	kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
 	servidor - por default &eacute; ../ogc.php o que for&ccedil;a o uso do i3geo local. Esse &eacute; o programa que ser&aacute; utilizado em conjunto com a lista definida no par&acirc;metro 'temas'
