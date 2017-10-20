@@ -754,6 +754,15 @@
 									placement : "left"
 								});
 								$('.iconeGuiaMovel').tooltip('show');
+								setTimeout(function(){$('.iconeGuiaMovel').tooltip('hide');},5000);
+
+								$('.ol-i3GEOcontrols button').tooltip({
+									animation : false,
+									trigger : "hover",
+									placement : "auto"
+								});
+
+
 								$("#i3GEOguiaMovelConteudo").mCustomScrollbar({
 									scrollbarPosition : "outside",
 									theme : "inset-2-dark"

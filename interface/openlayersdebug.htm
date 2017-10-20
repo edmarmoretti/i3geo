@@ -776,6 +776,14 @@
 									placement : "left"
 								});
 								$('.iconeGuiaMovel').tooltip('show');
+								setTimeout(function(){$('.iconeGuiaMovel').tooltip('hide');},5000);
+
+								$('.ol-i3GEOcontrols button').tooltip({
+									animation : false,
+									trigger : "hover",
+									placement : "auto"
+								});
+
 								$(".guiaOverflow").css("height",
 										i3GEO.parametros.h - 60);
 								$(".guiaOverflow").mCustomScrollbar({
@@ -785,6 +793,7 @@
 								i3GEO.eventos.adicionaEventos("RESIZE", $(
 										".guiaOverflow").css("height",
 										i3GEO.parametros.h - 60))
+
 								//setTimeout(function() {
 								//	$('.iconeGuiaMovel').tooltip('destroy');
 								//}, 30000);

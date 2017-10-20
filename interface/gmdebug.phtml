@@ -762,6 +762,15 @@ include ("../ms_configura.php");
 			afterStart : function(){
 				$('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});
 				$('.iconeGuiaMovel').tooltip('show');
+								setTimeout(function(){$('.iconeGuiaMovel').tooltip('hide');},5000);
+
+								$('.ol-i3GEOcontrols button').tooltip({
+									animation : false,
+									trigger : "hover",
+									placement : "auto"
+								});
+
+
 				$("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
 				//setTimeout(function() {
 				//	$('.iconeGuiaMovel').tooltip('destroy');
