@@ -667,7 +667,7 @@ $postgis_mapa = array(
 		"teste"=>"user=postgres password=postgres dbname=teste host=localhost port=5432",
 		"postgres"=>"user=postgres password=postgres dbname=postgres host=localhost port=5432",
 		"metaestat"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'",
-		"i3geosaudeUtf"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
+		"i3geosaude"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
 );
 /*
 Variable: utilizacgi
@@ -711,9 +711,9 @@ O banco de dados, originalmente, e montado em SQLITE, porem, em ambientes corpor
 
 Se voce quiser utilizar a conexao default, baseado no SQLITE, mantenha essa variavel vazia.
 
-O programa PHP que estabelece a conexao deve retornar objetos com nomes padronizados. Veja o arquivo classesphp/conexao.php, admin1/php/conexao.php e i3geo/admin1/php/conexaopostgresql.php para maiores detalhes.
+O programa PHP que estabelece a conexao deve retornar objetos com nomes padronizados. Veja o arquivo classesphp/conexao.php, admin/php/conexao.php e i3geo/admin/php/conexaopostgresql.php para maiores detalhes.
 
-Para criar o banco de dados de administracao utilize http://nome_do_host/i3geo/admin1/ferramentas/criabanco/index.php
+Para criar o banco de dados de administracao utilize http://nome_do_host/i3geo/admin/ferramentas/criabanco/index.php
 
 Exemplos:
 

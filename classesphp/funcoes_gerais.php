@@ -2963,7 +2963,7 @@ function verificaEditores($editores)
  */
 function verificaPapelUsuario($id_papel)
 {
-    include_once (dirname(__FILE__) . "/../admin1/php/login.php");
+    include_once (dirname(__FILE__) . "/../admin/php/login.php");
     $r = verificaPapelSessao($id_papel);
     return $r;
 }

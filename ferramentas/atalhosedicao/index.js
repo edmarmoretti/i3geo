@@ -47,7 +47,7 @@ i3GEOF.atalhosedicao =
 			YAHOO.namespace("admin");
 			YAHOO.namespace("admin.container");
 			core_montaEditor("","450px","500px","","Plugin",true,false,false);
-			var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
+			var sUrl = i3GEO.configura.locaplic + "/admin/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 			var montaEditorPlugin = function(retorno){
 				i3GEO.pluginI3geo.parametrossql.formAdmin(
 						retorno,
@@ -65,7 +65,7 @@ i3GEOF.atalhosedicao =
 			YAHOO.namespace("admin");
 			YAHOO.namespace("admin.container");
 			core_montaEditor("","450px","500px","","Plugin",true,false,false);
-			var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
+			var sUrl = i3GEO.configura.locaplic + "/admin/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 			var montaEditorPlugin = function(retorno){
 				i3GEO.pluginI3geo.layerkml.formAdmin(
 						retorno,
@@ -82,7 +82,7 @@ i3GEOF.atalhosedicao =
 			YAHOO.namespace("admin");
 			YAHOO.namespace("admin.container");
 			core_montaEditor("","450px","500px","","Plugin",false,false,false);
-			var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
+			var sUrl = i3GEO.configura.locaplic + "/admin/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 			var montaEditorPlugin = function(retorno){
 				i3GEO.pluginI3geo.markercluster.formAdmin(
 						retorno,
@@ -99,7 +99,7 @@ i3GEOF.atalhosedicao =
 			YAHOO.namespace("admin");
 			YAHOO.namespace("admin.container");
 			core_montaEditor("","450px","500px","","Plugin",true,false,false);
-			var sUrl = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
+			var sUrl = i3GEO.configura.locaplic + "/admin/catalogo/mapfile/exec.php?funcao=pegaPlugin&codigoMap="+i3GEO.temaAtivo+"&codigoLayer="+i3GEO.temaAtivo+"&g_sid="+i3GEO.configura.sid;
 			var montaEditorPlugin = function(retorno){
 				i3GEO.pluginI3geo.heatmap.formAdmin(
 						retorno,
@@ -235,7 +235,7 @@ i3GEOF.atalhosedicao =
 			var campos = onde.getElementsByTagName("input"),
 			n = campos.length,
 			par = [],
-			prog = i3GEO.configura.locaplic + "/admin1/catalogo/mapfile/exec.php?funcao=gravaPlugin&g_sid="+i3GEO.configura.sid,
+			prog = i3GEO.configura.locaplic + "/admin/catalogo/mapfile/exec.php?funcao=gravaPlugin&g_sid="+i3GEO.configura.sid,
 			i;
 			if(plugin != ""){
 				if(!i3GEO.pluginI3geo[plugin].parametrosFormAdmin){

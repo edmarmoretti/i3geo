@@ -45,7 +45,7 @@ i3geo/js/compactajs.php
 include ("../ms_configura.php");
 include ($locaplic . "/classesphp/carrega_ext.php");
 include ($locaplic . "/classesphp/funcoes_gerais.php");
-include ("../admin1/php/funcoesAdmin.php");
+include ("../admin/php/funcoesAdmin.php");
 //verifica se o login pode ser realizado
 if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false){
 	header ( "HTTP/1.1 403 Login desativado" );

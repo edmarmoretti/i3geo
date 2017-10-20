@@ -352,7 +352,7 @@ function getcapabilities3() {
  */
 function temaswms() {
 	global $servico, $id_ws;
-	// para admin1/cadastros/servicos/exec.php
+	// para admin/cadastros/servicos/exec.php
 	$_GET ["funcao"] = "lista";
 	$wms_service_request = gravaCacheWMS ( $servico );
 	// -------------------------------------------------------------

@@ -44,7 +44,7 @@ function dadosmapa($loc=""){
 		exit;
 	}
 	if($dadosmapa["publicado"] == "NAO"){
-		include($loc."/admin1/php/login.php");
+		include($loc."/admin/php/login.php");
 		if(verificaOperacaoSessao("admin/metaestat/geral") == false){
 			echo "O mapa nao esta marcado como publicado e vc nao fez login ou nao tem permissao";
 			exit;

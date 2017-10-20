@@ -1,5 +1,5 @@
 <?php
-include_once(dirname(__FILE__)."/../../admin1/php/login.php");
+include_once(dirname(__FILE__)."/../../admin/php/login.php");
 
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);

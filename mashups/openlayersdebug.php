@@ -355,7 +355,7 @@ function ajuda()
 	<pre><b>
 	Mashup OpenLayers
 	Par&acirc;metros:
-	.restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin1/catalogo/mapas/index.php)
+	.restauramapa - id do mapa armazenado no sistema de administracao e que ser&aacute; restaurado para ser aberto novamente (veja em i3geo/admin/catalogo/mapas/index.php)
 	.opacidade - opacidade (de 0 a 1) aplicada aos temas do tipo poligonal ou raster (default 1)
 	.kml - lista de endere&ccedil;os (url) de um arquivos kml que ser&atilde;o adicionados ao mapa. Separado por ','
 	.temas - lista com os temas (mapfiles) do i3Geo que ser&atilde;o inclu&iacute;dos no mapa. Pode ser inclu&iacute;do um arquivo mapfile que esteja fora da pasta i3geo/temas. Nesse caso, deve-se definir o caminho completo do arquivo e tamb&eacute;m o par&acirc;metro &layers

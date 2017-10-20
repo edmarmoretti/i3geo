@@ -172,7 +172,7 @@ i3GEOF.salvamapfile = {
 		//esses parametros podem ter sido alterados por outra ferramenta
 		//
 		tema = i3GEO.arvoreDeCamadas.pegaTema(nome);
-		p = i3GEO.configura.locaplic+"/admin1/catalogo/mapfile/editor/exec.php?funcao=REFAZERLAYER"
+		p = i3GEO.configura.locaplic+"/admin/catalogo/mapfile/editor/exec.php?funcao=REFAZERLAYER"
 			+ "&codigomap="+nome
 			+ "&maporigem=" + mapfile
 			+ "&nomelayer="+nomelayer

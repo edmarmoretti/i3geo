@@ -180,7 +180,7 @@ i3GEOF.salvaMapaBanco = {
 				}
 			}
 			var url = (window.location.href.split("?")[0]),
-			p = i3GEO.configura.locaplic + "/admin1/php/salvamapabanco.php?";
+			p = i3GEO.configura.locaplic + "/admin/php/salvamapabanco.php?";
 			var par =
 				"funcao=salvaMapfile"
 				+ "&id_mapa="
@@ -226,7 +226,7 @@ i3GEOF.salvaMapaBanco = {
 				var id_mapa = i3GEOF.salvaMapaBanco.ID_MAPA;
 			}
 
-			p = i3GEO.configura.locaplic + "/admin1/php/salvamapabanco.php?";
+			p = i3GEO.configura.locaplic + "/admin/php/salvamapabanco.php?";
 			var par =
 				"funcao=removeMapfile"
 				+ "&id_mapa="
