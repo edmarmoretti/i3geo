@@ -56,7 +56,7 @@ i3GEOadmin.subgrupos.dicionario = {
 	} ],
     'descListaDeSubGrupos' : [ {
 		pt : "Os nomes de subgrupos s&atilde;o utilizados para nomear os n&oacute;s da &aacute;rvore do cat&aacute;logo. Cada nome recebe um identificador, de forma que ao ser modificado a &aacute;rvore refletir&aacute; as edi&ccedil;&otilde;es.",
-		en : "Subgroup names are used to name catalog tree nodes. Each name received an identifier, so that the modified tree will show the editings.",
+		en : "Subgroup names are used to name catalog tree nodes. Each name receives an identifier, so that the modified tree will show the editings.",
 		es : "Los nombres de los subgrupos se utilizan para darle nombre a los nodos del &aacute;rbol del cat&aacute;logo. Cada nombre recibe un identificador, de forma que al ser modificado el &aacute;rbol se reflejar&aacute;n las ediciones."
 	} ]
 };
