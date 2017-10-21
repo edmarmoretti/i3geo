@@ -14,8 +14,8 @@ i3GEOadmin.sistemas.dicionario = {
 	} ],
 	'txtTitulo' : [ {
 		pt : "Sistemas especiais que adicionam camadas",
-		en : "Special systems that add layers",
-		es : "Sistemas especiales que agregan capas"
+		en : "Special systems for adding layers",
+		es : "Sistemas especiales para agregar capas"
 	} ],
     'txtDesc' : [ {
 		pt : "Sistemas especiais s&atilde;o utilizados para incluir camadas no i3geo tendo como base programas que interagem com o usu&aacute;rio de alguma forma espec&iacute;fica. Cada sistema pode ter um objetivo espec&iacute;fico e uma interface pr&oacute;pria. Normalmente s&atilde;o utilizados para realizar consultas a bancos de dados ou Web Services e gerar a camada para acrescentar ao mapa. Esses sistemas podem por exemplo, consultar bancos de dados estat&iacute;sticos para gerar cartogramas.",
