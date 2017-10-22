@@ -15,6 +15,9 @@ if($tipo == "OSM"){
 if($tipo == "GM"){
 	echo 'i3GEO.Interface.ATUAL = "googlemaps";';
 }
+//para comodidade de nao ter de calcular isso
+$u = basename(dirname(dirname(__FILE__)));
+echo 'i3GeoUrl = i3GEO.util.protocolo() + "://" + window.location.host + "/'.$u.'";';
 ?>
 i3GEO.janela.ativaAlerta();
 

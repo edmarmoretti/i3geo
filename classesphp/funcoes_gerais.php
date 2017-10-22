@@ -3123,8 +3123,9 @@ function validaAcessoTemas($map_file, $salva = true)
 function listaTemasRestritos()
 {
     global $esquemaadmin;
-    include_once (dirname(__FILE__) . "/../classesphp/conexao.php");
-    // error_reporting(0);
+    //nao usar include_once aqui
+    include (dirname(__FILE__) . "/../classesphp/conexao.php");
+   // error_reporting(E_ALL);
     $res = pegaDadosAdmin("select id_grupo,codigo_tema from " . $esquemaadmin . "i3geousr_grupotema as gt," . $esquemaadmin . "i3geoadmin_temas as te where gt.id_tema = te.id_tema",$dbh);
     $restritos = array();
     foreach ($res as $r) {

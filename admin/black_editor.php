@@ -673,7 +673,8 @@ if ($_SESSION ["usuario"] != $_COOKIE ["i3geousuariologin"]) {
 			toolTipSize : ["100px","200px"],
 			//Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
 			//Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
-			i3GeoServer : "",
+			//Para facilitar as coisas, i3GeoUrl e definida em interface/config.php
+			i3GeoServer : i3GeoUrl,
 			//Funcao que sera executada apos a inicializacao do mapa
 			afterStart : function(){
 				$('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});

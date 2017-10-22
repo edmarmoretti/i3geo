@@ -752,7 +752,8 @@ include ("../ms_configura.php");
 			posRenderType : "",
 			//Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
 			//Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
-			i3GeoServer : "",
+			//Para facilitar as coisas, i3GeoUrl e definida em interface/config.php
+			i3GeoServer : i3GeoUrl,
 			//opacidade default para camadas que nao sejam do tipo linha ou ponto
 			//a opacidade sera aplicada ao objeto HTML e nao ao LAYER original
 			//se for vazio, sera utilizado o valor definido no LAYER original
