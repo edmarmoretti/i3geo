@@ -409,7 +409,7 @@ g_traducao_init =
 		],
 		"34a" : [
 			{
-				pt : "Aqui s&atilde;o mostrados os mapas que foram salvos e que podem ser abertos como links individuais. Usu&aacute;rios casdatrados podem salvar mapas.",
+				pt : "Aqui s&atilde;o mostrados os mapas que foram salvos e que podem ser abertos como links individuais. Usu&aacute;rios cadastrados podem salvar mapas.",
 				en : "Here, saved maps are shown and there are links to open them individually. Only registered users can save maps.",
 				es : "Aqu&iacute; se muestran los mapas que han sido guardados y que pueden ser abiertos como enlaces individuales. Usuarios registrados pueden guardar mapas."
 			}

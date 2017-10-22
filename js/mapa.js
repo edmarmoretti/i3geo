@@ -1091,7 +1091,6 @@ i3GEO.mapa =
 				if (temas) {
 					ntemas = temas.length;
 				}
-
 				for (j = 0; j < ntemas; j += 1) {
 					titulo = temas[j].nome;
 					titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b></div>";
@@ -1138,11 +1137,7 @@ i3GEO.mapa =
 										mostra = true;
 									} catch (e) {}
 								}
-								if (classeCor === "toolTipBalaoTexto") {
-									classeCor = "toolTipBalaoTexto1";
-								} else {
-									classeCor = "toolTipBalaoTexto";
-								}
+
 								textoTempCompleto += "</div>";
 								textoTempSimples += "</div>";
 								//insere o wkt se existir
