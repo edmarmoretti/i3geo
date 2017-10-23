@@ -1018,7 +1018,7 @@ i3GEO.mapa =
 				ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
 				etiquetas = false;
 				for (j = 0; j < ntemas; j += 1) {
-					if (i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas !== "") {
+					if (i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas !== "" || i3GEO.arvoreDeCamadas.CAMADAS[j].identifica == "SIM") {
 						etiquetas = true;
 					}
 				}

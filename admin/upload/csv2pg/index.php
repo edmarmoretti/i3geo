@@ -39,23 +39,20 @@ $comboAliasConexao .= "</select>";
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="well hidden" id="titulo">
-				<button data-toggle="modal" data-target="#ajudaPrincipal" class="btn btn-primary btn-fab btn-fab-mini pull-right">
-					<i class="material-icons">help</i>
-				</button>
 				<h2>
 					<small>{{{txtTituloCsv2Pg}}}</small>
 				</h2>
-				<blockquote>{{{txtDescCsv2Pg}}}</blockquote>
-				<!--Modal ajuda-->
-				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body">
-								<p>{{{txtAjudaCsv2Pg}}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<blockquote>{{{txtDescCsv2Pg}}}<br>
+                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                        <span class="text-primary readMore">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </span>
+                        <span class="text-primary readLess">
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </span>
+                    </a>
+                    <div id="expandeTxt" class="collapse">{{{txtAjudaCsv2Pg}}}</div>
+                </blockquote>
 			</div>
 
 			<form style="" target="i3GEOuploadiframe" action="exec.php" method="post" ENCTYPE="multipart/form-data" onsubmit="javascript:$('#modalUpload').modal('show');" class="form-horizontal" role="form"
