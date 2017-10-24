@@ -21,7 +21,7 @@ i3GEO.editor =
 				'edita' : true,
 				'listag' : true,
 				'selecao' : true,
-				'selecaotudo' : true,
+				'selecaotudo' : true,//inclui tambem o botao de unseltodos
 				'apaga' : true,
 				'procura' : false,
 				'propriedades' : true,

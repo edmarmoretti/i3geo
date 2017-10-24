@@ -2597,6 +2597,13 @@ g_traducao =
 				es : "seleccionar todo"
 			}
 		],
+		"ustudo" : [
+			{
+				pt : "limpar selecao",
+				en : "",
+				es : ""
+			}
+		],
 		"excsel" : [
 			{
 				pt : "Remove os elementos selecionados",

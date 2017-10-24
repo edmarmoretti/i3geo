@@ -2175,6 +2175,12 @@ background-position:-900px -28px;
 .olControlEditingToolbar1 .editorOLimprimirItemInactive {
 background-position:-900px -0px;
 }
+.olControlEditingToolbar1 .editorOLunselecaoTudoItemActive {
+background-position:-929px -28px;
+}
+.olControlEditingToolbar1 .editorOLunselecaoTudoItemInactive {
+background-position:-929px -0px;
+}
 .olControlEditingToolbar1 {
 width:790px;
 float:right;
