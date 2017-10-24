@@ -21,7 +21,7 @@ i3GEOadmin.gruposusuarios.dicionario = {
 	} ],
     'usuariosv' : [ {
 		pt : "Usu&aacute;rios vinculados",
-		en : "Linked users",
+		en : "Associated users",
 		es : "Usuarios vinculados"
 	} ],
     'grupo' : [ {
