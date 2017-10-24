@@ -117,9 +117,8 @@ class Legenda
 
 	function __construct($map_file="",$locaplic="",$tema="",$template="")
 	{
-		include(dirname(__FILE__)."/../ms_configura.php");
+	    include(dirname(__FILE__)."/../ms_configura.php");
   		$this->postgis_mapa = $postgis_mapa;
-
 		include_once(dirname(__FILE__)."/funcoes_gerais.php");
 		$this->v = versao();
 		$this->v = $this->v["principal"];
@@ -130,22 +129,22 @@ class Legenda
 		}
 		$this->mapa = ms_newMapObj($map_file);
 		substituiConObj($this->mapa,$postgis_mapa);
-
 		$this->arquivo = str_replace(".map","",$map_file).".map";
+
 		if($tema != "" && @$this->mapa->getlayerbyname($tema))
 		{
-			$this->layer = $this->mapa->getlayerbyname($tema);
+		    $this->layer = $this->mapa->getlayerbyname($tema);
 			$this->nome = $tema;
 			$vermultilayer = new vermultilayer();
 			$vermultilayer->verifica($map_file,$tema);
 			if ($vermultilayer->resultado == 1) // o tema e multi layer
 			{
-				$ls = $vermultilayer->temas;
+			    $ls = $vermultilayer->temas;
 				$this->visiveis = $vermultilayer->temasvisiveis;
 			}
 			else
 			{
-				$ls[] = $tema;
+			    $ls[] = $tema;
 				$this->visiveis = array($tema);
 			}
 			$this->grupo = $ls;
@@ -424,9 +423,9 @@ class Legenda
 	array
 	*/
 	function tabelaLegenda($totaliza="nao"){
-		$linhas = array();
+	    $linhas = array();
 		foreach ($this->visiveis as $l){
-			$layer = $this->mapa->getlayerbyname($l);
+		    $layer = $this->mapa->getlayerbyname($l);
 			//verifica se &eacute; wms ou wfs
 			$c = $layer->connectiontype;
 

@@ -104,9 +104,12 @@ Cria elementos para construir uma legenda no formato de tabela em HTML.
 */
 	case "EDITALEGENDA":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_legenda.php");
+
 		$m = new Legenda($map_file,$locaplic,$tema);
 		$r = $m->tabelaLegenda();
-		if (!$r){$r = "erro.Erro legenda nao disponivel";}
+		if (!$r){
+		    $r = "erro.Erro legenda nao disponivel";
+		}
 		$retorno = $r;
 	break;
 /*

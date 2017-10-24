@@ -154,5 +154,10 @@ i3GEOF.proplabel.dicionario = {
 		pt : "Propriedades do texto",
 		en : "",
 		es : ""
+	} ],
+	'observacao' : [ {
+		pt : "Mantenha essa janela aberta ao aplicar para que as propriedades sejam consideradas",
+		en : "",
+		es : ""
 	} ]
 };

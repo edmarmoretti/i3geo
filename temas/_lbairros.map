@@ -2,26 +2,27 @@ MAP
   FONTSET "/var/www/i3geo/symbols/fontes.txt"
   SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
   LAYER
-    CONNECTION "i3geosaude"
+    CONNECTION "user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
     CONNECTIONTYPE POSTGIS
     DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros ) as foo using unique co_bairro using srid=4326"
     METADATA
-      "TIP"	"no_bairro,id"
       "cache"	"sim"
+      "TIP"	"no_bairro,id"
       "CLASSE"	"SIM"
       "permitekmz"	"SIM"
       "ITENSDESC"	"id,Código bairro,Nome,Distrito,Município"
       "EDITAVEL"	"NAO"
+      "extensao"	"-70.041740706664 -33.694583050265 -34.792884974458 2.8730391155742"
       "wkttip"	"SIM"
       "permitedownload"	"SIM"
       "permitecomentario"	"NAO"
       "escondido"	"NAO"
       "download"	"SIM"
-      "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
       "CONEXAOORIGINAL"	"i3geosaude"
-      "transitioneffect"	"NAO"
-      "permiteogc"	"SIM"
+      "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
       "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "transitioneffect"	"NAO"
       "TEMA"	"_Bairros POSTGIS"
       "identifica"	"nao"
     END # METADATA
@@ -41,4 +42,6 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
+
 END # MAP
+
