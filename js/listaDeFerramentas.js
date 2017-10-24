@@ -621,7 +621,7 @@ i3GEO.listaDeFerramentas = {
 						id : "omenudataBarraEdicao",
 						text : $trad("u29"),
 						url : "javascript:i3GEO.editor.inicia()",
-						Interface : "googlemaps" //so para a interface openlayers
+						Interface : "openlayers" //so para a interface openlayers
 					}
 				]
 			}

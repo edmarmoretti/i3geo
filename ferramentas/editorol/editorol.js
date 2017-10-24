@@ -67,7 +67,7 @@ i3GEO.editorOL = {
 			fillColor : "250,180,15",
 			strokeWidth : 5,
 			strokeColor : "250,150,0",
-			pointRadius : 4,
+			pointRadius : 6,
 			graphicName : "square",
 			fontSize : "12px",
 			fontColor : "0,0,0",
@@ -2182,14 +2182,18 @@ i3GEO.editorOL = {
 			var f, s;
 			s = i3GEO.desenho.layergrafico.getSource();
 			f = s.getFeatureById(id);
-			if(f){
-				if(f.getStyle() && f.getStyle().getSrc){
+			if(f && f.getStyle()){
+				if(f.getStyle().getSrc){
 					f.getStyle().setSrc(f.getProperties().externalGraphic);
 					f.getStyle().setSize([f.getProperties().graphicWidth,f.getProperties().graphicHeight]);
 				}
 				else{
-					f.getStyle().getFill().setColor(f.getProperties().fillColor);
-					f.getStyle().getStroke().setColor(f.getProperties().strokeColor);
+					if(f.getStyle().getFill()){
+						f.getStyle().getFill().setColor(f.getProperties().fillColor);
+					}
+					if(f.getStyle().getStroke()){
+						f.getStyle().getStroke().setColor(f.getProperties().strokeColor);
+					}
 				}
 			}
 			i3GEO.editorOL.idsSelecionados.remove(id);

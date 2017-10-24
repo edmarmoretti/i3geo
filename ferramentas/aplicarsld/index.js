@@ -69,10 +69,14 @@ i3GEOF.aplicarsld = {
 	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
 	*/
 	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML = i3GEOF.aplicarsld.html();
+		if(i3GEOF.aplicarsld.MUSTACHE == ""){
+			$.get(i3GEO.configura.locaplic + "/ferramentas/aplicarsld/template_mst.html", function(template) {
+				i3GEOF.aplicarsld.MUSTACHE = template;
+				i3GEOF.aplicarsld.inicia(iddiv);
+			});
+			return;
 		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+		$i(iddiv).innerHTML = i3GEOF.aplicarsld.html();
 	},
 	/*
 	Function: html
@@ -85,6 +89,7 @@ i3GEOF.aplicarsld = {
 	*/
 	html:function() {
 		var ins = Mustache.render(i3GEOF.aplicarsld.MUSTACHE, i3GEOF.aplicarsld.mustacheHash());
+		console.info(ins)
 		return ins;
 	},
 	/*
