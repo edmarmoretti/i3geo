@@ -610,6 +610,7 @@ i3GEO.Interface =
                 painel.appendChild(cabecalho);
 
                 conteudo = document.createElement("div");
+                conteudo.className = "tooltip-conteudo";
                 conteudo.innerHTML = texto;
                 painel.appendChild(conteudo);
 

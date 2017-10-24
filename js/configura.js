@@ -149,7 +149,7 @@ i3GEO.configura =
 				csw : "http://www.metadados.inde.gov.br/geonetwork/srv/br"
 			},
 			identifica : {
-				resolution : 8
+				resolution : 8 //utilizado em verificaTipDefault (i3GEO.mapa)
 			}
 		},
 		/**

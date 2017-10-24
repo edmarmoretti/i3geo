@@ -81,9 +81,16 @@ tooltip dos botoes da guia movel
 	width: 120px;
 	min-height: 30px;
 }
+/*
+tooltip balao info
+*/
 .toolTipBalaoTexto label{
 	color: black;
 	font-size: 12px;
+}
+.tooltip-conteudo {
+	overflow: auto;
+	max-height: 300px
 }
 
 /*
