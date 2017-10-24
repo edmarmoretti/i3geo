@@ -27,10 +27,6 @@ $nome_menu = $_SESSION["nome_menu"];
 	<div class="row center-block">
 		<div class="col-md-12">
 			<div class="well hidden">
-				<button data-toggle="modal" data-target="#ajudaPrincipal"
-					class="btn btn-primary btn-fab btn-fab-mini pull-right">
-					<i class="material-icons">help</i>
-				</button>
 				<span class="pull-right">&nbsp;&nbsp;</span>
 				<button data-toggle="modal" data-target="#modalFiltro"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
@@ -44,16 +40,17 @@ $nome_menu = $_SESSION["nome_menu"];
 				  <small>Grupo</small>
 				  <h4 class="text-info"><?php echo $nome_grupo; ?></h4>
 				</div>
-				<blockquote>{{{txtDesc}}}</blockquote>
-				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body">
-								<p>{{{txtAjuda}}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
+				<blockquote>{{{txtDesc}}}<br>
+                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                        <span class="text-primary readMore">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </span>
+                        <span class="text-primary readLess">
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </span>
+                    </a>
+                    <div id="expandeTxt" class="collapse">{{{txtAjuda}}}</div>
+                </blockquote>
 			</div>
 		</div>
 	</div>

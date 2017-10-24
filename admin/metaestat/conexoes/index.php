@@ -18,22 +18,19 @@ include "../../head.php";
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
-				<button data-toggle="modal" data-target="#ajudaPrincipal"
-					class="btn btn-primary btn-fab btn-fab-mini pull-right">
-					<i class="material-icons">help</i>
-				</button>
 				<h2><small>{{{txtTitulo}}}</small></h2>
-				<blockquote>{{{txtDesc}}}</blockquote>
+				<blockquote>{{{txtDesc}}}<br>
+                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                        <span class="text-primary readMore">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </span>
+                        <span class="text-primary readLess">
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </span>
+                    </a>
+                    <div id="expandeTxt" class="collapse">{{{txtAjuda}}}</div>
+                </blockquote>
 				<div class="clearfix"></div>
-				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body">
-								<p>{{{txtAjuda}}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="well hidden">
 				<div class="panel-heading">

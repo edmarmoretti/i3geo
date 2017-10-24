@@ -108,7 +108,7 @@ i3GEOadmin.uploadshp.dicionario = {
 		es : "Comentario que se insertar&aacute; en las propiedades de la tabla en caso de que sea una tabla nueva"
 	} ],
 	'colunaGid' : [ {
-		pt : "Nome de uma nova coluna, ou de uma existente no shapefile, que ser&aacute; considerada como identificadores &uacute;nicos de cada registro. Caso a coluna n&atilde;o exista, ser&aacute; criada.",
+		pt : "Nome de uma nova coluna, ou de uma existente no arquivo de upload, que ser&aacute; considerada como identificadores &uacute;nicos de cada registro. Caso a coluna n&atilde;o exista, ser&aacute; criada.",
 		en : "Name of a new column or an existing one in the shapefile, which will be considered as unique identifiers for each record.",
 		es : "Nombre de una columna nueva o de una existente en el shapefile que se considerar&aacute; como identificadores &uacute;nicos de cada registro."
 	} ],

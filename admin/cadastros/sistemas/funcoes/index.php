@@ -21,10 +21,6 @@ $nome_sistema = filter_var($_GET["nome_sistema"], FILTER_SANITIZE_STRING);
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
-				<button data-toggle="modal" data-target="#ajudaPrincipal"
-					class="btn btn-primary btn-fab btn-fab-mini pull-right">
-					<i class="material-icons">help</i>
-				</button>
 				<span class="pull-right">&nbsp;&nbsp;</span>
 				<button data-toggle="modal" data-target="#modalFiltro"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
@@ -32,17 +28,10 @@ $nome_sistema = filter_var($_GET["nome_sistema"], FILTER_SANITIZE_STRING);
 				</button>
 				<h2><small>{{{txtTituloFuncao}}}</small></h2>
 				<h3><small>{{{sistema}}}: <?php echo $nome_sistema; ?></small></h3>
-				<blockquote>{{{txtDescFuncao}}}</blockquote>
+				<blockquote>{{{txtDescFuncao}}}
+
+                </blockquote>
 				<div class="clearfix"></div>
-				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body">
-								<p>{{{txtAjuda}}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="well hidden">
 				<div class="panel-heading">

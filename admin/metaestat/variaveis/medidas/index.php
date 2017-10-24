@@ -25,28 +25,22 @@ $_SESSION["nome_variavel"] = $nome_variavel;
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
-				<button data-toggle="modal" data-target="#ajudaPrincipal"
-					class="btn btn-primary btn-fab btn-fab-mini pull-right">
-					<i class="material-icons">help</i>
-				</button>
 				<h2><small>{{{txtTituloMedida}}}</small></h2>
 				<div class="panel-heading" >
 				  <small>Vari&aacute;vel</small>
 				  <h4><?php echo $nome_variavel; ?></h4>
 				</div>
-				<blockquote>{{{txtDescMedida}}}</blockquote>
-
-				<div class="clearfix"></div>
-				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body">
-								<p>{{{txtAjudaMedida}}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
-
+				<blockquote>{{{txtDescMedida}}}<br>
+                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                        <span class="text-primary readMore">
+                            <i class="material-icons">keyboard_arrow_down</i>
+                        </span>
+                        <span class="text-primary readLess">
+                            <i class="material-icons">keyboard_arrow_up</i>
+                        </span>
+                    </a>
+                    <div id="expandeTxt" class="collapse">{{{txtAjudaMedida}}}</div>
+                </blockquote>
 			</div>
 			<div class="well hidden">
 				<div class="panel-heading">

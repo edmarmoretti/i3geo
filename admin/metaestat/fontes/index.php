@@ -18,12 +18,6 @@ include "../../head.php";
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
-				<!--
-				<button data-toggle="modal" data-target="#ajudaPrincipal"
-					class="btn btn-primary btn-fab btn-fab-mini pull-right">
-					<i class="material-icons">help</i>
-				</button>
-				-->
 				<h2><small>{{{txtTitulo}}}</small></h2>
 				<blockquote>{{{txtDesc}}}</blockquote>
 				<div class="clearfix"></div>

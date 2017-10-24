@@ -37,7 +37,7 @@ if (! isset($_COOKIE["palavraFiltro"])) {
                     <small>{{{txtTitulo}}}</small>
                 </h2>
                 <blockquote>
-                    {{{txtDesc}}}
+                    {{{txtDesc}}}<br>
                     <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
                         <span class="text-primary readMore">
                             <i class="material-icons">keyboard_arrow_down</i>

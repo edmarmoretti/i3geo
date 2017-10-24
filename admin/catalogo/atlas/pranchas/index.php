@@ -21,10 +21,6 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 	<div class="row center-block">
 		<div class="col-md-12" id="titulo">
 			<div class="well hidden" >
-				<button data-toggle="modal" data-target="#ajudaPrincipal"
-					class="btn btn-primary btn-fab btn-fab-mini pull-right">
-					<i class="material-icons">help</i>
-				</button>
 				<span class="pull-right">&nbsp;&nbsp;</span>
 				<button data-toggle="modal" data-target="#modalFiltro"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
@@ -34,15 +30,6 @@ $titulo_atlas = filter_var($_GET["titulo_atlas"], FILTER_SANITIZE_STRING);
 				<h3><small>Atlas: <?php echo $titulo_atlas; ?></small></h3>
 				<!--<blockquote>{{{txtDesc}}}</blockquote>-->
 				<div class="clearfix"></div>
-				<div id="ajudaPrincipal" class="modal fade" tabindex="-1">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-body">
-								<p>{{{txtAjuda}}}</p>
-							</div>
-						</div>
-					</div>
-				</div>
 			</div>
 			<div class="well hidden">
 				<div class="panel-heading">
