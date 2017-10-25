@@ -24,7 +24,7 @@ MAP
       "permiteogc"	"SIM"
       "transitioneffect"	"NAO"
       "TEMA"	"_Bairros POSTGIS"
-      "identifica"	"nao"
+      "identifica"	"sim"
     END # METADATA
     NAME "_lbairros"
     PROCESSING "LABEL_NO_CLIP=True"

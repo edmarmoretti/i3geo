@@ -511,7 +511,7 @@ $testa - Testa o filtro e retorna uma imagem.
 */
 	function insereFiltro($filtro,$testa="",$base64="nao")
 	{
-		$this->selecaoLimpa();
+	    $this->selecaoLimpa();
 		if($base64 == "sim"){
 			//$filtro = base64_decode($filtro);
 		}

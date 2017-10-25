@@ -210,13 +210,15 @@ i3GEOF.identifica =
 					if (botao.value != "") {
 						i3GEO.mapa.ativaTema(botao.value);
 						i3GEOF.identifica.propJanelas[idjanela].tema = botao.value;
-						i3GEOF.identifica.buscaDadosTema(botao.value, i3GEOF.identifica.propJanelas[idjanela].x, i3GEOF.identifica.propJanelas[idjanela].y, idjanela);
+						i3GEOF.identifica.propJanelas[idjanela].temaAtivo = botao.value;
+
+						var temp = i3GEO.arvoreDeCamadas.pegaTema(botao.value);
+						if (temp.identifica.toLowerCase() !== "nao") {
+							i3GEOF.identifica.buscaDadosTema(botao.value, i3GEOF.identifica.propJanelas[idjanela].x, i3GEOF.identifica.propJanelas[idjanela].y, idjanela);
+						}
 					}
 				}
 			};
-
-
-
 			try {
 				$i(iddiv).innerHTML = i3GEOF.identifica.html(idjanela);
 				if (!$i(idjanela + "i3GEOFidentificaComboCabecaSel")) {
