@@ -309,18 +309,20 @@ i3GEOF.parametrossql = {
 	},
 	aplicar: function(camada){
 		var temp, fim,cp,p,onde = $i("i3GEOFparametrosSQLForm"),
-			campos,n,i,chaves = [], valores = [];
+			campos,n,i,chaves = [], valores = [], titulos = [];
 		campos = onde.getElementsByTagName("input");
 		n = campos.length;
 		for (i = 0; i<n; i++) {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
+			titulos.push(campos[i].options[campos[i].selectedIndex].text);
 		}
 		campos = onde.getElementsByTagName("select");
 		n = campos.length;
 		for (i = 0; i<n; i++) {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
+			titulos.push(campos[i].options[campos[i].selectedIndex].text);
 		}
 		//verifica os objetos pois essa funcao pode ter sido chamada do mashup
 		if(typeof i3geoOL != 'undefined' || typeof i3GeoMap != 'undefined'){
@@ -333,6 +335,7 @@ i3GEOF.parametrossql = {
 				+ "&funcao=aplicar"
 				+ "&tema=" + camada
 				+ "&chaves=" + chaves.join(",")
+				+ "&titulos=" + titulos.join(",")
 				+ "&valores=" + valores.join(",");
 			cp = new cpaint();
 			cp.set_response_type("JSON");

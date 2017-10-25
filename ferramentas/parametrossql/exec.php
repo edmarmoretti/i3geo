@@ -57,6 +57,7 @@ switch (strtoupper($funcao))
 		*/
 	case "APLICAR":
 		$valores = $_GET["valores"];
+		$titulos = $_GET["titulos"];
 		$map = ms_newMapObj($map_file);
 		//pega o layer
 		$layer = $map->getlayerbyname($tema);
@@ -100,7 +101,7 @@ switch (strtoupper($funcao))
 					}
 					$layer->set("status",MS_DEFAULT);
 					$layer->setmetadata("PLUGINI3GEO",'{"plugin":"parametrossql","ativo":"sim"}');
-					$layer->setmetadata("TEMA",$layer1->getmetadata("TEMA")." - ".implode(",",$valores));
+					$layer->setmetadata("TEMA",$layer1->getmetadata("TEMA")." - ".$titulos);
 					//$layer->set("name","plugin".nomeRandomico());
 					$layer->setmetadata("nomeoriginal",$layer1->name);
 					if (connection_aborted()){
