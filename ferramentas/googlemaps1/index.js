@@ -53,6 +53,9 @@ $i = function(id){
 	return window.parent.document.getElementById(id);
 };
 function inicializa(){
+	if(i3GEO.parametros.googleApiKey == ""){
+		i3GEO.janela.tempoMsg("Essa instala&ccedil;&atilde;o do i3Geo n&atilde;o possu&iacute; uma chave da API do GoogleMaps. Algumas opera&ccedil;&otilde;es podem ficar bloqueadas.");
+	}
 	counterClick = 0;
 	var m = document.getElementById("mapa"),
 		nz = 8,
