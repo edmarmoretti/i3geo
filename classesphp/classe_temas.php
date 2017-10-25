@@ -529,6 +529,7 @@ $testa - Testa o filtro e retorna uma imagem.
 			$layer->set("template","none.htm");
 			$fil = $layer->getFilterString();
 			$filtro = str_replace("|","'",$filtro);
+			/*
 			if ($layer->connectiontype == MS_POSTGIS){
 				$filtro = str_replace("'[","",$filtro);
 				$filtro = str_replace("[","",$filtro);
@@ -537,30 +538,37 @@ $testa - Testa o filtro e retorna uma imagem.
 				$filtro = str_replace("("," ",$filtro);
 				$filtro = str_replace(")"," ",$filtro);
 			}
-			if ($filtro == ""){
-				$layer->setfilter($filtro);
-			}
-			else{
-				//testa o filtro
+			*/
+			if ($filtro != ""){
+				//testa o filtro para resolver problemas de acentuacao
 				if(mb_convert_encoding($filtro,"UTF-8","ISO-8859-1") != mb_convert_encoding($filtro,"ISO-8859-1","UTF-8")){
-					$teste = $layer->querybyattributes($items[0],$filtro,1);
-					if($teste != MS_SUCCESS){
+				    $filtro = str_replace("*","'",$filtro);
+				    $teste = $layer->querybyattributes($items[0],$filtro,1);
+				    if($teste != MS_SUCCESS){
 						$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"ISO-8859-1","UTF-8"), 1);
 						if($teste != MS_SUCCESS){
-							$teste = $this->layer->queryByAttributes($items[0], mb_convert_encoding($filtro,"UTF-8","ISO-8859-1"), 1);
 							$filtro =  mb_convert_encoding($filtro,"UTF-8","ISO-8859-1");
+						} else {
+						    $filtro = mb_convert_encoding($filtro,"ISO-8859-1","UTF-8");
+						    $teste = $layer->querybyattributes($items[0],$filtro,1);
+						    if($teste != MS_SUCCESS){
+						        $filtro = "";
+						    }
 						}
-						else{
-							$filtro = mb_convert_encoding($filtro,"ISO-8859-1","UTF-8");
-						}
-					}
-					if($teste == MS_SUCCESS){
-						$layer->setfilter($filtro);
 					}
 				} else {
-					$layer->setfilter($filtro);
+					//testa a questao de ser string ou numero
+					//$layer->setfilter($filtro);
+				    $teste = $layer->querybyattributes($items[0],str_replace("*","'",$filtro),1);
+				    if($teste != MS_SUCCESS){
+				        $filtro = str_replace("*","",$filtro);
+				    }
+				    if($teste == MS_SUCCESS){
+				        $filtro = str_replace("*","'",$filtro);
+				    }
 				}
 			}
+			$layer->setfilter($filtro);
 			if ($testa == ""){
 				$layer->setMetaData("cache","");
 			} else {

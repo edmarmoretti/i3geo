@@ -957,12 +957,15 @@ i3GEOF.identifica =
 				return;
 			}
 			i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "visible";
-			var filtro = "('[" + item + "]' = '" + valor + "')", temp = function(retorno) {
-				i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "hidden";
-				i3GEO.Interface.atualizaTema(retorno, tema);
-			}, p =
-				i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=sim&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro", cp =
-					new cpaint();
+			var filtro = "",
+				temp = function(retorno) {
+					i3GEOF.identifica.propJanelas[idjanela].aguarde.visibility = "hidden";
+					i3GEO.Interface.atualizaTema(retorno, tema);
+				},
+				p = i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=sim&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro",
+				cp = new cpaint();
+
+			filtro = "(*[" + item + "]* = *" + valor + "*)";
 			cp.set_response_type("JSON");
 			cp.set_transfer_mode('POST');
 			cp.call(p, "insereFiltro", temp, "tema=" + tema + "&filtro=" + i3GEO.util.base64encode(filtro));

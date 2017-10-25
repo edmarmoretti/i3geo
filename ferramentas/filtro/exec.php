@@ -34,6 +34,8 @@ Inclui um filtro no tema.
 			$_GET["testa"]="";
 		}
 		$m->insereFiltro("");
+		$m->salva();
+		$m = new Temas($map_file,$tema);
 		$retorno = $m->insereFiltro(base64_decode($_GET["filtro"]),$_GET["testa"],$_GET["base64"]);
 		if(strtolower($_GET["testa"]) != "sim"){
 			$m->salva();
