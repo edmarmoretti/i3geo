@@ -11,23 +11,15 @@ MAP
       "TIP"	"CD_LEGENDA"
       "cache"	"sim"
       "CLASSE"	"SIM"
-      "olopacity"	""
       "animagif"	""
       "permitekmz"	"SIM"
-      "gmopacity"	""
-      "gmstatus"	""
       "ITENSDESC"	"Teste de acentuação"
       "TILES"	"SIM"
       "ESCALA"	"250000"
       "editavel"	""
-      "arquivotemaoriginal"	""
       "extensao"	"-73.990940816816 -33.74827031115 -34.822855820777 5.272224303909"
-      "nomeoriginal"	""
-      "olstatus"	""
       "permitedownload"	"SIM"
-      "FILTROORIGINAL"	""
       "permitecomentario"	"NAO"
-      "DATAORIGINAL"	""
       "escondido"	"NAO"
       "download"	"SIM"
       "esquematabelaeditavel"	""
@@ -58,7 +50,7 @@ MAP
       NAME "CAATINGA"
       EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
       STYLE
-        COLOR 183 247 169
+        COLOR 50 247 169
         OUTLINECOLOR 255 255 255
       END # STYLE
       TITLE ""
@@ -109,6 +101,4 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
-
 END # MAP
-

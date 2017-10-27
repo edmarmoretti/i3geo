@@ -129,7 +129,7 @@ i3GEOF.salvamapfile = {
 		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x55") + "</span></div>";
 		janela = i3GEO.janela.cria(
 			"340px",
-			"160px",
+			"260px",
 			"",
 			"",
 			"",

@@ -3,6 +3,11 @@
 // TODO editor de cores
 //
 
+//nao tire daqui ou as expressoes podem ser sanitizadas
+if (isset ( $_POST ["texto"] )) {
+    $gravarTexto = $_POST ["texto"];
+    $_POST ["texto"] = "";
+}
 /****************************************************************/
 //include ("exec.php");
 //
@@ -13,7 +18,6 @@
 //
 include ("../../../php/checaLogin.php");
 \admin\php\login\checaLogin();
-
 
 //$k = filter_var ( $k, FILTER_SANITIZE_STRING );
 
@@ -39,10 +43,6 @@ define ( "ONDEI3GEO", "../../../.." );
 include "../../../head.php";
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
 $id_tema = ( int ) $_GET ["id_tema"];
-if (isset ( $_POST ["texto"] )) {
-	$gravarTexto = $_POST ["texto"];
-	$_POST ["texto"] = "";
-}
 
 if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editortexto" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
@@ -50,6 +50,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editortexto" ) 
 }
 $versao = \admin\php\funcoesAdmin\versao ();
 $versao = $versao ["principal"];
+
 \admin\catalogo\mapfile\editor\salvaMapfile ();
 $textoMapfile = \admin\catalogo\mapfile\editor\textoMapfile ( $codigo );
 ?>

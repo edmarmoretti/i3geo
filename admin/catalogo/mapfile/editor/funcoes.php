@@ -195,7 +195,7 @@ function salvaMapfile()
 
     $layer = $mapa->getlayerbyname($codigo);
     if ($layer == "") {
-        return "<br><span style='color:red;'>Atenção: não existe nenhum LAYER com NAME igual a " . $codigo . "</span><br>";
+        return "<br><span style='color:red;'>Aten&ccedil;&atilde;o: n&atilde;o existe nenhum LAYER com NAME igual a " . $codigo . "</span><br>";
     } else {
         // pega o metadata
         $meta = $layer->getmetadata("permitedownload");
