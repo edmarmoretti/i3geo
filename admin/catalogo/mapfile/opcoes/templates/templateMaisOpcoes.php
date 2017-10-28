@@ -31,7 +31,7 @@
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
 			<a title="{{{testaLayer}}}" onclick="i3GEOadmin.opcoesmapfile.testa('{{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons  md-18">send</i>
+				<i class="material-icons  md-18">gavel</i>
 			</a>
 			{{{testaLayer}}}
 		</h4>
@@ -42,7 +42,7 @@
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
 			<a title="{{{testarI3geo}}}" onclick="window.open('../../../../ms_criamapa.php?temasa={{codigo}}&layers={{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons  md-18">send</i>
+				<i class="material-icons  md-18">gavel</i>
 			</a>
 			{{{testarI3geo}}}
 		</h4>
@@ -53,7 +53,7 @@
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
 			<a title="{{{editarI3geo}}}" onclick="window.open('../../../../admin/black_editor.php?temaEdicao={{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons  md-18">more_horiz</i>
+				<i class="material-icons  md-18">mode_edit</i>
 			</a>
 			{{{editarI3geo}}}
 			<span id="helpBlock" class="help-block">
@@ -67,7 +67,7 @@
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
 			<a title="{{{editorTxt}}}" href="../editor/index.php?codigo={{codigo}}&id_tema={{id_tema}}" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons  md-18">more_horiz</i>
+				<i class="material-icons  md-18">mode_edit</i>
 			</a>
 			{{{editorTxt}}}
 		</h4>
@@ -78,7 +78,7 @@
 	<div class="row-content">
 		<h4 class="list-group-item-heading">
 			<a title="{{{limpaCache}}}" onclick="i3GEOadmin.opcoesmapfile.limpaCacheDialogo('{{codigo}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
-				<i class="material-icons  md-18">send</i>
+				<i class="material-icons  md-18">clear_all</i>
 			</a>
 			{{{limpaCache}}}
 			<span id="helpBlock" class="help-block">

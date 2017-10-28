@@ -1,62 +1,65 @@
 <?php
-//TODO incluir opcao para listar os arquivos no servidor
-//TODO incluir construtor de sql
-define ( "ONDEI3GEO", "../../../../.." );
+// TODO incluir opcao para listar os arquivos no servidor
+// TODO incluir construtor de sql
+define("ONDEI3GEO", "../../../../..");
 include ("exec.php");
 
 include "../../../../head.php";
-$codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
-$id_tema = (int) $_GET ["id_tema"];
+$codigo = filter_var($_GET["codigo"], FILTER_SANITIZE_STRING);
+$id_tema = (int) $_GET["id_tema"];
 ?>
 <div class="container-fluid migalha">
-	<div class="row">
-		<div class="btn-group btn-breadcrumb">
-			<a class="btn btn-default" href="../../../../../init/index.php">
-				<span>i3Geo</span>
-			</a>
-			<a class="btn btn-default" href="../../../../index.php">
-				<span>Admin</span>
-			</a>
-			<a class="btn btn-default" style="pointer-events: none">
-				<span>Cat&aacute;logo</span>
-			</a>
-			<a class="btn btn-default" href="../../index.php">
-				<span>Mapfiles</span>
-			</a>
-			<a class="btn btn-default" href="../../opcoes/index.php?codigo=<?php echo $codigo; ?>&id_tema=<?php echo $id_tema; ?>">
-				<span>Op&ccedil;&otilde;es</span>
-			</a>
-			<a class="btn btn-default" style="pointer-events: none">
-				<span><?php echo $codigo; ?></span>
-			</a>
-			<a class="btn btn-default" style="pointer-events: none">
-				<span>Conex&atilde;o local</span>
-			</a>
-		</div>
-	</div>
+    <div class="row">
+        <div class="btn-group btn-breadcrumb">
+            <a class="btn btn-default" href="../../../../../init/index.php">
+                <span>i3Geo</span>
+            </a>
+            <a class="btn btn-default" href="../../../../index.php">
+                <span>Admin</span>
+            </a>
+            <a class="btn btn-default" style="pointer-events: none">
+                <span>Cat&aacute;logo</span>
+            </a>
+            <a class="btn btn-default" href="../../index.php">
+                <span>Mapfiles</span>
+            </a>
+            <a class="btn btn-default" href="../../opcoes/index.php?codigo=<?php echo $codigo; ?>&id_tema=<?php echo $id_tema; ?>">
+                <span>Op&ccedil;&otilde;es</span>
+            </a>
+            <a class="btn btn-default" style="pointer-events: none">
+                <span><?php echo $codigo; ?></span>
+            </a>
+            <a class="btn btn-default" style="pointer-events: none">
+                <span>Conex&atilde;o local</span>
+            </a>
+        </div>
+    </div>
 </div>
 <div class="container">
-	<div class="row center-block">
-		<div class="col-md-12" id="titulo">
-			<div class="well hidden" >
-				<h2><small>{{{conexaoLocal}}}</small></h2>
-				<blockquote>{{{conexaoLayerLocal}}}</blockquote>
-				<div class="clearfix"></div>
-			</div>
-			<div class="well hidden">
-				<div id="corpo">
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="row center-block">
+        <div class="col-md-12" id="titulo">
+            <div class="well hidden">
+                <h2>
+                    <small>{{{conexaoLocal}}}</small>
+                </h2>
+                <blockquote>{{{conexaoLayerLocal}}}</blockquote>
+                <div class="clearfix"></div>
+                <button onclick="i3GEOadmin.conexaolocal.testa('<?php echo $codigo; ?>')" href="javascript:void(0)" class="btn btn-primary" role="button" style="color:#008579;">{{{testaLayer}}}</button>
+            </div>
+            <div class="well hidden">
+                <div id="corpo"></div>
+            </div>
+        </div>
+    </div>
 </div>
 <?php
-include("templates/templateFormConexaoLocal.php");
-include("../../templates/templateTiposLayer.php");
-include("../../templates/templateTiposConexao.php");
-include("../../../../templates/templateOpcoesPublicado.php");
+include ("templates/templateFormConexaoLocal.php");
+include ("../../templates/templateTiposLayer.php");
+include ("../../templates/templateTiposConexao.php");
+include ("../../../../templates/templateOpcoesPublicado.php");
 ?>
 <script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="../../teste/index.js"></script>
 <script type="text/javascript" src="../../../../dicionario/editormapfile.js"></script>
 <script>
 	$(document).ready(function(){

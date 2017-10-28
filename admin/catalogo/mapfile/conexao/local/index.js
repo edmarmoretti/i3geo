@@ -120,5 +120,9 @@ i3GEOadmin.conexaolocal = {
 						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
 					}
 			);
+		},
+		testa: function(codigo){
+			i3GEOadmin.core.modalAguarde(true);
+			i3GEOadmin.teste.testaImg("../../../../..",codigo,"","",$("#modalGeral .modal-body"))
 		}
 };
