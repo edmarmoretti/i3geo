@@ -1,5 +1,6 @@
 <?php
 include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
+
 $_GET = array_merge($_GET,$_POST);
 //
 //$fingerprint e usado para verificar se o usuario veio do i3geo
@@ -30,6 +31,7 @@ else{
 	$g_sid = "";
 	$fingerprint = "";
 }
+
 //variaveis mais utilizadas
 $tema = $_GET["tema"];
 if(isset($_GET["ext"])){
@@ -47,6 +49,7 @@ if(!empty($fingerprint) && !empty($g_sid))	{
 		return;
 	}
 }
+
 include_once(dirname(__FILE__)."/../ms_configura.php");
 include_once(dirname(__FILE__)."/blacklist.php");
 include_once(dirname(__FILE__)."/../classesphp/classe_vermultilayer.php");

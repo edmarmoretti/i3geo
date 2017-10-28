@@ -4,7 +4,7 @@
 //no conteudo da variavel $i3geoBlFerramentas
 //
 function verificaBlFerramentas($dir,$i3geoBlFerramentas="",$js=true){
-	if($i3geoBlFerramentas == ""){
+    if($i3geoBlFerramentas == ""){
 		if(file_exists(dirname(__FILE__)."/../ms_configura.php")){
 			include_once(dirname(__FILE__)."/../ms_configura.php");
 		} else {

@@ -266,7 +266,12 @@ function classes2preenchimento($map_file,$tema,$tipo){
 	$layer = ms_newLayerObj($mapa,$l);
 	$l->set("status",MS_OFF);
 	$layer->set("status",MS_DEFAULT);
-	$layer->set("opacity",50);
+
+	if(ms_GetVersionInt() >= 7){
+	    $layer->updateFromString('LAYER COMPOSITE OPACITY 50 END END');
+	} else {
+	    $layer->set("opacity",50);
+	}
 	$layer->set("name",$nome);
 	if($layer->type != MS_LAYER_POLYGON){
 		return "";
@@ -336,7 +341,11 @@ function classes2circulos($map_file,$tema,$tipo){
 	$layer = ms_newLayerObj($mapa,$l);
 	$l->set("status",MS_OFF);
 	$layer->set("status",MS_DEFAULT);
-	$layer->set("opacity",50);
+	if(ms_GetVersionInt() >= 7){
+	    $layer->updateFromString('LAYER COMPOSITE OPACITY 50 END END');
+	} else {
+	    $layer->set("opacity",50);
+	}
 
 	$layer->set("name",$nome);
 	$meta = new MetaestatInfo();
@@ -388,7 +397,11 @@ function classes2circulos($map_file,$tema,$tipo){
 		$max = max($valores);
 		$layer->setmetadata("tema",$layer->getmetadata("tema")." - cont");
 		$layer->set("type",MS_LAYER_CHART);
-		$layer->set("opacity",60);
+		if(ms_GetVersionInt() >= 7){
+		    $layer->updateFromString('LAYER COMPOSITE OPACITY 60 END END');
+		} else {
+		    $layer->set("opacity",60);
+		}
 		$layer->setprocessing("CHART_TYPE=pie");
 		$layer->setprocessing("CHART_SIZE_RANGE=".$medidavariavel["colunavalor"]." 10 150 ".$min." ".$max);
 		if ($numclasses > 0){

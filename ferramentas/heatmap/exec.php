@@ -1,9 +1,13 @@
 <?php
+
 include_once(dirname(__FILE__)."/../safe.php");
+
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+
 //
 //faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
+
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
@@ -19,12 +23,17 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$novolayer = ms_newLayerObj($map, $layer);
 		$novolayer->setmetadata("tema",$_GET["titulo"]);
 		$parametros = '{"plugin":"heatmap","parametros":{"max":10,"tipoGradiente":"default","valorPonto":"'.$_GET["valorPonto"].'","coluna":"'.$_GET["coluna"].'","radius":"'.$_GET["raio"].'"}}';
+
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
 		$novolayer->set("group","");
 
 		if(!empty($_GET["opacidade"])){
-			$novolayer->set("opacity",$_GET["opacidade"]);
+		    if(ms_GetVersionInt() >= 7){
+		      $novolayer->updateFromString('LAYER COMPOSITE OPACITY '.$_GET["opacidade"].'END END');
+			} else {
+			    $novolayer->set("opacity",$_GET["opacidade"]);
+			}
 		}
 		$map->save($map_file);
 		$retorno = $nameLayer;

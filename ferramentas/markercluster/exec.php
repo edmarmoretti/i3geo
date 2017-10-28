@@ -22,7 +22,12 @@ Adiciona ao mapa uma nova camada para calculo do mapa de cluster
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
 		$novolayer->setmetadata("tema",$_GET["titulo"]);
-		$novolayer->set("opacity",$_GET["opacidade"]);
+		if(ms_GetVersionInt() >= 7){
+		    $novolayer->updateFromString('LAYER COMPOSITE OPACITY '.$_GET["opacidade"].'END END');
+		} else {
+		    $novolayer->set("opacity",$_GET["opacidade"]);
+		}
+
 		$novolayer->set("group","");
 		$map->save($map_file);
 		$retorno = $nameLayer;

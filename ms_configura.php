@@ -318,7 +318,7 @@ inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */
 //$i3geoBlFerramentas = array("saiku");
-$i3geoBlFerramentas = array("");
+$i3geoBlFerramentas = array();
 /*
 Variable: $ogrOutput
 

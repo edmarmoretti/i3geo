@@ -140,8 +140,11 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 				else{
 					$layero->set("status",MS_OFF);
 				}
-
-				$layero->set("opacity",$layert->opacity);
+				if(ms_GetVersionInt() >= 7){
+				    $layero->updateFromString('LAYER COMPOSITE OPACITY '.$layert->opacity.'END END');
+				} else {
+				    $layero->set("opacity",$layert->opacity);
+				}
 				$layero->setmetadata("TEMA",$layert->getmetadata("TEMA"));
 				//
 				//adiciona o layer ao mapa atual
