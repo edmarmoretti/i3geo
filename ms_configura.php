@@ -262,7 +262,7 @@ No caso do SAIKU, verifique tambem se o programa i3geo/ferramentas/saiku/esquema
 abrir e verificar o inicio desse arquivo). Veja tambem: i3geo/ferramentas/saiku/install.txt
  */
 $statusFerramentas = array(
-	"saiku"=>false,
+	"saiku"=>true,
 	"melhorcaminho"=>false
 );
 /*
@@ -318,7 +318,7 @@ inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */
 //$i3geoBlFerramentas = array("saiku");
-$i3geoBlFerramentas = array("saiku");
+$i3geoBlFerramentas = array("");
 /*
 Variable: $ogrOutput
 

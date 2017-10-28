@@ -10,9 +10,13 @@ if(!isset($dir_tmp)){
 	include(dirname(__FILE__)."/../../ms_configura.php");
 }
 if(isset($statusFerramentas) && $statusFerramentas["saiku"] != true){
-	exit;
+	echo "A ferramenta SAIKU n&atilde;o est&aacute; ativada em ms_configura.php";
+    exit;
 }
 include(dirname(__FILE__)."/../blacklist.php");
+if(in_array("saiku",$i3geoBlFerramentas)){
+    echo "Ferramenta bloqueada em ms_configura.php";
+}
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 
 //error_reporting(E_ALL);
@@ -252,7 +256,7 @@ else{
 	}
 }
 
-header("Location:".$opcoes["locaplic"]."/mashups/openlayers.php?temas=".$map_file."&DESLIGACACHE=sim&botoes=legenda,pan,zoombox,zoomtot,zoomin,zoomout,distancia,area,identifica&controles=navigation,layerswitcher,scaleline,mouseposition,overviewmap,keyboarddefaults&tiles=false&mapext=".$opcoes["mapext"]);
+header("Location:".$opcoes["locaplic"]."/mashups/openlayers.php?temas=".$map_file."&DESLIGACACHE=sim&botoes=legenda,analise,catalogo,camadas,identifica&controles=navigation,layerswitcher,scaleline,mouseposition,keyboarddefaults&fundo=eng&tiles=false&mapext=".$opcoes["mapext"]);
 
 function mapaBarras($colunas,$metadataItens){
 	global $opcoes;

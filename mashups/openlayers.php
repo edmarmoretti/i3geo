@@ -11,9 +11,9 @@ include_once (dirname(__FILE__) . "/../classesphp/funcoes_gerais.php");
 error_reporting(0);
 // variaveis utilizadas
 $parurl = array_merge($_GET, $_POST);
-if(count($parurl) == 0){
+if (count($parurl) == 0) {
     ajuda();
-    exit;
+    exit();
 }
 
 if (isset($parurl["opacidade"])) {
@@ -36,18 +36,18 @@ if (! isset($parurl["temas"]) && isset($parurl["layers"])) {
     $parurl["temas"] = $parurl["layers"];
 }
 $temas = explode(",", str_replace(" ", ",", $parurl["temas"]));
-if(!isset($parurl["visiveis"])){
+if (! isset($parurl["visiveis"])) {
     $parurl["visiveis"] = $parurl["temas"];
 }
 $visiveis = explode(",", str_replace(" ", ",", $parurl["visiveis"]));
 $off = array_diff($temas, $visiveis);
-//filtros
+// filtros
 $filtros = array();
-foreach($temas as $tema){
-    if(isset($parurl["map_layer_".$tema."_filter"])){
+foreach ($temas as $tema) {
+    if (isset($parurl["map_layer_" . $tema . "_filter"])) {
         $filtros[] = array(
-            "layer"=>$tema,
-            "expression"=>$parurl["map_layer_".$tema."_filter"]
+            "layer" => $tema,
+            "expression" => $parurl["map_layer_" . $tema . "_filter"]
         );
     }
 }
@@ -267,7 +267,6 @@ if (isset($parurl["botoes"])) {
     $objBotoes[] = "'frente':true";
 
     $botoes = "{" . implode(",", $objBotoes) . "}";
-
 }
 if (isset($parurl["kml"])) {
     $kml = $parurl["kml"];
@@ -297,28 +296,26 @@ if (isset($parurl["pontos"])) {
 } else {
     $pontos = "";
 }
-if(isset($parurl["marca"])){
+if (isset($parurl["marca"])) {
     $marca = $parurl["marca"];
 } else {
-	$marca = "../pacotes/openlayers/img/marker-gold.png";
+    $marca = "../pacotes/openlayers/img/marker-gold.png";
 }
-if(isset($parurl["tiles"])){
+if (isset($parurl["tiles"])) {
     $tiles = $parurl["tiles"];
+} else {
+    $tiles = "true";
 }
-else{
-	$tiles = "true";
-}
-if(isset($parurl["ativarodadomouse"]) && $parurl["ativarodadomouse"] == "false"){
+if (isset($parurl["ativarodadomouse"]) && $parurl["ativarodadomouse"] == "false") {
     $ativarodadomouse = "";
-}
-else{
+} else {
     $ativarodadomouse = "new ol.interaction.MouseWheelZoom(),";
 }
-if(!isset($parurl["legendahtml"])){
+if (! isset($parurl["legendahtml"])) {
     $parurl["legendahtml"] = "";
 }
 $legendahtml = $parurl["legendahtml"];
-if(!isset($parurl["layerDefault"])){
+if (! isset($parurl["layerDefault"])) {
     $parurl["layerDefault"] = "";
 }
 $layerDefault = $parurl["layerDefault"];
@@ -457,10 +454,10 @@ function ajuda()
 <link rel="stylesheet" type="text/css" href="../css/default.css">
 <style>
 .ol-attribution.ol-uncollapsible {
-	height: 2.1em;
-	right: 24px;
-	background: none;
-	margin-bottom: 15px;
+    height: 2.1em;
+    right: 24px;
+    background: none;
+    margin-bottom: 35px;
 }
 
 .foraDoMapa+span>span {
@@ -494,17 +491,17 @@ function ajuda()
 }
 
 .ol-mouse-position {
-    left: 10px;
-    position: absolute;
-    bottom: 5px;
-    top: auto;
+	left: 10px;
+	position: absolute;
+	bottom: 5px;
+	top: auto;
 }
 </style>
 </head>
 <!-- As palavras entre {{{}}} sao utilizadas para a traducao. Veja i3geo/js/dicionario.js
 		Marque com data-traduzir="true" os elementos que deverao passar pelo tradutor
 	-->
-<body id="i3geo">
+<body id="i3geo" style='background: white;'>
     <div style="background: white;<?php echo $estilo;?>">
         <div id="mapai3Geo" style="<?php echo $estilo;?>"></div>
 
@@ -553,8 +550,7 @@ function ajuda()
             <!-- configuracao para todos os botoes
 			data-idconteudo - id do DIV que contem o conteudo da guia e que sera mostrado ao ser clicado
 		-->
-            <div class="iconesGuiaMovel" data-traduzir="true"
-                style="right: 0px; border-radius: 4px; padding: 0px; cursor: pointer; position: absolute; top: 5px; width: auto; z-index: 5000; background-color: rgba(255, 255, 255, .4);">
+            <div class="iconesGuiaMovel ol-control" data-traduzir="true">
                 <!-- ferramentas
 				data-idLista - id do DIV dentro de idconteudo que sera utilizado para mostrar as "pastas" que abrem o proximo nivel
 				data-idLinks - id do DIV dentro de idconteudo que sera utilizado para mostrar a lista de links que abre cada ferramenta
@@ -562,7 +558,7 @@ function ajuda()
 			-->
                 <div class="<?php echo $objBotoesHtml["analise"];?>" data-idconteudo="guia8obj" data-idLinks="listaFerramentasLinks" data-idMigalha="migalhaFerramentas" data-idLista="listaFerramentas"
                     onclick="i3GEO.guias.ativa('ferramentas',this)">
-                    <button title="{{{iconeFerramentas}}}" class="btn btn-default iconeGuiaMovel" style="margin: 2px; color: white; box-shadow: none;">
+                    <button title="{{{iconeFerramentas}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                         <i class="material-icons">business_center</i>
                     </button>
                 </div>
@@ -574,8 +570,8 @@ function ajuda()
 					do metadata existente na camada. Deixe vazio para nao ativar a operacao.
 			-->
                 <div class="<?php echo $objBotoesHtml["camadas"];?>" onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo"
-                    data-idListaDeCamadas="listaTemas" style="margin-top: 3px;">
-                    <button title="{{{iconeMapa}}}" class="btn btn-default iconeGuiaMovel" style="margin: 2px; color: white; box-shadow: none;">
+                    data-idListaDeCamadas="listaTemas" >
+                    <button title="{{{iconeMapa}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                         <i class="material-icons"><i class="material-icons">visibility</i></i>
                     </button>
                 </div>
@@ -589,50 +585,55 @@ function ajuda()
 				i3GEO.catalogoMenus.IDSMENUS - (array) apenas os menus com idmenu que constem nessa lista serao mostrados. Por default e vazio.
 			-->
                 <div class="<?php echo $objBotoesHtml["catalogo"];?>" onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj" data-idMigalha="catalogoMigalha"
-                    data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus" style="margin-top: 3px;">
-                    <button title="{{{iconeCatalogo}}}" class="btn btn-default iconeGuiaMovel" style="margin: 2px; color: white; box-shadow: none;">
+                    data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus" >
+                    <button title="{{{iconeCatalogo}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                         <i class="material-icons">layers</i>
                     </button>
                 </div>
                 <!-- legenda -->
-                <div class="<?php echo $objBotoesHtml["legenda"];?>" onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" style="margin-top: 3px;">
-                    <button title="{{{iconeLegenda}}}" class="btn btn-default iconeGuiaMovel" style="margin: 2px; color: white; box-shadow: none;">
+                <div class="<?php echo $objBotoesHtml["legenda"];?>" onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" >
+                    <button title="{{{iconeLegenda}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                         <i class="material-icons">view_list</i>
                     </button>
                 </div>
                 <!-- Busca -->
-                <div class="<?php echo $objBotoesHtml["procura"];?>" onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" style="margin-top: 3px;">
-                    <button class="btn btn-default iconeGuiaMovel" style="margin: 2px; color: white; box-shadow: none;">
+                <div class="<?php echo $objBotoesHtml["procura"];?>" onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" >
+                    <button class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                         <i class="material-icons">search</i>
                     </button>
                 </div>
-                <div class="<?php echo $objBotoesHtml["identifica"];?>" onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;">
-                    <button title="{{{iconeBalao}}}" class="btn btn-default iconeGuiaMovel" style="margin: 2px; color: white; box-shadow: none;">
+                <div class="<?php echo $objBotoesHtml["identifica"];?>" onclick="i3GEO.guias.ativa('identificaBalao',this)" >
+                    <button title="{{{iconeBalao}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                         <i class="material-icons">location_on</i>
                     </button>
                 </div>
-                <!-- A opcao de identificacao esta integrada ao balao de informacoes, mas pode aparecer aqui tambem
-			<div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
-				<button title="{{{iconeIdentifica}}}" class="btn btn-default iconeGuiaMovel" style="box-shadow: none;">
-					<img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer; padding: 3px;">
-				</button>
-			</div>
-			-->
+            <!-- A opcao de identificacao esta integrada ao balao de informacoes, mas pode aparecer aqui tambem
+            <div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('identifica',this)" style="margin-top: 3px;">
+                <button title="{{{iconeIdentifica}}}" class="iconeGuiaMovel" style="box-shadow: none;">
+                    <img src="../imagens/gisicons/pointer-info.png" style="cursor: pointer; padding: 3px;">
+                </button>
             </div>
-            <!-- veja i3GEO.guias.CONFIGURA -->
-            <!-- Os IDs sao definidos no botao que ativa a guia veja: "i3GEOguiaMovel" -->
-            <!-- se height nao estiver definido sera utilizada a altura do mapa -->
-            <div id="i3GEOguiaMovelMolde">
-                <div id="i3GEOguiaMovelConteudo">
-                    <!-- camadas existentes no mapa -->
-                    <div id='guia1obj' data-traduzir="true" style='display: none;'>
-                        <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
-                            <span class="pull-left">{{{iconeMapa}}}</span>X
-                        </div>
-                        <div class="separadorCabecalhoGuias">&nbsp;</div>
+            -->
+        </div>
+        <!-- veja i3GEO.guias.CONFIGURA -->
+        <!-- Os IDs sao definidos no botao que ativa a guia veja: "i3GEOguiaMovel" -->
+        <!-- se height nao estiver definido sera utilizada a altura do mapa -->
+        <div id="i3GEOguiaMovelMolde">
+            <div id="i3GEOguiaMovelConteudo">
+                <!-- camadas existentes no mapa -->
+                <div id='guia1obj' data-traduzir="true" style='display: none;'>
+                    <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
+                        <button>
+                            <span class="pull-left">{{{iconeMapa}}}</span>
+                            <span class="pull-right material-icons">cancel</span>
+                        </button>
+                    </div>
+                    <div class="separadorCabecalhoGuias">&nbsp;</div>
+                    <div class="guiaOverflow">
                         <div class="list-group condensed noprint">
-                            <label>{{{opcoes}}}</label> <a data-target="#opcoesGuia1" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;"
-                                type="button" data-toggle="collapse"> <span class="caret"></span>
+                            <label>{{{opcoes}}}</label>
+                            <a data-target="#opcoesGuia1" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button" data-toggle="collapse">
+                                <span class="caret"></span>
                             </a>
                             <div class="text-left collapse" id="opcoesGuia1" style="margin-left: 30px;">
                                 <p>
@@ -668,13 +669,15 @@ function ajuda()
                         <!-- Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
                         <div id="listaTemas" style="overflow: none;" data-template="../interface/templates/camada.html"></div>
                         <!-- Esta div acrescenta a lista de de camadas de fundo
-					A lista de camadas de fundo e obtida da variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS
-					Essa variavel e definida via javascript, e no caso das interfaces padrao do i3Geo, e definida
-					no programa interface/config.php
-					-->
+                    A lista de camadas de fundo e obtida da variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS
+                    Essa variavel e definida via javascript, e no caso das interfaces padrao do i3Geo, e definida
+                    no programa interface/config.php
+                    -->
                         <div class="list-group condensed">
-                            <label>Camadas de fundo</label> <a data-target="#collapseFundo" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;"
-                                type="button" data-toggle="collapse"> <span class="caret"></span>
+                            <label>{{{camadasDeFundo}}}</label>
+                            <a data-target="#collapseFundo" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button"
+                                data-toggle="collapse">
+                                <span class="caret"></span>
                             </a>
                             <div style="margin-left: 0px;" class="collapse text-left" id="collapseFundo">
                                 <form>
@@ -683,20 +686,27 @@ function ajuda()
                             </div>
                         </div>
                     </div>
-                    <!-- Catalogo de temas -->
-                    <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left;'>
-                        <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
-                            <span class="pull-left">{{{iconeCatalogo}}}</span> X
-                        </div>
-                        <div class="separadorCabecalhoGuias">&nbsp;</div>
+                </div>
+                <!-- Catalogo de temas -->
+                <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left;'>
+                    <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
+                        <button>
+                            <span class="pull-left">{{{iconeCatalogo}}}</span>
+                            <span class="pull-right material-icons">cancel</span>
+                        </button>
+                    </div>
+                    <div class="separadorCabecalhoGuias">&nbsp;</div>
+                    <div class="guiaOverflow">
                         <!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
                         <div id="catalogoMigalha" data-template="../interface/templates/catalogoMigalha.html"></div>
                         <div id="catalogoNavegacao"></div>
                         <!-- Opcoes -->
                         <div id="catalogoPrincipal">
                             <div class="list-group condensed noprint">
-                                <label>{{{opcoes}}}</label> <a data-target="#opcoesGuia2" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;"
-                                    type="button" data-toggle="collapse"> <span class="caret"></span>
+                                <label>{{{opcoes}}}</label>
+                                <a data-target="#opcoesGuia2" class="btn btn-sm btn-primary pull-right" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button"
+                                    data-toggle="collapse">
+                                    <span class="caret"></span>
                                 </a>
                                 <div class="text-left collapse" id="opcoesGuia2" style="margin-left: 30px;">
                                     <p>
@@ -733,56 +743,58 @@ function ajuda()
                                         <p>
                                             <a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
                                         </p>
-
                                 </div>
                             </div>
                             <hr>
                             <!-- busca tema no catalogo
-						<div class="form-group label-floating">
-							<label class="control-label" for="i3GEObuscatema">{{{a1}}}</label>
-							<div class="input-group">
-								<input id="i3GEObuscatema" class="form-control" type="text" value="">
-								<span class="input-group-btn">
-									<a onclick="i3GEO.arvoreDeTemas.buscaTema2($i('i3GEObuscatema').value);return false;" role="button" type="button" class="btn btn-warning btn-fab btn-fab-max" href="javascript:void(0)">
-										<span class="material-icons ">send</span>
-									</a>
-								</span>
-							</div>
-						</div>
-						 -->
+                        <div class="form-group label-floating">
+                            <label class="control-label" for="i3GEObuscatema">{{{a1}}}</label>
+                            <div class="input-group">
+                                <input id="i3GEObuscatema" class="form-control" type="text" value="">
+                                <span class="input-group-btn">
+                                    <a onclick="i3GEO.arvoreDeTemas.buscaTema2($i('i3GEObuscatema').value);return false;" role="button" type="button" class="btn btn-warning btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">send</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                         -->
                             <!-- A lista de menus e uma funcao de i3GEO.guias.CONFIGURA.adiciona
-							Nessa funcao ficam tambem os parametros:
-							"idOndeMenus": "catalogoMenus",
-							"idCatalogoPrincipal": "catalogoPrincipal",
-							"idCatalogoNavegacao": "catalogoNavegacao",
-							"idOndeMigalha": "catalogoMigalha"
-						-->
+                            Nessa funcao ficam tambem os parametros:
+                            "idOndeMenus": "catalogoMenus",
+                            "idCatalogoPrincipal": "catalogoPrincipal",
+                            "idCatalogoNavegacao": "catalogoNavegacao",
+                            "idOndeMigalha": "catalogoMigalha"
+                        -->
                             <div id="catalogoMenus" data-templateDir="../interface/templates/dir.html" data-templateTema="../interface/templates/tema.html"></div>
 
                             <div id="arvoreAdicionaTema"></div>
 
                             <!--
-						As funcoes de inicializacao recebem um objeto com parametros. Que por padrao sao:
-						config: {
-							'templateDir': '../interface/templates/dir.html',
-							'templateTema': '../interface/templates/tema.html',
-							'idCatalogoPrincipal': 'catalogoPrincipal',
-							'idCatalogoNavegacao': 'catalogoNavegacao',
-							'idOndeMigalha': 'catalogoMigalha'
-						}
+                        As funcoes de inicializacao recebem um objeto com parametros. Que por padrao sao:
+                        config: {
+                            'templateDir': 'templates/dir.html',
+                            'templateTema': 'templates/tema.html',
+                            'idCatalogoPrincipal': 'catalogoPrincipal',
+                            'idCatalogoNavegacao': 'catalogoNavegacao',
+                            'idOndeMigalha': 'catalogoMigalha'
+                        }
 
-						exemplo:
+                        exemplo:
 
-						onclick="i3GEO.catalogoInde.inicia({'templateDir': '../interface/templates/dir.html','templateTema': '../interface/templates/tema.html','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})"
-						-->
+                        onclick="i3GEO.catalogoInde.inicia({'templateDir': 'templates/dir.html','templateTema': 'templates/tema.html','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})"
+                        -->
 
                             <!-- servicos da INDE brasileira -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoInde.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoInde.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>INDE-Br</h4>
+                                    <a onclick="i3GEO.catalogoInde.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">folder_open</span>
                                     </a>
+                                    <label style="width: 255px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoInde.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>INDE-Br</h4>
+                                        </a>
                                         <h6>Infraestrutura Nacional de Dados Espaciais do Brasil</h6>
                                     </label>
                                 </div>
@@ -791,11 +803,13 @@ function ajuda()
                             <!-- lista de wms cadastrados no sistema de administracao -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span
-                                        class="material-icons ">folder_open</span></a> <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoOgc.inicia()" role="button"
-                                        href="javascript:void(0)">
-                                            <h4>OGC-WMS</h4>
+                                    <a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">folder_open</span>
                                     </a>
+                                    <label style="width: 255px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>OGC-WMS</h4>
+                                        </a>
                                         <h6>{{{descOgcWms}}}</h6>
                                     </label>
                                 </div>
@@ -804,10 +818,13 @@ function ajuda()
                             <!--  regioes cadastradas no sistema de metadados -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoRegioes.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoRegioes.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{x87}}}</h4>
+                                    <a onclick="i3GEO.catalogoRegioes.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">folder_open</span>
                                     </a>
+                                    <label style="width: 255px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoRegioes.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>{{{x87}}}</h4>
+                                        </a>
                                         <h6>{{{descLimLoc}}}</h6>
                                     </label>
                                 </div>
@@ -816,33 +833,38 @@ function ajuda()
                             <!--  camadas que vem do sistema de metadados estatisticos -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{x57}}}</h4>
+                                    <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">folder_open</span>
                                     </a>
+                                    <label style="width: 255px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>{{{x57}}}</h4>
+                                        </a>
                                         <h6>{{{descMeta}}}</h6>
                                     </label>
                                 </div>
                             </div>
                             <hr>
                             <!--  mapas cadastrados no sistema de administracao (nao funcional)
-						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 255px;vertical-align: middle;">
-								<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" href="javascript:void(0)">
-								<h4>{{{x90}}}</h4></a>
-								<h6>{{{descMapas}}}</h6>
-							</label>
-						</div></div><hr>
-						-->
+                        <div class="list-group condensed"><div class="row-content text-left">
+                            <a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
+                            <label style="width: 255px;vertical-align: middle;">
+                                <a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" href="javascript:void(0)">
+                                <h4>{{{x90}}}</h4></a>
+                                <h6>{{{descMapas}}}</h6>
+                            </label>
+                        </div></div><hr>
+                        -->
                             <!--  camadas por estrelas -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span
-                                        class="material-icons ">folder_open</span></a> <label style="width: 255px; vertical-align: middle;"> <a
-                                        onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" href="javascript:void(0)">
-                                            <h4>{{{t46}}}</h4>
+                                    <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">folder_open</span>
                                     </a>
+                                    <label style="width: 255px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" href="javascript:void(0)">
+                                            <h4>{{{t46}}}</h4>
+                                        </a>
                                         <h6>{{{descEstrelas}}}</h6>
                                     </label>
                                 </div>
@@ -851,10 +873,13 @@ function ajuda()
                             <!--  sistemas que adicionam camadas -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoSistemas.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoSistemas.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{a11}}}</h4>
+                                    <a onclick="i3GEO.catalogoSistemas.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">folder_open</span>
                                     </a>
+                                    <label style="width: 255px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoSistemas.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>{{{a11}}}</h4>
+                                        </a>
                                         <h6>{{{descSistemas}}}</h6>
                                     </label>
                                 </div>
@@ -863,10 +888,13 @@ function ajuda()
                             <!--  navegacao em diretorios -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoDir.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoDir.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{a6}}}</h4>
+                                    <a onclick="i3GEO.catalogoDir.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">folder_open</span>
                                     </a>
+                                    <label style="width: 255px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoDir.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>{{{a6}}}</h4>
+                                        </a>
                                         <h6>{{{descDir}}}</h6>
                                     </label>
                                 </div>
@@ -874,36 +902,48 @@ function ajuda()
                             <hr>
                         </div>
                     </div>
-                    <!-- Legenda -->
-                    <div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
-                        <div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
-                            <span class="pull-left">{{{iconeLegenda}}}</span>X
-                        </div>
-                        <div class="separadorCabecalhoGuias">&nbsp;</div>
+                </div>
+                <!-- Legenda -->
+                <div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
+                    <div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
+                        <button>
+                            <span class="pull-left">{{{iconeLegenda}}}</span>
+                            <span class="pull-right material-icons">cancel</span>
+                        </button>
+                    </div>
+                    <div class="separadorCabecalhoGuias">&nbsp;</div>
+                    <div class="guiaOverflow">
                         <a href='javascript:void(0)' onclick="i3GEO.legenda.inicia({'janela':true})">{{{x11}}}</a>
                         <div id="legendaHtml" data-template="../interface/templates/legenda.html" data-size="35,25" style='display: none; text-align: left'></div>
                     </div>
-                    <!-- busca
-				Funcoes de busca por registros. Pode ser feita nos temas existentes no mapa, em um servico de busca e no google
-				No botao que dispara a busca, ficam os parametros de configuracao
-				Esses parametros indicam qual o checkbox que define o tipo de busca, o local onde os dados serao mostrados e o template para formatar o resultado
-				-->
-                    <div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
-                        <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
-                            <span class="pull-left">{{{t23}}}</span> X
-                        </div>
-                        <div class="separadorCabecalhoGuias">&nbsp;</div>
+                </div>
+                <!-- busca
+                Funcoes de busca por registros. Pode ser feita nos temas existentes no mapa, em um servico de busca e no google
+                No botao que dispara a busca, ficam os parametros de configuracao
+                Esses parametros indicam qual o checkbox que define o tipo de busca, o local onde os dados serao mostrados e o template para formatar o resultado
+                -->
+                <div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
+                    <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
+                        <button>
+                            <span class="pull-left">{{{t23}}}</span>
+                            <span class="pull-right material-icons">cancel</span>
+                        </button>
+                    </div>
+                    <div class="separadorCabecalhoGuias">&nbsp;</div>
+                    <div class="guiaOverflow">
                         <form onSubmit="return false;">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>
                                 <div class="input-group">
-                                    <input class="form-control" type="text" value="" name="valorBuscaRapida"> <span class="input-group-btn"> <a onclick="i3GEO.busca.inicia(this);return false;"
-                                        data-templateGoogle="../interface/templates/buscaEmTemas.html" data-inputGoogle="[name=google]" data-ondeGoogle=".i3GEOresultadoBuscaGoogle"
-                                        data-templateTemasMapa="../interface/templates/buscaEmTemas.html" data-inputTemasMapa="[name=temasMapa]" data-ondeTemasMapa=".i3GEOresultadoBuscaTemasMapa"
-                                        data-templateServico="../interface/templates/buscaEmServico.html" data-ondeConteiner="#guia7obj" data-inputOndePalavra="[name=valorBuscaRapida]"
-                                        data-inputServicosExternos="[name=servicosExternos]" data-ondeServicosExternos=".i3GEOresultadoBuscaServicos" role="button" type="button"
-                                        class="btn btn-warning btn-fab btn-fab-max" href="javascript:void(0)"> <span class="material-icons ">send</span>
-                                    </a>
+                                    <input class="form-control" type="text" value="" name="valorBuscaRapida">
+                                    <span class="input-group-btn">
+                                        <a onclick="i3GEO.busca.inicia(this);return false;" data-templateGoogle="../interface/templates/buscaEmTemas.html" data-inputGoogle="[name=google]"
+                                            data-ondeGoogle=".i3GEOresultadoBuscaGoogle" data-templateTemasMapa="../interface/templates/buscaEmTemas.html" data-inputTemasMapa="[name=temasMapa]"
+                                            data-ondeTemasMapa=".i3GEOresultadoBuscaTemasMapa" data-templateServico="../interface/templates/buscaEmServico.html" data-ondeConteiner="#guia7obj"
+                                            data-inputOndePalavra="[name=valorBuscaRapida]" data-inputServicosExternos="[name=servicosExternos]"
+                                            data-ondeServicosExternos=".i3GEOresultadoBuscaServicos" role="button" type="button" class="btn btn-warning btn-fab btn-fab-max" href="javascript:void(0)">
+                                            <span class="material-icons ">send</span>
+                                        </a>
                                     </span>
                                 </div>
                             </div>
@@ -911,27 +951,30 @@ function ajuda()
                             <div class="form-inline" style="width: 100%;">
                                 <div class="list-group condensed">
                                     <div class="checkbox text-left">
-                                        <label> <input checked class="noprint" value="on" type="checkbox" value="" name="servicosExternos"> <span class="checkbox-material noprint"><span class="check"></span></span>
+                                        <label>
+                                            <input checked class="noprint" value="on" type="checkbox" value="" name="servicosExternos">
                                             {{{x38}}}
                                         </label>
                                     </div>
                                 </div>
                                 <div class="list-group condensed">
                                     <div class="checkbox text-left">
-                                        <label> <input class="noprint" value="on" type="checkbox" name="temasMapa"> <span class="checkbox-material noprint"><span class="check"></span></span> {{{x39}}}
+                                        <label>
+                                            <input class="noprint" value="on" type="checkbox" name="temasMapa">
+                                            {{{x39}}}
                                         </label>
                                     </div>
                                 </div>
                                 <!-- Apenas para a interface google maps
-							<div class="list-group condensed">
-								<div class="checkbox text-left">
-								<label>
-									<input class="noprint" value="on" type="checkbox" name="google">
-									<span class="checkbox-material noprint"><span class="check"></span></span> Google
-								</label>
-								</div>
-							</div>
-							 -->
+                            <div class="list-group condensed">
+                                <div class="checkbox text-left">
+                                <label>
+                                    <input class="noprint" value="on" type="checkbox" name="google">
+                                    <span class="checkbox-material noprint"><span class="check"></span></span> Google
+                                </label>
+                                </div>
+                            </div>
+                             -->
                             </div>
                         </form>
                         <hr>
@@ -940,34 +983,39 @@ function ajuda()
                         <div class="i3GEOresultadoBuscaGoogle"></div>
                         <div class="alert alert-info" role="alert">{{{x40}}}</div>
                     </div>
-                    <!-- Ferramentas -->
-                    <div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
-                        <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
-                            <span class="pull-left">{{{iconeFerramentas}}}</span> X
-                        </div>
-                        <div class="separadorCabecalhoGuias">&nbsp;</div>
+                </div>
+                <!-- Ferramentas -->
+                <div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
+                    <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
+                        <button>
+                            <span class="pull-left">{{{iconeFerramentas}}}</span>
+                            <span class="pull-right material-icons">cancel</span>
+                        </button>
+                    </div>
+                    <div class="separadorCabecalhoGuias">&nbsp;</div>
+                    <div class="guiaOverflow">
                         <div class="form-inline" style="width: 100%;">
                             <div class="text-center form-group" style="margin: 4px;">
-                                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.area();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)"> <img
-                                    style="margin-top: 4px;" src="../imagens/gisicons/area-measure.png">
+                                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.area();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
+                                    <img style="margin-top: 4px;" src="../imagens/gisicons/area-measure.png">
                                 </a>
                                 <h6>{{{d21at}}}</h6>
                             </div>
                             <div class="text-center form-group" style="margin: 4px;">
-                                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.distancia();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)"> <img
-                                    style="margin-top: 4px;" src="../imagens/gisicons/length-measure.png">
+                                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.distancia();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
+                                    <img style="margin-top: 4px;" src="../imagens/gisicons/length-measure.png">
                                 </a>
                                 <h6>{{{d21t}}}</h6>
                             </div>
                             <div class="text-center form-group" style="margin: 4px;">
-                                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.selecao();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)"> <img
-                                    style="margin-top: 4px;" src="../imagens/gisicons/select.png">
+                                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.selecao();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
+                                    <img style="margin-top: 4px;" src="../imagens/gisicons/select.png">
                                 </a>
                                 <h6>{{{d24t}}}</h6>
                             </div>
                             <div class="text-center form-group" style="margin: 4px;">
-                                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.geolocal();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)"> <img
-                                    style="margin-top: 4px;" src="../imagens/gisicons/layer-gps.png">
+                                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.geolocal();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
+                                    <img style="margin-top: 4px;" src="../imagens/gisicons/layer-gps.png">
                                 </a>
                                 <h6>{{{localiza}}}</h6>
                             </div>
@@ -982,6 +1030,7 @@ function ajuda()
             </div>
         </div>
     </div>
+
     <script>
 	//desativa os layers de fundo
 	$.each(i3GEO.Interface.openlayers.LAYERSADICIONAIS, function( index, value ) {
@@ -1125,9 +1174,31 @@ function ajuda()
 			layerOpacity: <?php echo $opacidade; ?>,
 			//Funcao que sera executada apos a inicializacao do mapa
 			afterStart : function(){
-				//$('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});
-				//$('.iconeGuiaMovel').tooltip('show');
-				$("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
+				$('.iconeGuiaMovel').tooltip({
+					animation : false,
+					trigger : "manual hover",
+					placement : "left"
+				});
+				$('.iconeGuiaMovel').tooltip('show');
+				setTimeout(function(){$('.iconeGuiaMovel').tooltip('hide');},5000);
+
+				$('.ol-i3GEOcontrols button').tooltip({
+					animation : false,
+					trigger : "hover",
+					placement : "auto"
+				});
+
+				$(".guiaOverflow").css("height",
+						i3GEO.parametros.h - 60);
+				$(".guiaOverflow").mCustomScrollbar({
+					scrollbarPosition : "inside",
+					theme : "inset-2-dark"
+				});
+				i3GEO.eventos.adicionaEventos("RESIZE", $(
+						".guiaOverflow").css("height",
+						i3GEO.parametros.h - 60));
+
+				//$("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
 				adicionaBotoesEditor();
 				$i("openlayers").style.backgroundColor = "rgb(245,245,245)";
 			},
