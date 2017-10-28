@@ -313,3 +313,15 @@ pg_restore --host localhost --port 5432 --username postgres --dbname i3geosaude 
 Devidos às restrições de uso da API do GoogleMaps, é necessário registrar uma chave no site do Google para o seu endereço de servidor para que as funcionalidades do i3Geo que utilizam essa API funcionem. Veja como fazer em: http://code.google.com/apis/maps/signup.html.
 
 A chave deve ser incluída na variável $googleApiKey do arquivo i3geo/ms_configura.php.
+
+## Docker
+
+Esta versão do i3geo conta com uma imagem Docker que pode ser utilizada para testar rapidamente o software e também utiliá-lo em ambiente produtivo após as suas customizações.
+
+Para usar basta ter o Docker instalado no seu computador e executar o seguinte comando:
+
+`docker run -i -t -p 80:8080 --rm i3geo/i3geo`
+
+Em seguida, acesse um navegador de sua preferência e insira o seguinte endereço:
+
+`http://localhost/i3geo`
