@@ -609,7 +609,7 @@ function inicializa()
     } else {
         ilegal();
     }
-    session_start();
+    session_start(['read_and_close'  => true]);
     if(isset($_GET["REQUEST"])){
         if ($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature") {
             return;

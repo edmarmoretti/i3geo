@@ -76,7 +76,7 @@ elseif (@$_COOKIE["i3GeoPHP"]){
 else{
 	ilegal();
 }
-session_start();
+session_start(['read_and_close'  => true]);
 if(@$_SESSION["fingerprint"]){
 	$f = explode(",",$_SESSION["fingerprint"]);
 	if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0] ){
