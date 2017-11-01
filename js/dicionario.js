@@ -2647,7 +2647,7 @@ g_traducao =
             }
         ],
         "meneditor5" : [
-            {                
+            {
                 pt : "&Eacute; necess&aacute;rio ter um c&oacute;digo para poder excluir",
  				en : "It is necessary to have a password to exclude",
  				es : "Es necesario tener una clave para excluir"
@@ -2988,7 +2988,7 @@ g_traducao =
         }],
         "versaoAntiga" : [{
             pt : "Essa op&ccedil;&atilde;o pode n&atilde;o funcionar corretamente devido a vers&atilde;o do sistema (Mapserver)",
-            en : "This option may not work properly because of the system version (Mapserver)"
+            en : "This option may not work properly because of the system version (Mapserver)",
             es : "Esta opción puede no funcionar correctamente debido a la versión del sistema (Mapserver)"
         }],
         "camadasDeFundo" : [{
