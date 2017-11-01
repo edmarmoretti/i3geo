@@ -141,7 +141,7 @@ if (! empty($_GET["request"])) {
 //
 $qyfile = dirname($map_fileX) . "/" . $_GET["layer"] . "_qy.map";
 $qy = file_exists($qyfile);
-if(!isset($_GET["DESLIGACACHE"])){
+if (! isset($_GET["DESLIGACACHE"])) {
     $_GET["DESLIGACACHE"] = "nao";
 }
 if (isset($_GET["REQUEST"])) {
@@ -164,10 +164,10 @@ $postgis_mapa = $_SESSION["postgis_mapa"];
 // por seguranca
 include_once ("funcoes_gerais.php");
 
-$logExec = $_SESSION["logExec"];
-
-if (isset($logExec) && $logExec["mapa_"] == true) {
-    i3GeoLog("prog: mapa_openlayers url: " . implode("&", array_merge($_GET, $_POST)), $_SESSION["dir_tmp"]);
+if (isset($_SESSION["logExec"])) {
+    if (@$_SESSION["logExec"]["mapa_"] == true) {
+        i3GeoLog("prog: mapa_openlayers url: " . implode("&", array_merge($_GET, $_POST)), $_SESSION["dir_tmp"]);
+    }
 }
 
 // restauraCon ( $map_fileX, $postgis_mapa );
@@ -339,9 +339,9 @@ $escala->set("status", MS_OFF);
 //
 // se o layer nao for do tipo fundo
 //
-//if ($_GET["tipolayer"] != "fundo") {
-    $o->set("transparent", MS_TRUE);
-//}
+// if ($_GET["tipolayer"] != "fundo") {
+$o->set("transparent", MS_TRUE);
+// }
 
 //
 // se o layer foi marcado para corte altera os parametros para ampliar o mapa
@@ -609,8 +609,10 @@ function inicializa()
     } else {
         ilegal();
     }
-    session_start(['read_and_close'  => true]);
-    if(isset($_GET["REQUEST"])){
+    session_start([
+        'read_and_close' => true
+    ]);
+    if (isset($_GET["REQUEST"])) {
         if ($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature") {
             return;
         }

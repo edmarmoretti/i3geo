@@ -214,9 +214,6 @@ include_once ("carrega_ext.php");
 if (! function_exists("sobeAnno")) {
     include_once ("funcoes_gerais.php");
 }
-if (isset($_SESSION["logExec"]) && $_SESSION["logExec"]["controle"] == true) {
-    i3GeoLog("prog: mapa_controle url: " . implode("&", array_merge($_GET, $_POST)), $_SESSION["dir_tmp"]);
-}
 if ($funcao == "criaMapa") {
     session_name("i3GeoPHP");
     unset($GLOBALS);
@@ -238,7 +235,11 @@ if ($funcao == "criaMapa") {
     $interface = "mashup";
 
     include_once (dirname(__FILE__) . "/../ms_criamapa.php");
-
+    if (isset($_SESSION["logExec"])) {
+        if($_SESSION["logExec"]["controle"] == true){
+            i3GeoLog("prog: mapa_controle url: " . implode("&", array_merge($_GET, $_POST)), $_SESSION["dir_tmp"]);
+        }
+    }
     $_SESSION["interface"] = $interfaceTemp;
     $temp = $_SESSION["map_file"];
     $id = session_id();
@@ -1713,7 +1714,11 @@ switch (strtoupper($funcao)) {
         $editores = $_pg["editores"];
         $perfil = $_pg["perfil"];
         $idioma = $_pg["idioma"];
-        $filtro = $_pg["filtro"];
+        if(isset($_pg["filtro"])){
+            $filtro = $_pg["filtro"];
+        } else {
+            $filtro = "";
+        }
 
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $idioma, $filtro);
         if (! isset($_pg["idmenu"])) {

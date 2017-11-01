@@ -58,19 +58,28 @@ switch (strtoupper($funcao)) {
         break;
     case "LISTAVARIAVEL":
         $m = new MetaestatInfo();
-        if (empty($_pg["filtro_esquema"])) {
+        if (!isset($_pg["filtro_esquema"])) {
             $_pg["filtro_esquema"] = "";
+        }
+        if (!isset($_pg["codigo_variavel"])) {
+            $_pg["codigo_variavel"] = "";
         }
         retornaJSON($m->listaVariavel($_pg["codigo_variavel"], $_pg["filtro_esquema"]));
         exit();
         break;
     case "LISTAMEDIDAVARIAVEL":
         $m = new MetaestatInfo();
+        if(!isset($_pg["id_medida_variavel"])){
+            $_pg["id_medida_variavel"] = "";
+        }
         retornaJSON($m->listaMedidaVariavel($_pg["codigo_variavel"], $_pg["id_medida_variavel"]));
         exit();
         break;
     case "LISTAPARAMETRO":
         $m = new MetaestatInfo();
+        if(!isset($_pg["id_medida_variavel"])){
+            $_pg["id_medida_variavel"] = "";
+        }
         retornaJSON($m->listaParametro($_pg["id_medida_variavel"], $_pg["id_parametro_medida"]));
         exit();
         break;
@@ -149,8 +158,8 @@ switch (strtoupper($funcao)) {
         retornaJSON($m->listaTemasMapa($_pg["id_mapa_grupo"], $_pg["id_mapa_tema"]));
         exit();
         break;
-    // lista os templates que o usuario pode escolher para publicar mapas
-    // a pasta com alista e definida na variavel $metaestatTemplates localizada no ms_configura.php
+        // lista os templates que o usuario pode escolher para publicar mapas
+        // a pasta com alista e definida na variavel $metaestatTemplates localizada no ms_configura.php
     case "LISTATEMPLATESMAPA":
         if (empty($metaestatTemplates)) {
             $d = dirname(__FILE__) . "/../../ferramentas/metaestat/templates";
@@ -162,8 +171,8 @@ switch (strtoupper($funcao)) {
         retornaJSON($arq);
         exit();
         break;
-    // lista os logos que o usuario pode escolher para publicar mapas
-    // a pasta com alista e definida na variavel $metaestatTemplates/logos localizada no ms_configura.php
+        // lista os logos que o usuario pode escolher para publicar mapas
+        // a pasta com alista e definida na variavel $metaestatTemplates/logos localizada no ms_configura.php
     case "LISTALOGOSMAPA":
         if (empty($metaestatTemplates)) {
             $metaestatTemplates = dirname(__FILE__) . "/../../ferramentas/metaestat/templates";
