@@ -72,6 +72,9 @@ i3GEO.legenda =
 			}
 			var temp, i, tamanho, atualiza = false;
 			if (i3GEO.arvoreDeCamadas.comparaTemas(i3GEO.legenda.CAMADAS, i3GEO.arvoreDeCamadas.CAMADAS)) {
+				if (typeof (console) !== 'undefined')
+					console.info("i3GEO.legenda.atualiza() nao precisa atualizar");
+
 				return;
 			}
 			//podem existir mais de um lugar para inserir a legenda
@@ -230,19 +233,15 @@ i3GEO.legenda =
 			cabecalho = function() {
 			};
 			minimiza = function() {
-				var t = i3GEO.janela.minimiza("wlegenda", "100px");
+				var t = i3GEO.janela.minimiza("wlegenda", "200px");
 				if (t === "min") {
 					$i("legendaTituloI").style.display = "none";
 				} else {
 					$i("legendaTituloI").style.display = "block";
 				}
 			};
-			titulo =
-				"<span class='i3GEOiconeFerramenta i3GEOiconeLegenda' title='" + $trad("P3")
-				+ "'></span>"
-				+ "<div class='i3GeoTituloJanela' id='legendaTituloI'>"
-				+ $trad("p3")
-				+ "</div>";
+			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p3") + "</span></div>";
+
 			janela = i3GEO.janela.cria(
 					largura + "px",
 					altura + "px",

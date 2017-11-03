@@ -4,10 +4,10 @@ g_traducao =
         // texto da janela de mensagens
         "p1" : [
             {
-                pt : "O i3Geo &eacute; software livre! Para download clique <a href='http://mapas.mma.gov.br/download' target=blank >aqui</a>. <b><a href='http://" + window.location.host
+                pt : "O i3Geo &eacute; software livre! Para download clique <a href='https://softwarepublico.gov.br/social/i3geo' target=blank >aqui</a>. <b><a href='http://" + window.location.host
                     + "/i3geo/mobile/qrcode.htm' target=blank >Qrcode mobile</a></b>",
-                en : "I3Geo is an open source software! Click <a href='http://mapas.mma.gov.br/download' target=blank >here</a> to download. <b><a href='http://" + window.location.host+ "/i3geo/mobile/qrcode.htm' target=blank >Qrcode mobile</a></b>",
-                es : "i3Geo es software libre! Para descargar haga clic <a href='http://mapas.mma.gov.br/download' target=blank >aqu&iacute;</a>. <b><a href='http://" + window.location.host+ "/i3geo/mobile/qrcode.htm' target=blank >Qrcode mobile</a></b>"
+                en : "I3Geo is an open source software! Click <a href='https://softwarepublico.gov.br/social/i3geo' target=blank >here</a> to download. <b><a href='http://" + window.location.host+ "/i3geo/mobile/qrcode.htm' target=blank >Qrcode mobile</a></b>",
+                es : "i3Geo es software libre! Para descargar haga clic <a href='https://softwarepublico.gov.br/social/i3geo' target=blank >aqu&iacute;</a>. <b><a href='http://" + window.location.host+ "/i3geo/mobile/qrcode.htm' target=blank >Qrcode mobile</a></b>"
             }
         ],
         // lista de propriedades do mapa
