@@ -752,16 +752,16 @@ class Alteraclasse
         if ($itemNome == "" || $ignorar != "") {
             $itemNome = $item;
         }
-        // pega valores
-        $vs = $this->pegaValores($this->mapa, $this->layer, $item, false, $ignorar);
         if ($item == $itemNome) {
-            $ns = $vs;
+            $vs = $this->pegaValores($this->mapa, $this->layer, $item, false, $ignorar,true);
+            for ($i = 0; $i < count($vs); ++ $i) {
+                $temp[$vs[$i]] = $vs[$i];
+            }
         } else {
-            $ns = $this->pegaValores($this->mapa, $this->layer, $itemNome, false, $ignorar);
-        }
-        $lista = array();
-        for ($i = 0; $i < count($vs); ++ $i) {
-            $temp[$vs[$i]] = $ns[$i];
+            $vs = $this->pegaValores($this->mapa, $this->layer, array($item,$itemNome), false, $ignorar,true);
+            for ($i = 0; $i < count($vs); ++ $i) {
+                $temp[$vs[$i][0]] = $vs[$i][1];
+            }
         }
         $valores = array_keys($temp);
         $nomes = array();
@@ -784,7 +784,7 @@ class Alteraclasse
         }
         $c = $this->layer->numclasses;
         for ($i = 0; $i < $c; ++ $i) // apaga classes atuais
-{
+        {
             $cl = $this->layer->getClass($i);
             $cl->set("status", MS_DELETE);
         }
@@ -1161,7 +1161,7 @@ class Alteraclasse
      *
      * {array}
      */
-    function pegaValores($mapa, $layer, $item, $numerico = false, $ignorar = "")
+    function pegaValores($mapa, $layer, $item, $numerico = false, $ignorar = "",$unico=false)
     {
         $layer->set("template", "none.htm");
         // $layer->setfilter("");
@@ -1174,7 +1174,6 @@ class Alteraclasse
                     $item = "value_0";
                 }
             }
-
             $sopen = $layer->open();
             if ($sopen == MS_FAILURE) {
                 return "erro";
@@ -1189,25 +1188,28 @@ class Alteraclasse
                     $shp_index = $result->shapeindex;
                     $shape = $layer->getfeature($shp_index, - 1);
                 }
-                $v = trim($shape->values[$item]);
-                if ($numerico) {
-                    if (is_numeric($v)) {
-                        if ($ignorar == "") {
-                            $valitem[] = $v;
-                        } else {
-                            // if ($v != $ignorar)
-                            if (! in_array($v, $ignorararray)) {
-                                $valitem[] = $v;
-                            }
+                if(is_array($item)){
+                    $valite = array();
+                    foreach($item as $ite){
+                        $valite[] = $this->retornaValorShape($shape,$ite,$numerico,$ignorararray);
+                    }
+                    if($unico == true){
+                        if(!in_array($valite,$valitem)){
+                            $valitem[] = $valite;
                         }
                     }
+                    else {
+                        $valitem[] = $valite;
+                    }
                 } else {
-                    if ($ignorar == "") {
-                        $valitem[] = $v;
-                    } else {
-                        if (! in_array($v, $ignorararray)) {
-                            $valitem[] = $v;
+                    $valite = $this->retornaValorShape($shape,$item,$numerico,$ignorararray);
+                    if($unico == true){
+                        if(!in_array($valite,$valitem)){
+                            $valitem[] = $valite;
                         }
+                    }
+                    else {
+                        $valitem[] = $valite;
                     }
                 }
             }
@@ -1216,7 +1218,30 @@ class Alteraclasse
         $layer->close();
         return ($valitem);
     }
-
+    function retornaValorShape($shape,$item,$numerico,$ignorararray){
+        $v = trim($shape->values[$item]);
+        $valor = "";
+        if ($numerico) {
+            if (is_numeric($v)) {
+                if (count($ignorararray) == 0) {
+                    $valor = $v;
+                } else {
+                    if (! in_array($v, $ignorararray)) {
+                        $valor = $v;
+                    }
+                }
+            }
+        } else {
+            if (count($ignorararray) == 0) {
+                $valor = $v;
+            } else {
+                if (! in_array($v, $ignorararray)) {
+                    $valor = $v;
+                }
+            }
+        }
+        return $valor;
+    }
     /*
      * Function: converteTexto
      *
