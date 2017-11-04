@@ -1,6 +1,6 @@
 # Versão em desenvolvimento do i3Geo
 
-Para versões do Mapserver 6.x ou posteriores e Openlayers 3
+Para versões do Mapserver 7.x ou posteriores e Openlayers 4
 
 Utilize esse repositório para manter seu código sempre atualizado diariamente. Isso garante o recebimento de correções de bugs.
 
@@ -15,6 +15,22 @@ Sobre segurança: https://softwarepublico.gov.br/gitlab/i3geo/i3geo/wikis/notas-
 O i3Geo pode ser instalado em diferentes sistemas operacionais Linux e também no Windows. Nesse tutorial será mostrado como instalar no Windows e no Ubuntu.
 
 Os arquivos do i3Geo estão disponíveis no Portal do Software Público Brasileiro (SPB). Para ter acesso a eles é desejável fazer um cadastro. O SPB, utiliza o Git, um sistema de controle de versões para disponibilizar o código. Assim, para obter os arquivos do i3Geo é necessário ter um cliente Git. No Windows pode ser utilizado o Tortoise. A utilização do Git é importante pois você poderá atualizar o software sempre que achar necessário.
+
+## Docker
+
+Esta versão do i3geo conta com uma imagem Docker que pode ser utilizada para testar rapidamente o software e também utiliá-lo em ambiente produtivo após as suas customizações.
+
+Para usar basta ter o Docker instalado no seu computador e executar o seguinte comando:
+
+`docker run -i -t -p 80:8080 --rm i3geo/i3geo`
+
+Em seguida, acesse um navegador de sua preferência e insira o seguinte endereço:
+
+`http://localhost/i3geo`
+
+Mais opções em https://hub.docker.com/u/i3geo/dashboard/
+
+Dicas sobre Docker: https://www.digitalocean.com/community/tutorials/como-instalar-e-utilizar-o-docker-primeiros-passos-pt
 
 ## Windows
 
@@ -314,14 +330,3 @@ Devidos às restrições de uso da API do GoogleMaps, é necessário registrar u
 
 A chave deve ser incluída na variável $googleApiKey do arquivo i3geo/ms_configura.php.
 
-## Docker
-
-Esta versão do i3geo conta com uma imagem Docker que pode ser utilizada para testar rapidamente o software e também utiliá-lo em ambiente produtivo após as suas customizações.
-
-Para usar basta ter o Docker instalado no seu computador e executar o seguinte comando:
-
-`docker run -i -t -p 80:8080 --rm i3geo/i3geo`
-
-Em seguida, acesse um navegador de sua preferência e insira o seguinte endereço:
-
-`http://localhost/i3geo`
