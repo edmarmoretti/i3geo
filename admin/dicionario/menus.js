@@ -43,5 +43,15 @@ i3GEOadmin.menus.dicionario = {
 		pt : "grupos",
 		en : "groups",
 		es : "grupos"
+	} ],
+    'nomeIn' : [ {
+		pt : "Nome em ingl&ecirc;s (opcional):",
+		en : "Name in English (optional):",
+		es : "Nombre en ingl&eacute;s (opcional):"
+	} ],
+    'nomeEs' : [ {
+		pt : "Espanhol (opcional):",
+		en : "Spanish (optional):",
+		es : "Espa&ntilde;ol (opcional):"
 	} ]
 };
