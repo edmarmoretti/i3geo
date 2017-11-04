@@ -21,8 +21,6 @@ Ativa as etiquetas de um tema.
 		$m->layer->setmetadata("IDENTIFICA","");
 		$m->layer->setmetadata("TIP",$_GET["tips"]);
 		$m->layer->setmetadata("ITENS",$_GET["itens"]);
-		//$m->layer->setmetadata("ITENSDESC",base64_decode($itensdesc));
-		//$m->layer->setmetadata("ITENSLINK",base64_decode($itenslink));
 		$m->layer->setmetadata("ITENSDESC",$_GET["itensdesc"]);
 		$m->layer->setmetadata("ITENSLINK",$_GET["itenslink"]);
 		$m->layer->setmetadata("itembuscarapida",$_GET["itembuscarapida"]);

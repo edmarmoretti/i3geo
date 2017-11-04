@@ -291,23 +291,19 @@ i3GEOF.etiqueta = {
 			i,
 			it,
 			n = inputs.length;
-		for (i=0;i<n; i++){
-			it = inputs[i];
-			if (it.checked === true && it.name === "etiquetaTip"){
-				tips.push(it.value);
+		for (i=0;i<n; i=i+5){
+			if (inputs[i].checked === true){
+				itens.push(inputs[i].value);
+				if (inputs[i+1].checked === true){
+					tips.push(inputs[i+1].value);
+				}
+				if (inputs[i+2].checked){
+					itembuscarapida = inputs[i+2].value;
+				}
+				itensdesc.push(inputs[i+3].value);
+				itenslink.push(inputs[i+4].value);
 			}
-			if (it.checked === true && it.name === "identifica"){
-				itens.push(it.value);
-			}
-			if (it.name === "itensdesc"){
-				itensdesc.push(it.value);
-			}
-			if (it.name === "itenslink"){
-				itenslink.push(it.value);
-			}
-			if (it.name === "itembuscarapida" && it.checked === true){
-				itembuscarapida = it.value;
-			}
+
 		}
 		return([tips,itens,itensdesc,itenslink,itembuscarapida]);
 	},
