@@ -132,9 +132,14 @@ i3GEOF.legenda =
 		 */
 		inicia : function(iddiv) {
 			if(i3GEOF.legenda.MUSTACHE == ""){
-				var t1 = i3GEO.configura.locaplic + "/ferramentas/legenda/template_mst.html",
-				t2 = i3GEO.configura.locaplic + "/ferramentas/legenda/templateLista_mst.html",
-				t3 = i3GEO.configura.locaplic + "/ferramentas/legenda/templateFormEstilo_mst.html";
+				if(!i3GEO.configura.ferramentas.legenda || !i3GEO.configura.ferramentas.legenda.templateDir){
+					var d = i3GEO.configura.locaplic + "/ferramentas/legenda";
+				} else {
+					var d = i3GEO.configura.ferramentas.legenda.templateDir;
+				}
+				var t1 = d + "/template_mst.html",
+				t2 = d + "/templateLista_mst.html",
+				t3 = d + "/templateFormEstilo_mst.html";
 				$.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
 					i3GEOF.legenda.MUSTACHE = r1[0];
 					i3GEOF.legenda.MUSTACHELISTA = r2[0];
