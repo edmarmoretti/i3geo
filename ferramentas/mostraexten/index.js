@@ -163,14 +163,18 @@ i3GEOF.mostraExten = {
 				y = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyg").value,$i("i3GEOmostraExtenym").value,$i("i3GEOmostraExtenys").value),
 				yy = i3GEO.calculo.dms2dd($i("i3GEOmostraExtenyyg").value,$i("i3GEOmostraExtenyym").value,$i("i3GEOmostraExtenyys").value);
 			if ((x == xx) || (y == yy)){
-				i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));
+				//i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));
+				//return;
+
+				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.parametros.tipoimagem,$i("i3GEOmostraExtenatual").value);
 				return;
 			}
 			if ((x > xx) || (y > yy)){
-				i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));
+				//i3GEO.janela.tempoMsg($trad('msgCoordValida',i3GEOF.mostraExten.dicionario));
+				i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.parametros.tipoimagem,$i("i3GEOmostraExtenatual").value);
 				return;
 			}
-			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,window.parent.i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
+			i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
 		}
 		catch(e){i3GEO.janela.tempoMsg(e+" Erro.");}
 	}

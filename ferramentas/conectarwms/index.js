@@ -250,13 +250,9 @@ i3GEOF.conectarwms = {
 			if (tema != ""){
 				var retorno = function(retorno){
 					i3GEOF.conectarwms.aguarde.visibility = "hidden";
-					if(retorno.data != "ok"){
-						i3GEO.janela.tempoMsg($trad('erro2',i3GEOF.conectarwms.dicionario));aguarde("none");
-					}
-					else{
-						i3GEO.atualiza();
-					}
+					i3GEO.atualiza();
 				};
+				i3GEOF.conectarwms.tema = tema;
 				i3GEOF.conectarwms.aguarde.visibility = "visible";
 				var tiporep = "";
 				if($i("tiporep")){
@@ -270,12 +266,12 @@ i3GEOF.conectarwms = {
 					$i("proj").value = "EPSG:4326";
 				}
 				var p = "&funcao=adicionatemawms&servico="+$i("servicoWms").value+"&tema="+i3GEOF.conectarwms.tema+"&nome="+nometema+"&proj="+$i("proj").value+"&formato="+$i("formatos").value+"&tipo="+tipo+"&versao="+$i("versao").value+"&nomecamada="+nomecamada+"&tiporep="+tiporep+"&suportasld="+sldflag+"&formatosinfo="+$i("formatosinfo").value;
-				if(g_tipows == "WMS-Tile"){
-					p += "&tile=1";
-				}
-				else{
+				//if(g_tipows && g_tipows == "WMS-Tile"){
+				//	p += "&tile=1";
+				//}
+				//else{
 					p += "&tile=0";
-				}
+				//}
 				var cp = new cpaint();
 				cp.set_transfer_mode("POST");
 				cp.set_response_type("JSON");

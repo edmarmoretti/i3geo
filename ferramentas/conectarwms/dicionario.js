@@ -30,6 +30,11 @@ i3GEOF.conectarwms.dicionario = {
 		en : "",
 		es : ""
 	} ],
+	'listasel' : [ {
+		pt : "Lista de servi&ccedil;os cadastrados",
+		en : "",
+		es : ""
+	} ],
 	5 : [ {
 		pt : "Ooops! Problemas ao acessar o servi&ccedil;o.",
 		en : "",

@@ -588,7 +588,7 @@ function imprimeEstilos($es, $suporta, $retorna, $tval, $tituloalternativo) {
 		$nomeestilo = $e ["nome"];
 		$nomecamada = $e ["titulo"];
 		$tituloestilo = $e ["titulo"];
-		$onclick = "seltema(\"estilo\",\"" . $tval . "\",\"\",\"" . $nomeestilo . "\",\"" . $tituloalternativo . " " . $nomecamada . " " . $tituloestilo . "\",\"" . $suporta . "\")";
+		$onclick = "i3GEOF.conectarwms.seltema(\"estilo\",\"" . $tval . "\",\"\",\"" . $nomeestilo . "\",\"" . $tituloalternativo . " " . $nomecamada . " " . $tituloestilo . "\",\"" . $suporta . "\")";
 
 		$retorna [] = <<<EOT
 <div class="list-group condensed">
@@ -611,7 +611,7 @@ EOT;
 	return $retorna;
 }
 function imprimeEstilos2($camada1, $titulocamada1, $suporta) {
-		$onclick = "seltema(\"tema\",\"" . $camada1 . "\",\"\",\"default\",\"" . $camada1 . " " . $titulocamada1 . "\",\"" . $suporta . "\")";
+		$onclick = "i3GEOF.conectarwms.seltema(\"tema\",\"" . $camada1 . "\",\"\",\"default\",\"" . $camada1 . " " . $titulocamada1 . "\",\"" . $suporta . "\")";
 		$retorna = <<<EOT
 <div class="list-group condensed">
 <div class="row-content text-left">
@@ -758,7 +758,7 @@ function temaswfs() {
 		foreach ( $vs as $v ) {
 			$temp .= $v->nodeValue;
 		}
-		$temp = "<input style='cursor:pointer' type=radio NAME='checks' onClick='seltema(\"" . $temp . "\",\"" . $temp1 . "\",\"" . $temp3 . "\",\"" . $serv . "\")' /><span style=color:red >" . $temp . "</span><br>";
+		$temp = "<input style='cursor:pointer' type=radio NAME='checks' onClick='i3GEOF.conectarwms.seltema(\"" . $temp . "\",\"" . $temp1 . "\",\"" . $temp3 . "\",\"" . $serv . "\")' /><span style=color:red >" . $temp . "</span><br>";
 		$retorno .= "<br>" . $temp . $temp1 . "<br>" . $temp2 . "<hr>";
 	}
 	$cp->set_data ( $retorno );
