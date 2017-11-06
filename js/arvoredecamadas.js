@@ -473,7 +473,7 @@ i3GEO.arvoreDeCamadas =
          */
         atualizaLegenda : function(idtema) {
             if (typeof (console) !== 'undefined')
-                console.info("oops i3GEO.arvoreDeCamadas.atualizaLegenda()");
+                console.info("depreciado i3GEO.arvoreDeCamadas.atualizaLegenda()");
 
         },
         /**

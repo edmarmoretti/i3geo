@@ -278,11 +278,14 @@ i3GEO.tema =
 		 * {string} - nova cor (r,g,b)
 		 */
 		alteracorclasse : function(idtema, idclasse, rgb) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.tema.alteracorclasse()");
+
 			i3GEO.mapa.ativaTema(idtema);
 			i3GEO.php.aplicaCorClasseTema(temp = function() {
 				i3GEO.atualiza();
 				i3GEO.Interface.atualizaTema("", idtema);
-				i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
+				//i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
 			}, idtema, idclasse, rgb);
 		},
 		/**

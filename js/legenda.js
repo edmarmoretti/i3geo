@@ -200,6 +200,9 @@ i3GEO.legenda =
 			i3GEO.php.inverteStatusClasse(temp, leg.name, leg.value);
 		},
 		mudaCorClasse : function(tema,idclasse) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.legenda.mudaCorClasse() cria um input hidden com id=tempinputcorclasse e abre o colorpicker");
+
 			var obj, novoel;
 			if (!$i("tempinputcorclasse")) {
 				novoel = document.createElement("input");
