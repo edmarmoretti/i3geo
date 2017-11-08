@@ -99,7 +99,9 @@ switch (strtoupper($funcao))
 						}
 						$layer->set("data",$data);
 					}
-					$layer->set("status",MS_DEFAULT);
+					if(isset($_GET["ativacamada"])){
+					   $layer->set("status",MS_DEFAULT);
+					}
 					$layer->setmetadata("PLUGINI3GEO",'{"plugin":"parametrossql","ativo":"sim"}');
 					$layer->setmetadata("TEMA",$layer1->getmetadata("TEMA")." - ".$titulos);
 					//$layer->set("name","plugin".nomeRandomico());

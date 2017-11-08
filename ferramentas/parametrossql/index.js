@@ -163,6 +163,7 @@ i3GEOF.parametrossql = {
 			};
 			p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
 				+ "&funcao=aplicar"
+				+ "&ativacamada=sim"
 				+ "&tema=" + camada.name
 				+ "&chaves=&valores=" + par.join(",");
 			cp = new cpaint();

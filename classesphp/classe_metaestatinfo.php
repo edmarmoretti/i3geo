@@ -510,6 +510,7 @@ class MetaestatInfo{
             $this->nomecache = $this->nomecache . $this->nomeRandomico(5);
         }
         $arq = $this->dir_tmp."/".$this->nomecache.".map";
+
         if(!file_exists($arq)){
             $meta = $this->listaMedidaVariavel("",$id_medida_variavel);
             //evita agregar regioes qd nao e necessario
@@ -578,14 +579,14 @@ class MetaestatInfo{
                 $titulo = array();
                 //adiciona as classes novas
                 $expressao[] = "([".$item."]<=".($calc["quartil1"]).")";
-                $titulo[] = "Quartil 1: <=".$calc["quartil1"];
+                $titulo[] = "<=".round($calc["quartil1"],3);
                 $expressao[] = "(([".$item."]>".($calc["quartil1"]).")and([".$item."]<=".($calc["quartil2"])."))";
-                $titulo[] = "Quartil 2: >".$calc["quartil1"]." e <= ".$calc["quartil2"];
+                $titulo[] = "> ".round($calc["quartil1"],3)." e <= ".round($calc["quartil2"],3);
                 if($calc["quartil3"] != 0){
                     $expressao[] = "(([".$item."]>".($calc["quartil2"]).")and([".$item."]<=".($calc["quartil3"])."))";
-                    $titulo[] = "Quartil 3: >".$calc["quartil2"]." e <= ".$calc["quartil3"];
+                    $titulo[] = "> ".round($calc["quartil2"],3)." e <= ".round($calc["quartil3"],3);
                     $expressao[] = "([".$item."]>".($calc["quartil3"]).")";
-                    $titulo[] = "Quartil 4: >".$calc["quartil3"];
+                    $titulo[] = "> ".round($calc["quartil3"],3);
                 }
                 if($calc["quartil1"] > 0){
                     $classes[] = array(
@@ -736,6 +737,7 @@ class MetaestatInfo{
                 fwrite($fp,$dado."\n");
             }
         }
+
         return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
     }
     /**

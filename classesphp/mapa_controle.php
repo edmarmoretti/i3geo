@@ -249,6 +249,7 @@ if ($funcao == "criaMapa") {
     cpjson($id);
     return;
 }
+
 if (! isset($map_file)) {
     // nesse caso &eacute; necess&aacute;rio criar o diret&oacute;rio tempor&aacute;rio e iniciar o mapa
     // $cp->set_data(array("erro"=>"linkquebrado"));
