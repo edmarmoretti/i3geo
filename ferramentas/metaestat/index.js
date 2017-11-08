@@ -295,6 +295,10 @@ i3GEOF.metaestat = {
                 $i(iddiv).innerHTML = i3GEOF.metaestat.classes.html();
                 i3GEOF.metaestat.classes.comboTipoClassificacao();
             }
+            if(i3GEOF.metaestat.INTERFACE == "inline"){
+                $i(iddiv).innerHTML = i3GEOF.metaestat.classes.html();
+                i3GEOF.metaestat.classes.comboTipoClassificacao();
+            }
         },
         /**
          * Abre a janela flutuante da ferramenta
@@ -584,6 +588,9 @@ i3GEOF.metaestat = {
             }
             //e necessario obter os parametros nessa interface
             if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
+                i3GEOF.metaestat.classes.aplicar();
+            }
+            if(i3GEOF.metaestat.INTERFACE == "inline"){
                 i3GEOF.metaestat.classes.aplicar();
             }
             if(i3GEO.Interface.ATUAL === "googlemaps"){
@@ -1490,7 +1497,7 @@ i3GEOF.metaestat = {
                         "combo"+idcombo,
                         dados,
                         dados,
-                        "overflow:auto;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px;height:150px;border:1px solid gray;background-color:white",
+                        "",  // "overflow:auto;width:"+(i3GEOF.metaestat.LARGURA - 20)+"px;height:150px;border:1px solid gray;background-color:white",
                         oc
                     );
                 }
@@ -1571,6 +1578,9 @@ i3GEOF.metaestat = {
             if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
                 template = "templatesimples_mst.html";
             }
+            if(i3GEOF.metaestat.INTERFACE == "inline"){
+                template = "templatesimplesinline_mst.html";
+            }
             i3GEOF.metaestat.log("i3GEOF.metaestat.principal.inicia()");
             if(!iddiv || !$i(iddiv)){
                 iddiv = "i3geoCartoParametros_corpo";
@@ -1588,10 +1598,19 @@ i3GEOF.metaestat = {
                 $i(iddiv).innerHTML = i3GEOF.metaestat.principal.html();
                 i3GEOF.metaestat.principal.opcoesVariaveis();
             }
+            
             //interface qd a medida da variavel ja tiver sido definida. Utilizada ao adicionar uma camada via catalogo de temas
             //TODO incluir via template mustache
             if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
                 i3GEOF.metaestat.principal.abreJanela();
+                $i(iddiv).innerHTML = i3GEOF.metaestat.principal.html();
+
+                i3GEOF.metaestat.classes.comboRegiao(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);
+                i3GEOF.metaestat.classes.comboTipoClassificacao();
+                i3GEOF.metaestat.parametros.lista(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);
+            }
+
+            if(i3GEOF.metaestat.INTERFACE == "inline"){
                 $i(iddiv).innerHTML = i3GEOF.metaestat.principal.html();
 
                 i3GEOF.metaestat.classes.comboRegiao(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);
@@ -1639,6 +1658,9 @@ i3GEOF.metaestat = {
                     i3GEO.janela.minimiza("i3geoCartoParametros");
                 };
                 if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
+                    modal = false;
+                }
+                if(i3GEOF.metaestat.INTERFACE == "inline"){
                     modal = false;
                 }
                 titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x57") + "</span></div>";
