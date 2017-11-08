@@ -256,6 +256,7 @@ if(empty($base) && !empty($parurl["base"])){
 }
 
 ms_ResetErrorList();
+$metaestatids = @$parurl["metaestatids"];
 $temasa = @$parurl["temasa"];
 $layers = @$parurl["layers"];
 $desligar = @$parurl["desligar"];
@@ -819,7 +820,7 @@ Inclui os temas definidos na vari&aacute;vel $temasa
 Os temas devem estar em i3geo/temas
 */
 function incluiTemasIniciais(){
-	global $temasa,$mapn,$locaplic;
+	global $temasa,$mapn,$locaplic,$metaestatids,$layers;
 	if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN'){
 		$temasdir = $locaplic."\\temas";
 	}
@@ -831,6 +832,53 @@ function incluiTemasIniciais(){
 	}
 	$temasa = str_replace(','," ",$temasa);
 	$alayers = explode(" ",$temasa);
+	if(isset($metaestatids)){
+	    //localhost/i3geo/ms_criamapa.php?metaestatids=25,12&layers=25
+	    include_once (dirname(__FILE__) . "/classesphp/classe_metaestatinfo.php");
+	    $metaestatids = str_replace(','," ",$metaestatids);
+	    $metaestatids = explode(" ",$metaestatids);
+	    $metaestatidsligados = $layers;
+	    $metaestatidsligados = str_replace(','," ",$metaestatidsligados);
+	    $metaestatidsligados = explode(" ",$metaestatidsligados);
+	    foreach($metaestatids as $metaestatid){
+	        //$_pg["filtro"] = str_replace('"', "'", $_pg["filtro"]);
+	        $m = new MetaestatInfo();
+
+	        $parametros = $m->listaParametro($metaestatid,"","",true,true);
+	        //id_parametro_medida,coluna
+	        $filtroPar = array();
+	        foreach($parametros as $parametro){
+	            $valoresparametro = $m->valorUnicoMedidaVariavel($metaestatid,$parametro["coluna"]);
+	            $valormaior = $valoresparametro[count($valoresparametro) - 1];
+	            $filtroPar[] =  " ".$parametro["coluna"] . "::text = '" . $valormaior[$parametro["coluna"]] . "' ";
+	        }
+	        //var_dump($filtroPar);exit;
+	        $mapfilemetaestat = $m->mapfileMedidaVariavel(
+	            $metaestatid,
+	            implode(" AND ",$filtroPar),
+	            0,
+	            "polygon",
+	            "",
+	            "",
+	            "",
+	            "",
+	            "",
+	            false,
+	            false
+	        );
+	        //array(3) { ["mapfile"]=> string(52) "/tmp/ms_tmp/AAAAc20ad4d76fe97759aa27a0c99bff6710.map" ["layer"]=> string(36) "AAAAc20ad4d76fe97759aa27a0c99bff6710" ["titulolayer"]=> string(0) "" }
+	        //var_dump ($mapfilemetaestat);
+	        //exit;
+	        array_push($alayers,$mapfilemetaestat["mapfile"]);
+
+	        if(in_array($metaestatid,$metaestatidsligados)){
+	            $maptemp = @ms_newMapObj($mapfilemetaestat["mapfile"]);
+	            $maptemp->getlayerbyname($mapfilemetaestat["layer"])->set("status",MS_DEFAULT);
+	            $maptemp->save($mapfilemetaestat["mapfile"]);
+	        }
+	    }
+	}
+
 	$existeraster = false;
 	foreach ($alayers as $arqt)	{
 		$arqtemp = "";
@@ -854,7 +902,7 @@ function incluiTemasIniciais(){
 			$arqtemp = $temasdir."/".$arqt.$extensao;
 		}
 		if($arqtemp == ""){
-			echo "<br>Imposs&iacute;vel acessar tema $arqtemp";
+			//echo "<br>Imposs&iacute;vel acessar tema $arqtemp";
 		}
 		else{
 			if ($extensao == ".map" && !@ms_newMapObj($arqtemp)){

@@ -1497,8 +1497,9 @@ i3GEOF.metaestat = {
                 novoel = document.createElement("div");
                 novoel.className = "paragrafo";
                 novoel.innerHTML = ins;
-                i3GEOF.metaestat.comum.aguarde("hidden");
+
                 onde.appendChild(novoel);
+                i3GEOF.metaestat.comum.aguarde("hidden");
             };
             i3GEO.php.listaValoresParametroMedidaVariavel(id_parametro_medida,temp);
         },

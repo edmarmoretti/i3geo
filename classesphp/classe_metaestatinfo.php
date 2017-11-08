@@ -506,7 +506,9 @@ class MetaestatInfo{
         //Layers adicionados aqui sao marcados com o metadata METAESTAT "SIM"
         //O codigo_tipo_regiao e marcado com o metadata METAESTAT_CODIGO_TIPO_REGIAO
         //O id da medida da variavel e marcado com o metadata METAESTAT_ID_MEDIDA_VARIAVEL
-
+        if($cachemapfile == false){
+            $this->nomecache = $this->nomecache . $this->nomeRandomico(5);
+        }
         $arq = $this->dir_tmp."/".$this->nomecache.".map";
         if(!file_exists($arq)){
             $meta = $this->listaMedidaVariavel("",$id_medida_variavel);
@@ -1021,8 +1023,8 @@ class MetaestatInfo{
      * @param coluna
      * @return array
      */
-    function valorUnicoMedidaVariavel($id_medida_variavel,$coluna){
-        $sqlf = $this->sqlMedidaVariavel($id_medida_variavel,0,$coluna);
+    function valorUnicoMedidaVariavel($id_medida_variavel,$coluna,$filtro=""){
+        $sqlf = $this->sqlMedidaVariavel($id_medida_variavel,0,$coluna,"polygon","",false,$filtro);
         $sqlf = $sqlf["sqlagrupamento"];
         $metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
         if(!empty($metaVariavel["codigo_estat_conexao"])){
