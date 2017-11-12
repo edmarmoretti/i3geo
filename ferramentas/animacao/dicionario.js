@@ -2,27 +2,27 @@
 i3GEOF.animacao.dicionario = {
 	'inicia' : [ {
 		pt : "inicia",
-		en : "",
+		en : "start",
 		es : "incia"
 	} ],
 	'rebobina' : [ {
 		pt : "rebobina",
-		en : "",
+		en : "rewind",
 		es : "rebobina"
 	} ],
 	'rapido' : [ {
 		pt : "mais rapido",
-		en : "",
+		en : "increase speed",
 		es : "m&aacute;s r&aacute;pido"
 	} ],
 	'lento' : [ {
 		pt : "mais lento",
-		en : "",
+		en : "decrease sped",
 		es : "m&aacute;s lento"
 	} ],
 	'ajuda' : [ {
 		pt : "Marque as camadas que ser&atilde;o inclu&iacute;das na anima&ccedil;&atilde;o e depois clique no bot&atilde;o <i>inicia</i>",
-		en : "",
-		es : "Marque las capas que ser&aacute;n incluidas en la animaci&oacute;n y despu&eacute;s haga clic en el bot;oacute;n inicio"
+		en : "Check the layers that will be included in the animation and then click the <i>start</i> button",
+		es : "Marque las capas que se incluir&aacute;n en la animaci&oacute;n y, a continuaci&oacute;n, haga clic en el bot&oacute;n de <i>inicio</i>"
 	} ]
 };
