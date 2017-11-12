@@ -2,12 +2,12 @@
 i3GEOF.aplicarsld.dicionario = {
 	'arquivo' : [ {
 		pt : "Arquivo SLD",
-		en : "",
+		en : "SLD file",
 		es : "Archivo SLD"
 	} ],
 	'aplica' : [ {
 		pt : "Aplicar",
-		en : "",
+		en : "Apply",
 		es : "Aplicar"
 	} ]
 };
