@@ -1,13 +1,13 @@
 //+$trad(1,i3GEOF.area.dicionario)+
 i3GEOF.area.dicionario = {
 		'incorporar' : [{
-			pt : "Incroporar figura ao mapa",
-			en : "",
-			es : ""
+			pt : "Incorporar figura ao mapa",
+			en : "Add picture to the map",
+			es : "Agregar figura al mapa"
 		}],
 		'inicia' : [{
 			pt : "Clique em diferentes pontos do mapa para tra&ccedil;ar um pol&iacute;gono",
-			en : "",
-			es : ""
+			en : "Click on different points on the map to draw a polygon",
+			es : "Haga clic en diferentes puntos del mapa para dibujar un pol&iacute;gono"
 		}]
 };
