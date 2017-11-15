@@ -90,6 +90,13 @@ tooltip dos botoes da guia movel
 	width: 120px;
 	min-height: 30px;
 }
+/* camadas de fundo*/
+.tooltip-inner > img {
+	padding: 0px;
+	width: 200px;
+	height: 200px;
+}
+
 /*
 tooltip balao info
 */
@@ -101,7 +108,6 @@ tooltip balao info
 	overflow: auto;
 	max-height: 300px
 }
-
 /*
 Botoes material
 */
@@ -276,7 +282,7 @@ hr {
 	display: block;
 	border: 0px solid white;
 	text-align: left;
-	z-index: 20000;
+	z-index: 1;
 	left: auto;
 	right: 2px;
 	top: 5px;
@@ -1407,7 +1413,7 @@ bd .i3geoFormIconeEdita {
 		width: 235px;
 		vertical-align: middle;
 	}
-	.ol-zoomslider {
+	.ol-zoomslider, .ol-zoom {
 		display: none;
 	}
 	.ol-scale-line {

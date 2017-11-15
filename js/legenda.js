@@ -47,7 +47,7 @@ i3GEO.legenda =
 			}
 		},
 		registra : function(idleg){
-			if(i3GEO.legenda.IDS.indexOf(idleg) == -1){
+			if($i(idleg) && i3GEO.legenda.IDS.indexOf(idleg) == -1){
 				i3GEO.legenda.IDS.push(idleg);
 			}
 		},

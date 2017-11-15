@@ -29,6 +29,7 @@ i3GEO.janela.ativaAlerta();
 					visible : true,
 					isBaseLayer : true,
 					name : "eng",
+                    preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
 								url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
@@ -44,6 +45,7 @@ i3GEO.janela.ativaAlerta();
 					visible : false,
 					isBaseLayer : true,
 					name : "oce",
+                    preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
 								url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
@@ -59,6 +61,7 @@ i3GEO.janela.ativaAlerta();
 					visible : false,
 					isBaseLayer : true,
 					name : "ims",
+                    preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
 								url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
@@ -74,6 +77,7 @@ i3GEO.janela.ativaAlerta();
 					visible : false,
 					isBaseLayer : true,
 					name : "wsm",
+                    preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
 								url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
@@ -89,6 +93,7 @@ i3GEO.janela.ativaAlerta();
 					visible : false,
 					isBaseLayer : true,
 					name : "bra",
+                    preview: "<img src=http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&TRANSPARENT=true&layers=baseraster&srs=EPSG:4326&format=image/png&WIDTH=256&HEIGHT=256&CRS=EPSG:4326&STYLES=&BBOX=-9.66796875,-48.427734375,-9.580078125,-48.33984375 >",
 					source : new ol.source.TileWMS(
 							{
 								url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
@@ -99,52 +104,8 @@ i3GEO.janela.ativaAlerta();
 								}
 							})
 				});
-		var tms = new ol.layer.Tile(
-				{
-					title : "OSGEO",
-					visible : false,
-					isBaseLayer : true,
-					name : "tms",
-					source : new ol.source.TileWMS(
-							{
-								url : "http://tilecache.osgeo.org/wms-c/Basic.py/",
-								params : {
-									'layers' : "basic",
-									'type' : "png",
-									'srs' : "EPSG:4326",
-									'format' : "image/png",
-									'VERSION' : '1.1.1'
-								},
-								attributions : [ new ol.Attribution(
-										{
-											html : '&copy; <a  href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
-										}) ]
-							})
-				});
-       /*
-       var esus = new ol.layer.Tile(
-				{
-					title : "ESUS Gestor",
-					visible : true,
-					isBaseLayer : true,
-					name : "osm",
-					source : new ol.source.TileWMS(
-							{
-								url : "http://192.168.1.112/mapcache/wms",
-								params : {
-									'layers' : "osm",
-									'srs' : "EPSG:4326",
-									'format' : "image/png"
-								},
-                                attributions : [ new ol.Attribution(
-                                        {
-                                            html : '&copy; </a>'
-                                        }) ]
-							})
-				});
-         */
 		i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ eng, oce, ims, wsm,
-		                                                bra, tms ];
+		                                                bra];
 	}
 	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === true){
 			var attribOSMData = 'Map Data: &copy; <a  href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';

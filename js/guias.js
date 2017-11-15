@@ -354,13 +354,15 @@ i3GEO.guias =
 						f.idLegenda = obj.attr("data-idLegenda");
 					}
 					//necessario para a legenda nao ser atualizada nos eventos desnecessariamente
-					$i(f.idLegenda).style.display = "block";
-					i3GEO.legenda.CAMADAS = "";
-					i3GEO.legenda.inicia({
-						"idLegenda": f.idLegenda,
-						"templateLegenda": $("#" + f.idLegenda).attr("data-template"),
-						"janela": false
-					});
+					if($i(f.idLegenda)){
+						$i(f.idLegenda).style.display = "block";
+						i3GEO.legenda.CAMADAS = "";
+						i3GEO.legenda.inicia({
+							"idLegenda": f.idLegenda,
+							"templateLegenda": $("#" + f.idLegenda).attr("data-template"),
+							"janela": false
+						});
+					}
 				}
 			},
 			"temas" : {
@@ -394,13 +396,15 @@ i3GEO.guias =
 					if($("#" + obj.attr("data-idListaFundo")).attr("data-idTemplateCamada") != undefined){
 						f.idTemplateCamadaFundo = $("#" + obj.attr("data-idListaFundo")).attr("data-idTemplateCamada");
 					}
-					i3GEO.arvoreDeCamadas.inicia({
-						"idOnde" : f.idListaDeCamadas,
-						"templateCamada": $("#" + f.idListaDeCamadas).attr("data-template"),
-						"idListaFundo": f.idListaFundo,
-						"templateCamadaFundo": $("#" + f.idListaFundo).attr("data-template"),
-						"verificaAbrangencia": f.verificaAbrangencia
-					});
+					if($i(f.idListaDeCamadas)){
+						i3GEO.arvoreDeCamadas.inicia({
+							"idOnde" : f.idListaDeCamadas,
+							"templateCamada": $("#" + f.idListaDeCamadas).attr("data-template"),
+							"idListaFundo": f.idListaFundo,
+							"templateCamadaFundo": $("#" + f.idListaFundo).attr("data-template"),
+							"verificaAbrangencia": f.verificaAbrangencia
+						});
+					}
 				}
 			},
 			"adiciona" : {
