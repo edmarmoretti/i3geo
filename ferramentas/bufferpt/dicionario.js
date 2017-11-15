@@ -2,22 +2,22 @@
 i3GEOF.bufferpt.dicionario = {
 	'entorno' : [ {
 		pt : "Dist&acirc;ncia em metros ao redor do ponto",
-		en : "",
+		en : "Distance in meters around the point",
 		es : "Distancia en metros alrededor de un punto"
 	} ],
 	'criaEntorno' : [ {
 		pt : "Criar",
-		en : "",
+		en : "Create",
 		es : "Crear"
 	} ],
 	'erroTempo' : [ {
 		pt : "Erro. A opera&ccedil;&atilde;o demorou muito.",
-		en : "",
-		es : "Error. La operaci&oacute;n demoro mucho"
+		en : "Error. Execution time too long.",
+		es : "Error. La operaci&oacute;n tard&oacute; mucho."
 	} ],
 	'erroDistancia' : [ {
 		pt : "Dist&acirc;ncia inv&aacute;lida",
-		en : "",
-		es : "Distancia inadecuada"
+		en : "Invalid distance",
+		es : "Distancia no v&aacute;lida"
 	} ]
 };
