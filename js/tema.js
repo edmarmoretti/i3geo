@@ -285,7 +285,7 @@ i3GEO.tema =
 			i3GEO.php.aplicaCorClasseTema(temp = function() {
 				i3GEO.atualiza();
 				i3GEO.Interface.atualizaTema("", idtema);
-				//i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
+				i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
 			}, idtema, idclasse, rgb);
 		},
 		/**

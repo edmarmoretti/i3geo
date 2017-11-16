@@ -695,10 +695,13 @@ i3GEO.editorOL = {
 			var n = i3GEO.editorOL.idsSelecionados.length,
 			ins = "",
 			s = i3GEO.desenho.layergrafico.getSource(),
-			i, w, g;
+			i, w, g,f, format = new ol.format.WKT();
 			for (i = 0; i < n; i++) {
-				g = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]);
-				ins += "<b>" + $trad("u6") + ": #" + i + "</b><br>" + i3GEO.editorOL.google2wgs(g.getGeometry().getCoordinates()) + "<br><br>";
+				f = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]).clone();
+				g = i3GEO.editorOL.google2wgs(f.getGeometry());
+				f.setGeometry(g);
+				g = format.writeFeatures([f])
+				ins += "<b>" + $trad("u6") + ": #" + i + "</b><br>" + g + "<br><br>";
 			}
 			w = window.open();
 			w.document.write(ins);
@@ -724,7 +727,6 @@ i3GEO.editorOL = {
 				g = i3GEO.editorOL.google2wgs(g);
 				format = new ol.format.WKT();
 				f.setGeometry(g);
-
 				if (tema == "") {
 					return;
 				}
