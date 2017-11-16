@@ -2,77 +2,77 @@
 i3GEOF.busca.dicionario = {
 	'digita' : [ {
 		pt : "Texto para busca",
-		en : "",
-		es : "digite aqu&iacute; el texto..."
+		en : "Enter your search terms",
+		es : "Digite aqu&iacute; el texto a buscar"
 	} ],
 	'procura' : [ {
 		pt : "Procurar",
-		en : "",
+		en : "Search",
 		es : "Buscar"
 	} ],
 	'busca' : [ {
 		pt : "qualquer lugar do item, ou",
-		en : "",
-		es : "cualquier lugar del &iacute;tem, o"
+		en : "anywhere in the field, or",
+		es : "cualquier lugar del campo, o"
 	} ],
 	'busca2' : [ {
 		pt : "a frase exata",
-		en : "",
+		en : "the exact phrase",
 		es : "la frase exacta "
 	} ],
 	'busca3' : [ {
 		pt : "procurar no mapa todo, ou",
-		en : "",
-		es : "buscar en el mapa todo, o"
+		en : "search on the entire map, or",
+		es : "buscar en todo el mapa, o"
 	} ],
 	'busca4' : [ {
 		pt : "na regi&atilde;o atual",
-		en : "",
+		en : "in the current region",
 		es : "en la regi&oacute;n actual"
 	} ],
 	'busca5' : [ {
 		pt : "Buscar nos itens:",
-		en : "",
-		es : "Buscar en los &iacute;tems"
+		en : "Search in the fields:",
+		es : "Buscar en los campos:"
 	} ],
 	'erroTema' : [ {
-		pt : "O tema ja nao existe mais no mapa",
-		en : "",
-		es : "El tema ya no existe m&aacute;s en el mapa"
+		pt : "O tema j&aacute; n&atilde;o existe mais no mapa",
+		en : "The theme no longer exists on the map",
+		es : "El tema ya no existe en el mapa"
 	} ],
 	'erro' : [ {
 		pt : "Ocorreu um erro",
-		en : "",
+		en : "An error has occurred",
 		es : "Ocurri&oacute; un error"
 	} ],
 	'erroTema2' : [ {
 		pt : "O tema ja nao existe mais no mapa",
-		en : "",
-		es : "El tema ya no existe m&aacute;s en el mapa"
+		en : "The theme no longer exists on the map",
+		es : "El tema ya no existe en el mapa"
 	} ],
 	'selecionaItem' : [ {
 		pt : "Selecione um item",
-		en : "",
-		es : "Selecciones un mapa"
+		en : "Select a field",
+		es : "Seleccione un campo"
 	} ],
 	'semRegistro' : [ {
 		pt : "Nenhum registro encontrado",
-		en : "",
-		es : "Ning&uacute;n registro encontrado"
+		en : "No records found",
+		es : "No se encontraron registros"
 	} ],
 	'localiza' : [ {
 		pt : "localiza",
-		en : "",
+		en : "locate",
 		es : "localiza"
 	} ],
 	'onde' : [ {
 		pt : "Buscar na camada",
-		en : "",
-		es : ""
+		en : "Search in the layer",
+		es : "Buscar en la capa"
 	} ],
 	'opecoes' : [ {
 		pt : "Op&ccedil;&otilde;es",
-		en : "",
-		es : ""
+		en : "Options",
+		es : "Opciones"
 	} ]
 };
