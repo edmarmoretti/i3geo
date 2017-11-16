@@ -47,8 +47,8 @@ i3GEOadmin.renderizacao = {
 													"onSalvar": "i3GEOadmin.renderizacao.salvar",
 													"cache": function(){
 														var hash = {
-																"sim": i3GEOadmin.comportamento.dicionario.sim,
-																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"sim": i3GEOadmin.renderizacao.dicionario.sim,
+																"nao": i3GEOadmin.renderizacao.dicionario.nao,
 																"NAO-sel" : "",
 																"SIM-sel": ""
 															};
@@ -60,8 +60,8 @@ i3GEOadmin.renderizacao = {
 													},
 													"tiles": function(){
 														var hash = {
-																"sim": i3GEOadmin.comportamento.dicionario.sim,
-																"nao": i3GEOadmin.comportamento.dicionario.nao,
+																"sim": i3GEOadmin.renderizacao.dicionario.sim,
+																"nao": i3GEOadmin.renderizacao.dicionario.nao,
 																"NAO-sel" : "",
 																"SIM-sel": ""
 															};

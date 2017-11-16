@@ -1,10 +1,10 @@
 [data-toggle*=collapse]:after {
 	font-family: "Glyphicons Halflings";
-	content: "\e114";
+	content: "\e113";
 }
 /* Icon when the collapsible content is hidden */
 [data-toggle*=collapse].collapsed:after {
-	content: "\e080";
+	content: "\e114";
 }
 
 .ol-attribution li {
