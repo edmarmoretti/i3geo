@@ -1308,7 +1308,11 @@ switch (strtoupper($funcao)) {
             $retorno = $m->desceclasse($idclasse);
         }
         if ($opcao == "alteracor") {
-            $retorno = $m->alteracor($idclasse, $_pg["cor"]);
+            if(!isset($_pg["w"])){
+                $_pg["w"] = 35;
+                $_pg["h"] = 25;
+            }
+            $retorno = $m->alteracor($idclasse, $_pg["cor"],$_pg["w"],$_pg["h"]);
         }
         if ($opcao == "adicionaopacidade") {
             $retorno = $m->adicionaopacidade();

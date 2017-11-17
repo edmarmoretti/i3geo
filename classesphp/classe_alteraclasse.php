@@ -907,7 +907,7 @@ class Alteraclasse
      *
      * $cor {string} - cor rgb
      */
-    function alteracor($idclasse, $cor)
+    function alteracor($idclasse, $cor, $w=35, $h=25)
     {
         // error_reporting(0);
         if (! $this->layer) {
@@ -929,7 +929,8 @@ class Alteraclasse
             }
         }
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        $imagem = $classe->createLegendIcon($w, $h)->saveWebImage();
+        return ($imagem);
     }
 
     /*
@@ -1005,6 +1006,7 @@ class Alteraclasse
             $cor->setrgb($corpaleta[0], $corpaleta[1], $corpaleta[2]);
         }
         $this->layer->setMetaData("cache", "");
+
         return ("ok");
     }
 

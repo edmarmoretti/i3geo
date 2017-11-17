@@ -214,45 +214,42 @@
                 <div id='guia1obj' data-traduzir="true" style='display: none;'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
                         <button>
-                            <span class="pull-left">{{{iconeMapa}}}</span>
-                            <span class="pull-right material-icons">cancel</span>
+                            <span class="pull-left">{{{iconeMapa}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
                     <div class="guiaOverflow">
-                        <div class="list-group condensed noprint">
+                        <div class="list-group condensed noprint collapsed" data-toggle="collapse" data-target="#opcoesGuia1">
                             <label>{{{opcoes}}}</label>
-                            <a data-target="#opcoesGuia1" class="btn btn-sm btn-primary pull-right collapsed" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button"
-                                data-toggle="collapse"> </a>
-                            <div class="text-left collapse" id="opcoesGuia1" style="margin-left: 30px;">
-                                <p>
-                                    <a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)">Refresh</a>
-                                </p>
-                                <p>
-                                    <a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)">{{{t3a}}}</a>
-                                </p>
-                                <p>
-                                    <a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)">{{{t3b}}}</a>
-                                </p>
-                                <p>
-                                    <a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)">{{{t12}}}</a>
-                                </p>
-                                <p>
-                                    <a onclick="i3GEO.arvoreDeCamadas.dialogo.filtro()" href="javascript:void(0)">{{{t2a}}}</a>
-                                </p>
-                                <p>
-                                    <a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)">{{{t20}}}</a>
-                                </p>
-                                <p>
-                                    <a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)">{{{p21}}}</a>
-                                </p>
-                                <p>
-                                    <a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)">{{{d12}}}</a>
-                                </p>
-                                <p>
-                                    <a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)">{{{t4}}}</a>
-                                </p>
-                            </div>
+                        </div>
+                        <div class="text-left collapse noprint" id="opcoesGuia1" style="margin-left: 30px;">
+                            <p>
+                                <a onclick="i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true)" href="javascript:void(0)">Refresh</a>
+                            </p>
+                            <p>
+                                <a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('ligartodos')" href="javascript:void(0)">{{{t3a}}}</a>
+                            </p>
+                            <p>
+                                <a onclick="i3GEO.arvoreDeCamadas.aplicaTemas('desligartodos')" href="javascript:void(0)">{{{t3b}}}</a>
+                            </p>
+                            <p>
+                                <a onclick="i3GEO.arvoreDeCamadas.dialogo.excluir()" href="javascript:void(0)">{{{t12}}}</a>
+                            </p>
+                            <p>
+                                <a onclick="i3GEO.arvoreDeCamadas.dialogo.filtro()" href="javascript:void(0)">{{{t2a}}}</a>
+                            </p>
+                            <p>
+                                <a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)">{{{t20}}}</a>
+                            </p>
+                            <p>
+                                <a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)">{{{p21}}}</a>
+                            </p>
+                            <p>
+                                <a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)">{{{d12}}}</a>
+                            </p>
+                            <p>
+                                <a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)">{{{t4}}}</a>
+                            </p>
                         </div>
                         <hr>
                         <!-- Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
@@ -262,24 +259,22 @@
 					Essa variavel e definida via javascript, e no caso das interfaces padrao do i3Geo, e definida
 					no programa interface/config.php
 					-->
-                        <div class="list-group condensed">
+                        <div data-toggle="collapse" data-target="#collapseFundo" class="list-group condensed collapsed">
                             <label>{{{camadasDeFundo}}}</label>
-                            <a data-target="#collapseFundo" class="btn btn-sm btn-primary pull-right collapsed" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button"
-                                data-toggle="collapse"> </a>
-                            <div style="margin-left: 0px;" class="collapse text-left" id="collapseFundo">
-                                <form>
-                                    <div id="listaFundo" class="form-group" data-template="templates/camadaFundo.html"></div>
-                                </form>
-                            </div>
                         </div>
+                        <div style="margin-left: 0px;" class="collapse text-left" id="collapseFundo">
+                            <form>
+                                <div id="listaFundo" class="form-group condensed" data-template="templates/camadaFundo.html"></div>
+                            </form>
+                        </div>
+
                     </div>
                 </div>
                 <!-- Catalogo de temas -->
                 <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left;'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
                         <button>
-                            <span class="pull-left">{{{iconeCatalogo}}}</span>
-                            <span class="pull-right material-icons">cancel</span>
+                            <span class="pull-left">{{{iconeCatalogo}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
@@ -289,47 +284,46 @@
                         <div id="catalogoNavegacao"></div>
                         <!-- Opcoes -->
                         <div id="catalogoPrincipal">
-                            <div class="list-group condensed noprint">
+                            <div data-toggle="collapse" data-target="#opcoesGuia2" class="list-group condensed collapsed noprint">
                                 <label>{{{opcoes}}}</label>
-                                <a data-target="#opcoesGuia2" class="btn btn-sm btn-primary pull-right collapsed" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button"
-                                    data-toggle="collapse"> </a>
-                                <div class="text-left collapse" id="opcoesGuia2" style="margin-left: 30px;">
-                                    <p>
-                                        <a href="javascript:void(0)" onclick="i3GEO.login.dialogo.abreLogin()">Login/Logout</a>
-                                    </p>
-                                    <p>
-                                        <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.atualiza()">Refresh</a> -->
-                                    </p>
-                                    <li class="divider"></p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()">{{{a15}}}</a>
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.uploadarquivo()">{{{a14}}}</a>
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">{{{a3}}}</a>
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.importarwmc()">{{{a3a}}}</a>
-                                        </p>
-                                        <p>
-                                            <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a> -->
-                                        </p>
-                                        <p>
-                                            <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a> -->
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
-                                        </p>
-                                        <p>
-                                            <a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
-                                        </p>
-                                        <p>
-                                            <a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
-                                        </p>
-                                </div>
                             </div>
+                            <div class="text-left collapse" id="opcoesGuia2" style="margin-left: 30px;">
+                                <p>
+                                    <a href="javascript:void(0)" onclick="i3GEO.login.dialogo.abreLogin()">Login/Logout</a>
+                                </p>
+                                <p>
+                                    <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.atualiza()">Refresh</a> -->
+                                </p>
+                                <li class="divider"></p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()">{{{a15}}}</a>
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.uploadarquivo()">{{{a14}}}</a>
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">{{{a3}}}</a>
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.importarwmc()">{{{a3a}}}</a>
+                                    </p>
+                                    <p>
+                                        <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a> -->
+                                    </p>
+                                    <p>
+                                        <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a> -->
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
+                                    </p>
+                                    <p>
+                                        <a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
+                                    </p>
+                                    <p>
+                                        <a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
+                                    </p>
+                            </div>
+
                             <hr>
                             <!-- busca tema no catalogo
 						<div class="form-group label-floating">
@@ -443,7 +437,8 @@
                             <!--  camadas por estrelas -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                    <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max"
+                                        href="javascript:void(0)">
                                         <span class="material-icons ">folder_open</span>
                                     </a>
                                     <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button"
@@ -493,8 +488,7 @@
                 <div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
                         <button>
-                            <span class="pull-left">{{{iconeLegenda}}}</span>
-                            <span class="pull-right material-icons">cancel</span>
+                            <span class="pull-left">{{{iconeLegenda}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
@@ -511,8 +505,7 @@
                 <div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
                         <button>
-                            <span class="pull-left">{{{t23}}}</span>
-                            <span class="pull-right material-icons">cancel</span>
+                            <span class="pull-left">{{{t23}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
@@ -521,9 +514,8 @@
                             <div class="form-group label-floating">
                                 <label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>
                                 <div class="input-group">
-                                    <input class="form-control" type="text" value="" name="valorBuscaRapida">
-                                    <span class="input-group-btn">
-                                        <a onclick="i3GEO.busca.inicia(this);return false;" data-templateGoogle="templates/buscaEmTemas.html" data-inputGoogle="[name=google]"
+                                    <input class="form-control" type="text" value="" name="valorBuscaRapida"> <span class="input-group-btn"> <a
+                                            onclick="i3GEO.busca.inicia(this);return false;" data-templateGoogle="templates/buscaEmTemas.html" data-inputGoogle="[name=google]"
                                             data-ondeGoogle=".i3GEOresultadoBuscaGoogle" data-templateTemasMapa="templates/buscaEmTemas.html" data-inputTemasMapa="[name=temasMapa]"
                                             data-ondeTemasMapa=".i3GEOresultadoBuscaTemasMapa" data-templateServico="templates/buscaEmServico.html" data-ondeConteiner="#guia7obj"
                                             data-inputOndePalavra="[name=valorBuscaRapida]" data-inputServicosExternos="[name=servicosExternos]"
@@ -570,8 +562,7 @@
                 <div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
                         <button>
-                            <span class="pull-left">{{{iconeFerramentas}}}</span>
-                            <span class="pull-right material-icons">cancel</span>
+                            <span class="pull-left">{{{iconeFerramentas}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>

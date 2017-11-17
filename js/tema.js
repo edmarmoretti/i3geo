@@ -36,7 +36,7 @@ if (typeof (i3GEO) === 'undefined') {
 }
 //TODO nova ferramenta para definir GEOMTRANSFORM
 i3GEO.tema =
-	{
+{
 		/**
 		 * Objeto que contem os identificadores dos temporizadores (setInterval) estabelecidos para cada camada
 		 *
@@ -80,9 +80,9 @@ i3GEO.tema =
 		exclui : function(tema,confirma) {
 			if(confirma && confirma === true){
 				i3GEO.janela.confirma($trad("removerDoMapa"), 300, $trad("x14"),
-					"", function() {
-						i3GEO.tema.exclui(tema);
-					});
+						"", function() {
+					i3GEO.tema.exclui(tema);
+				});
 				return;
 			}
 			// remove o tema do DOM e seus filhos
@@ -103,7 +103,7 @@ i3GEO.tema =
 			}
 			i3GEO.php.excluitema(i3GEO.atualiza, [
 				tema
-			]);
+				]);
 			i3GEO.mapa.ativaTema();
 			i3GEO.temaAtivo = "";
 		},
@@ -127,13 +127,13 @@ i3GEO.tema =
 				window.open(link);
 			} else {
 				i3GEO.janela.cria(
-					(i3GEO.parametros.w / 2) + 25 + "px",
-					(i3GEO.parametros.h / 2) + 18 + "px",
-					link,
-					"",
-					"",
-					"<div class='i3GeoTituloJanela'>Metadata</div>",
-					"metadata" + tema
+						(i3GEO.parametros.w / 2) + 25 + "px",
+						(i3GEO.parametros.h / 2) + 18 + "px",
+						link,
+						"",
+						"",
+						"<div class='i3GeoTituloJanela'>Metadata</div>",
+						"metadata" + tema
 				);
 			}
 		},
@@ -277,16 +277,27 @@ i3GEO.tema =
 		 *
 		 * {string} - nova cor (r,g,b)
 		 */
-		alteracorclasse : function(idtema, idclasse, rgb) {
+		alteracorclasse : function(idtema, idclasse, rgb, objImg) {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.tema.alteracorclasse()");
 
+			var w = 25, h = 25, temp;
+			if(objImg && objImg.style && objImg.style.width){
+				w = parseInt(objImg.style.width,10);
+				h = parseInt(objImg.style.height,10);
+			}
+
 			i3GEO.mapa.ativaTema(idtema);
-			i3GEO.php.aplicaCorClasseTema(temp = function() {
-				i3GEO.atualiza();
+			temp = function(retorno) {
+				if(objImg){
+					objImg.src = retorno.data;
+				} else {
+					i3GEO.legenda.CAMADAS = "";
+					i3GEO.atualiza();
+				}
 				i3GEO.Interface.atualizaTema("", idtema);
-				i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
-			}, idtema, idclasse, rgb);
+			};
+			i3GEO.php.aplicaCorClasseTema(temp, idtema, idclasse, rgb, w, h);
 		},
 		/**
 		 * Function: mudanome
@@ -365,10 +376,10 @@ i3GEO.tema =
 				};
 
 				i3GEO.tema.TEMPORIZADORESID[idtema] = {
-					tempo: tempo,
-					idtemporizador: setInterval(t,
-						parseInt(tempo,10)*1000
-					)
+						tempo: tempo,
+						idtemporizador: setInterval(t,
+								parseInt(tempo,10)*1000
+						)
 				};
 			} else {
 				try {
@@ -401,11 +412,11 @@ i3GEO.tema =
 					i3GEOF.animagif.iniciaJanelaFlutuante(tema);
 				};
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.animagif()",
-					"animagif",
-					"animagif",
-					"dependencias.php",
-					temp);
+						"i3GEO.tema.dialogo.animagif()",
+						"animagif",
+						"animagif",
+						"dependencias.php",
+						temp);
 			},
 			/**
 			 * Function: storymap
@@ -424,11 +435,11 @@ i3GEO.tema =
 					i3GEOF.storymap.iniciaJanelaFlutuante(tema);
 				};
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.storymap()",
-					"storymap",
-					"storymap",
-					"dependencias.php",
-					temp);
+						"i3GEO.tema.dialogo.storymap()",
+						"storymap",
+						"storymap",
+						"dependencias.php",
+						temp);
 			},
 			/**
 			 * Function: tme
@@ -448,11 +459,11 @@ i3GEO.tema =
 					i3GEOF.tme.iniciaJanelaFlutuante(tema);
 				};
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.tme()",
-					"tme",
-					"tme",
-					"dependencias.php",
-					temp);
+						"i3GEO.tema.dialogo.tme()",
+						"tme",
+						"tme",
+						"dependencias.php",
+						temp);
 			},
 			/**
 			 * Function: mostraWms
@@ -477,18 +488,18 @@ i3GEO.tema =
 			 */
 			comentario : function(tema) {
 				i3GEO.janela
-					.cria(
+				.cria(
 						"530px",
 						"330px",
 						i3GEO.configura.locaplic + "/ferramentas/comentarios/index.php?tema=" + tema + "&g_sid=" + i3GEO.configura.sid
-							+ "&locaplic=" + i3GEO.configura.locaplic,
+						+ "&locaplic=" + i3GEO.configura.locaplic,
 						"",
 						"",
 						"<img src='"
-							+ i3GEO.configura.locaplic
-							+ "/imagens/player_volta.png' style=cursor:pointer onclick='javascript:history.go(-1)'><span style=position:relative;top:-2px; > "
-							+ $trad("x19") + " " + tema + "</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-							+ "/ajuda_usuario.php?idcategoria=7&idajuda=68' ><b> </b></a>",
+						+ i3GEO.configura.locaplic
+						+ "/imagens/player_volta.png' style=cursor:pointer onclick='javascript:history.go(-1)'><span style=position:relative;top:-2px; > "
+						+ $trad("x19") + " " + tema + "</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
+						+ "/ajuda_usuario.php?idcategoria=7&idajuda=68' ><b> </b></a>",
 						"comentario" + Math.random());
 			},
 			/**
@@ -512,11 +523,11 @@ i3GEO.tema =
 				}
 
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.cortina()",
-					"cortina",
-					"cortina",
-					"dependencias.php",
-					"i3GEOF.cortina.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.cortina()",
+						"cortina",
+						"cortina",
+						"dependencias.php",
+				"i3GEOF.cortina.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: mmscale
@@ -531,11 +542,11 @@ i3GEO.tema =
 			mmscale : function(tema) {
 				i3GEO.mapa.ativaTema(tema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.mmscale()",
-					"mmscale",
-					"mmscale",
-					"dependencias.php",
-					"i3GEOF.mmscale.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.mmscale()",
+						"mmscale",
+						"mmscale",
+						"dependencias.php",
+				"i3GEOF.mmscale.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: atalhoscamada
@@ -550,11 +561,11 @@ i3GEO.tema =
 			atalhoscamada : function(tema) {
 				i3GEO.mapa.ativaTema(tema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.atalhoscamada()",
-					"atalhoscamada",
-					"atalhoscamada",
-					"dependencias.php",
-					"i3GEOF.atalhoscamada.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.atalhoscamada()",
+						"atalhoscamada",
+						"atalhoscamada",
+						"dependencias.php",
+				"i3GEOF.atalhoscamada.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: abreKml
@@ -573,9 +584,9 @@ i3GEO.tema =
 				}
 				if (typeof (i3GEOF.converteKml) === 'undefined') {
 					i3GEO.util.scriptTag(
-						i3GEO.configura.locaplic + "/ferramentas/convertekml/index.js",
-						"i3GEOF.converteKml.criaJanelaFlutuante('" + tema + "','" + tipo + "')",
-						"i3GEOF.converteKml_script");
+							i3GEO.configura.locaplic + "/ferramentas/convertekml/index.js",
+							"i3GEOF.converteKml.criaJanelaFlutuante('" + tema + "','" + tipo + "')",
+					"i3GEOF.converteKml_script");
 				} else {
 					i3GEOF.converteKml.criaJanelaFlutuante(tema, tipo);
 				}
@@ -617,11 +628,11 @@ i3GEO.tema =
 					i3GEOF.graficoTema.iniciaJanelaFlutuante(propriedades);
 				};
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.graficotema()",
-					"graficotema",
-					"graficoTema",
-					"dependencias.php",
-					temp);
+						"i3GEO.tema.dialogo.graficotema()",
+						"graficotema",
+						"graficoTema",
+						"dependencias.php",
+						temp);
 			},
 			/**
 			 * Function: toponimia
@@ -642,11 +653,11 @@ i3GEO.tema =
 				}
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.toponimia()",
-					"toponimia",
-					"toponimia",
-					"dependencias.php",
-					"i3GEOF.toponimia.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.toponimia()",
+						"toponimia",
+						"toponimia",
+						"dependencias.php",
+				"i3GEOF.toponimia.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: filtro
@@ -674,11 +685,11 @@ i3GEO.tema =
 					i3GEOF.filtro.iniciaJanelaFlutuante(modoCalculadora,idRetorno);
 				};
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.filtro()",
-					"filtro",
-					"filtro",
-					"dependencias.php",
-					temp);
+						"i3GEO.tema.dialogo.filtro()",
+						"filtro",
+						"filtro",
+						"dependencias.php",
+						temp);
 			},
 			/**
 			 * Function: procuraratrib
@@ -692,11 +703,11 @@ i3GEO.tema =
 			procuraratrib : function(idtema) {
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.procuraratrib()",
-					"busca",
-					"busca",
-					"dependencias.php",
-					"i3GEOF.busca.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.procuraratrib()",
+						"busca",
+						"busca",
+						"dependencias.php",
+				"i3GEOF.busca.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: tabela
@@ -717,11 +728,11 @@ i3GEO.tema =
 				}
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.tabela()",
-					"tabela",
-					"tabela",
-					"dependencias.php",
-					"i3GEOF.tabela.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.tabela()",
+						"tabela",
+						"tabela",
+						"dependencias.php",
+				"i3GEOF.tabela.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: etiquetas
@@ -742,11 +753,11 @@ i3GEO.tema =
 				}
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.etiquetas()",
-					"etiqueta",
-					"etiqueta",
-					"dependencias.php",
-					"i3GEOF.etiqueta.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.etiquetas()",
+						"etiqueta",
+						"etiqueta",
+						"dependencias.php",
+				"i3GEOF.etiqueta.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: editaLegenda
@@ -767,11 +778,11 @@ i3GEO.tema =
 				}
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.editaLegenda()",
-					"legenda",
-					"legenda",
-					"dependencias.php",
-					"i3GEOF.legenda.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.editaLegenda()",
+						"legenda",
+						"legenda",
+						"dependencias.php",
+				"i3GEOF.legenda.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: editaClasseLegenda
@@ -799,11 +810,11 @@ i3GEO.tema =
 					i3GEOF.legenda.iniciaJanelaFlutuante(idtema);
 				};
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.editaLegenda()",
-					"legenda",
-					"legenda",
-					"dependencias.php",
-					temp);
+						"i3GEO.tema.dialogo.editaLegenda()",
+						"legenda",
+						"legenda",
+						"dependencias.php",
+						temp);
 			},
 			/**
 			 * Function: download
@@ -845,8 +856,8 @@ i3GEO.tema =
 			sld : function(idtema) {
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.janela.cria("500px", "350px", i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?funcao=tema2sld&tema="
-					+ idtema + "&g_sid=" + i3GEO.configura.sid, "", "", "<div class='i3GeoTituloJanela'>SLD<a class=ajuda_usuario target=_blank href='"
-					+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' ><b> </b></a></div>");
+						+ idtema + "&g_sid=" + i3GEO.configura.sid, "", "", "<div class='i3GeoTituloJanela'>SLD<a class=ajuda_usuario target=_blank href='"
+						+ i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' ><b> </b></a></div>");
 			},
 			/**
 			 * Function: aplicarsld
@@ -860,11 +871,11 @@ i3GEO.tema =
 			aplicarsld : function(idtema) {
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.aplicarsld()",
-					"aplicarsld",
-					"aplicarsld",
-					"dependencias.php",
-					"i3GEOF.aplicarsld.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.aplicarsld()",
+						"aplicarsld",
+						"aplicarsld",
+						"dependencias.php",
+				"i3GEOF.aplicarsld.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: editorsql
@@ -878,11 +889,11 @@ i3GEO.tema =
 			editorsql : function(idtema) {
 				i3GEO.mapa.ativaTema(idtema);
 				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.editorsql()",
-					"editorsql",
-					"editorsql",
-					"dependencias.php",
-					"i3GEOF.editorsql.iniciaJanelaFlutuante()");
+						"i3GEO.tema.dialogo.editorsql()",
+						"editorsql",
+						"editorsql",
+						"dependencias.php",
+				"i3GEOF.editorsql.iniciaJanelaFlutuante()");
 			},
 			/**
 			 * Function: mudanome
@@ -902,4 +913,4 @@ i3GEO.tema =
 				i3GEO.janela.prompt($trad("novonome"),temp);
 			}
 		}
-	};
+};

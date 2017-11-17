@@ -9,6 +9,8 @@ i3GEO.legenda =
 		IDS : [],
 		//utilizado para comparar as camadas e ver se e necessario atualizar a legenda
 		CAMADAS : "",
+		//utilizado para guardar o objeto imagem que foi clicado para alterar a cor
+		objImg: "",
 		config: {
 			"idLegenda": "legendaHtml",
 			"templateLegenda": "templates/legenda.html",
@@ -199,19 +201,20 @@ i3GEO.legenda =
 			};
 			i3GEO.php.inverteStatusClasse(temp, leg.name, leg.value);
 		},
-		mudaCorClasse : function(tema,idclasse) {
+		mudaCorClasse : function(tema,idclasse,objImg) {
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.legenda.mudaCorClasse() cria um input hidden com id=tempinputcorclasse e abre o colorpicker");
 
 			var obj, novoel;
+			i3GEO.legenda.objImg = objImg;
 			if (!$i("tempinputcorclasse")) {
 				novoel = document.createElement("input");
 				novoel.id = "tempinputcorclasse";
-				novoel.style.display = "none";
+
 				novoel.type = "hidden";
 				novoel.onchange = function() {
 					var obj = $("#tempinputcorclasse");
-					i3GEO.tema.alteracorclasse(obj.attr("tema"), obj.attr("idclasse"), obj.val());
+					i3GEO.tema.alteracorclasse(obj.attr("tema"), obj.attr("idclasse"), obj.val(),i3GEO.legenda.objImg);
 				};
 				document.body.appendChild(novoel);
 			}

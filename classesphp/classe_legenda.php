@@ -391,7 +391,9 @@ class Legenda
                             "checked" => $ck,
                             "index" => $c,
                             "layer" => $la->name,
-                            "cor"=>$cor
+                            "cor"=>$cor,
+                            "w"=>$w,
+                            "h"=>$h
                         );
                     }
                     $legenda[] = array(

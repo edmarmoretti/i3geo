@@ -1,10 +1,16 @@
 [data-toggle*=collapse]:after {
 	font-family: "Glyphicons Halflings";
 	content: "\e113";
+	float: right;
+	color: #009688;
+	font-size: 14px;
 }
 /* Icon when the collapsible content is hidden */
 [data-toggle*=collapse].collapsed:after {
 	content: "\e114";
+	float: right;
+	color: #009688;
+	font-size: 14px;
 }
 
 .ol-attribution li {
@@ -331,7 +337,7 @@ hr {
 	vertical-align: middle;
 }
 .nomeTemaLegenda {
-	width: 265px;
+	width: 98%;
 	vertical-align: middle;
 	color: black;
 }
