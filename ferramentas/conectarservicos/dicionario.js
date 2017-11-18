@@ -2,7 +2,7 @@
 i3GEOF.conectarservicos.dicionario = {
 	'conexao' : [ {
 		pt : "Conex&atilde;o",
-		en : "",
+		en : "Connection",
 		es : "Conexi&oacute;n"
 	} ]
 };
