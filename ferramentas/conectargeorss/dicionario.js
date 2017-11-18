@@ -2,37 +2,37 @@
 i3GEOF.conectargeorss.dicionario = {
 	'msgServico' : [ {
 		pt : "Servi&ccedil;o n&atilde;o definido",
-		en : "",
-		es : "Servicio indefinido"
+		en : "Undefined service",
+		es : "Servicio no definido"
 	} ],
 	'selecionaItem' : [ {
 		pt : "Escolha um dos itens para incluir os dados do canal no mapa",
-		en : "",
-		es : "Elija uno de los &iacute;tems para incluir los datos del canal en el mapa"
+		en : "Select one of the fields to include channel data on the map",
+		es : "Seleccione uno de los campos para incluir los datos del canal en el mapa"
 	} ],
 	'descricao' : [ {
 		pt : "Descri&ccedil;&atilde;o:",
-		en : "",
-		es : "Dercripci&oacute;n:"
+		en : "Description:",
+		es : "Descripci&oacute;n:"
 	} ],
 	'categoria' : [ {
 		pt : "Categoria:",
-		en : "",
-		es : "Categor&i;a"
+		en : "Category:",
+		es : "Categor&iacute;a:"
 	} ],
 	'erro' : [ {
 		pt : "Ocorreu um erro",
-		en : "",
-		es : "Ocurri&oacute un error"
+		en : "An error has occurred",
+		es : "Ocurri&oacute; un error"
 	} ],
 	'listacanais' : [ {
 		pt : "Lista os canais",
-		en : "",
-		es : ""
+		en : "Lists channels",
+		es : "Crea una lista de los canales"
 	} ],
 	'sel' : [ {
 		pt : "Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo",
-		en : "",
-		es : ""
+		en : "Enter the service address or select from the list below",
+		es : "Introduzca la direcci&oacute;n del servicio o selecci&oacute;nelo de la siguiente lista"
 	} ]
 };
