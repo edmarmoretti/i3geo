@@ -174,6 +174,8 @@ packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
 packer("../pacotes/proj4js/lib/proj4js.js","compactados/proj4js.js","Normal");
 packer("../pacotes/wicket/wicket.js","compactados/wicket.js","Normal");
+packer("../pacotes/bootstrap-material-design/dist/js/material.js","compactados/material.js","Normal");
+
 //packer("../pacotes/eudock/js/euDock.2.0.js","compactados/euDock.2.0.js","Normal");
 //packer("../pacotes/eudock/js/euDock.Image.js","compactados/euDock.Image.js","Normal");
 //
@@ -210,7 +212,8 @@ $jsfiles = array(
 "../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
 //"../pacotes/jquery/jquery-ui/jquery.ui-contextmenu.min.js",
 "../pacotes/bootstrap/js/bootstrap.min.js",
-"../pacotes/bootstrap-material-design/dist/js/material.min.js",
+//"../pacotes/bootstrap-material-design/dist/js/material.min.js",
+"compactados/material.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
 "compactados/mustache.js",
