@@ -1,15 +1,19 @@
 		<div class="list-group condensed">
 			<div class="row-content text-left">
-				<a onclick="{{{onclick}}}" role="button" class="btn btn-default btn-fab btn-fab-max hidden-xs hidden-sm" href="javascript:void(0)">
+				<!--
+                <a onclick="{{{onclick}}}" role="button" class="btn btn-default btn-fab btn-fab-max hidden-xs hidden-sm" href="javascript:void(0)">
 					<span class="material-icons">visibility</span>
 				</a>
-				<label class="nomeTema" >
+                 -->
+				<label class="nomeTema" style="width:300px;" >
 					<a onclick="{{{onclick}}}" href="javascript:void(0)"><h4>
 					{{{nome}}}
-                     <i style="opacity:0.4;" class="pull-right material-icons">add_circle_outline</i>
 					</h4></a>
 					<h6>{{{descricao}}} {{{link}}}</h6>
 				</label>
+                <a onclick="{{{onclick}}}" role="button" class="hidden-xs" href="javascript:void(0)">
+                    <i style="opacity:0.4;margin-bottom:10px;margin-top:10px;" class="pull-right material-icons">add_circle_outline</i>
+                </a>
 			</div>
 		</div>
 		<hr>

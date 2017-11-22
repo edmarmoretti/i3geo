@@ -1,17 +1,21 @@
 		<div class="list-group condensed">
 			<div class="row-content text-left">
-				<a role="button" class="btn btn-default btn-fab btn-fab-max" href="{{{url}}}" target="{{{target}}}">
+				<!--
+                <a role="button" class="btn btn-default btn-fab btn-fab-max" href="{{{url}}}" target="{{{target}}}">
 					<span class="material-icons">launch</span>
 				</a>
-				<label class="nomeTemaCurto" >
+                 -->
+				<label class="nomeTemaCurto" style="width:300px;">
 					<a href="{{{url}}}" target="{{{target}}}" ><h4>
 					{{{nome}}}
 					</h4>
-
                     </a>
 					<h6>{{{descricao}}}</h6>
 				</label>
 				{{{opcional}}}
+                <a role="button" class="hidden-xs" href="{{{url}}}" target="{{{target}}}">
+                    <i style="opacity:0.4;margin-bottom:10px;margin-top:10px;" class="pull-right material-icons">launch</i>
+                </a>
 			</div>
 		</div>
 		<hr>

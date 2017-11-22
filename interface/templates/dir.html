@@ -1,14 +1,22 @@
 <div class="list-group condensed">
-    <div class="row-content text-left">
+    <div class="row-content text-left" style="opacity:0.8;">
+        <!--
         <a onclick="{{{onclick}}}" role="button" class="btn btn-warning btn-fab btn-fab-max hidden-xs hidden-sm" href="javascript:void(0)">
             <span class="material-icons">folder_open</span>
         </a>
-        <label class="nomeTema"> <a onclick="{{{onclick}}}" href="javascript:void(0)">
-                <h4>{{{nome}}} <i class="pull-right material-icons">navigate_next</i></h4>
-
+         -->
+        <label class="nomeTema" style="width:300px;">
+            <a onclick="{{{onclick}}}" href="javascript:void(0)">
+                <h4>
+                    <i class="material-icons" style="vertical-align: text-bottom;">folder_open</i>
+                    {{{nome}}}
+                </h4>
             </a>
             <h6>{{{descricao}}} {{{link}}}</h6>
         </label>
+        <a onclick="{{{onclick}}}" role="button" class="hidden-xs" href="javascript:void(0)">
+            <i style="margin-bottom:10px;margin-top:10px;" class="pull-right material-icons">navigate_next</i>
+        </a>
     </div>
 </div>
 <hr>

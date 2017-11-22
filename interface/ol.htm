@@ -749,17 +749,10 @@
 									placement : "auto",
 									template : "<div class='tooltip ' ><div class='tooltip-inner'></div></div>"
 								});
-
-
-								$(".guiaOverflow").css("height",
-										i3GEO.parametros.h - 60);
 								$(".guiaOverflow").mCustomScrollbar({
 									scrollbarPosition : "inside",
 									theme : "inset-2-dark"
 								});
-								i3GEO.eventos.adicionaEventos("RESIZE", $(
-										".guiaOverflow").css("height",
-										i3GEO.parametros.h - 60))
 								//setTimeout(function() {
 								//	$('.iconeGuiaMovel').tooltip('destroy');
 								//}, 30000);

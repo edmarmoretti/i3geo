@@ -1,16 +1,20 @@
-		<div class="list-group condensed">
-			<div class="row-content text-left">
-				<a role="button" class="btn btn-primary btn-fab btn-fab-max hidden-xs hidden-sm" href="javascript:void(0)">
+<div class="list-group condensed">
+    <div class="row-content text-left" style="opacity: 0.8;">
+        <!--
+                <a role="button" class="btn btn-primary btn-fab btn-fab-max hidden-xs hidden-sm" href="javascript:void(0)">
 					<span class="material-icons">folder_open</span>
 				</a>
-				<label class="nomeTema" >
-					<a><h4>
-					{{{nome}}}
-					</h4>
-                    <i class="pull-right material-icons">navigate_next</i>
-                    </a>
-					<h6>{{{descricao}}}</h6>
-				</label>
-			</div>
-		</div>
-		<hr>
+                 -->
+        <label class="nomeTema" style="width: 300px;"> <a href="javascript:void(0)">
+                <h4>
+                    <i class="material-icons" style="vertical-align: text-bottom;">folder_open</i> {{{nome}}}
+                </h4>
+            </a>
+            <h6>{{{descricao}}}</h6>
+        </label>
+        <a role="button" class="hidden-xs" href="javascript:void(0)">
+            <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+        </a>
+    </div>
+</div>
+<hr>

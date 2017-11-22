@@ -306,7 +306,7 @@ hr {
 	z-index: 10000;
 }
 .guiaOverflow{
-	padding-left: 10px;
+	padding-left: 0px;
 }
 #i3GEOguiaMovelConteudo {
 	/*width:355px;*/
@@ -374,7 +374,7 @@ hr {
 }
 /*utilizado para nao sobrepor com o icone de fechar guias, que e fixed*/
 .separadorCabecalhoGuias{
-	height: 10px;
+	height: 0px;
 }
 
 

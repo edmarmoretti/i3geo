@@ -84,7 +84,7 @@ i3GEO.caixaDeFerramentas = {
 				f = i3GEO.caixaDeFerramentas.config,
 				i,t,data;
 
-			$("#" + f.idOndeMigalha).html("&nbsp;");
+			$("#" + f.idOndeMigalha).html("");
 			f.idOndeFolder.html("");
 			f.idOndeLinks.html("");
 			for (i = 0; i < n; i += 1) {

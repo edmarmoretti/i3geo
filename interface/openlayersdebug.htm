@@ -211,14 +211,14 @@
         <div id="i3GEOguiaMovelMolde">
             <div id="i3GEOguiaMovelConteudo">
                 <!-- camadas existentes no mapa -->
-                <div id='guia1obj' data-traduzir="true" style='display: none;'>
+                <div id='guia1obj' data-traduzir="true" style='display: none; height:100%'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
                         <button>
                             <span class="pull-left">{{{iconeMapa}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
-                    <div class="guiaOverflow">
+                    <div class="guiaOverflow" style="height: calc(100% - 45px)">
                         <div class="list-group condensed noprint collapsed" data-toggle="collapse" data-target="#opcoesGuia1">
                             <label>{{{opcoes}}}</label>
                         </div>
@@ -271,16 +271,17 @@
                     </div>
                 </div>
                 <!-- Catalogo de temas -->
-                <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left;'>
+                <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left;height:100%;'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
                         <button>
                             <span class="pull-left">{{{iconeCatalogo}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
-                    <div class="guiaOverflow">
+
+                    <div class="guiaOverflow" style="height: calc(100% - 45px)">
+                        <div id="catalogoMigalha" style="display:none;" data-template="templates/catalogoMigalha.html"></div>
                         <!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
-                        <div id="catalogoMigalha" data-template="templates/catalogoMigalha.html"></div>
                         <div id="catalogoNavegacao"></div>
                         <!-- Opcoes -->
                         <div id="catalogoPrincipal">
@@ -366,118 +367,129 @@
 
                             <!-- servicos da INDE brasileira -->
                             <div class="list-group condensed">
-                                <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoInde.inicia()" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                                        <span class="material-icons ">folder_open</span>
-                                    </a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoInde.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>INDE-Br</h4>
-                                            <i class="pull-right material-icons">navigate_next</i>
+                                <div class="row-content text-left" style="opacity:0.8;">
+                                    <label style="width: 300px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoInde.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>
+                                            <i class="material-icons" style="vertical-align: text-bottom;">cloud_queue</i>
+                                            INDE-Br
+                                            </h4>
                                         </a>
                                         <h6>Infraestrutura Nacional de Dados Espaciais do Brasil</h6>
                                     </label>
+                                    <a onclick="i3GEO.catalogoInde.inicia()" role="button" class="" href="javascript:void(0)">
+                                        <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+                                    </a>
                                 </div>
                             </div>
                             <hr>
                             <!-- lista de wms cadastrados no sistema de administracao -->
                             <div class="list-group condensed">
-                                <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                                        <span class="material-icons ">folder_open</span>
-                                    </a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>OGC-WMS</h4>
-                                            <i class="pull-right material-icons">navigate_next</i>
+                                <div class="row-content text-left" style="opacity:0.8;">
+                                    <label style="width: 300px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>
+                                            <i class="material-icons" style="vertical-align: text-bottom;">cloud_queue</i>
+                                            OGC-WMS
+                                            </h4>
                                         </a>
                                         <h6>{{{descOgcWms}}}</h6>
                                     </label>
+                                    <a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="" href="javascript:void(0)">
+                                        <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+                                    </a>
                                 </div>
                             </div>
                             <hr>
                             <!--  regioes cadastradas no sistema de metadados -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoRegioes.inicia()" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                                        <span class="material-icons ">folder_open</span>
-                                    </a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoRegioes.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{x87}}}</h4>
-                                            <i class="pull-right material-icons">navigate_next</i>
+                                    <label style="width: 300px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoRegioes.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>
+                                            <i class="material-icons" style="vertical-align: text-bottom;">domain</i>
+                                            {{{x87}}}
+                                            </h4>
                                         </a>
                                         <h6>{{{descLimLoc}}}</h6>
                                     </label>
+                                    <a onclick="i3GEO.catalogoRegioes.inicia();" role="button" class="" href="javascript:void(0)">
+                                        <i style="opacity: 0.8; margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+                                    </a>
                                 </div>
                             </div>
                             <hr>
                             <!--  camadas que vem do sistema de metadados estatisticos -->
                             <div class="list-group condensed">
-                                <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                                        <span class="material-icons ">folder_open</span>
-                                    </a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{x57}}}</h4>
-                                            <i class="pull-right material-icons">navigate_next</i>
+                                <div class="row-content text-left" style="opacity:0.8;">
+                                    <label style="width: 300px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>
+                                            <i class="material-icons" style="vertical-align: text-bottom;">trending_up</i>
+                                            {{{x57}}}
+                                            </h4>
                                         </a>
                                         <h6>{{{descMeta}}}</h6>
                                     </label>
+                                    <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="" href="javascript:void(0)">
+                                        <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+                                    </a>
                                 </div>
                             </div>
                             <hr>
-                            <!--  mapas cadastrados no sistema de administracao (nao funcional)
-						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 255px;vertical-align: middle;">
-								<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" href="javascript:void(0)">
-								<h4>{{{x90}}}</h4></a>
-								<h6>{{{descMapas}}}</h6>
-							</label>
-						</div></div><hr>
-						-->
                             <!--  camadas por estrelas -->
                             <div class="list-group condensed">
-                                <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max"
-                                        href="javascript:void(0)">
-                                        <span class="material-icons ">folder_open</span>
-                                    </a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button"
+                                <div class="row-content text-left" style="opacity:0.8;">
+                                    <label style="width: 300px; vertical-align: middle;">
+                                    <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button"
                                             href="javascript:void(0)">
-                                            <h4>{{{t46}}}</h4>
-                                            <i class="pull-right material-icons">navigate_next</i>
+                                            <h4>
+                                            <i class="material-icons" style="vertical-align: text-bottom;">star_border</i>
+                                            {{{t46}}}
+                                            </h4>
                                         </a>
                                         <h6>{{{descEstrelas}}}</h6>
                                     </label>
+                                    <a onclick="i3GEO.catalogoEstrelas.inicia({'valorEstrela':5,'numEstrelas':1})" role="button" class="" href="javascript:void(0)">
+                                        <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+                                    </a>
                                 </div>
                             </div>
                             <hr>
                             <!--  sistemas que adicionam camadas -->
                             <div class="list-group condensed">
-                                <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoSistemas.inicia()" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                                        <span class="material-icons ">folder_open</span>
-                                    </a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoSistemas.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{a11}}}</h4>
-                                            <i class="pull-right material-icons">navigate_next</i>
+                                <div class="row-content text-left" style="opacity:0.8;">
+                                    <label style="width: 300px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoSistemas.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>
+                                            <i class="material-icons" style="vertical-align: text-bottom;">widgets</i>
+                                            {{{a11}}}
+                                            </h4>
                                         </a>
                                         <h6>{{{descSistemas}}}</h6>
                                     </label>
+                                    <a onclick="i3GEO.catalogoSistemas.inicia()" role="button" class="" href="javascript:void(0)">
+                                        <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+                                    </a>
+
                                 </div>
                             </div>
                             <hr>
                             <!--  navegacao em diretorios -->
                             <div class="list-group condensed">
-                                <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoDir.inicia()" role="button" class="hidden-xs hidden-sm btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                                        <span class="material-icons ">folder_open</span>
-                                    </a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoDir.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{a6}}}</h4>
-                                            <i class="pull-right material-icons">navigate_next</i>
+                                <div class="row-content text-left" style="opacity:0.8;">
+                                    <label style="width: 300px; vertical-align: middle;">
+                                        <a onclick="i3GEO.catalogoDir.inicia()" role="button" href="javascript:void(0)">
+                                            <h4>
+                                            <i class="material-icons" style="vertical-align: text-bottom;">storage</i>
+                                            {{{a6}}}
+                                            </h4>
                                         </a>
                                         <h6>{{{descDir}}}</h6>
                                     </label>
+                                    <a onclick="i3GEO.catalogoDir.inicia()" role="button" class="" href="javascript:void(0)">
+                                        <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
+                                    </a>
                                 </div>
                             </div>
                             <hr>
@@ -485,14 +497,14 @@
                     </div>
                 </div>
                 <!-- Legenda -->
-                <div data-traduzir="true" id='guia4obj' style='display: none; text-align: left'>
+                <div data-traduzir="true" id='guia4obj' style='display: none; text-align: left;height:100%;'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
                         <button>
                             <span class="pull-left">{{{iconeLegenda}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
-                    <div class="guiaOverflow">
+                    <div class="guiaOverflow" style="height: calc(100% - 45px)">
                         <a href='javascript:void(0)' onclick="i3GEO.legenda.inicia({'janela':true})">{{{x11}}}</a>
                         <div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: none; text-align: left'></div>
                     </div>
@@ -502,14 +514,14 @@
 				No botao que dispara a busca, ficam os parametros de configuracao
 				Esses parametros indicam qual o checkbox que define o tipo de busca, o local onde os dados serao mostrados e o template para formatar o resultado
 				-->
-                <div data-traduzir="true" id='guia7obj' style='display: none; text-align: left'>
+                <div data-traduzir="true" id='guia7obj' style='display: none; text-align: left; height:100%'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
                         <button>
                             <span class="pull-left">{{{t23}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
-                    <div class="guiaOverflow">
+                    <div class="guiaOverflow" style="height: calc(100% - 45px)">
                         <form onSubmit="return false;">
                             <div class="form-group label-floating">
                                 <label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>
@@ -559,34 +571,34 @@
                     </div>
                 </div>
                 <!-- Ferramentas -->
-                <div data-traduzir="true" id='guia8obj' style='display: none; text-align: left'>
+                <div data-traduzir="true" id='guia8obj' style='display: none; text-align: left;height:100%'>
                     <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
                         <button>
                             <span class="pull-left">{{{iconeFerramentas}}}</span> <span class="pull-right material-icons">cancel</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
-                    <div class="guiaOverflow">
+                    <div class="guiaOverflow" style="height: calc(100% - 45px)">
                         <div class="form-inline" style="width: 100%;">
-                            <div class="text-center form-group" style="margin: 4px;">
+                            <div class="text-center form-group" style="margin: 4px;display:inline-block">
                                 <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.area();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
                                     <img style="margin-top: 4px;" src="../imagens/gisicons/area-measure.png">
                                 </a>
                                 <h6>{{{d21at}}}</h6>
                             </div>
-                            <div class="text-center form-group" style="margin: 4px;">
+                            <div class="text-center form-group" style="margin: 4px;display:inline-block">
                                 <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.distancia();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
                                     <img style="margin-top: 4px;" src="../imagens/gisicons/length-measure.png">
                                 </a>
                                 <h6>{{{d21t}}}</h6>
                             </div>
-                            <div class="text-center form-group" style="margin: 4px;">
+                            <div class="text-center form-group" style="margin: 4px;display:inline-block">
                                 <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.selecao();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
                                     <img style="margin-top: 4px;" src="../imagens/gisicons/select.png">
                                 </a>
                                 <h6>{{{d24t}}}</h6>
                             </div>
-                            <div class="text-center form-group" style="margin: 4px;">
+                            <div class="text-center form-group" style="margin: 4px;display:inline-block">
                                 <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.geolocal();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
                                     <img style="margin-top: 4px;" src="../imagens/gisicons/layer-gps.png">
                                 </a>
@@ -743,24 +755,26 @@
 									placement : "left"
 								});
 								$('.iconeGuiaMovel').tooltip('show');
-								setTimeout(function(){$('.iconeGuiaMovel').tooltip('hide');},5000);
+								setTimeout(function() {
+									$('.iconeGuiaMovel').tooltip('hide');
+								}, 5000);
 
-								$('.ol-i3GEOcontrols button').tooltip({
-									animation : false,
-									trigger : "hover",
-									placement : "auto",
-									template : "<div class='tooltip ' ><div class='tooltip-inner'></div></div>"
-								});
+								$('.ol-i3GEOcontrols button')
+										.tooltip(
+												{
+													animation : false,
+													trigger : "hover",
+													placement : "auto",
+													template : "<div class='tooltip ' ><div class='tooltip-inner'></div></div>"
+												});
 
-								$(".guiaOverflow").css("height",
-										i3GEO.parametros.h - 60);
+								//$(".guiaOverflow").css("height",i3GEO.parametros.h - 140);
+
 								$(".guiaOverflow").mCustomScrollbar({
 									scrollbarPosition : "inside",
 									theme : "inset-2-dark"
 								});
-								i3GEO.eventos.adicionaEventos("RESIZE", $(
-										".guiaOverflow").css("height",
-										i3GEO.parametros.h - 60));
+								//i3GEO.eventos.adicionaEventos("RESIZE", $(".guiaOverflow").css("height",i3GEO.parametros.h - 140));
 
 								//setTimeout(function() {
 								//	$('.iconeGuiaMovel').tooltip('destroy');
@@ -845,7 +859,8 @@
 								legenda : {
 									//define o local onde os templates da ferramenta ficam armazenados
 									//esse eh o local default, colocado aqui para documentacao
-									templateDir : i3GeoUrl + "/ferramentas/legenda"
+									templateDir : i3GeoUrl
+											+ "/ferramentas/legenda"
 								}
 							},
 							//configuracoes especificas para a interface que utiliza o OpenLayers
