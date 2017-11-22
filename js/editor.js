@@ -3,6 +3,7 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.editor =
 {
+		//se for vazio, nao cria os botoes
 		botoes : {
 				'zoomin' : false,
 				'zoomout' : false,
@@ -106,7 +107,7 @@ i3GEO.editor =
 				if (!i3GEO.desenho.layergrafico) {
 					i3GEO.desenho.openlayers.criaLayerGrafico();
 				}
-				if (idjanela) {
+				if (idjanela && i3GEO.editor.botoes != "") {
 					i3GEO.editorOL.criaBotoes(i3GEO.editor.botoes);
 				}
 			}

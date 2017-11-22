@@ -34,7 +34,8 @@ body {
 <!--BEGIN SOURCE CODE FOR EXAMPLE =============================== -->
 <div id="container">
 </div>
-<button onclick="aplicarCor()" style="position:absolute;top:198px"  >aplicar</button>
+<button onclick="aplicarCor()" style="position:absolute;top:198px;left:5px;"  >aplicar</button>
+<button onclick="aplicarCor('-1,-1,-1')" style="position:absolute;top:198px;left:100px;"  >sem cor</button>
 <!--We'll use these to trigger interactions with the Color Picker
 API -->
 <script type="text/javascript">
@@ -56,7 +57,7 @@ API -->
 			picker.on("rgbChange", onRgbChange);
 			document.getElementById("yui-picker-swatch").style.display = "none";
 			document.getElementById("yui-picker-controls").style.top = "0px";
-			document.getElementById("yui-picker-websafe-swatch").style.left = "85px";
+			document.getElementById("yui-picker-websafe-swatch").style.left = "200px";
 			document.getElementById("yui-picker-websafe-swatch").style.top = "199px";
 			document.getElementById("yui-picker-websafe-swatch").style.width = "100px";
 
@@ -73,7 +74,7 @@ API -->
 //utilize tipo na url para definir o tipo de cor de retorno
 //default e hex
 //se for usado rgbSep, o retorno sera em rgb separado por " "
-function aplicarCor()
+function aplicarCor(valorcor)
 {
 	navm = false; // IE
 	navn = false; // netscape
@@ -100,6 +101,9 @@ function aplicarCor()
 	{ncor = document.getElementById("yui-picker-r").value+sep+document.getElementById("yui-picker-g").value+sep+document.getElementById("yui-picker-b").value;}
 	else
 	{ncor = "#"+document.getElementById("yui-picker-hex").value;}
+	if(valorcor){
+		ncor = valorcor;
+	}
 	doc.getElementById(elemento).value = ncor;
 	try{
 		doc.getElementById(elemento).onchange.call();

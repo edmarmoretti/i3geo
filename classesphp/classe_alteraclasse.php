@@ -205,9 +205,9 @@ class Alteraclasse
     function alteraclasses($ids, $nomes, $exps, $base64 = "nao", $minScales = "", $maxScales = "")
     {
         if ($base64 == "sim") {
-            // $ids = base64_decode($ids);
-            // $nomes = base64_decode($nomes);
-            // $exps = base64_decode($exps);
+            //$ids = base64_decode($ids);
+            $nomes = base64_decode($nomes);
+            $exps = base64_decode($exps);
         }
         // prepara os arrays com os valores
         $ids = explode(";", $ids);
@@ -1205,13 +1205,15 @@ class Alteraclasse
                     }
                 } else {
                     $valite = $this->retornaValorShape($shape,$item,$numerico,$ignorararray);
-                    if($unico == true){
-                        if(!in_array($valite,$valitem)){
+                    if($valite != false){
+                        if($unico == true){
+                            if(!in_array($valite,$valitem)){
+                                $valitem[] = $valite;
+                            }
+                        }
+                        else {
                             $valitem[] = $valite;
                         }
-                    }
-                    else {
-                        $valitem[] = $valite;
                     }
                 }
             }
@@ -1230,6 +1232,8 @@ class Alteraclasse
                 } else {
                     if (! in_array($v, $ignorararray)) {
                         $valor = $v;
+                    } else {
+                        $valor = false;
                     }
                 }
             }
@@ -1239,6 +1243,8 @@ class Alteraclasse
             } else {
                 if (! in_array($v, $ignorararray)) {
                     $valor = $v;
+                } else {
+                    $valor = false;
                 }
             }
         }
