@@ -47,7 +47,7 @@ i3GEO.catalogoInde = {
 			$("#" + i3GEO.catalogoInde.config.idOndeMigalha).hide();
 			$("#" + i3GEO.catalogoInde.config.idCatalogoPrincipal).show();
 		});
-		i3GEO.catalogoInde.DADOS = "";
+		//i3GEO.catalogoInde.DADOS = "";
 	},
 	adicionaTema : function(tid) {
 		if (typeof (console) !== 'undefined')
@@ -91,8 +91,7 @@ i3GEO.catalogoInde = {
 			i3GEO.catalogoInde.carregaTemplates();
 			return;
 		} else {
-			i3GEO.catalogoInde.DADOS = "";
-
+			//i3GEO.catalogoInde.DADOS = "";
 			i3GEO.catalogoInde.MIGALHA = [
 			{"nome":"","onclick":"i3GEO.catalogoInde.mostraCatalogoPrincipal()"},
 			{"nome":"INDE-Br","onclick":"i3GEO.catalogoInde.inicia()"}

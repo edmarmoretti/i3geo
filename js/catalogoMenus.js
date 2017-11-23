@@ -46,7 +46,7 @@ i3GEO.catalogoMenus = {
 			$("#" + i3GEO.catalogoMenus.config.idCatalogoPrincipal).show();
 		});
 		//ao fechar a guia
-		i3GEO.catalogoInde.DADOS = "";
+		//i3GEO.catalogoInde.DADOS = "";
 	},
 	adicionaTema : function(tid) {
 		if (typeof (console) !== 'undefined')
