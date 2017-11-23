@@ -2,47 +2,47 @@
 i3GEOF.geolocal.dicionario = {
 	'localizaUsuario' : [ {
 		pt : "Localiza&ccedil;&atilde;o do usu&aacute;rio",
-		en : "",
-		es : ""
+		en : "User location",
+		es : "Ubicaci&oacute;n del usuario"
 	} ],
 	'msgNavegador' : [ {
 		pt : "Seu navegador n&atilde;o permite a localiza&ccedil;&atilde;o do usu&aacute;rio",
-		en : "",
-		es : ""
+		en : "Your browser does not allow user location ",
+		es : "Su navegador no permite la ubicaci&amp;oacute;n del usuario"
 	} ],
 	'capturaCoord' : [ {
 		pt : "Captura coordenada",
-		en : "",
-		es : ""
+		en : "Captures coordinate",
+		es : "Captura coordenada"
 	} ],
 	'limpa' : [ {
 		pt : "Limpa",
-		en : "",
-		es : ""
+		en : "Clear",
+		es : "Limpiar"
 	} ],
 	'shp' : [ {
 		pt : "Cria camada com os pontos",
-		en : "",
-		es : ""
+		en : "Creates a layer with points",
+		es : "Crea una capa con los puntos"
 	} ],
 	'intervalo' : [ {
 		pt : "Intervalo entre capturas (segundos)",
-		en : "",
-		es : ""
+		en : "Interval between captures (seconds)",
+		es : "Intervalo entre capturas (segundos)"
 	} ],
 	'paraCaptura' : [ {
 		pt : "Para a captura",
-		en : "",
-		es : ""
+		en : "For capture",
+		es : "Para la captura"
 	} ],
 	'maximoPontos' : [ {
 		pt : "M&aacute;ximo de pontos",
-		en : "",
-		es : ""
+		en : "Maximum points",
+		es : "M&aacute;ximo de puntos"
 	} ],
 	9 : [ {
 		pt : "Salva como Shapefile",
-		en : "",
-		es : ""
+		en : "Save as Shapefile",
+		es : "Guarda como Shapefile"
 	} ]
 };
