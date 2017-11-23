@@ -7,6 +7,10 @@
 			</a>
 			<span class="pull-right">&nbsp;&nbsp;</span>
 <!-- utiliza o codigo aqui pois o mapfile pode nao estar no banco -->
+			<a title="{{{testaLayer}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.testa('{{codigo}}');" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+				<i class="material-icons  md-18">gavel</i>
+			</a>
+			<span class="pull-right">&nbsp;&nbsp;</span>
 			<a title="{{{tituloTxt}}}" href="javascript:void(0)" onclick="i3GEOadmin.mapfile.editarDialogo('{{codigo}}');" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons  md-18">mode_edit</i>
 			</a>

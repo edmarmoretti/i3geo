@@ -352,5 +352,9 @@ Obt&eacute;m a lista
 		aplicaFiltroPalavra: function(){
 			var palavra = $("#filtroPrefixo").val();
 			i3GEOadmin.mapfile.lista(palavra);
+		},
+		testa: function(codigo){
+			i3GEOadmin.core.modalAguarde(true);
+			i3GEOadmin.teste.testaImg("../../..",codigo,"","",$("#modalGeral .modal-body"))
 		}
 };

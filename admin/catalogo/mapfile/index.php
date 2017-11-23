@@ -123,6 +123,7 @@ include ("templates/templateFiltro.php");
 include ("templates/templateClonarTema.php");
 ?>
 <script type="text/javascript" src="index.js"></script>
+<script type="text/javascript" src="teste/index.js"></script>
 <script type="text/javascript" src="../../dicionario/editormapfile.js"></script>
 <script>
 	$(document).ready(function(){
