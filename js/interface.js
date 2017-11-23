@@ -303,7 +303,10 @@ i3GEO.Interface =
          * sendo value o c&oacute;digo do layer
          */
         ligaDesliga : function(obj) {
-            i3GEO.Interface[i3GEO.Interface.ATUAL].ligaDesliga(obj);
+        	if (typeof (console) !== 'undefined')
+				console.info("i3GEO.Interface.ligaDesliga()");
+
+        	i3GEO.Interface[i3GEO.Interface.ATUAL].ligaDesliga(obj);
             if(obj.checked && obj.value != ""){
                 i3GEO.mapa.ativaTema(obj.value);
             }

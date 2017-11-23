@@ -50,12 +50,19 @@ i3GEO.catalogoMenus = {
 	},
 	adicionaTema : function(tid) {
 		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.catalogoMenus.adicionaTema");
+			console.info("i3GEO.catalogoMenus.adicionaTema()");
 
 		// confirma se o tema existe no mapa
-		if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
-			i3GEO.janela.tempoMsg($trad("x76"));
-			//i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, true);
+		var tema = i3GEO.arvoreDeCamadas.pegaTema(tid),ck;
+		if ( tema !== "") {
+			//
+			ck = i3GEO.arvoreDeCamadas.capturaCheckBox(tid);
+			if(ck != false && ck.onclick){
+				ck.checked = !ck.checked;
+				ck.onclick.call(ck);
+			} else {
+				i3GEO.janela.tempoMsg($trad("x76"));
+			}
 		} else {
 			i3GEO.php.adtema(i3GEO.atualiza, tid);
 		}

@@ -799,7 +799,19 @@ i3GEO.arvoreDeCamadas =
 		 */
 		capturaCheckBox : function(tema) {
 			if (typeof (console) !== 'undefined')
-				console.info("oops i3GEO.arvoreDeCamadas.capturaCheckBox()");
+				console.info("i3GEO.arvoreDeCamadas.capturaCheckBox()");
+
+			var onde = $i(i3GEO.arvoreDeCamadas.config.idOnde),camadas,n,i;
+			if(onde){
+				camadas = onde.getElementsByTagName("input");
+				n = camadas.length;
+				for(i=0; i<n; i++){
+					if(camadas[i].name == tema){
+						return camadas[i];
+					}
+				}
+			}
+			return false;
 		},
 		/**
 		 * Compara se dois objetos com as camadas s&atilde;o iguais
