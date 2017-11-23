@@ -536,13 +536,13 @@ function carregaCacheImagem($cachedir, $map, $tms, $i3georendermode = 0)
     } else {
         $nome = $cachedir . $tms;
     }
-    $nome = $nome . ".png";
+    $nome = str_replace(".png","",$nome) . ".png";
     if (file_exists($nome)) {
         cabecalhoImagem($nome);
         if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
             readfile($nome);
         } else {
-            header("X-Sendfile: $nome");
+            header("X-Sendfile: ".$nome);
         }
         exit();
     }
