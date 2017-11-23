@@ -2,77 +2,77 @@
 i3GEOF.gradeCoord.dicionario = {
 	'intervalo' : [ {
 		pt : "Intervalo em d&eacute;cimos de grau",
-		en : "",
-		es : ""
+		en : "Interval in decimal degree",
+		es : "Intervalo en grados decimales"
 	} ],
 	'cor' : [ {
 		pt : "Cor das linhas",
-		en : "",
-		es : ""
+		en : "Line color",
+		es : "Color de las l&iacute;neas"
 	} ],
 	'largura' : [ {
 		pt : "Largura das linhas",
-		en : "",
-		es : ""
+		en : "Line width",
+		es : "Ancho de las l&iacute;neas"
 	} ],
 	'tipoLinha' : [ {
 		pt : "Tipo de linha",
-		en : "",
-		es : ""
+		en : "Line type",
+		es : "Tipo de l&iacute;nea"
 	} ],
 	'solido' : [ {
 		pt : "s&oacute;lido",
-		en : "",
-		es : ""
+		en : "solid",
+		es : "s&oacute;lido"
 	} ],
 	'tracejado' : [ {
 		pt : "tracejado",
-		en : "",
-		es : ""
+		en : "dashed",
+		es : "discontinuo"
 	} ],
 	'tamanhoTexto' : [ {
 		pt : "Tamanho do texto",
-		en : "",
-		es : ""
+		en : "Text size",
+		es : "Tama&ntilde;o del texto"
 	} ],
 	'fonteTexto' : [ {
 		pt : "Fonte",
-		en : "",
-		es : ""
+		en : "Font",
+		es : "Fuente"
 	} ],
 	'corMascara' : [ {
 		pt : "Cor da m&aacute;scara de um pixel de entorno",
-		en : "",
-		es : ""
+		en : "Color mask of one pixel buffer",
+		es : "Color de la m&aacute;scara de un pixel de entorno"
 	} ],
 	'corSombra' : [ {
 		pt : "Cor da sombra",
-		en : "",
-		es : ""
+		en : "Shadow color",
+		es : "Color de la sombra"
 	} ],
 	'deslocamentoSombra' : [ {
 		pt : "Deslocamento da sombra",
-		en : "",
-		es : ""
+		en : "Shadow offset",
+		es : "Desplazamiento de la sombra"
 	} ],
 	'corTexto' : [ {
 		pt : "Cor dos textos",
-		en : "",
-		es : ""
+		en : "Text color",
+		es : "Color de los textos"
 	} ],
 	'criaGrade' : [ {
 		pt : "Criar grade",
-		en : "",
-		es : ""
+		en : "Create grid",
+		es : "Crear cuadr&iacute;cula"
 	} ],
 	'distLinhas' : [ {
 		pt : "Entre com a dist&acirc;ncia entre as linhas",
-		en : "",
-		es : ""
+		en : "Enter distance between lines",
+		es : "Introduzca la distancia entre las l&iacute;neas"
 	} ],
 	'textos' : [ {
 		pt : "Inclui textos",
-		en : "",
-		es : ""
+		en : "Includes texts",
+		es : "Incluye textos"
 	} ]
 };
