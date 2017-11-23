@@ -2,13 +2,13 @@
 i3GEOF.imprimir.dicionario = {
 	"escolha" : [ {
 		pt : "Escolha o modelo: (utilize as propriedades do mapa para compor a legenda e outros elementos do mapa)",
-		en : "",
-		es : ""
+		en : "Choose a template: (use map properties to create the legend and other elements of the map)",
+		es : "Seleccione la plantilla: (utilice las propiedades del mapa para crear la leyenda y otros elementos del mapa)"
 	} ],
 	"config" : [ {
 		pt : "Configura&ccedil;&otilde;es",
-		en : "",
-		es : ""
+		en : "Settings",
+		es : "Configuraci&oacute;n"
 	} ],//para reusar o dicionario principal
 	"legenda" : [ {
 		pt : $trad("p3"),
