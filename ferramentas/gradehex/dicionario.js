@@ -62,8 +62,8 @@ i3GEOF.gradeDeHex.dicionario = {
 	} ],
 	'msg2' : [ {
 		pt : "N&uacute;mero de pontos n&atilde;o pode ser 0",
-		en : "El N&uacute;mero de puntos no puede ser 0",
-		es : "Number of points can not be 0"
+		en : "Number of points can not be 0",
+		es : "El N&uacute;mero de puntos no puede ser 0"
 	} ],
 	'projMercator' : [ {
 		pt : "Utiliza a proje&ccedil;&atilde;o Mercator na gera&ccedil;&atilde;o da grade",
