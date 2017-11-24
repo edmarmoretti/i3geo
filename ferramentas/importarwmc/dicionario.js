@@ -2,12 +2,12 @@
 i3GEOF.importarwmc.dicionario = {
 	'arquivo' : [ {
 		pt : "Arquivo",
-		en : "",
-		es : ""
+		en : "File",
+		es : "Archivo"
 	} ],
 	'importar' : [ {
 		pt : "Importar",
-		en : "",
-		es : ""
+		en : "Import",
+		es : "Importar"
 	} ]
 };

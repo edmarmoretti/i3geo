@@ -42,8 +42,8 @@ i3GEOF.gradeCoord.dicionario = {
 	} ],
 	'corMascara' : [ {
 		pt : "Cor da m&aacute;scara de um pixel de entorno",
-		en : "Color mask of one pixel buffer",
-		es : "Color de la m&aacute;scara de un pixel de entorno"
+		en : "Mask color of a one-pixel halo",
+		es : "Color de la m&aacute;scara de un halo de un pixel"
 	} ],
 	'corSombra' : [ {
 		pt : "Cor da sombra",
