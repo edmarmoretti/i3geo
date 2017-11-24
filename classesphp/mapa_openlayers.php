@@ -436,11 +436,11 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
             readfile($nomer);
         }
     } else {
+
         // cache inativo
         if ($img->imagepath == "") {
             ilegal();
         }
-
         // se for necessario cortar a imagem, $img->saveImage() nao funciona
         if ($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)) {
             $nomer = ($img->imagepath) . "temp" . nomeRand() . ".png";
