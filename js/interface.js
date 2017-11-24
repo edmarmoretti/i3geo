@@ -894,6 +894,7 @@ i3GEO.Interface =
                 var montaMapa =
                     function() {
                     var openlayers = i3GEO.Interface.openlayers;
+
                     i3geoOL.updateSize();
                     openlayers.registraEventos();
                     openlayers.zoom2ext(i3GEO.parametros.mapexten);
@@ -1690,7 +1691,7 @@ i3GEO.Interface =
                 ext = i3GEO.util.extGeo2OSM(ext);
                 m = ext.split(" ");
                 m = [
-                     parseInt(m[0], 10), parseInt(m[1], 10), parseInt(m[2], 10), parseInt(m[3], 10)
+                     m[0]*1, m[1]*1, m[2]*1, m[3]*1
                      ];
                 v = i3geoOL.getView();
                 v.fit(m, i3geoOL.getSize());
