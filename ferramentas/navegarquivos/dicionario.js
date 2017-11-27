@@ -2,12 +2,12 @@
 i3GEOF.navegarquivos.dicionario = {
 	'arquivos' : [ {
 		pt : "Arquivos",
-		en : "",
-		es : ""
+		en : "Files",
+		es : "Archivos"
 	} ],
 	'pastas' : [ {
 		pt : "Pastas",
-		en : "",
-		es : ""
+		en : "Folders",
+		es : "Carpetas"
 	} ]
 };
