@@ -2,77 +2,77 @@
 i3GEOF.opcoesEscala.dicionario = {
 	'msg' : [ {
 		pt : "Essa operacao afeta apenas a barra de escala utilizada na ferramenta de impressao do mapa",
-		en : "",
-		es : ""
+		en : "This operation only affects the scale bar used for the map printing tool",
+		es : "Esta operaci&oacute;n solo afecta a la escala de barra utilizada en la herramienta de impresi&oacute;n del mapa"
 	} ],
 	'altura' : [ {
 		pt : "Altura",
-		en : "",
-		es : ""
+		en : "Height",
+		es : "Altura"
 	} ],
 	'largura' : [ {
 		pt : "Largura",
-		en : "",
-		es : ""
+		en : "Width",
+		es : "Ancho"
 	} ],
 	'unidade' : [ {
 		pt : "Unidade",
-		en : "",
-		es : ""
+		en : "Unit",
+		es : "Unidad"
 	} ],
 	'estilo' : [ {
 		pt : "Estilo",
-		en : "",
-		es : ""
+		en : "Style",
+		es : "Estilo"
 	} ],
 	'bloco' : [ {
 		pt : "Bloco",
-		en : "",
-		es : ""
+		en : "Block",
+		es : "Bloque"
 	} ],
 	'linear' : [ {
 		pt : "Linear",
-		en : "",
-		es : ""
+		en : "Linear",
+		es : "Lineal"
 	} ],
 	'semBarra' : [ {
 		pt : "Sem barra",
-		en : "",
-		es : ""
+		en : "No bar",
+		es : "Sin barra"
 	} ],
 	'intervalos' : [ {
 		pt : "Intervalos",
-		en : "",
-		es : ""
+		en : "Intervals",
+		es : "Intervalos"
 	} ],
 	'cor' : [ {
 		pt : "Cor",
-		en : "",
-		es : ""
+		en : "Color",
+		es : "Color"
 	} ],
 	'fundo' : [ {
 		pt : "Fundo",
-		en : "",
-		es : ""
+		en : "Background",
+		es : "Fondo"
 	} ],
 	'contorno' : [ {
 		pt : "Contorno",
-		en : "",
-		es : ""
+		en : "Outline",
+		es : "Contorno"
 	} ],
 	'aplica' : [ {
 		pt : "Aplicar",
-		en : "",
-		es : ""
+		en : "Apply",
+		es : "Aplicar"
 	} ],
 	'testa' : [ {
 		pt : "Testar",
-		en : "",
-		es : ""
+		en : "Test",
+		es : "Probar"
 	} ],
 	'incluiNoMapa' : [ {
 		pt : "Inclui no corpo do mapa?",
-		en : "",
-		es : ""
+		en : "Do you want to add it to the map body?",
+		es : "&iquest;Se Incluye en el cuerpo del mapa?"
 	} ]
 };
