@@ -1,37 +1,37 @@
 i3GEOF.mostraregiao.dicionario = {
 		'regiao' : [ {
 			pt : "Regi&atilde;o",
-			en : "",
-			es : ""
+			en : "Region",
+			es : "Regi&oacute;n"
 		} ],
 		'nomes' : [ {
 			pt : "Inclui nomes",
-			en : "",
-			es : ""
+			en : "Adds names",
+			es : "Incluye nombres"
 		} ],
 		'contorno' : [ {
 			pt : "Contorno",
-			en : "",
-			es : ""
+			en : "Outline",
+			es : "Contorno"
 		} ],
 		'cor' : [ {
 			pt : "Cor do contorno",
-			en : "",
-			es : ""
+			en : "Outline color",
+			es : "Color del contorno"
 		} ],
 		'largura' : [ {
 			pt : "Espessura",
-			en : "",
-			es : ""
+			en : "Thickness",
+			es : "Ancho"
 		} ],
 		'aplicar' : [ {
 			pt : "Aplicar",
-			en : "",
-			es : ""
+			en : "Apply",
+			es : "Aplicar"
 		} ],
 		'limites' : [ {
 			pt : "Limites de regi&otilde;es",
-			en : "",
-			es : ""
+			en : "Region boundaries",
+			es : "L&iacute;mites de las regiones"
 		} ]
 };
