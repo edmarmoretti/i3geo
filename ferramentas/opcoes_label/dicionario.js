@@ -2,162 +2,162 @@
 i3GEOF.proplabel.dicionario = {
 	'msgAguarde' : [ {
 		pt : "Aguarde",
-		en : "",
-		es : ""
+		en : "Wait",
+		es : "Espere"
 	} ],
 	'fonte' : [ {
 		pt : "Fonte",
-		en : "",
-		es : ""
+		en : "Font",
+		es : "Fuente"
 	} ],
 	'tamanho' : [ {
 		pt : "Tamanho",
-		en : "",
-		es : ""
+		en : "Size",
+		es : "Tama&ntilde;o"
 	} ],
 	'larguraConector' : [ {
 		pt : "Largura do conector",
-		en : "",
-		es : ""
+		en : "Connector width",
+		es : "Ancho del conector"
 	} ],
 	'corConector' : [ {
 		pt : "Cor do conector",
-		en : "",
-		es : ""
+		en : "Connector color",
+		es : "Color del conector"
 	} ],
 	'angulo' : [ {
 		pt : "&Acirc;ngulo (no caso de linhas pode ser utilizado AUTO ou FOLLOW (segue a linha), nesses casos, a fonte n&atilde;o pode ser do tipo bitmap)",
-		en : "",
-		es : ""
+		en : "Angle (for lines you can use AUTO or FOLLOW (follow the line), in these cases the font cannot be bitmap)",
+		es : "&Aacute;ngulo (en el caso de l&iacute;neas se puede utilizar AUTO o FOLLOW (sigue la l&iacute;nea), en estos casos la fuente no puede ser del tipo de mapa de bits)"
 	} ],
 	'deslocamento' : [ {
 		pt : "Deslocamento do texto em rela&ccedil;&atilde;o ao ponto de inclus&atilde;o",
-		en : "",
-		es : ""
+		en : "Text offset in relation to the insertion point",
+		es : "Desplazamiento del texto en relaci&oacute;n al punto de inserci&oacute;n"
 	} ],
 	'corTexto' : [ {
 		pt : "Cor do texto",
-		en : "",
-		es : ""
+		en : "Text color",
+		es : "Color del texto"
 	} ],
 	'corMascara' : [ {
 		pt : "Cor da m&aacute;scara de um pixel de entorno",
-		en : "",
-		es : ""
+		en : "Mask color of a one-pixel halo",
+		es : "Color de la m&aacute;scara de un halo de un pixel"
 	} ],
 	'posicionamento' : [ {
 		pt : "Posicionamento",
-		en : "",
-		es : ""
+		en : "Positioning",
+		es : "Posicionamiento"
 	} ],
 	'automatico' : [ {
 		pt : "autom&aacute;tico",
-		en : "",
-		es : ""
+		en : "automatic",
+		es : "autom&aacute;tico"
 	} ],
 	'superiorEsquerdo' : [ {
 		pt : "superior esquerdo",
-		en : "",
-		es : ""
+		en : "upper left",
+		es : "superior izquierdo"
 	} ],
 	'superiorCentro' : [ {
 		pt : "superior centro",
-		en : "",
-		es : ""
+		en : "upper center",
+		es : "superior centro"
 	} ],
 	'superiorDireito' : [ {
 		pt : "superior direito",
-		en : "",
-		es : ""
+		en : "upper right",
+		es : "superior derecho"
 	} ],
 	'centroEsquerdo' : [ {
 		pt : "centro esquerdo",
-		en : "",
-		es : ""
+		en : "center left",
+		es : "centro izquierdo"
 	} ],
 	'centro' : [ {
 		pt : "centro",
-		en : "",
-		es : ""
+		en : "center",
+		es : "centro"
 	} ],
 	'centroDireito' : [ {
 		pt : "centro direito",
-		en : "",
-		es : ""
+		en : "right center",
+		es : "centro derecho"
 	} ],
 	'inferiorEsquerdo' : [ {
 		pt : "inferior esquerdo",
-		en : "",
-		es : ""
+		en : "lower left",
+		es : "inferior izquierdo"
 	} ],
 	'inferiorCentro' : [ {
 		pt : "inferior centro",
-		en : "",
-		es : ""
+		en : "lower center",
+		es : "inferior centro"
 	} ],
 	'inferiorDireito' : [ {
 		pt : "inferior direito",
-		en : "",
-		es : ""
+		en : "lower right",
+		es : "inferior derecho"
 	} ],
 	'corFundo' : [ {
 		pt : "Cor do fundo",
-		en : "",
-		es : ""
+		en : "Background color",
+		es : "Color del fondo"
 	} ],
 	'corSombraFundo' : [ {
 		pt : "Cor da sombra do fundo",
-		en : "",
-		es : ""
+		en : "Background shadow color",
+		es : "Color de la sombra del fondo"
 	} ],
 	'deslocamentoSombraFundo' : [ {
 		pt : "Deslocamento da sombra do fundo",
-		en : "",
-		es : ""
+		en : "Background shadow offset",
+		es : "Desplazamiento de la sombra del fondo"
 	} ],
 	'corTextoFundo' : [ {
 		pt : "Cor do texto de fundo (duplicado)",
-		en : "",
-		es : ""
+		en : "Background text color (duplicate)",
+		es : "Color del texto de fondo (duplicado)"
 	} ],
 	'deslocamentoTextoFundo' : [ {
 		pt : "Deslocamento do texto de fundo (duplicado)",
-		en : "",
-		es : ""
+		en : "Background text offset (duplicate)",
+		es : "Desplazamiento del texto de fondo (duplicado)"
 	} ],
 	'forcaColisaoTexto' : [ {
 		pt : "For&ccedil;a colis&otilde;es entre textos?",
-		en : "",
-		es : ""
+		en : "Do you want to force text overlapping?",
+		es : "&iquest;Quiere forzar la sobreposici&oacute;n entre textos?"
 	} ],
 	'distanciaMinimaTextos' : [ {
 		pt : "Dist&acirc;ncia m&iacute;nima entre textos duplicados (em pixel)",
-		en : "",
-		es : ""
+		en : "Minimum distance between duplicate texts (in pixel)",
+		es : "Distancia m&iacute;nima entre textos duplicados (en p&iacute;xel)"
 	} ],
 	'tamanhoMinimoElemento' : [ {
 		pt : "Tamanho m&iacute;nimo do elemento cartogr&aacute;fico(em pixel)",
-		en : "",
-		es : ""
+		en : "Minimum size of cartographic feature (in pixel)",
+		es : "Tama&ntilde;o m&iacute;nimo de la entidad cartogr&aacute;fica (en p&iacute;xel)"
 	} ],
 	'textoUltrapassaMapa' : [ {
 		pt : "O texto pode ultrapassar o mapa?",
-		en : "",
-		es : ""
+		en : "Can the text go beyond the map",
+		es : "&iquest;El texto puede sobrepasar el mapa?"
 	} ],
 	'caracterQuebraTexto' : [ {
 		pt : "Caractere usado para indicar uma quebra de texto",
-		en : "",
-		es : ""
+		en : "Character used to indicate a text break",
+		es : "Car&aacute;cter utilizado para indicar un salto de texto"
 	} ],
 	'propriedadesTexto' : [ {
 		pt : "Propriedades do texto",
-		en : "",
-		es : ""
+		en : "Text properties",
+		es : "Propiedades del texto"
 	} ],
 	'observacao' : [ {
 		pt : "Mantenha essa janela aberta ao aplicar para que as propriedades sejam consideradas",
-		en : "",
-		es : ""
+		en : "Keep this window open while applying changes so that properties would be considered",
+		es : "Mantenga esta ventana abierta al aplicar para que las propiedades sean consideradas"
 	} ]
 };
