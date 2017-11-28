@@ -27,8 +27,8 @@ i3GEOadmin.principal.dicionario = {
 	} ],
 	'msgUsr' : [ {
 		pt : "Na guia <kbd>Usu&aacute;rios</kbd> voc&ecirc; pode criar e manipular os usu&aacute;rios, grupos de usu&aacute;rios e as opera&ccedil;&otilde;es que cada elemento pode realizar dentro do sistema.",
-		en : "On the <kbd>Users</kbd> tab you can create and handle users, user groups, and operations that each element can perform within the system.",
-		es : "En la pesta&ntilde;a <kbd>Usuarios</kbd> usted puede crear y manipular los usuarios, grupos de usuarios y las operaciones que cada elemento puede realizar dentro del sistema."
+		en : "On the <kbd>Users</kbd> tab you can create and handle users, user groups, and operations that each component can perform within the system.",
+		es : "En la pesta&ntilde;a <kbd>Usuarios</kbd> usted puede crear y manipular los usuarios, grupos de usuarios y las operaciones que cada componente puede realizar dentro del sistema."
 	} ],
 	'msgMetaestat' : [ {
 		pt : "Em <kbd>Metaestat</kbd> &eacute; poss&iacute;vel cadastrar vari&aacute;veis e medidas que compor&atilde;o metadados para a visualiza&ccedil;&atilde;o de informa&ccedil;&otilde;es estat&iacute;sticas em uma determinada regi&atilde;o, os chamados metadados estat&iacute;sticos. Dessa forma, &eacute; poss&iacute;vel configurar visualiza&ccedil;&otilde;es espaciais padr&atilde;o para vari&aacute;veis estat&iacute;sticas.",
