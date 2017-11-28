@@ -18,6 +18,10 @@
 
 <!-- <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap-accessibility-plugin/plugins/js/bootstrap-accessibility.min.js"> -->
 <link rel="stylesheet" type="text/css" href="../css/default.css">
+<!-- para o tutorial -->
+<script src="../pacotes/bootstrap-tour/build/js/bootstrap-tour.js"></script>
+<link href="../pacotes/bootstrap-tour/build/css/bootstrap-tour.css" rel="stylesheet">
+<script src="tutorial.js"></script>
 <style>
 .ol-attribution.ol-uncollapsible {
 	height: 2.1em;
@@ -36,20 +40,19 @@
 	-->
 <body id="i3geo" style='background: white;'>
     <!-- inclui o nome do usuario logado
-	<div id="i3GEONomeLogin"
-		style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
-	-->
+    <div id="i3GEONomeLogin"
+        style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
+    -->
     <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
-	Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
-	-->
+    Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
+    -->
     <div id="mapai3Geo"></div>
     <!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
-    <form class="escalanumerica hidden-xs" onsubmit="javascript:i3GEO.navega.aplicaEscala($i('i3GEOescalanum').value);return false;">
+    <form data-tutorial="escalas" class="escalanumerica hidden-xs" onsubmit="javascript:i3GEO.navega.aplicaEscala($i('i3GEOescalanum').value);return false;">
         <input id='i3GEOescalanum' type='text' name='' value='' size='10' title=''>
     </form>
-
     <!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
-    <div class="localizarxy fundoRodape hidden-xs hidden-sm">
+    <div data-tutorial="coordenadas" class="localizarxy fundoRodape hidden-xs hidden-sm">
         <div class="i3GeoMascaraCoord" style="display: block;">
             <select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
                 <option>DMS:</option>
@@ -94,7 +97,7 @@
             <!--<img style="width:20px;" src="../imagens/gisicons/projection.png">-->
             <i class="material-icons">public</i>
         </button>
-        <button onclick="i3GEO.Interface.zoomli()" style="float: left;">
+        <button onclick="i3GEO.Interface.zoomli()" data-tutorial="barranavegacao" style="float: left;">
             <!--<img style="width:20px;" src="../imagens/gisicons/zoom-region.png">-->
             <i class="material-icons">zoom_in</i>
         </button>
@@ -108,16 +111,16 @@
             <i class="material-icons">redo</i>
         </button>
         <br>
-        <button title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" style="float: left;">
+        <button title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left;">
             <!--<img style="width:16px;" src="../imagens/gisicons/graticule.png">-->
             <i class="material-icons">grid_on</i>
         </button>
-        <button class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
+        <button data-tutorial="marcador" class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
             <!--<img style="width:20px;" src="../imagens/gisicons/save1.png">-->
             <i class="material-icons">bookmark_border</i>
         </button>
         <br>
-        <button class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
+        <button data-tutorial="referencia" class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
             <!--<img style="width:20px;" src="../imagens/gisicons/map-reference.png">-->
             <i class="material-icons">picture_in_picture</i>
         </button>
@@ -143,7 +146,7 @@
                 data-idLinks - id do DIV dentro de idconteudo que sera utilizado para mostrar a lista de links que abre cada ferramenta
                 data-idMigalha - id do DIV que sera utilizado para mostrar o link de retorno ao nivel anterior
             -->
-            <div data-idconteudo="guia8obj" data-idLinks="listaFerramentasLinks" data-idMigalha="migalhaFerramentas" data-idLista="listaFerramentas" onclick="i3GEO.guias.ativa('ferramentas',this)">
+            <div data-tutorial="ferramentas" data-idconteudo="guia8obj" data-idLinks="listaFerramentasLinks" data-idMigalha="migalhaFerramentas" data-idLista="listaFerramentas" onclick="i3GEO.guias.ativa('ferramentas',this)">
                 <button title="{{{iconeFerramentas}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                     <i class="material-icons">business_center</i>
                 </button>
@@ -155,7 +158,7 @@
                     inserindo ou nao a string como uma classe CSS. Pode degradar a performance e depende
                     do metadata existente na camada. Deixe vazio para nao ativar a operacao.
             -->
-            <div onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas"
+            <div data-tutorial="camadas" onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia="" data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas"
                 style="margin-top: 3px;">
                 <button title="{{{iconeMapa}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                     <i class="material-icons"><i class="material-icons">visibility</i></i>
@@ -170,32 +173,37 @@
                 Variaveis javascript:
                 i3GEO.catalogoMenus.IDSMENUS - (array) apenas os menus com idmenu que constem nessa lista serao mostrados. Por default e vazio.
             -->
-            <div onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj" data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal"
+            <div data-tutorial="catalogo" onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj" data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal"
                 data-idMenus="catalogoMenus" style="margin-top: 3px;">
                 <button title="{{{iconeCatalogo}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                     <i class="material-icons">layers</i>
                 </button>
             </div>
             <!-- legenda -->
-            <div onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" style="margin-top: 3px;">
+            <div data-tutorial="legenda" onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj" data-idLegenda="legendaHtml" style="margin-top: 3px;">
                 <button title="{{{iconeLegenda}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                     <i class="material-icons">view_list</i>
                 </button>
             </div>
-            <div class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('dobraPagina',this)" style="margin-top: 3px;">
+            <div data-tutorial="troca" class="hidden-xs hidden-sm" onclick="i3GEO.guias.ativa('dobraPagina',this)" style="margin-top: 3px;">
                 <button title="{{{trocaInterface}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                     <i class="material-icons">compare_arrows</i>
                 </button>
             </div>
             <!-- Busca -->
-            <div onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" style="margin-top: 3px;">
+            <div data-tutorial="busca" onclick="i3GEO.guias.ativa('buscaRapida',this)" data-idconteudo="guia7obj" style="margin-top: 3px;">
                 <button class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                     <i class="material-icons">search</i>
                 </button>
             </div>
-            <div onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;">
+            <div data-tutorial="info" onclick="i3GEO.guias.ativa('identificaBalao',this)" style="margin-top: 3px;">
                 <button title="{{{iconeBalao}}}" class="iconeGuiaMovel" style="color: white; box-shadow: none;">
                     <i class="material-icons">location_on</i>
+                </button>
+            </div>
+            <div onclick="tutorial.start(true);" style="margin-top: 3px;">
+                <button class="iconeGuiaMovel" style="color: white; box-shadow: none;">
+                    <i class="material-icons">live_help</i>
                 </button>
             </div>
             <!-- A opcao de identificacao esta integrada ao balao de informacoes, mas pode aparecer aqui tambem
@@ -766,6 +774,7 @@
 									scrollbarPosition : "inside",
 									theme : "inset-2-dark"
 								});
+								tutorial.init();
 								//setTimeout(function() {
 								//	$('.iconeGuiaMovel').tooltip('destroy');
 								//}, 30000);
