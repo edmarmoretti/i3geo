@@ -7,7 +7,7 @@ i3GEOF.markercluster.dicionario = {
 	} ],
 	'ajuda2' : [ {
 		pt : "A camada adicionada ao mapa &eacute; controlada por elementos inclu&iacute;dos no navegador web, por isso nem todas as funcionalidades do i3Geo ir&atilde;o operar corretamente na nova camada inserida no mapa.",
-		en : "The layer added to the map is controlled by the web browser, some i3Geo functionalities won't perform correctly on the new layer added to the map.",
+		en : "The layer added to the map is controlled by the web browser, so some i3Geo functionalities won't perform correctly on the new layer added to the map.",
 		es : "La capa agregada al mapa es controlada a trav&eacute;s navegador web, por lo que no todas las funcionalidades del i3Geo se desempe&ntilde;ar&aacute;n correctamente en la capa nueva insertada en el mapa."
 	} ],
 	'selecionaTema' : [ {
