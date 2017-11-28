@@ -45,7 +45,7 @@ function verificaMapa(mapa){
 		+ mapa.ID_MAPA;
 	}
 	//constroi o link para o mapa
-	if(mapa.LINK != ""){
+	if(mapa.LINK == ""){
 		link = i3GEO.configura.locaplic + "/ms_criamapa.php?temasa=" + mapa.TEMAS + "&layers=" + mapa.LIGADOS;
 		if (mapa.EXTENSAO !== "") {
 			link += "&mapext=" + mapa.EXTENSAO;
@@ -54,6 +54,12 @@ function verificaMapa(mapa){
 			link += "&" + mapa.OUTROS;
 		}
 		mapa.LINK = link;
+		links.push({
+			"nome": "Default",
+			"link": mapa.LINK,
+			"copiado": $trad("copiado",g_traducao_mapas)
+		});
+	} else {
 		links.push({
 			"nome": "Default",
 			"link": mapa.LINK,
