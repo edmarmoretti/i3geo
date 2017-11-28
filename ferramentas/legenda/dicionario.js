@@ -166,7 +166,7 @@ i3GEOF.legenda.dicionario =
 			{
 				pt : "marque para considerar nos c&aacute;lculos apenas os elementos vis&iacute;veis na extens&atilde;o geogr&aacute;fica atual, caso contr&aacute;rio, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica inicial do mapa",
 				en : "check to take into account in the calculations only those visible features in the current geographical extent, otherwise, the initial map extent will be considered",
-				es : "marque para considerar en los c&aacute;lculos solo los elementos visibles en la extensi&oacute;n geogr&aacute;fica actual, de lo contrario, se considerar&aacute; la extensi&oacute;n geogr&aacute;fica inicial del mapa"
+				es : "marque para considerar en los c&aacute;lculos solo las entidades visibles en la extensi&oacute;n geogr&aacute;fica actual, de lo contrario, se considerar&aacute; la extensi&oacute;n geogr&aacute;fica inicial del mapa"
 			}
 		],
 		'ignoraValores' : [
