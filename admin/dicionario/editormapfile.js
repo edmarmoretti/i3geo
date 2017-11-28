@@ -541,13 +541,13 @@ i3GEOadmin.mapfile.dicionario = {
 	}],
 	'maxfeaturesTitulo' : [{
 		pt : "M&aacute;ximo de elementos",
-		en : "Maximum of features",
-		es : "M&aacute;ximo de elementos"
+		en : "Max features",
+		es : "M&aacute;ximo de entidades"
 	}],
 	'Maxfeatures' : [{
 		pt : "N&uacute;mero m&aacute;ximo de elementos que podem ser mostrados em cada janela de apresenta&ccedil;&atilde;o (imagem renderizada).",
 		en : "Maximum number of features that can be shown in each presentation window (rendered image).",
-		es : "N&uacute;mero m&aacute;ximo de elementos que se pueden mostrar en cada ventana de presentaci&oacute;n (imagen renderizada)."
+		es : "N&uacute;mero m&aacute;ximo de entidades que se pueden mostrar en cada ventana de presentaci&oacute;n (imagen renderizada)."
 	}],
     'conexaoOgc' : [ {
 		pt : "Conex&atilde;o com servi&ccedil;os OGC (webservices)",
