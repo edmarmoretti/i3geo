@@ -165,7 +165,7 @@ i3GEOF.legenda.dicionario =
 		'consideraElementosVisisveis' : [
 			{
 				pt : "marque para considerar nos c&aacute;lculos apenas os elementos vis&iacute;veis na extens&atilde;o geogr&aacute;fica atual, caso contr&aacute;rio, ser&aacute; considerada a extens&atilde;o geogr&aacute;fica inicial do mapa",
-				en : "check to take into account in the calculations only those visible features in the current geographical extent, otherwise, the initial map extent will be considered",
+				en : "check to take into account in the calculations only visible features in the current geographical extent, otherwise, the initial map extent will be considered",
 				es : "marque para considerar en los c&aacute;lculos solo las entidades visibles en la extensi&oacute;n geogr&aacute;fica actual, de lo contrario, se considerar&aacute; la extensi&oacute;n geogr&aacute;fica inicial del mapa"
 			}
 		],
@@ -186,7 +186,7 @@ i3GEOF.legenda.dicionario =
 		'alteraGeom' : [
 			{
 				pt : "Altera a geometria. Transforma a representa&ccedil;&atilde;o geom&eacute;trica dos elementos do tema. Ap&oacute;s alterar esse par&acirc;metro, pode ser necess&aacute;rio modificar as caracter&iacute;sticas do s&iacute;mbolo.",
-				en : "Modify geometry. Transforms the geometric representation of a feature. After changing this parameter, you may need to modify symbol properties.",
+				en : "Modifies geometry. It transforms the geometric representation of a feature. After changing this parameter, you may need to modify symbol properties.",
 				es : "Modifica la geometr&iacute;a. Transforma la representaci&oacute;n geom&eacute;trica de las entidades del tema. Despu&eacute;s de cambiar este par&aacute;metro, puede que sea necesario modificar las caracter&iacute;sticas del s&iacute;mbolo."
 			}
 		],
