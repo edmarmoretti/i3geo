@@ -1984,8 +1984,8 @@ g_traducao =
         "x65" : [
             {
                 pt : "Buscando &iacute;tens...",
-                en : "Searching items...",
-                es : "Buscando &iacute;tems ..."
+                en : "Searching fields...",
+                es : "Buscando campos..."
             }
         ],
         "x66" : [
