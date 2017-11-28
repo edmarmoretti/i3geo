@@ -2,12 +2,12 @@
 i3GEOF.parametrossql.dicionario = {
 	'digita' : [ {
 		pt : "digite aqui o texto...",
-		en : "",
-		es : ""
+		en : "enter your text here...",
+		es : "ingrese aqu&iacute; el texto..."
 	} ],
 	'aplicar' : [ {
 		pt : "Aplicar",
-		en : "",
-		es : ""
+		en : "Apply",
+		es : "Aplicar"
 	} ]
 };
