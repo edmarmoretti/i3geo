@@ -2,7 +2,7 @@
 i3GEOF.opcoesQuery.dicionario = {
 	'aplica' : [ {
 		pt : "Aplica",
-		en : "",
-		es : ""
+		en : "Apply",
+		es : "Aplicar"
 	} ]
 };
