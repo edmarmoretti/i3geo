@@ -8,7 +8,7 @@ i3GEOF.agrupaElementos.dicionario = {
 	'descricao2' : [ {
 		pt : "Para definir quais elementos devem ser unidos uns com os outros &eacute; preciso escolher um item da tabela de atributos do tema. Os elementos que possu&iacute;rem o mesmo valor ser&atilde;o considerados no mesmo grupo. Caso n&atilde;o tenha sido escolhido nenhum item, todas os elementos ser&atilde;o agrupados em um s&oacute;.",
 		en : "In order to define which feature should be linked to each other, you must choose a field from the table of attributes of the theme. Features that have the same value will be group in the same group. If no field is chosen, all features will be grouped into a single one.",
-		es : "Para definir cu&aacute;les entidades deben estar unidas unas con otras es necesario elegir un campo de la tabla de atributos del tema. Las entidades que tengan el mismo valor se considerar&aacute;n en el mismo grupo. Si no se ha seleccionado ninguna entidad todas las entidades se agrupar&aacute;n en una sola."
+		es : "Para definir cu&aacute;les entidades deben estar unidas unas con otras es necesario elegir un campo de la tabla de atributos del tema. Las entidades que tengan el mismo valor se considerar&aacute;n en el mismo grupo. Si no se ha seleccionado ning&uacute;n campo todas las entidades se agrupar&aacute;n en una sola."
 	} ],
 	'descricao3' : [ {
 		pt : "O resultado final ser&aacute; um novo tema com elementos diferentes dos originais e cuja tabela de atributos conter&aacute; apenas o item escolhido.",
