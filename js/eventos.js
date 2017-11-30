@@ -280,6 +280,9 @@ i3GEO.eventos =
 		 * Executa as fun&ccedil;&otilde;es armazenadas em MOUSEUP.
 		 */
 		mouseupMapa : function(exy) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.eventos.mouseupMapa ");
+
 			if (!exy) {
 				i3GEO.eventos.executaEventos(this.MOUSEUP);
 			} else {
@@ -548,6 +551,11 @@ i3GEO.eventos =
 			if (!docMapa) {
 				return;
 			}
+
+			var timer = 0;
+			var delay = 200;
+			var prevent = false;
+
 			docMapa.onmouseover = function() {
 				objposicaocursor.dentroDomapa = true;
 				this.onmousemove = function(exy) {
@@ -564,18 +572,37 @@ i3GEO.eventos =
 				objposicaocursor.dentroDomapa = false;
 			};
 			docMapa.onmousedown = function(exy) {
+				if (typeof (console) !== 'undefined')
+					console.info("docMapa.onmousedown");
+
 				if(objposicaocursor.dentroDomapa === false){
 					return;
 				}
 				i3GEO.eventos.mousedownMapa();
 			};
 			docMapa.onclick = function(exy) {
+				if (typeof (console) !== 'undefined')
+					console.info("docMapa.onclick");
+
 				if(objposicaocursor.dentroDomapa === false){
 					return;
 				}
 				i3GEO.eventos.mousecliqueMapa(exy);
 			};
+			docMapa.ondblclick = function (){
+				if (typeof (console) !== 'undefined')
+					console.info("docMapa.ondblclick");
+
+				if(objposicaocursor.dentroDomapa === false){
+					return;
+				}
+				clearTimeout(timer);
+			    prevent = true;
+			};
 			docMapa.onmouseup = function(exy) {
+				if (typeof (console) !== 'undefined')
+					console.info("docMapa.onmouseup");
+
 				if(objposicaocursor.dentroDomapa === false){
 					return;
 				}
@@ -585,9 +612,14 @@ i3GEO.eventos =
 						return;
 					}
 				}
-				//funciona no googlemaps tbm
 				i3GEO.eventos.cliquePerm.status = true;
-				i3GEO.eventos.mouseupMapa(exy);
+				//i3GEO.eventos.mouseupMapa(exy);
+				timer = setTimeout(function() {
+					if (!prevent) {
+						i3GEO.eventos.mouseupMapa(exy);
+				      }
+				      prevent = false;
+				    }, delay);
 			};
 			docMapa.ontouchmove = function(exy) {
 				i3GEO.eventos.CONTATOUCH++;

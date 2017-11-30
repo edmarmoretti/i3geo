@@ -399,6 +399,9 @@ i3GEO.Interface =
         zoomli : function() {
             i3GEO.Interface[i3GEO.Interface.ATUAL].zoomli();
         },
+        getZoom : function(){
+        	return i3GEO.Interface[i3GEO.Interface.ATUAL].getZoom();
+        },
         /**
          * Section: i3GEO.Interface.OpenLayers
          *
@@ -527,6 +530,9 @@ i3GEO.Interface =
                 } else {
                     i3GEO.janela.tempoMsg($trad("zoomliShift"));
                 }
+            },
+            getZoom: function(){
+            	return i3geoOL.getZoom();
             },
             //ver i3GEO.mapa
             balao : function(texto, completo, x, y, botaoMais, botaoProp) {
@@ -1604,7 +1610,11 @@ i3GEO.Interface =
                     modoAtual = "move";
                 });
                 i3geoOL.on("click", function(e) {
-                    e.stopPropagation();
+                	e.stopPropagation();
+                    e.preventDefault();
+                });
+                i3geoOL.on("dbclick", function(e) {
+                	e.stopPropagation();
                     e.preventDefault();
                 });
                 i3geoOL.on("moveend", function(e) {
@@ -1615,6 +1625,7 @@ i3GEO.Interface =
                         return;
                     }
                     var xy;
+
                     modoAtual = "";
                     i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
                     i3GEO.Interface.openlayers.recalcPar();
@@ -1622,7 +1633,6 @@ i3GEO.Interface =
                     i3GEO.eventos.navegaMapa();
                     i3GEO.util.escondePin();
                     i3GEO.eventos.cliquePerm.status = false;
-                    // guarda a extensao geografica atual
                     i3GEO.Interface.STATUS.pan = false;
                 });
                 i3geoOL.on("pointermove", function(e) {
@@ -2086,6 +2096,9 @@ i3GEO.Interface =
                              } else {
                                  i3GEO.janela.tempoMsg($trad("zoomliCtrl"));
                              }
+                         },
+                         getZoom: function(){
+                        	 return i3GeoMap.getZoom();
                          },
                          removeBaloes : function() {
                              var p = i3GEO.Interface.googlemaps.BALAOPROP.baloes, n = p.length, i;

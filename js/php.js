@@ -1033,7 +1033,7 @@ i3GEO.php =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.php.identifica3()");
 
-			if(x === null || y === null){
+			if(x === null || y === null || (x == 0 && y == 0)){
 				return;
 			}
 			if (arguments.length === 4) {

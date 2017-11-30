@@ -125,10 +125,7 @@ i3GEO.guias =
 					if (typeof (console) !== 'undefined')
 						console.info("click no botao identifica balao");
 
-					//$('.iconeGuiaMovel').tooltip('toggle');
-
 					i3GEO.mapa.ativaIdentificaBalao();
-
 				}
 			},
 			"identifica" : {
