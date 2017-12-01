@@ -200,7 +200,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 					temas = [];
 
 				//temas na raiz do menu
-				temas.push("<option value=''>Escolha um menu</option>");
+				temas.push("<option value=''>Escolha um tema</option>");
 				$(raiz).each(function(i){
 					temas.push("<option value='"+raiz[i].tid+"'>"+raiz[i].nome+"</option>");
 				});
@@ -238,7 +238,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 					temas = [];
 
 				//temas na raiz do menu
-				temas.push("<option value=''>Escolha um menu</option>");
+				temas.push("<option value=''>Escolha um tema</option>");
 				$(raiz).each(function(i){
 					temas.push("<option value='"+raiz[i].tid+"'>"+raiz[i].nome+"</option>");
 				});
