@@ -58,6 +58,14 @@ include ("templates/templateFiltro.php");
 include ("templates/templateOpcoesPerfil.php");
 include ("../../templates/templateOpcoesPublicado.php");
 ?>
+<style>
+.contemmapfilesim{
+    display:block;
+}
+.contemmapfilenao{
+    display:none;
+}
+</style>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../dicionario/mapas.js"></script>
 <script>

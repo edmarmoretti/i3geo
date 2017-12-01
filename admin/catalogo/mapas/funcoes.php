@@ -10,7 +10,7 @@ function listar($dbh, $id_mapa = ""){
 		}
 		$dados = $dados[0];
 	} else {
-		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_mapa, nome_mapa from " . $esquemaadmin . "i3geoadmin_mapas order by ordem_mapa, lower(nome_mapa)", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_mapa, nome_mapa, CASE WHEN mapfile='' THEN 'nao' ELSE 'sim' END AS contemmapfile from " . $esquemaadmin . "i3geoadmin_mapas order by ordem_mapa, lower(nome_mapa)", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;

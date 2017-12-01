@@ -62,7 +62,7 @@ Obt&eacute;m a lista
 								"{{#data}}" + $("#templateOpcoesPerfil").html() + "{{/data}}",
 								{"data":json["perfis"]}
 						);
-						//lista todas as menus
+						//lista
 						var html = Mustache.to_html(
 								"{{#data}}" + templateLista + "{{/data}}",
 								$.extend(
