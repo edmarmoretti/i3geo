@@ -25,7 +25,7 @@ i3GEOadmin.menus.dicionario = {
 		es : "Perfiles que pueden ver este men&uacute;, separar por espacio y usar la lista de al lado"
 	} ],
     'iniciaAberto' : [ {
-		pt : "Inicia aberto?",
+		pt : "Inicia aberto? Esta op&ccedil;&atilde;o afeta apenas as implementa&ccedil;&otilde;es de mapas interativos que mostram os menus na forma de uma &aacute;rvore hier&aacute;rquica. As interfaces padr&atilde;o do i3Geo n&atilde;o usam esse tipo de implementa&ccedil;&atilde;o.",
 		en : "Start open?",
 		es : "&iquest;Inicia abierto?"
 	} ],
