@@ -149,17 +149,26 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		var iguias = $i($i3geo_gl.temasa).getElementsByTagName("input");
 		var tsl = []; //temas ligados
 		var tsd = []; //temas
+		var desligar = []; //forca desligar
 		for (var i=0;i<iguias.length; i++){
 			if (iguias[i].type == "checkbox"){
 				tsd.push(iguias[i].value);
-				if (iguias[i].checked == true)
-				{tsl.push(iguias[i].value);}
+				if (iguias[i].checked == true){
+					tsl.push(iguias[i].value);
+				} else {
+					desligar.push(iguias[i].value);
+				}
 			}
 		}
-		if(tsd.length > 0)
-		{ins += "&temasa="+tsd.join(" ");}
-		if(tsl.length > 0)
-		{ins += "&layers="+tsl.join(" ");}
+		if(tsd.length > 0){
+			ins += "&temasa="+tsd.join(" ");
+		}
+		if(tsl.length > 0){
+			ins += "&layers="+tsl.join(" ");
+		}
+		if(desligar.length > 0){
+			ins += "&desligar="+desligar.join(" ");
+		}
 		if($i("pontos").value != ""){
 			ins += "&pontos="+$i("pontos").value;
 			ins += "&nometemapontos="+$i("nometemapontos").value;
