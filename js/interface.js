@@ -1594,6 +1594,7 @@ i3GEO.Interface =
                 // vari&aacute;vel que indica se o usu&aacute;rio est&aacute;
                 // movimentando o mapa
                 var modoAtual = "";
+                var contadorPan = 0;
                 //
                 // ativa os eventos espec&iacute;ficos do i3geo
                 //
@@ -1625,18 +1626,25 @@ i3GEO.Interface =
                         return;
                     }
                     var xy;
+                    contadorPan++;
+                    //o timer aqui evita muitos calculos quando o usuario e muito rapidinho no mouse
+                    var timer = setTimeout(function() {
+                    	contadorPan--;
+                    	if(contadorPan == 0){
+	                    	modoAtual = "";
+	                        i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
+	                        i3GEO.Interface.openlayers.recalcPar();
+	                        i3GEO.Interface.STATUS.pan = false;
+	                        i3GEO.eventos.navegaMapa();
+	                        i3GEO.util.escondePin();
+	                        i3GEO.eventos.cliquePerm.status = false;
+	                        i3GEO.Interface.STATUS.pan = false;
+                    	}
+    				}, 350);
 
-                    modoAtual = "";
-                    i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
-                    i3GEO.Interface.openlayers.recalcPar();
-                    i3GEO.Interface.STATUS.pan = false;
-                    i3GEO.eventos.navegaMapa();
-                    i3GEO.util.escondePin();
-                    i3GEO.eventos.cliquePerm.status = false;
-                    i3GEO.Interface.STATUS.pan = false;
                 });
                 i3geoOL.on("pointermove", function(e) {
-                    //if (typeof (console) !== 'undefined')
+                	//if (typeof (console) !== 'undefined')
                     //	console.info("pointermove");
 
                     if (modoAtual === "move") {

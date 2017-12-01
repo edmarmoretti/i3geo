@@ -122,7 +122,6 @@ if (isset($_pg["funcao"])) {
 if (isset($_pg["g_sid"])) {
     $g_sid = $_pg["g_sid"];
 }
-
 //
 // inicializa a sessao
 // algumas funcoes sao utilizadas por outros aplicativos e por isso

@@ -354,7 +354,7 @@ if (! isset($mapext) || empty($mapext)) {
     $mapext = "";
 } else {
     $mapext = str_replace(",", " ", $mapext);
-    setcookie("i3geoUltimaExtensao", $mapext);
+
 }
 $saikuUrl_ = $saikuUrl;
 $cachedir_ = $cachedir;

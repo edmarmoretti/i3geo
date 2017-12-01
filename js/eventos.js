@@ -553,7 +553,7 @@ i3GEO.eventos =
 			}
 
 			var timer = 0;
-			var delay = 200;
+			var delay = 300;
 			var prevent = false;
 
 			docMapa.onmouseover = function() {

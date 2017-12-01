@@ -285,6 +285,9 @@ i3GEO.util =
 		 * {numerico} - Dias que levara para expirar
 		 */
 		insereCookie : function(nome, valor, expira) {
+			if (typeof (console) !== 'undefined')
+				console.info("insereCookie " + nome);
+
 			if (!expira) {
 				expira = 10;
 			}
