@@ -619,9 +619,9 @@ i3GEOF.legenda.dicionario =
 		],
 		'tamanhoEspacamento' : [
 			{
-				pt : "Tamanho / espa&ccedil;amento. Defina um valor para a cor ou um item da tabela de atributos que contm os valores para cada elemento.",
-				en : "Size / spacing. Set a value for the color or a field of the attribute table that contains the values for each feature.",
-				es : "Tama&ntilde;o / espaciado. Defina un valor para el color o un campo de la tabla de atributos que contiene los valores para cada entidad."
+				pt : "Tamanho / espa&ccedil;amento. Defina um valor ou um item da tabela de atributos que cont&eacute;m os valores para cada elemento.",
+				en : "Size / spacing. Set a value or a field of the attribute table that contains the values for each feature.",
+				es : "Tama&ntilde;o / espaciado. Defina un valor o un campo de la tabla de atributos que contiene los valores para cada entidad."
 			}
 		],
 		'espessura' : [
