@@ -72,18 +72,24 @@ include "../init/head.php";
 				</button>
 				<a class="navbar-brand" href="../init/index.php"><?php echo $mensagemInicia;?> <i
 					class="fa fa-home fa-1x"></i></a>
-
 			</div>
+		</div>
+	</nav>
+    <nav class="navbar-fixed-bottom">
+        <div class="container-fluid">
+            <div class="jumbotron" id="jumbotron"
+                style="background: rgb(255, 255, 255); background: rgb(255, 255, 255);">
 
-			<p class="navbar-text">
 				<button onclick="i3GEO.util.copyToClipboard($('#link').html());alerta('Copiado');"
 					class="btn btn-primary btn-fab btn-fab-mini">
 					<i class="fa fa-files-o" aria-hidden="true"></i>
 				</button>
 				&nbsp; <a class="navbar-link" href="" id="link" target="_blank">http://</a>
-			</p>
-		</div>
-	</nav>
+
+            </div>
+        </div>
+    </nav>
+
 	<!--para as mensagens de alerta-->
 	<div class="navbar-fixed-top alert alert-success text-center" style="padding: 0px;"></div>
 	    <div class="container-fluid migalha">
@@ -234,6 +240,7 @@ include "../init/head.php";
 		</div>
 
 	</div>
+    <div style="height:400px;">&nbsp;</div>
 	<script type="text/javascript" src="../classesjs/i3geo_tudo_compacto6.js"></script>
 	<script src='dicionario.js'></script>
 	<script src='index.js'></script>

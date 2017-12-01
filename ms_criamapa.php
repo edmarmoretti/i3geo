@@ -726,15 +726,19 @@ function adaptaLayers($tmpfname, $versao)
  */
 function abreInterface($interface, $caminho)
 {
+    global $customDir;
+    if(empty($customDir)){
+        $customDir = "interface";
+    }
     $nomeInterface = explode(".", basename($interface));
     if (count(explode(".php", $interface)) > 1) {
-        if (file_exists($caminho . "interface/" . $interface)) {
-            include_once ($caminho . "interface/" . $interface);
+        if (file_exists($caminho . $customDir . "/" . $interface)) {
+            include_once ($caminho . $customDir . "/" . $interface);
         }
         exit();
     } else {
-        if (file_exists($caminho . "interface/" . $interface)) {
-            $urln = $caminho . "interface/" . $interface . "?&" . session_id();
+        if (file_exists($caminho . $customDir . "/" . $interface)) {
+            $urln = $caminho . $customDir . "/" . $interface . "?&" . session_id();
         } else {
             $urln = $interface . "?&" . session_id();
         }
