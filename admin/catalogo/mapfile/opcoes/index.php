@@ -5,6 +5,14 @@ include ("exec.php");
 include "../../../head.php";
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
 $id_tema = (int) $_GET ["id_tema"];
+$locaplic = $_SESSION["locaplic"];
+$mapfile = $locaplic . "/temas/" . $codigo . ".map";
+$mapa = ms_newMapObj($mapfile);
+$layer = @$mapa->getlayerbyname($codigo);
+$mapext = $layer->getmetadata("extensao");
+if($mapext != ""){
+    $mapext = str_replace(" ",",",$mapext);
+}
 ?>
 <div class="container-fluid migalha">
 	<div class="row">
@@ -78,7 +86,8 @@ include("templates/templateMaisOpcoes.php");
 						i3GEOadmin.opcoesmapfile.dicionario,
 						{
 							"codigo": "<?php echo $codigo; ?>",
-							"id_tema": "<?php echo $id_tema; ?>"
+							"id_tema": "<?php echo $id_tema; ?>",
+                            "mapext" : "<?php echo $mapext; ?>"
 						}
 				)
 			)

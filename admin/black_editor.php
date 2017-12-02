@@ -650,7 +650,7 @@ session_write_close();
 			//extensao geografica do mapa
 			//deve ser definida em coordenadas no formato decimos de grau e na projecao geografica na sequencia xmin ymin xmax ymax
 			//exemplo [-77,-26,-30,6]
-			mapext: [],
+			mapext: [<?php echo strip_tags($_GET["mapext"]); ?>],
 			//perfil utilizado para restringir os menus de temas mostrando apenas os que correspondem a determinado perfil
 			perfil: "",
 			//layers que serao adicionados ao mapa.
