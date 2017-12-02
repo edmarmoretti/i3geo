@@ -1,5 +1,6 @@
 <script id="templateClonarTema" type="x-tmpl-mustache">
 		<h4>{{{clonaMapfile}}}</h4>
+        <h5>{{{codigoAtual}}}</h5>
 		<form id="form-modal-adiciona" style="" action="#" onsubmit="i3GEOadmin.mapfile.clona();return false;"   class="form-horizontal" role="form" method="post"   >
 			<div class="row">
 				<div class="col-md-12">
