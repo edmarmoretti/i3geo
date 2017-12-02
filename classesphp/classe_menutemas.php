@@ -239,7 +239,7 @@ locmapas - endere&ccedil;o do arquivo xml.
 return:
 array
 */
-	function pegaListaDeMapas($locmapas)
+	function pegaListaDeMapas($locmapas,$id_mapa="")
 	{
 		//necess&aacute;rio por conta da inclusao do conexao.php
 		$locaplic = $this->locaplic;
@@ -269,8 +269,11 @@ array
 				$p = $this->ixml($s,"PUBLICADO");
 				$m = $this->ixml($s,"CONTEMMAPFILE");
 				$id = $this->ixml($s,"ID_MAPA");
-				echo $p;
-				if(strtoupper($p) != "NAO"){
+				//echo $p;
+				if($id_mapa != "" && $id == $id_mapa && strtoupper($p) != "NAO"){
+				    return array("mapas"=>array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m));
+				}
+				if($id_mapa == "" && strtoupper($p) != "NAO"){
 					$mapas[] =  array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m);
 				}
 			}

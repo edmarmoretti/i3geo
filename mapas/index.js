@@ -33,7 +33,7 @@ function mostraBotoesBT(){
 		});
 	};
 	//cpJSON vem de classe_php.js
-	cpJSON.call("../classesphp/mapa_controle.php?map_file=&funcao=pegaMapas&g_sid=", "foo", r);
+	cpJSON.call("../classesphp/mapa_controle.php?id_mapa=&map_file=&funcao=pegaMapas&g_sid=", "foo", r);
 }
 //define os links adicionais conforme o tipo de mapa
 function verificaMapa(mapa){

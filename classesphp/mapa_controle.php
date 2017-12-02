@@ -1829,13 +1829,18 @@ switch (strtoupper($funcao)) {
         } else {
             $perfil = "";
         }
+        if (isset($_pg["id_mapa"])) {
+            $id_mapa = $_pg["id_mapa"];
+        } else {
+            $id_mapa = "";
+        }
         if (isset($_pg["idioma"])) {
             $idioma = $_pg["idioma"];
         } else {
             $idioma = "pt";
         }
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $idioma);
-        $retorno = $m->pegaListaDeMapas($locmapas);
+        $retorno = $m->pegaListaDeMapas($locmapas,$id_mapa);
         break;
     /*
      * Section: Webservices
