@@ -62,5 +62,20 @@ switch ($funcao) {
             "dados" => $dados
         ) );
         break;
+    case "UNDO" :
+        $mapfile = $_SESSION["dir_tmp"] . "/" . $codigo . "backupEditor.map";
+        if (file_exists($mapfile)) {
+            $status = copy($mapfile,$_SESSION["locaplic"]."/temas/".$codigo.".map");
+            if($status == false){
+                header ( "HTTP/1.1 500 nao foi possivel restaurar o arquivo" );
+            } else {
+                //ob_clean();
+                //echo "";
+                //echo "<meta http-equiv='refresh' content='0;url=index.php?codigo=_lbiomashp&id_tema=108&t'>";
+            }
+        } else {
+            header ( "HTTP/1.1 500 arquivo de backup nao encontrado" );
+        }
+        break;
 }
 ?>

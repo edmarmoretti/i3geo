@@ -29,7 +29,29 @@ i3GEOadmin.editor = {
 		},
 		salvar: function(){
 			i3GEOadmin.core.iconeAguarde($("#titulo"));
-			$("form").submit();
+			$("#form1").submit();
+		},
+		undo: function(codigo){
+			i3GEOadmin.core.modalAguarde(true);
+			$.post(
+					"exec.php?funcao=undo",
+					"codigomap=" + codigo
+			)
+			.done(
+					function(data, status){
+						i3GEOadmin.core.modalAguarde(false);
+						$("#form2").submit();
+						//window.history.back(1);
+						//window.location.reload();
+					}
+			)
+			.fail(
+					function(data){
+						i3GEOadmin.mapfile.parametrosSalvar = '';
+						i3GEOadmin.core.modalAguarde(false);
+						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+					}
+			);
 		},
 		testar: function(codigo){
 			i3GEOadmin.core.modalAguarde(true);

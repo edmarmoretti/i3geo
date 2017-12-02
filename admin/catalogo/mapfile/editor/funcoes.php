@@ -1,6 +1,14 @@
 <?php
 namespace admin\catalogo\mapfile\editor;
 
+function backupMapfile($codigo){
+    $locaplic = $_SESSION["locaplic"];
+    $mapfile = $locaplic . "/temas/" . $codigo . ".map";
+    if (file_exists($mapfile)) {
+        copy($mapfile,$_SESSION["dir_tmp"] . "/" . $codigo . "backupEditor.map");
+    }
+}
+
 function textoMapfile($codigo)
 {
     global $dbhw, $esquemaadmin;
