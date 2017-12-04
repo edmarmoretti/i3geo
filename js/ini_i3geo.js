@@ -343,6 +343,9 @@ var i3GEO = {
 				i3GEO.maparef.TOP = c.components.referenceMapPosition[0];
 				i3GEO.maparef.RIGHT = c.components.referenceMapPosition[1];
 			}
+			if(c.components.referenceType){
+				i3GEO.maparef.DEFAULTMAP = c.components.referenceType;
+			}
 			if(c.components.scrollBar){
 				i3GEO.janela.scrollBar = c.components.scrollBar;
 			}

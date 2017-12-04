@@ -6,12 +6,14 @@ LAYER
       TYPE RASTER
       STATUS DEFAULT
       CONNECTION "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseref.map&"
+      #CONNECTION "https://neo.sci.gsfc.nasa.gov/servlet/FGDCMetadata?datasetId=BlueMarbleNG&"
       #CONNECTION "http://labs.metacarta.com/wms/vmap0"
       CONNECTIONTYPE WMS
       METADATA
         "wms_srs"	"EPSG:4326"
         "wms_exceptions_format"	"application/vnd.ogc.se_xml"
         "wms_name"	"base"
+        #"wms_name"	"BlueMarbleNG"
         #"wms_name"	"basic"
         "wms_formatlist"	"image/png"
         "wms_format"	"image/png"
@@ -43,7 +45,7 @@ END
 LAYER
 	NAME "refdinrect"
 	TYPE line
-	STATUS default
+	STATUS off
 	CLASS
 		NAME " "
 		COLOR 255 0 0

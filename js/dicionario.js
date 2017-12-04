@@ -2312,9 +2312,9 @@ g_traducao =
         ],
         "refMapaDinamico" : [
             {
-                pt : "Mapa din&acirc;mico",
-                en : "Dynamic map",
-                es : "Mapa din&aacute;mico"
+                pt : "Mapa fixo",
+                en : "WMS",
+                es : "WMS"
             }
         ],
         "naoPermitido" : [

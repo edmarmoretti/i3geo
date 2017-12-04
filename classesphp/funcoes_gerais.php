@@ -796,8 +796,9 @@ function retornaReferenciaDinamica($ext = "", $w = "", $h = "", $zoom = -3, $tip
         $layern = $maptemp->getlayerbyname("refdin");
         ms_newLayerObj($objMapa, $layern);
     }
-    $layern = $maptemp->getlayerbyname("refdinrect");
-    ms_newLayerObj($objMapa, $layern);
+
+    //$layern = $maptemp->getlayerbyname("refdinrect");
+    //ms_newLayerObj($objMapa, $layern);
 
     $r = $objMapa->reference;
     if ($w == "") {
@@ -822,7 +823,7 @@ function retornaReferenciaDinamica($ext = "", $w = "", $h = "", $zoom = -3, $tip
     $pt->setXY(($w / 2), ($h / 2));
     $objMapa->zoompoint($zoom, $pt, $w, $h, $objMapa->extent);
     $objImagem = $objMapa->draw();
-    $em->draw($objMapa, ($objMapa->getlayerbyname("refdinrect")), $objImagem, 0, "");
+    //$em->draw($objMapa, ($objMapa->getlayerbyname("refdinrect")), $objImagem, 0, "");
     $nomer = ($objImagem->imagepath) . "ref" . $nomeImagem . ".png";
     $objImagem->saveImage($nomer);
     $nomer = ($objImagem->imageurl) . basename($nomer);

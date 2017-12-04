@@ -84,6 +84,10 @@ i3GEO.maparef =
 		 * 50
 		 */
 		RIGHT : 120,
+		//tipo de mapa que sera utilizado
+		//wms: usa um wms definido em /aplicmap/referenciadinamica.map
+		//map: utiliza o mapa atual
+		DEFAULTMAP : "wms",
 		W : function() {
 			var w = parseInt(i3GEO.parametros.w, 10) / 5;
 			if (w < 150) {
@@ -108,10 +112,12 @@ i3GEO.maparef =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.maparef.inicia()");
 
+			/*
 			if(i3GEO.arvoreDeCamadas.listaLigadosDesligados()[0].length == 0){
 				i3GEO.janela.tempoMsg($trad("umaLigada"));
 				return;
 			}
+			*/
 			var r, pos, novoel, ins, temp, moveX, moveY, escondeRef, janela;
 			if ($i("i3geo_winRef")) {
 				janela = YAHOO.i3GEO.janela.manager.find("i3geo_winRef");
@@ -134,8 +140,14 @@ i3GEO.maparef =
 				ins += "<div style='width: 100px;display:inline-table' class='form-group label-fixed condensed'>";
 				ins += "<div style='width: 100%;' class='input-group'>";
 				ins += "<select class='form-control' style='background-color:#094672' id='refDinamico' onchange='javascript:i3GEO.parametros.celularef=\"\";i3GEO.maparef.atualiza()'>";
-				ins += "<option value='mapa'  >" + $trad("refMapaAtual") + "</option>";
-				ins += "<option value='dinamico' >" + $trad("refMapaDinamico") + "</option>";
+				if(i3GEO.maparef.DEFAULTMAP == "map"){
+					ins += "<option value='mapa' >" + $trad("refMapaAtual") + "</option>";
+					ins += "<option value='dinamico' >" + $trad("refMapaDinamico") + "</option>";
+				} else {
+					ins += "<option value='dinamico' >" + $trad("refMapaDinamico") + "</option>";
+					ins += "<option value='mapa'>" + $trad("refMapaAtual") + "</option>";
+				}
+
 				ins += "</select>";
 				ins += "</div></div></div>";
 				ins += '<div class="bd" style="border:0px solid black;text-align:left;padding:3px;height: ' + i3GEO.maparef.H()
