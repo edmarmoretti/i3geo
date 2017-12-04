@@ -2145,7 +2145,7 @@ g_traducao =
         "x87" : [
             {
                 pt : "Limites e localidades",
-                en : "Boundaries and towns",
+                en : "Boundaries and localities",
                 es : "L&iacute;mites y localidades"
             }
         ],

@@ -2,82 +2,82 @@
 i3GEOF.storymap.dicionario = {
 	'aplicar' : [ {
 		pt : "Abre o aplicativo Storymap",
-		en : "",
-		es : ""
+		en : "Opens Storymap app",
+		es : "Abre la aplicaci&oacute;n Storymap"
 	} ],
 	'ativaAoAdic' : [ {
 		pt : "Abre essa ferramenta ao adicionar a camada ao mapa",
-		en : "",
-		es : ""
+		en : "Opens this tool when you add a layer to the map",
+		es : "Abre esta herramienta al agregar la capa al mapa"
 	} ],
 	'execAoAdic' : [ {
 		pt : "Executa essa ferramenta ao adicionar a camada ao mapa",
-		en : "",
-		es : ""
+		en : "Runs this tool when you add a layer to the map",
+		es : "Ejecuta esta herramienta al agregar la capa al mapa"
 	} ],
 	'salvaParametros' : [ {
 		pt : "Salva par&acirc;metros no mapfile",
-		en : "",
-		es : ""
+		en : "Save parameters in the mapfile",
+		es : "Guarda los par&aacute;metros en el mapfile"
 	} ],
 	'removeParametros' : [ {
 		pt : "Remove par&acirc;metros do mapfile",
-		en : "",
-		es : ""
+		en : "Remove parameters from the mapfile",
+		es : "Elimina los par&aacute;metros del mapfile"
 	} ],
 	'cabecalho' : [ {
 		pt : "Cabe&ccedil;alho do primeiro slide",
-		en : "",
-		es : ""
+		en : "Header of the first slide",
+		es : "Encabezado de la primera diapositiva"
 	} ],
 	'texto' : [ {
 		pt : "Texto do primeiro slide",
-		en : "",
-		es : ""
+		en : "Text of the first slide",
+		es : "Texto de la primera diapositiva"
 	} ],
 	'colcabecalho' : [ {
 		pt : "Coluna com o cabe&ccedil;alho de cada slide",
-		en : "",
-		es : ""
+		en : "Column with the header of each slide",
+		es : "Columna con el encabezado de cada diapositiva"
 	} ],
 	'coltexto' : [ {
 		pt : "Coluna com o texto de cada slide",
-		en : "",
-		es : ""
+		en : "Column with the text of each slide",
+		es : "Columna con el texto de cada diapositiva"
 	} ],
 	'collocal' : [ {
 		pt : "Coluna com o nome do local do slide",
-		en : "",
-		es : ""
+		en : "Column with the name of the slide location",
+		es : "Columna con el nombre de la ubicaci&oacute;n de la diapositiva"
 	} ],
 	'colicone' : [ {
 		pt : "Coluna com a URL do &iacute;cone do slide",
-		en : "",
-		es : ""
+		en : "Column with the URL of the slide icon",
+		es : "Columna con la URL del icono de la diapositiva"
 	} ],
 	'colmedia' : [ {
 		pt : "Coluna com a URL da media do slide",
-		en : "",
-		es : ""
+		en : "Column with the URL of the slide media",
+		es : "Columna con la URL de los medios de comunicaci&oacute;n de la diapositiva"
 	} ],
 	'collon' : [ {
 		pt : "Coluna com a longitude (em DD) - deixe em branco para usar o centr&oacute;ide calculado",
-		en : "",
-		es : ""
+		en : "Column with longitude (in DD) - leave blank to use the computed centroid",
+		es : "Columna con la longitud (en DD) - deje en blanco para usar el centroide calculado"
 	} ],
 	'collat' : [ {
 		pt : "Coluna com a latitude (em DD) - deixe em branco para usar o centr&oacute;ide calculado",
-		en : "",
-		es : ""
+		en : "Column with latitude (in DD) - leave blank to use the computed centroid",
+		es : "Columna con la latitud (en DD) - deje en blanco para usar el centroide calculado"
 	} ],
 	'removePar' : [ {
 		pt : "Remove os par&acirc;metros armazenados no tema?",
-		en : "",
-		es : ""
+		en : "Do you want to remove parameters stored in the theme?",
+		es : "&iquest;Quiere eliminar los par&aacute;metros almacenados en el tema?"
 	} ],
 	'incluiPar' : [ {
 		pt : "Inclui os par&acirc;metros no tema?",
-		en : "",
-		es : ""
+		en : "&iquest;Quiere incluir los par&aacute;metros en el tema?",
+		es : "Do you want to add parameters in the theme?"
 	} ]
 };
