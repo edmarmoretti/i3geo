@@ -2,182 +2,182 @@
 i3GEOF.selecao.dicionario = {
 	'selecionaTema' : [ {
 		pt : "Selecione um tema primeiro",
-		en : "",
-		es : ""
+		en : "Select first a theme ",
+		es : "Seleccione primero un tema"
 	} ],
 	'mapa' : [ {
 		pt : "Mapa",
-		en : "",
-		es : ""
+		en : "Map",
+		es : "Mapa"
 	} ],
 	'atributos' : [ {
 		pt : "Atributos",
-		en : "",
-		es : ""
+		en : "Attributes",
+		es : "Atributos"
 	} ],
 	'cruzamento' : [ {
 		pt : "Cruzamento",
-		en : "",
-		es : ""
+		en : "Intersection",
+		es : "Intersecci&oacute;n"
 	} ],
 	'desenhaPoligono' : [ {
 		pt : "Desenhe um poligono no mapa para selecionar",
-		en : "",
-		es : ""
+		en : "Draw a polygon on the map to select",
+		es : "Dibuja un poligono en el mapa para seleccionar"
 	} ],
 	'selecionaVisivel' : [ {
 		pt : "Seleciona o que estiver visivel no mapa",
-		en : "",
-		es : ""
+		en : "Select visible features on the map",
+		es : "Selecciona las entidades visibles en el mapa"
 	} ],
 	'selecionaRetangulo' : [ {
 		pt : "Desenhe um retangulo no mapa para selecionar",
-		en : "",
-		es : ""
+		en : "Draw a rectangle on the map to select",
+		es : "Dibuja un rect&aacute;ngulo en el mapa para seleccionar"
 	} ],
 	'inverteSelecao' : [ {
 		pt : "Inverte a selecao",
-		en : "",
-		es : ""
+		en : "Switch selection",
+		es : "Invierte la selección"
 	} ],
 	'limpaSelecao' : [ {
-		pt : "Limpa a selecao",
-		en : "",
-		es : ""
+		pt : "Limpa a sele&ccedil;&atilde;o",
+		en : "Clear selection",
+		es : "Limpia la selecci&oacute;n"
 	} ],
 	'salvaSelecao' : [ {
 		pt : "Salva a selecao como um novo tema",
-		en : "",
-		es : ""
+		en : "Save selection as a new theme",
+		es : "Salva la selecci&oacute;n como un tema nuevo"
 	} ],
 	'grafico' : [ {
 		pt : "Grafico",
-		en : "",
-		es : ""
+		en : "Chart",
+		es : "Gr&aacute;fico"
 	} ],
 	'perfil' : [ {
 		pt : "Perfil",
-		en : "",
-		es : ""
+		en : "Profile",
+		es : "Perfil"
 	} ],
 	'tipoOperacao' : [ {
-		pt : "Tipo de operacao",
-		en : "",
-		es : ""
+		pt : "Tipo de opera&ccedil;&atilde;o",
+		en : "Operation type",
+		es : "Tipo de operaci&oacute;n"
 	} ],
 	'adicionaASelecao' : [ {
 		pt : "Adicionar &agrave; sele&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "Add to selection",
+		es : "Agregar a la selecci&oacute;n"
 	} ],
 	'novaSelecao' : [ {
 		pt : "Nova sele&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "New selection",
+		es : "Selecci&oacute;n nueva"
 	} ],
 	'retiraDaSelecao' : [ {
 		pt : "Retirar da sele&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "Remove from selection",
+		es : "Excluir de la selecci&oacute;n"
 	} ],
 	'temas' : [ {
 		pt : "Temas:",
-		en : "",
-		es : ""
+		en : "Themes:",
+		es : "Temas:"
 	} ],
 	'distanciaSelecao' : [ {
 		pt : "Dist&acirc;ncia utilizada ao selecionar (em metros):",
-		en : "",
-		es : ""
+		en : "Distance used for selecting (in meters):",
+		es : "Distancia utilizada al seleccionar (en metros):"
 	} ],
 	'ajuda' : [ {
 		pt : "Escolha o(s) tema(s) alvo(s) e o tipo de opera&ccedil;&atilde;o. Depois, clique no mapa sobre o elemento desejado.",
-		en : "",
-		es : ""
+		en : "Select a target theme and an operation type. Then click on a feature you want to process.",
+		es : "Seleccione el tema (s) objetivo (s) y el tipo de operaci&oacute;n, luego haga clic sobre la entidad deseada en el mapa."
 	} ],
 	'seleciona' : [ {
 		pt : "Selecionar",
-		en : "",
-		es : ""
+		en : "Select",
+		es : "Seleccionar"
 	} ],
 	'item' : [ {
 		pt : "Item",
-		en : "",
-		es : ""
+		en : "Field",
+		es : "Campo"
 	} ],
 	'operador' : [ {
 		pt : "Operador",
-		en : "",
-		es : ""
+		en : "Operator",
+		es : "Operador"
 	} ],
 	'valor' : [ {
 		pt : "Valor",
-		en : "",
-		es : ""
+		en : "Value",
+		es : "Valor"
 	} ],
 	'conector' : [ {
 		pt : "Conector",
-		en : "",
-		es : ""
+		en : "Connector",
+		es : "Conector"
 	} ],
 	'separaComVirgula' : [ {
 		pt : "Na op&ccedil;&atilde;o IN separe os valores com v&iacute;rgula.",
-		en : "",
-		es : ""
+		en : "Separate values with a comma for the IN option.",
+		es : "En la opci&oacute;n IN separe los valores con coma."
 	} ],
 	'temaSelecaoMapa' : [ {
 		pt : "Tema que ser&aacute; utilizado para selecionar o tema definido na guia Mapa (esse tema deve ser do tipo pontual ou poligonal e deve possuir elementos j&aacute; selecionados):",
-		en : "",
-		es : ""
+		en : "Theme that will be used to select the theme defined on the Map tab (this theme must be of point or polygon features and must have selected features):",
+		es : "Tema que ser&aacute; utilizado para seleccionar el tema definido en la pesta&ntilde;a Mapa (este tema debe ser de puntos o pol&iacute;gono y debe tener entidades seleccionadas):"
 	} ],
 	'aplica' : [ {
 		pt : "Aplicar",
-		en : "",
-		es : ""
+		en : "Apply",
+		es : "Aplicar"
 	} ],
 	'selecionados' : [ {
 		pt : "Selecionados",
-		en : "",
-		es : ""
+		en : "Selected",
+		es : "Seleccionados"
 	} ],
 	29 : [ {
 		pt : "Clique no mapa para desenhar o pol&iacute;gono.",
-		en : "",
-		es : ""
+		en : "Click on the map to draw a polygon.",
+		es : "Haga clic en el mapa para dibujar el pol&iacute;gono."
 	} ],
 	'selecionaValor' : [ {
 		pt : "Escolha o valor",
-		en : "",
-		es : ""
+		en : "Select value",
+		es : "Seleccione el valor"
 	} ],
 	'msgNenhumPontoEncontrado' : [ {
 		pt : "Nenhum ponto encontrado",
-		en : "",
-		es : ""
+		en : "No points found",
+		es : "Ning&uacute;n punto encontrado"
 	} ],
 	'utilizaFiguraDesenhada' : [ {
 		pt : "Utiliza uma figura j&aacute; desenhada no mapa",
-		en : "",
-		es : ""
+		en : "Uses a shape already drawn on the map",
+		es : "Utiliza una figura ya dibujada en el mapa"
 	} ],
 	'mantemfigura' : [ {
 		pt : "Mant&eacute;m no mapa as figuras desenhadas nos processos de sele&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "Keeps shapes on the map that were drawn during selection",
+		es : "Mantiene en el mapa las figuras dibujadas en los procesos de selecci&oacute;n"
 	} ],
 	'editor' : [ {
 		pt : "Abre o editor de figuras",
-		en : "",
-		es : ""
+		en : "Opens shape editor",
+		es : "Abre el editor de figuras"
 	} ],
 	"fonte" : [ {
 		pt : "Escolha um ou mais temas que ser&atilde;o alvo da sele&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "Choose one or more themes that will be selected",
+		es : "Elija uno o m&aacute;s temas que ser&aacute;n seleccionados"
 	} ],
 	"opsel" : [ {
 		pt : "Op&ccedil;&otilde;es de sele&ccedil;&atilde;o. Clique no &iacute;cone para ativar.",
-		en : "",
-		es : ""
+		en : "Selection options. Click the icon to activate.",
+		es : "Opciones de selecci&oacute;n. Haga clic en el icono para activar."
 	} ]
 };
