@@ -27,7 +27,9 @@ botoesIni = [
 	"subtitulo": $trad("18a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_self"
-},{
+},
+/*
+{
 	"img":"cartogramas",
 	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/carto_ol.htm",
 	"titulo":$trad(8,g_traducao_init),
@@ -41,7 +43,9 @@ botoesIni = [
 	"subtitulo": $trad("9a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
-},{
+},
+*/
+{
 	"img":"window-duplicate",
 	"href": "../mapas/index.php",
 	"titulo":$trad(34,g_traducao_init),
