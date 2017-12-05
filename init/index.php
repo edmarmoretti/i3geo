@@ -145,7 +145,7 @@ include "head.php";
 								<div class="col-xs-6" style="line-height: 3.5; text-align: left;">
 									<!-- o texto no span e para acessibilidade-->
 									<button tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}"
-										class="btn btn-primary btn-fab btn-fab-mini" > <span
+										class="btn btn-primary btn-fab btn-fab-mini" style="padding-left: 8px;padding-top: 7px;margin: auto;"> <span
 										class="glyphicon glyphicon-qrcode" aria-hidden="true">&nbsp;&nbsp;qrcode</span>
 									</button>
 
