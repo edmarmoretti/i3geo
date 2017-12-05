@@ -772,7 +772,7 @@ i3GEOF.metaestat = {
             if(!v){
                 v = "visible";
             }
-            var a = $i("aguardeMetaestat");
+            var a = $i("i3geoCartoParametros_imagemCabecalho");
             if(a){
                 a.style.visibility = v;
             }
@@ -1598,7 +1598,7 @@ i3GEOF.metaestat = {
                 $i(iddiv).innerHTML = i3GEOF.metaestat.principal.html();
                 i3GEOF.metaestat.principal.opcoesVariaveis();
             }
-            
+
             //interface qd a medida da variavel ja tiver sido definida. Utilizada ao adicionar uma camada via catalogo de temas
             //TODO incluir via template mustache
             if(i3GEOF.metaestat.INTERFACE == "flutuanteSimples"){
