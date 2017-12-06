@@ -142,7 +142,7 @@ i3GEOF.proplabel.dicionario = {
 	} ],
 	'textoUltrapassaMapa' : [ {
 		pt : "O texto pode ultrapassar o mapa?",
-		en : "Can the text go beyond the map",
+		en : "Can the text go beyond the map?",
 		es : "&iquest;El texto puede sobrepasar el mapa?"
 	} ],
 	'caracterQuebraTexto' : [ {
