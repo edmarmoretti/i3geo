@@ -58,7 +58,7 @@ MAP
         COLOR 250 193 4
         SIZE 20
         SYMBOL "http://localhost/i3geo/imagens/google/condominium.png"
-      END # STYLE
+      END
       TITLE ""
     END # CLASS
     CLASS

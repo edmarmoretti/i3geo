@@ -336,6 +336,11 @@ hr {
 	width: 255px;
 	vertical-align: middle;
 }
+
+.nomeTema a:active{
+	opacity: 0.5;
+}
+
 .nomeTemaLegenda {
 	width: 98%;
 	vertical-align: middle;

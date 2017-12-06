@@ -20,7 +20,7 @@ MAP
 	FONTSET "/var/www/i3geo/symbols/fontes.txt"
 	SYMBOLSET "/var/www/i3geo/symbols/simbolosv7.sym"
 	SHAPEPATH "/var/www/i3geo/aplicmap/dados"
-	IMAGECOLOR 104 171 195
+	IMAGECOLOR 240 240 240
 	MAXSIZE 4096
 	#
 	#Por default, o i3geo utiliza o tipo de imagem configurado em png2
