@@ -2,33 +2,33 @@
 i3GEOF.uploaddbf.dicionario = {
 	'tipoArquivo' : [ {
 		pt : "Tipo de arquivo",
-		en : "",
-		es : ""
+		en : "File type",
+		es : "Tipo de archivo"
 	} ],
 	'colunaX' : [ {
 		pt : "nome da coluna x (long)",
-		en : "",
-		es : ""
+		en : "name of column x (long)",
+		es : "nombre de columna x (long)"
 	} ],
 	'colunaY' : [ {
 		pt : "nome da coluna y (lat)",
-		en : "",
-		es : ""
+		en : "name of column y (lat)",
+		es : "nombre de columna y (lat)"
 	} ],
 	'arquivo' : [ {
 		pt : "arquivo",
-		en : "",
-		es : ""
+		en : "file",
+		es : "archivo"
 	} ],
 	'projecao' : [ {
 		pt : "Proje&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "Projection",
+		es : "Proyecci&oacute;n"
 	} ],
 	'criaCamada' : [ {
 		pt : "Criar camada",
-		en : "",
-		es : ""
+		en : "Create layer",
+		es : "Crear capa"
 	} ],
 	7 : [ {
 		pt : "",
