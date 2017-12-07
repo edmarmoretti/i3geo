@@ -2,7 +2,7 @@
 i3GEOF.uploadarquivos.dicionario = {
 	'upload' : [ {
 		pt : "Upload",
-		en : "",
-		es : ""
+		en : "Upload",
+		es : "Cargar"
 	} ]
 };
