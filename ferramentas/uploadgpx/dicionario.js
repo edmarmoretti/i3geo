@@ -2,17 +2,17 @@
 i3GEOF.uploadgpx.dicionario = {
 	'arquivoGpx' : [ {
 		pt : "Arquivo gpx:",
-		en : "",
-		es : ""
+		en : "gpx file:",
+		es : "Archivo gpx:"
 	} ],
 	'projecao' : [ {
 		pt : "Proje&ccedil;&atilde;o",
-		en : "",
-		es : ""
+		en : "Projection",
+		es : "Proyecci&oacute;n"
 	} ],
 	'criaCamada' : [ {
 		pt : "Criar camada",
-		en : "",
-		es : ""
+		en : "Create layer",
+		es : "Crear capa"
 	} ]
 };
