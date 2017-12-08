@@ -583,7 +583,8 @@ i3GEOF.metaestat = {
                 }
             };
             if(v != true){
-                i3GEO.janela.tempoMsg("erro: "+v);
+            	i3GEOF.metaestat.comum.aguarde("hidden");
+            	i3GEO.janela.tempoMsg("erro: "+v);
                 return;
             }
             //e necessario obter os parametros nessa interface
@@ -696,18 +697,20 @@ i3GEOF.metaestat = {
                 c = $i("comboparametro_"+dados[i].id_parametro_medida+"_"+dados[i].id_pai);
                 if(c){
                     if(c.value != "" && i3GEOF.metaestat.MULTIPARAMETROS === false){
-                        t.push(dados[i].coluna+'="'+c.value+'"');
+                        //t.push(dados[i].coluna+'="'+c.value+'"');
+                    	t.push(dados[i].coluna+'*"'+c.value+'"');
                     }
                     else{
                         val = i3GEO.util.valoresCheckCombo(c.id);
                         if(val.length > 0){
-                            t.push(dados[i].coluna+' IN ("'+val.join('","')+'")');
+                            //t.push(dados[i].coluna+' IN ("'+val.join('","')+'")');
+                            t.push(dados[i].coluna+' * "'+val.join('","')+'"');
                         }
                     }
                 }
             }
             if(t.length > 0){
-                return t.join(" and ");
+                return t.join("|");
             }
             else{
                 return "";
@@ -1414,7 +1417,6 @@ i3GEOF.metaestat = {
             var temp = function(dados){
                 i3GEOF.metaestat.parametros.dados = dados;
                 i3GEOF.metaestat.parametros.combos("0");
-                i3GEOF.metaestat.comum.aguarde("hidden");
             };
             i3GEO.php.listaParametrosMedidaVariavel(id_medida_variavel,temp);
         },

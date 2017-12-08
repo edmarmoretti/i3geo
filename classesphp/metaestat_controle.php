@@ -198,7 +198,6 @@ switch (strtoupper($funcao)) {
         break;
     case "MAPFILEMEDIDAVARIAVEL":
         // $filtro usa aspas duplas para enviar os parametros
-        $_pg["filtro"] = str_replace('"', "'", $_pg["filtro"]);
         $m = new MetaestatInfo();
         if (! isset($_pg["codigo_tipo_regiao"])) {
             $_pg["codigo_tipo_regiao"] = "";
@@ -210,6 +209,25 @@ switch (strtoupper($funcao)) {
             $_pg["cachemapfile"] = false;
         } else {
             $_pg["cachemapfile"] = true;
+        }
+        //valida o filtro
+
+        if(!empty($_pg["filtro"])){
+            $_pg["filtro"] = str_replace('"', "'", $_pg["filtro"]);
+            $final = array();
+            $sepands = explode("|",$_pg["filtro"]);
+            foreach($sepands as $sepand){
+                $linhas = explode("*",$sepand);
+                if(!is_numeric(str_replace(array("'",","),"",$linhas[1]))){
+                    exit;
+                }
+                if(count(explode(",",$linhas[1])) == 1){
+                    $final[] = $linhas[0]." = ". $linhas[1];
+                } else {
+                    $final[] = $linhas[0]." IN (".$linhas[1].")";
+                }
+            }
+            $_pg["filtro"] = implode(" and ", $final);
         }
         if ($_pg["formato"] == "json") {
             retornaJSON($m->mapfileMedidaVariavel($_pg["id_medida_variavel"], $_pg["filtro"], $_GET["todasascolunas"], $_GET["tipolayer"], $_GET["titulolayer"], $_pg["id_classificacao"], $_GET["agruparpor"], $_pg["codigo_tipo_regiao"], $_GET["opacidade"], false, $_GET["cachemapfile"]));
