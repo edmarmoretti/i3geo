@@ -2,7 +2,7 @@
 i3GEOF.wiki.dicionario = {
 	'atualizaNavegacao' : [ {
 		pt : "Navegue no mapa para atualizar a lista de resultados",
-		en : "",
-		es : ""
+		en : "Browse the map to update the list of results",
+		es : "Navegue en el mapa para actualizar la lista de resultados"
 	} ]
 };
