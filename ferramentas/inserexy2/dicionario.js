@@ -58,7 +58,7 @@ i3GEOF.inserexy.dicionario = {
 	'ajuda3' : [ {
 		pt : "Para inserir pontos, &eacute; necess&aacute;rio a exist&ecirc;ncia de um tema edit&aacute;vel dispon&iacute;vel no mapa.",
 		en : "In order to insert points, you must have an editable theme available on the map.",
-		es : "Para insertar puntos es necesario la existencia de un tema editable disponible en el mapa."
+		es : "Para insertar puntos es necesario que exista un tema editable disponible en el mapa."
 	} ],
 	'ajuda4' : [ {
 		pt : "Utilize o bot&atilde;o <i>criar um novo</i> se n&atilde;o existir nenhum tema desse tipo no mapa.",
@@ -118,7 +118,7 @@ i3GEOF.inserexy.dicionario = {
 	'ajuda8' : [ {
 		pt : "Os valores devem sempre estar no formato Grau, Minuto e Segundo, sendo que no caso da op&ccedil;&atilde;o de campo &uacute;nico, os valores devem estar separados por espa&ccedil;os. Caso as coordenadas estejam em d&eacute;cimos de grau, utilize a guia <i>Colar</i>.",
 		en : "Values must always be in Degrees, Minutes and Seconds. In the case of unique field option, values must be separated by spaces. If coordinates are in decimal degrees use the <i>Paste</i> tab.",
-		es : "Los valores deben siempre deben estar en el formato de Grados, Minutos y Segundos. En el caso de la opci&oacute;n de campo &uacute;nico los valores deben estar separados por espacios. Si las coordenadas est&aacute;n en grados decimales utilice la pesta&ntilde;a <i>Pegar</i>."
+		es : "Los valores deben siempre estar en Grados, Minutos y Segundos. En el caso de la opci&oacute;n de campo &uacute;nico los valores deben estar separados por espacios. Si las coordenadas est&aacute;n en grados decimales utilice la pesta&ntilde;a <i>Pegar</i>."
 	} ],
 	'ajuda9' : [ {
 		pt : "O valor correspondente ao Grau deve receber o sinal de negativo(-) nos casos de longitude oeste e nos casos de latitude Sul.",
@@ -133,7 +133,7 @@ i3GEOF.inserexy.dicionario = {
 	'insereXY' : [ {
 		pt : "Cole os valores de X e Y, em d&eacute;cimos de grau, com sinal de negativo para oeste e sul, exemplo:",
 		en : "Paste X and Y values in decimal degrees. They should have a negative sign to the west and south, for example:",
-		es : "Pegue los valores de X e Y en grados decimales. Deben tener signo de negativo hacia el oeste y el sur, por ejemplo:"
+		es : "Pegue los valores de X e Y en grados decimales. Deben tener signo negativo hacia el oeste y el sur, por ejemplo:"
 	} ],
 	'listaWkt' : [ {
 		pt : "Lista wkt",
