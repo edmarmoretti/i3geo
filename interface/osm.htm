@@ -221,9 +221,20 @@
             <div id="i3GEOguiaMovelConteudo">
                 <!-- camadas existentes no mapa -->
                 <div id='guia1obj' data-traduzir="true" style='display: none; height:100%'>
-                    <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
-                        <button>
-                            <span class="pull-left">{{{iconeMapa}}}</span> <span class="pull-right material-icons">cancel</span>
+                    <div class="i3GEOfechaGuia" style="display: flex;">
+                        <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');">
+                            <span style="vertical-align: middle">{{{iconeMapa}}}</span>
+                        </button>
+                        <button style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.abreFecha('fecha');">
+                            <span style="vertical-align: middle" class="material-icons">cancel</span>
+                        </button>
+                        <button title="{{{iconeCatalogo}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj"
+                            data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus">
+                            <span style="vertical-align: middle" class="material-icons">layers</span>
+                        </button>
+                        <button title="{{{iconeLegenda}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj"
+                            data-idLegenda="legendaHtml">
+                            <span style="vertical-align: middle" class="material-icons">view_list</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
@@ -281,9 +292,20 @@
                 </div>
                 <!-- Catalogo de temas -->
                 <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left;height:100%;'>
-                    <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
-                        <button>
-                            <span class="pull-left">{{{iconeCatalogo}}}</span> <span class="pull-right material-icons">cancel</span>
+                    <div class="i3GEOfechaGuia" style="display: flex;">
+                        <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
+                            <span style="vertical-align: middle">{{{iconeCatalogo}}}</span>
+                        </button>
+                        <button style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
+                            <span style="vertical-align: middle" class="material-icons">cancel</span>
+                        </button>
+                        <button title="{{{iconeMapa}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia=""
+                            data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas">
+                            <span style="vertical-align: middle" class="material-icons">visibility</span>
+                        </button>
+                        <button title="{{{iconeLegenda}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj"
+                            data-idLegenda="legendaHtml">
+                            <span style="vertical-align: middle" class="material-icons">view_list</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
@@ -507,9 +529,20 @@
                 </div>
                 <!-- Legenda -->
                 <div data-traduzir="true" id='guia4obj' style='display: none; text-align: left;height:100%;'>
-                    <div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
-                        <button>
-                            <span class="pull-left">{{{iconeLegenda}}}</span> <span class="pull-right material-icons">cancel</span>
+                    <div class="i3GEOfechaGuia" style="display: flex;" >
+                        <button class="pull-left text-left" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
+                            <span style="vertical-align: middle">{{{iconeLegenda}}}</span>
+                        </button>
+                        <button style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
+                            <span style="vertical-align: middle" class="material-icons">cancel</span>
+                        </button>
+                        <button title="{{{iconeMapa}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia=""
+                            data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas">
+                            <span style="vertical-align: middle" class="material-icons">visibility</span>
+                        </button>
+                        <button title="{{{iconeCatalogo}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj"
+                            data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus">
+                            <span style="vertical-align: middle" class="material-icons">layers</span>
                         </button>
                     </div>
                     <div class="separadorCabecalhoGuias">&nbsp;</div>

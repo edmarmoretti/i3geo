@@ -937,9 +937,15 @@ function incluiTemasIniciais()
                         $layern->set("status", $statustemp);
                     }
                     cloneInlineSymbol($layern, $maptemp, $mapn);
-                    $layerAdicionado = ms_newLayerObj($mapn, $layern);
+                    //$layerAdicionado = ms_newLayerObj($mapn, $layern);
+                    if($layern->type == MS_LAYER_POLYGON){
+                        $mapn->insertLayer($layern,0);
+                    } else {
+                        $mapn->insertLayer($layern,-1);
+                    }
                     // echo $layern->name;
-                    corrigeLayerGrid($layern, $layerAdicionado);
+                    //corrigeLayerGrid($layern, $layerAdicionado);
+                    corrigeLayerGrid($layern, $mapn->getlayerbyname($layern->name));
                 }
             }
         }

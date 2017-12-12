@@ -294,10 +294,10 @@
                 <!-- Catalogo de temas -->
                 <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left; height: 100%;'>
                     <div class="i3GEOfechaGuia" style="display: flex;">
-                        <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');">
+                        <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
                             <span style="vertical-align: middle">{{{iconeCatalogo}}}</span>
                         </button>
-                        <button style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.abreFecha('fecha');">
+                        <button style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
                             <span style="vertical-align: middle" class="material-icons">cancel</span>
                         </button>
                         <button title="{{{iconeMapa}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia=""
@@ -516,12 +516,23 @@
                 </div>
                 <!-- Legenda -->
                 <div data-traduzir="true" id='guia4obj' style='display: none; text-align: left; height: 100%;'>
-                    <div class="i3GEOfechaGuia" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
-                        <button>
-                            <span class="pull-left">{{{iconeLegenda}}}</span>
-                            <span class="pull-right material-icons">cancel</span>
+                    <div class="i3GEOfechaGuia" style="display: flex;" >
+                        <button class="pull-left text-left" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
+                            <span style="vertical-align: middle">{{{iconeLegenda}}}</span>
+                        </button>
+                        <button style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
+                            <span style="vertical-align: middle" class="material-icons">cancel</span>
+                        </button>
+                        <button title="{{{iconeMapa}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia=""
+                            data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas">
+                            <span style="vertical-align: middle" class="material-icons">visibility</span>
+                        </button>
+                        <button title="{{{iconeCatalogo}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj"
+                            data-idMigalha="catalogoMigalha" data-idNavegacao="catalogoNavegacao" data-idCatalogo="catalogoPrincipal" data-idMenus="catalogoMenus">
+                            <span style="vertical-align: middle" class="material-icons">layers</span>
                         </button>
                     </div>
+
                     <div class="separadorCabecalhoGuias">&nbsp;</div>
                     <div class="guiaOverflow" style="height: calc(100% - 45px)">
                         <a href='javascript:void(0)' onclick="i3GEO.legenda.inicia({'janela':true})">{{{x11}}}</a>
