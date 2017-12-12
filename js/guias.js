@@ -618,7 +618,7 @@ i3GEO.guias =
 				i3GEO.guias.escondeGuias();
 				molde.animate(
 						{ "width": "-10px" },
-						"fast"
+						400
 				);
 			} else {
 				//$("#i3GEOguiaMovelIcones").css("display","block");
@@ -627,7 +627,7 @@ i3GEO.guias =
 				};
 				molde.animate(
 						{ "width": i3GEO.guias.LARGURAGUIAMOVEL + "px" },
-						{duration: "fast",always: temp}
+						{duration: 400,always: temp}
 				);
 			}
 		},

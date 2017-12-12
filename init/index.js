@@ -66,14 +66,18 @@ botoesIni = [
 	"subtitulo": $trad("12a",g_traducao_init),
 	"fa": "download",
 	"target": "_self"
-},{
+},
+/*
+{
 	"img":"saiku_free_small",
 	"href": "../ferramentas/saiku/startsaiku.php?locaplic="+window.location.href.replace("/init/index.php",""),
 	"titulo":$trad(25,g_traducao_init),
 	"subtitulo": $trad("25a",g_traducao_init),
 	"fa": "bar-chart",
 	"target": "_self"
-},{
+},
+*/
+{
 	"img":"insert-link",
 	"href": "../permlinks/index.php",
 	"titulo":$trad(13,g_traducao_init),

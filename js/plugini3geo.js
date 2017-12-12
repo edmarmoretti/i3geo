@@ -395,15 +395,17 @@ i3GEO.pluginI3geo =
 		        				   if (typeof (console) !== 'undefined')
 		        					   console.info("criaLayer heatmap");
 
-		        				   var v = true, temp, heatmap, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [];
+		        				   var g, v = true, temp, heatmap, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [];
 		        				   // para uso com o mashup
 		        				   if (!objMapa) {
 		        					   objMapa = i3geoOL;
 		        				   }
 		        				   while (datalen--) {
 		        					   temp = heatmap_dados[datalen].count;
+		        					   g = new ol.geom.Point([data[datalen].lng * 1,data[datalen].lat * 1]);
+		        					   g = i3GEO.util.projGeo2OSM(g);
 		        					   nudata.push(new ol.Feature({
-		        						   geometry: new ol.geom.Point([data[datalen].lng * 1,data[datalen].lat * 1]),
+		        						   geometry: g,
 		        						   weight: temp
 		        					   })
 		        					   );
