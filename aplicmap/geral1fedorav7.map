@@ -1,17 +1,21 @@
-#Este mapfile e utilizado pelo i3geo na instalacao em servidores linux
-#Toda vez que o i3geo e iniciado, esse mapfile e considerado como o mapa basico.
-#Se vc quer alterar a aparência do mapa inicial, edite esse arquivo para refletir
-#o mapa desejado.
+#Este mapfile é utilizado pelo i3geo
+#Toda vez que o i3geo é iniciado, esse mapfile é considerado como o mapa básico.
+#Se vc quer alterar a aparência do mapa inicial, edite esse arquivo para criar
+#o mapa desejado, porém, editando esse arquivo todos os mapas serão afetados.
 #
-#Se vc quer adicionar temas, dê preferência por editar o arquivo menutemas/menutemas.xml
-#assim, as camadas ficam disponíveis no menu de adicao de temas do i3geo. Nao se esqueca
-#de criar o arquivo mapfile no diretorio i3geo/temas (veja a documentacao no wiki da
-#comunidade i3geo no Portal do Software Publico Brasileiro.
+#Se vc quer adicionar temas, dê preferência por usar o sistema de administração
+#assim, as camadas ficam disponíveis no menu de adição de temas do i3geo. Não se esqueça
+#de criar o arquivo mapfile no diretório i3geo/temas (veja a documentação no wiki da
+#comunidade i3geo no Portal do Software Público Brasileiro).
 #
-#Existem varios metadados que podem ser incluidos na definicao de cada LAYER e que sao especificos do i3geo,
-#Esses metadados possibilitam coisas como mostrar ou nao a legenda de um tema no mapa,
-#mostrar ou nao o tema na ferramenta de identificacao, etc.
-#A lista completa de metadados vc pode obter no wiki da comunidade
+#Para iniciar um mapa com mais temas, além dos que existem aqui, utilize o gerador de links permanentes,
+#ou altere os parâmetros da interface que você irá utilizar (vejas os exemplos de interface existentes
+#em ../interface
+#
+#Existem vários metadados que podem ser incluidos na definicao de cada LAYER e que sao especificos do i3geo,
+#Esses metadados possibilitam coisas como mostrar ou não a legenda de um tema no mapa,
+#mostrar ou não o tema na ferramenta de identificacao, etc.
+#Os metadados são criados e mantidos por meio do sistema de administração
 #
 MAP
 	#

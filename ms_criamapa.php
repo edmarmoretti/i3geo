@@ -938,7 +938,7 @@ function incluiTemasIniciais()
                     }
                     cloneInlineSymbol($layern, $maptemp, $mapn);
                     //$layerAdicionado = ms_newLayerObj($mapn, $layern);
-                    if($layern->type == MS_LAYER_POLYGON){
+                    if($layern->type == MS_LAYER_POLYGON && $layern->getmetadata("METAESTAT") == "SIM"){
                         $mapn->insertLayer($layern,0);
                     } else {
                         $mapn->insertLayer($layern,-1);
