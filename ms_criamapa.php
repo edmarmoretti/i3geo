@@ -858,7 +858,7 @@ function incluiTemasIniciais()
             if(count($tituloPar)>0){
                 $tituloCamada = $tituloCamada." (".implode(" ,",$tituloPar)." )";
             }
-            $mapfilemetaestat = $m->mapfileMedidaVariavel($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, false);
+            $mapfilemetaestat = $m->mapfileMedidaVariavel($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true);
             // array(3) { ["mapfile"]=> string(52) "/tmp/ms_tmp/AAAAc20ad4d76fe97759aa27a0c99bff6710.map" ["layer"]=> string(36) "AAAAc20ad4d76fe97759aa27a0c99bff6710" ["titulolayer"]=> string(0) "" }
             // var_dump ($mapfilemetaestat);
             // exit;
