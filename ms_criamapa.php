@@ -566,9 +566,8 @@ incluiTemasIniciais();
 if (isset($layers)) {
     ligaTemas();
 }
-if (isset($desligar)) {
-    desligaTemasIniciais();
-}
+desligaTemasIniciais();
+
 if (isset($map_reference_image)) {
     $mapn->reference->set("image", $map_reference_image);
 }
@@ -755,9 +754,14 @@ function abreInterface($interface, $caminho)
  */
 function desligaTemasIniciais()
 {
-    global $desligar, $mapn;
-    $layers = str_replace(',', " ", $desligar);
-    $lista = explode(" ", $layers);
+    global $desligar, $temasa, $layers, $mapn;
+    //para evitar LAYERS com status MS_DEFAULT
+    if(!isset($desligar)){
+        $lista = array_diff(explode(" ", $temasa),explode(" ", $layers));
+    } else {
+        $layersdesligar = str_replace(',', " ", $desligar);
+        $lista = explode(" ", $layersdesligar);
+    }
     foreach ($lista as $l) {
         if ($l == "") {
             continue;
