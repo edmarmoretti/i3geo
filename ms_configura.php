@@ -95,7 +95,6 @@ Exemplo de chave: def00000881f5d29aa8604e109797766cd26754c4cc06be02c09163810a78a
 $i3geoKeys = array(
 	"salvaMapfile"=>""
 );
-//TODO documentar no moodle
 /*
 Variable: $i3geoPermiteLogin
 
@@ -187,17 +186,8 @@ $i3geoEsquemasWL = array();
  Tipo:
  {array}
  */
-$i3geoUploadDataWL = array(
-    "arquivos" => array(
-        "Pasta 1"=>"/tmp/ms_tmp"
-    ),
-    "postgis" => array(
-        "esquemas"=>array("esquema1","i3geo_metaestat","public"),
-        "conexao"=>array("user"=> "postgres", "password"=>"postgres", "dbname"=>"i3geosaude", "host"=>"localhost", "port"=>"5432")
-    )
-);
+$i3geoUploadDataWL = array();
 
-//TODO documentar moodle
 /*
  Variale: $logExec
 
@@ -262,7 +252,7 @@ No caso do SAIKU, verifique tambem se o programa i3geo/ferramentas/saiku/esquema
 abrir e verificar o inicio desse arquivo). Veja tambem: i3geo/ferramentas/saiku/install.txt
  */
 $statusFerramentas = array(
-	"saiku"=>true,
+	"saiku"=>false,
 	"melhorcaminho"=>false
 );
 /*
@@ -318,7 +308,7 @@ inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */
 //$i3geoBlFerramentas = array("saiku");
-$i3geoBlFerramentas = array();
+$i3geoBlFerramentas = array("saiku");
 /*
 Variable: $ogrOutput
 

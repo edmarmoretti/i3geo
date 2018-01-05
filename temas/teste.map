@@ -1,0 +1,35 @@
+MAP
+  FONTSET "/var/www/i3geo/symbols/fontes.txt"
+  SYMBOLSET "/var/www/i3geo/symbols/simbolosv6.sym"
+  LAYER
+    CONNECTION "ses"
+    CONNECTIONTYPE POSTGIS
+    DATA "waygeo from (select st_transform(way,4326) AS waygeo,osm_id,highway from public.planet_osm_line) as foo using unique osm_id using srid=4326"
+    METADATA
+      "CLASSE"	"SIM"
+      "TEMA"	"Teste"
+
+    END # METADATA
+    NAME "teste"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE LINE
+    classitem "highway"
+class 
+      expression "motorway"  
+      style
+        color 0 0 0  
+        width 8 
+      end
+      style
+        color 128 155 192 
+        width 6  
+      end
+    end 
+
+  END # LAYER
+END # MAP
+

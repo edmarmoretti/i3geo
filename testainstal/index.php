@@ -193,7 +193,6 @@ if (! function_exists("ms_GetVersion")) {
 if (get_cfg_var("safe_mode") == 1) {
     echo '<div class="alert alert-warning" role="alert">Problema: safe_mode no php.ini deveria estar como Off. O i3Geo n&atilde;o ir&aacute; funcionar!!!</div>';
 }
-// TODO ao fechar versao verificar esses acentos
 echo <<<HTML
 		<h3>Acentua&ccedil;&atilde;o</h3>
 		<pre>
