@@ -247,16 +247,16 @@ i3GEOF.parametrossql = {
 				//nesse caso e inserido um div com um id para permitir o preenchimento posterior
 				if(p.prog === ""){
 					if(p.tipo === "input"){
-						ins += "<div class='i3geoForm i3geoFormIconeEdita'>"
-							+ "<input type='text' name='"+p.chave+"' value='"+p.valores+"' />"
-							+ "</div><br>";
+						ins += "<div class='form-group label-fixed condensed' >"
+							+ "<label class='control-label' for=''>"+p.titulo+"</label>"
+							+ "<input data-titulo='" + p.titulo + "' class='form-control input-lg' type='text' name='"+p.chave+"' value='"+p.valores+"' /></div>";
 					}
 					if(p.tipo === "select"){
 						ins += "<div style='width: 100%;' class='form-group label-fixed condensed'>"
 							+ "<label class='control-label' for=''>"
 							+ p.titulo
 							+ "</label><div style='width: 100%;' class='input-group'>"
-							+ "<select name='"+p.chave+"' >";
+							+ "<select class='form-control' data-titulo='" + p.titulo + "' name='"+p.chave+"' >";
 						l = p.valores.split(",");
 						nj = l.length;
 						for(j=0; j<nj; j++){
@@ -316,14 +316,16 @@ i3GEOF.parametrossql = {
 		for (i = 0; i<n; i++) {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
-			titulos.push(campos[i].options[campos[i].selectedIndex].text);
+			titulos.push($( campos[i] ).data( "titulo" ));
+			//titulos.push(campos[i].options[campos[i].selectedIndex].text);
 		}
 		campos = onde.getElementsByTagName("select");
 		n = campos.length;
 		for (i = 0; i<n; i++) {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
-			titulos.push(campos[i].options[campos[i].selectedIndex].text);
+			titulos.push($( campos[i] ).data( "titulo" ));
+			//titulos.push(campos[i].options[campos[i].selectedIndex].text);
 		}
 		//verifica os objetos pois essa funcao pode ter sido chamada do mashup
 		if(typeof i3geoOL != 'undefined' || typeof i3GeoMap != 'undefined'){

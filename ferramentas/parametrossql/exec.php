@@ -104,8 +104,10 @@ switch (strtoupper($funcao))
 					}
 					$layer->setmetadata("PLUGINI3GEO",'{"plugin":"parametrossql","ativo":"sim"}');
 					$layer->setmetadata("TEMA",$layer1->getmetadata("TEMA")." - ".$titulos);
+
 					//$layer->set("name","plugin".nomeRandomico());
 					$layer->setmetadata("nomeoriginal",$layer1->name);
+					$layer->setmetadata("CACHE","nao");
 					if (connection_aborted()){
 						exit();
 					}
