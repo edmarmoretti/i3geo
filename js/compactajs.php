@@ -1,7 +1,7 @@
 <html>
 <title>Compacta js</title>
 	<body>
-	<h1>Compactador de c&oacute;digo Javascript da vers&atilde;o 7.0</h1>
+	<h1>Compactador de c&oacute;digo Javascript</h1>
 	<p>Esse programa deve ser executado sempre que forem feitas altera&ccedil;&otilde;es nos c&oacute;digos javascript principais do i3Geo (aqueles que ficam na pasta i3geo/js).
 	A compacta&ccedil;&atilde;o reduz o tamanho dos arquivos e faz a concatena&ccedil;&atilde;o de v&aacute;rios arquivos em um s&oacute;. O compactador atua tamb&eacute;m sobre os arquivos CSS existentes
 	em i3geo/css. Ao utilizar o javascript i3geo/js/i3geo.js o arquivo compactado ser&aacute; carregado, assim como o CSS, correspondentes a &uacute;ltima vers&atilde;o do i3Geo.

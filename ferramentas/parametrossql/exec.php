@@ -61,6 +61,10 @@ switch (strtoupper($funcao))
 		$map = ms_newMapObj($map_file);
 		//pega o layer
 		$layer = $map->getlayerbyname($tema);
+		if($_GET["nova"] == "true"){
+		    $layer = ms_newLayerObj($map,$layer);
+		    $layer->name = "novo".nomeRandomico();
+		}
 		$map1 = @ms_newMapObj($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map");
 		if($map1){
 			$layer1 = $map1->getlayerbyname($layer->getmetadata("nomeoriginal"));

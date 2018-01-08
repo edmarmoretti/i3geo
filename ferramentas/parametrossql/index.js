@@ -58,6 +58,7 @@ i3GEOF.parametrossql = {
 	mustacheHash : function(camada) {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.parametrossql.dicionario);
 		dicionario["camada"] = camada.name;
+		dicionario["novaCamada"] = camada.novaCamada;
 		return dicionario;
 	},
 	/*
@@ -78,6 +79,9 @@ i3GEOF.parametrossql = {
 				i3GEOF.parametrossql.inicia(iddiv,camada);
 			});
 			return;
+		}
+		if(camada.novaCamada == undefined){
+			camada.novaCamada = "hidden";
 		}
 		$i(iddiv).innerHTML = i3GEOF.parametrossql.html(camada);
 		var b,
@@ -106,7 +110,6 @@ i3GEOF.parametrossql = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/
 	iniciaJanelaFlutuante: function(camada){
-        //verifica se deve ser aberto o formulario
 		if(camada.plugini3geo.ativo != undefined && camada.plugini3geo.ativo === "nao"){
 			i3GEOF.parametrossql.iniciaDefault(camada);
 		}
@@ -267,7 +270,7 @@ i3GEOF.parametrossql = {
 				}
 				else{
 					ins += "<h5>"+p.titulo+"</h5>";
-					ins += "<div id='i3GeoPlugin_"+p.chave+"' >Auarde...</div>";
+					ins += "<div id='i3GeoPlugin_"+p.chave+"' >Aguarde...</div>";
 				}
 			}
 		}
@@ -324,8 +327,8 @@ i3GEOF.parametrossql = {
 		for (i = 0; i<n; i++) {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
-			titulos.push($( campos[i] ).data( "titulo" ));
-			//titulos.push(campos[i].options[campos[i].selectedIndex].text);
+			//titulos.push($( campos[i] ).data( "titulo" ));
+			titulos.push(campos[i].options[campos[i].selectedIndex].text);
 		}
 		//verifica os objetos pois essa funcao pode ter sido chamada do mashup
 		if(typeof i3geoOL != 'undefined' || typeof i3GeoMap != 'undefined'){
@@ -337,6 +340,7 @@ i3GEOF.parametrossql = {
 			p = i3GEO.configura.locaplic+"/ferramentas/parametrossql/exec.php?g_sid="+i3GEO.configura.sid
 				+ "&funcao=aplicar"
 				+ "&tema=" + camada
+				+ "&nova=" + $i("i3GEOFparametrosSQLnova").checked
 				+ "&chaves=" + chaves.join(",")
 				+ "&titulos=" + titulos.join(",")
 				+ "&valores=" + valores.join(",");

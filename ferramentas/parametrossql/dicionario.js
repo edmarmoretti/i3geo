@@ -9,5 +9,10 @@ i3GEOF.parametrossql.dicionario = {
 		pt : "Aplicar",
 		en : "Apply",
 		es : "Aplicar"
+	} ],
+	'nova' : [ {
+		pt : "Cria uma nova camada",
+		en : "",
+		es : ""
 	} ]
 };
