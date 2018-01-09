@@ -57,7 +57,24 @@ switch (strtoupper($funcao))
 		*/
 	case "APLICAR":
 		$valores = $_GET["valores"];
+		$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--","drop",";"),"",$valores);
+		$valores = explode(",",$valores);
 		$titulos = $_GET["titulos"];
+		$titulos = explode(",",$titulos);
+		$chaves = $_GET["chaves"];
+		$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--","drop",";"),"",$chaves);
+		$chaves = explode(",",$chaves);
+		if(count($chaves) <> count($valores)){
+			echo "erro";
+			exit;
+		}
+		//cria um array cuja key e a chave
+		$dados = array();
+		$n = count($chaves);
+		for($i = 0; $i < $n; $i++){
+			$dados[$chaves[$i]] = array("valor"=>$valores[$i],"titulo"=>$titulos[$i]);
+		}
+		
 		$map = ms_newMapObj($map_file);
 		//pega o layer
 		$layer = $map->getlayerbyname($tema);
@@ -75,6 +92,7 @@ switch (strtoupper($funcao))
 					$retorno = "erro";
 				}
 				if($c != ""){
+					//pega as chaves originais do mapfile
 					$cs = json_decode(utf8_encode($c),true);
 					$cs = $cs["parametros"];
 					$chaves = array();
@@ -82,20 +100,19 @@ switch (strtoupper($funcao))
 						$chaves[] = $c["chave"];
 					}
 					$chaves = implode(",",$chaves);
+					$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--","drop",";"),"",$chaves);
+					$chaves = explode(",",$chaves);
 					$filtro = $layer1->getFilterString();
-					if(!empty($valores)){
-						$chaves = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--","drop",";"),"",$chaves);
-						$chaves = explode(",",$chaves);
-						$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--","drop",";"),"",$valores);
-						$valores = explode(",",strip_tags($valores));
-						$n = count($chaves);
-						for($i = 0; $i < $n; $i++){
-							if($chaves[$i] != ""){
-								$v = $valores[$i];
-								$data = str_replace($chaves[$i],$v,$data);
+					$titulofim = array();
+					if(!empty($dados)){
+						foreach($chaves as $k){
+							if($k != ""){
+								$v = $dados[$k]["valor"];
+								$data = str_replace($k,$v,$data);
 								if($filtro != ""){
-									$filtro = str_replace($chaves[$i],$v,$filtro);
+									$filtro = str_replace($k,$v,$filtro);
 								}
+								$titulofim[] = $dados[$k]["titulo"]." ".$v;
 							}
 						}
 						if($filtro != ""){
@@ -107,7 +124,7 @@ switch (strtoupper($funcao))
 					   $layer->set("status",MS_DEFAULT);
 					}
 					$layer->setmetadata("PLUGINI3GEO",'{"plugin":"parametrossql","ativo":"sim"}');
-					$layer->setmetadata("TEMA",$layer1->getmetadata("TEMA")." - ".$titulos);
+					$layer->setmetadata("TEMA",$layer1->getmetadata("TEMA")." - ".implode(". ",$titulofim));
 
 					//$layer->set("name","plugin".nomeRandomico());
 					$layer->setmetadata("nomeoriginal",$layer1->name);
