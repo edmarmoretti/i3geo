@@ -1,0 +1,46 @@
+<td>
+	<button onclick='i3GEOF.filtro.adicionaLinhaFiltro()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+		<span class="material-icons">add</span>
+	</button>
+</td>
+<td>
+	<button onclick='i3GEOF.filtro.removeLinha(this,{{{contador}}})' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+		<span class="material-icons">clear</span>
+	</button>
+</td>
+<td>
+	<div class='form-group condensed' style="padding-left:10px;" >{{{comboTemas}}}</div>
+</td>
+<td>
+	<div class='form-group condensed' style="padding-left:10px;">
+		<select class="form-control" name="operador" >
+			<option value="=">=</option>
+			<option value="!=">!=</option>
+			<option value="<">&lt;</option>
+			<option value=">">&gt;</option>
+			<option value="<=">&lt;=</option>
+			<option value=">=">&gt;=</option>
+			<option value="in">in</option>
+			<option value="ilike">like (Postgis)</option>
+			<option value="not ilike">not like (Postgis)</option>
+			<option value="~=">regExp</option>
+		</select><b class="caret careti"></b>
+	</div>
+</td>
+<td>
+	<div class='form-group condensed' style="padding-left:10px;">
+		<input class="form-control input" name="valor" type='text' value='' />
+	</div>
+</td>
+<td>
+
+</td>
+<td>
+	<div class='form-group condensed' style="padding-left:10px;">
+		<select name="conector" class="form-control" >
+			<option value="and">and</option>
+			<option value="or">or</option>
+			<option value="not">not</option>
+		</select><b class="caret careti"></b>
+	</div>
+</td>

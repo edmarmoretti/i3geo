@@ -1438,7 +1438,8 @@ class Atributos
 				}
 			}
 			$codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
-			$final[] = array("xy"=>$xy,"tema"=>$tema,"tiposalva"=>$tiposalva,"nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
+			$funcoesjs = json_decode($this->converte($layer->getMetaData("FUNCOESJS")));
+			$final[] = array("funcoesjs"=>$funcoesjs,"xy"=>$xy,"tema"=>$tema,"tiposalva"=>$tiposalva,"nome"=>$nometmp,"resultado"=>$resultados[$tema],"editavel"=>$editavel,"colunaidunico"=>$colunaidunico,"id_medida_variavel"=>$id_medida_variavel,"codigo_tipo_regiao"=>$codigo_tipo_regiao);
 		}
 		return $final;
 	}

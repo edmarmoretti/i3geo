@@ -760,6 +760,25 @@ i3GEO.tema =
 				"i3GEOF.etiqueta.iniciaJanelaFlutuante()");
 			},
 			/**
+			 * Function: funcaojstip
+			 *
+			 * Abre a janela de dialogo da ferramenta funcaojstip. Utilizado na ferramenta atalhosedicao
+			 * Permite alterar o metadata que controla a lista de funcoes JS que são mostradas no balao de
+			 * informacoes quando o usuario clica no mapa
+			 *
+			 * Parametros:
+			 *
+			 * {string} - id que identifica o tema conforme definido no map file
+			 */
+			funcaojstip : function() {
+				i3GEO.util.dialogoFerramenta(
+						"i3GEO.tema.dialogo.funcaojstip()",
+						"funcaojstip",
+						"funcaojstip",
+						"dependencias.php",
+				"i3GEOF.funcaojstip.iniciaJanelaFlutuante()");
+			},
+			/**
 			 * Function: editaLegenda
 			 *
 			 * Abre a janela de dialogo da ferramenta legenda

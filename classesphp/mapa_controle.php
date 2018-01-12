@@ -2063,7 +2063,11 @@ switch (strtoupper($funcao)) {
      * <Atributos->identifica3>
      */
     case "IDENTIFICA3":
-        $tema = $_pg["tema"];
+        $tema = "";
+        if(isset($_pg["tema"])){
+            $tema = $_pg["tema"];
+        }
+
         $opcao = $_pg["opcao"];
         $xy = $_pg["xy"];
         $resolucao = $_pg["resolucao"];

@@ -296,7 +296,7 @@ i3GEOF.parametrossql = {
 			var i,n,ins = "";
 			ins += "<div style='width: 100%;' class='form-group label-fixed condensed'>"
 				+ "<div style='width: 100%;' class='input-group'>"
-				+ "<select  class='form-control' name='" +plugin.chave+ "' >";
+				+ "<select data-titulo='" + plugin.titulo + "'  class='form-control' name='" +plugin.chave+ "' >";
 
 			n = retorno.data.length;
 			for(i=0; i<n; i++){
@@ -327,8 +327,8 @@ i3GEOF.parametrossql = {
 		for (i = 0; i<n; i++) {
 			chaves.push(campos[i].name);
 			valores.push(campos[i].value);
-			//titulos.push($( campos[i] ).data( "titulo" ));
-			titulos.push(campos[i].options[campos[i].selectedIndex].text);
+			titulos.push($( campos[i] ).data( "titulo" ));
+			//titulos.push(campos[i].options[campos[i].selectedIndex].text);
 		}
 		//verifica os objetos pois essa funcao pode ter sido chamada do mashup
 		if(typeof i3geoOL != 'undefined' || typeof i3GeoMap != 'undefined'){

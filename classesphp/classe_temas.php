@@ -480,6 +480,51 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 		}
 		return("ok");
 	}
+	/*
+	 function: pegaFuncoesJs
+
+	 Pega o valor do metadata FUNCOESJS
+	 */
+	function pegaFuncoesJs()
+	{
+	    if(!$this->layer){
+	        return "erro";
+	    }
+	    $texto = $this->layer->getmetadata("FUNCOESJS");
+	    //if ($texto != "" && !mb_detect_encoding($texto,"UTF-8",true)){
+	    //    $texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
+	    //}
+	    return $texto;
+	}
+	/*
+	 function: insereFuncoesJs
+
+	 Insere o valor do metadata FUNCOESJS
+	 */
+	function insereFuncoesJs($texto)
+	{
+	    if(!$this->layer){
+	        return false;
+	    }
+	    //if ($texto != "" && !mb_detect_encoding($texto,"UTF-8",true)){
+	    //    $texto = mb_convert_encoding($texto,"UTF-8","ISO-8859-1");
+	    //}
+	    $this->layer->setmetadata("FUNCOESJS",$texto);
+	    return true;
+	}
+	/*
+	 function: limpaFuncoesJs
+
+	 Limpa o valor do metadata FUNCOESJS
+	 */
+	function limpaFuncoesJs()
+	{
+	    if(!$this->layer){
+	        return false;
+	    }
+	    $this->layer->setmetadata("FUNCOESJS","");
+	    return true;
+	}
 /*
 function: pegaFiltro
 

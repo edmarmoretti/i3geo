@@ -79,5 +79,10 @@ i3GEOF.atalhosedicao.dicionario = {
 		pt : "Plugins que implementam formas especiais de visualiza&ccedil;&atilde;o. A camada pode ter apenas um plugin.",
 		en : "Plugins that implement special ways of visualization. The layer can only have one plugin.",
 		es : "Plugins que implementan formas especiales de visualizaci&oacute;n. La capa solo puede tener un plugin."
+	}],
+	"funcaojstip" : [{
+		pt : "Fun&ccedil;&atilde;o JS",
+		en : "",
+		es : ""
 	}]
 };

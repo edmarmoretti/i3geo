@@ -1062,7 +1062,7 @@ i3GEO.mapa =
 			if (typeof (console) !== 'undefined')
 				console.info("i3GEO.mapa.montaTip()");
 
-			var textoCompleto = "", textoSimples = "", textoTempCompleto = "", textoTempSimples = "", x, y, classeCor, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
+			var textoCompleto = "", textoSimples = "", textoTempCompleto = "", textoTempSimples = "", x, y, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
 				i3GEO.configura, wkts = [];
 
 			i3GEO.eventos.cliquePerm.status = true;
@@ -1103,10 +1103,9 @@ i3GEO.mapa =
 					if (ds !== " " && ds[0] && ds[0] != " ") {
 						try {
 							nds = ds.length;
-							classeCor = "toolTipBalaoTexto";
 							for (s = 0; s < nds; s += 1) {
-								textoTempCompleto += "<div class='" + classeCor + "'>";
-								textoTempSimples += "<div class='" + classeCor + "'>";
+								textoTempCompleto += "<div class='toolTipBalaoTexto'>";
+								textoTempSimples += "<div class='toolTipBalaoTexto'>";
 								for (r = 0; r < ntips; r += 1) {
 									try {
 										temp = "";
@@ -1137,9 +1136,24 @@ i3GEO.mapa =
 										mostra = true;
 									} catch (e) {}
 								}
-
 								textoTempCompleto += "</div>";
-								textoTempSimples += "</div>";
+								//para os nomes de funcoes embutidas
+								//funcoes sao configuradas no mapfile
+								var temp1 = [];
+								$.each( temas[j].funcoesjs, function( key, value ) {
+									var parametros = [];
+									$.each( value.parametros, function( key1, value1 ) {
+										parametros.push(ds[s][value1].valor);
+									});
+									parametros = "\"" + parametros.join("\",\"") + "\"";
+									temp1.push("<a class='toolTipBalaoFuncoes' href='javascript:void(0);' onclick='" + value.funcao + "(" + parametros + ")' >" + value.titulo + "</a><br>");
+									//adiciona o javascript que contem a funcao
+									if(value.script && value.script != ""){
+										i3GEO.util.scriptTag(value.script, "", "funcaolayer"+value.funcao, false);
+									}
+								});
+								temp1 = temp1.join(" ");
+								textoTempSimples += temp1 + "</div>";
 								//insere o wkt se existir
 								if(ds[s].wkt && ds[s].wkt.valor != ""){
 									wkts.push(ds[s].wkt.valor);

@@ -182,6 +182,7 @@ MAP
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
 			"cache" "sim"
 			"itembuscarapida" "LONG_NAME"
+			#"FUNCOESJS" '[{"titulo":"teste fake"},{"titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["FIPS_CNTRY","LONG_NAME"]}]'
 		END
 		NAME "mundo"
 		STATUS OFF

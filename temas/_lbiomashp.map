@@ -8,34 +8,43 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
-      "TIP"	"CD_LEGENDA"
       "cache"	"nao"
+      "TIP"	"CD_LEGENDA"
       "CLASSE"	"SIM"
+      "olopacity"	""
       "animagif"	""
       "permitekmz"	"SIM"
+      "gmopacity"	""
+      "gmstatus"	""
       "ITENSDESC"	"Teste de acentuação"
-      "TILES"	"SIM"
-      "ESCALA"	"250000"
       "editavel"	""
+      "ESCALA"	"250000"
+      "TILES"	"SIM"
+      "arquivotemaoriginal"	""
       "extensao"	"-73.990940816816 -33.74827031115 -34.822855820777 5.272224303909"
+      "nomeoriginal"	""
+      "olstatus"	""
+      "FUNCOESJS"	'[{"titulo":"teste fake"},{"titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["CD_LEGENDA"]}]'
       "permitedownload"	"SIM"
+      "FILTROORIGINAL"	""
       "permitecomentario"	"NAO"
+      "DATAORIGINAL"	""
       "escondido"	"NAO"
-      "download"	"SIM"
       "esquematabelaeditavel"	""
+      "download"	"SIM"
       "itembuscarapida"	"CD_LEGENDA"
-      "ITENS"	"CD_LEGENDA"
       "tme"	""
-      "permitekml"	"SIM"
-      "permiteogc"	"SIM"
+      "ITENS"	"CD_LEGENDA"
       "transitioneffect"	"NAO"
-      "convcaracter"	"SIM"
+      "permiteogc"	"SIM"
+      "permitekml"	"SIM"
       "TEMA"	"Biomas shapefile (acentuação)"
-      "colunaidunico"	""
+      "convcaracter"	"SIM"
       "colunageometria"	""
+      "colunaidunico"	""
       "identifica"	"sim"
-      "tabelaeditavel"	""
       "storymap"	""
+      "tabelaeditavel"	""
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
@@ -101,7 +110,6 @@ MAP
       TITLE ""
     END # CLASS
   END # LAYER
+
 END # MAP
-                    
-                    
-                    
+

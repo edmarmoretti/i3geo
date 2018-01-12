@@ -2995,5 +2995,12 @@ g_traducao =
             pt : "Camadas de fundo",
             en : "Basemap",
             es : "Mapa base"
-        }]
+        }],
+        "funcaojstip" : [
+            {
+                pt : "Fun&ccedil;&atilde;o JS (para as etiquetas)",
+                en : "",
+                es : ""
+            }
+        ]
     };
