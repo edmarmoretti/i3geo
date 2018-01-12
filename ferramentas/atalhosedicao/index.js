@@ -173,7 +173,7 @@ i3GEOF.atalhosedicao =
 			cabecalho = function() {
 			};
 			minimiza = function() {
-				i3GEO.janela.minimiza("i3GEOFatalhosedicao");
+				i3GEO.janela.minimiza("i3GEOF.atalhosedicao",200);
 			};
 			// cria a janela flutuante
 			titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + i3GEO.temaAtivo + "</span></div>";
