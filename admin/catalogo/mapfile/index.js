@@ -230,8 +230,8 @@ Obt&eacute;m a lista
 			.done(
 					function(data, status){
 						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.mapfile.registraFavoritos(id);
 						i3GEOadmin.mapfile.lista("","");
+						i3GEOadmin.mapfile.registraFavoritos(id);
 					}
 			)
 			.fail(
@@ -274,16 +274,22 @@ Obt&eacute;m a lista
 			i3GEOadmin.mapfile.montaFavoritos();
 		},
 		montaFavoritos: function(){
-			var mapfile, i, conteudo = [], n, codigo, h;
-			n = i3GEOadmin.mapfile.favoritosArray.length;
-			for (i=0; i<n; i++){
-				codigo = i3GEOadmin.mapfile.favoritosArray[i];
-				h = $("#form-" + codigo).html();
-				if(h != undefined){
-					conteudo.push(h+"&nbsp;");
+			//o try aqui e necessario para evitar seletor com erro. Eventualmente.
+			try {
+				var mapfile, i, conteudo = [], n, codigo, h;
+				n = i3GEOadmin.mapfile.favoritosArray.length;
+				for (i=0; i<n; i++){
+					codigo = i3GEOadmin.mapfile.favoritosArray[i];
+					h = $("#form-" + codigo).html();
+					if(h != undefined){
+						conteudo.push(h+"&nbsp;");
+					}
 				}
+				$("#body-favoritos").html(conteudo.join("\n"));
+			} catch (e) {
+				i3GEOadmin.mapfile.favoritosArray = [];
 			}
-			$("#body-favoritos").html(conteudo.join("\n"));
+
 		},
 		limpaCacheDialogo: function(codigo){
 			var hash = {
