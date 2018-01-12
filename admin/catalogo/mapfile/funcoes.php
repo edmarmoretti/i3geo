@@ -538,6 +538,10 @@ function clonarMapfile($codigo,$novocodigo,$titulo,$dbh,$dbhw){
 	$mapa = ms_newMapObj($arq);
 	$layer = @$mapa->getlayerbyname($codigo);
 	$layer->set("name",$novocodigo);
+
+	if (mb_detect_encoding ( $titulo, 'UTF-8, ISO-8859-1' ) == "UTF-8") {
+	    $titulo = utf8_decode ( $titulo );
+	}
 	$layer->setmetadata("TEMA",$titulo);
 	$mapa->save($arqnovo);
 	\admin\php\funcoesAdmin\removeCabecalhoMapfile($arqnovo);
