@@ -721,7 +721,7 @@ i3GEO.php =
 			i3GEO.php.verifica();
 			var p =
 				i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php?funcao=selecaowkt&g_sid=" + i3GEO.configura.sid + "&tipo=" + tipo
-					+ "&tema=" + tema + "&ext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten + "&buffer=" + buffer), cp = new cpaint();
+					+ "&tema=" + tema + "&ext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten) + "&buffer=" + buffer, cp = new cpaint();
 			cp.set_transfer_mode('POST');
 			cp.set_response_type("JSON");
 			cp.call(p, "foo", funcao, "&wkt=" + wkt);

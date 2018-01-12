@@ -62,12 +62,6 @@ i3GEOF.selecao =
 		mustacheHash : function() {
 			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.selecao.dicionario);
 			dicionario["locaplic"] = i3GEO.configura.locaplic;
-			if (i3GEO.Interface.ATUAL === "openlayers"){
-				dicionario["i3GEOselecaoboxHidden"] = "hidden";
-			}
-			else {
-				dicionario["i3GEOselecaoboxHidden"] = "";
-			}
 			dicionario["p8"] = $trad("p8");
 			return dicionario;
 		},
@@ -500,33 +494,31 @@ i3GEOF.selecao =
 				inicia : function() {
 					i3GEO.eventos.cliquePerm.desativa();
 					i3GEOF.selecao.box.ol3.removeControle();
-					i3GEOF.selecao.box.ol3.draw = new ol.interaction.DragBox({
-						//condition: ol.events.condition.shiftKeyOnly,
-						style: new ol.style.Style({
-							stroke: new ol.style.Stroke({
-								color: [0, 0, 255, 1]
-							})
-						})
+					i3GEOF.selecao.box.ol3.draw = new ol.interaction.Draw({
+						type : "Circle",
+						freehand: true,
+						geometryFunction: ol.interaction.Draw.createRegularPolygon(4)
 					});
-
-					i3GEOF.selecao.box.ol3.draw.on("boxend",function(evt){
-						var feature, geo, pol = i3GEOF.selecao.box.ol3.draw.getGeometry();
+					i3GEOF.selecao.box.ol3.draw.setActive(true);
+					i3GEOF.selecao.box.ol3.draw.on("drawend",function(evt){
+						var wkt, feature, geo, pol = evt.feature.getGeometry(), format = new ol.format.WKT();
+						pol = i3GEO.util.projOSM2Geo(pol);
+						feature = new ol.Feature({
+							geometry: pol,
+							origem: 'i3GEOFselecao'
+						});
 						if ($i("i3GEOFselecaoMantemFigura").checked === true) {
-							feature = new ol.Feature({
-								geometry: pol,
-								origem: 'i3GEOFselecao'
-							});
-							//i3GEOF.selecao.box.ol3.draw.feature.setProperties({origem : "i3GEOFselecao"});
 							i3GEO.desenho.layergrafico.getSource().addFeature(feature);
 						}
 						i3GEOF.selecao.box.ol3.removeControle();
 						i3GEO.eventos.cliquePerm.ativa();
-						pol = i3GEO.util.projOSM2Geo(pol);
-						geo = pol.getExtent();
-						i3GEOF.selecao.box.termina(
-							i3GEO.temaAtivo,
-							$i("i3GEOselecaotipoOperacao").value,
-							geo.join(" "));
+
+						wkt = format.writeFeature(feature);
+						i3GEOF.selecao.figura.termina(
+								i3GEO.temaAtivo,
+								$i("i3GEOselecaotipoOperacao").value,
+								wkt
+						);
 					});
 					i3geoOL.addInteraction(i3GEOF.selecao.box.ol3.draw);
 				},
