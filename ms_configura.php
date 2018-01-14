@@ -168,7 +168,7 @@ $i3geoEsquemasWL = array();
  Para nao expor o endereco das pastas nos formularios, cada pasta recebe um apelido.
 
  No caso dos esquemas, o nome e o mesmo existente no banco. Alem dos esquemas e necessario fornecer os parametros de conexao
- com o banco de dados que permita a escrita nesses esquemas, pois a conversao de shapefile para Postgis exige a criação de tabela.
+ com o banco de dados que permita a escrita nesses esquemas, pois a conversao de shapefile para Postgis exige a criaï¿½ï¿½o de tabela.
  Esses parametros podem ser diferentes de outros existentes aqui no ms_configura e nao interferem em outras operacoes
 
  Exemplo:
@@ -300,7 +300,7 @@ colorpicker,colourramp,convertekml,download,editorgm,editorol,excluirarvore,opac
 opcoes_autoredesenha,opcoes_label,salvamapfile,wmstime
 
 As seguintes ferramentas podem ser bloqueadas apenas impedindo-se a carga do javascript
-(as operacoes via PHP sao realizadas por outras classes que nao residem na pasta ferramentas ou não utiliza PHP)
+(as operacoes via PHP sao realizadas por outras classes que nao residem na pasta ferramentas ou nï¿½o utiliza PHP)
 
 analisageometrias,animacao,atalhoscamada,atalhosedicao,atalhosmapa,bufferpt,busca,buscainde
 buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,geolocal,html2canvas,inseregrafico

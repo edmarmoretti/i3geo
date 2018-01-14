@@ -63,6 +63,9 @@ i3GEOF.selecao =
 			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.selecao.dicionario);
 			dicionario["locaplic"] = i3GEO.configura.locaplic;
 			dicionario["p8"] = $trad("p8");
+			if(i3GEO.Interface.ATUAL === "googlemaps"){
+				dicionario["i3GEOselecaoboxHidden"] = "hidden";
+			}
 			return dicionario;
 		},
 		/*

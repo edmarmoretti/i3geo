@@ -21,7 +21,6 @@
 <script src="../pacotes/bootstrap-tour/build/js/bootstrap-tour.js"></script>
 <link href="../pacotes/bootstrap-tour/build/css/bootstrap-tour.css" rel="stylesheet">
 <script src="tutorial.js"></script>
-
 <style>
 .ol-attribution.ol-uncollapsible {
 	height: 2.1em;
@@ -29,7 +28,6 @@
 	background: none;
 	margin-bottom: 15px;
 }
-
 .foraDoMapa+span>span {
 	background-color: yellow;
 }
@@ -920,8 +918,9 @@
 											new ol.interaction.MouseWheelZoom(),
 											new ol.interaction.PinchRotate(),
 											new ol.interaction.PinchZoom(),
-											new ol.interaction.DragZoom(),
-											new ol.interaction.DragPan() ]
+											//new ol.interaction.DragZoom(),
+											i3GEO.navega.dragZoom(),
+											new ol.interaction.DragPan()]
 								},
 								//opcoes para o objeto view, que e uma instancia de MapOptions
 								//ver https://openlayers.org/en/latest/apidoc/ol.View.html
