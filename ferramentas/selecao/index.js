@@ -337,6 +337,7 @@ i3GEOF.selecao =
 					"i3GEOF.tabela.atualizaListaDeRegistros()"
 				]);
 			}
+			i3GEO.eventos.cliquePerm.desativa();
 			i3GEO.eventos.executaEventos(i3GEO.eventos.SELECAO);
 		},
 		/*
@@ -613,6 +614,9 @@ i3GEOF.selecao =
 						maxPoints : 1
 					});
 					i3GEOF.selecao.clique.ol3.draw.on("drawend",function(evt){
+						if (typeof (console) !== 'undefined')
+							console.info("i3GEOF.selecao.clique.ol3.draw.on('drawend'");
+
 						var geo, ponto = evt.feature.getGeometry();
 						if ($i("i3GEOFselecaoMantemFigura").checked === true) {
 							evt.feature.setProperties({origem : "i3GEOFselecao"});
