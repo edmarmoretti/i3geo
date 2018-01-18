@@ -88,7 +88,7 @@ i3GEOF.legenda =
 		 *
 		 * Ultimo estilo selecionado
 		 */
-		estilo : "",
+		estilo : 0,
 		/*
 		 * Variavel: classe
 		 *
@@ -1017,7 +1017,6 @@ i3GEOF.legenda =
 				$i("i3GEOlegendaguia3obj").style.display = "block";
 				id = id.split("-");
 				i3GEOF.legenda.classe = id[1];
-				i3GEOF.legenda.estilo = 0;
 				i3GEOF.legenda.formEditorSimbolo();
 				i3GEOF.legenda.aguarde.visibility = "hidden";
 			} catch (e) {
@@ -1455,7 +1454,7 @@ i3GEOF.legenda =
 					retorno = retorno.data;
 					i3GEOF.legenda.estilos = retorno.split("|");
 					combo =
-						"<select id='i3GEOlegendaestilos' class='form-control' onchange=i3GEOF.legenda.mostraEstilo(this.value)>";
+						"<select id='i3GEOlegendaestilos' class='form-control' onchange=i3GEOF.legenda.estilo=this.value;i3GEOF.legenda.mostraEstilo(this.value)>";
 					n = i3GEOF.legenda.estilos.length;
 					for (i = 0; i < n; i++) {
 						l = i3GEOF.legenda.estilos[i].split("#");
@@ -1464,6 +1463,7 @@ i3GEOF.legenda =
 					}
 					combo += "</select></div>";
 					$i("i3GEOlegendacomboestilos").innerHTML = combo;
+					$i("i3GEOlegendaestilos").value = i3GEOF.legenda.estilo;
 
 
 					i3GEOF.legenda.aguarde.visibility = "hidden";
@@ -1537,6 +1537,7 @@ i3GEOF.legenda =
 					+ "&estilo="
 					+ i3GEOF.legenda.estilo, cp = new cpaint();
 				cp.set_response_type("JSON");
+				i3GEOF.legenda.estilo = i3GEOF.legenda.estilo + 1;
 				cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 			} catch (e) {
 				i3GEO.janela.tempoMsg("Erro: " + e);
@@ -1549,6 +1550,7 @@ i3GEOF.legenda =
 					return;
 				}
 				i3GEOF.legenda.aguarde.visibility = "visible";
+				i3GEOF.legenda.estilo = 0;
 				var p =
 					i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="
 					+ i3GEO.configura.sid
@@ -1570,11 +1572,11 @@ i3GEOF.legenda =
 		 *
 		 * Mostra as propriedades de um estilo de um s&iacute;mbolo
 		 */
-		mostraEstilo : function(e) {
+		mostraEstilo : function() {
 			i3GEOF.legenda.aguarde.visibility = "visible";
 			try {
 				var linha, tipoLayer, d, p, cp, mustache = {};
-				i3GEOF.legenda.estilo = e; // esta e uma variavel global
+				//i3GEOF.legenda.estilo = e; // esta e uma variavel global
 				linha = i3GEOF.legenda.estilos[i3GEOF.legenda.estilo];
 				linha = linha.split("#");
 				tipoLayer = linha[0];
@@ -1634,7 +1636,7 @@ i3GEOF.legenda =
 				cp.call(p, "editasimbolo", i3GEOF.legenda.listaSimbolos);
 				i3GEOF.legenda.aguarde.visibility = "hidden";
 			} catch (e) {
-				i3GEO.janela.tempoMsg("Erro: " + e);
+				i3GEO.janela.tempoMsg("Erro: " + i3GEOF.legenda.estilo);
 				i3GEOF.legenda.aguarde.visibility = "hidden";
 			}
 		},
