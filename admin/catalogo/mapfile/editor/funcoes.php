@@ -153,7 +153,8 @@ function salvaMapfile()
             "TEMA",
             "APLICAEXTENSAO",
             "IDENTIFICA",
-            "TRANSITIONEFFECT"
+            "TRANSITIONEFFECT",
+            "CONEXAOORIGINAL"
         );
         foreach (preg_split('~[\r\n]+~', $gravarTexto) as $line) {
             $teste = strtoupper($line);
@@ -269,6 +270,7 @@ function refazerLayer($nomelayer, $codigomap, $locaplic, $dir_tmp, $cachedir, $m
         $nl->setmetadata("gmstatus", "");
         $nl->setmetadata("FILTROORIGINAL", "");
         $nl->setmetadata("DATAORIGINAL", "");
+        $nl->setmetadata("CONEXAOORIGINAL", "");
         $nl->setmetadata("cache", $cache);
         $nl->setmetadata("classe", $classe);
         $nl->setmetadata("identifica", $identifica);

@@ -543,6 +543,10 @@ function clonarMapfile($codigo,$novocodigo,$titulo,$dbh,$dbhw){
 	    $titulo = utf8_decode ( $titulo );
 	}
 	$layer->setmetadata("TEMA",$titulo);
+	$layer->setmetadata("CONEXAOORIGINAL","");
+	$layer->setmetadata("ARQUIVOTEMAORIGINAL","");
+	$layer->setmetadata("NOMEORIGINAL","");
+	$layer->setmetadata("DATAORIGINAL","");
 	$mapa->save($arqnovo);
 	\admin\php\funcoesAdmin\removeCabecalhoMapfile($arqnovo);
 	if (count ( $dados ) > 0) {
