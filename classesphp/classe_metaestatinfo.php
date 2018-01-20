@@ -152,14 +152,20 @@ class MetaestatInfo{
      */
     function execSQL($sql,$id="",$convTexto=true){
         $sql = str_ireplace(array("update","delete","insert","--","drop",";"),"",$sql);
+        //error_log("--                        ");
+        //error_log("--xxxxxxxxxxx---- SQL: ".$sql);
         try	{
             $q = $this->dbh->query($sql,PDO::FETCH_ASSOC);
         }
         catch (PDOException $e)	{
+            //error_log("--                        ");
+            //error_log("--erro i3geo-- classe_metaestatinfo execSQL: ".$sql);
             return "Error!: ";
         }
         if($q){
+            //error_log("--xxxxxxxxxxx---- Executando o SQL ");
             $r = $q->fetchAll();
+            //error_log("--xxxxxxxxxxx---- Executado ");
             if($convTexto == false){
                 return $r;
             }
@@ -182,6 +188,8 @@ class MetaestatInfo{
             }
         }
         else{
+            //error_log("--");
+            //error_log("--erro i3geo-- classe_metaestatinfo execSQL");
             return false;
         }
     }
@@ -352,10 +360,50 @@ class MetaestatInfo{
         else{
             $nomeColunaValor = $dados["colunavalor"];
         }
+        //pega o tipo das coluna regiao.".$dadosgeo["identificador"]
+        $propColuna1 = $this->descreveColunasTabela(
+            $dadosgeo["codigo_estat_conexao"],
+            $dados["esquemadb"],
+            $dados["tabela"],
+            $dados["colunaidgeo"]
+            );
+        $propColuna2 = $this->descreveColunasTabela(
+            $dadosgeo["codigo_estat_conexao"],
+            $dadosgeo["esquemadb"],
+            $dadosgeo["tabela"],
+            $dadosgeo["identificador"]
+            );
+        if(in_array(array('oid','float4','float8','int2','int4','int8','int16','smallint','integer','real','double precision','bigint','numeric'),$propColuna1["type"])){
+            $propColuna1 = 'numeric';
+        } else {
+            $propColuna1 = 'text';
+        }
+        if(in_array(array('oid','float4','float8','int2','int4','int8','int16','smallint','integer','real','double precision','bigint','numeric'),$propColuna2["type"])){
+            $propColuna2 = 'numeric';
+        } else {
+            $propColuna2 = 'text';
+        }
+        if($propColuna1 == $propColuna2){
+            $propColuna1 = "";
+            $propColuna2 = "";
+        } else {
+            if($propColuna1 == 'numeric'){
+                $propColuna1 = 'text';
+            }
+            if($propColuna2 == 'numeric'){
+                $propColuna2 = 'text';
+            }
+            if($propColuna1 != ''){
+                $propColuna1 = '::'.$propColuna1;
+            }
+            if($propColuna2 != ''){
+                $propColuna2 = '::'.$propColuna2;
+            }
+        }
         $sqlIntermediario = "SELECT (j.valorcalculado) AS ".$nomeColunaValor.", __COLUNASSEMGEO__".
             " FROM ".$dadosgeo["esquemadb"].".".$dadosgeo["tabela"]." AS regiao ".
             " INNER JOIN ( __SQLDADOS__ ) ".
-            " AS j ON j.cod_regiao::text = regiao.".$dadosgeo["identificador"]."::text";
+            " AS j ON j.cod_regiao" . $propColuna1 . " = regiao.".$dadosgeo["identificador"] . $propColuna2;
         //inclui os sqls de regioes de niveis inferiores
         if($agregaregiao == true && $direto == false){
             $hierarquia = $this->regiaoFilhaAoPai($dados["codigo_tipo_regiao"],$codigo_tipo_regiao);
@@ -510,7 +558,8 @@ class MetaestatInfo{
             $this->nomecache = $this->nomecache . $this->nomeRandomico(5);
         }
         $arq = $this->dir_tmp."/".$this->nomecache.".map";
-
+        //error_log("--                        ");
+        //error_log("--xxxxxxxxxxx---- nomecache: ".$arq);
         if(!file_exists($arq)){
             $meta = $this->listaMedidaVariavel("",$id_medida_variavel);
             //evita agregar regioes qd nao e necessario
@@ -529,6 +578,8 @@ class MetaestatInfo{
                 $suportaWMST,
                 $filtro
                 );
+            //error_log("--                        ");
+            //error_log("--xxxxxxxxxxx---- sqlMedidaVariavel: ".$sql);
             if(empty($codigo_tipo_regiao)){
                 $d = $this->listaMedidaVariavel("",$id_medida_variavel);
                 $codigo_tipo_regiao = $d["codigo_tipo_regiao"];
@@ -555,7 +606,11 @@ class MetaestatInfo{
                 $classes = $this->listaClasseClassificacao($classificacoes[0]["id_classificacao"]);
             }
             if($classes == false){
+                //error_log("--                        ");
+                //error_log("--xxxxxxxxxxx---- dadosMedidaVariavel: ".$sql);
                 $valores = $this->dadosMedidaVariavel($id_medida_variavel,$filtro." AND ".$meta["colunavalor"]." > 0 ");
+                //error_log("--                        ");
+                //error_log("--xxxxxxxxxxx---- dadosMedidaVariavel obtidos ");
                 $valores = array_column($valores,$meta["colunavalor"]);
                 $item = $meta["colunavalor"];
                 $classes = array();
@@ -1726,9 +1781,9 @@ class MetaestatInfo{
      */
     function colunasTabela($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo="",$tipotratamento="="){
         $colunas = array();
-        $res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
+        $res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name, data_type FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'");
         if($tipo != ""){
-            $res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name FROM information_schema.columns where table_schema = '$nome_esquema' and udt_name $tipotratamento '$tipo' and table_name = '$nome_tabela'");
+            $res = $this->execSQLDB($codigo_estat_conexao,"SELECT column_name as coluna,udt_name, data_type FROM information_schema.columns where table_schema = '$nome_esquema' and udt_name $tipotratamento '$tipo' and table_name = '$nome_tabela'");
         }
         foreach($res as $c){
             $colunas[] = $c["coluna"];
