@@ -16,7 +16,7 @@ i3GEOF.funcaojstip.dicionario = {
 		es : "Campo"
 	} ],
 	'ajuda' : [ {
-		pt : 'Digite os par&acirc;metros no formato JSON. Podem ser inseridas mais de uma fun&ccedil;&atilde;o. A fun&ccedil;&atilde;o deve ter o mesmo nome daquela existente no arquivo JS. Exemplo: [{"titulo":"bla bla bla","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["FIPS_CNTRY","LONG_NAME"]}]',
+		pt : 'Digite os par&acirc;metros no formato JSON. Podem ser inseridas mais de uma fun&ccedil;&atilde;o. A fun&ccedil;&atilde;o deve ter o mesmo nome daquela existente no arquivo JS. Exemplo: [{"tipo":"layer","titulo":"teste fake"},{"tipo":"registro","titulo":"bla bla bla","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["FIPS_CNTRY","LONG_NAME"]}]',
 		en : "",
 		es : ""
 	} ],

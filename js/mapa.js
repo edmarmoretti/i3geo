@@ -1093,7 +1093,31 @@ i3GEO.mapa =
 				}
 				for (j = 0; j < ntemas; j += 1) {
 					titulo = temas[j].nome;
-					titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b></div>";
+
+                    //para os nomes de funcoes embutidas
+                    //funcoes sao configuradas no mapfile
+                    //exemplo do METADATA
+                    //"FUNCOESJS" '[{"tipo":"layer","titulo":"teste fake"},{"tipo":"registro","titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["FIPS_CNTRY","LONG_NAME"]}]'
+                    var temp1 = [];
+                    $.each( temas[j].funcoesjs, function( key, value ) {
+                        if(value.tipo == "layer"){
+                            var parametros = [x,y,temas[j].tema];
+                            $.each( value.parametros, function( key1, value1 ) {
+                                parametros.push(ds[s][value1].valor);
+                            });
+                            parametros = "\"" + parametros.join("\",\"") + "\"";
+                            temp1.push("<a class='toolTipBalaoFuncoes' href='javascript:void(0);' onclick='" + value.funcao + "(" + parametros + ")' >" + value.titulo + "</a><br>");
+                            //adiciona o javascript que contem a funcao
+                            if(value.script && value.script != ""){
+                                i3GEO.util.scriptTag(value.script, "", "funcaolayer"+value.funcao, false);
+                            }
+                        }
+                    });
+                    temp1 = temp1.join(" ");
+                    titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b><br>" + temp1 + "</div>";
+
+
+
 					tips = temas[j].resultado.todosItens;
 					ntips = tips.length;
 					ins = "";
@@ -1139,17 +1163,21 @@ i3GEO.mapa =
 								textoTempCompleto += "</div>";
 								//para os nomes de funcoes embutidas
 								//funcoes sao configuradas no mapfile
+								//exemplo do METADATA
+								//"FUNCOESJS" '[{"tipo":"layer","titulo":"teste fake"},{"tipo":"registro","titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["FIPS_CNTRY","LONG_NAME"]}]'
 								var temp1 = [];
 								$.each( temas[j].funcoesjs, function( key, value ) {
-									var parametros = [];
-									$.each( value.parametros, function( key1, value1 ) {
-										parametros.push(ds[s][value1].valor);
-									});
-									parametros = "\"" + parametros.join("\",\"") + "\"";
-									temp1.push("<a class='toolTipBalaoFuncoes' href='javascript:void(0);' onclick='" + value.funcao + "(" + parametros + ")' >" + value.titulo + "</a><br>");
-									//adiciona o javascript que contem a funcao
-									if(value.script && value.script != ""){
-										i3GEO.util.scriptTag(value.script, "", "funcaolayer"+value.funcao, false);
+									if(value.tipo == "registro"){
+    								    var parametros = [x,y,temas[j].tema];
+    									$.each( value.parametros, function( key1, value1 ) {
+    										parametros.push(ds[s][value1].valor);
+    									});
+    									parametros = "\"" + parametros.join("\",\"") + "\"";
+    									temp1.push("<a class='toolTipBalaoFuncoes' href='javascript:void(0);' onclick='" + value.funcao + "(" + parametros + ")' >" + value.titulo + "</a><br>");
+    									//adiciona o javascript que contem a funcao
+    									if(value.script && value.script != ""){
+    										i3GEO.util.scriptTag(value.script, "", "funcaolayer"+value.funcao, false);
+    									}
 									}
 								});
 								temp1 = temp1.join(" ");
