@@ -323,13 +323,15 @@ var i3GEO = {
 		i3GEO.configura.tipoimagem = (c.hasOwnProperty("posRenderType") && c.posRenderType != "") ? c.posRenderType:"nenhum";
 
 		i3GEO.configura.locaplic = (c.hasOwnProperty("i3GeoServer") && c.i3GeoServer != "") ? c.i3GeoServer:i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";
+		//
 		if(c.hasOwnProperty("tools")){
-			i3GEO.configura.ferramentas = c.tools;
+			jQuery.each( c.tools, function(index, value) {
+                i3GEO.configura.ferramentas[index] = c.tools[index];
+            });
 		}
 		if(c.hasOwnProperty("layerOpacity") && c.hasOwnProperty("layerOpacity") != ""){
 			i3GEO.Interface.LAYEROPACITY = c.layerOpacity;
 		}
-
 		i3GEO.Interface.IDCORPO = (c.hasOwnProperty("mapBody") && c.mapBody != "") ? c.mapBody:"mapai3Geo";
 		i3GEO.finalizaAPI = (c.hasOwnProperty("afterStart") && c.afterStart != "") ? c.afterStart:"";
 		if(c.hasOwnProperty("components")){

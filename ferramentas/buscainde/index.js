@@ -43,7 +43,8 @@ Veja as configuracoes de inicializacao em i3GEO.configura.ferramentas.buscainde
 
 */
 i3GEOF.buscainde = {
-	/*
+	csw : "http://www.metadados.inde.gov.br/geonetwork/srv/br",
+    /*
 	Variavel: aguarde
 
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
@@ -59,7 +60,7 @@ i3GEOF.buscainde = {
 	mustacheHash : function() {
 		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.buscainde.dicionario);
 		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["csw"] = i3GEO.configura.ferramentas.buscainde.csw;
+		dicionario["csw"] = i3GEOF.buscainde.csw;
 		return dicionario;
 	},
 	/*
@@ -135,3 +136,10 @@ i3GEOF.buscainde = {
 		i3GEOF.buscainde.inicia(divid);
 	},
 };
+//aplica ao codigo i3GEOF definicoes feitas na interface do mapa
+//isso permite a substituicao de funcoes e parametros
+if(i3GEO.configura.ferramentas.hasOwnProperty("buscainde")){
+  jQuery.each( i3GEO.configura.ferramentas.buscainde, function(index, value) {
+      i3GEOF.buscainde[index] = i3GEO.configura.ferramentas.buscainde[index];
+  });
+}

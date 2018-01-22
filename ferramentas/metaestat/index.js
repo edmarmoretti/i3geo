@@ -96,9 +96,8 @@ i3GEOF.metaestat = {
         },
         //TODO desabilitar em producao
         log: function(t){
-            if (typeof (console) !== 'undefined')
-                console.info(t);
-
+            //if (typeof (console) !== 'undefined')
+            //    console.info(t);
         },
         /**
          * Inicia a ferramenta
@@ -2092,3 +2091,10 @@ i3GEOF.metaestat = {
             }
         }
 };
+//aplica ao codigo i3GEOF definicoes feitas na interface do mapa
+//isso permite a substituicao de funcoes e parametros
+if(i3GEO.configura.ferramentas.hasOwnProperty("metaestat")){
+    jQuery.each( i3GEO.configura.ferramentas.metaestat, function(index, value) {
+        i3GEOF.metaestat[index] = i3GEO.configura.ferramentas.metaestat[index];
+    });
+}

@@ -47,7 +47,6 @@ if (typeof (i3GEOF) === 'undefined') {
  * Classe: i3GEOF.identifica
  *
  */
-
 //TODO na listagem de atributos, incluir opcao para abrir os valores das variaveis associadas a uma regiao, quando codigo_tipo_regiao for
 //diferente de null
 i3GEOF.identifica =

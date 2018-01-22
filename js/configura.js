@@ -142,12 +142,8 @@ i3GEO.configura =
 		 *
 		 * Parametros que sao utilizados para configurar ferramentas especificas
 		 *
-		 * i3GEO.ferramentas.buscainde.csw - endereco do servico csw utilizado na ferramenta de busca de metadados em IDE
 		 */
 		ferramentas: {
-			buscainde : {
-				csw : "http://www.metadados.inde.gov.br/geonetwork/srv/br"
-			},
 			identifica : {
 				resolution : 8 //utilizado em verificaTipDefault (i3GEO.mapa)
 			}

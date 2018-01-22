@@ -95,7 +95,7 @@ i3GEOF.legenda =
 		 * Ultima classe selecionado
 		 */
 		classe : "",
-
+		templateDir : "../ferramentas/legenda",
 		/**
 		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
 		 */
@@ -132,11 +132,7 @@ i3GEOF.legenda =
 		 */
 		inicia : function(iddiv) {
 			if(i3GEOF.legenda.MUSTACHE == ""){
-				if(!i3GEO.configura.ferramentas.legenda || !i3GEO.configura.ferramentas.legenda.templateDir){
-					var d = i3GEO.configura.locaplic + "/ferramentas/legenda";
-				} else {
-					var d = i3GEO.configura.ferramentas.legenda.templateDir;
-				}
+				var d = i3GEOF.legenda.templateDir;
 				var t1 = d + "/template_mst.html",
 				t2 = d + "/templateLista_mst.html",
 				t3 = d + "/templateFormEstilo_mst.html";
@@ -2047,3 +2043,10 @@ i3GEOF.legenda =
 			cp.call(p,"foo",temp);
 		}
 };
+//aplica ao codigo i3GEOF definicoes feitas na interface do mapa
+//isso permite a substituicao de funcoes e parametros
+if(i3GEO.configura.ferramentas.hasOwnProperty("legenda")){
+    jQuery.each( i3GEO.configura.ferramentas.legenda, function(index, value) {
+        i3GEOF.legenda[index] = i3GEO.configura.ferramentas.legenda[index];
+    });
+}

@@ -874,14 +874,12 @@
 									}
 								}
 							},
-							//parametros de configuracao das ferramentas que sao acionadas sob demanda
-							//ferramentas localizadas em i3geo/ferramentas
+							//parametros de configuracao das ferramentas que sao acionadas sob
+							//demanda. Veja em js/ini_i3geo.js e js/configura.js
+							//Algumas ferramentas localizadas em i3geo/ferramentas
+							//permitem que qualquer parametro ou funcao seja sobrescrita
+							//Veja o codigo de cada ferramenta para obter os nomes de parametros e funcoes
 							tools : {
-								//ferramenta de busca de camadas em um servico CSW
-								buscainde : {
-									//endereco do servico no padrao CSW
-									csw : "http://www.metadados.inde.gov.br/geonetwork/srv/br"
-								},
 								//ferramenta de identificacao
 								identifica : {
 									//resolucao em pixels para busca de elementos
@@ -892,7 +890,9 @@
 									//esse eh o local default, colocado aqui para documentacao
 									templateDir : i3GeoUrl
 											+ "/ferramentas/legenda"
-								}
+								},
+								metaestat : {},
+								buscainde : {}
 							},
 							//configuracoes especificas para a interface que utiliza o OpenLayers
 							openLayers : {
