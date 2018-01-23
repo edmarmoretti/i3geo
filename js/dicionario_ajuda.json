@@ -1373,7 +1373,7 @@
 			},
 			"diretorio":"i3geo/ferramentas/tme",
 			"categoria":"5",
-			"pt":"Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes <a href='http://thematicmapping.org/' target=_blank >aqui</a>.<br>Os par&acirc;metros utilizaados nessa ferramenta podem ser armazenados (por usu&aacute;rios cadastrados) no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos. As op&ccedil;&otilde;es que possibilitam isso s&atilde;o mostradas apenas quando o usu&aacute;rio estiver logado.",
+			"pt":"Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes <a href='http://thematicmapping.org/' target=_blank >aqui</a>.<br>Os par&acirc;metros utilizados nessa ferramenta podem ser armazenados (por usu&aacute;rios cadastrados) no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos. As op&ccedil;&otilde;es que possibilitam isso s&atilde;o mostradas apenas quando o usu&aacute;rio estiver logado.",
 			"es": "Crea un archivo en formato KML que representa como entidades en 3d los datos de una columna de la tabla de atributos. M&aacute;s detalles <a href='http://thematicmapping.org/' target=_blank >aqu&iacute;</a>.<br>Los par&aacute;metros utilizados en esta herramienta pueden ser almacenados (por usuarios registrados) en el mapfile correspondiente al tema. Cuando se hace esto, la herramienta se abre con los par&aacute;metros predefinidos. Las opciones que permiten hacer esto solo se muestran cuando el usuario ha iniciado sesi&oacute;n.",
 			"en": "It creates a file in KML format that shows as 3D features data of a column of the attribute table. More details <a href='http://thematicmapping.org/' target=_blank>here</a>.<br>Parameters used for this tool can be stored (by registered users) in the mapfile corresponding to the theme. When you have done so, the tool will be open with predefined parameters. The options that allow you to do this will be only displayed when the user is logged in.",
 			"apijs":"i3GEO.tema.dialogo.tme()"
@@ -1686,6 +1686,19 @@
 			"diretorio":"i3geo/ferramentas/funcaojstip",
 			"categoria":"5",
 			"pt": "Quando o usu&aacute;rio clica no mapa &eacute; mostrado uma etiqueta com informa&ccedil;&otilde;es. Essa etiqueta apresenta os dados obtidos da tabela de atributos das camadas e pode tamb&eacute;m mostrar links para fun&ccedil;&otilde;es especiais, que executam programas Javascript. Essas fun&ccedil;&otilde;es s&atilde;o definidas em cada camada por meio do sistema de administra&ccedil;&atilde;o e ficam armazenadas como uma string no formato JSON no METADATA chamado FUNCOESJS. Esse JSON cont&eacute;m os elementos tipo (se for layer o link para a fun&ccedil;&atilde;o ficar&aacute; no n&iacute;vel do tema e se for registro ficar&aacute; no n&iacute;vel do registro),titulo (nome que ser&aacute; mostrado na etiqueta), script (endere&ccedil;o do javascript que ser&aacute; inclu&iacute;do no mapa e que cont&eacute;m a fun&ccedil;&atilde;o que ser&aacute; executada), funcao (nome da fun&ccedil;&atilde;o que ser&aacute; executada), parametros (lista de nomes de colunas cujos valores ser&atilde;o enviadas como par&acirc;metros da fun&ccedil;&atilde;o)",
+			"es": "",
+			"en": "",
+			"apijs":""
+		},
+		"133": {
+			"titulo": {
+				"pt": "Storymap",
+				"es": "Storymap",
+				"en": "Storymap"
+			},
+			"diretorio":"i3geo/ferramentas/storymap",
+			"categoria":"5",
+			"pt": "Permite a cria&ccedil;&atilde;o de uma p&aacute;gina no formato de uma 'Storymap', ou seja, um mapa que permite a navega&ccedil;&atilde;o por seus elementos de modo interativo na forma de uma hist&oacute;ria. &Eacute; poss&iacute;vel configurar sua hist&oacute;ria para utilizar elementos da pr&oacute;pria camada como textos ou ainda incluir links para p&aacute;ginas externas como v&iacute;deos e fotos.<br>Os par&acirc;metros utilizados nessa ferramenta podem ser armazenados (por usu&aacute;rios cadastrados) no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos.",
 			"es": "",
 			"en": "",
 			"apijs":""

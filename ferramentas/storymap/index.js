@@ -244,7 +244,7 @@ i3GEOF.storymap =
 				"",
 				"",
 				"",
-				"108"
+				"133"
 			);
 			divid = janela[2].id;
 			i3GEOF.storymap.aguarde = $i("i3GEOF.storymap_imagemCabecalho").style;
