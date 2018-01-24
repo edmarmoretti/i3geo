@@ -1030,7 +1030,7 @@ i3GEO.pluginI3geo =
 						 return;
 					 }
 					 var linhas=[],temp,mustache, n, i, parametros, ins = "", configDefault =
-						 '{"plugin":"parametrossql","ativo":"sim","parametros":[{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""}]}';
+						 '{"plugin":"parametrossql","ativo":"sim","janela":{"w":"300px","h":"400px"},"parametros":[{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""},{"titulo":"","tipo":"input","valores":[],"chave":"","prog":""}]}';
 					 if (config === "") {
 						 config = configDefault;
 					 }
@@ -1047,6 +1047,10 @@ i3GEO.pluginI3geo =
 						 config.ativoSim = "";
 						 config.ativoNao = "selected";
 					 }
+					 //parametros da janela
+					 if (config.janela == undefined) {
+                         config.janela = JSON.parse(configDefault).janela;
+                     }
 					 for (i = 0; i < n; i++) {
 						 temp = {};
 						 temp.titulo = parametros[i].titulo;
@@ -1063,7 +1067,9 @@ i3GEO.pluginI3geo =
 							 "sim": config.sim,
 							 "nao": config.nao,
 							 "salvaPlugin": salva,
-							 "removePlugin": remove
+							 "removePlugin": remove,
+							 "janelaw": config.janela.w,
+							 "janelah": config.janela.h
 					 };
 					 ins = Mustache.render(
 							 i3GEO.template.parametrossql,
@@ -1082,9 +1088,8 @@ i3GEO.pluginI3geo =
 				 },
 				 // pega os valores do formulario quando e aberto no sistema de
 				 // administracao
-
 				 parametrosFormAdmin : function(onde) {
-					 var campo = 0, nlinhas = 4, ncampos = 5, campos = onde.getElementsByTagName("input"), par = [], temp = [], i, j;
+					 var janela, campo = 0, nlinhas = 4, ncampos = 5, campos = onde.getElementsByTagName("input"), par = [], temp = [], i, j;
 					 for (j = 0; j < nlinhas; j++) {
 						 temp = [];
 						 for (i = 0; i < ncampos; i++) {
@@ -1095,7 +1100,9 @@ i3GEO.pluginI3geo =
 						 }
 						 par.push("{" + temp.join(",") + "}");
 					 }
-					 return '{"plugin":"parametrossql","ativo":"' + $i("parametrosSqlAtivo").value + '","parametros":[' + par.join(",") + ']}';
+					 //parametros de confiuracao da janela
+					 janela = '{"w":"' + $i("parametrosSqljanelaw").value + '","h":"' + $i("parametrosSqljanelah").value + '"}';
+					 return '{"plugin":"parametrossql","ativo":"' + $i("parametrosSqlAtivo").value + '","janela":' + janela + ',"parametros":[' + par.join(",") + ']}';
 				 },
 				 /**
 				  * Constroi um icone que sera adicionado na barra de icones do tema quando for adicionado na arvore de camadas Esse icone e

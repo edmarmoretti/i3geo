@@ -24,6 +24,7 @@ session_write_close();
 <title>i3GEO - OpenLayers</title>
 <script src="../pacotes/ol4/ol.js"></script>
 <script src="../js/i3geo.js"></script>
+<script src="js/core.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
