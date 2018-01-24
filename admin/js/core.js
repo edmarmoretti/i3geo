@@ -374,7 +374,19 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 				);
 			}
 		}
-		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel("janela_editor", { fixedcenter:"contained",close:true,width:w, overflow:"auto",modal: modal,visible:false,constraintoviewport:true } );
+		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel(
+		        "janela_editor",
+		        {
+		            fixedcenter:"contained",
+		            close:true,
+		            width:w,
+		            overflow:"auto",
+		            modal: modal,
+		            visible:false,
+		            constraintoviewport:true,
+		            strings: {close: "<span class='material-icons'>cancel</span>"}
+		            }
+		        );
 		YAHOO.admin.container.panelEditor.render();
 	}
 	else
