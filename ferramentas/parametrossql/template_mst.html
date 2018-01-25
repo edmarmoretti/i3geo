@@ -1,11 +1,10 @@
 <div class='container-fluid'>
-	<div id='i3GEOFparametrosSQLForm'></div>
-	<div class='checkbox text-left {{novaCamada}}'>
-        <label>
-            <input id='i3GEOFparametrosSQLnova' type='checkbox' >
-            <span class='checkbox-material noprint'>
-            <span class='check'></span></span> {{{nova}}}
-        </label>
-    </div>
-    <button onclick="i3GEOF.parametrossql.aplicar('{{{camada}}}')" class='btn btn-primary btn-sm btn-raised'>{{{aplicar}}}</button>
+    <form style="" action="#" onsubmit="i3GEOF.parametrossql.aplicar('{{{camada}}}');return false;" class="form-horizontal" role="form" method="post">
+        <div id='i3GEOFparametrosSQLForm'></div>
+        <div class='checkbox text-left {{novaCamada}}'>
+            <label> <input id='i3GEOFparametrosSQLnova' type='checkbox'> <span class='checkbox-material noprint'> <span class='check'></span></span> {{{nova}}}
+            </label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-sm btn-raised" role="button">{{{aplicar}}}</button>
+    </form>
 </div>
