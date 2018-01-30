@@ -282,6 +282,9 @@ i3GEOF.parametrossql = {
                             }
                             ins += "class='form-control' data-titulo='" + p.titulo + "' name='"+p.chave+"' >";
                             l = p.valores.split(",");
+                            if(!p.nomes || p.nomes == undefined ){
+                                p.nomes = p.valores;
+                            }
                             nm = p.nomes.split(",");
                             nj = l.length;
                             if(nj != nm.length){
