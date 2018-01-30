@@ -86,7 +86,7 @@ i3GEOF.linhadotempo = {
 			i3GEO.janela.minimiza("i3GEOF.linhadotempo");
 		};
 		//cria a janela flutuante
-		titulo = "</div><div class='i3GeoTituloJanelaBs'>" + $trad("opt",i3GEOF.linhadotempo.dicionario)+"</div>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("opt",i3GEOF.linhadotempo.dicionario)+"</span></div>";
 		janela = i3GEO.janela.cria(
 			"400px",
 			"500px",
@@ -98,7 +98,14 @@ i3GEOF.linhadotempo = {
 			false,
 			"hd",
 			cabecalho,
-			minimiza
+			minimiza,
+            "",
+            true,
+            "",
+            "",
+            "",
+            "",
+            "88"
 		);
 		divid = janela[2].id;
 		$i("i3GEOF.linhadotempo_corpo").style.backgroundColor = "white";

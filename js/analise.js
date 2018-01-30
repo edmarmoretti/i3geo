@@ -150,16 +150,21 @@ i3GEO.analise =
 					i3GEO.configura.locaplic + "/ferramentas/linhadotempo/index.php",
 					"",
 					"",
-					"</div><a class='i3GeoTituloJanelaBs' target=_blank href='" + i3GEO.configura.locaplic
-						+ "/ajuda_usuario.php?idcategoria=3&idajuda=88' >Linha do tempo</a>",
-					"i3GEOF.linhaDoTempo",
+					"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d30") + "</span></div>",
+					"i3GEOFlinhaDoTempo",
 					false,
 					"hd",
 					"",
 					"",
 					"",
 					true,
-					i3GEO.configura.locaplic + "/imagens/oxygen/16x16/clock.png");
+		            "",
+		            "",
+		            "",
+		            "",
+		            "88"
+				);
+
 				i3GEO.analise.atualizaLinhaDoTempo =
 					function() {
 						var doc = "", ifr = "";
