@@ -3373,6 +3373,27 @@ i3GEO.util =
 					document.body.removeChild(textarea);
 				}
 			}
+		},
+	     /**
+         * Function: getFormData
+         *
+         * Serializa os elementos de um formulario
+         *
+         * Exemplo: i3GEO.util.getFormData('#some-form')
+         *
+         * Parametres:
+         *
+         * {dom}
+         */
+		getFormData: function(dom_query){
+		    var out = {};
+		    var s_data = $(dom_query).serializeArray();
+		    //transform into simple data/value object
+		    for(var i = 0; i<s_data.length; i++){
+		        var record = s_data[i];
+		        out[record.name] = record.value;
+		    }
+		    return out;
 		}
 };
 
