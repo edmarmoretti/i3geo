@@ -127,6 +127,9 @@ Botoes material
 .material-icons.md-18 {
 	font-size: 18px;
 }
+.material-icons.md-light {
+	color: rgba(255, 255, 255, 1);
+}
 .btn.btn-fab.btn-fab-mini {
 	font-size: 12px;
 	height: 28px;

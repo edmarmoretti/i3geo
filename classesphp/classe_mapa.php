@@ -280,7 +280,8 @@ class Mapa
 				"offsite",
 				"numclasses",
 				"id_medida_variavel",
-				"codigo_tipo_regiao"
+				"codigo_tipo_regiao",
+		        "utfgrid"
 		);
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
@@ -455,6 +456,11 @@ class Mapa
 					}
 					$ferramentas["tme"] = json_decode($f);
 				}
+				//utfgrid
+				$utfgrid = "nao";
+				if($oLayer->getmetadata("UTFITEM") != "" || $oLayer->getmetadata("UTFDATA") != ""){
+				    $utfgrid = "sim";
+				}
 				//storymap
 				if($oLayer->getmetadata("storymap") != ""){
 					$f = $oLayer->getmetadata("storymap");
@@ -518,7 +524,8 @@ class Mapa
 						$oLayer->offsite->red.",".$oLayer->offsite->green.",".$oLayer->offsite->blue,
 						$oLayer->numclasses,
 						$oLayer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"),
-						$oLayer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO")
+						$oLayer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"),
+				        $utfgrid
 				);
 			}
 		}

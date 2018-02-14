@@ -71,6 +71,7 @@ if (isset($_GET["tms"])) {
     $_GET["WIDTH"] = 256;
     $_GET["HEIGHT"] = 256;
     $temp = explode("/", $_GET["tms"]);
+    //var_dump($temp);exit;
     $z = $temp[2];
     $x = $temp[3];
     $y = str_replace(".png", "", $temp[4]);
@@ -83,7 +84,7 @@ if (isset($_GET["tms"])) {
     $lat2 = ($y + 1) / $n * 180.0 - 90;
     $_GET["BBOX"] = $lon1 . " " . $lat1 . " " . $lon2 . " " . $lat2;
 }
-
+//echo $_GET["BBOX"];exit;
 // para o caso da versao 3 do OpenLayers
 if (isset($_GET["X"]) && ! ($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature")) {
     $box = str_replace(" ", ",", $_GET["BBOX"]);
@@ -112,6 +113,7 @@ if (isset($_GET["TileMatrix"])) {
         $res[] = $temp;
         $temp = $temp / 2;
     }
+
     $_GET["tms"] = "/wmts/" . $_GET["layer"] . "/" . $z . "/" . $x . "/" . $y . ".png";
     if ($z . "/" . $x . "/" . $y == "0/0/0" || $x == - 1 || $y == - 1) {
         return;
@@ -189,7 +191,13 @@ for ($i = 0; $i < $numlayers; ++ $i) {
     $layerName = $l->name;
     if ($layerName != $_GET["layer"]) {
         $l->set("status", MS_OFF);
+    } else {
+        if($l->getmetadata("UTFITEM") != "" || $l->getmetadata("UTFDATA") != ""){
+            include("mapa_utfgrid.php");
+            exit;
+        }
     }
+
     // no caso de haver uma mascara definida no layer
     if (ms_GetVersionInt() >= 60200) {
         if ($l->mask != "") {
@@ -331,17 +339,13 @@ if (isset($_GET["REQUEST"])) {
 }
 $o = $mapa->outputformat;
 $o->set("imagemode", MS_IMAGEMODE_RGBA);
+$o->set("transparent", MS_TRUE);
 $legenda = $mapa->legend;
 $legenda->set("status", MS_OFF);
 $escala = $mapa->scalebar;
 $escala->set("status", MS_OFF);
 
-//
-// se o layer nao for do tipo fundo
-//
-// if ($_GET["tipolayer"] != "fundo") {
-$o->set("transparent", MS_TRUE);
-// }
+
 
 //
 // se o layer foi marcado para corte altera os parametros para ampliar o mapa
