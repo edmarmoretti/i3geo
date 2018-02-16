@@ -1,0 +1,14 @@
+O arquivo ol.js foi modificado para o i3Geo
+- correção no utfgrid
+
+ol.source.TileUTFGrid = function(options) {
+  //alteracao feita para o i3Geo
+  ol.source.Tile.call(this, {
+    projection: options.projection,
+    //projection: ol.proj.get('EPSG:3857'),
+    state: ol.source.State.LOADING
+  });
+  
+O compilado também foi corrigido:
+
+function ex(a){pw.call(this,{projection:a.projection,state:"loading"});

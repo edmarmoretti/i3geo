@@ -1279,32 +1279,33 @@ i3GEO.Interface =
                                     }
                                     urllayer += "&layer=" + camada.name;
                                     if(camada.utfgrid == "sim"){
-                                        source = new ol.source.TileUTFGrid({
-                                            tileJSON: {
-                                                "tilejson": "2.1.0",
-                                                "grids": [
-                                                    urllayer+"&tms=//{z}/{x}/{y}"
-                                                ]
-                                              }
-                                        });
-
-
-
-                                        /*
-                                        source = new ol.source.TileUTFGrid({
-                                            url : urllayer,
-                                            matrixSet : opcoes.projection,
-                                            format : 'image/png',
-                                            projection : opcoes.projection,
-                                            tileGrid : new ol.tilegrid.WMTS({
-                                                origin : ol.extent.getTopLeft(projectionExtent),
-                                                resolutions : resolutions,
-                                                matrixIds : matrixIds
-                                            }),
-                                            wrapX : true
-                                        });
-                                        */
-
+                                        if(i3GEO.Interface.openlayers.googleLike === false){
+                                            source = new ol.source.TileUTFGrid({
+                                                projection : opcoes.projection,
+                                                wrapX : true,
+                                                tileJSON: {
+                                                    "tilejson": "2.1.0",
+                                                    "scheme": "xyz",
+                                                    //"scheme": "tms",
+                                                    "grids": [
+                                                        urllayer+"&tms=&TileCol={x}&TileRow={y}&TileMatrix={z}"
+                                                    ]
+                                                  }
+                                            });
+                                        } else {
+                                            source = new ol.source.TileUTFGrid({
+                                                projection : opcoes.projection,
+                                                wrapX : true,
+                                                tileJSON: {
+                                                    "tilejson": "2.1.0",
+                                                    "scheme": "xyz",
+                                                    //"scheme": "tms",
+                                                    "grids": [
+                                                        urllayer+"&tms=&X={x}&Y={y}&Z={z}"
+                                                    ]
+                                                  }
+                                            });
+                                        }
                                         var displayCountryInfo = function(coordinate) {
                                             var viewResolution = /** @type {number} */ (i3geoOL.getView().getResolution());
                                             var source = i3geoOL.getLayersBy("name","mundoutfgrid")[0].getSource();

@@ -1,64 +1,42 @@
 <?php
 for ($i = 0; $i < $numlayers; ++ $i) {
     $l = $mapa->getLayer($i);
-    $layerName = $l->name;
-    if ($layerName != $_GET["layer"]) {
-        $l->set("status", MS_OFF);
-    } else {
-        $l->set("status", MS_DEFAULT);
-        $l->setmetadata("WMS_INCLUDE_ITEMS", "all");
-        if($l->getmetadata("UTFITEM") != ""){
-            $l->updateFromString("LAYER UTFITEM '" . $l->getmetadata("UTFITEM") . "' END");
-        }
-        if($l->getmetadata("UTFDATA") != ""){
-            $l->updateFromString("LAYER UTFDATA '" . $l->getmetadata("UTFDATA") . "' END");
-        }
-    }
+    $l->set("status", MS_OFF);
 }
-
-if ($_GET["layer"] == "") {
-    $cache = true;
+$l = $mapa->getLayerbyname($_GET["layer"]);
+$l->set("status", MS_DEFAULT);
+$l->setmetadata("WMS_INCLUDE_ITEMS", "all");
+if ($l->getmetadata("UTFITEM") != "") {
+    $l->updateFromString("LAYER UTFITEM '" . $l->getmetadata("UTFITEM") . "' END");
 }
-if (($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim")) {
-    $cache = false;
-} elseif ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
-    $cache = false;
+if ($l->getmetadata("UTFDATA") != "") {
+    $l->updateFromString("LAYER UTFDATA '" . $l->getmetadata("UTFDATA") . "' END");
 }
-
 if ($cache == true && $_GET["cache"] != "nao") {
-    carregaCacheImagemUtfGrid($cachedir, $_SESSION["map_file"], $_GET["tms"]);
+    // carregaCacheImagemUtfGrid($cachedir, $_SESSION["map_file"], $_GET["tms"]);
 }
 $mapa->selectOutputFormat("utfgrid");
-
 ms_ioinstallstdouttobuffer();
 $req = ms_newowsrequestobj();
-
-$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
-foreach ($_GET as $k=>$v){
+$_GET["BBOX"] = str_replace(" ", ",", $_GET["BBOX"]);
+foreach ($_GET as $k => $v) {
     $req->setParameter(strtoupper($k), $v);
 }
 $req->setParameter("REQUEST", "GetMap");
 $req->setParameter("SERVICE", "WMS");
-$req->setParameter("VERSION","1.1.1");
-$req->setParameter("SRS","EPSG:4326");
-$req->setParameter("LAYERS",$_GET["layer"]);
-$req->setParameter("FORMAT","application/json");
-
-/*
-for($i=0;$i < $req->numparams;$i++){
-    echo $req->getName($i)." ".$req->getValue($i)."<br>";
-}
-exit;
-*/
+$req->setParameter("VERSION", "1.1.1");
+$req->setParameter("LAYERS", $_GET["layer"]);
+$req->setParameter("FORMAT", "application/json");
 $mapa->owsdispatch($req);
 ob_clean();
 ms_iostripstdoutbuffercontentheaders();
 header("Content-type: application/json; subtype=json");
 ms_iogetStdoutBufferBytes();
-//ms_iogetstdoutbufferstring();
 ms_ioresethandlers();
+exit();
 
-exit;
+
+
 
 
 // nao usa o cache pois e necessario processar a imagem com alguma rotina de filtro
@@ -80,8 +58,8 @@ if ($cache == true && $_GET["cache"] != "nao") {
         // corta a imagem gerada para voltar ao tamanho normal
         //
         $img = imagecreatefrompng($nomer);
-            imagealphablending($img, false);
-            imagesavealpha($img, true);
+        imagealphablending($img, false);
+        imagesavealpha($img, true);
         cabecalhoImagem($nomer);
         imagepng($img);
         imagedestroy($img);
@@ -158,7 +136,6 @@ function salvaCacheImagemUtfGrid($cachedir, $map, $tms)
 
 function carregaCacheImagemUtfGrid($cachedir, $map, $tms, $i3georendermode = 0)
 {
-
     if ($cachedir == "") {
         $nome = dirname(dirname($map)) . "/cache" . $tms;
     } else {

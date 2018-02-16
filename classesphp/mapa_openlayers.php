@@ -99,7 +99,6 @@ if (isset($_GET["X"]) && ! ($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUE
     $_GET["HEIGHT"] = 256;
     $_GET["tms"] = "/" . $_GET["layer"] . "/" . $z . "/" . $x . "/" . $y . ".png";
 }
-
 if (isset($_GET["TileMatrix"])) {
     $_GET["WIDTH"] = 256;
     $_GET["HEIGHT"] = 256;
@@ -131,7 +130,6 @@ if (isset($_GET["TileMatrix"])) {
 
     $_GET["BBOX"] = $lon1 . " " . $lat1 . " " . $lon2 . " " . $lat2;
 }
-
 $map_fileX = $_SESSION["map_file"];
 //
 // verifica se o request e OGC
@@ -191,13 +189,7 @@ for ($i = 0; $i < $numlayers; ++ $i) {
     $layerName = $l->name;
     if ($layerName != $_GET["layer"]) {
         $l->set("status", MS_OFF);
-    } else {
-        if($l->getmetadata("UTFITEM") != "" || $l->getmetadata("UTFDATA") != ""){
-            include("mapa_utfgrid.php");
-            exit;
-        }
     }
-
     // no caso de haver uma mascara definida no layer
     if (ms_GetVersionInt() >= 60200) {
         if ($l->mask != "") {
@@ -280,7 +272,14 @@ for ($i = 0; $i < $numlayers; ++ $i) {
             }
         }
     }
+    if ($layerName == $_GET["layer"] && ($l->getmetadata("UTFITEM") != "" || $l->getmetadata("UTFDATA") != "")) {
+        $_GET["SRS"] = "EPSG:4326";
+        $mapa->setProjection("proj=latlong,a=6378137,b=6378137");
+        include ("mapa_utfgrid.php");
+        exit();
+    }
 }
+
 if (! function_exists('imagepng')) {
     $_GET["TIPOIMAGEM"] = "";
 }

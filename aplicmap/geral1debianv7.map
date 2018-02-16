@@ -217,8 +217,6 @@ MAP
 	#		"UTFDATA" "{\"CNTRY_NAME\":\"[CNTRY_NAME]\"}"
 	#	END
 	#	NAME "mundoutfgrid"
-	#	#UTFDATA   "{\'CNTRY_NAME\':\'[CNTRY_NAME]\'}"
-	#	#UTFITEM   "FIPS_CNTRY"
 	#	STATUS OFF
 	#	TEMPLATE "none.htm"
 	#	TYPE POLYGON
