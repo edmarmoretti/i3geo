@@ -1770,8 +1770,10 @@ i3GEO.Interface =
                                             if(data){
                                                 i3GEO.Interface.INFOOVERLAY.getElement().innerHTML += "<span style='display:block;'>" + data.text + "<span>";
                                                 i3GEO.Interface.INFOOVERLAY.setPosition(e.coordinate);
+                                                i3GEO.eventos.mouseOverData();
                                             } else {
                                                 i3GEO.Interface.INFOOVERLAY.setPosition(undefined);
+                                                i3GEO.eventos.mouseOutData();
                                             }
                                         }
                                 );
