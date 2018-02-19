@@ -149,10 +149,13 @@ if (isset($_GET["REQUEST"])) {
         $_GET["DESLIGACACHE"] = "sim";
     }
 }
-if ($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim") {
-    carregaCacheImagem($_SESSION["cachedir"], $_SESSION["map_file"], $_GET["tms"], $_SESSION["i3georendermode"]);
+//FORMAT pode ser utfgrid
+if(!isset($_GET["FORMAT"])){
+    $_GET["FORMAT"] = "";
 }
-
+if ($qy == false && $_GET["cache"] == "sim" && $_GET["DESLIGACACHE"] != "sim") {
+    carregaCacheImagem($_SESSION["cachedir"], $_SESSION["map_file"], $_GET["tms"], $_SESSION["i3georendermode"], $_GET["FORMAT"]);
+}
 //
 // map_fileX e para o caso register_globals = On no PHP.INI
 //
@@ -272,7 +275,7 @@ for ($i = 0; $i < $numlayers; ++ $i) {
             }
         }
     }
-    if ($layerName == $_GET["layer"] && ($l->getmetadata("UTFITEM") != "" || $l->getmetadata("UTFDATA") != "")) {
+    if ($layerName == $_GET["layer"] && ($_GET["FORMAT"] == "utfgrid")) {
         $_GET["SRS"] = "EPSG:4326";
         $mapa->setProjection("proj=latlong,a=6378137,b=6378137");
         include ("mapa_utfgrid.php");
@@ -343,9 +346,6 @@ $legenda = $mapa->legend;
 $legenda->set("status", MS_OFF);
 $escala = $mapa->scalebar;
 $escala->set("status", MS_OFF);
-
-
-
 //
 // se o layer foi marcado para corte altera os parametros para ampliar o mapa
 // antes de gerar a imagem
@@ -361,7 +361,6 @@ if ($cortePixels > 0) {
     $ponto->setxy(($wh / 2), ($wh / 2));
     $mapa->zoomScale($escalaInicial, $ponto, $wh, $wh, $extensaoInicial);
 }
-
 // se nao houver selecao
 if ($qy != true) {
     $img = $mapa->draw();
@@ -482,8 +481,7 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
         }
     }
 }
-
-function cabecalhoImagem($nome)
+function cabecalhoImagem($nome,$tipo="image/png")
 {
     if (ob_get_contents()) {
         ob_clean();
@@ -493,7 +491,7 @@ function cabecalhoImagem($nome)
     header("Last-Modified: " . gmdate("D, d M Y H:i:s", $lastModified) . " GMT");
     // make sure caching is turned on
     header('Cache-Control: public,max-age=86400'); // 24 horas
-    header("Content-type: image/png");
+    header("Content-type: " . $tipo);
     header("Etag: " . md5($nome));
     // check if page has changed. If not, send 304 and exit
     if (array_key_exists('HTTP_IF_MODIFIED_SINCE', $_SERVER)) {
@@ -520,7 +518,7 @@ function salvaCacheImagem($cachedir, $map, $tms)
             @mkdir(dirname($nome), 0744, true);
             chmod(dirname($nome), 0744);
         }
-        error_log("salvando imagem");
+        //error_log("salvando imagem");
         $img->saveImage($nome);
         //
         // corta a imagem gerada para voltar ao tamanho normal
@@ -533,16 +531,22 @@ function salvaCacheImagem($cachedir, $map, $tms)
     return $nome;
 }
 
-function carregaCacheImagem($cachedir, $map, $tms, $i3georendermode = 0)
+function carregaCacheImagem($cachedir, $map, $tms, $i3georendermode = 0, $format = "")
 {
     if ($cachedir == "") {
         $nome = dirname(dirname($map)) . "/cache" . $tms;
     } else {
         $nome = $cachedir . $tms;
     }
-    $nome = str_replace(".png","",$nome) . ".png";
+    if($format == "utfgrid"){
+        $nome = str_replace(".png","",$nome) . ".json";
+        $tipo = "application/json; subtype=json";
+    } else {
+        $nome = str_replace(".png","",$nome) . ".png";
+        $tipo = "image/png";
+    }
     if (file_exists($nome)) {
-        cabecalhoImagem($nome);
+        cabecalhoImagem($nome,$tipo);
         if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
             readfile($nome);
         } else {

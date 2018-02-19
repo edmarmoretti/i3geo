@@ -212,6 +212,9 @@ i3GEO.arvoreDeCamadas =
 			//else {
 			//    return;
 			//}
+			if (typeof (console) !== 'undefined')
+                console.info("Indexando CAMADAS e ARVOREDECAMADAS");
+
 
 			i3GEO.arvoreDeCamadas.CAMADAS = temas;
 			i3GEO.arvoreDeCamadas.CAMADASINDEXADAS = [];
@@ -1045,8 +1048,16 @@ i3GEO.arvoreDeCamadas =
 		 * Guarda um objeto contendo as definicoes das camadas conforme o padrao utilizado pela arvore de camadas
 		 */
 		 registaCamadas : function(obj) {
-			 obj = i3GEO.arvoreDeCamadas.converteChaveValor2normal(obj);
+		     if (typeof (console) !== 'undefined')
+	                console.info("i3GEO.arvoreDeCamadas.registaCamadas()");
+
+		     var i;
+		     obj = i3GEO.arvoreDeCamadas.converteChaveValor2normal(obj);
 			 i3GEO.arvoreDeCamadas.CAMADAS = obj;
+			 i3GEO.arvoreDeCamadas.CAMADASINDEXADAS = [];
+			 $.each( i3GEO.arvoreDeCamadas.CAMADAS, function( i,tema ) {
+			     i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[tema.name] = tema;
+			 });
 		 },
 		 /**
 		  * Section: i3GEO.arvoreDeCamadas.dialogo

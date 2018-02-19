@@ -241,7 +241,7 @@ for ($i = 0; $i < $numlayers; ++ $i) {
             }
         }
     }
-    if ($layerName == $_GET["layer"] && ($l->getmetadata("UTFITEM") != "" || $l->getmetadata("UTFDATA") != "")) {
+    if ($layerName == $_GET["layer"] && ($_GET["FORMAT"] == "utfgrid")) {
         $_GET["SRS"] = "EPSG:3857";
         include ("mapa_utfgrid.php");
         exit();
@@ -457,7 +457,7 @@ if (trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum") {
     exit();
 }
 
-function cabecalhoImagem($nome)
+function cabecalhoImagem($nome,$tipo="image/png")
 {
     if (ob_get_contents()) {
         ob_clean();
@@ -467,7 +467,7 @@ function cabecalhoImagem($nome)
     header("Last-Modified: " . gmdate("D, d M Y H:i:s", $lastModified) . " GMT");
     // make sure caching is turned on
     header('Cache-Control: public,max-age=86400'); // 24 horas
-    header("Content-type: image/png");
+    header("Content-type: " . $tipo);
     header("Etag: " . md5($nome));
     // check if page has changed. If not, send 304 and exit
     if (array_key_exists('HTTP_IF_MODIFIED_SINCE', $_SERVER)) {
@@ -518,9 +518,15 @@ function carregaCacheImagem()
         $cachedir = dirname(dirname($map_fileX)) . "/cache";
     }
     $c = $cachedir . "/googlemaps/$layer/$z/$x";
-    $nome = $c . "/$y.png";
+    if($_GET["FORMAT"] == "utfgrid"){
+        $nome = $c . "/$y.json";
+        $tipo = "application/json; subtype=json";
+    } else {
+        $nome = $c . "/$y.png";
+        $tipo = "image/png";
+    }
     if (file_exists($nome)) {
-        cabecalhoImagem($nome);
+        cabecalhoImagem($nome,$tipo);
         if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
             readfile($nome);
         } else {

@@ -4,16 +4,28 @@ for ($i = 0; $i < $numlayers; ++ $i) {
     $l->set("status", MS_OFF);
 }
 $l = $mapa->getLayerbyname($_GET["layer"]);
+//a classe deve ter uma cor
+if($l->type == MS_LAYER_POLYGON){
+    $numclasses = $l->numclasses;
+    if ($numclasses > 0) {
+        for ($i = 0; $i < $numclasses; ++ $i) {
+            $classe = $l->getClass($i);
+            $estilo = $classe->getstyle(0);
+            $ncor = $estilo->color;
+            $ncor->setrgb(255, 255, 255);
+        }
+    }
+}
 $l->set("status", MS_DEFAULT);
 $l->setmetadata("WMS_INCLUDE_ITEMS", "all");
 if ($l->getmetadata("UTFITEM") != "") {
-    $l->updateFromString("LAYER UTFITEM '" . $l->getmetadata("UTFITEM") . "' END");
+    $temp = "{\"text\":\"" . $l->getmetadata("UTFITEM") . "\"}";
+    $l->updateFromString("LAYER UTFITEM '" . $temp . "' END");
 }
 if ($l->getmetadata("UTFDATA") != "") {
-    $l->updateFromString("LAYER UTFDATA '" . $l->getmetadata("UTFDATA") . "' END");
-}
-if ($cache == true && $_GET["cache"] != "nao") {
-    // carregaCacheImagemUtfGrid($cachedir, $_SESSION["map_file"], $_GET["tms"]);
+    //"UTFDATA" "{\"text\":\"[FIPS_CNTRY]\"}"
+    $temp = "{\"text\":\"[" . $l->getmetadata("UTFDATA") . "]\"}";
+    $l->updateFromString("LAYER UTFDATA '" . $temp . "' END");
 }
 $mapa->selectOutputFormat("utfgrid");
 ms_ioinstallstdouttobuffer();
@@ -28,128 +40,38 @@ $req->setParameter("VERSION", "1.1.1");
 $req->setParameter("LAYERS", $_GET["layer"]);
 $req->setParameter("FORMAT", "application/json");
 $mapa->owsdispatch($req);
+//salva em disco para cache
+if ($cache == true && $_GET["cache"] != "nao") {
+    //caso EPSG:4326
+    if($_GET["SRS"] == "EPSG:4326"){
+        if ($_SESSION["cachedir"] == "") {
+            $nome = dirname(dirname($_SESSION["map_file"])) . "/cache" . $_GET["tms"];
+        } else {
+            $nome = $_SESSION["cachedir"] . $_GET["tms"];
+        }
+    } else {
+        if ($_SESSION["cachedir"] == "") {
+            $nome = dirname(dirname($_SESSION["map_file"])) . "/cache" . "/googlemaps/".$_GET["layer"]."/$z/$x/$y";
+        } else {
+            $nome = $_SESSION["cachedir"] . "/googlemaps/".$_GET["layer"]."/$z/$x/$y";
+        }
+    }
+    $nome = str_replace([".json",".png"], "", $nome);
+    $nome = $nome . ".json";
+    if (! file_exists($nome)) {
+        if (! file_exists(dirname($nome))) {
+            @mkdir(dirname($nome), 0744, true);
+            chmod(dirname($nome), 0744);
+        }
+        ms_iostripstdoutbuffercontenttype();
+        file_put_contents($nome,ms_iogetstdoutbufferstring());
+        chmod($nome, 0744);
+    }
+}
 ob_clean();
 ms_iostripstdoutbuffercontentheaders();
 header("Content-type: application/json; subtype=json");
 ms_iogetStdoutBufferBytes();
 ms_ioresethandlers();
 exit();
-
-
-
-
-
-// nao usa o cache pois e necessario processar a imagem com alguma rotina de filtro
-if ($cache == true && $_GET["cache"] != "nao") {
-    // cache ativo. Salva a imagem em cache
-    $nomer = salvaCacheImagemUtfGrid($cachedir, $map_fileX, $_GET["tms"]);
-    cabecalhoImagemUtfGrid($nomer);
-    if ($_SESSION["i3georendermode"] == 2) {
-        header("X-Sendfile: $nomer");
-    } else {
-        readfile($nomer);
-    }
-} else {
-    // se for necessario cortar a imagem, $img->saveImage() nao funciona
-    if ($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)) {
-        $nomer = ($img->imagepath) . "temp" . nomeRand() . ".png";
-        $img->saveImage($nomer);
-        //
-        // corta a imagem gerada para voltar ao tamanho normal
-        //
-        $img = imagecreatefrompng($nomer);
-        imagealphablending($img, false);
-        imagesavealpha($img, true);
-        cabecalhoImagem($nomer);
-        imagepng($img);
-        imagedestroy($img);
-        exit();
-    }
-    if ($_SESSION["i3georendermode"] == 1) {
-        ob_clean();
-        header('Content-Type: image/png');
-        $img->saveImage();
-    }
-    if ($_SESSION["i3georendermode"] == 2) {
-        $nomer = ($img->imagepath) . "temp" . nomeRand() . ".png";
-        $img->saveImage($nomer);
-        //
-        // corta a imagem gerada para voltar ao tamanho normal
-        //
-        if ($cortePixels > 0) {
-            $img = cortaImagemDisco($nomer, $cortePixels, 256);
-        }
-        cabecalhoImagem($nomer);
-        header("X-Sendfile: " . $nomer);
-    }
-}
-
-function cabecalhoImagemUtfGrid($nome)
-{
-    if (ob_get_contents()) {
-        ob_clean();
-    }
-    $lastModified = filemtime($nome);
-    // set last-modified header
-    header("Last-Modified: " . gmdate("D, d M Y H:i:s", $lastModified) . " GMT");
-    // make sure caching is turned on
-    header('Cache-Control: public,max-age=86400'); // 24 horas
-    header("Content-type: image/png");
-    header("Etag: " . md5($nome));
-    // check if page has changed. If not, send 304 and exit
-    if (array_key_exists('HTTP_IF_MODIFIED_SINCE', $_SERVER)) {
-        $if_modified_since = strtotime(preg_replace('/;.*$/', '', $_SERVER['HTTP_IF_MODIFIED_SINCE']));
-        if ($if_modified_since >= $lastModified) { // Is the Cached version the most recent?
-            header($_SERVER['SERVER_PROTOCOL'] . ' 304 Not Modified');
-            exit();
-        }
-    }
-}
-
-function salvaCacheImagemUtfGrid($cachedir, $map, $tms)
-{
-    global $img, $cortePixels;
-    if ($cachedir == "") {
-        $nome = dirname(dirname($map)) . "/cache" . $tms;
-    } else {
-        $nome = $cachedir . $tms;
-    }
-    $nome = str_replace(".png", "", $nome);
-    $nome = $nome . ".png";
-    if (! file_exists($nome)) {
-        if (! file_exists(dirname($nome))) {
-            @mkdir(dirname($nome), 0744, true);
-            chmod(dirname($nome), 0744);
-        }
-        error_log("salvando imagem");
-        $img->saveImage($nome);
-        //
-        // corta a imagem gerada para voltar ao tamanho normal
-        //
-        if ($cortePixels > 0) {
-            $img = cortaImagemDisco($nome, $cortePixels, 256);
-        }
-        chmod($nome, 0744);
-    }
-    return $nome;
-}
-
-function carregaCacheImagemUtfGrid($cachedir, $map, $tms, $i3georendermode = 0)
-{
-    if ($cachedir == "") {
-        $nome = dirname(dirname($map)) . "/cache" . $tms;
-    } else {
-        $nome = $cachedir . $tms;
-    }
-    $nome = str_replace(".png", "", $nome) . ".png";
-    if (file_exists($nome)) {
-        cabecalhoImagem($nome);
-        if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
-            readfile($nome);
-        } else {
-            header("X-Sendfile: " . $nome);
-        }
-        exit();
-    }
-}
 ?>

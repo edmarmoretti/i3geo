@@ -1,0 +1,136 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    COMPOSITE
+      OPACITY 50
+    END # COMPOSITE
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
+    GROUP "_lbiomashpgrupos"
+    METADATA
+      "cache"	"nao"
+      "TILES"	"SIM"
+      "ESCALA"	"250000"
+      "escondido"	"NAO"
+      "TEMA"	"Biomas shapefile linha grupo"
+      "identifica"	"nao"
+    END # METADATA
+    NAME "_lbiomashpcontorno"
+    STATUS OFF
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+      NAME " "
+      STYLE
+        COLOR 255 0 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+  LAYER
+    COMPOSITE
+      OPACITY 50
+    END # COMPOSITE
+    CONNECTION ""
+    DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
+    METADATA
+      "TIP"	"CD_LEGENDA"
+      "cache"	"nao"
+      "CLASSE"	"SIM"
+      "animagif"	""
+      "permitekmz"	"NAO"
+      "ITENSDESC"	"Teste de acentuação"
+      "TILES"	"SIM"
+      "ESCALA"	"250000"
+      "editavel"	""
+      "extensao"	"-73.990940816816 -33.74827031115 -34.822855820777 5.272224303909"
+      "FUNCOESJS"	'[{"titulo":"teste fake"},{"titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["CD_LEGENDA"]}]'
+      "permitedownload"	"NAO"
+      "permitecomentario"	"NAO"
+      "escondido"	"NAO"
+      "download"	"SIM"
+      "esquematabelaeditavel"	""
+      "itembuscarapida"	"CD_LEGENDA"
+      "ITENS"	"CD_LEGENDA"
+      "tme"	""
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "transitioneffect"	"NAO"
+      "convcaracter"	"SIM"
+      "TEMA"	"Biomas shapefile poligono grupo"
+      "colunaidunico"	""
+      "colunageometria"	""
+      "identifica"	"sim"
+      "tabelaeditavel"	""
+      "storymap"	""
+    END # METADATA
+    NAME "_lbiomashpgrupos"
+    PROCESSING "ITEMS=CD_LEGENDA"
+    PROCESSING "LABEL_NO_CLIP=True"
+    PROCESSING "POLYLINE_NO_CLIP=True"
+    STATUS DEFAULT
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME "CAATINGA"
+      EXPRESSION ('[CD_LEGENDA]'eq'CAATINGA')
+      STYLE
+        COLOR 50 247 169
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "PAMPA area > 5"
+      EXPRESSION ('[CD_LEGENDA]'eq'PAMPA area > 5')
+      STYLE
+        COLOR 239 22 152
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "CERRADO"
+      EXPRESSION ('[CD_LEGENDA]'eq'CERRADO')
+      STYLE
+        COLOR 202 223 14
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "PANTANAL"
+      EXPRESSION ('[CD_LEGENDA]'eq'PANTANAL')
+      STYLE
+        COLOR 214 107 232
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "AMAZÔNIA"
+      EXPRESSION ('[CD_LEGENDA]'eq'AMAZÃ”NIA')
+      STYLE
+        COLOR 16 67 6
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+    CLASS
+      NAME "MATA ATLÃ‚NTICA"
+      EXPRESSION ('[CD_LEGENDA]'eq'MATA ATLÃ‚NTICA')
+      STYLE
+        COLOR 44 215 49
+        OUTLINECOLOR 255 255 255
+      END # STYLE
+      TITLE ""
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

@@ -61,6 +61,13 @@ i3GEO.Interface =
          * Opacidade default dos layers de tipo imagem ou poligonais
          */
         LAYEROPACITY : "",
+        /*
+         * Objeto Overlay utilizado para tooltip na posicao do mouse
+         * Criado quando e detectado um layer do tipo utfGrid
+         *
+         * Contem um div com id=i3GEOoverlayInfo que pode ser utilizado para mostrar informacoes
+         */
+        INFOOVERLAY : "",
         /**
          * Propriedade: ATUAL
          *
@@ -126,6 +133,11 @@ i3GEO.Interface =
             trocando : false,
             pan : false
         },
+        /**
+         * Armazena os LAYERS que foram adicionados ao mapa e que sao do tipo UTFGRID
+         * E utilizado na funcao que busca os dados e gera a apresentacao na tela
+         */
+        LAYERSUTFGRID: {},
         /**
          * Troca o renderizador do mapa passando a usar a API do Google Maps
          */
@@ -547,15 +559,19 @@ i3GEO.Interface =
                     botaoProp = true;
                 }
                 removeBaloes = function() {
-                    var t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
+                    var nd,t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
                     for (i = 0; i < n; i++) {
                         t = i3GEO.Interface.openlayers.BALAOPROP.baloes[i];
-                        t.setPosition(undefined);
-                        t.getElement().parentNode.innerHTML = "";
+                        if(t.get("origem") == "balao"){
+                            t.setPosition(undefined);
+                            //t.getElement().parentNode.innerHTML = "";
+                            nd = t.getElement().parentNode;
+                            nd.parentNode.removeChild(nd);
+                        }
                     }
                     i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
                     if(i3GEO.desenho.layergrafico){
-                        i3GEO.desenho[i3GEO.Interface.ATUAL].removePins();
+                        //i3GEO.desenho[i3GEO.Interface.ATUAL].removePins();
                     }
                     return false;
                 };
@@ -629,6 +645,7 @@ i3GEO.Interface =
                     autoPan : p.autoPan,
                     autoPanAnimation : p.autoPanAnimation
                 });
+                b.setProperties({origem : "balao"});
                 p.baloes.push(b);
                 i3geoOL.addOverlay(b);
                 b.setPosition(i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates());
@@ -1234,7 +1251,7 @@ i3GEO.Interface =
                                             params : {
                                                 // 'LAYERS' : camada.wmsname,
                                                 'VERSION' : '1.1.0'
-                                                // 'format' : camada.wmsformat
+                                                    // 'format' : camada.wmsformat
                                             },
                                             projection : camada.wmssrs
                                         });
@@ -1278,6 +1295,7 @@ i3GEO.Interface =
                                         urllayer = url + "&cache=nao";
                                     }
                                     urllayer += "&layer=" + camada.name;
+                                    //se for do tipo utfgrid uma camada a mais e adicionada
                                     if(camada.utfgrid == "sim"){
                                         if(i3GEO.Interface.openlayers.googleLike === false){
                                             source = new ol.source.TileUTFGrid({
@@ -1288,9 +1306,9 @@ i3GEO.Interface =
                                                     "scheme": "xyz",
                                                     //"scheme": "tms",
                                                     "grids": [
-                                                        urllayer+"&tms=&TileCol={x}&TileRow={y}&TileMatrix={z}"
-                                                    ]
-                                                  }
+                                                        urllayer+"&FORMAT=utfgrid&tms=&TileCol={x}&TileRow={y}&TileMatrix={z}"
+                                                        ]
+                                                }
                                             });
                                         } else {
                                             source = new ol.source.TileUTFGrid({
@@ -1301,39 +1319,44 @@ i3GEO.Interface =
                                                     "scheme": "xyz",
                                                     //"scheme": "tms",
                                                     "grids": [
-                                                        urllayer+"&tms=&X={x}&Y={y}&Z={z}"
-                                                    ]
-                                                  }
+                                                        urllayer+"&FORMAT=utfgrid&tms=&X={x}&Y={y}&Z={z}"
+                                                        ]
+                                                }
                                             });
                                         }
-                                        var displayCountryInfo = function(coordinate) {
-                                            var viewResolution = /** @type {number} */ (i3geoOL.getView().getResolution());
-                                            var source = i3geoOL.getLayersBy("name","mundoutfgrid")[0].getSource();
-                                            source.forDataAtCoordinateAndResolution(coordinate, viewResolution,
-                                                function(data) {
-                                                console.info(data);
-                                                //mapElement.style.cursor = data ? 'pointer' : '';
-                                                  //if (data) {
-
-                                                    //nameElement.innerHTML = data['admin'];
-                                                  //}
-                                                  //infoOverlay.setPosition(data ? coordinate : undefined);
-                                                });
-                                          };
-
-                                          i3geoOL.on('pointermove', function(evt) {
-                                            if (evt.dragging) {
-                                              return;
-                                            }
-                                            var coordinate = i3geoOL.getEventCoordinate(evt.originalEvent);
-                                            displayCountryInfo(coordinate);
-                                          });
-
-
 
                                         source.set("tipoServico", "WMTS");
                                         opcoes.singleTile = false;
-                                    } else {
+
+                                        opcoes.title = "";
+                                        opcoes.name = camada.name+"_utfgrid";
+                                        opcoes.source = source;
+                                        opcoes.isBaseLayer = false;
+                                        opcoes.visible = true;
+                                        source.set("name", camada.name+"_utfgrid");
+                                        var layerutfgrid = new ol.layer.Tile(opcoes);
+                                            camada.status == 0 ? layerutfgrid.setVisible(false) : layerutfgrid.setVisible(true);
+                                            i3GEO.Interface.LAYERSUTFGRID[camada.name+"_utfgrid"] = layerutfgrid;
+                                            //adiciona o Overlay para mostrar os dados de layers utfgrid
+                                            if(i3GEO.Interface.INFOOVERLAY == ""){
+                                                if (typeof (console) !== 'undefined')
+                                                    console.info("i3GEO.Interface.openlayers adiciona Overlay para os dados utfgrid");
+
+                                                $( "#" + i3GEO.Interface.IDMAPA ).after(i3GEO.template.utfGridInfo);
+                                                i3GEO.Interface.INFOOVERLAY = new ol.Overlay({
+                                                    element: $i("i3GEOoverlayInfo"), //incluido no template
+                                                    offset: [3, -3],
+                                                    stopEvent: true,
+                                                    positioning: 'bottom-left'
+                                                });
+                                                i3GEO.Interface.INFOOVERLAY.setProperties({origem:"infoOverlay"});
+                                                i3geoOL.addOverlay(i3GEO.Interface.INFOOVERLAY);
+                                            }
+
+                                            i3geoOL.addLayer(layerutfgrid);
+
+
+                                    }
                                         if (opcoes.singleTile === true) {
                                             source = new ol.source.ImageWMS({
                                                 url : urllayer,
@@ -1371,7 +1394,7 @@ i3GEO.Interface =
                                                 source.set("tipoServico", "WMTS");
                                             }
                                         }
-                                    }
+
                                     opcoes.title = camada.tema;
                                     opcoes.name = camada.name;
                                 }
@@ -1403,6 +1426,7 @@ i3GEO.Interface =
                                 } else {
                                     layer = new ol.layer.Tile(opcoes);
                                 }
+
                             } catch (e) {
                             }
                         }
@@ -1554,9 +1578,19 @@ i3GEO.Interface =
                 if (obj.checked) {
                     ligar = obj.value;
                     i3GEO.arvoreDeCamadas.alteraPropCamadas("status", "2", obj.value);
+                    //verifica se e do tipo utfgrid e liga a camada altera tambem
+                    if(i3GEO.Interface.LAYERSUTFGRID[obj.value + "_utfgrid"]){
+                        i3GEO.arvoreDeCamadas.alteraPropCamadas("status", "2", obj.value + "_utfgrid");
+                        i3GEO.Interface.LAYERSUTFGRID[obj.value + "_utfgrid"].setVisibility(true);
+                    }
                 } else {
                     desligar = obj.value;
                     i3GEO.arvoreDeCamadas.alteraPropCamadas("status", "0", obj.value);
+                    //verifica se e do tipo utfgrid e liga a camada altera tambem
+                    if(i3GEO.Interface.LAYERSUTFGRID[obj.value + "_utfgrid"]){
+                        i3GEO.arvoreDeCamadas.alteraPropCamadas("status", "0", obj.value + "_utfgrid");
+                        i3GEO.Interface.LAYERSUTFGRID[obj.value + "_utfgrid"].setVisibility(false);
+                    }
                 }
                 i3GEO.php.ligatemas(i3GEO.legenda.atualiza,desligar,ligar);
             },
@@ -1701,10 +1735,7 @@ i3GEO.Interface =
 
                 });
                 i3geoOL.on("pointermove", function(e) {
-                    //if (typeof (console) !== 'undefined')
-                    //	console.info("pointermove");
-
-                    if (modoAtual === "move") {
+                    if (modoAtual === "move" || e.dragging) {
                         return;
                     }
                     var lonlat = false, d, pos = "";
@@ -1719,9 +1750,33 @@ i3GEO.Interface =
                     objposicaocursor.dmsy = d[1];
                     objposicaocursor.imgx = e.pixel[0];
                     objposicaocursor.imgy = e.pixel[1];
-                    //pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
                     objposicaocursor.telax = e.pixel[0] + pos[0];
                     objposicaocursor.telay = e.pixel[1] + pos[1];
+                    //para layers do tipo utfgrid
+                    var viewResolution = (i3geoOL.getView().getResolution());
+                    if(i3GEO.Interface.INFOOVERLAY != ""){
+                        i3GEO.Interface.INFOOVERLAY.getElement().innerHTML = "";
+                    }
+                    for(var k in i3GEO.Interface.LAYERSUTFGRID){
+                        if(!i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[k.replace("_utfgrid","")]){
+                            i3GEO.Interface.LAYERSUTFGRID[k] = null;
+                        } else {
+                            if(i3GEO.Interface.LAYERSUTFGRID[k] && i3GEO.Interface.LAYERSUTFGRID[k].getVisible()){
+                                i3GEO.Interface.LAYERSUTFGRID[k].getSource().forDataAtCoordinateAndResolution(
+                                        e.coordinate,
+                                        viewResolution,
+                                        function(data) {
+                                            if(data){
+                                                i3GEO.Interface.INFOOVERLAY.getElement().innerHTML += "<span style='display:block;'>" + data.text + "<span>";
+                                                i3GEO.Interface.INFOOVERLAY.setPosition(e.coordinate);
+                                            } else {
+                                                i3GEO.Interface.INFOOVERLAY.setPosition(undefined);
+                                            }
+                                        }
+                                );
+                            }
+                        }
+                    }
                 });
                 i3geoOL.on("touchend", function(e) {
                     e.preventDefault();

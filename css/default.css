@@ -1,3 +1,8 @@
+#i3GEOoverlayInfo {
+	background-color: white;
+	padding: 5px;
+}
+
 [data-toggle*=collapse]:after {
 	font-family: "Glyphicons Halflings";
 	content: "\e113";

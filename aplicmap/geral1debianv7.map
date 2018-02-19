@@ -189,8 +189,9 @@ MAP
 			"TEMA"	"Países do mundo" #nome que sera mostrado na legenda
 			"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 			"TIP" "FIPS_CNTRY,GMI_CNTRY,CNTRY_NAME"
-			"cache" "sim"
+			"cache" "nao"
 			"itembuscarapida" "LONG_NAME"
+			"UTFDATA" "CNTRY_NAME"
 			#"FUNCOESJS" '[{"tipo":"layer","titulo":"teste fake"},{"tipo":"registro","titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["FIPS_CNTRY","LONG_NAME"]}]'
 		END
 		NAME "mundo"
@@ -210,11 +211,11 @@ MAP
 	#	GROUP "mundo"
 	#	METADATA
 	#		"CLASSE"	"NAO" #o simbolo sera mostrado na legenda
-	#		"TEMA"	"Países do mundo (UTFGRID)" #nome que sera mostrado na legenda
+	#		"TEMA"	"Países do mundo (FIPS_CNTRY)" #nome que sera mostrado na legenda
 	#		"TITULO"       "Países do mundo" #nome alternativo que e mostrado nos combos para escolha do tema
 	#		"cache" "nao"
-	#		"UTFITEM" "FIPS_CNTRY"
-	#		"UTFDATA" "{\"CNTRY_NAME\":\"[CNTRY_NAME]\"}"
+			#"UTFITEM" "FIPS_CNTRY"
+	#		"UTFDATA" "{\"text\":\"[FIPS_CNTRY]\"}"
 	#	END
 	#	NAME "mundoutfgrid"
 	#	STATUS OFF

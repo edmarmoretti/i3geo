@@ -1148,14 +1148,18 @@ i3GEO.editorOL = {
 							}
 							else{
 								f.setProperties({
-									fillColor: s.getFill().getColor(),
-									strokeColor: s.getStroke().getColor(),
 									externalGraphic: "",
 									graphicHeight : 25,
 									graphicWidth : 25
 								});
-								s.getFill().setColor('rgba(255, 255, 255, 0.5)');
-								s.getStroke().setColor('blue');
+								if(s.getFill()){
+								    f.setProperties({fillColor: s.getFill().getColor()});
+								    s.getFill().setColor('rgba(255, 255, 255, 0.5)');
+								}
+								if(s.getStroke()){
+                                    f.setProperties({strokeColor: s.getStroke().getColor()});
+                                    s.getStroke().setColor('blue');
+                                }
 							}
 						}
 					}
@@ -2092,10 +2096,11 @@ i3GEO.editorOL = {
 				if(idfeature && idfeature != id){
 					continue;
 				}
-				if(!id){
+				if(!id || id == "" || id == undefined ){
 					id = i3GEO.util.uid();
 					f.setId(id);
 				}
+				console.info(id)
 				if(i3GEO.editorOL.idsSelecionados.indexOf(id) < 0){
 					i3GEO.editorOL.idsSelecionados.push(id);
 				}
@@ -2136,12 +2141,22 @@ i3GEO.editorOL = {
 					}
 				}
 				else if (st){
-					f.setProperties({
-						fillColor: st.getFill().getColor(),
-						strokeColor: st.getStroke().getColor()
-					});
-					st.getFill().setColor('rgba(255, 255, 255, 0.5)');
-					st.getStroke().setColor('blue');
+					if(st.getFill()){
+					    f.setProperties({
+	                        fillColor: st.getFill().getColor()
+	                    });
+					}
+					if(st.getStroke()){
+                        f.setProperties({
+                            strokeColor: st.getStroke().getColor()
+                        });
+                    }
+				    if(st.getFill()){
+				        st.getFill().setColor('rgba(255, 255, 255, 0.5)');
+				    }
+				    if(st.getStroke()){
+				        st.getStroke().setColor('blue');
+				    }
 				}
 			}
 			i3GEO.desenho.layergrafico.getSource().changed();
@@ -2187,8 +2202,12 @@ i3GEO.editorOL = {
 						}
 					}
 					else if(st){
-						st.getFill().setColor(f.getProperties().fillColor);
-						st.getStroke().setColor(f.getProperties().strokeColor);
+						if(f.getProperties().fillColor){
+						    st.getFill().setColor(f.getProperties().fillColor);
+						}
+						if(f.getProperties().strokeColor){
+						    st.getStroke().setColor(f.getProperties().strokeColor);
+						}
 					}
 				}
 			}

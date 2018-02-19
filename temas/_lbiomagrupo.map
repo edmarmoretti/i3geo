@@ -2,24 +2,22 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
   LAYER
+    COMPOSITE
+      OPACITY 50
+    END # COMPOSITE
     CONNECTION ""
     DATA "biomas.shp"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "cache"	"NAO"
       "CLASSE"	"SIM"
-      "permitekmz"	"nao"
-      "temporizador"	""
-      "iconetema"	""
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "permitedownload"	"sim"
+      "permitekmz"	"NAO"
+      "permitedownload"	"NAO"
       "permitecomentario"	"NAO"
-      "metaestat"	""
       "escondido"	"NAO"
-      "permitekml"	"sim"
-      "permiteogc"	"sim"
       "transitioneffect"	"NAO"
-      "TEMA"	"Biomas shapefile (acentuação)"
+      "permiteogc"	"NAO"
+      "permitekml"	"NAO"
+      "TEMA"	"Biomas shapefile (acentua??o)"
       "aplicaextensao"	"NAO"
     END # METADATA
     NAME "_lbiomagrupo"
@@ -27,7 +25,6 @@ MAP
     STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
-    OPACITY 50
     TYPE POLYGON
     UNITS METERS
     CLASS

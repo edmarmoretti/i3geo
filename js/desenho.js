@@ -376,7 +376,9 @@ i3GEO.desenho =
 					features = i3GEO.desenho.layergrafico.getSource().getFeatures();
 					n = features.length;
 					for (i = 0; i < n; i++) {
-						remover.push(features[i]);
+						if(features[i].get("origem") == namespace){
+						    remover.push(features[i]);
+						}
 					}
 					n = remover.length;
 					for (i = 0; i < n; i++) {
