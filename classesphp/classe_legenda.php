@@ -368,9 +368,10 @@ class Legenda
                             "outline" => "-1 -1 -1",
                             "background" => "-1 -1 -1"
                         );
+                        //o simbolo pode ser definido apenas com base nas cores
+                        $simple = true;
+
                         // remove o offset em simbolos do tipo imagem
-
-
                         if ($classe->numstyles > 0) {
                             $estilo = $classe->getstyle(0);
                             if ($estilo->symbolname != "" && file_exists($estilo->symbolname)) {
@@ -382,6 +383,9 @@ class Legenda
                                 "outline" => corRGB($estilo->outlinecolor),
                                 "background" => corRGB($estilo->backgroundcolor)
                             );
+                            if($estilo->symbolname != "" && $estilo->symbolname != "linha" && $estilo->symbolname != "ponto"){
+                                $simple = false;
+                            }
                         }
                         $imagem = $classe->createLegendIcon($w, $h)->saveWebImage();
 
@@ -393,7 +397,8 @@ class Legenda
                             "layer" => $la->name,
                             "cor"=>$cor,
                             "w"=>$w,
-                            "h"=>$h
+                            "h"=>$h,
+                            "simple" => $simple
                         );
                     }
                     $legenda[] = array(
