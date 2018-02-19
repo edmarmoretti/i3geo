@@ -42,6 +42,8 @@ i3GEO.mapa =
 {
 		//permite ou nao que o balao de info funcione ao clicar no mapa
 		BALAOATIVO: true,
+		//mostra ou nao o balao de informacoes mesmo se nao existirem dados retornados
+		OPENTIPIFEMPTY: true,
 		/**
 		 * Propriedade: TEMASINICIAISLIGADOS
 		 *
@@ -1083,6 +1085,9 @@ i3GEO.mapa =
 				textoSimples = $trad("balaoVazio");
 				textoCompleto="";
 				wkt = [];
+				if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.openTipNoData == false){
+				    mostra = false;
+				}
 			}
 			if (retorno !== "") {
 				res = "";

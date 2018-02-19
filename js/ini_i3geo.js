@@ -366,6 +366,7 @@ var i3GEO = {
 					i3GEO.configura.alturatip = c.components.tooltip.toolTipSize[0];
 					i3GEO.configura.larguratip = c.components.tooltip.toolTipSize[1];
 				}
+				p.openTipNoData = (c.components.tooltip.hasOwnProperty("openTipNoData")) ? c.components.tooltip.openTipNoData : true;
 			}
 		}
 		if(c.hasOwnProperty("openLayers") && c.mapType !== "GM" ){

@@ -511,6 +511,7 @@ i3GEO.Interface =
                 minWidth : '200px',
                 modal: false,
                 simple: true,
+                openTipNoData: true,
                 baloes : []
             },
             //objeto com a grade de coordenadas
