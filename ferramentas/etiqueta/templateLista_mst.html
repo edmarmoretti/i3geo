@@ -2,16 +2,17 @@
 	<table>
 		<tr>
 			<td>Coluna</td>
-			<td style="text-align:center">Identifica</td>
-			<td style="text-align:center">Tip</td>
-			<td style="text-align:center">Busca</td>
-			<td style="text-align:center">Alias</td>
-			<td style="text-align:center;">Link</td>
+			<td style="text-align:center;padding: 10px;">Identifica</td>
+			<td style="text-align:center;padding: 10px;">Tip (quando clicar)</td>
+            <td style="text-align:center;padding: 10px;">Tip (din&acirc;mico)</td>
+			<td style="text-align:center;padding: 10px;">Busca</td>
+			<td style="text-align:center;padding: 10px;">Alias</td>
+			<td style="text-align:center;padding: 10px;;">Link</td>
 		<tr>{{#linhas}}
 		<tr>
 			<td>{{{item}}}</td>
 			<td>
-				<div class="checkbox condensed">
+				<div class="checkbox condensed text-center" style="text-align:center;">
 					<label>
 						<input {{{ckIdentifica}}} value="{{{item}}}" type="checkbox" name="identifica" />
 						<span class="checkbox-material noprint">
@@ -21,7 +22,7 @@
 				</div>
 			</td>
 			<td>
-				<div class="checkbox condensed">
+				<div class="checkbox condensed"  style="text-align:center;">
 					<label>
 						<input {{{ckEtiquetaTip}}} type='checkbox' value="{{{item}}}" name='etiquetaTip' />
 						<span class="checkbox-material noprint">
@@ -30,10 +31,19 @@
 					</label>
 				</div>
 			</td>
+            <td>
+                <div class="radio radio-primary condensed"  style="text-align:center;">
+                    <label>
+                        <input {{{ckUtfdata}}} type='radio' value="{{{item}}}" name='utfdata' onclick='javascript:if(this.checked){this.checked=false;}'/>
+                        <span class="circle"></span>
+						<span class="check"></span>
+                    </label>
+                </div>
+            </td>
 			<td>
-				<div class="radio radio-primary condensed">
+				<div class="radio radio-primary condensed"  style="text-align:center;">
 					<label>
-						<input {{{ckBuscaRapida}}} type='radio' value="{{{item}}}" name='itembuscarapida' />
+						<input {{{ckBuscaRapida}}} type='radio' value="{{{item}}}" name='itembuscarapida' onclick='javascript:if(this.checked){this.checked=false;}'/>
 						<span class="circle"></span>
 						<span class="check"></span>
 					</label>

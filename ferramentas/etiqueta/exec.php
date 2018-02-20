@@ -23,6 +23,7 @@ Ativa as etiquetas de um tema.
 		$m->layer->setmetadata("ITENS",$_GET["itens"]);
 		$m->layer->setmetadata("ITENSDESC",$_GET["itensdesc"]);
 		$m->layer->setmetadata("ITENSLINK",$_GET["itenslink"]);
+		$m->layer->setmetadata("UTFDATA",$_GET["utfdata"]);
 		$m->layer->setmetadata("itembuscarapida",$_GET["itembuscarapida"]);
 		$m->salva();
 		$_SESSION["contadorsalva"]++;
@@ -46,7 +47,7 @@ Desativa as etiquetas de um tema.
 /*
  Valor: PEGADADOSETIQUETAS
 
-Obtém os dados sobre itens, itensdesc, etc
+Obtï¿½m os dados sobre itens, itensdesc, etc
 
 <Toponimia->pegaDadosEtiquetas>
 */
