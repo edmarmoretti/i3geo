@@ -7,6 +7,10 @@ botoesIni = [
 		"link":"http://colorbrewer2.com/",
 		"corpo": $trad("Colorbrewer",g_traducao_util)
 	},
+    {
+        "link":"http://tristen.ca/hcl-picker/#/hlc/4/1/302A0C/5FAD71",
+        "corpo": "Colorpicker for data"
+    },
 	{
 		"link":"http://tools.wmflabs.org/geohack/",
 		"corpo": "GeoHack"
