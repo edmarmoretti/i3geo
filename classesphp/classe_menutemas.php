@@ -253,7 +253,7 @@ array
 		}
 		//print_r($this->xml);exit;
 		$mapas = array();
-		//pega os sistemas checando os perfis
+		//pega os mapas checando os perfis
 		foreach($this->xml->MAPA as $s){
 			$ps = $this->ixml($s,"PERFIL");
 			$perfis = str_replace(","," ",$ps);
@@ -269,12 +269,13 @@ array
 				$p = $this->ixml($s,"PUBLICADO");
 				$m = $this->ixml($s,"CONTEMMAPFILE");
 				$id = $this->ixml($s,"ID_MAPA");
+				$dm = $this->ixml($s,"DESCRICAO");
 				//echo $p;
 				if($id_mapa != "" && $id == $id_mapa && strtoupper($p) != "NAO"){
-				    return array("mapas"=>array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m));
+				    return array("mapas"=>array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m,"DESCRICAO"=>$dm));
 				}
 				if($id_mapa == "" && strtoupper($p) != "NAO"){
-					$mapas[] =  array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m);
+				    $mapas[] =  array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m,"DESCRICAO"=>$dm);
 				}
 			}
 		}
@@ -704,16 +705,16 @@ nrss - (opcional) n&uacute;mero de registros no rss que ser&atilde;o considerado
 	 */
 	function removeAcentos($s)
 	{
-		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
-		$s = ereg_replace("[&Aacute;À&Acirc;&Atilde;]","A",$s);
-		$s = ereg_replace("[&eacute;è&ecirc;]","e",$s);
+		$s = ereg_replace("[&aacute;ï¿½&acirc;&atilde;]","a",$s);
+		$s = ereg_replace("[&Aacute;ï¿½&Acirc;&Atilde;]","A",$s);
+		$s = ereg_replace("[&eacute;ï¿½&ecirc;]","e",$s);
 		$s = ereg_replace("[&iacute;]","i",$s);
 		$s = ereg_replace("[&Iacute;]","I",$s);
-		$s = ereg_replace("[&Eacute;È&Ecirc;]","E",$s);
-		$s = ereg_replace("[óò&ocirc;&otilde;]","o",$s);
-		$s = ereg_replace("[ÓÒ&Ocirc;&Otilde;]","O",$s);
-		$s = ereg_replace("[&uacute;ùû]","u",$s);
-		$s = ereg_replace("[&Uacute;ÙÛ]","U",$s);
+		$s = ereg_replace("[&Eacute;ï¿½&Ecirc;]","E",$s);
+		$s = ereg_replace("[ï¿½ï¿½&ocirc;&otilde;]","o",$s);
+		$s = ereg_replace("[ï¿½ï¿½&Ocirc;&Otilde;]","O",$s);
+		$s = ereg_replace("[&uacute;ï¿½ï¿½]","u",$s);
+		$s = ereg_replace("[&Uacute;ï¿½ï¿½]","U",$s);
 		$s = str_replace("&ccedil;","c",$s);
 		$s = str_replace("&Ccedil;","C",$s);
 		//$str = htmlentities($s);
