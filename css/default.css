@@ -868,12 +868,16 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 
 .i3GeoAguardeJanela {
-	height: 2px;
 	left: 0;
 	position: absolute;
-	top: 29px;
 	width: 100%;
 	z-index: 102;
+	bottom: 0px;
+	height: 8px;
+	text-align: center;
+	margin: auto;
+	padding-left: 2px;
+	padding-right: 2px;
 }
 
 .yui-panel-container .yui-resizepanel .bd {
