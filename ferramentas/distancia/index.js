@@ -58,6 +58,13 @@ i3GEOF.distancia =
             var ins = Mustache.render(i3GEOF.distancia.MUSTACHE, i3GEOF.distancia.mustacheHash());
             return ins;
         },
+        isOn : function() {
+            if($i("i3GEOF.distancia")){
+                return true;
+            } else {
+                return false;
+            }
+        },
         /*
          * Function: iniciaJanelaFlutuante
          *
@@ -95,8 +102,8 @@ i3GEOF.distancia =
                 );
             divid = janela[2].id;
             i3GEOF.distancia.inicia(divid);
-            temp =
-                function() {
+            temp = function() {
+                i3GEO.distancia.pontos = {};
                 var janela;
                 i3GEO.eventos.cliquePerm.ativa();
                 janela = YAHOO.i3GEO.janela.manager.find("distancia");
@@ -105,6 +112,7 @@ i3GEOF.distancia =
                     janela.destroy();
                 }
                 i3GEOF.distancia[i3GEO.Interface["ATUAL"]].fechaJanela();
+
                 i3GEO.analise.pontos = {
                         xpt : [],
                         ypt : []
@@ -130,6 +138,9 @@ i3GEOF.distancia =
                 pontos.push(x[i] + " " + y[i]);
             }
             return "LINESTRING(" + pontos.join(",") + ")";
+        },
+        removeFiguras : function(){
+            i3GEOF.distancia[i3GEO.Interface["ATUAL"]].removeFiguras();
         },
         /**
          * Funcoes especificas da interface openlayers
@@ -246,6 +257,7 @@ i3GEOF.distancia =
                 }
             },
             point : function(point) {
+                i3GEO.eventos.cliquePerm.desativa();
                 var n, x1, y1, x2, y2, trecho, temp, circ, label, raio,
                 estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao],
                 coord = point.getCoordinates(),
@@ -360,7 +372,9 @@ i3GEOF.distancia =
                 m.removeControle();
                 m.numpontos = 0;
                 i3GEO.eventos.cliquePerm.ativa();
-
+                i3GEOF.distancia.openlayers.removeFiguras();
+            },
+            removeFiguras: function(){
                 var features, n, f, i, remover = [], temp;
                 features = i3GEO.desenho.layergrafico.getSource().getFeatures();
                 n = features.length;
@@ -470,6 +484,7 @@ i3GEOF.distancia =
                     }
                 };
                 evtclick = google.maps.event.addListener(i3GeoMap, "click", function(evt) {
+                    i3GEO.eventos.cliquePerm.desativa();
                     var x1, x2, y1, y2, trecho = 0, total, n;
                     // When the map is clicked, pass the LatLng obect to the
                     // measureAdd function
@@ -592,6 +607,9 @@ i3GEOF.distancia =
                 i3GeoMap.setOptions({
                     draggableCursor : undefined
                 });
+                i3GEOF.distancia.googlemaps.removeFiguras();
+            },
+            removeFiguras: function(){
                 var f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem", "medeDistancia");
                 if (f && f.length > 0) {
                     temp = window.confirm($trad("x94"));

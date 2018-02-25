@@ -37,6 +37,13 @@ i3GEOF.area =
 			$i(iddiv).innerHTML = i3GEOF.area.html();
 			i3GEOF.area[i3GEO.Interface["ATUAL"]].inicia();
 		},
+		isOn : function() {
+		    if($i("i3GEOF.area")){
+		        return true;
+		    } else {
+		        return false;
+		    }
+		},
 		/*
 		 * Function: html
 		 *
@@ -89,7 +96,8 @@ i3GEOF.area =
 			i3GEOF.area.inicia(divid);
 			temp =
 				function() {
-					var janela;
+			    i3GEOF.area.pontos = {};
+			    var janela;
 					i3GEO.eventos.cliquePerm.ativa();
 					janela = YAHOO.i3GEO.janela.manager.find("area");
 					if (janela) {
@@ -120,6 +128,9 @@ i3GEOF.area =
 			}
 			pontos.push(x[0] + " " + y[0]);
 			return "POLYGON((" + pontos.join(",") + "))";
+		},
+		removeFiguras : function(){
+		    i3GEOF.area[i3GEO.Interface["ATUAL"]].removeFiguras();
 		},
 		/**
 		 * Funcoes especificas da interface openlayers
@@ -171,6 +182,10 @@ i3GEOF.area =
 						ypt : [],
 						dist : []
 					};
+                    i3GEO.analise.pontos = {
+                            xpt : [],
+                            ypt : []
+                    };
 					var m = i3GEOF.area.openlayers,
 						sketch = evt.feature;
 					m.estilo = sketch.getStyle();
@@ -240,7 +255,8 @@ i3GEOF.area =
 
 			},
 			point : function(point,geom) {
-				var wgs84Sphere,area,coordinates,sourceProj,n, x1, y1, x2, y2, trecho, temp,
+			    i3GEO.eventos.cliquePerm.desativa();
+			    var wgs84Sphere,area,coordinates,sourceProj,n, x1, y1, x2, y2, trecho, temp,
 				coord = point.getCoordinates(),
 				total = 0;
 				i3GEOF.area.pontos.xpt.push(coord[0]);
@@ -300,24 +316,26 @@ i3GEOF.area =
 				m.removeControle();
 				m.numpontos = 0;
 				i3GEO.eventos.cliquePerm.ativa();
-
-				var features, n, f, i, remover = [], temp;
-				features = i3GEO.desenho.layergrafico.getSource().getFeatures();
-				n = features.length;
-				for (i = 0; i < n; i++) {
-					f = features[i];
-					if (f.getProperties().origem === "i3GeoMedeArea" || f.getProperties().origem === "medeAreaExcluir") {
-						remover.push(f);
-					}
-				}
-				if (remover.length > 0) {
-					temp = window.confirm($trad("x94"));
-					if (temp) {
-						for (r in remover) {
-							i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
-						}
-					}
-				}
+				i3GEOF.area.openlayers.removeFiguras();
+			},
+			removeFiguras : function(){
+                var features, n, f, i, remover = [], temp;
+                features = i3GEO.desenho.layergrafico.getSource().getFeatures();
+                n = features.length;
+                for (i = 0; i < n; i++) {
+                    f = features[i];
+                    if (f.getProperties().origem === "i3GeoMedeArea" || f.getProperties().origem === "medeAreaExcluir") {
+                        remover.push(f);
+                    }
+                }
+                if (remover.length > 0) {
+                    temp = window.confirm($trad("x94"));
+                    if (temp) {
+                        for (r in remover) {
+                            i3GEO.desenho.layergrafico.getSource().removeFeature(remover[r]);
+                        }
+                    }
+                }
 			},
 			/**
 			 * Mostra a totalizacao das linhas ja digitalizadas
@@ -425,7 +443,8 @@ i3GEOF.area =
 					i3GEOF.area.ultimoWkt = i3GEOF.area.pontos2wkt();
 				};
 				evtclick = google.maps.event.addListener(i3GeoMap, "click", function(evt) {
-					var area = 0, per;
+				    i3GEO.eventos.cliquePerm.desativa();
+				    var area = 0, per;
 					// When the map is clicked, pass the LatLng obect to the
 					// measureAdd function
 					pontos.mvcLine.push(evt.latLng);
@@ -525,17 +544,20 @@ i3GEOF.area =
 				i3GeoMap.setOptions({
 					draggableCursor : undefined
 				});
-				var f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem", "medeArea");
-				if (f && f.length > 0) {
-					temp = window.confirm($trad("x94"));
-					if (temp) {
-						i3GEO.desenho.googlemaps.destroyFeatures(f);
-					}
-				}
-				f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem", "medeAreaExcluir");
-				if (f && f.length > 0) {
-					i3GEO.desenho.googlemaps.destroyFeatures(f);
-				}
+				i3GEOF.area.googlemaps.removeFiguras();
+			},
+			removeFiguras: function(){
+                var temp, f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem", "medeArea");
+                if (f && f.length > 0) {
+                    temp = window.confirm($trad("x94"));
+                    if (temp) {
+                        i3GEO.desenho.googlemaps.destroyFeatures(f);
+                    }
+                }
+                f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem", "medeAreaExcluir");
+                if (f && f.length > 0) {
+                    i3GEO.desenho.googlemaps.destroyFeatures(f);
+                }
 			},
 			/**
 			 * Mostra a totalizacao das linhas ja digitalizadas
