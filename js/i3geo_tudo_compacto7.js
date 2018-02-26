@@ -326,7 +326,7 @@ if (typeof (i3GEO) === 'undefined') {
 var i3GEO = {};
 }
 //
-//utilizado para armazenar templates
+//utilizado para armazenar templates HTML
 //alguns templates sao carregados sob demanda, por isso sao definidos aqui como false
 //
 //exemplo de uso:
@@ -343,6 +343,28 @@ aguarde: "<div id='{{id}}_imagemCabecalho' class='i3GeoAguardeJanela progress' s
 },
 //formatacao da lista de camadas
 camada: false,
+//formatacao da lista de canadas de fundo
+camadaFundo: false,
 //tooltip utilizado quando o LAYER for do tipo utfGrid
-utfGridInfo: '<div><div id="i3GEOoverlayInfo"></div></div>'
+utfGridInfo: '<div><div id="i3GEOoverlayInfo"></div></div>',
+//resultado da busca feita em um tema
+buscaEmTemas: false,
+//resultado da busca feita em um servico externo
+buscaEmServico: false,
+//formatacao de itens de listagens que sao folders
+ferramentasFolder: false,
+//formatacao de itens de listagens que sao links
+ferramentasLinks: false,
+//formatacao de listas do tipo migalha mostrada na lista de ferramentas
+ferramentasMigalha: false,
+//formatacao geral utilizada para folders
+dir: false,
+//formatacao geral utilizada para uma camada
+tema: false,
+//formatacao utilizada em listas do tipo migalha mostradas no catalogo
+catalogoMigalha: false,
+//formatacao da legenda (guia principal do mapa)
+legenda: false,
+//formatacao da lista de marcadores salvos pelo usuario
+marcador: false
 };
