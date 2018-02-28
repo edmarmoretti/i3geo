@@ -68,6 +68,7 @@ include ("../../templates/templateOpcoesPublicado.php");
 </style>
 <script type="text/javascript" src="index.js"></script>
 <script type="text/javascript" src="../../dicionario/mapas.js"></script>
+<script type="text/javascript" src="../../dicionario/editormapfile.js"></script>
 <script>
 	$(document).ready(function(){
 		//vem de admin/index.js
@@ -84,6 +85,7 @@ include ("../../templates/templateOpcoesPublicado.php");
 		i3GEOadmin.mapas.dicionario = $.extend(
 			{},
 			i3GEOadmin.mapas.dicionario,
+			i3GEOadmin.mapfile.dicionario,
 			i3GEOadmin.core.dicionario
 		);
 

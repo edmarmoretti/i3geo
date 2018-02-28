@@ -1,3 +1,6 @@
+if (typeof (i3GEOadmin.mapfile) === 'undefined') {
+    i3GEOadmin["mapfile"] = {};
+}
 i3GEOadmin.mapfile.dicionario = {
     'ajudaEditor' : [ {
 		pt : "Salve antes de testar. Mais detalhes sobre a edi&ccedil;&atilde;o de mapfiles veja em:",
