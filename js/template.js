@@ -42,5 +42,7 @@ i3GEO.template = {
         //formatacao da legenda (guia principal do mapa)
         legenda: false,
         //formatacao da lista de marcadores salvos pelo usuario
-        marcador: false
+        marcador: false,
+        //campo do tipo input para a busca usando typeahead
+        searchInput: false
 };

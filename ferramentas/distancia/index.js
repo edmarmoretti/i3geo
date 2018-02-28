@@ -103,7 +103,7 @@ i3GEOF.distancia =
             divid = janela[2].id;
             i3GEOF.distancia.inicia(divid);
             temp = function() {
-                i3GEO.distancia.pontos = {};
+                i3GEOF.distancia.pontos = {};
                 var janela;
                 i3GEO.eventos.cliquePerm.ativa();
                 janela = YAHOO.i3GEO.janela.manager.find("distancia");
