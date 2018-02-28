@@ -16,7 +16,7 @@
 					<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
 				</a>
 			</div>
-			<a href="link.php?id={{{ID_MAPA}}}" target="_blank"><img class="img-rounded hidden-xs" src="{{{IMAGEM}}}" />&nbsp;{{{NOME}}} <small>{{{DESCRICAO}}}</small></a>
+			<a href="link.php?id={{{ID_MAPA}}}" target="_blank"><img class="img-rounded hidden-xs" style="width:80px;" src="{{{IMAGEM}}}" />&nbsp;{{{NOME}}} <small>{{{DESCRICAO}}}</small></a>
 
 		</h4>
 	</div>

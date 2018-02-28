@@ -105,14 +105,19 @@ include "../init/head.php";
             <div class="col-md-12">
                 <div class="well hidden escondido">
                     <blockquote id="titulo"></blockquote>
+
+                    <a title="RSS" href="../rss/rssmapas.php" target="_blank" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
+                        <i class="material-icons md-18">rss_feed</i>
+                    </a>
+                    <span>&nbsp;&nbsp;</span>
                 </div>
             </div>
+
         </div>
         <div class="row center-block">
             <div class="col-md-12">
                 <div class="well" id="corpo">
-                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i>
-                    <span class="sr-only">Loading...</span>
+                    <i class="fa fa-spinner fa-pulse fa-3x fa-fw"></i> <span class="sr-only">Loading...</span>
                 </div>
             </div>
         </div>

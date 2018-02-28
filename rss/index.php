@@ -17,7 +17,7 @@ include "../init/head.php";
 	margin: auto;
 }
 </style>
-<body style="padding-top: 55px;">
+<body style="padding-top: 60px;">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -26,12 +26,12 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
+	<div class="container-fluid migalha">
 		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="../init/index.php?home=">i3Geo</a></li>
-				<li class="active">RSS/XML/JSON</li>
-			</ol>
+            <div class="btn-group btn-breadcrumb">
+                <a class="btn btn-default" href="../init/index.php?home=">i3Geo</a>
+                <a class="btn btn-default" style="pointer-events: none">RSS/XML/JSON</a>
+            </div>
 		</div>
 	</div>
 	<div class="container">
@@ -43,7 +43,7 @@ include "../init/head.php";
 						<div class="list-group" >
 							<div class="row-action-primary">
 								<div class="bs-component btn-group-sm pull-left">
-									<a class="btn btn-primary btn-fab" href="{{{link}}}"> <i class="material-icons">launch</i>
+									<a class="btn btn-danger btn-fab" href="{{{link}}}"> <i class="material-icons">launch</i>
 									</a>
 								</div>
 							</div>
