@@ -57,6 +57,9 @@ var i3geoOL;
 
 i3GEO.Interface =
 {
+        //restringe a inclusao de attribution apenas aos LAYERS adicionados manualmente
+        //e nao aos que possuem o link para a fonte definido no mapfile
+        RESTRICTATT : true,
         /*
          * Opacidade default dos layers de tipo imagem ou poligonais
          */
@@ -1399,7 +1402,7 @@ i3GEO.Interface =
                                     opcoes.title = camada.tema;
                                     opcoes.name = camada.name;
                                 }
-                                if(camada.link_tema != ""){
+                                if(camada.link_tema != "" && i3GEO.Interface.RESTRICTATT == false){
                                     source.setAttributions([ new ol.Attribution({
                                         html : '<li><a  href="'+camada.link_tema+'">'+camada.tema+'</a></li>'
                                     })]);

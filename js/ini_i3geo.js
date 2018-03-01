@@ -335,7 +335,8 @@ var i3GEO = {
 		i3GEO.Interface.IDCORPO = (c.hasOwnProperty("mapBody") && c.mapBody != "") ? c.mapBody:"mapai3Geo";
 		i3GEO.finalizaAPI = (c.hasOwnProperty("afterStart") && c.afterStart != "") ? c.afterStart:"";
 		if(c.hasOwnProperty("components")){
-			i3GEO.arvoreDeTemas.IDSMENUS = (c.components.hasOwnProperty("idsMenus")) ? c.components.idsMenus : [];
+		    i3GEO.Interface.RESTRICTATT = (c.components.hasOwnProperty("restrictAtt")) ? c.components.restrictAtt : true;
+		    i3GEO.arvoreDeTemas.IDSMENUS = (c.components.hasOwnProperty("idsMenus")) ? c.components.idsMenus : [];
 			i3GEO.catalogoMenus.IDSMENUS = (c.components.hasOwnProperty("idsMenus")) ? c.components.idsMenus : [];
 			i3GEO.busca.SERVICO = (c.components.hasOwnProperty("searchService")) ? c.components.searchService : "";
 			i3GEO.busca.SERVICOWMS = (c.components.hasOwnProperty("searchWms")) ? c.components.searchWms : "";
