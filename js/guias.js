@@ -435,6 +435,12 @@ i3GEO.guias =
 					if($(obj).attr("data-idMigalha") != undefined){
 						f.idMigalha = $(obj).attr("data-idMigalha");
 					}
+                    if($(obj).attr("data-folderFirst") != undefined){
+                        f.folderFirst = $(obj).attr("data-folderFirst");
+                    } else {
+                        f.folderFirst = "false";
+                    }
+
 					var ondeMenus = $( "#" + f.idMenus );
 
 					i3GEO.catalogoMenus.listaMenus({
@@ -443,7 +449,8 @@ i3GEO.guias =
 						"idOndeMenus": f.idMenus,
 						"idCatalogoPrincipal": f.idCatalogo,
 						"idCatalogoNavegacao": f.idNavegacao,
-						"idOndeMigalha": f.idMigalha
+						"idOndeMigalha": f.idMigalha,
+						"folderFirst": f.folderFirst
 					});
 				}
 			},
@@ -587,6 +594,7 @@ i3GEO.guias =
 
 			// nao tem conteudo para mostrar
 			var f="" ;
+
 			if (!$i(i3GEO.guias.CONFIGURA[chave].idconteudo)) {
 				f = i3GEO.guias.CONFIGURA[chave].click.apply(f,[obj]);
 				return;

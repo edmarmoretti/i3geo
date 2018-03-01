@@ -10,7 +10,8 @@ i3GEO.catalogoMenus = {
 		"idOndeMenus": "catalogoMenus",
 		"idCatalogoPrincipal": "catalogoPrincipal",
 		"idCatalogoNavegacao": "catalogoNavegacao",
-		"idOndeMigalha": "catalogoMigalha"
+		"idOndeMigalha": "catalogoMigalha",
+		"folderFirst": "false"
 	},
 	carregaTemplates: function(){
 		var t1 = i3GEO.catalogoMenus.config.templateDir,
@@ -76,6 +77,7 @@ i3GEO.catalogoMenus = {
 				i3GEO.catalogoMenus.config[i] = v;
 			});
 		}
+
 		i3GEO.catalogoMenus.aguarde();
 		if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
 			i3GEO.catalogoMenus.carregaTemplates();
@@ -169,8 +171,11 @@ i3GEO.catalogoMenus = {
 				"{{#data}}" + i3GEO.template.tema + "{{/data}}",
 				{"data":clone}
 			);
-			$("#" + config.idCatalogoNavegacao).html(t + g);
-
+            if(config.folderFirst == "false"){
+            	$("#" + config.idCatalogoNavegacao).html(t + g);
+            } else {
+                $("#" + config.idCatalogoNavegacao).html(g + t);
+            }
 			$("#" + config.idCatalogoPrincipal).fadeOut( "fast", function(){
 				$("#" + i3GEO.catalogoMenus.config.idOndeMigalha).show();
 				$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).show();
@@ -229,7 +234,11 @@ i3GEO.catalogoMenus = {
 			);
 
 			$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).fadeOut( "fast", function(){
-				$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(t + g);
+	            if(i3GEO.catalogoMenus.folderFirst == "false"){
+	                $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(t + g);
+	            } else {
+	                $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(g + t);
+	            }
 				$("#" + i3GEO.catalogoMenus.config.idOndeMigalha).show();
 				$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).show();
 			});
