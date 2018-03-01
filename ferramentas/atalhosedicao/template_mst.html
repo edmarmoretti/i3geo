@@ -1,26 +1,26 @@
 <div class='container-fluid customScrollBar'>
-	<a onclick="i3GEOF.atalhosedicao.salva()" class='btn btn-warning btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{salvaTip}}}" onclick="i3GEOF.atalhosedicao.salva()" class='btn btn-warning btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{salva}}}
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.editaLegenda();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{legendaTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.editaLegenda();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{legenda}}}
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.tabela();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{tabelaTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.tabela();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{tabela}}}
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.toponimia();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{textoTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.toponimia();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{texto}}}
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.etiquetas();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{etiquetaTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.etiquetas();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{etiqueta}}}
 	</a>
-    <a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.funcaojstip();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
-    {{{funcaojstip}}}
+    <a title="{{{funcaojsTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.funcaojstip();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+    {{{funcaojsTitulo}}}
     </a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.filtro();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{filtroTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.filtro();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{filtro}}}
 	</a>
-	<a onclick="i3GEOF.atalhosedicao.temaComGrafico();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{temacomgraficoTip}}}" onclick="i3GEOF.atalhosedicao.temaComGrafico();" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{temacomgrafico}}}
 	</a>
 
@@ -54,31 +54,31 @@
 
 	<h5>{{{ferramentas}}}</h5>
 
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.tme(i3GEOF.atalhosedicao.tema)" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{tmeTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.tme(i3GEOF.atalhosedicao.tema)" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	TME
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.storymap(i3GEOF.atalhosedicao.tema)" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{storymapTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.storymap(i3GEOF.atalhosedicao.tema)" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	Storymap
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.animagif(i3GEOF.atalhosedicao.tema)" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{animagifTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.animagif(i3GEOF.atalhosedicao.tema)" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	Animagif
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.analise.dialogo.linhaDoTempo(i3GEOF.atalhosedicao.tema)" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{timelineTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.analise.dialogo.linhaDoTempo(i3GEOF.atalhosedicao.tema)" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	Time line
 	</a>
 
 	<h5>{{{plugins}}}</h5>
 
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.parametrosSql()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{parametrossqlTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.parametrosSql()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	Par&acirc;metros SQL
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.layerKml()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{layerkmlTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.layerKml()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	KML layer
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.markercluster()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{clusterTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.markercluster()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	Marker Cluster
 	</a>
-	<a onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.heatmap()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+	<a title="{{{heatmapTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.heatmap()" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	Heatmap
 	</a>
 </div>
