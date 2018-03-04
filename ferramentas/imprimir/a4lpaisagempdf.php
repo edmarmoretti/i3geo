@@ -123,7 +123,7 @@ $imgo->saveImage($nomer);
 $pathlegenda = $dir_tmp."/".basename($imgo->imageurl)."/".basename($nomer);
 $titulo = $_GET['titulo'];
 
-substituiCon($map_file,$postgis_mapa);
+substituiConObj($map_file,$postgis_mapa);
 
 require(dirname(__FILE__).'/../../pacotes/fpdf/fpdf.php');
 $pdf = new FPDF("L","mm","A4");

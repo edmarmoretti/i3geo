@@ -875,6 +875,19 @@ i3GEO.mapa =
 						"dependencias.php",
 				"i3GEOF.opcoesLegenda.iniciaJanelaFlutuante()");
 			},
+	         /**
+             * Function: opcoesMapaRef
+             *
+             * Abre a janela de dialogo da ferramenta opcoes_maparef
+             */
+			opcoesMapaRef : function() {
+                i3GEO.util.dialogoFerramenta(
+                        "i3GEO.mapa.dialogo.opcoesMapaRef()",
+                        "opcoes_maparef",
+                        "opcoesMaparef",
+                        "dependencias.php",
+                "i3GEOF.opcoesMaparef.iniciaJanelaFlutuante()");
+            },
 			/**
 			 * Function: gradeCoord
 			 *

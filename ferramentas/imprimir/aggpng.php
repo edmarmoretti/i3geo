@@ -66,7 +66,7 @@ $nomes = nomeRandomico();
 $map = ms_newMapObj($map_file);
 $temp = str_replace(".map","xxx.map",$map_file);
 $map->save($temp);
-substituiCon($temp,$postgis_mapa);
+substituiConObj($temp,$postgis_mapa);
 $of = $map->outputformat;
 $of->set("driver","AGG/PNG");
 $of->set("imagemode","RGB");
@@ -108,10 +108,11 @@ foreach ($temas as $tema)
 		}
 	}
 }
+restauraConObj($map, $postgis_mapa);
 $map->save($temp);
 removeLinha("classeNula",$temp);
 $map = ms_newMapObj($temp);
-substituiCon($temp,$postgis_mapa);
+substituiConObj($temp,$postgis_mapa);
 $o = $map->outputformat;
 
 if($mapexten != ""){
@@ -133,7 +134,7 @@ $imgo = $map->drawscalebar();
 $nomer = ($imgo->imagepath)."escala".$nomes.".png";
 $imgo->saveImage($nomer);
 $nomeescala = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
-//refer&ecirc;ncia
+//referencia
 $o = $map->reference->outlinecolor;
 $o->setrgb(255,0,0);
 $map->preparequery();

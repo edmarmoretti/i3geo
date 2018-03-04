@@ -29,5 +29,10 @@ i3GEOF.imprimir.dicionario = {
 		pt : $trad("p7"),
 		en : $trad("p7"),
 		es : $trad("p7"),
-	} ]
+	} ],
+    "ref" : [ {
+        pt : $trad("d9t"),
+        en : $trad("d9t"),
+        es : $trad("d9t"),
+    } ]
 };

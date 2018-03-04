@@ -545,6 +545,10 @@ if (! isset($mapext)) {
 // arquivo com a imagem de refer&ecirc;ncia
 if (! isset($map_reference_image)) {
     $map_reference_image = $map->reference->image;
+    //verifica o caminho
+    if(!file_exists($map_reference_image)){
+        $map_reference_image = $locaplic . "/imagens/" . basename($map_reference_image);
+    }
 }
 // extens&atilde;o geogr&aacute;fica da imagem do mapa de refer&ecirc;ncia
 if (! isset($map_reference_extent)) {

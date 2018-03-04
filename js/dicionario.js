@@ -1205,7 +1205,7 @@ g_traducao =
         ],
         "d9t" : [
             {
-                pt : "mapa de refer&ecirc;ncia",
+                pt : "Mapa de refer&ecirc;ncia",
                 en : "Overview map",
                 es : "Mapa de referencia"
             }
