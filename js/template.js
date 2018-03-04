@@ -7,6 +7,7 @@ if (typeof (i3GEO) === 'undefined') {
 //
 //exemplo de uso:
 // var html = Mustache.render(i3GEO.template.janela.aguarde, {id: "1234"});
+// var html = Mustache.render("{{#data}}<option value='{{{img}}}'>{{{name}}}</option>{{/data}}", {data: [{name: 'xx',img:'yy'}]})
 //
 i3GEO.template = {
         botoes: {

@@ -114,7 +114,7 @@ i3GEO.janela.ativaAlerta();
 
 			var osm = new ol.layer.Tile({
 				title : "OSM",
-				visible : false,
+				visible : true,
 				isBaseLayer : true,
 				name : "osm",
 				source: new ol.source.OSM({

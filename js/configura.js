@@ -142,6 +142,8 @@ i3GEO.configura =
 		 *
 		 * Parametros que sao utilizados para configurar ferramentas especificas
 		 *
+		 * O codigo index.js deve permitir o uso dessas configuracoes
+		 *
 		 */
 		ferramentas: {
 			identifica : {

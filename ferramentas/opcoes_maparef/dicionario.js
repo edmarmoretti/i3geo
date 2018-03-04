@@ -1,9 +1,14 @@
 //+$trad(1,i3GEOF.opcoesTamanho.dicionario)+
 i3GEOF.opcoesMaparef.dicionario = {
-	'outlinecolor' : [ {
-		pt : "Cor do contorno",
-		en : "",
-		es : ""
+    'imagemTxt' : [ {
+        pt : "Imagem de refer&ecirc;ncia",
+        en : "",
+        es : ""
+    } ],
+    'outlinecolorTxt' : [ {
+    	pt : "Cor do contorno",
+    	en : "",
+    	es : ""
 	} ],
 	'testa' : [ {
 		pt : "Testar",

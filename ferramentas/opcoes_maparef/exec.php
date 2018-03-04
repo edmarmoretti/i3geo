@@ -15,6 +15,10 @@ switch (strtoupper($funcao))
 		$ocor = explode(",",$_POST["outlinecolor"]);
 		$o = $r->outlinecolor;
 		$o->setrgb($ocor[0],$ocor[1],$ocor[2]);
+		$imagem = $locaplic."/imagens/".basename($_POST["image"]).".png";
+		if(file_exists($imagem)){
+		    $r->set("image",$imagem);
+		}
 		$salvo = $map->save($map_file);
 		$retorno = "ok";
 		$_SESSION["contadorsalva"]++;
@@ -23,8 +27,7 @@ switch (strtoupper($funcao))
 	    $map = ms_newMapObj($map_file);
 	    $r = $map->reference;
 	    $retorno = array(
-	        "width" => 150,
-	        "height" => 150
+	        "outlinecolor" => corRGB($r->outlinecolor)
 	    );
 	    break;
 }

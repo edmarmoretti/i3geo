@@ -856,6 +856,14 @@ include ("../ms_configura.php");
                 identifica : {
                     //resolucao em pixels para busca de elementos
                     resolution : 8
+                },
+                //mapa de referencia
+                opcoesMaparef : {
+                    //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
+                    images : [
+                        {name: "Colorida", img: "referencia1"},
+                        {name: "B & W", img: "referencia1cinza"}
+                    ]
                 }
             },
             //configuracoes especificas para a interface que utiliza o OpenLayers

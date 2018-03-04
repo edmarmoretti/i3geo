@@ -888,6 +888,7 @@
 							//Algumas ferramentas localizadas em i3geo/ferramentas
 							//permitem que qualquer parametro ou funcao seja sobrescrita
 							//Veja o codigo de cada ferramenta para obter os nomes de parametros e funcoes
+							//O codigo index.js da ferramenta deve permitir o uso dessas configuracoes (veja o final de cada index.js
 							tools : {
 								//ferramenta de identificacao
 								identifica : {
@@ -901,7 +902,15 @@
 											+ "/ferramentas/legenda"
 								},
 								metaestat : {},
-								buscainde : {}
+								buscainde : {},
+								//mapa de referencia
+                                opcoesMaparef : {
+								    //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
+                                    images : [
+                                    	{name: "Colorida", img: "referencia1"},
+                                    	{name: "B & W", img: "referencia1cinza"}
+                                	]
+                                }
 							},
 							//configuracoes especificas para a interface que utiliza o OpenLayers
 							openLayers : {
