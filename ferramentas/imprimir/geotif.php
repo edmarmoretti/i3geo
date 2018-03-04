@@ -131,7 +131,9 @@ $imgo->saveImage($nomer);
 $nomeescala = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
 //refer&ecirc;ncia
 $o = $map->reference->outlinecolor;
-$o->setrgb(255,0,0);
+if($o->red == -1){
+    $o->setrgb(255,0,0);
+}
 $map->preparequery();
 $imgo = $map->drawreferencemap();
 $nomer = ($imgo->imagepath)."ref".$nomes.".tif";

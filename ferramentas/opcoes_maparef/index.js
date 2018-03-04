@@ -50,6 +50,7 @@ i3GEOF.opcoesMaparef = {
             var b,box;
             try{
                 $i(iddiv).innerHTML = i3GEOF.opcoesMaparef.html();
+                i3GEO.util.aplicaAquarela('form-opcoesMaparef');
                 i3GEO.janela.tempoMsg($trad('msg',i3GEOF.opcoesMaparef.dicionario));
             }
             catch(erro){i3GEO.janela.tempoMsg(erro);}

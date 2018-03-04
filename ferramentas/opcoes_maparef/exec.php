@@ -11,7 +11,10 @@ switch (strtoupper($funcao))
 	    copiaSeguranca($map_file);
 		$map = ms_newMapObj($map_file);
 		$r = $map->reference;
-		$r->updateFromString("REFERENCE SIZE " . $_POST["width"] . " " . $_POST["height"] . " END");
+		//$r->updateFromString("REFERENCE SIZE " . $_POST["width"] . " " . $_POST["height"] . " END");
+		$ocor = explode(",",$_POST["outlinecolor"]);
+		$o = $r->outlinecolor;
+		$o->setrgb($ocor[0],$ocor[1],$ocor[2]);
 		$salvo = $map->save($map_file);
 		$retorno = "ok";
 		$_SESSION["contadorsalva"]++;

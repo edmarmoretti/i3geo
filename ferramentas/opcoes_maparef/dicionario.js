@@ -1,19 +1,9 @@
 //+$trad(1,i3GEOF.opcoesTamanho.dicionario)+
 i3GEOF.opcoesMaparef.dicionario = {
-	'largura' : [ {
-		pt : "Largura",
-		en : "Width",
-		es : "Ancho"
-	} ],
-	'altura' : [ {
-		pt : "Altura",
-		en : "Height",
-		es : "Altura"
-	} ],
-	'valor' : [ {
-		pt : "Valores em pixels",
-		en : "Values in pixels",
-		es : "Valores en p&iacute;xeles"
+	'outlinecolor' : [ {
+		pt : "Cor do contorno",
+		en : "",
+		es : ""
 	} ],
 	'testa' : [ {
 		pt : "Testar",

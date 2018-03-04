@@ -1,14 +1,9 @@
 <div class='container-fluid customScrollBar'>
     <form id="form-opcoesMaparef" style="" action="#" onsubmit="i3GEOF.opcoesMaparef.executa();return false;" class="form-horizontal" role="form" method="post">
         <div class='form-group label-fixed condensed'>
-            <label class="control-label" for="i3GEOopcoesMaparefl">{{{largura}}}</label>
-            <input required class="form-control input-lg " type='text' name='width' value='{{{Tamanhol}}}' />
+            <label class="control-label" for="i3GEOopcoesMaparefl">{{{outlinecolor}}}</label>
+            <input id='opcoesMaparefoutlinecolor' name='outlinecolor' class='form-control i3geoFormIconeAquarela' type='text' value='-1,-1,-1'>
         </div>
-        <div class='form-group label-fixed condensed'>
-            <label class="control-label" for="i3GEOopcoesMaparefa">{{{altura}}}</label>
-            <input required class="form-control input-lg " type='text' name='height' value='{{{Tamanhoa}}}' />
-        </div>
-        <h5>{{{valor}}}</h5>
         <button type="submit" role="button" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
     </form>
 </div>
