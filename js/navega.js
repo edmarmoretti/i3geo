@@ -43,6 +43,28 @@ i3GEO.navega =
 			posicao : 0,
 			emAcao : false
 		},
+	      /**
+         * Function: offset
+         *
+         * Nao implementado para googlemaps
+         *
+         * Desloca o centro do mapa
+         *
+         * pixelx - numero de pixels
+         *
+         * pixely - numero de pixels
+         *
+         */
+        offset: function (pixelx,pixely){
+            if(i3GEO.Interface.ATUAL == "openlayers"){
+                var view = i3geoOL.getView(),
+                    mover = [pixelx,pixely],
+                    s = i3geoOL.getSize(),
+                    dx  = s[0]/2 + mover[0],
+                    dy = s[1]/2 + mover[1];
+                view.centerOn(view.getCenter(), s, [dx,dy]);
+            }
+        },
 		/**
 		 * Ativa a funcao de navegacao do tipo pan
 		 */

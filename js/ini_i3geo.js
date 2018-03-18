@@ -642,11 +642,7 @@ var i3GEO = {
 				if (retorno.data.erro) {
 					// i3GEO.janela.fechaAguarde("montaMapa");
 					document.body.style.backgroundColor = "white";
-					document.body.innerHTML = "<br>Para abrir o i3Geo utilize o link:<br><a href="
-						+ i3GEO.configura.locaplic
-						+ "/ms_criamapa.php >"
-						+ i3GEO.configura.locaplic
-						+ "/ms_criamapa.php</a>";
+					document.body.innerHTML = "Ocorreu um erro ao criar o mapa";
 					return ("linkquebrado");
 				} else {
 					if (retorno.data.variaveis) {
