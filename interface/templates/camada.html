@@ -1,8 +1,8 @@
-<div class="list-group condensed" style="cursor: move;">
+<div class="rangeScale{{{rangeScale}}} list-group condensed" style="cursor: move;">
     <div class="checkbox text-left">
-        <label class="{{{classeCss}}}" style="width: 270px"> <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
+        <label class="rangeScale{{{rangeScale}}} {{{classeCss}}}" style="width: 270px"> <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
             {{{checked}}} onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);"> <span class="checkbox-material noprint"><span
-                class="check"></span></span> {{{iconetema}}} {{{tema}}}
+                class="check"></span></span> {{{iconetema}}} {{{tema}}} <small>{{{rangeScaleMsg}}}</small>
         </label>
         <a data-target="#collapse{{{name}}}" class="pull-right collapsed" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button" data-toggle="collapse">
 

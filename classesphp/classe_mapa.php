@@ -281,7 +281,9 @@ class Mapa
 				"numclasses",
 				"id_medida_variavel",
 				"codigo_tipo_regiao",
-		        "utfgrid"
+		        "utfgrid",
+		        "maxscaledenom",
+		        "minscaledenom"
 		);
 		foreach ($this->layers as $oLayer){
 			$sel = "nao";
@@ -525,7 +527,9 @@ class Mapa
 						$oLayer->numclasses,
 						$oLayer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"),
 						$oLayer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"),
-				        $utfgrid
+				        $utfgrid,
+				        $oLayer->maxscaledenom,
+				        $oLayer->minscaledenom
 				);
 			}
 		}

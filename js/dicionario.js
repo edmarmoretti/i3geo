@@ -3002,5 +3002,10 @@ g_traducao =
                 en : "",
                 es : ""
             }
-        ]
+        ],
+        "rangeScaleMsg" : [{
+                pt : "Vis&iacute;vel apenas em determinadas escalas",
+                en : "",
+                es : ""
+        }]
     };
