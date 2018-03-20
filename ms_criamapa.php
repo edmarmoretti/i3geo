@@ -845,28 +845,33 @@ function incluiTemasIniciais()
         $metaestatidsligados = str_replace(',', " ", $metaestatidsligados);
         $metaestatidsligados = explode(" ", $metaestatidsligados);
         foreach ($metaestatids as $metaestatid) {
-            // $_pg["filtro"] = str_replace('"', "'", $_pg["filtro"]);
-            $m = new MetaestatInfo();
-
-            $parametros = $m->listaParametro($metaestatid, "", "", true, true);
-            // id_parametro_medida,coluna
-            $filtroPar = array();
-            $tituloPar = array();
-            foreach ($parametros as $parametro) {
-                $valoresparametro = $m->valorUnicoMedidaVariavel($metaestatid, $parametro["coluna"]);
-                //var_dump($valoresparametro);
-                //exit();
-                $valormaior = $valoresparametro[count($valoresparametro) - 1];
-                $filtroPar[] = " " . $parametro["coluna"] . "::text = '" . $valormaior[$parametro["coluna"]] . "' ";
-                $tituloPar[] = $parametro["coluna"] . ": " . $valormaior[$parametro["coluna"]];
+            if(!file_exists($_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map")){
+                $m = new MetaestatInfo();
+                $parametros = $m->listaParametro($metaestatid, "", "", true, true);
+                // id_parametro_medida,coluna
+                $filtroPar = array();
+                $tituloPar = array();
+                foreach ($parametros as $parametro) {
+                    $valoresparametro = $m->valorUnicoMedidaVariavel($metaestatid, $parametro["coluna"]);
+                    //var_dump($valoresparametro);
+                    //exit();
+                    $valormaior = $valoresparametro[count($valoresparametro) - 1];
+                    $filtroPar[] = " " . $parametro["coluna"] . "::text = '" . $valormaior[$parametro["coluna"]] . "' ";
+                    $tituloPar[] = $parametro["coluna"] . ": " . $valormaior[$parametro["coluna"]];
+                }
+                $dadosMedida = $m->listaMedidaVariavel("", $metaestatid);
+                // var_dump($dadosMedida);exit;
+                $tituloCamada = mb_convert_encoding($dadosMedida["nomemedida"],"ISO-8859-1",mb_detect_encoding($dadosMedida["nomemedida"]));
+                if(count($tituloPar)>0){
+                    $tituloCamada = $tituloCamada." (".implode(" ,",$tituloPar)." )";
+                }
+                $mapfilemetaestat = $m->mapfileMedidaVariavel($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true,$_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map");
+            } else {
+                $mapfilemetaestat = array(
+                    "mapfile" => $_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map",
+                    "layer" => "metaestatTempInit".$metaestatid
+                );
             }
-            $dadosMedida = $m->listaMedidaVariavel("", $metaestatid);
-            // var_dump($dadosMedida);exit;
-            $tituloCamada = mb_convert_encoding($dadosMedida["nomemedida"],"ISO-8859-1",mb_detect_encoding($dadosMedida["nomemedida"]));
-            if(count($tituloPar)>0){
-                $tituloCamada = $tituloCamada." (".implode(" ,",$tituloPar)." )";
-            }
-            $mapfilemetaestat = $m->mapfileMedidaVariavel($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true);
             // array(3) { ["mapfile"]=> string(52) "/tmp/ms_tmp/AAAAc20ad4d76fe97759aa27a0c99bff6710.map" ["layer"]=> string(36) "AAAAc20ad4d76fe97759aa27a0c99bff6710" ["titulolayer"]=> string(0) "" }
             // var_dump ($mapfilemetaestat);
             // exit;

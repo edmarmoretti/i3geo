@@ -545,7 +545,7 @@ class MetaestatInfo{
      * @param faz o cache do mapfile
      * @return array("mapfile"=>,"layer"=>,"titulolayer"=>)
      */
-    function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade="",$suportaWMST=false,$cachemapfile=true){
+    function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor="",$codigo_tipo_regiao="",$opacidade="",$suportaWMST=false,$cachemapfile=true,$nomeTemp=""){
         //para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
         //indicando onde deve comecar e terminar uma possivel clausula where
         //ou com /*FA*//*FA*/
@@ -557,7 +557,13 @@ class MetaestatInfo{
         if($cachemapfile == false){
             $this->nomecache = $this->nomecache . $this->nomeRandomico(5);
         }
-        $arq = $this->dir_tmp."/".$this->nomecache.".map";
+        if($nomeTemp == ""){
+            $arq = $this->dir_tmp."/".$this->nomecache.".map";
+            $nomeDoLayer = $this->nomecache;
+        } else {
+            $arq = $nomeTemp;
+            $nomeDoLayer = str_replace(".map","",basename($nomeTemp));
+        }
         //error_log("--                        ");
         //error_log("--xxxxxxxxxxx---- nomecache: ".$arq);
         if(!file_exists($arq)){
@@ -699,7 +705,7 @@ class MetaestatInfo{
                 }
             }
             $dados[] = "LAYER";
-            $dados[] = '	NAME "'.$this->nomecache.'"';
+            $dados[] = '	NAME "'.$nomeDoLayer.'"';
             $dados[] = "	TYPE $tipolayer";
             $dados[] = '	DATA "'.$sqlf.'"';
             //$dados[] = '	CONNECTION "'.$conexao.'"';
@@ -793,7 +799,7 @@ class MetaestatInfo{
             }
         }
 
-        return array("mapfile"=>$arq,"layer"=>$this->nomecache,"titulolayer"=>$titulolayer);
+        return array("mapfile"=>$arq,"layer"=>$nomeDoLayer,"titulolayer"=>$titulolayer);
     }
     /**
      * Cria um mapfile para visualizacao de regioes
