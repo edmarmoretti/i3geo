@@ -56,7 +56,6 @@ i3GEO.catalogoMenus = {
 		// confirma se o tema existe no mapa
 		var tema = i3GEO.arvoreDeCamadas.pegaTema(tid),ck;
 		if ( tema !== "" && tema.plugini3geo.plugin != "parametrossql") {
-			//
 			ck = i3GEO.arvoreDeCamadas.capturaCheckBox(tid);
 			if(ck != false && ck.onclick){
 				ck.checked = !ck.checked;
