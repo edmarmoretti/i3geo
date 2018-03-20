@@ -248,6 +248,7 @@ i3GEOF.distancia =
                         x2 = temp[2];
                         y2 = temp[3];
                     }
+                    //console.info(x1+" "+y1+" "+x2+" "+y2)
                     trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
                     parcial = i3GEOF.distancia.openlayers.somaDist();
                     direcao = i3GEO.calculo.direcao(x1, y1, x2, y2);

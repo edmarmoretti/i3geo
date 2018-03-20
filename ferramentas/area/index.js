@@ -196,7 +196,8 @@ i3GEOF.area =
 							coords = geom.getLinearRing(0).getCoordinates(),
 							n = coords.length,
 							m = i3GEOF.area.openlayers;
-						ponto = new ol.geom.Point(coords[n-1]);
+						ponto = new ol.geom.Point(coords[n-2]);
+						//console.info(coords)
 						if(m.numpontos === n-1){
 							//clicou
 							m.numpontos = n;
@@ -212,6 +213,7 @@ i3GEOF.area =
 			modify : function(point,geom) {
 				var temp,sourceProj,coordinates,wgs84Sphere, per, area, n, x1, y1, x2, y2, trecho, direcao,
 				coord = point.getCoordinates();
+
 				n = i3GEOF.area.pontos.ypt.length;
 				if (n > 1) {
 					x1 = i3GEOF.area.pontos.xpt[n - 1];
@@ -243,7 +245,9 @@ i3GEOF.area =
 						x1 = temp[0];
 						y1 = temp[1];
 					}
+
 					per += i3GEO.calculo.distancia(x1, y1, x2, y2);
+
 					//getGeodesicArea
 					sourceProj = i3geoOL.getView().getProjection();
 					geom = (geom.clone().transform(sourceProj, 'EPSG:4326'));
