@@ -267,6 +267,7 @@ include_once ("classe_estatistica.php");
 $protocolo = explode("/", $_SERVER['SERVER_PROTOCOL']);
 $protocolo = strtolower($protocolo[0]) . '://' . $_SERVER['HTTP_HOST']; // $_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/classesphp/mapa_controle.php", "", $protocolo . $_SERVER["PHP_SELF"]);
+
 //
 // inserido na vers&atilde;o 4.6
 //
@@ -276,13 +277,13 @@ if (! isset($locaplic)) {
 //
 // substitui a string de conex&atilde;o
 //
-
 if ($funcao != "recuperamapa" && $funcao != "TEMA2SLD") {
     if (! substituiCon($map_file, $postgis_mapa)) {
         cpjson("erro", $cp);
         return;
     }
 }
+
 //
 // faz a busca da fun&ccedil;&atilde;o que deve ser executada
 //
@@ -1070,6 +1071,7 @@ switch (strtoupper($funcao)) {
      * <Temas->insereFeature>
      */
     case "INSEREFEATURE":
+
         include_once ("classe_temas.php");
         copiaSeguranca($map_file);
         $m = new Temas($map_file, "");

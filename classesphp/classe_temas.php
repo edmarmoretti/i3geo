@@ -914,7 +914,7 @@ $wkt - boolean indicando se $xy e um WKT
 					$pinlayer->setmetadata("TEMA",$texto);
 					$pinlayer->setmetadata("tiles","nao");
 					$pinlayer->set("type",MS_LAYER_POINT);
-					$pinlayer->set("opacity","100");
+					//$pinlayer->set("opacity","100");
 				break;
 			}
 		}
