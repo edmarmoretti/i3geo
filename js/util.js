@@ -1965,6 +1965,7 @@ i3GEO.util =
 				var ins = "", temp, i, dados;
 				if (retorno.data !== undefined) {
 					ins += "<select class='" + classe + "' id='" + id + "'>";
+					ins += "<option value='arial' >arial</option>";
 					ins += "<option value='bitmap' >bitmap</option>";
 					dados = retorno.data.split(",");
 					temp = dados.length;

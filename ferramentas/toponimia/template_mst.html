@@ -1,169 +1,152 @@
-<div id='i3GEOfiltroguiasYUI' class='yui-navset' style='height:38px; top: 0px; cursor: pointer; left: 0px; margin-left: 2px;'>
-	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
-		<li>
-			<div id='i3GEOtoponimiaguia1' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{fonteDados}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOtoponimiaguia2' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{propriedades}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOtoponimiaguia3' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{testa}}}</em>
-				</a>
-			</div>
-		</li>
-	</ul>
+<div id='i3GEOfiltroguiasYUI' class='yui-navset' style='height: 38px; top: 0px; cursor: pointer; left: 0px; margin-left: 2px;'>
+    <ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
+        <li>
+            <div id='i3GEOtoponimiaguia1' style='text-align: center; left: 0px;'>
+                <a>
+                    <em>{{{fonteDados}}}</em>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div id='i3GEOtoponimiaguia2' style='text-align: center; left: 0px;'>
+                <a>
+                    <em>{{{propriedades}}}</em>
+                </a>
+            </div>
+        </li>
+        <li>
+            <div id='i3GEOtoponimiaguia3' style='text-align: center; left: 0px;'>
+                <a>
+                    <em>{{{testa}}}</em>
+                </a>
+            </div>
+        </li>
+    </ul>
 </div>
 <div class='container-fluid customScrollBar' style="height: calc(100% - 39px); overflow: auto;">
 
-<div id='i3GEOtoponimiaguia1obj' class='container-fluid'>
-	<div  id='i3GEOFtoponimiaComboCabeca' class='form-group condensed' style='width:100%'>
+    <div id='i3GEOtoponimiaguia1obj' class='container-fluid'>
+        <div id='i3GEOFtoponimiaComboCabeca' class='form-group condensed' style='width: 100%'></div>
 
-	</div>
+        <div class='form-group condensed'>
+            <label class="control-label" for="i3GEOlegentaTipoGeo">{{{selecionaItem}}}</label>
+            <div style="width: 100%;" class="input-group" id='i3GEOtoponimiaDivListaItens'></div>
+        </div>
 
-	<div class='form-group condensed'>
-		<label class="control-label" for="i3GEOlegentaTipoGeo">{{{selecionaItem}}}</label>
-		<div style="width: 100%;" class="input-group" id='i3GEOtoponimiaDivListaItens'>
-		</div>
-	</div>
+        <h5>{{{minmaxscale}}}</h5>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaMinscale">min</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiaMinscale' value='' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaMinscale">max</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiaMaxscale' value='' />
+        </div>
 
-	<h5>{{{minmaxscale}}}</h5>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiaMinscale">min</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiaMinscale' value='' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiaMinscale">max</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiaMaxscale' value='' />
-	</div>
+        <div class="checkbox text-left">
+            <label> <input checked id='i3GEOtoponimianovotema' type="checkbox"> <span class="checkbox-material noprint"><span class="check"></span></span> {{{adicionaToponimia}}}
+            </label>
+        </div>
+        <button onclick="i3GEOF.toponimia.cria()" class='btn btn-primary btn-sm btn-raised'>{{{criaToponimia}}}</button>
+        <button onclick="i3GEOF.toponimia.remove()" class='btn btn-primary btn-sm btn-raised'>{{{removeToponimia}}}</button>
+    </div>
+    <!-- Propriedades -->
+    <div id='i3GEOtoponimiaguia2obj' class='container-fluid'>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaDivListaFonte">{{{fonte}}}</label>
+            <div style="width: 100%;" class="input-group" id='i3GEOtoponimiaDivListaFonte'></div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiatamanho_i">{{{tamanho}}}</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiatamanho_i' value='12' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaangulo_i">{{{angulo}}}</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiaangulo_i' value='0' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaoffsetx_i">{{{deslocamentoTexto}}} X</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiaoffsetx_i' value='0' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaoffsety_i">{{{deslocamentoTexto}}} Y</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiaoffsety_i' value='0' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiafrente_i">{{{corTexto}}}</label> <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiafrente_i'
+                value='0,0,0' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiamascara_i">{{{corMascara}}}</label> <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiamascara_i'
+                value='-1,-1,-1' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaposition_i">{{{posicionamento}}}</label>
+            <div style="width: 100%;" class="input-group">
+                <select class="form-control" id="i3GEOtoponimiaposition_i">
+                    <option value='MS_AUTO'>auto</option>
+                    <option value='MS_UL'>UL</option>
+                    <option value='MS_UC'>UC</option>
+                    <option value='MS_UR'>UR</option>
+                    <option value='MS_CL'>CL</option>
+                    <option value='MS_CC'>CC</option>
+                    <option value='MS_CR'>CR</option>
+                    <option value='MS_LL'>LL</option>
+                    <option value='MS_LC'>LC</option>
+                    <option value='MS_LR'>LR</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiafundoc_i">{{{corFundo}}}</label> <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiafundoc_i'
+                value='0,0,0' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiasombra_i">{{{corSombraFundo}}}</label> <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiasombra_i'
+                value='' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiasombrax_i">{{{deslocamentoSombraFundo}}} X</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiasombrax_i' value='' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiasombray_i">{{{deslocamentoSombraFundo}}} Y</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiasombray_i' value='' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiafrentes_i">{{{corSombra}}} Y</label> <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiafrentes_i'
+                value='' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiafrentex_i">{{{deslocamentoSombra}}} X</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiafrentex_i' value='1' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiafrentey_i">{{{deslocamentoSombra}}} Y</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiafrentey_i' value='1' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaforce_i">{{{forcaColisaoTextos}}}</label>
+            <div style="width: 100%;" class="input-group">
+                <select class="form-control" id="i3GEOtoponimiaforce_i">
+                    <option value='0'>{{{nao}}}</option>
+                    <option value='1'>{{{sim}}}</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiamindistance_i">{{{distanciaMinTextos}}}</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiamindistance_i' value='1' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiaminfeaturesize_i">{{{tamanhoMinElementoCarto}}}</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiaminfeaturesize_i'
+                value='auto' />
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiapartials_i">{{{textoUltrapassaMapa}}}</label>
+            <div style="width: 100%;" class="input-group">
+                <select class="form-control" id="i3GEOtoponimiapartials_i">
+                    <option value='1'>{{{sim}}}</option>
+                    <option value='0'>{{{nao}}}</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOtoponimiawrap_i">{{{caracterQuebraTexto}}}</label> <input class="form-control input-lg" type='text' id='i3GEOtoponimiawrap_i' value='' />
+        </div>
+    </div>
+    <!-- teste -->
 
-	<div class="checkbox text-left">
-		<label>
-			<input checked id='i3GEOtoponimianovotema' type="checkbox">
-			<span class="checkbox-material noprint"><span class="check"></span></span> {{{adicionaToponimia}}}
-		</label>
-	</div>
-	<button onclick="i3GEOF.toponimia.cria()" class='btn btn-primary btn-sm btn-raised'>{{{criaToponimia}}}</button>
-	<button onclick="i3GEOF.toponimia.remove()" class='btn btn-primary btn-sm btn-raised'>{{{removeToponimia}}}</button>
 </div>
-<!-- Propriedades -->
-<div id='i3GEOtoponimiaguia2obj' class='container-fluid'>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOtoponimiaDivListaFonte">{{{fonte}}}</label>
-		<div style="width: 100%;" class="input-group" id='i3GEOtoponimiaDivListaFonte'>
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiatamanho_i">{{{tamanho}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiatamanho_i' value='8' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiaangulo_i">{{{angulo}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiaangulo_i' value='0' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiaoffsetx_i">{{{deslocamentoTexto}}} X</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiaoffsetx_i' value='0' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiaoffsety_i">{{{deslocamentoTexto}}} Y</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiaoffsety_i' value='0' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiafrente_i">{{{corTexto}}}</label>
-		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiafrente_i' value='0,0,0' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiamascara_i">{{{corMascara}}}</label>
-		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiamascara_i' value='-1,-1,-1' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOtoponimiaposition_i">{{{posicionamento}}}</label>
-		<div style="width: 100%;" class="input-group">
-			<select class="form-control" id="i3GEOtoponimiaposition_i" >
-				<option value='MS_AUTO'>auto</option>
-				<option value='MS_UL'>UL</option>
-				<option value='MS_UC'>UC</option>
-				<option value='MS_UR'>UR</option>
-				<option value='MS_CL'>CL</option>
-				<option value='MS_CC'>CC</option>
-				<option value='MS_CR'>CR</option>
-				<option value='MS_LL'>LL</option>
-				<option value='MS_LC'>LC</option>
-				<option value='MS_LR'>LR</option>
-			</select><b class="caret careti"></b>
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiafundoc_i">{{{corFundo}}}</label>
-		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiafundoc_i' value='0,0,0' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiasombra_i">{{{corSombraFundo}}}</label>
-		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiasombra_i' value='' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiasombrax_i">{{{deslocamentoSombraFundo}}} X</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiasombrax_i' value='' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiasombray_i">{{{deslocamentoSombraFundo}}} Y</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiasombray_i' value='' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiafrentes_i">{{{corSombra}}} Y</label>
-		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOtoponimiafrentes_i' value='' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiafrentex_i">{{{deslocamentoSombra}}} X</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiafrentex_i' value='1' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiafrentey_i">{{{deslocamentoSombra}}} Y</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiafrentey_i' value='1' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOtoponimiaforce_i">{{{forcaColisaoTextos}}}</label>
-		<div style="width: 100%;" class="input-group">
-			<select class="form-control" id="i3GEOtoponimiaforce_i" >
-				<option value='0'>{{{nao}}}</option>
-				<option value='1'>{{{sim}}}</option>
-			</select><b class="caret careti"></b>
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiamindistance_i">{{{distanciaMinTextos}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiamindistance_i' value='1' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiaminfeaturesize_i">{{{tamanhoMinElementoCarto}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiaminfeaturesize_i' value='auto' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOtoponimiapartials_i">{{{textoUltrapassaMapa}}}</label>
-		<div style="width: 100%;" class="input-group">
-			<select class="form-control" id="i3GEOtoponimiapartials_i" >
-			<option value='1'>{{{sim}}}</option>
-			<option value='0'>{{{nao}}}</option>
-			</select><b class="caret careti"></b>
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="i3GEOtoponimiawrap_i">{{{caracterQuebraTexto}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOtoponimiawrap_i' value='' />
-	</div>
-</div>
-<!-- teste -->
-<div id='i3GEOtoponimiaguia3obj' class='container-fluid'>
-	<div id='i3GEOtoponimiaTeste' style='width: 98%; top: 15px; left: 0px;'></div>
-</div>
+<div id='i3GEOtoponimiaguia3obj' class='container-fluid' >
+    <div id='i3GEOtoponimiaTeste' style='width: 98%; top: -100px; left: 0px;'></div>
 </div>

@@ -575,7 +575,7 @@ i3GEO.Interface =
                     }
                     i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
                     if(i3GEO.desenho.layergrafico){
-                        //i3GEO.desenho[i3GEO.Interface.ATUAL].removePins();
+                        i3GEO.desenho[i3GEO.Interface.ATUAL].removePins();
                     }
                     return false;
                 };

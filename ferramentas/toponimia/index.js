@@ -288,7 +288,7 @@ i3GEOF.toponimia = {
 		{return;}
 		i3GEOF.toponimia.aguarde.visibility = "visible";
 		var monta = function(retorno){
-				$i("i3GEOtoponimiaTeste").innerHTML= "<img src='"+retorno.data+"' >";
+				$i("i3GEOtoponimiaTeste").innerHTML= "<img style='height:" + i3GEO.parametros.h + "px;width:" + i3GEO.parametros.w + "px;' src='"+retorno.data+"' >";
 				i3GEOF.toponimia.aguarde.visibility = "hidden";
 			},
 			par = i3GEOF.toponimia.pegaPar(),
