@@ -119,7 +119,12 @@ i3GEO.legenda =
 			}
 
 			if (retorno.data.legenda != "") {
-				$(".legendaTemaSolto").remove();
+			    $.each(retorno.data.legenda, function( index, value ) {
+    			    if(value.tipo == "imagem"){
+    			        value.classes[0].checkbox = "hidden";
+    			    }
+			    });
+			    $(".legendaTemaSolto").remove();
 				t = Mustache.to_html(
 						"{{#data}}" + i3GEO.template.legenda + "{{/data}}",
 						{

@@ -314,7 +314,7 @@ class Legenda
             // verifica se &eacute; wms ou se o metadata legendaimg est&aacute; definido
             $c = $this->layer->connectiontype;
             if ($c == 7 || $this->layer->getmetadata("legendaimg") != "") {
-                return ($this->tabelaLegenda());
+                //return ($this->tabelaLegenda());
             }
             for ($i = 0; $i < $numlayers; ++ $i) {
                 $la = $this->mapa->getlayer($i);
@@ -338,11 +338,17 @@ class Legenda
             }
             $desligarLayer = array();
             if ($la->status == MS_DEFAULT) {
-                if ($la->getmetadata("legendaimg") != "") {
+                //      "legendawms"	"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=biomas&format=image/png"
+
+                if ($la->getmetadata("legendaimg") != "" || $la->getmetadata("legendawms") != "") {
+                    $imagem = $la->getmetadata("legendaimg");
+                    if($imagem == ""){
+                        $imagem = $la->getmetadata("legendawms");
+                    }
                     $classes = array();
                     $classes[] = array(
                         "nome" => "",
-                        "img" => $la->getmetadata("legendaimg"),
+                        "img" => $imagem,
                         "checked" => "checked",
                         "index" => 0,
                         "layer" => $la->name
@@ -350,7 +356,8 @@ class Legenda
                     $legenda[] = array(
                         "layer" => $la->name,
                         "nome" => $this->converte($la->getmetadata("tema")),
-                        "classes" => $classes
+                        "classes" => $classes,
+                        "tipo" => "imagem"
                     );
                 } else {
                     $la->set("minscaledenom", 0);
@@ -404,7 +411,8 @@ class Legenda
                     $legenda[] = array(
                         "layer" => $la->name,
                         "nome" => $this->converte($la->getmetadata("tema")),
-                        "classes" => $classes
+                        "classes" => $classes,
+                        "tipo" => ""
                     );
                 }
             }
