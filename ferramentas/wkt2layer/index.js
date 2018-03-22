@@ -6,7 +6,8 @@ if (typeof (i3GEOF) === 'undefined') {
  */
 i3GEOF.wkt2layer =
 {
-		/*
+		position: [150,150],
+        /*
 	Variavel: aguarde
 
 	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
@@ -123,7 +124,7 @@ i3GEOF.wkt2layer =
 						""
 				);
 			divid = janela[2].id;
-			janela[0].moveTo(150,150);
+			janela[0].moveTo(i3GEOF.wkt2layer.position[0],i3GEOF.wkt2layer.position[1]);
 			$i("i3GEOF.wkt2layer_corpo").style.backgroundColor = "white";
 			i3GEOF.wkt2layer.aguarde = $i("i3GEOF.wkt2layer_imagemCabecalho").style;
 			i3GEOF.wkt2layer.inicia(divid,wkt,texto);
@@ -209,3 +210,10 @@ i3GEOF.wkt2layer =
 			cp.call(p,"foo",monta,"xy="+wkt);
 		}
 };
+//aplica ao codigo i3GEOF definicoes feitas na interface do mapa
+//isso permite a substituicao de funcoes e parametros
+if(i3GEO.configura.ferramentas.hasOwnProperty("wkt2layer")){
+  jQuery.each( i3GEO.configura.ferramentas.wkt2layer, function(index, value) {
+      i3GEOF.wkt2layer[index] = i3GEO.configura.ferramentas.wkt2layer[index];
+  });
+}

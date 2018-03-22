@@ -316,6 +316,8 @@ class Toponimia
             $label->set("position", $p[$position]);
         }
         if ($tipo == "teste") {
+            $this->layer->set("maxscaledenom", 0);
+            $this->layer->set("minscaledenom", 0);
             $i = gravaImagemMapa($this->mapa);
             return ($i["url"]);
         } else {

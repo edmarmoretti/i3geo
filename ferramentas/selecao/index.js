@@ -434,6 +434,7 @@ i3GEOF.selecao =
 
 					i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
 					i3GEOF.selecao.figura[api].inicia();
+					i3GEO.janela.tempoMsg($trad('cliqueSel', i3GEOF.selecao.dicionario));
 				}
 			// } catch (e) {
 				// i3GEO.janela.tempoMsg("Erro: " + e);

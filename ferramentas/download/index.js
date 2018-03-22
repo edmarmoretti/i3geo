@@ -91,8 +91,8 @@ i3GEOF.download = {
 	*/
 	html:function(divid,tema){
 		var cp,p,ins,mostraDownload,c;
-		ins = '<div class="container-fluid"><h5 class="alert alert-info">'+$trad('download',i3GEOF.download.dicionario)+'</h5>';
-		ins += '<div id=i3GEOdownloadResultado ></div>';
+		ins = '<div class="container-fluid" style="top:0px;position:absolute;"><h5 class="alert alert-info">'+$trad('download',i3GEOF.download.dicionario)+'</h5>';
+		ins += '<div id=i3GEOdownloadResultado ></div></div>';
 		$i(divid).innerHTML += ins;
 		c = i3GEO.arvoreDeCamadas.pegaTema(tema);
 		//wms
@@ -157,7 +157,7 @@ i3GEOF.download = {
 		minimiza = function(){
 			i3GEO.janela.minimiza("i3GEOF.download",200);
 		};
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' ></span></div>";
+		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Download</span></div>";
 		janela = i3GEO.janela.cria(
 			"300px",
 			"200px",

@@ -33,6 +33,13 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 		}
 		$m->layer->set("labelmaxscaledenom",$_GET["maxscale"]);
 		$m->layer->set("labelminscaledenom",$_GET["minscale"]);
+		$p = $m->layer->getProcessing();
+		if(!in_array("LABEL_NO_CLIP=True",$p)){
+		    $m->layer->setprocessing("LABEL_NO_CLIP=True");
+		}
+		if(!in_array("POLYLINE_NO_CLIP=True",$p)){
+		    $m->layer->setprocessing("POLYLINE_NO_CLIP=True");
+		}
 		if ($_GET["tipo"] != "teste"){
 			$m->salva();$_SESSION["contadorsalva"]++;
 		}

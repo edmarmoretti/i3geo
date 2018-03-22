@@ -85,7 +85,7 @@ i3GEOF.toponimia = {
 			$i("i3GEOtoponimiaguia2").onclick = function()
 			{i3GEO.guias.mostraGuiaFerramenta("i3GEOtoponimiaguia2","i3GEOtoponimiaguia");};
 			$i("i3GEOtoponimiaguia3").onclick = function(){
-				i3GEO.guias.mostraGuiaFerramenta("i3GEOtoponimiaguia3","i3GEOtoponimiaguia");
+				//i3GEO.guias.mostraGuiaFerramenta("i3GEOtoponimiaguia3","i3GEOtoponimiaguia");
 				i3GEOF.toponimia.testa();
 			};
 			//
@@ -288,8 +288,9 @@ i3GEOF.toponimia = {
 		{return;}
 		i3GEOF.toponimia.aguarde.visibility = "visible";
 		var monta = function(retorno){
-				$i("i3GEOtoponimiaTeste").innerHTML= "<img style='height:" + i3GEO.parametros.h + "px;width:" + i3GEO.parametros.w + "px;' src='"+retorno.data+"' >";
+				//$i("i3GEOtoponimiaTeste").innerHTML= "<img style='height:" + i3GEO.parametros.h + "px;width:" + i3GEO.parametros.w + "px;' src='"+retorno.data+"' >";
 				i3GEOF.toponimia.aguarde.visibility = "hidden";
+		        window.open(retorno.data);
 			},
 			par = i3GEOF.toponimia.pegaPar(),
 			p = i3GEO.configura.locaplic+"/ferramentas/toponimia/exec.php?g_sid="+i3GEO.configura.sid+

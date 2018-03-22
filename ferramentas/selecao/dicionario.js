@@ -179,5 +179,10 @@ i3GEOF.selecao.dicionario = {
 		pt : "Op&ccedil;&otilde;es de sele&ccedil;&atilde;o. Clique no &iacute;cone para ativar.",
 		en : "Selection options. Click the icon to activate.",
 		es : "Opciones de selecci&oacute;n. Haga clic en el icono para activar."
-	} ]
+	} ],
+    "cliqueSel" : [ {
+        pt : "Clique no desenho existente para us&aacute;-lo na sele&ccedil;&atilde;o",
+        en : "",
+        es : ""
+    } ]
 };

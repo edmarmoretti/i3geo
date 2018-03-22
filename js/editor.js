@@ -85,6 +85,9 @@ i3GEO.editor =
                             return i3GEO.editorOL.backup.getSource().getFeatures();
                         };
                     }
+                    if(jQuery.isEmptyObject(i3GEO.editorOL.botoes)){
+                        i3GEO.editorOL.botoes = i3GEO.editor.botoes;
+                    }
                     i3GEO.editorOL.criaBotoes(i3GEO.editorOL.botoes);
                 }
             },
