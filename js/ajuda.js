@@ -74,5 +74,15 @@ i3GEO.ajuda =
 
 			    return;
 			});
+		},
+		dialogo : {
+		    sobre : function() {
+                i3GEO.util.dialogoFerramenta(
+                        "i3GEO.mapa.dialogo.sobre()",
+                        "sobre",
+                        "sobre",
+                        "dependencias.php",
+                "i3GEOF.sobre.iniciaJanelaFlutuante()");
+            }
 		}
 	};
