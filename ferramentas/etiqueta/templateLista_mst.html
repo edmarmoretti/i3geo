@@ -8,7 +8,8 @@
 			<td style="text-align:center;padding: 10px;">Busca</td>
 			<td style="text-align:center;padding: 10px;">Alias</td>
 			<td style="text-align:center;padding: 10px;;">Link</td>
-		<tr>{{#linhas}}
+		<tr>
+{{#linhas}}
 		<tr>
 			<td>{{{item}}}</td>
 			<td>
@@ -34,7 +35,7 @@
             <td>
                 <div class="radio radio-primary condensed"  style="text-align:center;">
                     <label>
-                        <input {{{ckUtfdata}}} type='radio' value="{{{item}}}" name='utfdata' onclick='javascript:if(this.checked){this.checked=false;}'/>
+                        <input {{{ckUtfdata}}} type='radio' value="{{{item}}}" name='utfdata' />
                         <span class="circle"></span>
 						<span class="check"></span>
                     </label>
@@ -43,7 +44,7 @@
 			<td>
 				<div class="radio radio-primary condensed"  style="text-align:center;">
 					<label>
-						<input {{{ckBuscaRapida}}} type='radio' value="{{{item}}}" name='itembuscarapida' onclick='javascript:if(this.checked){this.checked=false;}'/>
+						<input {{{ckBuscaRapida}}} type='radio' value="{{{item}}}" name='itembuscarapida' />
 						<span class="circle"></span>
 						<span class="check"></span>
 					</label>
@@ -62,5 +63,30 @@
 
 		</tr>
 		{{/linhas}}
+                <tr>
+            <td></td>
+            <td style="text-align:center;padding: 10px;"></td>
+            <td style="text-align:center;padding: 10px;"></td>
+            <td style="text-align:center;padding: 10px;">
+            <div class="radio radio-primary condensed"  style="text-align:center;">
+                    <label>
+                        <input type='radio' value="" name='utfdata' />
+                        <span class="circle"></span>
+                        <span class="check"></span>
+                    </label>
+                </div>
+            </td>
+            <td style="text-align:center;padding: 10px;">
+            <div class="radio radio-primary condensed"  style="text-align:center;">
+                    <label>
+                        <input type='radio' value="" name='itembuscarapida' />
+                        <span class="circle"></span>
+                        <span class="check"></span>
+                    </label>
+                </div>
+            </td>
+            <td style="text-align:center;padding: 10px;"></td>
+            <td style="text-align:center;padding: 10px;;"></td>
+        <tr>
 	</table>
 </div>
