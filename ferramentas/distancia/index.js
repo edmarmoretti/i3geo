@@ -3,6 +3,7 @@ if (typeof (i3GEOF) === 'undefined') {
 }
 i3GEOF.distancia =
 {
+        position: [150,0],
         /**
          * Armazena os pontos clicados para realizar os calculos
          */
@@ -120,7 +121,7 @@ i3GEOF.distancia =
             };
             YAHOO.util.Event.addListener(janela[0].close, "click", temp);
             imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-            janela[0].moveTo(imagemxy[0] + 150, imagemxy[1]);
+            janela[0].moveTo(i3GEOF.distancia.position[0],i3GEOF.distancia.position[1]);
         },
         /*
          * Function: ativaFoco
@@ -671,3 +672,10 @@ i3GEOF.distancia =
             }
         }
 };
+//aplica ao codigo i3GEOF definicoes feitas na interface do mapa
+//isso permite a substituicao de funcoes e parametros
+if(i3GEO.configura.ferramentas.hasOwnProperty("distancia")){
+jQuery.each( i3GEO.configura.ferramentas.distancia, function(index, value) {
+  i3GEOF.distancia[index] = i3GEO.configura.ferramentas.distancia[index];
+});
+}

@@ -3,7 +3,8 @@ if (typeof (i3GEOF) === 'undefined') {
 }
 i3GEOF.area =
 	{
-		/**
+        position: [150,0],
+        /**
 		 * Armazena os pontos clicados para realizar os calculos
 		 */
 		pontos : {},
@@ -109,7 +110,7 @@ i3GEOF.area =
 				};
 			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 			imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-			janela[0].moveTo(imagemxy[0] + 150, imagemxy[1]);
+			janela[0].moveTo(i3GEOF.area.position[0],i3GEOF.area.position[1]);
 		},
 		/*
 		 * Function: ativaFoco
@@ -620,3 +621,10 @@ i3GEOF.area =
 			}
 		}
 	};
+//aplica ao codigo i3GEOF definicoes feitas na interface do mapa
+//isso permite a substituicao de funcoes e parametros
+if(i3GEO.configura.ferramentas.hasOwnProperty("area")){
+jQuery.each( i3GEO.configura.ferramentas.area, function(index, value) {
+    i3GEOF.area[index] = i3GEO.configura.ferramentas.area[index];
+});
+}
