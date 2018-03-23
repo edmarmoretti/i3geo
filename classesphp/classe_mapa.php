@@ -1627,7 +1627,7 @@ class Mapa
 		}
 		else
 		{
-			$urllegenda = $servico."&service=wms&request=getlegendgraphic&version=".$versao."&service=wms&layer=".$tema."&format=".$im;
+			$urllegenda = $servico."&request=getlegendgraphic&version=".$versao."&service=wms&layer=".$tema."&format=".$im;
 			$layer->setmetadata("legendawms",$urllegenda);
 		}
 		$layer->setmetadata("wms_format",$im);

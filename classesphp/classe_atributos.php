@@ -2173,12 +2173,12 @@ class Atributos
 			}
 			$res = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,$formatoinfo);
 			$res = str_replace("INFOFORMAT","INFO_FORMAT",$res);
-			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"MIME");
+			$res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1,"text/html");
 			$res2 = str_replace("INFOFORMAT","INFO_FORMAT",$res2);
-			$resposta = file($res);
 			$n = array();
 			if(strtoupper($formatoinfo) != "TEXT/HTML" && strtoupper($formatoinfo) != "MIME"){
-				foreach($resposta as $r){
+			    $resposta = file($res);
+			    foreach($resposta as $r){
 					$t = explode("=",$r);
 					if(count($t) > 1){
 						$v = str_replace("\\n","",$t[1]);
@@ -2212,15 +2212,15 @@ class Atributos
 				}
 			}
 			$id = nomeRandomico();
-			if(count($n) == 0 && strtoupper($formatoinfo) != "TEXT/HTML"){
-				$formatoinfo = "MIME";
-			}
-			if(strtoupper($formatoinfo) == "TEXT/HTML" && $res != ""){
-				$n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res."'></iframe>","link"=>"","img"=>"");
-			}
-			if(strtoupper($formatoinfo) == "MIME" && $res2 != ""){
+			//if(count($n) == 0 && strtoupper($formatoinfo) != "TEXT/HTML"){
+			//	$formatoinfo = "MIME";
+			//}
+			//if(strtoupper($formatoinfo) == "TEXT/HTML" && $res != ""){
+				//$n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res."'></iframe>","link"=>"","img"=>"");
+			//}
+			//if(strtoupper($formatoinfo) == "MIME" && $res2 != ""){
 				$n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res2."'></iframe>","link"=>"","img"=>"");
-			}
+			//}
 			if($res != ""){
 				$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"","idIframe"=>$id);
 			}
