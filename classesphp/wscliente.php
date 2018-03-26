@@ -65,10 +65,10 @@ $funcao = $_GET["funcao"];
 
 if ($funcao == "getcapabilities")
 {
-	$cp->register('getcapabilities');
-	$cp->start();
-	$cp->return_data();
-	exit;
+    $cp->register('getcapabilities');
+    $cp->start();
+    $cp->return_data();
+    exit;
 }
 /*
 Function: getcapabilities
@@ -89,57 +89,57 @@ Retorno:
 */
 function getcapabilities()
 {
-	global $cp,$onlineresource,$tipo;
-	$teste = explode("=",$onlineresource);
-	if ( count($teste) > 1 ){$onlineresource = $onlineresource."&";}
-	# -------------------------------------------------------------
-	# Test that there is a wms service defined before proceding.
-	#
-	if ( ! $onlineresource ) {
-		# No WMS service provided.
-		wms_fatal("No 'onlineresource' defined.");
-	}
+    global $cp,$onlineresource,$tipo;
+    $teste = explode("=",$onlineresource);
+    if ( count($teste) > 1 ){$onlineresource = $onlineresource."&";}
+    # -------------------------------------------------------------
+    # Test that there is a wms service defined before proceding.
+    #
+    if ( ! $onlineresource ) {
+        # No WMS service provided.
+        wms_fatal("No 'onlineresource' defined.");
+    }
 
-	$wms_service_request = $onlineresource . "REQUEST=GetCapabilities&SERVICE=".$tipo;
+    $wms_service_request = $onlineresource . "REQUEST=GetCapabilities&SERVICE=".$tipo;
 
-	# -------------------------------------------------------------
-	# Test that the capabilites file has successfully downloaded.
-	#
-	if( !($wms_capabilities = file($wms_service_request)) ) {
-		# Cannot download the capabilities file.
-		wms_fatal("N&atilde;o foi poss&iacute;vel ler o retorno do servi&ccedil;o '$wms_service_request'.");
-	}
+    # -------------------------------------------------------------
+    # Test that the capabilites file has successfully downloaded.
+    #
+    if( !($wms_capabilities = file($wms_service_request)) ) {
+        # Cannot download the capabilities file.
+        wms_fatal("N&atilde;o foi poss&iacute;vel ler o retorno do servi&ccedil;o '$wms_service_request'.");
+    }
 
-	$wms_capabilities = implode("",$wms_capabilities);
+    $wms_capabilities = implode("",$wms_capabilities);
 
-	# -------------------------------------------------------------
-	# Test that the capabilites file has successfully parsed.
-	#
-	$dom = new DomDocument();
-	$dom->loadXML($wms_capabilities);
-	$cp->set_data(xml2html($wms_capabilities));
+    # -------------------------------------------------------------
+    # Test that the capabilites file has successfully parsed.
+    #
+    $dom = new DomDocument();
+    $dom->loadXML($wms_capabilities);
+    $cp->set_data(xml2html($wms_capabilities));
 }
 
 
 //le links de RSS para ws
 if ($funcao == "listaRSSws")
 {
-	$cp->register('listaRSSws');
-	$cp->start();
-	ob_clean;
-	$cp->return_data();
-	exit;
+    $cp->register('listaRSSws');
+    $cp->start();
+    ob_clean;
+    $cp->return_data();
+    exit;
 }
 
 if ($funcao == "listaRSSwsARRAY")
 {
-	$cp->register('listaRSSwsARRAY');
-	$cp->start();
-	if(ob_get_contents ()){
-		ob_end_clean();
-	}
-	$cp->return_data();
-	exit;
+    $cp->register('listaRSSwsARRAY');
+    $cp->start();
+    if(ob_get_contents ()){
+        ob_end_clean();
+    }
+    $cp->return_data();
+    exit;
 }
 
 /*
@@ -161,54 +161,59 @@ Retorno:
 */
 function listaRSSwsARRAY()
 {
-	global $cp,$rss,$locaplic,$tipo;
+    global $cp,$rss,$locaplic,$tipo,$esquemaadmin;
 
-	if(!isset($tipo)){$tipo = "GEORSS";}
-	include_once("$locaplic/classesphp/funcoes_gerais.php");
-	include_once("$locaplic/classesphp/xml.php");
-	include_once("$locaplic/ms_configura.php");
-	$rsss = explode("|",$rss);
-	if(count($rsss) == 0){
-		$rsss = array(" ");
-	}
-	$erro = "Erro. Nao foi possivel ler o arquivo";
-	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$urli3geo = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
-	foreach ($rsss as $r){
-		if($r == "" || $r == " "){
+    if(!isset($tipo)){$tipo = "GEORSS";}
+    include_once("$locaplic/classesphp/funcoes_gerais.php");
+    include_once("$locaplic/classesphp/xml.php");
+    include("$locaplic/ms_configura.php");
 
-			if($tipo == "GEORSS"){
-				$canali = simplexml_load_string(geraXmlGeorss($locaplic));
-				$linkrss = $urli3geo."/rss/xmlgeorss.php";
-			}
-			if($tipo == "WMS" || $tipo == "WMS-Tile"){
-				$canali = simplexml_load_string(geraXmlWMS($locaplic));
-				$linkrss = $urli3geo."/rss/xmlservicoswms.php";
-			}
-			if($tipo == "WMSMETAESTAT")	{
-				$canali = simplexml_load_string(geraXmlWMSmetaestat($locaplic));
-				$linkrss = $urli3geo."/rss/xmlservicoswms.php";
-			}
-			if($tipo == "WS"){
-				$canali = simplexml_load_string(geraXmlWS($locaplic));
-				$linkrss = $urli3geo."/rss/xmlservicosws.php";
-			}
-		} else {
-			$canali = simplexml_load_file($rss);
-		}
-		if($r != "")
-		$linhas["rss"] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='../../imagens/rss.gif' /></a>";
-		else{
-			$linhas["rss"] = "<a href='".$linkrss."' target=blank ><img style='border:0px solid white;' src='../../imagens/rss.gif' /></a>";
-		}
-		//var_dump($canali);
-		$canais = array();
-		foreach ($canali->channel->item as $item){
-			$canais[] = array("id_ws"=>(ixml($item,"id")),"title"=>(ixml($item,"title")),"description"=>(ixml($item,"description")),"link"=>(ixml($item,"link")),"author"=>(ixml($item,"author")),"nacessos"=>(ixml($item,"nacessos")),"nacessosok"=>(ixml($item,"nacessosok")),"tipo_ws"=>(ixml($item,"tipo")));
-		}
-		$linhas["canais"] = $canais;
-	}
-	$cp->set_data($linhas);
+    if($esquemaadmin != ""){
+        $esquemaadmin = $esquemaadmin.".";
+    }
+
+    $rsss = explode("|",$rss);
+    if(count($rsss) == 0){
+        $rsss = array(" ");
+    }
+    $erro = "Erro. Nao foi possivel ler o arquivo";
+    $protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+    $urli3geo = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
+    foreach ($rsss as $r){
+        if($r == "" || $r == " "){
+
+            if($tipo == "GEORSS"){
+                $canali = simplexml_load_string(geraXmlGeorss($locaplic));
+                $linkrss = $urli3geo."/rss/xmlgeorss.php";
+            }
+            if($tipo == "WMS" || $tipo == "WMS-Tile"){
+                $canali = simplexml_load_string(geraXmlWMS($locaplic));
+                $linkrss = $urli3geo."/rss/xmlservicoswms.php";
+            }
+            if($tipo == "WMSMETAESTAT") {
+                $canali = simplexml_load_string(geraXmlWMSmetaestat($locaplic));
+                $linkrss = $urli3geo."/rss/xmlservicoswms.php";
+            }
+            if($tipo == "WS"){
+                $canali = simplexml_load_string(geraXmlWS($locaplic));
+                $linkrss = $urli3geo."/rss/xmlservicosws.php";
+            }
+        } else {
+            $canali = simplexml_load_file($rss);
+        }
+        if($r != "")
+        $linhas["rss"] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='../../imagens/rss.gif' /></a>";
+        else{
+            $linhas["rss"] = "<a href='".$linkrss."' target=blank ><img style='border:0px solid white;' src='../../imagens/rss.gif' /></a>";
+        }
+        //var_dump($canali);
+        $canais = array();
+        foreach ($canali->channel->item as $item){
+            $canais[] = array("id_ws"=>(ixml($item,"id")),"title"=>(ixml($item,"title")),"description"=>(ixml($item,"description")),"link"=>(ixml($item,"link")),"author"=>(ixml($item,"author")),"nacessos"=>(ixml($item,"nacessos")),"nacessosok"=>(ixml($item,"nacessosok")),"tipo_ws"=>(ixml($item,"tipo")));
+        }
+        $linhas["canais"] = $canais;
+    }
+    $cp->set_data($linhas);
 }
 
 /*
@@ -228,40 +233,40 @@ Retorno:
 */
 function listaRSSws()
 {
-	global $cp,$rss;
-	require(dirname(__FILE__).'/../pacotes/magpierss/rss_fetch.inc');
-	$rsss = explode("|",$rss);
-	$erro = "Erro. Nao foi possivel ler o arquivo";
-	foreach ($rsss as $r)
-	{
-		$rss = fetch_rss($r);
-		if ($rss)
-		{
-			$erro = "";
-			$linhas[] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='imagens/rss.gif' /></a>####";
-			foreach ( $rss->items as $item )
-			{
-				$linha[] = $item['title'];
-				$linha[] = $item['description'];
-				$linha[] = $item['link'];
-				$linha[] = $item['author'];
-				$linha[] = $item['ranking'];
-				$linha[] = $item['tempo'];
-				$linhas[] = implode("#",$linha);
-				$linha = array();
-			}
-		}
-	}
-	if ($erro == "")
-	{
-		$retorna = implode("|",$linhas);
-		$retorna = str_replace("\n","",$retorna);
-		if (function_exists("mb_convert_encoding"))
-		{$retorna = mb_convert_encoding($retorna,"UTF-8","ISO-88591");}
-		else
-		{$retorna = $retorna;}
-	}
-	else {$retorna = $erro;}
-	$cp->set_data($retorna);
+    global $cp,$rss;
+    require(dirname(__FILE__).'/../pacotes/magpierss/rss_fetch.inc');
+    $rsss = explode("|",$rss);
+    $erro = "Erro. Nao foi possivel ler o arquivo";
+    foreach ($rsss as $r)
+    {
+        $rss = fetch_rss($r);
+        if ($rss)
+        {
+            $erro = "";
+            $linhas[] = "<a href='".$r."' target=blank ><img style='border:0px solid white;' src='imagens/rss.gif' /></a>####";
+            foreach ( $rss->items as $item )
+            {
+                $linha[] = $item['title'];
+                $linha[] = $item['description'];
+                $linha[] = $item['link'];
+                $linha[] = $item['author'];
+                $linha[] = $item['ranking'];
+                $linha[] = $item['tempo'];
+                $linhas[] = implode("#",$linha);
+                $linha = array();
+            }
+        }
+    }
+    if ($erro == "")
+    {
+        $retorna = implode("|",$linhas);
+        $retorna = str_replace("\n","",$retorna);
+        if (function_exists("mb_convert_encoding"))
+        {$retorna = mb_convert_encoding($retorna,"UTF-8","ISO-88591");}
+        else
+        {$retorna = $retorna;}
+    }
+    else {$retorna = $erro;}
+    $cp->set_data($retorna);
 }
 ?>

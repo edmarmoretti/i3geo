@@ -25,7 +25,7 @@ function adicionar($id_medida_variavel, $nome, $observacao,$dbhw) {
 			"id_medida_variavel"=>$id_medida_variavel
 		);
 		$id_classificacao = \admin\php\funcoesAdmin\i3GeoAdminInsertUnico ( $dbhw, "i3geoestat_classificacao", $dataCol, "nome", "id_classificacao" );
-		$retorna = \admin\metaestat\variaveis\medidas\classificacoes\alterar ( $id_medida_variavel, $id_classificacao, $nome, $link, $dbhw );
+		$retorna = \admin\metaestat\variaveis\medidas\classificacoes\alterar ( $id_medida_variavel, $id_classificacao, $nome, $observacao, $dbhw );
 		return $retorna;
 	} catch ( PDOException $e ) {
 		return false;
