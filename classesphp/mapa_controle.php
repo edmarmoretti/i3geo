@@ -1621,6 +1621,48 @@ switch (strtoupper($funcao)) {
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $idioma);
         $retorno = $m->pegaListaDeMenus($filtraOgc, $filtraDown);
         break;
+    case "PEGALISTADEMENUSCOMPLETA":
+        $arq = $dir_tmp."/catalogoTemas.json";
+        if (file_exists($arq)){
+            $retorno = unserialize(file_get_contents($arq));
+        } else {
+            include_once ("classe_menutemas.php");
+            if (isset($_pg["editores"])) {
+                $editores = $_pg["editores"];
+            } else {
+                $editores = "";
+            }
+            if (isset($_pg["perfil"])) {
+                $perfil = $_pg["perfil"];
+            } else {
+                $perfil = "";
+            }
+            $idioma = $_pg["idioma"];
+            $filtraOgc = $_pg["filtraOgc"];
+            $filtraDown = $_pg["filtraDown"];
+            if (! isset($editores)) {
+                $editores = "";
+            }
+            $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $idioma);
+            $retorno = $m->pegaListaDeMenus($filtraOgc, $filtraDown);
+            for($i = 0; $i < count($retorno); $i++){
+                $idmenu = $retorno[$i]["idmenu"];
+                $grupos = $m->pegaListaDeGrupos($retorno[$i]["idmenu"], "nao", "sim");
+                for($j = 0; $j < count($grupos); $j++){
+                    $idgrupo = $grupos[$j]["id_n1"];
+                    for ($k = 0; $k < count($grupos[$j]["subgrupos"]); $k++){
+                        $idsubgrupo = $grupos[$j]["subgrupos"][$k]["id_n2"];
+                        $temas = $m->pegaListaDeTemas($idgrupo, $idsubgrupo, $idmenu);
+                        $grupos[$j]["subgrupos"][$k]["temas"] = $temas;
+                    }
+                }
+                $retorno[$i]["grupos"] = $grupos;
+            }
+            if (!file_exists($arq) && count($retorno) > 0){
+                gravaDados([serialize($retorno)], $arq);
+            }
+        }
+        break;
     /*
      * Valor: PEGALISTADEGRUPOS
      *
