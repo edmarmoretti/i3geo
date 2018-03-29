@@ -959,18 +959,22 @@ $wkt - boolean indicando se $xy e um WKT
 		}
 
 		$pinlayer->addfeature($shp);
-		if($nomeTema != ""){
-			$pinlayer->setmetadata("tema",$nomeTema);
-		}
+
 		//verifica a projecao
 		$c = $shp->getCentroid();
-		$c = $c->x;
-		if($c > -181 && $c < 181){
+		if($c->x > -181 && $c->x < 181){
 			$pinlayer->setprojection(pegaProjecaoDefault("proj4"));
+			$extensao = ($c->x - 0.01)." ".($c->y - 0.01)." ".($c->x + 0.01)." ".($c->y + 0.01);
 		}
 		else{
 			$pinlayer->setprojection($this->mapa->getProjection());
+			$extensao = ($c->x - 50000)." ".($c->y - 50000)." ".($c->x + 50000)." ".($c->y + 50000);
 		}
+		$pinlayer->setmetadata("extensao",$extensao);
+		if($nomeTema != ""){
+		    $pinlayer->setmetadata("tema",$nomeTema);
+		}
+
 		return("ok");
 	}
 /*

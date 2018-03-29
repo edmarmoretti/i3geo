@@ -1889,16 +1889,25 @@ class MetaestatInfo{
         else{
             $vs = $this->listaVariavel();
         }
+
+        $lista = $this->listaMedidaVariavel();
+        $lista = array_group_by($lista, "codigo_variavel");
+
         foreach($vs as $v){
             $nivel1["id"] = $v["codigo_variavel"];
             $nivel1["titulo"] = $v["nome"];
             $nivel1["descricao"] = $v["descricao"];
-            $ms = $this->listaMedidaVariavel($v["codigo_variavel"]);
+            //$ms = $this->listaMedidaVariavel($v["codigo_variavel"]);
+
+            $ms = $lista[$v["codigo_variavel"]];
+
             $nivel1["filhos"] = array();
             foreach($ms as $m){
                 $nivel2["id"] = $m["id_medida_variavel"];
                 $nivel2["titulo"] = $m["nomemedida"];
-                $unidade = $this->listaUnidadeMedida($m["codigo_unidade_medida"]);
+                //$unidade = $this->listaUnidadeMedida($m["codigo_unidade_medida"]);
+
+                $unidade = $lista[$m["codigo_unidade_medida"]];
                 $unidade = "Unidade de medida: ".$unidade["nome"];
                 $periodo = $this->listaTipoPeriodo($m["codigo_tipo_periodo"]);
                 $periodo = "Per&iacute;odo de tempo: ".$periodo["nome"];

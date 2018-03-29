@@ -38,6 +38,22 @@ switch (strtoupper($funcao)) {
         $layers = explode(",", $_pg["layers"]);
         $map = ms_newMapObj($map_file);
         break;
+    case "LISTACOMPLETA":
+        $arq = $dir_tmp."/listaDeVariaveis.json";
+        if (file_exists($arq)){
+            $dados = unserialize(file_get_contents($arq));
+            retornaJSON($dados);
+            exit;
+        }
+        $m = new MetaestatInfo();
+        $dados = $m->relatorioCompleto();
+        if(empty($_pg["cache"]) || $_pg["cache"] == "false" || $_pg["cache"] == false){
+            if (!file_exists($arq)){
+                gravaDados([serialize($dados)], $arq);
+            }
+        }
+        retornaJSON($dados);
+        break;
     case "RELATORIOCOMPLETO":
         $m = new MetaestatInfo();
         if (empty($_pg["codigo_variavel"])) {
