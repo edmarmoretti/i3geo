@@ -1035,6 +1035,19 @@ switch (strtoupper($funcao)) {
     case "DOWNLOAD2":
         $retorno = downloadTema2($map_file, $_pg["tema"], $locaplic, $dir_tmp, $postgis_mapa);
         break;
+        /*
+         * Valor: DOWNLOAD3
+         *
+         * Gera um arquivo para download de um tema.
+         */
+    case "DOWNLOAD3":
+        $retorno = downloadTema2($map_file, $_pg["tema"], $locaplic, $dir_tmp, $postgis_mapa);
+        $retorno["arquivos"] = "";
+        $retorno["datas"] = "";
+        $_SESSION["downloadZipTema"] = $retorno["shape-zip"];
+        $retorno["shape-zip"] = "";
+        session_write_close();
+        break;
     /*
      * Valor: DOWNLOAD3
      *

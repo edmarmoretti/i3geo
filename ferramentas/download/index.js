@@ -91,7 +91,7 @@ i3GEOF.download = {
 	*/
 	html:function(divid,tema){
 		var cp,p,ins,mostraDownload,c;
-		ins = '<div class="container-fluid" style="top:0px;position:absolute;"><h5 class="alert alert-info">'+$trad('download',i3GEOF.download.dicionario)+'</h5>';
+		ins = '<div class="container-fluid" style="top:0px;position:absolute;"><h5>'+$trad('download',i3GEOF.download.dicionario)+'</h5>';
 		ins += '<div id=i3GEOdownloadResultado ></div></div>';
 		$i(divid).innerHTML += ins;
 		c = i3GEO.arvoreDeCamadas.pegaTema(tema);
@@ -113,17 +113,18 @@ i3GEOF.download = {
 						ins = "<h5 class='alert alert-warning'>"+$trad('erroTema',i3GEOF.download.dicionario)+"</h5>";
 					}
 					else{
-						for (arq=0;arq<n;arq++){
-							ins += "<li><a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[arq]+"'>"+arqs[arq]+"</a></li>";
-						}
+                        ins += "<h5>" + $trad('arquivook',i3GEOF.download.dicionario) + "</h5>";
+					    var url = i3GEO.configura.locaplic + "/ferramentas/download/forcedownload.php?g_sid=" + i3GEO.configura.sid;
+                        var link = document.createElement("a");
+                        $(link).click(function(e) {
+                          e.preventDefault();
+                          window.location.href = url;
+                        });
+                        $(link).click();
 					}
 					if(retorno.nreg){
-						ins += "<h5 class='alert alert-info'>"+$trad('registros',i3GEOF.download.dicionario)+" ="+retorno.nreg + "</h5>";
+						ins += "<h5>"+$trad('registros',i3GEOF.download.dicionario)+" ="+retorno.nreg + "</h5>";
 					}
-					temp = i3GEO.configura.locaplic+"/datadownload.htm?tema="+tema+"&temaDownload="+tema;
-					ins += "<h5 class='alert alert-info'>";
-					ins += "<a href='"+temp+"' target=_blank >"+$trad('pagdownload',i3GEOF.download.dicionario)+"</a></h5>";
-
 				}
 				else{
 					ins = "<h5 class='alert alert-warning'>"+$trad("x66")+"</h5>";
@@ -131,7 +132,7 @@ i3GEOF.download = {
 				$i("i3GEOdownloadResultado").innerHTML = ins + "</div>";
 				i3GEOF.download.aguarde.visibility = "hidden";
 			};
-			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download2&tema="+tema;
+			p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=download3&tema="+tema;
 			cp = new cpaint();
 			cp.set_response_type("JSON");
 			cp.call(p,"downloadTema",mostraDownload);

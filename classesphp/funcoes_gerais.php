@@ -1807,60 +1807,47 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
     $map = ms_newMapObj($map_file);
     $rectextent = $map->extent;
     $extensao = ".map";
-    if (file_exists($locaplic . "/temas/" . $tema . ".gvp")) {
-        $extensao = ".gvp";
+    //
+    // problema aqui
+    // $tema pode ser diferente do nome do mapfile
+    //
+    $teste = @$map->getlayerbyname($tema);
+    // caso o usuario tenha usado caixa alta no nome do layer
+    if ($teste == "") {
+        $teste = @$map->getlayerbyname(strtoupper($tema));
     }
-    if ($extensao == ".map") {
-        //
-        // problema aqui
-        // $tema pode ser diferente do nome do mapfile
-        //
-        $teste = @$map->getlayerbyname($tema);
-        // caso o usuario tenha usado caixa alta no nome do layer
-        if ($teste == "") {
-            $teste = @$map->getlayerbyname(strtoupper($tema));
-        }
-        // se o layer n&atilde;o existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
-        if ($teste == "") {
-            // tema pode ser o nome de um arquivo mapfile
-            if (file_exists($tema . ".map")) {
-                $maptemp = ms_newMapObj($tema . ".map");
-                $tema = basename($tema);
-            } else {
-                $maptemp = ms_newMapObj($temasdir . "/" . $tema . ".map");
-            }
-            $numlayers = $maptemp->numlayers;
-            for ($i = 0; $i < $numlayers; ++ $i) {
-                $ll = $maptemp->getlayer($i);
-                $permite = $ll->getmetadata("permitedownload");
-                if ($permite != "nao") {
-                    ms_newLayerObj($map, $ll);
-                }
-            }
-            $teste = @$map->getlayerbyname($tema);
-            if ($teste == "") {
-                $ll = $maptemp->getlayer(0);
-                $permite = $ll->getmetadata("permitedownload");
-                if ($permite != "nao") {
-                    ms_newLayerObj($map, $ll);
-                    $tema = $ll->name;
-                }
-            }
+    // se o layer n&atilde;o existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
+    if ($teste == "") {
+        // tema pode ser o nome de um arquivo mapfile
+        if (file_exists($tema . ".map")) {
+            $maptemp = ms_newMapObj($tema . ".map");
+            $tema = basename($tema);
         } else {
-            // remove o metadata com um nome de arquivo opcional, pois a fun&ccedil;&atilde;o de download pode estar sendo executada da &aacute;rvore de camadas
-            $teste = $map->getlayerbyname($tema);
-            $teste->setmetadata("arquivodownload", "");
+            $maptemp = ms_newMapObj($temasdir . "/" . $tema . ".map");
+        }
+        $numlayers = $maptemp->numlayers;
+        for ($i = 0; $i < $numlayers; ++ $i) {
+            $ll = $maptemp->getlayer($i);
+            $permite = $ll->getmetadata("permitedownload");
+            if ($permite != "nao") {
+                ms_newLayerObj($map, $ll);
+            }
+        }
+        $teste = @$map->getlayerbyname($tema);
+        if ($teste == "") {
+            $ll = $maptemp->getlayer(0);
+            $permite = $ll->getmetadata("permitedownload");
+            if ($permite != "nao") {
+                ms_newLayerObj($map, $ll);
+                $tema = $ll->name;
+            }
         }
     } else {
-        include_once ($locaplic . "/pacotes/gvsig/gvsig2mapfile/class.gvsig2mapfile.php");
-        $gm = new gvsig2mapfile($locaplic . "/temas/" . $tema . ".gvp");
-        $gvsigview = $gm->getViewsNames();
-        foreach ($gvsigview as $gv) {
-            $dataView = $gm->getViewData($gvsigview);
-            $map = $gm->addLayers($map, $gvsigview, $dataView["layerNames"]);
-            $temas = array_merge($temas, $gm->nomesLayersAdicionados);
-        }
+        // remove o metadata com um nome de arquivo opcional, pois a fun&ccedil;&atilde;o de download pode estar sendo executada da &aacute;rvore de camadas
+        $teste = $map->getlayerbyname($tema);
+        $teste->setmetadata("arquivodownload", "");
     }
+
     //
     // salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
     //
@@ -1883,7 +1870,6 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
     // verifica se existe mais de um tema (grupo) montando o array com os temas
     // os grupos podem ter o nome do layer em GROUP ao inv&eacute;s de NAME
     //
-    if ($extensao == ".map") {
         $multilayer = 0;
         $grupos = $map->getAllGroupNames();
         foreach ($grupos as $grupo) {
@@ -1904,7 +1890,6 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
         if ($multilayer == 0) {
             $temas[] = $tema;
         }
-    }
     // $temas agora &eacute; um array com os NAMEs dos LAYERS que ser&atilde;o baixados
     $radtmp = dirname($dir_tmp);
     $ziper = new zipfile();
@@ -2472,16 +2457,16 @@ function seems_utf8($Str)
  */
 function removeAcentos($s)
 {
-    $s = ereg_replace("[&aacute;à&acirc;&atilde;]", "a", $s);
-    $s = ereg_replace("[&Aacute;À&Acirc;&Atilde;]", "A", $s);
-    $s = ereg_replace("[&eacute;è&ecirc;]", "e", $s);
+    $s = ereg_replace("[&aacute;ï¿½&acirc;&atilde;]", "a", $s);
+    $s = ereg_replace("[&Aacute;ï¿½&Acirc;&Atilde;]", "A", $s);
+    $s = ereg_replace("[&eacute;ï¿½&ecirc;]", "e", $s);
     $s = ereg_replace("[&iacute;]", "i", $s);
     $s = ereg_replace("[&Iacute;]", "I", $s);
-    $s = ereg_replace("[&Eacute;È&Ecirc;]", "E", $s);
-    $s = ereg_replace("[óò&ocirc;&otilde;]", "o", $s);
-    $s = ereg_replace("[ÓÒ&Ocirc;&Otilde;]", "O", $s);
-    $s = ereg_replace("[&uacute;ùû]", "u", $s);
-    $s = ereg_replace("[&Uacute;ÙÛ]", "U", $s);
+    $s = ereg_replace("[&Eacute;ï¿½&Ecirc;]", "E", $s);
+    $s = ereg_replace("[ï¿½ï¿½&ocirc;&otilde;]", "o", $s);
+    $s = ereg_replace("[ï¿½ï¿½&Ocirc;&Otilde;]", "O", $s);
+    $s = ereg_replace("[&uacute;ï¿½ï¿½]", "u", $s);
+    $s = ereg_replace("[&Uacute;ï¿½ï¿½]", "U", $s);
     $s = str_replace("&ccedil;", "c", $s);
     $s = str_replace("&Ccedil;", "C", $s);
     // $str = htmlentities($s);
