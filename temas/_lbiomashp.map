@@ -38,7 +38,7 @@ MAP
       "storymap"	""
       "tabelaeditavel"	""
     END # METADATA
-    MAXSCALEDENOM 5000000
+    #MAXSCALEDENOM 5000000
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
     PROCESSING "LABEL_NO_CLIP=True"

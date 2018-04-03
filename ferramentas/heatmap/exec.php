@@ -32,7 +32,7 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		    if(ms_GetVersionInt() >= 7){
 		      $novolayer->updateFromString('LAYER COMPOSITE OPACITY '.$_GET["opacidade"].'END END');
 			} else {
-			    $novolayer->set("opacity",$_GET["opacidade"]);
+			  $novolayer->set("opacity",$_GET["opacidade"]);
 			}
 		}
 		$map->save($map_file);

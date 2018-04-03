@@ -1651,6 +1651,9 @@ switch (strtoupper($funcao)) {
                 $perfil = "";
             }
             $idioma = $_pg["idioma"];
+            if(empty($idioma)){
+                $idioma = "pt";
+            }
             $filtraOgc = $_pg["filtraOgc"];
             $filtraDown = $_pg["filtraDown"];
             if (! isset($editores)) {
