@@ -413,10 +413,19 @@ i3GEO.desenho =
 							})
 						})
 					});
+					i3GEO.desenho.layergrafico.setProperties(
+						{
+						    "layerGr" : true,
+						    "name" : "i3GEOdesenho",
+						    "title" : $trad("layerDesenho"),
+						    "isBaseLayer" : false
+						},
+						true);
 					i3GEO.desenho.layergrafico.setMap(i3geoOL);
 					i3GEO.desenho.layergrafico.getFeatures = function(){
 						return i3GEO.desenho.layergrafico.getSource().getFeatures();
 					};
+					i3GEO.arvoreDeCamadas.atualizaLayersGr();
 				}
 			}
 		},

@@ -852,6 +852,22 @@ i3GEO.Interface =
                     }
                     return res;
                 };
+                i3geoOL.getLayersGr = function() {
+                    var layers = i3geoOL.getLayersBy("layerGr", true);
+                    if(i3GEO.desenho.layergrafico){
+                        layers.unshift(i3GEO.desenho.layergrafico);
+                    }
+                    return layers;
+                };
+                i3geoOL.getLayersGrBy = function(chave, valor) {
+                    var res = [], layers = this.getLayersGr(), n = layers.length, i;
+                    for (i = 0; i < n; i++) {
+                        if (layers[i].get(chave) && layers[i].get(chave) === valor) {
+                            res.push(layers[i]);
+                        }
+                    }
+                    return res;
+                };
                 i3geoOL.getControlsBy = function(chave, valor) {
                     var res = [], controles = this.getControls(), n = controles.getLength(), i;
                     for (i = 0; i < n; i++) {
@@ -1774,7 +1790,7 @@ i3GEO.Interface =
                                                 i3GEO.Interface.INFOOVERLAY.getElement().innerHTML += "<span style='display:block;'>" + data.text + "<span>";
                                                 i3GEO.Interface.INFOOVERLAY.setPosition(e.coordinate);
                                                 i3GEO.eventos.mouseOverData();
-                                            } else {
+                                            } else if (i3GEO.Interface.INFOOVERLAY.getElement().innerHTML == "") {
                                                 i3GEO.Interface.INFOOVERLAY.setPosition(undefined);
                                                 i3GEO.eventos.mouseOutData();
                                             }

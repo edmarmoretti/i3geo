@@ -7,6 +7,7 @@
 <title>i3GEO - OpenLayers</title>
 <script src="../pacotes/ol4/ol.js"></script>
 <script src="../js/i3geonaocompacto.js"></script>
+<script src="../ferramentas/editorol/editorol.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
@@ -274,7 +275,10 @@
                             </p>
                         </div>
                         <hr>
-                        <!-- Esta div acrescenta a lista de de camadas dispon&iacute;veis no mapa atual -->
+                        <!-- Esta div acrescenta a lista de layers graficos -->
+                        <div id="listaLayersGr" style="overflow: none;" data-template="templates/camadaGr.html"></div>
+
+                        <!-- Esta div acrescenta a lista de camadas disponiveis no mapa atual -->
                         <div id="listaTemas" style="overflow: none;" data-template="templates/camada.html"></div>
                         <!-- Esta div acrescenta a lista de de camadas de fundo
 					A lista de camadas de fundo e obtida da variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS
@@ -302,7 +306,7 @@
                             <span style="vertical-align: middle" class="material-icons">cancel</span>
                         </button>
                         <button title="{{{iconeMapa}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('temas',this)" data-verificaAbrangencia=""
-                            data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas">
+                            data-idconteudo="guia1obj" data-idListaFundo="listaFundo" data-idListaDeCamadas="listaTemas" data-idListaLayersGr="listaLayersGr">
                             <span style="vertical-align: middle" class="material-icons">visibility</span>
                         </button>
                         <button title="{{{iconeLegenda}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('legenda',this)" data-idconteudo="guia4obj"

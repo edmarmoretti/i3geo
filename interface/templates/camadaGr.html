@@ -1,0 +1,11 @@
+<div class="rangeScale{{{rangeScale}}} list-group condensed" style="cursor: move;">
+    <div class="checkbox text-left">
+        <label class="rangeScale{{{rangeScale}}} {{{classeCss}}}" style="width: 270px">
+            <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
+                {{{checked}}} onclick="i3geoOL.getLayersGrBy('name','{{{name}}}')[0].setVisibility(this.checked);i3geoOL.getLayersGrBy('name','{{{name}}}')[0].changed()">
+            <span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} {{{tema}}} <small>{{{rangeScaleMsg}}}</small>
+        </label>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+</div>

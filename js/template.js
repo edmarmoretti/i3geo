@@ -20,8 +20,10 @@ i3GEO.template = {
         },
         //formatacao da lista de camadas
         camada: false,
-        //formatacao da lista de canadas de fundo
+        //formatacao da lista de camadas de fundo
         camadaFundo: false,
+        //formatacao da lista de camadas graficas
+        camadaGr: false,
         //tooltip utilizado quando o LAYER for do tipo utfGrid
         utfGridInfo: '<div><div id="i3GEOoverlayInfo"></div></div>',
         //resultado da busca feita em um tema

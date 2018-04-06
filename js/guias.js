@@ -369,6 +369,7 @@ i3GEO.guias =
 				idconteudo : "guia1obj",
 				idListaDeCamadas : "listaTemas",
 				idListaFundo : "listaFundo",
+				idListaLayersGr : "listaLayersGr",
 				verificaAbrangencia : "",
 				click : function(obj){
 					if (typeof (console) !== 'undefined')
@@ -390,6 +391,9 @@ i3GEO.guias =
 					if(obj.attr("data-idListaFundo") != undefined){
 						f.idListaFundo = obj.attr("data-idListaFundo");
 					}
+					if(obj.attr("data-idListaLayersGr") != undefined){
+						f.idListaLayersGr = obj.attr("data-idListaLayersGr");
+					}
 					if($("#" + obj.attr("data-idListaFundo")).attr("data-idTemplateCamada") != undefined){
 						f.idTemplateCamadaFundo = $("#" + obj.attr("data-idListaFundo")).attr("data-idTemplateCamada");
 					}
@@ -399,6 +403,8 @@ i3GEO.guias =
 							"templateCamada": $("#" + f.idListaDeCamadas).attr("data-template"),
 							"idListaFundo": f.idListaFundo,
 							"templateCamadaFundo": $("#" + f.idListaFundo).attr("data-template"),
+							"idListaLayersGr": f.idListaLayersGr,
+							"templateCamadaGr": $("#" + f.idListaLayersGr).attr("data-template"),
 							"verificaAbrangencia": f.verificaAbrangencia
 						});
 					}

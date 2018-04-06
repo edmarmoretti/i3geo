@@ -3007,5 +3007,10 @@ g_traducao =
                 pt : "Vis&iacute;vel apenas em determinadas escalas",
                 en : "",
                 es : ""
+        }],
+        "layerDesenho" : [{
+            pt : "Camada de desenho",
+            en : "",
+            es : ""
         }]
     };
