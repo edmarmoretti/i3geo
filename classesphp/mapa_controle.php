@@ -278,10 +278,10 @@ if (! isset($locaplic)) {
 // substitui a string de conex&atilde;o
 //
 if ($funcao != "recuperamapa" && $funcao != "TEMA2SLD") {
-    if (! substituiCon($map_file, $postgis_mapa)) {
-        cpjson("erro", $cp);
-        return;
-    }
+    //if (! substituiCon($map_file, $postgis_mapa)) {
+    //    cpjson("erro", $cp);
+    //    return;
+    //}
 }
 
 //
