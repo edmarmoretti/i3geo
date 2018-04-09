@@ -293,7 +293,7 @@ i3GEO.pluginI3geo =
                         camada.grafico = false;
                         camada.destacar = false;
                         camada.wms = false;
-                        camada.classe = "NAO";
+                        camada.classe = "SIM";
                         return camada;
                     },
                     inicia : function(camada) {
@@ -382,7 +382,7 @@ i3GEO.pluginI3geo =
                         camada.grafico = false;
                         camada.destacar = false;
                         camada.wms = false;
-                        camada.classe = "NAO";
+                        camada.classe = "SIM";
                         return camada;
                     },
                     layerMashup : function(camada, epsg){

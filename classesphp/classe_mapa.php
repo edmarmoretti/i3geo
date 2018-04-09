@@ -385,10 +385,10 @@ class Mapa
 				//
 				//verifica se o tema receber&aacute; efeito de transi&ccedil;&atilde;o de zoom
 				//
-				$transitioneffect = "sim";
-				if($oLayer->getmetadata("transitioneffect") == "NAO")
+				$transitioneffect = "nao";
+				if($oLayer->getmetadata("transitioneffect") == "SIM")
 				{
-					$transitioneffect = "nao";
+					$transitioneffect = "sim";
 				}
 				//
 				$permitecomentario = "nao";
