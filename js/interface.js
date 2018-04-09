@@ -1207,7 +1207,7 @@ i3GEO.Interface =
                         visible : false,
                         singleTile : !(i3GEO.Interface.openlayers.TILES),
                         tilePixelRatio : 1,
-                        preload : Infinity,
+                        preload : 0,
                         projection : 'EPSG:4326'
                 };
                 if (i3GEO.Interface.openlayers.googleLike === true) {
