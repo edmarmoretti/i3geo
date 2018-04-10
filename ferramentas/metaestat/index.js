@@ -567,8 +567,10 @@ i3GEOF.metaestat = {
              * Atualiza o combo da janela de analise com i3GEOF.metaestat.analise.comboCamadas();
              */
             adicionaCamada: function(botao){
-                if(botao){
+        	i3GEOF.metaestat.comum.aguarde("visible");
+        	if(botao){
                     $(botao).prop("disabled",true);
+
                 }
                 i3GEOF.metaestat.log("i3GEOF.metaestat.comum.adicionaCamada()");
                 //function mapfileMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$tipolayer="polygon",$titulolayer="",$id_classificacao="",$agruparpor=""){
