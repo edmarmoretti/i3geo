@@ -201,14 +201,13 @@ switch (strtoupper($funcao)) {
     case "LISTACLASSIFICACAOMEDIDA":
         $m = new MetaestatInfo();
         $lista = $m->listaClassificacaoMedida($_pg["id_medida_variavel"], $_pg["id_classificacao"]);
-        if (count($lista) == 0) {
-            $lista = array(
+        //if (count($lista) == 0) {
+            $lista[] =
                 array(
                     "id_classificacao" => "",
-                    "nome" => "default"
-                )
-            );
-        }
+                    "nome" => "default (recalcula as classes com base em quartil)"
+                );
+        //}
         retornaJSON($lista);
         exit();
         break;
