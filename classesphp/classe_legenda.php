@@ -405,6 +405,8 @@ class Legenda
                             "cor"=>$cor,
                             "w"=>$w,
                             "h"=>$h,
+                            "minscaledenom" => $classe->minscaledenom,
+                            "maxscaledenom" => $classe->maxscaledenom,
                             "simple" => $simple
                         );
                     }
