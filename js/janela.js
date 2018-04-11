@@ -687,36 +687,31 @@ i3GEO.janela =
                         draggable : false,
                         zIndex : 100000,
                         textAlign : "left",
-                        close : true,
+                        close : false,
                         modal : false,
                         effect : {
                             effect : YAHOO.widget.ContainerEffect.FADE,
                             duration : 0.25
                         },
                         constraintoviewport : true,
-                        buttons : [
-                                   {
-                                       text : $trad("x74"),
-                                       handler : function() {
-                                           this.destroy();
-                                       },
-                                       isDefault : true
-                                   }
-                                   ],
-                                   icon : YAHOO.widget.SimpleDialog.ICON_WARN,
-                                   text : ""
+                       text : ""
                     });
                     // YAHOO.i3GEO.janela.dialogInfo.cfg.setProperty("icon",YAHOO.widget.SimpleDialog.ICON_WARN);
                     YAHOO.i3GEO.janela.managerAguarde.register(janela);
                     janela.setHeader(" ");
+
                     janela.render(document.body);
+                    janela.setFooter("<div class='form-group condensed' id='alertFooter'></div>");
+                    var ins = Mustache.render(i3GEO.template.botoes.padrao, {text: $trad("x74")});
+            	    var fecha = function(){YAHOO.i3GEO.janela.managerAguarde.find("alerta").destroy();};
+                    $('#alertFooter').append($(ins).click(fecha));
                 }
                 textoI = janela.cfg.getProperty("text");
                 if (textoI != "") {
                     textoI += "<br>";
                 }
                 texto = textoI + texto;
-                janela.cfg.setProperty("text", texto);
+                janela.cfg.setProperty("text", "<h4 class='alertTitulo'>" + texto + "</h4>");
                 janela.show();
             };
         },
@@ -770,7 +765,7 @@ i3GEO.janela =
                 YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
             };
             if (!resposta1 || resposta1 == "") {
-                resposta1 = $trad("x58");
+                resposta1 = $trad("confirma");
             }
             if (janela) {
                 janela.destroy();
@@ -804,12 +799,19 @@ i3GEO.janela =
                     duration : 0.25
                 },
                 constraintoviewport : true,
-                buttons : b,
-                text : pergunta
+                //buttons : b,
+                text : "<h4 class='alertTitulo'>" + pergunta + "</h4>"
             });
             YAHOO.i3GEO.janela.managerAguarde.register(janela);
             janela.setHeader(" ");
+            //botoes
+            janela.setFooter("<div class='form-group condensed' id='confirmaFooter'></div>");
             janela.render(document.body);
+            var ins = "";
+            $.each(b, function( index, value ) {
+        	ins = Mustache.render(i3GEO.template.botoes.padrao, {style:'margin-right:10px;',text: value.text});
+        	$('#confirmaFooter').append($(ins).click(value.handler));
+            });
             janela.show();
         },
         /**

@@ -12,7 +12,8 @@ if (typeof (i3GEO) === 'undefined') {
 i3GEO.template = {
         botoes: {
             //lista de botoes na forma de icones
-            listaDeIcones: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-xs" style="margin: 2px; padding: 2px;"><span class="material-icons {{{classe}}}" style="{{{estiloicon}}}">{{{icone}}}</span></button>'
+            listaDeIcones: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-xs" style="margin: 2px; padding: 2px;"><span class="material-icons {{{classe}}}" style="{{{estiloicon}}}">{{{icone}}}</span></button>',
+            padrao: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-primary btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>'
         },
         //utilizados nas janelas flutuantes
         janela : {

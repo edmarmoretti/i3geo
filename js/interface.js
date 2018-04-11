@@ -1776,6 +1776,7 @@ i3GEO.Interface =
                     var viewResolution = (i3geoOL.getView().getResolution());
                     if(i3GEO.Interface.INFOOVERLAY != ""){
                         i3GEO.Interface.INFOOVERLAY.getElement().innerHTML = "";
+                        i3GEO.Interface.INFOOVERLAY.getElement().style.visibility = "hidden";
                     }
                     for(var k in i3GEO.Interface.LAYERSUTFGRID){
                         if(!i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[k.replace("_utfgrid","")]){
@@ -1786,12 +1787,15 @@ i3GEO.Interface =
                                         e.coordinate,
                                         viewResolution,
                                         function(data) {
+                                            var ei = i3GEO.Interface.INFOOVERLAY.getElement();
                                             if(data){
-                                                i3GEO.Interface.INFOOVERLAY.getElement().innerHTML += "<span style='display:block;'>" + data.text + "<span>";
+                                                ei.style.visibility = "visible";
+                                        	ei.innerHTML += "<span style='display:block;'>" + data.text + "<span>";
                                                 i3GEO.Interface.INFOOVERLAY.setPosition(e.coordinate);
                                                 i3GEO.eventos.mouseOverData();
-                                            } else if (i3GEO.Interface.INFOOVERLAY.getElement().innerHTML == "") {
-                                                i3GEO.Interface.INFOOVERLAY.setPosition(undefined);
+                                            } else if (ei.innerHTML == "") {
+                                        	ei.style.visibility = "hidden";
+                                        	i3GEO.Interface.INFOOVERLAY.setPosition(undefined);
                                                 i3GEO.eventos.mouseOutData();
                                             }
                                         }

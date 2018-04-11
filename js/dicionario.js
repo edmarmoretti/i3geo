@@ -3012,5 +3012,10 @@ g_traducao =
             pt : "Camada de desenho",
             en : "",
             es : ""
+        }],
+        "confirma" : [{
+            pt : "Confirma",
+            en : "",
+            es : ""
         }]
     };
