@@ -27,6 +27,8 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		$novolayer->setmetadata("PLUGINI3GEO",$parametros);
 		$novolayer->set("name",$nameLayer);
 		$novolayer->set("group","");
+		$novolayer->set("minscaledenom",0);
+		$novolayer->set("maxscaledenom",0);
 
 		if(!empty($_GET["opacidade"])){
 		    if(ms_GetVersionInt() >= 7){
@@ -37,6 +39,8 @@ Adiciona ao mapa uma nova camada para calculo do mapa de calor
 		}
 		$map->save($map_file);
 		$retorno = $nameLayer;
+		include("funcoes.php");
+		heatmapGradiente($map_file,$nameLayer,"default");
 	break;
 }
 if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
