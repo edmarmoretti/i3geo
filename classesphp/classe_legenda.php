@@ -381,10 +381,13 @@ class Legenda
                         // remove o offset em simbolos do tipo imagem
                         if ($classe->numstyles > 0) {
                             $estilo = $classe->getstyle(0);
-                            if ($estilo->symbolname != "" && file_exists($estilo->symbolname)) {
-                                $estilo->set("offsetx", 0);
-                                $estilo->set("offsety", 0);
-                            }
+                            $simbolo = $this->mapa->getSymbolObjectById($estilo->symbol);
+                            if($simbolo != ""){
+								if ($estilo->symbolname != "" && $simbolo->imagepath != "") {
+									$estilo->set("offsetx", 0);
+									$estilo->set("offsety", 0);
+								}
+							}
                             $cor = array(
                                 "color" => corRGB($estilo->color),
                                 "outline" => corRGB($estilo->outlinecolor),

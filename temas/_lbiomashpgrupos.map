@@ -68,6 +68,7 @@ MAP
       "storymap"	""
     END # METADATA
     NAME "_lbiomashpgrupos"
+    GROUP "_lbiomashpgrupos"
     PROCESSING "ITEMS=CD_LEGENDA"
     PROCESSING "LABEL_NO_CLIP=True"
     PROCESSING "POLYLINE_NO_CLIP=True"

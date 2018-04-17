@@ -1126,7 +1126,7 @@ class Alteraclasse
         }
         $cl = $this->layer->getclass($classe);
         $status = $cl->status;
-        echo $status;
+        //echo $status;
         if ($status == MS_OFF) {
             $cl->set("status", MS_ON);
             if ($this->layer->type == 3) {

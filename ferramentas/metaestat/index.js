@@ -1636,6 +1636,10 @@ i3GEOF.metaestat = {
 
                 if(i3GEOF.metaestat.INTERFACE == "inline"){
                     $i(iddiv).innerHTML = i3GEOF.metaestat.principal.html();
+                    if(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL == ""){
+                	$i(iddiv).innerHTML = "ID_MEDIDA_VARIAVEL nao definido";
+                	return;
+                    }
                     i3GEOF.metaestat.classes.comboRegiao(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);
                     i3GEOF.metaestat.classes.comboTipoClassificacao();
                     i3GEOF.metaestat.parametros.lista(i3GEOF.metaestat.ID_MEDIDA_VARIAVEL);

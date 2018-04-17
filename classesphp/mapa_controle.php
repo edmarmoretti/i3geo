@@ -826,7 +826,7 @@ switch (strtoupper($funcao)) {
         include_once ("classe_mapa.php");
         copiaSeguranca($map_file);
         $m = new Mapa($map_file);
-        $m->excluiTemas($_pg["temas"]);
+        $temas = $m->excluiTemas($_pg["temas"]);
         $m->salva();
         $_SESSION["contadorsalva"] ++;
         redesenhaMapa();
