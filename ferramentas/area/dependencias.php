@@ -16,6 +16,7 @@ if(extension_loaded('zlib')){
 header("Content-type: text/javascript");
 include("index.js");
 include("dicionario.js");
+include("../../pacotes/formatnumber.js");
 echo "\n";
 
 if(extension_loaded('zlib')){

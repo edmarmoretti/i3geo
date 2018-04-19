@@ -404,11 +404,11 @@ i3GEOF.distancia =
                     texto =
                         "total <br>" + $trad("x96")
                         + " km: "
-                        + total.toFixed(3)
+                        + format("#.###,000",total.toFixed(3))
                         + "<br>"
                         + $trad("x96")
                         + " m: "
-                        + (total * 1000).toFixed(2)
+                        + format("#.###,00",(total * 1000).toFixed(2))
                         + "<br>"
                         + $trad("x25")
                         + ": "
@@ -425,11 +425,11 @@ i3GEOF.distancia =
                     texto =
                         "parcial <br>" + $trad("x95")
                         + " km: "
-                        + trecho.toFixed(3)
+                        + format("#.###,000",trecho.toFixed(3))
                         + "<br>"
                         + $trad("x97")
                         + " km: "
-                        + (parcial + trecho).toFixed(3)
+                        + format("#.###,000",(parcial + trecho).toFixed(3))
                         + "<br>"
                         + $trad("x23")
                         + " (DMS): "
