@@ -333,7 +333,7 @@ i3GEOF.distancia =
                                         })
                                     }),
                                     text: new ol.style.Text({
-                                        text: trecho.toFixed(3),
+                                        text: format("#.###,000",trecho.toFixed(3)),
                                         font: 'Bold 14px Arial',
                                         textAlign: 'left',
                                         stroke: new ol.style.Stroke({
