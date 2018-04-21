@@ -36,6 +36,7 @@ class MetaestatInfo{
      */
     function __construct(){
         include(dirname(__FILE__)."/conexao.php");
+        error_reporting(0);
         //vem do include
         $this->dir_tmp = $dir_tmp;
         $this->logTransacoes = $logTransacoes;
@@ -81,7 +82,7 @@ class MetaestatInfo{
      * Fecha a conexao com o banco de dados de administracao
      */
     function fechaConexao(){
-        $this->dbh = null;
+        //$this->dbh = null;
     }
     /**
      * Aplica a conversao de caracteres em um array ou string conforme o padrao do banco de administracao
@@ -227,7 +228,8 @@ class MetaestatInfo{
         //a parte que contem referencias a coluna com a geometria e marcada com /*SG*//*SG*/
         //
         //registros da medida da variavel
-        $dados = $this->listaMedidaVariavel("",$id_medida_variavel);
+        $dados = $this->listaTabelaMedidaVariavel($id_medida_variavel);
+        $dadosUnidadeDeMedida = $this->listaUnidadeMedida($dados["codigo_unidade_medida"]);
         if(!empty($dados["filtro"])){
             if($filtro == ""){
                 $filtro = $dados["filtro"];
@@ -311,13 +313,13 @@ class MetaestatInfo{
         }
         //verifica o tipo de calculo para agragacao de valores
         $tipoconta = "";
-        if($dados["permitesoma"] == 1 && $direto == false){
+        if($dadosUnidadeDeMedida["permitesoma"] == 1 && $direto == false){
             $tipoconta = "sum";
             if($agregaregiao == true){
                 $titulo .= " - soma";
             }
         }
-        elseif($dados["permitemedia"] == 1 && $direto == false){
+        elseif($dadosUnidadeDeMedida["permitemedia"] == 1 && $direto == false){
             $tipoconta = "avg";
             if($agregaregiao == true){
                 $titulo .= " - media";
@@ -567,14 +569,17 @@ class MetaestatInfo{
         //error_log("--                        ");
         //error_log("--xxxxxxxxxxx---- nomecache: ".$arq);
         if(!file_exists($arq)){
-            $meta = $this->listaMedidaVariavel("",$id_medida_variavel);
+//error_log("----- m->listaTabelaMedidaVariavel");
+            $meta = $this->listaTabelaMedidaVariavel($id_medida_variavel);
             //evita agregar regioes qd nao e necessario
             if($meta["codigo_tipo_regiao"] == $codigo_tipo_regiao || empty($codigo_tipo_regiao) ){
                 $agruparpor = "";
             }
             //$dconexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+//error_log("----- m->listaConexaoMetaestat");
             $dconexao = $this->listaConexaoMetaestat();
             $conexao = "user=".$dconexao["usuario"]." password=".$dconexao["senha"]." dbname=".$dconexao["bancodedados"]." host=".$dconexao["host"]." port=".$dconexao["porta"]."";
+//error_log("----- m->sqlMedidaVariavel");
             $sql = $this->sqlMedidaVariavel(
                 $id_medida_variavel,
                 $todasascolunas,
@@ -587,9 +592,13 @@ class MetaestatInfo{
             //error_log("--                        ");
             //error_log("--xxxxxxxxxxx---- sqlMedidaVariavel: ".$sql);
             if(empty($codigo_tipo_regiao)){
-                $d = $this->listaMedidaVariavel("",$id_medida_variavel);
-                $codigo_tipo_regiao = $d["codigo_tipo_regiao"];
+                //$d = $this->listaMedidaVariavel("",$id_medida_variavel);
+                $codigo_tipo_regiao = $meta["codigo_tipo_regiao"];
             }
+            if(empty($codigo_tipo_regiao)){
+                return false;
+            }
+//error_log("----- m->listaDadosGeometriaRegiao");
             //define o tipo correto de layer
             $dg = $this->listaDadosGeometriaRegiao($codigo_tipo_regiao);
             if(empty($tipolayer)){
@@ -601,8 +610,11 @@ class MetaestatInfo{
             if($dg["dimension"] == 1){
                 $tipolayer = "line";
             }
+            error_log("++++++ tipolayer ".$tipolayer);
+            error_log("++++++ dimension ".$dg["dimension"]);
+            error_log("++++++ id_medida_variavel ".$id_medida_variavel);
+            //$tipolayer = "polygon";
             $sqlf = $sql["sqlmapserver"];
-
             $classes = "";
             if(!empty($id_classificacao)){
                 $classes = $this->listaClasseClassificacao($id_classificacao);
@@ -721,6 +733,7 @@ class MetaestatInfo{
             $dados[] = '		tme	"{\"titulo\":\"'.$titulolayer.'\",\"colnome\":\"'.$sql["nomeregiao"].'\",\"colsdata\":[\"'.$sql["colunavalor"].'\"],\"lmax\":\"8000\",\"amax\":\"500000\",\"outlinecolor\":\"-1,-1,-1\",\"numvertices\":\"4\",\"auto\":\"nao\",\"exec\":\"nao\"}"';
 
             $dados[] = '		TIP "'.$sql["colunavalor"].','.$sql["nomeregiao"].'"';
+            //$dados[] = '        "UTFDATA" "'.$sql["colunavalor"].'"';
             $dados[] = '		CLASSE "SIM"';
             $dados[] = '		permitedownload "SIM"';
             $dados[] = '		METAESTAT "SIM"';
@@ -906,7 +919,7 @@ class MetaestatInfo{
             $dados[] = '	NAME "'.$this->nomecache.'"';
             $dados[] = "	TYPE $tipolayer";
             $dados[] = '	DATA "'.$sqlf.'"';
-            $dados[] = '	CONNECTION "'.$conexao.'"';
+            $dados[] = '	CONNECTION "metaestat"';
             $dados[] = '	CONNECTIONTYPE POSTGIS';
             $dados[] = '	TEMPLATE "none.htm"';
             $dados[] = '	STATUS OFF';
@@ -957,7 +970,7 @@ class MetaestatInfo{
                 $dados[] = '	NAME "'.$this->nomecache.'_anno"';
                 $dados[] = "	TYPE ANNOTATION";
                 $dados[] = '	DATA "'.$sqlf.'"';
-                $dados[] = '	CONNECTION "'.$conexao.'"';
+                $dados[] = '	CONNECTION "metaestat"';
                 $dados[] = '	CONNECTIONTYPE POSTGIS';
                 $dados[] = '	TEMPLATE "none.htm"';
                 $dados[] = '	STATUS OFF';
@@ -1089,7 +1102,7 @@ class MetaestatInfo{
     function valorUnicoMedidaVariavel($id_medida_variavel,$coluna,$filtro=""){
         $sqlf = $this->sqlMedidaVariavel($id_medida_variavel,0,$coluna,"polygon","",false,$filtro);
         $sqlf = $sqlf["sqlagrupamento"];
-        $metaVariavel = $this->listaMedidaVariavel("",$id_medida_variavel);
+        $metaVariavel = $this->listaTabelaMedidaVariavel($id_medida_variavel);
         if(!empty($metaVariavel["codigo_estat_conexao"])){
             //$c = $this->listaConexao($metaVariavel["codigo_estat_conexao"],true);
             $c = $this->listaConexaoMetaestat();
@@ -1369,6 +1382,16 @@ class MetaestatInfo{
             $sql .= "WHERE i3geoestat_medida_variavel.id_medida_variavel = $id_medida_variavel ";
         }
         $sql .= "ORDER BY i3geoestat_medida_variavel.nomemedida";
+        $res = $this->execSQL($sql,$id_medida_variavel);
+        $res = str_replace('"',"'",$res);
+        return $res;
+    }
+    function listaTabelaMedidaVariavel($id_medida_variavel=""){
+        $sql = "SELECT * ";
+        $sql .= "FROM ".$this->esquemaadmin."i3geoestat_medida_variavel ";
+        if($id_medida_variavel != "") {
+            $sql .= " WHERE id_medida_variavel = $id_medida_variavel ";
+        }
         $res = $this->execSQL($sql,$id_medida_variavel);
         $res = str_replace('"',"'",$res);
         return $res;
