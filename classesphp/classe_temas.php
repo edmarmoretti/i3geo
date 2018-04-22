@@ -412,9 +412,10 @@ lista - lista com a nova ordem para os temas. A lista cont&eacute;m os nomes dos
 					}
 				}
 				else{
-					$g = strtoupper($la->group);
+					//$g = strtoupper($la->group);
 					$n = strtoupper($la->name);
-					if ((strtoupper($l) == $n) || (strtoupper($l) == $g)){
+					//if ((strtoupper($l) == $n) || (strtoupper($l) == $g)){
+					if (strtoupper($l) == $n){
 						$novaordem[] = $i;
 					}
 				}
