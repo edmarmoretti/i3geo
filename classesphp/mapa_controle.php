@@ -107,6 +107,7 @@
 //
 // pega as variaveis passadas com get ou post
 //
+error_reporting(0);
 $tempo = microtime(1);
 
 include_once ("sani_request.php");

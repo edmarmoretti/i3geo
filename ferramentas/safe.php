@@ -1,6 +1,6 @@
 <?php
 include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
-
+error_reporting(0);
 $_GET = array_merge($_GET,$_POST);
 //
 //$fingerprint e usado para verificar se o usuario veio do i3geo

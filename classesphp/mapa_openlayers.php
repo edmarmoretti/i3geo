@@ -59,7 +59,7 @@ include ("sani_request.php");
 if (! function_exists('ms_GetVersion')) {
     include_once ("carrega_ext.php");
 }
-//error_reporting(E_ALL);
+error_reporting(0);
 inicializa();
 //
 // calcula a extensao geografica com base no x,y,z
