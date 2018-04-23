@@ -59,15 +59,14 @@ include ("sani_request.php");
 if (! function_exists('ms_GetVersion')) {
     include_once ("carrega_ext.php");
 }
-// error_reporting(0);
+//error_reporting(E_ALL);
 inicializa();
 //
 // calcula a extensao geografica com base no x,y,z
 // nos casos do modo notile, a requisicao e feita como se fosse um wms
 // quando for do tipo tms $_GET["tms"] contem os parametros do tile
 //
-
-if (isset($_GET["tms"])) {
+if (!empty($_GET["tms"])) {
     $_GET["WIDTH"] = 256;
     $_GET["HEIGHT"] = 256;
     $temp = explode("/", $_GET["tms"]);
@@ -545,15 +544,19 @@ function carregaCacheImagem($cachedir, $map, $tms, $i3georendermode = 0, $format
         $nome = str_replace(".png","",$nome) . ".png";
         $tipo = "image/png";
     }
+
     if (file_exists($nome)) {
+
         cabecalhoImagem($nome,$tipo);
         if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
             readfile($nome);
         } else {
             header("X-Sendfile: ".$nome);
         }
+
         exit();
     }
+
 }
 
 function nomeRand($n = 10)

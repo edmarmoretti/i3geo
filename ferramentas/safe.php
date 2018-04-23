@@ -33,12 +33,12 @@ else{
 }
 
 //variaveis mais utilizadas
-$tema = $_GET["tema"];
+$tema = @$_GET["tema"];
 if(isset($_GET["ext"])){
    $ext = $_GET["ext"];
 }
 
-$funcao = $_GET["funcao"];
+$funcao = @$_GET["funcao"];
 
 include_once(dirname(__FILE__)."/../classesphp/funcoes_gerais.php");
 

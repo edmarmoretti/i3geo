@@ -235,7 +235,7 @@ if ($funcao == "criaMapa") {
 
     include_once (dirname(__FILE__) . "/../ms_criamapa.php");
     if (isset($_SESSION["logExec"])) {
-        if($_SESSION["logExec"]["controle"] == true){
+        if(@$_SESSION["logExec"]["controle"] == true){
             i3GeoLog("prog: mapa_controle url: " . implode("&", array_merge($_GET, $_POST)), $_SESSION["dir_tmp"]);
         }
     }
