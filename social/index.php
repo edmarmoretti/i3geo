@@ -19,7 +19,7 @@ include "../init/head.php";
 	margin: auto;
 }
 </style>
-<body style="padding-top: 55px;">
+<body style="padding-top: 60px;">
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
@@ -28,14 +28,15 @@ include "../init/head.php";
 			</div>
 		</div>
 	</nav>
-	<div class="container-fluid">
-		<div class="row">
-			<ol class="breadcrumb">
-				<li><a href="../init/index.php?home=">i3Geo</a></li>
-				<li class="active">Social</li>
-			</ol>
-		</div>
-	</div>
+    <div class="container-fluid migalha">
+        <div class="row">
+            <div class="btn-group btn-breadcrumb">
+                <a class="btn btn-default" href="../init/index.php?home=">i3Geo</a>
+                <a class="btn btn-default" style="pointer-events: none">Social</a>
+            </div>
+        </div>
+    </div>
+
 	<div class="container">
 		<div class="row center-block">
 			<div class="center-block col-xs-12 col-md-6">
@@ -49,8 +50,9 @@ include "../init/head.php";
 			<div class="center-block col-xs-12 col-md-6">
 				<div class="panel panel-default">
 					<div class="panel-body">
-						<a class="twitter-timeline htag" href="https://twitter.com/hashtag/i3geo"
-							data-widget-id="643417277208133633" height="320">i3geo Tweets</a>
+						            <a height="320" class="twitter-timeline"  href="https://twitter.com/search?q=i3geo" data-widget-id="990311163815710720">Tweets sobre i3geo</a>
+            <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+
 					</div>
 				</div>
 			</div>
@@ -61,8 +63,7 @@ include "../init/head.php";
 					src='https://www.openhub.net/p/i3geo/widgets/project_users?format=js&style=blue'></script>
 			</div>
 			<div tabindex="-1" class="col-xs-12 text-center">
-				<script type="text/javascript"
-					src="http://www.openhub.net/p/150688/widgets/project_basic_stats.js"></script>
+				<script type='text/javascript' src='https://www.openhub.net/p/i3_geo/widgets/project_basic_stats?format=js'></script>
 			</div>
 		</div>
 	</div>
