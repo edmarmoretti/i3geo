@@ -1391,14 +1391,15 @@ i3GEO.Interface =
                                         } else {
                                             if(i3GEO.Interface.openlayers.googleLike === false){
                                                 source = new ol.source.WMTS({
-                                                    url : urllayer,
+                                                    url : urllayer + "&WIDTH=256&HEIGHT=256",
                                                     matrixSet : opcoes.projection,
                                                     format : 'image/png',
                                                     projection : opcoes.projection,
                                                     tileGrid : new ol.tilegrid.WMTS({
                                                         origin : ol.extent.getTopLeft(projectionExtent),
                                                         resolutions : resolutions,
-                                                        matrixIds : matrixIds
+                                                        matrixIds : matrixIds,
+                                                        tileSize : [256,256]
                                                     }),
                                                     wrapX : true
                                                 });

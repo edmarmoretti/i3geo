@@ -104,7 +104,7 @@ hr {
     width: 40px;
 }
 body{
-	background-color: rgb(240,240,240);
+	background-color: rgb(245,245,245);
 }
 
 /* conforme regra de acessibilidade */
@@ -253,6 +253,17 @@ h2 small {
     min-height: 60px;
     max-height: 60px;
     height: 60px;
+}
+
+.panel {
+    border-radius: 2px;
+    border: 0;
+    -webkit-box-shadow: 0 1px 6px 0 rgba(0,0,0,.12),0 1px 6px 0 rgba(0,0,0,.12);
+    box-shadow: 0 1px 1px 0 rgba(0,0,0,.12),0 1px 1px 0 rgba(0,0,0,.2);
+}
+
+.cartao {
+
 }
 /* === For phones =================================== */
 @media (max-width: 767px) {

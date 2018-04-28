@@ -7,7 +7,7 @@ MAP
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"TIPO,NOMELOC,ANOCRIA"
-      "cache"	"nao"
+      "cache"	"sim"
       "CLASSE"	"SIM"
       "LTEMPOITEMDESCRICAO"	"TIPO"
       "olopacity"	""

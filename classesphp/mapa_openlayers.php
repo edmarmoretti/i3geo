@@ -99,8 +99,10 @@ if (isset($_GET["X"]) && ! ($_GET["REQUEST"] == "getfeatureinfo" || $_GET["REQUE
     $_GET["tms"] = "/" . $_GET["layer"] . "/" . $z . "/" . $x . "/" . $y . ".png";
 }
 if (isset($_GET["TileMatrix"])) {
-    $_GET["WIDTH"] = 256;
-    $_GET["HEIGHT"] = 256;
+    if(empty($_GET["WIDTH"])){
+        $_GET["WIDTH"] = 256;
+        $_GET["HEIGHT"] = 256;
+    }
     $z = $_GET["TileMatrix"];
     $x = $_GET["TileCol"];
     $y = $_GET["TileRow"];
@@ -119,7 +121,7 @@ if (isset($_GET["TileMatrix"])) {
     $top_left_minx = - 180;
     $top_left_maxy = 90;
 
-    $x_size = $res[$z - 1] * 256;
+    $x_size = $res[$z - 1] * $_GET["WIDTH"];
     $y_size = $x_size;
 
     $lon1 = $top_left_minx + ($x * $x_size);
@@ -354,7 +356,10 @@ if ($cortePixels > 0) {
     // echo $mapa->scaledenom;exit;
     $escalaInicial = $mapa->scaledenom;
     $extensaoInicial = $mapa->extent;
-    $wh = 256 + ($cortePixels * 2);
+    if(empty($_GET["WIDTH"])){
+        $_GET["WIDTH"] = 256;
+    }
+    $wh = $_GET["WIDTH"] + ($cortePixels * 2);
     $mapa->setsize($wh, $wh);
     $ponto = new pointObj();
     $ponto->setxy(($wh / 2), ($wh / 2));
@@ -417,7 +422,7 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
     // corta a imagem gerada para voltar ao tamanho normal
     //
     if ($cortePixels > 0) {
-        cortaImagemDisco($nomer, $cortePixels, 256);
+        cortaImagemDisco($nomer, $cortePixels, $_GET["WIDTH"]);
     }
     filtraImg($nomer, $_GET["TIPOIMAGEM"]);
     $img = imagecreatefrompng($nomer);
@@ -450,7 +455,7 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
             // corta a imagem gerada para voltar ao tamanho normal
             //
             if ($cortePixels > 0) {
-                $img = cortaImagemDisco($nomer, $cortePixels, 256);
+                $img = cortaImagemDisco($nomer, $cortePixels, $_GET["WIDTH"]);
             } else {
                 $img = imagecreatefrompng($nomer);
                 imagealphablending($img, false);
@@ -473,7 +478,7 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
             // corta a imagem gerada para voltar ao tamanho normal
             //
             if ($cortePixels > 0) {
-                $img = cortaImagemDisco($nomer, $cortePixels, 256);
+                $img = cortaImagemDisco($nomer, $cortePixels, $_GET["WIDTH"]);
             }
             cabecalhoImagem($nomer);
             header("X-Sendfile: ".$nomer);
@@ -523,7 +528,7 @@ function salvaCacheImagem($cachedir, $map, $tms)
         // corta a imagem gerada para voltar ao tamanho normal
         //
         if ($cortePixels > 0) {
-            $img = cortaImagemDisco($nome, $cortePixels, 256);
+            $img = cortaImagemDisco($nome, $cortePixels, $_GET["WIDTH"]);
         }
         chmod($nome, 0744);
     }

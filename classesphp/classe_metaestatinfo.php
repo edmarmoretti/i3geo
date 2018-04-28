@@ -601,15 +601,19 @@ class MetaestatInfo{
 //error_log("----- m->listaDadosGeometriaRegiao");
             //define o tipo correto de layer
             $dg = $this->listaDadosGeometriaRegiao($codigo_tipo_regiao);
-            if(empty($tipolayer)){
+            if(empty($tipolayer) || !isset($dg["dimension"]) || $dg == false || empty($dg) || $dg["dimension"] == ""){
                 $tipolayer = "polygon";
+            } else {
+                if($dg["dimension"] == 0){
+                    $tipolayer = "point";
+                }
+                if($dg["dimension"] == 1){
+                    $tipolayer = "line";
+                }
             }
-            if($dg["dimension"] == 0){
-                $tipolayer = "point";
-            }
-            if($dg["dimension"] == 1){
-                $tipolayer = "line";
-            }
+            error_log("++++++ mapfileMedidaVariavel ");
+            error_log("++++++ dg['dimension'] ".$dg["dimension"]);
+            error_log("++++++ codigo_tipo_regiao ".$codigo_tipo_regiao);
             error_log("++++++ tipolayer ".$tipolayer);
             error_log("++++++ dimension ".$dg["dimension"]);
             error_log("++++++ id_medida_variavel ".$id_medida_variavel);
@@ -1742,8 +1746,10 @@ class MetaestatInfo{
         $r = array();
         if($q){
             $r = $q->fetchAll();
+            return $r[0];
+        } else {
+            return false;
         }
-        return $r[0];
     }
     /**
      * Lista uma ou todas as agregacoes de regioes existentes para um tipo de regiao

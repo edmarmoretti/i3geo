@@ -1467,7 +1467,7 @@ function criaDirMapa($dir_tmp, $cachedir = "")
     }
     if (file_exists($dir_tmp)) {
         foreach (glob($dir_tmp . '/{,.}*.php', GLOB_BRACE) as $f) {
-            unlink($f);
+            rename($f,str_replace(".php","_php_renomeado_por_ms_criamapa",$f));
         }
         $tmpdirname = nomeRandomico();
         $crdir = @mkdir($dir_tmp . "/" . $tmpdirname, 0744);
