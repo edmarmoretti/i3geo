@@ -1,4 +1,5 @@
 <?php
+exit;
 include('../../pacotes/picStylizer/picStylizer.php');
 
 // initialize

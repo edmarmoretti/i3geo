@@ -262,8 +262,17 @@ h2 small {
     box-shadow: 0 1px 1px 0 rgba(0,0,0,.12),0 1px 1px 0 rgba(0,0,0,.2);
 }
 
-.cartao {
-
+.thumbnail {
+    display: block;
+    padding: 0px;
+    margin-bottom: 20px;
+    line-height: 0;
+    background-color: unset;
+    border: 0px;
+    border-radius: 0px;
+    -webkit-transition: border .2s ease-in-out;
+    -o-transition: border .2s ease-in-out;
+    transition: border .2s ease-in-out;
 }
 /* === For phones =================================== */
 @media (max-width: 767px) {
