@@ -268,7 +268,7 @@ include(dirname(__FILE__)."/classesphp/sani_request.php");
 include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
 $_GET = array_merge($_GET,$_POST);
-
+//error_log($_SERVER['QUERY_STRING']);
 if(isset($_GET["BBOX"])){
 	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
 }
@@ -276,7 +276,7 @@ if(isset($_GET["BBOX"])){
 if(isset($_GET["tema"])){
 	$tema = $_GET["tema"];
 }
-if($_GET["id_medida_variavel"] != ""){
+if(@$_GET["id_medida_variavel"] != ""){
 	$_GET["id_medida_variavel"] = filter_var ( $_GET["id_medida_variavel"], FILTER_SANITIZE_NUMBER_INT);
 }
 //
@@ -337,7 +337,7 @@ if(isset($_GET["TileMatrix"])){
 if(isset($_GET["tms"]) && $_GET["tms"] != "" && $_GET["DESLIGACACHE"] != "sim"){
 	carregaCacheImagem($cachedir,$nomeMapfileTmp,$_GET["tms"]);
 }
-if($_GET["DESLIGACACHE"] != "sim" && isset($_GET["Z"]) && isset($_GET["X"])){
+if(@$_GET["DESLIGACACHE"] != "sim" && isset($_GET["Z"]) && isset($_GET["X"])){
 	$x = $_GET["X"];
 	$y = $_GET["Y"];
 	$z = $_GET["Z"];
@@ -407,7 +407,10 @@ if(!file_exists($tema)){
 
 $layers = $tema;
 //ajusta o OUTPUTFORMAT
-$OUTPUTFORMAT = $_GET["OUTPUTFORMAT"];
+$OUTPUTFORMAT = "";
+if(isset($_GET["OUTPUTFORMAT"])){
+    $OUTPUTFORMAT = $_GET["OUTPUTFORMAT"];
+}
 if(strpos(strtolower($OUTPUTFORMAT),"kml") !== false){
 	$OUTPUTFORMAT = "kml";
 }
@@ -463,7 +466,7 @@ if(strpos(strtolower($format),"kmz") !== false){
 //
 //usa o epsg correto ao inves do apelido inventado pelo Google
 //
-if($_GET["SRS"] == "EPSG:900913" || $_GET["srs"] == "EPSG:900913"){
+if(@$_GET["SRS"] == "EPSG:900913" || @$_GET["srs"] == "EPSG:900913"){
 	$_GET["SRS"] = "EPSG:3857";
 	$_GET["srs"] = "EPSG:3857";
 }
@@ -499,6 +502,7 @@ if(isset($format) && strtolower($format) == "application/openlayers"){
 	else{
 		echo "<meta http-equiv='refresh' content='0;url=$urln'>";
 	}
+	exit;
 }
 //
 //pega a versao do Mapserver
@@ -762,7 +766,7 @@ else{
 							//
 							//verifica se existem parametros de substituicao passados via url
 							//
-							$parametro = $_GET["map_layer_".$l->name."_filter"];
+							$parametro = @$_GET["map_layer_".$l->name."_filter"];
 							//echo $parametro;exit;
 							if(!empty($parametro)){
 								$l->setfilter($parametro);
@@ -1223,7 +1227,7 @@ ms_ioinstallstdouttobuffer();
 //verifica parametro outputformat e ajusta a requisicao
 //
 if(strtolower($req->getValueByName("REQUEST")) == "getmap" && $req->getValueByName("format") == ""){
-	$req->setParameter("format","image/png");
+    $req->setParameter("format","image/png");
 }
 if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo" && $_GET["info_format"] == "text/xml"){
 	$req->setParameter("info_format","application/vnd.ogc.gml");
@@ -1233,12 +1237,9 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo" && $_GET["inf
 	getfeatureinfoJson();
 	exit;
 }
-if(strtolower($request) == "getcapabilities"){
-	//header('Content-Disposition: attachment; filename=getcapabilities.xml');
-}
-elseif(!isset($OUTPUTFORMAT)){
+if(!isset($OUTPUTFORMAT) && !headers_sent()){
 	//$contenttype = ms_iostripstdoutbuffercontenttype();
-	header("Content-type: $contenttype");
+    header("Content-type: $contenttype");
 }
 //$ogrOutput vem de ms_configura.php
 
@@ -1329,9 +1330,12 @@ if(strtolower($OUTPUTFORMAT) == "csv"){
 	exit;
 }
 //echo $req->getValue(1);exit;
-ob_clean();
+if(ob_get_contents() != false){
+    ob_clean();
+}
 $oMap->owsdispatch($req);
 $contenttype = ms_iostripstdoutbuffercontenttype();
+header("Content-type: $contenttype");
 $buffer = ms_iogetStdoutBufferBytes();
 
 ms_ioresethandlers();
