@@ -61,7 +61,7 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"imagens/application-vnd-google-earth-kml.png",
-	"href": "../kml.php",
+	"href": "../kml.php?tipoxml=kml",
 	"titulo":$trad(12,g_traducao_init),
 	"subtitulo": $trad("12a",g_traducao_init),
 	"fa": "download",
