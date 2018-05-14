@@ -504,7 +504,6 @@ function ajuda()
 <body id="i3geo" style='background: white;'>
     <div style="background: white;<?php echo $estilo;?>">
         <div id="mapai3Geo" style="<?php echo $estilo;?>"></div>
-
         <!-- barra de icones de navegacao -->
         <div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
             <button title="{{{volta}}}" class="<?php echo $objBotoesHtml["zoomanterior"];?>" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">

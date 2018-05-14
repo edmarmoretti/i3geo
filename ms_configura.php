@@ -667,6 +667,24 @@ $postgis_mapa = array(
 		"metaestat"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432 options='-c client_encoding=LATIN1'",
 		"i3geosaude"=>"user=postgres password=postgres dbname=i3geosaude host=localhost port=5432"
 );
+//
+//Voce pode querer usar variaveis de ambiente
+//
+/*
+if(getenv('DB_HOST')){
+    $envhost = getenv('DB_HOST');
+    $envport = getenv('DB_PORT');
+    $envdatabase = getenv('DB_DATABASE');
+    $envuser = getenv('DB_USER');
+    $envpassw = getenv('DB_PASSWORD');
+    $postgis_mapa = array(
+        "teste"=>"user={$envuser} password={$envpassw} dbname={$envdatabase} host={$envhost} port={$envport}",
+        "postgres"=>"user={$envuser} password={$envpassw} dbname={$envdatabase} host={$envhost} port={$envport}",
+        "metaestat"=>"user={$envuser} password={$envpassw} dbname={$envdatabase} host={$envhost} port={$envport} options='-c client_encoding=LATIN1'",
+        "i3geosaude"=>"user={$envuser} password={$envpassw} dbname={$envdatabase} host={$envhost} port={$envport}"
+    );
+}
+*/
 /*
 Variable: utilizacgi
 

@@ -2422,7 +2422,6 @@ i3GEO.editorOL = {
 	     */
 	}
 };
-
 //para compatibilidade com OpenLayers 2x
 i3GEO.editorOL.backup.getFeatures = function() {
     return i3GEO.editorOL.backup.getSource().getFeatures();

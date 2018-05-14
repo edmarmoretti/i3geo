@@ -107,7 +107,7 @@ include "head.php";
         </div>
     </nav>
 
-    <div class="container-fluid row center-block;" id="conteudoPrincipal" tabindex="-1">
+    <div class="container-fluid row center-block;" style="width:100%" id="conteudoPrincipal" tabindex="-1">
         <div class="row center-block " style="max-width:1000px">
 <?php
 include_once ("../classesphp/carrega_ext.php");

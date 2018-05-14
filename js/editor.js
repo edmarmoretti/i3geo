@@ -4,6 +4,10 @@ if (typeof (i3GEO) === 'undefined') {
 i3GEO.editor =
 {
         //se for vazio, nao cria os botoes
+	//o objeto com os botoes que serao ativados ou nao, pode ser enviado
+	//como um parametro na funcao:
+	//i3GEO.editorOL.criaBotoes(botoes);
+	//caso contrario, utiliza-se i3GEO.editorOL.botoes
         botoes : {
             'zoomin' : false,
             'zoomout' : false,
@@ -60,7 +64,6 @@ i3GEO.editor =
         openlayers : {
             inicia : function(idjanela) {
                 if (!i3GEO.editorOL) {
-                    //a barra de botoes utiliza codigo do Opelayers2
                     i3GEO.util.scriptTag(
                             i3GEO.configura.locaplic + "/ferramentas/editorol/editorol.js",
                             "i3GEO.editor.openlayers.ativaPainel('" + idjanela + "')",
