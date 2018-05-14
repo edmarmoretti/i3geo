@@ -1,0 +1,2555 @@
+input[type=text], textarea, input[type=number]{
+	-webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+}
+
+.bd.i3geo6 input[type=text] {
+	color: white;
+	background: none !IMPORTANT;
+
+	padding: 0;
+	border: 1px solid rgb(180, 180, 180);
+	text-align: center;
+	cursor: text;
+	height: 22px;
+
+}
+
+.bd.i3geo6 input[type=text] {
+	color: white;
+	background: none !IMPORTANT;
+	padding: 0;
+	border: 1px solid rgb(180, 180, 180);
+	text-align: center;
+	cursor: text;
+	height: 22px;
+}
+
+.bd input[type=text] {
+
+}
+
+input[type=number] {
+	font-size: 12px;
+	color: #2F4632;
+	background-color: rgb(250, 250, 250);
+	padding: 0;
+	border: 1px solid rgb(180, 180, 180);
+	text-align: center;
+	cursor: text;
+	height: 26px;
+}
+
+input[type=checkbox] {
+	border: 0px solid white;
+}
+
+input[type=file] {
+	border: 0px solid white;
+	background-color: none;
+	background: none;
+}
+
+select {
+	box-shadow: 1px 1px 3px 0 lightgray;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #2F4632;
+	background-color: #FFFFFF;
+	padding: 0;
+	border: 1px solid rgb(230, 230, 230);
+	text-align: left;
+	cursor: pointer;
+}
+
+select option:hover {
+	background-color: #CCFFFF;
+}
+
+.inputsb {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: #2F4632;
+	background-color: #FFFFFF;
+	padding: 0;
+	border: 0px solid gray;
+	text-align: center;
+	cursor: text;
+}
+
+.styled-select input, .styled-select150 input {
+	width: 100%;
+	height: 22px;
+	border: 0;
+	box-shadow: none;
+	line-height: 1.5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	text-overflow: '';
+	font-size: 12px;
+	appearance: none;
+  background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 97% 5px;
+      background-size: 16px 144px;
+    }
+}
+
+.styled-select input:focus, .i3geoForm input:focus {
+	box-shadow: 0 0 1px blue inset;
+	background: white none repeat scroll 0 0;
+}
+
+.i3geoForm, .i3geoForm150, .i3geoForm100 {
+	width: 252px;
+	overflow: hidden;
+	background: #F8F8F8;
+	border: 0px solid #DDDDDD;
+	height: 22px;
+	border-radius: 2px;
+	text-align:left;
+	color: black;
+    font-weight: normal;
+}
+
+.i3geoForm150 {
+	width: 150px;
+}
+
+.i3geoForm100 {
+	width: 100px;
+}
+
+.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
+	width: 90%;
+	height: 22px;
+	border: 0;
+	box-shadow: none;
+	line-height: 1.5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	text-overflow: '';
+	font-size: 12px;
+	appearance: none;
+	cursor: text;
+}
+.i3geoForm100 input[type=number] {
+	width: 85%;
+}
+
+.i3geoFormIconeBusca {
+  background: transparent url("../imagens/oxygen/16x16/edit-find.png") no-repeat scroll 100% -1px / 16px;
+  background-position: right center;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px;
+      background-size: 16px 144px;
+    }
+}
+
+
+.i3geoFormIconeMinuto {
+  background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px / 18px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/minuto.png") no-repeat scroll 100% -1px;
+      background-size: 18px 144px;
+    }
+}
+.i3geoFormIconeMinuto input{
+	width: 85%;
+}
+
+.i3geoFormIconeSegundo {
+  background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px / 18px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/segundo.png") no-repeat scroll 100% -1px;
+      background-size: 18px 144px;
+    }
+}
+.i3geoFormIconeSegundo input{
+	width: 85%;
+}
+
+.i3geoFormIconeLongitude {
+  background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% 2px / 18px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/longitude.png") no-repeat scroll 100% 2px;
+      background-size: 18px 144px;
+    }
+}
+.i3geoFormIconeLongitude input{
+	width: 70%;
+}
+
+.i3geoFormIconeLatitude {
+  background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% 2px / 18px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/latitude.png") no-repeat scroll 100% 2px;
+      background-size: 18px 144px;
+    }
+}
+.i3geoFormIconeLatitude input{
+	width: 70%;
+}
+
+.i3geoFormIconeDistancia {
+  background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% 2px / 18px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/length-measure.png") no-repeat scroll 100% -2px;
+      background-size: 16px 144px;
+    }
+}
+
+.i3geoFormIconeEdita {
+  background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/edit2.png") no-repeat scroll 100% 5px;
+      background-size: 16px 144px;
+    }
+}
+
+.i3geoFormIconeUsuario {
+  background: transparent url("../imagens/oxygen/22x22/system-users.png") no-repeat scroll 100% 0px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/oxygen/22x22/system-users.png") no-repeat scroll 100% 0px;
+      background-size: 16px 144px;
+    }
+}
+
+.i3geoFormIconeSenha {
+  background: transparent url("../imagens/oxygen/22x22/preferences-desktop-user-password.png") no-repeat scroll 100% 0px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/oxygen/22x22/preferences-desktop-user-password.png") no-repeat scroll 100% 0px;
+      background-size: 16px 144px;
+    }
+}
+
+.i3geoFormSemIcone {
+  background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/branco.gif") no-repeat scroll 100% 5px;
+      background-size: 16px 144px;
+    }
+}
+
+.i3geoFormTag {
+  background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/oxygen/16x16/list-remove.png") no-repeat scroll 100% 3px;
+      background-size: 16px 144px;
+    }
+    border-radius: 8px;
+    background-color: #F0F0F0;
+    cursor: pointer;
+}
+
+.i3geoFormIconeAquarela {
+  cursor: pointer;
+  background: transparent url("../imagens/aquarela.gif") no-repeat scroll 98% 5px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/aquarela.gif") no-repeat scroll 100% 5px;
+      background-size: 16px 144px;
+    }
+
+}
+.i3geoFormIconeAquarela input{
+	width: 80%;
+}
+
+.i3geoFormIconeGlobo {
+  background: transparent url("../imagens/gisicons/projection.png") no-repeat scroll 100% 2px / 18px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/gisicons/projection.png") no-repeat scroll 100% 2px;
+      background-size: 18px 144px;
+    }
+}
+.i3geoFormIconeGlobo input{
+	width: 70%;
+}
+
+.i3geoFormIconeNumero {
+  background: transparent url("../imagens/oxygen/16x16/number.png") no-repeat scroll 100% 4px / 14px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/oxygen/16x16/number.png") no-repeat scroll 100% 4px;
+      background-size: 14px 144px;
+    }
+}
+
+/*hack opera */
+@media all and (-webkit-min-device-pixel-ratio:10000) , not all and
+	(-webkit-min-device-pixel-ratio:0) {
+	.inputsb {
+		border: 1px solid black
+	}
+}
+
+/*
+para nao selecionar
+*/
+* {
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: -moz-none;
+    -o-user-select: none;
+    user-select: none;
+}
+.bd input, .bd textarea, #escala input {
+    -webkit-user-select: text;
+    -khtml-user-select: text;
+    -moz-user-select: text;
+    -o-user-select: text;
+    user-select: text;
+}
+
+#i3GEOlogoMarca {
+	display: block;
+	top: 4em;
+	zIndex: 5000;
+}
+#i3GEOlogoMarca > table {
+	width: 100%;
+}
+.i3GEOlogoMarca {
+	font-size:14pt;
+	padding:5px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	background-color: white;
+}
+#i3GEOlogoMarca > img {
+	width:inherit;
+	padding:5px;
+}
+
+/*
+Banner inicial
+*/
+#i3GEOlogoMarca {
+	width:95%;
+	max-width:600px;
+	text-align:center;
+	margin: auto auto;
+	box-shadow: 0 1px 13px gray;
+	border-radius: 5px;
+}
+/*
+Para nao marcar links
+*/
+a:active {
+    outline: none;
+}
+/*
+Popup do identifica no openlayers 3
+*/
+.ol-popup {
+  position: absolute;
+  background-color: white;
+  -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+  padding: 8px;
+  border-radius: 10px;
+  border: 1px solid #cccccc;
+  bottom: 12px;
+  left: -50px;
+}
+.ol-popup:after, .ol-popup:before {
+  top: 100%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+.ol-popup:after {
+  border-top-color: white;
+  border-width: 10px;
+  left: 48px;
+  margin-left: -10px;
+}
+.ol-popup:before {
+  border-top-color: #cccccc;
+  border-width: 11px;
+  left: 48px;
+  margin-left: -11px;
+}
+.ol-popup-closer {
+  text-decoration: none;
+  position: absolute;
+  top: 2px;
+  right: 1px;
+  cursor:pointer;
+}
+.ol-popup-closer:after {
+  content: "\2716";
+  color: red;
+  font-size: 16px;
+}
+/*
+Ajusta altura dos controles do googlemaps
+*/
+div.gmnoprint {
+	padding-top: 10px;
+}
+/*
+Utilizado na janela do buscador INDE
+*/
+.meta-param, .meta-value{
+	text-align: left;
+	font-size: 12px;
+	padding: 5px;
+}
+
+.mensagemAjuda {
+	width:95%;
+	padding:2;
+	vertical-align:top;
+}
+
+.mensagemAjuda th {
+	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	border: 1px solid #B1CDEB;
+	text-align: left;
+	padding-left: 7px;
+	padding-right: 11px;
+}
+
+.botoesLegendaFlutuante {
+	font-size: 10px;
+}
+/*
+.legendaExpImagemPng .first-child button {
+	background: url(../imagens/oxygen/16x16/image-x-generic.png) 5% 50% no-repeat;
+	width: 60px;
+}
+.legendaMostraTodosTemas .first-child button {
+	background: url(../imagens/oxygen/16x16/layer-visible-on.png) 5% 50% no-repeat;
+	width: 80px;
+}
+.legendaMostraSoTemas .first-child button {
+	background: url(../imagens/oxygen/16x16/layer-visible-off.png) 5% 50% no-repeat;
+	width: 90px;
+}
+*/
+
+.i3GEOconteudoLegendaClass{
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.olPopupCloseBox {
+	margin-top: -2px;
+}
+
+.i3GEOCabecalhoInfoWindow {
+	height:16px;
+	top: -5px;
+}
+
+.i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
+	display: none;
+}
+/*
+.i3GEOarvCat input[type=checkbox]+label:before {
+    color: white;
+    content: "";
+    content: url("../imagens/checkbox-unchecked.png");
+    line-height: 15px;
+    text-align: center;
+    top: -1px;
+    position: absolute;
+    left: -25px;
+	cursor : pointer;
+}
+
+.i3GEOarvCat input[type=checkbox]:checked+label:before {
+    color: white;
+    content: "";
+    content: url("../imagens/checkbox-checked.png");
+    line-height: 15px;
+    text-align: center;
+    top: -1px;
+    position: absolute;
+    left: -25px;
+    cursor : pointer;
+}
+*/
+.i3GEOarvCat label {
+	left:12px;
+}
+
+.i3GEOarvCam .ygtvitem {
+    text-align: left;
+    margin-top: 3px;
+    margin-bottom: 10px;
+}
+
+.i3GEOarvCam input[type=radio], .i3GEOarvCam input[type=checkbox] {
+	display: none;
+}
+
+/*
+.i3GEOarvCam input[type=checkbox]+label:before {
+    color: white;
+    content: "";
+    content: url("../imagens/gisicons/hide.png");
+    line-height: 15px;
+    text-align: center;
+    top: -1px;
+    position: absolute;
+    left: 1px;
+	cursor : pointer;
+}
+
+.i3GEOarvCam input[type=checkbox]:checked+label:before {
+    color: white;
+    content: "";
+    content: url("../imagens/gisicons/show.png");
+    line-height: 15px;
+    text-align: center;
+    top: -1px;
+    position: absolute;
+    left: 1px;
+    cursor : pointer;
+}
+
+.i3GEOarvCam label {
+	margin-left: 0px;
+	cursor: move;
+}
+*/
+.i3GEOarvCamGrupo {
+	font-size: 12pt;
+	margin: auto;
+	text-align: left;
+	cursor: pointer;
+	top: -1px;
+	font-weight : bold;
+}
+
+.i3GEOarvCamTema {
+	font-size: 12pt;
+	margin: auto;
+	text-align: left;
+	cursor: pointer;
+	top: -2px;
+	font-weight : bold;
+}
+
+.i3GEOarvCamTemaIE {
+	text-align: left;
+	font-size: 12pt;
+	vertical-align: middle;
+	display: table-cell;
+	font-weight : bold;
+}
+.i3GEOarvCam .ygtvdepthcell {
+	background : none;
+	display: none;
+}
+
+.i3GEOarvCamTema input, .i3GEOarvCamTemaIE input {
+	cursor: pointer;
+}
+
+.i3GEOarvCamTema span, .i3GEOarvCamTemaIE span {
+	vertical-align: top;
+	cursor: move;
+}
+
+.i3GEOarvCamTema img, .i3GEOarvCamTemaIE img {
+	width: 15px;
+	height: 15px;
+	background-size: 15px;
+	position: relative;
+	top: 1px;
+	margin-left: 2px;
+}
+.i3GEOarvCamTemaIco img, .i3GEOarvCamTemaIcoIE img {
+	width: 15px;
+	height: 15px;
+	background-size: 15px;
+	position: relative;
+	top: -1px;
+	margin-left: 3px;
+}
+.i3GEOarvCamTemaIco .arvCamFarol, .i3GEOarvCamTemaIcoIE .Farol {
+	width: 11px;
+	height: 11px;
+}
+/*
+.i3GEOarvCamTemaIco .arvCamFerramentas, .i3GEOarvCamTemaIcoIE .Ferramentas {
+	background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
+}
+
+.i3GEOarvCamTemaIco .arvCamDownload, .i3GEOarvCamTemaIcoIE .Download {
+	background-image: url("../imagens/oxygen/16x16/download.png");
+}
+
+.i3GEOarvCamTemaIco .arvCamOgc, .i3GEOarvCamTemaIcoIE .Ogc {
+	background-image: url("../imagens/oxygen/16x16/application-x-smb-workgroup.png");
+}
+
+.i3GEOarvCamTemaIco .arvCamFonte, .i3GEOarvCamTemaIcoIE .Fonte {
+	background-image: url("../imagens/oxygen/16x16/help-about.png");
+}
+
+.i3GEOarvCamTemaIco .arvCamSelecionado, .i3GEOarvCamTemaIcoIE .Selecionado {
+	background-image: url("../imagens/gisicons/select-cancel.png");
+}
+
+.i3GEOarvCamTemaIco .arvCamZoomSelecionado, .i3GEOarvCamTemaIE .ZoomSelecionado {
+	background-image: url("../imagens/gisicons/zoom-selection.png");
+}
+.i3GEOarvCamTemaIco .arvCamDependeEscala, .i3GEOarvCamTemaIcoIE .DependeEscala {
+	background-image: url("../imagens/oxygen/16x16/task-attempt.png");
+	top: 0px;
+}
+.i3GEOarvCamTemaIco .arvCamRemoveLayer, .i3GEOarvCamTemaIcoIE .RemoveLayer {
+	background-image: url("../imagens/oxygen/16x16/draw-x.png");
+}
+.i3GEOarvCamTemaIco .arvCamSobeLayer, .i3GEOarvCamTemaIcoIE .SobeLayer {
+	background-image: url("../imagens/oxygen/16x16/draw-triangle3.png");
+}
+.i3GEOarvCamTemaIco .arvCamDesceLayer, .i3GEOarvCamTemaIcoIE .DesceLayer {
+	background-image: url("../imagens/oxygen/16x16/draw-triangle4.png");
+}
+.i3GEOarvCamTemaIco .arvCamZoomLayer, .i3GEOarvCamTemaIcoIE .ZoomLayer {
+	background-image: url("../imagens/gisicons/zoom-layer.png");
+}
+.i3GEOarvCamTemaIco .pluginParametrossql, .i3GEOarvCamTemaIcoIE .pluginParametrossql {
+	background-image: url("../imagens/gisicons/settings.png");
+}
+*/
+.i3GEObalaoInfo {
+	position : absolute;
+	textAlign : left;
+	background : white;
+	-moz-opacity: 0.9;
+	opacity:.90;
+	filter: alpha(opacity=90);
+	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+}
+.subbloco {
+	background-color: rgb(248, 248, 248);
+	width: 90%;
+	padding: 5px;
+	margin: 7px;
+}
+.i3GeoExemploImg{
+	margin:6px;
+	cursor:text;
+	border: 0px solid gray;
+	box-shadow: 1px 1px 1px 1px #D3D3D3;
+	border-radius: 5px;
+	float: left;
+	width: 40px;
+}
+
+.i3GeoMascaraCoord {
+	width: 100%;
+}
+
+.i3GeoMascaraCoord td {
+	background: white;
+	color: black;
+}
+
+.i3GeoMascaraCoord input {
+	background: white;
+	color: black;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	margin: 0;
+	border: 0px solid white;
+	box-shadow: none;
+}
+
+.i3GeoMascaraCoord span {
+	border: 0px solid white;
+}
+
+.i3GeoMascaraCoord select {
+	border: 1px solid #B4B4B4;
+	font-size: 10px;
+	height: 16px;
+	left: 1px;
+	position: relative;
+	top: 1px;
+	width: 40px;
+}
+
+.i3GeoMascaraCoord tr {
+	border: 0px solid white;
+}
+
+.toolTipBalaoTitulo {
+	text-decoration: none;
+	text-align: left;
+	font-size: 8pt;
+	font-weight: normal;
+	margin-top: 8px;
+	margin-bottom: 2px;
+}
+
+.toolTipBalaoTexto {
+	text-align: left;
+	font-size: 8pt;
+	background-color: #E0E0E0;
+	color: black;
+	padding: 3px;
+	-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	border-radius: 6px;
+}
+
+.toolTipBalaoTexto1 {
+	text-align: left;
+	font-size: 8pt;
+	background-color: #e5e5e5;
+	color: black;
+	padding: 3px;
+	-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	border-radius: 6px;
+}
+
+fieldset {
+	text-align: left;
+	padding: 10px;
+	border: 0px solid gray;
+	border-radius: 5px 5px 5px 5px;
+	box-shadow: 0 1px 3px gray;
+	background: transparent;
+	margin: 15px;
+}
+
+legend {
+	font-weight: bold;
+	cursor: pointer;
+	background: transparent;
+	color: navy;
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.paragrafo {
+	font-size: 12px;
+	line-height: 15px;
+	margin-bottom: 9px;
+	text-align: left;
+}
+
+.paragrafo input[type=checkbox] {
+	position: relative;
+	top: 2px;
+	border: 0px solid white;
+	cursor: pointer;
+}
+
+.paragrafo input[type=radio] {
+	position: relative;
+	top: 3px;
+	border: 0px solid white;
+	cursor: pointer;
+}
+
+.lista td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 0px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: left;
+	font-size: 11px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista2 td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 2px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista2 td input {
+	border: 1px solid gray;
+}
+
+.lista3 td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 1px;
+	color: #2F4632;
+	background-color: #F2F2F2;
+	margin: 0px;
+	text-align: left;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista4 td {
+	border: 1px solid rgb(240, 240, 240);
+	padding: 2px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista4 td input {
+	border: 0px solid gray;
+}
+
+.lista5 td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 2px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: right;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista5 td input {
+	border: 1px solid gray;
+}
+
+.lista6 td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 1px;
+	color: #2F4632;
+	background-color: white;
+	margin: 0px;
+	text-align: left;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista7 td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 1px;
+	color: #2F4632;
+	background-color: #F2F2F2;
+	margin: 0px;
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista8 td {
+	border-top: 1px solid rgb(240, 240, 240);
+	padding: 2px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista8 td input {
+	border: 0px solid gray;
+}
+
+.geralFerramentas {
+	position: relative;
+	background-color: white;
+	text-align: left;
+	text-decoration: none;
+	border-top: 2px solid rgb(230, 230, 230);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	display: block;
+	font-size: 12px;
+	padding: 5px;
+	font-weight: normal;
+	top: 8px;
+	left: 0px;
+	overflow: auto;
+	width: 100%;
+}
+
+.alerta {
+	color: red;
+	font-size: 11px;
+}
+label {
+	margin-left: 5px;
+	margin-right: 2px;
+}
+caption {
+	font-size: 8px;
+	padding-top: 0px;
+	border-top: 0px solid #FFFFFF;
+	z-index: 1000;
+	position: relative;
+}
+
+span {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+/*
+body {
+	background-color: black;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	margin: 0px;
+	z-index: 1000;
+}
+*/
+A {
+	text-align: left;
+	font-size: 11pt;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #26298D;
+	outline : none;
+}
+
+A:hover {
+	color: #4142ff;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	outline : none;
+}
+
+img {
+	border: 0px solid #FFFFFF;
+	border-width: 0;
+}
+
+table {
+	text-align: center;
+	border: 0px solid #FFFFFF;
+	padding: 0px;
+	margin: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+td {
+	background-color: white;
+	border: 0px solid gray;
+	padding: 0px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: center;
+	font-size: 10pt !Important;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+div {
+	border: 0px solid #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: relative;
+}
+
+H1 {
+	COLOR: #2F4632;
+	text-align: left;
+	text-decoration: none;
+	font-weight: normal;
+	font-style: normal;
+	font-size: 14px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: #004080;
+}
+
+
+/*
+.ajuda_usuario {
+	background-image: url(../imagens/oxygen/16x16/dialog-information.png);
+	background-position: 0px 0px;
+	background-repeat: no-repeat;
+	margin-left: 0;
+	text-decoration: none;
+	cursor: help;
+	position: relative;
+	font-size: 14px;
+	background-size: 14px 14px;
+	vertical-align: middle;
+}
+*/
+#buscaRapida .ajuda_usuario {
+	top: 1px;
+	display: inline-block;
+	height: 14px;
+	width: 14px;
+	left: 2px;
+}
+/*
+.executar {
+	cursor: pointer;
+	color: white;
+	text-align: left;
+	background-color: gray;
+	background-image: URL('../imagens/tic.png');
+	background-repeat: no-repeat;
+	border-style: outset;
+	background-position: right;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+*/
+.legendatemas {
+	cursor: pointer;
+	text-align: left;
+	background-color: transparent;
+	vertical-align: top;
+	border: 0px solid gray;
+	margin: 0;
+	padding: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.legendatemas td {
+	text-align: left;
+	background-color: #ffffff;
+	vertical-align: top;
+	padding: 0;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+	position: relative;
+}
+
+.legendatemas input {
+	cursor: pointer;
+	vertical-align: top;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.legendadiv {
+	left: 0px;
+	top: 100px;
+	overflow: auto;
+	position: absolute;
+	float: left;
+	visibility: hidden;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.button {
+	visibility: visible;
+	color: #2F4632;
+	background: #ffffff;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	border-style: outset;
+	border-width: 3px;
+	cursor: pointer
+}
+
+.filme {
+	cursor: pointer;
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 8px;
+	color: #000000;
+	background: #ebf8e9;
+	border-style: solid;
+	border-top-width: 1px;
+	border-right-width: 0px;
+	border-bottom-width: 1px;
+	border-left-width: 0px;
+}
+
+.direcao {
+	cursor: pointer;
+	font-size: 0px;
+	text-align: center;
+	color: #ebf8e9;
+	background-color: #d5e9c1;
+	border: 0px solid #d5e9c1;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.pcenter10 {
+	COLOR: #2F4632;
+	text-align: center;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+}
+
+.tablefilme {
+	text-align: center;
+	border: 0px solid #FFFFFF;
+	padding: 0px;
+	margin: 0px;
+	border-collapse: collapse;
+	background: #ebf8e9;
+	cursor: pointer;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+	position: relative;
+}
+
+.tablefilme td {
+	background-color: white;
+	border: 0px solid #FFFFFF;
+	padding: 0px;
+	cursor: pointer;
+	border-collapse: collapse;
+	margin: 0px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.tdclara {
+	color: #2F4632;
+	border: 0px solid #DFDFDF;
+	padding: 0px;
+	background-color: #DFDFDF;
+	margin: 0px;
+	text-align: center;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+	position: relative;
+}
+
+.tdbranca {
+	border-collapse: collapse;
+	color: #2F4632;
+	border: 0px solid #DFDFDF;
+	padding: 0px;
+	background-color: #FFFFFF;
+	margin: 0px;
+	text-align: center;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: relative;
+}
+
+.tdtxtleft {
+	color: #2F4632;
+	border: 0px solid #DFDFDF;
+	padding: 0px;
+	background-color: #FFFFFF;
+	margin: 0px;
+	text-align: left;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.tdtxtjust {
+	color: #2F4632;
+	border: 0px solid #DFDFDF;
+	padding: 0px;
+	background-color: #FFFFFF;
+	margin: 0px;
+	text-align: justify;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.verdeescuro {
+	color: orange;
+	border: 0px solid #6699FF;
+	padding: 0px;
+	background-color: #667B67;
+	margin: 0px;
+	text-align: left;
+	font-size: 8px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.verdeclaro {
+	/*background-image: url(../imagens/i3geo1bw.jpg);*/
+	padding: 0px;
+	background-color: #d5e9c1;
+	margin: 0px;
+	border: 0px solid #d5e9c1;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+}
+
+.verdemedio {
+	padding: 0px;
+	background-color: #d5e9c1;
+	margin: 0px;
+	border: 0px solid #d5e9c1;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+	position: relative;
+}
+
+.aplicar {
+	visibility: visible;
+	color: #2F4632;
+	background: rgb(240, 240, 240);
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border-style: outset;
+	border-width: 2px;
+	border-color: #cc0000;
+	cursor: pointer;
+	z-index: 1000;
+}
+
+.digitar {
+	box-shadow: 1px 1px 3px 0px lightgray;
+	margin: 0px;
+	color: #426252;
+	background-color: white;
+	height: 17px;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.digitar input {
+	border: 1px solid rgb(180, 180, 180);
+}
+
+.digitarOver {
+	margin: 0px;
+	color: #426252;
+	background-color: #F6F6F6;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	box-shadow: 1px 1px 3px 0px #3CA5EB;
+}
+
+.digitarMouseclick {
+	margin: 0px;
+	color: #426252;
+	background-color: beige;
+	border: none;
+	border-bottom: 1px solid gray;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.digitarMouseover {
+	margin: 0px;
+	color: #426252;
+	background-color: rgb(195, 226, 226);
+	border: 0px solid #CBCBCB;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.legendaTema {
+	font-size: 12px;
+	text-align: left;
+}
+
+#corpoMapa,#corpoMapaL,#corpoMapaO,#corpoMapaN,#corpoMapaS {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 0;
+}
+
+#div_d {
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	z-index: 0;
+}
+
+#executa {
+	visibility: visible;
+	color: #2F4632;
+	background: rgb(240, 240, 240);
+	text-align: center;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 12px;
+	border-style: outset;
+	border-width: 2px;
+	border-color: #cc0000;
+	cursor: pointer;
+}
+
+#imgh {
+	z-index: 1000;
+}
+
+#ferramentas1 {
+	display: block;
+}
+
+#ferramentas2 {
+	display: none;
+}
+
+#ferramentas3 {
+	display: none;
+}
+
+#ferramentas {
+	vertical-align: top;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	text-align: center;
+	background-color: white;
+	z-index: 1000;
+	position: relative;
+}
+
+#ferramentas input {
+	font-size: 10px;
+	color: #2F4632;
+	border-style: solid;
+	border-top-width: 1px;
+	border-right-width: 2px;
+	border-bottom-width: 2px;
+	border-left-width: 1px;
+	cursor: pointer;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+}
+
+#ferramentas table {
+	padding: 0px;
+	border-spacing: 0px;
+	width: 100%;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+	position: relative;
+}
+
+#ferramentas table td {
+	border: 0px solid #ebf8e9;
+	font-size: 12px;
+	background-color: white;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	z-index: 1000;
+}
+
+#legenda,#legendai,#corpoLegi,#listaPropriedades {
+	overflow: auto;
+	background-color: white;
+	text-align: left;
+}
+#listaTemas{
+	background-color: white;
+	text-align: left;
+	overflow: none;
+}
+
+#ferr1 {
+	background-color: rgb(255, 255, 255);
+}
+
+#janelaMenu {
+	opacity: .80;
+	background-color: #667B67;
+	position: absolute;
+	top: 0px;
+	width: 150px;
+	height: 200px;
+	border: 0px solid #667B67;
+	text-align: center;
+	z-index: 0;
+}
+
+#janelaMenu div {
+	position: relative;
+	width: 150px;
+	z-index: 10;
+	cursor: pointer;
+	background-color: orange;
+	color: white;
+}
+
+#areaRealce {
+	opacity: .20;
+	background-color: white;
+	position: absolute;
+	top: 0px;
+	width: 50px;
+	height: 50px;
+	border: 0px solid #667B67;
+	z-index: 1000;
+}
+
+#tip {
+	border: 0px solid yellow;
+	opacity: .90;
+}
+
+.clique {
+	cursor: pointer;
+	color: blue;
+}
+
+.guiaobj {
+	text-align: left;
+	text-decoration: none;
+	border: 0px solid #ffffff;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: relative;
+	display: block;
+	font-size: 8px;
+	padding: 1px 5px;
+	font-weight: normal;
+	top: 0px;
+	width: 95%;
+}
+
+#mostradistancia {
+	z-index: 2600;
+	color: red;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+div.yui-b p {
+	margin: 0 0 .5em 0;
+	color: #999;
+}
+
+div.yui-b p strong {
+	font-weight: bold;
+	color: #000;
+}
+
+div.yui-b p em {
+	color: #000;
+}
+
+h1 {
+	padding: .25em .5em;
+	background-color: #ccc;
+}
+
+#vertHandleDiv {
+	cursor: pointer;
+	width: 20px;
+	height: 18px;
+	position: absolute;
+	left: -1;
+	top: 0px
+}
+/*
+#vertBGDiv {
+	position: relative;
+	top: 0px;
+	width: 18px;
+	left: 0px;
+	background: url(../imagens/zoombar.png) no-repeat;
+	height: 78px;
+}
+*/
+#googlemapsdiv {
+	-moz-user-select: -moz-none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	/*
+		Introduced in IE 10.
+		See http://ie.microsoft.com/testdrive/HTML5/msUserSelect/
+	 */
+	-ms-user-select: none;
+	user-select: none;
+}
+/* utilizado pela ferramenta de cartogramas */
+.var_div_relatorio h1 {
+	font-size: 16px;
+	text-align: left;
+}
+
+.var_div_relatorio h2 {
+	font-size: 14px;
+	text-align: left;
+}
+
+.var_div_relatorio p {
+	font-size: 12px;
+	line-height: 15px;
+	margin-bottom: 9px;
+	text-align: left;
+}
+
+.var_div_relatorio i {
+	font-size: 12px;
+	line-height: 15px;
+	margin-bottom: 9px;
+	text-align: left;
+	background-color: white;
+}
+
+.var_cor1 {
+	background-color: rgb(250, 250, 250);
+	width: 95%;
+	padding: 5px;
+}
+
+.var_cor2 {
+	background-color: rgb(220, 220, 220);
+	width: 95%;
+	padding: 5px;
+}
+/*
+#editor_bd p {
+	margin-top: 15px;
+}
+
+#editor_bd input {
+	background-color: #F6F6F6;
+	border: 1px solid #FAFAFA;
+	box-shadow: 0 1px 3px lightgray;
+	color: #426252;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+*/
+/* usado pelos graficos interativos (CCC2)*/
+.tipsy {
+	pointer-events: none;
+	padding: 5px;
+	font-size: 10px;
+	font-family: Arial, Helvetica, sans-serif;
+	position: absolute;
+	z-index: 100000;
+}
+
+.tipsy-inner {
+	padding: 5px 8px 4px 8px;
+	background-color: black;
+	color: white;
+	max-width: 200px;
+	text-align: center;
+}
+
+.tipsy-inner {
+	border-radius: 3px;
+	-moz-border-radius: 3px;
+	-webkit-border-radius: 3px;
+}
+
+/* Uncomment for shadow */
+/*.tipsy-inner { box-shadow: 0 0 5px #000000; -webkit-box-shadow: 0 0 5px #000000; -moz-box-shadow: 0 0 5px #000000; }*/
+.tipsy-arrow {
+	position: absolute;
+	width: 0;
+	height: 0;
+	line-height: 0;
+	border: 5px dashed #000;
+}
+
+.tipsy-n .tipsy-arrow {
+	top: 0px;
+	left: 50%;
+	margin-left: -5px;
+	border-bottom-style: solid;
+	border-top: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-nw .tipsy-arrow {
+	top: 0;
+	left: 10px;
+	border-bottom-style: solid;
+	border-top: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-ne .tipsy-arrow {
+	top: 0;
+	right: 10px;
+	border-bottom-style: solid;
+	border-top: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-s .tipsy-arrow {
+	bottom: 0;
+	left: 50%;
+	margin-left: -5px;
+	border-top-style: solid;
+	border-bottom: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-sw .tipsy-arrow {
+	bottom: 0;
+	left: 10px;
+	border-top-style: solid;
+	border-bottom: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-se .tipsy-arrow {
+	bottom: 0;
+	right: 10px;
+	border-top-style: solid;
+	border-bottom: none;
+	border-left-color: transparent;
+	border-right-color: transparent;
+}
+
+.tipsy-e .tipsy-arrow {
+	right: 0;
+	top: 50%;
+	margin-top: -5px;
+	border-left-style: solid;
+	border-right: none;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+}
+
+.tipsy-w .tipsy-arrow {
+	left: 0;
+	top: 50%;
+	margin-top: -5px;
+	border-right-style: solid;
+	border-left: none;
+	border-top-color: transparent;
+	border-bottom-color: transparent;
+}
+
+
+.cabecalhoTemas {
+    display: inline-block;
+    line-height: 9px;
+    overflow: hidden;
+    text-align: left;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 10em;
+}
+
+.styled-select {
+	width: 252px;
+	overflow: hidden;
+	background: #F8F8F8;
+	border: 1px solid #DDDDDD;
+	height: 22px;
+	border-radius: 2px;
+	text-overflow: ellipsis;
+}
+
+.styled-select150 {
+	width: 150px;
+	overflow: hidden;
+	background: #F8F8F8;
+	border: 1px solid #DDDDDD;
+	height: 22px;
+	border-radius: 2px;
+}
+
+.styled-select select, .styled-select150 select {
+	width: 100%;
+	height: 22px;
+	border: 0;
+	box-shadow: none;
+	line-height: 1.5;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	text-indent: 0.01px;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	font-size: 12px;
+	appearance: none;
+	/*
+  background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
+  @media (-webkit-min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi) {
+      background: transparent url("../imagens/menuarodwn8_nrm_1.gif") no-repeat scroll 99% 0px;
+      background-size: 16px 144px;
+    }
+   */
+}
+
+/* esconde na impressao */
+@media print {
+	.noprint {
+		display: none !important;
+	}
+	.yui-skin-sam .yui-panel .hd {
+		display: none !important;
+	}
+	.yui-skin-sam .yui-panel .ft {
+		display: none !important;
+	}
+	.yui-navset {
+		display: none !important;
+	}
+	.yui-skin-sam .yui-button {
+		display: none !important;
+	}
+	.yuimenubar {
+		display: none !important;
+	}
+	.eudockImagemBottom {
+		display: none !important;
+	}
+	.eudockImagemTop {
+		display: none !important;
+	}
+	#i3GEOcompartilhar {
+		display: none !important;
+	}
+	.iconesGuiaMovel {
+		display: none !important;
+	}
+	.localizarxy {
+		display: none !important;
+	}
+	.i3GEOfechaGuia {
+		display: none !important;
+	}
+	input[type="radio"] {
+		display: none !important;
+	}
+	input[type="checkbox"] {
+		display: none !important;
+	}
+	.legenda > label + input[type="checkbox"]:disabled {
+		display: none !important;
+ 	}
+}
+
+/*
+Copyright (c) 2007, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.2.2
+*/
+.yuibutton  {
+
+    display:-moz-inline-stack; /* Gecko */
+    display:inline-block; /* IE, Opera and Safari */
+    border-width:1px 0;
+    border-style:solid;
+    border-color:#999;
+    margin:auto .25em;
+}
+
+.yuibutton.ie6 {
+
+    /* Give the transparent background image to IE 6 */
+    background-image:none;
+    filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='background.png', sizingMethod = 'scale');
+
+}
+
+.yuibutton .first-child {
+
+    display:block; /* Gecko, Opera and Safari */
+    display:inline-block; /* IE */
+
+    border-width:0 2px;
+    border-style:solid;
+    border-color:#999;
+
+    margin:0 -1px;
+/*
+    *position:relative;
+    *left:-1px;
+*/
+}
+
+.yuibutton button,
+.yuibutton a {
+
+    display:block; /* Opera and Safari */
+    display:-moz-inline-block; /* Gecko */
+    *display:inline-block; /* IE */
+    padding:.25em .5em;
+    border:1px solid #ccc;
+
+}
+
+.yuibutton button {
+
+    overflow:visible; /* Remove superfluous padding for IE */
+    font-size:100%; /* Makes form controls resizable in IE */
+    background-color:transparent;
+    cursor:pointer;
+    cursor:hand;
+
+}
+
+.yuibutton a {
+
+    text-decoration:none;
+    color:#000;
+
+}
+
+.yuibutton.splitbutton button,
+.yuibutton.menubutton button {
+
+    padding-right:20px;
+    background-position:right center;
+    background-repeat:no-repeat;
+
+}
+
+.yuibutton.menubutton button {
+
+    background-image:url(menuarrow.gif);
+
+}
+
+.yuibutton.splitbutton button {
+
+    background-image:url(splitarrow.gif);
+
+}
+
+
+/* Focus state */
+
+.yuibutton.focus {
+
+    border-color:#5e5c95;
+
+}
+
+.yuibutton.focus .first-child {
+
+    border-color:#5e5c95;
+
+}
+
+.yuibutton.focus button,
+.yuibutton.focus a {
+
+    border-color:#cec1fc;
+
+}
+
+
+/* Hover state */
+
+.yuibutton.hover {
+
+    border-color:#406fac;
+    background-color:#98d5fc;
+
+}
+
+.yuibutton.hover .first-child {
+
+    border-color:#406fac;
+
+}
+
+.yuibutton.hover button,
+.yuibutton.hover a {
+
+    border-color:#7099ce;
+
+}
+
+
+/* Active state */
+
+.yuibutton.active {
+
+    border-color:#7a8180;
+    background-color:#333;
+
+}
+
+.yuibutton.active .first-child {
+
+    border-color:#7a8180;
+
+}
+
+.yuibutton.active button,
+.yuibutton.active a {
+
+    border-color:#98a09f;
+
+}
+
+.yuibutton.splitbutton.activeoption button {
+
+    background-color:transparent;
+    background-image:url(splitarrow_active.gif);
+
+}
+
+
+
+/* Checked state */
+
+.yuibutton.radio.checked,
+.yuibutton.checkbox.checked {
+
+    border-color:#7a8180;
+    background-color:#333;
+
+}
+
+.yuibutton.radio.checked .first-child,
+.yuibutton.checkbox.checked .first-child {
+
+    border-color:#7a8180;
+
+}
+
+.yuibutton.radio.checked button,
+.yuibutton.checkbox.checked button {
+
+    border-color:#98a09f;
+
+}
+
+
+
+/* Disabled state */
+
+.yuibutton.disabled {
+
+    border-color:#cbcdc5;
+    background:#ecece3;
+
+    filter:none;
+
+}
+
+.yuibutton.disabled .first-child {
+
+    border-color:#cbcdc5;
+
+}
+
+.yuibutton.disabled button,
+.yuibutton.disabled a {
+
+    border-color:transparent;
+    color:#b9b9b9;
+    cursor:default;
+
+}
+td input {
+	border-bottom: 1px solid rgb(156, 195, 195);
+	border-left: 1px solid rgb(156, 195, 195);
+	border-right: 1px solid rgb(156, 195, 195);
+	border-top: 1px solid rgb(156, 195, 195);
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	color: navy;
+	text-align: center;
+}
+
+body {
+	overflow: hidden;
+	font-size: 12px
+}
+
+div {
+	text-align: left;
+	border: 0px solid #FFFFFF;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: relative;
+	display: block;
+	font-size: 12px;
+	padding: 0px;
+	font-weight: normal;
+	left: 10px;
+}
+
+tr {
+	background-color: white;
+	border: 0px solid rgb(240, 240, 240);
+	padding: 0px;
+	margin: 0px;
+}
+
+td {
+	border: 2px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 0px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: center;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 0px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista2 td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 2px;
+	color: #2F4632;
+	margin: 0px;
+	text-align: left;
+	font-size: 10px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.lista3 td {
+	border: 0px solid rgb(240, 240, 240);
+	border-left: 0px;
+	border-right: 0px;
+	border-top: 0px;
+	padding: 1px;
+	color: #2F4632;
+	background-color: #F2F2F2;
+	margin: 0px;
+	text-align: left;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+select {
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+	color: navy;
+	background-color: #FFFFFF;
+	padding: 0;
+	border: 1px solid rgb(240, 240, 240);
+	text-align: left;
+	cursor: pointer;
+}
+
+.digitar {
+	box-shadow: 1px 1px 3px 0px lightgray;
+	margin: 0px;
+	color: #426252;
+	background-color: white;
+	height: 17px;
+	font-size: 12px;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+}
+
+.digitar input {
+	border: 1px solid rgb(180, 180, 180);
+}
+
+.executar {
+	cursor: pointer;
+	color: rgb(0, 0, 200);
+	text-align: left;
+	padding-left: 5px;
+	background-color: white;
+	background-image: URL('../imagens/tic.png');
+	background-repeat: no-repeat;
+	border-style: outset;
+	background-position: right;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	font-size: 10px;
+}
+
+#fundo {
+	background-color: rgb(255, 255, 255);
+	overflow: hidden;
+	position: absolute;
+	top: 0px;
+	left: 0px;
+}
+
+.guias {
+	background-color: rgb(255, 255, 255);
+	cursor: pointer;
+	position: relative;
+	text-align: left;
+	top: 8px;
+	left: 8px;
+	padding: 0px;
+	margin: 0px;
+}
+
+.guia {
+	display: inline;
+	background-color: rgb(230, 230, 230);
+	color: rgb(150, 150, 150);
+	position: relative;
+	left: 0px;
+	top: 0px;
+	border: 0px solid white;
+	font-size: 12px;
+	z-index: 1050;
+	padding: 0;
+	margin-right: 3px;
+	border-left: 1px solid rgb(230, 230, 230);
+	border-top: 1px solid rgb(230, 230, 230);
+	border-right: 1px solid rgb(230, 230, 230);
+}
+
+.guiaobj {
+	text-align: left;
+	text-decoration: none;
+	border: 0px solid #ffffff;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	position: relative;
+	display: block;
+	font-size: 8px;
+	padding: 1;
+	font-weight: normal;
+	top: 0px;
+	width: 95%;
+}
+
+#geral {
+	position: relative;
+	background-color: white;
+	text-align: center;
+	text-decoration: none;
+	border-top: 2px solid rgb(230, 230, 230);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	display: block;
+	font-size: 8px;
+	padding: 5px;
+	font-weight: normal;
+	top: 8px;
+	left: 0px;
+	overflow: auto;
+	width: 100%;
+}
+
+.geralFerramentas {
+	position: relative;
+	background-color: white;
+	text-align: center;
+	text-decoration: none;
+	border-top: 2px solid rgb(230, 230, 230);
+	font-family: Verdana, Arial, Helvetica, sans-serif;
+	display: block;
+	font-size: 8px;
+	padding: 5px;
+	font-weight: normal;
+	top: 8px;
+	left: 0px;
+	overflow: auto;
+	width: 100%;
+}
+
+#aguarde {
+	position: relative;
+	top: 10px;
+	left: 5px;
+}
+
+.aguarde1 {
+	background-image: URL('../../imagens/aguarde.gif');
+}
+
+.alerta {
+	font-weight: bold;
+	color: red;
+	top: 5px;
+	left: 0px;
+	padding: 5px;
+}
+
+.erro {
+	color: red;
+	padding: 5px;
+}
+
+.destaca {
+	left: 0px;
+	bottom: 10px;
+	padding: 5px;
+}
+/*
+Copyright (c) 2011, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 2.9.0
+*/
+.yui-overlay,.yui-panel-container{visibility:hidden;position:absolute;z-index:2}.yui-panel{position:relative}.yui-panel-container form{margin:0}.mask{z-index:1;display:none;position:absolute;top:0;left:0;right:0;bottom:0}.mask.block-scrollbars{overflow:auto}.masked select,.drag select,.hide-select select{_visibility:hidden}.yui-panel-container select{_visibility:inherit}.hide-scrollbars,.hide-scrollbars *{overflow:hidden}.hide-scrollbars select{display:none}.show-scrollbars{overflow:auto}.yui-panel-container.show-scrollbars,.yui-tt.show-scrollbars{overflow:visible}.yui-panel-container.show-scrollbars .underlay,.yui-tt.show-scrollbars .yui-tt-shadow{overflow:auto}.yui-panel-container.shadow .underlay.yui-force-redraw{padding-bottom:1px}.yui-effect-fade .underlay,.yui-effect-fade .yui-tt-shadow{display:none}.yui-tt-shadow{position:absolute}.yui-override-padding{padding:0!important}.yui-panel-container .container-close{overflow:hidden;text-indent:-10000em;text-decoration:none}.yui-overlay.yui-force-redraw,.yui-panel-container.yui-force-redraw{margin-bottom:1px}.yui-skin-sam .mask{background-color:#000;opacity:.25;filter:alpha(opacity=25)}.yui-skin-sam .yui-panel-container{padding:0 1px;*padding:2px}.yui-skin-sam .yui-panel{position:relative;left:0;top:0;border-style:solid;border-width:1px 0;border-color:#808080;z-index:1;*border-width:1px;*zoom:1;_zoom:normal}.yui-skin-sam .yui-panel .hd,.yui-skin-sam .yui-panel .bd,.yui-skin-sam .yui-panel .ft{border-style:solid;border-width:0 1px;border-color:#808080;margin:0 -1px;*margin:0;*border:0}.yui-skin-sam .yui-panel .hd{border-bottom:solid 1px #ccc}.yui-skin-sam .yui-panel .bd,.yui-skin-sam .yui-panel .ft{background-color:#f2f2f2}.yui-skin-sam .yui-panel .hd{padding:0 10px;font-size:93%;line-height:2;*line-height:1.9;font-weight:bold;color:#000;background:url(../../../../assets/skins/sam/sprite.png) repeat-x 0 -200px}.yui-skin-sam .yui-panel .bd{padding:10px}.yui-skin-sam .yui-panel .ft{border-top:solid 1px #808080;padding:5px 10px;font-size:77%}.yui-skin-sam .container-close{position:absolute;top:5px;right:6px;width:25px;height:15px;background:url(../../../../assets/skins/sam/sprite.png) no-repeat 0 -300px;cursor:pointer}.yui-skin-sam .yui-panel-container .underlay{right:-1px;left:-1px}.yui-skin-sam .yui-panel-container.matte{padding:9px 10px;background-color:#fff}.yui-skin-sam .yui-panel-container.shadow{_padding:2px 4px 0 2px}.yui-skin-sam .yui-panel-container.shadow .underlay{position:absolute;top:2px;left:-3px;right:-3px;bottom:-3px;*top:4px;*left:-1px;*right:-1px;*bottom:-1px;_top:0;_left:0;_right:0;_bottom:0;_margin-top:3px;_margin-left:-1px;background-color:#000;opacity:.12;filter:alpha(opacity=12)}.yui-skin-sam .yui-dialog .ft{border-top:0;padding:0 10px 10px 10px;font-size:100%}.yui-skin-sam .yui-dialog .ft .button-group{display:block;text-align:right}.yui-skin-sam .yui-dialog .ft button.default{font-weight:bold}.yui-skin-sam .yui-dialog .ft span.default{border-color:#304369;background-position:0 -1400px}.yui-skin-sam .yui-dialog .ft span.default .first-child{border-color:#304369}.yui-skin-sam .yui-dialog .ft span.default button{color:#fff}.yui-skin-sam .yui-dialog .ft span.yui-button-disabled{background-position:0 -1500px;border-color:#ccc}.yui-skin-sam .yui-dialog .ft span.yui-button-disabled .first-child{border-color:#ccc}.yui-skin-sam .yui-dialog .ft span.yui-button-disabled button{color:#a6a6a6}.yui-skin-sam .yui-simple-dialog .bd .yui-icon{background:url(../../../../assets/skins/sam/sprite.png) no-repeat 0 0;width:16px;height:16px;margin-right:10px;float:left}.yui-skin-sam .yui-simple-dialog .bd span.blckicon{background-position:0 -1100px}.yui-skin-sam .yui-simple-dialog .bd span.alrticon{background-position:0 -1050px}.yui-skin-sam .yui-simple-dialog .bd span.hlpicon{background-position:0 -1150px}.yui-skin-sam .yui-simple-dialog .bd span.infoicon{background-position:0 -1200px}.yui-skin-sam .yui-simple-dialog .bd span.warnicon{background-position:0 -1900px}.yui-skin-sam .yui-simple-dialog .bd span.tipicon{background-position:0 -1250px}.yui-skin-sam .yui-tt .bd{position:relative;top:0;left:0;z-index:1;color:#000;padding:2px 5px;border-color:#d4c237 #A6982b #a6982b #A6982B;border-width:1px;border-style:solid;background-color:#ffee69}.yui-skin-sam .yui-tt.show-scrollbars .bd{overflow:auto}.yui-skin-sam .yui-tt-shadow{top:2px;right:-3px;left:-3px;bottom:-3px;background-color:#000}.yui-skin-sam .yui-tt-shadow-visible{opacity:.12;filter:alpha(opacity=12)}
+
+/*
+Copyright (c) 2011, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.com/yui/license.html
+version: 2.9.0
+*/
+/* MenuBar style rules */
+
+.yui-skin-sam .yuimenubar {
+
+    font-size: 93%;  /* 12px */
+    line-height: 2;  /* ~24px */
+    *line-height: 1.9; /* For IE */
+    border: solid 1px #808080;
+    background: url(../../../../assets/skins/sam/sprite.png) repeat-x 0 0;
+
+}
+
+
+/* MenuBarItem style rules */
+
+.yui-skin-sam .yuimenubarnav .yuimenubaritem {
+
+    border-right: solid 1px #ccc;
+
+}
+
+.yui-skin-sam .yuimenubaritemlabel {
+
+    padding: 0 10px;
+    color: #000;
+    text-decoration: none;
+    cursor: default;
+    border-style: solid;
+    border-color: #808080;
+    border-width: 1px 0;
+    *position: relative; /*  Necessary to get negative margins in IE. */
+    margin: -1px 0;
+
+}
+
+.yui-skin-sam .yuimenubaritemlabel:visited {
+
+	color: #000;
+
+}
+
+.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel {
+
+    padding-right: 20px;
+
+    /*
+        Prevents the label from shifting left in IE when the 
+        ".yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-selected" 
+        rule us applied.
+    */
+
+    *display: inline-block;
+
+}
+
+.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu {
+
+    background: url(menubaritem_submenuindicator.png) right center no-repeat;
+
+}
+
+
+
+/* MenuBarItem states */
+
+/* Selected MenuBarItem */
+
+.yui-skin-sam .yuimenubaritem-selected {
+
+    background: url(../../../../assets/skins/sam/sprite.png) repeat-x 0 -1700px;
+
+}
+
+.yui-skin-sam .yuimenubaritemlabel-selected {
+
+    border-color: #7D98B8;
+
+}
+
+.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-selected {
+
+    border-left-width: 1px;
+    margin-left: -1px;
+    *left: -1px;    /* For IE */
+
+}
+
+
+/* Disabled  MenuBarItem */
+
+.yui-skin-sam .yuimenubaritemlabel-disabled,
+.yui-skin-sam .yuimenubaritemlabel-disabled:visited {
+
+    cursor: default;
+    color: #A6A6A6;
+
+}
+
+.yui-skin-sam .yuimenubarnav .yuimenubaritemlabel-hassubmenu-disabled {
+
+    background-image: url(menubaritem_submenuindicator_disabled.png);
+
+}
+
+
+
+/* Menu style rules */
+
+.yui-skin-sam .yuimenu {
+
+    font-size: 93%;  /* 12px */
+    line-height: 1.5;  /* 18px */
+    *line-height: 1.45; /* For IE */
+
+}
+
+.yui-skin-sam .yuimenubar .yuimenu,
+.yui-skin-sam .yuimenu .yuimenu {
+
+    font-size: 100%;
+
+}
+
+.yui-skin-sam .yuimenu .bd {
+
+	/*
+		The following application of zoom:1 prevents first tier submenus of a MenuBar from hiding 
+		when the mouse is moving from an item in a MenuBar to a submenu in IE 7.
+	*/
+
+	*zoom: 1;
+	_zoom: normal;	/* Remove this rule for IE 6. */
+    border: solid 1px #808080;
+    background-color: #fff;
+    
+}
+
+.yui-skin-sam .yuimenu .yuimenu .bd {
+
+	*zoom: normal;
+
+}
+
+.yui-skin-sam .yuimenu ul {
+
+    padding: 3px 0;
+    border-width: 1px 0 0 0;
+    border-color: #ccc;
+    border-style: solid;
+
+}
+
+.yui-skin-sam .yuimenu ul.first-of-type {
+
+    border-width: 0;
+
+}
+
+
+/* Group titles */
+
+.yui-skin-sam .yuimenu h6 { 
+
+    font-weight: bold;
+    border-style: solid;
+    border-color: #ccc;
+    border-width: 1px 0 0 0;
+    color: #a4a4a4;    
+    padding: 3px 10px 0 10px;
+
+}
+
+.yui-skin-sam .yuimenu ul.hastitle,
+.yui-skin-sam .yuimenu h6.first-of-type {
+
+    border-width: 0;
+
+}
+
+
+/* Top and bottom scroll controls */
+
+.yui-skin-sam .yuimenu .yui-menu-body-scrolled {
+
+    border-color: #ccc #808080;
+    overflow: hidden;
+
+}
+
+.yui-skin-sam .yuimenu .topscrollbar,
+.yui-skin-sam .yuimenu .bottomscrollbar {
+
+    height: 16px;
+    border: solid 1px #808080;
+    background: #fff url(../../../../assets/skins/sam/sprite.png) no-repeat 0 0;
+
+}
+
+.yui-skin-sam .yuimenu .topscrollbar {
+
+    border-bottom-width: 0;
+    background-position: center -950px;
+
+}
+
+.yui-skin-sam .yuimenu .topscrollbar_disabled {
+
+    background-position: center -975px;
+
+}
+
+.yui-skin-sam .yuimenu .bottomscrollbar {
+
+    border-top-width: 0;
+    background-position: center -850px;
+
+}
+
+.yui-skin-sam .yuimenu .bottomscrollbar_disabled {
+
+    background-position: center -875px;
+
+}
+
+
+/* MenuItem style rules */
+
+.yui-skin-sam .yuimenuitem {
+
+    /*
+        For IE 7 Quirks and IE 6 Strict Mode and Quirks Mode:
+        Used to collapse superfluous white space between <li> elements
+        that is triggered by the "display" property of the <a> elements being
+        set to "block."
+    */
+
+    _border-bottom: solid 1px #fff;
+
+}
+
+.yui-skin-sam .yuimenuitemlabel {
+
+    padding: 0 20px;
+    color: #000;
+    text-decoration: none;
+    cursor: default;
+
+}
+
+.yui-skin-sam .yuimenuitemlabel:visited {
+
+    color: #000;
+	
+}
+
+.yui-skin-sam .yuimenuitemlabel .helptext {
+
+    margin-top: -1.5em;
+    *margin-top: -1.45em;  /* For IE*/
+    
+}
+
+.yui-skin-sam .yuimenuitem-hassubmenu {
+
+    background-image: url(menuitem_submenuindicator.png);
+    background-position: right center;
+    background-repeat: no-repeat;
+
+}
+
+.yui-skin-sam .yuimenuitem-checked {
+
+    background-image: url(menuitem_checkbox.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+
+}
+
+
+/* Menu states */
+
+
+/* Visible Menu */
+
+.yui-skin-sam .yui-menu-shadow-visible {
+
+    background-color: #000;
+
+    /*
+        Opacity can be expensive, so defer the use of opacity until the 
+        menu is visible.
+    */
+
+    opacity: .12;
+    filter: alpha(opacity=12);  /* For IE */
+
+}
+
+
+
+/* MenuItem states */
+
+
+/* Selected MenuItem */
+
+.yui-skin-sam .yuimenuitem-selected {
+
+    background-color: #B3D4FF;
+
+}
+
+
+/* Disabled MenuItem */
+
+.yui-skin-sam .yuimenuitemlabel-disabled,
+.yui-skin-sam .yuimenuitemlabel-disabled:visited {
+
+    cursor: default;
+    color: #A6A6A6;
+
+}
+
+.yui-skin-sam .yuimenuitem-hassubmenu-disabled {
+
+    background-image: url(menuitem_submenuindicator_disabled.png);
+
+}
+
+.yui-skin-sam .yuimenuitem-checked-disabled {
+
+    background-image: url(menuitem_checkbox_disabled.png);
+
+}
+/*
+Copyright (c) 2009, Yahoo! Inc. All rights reserved.
+Code licensed under the BSD License:
+http://developer.yahoo.net/yui/license.txt
+version: 2.7.0
+*/
+.yui-navset .yui-nav li,.yui-navset .yui-navset-top .yui-nav li,.yui-navset .yui-navset-bottom .yui-nav li{margin:0 .5em 0 0;}.yui-navset-left .yui-nav li,.yui-navset-right .yui-nav li{margin:0 0 .5em;}.yui-navset .yui-content .yui-hidden{position:absolute;left:-999999px;visibility:hidden;}.yui-navset .yui-navset-left .yui-nav,.yui-navset .yui-navset-right .yui-nav,.yui-navset-left .yui-nav,.yui-navset-right .yui-nav{width:6em;}.yui-navset-top .yui-nav,.yui-navset-bottom .yui-nav{width:auto;}.yui-navset .yui-navset-left,.yui-navset-left{padding:0 0 0 6em;}.yui-navset-right{padding:0 6em 0 0;}.yui-navset-top,.yui-navset-bottom{padding:auto;}.yui-nav,.yui-nav li{margin:0;padding:0;list-style:none;}.yui-navset li em{font-style:normal;}.yui-navset{position:relative;zoom:1;}.yui-navset .yui-content,.yui-navset .yui-content div{zoom:1;}.yui-navset .yui-content:after{content:'';display:block;clear:both;}.yui-navset .yui-nav li,.yui-navset .yui-navset-top .yui-nav li,.yui-navset .yui-navset-bottom .yui-nav li{display:inline-block;display:-moz-inline-stack;*display:inline;vertical-align:bottom;cursor:pointer;zoom:1;}.yui-navset-left .yui-nav li,.yui-navset-right .yui-nav li{display:block;}.yui-navset .yui-nav a{position:relative;}.yui-navset .yui-nav li a,.yui-navset-top .yui-nav li a,.yui-navset-bottom .yui-nav li a{display:block;display:inline-block;vertical-align:bottom;zoom:1;}.yui-navset-left .yui-nav li a,.yui-navset-right .yui-nav li a{display:block;}.yui-navset-bottom .yui-nav li a{vertical-align:text-top;}.yui-navset .yui-nav li a em,.yui-navset-top .yui-nav li a em,.yui-navset-bottom .yui-nav li a em{display:block;}.yui-navset .yui-navset-left .yui-nav,.yui-navset .yui-navset-right .yui-nav,.yui-navset-left .yui-nav,.yui-navset-right .yui-nav{position:absolute;z-index:1;}.yui-navset-top .yui-nav,.yui-navset-bottom .yui-nav{position:static;}.yui-navset .yui-navset-left .yui-nav,.yui-navset-left .yui-nav{left:0;right:auto;}.yui-navset .yui-navset-right .yui-nav,.yui-navset-right .yui-nav{right:0;left:auto;}.yui-skin-sam .yui-navset .yui-nav,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav{border:solid #2647a0;border-width:0 0 5px;zoom:1;}.yui-skin-sam .yui-navset .yui-nav li,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav li{margin:0 .16em 0 0;padding:1px 0 0;zoom:1;}.yui-skin-sam .yui-navset .yui-nav .selected,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav .selected{margin:0 .16em -1px 0;}.yui-skin-sam .yui-navset .yui-nav a,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a{background:#d8d8d8 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x;border:solid #a3a3a3;border-width:0 1px;color:#000;position:relative;text-decoration:none;}.yui-skin-sam .yui-navset .yui-nav a em,.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em{border:solid #a3a3a3;border-width:1px 0 0;cursor:hand;padding:.25em .75em;left:0;right:0;bottom:0;top:-1px;position:relative;}.yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a:focus,.yui-skin-sam .yui-navset .yui-nav .selected a:hover{background:#2647a0 url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1400px;color:#fff;}.yui-skin-sam .yui-navset .yui-nav a:hover,.yui-skin-sam .yui-navset .yui-nav a:focus{background:white url(../pacotes/yui290/build/assets/skins/sam/sprite.png) repeat-x left -1300px;outline:0;}.yui-skin-sam .yui-navset .yui-nav .selected a em{padding:.35em .75em;}.yui-skin-sam .yui-navset .yui-nav .selected a,.yui-skin-sam .yui-navset .yui-nav .selected a em{border-color:#243356;}.yui-skin-sam .yui-navset .yui-content{background:#edf5ff;}.yui-skin-sam .yui-navset .yui-content,.yui-skin-sam .yui-navset .yui-navset-top .yui-content{border:1px solid #808080;border-top-color:#243356;padding:.25em .5em;}.yui-skin-sam .yui-navset-left .yui-nav,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav,.yui-skin-sam .yui-navset .yui-navset-right .yui-nav,.yui-skin-sam .yui-navset-right .yui-nav{border-width:0 5px 0 0;Xposition:absolute;top:0;bottom:0;}.yui-skin-sam .yui-navset .yui-navset-right .yui-nav,.yui-skin-sam .yui-navset-right .yui-nav{border-width:0 0 0 5px;}.yui-skin-sam .yui-navset-left .yui-nav li,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav li,.yui-skin-sam .yui-navset-right .yui-nav li{margin:0 0 .16em;padding:0 0 0 1px;}.yui-skin-sam .yui-navset-right .yui-nav li{padding:0 1px 0 0;}.yui-skin-sam .yui-navset-left .yui-nav .selected,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav .selected{margin:0 -1px .16em 0;}.yui-skin-sam .yui-navset-right .yui-nav .selected{margin:0 0 .16em -1px;}.yui-skin-sam .yui-navset-left .yui-nav a,.yui-skin-sam .yui-navset-right .yui-nav a{border-width:1px 0;}.yui-skin-sam .yui-navset-left .yui-nav a em,.yui-skin-sam .yui-navset .yui-navset-left .yui-nav a em,.yui-skin-sam .yui-navset-right .yui-nav a em{border-width:0 0 0 1px;padding:.2em .75em;top:auto;left:-1px;}.yui-skin-sam .yui-navset-right .yui-nav a em{border-width:0 1px 0 0;left:auto;right:-1px;}.yui-skin-sam .yui-navset-left .yui-nav a,.yui-skin-sam .yui-navset-left .yui-nav .selected a,.yui-skin-sam .yui-navset-left .yui-nav a:hover,.yui-skin-sam .yui-navset-right .yui-nav a,.yui-skin-sam .yui-navset-right .yui-nav .selected a,.yui-skin-sam .yui-navset-right .yui-nav a:hover,.yui-skin-sam .yui-navset-bottom .yui-nav a,.yui-skin-sam .yui-navset-bottom .yui-nav .selected a,.yui-skin-sam .yui-navset-bottom .yui-nav a:hover{background-image:none;}.yui-skin-sam .yui-navset-left .yui-content{border:1px solid #808080;border-left-color:#243356;}.yui-skin-sam .yui-navset-bottom .yui-nav,.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav{border-width:5px 0 0;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav .selected,.yui-skin-sam .yui-navset-bottom .yui-nav .selected{margin:-1px .16em 0 0;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav li,.yui-skin-sam .yui-navset-bottom .yui-nav li{padding:0 0 1px 0;vertical-align:top;}.yui-skin-sam .yui-navset .yui-navset-bottom .yui-nav a em,.yui-skin-sam .yui-navset-bottom .yui-nav a em{border-width:0 0 1px;top:auto;bottom:-1px;}
+.yui-skin-sam .yui-navset-bottom .yui-content,.yui-skin-sam .yui-navset .yui-navset-bottom .yui-content{border:1px solid #808080;border-bottom-color:#243356;}
+

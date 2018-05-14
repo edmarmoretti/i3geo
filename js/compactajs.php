@@ -109,11 +109,9 @@ packer("ajuda.js","compactados/ajuda_compacto.js","Normal");
 packer("configura.js","compactados/configura_compacto.js","Normal");
 packer("navega.js","compactados/navega_compacto.js","Normal");
 packer("coordenadas.js","compactados/coordenadas_compacto.js","Normal");
-//packer("gadgets.js","compactados/gadgets_compacto.js","Normal");
 packer("eventos.js","compactados/eventos_compacto.js","Normal");
 packer("editor.js","compactados/editor_compacto.js","Normal");
 packer("guias.js","compactados/guias_compacto.js","Normal");
-//packer("selecao.js","compactados/selecao_compacto.js","Normal");
 packer("mapa.js","compactados/mapa_compacto.js","Normal");
 packer("desenho.js","compactados/desenho_compacto.js","Normal");
 packer("tema.js","compactados/tema_compacto.js","Normal");
@@ -121,7 +119,7 @@ packer("analise.js","compactados/analise_compacto.js","Normal");
 packer("php.js","compactados/php_compacto.js","Normal");
 packer("interface.js","compactados/interface_compacto.js","Normal");
 packer("ini_i3geo.js","compactados/ini_i3geo_compacto.js","Normal");
-packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
+//packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
 packer("social.js","compactados/social_compacto.js","Normal");
 packer("catalogoMenus.js","compactados/catalogoMenus_compacto.js","Normal");
 packer("catalogoInde.js","compactados/catalogoInde_compacto.js","Normal");
@@ -143,22 +141,17 @@ packer("../pacotes/yui290/build/utilities/utilities.js","../pacotes/yui290/build
 packer("../pacotes/yui290/build/treeview/treeview.js","../pacotes/yui290/build/treeview/treeview_compacto.js","Normal");
 packer("../pacotes/yui290/build/carousel/carousel-min.js","../pacotes/yui290/build/carousel/carousel_compacto.js","Normal");
 packer("../pacotes/yui290/build/resize/resize-min.js","../pacotes/yui290/build/resize/resize_compacto.js","Normal");
-//packer("../pacotes/yui290/build/progressbar/progressbar-min.js","../pacotes/yui290/build/progressbar/progressbar_compacto.js","Normal");
 packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
 packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
 packer("../pacotes/proj4js/lib/proj4js.js","compactados/proj4js.js","Normal");
 packer("../pacotes/wicket/wicket.js","compactados/wicket.js","Normal");
 packer("../pacotes/bootstrap-material-design/dist/js/material.js","compactados/material.js","Normal");
-
-//packer("../pacotes/eudock/js/euDock.2.0.js","compactados/euDock.2.0.js","Normal");
-//packer("../pacotes/eudock/js/euDock.Image.js","compactados/euDock.Image.js","Normal");
 //
 //gera um unico js para a inicializacao do I3Geo
 //
 $jsfiles = array(
 "../pacotes/mobileesp/mdetect_compacto.js",
-//"../pacotes/proj4js/lib/proj4js-compressed.js",
 "compactados/proj4js.js",
 "../pacotes/cpaint/cpaint2_compacto.inc.js",
 "../pacotes/yui290/build/yahoo/yahoo-min.js",
@@ -167,16 +160,11 @@ $jsfiles = array(
 "../pacotes/yui290/build/utilities/utilities_compacto.js",
 "../pacotes/yui290/build/container/container_core_compacto.js",
 "../pacotes/yui290/build/menu/menu-min.js",
-//"../pacotes/yui290/build/logger/logger-min.js",
 "../pacotes/yui290/build/dragdrop/dragdrop-min.js",
-//"../pacotes/yui290/build/slider/slider-min.js",
 "../pacotes/yui290/build/animation/animation-min270.js",
 "../pacotes/yui290/build/container/container_compacto.js",
 "../pacotes/yui290/build/element/element-min.js",
 "../pacotes/yui290/build/tabview/tabview-min.js",
-//"../pacotes/yui290/build/treeview/treeview_compacto.js",
-//"../pacotes/yui290/build/button/button-min.js",
-//"../pacotes/yui290/build/carousel/carousel_compacto.js",
 "../pacotes/yui290/build/json/json-min.js",
 "../pacotes/yui290/build/storage/storage-min.js",
 "../pacotes/yui290/build/resize/resize_compacto.js",
@@ -185,9 +173,7 @@ $jsfiles = array(
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
 "../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
-//"../pacotes/jquery/jquery-ui/jquery.ui-contextmenu.min.js",
 "../pacotes/bootstrap/js/bootstrap.min.js",
-//"../pacotes/bootstrap-material-design/dist/js/material.min.js",
 "compactados/material.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
@@ -213,7 +199,6 @@ $jsfiles = array(
 "compactados/arvoredetemas_compacto.js",
 "compactados/editor_compacto.js",
 "compactados/coordenadas_compacto.js",
-//"compactados/gadgets_compacto.js",
 "compactados/social_compacto.js",
 "compactados/login_compacto.js",
 "compactados/marcador_compacto.js",
@@ -235,8 +220,8 @@ $jsfiles = array(
 
 $removeQuebra = array();
 
-$buffer .= "\$i = function(id){return document.getElementById(id);};\n";
-salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto7.js","js");
+$buffer = "\$i = function(id){return document.getElementById(id);};\n";
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto8.js","js");
 //
 //gera um unico css
 //
@@ -244,30 +229,20 @@ salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto7.js","js");
 $cssfiles = array(
 "../css/input.css",
 "../css/geral.css",
-//"../css/botoes2.css",
-//"../css/documentation.css",
-//"../pacotes/yui290/build/logger/assets/skins/sam/logger.css",
 "../pacotes/yui290/build/fonts/fonts-min.css",
 "../pacotes/yui290/build/reset-fonts-grids/reset-fonts-grids.css",
 "../pacotes/yui290/build/grids/grids-min.css",
 "../pacotes/yui290/build/menu/assets/skins/sam/menu.css",
-//"../pacotes/yui290/build/autocomplete/assets/skins/sam/autocomplete.css",
 "../pacotes/yui290/build/container/assets/skins/sam/container.css",
 "../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
-//"../pacotes/yui290/build/treeview/assets/skins/sam/treeview.css",
-//"../pacotes/yui290/build/carousel/assets/skins/sam/carousel.css",
-//"../pacotes/yui290/build/slider/assets/skins/sam/slider.css",
 "../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
-//"../pacotes/yui290/build/progressbar/assets/skins/sam/progressbar.css",
-//"../css/corrigeyui_geral.css",
 "../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css",
 "../mashups/theme/default/style.css",
-//"../css/janelaflutuante.css",
 "../mashups/openlayers.css"
 );
 
 $buffer = "";
-salvatudojs($cssfiles,$buffer,"../css/i3geo7.css","css");
+salvatudojs($cssfiles,$buffer,"../css/i3geo8.css","css");
 //css das ferramentas
 $cssfiles = array(
 "../css/input.css",
@@ -287,7 +262,7 @@ foreach ($cssfiles as $f)
 	fclose($abre);
 	$buffer .= "\n";
 }
-$abre = fopen("../css/i3geo_ferramentas7.css", "wt");
+$abre = fopen("../css/i3geo_ferramentas8.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
 //
@@ -300,7 +275,6 @@ $jsfiles = array(
 "../pacotes/yui290/build/utilities/utilities_compacto.js",
 "../pacotes/yui290/build/container/container_core_compacto.js",
 "../pacotes/yui290/build/menu/menu-min.js",
-//"../pacotes/yui290/build/logger/logger-min.js",
 "../pacotes/yui290/build/dragdrop/dragdrop-min.js",
 "../pacotes/yui290/build/slider/slider-min.js",
 "../pacotes/yui290/build/animation/animation-min270.js",
@@ -326,19 +300,6 @@ $jsfiles = array(
 "compactados/configura_compacto.js",
 "compactados/mustache.js"
 );
-$buffer = "";
-//TODO concluir isso apos migrar o codigo principal para o OpenLayers 3
-//salvatudojs($jsfiles,$buffer,"../mashups/openlayers_compacto.js","js");
-$jsfiles = array(
-"../css/botoes2.css",
-"../pacotes/yui290/build/fonts/fonts-min.css",
-"../pacotes/yui290/build/container/assets/skins/sam/container.css",
-"../mashups/theme/default/style.css",
-"../mashups/openlayers.css"
-);
-$buffer = "";
-//salvatudojs($jsfiles,$buffer,"../mashups/openlayers_compacto.css","css");
-
 function inicia($arquivo)
 {
 	$abre = fopen($arquivo, "r");
@@ -414,16 +375,6 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 		if($tipo == "js"){
 			$buffer .= "//\n//".$f."\n";
 		}
-/*
-		$abre = fopen($f, "r");
-		while (!feof($abre))
-		{
-			$linha = fgets($abre,FILE_IGNORE_NEW_LINES);
-			if($linha != "\r\n")
-			$buffer .= $linha;
-		}
-		fclose($abre);
-*/
 		$linhas = file($f);
 		foreach($linhas as $linha){
 			$linha = trim(preg_replace('#[\r\n]#', '', $linha));
@@ -445,12 +396,6 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 	//gzip
 
 	$abre = fopen($final, "r");
-/*
-	if ($tipo == "js")
-	$buffer = "<?php //error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/javascript\"); ?>";
-	else
-	$buffer = "<?php //error_reporting(0);if(extension_loaded('zlib')){ob_start('ob_gzhandler');} header(\"Content-type: text/css\"); ?>";
-*/
 	if ($tipo == "js")
 		$buffer = "<?php header(\"Content-type: text/javascript\"); ?>";
 	else
