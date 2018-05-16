@@ -185,7 +185,11 @@ i3GEO.analise =
 									"i3GEO.analise.atualizaLinhaDoTempo()"
 								]);
 						} catch (e) {
-							i3GEO.eventos.removeEventos("NAVEGAMAPA", [
+
+						    if (typeof (console) !== 'undefined')
+							console.error(e.message)
+
+						    i3GEO.eventos.removeEventos("NAVEGAMAPA", [
 								"i3GEO.analise.atualizaLinhaDoTempo()"
 							]);
 						}

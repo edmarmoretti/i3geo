@@ -139,7 +139,6 @@ i3GEO.arvoreDeCamadas =
 		    }
 		});
 	    }
-
 	    if(!i3GEO.template.camada || !i3GEO.template.camadaFundo){
 		i3GEO.arvoreDeCamadas.carregaTemplates();
 		return;
@@ -160,9 +159,9 @@ i3GEO.arvoreDeCamadas =
 		}
 	    }
 	},
-	atualizaLayersGr : function(){
+	adicionaLayersGr : function(){
 	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.arvoreDeCamadas.atualizaLayersGr()");
+		console.info("i3GEO.arvoreDeCamadas.adicionaLayersGr()");
 
 	    if (i3GEO.Interface.ATUAL != "openlayers") {
 		return;
@@ -174,9 +173,10 @@ i3GEO.arvoreDeCamadas =
 	    if(temp){
 		$.each( layers, function( i,layer ) {
 		    var p = layer.getProperties();
-		    camada = {};
+		    camada = {...i3GEO.idioma.OBJETOIDIOMA};
 		    camada.name = p.name;
 		    camada.tema = p.title;
+		    camada.locaplic = i3GEO.configura.locaplic;
 		    //ligado ou desligado
 		    if(layer.getVisible() == true ){
 			camada.checked = "checked";
@@ -191,7 +191,6 @@ i3GEO.arvoreDeCamadas =
 		);
 
 		$(temp).html(t);
-
 	    }
 	},
 	/**
@@ -345,6 +344,7 @@ i3GEO.arvoreDeCamadas =
 		});
 	    }
 	    i3GEO.arvoreDeCamadas.adicionaCamadasDeFundo(config);
+	    i3GEO.arvoreDeCamadas.adicionaLayersGr();
 	    i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);
 	    /*
 
@@ -899,6 +899,9 @@ i3GEO.arvoreDeCamadas =
 		}
 		return (true);
 	    } catch (e) {
+		if (typeof (console) !== 'undefined')
+			console.error(e.message)
+
 		return true;
 	    }
 	},
@@ -1062,6 +1065,9 @@ i3GEO.arvoreDeCamadas =
 		    } while (i < nelementos);
 		}
 	    } catch (e) {
+		if (typeof (console) !== 'undefined')
+			console.error(e.message)
+
 		return "";
 	    }
 	    return temp;

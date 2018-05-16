@@ -68,6 +68,9 @@ i3GEO.arvoreDeTemas = {
 								mostra = false;
 							}
 						} catch (e) {
+						    if (typeof (console) !== 'undefined')
+							console.error(e.message)
+
 						}
 						if (mostra) {
 							d = i3GEO.arvoreDeTemas.montaTextoTema("gray",

@@ -378,9 +378,6 @@ var i3GEO = {
 			i3GEO.Interface.openlayers.TILES = (d.hasOwnProperty("singleTile") && d.singleTile != "") ? !d.singleTile:true;
 			i3GEO.Interface.openlayers.parametrosMap = d.MapOptions;
 			i3GEO.Interface.openlayers.parametrosView = d.ViewOptions;
-			if(d.hasOwnProperty("editorButtons") && d.editorButtons != ""){
-				i3GEO.editor.botoes = d.editorButtons;
-			}
 		}
 		if(c.hasOwnProperty("googleMaps") && c.mapType == "GM"){
 			i3GEO.Interface.ATUAL = "googlemaps";
@@ -537,12 +534,6 @@ var i3GEO = {
 	cria : function() {
 		//calcula a largura da barra de rolagem para adicionar ao tamanho do mapa
 		i3GEO.scrollerWidth = i3GEO.util.getScrollerWidth();
-		$('[data-traduzir="true"]').each(function(){
-			this.innerHTML = Mustache.to_html(
-					this.innerHTML,
-					i3GEO.idioma.OBJETOIDIOMA
-				);
-		});
 		var tamanho, temp;
 		temp = window.location.href.split("?&");
 		if (temp[1]) {
@@ -573,6 +564,14 @@ var i3GEO = {
 			|| i3GEO.configura.locaplic === "") {
 			i3GEO.util.localizai3GEO();
 		}
+		//para permitir o uso de {{{locaplic}}} em templates
+		i3GEO.idioma.OBJETOIDIOMA.locaplic = i3GEO.configura.locaplic;
+		$('[data-traduzir="true"]').each(function(){
+			this.innerHTML = Mustache.to_html(
+					this.innerHTML,
+					i3GEO.idioma.OBJETOIDIOMA
+				);
+		});
 		//
 		// calcula o tamanho do mapa
 		//
@@ -738,11 +737,14 @@ var i3GEO = {
 				}
 				i3GEO.aposIniciar();
 			} catch (e) {
+			    if (typeof (console) !== 'undefined')
+				console.error(e.message)
 
 			}
 		};
 		if (!$i("i3geo")) {
-			document.body.id = "i3geo";
+
+		    document.body.id = "i3geo";
 		}
 		temp = $i("i3geo");
 		temp.className = "yui-skin-sam";
@@ -901,6 +903,8 @@ var i3GEO = {
 				return;
 			}
 		} catch (e) {
+		    if (typeof (console) !== 'undefined')
+			console.error(e.message)
 
 		}
 		erro = function() {
@@ -947,6 +951,8 @@ var i3GEO = {
 					i3GEO.arvoreDeCamadas.atualizaFarol(i3GEO.parametros.mapscale);
 				}
 			} catch (e) {
+			    if (typeof (console) !== 'undefined')
+				console.error(e.message)
 			}
 			i3GEO.arvoreDeCamadas.registaCamadas(temp);
 			// nesse ponto o layer sera adicionado ao mapa

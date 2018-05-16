@@ -37,6 +37,7 @@
 .foraDoMapa+span>span {
 	background-color: yellow;
 }
+
 </style>
 </head>
 <!-- As palavras entre {{{}}} sao utilizadas para a traducao. Veja i3geo/js/dicionario.js
@@ -303,7 +304,6 @@
                     <div class="guiaOverflow" style="height: calc(100% - 45px); width: calc(100% - 5px);">
                         <!-- Esta div acrescenta a lista de layers graficos -->
                         <div id="listaLayersGr" style="overflow: none;" data-template="templates/camadaGr.html"></div>
-                        <div id="listaLayersGrBtn" style="overflow: none;"></div>
                         <!-- Esta div acrescenta a lista de camadas disponiveis no mapa atual -->
                         <div id="listaTemas" style="overflow: none;" data-template="templates/camada.html"></div>
                         <!-- Esta div acrescenta a lista de de camadas de fundo
@@ -988,40 +988,6 @@
 				//ver https://openlayers.org/en/latest/apidoc/ol.View.html
 				ViewOptions : {
 
-				},
-				//botoes que sao mostrados no editor vetorial
-				editorButtons : {
-				    'imprimir' : false,
-				    'grid' : false,
-				    'pan' : false,
-				    'zoombox' : false,
-				    'zoomtot' : false,
-				    'zoomin' : false,
-				    'zoomout' : false,
-				    'distancia' : false,
-				    'area' : false,
-				    'identifica' : false,
-				    'linha' : true,
-				    'ponto' : true,
-				    'poligono' : true,
-				    'texto' : true,
-				    'edita' : true,
-				    'listag' : true,
-				    'corta' : true,
-				    'apaga' : true,
-				    'procura' : false,
-				    'selecao' : true,
-				    'selecaotudo' : true,
-				    'salva' : true,
-				    'ajuda' : true,
-				    'propriedades' : true,
-				    'fecha' : true,
-				    'tools' : true,
-				    'undo' : false,
-				    'frente' : false,
-				    'legenda' : false,
-				    'rodadomouse' : true,
-				    'novaaba' : false
 				}
 			    },
 			    //configuracoes especificas para a interface GoogleMaps

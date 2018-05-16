@@ -80,7 +80,10 @@ i3GEO.calculo =
 				}
 				return (dd);
 			} catch (e) {
-				return (0);
+			    if (typeof (console) !== 'undefined')
+				console.error(e.message)
+
+			    return (0);
 			}
 		},
 		/**
@@ -146,6 +149,9 @@ i3GEO.calculo =
 					(vy / c) + pos[1]
 				];
 			} catch (e) {
+			    if (typeof (console) !== 'undefined')
+				console.error(e.message)
+
 				return ([]);
 			}
 		},
@@ -284,6 +290,9 @@ i3GEO.calculo =
 					latdd
 				];
 			} catch (e) {
+			    if (typeof (console) !== 'undefined')
+				console.error(e.message)
+
 				return (0);
 			}
 		},
@@ -330,6 +339,10 @@ i3GEO.calculo =
 				}
 				return $polygon_area * pixel;
 			} catch (e) {
+
+			    if (typeof (console) !== 'undefined')
+				console.error(e.message)
+
 				return (0);
 			}
 		},

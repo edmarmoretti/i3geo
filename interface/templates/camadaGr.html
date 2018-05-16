@@ -1,11 +1,47 @@
-<div class="rangeScale{{{rangeScale}}} list-group condensed" style="cursor: move;">
+<div class="list-group condensed" style="cursor: move;">
     <div class="checkbox text-left">
-        <label class="rangeScale{{{rangeScale}}} {{{classeCss}}}" style="width: 270px">
+        <label class="{{{classeCss}}}" style="width: 270px">
             <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
                 {{{checked}}} onclick="i3geoOL.getLayersGrBy('name','{{{name}}}')[0].setVisibility(this.checked);i3geoOL.getLayersGrBy('name','{{{name}}}')[0].changed()">
-            <span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} {{{tema}}} <small>{{{rangeScaleMsg}}}</small>
+            <span class="checkbox-material noprint"><span class="check"></span></span> {{{tema}}}
         </label>
+        <a data-target=".listaLayersGrBtn" class="pull-right collapsed" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button" data-toggle="collapse"> </a>
     </div>
     <div class="clearfix"></div>
-    <hr>
 </div>
+<div class="listaLayersGrBtn collapse" style="overflow: none;">
+    <button title="{{{dlinha}}}" onclick="i3GEO.editor.drawLineString()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/line-edit.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{dpol}}}" onclick="i3GEO.editor.drawPolygon()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/polygon-edit.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{dponto}}}" onclick="i3GEO.editor.drawPoint()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/point.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{dtexto}}}" onclick="i3GEO.editor.drawText()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/text-add.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{modf}}}" onclick="i3GEO.editor.edit()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/edit.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{d24t}}}" onclick="i3GEO.editor.selectOne()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/select-one.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{ustudo}}}" onclick="i3GEO.editor.unselAll()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/select-cancel.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{studo}}}" onclick="i3GEO.editor.selAll()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/selectall.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{excsel}}}" onclick="i3GEO.editor.selDelete()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/selected-delete.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{frente}}}" onclick="i3GEO.editor.orderToFront()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/order-to-front.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{cortaf}}}" onclick="i3GEO.editor.editCut()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/edit-cut.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+</div>
+<hr>
