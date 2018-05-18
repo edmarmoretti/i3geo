@@ -63,6 +63,7 @@ OpenLayers = {
 	}
 	var allScriptTags = "";
 	var jsfiles = new Array(
+	"../pacotes/jsts/jsts_min.js",
 	"../pacotes/mobileesp/mdetect.js",
 	"../pacotes/proj4js/lib/proj4js-compressed.js",
 	"../pacotes/yui290/build/yahoo/yahoo-min.js",

@@ -1,54 +1,35 @@
-JSTS Topology Suite
-===================
+# JSTS
 
-DISCLAIMER: The current status of this project is unfinished non-production quality.
-You are hereby invited to help change that. :)
+[![Build Status](https://travis-ci.org/bjornharrtell/jsts.svg)](https://travis-ci.org/bjornharrtell/jsts)
+[![codecov](https://codecov.io/gh/bjornharrtell/jsts/branch/master/graph/badge.svg)](https://codecov.io/gh/bjornharrtell/jsts)
 
-The JSTS Topology Suite is a JavaScript library of spatial predicates and functions 
-for processing geometry conforming to the Simple Features Specification for SQL published by
-the Open Geospatial Consortium. JSTS Topology Suite is also a JavaScript port of the well 
-established Java library [JTS Topology Suite](http://tsusiatsoftware.net/jts/main.html) with
-OpenLayers compatibility. The core geometry classes are inherited from OpenLayers.Geometry
-and extended with API as close as possible to the corresponding JTS Topology Suite geometry classes.
+JSTS is an ECMAScript library of spatial predicates and functions for processing geometry conforming to the Simple Features Specification for SQL published by the Open Geospatial Consortium. JSTS is also a port of the well established Java library [JTS](https://github.com/locationtech/jts).
 
-Currently JSTS Topology Suite implements APIs for the the core geom.* classes and the validation
-suite is sort of half-way ported. QuadTree index have been ported. A fait bit of ground work has been
-done to port core geometry predicate/functions.
+The primary goal of the project is to provide web mapping applications with a complete library for processing and analyzing simple geometries but JSTS can also be used as a free standing geometry library.
 
-The goal of the project is to provide OpenLayers applications with a complete library for processing
-and analysing simple geometries.
+JSTS was made using automatic translation of the original JTS Java source via AST to AST transformation preserving the [JTS API](http://locationtech.github.io/jts/javadoc/), except for the I/O related classes which has been selectively and manually ported with support for WKT, GeoJSON and OpenLayers.
 
-A [Google group](http://groups.google.com/group/jsts-devs) is available for developer discussions.
+A [Google group](http://groups.google.com/group/jsts-devs) is available for discussions.
 
-Code is conformant to the
-[Google JavaScript Style Guide](http://google-styleguide.googlecode.com/svn/trunk/javascriptguide.xml) and
-[JSLint](http://www.jslint.com/).
+A [port](http://bjornharrtell.github.com/jsts/1.5.0/validationsuite/index.html) of [JTS Validation Suite](http://www.vividsolutions.com/jts/tests/index.html) provides additional tests.
 
-[Unit tests](http://bjornharrtell.github.com/jsts/test/SpecRunner.html) are made
-using the [Jasmine testing framework](https://github.com/pivotal/jasmine).
+Basic functionality together with OpenLayers is demonstrated [here](http://bjornharrtell.github.io/jsts).
 
-A recent trunk snapshot of [API docs is available](http://bjornharrtell.github.com/jsts/doc/api/index.html). 
+## Browser or Node.js use
 
-A [port](http://bjornharrtell.github.com/jsts/validationsuite/index.html) of
-[JTS Validation Suite](http://www.vividsolutions.com/jts/tests/index.html) provides
-additional tests.
+An ES5 (the most common JavaScript variant) compatible build for browsers is available [here](https://cdn.rawgit.com/bjornharrtell/jsts/gh-pages/1.5.0/jsts.min.js).
 
-The code is licensed using the LGPL 2.1 license.
+Including the above build as a script will import a global object `jsts` exposing similar public API as `org.locationtech.jts` in the [JTS API](http://locationtech.github.io/jts/javadoc/).
 
-Development environment
------------------------
+For Node.js, install using `npm install jsts` after which `require('jsts')` will import an object with the same properties as `jsts` in the browser build.
 
-* Eclipse 3.6 (Helios) using custom builders to check and enforce the Google JavaScript Style Guide and JSLint
-* Custom builders requirements:
-  * Installed Closure Linter from http://code.google.com/closure/utilities
-  * Compiled 'shell' sample from V8 JavaScript Engine (http://code.google.com/apis/v8) in /tools
-  * External JavaScript jslint.js and json2.js from https://github.com/douglascrockford in /tools
-* Assumes OpenLayers 2.10 distribution in project root from http://www.openlayers.org/
-* Assumes OS Ubuntu/Linux
+I/O related classes in JTS had to be manually ported. From the original formats WKT and GeoJSON are supported. A direct reader/writer for OpenLayers 3 geometries exist. See the [API documentation](http://bjornharrtell.github.io/jsts/1.5.0/doc/) for these specific classes.
 
-Design changes
---------------
+## ES6 modules use
 
-These are effective/potential changes from the original JTS Topology Suite:
+As of version 1.4.0 it's possible to depend on the source modules directly using the NPM package. For most environments it will require a bundler like [Rollup](https://rollupjs.org/) to work. [topolis](https://github.com/bjornharrtell/topolis) serves as an example project depending on JSTS in this way.
 
-* Skip abstracted CoordinateSequence interface/implementation
+## Caveats
+
+* In a few cases Java overloading cannot be correctly translated to JavaScript. One such case is `createMultiPoint` in `GeometryFactory` which only works with `Point[]` arguments.
+* In some cases you might get a `TopologyException` thrown as an `Error`. This is expected if a calculation fails due to precision issues. To resolve this issue try reducing precision in the input and at the same time make sure the input is valid as defined by the [OGC Simple Features specification](http://www.opengeospatial.org/standards/sfs). To reduce precision [GeometryPrecisionReducer](http://locationtech.github.io/jts/javadoc/org/locationtech/jts/precision/GeometryPrecisionReducer.html) can be used.

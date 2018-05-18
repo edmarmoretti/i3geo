@@ -3017,5 +3017,20 @@ g_traducao =
             pt : "Confirma",
             en : "",
             es : ""
+        }],
+        "selCorta" : [{
+            pt : "Selecione primeiro um elemento para ser cortado",
+            en : "",
+            es : ""
+        }],
+        "desPol" : [{
+            pt : "Desenhe um pol&iacute;gono",
+            en : "",
+            es : ""
+        }],
+        "union" : [{
+            pt : "Uni&atilde;o",
+            en : "",
+            es : ""
         }]
     };

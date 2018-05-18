@@ -381,6 +381,7 @@ i3GEO.Interface =
             //
             i3GEO.Interface[i3GEO.Interface.ATUAL].inicia();
             i3GEO.desenho.criaLayerGrafico();
+            i3GEO.editor.start();
             // inclui o nome do usuario que esta logado
             if ($i(i3GEO.login.divnomelogin) && i3GEO.util.pegaCookie("i3geousuarionome")) {
                 $i(i3GEO.login.divnomelogin).innerHTML = i3GEO.util.pegaCookie("i3geousuarionome");

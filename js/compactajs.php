@@ -151,6 +151,7 @@ packer("../pacotes/bootstrap-material-design/dist/js/material.js","compactados/m
 //gera um unico js para a inicializacao do I3Geo
 //
 $jsfiles = array(
+"../pacotes/jsts/jsts_min.js",
 "../pacotes/mobileesp/mdetect_compacto.js",
 "compactados/proj4js.js",
 "../pacotes/cpaint/cpaint2_compacto.inc.js",

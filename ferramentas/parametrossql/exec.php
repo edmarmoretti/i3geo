@@ -74,7 +74,7 @@ switch (strtoupper($funcao))
 		for($i = 0; $i < $n; $i++){
 			$dados[$chaves[$i]] = array("valor"=>$valores[$i],"titulo"=>$titulos[$i]);
 		}
-		
+
 		$map = ms_newMapObj($map_file);
 		//pega o layer
 		$layer = $map->getlayerbyname($tema);
@@ -164,6 +164,8 @@ switch (strtoupper($funcao))
 		$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 		$urli3geo = str_replace("/ferramentas/parametrossql/exec.php","",$protocolo.$_SERVER["PHP_SELF"]);
 		$handle = curl_init();
+		//em alguns casos, com rancher, retorna a porta 8080
+		$urli3geo = str_replace(":8080","",$urli3geo);
 		curl_setopt( $handle, CURLOPT_URL, $urli3geo."/".$_GET["prog"]);
 		curl_setopt( $handle, CURLOPT_HEADER, false );
 		curl_setopt($handle, CURLOPT_RETURNTRANSFER, true);

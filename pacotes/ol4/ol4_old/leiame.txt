@@ -11,6 +11,4 @@ ol.source.TileUTFGrid = function(options) {
   
 O compilado também foi corrigido:
 
-function hz(a){iy.call(this,{projection:Ob("EPSG:3857"),state:"loading"})
-
-function hz(a){iy.call(this,{projection:a.projection,state:"loading"})
+function ex(a){pw.call(this,{projection:a.projection,state:"loading"});

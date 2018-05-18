@@ -79502,9 +79502,7 @@ goog.require('ol.tilegrid');
  * @api
  */
 ol.source.TileUTFGrid = function(options) {
-  //alteracao feita para o i3Geo
   ol.source.Tile.call(this, {
-    projection: options.projection,
     projection: ol.proj.get('EPSG:3857'),
     state: ol.source.State.LOADING
   });
