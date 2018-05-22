@@ -1,44 +1,3 @@
-//TODO incluir balao de informacoes como um elemento grafico de desenho
-//TODO incluir caixas de texto
-//TODO incluir undo na edicao
-//TODO incluir opção para digitar coordenadas do novo ponto ou vertice
-
-/*
- Title: Editor vetorial para OpenLayers
-
- i3GEO.editorOL
-
- Fun&ccedil;&otilde;es utilizadas pelo OpenLayers nas op&ccedil;&otilde;es de edi&ccedil;&atilde;o de dados vetoriais.
- &Eacute; utilizado tamb&eacute;m pelo mashup com navega&ccedil;&atilde;o via OpenLayers e com OSM.
-
- Para adicionar novos botoes, modifique tamb&eacute;m i3GEO.editorOL.botoes existente em i3GEO.barraDeBotoes.openlayers.ativaPainel
-
- Mesmo em interfaces de debug, esse javascript s&oacute; &eacute; carregado depois de cmpactado
-
- Arquivo: i3geo/classesjs/classe_editorol.js
-
- Licen&ccedil;a:
-
- GPL2
-
- i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
- Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
- Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
- Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
- e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
- GNU conforme publicada pela Free Software Foundation;
-
- Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
- por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
- de COMERCIABILIDADE OU ADEQUACAtilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
- Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
- Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- GNU junto com este programa; se n&atilde;o, escreva para a
- Free Software Foundation, Inc., no endere&ccedil;o
- 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
 
 if (!i3GEO || typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
@@ -543,30 +502,6 @@ i3GEO.editorOL = {
 	    }
 	    return w.write();
 	},
-	uniaojts : function(geoms) {
-	    var n = geoms.length,
-	    fwkt = new ol.format.WKT(),
-	    rwkt = new jsts.io.WKTReader(),
-	    wwkt = new jsts.io.WKTWriter(),
-	    g, i, uniao;
-	    if (n > 1) {
-		//converte em wkt
-		uniao = fwkt.writeFeatures([geoms[0]]);
-		//le na jsts
-		uniao = rwkt.read(uniao);
-		for (i = 1; i <= n; i++) {
-		    g = fwkt.writeFeatures([geoms[i]]);
-		    uniao = uniao.union(rwkt.read(g));
-		}
-		//gera em wkt
-		uniao = wwkt.write(uniao);
-		return [
-		    fwkt.readFeatures(uniao)
-		    ];
-	    } else {
-		return false;
-	    }
-	},
 	retornaGeometriasTipo : function(tipo) {
 	    var n = i3GEO.editorOL.idsSelecionados.length, lista = [], i,
 	    s = i3GEO.desenho.layergrafico.getSource(),
@@ -575,17 +510,6 @@ i3GEO.editorOL = {
 		f = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]);
 		if (f.getGeometry().getType() == tipo) {
 		    lista.push(fwkt.writeFeatures([f]));
-		}
-	    }
-	    return lista;
-	},
-	retornaFeaturesTipo : function(tipo) {
-	    var n = i3GEO.editorOL.idsSelecionados.length, lista = [], i,
-	    s = i3GEO.desenho.layergrafico.getSource();
-	    for (i = 0; i < n; i++) {
-		f = s.getFeatureById(i3GEO.editorOL.idsSelecionados[i]);
-		if (f.getGeometry().getType() == tipo) {
-		    lista.push(f);
 		}
 	    }
 	    return lista;
@@ -648,54 +572,6 @@ i3GEO.editorOL = {
 	    if (document.getElementById("panellistagEditor")) {
 		i3GEO.editorOL.listaGeometrias();
 	    }
-	},
-	flashFeaturesI : function(index) {
-	    i3GEO.editorOL.flashFeatures([
-		i3GEO.desenho.layergrafico.features[index]
-		], 0);
-	},
-	flashFeatures : function(features, index) {
-	    if (!index) {
-		index = 0;
-	    }
-	    var current = features[index];
-	    if (current && current.layer === i3GEO.desenho.layergrafico) {
-		i3GEO.desenho.layergrafico.drawFeature(features[index], "select");
-	    }
-	    var prev = features[index - 1];
-	    if (prev && prev.layer === i3GEO.desenho.layergrafico) {
-		i3GEO.desenho.layergrafico.drawFeature(prev, "default");
-	    }
-	    ++index;
-	    if (index <= features.length) {
-		window.setTimeout(function() {
-		    i3GEO.editorOL.flashFeatures(features, index);
-		}, 75);
-	    }
-	},
-	selFeature : function(id) {
-	    if(console){
-		console.info("selFeature");
-	    }
-	    if(i3GEO.editorOL.idsSelecionados.indexOf(id) < 0){
-		i3GEO.editorOL.selTodos(id);
-	    }
-	},
-	carregajts : function(funcao) {
-	    if (i3GEO.configura) {
-		i3GEO.util.scriptTag(i3GEO.configura.locaplic + "/pacotes/jsts/lib/jsts.js", funcao, "i3GEOjts", true);
-	    } else {
-		i3GEO.util.scriptTag("../pacotes/jsts/lib/jsts.js", funcao, "i3GEOjts", true);
-	    }
-	},
-	pegaControle : function(classe) {
-	    var n = i3GEO.editorOL.controles.length, i;
-	    for (i = 0; i < n; i++) {
-		if (i3GEO.editorOL.controles[i].CLASS_NAME === classe) {
-		    return i3GEO.editorOL.controles[i];
-		}
-	    }
-	    return false;
 	},
 	google2wgs : function(obj) {
 	    if (i3GEO.Interface.openlayers.googleLike === true) {

@@ -231,10 +231,6 @@ i3GEO.busca = {
 			return;
 		}
 		b = ext.split(" ");
-		//OL 3
-		if (i3GEO.Interface["ATUAL"] === "openlayers" && typeof OpenLayers.Control == "undefined") {
-			i3GEO.busca.BOX = false;
-		}
 
 		if(i3GEO.busca.BOX === false){
 			i3GEO.busca.BOX = i3GEO.desenho.addBox(b[0], b[1], b[2], b[3], "boxOndeBusca");

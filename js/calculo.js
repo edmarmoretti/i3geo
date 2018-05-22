@@ -256,25 +256,6 @@ i3GEO.calculo =
 						amext.lat()
 					];
 				}
-				/*
-				if (i3GEO.Interface.openlayers.googleLike === true) {
-					amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign, yfign));
-					var point = new OpenLayers.LonLat(amext.lon, amext.lat);
-					amext = point.transform(new OpenLayers.Projection("EPSG:900913"), new OpenLayers.Projection("EPSG:4326"));
-					return [
-						amext.lon,
-						amext.lat
-					];
-				}
-				*/
-				if (i3GEO.Interface.ATUAL === "openlayers" && arguments.length === 4) {
-					amext = i3geoOL.getLonLatFromPixel(new OpenLayers.Pixel(xfign, yfign));
-					return [
-						amext.lon,
-						amext.lat
-					];
-				}
-
 				if (navm) {
 					xfign = xfign - 2.2;
 					yfign = yfign - 2.7;
@@ -418,7 +399,7 @@ i3GEO.calculo =
 		 * Given two objects representing points with geographic coordinates, this calculates the distance between those points on the
 		 * surface of an ellipsoid.
 		 *
-		 * Baseado em OpenLayers.Util.distVincenty
+		 * Baseado em openLayers.Util.distVincenty
 		 *
 		 * Parametros:
 		 *

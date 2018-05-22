@@ -14,7 +14,7 @@
  *
  * Alguns itens s&atilde;o inclu&iacute;dos caso sejam localizados na interface elementos html com os seguintes ID
  *
- * listaLayersBase - lista os layers de fundo na interface OpenLayers
+ * listaLayersBase - lista os layers de fundo na interface openLayers
  *
  * buscaRapida - formul&aacute;rio de busca de dados em camadas
  *

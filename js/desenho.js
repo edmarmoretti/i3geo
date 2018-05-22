@@ -45,11 +45,11 @@ i3GEO.desenho =
 	/**
 	 * Constant: layergrafico
 	 *
-	 * Objeto LAYER para a interface OpenLayers criado com i3GEO.desenho.openlayers.criaLayerGrafico
+	 * Objeto LAYER para a interface openLayers criado com i3GEO.desenho.openlayers.criaLayerGrafico
 	 *
 	 * Tipo:
 	 *
-	 * {OpenLayers.Layer.Vector}
+	 * {penLayers.Layer.Vector}
 	 *
 	 */
 	layergrafico : null,
@@ -269,7 +269,7 @@ i3GEO.desenho =
 	/**
 	 * Section: i3GEO.desenho.openlayers
 	 *
-	 * Fun&ccedil;&otilde;es utilizadas quando o mapa baseia-se na interface OpenLayers
+	 * Fun&ccedil;&otilde;es utilizadas quando o mapa baseia-se na interface openLayers
 	 */
 	openlayers : {
 	    /**

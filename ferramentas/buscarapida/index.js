@@ -494,7 +494,7 @@ i3GEObuscaRapida =
 			}
 			b = ext.split(" ");
 			//OL 3
-			if (window.parent.i3GEO.Interface["ATUAL"] === "openlayers" && typeof window.parent.OpenLayers.Control == "undefined") {
+			if (window.parent.i3GEO.Interface["ATUAL"] === "openlayers") {
 				i3GEObuscaRapida.BOX = false;
 			}
 

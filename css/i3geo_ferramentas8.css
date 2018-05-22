@@ -702,26 +702,6 @@ Utilizado na janela do buscador INDE
 	border: 0px solid white;
 }
 
-.toolTipBalaoTitulo {
-	text-decoration: none;
-	text-align: left;
-	font-size: 8pt;
-	font-weight: normal;
-	margin-top: 8px;
-	margin-bottom: 2px;
-}
-
-.toolTipBalaoTexto {
-	text-align: left;
-	font-size: 8pt;
-	background-color: #E0E0E0;
-	color: black;
-	padding: 3px;
-	-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-	filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-	border-radius: 6px;
-}
-
 .toolTipBalaoTexto1 {
 	text-align: left;
 	font-size: 8pt;

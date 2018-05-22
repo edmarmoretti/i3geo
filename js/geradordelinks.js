@@ -5,18 +5,6 @@ Classe javascript da aplica&ccedil;&atilde;o de gera&ccedil;&atilde;o de links.
 
 L&ecirc; o conjunto de javascripts para o funcionamento da interface geradordelinks.htm
 
-Arquivo
-
-i3geo/classesjs/geradordelinks.js
-
-Esse programa possu&iacute; as seguintes depend&ecirc;ncias:
-
-i3geo/pacotes/cpaint/cpaint2.inc.compressed.js
-
-i3geo/pacotes/openlayers/OpenLayers.js
-
-i3geo/classesjs/compactados/funcoes_compacto.js
-
 As depend&ecirc;ncias s&atilde;o carregadas pelo pr&oacute;prio geradordelinks.js, n&atilde;o sendo necess&aacute;rio incluir no HTML.
 
 Licen&ccedil;a

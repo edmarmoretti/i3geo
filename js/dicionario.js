@@ -3032,5 +3032,55 @@ g_traducao =
             pt : "Uni&atilde;o",
             en : "",
             es : ""
+        }],
+        "intersect" : [{
+            pt : "Intersec&ccedil;&atilde;o",
+            en : "",
+            es : ""
+        }],
+        "symdif" : [{
+            pt : "Diferen&ccedil;a sim&eacute;trica",
+            en : "",
+            es : ""
+        }],
+        "dif" : [{
+            pt : "Diferen&ccedil;a",
+            en : "",
+            es : ""
+        }],
+        "shiftdel" : [{
+            pt : "Para apagar um v&eacute;rtice, pressione shift e clique",
+            en : "",
+            es : ""
+        }],
+        "extent" : [{
+            pt : "Extens&atilde;o",
+            en : "",
+            es : ""
+        }],
+        "cola" : [{
+            pt : "Cola",
+            en : "",
+            es : ""
+        }],
+        "fillring" : [{
+            pt : "Preenche as ilhas",
+            en : "",
+            es : ""
+        }],
+        "naoremovewkt" : [{
+            pt : "Fecha sem remover o desenho",
+            en : "",
+            es : ""
+        }],
+        "ativasnaptol" : [{
+            pt : "Ativa toler&acirc;ncia (snap)",
+            en : "",
+            es : ""
+        }],
+        "freehand" : [{
+            pt : "M&atilde;o livre",
+            en : "",
+            es : ""
         }]
     };

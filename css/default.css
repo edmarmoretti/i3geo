@@ -1,3 +1,29 @@
+.toolTipBalaoTitulo {
+	text-decoration: none;
+	text-align: left;
+	font-size: 8pt;
+	font-weight: normal;
+	margin-top: 8px;
+	margin-bottom: 2px;
+}
+
+.toolTipBalaoTexto {
+	text-align: left;
+	font-size: 8pt;
+	color: black;
+	padding: 3px;
+}
+.toolTipBalaoTexto:after {
+    content:"";
+    display: inline-block;
+    height: 0.5em;
+    vertical-align: bottom;
+    width: 100%;
+    margin-right: -100%;
+    margin-left: 0px;
+    border-top: 1px solid #ededed;
+}
+
 #mostraarea_calculo_parcial, #mostraarea_calculo, #mostradistancia_calculo, #mostradistancia_calculo_movel {
 	font-size: 1.4rem;
 }
@@ -745,6 +771,15 @@ Configuracoes especificas dos elementos que ficam no rodape
 /*balao de info*/
 .i3GEOiconeMais {
 	background-image: url("../imagens/oxygen/16x16/draw-cross.png");
+	width: 16px;
+	height: 16px;
+	float: left;
+	cursor: pointer;
+	background-repeat: no-repeat;
+}
+
+.i3GEOiconeMantemWkt {
+	background-image: url("../imagens/oxygen/16x16/dialog-cancel.png");
 	width: 16px;
 	height: 16px;
 	float: left;

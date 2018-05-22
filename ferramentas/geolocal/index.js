@@ -158,15 +158,7 @@ i3GEOF.geolocal =
 			i3GEOF.geolocal.inicia(divid);
 			temp = function() {
 				var api;
-				if (i3GEO.Interface["ATUAL"] === "openlayers") {
-					if (typeof OpenLayers.Control == "undefined") {
-						api = "ol3";
-					} else {
-						api = "openlayers";
-					}
-				} else {
-					api = i3GEO.Interface["ATUAL"];
-				}
+				api = i3GEO.Interface["ATUAL"];
 				i3GEOF.geolocal[api].removeLayer();
 				i3GEOF.geolocal.paraTempo();
 			};
@@ -246,29 +238,13 @@ i3GEOF.geolocal =
 			tabela.appendChild(ntr);
 			$i("i3GEOFgeolocalNcoord").innerHTML = ps.length;
 
-			if (i3GEO.Interface["ATUAL"] === "openlayers") {
-				if (typeof OpenLayers.Control == "undefined") {
-					api = "ol3";
-				} else {
-					api = "openlayers";
-				}
-			} else {
-				api = i3GEO.Interface["ATUAL"];
-			}
+			api = i3GEO.Interface["ATUAL"];
 			i3GEOF.geolocal[api].desenha();
 			i3GEOF.geolocal.aguarde.visibility = "hidden";
 		},
 		limpa : function() {
 			i3GEOF.geolocal.posicoes = [];
-			if (i3GEO.Interface["ATUAL"] === "openlayers") {
-				if (typeof OpenLayers.Control == "undefined") {
-					api = "ol3";
-				} else {
-					api = "openlayers";
-				}
-			} else {
-				api = i3GEO.Interface["ATUAL"];
-			}
+			api = i3GEO.Interface["ATUAL"];
 			i3GEOF.geolocal[api].removeLayer();
 			var tabela = $i("i3GEOFgeolocalListaDePontos");
 			var cabecalho = tabela.getElementsByTagName("tr");
@@ -344,12 +320,12 @@ i3GEOF.geolocal =
 			var p = window.parent.i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid;
 			cp.call(p, "criaSHPvazio", ativanovotema, "&funcao=criashpvazio");
 		},
-		ol3 : {
+		openlayers : {
 			desenha : function() {
 				if (!i3GEO.desenho.layergrafico) {
 					i3GEO.desenho.openlayers.criaLayerGrafico();
 				}
-				i3GEOF.geolocal.ol3.removeFiguras();
+				i3GEOF.geolocal.openlayers.removeFiguras();
 				var ps = i3GEOF.geolocal.posicoes, n = ps.length, i, feature;
 				for (i = 0; i < n; i++) {
 					feature = new ol.Feature({
@@ -429,57 +405,8 @@ i3GEOF.geolocal =
 			removeLayer : function() {
 				var temp = window.confirm($trad("x94"));
 				if (temp) {
-					i3GEOF.geolocal.ol3.removeFiguras();
+					i3GEOF.geolocal.openlayers.removeFiguras();
 				}
-			}
-		},
-		openlayers : {
-			desenha : function() {
-				// allow testing of specific renderers via "?renderer=Canvas", etc
-				var renderer = OpenLayers.Util.getParameters(window.location.href).renderer, layer_style =
-					OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']), style_blue =
-					OpenLayers.Util.extend({}, layer_style), vectorLayer, ps = i3GEOF.geolocal.posicoes, n = ps.length, i, point, pointFeature =
-					[], pointList = [];
-
-				renderer = (renderer) ? [
-					renderer
-				] : OpenLayers.Layer.Vector.prototype.renderers;
-
-				style_blue.strokeColor = "blue";
-				style_blue.fillColor = "yellow";
-				style_blue.graphicName = "square";
-				style_blue.pointRadius = 3;
-				style_blue.strokeWidth = 2;
-				style_blue.rotation = 0;
-				style_blue.strokeLinecap = "butt";
-				if (i3geoOL.getLayersByName("Coordenadas").length === 0) {
-					vectorLayer = new OpenLayers.Layer.Vector("Coordenadas", {
-						style : layer_style,
-						renderers : renderer
-					});
-				} else {
-					vectorLayer = i3geoOL.getLayersByName("Coordenadas")[0];
-					vectorLayer.removeFeatures(vectorLayer.features);
-				}
-
-				for (i = 0; i < n; i++) {
-					point = new OpenLayers.Geometry.Point((ps[i].coords.longitude), (ps[i].coords.latitude));
-					i3GEOF.geolocal.wgs2google(point);
-					pointList.push(point);
-					pointFeature.push(new OpenLayers.Feature.Vector(point, null, style_blue));
-				}
-
-				var lineFeature = new OpenLayers.Feature.Vector(new OpenLayers.Geometry.LineString(pointList), null, style_blue);
-
-				i3geoOL.addLayer(vectorLayer);
-				vectorLayer.addFeatures([
-					lineFeature
-				]);
-				vectorLayer.addFeatures(pointFeature);
-				i3GEOF.geolocal.panLinha(n - 1);
-			},
-			removeLayer : function() {
-				i3geoOL.removeLayer(i3geoOL.getLayersByName("Coordenadas")[0], false);
 			}
 		},
 		googlemaps : {
@@ -521,14 +448,6 @@ i3GEOF.geolocal =
 			desenha : function() {
 			},
 			removeLayer : function() {
-			}
-		},
-		wgs2google : function(obj) {
-			if (i3GEO.Interface.openlayers.googleLike === true || i3GEO.Interface.ATUAL === "googlemaps") {
-				var projWGS84 = new OpenLayers.Projection("EPSG:4326"), proj900913 = new OpenLayers.Projection("EPSG:900913");
-				return obj.transform(projWGS84, proj900913);
-			} else {
-				return obj;
 			}
 		}
 	};
