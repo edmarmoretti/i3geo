@@ -241,7 +241,7 @@ include "../init/head.php";
 
 	</div>
     <div style="height:400px;">&nbsp;</div>
-	<script type="text/javascript" src="../classesjs/i3geo_tudo_compacto6.js"></script>
+	<script type="text/javascript" src="../js/i3geo_tudo_compacto8.js"></script>
 	<script src='dicionario.js'></script>
 	<script src='index.js'></script>
 	<script>

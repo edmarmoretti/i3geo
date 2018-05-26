@@ -59,7 +59,7 @@ if (! isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 
 <link href='../../../pacotes/bootstrap-accessibility-plugin/plugins/css/bootstrap-accessibility.css' rel='stylesheet'>
 <script src='../../../admin/headjs.php'></script>
-<script src="../../../classesjs/classe_util.js"></script>
+<script src="../../../js/util.js"></script>
 </head>
 <body bgcolor="white" style="background-color: white; text-align: left;">
 	<p>

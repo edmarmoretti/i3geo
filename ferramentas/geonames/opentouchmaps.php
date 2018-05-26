@@ -1,8 +1,8 @@
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
-<script type="text/javascript"  src='../../classesjs/classe_util.js' ></script>
-<script type="text/javascript"  src='../../classesjs/classe_social.js' ></script>
+<script type="text/javascript"  src='../../js/util.js' ></script>
+<script type="text/javascript"  src='../../js/social.js' ></script>
 <style>
 p {
 color:#2F4632;

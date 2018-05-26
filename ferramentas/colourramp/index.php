@@ -19,7 +19,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<script type="text/javascript" src="<?php echo $locaplic;?>/classesjs/i3geo.js"></script>
+<script type="text/javascript" src="<?php echo $locaplic;?>/js/i3geo.js"></script>
 <script type="text/javascript" src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/slider-min.js"></script>
 <link rel='stylesheet' type='text/css' href='<?php echo $locaplic;?>/css/i3geo6.css'/>
 <style>

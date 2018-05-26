@@ -584,7 +584,7 @@ i3GEO.janela =
          *
          * {String} - texto da janela
          */
-        abreAguarde : function(id, texto) {
+        abreAguarde : function() {
             var p = $i("i3GEObarraAguarde");
             if(p){
                 p.style.width = "100%";
@@ -600,7 +600,7 @@ i3GEO.janela =
          *
          * {String} - id da janela que ser&aacute; fechada. Se n&atilde;o for definido, tenta fechar as janelas principais.
          */
-        fechaAguarde : function(id) {
+        fechaAguarde : function() {
             var p = $i("i3GEObarraAguarde");
             if (p){
                 if (i3GEO.janela.CONTADORAGUARDE.length == 1) {

@@ -6,17 +6,17 @@ if (extension_loaded ( 'zlib' )) {
 header ( "Content-type: text/javascript" );
 include (ONDEI3GEO . "/pacotes/cpaint/cpaint2_compacto.inc.js");
 echo "\n";
-include (ONDEI3GEO . "/classesjs/compactados/dicionario_compacto.js");
+include (ONDEI3GEO . "/js/compactados/dicionario_compacto.js");
 echo "\n";
-include (ONDEI3GEO . "/classesjs/compactados/classe_util_compacto.js");
+include (ONDEI3GEO . "/js/compactados/util_compacto.js");
 echo "\n";
-include (ONDEI3GEO . "/classesjs/compactados/classe_idioma_compacto.js");
+include (ONDEI3GEO . "/js/compactados/idioma_compacto.js");
 echo "\n";
-include (ONDEI3GEO . "/classesjs/compactados/classe_php_compacto.js");
+include (ONDEI3GEO . "/js/compactados/php_compacto.js");
 echo "\n";
-include (ONDEI3GEO . "/classesjs/compactados/classe_arvoredetemas_compacto.js");
+include (ONDEI3GEO . "/js/compactados/arvoredetemas_compacto.js");
 echo "\n";
-include (ONDEI3GEO . "/classesjs/compactados/mustache.js");
+include (ONDEI3GEO . "/js/compactados/mustache.js");
 echo "\n";
 
 if (extension_loaded ( 'zlib' )) {

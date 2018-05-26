@@ -5,7 +5,7 @@ verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 ?>
 <html>
 <head>
-<script src="../../classesjs/i3geo.js" type="text/javascript"></script>
+<script src="../../js/i3geo.js" type="text/javascript"></script>
 <script>
 Timeline_ajax_url="../../pacotes/simile/timeline_2.3.0/timeline_ajax/simile-ajax-api.js";
 Timeline_urlPrefix='../../pacotes/simile/timeline_2.3.0/timeline_js/';

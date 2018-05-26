@@ -5,10 +5,9 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 <title>i3GEO - OpenLayers</title>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script src="../pacotes/ol4/ol.js"></script>
 <script src="../js/i3geonaocompacto.js"></script>
-<!-- carrega as funcoes dos botoes de edicao de elementos graficos -->
-<script src="../ferramentas/editorol/editorol.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
@@ -51,7 +50,7 @@
     <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
 	Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
 	-->
-    <div id="mapai3Geo"></div>
+    <div id="mapai3Geo" style="width:100vw;height:100vh"></div>
     <!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
     <form data-tutorial="escalas" class="escalanumerica hidden-xs" onsubmit="javascript:i3GEO.navega.aplicaEscala($i('i3GEOescalanum').value);return false;">
         <input id='i3GEOescalanum' type='text' name='' value='' size='10' title=''>
@@ -118,36 +117,32 @@
     <!-- barra de icones de navegacao -->
     <div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
         <button title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
-            <!--<img style="width:20px;" src="../imagens/gisicons/projection.png">-->
             <i class="material-icons">public</i>
         </button>
         <button onclick="i3GEO.Interface.zoomli()" data-tutorial="barranavegacao" style="float: left;">
-            <!--<img style="width:20px;" src="../imagens/gisicons/zoom-region.png">-->
             <i class="material-icons">zoom_in</i>
         </button>
         <br>
         <button title="{{{volta}}}" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
-            <!--<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle1.png">-->
             <i class="material-icons">undo</i>
         </button>
         <button title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
-            <!--<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">-->
             <i class="material-icons">redo</i>
         </button>
         <br>
         <button title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left;">
-            <!--<img style="width:16px;" src="../imagens/gisicons/graticule.png">-->
             <i class="material-icons">grid_on</i>
         </button>
         <button data-tutorial="marcador" class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
-            <!--<img style="width:20px;" src="../imagens/gisicons/save1.png">-->
             <i class="material-icons">bookmark_border</i>
         </button>
         <br>
         <button data-tutorial="referencia" class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
-            <!--<img style="width:20px;" src="../imagens/gisicons/map-reference.png">-->
             <i class="material-icons">picture_in_picture</i>
         </button>
+        <!-- Para o botao de fullscreen e necessario uma funcao. Veja abaixo nas configuracoes o item afterStart -->
+        <div id="i3GEOFullscreen" class="hidden-xs hidden-sm" title="{{{d9}}}" style="float: left;">
+        </div>
     </div>
     <!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
     <div id="i3GEOprogressoCamadas" class="progress" style="display: block; position: absolute; top: 0px; height: 5px; width: 0%; margin: auto;">
@@ -836,6 +831,13 @@
 				    theme : "inset-2-dark"
 				});
 				tutorial.init();
+				new ol.control.FullScreen({
+					target: $i("i3GEOFullscreen"),
+					className: "i3GEOcontrols",
+					tipLabel: $trad("fullscreen"),
+					source: "i3geo"
+
+				}).setMap(i3geoOL);
 				//i3GEO.eventos.adicionaEventos("RESIZE", $(".guiaOverflow").css("height",i3GEO.parametros.h - 140));
 
 				//setTimeout(function() {
@@ -870,9 +872,11 @@
 				//webservice wms que faz a apresentacao do lugar encontrado por searchService
 				searchWms : "http://mapas.mma.gov.br/webservices/geonameswms.php",
 				//posicao do mapa de referencia, em pixels [top,right]
+				//quando referenceType for igual a "api", deve-se usar a classe css utilizada
+				//na respectiva api
 				referenceMapPosition : [ 4, 120 ],
-				//tipo do mapa de referencia. Pode ser wms ou map
-				referenceType : "map",
+				//tipo do mapa de referencia. Pode ser wms, map ou api
+				referenceType : "api",
 				//propriedades do balao de informacoes mostrado quando o usuario clica no mapa
 				tooltip : {
 				    //o resultado sera mostrado em uma janela do tipo modal
@@ -934,7 +938,9 @@
 				},
 				metaestat : {},
 				buscainde : {},
-				//mapa de referencia
+				//ferramenta mapa de referencia
+				//difere das propriedades do mapa de referencia
+				//utilizado pela api openlayers ou googlemaps
 				opcoesMaparef : {
 				    //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
 				    images : [ {
@@ -964,12 +970,14 @@
 				//opcoes de inicializacao do mapa conforme definido na API do OpenLayers
 				MapOptions : {
 				    layers : [],
-				    controls : [ new ol.control.Zoom(),
+				    controls : [
+						new ol.control.Zoom(),
 					    new ol.control.ZoomSlider(),
 					    new ol.control.ScaleLine(),
 					    new ol.control.Attribution({
-						collapsible : true
-					    }) ],
+							collapsible : true
+					    })
+				    ],
 				    loadTilesWhileAnimating : true,
 				    loadTilesWhileInteracting : true,
 				    //os objetos devem ser comentados na interface googleMaps

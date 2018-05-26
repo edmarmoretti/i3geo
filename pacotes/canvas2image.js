@@ -145,7 +145,14 @@ var Canvas2Image = (function() {
 
 	// sends the generated file to the client
 	var saveFile = function(strData) {
-		document.location.href = strData;
+		console.log(strData);
+		//document.location.href = strData;
+		var link = document.createElement("a");
+                        $(link).click(function(e) {
+                          e.preventDefault();
+                          window.location.href = strData;
+                        });
+                        $(link).click();
 	}
 
 	var makeDataURI = function(strData, strMime) {

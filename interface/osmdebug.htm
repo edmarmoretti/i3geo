@@ -5,10 +5,9 @@
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0, user-scalable=0">
 <title>i3GEO - OpenLayers</title>
+<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
 <script src="../pacotes/ol4/ol.js"></script>
 <script src="../js/i3geonaocompacto.js"></script>
-<!-- carrega as funcoes dos botoes de edicao de elementos graficos -->
-<script src="../ferramentas/editorol/editorol.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
 <script src="../js/listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
@@ -147,6 +146,9 @@
             <!--<img style="width:20px;" src="../imagens/gisicons/map-reference.png">-->
             <i class="material-icons">picture_in_picture</i>
         </button>
+        <!-- Para o botao de fullscreen e necessario uma funcao. Veja abaixo nas configuracoes o item afterStart -->
+        <div id="i3GEOFullscreen" class="hidden-xs hidden-sm" title="{{{d9}}}" style="float: left;">
+        </div>
     </div>
     <!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
     <div id="i3GEOprogressoCamadas" class="progress" style="display: block; position: absolute; top: 0px; height: 5px; width: 0%; margin: auto;">
@@ -836,6 +838,13 @@
 				    theme : "inset-2-dark"
 				});
 				tutorial.init();
+				new ol.control.FullScreen({
+					target: $i("i3GEOFullscreen"),
+					className: "i3GEOcontrols",
+					tipLabel: $trad("fullscreen"),
+					source: "i3geo"
+
+				}).setMap(i3geoOL);
 				//i3GEO.eventos.adicionaEventos("RESIZE", $(".guiaOverflow").css("height",i3GEO.parametros.h - 140));
 
 				//setTimeout(function() {
@@ -872,7 +881,7 @@
 				//posicao do mapa de referencia, em pixels [top,right]
 				referenceMapPosition : [ 4, 120 ],
 				//tipo do mapa de referencia. Pode ser wms ou map
-				referenceType : "map",
+				referenceType : "api",
 				//propriedades do balao de informacoes mostrado quando o usuario clica no mapa
 				tooltip : {
 				    //o resultado sera mostrado em uma janela do tipo modal

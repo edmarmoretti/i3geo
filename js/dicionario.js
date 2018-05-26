@@ -3082,5 +3082,15 @@ g_traducao =
             pt : "M&atilde;o livre",
             en : "",
             es : ""
+        }],
+        "masc" : [{
+            pt : "M&aacute;scara",
+            en : "",
+            es : ""
+        }],
+        "fullscreen" : [{
+            pt : "Tela cheia",
+            en : "",
+            es : ""
         }]
     };

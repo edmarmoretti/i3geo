@@ -1,3 +1,10 @@
+.ol-overviewmap button {
+	display:none;
+}
+.ol-overviewmap {
+    left: .5em;
+    bottom: 4.5em;
+}
 .toolTipBalaoTitulo {
 	text-decoration: none;
 	text-align: left;
@@ -58,6 +65,12 @@
 /*
 Barra de botoes de navegacao
 */
+.ol-control {
+    position: absolute;
+    background-color: rgba(255,255,255,.4);
+    border-radius: 4px;
+    padding: 0px;
+}
 .ol-control button {
 	font-size: 1.5em;
 	margin: 2px;
@@ -570,7 +583,17 @@ no caso do OL3
 }
 
 .ol-scale-line {
-	bottom: 2em;
+	bottom: 2.2em;
+	cursor: pointer;
+}
+.ol-scale-line::after {
+  font-family: "Material Icons";
+  content: "\e8d5";
+  color: #336090;
+	position: absolute;
+	left: 101%;
+	top: 0px;
+	cursor: pointer;
 }
 
 .olControlEditingToolbar1 div {

@@ -13,7 +13,7 @@ menuPrincipal = [
 			},{
 			html: "<a href='" + i3GEO.configura.locaplic + "/testainstal.php' >"+$trad("testaInstal",i3GEOadmin.menup.dicionario)+"</a>"
 			},{
-			html: "<a href='" + i3GEO.configura.locaplic + "/classesjs/compactajs.php' target='_blank'>"+$trad("compacta",i3GEOadmin.menup.dicionario)+"</a>"
+			html: "<a href='" + i3GEO.configura.locaplic + "/js/compactajs.php' target='_blank'>"+$trad("compacta",i3GEOadmin.menup.dicionario)+"</a>"
 			},{
 				html: $trad("outrasOpc",i3GEOadmin.menup.dicionario),
 				children:[

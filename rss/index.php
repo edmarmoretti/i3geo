@@ -59,10 +59,10 @@ include "../init/head.php";
 			</div>
 		</div>
 	</div>
-	<script src='../classesjs/compactados/mustache.js'></script>
-	<script src='../classesjs/compactados/dicionario_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_util_compacto.js'></script>
-	<script src='../classesjs/compactados/classe_idioma_compacto.js'></script>
+	<script src='../js/compactados/mustache.js'></script>
+	<script src='../js/compactados/dicionario_compacto.js'></script>
+	<script src='../js/compactados/util_compacto.js'></script>
+	<script src='../js/compactados/idioma_compacto.js'></script>
 	<script src='dicionario.js'></script>
 	<script src='index.js'></script>
 

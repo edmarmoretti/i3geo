@@ -3,6 +3,7 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.editor =
 {
+	_mascCompose: "",
 	_interacoes: "",
 	_idsSelecionados: [],
 	_copia: [],
@@ -68,6 +69,51 @@ i3GEO.editor =
 		i3GEO.editor._idsSelecionados.push(i3GEO.editor._copia[i].getId());
 	    }
 	    i3GEO.editor._copia = [];
+	},
+	masc: function(){
+	    if(i3GEO.editor._mascCompose == ""){
+		i3GEO.editor.addMasc();
+	    } else {
+		i3GEO.editor.removeMasc();
+	    }
+	},
+	removeMasc: function(){
+	    ol.Observable.unByKey(i3GEO.editor._mascCompose);
+	    i3GEO.editor._mascCompose = "";
+	    i3geoOL.renderSync();
+	},
+	addMasc: function(){
+	    var nsel = i3GEO.editor._idsSelecionados.length,
+	    s = i3GEO.desenho.layergrafico.getSource(),
+	    feature;
+    	    if(nsel != 1){
+    		i3GEO.janela.tempoMsg($trad("selum"));
+    	    } else {
+    		feature = s.getFeatureById(i3GEO.editor._idsSelecionados[0]);
+    		var style = new ol.style.Style({
+    			stroke: new ol.style.Stroke({
+    			    color: 'rgba(' + i3GEO.editor._simbologia.strokeColor + ',' + i3GEO.editor._simbologia.opacidade + ')',
+    			    width: i3GEO.editor._simbologia.strokeWidth
+    			}),
+    			fill: new ol.style.Fill({
+    			    color: "rgba('0,0,0,0.1')"
+    			})
+    		    });
+    		var a = i3geoOL.on('precompose', function(event) {
+    		    var ctx = event.context;
+    		    var vecCtx = event.vectorContext;
+    		    ctx.save();
+    		    vecCtx.drawFeature(feature,style);
+    		    ctx.clip();
+    		});
+    		var b = i3geoOL.on('postcompose', function(event) {
+    		    var ctx = event.context;
+    		    ctx.restore();
+    		});
+    		i3geoOL.renderSync();
+    		i3GEO.editor.sel.deleteFeatures();
+    		i3GEO.editor._mascCompose = [a,b];
+    	    }
 	},
 	sel: {
 	    unselFeature : function(id) {
