@@ -1,7 +1,22 @@
 //utilize $trad("p1") para retornar o texto
 g_traducao =
     {
-        // texto da janela de mensagens
+        // utilizado em numeros
+        "dec" : [
+            {
+                pt : ",",
+                en : ".",
+                es : ","
+            }
+        ],
+        "mil" : [
+            {
+                pt : ".",
+                en : ",",
+                es : "."
+            }
+        ],
+	// texto da janela de mensagens
         "p1" : [
             {
                 pt : "O i3Geo &eacute; software livre! Para download clique <a href='https://softwarepublico.gov.br/social/i3geo' target=blank >aqui</a>. <b><a href='http://" + window.location.host

@@ -701,7 +701,7 @@ i3GEO.eventos =
                                 doc.getElementById(ixm).value = x[1];
                             }
                             if (doc.getElementById(ixs)) {
-                                doc.getElementById(ixs).value = x[2];
+                                doc.getElementById(ixs).value = $.number(x[2],2,$trad("dec"),$trad("mil"));
                             }
                             if (doc.getElementById(iyg)) {
                                 doc.getElementById(iyg).value = y[0];
@@ -710,7 +710,7 @@ i3GEO.eventos =
                                 doc.getElementById(iym).value = y[1];
                             }
                             if (doc.getElementById(iys)) {
-                                doc.getElementById(iys).value = y[2];
+                                doc.getElementById(iys).value = $.number(y[2],2,$trad("dec"),$trad("mil"));
                             }
                         }
                     } catch (m) {}

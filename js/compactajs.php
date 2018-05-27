@@ -119,7 +119,6 @@ packer("analise.js","compactados/analise_compacto.js","Normal");
 packer("php.js","compactados/php_compacto.js","Normal");
 packer("interface.js","compactados/interface_compacto.js","Normal");
 packer("ini_i3geo.js","compactados/ini_i3geo_compacto.js","Normal");
-//packer("dicionario_ajuda.js","compactados/dicionario_ajuda_compacto.js","Normal");
 packer("social.js","compactados/social_compacto.js","Normal");
 packer("catalogoMenus.js","compactados/catalogoMenus_compacto.js","Normal");
 packer("catalogoInde.js","compactados/catalogoInde_compacto.js","Normal");
@@ -133,8 +132,8 @@ packer("catalogoDir.js","compactados/catalogoDir_compacto.js","Normal");
 packer("busca.js","compactados/busca_compacto.js","Normal");
 packer("legenda.js","compactados/legenda_compacto.js","Normal");
 packer("caixaDeFerramentas.js","compactados/caixaDeFerramentas_compacto.js","Normal");
-packer("../ferramentas/editorol/editorol.js","../ferramentas/editorol/editorol_compacto.js","Normal");
-packer("../ferramentas/editorgm/editorgm.js","../ferramentas/editorgm/editorgm_compacto.js","Normal");
+//packer("../ferramentas/editorol/editorol.js","../ferramentas/editorol/editorol_compacto.js","Normal");
+//packer("../ferramentas/editorgm/editorgm.js","../ferramentas/editorgm/editorgm_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container.js","../pacotes/yui290/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container_core.js","../pacotes/yui290/build/container/container_core_compacto.js","Normal");
 packer("../pacotes/yui290/build/utilities/utilities.js","../pacotes/yui290/build/utilities/utilities_compacto.js","Normal");
@@ -172,6 +171,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/progressbar/progressbar_compacto.js",
 "../pacotes/yui290/build/selector/selector-min.js",
 "../pacotes/jquery/dist/jquery.min.js",
+"../pacotes/jquery/jquery-number/jquery.number.min.js",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
 "../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
 "../pacotes/bootstrap/js/bootstrap.min.js",

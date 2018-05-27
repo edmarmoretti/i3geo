@@ -24,8 +24,7 @@ $s = array("../../pacotes/ccc2/ccc/def.js",
 		"../../pacotes/ccc2/ccc/protovis.js",
 		"../../pacotes/ccc2/ccc/protovis-msie.js",
 		"../../pacotes/ccc2/ccc/pvc-r2.0.js",
-		"../../pacotes/ccc2/ccc/tipsy.js",
-		"../../pacotes/formatnumber.js"
+		"../../pacotes/ccc2/ccc/tipsy.js"
 );
 foreach($s as $i){
 	include_once($i);

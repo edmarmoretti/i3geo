@@ -525,18 +525,21 @@ i3GEO.navega =
 	    }
 	},
 	atualizaEscalaNumerica : function(escala) {
+	    if (typeof (console) !== 'undefined')
+		    console.log("atualizaEscalaNumerica");
+
 	    var e = $i("i3GEOescalanum");
 	    if (!e) {
 		return;
 	    }
 	    if (arguments.length === 1) {
-		e.value = escala;
+		e.value = $.number(escala,0,$trad("dec"),$trad("mil"));
 	    } else {
 		if (i3GEO.Interface.ATUAL === "googlemaps") {
 		    e.value = parseInt(i3GEO.parametros.mapscale, 10);
 		}
 		if (i3GEO.Interface.ATUAL === "openlayers") {
-		    e.value = parseInt(i3geoOL.getScale(),10);
+		    e.value = $.number(i3geoOL.getScale(),0,$trad("dec"),$trad("mil"))
 		}
 	    }
 	},

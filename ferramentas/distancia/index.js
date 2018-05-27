@@ -333,7 +333,7 @@ i3GEOF.distancia =
                                         })
                                     }),
                                     text: new ol.style.Text({
-                                        text: format("#.###,000",trecho.toFixed(3)),
+                                	text : $.number(trecho,3,$trad("dec"),$trad("mil")),
                                         font: 'Bold 14px Arial',
                                         textAlign: 'left',
                                         stroke: new ol.style.Stroke({
@@ -404,11 +404,11 @@ i3GEOF.distancia =
                     texto =
                         "total <br>" + $trad("x96")
                         + " km: "
-                        + format("#.###,000",total.toFixed(3))
+                        + $.number(total,3,$trad("dec"),$trad("mil"))
                         + "<br>"
                         + $trad("x96")
                         + " m: "
-                        + format("#.###,00",(total * 1000).toFixed(2))
+                        + $.number((total * 1000),2,$trad("dec"),$trad("mil"))
                         + "<br>"
                         + $trad("x25")
                         + ": "
@@ -425,11 +425,11 @@ i3GEOF.distancia =
                     texto =
                         "parcial <br>" + $trad("x95")
                         + " km: "
-                        + format("#.###,000",trecho.toFixed(3))
+                        + $.number(trecho,3,$trad("dec"),$trad("mil"))
                         + "<br>"
                         + $trad("x97")
                         + " km: "
-                        + format("#.###,000",(parcial + trecho).toFixed(3))
+                        + $.number((parcial + trecho),3,$trad("dec"),$trad("mil"))
                         + "<br>"
                         + $trad("x23")
                         + " (DMS): "

@@ -1375,7 +1375,7 @@ i3GEOF.graficointerativo1 =
 				tooltipFollowMouse : false,
 				tooltipFormat : function(scene) {
 					var cat = this.scene.datum.atoms['category'].value, val = this.scene.datum.atoms['value'].value;
-					return "<span style=color:yellow >" + cat + "</span><br>" + format("#.###,", val);
+					return "<span style=color:yellow >" + cat + "</span><br>" + $.number(val,3,$trad("dec"),$trad("mil"));
 				},
 				clickAction : function(scene) {
 
@@ -1407,11 +1407,11 @@ i3GEOF.graficointerativo1 =
 				baseAxisTitleFont : '9px sans-serif',
 				yAxisTickFormatter : function(valor) {
 					valor = valor + "";
-					return format("#.###,", valor);
+					return $.number(valor,3,$trad("dec"),$trad("mil"));
 				},
 				valueFormat : function(valor) {
 					valor = valor + "";
-					return format("#.###,", valor);
+					return $.number(valor,3,$trad("dec"),$trad("mil"));
 				},
 				valuesAnchor : 'top',
 				valuesVisible : false,
@@ -1575,7 +1575,7 @@ i3GEOF.graficointerativo1 =
 				rootCategoryLabel : legendaX,
 				tooltipFormat : function(scene) {
 					var cat = this.scene.datum.atoms['category'].value, val = this.scene.datum.atoms.size.value;
-					return "<span style=color:yellow >" + cat + "</span><br>" + format("#.###,", val);
+					return "<span style=color:yellow >" + cat + "</span><br>" + $.number(val,3,$trad("dec"),$trad("mil"));
 				}
 			};
 			//
@@ -1608,7 +1608,7 @@ i3GEOF.graficointerativo1 =
 				valuesMask : "{category}",
 				tooltipFormat : function(scene) {
 					var cat = this.scene.datum.atoms['category'].value, val = this.scene.datum.atoms['value'].value;
-					return "<span style=color:yellow >" + cat + "</span><br>" + format("#.###,", val);
+					return "<span style=color:yellow >" + cat + "</span><br>" + $.number(val,3,$trad("dec"),$trad("mil"));
 				},
 				extensionPoints : {
 					slice_strokeStyle : 'white'
@@ -1645,15 +1645,15 @@ i3GEOF.graficointerativo1 =
 				baseAxisTitle : legendaX,
 				yAxisTickFormatter : function(valor) {
 					valor = valor + "";
-					return format("#.###,", valor);
+					return $.number(valor,3,$trad("dec"),$trad("mil"));
 				},
 				valueFormat : function(valor) {
 					valor = valor + "";
-					return format("#.###,", valor);
+					return $.number(valor,3,$trad("dec"),$trad("mil"));
 				},
 				tooltipFormat : function(scene) {
 					var cat = this.scene.datum.atoms['category'].value, val = this.scene.datum.atoms['value'].value;
-					return "<span style=color:yellow >X: " + cat + "</span><br>Y: " + format("#.###,", val);
+					return "<span style=color:yellow >X: " + cat + "</span><br>Y: " + $.number(val,3,$trad("dec"),$trad("mil"));
 				}
 			};
 			//

@@ -351,21 +351,21 @@ i3GEOF.area =
 		    texto =
 			"total <br>" + $trad("d21at")
 			+ " km2: "
-			+ format("#.###,000", (area / 1000000).toFixed(3))
+			+ $.number((area / 1000000),3,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("d21at")
 			+ " ha: "
-			+ format("#.###,00",(area / 10000).toFixed(2))
+			+ $.number((area / 10000),3,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("x98")
 			+ " km: "
-			+ format("#.###,00",(per).toFixed(2))
+			+ $.number(per,2,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("x25")
 			+ ": "
 			+ i3GEO.calculo.metododistancia;
 		    mostra.innerHTML = texto + "<hr>";
-		    i3GEOF.area.ultimaMedida = format("#.###,000",(area / 1000000).toFixed(3)) + " km2";
+		    i3GEOF.area.ultimaMedida = + $.number((area / 1000000),3,$trad("dec"),$trad("mil")) + " km2";
 		}
 	    },
 	    /**
@@ -377,19 +377,19 @@ i3GEOF.area =
 		    texto =
 			"parcial <br>" + $trad("d21at")
 			+ " km2:"
-			+ format("#.###,000",(area / 1000000).toFixed(3))
+			+ $.number((area / 1000000),3,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("d21at")
 			+ " ha: "
-			+ format("#.###,00",(area / 10000).toFixed(2))
+			+ $.number((area / 10000),2,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("x95")
 			+ " km: "
-			+ format("#.###,000",trecho.toFixed(3))
+			+ $.number(trecho,3,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("x98")
 			+ " km: "
-			+ format("#.###,000",(per).toFixed(3))
+			+ $.number(per,3,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("x23")
 			+ " (DMS):"
