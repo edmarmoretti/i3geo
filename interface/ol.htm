@@ -116,39 +116,36 @@
     <!-- barra de icones de navegacao -->
     <div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
         <button title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
-            <!--<img style="width:20px;" src="../imagens/gisicons/projection.png">-->
             <i class="material-icons">public</i>
         </button>
         <button onclick="i3GEO.Interface.zoomli()" data-tutorial="barranavegacao" style="float: left;">
-            <!--<img style="width:20px;" src="../imagens/gisicons/zoom-region.png">-->
             <i class="material-icons">zoom_in</i>
         </button>
         <br>
         <button title="{{{volta}}}" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
-            <!--<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle1.png">-->
             <i class="material-icons">undo</i>
         </button>
         <button title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
-            <!--<img style="width:16px;" src="../imagens/oxygen/16x16/draw-triangle2.png">-->
             <i class="material-icons">redo</i>
         </button>
         <br>
         <button title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left;">
-            <!--<img style="width:16px;" src="../imagens/gisicons/graticule.png">-->
             <i class="material-icons">grid_on</i>
         </button>
         <button data-tutorial="marcador" class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
-            <!--<img style="width:20px;" src="../imagens/gisicons/save1.png">-->
             <i class="material-icons">bookmark_border</i>
         </button>
         <br>
-        <button data-tutorial="referencia" class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
-            <!--<img style="width:20px;" src="../imagens/gisicons/map-reference.png">-->
+        <button data-tutorial="referencia" class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;cursor:pointer;">
             <i class="material-icons">picture_in_picture</i>
         </button>
+        <button class="hidden-xs hidden-sm" title="Spy" onclick="i3GEO.navega.basemapSpy.start()" style="float: left; cursor:pointer;">
+            <i class="material-icons">highlight</i>
+        </button>
+        <br>
         <!-- Para o botao de fullscreen e necessario uma funcao. Veja abaixo nas configuracoes o item afterStart -->
-        <div id="i3GEOFullscreen" class="hidden-xs hidden-sm" title="{{{d9}}}" style="float: left;">
-        </div>
+        <span id="i3GEOFullscreen" class="hidden-xs hidden-sm" style="cursor:pointer;" title="{{{d9}}}">
+        </span>
     </div>
     <!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
     <div id="i3GEOprogressoCamadas" class="progress" style="display: block; position: absolute; top: 0px; height: 5px; width: 0%; margin: auto;">
@@ -839,7 +836,7 @@
 				});
 				new ol.control.FullScreen({
 					target: $i("i3GEOFullscreen"),
-					className: "i3GEOcontrols",
+					className: "ol-FullScreen",
 					tipLabel: $trad("fullscreen"),
 					source: "i3geo"
 

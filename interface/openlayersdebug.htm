@@ -137,12 +137,16 @@
             <i class="material-icons">bookmark_border</i>
         </button>
         <br>
-        <button data-tutorial="referencia" class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;">
+        <button data-tutorial="referencia" class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;cursor:pointer;">
             <i class="material-icons">picture_in_picture</i>
         </button>
+        <button class="hidden-xs hidden-sm" title="Spy" onclick="i3GEO.navega.basemapSpy.start()" style="float: left; cursor:pointer;">
+            <i class="material-icons">highlight</i>
+        </button>
+        <br>
         <!-- Para o botao de fullscreen e necessario uma funcao. Veja abaixo nas configuracoes o item afterStart -->
-        <div id="i3GEOFullscreen" class="hidden-xs hidden-sm" title="{{{d9}}}" style="float: left;">
-        </div>
+        <span id="i3GEOFullscreen" class="hidden-xs hidden-sm" style="cursor:pointer;" title="{{{d9}}}">
+        </span>
     </div>
     <!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
     <div id="i3GEOprogressoCamadas" class="progress" style="display: block; position: absolute; top: 0px; height: 5px; width: 0%; margin: auto;">
@@ -833,7 +837,7 @@
 				tutorial.init();
 				new ol.control.FullScreen({
 					target: $i("i3GEOFullscreen"),
-					className: "i3GEOcontrols",
+					className: "ol-FullScreen",
 					tipLabel: $trad("fullscreen"),
 					source: "i3geo"
 

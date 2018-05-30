@@ -559,19 +559,6 @@
 			"en": "This option modifies the opacity of a theme, allowing to adjust the visibility of a feature in relation to other themes. The opacity varies from 0 to 100, where 100 is the most opaque.",
 			"apijs":"i3GEO.tema.mudanome(idtema)"
 		},
-		"44": {
-			"titulo": {
-				"pt": "Mostrar em janela",
-				"es": "Mostrar en la ventana",
-				"en": "Show in window"
-			},
-			"diretorio":"i3geo/classesjs/classe_navega.js",
-			"categoria":"5",
-			"pt":"Inclui um ret&acirc;ngulo na tela que segue a movimenta&ccedil;&atilde;o do mouse e mostra o tema escolhido. Possibilita destacar a visualiza&ccedil;&atilde;o de uma camada sobre as outras.",
-			"es": "Incluye un rect&aacute;ngulo en la pantalla que sigue el movimiento del rat&oacute;n y muestra el tema seleccionado. Posibilita destacar la visualizaci&oacute;n de una capa sobre las otras.",
-			"en": "It includes a rectangle on the screen that follows the movement of the mouse and shows the selected theme. It allows you to highlight one layer over others.",
-			"apijs":"i3GEO.navega.destacaTema.inicia()"
-		},
 		"45": {
 			"titulo": {
 				"pt": "Zoom para o tema",

@@ -1757,8 +1757,8 @@ i3GEO.Interface =
 	        	objposicaocursor.dmsy = d[1];
 	        	objposicaocursor.imgx = e.pixel[0];
 	        	objposicaocursor.imgy = e.pixel[1];
-	        	objposicaocursor.telax = e.pixel[0] + pos[0];
-	        	objposicaocursor.telay = e.pixel[1] + pos[1];
+	        	objposicaocursor.telax = objposicaocursor.imgx + pos[0];
+	        	objposicaocursor.telay = objposicaocursor.imgy + pos[1];
 	        	//para layers do tipo utfgrid
 	        	var viewResolution = (i3geoOL.getView().getResolution());
 	        	if(i3GEO.Interface.INFOOVERLAY != ""){

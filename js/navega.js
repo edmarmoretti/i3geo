@@ -526,7 +526,7 @@ i3GEO.navega =
 	},
 	atualizaEscalaNumerica : function(escala) {
 	    if (typeof (console) !== 'undefined')
-		    console.log("atualizaEscalaNumerica");
+		console.log("atualizaEscalaNumerica");
 
 	    var e = $i("i3GEOescalanum");
 	    if (!e) {
@@ -824,161 +824,70 @@ i3GEO.navega =
 		}
 	    }
 	},
-	/**
-	 * Section: i3GEO.navega.destacaTema
-	 *
-	 * Destaca um tema mostrando-o sobre os outros em um box que segue o mouse
-	 */
 	destacaTema : {
-	    /**
-	     * Propriedade: TAMANHO
-	     *
-	     * Tamanho do box
-	     *
-	     * Tipo:
-	     *
-	     * {Integer}
-	     *
-	     * Default:
-	     *
-	     * 75
-	     */
-	    TAMANHO : 75,
-	    /**
-	     * Tipo: {sim|nao}
-	     */
-	    ESTAATIVO : "nao",
-	    /**
-	     * Tipo: {C&oacute;digo do tema}
-	     */
-	    TEMA : "",
-	    /**
-	     * Function: inicia
-	     *
-	     * Inicia o destaque de um tema
-	     *
-	     * Parametros:
-	     *
-	     * {String} - c&oacute;digo do tema
-	     */
-	    inicia : function(tema) {
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.navega.destacaTema.inicia()");
-
-		var novoel, novoeli, janela, pos;
-		if (!$i("img_d")) {
-		    pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
-		    novoel = document.createElement("div");
-		    novoel.id = "div_d";
-		    novoel.style.zIndex = 5000;
-		    document.body.appendChild(novoel);
-		    $i("div_d").innerHTML = "<input style='position:relative;top:0px;left:0px'' type=image src='' id='img_d' />";
-		    $i("div_d").style.left = parseInt(pos[0], 10) + "px";
-		    $i("div_d").style.top = parseInt(pos[1], 10) + "px";
-		    $i("img_d").style.left = 0 + "px";
-		    $i("img_d").style.top = 0 + "px";
-		    $i("img_d").style.width = i3GEO.parametros.w + "px";
-		    $i("img_d").style.height = i3GEO.parametros.h + "px";
-		    $i("div_d").style.clip = 'rect(0px 75px 75px 0px)';
-		    //novoeli = document.createElement("div");
-		    //novoeli.id = "div_di";
-		    //novoel.appendChild(novoeli);
-		    //$i("div_di").innerHTML = "<p style='position:absolute;top:0px;left:0px'>+-</p>";
-		}
-		i3GEO.navega.destacaTema.TEMA = tema;
-		i3GEO.navega.destacaTema.ESTAATIVO = "sim";
-		i3GEO.navega.destacaTema.atualiza();
-		janela = i3GEO.janela.cria(
-			200,
-			150,
-			"",
-			"center",
-			"center",
-			"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x50") + "</span></div>",
-			"ativadesativaDestaque",
-			false,
-			"hd",
-			"",
-			"",
-			"",
-			true,
-			"",
-			"",
-			"",
-			""
-		);
-		$i(janela[2].id).innerHTML = "<div class='container-fluid'>"
-		    + "<h5 class='alert alert-info'>" + $trad("x91") + "</h5>"
-		    + "<div class='form-group condensed'>"
-		    + "<button onclick='i3GEO.navega.destacaTema.TAMANHO = i3GEO.navega.destacaTema.TAMANHO + 20' class='btn btn-xs' style='margin:2px;padding:2px;'><span class='material-icons'>add_circle_outline</span></button>"
-		    + "<button onclick='i3GEO.navega.destacaTema.TAMANHO = i3GEO.navega.destacaTema.TAMANHO - 20' class='btn btn-xs' style='margin:2px;padding:2px;'><span class='material-icons'>remove_circle_outline</span></button>"
-		    + "</div></div>";
-		$( janela[0].close ).click(i3GEO.navega.destacaTema.desativa);
-		i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEO.navega.destacaTema.atualiza()"]);
-		i3GEO.eventos.adicionaEventos("MOUSEMOVE",["i3GEO.navega.destacaTema.movimenta()"]);
-	    },
-	    /**
-	     * Atualiza o destaque
-	     *
-	     * &Eacute; definido para o evento de navega&ccedil;&atilde;o do mapa
-	     */
-	    atualiza : function() {
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.navega.destacaTema.atualiza()");
-
-		if (i3GEO.navega.destacaTema.ESTAATIVO === "nao") {
-		    return;
-		}
-		var temp = function(retorno) {
-		    var m, novoel;
-		    retorno = retorno.data;
-		    m = new Image();
-		    m.src = retorno;
-		    $i("div_d").innerHTML = "";
-		    $i("div_d").style.display = "block";
-		    novoel = document.createElement("input");
-		    novoel.id = "img_d";
-		    novoel.style.position = "relative";
-		    novoel.style.top = "0px";
-		    novoel.style.left = "0px";
-		    novoel.type = "image";
-		    novoel.src = m.src;
-		    novoel.style.display = "block";
-		    $i("div_d").appendChild(novoel);
-		    i3GEO.janela.fechaAguarde("ajaxdestaca");
-		};
-		i3GEO.php.geradestaque(temp, i3GEO.navega.destacaTema.TEMA, i3GEO.parametros.mapexten);
-	    },
-	    /**
-	     * Function: desativa
-	     *
-	     * Desativa o destaque
-	     */
-	    desativa : function() {
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.navega.destacaTema.desativa()");
-
-		i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEO.navega.destacaTema.atualiza()"]);
-		i3GEO.eventos.removeEventos("MOUSEMOVE",["i3GEO.navega.destacaTema.movimenta()"]);
-		i3GEO.navega.destacaTema.ESTAATIVO = "nao";
-		document.body.removeChild($i("div_d"));
-	    },
-	    /**
-	     * Movimenta o destaque conforme o mouse move
-	     *
-	     * &Eacute; definido para o evento de deslocamento do mouse
-	     */
-	    movimenta : function() {
-		if (i3GEO.navega.destacaTema.ESTAATIVO === "sim") {
-		    $i("div_d").style.clip =
-			'rect(' + (objposicaocursor.imgy - i3GEO.navega.destacaTema.TAMANHO) + "px " + (objposicaocursor.imgx - 10) + "px "
-			+ (objposicaocursor.imgy - 10) + "px " + (objposicaocursor.imgx - i3GEO.navega.destacaTema.TAMANHO) + 'px)';
-		}
+	    inicia : function() {
+		i3GEO.janela.tempoMsg("removido na versao 8");
 	    }
 	},
-	barraDeZoom : {
-	    cria : function() {
-		alert("barraDeZoom depreciado na versao 6.0");
+	basemapSpy : {
+	    _spyCompose: "",
+	    eventMouseout: function() {
+		if(i3GEO.navega.basemapSpy._spyCompose != ""){
+		    i3geoOL.renderSync();
+		}
+	    },
+	    eventMouseMove: function(event) {
+		console.log("oi");
+		if(i3GEO.navega.basemapSpy._spyCompose != ""){
+		    i3geoOL.renderSync();
+		}
+	    },
+	    stop: function(imagery,container){
+		ol.Observable.unByKey(i3GEO.navega.basemapSpy._spyCompose);
+		i3GEO.navega.basemapSpy._spyCompose = "";
+		imagery.setZIndex(imagery.get("zIndexOriginal"));
+		container.removeEventListener('mousemove', i3GEO.navega.basemapSpy.eventMouseMove);
+		container.removeEventListener('mouseout', i3GEO.navega.basemapSpy.eventMouseout);
+		i3geoOL.renderSync();
+	    },
+	    start : function(){
+		if (typeof (console) !== 'undefined')
+		    console.info("i3GEO.navega.basemapSpy()");
+
+		if(i3GEO.Interface.ATUAL != "openlayers"){
+		    return;
+		}
+		var imagery = i3geoOL.getLayerBase();
+		var container = i3geoOL.getTargetElement();
+		if(i3GEO.navega.basemapSpy._spyCompose != ""){
+		    i3GEO.navega.basemapSpy.stop(imagery,container);
+		    return;
+		}
+		var radius = 75;
+		imagery.set("zIndexOriginal",imagery.getZIndex());
+		imagery.setZIndex(1000);
+
+		container.addEventListener('mousemove', i3GEO.navega.basemapSpy.eventMouseMove);
+		container.addEventListener('mouseout', i3GEO.navega.basemapSpy.eventMouseout);
+
+		var a = imagery.on('precompose', function(event) {
+		    var ctx = event.context;
+		    var pixelRatio = event.frameState.pixelRatio;
+		    ctx.save();
+		    ctx.beginPath();
+		    // only show a circle around the mouse
+		    ctx.arc(objposicaocursor.imgx * pixelRatio, objposicaocursor.imgy * pixelRatio,
+			    radius * pixelRatio, 0, 2 * Math.PI);
+		    ctx.lineWidth = 5 * pixelRatio;
+		    ctx.strokeStyle = 'rgba(0,0,0,0.5)';
+		    ctx.stroke();
+		    ctx.clip();
+		});
+		var b = imagery.on('postcompose', function(event) {
+		    var ctx = event.context;
+		    ctx.restore();
+		});
+		i3GEO.navega.basemapSpy._spyCompose = [a,b];
 	    }
 	},
 	/**

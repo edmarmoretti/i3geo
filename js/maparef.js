@@ -127,7 +127,6 @@ i3GEO.maparef =
 		    });
 		    i3GEO.maparef.APIOBJ.setMap(i3geoOL);
 		} else {
-		    //i3GEO.maparef.APIOBJ.setProperties({"layers": [i3geoOL.getLayerBase()]});
 		    i3GEO.maparef.APIOBJ.setCollapsed(!i3GEO.maparef.APIOBJ.getCollapsed());
 		    if(i3GEO.maparef.APIOBJ.getCollapsed() == true){
 			i3GEO.maparef.APIOBJ.setMap(null);
