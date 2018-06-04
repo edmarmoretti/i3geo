@@ -1,3 +1,8 @@
+.ol-zoom {
+	position: unset !Important;
+    display: flex !Important;
+}
+
 .ol-FullScreen.ol-unselectable.ol-control  {
     position: unset !Important;
     display: unset !Important;
@@ -347,7 +352,7 @@ hr {
 	z-index: 1;
 	left: auto;
 	right: 2px;
-	top: 5px;
+	top: 1rem;
 	width: 380px;
 }
 #i3GEOguiaMovelMolde {
@@ -570,14 +575,9 @@ no caso do OL3
 	top: 10px;
 }
 
-.ol-zoom {
-	top: 2.8em;
-	font-size: 1.8rem;
-}
-
 .ol-i3GEOcontrols {
-	top: 2.8em;
-	left: 3.5em;
+	top: 2.5rem;
+	left: 1rem;
 	width: auto;
 	font-size: 1.8rem;
 }

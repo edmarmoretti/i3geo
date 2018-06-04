@@ -114,6 +114,7 @@
     </div>
     <!-- barra de icones de navegacao -->
     <div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
+        <span id="i3GEOzoomInOut" class="hidden-xs hidden-sm" style="cursor:pointer;"></span>
         <button title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
             <i class="material-icons">public</i>
         </button>
@@ -839,6 +840,10 @@
 					source: "i3geo"
 
 				}).setMap(i3geoOL);
+				new ol.control.Zoom({
+					target: $i("i3GEOzoomInOut")
+				}).setMap(i3geoOL);
+
 				//i3GEO.eventos.adicionaEventos("RESIZE", $(".guiaOverflow").css("height",i3GEO.parametros.h - 140));
 
 				//setTimeout(function() {
@@ -972,8 +977,8 @@
 				MapOptions : {
 				    layers : [],
 				    controls : [
-						new ol.control.Zoom(),
-					    new ol.control.ZoomSlider(),
+						//new ol.control.Zoom(),
+					    //new ol.control.ZoomSlider(),
 					    new ol.control.ScaleLine(),
 					    new ol.control.Attribution({
 							collapsible : true

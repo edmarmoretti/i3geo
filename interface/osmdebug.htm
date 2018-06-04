@@ -115,6 +115,7 @@
     </div>
     <!-- barra de icones de navegacao -->
     <div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
+        <span id="i3GEOzoomInOut" class="hidden-xs hidden-sm" style="cursor:pointer;"></span>
         <button title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
             <i class="material-icons">public</i>
         </button>
@@ -970,8 +971,9 @@
 				//opcoes de inicializacao do mapa conforme definido na API do OpenLayers
 				MapOptions : {
 				    layers : [],
-				    controls : [ new ol.control.Zoom(),
-					    new ol.control.ZoomSlider(),
+				    controls : [
+						//new ol.control.Zoom(),
+					    //new ol.control.ZoomSlider(),
 					    new ol.control.ScaleLine(),
 					    new ol.control.Attribution({
 						collapsible : true
