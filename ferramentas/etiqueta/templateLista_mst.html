@@ -15,7 +15,7 @@
 			<td>
 				<div class="checkbox condensed text-center" style="text-align:center;">
 					<label>
-						<input {{{ckIdentifica}}} value="{{{item}}}" type="checkbox" name="identifica" />
+						<input {{{ckIdentifica}}} data-col="{{{item}}}" value="{{{item}}}" type="checkbox" name="identifica" />
 						<span class="checkbox-material noprint">
 							<span class="check"></span>
 						</span>
@@ -25,7 +25,7 @@
 			<td>
 				<div class="checkbox condensed"  style="text-align:center;">
 					<label>
-						<input {{{ckEtiquetaTip}}} type='checkbox' value="{{{item}}}" name='etiquetaTip' />
+						<input {{{ckEtiquetaTip}}} data-col="{{{item}}}" type='checkbox' value="{{{item}}}" name='etiquetaTip' />
 						<span class="checkbox-material noprint">
 							<span class="check"></span>
 						</span>
@@ -35,7 +35,7 @@
             <td>
                 <div class="radio radio-primary condensed"  style="text-align:center;">
                     <label>
-                        <input {{{ckUtfdata}}} type='radio' value="{{{item}}}" name='utfdata' />
+                        <input {{{ckUtfdata}}} data-col="{{{item}}}" type='radio' value="{{{item}}}" name='utfdata' />
                         <span class="circle"></span>
 						<span class="check"></span>
                     </label>
@@ -44,7 +44,7 @@
 			<td>
 				<div class="radio radio-primary condensed"  style="text-align:center;">
 					<label>
-						<input {{{ckBuscaRapida}}} type='radio' value="{{{item}}}" name='itembuscarapida' />
+						<input {{{ckBuscaRapida}}} data-col="{{{item}}}" type='radio' value="{{{item}}}" name='itembuscarapida' />
 						<span class="circle"></span>
 						<span class="check"></span>
 					</label>
@@ -52,12 +52,12 @@
 			</td>
 			<td>
 				<div class='form-group condensed'>
-					<input class="form-control input" style="width: 150px;" type='text' name='itensdesc' value='{{{ckitensdesc}}}' />
+					<input class="form-control input" data-col="{{{item}}}" style="width: 150px;" type='text' name='itensdesc' value='{{{ckitensdesc}}}' />
 				</div>
 			</td>
 			<td>
 				<div class='form-group condensed'>
-					<input style="margin-left:10px;width: 100px;" class="form-control input" type='text' name='itenslink' value='{{{ckitem}}}' />
+					<input data-col="{{{item}}}" style="margin-left:10px;width: 100px;" class="form-control input" type='text' name='itenslink' value='{{{ckitem}}}' />
 				</div>
 			</td>
 

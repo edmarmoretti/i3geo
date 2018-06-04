@@ -1,14 +1,12 @@
-<div class='container-fluid customScrollBarXY' >
+<div class='container-fluid' >
+    <button onclick="i3GEOF.etiqueta.ativa()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
+    <button onclick="i3GEOF.etiqueta.desativa()" class='btn btn-primary btn-sm btn-raised'>{{{desativaEtiquetas}}}</button>
+</div>
+<div class='container-fluid customScrollBarXY' style="height: calc(100% - 50px);">
 	<div  id='i3GEOFetiquetaComboCabeca' class='form-group condensed' style='width:100%'>
 
 	</div>
-
 	<!-- ver templateLista_mst.html -->
 	<div id='i3GEOetiquetalistai'></div>
-
-	<button onclick="i3GEOF.etiqueta.ativa()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
-	<button onclick="i3GEOF.etiqueta.desativa()" class='btn btn-primary btn-sm btn-raised'>{{{desativaEtiquetas}}}</button>
-
 	<h5 class="alert alert-info">{{{selecionaItem}}}</h5>
-
 </div>
