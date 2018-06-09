@@ -807,7 +807,7 @@ i3GEO.Interface =
 		    }
 		    return res;
 		};
-		i3geoOL.getAllLayers = function(chave, valor) {
+		i3geoOL.getAllLayers = function() {
 		    var res = [], layers = this.getLayers(), n = layers.getLength(), i;
 		    for (i = 0; i < n; i++) {
 			res.push(layers.item(i));

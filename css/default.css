@@ -1,3 +1,7 @@
+/* para evitar erros no logo de atribuicao quando nao ha mapa base ativado */
+.ol-logo-only {
+	visibility: hidden;
+}
 .ol-zoom {
 	position: unset !Important;
     display: flex !Important;
@@ -84,6 +88,7 @@ Barra de botoes de navegacao
 .ol-control button {
 	font-size: 1.5em;
 	margin: 2px;
+	float: left;
 }
 /*
 Para a barra de rolagem
@@ -351,8 +356,8 @@ hr {
 	text-align: left;
 	z-index: 1;
 	left: auto;
-	right: 2px;
-	top: 1rem;
+	right: 0;
+	top: 0;
 	width: 380px;
 }
 #i3GEOguiaMovelMolde {

@@ -1318,7 +1318,7 @@ g_traducao =
         ],
         "d18t" : [
             {
-                pt : "lente",
+                pt : "lente de aumento",
                 en : "magnifying glass",
                 es : "lupa"
             }
