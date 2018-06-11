@@ -663,11 +663,7 @@ i3GEO.navega =
 	    _lenteCompose: "",
 	    eventMouseout: function() {
 		if(i3GEO.navega.lente._lenteCompose != ""){
-		    var imagery = i3geoOL.getLayerBase();
-		    if(!imagery){
-			imagery = i3geoOL.getLayersBy("visible",true)[0];
-		    }
-		    i3GEO.navega.lente.stop(imagery,i3geoOL.getTargetElement());
+		    i3GEO.navega.lente.stop(i3geoOL.getTargetElement());
 		}
 	    },
 	    eventMouseMove: function(event) {
@@ -675,10 +671,9 @@ i3GEO.navega =
 		    i3geoOL.renderSync();
 		}
 	    },
-	    stop: function(imagery,container){
+	    stop: function(container){
 		ol.Observable.unByKey(i3GEO.navega.lente._lenteCompose);
 		i3GEO.navega.lente._lenteCompose = "";
-		imagery.setZIndex(imagery.get("zIndexOriginal"));
 		container.removeEventListener('mousemove', i3GEO.navega.lente.eventMouseMove);
 		container.removeEventListener('mouseout', i3GEO.navega.lente.eventMouseout);
 		i3geoOL.renderSync();
@@ -690,22 +685,10 @@ i3GEO.navega =
 		if(i3GEO.Interface.ATUAL != "openlayers"){
 		    return;
 		}
-		var imagery = i3geoOL.getLayerBase();
-		if(!imagery){
-		    imagery = i3geoOL.getLayersBy("visible",true)[0];
-		}
 		var container = i3geoOL.getTargetElement();
-		if(i3GEO.navega.lente._lenteCompose != ""){
-		    i3GEO.navega.lente.stop(imagery,container);
-		    return;
-		}
 		var radius = 75;
-		imagery.set("zIndexOriginal",imagery.getZIndex());
-		imagery.setZIndex(1000);
-
 		container.addEventListener('mousemove', i3GEO.navega.lente.eventMouseMove);
 		container.addEventListener('mouseout', i3GEO.navega.lente.eventMouseout);
-
 		var a = i3geoOL.on('postcompose', function(event) {
 		    var context = event.context;
 		    var pixelRatio = event.frameState.pixelRatio;

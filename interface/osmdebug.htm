@@ -115,12 +115,30 @@
     </div>
     <!-- barra de icones de navegacao -->
     <div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
-        <span id="i3GEOzoomInOut" class="hidden-xs hidden-sm" style="cursor:pointer;"></span>
+        <button onclick="$('.ol-i3GEOcontrols .toggle').toggle();" style="float: left;">
+            <i class="material-icons">menu</i>
+        </button>
+        <!-- Para o botao de fullscreen e necessario uma funcao. Veja abaixo nas configuracoes o item afterStart -->
+        <span id="i3GEOFullscreen" style="cursor:pointer;" title="{{{d9}}}">
+        </span>
+        <button class="toggle" data-tutorial="referencia" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;cursor:pointer;display:none;">
+            <i class="material-icons">picture_in_picture</i>
+        </button>
+        <br>
+        <div class="clearfix"></div>
+        <span id="i3GEOzoomInOut" style="cursor:pointer;"></span>
+        <button class="toggle" title="Spy" onclick="i3GEO.navega.basemapSpy.start()" style="float: left; cursor:pointer;display:none;">
+            <i class="material-icons">highlight</i>
+        </button>
+        <br>
         <button title="{{{d2t}}}" onclick="i3GEO.Interface.zoom2ext(i3GEO.parametros.extentTotal)" style="float: left;">
             <i class="material-icons">public</i>
         </button>
         <button onclick="i3GEO.Interface.zoomli()" data-tutorial="barranavegacao" style="float: left;">
             <i class="material-icons">zoom_in</i>
+        </button>
+        <button class="toggle" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor:pointer;display:none;">
+            <i class="material-icons">loupe</i>
         </button>
         <br>
         <button title="{{{volta}}}" onclick="i3GEO.navega.extensaoAnterior()" style="float: left;">
@@ -129,27 +147,14 @@
         <button title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
             <i class="material-icons">redo</i>
         </button>
-        <br>
-        <button title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left;">
-            <i class="material-icons">grid_on</i>
-        </button>
-        <button data-tutorial="marcador" class="hidden-xs hidden-sm" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;">
+        <button class="toggle" data-tutorial="marcador" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;display:none;">
             <i class="material-icons">bookmark_border</i>
         </button>
         <br>
-        <button data-tutorial="referencia" class="hidden-xs hidden-sm" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;cursor:pointer;">
-            <i class="material-icons">picture_in_picture</i>
+        <button class="toggle" title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left;display:none;">
+            <i class="material-icons">grid_on</i>
         </button>
-        <button class="hidden-xs hidden-sm" title="Spy" onclick="i3GEO.navega.basemapSpy.start()" style="float: left; cursor:pointer;">
-            <i class="material-icons">highlight</i>
-        </button>
-        <br>
-        <button class="hidden-xs hidden-sm" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor:pointer;">
-            <i class="material-icons">loupe</i>
-        </button>
-        <!-- Para o botao de fullscreen e necessario uma funcao. Veja abaixo nas configuracoes o item afterStart -->
-        <span id="i3GEOFullscreen" class="hidden-xs hidden-sm" style="cursor:pointer;" title="{{{d9}}}">
-        </span>
+
     </div>
     <!--barra de progresso que e mostrada conforme as camadas sao desenhadas no mapa. Esse elemento deve ter o id="i3GEOprogressoCamadas" -->
     <div id="i3GEOprogressoCamadas" class="progress" style="display: block; position: absolute; top: 0px; height: 5px; width: 0%; margin: auto;">

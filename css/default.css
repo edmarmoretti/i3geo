@@ -4,7 +4,6 @@
 }
 .ol-zoom {
 	position: unset !Important;
-    display: flex !Important;
 }
 
 .ol-FullScreen.ol-unselectable.ol-control  {
