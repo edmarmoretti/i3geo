@@ -632,14 +632,6 @@ $_SESSION["imgurl"] = strtolower($protocolo[0]) . "://" . $_SERVER['HTTP_HOST'] 
 $_SESSION["tmpurl"] = strtolower($protocolo[0]) . "://" . $_SERVER['HTTP_HOST'] . $atual;
 $_SESSION["map_file"] = $tmpfname;
 $_SESSION["mapext"] = $mapext;
-if (isset($executa)) {
-    if (file_exists($executa)) {
-        // include_once ($executa);
-    }
-    if (function_exists($executa)) {
-        // eval($executa."();");
-    }
-}
 if (isset($wkt)) {
     insereWKTUrl();
 }

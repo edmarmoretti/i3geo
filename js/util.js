@@ -3343,9 +3343,10 @@ i3GEO.util =
 	 *
 	 * Retorna um ID unico baseado no tempo
 	 */
-	uid : function(){
-	    return (new Date().getTime()).toString(36);
-	},
+	uid : (function () {
+	    var counter = 0;
+	    return function () {counter += 1; return (new Date().getTime()).toString(36) + counter}
+	})(),
 	/**
 	 * Function: copyToClipboard
 	 *

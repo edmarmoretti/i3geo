@@ -801,14 +801,14 @@ i3GEO.coordenadas =
 	},
 	zoomPonto: function(){
 	    var localizarxygeoProjxxx = i3GEO.calculo.dms2dd(
-		    $i('localizarxygeoProjxg').value,
-		    $i('localizarxygeoProjxm').value,
-		    $i('localizarxygeoProjxs').value
+		    $i('localizarxygeoProjxg').value*1,
+		    $i('localizarxygeoProjxm').value*1,
+		    $i('localizarxygeoProjxs').value.replace(",",".")*1
 	    );
 	    var localizarxygeoProjyyy = i3GEO.calculo.dms2dd(
-		    $i('localizarxygeoProjyg').value,
-		    $i('localizarxygeoProjym').value,
-		    $i('localizarxygeoProjys').value
+		    $i('localizarxygeoProjyg').value*1,
+		    $i('localizarxygeoProjym').value*1,
+		    $i('localizarxygeoProjys').value.replace(",",".")*1
 	    );
 	    i3GEO.navega.zoomponto(
 		    i3GEO.configura.locaplic,
@@ -816,5 +816,8 @@ i3GEO.coordenadas =
 		    localizarxygeoProjxxx,
 		    localizarxygeoProjyyy
 	    );
+	},
+	zoomPontoGeo: function(){
+	    i3GEO.coordenadas.zoomPonto();
 	}
 };

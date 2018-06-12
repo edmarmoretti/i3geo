@@ -596,13 +596,15 @@ no caso do OL3
 	cursor: pointer;
 }
 .ol-scale-line::after {
-  font-family: "Material Icons";
-  content: "\e8d5";
-  color: #336090;
-	position: absolute;
-	left: 101%;
-	top: 0px;
-	cursor: pointer;
+font-family: "Material Icons";
+content: "\e8d5";
+color: white;
+position: absolute;
+left: 101%;
+top: 0px;
+cursor: pointer;
+background-color: rgba(0,60,136,.3);
+border-radius: 4px;
 }
 
 .olControlEditingToolbar1 div {
