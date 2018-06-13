@@ -910,6 +910,7 @@ $retornaShapes - retorna os shapes selecionados. Nesse caso, nao e gerado o arqu
 		$rect->set("maxx",(max(array($temp[0],$temp[2]))));
 		$rect->set("maxy",(max(array($temp[1],$temp[3]))));
 		$ident = $this->layer->queryByRect($rect);
+		error_reporting(0);
 		if ($ident != 1){
 			$res_count = $this->layer->getNumresults();
 			//echo $res_count;exit;325449
