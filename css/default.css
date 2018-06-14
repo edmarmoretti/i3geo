@@ -697,17 +697,17 @@ Configuracoes especificas dos elementos que ficam no rodape
 	border: 0px solid white;
 }
 .localizarxy {
-	z-index : 50;
-	color: white;
-	position: absolute;
-	bottom: 2px;
-	width: 450px;
-	left: 120px;
-	text-align: left;
-	font-size: 1em;
-	display: inline;
-	height: 1.8em;
-	background: rgba(0, 60, 136, 0.5);
+z-index: 50;
+color: white;
+width: 350px;
+left: 120px;
+text-align: left;
+font-size: 1em;
+height: 1.8em;
+background: rgba(0, 60, 136, 0.5);
+bottom: 2px;
+display: flex;
+position: absolute;
 }
 .localizarxy input, .localizarxy select {
 	font-size: 1em;

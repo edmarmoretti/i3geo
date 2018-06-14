@@ -526,6 +526,8 @@ i3GEO.coordenadas =
 	    } else {
 		p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem, destino, x, y);
 	    }
+	    p.x = $.number(p.x,4,$trad("dec"),$trad("mil"));
+	    p.y = $.number(p.y,4,$trad("dec"),$trad("mil"));
 	    iu.defineValor(onde + configProj + "X", "value", p.x);
 	    iu.defineValor(onde + configProj + "Y", "value", p.y);
 	    i3GEO.coordenadas.MODOTEXTO += temp.titulo + " - X: " + p.x + " Y: " + p.y + "<br><br>";

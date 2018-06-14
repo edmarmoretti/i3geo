@@ -55,20 +55,29 @@
         <input id='i3GEOescalanum' type='text' name='' value='' size='10' title=''>
     </form>
     <!-- aqui sera incluido o gadget que mostra a coordenada geografica da posicao do mouse -->
+    <!-- barra de icones de navegacao -->
     <div data-tutorial="coordenadas" class="localizarxy fundoRodape hidden-xs hidden-sm">
-        <div class="i3GeoMascaraCoord" style="display: block;">
-            <select onchange="javascript:i3GEO.coordenadas.mudaTipo(this,'localizarxy');" class="i3geoCoordenadasComboTipo">
-                <option>DMS:</option>
-                <option value="janela">janela</option>
-                <option value="geoProj">DMS</option>
-                <option value="dd">Dec. de grau</option>
-                <option value="geohash">GeoHash</option>
-                <option value="policonicaSad69">Polic SAD-69</option>
-                <option value="utmSad69Proj">UTM Sad-69</option>
-                <option value="utmSirgas2000Proj">UTM Sirgas</option>
-            </select>
+        <div class="dropdown dropup">
+            <a style="color: white;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
+            </a>
+            <ul class="dropdown-menu dropdown-menu">
+                <li><a onclick="i3GEO.coordenadas.mudaTipo({value:'geoProj'},'localizarxy')" href="javascript:void(0)"> DMS </a></li>
+                <li><a onclick="i3GEO.coordenadas.mudaTipo({value:'janela'},'localizarxy')" href="javascript:void(0)"> Janela </a></li>
+                <li><a onclick="i3GEO.coordenadas.mudaTipo({value:'dd'},'localizarxy')" href="javascript:void(0)"> Dec. de grau </a></li>
+                <li><a onclick="i3GEO.coordenadas.mudaTipo({value:'geohash'},'localizarxy')" href="javascript:void(0)"> GeoHash </a></li>
+                <li><a onclick="i3GEO.coordenadas.mudaTipo({value:'utmSirgas2000Proj'},'localizarxy')" href="javascript:void(0)"> UTM Sirgas </a></li>
+                <!--
+                <li><a onclick="i3GEO.coordenadas.mudaTipo({value:'utmSad69Proj'},'localizarxy')" href="javascript:void(0)">
+                        UTM Sad-69
+                    </a></li>
+                <li><a onclick="i3GEO.coordenadas.mudaTipo({value:'policonicaSad69'},'localizarxy')" href="javascript:void(0)">
+                        Polic SAD-69
+                    </a></li>
+                 -->
+            </ul>
         </div>
-        <div class="i3GeoMascaraCoord" id="localizarxygeoProj" style="display: block; position: absolute; top: 0px; left: 60px;">
+        <div class="i3GeoMascaraCoord" id="localizarxygeoProj" style="display: block; position: absolute; top: 0px; left: 30px;">
             X:
             <input name="" value="-00" size="3" title="grau" id="localizarxygeoProjxg" type="text">
             <input name="" value="00" size="2" title="minuto" id="localizarxygeoProjxm" type="text">
@@ -113,7 +122,6 @@
             <input name="" value="--" size="2" title="Zona" id="localizarxyutmSirgas2000ProjZN" type="text">
         </div>
     </div>
-    <!-- barra de icones de navegacao -->
     <div class="ol-i3GEOcontrols ol-control" data-traduzir="true">
         <button onclick="$('.ol-i3GEOcontrols .toggle').toggle();" style="float: left;">
             <i class="material-icons">menu</i>
