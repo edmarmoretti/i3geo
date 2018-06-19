@@ -672,7 +672,7 @@ i3GEO.mapa =
 	     */
 	    opacidade : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.opacidade()",
+			"i3GEO.mapa.dialogo.opacidademapa()",
 			"opacidademapa",
 			"opacidademapa",
 			"dependencias.php",

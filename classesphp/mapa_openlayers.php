@@ -227,6 +227,9 @@ for ($i = 0; $i < $numlayers; ++ $i) {
             $cortePixels = $l->getmetadata("cortepixels");
         }
         $l->set("status", MS_DEFAULT);
+        //a opacidade e controlada pela aplicacao
+        //a renderiazacao e sempre com opacidade 1
+        $l->updateFromString('LAYER COMPOSITE OPACITY 100 END END');
         $l->set("template", "none.htm");
         if (! empty($postgis_mapa)) {
             if ($l->connectiontype == MS_POSTGIS) {
@@ -341,7 +344,7 @@ if (isset($_GET["REQUEST"])) {
     }
 }
 $o = $mapa->outputformat;
-$o->set("imagemode", MS_IMAGEMODE_RGBA);
+//$o->set("imagemode", MS_IMAGEMODE_RGBA);
 $o->set("transparent", MS_TRUE);
 $legenda = $mapa->legend;
 $legenda->set("status", MS_OFF);

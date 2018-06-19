@@ -127,15 +127,14 @@
             <i class="material-icons">menu</i>
         </button>
         <!-- Para o botao de fullscreen e necessario uma funcao. Veja abaixo nas configuracoes o item afterStart -->
-        <span id="i3GEOFullscreen" style="cursor:pointer;" title="{{{d9}}}">
-        </span>
-        <button class="toggle" data-tutorial="referencia" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left;cursor:pointer;display:none;">
+        <span id="i3GEOFullscreen" style="cursor: pointer;" title="{{{d9}}}"> </span>
+        <button class="toggle" data-tutorial="referencia" title="{{{d9}}}" onclick="i3GEO.maparef.inicia()" style="float: left; cursor: pointer; display: none;">
             <i class="material-icons">picture_in_picture</i>
         </button>
         <br>
         <div class="clearfix"></div>
-        <span id="i3GEOzoomInOut" style="cursor:pointer;"></span>
-        <button class="toggle" title="Spy" onclick="i3GEO.navega.basemapSpy.start()" style="float: left; cursor:pointer;display:none;">
+        <span id="i3GEOzoomInOut" style="cursor: pointer;"></span>
+        <button class="toggle" title="Spy" onclick="i3GEO.navega.basemapSpy.start()" style="float: left; cursor: pointer; display: none;">
             <i class="material-icons">highlight</i>
         </button>
         <br>
@@ -145,7 +144,7 @@
         <button onclick="i3GEO.Interface.zoomli()" data-tutorial="barranavegacao" style="float: left;">
             <i class="material-icons">zoom_in</i>
         </button>
-        <button class="toggle" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor:pointer;display:none;">
+        <button class="toggle" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor: pointer; display: none;">
             <i class="material-icons">loupe</i>
         </button>
         <br>
@@ -155,11 +154,11 @@
         <button title="{{{avanca}}}" onclick="i3GEO.navega.extensaoProximo()" style="float: left;">
             <i class="material-icons">redo</i>
         </button>
-        <button class="toggle" data-tutorial="marcador" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left;display:none;">
+        <button class="toggle" data-tutorial="marcador" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left; display: none;">
             <i class="material-icons">bookmark_border</i>
         </button>
         <br>
-        <button class="toggle" title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left;display:none;">
+        <button class="toggle" title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left; display: none;">
             <i class="material-icons">grid_on</i>
         </button>
 
@@ -288,7 +287,7 @@
                                         <span class="glyphicon glyphicon-filter"></span> {{{t2a}}}
                                     </a></li>
                                 <li role="separator" class="divider"></li>
-                                <li><a onclick="i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)">
+                                <li><a onclick="i3GEO.temaAtivo='';i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)">
                                         <span class="glyphicon glyphicon-adjust"></span> {{{t20}}}
                                     </a></li>
                                 <li><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)">

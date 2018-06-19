@@ -1,0 +1,60 @@
+<div class="rangeScale{{{rangeScale}}} list-group condensed" style="cursor: move;">
+    <div class="checkbox text-left">
+        <label class="rangeScale{{{rangeScale}}} {{{classeCss}}}" style="width: 270px"> <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
+            {{{checked}}} onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);"> <span class="checkbox-material noprint"><span
+                class="check"></span></span> {{{iconetema}}} {{{tema}}} <small>{{{rangeScaleMsg}}}</small>
+
+        </label>
+        <a data-target="#collapse{{{name}}}" class="pull-right collapsed" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button" data-toggle="collapse">
+        </a>
+    </div>
+    <div style="margin-left: 30px;" class="collapse text-left" id="collapse{{{name}}}">
+        <!-- icones que trazem informacoes sobre o tema -->
+        <!-- farol que indica a relacao com a escala do mapa -->
+        <span title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color: {{{farol}}}"></span>
+        <!-- indica se os elementos da camada sao dependentes da escala do mapa -->
+        <span title="{{{contextoescalaTitle}}}" class="glyphicon glyphicon-alert {{{contextoescala}}}" style="color: orange;"></span>
+        <!-- links para formularios que sao especificos de cada plugin do i3Geo  e de ferramentas salvas na camada-->
+        {{{iconeFerramentas}}} {{{iconePlugin}}}
+
+        <!-- links -->
+        <!-- ferramentas -->
+        <p>
+            <a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.atalhoscamada('{{{name}}}')" title="{{{ferramentasTitle}}}">{{{ferramentasTexto}}}</a>
+            <!-- remover -->
+        <p>
+            <a href="javascript:void(0)" onclick="i3GEO.tema.exclui('{{{name}}}',true)" title="{{{removerTitle}}}">{{{removerTexto}}}</a>
+            <!-- sobe -->
+        <p>
+            <a href="javascript:void(0)" onclick="i3GEO.tema.sobe('{{{name}}}')" title="{{{sobeTitle}}}">{{{sobeTexto}}}</a>
+            <!-- desce -->
+        <p>
+            <a href="javascript:void(0)" onclick="i3GEO.tema.desce('{{{name}}}')" title="{{{desceTitle}}}">{{{desceTexto}}}</a>
+            <!-- tabela de atributos -->
+        <p>
+            <a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}">{{{tabelaTexto}}}</a>
+            <!-- editor de legenda -->
+        <p>
+            <a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')">{{{editorlegendaTexto}}}</a>
+            <!-- zoom para o tema -->
+        <p>
+            <a class="{{{zoomtema}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoom('{{{name}}}')" title="{{{zoomtemaTitle}}}">{{{zoomtemaTexto}}}</a>
+            <!-- limpa a selecao -->
+        <p>
+            <a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')" title="{{{selTitle}}}">{{{selTexto}}}</a>
+            <!-- zoom para a selecao -->
+        <p>
+            <a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')">{{{zoomSelTexto}}}</a>
+            <!-- metadados -->
+        <p>
+            <a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')" title="{{{linkTitle}}}">{{{linkTexto}}}</a>
+            <!-- download -->
+        <p>
+            <a class="{{{download}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.download('{{{name}}}')" title="{{{downloadTitle}}}">{{{downloadTexto}}}</a>
+            <!-- ogc -->
+        <p>
+            <a class="{{{permiteogc}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.ogcwindow('{{{name}}}')">{{{permiteogcTexto}}}</a>
+    </div>
+    <div class="clearfix"></div>
+    <hr>
+</div>

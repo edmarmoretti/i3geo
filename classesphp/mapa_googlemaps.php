@@ -199,6 +199,9 @@ for ($i = 0; $i < $numlayers; ++ $i) {
         $l->set("maxscaledenom", $l->maxscaledenom * 100000);
         $l->set("minscaledenom", $l->minscaledenom * 100000);
         $l->set("symbolscaledenom", $l->symbolscaledenom * 100000);
+        //a opacidade e controlada pela aplicacao
+        //a renderiazacao e sempre com opacidade 1
+        $l->updateFromString('LAYER COMPOSITE OPACITY 100 END END');
         if ($l->getmetadata("classesnome") != "" || $l->getmetadata("palletefile") != "") {
             autoClasses($l, $mapa);
         }
@@ -297,18 +300,12 @@ $mapa->setsize($_GET["WIDTH"], $_GET["HEIGHT"]);
 $mapext = explode(" ", $_GET["mapext"]);
 $mapa->setExtent($mapext[0], $mapext[1], $mapext[2], $mapext[3]);
 $o = $mapa->outputformat;
-$o->set("imagemode", MS_IMAGEMODE_RGBA);
-
+//$o->set("imagemode", MS_IMAGEMODE_RGBA);
+$o->set("transparent", MS_TRUE);
 $legenda = $mapa->legend;
 $legenda->set("status", MS_OFF);
 $escala = $mapa->scalebar;
 $escala->set("status", MS_OFF);
-//
-// se o layer nao for do tipo fundo
-//
-if ($_GET["tipolayer"] != "fundo") {
-    $o->set("transparent", MS_TRUE);
-}
 if (trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum") {
     $o->setOption("QUANTIZE_FORCE", "OFF");
 }

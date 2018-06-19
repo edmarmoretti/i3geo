@@ -114,18 +114,18 @@ i3GEO.arvoreDeCamadas =
 		    i3GEO.template.camada = "";
 		}
 		$.ajax(t2).always(function(r2) {
-			i3GEO.template.camadaFundo = r2;
-			if(r2.status){
-			    i3GEO.template.camadaFundo = "";
+		    i3GEO.template.camadaFundo = r2;
+		    if(r2.status){
+			i3GEO.template.camadaFundo = "";
+		    }
+		    $.ajax(t3).always(function(r3) {
+			i3GEO.template.camadaGr = r3;
+			if(r3.status){
+			    i3GEO.template.camadaGr = "";
 			}
-			$.ajax(t3).always(function(r3) {
-				i3GEO.template.camadaGr = r3;
-				if(r3.status){
-				    i3GEO.template.camadaGr = "";
-				}
-				i3GEO.arvoreDeCamadas.inicia();
-			    });
+			i3GEO.arvoreDeCamadas.inicia();
 		    });
+		});
 	    });
 	},
 	inicia : function(config) {
@@ -564,6 +564,11 @@ i3GEO.arvoreDeCamadas =
 	    //A inclusao das opcoes e feita com base no template usado na interface
 	    //a classe hidden permite esconder o icone
 	    //
+	    vetor = "hidden";
+	    if ((temaObj.type < 3) && (temaObj.connectiontype !== 7)){
+		vetor = "";
+	    }
+	    camada.isnotvetor = vetor;
 	    camada.ferramentasTexto = $trad("u15a");
 	    camada.ferramentasTitle = $trad("ferramCamadas");
 	    camada.removerTexto = $trad("t12");
@@ -574,7 +579,27 @@ i3GEO.arvoreDeCamadas =
 	    camada.desceTitle = $trad("t16");
 	    camada.tabelaTexto = $trad("tabela");
 	    camada.tabelaTitle = $trad("t30");
+	    camada.limpaselTexto = $trad("t4");
+	    camada.zoomSelTexto = $trad("t4a");
+	    camada.linkTexto = $trad("a9");
 	    camada.editorlegendaTexto = $trad("t33");
+	    camada.procurarTexto = $trad("t23");
+	    camada.topoTexto = $trad("t25");
+	    camada.etiquetasTexto = $trad("t27");
+	    camada.filtroTexto = $trad("t29");
+	    camada.selecaoTexto = $trad("x51");
+	    camada.graficoTexto = $trad("t37");
+	    camada.wmsTexto = "WMS-OGC";
+	    camada.tmeTexto = $trad("t49");
+	    camada.topoTexto = $trad("x56");
+	    camada.nomeCamada = camada.tema;
+	    camada.opaCamada = camada.transparency;
+	    camada.editorlegendaTexto = $trad("t33");
+	    camada.coresTexto = $trad("esquemadecores");
+	    camada.copiaTexto = $trad("copiaCamada");
+	    camada.contornoTexto = $trad("contorno");
+	    camada.opacidade = $trad("t20");
+	    camada.opaCamada = temaObj.transparency;
 
 	    if (temaObj.zoomtema.toLowerCase() === "sim"){
 		camada.zoomtemaTexto = $trad("t17");
@@ -617,6 +642,7 @@ i3GEO.arvoreDeCamadas =
 	    //a classe hidden permite esconder o icone
 	    //
 	    //farol de escala
+	    camada.farol = "hidden";
 	    if (temaObj.escala != 0) {
 		if (temaObj.escala * 1 < i3GEO.parametros.mapscale * 1) {
 		    camada.farol = "green";
@@ -630,8 +656,6 @@ i3GEO.arvoreDeCamadas =
 		    camada.farol = "yellow";
 		    camada.farolTitle = $trad("t11");
 		}
-	    } else {
-		camada.farol = "hidden";
 	    }
 	    if (temaObj.contextoescala.toLowerCase() === "sim") {
 		camada.contextoescala = "";
@@ -681,24 +705,32 @@ i3GEO.arvoreDeCamadas =
 
 	    // YAHOO.log("Atualizando o farol da &aacute;rvore de camadas",
 	    // "i3geo");
-	    var farol, l, ltema, escala, iu = i3GEO.util, im = i3GEO.configura.locaplic + "/imagens/", camadas =
+	    var cor,farol, l, ltema, escala, iu = i3GEO.util, im = i3GEO.configura.locaplic + "/imagens/", camadas =
 		i3GEO.arvoreDeCamadas.CAMADAS;
 	    farol = "maisamarelo.png";
+	    cor = "yellow";
 	    l = camadas.length - 1;
 	    if (l >= 0) {
 		do {
 		    ltema = camadas[l];
 		    escala = ltema.escala;
-		    if (escala * 1 < mapscale * 1) {
-			farol = "maisverde.png";
+		    if (escala != 0){
+			if (escala * 1 < mapscale * 1) {
+			    farol = "maisverde.png";
+			    cor = "green";
+			}
+			if (escala * 1 > mapscale * 1) {
+			    farol = "maisvermelho.png";
+			    cor = "red";
+			}
+			if (escala * 1 === 0) {
+			    farol = "maisamarelo.png";
+			    cor = "yellow";
+			}
+			//iu.defineValor("farol" + ltema.name, "src", im + farol);
+			//iu.defineValor("farol" + ltema.name, "src", im + farol);
+			$("#farol" + ltema.name).css("color",cor);
 		    }
-		    if (escala * 1 > mapscale * 1) {
-			farol = "maisvermelho.png";
-		    }
-		    if (escala * 1 === 0) {
-			farol = "maisamarelo.png";
-		    }
-		    iu.defineValor("farol" + ltema.name, "src", im + farol);
 		} while (l--);
 	    }
 	},
@@ -900,9 +932,9 @@ i3GEO.arvoreDeCamadas =
 		return (true);
 	    } catch (e) {
 		if (typeof (console) !== 'undefined')
-			console.error(e.message)
+		    console.error(e.message)
 
-		return true;
+		    return true;
 	    }
 	},
 	/**
@@ -1066,9 +1098,9 @@ i3GEO.arvoreDeCamadas =
 		}
 	    } catch (e) {
 		if (typeof (console) !== 'undefined')
-			console.error(e.message)
+		    console.error(e.message)
 
-		return "";
+		    return "";
 	    }
 	    return temp;
 	},
@@ -1097,51 +1129,51 @@ i3GEO.arvoreDeCamadas =
 	/**
 	 * Guarda um objeto contendo as definicoes das camadas conforme o padrao utilizado pela arvore de camadas
 	 */
-	 registaCamadas : function(obj) {
-	     if (typeof (console) !== 'undefined')
-		 console.info("i3GEO.arvoreDeCamadas.registaCamadas()");
+	registaCamadas : function(obj) {
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.arvoreDeCamadas.registaCamadas()");
 
-	     var i;
-	     obj = i3GEO.arvoreDeCamadas.converteChaveValor2normal(obj);
-	     i3GEO.arvoreDeCamadas.CAMADAS = obj;
-	     i3GEO.arvoreDeCamadas.CAMADASINDEXADAS = [];
-	     $.each( i3GEO.arvoreDeCamadas.CAMADAS, function( i,tema ) {
-		 i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[tema.name] = tema;
-	     });
-	 },
-	 /**
-	  * Section: i3GEO.arvoreDeCamadas.dialogo
-	  *
-	  * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de manipula&ccedil;&atilde;o da &aacute;rvore
-	  */
-	 dialogo : {
-	     /**
-	      * Function: filtro
-	      *
-	      * Abre a janela de di&aacute;logo para o usu&aacute;rio escolher ou alterar o filtro aplicado a &aacute;rvore
-	      */
-	     filtro : function() {
-		 i3GEO.util.dialogoFerramenta(
-			 "i3GEO.arvoreDeCamadas.dialogo.filtro()",
-			 "filtroarvore",
-			 "filtroarvore",
-			 "dependencias.php",
-			 "i3GEOF.filtroarvore.iniciaJanelaFlutuante()"
-		 );
-	     },
-	     /**
-	      * Function: excluir
-	      *
-	      * Abre a janela de di&aacute;logo para o usu&aacute;rio escolher os temas que ser&atilde;o exclu&iacute;dos da &aacute;rvore
-	      */
-	     excluir : function() {
-		 i3GEO.util.dialogoFerramenta(
-			 "i3GEO.arvoreDeCamadas.dialogo.excluir()",
-			 "excluirarvore",
-			 "excluirarvore",
-			 "dependencias.php",
-			 "i3GEOF.excluirarvore.iniciaJanelaFlutuante()"
-		 );
-	     }
-	 }
+	    var i;
+	    obj = i3GEO.arvoreDeCamadas.converteChaveValor2normal(obj);
+	    i3GEO.arvoreDeCamadas.CAMADAS = obj;
+	    i3GEO.arvoreDeCamadas.CAMADASINDEXADAS = [];
+	    $.each( i3GEO.arvoreDeCamadas.CAMADAS, function( i,tema ) {
+		i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[tema.name] = tema;
+	    });
+	},
+	/**
+	 * Section: i3GEO.arvoreDeCamadas.dialogo
+	 *
+	 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de manipula&ccedil;&atilde;o da &aacute;rvore
+	 */
+	dialogo : {
+	    /**
+	     * Function: filtro
+	     *
+	     * Abre a janela de di&aacute;logo para o usu&aacute;rio escolher ou alterar o filtro aplicado a &aacute;rvore
+	     */
+	    filtro : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.arvoreDeCamadas.dialogo.filtro()",
+			"filtroarvore",
+			"filtroarvore",
+			"dependencias.php",
+			"i3GEOF.filtroarvore.iniciaJanelaFlutuante()"
+		);
+	    },
+	    /**
+	     * Function: excluir
+	     *
+	     * Abre a janela de di&aacute;logo para o usu&aacute;rio escolher os temas que ser&atilde;o exclu&iacute;dos da &aacute;rvore
+	     */
+	    excluir : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.arvoreDeCamadas.dialogo.excluir()",
+			"excluirarvore",
+			"excluirarvore",
+			"dependencias.php",
+			"i3GEOF.excluirarvore.iniciaJanelaFlutuante()"
+		);
+	    }
+	}
 };

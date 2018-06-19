@@ -1,3 +1,18 @@
+.I3GEOpropCamadas {
+	overflow: auto;
+	position: fixed;
+	margin: auto;
+	right: 375px;
+	height: auto;
+	top: 0px;
+	bottom: 0px;
+	width: 200px;
+	left: auto;
+	background-color: #b0cef6;
+	color: white;
+	border-radius: unset;
+	box-shadow: unset;
+}
 /* para evitar erros no logo de atribuicao quando nao ha mapa base ativado */
 .ol-logo-only {
 	visibility: hidden;
@@ -1601,11 +1616,17 @@ ver exemplos em https://bootsnipp.com/snippets/featured/glyphicon-animate-rotati
 	.tooltip-inner,.ol-i3GEOcontrols.ol-control {
 		display: none;
 	}
-
+	.I3GEOpropCamadas {
+		right: 0px;
+		width: 280px;
+	}
 }
 /* === For meio phones =================================== */
 @media ( min-width : 480px) and (max-width:767px) {
-
+	.I3GEOpropCamadas {
+		right: 0px;
+		width: 280px;
+	}
 }
 /* === For tablets ================================== */
 @media ( min-width : 768px) and (max-width:991px) {

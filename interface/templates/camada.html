@@ -1,60 +1,94 @@
-<div class="rangeScale{{{rangeScale}}} list-group condensed" style="cursor: move;">
-    <div class="checkbox text-left">
-        <label class="rangeScale{{{rangeScale}}} {{{classeCss}}}" style="width: 270px"> <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
-            {{{checked}}} onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);"> <span class="checkbox-material noprint"><span
-                class="check"></span></span> {{{iconetema}}} {{{tema}}} <small>{{{rangeScaleMsg}}}</small>
+<div class="rangeScale{{{rangeScale}}} list-group condensed" style="margin: 10px; cursor: move;">
+    <div class="dropdown" style="display: inline; vertical-align: top;">
+        <button class="btn btn-default btn-xs dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+            style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; padding-left: 5px; padding-right: 5px;">
+            <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
+        </button>
+        <ul class="dropdown-menu I3GEOpropCamadas">
+            <li><a onclick="i3GEO.temaAtivo='{{{name}}}';i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)">
+                    <span class="glyphicon glyphicon-adjust"></span> {{{opacidade}}}
+                </a></li>
+
+            <li><a href="javascript:void(0)" onclick="i3GEO.tema.exclui('{{{name}}}',true)" title="{{{removerTitle}}}">
+                    <span class="glyphicon glyphicon-trash"></span> {{{removerTexto}}}
+                </a></li>
+            <li><a href="javascript:void(0)" onclick="i3GEO.tema.sobe('{{{name}}}')" title="{{{sobeTitle}}}">
+                    <span class="glyphicon glyphicon-menu-up"></span> {{{sobeTexto}}}
+                </a></li>
+            <li><a href="javascript:void(0)" onclick="i3GEO.tema.desce('{{{name}}}')" title="{{{desceTitle}}}">
+                    <span class="glyphicon glyphicon-menu-down"></span> {{{desceTexto}}}
+                </a></li>
+            <li><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}">
+                    <span class="glyphicon glyphicon-list-alt"></span> {{{tabelaTexto}}}
+                </a></li>
+            <li><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')">
+                    <span class="glyphicon glyphicon-th-list"></span> {{{editorlegendaTexto}}}
+                </a></li>
+            <li><a class="{{{zoomtema}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoom('{{{name}}}')" title="{{{zoomtemaTitle}}}">
+                    <span class="glyphicon glyphicon-fullscreen"></span> {{{zoomtemaTexto}}}
+                </a></li>
+            <li><a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')" title="{{{selTitle}}}">
+                    <span class="glyphicon glyphicon-erase"></span> {{{limpaselTexto}}}
+                </a></li>
+            <li><a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')">
+                    <span class="glyphicon glyphicon-fullscreen"></span> {{{zoomSelTexto}}}
+                </a></li>
+            <li><a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')" title="{{{linkTitle}}}">
+                    <span class="glyphicon glyphicon-file"></span> {{{linkTexto}}}
+                </a></li>
+            <li><a class="{{{download}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.download('{{{name}}}')" title="{{{downloadTitle}}}">
+                    <span class="glyphicon glyphicon-cloud-download"></span> {{{downloadTexto}}}
+                </a></li>
+            <li><a class="{{{permiteogc}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.ogcwindow('{{{name}}}')">
+                    <span class="glyphicon glyphicon-cloud"></span> WMS-OGC
+                </a></li>
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.procuraratrib('{{name}}')" class='{{isnotvetor}} '>
+                    <span class="glyphicon glyphicon-search"></span> {{{procurarTexto}}}
+                </a></li>
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.copia('{{name}}')" class=''>
+                    <span class="glyphicon glyphicon-duplicate"></span> {{{copiaTexto}}}
+                </a></li>
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.toponimia('{{name}}')" class='{{isnotvetor}} '>
+                    <span class="glyphicon glyphicon-font"></span> {{{topoTexto}}}
+                </a></li>
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.etiquetas('{{name}}')" class='{{isnotvetor}} '>
+                    <span class="glyphicon glyphicon-tag"></span> {{{etiquetasTexto}}}
+                </a></li>
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.filtro('{{name}}')" class='{{isnotvetor}} '>
+                    <span class="glyphicon glyphicon-filter"></span> {{{filtroTexto}}}
+                </a></li>
+            <li><a href='javascript:void(0)' onclick="i3GEO.mapa.dialogo.selecao()" class='{{isnotvetor}} '>
+                    <span class="glyphicon glyphicon-hand-up"></span> {{{selecaoTexto}}}
+                </a></li>
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.graficotema('{{name}}')" class='{{isnotvetor}} '>
+                    <span class="glyphicon glyphicon-stats"></span> {{{graficoTexto}}}
+                </a></li>
+            <!-- incluir na legenda e nao aqui
+            <li><a href='javascript:void(0)' onclick="i3GEOF.atalhoscamada.mudaCor('{{{idjanela}}}')" class='{{isnotvetor}} '>
+                    <span class="glyphicon glyphicon-tint"></span> {{{coresTexto}}}
+                </a></li>
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.contorno('{{name}}')" class='{{isnotvetor}} '>
+                    <span class="glyphicon glyphicon-check"></span> {{{contornoTexto}}}
+                </a></li>
+                 -->
+        </ul>
+    </div>
+    <div class="checkbox" style="display: inline;">
+        <label class="rangeScale{{{rangeScale}}} {{{classeCss}}}" style="width: calc(100% - 50px)">
+            <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
+                {{{checked}}} onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
+            <span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} <span style="cursor:move;">{{{tema}}}</span>
+            <!-- icones que trazem informacoes sobre o tema -->
+            <!-- farol que indica a relacao com a escala do mapa -->
+            <span id="farol{{name}}" title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color: {{{farol}}}"></span>
+            <!-- indica se os elementos da camada sao dependentes da escala do mapa -->
+            <span title="{{{contextoescalaTitle}}}" class="glyphicon glyphicon-alert {{{contextoescala}}}" style="color: orange;"></span>
+            <!-- links para formularios que sao especificos de cada plugin do i3Geo  e de ferramentas salvas na camada-->
+            {{{iconeFerramentas}}} {{{iconePlugin}}}
         </label>
-        <a data-target="#collapse{{{name}}}" class="pull-right collapsed" style="margin-top: 0px; padding-top: 0px; padding-bottom: 0px;" type="button" data-toggle="collapse">
-
-        </a>
     </div>
-    <div style="margin-left: 30px;" class="collapse text-left" id="collapse{{{name}}}">
-        <!-- icones que trazem informacoes sobre o tema -->
-        <!-- farol que indica a relacao com a escala do mapa -->
-        <span title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color: {{{farol}}}"></span>
-        <!-- indica se os elementos da camada sao dependentes da escala do mapa -->
-        <span title="{{{contextoescalaTitle}}}" class="glyphicon glyphicon-alert {{{contextoescala}}}" style="color: orange;"></span>
-        <!-- links para formularios que sao especificos de cada plugin do i3Geo  e de ferramentas salvas na camada-->
-        {{{iconeFerramentas}}} {{{iconePlugin}}}
 
-        <!-- links -->
-        <!-- ferramentas -->
-        <p>
-            <a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.atalhoscamada('{{{name}}}')" title="{{{ferramentasTitle}}}">{{{ferramentasTexto}}}</a>
-            <!-- remover -->
-        <p>
-            <a href="javascript:void(0)" onclick="i3GEO.tema.exclui('{{{name}}}',true)" title="{{{removerTitle}}}">{{{removerTexto}}}</a>
-            <!-- sobe -->
-        <p>
-            <a href="javascript:void(0)" onclick="i3GEO.tema.sobe('{{{name}}}')" title="{{{sobeTitle}}}">{{{sobeTexto}}}</a>
-            <!-- desce -->
-        <p>
-            <a href="javascript:void(0)" onclick="i3GEO.tema.desce('{{{name}}}')" title="{{{desceTitle}}}">{{{desceTexto}}}</a>
-            <!-- tabela de atributos -->
-        <p>
-            <a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}">{{{tabelaTexto}}}</a>
-            <!-- editor de legenda -->
-        <p>
-            <a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')">{{{editorlegendaTexto}}}</a>
-            <!-- zoom para o tema -->
-        <p>
-            <a class="{{{zoomtema}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoom('{{{name}}}')" title="{{{zoomtemaTitle}}}">{{{zoomtemaTexto}}}</a>
-            <!-- limpa a selecao -->
-        <p>
-            <a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')" title="{{{selTitle}}}">{{{selTexto}}}</a>
-            <!-- zoom para a selecao -->
-        <p>
-            <a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')">{{{zoomSelTexto}}}</a>
-            <!-- metadados -->
-        <p>
-            <a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')" title="{{{linkTitle}}}">{{{linkTexto}}}</a>
-            <!-- download -->
-        <p>
-            <a class="{{{download}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.download('{{{name}}}')" title="{{{downloadTitle}}}">{{{downloadTexto}}}</a>
-            <!-- ogc -->
-        <p>
-            <a class="{{{permiteogc}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.ogcwindow('{{{name}}}')">{{{permiteogcTexto}}}</a>
-    </div>
     <div class="clearfix"></div>
-    <hr>
 </div>
+
+<hr>

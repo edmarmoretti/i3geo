@@ -3107,5 +3107,20 @@ g_traducao =
             pt : "Tela cheia",
             en : "",
             es : ""
+        }],
+        "esquemadecores" : [{
+            pt : "Esquema de cores",
+            en : "Color schema",
+            es : "Esquema de colores"
+        }],
+        "copiaCamada" : [{
+            pt : "C&oacute;pia da camada",
+            en : "Layer copy",
+            es : "Copia de la capa"
+        }],
+        "contorno" : [{
+            pt : "Contorno",
+            en : "Outline",
+            es : "Contorno"
         }]
     };
