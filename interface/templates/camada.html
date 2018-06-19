@@ -5,10 +5,15 @@
             <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
         </button>
         <ul class="dropdown-menu I3GEOpropCamadas">
-            <li><a onclick="i3GEO.temaAtivo='{{{name}}}';i3GEO.mapa.dialogo.opacidade()" href="javascript:void(0)">
-                    <span class="glyphicon glyphicon-adjust"></span> {{{opacidade}}}
-                </a></li>
-
+            <li class="container-fluid form-group">
+                <form onsubmit="console.log(this);i3GEO.tema.mudanome('{{{name}}}',this[0].value);return false;" action="">
+                    <input style="color: black;" class="form-control" type='text' value='{{{nomeCamada}}}' />
+                </form>
+            </li>
+            <li style="margin-top:0px;" class="container-fluid form-group">
+                <label class="control-label"> {{{opacidade}}}</label>
+                <input style="background:none;" onChange="i3GEO.Interface.aplicaOpacidade(this.value,'{{{name}}}')" type="range" min="1" max="100" value="{{opaCamada}}" class="slider" >
+            </li>
             <li><a href="javascript:void(0)" onclick="i3GEO.tema.exclui('{{{name}}}',true)" title="{{{removerTitle}}}">
                     <span class="glyphicon glyphicon-trash"></span> {{{removerTexto}}}
                 </a></li>
@@ -77,10 +82,10 @@
         <label class="rangeScale{{{rangeScale}}} {{{classeCss}}}" style="width: calc(100% - 50px)">
             <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
                 {{{checked}}} onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
-            <span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} <span style="cursor:move;">{{{tema}}}</span>
+            <span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} <span style="cursor: move;">{{{tema}}}</span>
             <!-- icones que trazem informacoes sobre o tema -->
             <!-- farol que indica a relacao com a escala do mapa -->
-            <span id="farol{{name}}" title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color: {{{farol}}}"></span>
+            <span id="farol{{name}}" title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color: {{{farol"></span>
             <!-- indica se os elementos da camada sao dependentes da escala do mapa -->
             <span title="{{{contextoescalaTitle}}}" class="glyphicon glyphicon-alert {{{contextoescala}}}" style="color: orange;"></span>
             <!-- links para formularios que sao especificos de cada plugin do i3Geo  e de ferramentas salvas na camada-->

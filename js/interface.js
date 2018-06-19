@@ -951,6 +951,19 @@ i3GEO.Interface =
 	     * Aplica um valor de opacidade aos layers do mapa
 	     */
 	    aplicaOpacidade : function(opacidade, layer) {
+		if (typeof (console) !== 'undefined')
+			console.info("i3GEO.Interface.aplicaOpacidade");
+
+		if(opacidade > 1){
+		    opacidade = opacidade / 100;
+		}
+
+		if(layer){
+		    i3geoOL.getLayersByName(layer)[0].setOpacity(opacidade*1);
+		    return;
+		} else {
+		    layer = "";
+		}
 		var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length, l, i, camada;
 		if (!layer) {
 		    layer = "";

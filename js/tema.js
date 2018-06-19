@@ -303,6 +303,9 @@ i3GEO.tema =
 	 * {string} - codigo do tema
 	 */
 	mudanome : function(idtema,valor) {
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.tema.mudanome() " + valor);
+
 	    i3GEO.mapa.ativaTema(idtema);
 	    if (!valor) {
 		return;
