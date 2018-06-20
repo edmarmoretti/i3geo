@@ -816,9 +816,9 @@ g_traducao =
         ],
         "t42" : [
             {
-                pt : "Efeito cortina",
-                en : "Curtain efect",
-                es : "Efecto Cortina"
+                pt : "Cortina",
+                en : "Curtain",
+                es : "Cortina"
             }
         ],
         "t43" : [

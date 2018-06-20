@@ -386,6 +386,47 @@ i3GEO.tema =
 		}
 	    }
 	},
+	cortina : {
+	    _cortinaCompose: "",
+	    _slide: "",
+	    start : function(obj,tema){
+		if (typeof (console) !== 'undefined')
+		    console.info("i3GEO.tema.cortina.start()");
+
+		var layer = i3geoOL.getLayersByName(tema)[0];
+
+		if(i3GEO.tema.cortina._cortinaCompose == ""){
+		    var a = layer.on('precompose', function(event) {
+			var ctx = event.context;
+			var width = ctx.canvas.width * (obj.value / 100);
+			ctx.save();
+			ctx.beginPath();
+			ctx.rect(width, 0, ctx.canvas.width - width, ctx.canvas.height);
+			ctx.clip();
+		    });
+
+		    var b = layer.on('postcompose', function(event) {
+			var ctx = event.context;
+			ctx.restore();
+		    });
+
+		    i3GEO.tema.cortina._cortinaCompose = [a,b];
+
+		    obj.addEventListener('input', function() {
+			i3geoOL.render();
+		      }, false);
+		}
+	    },
+	    stop : function(){
+		if (typeof (console) !== 'undefined')
+		    console.info("i3GEO.tema.cortina.stop()");
+
+		ol.Observable.unByKey(i3GEO.tema.cortina._cortinaCompose);
+		i3GEO.tema.cortina._cortinaCompose = "";
+		//i3GEO.tema.cortina._slide.value = 50;
+		i3geoOL.renderSync();
+	    }
+	},
 	/**
 	 * Section: i3GEO.tema.dialogo
 	 *
@@ -499,33 +540,8 @@ i3GEO.tema =
 			+ "/ajuda_usuario.php?idcategoria=7&idajuda=68' ><b> </b></a>",
 			"comentario" + Math.random());
 	    },
-	    /**
-	     * Function: cortina
-	     *
-	     * Abre a janela de dialogo da ferramenta cortina
-	     *
-	     * Parametros:
-	     *
-	     * {string} - codigo do tema escolhido
-	     *
-	     */
-	    cortina : function(idtema) {
-		if(idtema && idtema != ""){
-		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
-		    if(t.status < 2){
-			i3GEO.janela.tempoMsg($trad("deveLigada"));
-			return;
-		    }
-		    i3GEO.mapa.ativaTema(idtema);
-		}
 
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.tema.dialogo.cortina()",
-			"cortina",
-			"cortina",
-			"dependencias.php",
-		"i3GEOF.cortina.iniciaJanelaFlutuante()");
-	    },
+
 	    /**
 	     * Function: mmscale
 	     *
