@@ -1,3 +1,8 @@
+<?php
+if(extension_loaded('zlib')){
+    ob_start('ob_gzhandler');
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
