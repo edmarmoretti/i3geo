@@ -228,8 +228,4 @@ if (! function_exists("ms_GetVersion")) {
 	</script>
 </body>
 </html>
-<?php
-if(extension_loaded('zlib')){
-    ob_end_flush();
-}
-?>
+
