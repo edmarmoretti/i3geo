@@ -62,7 +62,7 @@ include ("sani_request.php");
 if (! function_exists('ms_GetVersion')) {
     include_once ("carrega_ext.php");
 }
-
+error_reporting(0);
 // verifica&ccedil;&atilde;o de seguran&ccedil;a
 ini_set("session.use_cookies", 0);
 $_SESSION = array();
@@ -300,7 +300,7 @@ $mapa->setsize($_GET["WIDTH"], $_GET["HEIGHT"]);
 $mapext = explode(" ", $_GET["mapext"]);
 $mapa->setExtent($mapext[0], $mapext[1], $mapext[2], $mapext[3]);
 $o = $mapa->outputformat;
-//$o->set("imagemode", MS_IMAGEMODE_RGBA);
+$o->set("imagemode", MS_IMAGEMODE_RGBA);
 $o->set("transparent", MS_TRUE);
 $legenda = $mapa->legend;
 $legenda->set("status", MS_OFF);

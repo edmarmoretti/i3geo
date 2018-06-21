@@ -119,3 +119,8 @@ if (! isset($_GET["temaDownload"])) {
 </script>
 </body>
 </html>
+<?php
+if(extension_loaded('zlib')){
+    ob_end_flush();
+}
+?>

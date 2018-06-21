@@ -344,7 +344,7 @@ if (isset($_GET["REQUEST"])) {
     }
 }
 $o = $mapa->outputformat;
-//$o->set("imagemode", MS_IMAGEMODE_RGBA);
+$o->set("imagemode", MS_IMAGEMODE_RGBA);
 $o->set("transparent", MS_TRUE);
 $legenda = $mapa->legend;
 $legenda->set("status", MS_OFF);

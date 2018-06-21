@@ -1,3 +1,8 @@
+<?php
+if(extension_loaded('zlib')){
+    ob_start('ob_gzhandler');
+}
+?>
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
@@ -23,9 +28,6 @@ echo "
     <link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/css/ripples.min.css'>
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap/css/ie10-viewport-bug-workaround.css' rel='stylesheet'>
-    <!-- Custom styles for this template -->
-    <link href='" . ONDEI3GEO . "/pacotes/font-awesome/css/font-awesome.min.css' rel='stylesheet'>
-
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap-accessibility-plugin/plugins/css/bootstrap-accessibility.css' rel='stylesheet'>
 
     <script src='" . ONDEI3GEO . "/init/headjs.php'></script>";

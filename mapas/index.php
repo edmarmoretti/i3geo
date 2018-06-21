@@ -164,3 +164,8 @@ include ("templates/templatelista.php");
 	</script>
 </body>
 </html>
+<?php
+if(extension_loaded('zlib')){
+    ob_end_flush();
+}
+?>
