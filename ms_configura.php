@@ -158,7 +158,7 @@ $logTransacoes = false;
  Tipo:
  {array}
 */
-$i3geoEsquemasWL = array();
+$i3geoEsquemasWL = array("i3geo_metaestat");
 /*
  Variale: $i3geoUploadDataWL
 

@@ -22,7 +22,7 @@ function adicionar($nome_tipo_regiao,$descricao_tipo_regiao,$codigo_estat_conexa
 		$dataCol = array (
 			"nome_tipo_regiao"=>'',
 			"descricao_tipo_regiao"=>'',
-			"codigo_estat_conexao"=>'',
+			"codigo_estat_conexao"=>1,
 			"esquemadb"=>'',
 			"tabela"=>'',
 			"colunageo"=>'',
