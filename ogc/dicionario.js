@@ -105,5 +105,10 @@ ogc.dicionario =
 			pt : "Os servi&ccedil;os OGC possibilitam o acesso &agrave;s camadas p&uacute;blicas configuradas no i3Geo por meio de WebServices. As camadas s&atilde;o organizadas em pastas. Navegue pelos links abaixo ou utilize a op&ccedil;&atilde;o de listagem completa de camadas.",
 			en : "OGC services allow you to access open-data layers configured in i3Geo through WebServices. Layers are organized into folders. Browse the links below or use the full layer list option.",
 			es : "Los servicios OGC posibilitan el acceso a las capas de acceso libre configuradas en i3Geo a trav&eacute;s de WebServices. Las capas se organizan en carpetas. Navegue por los siguientes enlaces o utilice la opci&oacute;n de lista completa de capas."
+		}],
+		"listaGrupos" : [{
+			pt : "Lista por grupos",
+			en : "",
+			es : ""
 		}]
 };

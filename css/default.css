@@ -1616,7 +1616,7 @@ ver exemplos em https://bootsnipp.com/snippets/featured/glyphicon-animate-rotati
 	.ol-scale-line {
 		bottom: 0;
 	}
-	.tooltip-inner,.ol-i3GEOcontrols.ol-control {
+	.tooltip-inner {
 		display: none;
 	}
 	.I3GEOpropCamadas {

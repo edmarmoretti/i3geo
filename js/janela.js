@@ -640,7 +640,7 @@ i3GEO.janela =
         closeMsg : function(texto) {
             if(!i3GEO.janela.closeModal){
                 i3GEO.janela.closeModal = $(
-                	Mustache.render(i3GEO.template.janela.msg, {"texto": texto})
+                	Mustache.render(i3GEO.template.janela.closemsg, {"texto": texto})
                 );
             } else {
                 $("#i3GEOMensagemCloseModal").html(texto);

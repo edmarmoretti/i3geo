@@ -37,6 +37,8 @@ if (! isset($_GET["temaDownload"])) {
                     <ul class="nav navbar-nav">
                         <li><a href="../kml.php?tipoxml=kml" target="_blank">Kml Google Earth</a></li>
                         <li><a href="javascript:void(0)" onclick="ogc.menus.listaCompleta()" aria-controls="#listaCompleta">{{{lista}}}</a></li>
+                        <li><a href="javascript:void(0)" onclick="ogc.menus.lista()" aria-controls="#listaCompleta">{{{listaGrupos}}}</a></li>
+
                     </ul>
                 </div>
             </div>
@@ -75,7 +77,7 @@ if (! isset($_GET["temaDownload"])) {
 <?php include(ONDEI3GEO."/ogc/templates/templatelinksdownload.php");?>
 
 <script src='headjs.php'></script>
-    <script src='index.js'></script>
+    <script src='index.js?27062018'></script>
     <script src='dicionario.js'></script>
     <script>
 	$(document).ready(function(){
