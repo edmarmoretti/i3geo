@@ -1,14 +1,14 @@
 botoesIni = [
 {
 	"img":"imagens/openlayers.png",
-	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/ol.htm",
+	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/ol.php",
 	"titulo":$trad(4,g_traducao_init),
 	"subtitulo": $trad("4a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
 },{
 	"img":"imagens/osm.png",
-	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/osm.htm",
+	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/osm.php",
 	"titulo":$trad(23,g_traducao_init),
 	"subtitulo": $trad("23a",g_traducao_init),
 	"fa": "map-o",
@@ -86,7 +86,7 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"imagens/openlayersdebug.png",
-	"href": location.href.replace("init/index.php"+window.location.search,"") +  customDir + "/openlayersdebug.htm",
+	"href": location.href.replace("init/index.php"+window.location.search,"") +  customDir + "/openlayersdebug.php",
 	"titulo":$trad(5,g_traducao_init),
 	"subtitulo": $trad("5a",g_traducao_init),
 	"fa": "cogs",

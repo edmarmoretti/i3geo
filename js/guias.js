@@ -586,6 +586,9 @@ i3GEO.guias =
 	    if(!$i("i3GEOguiaMovelMolde").style.height || $i("i3GEOguiaMovelMolde").style.height == ""){
 		$("#i3GEOguiaMovelMolde,#i3GEOguiaMovelConteudo").css("height",i3GEO.parametros.h + "px");
 	    }
+	    if(i3GEO.guias.LARGURAGUIAMOVEL > i3GEO.parametros.w){
+		i3GEO.guias.LARGURAGUIAMOVEL = i3GEO.parametros.w;
+	    }
 	},
 	/**
 	 * Ativa o conte&uacute;do de determinada guia
@@ -598,6 +601,9 @@ i3GEO.guias =
 	    if (typeof (console) !== 'undefined')
 		console.info("guias.ativa");
 
+	    if(i3GEO.guias.LARGURAGUIAMOVEL > i3GEO.parametros.w){
+		i3GEO.guias.LARGURAGUIAMOVEL = i3GEO.parametros.w;
+	    }
 	    // nao tem conteudo para mostrar
 	    var f="" ;
 

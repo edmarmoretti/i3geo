@@ -2641,13 +2641,10 @@ i3GEO.util =
 	 *
 	 */
 	detectaTablet : function() {
-	    var p, c = DetectaMobile("DetectTierTablet");
+	    var c = DetectaMobile("DetectTierTablet");
 	    if (c === false) {
 		return false;
-	    }
-	    p = confirm($trad("x73"));
-	    if (p) {
-		window.location = i3GEO.configura.locaplic + '/interface/' + i3GEO.Interface.ALTTABLET + '?' + i3GEO.configura.sid;
+	    } else {
 		return true;
 	    }
 	},
@@ -2662,13 +2659,10 @@ i3GEO.util =
 	 *
 	 */
 	detectaMobile : function() {
-	    var p, c = DetectaMobile("DetectMobileLong");
+	    var c = DetectaMobile("DetectMobileLong");
 	    if (c === false) {
 		return false;
-	    }
-	    p = confirm($trad("x73"));
-	    if (p) {
-		window.location = i3GEO.configura.locaplic + '/interface/' + i3GEO.Interface.ALTTABLET + '?' + i3GEO.configura.sid;
+	    } else {
 		return true;
 	    }
 	},

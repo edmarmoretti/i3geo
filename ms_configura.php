@@ -66,7 +66,7 @@ array(array("usuario"=>"admin", "senha"=>"adminx"));
 */
 //TODO verificar ao fechar versao - alterar a senha para admin
 $i3geomaster = array(
-	array("usuario"=>"admin", "senha"=>"admin")
+	array("usuario"=>"adminx", "senha"=>"adminx")
 );
 //TODO remover chave ao fechar a versao
 /*

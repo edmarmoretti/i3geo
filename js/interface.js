@@ -1316,7 +1316,7 @@ i3GEO.Interface =
 				    }
 				    urllayer += "&layer=" + camada.name;
 				    //se for do tipo utfgrid uma camada a mais e adicionada
-				    if(camada.utfgrid == "sim"){
+				    if(camada.utfgrid == "sim" && i3GEO.parametros.w > 500 ){
 					if(i3GEO.Interface.openlayers.googleLike === false){
 					    source = new ol.source.TileUTFGrid({
 						projection : opcoes.projection,

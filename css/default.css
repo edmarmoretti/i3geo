@@ -1597,11 +1597,14 @@ ver exemplos em https://bootsnipp.com/snippets/featured/glyphicon-animate-rotati
 }
 /* === For phones =================================== */
 @media ( max-width : 480px) {
+	#i3GEOguiaMovelMolde {
+		width: 100%;
+	}
 	#i3GEOguiaMovel {
 		width: 100%;
 	}
 	#i3GEOguiaMovelConteudo {
-		width:95%;
+		width:100%;
 	}
 	.nomeTema {
 		width: 235px;
