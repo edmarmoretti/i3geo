@@ -525,9 +525,6 @@ i3GEO.navega =
 	    }
 	},
 	atualizaEscalaNumerica : function(escala) {
-	    if (typeof (console) !== 'undefined')
-		console.log("atualizaEscalaNumerica");
-
 	    var e = $i("i3GEOescalanum");
 	    if (!e) {
 		return;

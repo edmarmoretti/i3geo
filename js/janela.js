@@ -638,16 +638,25 @@ i3GEO.janela =
         },
         closeModal: false,
         closeMsg : function(texto) {
+            if(!texto){
+        	texto = "";
+            }
             if(!i3GEO.janela.closeModal){
                 i3GEO.janela.closeModal = $(
                 	Mustache.render(i3GEO.template.janela.closemsg, {"texto": texto})
                 );
-            } else {
+                i3GEO.janela.closeModal.on('hidden.bs.modal', function (e) {
+                    $("#i3GEOMensagemCloseModal").html("");
+          	});
+                $(i3GEO.janela.closeModal).appendTo("body");
+                i3GEO.janela.closeModal.modal("show");
+            } else if (texto != "") {
                 $("#i3GEOMensagemCloseModal").html(texto);
                 i3GEO.janela.closeModal.modal("show");
-                return;
             }
-            i3GEO.janela.closeModal.modal("show");
+            if(texto == ""){
+        	i3GEO.janela.closeModal.modal("hide");
+            }
         },
         /**
          * Function: ativaAlerta

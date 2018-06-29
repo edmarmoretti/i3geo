@@ -5,7 +5,8 @@
 $configInc = array(
     "debug" => "",
     "tipo" => "OL", // OL ou OSM
-    "url" => "inc"
+    "url" => "inc",
+    "nocache" => time()
 );
 include ($configInc["url"]."/meta.php");
 ?>

@@ -1,0 +1,51 @@
+<!-- Guias -->
+<div id='{{{idjanela}}}i3GEOidentificaguiasYUI' class='yui-navset' style='height: 38px; top: 0px; cursor: pointer; margin-left: 2px;'>
+	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
+		<li>
+			<div id='{{{idjanela}}}i3GEOidentificaguia3' style='text-align: center; left: 0px;'>
+				<a title='{{{propriedades}}}'>
+					<em><span class="material-icons">settings</span></em>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div id='{{{idjanela}}}i3GEOidentificaguia1' style='text-align: center; left: 0px;'>
+				<a>
+					<em>{{{resultado}}}</em>
+				</a>
+			</div>
+		</li>
+		<li>
+			<div id='{{{idjanela}}}i3GEOidentificaguia5' style='text-align: center; left: 0px;'>
+				<a>
+					<em>XY/buffer</em>
+				</a>
+			</div>
+		</li>
+	</ul>
+</div>
+<div class='container-fluid customScrollBar' style="height: calc(100% - 39px); overflow: auto;">
+	<!-- Resultado -->
+	<div class='container-fluid'>
+		<div id='{{{idjanela}}}i3GEOFidentificaComboCabeca' class='form-group condensed' style='width: 100%'>
+
+		</div>
+	</div>
+	<div class='container-fluid' id='{{{idjanela}}}i3GEOidentificaguia1obj'></div>
+
+	<!-- propriedades -->
+	<div class='container-fluid' id='{{{idjanela}}}i3GEOidentificaguia3obj'>
+		<div class='form-group label-fixed'>
+			<label class="control-label" for="{{{idjanela}}}i3GEOtabelafiltro1">{{{resolucaoBusca}}}</label>
+			<input class="form-control input-lg" type='text' id='{{{idjanela}}}i3GEOidentificaresolucao' value='{{{resolution}}}' />
+		</div>
+
+		<div id='{{{idjanela}}}i3GEOidentificalistaSistemas'></div>
+	</div>
+	<!-- coordenadas e buffer -->
+	<div class='container-fluid' id='{{{idjanela}}}i3GEOidentificaguia5obj'>
+		<h5>{{{valorPonto}}}</h5>
+		<div id='{{{idjanela}}}i3GEOidentificacoord'></div>
+		<a href='javascript:void(0)' onclick="i3GEOF.identifica.buffer('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{criaBuffer}}}</a>
+	</div>
+</div>

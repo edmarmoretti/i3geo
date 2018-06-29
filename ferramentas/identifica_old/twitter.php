@@ -28,6 +28,14 @@ p {
 	include(dirname(__FILE__)."/../blacklist.php");
 	verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 	$s = PHP_SHLIB_SUFFIX;
+	if(!function_exists('curl_init'))
+	{
+		@dl( 'php_curl'.'.'.$s );
+	}
+	if(!function_exists('curl_init'))
+	{
+		echo "curl n&atilde;o instalado";return;
+	}
 
 	$ch = curl_init();
 	curl_setopt($ch,CURLOPT_URL, 'https://api.twitter.com/oauth2/token');

@@ -40,6 +40,7 @@
 	font-weight: normal;
 	margin-top: 8px;
 	margin-bottom: 2px;
+	display: flex;
 }
 
 .toolTipBalaoTexto {
@@ -230,8 +231,18 @@ Botoes material
 	color:white;
 	background-color: #477596;
 }
+
+.modal-body .form-group .form-control{
+	color: initial;
+	background-color: initial;
+}
+
 .form-group label {
 	color: white;
+}
+
+.modal-body .form-group label {
+	color: initial;
 }
 
 .form-group.label-static label.control-label {
@@ -825,6 +836,7 @@ position: absolute;
 	float: left;
 	cursor: pointer;
 	background-repeat: no-repeat;
+	margin-right: 5px;
 }
 
 .i3GEOiconeMantemWkt {
@@ -1413,11 +1425,18 @@ bd .i3geoFormIconeEdita {
 
 .yui-navset {
     background-color: #222222 !IMPORTANT;
-    opacity: 0.6 !IMPORTANT;
+    opacity: 0.8 !IMPORTANT;
     border-bottom: 1px solid #A6A8AA;
     background-image: none !important;
 	/* tab background */
 	z-index: 1; /* 3000 */
+}
+
+.modal-body .yui-navset {
+    position: sticky;
+    opacity: 1;
+    zoom: 1;
+    text-align: left;
 }
 
 .i3geoForm {

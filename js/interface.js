@@ -472,14 +472,11 @@ i3GEO.Interface =
 		return i3geoOL.getZoom();
 	    },
 	    //ver i3GEO.mapa
-	    balao : function(texto, completo, x, y, botaoMais, botaoProp, nwkts) {
+	    balao : function(texto, completo, x, y, botaoProp, nwkts) {
 		if (typeof (console) !== 'undefined')
 		    console.info("monta o balao de identificacao e mostra na tela");
 
 		var icone, painel, b, cabecalho, conteudo, p = i3GEO.Interface.openlayers.BALAOPROP, removeBaloes;
-		if(botaoMais === undefined){
-		    botaoMais = true;
-		}
 		if(botaoProp === undefined){
 		    botaoProp = true;
 		}
@@ -549,23 +546,20 @@ i3GEO.Interface =
 		    };
 		    cabecalho.appendChild(icone);
 		}
-		// icone mais info
-		if(botaoMais === true){
-		    icone = document.createElement("div");
-		    icone.className = "i3GEOiconeMais";
-		    icone.style.left = "9px";
-		    icone.onclick = function() {
-			i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y);
-			//i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
-			return false;
-		    };
-		    cabecalho.appendChild(icone);
-		}
+                // icone mais info
+                    icone = document.createElement("div");
+                    icone.className = "i3GEOiconeMais";
+                    icone.style.left = "9px";
+                    icone.onclick = function() {
+                        i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y,"");
+                        return false;
+                    };
+                    cabecalho.appendChild(icone);
 		//icone para remover o balao sem remover wkt
 		if(nwkts && nwkts > 0){
 		    icone = document.createElement("div");
 		    icone.className = "i3GEOiconeMantemWkt";
-		    icone.style.left = "15px";
+		    icone.style.left = "10px";
 		    icone.title = $trad("naoremovewkt");
 		    icone.onclick = function() {
 			removeBaloes(false);
@@ -1721,6 +1715,21 @@ i3GEO.Interface =
 		i3geoOL.on("click", function(e) {
 		    e.stopPropagation();
 		    e.preventDefault();
+
+		    var lonlat = false, d, pos = "";
+		    lonlat = e.coordinate;
+		    if (i3GEO.Interface.openlayers.googleLike === true) {
+			lonlat = ol.proj.transform(lonlat, 'EPSG:3857', 'EPSG:4326');
+		    }
+		    d = i3GEO.calculo.dd2dms(lonlat[0], lonlat[1]);
+		    objposicaocursor.ddx = lonlat[0];
+		    objposicaocursor.ddy = lonlat[1];
+		    objposicaocursor.dmsx = d[0];
+		    objposicaocursor.dmsy = d[1];
+		    objposicaocursor.imgx = e.pixel[0];
+		    objposicaocursor.imgy = e.pixel[1];
+		    objposicaocursor.telax = objposicaocursor.imgx + pos[0];
+		    objposicaocursor.telay = objposicaocursor.imgy + pos[1];
 		});
 		i3geoOL.on("dbclick", function(e) {
 		    e.stopPropagation();
@@ -2286,16 +2295,6 @@ i3GEO.Interface =
 			i3GEO.janela.prompt($trad("tolerancia"), function() {
 			    i3GEO.configura.ferramentas.identifica.resolution = $i("i3GEOjanelaprompt").value;
 			}, i3GEO.configura.ferramentas.identifica.resolution);
-		    };
-		    temp.appendChild(elem);
-		    elem = document.createElement("img");
-		    elem.src = i3GEO.configura.locaplic + "/imagens/branco.gif";
-		    elem.className = "i3GEOiconeMais";
-		    elem.style.marginLeft = "7px";
-		    elem.onclick = function() {
-			i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y);
-			//i3GEO.janela.mensagemSimples("<div style='overflow:auto;height:100%'>" + completo + "</div>", "");
-			return false;
 		    };
 		    temp.appendChild(elem);
 		    // texto do balao

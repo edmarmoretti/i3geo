@@ -84,7 +84,7 @@
 	var nocache = new Date().getTime();
 	for (i = 0; i < jsfiles.length; i++)
 	{
-		var currentScriptTag = "<script type='text/javascript' src='" + scriptLocation + jsfiles[i] + "?" + nocache + "'></script>";
+		var currentScriptTag = "<script type='text/javascript' src='" + scriptLocation + jsfiles[i] + "?time=" + nocache + "'></script>";
 		allScriptTags += currentScriptTag;
 	}
 	//css

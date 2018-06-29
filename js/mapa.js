@@ -980,35 +980,25 @@ i3GEO.mapa =
 	     * {numerco} - (opcional) coordenada y
 	     *
 	     */
-	    cliqueIdentificaDefault : function(x, y) {
+	    cliqueIdentificaDefault : function(x, y, tema) {
 		if (typeof (console) !== 'undefined')
 		    console.info("i3GEO.mapa.cliqueIdentificaDefault()");
 
-		// evita ativar a ferramenta se o botao nao estiver ativo
-		// e estiver no modo de clique permanente
-		if (i3GEO.eventos.cliquePerm.ativo === false) {
-		    return;
+		if(!x){
+		    x = objposicaocursor.ddx;
+		    y = objposicaocursor.ddy;
 		}
+		var temp = function() {
+		    i3GEOF.identifica.start({"x":x,"y":y,"tema": tema});
+		};
 		// javascript nao foi carregado
 		if (typeof (i3GEOF.identifica) === 'undefined') {
 		    // javascript que sera carregado
-		    var js = i3GEO.configura.locaplic + "/ferramentas/identifica/dependencias.php",
-		    temp = function() {
-			if (x) {
-			    i3GEOF.identifica.criaJanelaFlutuante(x, y);
-			} else {
-			    i3GEOF.identifica.criaJanelaFlutuante(objposicaocursor.ddx, objposicaocursor.ddy);
-			}
-		    };
+		    var js = i3GEO.configura.locaplic + "/ferramentas/identifica/dependencias.php";
 		    // carrega o script
 		    i3GEO.util.scriptTag(js, temp, "i3GEOF.identifica_script");
 		} else {
-		    if (x) {
-			i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo, x, y);
-		    } else {
-			i3GEOF.identifica.buscaDadosTema(i3GEO.temaAtivo, objposicaocursor.ddx, objposicaocursor.ddy);
-		    }
-		    return;
+		    temp();
 		}
 	    },
 	    /**
@@ -1145,7 +1135,8 @@ i3GEO.mapa =
 			}
 		    });
 		    temp1 = temp1.join(" ");
-		    titulo = "<div class='toolTipBalaoTitulo'><b>" + titulo + "</b><br>" + temp1 + "</div>";
+		    var mais = "<div class='i3GEOiconeMais' onclick=\"i3GEO.mapa.dialogo.cliqueIdentificaDefault(" + x + "," + y + ",'" + temas[j].tema + "');return false;\" ></div>";
+		    titulo = "<div class='toolTipBalaoTitulo'>" + mais + " <b>" + titulo + "</b><br>" + temp1 + "</div>";
 		    tips = temas[j].resultado.todosItens;
 		    ntips = tips.length;
 		    ins = "";
@@ -1238,7 +1229,7 @@ i3GEO.mapa =
 			}
 		    } else {
 			if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.simple == true){
-			    i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, textoCompleto, x, y, true, true, wkts.length);
+			    i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, textoCompleto, x, y, true, wkts.length);
 			} else {
 			    i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoCompleto, textoSimples, x, y);
 			}

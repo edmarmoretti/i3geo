@@ -320,33 +320,9 @@ i3GEO.eventos =
                         }
                         else if (i3GEO.Interface.ATUAL === "openlayers" && exy.target && exy.target.tagName === "CANVAS"){
                             //para evitar bubble
+
                             i3GEO.eventos.executaEventos(this.MOUSEUP);
                         }
-
-                        /*
-				if (i3GEO.Interface.ATUAL === "googlemaps" && exy.target && !exy.target.src) {
-					//recalcula a posicao do mouse. Necessario em dispositivos touch
-					if(i3GEOtouchesPosMapa === ""){
-						i3GEOtouchesPosMapa = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDMAPA));
-					}
-					pos = i3GEOtouchesPosMapa;
-					p = new google.maps.Point(exy.clientX - pos[0],exy.clientY - pos[1]);
-					e = null;
-					lonlat = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(p);
-					if(lonlat){
-						objposicaocursor.ddx = lonlat.lng();
-						objposicaocursor.ddy = lonlat.lat();
-					}
-					i3GEO.eventos.executaEventos(this.MOUSEUP);
-				}
-				if (i3GEO.Interface.ATUAL === "openlayers" && exy.target && (i3GEO.desenho.layergrafico || exy.target.style.zIndex == "" || exy.target.style.zIndex == 1)) {
-					var parente = exy.target.parentNode;
-					if (parente
-						&& (parente.className === "olLayerDiv" || parente.className === "olLayerDiv olLayerGrid" || (parente.childNodes && parente.childNodes[0].attributes[0].nodeValue === "olTileImage"))) {
-						i3GEO.eventos.executaEventos(this.MOUSEUP);
-					}
-				}
-                         */
                     }
                 },
                 /**

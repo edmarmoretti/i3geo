@@ -43,12 +43,12 @@ Return:
 //set_time_limit(600);
 echo "<html><style>
 	P
-	{padding-top:1px;COLOR: #2F4632;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
+	{padding-top:1px;COLOR: white;text-align: justify;font-size: 12px;font-family: Verdana, Arial, Helvetica, sans-serif;}
 	</style>";
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
-$y = $_GET["y"];
-$x = $_GET["x"];
+$y = $_GET["y"]*1;
+$x = $_GET["x"]*1;
 error_reporting(0);
 $url = "http://ws.geonames.org/findNearByWeatherXML?username=i3geo&lat=$y&lng=$x&lang=pt";
 
@@ -140,18 +140,16 @@ echo $resultado;
 
 	$i = window.parent.$i
 	function escondexy(){
-		i3GEO.desenho.removeBox("boxOndeMetar");
+	    i3GEO.desenho.removePins("pingeolocal");
 	}
 	function mostraxy(){
-		if(i3GEO.Interface.ATUAL === "googleearth")
-		{return;}
-		var b = ext.split(" ");
-		if(BOX === false){
-			BOX = i3GEO.desenho.addBox(b[0], b[1], b[2], b[3], "boxOndeMetar");
-		}
-		else{
-			BOX = i3GEO.desenho.moveBox(BOX,b[0], b[1], b[2], b[3]);
-		}
+	    i3GEO.desenho.addPin(
+		    x,
+		    y,
+		    "",
+		    "",
+		    i3GEO.configura.locaplic + '/imagens/google/confluence.png',
+	    "pingeolocal");
 	}
 	function insereponto(){
 		i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,x,y);

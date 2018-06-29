@@ -2,7 +2,7 @@
 <script src="../pacotes/ol4/ol.js"></script>
 <script src="../js/i3geo<?php echo $configInc["debug"];?>.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->
-<script src="../js/listaDeFerramentas.js"></script>
+<script src="../js/listaDeFerramentas.js?time=<?php echo $configInc["nocache"];?>"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
 <script src="config.php?tipo=<?php echo $configInc["tipo"];?>"></script>
 <!-- para o tutorial -->

@@ -1,6 +1,8 @@
 <?php
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)));
+
+
 /**
  * Carrega os programas javascript necessarios para a ferramenta
  * Esse programa e usado na tag <script> ou com a funcao scripttag do i3Geo
