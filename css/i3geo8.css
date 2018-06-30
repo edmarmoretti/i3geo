@@ -415,10 +415,6 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 .olPopupCloseBox {
 margin-top: -2px;
 }
-.i3GEOCabecalhoInfoWindow {
-height:16px;
-top: -5px;
-}
 .i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
 display: none;
 }

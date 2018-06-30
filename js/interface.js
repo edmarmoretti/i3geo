@@ -519,57 +519,72 @@ i3GEO.Interface =
 
 		cabecalho = document.createElement("div");
 		cabecalho.className = "i3GEOCabecalhoInfoWindow";
+
+		var ic = function(){
+			icone = document.createElement("button");
+			icone.style.padding = "2px";
+			icone.style.margin = "0px";
+			icone.style.marginRight = "3px";
+			icone.className = "btn btn-default btn-xs";
+			return icone;
+		};
+
 		// icone que indica se os baloes devem ficar na tela ou nao
-		icone = document.createElement("div");
-		icone.className = p.classeCadeado;
+		icone = ic();
 		icone.onclick = function() {
 		    if (p.classeCadeado === "i3GEOiconeAberto") {
 			p.classeCadeado = "i3GEOiconeFechado";
+			this.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">lock</span>';
 		    } else {
-			p.classeCadeado = "i3GEOiconeAberto";
+			p.classeCadeado = "i3GEOiconeFechado";
+			this.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">lock_open</span>';
 		    }
-		    this.className = p.classeCadeado;
 		    p.removeAoAdicionar = !p.removeAoAdicionar;
 		    return false;
 		};
+		if (p.classeCadeado === "i3GEOiconeAberto") {
+		    icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">lock_open</span>';
+		} else {
+		    icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">lock</span>';
+		}
 		cabecalho.appendChild(icone);
 		// icone das propriedades
 		if(botaoProp === true){
-		    icone = document.createElement("div");
-		    icone.className = "i3GEOiconeFerramentas";
-		    icone.style.left = "3px";
+		    icone = ic();
 		    icone.onclick = function() {
 			i3GEO.janela.prompt($trad("tolerancia"), function() {
 			    i3GEO.configura.ferramentas.identifica.resolution = $i("i3GEOjanelaprompt").value;
 			}, i3GEO.configura.ferramentas.identifica.resolution);
 			return false;
 		    };
+		    icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">settings</span>';
 		    cabecalho.appendChild(icone);
 		}
-                // icone mais info
-                    icone = document.createElement("div");
-                    icone.className = "i3GEOiconeMais";
-                    icone.style.left = "9px";
-                    icone.onclick = function() {
-                        i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y,"");
-                        return false;
-                    };
-                    cabecalho.appendChild(icone);
+		// icone mais info
+		icone = ic();
+		icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">info</span>';
+		icone.onclick = function() {
+		    i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y,"");
+		    return false;
+		};
+		cabecalho.appendChild(icone);
 		//icone para remover o balao sem remover wkt
 		if(nwkts && nwkts > 0){
-		    icone = document.createElement("div");
-		    icone.className = "i3GEOiconeMantemWkt";
-		    icone.style.left = "10px";
+		    icone = ic();
 		    icone.title = $trad("naoremovewkt");
+		    icone.innerHTML = '<span style="color:red; vertical-align: middle;padding: 0px;" class="material-icons">highlight_off</span>';
+
 		    icone.onclick = function() {
 			removeBaloes(false);
 		    };
 		    cabecalho.appendChild(icone);
 		}
 		// icone x
-		icone = document.createElement("div");
-		icone.className = "ol-popup-closer";
+		icone = ic();
+		icone.style.right = "0px";
+		icone.style.position = "absolute";
 		icone.onclick = removeBaloes;
+		icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">highlight_off</span>';
 		cabecalho.appendChild(icone);
 
 		painel.appendChild(cabecalho);
@@ -946,7 +961,7 @@ i3GEO.Interface =
 	     */
 	    aplicaOpacidade : function(opacidade, layer) {
 		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.Interface.aplicaOpacidade");
+		    console.info("i3GEO.Interface.aplicaOpacidade");
 
 		if(opacidade > 1){
 		    opacidade = opacidade / 100;

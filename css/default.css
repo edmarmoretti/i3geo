@@ -1,3 +1,8 @@
+.i3GEOCabecalhoInfoWindow {
+	height:35px;
+	border-bottom: 1px solid #d2caca;
+}
+
 .I3GEOpropCamadas {
 	overflow: auto;
 	position: fixed;

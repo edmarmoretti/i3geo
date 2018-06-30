@@ -1135,7 +1135,8 @@ i3GEO.mapa =
 			}
 		    });
 		    temp1 = temp1.join(" ");
-		    var mais = "<div class='i3GEOiconeMais' onclick=\"i3GEO.mapa.dialogo.cliqueIdentificaDefault(" + x + "," + y + ",'" + temas[j].tema + "');return false;\" ></div>";
+
+		    var mais = "<button style='margin: 2px;padding: 0px;vertical-align: middle;position: relative;top: -7px;' class='btn btn-default btn-xs' onclick=\"i3GEO.mapa.dialogo.cliqueIdentificaDefault(" + x + "," + y + ",'" + temas[j].tema + "');return false;\" ><span style='opacity:0.5;vertical-align: middle;padding: 0px;' class='material-icons'>info</span></button>";
 		    titulo = "<div class='toolTipBalaoTitulo'>" + mais + " <b>" + titulo + "</b><br>" + temp1 + "</div>";
 		    tips = temas[j].resultado.todosItens;
 		    ntips = tips.length;
