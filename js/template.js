@@ -4,6 +4,8 @@ if (typeof (i3GEO) === 'undefined') {
 //
 //utilizado para armazenar templates HTML
 //alguns templates sao carregados sob demanda, por isso sao definidos aqui como false
+//nesses casos, o HTML do template sao estruturados de outras formas, como em arquivos
+//que sao lidos quando necessario
 //
 //exemplo de uso:
 // var html = Mustache.render(i3GEO.template.janela.aguarde, {id: "1234"});
@@ -20,7 +22,6 @@ i3GEO.template = {
             aguarde: "<div id='{{id}}_imagemCabecalho' class='i3GeoAguardeJanela progress' style='visibility:hidden; '><span class='progress-bar progress-bar-striped active' role='progressbar' style='width: 100%'></span></div>",
             msg: "<div class='modal fade' data-keyboard='false' tabindex='-1' role='dialog' aria-hidden='true' style='z-index:500000;overflow-y:visible;'><div class='modal-dialog'><div class='modal-content'><div class='modal-header' style='padding-top: 5px;'><button type='button' class='close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button></div><div class='modal-body' style='padding-top: 0px;'><div id='i3GEOMensagemTempoModal' > {{{texto}}} </div></div></div></div></div>",
             closemsg: "<div class='modal fade' data-keyboard='false' tabindex='-1' role='dialog' aria-hidden='true' style='z-index:500000;overflow-y:visible;'><div class='modal-dialog'><div class='modal-content'><div class='modal-header' style='padding-top: 5px;'><button type='button' class='close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button></div><div class='modal-body' style='padding-top: 0px;'><div id='i3GEOMensagemCloseModal' > {{{texto}}} </div></div></div></div></div>"
-
         },
         //formatacao da lista de camadas
         camada: false,
@@ -51,5 +52,7 @@ i3GEO.template = {
         //formatacao da lista de marcadores salvos pelo usuario
         marcador: false,
         //campo do tipo input para a busca usando typeahead
-        searchInput: false
+        searchInput: false,
+        //balao de informacoes da ferramenta identifica
+        infotooltip: false
 };

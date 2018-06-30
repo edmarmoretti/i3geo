@@ -476,134 +476,128 @@ i3GEO.Interface =
 		if (typeof (console) !== 'undefined')
 		    console.info("monta o balao de identificacao e mostra na tela");
 
-		var icone, painel, b, cabecalho, conteudo, p = i3GEO.Interface.openlayers.BALAOPROP, removeBaloes;
+		var hash = {
+			"x": x,
+			"y": y
+		};
 		if(botaoProp === undefined){
 		    botaoProp = true;
 		}
-		removeBaloes = function(removeWkt) {
-		    var nd,t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
-		    for (i = 0; i < n; i++) {
-			t = i3GEO.Interface.openlayers.BALAOPROP.baloes[i];
-			if(t.get("origem") == "balao"){
-			    t.setPosition(undefined);
-			    //t.getElement().parentNode.innerHTML = "";
-			    nd = t.getElement().parentNode;
-			    nd.parentNode.removeChild(nd);
-			}
-		    }
-		    i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
-		    if(removeWkt !== false && i3GEO.desenho.layergrafico){
-			i3GEO.desenho[i3GEO.Interface.ATUAL].removePins();
-		    } else if (i3GEO.desenho.layergrafico) {
-			//muda o namespace para nao remover em um proximo evento de excluir o balao
-			var features, n, f, i;
-			features = i3GEO.desenho.layergrafico.getSource().getFeatures();
-			n = features.length;
+		hash.texto = texto;
+
+		var createinfotooltip = function(){
+		    var icone,
+		    painel,
+		    b,
+		    cabecalho,
+		    conteudo,
+		    removeBaloes,
+		    html,
+		    p = i3GEO.Interface.openlayers.BALAOPROP,
+		    removeBaloes = function(removeWkt) {
+			var nd,t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
 			for (i = 0; i < n; i++) {
-			    if(features[i].get("origem") == "pin"){
-				features[i].set("origem","identifica");
+			    t = i3GEO.Interface.openlayers.BALAOPROP.baloes[i];
+			    if(t.get("origem") == "balao"){
+				t.setPosition(undefined);
+				//t.getElement().parentNode.innerHTML = "";
+				nd = t.getElement().parentNode;
+				nd.parentNode.removeChild(nd);
 			    }
 			}
-		    }
-		    return false;
-		};
-		if (p.classeCadeado === "i3GEOiconeAberto") {
-		    removeBaloes(true);
-		}
-		if (i3GEO.eventos.cliquePerm.ativo === false) {
-		    return;
-		}
-		painel = document.createElement("div");
-		painel.style.minWidth = p.minWidth;
-		painel.className = "ol-popup";
-
-		cabecalho = document.createElement("div");
-		cabecalho.className = "i3GEOCabecalhoInfoWindow";
-
-		var ic = function(){
-			icone = document.createElement("button");
-			icone.style.padding = "2px";
-			icone.style.margin = "0px";
-			icone.style.marginRight = "3px";
-			icone.className = "btn btn-default btn-xs";
-			return icone;
-		};
-
-		// icone que indica se os baloes devem ficar na tela ou nao
-		icone = ic();
-		icone.onclick = function() {
-		    if (p.classeCadeado === "i3GEOiconeAberto") {
-			p.classeCadeado = "i3GEOiconeFechado";
-			this.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">lock</span>';
-		    } else {
-			p.classeCadeado = "i3GEOiconeFechado";
-			this.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">lock_open</span>';
-		    }
-		    p.removeAoAdicionar = !p.removeAoAdicionar;
-		    return false;
-		};
-		if (p.classeCadeado === "i3GEOiconeAberto") {
-		    icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">lock_open</span>';
-		} else {
-		    icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">lock</span>';
-		}
-		cabecalho.appendChild(icone);
-		// icone das propriedades
-		if(botaoProp === true){
-		    icone = ic();
-		    icone.onclick = function() {
-			i3GEO.janela.prompt($trad("tolerancia"), function() {
-			    i3GEO.configura.ferramentas.identifica.resolution = $i("i3GEOjanelaprompt").value;
-			}, i3GEO.configura.ferramentas.identifica.resolution);
+			i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
+			if(removeWkt !== false && i3GEO.desenho.layergrafico){
+			    i3GEO.desenho[i3GEO.Interface.ATUAL].removePins();
+			} else if (i3GEO.desenho.layergrafico) {
+			    //muda o namespace para nao remover em um proximo evento de excluir o balao
+			    var features, n, f, i;
+			    features = i3GEO.desenho.layergrafico.getSource().getFeatures();
+			    n = features.length;
+			    for (i = 0; i < n; i++) {
+				if(features[i].get("origem") == "pin"){
+				    features[i].set("origem","identifica");
+				}
+			    }
+			}
 			return false;
 		    };
-		    icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">settings</span>';
-		    cabecalho.appendChild(icone);
-		}
-		// icone mais info
-		icone = ic();
-		icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">info</span>';
-		icone.onclick = function() {
-		    i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y,"");
-		    return false;
+
+		    if (p.removeAoAdicionar === true) {
+			removeBaloes(true);
+		    }
+		    if (i3GEO.eventos.cliquePerm.ativo === false) {
+			return;
+		    }
+
+		    hash.minWidth = p.minWidth;
+		    painel = document.createElement("div");
+
+		    hash.lock_open = "hidden";
+		    hash.lock = "hidden";
+		    if (p.removeAoAdicionar === true) {
+			hash.lock_open = ""
+		    } else {
+			hash.lock = ""
+		    }
+		    // icone das propriedades
+		    hash.botaoProp = "hidden";
+		    if(botaoProp === true){
+			hash.botaoProp = "";
+		    }
+		    //icone para remover o balao sem remover wkt
+		    hash.wkt = "hidden";
+		    if(nwkts && nwkts > 0){
+			hash.wkt = "";
+		    }
+		    painel = document.createElement("div");
+		    painel.innerHTML = Mustache.render(i3GEO.template.infotooltip, hash);
+
+		    $(painel).find("[data-info='close']").on("click",removeBaloes);
+		    $(painel).find("[data-info='wkt']").on("click",function(){removeBaloes(false);});
+		    $(painel).find("[data-info='info']").on("click",function(){
+			i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y,"");
+			return false;
+		    });
+		    $(painel).find("[data-info='settings']").on("click",function(){
+			    i3GEO.janela.prompt($trad("tolerancia"), function() {
+				i3GEO.configura.ferramentas.identifica.resolution = $i("i3GEOjanelaprompt").value;
+			    }, i3GEO.configura.ferramentas.identifica.resolution);
+			    return false;
+		    });
+		    $(painel).find("[data-info='lockopen']").on("click",function(e){
+			var p = i3GEO.Interface.openlayers.BALAOPROP;
+			$(e.target).addClass("hidden");
+			$(e.target.parentNode).find("[data-info='lock']").removeClass("hidden");
+			p.removeAoAdicionar = false;
+			return false;
+		    });
+		    $(painel).find("[data-info='lock']").on("click",function(e){
+			var p = i3GEO.Interface.openlayers.BALAOPROP;
+			$(e.target).addClass("hidden");
+			$(e.target.parentNode).find("[data-info='lockopen']").removeClass("hidden");
+			p.removeAoAdicionar = true;
+			return false;
+		    });
+		    b = new ol.Overlay({
+			element : painel,
+			stopEvent : true,
+			autoPan : p.autoPan,
+			autoPanAnimation : p.autoPanAnimation
+		    });
+		    b.setProperties({origem : "balao"});
+		    p.baloes.push(b);
+		    i3geoOL.addOverlay(b);
+		    b.setPosition(i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates());
 		};
-		cabecalho.appendChild(icone);
-		//icone para remover o balao sem remover wkt
-		if(nwkts && nwkts > 0){
-		    icone = ic();
-		    icone.title = $trad("naoremovewkt");
-		    icone.innerHTML = '<span style="color:red; vertical-align: middle;padding: 0px;" class="material-icons">highlight_off</span>';
 
-		    icone.onclick = function() {
-			removeBaloes(false);
-		    };
-		    cabecalho.appendChild(icone);
+		if(i3GEO.template.infotooltip == false){
+		    $.get(i3GEO.configura.locaplic+"/js/templates/infotooltip.html").done(function(r) {
+			i3GEO.template.infotooltip = r;
+			createinfotooltip();
+		    });
+		} else {
+		    createinfotooltip();
 		}
-		// icone x
-		icone = ic();
-		icone.style.right = "0px";
-		icone.style.position = "absolute";
-		icone.onclick = removeBaloes;
-		icone.innerHTML = '<span style="vertical-align: middle;padding: 0px;" class="material-icons">highlight_off</span>';
-		cabecalho.appendChild(icone);
-
-		painel.appendChild(cabecalho);
-
-		conteudo = document.createElement("div");
-		conteudo.className = "tooltip-conteudo";
-		conteudo.innerHTML = texto;
-		painel.appendChild(conteudo);
-
-		b = new ol.Overlay({
-		    element : painel,
-		    stopEvent : true,
-		    autoPan : p.autoPan,
-		    autoPanAnimation : p.autoPanAnimation
-		});
-		b.setProperties({origem : "balao"});
-		p.baloes.push(b);
-		i3geoOL.addOverlay(b);
-		b.setPosition(i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates());
 	    },
 	    /**
 	     * Redesenha o mapa atual
