@@ -1,13 +1,25 @@
-<div style='min-width: {{minWidth}}' class='ol-popup'>
+<div style='min-width: {{minWidth}};' class='ol-popup'>
     <div class='i3GEOCabecalhoInfoWindow'>
+        <div class='dropdown' style='display: inline; vertical-align: top' >
+            <button class='btn btn-default btn-xs dropdown-toggle' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'
+                style='padding: 2px; margin: 0px 3px 0px 0px;'>
+                <span class='material-icons'>playlist_add_check</span>
+            </button>
+            <ul class='dropdown-menu'>
+                <li style='margin-top: 0px;' class='container-fluid form-group'>
+                    <label class='control-label' style='color:gray;'> {{{tolerancia}}}</label>
+                        <form onchange='i3GEO.configura.ferramentas.identifica.resolution = this[0].value*1;'>
+                            <input class='form-control' style='background: none;color: black;' oninput='this.form[1].value=this.value;' type='text' value='{{resolution}}' >
+                            <input style='background: none;' oninput=';this.form[0].value=this.value;'  type='range' min='1' max='50' value='{{resolution}}' class='slider'>
+                        </form>
+                </li>
+            </ul>
+        </div>
         <button data-info='lockopen' style='padding: 2px; margin: 0px 3px 0px 0px;' class='{{lock_open}} btn btn-default btn-xs'>
             <span style='vertical-align: middle; padding: 0px;' class='material-icons'>lock_open</span>
         </button>
         <button data-info='lock' style='padding: 2px; margin: 0px 3px 0px 0px;' class='{{lock}} btn btn-default btn-xs'>
             <span style='vertical-align: middle; padding: 0px;' class='material-icons'>lock</span>
-        </button>
-        <button data-info='settings' style='padding: 2px; margin: 0px 3px 0px 0px;' class='{{botaoProp}} btn btn-default btn-xs'>
-            <span style='vertical-align: middle; padding: 0px;' class='material-icons'>settings</span>
         </button>
         <button data-info='info' style='padding: 2px; margin: 0px 3px 0px 0px;' class='btn btn-default btn-xs'>
             <span style='vertical-align: middle; padding: 0px;' class='material-icons'>info</span>

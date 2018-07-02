@@ -1059,14 +1059,33 @@ i3GEO.mapa =
 		    }
 		    return;
 		}
+
+		var res = i3GEO.configura.ferramentas.identifica.resolution;
+		var bdiv = document.createElement("div");
+		bdiv.className = "waitInfoWindow";
+		bdiv.style.width = res+"px";
+		bdiv.style.height = res+"px";
+		bdiv.style.top = (res/2 * -1) + "px";
+
+		var b = new ol.Overlay({
+		    element : bdiv,
+		    stopEvent : true,
+		    autoPan : false,
+		    origem: "balao",
+		    autoPanAnimation : false,
+		    positioning: "center-center",
+		    position: i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates()
+		});
+		i3geoOL.addOverlay(b);
 		temp = function(retorno){
+		    i3geoOL.removeOverlay(b);
 		    i3GEO.mapa.montaTip(retorno,x,y);
 		};
 		i3GEO.php.identifica3(
 			temp,
 			x,
 			y,
-			i3GEO.configura.ferramentas.identifica.resolution,
+			res,
 			"tip",
 			i3GEO.configura.locaplic,
 			i3GEO.configura.sid,
@@ -1085,10 +1104,6 @@ i3GEO.mapa =
 
 	    i3GEO.eventos.cliquePerm.status = true;
 	    mostra = false;
-	    if(retorno == ""){
-		//i3GEO.janela.tempoMsg($trad("tipvazio"));
-		//return;
-	    }
 	    if(retorno.data){
 		retorno = retorno.data;
 		temp = retorno[0].xy.split(",");

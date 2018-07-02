@@ -12,7 +12,7 @@
             </li>
             <li style="margin-top:0px;" class="container-fluid form-group">
                 <label class="control-label"> {{{opacidade}}}</label>
-                <input style="background:none;" onchange="i3GEO.Interface.aplicaOpacidade(this.value,'{{{name}}}')" type="range" min="1" max="100" value="{{opaCamada}}" class="slider" >
+                <input style="background:none;" oninput="i3GEO.Interface.aplicaOpacidade(this.value,'{{{name}}}')" type="range" min="1" max="100" value="{{opaCamada}}" class="slider" >
             </li>
             <li style="margin-top:0px;" class="container-fluid form-group">
                 <label class="control-label"> {{{cortina}}}</label>

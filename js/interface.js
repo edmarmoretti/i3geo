@@ -478,7 +478,9 @@ i3GEO.Interface =
 
 		var hash = {
 			"x": x,
-			"y": y
+			"y": y,
+			"resolution": i3GEO.configura.ferramentas.identifica.resolution,
+			"tolerancia": $trad("tolerancia")
 		};
 		if(botaoProp === undefined){
 		    botaoProp = true;
@@ -499,10 +501,12 @@ i3GEO.Interface =
 			for (i = 0; i < n; i++) {
 			    t = i3GEO.Interface.openlayers.BALAOPROP.baloes[i];
 			    if(t.get("origem") == "balao"){
+				/*
 				t.setPosition(undefined);
-				//t.getElement().parentNode.innerHTML = "";
 				nd = t.getElement().parentNode;
 				nd.parentNode.removeChild(nd);
+				*/
+				i3geoOL.removeOverlay(t);
 			    }
 			}
 			i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
@@ -578,6 +582,7 @@ i3GEO.Interface =
 			p.removeAoAdicionar = true;
 			return false;
 		    });
+		    $(painel).find('.dropdown-toggle').dropdown();
 		    b = new ol.Overlay({
 			element : painel,
 			stopEvent : true,
