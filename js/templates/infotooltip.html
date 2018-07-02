@@ -8,7 +8,7 @@
             <ul class='dropdown-menu'>
                 <li style='margin-top: 0px;' class='container-fluid form-group'>
                     <label class='control-label' style='color:gray;'> {{{tolerancia}}}</label>
-                        <form onchange='i3GEO.configura.ferramentas.identifica.resolution = this[0].value*1;'>
+                        <form onchange='i3GEO.configura.ferramentas.identifica.resolution = this[0].value*1;i3GEO.mapa.dialogo.verificaTipDefault({{x}},{{y}});'>
                             <input class='form-control' style='background: none;color: black;' oninput='this.form[1].value=this.value;' type='text' value='{{resolution}}' >
                             <input style='background: none;' oninput=';this.form[0].value=this.value;'  type='range' min='1' max='50' value='{{resolution}}' class='slider'>
                         </form>

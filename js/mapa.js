@@ -1006,7 +1006,7 @@ i3GEO.mapa =
 	     *
 	     * Essa e a funcao padrao definida em i3GEO.configura
 	     */
-	    verificaTipDefault : function(e) {
+	    verificaTipDefault : function(x,y) {
 		if (typeof (console) !== 'undefined')
 		    console.info("i3GEO.mapa.dialogo.verificaTipDefault()");
 
@@ -1025,8 +1025,14 @@ i3GEO.mapa =
 		} else {
 		    i3GEO.eventos.cliquePerm.status = false;
 		}
+		if(!x){
+		    x = objposicaocursor.ddx;
+		}
+		if(!y){
+		    y = objposicaocursor.ddy;
+		}
 
-		var ntemas, etiquetas, j, x = objposicaocursor.ddx, y = objposicaocursor.ddy, temp;
+		var ntemas, etiquetas, j, temp;
 		if(x === -1 || y === -1){
 		    return;
 		}
@@ -1280,6 +1286,5 @@ i3GEO.mapa =
 		    c.addFeature(f);
 		}
 	    }
-
 	}
 };
