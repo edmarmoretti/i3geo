@@ -209,7 +209,7 @@ i3GEO.eventos =
                  *
                  * i3GEO.configura.funcaoTip
                  */
-                MOUSECLIQUEPERM : ["i3GEO.mapa.dialogo.verificaTipDefault()"],
+                MOUSECLIQUEPERM : ["i3GEO.mapa.dialogo.verificaTipDefault(xx,yy)"],
                 /**
                  * Timer utilizado pelo contador do mouse parado
                  *
@@ -365,7 +365,10 @@ i3GEO.eventos =
                                         if (typeof (eventos[f]) === "function") {
                                             eventos[f].call();
                                         } else {
-                                            eval(eventos[f]);
+                                            var f = eventos[f];
+                                            f = f.replace("xx",objposicaocursor.ddx);
+                                            f = f.replace("yy",objposicaocursor.ddy);
+                                            eval(f);
                                         }
                                     }
                                 } while (f--);
