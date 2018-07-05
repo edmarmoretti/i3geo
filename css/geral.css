@@ -8,14 +8,13 @@ para nao selecionar
     -o-user-select: none;
     user-select: none;
 }
-.bd input, .bd textarea, #escala input {
+.bd input, .bd textarea, #escala input, .copyToMemory {
     -webkit-user-select: text;
     -khtml-user-select: text;
     -moz-user-select: text;
     -o-user-select: text;
     user-select: text;
 }
-
 #i3GEOlogoMarca {
 	display: block;
 	top: 4em;

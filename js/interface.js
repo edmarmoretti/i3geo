@@ -473,7 +473,7 @@ i3GEO.Interface =
 	    },
 	    //ver i3GEO.mapa
 	    //completo depreciado
-	    balao : function(texto, completo, x, y, botaoProp, nwkts) {
+	    balao : function(texto, textCopy, x, y, botaoProp, nwkts) {
 		if (typeof (console) !== 'undefined')
 		    console.info("monta o balao de identificacao e mostra na tela");
 
@@ -579,6 +579,9 @@ i3GEO.Interface =
 			return false;
 		    });
 		    $(painel).find('.dropdown-toggle').dropdown();
+		    $(painel).find("[data-info='copy']").on("click",function(e){
+			i3GEO.util.copyToClipboard(textCopy.join("\n"));
+		    });
 		    b = new ol.Overlay({
 			element : painel,
 			stopEvent : true,

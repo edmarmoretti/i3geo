@@ -701,6 +701,17 @@ no caso do OL3
 	background-color: rgba(0, 60, 136, .3);
 	border-radius: 4px;
 }
+.copyToMemory::after {
+	font-family: "Glyphicons Halflings";
+	content: "\e205";
+	cursor: copy;
+	color: inherit;
+	margin-left: 2px;
+	opacity: 0.5
+}
+.copyToMemory {
+	cursor: copy;
+}
 
 .olControlEditingToolbar1 div {
 	background-image: url(../mashups/openlayers.png);

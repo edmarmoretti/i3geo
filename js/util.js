@@ -3356,13 +3356,17 @@ i3GEO.util =
 		return clipboardData.setData("Text", texto);
 
 	    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-		var textarea = document.createElement("textarea");
-		textarea.textContent = texto;
-		textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
-		document.body.appendChild(textarea);
+    		var textarea = document.createElement("textarea");
+    		textarea.setAttribute('readonly', '');
+    		textarea.textContent = texto;
+    		textarea.value = texto;
+    		textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+    		textarea.className = "copyToMemory";
+    		document.body.appendChild(textarea);
+		textarea.focus();
 		textarea.select();
 		try {
-		    return document.execCommand("copy");  // Security exception may be thrown by some browsers.
+		    document.execCommand("copy");  // Security exception may be thrown by some browsers.
 		} catch (ex) {
 		    return false;
 		} finally {

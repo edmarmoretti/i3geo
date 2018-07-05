@@ -13,6 +13,7 @@ i3GEOF.identifica =
 	 */
 	mostraSistemasAdicionais : true,
 	_sistemasAdicionais : [],
+	_export: [],
 	_parameters : {
 	    "x": 0,
 	    "y": 0,
@@ -62,6 +63,9 @@ i3GEOF.identifica =
 	    $i("i3GEOidentificaguia1").onclick = function() {
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1", "i3GEOidentificaguia");
 	    };
+	    $i("i3GEOidentificaguia4").onclick = function() {
+		i3GEO.util.copyToClipboard(i3GEOF.identifica._export.join("\n"));
+	    }
 
 	    $i("i3GEOidentificaguia3").onclick = function() {
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia3", "i3GEOidentificaguia");
@@ -69,7 +73,7 @@ i3GEOF.identifica =
 	    $i("i3GEOidentificaguia5").onclick =
 		function() {
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia5", "i3GEOidentificaguia");
-		var ins = "<h5>X: " + p.x + " Y: " + p.y + "</h5>";
+		var ins = "<h5 class='copyToMemory' onclick='i3GEO.util.copyToClipboard(this.innerHTML);return false;'>X: " + p.x + " Y: " + p.y + "</h5>";
 		$i("i3GEOidentificacoord").innerHTML = ins;
 	    };
 	    $i("i3GEOidentificaguia6").onclick = function() {
@@ -280,6 +284,7 @@ i3GEOF.identifica =
 			    "textoRemoveFiltro": $trad('removeFiltro', i3GEOF.identifica.dicionario),
 			    "registros" : []
 		    };
+		    i3GEOF.identifica._export.push(retorno[i].nome);
 		    resultados = retorno[i].resultado;
 
 		    // encontrou algo
@@ -398,7 +403,6 @@ i3GEOF.identifica =
 				    coluna.textovalor = textovalor;
 				    coluna.alvo = alvo;
 				    coluna.classeCssLink = "";
-
 				}
 				coluna.classeCssImg = "hidden";
 				coluna.img = "";
@@ -407,6 +411,7 @@ i3GEOF.identifica =
 				    coluna.img = resultados[j][k].img;
 				}
 				linha.colunas.push(coluna);
+				i3GEOF.identifica._export.push(coluna.alias + ":" + coluna.textovalor);
 			    }
 			    registros.push(linha);
 			}

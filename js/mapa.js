@@ -1098,7 +1098,7 @@ i3GEO.mapa =
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.mapa.montaTip()");
 
-	    var textoSimples = "", textoTempSimples = "", x, y, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
+	    var textCopy = [],textoSimples = "", textoTempSimples = "", x, y, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
 		i3GEO.configura, wkts = [];
 
 	    i3GEO.eventos.cliquePerm.status = true;
@@ -1113,7 +1113,6 @@ i3GEO.mapa =
 		y = yy;
 		mostra = true;
 		textoSimples = $trad("balaoVazio");
-		textoCompleto="";
 		wkt = [];
 		if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.openTipNoData == false){
 		    mostra = false;
@@ -1128,6 +1127,7 @@ i3GEO.mapa =
 		}
 		for (j = 0; j < ntemas; j += 1) {
 		    titulo = temas[j].nome;
+		    textCopy.push(titulo);
 		    //para os nomes de funcoes embutidas
 		    //funcoes sao configuradas no mapfile
 		    //exemplo do METADATA
@@ -1141,6 +1141,7 @@ i3GEO.mapa =
 			    });
 			    parametros = "\"" + parametros.join("\",\"") + "\"";
 			    temp1.push("<a class='toolTipBalaoFuncoes' href='javascript:void(0);' onclick='" + value.funcao + "(" + parametros + ")' >" + value.titulo + "</a><br>");
+
 			    //adiciona o javascript que contem a funcao
 			    if(value.script && value.script != ""){
 				i3GEO.util.scriptTag(value.script, "", "funcaolayer"+value.funcao, false);
@@ -1174,6 +1175,7 @@ i3GEO.mapa =
 					var estilo = "tooltip-"+temas[j].tema;
 					if (valor !== "" && link === "") {
 					    temp += "<span class='"+estilo+"'><label>" + alias + ": </label>" + valor + "</span><br>";
+					    textCopy.push(alias + ":" + valor);
 					}
 					if (valor !== "" && link !== "") {
 					    temp +=
@@ -1183,6 +1185,7 @@ i3GEO.mapa =
 						+ "' >"
 						+ valor
 						+ "</a></span><br>";
+					    textCopy.push(alias + ":" + valor);
 					}
 					if (img !== "") {
 					    temp += img + "<br>";
@@ -1233,7 +1236,7 @@ i3GEO.mapa =
 			i3GEO.janela.closeMsg(textoSimples);
 			return;
 		    } else {
-			i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, "", x, y, true, wkts.length);
+			i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, textCopy, x, y, true, wkts.length);
 		    }
 		}
 	    }
