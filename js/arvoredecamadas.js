@@ -475,7 +475,8 @@ i3GEO.arvoreDeCamadas =
 		//camadas de fundo
 		var temp = temp = $i(config.idOnde);
 		if(temp && $("#" + config.idListaFundo).html() == ""){
-		    clone = [{"name":"camadaDeFundo","value":"nenhum","title":$trad("nenhum")}];
+		    //clone = [{"name":"camadaDeFundo","value":"nenhum","title":$trad("nenhum")}];
+		    clone= [];
 		    $.each(i3GEO.Interface.openlayers.LAYERSADICIONAIS, function( i , layer ){
 			camada = {};
 			temp = layer.getProperties();

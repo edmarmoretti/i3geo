@@ -1,8 +1,11 @@
 		<div class="list-group condensed">
-			<div class="radio radio-primary text-left">
+			<div class="checkbox text-left">
 				<label title="{{{preview}}}" >
-					<input class="noprint" type="radio" value="{{{value}}}" name="{{{name}}}" {{{checked}}} onclick="i3GEO.Interface.openlayers.ativaFundo('{{{value}}}');">
-					<span class="circle noprint"></span><span class="check"></span> {{{title}}}
+					<input class="noprint" type="checkbox" value="{{{value}}}" name="{{{name}}}" {{{checked}}} onclick="i3GEO.Interface.openlayers.ativaFundo('{{{value}}}',this);">
+					<span class="checkbox-material noprint">
+                    <span class="check"></span></span> {{{title}}}
 				</label>
+                <input style="background:none;opacity:0.3;" oninput="i3geoOL.getLayerBase('{{{value}}}').setOpacity(this.value/100)" type="range" min="0" max="100" value="100" class="slider" >
+            </li>
 			</div>
 		</div>

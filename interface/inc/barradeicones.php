@@ -20,7 +20,7 @@
         <button class="hidden-xs" onclick="i3GEO.Interface.zoomli()" data-tutorial="barranavegacao" style="float: left;">
             <i class="material-icons">zoom_in</i>
         </button>
-        <button class="hidden-xs" class="toggle" title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left; display: none;">
+        <button class="hidden-xs toggle" title="{{{graticule}}}" onclick="i3GEO.Interface.grade()" data-tutorial='grade' style="float: left; display: none;">
             <i class="material-icons">grid_on</i>
         </button>
         <br class="hidden-xs">

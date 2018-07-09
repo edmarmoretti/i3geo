@@ -559,10 +559,10 @@ i3GEO.Interface =
 			return false;
 		    });
 		    $(painel).find("[data-info='settings']").on("click",function(){
-			    i3GEO.janela.prompt($trad("tolerancia"), function() {
-				i3GEO.configura.ferramentas.identifica.resolution = $i("i3GEOjanelaprompt").value;
-			    }, i3GEO.configura.ferramentas.identifica.resolution);
-			    return false;
+			i3GEO.janela.prompt($trad("tolerancia"), function() {
+			    i3GEO.configura.ferramentas.identifica.resolution = $i("i3GEOjanelaprompt").value;
+			}, i3GEO.configura.ferramentas.identifica.resolution);
+			return false;
 		    });
 		    $(painel).find("[data-info='lockopen']").on("click",function(e){
 			var p = i3GEO.Interface.openlayers.BALAOPROP;
@@ -793,13 +793,16 @@ i3GEO.Interface =
 		i3geoOL.getLayersBase = function() {
 		    return i3geoOL.getLayersBy("isBaseLayer", true);
 		};
-		i3geoOL.getLayerBase = function(){
+		//layername e opcional
+		i3geoOL.getLayerBase = function(layername){
 		    var baseLayers, n, i;
 		    baseLayers = i3geoOL.getLayersBase();
 		    n = baseLayers.length;
-		    // desliga todos
 		    for (i = 0; i < n; i++) {
-			if(baseLayers[i].getVisible() == true){
+			if(layername && baseLayers[i].getProperties().name == layername){
+			    return baseLayers[i];
+			}
+			if(!layername && baseLayers[i].getVisible() == true){
 			    return baseLayers[i];
 			}
 		    }
@@ -1619,17 +1622,24 @@ i3GEO.Interface =
 	    /**
 	     * Define um dos layers existentes no mapa como baselayer
 	     */
-	    ativaFundo : function(nome) {
+	    ativaFundo : function(nome,obj) {
+		//para efeitos de compatibilidade, obj pode nao existir
+		//obj pode ser radio
 		var baseLayers, n, i, t, ck = true;
 		baseLayers = i3geoOL.getLayersBase();
 		n = baseLayers.length;
+		if(obj){
+		    ck = obj.checked;
+		}
 		// desliga todos
-		for (i = 0; i < n; i++) {
-		    baseLayers[i].setVisible(false);
+		if(obj && obj.type != "checkbox"){
+		    for (i = 0; i < n; i++) {
+			baseLayers[i].setVisible(false);
+		    }
 		}
 		for (i = 0; i < n; i++) {
 		    if (baseLayers[i].get("name") === nome) {
-			baseLayers[i].setVisible(true);
+			baseLayers[i].setVisible(ck);
 		    }
 		}
 		if(i3GEO.maparef.APIOBJ != ""){
