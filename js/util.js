@@ -3288,7 +3288,7 @@ i3GEO.util =
 	 *
 	 * Aplica um efeito sobre um elemento quando e feito o clique
 	 *
-	 * Parametres:
+	 * Parameters:
 	 *
 	 * {objeto dom}
 	 */
@@ -3309,7 +3309,7 @@ i3GEO.util =
 	 *
 	 * Parser de hash e template com Mustache. Troca caracter & amp; para &
 	 *
-	 * Parametres:
+	 * Parameters:
 	 *
 	 * {string}
 	 *
@@ -3346,7 +3346,7 @@ i3GEO.util =
 	 *
 	 * Copia um texto para o clipboar
 	 *
-	 * Parametres:
+	 * Parameters:
 	 *
 	 * {string}
 	 */
@@ -3377,13 +3377,17 @@ i3GEO.util =
 	/**
 	 * Function: getFormData
 	 *
-	 * Serializa os elementos de um formulario
+	 * Serializa os elementos de um formulario usando jQuery
 	 *
 	 * Exemplo: i3GEO.util.getFormData('#some-form')
 	 *
-	 * Parametres:
+	 * Parameters:
 	 *
-	 * {dom}
+	 * {dom_query}
+	 *
+	 * Return:
+	 *
+	 * {object}
 	 */
 	getFormData: function(dom_query){
 	    var out = {};
@@ -3394,6 +3398,31 @@ i3GEO.util =
 		out[record.name] = record.value;
 	    }
 	    return out;
+	},
+	/**
+	 * Function: dynamicSortString
+	 *
+	 * Funcao de ordenamento de um array de objetos que considera um indice do tipo string
+	 *
+	 * Exemplo: [{"a":"aaaaa"},{"a":"bbbbb"}].sort(i3GEO.util.dynamicSortString("a"))
+	 *
+	 * veja https://stackoverflow.com/questions/1129216/sort-array-of-objects-by-string-property-value-in-javascript
+	 *
+	 * Parameters:
+	 *
+	 * {string}
+	 *
+	 */
+	dynamicSortString: function(property) {
+	    var sortOrder = 1;
+	    if(property[0] === "-") {
+	        sortOrder = -1;
+	        property = property.substr(1);
+	    }
+	    return function (a,b) {
+	        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+	        return result * sortOrder;
+	    }
 	}
 };
 

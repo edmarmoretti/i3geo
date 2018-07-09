@@ -51,7 +51,6 @@ include_once("carrega_ext.php");
 include(dirname(__FILE__)."/../ms_configura.php");
 
 $cp = new cpaint();
-
 $onlineresource = $_GET["onlineresource"];
 $tipo = $_GET["tipo"];
 $servico = $_GET["servico"];
@@ -62,7 +61,6 @@ $rss = $_GET["rss"];
 //busca o getcapabilities de um wms
 //
 $funcao = $_GET["funcao"];
-
 if ($funcao == "getcapabilities")
 {
     $cp->register('getcapabilities');
@@ -126,19 +124,22 @@ if ($funcao == "listaRSSws")
 {
     $cp->register('listaRSSws');
     $cp->start();
-    ob_clean;
+    ob_clean();
     $cp->return_data();
     exit;
 }
 
 if ($funcao == "listaRSSwsARRAY")
 {
+    /*
     $cp->register('listaRSSwsARRAY');
     $cp->start();
-    if(ob_get_contents ()){
-        ob_end_clean();
-    }
-    $cp->return_data();
+    */
+    $data = listaRSSwsARRAY();
+    ob_clean();
+    //$cp->return_data();
+    header('Content-Type: application/json');
+    echo json_encode(["data"=>$data]);
     exit;
 }
 
@@ -162,12 +163,10 @@ Retorno:
 function listaRSSwsARRAY()
 {
     global $cp,$rss,$locaplic,$tipo,$esquemaadmin;
-
     if(!isset($tipo)){$tipo = "GEORSS";}
     include_once("$locaplic/classesphp/funcoes_gerais.php");
     include_once("$locaplic/classesphp/xml.php");
     include("$locaplic/ms_configura.php");
-
     if($esquemaadmin != ""){
         $esquemaadmin = $esquemaadmin.".";
     }
@@ -198,6 +197,11 @@ function listaRSSwsARRAY()
                 $canali = simplexml_load_string(geraXmlWS($locaplic));
                 $linkrss = $urli3geo."/rss/xmlservicosws.php";
             }
+
+            if($tipo == "ARCGISREST"){
+                $canali = simplexml_load_string(geraXmlARCGISREST($locaplic));
+                $linkrss = "";
+            }
         } else {
             $canali = simplexml_load_file($rss);
         }
@@ -209,11 +213,14 @@ function listaRSSwsARRAY()
         //var_dump($canali);
         $canais = array();
         foreach ($canali->channel->item as $item){
-            $canais[] = array("id_ws"=>(ixml($item,"id")),"title"=>(ixml($item,"title")),"description"=>(ixml($item,"description")),"link"=>(ixml($item,"link")),"author"=>(ixml($item,"author")),"nacessos"=>(ixml($item,"nacessos")),"nacessosok"=>(ixml($item,"nacessosok")),"tipo_ws"=>(ixml($item,"tipo")));
+            $urlservice = ixml($item,"link");
+            $title = ixml($item,"title");
+            $canais[] = array("id_ws"=>(ixml($item,"id")),"title"=>$title,"description"=>(ixml($item,"description")),"link"=>$urlservice,"author"=>(ixml($item,"author")),"nacessos"=>(ixml($item,"nacessos")),"nacessosok"=>(ixml($item,"nacessosok")),"tipo_ws"=>(ixml($item,"tipo")));
         }
         $linhas["canais"] = $canais;
     }
-    $cp->set_data($linhas);
+    //$cp->set_data($linhas);
+    return $linhas;
 }
 
 /*

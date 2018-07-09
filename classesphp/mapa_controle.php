@@ -1986,6 +1986,20 @@ switch (strtoupper($funcao)) {
         $tipo_ws = $_pg["tipo_ws"];
         $retorno = listaLayersWMS();
         break;
+    case "LISTALAYERSARCGISREST":
+        $id_ws = $_pg["id_ws"];
+        $nomelayer = $_pg["nomelayer"];
+        //obtem a url
+        include("conexao.php");
+        $sql = "SELECT link_ws from {$esquemaadmin}i3geoadmin_ws WHERE id_ws = '{$id_ws}'";
+        $q = $dbh->query($sql,PDO::FETCH_ASSOC)->fetchAll();
+        $servico = $q[0]["link_ws"];
+        if(!empty($nomelayer)){
+            $servico = $servico . "/" . $nomelayer;
+        }
+        include_once ("wmswfs.php");
+        $retorno = json_decode(listaLayersARCGISREST());
+        break;
     /*
      * Section: Atributos
      *

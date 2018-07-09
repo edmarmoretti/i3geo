@@ -1301,6 +1301,12 @@ i3GEO.php =
 		+ "&tipo_ws=" + tipo_ws;
 	    cpJSON.call(p, "listaLayersWMS", funcao, par);
 	},
+	listaLayersARCGISREST : function(funcao, id_ws, nomelayer) {
+	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
+		"funcao=listaLayersARCGISREST&id_ws=" + id_ws + "&nomelayer=" + nomelayer
+		+ "&tipo_ws=ARCGISREST";
+	    cpJSON.call(p, "listaLayersARCGISREST", funcao, par);
+	},
 	/**
 	 * Function: buscaRapida
 	 *

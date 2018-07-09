@@ -6,4 +6,5 @@
 	<option {{GEORSS-sel}} value="GEORSS">GEORSS</option>
 	<option {{WS-sel}} value="WS">WS</option>
 	<option {{GEOJSON-sel}} value="GEOJSON">GEOJSON</option>
+    <option {{ARCGISREST-sel}} value="ARCGISREST">ArcGis REST</option>
 </script>

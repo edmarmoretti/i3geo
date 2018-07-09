@@ -20,7 +20,7 @@
 			</div>
 		</div>
 	</div>
-	<div class="row">
+	<div class="row hidden">
 		<div class="col-md-12">
 			<div class="form-group form-group-lg">
 				<label class="col-md-5 control-label" for="codigo_estat_conexao" >{{{codigo_estat_conexaoTxt}}}</label>

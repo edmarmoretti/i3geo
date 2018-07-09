@@ -53,7 +53,7 @@
  */
 function gravaCacheWMS($servico) {
 	global $dir_tmp, $i3geo_proxy_server;
-	if ($dir_tmp == "") {
+	if ($dir_tmp == "" || $i3geo_proxy_server == "") {
 		include (dirname ( __FILE__ ) . "/../ms_configura.php");
 	}
 	// error_reporting(0);
@@ -351,7 +351,7 @@ function getcapabilities3() {
  * {html} - htaml formatado para permitir a escolha de uma camada
  */
 function temaswms() {
-	global $servico, $id_ws;
+    global $servico, $id_ws, $i3geo_proxy_server;
 	// para admin/cadastros/servicos/exec.php
 	$_GET ["funcao"] = "lista";
 	$wms_service_request = gravaCacheWMS ( $servico );
@@ -470,6 +470,20 @@ function temaswms() {
 	//$retorna [] = "<br><p class='paragrafo'>Suporta SLD:</p><div class='styled-select'><input type='text' id='suportasld' value='" . $suporta . "' /></div>";
 	return (implode ( $retorna ));
 }
+function listaLayersARCGISREST(){
+    global $servico, $i3geo_proxy_server;
+    //echo $i3geo_proxy_server;exit;
+    $curl = curl_init ();
+    curl_setopt ( $curl, CURLOPT_URL, $servico."?f=json" );
+    curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 );
+    curl_setopt ( $curl, CURLOPT_HEADER, 0 );
+    if (isset ( $i3geo_proxy_server ) && $i3geo_proxy_server != "") {
+        curl_setopt ( $curl, CURLOPT_PROXY, $i3geo_proxy_server );
+    }
+    $list = curl_exec ( $curl );
+    curl_close ( $curl );
+    return $list;
+}
 /*
  * Function: listaLayersWMS
  *
@@ -488,8 +502,7 @@ function temaswms() {
  * {array}
  */
 function listaLayersWMS() {
-	global $servico, $nivel, $id_ws, $nomelayer, $tipo_ws;
-
+    global $servico, $nivel, $id_ws, $nomelayer, $tipo_ws, $i3geo_proxy_server;
 	if (! isset ( $nomelayer )) {
 		$nomelayer = "undefined";
 	}

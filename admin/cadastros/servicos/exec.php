@@ -27,12 +27,12 @@ include ("funcoes.php");
 //
 include ($_SESSION["locaplic"]."/admin/php/conexao.php");
 /***************************************************************/
-if ($_GET["funcao"] != "lista" && \admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/webservices" ) === false) {
+if (@$_GET["funcao"] != "lista" && \admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/webservices" ) === false) {
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-$id_ws = $_POST["id_ws"];
-$id = $_POST["id"];
+$id_ws = @$_POST["id_ws"];
+$id = @$_POST["id"];
 
 \admin\php\funcoesAdmin\testaSafeNumerico(array($id,$id_ws));
 

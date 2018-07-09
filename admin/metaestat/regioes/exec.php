@@ -30,7 +30,7 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) =
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-$codigo_tipo_regiao = $_POST["codigo_tipo_regiao"];
+$codigo_tipo_regiao = @$_POST["codigo_tipo_regiao"];
 
 \admin\php\funcoesAdmin\testaSafeNumerico(array($codigo_tipo_regiao));
 
