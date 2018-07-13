@@ -1,6 +1,6 @@
 
 <!-- camadas existentes no mapa -->
-<div id='guia1obj' data-traduzir="true" style='display: none; height: 100%'>
+<div id='guia1obj' data-traduzir="true" style='display: none; height: 100%;'>
     <div class="i3GEOfechaGuia" style="display: flex;">
         <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');">
             <span style="vertical-align: middle">{{{iconeMapa}}}</span>
@@ -52,7 +52,7 @@
         </button>
     </div>
     <div class="separadorCabecalhoGuias">&nbsp;</div>
-    <div class="guiaOverflow" style="height: calc(100% - 45px); width: calc(100% - 5px);">
+    <div class="guiaOverflow" style="height: calc(100% - 45px); width: calc(100% - 12px);">
         <!-- Esta div acrescenta a lista de layers graficos -->
         <div id="listaLayersGr" style="overflow: none;" data-template="templates/camadaGr.html"></div>
         <!-- Esta div acrescenta a lista de camadas disponiveis no mapa atual -->

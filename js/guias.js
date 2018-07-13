@@ -660,7 +660,12 @@ i3GEO.guias =
 	    for (g = 0; g < 12; g++) {
 		Dom.setStyle(namespace + g + "obj", "display", "none");
 	    }
-	    Dom.setStyle(guia + "obj", "display", "block");
+	    if(guia != ""){
+		Dom.setStyle(guia + "obj", "display", "block");
+	    }
+	},
+	escondeGuiasFerramenta : function(namespace){
+	    i3GEO.guias.mostraGuiaFerramenta("",namespace);
 	},
 	ajustaGuiaFerramenta : function(){}
 };

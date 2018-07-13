@@ -30,12 +30,12 @@
         <button data-info='copy' style='padding: 2px; margin: 0px 3px 0px 0px;' class='btn btn-default btn-xs'>
             <span style='font-size:2rem;' class='glyphicon glyphicon-copy' aria-hidden='true'></span>
         </button>
-        <button data-info='close' style='padding: 2px; margin: 0px 3px 0px 0px; right: 0px; position: absolute;' class='btn btn-default btn-xs'>
-            <span style='vertical-align: middle; padding: 0px;' class='material-icons'>highlight_off</span>
-        </button>
     </div>
     <div class='tooltip-conteudo'>
         {{{texto}}}
     </div>
-    <smal style='color:gray;'><span class='copyToMemory' onclick='i3GEO.util.copyToClipboard(this.innerHTML);return false;'>{{{x}}},{{{y}}}</span></smal>
+    <smal style='color:gray;'><span class='copyToMemory' onclick='i3GEO.util.copyToClipboard("{{{x}}},{{{y}}}");return false;'>{{{xtxt}}},{{{ytxt}}}</span></smal>
+        <button data-info='close' style='padding: 2px; margin: 0px 3px 0px 0px; right: 0px; position: absolute;' class='btn btn-default btn-xs'>
+            <span style='color:gray;vertical-align: middle; padding: 0px;' class='material-icons'>highlight_off</span>
+        </button>
 </div>

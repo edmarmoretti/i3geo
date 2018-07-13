@@ -1,9 +1,9 @@
 if (typeof (i3GEOF) === 'undefined') {
     var i3GEOF = {};
 }
-i3GEOF.identifica =
-{
+i3GEOF.identifica = {
 	resolution: 8,
+	renderFunction: i3GEO.janela.formModal,
 	/*
 	 * Propriedade: mostraSistemasAdicionais
 	 *
@@ -21,7 +21,8 @@ i3GEOF.identifica =
 	    "mustache": "",
 	    "mustachesistemas": "",
 	    "mustachedados": "",
-	    "marca": false
+	    "marca": false,
+	    "idContainer": "i3GEOidentificaguiasContainer"
 	},
 	/*
 	 * Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
@@ -56,7 +57,10 @@ i3GEOF.identifica =
 	    var hash = i3GEO.idioma.objetoIdioma(i3GEOF.identifica.dicionario);
 	    hash["locaplic"] = i3GEO.configura.locaplic;
 	    hash["resolution"] = i3GEOF.identifica.resolution;
-	    i3GEO.janela.closeMsg(Mustache.render(p.mustache, hash));
+	    hash["namespace"] = "identifica";
+	    hash["idContainer"] = p.idContainer;
+
+	    i3GEOF.identifica.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
 
 	    i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia1", "i3GEOidentificaguia");
 
@@ -102,6 +106,7 @@ i3GEOF.identifica =
 		    }
 		}
 	    };
+	    i3GEO.janela.applyScrollBar(p.idContainer);
 	    i3GEOF.identifica.getData();
 	},
 	buffer: function(){
@@ -230,7 +235,7 @@ i3GEOF.identifica =
 	    }
 	},
 	abrejanelaIframe : function(w, h, s) {
-	    i3GEO.janela.closeMsg();
+	    i3GEO.janela.formModal();
 	    i3GEO.janela.cria(
 		    w,
 		    h,

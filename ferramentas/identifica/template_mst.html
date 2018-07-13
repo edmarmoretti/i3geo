@@ -1,59 +1,48 @@
 <!-- Guias -->
-<div id='i3GEOidentificaguiasYUI' class='yui-navset' style='height: 38px; top: 0px; cursor: pointer; margin-left: 2px;'>
-	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
-		<li>
-			<div id='i3GEOidentificaguia3' style='text-align: center; left: 0px;'>
-				<a title='{{{propriedades}}}'>
-					<em><span class="material-icons">settings</span></em>
-				</a>
-			</div>
-		</li>
-        <li>
-            <div id='i3GEOidentificaguia4' style='text-align: center; left: 0px;'>
-                <a>
-                    <span class='copyToMemory' style='font-size:2rem;' ></span>
-                </a>
-            </div>
-        </li>
-		<li>
-			<div id='i3GEOidentificaguia1' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{resultado}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOidentificaguia5' style='text-align: center; left: 0px;'>
-				<a>
-					<em>XY/buffer</em>
-				</a>
-			</div>
-		</li>
-        <li>
-            <div id='i3GEOidentificaguia6' style='text-align: center; left: 0px;'>
-                <a>
-                    <em>Links</em>
-                </a>
-            </div>
-        </li>
-	</ul>
-</div>
-<div class='container-fluid' style="height: calc(100% - 39px); overflow: auto;">
-	<!-- Resultado -->
-	<div class='container-fluid' id='i3GEOidentificaguia1obj'></div>
-	<!-- propriedades -->
-	<div class='container-fluid' id='i3GEOidentificaguia3obj'>
-		<div class='form-group label-fixed'>
-			<label class="control-label" for="i3GEOtabelafiltro1">{{{resolucaoBusca}}}</label>
-			<input class="form-control input-lg" type='text' id='i3GEOidentificaresolucao' value='{{{resolution}}}' />
-		</div>
-	</div>
-	<!-- coordenadas e buffer -->
-	<div class='container-fluid' id='i3GEOidentificaguia5obj'>
-        <div id='i3GEOidentificacoord'></div>
-		<a href='javascript:void(0)' onclick="i3GEOF.identifica.buffer('')" class='btn btn-primary btn-sm btn-raised'>{{{criaBuffer}}}</a>
-	</div>
-    <div class='container-fluid' id='i3GEOidentificaguia6obj'>
+<nav class='navbar navbar-default' >
+    <div class="container-fluid">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse">
+            <ul class="nav navbar-nav ">
+                <li role="presentation"><a id='i3GEO{{namespace}}guia3' title='{{{propriedades}}}' href="javascript:void(0);">
+                        <em><span class="material-icons">settings</span></em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia4' href="javascript:void(0);">
+                        <span class='copyToMemory' style='font-size: 2rem;'></span>
+                    </a></li>
+                <li role="presentation" class="active"><a id='i3GEO{{namespace}}guia1' href="javascript:void(0);">
+                        <em>{{{resultado}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia5' href="javascript:void(0);">
+                        <em>XY/buffer</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia6' href="javascript:void(0);">
+                        <em>Links</em>
+                    </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <!-- Resultado -->
+    <div class='container-fluid' id='i3GEO{{namespace}}guia1obj'></div>
+    <!-- propriedades -->
+    <div class='container-fluid' id='i3GEO{{namespace}}guia3obj'>
+        <div class='form-group label-fixed'>
+            <label class="control-label" for="i3GEOtabelafiltro1">{{{resolucaoBusca}}}</label>
+            <input class="form-control input-lg" type='text' id='i3GEO{{namespace}}resolucao' value='{{{resolution}}}' />
+        </div>
+    </div>
+    <!-- coordenadas e buffer -->
+    <div class='container-fluid' id='i3GEO{{namespace}}guia5obj'>
+        <div id='i3GEO{{namespace}}coord'></div>
+        <a href='javascript:void(0)' onclick="i3GEOF.identifica.buffer('')" class='btn btn-primary btn-sm btn-raised'>{{{criaBuffer}}}</a>
+    </div>
+    <div class='container-fluid' id='i3GEO{{namespace}}guia6obj'>
         <div id='i3GEOidentificaSis'></div>
         <div id='i3GEOidentificalistaSistemas'></div>
     </div>

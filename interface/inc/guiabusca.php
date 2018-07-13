@@ -11,7 +11,7 @@
         </button>
     </div>
     <div class="separadorCabecalhoGuias">&nbsp;</div>
-    <div class="guiaOverflow" style="height: calc(100% - 45px)">
+    <div class="guiaOverflow" style="height: calc(100% - 45px);width: calc(100% - 12px);">
         <form onSubmit="return false;">
             <div class="form-group label-floating">
                 <label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>

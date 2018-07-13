@@ -414,9 +414,10 @@ i3GEO.Interface =
 		templateModal: "",
 		removeAoAdicionar : true,
 		classeCadeado : "i3GEOiconeAberto",
-		autoPan : true,
+		autoPan : false,
 		autoPanAnimation : {
-		    duration : 250
+		    duration : 250,
+		    easing: ol.easing.inAndOut
 		},
 		minWidth : '200px',
 		modal: false,
@@ -480,6 +481,8 @@ i3GEO.Interface =
 		var hash = {
 			"x": x,
 			"y": y,
+			"xtxt": $.number(x,3,$trad("dec"),$trad("mil")),
+			"ytxt": $.number(y,3,$trad("dec"),$trad("mil")),
 			"resolution": i3GEO.configura.ferramentas.identifica.resolution,
 			"tolerancia": $trad("tolerancia")
 		};
@@ -585,15 +588,19 @@ i3GEO.Interface =
 		    b = new ol.Overlay({
 			element : painel,
 			stopEvent : true,
-			autoPan : p.autoPan,
+			autoPan : false,//nao funciona o true
 			autoPanAnimation : p.autoPanAnimation
 		    });
 		    b.setProperties({origem : "balao"});
 		    p.baloes.push(b);
 		    i3geoOL.addOverlay(b);
 		    b.setPosition(i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates());
+		    if(p.autoPan == true){
+			i3GEO.Interface.openlayers.pan2ponto(x,y,p.autoPanAnimation);
+		    } else {
+			i3GEO.Interface.openlayers.pan2ponto(x,y,false);
+		    }
 		};
-
 		if(i3GEO.template.infotooltip == false){
 		    $.get(i3GEO.configura.locaplic+"/js/templates/infotooltip.html").done(function(r) {
 			i3GEO.template.infotooltip = r;
@@ -762,10 +769,12 @@ i3GEO.Interface =
 		ol.layer.Layer.prototype.getVisibility = function(v) {
 		    this.getVisible(v);
 		};
-		i3geoOL.panTo = function(x, y) {
-		    this.getView().setCenter([
-			x, y
-			]);
+		i3geoOL.panTo = function(x, y, anim) {
+		    if(anim){
+			this.getView().animate({center: [x,y],duration: anim.duration,easing: anim.easing});
+		    } else {
+			this.getView().setCenter([x, y]);
+		    }
 		};
 		i3geoOL.getLayersByName = function(nome) {
 		    var res = [], layers = this.getLayers(), n = layers.getLength(), i;
@@ -1882,7 +1891,7 @@ i3GEO.Interface =
 		v.fit(m, i3geoOL.getSize());
 		i3GEO.eventos.cliquePerm.status = true;
 	    },
-	    pan2ponto : function(x, y) {
+	    pan2ponto : function(x, y, anim) {
 		// verifica se nao e necessario alterar as coordenadas
 		if (i3GEO.Interface.openlayers.googleLike === true) {
 		    var metrica;
@@ -1894,7 +1903,7 @@ i3GEO.Interface =
 			y = metrica[1];
 		    }
 		}
-		i3geoOL.panTo(x, y);
+		i3geoOL.panTo(x, y, anim);
 	    }
 	},
 	/**

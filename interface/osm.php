@@ -237,7 +237,9 @@ include ($configInc["url"]."/css.php");
 
                 $(".guiaOverflow").mCustomScrollbar({
                     scrollbarPosition : "inside",
-                    theme : "inset-2-dark"
+                    theme : "minimal-dark",
+                    contentTouchScroll : false,
+                    documentTouchScroll : false
                 });
                 tutorial.init();
                 new ol.control.FullScreen({
@@ -320,7 +322,7 @@ include ($configInc["url"]."/css.php");
                 },
                 //barra de rolagem - ver plugin jquery https://github.com/malihu/malihu-custom-scrollbar-plugin
                 scrollBar : {
-                    theme : "inset-2",
+                    theme : "minimal-dark",
                     axis : "yx",
                     scrollbarPosition : "inside",
                     scrollButtons : {

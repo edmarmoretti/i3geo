@@ -1,3 +1,14 @@
+.closeModal {
+	position: relative;
+	left: 20px;
+}
+.navbar, .navbar.navbar-default {
+	background-color: #386682 !Important;
+}
+.container-tools {
+	overflow: auto;
+	max-height: calc(100vh - 120px);
+}
 .waitSpin {
 	border: 16px solid #f3f3f3; /* Light grey */
 	border-top: 16px solid #005272; /* green */
@@ -27,7 +38,7 @@
 	border-bottom: 1px solid #d2caca;
 }
 
-.i3GEOCabecalhoInfoWindow>button {
+.i3GEOCabecalhoInfoWindow>button, .i3GEOCabecalhoInfoWindow>.dropdown>button {
 	color: #386682 !Important;
 }
 
@@ -111,14 +122,14 @@
 	font-family: "Glyphicons Halflings";
 	content: "\e113";
 	float: right;
-	color: #009688;
+	color: #386682;
 	font-size: 14px;
 }
 /* Icon when the collapsible content is hidden */
 [data-toggle*=collapse].collapsed:after {
 	content: "\e114";
 	float: right;
-	color: #009688;
+	color: #386682 ;
 	font-size: 14px;
 }
 
@@ -147,6 +158,11 @@ Barra de botoes de navegacao
 /*
 Para a barra de rolagem
 */
+.mCSB_outside + .mCS-minimal-dark.mCSB_scrollTools_vertical, .mCSB_outside + .mCS-minimal.mCSB_scrollTools_vertical {
+    right: -10px;
+    margin: 12px 0;
+}
+
 .customScrollBar {
 	height: 100%;
 	overflow: hidden;
@@ -170,6 +186,11 @@ Para a barra de rolagem
 
 .customScrollBar .mCSB_scrollTools {
 	margin-right: 0px;
+}
+
+.mCSB_container.mCS_no_scrollbar_y.mCS_y_hidden {
+    margin-right: 0;
+    display: initial;
 }
 
 /*

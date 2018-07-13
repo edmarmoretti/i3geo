@@ -46,7 +46,7 @@
     </div>
     <div class="separadorCabecalhoGuias">&nbsp;</div>
 
-    <div class="guiaOverflow" style="height: calc(100% - 45px)">
+    <div class="guiaOverflow" style="height: calc(100% - 45px);width: calc(100% - 12px);">
         <div id="catalogoMigalha" style="display: block;" data-template="templates/catalogoMigalha.html"></div>
         <!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
         <div id="catalogoNavegacao"></div>

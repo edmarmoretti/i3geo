@@ -331,6 +331,7 @@ border-radius: 10px;
 border: 1px solid #cccccc;
 bottom: 12px;
 left: -50px;
+z-Index: 2;
 }
 .ol-popup:after, .ol-popup:before {
 top: 100%;

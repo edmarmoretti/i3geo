@@ -193,6 +193,35 @@ i3GEO.arvoreDeCamadas =
 		$(temp).html(t);
 	    }
 	},
+	verifyFilter: function(camada) {
+	    var f = i3GEO.arvoreDeCamadas.FILTRO;
+	    if(f == ""){
+		return true;
+	    }
+	    var mostra = true;
+	    if (f === "desligados" && camada.status != 0 ) {
+		mostra = false;
+	    }
+	    if (f === "ligados" && camada.status == 0) {
+		mostra = false;
+	    }
+	    if (f === "selecionados" && camada.sel.toLowerCase() !== "sim") {
+		mostra = false;
+	    }
+	    if (f === "download" && camada.download.toLowerCase() !== "sim") {
+		mostra = false;
+	    }
+	    if (f === "wms" && camada.connectiontype * 1 !== 7) {
+		mostra = false;
+	    }
+	    if (f === "raster" && camada.type * 1 !== 3) {
+		mostra = false;
+	    }
+	    if (f === "toponimia" && camada.type * 1 !== 4) {
+		mostra = false;
+	    }
+	    return mostra;
+	},
 	/**
 	 * Function: atualiza
 	 *
@@ -272,27 +301,7 @@ i3GEO.arvoreDeCamadas =
 		}
 		//aplica o filtro
 		if (temp && i3GEO.arvoreDeCamadas.FILTRO !== "") {
-		    if (i3GEO.arvoreDeCamadas.FILTRO === "desligados" && camada.checked == "checked") {
-			mostra = false;
-		    }
-		    if (i3GEO.arvoreDeCamadas.FILTRO === "ligados" && camada.checked == "") {
-			mostra = false;
-		    }
-		    if (i3GEO.arvoreDeCamadas.FILTRO === "selecionados" && tema.sel.toLowerCase() !== "sim") {
-			mostra = false;
-		    }
-		    if (i3GEO.arvoreDeCamadas.FILTRO === "download" && tema.download.toLowerCase() !== "sim") {
-			mostra = false;
-		    }
-		    if (i3GEO.arvoreDeCamadas.FILTRO === "wms" && tema.connectiontype * 1 !== 7) {
-			mostra = false;
-		    }
-		    if (i3GEO.arvoreDeCamadas.FILTRO === "raster" && tema.type * 1 !== 3) {
-			mostra = false;
-		    }
-		    if (i3GEO.arvoreDeCamadas.FILTRO === "toponimia" && tema.type * 1 !== 4) {
-			mostra = false;
-		    }
+		    mostra = i3GEO.arvoreDeCamadas.verifyFilter(tema);
 		}
 		if(temp && mostra == true){
 		    i3GEO.arvoreDeCamadas.montaIconesTema(tema,camada);
@@ -803,10 +812,10 @@ i3GEO.arvoreDeCamadas =
 		console.info("i3GEO.arvoreDeCamadas.listaLigadosDesligados()");
 
 	    if (!i3GEO.arvoreDeCamadas.CAMADAS) {
-		return [[],[],[]];
+		return [[],[],[],[]];
 	    }
 
-	    var i = 0, ligados = [], desligados = [], todos = [], camada, camadas = i3GEO.arvoreDeCamadas.CAMADAS;
+	    var i = 0, filtrados = [], ligados = [], desligados = [], todos = [], camada, camadas = i3GEO.arvoreDeCamadas.CAMADAS;
 	    i = camadas.length;
 	    while (i > 0) {
 		i -= 1;
@@ -817,11 +826,15 @@ i3GEO.arvoreDeCamadas =
 		} else {
 		    desligados.push(camada["name"]);
 		}
+		if(i3GEO.arvoreDeCamadas.verifyFilter(camada) == true){
+		    filtrados.push(camada["name"]);
+		}
 	    }
 	    return ([
 		ligados,
 		desligados,
-		todos
+		todos,
+		filtrados
 		]);
 	},
 	/**
@@ -1160,7 +1173,7 @@ i3GEO.arvoreDeCamadas =
 			"filtroarvore",
 			"filtroarvore",
 			"dependencias.php",
-			"i3GEOF.filtroarvore.iniciaJanelaFlutuante()"
+			"i3GEOF.filtroarvore.start()"
 		);
 	    },
 	    /**
@@ -1174,7 +1187,8 @@ i3GEO.arvoreDeCamadas =
 			"excluirarvore",
 			"excluirarvore",
 			"dependencias.php",
-			"i3GEOF.excluirarvore.iniciaJanelaFlutuante()"
+			//"i3GEOF.excluirarvore.iniciaJanelaFlutuante()"
+			"i3GEOF.excluirarvore.start()"
 		);
 	    }
 	}

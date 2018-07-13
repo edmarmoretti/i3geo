@@ -1,9 +1,9 @@
 //+$trad(1,i3GEOF.filtroarvore.dicionario)+
 i3GEOF.filtroarvore.dicionario = {
 	'selecionaFiltro' : [ {
-		pt : "Escolha o tipo de filtro",
-		en : "Choose filter type",
-		es : "Elija el tipo de filtro"
+		pt : "Escolha o tipo de filtro que ser&aacute; aplicado &agrave; lista de camadas",
+		en : "",
+		es : ""
 	} ],
 	'removeFiltro' : [ {
 		pt : "remover filtro",
@@ -51,8 +51,8 @@ i3GEOF.filtroarvore.dicionario = {
 		es : "Operaci&oacute;n"
 	} ],
 	'exclui' : [ {
-		pt : "excluir",
-		en : "delete",
-		es : "eliminar"
+		pt : "excluir do mapa as camadas",
+		en : "",
+		es : ""
 	} ]
 };
