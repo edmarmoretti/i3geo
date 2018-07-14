@@ -1,4 +1,7 @@
 <?php
+//
+//veja i3GEO.mapa.dialogo.opacidademapa()
+//
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)));
 /**

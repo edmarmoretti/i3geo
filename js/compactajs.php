@@ -175,6 +175,7 @@ $jsfiles = array(
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
 "../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
 "../pacotes/bootstrap/js/bootstrap.min.js",
+"../pacotes/nouislider/nouislider.min.js",
 "compactados/material.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",

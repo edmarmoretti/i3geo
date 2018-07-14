@@ -51,6 +51,7 @@
  *
  * {string} - Nome do arquivo criado. Retorna a palavra "erro" se tiver ocorrido um erro.
  */
+
 function gravaCacheWMS($servico) {
 	global $dir_tmp, $i3geo_proxy_server;
 	if ($dir_tmp == "" || $i3geo_proxy_server == "") {
@@ -656,7 +657,7 @@ function imprimeTag($r, $retorna) {
 	return $retorna;
 }
 function pegaTag($layer) {
-	// error_reporting(0);
+	error_reporting(0);
 	$noslayer = $layer->childNodes;
 	$resultado = array (
 			"estiloas" => array (),

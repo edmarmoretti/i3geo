@@ -659,7 +659,7 @@ i3GEO.mapa =
 	     */
 	    animacao : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.tema.dialogo.animacao()",
+			"i3GEO.mapa.dialogo.animacao()",
 			"animacao",
 			"animacao",
 			"dependencias.php",
@@ -676,7 +676,7 @@ i3GEO.mapa =
 			"opacidademapa",
 			"opacidademapa",
 			"dependencias.php",
-		"i3GEOF.opacidademapa.iniciaJanelaFlutuante()");
+		"i3GEOF.opacidademapa.start()");
 	    },
 	    /**
 	     * Function: t3d

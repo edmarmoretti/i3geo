@@ -117,7 +117,7 @@ i3GEO.catalogoInde = {
 				//verifica se o menu esta na lista de ids definidos em i3GEO.catalogoInde.IDSMENUS
 				$.each( dados, function( i,v ) {
 					clone.push({
-						"nome": i,
+						"nome": i + " (" + dados[i].length + ")",
 						"onclick": "i3GEO.catalogoInde.listaTemas('" + i + "')"
 					});
 				});

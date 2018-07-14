@@ -1,4 +1,5 @@
 <?php
+//http://localhost/i3geo/ferramentas/vinde/wmsindejson.php
 include(dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
@@ -51,7 +52,7 @@ for ($i=0;$i<$n;$i++){
 
 		$pt = "/(new OpenLayers\.Layer\.WMS\(\')(.*)',\s'(.*)',\s{/";
 		preg_match_all($pt, $linha, $matches);
-		$nomeLayer = $matches[2][0];////converte($matches[2][0]);
+		$nomeLayer = $matches[2][0];
 		$layer[] = $nomeLayer;
 		$parametros = array();
 		$urlwms = $matches[3][0];
@@ -67,7 +68,8 @@ for ($i=0;$i<$n;$i++){
 			$pt = "/($b[0]:\s\')(.*)(\'\, $b[1])/";
 			preg_match_all($pt, $linha, $matches);
 
-			$linhas = ($matches[2][0]);
+			$linhas = $matches[2][0];
+
 			$parametros[$b[0]] = $linhas;
 			if($b[0] == "groupOfKeeper"){
 				if(empty($gruposUnicos[$linhas])){
@@ -91,14 +93,21 @@ $chaves = array_keys($grupos);
 sort($chaves);
 $arvore = array();
 foreach($chaves as $chave){
-	$hs = explode("/",$chave);
+	//remove outras /
+    $p1 = explode("/",$chave);
+    $chave = $p1[0]."||";
+    $p1[0] = "";
+    $chave = $chave . implode(" ",$p1);
+    $hs = explode("||",$chave);
 	$d = $hs;
 	array_shift($d);
 	if(array_key_exists(0,$hs) && array_key_exists($hs[0],$arvore)){
 		$arvore[$hs[0]] = array_merge($arvore[$hs[0]],noi($d,$arvore[$hs[0]]));
+	    //$arvore[$hs[0]] = array_merge($arvore[$hs[0]],$d);
 	}
 	else{
 		$arvore[$hs[0]] = noi($d,array());
+	    //$arvore[$hs[0]] = $d;
 	}
 }
 $final = array(
@@ -106,15 +115,15 @@ $final = array(
 		"arvore"=>$arvore
 );
 //teste
-$final = json_encode($final);
-$final = json_decode($final);
+//$final = json_encode($final);
+//$final = json_decode($final);
 
 //error_reporting(0);
 ob_end_clean();
 if(extension_loaded('zlib')){
 	ob_start('ob_gzhandler');
 }
-header("Content-type: text/html");
+header("Content-type: application/json");
 echo json_encode($final,true);
 if(extension_loaded('zlib')){
 	ob_end_flush();

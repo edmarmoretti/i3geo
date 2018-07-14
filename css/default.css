@@ -1,3 +1,38 @@
+/*slide*/
+.noUi-horizontal {
+    height: 5px;
+}
+.noUi-horizontal .noUi-handle {
+    width: 18px;
+    height: 18px;
+    left: -9px;
+    top: -7px;
+    border-radius: 10px;
+}
+.noUi-handle::after, .noUi-handle::before {
+	display: none;
+}
+.noUi-horizontal .noUi-tooltip {
+    font-size: 1rem;
+}
+.noUi-connect {
+    background: #DAE1E0;
+}
+.noUi-handle.noUi-active {
+  -webkit-transform: scale3d(1.2, 1.2, 1);
+  transform: scale3d(1.2, 1.2, 1);
+}
+.noUi-active {
+	box-shadow: none;
+}
+.noUi-horizontal .noUi-tooltip {
+    -webkit-transform: translate(-50%,0);
+    transform: translate(-50%,0);
+    left: -60%;
+    bottom: 120%;
+}
+
+
 .closeModal {
 	position: relative;
 	left: 20px;

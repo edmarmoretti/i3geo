@@ -516,6 +516,22 @@ i3GEO.arvoreDeCamadas =
 			html: true,
 			template : "<div class='tooltip ' ><div class='tooltip-inner'></div></div>"
 		    });
+		    //slide
+		    $.each(clone,function(i,v){
+			var slide = $i("slideFundo" + v.value);
+			noUiSlider.create(slide, {
+			    connect: "lower",
+			    start: [ 100 ],
+			    range: {
+				'min': [  0 ],
+				'max': [ 100 ]
+			    },
+			    name: v.value
+			});
+			slide.noUiSlider.on('update', function( values, handle ) {
+			    i3GEO.Interface.aplicaOpacidade(values[0]*1,this.options.name);
+			});
+		    });
 		}
 	    }
 	},

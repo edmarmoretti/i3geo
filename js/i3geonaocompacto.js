@@ -41,6 +41,7 @@
 	"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
 	"../pacotes/bootstrap/js/bootstrap.min.js",
 	"../pacotes/bootstrap-material-design/dist/js/material.min.js",
+	"../pacotes/nouislider/nouislider.min.js",
 	"ini_i3geo.js",
 	"util.js",
 	"dicionario.js",
