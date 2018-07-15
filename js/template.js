@@ -17,6 +17,7 @@ i3GEO.template = {
 	    listaDeIcones: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-xs" style="margin: 2px; padding: 2px;"><span class="material-icons {{{classe}}}" style="{{{estiloicon}}}">{{{icone}}}</span></button>',
 	    padrao: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-primary btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>'
 	},
+	checkbox: '<div class="checkbox text-left" title="{{{title}}}"><label><input {{checked}} name="{{{name}}}" id="{{id}}" type="checkbox" value="{{{value}}}"><span class="checkbox-material noprint"><span class="check" ></span></span> {{{label}}}</label></div>',
 	//utilizados nas janelas flutuantes
 	janela : {
 	    aguarde: "<div id='{{id}}_imagemCabecalho' class='i3GeoAguardeJanela progress' style='visibility:hidden; '><span class='progress-bar progress-bar-striped active' role='progressbar' style='width: 100%'></span></div>",

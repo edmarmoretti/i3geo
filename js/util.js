@@ -3371,6 +3371,7 @@ i3GEO.util =
 		    return false;
 		} finally {
 		    document.body.removeChild(textarea);
+		    i3GEO.janela.snackBar({content: $trad("copytomemory"),timeout: 1000});
 		}
 	    }
 	},

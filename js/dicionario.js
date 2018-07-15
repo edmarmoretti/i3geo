@@ -3122,5 +3122,10 @@ g_traducao =
             pt : "Contorno",
             en : "Outline",
             es : "Contorno"
+        }],
+        "copytomemory" : [{
+            pt : "Copiado para a mem&oacute;ria",
+            en : "",
+            es : ""
         }]
     };

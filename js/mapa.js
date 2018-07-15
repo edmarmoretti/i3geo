@@ -663,7 +663,7 @@ i3GEO.mapa =
 			"animacao",
 			"animacao",
 			"dependencias.php",
-		"i3GEOF.animacao.iniciaJanelaFlutuante()");
+		"i3GEOF.animacao.start()");
 	    },
 	    /**
 	     * Function: opacidade

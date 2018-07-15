@@ -1,239 +1,176 @@
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
 i3GEOF.animacao = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
-	aguarde: "",
+	renderFunction: i3GEO.janela.formModal,
+	_parameters : {
+	    "mustache": "",
+	    "idContainer": "i3GEOanimacaoguiasContainer",
+	    "namespace": "animacao",
+	    "idlista": "i3GEOanimacaoguiasContainerLista",
+	    "codigos": [],
+	},
 	tempo: 1000,
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.animacao.dicionario);
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		return dicionario;
+	start: function(){
+	    var i3f = i3GEOF.animacao,
+	    p = i3f._parameters,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/animacao/template_mst.html";
+	    if(p.mustache === ""){
+		$.get(t1, function(template) {
+		    p.mustache = template;
+		    i3f.html();
+		}).fail(function() {
+		    i3GEO.janela.tempoMsg($trad("erroTpl"));
+		});
+	    } else {
+		i3f.html();
+	    }
 	},
-	/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		if(i3GEOF.animacao.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/animacao/template_mst.html", function(template) {
-				i3GEOF.animacao.MUSTACHE = template;
-				i3GEOF.animacao.inicia(iddiv);
-			});
-			return;
-		}
-		i3GEOF.animacao.aguarde.visibility = "visible";
-		$i(iddiv).innerHTML = i3GEOF.animacao.html();
-
-		i3GEOF.animacao.listaDeCamadas();
-		i3GEOF.animacao.aguarde.visibility = "hidden";
-	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	*/
 	html:function() {
-		var ins = Mustache.render(i3GEOF.animacao.MUSTACHE, i3GEOF.animacao.mustacheHash());
-		return ins;
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = i3GEO.idioma.objetoIdioma(i3GEOF[p.namespace].dicionario);
+	    hash["locaplic"] = i3GEO.configura.locaplic;
+	    hash["namespace"] = p.namespace;
+	    hash["idContainer"] = p.idContainer;
+	    hash["idlista"] = p.idlista;
+	    i3f.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
+	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    i3GEOF.animacao.listaDeCamadas();
 	},
-	listaDeCamadas: function(camadas){
-		if(!camadas){
-			camadas = i3GEO.arvoreDeCamadas.CAMADAS;
+	listaDeCamadas: function(){
+	    var p = this._parameters,
+	    camadas = i3GEO.arvoreDeCamadas.CAMADAS,
+	    n = camadas.length,
+	    ins = "",
+	    hash = [];
+	    while(n > 0){
+		n -= 1;
+		if(camadas[n].tema !== ""){
+		    hash.push({
+			"title": "",
+			"checked": "checked",
+			"value": camadas[n].name,
+			"id": "i3GEOanima" + camadas[n].name,
+			"label": camadas[n].tema
+		    });
+
+		    ins += '<div class="checkbox text-left"><label>';
+		    ins += '	<input checked id="" type="checkbox" value="'+camadas[n].name+'">';
+		    ins += '	<span class="checkbox-material noprint"><span class="check" id="i3GEOanima' + camadas[n].name + '"></span></span> ' + camadas[n].tema;
+		    ins += '</label></div>';
 		}
-		var n = camadas.length,
-			ins = "";
-		while(n > 0){
-			n -= 1;
-			if(camadas[n].tema !== ""){
-				ins += '<div class="checkbox text-left"><label>';
-				ins += '	<input checked id="" type="checkbox" value="'+camadas[n].name+'">';
-				ins += '	<span class="checkbox-material noprint"><span class="check" id="i3GEOanima' + camadas[n].name + '"></span></span> ' + camadas[n].tema;
-				ins += '</label></div>';
-			}
-		}
-		$i("i3GEOFanimacaoLista").innerHTML = ins;
+	    }
+	    ins = Mustache.render("{{#data}}" + i3GEO.template.checkbox + "{{/data}}", {data: hash});
+	    $i(p.idlista).innerHTML = ins;
+	    i3GEO.janela.snackBar({content: $trad("ajuda",i3GEOF[p.namespace].dicionario)});
 	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var janela,divid,temp,titulo,cabecalho,minimiza;
-		if($i("i3GEOF.animacao")){
-			return;
-		}
-		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.iconiza("i3GEOF.animacao",200);
-		};
-		//cria a janela flutuante
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p21") + "</span></div>";
-		janela = i3GEO.janela.cria(
-			"410px",
-			"250px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.animacao",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			true,
-			"",
-			"",
-			"",
-			"",
-			107
-		);
-		divid = janela[2].id;
-		$i("i3GEOF.animacao_corpo").style.backgroundColor = "white";
-		$i("i3GEOF.animacao_corpo").style.textAlign = "left";
-		i3GEOF.animacao.aguarde = $i("i3GEOF.animacao_imagemCabecalho").style;
-		i3GEOF.animacao.inicia(divid);
-		temp = function(){
-			i3GEOF.animacao.termina();
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-	},
-	codigos: [],
-	/*
-	Function: anima
-
-	Inicia a anima&ccedil;&atilde;o
-
-	*/
 	dispara: function(){
-		if(i3GEOF.animacao.aguarde.visibility === "visible")
-		{return;}
-		var codigos = i3GEOF.animacao.obtemTemasAnima();
-		i3GEOF.animacao.codigos = codigos;
-		i3GEOF.animacao.contador = 0;
-		i3GEOF.animacao.aguarde.visibility = "visible";
-		i3GEOF.animacao.desligaTodos(codigos);
-		i3GEOF.animacao.retornaCoresInicial();
-		i3GEOF.animacao.anima(i3GEOF.animacao.codigos.length - 1);
+	    var codigos = i3GEOF.animacao.obtemTemasAnima();
+	    this._parameters.codigos = codigos;
+	    i3GEOF.animacao.contador = 0;
+	    i3GEOF.animacao.desligaTodos(codigos);
+	    i3GEOF.animacao.anima(codigos.length);
 	},
 	maisrapido: function(){
-		i3GEOF.animacao.tempo -= 100;
+	    i3GEOF.animacao.tempo -= 100;
 	},
 	maislento: function(){
-		i3GEOF.animacao.tempo += 100;
+	    i3GEOF.animacao.tempo += 100;
 	},
 	anima: function(c){
-		if(i3GEOF.animacao.codigos.length === 0)
-		{return;}
-		//console.warn(c);
-		if(c < 0){
-			i3GEOF.animacao.termina();
-			i3GEOF.animacao.dispara();
-		}
-		else{
-			$i("i3GEOanima"+i3GEOF.animacao.codigos[c]).style.backgroundColor = "yellow";
-			i3GEOF.animacao.ligaDesliga(i3GEOF.animacao.codigos[c],'troca');
-			setTimeout("i3GEOF.animacao.anima("+(c - 1)+");",i3GEOF.animacao.tempo);
-		}
+	    if(this._parameters.codigos.length === 0)
+	    {return;}
+	    $( "#" + this._parameters.idlista ).toggle(false);
+	    if(c < 0){
+		i3GEOF.animacao.termina();
+		i3GEOF.animacao.dispara();
+	    }
+	    else{
+		i3GEOF.animacao.ligaDesliga(this._parameters.codigos[c],'troca');
+		setTimeout("i3GEOF.animacao.anima("+(c - 1)+");",i3GEOF.animacao.tempo);
+	    }
 	},
 	desligaTodos: function(codigos){
-		var n = codigos.length;
-		while(n > 0){
-			n -= 1;
-			i3GEOF.animacao.ligaDesliga(codigos[n],"desliga");
+	    var n = codigos.length;
+	    while(n >= 0){
+		n -= 1;
+		if(codigos[n]){
+		    i3GEOF.animacao.ligaDesliga(codigos[n],"desliga");
 		}
+	    }
 	},
 	ligaDesliga: function(codigoTema,tipo){
-		var layer,estilo;
-		switch(i3GEO.Interface.ATUAL){
-			case "openlayers":
-				layer = i3geoOL.getLayersByName(codigoTema)[0];
-				if(tipo === "troca"){
-					layer.setVisibility(!layer.getVisibility());
-				}
-				if(tipo === "liga")
-				{layer.setVisibility(true);}
-				if(tipo === "desliga")
-				{layer.setVisibility(false);}
-				break;
-			case "googlemaps":
-				layer = i3GEO.Interface.googlemaps.retornaDivLayer(codigoTema);
-				if(!layer){return;}
-				estilo = layer.style.visibility;
-				if(tipo === "troca"){
-					if(estilo === "visible" || estilo === "")
-					{layer.style.visibility = "hidden";}
-					else
-					{layer.style.visibility = "visible";}
-				}
-				if(tipo === "liga")
-				{layer.style.visibility = "visible";}
-				if(tipo === "desliga")
-				{layer.style.visibility = "hidden";}
-				break;
-		};
+	    if(codigoTema == undefined){
+		return;
+	    }
+	    var layer,estilo;
+	    switch(i3GEO.Interface.ATUAL){
+	    case "openlayers":
+		layer = i3geoOL.getLayersByName(codigoTema)[0];
+		if(tipo === "troca"){
+		    layer.setVisibility(!layer.getVisibility());
+		}
+		if(tipo === "liga")
+		{layer.setVisibility(true);}
+		if(tipo === "desliga")
+		{layer.setVisibility(false);}
+		break;
+	    case "googlemaps":
+		layer = i3GEO.Interface.googlemaps.retornaDivLayer(codigoTema);
+		if(!layer){return;}
+		estilo = layer.style.visibility;
+		if(tipo === "troca"){
+		    if(estilo === "visible" || estilo === "")
+		    {layer.style.visibility = "hidden";}
+		    else
+		    {layer.style.visibility = "visible";}
+		}
+		if(tipo === "liga")
+		{layer.style.visibility = "visible";}
+		if(tipo === "desliga")
+		{layer.style.visibility = "hidden";}
+		break;
+	    };
 	},
 	termina: function(){
-		i3GEOF.animacao.codigos = [];
-		i3GEOF.animacao.aguarde.visibility = "hidden";
-		i3GEOF.animacao.retornaStatusInicial();
+	    this._parameters.codigos = [];
+	    i3GEOF.animacao.retornaStatusInicial();
+	    $( "#" + this._parameters.idlista ).toggle(true);
 	},
 	obtemTemasAnima: function(){
-		var temp = [],
-			cs = $i("i3GEOFanimacaoLista").getElementsByTagName("input"),
-			n = cs.length;
-		while(n > 0){
-			n -= 1;
-			if(cs[n].checked === true)
-			{temp.push(cs[n].value);}
+	    var l = $i(this._parameters.idlista);
+	    if(!l){
+		this.termina();
+		return;
+	    }
+	    var temp = [],
+	    cs = l.getElementsByTagName("input"),
+	    n = cs.length;
+	    while(n >= 0){
+		n -= 1;
+		if(cs[n] && cs[n].checked === true){
+		    temp.push(cs[n].value);
 		}
-		return temp;
+	    }
+	    return temp;
 	},
 	retornaStatusInicial: function(){
-		if($i("i3GEOFanimacaoLista")){
-			i3GEOF.animacao.retornaCoresInicial();
-			var temas = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS),
-				n = temas.length;
-			while(n > 0){
-				n -= 1;
-				i3GEOF.animacao.ligaDesliga(temas[n].name,"liga");
-			}
-			temas = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"diferente",i3GEO.arvoreDeCamadas.CAMADAS);
-			n = temas.length;
-			while(n > 0){
-				n -= 1;
-				i3GEOF.animacao.ligaDesliga(temas[n].name,"desliga");
-			}
-		}
-	},
-	retornaCoresInicial: function(){
-		var cs = $i("i3GEOFanimacaoLista").getElementsByTagName("input"),
-			n = cs.length;
+	    if($i(this._parameters.idlista)){
+		var temas = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"igual",i3GEO.arvoreDeCamadas.CAMADAS),
+		n = temas.length;
 		while(n > 0){
-			n -= 1;
-			$i("i3GEOanima"+cs[n].value).style.backgroundColor = "";
+		    n -= 1;
+		    i3GEOF.animacao.ligaDesliga(temas[n].name,"liga");
 		}
+		temas = i3GEO.arvoreDeCamadas.filtraCamadas("status",2,"diferente",i3GEO.arvoreDeCamadas.CAMADAS);
+		n = temas.length;
+		while(n >= 0){
+		    n -= 1;
+		    if(temas[n]){
+			i3GEOF.animacao.ligaDesliga(temas[n].name,"desliga");
+		    }
+		}
+	    }
 	}
 };

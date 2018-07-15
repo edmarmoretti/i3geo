@@ -75,8 +75,8 @@ i3GEO.janela =
 	    scrollbarPosition: "inside",
 	    advanced:{ autoExpandHorizontalScroll: true },
 	    scrollButtons:{ enable: false },
-            contentTouchScroll : false,
-            documentTouchScroll : false
+	    contentTouchScroll : false,
+	    documentTouchScroll : false
 	},
 	/**
 	 * Cada vez que uma janela flutuante &eacute; criada, esse valor &eacute; acrescido de 1
@@ -611,6 +611,24 @@ i3GEO.janela =
 		i3GEO.janela.CONTADORAGUARDE.pop();
 	    }
 	},
+	//http://fezvrasta.github.io/snackbarjs/
+	snackBar: function({content = "", style = "snackbar", timeout = 4000, htmlAllowed = true, onClose = function(){}}){
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.janela.snackbar()" + content);
+	    $("#snackbar-container").find("div").filter(function(){
+		if($(this).css('opacity') < 1){
+		    $(this).remove();
+		}
+	    });
+	    var options =  {
+		    content: content, // text of the snackbar
+		    style: style, // add a custom class to your snackbar
+		    timeout: timeout, // time in milliseconds after the snackbar autohides, 0 is disabled
+		    htmlAllowed: htmlAllowed, // allows HTML as content value
+		    onClose: onClose // callback called when the snackbar gets closed.
+	    };
+	    $.snackbar(options);
+	},
 	/**
 	 * Function: tempoMsg
 	 *
@@ -687,6 +705,10 @@ i3GEO.janela =
 		    backdrop: backdrop
 		});
 		i3GEO.janela._formModal.draggable(draggable);
+	    }
+	    //fecha as guias em dispositivos com tela pequena
+	    if(i3GEO.parametros.w < 420){
+		i3GEO.guias.abreFecha("fecha");
 	    }
 	},
 	/**

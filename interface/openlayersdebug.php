@@ -101,8 +101,7 @@ include ($configInc["url"]."/css.php");
     </script>
     <script>
             //ativa o banner de inicializacao
-            i3GEO.janela.tempoMsg(
-                $i("i3GEOlogoMarcaTemplate").innerHTML, 4000);
+            //i3GEO.janela.tempoMsg($i("i3GEOlogoMarcaTemplate").innerHTML, 4000);
             (function() {
             //parametros aplicados na criacao do arquivo mapfile
             var parametrosMapa = {
