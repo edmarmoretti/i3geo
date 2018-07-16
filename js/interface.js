@@ -627,100 +627,6 @@ i3GEO.Interface =
 	     * Usado na troca de interfaces entre googlemaps e openlayers
 	     */
 	    fundoDefault : function(){
-		var eng, oce, ims, wsm, tms, bra;
-		eng = new ol.layer.Tile({
-		    title : "ESRI National Geographic",
-		    visible : true,
-		    isBaseLayer : true,
-		    name : "eng",
-		    source : new ol.source.TileArcGISRest({
-			url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
-			attributions: [
-			    new ol.Attribution({
-				html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
-			    })
-			    ]
-		    })
-		});
-		oce = new ol.layer.Tile({
-		    title : "ESRI Ocean Basemap",
-		    visible : false,
-		    isBaseLayer : true,
-		    name : "oce",
-		    source : new ol.source.TileArcGISRest({
-			url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
-			attributions: [
-			    new ol.Attribution({
-				html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
-			    })
-			    ]
-		    })
-		});
-		ims = new ol.layer.Tile({
-		    title : "ESRI Imagery World 2D",
-		    visible : false,
-		    isBaseLayer : true,
-		    name : "ims",
-		    source : new ol.source.TileArcGISRest({
-			url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
-			attributions: [
-			    new ol.Attribution({
-				html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
-			    })
-			    ]
-		    })
-		});
-		wsm = new ol.layer.Tile({
-		    title : "ESRI World Street Map",
-		    visible : false,
-		    isBaseLayer : true,
-		    name : "wsm",
-		    source : new ol.source.TileArcGISRest({
-			url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
-			attributions: [
-			    new ol.Attribution({
-				html: 'Tiles &copy; <a href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
-			    })
-			    ]
-		    })
-		});
-		bra = new ol.layer.Tile({
-		    title : "Base carto MMA",
-		    visible : false,
-		    isBaseLayer : true,
-		    name : "bra",
-		    source : new ol.source.TileWMS({
-			url : "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/baseraster.map&",
-			params : {
-			    'layers' : "baseraster",
-			    'srs' : "EPSG:4326",
-			    'format' : "image/png"
-			}
-		    })
-		});
-		tms = new ol.layer.Tile({
-		    title : "OSGEO",
-		    visible : false,
-		    isBaseLayer : true,
-		    name : "tms",
-		    source : new ol.source.TileWMS({
-			url : "http://tilecache.osgeo.org/wms-c/Basic.py/",
-			params : {
-			    'layers' : "basic",
-			    'type' : "png",
-			    'srs' : "EPSG:4326",
-			    'format' : "image/png",
-			    'VERSION' : '1.1.1'
-			},
-			attributions: [
-			    new ol.Attribution({
-				html: '&copy; <a href="http://www.tilecache.org/">2006-2010, TileCache Contributors</a>'
-			    })
-			    ]
-		    })
-		});
-		i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ eng, oce, ims, wsm, tms,
-		    bra ];
 	    },
 	    /**
 	     * Cria o mapa do lado do cliente (navegador) Define o que for necessario para a criacao de
@@ -1271,6 +1177,7 @@ i3GEO.Interface =
 				    if (camada.wmstile == 10) {
 					// TODO testar isso
 					source = new ol.source.WMTS({
+					    crossOrigin : "anonymous",
 					    url : urllayer,
 					    matrixSet : opcoes.projection,
 					    format : 'image/png',
@@ -1286,6 +1193,7 @@ i3GEO.Interface =
 					opcoes.singleTile = false;
 				    } else {
 					source = new ol.source.TileWMS({
+					    crossOrigin : "anonymous",
 					    url : urllayer,
 					    params : {
 						// 'LAYERS' : camada.wmsname,
@@ -1394,6 +1302,7 @@ i3GEO.Interface =
 				    if (opcoes.singleTile === true) {
 					source = new ol.source.ImageWMS({
 					    url : urllayer,
+					    crossOrigin : "anonymous",
 					    params : {
 						'LAYERS' : camada.name,
 						'VERSION' : '1.1.0'
@@ -1406,6 +1315,7 @@ i3GEO.Interface =
 					if(i3GEO.Interface.openlayers.googleLike === false){
 					    source = new ol.source.WMTS({
 						url : urllayer + "&WIDTH=256&HEIGHT=256",
+						crossOrigin : "anonymous",
 						matrixSet : opcoes.projection,
 						format : 'image/png',
 						projection : opcoes.projection,
@@ -1420,6 +1330,7 @@ i3GEO.Interface =
 					    source.set("tipoServico", "WMTS");
 					}else{
 					    source = new ol.source.XYZ({
+						crossOrigin : "anonymous",
 						url : urllayer+"&X={x}&Y={y}&Z={z}",
 						matrixSet : opcoes.projection,
 						format : 'image/png',

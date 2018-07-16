@@ -106,7 +106,7 @@ i3GEO.catalogoInde = {
 
 			var lista = function(dados){
 				if(i3GEO.catalogoInde.DADOS == ""){
-					i3GEO.janela.tempoMsg($trad("indeOk"));
+					i3GEO.janela.snackBar({content:$trad("indeOk")})
 				}
 				i3GEO.catalogoInde.DADOS = dados;
 				var clone = [],

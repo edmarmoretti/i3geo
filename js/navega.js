@@ -695,6 +695,7 @@ i3GEO.navega =
 		    var originX = centerX - half;
 		    var originY = centerY - half;
 		    var size = 2 * half + 1;
+		    console.log(originX +", "+originY+", "+ size+", "+ size)
 		    var sourceData = context.getImageData(originX, originY, size, size).data;
 		    var dest = context.createImageData(size, size);
 		    var destData = dest.data;

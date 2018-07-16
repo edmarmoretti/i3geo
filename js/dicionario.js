@@ -3127,5 +3127,10 @@ g_traducao =
             pt : "Copiado para a mem&oacute;ria",
             en : "",
             es : ""
+        }],
+        "nenhumaSel" : [{
+            pt : "N&atilde;o existe nenhuma camada com sele&ccedil;&atilde;o",
+            en : "",
+            es : ""
         }]
     };

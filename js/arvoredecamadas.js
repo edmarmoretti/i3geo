@@ -193,8 +193,20 @@ i3GEO.arvoreDeCamadas =
 		$(temp).html(t);
 	    }
 	},
-	verifyFilter: function(camada) {
-	    var f = i3GEO.arvoreDeCamadas.FILTRO;
+	existeCamadaSel: function({msg = true}={}){
+	    var sel = false;
+	    $.each(i3GEO.arvoreDeCamadas.CAMADAS, function(i,v){
+		sel = v.sel.toLowerCase() !== "sim" ? false : true;
+	    });
+	    if(msg == true && sel == false){
+		i3GEO.janela.snackBar({content: $trad("nenhumaSel")});
+	    }
+	    return sel;
+	},
+	verifyFilter: function(camada,f) {
+	    if(!f){
+		f = i3GEO.arvoreDeCamadas.FILTRO;
+	    }
 	    if(f == ""){
 		return true;
 	    }

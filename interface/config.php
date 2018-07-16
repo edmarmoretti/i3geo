@@ -32,7 +32,8 @@ i3GEO.janela.ativaAlerta();
                     preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
-								url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
+								crossOrigin : "anonymous",
+                                url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
 								attributions : [ new ol.Attribution(
 										{
 											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
@@ -48,7 +49,8 @@ i3GEO.janela.ativaAlerta();
                     preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
-								url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
+								crossOrigin : "anonymous",
+                                url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
 								attributions : [ new ol.Attribution(
 										{
 											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
@@ -64,7 +66,8 @@ i3GEO.janela.ativaAlerta();
                     preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
-								url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
+								crossOrigin : "anonymous",
+                                url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
 								attributions : [ new ol.Attribution(
 										{
 											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
@@ -80,7 +83,8 @@ i3GEO.janela.ativaAlerta();
                     preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
-								url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
+								crossOrigin : "anonymous",
+                                url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
 								attributions : [ new ol.Attribution(
 										{
 											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
@@ -101,7 +105,8 @@ i3GEO.janela.ativaAlerta();
 									'layers' : "baseraster",
 									'srs' : "EPSG:4326",
 									'format' : "image/png"
-								}
+								},
+                                crossOrigin : "anonymous"
 							})
 				});
 		i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ eng, oce, ims, wsm,

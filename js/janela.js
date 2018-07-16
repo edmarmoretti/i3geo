@@ -613,8 +613,6 @@ i3GEO.janela =
 	},
 	//http://fezvrasta.github.io/snackbarjs/
 	snackBar: function({content = "", style = "snackbar", timeout = 4000, htmlAllowed = true, onClose = function(){}}){
-	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.janela.snackbar()" + content);
 	    $("#snackbar-container").find("div").filter(function(){
 		if($(this).css('opacity') < 1){
 		    $(this).remove();

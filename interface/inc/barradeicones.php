@@ -37,7 +37,7 @@
         <button title="GPS" onclick="i3GEO.navega.geolocal.start()" style="float: left; cursor: pointer;">
             <i class="material-icons">gps_fixed</i>
         </button>
-        <button class="hidden-xs <?php echo $configInc["tipo"] == "OL" ? "hidden":""; ?> toggle" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor: pointer; display: none;">
+        <button class="hidden-xs toggle" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor: pointer; display: none;">
             <i class="material-icons">loupe</i>
         </button>
     </div>

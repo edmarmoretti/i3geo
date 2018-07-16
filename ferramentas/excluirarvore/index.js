@@ -5,26 +5,30 @@ i3GEOF.excluirarvore = {
 	renderFunction: i3GEO.janela.formModal,
 	_parameters : {
 	    "mustache": "",
-	    "idContainer": "i3GEOexcluirarvoreContainer"
+	    "idContainer": "i3GEOexcluirarvoreContainer",
+	    "namespace": "excluirarvore",
+	    "idlista": "i3GEOFexcluirarvoreLista"
 	},
 	start: function(iddiv){
-	    var p = i3GEOF.excluirarvore._parameters;
+	    var i3f = this,
+	    p = i3f._parameters;
 	    if(p.mustache === ""){
-		$.get(i3GEO.configura.locaplic + "/ferramentas/excluirarvore/template_mst.html", function(template) {
+		$.get(i3GEO.configura.locaplic + "/ferramentas/" + p.namespace +"/template_mst.html", function(template) {
 		    p.mustache = template;
-		    i3GEOF.excluirarvore.html();
+		    i3f.html();
 		});
 		return;
 	    } else {
-		i3GEOF.excluirarvore.html();
+		i3f.html();
 	    }
 	},
 	html:function(){
 	    var p = i3GEOF.excluirarvore._parameters;
 	    var hash = i3GEO.idioma.objetoIdioma(i3GEOF.excluirarvore.dicionario);
 	    hash["locaplic"] = i3GEO.configura.locaplic;
-	    hash["namespace"] = "excluirarvore";
+	    hash["namespace"] = p.namespace;
 	    hash["idContainer"] = p.idContainer;
+	    hash["idlista"] = p.idlista;
 	    i3GEO.janela.formModal({texto: Mustache.render(p.mustache, hash)});
 	    i3GEOF.excluirarvore.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
 	    i3GEOF.excluirarvore.lista();

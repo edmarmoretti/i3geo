@@ -14,6 +14,7 @@ if(extension_loaded('zlib')){
 	ob_start('ob_gzhandler');
 }
 header("Content-type: text/javascript");
+include("../../pacotes/filesaver/FileSaver.js");
 include("index.js");
 include("dicionario.js");
 echo "\n";

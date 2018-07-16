@@ -35,7 +35,7 @@
                 <li><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-print"></span> {{{d12}}}
                     </a></li>
-                <li><a onclick="i3GEO.mapa.limpasel()" href="javascript:void(0)">
+                <li><a onclick="i3GEO.mapa.limpasel({verifica:true})" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-erase"></span> {{{t4}}}
                     </a></li>
             </ul>

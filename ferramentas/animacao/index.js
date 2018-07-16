@@ -12,9 +12,9 @@ i3GEOF.animacao = {
 	},
 	tempo: 1000,
 	start: function(){
-	    var i3f = i3GEOF.animacao,
+	    var i3f = this,
 	    p = i3f._parameters,
-	    t1 = i3GEO.configura.locaplic + "/ferramentas/animacao/template_mst.html";
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/" + p.namespace + "/template_mst.html";
 	    if(p.mustache === ""){
 		$.get(t1, function(template) {
 		    p.mustache = template;

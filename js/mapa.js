@@ -84,14 +84,22 @@ i3GEO.mapa =
 	 * Limpa a selecao de todos os temas do mapa
 	 *
 	 */
-	limpasel : function() {
-	    i3GEO.php.limpasel(
-		    function(retorno) {
-			i3GEO.atualiza();
-			i3GEO.Interface.atualizaMapa();
-		    },
-		    ""
-	    );
+	limpasel : function({verifica = false}={}) {
+	    var sel = false;
+	    if(verifica == true){
+		sel = i3GEO.arvoreDeCamadas.existeCamadaSel({msg: true});
+	    } else {
+		sel = true;
+	    }
+	    if(sel == true){
+		i3GEO.php.limpasel(
+			function(retorno) {
+			    i3GEO.atualiza();
+			    i3GEO.Interface.atualizaMapa();
+			},
+			""
+		);
+	    }
 	},
 	/**
 	 * Ativa o redimensionamento automatico do mapa sempre que o navegador for redimensionado
