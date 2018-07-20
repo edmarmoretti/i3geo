@@ -356,7 +356,7 @@ include ($configInc["url"]."/css.php");
                 //ferramenta mapa de referencia
                 //difere das propriedades do mapa de referencia
                 //utilizado pela api openlayers ou googlemaps
-                opcoesMaparef : {
+                opcoesmaparef : {
                     //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
                     images : [ {
                     name : "Colorida",

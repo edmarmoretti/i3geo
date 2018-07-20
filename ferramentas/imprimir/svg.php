@@ -1,34 +1,4 @@
-<style>
-body
-{margin:20px;font-family: Verdana, Arial, Helvetica, sans-serif;font-size: 14px;width:300px}
-A
-{text-align:left;font-family: Verdana, Arial, Helvetica, sans-serif;color: #2F4632;}
-A:hover
-{color: #4142ff;font-weight: normal;font-family: Verdana, Arial, Helvetica, sans-serif;}
-</style>
-<body>
 <?php
-/*
-About: Licen&ccedil;a
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 $mapexten = $_GET["mapexten"];
@@ -38,7 +8,6 @@ if (isset($_GET["g_sid"]))
 {session_id($_GET["g_sid"]);}
 session_start();
 $map_file = $_SESSION["map_file"];
-$postgis_mapa = $_SESSION["postgis_mapa"];
 require_once (dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
@@ -119,8 +88,23 @@ if($imgo->imagepath == ""){
 }
 $nomer = ($imgo->imagepath)."mapa".$nomes.".svg";
 $imgo->saveImage($nomer);
-$nomemapa = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST'].($imgo->imageurl).basename($nomer);
-echo "<p>Utilize a op&ccedil;&atilde;o de altera&ccedil;&atilde;o das propriedades do mapa para ajustar a legenda, tamanho e outras caracter&iacute;sticas antes de gerar os arquivos.</p>";
-echo "<p>Arquivos gerados:</p>";
-echo "<a style=font-family:Verdana,Arial,Helvetica,sans-serif; href='$nomemapa' target=_blank >Mapa</a><br><br>";
+$nomezip = ($imgo->imagepath)."mapa".$nomes.".zip";
+include ("../../pacotes/kmlmapserver/classes/zip.class.php");
+// zipa o arquivo
+if (file_exists($nomezip)) {
+    unlink($nomezip);
+}
+$ziper = new zipfile();
+$ziper->addFile(file_get_contents($nomer),basename($nomer));
+$fp = fopen($nomezip, "wb");
+fwrite($fp, $ziper->file());
+fclose($fp);
+
+if (file_exists($nomezip)) {
+    ob_end_clean();
+    header('Content-type: application/zip');
+    header('Content-Disposition: attachment; filename=' . basename($nomezip));
+    readfile($nomezip);
+}
+
 ?>

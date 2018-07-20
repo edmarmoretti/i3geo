@@ -1957,14 +1957,14 @@ i3GEO.util =
 	 *
 	 * {String} - id do elemento HTML que recebera o combo. e utilizado apenas para inserir uma mensagem de aguarde.
 	 */
-	comboFontes : function(id, onde, classe) {
+	comboFontes : function(id, onde, classe, sel) {
 	    if(!classe){
 		classe= "";
 	    }
 	    var monta = function(retorno) {
 		var ins = "", temp, i, dados;
 		if (retorno.data !== undefined) {
-		    ins += "<select class='" + classe + "' id='" + id + "'>";
+		    ins += "<select name='font' class='" + classe + "' id='" + id + "'>";
 		    ins += "<option value='arial' >arial</option>";
 		    ins += "<option value='bitmap' >bitmap</option>";
 		    dados = retorno.data.split(",");
@@ -1975,6 +1975,9 @@ i3GEO.util =
 		    ins += "</select><b class='caret careti' ></b>";
 		}
 		$i(onde).innerHTML = ins;
+		if(sel){
+		    $i(id).value = sel;
+		}
 	    };
 	    i3GEO.php.listaFontesTexto(monta);
 	},

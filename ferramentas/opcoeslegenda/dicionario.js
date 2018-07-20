@@ -1,10 +1,5 @@
 //+$trad(1,i3GEOF.opcoesLegenda.dicionario)+
-i3GEOF.opcoesLegenda.dicionario = {
-	'msg' : [ {
-		pt : "Essa opera&ccedil;&atilde;o afeta apenas a legenda utilizada na ferramenta de impress&atilde;o do mapa",
-		en : "This operation only affects the legend used for the map printing tool",
-		es : "Esta operaci&oacute;n solo afecta a la leyenda utilizada en la herramienta de impresi&oacute;n del mapa"
-	} ],
+i3GEOF.opcoeslegenda.dicionario = {
 	'incluiNoMapa' : [ {
 		pt : "Inclui no corpo do mapa?",
 		en : "Do you want to add it to the map body?",
@@ -16,7 +11,7 @@ i3GEOF.opcoesLegenda.dicionario = {
 		es : "Color del fondo"
 	} ],
 	'contornoSimbolos' : [ {
-		pt : "Contorno dos s&iacute;mbolos",
+		pt : "Cor do contorno dos s&iacute;mbolos",
 		en : "Symbol outline",
 		es : "Contorno de los símbolos"
 	} ],
@@ -65,7 +60,7 @@ i3GEOF.opcoesLegenda.dicionario = {
 		en : "Spacing in X",
 		es : "Espaciado en X"
 	} ],
-	'tamanhoSimboloX' : [ {
+	'tamanhoSimboloY' : [ {
 		pt : "Tamanho do s&iacute;mb. Y",
 		en : "Size of Y symbol",
 		es : "Tama&ntilde;o del s&iacute;mbolo Y"
@@ -94,5 +89,10 @@ i3GEOF.opcoesLegenda.dicionario = {
 		pt : "Testar",
 		en : "Test",
 		es : "Probar"
+	} ],
+	'concluido' : [ {
+		pt : "Legenda alterada",
+		en : "",
+		es : ""
 	} ]
 };

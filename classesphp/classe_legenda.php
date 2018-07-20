@@ -147,7 +147,7 @@ class Legenda
             $vermultilayer = new vermultilayer();
             $vermultilayer->verifica($map_file, $tema);
             if ($vermultilayer->resultado == 1) // o tema e multi layer
-{
+            {
                 $ls = $vermultilayer->temas;
                 $this->visiveis = $vermultilayer->temasvisiveis;
             } else {
@@ -183,7 +183,9 @@ class Legenda
      */
     function salva()
     {
-        $this->recalculaSLD();
+        if (isset($this->layer)) {
+            $this->recalculaSLD();
+        }
         restauraConObj($this->mapa, $this->postgis_mapa);
         $this->mapa->save($this->arquivo);
     }
@@ -314,7 +316,7 @@ class Legenda
             // verifica se &eacute; wms ou se o metadata legendaimg est&aacute; definido
             $c = $this->layer->connectiontype;
             if ($c == 7 || $this->layer->getmetadata("legendaimg") != "") {
-                //return ($this->tabelaLegenda());
+                // return ($this->tabelaLegenda());
             }
             for ($i = 0; $i < $numlayers; ++ $i) {
                 $la = $this->mapa->getlayer($i);
@@ -338,11 +340,11 @@ class Legenda
             }
             $desligarLayer = array();
             if ($la->status == MS_DEFAULT) {
-                //      "legendawms"	"http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=biomas&format=image/png"
+                // "legendawms" "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=biomas&format=image/png"
 
                 if ($la->getmetadata("legendaimg") != "" || $la->getmetadata("legendawms") != "") {
                     $imagem = $la->getmetadata("legendaimg");
-                    if($imagem == ""){
+                    if ($imagem == "") {
                         $imagem = $la->getmetadata("legendawms");
                     }
                     $classes = array();
@@ -375,25 +377,25 @@ class Legenda
                             "outline" => "-1 -1 -1",
                             "background" => "-1 -1 -1"
                         );
-                        //o simbolo pode ser definido apenas com base nas cores
+                        // o simbolo pode ser definido apenas com base nas cores
                         $simple = true;
 
                         // remove o offset em simbolos do tipo imagem
                         if ($classe->numstyles > 0) {
                             $estilo = $classe->getstyle(0);
                             $simbolo = $this->mapa->getSymbolObjectById($estilo->symbol);
-                            if($simbolo != ""){
-								if ($estilo->symbolname != "" && $simbolo->imagepath != "") {
-									$estilo->set("offsetx", 0);
-									$estilo->set("offsety", 0);
-								}
-							}
+                            if ($simbolo != "") {
+                                if ($estilo->symbolname != "" && $simbolo->imagepath != "") {
+                                    $estilo->set("offsetx", 0);
+                                    $estilo->set("offsety", 0);
+                                }
+                            }
                             $cor = array(
                                 "color" => corRGB($estilo->color),
                                 "outline" => corRGB($estilo->outlinecolor),
                                 "background" => corRGB($estilo->backgroundcolor)
                             );
-                            if($estilo->symbolname != "" && $estilo->symbolname != "linha" && $estilo->symbolname != "ponto"){
+                            if ($estilo->symbolname != "" && $estilo->symbolname != "linha" && $estilo->symbolname != "ponto") {
                                 $simple = false;
                             }
                         }
@@ -405,9 +407,9 @@ class Legenda
                             "checked" => $ck,
                             "index" => $c,
                             "layer" => $la->name,
-                            "cor"=>$cor,
-                            "w"=>$w,
-                            "h"=>$h,
+                            "cor" => $cor,
+                            "w" => $w,
+                            "h" => $h,
                             "minscaledenom" => $classe->minscaledenom,
                             "maxscaledenom" => $classe->maxscaledenom,
                             "simple" => $simple
@@ -469,7 +471,13 @@ class Legenda
         $nomer = ($imgo->imagepath) . "leg" . $nomeImagem . ".png";
         $imgo->saveImage($nomer);
         $nomer = ($imgo->imageurl) . basename($nomer);
-        return ("var legimagem='" . $nomer . "';var legwidth=" . $imgo->width . ";var legheight=" . $imgo->height . ";var legpath='" . $imgo->imagepath . "';var legurl='" . $imgo->imageurl . "'");
+        return (array(
+            "imagem" => $nomer,
+            "width" => $imgo->width,
+            "height" => $imgo->height,
+            "path" => $imgo->imagepath,
+            "url" => $imgo->imageurl
+        ));
     }
 
     /*
@@ -1105,89 +1113,64 @@ class Legenda
         ));
     }
 
-    /*
-     * function: aplicaParametrosLegImg
-     *
-     * Aplica os par&acirc;metros da legenda embebida no mapa.
-     *
-     * parameters:
-     *
-     * $imagecolor
-     *
-     * $position
-     *
-     * $status
-     *
-     * $outlinecolor
-     *
-     * $keyspacingy
-     *
-     * $keyspacingx
-     *
-     * $keysizey
-     *
-     * $keysizex
-     *
-     * $heigt
-     *
-     * $width
+    /**
+     * $parameters = array("font"=>"", "imagecolor"=>"", "position"=>"", "status"=>"", "outlinecolor"=>"", "keyspacingy"=>"", "keyspacingx"=>"", "keysizey"=>"", "keysizex"=>"", "labelsize"=>""
      */
-    function aplicaParametrosLegImg($fonte, $imagecolor, $position, $status, $outlinecolor, $keyspacingy, $keyspacingx, $keysizey, $keysizex, $height, $width, $labelsize)
+    function aplicaParametrosLegImg($parameters = array("font"=>"", "imagecolor"=>"", "position"=>"", "status"=>"", "outlinecolor"=>"", "keyspacingy"=>"", "keyspacingx"=>"", "keysizey"=>"", "keysizex"=>"", "height"=>"", "width"=>"", "labelsize"=>""))
     {
         $legenda = $this->mapa->legend;
-        $legenda->set("height", $height);
-        $legenda->set("width", $width);
-        $legenda->set("keysizex", $keysizex);
-        $legenda->set("keysizey", $keysizey);
-        $legenda->set("keyspacingx", $keyspacingx);
-        $legenda->set("keyspacingy", $keyspacingy);
+        // $legenda->set("height", $parameters["height"]);
+        // $legenda->set("width", $parameters["width"]);
+        $legenda->set("keysizex", $parameters["keysizex"]);
+        $legenda->set("keysizey", $parameters["keysizey"]);
+        $legenda->set("keyspacingx", $parameters["keyspacingx"]);
+        $legenda->set("keyspacingy", $parameters["keyspacingy"]);
         $corres = $legenda->outlinecolor;
-        $cor = explode(",", $outlinecolor);
+        $cor = explode(",", $parameters["outlinecolor"]);
         $corres->setRGB($cor[0], $cor[1], $cor[2]);
 
-        if ($status == 3) {
+        if ($parameters["status"] == 3) {
             $legenda->set("status", MS_EMBED);
         } else {
             $legenda->set("status", MS_OFF);
         }
         $verifica = $legenda->position;
         if ($verifica < 100) {
-            if ($position > 99) {
-                $position = 3;
+            if ($parameters["position"] > 99) {
+                $parameters["position"] = 3;
             }
         }
-        $legenda->set("position", $position);
+        $legenda->set("position", $parameters["position"]);
 
         $corres = $legenda->imagecolor;
-        $cor = explode(",", $imagecolor);
+        $cor = explode(",", $parameters["imagecolor"]);
         $corres->setRGB($cor[0], $cor[1], $cor[2]);
         $label = $legenda->label;
-        if ($fonte != "bitmap") {
+        if ($parameters["font"] != "bitmap") {
             $label->updatefromstring("LABEL TYPE TRUETYPE END");
-            $label->set("font", $fonte);
-            $label->set("size", $labelsize);
+            $label->set("font", $parameters["font"]);
+            $label->set("size", $parameters["labelsize"]);
         } else {
             $label->updatefromstring("LABEL TYPE BITMAP END");
             $t = MS_TINY;
-            if ($labelsize > 5) {
+            if ($parameters["labelsize"] > 5) {
                 $t = MS_TINY;
             }
-            if ($labelsize >= 7) {
+            if ($parameters["labelsize"] >= 7) {
                 $t = MS_SMALL;
             }
-            if ($labelsize >= 10) {
+            if ($parameters["labelsize"] >= 10) {
                 $t = MS_MEDIUM;
             }
-            if ($labelsize >= 12) {
+            if ($parameters["labelsize"] >= 12) {
                 $t = MS_LARGE;
             }
-            if ($labelsize >= 14) {
+            if ($parameters["labelsize"] >= 14) {
                 $t = MS_GIANT;
             }
             $label->set("size", $t);
         }
-
-        return ("ok");
+        return true;
     }
 
     /*

@@ -1,0 +1,71 @@
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form class="form-horizontal">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{incluiNoMapa}}}</label>
+            <div class="col-md-6">
+                <select class="form-control" name="status">
+                    <option value='3'>{{{sim}}}</option>
+                    <option value='1'>{{{nao}}}</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{largura}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='text' name='width' value='{{values.width}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{altura}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='text' name='height' value='{{values.height}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{unidade}}}</label>
+            <div class="col-md-6">
+                <select class="form-control" name="units">
+                    <option value='3' selected>Metros</option>
+                    <option value='4'>Km</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{estilo}}}</label>
+            <div class="col-md-6">
+                <select class="form-control" name="style">
+                    <option value='0' selected>{{{bloco}}}</option>
+                    <option value='1'>{{{linear}}}</option>
+                    <option value='2'>{{{semBarra}}}</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{intervalos}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg " type='text' name='intervals' value='{{values.intervals}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{cor}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='{{namespace}}color' name='color' value='{{values.color}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{fundo}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='{{namespace}}backgroundcolor' name='backgroundcolor' value='{{values.backgroundcolor}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{contorno}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='{{namespace}}outlinecolor' name='outlinecolor' value='{{values.outlinecolor}}' />
+            </div>
+        </div>
+    </form>
+    <button onclick="i3GEOF.{{namespace}}.mudaEscalaGrafica(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplica}}}</button>
+    <button onclick="i3GEOF.{{namespace}}.test(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{testa}}}</button>
+    <br> <br>
+</div>

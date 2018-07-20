@@ -1,0 +1,19 @@
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form class="form-horizontal">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{outlinecolorTxt}}}</label>
+            <div class="col-md-6 ">
+                <input id='opcoesMaparefoutlinecolor' name='outlinecolor' class='form-control input-lg i3geoFormIconeAquarela' type='text' value='{{{values.outlinecolor}}}'>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class='col-md-6 control-label'>{{{imagemTxt}}}</label>
+            <div class="col-md-6">
+                <select class='form-control' name='image'> {{{image}}}
+                </select> <b class='caret careti'></b>
+            </div>
+        </div>
+    </form>
+    <button onclick="i3GEOF.{{namespace}}.altera(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplica}}}</button>
+    <br> <br>
+</div>

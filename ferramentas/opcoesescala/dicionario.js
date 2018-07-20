@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.opcoesEscala.dicionario)+
-i3GEOF.opcoesEscala.dicionario = {
+//+$trad(1,i3GEOF.opcoesescala.dicionario)+
+i3GEOF.opcoesescala.dicionario = {
 	'msg' : [ {
 		pt : "Essa operacao afeta apenas a barra de escala utilizada na ferramenta de impressao do mapa",
 		en : "This operation only affects the scale bar used for the map printing tool",
@@ -74,5 +74,10 @@ i3GEOF.opcoesEscala.dicionario = {
 		pt : "Inclui no corpo do mapa?",
 		en : "Do you want to add it to the map body?",
 		es : "&iquest;Se Incluye en el cuerpo del mapa?"
+	} ],
+	'concluido' : [ {
+		pt : "Escala alterada",
+		en : "",
+		es : ""
 	} ]
 };

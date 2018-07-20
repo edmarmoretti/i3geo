@@ -612,6 +612,7 @@ i3GEO.janela =
 	    }
 	},
 	//http://fezvrasta.github.io/snackbarjs/
+	//styles: snackbar|red
 	snackBar: function({content = "", style = "snackbar", timeout = 4000, htmlAllowed = true, onClose = function(){}}){
 	    $("#snackbar-container").find("div").filter(function(){
 		if($(this).css('opacity') < 1){
@@ -679,7 +680,7 @@ i3GEO.janela =
 	},
 	_formModal: false,
 	//utilizado para mensagens de ferramentas com botao de close e outros parametros
-	formModal : function({texto = false, backdrop = false, draggable = "enable", css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'}} = {}) {
+	formModal : function({texto = false, onclose = false, backdrop = false, draggable = "enable", css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'}} = {}) {
 	    if(draggable == "enable"){
 		css.cursor = "move";
 	    }
@@ -707,6 +708,18 @@ i3GEO.janela =
 	    //fecha as guias em dispositivos com tela pequena
 	    if(i3GEO.parametros.w < 420){
 		i3GEO.guias.abreFecha("fecha");
+	    }
+	    if(onclose != false){
+
+		if (typeof (console) !== 'undefined')
+			console.info("onclose janela._formModal");
+
+		i3GEO.janela._formModal.on("hidden.bs.modal",function(){
+		    onclose();
+		    i3GEO.janela._formModal.unbind("hidden.bs.modal");
+		});
+	    } else {
+		i3GEO.janela._formModal.unbind("hidden.bs.modal");
 	    }
 	},
 	/**

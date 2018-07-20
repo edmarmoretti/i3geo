@@ -1,3 +1,29 @@
+.glyphicon.normal-right-spinner {
+    -webkit-animation: glyphicon-spin-r 2s infinite linear;
+    animation: glyphicon-spin-r 2s infinite linear;
+}
+@-webkit-keyframes glyphicon-spin-r {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
+@keyframes glyphicon-spin-r {
+    0% {
+        -webkit-transform: rotate(0deg);
+        transform: rotate(0deg);
+    }
+
+    100% {
+        -webkit-transform: rotate(359deg);
+        transform: rotate(359deg);
+    }
+}
 /* snack */
 #snackbar-container {
   position: fixed;
@@ -12,6 +38,9 @@
   max-width: 568px;
   cursor: pointer;
   opacity: 0;
+}
+.snackbar.red {
+	background-color: red;
 }
 .snackbar:after {
     font-family: "Glyphicons Halflings";
@@ -78,6 +107,9 @@
     bottom: 120%;
 }
 
+#i3geo_janelaCor_c {
+	z-Index: 999;
+}
 
 .closeModal {
 	position: relative;
@@ -383,6 +415,16 @@ Botoes material
 	font-size: 1.5rem;
 	color: white;
 	background-color: #477596;
+}
+
+.form-group input[type=number] {
+    margin-top: 14px;
+    margin-bottom: 0px;
+}
+
+.form-group select, .form-group input[type=text] {
+    margin-top: 6px;
+    margin-bottom: 0px;
 }
 
 .modal-body .form-group .form-control {
@@ -1874,11 +1916,10 @@ rotate
 }
 
 @media print {
-	-webkit-print-color-adjust
-	:exact
-	;
-
-
+	.ol-viewport>canvas {
+		height: unset !Important;
+		width: unset !Important;
+	}
 }
 /* === For phones =================================== */
 @media ( max-width : 480px) {

@@ -705,7 +705,7 @@ i3GEO.mapa =
 			"imprimir",
 			"imprimir",
 			"dependencias.php",
-		"i3GEOF.imprimir.iniciaJanelaFlutuante()");
+		"i3GEOF.imprimir.start()");
 	    },
 	    /**
 	     * Function: mostraExten
@@ -836,13 +836,13 @@ i3GEO.mapa =
 	     *
 	     * Abre a janela de dialogo da ferramenta opcoes_tamanho
 	     */
-	    tamanho : function() {
+	    opcoestamanho : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.tamanho()",
-			"opcoes_tamanho",
-			"opcoesTamanho",
+			"i3GEO.mapa.dialogo.opcoestamanho()",
+			"opcoestamanho",
+			"opcoestamanho",
 			"dependencias.php",
-		"i3GEOF.opcoesTamanho.iniciaJanelaFlutuante()");
+		"i3GEOF.opcoestamanho.start()");
 	    },
 	    /**
 	     * Function: tipoimagem
@@ -875,39 +875,39 @@ i3GEO.mapa =
 	     *
 	     * Abre a janela de dialogo da ferramenta opcoes_escala
 	     */
-	    opcoesEscala : function() {
+	    opcoesescala : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.opcoesEscala()",
-			"opcoes_escala",
-			"opcoesEscala",
+			"i3GEO.mapa.dialogo.opcoesescala()",
+			"opcoesescala",
+			"opcoesescala",
 			"dependencias.php",
-		"i3GEOF.opcoesEscala.iniciaJanelaFlutuante()");
+		"i3GEOF.opcoesescala.start()");
 	    },
 	    /**
-	     * Function: opcoesLegenda
+	     * Function: opcoeslegenda
 	     *
-	     * Abre a janela de dialogo da ferramenta opcoes_legenda
+	     * Abre a janela de dialogo da ferramenta opcoeslegenda
 	     */
-	    opcoesLegenda : function() {
+	    opcoeslegenda : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.opcoesLegenda()",
-			"opcoes_legenda",
-			"opcoesLegenda",
+			"i3GEO.mapa.dialogo.opcoeslegenda()",
+			"opcoeslegenda",
+			"opcoeslegenda",
 			"dependencias.php",
-		"i3GEOF.opcoesLegenda.iniciaJanelaFlutuante()");
+		"i3GEOF.opcoeslegenda.start()");
 	    },
 	    /**
 	     * Function: opcoesMapaRef
 	     *
 	     * Abre a janela de dialogo da ferramenta opcoes_maparef
 	     */
-	    opcoesMapaRef : function() {
+	    opcoesmaparef : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.opcoesMapaRef()",
-			"opcoes_maparef",
-			"opcoesMaparef",
+			"i3GEO.mapa.dialogo.opcoesmaparef()",
+			"opcoesmaparef",
+			"opcoesmaparef",
 			"dependencias.php",
-		"i3GEOF.opcoesMaparef.iniciaJanelaFlutuante()");
+		"i3GEOF.opcoesmaparef.start()");
 	    },
 	    /**
 	     * Function: gradeCoord

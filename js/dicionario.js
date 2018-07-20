@@ -1248,9 +1248,9 @@ g_traducao =
         ],
         "d12" : [
             {
-                pt : "Imprime o mapa",
-                en : "Print map",
-                es : "Imprime el mapa"
+                pt : "Imprimir/exportar",
+                en : "",
+                es : ""
             }
         ],
         "d13" : [

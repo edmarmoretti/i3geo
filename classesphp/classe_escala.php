@@ -132,54 +132,46 @@ string javascript com os parametros.
 		$bcor = $cor->red.",".$cor->green.",".$cor->blue;
 		$cor = $eb->outlinecolor;
 		$ocor = $cor->red.",".$cor->green.",".$cor->blue;
-		return("var status = ".$eb->status.";var w=".$eb->width.";var h=".$eb->height.";var estilo=".$eb->style.";var intervalos=".$eb->intervals.";var unidade=".$eb->units.";var cor='".$fcor."';var bcor='".$bcor."';var ocor='".$fcor."'");
+		return (array(
+		    "color"=>$fcor,
+		    "backgroundcolor"=>$bcor,
+		    "outlinecolor"=>$ocor,
+		    "status"=>$eb->status,
+		    "width"=>$eb->width,
+		    "height"=>$eb->height,
+		    "style"=>$eb->style,
+		    "intervals"=>$eb->intervals,
+		    "units"=>$eb->units
+		));
 	}
 /*
-function: mudaEscalaGrafica
-
-Muda os par&acirc;metros da barra de escala.
-
-parameters:
-$w - integer Largura.
-
-$h - integer Altura.
-
-$estilo - estilo
-
-$intervalos - N&uacute;mero de intervalos.
-
-$unidade - Tipo de unidade de medida.
-
-$cor - Cor RGB separado por v&iacute;rgulas.
-
-$bcor - Cor do fundo RGB separado por v&iacute;rgulas.
-
-$ocor - Cor do contorno RGB separado por v&iacute;rgulas.
+array("color"=>"","backgroundcolor"=>"","outlinecolor"=>"","status"=>"","width"=>"","height"=>"","style"=>"","intervals"=>"","units"=>"")
 */
-	function mudaEscalaGrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor,$status=3)
+	function mudaEscalaGrafica($parameters = array("color"=>"","backgroundcolor"=>"","outlinecolor"=>"","status"=>"","width"=>"","height"=>"","style"=>"","intervals"=>"","units"=>""))
 	{
 		$eb = $this->mapa->scalebar;
-		$eb->set("width",$w);
-		$eb->set("height",$h);
-		if ($estilo != 2)
-		{$eb->set("style",$estilo);}
-		$eb->set("intervals",$intervalos);
-		$eb->set("units",$unidade);
+		$eb->set("width",$parameters["width"]);
+		$eb->set("height",$parameters["height"]);
+		if ($parameters["style"] != 2){
+		    $eb->set("style",$parameters["style"]);
+		}
+		$eb->set("intervals",$parameters["intervals"]);
+		$eb->set("units",$parameters["units"]);
 		$corn = $eb->color;
-		$n = explode(",",$cor);
+		$n = explode(",",$parameters["color"]);
 		$corn->setrgb($n[0],$n[1],$n[2]);
 		$cornb = $eb->backgroundcolor;
-		$n = explode(",",$bcor);
+		$n = explode(",",$parameters["backgroundcolor"]);
 		$cornb->setrgb($n[0],$n[1],$n[2]);
 		$corno = $eb->outlinecolor;
-		$n = explode(",",$ocor);
+		$n = explode(",",$parameters["outlinecolor"]);
 		$corno->setrgb($n[0],$n[1],$n[2]);
 		//desabilita a escala
-		if ($estilo == 2)
+		if ($parameters["style"] == 2)
 		{$eb->set("status",MS_OFF);}
 		else
 		{$eb->set("status",MS_EMBED);}
-		if ($status == 3)
+		if ($parameters["status"] == 3)
 		{$eb->set("status",MS_EMBED);} //MS_ON, MS_OFF, MS_EMBED
 		else
 		{$eb->set("status",MS_OFF);}
@@ -187,51 +179,36 @@ $ocor - Cor do contorno RGB separado por v&iacute;rgulas.
 		return("ok");
 }
 /*
-function: testaescalagrafica
-
-Testa os par&acirc;metros da barra de escala.
-
-Gera uma imagem da escala sem alterar o mapa
-
-parameters:
-$w - integer Largura.
-
-$h - integer Altura.
-
-$estilo - estilo
-
-$intervalos - N&uacute;mero de intervalos.
-
-$unidade - Tipo de unidade de medida.
-
-$cor - Cor RGB separado por v&iacute;rgulas.
-
-$bcor - Cor do fundo RGB separado por v&iacute;rgulas.
-
-$ocor - Cor do contorno RGB separado por v&iacute;rgulas.
-
-return:
-
-string com o endere&ccedil;o da imagem criada
+array("color"=>"","backgroundcolor"=>"","outlinecolor"=>"","status"=>"","width"=>"","height"=>"","style"=>"","intervals"=>"","units"=>"")
 */
-	function testaescalagrafica($w,$h,$estilo,$intervalos,$unidade,$cor,$bcor,$ocor)
+function testaescalagrafica($parameters = array("color"=>"","backgroundcolor"=>"","outlinecolor"=>"","status"=>"","width"=>"","height"=>"","style"=>"","intervals"=>"","units"=>""))
 	{
-		$eb = $this->mapa->scalebar;
-		$eb->set("width",$w);
-		$eb->set("height",$h);
-		if ($estilo != 2)
-		{$eb->set("style",$estilo);}
-		$eb->set("intervals",$intervalos);
-		$eb->set("units",$unidade);
-		$corn = $eb->color;
-		$n = explode(",",$cor);
-		$corn->setrgb($n[0],$n[1],$n[2]);
-		$cornb = $eb->backgroundcolor;
-		$n = explode(",",$bcor);
-		$cornb->setrgb($n[0],$n[1],$n[2]);
-		$corno = $eb->outlinecolor;
-		$n = explode(",",$ocor);
-		$corno->setrgb($n[0],$n[1],$n[2]);
+	    $eb = $this->mapa->scalebar;
+	    $eb->set("width",$parameters["width"]);
+	    $eb->set("height",$parameters["height"]);
+	    if ($parameters["style"] != 2){
+	        $eb->set("style",$parameters["style"]);
+	    }
+	    $eb->set("intervals",$parameters["intervals"]);
+	    $eb->set("units",$parameters["units"]);
+	    $corn = $eb->color;
+	    $n = explode(",",$parameters["color"]);
+	    $corn->setrgb($n[0],$n[1],$n[2]);
+	    $cornb = $eb->backgroundcolor;
+	    $n = explode(",",$parameters["backgroundcolor"]);
+	    $cornb->setrgb($n[0],$n[1],$n[2]);
+	    $corno = $eb->outlinecolor;
+	    $n = explode(",",$parameters["outlinecolor"]);
+	    $corno->setrgb($n[0],$n[1],$n[2]);
+	    //desabilita a escala
+	    if ($parameters["style"] == 2)
+	    {$eb->set("status",MS_OFF);}
+	    else
+	    {$eb->set("status",MS_EMBED);}
+	    if ($parameters["status"] == 3)
+	    {$eb->set("status",MS_EMBED);} //MS_ON, MS_OFF, MS_EMBED
+	    else
+	    {$eb->set("status",MS_OFF);}
 		$objImagem = $this->mapa->drawscalebar();
 		$nomer = ($objImagem->imagepath)."sca".$this->nomeImagem.".png";
 		$objImagem->saveImage($nomer);

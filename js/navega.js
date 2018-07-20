@@ -1,34 +1,3 @@
-/**
- * Title: Navega&ccedil;&atilde;o sobre o mapa
- *
- * Realiza opera&ccedil;&otilde;es de navega&ccedil;&atilde;o do mapa, como zoom, pan, etc..
- *
- * Namespace:
- *
- * i3GEO.navega
- *
- * Veja:
- *
- * <http://localhost/i3geo/classesjs/classe_navega.js>
- */
-/**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
- * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite
- * 330, Boston, MA 02111-1307 USA.
- */
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
@@ -322,15 +291,6 @@ i3GEO.navega =
 		i3GEO.configura.sid = sid;
 	    }
 	    i3GEO.php.zoomponto(i3GEO.atualiza,x,y,tamanho,simbolo,cor);
-	    /*
-			var f =
-				"i3GEO.navega.timerNavega = null;" + "i3GEO.php.zoomponto(i3GEO.atualiza," + x + "," + y + "," + tamanho + ",'" + simbolo
-					+ "','" + cor + "');";
-			if (i3GEO.navega.timerNavega !== undefined) {
-				clearTimeout(i3GEO.navega.timerNavega);
-			}
-			i3GEO.navega.timerNavega = setTimeout(f, i3GEO.navega.TEMPONAVEGAR);
-	     */
 	},
 	/**
 	 * Function: zoompontoIMG
@@ -536,7 +496,7 @@ i3GEO.navega =
 		    e.value = parseInt(i3GEO.parametros.mapscale, 10);
 		}
 		if (i3GEO.Interface.ATUAL === "openlayers") {
-		    e.value = $.number(i3geoOL.getScale(),0,$trad("dec"),$trad("mil"))
+		    e.value = $.number(i3geoOL.getScale(),0,$trad("dec"),$trad("mil"));
 		}
 	    }
 	},
@@ -695,7 +655,7 @@ i3GEO.navega =
 		    var originX = centerX - half;
 		    var originY = centerY - half;
 		    var size = 2 * half + 1;
-		    console.log(originX +", "+originY+", "+ size+", "+ size)
+
 		    var sourceData = context.getImageData(originX, originY, size, size).data;
 		    var dest = context.createImageData(size, size);
 		    var destData = dest.data;

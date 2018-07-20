@@ -1,0 +1,18 @@
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form class='form-horizontal'>
+        <div class='form-group label-fixed condensed'>
+            <label class='col-md-6 control-label'>{{{largura}}}</label>
+            <div class='col-md-6'>
+                <input class='form-control input-lg ' type='text' name='largura' value='{{{values.largura}}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class='col-md-6 control-label'>{{{altura}}}</label>
+            <div class='col-md-6'>
+                <input class='form-control input-lg ' type='text' name='altura' value='{{{values.altura}}}' />
+            </div>
+        </div>
+    </form>
+    <button onclick='i3GEOF.opcoestamanho.mudatamanho(this)' class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplica}}}</button>
+    <br> <br>
+</div>

@@ -1,0 +1,78 @@
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form class="form-horizontal">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{incluiNoMapa}}}</label>
+            <div class="col-md-6">
+                <select name='status' class="form-control">
+                    <option value='3'>{{{sim}}}</option>
+                    <option value='1'>{{{nao}}}</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{corFundo}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='{{namespace}}imagecolor' name="imagecolor" value='{{values.imagecolor}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{contornoSimbolos}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='{{namespace}}outlinecolor' name='outlinecolor' value='{{values.outlinecolor}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{posicao}}}</label>
+            <div class="col-md-6">
+                <select class="form-control" name='position' >
+                    <option value='101'>{{{supEsquerdo}}}</option>
+                    <option value='107'>{{{supCentro}}}</option>
+                    <option value='103'>{{{supDireito}}}</option>
+                    <option value='104'>{{{infEsquerdo}}}</option>
+                    <option value='108'>{{{infCentro}}}</option>
+                    <option value='102'>{{{infDireito}}}</option>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{espacamentoY}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='number' name='keyspacingy' value='{{values.keyspacingy}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{espacamentoX}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='number' name='keyspacingx' value='{{values.keyspacingx}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{tamanhoSimboloY}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='number' name='keysizey' value='{{values.keysizey}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{tamanhoSimboloX}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='number' name='keysizex' value='{{values.keysizex}}' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{tamanhoTexto}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='number' name='labelsize' value='{{values.labelsize}}' />
+            </div>
+        </div>
+        <div style="width: 100%;" class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{fonte}}}</label>
+            <div class="col-md-6">
+                <div id='i3GEO{{namespace}}fontef'></div>
+            </div>
+        </div>
+    </form>
+    <button onclick="i3GEOF.{{namespace}}.aplicaParametrosLegImg(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplica}}}</button>
+    <button onclick="i3GEOF.{{namespace}}.test(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{testa}}}</button>
+    <br>
+    <br>
+</div>
