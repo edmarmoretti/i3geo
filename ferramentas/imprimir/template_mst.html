@@ -1,8 +1,11 @@
 <div id='{{idContainer}}' class='container-fluid container-tools'>
     <div class='form-group condensed'>
+        <button onclick='i3GEOF.{{namespace}}.pngExport();' class='btn btn-default btn-xs btn-raised'>{{{mapaPng}}}</button>
+        <button onclick='i3GEOF.{{namespace}}.legendExport();' class='btn btn-default btn-xs btn-raised'>{{{legenda}}}</button>
+        <button onclick='i3GEOF.{{namespace}}.scaleExport();' class='btn btn-default btn-xs btn-raised'>{{{escala}}}</button>
+        <button onclick='i3GEOF.{{namespace}}.maparefExport();' class='btn btn-default btn-xs btn-raised'>{{{ref}}}</button>
         <button onclick='i3GEOF.{{namespace}}.tiffExport();' class='btn btn-default btn-xs btn-raised'>Geo Tiff</button>
-        <button onclick='i3GEOF.{{namespace}}.pngExport();' class='btn btn-default btn-xs btn-raised'>Png</button>
-        <button onclick='i3GEOF.{{namespace}}.svgExport();' class='btn btn-default btn-xs btn-raised'>Svg - vetorial</button>
+        <button onclick='i3GEOF.{{namespace}}.svgExport();' class='btn btn-default btn-xs btn-raised'>Svg</button>
     </div>
     <div class='form-group condensed'>
         <h4>{{{config}}}:</h4>

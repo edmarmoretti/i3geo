@@ -75,6 +75,7 @@ i3GEOF.opcoesescala = {
 	},
 	getFormData: function(){
 	    var data = i3GEO.util.getFormData("#" + this._parameters.idContainer + " form");
+	    data.ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 	    return data
 	},
 	mudaEscalaGrafica: function(btn){

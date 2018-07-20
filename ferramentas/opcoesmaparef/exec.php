@@ -34,4 +34,23 @@ switch (strtoupper($_GET["funcao"]))
 	    echo json_encode($retorno);
 	    exit;
 	    break;
+	case "GETREFIMG":
+	    $map = ms_newMapObj($_SESSION["map_file"]);
+	    $ext = explode(" ", $_GET["ext"]);
+	    $extatual = $map->extent;
+	    $extatual->setextent($ext[0], $ext[1], $ext[2], $ext[3]);
+	    $ref = $map->reference;
+	    $o = $ref->outlinecolor;
+	    if ($o->red == - 1) {
+	        $o->setrgb(255, 0, 0);
+	    }
+	    $map->preparequery();
+	    $objImagem = $map->drawreferencemap();
+	    $nomer = ($objImagem->imagepath) . "ref" . nomeRandomico(5) . ".png";
+	    $objImagem->saveImage($nomer);
+	    ob_clean();
+	    header('Content-type: image/png');
+	    readfile($nomer);
+	    exit;
+	    break;
 }

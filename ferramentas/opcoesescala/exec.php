@@ -13,7 +13,7 @@ Aplica novos par&acirc;metros na barra de escala atual.
 <Escala->mudaEscalaGrafica>
 */
 	case "MUDAESCALAGRAFICA":
-		$m = new Escala($_SESSION["map_file"]);
+	    $m = new Escala($_SESSION["map_file"],"","",$_SESSION["mapexten"]);
 		$retorno = $m->mudaEscalaGrafica($_GET);
 		ob_clean();
 		header("Content-type: application/json");
@@ -46,12 +46,20 @@ Testa os novos par&acirc;metros de uma barra de escala.
 */
 	case "TESTAESCALAGRAFICA":
 		include_once(dirname(__FILE__)."/../../classesphp/classe_escala.php");
-		$m = new Escala($_SESSION["map_file"]);
+		$m = new Escala($_SESSION["map_file"],"","",$_GET["ext"]);
 		$retorno = $m->testaescalagrafica($_GET);
 		ob_clean();
 		header("Content-type: application/json");
 		echo json_encode($retorno);
 		exit;
 	break;
+	case "GETSCALEIMG":
+	    $m = new Escala($_SESSION["map_file"],"","",$_GET["ext"]);
+	    $retorno = $m->retornaBarraEscala();
+	    ob_end_clean();
+	    header('Content-type: image/png');
+	    readfile($retorno["scaimagem"]);
+	    exit;
+	    break;
 
 }

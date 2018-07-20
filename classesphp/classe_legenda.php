@@ -468,15 +468,16 @@ class Legenda
             echo "Erro IMAGEPATH vazio";
             exit();
         }
-        $nomer = ($imgo->imagepath) . "leg" . $nomeImagem . ".png";
-        $imgo->saveImage($nomer);
-        $nomer = ($imgo->imageurl) . basename($nomer);
+        $arq = ($imgo->imagepath) . "leg" . $nomeImagem . ".png";
+        $imgo->saveImage($arq);
+        $nomer = ($imgo->imageurl) . basename($arq);
         return (array(
             "imagem" => $nomer,
             "width" => $imgo->width,
             "height" => $imgo->height,
             "path" => $imgo->imagepath,
-            "url" => $imgo->imageurl
+            "url" => $imgo->imageurl,
+            "arq" => $arq
         ));
     }
 

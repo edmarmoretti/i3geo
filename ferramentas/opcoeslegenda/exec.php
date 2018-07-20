@@ -59,5 +59,12 @@ Testa os par&acirc;metros de defini&ccedil;&atilde;o da legenda inserida no mapa
 		echo json_encode($retorno["imagem"]);
 		exit;
 	break;
-
+	case "GETLEGENDA":
+	    $m = new Legenda($_SESSION["map_file"]);
+	    $retorno = $m->legendaGrafica();
+	    ob_end_clean();
+	    header('Content-type: image/png');
+	    readfile($retorno["arq"]);
+	    exit;
+    break;
 }
