@@ -388,7 +388,7 @@ include ($configInc["url"]."/css.php");
                     controls : [
                         //new ol.control.Zoom(),
                         //new ol.control.ZoomSlider(),
-                        //new ol.control.ScaleLine(),
+                        new ol.control.ScaleLine(),
                         new ol.control.Attribution({
                             collapsible : true
                         })

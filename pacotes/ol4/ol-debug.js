@@ -26897,9 +26897,20 @@ ol.ext.rbush = function() {};
 (function() {(function (exports) {
 'use strict';
 
-var quickselect_1 = quickselect;
-var default_1 = quickselect;
-function quickselect(arr, k, left, right, compare) {
+var commonjsGlobal = typeof window !== 'undefined' ? window : typeof global !== 'undefined' ? global : typeof self !== 'undefined' ? self : {};
+
+
+
+
+
+function createCommonjsModule(fn, module) {
+	return module = { exports: {} }, fn(module, module.exports), module.exports;
+}
+
+var quickselect = createCommonjsModule(function (module, exports) {
+(function (global, factory) {
+	module.exports = factory();
+}(commonjsGlobal, (function () { function quickselect(arr, k, left, right, compare) {
     quickselectStep(arr, k, left || 0, right || (arr.length - 1), compare || defaultCompare);
 }
 function quickselectStep(arr, k, left, right, compare) {
@@ -26943,7 +26954,9 @@ function swap(arr, i, j) {
 function defaultCompare(a, b) {
     return a < b ? -1 : a > b ? 1 : 0;
 }
-quickselect_1.default = default_1;
+return quickselect;
+})));
+});
 
 var rbush_1 = rbush;
 function rbush(maxEntries, format) {
@@ -27324,7 +27337,7 @@ function multiSelect(arr, left, right, n, compare) {
         left = stack.pop();
         if (right - left <= n) continue;
         mid = left + Math.ceil((right - left) / n / 2) * n;
-        quickselect_1(arr, mid, left, right, compare);
+        quickselect(arr, mid, left, right, compare);
         stack.push(left, mid, mid, right);
     }
 }
@@ -33579,25 +33592,17 @@ ol.control.ScaleLine.prototype.updateElement_ = function() {
 
   var center = viewState.center;
   var projection = viewState.projection;
-  var units = this.getUnits();
-  var pointResolutionUnits = units == ol.control.ScaleLineUnits.DEGREES ?
-    ol.proj.Units.DEGREES :
-    ol.proj.Units.METERS;
+  var metersPerUnit = projection.getMetersPerUnit();
   var pointResolution =
-      ol.proj.getPointResolution(projection, viewState.resolution, center, pointResolutionUnits);
-  if (units != ol.control.ScaleLineUnits.DEGREES) {
-    pointResolution *= projection.getMetersPerUnit();
-  }
+      ol.proj.getPointResolution(projection, viewState.resolution, center) *
+      metersPerUnit;
 
   var nominalCount = this.minWidth_ * pointResolution;
   var suffix = '';
+  var units = this.getUnits();
   if (units == ol.control.ScaleLineUnits.DEGREES) {
     var metersPerDegree = ol.proj.METERS_PER_UNIT[ol.proj.Units.DEGREES];
-    if (projection.getUnits() == ol.proj.Units.DEGREES) {
-      nominalCount *= metersPerDegree;
-    } else {
-      pointResolution /= metersPerDegree;
-    }
+    pointResolution /= metersPerDegree;
     if (nominalCount < metersPerDegree / 60) {
       suffix = '\u2033'; // seconds
       pointResolution *= 3600;
@@ -79502,10 +79507,11 @@ goog.require('ol.tilegrid');
  * @api
  */
 ol.source.TileUTFGrid = function(options) {
-  //alteracao feita para o i3Geo
+ 
+    //alteracao feita para o i3Geo
   ol.source.Tile.call(this, {
     projection: options.projection,
-    projection: ol.proj.get('EPSG:3857'),
+    //projection: ol.proj.get('EPSG:3857'),
     state: ol.source.State.LOADING
   });
 
