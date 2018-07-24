@@ -2,11 +2,6 @@ if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
 i3GEOF.loginusuario = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
 	aguarde: "",
 	MUSTACHE : "",
 	start: function(){

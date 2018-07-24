@@ -34,6 +34,7 @@ i3GEOF.imprimir = {
 	    i3GEO.janela.applyScrollBar(p.idContainer);
 	},
 	pngExport: function(){
+	    i3GEO.janela.abreAguarde();
 	    i3geoOL.once('postcompose', function(event) {
 		var canvas = event.context.canvas;
 		if (navigator.msSaveBlob) {
@@ -43,10 +44,12 @@ i3GEOF.imprimir = {
 			saveAs(blob, 'map.png');
 		    });
 		}
+		i3GEO.janela.fechaAguarde();
 	    });
 	    i3geoOL.renderSync();
 	},
 	tiffExport: function(){
+	    i3GEO.janela.abreAguarde();
 	    var url = i3GEO.configura.locaplic + "/ferramentas/imprimir/geotif.php?g_sid="
 	    + i3GEO.configura.sid
 	    +"&mapexten="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
@@ -54,10 +57,12 @@ i3GEOF.imprimir = {
 	    $(link).click(function(e) {
 		e.preventDefault();
 		window.location.href = url;
+		i3GEO.janela.fechaAguarde();
 	    });
 	    $(link).click();
 	},
 	svgExport: function(){
+	    i3GEO.janela.abreAguarde();
 	    var url = i3GEO.configura.locaplic + "/ferramentas/imprimir/svg.php?g_sid="
 	    + i3GEO.configura.sid
 	    +"&mapexten="+i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
@@ -65,6 +70,7 @@ i3GEOF.imprimir = {
 	    $(link).click(function(e) {
 		e.preventDefault();
 		window.location.href = url;
+		i3GEO.janela.fechaAguarde();
 	    });
 	    $(link).click();
 	},

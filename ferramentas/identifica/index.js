@@ -36,16 +36,19 @@ i3GEOF.identifica = {
 	    };
 	    var p = i3GEOF.identifica._parameters;
 	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
 		var t1 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_mst.html",
 		t2 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_sistemas_mst.html",
 		t3 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_dados_mst.html";
 		$.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
+		    i3GEO.janela.fechaAguarde();
 		    var p = i3GEOF.identifica._parameters;
 		    p.mustache = r1[0];
 		    p.mustachesistemas = r2[0];
 		    p.mustachedados = r3[0];
 		    i3GEOF.identifica.html();
 		}).fail(function() {
+		    i3GEO.janela.fechaAguarde();
 		    i3GEO.janela.tempoMsg($trad("erroTpl"));
 		});
 	    } else {
@@ -70,10 +73,6 @@ i3GEOF.identifica = {
 	    $i("i3GEOidentificaguia4").onclick = function() {
 		i3GEO.util.copyToClipboard(i3GEOF.identifica._export.join("\n"));
 	    }
-
-	    $i("i3GEOidentificaguia3").onclick = function() {
-		i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia3", "i3GEOidentificaguia");
-	    };
 	    $i("i3GEOidentificaguia5").onclick =
 		function() {
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia5", "i3GEOidentificaguia");
@@ -96,6 +95,7 @@ i3GEOF.identifica = {
 		$i("i3GEOidentificaSis").innerHTML = ins;
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia6", "i3GEOidentificaguia");
 		if (i3GEOF.identifica.mostraSistemasAdicionais === true) {
+		    i3GEO.janela.abreAguarde();
 		    if (i3GEOF.identifica._sistemasAdicionais.length == 0) {
 			var p =
 			    i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?funcao=pegaSistemasIdentificacao&g_sid="
@@ -153,6 +153,7 @@ i3GEOF.identifica = {
 	 *
 	 */
 	montaListaSistemas : function(retorno) {
+	    i3GEO.janela.fechaAguarde();
 	    var l, divins, ig, sistema, pub, exec, temp, t, linhas = [], ltema, i;
 	    if (retorno !== undefined ) {
 		if (retorno.data && i3GEOF.identifica._sistemasAdicionais.length == 0) {
@@ -193,8 +194,10 @@ i3GEOF.identifica = {
 	    }
 	},
 	getData : function() {
+	    i3GEO.janela.abreAguarde();
 	    var p = i3GEOF.identifica._parameters;
 	    var f = function(retorno) {
+		i3GEO.janela.fechaAguarde();
 		if(retorno){
 		    i3GEOF.identifica.mostraDadosTema(retorno.data);
 		}
@@ -260,7 +263,7 @@ i3GEOF.identifica = {
 	 * retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica3>
 	 */
 	mostraDadosTema : function(retorno) {
-	    console.log("mostraDadosTema")
+
 	    var classeTemp="",codigo_tipo_regiao = "",alvo, filtro, camada, idreg, idsalva, paramsalva, i, res = "", ntemas, resultados, nres, cor, j, nitens, k, atualN = "todas", inicio =
 		0, numResultados = 0, tip, link, textovalor;
 
@@ -448,8 +451,10 @@ i3GEOF.identifica = {
 	    }
 	},
 	filtrar : function(tema, item, valor) {
+	    i3GEO.janela.abreAguarde();
 	    var filtro = "",
 	    temp = function(retorno) {
+		i3GEO.janela.fechaAguarde();
 		i3GEO.Interface.atualizaTema(retorno, tema);
 	    },
 	    p = i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=sim&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro",
@@ -461,7 +466,9 @@ i3GEOF.identifica = {
 	    cp.call(p, "insereFiltro", temp, "tema=" + tema + "&filtro=" + i3GEO.util.base64encode(filtro));
 	},
 	removeFiltro : function(tema) {
+	    i3GEO.janela.abreAguarde();
 	    var temp = function(retorno) {
+		i3GEO.janela.fechaAguarde();
 		i3GEO.Interface.atualizaTema(retorno, tema);
 	    }, p =
 		i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=nao&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro", cp =

@@ -1171,32 +1171,21 @@ i3GEO.util =
 	scriptTag : function(js, ini, id, aguarde) {
 	    var head, script;
 	    if (!$i(id) || id === "") {
+		i3GEO.janela.abreAguarde();
 		head = document.getElementsByTagName('head')[0];
 		script = document.createElement('script');
 		script.type = 'text/javascript';
 		if (ini !== "") {
-		    if (navm) {
-			script.onreadystatechange = function() {
-			    if (this.readyState === 'loaded' || this.readyState === 'complete') {
-				/*
-				 * if (i3GEO.janela) { i3GEO.janela.fechaAguarde(id + "aguarde"); }
-				 */
-				if (ini.call) {
-				    ini.call();
-				} else {
-				    eval(ini);
-				}
-			    }
-			};
-		    } else {
 			script.onload = function() {
+			    i3GEO.janela.fechaAguarde();
 			    if (ini.call) {
 				ini.call();
 			    } else {
 				eval(ini);
 			    }
 			};
-		    }
+		} else {
+		    i3GEO.janela.fechaAguarde();
 		}
 		script.src = js;
 		if (id !== "") {

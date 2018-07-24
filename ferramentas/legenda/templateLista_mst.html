@@ -1,111 +1,109 @@
 <!-- para o caso de vetores -->
 <div class="{{{hidden2}}}">
-	<button onclick="i3GEOF.legenda.mudaLegenda()" class='btn btn-primary btn-sm btn-raised'>{{{aplicaAlteracao}}}</button>
-	<button id="botaoAdicionaClasse" onclick="i3GEOF.legenda.adicionaClasse()" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>{{{adicionaClasse}}}</button>
-	<h5 class="alert alert-info">{{{clicaSimbolo}}}</h5>
-	<table id="i3GEOlegendalegenda" >
-		<tr>
-			<td>
-				<button title='{{{inverte}}}' onclick='i3GEOF.legenda.inverteCores()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
-					<span class="material-icons">invert_colors</span>
-				</button>
-			</td>
-			<td style="background-color: white">
-				<button title='{{{calculaTamanho}}}' onclick='i3GEOF.legenda.calculaTamanho()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
-					<span class="material-icons">texture</span>
-				</button>
-			</td>
-			<td></td>
-			<td style="background-color: yellow">
-				<button onclick='i3GEOF.legenda.ordenaClasses()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
-					<span class="material-icons">sort</span>
-				</button>
-				<span style="vertical-align: super; margin-left: 3px;">nome</span>
-			</td>
-			<td style="background-color: yellow">expressão</td>
-			<td style="background-color: yellow"></td>
-			<td style="background-color: yellow">minScale</td>
-			<td style="background-color: yellow">maxScale</td>
-		</tr>
-		{{#linhas}}
-		<tr id="{{{id}}}{{{idclasse}}}">
-			<td>
-				<button title="{{{cliqueExclui}}}" onclick="i3GEOF.legenda.excluilinhaf('{{{id}}}{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
-					<span class="material-icons">clear</span>
-				</button>
-			</td>
-			<td>
-				<img style="cursor: pointer; width: 30px; height: 25px" title="{{{cliqueAltera}}}" src="{{{imagem}}}" onclick="i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_{{{id}}}')">
-			</td>
-			<td>
-				<button onclick="i3GEOF.legenda.modificaCor('{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
-					<span class="material-icons">palette</span>
-				</button>
-			</td>
-			<td style="padding: 5px;">
-				<div class='form-group label-fixed condensed'>
-					<input onchange="$('#botaoAdicionaClasse').prop('disabled', true);" id="i3GEOlegendaid_{{{id}}}" style="width: 200px;" value="{{{nome}}}" name="nome" title="{{{novoNome}}}" tabindex="0" class="form-control input-lg" type='text' />
-				</div>
-			</td>
-			<td style="padding: 5px;">
-				<div class='form-group label-fixed condensed'>
-					<!-- id necessario para o construtor de filtro -->
-					<input onchange="$('#botaoAdicionaClasse').prop('disabled', true);" id="i3GEOlegendaid_exp{{{id}}}" style="width: 200px;" value='{{{exp}}}' name="expressao" tabindex="0" class="form-control input-lg" type='text' />
-				</div>
-			</td>
-			<td>
-				<button title="{{{editorExp}}}" onclick="i3GEOF.legenda.filtro('i3GEOlegendaid_exp{{{id}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
-					<span class="material-icons">build</span>
-				</button>
-			</td>
-			<td style="padding: 5px;">
-				<div class='form-group label-fixed condensed'>
-					<input style="width: 100px;" value="{{{minScale}}}" name="minScale" title="{{{txtMinscale}}}" tabindex="0" class="form-control input-lg" type='text' />
-				</div>
-			</td>
-			<td style="padding: 5px;">
-				<div class='form-group label-fixed condensed'>
-					<input style="width: 100px;" value="{{{maxScale}}}" name="maxScale" title="{{{txtMaxscale}}}" tabindex="0" class="form-control input-lg" type='text' />
-				</div>
-			</td>
-			<td>
-				<button title="{{{sobe}}}" onclick="i3GEOF.legenda.sobelinhaf('{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
-					<span class="material-icons">arrow_drop_up</span>
-				</button>
-			</td>
-			<td>
-				<button title="{{{desce}}}" onclick="i3GEOF.legenda.descelinhaf('{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
-					<span class="material-icons">arrow_drop_down</span>
-				</button>
-			</td>
-		</tr>
-		{{/linhas}}
-	</table>
+    <button onclick="i3GEOF.legenda.mudaLegenda()" class='btn btn-primary btn-sm btn-raised'>{{{aplicaAlteracao}}}</button>
+    <button id="botaoAdicionaClasse" onclick="i3GEOF.legenda.adicionaClasse()" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>{{{adicionaClasse}}}</button>
+    <h5 class="alert alert-info">{{{clicaSimbolo}}}</h5>
+    <table id="i3GEOlegendalegenda">
+        <tr>
+            <td>
+                <button title='{{{inverte}}}' onclick='i3GEOF.legenda.inverteCores()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">invert_colors</span>
+                </button>
+            </td>
+            <td style="background-color: white">
+                <button title='{{{calculaTamanho}}}' onclick='i3GEOF.legenda.calculaTamanho()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">texture</span>
+                </button>
+            </td>
+            <td></td>
+            <td style="background-color: yellow">
+                <button onclick='i3GEOF.legenda.ordenaClasses()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">sort</span>
+                </button> <span style="vertical-align: super; margin-left: 3px;">nome</span>
+            </td>
+            <td style="background-color: yellow">expressão</td>
+            <td style="background-color: yellow"></td>
+            <td style="background-color: yellow">minScale</td>
+            <td style="background-color: yellow">maxScale</td>
+        </tr>
+        {{#linhas}}
+        <tr id="{{{id}}}{{{idclasse}}}">
+            <td>
+                <button title="{{{cliqueExclui}}}" onclick="i3GEOF.legenda.excluilinhaf('{{{id}}}{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">clear</span>
+                </button>
+            </td>
+            <td><img style="cursor: pointer; width: 30px; height: 25px" title="{{{cliqueAltera}}}" src="{{{imagem}}}" onclick="i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_{{{id}}}')"></td>
+            <td>
+                <button onclick="i3GEOF.legenda.modificaCor('{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">palette</span>
+                </button>
+            </td>
+            <td style="padding: 5px;">
+                <div class='form-group label-fixed condensed'>
+                    <input onchange="$('#botaoAdicionaClasse').prop('disabled', true);" id="i3GEOlegendaid_{{{id}}}" style="width: 200px;" value="{{{nome}}}" name="nome" title="{{{novoNome}}}"
+                        tabindex="0" class="form-control input-lg" type='text' />
+                </div>
+            </td>
+            <td style="padding: 5px;">
+                <div class='form-group label-fixed condensed'>
+                    <!-- id necessario para o construtor de filtro -->
+                    <input onchange="$('#botaoAdicionaClasse').prop('disabled', true);" id="i3GEOlegendaid_exp{{{id}}}" style="width: 200px;" value='{{{exp}}}' name="expressao" tabindex="0"
+                        class="form-control input-lg" type='text' />
+                </div>
+            </td>
+            <td>
+                <button title="{{{editorExp}}}" onclick="i3GEOF.legenda.filtro('i3GEOlegendaid_exp{{{id}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">build</span>
+                </button>
+            </td>
+            <td style="padding: 5px;">
+                <div class='form-group label-fixed condensed'>
+                    <input style="width: 100px;" value="{{{minScale}}}" name="minScale" title="{{{txtMinscale}}}" tabindex="0" class="form-control input-lg" type='text' />
+                </div>
+            </td>
+            <td style="padding: 5px;">
+                <div class='form-group label-fixed condensed'>
+                    <input style="width: 100px;" value="{{{maxScale}}}" name="maxScale" title="{{{txtMaxscale}}}" tabindex="0" class="form-control input-lg" type='text' />
+                </div>
+            </td>
+            <td>
+                <button title="{{{sobe}}}" onclick="i3GEOF.legenda.sobelinhaf('{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">arrow_drop_up</span>
+                </button>
+            </td>
+            <td>
+                <button title="{{{desce}}}" onclick="i3GEOF.legenda.descelinhaf('{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">arrow_drop_down</span>
+                </button>
+            </td>
+        </tr>
+        {{/linhas}}
+    </table>
 </div>
 <!-- para o caso de imagens -->
 <div class="{{{hidden1}}}">
-	<button onclick="i3GEOF.legenda.aplicaProcessos()" class='btn btn-primary btn-sm btn-raised'>{{{aplicaProcesso}}}</button>
-	<div class='form-group condensed'>
-		<label class="control-label">{{{selecionaProcesso}}}</label>
-		<select class="form-control" onchange="i3GEOF.legenda.adicionaProcesso(this)">
-			<option value=''></option>
-			<option value='SCALE='>{{{escalaCores}}}</option>
-			<option value='RESAMPLE='>{{{reamostragem}}}</option>
-			<option value='BANDS='>{{{bandas}}}</option>
-			<option value='COLOR_MATCH_THRESHOLD='>Threshold</option>
-			<option value='NODATA='>Nodata</option>
-		</select><b class="caret careti"></b>
-		<b class="caret careti" ></b>
-	</div>
-	<br>
-	<h5>{{{existentes}}}</h5>
-	<div id=i3GEOlegendaprocessos>
-		{{#processos}}
-		<div class='form-group label-fixed condensed'>
-			<input value="{{{value}}}" tabindex="0" class="form-control input-lg" type='text' />
-		</div>
-		{{/processos}}
-	</div>
-	<h5 class="alert alert-info">{{{ajuda1}}}</h5>
-	<h5 class="alert alert-info">{{{adicionaProcesso}}}</h5>
+    <button onclick="i3GEOF.legenda.aplicaProcessos()" class='btn btn-primary btn-sm btn-raised'>{{{aplicaProcesso}}}</button>
+    <div class='form-group condensed'>
+        <label class="control-label">{{{selecionaProcesso}}}</label>
+        <select class="form-control" onchange="i3GEOF.legenda.adicionaProcesso(this)">
+            <option value=''></option>
+            <option value='SCALE='>{{{escalaCores}}}</option>
+            <option value='RESAMPLE='>{{{reamostragem}}}</option>
+            <option value='BANDS='>{{{bandas}}}</option>
+            <option value='COLOR_MATCH_THRESHOLD='>Threshold</option>
+            <option value='NODATA='>Nodata</option>
+        </select><b class="caret careti"></b> <b class="caret careti"></b>
+    </div>
+    <br>
+    <h5>{{{existentes}}}</h5>
+    <div id=i3GEOlegendaprocessos>
+        {{#processos}}
+        <div class='form-group label-fixed condensed'>
+            <input value="{{{value}}}" tabindex="0" class="form-control input-lg" type='text' />
+        </div>
+        {{/processos}}
+    </div>
+    <h5 class="alert alert-info">{{{ajuda1}}}</h5>
+    <h5 class="alert alert-info">{{{adicionaProcesso}}}</h5>
 </div>

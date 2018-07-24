@@ -10,7 +10,7 @@ session_name("i3GeoPHP");
 
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
-
+error_reporting(0);
 $nomesrel = $_GET["nomesrel"];
 $temarel = $_GET["temarel"];
 $ordemrel = $_GET["ordemrel"];
@@ -32,7 +32,7 @@ include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 $versao = versao();
 $versao = $versao["principal"];
-
+error_reporting(0);
 $temp = explode(",",$nomesrel);
 $colunasTemp = array();
 foreach($temp as $t){

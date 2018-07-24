@@ -16,12 +16,15 @@ i3GEOF.opcoesescala = {
 	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html",
 	    t2 = i3GEO.configura.locaplic+"/ferramentas/"+p.namespace+"/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=parametrosBarraEscala";
 	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
 		$.when( $.get(t1),$.get(t2)).done(function(r1,r2) {
 		    p.mustache = r1[0];
 		    p.dataForm = r2[0];
 		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
 		    if(p.dataForm.errorMsg && p.dataForm.errorMsg != ""){
 			i3GEO.janela.snackBar({content: p.dataForm.errorMsg, style:'red'});
+			i3GEO.janela.fechaAguarde();
 			i3f.destroy();
 		    }
 		}).fail(function(data) {
@@ -79,6 +82,7 @@ i3GEOF.opcoesescala = {
 	    return data
 	},
 	mudaEscalaGrafica: function(btn){
+	    i3GEO.janela.abreAguarde();
 	    $(btn).button("disable").find("span").removeClass("hidden");
 	    var par = this.getFormData(),
 	    	i3f = this;
@@ -90,18 +94,21 @@ i3GEOF.opcoesescala = {
 	    )
 	    .done(
 		    function(data, status){
+			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: $trad("concluido",i3f.dicionario)});
 			i3f.destroy();
 		    }
 	    )
 	    .fail(
 		    function(data){
+			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 			i3f.destroy();
 		    }
 	    );
 	},
 	test: function(btn){
+	    i3GEO.janela.abreAguarde();
 	    $(btn).button("disable").find("span").removeClass("hidden");
 	    var par = this.getFormData(),
 	    	i3f = this;
@@ -113,12 +120,14 @@ i3GEOF.opcoesescala = {
 	    )
 	    .done(
 		    function(data, status){
+			i3GEO.janela.fechaAguarde();
 			$(btn).button("enable").find("span").addClass("hidden");
 			i3GEO.janela.closeMsg("<img src='" + data + "' >");
 		    }
 	    )
 	    .fail(
 		    function(data){
+			i3GEO.janela.fechaAguarde();
 			$(btn).button("enable").find("span").addClass("hidden");
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 		    }

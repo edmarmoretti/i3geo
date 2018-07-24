@@ -384,8 +384,8 @@ i3GEO.janela =
 
 	    janela.bringToTop();
 	    if(waltura !== "auto" && wsrc == ""){
-		i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBar"});
-		i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBarXY",advanced:{ autoExpandHorizontalScroll: false }});
+		//i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBar"});
+		//i3GEO.janela.applyScrollBar(temp.id,"",{live:true,liveSelector:".customScrollBarXY",advanced:{ autoExpandHorizontalScroll: false }});
 	    }
 	    return ([
 		janela, $i(id + "_cabecalho"), temp

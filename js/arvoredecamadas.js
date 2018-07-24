@@ -1215,7 +1215,6 @@ i3GEO.arvoreDeCamadas =
 			"excluirarvore",
 			"excluirarvore",
 			"dependencias.php",
-			//"i3GEOF.excluirarvore.iniciaJanelaFlutuante()"
 			"i3GEOF.excluirarvore.start()"
 		);
 	    }

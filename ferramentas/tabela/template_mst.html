@@ -60,24 +60,23 @@
 	</div>
 </div>
 <!-- Registros da tabela -->
-<div id='{{{idjanela}}}i3GEOtabelaguia1obj' class='container-fluid '>
-	<div id='{{{idjanela}}}i3GEOFtabelaComboCabeca' class='form-group condensed' style='width: 450px'>
-		
-	</div>
+<div id='{{{idjanela}}}i3GEOtabelaguia1obj' class='container-fluid ' style="height: calc(100% - 200px);">
+	<div id='{{{idjanela}}}i3GEOFtabelaComboCabeca' class='form-group condensed' >
 
+	</div>
+<div style="display: flex;overflow: hidden;">
 	<a href='javascript:void(0)' onclick="i3GEOF.tabela.ativaSelecao('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{atvsel}}}</a>
 	<a title='{{{limpselmap}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.limpaSelecao('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{limpsel}}}</a>
 	<a title='{{{criatemasel}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.criaNovoTema('{{{idjanela}}}')" class='btn btn-primary btn-sm btn-raised'>{{{criatema}}}</a>
 	<a href='javascript:void(0)' onclick="i3GEO.mapa.ativaTema(i3GEOF.tabela.propJanelas['{{{idjanela}}}'].tema);i3GEO.analise.dialogo.graficoInterativo1();" class='btn btn-primary btn-sm btn-raised'>{{{grafico}}}</a>
 	<a title='{{{vinctab}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.vinculos.iniciaJanelaFlutuante()" class='btn btn-primary btn-sm btn-raised'>{{{vinculos}}}</a>
-
+</div>
 	<div class="form-group condensed">
 		{{{de}}} &nbsp;
 		<input class="form-control" style="display: inline; width: 50px;" id="{{{idjanela}}}i3GEOtabelainicio" size="5" value="1" type="text">
 		&nbsp; {{{ate}}} &nbsp;
 		<input class="form-control" style="display: inline; width: 50px;" id="{{{idjanela}}}i3GEOtabelafim" size="5" value="20" type="text">
 		&nbsp;
-
 		<button onclick='i3GEOF.tabela.menos("{{{idjanela}}}")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
 			<span class="material-icons">remove_circle_outline</span>
 		</button>
@@ -90,12 +89,12 @@
 		<button title='{{{atuareg}}}' onclick='i3GEOF.tabela.pegaRegistros("{{{idjanela}}}")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
 			<span class="material-icons">refresh</span>
 		</button>
-	</div>
+        </div>
 
-	<div id='{{{idjanela}}}i3GEOtabelaregistros' style='top: 10px;'></div>
+	<div id='{{{idjanela}}}i3GEOtabelaregistros' class='container-fluid ' style='top: 10px; display: flex;overflow: auto;height: 100%;'></div>
 </div>
 <!-- Estatisticas -->
-<div id='{{{idjanela}}}i3GEOtabelaguia3obj' style='display: none;' class='container-fluid '>
+<div id='{{{idjanela}}}i3GEOtabelaguia3obj' style='width:98%; height: calc(100% - 50px);display: none;' class='container-fluid '>
 	<div class='form-group condensed'>
 		<label class="control-label">{{{itemcalc}}}</label>
 		<div id='{{{idjanela}}}i3GEOtabelaitensGuia3'></div>
@@ -113,10 +112,10 @@
 	<h5 class="alert alert-info">{{{paraqueas}}}</h5>
 </div>
 <!-- Relatorio -->
-<div id='{{{idjanela}}}i3GEOtabelaguia5obj' class='container-fluid '>
+<div id='{{{idjanela}}}i3GEOtabelaguia5obj' class='container-fluid ' style="width:98%; height: calc(100% - 50px); overflow:auto;">
 	<div class='form-group condensed'>
 		<label>{{{itensrel}}}</label>
-		<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' style='overflow: auto; height: 120px; top: 10px;'></div>
+		<div id='{{{idjanela}}}i3GEOtabelaitensrelatorio' style='top: 10px;'></div>
 	</div>
 	<div class='form-group condensed'>
 		<label class="control-label">{{{itensagr}}}</label>

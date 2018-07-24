@@ -276,6 +276,13 @@ Para a barra de rolagem
     margin: 12px 0;
 }
 
+.bd .customScrollBar {
+	height: 100%;
+	width: 95%;
+	overflow: hidden;
+	padding-right: 5px;
+}
+
 .customScrollBar {
 	height: 100%;
 	overflow: hidden;

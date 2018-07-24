@@ -92,8 +92,10 @@ i3GEO.mapa =
 		sel = true;
 	    }
 	    if(sel == true){
+		i3GEO.janela.abreAguarde();
 		i3GEO.php.limpasel(
 			function(retorno) {
+			    i3GEO.janela.fechaAguarde();
 			    i3GEO.atualiza();
 			    i3GEO.Interface.atualizaMapa();
 			},
