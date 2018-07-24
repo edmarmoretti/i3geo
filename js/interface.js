@@ -57,6 +57,7 @@ var i3geoOL;
 
 i3GEO.Interface =
 {
+	LAYERPROGRESSBAR: true,
 	//restringe a inclusao de attribution apenas aos LAYERS adicionados manualmente
 	//e nao aos que possuem o link para a fonte definido no mapfile
 	RESTRICTATT : true,
@@ -1355,7 +1356,7 @@ i3GEO.Interface =
 				opcoes.source = source;
 				opcoes.isBaseLayer = false;
 				opcoes.visible = true;
-				if ($i("i3GEOprogressoCamadas")) {
+				if (i3GEO.Interface.LAYERPROGRESSBAR == true && $i("i3GEOprogressoCamadas")) {
 				    source.on('tileloadstart', function(event) {
 					i3GEO.Interface.openlayers.loadStartLayer(source.get("name"));
 				    });

@@ -204,40 +204,6 @@ i3GEO.login = {
 				+ operacao);
 	},
 	/**
-	 * Adiciona os itens no objeto menu suspenso no processo de nicializacao do
-	 * i3geo
-	 *
-	 * @param objeto
-	 *            com os parametros ja existentes no menu
-	 * @return objeto com os parametros complementados
-	 */
-	adicionaMenuSuspenso : function(obj) {
-		obj.menu.push({
-			nome : "Admin/Login",
-			id : "i3GeoAdmin"
-		});
-		obj.submenus.i3GeoAdmin = [];
-		obj.submenus.i3GeoAdmin.push(
-			{
-				id : "omenudataAdminu1",
-				text : "Login",
-				url : "javascript:i3GEO.login.dialogo.abreLogin()"
-			},
-			{
-				id : "omenudataAdminu2",
-				text : "Logout",
-				url : "javascript:i3GEO.login.dialogo.abreLogout()"
-			},
-			{
-				id : "omenudataAdmin5",
-				text : $trad("x88"),
-				url : "javascript:i3GEO.mapa.dialogo.preferencias()"
-			}
-
-		);
-		return obj;
-	},
-	/**
 	 * Section: i3GEO.login.dialogo
 	 *
 	 * Abre as telas de di&aacute;logo com o usu&aacute;rio
@@ -258,23 +224,20 @@ i3GEO.login = {
 		 *
 		 * Abre a tela de login
 		 */
-		abreLogin : function(locaplic,template) {
+		abreLogin : function(locaplic) {
 			var js;
-			if (!template || template == "") {
-				template = "template_mst.html";
-			}
 			if (!locaplic || locaplic == "") {
 				locaplic = i3GEO.configura.locaplic;
 			}
 			if (typeof (i3GEOF.loginusuario) === 'undefined') {
 				js = locaplic
-					+ "/ferramentas/loginusuario/dependencias.php?template=" + template;
+					+ "/ferramentas/loginusuario/dependencias.php";
 				i3GEO.util.scriptTag(
 					js,
-					"i3GEOF.loginusuario.criaJanelaFlutuante()",
+					"i3GEOF.loginusuario.start()",
 					"i3GEOF.loginusuario_script()");
 			} else {
-				i3GEOF.loginusuario.criaJanelaFlutuante();
+				i3GEOF.loginusuario.start();
 			}
 		},
 		/**

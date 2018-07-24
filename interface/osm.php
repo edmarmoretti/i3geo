@@ -3,28 +3,28 @@
 <head>
 <?php
 $configInc = array(
-    "debug" => "naocompacto",
+    "debug" => "",
     "tipo" => "OSM", // OL ou OSM
     "url" => "inc",
     "nocache" => time()
 );
-include ($configInc["url"]."/meta.php");
+include ($configInc["url"] . "/meta.php");
 ?>
 <title>i3GEO - OpenLayers</title>
 <?php
-include ($configInc["url"]."/js.php");
-include ($configInc["url"]."/css.php");
+include ($configInc["url"] . "/js.php");
+include ($configInc["url"] . "/css.php");
 ?>
 <style>
 .ol-attribution.ol-uncollapsible {
-    height: 2.1em;
-    right: 24px;
-    background: none;
-    margin-bottom: 15px;
+	height: 2.1em;
+	right: 24px;
+	background: none;
+	margin-bottom: 15px;
 }
 
 .foraDoMapa+span>span {
-    background-color: yellow;
+	background-color: yellow;
 }
 </style>
 </head>
@@ -56,13 +56,13 @@ include ($configInc["url"]."/css.php");
         -->
         <div class="iconesGuiaMovel ol-control" data-traduzir="true">
             <?php
-                include ($configInc["url"]."/iconeferramentas.php");
-                include ($configInc["url"]."/iconecamadas.php");
-                include ($configInc["url"]."/iconecatalogo.php");
-                include ($configInc["url"]."/iconelegenda.php");
-                include ($configInc["url"]."/iconebusca.php");
-                include ($configInc["url"]."/iconeinfo.php");
-                include ($configInc["url"]."/iconetutorial.php");
+            include ($configInc["url"] . "/iconeferramentas.php");
+            include ($configInc["url"] . "/iconecamadas.php");
+            include ($configInc["url"] . "/iconecatalogo.php");
+            include ($configInc["url"] . "/iconelegenda.php");
+            include ($configInc["url"] . "/iconebusca.php");
+            include ($configInc["url"] . "/iconeinfo.php");
+            include ($configInc["url"] . "/iconetutorial.php");
             ?>
         </div>
         <!-- veja i3GEO.guias.CONFIGURA -->
@@ -71,15 +71,18 @@ include ($configInc["url"]."/css.php");
         <div id="i3GEOguiaMovelMolde">
             <div id="i3GEOguiaMovelConteudo">
                 <?php
-                    include($configInc["url"]."/guiaferramentas.php");
-                    include($configInc["url"]."/guiacamadas.php");
-                    include($configInc["url"]."/guiacatalogo.php");
-                    include($configInc["url"]."/guialegenda.php");
-                    include($configInc["url"]."/guiabusca.php");
+                include ($configInc["url"] . "/guiaferramentas.php");
+                include ($configInc["url"] . "/guiacamadas.php");
+                include ($configInc["url"] . "/guiacatalogo.php");
+                include ($configInc["url"] . "/guialegenda.php");
+                include ($configInc["url"] . "/guiabusca.php");
                 ?>
             </div>
         </div>
     </div>
+    <?php
+    include ($configInc["url"] . "/modallogin.php");
+    ?>
     <!--  para mostrar o banner de abertura -->
     <script id="i3GEOlogoMarcaTemplate" type="x-tmpl-mustache">
     <div>
@@ -199,6 +202,9 @@ include ($configInc["url"]."/css.php");
                 //OSM - utiliza o OpenLayers e o OpenStreetMap como fundo, em projecao semelhante ao GoogleMaps
                 //GM - utiliza o GoogleMaps como motor de controle do mapa
                 mapType : "OSM",
+                //mostra ou nao a barra de progresso do carregamento de camadas
+                layerProgressBar: true,
+
                 //armazena em um cookie a ultima extensao geografica do mapa e utiliza essa extensao quando o mapa for aberto
                 saveExtension : false,
                 //aplica um filtro de cores apos a renderizacao da imagem de cada camada que compoe o mapa cinza|sepiaclara|sepianormal

@@ -10,7 +10,7 @@
                 <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
-                <li><a href="javascript:void(0)" onclick="i3GEO.login.dialogo.abreLogin()">
+                <li><a onclick="i3GEO.login.recarrega = false; i3GEO.login.dialogo.abreLogin();" href="javascript:void(0)" data-toggle="modal" data-target="#modalLogin">
                         <span class="glyphicon glyphicon-log-in"></span> Login/Logout
                     </a></li>
                 <li><a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()">
@@ -46,7 +46,7 @@
     </div>
     <div class="separadorCabecalhoGuias">&nbsp;</div>
 
-    <div class="guiaOverflow" style="height: calc(100% - 45px);width: calc(100% - 12px);">
+    <div class="guiaOverflow" style="height: calc(100% - 45px); width: calc(100% - 12px);">
         <div id="catalogoMigalha" style="display: block;" data-template="templates/catalogoMigalha.html"></div>
         <!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
         <div id="catalogoNavegacao"></div>

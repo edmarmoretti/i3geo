@@ -1,40 +1,6 @@
-/*
-Title: Login
-
-Abre di&aacute;logo de login
-
-Arquivo:
-
-i3geo/ferramentas/loginusuario/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
-/*
-Classe: i3GEOF.loginusuario
-*/
 i3GEOF.loginusuario = {
 	/*
 	Variavel: aguarde
@@ -43,6 +9,9 @@ i3GEOF.loginusuario = {
 	*/
 	aguarde: "",
 	MUSTACHE : "",
+	start: function(){
+	    i3GEOF.loginusuario.iniciaDicionario();
+	},
 	/**
 	 * Susbtitutos para o template
 	 */
@@ -129,44 +98,8 @@ i3GEOF.loginusuario = {
 	Cria a janela flutuante para controle da ferramenta.
 	*/
 	iniciaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,titulo;
-		if ($i("i3GEOF_loginusuario")) {
-			//para o caso do uso do bootstrap
-			if(typeof(YAHOO) == "undefined"){
-				i3GEOF.loginusuario.inicia("i3GEOF_loginusuario");
-			}
-			return;
-		}
-		//cria a janela flutuante
-		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF_loginusuario");
-		};
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Login</span></div>";
-		janela = i3GEO.janela.cria(
-			"270px",
-			"auto",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF_loginusuario",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			false,
-			"",
-			"",
-			"",
-			""
-		);
-		divid = janela[2].id;
-		janela[0].cfg.setProperty("constraintoviewport",false);
-		i3GEOF.loginusuario.aguarde = $i("i3GEOF_loginusuario_imagemCabecalho").style;
-		$i("i3GEOF_loginusuario_corpo").style.backgroundColor = "#F2F2F2";
-		i3GEOF.loginusuario.inicia(divid);
+		i3GEOF.loginusuario.inicia("i3GEOF_loginusuario");
+
 	},
 	/*
 	Function: enviar

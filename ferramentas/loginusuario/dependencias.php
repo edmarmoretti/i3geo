@@ -30,10 +30,7 @@ echo "\n";
  * Inclui o template mustache do HTML usado para criar o conteudo da janela
  */
 echo 'i3GEOF.loginusuario.MUSTACHE = "';
-if(empty($_GET["template"])){
-	$_GET["template"] = "template_mst.html";
-}
-$texto = file_get_contents($_GET["template"]);
+$texto = file_get_contents("template_mst.html");
 $texto = str_replace("\n", "", $texto);
 $texto = str_replace("\r", "", $texto);
 $texto = str_replace("\t", "", $texto);

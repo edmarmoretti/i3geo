@@ -419,7 +419,7 @@ a.collapsed .readLess {
 				</ul>
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
-						<a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>','template_mst_bt.html');" href="#topo" data-toggle="modal"
+						<a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>');" href="#topo" data-toggle="modal"
 							data-target="#modalLogin">
 							Login <i id="loginOff" style="display: none;" class="material-icons md-18">lock</i><i id="loginOn" style="display: none;" class="material-icons md-18">lock_open</i>
 						</a>
@@ -475,18 +475,8 @@ a.collapsed .readLess {
 			</div>
 		</div>
 	</div>
-	<div id="modalLogin" class="modal fade" tabindex="-1">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body" id="i3GEOF_loginusuario"></div>
-			</div>
-		</div>
-	</div>
+    <?php include (dirname(__FILE__) . "/../interface/inc/modallogin.php");?>
+
 	<nav class="navbar-fixed-bottom">
 		<div class="container"></div>
 	</nav>

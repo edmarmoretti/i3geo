@@ -171,21 +171,6 @@ i3GEO.marcador =
 			}
 		},
 		/**
-		 * Adiciona os itens no objeto menu suspenso no processo de nicializacao do i3geo
-		 *
-		 * @param objeto
-		 *            com os parametros ja existentes no menu
-		 * @return objeto com os parametros complementados
-		 */
-		adicionaMenuSuspenso : function(obj) {
-			obj.menu.push({
-				nome : $trad("x79"),
-				id : "i3GeoMenuMarcador"
-			});
-			obj.submenus.i3GeoMenuMarcador = i3GEO.marcador.itensMenu();
-			return obj;
-		},
-		/**
 		 * Itens para o menu suspenso
 		 */
 		itensMenu : function() {

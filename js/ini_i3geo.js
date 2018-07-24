@@ -322,6 +322,7 @@ var i3GEO = {
 	//
 	configMapa : function(c){
 	    i3GEO.configura.guardaExtensao = (c.hasOwnProperty("saveExtension") && c.saveExtension == true) ? true:false;
+	    i3GEO.Interface.LAYERPROGRESSBAR = (c.hasOwnProperty("layerProgressBar") && c.layerProgressBar == true) ? true:false;
 	    //TODO implementar composite para versao 7 do Mapserver
 	    i3GEO.configura.tipoimagem = (c.hasOwnProperty("posRenderType") && c.posRenderType != "") ? c.posRenderType:"nenhum";
 

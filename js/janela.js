@@ -588,10 +588,10 @@ i3GEO.janela =
 	 */
 	abreAguarde : function() {
 	    var p = $i("i3GEObarraAguarde");
-	    if(p){
-		p.style.width = "100%";
-	    }
 	    i3GEO.janela.CONTADORAGUARDE.push(" ");
+	    if(p){
+		p.style.width = (i3GEO.janela.CONTADORAGUARDE.length * 15) + "%";
+	    }
 	},
 	/**
 	 * Function: fechaAguarde
@@ -604,11 +604,9 @@ i3GEO.janela =
 	 */
 	fechaAguarde : function() {
 	    var p = $i("i3GEObarraAguarde");
+	    i3GEO.janela.CONTADORAGUARDE.pop();
 	    if (p){
-		if (i3GEO.janela.CONTADORAGUARDE.length == 1) {
-		    p.style.width = "0px";
-		}
-		i3GEO.janela.CONTADORAGUARDE.pop();
+		p.style.width = (i3GEO.janela.CONTADORAGUARDE.length * 15) + "%";
 	    }
 	},
 	//http://fezvrasta.github.io/snackbarjs/

@@ -100,7 +100,7 @@ botoesIni = [
 	"target": "_self"
 },{
 	"img":"imagens/applications-development-web.png",
-	"href": "../admin",
+	"href": "../admin/index.php",
 	"titulo":$trad(3,g_traducao_init),
 	"subtitulo": $trad("3a",g_traducao_init),
 	"fa": "cogs",
