@@ -763,7 +763,7 @@ A interface padr&atilde;o &eacute; utilizada quando n&atilde;o &eacute; definida
 Tipo:
 {string}
 */
-$interfacePadrao = "ol.htm";
+$interfacePadrao = "ol.php";
 /*
 Variable: customDir
 

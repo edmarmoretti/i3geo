@@ -599,12 +599,18 @@ i3GEO.arvoreDeCamadas =
 	    return (html);
 	},
 	montaOpcoesTema : function(temaObj,camada) {
+	    if (typeof (console) !== 'undefined')
+		     console.info("montaOpcoesTema " + camada.name);
+
 	    //A inclusao das opcoes e feita com base no template usado na interface
 	    //a classe hidden permite esconder o icone
 	    //
 	    vetor = "hidden";
 	    if ((temaObj.type < 3) && (temaObj.connectiontype !== 7)){
 		vetor = "";
+	    }
+	    if(temaObj.plugini3geo && (temaObj.plugini3geo.plugin == "layerkml" || temaObj.plugini3geo.plugin == "layergeojson")){
+		vetor = "hidden";
 	    }
 	    camada.isnotvetor = vetor;
 	    camada.ferramentasTexto = $trad("u15a");

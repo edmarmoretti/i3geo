@@ -31,8 +31,8 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/usuarios" ) ===
 	exit ();
 }
 
-$id_usuario = $_POST ["id_usuario"];
-$id_papel = $_POST ["id_papel"];
+$id_usuario = @$_POST ["id_usuario"];
+$id_papel = @$_POST ["id_papel"];
 
 \admin\php\funcoesAdmin\testaSafeNumerico ( array(
 		$id_usuario,

@@ -697,17 +697,6 @@ var i3GEO = {
 			    }
 
 			    i3GEO.arvoreDeCamadas.registaCamadas(retorno.data.temas);
-
-			    //
-			    //complementa o objeto com os parametros para o menu de ferramentas
-			    //
-			    // complementa o array com os dados para o menu de
-			    // marcadores
-			    //i3GEO.listaDeFerramentas = i3GEO.marcador.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
-			    // inclui opcoes admin
-			    if (i3GEO.parametros.editor === "sim") {
-				i3GEO.listaDeFerramentas = i3GEO.login.adicionaMenuSuspenso(i3GEO.listaDeFerramentas);
-			    }
 			    i3GEO.Interface.inicia();
 			    //
 			    // obtem os parametros que foram armazenados ao salvar o

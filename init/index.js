@@ -13,22 +13,24 @@ botoesIni = [
 	"subtitulo": $trad("23a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
-},{
-	"img":"imagens/googlemaps.png",
-	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/gm.phtml",
-	"titulo":$trad(6,g_traducao_init),
-	"subtitulo": $trad("6a",g_traducao_init),
-	"fa": "map-o",
-	"target": "_blank"
-},{
+},
+/*
+,{
 	"img":"imagens/mashup.png",
 	"href": "../mashups/index.php",
 	"titulo":$trad(18,g_traducao_init) + "<br><a href='../mashups/osm.php?temas=&largura=800&altura=500' target=_blank >OSM</a>" + " - <a href='../mashups/openlayers.php?temas=&largura=800&altura=500' target=_blank >OpenLayers</a>",
 	"subtitulo": $trad("18a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_self"
-},
-/*
+}
+,{
+	"img":"imagens/googlemaps.png",
+	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/gm.phtml",
+	"titulo":$trad(6,g_traducao_init),
+	"subtitulo": $trad("6a",g_traducao_init),
+	"fa": "map-o",
+	"target": "_blank"
+}
 {
 	"img":"cartogramas",
 	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/carto_ol.htm",

@@ -22,6 +22,6 @@
 
     <div class="separadorCabecalhoGuias">&nbsp;</div>
     <div class="guiaOverflow" style="height: calc(100% - 45px);width: calc(100% - 12px);">
-        <div id="legendaHtml" data-template="templates/legenda.html" data-size="35,25" style='display: none; text-align: left'></div>
+        <div id="legendaHtml" data-template="<?php echo $configInc["pathtemplates"];?>/legenda.html" data-size="35,25" style='display: none; text-align: left'></div>
     </div>
 </div>

@@ -1369,10 +1369,11 @@ function geo2utm($x, $y, $zona)
  *
  * $locaplic - Localiza&ccedil;&atilde;o do I3geo
  */
-function georssCanais($servico, $map_file, $dir_tmp, $locaplic)
+function georssCanais($servico)
 {
     $xml = simplexml_load_file($servico);
     // var_dump($xml);
+    $resultado = [];
     foreach ($xml->channel as $c) {
         $resultado[] = array(
             "title" => (ixml($c, "title")),

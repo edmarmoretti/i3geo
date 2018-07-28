@@ -54,9 +54,9 @@
     <div class="separadorCabecalhoGuias">&nbsp;</div>
     <div class="guiaOverflow" style="height: calc(100% - 45px); width: calc(100% - 12px);">
         <!-- Esta div acrescenta a lista de layers graficos -->
-        <div id="listaLayersGr" style="overflow: none;" data-template="templates/camadaGr.html"></div>
+        <div id="listaLayersGr" style="overflow: none;" data-template="<?php echo $configInc["pathtemplates"];?>/camadaGr.html"></div>
         <!-- Esta div acrescenta a lista de camadas disponiveis no mapa atual -->
-        <div id="listaTemas" style="overflow: none;" data-template="templates/camada.html"></div>
+        <div id="listaTemas" style="overflow: none;" data-template="<?php echo $configInc["pathtemplates"];?>/camada.html"></div>
         <!-- Esta div acrescenta a lista de de camadas de fundo
                     A lista de camadas de fundo e obtida da variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS
                     Essa variavel e definida via javascript, e no caso das interfaces padrao do i3Geo, e definida
@@ -67,7 +67,7 @@
         </div>
         <div style="margin-left: 0px;" class="collapse text-left" id="collapseFundo">
             <form>
-                <div id="listaFundo" class="form-group condensed" data-template="templates/camadaFundo.html"></div>
+                <div id="listaFundo" class="form-group condensed" data-template="<?php echo $configInc["pathtemplates"];?>/camadaFundo.html"></div>
             </form>
         </div>
     </div>

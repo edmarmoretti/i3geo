@@ -654,9 +654,6 @@ if (isset($url_wms)) {
 
 adaptaLayers($tmpfname, $versao);
 
-// if (file_exists($locaplic."/pacotes/geoip") && file_exists($locaplic."/pacotes/geoip/GeoLiteCity.dat")){
-// require_once(dirname(__FILE__)."/ms_registraip.php");
-// }
 if ($interface != "mashup") {
     abreInterface($interface, $caminho);
 }
@@ -726,7 +723,7 @@ function abreInterface($interface, $caminho)
         $customDir = "interface";
     }
     $nomeInterface = explode(".", basename($interface));
-    if (count(explode(".php", $interface)) > 1) {
+    if (count(explode(".xphp", $interface)) > 1) {
         if (file_exists($caminho . $customDir . "/" . $interface)) {
             include_once ($caminho . $customDir . "/" . $interface);
         }

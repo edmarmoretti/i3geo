@@ -32,6 +32,10 @@ include (ONDEI3GEO . "/js/compactados/php_compacto.js");
 echo "\n";
 include (ONDEI3GEO . "/js/compactados/mustache.js");
 echo "\n";
+include (ONDEI3GEO . "/js/template.js");
+echo "\n";
+include (ONDEI3GEO . "/js/compactados/janela_compacto.js");
+echo "\n";
 include (ONDEI3GEO . "/admin/menu.js");
 echo "\n";
 include (ONDEI3GEO . "/admin/js/core.js");
@@ -39,6 +43,8 @@ echo "\n";
 include (ONDEI3GEO . "/admin/dicionario/core.js");
 echo "\n";
 include (ONDEI3GEO . "/admin/dicionario/menup.js");
+echo "\n";
+include (ONDEI3GEO . "/pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js");
 echo "\n";
 
 if (extension_loaded ( 'zlib' )) {

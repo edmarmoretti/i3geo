@@ -1911,16 +1911,6 @@ switch (strtoupper($funcao)) {
      * <wmswfs.php>
      */
     /*
-     * Valor: GEORSSCANAIS
-     *
-     * Lista os canais de um georss.
-     *
-     * <georssCanais>
-     */
-    case "GEORSSCANAIS":
-        $retorno = georssCanais($_pg["servico"], $map_file, $dir_tmp, $locaplic);
-        break;
-    /*
      * Valor: GETCAPABILITIES
      *
      * Chama a fun&ccedil;&atilde;o getcapabilities e retorna o resultado.

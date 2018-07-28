@@ -10,7 +10,7 @@
         <br class="hidden-xs">
         <div class="clearfix"></div>
         <span class="hidden-xs" id="i3GEOzoomInOut" style="cursor: pointer;"></span>
-        <button class="hidden-xs toggle" data-tutorial="marcador" title="{{{x79}}}" data-template="templates/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left; display: none;">
+        <button class="hidden-xs toggle" data-tutorial="marcador" title="{{{x79}}}" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasSend.html" onclick="i3GEO.marcador.inicia(this)" style="float: left; display: none;">
             <i class="material-icons">bookmark_border</i>
         </button>
         <br class="hidden-xs">

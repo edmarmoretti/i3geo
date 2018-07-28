@@ -15,7 +15,8 @@ include (ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/js/material.min.js
 echo "\n";
 include (ONDEI3GEO . "/pacotes/bootstrap-accessibility-plugin/plugins/js/bootstrap-accessibility.min.js");
 echo "\n";
-
+include (ONDEI3GEO . "/pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js");
+echo "\n";
 if (extension_loaded ( 'zlib' )) {
 	ob_end_flush ();
 }

@@ -38,6 +38,6 @@ if(isset($i3geo_proxy_server) && $i3geo_proxy_server != ""){
 }
 $resultado = curl_exec($ch);
 ob_clean();
-header('Content-type: application/vnd.google-earth.kml+xml');
+header('Content-type: application/json');
 echo $resultado;
 ?>

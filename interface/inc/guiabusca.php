@@ -17,9 +17,9 @@
                 <label class="control-label" for="valorBuscaRapida">{{{x36}}}</label>
                 <div class="input-group">
                     <input class="form-control" type="text" value="" name="valorBuscaRapida">
-                    <span class="input-group-btn"> <a onclick="i3GEO.busca.inicia(this);return false;" data-templateGoogle="templates/buscaEmTemas.html" data-inputGoogle="[name=google]"
-                            data-ondeGoogle=".i3GEOresultadoBuscaGoogle" data-templateTemasMapa="templates/buscaEmTemas.html" data-inputTemasMapa="[name=temasMapa]"
-                            data-ondeTemasMapa=".i3GEOresultadoBuscaTemasMapa" data-templateServico="templates/buscaEmServico.html" data-ondeConteiner="#guia7obj"
+                    <span class="input-group-btn"> <a onclick="i3GEO.busca.inicia(this);return false;" data-templateGoogle="<?php echo $configInc["pathtemplates"];?>/buscaEmTemas.html" data-inputGoogle="[name=google]"
+                            data-ondeGoogle=".i3GEOresultadoBuscaGoogle" data-templateTemasMapa="<?php echo $configInc["pathtemplates"];?>/buscaEmTemas.html" data-inputTemasMapa="[name=temasMapa]"
+                            data-ondeTemasMapa=".i3GEOresultadoBuscaTemasMapa" data-templateServico="<?php echo $configInc["pathtemplates"];?>/buscaEmServico.html" data-ondeConteiner="#guia7obj"
                             data-inputOndePalavra="[name=valorBuscaRapida]" data-inputServicosExternos="[name=servicosExternos]" data-ondeServicosExternos=".i3GEOresultadoBuscaServicos" role="button"
                             type="button" class="btn btn-warning btn-fab btn-fab-max" href="javascript:void(0)">
                             <span class="material-icons ">send</span>

@@ -103,6 +103,9 @@ i3GEO.mapa =
 		);
 	    }
 	},
+	infoxy: function(x,y){
+	    i3GEO.mapa.dialogo.verificaTipDefault(x,y);
+	},
 	/**
 	 * Ativa o redimensionamento automatico do mapa sempre que o navegador for redimensionado
 	 *
@@ -1122,7 +1125,7 @@ i3GEO.mapa =
 		x = xx;
 		y = yy;
 		mostra = true;
-		textoSimples = $trad("balaoVazio");
+		textoSimples = "";//$trad("balaoVazio");
 		wkt = [];
 		if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.openTipNoData == false){
 		    mostra = false;
@@ -1241,6 +1244,24 @@ i3GEO.mapa =
 			textoSimples += titulo + textoTempSimples;
 		    }
 		}
+		//caso seja um vetor
+		var pixel = i3geoOL.getPixelFromCoordinate([x,y]);
+		var html = [];
+		i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
+			 var texto = "";
+			 var chaves = feature.getKeys();
+			 var prop = feature.getProperties();
+			 var c = chaves.length;
+			 for (var i = 0; i < c; i++) {
+			     if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
+				 texto += chaves[i] + ": " + prop[chaves[i]] + "<br>";
+			     }
+			 }
+			 html.push(texto);
+			 mostra = true;
+		     });
+		textoSimples += html.join("<br>");
+		textCopy += html.join("<br>");
 		if (mostra === true) {
 		    if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.modal == true){
 			i3GEO.janela.closeMsg(textoSimples);

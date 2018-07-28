@@ -380,10 +380,12 @@ i3GEO.arvoreDeTemas = {
 		 * conexao com servicos externos
 		 */
 		conectaservico : function() {
-			i3GEO.util.scriptTag(i3GEO.configura.locaplic
-					+ "/ferramentas/conectarservicos/dependencias.php",
-					"i3GEOF.conectarservicos.iniciaJanelaFlutuante()",
-					"i3GEOF.conectarservicos_script");
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.arvoreDeTemas.dialogo.conectaservico()",
+				"conectaservico",
+				"conectaservico",
+				"dependencias.php",
+			"i3GEOF.conectaservico.start()");
 		},
 		/**
 		 * Function: dialogo.carouselTemas

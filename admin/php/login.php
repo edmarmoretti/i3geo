@@ -36,7 +36,7 @@ session_write_close();
 session_name("i3GeoLogin");
 //se o usuario estiver tentando fazer login
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
-
+$funcao = $_POST["funcao"];
 if(!empty($_POST["usuario"]) && !empty($_POST["senha"])){
     logoutUsuario();
 	session_regenerate_id();
@@ -57,16 +57,18 @@ else{//se nao, verifica se o login ja existe realmente
 		session_start();
 		if($_SESSION["usuario"] != $_COOKIE["i3geousuariologin"]){
 			logoutUsuario();
-			cpjson("logout");
+			header("Content-type: application/json");
+			echo json_encode("logout");
+			exit;
 		}
 	}
 	else{//caso nao exista, retorna um erro
 		logoutUsuario();
-		cpjson("erro");
+		header("Content-type: application/json");
+		echo json_encode("erro");
 	}
 }
 
-//var_dump($_SESSION);exit;
 $retorno = "logout"; //string que ser&aacute; retornada ao browser via JSON
 switch (strtoupper($funcao))
 {
@@ -103,11 +105,15 @@ switch (strtoupper($funcao))
 				}
 			}
 			$retorno = array("id"=>session_id(),"nome"=>$teste["usuario"]["nome_usuario"],"editor"=>$editor);
-			cpjson($retorno);
+			header("Content-type: application/json");
+			echo json_encode($retorno);
+			exit;
 		}
 		else{
 			logoutUsuario();
-			cpjson("logout");
+			header("Content-type: application/json");
+			echo json_encode("logout");
+			exit;
 		}
 	break;
 	/*
@@ -140,22 +146,6 @@ switch (strtoupper($funcao))
 		cpjson($retorno);
 	break;
 	/*
-	Valor: RECUPERARSENHA
-
-	Cria uma nova senha para um usuario enviando-a por e-mailo
-
-	Paremeter:
-
-	$usuario
-	*/
-	case "RECUPERARSENHA":
-		$retorno = false;
-		if(!empty($_POST["usuario"])){
-			$retorno = recuperarSenha($_POST["usuario"]);
-		}
-		cpjson($retorno);
-	break;
-	/*
 	Valor: ALTERARSENHA
 
 	Altera a senha de um usuario
@@ -168,22 +158,43 @@ switch (strtoupper($funcao))
 	*/
 	case "ALTERARSENHA":
 		$retorno = false;
-		if(!empty($_POST["usuario"])){
+		if(!empty($_POST["usuario"]) && !empty($_POST["novaSenha"])){
 			$retorno = alterarSenha($_POST["usuario"],$_POST["novaSenha"]);
 		}
-		cpjson($retorno);
+		logoutUsuario();
+		header("Content-type: application/json");
+		echo json_encode($retorno);
+		exit;
 	break;
 }
 function alterarSenha($usuario,$novaSenha){
 	include(dirname(__FILE__)."/conexao.php");
-	$dados = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where senha = '".md5($_SESSION["senha"])."' and login = '$usuario' and ativo = 1",$locaplic);
+
+	if(function_exists("password_hash")){
+	    $novaSenha = password_hash($novaSenha, PASSWORD_DEFAULT);
+	} else {
+	    $novaSenha = md5($novaSenha);
+	}
+    $dados = array();
+	//por causa das versoes antigas do PHP
+    if(strlen($_SESSION["senha"]) == 32 || !function_exists("password_hash") ){
+	    $dados = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where senha = '".md5($_SESSION["senha"])."' and login = '$usuario' and ativo = 1",$locaplic);
+	}
+	else{
+	    $usuarios = \admin\php\funcoesAdmin\pegaDados("select senha,id_usuario,nome_usuario from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$dbh,false);
+	    if (count($usuarios) == 1 && password_verify($_SESSION["senha"],$usuarios[0]["senha"])){
+	        $dados[] = array("id_usuario"=>$usuarios[0]["id_usuario"],"nome_usuario"=>$usuarios[0]["nome_usuario"]);
+	    }
+	}
 	if(count($dados) > 0){
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='".md5($novaSenha)."' WHERE login = '$usuario'");
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='".$novaSenha."' WHERE login = '$usuario'");
 		$_SESSION["senha"] = $novaSenha;
 		$to      = $dados[0]["email"];
 		$subject = 'nova senha i3geo';
 		$message = "Sua senha foi alterada";
-		mail($to, $subject, $message);
+		if($to != ""){
+		  mail($to, $subject, $message);
+		}
 		return true;
 	}
 	else{
@@ -193,13 +204,18 @@ function alterarSenha($usuario,$novaSenha){
 function recuperarSenha($usuario){
 	include(dirname(__FILE__)."/conexao.php");
 	$novaSenha = rand(9000,1000000);
+	if(function_exists("password_hash")){
+	    $novaSenha = password_hash($novaSenha, PASSWORD_DEFAULT);
+	} else {
+	    $novaSenha = md5($novaSenha);
+	}
 	$dados = \admin\php\funcoesAdmin\pegaDados("select * from ".$esquemaadmin."i3geousr_usuarios where login = '$usuario' and ativo = 1",$locaplic);
 	if(count($dados) > 0){
-		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='".md5($novaSenha)."' WHERE login = '$usuario'");
+		$dbhw->query("UPDATE ".$esquemaadmin."i3geousr_usuarios SET senha='".$novaSenha."' WHERE login = '$usuario'");
 		$to      = $dados[0]["email"];
 		$subject = 'nova senha i3geo';
 		$message = $novaSenha;
-		mail($to, $subject, $message);
+		//mail($to, $subject, $message);
 		return true;
 	}
 	else{

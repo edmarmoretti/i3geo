@@ -1420,7 +1420,7 @@ class Mapa
                 $vermultilayer = new vermultilayer();
                 $vermultilayer->verifica($this->arquivo, $layer);
                 if ($vermultilayer->resultado == 1) // o tema e multi layer
-{
+                {
                     $ls = $vermultilayer->temas;
                 }
                 $ls[] = $layer;
@@ -1438,7 +1438,7 @@ class Mapa
                 $vermultilayer = new vermultilayer();
                 $vermultilayer->verifica($this->arquivo, $layer);
                 if ($vermultilayer->resultado == 1) // o tema e multi layer
-{
+                {
                     $ls = $vermultilayer->temas;
                 } else {
                     $ls[] = $layer;
@@ -1776,92 +1776,89 @@ class Mapa
      * $locaplic - Localiza&ccedil;&atilde;o do I3geo
      * $canal - Identificador do canal (ordem em que est&aacute; no RSS)
      */
-    function adicionaTemaGeoRSS($servico, $dir_tmp, $locaplic, $canal)
+    function adicionaTemaGeoRSS($servico, $dir_tmp, $locaplic)
     {
         error_reporting(0);
         $xml = simplexml_load_file($servico);
-        $conta = 0;
+        $resultado = array();
         foreach ($xml->channel as $c) {
-            if ($conta == $canal) {
-                $canal = $c;
-            }
-        }
-        $nos = $canal->item;
-        // verifica se o canal faz referencia a elementos externos
-        // se sim, usa todos os elementos do xml no lugar do canal
-        foreach ($canal->items as $t) {
-            foreach ($t->xpath('rdf:Seq') as $x) {
-                foreach ($x->xpath('rdf:li') as $z) {
-                    $nos = $xml->item;
+            $canal = $c;
+            $nos = $canal->item;
+            // verifica se o canal faz referencia a elementos externos
+            // se sim, usa todos os elementos do xml no lugar do canal
+            foreach ($canal->items as $t) {
+                foreach ($t->xpath('rdf:Seq') as $x) {
+                    foreach ($x->xpath('rdf:li') as $z) {
+                        $nos = $xml->item;
+                    }
                 }
             }
-        }
-        $resultado = array();
-        $tipog = "";
-        foreach ($nos as $item) {
-            $env = array();
-            // define o tipo
-            if ($item->xpath('geo:lat')) {
-                $tipog = "geo";
-            }
-            if ($item->xpath('georss:point')) {
-                $tipog = "georsspoint";
-            }
-            if ($item->xpath('georss:where')) {
-                $tipog = "envelope";
-            }
-            if ($tipog == "envelope") {
-                foreach ($item->xpath('georss:where') as $w) {
-                    foreach ($w->xpath('gml:Envelope') as $e) {
-                        // $lc = $e->xpath('gml:lowerCorner');
-                        $lc = (string) $e->children('gml', TRUE)->lowerCorner;
-                        // $uc = $e->xpath('gml:upperCorner');
-                        $uc = (string) $e->children('gml', TRUE)->upperCorner;
-                        $lc = explode(" ", $lc);
-                        $uc = explode(" ", $uc);
-                        if (is_numeric($lc[0])) {
-                            $ymin = $lc[0];
-                            $ymax = $uc[0];
-                            $xmin = $lc[1];
-                            $xmax = $uc[1];
-                            if ($ymin != "") {
-                                $env = array(
-                                    $xmin,
-                                    $ymin,
-                                    $xmax,
-                                    $ymax
-                                );
+            $tipog = "";
+            foreach ($nos as $item) {
+                $env = array();
+                // define o tipo
+                if ($item->xpath('geo:lat')) {
+                    $tipog = "geo";
+                }
+                if ($item->xpath('georss:point')) {
+                    $tipog = "georsspoint";
+                }
+                if ($item->xpath('georss:where')) {
+                    $tipog = "envelope";
+                }
+                if ($tipog == "envelope") {
+                    foreach ($item->xpath('georss:where') as $w) {
+                        foreach ($w->xpath('gml:Envelope') as $e) {
+                            // $lc = $e->xpath('gml:lowerCorner');
+                            $lc = (string) $e->children('gml', TRUE)->lowerCorner;
+                            // $uc = $e->xpath('gml:upperCorner');
+                            $uc = (string) $e->children('gml', TRUE)->upperCorner;
+                            $lc = explode(" ", $lc);
+                            $uc = explode(" ", $uc);
+                            if (is_numeric($lc[0])) {
+                                $ymin = $lc[0];
+                                $ymax = $uc[0];
+                                $xmin = $lc[1];
+                                $xmax = $uc[1];
+                                if ($ymin != "") {
+                                    $env = array(
+                                        $xmin,
+                                        $ymin,
+                                        $xmax,
+                                        $ymax
+                                    );
+                                }
                             }
                         }
                     }
                 }
-            }
-            if ($tipog == "geo") {
-                if ($item->xpath('geo:lon')) {
-                    $x = (string) $item->children('geo', TRUE)->lon;
-                } else {
-                    $x = (string) $item->children('geo', TRUE)->long;
+                if ($tipog == "geo") {
+                    if ($item->xpath('geo:lon')) {
+                        $x = (string) $item->children('geo', TRUE)->lon;
+                    } else {
+                        $x = (string) $item->children('geo', TRUE)->long;
+                    }
+                    // $y = $item->xpath('geo:lat');
+                    $y = (string) $item->children('geo', TRUE)->lat;
+                    $env = array(
+                        $y,
+                        $x
+                    );
                 }
-                // $y = $item->xpath('geo:lat');
-                $y = (string) $item->children('geo', TRUE)->lat;
-                $env = array(
-                    $y,
-                    $x
-                );
-            }
-            if ($tipog == "georsspoint") {
-                // $temp = $item->xpath('georss:point');
-                $temp = (string) $item->children('georss', TRUE)->point;
-                $env = (explode(" ", $temp));
-            }
-            if (count($env) > 0) {
-                $resultado[] = array(
-                    ixml($item, "title"),
-                    ixml($item, "link"),
-                    ixml($item, "description"),
-                    ixml($item, "category"),
-                    $env
-                );
+                if ($tipog == "georsspoint") {
+                    // $temp = $item->xpath('georss:point');
+                    $temp = (string) $item->children('georss', TRUE)->point;
+                    $env = (explode(" ", $temp));
+                }
+                if (count($env) > 0) {
+                    $resultado[] = array(
+                        ixml($item, "title"),
+                        ixml($item, "link"),
+                        ixml($item, "description"),
+                        ixml($item, "category"),
+                        $env
+                    );
+                }
             }
         }
         // cria o shapefile com os dados

@@ -1,207 +1,187 @@
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
 i3GEOF.loginusuario = {
+	_parameters : {
+	    "mustache": "",
+	    "namespace": "loginusuario",
+	    "idContainer": "i3GEOF_loginusuario" //esse elemento div ja deve ter sido carregado no html
+	},
 	aguarde: "",
-	MUSTACHE : "",
 	start: function(){
-	    i3GEOF.loginusuario.iniciaDicionario();
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.when( $.get(t1)).done(function(r1) {
+		    i3GEO.janela.fechaAguarde();
+		    p.mustache = r1;
+		    i3f.html();
+		}).fail(function(data) {
+		    i3GEO.janela.fechaAguarde();
+		    i3GEO.janela.snackBar({content: "Erro. " + data.status, style:'red'});
+		    i3f.destroy();
+		});
+	    } else {
+		i3f.html();
+	    }
 	},
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-		var usuario = i3GEO.util.pegaCookie("i3geousuariologin"),
-			dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.loginusuario.dicionario),
-			u = "";
-
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["ativo"] = $trad('x30');
-		dicionario["usuario"] = $trad('x27');
-		dicionario["senha"] = $trad('x28');
-		dicionario["enviar"] = $trad('x29');
-		dicionario["recuperar"] = $trad('x32');
-		dicionario["alterar"] = $trad('x52');
-		dicionario["user"] = i3GEO.util.pegaCookie("i3geousuariologin");
-
-		if(!usuario || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
-			u = "-";
-		}
-		else{
-			u = i3GEO.util.pegaCookie("i3geousuarionome") + " - " + i3GEO.util.pegaCookie("i3geousuariologin");
-		}
-
-		dicionario["usuarioLogado"] = u;
-		return dicionario;
+	destroy: function(){
+	    //nao use this aqui
+	    i3GEOF.loginusuario._parameters.mustache = "";
+	    $("#modalLogin").modal("hide");//modalLogin ja existe no html
 	},
-	/*
-		Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-	*/
-	criaJanelaFlutuante: function(){
-		i3GEOF.loginusuario.iniciaDicionario();
+	html: function(){
+	    var p = this._parameters,
+	    usuario = i3GEO.util.pegaCookie("i3geousuariologin"),
+	    i3f = this,
+	    u = "",
+	    hash;
+
+	    if(!usuario || !i3GEO.util.pegaCookie("i3GeoLogin") || i3GEO.util.pegaCookie("i3geousuariologin") == "" || i3GEO.util.pegaCookie("i3GeoLogin") == ""){
+		u = "-";
+	    }
+	    else{
+		u = i3GEO.util.pegaCookie("i3geousuarionome") + " - " + i3GEO.util.pegaCookie("i3geousuariologin");
+	    }
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    ativo: $trad('x30'),
+		    usuario: $trad('x27'),
+		    senha: $trad('x28'),
+		    enviar: $trad('x29'),
+		    recuperar: $trad('x32'),
+		    alterar: $trad('x52'),
+		    user: i3GEO.util.pegaCookie("i3geousuariologin"),
+		    usuarioLogado: u,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    $i(p.idContainer).innerHTML = Mustache.render(p.mustache, hash);
 	},
-	/*
-	Function: iniciaDicionario
-
-	Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-
-	O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-	*/
-	iniciaDicionario: function(){
-		if(typeof(i3GEOF.loginusuario.dicionario) === 'undefined'){
-			i3GEO.util.scriptTag(
-				i3GEO.configura.locaplic+"/ferramentas/loginusuario/dicionario.js",
-				"i3GEOF.loginusuario.iniciaJanelaFlutuante()",
-				"i3GEOF.loginusuario.dicionario_script"
-			);
-		}
-		else{
-			i3GEOF.loginusuario.iniciaJanelaFlutuante();
-		}
-	},
-	/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		try{
-			$i(iddiv).innerHTML = i3GEOF.loginusuario.html();
-		}
-		catch(erro){alert(erro);}
-	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresentacao das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	*/
-	html:function(){
-		var ins = Mustache.render(i3GEOF.loginusuario.MUSTACHE, i3GEOF.loginusuario.mustacheHash());
-		return ins;
-	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		i3GEOF.loginusuario.inicia("i3GEOF_loginusuario");
-
+	getFormData: function(){
+	    var data = i3GEO.util.getFormData("#" + this._parameters.idContainer + " form");
+	    return data;
 	},
 	/*
 	Function: enviar
 
 	Envia os dados de login
-	*/
+	 */
 	enviar: function(){
-		var u = $i("i3geousuario").value,
-			s = $i("i3geosenha").value,
-			temp,p,cp;
-		if(i3GEOF.loginusuario.aguarde.visibility === "visible"){
-			return;
-		}
-		i3GEOF.loginusuario.aguarde.visibility = "visible";
-		if(u == "" || s == ""){
-			i3GEOF.loginusuario.aguarde.visibility = "hidden";
-			return;
-		}
-		temp = function(retorno){
-			i3GEOF.loginusuario.aguarde.visibility = "hidden";
-			if(!retorno || !retorno.data || retorno.data == "erro" || retorno.data == "logout"){
-				if(i3GEO.login.funcaoLoginErro){
-					i3GEO.login.funcaoLoginErro.call();
-				}
-				else{
-					alert($trad("x31"));
-				}
-				if(i3GEO.parametros){
-					i3GEO.parametros.editor = "nao";
-					i3GEO.catalogoMenus.listaMenus();
-				}
+	    var par = this.getFormData(),
+	    i3f = this;
+
+	    if(par.usuario == "" || par.senha == ""){
+		return;
+	    }
+	    par.funcao = "login";
+	    i3GEO.janela.abreAguarde();
+	    $.post(
+		    i3GEO.configura.locaplic+"/admin/php/login.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela.fechaAguarde();
+			i3f.destroy();
+			if(!data || data == "erro" || data == "logout"){
+			    if(i3GEO.login.funcaoLoginErro){
+				i3GEO.login.funcaoLoginErro.call();
+			    }
+			    else{
+				i3GEO.janela.snackBar({content: $trad("x31"), style:'red'});
+			    }
+			    if(i3GEO.parametros){
+				i3GEO.parametros.editor = "nao";
+				i3GEO.catalogoMenus.listaMenus();
+			    }
 			}
 			else{
-				i3GEO.util.insereCookie("i3geocodigologin",retorno.data.id,1);
-				i3GEO.util.insereCookie("i3geousuariologin",u,1);
-				i3GEO.util.insereCookie("i3geousuarionome",retorno.data.nome,1);
-				if(!typeof(YAHOO) == "undefined"){
-					i3GEO.janela.destroi("i3GEOF_loginusuario");
-				}
-				if(i3GEO.login.recarrega === true){
-					document.location.reload();
-					return;
-				}
-				if($i(i3GEO.login.divnomelogin)){
-					$i(i3GEO.login.divnomelogin).innerHTML = retorno.data.nome;
-				}
-				if(i3GEO.login.funcaoLoginOk){
-					i3GEO.login.funcaoLoginOk.call();
-				}
-				else{
-					alert("Login OK -> "+retorno.data.nome);
-				}
-				if(i3GEO.parametros){
-					i3GEO.parametros.editor = retorno.data.editor;
-					i3GEO.catalogoMenus.listaMenus();
-				}
+			    i3GEO.util.insereCookie("i3geocodigologin",data.id,1);
+			    i3GEO.util.insereCookie("i3geousuariologin",par.usuario,1);
+			    i3GEO.util.insereCookie("i3geousuarionome",data.nome,1);
+			    i3GEOF.loginusuario.destroy();
+			    if(i3GEO.login.recarrega === true){
+				document.location.reload();
+				return;
+			    }
+			    if($i(i3GEO.login.divnomelogin)){
+				$i(i3GEO.login.divnomelogin).innerHTML = data.nome;
+			    }
+			    if(i3GEO.login.funcaoLoginOk){
+				i3GEO.login.funcaoLoginOk.call();
+			    }
+			    else{
+				i3GEO.janela.snackBar({content: "Login OK -> "+data.nome});
+			    }
+			    if(i3GEO.parametros){
+				i3GEO.parametros.editor = data.editor;
+				i3GEO.catalogoMenus.listaMenus();
+			    }
 			}
-		};
-		p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=login";
-		cp = new cpaint();
-		cp.set_transfer_mode("POST");
-		cp.set_response_type("JSON");
-		cp.call(p,"login",temp,"&usuario="+u+"&senha="+s);
-	},
-	recuperarSenha: function(){
-		var u = $i("i3geousuario").value,
-		temp,cp;
-		if(u == ""){
-			alert($trad("x27"));
-			return;
-		}
-		temp = function(retorno){
-			if(retorno.data == true ){
-				alert("ok");
-			}
-			else{
-				alert($trad("x31"));
-			}
-		};
-		p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=recuperarSenha";
-		cp = new cpaint();
-		cp.set_transfer_mode("POST");
-		cp.set_response_type("JSON");
-		cp.call(p,"login",temp,"&usuario="+u);
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: data.status, style:'red'});
+			i3f.destroy();
+		    }
+	    );
 	},
 	alterarSenha: function(){
-		var u = $i("i3geousuario").value,
-		temp,cp,novaSenha;
-		novaSenha = window.prompt("Nova senha");
-		if(u == ""){
-			alert($trad("x27"));
-			return;
-		}
-		temp = function(retorno){
-			if(retorno.data == true ){
-				alert("ok");
+	    var par = this.getFormData(),
+	    i3f = this,
+	    novaSenha = "";
+	    if(par.usuario == ""){
+		i3GEO.janela.snackBar({content: "Digite o nome de usu&aacute;rio", style:'red'});
+		return;
+	    }
+	    par.novaSenha = window.prompt("Nova senha");
+	    if(par.novaSenha == ""){
+		return;
+	    }
+	    par.funcao = "alterarSenha";
+	    i3GEO.janela.abreAguarde();
+	    $.post(
+		    i3GEO.configura.locaplic+"/admin/php/login.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.login.anulaCookie();
+			if(i3GEO.parametros){
+			    i3GEO.parametros.editor = "nao";
+			    i3GEO.catalogoMenus.listaMenus();
 			}
-			else{
-				alert($trad("x31"));
+			i3GEO.janela.fechaAguarde();
+			i3f.destroy();
+			if(!data || data == "erro"){
+			    i3GEO.janela.snackBar({content: $trad("loginnecessario",i3f.dicionario), style:'red'});
+			    i3GEO.janela.snackBar({content: $trad("errotroca",i3f.dicionario), style:'red'});
+			    return;
 			}
-		};
-		if(novaSenha != ""){
-			p = i3GEO.configura.locaplic+"/admin/php/login.php?funcao=alterarSenha";
-			cp = new cpaint();
-			cp.set_transfer_mode("POST");
-			cp.set_response_type("JSON");
-			cp.call(p,"login",temp,"&usuario="+u+"&novaSenha="+novaSenha);
-		}
+			i3GEOF.loginusuario.destroy();
+			if(i3GEO.login.recarrega === true){
+			    document.location.reload();
+			    return;
+			}
+			if($i(i3GEO.login.divnomelogin)){
+			    $i(i3GEO.login.divnomelogin).innerHTML = "";
+			}
+			i3GEO.janela.snackBar({content: $trad("loginnecessario",i3f.dicionario)});
+			i3GEO.janela.snackBar({content: $trad("senhatrocada",i3f.dicionario)});
+
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: data.status, style:'red'});
+			i3f.destroy();
+		    }
+	    );
 	}
 };

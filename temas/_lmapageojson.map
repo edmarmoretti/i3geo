@@ -1,0 +1,31 @@
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolosv6.sym"
+  LAYER
+    METADATA
+      "CLASSE"	"SIM"
+      "permitekmz"	"NAO"
+      "permitedownload"	"NAO"
+      "PLUGINI3GEO"	'{"plugin":"layergeojson","parametros":{"url":"https://raw.githubusercontent.com/tbrugz/geodata-br/master/geojson/geojs-12-mun.json"}}'
+      "permitekml"	"NAO"
+      "permiteogc"	"NAO"
+      "TEMA"	"Teste de plugin GeoJson"
+    END # METADATA
+    NAME "_lmapageojson"
+    STATUS OFF
+    TEMPLATE "none.htm"
+    TILEITEM "location"
+    TYPE POLYGON
+    UNITS METERS
+    CLASS
+      NAME ""
+      STYLE
+        COLOR 255 0 0
+        OUTLINECOLOR 0 0 0
+        SIZE 12
+      END # STYLE
+    END # CLASS
+  END # LAYER
+
+END # MAP
+

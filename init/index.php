@@ -128,13 +128,6 @@ if (! function_exists("ms_GetVersion")) {
 
                         </div>
                         <div class="panel-body" tabindex="-1" style="background-color: rgb(250, 250, 250)">
-                            <!--
-							<div class="thumbnail" role="button" style="height: 90px;">
-								<a target="{{{target}}}" href="{{{href}}}"> <img class="img-rounded"
-									style="height: 100%; width: 100%" src="imagens/{{{img}}}" />
-								</a>
-							</div>
-							-->
                             <h5 tabindex="-1" class="hidden-xs" style="height: 10rem; font-size: 1.7rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
                         </div>
                         <div class="panel-footer text-right" style="padding: 0px; padding-right: 15px; border: 0px; background-color: rgb(250, 250, 250);">

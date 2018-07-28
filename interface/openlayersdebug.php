@@ -3,17 +3,22 @@
 <head>
 <?php
 $configInc = array(
-    "debug" => "naocompacto",
+    "debug" => "naocompacto", //posfixos inserido na carga do script do i3geo
     "tipo" => "OL", // OL ou OSM
-    "url" => "inc",
+    "inc" => "inc", //caminho para os includes PHP com os componentes da interface
+    "pathjs" => "..", //caminho para o include dos arquivos JS
+    "pathcss" => "..", //caminho para o include dos arquivos css
+    "pathconfig" => ".", //caminho para o include do arquivo JS config.php
+    "pathtutorial" => ".", //caminho para o include do arquivo JS tutorial.js
+    "pathtemplates" => "templates", //caminho para a pasta template com os arquivos MUSTACHE
     "nocache" => time()
 );
-include ($configInc["url"] . "/meta.php");
+include ($configInc["inc"] . "/meta.php");
 ?>
 <title>i3GEO - OpenLayers</title>
 <?php
-include ($configInc["url"] . "/js.php");
-include ($configInc["url"] . "/css.php");
+include ($configInc["inc"] . "/js.php");
+include ($configInc["inc"] . "/css.php");
 ?>
 <style>
 .ol-attribution.ol-uncollapsible {
@@ -41,12 +46,12 @@ include ($configInc["url"] . "/css.php");
     -->
     <div id="mapai3Geo" style="width: 100vw; height: 100vh"></div>
     <!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
-    <?php include($configInc["url"]."/escalanum.php");?>
+    <?php include($configInc["inc"]."/escalanum.php");?>
     <!-- aqui sera incluido o componente que mostra a coordenada geografica da posicao do mouse -->
-    <?php include($configInc["url"]."/coordenadas.php");?>
+    <?php include($configInc["inc"]."/coordenadas.php");?>
     <!-- barra de icones de navegacao -->
-    <?php include($configInc["url"]."/barradeicones.php");?>
-    <?php include($configInc["url"]."/barraaguarde.php");?>
+    <?php include($configInc["inc"]."/barradeicones.php");?>
+    <?php include($configInc["inc"]."/barraaguarde.php");?>
     <!-- mensagem de copyright -->
     <div id="i3GEOcopyright">i3Geo</div>
     <!-- botoes laterais que abrem guias moveis -->
@@ -56,13 +61,13 @@ include ($configInc["url"] . "/css.php");
         -->
         <div class="iconesGuiaMovel ol-control" data-traduzir="true">
             <?php
-            include ($configInc["url"] . "/iconeferramentas.php");
-            include ($configInc["url"] . "/iconecamadas.php");
-            include ($configInc["url"] . "/iconecatalogo.php");
-            include ($configInc["url"] . "/iconelegenda.php");
-            include ($configInc["url"] . "/iconebusca.php");
-            include ($configInc["url"] . "/iconeinfo.php");
-            include ($configInc["url"] . "/iconetutorial.php");
+            include ($configInc["inc"] . "/iconeferramentas.php");
+            include ($configInc["inc"] . "/iconecamadas.php");
+            include ($configInc["inc"] . "/iconecatalogo.php");
+            include ($configInc["inc"] . "/iconelegenda.php");
+            include ($configInc["inc"] . "/iconebusca.php");
+            include ($configInc["inc"] . "/iconeinfo.php");
+            include ($configInc["inc"] . "/iconetutorial.php");
             ?>
         </div>
         <!-- veja i3GEO.guias.CONFIGURA -->
@@ -71,17 +76,17 @@ include ($configInc["url"] . "/css.php");
         <div id="i3GEOguiaMovelMolde">
             <div id="i3GEOguiaMovelConteudo">
                 <?php
-                include ($configInc["url"] . "/guiaferramentas.php");
-                include ($configInc["url"] . "/guiacamadas.php");
-                include ($configInc["url"] . "/guiacatalogo.php");
-                include ($configInc["url"] . "/guialegenda.php");
-                include ($configInc["url"] . "/guiabusca.php");
+                include ($configInc["inc"] . "/guiaferramentas.php");
+                include ($configInc["inc"] . "/guiacamadas.php");
+                include ($configInc["inc"] . "/guiacatalogo.php");
+                include ($configInc["inc"] . "/guialegenda.php");
+                include ($configInc["inc"] . "/guiabusca.php");
                 ?>
             </div>
         </div>
     </div>
         <?php
-        include ($configInc["url"] . "/modallogin.php");
+        include ($configInc["inc"] . "/modallogin.php");
         ?>
     <!--  para mostrar o banner de abertura -->
     <script id="i3GEOlogoMarcaTemplate" type="x-tmpl-mustache">

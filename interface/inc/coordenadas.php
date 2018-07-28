@@ -29,7 +29,7 @@
         <input name="" value="-00" size="3" title="grau" id="localizarxygeoProjyg" type="text">
         <input name="" value="00" size="2" title="minuto" id="localizarxygeoProjym" type="text">
         <input name="" value="00.00" size="5" title="segundo" id="localizarxygeoProjys" type="text">
-        <img class="ticfind" style="margin-left: 8px;" title="zoom" onclick="i3GEO.coordenadas.zoomPontoGeo()" src="../imagens/branco.gif">
+        <img class="ticfind" style="margin-left: 0px;" title="zoom" onclick="i3GEO.coordenadas.zoomPontoGeo()" src="../imagens/branco.gif">
     </div>
     <div id="localizarxydd" class="i3GeoMascaraCoord" style="display: none; position: absolute; top: 0px; left: 60px;">
         X:

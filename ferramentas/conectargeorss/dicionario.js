@@ -26,13 +26,18 @@ i3GEOF.conectargeorss.dicionario = {
 		es : "Ocurri&oacute; un error"
 	} ],
 	'listacanais' : [ {
-		pt : "Lista os canais",
+		pt : "Listar os canais",
 		en : "Lists channels",
 		es : "Crea una lista de los canales"
 	} ],
-	'sel' : [ {
-		pt : "Digite o endere&ccedil;o do servi&ccedil;o ou escolha da lista abaixo",
-		en : "Enter the service address or select from the list below",
-		es : "Introduzca la direcci&oacute;n del servicio o selecci&oacute;nelo de la siguiente lista"
+	'inseregeorss' : [ {
+		pt : "URL do GeoRSS (ou escolha da lista)",
+		en : "",
+		es : ""
+	} ],
+	'concluido' : [ {
+		pt : "GeoRSS inclu&iacute;do no mapa",
+		en : "",
+		es : ""
 	} ]
 };

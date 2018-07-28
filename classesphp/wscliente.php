@@ -170,7 +170,6 @@ function listaRSSwsARRAY()
     if($esquemaadmin != ""){
         $esquemaadmin = $esquemaadmin.".";
     }
-
     $rsss = explode("|",$rss);
     if(count($rsss) == 0){
         $rsss = array(" ");
@@ -180,7 +179,10 @@ function listaRSSwsARRAY()
     $urli3geo = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".basename($locaplic);
     foreach ($rsss as $r){
         if($r == "" || $r == " "){
-
+            if($tipo == "KML"){
+                $canali = simplexml_load_string(geraXmlKmlrss($locaplic));
+                $linkrss = $urli3geo."/rss/xmlkml.php";
+            }
             if($tipo == "GEORSS"){
                 $canali = simplexml_load_string(geraXmlGeorss($locaplic));
                 $linkrss = $urli3geo."/rss/xmlgeorss.php";

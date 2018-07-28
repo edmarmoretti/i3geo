@@ -1,14 +1,14 @@
 <?php
-include_once(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
+include_once(dirname(__FILE__)."/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$_SESSION["i3geoBlFerramentas"],false);
+$retorno = "";
 $url = $_GET["url"];
-switch (strtoupper($funcao))
+switch (strtoupper($_GET["funcao"]))
 {
 	case "CRIALAYER":
-		$mapa = ms_newMapObj($map_file);
+	    $mapa = ms_newMapObj($_SESSION["map_file"]);
 		$novolayer = ms_newLayerObj($mapa);
-		$novolayer->set("name",$url);
+		$novolayer->set("name",str_replace([".",":","/"],"",$url));
 		$novolayer->setmetadata("TEMA",$url);
 		$novolayer->setmetadata("nomeoriginal",$url);
 		$novolayer->setmetadata("CLASSE","SIM");
@@ -18,12 +18,13 @@ switch (strtoupper($funcao))
 		$classe->set("name","");
 		$novolayer->set("status",MS_DEFAULT);
 		$novolayer->set("template","none.htm");
-		$salvo = $mapa->save(str_replace(".map","",$map_file).".map");
-		$retorno = "ok";
+		$salvo = $mapa->save(str_replace(".map","",$_SESSION["map_file"]).".map");
+		ob_clean();
+		header("Content-type: application/json");
+		echo json_encode(array(
+		    "errorMsg" => ""
+		));
+		exit;
 	break;
 }
-if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-	restauraCon($map_file,$postgis_mapa);
-}
-cpjson($retorno);
 ?>

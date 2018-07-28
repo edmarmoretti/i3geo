@@ -9,5 +9,25 @@ i3GEOF.loginusuario.dicionario = {
 		pt : "Digite o usu&aacute;rio e a senha para acessar o sistema de administra&ccedil;&atilde;o bem como outras funcionalidades de uso restrito",
 		en : "Enter the username and password to access the management system as well as other restricted functionalities",
 		es : "Introduzca el usuario y la contrase&ntilde;a para acceder al sistema de administraci&oacute;n y a otras funcionalidades de uso restringido"
+	} ],
+	"concluido" : [ {
+		pt : "Login conclu&iacute;do",
+		en : "",
+		es : ""
+	} ],
+	"loginnecessario" : [ {
+		pt : "&Eacute; necess&aacute;rio fazer login",
+		en : "",
+		es : ""
+	} ],
+	"errotroca" : [ {
+		pt : "Erro. Senha n&atilde;o foi alterada",
+		en : "",
+		es : ""
+	} ],
+	"senhatrocada" : [ {
+		pt : "Senha alterada",
+		en : "",
+		es : ""
 	} ]
 };

@@ -36,9 +36,9 @@
         </div>
         <div class="clearfix"></div>
 
-        <div id="searchInputFerramentas" data-template="templates/searchInput.html" style='display: block; text-align: center; width: 100%; padding-left: 1rem; padding-right: 1rem;'></div>
-        <div id="migalhaFerramentas" data-template="templates/ferramentasMigalha.html" style='display: block; text-align: left;'></div>
-        <div id="listaFerramentasLinks" data-template="templates/ferramentasLink.html" style='display: block; text-align: left'></div>
-        <div id="listaFerramentas" data-template="templates/ferramentasFolder.html" style='display: block; text-align: left'></div>
+        <div id="searchInputFerramentas" data-template="<?php echo $configInc["pathtemplates"];?>/searchInput.html" style='display: block; text-align: center; width: 100%; padding-left: 1rem; padding-right: 1rem;'></div>
+        <div id="migalhaFerramentas" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasMigalha.html" style='display: block; text-align: left;'></div>
+        <div id="listaFerramentasLinks" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasLink.html" style='display: block; text-align: left'></div>
+        <div id="listaFerramentas" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasFolder.html" style='display: block; text-align: left'></div>
     </div>
 </div>

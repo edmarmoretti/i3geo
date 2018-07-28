@@ -47,7 +47,7 @@
     <div class="separadorCabecalhoGuias">&nbsp;</div>
 
     <div class="guiaOverflow" style="height: calc(100% - 45px); width: calc(100% - 12px);">
-        <div id="catalogoMigalha" style="display: block;" data-template="templates/catalogoMigalha.html"></div>
+        <div id="catalogoMigalha" style="display: block;" data-template="<?php echo $configInc["pathtemplates"];?>/catalogoMigalha.html"></div>
         <!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
         <div id="catalogoNavegacao"></div>
         <!-- Opcoes -->
@@ -73,15 +73,15 @@
                             "idCatalogoNavegacao": "catalogoNavegacao",
                             "idOndeMigalha": "catalogoMigalha"
                         -->
-            <div id="catalogoMenus" data-templateDir="templates/dir.html" data-templateTema="templates/tema.html"></div>
+            <div id="catalogoMenus" data-templateDir="<?php echo $configInc["pathtemplates"];?>/dir.html" data-templateTema="<?php echo $configInc["pathtemplates"];?>/tema.html"></div>
 
             <div id="arvoreAdicionaTema"></div>
 
             <!--
                         As funcoes de inicializacao recebem um objeto com parametros. Que por padrao sao:
                         config: {
-                            'templateDir': 'templates/dir.html',
-                            'templateTema': 'templates/tema.html',
+                            'templateDir': '<?php echo $configInc["pathtemplates"];?>/dir.html',
+                            'templateTema': '<?php echo $configInc["pathtemplates"];?>/tema.html',
                             'idCatalogoPrincipal': 'catalogoPrincipal',
                             'idCatalogoNavegacao': 'catalogoNavegacao',
                             'idOndeMigalha': 'catalogoMigalha'
@@ -89,7 +89,7 @@
 
                         exemplo:
 
-                        onclick="i3GEO.catalogoInde.inicia({'templateDir': 'templates/dir.html','templateTema': 'templates/tema.html','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})"
+                        onclick="i3GEO.catalogoInde.inicia({'templateDir': '<?php echo $configInc["pathtemplates"];?>/dir.html','templateTema': '<?php echo $configInc["pathtemplates"];?>/tema.html','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})"
                         -->
 
             <!-- servicos da INDE brasileira -->

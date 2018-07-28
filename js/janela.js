@@ -40,31 +40,32 @@ if (typeof (i3GEO) === 'undefined') {
  *
  * Namespace da biblioteca YUI utilizado para armazenar janelas flutuantes
  */
-YAHOO.namespace("i3GEO.janela");
-/**
- * Variavel: YAHOO.widget.OverlayManager
- *
- * Gerenciador das janelas flutuantes da biblioteca YUI
- *
- * Type:
- *
- * {YAHOO.widget.OverlayManager}
- */
-YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
-//para efeitos de compatibilidade com a vers&atilde;o 4.6
-YAHOO.namespace("janelaDoca.xp");
-YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
-/**
- * Variavel: YAHOO.i3GEO.janela.managerAguarde
- *
- * Gerenciador das janelas flutuantes de aguarde
- *
- * Type:
- *
- * {YAHOO.widget.OverlayManager}
- */
-YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
-
+if(typeof YAHOO != 'undefined'){
+    YAHOO.namespace("i3GEO.janela");
+    /**
+     * Variavel: YAHOO.widget.OverlayManager
+     *
+     * Gerenciador das janelas flutuantes da biblioteca YUI
+     *
+     * Type:
+     *
+     * {YAHOO.widget.OverlayManager}
+     */
+    YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
+    //para efeitos de compatibilidade com a vers&atilde;o 4.6
+    YAHOO.namespace("janelaDoca.xp");
+    YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
+    /**
+     * Variavel: YAHOO.i3GEO.janela.managerAguarde
+     *
+     * Gerenciador das janelas flutuantes de aguarde
+     *
+     * Type:
+     *
+     * {YAHOO.widget.OverlayManager}
+     */
+    YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
+}
 //TODO criar janela que permita inserir um link e salva-la junto com o mapa
 i3GEO.janela =
 {

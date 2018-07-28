@@ -7,10 +7,10 @@
 	<div class="col-md-12">
 		<form class="form" role="form" method="post" action="#">
 			<div class="form-group">
-				<input tabindex="1" style="text-align: left" type="text" class="form-control" id="i3geousuario" placeholder="{{{usuario}}}" required>
+				<input tabindex="1" style="text-align: left" type="text" class="form-control" name="usuario" placeholder="{{{usuario}}}" required>
 			</div>
 			<div class="form-group">
-				<input tabindex="2" style="text-align: left" type="password" class="form-control" id="i3geosenha" placeholder="{{{senha}}}" required>
+				<input tabindex="2" style="text-align: left" type="password" class="form-control" name="senha" placeholder="{{{senha}}}" required>
 			</div>
 		</form>
 	</div>
@@ -25,7 +25,6 @@
 </div>
 <div class="row">
 	<div class="col-md-6">
-		<p><a href="#" onclick="i3GEOF.loginusuario.recuperarSenha()">{{{recuperar}}}</a></p>
 		<p><a href="#" onclick="i3GEOF.loginusuario.alterarSenha()">{{{alterar}}}</a></p>
 	</div>
 	<div class="col-md-6">
