@@ -210,6 +210,7 @@ if (isset($interfaceTemp) && $interfaceTemp != "") {
 // ativa o php mapscript e as extens&otilde;es necess&aacute;rias
 // se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
+
 include_once ("carrega_ext.php");
 if (! function_exists("sobeAnno")) {
     include_once ("funcoes_gerais.php");
@@ -257,7 +258,6 @@ if (! isset($map_file)) {
     // cpjson(array("erro"=>"linkquebrado"));
     exit();
 }
-
 include_once ("classe_vermultilayer.php");
 include_once ("classe_estatistica.php");
 // error_reporting(0);
@@ -759,11 +759,9 @@ switch (strtoupper($funcao)) {
      */
     case "LIGATEMAS":
         include_once ("classe_mapa.php");
-        copiaSeguranca($map_file);
         $m = new Mapa($map_file, $locaplic);
-        $retorno = $m->ligaDesligaTemas($_pg["ligar"], $_pg["desligar"], $_pg["adicionar"]);
+        $m->ligaDesligaTemas($_pg["ligar"], $_pg["desligar"], $_pg["adicionar"]);
         $m->salva();
-        $_SESSION["contadorsalva"] ++;
         break;
     /*
      * Valor: LIGATEMASBEACON

@@ -401,7 +401,7 @@ class Mapa
                 $wmsurl = "";
                 $wmsformat = "";
                 $wmssrs = "";
-                $wmstile = "";
+                $wmstile = "0";
                 $wmsname = "";
                 if ($ct == 7 && strtoupper($oLayer->getmetadata("cache")) != "SIM") {
                     $wmsurl = ($oLayer->connection) . "&layers=" . ($oLayer->getmetadata("wms_name")) . "&style=" . ($oLayer->getmetadata("wms_style"));
@@ -415,6 +415,9 @@ class Mapa
                     $wmsname = $oLayer->getmetadata("wms_name");
                     if ($wmstile == 1) {
                         $wmsurl = ($oLayer->connection);
+                    }
+                    if($wmstile == ""){
+                        $wmstile = "0";
                     }
                 }
                 //
@@ -1573,6 +1576,9 @@ class Mapa
         $layer->setmetadata("wms_connectiontimeout", "30");
         $layer->setmetadata("wms_force_separate_request", "1");
         // esse parametro e especifico do i3geo. Se for 1 indica um servico do tipo tile
+        if($tile == ""){
+            $tile = "0";
+        }
         $layer->setmetadata("wms_tile", $tile);
         if ($time != "")
             $layer->setmetadata("wms_time", $time);

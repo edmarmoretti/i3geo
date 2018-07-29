@@ -1,12 +1,14 @@
-<div class="container-fluid customScrollBar">
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="servicoWms">{{{sel}}}</label>
-		<input class="form-control input-lg" type='text' id='servicoWms' value='' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class='control-label' >{{{listasel}}}</label>
-        <div style="width: 100%;" class="input-group" id='RSSgeo'></div>
-	</div>
-	<button onclick="i3GEOF.conectarwms.listaLayers()" class='btn btn-primary btn-sm btn-raised'>{{{listaLayers}}}</button>
-	<div id="resultadoget" ></div>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form class="form-vertical">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-12 control-label">{{{inserewms}}}</label>
+            <div class="col-md-12 ">
+                <input required class="form-control input-lg" type='text' id='{{namespace}}url' name="url" value='' />
+            </div>
+        </div>
+    </form>
+    <button onclick="i3GEOF.{{namespace}}.adiciona(this)" class='btn btn-primary btn-sm btn-raised'>
+        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{botao}}}
+    </button>
+    <br> <br>
 </div>

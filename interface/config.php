@@ -172,7 +172,6 @@ i3GEO.janela.ativaAlerta();
 			    	  url : "http://oatile4.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg"
 			      })
 			    });
-
 			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ osm, aquarela, toner, tonerlite, layMapQuestAerial ];
 	}
 })();

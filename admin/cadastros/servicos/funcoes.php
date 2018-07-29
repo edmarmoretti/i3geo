@@ -7,7 +7,7 @@ function listar($dbh, $id_ws = ""){
 		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_ws,autor_ws,desc_ws,link_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws WHERE id_ws = $id_ws ", $dbh, false );
 		$dados = $dados[0];
 	} else {
-		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_ws,nome_ws from ".$esquemaadmin."i3geoadmin_ws order by lower (nome_ws)", $dbh, false );
+		$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT id_ws,nome_ws,tipo_ws from ".$esquemaadmin."i3geoadmin_ws order by lower (nome_ws)", $dbh, false );
 	}
 	if ($dados === false) {
 		return false;

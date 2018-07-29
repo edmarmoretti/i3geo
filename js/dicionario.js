@@ -3132,5 +3132,15 @@ g_traducao =
             pt : "N&atilde;o existe nenhuma camada com sele&ccedil;&atilde;o",
             en : "",
             es : ""
+        }],
+        "descws" : [{
+            pt : "Utiliza Webservices para adicionar camadas ao mapa, como WMS o GeoJson",
+            en : "",
+            es : ""
+        }],
+        "camadaadic" : [{
+            pt : "Camada adicionada ao mapa",
+            en : "",
+            es : ""
         }]
     };

@@ -333,7 +333,12 @@ function geraXmlGeorss($locaplic,$output)
 	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'GEORSS' and nome_ws <> ''";
 	return geraXmlRSS($locaplic,$sql,"Georss",$output);
 }
-
+function geraXmlGeojson($locaplic,$output)
+{
+    global $esquemaadmin;
+    $sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'GEOJSON' and nome_ws <> ''";
+    return geraXmlRSS($locaplic,$sql,"Georss",$output);
+}
 
 /*
 Function: geraXmlRSS

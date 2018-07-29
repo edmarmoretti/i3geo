@@ -374,20 +374,6 @@ i3GEO.arvoreDeTemas = {
 					"i3GEOF.uploadarquivos_script");
 		},
 		/**
-		 * Function: dialogo.conectaservico
-		 *
-		 * Abre uma janela flutunate que permite abrir outras ferramentas para
-		 * conexao com servicos externos
-		 */
-		conectaservico : function() {
-			i3GEO.util.dialogoFerramenta(
-				"i3GEO.arvoreDeTemas.dialogo.conectaservico()",
-				"conectaservico",
-				"conectaservico",
-				"dependencias.php",
-			"i3GEOF.conectaservico.start()");
-		},
-		/**
 		 * Function: dialogo.carouselTemas
 		 *
 		 * Abre a janela flutuante para o usuario adicionar temas baseado nas

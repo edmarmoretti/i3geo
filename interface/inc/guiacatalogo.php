@@ -13,9 +13,6 @@
                 <li><a onclick="i3GEO.login.recarrega = false; i3GEO.login.dialogo.abreLogin();" href="javascript:void(0)" data-toggle="modal" data-target="#modalLogin">
                         <span class="glyphicon glyphicon-log-in"></span> Login/Logout
                     </a></li>
-                <li><a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.conectaservico()">
-                        <span class="glyphicon glyphicon-globe"></span> {{{a15}}}
-                    </a></li>
                 <li><a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.uploadarquivo()">
                         <span class="glyphicon glyphicon-cloud-upload"></span> {{{a14}}}
                     </a></li>
@@ -115,10 +112,10 @@
                     <label style="width: 300px; vertical-align: middle;">
                         <a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
                             <h4>
-                                <i class="material-icons" style="vertical-align: text-bottom;">cloud_queue</i> OGC-WMS
+                                <i class="material-icons" style="vertical-align: text-bottom;">cloud_queue</i> Webservices
                             </h4>
                         </a>
-                        <h6>{{{descOgcWms}}}</h6>
+                        <h6>{{{descws}}}</h6>
                     </label>
                     <a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="" href="javascript:void(0)">
                         <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>

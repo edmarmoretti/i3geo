@@ -6,20 +6,17 @@ i3GEOF.conectarkml = {
 	_parameters : {
 	    "mustache": "",
 	    "idContainer": "i3GEOconectarkmlContainer",
-	    "namespace": "conectarkml",
-	    "lista": ""
+	    "namespace": "conectarkml"
 	},
 	start : function(){
 	    var p = this._parameters,
 	    i3f = this,
-	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html",
-	    t2 = i3GEO.configura.locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&tipo=KML&rss=" + ["|"];
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
 	    if(p.mustache === ""){
 		i3GEO.janela.abreAguarde();
-		$.when( $.get(t1),$.get(t2)).done(function(r1,r2) {
+		$.get(t1).done(function(r1) {
 		    i3GEO.janela.fechaAguarde();
-		    p.mustache = r1[0];
-		    p.lista = r2[0].data;
+		    p.mustache = r1;
 		    i3f.html();
 		}).fail(function(data) {
 		    i3GEO.janela.fechaAguarde();
@@ -32,9 +29,7 @@ i3GEOF.conectarkml = {
 	},
 	destroy: function(){
 	    //nao use this aqui
-	    i3GEOF.conectarkml._parameters.mustache = "";
-	    i3GEOF.conectarkml._parameters.lista = "";
-	    i3GEO.arvoreDeTemas.dialogo.conectaservico();
+	    //i3GEOF.conectarkml._parameters.mustache = "";
 	},
 	html:function() {
 	    var p = this._parameters,
@@ -49,27 +44,9 @@ i3GEOF.conectarkml = {
 	    i3f.renderFunction.call(
 		    this,
 		    {
-			texto: Mustache.render(p.mustache, hash),
-			onclose: i3f.destroy
+			texto: Mustache.render(p.mustache, hash)
 		    });
 	    i3GEO.janela.applyScrollBar(p.idContainer);
-	    i3f.comboLista();
-	},
-	comboLista: function(){
-		var p = this._parameters,
-			raiz,nraiz,i,combo;
-		raiz = p.lista.canais;
-		nraiz = raiz.length;
-		combo = "<select class='form-control' >";
-		combo += "<option value=''>---</option>";
-		for (i=0;i<nraiz; i++){
-			combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
-		}
-		combo += "</select>";
-		$("#i3GEO" + p.namespace + "Combo").html(combo);
-		$("#i3GEO" + p.namespace + "Combo").find("select").change(function(){
-		    $("#conectarkmlurl").val($(this).val());
-		});
 	},
 	getFormData: function(){
 	    var data = i3GEO.util.getFormData("#" + this._parameters.idContainer + " form");
@@ -91,6 +68,7 @@ i3GEOF.conectarkml = {
 			i3GEO.atualiza();
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: $trad("concluido",i3f.dicionario)});
+			$(btn).button("disable").find("span").addClass("hidden");
 			i3f.destroy();
 		    }
 	    )
@@ -98,6 +76,7 @@ i3GEOF.conectarkml = {
 		    function(data){
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
+			$(btn).button("disable").find("span").addClass("hidden");
 			i3f.destroy();
 		    }
 	    );

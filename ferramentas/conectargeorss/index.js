@@ -12,14 +12,12 @@ i3GEOF.conectargeorss = {
 	start : function(){
 	    var p = this._parameters,
 	    i3f = this,
-	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html",
-	    t2 = i3GEO.configura.locaplic+"/classesphp/wscliente.php?funcao=listaRSSwsARRAY&tipo=GEORSS";
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
 	    if(p.mustache === ""){
 		i3GEO.janela.abreAguarde();
-		$.when( $.get(t1),$.get(t2)).done(function(r1,r2) {
+		$.get(t1).done(function(r1) {
 		    i3GEO.janela.fechaAguarde();
-		    p.mustache = r1[0];
-		    p.lista = r2[0].data;
+		    p.mustache = r1;
 		    i3f.html();
 		}).fail(function(data) {
 		    i3GEO.janela.fechaAguarde();
@@ -32,9 +30,6 @@ i3GEOF.conectargeorss = {
 	},
 	destroy: function(){
 	    //nao use this aqui
-	    i3GEOF.conectargeorss._parameters.mustache = "";
-	    i3GEOF.conectargeorss._parameters.lista = "";
-	    i3GEO.arvoreDeTemas.dialogo.conectaservico();
 	},
 	html:function() {
 	    var p = this._parameters,
@@ -53,23 +48,6 @@ i3GEOF.conectargeorss = {
 			onclose: i3f.destroy
 		    });
 	    i3GEO.janela.applyScrollBar(p.idContainer);
-	    i3f.comboLista();
-	},
-	comboLista: function(){
-	    var p = this._parameters,
-	    raiz,nraiz,i,combo;
-	    raiz = p.lista.canais;
-	    nraiz = raiz.length;
-	    combo = "<select class='form-control' >";
-	    combo += "<option value=''>---</option>";
-	    for (i=0;i<nraiz; i++){
-		combo += "<option value='"+raiz[i].link+"'>"+raiz[i].title+"</option>";
-	    }
-	    combo += "</select>";
-	    $("#i3GEO" + p.namespace + "Combo").html(combo);
-	    $("#i3GEO" + p.namespace + "Combo").find("select").change(function(){
-		$("#conectargeorssurl").val($(this).val());
-	    });
 	},
 	getFormData: function(){
 	    var data = i3GEO.util.getFormData("#" + this._parameters.idContainer + " form");
@@ -97,6 +75,7 @@ i3GEOF.conectargeorss = {
 			    i3GEO.janela.snackBar({content: $trad("concluido",i3f.dicionario)});
 			    i3f.destroy();
 			}
+			$(btn).button("disable").find("span").addClass("hidden");
 		    }
 	    )
 	    .fail(
@@ -104,6 +83,7 @@ i3GEOF.conectargeorss = {
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 			i3f.destroy();
+			$(btn).button("disable").find("span").addClass("hidden");
 		    }
 	    );
 	}

@@ -1,11 +1,14 @@
-<div class='container-fluid customScrollBar'>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOconectargeojsonurl">{{{insereEndereco}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOconectargeojsonurl' value='' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<div style="width: 100%;"  class="input-group" id='i3GEOconectargeojsonCombo'>
-		</div>
-	</div>
-	<button onclick="i3GEOF.conectargeojson.adiciona()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form class="form-vertical">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-12 control-label">{{{inseregeorss}}}</label>
+            <div class="col-md-12 ">
+                <input required class="form-control input-lg" type='text' id='{{namespace}}url' name="url" value='' />
+            </div>
+        </div>
+    </form>
+    <button onclick="i3GEOF.{{namespace}}.adiciona(this)" class='btn btn-primary btn-sm btn-raised'>
+        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{botao}}}
+    </button>
+    <br> <br>
 </div>

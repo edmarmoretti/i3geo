@@ -993,9 +993,8 @@ i3GEO.Interface =
 				// 1 sao inseridos com Layer.TileCache
 				// i3GEO.Interface.openlayers.googleLike === false
 				// FIXME testar isso
-				if (i3GEO.Interface.openlayers.googleLike === false && camada.connectiontype === 7
-					&& camada.wmsurl !== ""
-					    && camada.usasld.toLowerCase() != "sim") {
+				if (camada.connectiontype === 7
+					&& camada.wmsurl !== "" && camada.wmstile == 1) {
 				    urllayer = camada.wmsurl;
 				    if (camada.wmstile == 10) {
 					// TODO testar isso
@@ -1023,7 +1022,7 @@ i3GEO.Interface =
 						'VERSION' : '1.1.0'
 						    // 'format' : camada.wmsformat
 					    },
-					    projection : camada.wmssrs
+					    projection : opcoes.projection
 					});
 					source.set("tipoServico", "ImageWMS");
 					opcoes.singleTile = false;

@@ -131,15 +131,22 @@ if ($funcao == "listaRSSws")
 
 if ($funcao == "listaRSSwsARRAY")
 {
-    /*
-    $cp->register('listaRSSwsARRAY');
-    $cp->start();
-    */
-    $data = listaRSSwsARRAY();
-    ob_clean();
-    //$cp->return_data();
-    header('Content-Type: application/json');
-    echo json_encode(["data"=>$data]);
+    $tipos = explode(",",$tipo);
+    if(count($tipos) > 1){
+        $r = array();
+        foreach($tipos as $tipo){
+            $d = listaRSSwsARRAY();
+            $r = array_merge($r,$d["canais"]);
+        }
+        ob_clean();
+        header('Content-Type: application/json');
+        echo json_encode(["data"=>$r]);
+    } else {
+        //para efeitos de compatibilidade
+        ob_clean();
+        header('Content-Type: application/json');
+        echo json_encode(["data"=>listaRSSwsARRAY()]);
+    }
     exit;
 }
 
@@ -185,6 +192,10 @@ function listaRSSwsARRAY()
             }
             if($tipo == "GEORSS"){
                 $canali = simplexml_load_string(geraXmlGeorss($locaplic));
+                $linkrss = $urli3geo."/rss/xmlgeorss.php";
+            }
+            if($tipo == "GEOJSON"){
+                $canali = simplexml_load_string(geraXmlGeojson($locaplic));
                 $linkrss = $urli3geo."/rss/xmlgeorss.php";
             }
             if($tipo == "WMS" || $tipo == "WMS-Tile"){

@@ -1,7 +1,7 @@
 //+$trad(1,i3GEOF.carregakml.dicionario)+
 i3GEOF.conectarkml.dicionario = {
 	'insereKml' : [ {
-		pt : "URL do KML (ou escolha da lista)",
+		pt : "URL do KML",
 		en : "KML URL (or select from the list)",
 		es : "Direcci&oacute;n (URL) de KML (o seleccione la lista)"
 	} ],

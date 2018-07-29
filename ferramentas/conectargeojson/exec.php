@@ -1,36 +1,30 @@
 <?php
-include_once(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-//
-//faz a busca da fun&ccedil;&atilde;o que deve ser executada
-//
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
-switch (strtoupper($funcao))
+include_once(dirname(__FILE__)."/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)),$_SESSION["i3geoBlFerramentas"],false);
+$retorno = "";
+$url = $_GET["url"];
+switch (strtoupper($_GET["funcao"]))
 {
-/*
-Valor: ADICIONATEMAGEOJSON
-
-Adiciona um tema baseado em uma URL GeoJson.
-
-<Mapa->adicionaTemaGeoJson>
-*/
-	case "ADICIONATEMAGEOJSON":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
-		copiaSeguranca($map_file);
-		$m = new Mapa($map_file);
-		$retorno = $m->adicionaTemaGeoJson($_GET["servico"],$dir_tmp,$locaplic);
-		if ($retorno != "erro")	{
-			$m->salva();
-			$_SESSION["contadorsalva"]++;
-			redesenhaMapa();
-		}
-		else{
-			$retorno = "erro.";
-		}
-	break;
+    case "CRIALAYER":
+        $mapa = ms_newMapObj($_SESSION["map_file"]);
+        $novolayer = ms_newLayerObj($mapa);
+        $novolayer->set("name",str_replace([".",":","/"],"",$url));
+        $novolayer->setmetadata("TEMA",$url);
+        $novolayer->setmetadata("nomeoriginal",$url);
+        $novolayer->setmetadata("CLASSE","SIM");
+        $novolayer->setmetadata("PLUGINI3GEO",'{"plugin":"layergeojson","parametros":{"url":"'.$url.'"}}');
+        $novolayer->set("type",MS_LAYER_POINT);
+        $classe = ms_newClassObj($novolayer);
+        $classe->set("name","");
+        $novolayer->set("status",MS_DEFAULT);
+        $novolayer->set("template","none.htm");
+        $salvo = $mapa->save(str_replace(".map","",$_SESSION["map_file"]).".map");
+        ob_clean();
+        header("Content-type: application/json");
+        echo json_encode(array(
+            "errorMsg" => ""
+        ));
+        exit;
+        break;
 }
-if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-	restauraCon($map_file,$postgis_mapa);
-}
-cpjson($retorno);
 ?>

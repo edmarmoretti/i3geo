@@ -76,7 +76,7 @@ i3GEO.catalogoOgc = {
 	    } else {
 		i3GEO.catalogoOgc.MIGALHA = [
 		    {"nome":"","onclick":"i3GEO.catalogoOgc.mostraCatalogoPrincipal()"},
-		    {"nome":"OGC-WMS","onclick":"i3GEO.catalogoOgc.inicia()"}
+		    {"nome":"Webservices","onclick":"i3GEO.catalogoOgc.inicia()"}
 		    ];
 		i3GEO.catalogoOgc.atualizaMigalha();
 
@@ -86,7 +86,7 @@ i3GEO.catalogoOgc = {
 
 		var t = Mustache.to_html(
 			i3GEO.template.catalogoMigalha,
-			{"nome":'OGC-WMS',"onclick":"i3GEO.catalogoOgc.mostraCatalogoPrincipal()"}
+			{"nome":'Webservices',"onclick":"i3GEO.catalogoOgc.mostraCatalogoPrincipal()"}
 		);
 
 		i3GEO.catalogoOgc.config = config;
@@ -99,30 +99,39 @@ i3GEO.catalogoOgc = {
 		    //verifica se o menu esta na lista de ids definidos em i3GEO.catalogoOgc.IDSMENUS
 		    $.each( dados, function( i,v ) {
 			v.nome = v.title;
+			v.tipo = v.tipo_ws;
 			v.descricao = v.description;
 			v.onclick = "i3GEO.catalogoOgc.listaCamadas('" + v.nome + "'," + v.id_ws + ",'" + v.nome + "','" + v.link + "',0" + ",'" + v.tipo_ws + "','" + v.layer + "')";
+			if(v.tipo_ws == "KML"){
+			    v.onclick = "i3GEO.catalogoOgc.addkml('" + v.link + "')";
+			    v.hiddenfolder = "hidden";
+			}
+			if(v.tipo_ws == "GEORSS"){
+			    v.onclick = "i3GEO.catalogoOgc.addgeorss('" + v.link + "')";
+			    v.hiddenfolder = "hidden";
+			}
+			if(v.tipo_ws == "GEOJSON"){
+			    v.onclick = "i3GEO.catalogoOgc.addgeojson('" + v.link + "')";
+			    v.hiddenfolder = "hidden";
+			}
 			clone.push(v);
 		    });
 		    t = Mustache.to_html(
 			    "{{#data}}" + i3GEO.template.dir + "{{/data}}",
 			    {"data":clone}
 		    );
-		    $("#" + config.idCatalogoNavegacao).html(t);
+		    $("#" + config.idCatalogoNavegacao).html(i3GEO.catalogoOgc.getAddSercicesBtn() + t);
 
 		    $("#" + i3GEO.catalogoOgc.config.idCatalogoPrincipal).fadeOut( "fast", function(){
 			$("#" + i3GEO.catalogoOgc.config.idOndeMigalha).show();
 			$("#" + i3GEO.catalogoOgc.config.idCatalogoNavegacao).show();
 		    });
 		};
-		var t2 = i3GEO.configura.locaplic + "/classesphp/wscliente.php?funcao=listaRSSwsARRAY&tipo=WMS&rss="+["|"];
-		var t1 = i3GEO.configura.locaplic + "/classesphp/wscliente.php?funcao=listaRSSwsARRAY&tipo=ARCGISREST&rss="+["|"];
-		$.when( $.get(t1),$.get(t2)).done(function(r1,r2) {
+		var t1 = i3GEO.configura.locaplic + "/classesphp/wscliente.php?funcao=listaRSSwsARRAY&tipo=WMS,ARCGISREST,KML,GEORSS,GEOJSON&rss="+["|"];
+		$.get(t1).done(function(r1) {
 		    var dados = [];
-		    if(r1[0].data && r1[0].data.canais){
-			dados = r1[0].data.canais;
-		    }
-		    if(r2[0].data && r2[0].data.canais){
-			dados.push(...r2[0].data.canais);
+		    if(r1.data){
+			dados = r1.data;
 		    }
 		    lista(dados.sort(i3GEO.util.dynamicSortString("title")));
 		}).fail(function() {
@@ -279,5 +288,123 @@ i3GEO.catalogoOgc = {
 		    {"data":clone}
 	    );
 	    $("#" + i3GEO.catalogoOgc.config.idCatalogoNavegacao).html(t);
-	}
+	},
+	getAddSercicesBtn: function(){
+	    var btn = ""
+		+ "<div class='sercicesbtn container-fluid container-tools'>"
+		+ "<div class='form-group condensed'>"
+		+ "   <button onclick='i3GEO.catalogoOgc.kml();' class='btn btn-default btn-xs btn-raised'>KML</button>"
+		+ "   <button onclick='i3GEO.catalogoOgc.georss();' class='btn btn-default btn-xs btn-raised'>GeoRSS</button>"
+		+ "   <button onclick='i3GEO.catalogoOgc.geojson();' class='btn btn-default btn-xs btn-raised'>GeoJson</button>"
+		+ "   <button onclick='i3GEO.catalogoOgc.wms();' class='btn btn-default btn-xs btn-raised'>WMS</button>"
+		+ "   <button onclick='i3GEO.catalogoOgc.wmst();' class='btn btn-default btn-xs btn-raised'>WMS-Time</button>"
+		+ "</div>"
+		+ "</div>";
+	    return btn;
+	},
+	kml: function() {
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/conectarkml/dependencias.php",
+		    "i3GEOF.conectarkml.start()",
+	    "i3GEOF.conectarkml_script");
+	},
+	geojson: function(){
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/conectargeojson/dependencias.php",
+		    "i3GEOF.conectargeojson.start()",
+	    "i3GEOF.conectargeojson_script");
+	},
+	georss: function(){
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/conectargeorss/dependencias.php",
+		    "i3GEOF.conectargeorss.start()",
+	    "i3GEOF.conectargeorss_script");
+	},
+	wmst: function(){
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/wmstime/dependencias.php",
+		    "i3GEOF.wmstime.start()",
+	    "i3GEOF.wmstime_script");
+	},
+	wms: function(){
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/conectarwms/dependencias.php",
+		    "i3GEOF.conectarwms.start()",
+	    "i3GEOF.conectarwms_script");
+	},
+	addkml: function(url){
+	    i3GEO.janela.abreAguarde();
+	    var par = {
+		g_sid: i3GEO.configura.sid,
+	    	funcao: "crialayer",
+	    	url: url
+	    };
+	    $.post(
+		    i3GEO.configura.locaplic+"/ferramentas/conectarkml/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.atualiza();
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: $trad("camadaadic")});
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: data.status, style:'red'});
+		    }
+	    );
+	},
+	addgeorss: function(url){
+	    i3GEO.janela.abreAguarde();
+	    var par = {
+		g_sid: i3GEO.configura.sid,
+	    	funcao: "adicionaTemaGeoRSS",
+	    	url: url
+	    };
+	    $.post(
+		    i3GEO.configura.locaplic+"/ferramentas/conectargeorss/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.atualiza();
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: $trad("camadaadic")});
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: data.status, style:'red'});
+		    }
+	    );
+	},
+	addgeojson: function(url){
+	    i3GEO.janela.abreAguarde();
+	    var par = {
+		g_sid: i3GEO.configura.sid,
+	    	funcao: "crialayer",
+	    	url: url
+	    };
+	    $.post(
+		    i3GEO.configura.locaplic+"/ferramentas/conectargeojson/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.atualiza();
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: $trad("camadaadic")});
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: data.status, style:'red'});
+		    }
+	    );
+	},
 };
