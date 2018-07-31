@@ -335,7 +335,7 @@ class Legenda
         $legenda = array();
         for ($i = 0; $i < $numlayers; ++ $i) {
             $la = $this->mapa->getlayer($i);
-            if (strtoupper($la->getmetadata("ESCONDIDO")) == "SIM") {
+            if (strtoupper($la->getmetadata("CLASSE")) == "NAO" || strtoupper($la->getmetadata("ESCONDIDO")) == "SIM") {
                 $la->set("status", MS_OFF);
             }
             $desligarLayer = array();

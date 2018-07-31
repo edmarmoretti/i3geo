@@ -92,6 +92,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 		$numlayers = $mapt->numlayers;
 		for ($i=0;$i < $numlayers;$i++){
 			$layert = $mapt->getlayer($i);
+			$layert->setmetadata("cache","nao");
 			//
 			//verifica se existe o tema em i3geo/temas
 			//

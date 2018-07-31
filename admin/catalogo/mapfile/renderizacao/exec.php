@@ -37,12 +37,22 @@ $codigo = str_replace ( ".", "", $codigo );
 $codigo = strip_tags ( $codigo );
 $codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
 
+if(isset($_POST ["cacheprefixo"])){
+    $cacheprefixo = $_POST ["cacheprefixo"];
+    $cacheprefixo = str_replace ( " ", "", \admin\php\funcoesAdmin\removeAcentos ( $cacheprefixo ) );
+    $cacheprefixo = str_replace ( ".", "", $cacheprefixo );
+    $cacheprefixo = strip_tags ( $cacheprefixo );
+    $cacheprefixo = htmlspecialchars ( $cacheprefixo, ENT_QUOTES );
+} else {
+    $cacheprefixo = "";
+}
+
 $id_tema = ( int ) $_POST ["id_tema"];
 
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "ALTERAR" :
-		$dados = \admin\catalogo\mapfile\renderizacao\alterar ( $_SESSION["locaplic"], $id_tema, $codigo, $_POST["cache"], $_POST["tiles"], $_POST["maxfeatures"], $_POST["cortepixels"]);
+	    $dados = \admin\catalogo\mapfile\renderizacao\alterar ( $_SESSION["locaplic"], $id_tema, $codigo, $_POST["cache"], $_POST["tiles"], $_POST["maxfeatures"], $_POST["cortepixels"], $cacheprefixo);
 		if ($dados === false) {
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 		}

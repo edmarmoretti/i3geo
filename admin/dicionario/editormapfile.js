@@ -586,5 +586,15 @@ i3GEOadmin.mapfile.dicionario = {
 		pt : "<p><b>Mudan&ccedil;as na vers&atilde;o 7 do Mapserver</b></p><li>N&atilde;o permite o uso do tipo de layer ANNOTATION. Voc&ecirc; deve substituir por um dos tipos permitidos (POINT, LINE, POLYGON...).</li><li>Ao usar CLUSTER substitua Cluster:FeatureCount por Cluster_FeatureCount.</li>",
 		en : "<p><b>Changes in Mapserver 7</b></p><li>It does not allow to use ANNOTATION layer type. You must replace it with one of the allowed types (POINT, LINE, POLYGON ...).</li><li>When using CLUSTER replace Cluster: FeatureCount with Cluster_FeatureCount.</li>",
 		es : "<p><b>Cambios en la versi&oacute;n 7 de Mapserver</b></p><li>No permite el uso del layer del tipo ANNOTATION. Usted debe reemplazarlo por uno de los tipos permitidos (POINT, LINE, POLYGON ...).</li><li>Al utilizar CLUSTER, reemplace Cluster: FeatureCount por Cluster_FeatureCount.</li>"
+	} ],
+    'cacheprefixoTitulo' : [ {
+		pt : "Prefixo utilizado para o cache",
+		en : "",
+		es : ""
+	} ],
+    'Cacheprefixo' : [ {
+		pt : "Prefixo (texto sem caracteres especiais e sem espa&ccedil;os em branco) que ser&aacute; utilizado para dar nome ao arquivo de armazenamento de cache. Voc&ecirc; pode alterar esse prefixo quando for necess&aacute;rio utilizar um novo cache, por exemplo, quando for feita alguma altera&ccedil;&atilde;o na simbologia da camada.",
+		en : "",
+		es : ""
 	} ]
 };

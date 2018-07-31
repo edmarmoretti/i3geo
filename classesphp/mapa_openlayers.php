@@ -61,6 +61,9 @@ if (! function_exists('ms_GetVersion')) {
 }
 error_reporting(0);
 inicializa();
+if(!isset($_GET["cacheprefixo"])){
+    $_GET["cacheprefixo"] = "";
+}
 //
 // calcula a extensao geografica com base no x,y,z
 // nos casos do modo notile, a requisicao e feita como se fosse um wms
@@ -115,6 +118,10 @@ if (isset($_GET["TileMatrix"])) {
     }
 
     $_GET["tms"] = "/wmts/" . $_GET["layer"] . "/" . $z . "/" . $x . "/" . $y . ".png";
+    if($_GET["cacheprefixo"] != ""){
+        $_GET["tms"] = "/wmts/" . $_GET["cacheprefixo"] . $_GET["layer"] . "/" . $z . "/" . $x . "/" . $y . ".png";
+    }
+
     if ($z . "/" . $x . "/" . $y == "0/0/0" || $x == - 1 || $y == - 1) {
         return;
     }
@@ -514,9 +521,13 @@ function salvaCacheImagem($cachedir, $map, $tms)
 {
     global $img, $cortePixels;
     if ($cachedir == "") {
-        $nome = dirname(dirname($map)) . "/cache" . $tms;
+
+            $nome = dirname(dirname($map)) . "/cache" . $tms;
+
     } else {
-        $nome = $cachedir . $tms;
+
+            $nome = $cachedir . $tms;
+
     }
     $nome = str_replace(".png", "", $nome);
     $nome = $nome . ".png";
@@ -564,7 +575,6 @@ function carregaCacheImagem($cachedir, $map, $tms, $i3georendermode = 0, $format
 
         exit();
     }
-
 }
 
 function nomeRand($n = 10)

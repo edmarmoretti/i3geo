@@ -21,6 +21,21 @@
 	<div class="col-md-12">
 		<div class="form-group form-group-lg">
 			<div class="col-md-6">
+				<label class="control-label" for="cacheprefixo">
+					{{{cacheprefixoTitulo}}}
+				</label>
+				<p class="small">
+					{{{Cacheprefixo}}}
+				</p>
+			</div>
+			<div class="col-md-6">
+				<input title="{{{cacheprefixoTitulo}}}" type="text" value="{{{cacheprefixo}}}" class="form-control" name="cacheprefixo" >
+			</div>
+		</div>
+	</div>
+	<div class="col-md-12">
+		<div class="form-group form-group-lg">
+			<div class="col-md-6">
 				<label class="control-label" for="tiles">
 					{{{tilesTitulo}}}
 				</label>

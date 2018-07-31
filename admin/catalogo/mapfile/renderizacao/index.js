@@ -24,84 +24,84 @@ Free Software Foundation, Inc., no endere&ccedil;o
  */
 i3GEOadmin.mapfile = {};
 i3GEOadmin.renderizacao = {
-		inicia: function(codigo, id_tema){
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=lista",
-					"codigo="+codigo
-			)
-			.done(
-					function(data, status){
-						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data);
-						$("#corpo").html(
-								Mustache.to_html(
-										$("#templateFormRenderizacao").html(),
-										$.extend(
-												{},
-												i3GEOadmin.renderizacao.dicionario,
-												json.dados,
-												{
-													"codigo": codigo,
-													"id_tema": id_tema,
-													"onSalvar": "i3GEOadmin.renderizacao.salvar",
-													"cache": function(){
-														var hash = {
-																"sim": i3GEOadmin.renderizacao.dicionario.sim,
-																"nao": i3GEOadmin.renderizacao.dicionario.nao,
-																"NAO-sel" : "",
-																"SIM-sel": ""
-															};
-														hash[json.dados.cache + "-sel"] = "selected";
-														return Mustache.to_html(
-																$("#templateOpcoesPublicado").html(),
-																hash
-														);
-													},
-													"tiles": function(){
-														var hash = {
-																"sim": i3GEOadmin.renderizacao.dicionario.sim,
-																"nao": i3GEOadmin.renderizacao.dicionario.nao,
-																"NAO-sel" : "",
-																"SIM-sel": ""
-															};
-														hash[json.dados.tiles + "-sel"] = "selected";
-														return Mustache.to_html(
-																$("#templateOpcoesPublicado").html(),
-																hash
-														);
-													}
-												}
-										)
-								)
-						);
-						$.material.init();
-					}
-			)
-			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
+	inicia: function(codigo, id_tema){
+	    i3GEOadmin.core.modalAguarde(true);
+	    $.post(
+		    "exec.php?funcao=lista",
+		    "codigo="+codigo
+	    )
+	    .done(
+		    function(data, status){
+			i3GEOadmin.core.modalAguarde(false);
+			var json = jQuery.parseJSON(data);
+			$("#corpo").html(
+				Mustache.to_html(
+					$("#templateFormRenderizacao").html(),
+					$.extend(
+						{},
+						i3GEOadmin.renderizacao.dicionario,
+						json.dados,
+						{
+						    "codigo": codigo,
+						    "id_tema": id_tema,
+						    "onSalvar": "i3GEOadmin.renderizacao.salvar",
+						    "cache": function(){
+							var hash = {
+								"sim": i3GEOadmin.renderizacao.dicionario.sim,
+								"nao": i3GEOadmin.renderizacao.dicionario.nao,
+								"NAO-sel" : "",
+								"SIM-sel": ""
+							};
+							hash[json.dados.cache + "-sel"] = "selected";
+							return Mustache.to_html(
+								$("#templateOpcoesPublicado").html(),
+								hash
+							);
+						    },
+						    "tiles": function(){
+							var hash = {
+								"sim": i3GEOadmin.renderizacao.dicionario.sim,
+								"nao": i3GEOadmin.renderizacao.dicionario.nao,
+								"NAO-sel" : "",
+								"SIM-sel": ""
+							};
+							hash[json.dados.tiles + "-sel"] = "selected";
+							return Mustache.to_html(
+								$("#templateOpcoesPublicado").html(),
+								hash
+							);
+						    }
+						}
+					)
+				)
 			);
-		},
-		salvar: function(codigo,id_tema){
-			var parametros = $("#form-edicao-renderizacao").serialize();
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=alterar",
-					"codigo=" + codigo + "&id_tema="+ id_tema+"&"+parametros
-			)
-			.done(
-					function(data, status){
-						i3GEOadmin.renderizacao.inicia(codigo,id_tema);
-					}
-			)
-			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
-			);
-		}
+			$.material.init();
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEOadmin.core.modalAguarde(false);
+			i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+		    }
+	    );
+	},
+	salvar: function(codigo,id_tema){
+	    var parametros = $("#form-edicao-renderizacao").serialize();
+	    i3GEOadmin.core.modalAguarde(true);
+	    $.post(
+		    "exec.php?funcao=alterar",
+		    "codigo=" + codigo + "&id_tema="+ id_tema+"&"+parametros
+	    )
+	    .done(
+		    function(data, status){
+			i3GEOadmin.renderizacao.inicia(codigo,id_tema);
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEOadmin.core.modalAguarde(false);
+			i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+		    }
+	    );
+	}
 };

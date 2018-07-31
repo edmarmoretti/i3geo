@@ -292,7 +292,8 @@ class Mapa
             "utfgrid",
             "maxscaledenom",
             "minscaledenom",
-            "group"
+            "group",
+            "cacheprefixo"
         );
         foreach ($this->layers as $oLayer) {
             $sel = "nao";
@@ -530,7 +531,8 @@ class Mapa
                     $utfgrid,
                     $oLayer->maxscaledenom,
                     $oLayer->minscaledenom,
-                    $oLayer->group
+                    $oLayer->group,
+                    $oLayer->getmetadata("cacheprefixo")
                 );
             }
         }

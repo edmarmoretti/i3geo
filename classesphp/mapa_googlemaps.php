@@ -88,6 +88,9 @@ if (@$_SESSION["fingerprint"]) {
 if (! isset($_SESSION["map_file"])) {
     exit();
 }
+if(!isset($_GET["cacheprefixo"])){
+    $_GET["cacheprefixo"] = "";
+}
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 $cachedir = $_SESSION["cachedir"];
@@ -483,6 +486,7 @@ function salvaCacheImagem()
     if ($layer == "") {
         $layer = "fundo";
     }
+    $layer = $_GET["cacheprefixo"] . $layer;
     if ($cachedir == "") {
         $cachedir = dirname(dirname($map_fileX)) . "/cache";
     }
@@ -511,6 +515,7 @@ function carregaCacheImagem()
     if ($layer == "") {
         $layer = "fundo";
     }
+    $layer = $_GET["cacheprefixo"] . $layer;
     if ($cachedir == "") {
         $cachedir = dirname(dirname($map_fileX)) . "/cache";
     }

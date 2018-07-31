@@ -1059,7 +1059,7 @@ i3GEO.Interface =
 				    }
 
 				    if (camada.cache) {
-					urllayer = url + "&cache=" + camada.cache;
+					urllayer = url + "&cache=" + camada.cache + "&cacheprefixo=" + camada.cacheprefixo;
 				    } else {
 					urllayer = url + "&cache=nao";
 				    }

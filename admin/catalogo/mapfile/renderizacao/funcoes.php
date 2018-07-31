@@ -12,6 +12,7 @@ function listar($locaplic,$codigo){
 		exit ();
 	}
 	$dados = array ();
+	$dados["cacheprefixo"] = strtoupper($layer->getmetadata("cacheprefixo"));
 	$dados["cache"] = strtoupper($layer->getmetadata("cache"));
 	if($dados["cache"] == ""){
 		$dados["cache"] = "NAO";
@@ -27,8 +28,8 @@ function listar($locaplic,$codigo){
 	}
 	return $dados;
 }
-function alterar($locaplic, $id_tema, $codigo, $cache, $tiles, $maxfeatures, $cortepixels) {
-	$arq = $locaplic . "/temas/" . $codigo . ".map";
+function alterar($locaplic, $id_tema, $codigo, $cache, $tiles, $maxfeatures, $cortepixels, $cacheprefixo) {
+    $arq = $locaplic . "/temas/" . $codigo . ".map";
 	if (! file_exists ( $locaplic . "/temas/" . $codigo . ".map" )) {
 		return false;
 	}
@@ -38,6 +39,7 @@ function alterar($locaplic, $id_tema, $codigo, $cache, $tiles, $maxfeatures, $co
 		return false;
 	}
 	$layer->setmetadata ( "cache", $cache );
+	$layer->setmetadata ( "cacheprefixo", $cacheprefixo );
 	$layer->setmetadata ( "tiles", $tiles );
 	$layer->setmetadata ( "cortepixels", $cortepixels );
 	if(empty($maxfeatures)){
