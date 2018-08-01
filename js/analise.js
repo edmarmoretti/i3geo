@@ -40,425 +40,425 @@
  * 330, Boston, MA 02111-1307 USA.
  */
 if (typeof (i3GEO) === 'undefined') {
-	var i3GEO = {};
+    var i3GEO = {};
 }
 i3GEO.analise =
-	{
-		/**
-		 * Armazena os pontos clicados da ultima linha
-		 */
-		pontos : {
-			xpt : [],
-			ypt : []
-		},
-		/**
-		 * Classe: i3GEO.analise.dialogo
-		 *
-		 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de an&aacute;lise
-		 *
-		 * Exemplo:
-		 *
-		 * Para abrir a mensagem de di&aacute;logo de gera&ccedil;&atilde;o de buffer, utilize
-		 *
-		 * i3GEO.analise.dialogo.buffer()
-		 */
-		dialogo : {
-			/**
-			 * Function: markercluster
-			 *
-			 * Ferramenta mapa agrupamento de pontos
-			 */
-			markercluster : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.markercluster()",
-					"markercluster",
-					"markercluster",
-					"dependencias.php",
-					"i3GEOF.markercluster.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: heatmap
-			 *
-			 * Ferramenta mapa de calor
-			 */
-			heatmap : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.heatmap()",
-					"heatmap",
-					"heatmap",
-					"dependencias.php",
-					"i3GEOF.heatmap.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: saiku
-			 *
-			 * Ferramenta SAIKU em nova aba do navegador
-			 */
-			saiku : function() {
-				if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false) {
-					i3GEO.janela.tempoMsg($trad("naoInstalado"));
-					return;
-				}
-				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.saiku()", "saiku", "saiku");
-			},
-			/**
-			 * Function: saikuMapa
-			 *
-			 * Ferramenta SAIKU em uma janela interna
-			 */
-			saikuMapa : function() {
-				if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false) {
-					i3GEO.janela.tempoMsg($trad("naoInstalado"));
-					return;
-				}
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.saiku()",
-					"saiku",
-					"saiku",
-					"index.js",
-					"i3GEOF.saiku.iniciaJanelaFlutuante2()");
-			},
-			/**
-			 *
-			 * Ferramenta graficointerativo versao flash
-			 */
-			graficoInterativo : function() {
-				alert("depreciado. Use graficointerativo1");
-			},
-			/**
-			 * Function: graficoInterativo1
-			 *
-			 * Ferramenta gr&aacute;fico interativo
-			 */
-			graficoInterativo1 : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.graficointerativo1()",
-					"graficointerativo1",
-					"graficointerativo1",
-					"dependencias.php",
-					"i3GEOF.graficointerativo1.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: linhaDoTempo
-			 *
-			 * Ferramenta linha do tempo
-			 */
-			linhaDoTempo : function() {
-				i3GEO.janela.cria(
-					"650px",
-					"450px",
-					i3GEO.configura.locaplic + "/ferramentas/linhadotempo/index.php",
-					"",
-					"",
-					"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d30") + "</span></div>",
-					"i3GEOFlinhaDoTempo",
-					false,
-					"hd",
-					"",
-					"",
-					"",
-					true,
-		            "",
-		            "",
-		            "",
-		            "",
-		            "88"
-				);
-
-				i3GEO.analise.atualizaLinhaDoTempo =
-					function() {
-						var doc = "", ifr = "";
-						try {
-							ifr = $i("i3GEOF.linhaDoTempoi");
-							if (navn) {
-								if (ifr) {
-									doc = ifr.contentDocument;
-								}
-							} else {
-								if (document.frames("i3GEOF.linhaDoTempoi")) {
-									doc = document.frames("i3GEOF.linhaDoTempoi").document;
-								}
-							}
-							doc.getElementById("tl") ? window.parent["i3GEOF.linhaDoTempoi"].carregaDados() : i3GEO.eventos.removeEventos(
-								"NAVEGAMAPA",
-								[
-									"i3GEO.analise.atualizaLinhaDoTempo()"
-								]);
-						} catch (e) {
-
-						    if (typeof (console) !== 'undefined')
-							console.error(e.message)
-
-						    i3GEO.eventos.removeEventos("NAVEGAMAPA", [
-								"i3GEO.analise.atualizaLinhaDoTempo()"
-							]);
-						}
-					};
-				i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
-					"i3GEO.analise.atualizaLinhaDoTempo()"
-				]);
-				var ifr = $i("i3GEOF.linhaDoTempoi");
-				// ifr.style.height = "75%";
-				if (ifr) {
-					ifr.style.width = "100%";
-				}
-			},
-			/**
-			 * Function: perfil
-			 *
-			 * Ferramenta perfil
-			 */
-			perfil : function() {
-				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.perfil()", "perfil", "perfil");
-			},
-			rota : function(){
-				if (i3GEO.Interface.ATUAL !== "googlemaps") {
-					alert("Operacao disponivel apenas na interface Google Maps");
-					return;
-				}
-				counterClick = 1;
-				var parametrosRota =
-					function(overlay, latlng) {
-						var temp, janela;
-						if (counterClick === 1) {
-							counterClick++;
-							alert("Clique o ponto de destino da rota");
-							pontoRota1 = latlng;
-							return;
-						}
-						if (counterClick === 2) {
-							pontoRota2 = latlng;
-							counterClick = 0;
-							GEvent.removeListener(rotaEvento);
-							janela = i3GEO.janela.cria("300px", "300px", "", "center", "", "<div class='i3GeoTituloJanela'>"+$trad("x48")+"</div>");
-							janela[2].style.overflow = "auto";
-							janela[2].style.height = "300px";
-							directions = new GDirections(i3GeoMap, janela[2]);
-							temp = function() {
-								$i("wdoca_corpo").innerHTML = "N&atilde;o foi poss&iacute;vel criar a rota";
-							};
-							GEvent.addListener(directions, "error", temp);
-							directions.load("from: " + pontoRota1.lat() + "," + pontoRota1.lng() + " to: " + pontoRota2.lat() + ","
-								+ pontoRota2.lng());
-						}
-					};
-				rotaEvento = GEvent.addListener(i3GeoMap, "click", parametrosRota);
-				i3GEO.janela.tempoMsg("Clique o ponto de origem da rota");
-			},
-			/**
-			 * Function: melhorcaminho
-			 *
-			 * Ferramenta melhor caminho
-			 */
-			melhorcaminho : function() {
-				if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.melhorcaminho === false) {
-					i3GEO.janela.tempoMsg($trad("naoInstalado"));
-					return;
-				}
-				i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.melhorcaminho()", "melhorcaminho", "melhorcaminho");
-			},
-			/**
-			 * Function: gradePontos
-			 *
-			 * Ferramenta grade de pontos
-			 */
-			gradePontos : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.gradePontos()",
-					"gradepontos",
-					"gradeDePontos",
-					"dependencias.php",
-					"i3GEOF.gradeDePontos.iniciaJanelaFlutuante()"
-				);
-			},
-			/**
-			 * Function: gradePol
-			 *
-			 * Ferramenta grade de pol&iacute;gonos
-			 */
-			gradePol : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.gradePol()",
-						"gradepol",
-						"gradeDePoligonos",
-						"dependencias.php",
-						"i3GEOF.gradeDePoligonos.iniciaJanelaFlutuante()"
-					);
-			},
-			/**
-			 * Function: gradeHex
-			 *
-			 * Ferramenta grade de hex&aacute;gonos
-			 */
-			gradeHex : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.gradeHex()",
-					"gradehex",
-					"gradeDeHex",
-					"dependencias.php",
-					"i3GEOF.gradeDeHex.iniciaJanelaFlutuante()"
-				);
-			},
-			/**
-			 * Function: analisaGeometrias
-			 *
-			 * Ferramenta de an&aacute;lise de geometrias
-			 */
-			analisaGeometrias : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.tema.dialogo.tabela()",
-					"analisageometrias",
-					"analisaGeometrias",
-					"dependencias.php",
-					"i3GEOF.analisaGeometrias.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: pontosdistri
-			 *
-			 * Ferramenta de c&aacute;lculo de distribui&ccedil;&atilde;o de pontos
-			 */
-			pontosdistri : function() {
-				i3GEO.parametros.r === "nao" ? i3GEO.janela.tempoMsg($trad("x22")) : i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.pontosdistri()",
-					"pontosdistri",
-					"pontosDistri",
-					"dependencias.php",
-					"i3GEOF.pontosDistri.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: pontoempoligono
-			 *
-			 * Ferramenta ponto em pol&iacute;gono
-			 */
-			pontoempoligono : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.pontoempoligono()",
-					"pontoempoligono",
-					"pontoEmPoligono",
-					"dependencias.php",
-					"i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: centromassa
-			 *
-			 * Ferramenta centro m&eacute;dio
-			 */
-			centromassa : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.centromassa()",
-					"centromassa",
-					"centromassa",
-					"dependencias.php",
-					"i3GEOF.centromassa.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: nptPol
-			 *
-			 * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
-			 */
-			nptPol : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.nptpol()",
-					"nptpol",
-					"nptpol",
-					"dependencias.php",
-					"i3GEOF.nptpol.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: buffer
-			 *
-			 * Ferramenta buffer
-			 */
-			buffer : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.buffer()",
-					"buffer",
-					"buffer",
-					"dependencias.php",
-					"i3GEOF.buffer.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: distanciaptpt
-			 *
-			 * Ferramenta dist&acirc;ncia entre pontos
-			 */
-			distanciaptpt : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.distanciaptpt()",
-					"distanciaptpt",
-					"distanciaptpt",
-					"dependencias.php",
-					"i3GEOF.distanciaptpt.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: centroide
-			 *
-			 * Ferramenta centr&oacute;ide
-			 */
-			centroide : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.centroide()",
-					"centroide",
-					"centroide",
-					"dependencias.php",
-					"i3GEOF.centroide.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: dissolve
-			 *
-			 * Ferramenta dissolve bordas comuns
-			 */
-			dissolve : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.dissolve()",
-					"dissolve",
-					"dissolve",
-					"dependencias.php",
-					"i3GEOF.dissolve.iniciaJanelaFlutuante()");
-			},
-			/**
-			 * Function: agrupaElementos
-			 *
-			 * Ferramenta agrupa elementos
-			 */
-			agrupaElementos : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.agrupaElementos()",
-					"agrupaelementos",
-					"agrupaElementos",
-					"dependencias.php",
-					"i3GEOF.agrupaElementos.iniciaJanelaFlutuante()");
-			},
-			distancia : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.distancia()",
-					"distancia",
-					"distancia",
-					"dependencias.php",
-					"i3GEOF.distancia.iniciaJanelaFlutuante()");
-			},
-			area : function() {
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.area()",
-					"area",
-					"area",
-					"dependencias.php",
-					"i3GEOF.area.iniciaJanelaFlutuante()");
-			},
-			juntamedidasvariavel : function(tema) {
-				if(!tema){
-					tema = i3GEO.temaAtivo;
-				}
-				var temp = function(){
-					i3GEOF.juntamedidasvariavel.iniciaJanelaFlutuante(tema);
-				};
-				i3GEO.util.dialogoFerramenta(
-					"i3GEO.analise.dialogo.juntamedidasvariavel()",
-					"juntamedidasvariavel",
-					"juntamedidasvariavel",
-					"dependencias.php",
-					temp
-				);
-			}
+{
+	/**
+	 * Armazena os pontos clicados da ultima linha
+	 */
+	pontos : {
+	    xpt : [],
+	    ypt : []
+	},
+	/**
+	 * Classe: i3GEO.analise.dialogo
+	 *
+	 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de an&aacute;lise
+	 *
+	 * Exemplo:
+	 *
+	 * Para abrir a mensagem de di&aacute;logo de gera&ccedil;&atilde;o de buffer, utilize
+	 *
+	 * i3GEO.analise.dialogo.buffer()
+	 */
+	dialogo : {
+	    /**
+	     * Function: markercluster
+	     *
+	     * Ferramenta mapa agrupamento de pontos
+	     */
+	    markercluster : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.markercluster()",
+			"markercluster",
+			"markercluster",
+			"dependencias.php",
+		"i3GEOF.markercluster.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: heatmap
+	     *
+	     * Ferramenta mapa de calor
+	     */
+	    heatmap : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.heatmap()",
+			"heatmap",
+			"heatmap",
+			"dependencias.php",
+		"i3GEOF.heatmap.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: saiku
+	     *
+	     * Ferramenta SAIKU em nova aba do navegador
+	     */
+	    saiku : function() {
+		if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false) {
+		    i3GEO.janela.tempoMsg($trad("naoInstalado"));
+		    return;
 		}
-	};
+		i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.saiku()", "saiku", "saiku");
+	    },
+	    /**
+	     * Function: saikuMapa
+	     *
+	     * Ferramenta SAIKU em uma janela interna
+	     */
+	    saikuMapa : function() {
+		if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.saiku === false) {
+		    i3GEO.janela.tempoMsg($trad("naoInstalado"));
+		    return;
+		}
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.saiku()",
+			"saiku",
+			"saiku",
+			"index.js",
+		"i3GEOF.saiku.iniciaJanelaFlutuante2()");
+	    },
+	    /**
+	     *
+	     * Ferramenta graficointerativo versao flash
+	     */
+	    graficoInterativo : function() {
+		alert("depreciado. Use graficointerativo1");
+	    },
+	    /**
+	     * Function: graficoInterativo1
+	     *
+	     * Ferramenta gr&aacute;fico interativo
+	     */
+	    graficoInterativo1 : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.graficointerativo1()",
+			"graficointerativo1",
+			"graficointerativo1",
+			"dependencias.php",
+		"i3GEOF.graficointerativo1.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: linhaDoTempo
+	     *
+	     * Ferramenta linha do tempo
+	     */
+	    linhaDoTempo : function() {
+		i3GEO.janela.cria(
+			"650px",
+			"450px",
+			i3GEO.configura.locaplic + "/ferramentas/linhadotempo/index.php",
+			"",
+			"",
+			"<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d30") + "</span></div>",
+			"i3GEOFlinhaDoTempo",
+			false,
+			"hd",
+			"",
+			"",
+			"",
+			true,
+			"",
+			"",
+			"",
+			"",
+			"88"
+		);
+
+		i3GEO.analise.atualizaLinhaDoTempo =
+		    function() {
+		    var doc = "", ifr = "";
+		    try {
+			ifr = $i("i3GEOF.linhaDoTempoi");
+			if (navn) {
+			    if (ifr) {
+				doc = ifr.contentDocument;
+			    }
+			} else {
+			    if (document.frames("i3GEOF.linhaDoTempoi")) {
+				doc = document.frames("i3GEOF.linhaDoTempoi").document;
+			    }
+			}
+			doc.getElementById("tl") ? window.parent["i3GEOF.linhaDoTempoi"].carregaDados() : i3GEO.eventos.removeEventos(
+				"NAVEGAMAPA",
+				[
+				    "i3GEO.analise.atualizaLinhaDoTempo()"
+				    ]);
+		    } catch (e) {
+
+			if (typeof (console) !== 'undefined')
+			    console.error(e.message)
+
+			    i3GEO.eventos.removeEventos("NAVEGAMAPA", [
+				"i3GEO.analise.atualizaLinhaDoTempo()"
+				]);
+		    }
+		};
+		i3GEO.eventos.adicionaEventos("NAVEGAMAPA", [
+		    "i3GEO.analise.atualizaLinhaDoTempo()"
+		    ]);
+		var ifr = $i("i3GEOF.linhaDoTempoi");
+		// ifr.style.height = "75%";
+		if (ifr) {
+		    ifr.style.width = "100%";
+		}
+	    },
+	    /**
+	     * Function: perfil
+	     *
+	     * Ferramenta perfil
+	     */
+	    perfil : function() {
+		i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.perfil()", "perfil", "perfil");
+	    },
+	    rota : function(){
+		if (i3GEO.Interface.ATUAL !== "googlemaps") {
+		    alert("Operacao disponivel apenas na interface Google Maps");
+		    return;
+		}
+		counterClick = 1;
+		var parametrosRota =
+		    function(overlay, latlng) {
+		    var temp, janela;
+		    if (counterClick === 1) {
+			counterClick++;
+			alert("Clique o ponto de destino da rota");
+			pontoRota1 = latlng;
+			return;
+		    }
+		    if (counterClick === 2) {
+			pontoRota2 = latlng;
+			counterClick = 0;
+			GEvent.removeListener(rotaEvento);
+			janela = i3GEO.janela.cria("300px", "300px", "", "center", "", "<div class='i3GeoTituloJanela'>"+$trad("x48")+"</div>");
+			janela[2].style.overflow = "auto";
+			janela[2].style.height = "300px";
+			directions = new GDirections(i3GeoMap, janela[2]);
+			temp = function() {
+			    $i("wdoca_corpo").innerHTML = "N&atilde;o foi poss&iacute;vel criar a rota";
+			};
+			GEvent.addListener(directions, "error", temp);
+			directions.load("from: " + pontoRota1.lat() + "," + pontoRota1.lng() + " to: " + pontoRota2.lat() + ","
+				+ pontoRota2.lng());
+		    }
+		};
+		rotaEvento = GEvent.addListener(i3GeoMap, "click", parametrosRota);
+		i3GEO.janela.tempoMsg("Clique o ponto de origem da rota");
+	    },
+	    /**
+	     * Function: melhorcaminho
+	     *
+	     * Ferramenta melhor caminho
+	     */
+	    melhorcaminho : function() {
+		if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.melhorcaminho === false) {
+		    i3GEO.janela.tempoMsg($trad("naoInstalado"));
+		    return;
+		}
+		i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.melhorcaminho()", "melhorcaminho", "melhorcaminho");
+	    },
+	    /**
+	     * Function: gradePontos
+	     *
+	     * Ferramenta grade de pontos
+	     */
+	    gradePontos : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.gradePontos()",
+			"gradepontos",
+			"gradeDePontos",
+			"dependencias.php",
+			"i3GEOF.gradeDePontos.iniciaJanelaFlutuante()"
+		);
+	    },
+	    /**
+	     * Function: gradePol
+	     *
+	     * Ferramenta grade de pol&iacute;gonos
+	     */
+	    gradePol : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.gradePol()",
+			"gradepol",
+			"gradeDePoligonos",
+			"dependencias.php",
+			"i3GEOF.gradeDePoligonos.iniciaJanelaFlutuante()"
+		);
+	    },
+	    /**
+	     * Function: gradeHex
+	     *
+	     * Ferramenta grade de hex&aacute;gonos
+	     */
+	    gradeHex : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.gradeHex()",
+			"gradehex",
+			"gradeDeHex",
+			"dependencias.php",
+			"i3GEOF.gradeDeHex.iniciaJanelaFlutuante()"
+		);
+	    },
+	    /**
+	     * Function: analisaGeometrias
+	     *
+	     * Ferramenta de an&aacute;lise de geometrias
+	     */
+	    analisaGeometrias : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.tema.dialogo.tabela()",
+			"analisageometrias",
+			"analisaGeometrias",
+			"dependencias.php",
+		"i3GEOF.analisaGeometrias.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: pontosdistri
+	     *
+	     * Ferramenta de c&aacute;lculo de distribui&ccedil;&atilde;o de pontos
+	     */
+	    pontosdistri : function() {
+		i3GEO.parametros.r === "nao" ? i3GEO.janela.tempoMsg($trad("x22")) : i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.pontosdistri()",
+			"pontosdistri",
+			"pontosDistri",
+			"dependencias.php",
+		"i3GEOF.pontosDistri.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: pontoempoligono
+	     *
+	     * Ferramenta ponto em pol&iacute;gono
+	     */
+	    pontoempoligono : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.pontoempoligono()",
+			"pontoempoligono",
+			"pontoEmPoligono",
+			"dependencias.php",
+		"i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: centromassa
+	     *
+	     * Ferramenta centro m&eacute;dio
+	     */
+	    centromassa : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.centromassa()",
+			"centromassa",
+			"centromassa",
+			"dependencias.php",
+		"i3GEOF.centromassa.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: nptPol
+	     *
+	     * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
+	     */
+	    nptPol : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.nptpol()",
+			"nptpol",
+			"nptpol",
+			"dependencias.php",
+		"i3GEOF.nptpol.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: buffer
+	     *
+	     * Ferramenta buffer
+	     */
+	    buffer : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.buffer()",
+			"buffer",
+			"buffer",
+			"dependencias.php",
+		"i3GEOF.buffer.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: distanciaptpt
+	     *
+	     * Ferramenta dist&acirc;ncia entre pontos
+	     */
+	    distanciaptpt : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.distanciaptpt()",
+			"distanciaptpt",
+			"distanciaptpt",
+			"dependencias.php",
+		"i3GEOF.distanciaptpt.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: centroide
+	     *
+	     * Ferramenta centr&oacute;ide
+	     */
+	    centroide : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.centroide()",
+			"centroide",
+			"centroide",
+			"dependencias.php",
+		"i3GEOF.centroide.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: dissolve
+	     *
+	     * Ferramenta dissolve bordas comuns
+	     */
+	    dissolve : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.dissolve()",
+			"dissolve",
+			"dissolve",
+			"dependencias.php",
+		"i3GEOF.dissolve.iniciaJanelaFlutuante()");
+	    },
+	    /**
+	     * Function: agrupaElementos
+	     *
+	     * Ferramenta agrupa elementos
+	     */
+	    agrupaElementos : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.agrupaElementos()",
+			"agrupaelementos",
+			"agrupaElementos",
+			"dependencias.php",
+		"i3GEOF.agrupaElementos.iniciaJanelaFlutuante()");
+	    },
+	    distancia : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.distancia()",
+			"distancia",
+			"distancia",
+			"dependencias.php",
+		"i3GEOF.distancia.iniciaJanelaFlutuante()");
+	    },
+	    area : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.area()",
+			"area",
+			"area",
+			"dependencias.php",
+		"i3GEOF.area.iniciaJanelaFlutuante()");
+	    },
+	    juntamedidasvariavel : function(tema) {
+		if(!tema){
+		    tema = i3GEO.temaAtivo;
+		}
+		var temp = function(){
+		    i3GEOF.juntamedidasvariavel.iniciaJanelaFlutuante(tema);
+		};
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.analise.dialogo.juntamedidasvariavel()",
+			"juntamedidasvariavel",
+			"juntamedidasvariavel",
+			"dependencias.php",
+			temp
+		);
+	    }
+	}
+};

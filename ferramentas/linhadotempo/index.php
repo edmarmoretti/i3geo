@@ -5,7 +5,8 @@ verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 ?>
 <html>
 <head>
-<script src="../../js/i3geo.js" type="text/javascript"></script>
+<script src="../../pacotes/ol4/ol.js"></script>
+<script src="../../js/i3geonaocompacto.js" type="text/javascript"></script>
 <script>
 Timeline_ajax_url="../../pacotes/simile/timeline_2.3.0/timeline_ajax/simile-ajax-api.js";
 Timeline_urlPrefix='../../pacotes/simile/timeline_2.3.0/timeline_js/';
@@ -66,9 +67,6 @@ Free Software Foundation, Inc., no endere&ccedil;o
 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-if(navm){
-	i3GEO.janela.tempoMsg("o funcionamento da linha do tempo &eacute; muito melhor com o Firefox")
-}
 $i = function(id){
 	return document.getElementById(id);
 };
@@ -97,16 +95,20 @@ function inicializa(){
 			$i("combotemas").innerHTML = retorno.dados;
 			if ($i("tema")){
 				$i("tema").onchange = function(){
-					if($i("tema").value === ""){return;}
+					if($i("tema").value === ""){
+                        return;
+                    }
 					bandas();
 					carregaDados();
 					window.parent.i3GEO.mapa.ativaTema($i("tema").value);
 				};
 			}
+			window.parent.i3GEO.temaAtivo = $i("tema").value;
 			if(window.parent.i3GEO.temaAtivo !== ""){
 				$i("tema").value = window.parent.i3GEO.temaAtivo;
-				if($i("tema").value !== "")
-				{$i("tema").onchange.call();}
+				if($i("tema").value !== ""){
+                    $i("tema").onchange.call();
+                }
 			}
 		},
 		"combotemas",
@@ -214,8 +216,6 @@ function tituloover(wkt){
 	wkt = wkt.split("(")[1].split(")")[0];
 	wkt = wkt.split(" ");
 
-	if(wi.i3GEO.Interface.ATUAL === "googleearth")
-	{return;}
 	if(MARCA === false){
 		MARCA = wi.i3GEO.desenho.addPin(wkt[0],wkt[1],"","",wi.i3GEO.configura.locaplic+'/imagens/google/confluence.png',"linhadotempo");
 	}
