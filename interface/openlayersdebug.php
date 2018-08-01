@@ -66,7 +66,7 @@ include ($configInc["inc"] . "/css.php");
             include ($configInc["inc"] . "/iconecatalogo.php");
             include ($configInc["inc"] . "/iconelegenda.php");
             include ($configInc["inc"] . "/iconebusca.php");
-            include ($configInc["inc"] . "/iconeinfo.php");
+            //include ($configInc["inc"] . "/iconeinfo.php");
             include ($configInc["inc"] . "/iconetutorial.php");
             ?>
         </div>
