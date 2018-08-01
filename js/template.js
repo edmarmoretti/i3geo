@@ -15,7 +15,8 @@ i3GEO.template = {
 	botoes: {
 	    //lista de botoes na forma de icones
 	    listaDeIcones: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-xs" style="margin: 2px; padding: 2px;"><span class="material-icons {{{classe}}}" style="{{{estiloicon}}}">{{{icone}}}</span></button>',
-	    padrao: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-primary btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>'
+	    padrao: '<button id="{{{id}}}" title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-primary btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>',
+	    opcoes: '<button name="{{{name}}}" title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-default btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>&nbsp;'
 	},
 	checkbox: '<div class="checkbox text-left" title="{{{title}}}"><label><input {{checked}} name="{{{name}}}" id="{{id}}" type="checkbox" value="{{{value}}}"><span class="checkbox-material noprint"><span class="check" ></span></span> {{{label}}}</label></div>',
 	//utilizados nas janelas flutuantes
@@ -25,6 +26,8 @@ i3GEO.template = {
 	    closemsg: "<div class='modal fade' data-keyboard='false' tabindex='-1' role='dialog' aria-hidden='true' style='z-index:500000;overflow-y:visible;'><div class='modal-dialog'><div class='modal-content'><div class='modal-header' style='padding-top: 5px;'><button type='button' class='closeModal close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button></div><div class='modal-body' style='padding-top: 0px;'><div id='i3GEOMensagemCloseModal' > {{{texto}}} </div></div></div></div></div>",
 	    formModal: "<div class='modal-dialog' style='z-Index:100;'><div class='modal-content' style='max-height: 99vh;'><div class='modal-header handleDraggable' style='padding-top: 5px;height:30px;'><button type='button' class='closeModal close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button></div><div class='modal-body' style='padding-top: 0px;cursor:default;'><div id='i3GEOToolFormModal' > {{{texto}}} </div></div></div></div>"
 	},
+	//lista generica de opcoes
+	listaopcoes: '<div class="list-group condensed"><div class="row-content text-left">{{{opcional}}}<label class="nomeTemaCurto" style="margin-bottom: 0px;"><a href="{{{url}}}" target="{{{target}}}" ><h4>{{{nome}}}</h4></a><h6>{{{descricao}}}</h6></label></div></div><hr>',
 	//formatacao da lista de camadas
 	camada: false,
 	//formatacao da lista de camadas de fundo

@@ -290,14 +290,39 @@ i3GEO.catalogoOgc = {
 	    $("#" + i3GEO.catalogoOgc.config.idCatalogoNavegacao).html(t);
 	},
 	getAddSercicesBtn: function(){
+	    var itens = [];
+	    itens.push({
+		title : "",
+		text: "KML",
+		onclick : "i3GEO.catalogoOgc.kml()"
+	    },{
+		title : "",
+		text: "GeoRSS",
+		onclick : "i3GEO.catalogoOgc.georss()"
+	    },{
+		title : "",
+		text: "GeoJson",
+		onclick : "i3GEO.catalogoOgc.geojson()"
+	    },{
+		title : "",
+		text: "WMS",
+		onclick : "i3GEO.catalogoOgc.wms()"
+	    });
+	    /*
+	    ,{
+		title : "",
+		text: "WMS-Time",
+		onclick : "i3GEO.catalogoOgc.wmst()"
+	    });
+	    */
+	    var t = Mustache.to_html(
+		    "{{#data}}" + i3GEO.template.botoes.opcoes + "{{/data}}",
+		    {"data":itens}
+	    );
 	    var btn = ""
-		+ "<div class='sercicesbtn container-fluid container-tools'>"
+		+ "<div class='servicesbtn container-fluid container-tools'>"
 		+ "<div class='form-group condensed'>"
-		+ "   <button onclick='i3GEO.catalogoOgc.kml();' class='btn btn-default btn-xs btn-raised'>KML</button>"
-		+ "   <button onclick='i3GEO.catalogoOgc.georss();' class='btn btn-default btn-xs btn-raised'>GeoRSS</button>"
-		+ "   <button onclick='i3GEO.catalogoOgc.geojson();' class='btn btn-default btn-xs btn-raised'>GeoJson</button>"
-		+ "   <button onclick='i3GEO.catalogoOgc.wms();' class='btn btn-default btn-xs btn-raised'>WMS</button>"
-		+ "   <button onclick='i3GEO.catalogoOgc.wmst();' class='btn btn-default btn-xs btn-raised'>WMS-Time</button>"
+		+ t
 		+ "</div>"
 		+ "</div>";
 	    return btn;

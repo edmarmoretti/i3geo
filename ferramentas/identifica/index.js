@@ -106,7 +106,7 @@ i3GEOF.identifica = {
 		    }
 		}
 	    };
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	    i3GEOF.identifica.getData();
 	},
 	buffer: function(){

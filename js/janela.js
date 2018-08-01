@@ -711,7 +711,7 @@ i3GEO.janela =
 	    if(onclose != false){
 
 		if (typeof (console) !== 'undefined')
-			console.info("onclose janela._formModal");
+		    console.info("onclose janela._formModal");
 
 		i3GEO.janela._formModal.on("hidden.bs.modal",function(){
 		    onclose();
@@ -849,7 +849,6 @@ i3GEO.janela =
 		    duration : 0.25
 		},
 		constraintoviewport : true,
-		//buttons : b,
 		text : "<h4 class='alertTitulo'>" + pergunta + "</h4>"
 	    });
 	    YAHOO.i3GEO.janela.managerAguarde.register(janela);
@@ -880,15 +879,27 @@ i3GEO.janela =
 	 * {string} - (opcional) valor default
 	 */
 	prompt : function(pergunta, funcaoOk, valorDefault) {
-	    if ($i("i3GEOjanelaprompt")) {
-		return;
-	    }
-	    if (!valorDefault) {
-		valorDefault = "";
-	    }
-	    var i = "<div class='form-group label-fixed condensed' ><label class='control-label' for='i3GEOjanelaprompt'>"+pergunta+"</label><input placeholder='"+pergunta+"' class='form-control input-lg' type='text' id='i3GEOjanelaprompt' value='"+ valorDefault +"' /></div>";
-
-	    i3GEO.janela.confirma(i, "", "", "", funcaoOk);
+	    var botao = Mustache.render(
+		    i3GEO.template.botoes.padrao,
+		    {
+			style:'margin-right:10px;',
+			text: $trad("confirma"),
+			id: "i3GEOJanelapromptOk"
+		    }
+	    );
+	    var text = ""
+		+ "<div class='form-group label-fixed condensed' >"
+		+ "    <label class='control-label' for=''>"
+		+      pergunta
+		+ "    </label>"
+		+ "    <input class='form-control input-lg' type='text' id='i3GEOjanelaprompt' value='"+ valorDefault +"' />"
+		+ "</div>"
+		+ botao;
+	    i3GEO.janela.closeMsg(text);
+	    $("#i3GEOJanelapromptOk").on("click",function(){
+		i3GEO.janela.closeMsg();
+		funcaoOk.call();
+	    });
 	},
 	/**
 	 * Function: mensagemSimples
