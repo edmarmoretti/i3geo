@@ -9,7 +9,7 @@
 			<a href="javascript:void(0)" onclick="{{onExcluir}}('{{id_ws}}')" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
 				<i class="material-icons md-18">delete_forever</i>
 			</a>
-			&nbsp;{{{nome_ws}}}&nbsp; <span class="badge">{{tipo_ws}}</span>
+			ID: {{id_ws}} - &nbsp;{{{nome_ws}}}&nbsp; <span class="badge">{{tipo_ws}}</span>
 		</h4>
 	</div>
 	<div class="list-group-separator"></div>

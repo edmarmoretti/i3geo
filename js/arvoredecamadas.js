@@ -318,6 +318,7 @@ i3GEO.arvoreDeCamadas =
 		if(temp && mostra == true){
 		    i3GEO.arvoreDeCamadas.montaIconesTema(tema,camada);
 		    i3GEO.arvoreDeCamadas.montaOpcoesTema(tema,camada);
+		    i3GEO.arvoreDeCamadas.montaParametrosTema(tema,camada);
 		    //
 		    // inclui icone do tema
 		    //
@@ -343,7 +344,6 @@ i3GEO.arvoreDeCamadas =
 			"{{#data}}" + i3GEO.template.camada + "{{/data}}",
 			{"data":clone}
 		);
-
 		$("#" + config.idOnde).html(t);
 
 		$("#" + config.idOnde).sortable({
@@ -682,7 +682,24 @@ i3GEO.arvoreDeCamadas =
 	    }
 	    return camada;
 	},
+	montaParametrosTema: function(temaObj,camada) {
+	    if (typeof (console) !== 'undefined')
+		     console.info("arvoreDeCamadas montaParametrosTema");
+
+	    if(temaObj.ferramentas){
+		var html = "", fer="", fers = temaObj.ferramentas;
+		for(fer in fers){
+		    if(i3GEO.configura.ferramentasLayers[fer] && i3GEO.configura.ferramentasLayers[fer].parametrosForm){
+			html += i3GEO.configura.ferramentasLayers[fer].parametrosForm(temaObj);
+		    }
+		}
+		//formsFerramentas deve estar no template de renderizacao da camada
+		camada.formsFerramentas = html;
+	    }
+	},
 	montaIconesTema : function(temaObj,camada) {
+	    if (typeof (console) !== 'undefined')
+		     console.info("arvoreDeCamadas montaIconesTema");
 	    //A inclusao dos icones e feita com base no template usado na interface
 	    //a classe hidden permite esconder o icone
 	    //
@@ -720,7 +737,7 @@ i3GEO.arvoreDeCamadas =
 	    if(temaObj.ferramentas){
 		var html = "", fer="", fers = temaObj.ferramentas;
 		for(fer in fers){
-		    if(i3GEO.configura.ferramentasLayers[fer]){
+		    if(i3GEO.configura.ferramentasLayers[fer] && i3GEO.configura.ferramentasLayers[fer].icone){
 			html += i3GEO.configura.ferramentasLayers[fer].icone(temaObj.name);
 		    }
 		}

@@ -29,14 +29,14 @@ i3GEO.janela.ativaAlerta();
 					visible : true,
 					isBaseLayer : true,
 					name : "eng",
-                    preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
+                    preview : "<img class='img-responsive img-thumbnail' src='https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
 								crossOrigin : "anonymous",
-                                url : "http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
+                                url : "https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer",
 								attributions : [ new ol.Attribution(
 										{
-											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
+											html : 'Tiles &copy; <a  href="https://server.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer">ArcGIS</a>'
 										}) ]
 							})
 				});
@@ -46,14 +46,14 @@ i3GEO.janela.ativaAlerta();
 					visible : false,
 					isBaseLayer : true,
 					name : "oce",
-                    preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
+                    preview : "<img class='img-responsive img-thumbnail' src='https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
 								crossOrigin : "anonymous",
                                 url : "http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer",
 								attributions : [ new ol.Attribution(
 										{
-											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
+											html : 'Tiles &copy; <a  href="https://server.arcgisonline.com/ArcGIS/rest/services/Ocean_Basemap/MapServer">ArcGIS</a>'
 										}) ]
 							})
 				});
@@ -63,14 +63,14 @@ i3GEO.janela.ativaAlerta();
 					visible : false,
 					isBaseLayer : true,
 					name : "ims",
-                    preview : "<img class='img-responsive img-thumbnail' src='http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
+                    preview : "<img class='img-responsive img-thumbnail' src='https://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer/export?F=image&FORMAT=PNG32&TRANSPARENT=true&SIZE=256,256&BBOX=-67.5,-22.5,-45,0&BBOXSR=4326&IMAGESR=4326&DPI=90' >",
 					source : new ol.source.TileArcGISRest(
 							{
 								crossOrigin : "anonymous",
-                                url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
+                                url : "https://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer",
 								attributions : [ new ol.Attribution(
 										{
-											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
+											html : 'Tiles &copy; <a  href="https://server.arcgisonline.com/ArcGIS/rest/services/ESRI_Imagery_World_2D/MapServer">ArcGIS</a>'
 										}) ]
 							})
 				});
@@ -84,10 +84,10 @@ i3GEO.janela.ativaAlerta();
 					source : new ol.source.TileArcGISRest(
 							{
 								crossOrigin : "anonymous",
-                                url : "http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
+                                url : "https://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer",
 								attributions : [ new ol.Attribution(
 										{
-											html : 'Tiles &copy; <a  href="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
+											html : 'Tiles &copy; <a  href="https://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer">ArcGIS</a>'
 										}) ]
 							})
 				});
@@ -113,8 +113,8 @@ i3GEO.janela.ativaAlerta();
 		                                                bra];
 	}
 	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === true){
-			var attribOSMData = 'Map Data: &copy; <a  href="http://www.openstreetmap.org/">OpenStreetMap</a> contributors';
-			var attribMapQuestAerial = 'Map Data: &copy; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="http://www.mapquest.com/" target="_blank">MapQuest</a> <img src="http://developer.mapquest.com/content/osm/mq_logo.png">';
+			var attribOSMData = 'Map Data: &copy; <a  href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
+			var attribMapQuestAerial = 'Map Data: &copy; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="https://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">';
 			var attribStamen = 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA';
 
 			var osm = new ol.layer.Tile({
@@ -125,7 +125,7 @@ i3GEO.janela.ativaAlerta();
 				source: new ol.source.OSM({
 			    	  attributions : [new ol.Attribution({html: attribOSMData})],
 			    	  crossOrigin : "anonymous",
-			    	  url : "http://tile.openstreetmap.org/{z}/{x}/{y}.png"
+			    	  url : "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
 			      })
 			    });
 			var aquarela = new ol.layer.Tile({
@@ -136,7 +136,7 @@ i3GEO.janela.ativaAlerta();
 				source: new ol.source.OSM({
 			    	  attributions : [new ol.Attribution({html: attribStamen})],
 			    	  crossOrigin : "anonymous",
-			    	  url : "http://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
+			    	  url : "https://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
 			      })
 			    });
 			var toner = new ol.layer.Tile({
@@ -147,7 +147,7 @@ i3GEO.janela.ativaAlerta();
 				source: new ol.source.OSM({
 			    	  attributions : [new ol.Attribution({html: attribStamen})],
 			    	  crossOrigin : "anonymous",
-			    	  url : "http://tile.stamen.com/toner/{z}/{x}/{y}.png"
+			    	  url : "https://tile.stamen.com/toner/{z}/{x}/{y}.png"
 			      })
 			    });
 			var tonerlite = new ol.layer.Tile({
@@ -158,7 +158,7 @@ i3GEO.janela.ativaAlerta();
 				source: new ol.source.OSM({
 			    	  attributions : [new ol.Attribution({html: attribStamen})],
 			    	  crossOrigin : "anonymous",
-			    	  url : "http://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"
+			    	  url : "https://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"
 			      })
 			    });
 			var layMapQuestAerial = new ol.layer.Tile({
@@ -169,7 +169,7 @@ i3GEO.janela.ativaAlerta();
 				source: new ol.source.OSM({
 			    	  attributions : [new ol.Attribution({html: attribMapQuestAerial})],
 			    	  crossOrigin : "anonymous",
-			    	  url : "http://oatile4.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg"
+			    	  url : "https://oatile4.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg"
 			      })
 			    });
 			i3GEO.Interface.openlayers.LAYERSADICIONAIS = [ osm, aquarela, toner, tonerlite, layMapQuestAerial ];

@@ -74,9 +74,7 @@ function gravaCacheWMS($servico) {
 			$wms_service_request .= "&VERSION=1.1.1";
 		}
 		$nome = $dir_tmp . "/wms" . md5 ( $servico ) . ".xml";
-		// echo ($wms_service_request);exit;
 		if (! file_exists ( $nome )) {
-			// $wms_capabilities = file($wms_service_request);
 			$curl = curl_init ();
 			curl_setopt ( $curl, CURLOPT_URL, $wms_service_request );
 			curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 );
@@ -90,7 +88,6 @@ function gravaCacheWMS($servico) {
 				return "erro";
 			} else {
 				$fp = fopen ( $nome, 'w' );
-				// fwrite($fp, implode("",$wms_capabilities));
 				fwrite ( $fp, $wms_capabilities );
 				fclose ( $fp );
 			}

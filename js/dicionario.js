@@ -3142,5 +3142,10 @@ g_traducao =
             pt : "Camada adicionada ao mapa",
             en : "",
             es : ""
+        }],
+        "camadaatualizada" : [{
+            pt : "Camada atualizada",
+            en : "",
+            es : ""
         }]
     };

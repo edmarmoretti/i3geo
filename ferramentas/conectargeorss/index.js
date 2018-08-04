@@ -66,7 +66,6 @@ i3GEOF.conectargeorss = {
 	    )
 	    .done(
 		    function(data, status){
-
 			i3GEO.janela.fechaAguarde();
 			if(data.errorMsg != ""){
 			    i3GEO.janela.snackBar({content: data.errorMsg, style:'red'});

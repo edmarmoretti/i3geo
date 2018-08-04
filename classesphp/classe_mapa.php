@@ -472,6 +472,14 @@ class Mapa
                     }
                     $ferramentas["storymap"] = json_decode(str_replace("'", '"', $f));
                 }
+                //wmstime
+                if ($oLayer->getmetadata("wmstime") != "") {
+                    $f = $oLayer->getmetadata("wmstime");
+                    if (! mb_detect_encoding($f, "UTF-8", true)) {
+                        $f = mb_convert_encoding($f, "UTF-8", "ISO-8859-1");
+                    }
+                    $ferramentas["wmstime"] = json_decode(str_replace("'", '"', $f));
+                }
                 // animagif
                 if ($oLayer->getmetadata("animagif") != "") {
                     $f = $oLayer->getmetadata("animagif");
@@ -1607,6 +1615,7 @@ class Mapa
         $c->setrgb(255, 255, 255);
         $of = $this->mapa->outputformat;
         $this->salva();
+        return $layer;
     }
 
     /*

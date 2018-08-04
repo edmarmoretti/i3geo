@@ -42,7 +42,7 @@ i3GEO.configura =
 	 */
 	ferramentasLayers : {
 	    //lista de ferramentas que aceitam parametros embutidos em mapfiles
-	    param : ["tme","storymap","animagif"],
+	    param : ["tme","storymap","animagif","wmstime"],
 	    "tme" : {
 		"arvoreDeCamadas" : true,
 		"metadata" : "tme",
@@ -134,6 +134,67 @@ i3GEO.configura =
 			+ i3GEO.configura.locaplic
 			+ "/imagens/branco.gif' />";
 		    return icone;
+		}
+	    },
+	    "wmstime" : {
+		parametrosForm: function(temaObj){
+		    if (typeof (console) !== 'undefined')
+			     console.info("configura wmstime parametrosForm");
+
+		    var html = [],
+		    	parametros = temaObj.ferramentas.wmstime,
+		    	times = parametros.times.split("|");
+
+		    html.push("<div style='width: 100%;' class='form-group label-fixed condensed'>");
+		    html.push("<div style='width: 100%;' class='input-group'>");
+		    html.push("<select name='" + temaObj.name + "' onchange='i3GEO.configura.ferramentasLayers.wmstime.changeTime(this)' class='form-control' >");
+		    $.each(times,function(i,v){
+			var s = "";
+			if(v == parametros.time){
+			    s = "selected";
+			}
+			html.push("<option " + s + " value='" + v + "'>" + v + "</option>");
+		    });
+
+		    html.push("</select>");
+		    html.push("<b class='caret careti'></b>");
+		    html.push("</div></div>");
+
+		    return html.join("");
+		},
+		changeTime: function(obj){
+		    var time = obj.value,
+		    	temaObj = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[obj.name];
+		    i3GEO.janela.abreAguarde();
+		    $.post(
+			    i3GEO.configura.locaplic+"/ferramentas/wmstime/exec.php",
+			    {
+				funcao: "alteratime",
+				g_sid: i3GEO.configura.sid,
+				layer: temaObj.name,
+				time: time,
+				times: temaObj.ferramentas.wmstime.times
+			    }
+		    )
+		    .done(
+			    function(data, status){
+
+				i3GEO.janela.fechaAguarde();
+				if(data.errorMsg != ""){
+				    i3GEO.janela.snackBar({content: data.errorMsg, style:'red'});
+				} else {
+				    i3GEO.Interface.openlayers.atualizaTema("",temaObj.name);
+				    i3GEO.janela.snackBar({content: $trad("camadaatualizada")});
+				}
+
+			    }
+		    )
+		    .fail(
+			    function(data){
+				i3GEO.janela.fechaAguarde();
+				i3GEO.janela.snackBar({content: data.status, style:'red'});
+			    }
+		    );
 		}
 	    }
 	},

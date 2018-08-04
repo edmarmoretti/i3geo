@@ -41,9 +41,9 @@ i3GEOF.wmstime.dicionario = {
 		es : "Obtener una imagen por:"
 	} ],
 	9 : [ {
-		pt : "Continuar",
-		en : "Continue",
-		es : "Continuar"
+		pt : "Adicionar ao mapa",
+		en : "",
+		es : ""
 	} ],
 	10 : [ {
 		pt : "Ano",
@@ -60,29 +60,9 @@ i3GEOF.wmstime.dicionario = {
 		en : "Day",
 		es : "D&iacute;a"
 	} ],
-	13 : [ {
-		pt : "clique para adicionar ao mapa",
-		en : "click to add to the map",
-		es : "haga clic para a&ntilde;adir al mapa"
-	} ],
-	14 : [ {
-		pt : "exclu&iacute;do",
-		en : "deleted",
-		es : "excluido"
-	} ],
-	15 : [ {
-		pt : "Imagem exclu&iacute;da",
-		en : "Deleted image",
-		es : "Imagen excluida"
-	} ],
-	16 : [ {
-		pt : "clique para adicionar ao mapa",
-		en : "click to add to the map",
-		es : "haga clic para a&ntilde;adir al mapa"
-	} ],
-    17 : [ {
-        pt : "Imagens",
-        en : "Images",
-        es : "Im&aacute;genes"
-    } ]
+        "concluido" : [ {
+            pt : "Camada adicionada ao mapa",
+            en : "",
+            es : ""
+        } ]
 };

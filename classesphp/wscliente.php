@@ -198,7 +198,7 @@ function listaRSSwsARRAY()
                 $canali = simplexml_load_string(geraXmlGeojson($locaplic));
                 $linkrss = $urli3geo."/rss/xmlgeorss.php";
             }
-            if($tipo == "WMS" || $tipo == "WMS-Tile"){
+            if($tipo == "WMS" || $tipo == "WMS-Tile" || $tipo == "WMS-Time"){
                 $canali = simplexml_load_string(geraXmlWMS($locaplic));
                 $linkrss = $urli3geo."/rss/xmlservicoswms.php";
             }

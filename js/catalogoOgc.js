@@ -49,17 +49,6 @@ i3GEO.catalogoOgc = {
 		$("#" + i3GEO.catalogoOgc.config.idCatalogoPrincipal).show();
 	    });
 	},
-	adicionaTema : function(tid) {
-	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.catalogoOgc.adicionaTema");
-
-	    // confirma se o tema existe no mapa
-	    if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
-		i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, true);
-	    } else {
-		i3GEO.arvoreDeTemas.adicionaTemas([ tid ]);
-	    }
-	},
 	inicia: function(config){
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.catalogoOgc.inicia");
@@ -104,6 +93,10 @@ i3GEO.catalogoOgc = {
 			v.onclick = "i3GEO.catalogoOgc.listaCamadas('" + v.nome + "'," + v.id_ws + ",'" + v.nome + "','" + v.link + "',0" + ",'" + v.tipo_ws + "','" + v.layer + "')";
 			if(v.tipo_ws == "KML"){
 			    v.onclick = "i3GEO.catalogoOgc.addkml('" + v.link + "')";
+			    v.hiddenfolder = "hidden";
+			}
+			if(v.tipo_ws == "WMS-Time"){
+			    v.onclick = "i3GEO.catalogoOgc.addwmstime('" + v.link + "','" + v.id_ws + "','" + v.nome + "')";
 			    v.hiddenfolder = "hidden";
 			}
 			if(v.tipo_ws == "GEORSS"){
@@ -231,31 +224,37 @@ i3GEO.catalogoOgc = {
 		    temas;
 
 		    //monta a lista com proximo nivel
-		    $.each( data, function( i,v ) {
-			if (v.nome + " - " + v.titulo !== "undefined - undefined") {
-			    v.descricao = v.titulo;
-			    if (!v.estilos) {
-				v.onclick = "i3GEO.catalogoOgc.listaCamadas('" + nome + "'," + id_ws + ",'" + v.nome + "','" + url + "'," + (nivel*1 + 1) + ",'" + tipo_ws + "','" + v.titulo + "')";
-				clone.push(v);
-			    } else {
-				i3GEO.catalogoOgc.temas({
-				    "estilos": v.estilos,
-				    "servico": url,
-				    "layer": v.nome,
-				    "proj": v.srs.toString(),
-				    "formatoimg": v.formats.toString(),
-				    "versao": v.version.toString(),
-				    "formatoinfo": v.formatsinfo.toString()
-				});
+		    if(data.length > 0){
+			$.each( data, function( i,v ) {
+			    if (v.nome + " - " + v.titulo !== "undefined - undefined") {
+				v.descricao = v.titulo;
+				if (!v.estilos) {
+				    v.onclick = "i3GEO.catalogoOgc.listaCamadas('" + nome + "'," + id_ws + ",'" + v.nome + "','" + url + "'," + (nivel*1 + 1) + ",'" + tipo_ws + "','" + v.titulo + "')";
+				    clone.push(v);
+				} else {
+				    i3GEO.catalogoOgc.temas({
+					"estilos": v.estilos,
+					"servico": url,
+					"layer": v.nome,
+					"proj": v.srs.toString(),
+					"formatoimg": v.formats.toString(),
+					"versao": v.version.toString(),
+					"formatoinfo": v.formatsinfo.toString()
+				    });
+				}
 			    }
+			});
+			if(clone.length > 0){
+			    g = Mustache.to_html(
+				    "{{#data}}" + i3GEO.template.dir + "{{/data}}",
+				    {"data":clone}
+			    );
+			    $("#" + i3GEO.catalogoOgc.config.idCatalogoNavegacao).html(g);
 			}
-		    });
-		    if(clone.length > 0){
-			g = Mustache.to_html(
-				"{{#data}}" + i3GEO.template.dir + "{{/data}}",
-				{"data":clone}
-			);
-			$("#" + i3GEO.catalogoOgc.config.idCatalogoNavegacao).html(g);
+
+		    } else {
+			i3GEO.janela.snackBar({content: "Erro", style:'red'});
+			$("#" + i3GEO.catalogoOgc.config.idCatalogoNavegacao).html("");
 		    }
 		};
 		i3GEO.php.listaLayersWMS(monta, url, (nivel * 1) + 1, id_ws, layer,
@@ -263,12 +262,18 @@ i3GEO.catalogoOgc = {
 	    }
 	},
 	temas: function(config){
+	    if (typeof (console) !== 'undefined')
+		    console.info(config);
+
 	    var clone = [],
 	    estilos = config.estilos;
 
 	    $.each( estilos, function( i,v ) {
 		if(v.titulo == "default"){
 		    v.titulo = i3GEO.catalogoOgc.MIGALHA[i3GEO.catalogoOgc.MIGALHA.length - 1].nome;
+		}
+		if(config.proj == ""){
+		    config.proj = i3geoOL.getView().getProjection().getCode();
 		}
 		v.onclick = "i3GEO.php.adicionaTemaWMS('','"
 		    + config.servico + "','"
@@ -308,13 +313,13 @@ i3GEO.catalogoOgc = {
 		text: "WMS",
 		onclick : "i3GEO.catalogoOgc.wms()"
 	    });
-	    /*
-	    ,{
+	    //TODO incluir essa opcao para permitir digitar uma nova url
+	    /*,{
 		title : "",
 		text: "WMS-Time",
 		onclick : "i3GEO.catalogoOgc.wmst()"
 	    });
-	    */
+	     */
 	    var t = Mustache.to_html(
 		    "{{#data}}" + i3GEO.template.botoes.opcoes + "{{/data}}",
 		    {"data":itens}
@@ -357,12 +362,21 @@ i3GEO.catalogoOgc = {
 		    "i3GEOF.conectarwms.start()",
 	    "i3GEOF.conectarwms_script");
 	},
+	addwmstime: function(url,id_ws,titulo){
+	    var temp = function(){
+		i3GEOF.wmstime.start(url,id_ws,titulo);
+	    };
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/wmstime/dependencias.php",
+		    temp,
+	    "i3GEOF.wmstime_script");
+	},
 	addkml: function(url){
 	    i3GEO.janela.abreAguarde();
 	    var par = {
-		g_sid: i3GEO.configura.sid,
-	    	funcao: "crialayer",
-	    	url: url
+		    g_sid: i3GEO.configura.sid,
+		    funcao: "crialayer",
+		    url: url
 	    };
 	    $.post(
 		    i3GEO.configura.locaplic+"/ferramentas/conectarkml/exec.php",
@@ -385,9 +399,9 @@ i3GEO.catalogoOgc = {
 	addgeorss: function(url){
 	    i3GEO.janela.abreAguarde();
 	    var par = {
-		g_sid: i3GEO.configura.sid,
-	    	funcao: "adicionaTemaGeoRSS",
-	    	url: url
+		    g_sid: i3GEO.configura.sid,
+		    funcao: "adicionaTemaGeoRSS",
+		    url: url
 	    };
 	    $.post(
 		    i3GEO.configura.locaplic+"/ferramentas/conectargeorss/exec.php",
@@ -410,9 +424,9 @@ i3GEO.catalogoOgc = {
 	addgeojson: function(url){
 	    i3GEO.janela.abreAguarde();
 	    var par = {
-		g_sid: i3GEO.configura.sid,
-	    	funcao: "crialayer",
-	    	url: url
+		    g_sid: i3GEO.configura.sid,
+		    funcao: "crialayer",
+		    url: url
 	    };
 	    $.post(
 		    i3GEO.configura.locaplic+"/ferramentas/conectargeojson/exec.php",
@@ -431,5 +445,5 @@ i3GEO.catalogoOgc = {
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 		    }
 	    );
-	},
+	}
 };

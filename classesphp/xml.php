@@ -280,7 +280,7 @@ RSS
 function geraXmlWMS($locaplic,$output)
 {
 	global $esquemaadmin;
-	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where (tipo_ws = 'WMS' or tipo_ws = 'WMS-Tile') and nome_ws <> '' order by nome_ws";
+	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where (tipo_ws = 'WMS' or tipo_ws = 'WMS-Tile' or tipo_ws = 'WMS-Time') and nome_ws <> '' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Web services WMS-OGC",$output);
 }
 function geraXmlARCGISREST($locaplic,$output)

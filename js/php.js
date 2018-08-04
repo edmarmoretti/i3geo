@@ -968,7 +968,8 @@ i3GEO.php =
 	    var s, p, camadaArvore, par, ck;
 	    if(funcao === ""){
 		funcao = function() {
-		    i3GEO.janela.fechaAguarde("ajaxredesenha");
+		    i3GEO.janela.fechaAguarde();
+		    i3GEO.janela.snackBar({content: $trad("camadaadic")});
 		    i3GEO.atualiza();
 		};
 	    }

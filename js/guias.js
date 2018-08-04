@@ -653,15 +653,15 @@ i3GEO.guias =
 	},
 	//usado nas ferramentas
 	mostraGuiaFerramenta : function(guia, namespace) {
-	    var g, Dom = YAHOO.util.Dom;
+	    var g;
 	    if (!namespace) {
 		namespace = "guia";
 	    }
 	    for (g = 0; g < 12; g++) {
-		Dom.setStyle(namespace + g + "obj", "display", "none");
+		$("#" + namespace + g + "obj").css("display", "none");
 	    }
 	    if(guia != ""){
-		Dom.setStyle(guia + "obj", "display", "block");
+		$("#" + guia + "obj").css("display","block");
 	    }
 	},
 	escondeGuiasFerramenta : function(namespace){

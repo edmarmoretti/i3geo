@@ -41,5 +41,8 @@
 		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
 	</div>
 	<div class="clearfix"></div>
+    <h5 class='alert alert-info'>
+		{{{ajudawmstime}}}
+	</h5>
 </form>
 </script>

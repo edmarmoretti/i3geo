@@ -18,5 +18,10 @@ i3GEOadmin.webservices.dicionario = {
 		pt : "Endere&ccedil;o:",
 		en : "Address:",
 		es : "Direcci&oacute;n:"
+	} ],
+    'ajudawmstime' : [ {
+		pt : "No caso de serviços do tipo WMS-Time é necessário configurar os parâmetros de período de tempo e LAYER. Veja o arquivo i3geo/ferramentas/wmstime/index.js",
+		en : "",
+		es : ""
 	} ]
 };
