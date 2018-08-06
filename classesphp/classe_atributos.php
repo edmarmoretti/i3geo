@@ -2151,6 +2151,7 @@ class Atributos
 			$ptimg = xy2imagem($map_file,array($x,$y),$mapa);
 			//$formatoinfo = "MIME";
 			$formatosinfo = $layer->getmetadata("formatosinfo");
+			$formatosinfohtml = false;
 			if ($formatosinfo != ""){
 				$formatosinfo = explode(",",$formatosinfo);
 				if ($formatosinfo[0] != ""){
@@ -2159,6 +2160,9 @@ class Atributos
 				foreach ($formatosinfo as $f){
 					if(strtoupper($f) == "TEXT/PLAIN"){
 						$formatoinfo = "text/plain";
+					}
+					if(strtoupper($f) == "TEXT/HTML"){
+					    $formatosinfohtml = true;
 					}
 				}
 			}
@@ -2218,9 +2222,9 @@ class Atributos
 			//if(strtoupper($formatoinfo) == "TEXT/HTML" && $res != ""){
 				//$n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res."'></iframe>","link"=>"","img"=>"");
 			//}
-			//if(strtoupper($formatoinfo) == "MIME" && $res2 != ""){
+			if($formatosinfohtml == true){
 				$n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res2."'></iframe>","link"=>"","img"=>"");
-			//}
+			}
 			if($res != ""){
 				$n[] = array("alias"=>"Link WMS","valor"=>"getfeatureinfo ".$formatoinfo,"link"=>$res,"img"=>"","idIframe"=>$id);
 			}
