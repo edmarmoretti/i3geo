@@ -114,7 +114,7 @@ i3GEO.catalogoMenus = {
 			    "{{#data}}" + i3GEO.template.dir + "{{/data}}",
 			    {"data":clone}
 		    );
-		    $("#" + config.idOndeMenus).html(t);
+		    $("#" + config.idOndeMenus).html(i3GEO.catalogoMenus.getUploadBtn() + t);
 		};
 		i3GEO.php.pegalistademenus(montaMenus);
 	    }
@@ -285,5 +285,60 @@ i3GEO.catalogoMenus = {
 		});
 	    };
 	    i3GEO.php.pegalistadetemas(montaTemas, idmenu, id_n1, id_n2);
+	},
+	getUploadBtn: function(){
+	    var itens = [];
+	    itens.push({
+		title : "",
+		text: "SHP",
+		onclick : "i3GEO.catalogoMenus.shp()"
+	    },{
+		title : "",
+		text: "DBF/CSV",
+		onclick : "i3GEO.catalogoMenus.dbfcsv()"
+	    },{
+		title : "",
+		text: "GPX",
+		onclick : "i3GEO.catalogoMenus.gpx()"
+	    },{
+		title : "",
+		text: "KML",
+		onclick : "i3GEO.catalogoMenus.kml()"
+	    });
+	    var t = Mustache.to_html(
+		    "{{#data}}" + i3GEO.template.botoes.opcoes + "{{/data}}",
+		    {"data":itens}
+	    );
+	    var btn = ""
+		+ "<div class='uploadbtn container-fluid container-tools'>"
+		+ "<div class='form-group condensed'>"
+		+ t
+		+ "</div>"
+		+ "</div>";
+	    return btn;
+	},
+	shp: function() {
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/upload/dependencias.php",
+		    "i3GEOF.uploadshp.iniciaJanelaFlutuante()",
+	    "i3GEOF.upload_script");
+	},
+	dbfcsv: function() {
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/uploaddbf/dependencias.php",
+		    "i3GEOF.uploaddbf.iniciaJanelaFlutuante()",
+	    "i3GEOF.uploaddbf_script");
+	},
+	gpx: function() {
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/uploadgpx/dependencias.php",
+		    "i3GEOF.uploadgpx.iniciaJanelaFlutuante()",
+	    "i3GEOF.uploadgpx_script");
+	},
+	kml: function() {
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
+		    + "/ferramentas/uploadkml/dependencias.php",
+		    "i3GEOF.uploadkml.iniciaJanelaFlutuante()",
+	    "i3GEOF.uploadkml_script");
 	}
 };

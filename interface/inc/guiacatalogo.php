@@ -13,9 +13,6 @@
                 <li><a onclick="i3GEO.login.recarrega = false; i3GEO.login.dialogo.abreLogin();" href="javascript:void(0)" data-toggle="modal" data-target="#modalLogin">
                         <span class="glyphicon glyphicon-log-in"></span> Login/Logout
                     </a></li>
-                <li><a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.uploadarquivo()">
-                        <span class="glyphicon glyphicon-cloud-upload"></span> {{{a14}}}
-                    </a></li>
                 <li><a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">
                         <span class="glyphicon glyphicon-cloud-download"></span> {{{a3}}}
                     </a></li>

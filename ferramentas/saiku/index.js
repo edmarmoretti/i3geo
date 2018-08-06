@@ -98,7 +98,7 @@ i3GEOF.saiku =
 		 */
 		html : function() {
 			var ins =
-				"<div class='container-fluid customScrollBar'>"
+				"<div class='container-fluid'>"
 				+ "<h5>Saiku: <a href=http://meteorite.bi/saiku target=_blank >http://meteorite.bi/saiku</a></h4>"
 					+ "<h5 class='alert alert-info'>" + $trad('ajuda', i3GEOF.saiku.dicionario) + "<h5>";
 			if (i3GEO.parametros.saikuUrl !== "") {

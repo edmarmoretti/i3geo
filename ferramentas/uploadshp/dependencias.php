@@ -1,6 +1,8 @@
 <?php
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)));
+//como o nome da pasta mudou, essa linha mantem a compatibilidade
+verificaBlFerramentas("upload");
 /**
  * Carrega os programas javascript necessarios para a ferramenta
  * Esse programa e usado na tag <script> ou com a funcao scripttag do i3Geo
