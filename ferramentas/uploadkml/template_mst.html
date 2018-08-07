@@ -1,27 +1,32 @@
-<div class='container-fluid'>
-	<h5 class="alert alert-info">{{{ajuda}}}</h5>
-	<h5 class="alert alert-info">{{{ajuda2}}}</h5>
-	<form class="form-horizontal" role="form" id='i3GEOuploadkmlf' target='i3GEOuploadkmliframe' action='{{{locaplic}}}/ferramentas/uploadkml/upload.php' method='post' ENCTYPE='multipart/form-data'>
-		<div class="input-group-btn">
-			<button style="margin-right:10px;"  type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">KML</button>
-			<input name="i3GEOuploadkml" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
-			<span class="form-control upload"></span>
-		</div>
-		<br>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{nomeLayerKml}}}</label>
-			<input class="form-control input-lg" type='text' name="layerkml" id="layerkml" value='' />
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="tipo">{{{projecao}}}</label>
-			<div class="input-group"></div>
-			<div id=i3GEOuploadkmlListaepsg style="text-align: left; overflow: auto; height: 70px; margin-top: 8px;"></div>
-		</div>
-		<hr />
-
-		<input type='hidden' name='g_sid' value='{{{sid}}}'>
-		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
-	</form>
-	<button onclick="i3GEOF.uploadkml.submete()" class='btn btn-primary btn-sm btn-raised'>{{{criaCamada}}}</button>
-	<iframe name='i3GEOuploadkmliframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <h5 class="alert alert-info">{{{ajuda}}}</h5>
+    <h5 class="alert alert-info">{{{ajuda2}}}</h5>
+    <form accept-charset="utf-8" class="form-horizontal" target="i3GEOuploadkmliframe" action="{{{locaplic}}}/ferramentas/uploadkml/upload.php" method="post" ENCTYPE="multipart/form-data">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{arquivoKml}}}</label>
+            <div class="col-md-6 ">
+                <input required onclick="$(this).parent().find('input[type=file]').click();" class="form-control input-lg" type='text' name="i3GEOuploadkml" />
+                <input name="i3GEOuploadkml" onchange="$(this).parent().find('.form-control').val($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                <b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{nomeLayerKml}}}</label>
+            <div class="col-md-6 ">
+                <input required class="form-control input-lg " type='text' value='' name="layerkml"/>
+            </div>
+        </div>
+        <div style="width: 100%;" class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{projecao}}}</label>
+            <div class="col-md-6">
+                <div id='i3GEOuploadkmlListaepsg'></div>
+            </div>
+        </div>
+        <button name="submit" onclick="i3GEOF.uploadkml.submete(this)" class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>{{{adicmapa}}}
+        </button>
+        <input type='hidden' name='g_sid' value='{{{sid}}}'>
+        <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+    </form>
+    <iframe name=i3GEOuploadkmliframe style="text-align: left; border: 1px solid rgb(242, 232, 232);" width="98%" height="60px"></iframe>
 </div>

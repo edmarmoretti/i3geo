@@ -34,6 +34,11 @@ i3GEOF.uploadshp = {
 	},
 	destroy: function(){
 	    //nao use this aqui
+	    i3GEOF.uploadshp.renderFunction.call();
+	},
+	doneok: function(){
+	    i3GEO.janela.snackBar({content: $trad("camadaadic")});
+	    this.destroy();
 	},
 	html:function() {
 	    var p = this._parameters,
@@ -43,6 +48,7 @@ i3GEOF.uploadshp = {
 		    namespace: p.namespace,
 		    sid: i3GEO.configura.sid,
 		    idContainer: p.idContainer,
+		    adicmapa : $trad("adicmapa"),
 		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
 	    };
 	    i3f.renderFunction.call(
@@ -53,11 +59,6 @@ i3GEOF.uploadshp = {
 		    });
 	    i3GEO.util.comboEpsg("uploadEPSG","i3GEOuploadListaepsg");
 	},
-	/*
-	Function: submete
-
-	Submete o arquivo ao servidor
-	 */
 	submete: function(btn){
 	    i3GEO.janela.abreAguarde();
 	    $(btn).prop("disabled",true).find("span").removeClass("hidden");

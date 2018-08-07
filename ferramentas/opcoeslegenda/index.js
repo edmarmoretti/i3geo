@@ -82,7 +82,8 @@ i3GEOF.opcoeslegenda = {
 	},
 	aplicaParametrosLegImg: function(btn){
 	    i3GEO.janela.abreAguarde();
-	    $(btn).button("disable").find("span").removeClass("hidden");
+	    btn = $(btn);
+	    btn.prop("disabled",true).find("span").removeClass("hidden");
 	    var par = this.getFormData(),
 	    	i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
@@ -93,6 +94,7 @@ i3GEOF.opcoeslegenda = {
 	    )
 	    .done(
 		    function(data, status){
+			btn.prop("disabled",false).find("span").addClass("hidden");
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: $trad("concluido",i3f.dicionario)});
 			i3f.destroy();
@@ -100,6 +102,7 @@ i3GEOF.opcoeslegenda = {
 	    )
 	    .fail(
 		    function(data){
+			btn.prop("disabled",false).find("span").addClass("hidden");
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 			i3f.destroy();
@@ -108,7 +111,8 @@ i3GEOF.opcoeslegenda = {
 	},
 	test: function(btn){
 	    i3GEO.janela.abreAguarde();
-	    $(btn).button("disable").find("span").removeClass("hidden");
+	    btn = $(btn);
+	    btn.prop("disabled",true).find("span").removeClass("hidden");
 	    var par = this.getFormData(),
 	    	i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
@@ -120,7 +124,7 @@ i3GEOF.opcoeslegenda = {
 	    .done(
 		    function(data, status){
 			i3GEO.janela.fechaAguarde();
-			$(btn).button("enable").find("span").addClass("hidden");
+			btn.prop("disabled",false).find("span").addClass("hidden");
 			i3GEO.janela.closeMsg("<img src='" + data + "' >");
 		    }
 	    )
@@ -128,7 +132,7 @@ i3GEOF.opcoeslegenda = {
 		    function(data){
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
-			$(btn).button("enable").find("span").addClass("hidden");
+			btn.prop("disabled",false).find("span").addClass("hidden");
 		    }
 	    );
 	}

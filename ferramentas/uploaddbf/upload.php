@@ -13,9 +13,6 @@ if (ob_get_level() == 0) ob_start();
 ?>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../../css/input.css" />
-<link rel="stylesheet" type="text/css" href="../../css/geral.css" />
-<title></title>
 </head>
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
@@ -198,7 +195,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 			{$novolayer->setProjection("init=epsg:".$uploaddbfEPSG);}
 			$salvo = $mapa->save($map_file);
 			echo "<b>Tema criado!!!";
-			echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza()</script>";
+			echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza();window.parent.i3GEOF.uploaddbf.doneok();</script>";
 		}
 	}
 	else
@@ -209,9 +206,9 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 	}
 }
 restauraCon($map_file,$postgis_mapa);
-paraAguarde();
+
 function paraAguarde(){
-	echo "<script>window.scrollTo(0,10000);window.parent.i3GEOF.uploaddbf.aguarde.visibility='hidden';</script>";
+	echo "<script>window.parent.i3GEOF.uploaddbf.destroy();</script>";
 }
 function verificaNome($nome)
 {

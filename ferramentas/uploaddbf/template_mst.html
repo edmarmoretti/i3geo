@@ -1,40 +1,46 @@
-<div class='container-fluid'>
-<h5></h5>
-	<form class="form-horizontal" role="form" id='i3GEOuploaddbff' target='i3GEOuploaddbfiframe' action='{{{locaplic}}}/ferramentas/uploaddbf/upload.php' method='post' ENCTYPE='multipart/form-data'>
-		<div class="input-group-btn">
-			<button style="margin-right:10px;" type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">{{{arquivo}}}</button>
-			<input name="i3GEOuploaddbffile" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
-			<span class="form-control upload"></span>
-		</div>
-		<br>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label">{{{tipoArquivo}}}</label>
-			<div style="width: 100%;" class="input-group">
-				<select class="form-control" name="i3GEOuploaddbftipoarquivo">
-					<option value='dbf' selected>dbf</option>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+	<form accept-charset="utf-8" class="form-horizontal" target="i3GEOuploaddbfiframe" action="{{{locaplic}}}/ferramentas/uploaddbf/upload.php" method="post" ENCTYPE="multipart/form-data">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{arquivo}}}</label>
+            <div class="col-md-6 ">
+                <input required onclick="$(this).parent().find('input[type=file]').click();" class="form-control input-lg" type='text' name="i3GEOuploaddbffile" />
+                <input name="i3GEOuploaddbffile" onchange="$(this).parent().find('.form-control').val($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                <b class="caret careti"></b>
+            </div>
+        </div>
+        <div style="width: 100%;" class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{tipoArquivo}}}</label>
+            <div class="col-md-6">
+                <select class="form-control" name="i3GEOuploaddbftipoarquivo">
+                    <option value='dbf' selected>dbf</option>
 					<option value='csvpv'>csv separado por ;</option>
 					<option value='csvv'>csv separado por ,</option>
-				</select><b class="caret careti"></b>
-			</div>
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{colunaX}}}</label>
-			<input class="form-control input-lg" type='text' name="i3GEOuploaddbfnomex" value='' />
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{colunaY}}}</label>
-			<input class="form-control input-lg" type='text' name="i3GEOuploaddbfnomey" value='' />
-		</div>
-
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="tipo">{{{projecao}}}</label>
-			<div style="width: 100%;" class="input-group"></div>
-			<div id=i3GEOuploaddbfListaepsg style="text-align: left; overflow: auto; height: 70px; margin-top: 8px;"></div>
-		</div>
-		<hr />
-		<button name="submit" onclick="i3GEOF.uploaddbf.submete()" class='btn btn-primary btn-sm btn-raised'>{{{criaCamada}}}</button>
+                </select><b class="caret careti"></b>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{colunaX}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='text' name='i3GEOuploaddbfnomex' value='' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{colunaY}}}</label>
+            <div class="col-md-6 ">
+                <input class="form-control input-lg " type='text' name='i3GEOuploaddbfnomey' value='' />
+            </div>
+        </div>
+        <div style="width: 100%;" class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{projecao}}}</label>
+            <div class="col-md-6">
+                <div id='i3GEOuploaddbfListaepsg'></div>
+            </div>
+        </div>
+		<button name="submit" onclick="i3GEOF.uploaddbf.submete(this)" class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>{{{adicmapa}}}
+        </button>
 		<input type='hidden' name='g_sid' value='{{{sid}}}'>
 		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
 	</form>
-	<iframe name='i3GEOuploaddbfiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+    <iframe name=i3GEOuploaddbfiframe style="text-align: left; border: 1px solid rgb(242, 232, 232);" width="98%" height="60px"></iframe>
 </div>

@@ -30,6 +30,7 @@ i3GEOF.conectargeorss = {
 	},
 	destroy: function(){
 	    //nao use this aqui
+	    i3GEOF.conectargeorss.renderFunction.call();
 	},
 	html:function() {
 	    var p = this._parameters,
@@ -38,7 +39,7 @@ i3GEOF.conectargeorss = {
 		    locaplic: i3GEO.configura.locaplic,
 		    namespace: p.namespace,
 		    idContainer: p.idContainer,
-		    botao: $trad("p14"),
+		    botao: $trad("adicmapa"),
 		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
 	    };
 	    i3f.renderFunction.call(
@@ -53,9 +54,10 @@ i3GEOF.conectargeorss = {
 	    var data = i3GEO.util.getFormData("#" + this._parameters.idContainer + " form");
 	    return data
 	},
-	adiciona: function(btn){
+	adiciona: function(formEl){
+	    var btn = $(formEl).find(":submit");
+	    btn.prop("disabled",true).find("span").removeClass("hidden");
 	    i3GEO.janela.abreAguarde();
-	    $(btn).button("disable").find("span").removeClass("hidden");
 	    var par = this.getFormData(),
 	    i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
@@ -66,23 +68,23 @@ i3GEOF.conectargeorss = {
 	    )
 	    .done(
 		    function(data, status){
+			btn.prop("disabled",false).find("span").addClass("hidden");
 			i3GEO.janela.fechaAguarde();
 			if(data.errorMsg != ""){
 			    i3GEO.janela.snackBar({content: data.errorMsg, style:'red'});
 			} else {
 			    i3GEO.atualiza();
 			    i3GEO.janela.snackBar({content: $trad("concluido",i3f.dicionario)});
-			    i3f.destroy();
 			}
-			$(btn).button("disable").find("span").addClass("hidden");
+			i3f.destroy();
 		    }
 	    )
 	    .fail(
 		    function(data){
+			btn.prop("disabled",false).find("span").addClass("hidden");
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 			i3f.destroy();
-			$(btn).button("disable").find("span").addClass("hidden");
 		    }
 	    );
 	}

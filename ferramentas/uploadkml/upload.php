@@ -16,8 +16,6 @@ if (ob_get_level() == 0) ob_start();
 ?>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../../css/input.css" />
-<link rel="stylesheet" type="text/css" href="../../css/geral.css" />
 <title></title>
 </head>
 <body bgcolor="white" style="background-color:white;text-align:left;">
@@ -112,7 +110,7 @@ if (isset($_FILES['i3GEOuploadkml']['name']) && strlen(basename($_FILES['i3GEOup
 		$salvo = $mapa->save($map_file);
 		//grava os templates de cada tema
 		echo "<b><p class='paragrafo' >Camadas criadas!!! Redesenhando o mapa.";
-		echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza()</script>";
+		echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza();window.parent.i3GEOF.uploadkml.doneok();</script>";
 	}
 	else
 	{
@@ -129,7 +127,7 @@ else
 restauraCon($map_file,$postgis_mapa);
 paraAguarde();
 function paraAguarde(){
-	echo "<script>window.scrollTo(0,10000);window.parent.i3GEOF.uploadkml.aguarde.visibility='hidden';</script>";
+    echo "<script>window.parent.i3GEOF.uploadkml.destroy();</script>";
 }
 function verificaNome($nome)
 {
