@@ -2153,11 +2153,17 @@ i3GEO.util =
 	comboEpsg : function(idCombo, onde, funcaoOnChange, valorDefault) {
 	    onde = $i(onde);
 	    onde.innerHTML = "<span style=color:red;font-size:10px; >buscando...</span>";
+	    if(!funcaoOnChange){
+		funcaoOnChange = "";
+	    }
+	    if(!valorDefault){
+		valorDefault = "";
+	    }
 	    var monta = function(retorno) {
 		var ins = [], i, n;
 		if (retorno.data !== undefined) {
 		    n = retorno.data.length;
-		    ins.push("<select id='" + idCombo + "' onChange='" + funcaoOnChange + "(this)' >");
+		    ins.push("<select class='form-control' name='" + idCombo + "' id='" + idCombo + "' onChange='" + funcaoOnChange + "(this)' >");
 		    for (i = 0; i < n; i++) {
 			ins.push("<option value='" + retorno.data[i].codigo + "'>" + retorno.data[i].nome + "</option>");
 		    }

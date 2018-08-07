@@ -3147,5 +3147,12 @@ g_traducao =
             pt : "Camada atualizada",
             en : "",
             es : ""
-        }]
+        }],
+        "adicmapa" : [
+            {
+                pt : "Adiconar ao mapa",
+                en : "",
+                es : ""
+            }
+        ]
     };

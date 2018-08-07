@@ -46,7 +46,7 @@ i3GEOF.conectarwms = {
 		    {
 			texto: Mustache.render(p.mustache, hash)
 		    });
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	},
 	getFormData: function(){
 	    var data = i3GEO.util.getFormData("#" + this._parameters.idContainer + " form");

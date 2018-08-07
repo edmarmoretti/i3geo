@@ -3,13 +3,6 @@ include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)));
 //como o nome da pasta mudou, essa linha mantem a compatibilidade
 verificaBlFerramentas("upload");
-/**
- * Carrega os programas javascript necessarios para a ferramenta
- * Esse programa e usado na tag <script> ou com a funcao scripttag do i3Geo
- * Alem de carregar os scripts, carrega tambem o template no formato MUSTACHE, definindo a variavel
- * javascript i3GEOF.uploaddbf.MUSTACHE
- * O template e substituido pelos valores definidos em index.js no momento da inicializacao da ferramenta
- */
 if(extension_loaded('zlib')){
 	ob_start('ob_gzhandler');
 }

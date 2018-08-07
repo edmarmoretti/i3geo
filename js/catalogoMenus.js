@@ -319,26 +319,26 @@ i3GEO.catalogoMenus = {
 	},
 	shp: function() {
 	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
-		    + "/ferramentas/upload/dependencias.php",
-		    "i3GEOF.uploadshp.iniciaJanelaFlutuante()",
-	    "i3GEOF.upload_script");
+		    + "/ferramentas/uploadshp/dependencias.php",
+		    "i3GEOF.uploadshp.start()",
+	    "i3GEOF.uploadshp_script");
 	},
 	dbfcsv: function() {
 	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
 		    + "/ferramentas/uploaddbf/dependencias.php",
-		    "i3GEOF.uploaddbf.iniciaJanelaFlutuante()",
+		    "i3GEOF.uploaddbf.start()",
 	    "i3GEOF.uploaddbf_script");
 	},
 	gpx: function() {
 	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
 		    + "/ferramentas/uploadgpx/dependencias.php",
-		    "i3GEOF.uploadgpx.iniciaJanelaFlutuante()",
+		    "i3GEOF.uploadgpx.start()",
 	    "i3GEOF.uploadgpx_script");
 	},
 	kml: function() {
 	    i3GEO.util.scriptTag(i3GEO.configura.locaplic
 		    + "/ferramentas/uploadkml/dependencias.php",
-		    "i3GEOF.uploadkml.iniciaJanelaFlutuante()",
+		    "i3GEOF.uploadkml.start()",
 	    "i3GEOF.uploadkml_script");
 	}
 };

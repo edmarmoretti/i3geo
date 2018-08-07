@@ -7,7 +7,7 @@
         </button>
     </div>
     <div class="separadorCabecalhoGuias">&nbsp;</div>
-    <div class="guiaOverflow" style="height: calc(100% - 45px);width: calc(100% - 12px);">
+    <div style="overflow-y: scroll; height: calc(100% - 45px);">
         <div class="form-inline" style="width: 100%;">
             <div class="text-center form-group" style="margin: 4px; display: inline-block">
                 <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.area();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
@@ -35,7 +35,6 @@
             </div>
         </div>
         <div class="clearfix"></div>
-
         <div id="searchInputFerramentas" data-template="<?php echo $configInc["pathtemplates"];?>/searchInput.html" style='display: block; text-align: center; width: 100%; padding-left: 1rem; padding-right: 1rem;'></div>
         <div id="migalhaFerramentas" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasMigalha.html" style='display: block; text-align: left;'></div>
         <div id="listaFerramentasLinks" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasLink.html" style='display: block; text-align: left'></div>

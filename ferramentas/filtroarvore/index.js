@@ -31,7 +31,7 @@ i3GEOF.filtroarvore = {
 	    hash["namespace"] = p.namespace;
 	    hash["idContainer"] = p.idContainer;
 	    i3f.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	    $('#' + p.idContainer + ' button[name="' + i3GEO.arvoreDeCamadas.FILTRO + '"]').button('toggle');
 	},
 	filtrar: function(filtro){

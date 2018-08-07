@@ -64,7 +64,7 @@ i3GEOF.opcoesmaparef = {
 			texto: Mustache.render(p.mustache, hash),
 			onclose: i3f.destroy
 		    });
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	    i3GEO.util.aplicaAquarela(p.idContainer);
 	    i3f.applyDataForm(p.dataForm);
 	},

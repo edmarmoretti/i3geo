@@ -60,7 +60,7 @@ i3GEOF.opcoeslegenda = {
 			texto: Mustache.render(p.mustache, hash),
 			onclose: i3f.destroy
 		    });
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	    i3GEO.util.comboFontes("i3GEOopcoeslegendafonte","i3GEOopcoeslegendafontef","form-control", p.dataForm.font );
 	    i3GEO.util.aplicaAquarela(p.idContainer);
 	    i3f.applyDataForm(p.dataForm);

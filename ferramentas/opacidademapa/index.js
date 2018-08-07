@@ -28,7 +28,7 @@ i3GEOF.opacidademapa = {
 	    hash["namespace"] = "opacidademapa";
 	    hash["idContainer"] = p.idContainer;
 	    i3GEOF.opacidademapa.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	    i3GEOF.opacidademapa.slide();
 
 	},

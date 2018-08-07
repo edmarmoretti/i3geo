@@ -35,7 +35,7 @@ i3GEOF.animacao = {
 	    hash["idContainer"] = p.idContainer;
 	    hash["idlista"] = p.idlista;
 	    i3f.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	    i3GEOF.animacao.listaDeCamadas();
 	},
 	listaDeCamadas: function(){

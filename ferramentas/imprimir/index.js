@@ -31,7 +31,7 @@ i3GEOF.imprimir = {
 	    hash["namespace"] = p.namespace;
 	    hash["idContainer"] = p.idContainer;
 	    i3f.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	},
 	pngExport: function(){
 	    i3GEO.janela.abreAguarde();

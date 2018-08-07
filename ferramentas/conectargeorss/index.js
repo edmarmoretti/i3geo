@@ -47,7 +47,7 @@ i3GEOF.conectargeorss = {
 			texto: Mustache.render(p.mustache, hash),
 			onclose: i3f.destroy
 		    });
-	    i3GEO.janela.applyScrollBar(p.idContainer);
+	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	},
 	getFormData: function(){
 	    var data = i3GEO.util.getFormData("#" + this._parameters.idContainer + " form");

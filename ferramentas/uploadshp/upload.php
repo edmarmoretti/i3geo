@@ -24,14 +24,11 @@ if(!file_exists($map_file)){
 	exit;
 }
 if (ob_get_level() == 0) ob_start();
+
 ?>
 <html>
 <head>
 <META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
-<link rel="stylesheet" type="text/css" href="../../css/input.css" />
-<link rel="stylesheet" type="text/css" href="../../css/geral.css" />
-<script src="../../js/util.js"></script>
-<title></title>
 </head>
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
@@ -194,7 +191,7 @@ else
 restauraCon($map_file,$postgis_mapa);
 paraAguarde();
 function paraAguarde(){
-	echo "<script>try{window.scrollTo(0,10000);window.parent.i3GEOF.upload.aguarde.visibility='hidden';}catch(e){};</script>";
+	echo "<script>window.parent.i3GEOF.uploadshp.destroy();</script>";
 }
 function verificaNome($nome){
 	if(strlen(basename($nome)) > 200){

@@ -52,20 +52,20 @@
         </button>
     </div>
     <div class="separadorCabecalhoGuias">&nbsp;</div>
-    <div class="guiaOverflow" style="height: calc(100% - 45px); width: calc(100% - 12px);">
+    <div style="overflow-y: scroll; height: calc(100% - 45px);">
         <!-- Esta div acrescenta a lista de layers graficos -->
-        <div id="listaLayersGr" style="overflow: none;" data-template="<?php echo $configInc["pathtemplates"];?>/camadaGr.html"></div>
+        <div id="listaLayersGr" style="width: calc(100% - 12px);overflow: none;" data-template="<?php echo $configInc["pathtemplates"];?>/camadaGr.html"></div>
         <!-- Esta div acrescenta a lista de camadas disponiveis no mapa atual -->
-        <div id="listaTemas" style="overflow: none;" data-template="<?php echo $configInc["pathtemplates"];?>/camada.html"></div>
+        <div id="listaTemas" style="width: calc(100% - 12px);overflow: none;" data-template="<?php echo $configInc["pathtemplates"];?>/camada.html"></div>
         <!-- Esta div acrescenta a lista de de camadas de fundo
                     A lista de camadas de fundo e obtida da variavel i3GEO.Interface.openlayers.LAYERSADICIONAIS
                     Essa variavel e definida via javascript, e no caso das interfaces padrao do i3Geo, e definida
                     no programa interface/config.php
                     -->
-        <div data-toggle="collapse" data-target="#collapseFundo" class="list-group condensed collapsed">
+        <div style="width: calc(100% - 22px);overflow: none;" data-toggle="collapse" data-target="#collapseFundo" class="list-group condensed collapsed">
             <label>{{{camadasDeFundo}}}</label>
         </div>
-        <div style="margin-left: 0px;" class="collapse text-left" id="collapseFundo">
+        <div style="width: calc(100% - 22px);overflow: none;margin-left: 0px;" class="collapse text-left" id="collapseFundo">
             <form>
                 <div id="listaFundo" class="form-group condensed" data-template="<?php echo $configInc["pathtemplates"];?>/camadaFundo.html"></div>
             </form>
