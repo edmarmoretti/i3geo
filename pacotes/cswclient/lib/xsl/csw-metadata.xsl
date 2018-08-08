@@ -134,14 +134,14 @@
 <!-- 'Identification' block -->
 <xsl:template match="gmd:MD_DataIdentification">
 <div class="captioneddiv">
-<h3>Identification info</h3>
+<h3>Informações de identificação</h3>
 <table class="meta"><tr></tr>
       <xsl:call-template name="tablerow">
-      <xsl:with-param name="cname" select="'Title'"/>
+      <xsl:with-param name="cname" select="'Título'"/>
       <xsl:with-param name="cvalue" select="./gmd:citation/gmd:CI_Citation/gmd:title/gco:CharacterString"/>
       </xsl:call-template>
       <xsl:call-template name="tablerow">
-      <xsl:with-param name="cname" select="'Date'"/>
+      <xsl:with-param name="cname" select="'Data'"/>
       <xsl:with-param name="cvalue" select="./gmd:citation/gmd:CI_Citation/gmd:date/gmd:CI_Date/gmd:data/gco:Date"/>
       </xsl:call-template>
       <!--xsl:call-template name="tablerow">
@@ -159,9 +159,10 @@
 
       <!--abstract is handled seperately because of text formatting-->
       <tr>
-      <td class="meta-param">Abstract:</td>
-      <td class="meta-value">
+      <td class="meta-param"><h4>Resumo:</h4></td>
+      <td class="meta-value"><h5>
       <xsl:apply-templates select="./gmd:abstract"/>
+      </h5>
       </td>
       </tr>
 </table>
@@ -231,11 +232,11 @@
 </div>
 </xsl:template>
 
-<!-- 'Identification->Geographic box' block -->
+<!-- 'Identification->Coordenadas' block -->
 <xsl:template match="gmd:extent">
 <xsl:if test="./gmd:EX_Extent/gmd:geographicElement">
 <div class="captioneddiv">
-<h3>Geographic box</h3>
+<h3>Coordenadas</h3>
 <br/>
 <table class="meta" width="100%" align="center"><tr></tr>
 <tr>
@@ -261,7 +262,7 @@
 <!-- 'Distribution Info' block -->
 <xsl:template match="gmd:MD_Distribution">
 <div class="captioneddiv">
-<h3>Distribution info</h3>
+<h3>Informações de identificação</h3>
 
 <table class="meta"><tr></tr>
     <xsl:for-each select="gmd:transferOptions/gmd:MD_DigitalTransferOptions/gmd:onLine/gmd:CI_OnlineResource">
@@ -295,7 +296,7 @@
 			      <td class="meta-param">OGC-WMS:</td>
 			      <td class="meta-value">
 			        <a><xsl:attribute name="href">
-				     <xsl:text>javascript:void(i3GEO.mapa.dialogo.listaLayersWms('</xsl:text>
+				     <xsl:text>javascript:void(i3GEOF.buscainde.listaLayersWms('</xsl:text>
 				     <xsl:value-of select="gmd:linkage/gmd:URL"/>
 			         <xsl:text>'))</xsl:text>
 					 </xsl:attribute>
@@ -316,7 +317,7 @@
 			      </td>
 			    </tr>
   		    </xsl:when>
-  		    
+
   		    <!--xsl:when test="linkage[text()]">
   			    <link type="url"><xsl:value-of select="linkage[text()]"/></link>
   		    </xsl:when-->
@@ -338,14 +339,16 @@
 <!-- 'Identification' block -->
 <xsl:template match="*[local-name()='Record']|*[local-name()='SummaryRecord']|*[local-name()='BriefRecord']">
 <div class="captioneddiv">
-<h3>Identification info</h3>
+<h3>Links e WebServices</h3>
+<xsl:apply-templates select="./dc:URI"/>
+<h3>Informações de identificação</h3>
 <table class="meta"><tr></tr>
       <xsl:call-template name="tablerow">
-      <xsl:with-param name="cname" select="'Title'"/>
+      <xsl:with-param name="cname" select="'Título'"/>
       <xsl:with-param name="cvalue" select="./dc:title"/>
       </xsl:call-template>
       <xsl:call-template name="tablerow">
-      <xsl:with-param name="cname" select="'Date'"/>
+      <xsl:with-param name="cname" select="'Data'"/>
       <xsl:with-param name="cvalue" select="./dc:date"/>
       </xsl:call-template>
       <xsl:call-template name="tablerow">
@@ -357,24 +360,24 @@
       <xsl:with-param name="cvalue" select="./dc:publisher"/>
       </xsl:call-template>
       <xsl:call-template name="tablerow">
-      <xsl:with-param name="cname" select="'Identifier'"/>
+      <xsl:with-param name="cname" select="'Identificador'"/>
       <xsl:with-param name="cvalue" select="./dc:identifier"/>
       </xsl:call-template>
 <xsl:if test="./dct:abstract">
 <tr><!-- this "tr" causes problems for new line replacement by "p" -->
-<td class="meta-param">Abstract:</td><td class="meta-value"><xsl:apply-templates select="./dct:abstract"/></td>
+<td class="meta-param"><h4>Resumo:</h4></td><td class="meta-value"><h5><xsl:apply-templates select="./dct:abstract"/></h5></td>
 </tr>
 </xsl:if>
       <xsl:for-each select="./dc:subject">
       <xsl:call-template name="tablerow">
-      <xsl:with-param name="cname" select="'Keyword'"/>
+      <xsl:with-param name="cname" select="'Tag'"/>
       <xsl:with-param name="cvalue" select="."/>
       </xsl:call-template>
       </xsl:for-each>
 </table>
 <xsl:apply-templates select="./ows:BoundingBox"/>
 <xsl:apply-templates select="./ows:WGS84BoundingBox"/>
-<xsl:apply-templates select="./dc:URI"/>
+
 </div>
 </xsl:template>
 
@@ -384,10 +387,10 @@
 <xsl:apply-templates select="text()"/>
 </xsl:template>
 
-<!-- 'Identification->Geographic box' block -->
+<!-- 'Identification->Coordenadas' block -->
 <xsl:template match="ows:BoundingBox|ows:WGS84BoundingBox">
 <div class="captioneddiv">
-<h3>Geographic box</h3>
+<h3>Coordenadas</h3>
 <table class="meta"><tr></tr>
       <xsl:call-template name="tablerow">
       <xsl:with-param name="cname" select="'Lower corner'"/>
@@ -403,30 +406,26 @@
 
 <xsl:template match="dc:URI">
 	<div class="captioneddiv">
-	<br></br>
 		<xsl:choose>
-		  <xsl:when test="@description = 'WMS'  and text() != ''">
+		<!--
+		<xsl:when test="contains(@protocol,'get-map')">
 			<div class='paragrafo' style='cursor:pointer;'>
-				<xsl:attribute name="onclick">
-				i3GEO.mapa.dialogo.listaLayersWms('<xsl:value-of select="."/>');
-				</xsl:attribute>
-				<img style="cursor:pointer;text-align:left" src="../imagens/branco.gif" class="conectarwms iconeMini iconeGuiaMovelMouseOut" />
-
-				<label style='top:-5px;position:relative'>Adiciona ao mapa</label>
-			</div>	
-
-		  </xsl:when>
-		  <xsl:when test="contains(@protocol,'get-map') and text() != ''">
-			<div class='paragrafo' style='cursor:pointer;'>
-				<xsl:attribute name="onclick">
-				i3GEO.mapa.dialogo.listaLayersWms('<xsl:value-of select="."/>');
-				</xsl:attribute>
-				<img style="cursor:pointer;text-align:left" src="../imagens/branco.gif" class="conectarwms iconeMini iconeGuiaMovelMouseOut" />
-				<label style='top:-5px;position:relative;cursor:pointer;'>Adiciona ao mapa</label>
+				<xsl:value-of select="@protocol"/>
 			</div>
-
 		  </xsl:when>
-
+		   -->
+		  <xsl:when test="contains(@protocol,'wms')">
+			<div>
+				<h4><xsl:value-of select="@protocol"/><small><xsl:value-of select="."/></small></h4>
+				<button class='btn btn-primary btn-sm btn-raised'><xsl:attribute name="onclick">i3GEOF.buscainde.listaLayersWms('<xsl:value-of select="."/>');i3GEO.janela.closeMsg();return false;</xsl:attribute>Adicionar ao mapa</button>
+			</div>
+		  </xsl:when>
+		  <xsl:when test="@description = 'WMS' and text() != ''">
+			<div>
+				<h4><xsl:value-of select="@protocol"/><small><xsl:value-of select="."/></small></h4>
+				<button class='btn btn-primary btn-sm btn-raised'><xsl:attribute name="onclick">i3GEOF.buscainde.listaLayersWms('<xsl:value-of select="."/>');i3GEO.janela.closeMsg();return false;</xsl:attribute>Adicionar ao mapa</button>
+			</div>
+		  </xsl:when>
 		  <xsl:when test="(contains(@protocol,'download') or (contains(@protocol,'link'))) and text() != '' and contains(text(),'http')">
 			<a target='_blank'>
 				<xsl:attribute name="href">
@@ -445,9 +444,7 @@
 			</a>
 		  </xsl:when>
 		</xsl:choose>
-
 	</div>
-
 </xsl:template>
 
 <!-- End Metadata Dublin Core -->
@@ -458,7 +455,7 @@
     <xsl:with-param name="from" select="'&#10;&#10;'"/>
     <xsl:with-param name="string" select="."/>
   </xsl:call-template>
-</xsl:template> 
+</xsl:template>
 
 <!-- replace all occurences of the character(s) `from'
                    by  <p/> in the string `string'.-->
@@ -488,8 +485,8 @@
   <xsl:choose>
     <xsl:when test="string($cvalue)">
 	<tr>
-    <td class="meta-param"><xsl:value-of select="$cname"/><xsl:text>: </xsl:text></td>
-    <td class="meta-value"><xsl:value-of select="$cvalue"/></td>
+    <td class="meta-param"><h4><xsl:value-of select="$cname"/><xsl:text>: </xsl:text></h4></td>
+    <td class="meta-value"><h4><xsl:value-of select="$cvalue"/></h4></td>
 	</tr>
     </xsl:when>
     <xsl:otherwise>

@@ -400,27 +400,7 @@ i3GEO.mapa =
 		}
 	    }
 	},
-	//parece ser usado no busca dados na inde???
 	dialogo : {
-	    listaLayersWms : function(servico) {
-		i3GEO.janela.cria(
-			"400px",
-			"300px",
-			i3GEO.configura.locaplic + "/ferramentas/conectarwms/listalayers.php?servico=" + servico,
-			"",
-			"",
-			"<div class='i3GeoTituloJanela'>" + $trad("a4")
-			+ "<a class=ajuda_usuario target=_blank href='"
-			+ i3GEO.configura.locaplic
-			+ "/ajuda_usuario.php?idcategoria=4&idajuda=28' ><b> </b></a></div>",
-			"i3GEO.conectarwms",
-			false,
-			"hd",
-			"",
-			"",
-			"",
-			true);
-	    },
 	    /**
 	     * Function: wms
 	     *

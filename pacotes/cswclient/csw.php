@@ -40,8 +40,9 @@ include ("../../ms_configura.php");
                     <option value="title">T&iacute;tulo</option>
                     <option value="subject">Descri&ccedil;&atilde;o</option>
                 </select> <select class='form-control' name="operator">
-                    <option value="contains">igual</option>
+
                     <option value="equals">cont&eacute;m</option>
+                    <option value="contains">igual</option>
                 </select>
                 <input name="query" class='form-control' placeholder="digite aqui" type='text' value='' />
             </div>
@@ -59,9 +60,7 @@ include ("../../ms_configura.php");
                 </div>
             </div>
         </div>
-
     </div>
-
     <!-- query-container -->
     <div id="overlay" style="visibility: hidden"></div>
     <script type="text/javascript">

@@ -1,6 +1,10 @@
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
+//
+//A funcao javascript que faz a inclusao da camada WMS
+//e definida em i3geo/pacotes/cswclient/lib/xsl/csw-metadata.xsl
+//
 i3GEOF.buscainde = {
 	renderFunction: i3GEO.janela.formModal,
 	_parameters : {
@@ -48,12 +52,17 @@ i3GEOF.buscainde = {
 			texto: Mustache.render(p.mustache, hash),
 			close: i3f.destroy
 		    });
+	},
+	listaLayersWms : function(servico) {
+	    i3GEO.catalogoOgc.escondeCatalogoPrincipal();
+	    i3GEO.catalogoOgc.listaCamadas('WMS',7,'WMS',servico,0,'WMS','undefined');
+	    this.destroy();
 	}
 };
 //aplica ao codigo i3GEOF definicoes feitas na interface do mapa
 //isso permite a substituicao de funcoes e parametros
 if(i3GEO.configura.ferramentas.hasOwnProperty("buscainde")){
-  jQuery.each( i3GEO.configura.ferramentas.buscainde, function(index, value) {
-      i3GEOF.buscainde[index] = i3GEO.configura.ferramentas.buscainde[index];
-  });
+    jQuery.each( i3GEO.configura.ferramentas.buscainde, function(index, value) {
+	i3GEOF.buscainde[index] = i3GEO.configura.ferramentas.buscainde[index];
+    });
 }

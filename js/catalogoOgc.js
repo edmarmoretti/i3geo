@@ -28,15 +28,16 @@ i3GEO.catalogoOgc = {
 	atualizaMigalha: function(){
 	    var migalha = i3GEO.catalogoOgc.MIGALHA;
 	    var n = migalha.length;
-
 	    var nome = migalha[n - 1].nome;
-	    var onclick = migalha[n - 2].onclick;
-
+	    if(migalha[n - 2]){
+		var onclick = migalha[n - 2].onclick;
+	    } else {
+		var onclick = i3GEO.catalogoOgc.inicia;
+	    }
 	    var t = Mustache.to_html(
 		    i3GEO.template.catalogoMigalha,
 		    {"nome":nome,"onclick":"i3GEO.catalogoOgc.MIGALHA.pop();i3GEO.catalogoOgc.MIGALHA.pop();" + onclick}
 	    );
-
 	    $("#" + i3GEO.catalogoOgc.config.idOndeMigalha).html(t);
 	    $("#i3GEOguiaMovelConteudo").scrollTop(0);
 	},

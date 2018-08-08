@@ -34,7 +34,8 @@ CSWClient.prototype.abreINDE = function(id)
 }
 CSWClient.prototype.adicionaI3geo = function(wms)
 {
-   i3GEO.mapa.dialogo.listaLayersWms(wms);
+    i3GEO.catalogoOgc.inicia();
+    //i3GEO.mapa.dialogo.listaLayersWms(wms);
 }
 CSWClient.prototype.setCSWHost = function(host)
 {
@@ -94,7 +95,7 @@ CSWClient.prototype.handleCSWResponse = function(request, xml)
    //this.positionPopUp(document.getElementById('popup'), document.getElementById('results'))
    //this.positionPopUp(document.getElementById('popup'), document.getElementById('cswclient'))
    //this.showDiv(document.getElementById('popup'));
-   i3GEO.janela.mensagemSimples("<div style='text-align:left;overflow:auto;height: 250px;'>"+output+"</div>");
+   i3GEO.janela.mensagemSimples("<div style='text-align:left;overflow:auto;height: 250px;margin:10px;'>"+output+"</div>");
    return;
 }
  outputDiv.innerHTML = output;
