@@ -306,6 +306,11 @@ h2 small {
   height: auto;
   opacity: 1;
 }
+#botoesTpl {
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+}
 @media (max-width: 767px) {
   #snackbar-container {
     left: 0px !important;

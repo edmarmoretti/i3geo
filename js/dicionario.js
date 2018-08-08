@@ -3154,5 +3154,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "arqimp" : [
+            {
+                pt : "Arquivo importado",
+                en : "",
+                es : ""
+            }
         ]
     };

@@ -400,11 +400,7 @@ i3GEO.mapa =
 		}
 	    }
 	},
-	/**
-	 * Section: i3GEO.mapa.dialogo
-	 *
-	 * Abre as telas de dialogo das opcoes de manipulacao do mapa atual
-	 */
+	//parece ser usado no busca dados na inde???
 	dialogo : {
 	    listaLayersWms : function(servico) {
 		i3GEO.janela.cria(

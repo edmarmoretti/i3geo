@@ -10,8 +10,8 @@
 				 <option value="subject">Descricao</option>
                </select>
                <select name="operator">
-				 <option value="contains">contem</option>
-				 <option value="equals">igual</option>
+				 <option value="contains">igual</option>
+				 <option value="equals">contem</option>
                </select>
                <input type="text" name="query" value="" size="24"/>
                <p/>

@@ -94,7 +94,7 @@ CSWClient.prototype.handleCSWResponse = function(request, xml)
    //this.positionPopUp(document.getElementById('popup'), document.getElementById('results'))
    //this.positionPopUp(document.getElementById('popup'), document.getElementById('cswclient'))
    //this.showDiv(document.getElementById('popup'));
-   i3GEO.janela.mensagemSimples("<div style='text-align:left;overflow:auto;height: 250px;'>"+output+"</div>","",450);
+   i3GEO.janela.mensagemSimples("<div style='text-align:left;overflow:auto;height: 250px;'>"+output+"</div>");
    return;
 }
  outputDiv.innerHTML = output;
@@ -189,7 +189,6 @@ CSWClient.prototype.getRecordById = function(id)
 
 CSWClient.prototype.sendCSWRequest = function(request)
 {
-
  var xml = Sarissa.getDomDocument();
  xml.async = false;
  var xmlhttp = new XMLHttpRequest();
@@ -204,6 +203,7 @@ CSWClient.prototype.sendCSWRequest = function(request)
    xmlhttp.open("POST", this.cswhost, false);
    xmlhttp.setRequestHeader("Content-type", "application/xml");
  }
+
 
  //xmlhttp.open("POST", this.proxy, false);
  //xmlhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");

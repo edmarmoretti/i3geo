@@ -901,58 +901,8 @@ i3GEO.janela =
 		funcaoOk.call();
 	    });
 	},
-	/**
-	 * Function: mensagemSimples
-	 *
-	 * Mostra uma janela simples com uma mensagem
-	 *
-	 * Parametros:
-	 *
-	 * {String} - texto da mensagem
-	 *
-	 * {String} - texto do cabecalho
-	 *
-	 * {numeric} - (opcional) largura em pixel
-	 *
-	 * {numeric} - (opcional) altura em pixel
-	 */
-	mensagemSimples : function(texto, cabecalho, largura, altura) {
-	    var janela;
-	    if (!largura) {
-		largura = 300;
-	    }
-	    if (!altura) {
-		altura = 300;
-	    }
-	    if (!cabecalho) {
-		cabecalho = "";
-	    }
-	    janela = new YAHOO.widget.SimpleDialog(i3GEO.util.generateId(), {
-		width : parseInt(largura, 10) + "px",
-		height : parseInt(altura, 10) + "px",
-		fixedcenter : true,
-		visible : true,
-		draggable : true,
-		zIndex : 100000,
-		textAlign : "left",
-		close : true,
-		modal : false,
-		effect : {
-		    effect : YAHOO.widget.ContainerEffect.FADE,
-		    duration : 0.25
-		},
-		constraintoviewport : true,
-		text : ""
-	    });
-	    YAHOO.i3GEO.janela.manager.register(janela);
-	    // $i(id + '_corpo').style.height = parseInt(waltura, 10) + "px";
-	    janela.setHeader(cabecalho);
-	    janela.render(document.body);
-	    janela.setHeader("<div class='i3GeoTituloJanela'>"+cabecalho+"</div>");
-	    janela.cfg.setProperty("text", texto);
-	    janela.bringToTop();
-	    janela.show();
-	    return janela;
+	mensagemSimples : function(texto) {
+	    this.closeMsg(texto);
 	},
 	/**
 	 * Adiciona no cabe&ccedil;alho da janela um combo com a lista de temas para janelas abertas por ferramentas

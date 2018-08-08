@@ -10,9 +10,6 @@ $map_file = $_SESSION["map_file"];
 ?>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../../css/input.css" />
-<link rel="stylesheet" type="text/css" href="../../css/geral.css" />
-<title></title>
 </head>
 <body bgcolor="white" style="background-color:white;text-align:left;">
 <p>
@@ -22,7 +19,7 @@ include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 require_once (dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-
+error_reporting(0);
 $dirmap = dirname($map_file);
 $arquivo = "";
 
@@ -30,7 +27,7 @@ if(isset($logExec) && $logExec["upload"] == true){
 	i3GeoLog("prog: importarwmc filename:" . $_FILES['i3GEOimportarwmc']['name'],$dir_tmp);
 }
 
-if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]) && strlen(basename($_FILES['i3GEOimportarwmc']['name'])) < 200)
+if(isset($_FILES['i3GEOimportarwmc']['name']) && strlen(basename($_FILES['i3GEOimportarwmc']['name'])) < 200)
 {
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	//verifica nomes
@@ -48,38 +45,26 @@ if(isset($_FILES['i3GEOimportarwmc']['name']) && !($_POST["i3GEOimportarwmcurl"]
 
 	$checkphp = fileContemString($_FILES['i3GEOimportarwmc']['tmp_name'],"<?php");
 	if($checkphp == true){
+	    echo "Arquivo invalido";
 		exit;
 	}
 
 	$Arquivo = $_FILES['i3GEOimportarwmc']['tmp_name'];
+
 	$status =  move_uploaded_file($Arquivo,$dirmap."/".$ArquivoDest);
-	$arquivo = $dirmap."/".$_FILES['i3GEOimportarwmc']['name'];
+
+	$arquivo = $dirmap."/".$ArquivoDest;
 }
-if($_POST["i3GEOimportarwmcurl"])
-{
-	$s = PHP_SHLIB_SUFFIX;
-	if(!function_exists('curl_init'))
-	{@dl( 'php_curl'.'.'.$s );}
-	if(!function_exists('curl_init'))
-	{echo "curl n&atilde;o instalado";}
-	else{
-		$curl = curl_init();
-		curl_setopt ($curl, CURLOPT_URL, $_POST["i3GEOimportarwmcurl"]);
-		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		$result = curl_exec($curl);
-		curl_close ($curl);
-		$arquivo = $dirmap."/".nomeRandomico();
-		gravaDados(array($result),$arquivo);
-	}
+if($arquivo != "" && file_exists($arquivo)){
+    incluiWMC();
 }
-if($arquivo != "")
-{incluiWMC();}
 paraAguarde();
 function incluiWMC(){
 	global $map_file,$arquivo;
 	$mapa = ms_newMapObj($map_file);
 	$proj = $mapa->getprojection();
-	$mapa->loadMapContext($arquivo,"MS_TRUE");
+	$mapa->loadMapContext($arquivo,true);
+	unlink($arquivo);
 	$layers = $mapa->getalllayernames();
 	foreach($layers as $nome){
 		$l = $mapa->getlayerbyname($nome);
@@ -96,8 +81,7 @@ function incluiWMC(){
 	echo "Arquivo carregado com sucesso!";
 }
 function paraAguarde(){
-	echo "<script>window.parent.i3GEOF.importarwmc.aguarde.visibility='hidden';</script>";
-	echo "<script>window.parent.i3GEO.atualiza()</script>";
+	echo "<script>window.parent.i3GEO.atualiza();window.parent.i3GEOF.importarwmc.doneok()</script>";
 }
 function verificaNome($nome)
 {

@@ -434,6 +434,12 @@ Botoes material
     margin-bottom: 0px;
 }
 
+.modal-content .modal-body {
+    padding-right: 10px;
+    padding-bottom: 16px;
+    padding-left: 0px;
+}
+
 .modal-body .form-group .form-control {
 	color: initial;
 	background-color: initial;

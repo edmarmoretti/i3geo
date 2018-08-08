@@ -47,7 +47,7 @@
 <!--xsl:if test="number(@numberOfRecordsMatched) > number(@numberOfRecordsReturned)"-->
 <!-- because ESRI GPT returns always numberOfRecordsMatched = 0 -->
 <xsl:if test="number(@numberOfRecordsReturned) > 0 and ($start > 1 or number($next) > 0)">
-  <h3 style="float:right;top: -2.5em;">
+  <h5 style="float:right;top: -2.5em;">
     <xsl:if test="$start > 1">
       <a>
         <xsl:attribute name="href">
@@ -55,7 +55,7 @@
     	  <xsl:value-of select="number($start)-number(../../request/@maxrecords)"/>
           <xsl:text>'))</xsl:text> 
 	    </xsl:attribute>
-        <xsl:text>&lt;&lt; previous</xsl:text>
+        <xsl:text>&lt;&lt; anterior</xsl:text>
       </a>
     </xsl:if>
     <xsl:text>  || </xsl:text> 
@@ -66,24 +66,24 @@
 	  <xsl:value-of select="$next"/>
           <xsl:text>'))</xsl:text> 
 	</xsl:attribute>
-        <xsl:text>next &gt;&gt;</xsl:text>
+        <xsl:text>proximo &gt;&gt;</xsl:text>
       </a>
     </xsl:if>
-  </h3>
+  </h5>
 </xsl:if>
 
-<h3>Total: <xsl:value-of select="@numberOfRecordsReturned"/>
+<h5>Total: <xsl:value-of select="@numberOfRecordsReturned"/>
 (of <xsl:value-of select="@numberOfRecordsMatched"/>)
-</h3>
+</h5>
     
 <br/>
-  <ol>
+  <ol class="list-group">
     <xsl:attribute name="start">
       <xsl:value-of select="$start"/>
     </xsl:attribute>
     <xsl:for-each select="./*[local-name()='SummaryRecord']|./*[local-name()='BriefRecord']|./*[local-name()='Record']">
-     <li>
-      <strong><xsl:text>Title: </xsl:text></strong>
+     <li class="list-group-item">
+      <h4 class="list-group-item-heading">
       <a>
       <xsl:attribute name="href">
         <xsl:text>javascript:(csw_client.abreINDE</xsl:text>
@@ -100,17 +100,19 @@
         </xsl:otherwise>
       </xsl:choose>
       </a>
-      <br/>
+      </h4>
+      <h5 class="list-group-item-text">
       <xsl:apply-templates select="./dct:abstract"/>
-      <br/>
-      <strong><xsl:text>Keywords: </xsl:text></strong>
+      </h5>
+      <h5 class="list-group-item-text">
+       <strong><xsl:text>Keywords: </xsl:text></strong>
       <xsl:for-each select="./dc:subject">
         <xsl:if test=".!=''">
             <xsl:if test="position() &gt; 1">, </xsl:if>
             <i><xsl:value-of select="."/></i>
         </xsl:if>
       </xsl:for-each>
-      <hr/>
+      </h5>
       </li>
   </xsl:for-each> 
   </ol> 

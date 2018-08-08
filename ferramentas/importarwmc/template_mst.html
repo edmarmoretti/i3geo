@@ -1,22 +1,18 @@
-<div class='container-fluid'>
-	<form class="form-horizontal" role="form" id='i3GEOimportarwmcf' target='i3GEOimportarwmciframe' action='{{{locaplic}}}/ferramentas/importarwmc/upload.php' method='post' ENCTYPE='multipart/form-data'>
-		<h5></h5>
-		<div class="input-group-btn">
-			<button type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">XML</button>
-			<input name="i3GEOimportarwmc" onchange="$(this).parent().parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
-			<span class="form-control"></span>
-		</div>
-
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="" >Ou URL</label>
-			<input class="form-control input-lg" type='text' value='' name='i3GEOimportarwmcurl' />
-		</div>
-
-		<button onclick="i3GEOF.importarwmc.submete()" class='btn btn-primary btn-sm btn-raised' name='submit'>{{{importar}}}</button>
-
-
-		<input type='hidden' name='g_sid' value='{{{sid}}}'>
-		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
-	</form>
-	<iframe name='i3GEOimportarwmciframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form accept-charset="utf-8" class="form-horizontal" target="i3GEOimportarwmciframe" action="{{{locaplic}}}/ferramentas/importarwmc/upload.php" method="post" ENCTYPE="multipart/form-data">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">Arquivo WMC</label>
+            <div class="col-md-6 ">
+                <input required onclick="$(this).parent().find('input[type=file]').click();" class="form-control input-lg" type='text' name="i3GEOimportarwmc" />
+                <input name="i3GEOimportarwmc" onchange="$(this).parent().find('.form-control').val($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                <b class="caret careti"></b>
+            </div>
+        </div>
+        <button name="submit" onclick="i3GEOF.importarwmc.submete(this)" class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>{{{importar}}}
+        </button>
+        <input type='hidden' name='g_sid' value='{{{sid}}}'>
+        <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+    </form>
+    <iframe name=i3GEOimportarwmciframe style="text-align: left; border: 1px solid rgb(242, 232, 232);" width="98%" height="60px"></iframe>
 </div>

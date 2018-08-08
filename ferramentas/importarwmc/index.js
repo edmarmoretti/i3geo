@@ -1,154 +1,66 @@
-/*
-Title: Importar WMC
-
-Importa um arquivo WMC (Web Map Context) e acrescenta ascamadas ao mapa atual.
-
-Veja:
-
-<i3GEO.arvoreDeTemas.dialogo.importarwmc>
-
-Arquivo:
-
-i3geo/ferramentas/importarwmc/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-
-
 if(typeof(i3GEOF) === 'undefined'){
 	var i3GEOF = {};
 }
-/*
-Classe: i3GEOF.importarwmc
-*/
 i3GEOF.importarwmc = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
-	aguarde: "",
-	/**
-	 * Objeto com as propriedades de cada janela. A chave e o id da janela armazenado em i3GEO.tabela.janelas
-	 */
-	propJanelas : {},
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.importarwmc.dicionario);
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["sid"] = i3GEO.configura.sid;
-		return dicionario;
+	renderFunction: i3GEO.janela.formModal,
+	_parameters : {
+	    "mustache": "",
+	    "idContainer": "i3GEOimportarwmc",
+	    "namespace": "importarwmc",
+	    "dataForm": ""
 	},
-	/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		if(i3GEOF.importarwmc.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/importarwmc/template_mst.html", function(template) {
-				i3GEOF.importarwmc.MUSTACHE = template;
-				i3GEOF.importarwmc.inicia(iddiv);
-			});
-			return;
-		}
-
-			$i(iddiv).innerHTML = i3GEOF.importarwmc.html();
-
-
+	start : function(){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		    if(p.dataForm.errorMsg && p.dataForm.errorMsg != ""){
+			i3GEO.janela.snackBar({content: p.dataForm.errorMsg, style:'red'});
+			i3GEO.janela.fechaAguarde();
+			i3f.destroy();
+		    }
+		}).fail(function(data) {
+		    i3GEO.janela.snackBar({content: "Erro. " + data.status, style:'red'});
+		    i3f.destroy();
+		});
+	    } else {
+		i3f.html();
+	    }
 	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	*/
+	destroy: function(){
+	    //nao use this aqui
+	    i3GEOF.importarwmc.renderFunction.call();
+	},
+	doneok: function(){
+	    i3GEO.janela.snackBar({content: $trad("arqimp")});
+	    this.destroy();
+	},
 	html:function() {
-		var ins = Mustache.render(i3GEOF.importarwmc.MUSTACHE, i3GEOF.importarwmc.mustacheHash());
-		return ins;
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    sid: i3GEO.configura.sid,
+		    idContainer: p.idContainer,
+		    importar : $trad("importar",i3GEOF.importarwmc.dicionario),
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			onclose: i3f.destroy
+		    });
 	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var janela,divid,titulo,cabecalho,minimiza;
-		if ($i("i3GEOF.importarwmc")) {
-			return;
-		}
-		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.importarwmc",200);
-		};
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("x53") + "</span></div>";
-		titulo = "</div><a class='i3GeoTituloJanelaBs' href='javascript:void(0)' onclick='i3GEO.ajuda.ferramenta(98)' >" + $trad("x53")+"</a>";
-		janela = i3GEO.janela.cria(
-			"320px",
-			"280px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.importarwmc",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			true,
-			"",
-			"",
-			"",
-			"",
-			"98"
-		);
-		divid = janela[2].id;
-		$i("i3GEOF.importarwmc_corpo").style.backgroundColor = "white";
-		i3GEOF.importarwmc.aguarde = $i("i3GEOF.importarwmc_imagemCabecalho").style;
-		i3GEOF.importarwmc.inicia(divid);
-	},
-	/*
-	Function: submete
-
-	Submete o arquivo ao servidor.
-	*/
-	submete: function(){
-		if(i3GEOF.importarwmc.aguarde.visibility==="visible")
-		{return;}
-		i3GEOF.importarwmc.aguarde.visibility="visible";
-		$i("i3GEOimportarwmcf").submit();
+	submete: function(btn){
+	    i3GEO.janela.abreAguarde();
+	    $(btn).prop("disabled",true).find("span").removeClass("hidden");
+	    $("#" + this._parameters.idContainer + " form").submit();
 	}
 };

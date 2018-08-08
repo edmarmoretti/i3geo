@@ -295,7 +295,7 @@
 			      <td class="meta-param">OGC-WMS:</td>
 			      <td class="meta-value">
 			        <a><xsl:attribute name="href">
-				     <xsl:text>javascript:void(window.open('</xsl:text>
+				     <xsl:text>javascript:void(i3GEO.mapa.dialogo.listaLayersWms('</xsl:text>
 				     <xsl:value-of select="gmd:linkage/gmd:URL"/>
 			         <xsl:text>'))</xsl:text>
 					 </xsl:attribute>
