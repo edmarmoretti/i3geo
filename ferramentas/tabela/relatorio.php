@@ -151,12 +151,15 @@ $fechou = $layer->close();
 restauraCon($map_file,$postgis_mapa);
 
 if(isset($_GET["tiporel"]) && $_GET["tiporel"] == "csv"){
-	echo "<pre>";
+	ob_end_clean();
+	header("Content-type: text/csv");
 	echo implode(";",explode(",",$nomesrel));
-	if($arearel == "true")
-	{echo ";&aacute;rea em ha \n";}
-	else
-	{echo "\n";}
+	if($arearel == "true"){
+	    echo ";&aacute;rea em ha \n";
+	}
+	else{
+	    echo "\n";
+	}
 	foreach ($registros as $linhas){
 		echo converte(implode(";",$linhas))."\n";
 	}
@@ -177,7 +180,6 @@ body,td
 
 </style>
 <body>
-<img src='../../imagens/i3geo1.jpg' /><br>
 <?php
 echo "<span style=font-size:18px; >Relat&oacute;rio do tema: <b>".converte($layer->getmetadata("TEMA"))."</b><br></span>";
 $ocorrencias = count($registros);
