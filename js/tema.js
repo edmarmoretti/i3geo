@@ -540,8 +540,6 @@ i3GEO.tema =
 			+ "/ajuda_usuario.php?idcategoria=7&idajuda=68' ><b> </b></a>",
 			"comentario" + Math.random());
 	    },
-
-
 	    /**
 	     * Function: mmscale
 	     *
@@ -943,6 +941,16 @@ i3GEO.tema =
 		    i3GEO.tema.mudanome(idtema,valor);
 		};
 		i3GEO.janela.prompt($trad("novonome"),temp);
-	    }
+	    },
+	    selecao : function(idtema) {
+		i3GEO.mapa.ativaTema(idtema);
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.tema.dialogo.selecao()",
+			"selecao",
+			"selecao",
+			"dependencias.php",
+			"i3GEOF.selecao.iniciaJanelaFlutuante()"
+		);
+	    },
 	}
 };
