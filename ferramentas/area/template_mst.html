@@ -1,6 +1,8 @@
-<div class='container-fluid'>
-	<div id="mostraarea_calculo"><h5 class="alert alert-info">{{{inicia}}}</h5></div>
-	<div id="mostraarea_calculo_parcial"></div>
-	<button onclick="i3GEO.mapa.dialogo.wkt2layer(i3GEOF.area.ultimoWkt, i3GEOF.area.ultimaMedida);" class='btn btn-primary btn-sm btn-raised'>{{{incorporar}}}</button>
-    <button onclick="i3GEOF.area.removeFiguras()" class='btn btn-primary btn-sm btn-raised'>{{{remover}}}</button>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <div class="row">
+        <div style="text-align:left;font-size: 1.5rem;" class="col-md-6" id="mostraarea_calculo"></div>
+        <div style="text-align:left;font-size: 1.5rem;" class="col-md-6" id="mostraarea_calculo_parcial"></div>
+    </div>
+    <button onclick="i3GEO.mapa.dialogo.wkt2layer(i3GEOF.area.ultimoWkt, i3GEOF.area.ultimaMedida);" class='hidden-sm hidden-xs btn btn-primary btn-sm btn-raised'>{{{incorporar}}}</button>
+    <button onclick="i3GEOF.area.removeFiguras()" class='hidden-sm hidden-xs btn btn-primary btn-sm btn-raised'>{{{remover}}}</button>
 </div>

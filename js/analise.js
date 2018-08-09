@@ -435,7 +435,7 @@ i3GEO.analise =
 			"distancia",
 			"distancia",
 			"dependencias.php",
-		"i3GEOF.distancia.iniciaJanelaFlutuante()");
+		"i3GEOF.distancia.start()");
 	    },
 	    area : function() {
 		i3GEO.util.dialogoFerramenta(
@@ -443,7 +443,7 @@ i3GEO.analise =
 			"area",
 			"area",
 			"dependencias.php",
-		"i3GEOF.area.iniciaJanelaFlutuante()");
+		"i3GEOF.area.start()");
 	    },
 	    juntamedidasvariavel : function(tema) {
 		if(!tema){

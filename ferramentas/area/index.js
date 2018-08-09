@@ -16,27 +16,57 @@ i3GEOF.area =
 	 * Armazena a ultima medida
 	 */
 	ultimaMedida : "",
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-	    var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.area.dicionario);
-	    dicionario["sid"] = i3GEO.configura.sid;
-	    dicionario["locaplic"] = i3GEO.configura.locaplic;
-	    return dicionario;
+	renderFunction: i3GEO.janela.formModal,
+	_parameters : {
+	    "mustache": "",
+	    "idContainer": "i3GEOareaContainer",
+	    "namespace": "area"
 	},
-	inicia : function(iddiv) {
-	    if(i3GEOF.area.MUSTACHE == ""){
-		$.get(i3GEO.configura.locaplic + "/ferramentas/area/template_mst.html", function(template) {
-		    i3GEOF.area.MUSTACHE = template;
-		    i3GEOF.area.inicia(iddiv);
+	start : function(){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    i3GEO.janela.fechaAguarde();
+		    p.mustache = r1;
+		    i3f.html();
+		}).fail(function(data) {
+		    i3GEO.janela.fechaAguarde();
+		    i3GEO.janela.snackBar({content: "Erro. " + data.status, style:'red'});
+		    i3f.destroy();
 		});
-		return;
+	    } else {
+		i3f.html();
 	    }
+	},
+	destroy: function(){
+	    //nao use this aqui
+	    i3GEOF.area.renderFunction.call();
+	    i3GEO.analise.pontos = {};
+	    i3GEOF.area.ultimaMedida = "";
+	    i3GEOF.area[i3GEO.Interface["ATUAL"]].fechaJanela();
+	},
+	html:function() {
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			header: "<span class='copyToMemory' onclick='i3GEO.util.copyToClipboard(i3GEOF.area.ultimaMedida);return false;'></span>",
+			onclose: i3f.destroy
+		    });
 	    i3GEO.eventos.cliquePerm.desativa();
-	    $i(iddiv).innerHTML = i3GEOF.area.html();
 	    i3GEOF.area[i3GEO.Interface["ATUAL"]].inicia();
+	    i3GEO.janela.snackBar({content: $trad("inicia",i3f.dicionario)});
 	},
 	isOn : function() {
 	    if($i("i3GEOF.area")){
@@ -44,80 +74,6 @@ i3GEOF.area =
 	    } else {
 		return false;
 	    }
-	},
-	/*
-	 * Function: html
-	 *
-	 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	 *
-	 * Retorno:
-	 *
-	 * String com o c&oacute;digo html
-	 */
-	html : function() {
-	    var ins = Mustache.render(i3GEOF.area.MUSTACHE, i3GEOF.area.mustacheHash());
-	    return ins;
-	},
-	/*
-	 * Function: iniciaJanelaFlutuante
-	 *
-	 * Cria a janela flutuante para controle da ferramenta.
-	 */
-	iniciaJanelaFlutuante : function() {
-	    var minimiza, cabecalho, janela, divid, temp, titulo,imagemxy;
-	    if ($i("i3GEOF.area")) {
-		return;
-	    }
-	    cabecalho = "";
-	    minimiza = "";
-	    // cria a janela flutuante
-	    titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("areaAprox") + "</span></div>";
-	    janela =
-		i3GEO.janela.cria(
-			"250px",
-			"auto",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.area",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			true,
-			"",
-			"",
-			"nao",
-			"",
-			"51"
-		);
-	    divid = janela[2].id;
-	    i3GEOF.area.inicia(divid);
-	    temp =
-		function() {
-		i3GEOF.area.pontos = {};
-		var janela;
-		i3GEO.eventos.cliquePerm.ativa();
-		janela = YAHOO.i3GEO.janela.manager.find("area");
-		if (janela) {
-		    YAHOO.i3GEO.janela.manager.remove(janela);
-		    janela.destroy();
-		}
-		i3GEOF.area[i3GEO.Interface["ATUAL"]].fechaJanela();
-		i3GEO.analise.pontos = {};
-	    };
-	    YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-	    imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-	    janela[0].moveTo(i3GEOF.area.position[0],i3GEOF.area.position[1]);
-	},
-	/*
-	 * Function: ativaFoco
-	 *
-	 * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
-	 */
-	ativaFoco : function() {
 	},
 	/**
 	 * Converte a lista de pontos em WKT
@@ -349,23 +305,24 @@ i3GEOF.area =
 		var mostra = $i("mostraarea_calculo"), texto;
 		if (mostra) {
 		    texto =
-			"total <br>" + $trad("d21at")
+			"<strong>Total </strong><br>" + $trad("d21at")
 			+ " km2: "
 			+ $.number((area / 1000000),3,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("d21at")
 			+ " ha: "
 			+ $.number((area / 10000),3,$trad("dec"),$trad("mil"))
-			+ "<br>"
+			+ "<div class='hidden-sm hidden-xs' >"
 			+ $trad("x98")
 			+ " km: "
 			+ $.number(per,2,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("x25")
 			+ ": "
-			+ i3GEO.calculo.metododistancia;
-		    mostra.innerHTML = texto + "<hr>";
-		    i3GEOF.area.ultimaMedida = + $.number((area / 1000000),3,$trad("dec"),$trad("mil")) + " km2";
+			+ i3GEO.calculo.metododistancia
+			+ "</div>";
+		    mostra.innerHTML = texto;
+		    i3GEOF.area.ultimaMedida = $.number((area / 1000000),3,$trad("dec"),$trad("mil")) + " km2";
 		}
 	    },
 	    /**
@@ -375,14 +332,14 @@ i3GEOF.area =
 		var mostra = $i("mostraarea_calculo_parcial"), texto;
 		if (mostra) {
 		    texto =
-			"parcial <br>" + $trad("d21at")
+			"<strong>Parcial</strong> <br>" + $trad("d21at")
 			+ " km2:"
 			+ $.number((area / 1000000),3,$trad("dec"),$trad("mil"))
 			+ "<br>"
 			+ $trad("d21at")
 			+ " ha: "
 			+ $.number((area / 10000),2,$trad("dec"),$trad("mil"))
-			+ "<br>"
+			+ "<div class='hidden-sm hidden-xs' >"
 			+ $trad("x95")
 			+ " km: "
 			+ $.number(trecho,3,$trad("dec"),$trad("mil"))
@@ -393,7 +350,8 @@ i3GEOF.area =
 			+ "<br>"
 			+ $trad("x23")
 			+ " (DMS):"
-			+ direcao;
+			+ direcao
+			+ "</div>";
 		    mostra.innerHTML = texto;
 		}
 	    }

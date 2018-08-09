@@ -16,48 +16,67 @@ i3GEOF.distancia =
          * Armazena a ultima medida
          */
         ultimaMedida : "",
-        MUSTACHE : "",
-        /**
-         * Susbtitutos para o template
-         */
-        mustacheHash : function() {
-            var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.distancia.dicionario);
-            dicionario["sid"] = i3GEO.configura.sid;
-            dicionario["locaplic"] = i3GEO.configura.locaplic;
-            dicionario["caixaDeEstilos"] = i3GEO.desenho.caixaEstilos();
-            return dicionario;
-        },
-        inicia : function(iddiv) {
-            if(i3GEOF.distancia.MUSTACHE == ""){
-                $.get(i3GEO.configura.locaplic + "/ferramentas/distancia/template_mst.html", function(template) {
-                    i3GEOF.distancia.MUSTACHE = template;
-                    i3GEOF.distancia.inicia(iddiv);
-                });
-                return;
-            }
-            i3GEO.eventos.cliquePerm.desativa();
-            $i(iddiv).innerHTML = i3GEOF.distancia.html();
-            //$('.collapse').collapse();
-            i3GEOF.distancia[i3GEO.Interface["ATUAL"]].inicia();
-        },
+	renderFunction: i3GEO.janela.formModal,
+	_parameters : {
+	    "mustache": "",
+	    "idContainer": "i3GEOdistanciaContainer",
+	    "namespace": "distancia"
+	},
+	start : function(){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    i3GEO.janela.fechaAguarde();
+		    p.mustache = r1;
+		    i3f.html();
+		}).fail(function(data) {
+		    i3GEO.janela.fechaAguarde();
+		    i3GEO.janela.snackBar({content: "Erro. " + data.status, style:'red'});
+		    i3f.destroy();
+		});
+	    } else {
+		i3f.html();
+	    }
+	},
+	destroy: function(){
+	    //nao use this aqui
+	    i3GEOF.distancia.renderFunction.call();
+	    i3GEO.analise.pontos = {
+                    xpt : [],
+                    ypt : []
+            };
+	    i3GEOF.distancia.ultimaMedida = "";
+	    i3GEOF.distancia[i3GEO.Interface["ATUAL"]].fechaJanela();
+	},
+	html:function() {
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    caixaDeEstilos: i3GEO.desenho.caixaEstilos(),
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			header: "<span class='copyToMemory' onclick='i3GEO.util.copyToClipboard(i3GEOF.distancia.ultimaMedida);return false;'></span>",
+			onclose: i3f.destroy
+		    });
+	    i3GEO.eventos.cliquePerm.desativa();
+	    i3GEOF.distancia[i3GEO.Interface["ATUAL"]].inicia();
+	    i3GEO.janela.snackBar({content: $trad("inicia",i3f.dicionario)});
+	},
         perfil: function (){
             var js = i3GEO.configura.locaplic + "/ferramentas/perfil/dependencias.php", temp = function() {
                 i3GEOF.perfil.iniciaJanelaFlutuante(i3GEO.analise.pontos);
             };
             i3GEO.util.scriptTag(js, temp, "i3GEOF.perfil_script");
-        },
-        /*
-         * Function: html
-         *
-         * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-         *
-         * Retorno:
-         *
-         * String com o c&oacute;digo html
-         */
-        html : function() {
-            var ins = Mustache.render(i3GEOF.distancia.MUSTACHE, i3GEOF.distancia.mustacheHash());
-            return ins;
         },
         isOn : function() {
             if($i("i3GEOF.distancia")){
@@ -66,70 +85,7 @@ i3GEOF.distancia =
                 return false;
             }
         },
-        /*
-         * Function: iniciaJanelaFlutuante
-         *
-         * Cria a janela flutuante para controle da ferramenta.
-         */
-        iniciaJanelaFlutuante : function() {
-            var minimiza, cabecalho, janela, divid, temp, titulo,imagemxy;
-            if ($i("i3GEOF.distancia")) {
-                return;
-            }
-            cabecalho = "";
-            minimiza = "";
-            // cria a janela flutuante
-            titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("distAprox") + "</span></div>";
-            janela =
-                i3GEO.janela.cria(
-                        "355px",
-                        "auto",
-                        "",
-                        "",
-                        "",
-                        titulo,
-                        "i3GEOF.distancia",
-                        false,
-                        "hd",
-                        cabecalho,
-                        minimiza,
-                        "",
-                        true,
-                        "",
-                        "",
-                        "nao",
-                        "",
-                        "50"
-                );
-            divid = janela[2].id;
-            i3GEOF.distancia.inicia(divid);
-            temp = function() {
-                i3GEOF.distancia.pontos = {};
-                var janela;
-                i3GEO.eventos.cliquePerm.ativa();
-                janela = YAHOO.i3GEO.janela.manager.find("distancia");
-                if (janela) {
-                    YAHOO.i3GEO.janela.manager.remove(janela);
-                    janela.destroy();
-                }
-                i3GEOF.distancia[i3GEO.Interface["ATUAL"]].fechaJanela();
 
-                i3GEO.analise.pontos = {
-                        xpt : [],
-                        ypt : []
-                };
-            };
-            YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-            imagemxy = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-            janela[0].moveTo(i3GEOF.distancia.position[0],i3GEOF.distancia.position[1]);
-        },
-        /*
-         * Function: ativaFoco
-         *
-         * Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
-         */
-        ativaFoco : function() {
-        },
         /**
          * Converte a lista de pontos em WKT
          */
@@ -402,18 +358,20 @@ i3GEOF.distancia =
                 var mostra = $i("mostradistancia_calculo"), texto;
                 if (mostra) {
                     texto =
-                        "total <br>" + $trad("x96")
+                        "<strong>Total</strong><br>" + $trad("x96")
                         + " km: "
                         + $.number(total,3,$trad("dec"),$trad("mil"))
                         + "<br>"
                         + $trad("x96")
                         + " m: "
                         + $.number((total * 1000),2,$trad("dec"),$trad("mil"))
-                        + "<br>"
+                        + "<div class='hidden-sm hidden-xs' >"
                         + $trad("x25")
                         + ": "
-                        + i3GEO.calculo.metododistancia;
-                    mostra.innerHTML = texto + "<hr>";
+                        + i3GEO.calculo.metododistancia
+                        + "</div>";
+                    i3GEOF.distancia.ultimaMedida = $.number(total,3,$trad("dec"),$trad("mil")) + " km";
+                    mostra.innerHTML = texto;
                 }
             },
             /**
@@ -423,17 +381,18 @@ i3GEOF.distancia =
                 var mostra = $i("mostradistancia_calculo_movel"), texto;
                 if (mostra) {
                     texto =
-                        "parcial <br>" + $trad("x95")
+                        "<strong>Parcial </strong><br>" + $trad("x95")
                         + " km: "
                         + $.number(trecho,3,$trad("dec"),$trad("mil"))
                         + "<br>"
                         + $trad("x97")
                         + " km: "
                         + $.number((parcial + trecho),3,$trad("dec"),$trad("mil"))
-                        + "<br>"
+                        + "<div class='hidden-sm hidden-xs' >"
                         + $trad("x23")
                         + " (DMS): "
-                        + direcao;
+                        + direcao
+                        + "</div>";
                     mostra.innerHTML = texto;
                 }
             }
