@@ -240,6 +240,7 @@ $cssfiles = array(
 "../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
 "../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css",
+"../pacotes/jquery/jquery-ui/jquery-ui.min.css",
 "../mashups/theme/default/style.css",
 "../mashups/openlayers.css"
 );

@@ -679,7 +679,7 @@ i3GEO.janela =
 	},
 	_formModal: false,
 	//utilizado para mensagens de ferramentas com botao de close e outros parametros
-	formModal : function({texto = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'}} = {}) {
+	formModal : function({texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'}} = {}) {
 	    if(draggable == "enable"){
 		css.cursor = "move";
 	    }
@@ -691,7 +691,13 @@ i3GEO.janela =
 		    $("#i3GEOToolFormModal").html("");
 		    $("#i3GEOToolFormModalHeader").html("");
 		});
-		i3GEO.janela._formModal.draggable({handle: ".handleDraggable"});
+		i3GEO.janela._formModal.resizable({
+		    ghost: true,
+		    handles: "se"
+		});
+		i3GEO.janela._formModal.draggable({
+		    handle: ".handleDraggable"
+		});
 		i3GEO.janela._formModal.draggable(draggable);
 		$(i3GEO.janela._formModal).appendTo("body");
 	    }
@@ -701,6 +707,9 @@ i3GEO.janela =
 		$("#i3GEOToolFormModal").html(texto);
 		if(header){
 		    $("#i3GEOToolFormModalHeader").html(header);
+		}
+		if(footer){
+		    $("#i3GEOToolFormModalFooter").html(footer);
 		}
 		i3GEO.janela._formModal.css(css);
 		i3GEO.janela._formModal.modal({
