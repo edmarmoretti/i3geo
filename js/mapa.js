@@ -971,7 +971,7 @@ i3GEO.mapa =
 	     */
 	    cliqueIdentificaDefault : function(x, y, tema) {
 		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.mapa.cliqueIdentificaDefault()");
+		    console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");
 
 		if(!x){
 		    x = objposicaocursor.ddx;
@@ -1015,15 +1015,12 @@ i3GEO.mapa =
 		    return;
 		}
 		i3GEO.eventos.cliquePerm.status = false;
-
-		var ntemas, etiquetas, j, temp;
-
 		//para evitar duplo clique
 		objposicaocursor.ddx = -1;
 		objposicaocursor.ddy = -1;
-		ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
-		etiquetas = false;
-		for (j = 0; j < ntemas; j += 1) {
+		var ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
+		var etiquetas = false;
+		for (var j = 0; j < ntemas; j += 1) {
 		    if (i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas !== "" || i3GEO.arvoreDeCamadas.CAMADAS[j].identifica == "SIM") {
 			etiquetas = true;
 		    }
@@ -1048,24 +1045,9 @@ i3GEO.mapa =
 		    return;
 		}
 
-		var res = i3GEO.configura.ferramentas.identifica.resolution;
-		var bdiv = document.createElement("div");
-		bdiv.className = "waitInfoWindow";
-		bdiv.style.width = res+"px";
-		bdiv.style.height = res+"px";
-		bdiv.style.top = (res/2 * -1) + "px";
 
-		var b = new ol.Overlay({
-		    element : bdiv,
-		    stopEvent : true,
-		    autoPan : false,
-		    origem: "balao",
-		    autoPanAnimation : false,
-		    positioning: "center-center",
-		    position: i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates()
-		});
-		i3geoOL.addOverlay(b);
-		temp = function(retorno){
+		var b = i3GEO.mapa.createWaitOverlay(x,y);
+		var temp = function(retorno){
 		    i3geoOL.removeOverlay(b);
 		    i3GEO.mapa.montaTip(retorno,x,y);
 		};
@@ -1073,7 +1055,7 @@ i3GEO.mapa =
 			temp,
 			x,
 			y,
-			res,
+			i3GEO.configura.ferramentas.identifica.resolution,
 			"tip",
 			i3GEO.configura.locaplic,
 			i3GEO.configura.sid,
@@ -1082,6 +1064,29 @@ i3GEO.mapa =
 			"",
 		"sim");
 	    }
+	},
+	createWaitOverlay: function(x,y){
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.mapa.createWaitOverlay()" );
+
+	    var res = i3GEO.configura.ferramentas.identifica.resolution;
+	    var bdiv = document.createElement("div");
+	    bdiv.className = "waitInfoWindow";
+	    bdiv.style.width = res+"px";
+	    bdiv.style.height = res+"px";
+	    bdiv.style.top = (res/2 * -1) + "px";
+
+	    var b = new ol.Overlay({
+		element : bdiv,
+		stopEvent : true,
+		autoPan : false,
+		origem: "balao",
+		autoPanAnimation : false,
+		positioning: "center-center",
+		position: i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates()
+	    });
+	    i3geoOL.addOverlay(b);
+	    return b;
 	},
 	montaTip: function (retorno,xx,yy){
 	    if (typeof (console) !== 'undefined')
@@ -1224,18 +1229,18 @@ i3GEO.mapa =
 		var pixel = i3geoOL.getPixelFromCoordinate([x,y]);
 		var html = [];
 		i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
-			 var texto = "";
-			 var chaves = feature.getKeys();
-			 var prop = feature.getProperties();
-			 var c = chaves.length;
-			 for (var i = 0; i < c; i++) {
-			     if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
-				 texto += chaves[i] + ": " + prop[chaves[i]] + "<br>";
-			     }
-			 }
-			 html.push(texto);
-			 mostra = true;
-		     });
+		    var texto = "";
+		    var chaves = feature.getKeys();
+		    var prop = feature.getProperties();
+		    var c = chaves.length;
+		    for (var i = 0; i < c; i++) {
+			if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
+			    texto += chaves[i] + ": " + prop[chaves[i]] + "<br>";
+			}
+		    }
+		    html.push(texto);
+		    mostra = true;
+		});
 		textoSimples += html.join("<br>");
 		textCopy += html.join("<br>");
 		if (mostra === true) {

@@ -1,3 +1,5 @@
+
+
 .glyphicon.normal-right-spinner {
     -webkit-animation: glyphicon-spin-r 2s infinite linear;
     animation: glyphicon-spin-r 2s infinite linear;
@@ -1976,4 +1978,8 @@ rotate
 
 /* === For desktops ================================== */
 @media ( min-width : 992px) {
+	/* classe incluida no balao de informacoes nos eventos mouseover e mouseout */
+	.hiddenInfo {
+		display: none;
+	}
 }

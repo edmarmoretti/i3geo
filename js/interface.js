@@ -493,6 +493,10 @@ i3GEO.Interface =
 		hash.texto = texto;
 
 		var createinfotooltip = function(){
+
+		    if (typeof (console) !== 'undefined')
+			console.info("createinfotooltip");
+
 		    var icone,
 		    painel,
 		    b,
@@ -534,7 +538,6 @@ i3GEO.Interface =
 		    }
 
 		    hash.minWidth = p.minWidth;
-		    painel = document.createElement("div");
 
 		    hash.lock_open = "hidden";
 		    hash.lock = "hidden";
@@ -554,6 +557,13 @@ i3GEO.Interface =
 			hash.wkt = "";
 		    }
 		    painel = document.createElement("div");
+
+		    $(painel).hover(function(){
+			$(this).find(".i3GEOCabecalhoInfoWindow").removeClass("hiddenInfo");
+		    }, function () {
+			$(this).find(".i3GEOCabecalhoInfoWindow").addClass("hiddenInfo");
+		    });
+
 		    painel.innerHTML = Mustache.render(i3GEO.template.infotooltip, hash);
 
 		    $(painel).find("[data-info='close']").on("click",removeBaloes);
