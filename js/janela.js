@@ -679,7 +679,10 @@ i3GEO.janela =
 	},
 	_formModal: false,
 	//utilizado para mensagens de ferramentas com botao de close e outros parametros
-	formModal : function({texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'}} = {}) {
+	formModal : function({resizable = {disabled: true, ghost: true, handles: "se"}, texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = false} = {}) {
+	    if(css == false){
+		css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'};
+	    }
 	    if(draggable == "enable"){
 		css.cursor = "move";
 	    }
@@ -691,15 +694,16 @@ i3GEO.janela =
 		    $("#i3GEOToolFormModal").html("");
 		    $("#i3GEOToolFormModalHeader").html("");
 		});
-		i3GEO.janela._formModal.resizable({
-		    ghost: true,
-		    handles: "se"
-		});
+		i3GEO.janela._formModal.resizable(resizable);
+		if(resizable.disabled == true){
+		    i3GEO.janela._formModal.resizable( "destroy" );
+		}
 		i3GEO.janela._formModal.draggable({
 		    handle: ".handleDraggable"
 		});
+		i3GEO.janela._formModal.css(css);
 		i3GEO.janela._formModal.draggable(draggable);
-		$(i3GEO.janela._formModal).appendTo("body");
+		$(i3GEO.janela._formModal).appendTo("#" + i3GEO.Interface.IDCORPO);
 	    }
 	    if(texto == false){
 		i3GEO.janela._formModal.modal("hide");
@@ -716,13 +720,16 @@ i3GEO.janela =
 		    backdrop: backdrop
 		});
 		i3GEO.janela._formModal.draggable(draggable);
+		i3GEO.janela._formModal.resizable(resizable);
+		if(resizable.disabled == true){
+		    i3GEO.janela._formModal.resizable( "destroy" );
+		}
 	    }
 	    //fecha as guias em dispositivos com tela pequena
 	    if(i3GEO.parametros.w < 420){
 		i3GEO.guias.abreFecha("fecha");
 	    }
 	    if(onclose != false){
-
 		if (typeof (console) !== 'undefined')
 		    console.info("onclose janela._formModal");
 

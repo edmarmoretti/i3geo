@@ -737,13 +737,15 @@ i3GEO.tema =
 			return;
 		    }
 		}
-		i3GEO.mapa.ativaTema(idtema);
+		var temp = function(){
+		    i3GEOF.tabela.start(idtema);
+		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.tabela()",
 			"tabela",
 			"tabela",
 			"dependencias.php",
-		"i3GEOF.tabela.iniciaJanelaFlutuante()");
+		temp);
 	    },
 	    /**
 	     * Function: etiquetas

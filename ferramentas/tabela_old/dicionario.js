@@ -249,10 +249,5 @@ i3GEOF.tabela.dicionario = {
 		pt : "Selecione pelo menos um registro",
 		en : "Select at least one record",
 		es : "Seleccione al menos un registro"
-	} ],
-	'operReg' : [ {
-		pt : "Opera&ccedil;&otilde;es que s&atilde;o executadas considerando a lista de registros marcados",
-		en : "",
-		es : ""
 	} ]
 };

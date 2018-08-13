@@ -53,7 +53,7 @@ Alguns usuários reportaram problemas ao instalar o Apache em algumas versões d
 * Execute novamente o arquivo apache-install.bat
 * Para confirmar que tudo ocorreu bem, abra o navegador de internet e digite http:\\localhost
 
-### i3Geo
+### i3Geo Windows
 
 Para obter o código do i3Geo você tem duas opções, a primeira utiliza simplesmente o download de um arquivo e a segunda utiliza o Git. A vantagem da segunda opção é que você poderá atualizar sua instalação de forma mais fácil.
 
@@ -100,7 +100,7 @@ git config --global user.name "Seu Nome"
 ```
 
 
-### PostGIS (opcional)
+### PostGIS Windows (opcional)
 
 Para instalar o PostGIS siga o roteiro mostrado em http://postgis.net/windows_downloads
 
@@ -218,7 +218,7 @@ service apache2 restart
 
 ```
 
-### i3Geo
+### i3Geo Linux
 
 Para obter o código do i3Geo você tem duas opções, a primeira utiliza simplesmente o download de um arquivo e a segunda utiliza o Git. A vantagem da segunda opção é que você poderá atualizar sua instalação de forma mais fácil.
 
@@ -277,7 +277,7 @@ git config --global user.email seuemail@example.com
 git config --global user.name "Seu Nome"
 ```
 
-### PostGIS (opcional)
+### PostGIS Linux (opcional)
 
 Instale o PostgreSQL e PostGIS
 
@@ -292,7 +292,7 @@ apt-get install postgresql-9.1-postgis
 
 Observações:
 
-* Pependendo da versão do PostgreSQL alguns comandos podem ser diferentes. Veja a pasta /usr/share/postgresql para descobrir a versão instalada)
+* Dependendo da versão do PostgreSQL alguns comandos podem ser diferentes. Veja a pasta /usr/share/postgresql para descobrir a versão instalada)
 
 * Pode ser necessário o uso de sudo, exemplo: sudo su - postgres -c "createdb i3geosaude"
 
