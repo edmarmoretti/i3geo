@@ -141,9 +141,9 @@ i3GEOF.tabela.dicionario = {
 		es : "Excluir de las estad&iacute;sticas el valor"
 	} ],
 	"relattext" : [ {
-		pt : "Relat&oacute;rio no formato texto",
-		en : "Report in text format",
-		es : "Informe en formato de texto"
+		pt : "Relat&oacute;rio no formato CSV",
+		en : "Report in CSV format",
+		es : "Informe en formato CSV"
 	} ],
 	'temaNaoExisteMais' : [ {
 		pt : "O tema j&aacute; n&atilde;o existe mais no mapa",

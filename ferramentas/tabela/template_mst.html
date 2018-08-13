@@ -24,26 +24,26 @@
         </div>
     </div>
 </nav>
-<div id='{{idContainer}}' class='container-fluid' style='text-align:left;display: block; overflow: auto; height: calc(100% - 50px);''>
+<div id='{{idContainer}}' class='container-fluid' style='text-align:left;display: block; overflow: auto; height: calc(100% - 50px);'>
     <!-- Guia Propriedades -->
     <div id='i3GEOtabelaguia6obj' class="container-fluid">
         <h5>{{{operReg}}}</h5>
         <div style="display: flex; overflow: hidden;">
             <a href='javascript:void(0)' onclick="i3GEOF.tabela.ativaSelecao(this)" class='btn btn-primary btn-sm btn-raised'>{{{atvsel}}}</a>
-            <a title='{{{limpselmap}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.limpaSelecao('')" class='btn btn-primary btn-sm btn-raised'>{{{limpsel}}}</a>
-            <a title='{{{criatemasel}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.criaNovoTema('')" class='btn btn-primary btn-sm btn-raised'>{{{criatema}}}</a>
+            <a title='{{{limpselmap}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.limpaSelecao()" class='btn btn-primary btn-sm btn-raised'>{{{limpsel}}}</a>
+            <a title='{{{criatemasel}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.criaNovoTema()" class='btn btn-primary btn-sm btn-raised'>{{{criatema}}}</a>
         </div>
         <h5>{{{opcoes}}}</h5>
         <div class="checkbox text-left">
             <label>
-                <input id='i3GEOtabelatipolista' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros('')">
+                <input id='i3GEOtabelatipolista' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros()">
                 <span class="checkbox-material noprint"> <span class="check"></span>
                 </span> {{{atuatab}}}
             </label>
         </div>
         <div class="checkbox text-left">
             <label>
-                <input id='i3GEOtabelalegenda' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros('')">
+                <input id='i3GEOtabelalegenda' type="checkbox" onclick="i3GEOF.tabela.pegaRegistros()">
                 <span class="checkbox-material noprint"> <span class="check"></span>
                 </span> {{{colleg}}}
             </label>
@@ -81,34 +81,34 @@
     </div>
     <!-- Estatisticas -->
     <div id='i3GEOtabelaguia3obj' style='width: 98%; height: calc(100% - 50px); display: none;' class='container-fluid '>
-        <div class='form-group condensed'>
+        <div class='form-group condensed' style='width:50%'>
             <label class="control-label">{{{itemcalc}}}</label>
             <div id='i3GEOtabelaitensGuia3'></div>
         </div>
         <!-- label-floating -->
-        <div class='form-group label-floating is-empty'>
+        <div class='form-group label-floating is-empty' style='width:50%'>
             <label class="control-label" for="i3GEOtabelafiltro1">{{{excluicalc}}}</label>
             <input class="form-control input-lg" type='text' id='i3GEOtabelafiltro1' value='' />
         </div>
 
-        <button onclick="i3GEOF.tabela.estatistica('')" class='btn btn-primary btn-sm btn-raised'>{{{calc}}}</button>
+        <button onclick="i3GEOF.tabela.estatistica()" class='btn btn-primary btn-sm btn-raised'>{{{calc}}}</button>
 
-        <div id='i3GEOtabelaoperacoes' style='font-size: 12px; text-align: left; position: relative; top: 15px; left: 0px;'></div>
+        <div id='i3GEOtabelaEstatisticas' style='font-size: 12px; text-align: left; position: relative; top: 15px; left: 0px;'></div>
 
         <h5 class="alert alert-info">{{{paraqueas}}}</h5>
     </div>
     <!-- Relatorio -->
     <div id='i3GEOtabelaguia5obj' class='container-fluid ' style="width: 98%; height: calc(100% - 50px); overflow: auto;">
-        <div class='form-group condensed'>
+        <div class='form-group condensed' style='margin-bottom:15px;'>
             <label>{{{itensrel}}}</label>
             <div id='i3GEOtabelaitensrelatorio' style='top: 10px;'></div>
         </div>
-        <div class='form-group condensed'>
+        <div class='form-group condensed' style='width:50%'>
             <label class="control-label">{{{itensagr}}}</label>
             <div id='i3GEOtabelaagrupamento'></div>
         </div>
 
-        <div class='form-group label-floating is-empty'>
+        <div class='form-group label-floating is-empty' style='width:50%'>
             <label class="control-label" for="i3GEOtabelaexcestat">{{{excvalor}}}</label>
             <input class="form-control input-lg" type='text' id='i3GEOtabelaexcestat' value='' />
         </div>
@@ -129,8 +129,8 @@
             </label>
         </div>
 
-        <button onclick="i3GEOF.tabela.relatorioTabela('')" class='btn btn-primary btn-sm btn-raised'>{{{relat}}}</button>
-        <button onclick="i3GEOF.tabela.relatorioTexto('')" class='btn btn-primary btn-sm btn-raised'>{{{relattext}}}</button>
+        <button onclick="i3GEOF.tabela.relatorioTabela()" class='btn btn-primary btn-sm btn-raised'>{{{relat}}}</button>
+        <button onclick="i3GEOF.tabela.relatorioTexto()" class='btn btn-primary btn-sm btn-raised'>{{{relattext}}}</button>
 
         <form method='post' style='display: none' id='i3GEOtabelarelatorio' action='{{{locaplic}}}/ferramentas/tabela/relatorio.php' target='_blank'>
             <input type='hidden' id='i3GEOtabelaarearelh' name='arearel' value='nao' />

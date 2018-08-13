@@ -98,6 +98,19 @@ i3GEOF.tabela =
 	    // relatorio
 	    $i("i3GEOtabelaguia5").onclick = function() {
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOtabelaguia5", "i3GEOtabelaguia");
+		i3GEO.util.checkItensEditaveis(
+			i3GEOF.tabela._parameters.tema,
+			function(retorno) {
+			    if (retorno.tipo === "dados") {
+				$i("i3GEOtabelaitensrelatorio").innerHTML = retorno.dados;
+			    }
+			},
+			"i3GEOtabelaitensrelatorio",
+			"320px",
+			"",
+			"sim"
+		);
+
 		i3GEO.util.comboItens(
 			"i3GEOtabelaagrupaItem",
 			i3GEOF.tabela._parameters.tema,
@@ -508,20 +521,21 @@ i3GEOF.tabela =
 		}
 	    }, "i3GEOtabelaitensGuia3", "","sim","","form-control");
 	},
-	estatistica : function(idjanela) {
+	estatistica : function() {
 	    if ($i("i3GEOtabelaComboItensGuia3").value === "") {
 		i3GEO.janela.tempoMsg("Escolha um item!");
 		return;
 	    }
 	    try {
 		var monta = function(retorno) {
-		    var ins = "", nome, valor, i, n;
+		    var textoCopy = "", ins = "", nome, valor, i, n;
 		    if (retorno.data.indices !== undefined) {
 			if (retorno.data.indices) {
 			    n = retorno.data.indices.length;
 			    for (i = 0; i < n; i++) {
-				nome =retorno.data.variaveis[retorno.data.indices[i]];
+				nome = retorno.data.variaveis[retorno.data.indices[i]];
 				valor = retorno.data.valores[retorno.data.indices[i]];
+				textoCopy += nome + " = " + valor + "\n";
 				ins += '<div class="row-content"><h4 class="list-group-item-heading">'+nome+'</h4><p class="list-group-item-text">'+valor+'</p></div>';
 				ins += '<div class="list-group-separator">&nbsp;</div>';
 			    }
@@ -529,7 +543,10 @@ i3GEOF.tabela =
 		    } else {
 			ins = retorno.data;
 		    }
-		    $i("i3GEOtabelaoperacoes").innerHTML = ins + "<br>";
+		    $i("i3GEOtabelaEstatisticas").innerHTML = "<span class='copyToMemory' ></span>" + ins + "<br>";
+		    $("#i3GEOtabelaEstatisticas").on("click",function(){
+			i3GEO.util.copyToClipboard(textoCopy);
+		    });
 		}, exclui = "", cp = new cpaint(), p;
 		if ($i("i3GEOtabelafiltro1").value !== "") {
 		    exclui = $i("i3GEOtabelafiltro1").value;
