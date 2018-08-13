@@ -108,7 +108,7 @@ Instale também o pgAdmin, que é uma interface gráfica para o PostGIS: http://
 
 Caso deseje, carregue no PostGIS o banco de dados do i3GeoSaúde. Esse banco é utilizado em alguns dos tutoriais do i3Geo e pode servir de teste para uso com o SAIKU.
 
-* Primeiro baixe o arquivo https://softwarepublico.gov.br/gitlab/i3geo/i3geosaude/blob/master/databasei3geosaude.backup
+* Primeiro baixe o arquivo https://softwarepublico.gov.br/gitlab/i3geo/i3geosaude/raw/master/databasei3geosaude.backup
 * Abra o pgAdmin e crie uma nova conexão com o banco de dados. Em nome do host utilize "localhost" e o login e senha que você usou na istalação, normalmente "postgres".
 * Utilize as opções do pgAdmin para criar um novo banco de dados chamado i3geosaude. Ao criá-lo, utilize o banco de dados postgres como template e login e senha "postgres".
 * Clicando sobre o novo banco de dados, localize a opção "restore" e faça a carga do banco de dados que foi baixado no início.
@@ -285,7 +285,7 @@ Instale o PostgreSQL e PostGIS
 
 ```
 apt-get install postgresql postgis pgadmin3
-apt-get install postgresql-9.1-postgis
+service postgresql start
 ```
 
 #### Instalando o banco de dados i3GeoSaude para testes
@@ -311,6 +311,8 @@ Observações:
 Comandos para instalação:
 
 ```
+cd /var/www
+wget https://softwarepublico.gov.br/gitlab/i3geo/i3geosaude/raw/master/databasei3geosaude.backup
 su - postgres -c "psql -c \"ALTER USER postgres WITH PASSWORD 'postgres'\""
 su - postgres -c "createdb i3geosaude"
 su - postgres -c "createlang -d i3geosaude plpgsql"
