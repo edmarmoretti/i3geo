@@ -2846,13 +2846,14 @@ function sobeAnno($map_file)
 
 function retornaShapesMapext($objLayer, $objMapa)
 {
+    $objLayer->querybyrect($objMapa->extent);
+    $objLayer->open();
     $shapes = array();
-    $status = $objLayer->open();
-    $status = $objLayer->whichShapes($objMapa->extent);
-    while ($shape = $objLayer->nextShape()) {
-        $shapes[] = $shape;
+    $res_count = $objLayer->getNumresults();
+    for ($i = 0; $i < $res_count; $i++){
+        $shapes[] = $objLayer->getShape($objLayer->getResult($i));
     }
-    $objLayer->close();
+    $fechou = $objLayer->close();
     return $shapes;
 }
 

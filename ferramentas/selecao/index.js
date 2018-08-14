@@ -326,11 +326,6 @@ i3GEOF.selecao =
 	    i3GEO.Interface.atualizaTema(retorno, tema);
 	    nsel = i3GEO.arvoreDeCamadas.pegaTema(tema, retorno.data.temas);
 	    $i("i3GEOselecaoNsel").innerHTML = $trad('selecionados', i3GEOF.selecao.dicionario) + ": " + (nsel.nsel);
-	    if(i3GEOF.tabela){
-		i3GEO.eventos.adicionaEventos("SELECAO", [
-		    "i3GEOF.tabela.atualizaListaDeRegistros()"
-		    ]);
-	    }
 	    i3GEO.eventos.cliquePerm.desativa();
 	    i3GEO.eventos.executaEventos(i3GEO.eventos.SELECAO);
 	},

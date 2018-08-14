@@ -16,6 +16,7 @@ $temarel = $_GET["temarel"];
 $ordemrel = $_GET["ordemrel"];
 $itensrel = $_GET["itensrel"];
 $itemagruparel = $_GET["itemagruparel"];
+$ext = $_GET["ext"];
 
 if (isset($_GET["g_sid"])){
 	session_id($_GET["g_sid"]);

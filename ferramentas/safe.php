@@ -71,7 +71,7 @@ if(!substituiCon($map_file,$postgis_mapa)){
 function redesenhaMapa()
 {
 	global $map_file,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
-	substituiCon($map_file,$postgis_mapa);
+	//substituiCon($map_file,$postgis_mapa);
 	if($tipoimagem != "nenhum" && $tipoimagem != "")
 	{$utilizacgi = "nao";}
 	if (connection_aborted()){exit();}

@@ -740,6 +740,13 @@ i3GEO.janela =
 	    } else {
 		i3GEO.janela._formModal.unbind("hidden.bs.modal");
 	    }
+	    i3GEO.janela._formModal.block = function(){
+		$("#i3GEOToolFormModalWrap").css("display","block");
+	    };
+	    i3GEO.janela._formModal.unblock = function(){
+		$("#i3GEOToolFormModalWrap").css("display","none");
+	    };
+	    $("#i3GEOToolFormModalWrap").css("display","none");
 	},
 	/**
 	 * Function: ativaAlerta

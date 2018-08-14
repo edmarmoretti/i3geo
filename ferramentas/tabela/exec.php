@@ -1,145 +1,54 @@
 <?php
-include_once(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-//
-//faz a busca da fun&ccedil;&atilde;o que deve ser executada
-//
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
-switch (strtoupper($funcao))
-{
-/*
-Valor: INCLUISEL
-
-Inclu&iacute; elementos em uma sele&ccedil;&atilde;o.
-
-<Selecao->incluiSel>
-*/
-	case "INCLUISEL":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_selecao.php");
-		$m = new Selecao($map_file,$tema);
-		$retorno = $m->incluiSel($_GET["ids"]);
-		//
-		//&eacute; necess&aacute;rio obter os par&acirc;metros do mapa para remontar a &aacute;rvore de camadas
-		//
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
-/*
-Valor: ESTATISTICA
-
-Calcula estat&iacute;sticas b&aacute;sicas de uma tabela de um tema.
-
-<Atributos->estatDescritivas>
-*/
-	case "ESTATISTICA":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_atributos.php");
-		$m = new Atributos($map_file,$tema,$locaplic,$ext);
-		$retorno = $m->estatDescritivas($_GET["item"],$_GET["exclui"]);
-	break;
-/*
-Valor: GRAFICOPIZZA
-
-Cria um gr&aacute;fico de pizza.
-
-<graficoPizza>
-*/
-	case "GRAFICOPIZZA":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		$retorno = graficoPizza();
-	break;
-/*
-Valor: GRAFICOESTRELA
-
-Cria um gr&aacute;fico do tipo estrela.
-
-<graficoEstrela>
-*/
-	case "GRAFICOESTRELA":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		$retorno = graficoEstrela();
-	break;
-/*
-Valor: GRAFICOSCATTER
-
-Cria um gr&aacute;fico de distribui&ccedil;&atilde;o de pontos.
-
-<graficoScatter>
-*/
-	case "GRAFICOSCATTER":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		$retorno = graficoScatter();
-	break;
-/*
-Valor: GRAFICOSCATTERBINS
-
-Cria um gr&aacute;fico de distribui&ccedil;&atilde;o de pontos com agrupamento em pixels (bins).
-
-<graficoScatterBins>
-*/
-	case "GRAFICOSCATTERBINS":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		$retorno = graficoScatterBins();
-	break;
-/*
-Valor: GRAFICOLINHAS
-
-Cria um gr&aacute;fico de linhas.
-
-<graficoLinhas>
-*/
-	case "GRAFICOLINHAS":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		$retorno = graficoLinhas();
-	break;
-/*
-Valor: GRAFICOHIST
-
-Cria um gr&aacute;fico de histograma.
-
-<graficoHist>
-*/
-	case "GRAFICOHIST":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		$retorno = graficoHist();
-	break;
-/*
-Valor: GRAFICOBARRAS
-
-Cria um gr&aacute;fico de barras.
-
-<graficoBarras>
-*/
-	case "GRAFICOBARRAS":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		$retorno = graficoBarras();
-	break;
-/*
-Valor: FUSAOGRAFICO
-
-Faz a fus&atilde;o da imagem de um gr&aacute;fico com a imagem do mapa atual.
-
-<fusaoGrafico>
-*/
-	case "FUSAOGRAFICO":
-		include_once(dirname(__FILE__)."/../../classesphp/graficos.php");
-		restauraCon($map_file,$postgis_mapa);
-		include_once(dirname(__FILE__)."/../../classesphp/classe_imagem.php");
-		if($map_file != "")
-		{
-			$mapa = ms_newMapObj($map_file);
-			$imgo = $mapa->draw();
-			$nome = ($imgo->imagepath).nomeRandomico().".png";
-			$imgo->saveImage($nome);
-			$imagem = ($imgo->imageurl).basename($nome);
-		}
-		$m = new Imagem(dirname($dir_tmp).$imagem);
-		$i = $m->fundeIm(dirname($dir_tmp).$grafico);
-		imagepng($i,dirname($dir_tmp).$imagem);
-		$retorno = $imagem;
-	break;
+include_once (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
+$retorno = "";
+switch (strtoupper($_GET["funcao"])) {
+    case "LISTAREGISTROS":
+        include_once ("../../classesphp/classe_atributos.php");
+        $m = new Atributos($_SESSION["map_file"], $_POST["tema"], "", $_POST["ext"]);
+        $legenda = "";
+        if ($_POST["dadosDaClasse"] == "sim") {
+            include_once ("../../classesphp/classe_legenda.php");
+            $mc = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
+            $linhas = $mc->tabelaLegenda();
+            foreach ($linhas as $linha) {
+                if ($linha["tema"] == $_POST["tema"]) {
+                    $legenda[$linha["idclasse"]] = $linha["imagem"];
+                }
+            }
+        }
+        $retorno = $m->listaRegistros("", $_POST["tipo"], "", $_POST["inicio"], $_POST["fim"], $_POST["tipolista"], $_POST["dadosDaClasse"]);
+        ob_clean();
+        header("Content-type: application/json");
+        echo json_encode(array(
+            "legenda"=>$legenda,
+            "totalSelecionados"=>$retorno[0]["totalSelecionados"],
+            "itens"=>$retorno[0]["itens"],
+            "alias"=>$retorno[0]["alias"],
+            "totalGeral"=>$retorno[1]["totalGeral"],
+            "registros"=>$retorno[1]["registros"],
+            "errorMsg" => ""
+        ));
+        exit;
+        break;
+    case "INCLUISEL":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_selecao.php");
+        $m = new Selecao($_SESSION["map_file"], $_POST["tema"]);
+        $m->incluiSel($_POST["ids"]);
+        include_once(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
+        //retorna os dados para poder atualizar a arvore de camadas
+        $m = New Mapa($_SESSION["map_file"]);
+        $retorno = $m->parametrosTemas();
+        ob_clean();
+        header("Content-type: application/json");
+        echo json_encode($retorno);
+        break;
+    case "ESTATISTICA":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_atributos.php");
+        $m = new Atributos($_SESSION["map_file"], $_POST["tema"], $_SESSION["locaplic"], $_POST["ext"]);
+        $retorno = $m->estatDescritivas($_POST["item"], $_POST["exclui"]);
+        ob_clean();
+        header("Content-type: application/json");
+        echo json_encode($retorno);
+        break;
 }
-if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-	restauraCon($map_file,$postgis_mapa);
-}
-cpjson($retorno);
-?>

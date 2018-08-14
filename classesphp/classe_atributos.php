@@ -882,7 +882,7 @@ class Atributos
 			$v = $shape->values[$item];
 			$valores[] = $v;
 		}
-		$fechou = $this->layer->close();
+		//$fechou = $this->layer->close();
 		$valoresn = array();
 		//verifica se a lista de valores contem numeros e exclusao
 		foreach ($valores as $valor)

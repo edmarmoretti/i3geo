@@ -2192,13 +2192,8 @@ switch (strtoupper($funcao)) {
         $m = new Atributos($map_file, $_pg["tema"]);
         $retorno = $m->itensTexto($_pg["tipo"]);
         break;
-    /*
-     * Valor: LISTAREGISTROS
-     *
-     * Pega todos os valores dos itens de uma tabela de um tema.
-     *
-     * <Atributos->listaRegistros>
-     */
+    //depreciado na versao 8. Ver: ferramentas/tabela/exec.php
+    //@TODO excluir codigo pois esta duplpicado
     case "LISTAREGISTROS":
         $tema = $_pg["tema"];
         $ext = $_pg["ext"];
@@ -2213,7 +2208,6 @@ switch (strtoupper($funcao)) {
             $unico = $_pg["unico"];
         }
         $dadosDaClasse = $_pg["dadosDaClasse"];
-
         include_once ("classe_atributos.php");
         $m = new Atributos($map_file, $tema, "", $ext);
         if (! isset($tipo)) {
@@ -2249,7 +2243,6 @@ switch (strtoupper($funcao)) {
         }
         $retorno = $m->listaRegistros($itemtema, $tipo, $unico, $inicio, $fim, $tipolista, $dadosDaClasse);
         $retorno["legenda"] = $legenda;
-
         break;
     /*
      * Valor: LISTAUNICA

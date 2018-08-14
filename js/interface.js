@@ -1450,7 +1450,11 @@ i3GEO.Interface =
 		if (retorno === "") {
 		    return;
 		}
-		objtemas = i3GEO.arvoreDeCamadas.converteChaveValor2normal(retorno.data.temas);
+		//para efeitos de compatibilidade
+		if(retorno.data){
+		    retorno = retorno.data.temas;
+		}
+		objtemas = i3GEO.arvoreDeCamadas.converteChaveValor2normal(retorno);
 		i3GEO.Interface.openlayers.recalcPar();
 		try {
 		    i3GEO.arvoreDeCamadas.atualiza(objtemas);

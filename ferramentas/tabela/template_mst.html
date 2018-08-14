@@ -29,7 +29,7 @@
     <div id='i3GEOtabelaguia6obj' class="container-fluid">
         <h5>{{{operReg}}}</h5>
         <div style="display: flex; overflow: hidden;">
-            <a href='javascript:void(0)' onclick="i3GEOF.tabela.ativaSelecao(this)" class='btn btn-primary btn-sm btn-raised'>{{{atvsel}}}</a>
+            <a href='javascript:void(0)' onclick="i3GEOF.tabela.ativaSelecao(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{atvsel}}}</a>
             <a title='{{{limpselmap}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.limpaSelecao()" class='btn btn-primary btn-sm btn-raised'>{{{limpsel}}}</a>
             <a title='{{{criatemasel}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.criaNovoTema()" class='btn btn-primary btn-sm btn-raised'>{{{criatema}}}</a>
         </div>
@@ -64,16 +64,16 @@
             &nbsp; {{{ate}}} &nbsp;
             <input class="form-control" style="display: inline; width: 50px;" id="i3GEOtabelafim" size="5" value="20" type="text">
             &nbsp;
-            <button onclick='i3GEOF.tabela.menos("")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+            <button onclick='i3GEOF.tabela.menos()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                 <span class="material-icons">remove_circle_outline</span>
             </button>
-            <button onclick='i3GEOF.tabela.mais("")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+            <button onclick='i3GEOF.tabela.mais()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                 <span class="material-icons">add_circle_outline</span>
             </button>
-            <button title='{{{vertodos}}}' onclick='i3GEOF.tabela.todos("")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+            <button title='{{{vertodos}}}' onclick='i3GEOF.tabela.todos()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                 <span class="material-icons">last_page</span>
             </button>
-            <button title='{{{atuareg}}}' onclick='i3GEOF.tabela.pegaRegistros("")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+            <button title='{{{atuareg}}}' onclick='i3GEOF.tabela.pegaRegistros()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                 <span class="material-icons">refresh</span>
             </button>
         </div>
