@@ -30,8 +30,8 @@
         <h5>{{{operReg}}}</h5>
         <div style="display: flex; overflow: hidden;">
             <a href='javascript:void(0)' onclick="i3GEOF.tabela.ativaSelecao(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{atvsel}}}</a>
-            <a title='{{{limpselmap}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.limpaSelecao()" class='btn btn-primary btn-sm btn-raised'>{{{limpsel}}}</a>
-            <a title='{{{criatemasel}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.criaNovoTema()" class='btn btn-primary btn-sm btn-raised'>{{{criatema}}}</a>
+            <a title='{{{limpselmap}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.limpaSelecao(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{limpsel}}}</a>
+            <a title='{{{criatemasel}}}' href='javascript:void(0)' onclick="i3GEOF.tabela.criaNovoTema(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criatema}}}</a>
         </div>
         <h5>{{{opcoes}}}</h5>
         <div class="checkbox text-left">
@@ -80,7 +80,7 @@
         <div id='{{{idRegistros}}}' class='container-fluid ' style='margin-top: 20px;'></div>
     </div>
     <!-- Estatisticas -->
-    <div id='i3GEOtabelaguia3obj' style='width: 98%; height: calc(100% - 50px); display: none;' class='container-fluid '>
+    <div id='i3GEOtabelaguia3obj' style='display: none;' class='container-fluid '>
         <div class='form-group condensed' style='width:50%'>
             <label class="control-label">{{{itemcalc}}}</label>
             <div id='i3GEOtabelaitensGuia3'></div>
@@ -98,7 +98,7 @@
         <h5 class="alert alert-info">{{{paraqueas}}}</h5>
     </div>
     <!-- Relatorio -->
-    <div id='i3GEOtabelaguia5obj' class='container-fluid ' style="width: 98%; height: calc(100% - 50px); overflow: auto;">
+    <div id='i3GEOtabelaguia5obj' class='container-fluid ' style="display: none;">
         <div class='form-group condensed' style='margin-bottom:15px;'>
             <label>{{{itensrel}}}</label>
             <div id='i3GEOtabelaitensrelatorio' style='top: 10px;'></div>

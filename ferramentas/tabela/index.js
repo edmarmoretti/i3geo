@@ -479,13 +479,19 @@ i3GEOF.tabela =
 		lista[i].checked = false;
 	    }
 	},
-	criaNovoTema : function() {
+	criaNovoTema : function(btn) {
 	    var camada = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.tabela._parameters.tema);
 	    if(camada.nsel == 0){
 		i3GEO.janela.snackBar({content: $trad("selUmReg",i3GEOF.tabela.dicionario)});
 		return;
 	    }
+	    btn = $(btn);
+	    btn.prop("disabled",true).find("span").removeClass("hidden");
+	    i3GEO.janela._formModal.block();
 	    var temp = function(retorno) {
+		i3GEO.janela._formModal.unblock();
+		i3GEO.janela.fechaAguarde();
+		btn.prop("disabled",false).find("span").addClass("hidden");
 		i3GEO.atualiza(retorno);
 	    };
 	    i3GEO.php.criatemaSel(temp, i3GEOF.tabela._parameters.tema);

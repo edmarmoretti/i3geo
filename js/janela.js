@@ -715,7 +715,9 @@ i3GEO.janela =
 		if(footer){
 		    $("#i3GEOToolFormModalFooter").html(footer);
 		}
+		i3GEO.janela._formModal.find(".modal-content").css("height","");
 		i3GEO.janela._formModal.css(css);
+
 		i3GEO.janela._formModal.modal({
 		    backdrop: backdrop
 		});
@@ -723,6 +725,8 @@ i3GEO.janela =
 		i3GEO.janela._formModal.resizable(resizable);
 		if(resizable.disabled == true){
 		    i3GEO.janela._formModal.resizable( "destroy" );
+		} else {
+		    i3GEO.janela._formModal.find(".modal-content").css("height","100%");
 		}
 	    }
 	    //fecha as guias em dispositivos com tela pequena
