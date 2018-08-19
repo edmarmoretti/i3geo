@@ -3,14 +3,14 @@
 <head>
 <?php
 $configInc = array(
-    "debug" => "naocompacto", //posfixos inserido na carga do script do i3geo
+    "debug" => "naocompacto", // posfixos inserido na carga do script do i3geo
     "tipo" => "OL", // OL ou OSM
-    "inc" => "inc", //caminho para os includes PHP com os componentes da interface
-    "pathjs" => "..", //caminho para o include dos arquivos JS
-    "pathcss" => "..", //caminho para o include dos arquivos css
-    "pathconfig" => ".", //caminho para o include do arquivo JS config.php
-    "pathtutorial" => ".", //caminho para o include do arquivo JS tutorial.js
-    "pathtemplates" => "templates", //caminho para a pasta template com os arquivos MUSTACHE
+    "inc" => "inc", // caminho para os includes PHP com os componentes da interface
+    "pathjs" => "..", // caminho para o include dos arquivos JS
+    "pathcss" => "..", // caminho para o include dos arquivos css
+    "pathconfig" => ".", // caminho para o include do arquivo JS config.php
+    "pathtutorial" => ".", // caminho para o include do arquivo JS tutorial.js
+    "pathtemplates" => "templates", // caminho para a pasta template com os arquivos MUSTACHE
     "nocache" => time()
 );
 include ($configInc["inc"] . "/meta.php");
@@ -66,7 +66,7 @@ include ($configInc["inc"] . "/css.php");
             include ($configInc["inc"] . "/iconecatalogo.php");
             include ($configInc["inc"] . "/iconelegenda.php");
             include ($configInc["inc"] . "/iconebusca.php");
-            //include ($configInc["inc"] . "/iconeinfo.php");
+            // include ($configInc["inc"] . "/iconeinfo.php");
             include ($configInc["inc"] . "/iconetutorial.php");
             ?>
         </div>

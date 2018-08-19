@@ -4,23 +4,14 @@ if (typeof (i3GEOF) === 'undefined') {
 i3GEOF.area =
 {
 	position: [150,0],
-	/**
-	 * Armazena os pontos clicados para realizar os calculos
-	 */
-	pontos : {},
-	/**
-	 * Armazena o WKT da ultima linha
-	 */
-	ultimoWkt : "",
-	/**
-	 * Armazena a ultima medida
-	 */
-	ultimaMedida : "",
 	renderFunction: i3GEO.janela.formModal,
 	_parameters : {
 	    "mustache": "",
 	    "idContainer": "i3GEOareaContainer",
-	    "namespace": "area"
+	    "namespace": "area",
+	    "pontos" : {},
+	    "ultimoWkt": "",
+	    "ultimaMedida" : ""
 	},
 	start : function(){
 	    var p = this._parameters,
@@ -45,8 +36,9 @@ i3GEOF.area =
 	    //nao use this aqui
 	    i3GEOF.area.renderFunction.call();
 	    i3GEO.analise.pontos = {};
-	    i3GEOF.area.ultimaMedida = "";
+	    i3GEOF.area._parameters.ultimaMedida = "";
 	    i3GEOF.area[i3GEO.Interface["ATUAL"]].fechaJanela();
+	    i3GEOF.area._parameters.pontos = {};
 	},
 	html:function() {
 	    var p = this._parameters,
@@ -61,7 +53,7 @@ i3GEOF.area =
 		    this,
 		    {
 			texto: Mustache.render(p.mustache, hash),
-			header: "<span class='copyToMemory' onclick='i3GEO.util.copyToClipboard(i3GEOF.area.ultimaMedida);return false;'></span>",
+			header: "<span class='copyToMemory' onclick='i3GEO.util.copyToClipboard(i3GEOF.area._parameters.ultimaMedida);return false;'></span>",
 			onclose: i3f.destroy
 		    });
 	    i3GEO.eventos.cliquePerm.desativa();
@@ -79,7 +71,7 @@ i3GEOF.area =
 	 * Converte a lista de pontos em WKT
 	 */
 	pontos2wkt : function() {
-	    var pontos = [], x = i3GEOF.area.pontos.xpt, y = i3GEOF.area.pontos.ypt, n = x.length, i;
+	    var pontos = [], x = i3GEOF.area._parameters.pontos.xpt, y = i3GEOF.area._parameters.pontos.ypt, n = x.length, i;
 	    for (i = 0; i < n; i++) {
 		pontos.push(x[i] + " " + y[i]);
 	    }
@@ -134,7 +126,7 @@ i3GEOF.area =
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		});
 		m.draw.on('drawstart', function(evt) {
-		    i3GEOF.area.pontos = {
+		    i3GEOF.area._parameters.pontos = {
 			    xpt : [],
 			    ypt : [],
 			    dist : []
@@ -171,10 +163,10 @@ i3GEOF.area =
 		var temp,sourceProj,coordinates,wgs84Sphere, per, area, n, x1, y1, x2, y2, trecho, direcao,
 		coord = point.getCoordinates();
 
-		n = i3GEOF.area.pontos.ypt.length;
+		n = i3GEOF.area._parameters.pontos.ypt.length;
 		if (n > 1) {
-		    x1 = i3GEOF.area.pontos.xpt[n - 1];
-		    y1 = i3GEOF.area.pontos.ypt[n - 1];
+		    x1 = i3GEOF.area._parameters.pontos.xpt[n - 1];
+		    y1 = i3GEOF.area._parameters.pontos.ypt[n - 1];
 		    x2 = coord[0];
 		    y2 = coord[1];
 		    // projeta
@@ -193,8 +185,8 @@ i3GEOF.area =
 		    direcao = direcao[0];
 		    per = i3GEOF.area.openlayers.somaDist();
 		    // soma ate o primeiro ponto
-		    x1 = i3GEOF.area.pontos.xpt[0];
-		    y1 = i3GEOF.area.pontos.ypt[0];
+		    x1 = i3GEOF.area._parameters.pontos.xpt[0];
+		    y1 = i3GEOF.area._parameters.pontos.ypt[0];
 		    // projeta
 		    if (i3GEO.Interface.openlayers.googleLike) {
 			temp = i3GEO.util.extOSM2Geo(x1 + " " + y1);
@@ -220,14 +212,14 @@ i3GEOF.area =
 		var wgs84Sphere,area,coordinates,sourceProj,n, x1, y1, x2, y2, trecho, temp,
 		coord = point.getCoordinates(),
 		total = 0;
-		i3GEOF.area.pontos.xpt.push(coord[0]);
-		i3GEOF.area.pontos.ypt.push(coord[1]);
+		i3GEOF.area._parameters.pontos.xpt.push(coord[0]);
+		i3GEOF.area._parameters.pontos.ypt.push(coord[1]);
 		i3GEO.analise.pontos.xpt.push(coord[0]);
 		i3GEO.analise.pontos.ypt.push(coord[1]);
-		n = i3GEOF.area.pontos.ypt.length;
+		n = i3GEOF.area._parameters.pontos.ypt.length;
 		if (n > 1) {
-		    x1 = i3GEOF.area.pontos.xpt[n - 2];
-		    y1 = i3GEOF.area.pontos.ypt[n - 2];
+		    x1 = i3GEOF.area._parameters.pontos.xpt[n - 2];
+		    y1 = i3GEOF.area._parameters.pontos.ypt[n - 2];
 		    x2 = coord[0];
 		    y2 = coord[1];
 		    raio = new ol.geom.LineString([[x1, y1],[x2, y2]]).getLength();
@@ -241,7 +233,7 @@ i3GEOF.area =
 			y2 = temp[3];
 		    }
 		    trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
-		    i3GEOF.area.pontos.dist.push(trecho);
+		    i3GEOF.area._parameters.pontos.dist.push(trecho);
 		    total = i3GEOF.area.openlayers.somaDist();
 
 		    sourceProj = i3geoOL.getView().getProjection();
@@ -251,7 +243,7 @@ i3GEOF.area =
 		    area = Math.abs(wgs84Sphere.geodesicArea(coordinates));
 
 		    i3GEOF.area.openlayers.mostraTotal(total, area);
-		    i3GEOF.area.ultimoWkt = i3GEOF.area.pontos2wkt();
+		    i3GEOF.area._parameters.ultimoWkt = i3GEOF.area.pontos2wkt();
 		}
 	    },
 	    /**
@@ -259,9 +251,9 @@ i3GEOF.area =
 	     */
 	    somaDist : function() {
 		var n, i, total = 0;
-		n = i3GEOF.area.pontos.dist.length;
+		n = i3GEOF.area._parameters.pontos.dist.length;
 		for (i = 0; i < n; i++) {
-		    total += i3GEOF.area.pontos.dist[i];
+		    total += i3GEOF.area._parameters.pontos.dist[i];
 		}
 		return total;
 	    },
@@ -322,7 +314,7 @@ i3GEOF.area =
 			+ i3GEO.calculo.metododistancia
 			+ "</div>";
 		    mostra.innerHTML = texto;
-		    i3GEOF.area.ultimaMedida = $.number((area / 1000000),3,$trad("dec"),$trad("mil")) + " km2";
+		    i3GEOF.area._parameters.ultimaMedida = $.number((area / 1000000),3,$trad("dec"),$trad("mil")) + " km2";
 		}
 	    },
 	    /**
@@ -362,7 +354,7 @@ i3GEOF.area =
 	     * layer para receber os graficos
 	     */
 	    inicia : function() {
-		i3GEOF.area.pontos = {
+		i3GEOF.area._parameters.pontos = {
 			xpt : [],
 			ypt : [],
 			dist : []
@@ -403,7 +395,7 @@ i3GEOF.area =
 			i3GEO.desenho.googlemaps.shapes.push(pontos.line);
 			pontos = null;
 		    }
-		    i3GEOF.area.ultimoWkt = i3GEOF.area.pontos2wkt();
+		    i3GEOF.area._parameters.ultimoWkt = i3GEOF.area.pontos2wkt();
 		};
 		evtclick = google.maps.event.addListener(i3GeoMap, "click", function(evt) {
 		    i3GEO.eventos.cliquePerm.desativa();
@@ -413,8 +405,8 @@ i3GEOF.area =
 		    pontos.mvcLine.push(evt.latLng);
 		    pontos.xpt.push(evt.latLng.lng());
 		    pontos.ypt.push(evt.latLng.lat());
-		    i3GEOF.area.pontos.xpt.push(evt.latLng.lng());
-		    i3GEOF.area.pontos.ypt.push(evt.latLng.lat());
+		    i3GEOF.area._parameters.pontos.xpt.push(evt.latLng.lng());
+		    i3GEOF.area._parameters.pontos.ypt.push(evt.latLng.lat());
 		    // desenha um circulo
 		    if (pontos.mvcLine.getLength() > 0) {
 			per = google.maps.geometry.spherical.computeLength(pontos.mvcLine);
@@ -545,7 +537,7 @@ i3GEOF.area =
 			+ ": "
 			+ i3GEO.calculo.metododistancia;
 		    mostra.innerHTML = texto + "<hr>";
-		    i3GEOF.area.ultimaMedida = (area / 1000000).toFixed(3) + " km2";
+		    i3GEOF.area._parameters.ultimaMedida = (area / 1000000).toFixed(3) + " km2";
 		}
 	    },
 	    /**
