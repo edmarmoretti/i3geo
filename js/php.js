@@ -1136,6 +1136,7 @@ i3GEO.php =
 		function(retorno) {
 		i3GEO.janela.fechaAguarde("adtema");
 		funcao.call(funcao, retorno);
+		i3GEO.janela.snackBar({content:$trad("camadaadic")});
 	    };
 	    i3GEO.janela.abreAguarde("adtema", $trad("o1"));
 	    cpJSON.call(p, "adtema", retorno, par);
