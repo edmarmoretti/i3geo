@@ -630,7 +630,7 @@ i3GEO.tema =
 		if(idtema && idtema != ""){
 		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		    if(t.status < 2){
-			i3GEO.janela.tempoMsg($trad("deveLigada"));
+			i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
 			return;
 		    }
 		}
@@ -658,7 +658,7 @@ i3GEO.tema =
 		if(idtema && idtema != ""){
 		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		    if(t.status < 2){
-			i3GEO.janela.tempoMsg($trad("deveLigada"));
+			i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
 			return;
 		    }
 		}
@@ -687,7 +687,7 @@ i3GEO.tema =
 		if(idtema && idtema != ""){
 		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		    if(t.status < 2){
-			i3GEO.janela.tempoMsg($trad("deveLigada"));
+			i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
 			return;
 		    }
 		}
@@ -733,7 +733,7 @@ i3GEO.tema =
 		if(idtema && idtema != ""){
 		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		    if(t.status < 2){
-			i3GEO.janela.tempoMsg($trad("deveLigada"));
+			i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
 			return;
 		    }
 		}
@@ -760,7 +760,7 @@ i3GEO.tema =
 		if(idtema && idtema != ""){
 		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		    if(t.status < 2){
-			i3GEO.janela.tempoMsg($trad("deveLigada"));
+			i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
 			return;
 		    }
 		}
@@ -804,17 +804,19 @@ i3GEO.tema =
 		if(idtema && idtema != ""){
 		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		    if(t.status < 2){
-			i3GEO.janela.tempoMsg($trad("deveLigada"));
+			i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
 			return;
 		    }
 		}
-		i3GEO.mapa.ativaTema(idtema);
+		var temp = function(){
+		    i3GEOF.legenda.start(idtema);
+		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.editaLegenda()",
 			"legenda",
 			"legenda",
 			"dependencias.php",
-		"i3GEOF.legenda.iniciaJanelaFlutuante()");
+		temp);
 	    },
 	    /**
 	     * Function: editaClasseLegenda
@@ -828,7 +830,7 @@ i3GEO.tema =
 	    editaClasseLegenda : function(idtema,idclasse) {
 		var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		if(t.status < 2){
-		    i3GEO.janela.tempoMsg($trad("deveLigada"));
+		    i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
 		    return;
 		}
 		i3GEO.mapa.ativaTema(idtema);

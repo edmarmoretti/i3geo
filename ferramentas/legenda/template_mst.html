@@ -1,71 +1,47 @@
 <!-- Guias -->
-<div class='yui-navset' style='height: 38px; top: 0px; cursor: pointer; margin-left: 2px;'>
-    <ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
-        <li>
-            <div id='i3GEOlegendaguia6' style='text-align: center; left: 0px;'>
-                <a title='{{{propriedades}}}'>
-                    <em><span class="material-icons">settings</span></em>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div id='i3GEOlegendaguia1' style='text-align: center; left: 0px;'>
-                <a>
-                    <em>{{{legenda}}}</em>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div id='i3GEOlegendaguia2' style='text-align: center; left: 0px;'>
-                <a>
-                    <em>{{{classes}}}</em>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div id='i3GEOlegendaguia3' style='text-align: center; left: 0px;'>
-                <a>
-                    <em>{{{editor}}}</em>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div id='i3GEOlegendaguia4' style='text-align: center; left: 0px;'>
-                <a>
-                    <em>{{{graficos}}}</em>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div id='i3GEOlegendaguia5' style='text-align: center; left: 0px;'>
-                <a>
-                    <em>{{{importaExportaSLD}}}</em>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div id='i3GEOlegendaguia7' style='text-align: center; left: 0px;'>
-                <a>
-                    <em>{{{cluster}}}</em>
-                </a>
-            </div>
-        </li>
-        <li>
-            <div id='i3GEOlegendaguia8' style='text-align: center; left: 0px;'>
-                <a>
-                    <em>Auto</em>
-                </a>
-            </div>
-        </li>
-    </ul>
-</div>
-<div class='container-fluid' style="width:98%;height: calc(100% - 39px); overflow: auto;">
-
-<!--- Propriedades -->
-    <div id='i3GEOlegendaguia6obj' class='container-fluid ' >
-        <button onclick="i3GEOF.legenda.adicionaConta()" class='btn btn-primary btn-sm btn-block btn-raised'>{{{incluiNumeroOcorrencia}}}</button>
-        <button onclick="i3GEOF.legenda.adicionaOpacidade()" title='{{{aplicaOpacidade}}}' class='btn btn-primary btn-sm btn-block btn-raised'>{{{aplicaOpacidadeVariavel}}}</button>
-        <button onclick="i3GEOF.legenda.janelaCorRamp()" title='{{{variaCoresExtremos}}}' class='btn btn-primary btn-sm btn-block btn-raised'>{{{escolhePaletaCores}}}</button>
+<nav class='navbar navbar-default' style='margin-bottom: 0px; min-height: 35px'>
+    <div class="container" style="margin: 0px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse" style="padding: 0px;">
+            <ul class="nav navbar-nav ">
+                <li role="presentation"><a id='i3GEO{{namespace}}guia6' href="javascript:void(0);">
+                        <span class="material-icons">settings</span>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia1' href="javascript:void(0);">
+                        <em>{{{legenda}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia2' href="javascript:void(0);">
+                        <em>{{{classes}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia3' href="javascript:void(0);">
+                        <em>{{{editor}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia4' href="javascript:void(0);">
+                        <em>{{{graficos}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia5' href="javascript:void(0);">
+                        <em>{{{importaExportaSLD}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia7' href="javascript:void(0);">
+                        <em>{{{cluster}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia8' href="javascript:void(0);">
+                        <em>Auto</em>
+                    </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; height: calc(100% - 50px);'>
+    <!--- Propriedades -->
+    <div id='i3GEOlegendaguia6obj' class='container-fluid '>
+        <button onclick="i3GEOF.legenda.adicionaConta()" class='btn btn-primary btn-sm btn-raised'>{{{incluiNumeroOcorrencia}}}</button>
+        <button onclick="i3GEOF.legenda.adicionaOpacidade()" title='{{{aplicaOpacidade}}}' class='btn btn-primary btn-sm btn-raised'>{{{aplicaOpacidadeVariavel}}}</button>
+        <button onclick="i3GEOF.legenda.janelaCorRamp()" title='{{{variaCoresExtremos}}}' class='btn btn-primary btn-sm btn-raised'>{{{escolhePaletaCores}}}</button>
         <div class="checkbox text-left">
             <label>
                 <input checked type="checkbox" id="i3GEOFlegendamostra" onclick="i3GEO.tema.invertestatuslegenda(i3GEOF.legenda.tema);">
@@ -73,260 +49,384 @@
                 </span> {{{mostraClassesLegenda}}}
             </label>
         </div>
-        <div class="form-group label-fixed">
-            <label class="control-label" for="i3GEOlegendaImg">{{{legendaImg}}}</label>
-            <div class="input-group">
-                <input id="i3GEOlegendaImg" class="form-control" type="text" value="">
-                <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicarLegendaImg();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
-                        href="javascript:void(0)">
-                        <span class="material-icons ">send</span>
-                    </a>
-                </span>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group label-fixed condensed">
+                            <label class="control-label" for="i3GEOlegendaImg">{{{legendaImg}}}</label>
+                            <div class="input-group">
+                                <input id="i3GEOlegendaImg" class="form-control" type="text" value="">
+                                <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicarLegendaImg();return false;" role="button" type="button"
+                                        class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">send</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group label-fixed">
-            <label class="control-label" for="i3GEOlegendaImg">{{{offsite}}}</label>
-            <div class="input-group">
-                <input id="i3GEOoffsite" class="form-control i3geoFormIconeAquarela" type="text" value="-1,-1,-1">
-                <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicarOffsite();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
-                        href="javascript:void(0)">
-                        <span class="material-icons ">send</span>
-                    </a>
-                </span>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group label-fixed condensed">
+                            <label class="control-label" for="i3GEOlegendaImg">{{{offsite}}}</label>
+                            <div class="input-group">
+                                <input id="i3GEOoffsite" class="form-control i3geoFormIconeAquarela" type="text" value="-1,-1,-1">
+                                <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicarOffsite();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                                        href="javascript:void(0)">
+                                        <span class="material-icons ">send</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </div>
-
-        <div class="form-group label-fixed">
-            <label class="control-label" for="i3GEOlegendaImg">{{{geraCores}}}</label>
-            <br> {{{de}}} &nbsp;
-            <input class="form-control i3geoFormIconeAquarela" style="display: inline; width: 150px;" id="i3GEOlegendaacori" size="10" value="0,0,0" type="text">
-            &nbsp; {{{ate}}} &nbsp;
-            <input class="form-control i3geoFormIconeAquarela" style="display: inline; width: 150px;" id="i3GEOlegendaacorf" size="10" value="255,255,255" type="text">
-            &nbsp; <span class="input-group-btn" style="display: inline;"> <a title='{{{aplicaVariaCores}}}' onclick="i3GEOF.legenda.paleta();return false;" role="button" type="button"
-                    class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                    <span class="material-icons ">send</span>
-                </a>
-            </span>
+            <div class="col-md-4">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        <div class="form-group label-fixed condensed">
+                            <label class="control-label" for="i3GEOlegendaImg">{{{geraCores}}}</label>
+                            <br> {{{de}}} &nbsp;
+                            <input class="form-control i3geoFormIconeAquarela" style="display: inline; width: 100px;" id="i3GEOlegendaacori" size="10" value="0,0,0" type="text">
+                            &nbsp; {{{ate}}} &nbsp;
+                            <input class="form-control i3geoFormIconeAquarela" style="display: inline; width: 100px;" id="i3GEOlegendaacorf" size="10" value="255,255,255" type="text">
+                            &nbsp; <span class="input-group-btn" style="display: inline;"> <a title='{{{aplicaVariaCores}}}' onclick="i3GEOF.legenda.paleta();return false;" role="button"
+                                    type="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                    <span class="material-icons ">send</span>
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
     <!-- listagem das classes ver templateLista_mst.html -->
-    <div id='i3GEOlegendaguia1obj' class='container-fluid ' style="height: calc(100% - 200px);">
-        <div id='i3GEOFlegendaComboCabeca' class='form-group condensed' ></div>
+    <div id='i3GEOlegendaguia1obj' class='container-fluid '>
         <div id="i3GEOlegendaguia1objLegenda"></div>
     </div>
 
     <!-- Classificacao -->
     <div id='i3GEOlegendaguia2obj' class='container-fluid '>
-        <div class="checkbox text-left">
-            <label>
-                <input checked id='i3GEOFlegendaaplicaextent' type="checkbox" onclick="">
-                <span class="checkbox-material noprint"> <span class="check"></span>
-                </span> {{{consideraElementosVisisveis}}}
-            </label>
-        </div>
-        <div class='form-group label-floating'>
-            <label class="control-label" for="{{{idjanela}}}i3GEOtabelaexcestat">{{{ignoraValores}}}</label>
-            <input class="form-control input-lg" type='text' id='i3GEOlegendaignorar' value='' />
-        </div>
-
-        <hr />
-        <h5>{{{alteraGeom}}}</h5>
-        <div style="width: 80%">
-            <div class='form-group condensed'>
-                <label class="control-label" for="i3GEOlegentaTipoGeo">{{{transformaGeom}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <select class="form-control" id='i3GEOlegentaTipoGeo'>
-                        <option value=''>{{{semTransformacao}}}</option>
-                        <option value='centroid'>{{{centroide}}}</option>
-                        <option value='bbox'>box</option>
-                        <option value='vertices'>{{{vertices}}}</option>
-                        <option value='start'>{{{verticeInicial}}}</option>
-                        <option value='end'>{{{verticeFinal}}}</option>
-                    </select> <b class="caret careti"></b>
-                </div>
-            </div>
-            <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn pull-right"> <a style="left: 80px;" onclick="i3GEOF.legenda.alteraGeometriaTema();return false;"
-                    role="button" type="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                    <span class="material-icons ">send</span>
-                </a>
-            </span>
-        </div>
-        <hr />
-        <h5>{{{alteraTipo}}}</h5>
-        <div style="width: 80%">
-
-            <div class='form-group condensed'>
-                <div class="input-group">
-                    <label class="control-label">{{{alteraTipoGeom}}}</label>
-                </div>
-            </div>
-            <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn"> <a style="left: 80px;" onclick="i3GEOF.legenda.representacao();return false;" role="button"
-                    type="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                    <span class="material-icons ">send</span>
-                </a>
-            </span>
-        </div>
-        <hr />
-        <h5>{{{simboloUnico}}}</h5>
-        <div style="width: 80%">
-
-            <div class='form-group condensed'>
-                <div class="input-group">
-                    <label class="control-label">{{{todosElementosUnicoSimbolo}}}</label>
-                </div>
-            </div>
-            <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn"> <a style="left: 80px;" onclick="i3GEOF.legenda.simbU();return false;" role="button" type="button"
-                    class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                    <span class="material-icons ">send</span>
-                </a>
-            </span>
-        </div>
-        <hr />
-        <h5>{{{valorUnico}}}</h5>
-        <div style="width: 80%">
-
-            <div class='form-group condensed'>
-                <label class="control-label">{{{cadaOcorrenciaUnicoSimbolo}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <div id='i3GEOlegendaitensValorUnico'></div>
-                </div>
-            </div>
-            <div class='form-group condensed'>
-                <label class="control-label">{{{nomeClassesUnicoSimbolo}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <div id='i3GEOlegendaClassesValorUnico'></div>
-
-                </div>
-            </div>
-            <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn"> <a style="left: 80px;" onclick="i3GEOF.legenda.valorU();return false;" role="button" type="button"
-                    class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                    <span class="material-icons ">send</span>
-                </a>
-            </span>
-        </div>
-        <hr />
-        <h5>{{{classesFixas}}}</h5>
-        <div style="width: 80%">
-
-            <div class='form-group condensed'>
-                <label class="control-label">{{{criaClassesItemNumerico}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <div id='i3GEOlegendaitensValorClass'></div>
-                </div>
-            </div>
-            <div class='form-group label-floating'>
-                <label class="control-label" for="i3GEOlegendanclasses">{{{numeroClasses}}}</label>
-                <input class="form-control input-lg" type='text' id='i3GEOlegendanclasses' value='5' />
-            </div>
-            <h5>{{{tipoCalculo}}}</h5>
-            <button onclick="i3GEOF.legenda.valorC()" class='btn btn-primary btn-sm btn-raised'>{{{intervalosIguais}}}</button>
-            <button onclick="i3GEOF.legenda.valorQN()" class='btn btn-primary btn-sm btn-raised'>{{{quebrasNaturais}}}</button>
-            <button onclick="i3GEOF.legenda.valorQu()" class='btn btn-primary btn-sm btn-raised'>{{{calcularQuantil}}}</button>
-        </div>
-        <hr />
-        <h5>{{{metade}}}</h5>
-        <div style="width: 80%">
-
-            <div class='form-group condensed'>
-                <label class="control-label">{{{duasmetades}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <div id='i3GEOlegendaitensMetade'></div>
-                </div>
-            </div>
-            <div class='form-group condensed'>
-                <label class="control-label">{{{iunico}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <div id='i3GEOlegendaitensMetadeId'></div>
-                </div>
-            </div>
-            <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn"> <a style="left: 80px;" onclick="i3GEOF.legenda.metade();return false;" role="button" type="button"
-                    class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                    <span class="material-icons ">send</span>
-                </a>
-            </span>
-        </div>
-        <hr />
-        <h5>{{{media}}}</h5>
-        <div style="width: 80%">
-
-            <div class='form-group condensed'>
-                <label class="control-label">{{{duasmedias}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <div id='i3GEOlegendaitensMedia'></div>
-                </div>
-            </div>
-            <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn"> <a style="left: 80px;" onclick="i3GEOF.legenda.media();return false;" role="button" type="button"
-                    class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                    <span class="material-icons ">send</span>
-                </a>
-            </span>
-        </div>
-        <hr />
-        <h5>{{{calcularQuartil}}}</h5>
-        <div style="width: 80%">
-
-            <div class='form-group condensed'>
-                <label class="control-label">{{{criaQuartis}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <div id='i3GEOlegendaitensValorQuartil'></div>
-                </div>
-            </div>
-            <div class='form-group condensed'>
-                <label class="control-label">{{{estiloNomeClasses}}}</label>
-                <div style="width: 100%;" class="input-group">
-                    <select class="form-control" id='estiloClassesQuartis'>
-                        <option value='minimo'>{{{soValores}}}</option>
-                        <option value='simples'>{{{quartilValores}}}</option>
-                        <option value='completo'>{{{expressaoCompleta}}}</option>
-                    </select> <b class="caret careti"></b>
-
-
-                </div>
-            </div>
-            <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn"> <a style="left: 80px;" onclick="i3GEOF.legenda.valorQ();return false;" role="button" type="button"
-                    class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                    <span class="material-icons ">send</span>
-                </a>
-            </span>
-        </div>
         <br>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="" id="legendaClassesAccordion" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion4">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse4" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse4"> {{{simboloUnico}}} </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse4" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion4">
+                            <div class="panel-body">
+                                <div class='form-group condensed'>
+                                    <div class="input-group">
+                                        <label class="control-label">{{{todosElementosUnicoSimbolo}}}</label>
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.simbU();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                                                href="javascript:void(0)">
+                                                <span class="material-icons ">send</span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion9">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse9" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse9"> {{{valorUnico}}} </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse9" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion9">
+                            <div class="panel-body">
+                                <div class='form-group condensed'>
+                                    <label class="control-label">{{{cadaOcorrenciaUnicoSimbolo}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <div id='i3GEOlegendaitensValorUnico'></div>
+                                    </div>
+                                </div>
+                                <div class='form-group condensed'>
+                                    <label class="control-label">{{{nomeClassesUnicoSimbolo}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <div id='i3GEOlegendaClassesValorUnico'></div>
+
+                                    </div>
+                                </div>
+                                <div class='form-group condensed'>
+                                    <div class="input-group">
+                                        <label class="control-label">&nbsp;</label>
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.valorU();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                                                href="javascript:void(0)">
+                                                <span class="material-icons ">send</span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion5">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse5" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse5"> {{{classesFixas}}} </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse5" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion5">
+                            <div class="panel-body">
+                                <div class='form-group condensed'>
+                                    <label class="control-label">{{{criaClassesItemNumerico}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <div id='i3GEOlegendaitensValorClass'></div>
+                                    </div>
+                                </div>
+                                <div class='form-group label-floating'>
+                                    <label class="control-label" for="i3GEOlegendanclasses">{{{numeroClasses}}}</label>
+                                    <input class="form-control input-lg" type='text' id='i3GEOlegendanclasses' value='5' />
+                                </div>
+                                <h5>{{{tipoCalculo}}}</h5>
+                                <button onclick="i3GEOF.legenda.valorC()" class='btn btn-primary btn-sm btn-raised'>{{{intervalosIguais}}}</button>
+                                <button onclick="i3GEOF.legenda.valorQN()" class='btn btn-primary btn-sm btn-raised'>{{{quebrasNaturais}}}</button>
+                                <button onclick="i3GEOF.legenda.valorQu()" class='btn btn-primary btn-sm btn-raised'>{{{calcularQuantil}}}</button>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion6">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse6" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse6"> {{{metade}}} </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse6" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion6">
+                            <div class="panel-body">
+                                <div class='form-group condensed'>
+                                    <label class="control-label">{{{duasmetades}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <div id='i3GEOlegendaitensMetade'></div>
+                                    </div>
+                                </div>
+                                <div class='form-group condensed'>
+                                    <label class="control-label">{{{iunico}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <div id='i3GEOlegendaitensMetadeId'></div>
+                                    </div>
+                                </div>
+                                <div class='form-group condensed'>
+                                    <div class="input-group">
+                                        <label class="control-label">&nbsp;</label>
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.metade();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                                                href="javascript:void(0)">
+                                                <span class="material-icons ">send</span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion7">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse7" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse7"> {{{media}}} </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse7" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion7">
+                            <div class="panel-body">
+                                <div class='form-group condensed'>
+                                    <label class="control-label">{{{duasmedias}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <div id='i3GEOlegendaitensMedia'></div>
+                                    </div>
+                                </div>
+                                <div class='form-group condensed'>
+                                    <div class="input-group">
+                                        <label class="control-label">&nbsp;</label>
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.media();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                                                href="javascript:void(0)">
+                                                <span class="material-icons ">send</span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion8">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse8" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse8"> {{{calcularQuartil}}} </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse8" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion8">
+                            <div class="panel-body">
+
+                                <div class='form-group condensed'>
+                                    <label class="control-label">{{{criaQuartis}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <div id='i3GEOlegendaitensValorQuartil'></div>
+                                    </div>
+                                </div>
+                                <div class='form-group condensed'>
+                                    <label class="control-label">{{{estiloNomeClasses}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <select class="form-control" id='estiloClassesQuartis'>
+                                            <option value='minimo'>{{{soValores}}}</option>
+                                            <option value='simples'>{{{quartilValores}}}</option>
+                                            <option value='completo'>{{{expressaoCompleta}}}</option>
+                                        </select> <b class="caret careti"></b>
+                                    </div>
+                                </div>
+                                <div class='form-group condensed'>
+                                    <div class="input-group">
+                                        <label class="control-label">&nbsp;</label>
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.valorQ();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                                                href="javascript:void(0)">
+                                                <span class="material-icons ">send</span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="" id="legendaClassesAccordion_" role="tablist" aria-multiselectable="true">
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion1">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion_" href="#legendaClassesCollapse1" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse1"> Par&acirc;metros </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse1" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion1">
+                            <div class="panel-body">
+                                <div class="checkbox text-left">
+                                    <label>
+                                        <input checked id='i3GEOFlegendaaplicaextent' type="checkbox" onclick="">
+                                        <span class="checkbox-material noprint"> <span class="check"></span>
+                                        </span> {{{consideraElementosVisisveis}}}
+                                    </label>
+                                </div>
+                                <div class='form-group label-fixed condensed'>
+                                    <label class="control-label" for="{{{idjanela}}}i3GEOtabelaexcestat">{{{ignoraValores}}}</label>
+                                    <input class="form-control input-lg" type='text' id='i3GEOlegendaignorar' value='' />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion2">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion_" href="#legendaClassesCollapse2" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse2"> {{{alteraGeom}}} </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse2" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion2">
+                            <div class="panel-body">
+                                <div class='form-group condensed'>
+                                    <label class="control-label" for="i3GEOlegentaTipoGeo">{{{transformaGeom}}}</label>
+                                    <div style="width: 100%;" class="input-group">
+                                        <select class="form-control" id='i3GEOlegentaTipoGeo'>
+                                            <option value=''>{{{semTransformacao}}}</option>
+                                            <option value='centroid'>{{{centroide}}}</option>
+                                            <option value='bbox'>box</option>
+                                            <option value='vertices'>{{{vertices}}}</option>
+                                            <option value='start'>{{{verticeInicial}}}</option>
+                                            <option value='end'>{{{verticeFinal}}}</option>
+                                        </select> <b class="caret careti"></b>
+                                    </div>
+                                </div>
+                                <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn pull-right"> <a style="left: 80px;"
+                                        onclick="i3GEOF.legenda.alteraGeometriaTema();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">send</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading" role="tab" id="legendaClassesAccordion3">
+                            <h4 class="panel-title">
+                                <a class="collapsed" role="button" data-toggle="collapse" data-parent="#legendaClassesAccordion_" href="#legendaClassesCollapse3" aria-expanded="false"
+                                    aria-controls="legendaClassesCollapse3"> {{{alteraTipo}}} </a>
+                            </h4>
+                        </div>
+                        <div id="legendaClassesCollapse3" class="panel-collapse collapse" role="tabpanel" aria-labelledby="legendaClassesAccordion3">
+                            <div class="panel-body">
+                                <div class='form-group condensed'>
+                                    <div class="input-group">
+                                        <label class="control-label">{{{alteraTipoGeom}}}</label>
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.representacao();return false;" role="button" type="button"
+                                                class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                                <span class="material-icons ">send</span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     <!-- editor de simbolos -->
     <div id='i3GEOlegendaguia3obj' class='container-fluid '>
-        <h5>{{{etiquetasClasse}}}</h5>
-        <div class='form-group condensed'>
-            <label class="control-label" for="i3GEOlegendaitensLabel">{{{itemComTexto}}}</label>
-            <div style="width: 100%;" class="input-group">
-                <div id='i3GEOlegendaitensLabel'></div>
+        <br>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{{etiquetasClasse}}}</div>
+                    <div class="panel-body">
+                        <div class='form-group condensed'>
+                            <label class="control-label" for="i3GEOlegendaitensLabel">{{{itemComTexto}}}</label>
+                            <div style="width: 100%;" class="input-group">
+                                <div id='i3GEOlegendaitensLabel'></div>
+                            </div>
+                        </div>
+                        <button onclick="i3GEOF.legenda.excluiLabels()" class='btn btn-primary btn-sm btn-raised'>{{{removeLabels}}}</button>
+                        <button onclick="i3GEOF.legenda.incluirLabels()" class='btn btn-primary btn-sm btn-raised'>{{{aplicar}}}</button>
+                        <button onclick="i3GEOF.legenda.propriedadesLabels()" class='btn btn-primary btn-sm btn-raised'>{{{propriedades2}}}</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <button onclick="i3GEOF.legenda.excluiLabels()" class='btn btn-primary btn-sm btn-raised'>{{{removeLabels}}}</button>
-        <button onclick="i3GEOF.legenda.incluirLabels()" class='btn btn-primary btn-sm btn-raised'>{{{aplicar}}}</button>
-        <button onclick="i3GEOF.legenda.propriedadesLabels()" class='btn btn-primary btn-sm btn-raised'>{{{propriedades2}}}</button>
-
-        <hr />
-
-        <h5>{{{estilos}}}</h5>
-
-        <div class='form-group condensed'>
-            <label class="control-label" for="i3GEOlegendaestilos">{{{estiloEdicao}}}</label>
-            <div class="input-group" style="width: 150px;">
-                <div id='i3GEOlegendacomboestilos'></div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">{{{estilos}}}</div>
+                    <div class="panel-body">
+                        <div class='form-group condensed'>
+                            <label class="control-label" for="i3GEOlegendaestilos">{{{estiloEdicao}}}</label>
+                            <div class="input-group" style="width: 150px;">
+                                <div id='i3GEOlegendacomboestilos'></div>
+                            </div>
+                        </div>
+                        <button onclick="i3GEOF.legenda.excluiEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{exclui}}}</button>
+                        <button onclick="i3GEOF.legenda.adicionaEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{adiciona}}}</button>
+                        <button onclick="i3GEOF.legenda.sobeEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{sobe}}}</button>
+                        <button onclick="i3GEOF.legenda.desceEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{desce}}}</button>
+                    </div>
+                </div>
             </div>
         </div>
-        <button onclick="i3GEOF.legenda.excluiEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{exclui}}}</button>
-        <button onclick="i3GEOF.legenda.adicionaEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{adiciona}}}</button>
-        <button onclick="i3GEOF.legenda.sobeEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{sobe}}}</button>
-        <button onclick="i3GEOF.legenda.desceEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{desce}}}</button>
-
-        <hr />
-
-        <h5>{{{edicaoEstilo}}}</h5>
-        <h5>{{{ajudaEstilo}}}</h5>
+        <h4>{{{edicaoEstilo}}}</h4>
+        <h4>{{{ajudaEstilo}}}</h4>
         <div id='i3GEOlegendaParametrosEstilos'></div>
-        <div style='position: relative; top: 0px; left: 0px; text-align: left;' id='i3GEOlegendamostraEstilo'></div>
-        <div style='position: relative; top: 0px; left: 0px; text-align: left;' id='i3GEOlegendasimbolos'></div>
+
     </div>
 
     <!-- graficos -->

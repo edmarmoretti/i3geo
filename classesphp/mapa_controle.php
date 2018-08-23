@@ -1040,11 +1040,14 @@ switch (strtoupper($funcao)) {
          * Gera um arquivo para download de um tema.
          */
     case "DOWNLOAD3":
+        if(isset($_SESSION)){
+            $map_file = $_SESSION["map_file"];
+        }
         $retorno = downloadTema2($map_file, $_pg["tema"], $locaplic, $dir_tmp, $postgis_mapa);
         $retorno["arquivos"] = "";
         $retorno["datas"] = "";
         $_SESSION["downloadZipTema"] = $retorno["shape-zip"];
-        $retorno["shape-zip"] = "";
+        $retorno["shape-zip"] = basename($retorno["shape-zip"]);
         session_write_close();
         break;
     /*
@@ -1052,7 +1055,7 @@ switch (strtoupper($funcao)) {
      *
      * Gera os arquivos para download de um tema for&ccedil;ando um mapfile vazio.
      */
-    case "DOWNLOAD3":
+    case "DOWNLOAD3x":
         // caso o tema tenha de vir do sistema de metadados estatisticos
         // pode ser uma regiao cadastrada no sistema de metadados
         $tema = $_pg["tema"];

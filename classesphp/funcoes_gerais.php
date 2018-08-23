@@ -1752,7 +1752,6 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
 {
     ini_set("max_execution_time", "1800");
     ini_set('memory_limit', '5000M');
-    $temas = array();
     if (file_exists($locaplic . "/ms_configura.php")) {
         include ($locaplic . "/ms_configura.php");
     } else {
@@ -1768,7 +1767,7 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
     //
     $nomeRand = true;
     $projecao = pegaProjecaoDefault();
-    if (($map_file == "") || (! @ms_newMapObj($map_file))) { // a funcao foi chamada do aplicativo datadownload
+    if (($map_file == "") || (! file_exists($map_file))) { // a funcao foi chamada do aplicativo datadownload
         if ($base == "" or ! isset($base)) {
             $base = "";
             if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
@@ -1808,17 +1807,8 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
     $map = ms_newMapObj($map_file);
     $rectextent = $map->extent;
     $extensao = ".map";
-    //
-    // problema aqui
-    // $tema pode ser diferente do nome do mapfile
-    //
-    $teste = @$map->getlayerbyname($tema);
-    // caso o usuario tenha usado caixa alta no nome do layer
-    if ($teste == "") {
-        $teste = @$map->getlayerbyname(strtoupper($tema));
-    }
-    // se o layer n&atilde;o existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
-    if ($teste == "") {
+    // se o layer nao existir no mapfile, pega da pasta i3geo/temas e adiciona em $map
+    if (@$map->getlayerbyname($tema) == "") {
         // tema pode ser o nome de um arquivo mapfile
         if (file_exists($tema . ".map")) {
             $maptemp = ms_newMapObj($tema . ".map");
@@ -1826,240 +1816,166 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
         } else {
             $maptemp = ms_newMapObj($temasdir . "/" . $tema . ".map");
         }
-        $numlayers = $maptemp->numlayers;
-        for ($i = 0; $i < $numlayers; ++ $i) {
-            $ll = $maptemp->getlayer($i);
-            $permite = $ll->getmetadata("permitedownload");
-            if ($permite != "nao") {
-                ms_newLayerObj($map, $ll);
-            }
-        }
-        $teste = @$map->getlayerbyname($tema);
-        if ($teste == "") {
-            $ll = $maptemp->getlayer(0);
-            $permite = $ll->getmetadata("permitedownload");
-            if ($permite != "nao") {
-                ms_newLayerObj($map, $ll);
-                $tema = $ll->name;
-            }
+        $ll = $maptemp->getlayer(0);
+        if($ll->getmetadata("permitedownload") != "nao"){
+            ms_newLayerObj($map, $ll);
         }
     } else {
         // remove o metadata com um nome de arquivo opcional, pois a fun&ccedil;&atilde;o de download pode estar sendo executada da &aacute;rvore de camadas
         $teste = $map->getlayerbyname($tema);
         $teste->setmetadata("arquivodownload", "");
     }
-
-    //
-    // salva o mapfile com um outro nome para evitar que o mapa atual, se estiver aberto, seja modificado
-    //
-    // verifica se tem query e copia o arquivo
-    $qyfile = str_replace(".map", "_qy.map", $map_file);
-    $nr = nomerandomico(5);
-    $map_file = str_replace(".map", $nr . "tmp.map", $map_file);
-    if (file_exists($qyfile)) {
-        $nqyfile = str_replace(".map", "_qy.map", $map_file);
-        $nqyfile = str_replace("_qy.map", "", $nqyfile) . "_qy.map";
-        copy($qyfile, $nqyfile);
-    }
+    $map_file = str_replace(".map","",$map_file).nomerandomico(5).".map";
     $map->save($map_file);
-
-    // $map_file agora contem os LAYERS necess&aacute;rios
+    validaAcessoTemas($map_file);
     $map = ms_newMapObj($map_file);
     substituiConObj($map, $postgis_mapa);
     $nameMapfile = $map->name;
-    //
-    // verifica se existe mais de um tema (grupo) montando o array com os temas
-    // os grupos podem ter o nome do layer em GROUP ao inv&eacute;s de NAME
-    //
-        $multilayer = 0;
-        $grupos = $map->getAllGroupNames();
-        foreach ($grupos as $grupo) {
-            if ($grupo == $tema) {
-                $multilayer = 1;
-            }
-        }
-        if ($multilayer == 1) {
-            $temasnx = $map->getAllLayerNames();
-            foreach ($temasnx as $l) {
-                $gl = $map->getlayerbyname($l);
-                $g = $gl->group;
-                if (($g == $tema) || ($l == $tema)) {
-                    $temas[] = $l;
-                }
-            }
-        }
-        if ($multilayer == 0) {
-            $temas[] = $tema;
-        }
-    // $temas agora &eacute; um array com os NAMEs dos LAYERS que ser&atilde;o baixados
     $radtmp = dirname($dir_tmp);
-    $ziper = new zipfile();
-    foreach ($temas as $tema) {
-        $l = $map->getlayerbyname($tema);
-        $novonomelayer = $tema;
-        // usa o NAME do mapfile para nao gerar arquivos com o mesmo nome em instalacoes multiplas do i3geo
-        $nomeshp = $dir_tmp . "/" . $nameMapfile . "_" . $novonomelayer;
-        if (file_exists($nomeshp . ".dbf")) {
-            //
-            // verifica se o arquivo est&aacute; vazio ou n&atilde;o
-            // se estiver, apaga o arquivo
-            //
-            $verificaDBF = verificaDBF($nomeshp . ".dbf");
-            if ($verificaDBF == false) {
-                unlink($nomeshp . ".dbf");
-                unlink($nomeshp . ".shp");
-                unlink($nomeshp . ".shx");
-                unlink($nomeshp . ".prj");
-                unlink($nomeshp . ".zip");
+    $nomezip = $dir_tmp . "/" . $nameMapfile . "_" . $tema;
+    $qyfile = str_replace(".map", "_qy.map", $map_file);
+    if(file_exists($qyfile)){
+        $nomezip = $nomezip . nomerandomico(5);
+    }
+    if(file_exists($nomezip.".zip")){
+        return array(
+            "tema" => $tema,
+            "mapfile" => "",
+            "mapfileurl" => "",
+            "arquivos" => "",
+            "nreg" => "",
+            "datas" => "",
+            "shape-zip" => $nomezip.".zip"
+        );
+    }
+    $l = $map->getlayerbyname($tema);
+    //
+    // se existir um arquivo j&aacute; pronto, definido no metadata arquivodownload, ir&aacute; ser utilizado
+    //
+    $meta = $l->getmetadata("arquivodownload");
+    if ($meta != "") {
+        $meta = str_replace(".zip", "", $meta) . ".zip";
+        if (file_exists($meta)) {
+            if (! file_exists($nomecopia)) {
+                copy($meta, $nomezip.".zip");
             }
         }
+        return array(
+            "tema" => $tema,
+            "mapfile" => "",
+            "mapfileurl" => "",
+            "arquivos" => "",
+            "nreg" => "",
+            "datas" => "",
+            "shape-zip" => $nomezip.".zip"
+        );
+    }
+    $ziper = new zipfile();
+    $zipar = array();
+    $novonomelayer = $tema;
+    // usa o NAME do mapfile para nao gerar arquivos com o mesmo nome em instalacoes multiplas do i3geo
+    $nomeshp = $dir_tmp . "/" . $nameMapfile . "_" . $tema;
+    if (file_exists($nomeshp . ".dbf")) {
         //
-        // se existir um arquivo j&aacute; pronto, definido no metadata arquivodownload, ir&aacute; ser utilizado
+        // verifica se o arquivo est&aacute; vazio ou n&atilde;o
+        // se estiver, apaga o arquivo
         //
-        $meta = $l->getmetadata("arquivodownload");
-        if ($meta != "") {
-            //
-            // se o arquivo n&atilde;o tiver sido copiado
-            //
-            // evita que se tente copiar qualquer arquivo
-            $meta = str_replace(".zip", "", $meta) . ".zip";
-            $nomecopia = $dir_tmp . "/" . $nameMapfile . "_" . basename($meta);
-            // para evitar que tente copiar um arquivo mapfile
-            $nomecopia = str_replace(".map", "", $nomecopia);
-            $nomecopia = str_replace(".zip", "zip", $nomecopia) . ".zip";
-            if (file_exists($meta)) {
-                if (! file_exists($nomecopia)) {
-                    copy($meta, $nomecopia);
-                }
-            }
-            $resultado[] = basename($dir_tmp) . "/" . basename($nomecopia);
-        } else { // se n&atilde;o existir arquivo definido
-            $dados = $l->data;
-            //
-            // se for imagem, copia o arquivo
-            //
-            if ($l->type == MS_LAYER_RASTER) {
-                if (file_exists($dados)) {
-                    $dir = dirname($dados);
-                    $arq = explode(".", basename($dados));
-                    $nomecopia = $dir_tmp . "/" . $nameMapfile . "_" . $arq[0];
-                    $exts = array(
-                        "jpg",
-                        "jpw",
-                        "tif",
-                        "tifw",
-                        "tfw",
-                        "png",
-                        "pngw",
-                        "jpgw",
-                        "wld",
-                        "img"
-                    );
-                    foreach ($exts as $ext) {
-                        $copia = $nomecopia . "." . $ext;
-                        if (! file_exists($copia) && file_exists($dir . "/" . $arq[0] . "." . $ext)) {
-                            copy($dir . "/" . $arq[0] . "." . $ext, $copia);
-                        }
-                        if (file_exists($copia)) {
-                            $resultado[] = basename($dir_tmp) . "/" . basename($copia);
-                        }
-                    }
-                } else {
-                    return "erro";
-                }
-            } else { // se for vetorial, extrai o arquivo
-                  //
-                  // verifica se existe selecao, caso contrario, faz a selecao baseada na extensao
-                  // do mapfile
-                  //
-                include (dirname(__FILE__) . "/../classesphp/classe_selecao.php");
-                $sel = new Selecao($map_file, $tema);
-                // carrega a query para ver se o layer possui selecao ou nao
-                $numSel = 0;
-                $nomeRand = true;
-
-                if (file_exists($sel->qyfile)) {
-                    $map->loadquery($sel->qyfile);
-                    $numSel = $l->getNumresults();
-                    $nomeshp = criaSHP($tema, $map_file, $locaplic, $dir_tmp, $nomeRand, $projecao["prj"]);
-                }
-                //
-                // se nao existir selecao seleciona por box
-                // o box vem do mapfile original
-                //
-                if (! file_exists($sel->qyfile)) {
-                    $box = $rectextent->minx . " " . $rectextent->miny . " " . $rectextent->maxx . " " . $rectextent->maxy;
-                    $shapesSel = $sel->selecaoBOX("novo", $box, true);
-                    // reaproveita arquivo anterior
-                    $nomeRand = false;
-                    $nomeshp = criaSHP($tema, $map_file, $locaplic, $dir_tmp, $nomeRand, $projecao["prj"], true, $shapesSel);
-                }
-                // remove o arquivo de selecao se ele foi criado apenas para pegar todos os elementos
-                if ($nomeRand == false) {
-                    $sel->selecaoLimpa();
-                }
-                if ($nomeshp == false) {
-                    return array(
-                        "arquivos" => "<span style=color:red >Ocorreu um erro, tente novamente",
-                        "nreg" => 0
-                    );
-                }
-                $pre = str_replace($radtmp . "/", "", $nomeshp);
-                $resultado[] = $pre . ".shp";
-                $dataArquivos[] = date("F d Y H:i:s.", filemtime($nomeshp . ".shp"));
-
-                $resultado[] = $pre . ".shx";
-                $dataArquivos[] = date("F d Y H:i:s.", filemtime($nomeshp . ".shx"));
-
-                $resultado[] = $pre . ".dbf";
-                $dataArquivos[] = date("F d Y H:i:s.", filemtime($nomeshp . ".dbf"));
-
-                $resultado[] = $pre . ".prj";
-                $dataArquivos[] = date("F d Y H:i:s.", filemtime($nomeshp . ".prj"));
-                // zipa o arquivo
-                $zip = basename($pre);
-                if (! file_exists($pre . ".zip")) {
-                    $ziper->addFile(file_get_contents($nomeshp . ".shp"), $zip . ".shp");
-                    $ziper->addFile(file_get_contents($nomeshp . ".shx"), $zip . ".shx");
-                    $ziper->addFile(file_get_contents($nomeshp . ".dbf"), $zip . ".dbf");
-                    $ziper->addFile(file_get_contents($nomeshp . ".prj"), $zip . ".prj");
-                    $fp = fopen($nomeshp . ".zip", "wb");
-                    fwrite($fp, $ziper->file());
-                    fclose($fp);
-                }
-                $resultado[] = $pre . ".zip";
-                $dataArquivos[] = date("F d Y H:i:s.", filemtime($nomeshp . ".zip"));
-            }
+        $verificaDBF = verificaDBF($nomeshp . ".dbf");
+        if ($verificaDBF == false) {
+            unlink($nomeshp . ".dbf");
+            unlink($nomeshp . ".shp");
+            unlink($nomeshp . ".shx");
+            unlink($nomeshp . ".prj");
+            unlink($nomeshp . ".zip");
         }
     }
-    $nreg = "";
-    if (count($resultado) == 3) {
-        $arq = $radtmp . "/" . $resultado[2];
-        if (function_exists("dbase_open")) {
-            $db = dbase_open($arq, 0);
-            if ($db) {
-                $nreg = dbase_numrecords($db);
+    $dados = $l->data;
+    //
+    // se for imagem, copia o arquivo
+    //
+    if ($l->type == MS_LAYER_RASTER) {
+        if (file_exists($dados)) {
+            $dir = dirname($dados);
+            $arq = explode(".", basename($dados))[0];
+            $nomecopia = $dir_tmp . "/" . $nameMapfile . "_" . $arq;
+            $exts = array(
+                "jpg",
+                "jpw",
+                "tif",
+                "tifw",
+                "tfw",
+                "png",
+                "pngw",
+                "jpgw",
+                "wld",
+                "img"
+            );
+            foreach ($exts as $ext) {
+                if (file_exists($dir . "/" . $arq . "." . $ext)) {
+                    $zipar[] = $dir . "/" . $arq . "." . $ext;
+                }
             }
         } else {
-            $db = xbase_open($arq, 0);
-            if ($db) {
-                $nreg = xbase_numrecords($db);
-            }
+            return "erro";
         }
-    }
+    } else { // se for vetorial, extrai o arquivo
+          //
+          // verifica se existe selecao, caso contrario, faz a selecao baseada na extensao
+          // do mapfile
+          //
+        include (dirname(__FILE__) . "/../classesphp/classe_selecao.php");
+        $sel = new Selecao($map_file, $tema);
+        // carrega a query para ver se o layer possui selecao ou nao
+        $numSel = 0;
+        $nomeRand = true;
+        if (file_exists($sel->qyfile)) {
+            $map->loadquery($sel->qyfile);
+            $numSel = $l->getNumresults();
+            $nomeshp = criaSHP($tema, $map_file, $locaplic, $dir_tmp, $nomeRand, $projecao["prj"]);
+        }
+        //
+        // se nao existir selecao seleciona por box
+        // o box vem do mapfile original
+        //
 
-    //
-    // gera um mapfile para download
-    //
-    $nomemapfileurl = "";
+        if (! file_exists($sel->qyfile)) {
+            $box = $rectextent->minx . " " . $rectextent->miny . " " . $rectextent->maxx . " " . $rectextent->maxy;
+            $shapesSel = $sel->selecaoBOX("novo", $box, true);
+            // reaproveita arquivo anterior
+            $nomeRand = false;
+            $nomeshp = criaSHP($tema, $map_file, $locaplic, $dir_tmp, $nomeRand, $projecao["prj"], true, $shapesSel);
+        }
+        // remove o arquivo de selecao se ele foi criado apenas para pegar todos os elementos
+        if ($nomeRand == false) {
+            $sel->selecaoLimpa();
+        }
+        if ($nomeshp == false) {
+            return array(
+                "arquivos" => "<span style=color:red >Ocorreu um erro, tente novamente",
+                "nreg" => 0
+            );
+        }
+        $pre = str_replace($radtmp . "/", "", $nomeshp);
+        $zipar[] = $nomeshp . ".shp";
+        $zipar[] = $nomeshp . ".shx";
+        $zipar[] = $nomeshp . ".dbf";
+        $zipar[] = $nomeshp . ".prj";
+    }
+    foreach($zipar as $z) {
+        $ext = explode(".",$z)[1];
+        $ziper->addFile(file_get_contents($z), $tema . "." . $ext);
+    }
+    $fp = fopen($nomeshp . ".zip", "wb");
+    fwrite($fp, $ziper->file());
+    fclose($fp);
 
     return array(
         "tema" => $tema,
         "mapfile" => "",
         "mapfileurl" => "",
-        "arquivos" => implode(",", $resultado),
-        "nreg" => $nreg,
-        "datas" => $dataArquivos,
+        "arquivos" => [],
+        "nreg" => "",
+        "datas" => [],
         "shape-zip" => $nomeshp . ".zip"
     );
 }

@@ -716,6 +716,7 @@ i3GEO.janela =
 		    $("#i3GEOToolFormModalFooter").html(footer);
 		}
 		i3GEO.janela._formModal.find(".modal-content").css("height","");
+
 		i3GEO.janela._formModal.css(css);
 
 		i3GEO.janela._formModal.modal({
@@ -728,6 +729,7 @@ i3GEO.janela =
 		} else {
 		    i3GEO.janela._formModal.find(".modal-content").css("height","100%");
 		}
+		i3GEO.janela._formModal.css("padding-left",0);
 	    }
 	    //fecha as guias em dispositivos com tela pequena
 	    if(i3GEO.parametros.w < 420){

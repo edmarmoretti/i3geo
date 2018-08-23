@@ -1,4 +1,4 @@
-<table id="i3GEOtabelatabelai">
+<table id="i3GEOtabelatabelai" class="table-striped table-condensed">
 	<tr>
 		{{#cabecalho}}
 		<td accessKey="{{idcoluna}}" >
@@ -8,7 +8,7 @@
 			<button title="{{{ordena}}}" onclick='i3GEOF.tabela.ordenaColuna(this,"{{idcoluna}}")' class="{{classe}} btn btn-xs" style="margin: 2px; padding: 2px;">
 				<span class="material-icons">sort</span>
 			</button><br>
-			<span class="{{classe}}" title="{{{item}}}">{{{alias}}}</span>
+			<span class="{{classe}}" title="{{{item}}}"><strong>{{{alias}}}</strong></span>
 		</td>
 		{{/cabecalho}}
 	</tr>

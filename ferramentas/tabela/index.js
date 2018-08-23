@@ -3,7 +3,6 @@ if (typeof (i3GEOF) === 'undefined') {
 }
 i3GEOF.tabela =
 {
-	LISTAREGATIVO : true,
 	refreshOnNavigate : true,
 	renderFunction: i3GEO.janela.formModal,
 	_parameters: {
@@ -42,14 +41,12 @@ i3GEOF.tabela =
 	},
 	destroy: function(){
 	    //nao use this aqui
-	    i3GEOF.tabela._parameters.mustache = "";
-	    i3GEOF.tabela._parameters.tema = "";
+	    //i3GEOF.tabela._parameters.mustache = "";
 	    i3GEOF.tabela._parameters.registros = [];
 	    i3GEOF.tabela._parameters.colunas = {
 		    "itens" : [],
 		    "alias" : []
 	    };
-
 	    i3GEO.eventos.removeEventos("NAVEGAMAPA", [
 		"i3GEOF.tabela.atualizaListaDeRegistros()"
 		]);
