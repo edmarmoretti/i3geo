@@ -99,7 +99,7 @@ i3GEOF.legenda =
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia2", "i3GEOlegendaguia");
 	    };
 	    $i("i3GEOlegendaguia3").onclick = function() {
-		i3GEO.janela.tempoMsg($trad('ajuda', i3GEOF.legenda.dicionario));
+		i3GEO.janela.snackBar({content: $trad("ajuda",i3GEOF.legenda.dicionario),style: "red"});
 	    };
 	    $i("i3GEOlegendaguia4").onclick = function() {
 		i3GEOF.legenda.mostraGrafico();
@@ -314,7 +314,7 @@ i3GEOF.legenda =
 	 */
 	aviso : function() {
 	    if (i3GEOF.legenda.aviso == true) {
-		i3GEO.janela.tempoMsg($trad('msgAplicaAlteracao', i3GEOF.legenda.dicionario));
+		i3GEO.janela.snackBar({content: $trad("msgAplicaAlteracao",i3GEOF.legenda.dicionario),style: "red"});
 		i3GEOF.legenda.aviso == false;
 	    }
 	},
@@ -524,7 +524,7 @@ i3GEOF.legenda =
 			+ "&maxScales="
 			+ maxScales);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -579,7 +579,7 @@ i3GEOF.legenda =
 		+ i3GEOF.legenda._parameters.tema, cp = new cpaint();
 	    cp.set_response_type("JSON");
 	    cp.call(p, "contagemclasse", i3GEOF.legenda.montaLegenda);
-	    i3GEO.janela.tempoMsg($trad('consideraElementosVisiveis', i3GEOF.legenda.dicionario));
+	    i3GEO.janela.snackBar({content: $trad('consideraElementosVisiveis', i3GEOF.legenda.dicionario)});
 	},
 	/*
 	 * Function: adicionaClasse
@@ -667,7 +667,7 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraCoresClasses", retornapaleta);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -698,7 +698,7 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraCoresClasses", retornapaleta);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -729,7 +729,7 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "calculaTamanhoClasses", retornapaleta);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -757,7 +757,7 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "foo", retornapaleta);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -839,7 +839,7 @@ i3GEOF.legenda =
 		i3GEOF.legenda.formEditorSimbolo();
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -883,7 +883,7 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraclasse", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -924,14 +924,14 @@ i3GEOF.legenda =
 		}
 
 		if (item == "") {
-		    i3GEO.janela.tempoMsg($trad('selecionaUmItem', i3GEOF.legenda.dicionario));
+		    i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 		    return;
 		}
 		i3GEOF.legenda.aguarde.visibility = "visible";
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraclasse", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -967,7 +967,7 @@ i3GEOF.legenda =
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		};
 		if (item == "") {
-		    i3GEO.janela.tempoMsg("Selecione um item!");
+		    i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 		    return;
 		}
 		if ($i("i3GEOFlegendaaplicaextent").checked === true) {
@@ -979,7 +979,7 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraclasse", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1016,11 +1016,11 @@ i3GEOF.legenda =
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		};
 		if (item == "") {
-		    i3GEO.janela.tempoMsg("Selecione um item!");
+		    i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 		    return;
 		}
 		if (itemid == "") {
-		    i3GEO.janela.tempoMsg("Selecione um item!");
+		    i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 		    return;
 		}
 		if ($i("i3GEOFlegendaaplicaextent").checked === true) {
@@ -1032,7 +1032,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraclasse", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1066,7 +1067,7 @@ i3GEOF.legenda =
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		};
 		if (item == "") {
-		    i3GEO.janela.tempoMsg("Selecione um item!");
+		    i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 		    return;
 		}
 		if ($i("i3GEOFlegendaaplicaextent").checked === true) {
@@ -1078,7 +1079,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraclasse", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1114,14 +1116,15 @@ i3GEOF.legenda =
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		};
 		if (item == "") {
-		    i3GEO.janela.tempoMsg($trad('selecionaUmItem', i3GEOF.legenda.dicionario));
+		    i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 		    return;
 		}
 		i3GEOF.legenda.aguarde.visibility = "visible";
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraclasse", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1157,14 +1160,15 @@ i3GEOF.legenda =
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		};
 		if (item == "") {
-		    i3GEO.janela.tempoMsg($trad('selecionaUmItem', i3GEOF.legenda.dicionario));
+		    i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 		    return;
 		}
 		i3GEOF.legenda.aguarde.visibility = "visible";
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraclasse", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1200,14 +1204,15 @@ i3GEOF.legenda =
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		};
 		if (item == "") {
-		    i3GEO.janela.tempoMsg($trad('selecionaUmItem', i3GEOF.legenda.dicionario));
+		    i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 		    return;
 		}
 		i3GEOF.legenda.aguarde.visibility = "visible";
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraclasse", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1239,7 +1244,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "alteraRepresentacao", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1292,7 +1298,8 @@ i3GEOF.legenda =
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		}
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1314,7 +1321,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1336,7 +1344,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1359,7 +1368,8 @@ i3GEOF.legenda =
 		i3GEOF.legenda.estilo = i3GEOF.legenda.estilo + 1;
 		cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1382,7 +1392,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1455,7 +1466,7 @@ i3GEOF.legenda =
 		cp.call(p, "editasimbolo", i3GEOF.legenda.listaSimbolos);
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + i3GEOF.legenda.estilo);
+		i3GEO.janela.snackBar({content: "Erro: " + i3GEOF.legenda.estilo, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1475,7 +1486,8 @@ i3GEOF.legenda =
 		}
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1571,7 +1583,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "editasimbolo", fim);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1609,7 +1622,7 @@ i3GEOF.legenda =
 			    "n;x"
 			    ];
 			if (retorno.data.length < 2) {
-			    i3GEO.janela.tempoMsg($trad('msgNumeroClasses', i3GEOF.legenda.dicionario));
+			    i3GEO.janela.snackBar({content: $trad("msgNumeroClasses",i3GEOF.legenda.dicionario),style: "red"});
 			    i3GEOF.legenda.aguarde.visibility = "hidden";
 			    return;
 			} else {
@@ -1645,7 +1658,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "cocontagemclasse", monta);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1702,7 +1716,8 @@ i3GEOF.legenda =
 		cp.set_response_type("JSON");
 		cp.call(p, "aplicaProcessos", temp);
 	    } catch (e) {
-		i3GEO.janela.tempoMsg("Erro: " + e);
+
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1832,7 +1847,8 @@ i3GEOF.legenda =
 		    }
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		}catch(e){
-		    i3GEO.janela.tempoMsg("Erro. "+e);
+
+		    i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
 		}
 	    };

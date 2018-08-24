@@ -52,28 +52,33 @@
         <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default">
+                    <div class="panel-heading">{{{legendaImg}}}</div>
                     <div class="panel-body">
-                        <div class="form-group label-fixed condensed">
-                            <label class="control-label" for="i3GEOlegendaImg">{{{legendaImg}}}</label>
+                        <div class="form-group condensed">
                             <div class="input-group">
-                                <input id="i3GEOlegendaImg" class="form-control" type="text" value="">
+                                <div style="display: contents;" class="form-group label-fixed">
+                                    <input id="i3GEOlegendaImg" class="form-control" type="text" value="">
+                                </div>
                                 <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicarLegendaImg();return false;" role="button" type="button"
                                         class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
                                         <span class="material-icons ">send</span>
                                     </a>
                                 </span>
                             </div>
+
                         </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default">
+                    <div class="panel-heading">{{{offsite}}}</div>
                     <div class="panel-body">
-                        <div class="form-group label-fixed condensed">
-                            <label class="control-label" for="i3GEOlegendaImg">{{{offsite}}}</label>
+                        <div class="form-group condensed">
                             <div class="input-group">
-                                <input id="i3GEOoffsite" class="form-control i3geoFormIconeAquarela" type="text" value="-1,-1,-1">
+                                <div style="display: contents;" class="form-group label-fixed">
+                                    <input id="i3GEOoffsite" class="form-control i3geoFormIconeAquarela" type="text" value="-1,-1,-1">
+                                </div>
                                 <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicarOffsite();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                                         href="javascript:void(0)">
                                         <span class="material-icons ">send</span>
@@ -86,18 +91,23 @@
             </div>
             <div class="col-md-4">
                 <div class="panel panel-default">
+                    <div class="panel-heading">{{{geraCores}}}</div>
                     <div class="panel-body">
-                        <div class="form-group label-fixed condensed">
-                            <label class="control-label" for="i3GEOlegendaImg">{{{geraCores}}}</label>
-                            <br> {{{de}}} &nbsp;
-                            <input class="form-control i3geoFormIconeAquarela" style="display: inline; width: 100px;" id="i3GEOlegendaacori" size="10" value="0,0,0" type="text">
-                            &nbsp; {{{ate}}} &nbsp;
-                            <input class="form-control i3geoFormIconeAquarela" style="display: inline; width: 100px;" id="i3GEOlegendaacorf" size="10" value="255,255,255" type="text">
-                            &nbsp; <span class="input-group-btn" style="display: inline;"> <a title='{{{aplicaVariaCores}}}' onclick="i3GEOF.legenda.paleta();return false;" role="button"
-                                    type="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                                    <span class="material-icons ">send</span>
-                                </a>
-                            </span>
+                        <div class="form-group condensed">
+                            <div class="input-group">
+                                <div style="display: contents;" class="form-group label-fixed">
+                                    {{{de}}} &nbsp;
+                                    <input class="form-control i3geoFormIconeAquarela" style="display: inline; width: 100px;" id="i3GEOlegendaacori" size="10" value="0,0,0" type="text">
+                                    {{{ate}}} &nbsp;
+                                    <input class="form-control i3geoFormIconeAquarela" style="display: inline; width: 100px;" id="i3GEOlegendaacorf" size="10" value="255,255,255" type="text">
+                                    &nbsp;
+                                </div>
+                                <span class="input-group-btn"> <a title='{{{aplicaVariaCores}}}' onclick="i3GEOF.legenda.paleta();return false;" role="button"
+                                        type="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                        <span class="material-icons ">send</span>
+                                    </a>
+                                </span>
+                            </div>
                         </div>
                     </div>
                 </div>
