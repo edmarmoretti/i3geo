@@ -153,7 +153,7 @@ class LayerServer
      * wether folder should contain networklinks instead of real geometries
      * it is automatically set when all layers are requested
      */
-    var $_networklink;
+    var $_networklink = false;
     var $postgis_mapa;
 
     /**
@@ -191,8 +191,6 @@ class LayerServer
         if (! $this->typename) {
             $this->_networklink = true;
             $this->typename = $this->get_layer_list();
-        } else {
-            $this->_networklink = false;
         }
         if ($this->_networklink == false) {
             // desliga todos os layers
@@ -276,6 +274,11 @@ class LayerServer
         $this->request = $this->load_parm('request', 'kml');
         if ($this->request == 'kmz') {
             $this->_zipped = true;
+        } else {
+            $this->_zipped = false;
+        }
+        if($this->request == "kmlwms"){
+            $this->_networklink = true;
         }
         if (! $this->map) {
             $this->set_error('No mapfile specified');
@@ -325,7 +328,6 @@ class LayerServer
             }
         } else {
             foreach ($layers as $layer) {
-                // echo "Oi";exit;
                 $this->process_layer_request($layer);
             }
         }
@@ -684,6 +686,9 @@ class LayerServer
     {
         $ml = $element->addChild('MultiGeometry');
         foreach (split('\), \(', $wkt) as $line) {
+            //$line = str_replace("MULTIPOLYGON (","POLYGON ",$line).")";
+            $line = str_replace(array("MULTIPOLYGON",")","("),"",$line);
+            //$line = "POLYGON ((".$line."))";
             $this->add_polygon($line, $ml, $featurename);
         }
     }
@@ -1107,7 +1112,7 @@ class LayerServer
                 for ($i = 0; $i < ($maptemp->numlayers); $i ++) {
                     $l = $maptemp->getlayer($i);
                     $l->set("status", MS_DEFAULT);
-                    if (! $this->_zipped) {
+                    if ($this->_networklink == true || $l->type == MS_LAYER_RASTER ) {
                         $l->set("type", MS_LAYER_RASTER);
                         $l->setmetadata('wms_onlineresource', "../../ogc.php?tema=" . $temp . "&width=1500&height=1500&TRANSPARENT=true&FORMAT=image/png&");
                         $l->setmetadata("ows_enable_request", "*");
@@ -1116,11 +1121,7 @@ class LayerServer
                 }
             } else {
                 $this->map_object = ms_newMapObj($this->map);
-                // $w = $this->map_object->web;
-                // $w->set("template","none.htm");
-
                 if (! $this->_zipped) {
-                    // $this->map_object->setmetadata('wms_onlineresource',$servidor.":80".$locmapserv."?map=".$temp."&width=1500&height=1500&");
                     $this->map_object->setmetadata('wms_onlineresource', "../../ogc.php?tema=" . $temp . "&width=1500&height=1500&TRANSPARENT=true&FORMAT=image/png&");
                     $this->map_object->setmetadata("ows_enable_request", "*");
                 }
@@ -1128,10 +1129,6 @@ class LayerServer
                 for ($i = 0; $i < $n; $i ++) {
                     $l = $this->map_object->getlayer($i);
                     $l->set("status", MS_DEFAULT);
-                    if (! $this->_zipped)
-                        $l->set("type", MS_LAYER_RASTER);
-                    // $l->setmetadata('wms_onlineresource',"../../ogc.php?tema=".$temp."&width=500&height=500&");
-                    // ms_newLayerObj($this->map_object, $l);
                 }
             }
             if (! $this->map_object) {
@@ -1181,7 +1178,7 @@ class LayerServer
      */
     function send_header()
     {
-        header('Content-Disposition: attachment; filename=kml.km' . ($this->_zipped ? 'z' : 'l'));
+        header('Content-Disposition: attachment; filename='.$this->typename."_".$this->request .'.km' . ($this->_zipped ? 'z' : 'l'));
         header('Content-type: application/vnd.google-earth.km' . ($this->_zipped ? 'z' : 'l') . '+XML');
     }
 

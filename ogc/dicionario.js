@@ -52,14 +52,19 @@ ogc.dicionario =
 			es : "Descargar CSV a trav&eacute;s de WFS pero sin geometr&iacute;a"
 		}],
 		"kmz" : [{
-			pt : "Download KMZ",
+			pt : "Download KMZ (KML vetorial compactado)",
 			en : "Download KMZ",
 			es : "Descargar KMZ"
 		}],
+		"kmlwms" : [{
+			pt : "Download KML (com WMS embutido)",
+			en : "",
+			es : ""
+		}],
 		"kml" : [{
-			pt : "Download KML",
-			en : "Download KML",
-			es : "Descargar KML"
+			pt : "Download KML (vetorial)",
+			en : "",
+			es : ""
 		}],
 		"explore" : [{
 			pt : "Explore a tabela de atributos",

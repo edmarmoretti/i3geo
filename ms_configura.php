@@ -314,7 +314,7 @@ Variable: $ogrOutput
 
 Indica se o OGR esta corretamente instalado, permitindo o seu uso nos servicos OGC de exportacao de dados
 */
-$ogrOutput = true;
+$ogrOutput = false;
 /*
 Variable: saikuUrl
 

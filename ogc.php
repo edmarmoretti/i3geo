@@ -263,10 +263,10 @@ ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
  		";
  exit;
 }
-
 include(dirname(__FILE__)."/classesphp/sani_request.php");
 include_once (dirname(__FILE__)."/classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/ms_configura.php");
+error_reporting(0);
 $_GET = array_merge($_GET,$_POST);
 //error_log($_SERVER['QUERY_STRING']);
 if(isset($_GET["BBOX"])){
@@ -417,6 +417,9 @@ if(strpos(strtolower($OUTPUTFORMAT),"kml") !== false){
 if(strpos(strtolower($OUTPUTFORMAT),"kmz") !== false){
 	$OUTPUTFORMAT = "kmz";
 }
+if(strpos(strtolower($OUTPUTFORMAT),"kmlwms") !== false){
+    $OUTPUTFORMAT = "kmlwms";
+}
 //
 //verifica o OUTPUTFORMAT e o cache de arquivo
 //
@@ -428,15 +431,20 @@ if(!empty($OUTPUTFORMAT)){
 //para o caso da requisicao kmz
 //kmz nao funciona diretamente com mapserver
 //
-if(strtolower($OUTPUTFORMAT) == "kmz"){
+if(strtolower($OUTPUTFORMAT) == "kmz" && $ogrOutput == false){
 	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
 	exit;
 }
 if(strtolower($OUTPUTFORMAT) == "kml" && $ogrOutput == false){
-	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kmz&map=".$tema."&typename=".$tema;
+	$urln = "pacotes/kmlmapserver/kmlservice.php?request=kml&map=".$tema."&typename=".$tema;
 	header("Location:".$urln);
 	exit;
+}
+if(strtolower($OUTPUTFORMAT) == "kmlwms"){
+    $urln = "pacotes/kmlmapserver/kmlservice.php?request=kmlwms&map=".$tema."&typename=".$tema;
+    header("Location:".$urln);
+    exit;
 }
 if(strtolower($OUTPUTFORMAT) == "shape-zip" && $ogrOutput == false){
 	$retorno = downloadTema2("",$tema,$locaplic,$dir_tmp,$postgis_mapa);
@@ -1542,6 +1550,14 @@ function processaOutputformatMapfile(){
 		$oMap->outputformat->setOption("STORAGE", "filesystem");
 		$oMap->outputformat->setOption("FILENAME", $tema.".kml");
 		$l->setmetadata("wfs_getfeature_formatlist","kml");
+	}
+	if(strtolower($OUTPUTFORMAT) == "kmz"){
+	    $l = $oMap->getlayer(0);
+	    $n = $l->name;
+	    $oMap->selectOutputFormat("kmz");
+	    $oMap->outputformat->setOption("STORAGE", "filesystem");
+	    $oMap->outputformat->setOption("FILENAME", $tema.".kmz");
+	    $l->setmetadata("wfs_getfeature_formatlist","kmz");
 	}
 	if(strtolower($OUTPUTFORMAT) == "shape-zip"){
 		$l = $oMap->getlayer(0);

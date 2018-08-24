@@ -70,6 +70,7 @@ class KmlServer {
             $this->service->run();
         } else {
             include 'layerserver.class.php';
+            error_reporting(0);
             $this->service = new LayerServer();
             $this->service->run();
         }
@@ -81,7 +82,10 @@ class KmlServer {
     function get_request(){
         $this->service = $this->load_parm('service');
         if(!$this->service){
-            $this->service= 'kml';
+            $this->service= $this->load_parm('request');
+        }
+        if(!$this->service){
+            $this->service= "kml";
         }
     }
 
