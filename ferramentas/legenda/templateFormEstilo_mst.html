@@ -1,7 +1,18 @@
+<style>
+.panel-heading.legenda {
+    height: 48px;
+    display: block;
+    overflow-y: auto;
+    width: 105%
+}
+.panel.panel-default.legenda {
+    overflow: hidden
+}
+</style>
 <div class="row">
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{corContorno}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{corContorno}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -24,8 +35,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{corFrente}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{corFrente}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -33,7 +44,6 @@
                             <button title='{{{aplicatodos}}}' onclick='i3GEOF.legenda.aplicaTodasClasses("color","i3GEOlegendacolor")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                                 <span class="material-icons">flash_on</span>
                             </button>
-                            <label class="control-label" style="max-width: 90%;" for="i3GEOlegendacolor">{{{corFrente}}}</label>
                             <input style="width: 100px;" id='i3GEOlegendacolor' value='{{{vcolor}}}' class="form-control input-lg i3geoFormIconeAquarela" type='text' />
                         </div>
                         <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicaEstilo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
@@ -47,8 +57,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{corFundo}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{corFundo}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -72,8 +82,8 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{espessura}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{espessura}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -94,8 +104,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{padraoRepeticao}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{padraoRepeticao}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -116,8 +126,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{opacidade}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{opacidade}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -140,8 +150,8 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{angulo}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{angulo}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -162,8 +172,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{offsetx}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{offsetx}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -184,8 +194,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{offsety}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{offsety}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -208,8 +218,8 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{minsize}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{minsize}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -230,8 +240,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{maxsize}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{maxsize}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -252,8 +262,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{symbolscale}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{symbolscale}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -277,8 +287,8 @@
 </div>
 <div class="row">
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{simbolo}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{simbolo}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">
@@ -302,8 +312,8 @@
         </div>
     </div>
     <div class="col-md-4">
-        <div class="panel panel-default">
-            <div class="panel-heading">{{{tamanhoEspacamento}}}</div>
+        <div class="panel panel-default legenda">
+            <div class="panel-heading legenda">{{{tamanhoEspacamento}}}</div>
             <div class="panel-body">
                 <div class='form-group condensed'>
                     <div class="input-group">

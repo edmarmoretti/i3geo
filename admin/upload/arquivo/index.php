@@ -116,7 +116,7 @@ $comboPastas .= "</select>";
 					</div>
 					<div class="col-md-12">
 						<div class="pull-right">
-							<button type="submit" class="btn btn-primary" role="button" style="color: #008579;">{{envia}}</button>
+							<button type="submit" class="btn btn-primary" role="button" style="color: #5F4B8B;">{{envia}}</button>
 						</div>
 					</div>
 				</div>

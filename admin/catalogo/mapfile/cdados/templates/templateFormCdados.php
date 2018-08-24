@@ -29,7 +29,7 @@
 			<div class="col-md-6">
 				<input type="text" value="{{{extensao}}}" class="form-control" name="extensao" >
 				<div class="pull-right">
-					<button onclick="i3GEOadmin.cdados.calcularExtensao('{{codigo}}','{{id_tema}}');return false;" class="btn btn-primary" role="button" style="color:#008579;">{{calcular}}</button>
+					<button onclick="i3GEOadmin.cdados.calcularExtensao('{{codigo}}','{{id_tema}}');return false;" class="btn btn-primary" role="button" style="color:#5F4B8B;">{{calcular}}</button>
 				</div>
 			</div>
 		</div>
@@ -51,7 +51,7 @@
 	</div>
 
 	<div class="pull-right">
-		<button type="submit" class="btn btn-primary" role="button" style="color:#008579;">{{salvar}}</button>
+		<button type="submit" class="btn btn-primary" role="button" style="color:#5F4B8B;">{{salvar}}</button>
 	</div>
 	<div class="clearfix"></div>
 </form>

@@ -109,7 +109,7 @@ body{
 
 /* conforme regra de acessibilidade */
 .navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary {
-    background-color: #008579;
+    background-color: #5F4B8B;
 }
 .alert.alert-danger {
 	background-color: #e13023;
@@ -118,7 +118,7 @@ body{
     background-color: #de3601;
 }
 a, a:focus, a:hover {
-    color: #008579;
+    color: #5F4B8B;
 }
 
 .breadcrumb a, .breadcrumb a:focus, .breadcrumb a:hover {
@@ -130,7 +130,7 @@ a, a:focus, a:hover {
 }
 
 a, a:focus, a:hover {
-	color: #008579;
+	color: #5F4B8B;
 }
 
 .alert.alert-warning {
