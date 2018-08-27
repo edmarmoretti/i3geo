@@ -1,8 +1,7 @@
 <!-- para o caso de vetores -->
 <div class="{{{hidden2}}}">
-    <button onclick="i3GEOF.legenda.mudaLegenda()" class='btn btn-primary btn-sm btn-raised'>{{{aplicaAlteracao}}}</button>
-    <button id="botaoAdicionaClasse" onclick="i3GEOF.legenda.adicionaClasse()" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>{{{adicionaClasse}}}</button>
-
+    <button onclick="i3GEOF.legenda.mudaLegenda(this)" class='btn btn-primary btn-sm btn-raised'>{{{aplicaAlteracao}}}</button>
+    <button id="botaoAdicionaClasse" onclick="i3GEOF.legenda.adicionaClasse(this)" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>{{{adicionaClasse}}}</button>
     <table id="i3GEOlegendalegenda" class="table-striped table-condensed">
         <tr>
             <td>
@@ -61,12 +60,12 @@
             </td>
             <td style="padding: 5px;">
                 <div class='form-group label-fixed condensed'>
-                    <input style="width: 100px;" value="{{{minScale}}}" name="minScale" title="{{{txtMinscale}}}" tabindex="0" class="form-control input-lg" type='text' />
+                    <input style="width: 100px;" value="{{{minScale}}}" name="minScale" title="{{{txtMinscale}}}" tabindex="0" class="form-control input-lg" type='number' />
                 </div>
             </td>
             <td style="padding: 5px;">
                 <div class='form-group label-fixed condensed'>
-                    <input style="width: 100px;" value="{{{maxScale}}}" name="maxScale" title="{{{txtMaxscale}}}" tabindex="0" class="form-control input-lg" type='text' />
+                    <input style="width: 100px;" value="{{{maxScale}}}" name="maxScale" title="{{{txtMaxscale}}}" tabindex="0" class="form-control input-lg" type='number' />
                 </div>
             </td>
             <td>

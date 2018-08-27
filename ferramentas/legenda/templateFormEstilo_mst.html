@@ -1,14 +1,4 @@
-<style>
-.panel-heading.legenda {
-    height: 48px;
-    display: block;
-    overflow-y: auto;
-    width: 105%
-}
-.panel.panel-default.legenda {
-    overflow: hidden
-}
-</style>
+
 <div class="row">
     <div class="col-md-4">
         <div class="panel panel-default legenda">
@@ -91,7 +81,7 @@
                             <button title='{{{aplicatodos}}}' onclick='i3GEOF.legenda.aplicaTodasClasses("width","i3GEOlegendawidth")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                                 <span class="material-icons">flash_on</span>
                             </button>
-                            <input style="width: 100px;" value='{{{vwidth}}}' id='i3GEOlegendawidth' class="form-control input-lg " type='text' />
+                            <input style="width: 100px;" value='{{{vwidth}}}' id='i3GEOlegendawidth' class="form-control input-lg " type='number' />
                         </div>
                         <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicaEstilo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                                 href="javascript:void(0)">
@@ -135,7 +125,7 @@
                             <button title='{{{aplicatodos}}}' onclick='i3GEOF.legenda.aplicaTodasClasses("opacity","i3GEOlegendaopacidade")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                                 <span class="material-icons">flash_on</span>
                             </button>
-                            <input style="width: 100px;" value='{{{vopacity}}}' id='i3GEOlegendaopacidade' class="form-control input-lg " type='text' />
+                            <input style="width: 100px;" value='{{{vopacity}}}' id='i3GEOlegendaopacidade' class="form-control input-lg " type='number' />
                         </div>
                         <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicaEstilo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                                 href="javascript:void(0)">
@@ -181,7 +171,7 @@
                             <button title='{{{aplicatodos}}}' onclick='i3GEOF.legenda.aplicaTodasClasses("offsetx","i3GEOlegendaoffsetx")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                                 <span class="material-icons">flash_on</span>
                             </button>
-                            <input style="width: 100px;" value='{{{voffsetx}}}' id='i3GEOlegendaoffsetx' class="form-control input-lg " type='text' />
+                            <input style="width: 100px;" value='{{{voffsetx}}}' id='i3GEOlegendaoffsetx' class="form-control input-lg " type='number' />
                         </div>
                         <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicaEstilo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                                 href="javascript:void(0)">
@@ -203,7 +193,7 @@
                             <button title='{{{aplicatodos}}}' onclick='i3GEOF.legenda.aplicaTodasClasses("offsety","i3GEOlegendaoffsety")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                                 <span class="material-icons">flash_on</span>
                             </button>
-                            <input style="width: 100px;" value='{{{voffsety}}}' id='i3GEOlegendaoffsety' class="form-control input-lg " type='text' />
+                            <input style="width: 100px;" value='{{{voffsety}}}' id='i3GEOlegendaoffsety' class="form-control input-lg " type='number' />
                         </div>
                         <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicaEstilo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                                 href="javascript:void(0)">
@@ -227,7 +217,7 @@
                             <button title='{{{aplicatodos}}}' onclick='i3GEOF.legenda.aplicaTodasClasses("minsize","i3GEOlegendaminsize")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                                 <span class="material-icons">flash_on</span>
                             </button>
-                            <input style="width: 100px;" value='{{{vminsize}}}' id='i3GEOlegendaminsize' class="form-control input-lg " type='text' />
+                            <input style="width: 100px;" value='{{{vminsize}}}' id='i3GEOlegendaminsize' class="form-control input-lg " type='number' />
                         </div>
                         <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicaEstilo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                                 href="javascript:void(0)">
@@ -249,7 +239,7 @@
                             <button title='{{{aplicatodos}}}' onclick='i3GEOF.legenda.aplicaTodasClasses("maxsize","i3GEOlegendamaxsize")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                                 <span class="material-icons">flash_on</span>
                             </button>
-                            <input style="width: 100px;" value='{{{vmaxsize}}}' id='i3GEOlegendamaxsize' class="form-control input-lg " type='text' />
+                            <input style="width: 100px;" value='{{{vmaxsize}}}' id='i3GEOlegendamaxsize' class="form-control input-lg " type='number' />
                         </div>
                         <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicaEstilo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                                 href="javascript:void(0)">
@@ -271,7 +261,7 @@
                             <button title='{{{aplicatodos}}}' onclick='i3GEOF.legenda.aplicaTodasClasses("symbolscale","i3GEOlegendasymbolscale")' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                                 <span class="material-icons">flash_on</span>
                             </button>
-                            <input style="width: 100px;" value='{{{vsymbolscale}}}' id='i3GEOlegendasymbolscale' class="form-control input-lg " type='text' />
+                            <input style="width: 100px;" value='{{{vsymbolscale}}}' id='i3GEOlegendasymbolscale' class="form-control input-lg " type='number' />
                         </div>
                         <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicaEstilo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                                 href="javascript:void(0)">

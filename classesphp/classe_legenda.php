@@ -131,6 +131,7 @@ class Legenda
         include (dirname(__FILE__) . "/../ms_configura.php");
         $this->postgis_mapa = $postgis_mapa;
         include_once (dirname(__FILE__) . "/funcoes_gerais.php");
+        include_once (dirname(__FILE__) . "/classe_vermultilayer.php");
         $this->v = versao();
         $this->v = $this->v["principal"];
         $this->localaplicacao = $locaplic;
@@ -225,6 +226,7 @@ class Legenda
     function aplicaLegendaImg($imagem)
     {
         $this->layer->setmetadata("legendaimg", $imagem);
+        return true;
     }
 
     /*

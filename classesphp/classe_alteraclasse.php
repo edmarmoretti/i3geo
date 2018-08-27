@@ -879,7 +879,7 @@ class Alteraclasse
     {
         // error_reporting(0);
         if (! $this->layer) {
-            return "erro";
+            return false;
         }
         $numclasses = $this->layer->numclasses;
         $n = intval(100 / $numclasses);
@@ -893,7 +893,7 @@ class Alteraclasse
             }
         }
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*

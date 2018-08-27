@@ -4,12 +4,7 @@ if (typeof (i3GEOF) === 'undefined') {
 i3GEOF.legenda =
 {
 	parDefault : "&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
-	aviso : false,
-	dadosGrafico : "",
 	aguarde : "",
-	estilos : "",
-	estilo : 0,
-	classe : "",
 	templateDir : "../ferramentas/legenda",
 	aposIniciar : function(){
 
@@ -22,7 +17,12 @@ i3GEOF.legenda =
 	    "mustacheestilo": "",
 	    "idContainer": "i3GEOlegendaContainer",
 	    "namespace": "legenda",
-	    "objdicionario": {}
+	    "objdicionario": {},
+	    "aviso": false,
+	    "dadosGrafico": "",
+	    "estilos": "",
+	    "estilo": 0,
+	    "classe": ""
 	},
 	start : function(tema){
 	    var p = this._parameters,
@@ -40,7 +40,7 @@ i3GEOF.legenda =
 		    i3f.html();
 		    i3GEO.janela.fechaAguarde();
 		}).fail(function() {
-		    i3GEO.janela.closeMsg($trad("erroTpl"));
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
 		    return;
 		});
 	    } else {
@@ -55,14 +55,24 @@ i3GEOF.legenda =
 	html:function() {
 	    var p = this._parameters,
 	    i3f = this,
-	    hash = {};
+	    hash = {},
+	    objTema = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[p.tema],
+	    values = {
+		    mostra: "checked",
+		    img: objTema.legendaimg ? objTema.legendaimg : "",
+			    offsite: objTema.offsite ? objTema.offsite : "-1,-1,-1"
+	    };
 	    p.objdicionario = i3GEO.idioma.objetoIdioma(i3GEOF.legenda.dicionario);
+	    if (objTema.classe && objTema.classe.toLowerCase() == "nao") {
+		values.mostra = "";
+	    }
 	    hash = {
 		    locaplic: i3GEO.configura.locaplic,
 		    namespace: p.namespace,
 		    idContainer: p.idContainer,
 		    aplicar: $trad("p14"),
 		    opcoes: $trad("opcoes"),
+		    values: values,
 		    ...p.objdicionario
 	    };
 	    i3f.renderFunction.call(
@@ -77,24 +87,24 @@ i3GEOF.legenda =
 			},
 			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
 		    });
-
-
 	    i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1", "i3GEOlegendaguia");
 	    // eventos das guias
-	    $i("i3GEOlegendaguia8").onclick = function() {
-		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia8", "i3GEOlegendaguia");
-		i3GEOF.legenda.parametrosAuto();
-	    };
-	    $i("i3GEOlegendaguia7").onclick = function() {
-		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia7", "i3GEOlegendaguia");
-	    };
-	    $i("i3GEOlegendaguia6").onclick = function() {
-		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia6", "i3GEOlegendaguia");
-	    };
 	    $i("i3GEOlegendaguia1").onclick = function() {
 		i3GEOF.legenda.mostralegenda();
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia1", "i3GEOlegendaguia");
 	    };
+	    $i("i3GEOlegendaguia7").onclick = function() {
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia7", "i3GEOlegendaguia");
+	    };
+	    $i("i3GEOlegendaguia8").onclick = function() {
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia8", "i3GEOlegendaguia");
+		i3GEOF.legenda.parametrosAuto();
+	    };
+
+	    $i("i3GEOlegendaguia6").onclick = function() {
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia6", "i3GEOlegendaguia");
+	    };
+
 	    $i("i3GEOlegendaguia2").onclick = function() {
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia2", "i3GEOlegendaguia");
 	    };
@@ -109,18 +119,9 @@ i3GEOF.legenda =
 	    };
 	    i3GEOF.legenda.mostralegenda();
 	    i3GEOF.legenda.montaCombosItens();
-	    var objTema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda._parameters.tema);
-	    if (objTema.classe && objTema.classe.toLowerCase() == "nao") {
-		$i("i3GEOFlegendamostra").checked = false;
-	    }
-	    if(objTema.legendaimg){
-		$i("i3GEOlegendaImg").value = objTema.legendaimg;
-	    }
-	    if(objTema.offsite){
-		$i("i3GEOoffsite").value = objTema.offsite;
-	    }
+
 	    i3GEO.janela.snackBar({content: $trad("clicaSimbolo",i3GEOF.legenda.dicionario)});
-	    i3GEO.util.aplicaAquarela("i3GEOF.legenda_corpo");
+	    i3GEO.util.aplicaAquarela(p.idContainer);
 	    i3GEOF.legenda.aposIniciar.call();
 	},
 	sldi: function() {
@@ -186,10 +187,7 @@ i3GEOF.legenda =
 	    cp.call(p, "foo", temp);
 	},
 	janelaCorRamp: function(){
-	    var tabela = $i("i3GEOlegendalegenda");
-	    var trs = tabela.getElementsByTagName("tr");
-	    var ncores = trs.length - 1;
-	    i3GEO.util.abreColourRamp("", "listaColourRamp", ncores, i3GEOF.legenda._parameters.tema);
+	    i3GEO.util.abreColourRamp("", "listaColourRamp", i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[i3GEOF.legenda._parameters.tema].numclasses, i3GEOF.legenda._parameters.tema);
 	},
 	/*
 	 * Function: aposAlterarLegenda
@@ -202,105 +200,300 @@ i3GEOF.legenda =
 	    i3GEO.Interface.atualizaTema("", i3GEOF.legenda._parameters.tema);
 	},
 	mostralegenda : function() {
-	    if (i3GEOF.legenda.aguarde.visibility === "visible") {
-		return;
-	    }
-	    i3GEOF.legenda.aguarde.visibility = "visible";
-	    var p, cp;
-	    p =
-		i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
-		+ i3GEO.configura.sid
-		+ "&funcao=editalegenda&opcao=edita&tema="
-		+ i3GEOF.legenda._parameters.tema;
-	    cp = new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.call(p, "tabelaLegenda", i3GEOF.legenda.montaLegenda);
-	},
-	montaLegenda : function(retorno) {
-	    i3GEOF.legenda.aviso = false;
-	    try {
-		if (retorno.data != undefined) {
-		    //hidden e utilizado para esconder ou mostrar determinados trechos do template
-		    var mustache = [], b, ins, i, ajuda, id, re, exp, n, filtro,temp = {};
-		    // se nao for do tipo raster
-		    if (retorno.data[0].proc === "") {
-			n = retorno.data.length;
-			for (i = 0; i < n; i++) {
-			    temp = {};
-			    id = retorno.data[i].tema + "-" + retorno.data[i].idclasse;
-			    re = new RegExp("'", "g");
-			    exp = (retorno.data[i].expressao).replace(re, '"');
-			    temp.cliqueExclui = $trad('cliqueExclui', i3GEOF.legenda.dicionario);
-			    temp.cliqueAltera = $trad('cliqueAltera', i3GEOF.legenda.dicionario);
-			    temp.imagem = retorno.data[i].imagem;
-			    temp.id = id;
-			    temp.idclasse = retorno.data[i].idclasse;
-			    temp.novoNome = $trad('digitaNovoNome', i3GEOF.legenda.dicionario);
-			    temp.nome = retorno.data[i].nomeclasse;
-			    temp.editorExp = $trad("editorExp", i3GEOF.legenda.dicionario);
-			    temp.exp = exp;
-			    temp.txtMinscale = $trad('minScale', i3GEOF.legenda.dicionario);
-			    temp.minScale = retorno.data[i].minScale;
-			    temp.txtMaxScale = $trad('maxScale', i3GEOF.legenda.dicionario);
-			    temp.maxScale = retorno.data[i].maxScale;
-			    temp.sobe = $trad('sobe', i3GEOF.legenda.dicionario);
-			    temp.desce = $trad('desce', i3GEOF.legenda.dicionario);
-			    mustache.push(temp);
-			}
-			ins = Mustache.render(
-				i3GEOF.legenda._parameters.mustachelista,
-				$.extend(
-					{},
-					{
-					    "linhas" :  mustache,
-					    "hidden2":"",
-					    "hidden1": "hidden"
-					},
-					i3GEOF.legenda._parameters.objdicionario
-				)
-			);
-			$i("i3GEOlegendaguia1objLegenda").innerHTML = ins;
-		    } else {
-			ajuda = i3GEOF.legenda._parameters.objdicionario['ajudaEscalaCores']
-			+ "<p>"
-			+ i3GEOF.legenda._parameters.objdicionario['msgEscalaCoresAuto']
-			+ "<p>"
-			+ i3GEOF.legenda._parameters.objdicionario['msgEscalaCoresIndividual']
-			+ "<p>"
-			+ i3GEOF.legenda._parameters.objdicionario['msgBandas']
-			+ "<p>"
-			+ i3GEOF.legenda._parameters.objdicionario['msgReamostragem'];
-
-			mustache = [];
-			for (i = 0; i < retorno.data[0].proc.length; i++) {
-			    mustache.push({
-				"value": retorno.data[0].proc[i]
-			    });
-			}
-
-			ins = Mustache.render(
-				i3GEOF.legenda._parameters.mustachelista,
-				$.extend(
-					{},
-					{
-					    "hidden2":"hidden",
-					    "hidden1": "",
-					    "ajuda1": ajuda,
-					    "processos": mustache
-					},
-					i3GEOF.legenda._parameters.objdicionario
-				)
-			);
-			$i("i3GEOlegendaguia1objLegenda").innerHTML = ins;
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    g_sid: i3GEO.configura.sid,
+		    funcao: "editalegenda",
+		    opcao: "edita",
+		    tema: p.tema
+	    };
+	    i3GEO.janela.abreAguarde();
+	    i3GEO.janela._formModal.block();
+	    $.post(
+		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			i3GEOF.legenda.montaLegenda(data);
 		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	},
+	montaLegenda : function(data) {
+	    var p = this._parameters,
+	    i3f = this;
+	    i3f._parameters.aviso = false;
+	    $i("i3GEOlegendaguia1objLegenda").innerHTML = "";
+	    if (data != undefined) {
+		//hidden e utilizado para esconder ou mostrar determinados trechos do template
+		var mustache = [], b, ins, i, ajuda, re, n, filtro;
+		// se nao for do tipo raster
+		if (data[0].proc === "") {
+		    n = data.length;
+		    re = new RegExp("'", "g");
+		    for (i = 0; i < n; i++) {
+			mustache.push({
+			    cliqueExclui: $trad('cliqueExclui', i3f.dicionario),
+			    cliqueAltera: $trad('cliqueAltera', i3f.dicionario),
+			    imagem: data[i].imagem,
+			    id: data[i].tema + "-" + data[i].idclasse,
+			    idclasse: data[i].idclasse,
+			    novoNome: $trad('digitaNovoNome', i3f.dicionario),
+			    nome: data[i].nomeclasse,
+			    editorExp: $trad("editorExp", i3f.dicionario),
+			    exp: (data[i].expressao).replace(re, '"'),
+			    txtMinscale: $trad('minScale', i3f.dicionario),
+			    minScale: data[i].minScale,
+			    txtMaxScale: $trad('maxScale', i3f.dicionario),
+			    maxScale: data[i].maxScale,
+			    sobe: $trad('sobe', i3f.dicionario),
+			    desce: $trad('desce', i3f.dicionario)
+			});
+		    }
+		    ins = Mustache.render(
+			    p.mustachelista,
+			    $.extend(
+				    {},
+				    {
+					"linhas" :  mustache,
+					"hidden2":"",
+					"hidden1": "hidden"
+				    },
+				    p.objdicionario
+			    )
+		    );
+		    $i("i3GEOlegendaguia1objLegenda").innerHTML = ins;
 		} else {
-		    $i("i3GEOlegendaresultado").innerHTML = "<p style=color:red >Erro<br>";
+		    ajuda = p.objdicionario['ajudaEscalaCores']
+		    + "<p>"
+		    + p.objdicionario['msgEscalaCoresAuto']
+		    + "<p>"
+		    + p.objdicionario['msgEscalaCoresIndividual']
+		    + "<p>"
+		    + p.objdicionario['msgBandas']
+		    + "<p>"
+		    + p.objdicionario['msgReamostragem'];
+
+		    mustache = [];
+		    for (i = 0; i < data[0].proc.length; i++) {
+			mustache.push({
+			    "value": data[0].proc[i]
+			});
+		    }
+
+		    ins = Mustache.render(
+			    p.mustachelista,
+			    $.extend(
+				    {},
+				    {
+					"hidden2":"hidden",
+					"hidden1": "",
+					"ajuda1": ajuda,
+					"processos": mustache
+				    },
+				    p.objdicionario
+			    )
+		    );
+		    $i("i3GEOlegendaguia1objLegenda").innerHTML = ins;
 		}
-		i3GEOF.legenda.aguarde.visibility = "hidden";
+	    } else {
+		i3GEO.janela.snackBar({content: "erro", style:'red'});
+	    }
+	},
+	/*
+	 * Function: adicionaConta
+	 *
+	 * Adiciona ao nome de cada classe o n&uacute;mero de ocorr&ecirc;ncias em cada uma
+	 *
+	 */
+	adicionaConta : function(btn) {
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    funcao: "contagemclasse",
+		    g_sid: i3GEO.configura.sid,
+		    tema: p.tema
+	    };
+	    i3GEO.janela.abreAguarde();
+	    btn = $(btn);
+	    btn.prop("disabled",true).find("span").removeClass("hidden");
+	    i3GEO.janela._formModal.block();
+	    $.post(
+		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false).find("span").addClass("hidden");
+			i3GEO.janela.snackBar({content: $trad('feito')});
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false).find("span").addClass("hidden");
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	},
+	/*
+	 * Function: adicionaOpacidade
+	 *
+	 * Adiciona opacidade vari&aacute;vel em cada classe
+	 */
+	adicionaOpacidade : function(btn) {
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    funcao: "adicionaOpacidade",
+		    g_sid: i3GEO.configura.sid,
+		    tema: p.tema,
+		    ext: i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten)
+	    };
+	    i3GEO.janela.abreAguarde();
+	    btn = $(btn);
+	    btn.prop("disabled",true).find("span").removeClass("hidden");
+	    i3GEO.janela._formModal.block();
+	    $.post(
+		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false).find("span").addClass("hidden");
+			i3GEO.janela.snackBar({content: $trad('feito')});
+			i3GEOF.legenda.aposAlterarLegenda();
+			i3GEOF.legenda.mostralegenda();
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false).find("span").addClass("hidden");
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	},
+	aplicaLegendaImg : function(btn) {
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    funcao: "aplicaLegendaImg",
+		    g_sid: i3GEO.configura.sid,
+		    tema: p.tema,
+		    imagem: $i("i3GEOlegendaImg").value
+	    };
+	    i3GEO.janela.abreAguarde();
+	    btn = $(btn);
+	    btn.prop("disabled",true);
+	    i3GEO.janela._formModal.block();
+	    $.post(
+		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false);
+			i3GEO.janela.snackBar({content: $trad('feito')});
+			i3GEOF.legenda.aposAlterarLegenda();
+			i3GEOF.legenda.mostralegenda();
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false);
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	},
+	aplicarOffsite : function(btn) {
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    funcao: "aplicaOffsite",
+		    g_sid: i3GEO.configura.sid,
+		    tema: p.tema,
+		    offsite: $i("i3GEOoffsite").value
+	    };
+	    i3GEO.janela.abreAguarde();
+	    btn = $(btn);
+	    btn.prop("disabled",true);
+	    i3GEO.janela._formModal.block();
+	    $.post(
+		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false);
+			i3GEO.janela.snackBar({content: $trad('feito')});
+			i3GEOF.legenda.aposAlterarLegenda();
+			i3GEOF.legenda.mostralegenda();
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false);
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	},
+	paleta : function(btn) {
+	    try {
+		if (i3GEOF.legenda.aguarde.visibility === "visible") {
+		    return;
+		}
+		i3GEOF.legenda.aguarde.visibility = "visible";
+		var retornapaleta = function() {
+		    i3GEOF.legenda.aposAlterarLegenda();
+		    i3GEOF.legenda.aguarde.visibility = "hidden";
+		    i3GEOF.legenda.mostralegenda();
+		}, ci = $i("i3GEOlegendaacori").value, cf = $i("i3GEOlegendaacorf").value, cp = new cpaint(), p =
+		    i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="
+		    + i3GEO.configura.sid
+		    + "&funcao=alteraCoresClasses&tema="
+		    + i3GEOF.legenda._parameters.tema
+		    + "&cori="
+		    + ci
+		    + "&corf="
+		    + cf;
+		cp.set_response_type("JSON");
+		cp.call(p, "alteraCoresClasses", retornapaleta);
 	    } catch (e) {
+		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
+
+
+
+
+
+
 	filtro : function(idRetorno) {
 	    i3GEO.tema.dialogo.filtro(i3GEOF.legenda._parameters.tema, true, idRetorno);
 	},
@@ -313,9 +506,9 @@ i3GEOF.legenda =
 	 * O aviso &eacute; mostrado apenas uma vez
 	 */
 	aviso : function() {
-	    if (i3GEOF.legenda.aviso == true) {
+	    if (i3GEOF.legenda._parameters.aviso == true) {
 		i3GEO.janela.snackBar({content: $trad("msgAplicaAlteracao",i3GEOF.legenda.dicionario),style: "red"});
-		i3GEOF.legenda.aviso == false;
+		i3GEOF.legenda._parameters.aviso == false;
 	    }
 	},
 	/*
@@ -386,69 +579,14 @@ i3GEOF.legenda =
 	    };
 	    i3GEO.php.aplicaCorClasseTema(retorna, i3GEOF.legenda._parameters.tema, id, $i("tempCorLegenda").value);
 	},
-	aplicarLegendaImg : function() {
-	    if (i3GEOF.legenda.aguarde.visibility === "visible") {
-		return;
-	    }
-	    //muda o valor do objeto tema para que a proxima vez que abrir a ferramenta o campo input seja preenchido corretamente
-	    var objTema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda._parameters.tema);
-	    objTema.legendaimg = $i("i3GEOlegendaImg").value;
 
-	    i3GEOF.legenda.aguarde.visibility = "visible";
-	    var retorna = function() {
-		i3GEOF.legenda.aposAlterarLegenda();
-		i3GEOF.legenda.aguarde.visibility = "hidden";
-		i3GEOF.legenda.mostralegenda();
-	    };
-	    var p =
-		i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
-		+ i3GEO.configura.sid
-		+ "&funcao=aplicaLegendaImg"
-		+ "&tema="
-		+ i3GEOF.legenda._parameters.tema
-		+ "&imagem="
-		+ objTema.legendaimg,
-		cp = new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.call(p, "foo", retorna);
-	},
-	aplicarOffsite : function() {
-	    if (i3GEOF.legenda.aguarde.visibility === "visible") {
-		return;
-	    }
-	    //muda o valor do objeto tema para que a proxima vez que abrir a ferramenta o campo input seja preenchido corretamente
-	    var objTema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.legenda._parameters.tema);
-	    objTema.offsite = $i("i3GEOoffsite").value;
-
-	    i3GEOF.legenda.aguarde.visibility = "visible";
-	    var retorna = function() {
-		i3GEOF.legenda.aposAlterarLegenda();
-		i3GEOF.legenda.aguarde.visibility = "hidden";
-		i3GEOF.legenda.mostralegenda();
-	    };
-	    var p =
-		i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
-		+ i3GEO.configura.sid
-		+ "&funcao=aplicaOffsite"
-		+ "&tema="
-		+ i3GEOF.legenda._parameters.tema
-		+ "&offsite="
-		+ objTema.offsite,
-		cp = new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.call(p, "foo", retorna);
-	},
 	/*
 	 * Function: mudaLegenda
 	 *
 	 * Altera a legenda conforme os valores existentes na tabela de propriedades (express&atilde;o e nome da classe)
-	 *
-	 * Veja:
-	 *
-	 * <ALTERACLASSE>
 	 */
-	mudaLegenda : function() {
-	    i3GEOF.legenda.aviso = false;
+	mudaLegenda : function(btn) {
+	    i3GEOF.legenda._parameters.aviso = false;
 	    if (i3GEOF.legenda.aguarde.visibility === "visible") {
 		return;
 	    }
@@ -558,30 +696,6 @@ i3GEOF.legenda =
 	    cp.call(p, "", retorna);
 	},
 	/*
-	 * Function: adicionaConta
-	 *
-	 * Adiciona ao nome de cada classe o n&uacute;mero de ocorr&ecirc;ncias em cada uma
-	 *
-	 * Veja:
-	 *
-	 * <CONTAGEMCLASSE>
-	 */
-	adicionaConta : function() {
-	    if (i3GEOF.legenda.aguarde.visibility === "visible") {
-		return;
-	    }
-	    i3GEOF.legenda.aguarde.visibility = "visible";
-	    var p =
-		i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?g_sid="
-		+ i3GEO.configura.sid
-		+ "&funcao=contagemclasse"
-		+ "&tema="
-		+ i3GEOF.legenda._parameters.tema, cp = new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.call(p, "contagemclasse", i3GEOF.legenda.montaLegenda);
-	    i3GEO.janela.snackBar({content: $trad('consideraElementosVisiveis', i3GEOF.legenda.dicionario)});
-	},
-	/*
 	 * Function: adicionaClasse
 	 *
 	 * Adiciona uma nova classe ao tema
@@ -606,71 +720,8 @@ i3GEOF.legenda =
 	    cp.set_response_type("JSON");
 	    cp.call(p, "alteraclasse", i3GEOF.legenda.mostralegenda);
 	},
-	/*
-	 * Function: adicionaOpacidade
-	 *
-	 * Adiciona opacidade vari&aacute;vel em cada classe
-	 *
-	 * Veja:
-	 *
-	 * <ALTERACLASSE>
-	 */
-	adicionaOpacidade : function() {
-	    var retorna = function() {
-		i3GEOF.legenda.aposAlterarLegenda();
-		i3GEOF.legenda.aguarde.visibility = "hidden";
-		i3GEOF.legenda.mostralegenda();
-	    };
-	    if (i3GEOF.legenda.aguarde.visibility === "visible") {
-		return;
-	    }
-	    var ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="
-		+ i3GEO.configura.sid
-		+ "&funcao=alteraclasse&opcao=adicionaopacidade"
-		+ "&tema="
-		+ i3GEOF.legenda._parameters.tema
-		+ "&ext="
-		+ ext, cp = new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.call(p, "alteraclasse", retorna);
-	},
-	/*
-	 * Function: paleta
-	 *
-	 * Gera as cores para as classes considerando um RGB inicial e um final
-	 *
-	 * Veja:
-	 *
-	 * <ALTERACORESCLASSES>
-	 */
-	paleta : function() {
-	    try {
-		if (i3GEOF.legenda.aguarde.visibility === "visible") {
-		    return;
-		}
-		i3GEOF.legenda.aguarde.visibility = "visible";
-		var retornapaleta = function() {
-		    i3GEOF.legenda.aposAlterarLegenda();
-		    i3GEOF.legenda.aguarde.visibility = "hidden";
-		    i3GEOF.legenda.mostralegenda();
-		}, ci = $i("i3GEOlegendaacori").value, cf = $i("i3GEOlegendaacorf").value, cp = new cpaint(), p =
-		    i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="
-		    + i3GEO.configura.sid
-		    + "&funcao=alteraCoresClasses&tema="
-		    + i3GEOF.legenda._parameters.tema
-		    + "&cori="
-		    + ci
-		    + "&corf="
-		    + cf;
-		cp.set_response_type("JSON");
-		cp.call(p, "alteraCoresClasses", retornapaleta);
-	    } catch (e) {
-		i3GEO.janela.snackBar({content: "Erro: " + e, style: "red"});
-		i3GEOF.legenda.aguarde.visibility = "hidden";
-	    }
-	},
+
+
 	/*
 	 * Function: inverteCores
 	 *
@@ -1277,18 +1328,18 @@ i3GEOF.legenda =
 		if (retorno.data != undefined) {
 		    var b, l, i, sct, combo, n;
 		    retorno = retorno.data;
-		    i3GEOF.legenda.estilos = retorno.split("|");
+		    i3GEOF.legenda._parameters.estilos = retorno.split("|");
 		    combo =
-			"<select id='i3GEOlegendaestilos' class='form-control' onchange=i3GEOF.legenda.estilo=this.value;i3GEOF.legenda.mostraEstilo(this.value)>";
-		    n = i3GEOF.legenda.estilos.length;
+			"<select id='i3GEOlegendaestilos' class='form-control' onchange=i3GEOF.legenda._parameters.estilo=this.value;i3GEOF.legenda.mostraEstilo(this.value)>";
+		    n = i3GEOF.legenda._parameters.estilos.length;
 		    for (i = 0; i < n; i++) {
-			l = i3GEOF.legenda.estilos[i].split("#");
+			l = i3GEOF.legenda._parameters.estilos[i].split("#");
 			sct = "<option value=" + l[1] + "  />" + l[1] + "</option>";
 			combo += sct;
 		    }
 		    combo += "</select></div>";
 		    $i("i3GEOlegendacomboestilos").innerHTML = combo;
-		    $i("i3GEOlegendaestilos").value = i3GEOF.legenda.estilo;
+		    $i("i3GEOlegendaestilos").value = i3GEOF.legenda._parameters.estilo;
 
 
 		    i3GEOF.legenda.aguarde.visibility = "hidden";
@@ -1317,7 +1368,7 @@ i3GEOF.legenda =
 		    + "&classe="
 		    + i3GEOF.legenda.classe
 		    + "&estilo="
-		    + i3GEOF.legenda.estilo, cp = new cpaint();
+		    + i3GEOF.legenda._parameters.estilo, cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 	    } catch (e) {
@@ -1340,7 +1391,7 @@ i3GEOF.legenda =
 		    + "&classe="
 		    + i3GEOF.legenda.classe
 		    + "&estilo="
-		    + i3GEOF.legenda.estilo, cp = new cpaint();
+		    + i3GEOF.legenda._parameters.estilo, cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 	    } catch (e) {
@@ -1363,9 +1414,9 @@ i3GEOF.legenda =
 		    + "&classe="
 		    + i3GEOF.legenda.classe
 		    + "&estilo="
-		    + i3GEOF.legenda.estilo, cp = new cpaint();
+		    + i3GEOF.legenda._parameters.estilo, cp = new cpaint();
 		cp.set_response_type("JSON");
-		i3GEOF.legenda.estilo = i3GEOF.legenda.estilo + 1;
+		i3GEOF.legenda._parameters.estilo = i3GEOF.legenda._parameters.estilo + 1;
 		cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 	    } catch (e) {
 
@@ -1379,7 +1430,7 @@ i3GEOF.legenda =
 		    return;
 		}
 		i3GEOF.legenda.aguarde.visibility = "visible";
-		i3GEOF.legenda.estilo = 0;
+		i3GEOF.legenda._parameters.estilo = 0;
 		var p =
 		    i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid="
 		    + i3GEO.configura.sid
@@ -1388,7 +1439,7 @@ i3GEOF.legenda =
 		    + "&classe="
 		    + i3GEOF.legenda.classe
 		    + "&estilo="
-		    + i3GEOF.legenda.estilo, cp = new cpaint();
+		    + i3GEOF.legenda._parameters.estilo, cp = new cpaint();
 		cp.set_response_type("JSON");
 		cp.call(p, "editasimbolo", i3GEOF.legenda.reMontaEditor);
 	    } catch (e) {
@@ -1406,8 +1457,8 @@ i3GEOF.legenda =
 	    i3GEOF.legenda.aguarde.visibility = "visible";
 	    try {
 		var linha, tipoLayer, d, p, cp, mustache = {};
-		//i3GEOF.legenda.estilo = e; // esta e uma variavel global
-		linha = i3GEOF.legenda.estilos[i3GEOF.legenda.estilo];
+		//i3GEOF.legenda._parameters.estilo = e; // esta e uma variavel global
+		linha = i3GEOF.legenda._parameters.estilos[i3GEOF.legenda._parameters.estilo];
 		linha = linha.split("#");
 		tipoLayer = linha[0];
 		mustache = {
@@ -1466,7 +1517,7 @@ i3GEOF.legenda =
 		cp.call(p, "editasimbolo", i3GEOF.legenda.listaSimbolos);
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    } catch (e) {
-		i3GEO.janela.snackBar({content: "Erro: " + i3GEOF.legenda.estilo, style: "red"});
+		i3GEO.janela.snackBar({content: "Erro: " + i3GEOF.legenda._parameters.estilo, style: "red"});
 		i3GEOF.legenda.aguarde.visibility = "hidden";
 	    }
 	},
@@ -1544,7 +1595,7 @@ i3GEOF.legenda =
 		    + "&classe="
 		    + i3GEOF.legenda.classe
 		    + "&estilo="
-		    + i3GEOF.legenda.estilo
+		    + i3GEOF.legenda._parameters.estilo
 		    + "&outlinecolor="
 		    + outlinecolor
 		    + "&backgroundcolor="
@@ -1616,9 +1667,9 @@ i3GEOF.legenda =
 		    function(retorno) {
 		    if (retorno.data && retorno.data[0].proc == "") {
 			var b, ins = [], i, re, t;
-			ins.push("<h5>" + $trad('numeroOcorrenciasClasses', i3GEOF.legenda.dicionario) + "</h5>");
+			ins.push("<h4>" + $trad('numeroOcorrenciasClasses', i3GEOF.legenda.dicionario) + "</h4>");
 			ins.push("<table width=100% >");
-			i3GEOF.legenda.dadosGrafico = [
+			i3GEOF.legenda._parameters.dadosGrafico = [
 			    "n;x"
 			    ];
 			if (retorno.data.length < 2) {
@@ -1632,14 +1683,14 @@ i3GEOF.legenda =
 			    id = retorno.data[i].tema + "-" + retorno.data[i].idclasse; // layer+indice da classe
 			    re = new RegExp("'", "g");
 			    exp = (retorno.data[i].expressao).replace(re, '"');
-			    ins.push("<tr><td style='text-align:left;border-bottom:0 none white' ><label>" + retorno.data[i].nomeclasse
-				    + "</label></td></tr>");
+			    ins.push("<tr><td style='text-align:left;border-bottom:0 none white' >" + retorno.data[i].nomeclasse
+				    + "</td></tr>");
 			    t = (retorno.data[i].nreg * 100) / retorno.data[i].totalreg;
 			    ins.push("<tr><td style=text-align:left ><img height=15px width=" + t
 				    + "% src='"
 				    + retorno.data[i].imagem
 				    + "' /></td></tr>");
-			    i3GEOF.legenda.dadosGrafico.push(retorno.data[i].nomeclasse + ";" + retorno.data[i].nreg);
+			    i3GEOF.legenda._parameters.dadosGrafico.push(retorno.data[i].nomeclasse + ";" + retorno.data[i].nreg);
 			}
 			ins.push("</table><br>");
 			$i("i3GEOlegendaguia4obj").innerHTML = ins.join("");
@@ -1669,7 +1720,7 @@ i3GEOF.legenda =
 			"id" : ""
 		    },
 		    "data" : {
-			"dados" : i3GEOF.legenda.dadosGrafico
+			"dados" : i3GEOF.legenda._parameters.dadosGrafico
 		    }
 	    };
 	    i3GEOF.graficointerativo1.tipo = "pizza_1";
@@ -1836,7 +1887,7 @@ i3GEOF.legenda =
 	    temp = function(retorno){
 		try{
 		    if(retorno.data !== ""){
-			$i("i3GEOlegendaAutocolunas").innerHTML = retorno.data.colunas;
+			$i("i3GEOlegendaAutocolunas").innerHTML = retorno.data.colunas.replace(/,/gi,', ');
 			$i("i3GEOlegendaAutoclassesitem").value = retorno.data.classesitem;
 			$i("i3GEOlegendaAutoclassesnome").value = retorno.data.classesnome;
 			$i("i3GEOlegendaAutoclassescor").value = retorno.data.classescor;

@@ -685,7 +685,7 @@ $valor - Novo valor da transpar&ecirc;ncia
 		}
 		$cor->setrgb($c[0],$c[1],$c[2]);
 		$this->layer->setmetadata("cache","");
-		return("ok");
+		return true;
 	}
 /*
 function: inverteStatusLegenda

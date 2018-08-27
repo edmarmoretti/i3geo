@@ -395,7 +395,8 @@ $protocolo = $protocolo[0];
 $protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
 $protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 $urli3geo = str_replace("/ogc.php","",$protocolo.$_SERVER["PHP_SELF"]);
-
+$urli3geo = str_replace(":8080","",$urli3geo);
+$protocolo = str_replace(":8080","",$protocolo);
 //
 //garante que layers possam ser especificados de diferentes maneiras
 //mas evita definir o layer como o nome do mapfile
@@ -606,6 +607,7 @@ else{
 	}
 	$proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 	$server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
+	$server = str_replace(":8080","",$server);
 	$or = $urli3geo."/ogc.php";
 	if((isset($tema)) && ($tema != "") && ($tipo=="metadados")){
 		$or = $or."?tema=".$tema."&";
@@ -700,9 +702,9 @@ else{
 								$l->set("status",MS_OFF);
 							}
 							else{
-								$l->set("status",MS_DEFAULT);
+								$l->set("status",MS_ON);
 							}
-							$l->setmetadata("ows_title",pegaNome($l));
+							$l->setmetadata("ows_title",converteenc($l->getmetadata("tema")));
 							$l->setmetadata("ows_srs",$listaepsg);
 							$l->set("group","");
 							//timeout
@@ -898,7 +900,7 @@ else{
 								$extensao = $extensaoMap;
 							}
 							$l->setmetadata("wms_extent",$extensao);
-							$l->setmetadata("ows_title",pegaNome($l));
+							$l->setmetadata("ows_title",converteenc($l->getmetadata("tema")));
 							$l->setmetadata("ows_srs",$listaepsg);
 							$l->set("status",MS_OFF);
 							$l->setmetadata("gml_include_items","all");
@@ -957,8 +959,10 @@ else{
 	if((isset($_GET["grade"])) && (strtolower($_GET["grade"]) == "sim")){
 		processaGrade();
 	}
-	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
-	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
+	if(!file_exists($oMap->symbolsetfilename)){
+    	$oMap->setSymbolSet($locaplic."/symbols/".basename($oMap->symbolsetfilename));
+    	$oMap->setFontSet($locaplic."/symbols/".basename($oMap->fontsetfilename));
+	}
 	//verifica se existem layers com plugin definido e processa conforme o tipo de plugin
 	processaPluginI3geo();
 	//

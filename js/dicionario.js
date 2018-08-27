@@ -3161,5 +3161,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "feito" : [
+            {
+                pt : "Feito!",
+                en : "",
+                es : ""
+            }
         ]
     };
