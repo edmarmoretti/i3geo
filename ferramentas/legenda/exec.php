@@ -3,91 +3,30 @@ include_once (dirname(__FILE__) . "/../safe2.php");
 verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
 $retorno = "";
 switch (strtoupper($_GET["funcao"])) {
-    case "EDITALEGENDA":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
-        $m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
-        $retorno = $m->tabelaLegenda();
+    case "SALVAPARAMETROSAUTO":
+        $map = ms_newMapObj($_SESSION["map_file"]);
+        $layer = $map->getlayerbyname($_POST["tema"]);
+        $layer->setmetadata("classesitem", $_POST["classesitem"]);
+        $layer->setmetadata("classesnome", $_POST["classesnome"]);
+        $layer->setmetadata("classescor", $_POST["classescor"]);
+        $layer->setmetadata("classessimbolo", $_POST["classessimbolo"]);
+        $layer->setmetadata("classestamanho", $_POST["classestamanho"]);
+        $layer->setmetadata("palletefile", $_POST["palletefile"]);
+        $layer->setmetadata("palletestep", $_POST["palletestep"]);
+        $layer->setmetadata("cache", "nao");
+        $layer->setmetadata("TILES", "nao");
+        autoClasses($layer, $map, $_SESSION["locaplic"]);
+        $layer->setmetadata("classesnome", "");
+        $layer->setmetadata("palletefile", "");
+        $map->save($_SESSION["map_file"]);
         ob_clean();
-        if (! $retorno) {
-            header ( "HTTP/1.1 500 erro legenda nao disponivel" );
-        } else {
-            header("Content-type: application/json");
-            echo json_encode($retorno);
-        }
+        header("Content-type: application/json");
+        echo json_encode(true);
         exit();
         break;
-        /*
-         * Valor: CONTAGEMCLASSE
-         *
-         * Acrescenta a contagem de elementos em cada classe.
-         *
-         * <Legenda->tabelaLegenda>
-         */
-    case "CONTAGEMCLASSE":
-        // apresenta erro com palavras acentuadas
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
-        $m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
-        $retorno = $m->tabelaLegenda("sim");
-        $m->salva();
-        ob_clean();
-        if (! $retorno) {
-            header ( "HTTP/1.1 500 erro legenda nao disponivel" );
-        } else {
-            header("Content-type: application/json");
-            echo json_encode($retorno);
-        }
-        exit();
-        break;
-    case "ADICIONAOPACIDADE":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_alteraclasse.php");
-        $m = new Alteraclasse($_SESSION["map_file"], $_POST["tema"], "", $_POST["ext"]);
-        $retorno = $m->adicionaopacidade();
-        $m->salva();
-        ob_clean();
-        if (! $retorno) {
-            header ( "HTTP/1.1 500 erro legenda nao disponivel" );
-        } else {
-            header("Content-type: application/json");
-            echo json_encode($retorno);
-        }
-        exit();
-        break;
-    case "APLICALEGENDAIMG":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
-        $m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
-        $retorno = $m->aplicaLegendaImg($_GET["imagem"]);
-        $m->salva();
-        ob_clean();
-        if (! $retorno) {
-            header ( "HTTP/1.1 500 erro legenda nao disponivel" );
-        } else {
-            header("Content-type: application/json");
-            echo json_encode($retorno);
-        }
-        exit();
-        break;
-    case "APLICAOFFSITE":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
-        $m = new Temas($_SESSION["map_file"], $_POST["tema"]);
-        $retorno = $m->mudaOffsite($_GET["offsite"]);
-        $m->salva();
-        ob_clean();
-        if (! $retorno) {
-            header ( "HTTP/1.1 500 erro legenda nao disponivel" );
-        } else {
-            header("Content-type: application/json");
-            echo json_encode($retorno);
-        }
-        exit();
-        break;
-
-
-
-
-
     case "PARAMETROSAUTO":
-        $map = ms_newMapObj($map_file);
-        $layer = $map->getlayerbyname($tema);
+        $map = ms_newMapObj($_SESSION["map_file"]);
+        $layer = $map->getlayerbyname($_POST["tema"]);
         $retorno = array();
         $retorno["classesitem"] = $layer->getmetadata("classesitem");
         $retorno["classesnome"] = $layer->getmetadata("classesnome");
@@ -103,26 +42,160 @@ switch (strtoupper($_GET["funcao"])) {
             $items = array();
         }
         $retorno["colunas"] = implode(",", $items);
+        ob_clean();
+        header("Content-type: application/json");
+        echo json_encode($retorno);
+        exit();
         break;
-    case "SALVAPARAMETROSAUTO":
-        $map = ms_newMapObj($map_file);
-        $layer = $map->getlayerbyname($tema);
-        $layer->setmetadata("classesitem", $_GET["classesitem"]);
-        $layer->setmetadata("classesnome", $_GET["classesnome"]);
-        $layer->setmetadata("classescor", $_GET["classescor"]);
-        $layer->setmetadata("classessimbolo", $_GET["classessimbolo"]);
-        $layer->setmetadata("classestamanho", $_GET["classestamanho"]);
-        $layer->setmetadata("palletefile", $_GET["palletefile"]);
-        $layer->setmetadata("palletestep", $_GET["palletestep"]);
-        $layer->setmetadata("cache", "nao");
-        $layer->setmetadata("TILES", "nao");
+    case "APLICARCLUSTER":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
+        $m = new Temas($_SESSION["map_file"], $_POST["tema"]);
+        $retorno = $m->criaCluster($_POST["group"], $_POST["filter"], $_POST["maxdistance"], $_POST["region"], $_POST["buffer"]);
+        $m->salva();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
+    case "REMOVERCLUSTER":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
+        $m = new Temas($_SESSION["map_file"], $_POST["tema"]);
+        $l = $m->mapa->getlayerbyname($_POST["tema"]);
+        $retorno = $m->removeCluster();
+        $m->salva();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
+    case "CONTAGEMCLASSE":
+        // apresenta erro com palavras acentuadas
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
+        $m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
+        $retorno = $m->tabelaLegenda("sim");
+        $m->salva();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
+    case "REMOVELABELCLASSE":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
+        $m = new Temas($_SESSION["map_file"], $_POST["tema"]);
+        $retorno = $m->removeLabel($_POST["classe"]);
+        $m->salva();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
+    case "ADICIONALABELCLASSE":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
+        $m = new Temas($_SESSION["map_file"], $_POST["tema"]);
+        $l = $m->mapa->getlayerbyname($_POST["tema"]);
+        if (empty($_POST["item"])) {
+            $retorno = false;
+        } else {
+            $classe = $l->getclass($_POST["classe"]);
+            $retorno = $m->adicionaLabel($classe, $_POST["wrap"], $_POST["fonte"], $_POST["tamanho"], $_POST["angulo"], $_POST["fundo"], $_POST["sombra"], $_POST["cor"], $_POST["outlinecolor"], $_POST["shadowcolor"], $_POST["shadowsizex"], $_POST["shadowsizey"], $_POST["force"], $_POST["mindistance"], $_POST["minfeaturesize"], $_POST["offsetx"], $_POST["offsety"], $_POST["partials"], $_POST["position"], "[" . $_POST["item"] . "]");
+            $m->salva();
+        }
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
+    case "ALTERAREPRESENTACAO":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
+        $m = new Temas($_SESSION["map_file"], $_POST["tema"]);
+        $retorno = $m->alteraRepresentacao();
+        $m->salva();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
+    case "EDITALEGENDA":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
+        $m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
+        $retorno = $m->tabelaLegenda();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
+    case "APLICALEGENDAIMG":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
+        $m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
+        $retorno = $m->aplicaLegendaImg($_GET["imagem"]);
+        $m->salva();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
+    case "APLICAOFFSITE":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
+        $m = new Temas($_SESSION["map_file"], $_POST["tema"]);
+        $retorno = $m->mudaOffsite($_GET["offsite"]);
+        $m->salva();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
+        break;
 
-        autoClasses($layer, $map, $locaplic);
-        $layer->setmetadata("classesnome", "");
-        $layer->setmetadata("palletefile", "");
-        $map->save($map_file);
-        $retorno = "ok";
+    case "APLICAPROCESSOS":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
+        $m = new Temas($_SESSION["map_file"], $_POST["tema"]);
+        $retorno = $m->aplicaProcessos($_POST["lista"]);
+        $m->salva();
+        ob_clean();
+        if (! $retorno) {
+            header("HTTP/1.1 500 erro legenda nao disponivel");
+        } else {
+            header("Content-type: application/json");
+            echo json_encode($retorno);
+        }
+        exit();
         break;
+
     /*
      * Valor: TEMA2SLD
      *
@@ -139,76 +212,5 @@ switch (strtoupper($_GET["funcao"])) {
         echo $m->sld();
         exit();
         break;
-    /*
-     * function: ADICIONALABELCLASSE
-     *
-     * Adiciona LABEL em uma classe de um layer
-     *
-     * <Temas->adicionaLabel>
-     */
-    case "ADICIONALABELCLASSE":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
-        $m = new Temas($map_file, $tema);
-        $l = $m->mapa->getlayerbyname($tema);
-        if (empty($_GET["item"])) {
-            $retorno = "erro";
-        } else {
-            // $l->set("labelitem",$item);
-            $novac = $l->getclass($_GET["classe"]);
-            $m->adicionaLabel($novac, $_GET["wrap"], $_GET["fonte"], $_GET["tamanho"], $_GET["angulo"], $_GET["fundo"], $_GET["sombra"], $_GET["cor"], $_GET["outlinecolor"], $_GET["shadowcolor"], $_GET["shadowsizex"], $_GET["shadowsizey"], $_GET["force"], $_GET["mindistance"], $_GET["minfeaturesize"], $_GET["offsetx"], $_GET["offsety"], $_GET["partials"], $_GET["position"], "[" . $_GET["item"] . "]");
-            $m->salva();
-            $retorno = "ok";
-        }
-        break;
-    /*
-     * function: REMOVELABELCLASSE
-     *
-     * Remove LABEL em uma classe de um layer
-     */
-    case "REMOVELABELCLASSE":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
-        $m = new Temas($map_file, $tema);
-        $m->removeLabel($_GET["classe"]);
-        $m->salva();
-        $retorno = "ok";
-        break;
-
-
-    /*
-     * Valor: APLICATODASCLASSES
-     *
-     * Aplica um parametro a todas as classes
-     */
-    case "APLICATODASCLASSES":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
-        $m = new Legenda($map_file, $locaplic, $tema);
-        $r = $m->aplicaTodasClasses($_GET["parametro"], $_GET["valor"]);
-        $m->salva();
-        if (! $r) {
-            $r = "erro.Erro legenda nao disponivel";
-        }
-        $retorno = $r;
-        break;
-    case "APLICARCLUSTER":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
-        $m = new Temas($map_file, $tema);
-        $l = $m->mapa->getlayerbyname($tema);
-        if ($filter != "") {
-            // $filter = base64decode($filter);
-        }
-        $m->criaCluster($_GET["group"], $_GET["filter"], $_GET["maxdistance"], $_GET["region"], $_GET["buffer"]);
-        $m->salva();
-        $retorno = "ok";
-        break;
-    case "REMOVERCLUSTER":
-        include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
-        $m = new Temas($map_file, $tema);
-        $l = $m->mapa->getlayerbyname($tema);
-        $m->removeCluster();
-        $m->salva();
-        $retorno = "ok";
-        break;
-
-
 }
 ?>

@@ -134,10 +134,14 @@ $ext - (opcional) extens&atilde;o geogr&aacute;fica que ser&aacute; aplicada ao 
 			$this->arquivo = $map_file;
 		}
 
-		if(file_exists($locaplic."/funcoes_gerais.php"))
+		if(file_exists($locaplic."/funcoes_gerais.php")){
 			include_once($locaplic."/funcoes_gerais.php");
-		else
+			include_once($locaplic."/classe_vermultilayer.php");
+		}
+		else {
 			include_once("funcoes_gerais.php");
+			include_once("classe_vermultilayer.php");
+		}
 
 		$this->tema = $tema;
 		$this->v = versao();
@@ -229,7 +233,7 @@ $lista - lista de processos separados por |
 			$this->layer->setMetaData("cache","");
 		}
 
-		return("ok");
+		return true;
 	}
 /*
 function: gravaImagemCorpo (depreciado)
@@ -273,18 +277,17 @@ Temas poligonais s&atilde;o transformados em lineares, e lineares em poligonais.
 A mudan&ccedil;a &eacute; feita apenas na representa&ccedil;&atilde;o do layer.
 */
 	function alteraRepresentacao(){
-		$retorno = "ok";
+		$retorno = true;
 		foreach ($this->grupo as $l){
-
 			$l = $this->mapa->getlayerbyname($l);
-			if (($l->type == 1) || ($l->type == MS_LAYER_LINE)){
+			if ($l->type == MS_LAYER_LINE){
 				$l->set("type",MS_LAYER_POLYGON);
 			}
-			elseif (($l->type == 2) || ($l->type == MS_LAYER_POLYGON)){
+			elseif ($l->type == MS_LAYER_POLYGON){
 				$l->set("type",MS_LAYER_LINE);
 			}
 			if (($l->type < 1) || ($l->type > 2)){
-				$retorno = "erro. O tipo desse tema nao pode ser alterado";
+				$retorno = false;
 			}
 			if ($this->layer){
 				$this->layer->setMetaData("cache","");
@@ -1427,6 +1430,7 @@ Adiciona LABEL em uma classe de um tema
 		if ($this->layer){
 			$this->layer->setMetaData("cache","");
 		}
+		return true;
 	}
 	function removeLabel($iclasse){
         $classe = $this->layer->getclass($iclasse);
@@ -1442,25 +1446,10 @@ Adiciona LABEL em uma classe de um tema
             $label->removeBinding(0);
             $classe->settext($texto);
         }
-		/*
-		$nlabel = $classe->numlabels;
-		for($i=0;$i<$nlabel;$i++){
-			if($this->vi >= 60200){
-				$label = $classe->getLabel($i);
-			}
-			else{
-				$label = $classe->label;
-			}
-			$label->set("type",MS_TRUETYPE);
-			$label->set("font","arial");
-			$label->set("size",0);
-			$s = "CLASS LABEL TEXT '' END END";
-			$classe->updateFromString($s);
-		}
-		*/
 		if ($this->layer){
 			$this->layer->setMetaData("cache","");
 		}
+		return true;
 	}
 	function criaCluster ($group = "",$filter = "",$maxdistance=5,$region='rectangle',$buffer=0){
 		if($group != ""){
@@ -1478,7 +1467,7 @@ Adiciona LABEL em uma classe de um tema
 		$cluster->updateFromString("CLUSTER $par END");
 		$this->layer->setMetaData("cache","");
 		$this->layer->setMetadata("tiles","NAO");
-		$this->layer->setMetadata("cortepixels",0);
+		$this->layer->setMetadata("cortepixels",$buffer);
 		//apaga as classes pois nao fazem mais sentido
 		if($group == ""){
 			$numclasses = $this->layer->numclasses;
@@ -1496,6 +1485,7 @@ Adiciona LABEL em uma classe de um tema
 			$cor = $novoestilo->color;
 			$cor->setRGB(255,100,100);
 		}
+		return true;
 	}
 	function removeCluster(){
 		$cluster = $this->layer->cluster;
@@ -1515,6 +1505,7 @@ Adiciona LABEL em uma classe de um tema
 				}
 			}
 		}
+		return true;
 	}
 	function selecaoLimpa(){
 		//apaga o arquivo do i3geo com os ids selecionados

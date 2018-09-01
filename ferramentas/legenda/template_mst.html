@@ -51,9 +51,15 @@
 <div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; height: calc(100% - 50px);'>
     <!--- Propriedades -->
     <div id='i3GEOlegendaguia6obj' class='container-fluid '>
-        <button onclick="i3GEOF.legenda.adicionaConta(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{incluiNumeroOcorrencia}}}</button>
-        <button onclick="i3GEOF.legenda.adicionaOpacidade(this)" title='{{{aplicaOpacidade}}}' class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplicaOpacidadeVariavel}}}</button>
-        <button onclick="i3GEOF.legenda.janelaCorRamp(this)" title='{{{variaCoresExtremos}}}' class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{escolhePaletaCores}}}</button>
+        <button onclick="i3GEOF.legenda.adicionaConta(this)" class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{incluiNumeroOcorrencia}}}
+        </button>
+        <button onclick="i3GEOF.legenda.adicionaOpacidade(this)" title='{{{aplicaOpacidade}}}' class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplicaOpacidadeVariavel}}}
+        </button>
+        <button onclick="i3GEOF.legenda.janelaCorRamp(this)" title='{{{variaCoresExtremos}}}' class='btn btn-primary btn-sm btn-raised'>
+            <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{escolhePaletaCores}}}
+        </button>
         <div class="checkbox text-left">
             <label>
                 <input {{{values.mostra}}} type="checkbox" id="i3GEOFlegendamostra" onclick="i3GEO.tema.invertestatuslegenda(i3GEOF.legenda.tema);">
@@ -62,6 +68,20 @@
             </label>
         </div>
         <div class="row">
+            <div class="col-md-4">
+                <div class="panel panel-default legenda">
+                    <div class="panel-heading legenda">{{{autoSizeSymbol}}}</div>
+                    <div class="panel-body">
+                        <div class="form-group condensed">
+                            <div class="input-group">
+                                <div style="display: contents;" class="form-group label-fixed">
+                                    <input id="i3GEOlegendaAutoSize" class="form-control" type="text" value="5">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div class="col-md-4">
                 <div class="panel panel-default legenda">
                     <div class="panel-heading legenda">{{{legendaImg}}}</div>
@@ -90,8 +110,8 @@
                                 <div style="display: contents;" class="form-group label-fixed">
                                     <input id="i3GEOoffsite" class="form-control i3geoFormIconeAquarela" type="text" value="{{{values.offsite}}}">
                                 </div>
-                                <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicarOffsite(this);return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
-                                        href="javascript:void(0)">
+                                <span class="input-group-btn"> <a onclick="i3GEOF.legenda.aplicarOffsite(this);return false;" role="button" type="button"
+                                        class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
                                         <span class="material-icons ">send</span>
                                     </a>
                                 </span>
@@ -100,6 +120,8 @@
                     </div>
                 </div>
             </div>
+        </div>
+        <div class="row">
             <div class="col-md-4">
                 <div class="panel panel-default legenda">
                     <div class="panel-heading legenda">{{{geraCores}}}</div>
@@ -148,8 +170,8 @@
                                 <div class='form-group condensed'>
                                     <div class="input-group">
                                         <label class="control-label">{{{todosElementosUnicoSimbolo}}}</label>
-                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.simbU();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
-                                                href="javascript:void(0)">
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.simbolounico();return false;" role="button" type="button"
+                                                class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
                                                 <span class="material-icons ">send</span>
                                             </a>
                                         </span>
@@ -183,8 +205,8 @@
                                 <div class='form-group condensed'>
                                     <div class="input-group">
                                         <label class="control-label">&nbsp;</label>
-                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.valorU();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
-                                                href="javascript:void(0)">
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.valorunico();return false;" role="button" type="button"
+                                                class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
                                                 <span class="material-icons ">send</span>
                                             </a>
                                         </span>
@@ -213,9 +235,15 @@
                                     <input class="form-control input-lg" type='number' id='i3GEOlegendanclasses' value='5' />
                                 </div>
                                 <h5>{{{tipoCalculo}}}</h5>
-                                <button onclick="i3GEOF.legenda.valorC()" class='btn btn-primary btn-sm btn-raised'>{{{intervalosIguais}}}</button>
-                                <button onclick="i3GEOF.legenda.valorQN()" class='btn btn-primary btn-sm btn-raised'>{{{quebrasNaturais}}}</button>
-                                <button onclick="i3GEOF.legenda.valorQu()" class='btn btn-primary btn-sm btn-raised'>{{{calcularQuantil}}}</button>
+                                <button onclick="i3GEOF.legenda.nclasses(this)" class='btn btn-primary btn-sm btn-raised'>
+                                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{intervalosIguais}}}
+                                </button>
+                                <button onclick="i3GEOF.legenda.quebrasnaturais(this)" class='btn btn-primary btn-sm btn-raised'>
+                                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{quebrasNaturais}}}
+                                </button>
+                                <button onclick="i3GEOF.legenda.quantil(this)" class='btn btn-primary btn-sm btn-raised'>
+                                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{calcularQuantil}}}
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -310,8 +338,8 @@
                                 <div class='form-group condensed'>
                                     <div class="input-group">
                                         <label class="control-label">&nbsp;</label>
-                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.valorQ();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
-                                                href="javascript:void(0)">
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.quartil();return false;" role="button" type="button"
+                                                class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
                                                 <span class="material-icons ">send</span>
                                             </a>
                                         </span>
@@ -343,7 +371,7 @@
                                 </div>
                                 <div class='form-group label-fixed condensed'>
                                     <label class="control-label" for="{{{idjanela}}}i3GEOtabelaexcestat">{{{ignoraValores}}}</label>
-                                    <input class="form-control input-lg" type='number' id='i3GEOlegendaignorar' value='' />
+                                    <input class="form-control input-lg" type='text' id='i3GEOlegendaignorar' value='' />
                                 </div>
                             </div>
                         </div>
@@ -370,11 +398,16 @@
                                         </select> <b class="caret careti"></b>
                                     </div>
                                 </div>
-                                <span style="top: 0px; position: absolute; right: 0px;" class="input-group-btn pull-right"> <a style="left: 80px;"
-                                        onclick="i3GEOF.legenda.alteraGeometriaTema();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
-                                        <span class="material-icons ">send</span>
-                                    </a>
-                                </span>
+                                <div class='form-group condensed'>
+                                    <div class="input-group">
+                                        <label class="control-label">&nbsp;</label>
+                                        <span class="input-group-btn"> <a onclick="i3GEOF.legenda.alteraGeometria();return false;" role="button" type="button"
+                                                class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                                <span class="material-icons ">send</span>
+                                            </a>
+                                        </span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -423,9 +456,15 @@
                                     <div id='i3GEOlegendaitensLabel'></div>
                                 </div>
                             </div>
-                            <button onclick="i3GEOF.legenda.excluiLabels()" class='btn btn-primary btn-sm btn-raised'>{{{removeLabels}}}</button>
-                            <button onclick="i3GEOF.legenda.incluirLabels()" class='btn btn-primary btn-sm btn-raised'>{{{aplicar}}}</button>
-                            <button onclick="i3GEOF.legenda.propriedadesLabels()" class='btn btn-primary btn-sm btn-raised'>{{{propriedades2}}}</button>
+                            <button onclick="i3GEOF.legenda.excluiLabels(this)" class='btn btn-primary btn-sm btn-raised'>
+                                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{removeLabels}}}
+                            </button>
+                            <button onclick="i3GEOF.legenda.incluirLabels(this)" class='btn btn-primary btn-sm btn-raised'>
+                                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplicar}}}
+                            </button>
+                            <button onclick="i3GEOF.legenda.propriedadesLabels(this)" class='btn btn-primary btn-sm btn-raised'>
+                                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{propriedades2}}}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -445,10 +484,18 @@
                                     <div id='i3GEOlegendacomboestilos'></div>
                                 </div>
                             </div>
-                            <button onclick="i3GEOF.legenda.excluiEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{exclui}}}</button>
-                            <button onclick="i3GEOF.legenda.adicionaEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{adiciona}}}</button>
-                            <button onclick="i3GEOF.legenda.sobeEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{sobe}}}</button>
-                            <button onclick="i3GEOF.legenda.desceEstilo()" class='btn btn-primary btn-sm btn-raised'>{{{desce}}}</button>
+                            <button onclick="i3GEOF.legenda.excluiEstilo(this)" class='btn btn-primary btn-sm btn-raised'>
+                                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{exclui}}}
+                            </button>
+                            <button onclick="i3GEOF.legenda.adicionaEstilo(this)" class='btn btn-primary btn-sm btn-raised'>
+                                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{adiciona}}}
+                            </button>
+                            <button onclick="i3GEOF.legenda.sobeEstilo(this)" class='btn btn-primary btn-sm btn-raised'>
+                                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{sobe}}}
+                            </button>
+                            <button onclick="i3GEOF.legenda.desceEstilo(this)" class='btn btn-primary btn-sm btn-raised'>
+                                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{desce}}}
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -488,7 +535,7 @@
             <div class='form-group label-fixed condensed'>
                 <label class="col-md-6 control-label">{{{ClusterBuffer}}}</label>
                 <div class="col-md-6 ">
-                    <input class="form-control input-lg" type='number' id='i3GEOlegendaClusterBuffer' value='0' />
+                    <input class="form-control input-lg" type='number' id='i3GEOlegendaClusterBuffer' value='10' />
                 </div>
             </div>
             <div class='form-group label-fixed condensed'>
@@ -514,8 +561,12 @@
             </div>
         </form>
         <div style="text-align: center;">
-            <button onclick="i3GEOF.legenda.aplicarCluster()" class='btn btn-primary btn-sm btn-raised'>{{{aplicar}}}</button>
-            <button onclick="i3GEOF.legenda.removerCluster()" class='btn btn-primary btn-sm btn-raised'>{{{remover}}}</button>
+            <button onclick="i3GEOF.legenda.aplicarCluster(this)" class='btn btn-primary btn-sm btn-raised'>
+                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplicar}}}
+            </button>
+            <button onclick="i3GEOF.legenda.removerCluster(this)" class='btn btn-primary btn-sm btn-raised'>
+                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{remover}}}
+            </button>
         </div>
     </div>
     <!--autoclasses-->
@@ -568,7 +619,7 @@
             </div>
         </form>
         <div style="text-align: center;">
-            <button onclick="i3GEOF.legenda.salvaParametrosAuto()" class='btn btn-primary btn-sm btn-raised'>{{{aplicar}}}</button>
+            <button onclick="i3GEOF.legenda.salvaParametrosAuto(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplicar}}}</button>
         </div>
     </div>
     <input type='hidden' value='' id='listaColourRamp' onchange='javascript:i3GEOF.legenda.aplicaColourRamp()' />

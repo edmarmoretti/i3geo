@@ -80,7 +80,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'aplicaOpacidade' : [
 			{
-				pt : "aplicar opacidade nas classes existente, variando de 10 at&eacute; 100",
+				pt : "Aplicar opacidade nas classes existente, variando de 10 at&eacute; 100",
 				en : "apply opacity to existing classes. Opacity ranges from 10 to 100",
 				es : "aplicar opacidad a las clases existentes. La opacidad a aplicar var&iacute;a entre 10 y 100"
 			}
@@ -94,7 +94,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'variaCoresExtremos' : [
 			{
-				pt : "escolher e aplicar as varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes",
+				pt : "Escolher e aplicar as varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes",
 				en : "select and apply color variations between two extremes to existing classes",
 				es : "seleccionar y aplicar las variaciones de color entre dos extremos en las clases existentes"
 			}
@@ -129,7 +129,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'aplicaVariaCores' : [
 			{
-				pt : "aplicar varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes",
+				pt : "Aplicar varia&ccedil;&otilde;es de cores, entre dois extremos, nas classes existentes",
 				en : "apply color variations between two extremes to existing classes",
 				es : "aplicar variaciones de color entre dos extremos en las clases existentes"
 			}
@@ -150,7 +150,7 @@ i3GEOF.legenda.dicionario =
 		],
 		'adicionaNovaClasse' : [
 			{
-				pt : "adicionar uma nova classe na legenda",
+				pt : "Adicionar uma nova classe na legenda",
 				en : "add a new class on the legend",
 				es : "a&ntilde;adir una clase nueva en la leyenda"
 			}
@@ -836,7 +836,7 @@ i3GEOF.legenda.dicionario =
   		],
   		"ClusterBuffer" : [
  			{
-				pt : "Dist&acirc;ncia em pixel, no entorno da extens&atilde;o geogr&aacute;fica do mapa ou dos tiles, se for o caso, que extende a &aacute;rea de pesuisa dos pontos para forma&ccedil;&atilde;o do agrupamento",
+				pt : "Dist&acirc;ncia em pixel, no entorno da extens&atilde;o geogr&aacute;fica do mapa ou dos tiles, se for o caso, que extende a &aacute;rea de pesquisa dos pontos para forma&ccedil;&atilde;o do agrupamento",
 				en : "Distance in pixel around the map extent or tiles (if applicable), which extends the area of points to create cluster",
 				es : "Distancia en p&iacute;xel alrededor de la extensi&oacute;n geogr&aacute;fica del mapa o de las teselas (si es el caso), que ampl&iacute;a el &aacute;rea de los puntos para la creaci&oacute;n de la agrupaci&oacute;n"
 			}
@@ -952,5 +952,10 @@ i3GEOF.legenda.dicionario =
    			pt : "Cor do contorno",
    			en : "Outline color",
    			es : "Color del contorno"
-   		} ]
+   		} ],
+   		"autoSizeSymbol" : [ {
+			pt : "Valor utilizado para definir o tamanho dos s&iacute;mbolos na op&ccedil;&atilde;o 'varia textura ou tamanho'",
+			en : "",
+			es : ""
+		} ]
 	};

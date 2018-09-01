@@ -143,7 +143,7 @@ class Alteraclasse
             }
         }
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*
@@ -180,7 +180,7 @@ class Alteraclasse
             $cor->setRGB(255, 100, 100);
         }
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*
@@ -202,7 +202,7 @@ class Alteraclasse
      *
      * $maxScales - lista com valores para maxscaledenom
      */
-    function alteraclasses($ids, $nomes, $exps, $base64 = "nao", $minScales = "", $maxScales = "")
+    function alteraclasses($ids, $nomes, $exps, $base64 = "nao", $minScales = "", $maxScales = "",$separador=";")
     {
         if ($base64 == "sim") {
             //$ids = base64_decode($ids);
@@ -210,14 +210,14 @@ class Alteraclasse
             $exps = base64_decode($exps);
         }
         // prepara os arrays com os valores
-        $ids = explode(";", $ids);
-        $minScales = explode(";", $minScales);
-        $maxScales = explode(";", $maxScales);
+        $ids = explode($separador, $ids);
+        $minScales = explode($separador, $minScales);
+        $maxScales = explode($separador, $maxScales);
 
         $nomes = $this->converteTexto($nomes);
-        $nomes = explode(";", $nomes);
+        $nomes = explode($separador, $nomes);
         $exps = mb_convert_encoding($exps, "ISO-8859-1", "UTF-8");
-        $exps = explode(";", $exps);
+        $exps = explode($separador, $exps);
         // pega os layers existentes no array ids e armazena no array t
         $c = count($ids);
         for ($i = 0; $i < $c; ++ $i) {
@@ -269,6 +269,7 @@ class Alteraclasse
                 }
             }
         }
+        return true;
     }
 
     /*
@@ -328,9 +329,9 @@ class Alteraclasse
                 $classe->set("title", ($this->layer->name) . "+" . $i);
             }
             $this->layer->setMetaData("cache", "");
-            return ("ok");
+            return true;
         } else {
-            return ("erro. Nenhum valor numerico no item");
+            return false;
         }
     }
 
@@ -430,9 +431,9 @@ class Alteraclasse
             $classe->set("name", $nomeclasse);
 
             $this->layer->setMetaData("cache", "");
-            return ("ok");
+            return true;
         } else {
-            return ("erro. Nenhum valor numerico no item");
+            return false;
         }
     }
 
@@ -499,9 +500,9 @@ class Alteraclasse
             $classe->set("name", $nomeclasse);
 
             $this->layer->setMetaData("cache", "");
-            return ("ok");
+            return true;
         } else {
-            return ("erro. Nenhum valor numerico no item");
+            return false;
         }
     }
 
@@ -635,9 +636,9 @@ class Alteraclasse
                 // $classe->set("title",($this->layer->name)."+".$i);
             }
             $this->layer->setMetaData("cache", "");
-            return ("ok");
+            return true;
         } else {
-            return ("erro. Nenhum valor numerico no item");
+            return false;
         }
     }
 
@@ -723,9 +724,9 @@ class Alteraclasse
                 $ncor->setrgb(255, 255, 255);
             }
             $this->layer->setMetaData("cache", "");
-            return ("ok");
+            return true;
         } else {
-            return ("erro. Nenhum valor numerico no item");
+            return false;
         }
     }
 
@@ -812,7 +813,7 @@ class Alteraclasse
             // $c->set("title",$tema."+".$i);
         }
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*
@@ -848,7 +849,7 @@ class Alteraclasse
             return "erro";
         }
         $this->layer->moveclassup($idclasse);
-        return ("ok");
+        return true;
     }
 
     /*
@@ -866,7 +867,7 @@ class Alteraclasse
             return "erro";
         }
         $this->layer->moveclassdown($idclasse);
-        return ("ok");
+        return true;
     }
 
     /*
@@ -956,10 +957,15 @@ class Alteraclasse
                 $estilo = $classe->getstyle($j);
                 $s = "STYLE geomtransform '$tipo' END";
                 $estilo->updateFromString($s);
+                $estilo->set("size",10);
+                if($tipo == "" || $tipo == "bbox"){
+                    $estilo->updateFromString("symbol 0");
+                } else {
+                    $estilo->set("symbolname","ponto");
+                }
             }
         }
-        $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*
@@ -1007,7 +1013,7 @@ class Alteraclasse
         }
         $this->layer->setMetaData("cache", "");
 
-        return ("ok");
+        return true;
     }
 
     /*
@@ -1041,7 +1047,7 @@ class Alteraclasse
             $ncor->setrgb($c["r"], $c["g"], $c["b"]);
         }
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*
@@ -1049,7 +1055,7 @@ class Alteraclasse
      *
      * Calcula o tamanho dos estilos das classes, alterando o tamanho do s&iacute;mbolo.
      */
-    function calculaTamanhoClasses()
+    function calculaTamanhoClasses($size=5)
     {
         if (! $this->layer) {
             return "erro";
@@ -1058,7 +1064,7 @@ class Alteraclasse
         for ($i = 0; $i < $numclasses; ++ $i) {
             $classe = $this->layer->getclass($i);
             $estilo = $classe->getstyle(0);
-            $estilo->set("size", ($i + 1));
+            $estilo->set("size", ($i + $size));
             if ($estilo->symbolname == "") {
                 if ($this->layer->type == MS_LAYER_LINE) {
                     $estilo->set("symbolname", "linha");
@@ -1072,7 +1078,7 @@ class Alteraclasse
             }
         }
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*
@@ -1103,7 +1109,7 @@ class Alteraclasse
             $indice ++;
         }
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*

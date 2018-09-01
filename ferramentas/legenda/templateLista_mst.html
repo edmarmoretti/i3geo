@@ -1,20 +1,25 @@
 <!-- para o caso de vetores -->
 <div class="{{{hidden2}}}">
-    <button onclick="i3GEOF.legenda.mudaLegenda(this)" class='btn btn-primary btn-sm btn-raised'>{{{aplicaAlteracao}}}</button>
-    <button id="botaoAdicionaClasse" onclick="i3GEOF.legenda.adicionaClasse(this)" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>{{{adicionaClasse}}}</button>
+    <button onclick="i3GEOF.legenda.mudaLegenda(this)" class='btn btn-primary btn-sm btn-raised'>
+        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplicaAlteracao}}}
+    </button>
+    <button onclick="i3GEOF.legenda.adicionaClasse(this)" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>
+        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{adicionaClasse}}}
+    </button>
     <table id="i3GEOlegendalegenda" class="table-striped table-condensed">
         <tr>
-            <td>
-                <button title='{{{inverte}}}' onclick='i3GEOF.legenda.inverteCores()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
-                    <span class="material-icons">invert_colors</span>
-                </button>
-            </td>
+            <td></td>
             <td style="background-color: white">
                 <button title='{{{calculaTamanho}}}' onclick='i3GEOF.legenda.calculaTamanho()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                     <span class="material-icons">texture</span>
                 </button>
             </td>
             <td></td>
+            <td>
+                <button title='{{{inverte}}}' onclick='i3GEOF.legenda.inverteCores()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">invert_colors</span>
+                </button>
+            </td>
             <td style="background-color: yellow">
                 <button onclick='i3GEOF.legenda.ordenaClasses()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                     <span class="material-icons">sort</span>
@@ -34,7 +39,12 @@
                     <span class="material-icons">clear</span>
                 </button>
             </td>
-            <td><img style="cursor: pointer; width: 30px; height: 25px" title="{{{cliqueAltera}}}" src="{{{imagem}}}" onclick="i3GEOF.legenda.editaSimbolo('i3GEOlegendaid_{{{id}}}')"></td>
+            <td><img style="cursor: pointer; max-width: 80px;" title="{{{cliqueAltera}}}" src="{{{imagem}}}" onclick="i3GEOF.legenda.editaSimbolo('{{{id}}}')"></td>
+            <td>
+                <button onclick="i3GEOF.legenda.editaSimbolo('{{{id}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">edit</span>
+                </button>
+            </td>
             <td>
                 <button onclick="i3GEOF.legenda.modificaCor('{{{idclasse}}}')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
                     <span class="material-icons">palette</span>
@@ -84,17 +94,20 @@
 </div>
 <!-- para o caso de imagens -->
 <div class="{{{hidden1}}}">
-    <button onclick="i3GEOF.legenda.aplicaProcessos()" class='btn btn-primary btn-sm btn-raised'>{{{aplicaProcesso}}}</button>
+    <button onclick="i3GEOF.legenda.aplicaProcessos(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplicaProcesso}}}</button>
+
     <div class='form-group condensed'>
         <label class="control-label">{{{selecionaProcesso}}}</label>
-        <select class="form-control" onchange="i3GEOF.legenda.adicionaProcesso(this)">
+        <div style="width: 50%;" class="input-group">
+            <select class="form-control" onchange="i3GEOF.legenda.adicionaProcesso(this)">
             <option value=''></option>
             <option value='SCALE='>{{{escalaCores}}}</option>
             <option value='RESAMPLE='>{{{reamostragem}}}</option>
             <option value='BANDS='>{{{bandas}}}</option>
             <option value='COLOR_MATCH_THRESHOLD='>Threshold</option>
             <option value='NODATA='>Nodata</option>
-        </select><b class="caret careti"></b> <b class="caret careti"></b>
+            </select> <b class="caret careti"></b>
+        </div>
     </div>
     <br>
     <h5>{{{existentes}}}</h5>

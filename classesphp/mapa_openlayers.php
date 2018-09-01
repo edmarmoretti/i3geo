@@ -138,6 +138,7 @@ if (isset($_GET["TileMatrix"])) {
 
     $_GET["BBOX"] = $lon1 . " " . $lat1 . " " . $lon2 . " " . $lat2;
 }
+
 $map_fileX = $_SESSION["map_file"];
 //
 // verifica se o request e OGC

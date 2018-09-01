@@ -678,7 +678,7 @@ class Legenda
         $classe = $this->layer->getclass($classe);
         $classe->deletestyle($estilo);
         $this->layer->removeMetaData("cache");
-        return "ok";
+        return true;
     }
 
     /*
@@ -719,6 +719,7 @@ class Legenda
         $classe = $this->layer->getclass($classe);
         $classe->movestyleup($estilo);
         $this->layer->removeMetaData("cache");
+        return true;
     }
 
     /*
@@ -739,6 +740,7 @@ class Legenda
         $classe = $this->layer->getclass($classe);
         $classe->movestyledown($estilo);
         $this->layer->removeMetaData("cache");
+        return true;
     }
 
     /*
@@ -1043,7 +1045,7 @@ class Legenda
             $this->reSLD($this->arquivo, $this->nome, $sld);
         }
         $this->layer->setMetaData("cache", "");
-        return "ok";
+        return true;
     }
 
     /*
@@ -1282,7 +1284,7 @@ class Legenda
             }
         }
         $this->layer->setMetaData("cache", "");
-        return "ok";
+        return true;
     }
 
     function converte($texto)
