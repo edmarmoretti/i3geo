@@ -5,6 +5,17 @@ $retorno = "";
 include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
 $m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
 switch (strtoupper($_GET["funcao"])) {
+    case "APLICALEGENDAIMG":
+        $retorno = $m->aplicaLegendaImg($_GET["imagem"]);
+        $m->salva();
+        break;
+    case "EDITALEGENDA":
+        $retorno = $m->tabelaLegenda();
+        break;
+    case "CONTAGEMCLASSE":
+        $retorno = $m->tabelaLegenda("sim");
+        $m->salva();
+        break;
     case "APLICATODASCLASSES":
         $retorno = $m->aplicaTodasClasses($_POST["parametro"], $_POST["valor"]);
         $m->salva();

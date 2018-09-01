@@ -158,7 +158,7 @@ i3GEOF.legenda =
 	    i3GEO.janela.abreAguarde();
 	    i3GEO.janela._formModal.block();
 	    $.post(
-		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
+		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/execlegenda.php",
 		    par
 	    )
 	    .done(
@@ -306,7 +306,7 @@ i3GEOF.legenda =
 		    g_sid: i3GEO.configura.sid,
 		    tema: p.tema
 	    };
-	    i3f.post({btn: btn, par: par, refresh: false, prog: "exec"});
+	    i3f.post({btn: btn, par: par, refresh: false, prog: "exectemas"});
 	},
 	adicionaOpacidade : function(btn) {
 	    var p = this._parameters,
@@ -328,7 +328,7 @@ i3GEOF.legenda =
 		    tema: p.tema,
 		    imagem: $i("i3GEOlegendaImg").value
 	    };
-	    i3f.post({btn: btn, par: par, refresh: true, prog: "exec"});
+	    i3f.post({btn: btn, par: par, refresh: true, prog: "execlegenda"});
 	},
 	aplicarOffsite : function(btn) {
 	    var p = this._parameters,
@@ -339,7 +339,7 @@ i3GEOF.legenda =
 		    tema: p.tema,
 		    offsite: $i("i3GEOoffsite").value
 	    };
-	    i3f.post({btn: btn, par: par, refresh: true, prog: "exec"});
+	    i3f.post({btn: btn, par: par, refresh: true, prog: "exectemas"});
 	},
 	paleta : function(btn) {
 	    var p = this._parameters,
@@ -529,7 +529,7 @@ i3GEOF.legenda =
 		}
 	    }
 	    par.lista = lista.join("|");
-	    i3f.post({btn: btn, par: par, refresh: true, prog: "exec"});
+	    i3f.post({btn: btn, par: par, refresh: true, prog: "exectemas"});
 	},
 	corj : function(obj) {
 	    i3GEO.util.abreCor("", obj);
@@ -762,7 +762,7 @@ i3GEOF.legenda =
 	    if(par.item == ""){
 		i3GEO.janela.snackBar({content: $trad("selecionaUmItem",i3GEOF.legenda.dicionario),style: "red"});
 	    } else {
-		i3f.post({btn: false, par: par, refresh: true, prog: "exec"});
+		i3f.post({btn: false, par: par, refresh: true, prog: "exectemas"});
 	    }
 	},
 	aplicaTodasClasses : function(parametro, id) {
@@ -776,7 +776,7 @@ i3GEOF.legenda =
 		    valor: $i(id).value
 
 	    };
-	    i3f.post({btn: false, par: par, refresh: true, prog: "execsymbol"});
+	    i3f.post({btn: false, par: par, refresh: true, prog: "execlegenda"});
 	},
 	aplicaEstilo : function() {
 	    var p = this._parameters,
@@ -804,7 +804,7 @@ i3GEOF.legenda =
 			    estilo: p.estilo
 
 	    };
-	    i3f.post({btn: false, par: par, refresh: true, prog: "execsymbol"});
+	    i3f.post({btn: false, par: par, refresh: true, prog: "execlegenda"});
 	},
 	editaSimbolo : function(id) {
 	    i3GEO.guias.mostraGuiaFerramenta("i3GEOlegendaguia3", "i3GEOlegendaguia");
@@ -820,7 +820,7 @@ i3GEOF.legenda =
 		    g_sid: i3GEO.configura.sid,
 		    classe: id
 	    };
-	    i3f.post({fn: i3GEOF.legenda.montaEditor, btn: false, par: par, refresh: false, prog: "execsymbol"});
+	    i3f.post({fn: i3GEOF.legenda.montaEditor, btn: false, par: par, refresh: false, prog: "execlegenda"});
 	},
 	montaEditor : function(data) {
 	    i3GEO.util.comboItens(
@@ -863,7 +863,7 @@ i3GEOF.legenda =
 		    estilo: p.estilo
 
 	    };
-	    i3f.post({fn: i3f.reMontaEditor, btn: true, par: par, refresh: false, prog: "execsymbol"});
+	    i3f.post({fn: i3f.reMontaEditor, btn: true, par: par, refresh: false, prog: "execlegenda"});
 	},
 	sobeEstilo: function() {
 	    var p = this._parameters,
@@ -876,7 +876,7 @@ i3GEOF.legenda =
 		    estilo: p.estilo
 
 	    };
-	    i3f.post({fn: i3f.reMontaEditor, btn: true, par: par, refresh: false, prog: "execsymbol"});
+	    i3f.post({fn: i3f.reMontaEditor, btn: true, par: par, refresh: false, prog: "execlegenda"});
 	},
 	adicionaEstilo: function() {
 	    var p = this._parameters,
@@ -889,7 +889,7 @@ i3GEOF.legenda =
 		    estilo: p.estilo
 	    };
 	    p.estilo = p.estilo + 1;
-	    i3f.post({fn: i3f.reMontaEditor, btn: true, par: par, refresh: false, prog: "execsymbol"});
+	    i3f.post({fn: i3f.reMontaEditor, btn: true, par: par, refresh: false, prog: "execlegenda"});
 	},
 	excluiEstilo: function() {
 	    var p = this._parameters,
@@ -902,7 +902,7 @@ i3GEOF.legenda =
 		    estilo: p.estilo
 	    };
 	    p.estilo = 0;
-	    i3f.post({fn: i3f.reMontaEditor, btn: true, par: par, refresh: false, prog: "execsymbol"});
+	    i3f.post({fn: i3f.reMontaEditor, btn: true, par: par, refresh: false, prog: "execlegenda"});
 	},
 	propriedadesLabels: function() {
 	    i3GEO.util.scriptTag(
@@ -925,7 +925,7 @@ i3GEOF.legenda =
 	    par.g_sid = i3GEO.configura.sid;
 	    par.classe = p.classe;
 	    par.item = $i("i3GEOlegendaSelItemLabel").value;
-	    i3f.post({btn: btn, par: par, refresh: true, prog: "exec"});
+	    i3f.post({btn: btn, par: par, refresh: true, prog: "exectemas"});
 	},
 	excluiLabels: function(btn) {
 	    var p = this._parameters,
@@ -936,7 +936,7 @@ i3GEOF.legenda =
 		    g_sid: i3GEO.configura.sid,
 		    classe: p.classe
 	    };
-	    i3f.post({btn: true, par: par, refresh: true, prog: "exec"});
+	    i3f.post({btn: true, par: par, refresh: true, prog: "exectemas"});
 	},
 	mostraEstilo : function() {
 	    var linha, tipoLayer, d, p, cp, mustache = {};
@@ -989,7 +989,7 @@ i3GEOF.legenda =
 		g_sid: i3GEO.configura.sid,
 		onclick: 'i3GEOF.legenda.aplicaSimbolo(this)',
 		tipo: tipoLayer
-	    }, refresh: false, prog: "execsymbol", fn: i3GEOF.legenda.listaSimbolos});
+	    }, refresh: false, prog: "execlegenda", fn: i3GEOF.legenda.listaSimbolos});
 	},
 	listaSimbolos : function(data) {
 	    $i("i3GEOlegendasimbolos").innerHTML = data;
@@ -1043,7 +1043,7 @@ i3GEOF.legenda =
 		    tema: i3GEOF.legenda._parameters.tema,
 		},
 		refresh: false,
-		prog: "exec",
+		prog: "execlegenda",
 		fn: monta
 	    });
 	},
@@ -1073,7 +1073,7 @@ i3GEOF.legenda =
 		fn: function() {
 		    i3GEOF.legenda.aposAlterarLegenda();
 		    i3GEOF.legenda.montaCombosItens();
-		},btn: true, par: par, refresh: false, prog: "exec"
+		},btn: true, par: par, refresh: false, prog: "exectemas"
 	    });
 	},
 	removerCluster : function(btn){
@@ -1088,7 +1088,7 @@ i3GEOF.legenda =
 		fn: function() {
 		    i3GEOF.legenda.aposAlterarLegenda();
 		    i3GEOF.legenda.montaCombosItens();
-		},btn: true, par: par, refresh: false, prog: "exec"
+		},btn: true, par: par, refresh: false, prog: "exectemas"
 	    });
 	},
 	montaCombosItens : function(){
@@ -1146,7 +1146,7 @@ i3GEOF.legenda =
 		    $i("i3GEOlegendaAutoclassestamanho").value = data.classestamanho;
 		    $i("i3GEOlegendaAutopalletefile").value = data.palletefile;
 		    $i("i3GEOlegendaAutopalletestep").value = data.palletestep;
-		},btn: false, par: par, refresh: false, prog: "exec"
+		},btn: false, par: par, refresh: false, prog: "exectemas"
 	    });
 	},
 	salvaParametrosAuto: function(btn){
@@ -1164,7 +1164,7 @@ i3GEOF.legenda =
 		    palletefile: $i("i3GEOlegendaAutopalletefile").value,
 		    palletestep: $i("i3GEOlegendaAutopalletestep").value
 	    };
-	    i3f.post({btn: true, par: par, refresh: true, prog: "exec"});
+	    i3f.post({btn: true, par: par, refresh: true, prog: "exectemas"});
 	}
 };
 //aplica ao codigo i3GEOF definicoes feitas na interface do mapa
