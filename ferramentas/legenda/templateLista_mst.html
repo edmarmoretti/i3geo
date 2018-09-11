@@ -3,7 +3,7 @@
     <button onclick="i3GEOF.legenda.mudaLegenda(this)" class='btn btn-primary btn-sm btn-raised'>
         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplicaAlteracao}}}
     </button>
-    <button onclick="i3GEOF.legenda.adicionaClasse(this)" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>
+    <button data-refresh="true" data-prog="execclasses" data-funcao="adicionaclasse" onclick="i3GEOF.legenda.run(this)" title='{{{adicionaNovaClasse}}}' class='btn btn-primary btn-sm btn-raised'>
         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{adicionaClasse}}}
     </button>
     <table id="i3GEOlegendalegenda" class="table-striped table-condensed">
@@ -16,12 +16,12 @@
             </td>
             <td></td>
             <td>
-                <button title='{{{inverte}}}' onclick='i3GEOF.legenda.inverteCores()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                <button data-refresh="true" data-prog="execclasses" data-funcao="inverteCoresClasses" title='{{{inverte}}}' onclick='i3GEOF.legenda.run(this)' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                     <span class="material-icons">invert_colors</span>
                 </button>
             </td>
             <td style="background-color: yellow">
-                <button onclick='i3GEOF.legenda.ordenaClasses()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                <button data-refresh="true" data-prog="execclasses" data-funcao="ordenaClasses" onclick='i3GEOF.legenda.run(this)' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                     <span class="material-icons">sort</span>
                 </button> <span style="vertical-align: super; margin-left: 3px;"><strong>Nome</strong></span>
             </td>

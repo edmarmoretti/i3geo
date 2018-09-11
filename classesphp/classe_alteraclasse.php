@@ -831,7 +831,7 @@ class Alteraclasse
         $classe = $this->layer->getclass(0);
         $c = ms_newClassObj($this->layer, $classe);
         $this->layer->setMetaData("cache", "");
-        return ("ok");
+        return true;
     }
 
     /*

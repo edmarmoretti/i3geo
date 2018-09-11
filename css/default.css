@@ -459,11 +459,16 @@ Botoes material
 	height: 40px;
 	min-width: 40px;
 	width: 40px;
+	line-height: 1.5;
 }
-
+button>.material-icons {
+	vertical-align: text-top;
+}
+/*
 .btn.btn-fab.btn-fab-max>span {
 	height: 15px;
 }
+*/
 
 .form-group .form-control {
 	font-size: 1.5rem;

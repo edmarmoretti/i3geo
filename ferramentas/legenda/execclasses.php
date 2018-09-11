@@ -59,16 +59,16 @@ switch (strtoupper($_GET["funcao"])) {
         $retorno = $m->valorunico($_POST["item"], $_POST["ignorar"], $_POST["itemNome"]);
         $m->salva();
         break;
-    case "NCLASSES":
-        $retorno = $m->intervalosiguais($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
-        $m->salva();
-        break;
-    case "QUEBRASNATURAIS":
-        $retorno = $m->quebrasnaturais($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
-        $m->salva();
-        break;
-    case "QUANTIL":
-        $retorno = $m->quantil($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
+    case "TIPOCLASSES":
+        if($_POST["tipoCalculo"] == "nclasses"){
+            $retorno = $m->intervalosiguais($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
+        }
+        if($_POST["tipoCalculo"] == "quebrasnaturais"){
+            $retorno = $m->quebrasnaturais($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
+        }
+        if($_POST["tipoCalculo"] == "quantil"){
+            $retorno = $m->quantil($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
+        }
         $m->salva();
         break;
     case "METADE":
