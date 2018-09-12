@@ -1,0 +1,22 @@
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; height: calc(100% - 50px);'>
+    <!-- filtro -->
+    <div id='i3GEOmsquerybuilderguia1obj' class='container-fluid'>
+        <button onclick="i3GEOF.msquerybuilder.aplicaFiltro(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{inclui}}}</button>
+        <!-- as linhas sao baseadas no template template_linhafiltro_mst.html -->
+        <div id='i3GEOmsquerybuilderpar'>
+            <table class="table table-striped" id='i3GEOmsquerybuilderparametros'>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>{{{item}}}</td>
+                    <td>{{{operador}}}</td>
+                    <td>{{{valor}}}</td>
+                    <td>&nbsp;</td>
+                    <td>{{{conector}}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class='form-group condensed' id='i3GEOmsquerybuildervalores'></div>
+        <h5 class="alert alert-info {{{escondeGuias}}}">{{{ajuda}}}</h5>
+    </div>
+</div>

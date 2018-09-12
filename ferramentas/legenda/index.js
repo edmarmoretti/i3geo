@@ -399,7 +399,7 @@ i3GEOF.legenda =
 	    i3GEO.php.aplicaCorClasseTema(retorna, i3GEOF.legenda._parameters.tema, id, $i("tempCorLegenda").value);
 	},
 	filtro : function(idRetorno) {
-	    i3GEO.tema.dialogo.filtro(i3GEOF.legenda._parameters.tema, true, idRetorno);
+	    i3GEO.tema.dialogo.msQueryBuilder(i3GEOF.legenda._parameters.tema, idRetorno);
 	},
 	sobelinhaf : function(idclasse) {
 	    var p = this._parameters,

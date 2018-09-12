@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.filtro.dicionario)+
-i3GEOF.filtro.dicionario = {
+i3GEOF.msquerybuilder.dicionario = {
 	'constroi' : [ {
 		pt : "Construir",
 		en : "Build",

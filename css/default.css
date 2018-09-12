@@ -464,6 +464,10 @@ Botoes material
 button>.material-icons {
 	vertical-align: text-top;
 }
+.btn.btn-fab.btn-fab-max>.material-icons {
+	font-size: 20px;
+	display: block;
+}
 /*
 .btn.btn-fab.btn-fab-max>span {
 	height: 15px;

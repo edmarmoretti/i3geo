@@ -1,71 +1,52 @@
-<div id='i3GEOfiltroguiasYUI' class='yui-navset {{{escondeGuias}}}' style='height: 38px; top: 0px; cursor: pointer; margin-left: 2px;'>
-	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
-		<li>
-			<div id='i3GEOfiltroguia1' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{constroi}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOfiltroguia2' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{digita}}}</em>
-				</a>
-			</div>
-		</li>
-		<!--
-		<li>
-			<div id='i3GEOfiltroguia3' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{testa}}}</em>
-				</a>
-			</div>
-		</li>
-		-->
-	</ul>
+<nav class='navbar navbar-default' style='margin-bottom: 0px; min-height: 35px'>
+    <div class="container" style="margin: 0px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse" style="padding: 0px;">
+            <ul class="nav navbar-nav ">
+                <li class="active" role="presentation"><a id='i3GEO{{namespace}}guia1' href="javascript:void(0);">
+                        <em>{{{constroi}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia2' href="javascript:void(0);">
+                        <em>{{{digita}}}</em>
+                    </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; height: calc(100% - 50px);'>
+    <!-- filtro -->
+    <div id='i3GEOfiltroguia1obj' class='container-fluid'>
+        <button onclick="i3GEOF.filtro.aplicaFiltro(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{inclui}}}</button>
+        <button onclick="i3GEOF.filtro.limpaFiltro(this)" class='btn btn-primary btn-sm btn-raised {{{escondeGuias}}}'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{remove}}}</button>
+        <!-- as linhas sao baseadas no template template_linhafiltro_mst.html -->
+        <div id='i3GEOfiltropar'>
+            <table class="table table-striped" id='i3GEOfiltroparametros'>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td>{{{item}}}</td>
+                    <td>{{{operador}}}</td>
+                    <td>{{{valor}}}</td>
+                    <td>&nbsp;</td>
+                    <td>{{{conector}}}</td>
+                </tr>
+            </table>
+        </div>
+        <div class='form-group condensed' id='i3GEOfiltrovalores'></div>
+        <h5 class="alert alert-info {{{escondeGuias}}}">{{{ajuda}}}</h5>
+    </div>
+    <!-- digitar -->
+    <div id='i3GEOfiltroguia2obj' style='display: none;' class='container-fluid'>
+        <button onclick="i3GEOF.filtro.aplicaFiltro(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{inclui}}}</button>
+        <button onclick="i3GEOF.filtro.limpaFiltro(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{remove}}}</button>
+
+        <div class='form-group label-floating'>
+            <label class="control-label" for="i3GEOfiltrofiltro">{{{digitaFiltro}}}</label>
+            <input class="form-control input-lg" type='text' id='i3GEOfiltrofiltro' value='' />
+        </div>
+    </div>
 </div>
-<!-- filtro -->
-<div class='container-fluid customScrollBar' style="width:98%;height: calc(100% - 39px); overflow: auto;">
-	<div id='i3GEOfiltroguia1obj' style='display: none;' class='container-fluid'>
-		<div {{{escondeGuias}}} id='i3GEOFfiltroComboCabeca' class='form-group condensed' style='width: 100%'>
-
-		</div>
-
-		<button onclick="i3GEOF.filtro.aplicaFiltro('nao',{{{modoCalculadora}}},'{{{idRetorno}}}')" class='btn btn-primary btn-sm btn-raised'>{{{inclui}}}</button>
-		<button onclick="i3GEOF.filtro.limpaFiltro()" class='btn btn-primary btn-sm btn-raised {{{escondeGuias}}}'>{{{remove}}}</button>
-
-		<!-- as linhas sao baseadas no template template_linhafiltro_mst.html -->
-		<div id='i3GEOfiltropar'>
-			<table id='i3GEOfiltroparametros'>
-				<tr>
-					<td></td>
-					<td></td>
-					<td>{{{item}}}</td>
-					<td>{{{operador}}}</td>
-					<td>{{{valor}}}</td>
-					<td>&nbsp;</td>
-					<td>{{{conector}}}</td>
-				</tr>
-			</table>
-		</div>
-
-		<div class='form-group condensed' id='i3GEOfiltrovalores'></div>
-
-		<h5 class="alert alert-info {{{escondeGuias}}}">{{{ajuda}}}</h5>
-
-	</div>
-	<!-- digitar -->
-	<div id='i3GEOfiltroguia2obj' style='display: none;' class='container-fluid'>
-		<button onclick="i3GEOF.filtro.aplicaFiltro('nao',{{{modoCalculadora}}},'{{{idRetorno}}}')" class='btn btn-primary btn-sm btn-raised'>{{{inclui}}}</button>
-		<button onclick="i3GEOF.filtro.limpaFiltro()" class='btn btn-primary btn-sm btn-raised'>{{{remove}}}</button>
-
-		<div class='form-group label-floating'>
-			<label class="control-label" for="i3GEOfiltrofiltro">{{{digitaFiltro}}}</label>
-			<input class="form-control input-lg" type='text' id='i3GEOfiltrofiltro' value='' />
-		</div>
-	</div>
-</div>
-<!-- testar
-<div id='i3GEOfiltroguia3obj' style='display: none;' class='container-fluid'></div>
- -->

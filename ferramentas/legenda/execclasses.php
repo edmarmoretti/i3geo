@@ -7,6 +7,7 @@ if(!isset($_POST["ext"])){
     $_POST["ext"] = "";
 }
 $m = new Alteraclasse($_SESSION["map_file"], $_POST["tema"], "", $_POST["ext"]);
+
 switch (strtoupper($_GET["funcao"])) {
     case "ADICIONAOPACIDADE":
         $retorno = $m->adicionaopacidade();
@@ -17,7 +18,7 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "ALTERACLASSES":
-        $retorno = $m->alteraclasses($_POST["ids"], $_POST["nomes"], $_POST["exps"], $_POST["base64"], $_POST["minScales"], $_POST["maxScales"], $_POST["separador"]);
+        $retorno = $m->alteraclasses($_POST["tema"], $_POST["nomes"], $_POST["exps"], "nao", $_POST["minScales"], $_POST["maxScales"], $_POST["separador"]);
         $m->salva();
         break;
     case "ADICIONACLASSE":

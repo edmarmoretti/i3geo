@@ -541,11 +541,12 @@ string Filtro.
 	{
 		if(!$this->layer){return "erro";}
 		$fil = $this->layer->getfilterstring();
-		if ($this->layer->getfilterstring() == '"(null)"'){return " ";}
-		if (function_exists("mb_convert_encoding"))
-		{return (mb_convert_encoding($this->layer->getfilterstring(),"HTML-ENTITIES","auto"));}
-		else
-		{return ($this->layer->getfilterstring());}
+		if ($fil == '"(null)"' || $fil == ''){
+		    return "";
+		}
+		else{
+		    return mb_convert_encoding($fil, "ISO-8859-1", "UTF-8");
+		}
 	}
 /*
 function: insereFiltro
@@ -628,7 +629,7 @@ $testa - Testa o filtro e retorna uma imagem.
 			$i = gravaImagemMapa($this->mapa);
 			return ($i["url"]);
 		}
-		return "ok";
+		return true;
 	}
 /*
 function: mudaTransparencia
