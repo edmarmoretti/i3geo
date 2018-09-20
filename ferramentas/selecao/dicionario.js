@@ -126,9 +126,9 @@ i3GEOF.selecao.dicionario = {
 		es : "En la opci&oacute;n IN separe los valores con coma."
 	} ],
 	'temaSelecaoMapa' : [ {
-		pt : "Tema que ser&aacute; utilizado para selecionar o tema definido na guia Mapa (esse tema deve ser do tipo pontual ou poligonal e deve possuir elementos j&aacute; selecionados):",
-		en : "Theme that will be used to select the theme defined on the Map tab (this theme must be of point or polygon features and must have selected features):",
-		es : "Tema que ser&aacute; utilizado para seleccionar el tema definido en la pesta&ntilde;a Mapa (este tema debe ser de puntos o pol&iacute;gono y debe tener entidades seleccionadas):"
+		pt : "Escolha a camada que ser&aacute; utilizado na sele&ccedil;&atilde;o (overlay). Apenas camadas do tipo poligonal ou pontual e que possuem elementos j&aacute; selecionados podem ser utilizados.",
+		en : "",
+		es : ""
 	} ],
 	'aplica' : [ {
 		pt : "Aplicar",
@@ -170,6 +170,11 @@ i3GEOF.selecao.dicionario = {
 		en : "Opens shape editor",
 		es : "Abre el editor de figuras"
 	} ],
+	'noeditor' : [ {
+		pt : "Nenhuma figura encontada",
+		en : "",
+		es : ""
+	} ],
 	"fonte" : [ {
 		pt : "Escolha um ou mais temas que ser&atilde;o alvo da sele&ccedil;&atilde;o",
 		en : "Choose one or more themes that will be selected",
@@ -180,9 +185,19 @@ i3GEOF.selecao.dicionario = {
 		en : "Selection options. Click the icon to activate.",
 		es : "Opciones de selecci&oacute;n. Haga clic en el icono para activar."
 	} ],
-    "cliqueSel" : [ {
-        pt : "Clique no desenho existente para us&aacute;-lo na sele&ccedil;&atilde;o",
-        en : "",
-        es : ""
-    } ]
+        "cliqueSel" : [ {
+            pt : "Clique no desenho existente para us&aacute;-lo na sele&ccedil;&atilde;o",
+            en : "",
+            es : ""
+        } ],
+	'dexp' : [ {
+		pt : "Digite a express&atilde;o",
+		en : "",
+		es : ""
+	} ],
+	'cexp' : [ {
+		pt : "Construtor de express&atilde;o",
+		en : "",
+		es : ""
+	} ]
 };

@@ -54,16 +54,20 @@
  * i3geo/classesphp/mapa_openlayers.php
  *
  */
+
 include ("sani_request.php");
 // para efeitos de compatibilidade
 if (! function_exists('ms_GetVersion')) {
     include_once ("carrega_ext.php");
 }
+
 error_reporting(0);
 inicializa();
+
 if(!isset($_GET["cacheprefixo"])){
     $_GET["cacheprefixo"] = "";
 }
+
 //
 // calcula a extensao geografica com base no x,y,z
 // nos casos do modo notile, a requisicao e feita como se fosse um wms
@@ -351,6 +355,7 @@ if (isset($_GET["REQUEST"])) {
         exit();
     }
 }
+
 $o = $mapa->outputformat;
 $o->set("imagemode", MS_IMAGEMODE_RGBA);
 $o->set("transparent", MS_TRUE);
@@ -380,12 +385,29 @@ if ($cortePixels > 0) {
 if ($qy != true) {
     $img = $mapa->draw();
 } else {
-    $handle = fopen($qyfile, "r");
-    $conteudo = fread($handle, filesize($qyfile));
-    fclose($handle);
+    //$handle = fopen($qyfile, "r");
+    //$conteudo = fread($handle, filesize($qyfile));
+    //fclose($handle);
+    $conteudo = file_get_contents($qyfile);
     $shp = unserialize($conteudo);
     $l = $mapa->getLayerByname($_GET["layer"]);
-    if ($l->connectiontype != MS_POSTGIS) {
+    $c = $mapa->querymap->color;
+    if ($l->connectiontype != MS_POSTGIS ) {
+        if($l->type == MS_LAYER_POINT){
+            $numclasses = $l->numclasses;
+            if ($numclasses > 0) {
+                $classe0 = $l->getClass(0);
+                $classe0->setexpression("");
+                $classe0->set("name", " ");
+                for ($i = 1; $i < $numclasses; ++ $i) {
+                    $classe = $l->getClass($i);
+                    $classe->set("status", MS_DELETE);
+                }
+            }
+            if($l->type == MS_LAYER_POINT){
+                $classe0->getstyle(0)->set("symbolname","ponto");
+            }
+        }
         $indxlayer = $l->index;
         foreach ($shp as $indx) {
             $mapa->querybyindex($indxlayer, - 1, $indx, MS_TRUE);
@@ -396,7 +418,7 @@ if ($qy != true) {
         $img = $mapa->drawQuery();
     } else {
         $img = $mapa->draw();
-        $c = $mapa->querymap->color;
+
         $numclasses = $l->numclasses;
         if ($numclasses > 0) {
             $classe0 = $l->getClass(0);
@@ -407,10 +429,11 @@ if ($qy != true) {
                 $classe->set("status", MS_DELETE);
             }
         }
+        if($l->type == MS_LAYER_POINT){
+            $classe0->getstyle(0)->set("symbolname","ponto");
+        }
         $cor = $classe0->getstyle(0)->color;
         $cor->setrgb($c->red, $c->green, $c->blue);
-        // $cor = $classe0->getstyle(0)->outlinecolor;
-        // $cor->setrgb($c->red,$c->green,$c->blue);
         $status = $l->open();
         $status = $l->whichShapes($mapa->extent);
         while ($shape = $l->nextShape()) {
@@ -655,6 +678,7 @@ function inicializa()
     } else {
         exit();
     }
+
     if (! isset($_SESSION["map_file"])) {
         exit();
     }

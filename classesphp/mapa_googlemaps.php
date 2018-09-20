@@ -337,7 +337,22 @@ if ($qy != true) {
     $shp = unserialize($conteudo);
     $l = $mapa->getLayerByname($_GET["layer"]);
     $indxlayer = $l->index;
-    if ($l->connectiontype !== MS_POSTGIS) {
+    if ($l->connectiontype != MS_POSTGIS) {
+        if($l->type == MS_LAYER_POINT){
+            $numclasses = $l->numclasses;
+            if ($numclasses > 0) {
+                $classe0 = $l->getClass(0);
+                $classe0->setexpression("");
+                $classe0->set("name", " ");
+                for ($i = 1; $i < $numclasses; ++ $i) {
+                    $classe = $l->getClass($i);
+                    $classe->set("status", MS_DELETE);
+                }
+            }
+            if($l->type == MS_LAYER_POINT){
+                $classe0->getstyle(0)->set("symbolname","ponto");
+            }
+        }
         foreach ($shp as $indx) {
             $mapa->querybyindex($indxlayer, - 1, $indx, MS_TRUE);
         }
@@ -357,6 +372,9 @@ if ($qy != true) {
                 $classe = $l->getClass($i);
                 $classe->set("status", MS_DELETE);
             }
+        }
+        if($l->type == MS_LAYER_POINT){
+            $classe0->getstyle(0)->set("symbolname","ponto");
         }
         $cor = $classe0->getstyle(0)->color;
         $cor->setrgb($c->red, $c->green, $c->blue);

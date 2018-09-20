@@ -3,10 +3,10 @@ include_once (dirname(__FILE__) . "/../safe2.php");
 verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
 $retorno = "";
 include_once (dirname(__FILE__) . "/../../classesphp/classe_alteraclasse.php");
-if(!isset($_POST["ext"])){
-    $_POST["ext"] = "";
+if(!isset($_GET["ext"])){
+    $_GET["ext"] = "";
 }
-$m = new Alteraclasse($_SESSION["map_file"], $_POST["tema"], "", $_POST["ext"]);
+$m = new Alteraclasse($_SESSION["map_file"], $_GET["tema"], "", $_GET["ext"]);
 
 switch (strtoupper($_GET["funcao"])) {
     case "ADICIONAOPACIDADE":
@@ -14,11 +14,11 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "ALTERACORESCLASSES":
-        $retorno = $m->alteraCoresClasses($_POST["cori"], $_POST["corf"]);
+        $retorno = $m->alteraCoresClasses($_GET["cori"], $_GET["corf"]);
         $m->salva();
         break;
     case "ALTERACLASSES":
-        $retorno = $m->alteraclasses($_POST["tema"], $_POST["nomes"], $_POST["exps"], "nao", $_POST["minScales"], $_POST["maxScales"], $_POST["separador"]);
+        $retorno = $m->alteraclasses($_GET["tema"], $_GET["nomes"], $_GET["exps"], "nao", $_GET["minScales"], $_GET["maxScales"], $_GET["separador"]);
         $m->salva();
         break;
     case "ADICIONACLASSE":
@@ -30,7 +30,7 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "CALCULATAMANHOCLASSES":
-        $retorno = $m->calculaTamanhoClasses($_POST["size"]);
+        $retorno = $m->calculaTamanhoClasses($_GET["size"]);
         $m->salva();
         break;
     case "ORDENACLASSES":
@@ -38,15 +38,15 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "SOBECLASSE":
-        $retorno = $m->sobeclasse($_POST["idclasse"]);
+        $retorno = $m->sobeclasse($_GET["idclasse"]);
         $m->salva();
         break;
     case "DESCECLASSE":
-        $retorno = $m->desceclasse($_POST["idclasse"]);
+        $retorno = $m->desceclasse($_GET["idclasse"]);
         $m->salva();
         break;
     case "APLICACORESRGB":
-        $cores = str_replace("rgb", "", $_POST["cores"]);
+        $cores = str_replace("rgb", "", $_GET["cores"]);
         $cores = str_replace(")", "", $cores);
         $cores = str_replace("(", "", $cores);
         $retorno = $m->aplicacoresrgb(explode("|", $cores));
@@ -57,35 +57,35 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "VALORUNICO":
-        $retorno = $m->valorunico($_POST["item"], $_POST["ignorar"], $_POST["itemNome"]);
+        $retorno = $m->valorunico($_GET["item"], $_GET["ignorar"], $_GET["itemNome"]);
         $m->salva();
         break;
     case "TIPOCLASSES":
-        if($_POST["tipoCalculo"] == "nclasses"){
-            $retorno = $m->intervalosiguais($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
+        if($_GET["tipoCalculo"] == "nclasses"){
+            $retorno = $m->intervalosiguais($_GET["item"], $_GET["nclasses"], $_GET["ignorar"]);
         }
-        if($_POST["tipoCalculo"] == "quebrasnaturais"){
-            $retorno = $m->quebrasnaturais($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
+        if($_GET["tipoCalculo"] == "quebrasnaturais"){
+            $retorno = $m->quebrasnaturais($_GET["item"], $_GET["nclasses"], $_GET["ignorar"]);
         }
-        if($_POST["tipoCalculo"] == "quantil"){
-            $retorno = $m->quantil($_POST["item"], $_POST["nclasses"], $_POST["ignorar"]);
+        if($_GET["tipoCalculo"] == "quantil"){
+            $retorno = $m->quantil($_GET["item"], $_GET["nclasses"], $_GET["ignorar"]);
         }
         $m->salva();
         break;
     case "METADE":
-        $retorno = $m->metade($_POST["item"], $_POST["itemid"], $_POST["ignorar"]);
+        $retorno = $m->metade($_GET["item"], $_GET["itemid"], $_GET["ignorar"]);
         $m->salva();
         break;
     case "MEDIA":
-        $retorno = $m->classemedia($_POST["item"], $_POST["ignorar"]);
+        $retorno = $m->classemedia($_GET["item"], $_GET["ignorar"]);
         $m->salva();
         break;
     case "QUARTIL":
-        $retorno = $m->quartis($_POST["item"], $_POST["ignorar"], $_POST["tipoLegenda"]);
+        $retorno = $m->quartis($_GET["item"], $_GET["ignorar"], $_GET["tipoLegenda"]);
         $m->salva();
         break;
     case "ALTERAGEOMETRIA":
-        $retorno = $m->alterageometria($_POST["tipo"]);
+        $retorno = $m->alterageometria($_GET["tipo"]);
         $m->salva();
         break;
 }

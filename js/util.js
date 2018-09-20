@@ -1383,27 +1383,15 @@ i3GEO.util =
 	    if (!multiplo) {
 		multiplo = false;
 	    }
-	    if (!estilo || estilo == "") {
-		estilo = "font-size: 12px;width: 95%;";
-	    }
-	    if (!yui) {
-		yui = false;
-	    }
 	    if (!incluiVazio) {
 		incluiVazio = false;
 	    }
 	    if(!classe){
-		classe = "";
+		classe = "form-control";
 	    }
 	    var monta, temp, temp1, temp2;
 	    monta =	function(retorno) {
 		var i, comboTemas = '', n, nome = "", tema;
-		if (yui === true) {
-		    comboTemas =
-			'<input type="button" name=' + id + '_button id="' + id + '" value="' + $trad("x33") + '&nbsp;&nbsp;">';
-		    id = id + "select";
-		    nome = id;
-		}
 		if (retorno == undefined || retorno.length == 0 || (retorno.data && retorno.data.length == 0)) {
 		    retorno = {"data": [{"tema":"","nome":"---"}]};
 		    incluiVazio = false;
@@ -1416,9 +1404,9 @@ i3GEO.util =
 		    if (n > 0) {
 			if (multiplo) {
 			    comboTemas +=
-				"<select class='" + classe + "' style='" + estilo + "' id='" + id + "' size='4' multiple='multiple' name='" + nome + "'>";
+				"<select class='" + classe + "' id='" + id + "' size='4' multiple='multiple' name='" + nome + "'>";
 			} else {
-			    comboTemas += "<select class='" + classe + "' style='" + estilo + "' id='" + id + "' name='" + nome + "'>";
+			    comboTemas += "<select class='" + classe + "' id='" + id + "' name='" + nome + "'>";
 			}
 			if (incluiVazio === true) {
 			    comboTemas += "<option value=''>"+$trad("x92")+"</option>";
@@ -1435,7 +1423,7 @@ i3GEO.util =
 				comboTemas += "<option value=" + tema + " >" + nome + "</option>";
 			    }
 			}
-			comboTemas += "</select><span class='material-icons iconeComboTemas'>playlist_add_check</span>";
+			comboTemas += "</select><b class='caret careti'></b>";
 			temp = {
 				dados : comboTemas,
 				tipo : "dados"

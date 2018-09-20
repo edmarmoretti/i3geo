@@ -37,12 +37,6 @@
             <li><a class="{{{zoomtema}}} " href="javascript:void(0)" onclick="i3GEO.tema.zoom('{{{name}}}')" title="{{{zoomtemaTitle}}}" >
                     <span class="glyphicon glyphicon-fullscreen"></span> {{{zoomtemaTexto}}}
                 </a></li>
-            <li><a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')" title="{{{selTitle}}}">
-                    <span class="glyphicon glyphicon-erase"></span> {{{limpaselTexto}}}
-                </a></li>
-            <li><a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')">
-                    <span class="glyphicon glyphicon-fullscreen"></span> {{{zoomSelTexto}}}
-                </a></li>
             <li><a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')" title="{{{linkTitle}}}">
                     <span class="glyphicon glyphicon-file"></span> {{{linkTexto}}}
                 </a></li>
@@ -67,8 +61,15 @@
             <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.filtro('{{name}}')" class='{{isnotvetor}} '>
                     <span class="glyphicon glyphicon-filter"></span> {{{filtroTexto}}}
                 </a></li>
+
+            <li><a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')" title="{{{selTitle}}}">
+                    <span class="glyphicon glyphicon-erase"></span> {{{limpaselTexto}}}
+                </a></li>
             <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.selecao('{{name}}')" class='{{isnotvetor}} '>
                     <span class="glyphicon glyphicon-hand-up"></span> {{{selecaoTexto}}}
+                </a></li>
+            <li><a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')">
+                    <span class="glyphicon glyphicon-fullscreen"></span> {{{zoomSelTexto}}}
                 </a></li>
             <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.graficotema('{{name}}')" class='{{isnotvetor}} '>
                     <span class="glyphicon glyphicon-stats"></span> {{{graficoTexto}}}

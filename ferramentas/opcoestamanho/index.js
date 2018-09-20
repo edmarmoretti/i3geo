@@ -68,7 +68,7 @@ i3GEOF.opcoestamanho = {
 	    	i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
 	    par.funcao = "mudatamanho";
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
 		    par
 	    )

@@ -60,7 +60,7 @@ i3GEOF.conectarkml = {
 	    	i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
 	    par.funcao = "crialayer";
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
 		    par
 	    )

@@ -738,6 +738,7 @@ switch (strtoupper($funcao)) {
         }
         $retorno = $m->listaTemasTipo($_pg["tipo"], $_pg["selecao"]);
         break;
+
     /*
      * Valor: LISTATEMASCOMSEL
      *
@@ -2624,6 +2625,12 @@ switch (strtoupper($funcao)) {
      *
      * <Selecao->selecaoAtributos>
      */
+    case "LIMPASEL":
+        include_once ("classe_selecao.php");
+        $m = new Selecao($map_file, $_pg["tema"]);
+        $retorno = $m->selecaoLimpa();
+        redesenhaMapa();
+        break;
     case "SELECAOATRIB":
         include_once ("classe_selecao.php");
         copiaSeguranca($map_file);

@@ -1,3 +1,7 @@
+.ui-resizable-helper {
+	border: 1px solid #888a85;
+	z-index: 200;
+}
 .navbar .navbar-nav > li > a {
     padding-top: 5px;
     padding-bottom: 5px;
@@ -160,6 +164,7 @@
 }
 .navbar, .navbar.navbar-default {
 	background-color: #386682 !Important;
+	border-bottom: 4px solid #7f9dc3;
 }
 .container-tools {
 	overflow: auto;
@@ -460,6 +465,7 @@ Botoes material
 	min-width: 40px;
 	width: 40px;
 	line-height: 1.5;
+	display: inherit;
 }
 button>.material-icons {
 	vertical-align: text-top;

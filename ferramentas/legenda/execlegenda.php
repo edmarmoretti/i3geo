@@ -3,7 +3,7 @@ include_once (dirname(__FILE__) . "/../safe2.php");
 verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
 $retorno = "";
 include_once (dirname(__FILE__) . "/../../classesphp/classe_legenda.php");
-$m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
+$m = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_GET["tema"]);
 switch (strtoupper($_GET["funcao"])) {
     case "APLICALEGENDAIMG":
         $retorno = $m->aplicaLegendaImg($_GET["imagem"]);
@@ -17,36 +17,36 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "APLICATODASCLASSES":
-        $retorno = $m->aplicaTodasClasses($_POST["parametro"], $_POST["valor"]);
+        $retorno = $m->aplicaTodasClasses($_GET["parametro"], $_GET["valor"]);
         $m->salva();
         break;
     case "APLICAPARAMETRO":
-        $retorno = $m->aplicaParametro($_POST["classe"], $_POST["estilo"], $_POST["outlinecolor"], $_POST["backgroundcolor"], $_POST["color"], $_POST["symbolname"], $_POST["size"], $_POST["opacidade"], $_POST["width"], $_POST["pattern"], $_POST["angle"], $_POST["minsize"], $_POST["maxsize"], $_POST["offsetx"], $_POST["offsety"]);
+        $retorno = $m->aplicaParametro($_GET["classe"], $_GET["estilo"], $_GET["outlinecolor"], $_GET["backgroundcolor"], $_GET["color"], $_GET["symbolname"], $_GET["size"], $_GET["opacidade"], $_GET["width"], $_GET["pattern"], $_GET["angle"], $_GET["minsize"], $_GET["maxsize"], $_GET["offsetx"], $_GET["offsety"]);
         $m->salva();
         break;
     case "PARAMETROS":
-        $retorno = $m->pegaParametros($_POST["classe"]);
+        $retorno = $m->pegaParametros($_GET["classe"]);
         break;
     case "SOBEESTILO":
-        $retorno = $m->sobeEstilo($_POST["classe"], $_POST["estilo"]);
+        $retorno = $m->sobeEstilo($_GET["classe"], $_GET["estilo"]);
         $m->salva();
         break;
     case "DESCEESTILO":
-        $retorno = $m->desceEstilo($_POST["classe"], $_POST["estilo"]);
+        $retorno = $m->desceEstilo($_GET["classe"], $_GET["estilo"]);
         $m->salva();
         break;
     case "ADICIONAESTILO":
-        $retorno = $m->adicionaEstilo($_POST["classe"], $_POST["estilo"]);
+        $retorno = $m->adicionaEstilo($_GET["classe"], $_GET["estilo"]);
         $m->salva();
         break;
     case "EXCLUIESTILO":
-        $retorno = $m->excluiEstilo($_POST["classe"], $_POST["estilo"]);
+        $retorno = $m->excluiEstilo($_GET["classe"], $_GET["estilo"]);
         $m->salva();
         break;
     case "LISTASIMBOLOS":
-        $retorno = $m->listaSimbolos($_POST["tipo"], $_SESSION["dir_tmp"], $_SESSION["imgdir"], $_POST["onclick"]);
+        $retorno = $m->listaSimbolos($_GET["tipo"], $_SESSION["dir_tmp"], $_SESSION["imgdir"], $_GET["onclick"]);
         if ($retorno == "") {
-            $retorno = $m->listaSimbolos($_POST["tipo"], $_SESSION["dir_tmp"], $_SESSION["imgdir"], $_POST["onclick"], 8, 1, true);
+            $retorno = $m->listaSimbolos($_GET["tipo"], $_SESSION["dir_tmp"], $_SESSION["imgdir"], $_GET["onclick"], 8, 1, true);
         }
         break;
 }

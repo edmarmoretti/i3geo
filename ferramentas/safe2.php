@@ -1,8 +1,6 @@
 <?php
 include_once (dirname(__FILE__) . "/../classesphp/sani_request.php");
-
 error_reporting(0);
-$_GET = array_merge($_GET, $_POST);
 ini_set("session.use_cookies", 0);
 session_name("i3GeoPHP");
 if (@$_GET["g_sid"]) {

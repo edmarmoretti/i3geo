@@ -701,80 +701,6 @@ i3GEO.php =
 	    cpJSON.call(p, "geradestaque", retorno, par);
 	},
 	/**
-	 * Function: selecaopt
-	 *
-	 * Seleciona por ponto
-	 */
-	selecaopt : function(funcao, tema, xy, tipo, tolerancia) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php", par =
-		"funcao=selecaopt&tema=" + tema + "&tipo=" + tipo + "&xy=" + xy + "&tolerancia=" + tolerancia + "&g_sid="
-		+ i3GEO.configura.sid + "&ext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-	    cpJSON.call(p, "selecaoPT", funcao, par);
-	},
-	/**
-	 * Function: selecaoWkt
-	 *
-	 * Seleciona por WKT
-	 */
-	selecaoWkt : function(funcao, tema, tipo, wkt, buffer) {
-	    i3GEO.php.verifica();
-	    var p =
-		i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php?funcao=selecaowkt&g_sid=" + i3GEO.configura.sid + "&tipo=" + tipo
-		+ "&tema=" + tema + "&ext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten) + "&buffer=" + buffer, cp = new cpaint();
-	    cp.set_transfer_mode('POST');
-	    cp.set_response_type("JSON");
-	    cp.call(p, "foo", funcao, "&wkt=" + wkt);
-	},
-	/**
-	 * Function: selecaobox
-	 *
-	 * Seleciona por box
-	 */
-	selecaobox : function(funcao, tema, tipo, box) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php", par =
-		"funcao=selecaobox&box=" + i3GEO.util.extOSM2Geo(box) + "&g_sid=" + i3GEO.configura.sid + "&tipo=" + tipo + "&tema=" + tema
-		+ "&ext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-	    cpJSON.call(p, "selecaobox", funcao, par);
-	},
-	/**
-	 * Function: selecaoext
-	 *
-	 * Seleciona por extensao
-	 */
-	selecaoext : function(funcao, tema, tipo) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=selecaoext&tema=" + tema + "&tipo=" + tipo + "&ext="
-		+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-	    cpJSON.call(p, "selecaoext", funcao, par);
-	},
-	/**
-	 * Function: selecaoatrib2
-	 *
-	 * Seleciona por atributo
-	 */
-	selecaoatrib2 : function(funcao, tema, filtro, tipo) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=selecaoatrib2&tema=" + tema + "&filtro=" + filtro + "&tipo=" + tipo + "&ext="
-		+ i3GEO.parametros.mapexten;
-	    cpJSON.call(p, "selecaoatrib2", funcao, par);
-	},
-	/**
-	 * Function: selecaotema
-	 *
-	 * Seleciona por tema
-	 */
-	selecaotema : function(funcao, temao, tema, tipo, buffer) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=selecaotema&temao=" + temao + "&tema=" + tema + "&tipo=" + tipo + "&ext="
-		+ i3GEO.parametros.mapexten + "&buffer=" + buffer;
-	    cpJSON.call(p, "selecaotema", funcao, par);
-	},
-	/**
 	 * Function: sobetema
 	 *
 	 * Sobe um tema na hierarquia
@@ -872,7 +798,7 @@ i3GEO.php =
 	 */
 	limpasel : function(funcao, tema) {
 	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php", par =
+	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 		"funcao=limpasel&tema=" + tema + "&g_sid=" + i3GEO.configura.sid, retorno = function(retorno) {
 		funcao.call(funcao, retorno);
 	    };
@@ -1369,22 +1295,6 @@ i3GEO.php =
 	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 		"g_sid=" + i3GEO.configura.sid + "&funcao=listaEpsg&map_file=";
 	    cpJSON.call(p, "listaEpsg", funcao, par);
-	},
-	/**
-	 * criatemasel
-	 *
-	 * <CRIATEMASEL>
-	 */
-	criatemaSel : function(funcao, tema) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/selecao/exec.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=criatemasel&tema=" + tema + "&nome=Novo tema " + tema, retorno =
-		    function(retorno) {
-		i3GEO.janela.fechaAguarde("criatemaSel");
-		funcao.call(funcao, retorno);
-	    };
-	    i3GEO.janela.abreAguarde("criatemaSel", $trad("o1"));
-	    cpJSON.call(p, "chavegoogle", retorno, par);
 	},
 	/**
 	 * pegaData

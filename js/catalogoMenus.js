@@ -233,7 +233,7 @@ i3GEO.catalogoMenus = {
 		);
 
 		$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).fadeOut( "fast", function(){
-		    if(i3GEO.catalogoMenus.folderFirst == "false"){
+		    if(i3GEO.catalogoMenus.config.folderFirst == "false"){
 			$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(t + g);
 		    } else {
 			$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(g + t);

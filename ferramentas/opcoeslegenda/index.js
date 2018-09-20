@@ -88,7 +88,7 @@ i3GEOF.opcoeslegenda = {
 	    	i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
 	    par.funcao = "aplicaParametrosLegImg";
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
 		    par
 	    )
@@ -117,7 +117,7 @@ i3GEOF.opcoeslegenda = {
 	    	i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
 	    par.funcao = "testalegenda";
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
 		    par
 	    )

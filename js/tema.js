@@ -959,13 +959,22 @@ i3GEO.tema =
 		i3GEO.janela.prompt($trad("novonome"),temp);
 	    },
 	    selecao : function(idtema) {
-		i3GEO.mapa.ativaTema(idtema);
+		if(idtema && idtema != ""){
+		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
+		    if(t.status < 2){
+			i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
+			return;
+		    }
+		}
+		var temp = function(){
+		    i3GEOF.selecao.start(idtema);
+		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.selecao()",
 			"selecao",
 			"selecao",
 			"dependencias.php",
-			"i3GEOF.selecao.iniciaJanelaFlutuante()"
+			temp
 		);
 	    },
 	}

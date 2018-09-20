@@ -379,7 +379,7 @@ i3GEO.catalogoOgc = {
 		    funcao: "crialayer",
 		    url: url
 	    };
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/conectarkml/exec.php",
 		    par
 	    )
@@ -404,7 +404,7 @@ i3GEO.catalogoOgc = {
 		    funcao: "adicionaTemaGeoRSS",
 		    url: url
 	    };
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/conectargeorss/exec.php",
 		    par
 	    )
@@ -429,7 +429,7 @@ i3GEO.catalogoOgc = {
 		    funcao: "crialayer",
 		    url: url
 	    };
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/conectargeojson/exec.php",
 		    par
 	    )

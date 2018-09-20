@@ -656,7 +656,7 @@ class Atributos
 	*/
 	function listaRegistrosXY($items,$tipo,$tipolista)
 	{
-		//error_reporting(0);
+		error_reporting(0);
 		if(!$this->layer){
 			return "erro";
 		}

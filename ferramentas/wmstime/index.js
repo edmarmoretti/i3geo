@@ -187,7 +187,7 @@ i3GEOF.wmstime = {
 	    	+ "&times=" + timeParams.join("|")
     	    	+ serv.outros;
 
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
 		    par
 	    )

@@ -5,19 +5,19 @@ $retorno = "";
 switch (strtoupper($_GET["funcao"])) {
     case "LISTAREGISTROS":
         include_once ("../../classesphp/classe_atributos.php");
-        $m = new Atributos($_SESSION["map_file"], $_POST["tema"], "", $_POST["ext"]);
+        $m = new Atributos($_SESSION["map_file"], $_GET["tema"], "", $_GET["ext"]);
         $legenda = "";
-        if ($_POST["dadosDaClasse"] == "sim") {
+        if ($_GET["dadosDaClasse"] == "sim") {
             include_once ("../../classesphp/classe_legenda.php");
-            $mc = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_POST["tema"]);
+            $mc = new Legenda($_SESSION["map_file"], $_SESSION["locaplic"], $_GET["tema"]);
             $linhas = $mc->tabelaLegenda();
             foreach ($linhas as $linha) {
-                if ($linha["tema"] == $_POST["tema"]) {
+                if ($linha["tema"] == $_GET["tema"]) {
                     $legenda[$linha["idclasse"]] = $linha["imagem"];
                 }
             }
         }
-        $retorno = $m->listaRegistros("", $_POST["tipo"], "", $_POST["inicio"], $_POST["fim"], $_POST["tipolista"], $_POST["dadosDaClasse"]);
+        $retorno = $m->listaRegistros("", $_GET["tipo"], "", $_GET["inicio"], $_GET["fim"], $_GET["tipolista"], $_GET["dadosDaClasse"]);
         ob_clean();
         header("Content-type: application/json");
         echo json_encode(array(
@@ -33,8 +33,8 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "INCLUISEL":
         include_once (dirname(__FILE__) . "/../../classesphp/classe_selecao.php");
-        $m = new Selecao($_SESSION["map_file"], $_POST["tema"]);
-        $m->incluiSel($_POST["ids"]);
+        $m = new Selecao($_SESSION["map_file"], $_GET["tema"]);
+        $m->incluiSel($_GET["ids"]);
         include_once(dirname(__FILE__)."/../../classesphp/classe_mapa.php");
         //retorna os dados para poder atualizar a arvore de camadas
         $m = New Mapa($_SESSION["map_file"]);
@@ -43,10 +43,19 @@ switch (strtoupper($_GET["funcao"])) {
         header("Content-type: application/json");
         echo json_encode($retorno);
         break;
+    case "SELECAOCRIATEMA":
+        include_once (dirname(__FILE__) . "/../../classesphp/classe_selecao.php");
+        $selecao = new Selecao($_SESSION["map_file"], $_GET["tema"]);
+        $selecao->selecao2tema($_SESSION["locaplic"], $_SESSION["dir_tmp"]);
+        $selecao->salva();
+        ob_clean();
+        header("Content-type: application/json");
+        echo json_encode(true);
+        break;
     case "ESTATISTICA":
         include_once (dirname(__FILE__) . "/../../classesphp/classe_atributos.php");
-        $m = new Atributos($_SESSION["map_file"], $_POST["tema"], $_SESSION["locaplic"], $_POST["ext"]);
-        $retorno = $m->estatDescritivas($_POST["item"], $_POST["exclui"]);
+        $m = new Atributos($_SESSION["map_file"], $_GET["tema"], $_SESSION["locaplic"], $_GET["ext"]);
+        $retorno = $m->estatDescritivas($_GET["item"], $_GET["exclui"]);
         ob_clean();
         header("Content-type: application/json");
         echo json_encode($retorno);

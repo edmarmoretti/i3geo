@@ -13,14 +13,13 @@ coluna coluna que contem os dados
 g_sid codigo da secao i3geo
 
 nomevariavel nome da variavel javascript que sera retornada com os valores
-
  */
 $dir = dirname(__FILE__);
 
 //inicializa o programa verificando seguranca e pegando os parametros enviados pela URL e pela secao
 include_once($dir."/../safe.php");
 include_once($dir."/funcoes.php");
-
+error_reporting(0);
 $layer = $_GET["layer"];
 $tipoGradiente = $_GET["tipoGradiente"];
 $coluna = $_GET["coluna"];
@@ -58,8 +57,6 @@ $gradiente = heatmapGradiente($map_file,$layer,$tipoGradiente);
 if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);
 }
-
 echo 'heatmap_dados = ['.implode(",",$resultado).'];';
 echo 'heatmap_config = '.$gradiente.';';
-
 ?>

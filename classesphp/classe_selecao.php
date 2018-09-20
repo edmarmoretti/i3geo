@@ -785,7 +785,7 @@ $dir_tmp - localiza&ccedil;&atilde;o do diret&oacute;rio tempor&aacute;rio
 	function selecao2tema($locaplic,$dir_tmp)
 	{
 		if(!$this->layer){return "erro";}
-		//$this->layer->setfilter("");
+		error_reporting(0);
 		$nomeshp = criaSHP($this->nome,$this->arquivo,$locaplic,$dir_tmp,true,"",false);
 		$novolayer = criaLayer($this->mapa,$this->layer->type,MS_DEFAULT,"Sele&ccedil;&atilde;o de ".(pegaNome($this->layer))." (".$this->nome.")",$metaClasse="SIM");
 		if($this->layer->getprojection() != ""){
@@ -805,7 +805,7 @@ $dir_tmp - localiza&ccedil;&atilde;o do diret&oacute;rio tempor&aacute;rio
 		}
 		$novolayer->setmetadata("TEMALOCAL","SIM");
 		$novolayer->setfilter("");
-		return("ok");
+		return true;
 	}
 /*
 function: selecaoEXT

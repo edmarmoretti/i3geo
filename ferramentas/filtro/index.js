@@ -2,10 +2,6 @@ if(typeof(i3GEOF) === 'undefined'){
     var i3GEOF = {};
 }
 i3GEOF.filtro = {
-	//implementar modoCalculadora em outra ferramenta
-
-
-
 	renderFunction: i3GEO.janela.formModal,
 	_parameters: {
 	    "tema": "",
@@ -124,7 +120,7 @@ i3GEOF.filtro = {
 	    $(ntr).html(temp);
 	    $i("i3GEOfiltroparametros").appendChild(ntr);
 	},
-	post: function({snackbar = true, btn = false, par = {}, refresh = false, prog = "exec", fn = false} = {}){
+	get: function({snackbar = true, btn = false, par = {}, refresh = false, prog = "exec", fn = false} = {}){
 	    var p = this._parameters,
 	    i3f = this;
 	    i3GEO.janela.abreAguarde();
@@ -139,7 +135,7 @@ i3GEOF.filtro = {
 	    //por isso sao removidos aqui
 	    delete par["prog"];
 	    delete par["refresh"];
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + p.namespace + "/" + prog + ".php",
 		    par
 	    )
@@ -178,7 +174,7 @@ i3GEOF.filtro = {
 	    par = {
 		    funcao: "pegafiltro"
 	    };
-	    i3f.post({
+	    i3f.get({
 		snackbar: false,
 		fn: function(retorno){
 		    $i("i3GEOfiltrofiltro").value = i3GEO.util.base64decode(retorno);
@@ -196,7 +192,7 @@ i3GEOF.filtro = {
 		    funcao: "inserefiltro",
 		    filtro: ""
 	    };
-	    i3f.post({
+	    i3f.get({
 		snackbar: false,
 		fn: function(retorno){
 		    $i("i3GEOfiltrofiltro").value = "";
@@ -221,7 +217,7 @@ i3GEOF.filtro = {
 		    funcao: "inserefiltro",
 		    filtro: i3GEO.util.base64encode(filtro)
 	    };
-	    i3f.post({
+	    i3f.get({
 		snackbar: false,
 		btn: btn,
 		par: par,

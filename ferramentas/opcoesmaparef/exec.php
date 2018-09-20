@@ -7,10 +7,10 @@ switch (strtoupper($_GET["funcao"]))
 	case "ALTERA":
 	    $map = ms_newMapObj($_SESSION["map_file"]);
 		$r = $map->reference;
-		$ocor = explode(",",$_POST["outlinecolor"]);
+		$ocor = explode(",",$_GET["outlinecolor"]);
 		$o = $r->outlinecolor;
 		$o->setrgb($ocor[0],$ocor[1],$ocor[2]);
-		$imagem = $_SESSION["locaplic"]."/imagens/".basename($_POST["image"]).".png";
+		$imagem = $_SESSION["locaplic"]."/imagens/".basename($_GET["image"]).".png";
 		if(file_exists($imagem)){
 		    $r->set("image",$imagem);
 		}

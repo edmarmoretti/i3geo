@@ -343,11 +343,6 @@ i3GEO.listaDeFerramentas = {
 							url : "javascript:i3GEO.mapa.dialogo.animacao()"
 						    },
 						    {
-							id : "omenudataFerramentas3a",
-							text : $trad("d24t"),
-							url : "javascript:i3GEO.mapa.dialogo.selecao();"
-						    },
-						    {
 							id : "omenudataFerramentas11",
 							text : $trad("d22t"),
 							url : "javascript:i3GEO.mapa.dialogo.cliquePonto()"
@@ -405,11 +400,6 @@ i3GEO.listaDeFerramentas = {
 					    itemdata : [
 						[
 						    {
-							id : "omenudataFerramentas1b",
-							text : $trad("t31"),
-							url : "javascript:i3GEO.tema.dialogo.tabela()"
-						    },
-						    {
 							id : "omenudataFerramentas2b",
 							text : $trad("t23"),
 							url : "javascript:i3GEO.tema.dialogo.procuraratrib()" //feramentas/busca
@@ -424,23 +414,6 @@ i3GEO.listaDeFerramentas = {
 							text : $trad("t27"),
 							url : "javascript:i3GEO.tema.dialogo.etiquetas()"
 						    },
-						    {
-							id : "omenudataFerramentas5b",
-							text : $trad("t29"),
-							url : "javascript:i3GEO.tema.dialogo.filtro()"
-						    },
-						    {
-							id : "omenudataFerramentas6b",
-							text : $trad("t33"),
-							url : "javascript:i3GEO.tema.dialogo.editaLegenda()"
-						    },
-						    /*
-									{
-										id : "omenudataFerramentas7b",
-										text : $trad("t42"),
-										url : "javascript:i3GEO.tema.dialogo.cortina()"
-									},
-						     */
 						    {
 							id : "omenudataFerramentas8b",
 							text : $trad("t37a"),

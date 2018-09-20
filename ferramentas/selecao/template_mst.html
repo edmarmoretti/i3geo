@@ -1,128 +1,111 @@
-<div id=i3GEOselecaoguiasYUI class='yui-navset' style='height: 38px; top: 0px; cursor: pointer; margin-left: 2px;'>
-	<ul class="yui-nav" style="border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;">
-		<li>
-			<div id='i3GEOselecaoguia4' style='text-align: center; left: 0px;'>
-				<a title='{{{propriedades}}}'>
-					<em><span class="material-icons">settings</span></em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<a>
-				<em><div id="i3GEOselecaoguia1" style="text-align: center; left: 0px;">{{{mapa}}}</div></em>
-			</a>
-		</li>
-		<li>
-			<a>
-				<em><div id="i3GEOselecaoguia2" style="text-align: center; left: 0px;">{{{atributos}}}</div></em>
-			</a>
-		</li>
-		<li>
-			<a>
-				<em><div id="i3GEOselecaoguia3" style="text-align: center; left: 0px;">{{{cruzamento}}}</div></em>
-			</a>
-		</li>
-	</ul>
-</div>
-<div class='container-fluid customScrollBar' style="height: calc(100% - 39px); overflow: auto;">
+<nav class='navbar navbar-default' style='margin-bottom: 0px; min-height: 35px'>
+    <div class="container" style="margin: 0px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse" style="padding: 0px;">
+            <ul class="nav navbar-nav ">
+                <li role="presentation"><a id='i3GEO{{namespace}}guia4' href="javascript:void(0);">
+                        <span class="material-icons">settings</span>
+                    </a></li>
+                <li class="active" role="presentation"><a id='i3GEO{{namespace}}guia1' href="javascript:void(0);">
+                        <em>{{{mapa}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia2' href="javascript:void(0);">
+                        <em>{{{atributos}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia3' href="javascript:void(0);">
+                        <em>{{{cruzamento}}}</em>
+                    </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
 
-	<div id="i3GEOselecaoguia4obj" class="container-fluid">
-		<div class="checkbox text-left">
-			<label>
-				<input checked id='i3GEOFselecaoMantemFigura' type="checkbox" onclick="">
-				<span class="checkbox-material noprint">
-					<span class="check"></span>
-				</span>
-				{{{mantemfigura}}}
-			</label>
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{distanciaSelecao}}}</label>
-			<input class="form-control input-lg" type='text' id='i3GEOselecaotoleranciapt' value='2' />
-		</div>
-		<button onclick="i3GEO.mapa.dialogo.queryMap()" class='btn btn-primary btn-sm btn-raised'>{{{p8}}}</button>
-		<h5 class="alert alert-info">{{{ajuda}}}</h5>
-	</div>
-	<div id="i3GEOselecaoguia1obj" class="container-fluid">
-		<label class="control-label" for="tipo">{{{opsel}}}</label>
-		<div class="form-group condensed">
-			<button class='btn btn-primary btn-sm btn-raised' title="Clique no mapa para selecionar" value="i3GEOselecaopt" onclick="i3GEOF.selecao.tiposel(this)">
-				<img id=i3GEOselecaopt src="{{{locaplic}}}/imagens/gisicons/select-one.png" />
-			</button>
-			<button class='btn btn-primary btn-sm btn-raised' title="{{{selecionaVisivel}}}" onclick=" i3GEOF.selecao.tiposel(this)" value="i3GEOselecaoext">
-				<img id=i3GEOselecaoext src="{{{locaplic}}}/imagens/gisicons/map.png" />
-			</button>
-			<button class='btn btn-primary btn-sm btn-raised' title="{{{utilizaFiguraDesenhada}}}" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaofigura">
-				<img id=i3GEOselecaoFigura src="{{{locaplic}}}/imagens/gisicons/select.png" />
-			</button>
-			<button class='btn btn-primary btn-sm btn-raised {{{i3GEOselecaoboxHidden}}}' title="{{{selecionaRetangulo}}}" onclick="i3GEOF.selecao.tiposel(this)" value="i3GEOselecaobox">
-				<img id=i3GEOselecaobox src="{{{locaplic}}}/imagens/gisicons/select-rectangle.png" />
-			</button>
-			<button class='btn btn-primary btn-sm btn-raised' title="{{{inverteSelecao}}}" onclick="i3GEOF.selecao.operacao('inverte')">
-				<img src="{{{locaplic}}}/imagens/gisicons/selection-invert.png" />
-			</button>
-			<button class='btn btn-primary btn-sm btn-raised' title="{{{limpaSelecao}}}" onclick="i3GEOF.selecao.operacao('limpa')">
-				<img src="{{{locaplic}}}/imagens/gisicons/selected-delete.png" />
-			</button>
-			<button class='btn btn-primary btn-sm btn-raised' title="{{{salvaSelecao}}}" onclick="i3GEOF.selecao.criatema()">
-				<img src="{{{locaplic}}}/imagens/gisicons/save1.png" />
-			</button>
-			<!--
-			<button class='btn btn-primary btn-sm btn-raised' title="{{{grafico}}}" onclick="i3GEOF.selecao.grafico()">
-				<img src="{{{locaplic}}}/imagens/gisicons/layer-vector-chart-add.png" />
-			</button>
-			<button class='btn btn-primary btn-sm btn-raised' title="{{{perfil}}}" onclick="i3GEOF.selecao.graficoPerfil()">
-				<img src="{{{locaplic}}}/imagens/gisicons/grafico-perfil.png" />
-			</button>
-			-->
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="i3GEOselecaotipoOperacao">{{{tipoOperacao}}}</label>
-			<div style="width: 100%;" class="input-group">
-				<select class="form-control" title="{{{tipoOperacao}}}" id=i3GEOselecaotipoOperacao>
-					<option value="adiciona">{{{adicionaASelecao}}}</option>
-					<option value="novo">{{{novaSelecao}}}</option>
-					<option value="retira">{{{retiraDaSelecao}}}</option>
-				</select>
-				<b class="caret careti"></b>
-			</div>
-		</div>
-		<h5 class="alert alert-info" id=i3GEOselecaoNsel></h5>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{fonte}}}</label>
-			<div id=i3GEOselecaoComboTemas style="width: 100%;" class="input-group"></div>
-		</div>
-	</div>
-	<div id="i3GEOselecaoguia2obj" class="container-fluid">
-		<button onclick="i3GEOF.selecao.atributo()" class='btn btn-primary btn-sm btn-raised'>{{{seleciona}}}</button>
-
-		<!-- as linhas sao baseadas no template template_linhafiltro_mst.html -->
-		<div>
-			<table id='i3GEOselecaoparametros'>
-				<tr>
-					<td></td>
-					<td></td>
-					<td>{{{item}}}</td>
-					<td>{{{operador}}}</td>
-					<td>{{{valor}}}</td>
-					<td>&nbsp;</td>
-					<td>{{{conector}}}</td>
-				</tr>
-			</table>
-		</div>
-		<div style="width: 100%;" class='form-group label-fixed condensed'>
-			<label class="control-label" for="">{{{selecionaValor}}}</label>
-			<div style="width: 100%;" class="input-group">
-				<div id=i3GEOselecaovalores ></div>
-			</div>
-		</div>
-		<h5 class="alert alert-info">{{{separaComVirgula}}}</h5>
-	</div>
-	<div id="i3GEOselecaoguia3obj" class="container-fluid">
-		<h5>{{{temaSelecaoMapa}}}</h5>
-		<div id=i3GEOselecaooverlay style="width: 100%;" class="form-group condensed"></div>
-
-		<button onclick="i3GEOF.selecao.aplicaselecaoTema()" class='btn btn-primary btn-sm btn-raised'>{{{seleciona}}}</button>
-
-	</div>
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; height: calc(100% - 55px);'>
+    <div id="i3GEOselecaoguia4obj" class="container-fluid">
+        <div class="checkbox text-left">
+            <label>
+                <input type="checkbox" onclick="i3GEOF.selecao._parameters.removeFiguras = this.checked ">
+                <span class="checkbox-material noprint"> <span class="check"></span>
+                </span> {{{mantemfigura}}}
+            </label>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="">{{{distanciaSelecao}}}</label>
+            <input class="form-control input-lg" type='text' id='i3GEOselecaotoleranciapt' value='2' />
+        </div>
+        <button onclick="i3GEO.mapa.dialogo.queryMap()" class='btn btn-primary btn-sm btn-raised'>{{{p8}}}</button>
+        <h5 class="alert alert-info">{{{ajuda}}}</h5>
+    </div>
+    <div id="i3GEOselecaoguia1obj" class="container-fluid">
+        <div class="form-group condensed">
+            <div style="width: 160px; float: left; margin-right: 10px;">
+                <select class="form-control" title="{{{tipoOperacao}}}" id=i3GEOselecaotipoOperacao>
+                    <option value="adiciona">{{{adicionaASelecao}}}</option>
+                    <option value="novo">{{{novaSelecao}}}</option>
+                    <option value="retira">{{{retiraDaSelecao}}}</option>
+                </select> <b class="caret careti"></b>
+            </div>
+            <button class='btn btn-primary btn-sm btn-raised' title="{{{selecionaVisivel}}}" onclick="i3GEOF.selecao.ext()">
+                <img src="{{{locaplic}}}/imagens/gisicons/map.png" />
+            </button>
+            <button class='btn btn-primary btn-sm btn-raised' title="Clique no mapa para selecionar" onclick="i3GEOF.selecao.clique.inicia();">
+                <img id=i3GEOselecaopt src="{{{locaplic}}}/imagens/gisicons/select-one.png" />
+            </button>
+            <button class='btn btn-primary btn-sm btn-raised' title="{{{utilizaFiguraDesenhada}}}" onclick="i3GEOF.selecao.figura.inicia();">
+                <img id=i3GEOselecaoFigura src="{{{locaplic}}}/imagens/gisicons/select.png" />
+            </button>
+            <button class='btn btn-primary btn-sm btn-raised {{{i3GEOselecaoboxHidden}}}' title="{{{selecionaRetangulo}}}" onclick="i3GEOF.selecao.box.inicia()">
+                <img id=i3GEOselecaobox src="{{{locaplic}}}/imagens/gisicons/select-rectangle.png" />
+            </button>
+            <button class='btn btn-primary btn-sm btn-raised' title="{{{inverteSelecao}}}" onclick="i3GEOF.selecao.inverte()">
+                <img src="{{{locaplic}}}/imagens/gisicons/selection-invert.png" />
+            </button>
+            <button class='btn btn-primary btn-sm btn-raised' title="{{{limpaSelecao}}}" onclick="i3GEOF.selecao.limpa()">
+                <img src="{{{locaplic}}}/imagens/gisicons/selected-delete.png" />
+            </button>
+            <button class='btn btn-primary btn-sm btn-raised' title="{{{salvaSelecao}}}" onclick="i3GEOF.selecao.criatema()">
+                <img src="{{{locaplic}}}/imagens/gisicons/save1.png" />
+            </button>
+        </div>
+        <h5 id=i3GEOselecaoNsel></h5>
+    </div>
+    <div id="i3GEOselecaoguia2obj" class="container-fluid">
+        <div class='form-group condensed' style="max-width: 700px;">
+            <div class="input-group">
+                <div style="display: contents;" class='form-group label-fixed'>
+                    <label class="control-label">{{{dexp}}}</label>
+                    <input id='i3GEOselecaofiltro' value='' class="form-control input-lg " type='text' />
+                </div>
+                <span class="input-group-btn"> <a title="{{{cexp}}}" onclick="i3GEO.tema.dialogo.msQueryBuilder('{{{tema}}}','i3GEOselecaofiltro');return false;" role="button" type="button"
+                        class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                        <span class="material-icons ">build</span>
+                    </a>
+                </span>
+                <span class="input-group-btn"> <a onclick="i3GEOF.selecao.atributo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                        href="javascript:void(0)">
+                        <span class="material-icons ">send</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+    </div>
+    <div id="i3GEOselecaoguia3obj" class="container-fluid">
+         <div class='form-group condensed' style="max-width: 700px;">
+            <label class="control-label">{{{temaSelecaoMapa}}}</label>
+            <div class="input-group">
+                <div style="display: contents;" class='form-group label-fixed'>
+                    <div id=i3GEOselecaooverlay class="form-group condensed"></div>
+                </div>
+                <span class="input-group-btn"> <a onclick="i3GEOF.selecao.aplicaselecaoTema();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                        href="javascript:void(0)">
+                        <span class="material-icons ">send</span>
+                    </a>
+                </span>
+            </div>
+        </div>
+     </div>
 </div>

@@ -3,18 +3,18 @@ include_once (dirname(__FILE__) . "/../safe2.php");
 verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
 $retorno = "";
 include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
-$m = new Temas($_SESSION["map_file"], $_POST["tema"]);
+$m = new Temas($_SESSION["map_file"], $_GET["tema"]);
 switch (strtoupper($_GET["funcao"])) {
     case "SALVAPARAMETROSAUTO":
         $map = ms_newMapObj($_SESSION["map_file"]);
-        $layer = $map->getlayerbyname($_POST["tema"]);
-        $layer->setmetadata("classesitem", $_POST["classesitem"]);
-        $layer->setmetadata("classesnome", $_POST["classesnome"]);
-        $layer->setmetadata("classescor", $_POST["classescor"]);
-        $layer->setmetadata("classessimbolo", $_POST["classessimbolo"]);
-        $layer->setmetadata("classestamanho", $_POST["classestamanho"]);
-        $layer->setmetadata("palletefile", $_POST["palletefile"]);
-        $layer->setmetadata("palletestep", $_POST["palletestep"]);
+        $layer = $map->getlayerbyname($_GET["tema"]);
+        $layer->setmetadata("classesitem", $_GET["classesitem"]);
+        $layer->setmetadata("classesnome", $_GET["classesnome"]);
+        $layer->setmetadata("classescor", $_GET["classescor"]);
+        $layer->setmetadata("classessimbolo", $_GET["classessimbolo"]);
+        $layer->setmetadata("classestamanho", $_GET["classestamanho"]);
+        $layer->setmetadata("palletefile", $_GET["palletefile"]);
+        $layer->setmetadata("palletestep", $_GET["palletestep"]);
         $layer->setmetadata("cache", "nao");
         $layer->setmetadata("TILES", "nao");
         autoClasses($layer, $map, $_SESSION["locaplic"]);
@@ -25,7 +25,7 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "PARAMETROSAUTO":
         $map = ms_newMapObj($_SESSION["map_file"]);
-        $layer = $map->getlayerbyname($_POST["tema"]);
+        $layer = $map->getlayerbyname($_GET["tema"]);
         $retorno = array();
         $retorno["classesitem"] = $layer->getmetadata("classesitem");
         $retorno["classesnome"] = $layer->getmetadata("classesnome");
@@ -43,7 +43,7 @@ switch (strtoupper($_GET["funcao"])) {
         $retorno["colunas"] = implode(",", $items);
         break;
     case "APLICARCLUSTER":
-        $retorno = $m->criaCluster($_POST["group"], $_POST["filter"], $_POST["maxdistance"], $_POST["region"], $_POST["buffer"]);
+        $retorno = $m->criaCluster($_GET["group"], $_GET["filter"], $_GET["maxdistance"], $_GET["region"], $_GET["buffer"]);
         $m->salva();
         break;
     case "REMOVERCLUSTER":
@@ -51,16 +51,16 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "REMOVELABELCLASSE":
-        $retorno = $m->removeLabel($_POST["classe"]);
+        $retorno = $m->removeLabel($_GET["classe"]);
         $m->salva();
         break;
     case "ADICIONALABELCLASSE":
-        $l = $m->mapa->getlayerbyname($_POST["tema"]);
-        if (empty($_POST["item"])) {
+        $l = $m->mapa->getlayerbyname($_GET["tema"]);
+        if (empty($_GET["item"])) {
             $retorno = false;
         } else {
-            $classe = $l->getclass($_POST["classe"]);
-            $retorno = $m->adicionaLabel($classe, $_POST["wrap"], $_POST["fonte"], $_POST["tamanho"], $_POST["angulo"], $_POST["fundo"], $_POST["sombra"], $_POST["cor"], $_POST["outlinecolor"], $_POST["shadowcolor"], $_POST["shadowsizex"], $_POST["shadowsizey"], $_POST["force"], $_POST["mindistance"], $_POST["minfeaturesize"], $_POST["offsetx"], $_POST["offsety"], $_POST["partials"], $_POST["position"], "[" . $_POST["item"] . "]");
+            $classe = $l->getclass($_GET["classe"]);
+            $retorno = $m->adicionaLabel($classe, $_GET["wrap"], $_GET["fonte"], $_GET["tamanho"], $_GET["angulo"], $_GET["fundo"], $_GET["sombra"], $_GET["cor"], $_GET["outlinecolor"], $_GET["shadowcolor"], $_GET["shadowsizex"], $_GET["shadowsizey"], $_GET["force"], $_GET["mindistance"], $_GET["minfeaturesize"], $_GET["offsetx"], $_GET["offsety"], $_GET["partials"], $_GET["position"], "[" . $_GET["item"] . "]");
             $m->salva();
         }
         break;
@@ -73,7 +73,7 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "APLICAPROCESSOS":
-        $retorno = $m->aplicaProcessos($_POST["lista"]);
+        $retorno = $m->aplicaProcessos($_GET["lista"]);
         $m->salva();
         break;
     case "TEMA2SLD":

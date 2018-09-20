@@ -89,7 +89,7 @@ i3GEOF.opcoesescala = {
 	    	i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
 	    par.funcao = "mudaEscalaGrafica";
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
 		    par
 	    )
@@ -118,7 +118,7 @@ i3GEOF.opcoesescala = {
 	    	i3f = this;
 	    par.g_sid = i3GEO.configura.sid;
 	    par.funcao = "testaescalagrafica";
-	    $.post(
+	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
 		    par
 	    )
