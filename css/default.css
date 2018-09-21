@@ -162,6 +162,10 @@
 	position: relative;
 	left: 20px;
 }
+.expandModal {
+	position: relative;
+	left: 16px;
+}
 .navbar, .navbar.navbar-default {
 	background-color: #386682 !Important;
 	border-bottom: 4px solid #7f9dc3;

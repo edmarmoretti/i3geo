@@ -704,6 +704,21 @@ i3GEO.janela =
 		i3GEO.janela._formModal.css(css);
 		i3GEO.janela._formModal.draggable(draggable);
 		$(i3GEO.janela._formModal).appendTo("#" + i3GEO.Interface.IDCORPO);
+		i3GEO.janela._formModal.find(".expandModal").on("click",function(){
+		    if($(this).data("expanded") == true){
+			$(this).data("expanded",false);
+			i3GEO.janela._formModal.css($(this).data("original"));
+		    } else {
+			$(this).data("expanded",true);
+			$(this).data("original",{
+			    top: i3GEO.janela._formModal.css("top"),
+			    left: i3GEO.janela._formModal.css("left"),
+			    width: i3GEO.janela._formModal.css("width"),
+			    height: i3GEO.janela._formModal.css("height")
+			});
+			i3GEO.janela._formModal.css({"top":"0px","left":"0px","width":"100%","height":"100%"});
+		    }
+		});
 	    }
 	    if(texto == false){
 		i3GEO.janela._formModal.modal("hide");
