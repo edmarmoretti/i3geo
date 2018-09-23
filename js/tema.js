@@ -872,8 +872,15 @@ i3GEO.tema =
 	     * {string} - id que identifica o tema no map file.
 	     */
 	    download : function(idtema) {
-		i3GEO.mapa.ativaTema(idtema);
-		i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.download()", "download", "download");
+		var temp = function(){
+		    i3GEOF.download.start(idtema);
+		};
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.tema.dialogo.download()",
+			"download",
+			"download",
+			"dependencias.php",
+			temp);
 	    },
 	    /**
 	     * Function: ogcwindow
