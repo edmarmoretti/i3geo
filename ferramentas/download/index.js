@@ -44,6 +44,9 @@ i3GEOF.download = {
 				window.location.href = url;
 			    });
 			    $(link).click();
+			    if(fn){
+				fn(data);
+			    }
 			}
 		    }
 	    )

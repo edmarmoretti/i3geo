@@ -1,30 +1,17 @@
 <?php
-include_once(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-//
-//faz a busca da fun&ccedil;&atilde;o que deve ser executada
-//
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
-switch (strtoupper($funcao))
-{
-/*
-Valor: CRIATOPONIMIA
-
-Cria um novo tema com a topon&iacute;mia do tema atual.
-
-<Toponimia->criaToponimia>
-*/
+include (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
+include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
+$m = new Toponimia($_SESSION["map_file"], $_GET["tema"]);
+switch (strtoupper($_GET["funcao"])) {
 	case "CRIATOPONIMIA":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
-		copiaSeguranca($map_file);
-		$m = new Toponimia($map_file,$tema);
-		if(!isset($tipo)){
-			$tipo="";
+		if(!isset($_GET["tipo"])){
+		    $_GET["tipo"] = "";
 		}
-		if(!isset($novotema)){
-			$novotema = "sim";
+		if(!isset($_GET["novotema"])){
+		    $_GET["novotema"] = "sim";
 		}
-		$retorno = $m->criaToponimia($_GET["item"],$_GET["position"],$_GET["partials"],$_GET["offsetx"],$_GET["offsety"],$_GET["minfeaturesize"],$_GET["mindistance"],$_GET["force"],$_GET["shadowcolor"],$_GET["shadowsizex"],$_GET["shadowsizey"],$_GET["outlinecolor"],$_GET["cor"],$_GET["sombray"],$_GET["sombrax"],$_GET["sombra"],$_GET["fundo"],$_GET["angulo"],$_GET["tamanho"],$_GET["fonte"],$_GET["tipo"],$_GET["wrap"],$_GET["novotema"]);
+		$retorno = $m->criaToponimia($_GET["item"],$_GET["position"],$_GET["partials"],$_GET["offsetx"],$_GET["offsety"],$_GET["minfeaturesize"],$_GET["mindistance"],$_GET["force"],$_GET["shadowcolor"],$_GET["shadowsizex"],$_GET["shadowsizey"],$_GET["outlinecolor"],$_GET["cor"],$_GET["sombray"],$_GET["sombrax"],$_GET["sombra"],$_GET["fundo"],$_GET["angulo"],$_GET["tamanho"],$_GET["font"],$_GET["tipo"],$_GET["wrap"],$_GET["novotema"]);
 		if(empty($_GET["maxscale"])){
 			$_GET["maxscale"] = -1;
 		}
@@ -41,21 +28,15 @@ Cria um novo tema com a topon&iacute;mia do tema atual.
 		    $m->layer->setprocessing("POLYLINE_NO_CLIP=True");
 		}
 		if ($_GET["tipo"] != "teste"){
-			$m->salva();$_SESSION["contadorsalva"]++;
+			$m->salva();
 		}
 	break;
 	case "REMOVETOPONIMIA":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_toponimia.php");
-		copiaSeguranca($map_file);
-		$m = new Toponimia($map_file,$tema);
-		$tipo="";
 		$retorno = $m->removeToponimia();
 		$m->salva();
-		$_SESSION["contadorsalva"]++;
 		break;
 }
-if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-	restauraCon($map_file,$postgis_mapa);
-}
-cpjson($retorno);
+ob_clean();
+header("Content-type: application/json");
+echo json_encode($retorno);
 ?>

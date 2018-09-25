@@ -70,9 +70,14 @@ i3GEOF.busca.dicionario = {
 		en : "Search in the layer",
 		es : "Buscar en la capa"
 	} ],
-	'opecoes' : [ {
+	'opcoes' : [ {
 		pt : "Op&ccedil;&otilde;es",
 		en : "Options",
 		es : "Opciones"
+	} ],
+	'resultado' : [ {
+		pt : "Resultado",
+		en : "",
+		es : ""
 	} ]
 };

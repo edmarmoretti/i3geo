@@ -9,7 +9,7 @@ i3GEOF.filtro = {
 	    "mustachelinha": "",
 	    "idContainer": "i3GEOfiltroContainer",
 	    "namespace": "filtro",
-	    "comboTemas": ""
+	    "comboItens": ""
 	},
 	start : function(tema){
 	    var p = this._parameters,
@@ -35,7 +35,7 @@ i3GEOF.filtro = {
 	destroy: function(){
 	    //nao use this aqui
 	    //i3GEOF.legenda._parameters.mustache = "";
-	    i3GEOF.filtro._parameters.comboTemas = "";
+	    i3GEOF.filtro._parameters.comboItens = "";
 	},
 	html:function() {
 	    var p = this._parameters,
@@ -71,7 +71,7 @@ i3GEOF.filtro = {
 		    "",
 		    i3GEOF.filtro._parameters.tema,
 		    function(retorno) {
-			i3GEOF.filtro._parameters.comboTemas = retorno.dados;
+			i3GEOF.filtro._parameters.comboItens = retorno.dados;
 			i3GEOF.filtro.adicionaLinhaFiltro();
 		    },
 		    "",
@@ -115,7 +115,7 @@ i3GEOF.filtro = {
 	    ntr.id = "linhaFiltro"+id;
 	    temp = Mustache.render(
 		    "{{#data}}" + p.mustachelinha + "{{/data}}",
-		    {"data":{"comboTemas": p.comboTemas,"id": id, "escondeGuias": i3GEOF.filtro.dicionario["escondeGuias"]}}
+		    {"data":{"comboItens": p.comboItens,"id": id, "escondeGuias": i3GEOF.filtro.dicionario["escondeGuias"]}}
 	    );
 	    $(ntr).html(temp);
 	    $i("i3GEOfiltroparametros").appendChild(ntr);

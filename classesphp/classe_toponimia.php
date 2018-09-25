@@ -191,7 +191,7 @@ class Toponimia
     {
         // error_reporting(0);
         if (! $this->layer) {
-            return "erro";
+            return false;
         }
         $this->removeToponimia();
 
@@ -321,7 +321,7 @@ class Toponimia
             $i = gravaImagemMapa($this->mapa);
             return ($i["url"]);
         } else {
-            return ($nomer);
+            return true;
         }
     }
 
@@ -339,6 +339,7 @@ class Toponimia
         if ($this->layer) {
             $this->layer->setMetaData("cache", "");
         }
+        return true;
     }
 
     /*
