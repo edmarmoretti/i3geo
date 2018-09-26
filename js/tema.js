@@ -757,20 +757,15 @@ i3GEO.tema =
 	     * {string} - id que identifica o tema conforme definido no map file
 	     */
 	    etiquetas : function(idtema) {
-		if(idtema && idtema != ""){
-		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
-		    if(t.status < 2){
-			i3GEO.janela.snackBar({content: $trad("deveLigada"),style: "red"});
-			return;
-		    }
-		}
-		i3GEO.mapa.ativaTema(idtema);
+		var temp = function(){
+		    i3GEOF.etiqueta.start(idtema);
+		};
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.tema.dialogo.etiquetas()",
+			"i3GEO.tema.dialogo.etiqueta()",
 			"etiqueta",
 			"etiqueta",
 			"dependencias.php",
-		"i3GEOF.etiqueta.iniciaJanelaFlutuante()");
+		"i3GEOF.etiqueta.start()");
 	    },
 	    /**
 	     * Function: funcaojstip
