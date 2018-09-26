@@ -78,6 +78,15 @@ i3GEO.mapa =
 	 * Tipo {Array}
 	 */
 	GEOXML : [],
+	itensvisib: function(seletores){
+	    $.each(seletores, function(i,v){
+		if($(v).hasClass("itensvisib")){
+		    $(v).removeClass("itensvisib");
+		} else {
+		    $(v).addClass("itensvisib");
+		}
+	    });
+	},
 	/**
 	 * Function: limpasel
 	 *

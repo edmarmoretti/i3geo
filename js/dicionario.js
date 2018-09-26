@@ -3168,5 +3168,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "itensvisib" : [
+            {
+                pt : "Ativa o modo de invisibilidade dos elementos marginais",
+                en : "",
+                es : ""
+            }
         ]
     };

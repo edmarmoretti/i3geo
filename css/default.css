@@ -1,3 +1,10 @@
+.itensvisib {
+	opacity: 0;
+}
+.itensvisib:hover{
+	opacity: initial;
+}
+
 .ui-resizable-helper {
 	border: 1px solid #888a85;
 	z-index: 200;
