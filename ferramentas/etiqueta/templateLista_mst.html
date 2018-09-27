@@ -1,92 +1,84 @@
-<div>
-	<table>
-		<tr>
-			<td>Coluna</td>
-			<td style="text-align:center;padding: 10px;">Identifica</td>
-			<td style="text-align:center;padding: 10px;">Tip (quando clicar)</td>
-            <td style="text-align:center;padding: 10px;">Tip (din&acirc;mico)</td>
-			<td style="text-align:center;padding: 10px;">Busca</td>
-			<td style="text-align:center;padding: 10px;">Alias</td>
-			<td style="text-align:center;padding: 10px;;">Link</td>
-		<tr>
-{{#linhas}}
-		<tr>
-			<td>{{{item}}}</td>
-			<td>
-				<div class="checkbox condensed text-center" style="text-align:center;">
-					<label>
-						<input {{{ckIdentifica}}} data-col="{{{item}}}" value="{{{item}}}" type="checkbox" name="identifica" />
-						<span class="checkbox-material noprint">
-							<span class="check"></span>
-						</span>
-					</label>
-				</div>
-			</td>
-			<td>
-				<div class="checkbox condensed"  style="text-align:center;">
-					<label>
-						<input {{{ckEtiquetaTip}}} data-col="{{{item}}}" type='checkbox' value="{{{item}}}" name='etiquetaTip' />
-						<span class="checkbox-material noprint">
-							<span class="check"></span>
-						</span>
-					</label>
-				</div>
-			</td>
-            <td>
-                <div class="radio radio-primary condensed"  style="text-align:center;">
-                    <label>
-                        <input {{{ckUtfdata}}} data-col="{{{item}}}" type='radio' value="{{{item}}}" name='utfdata' />
-                        <span class="circle"></span>
-						<span class="check"></span>
-                    </label>
-                </div>
-            </td>
-			<td>
-				<div class="radio radio-primary condensed"  style="text-align:center;">
-					<label>
-						<input {{{ckBuscaRapida}}} data-col="{{{item}}}" type='radio' value="{{{item}}}" name='itembuscarapida' />
-						<span class="circle"></span>
-						<span class="check"></span>
-					</label>
-				</div>
-			</td>
-			<td>
-				<div class='form-group condensed'>
-					<input class="form-control input" data-col="{{{item}}}" style="width: 150px;" type='text' name='itensdesc' value='{{{ckitensdesc}}}' />
-				</div>
-			</td>
-			<td>
-				<div class='form-group condensed'>
-					<input data-col="{{{item}}}" style="margin-left:10px;width: 100px;" class="form-control input" type='text' name='itenslink' value='{{{ckitem}}}' />
-				</div>
-			</td>
 
-		</tr>
-		{{/linhas}}
-                <tr>
-            <td></td>
-            <td style="text-align:center;padding: 10px;"></td>
-            <td style="text-align:center;padding: 10px;"></td>
-            <td style="text-align:center;padding: 10px;">
-            <div class="radio radio-primary condensed"  style="text-align:center;">
-                    <label>
-                        <input type='radio' value="" name='utfdata' />
-                        <span class="circle"></span>
-                        <span class="check"></span>
-                    </label>
-                </div>
-            </td>
-            <td style="text-align:center;padding: 10px;">
-            <div class="radio radio-primary condensed"  style="text-align:center;">
-                    <label>
-                        <input type='radio' value="" name='itembuscarapida' />
-                        <span class="circle"></span>
-                        <span class="check"></span>
-                    </label>
-                </div>
-            </td>
-            <td style="text-align:center;padding: 10px;"></td>
-            <td style="text-align:center;padding: 10px;;"></td>
-        <tr>
-	</table>
-</div>
+<table class="table-striped table-condensed">
+    <tr>
+        <td>Coluna</td>
+        <td style="text-align: center; padding: 10px;">Identifica</td>
+        <td style="text-align: center; padding: 10px;">Tip (quando clicar)</td>
+        <td style="text-align: center; padding: 10px;">Tip (din&acirc;mico)</td>
+        <td style="text-align: center; padding: 10px;">Busca</td>
+        <td style="text-align: center; padding: 10px;">Alias</td>
+        <td style="text-align: center; padding: 10px;">Link</td>
+    <tr>{{#linhas}}
+    <tr>
+        <td>{{{item}}}</td>
+        <td>
+            <div class="checkbox condensed text-center" style="text-align: center;">
+                <label>
+                    <input {{{ckIdentifica}}} data-col="{{{item}}}" value="{{{item}}}" type="checkbox" name="identifica" />
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span>
+                </label>
+            </div>
+        </td>
+        <td>
+            <div class="checkbox condensed" style="text-align: center;">
+                <label>
+                    <input {{{ckEtiquetaTip}}} data-col="{{{item}}}" type='checkbox' value="{{{item}}}" name='etiquetaTip' />
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span>
+                </label>
+            </div>
+        </td>
+        <td>
+            <div class="radio radio-primary condensed" style="text-align: center;">
+                <label>
+                    <input {{{ckUtfdata}}} data-col="{{{item}}}" type='radio' value="{{{item}}}" name='utfdata' />
+                    <span class="circle"></span> <span class="check"></span>
+                </label>
+            </div>
+        </td>
+        <td>
+            <div class="radio radio-primary condensed" style="text-align: center;">
+                <label>
+                    <input {{{ckBuscaRapida}}} data-col="{{{item}}}" type='radio' value="{{{item}}}" name='itembuscarapida' />
+                    <span class="circle"></span> <span class="check"></span>
+                </label>
+            </div>
+        </td>
+        <td>
+            <div class='form-group condensed'>
+                <input class="form-control input" data-col="{{{item}}}" style="width: 150px;" type='text' name='itensdesc' value='{{{ckitensdesc}}}' />
+            </div>
+        </td>
+        <td>
+            <div class='form-group condensed'>
+                <input data-col="{{{item}}}" style="margin-left: 10px; width: 100px;" class="form-control input" type='text' name='itenslink' value='{{{ckitem}}}' />
+            </div>
+        </td>
+
+    </tr>
+    {{/linhas}}
+    <tr>
+        <td></td>
+        <td style="text-align: center; padding: 10px;"></td>
+        <td style="text-align: center; padding: 10px;"></td>
+        <td style="text-align: center; padding: 10px;">
+            <div class="radio radio-primary condensed" style="text-align: center;">
+                <label>
+                    <input type='radio' value="" name='utfdata' />
+                    <span class="circle"></span> <span class="check"></span>
+                </label>
+            </div>
+        </td>
+        <td style="text-align: center; padding: 10px;">
+            <div class="radio radio-primary condensed" style="text-align: center;">
+                <label>
+                    <input type='radio' value="" name='itembuscarapida' />
+                    <span class="circle"></span> <span class="check"></span>
+                </label>
+            </div>
+        </td>
+        <td style="text-align: center; padding: 10px;"></td>
+        <td style="text-align: center; padding: 10px;"></td>
+    <tr>
+</table>

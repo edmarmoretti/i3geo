@@ -765,7 +765,7 @@ i3GEO.tema =
 			"etiqueta",
 			"etiqueta",
 			"dependencias.php",
-		"i3GEOF.etiqueta.start()");
+		temp);
 	    },
 	    /**
 	     * Function: funcaojstip

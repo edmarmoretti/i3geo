@@ -1,276 +1,194 @@
-/*
-Title: Etiqueta
 
-Ativa um determinado campo na tabela de atributos para ser utilizado na ferramenta de identifica&ccedil;&atilde;o do tipo "bal&atilde;o".
-
-<i3GEO.tema.dialogo.etiquetas>
-
-Arquivo:
-
-i3geo/ferramentas/etiqueta/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
 if(typeof(i3GEOF) === 'undefined'){
     var i3GEOF = {};
 }
-
-/*
-Classe: i3GEOF.etiqueta
- */
 i3GEOF.etiqueta = {
-	tema : i3GEO.temaAtivo,
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	 */
-	aguarde: "",
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	MUSTACHELISTA : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-	    var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.etiqueta.dicionario);
-	    dicionario["aplica"] = $trad("p14");
-	    return dicionario;
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "tema": "",
+	    "mustache": "",
+	    "mustachelista": "",
+	    "idContainer": "i3GEOetiquetaContainer",
+	    "namespace": "etiqueta"
 	},
-	/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	 */
-	inicia: function(iddiv){
-	    if(i3GEOF.etiqueta.MUSTACHE == ""){
-		var t1 = i3GEO.configura.locaplic + "/ferramentas/etiqueta/template_mst.html",
-		t2 = i3GEO.configura.locaplic + "/ferramentas/etiqueta/templateLista_mst.html";
-
-		$.when( $.get(t1),$.get(t2) ).done(function(r1,r2) {
-		    i3GEOF.etiqueta.MUSTACHE = r1[0];
-		    i3GEOF.etiqueta.MUSTACHELISTA = r2[0];
-		    i3GEOF.etiqueta.inicia(iddiv);
+	start : function(tema){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html",
+	    t2 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/templateLista_mst.html";
+	    p.tema = tema;
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.when( $.get(t1),$.get(t2)).done(function(r1,r2) {
+		    p.mustache = r1[0];
+		    p.mustachelista = r2[0];
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
 		}).fail(function() {
-		    i3GEO.janela.closeMsg($trad("erroTpl"));
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
 		    return;
 		});
-		return;
+	    } else {
+		i3f.html();
 	    }
 
-	    if(i3GEOF.etiqueta.tema === ""){
-		$i(iddiv).innerHTML = "";
-		return;
-	    }
-	    try{
-		$i(iddiv).innerHTML = i3GEOF.etiqueta.html();
-
-		if (!$i("i3GEOFetiquetaComboCabecaSel")) {
-		    i3GEO.janela.comboCabecalhoTemasBs("i3GEOFetiquetaComboCabeca","i3GEOFetiquetaComboCabecaSel","etiqueta","ligadosComTabela",function(evt){
-			var botao = evt.target;
-			if (botao) {
-			    if (botao.value != "") {
-				i3GEO.mapa.ativaTema(botao.value);
-				i3GEOF.etiqueta.tema = botao.value;
-				$i(iddiv).innerHTML = "";
-				i3GEOF.etiqueta.inicia(iddiv);
-			    } else {
-				//$i(iddiv).innerHTML = "";
-			    }
-			}
-		    });
-		}
-		i3GEOF.etiqueta.ativaFoco();
-	    }
-	    catch(erro){i3GEO.janela.tempoMsg(erro);}
 	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	 */
+	destroy: function(){
+	    //nao use this aqui
+	    //i3GEOF.legenda._parameters.mustache = "";
+	},
 	html:function() {
-	    var ins = Mustache.render(i3GEOF.etiqueta.MUSTACHE, i3GEOF.etiqueta.mustacheHash());
-	    return ins;
-	},
-	/*
-	Function: iniciaJanelaFlutuante
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    aplica: $trad("p14"),
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    });
 
-	Cria a janela flutuante para controle da ferramenta.
-	 */
-	iniciaJanelaFlutuante: function(){
-	    var minimiza,cabecalho,janela,divid,temp,titulo;
-	    if($i("i3GEOF.etiqueta")){
-		i3GEOF.etiqueta.inicia("i3GEOF.etiqueta_corpo");
-		return;
-	    }
-	    cabecalho = function(){
-		i3GEOF.etiqueta.ativaFoco();
-	    };
-	    minimiza = function(){
-		i3GEO.janela.minimiza("i3GEOF.etiqueta");
-	    };
-	    //cria a janela flutuante
-	    titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("d7at")+"</span></div>";
-	    janela = i3GEO.janela.cria(
-		    "600px",
-		    "400px",
-		    "",
-		    "",
-		    "",
-		    titulo,
-		    "i3GEOF.etiqueta",
-		    false,
-		    "hd",
-		    cabecalho,
-		    minimiza,
-		    "",
-		    true,
-		    "",
-		    "",
-		    "",
-		    "",
-		    "37"
+	    i3GEO.php.listaItensTema(
+		    i3GEOF.etiqueta.montaListaItens,
+		    p.tema
 	    );
-	    divid = janela[2].id;
-	    i3GEOF.etiqueta.aguarde = $i("i3GEOF.etiqueta_imagemCabecalho").style;
-	    $i("i3GEOF.etiqueta_corpo").style.backgroundColor = "white";
-	    i3GEOF.etiqueta.inicia(divid);
 	},
-	/*
-	Function: ativaFoco
-
-	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
-	 */
-	ativaFoco: function(){
-	    if(i3GEO.temaAtivo != ""){
-		i3GEO.php.listaItensTema(i3GEOF.etiqueta.montaListaItens,i3GEOF.etiqueta.tema);
-	    }
-	},
-	pegaDadosEtiquetas: function(funcao){
-	    var cp = new cpaint(),
-	    p;
-	    p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaDadosEtiquetas&tema="+i3GEOF.etiqueta.tema;
-	    cp.set_response_type("JSON");
-	    cp.call(p,"etiqueta",funcao);
-	},
-	/*
-	Function: montaListaItens
-
-	Monta a lista de itens que poder&atilde;o ser escolhidos para compor o mapa.
-
-	A lista &eacute; inserida no elemento html com id "i3GEOetiquetalistai"
-
-	@TODO verificar quando um item ja esta na lista e marca-lo no checkbox
-	 */
 	montaListaItens: function(retorno){
-	    var funcao = function(dadosItens){
-		var mustache = [], ins,i,n,itensatuais,item, ck = '',lista, temp;
-		lista = dadosItens.data;
-		try{
-		    itensatuais = i3GEO.arvoreDeCamadas.pegaTema(i3GEO.temaAtivo);
-		    itensatuais = itensatuais.etiquetas.split(",");
-		    n = retorno.data.valores.length;
-		    for (i=0;i<n; i++){
-			temp = {};
-			item = retorno.data.valores[i].item;
-			temp.item = item;
-			if(i3GEO.util.in_array(item,lista.itens) || i3GEO.util.in_array(item,itensatuais) || lista.itembuscarapida[item]){
-			    temp.ckIdentifica = "checked";
-			}
-			else{
-			    temp.ckIdentifica = "";
-			}
-			if(i3GEO.util.in_array(item,itensatuais)){
-			    temp.ckEtiquetaTip = "checked";
-			}
-			else{
-			    temp.ckEtiquetaTip = "";
-			}
-			//utfdata
-			if(lista.utfdata === item){
-			    temp.ckUtfdata = "checked";
-			}
-			else{
-			    temp.ckUtfdata = "";
-			}
-			//buscarapida
-			if(lista.itembuscarapida === item){
-			    temp.ckBuscaRapida = "checked";
-			}
-			else{
-			    temp.ckBuscaRapida = "";
-			}
-			if(lista.itensdesc[item]){
-			    temp.ckitensdesc = lista.itensdesc[item];
-			}
-			else{
-			    temp.ckitensdesc = item;
-			}
-			//links
-			if(lista.itenslink[item]){
-			    temp.ckitem = lista.itenslink[item];
-			}
-			else{
-			    temp.ckitem = "";
-			}
-			mustache.push(temp);
+	    var data = retorno.data;
+	    var funcao = function(lista){
+		var mustache = [], ins,i,n,itensatuais,item, ck = '',temp;
+		itensatuais = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.etiqueta._parameters.tema);
+		itensatuais = itensatuais.etiquetas.split(",");
+		n = data.valores.length;
+		for (i=0;i<n; i++){
+		    temp = {};
+		    item = data.valores[i].item;
+		    temp.item = item;
+		    if(i3GEO.util.in_array(item,lista.itens) || i3GEO.util.in_array(item,itensatuais) || lista.itembuscarapida[item]){
+			temp.ckIdentifica = "checked";
 		    }
-		    ins = Mustache.render(
-			    i3GEOF.etiqueta.MUSTACHELISTA,
-			    $.extend(
-				    {},
-				    {
-					"linhas" :  mustache,
-				    },
-				    i3GEOF.etiqueta.DICIONARIO
-			    )
-		    );
-		    $i("i3GEOetiquetalistai").innerHTML = ins;
-
-		    //enable
-		    lista = $i("i3GEOetiquetalistai").getElementsByTagName("input");
-		    n = lista.length;
-		    for (i=0;i<n; i++){
-			if(lista[i].name === "identifica"){
-			    i3GEOF.etiqueta.ativaLinha(lista[i]);
-			}
+		    else{
+			temp.ckIdentifica = "";
+		    }
+		    if(i3GEO.util.in_array(item,itensatuais)){
+			temp.ckEtiquetaTip = "checked";
+		    }
+		    else{
+			temp.ckEtiquetaTip = "";
+		    }
+		    //utfdata
+		    if(lista.utfdata === item){
+			temp.ckUtfdata = "checked";
+		    }
+		    else{
+			temp.ckUtfdata = "";
+		    }
+		    //buscarapida
+		    if(lista.itembuscarapida === item){
+			temp.ckBuscaRapida = "checked";
+		    }
+		    else{
+			temp.ckBuscaRapida = "";
+		    }
+		    if(lista.itensdesc[item]){
+			temp.ckitensdesc = lista.itensdesc[item];
+		    }
+		    else{
+			temp.ckitensdesc = item;
+		    }
+		    //links
+		    if(lista.itenslink[item]){
+			temp.ckitem = lista.itenslink[item];
+		    }
+		    else{
+			temp.ckitem = "";
+		    }
+		    mustache.push(temp);
+		}
+		ins = Mustache.render(
+			i3GEOF.etiqueta._parameters.mustachelista,
+			$.extend(
+				{},
+				{
+				    "linhas" :  mustache,
+				},
+				i3GEO.idioma.objetoIdioma(i3GEOF.etiqueta.dicionario)
+			)
+		);
+		$i("i3GEOetiquetalistai").innerHTML = ins;
+		//enable
+		lista = $i("i3GEOetiquetalistai").getElementsByTagName("input");
+		n = lista.length;
+		for (i=0;i<n; i++){
+		    if(lista[i].name === "identifica"){
+			i3GEOF.etiqueta.ativaLinha(lista[i]);
 		    }
 		}
-		catch(e)
-		{$i("i3GEOetiquetalistai").innerHTML = "<p style=color:red >Erro<br>"+e;}
 	    };
-	    i3GEOF.etiqueta.pegaDadosEtiquetas(funcao);
+	    i3GEOF.etiqueta.get({
+		snackbar: false,
+		fn: funcao,
+		btn: false,
+		par: {funcao: "pegaDadosEtiquetas"},
+		refresh: false
+	    });
+	},
+	get: function({snackbar = true, btn = false, par = {}, refresh = false, fn = false} = {}){
+	    var p = this._parameters,
+	    i3f = this;
+	    i3GEO.janela.abreAguarde();
+	    if(btn){
+		btn = $(btn);
+		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    }
+	    i3GEO.janela._formModal.block();
+	    par.g_sid = i3GEO.configura.sid;
+	    par.tema = p.tema;
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/" + p.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			if(snackbar){
+			    i3GEO.janela.snackBar({content: $trad('feito')});
+			}
+			if(refresh){
+			    i3GEO.Interface.atualizaTema("", i3GEOF.etiqueta._parameters.tema);
+			}
+			if(fn){
+			    fn(data);
+			}
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
 	},
 	ativaLinha: function(obj){
 	    var linha = obj.parentNode.parentNode,
@@ -283,11 +201,6 @@ i3GEOF.etiqueta = {
 		}
 	    }
 	},
-	/*
-	Function: pegaItensMarcados
-
-	Recupera os itens que foram marcados e monta uma lista para enviar como par&acirc;metro para a fun&ccedil;&atilde;o de gera&ccedil;&atilde;o dos gr&aacute;ficos
-	 */
 	pegaItensMarcados: function(){
 	    var tips = [],
 	    itens = [],
@@ -326,77 +239,40 @@ i3GEOF.etiqueta = {
 		if (el.checked === true && el.name == "utfdata"){
 		    utfdata = el.value;
 		}
-
-
 	    }
-
 	    return([tips,itens,itensdesc,itenslink,itembuscarapida,utfdata]);
 	},
-	/*
-	Function: ativa
-
-	Ativa a etiqueta com os itens marcados
-
-	Veja:
-
-	<ATIVAETIQUETAS>
-	 */
-	ativa: function(){
-	    try{
-		if(i3GEOF.etiqueta.aguarde.visibility === "visible")
-		{return;}
-		var lista = i3GEOF.etiqueta.pegaItensMarcados(),
-		cp = new cpaint(),
-		temp,
-		p;
-
-		i3GEOF.etiqueta.aguarde.visibility = "visible";
-		temp = function(retorno){
-		    i3GEOF.etiqueta.aguarde.visibility = "hidden";
-		    i3GEO.atualiza(retorno);
-		    i3GEO.php.listaItensTema(i3GEOF.etiqueta.montaListaItens,i3GEO.temaAtivo);
-		};
-		p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="
-		+ i3GEO.configura.sid
-		+ "&funcao=ativaEtiquetas&tema="
-		+ i3GEOF.etiqueta.tema
-		+ "&tips="+lista[0].toString(",")
-		+ "&itens="+lista[1].toString(",")
-		//+ "&itensdesc="+i3GEO.util.base64encode(lista[2].toString(","))
-		//+ "&itenslink="+i3GEO.util.base64encode(lista[3].toString(","))
-		+ "&itensdesc="+lista[2].toString(",")
-		+ "&itenslink="+lista[3].toString(",")
-		+ "&itembuscarapida="+lista[4]
-		+ "&utfdata="+lista[5];
-		cp.set_response_type("JSON");
-		cp.set_transfer_mode('POST');
-		cp.call(p,"etiqueta",temp);
-	    }catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}
+	ativa: function(btn){
+	    var lista = i3GEOF.etiqueta.pegaItensMarcados();
+	    var par = {
+		funcao: "ativaEtiquetas",
+		tips: lista[0].toString(","),
+		itens: lista[1].toString(","),
+		itensdesc: lista[2].toString(","),
+		itenslink: lista[3].toString(","),
+		itembuscarapida: lista[4],
+		utfdata: lista[5]
+	    };
+	    i3GEOF.etiqueta.get({
+		snackbar: false,
+		fn: false,
+		btn: btn,
+		par: par,
+		refresh: true
+	    });
 	},
-	/*
-	Function: desativa
-
-	Desativa as etiqueta do tema ativo
-
-	Veja:
-
-	<REMOVEETIQUETAS>
-	 */
-	desativa: function(){
-	    try{
-		if(i3GEOF.etiqueta.aguarde.visibility === "visible")
-		{return;}
-		var cp = new cpaint(),
-		temp,
-		p;
-		i3GEOF.etiqueta.aguarde.visibility = "visible";
-		temp = function(retorno){
-		    i3GEOF.etiqueta.aguarde.visibility = "hidden";
-		    i3GEO.atualiza(retorno);
-		};
-		p = i3GEO.configura.locaplic+"/ferramentas/etiqueta/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=removeEtiquetas&tema="+i3GEOF.etiqueta.tema;
-		cp.set_response_type("JSON");
-		cp.call(p,"etiqueta",temp);
-	    }catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.etiqueta.aguarde.visibility = "hidden";}
+	desativa: function(btn){
+	    i3GEOF.etiqueta.get({
+		snackbar: false,
+		fn: function(){
+		    i3GEO.php.listaItensTema(
+			    i3GEOF.etiqueta.montaListaItens,
+			    i3GEOF.etiqueta._parameters.tema
+		    );
+		},
+		btn: btn,
+		par: {funcao: "removeEtiquetas"},
+		refresh: true
+	    });
 	}
 };

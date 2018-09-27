@@ -1,12 +1,10 @@
-<div class='container-fluid' >
-    <button onclick="i3GEOF.etiqueta.ativa()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
-    <button onclick="i3GEOF.etiqueta.desativa()" class='btn btn-primary btn-sm btn-raised'>{{{desativaEtiquetas}}}</button>
-</div>
-<div class='container-fluid customScrollBarXY' style="height: calc(100% - 55px);">
-	<div  id='i3GEOFetiquetaComboCabeca' class='form-group condensed' style='width:100%'>
-
-	</div>
-	<!-- ver templateLista_mst.html -->
-	<div id='i3GEOetiquetalistai'></div>
-	<h5 class="alert alert-info">{{{selecionaItem}}}</h5>
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; height: calc(100% - 85px);'>
+    <div class='container-fluid'>
+    <div class="form-group condensed">
+        <button onclick="i3GEOF.etiqueta.ativa(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplica}}}</button>
+    </div>
+    </div>
+    <!-- ver templateLista_mst.html -->
+    <div id='i3GEOetiquetalistai' class='container-fluid ' style='margin-top: 20px;'></div>
+    <h5 class="alert alert-info">{{{selecionaItem}}}</h5>
 </div>
