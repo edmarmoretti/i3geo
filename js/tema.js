@@ -624,9 +624,8 @@ i3GEO.tema =
 	     *
 	     * {string} - codigo do tema
 	     *
-	     * {objeto} - propriedades (ver ferramentas/graficotema/index.js funcao iniciaJanelaFlutuante)
 	     */
-	    graficotema : function(idtema,propriedades) {
+	    graficotema : function(idtema) {
 		if(idtema && idtema != ""){
 		    var t = i3GEO.arvoreDeCamadas.pegaTema(idtema);
 		    if(t.status < 2){
@@ -634,14 +633,13 @@ i3GEO.tema =
 			return;
 		    }
 		}
-		i3GEO.mapa.ativaTema(idtema);
 		var temp = function(){
-		    i3GEOF.graficoTema.iniciaJanelaFlutuante(propriedades);
+		    i3GEOF.graficoTema.start(idtema);
 		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.graficotema()",
 			"graficotema",
-			"graficoTema",
+			"graficotema",
 			"dependencias.php",
 			temp);
 	    },

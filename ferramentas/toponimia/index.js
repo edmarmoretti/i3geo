@@ -80,9 +80,6 @@ i3GEOF.toponimia = {
 	    i3GEO.util.comboFontes("fonte","i3GEOtoponimiaDivListaFonte","form-control");
 	    i3GEO.util.aplicaAquarela(p.idContainer);
 	},
-	corj: function(obj){
-	    i3GEO.util.abreCor("",obj);
-	},
 	getFormData: function(){
 	    var data = {
 		    ...i3GEO.util.getFormData("#i3GEOtoponimiaguia1obj form"),

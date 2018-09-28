@@ -1155,6 +1155,7 @@ lista - lista de item e cores de cada parte do grafico
 			$novolayer->set("name",$this->layer->name);
 			$novolayer->setmetadata("tema",$this->layer->getmetadata("tema"));
 		}
+		return true;
 	}
 /*
 function: fonteTema
