@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.gradeDePoligonos.dicionario)+
-i3GEOF.gradeDePoligonos.dicionario = {
+i3GEOF.gradepol.dicionario = {
 	'ajuda' : [ {
 		pt : "A grade &eacute; formada por pol&iacute;gonos espa&ccedil;ados conforme os par&acirc;metros de dx e dy.",
 		en : "A grid is made up of polygons spaced according to dx and dy parameters.",
@@ -36,7 +36,7 @@ i3GEOF.gradeDePoligonos.dicionario = {
 		es : "Segundo"
 	} ],
 	'coord' : [ {
-		pt : "Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). <b>Voc&ecirc; pode clicar no mapa para pegar o ponto.</b>",
+		pt : "Coordenadas do ponto inicial superior esquerdo (utilize o sinal negativo no grau quando ao sul do equador e a oeste). Voc&ecirc; pode clicar no mapa para pegar o ponto.",
 		en : "Coordinates of the upper left starting point (degree values must have a negative sign when the point is located at south of the equator and/or at west of the Greenwich meridian). <b>You can click on the map to fetch the point.</b>",
 		es : "Coordenadas del punto inicial superior izquierdo (utilice el signo negativo en el grado cuando se encuentre al sur del ecuador y/o al oeste del meridano de Greenwich). <b>Usted puede hacer clic en el mapa para tomar el punto.</b>"
 	} ],

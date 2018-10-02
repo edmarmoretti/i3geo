@@ -639,6 +639,11 @@ i3GEO.janela =
 	 * {segundos}
 	 */
 	tempoMsg : function(texto, tempo) {
+	    if(!tempo){
+		tempo = 4000;
+	    }
+	    i3GEO.janela.snackBar({content: texto, timeout: tempo});
+	    /*
 	    if(!i3GEO.janela.tempoModal){
 		i3GEO.janela.tempoModal = $(
 			Mustache.render(i3GEO.template.janela.msg, {"texto": texto})
@@ -653,6 +658,7 @@ i3GEO.janela =
 	    setTimeout(function() {
 		i3GEO.janela.tempoModal.modal("hide");
 	    }, tempo);
+	    */
 	},
 	closeModal: false,
 	//utilizado para mensagens genericas com botao de close
@@ -729,6 +735,8 @@ i3GEO.janela =
 		}
 		if(footer){
 		    $("#i3GEOToolFormModalFooter").html(footer);
+		} else {
+		    $("#i3GEOToolFormModalFooter").html("");
 		}
 		i3GEO.janela._formModal.find(".modal-content").css("height","");
 

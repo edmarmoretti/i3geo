@@ -98,17 +98,17 @@ i3GEO.listaDeFerramentas = {
 					{
 					    id : "omenudataAnalise2",
 					    text : $trad("u7"),
-					    url : "javascript:i3GEO.analise.dialogo.gradePol()"
+					    url : "javascript:i3GEO.analise.dialogo.gradepol()"
 					},
 					{
 					    id : "omenudataAnalise3",
 					    text : $trad("u8"),
-					    url : "javascript:i3GEO.analise.dialogo.gradePontos()"
+					    url : "javascript:i3GEO.analise.dialogo.gradepontos()"
 					},
 					{
 					    id : "omenudataAnalise4",
 					    text : $trad("u9"),
-					    url : "javascript:i3GEO.analise.dialogo.gradeHex()"
+					    url : "javascript:i3GEO.analise.dialogo.gradehex()"
 					}
 					]
 				    ]

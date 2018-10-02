@@ -262,13 +262,13 @@ i3GEO.analise =
 	     *
 	     * Ferramenta grade de pontos
 	     */
-	    gradePontos : function() {
+	    gradepontos : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.analise.dialogo.gradePontos()",
+			"i3GEO.analise.dialogo.gradepontos()",
 			"gradepontos",
-			"gradeDePontos",
+			"gradepontos",
 			"dependencias.php",
-			"i3GEOF.gradeDePontos.iniciaJanelaFlutuante()"
+			"i3GEOF.gradepontos.start()"
 		);
 	    },
 	    /**
@@ -276,13 +276,13 @@ i3GEO.analise =
 	     *
 	     * Ferramenta grade de pol&iacute;gonos
 	     */
-	    gradePol : function() {
+	    gradepol : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.analise.dialogo.gradePol()",
+			"i3GEO.analise.dialogo.gradepol()",
 			"gradepol",
-			"gradeDePoligonos",
+			"gradepol",
 			"dependencias.php",
-			"i3GEOF.gradeDePoligonos.iniciaJanelaFlutuante()"
+			"i3GEOF.gradepol.start()"
 		);
 	    },
 	    /**
@@ -290,13 +290,13 @@ i3GEO.analise =
 	     *
 	     * Ferramenta grade de hex&aacute;gonos
 	     */
-	    gradeHex : function() {
+	    gradehex : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.analise.dialogo.gradeHex()",
+			"i3GEO.analise.dialogo.gradehex()",
 			"gradehex",
-			"gradeDeHex",
+			"gradehex",
 			"dependencias.php",
-			"i3GEOF.gradeDeHex.iniciaJanelaFlutuante()"
+			"i3GEOF.gradehex.start()"
 		);
 	    },
 	    /**

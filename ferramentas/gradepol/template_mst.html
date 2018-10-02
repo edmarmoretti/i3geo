@@ -1,16 +1,18 @@
-<div class='container-fluid'>
-	<div id='i3GEOgradedepoligonosresultado'></div>
-	<div id='i3GEOgradedepoligonosfim'></div>
+<div id='{{idContainer}}' class='container' style='text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEOgradepolresultado'></div>
+        <div id='i3GEOgradepolfim'></div>
+    </div>
 </div>
 <!-- telas do ajudante -->
-<script id="i3GEOgradedepoligonosT0" type="x-tmpl-mustache">
-	<img class="img-rounded pull-left" style="margin: 5px;" src='{{{locaplic}}}/ferramentas/gradepol/exemplo.png' />
+<script id="i3GEOgradepolT0" type="x-tmpl-mustache">
+	<img class="img-rounded" style="margin: 5px;" src='{{{locaplic}}}/ferramentas/gradepol/exemplo.png' />
 	<h5>{{{ajuda}}}</h5>
 	<h5>{{{ajuda2}}}</h5>
 	<h5>{{{ajuda3}}}</h5>
 	<div class="checkbox text-left">
 		<label>
-			<input id='i3GEOgradedepoligonosProj' type="checkbox">
+			<input id='i3GEOgradepolProj' type="checkbox">
 			<span class="checkbox-material noprint">
 				<span class="check"></span>
 			</span>
@@ -18,60 +20,116 @@
 		</label>
 	</div>
 </script>
-<script id="i3GEOgradedepoligonosT1a" type="x-tmpl-mustache">
-	<h5>{{{distancia}}}</h5>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOgradedepoligonosxg">{{{metros}}} X</label>
-		<input class="form-control input-lg" type='text' id='i3GEOgradedepoligonosxg' value='100000' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOgradedepoligonosyg">{{{metros}}} Y</label>
-		<input class="form-control input-lg" type='text' id='i3GEOgradedepoligonosyg' value='100000' />
-	</div>
+<script id="i3GEOgradepolT1a" type="x-tmpl-mustache">
+<h3 class="header">{{{distancia}}}</h3>
+<div class='row'>
+    <div class="col-md-6">
+        <h4>X (longitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolxg" class="control-label">{{{metros}}}</label>
+            <input class="form-control" type='text' id='i3GEOgradepolxg' value='100000' />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Y (latitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolyg" class="control-label">{{{metros}}}</label>
+            <input class="form-control" type='text' id='i3GEOgradepolyg' value='100000' />
+        </div>
+    </div>
+</div>
 </script>
-<script id="i3GEOgradedepoligonosT1b" type="x-tmpl-mustache">
-	<h5>{{{distancia}}} {{{grau}}} - {{{minuto}}} - {{{segundo}}}</h5>
-	<h5>X</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosxg' value='1' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosxm' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosxs' value='00.00' title='segundo' />
-	</div>
-	<h5>Y</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosyg' value='1' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosym' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosys' value='00.00' title='segundo' />
-	</div>
+<script id="i3GEOgradepolT1b" type="x-tmpl-mustache">
+<h3 class="header">{{{distancia}}}</h3>
+<div class='row'>
+    <div class="col-md-6">
+        <h4>X (longitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolxg" class="control-label">{{{grau}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolxg' value='1' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolxm" class="control-label">{{{minuto}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolxm' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolxs" class="control-label">{{{segundo}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolxs' value='00.00' />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Y (latitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolyg" class="control-label">{{{grau}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolyg' value='1' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolym" class="control-label">{{{minuto}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolym' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolys" class="control-label">{{{segundo}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolys' value='00.00' />
+        </div>
+    </div>
+</div>
 </script>
-<script id="i3GEOgradedepoligonosT2" type="x-tmpl-mustache">
-	<h5>{{{coord}}} {{{grau}}} - {{{minuto}}} - {{{segundo}}}</h5>
-
-	<h5>X</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosixg' value='00' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosixm' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosixs' value='00.00' title='segundo' />
-	</div>
-	<h5>Y</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosiyg' value='00' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosiym' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOgradedepoligonosiys' value='00.00' title='segundo' />
-	</div>
+<script id="i3GEOgradepolT2" type="x-tmpl-mustache">
+<h3 class="header">{{{coord}}}</h3>
+<div class='row'>
+    <div class="col-md-6">
+        <h4>X (longitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolixg" class="control-label">{{{grau}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolixg' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolixm" class="control-label">{{{minuto}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolixm' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolixs" class="control-label">{{{segundo}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepolixs' value='00.00' />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Y (latitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepoliyg" class="control-label">{{{grau}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepoliyg' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepoliym" class="control-label">{{{minuto}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepoliym' value='00' />
+        </div>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepoliys" class="control-label">{{{segundo}}}</label>
+            <input class="form-control" style="height:auto;" type='text' id='i3GEOgradepoliys' value='00.00' />
+        </div>
+    </div>
+</div>
 </script>
-<script id="i3GEOgradedepoligonosT3" type="x-tmpl-mustache">
-	<h5>{{{numero}}}</h5>
-
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="">X</label>
-		<input class="form-control input-lg" type='text' id='i3GEOgradedepoligonosnptx' value='10' />
-	</div>
-	<div class='form-group label-fixed condensed' >
-		<label class="control-label" for="">Y</label>
-		<input class="form-control input-lg" type='text' id='i3GEOgradedepoligonosnpty' value='10' />
-	</div>
+<script id="i3GEOgradepolT3" type="x-tmpl-mustache">
+<h3 class="header">{{{numero}}}</h3>
+<div class='row'>
+    <div class="col-md-6">
+        <h4>X (longitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolnptx" class="control-label">{{{metros}}}</label>
+            <input class="form-control" type='text' id='i3GEOgradepolnptx' value='10' />
+        </div>
+    </div>
+    <div class="col-md-6">
+        <h4>Y (latitude)</h4>
+        <div class="form-group label-static">
+            <label for="i3GEOgradepolnpty" class="control-label">{{{metros}}}</label>
+            <input class="form-control" type='text' id='i3GEOgradepolnpty' value='10' />
+        </div>
+    </div>
+</div>
 </script>
-<script id="i3GEOgradedepoligonosT4" type="x-tmpl-mustache">
-	<button onclick="i3GEOF.gradeDePoligonos.criaGrade()" class='btn btn-primary btn-sm btn-raised'>{{{criaGrade}}}</button>
+<script id="i3GEOgradepolT4" type="x-tmpl-mustache">
+<div class='text-center' >
+<button onclick="i3GEOF.gradepol.get(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criaGrade}}}</button>
+</div>
 </script>

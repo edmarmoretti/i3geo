@@ -3175,5 +3175,19 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "anterior" : [
+            {
+                pt : "Anterior",
+                en : "",
+                es : ""
+            }
+        ],
+        "proximo" : [
+            {
+                pt : "Pr&oacute;ximo",
+                en : "",
+                es : ""
+            }
         ]
     };

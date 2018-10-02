@@ -1913,7 +1913,7 @@ class Analise {
 		$ext = ms_newRectObj ();
 		$ext->setextent ( $r->minx, $r->miny, $r->maxx, $r->maxy );
 		if ($proj == true) {
-			// caso precise projetar
+
 			$projInObj = ms_newprojectionobj ( "proj=latlong,a=6378137,b=6378137" );
 			$projOutObj = ms_newprojectionobj ( "proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m" );
 
@@ -2017,11 +2017,11 @@ class Analise {
 		$novolayer->set ( "data", $nomeshp . ".shp" );
 		$novolayer->setmetadata ( "DOWNLOAD", "SIM" );
 		$novolayer->setmetadata ( "TEMALOCAL", "SIM" );
-		$novolayer->set ( "opacity", "50" );
+		$novolayer->set ( "opacity", 50 );
 		if (file_exists ( $this->qyfile )) {
 			unlink ( $this->qyfile );
 		}
-		return ("ok");
+		return true;
 	}
 	/*
 	 * function: gradeDeHex
@@ -2198,11 +2198,11 @@ class Analise {
 		$novolayer->set ( "data", $nomeshp . ".shp" );
 		$novolayer->setmetadata ( "DOWNLOAD", "SIM" );
 		$novolayer->setmetadata ( "TEMALOCAL", "SIM" );
-		$novolayer->set ( "opacity", "50" );
+		$novolayer->set ( "opacity", 50 );
 		if (file_exists ( $this->qyfile )) {
 			unlink ( $this->qyfile );
 		}
-		return ("ok");
+		return (true);
 	}
 	/*
 	 * function: nptPol
@@ -2323,11 +2323,11 @@ class Analise {
 		$novolayer->set ( "data", $nomeshp . ".shp" );
 		$novolayer->setmetadata ( "DOWNLOAD", "SIM" );
 		$novolayer->setmetadata ( "TEMALOCAL", "SIM" );
-		$novolayer->set ( "opacity", "80" );
+		$novolayer->set ( "opacity", 80 );
 		if (file_exists ( $this->qyfile )) {
 			unlink ( $this->qyfile );
 		}
-		return ("ok");
+		return (true);
 	}
 	/*
 	 * Function: agrupaElementos

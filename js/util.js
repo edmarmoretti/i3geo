@@ -2202,16 +2202,16 @@ i3GEO.util =
 	    if(c && c.style){
 		//c.style.backgroundColor = "white";
 	    }
-	    botoes = "<ul class='proximoAnterior pager condensed' style='width:95%;margin-bottom: 2px;'>";
+	    botoes = "<ul class='proximoAnterior pager condensed'>";
 	    if (anterior !== "") {
 		anterior = anterior.replace("()","");
 		botoes +=
-		    "<li><a onclick='" + anterior + "()' class='pull-left withripple condensed' href='javascript:void(0)'>" + $trad("volta") + "</a></li>";
+		    "<li><a onclick='" + anterior + "()' class='withripple condensed' href='javascript:void(0)'><i class='material-icons'>navigate_before</i> " + $trad("anterior") + "</a></li>";
 	    }
 	    if (proxima !== "") {
 		proxima = proxima.replace("()","");
 		botoes +=
-		    "<li><a onclick='" + proxima + "()' class='pull-right withripple condensed' href='javascript:void(0)'>" + $trad("continua") + "</a></li>";
+		    "<li><a onclick='" + proxima + "()' class='withripple condensed' href='javascript:void(0)'>" + $trad("proximo") + " <i class='material-icons'>navigate_next</i></a></li>";
 	    }
 	    botoes += "</ul>";
 	    if (onde) {
