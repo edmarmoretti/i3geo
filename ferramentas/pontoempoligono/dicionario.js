@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.pontoEmPoligono.dicionario)+
-i3GEOF.pontoEmPoligono.dicionario = {
+i3GEOF.pontoempoligono.dicionario = {
 	'ajuda' : [ {
 		pt : "Ponto em pol&iacute;gono &eacute; uma opera&ccedil;&atilde;o que resulta em um novo tema contendo o cruzamento entre um tema com pontos e outros com pol&iacute;gonos ou raster.",
 		en : "Point in polygon is an operation that results in a new theme that contains the intersection between a point-based theme and polygon-based themes or raster.",
@@ -45,9 +45,9 @@ i3GEOF.pontoEmPoligono.dicionario = {
 		en : "Columns",
 		es : "Columnas"
 	} ],
-	10 : [ {
-		pt : "",
-		en : "",
-		es : ""
+	'calcula' : [ {
+		pt : "Calcular",
+		en : "Calculate",
+		es : "Calcular"
 	} ]
 };

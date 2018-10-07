@@ -334,9 +334,9 @@ i3GEO.analise =
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.analise.dialogo.pontoempoligono()",
 			"pontoempoligono",
-			"pontoEmPoligono",
+			"pontoempoligono",
 			"dependencias.php",
-		"i3GEOF.pontoEmPoligono.iniciaJanelaFlutuante()");
+		"i3GEOF.pontoempoligono.start()");
 	    },
 	    /**
 	     * Function: centromassa
@@ -356,13 +356,13 @@ i3GEO.analise =
 	     *
 	     * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
 	     */
-	    nptPol : function() {
+	    nptpol : function() {
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.analise.dialogo.nptpol()",
 			"nptpol",
 			"nptpol",
 			"dependencias.php",
-		"i3GEOF.nptpol.iniciaJanelaFlutuante()");
+		"i3GEOF.nptpol.start()");
 	    },
 	    /**
 	     * Function: buffer
@@ -388,7 +388,7 @@ i3GEO.analise =
 			"distanciaptpt",
 			"distanciaptpt",
 			"dependencias.php",
-		"i3GEOF.distanciaptpt.iniciaJanelaFlutuante()");
+		"i3GEOF.distanciaptpt.start()");
 	    },
 	    /**
 	     * Function: centroide

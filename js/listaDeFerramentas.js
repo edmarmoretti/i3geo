@@ -129,7 +129,7 @@ i3GEO.listaDeFerramentas = {
 					{
 					    id : "omenudataAnalise7",
 					    text : $trad("u12"),
-					    url : "javascript:i3GEO.analise.dialogo.nptPol()"
+					    url : "javascript:i3GEO.analise.dialogo.nptpol()"
 					},
 					{
 					    id : "omenudataAnalise8",

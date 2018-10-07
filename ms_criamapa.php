@@ -1080,9 +1080,9 @@ function insereWKTUrl()
     }
     if ($shape->type == 1) {
         if (! isset($simbolo))
-            $estilo->set("symbolname", "linha");
+            //$estilo->set("symbolname", "linha");
         if (! isset($tamanhosimbolo))
-            $estilo->set("size", 3);
+            $estilo->set("width", 3);
     }
     if ($shape->type == 2) {
         $layer->set("opacity", "50");

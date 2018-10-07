@@ -1064,16 +1064,19 @@ class Alteraclasse
         for ($i = 0; $i < $numclasses; ++ $i) {
             $classe = $this->layer->getclass($i);
             $estilo = $classe->getstyle(0);
-            $estilo->set("size", ($i + $size));
+
             if ($estilo->symbolname == "") {
                 if ($this->layer->type == MS_LAYER_LINE) {
-                    $estilo->set("symbolname", "linha");
+                    //$estilo->set("symbolname", "linha");
+                    $estilo->set("width", ($i + $size));
                 }
                 if ($this->layer->type == MS_LAYER_POINT) {
                     $estilo->set("symbolname", "ponto");
+                    $estilo->set("size", ($i + $size));
                 }
                 if ($this->layer->type == MS_LAYER_POLYGON) {
                     $estilo->set("symbolname", "p4");
+                    $estilo->set("size", ($i + $size));
                 }
             }
         }

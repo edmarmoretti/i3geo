@@ -600,7 +600,7 @@ i3GEO.arvoreDeCamadas =
 	},
 	montaOpcoesTema : function(temaObj,camada) {
 	    if (typeof (console) !== 'undefined')
-		     console.info("montaOpcoesTema " + camada.name);
+		console.info("montaOpcoesTema " + camada.name);
 
 	    //A inclusao das opcoes e feita com base no template usado na interface
 	    //a classe hidden permite esconder o icone
@@ -684,7 +684,7 @@ i3GEO.arvoreDeCamadas =
 	},
 	montaParametrosTema: function(temaObj,camada) {
 	    if (typeof (console) !== 'undefined')
-		     console.info("arvoreDeCamadas montaParametrosTema");
+		console.info("arvoreDeCamadas montaParametrosTema");
 
 	    if(temaObj.ferramentas){
 		var html = "", fer="", fers = temaObj.ferramentas;
@@ -699,7 +699,7 @@ i3GEO.arvoreDeCamadas =
 	},
 	montaIconesTema : function(temaObj,camada) {
 	    if (typeof (console) !== 'undefined')
-		     console.info("arvoreDeCamadas montaIconesTema");
+		console.info("arvoreDeCamadas montaIconesTema");
 	    //A inclusao dos icones e feita com base no template usado na interface
 	    //a classe hidden permite esconder o icone
 	    //

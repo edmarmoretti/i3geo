@@ -1,33 +1,17 @@
 <?php
-include_once(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-//
-//faz a busca da fun&ccedil;&atilde;o que deve ser executada
-//
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
-switch (strtoupper($funcao))
+include (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
+include (dirname(__FILE__) . "/../../classesphp/classe_analise.php");
+$m = new Analise($_SESSION["map_file"],$_GET["temaorigem"],$_SESSION["locaplic"]);
+switch (strtoupper($_GET["funcao"]))
 {
-/*
-Valor: DISTANCIAPTPT
-
-Calcula a distancia entre um ponto de origem e os pontos em um tema.
-
-S&atilde;o considerados apenas os pontos próximos definidos por um buffer.
-
-<Analise->distanciaptpt>
-*/
-	case "DISTANCIAPTPT":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
-		copiaSeguranca($map_file);
-		$m = new Analise($map_file,$_GET["temaorigem"],$locaplic,$ext);
-		$temaoverlay = $m->criaBuffer($_GET["distancia"],$locaplic);
-		$retorno = $m->distanciaptpt($_GET["temaorigem"],$_GET["temadestino"],$temaoverlay,$locaplic,$_GET["itemorigem"],$_GET["itemdestino"]);
-		$m->salva();
-		$_SESSION["contadorsalva"]++;
-	break;
+    case "DISTANCIAPTPT":
+        $temaoverlay = $m->criaBuffer($_GET["distancia"],$_SESSION["locaplic"]);
+        $retorno = $m->distanciaptpt($_GET["temaorigem"],$_GET["temadestino"],$temaoverlay,$_SESSION["locaplic"],$_GET["itemorigem"],$_GET["itemdestino"]);
+        $m->salva();
+    break;
 }
-if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-	restauraCon($map_file,$postgis_mapa);
-}
-cpjson($retorno);
+ob_clean();
+header("Content-type: application/json");
+echo json_encode(true);
 ?>

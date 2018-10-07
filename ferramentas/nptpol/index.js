@@ -1,191 +1,108 @@
-/*
-Title: N&uacute;mero de pontos em pol&iacute;gonos
-
-Calcula quantos pontos existem em cada pol&iacute;gono cruzando dois temas.
-
-Veja:
-
-<i3GEO.analise.nptPol>
-
-Arquivo:
-
-i3geo/ferramentas/nptpol/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
-if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
-}
-/*
-Classe: i3GEOF.nptpol
-*/
 i3GEOF.nptpol = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
-	aguarde: "",
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.nptpol.dicionario);
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		return dicionario;
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "tema": "",
+	    "mustache": "",
+	    "idContainer": "i3GEOnptpolContainer",
+	    "namespace": "nptpol"
 	},
-	/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		if(i3GEOF.nptpol.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/nptpol/template_mst.html", function(template) {
-				i3GEOF.nptpol.MUSTACHE = template;
-				i3GEOF.nptpol.inicia(iddiv);
-			});
-			return;
-		}
-			$i(iddiv).innerHTML = i3GEOF.nptpol.html();
-			i3GEOF.nptpol.t0();
+	start : function(tema){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    p.tema = tema;
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
 	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	*/
+	destroy: function(){
+	    //nao use this aqui
+	    //i3GEOF.legenda._parameters.mustache = "";
+	},
 	html:function() {
-		var ins = Mustache.render(i3GEOF.nptpol.MUSTACHE, i3GEOF.nptpol.mustacheHash());
-		return ins;
-	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
-		if ($i("i3GEOF.nptpol")) {
-			return;
-		}
-		//cria a janela flutuante
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u12") + "</span></div>";
-		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.nptpol",200);
-		};
-		janela = i3GEO.janela.cria(
-			"420px",
-			"280px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.nptpol",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			false,
-			"",
-			"",
-			"",
-			"",
-			"19"
-		);
-		divid = janela[2].id;
-		janela[0].setFooter("<div id=i3GEOF.nptpol_rodape class='i3GeoRodapeJanela' ></div>");
-		i3GEOF.nptpol.aguarde = $i("i3GEOF.nptpol_imagemCabecalho").style;
-		i3GEOF.nptpol.inicia(divid);
-		temp = function(){
-			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.nptpol.t0()"]);
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.nptpol.t0()"]);
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    });
+	    i3GEO.eventos.cliquePerm.ativa();
+	    i3GEOF.nptpol.t0();
 	},
 	t0: function()
 	{
-		i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()","","i3GEOFgradeDePontost0","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
+	    i3GEO.util.proximoAnterior("","i3GEOF.nptpol.t1()","","i3GEOFnptpolt0","i3GEOnptpolresultado",true,"i3GEOToolFormModalFooter");
 	},
 	t1: function(){
-		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()","","i3GEOF.nptpol.t1","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
-		i3GEOF.nptpol.comboTemasPontos();
-		i3GEOF.nptpol.comboTemasPoligonos();
+	    i3GEO.util.proximoAnterior("i3GEOF.nptpol.t0()","i3GEOF.nptpol.t2()","","i3GEOF.nptpol.t1","i3GEOnptpolresultado",true,"i3GEOToolFormModalFooter");
+	    i3GEOF.nptpol.comboTemasPontos();
+	    i3GEOF.nptpol.comboTemasPoligonos();
 	},
 	t2: function(){
-		i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","","","i3GEOF.nptpol.t2","i3GEOnptpolresultado",true,"i3GEOF.nptpol_rodape");
+	    i3GEO.util.proximoAnterior("i3GEOF.nptpol.t1()","","","i3GEOF.nptpol.t2","i3GEOnptpolresultado",true,"i3GEOToolFormModalFooter");
 	},
-	/*
-	Function: calcula
-
-	Faz o cruzamento entre os temas
-
-	Veja:
-
-	<NPTPOL>
-	*/
-	calcula: function(){
-		try{
-			if(i3GEOF.nptpol.aguarde.visibility === "visible")
-			{return;}
-			i3GEOF.nptpol.aguarde.visibility = "visible";
-			var p,
-				cp,
-				somaritem = $i("i3GEOnptpoltemasItem").value,
-				fim = function(retorno){
-					if (retorno.data==undefined )
-					{$i("i3GEOnptpolfim").innerHTML = "<p class='paragrafo' >Erro";}
-					else
-					{i3GEO.atualiza();}
-					i3GEOF.nptpol.aguarde.visibility = "hidden";
-				},
-				ext;
-			if(i3GEO.Interface.ATUAL === "googlemaps")
-			{ext = i3GEO.Interface.googlemaps.bbox();}
-			else
-			{ext = i3GEO.parametros.mapexten;}
-			ext = i3GEO.util.extOSM2Geo(ext);
-			p = i3GEO.configura.locaplic+"/ferramentas/nptpol/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=nptPol&temaPt="+$i("i3GEOnptpolPontos").value+"&temaPo="+$i("i3GEOnptpolPoligonos").value+"&ext="+ext;
-			p += "&somaritem="+somaritem;
-			cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"nptpol",fim);
-		}
-		catch(e){$i("i3GEOnptpolfim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.nptpol.aguarde.visibility = "hidden";}
+	get: function(btn){
+	    var par = {
+		    g_sid: i3GEO.configura.sid,
+		    proj: false,
+		    funcao: "nptPol",
+		    temaPt: $i("i3GEOnptpolPontos").value,
+		    temaPo: $i("i3GEOnptpolPoligonos").value,
+		    somaritem: $i("i3GEOnptpoltemasItem").value,
+		    ext: i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten)
+	    };
+	    i3GEO.janela.abreAguarde();
+	    btn = $(btn);
+	    btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    i3GEO.janela._formModal.block();
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/nptpol/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			i3GEO.janela.snackBar({content: $trad('feito')});
+			i3GEO.atualiza();
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
 	},
 	/*
 	Function: comboTemasPontos
@@ -195,36 +112,36 @@ i3GEOF.nptpol = {
 	Veja:
 
 	<i3GEO.util.comboTemas>
-	*/
+	 */
 	comboTemasPontos: function(){
-		i3GEO.util.comboTemas(
-			"i3GEOnptpolPontos",
-			function(retorno){
-				$i("i3GEOnptpolDivPontos").innerHTML = retorno.dados;
-				$i("i3GEOnptpolDivPontos").style.display = "block";
-				if ($i("i3GEOnptpolPontos")){
-					$i("i3GEOnptpolPontos").onchange = function(){
-						var v = $i("i3GEOnptpolPontos").value;
-						i3GEO.mapa.ativaTema(v);
-						if(v != ""){
-							i3GEOF.nptpol.comboItens();
-						}
-					};
+	    i3GEO.util.comboTemas(
+		    "i3GEOnptpolPontos",
+		    function(retorno){
+			$i("i3GEOnptpolDivPontos").innerHTML = retorno.dados;
+			$i("i3GEOnptpolDivPontos").style.display = "block";
+			if ($i("i3GEOnptpolPontos")){
+			    $i("i3GEOnptpolPontos").onchange = function(){
+				var v = $i("i3GEOnptpolPontos").value;
+				i3GEO.mapa.ativaTema(v);
+				if(v != ""){
+				    i3GEOF.nptpol.comboItens();
 				}
-				if(i3GEO.temaAtivo !== ""){
-					$i("i3GEOnptpolPontos").value = i3GEO.temaAtivo;
-					i3GEOF.nptpol.comboItens();
-				}
-			},
-			"i3GEOnptpolDivPontos",
-			"",
-			false,
-			"pontos",
-			" ",
-			false,
-			true,
-			"form-control comboTema"
-		);
+			    };
+			}
+			if(i3GEO.temaAtivo !== ""){
+			    $i("i3GEOnptpolPontos").value = i3GEO.temaAtivo;
+			    i3GEOF.nptpol.comboItens();
+			}
+		    },
+		    "i3GEOnptpolDivPontos",
+		    "",
+		    false,
+		    "pontos",
+		    " ",
+		    false,
+		    true,
+		    "form-control comboTema"
+	    );
 	},
 	/*
 	Function: comboTemasPoligonos
@@ -234,31 +151,31 @@ i3GEOF.nptpol = {
 	Veja:
 
 	<i3GEO.util.comboTemas>
-	*/
+	 */
 	comboTemasPoligonos: function(){
-		i3GEO.util.comboTemas(
-			"i3GEOnptpolPoligonos",
-			function(retorno){
-				$i("i3GEOnptpolDivPoligonos").innerHTML = retorno.dados;
-				$i("i3GEOnptpolDivPoligonos").style.display = "block";
-				if ($i("i3GEOnptpolPoligonos")){
-					$i("i3GEOnptpolPoligonos").onchange = function(){
-						i3GEO.mapa.ativaTema($i("i3GEOnptpolPoligonos").value);
-					};
-				}
-				if(i3GEO.temaAtivo !== ""){
-					$i("i3GEOnptpolPoligonos").value = i3GEO.temaAtivo;
-				}
-			},
-			"i3GEOnptpolDivPoligonos",
-			"",
-			false,
-			"poligonos",
-			" ",
-			false,
-			true,
-			"form-control comboTema"
-		);
+	    i3GEO.util.comboTemas(
+		    "i3GEOnptpolPoligonos",
+		    function(retorno){
+			$i("i3GEOnptpolDivPoligonos").innerHTML = retorno.dados;
+			$i("i3GEOnptpolDivPoligonos").style.display = "block";
+			if ($i("i3GEOnptpolPoligonos")){
+			    $i("i3GEOnptpolPoligonos").onchange = function(){
+				i3GEO.mapa.ativaTema($i("i3GEOnptpolPoligonos").value);
+			    };
+			}
+			if(i3GEO.temaAtivo !== ""){
+			    $i("i3GEOnptpolPoligonos").value = i3GEO.temaAtivo;
+			}
+		    },
+		    "i3GEOnptpolDivPoligonos",
+		    "",
+		    false,
+		    "poligonos",
+		    " ",
+		    false,
+		    true,
+		    "form-control comboTema"
+	    );
 	},
 	/*
 	Function: comboItens
@@ -269,26 +186,26 @@ i3GEOF.nptpol = {
 
 	<i3GEO.util.comboItens>
 
-	*/
+	 */
 	comboItens: function(){
-		var tema = $i("i3GEOnptpolPontos").value;
-		if(tema != ""){
-			i3GEO.util.comboItens(
-				"i3GEOnptpoltemasItem",
-				tema,
-				function(retorno){
-					$i("i3GEOnptpolondeItens").innerHTML = retorno.dados;
-					$i("i3GEOnptpolondeItens").style.display = "block";
-				},
-				"i3GEOnptpolondeItens",
-				"",
-				"",
-				"",
-				"form-control comboTema"
-			);
-		}
-		else{
-			$i("i3GEOnptpolondeItens").innerHTML = "-";
-		}
+	    var tema = $i("i3GEOnptpolPontos").value;
+	    if(tema != ""){
+		i3GEO.util.comboItens(
+			"i3GEOnptpoltemasItem",
+			tema,
+			function(retorno){
+			    $i("i3GEOnptpolondeItens").innerHTML = retorno.dados;
+			    $i("i3GEOnptpolondeItens").style.display = "block";
+			},
+			"i3GEOnptpolondeItens",
+			"",
+			"",
+			"",
+			"form-control comboTema"
+		);
+	    }
+	    else{
+		$i("i3GEOnptpolondeItens").innerHTML = "-";
+	    }
 	}
 };

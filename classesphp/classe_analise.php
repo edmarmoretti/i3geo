@@ -835,8 +835,8 @@ class Analise {
 			$novolayer->set ( "template", "none.htm" );
 			$classe = $novolayer->getclass ( 0 );
 			$estilo = $classe->getstyle ( 0 );
-			$estilo->set ( "symbolname", "linha" );
-			$estilo->set ( "size", 2 );
+			//$estilo->set ( "symbolname", "linha" );
+			$estilo->set ( "width", 2 );
 			$cor = $estilo->color;
 			$cor->setrgb ( 255, 50, 0 );
 		}
@@ -1081,8 +1081,8 @@ class Analise {
 			$novolayer->set ( "template", "none.htm" );
 			$classe = $novolayer->getclass ( 0 );
 			$estilo = $classe->getstyle ( 0 );
-			$estilo->set ( "symbolname", "linha" );
-			$estilo->set ( "size", 4 );
+			//$estilo->set ( "symbolname", "linha" );
+			$estilo->set ( "width", 4 );
 			$cor = $estilo->color;
 			$cor->setrgb ( 255, 210, 0 );
 		}
@@ -1270,7 +1270,6 @@ class Analise {
 	 *
 	 */
 	function distanciaptpt($temaorigem, $temadestino, $temaoverlay, $locaplic, $itemorigem = "", $itemdestino = "") {
-
 		set_time_limit ( 180 );
 		// para manipular dbf
 		if ($this->dbaseExiste == false) {
@@ -1413,8 +1412,8 @@ class Analise {
 		$novolayer->set ( "template", "none.htm" );
 		$classe = $novolayer->getclass ( 0 );
 		$estilo = $classe->getstyle ( 0 );
-		$estilo->set ( "symbolname", "linha" );
-		$estilo->set ( "size", 4 );
+		//$estilo->set ( "symbolname", "linha" );
+		$estilo->set ( "width", 2 );
 		$cor = $estilo->color;
 		$cor->setrgb ( 255, 210, 0 );
 		// limpa selecao

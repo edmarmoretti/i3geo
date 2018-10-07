@@ -1,23 +1,21 @@
-		<div class="draggable list-group condensed" style="background-color: white;">
-			<div class="row-content text-left">
-				<label class="nomeTemaLegenda" style="cursor:move;">
-					<h4 data-target="#legendaCollapse{{layer}}" class="collapsed" data-toggle="collapse">
-					{{{nome}}}
-					</h4>
-
-				</label>
-                <div id='legendaCollapse{{layer}}' class="collapse in" aria-expanded="true">
-				{{#classes}}
-    				<div class="checkbox text-left ">
-    					<!-- a classe itemLegenda e importante para nao imprimir quando nao estiver checado -->
-    					<label class="itemLegenda" >
-    						<input class="noprint {{checkbox}}" type="checkbox" id='legendack_{{layer}}_{{index}}' value="{{{index}}}" name="{{{layer}}}" {{{checked}}} onclick="i3GEO.legenda.inverteStatusClasse(this)">
-    						<span class="checkbox-material noprint {{checkbox}}"><span class="check"></span></span> <img style="cursor:pointer;width:{{{w}}}px;height:{{{h}}}px" onclick="i3GEO.legenda.mudaCorClasse('{{layer}}','{{index}}');return false;" src="{{{img}}}" title="{{{altera}}}"> {{{nome}}}
-    					</label>
-    				</div>
-				{{/classes}}
-                {{{legendaWms}}}
-                </div>
-			</div>
-			<hr>
-		</div>
+<div class="draggable list-group condensed" style="background-color: white;">
+    <div class="row-content text-left">
+        <label class="{{hiddenTitle}} nomeTemaLegenda" style="cursor: move;">
+            <h4 data-target="#legendaCollapse{{layer}}" class="collapsed" data-toggle="collapse">{{{nome}}}</h4>
+        </label>
+        <div id='legendaCollapse{{layer}}' class="collapse in" aria-expanded="true">
+            {{#classes}}
+            <div class="checkbox text-left ">
+                <!-- a classe itemLegenda e importante para nao imprimir quando nao estiver checado -->
+                <label class="itemLegenda">
+                    <input class="noprint {{checkbox}}" type="checkbox" id='legendack_{{layer}}_{{index}}' value="{{{index}}}" name="{{{layer}}}"
+                        {{{checked}}} onclick="i3GEO.legenda.inverteStatusClasse(this)">
+                    <span class="checkbox-material noprint {{checkbox}}"><span class="check"></span></span> <img style="cursor: pointer; width: {{{w}}}"
+                        onclick="i3GEO.legenda.mudaCorClasse('{{layer}}','{{index}}');return false;" src="{{{img}}}" title="{{{altera}}}"> {{{nome}}}
+                </label>
+            </div>
+            {{/classes}} {{{legendaWms}}}
+        </div>
+    </div>
+    <hr>
+</div>

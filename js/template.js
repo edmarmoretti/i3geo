@@ -53,7 +53,8 @@ i3GEO.template = {
 	//formatacao utilizada em listas do tipo migalha mostradas no catalogo
 	catalogoMigalha: false,
 	//formatacao da legenda (guia principal do mapa)
-	legenda: false,
+	legenda: false, //para camadas com mais de uma classe
+	legenda1class : false, //para camadas com uma classe
 	//formatacao da lista de marcadores salvos pelo usuario
 	marcador: false,
 	//campo do tipo input para a busca usando typeahead
