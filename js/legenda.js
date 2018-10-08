@@ -13,7 +13,7 @@ i3GEO.legenda =
 	objImg: "",
 	config: {
 	    "idLegenda": "legendaHtml",
-	    "templateLegenda1class": "templates/legenda1class.html",
+	    "templateLegenda": "templates/legenda.html",
 	    "janela": false
 	},
 	carregaTemplates: function(){

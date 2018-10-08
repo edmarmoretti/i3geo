@@ -1,11 +1,7 @@
 <?php
-include_once(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-//
-//faz a busca da fun&ccedil;&atilde;o que deve ser executada
-//
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
-switch (strtoupper($funcao))
+include (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
+switch (strtoupper($_GET["funcao"]))
 {
 /*
 Valor: ANALISEDISTRIPT
@@ -17,25 +13,39 @@ Executa script R para gerar a imagem.
 <Analise->analiseDistriPt>
 */
 	case "ANALISEDISTRIPT":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_analise.php");
-		copiaSeguranca($map_file);
+		include(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		if(!isset($_GET["tema2"])){
 			$_GET["tema2"] = "";
 		}
 		if(!isset($_GET["limitepontos"])){
 			$_GET["limitepontos"] = "";
 		}
-		$m = new Analise($map_file,$tema,$locaplic,$ext);
+		$m = new Analise($_SESSION["map_file"],$_GET["tema"],$_SESSION["locaplic"],$_GET["ext"]);
 		if(empty($_GET["item"])){
 			$_GET["item"] = "";
 		}
-		$retorno = $m->analiseDistriPt($locaplic,$dir_tmp,$R_path,$_GET["numclasses"],$_GET["tipo"],$_GET["cori"],$_GET["corf"],$tmpurl,$_GET["sigma"],$_GET["limitepontos"],$_GET["tema2"],$_GET["extendelimite"]);
+		$retorno = $m->analiseDistriPt($_SESSION["locaplic"],$_SESSION["dir_tmp"],$_SESSION["R_path"],$_GET["numclasses"],$_GET["tipo"],$_GET["cori"],$_GET["corf"],$_SESSION["tmpurl"],$_GET["sigma"],$_GET["limitepontos"],$_GET["tema2"],$_GET["extendelimite"]);
 		$m->salva();
-		$_SESSION["contadorsalva"]++;
+		if($retorno != false){
+		    $retorno = true;
+		}
+	break;
+	case "VERPALETA":
+	    include(dirname(__FILE__)."/../../classesphp/class.palette.php");
+	    $retorno = array();
+	    $cori = $_GET["cori"];
+	    $corf = $_GET["corf"];
+	    $numclasses = $_GET["numclasses"];
+	    $cori = RGB2hex(explode(",",$cori));
+	    $corf = RGB2hex(explode(",",$corf));
+	    $myPalette=new palette(array($cori,$corf),($numclasses + 1));
+	    foreach ($myPalette->colorRGB as $cores)
+	    {
+	        $retorno[] = $cores[0].",".$cores[1].",".$cores[2];
+	    }
 	break;
 }
-if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-	restauraCon($map_file,$postgis_mapa);
-}
-cpjson($retorno);
+ob_clean();
+header("Content-type: application/json");
+echo json_encode($retorno);
 ?>

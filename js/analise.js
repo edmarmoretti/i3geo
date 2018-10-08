@@ -321,9 +321,9 @@ i3GEO.analise =
 		i3GEO.parametros.r === "nao" ? i3GEO.janela.tempoMsg($trad("x22")) : i3GEO.util.dialogoFerramenta(
 			"i3GEO.analise.dialogo.pontosdistri()",
 			"pontosdistri",
-			"pontosDistri",
+			"pontosdistri",
 			"dependencias.php",
-		"i3GEOF.pontosDistri.iniciaJanelaFlutuante()");
+		"i3GEOF.pontosdistri.start()");
 	    },
 	    /**
 	     * Function: pontoempoligono

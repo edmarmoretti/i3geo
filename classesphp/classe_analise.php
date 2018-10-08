@@ -284,7 +284,7 @@ class Analise {
 		$cls = $this->classesRasterI ( $minmax [0], $minmax [1], $numclasses, $myPalette->colorRGB );
 
 		if (count ( $cls ) != $numclasses) {
-			return ("erro.");
+			return false;
 		}
 		// adiciona o novo tema
 		if (file_exists ( $nomearq . ".png" )) {
@@ -336,7 +336,7 @@ class Analise {
 				}
 			}
 		} else {
-			return ("erro");
+			return false;
 		}
 		if (file_exists ( $this->qyfile )) {
 			unlink ( $this->qyfile );

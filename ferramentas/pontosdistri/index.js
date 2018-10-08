@@ -1,402 +1,269 @@
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
-/*
-Classe: i3GEOF.pontosDistri
-*/
-i3GEOF.pontosDistri = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
-	aguarde: "",
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.pontosDistri.dicionario);
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["asp"] = '"';
-		dicionario["limitePontos"] = i3GEO.util.comboSimNao('i3GEOpontosDistrilimitePontos','sim');
-		return dicionario;
+i3GEOF.pontosdistri = {
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "tema": "",
+	    "mustache": "",
+	    "idContainer": "i3GEOpontosdistriContainer",
+	    "namespace": "pontosdistri"
 	},
-	/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		if(i3GEOF.pontosDistri.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/pontosdistri/template_mst.html", function(template) {
-				i3GEOF.pontosDistri.MUSTACHE = template;
-				i3GEOF.pontosDistri.inicia(iddiv);
-			});
-			return;
-		}
-		try{
-			var b;
-			$i(iddiv).innerHTML = i3GEOF.pontosDistri.html();
-			i3GEO.guias.mostraGuiaFerramenta("i3GEOpontosDistriguia1","i3GEOpontosDistriguia");
-			//eventos das guias
-			$i("i3GEOpontosDistriguia1").onclick = function()
-			{i3GEO.guias.mostraGuiaFerramenta("i3GEOpontosDistriguia1","i3GEOpontosDistriguia");};
-			$i("i3GEOpontosDistriguia2").onclick = function()
-			{i3GEO.guias.mostraGuiaFerramenta("i3GEOpontosDistriguia2","i3GEOpontosDistriguia");};
-			b = new YAHOO.widget.Button(
-				"i3GEOpontosDistribotao4",
-				{onclick:{fn: i3GEOF.pontosDistri.verCores}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOpontosDistribotao1",
-				{onclick:{fn: i3GEOF.pontosDistri.analiseDensidade}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOpontosDistribotao2",
-				{onclick:{fn: i3GEOF.pontosDistri.analiseDistancia}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOpontosDistribotao3",
-				{onclick:{fn: i3GEOF.pontosDistri.analiseRelatorio}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOpontosDistribotaokernel",
-				{onclick:{fn: i3GEOF.pontosDistri.analiseKernel}}
-			);
-			b.addClass("rodar");
-			b = new YAHOO.widget.Button(
-				"i3GEOpontosDistribotaodeldir",
-				{onclick:{fn: i3GEOF.pontosDistri.analiseDeldir}}
-			);
-			b.addClass("rodar");
-			i3GEOF.pontosDistri.ativaFoco();
-			i3GEO.util.aplicaAquarela("i3GEOF.pontosDistri");
-		}
-		catch(erro){i3GEO.janela.tempoMsg(erro);}
+	start : function(tema){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    p.tema = tema;
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
 	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	*/
+	destroy: function(){
+	    //nao use this aqui
+	    //i3GEOF.legenda._parameters.mustache = "";
+	},
 	html:function() {
-		var ins = Mustache.render(i3GEOF.pontosDistri.MUSTACHE, i3GEOF.pontosDistri.mustacheHash());
-		return ins;
-	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
-		if ($i("i3GEOF.pontosDistri")) {
-			return;
-		}
-		//funcao que sera executada ao ser clicado no cabe&ccedil;alho da janela
-		cabecalho = function(){
-			i3GEOF.pontosDistri.ativaFoco();
-		};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.pontosDistri",200);
-		};
-		//cria a janela flutuante
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("u14") + "</span></div>";
-		janela = i3GEO.janela.cria(
-			"400px",
-			"330px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.pontosDistri",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			true,
-			"",
-			"",
-			"",
-			"",
-			"20"
-		);
-		divid = janela[2].id;
-		$i("i3GEOF.pontosDistri_corpo").style.backgroundColor = "white";
-		i3GEOF.pontosDistri.aguarde = $i("i3GEOF.pontosDistri_imagemCabecalho").style;
-		i3GEOF.pontosDistri.inicia(divid);
-		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.pontosDistri.ativaFoco()"]);
-		temp = function(){
-			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.pontosDistri.ativaFoco()"]);
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-	},
-	/*
-	Function: ativaFoco
-
-	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
-	*/
-	ativaFoco: function(){
-		i3GEO.util.comboTemas(
-			"i3GEOpontosDistritemasComSel",
-			function(retorno){
-		 		if(retorno.tipo !== "dados"){
-		 			$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo style=color:red >"+$trad('nenhumTemaSelecionado',i3GEOF.pontosDistri.dicionario)+"<span style=cursor:pointer;color:blue onclick='i3GEO.mapa.dialogo.selecao()' > "+$trad('seleciona',i3GEOF.pontosDistri.dicionario)+"</span></p>";
-		 			return;
-		 		}
-		 		$i("i3GEOpontosDistriTemas").innerHTML = "<p class=paragrafo >"+retorno.dados + "</p>";
-	 			$i("i3GEOpontosDistritemasComSel").onchange = function(){
-	 				i3GEO.mapa.ativaTema($i("i3GEOpontosDistritemasComSel").value);
-	 			};
-				if(i3GEO.temaAtivo !== ""){
-					$i("i3GEOpontosDistritemasComSel").value = i3GEO.temaAtivo;
-				}
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    limitePontos: i3GEO.util.comboSimNao('limitepontos','sim'),
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
 			},
-			"i3GEOpontosDistriTemas",
-			"",
-			false,
-			"selecionados",
-			" "
-		);
-		var i = $i("i3GEOF.pontosDistri_c").style;
-		i.zIndex = i3GEO.janela.ULTIMOZINDEX;
-		i3GEO.janela.ULTIMOZINDEX++;
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    });
+	    i3GEO.guias.mostraGuiaFerramenta("i3GEO" + p.namespace + "guia1","i3GEO" + p.namespace + "guia");
+	    //eventos das guias
+	    $i("i3GEO" + p.namespace + "guia1").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEO" + p.namespace + "guia1","i3GEO" + p.namespace + "guia");
+	    };
+	    $i("i3GEO" + p.namespace + "guia2").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEO" + p.namespace + "guia2","i3GEO" + p.namespace + "guia");
+	    };
+	    i3GEO.util.aplicaAquarela(p.idContainer);
+	    i3GEO.util.comboTemas(
+		    "",
+		    function(retorno){
+			$i("i3GEOpontosdistriTemas").innerHTML = retorno.dados;
+		    },
+		    "i3GEOpontosdistriTemas",
+		    "tema",
+		    false,
+		    "selecionados",
+		    " "
+	    );
+	    i3GEO.janela.snackBar({content: $trad('alerta1',i3GEOF.pontosdistri.dicionario)});
 	},
-	/*
-	Function: corj
-
-	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
-	*/
-	corj: function(obj){
-		i3GEO.util.abreCor("",obj);
-	},
-	/*
-	Function: verCores
-
-	Mostra as cores definidas nos intervalos de defini&ccedil;&atilde;o da paleta
-
-	Veja:
-
-	<VERPALETA>
-	*/
-	verCores: function(){
-		try{
-			if(i3GEOF.pontosDistri.aguarde.visibility === "visible")
-			{return;}
-			var n = $i("i3GEOpontosDistrinumclasses").value,
-				ci = $i("i3GEOpontosDistricori").value,
-				cf = $i("i3GEOpontosDistricorf").value,
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=verPaleta&numclasses="+n+"&cori="+ci+"&corf="+cf,
-				mostraopcoes = function(retorno){
-					retorno = retorno.data.split("*");
-					var ins = "<br><br>",
-						i,
-						n = retorno.length;
-					for (i=0;i<n;i++){
-						ins += "<div style=background-color:rgb("+retorno[i]+") >"+retorno[i]+"</div>";
-					}
-					$i("i3GEOpontosDistrimostracores").innerHTML = ins;
-					i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-				};
-			cp.set_response_type("JSON");
-			cp.call(p,"verPaleta",mostraopcoes);
-		}catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
-	},
-	/*
-	Function: analiseDistancia
-
-	Executa a an&aacute;lise de distribui&ccedil;&atilde;o de pontos
-
-	Veja:
-
-	<ANALISEDISTRIPT>
-	*/
-	analiseDistancia: function(){
-		if(!$i("i3GEOpontosDistritemasComSel"))
-		{return;}
-		if(i3GEOF.pontosDistri.aguarde.visibility === "visible")
-		{return;}
-		i3GEOF.pontosDistri.aguarde.visibility = "visible";
-		try{
-			var n = $i("i3GEOpontosDistrinumclasses").value,
-				ci = $i("i3GEOpontosDistricori").value,
-				cf = $i("i3GEOpontosDistricorf").value,
-				temp = function(){
-					i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-					i3GEO.atualiza();
-				},
-				tema = $i("i3GEOpontosDistritemasComSel").value,
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=distancia&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&ext="+i3GEO.parametros.mapexten;
-			if(tema === ""){
-				i3GEO.janela.tempoMsg($trad('selecionaUmTema',i3GEOF.pontosDistri.dicionario));
-				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-				return;
+	get: function({snackbar = true, btn = false, par = {}, fn = false} = {}){
+	    var p = this._parameters,
+	    i3f = this;
+	    i3GEO.janela.abreAguarde();
+	    if(btn){
+		btn = $(btn);
+		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    }
+	    i3GEO.janela._formModal.block();
+	    par.g_sid = i3GEO.configura.sid;
+	    par.tema = $i("i3GEOpontosdistritemasComSel").value;
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/" + p.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
 			}
-			cp.set_response_type("JSON");
-			cp.call(p,"analiseDistriPt",temp);
-		}
-		catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
-	},
-	/*
-	Function: analiseDensidade
-
-	Executa a an&aacute;lise de densidade
-
-	Veja:
-
-	<ANALISEDISTRIPT>
-	*/
-	analiseDensidade: function(){
-		if(!$i("i3GEOpontosDistritemasComSel"))
-		{return;}
-		if(i3GEOF.pontosDistri.aguarde.visibility === "visible")
-		{return;}
-		i3GEOF.pontosDistri.aguarde.visibility = "visible";
-		try{
-			var n = $i("i3GEOpontosDistrinumclasses").value,
-				ci = $i("i3GEOpontosDistricori").value,
-				cf = $i("i3GEOpontosDistricorf").value,
-				temp = function(){
-					i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-					i3GEO.atualiza();
-				},
-				tema = $i("i3GEOpontosDistritemasComSel").value,
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&ext="+i3GEO.parametros.mapexten;
-			if(tema === ""){
-				i3GEO.janela.tempoMsg("Escolha um tema");
-				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-				return;
+			if(snackbar){
+			    i3GEO.janela.snackBar({content: $trad('feito')});
 			}
-			cp.set_response_type("JSON");
-			cp.call(p,"analiseDistriPt",temp);
-		}
-		catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
-	},
-	/*
-	Function: analiseKernel
-
-	Executa a an&aacute;lise de kernel
-
-	Veja:
-
-	<ANALISEDISTRIPT>
-	*/
-	analiseKernel: function(){
-		if(!$i("i3GEOpontosDistritemasComSel"))
-		{return;}
-		if(i3GEOF.pontosDistri.aguarde.visibility === "visible")
-		{return;}
-		i3GEOF.pontosDistri.aguarde.visibility = "visible";
-		try{
-			var n = $i("i3GEOpontosDistrinumclasses").value,
-				ci = $i("i3GEOpontosDistricori").value,
-				cf = $i("i3GEOpontosDistricorf").value,
-				temp = function(){
-					i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-					i3GEO.atualiza();
-				},
-				tema = $i("i3GEOpontosDistritemasComSel").value,
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&sigma="+$i("i3GEOpontosDistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
-			if(tema === ""){
-				i3GEO.janela.tempoMsg("Escolha um tema");
-				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-				return;
+			if(fn){
+			    fn(data);
 			}
-			cp.set_response_type("JSON");
-			cp.call(p,"analiseDistriPt",temp);
-		}
-		catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
-	},
-	/*
-	Function: analiseDeldir
-
-	Executa a an&aacute;lise de triangula&ccedil;&atilde;o
-
-	Veja:
-
-	<ANALISEDISTRIPT>
-
-	*/
-	analiseDeldir: function(){
-		if(!$i("i3GEOpontosDistritemasComSel"))
-		{return;}
-		if(i3GEOF.pontosDistri.aguarde.visibility === "visible")
-		{return;}
-		i3GEOF.pontosDistri.aguarde.visibility = "visible";
-		try{
-			var tema = $i("i3GEOpontosDistritemasComSel").value,
-				temp = function(){
-					i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-					i3GEO.atualiza();
-				},
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses=&cori=&corf=&tipo=deldir&limitepontos=&extendelimite=&sigma=&ext="+i3GEO.parametros.mapexten;
-			if(tema === ""){
-				i3GEO.janela.tempoMsg("Escolha um tema");
-				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-				return;
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
 			}
-			cp.set_response_type("JSON");
-			cp.call(p,"analiseDistriPt",temp);
-		}
-		catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
 	},
-	/*
-	Function: analiseRelatorio
-
-	Abre o relat&oacute;rio de an&aacute;lise
-
-	Veja:
-
-	<ANALISEDISTRIPT>
-
-	*/
-	analiseRelatorio: function(){
-		if(!$i("i3GEOpontosDistritemasComSel"))
-		{return;}
-		if(i3GEOF.pontosDistri.aguarde.visibility === "visible")
-		{return;}
-		i3GEOF.pontosDistri.aguarde.visibility = "visible";
-		try{
-			var n = $i("i3GEOpontosDistrinumclasses").value,
-				ci = $i("i3GEOpontosDistricori").value,
-				cf = $i("i3GEOpontosDistricorf").value,
-				temp = function(retorno){
-					i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-					window.open(retorno.data);
-				},
-				tema = $i("i3GEOpontosDistritemasComSel").value,
-				cp = new cpaint(),
-				p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio&limitepontos="+$i("i3GEOpontosDistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosDistriextendelimite").value+"&sigma="+$i("i3GEOpontosDistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
-			if(tema === ""){
-				i3GEO.janela.tempoMsg("Escolha um tema");
-				i3GEOF.pontosDistri.aguarde.visibility = "hidden";
-				return;
-			}
-			cp.set_response_type("JSON");
-			cp.call(p,"analiseDistriPt",temp);
+	getFormData: function(){
+	    var data = {
+		    ...i3GEO.util.getFormData("#i3GEOpontosdistriguia1obj form"),
+		    ...i3GEO.util.getFormData("#i3GEOpontosdistriguia2obj form")
+	    };
+	    return data
+	},
+	verCores: function(btn){
+	    var p = this._parameters,
+	    i3f = this,
+	    par = i3f.getFormData();
+	    par.funcao = "verPaleta";
+	    i3f.get({
+		snackbar: false,
+		fn: function(data){
+		    var ins = "",
+		    i,
+		    n = data.length;
+		    for (i=0;i<n;i++){
+			ins += "<div style=background-color:rgb("+data[i]+") >"+data[i]+"</div>";
+		    }
+		    $i("i3GEOpontosdistrimostracores").innerHTML = ins;
+		},
+		btn: btn,
+		par: par
+	    });
+	},
+	analiseDistancia: function(btn){
+	    var p = this._parameters,
+	    i3f = this,
+	    par = i3f.getFormData();
+	    par.funcao = "analiseDistriPt";
+	    par.tema2 = "";
+	    par.ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+	    i3f.get({
+		snackbar: false,
+		fn: function(data){
+		    i3GEO.atualiza();
+		},
+		btn: btn,
+		par: par
+	    });
+	},
+	analiseDensidade: function(btn){
+	    if(!$i("i3GEOpontosdistritemasComSel"))
+	    {return;}
+	    if(i3GEOF.pontosdistri.aguarde.visibility === "visible")
+	    {return;}
+	    i3GEOF.pontosdistri.aguarde.visibility = "visible";
+	    try{
+		var n = $i("i3GEOpontosdistrinumclasses").value,
+		ci = $i("i3GEOpontosdistricori").value,
+		cf = $i("i3GEOpontosdistricorf").value,
+		temp = function(){
+		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+		    i3GEO.atualiza();
+		},
+		tema = $i("i3GEOpontosdistritemasComSel").value,
+		cp = new cpaint(),
+		p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade&limitepontos="+$i("i3GEOpontosdistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosdistriextendelimite").value+"&ext="+i3GEO.parametros.mapexten;
+		if(tema === ""){
+		    i3GEO.janela.tempoMsg("Escolha um tema");
+		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+		    return;
 		}
-		catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosDistri.aguarde.visibility = "hidden";}
+		cp.set_response_type("JSON");
+		cp.call(p,"analiseDistriPt",temp);
+	    }
+	    catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosdistri.aguarde.visibility = "hidden";}
+	},
+	analiseKernel: function(btn){
+	    if(!$i("i3GEOpontosdistritemasComSel"))
+	    {return;}
+	    if(i3GEOF.pontosdistri.aguarde.visibility === "visible")
+	    {return;}
+	    i3GEOF.pontosdistri.aguarde.visibility = "visible";
+	    try{
+		var n = $i("i3GEOpontosdistrinumclasses").value,
+		ci = $i("i3GEOpontosdistricori").value,
+		cf = $i("i3GEOpontosdistricorf").value,
+		temp = function(){
+		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+		    i3GEO.atualiza();
+		},
+		tema = $i("i3GEOpontosdistritemasComSel").value,
+		cp = new cpaint(),
+		p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel&limitepontos="+$i("i3GEOpontosdistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosdistriextendelimite").value+"&sigma="+$i("i3GEOpontosdistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
+		if(tema === ""){
+		    i3GEO.janela.tempoMsg("Escolha um tema");
+		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+		    return;
+		}
+		cp.set_response_type("JSON");
+		cp.call(p,"analiseDistriPt",temp);
+	    }
+	    catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosdistri.aguarde.visibility = "hidden";}
+	},
+	analiseDeldir: function(btn){
+	    if(!$i("i3GEOpontosdistritemasComSel"))
+	    {return;}
+	    if(i3GEOF.pontosdistri.aguarde.visibility === "visible")
+	    {return;}
+	    i3GEOF.pontosdistri.aguarde.visibility = "visible";
+	    try{
+		var tema = $i("i3GEOpontosdistritemasComSel").value,
+		temp = function(){
+		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+		    i3GEO.atualiza();
+		},
+		cp = new cpaint(),
+		p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses=&cori=&corf=&tipo=deldir&limitepontos=&extendelimite=&sigma=&ext="+i3GEO.parametros.mapexten;
+		if(tema === ""){
+		    i3GEO.janela.tempoMsg("Escolha um tema");
+		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+		    return;
+		}
+		cp.set_response_type("JSON");
+		cp.call(p,"analiseDistriPt",temp);
+	    }
+	    catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosdistri.aguarde.visibility = "hidden";}
+	},
+	analiseRelatorio: function(btn){
+	    if(!$i("i3GEOpontosdistritemasComSel"))
+	    {return;}
+	    if(i3GEOF.pontosdistri.aguarde.visibility === "visible")
+	    {return;}
+	    i3GEOF.pontosdistri.aguarde.visibility = "visible";
+	    try{
+		var n = $i("i3GEOpontosdistrinumclasses").value,
+		ci = $i("i3GEOpontosdistricori").value,
+		cf = $i("i3GEOpontosdistricorf").value,
+		temp = function(retorno){
+		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+		    window.open(retorno.data);
+		},
+		tema = $i("i3GEOpontosdistritemasComSel").value,
+		cp = new cpaint(),
+		p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio&limitepontos="+$i("i3GEOpontosdistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosdistriextendelimite").value+"&sigma="+$i("i3GEOpontosdistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
+		if(tema === ""){
+		    i3GEO.janela.tempoMsg("Escolha um tema");
+		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+		    return;
+		}
+		cp.set_response_type("JSON");
+		cp.call(p,"analiseDistriPt",temp);
+	    }
+	    catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosdistri.aguarde.visibility = "hidden";}
 	}
 };

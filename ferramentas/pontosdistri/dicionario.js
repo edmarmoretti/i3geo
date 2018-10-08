@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.pontosDistri.dicionario)+
-i3GEOF.pontosDistri.dicionario = {
+i3GEOF.pontosdistri.dicionario = {
 	'calculo' : [ {
 		pt : "C&aacute;lculo",
 		en : "Calculation",
@@ -84,5 +84,10 @@ i3GEOF.pontosDistri.dicionario = {
 		pt : "Escolha um tema",
 		en : "Select a theme",
 		es : "Seleccionar un tema"
+	} ],
+	'alerta1' : [ {
+		pt : "Apenas os temas com elementos selecionados podem ser analisados",
+		en : "",
+		es : ""
 	} ]
 };

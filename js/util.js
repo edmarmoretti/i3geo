@@ -1974,7 +1974,7 @@ i3GEO.util =
 	 * {string}
 	 */
 	comboSimNao : function(id, selecionado) {
-	    var combo = "<select name=" + id + " id=" + id + " >";
+	    var combo = "<select class='form-control' name=" + id + " id=" + id + " >";
 	    combo += "<option value='' >---</option>";
 	    if (selecionado.toLowerCase() === "sim") {
 		combo += "<option value=TRUE selected >" + $trad("x14") + "</option>";

@@ -1,5 +1,19 @@
 GUIA DE UPDATES e UPGRADES
 
+Para a versão 8.0
+
+As requisições AJAX agora são feitas usando jQuery. As requisições feitas em
+cada ferramenta utilizam programas em PHP localizados na pasta
+ferramentas/nome_da_ferramenta.
+
+Foram padronizados os nomes das ferramentas e das variáveis javascript que
+essas utilizam. Os nomes agora são sempre em caixa baixa e sem o uso de "_".
+
+As janelas flutuantes, baseadas na biblioteca YUI, foram substituídas por
+janelas modais criadas com BOOTSTRAP.
+
+Não são permitidas múltiplas janelas flutuantes.
+
 -------------------------------------------------------------------------------------------------
 Para a versão 7.0
 
