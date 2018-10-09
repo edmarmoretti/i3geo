@@ -349,7 +349,7 @@ i3GEO.analise =
 			"centromassa",
 			"centromassa",
 			"dependencias.php",
-		"i3GEOF.centromassa.iniciaJanelaFlutuante()");
+		"i3GEOF.centromassa.start()");
 	    },
 	    /**
 	     * Function: nptPol
@@ -414,7 +414,7 @@ i3GEO.analise =
 			"dissolve",
 			"dissolve",
 			"dependencias.php",
-		"i3GEOF.dissolve.iniciaJanelaFlutuante()");
+		"i3GEOF.dissolve.start()");
 	    },
 	    /**
 	     * Function: agrupaElementos

@@ -1,259 +1,146 @@
-/*
-Title: Centro de massa
-
-Calcula o centro m&eacute;dio e centro m&eacute;dio ponderado de um conjunto de pontos
-
-Veja:
-
-<i3GEO.analise.centromassa>
-
-Arquivo:
-
-i3geo/ferramentas/centromassa/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
-/*
-Classe: i3GEOF.centromassa
-*/
 i3GEOF.centromassa = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
-	aguarde: "",
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.centromassa.dicionario);
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		return dicionario;
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "tema": "",
+	    "mustache": "",
+	    "idContainer": "i3GEOcentromassaContainer",
+	    "namespace": "centromassa"
 	},
-	/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		if(i3GEOF.centromassa.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/centromassa/template_mst.html", function(template) {
-				i3GEOF.centromassa.MUSTACHE = template;
-				i3GEOF.centromassa.inicia(iddiv);
-			});
-			return;
-		}
-		$i(iddiv).innerHTML = i3GEOF.centromassa.html();
-		i3GEOF.centromassa.t0();
+	start : function(tema){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    p.tema = tema;
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
 	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	*/
+	destroy: function(){
+	    //nao use this aqui
+	    //i3GEOF.legenda._parameters.mustache = "";
+	},
 	html:function() {
-		var ins = Mustache.render(i3GEOF.centromassa.MUSTACHE, i3GEOF.centromassa.mustacheHash());
-		return ins;
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    });
+	    i3GEO.eventos.cliquePerm.ativa();
+	    i3GEOF.centromassa.t0();
+	    i3GEOF.centromassa.comboTemas();
 	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
-		if($i("i3GEOF.centromassa")){
-			return;
-		}
-		//cria a janela flutuante
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >Centro de massa</span></div>";
-		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.centromassa",200);
-		};
-		janela = i3GEO.janela.cria(
-			"400px",
-			"250px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.centromassa",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			false,
-			"",
-			"",
-			"",
-			""
-		);
-		divid = janela[2].id;
-		janela[0].setFooter("<div id=i3GEOF.centromassa_rodape class='i3GeoRodapeJanela' ></div>");
-		i3GEOF.centromassa.aguarde = $i("i3GEOF.centromassa_imagemCabecalho").style;
-		i3GEOF.centromassa.inicia(divid);
-		temp = function(){
-			i3GEO.eventos.removeEventos("ATUALIZAARVORECAMADAS",["i3GEOF.centromassa.t0()"]);
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS",["i3GEOF.centromassa.t0()"]);
-	},
-	t0: function()
-	{
-
-		i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()","","i3GEOFgradeDePontost0","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
+	t0: function(){
+	    i3GEO.util.proximoAnterior("","i3GEOF.centromassa.t1()","","i3GEOFgradeDePontost0","i3GEOcentromassaresultado",true,"i3GEOToolFormModalFooter");
 	},
 	t1: function(){
-		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t0()","i3GEOF.centromassa.t2()","","i3GEOF.centromassa.t1","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
-		i3GEOF.centromassa.comboTemasPontos();
+	    i3GEO.util.proximoAnterior("i3GEOF.centromassa.t0()","i3GEOF.centromassa.t2()","","i3GEOF.centromassa.t1","i3GEOcentromassaresultado",true,"i3GEOToolFormModalFooter");
+	    i3GEOF.centromassa.comboTemasPontos();
 	},
 	t2: function(){
-		i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","","","i3GEOF.centromassa.t2","i3GEOcentromassaresultado",true,"i3GEOF.centromassa_rodape");
+	    i3GEO.util.proximoAnterior("i3GEOF.centromassa.t1()","","","i3GEOF.centromassa.t2","i3GEOcentromassaresultado",true,"i3GEOToolFormModalFooter");
 	},
-	/*
-	Function: calcula
-
-	Faz o c&aacute;lculo
-
-	Veja:
-
-	<centromassa>
-	*/
-	calcula: function(){
-		try{
-			if(i3GEOF.centromassa.aguarde.visibility === "visible")
-			{return;}
-			i3GEOF.centromassa.aguarde.visibility = "visible";
-			var p,
-			cp,
-			fim = function(retorno){
-				if (retorno.data==undefined )
-				{$i("i3GEOcentromassafim").innerHTML = "<p class='paragrafo' >"+$trad('erroTempo',i3GEOF.centromassa.dicionario);}
-				else
-				{i3GEO.atualiza();}
-				i3GEOF.centromassa.aguarde.visibility = "hidden";
-			},
-			tema = $i("i3GEOFcentromassaPontos").value,
-			ext;
-			if(i3GEO.Interface.ATUAL === "googlemaps")
-			{ext = i3GEO.Interface.googlemaps.bbox();}
-			else
-			{ext = i3GEO.parametros.mapexten;}
-			if(tema == ""){
-				i3GEO.janela.tempoMsg($trad('selecionaTema2',i3GEOF.centromassa.dicionario));
-				i3GEOF.centromassa.aguarde.visibility = "hidden";
-				return;
+	get: function(btn){
+	    var par = {
+		    g_sid: i3GEO.configura.sid,
+		    funcao: "centromassa",
+		    tema: $i("i3GEOFcentromassaPontos").value,
+		    ext: i3GEO.parametros.mapexten,
+		    item: $i("i3GEOFcentromassaItem").value
+	    };
+	    if(par.tema == ""){
+		i3GEO.janela.tempoMsg($trad('selecionaTema2',i3GEOF.centromassa.dicionario));
+		return;
+	    }
+	    i3GEO.janela.abreAguarde();
+	    btn = $(btn);
+	    btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    i3GEO.janela._formModal.block();
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/centromassa/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			i3GEO.janela.snackBar({content: $trad('feito')});
+			i3GEO.atualiza();
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
 			}
-			p = i3GEO.configura.locaplic+"/ferramentas/centromassa/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=centromassa&tema="+tema+"&item="+$i("i3GEOFcentromassaItem").value+"&ext="+ext;
-			cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"centromassa",fim);
-		}
-		catch(e){$i("i3GEOcentromassafim").innerHTML = "<p class='paragrafo' >Erro. "+e;i3GEO.janela.fechaAguarde();i3GEOF.centromassa.aguarde.visibility = "hidden";}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
 	},
-	/*
-	Function: comboTemasPontos
-
-	Cria um combo com a lista de temas pontuais
-
-	Veja:
-
-	<i3GEO.util.comboTemas>
-	*/
-	comboTemasPontos: function(){
-		i3GEO.util.comboTemas(
-			"i3GEOFcentromassaPontos",
-			function(retorno){
-				$i("i3GEOcentromassaDivPontos").innerHTML = retorno.dados;
-				var c = $i("i3GEOFcentromassaPontos");
-				$i("i3GEOcentromassaDivPontos").style.display = "block";
-				if (c){
-					c.onchange = function(){
-						$i("i3GEOondeItens").style.display = "block";
-						$i("i3GEOondeItens").innerHTML = $trad("o1");
-						i3GEO.mapa.ativaTema(c.value);
-						i3GEOF.centromassa.comboItens();
-					};
-				}
-				if(i3GEO.temaAtivo !== ""){
-					if(c)
-					{c.value = i3GEO.temaAtivo;}
-					$i("i3GEOondeItens").style.display = "block";
-					$i("i3GEOondeItens").innerHTML = $trad("o1");
-					i3GEOF.centromassa.comboItens();
-				}
-			},
-			"i3GEOcentromassaDivPontos",
-			"",
-			false,
-			"pontos",
-			" ",
-			false,
-			true,
-			"form-control comboTema"
-		);
+	comboTemas: function(){
+	    i3GEO.util.comboTemas(
+		    "i3GEOFcentromassaPontos",
+		    function(retorno){
+			$i("i3GEOcentromassaDivPontos").innerHTML = retorno.dados;
+			var c = $i("i3GEOFcentromassaPontos");
+			c.onchange = function(){
+			    i3GEO.janela.snackBar({content: $trad('o1')});
+			    i3GEOF.centromassa.comboItens();
+			};
+		    },
+		    "i3GEOcentromassaDivPontos",
+		    "",
+		    false,
+		    "pontos",
+		    " ",
+		    false,
+		    true,
+		    "form-control comboTema"
+	    );
 	},
-	/*
-	Function: comboItens
-
-	Cria um combo para escolha de um item do tema
-
-	Veja:
-
-	<i3GEO.util.comboItens>
-
-	*/
 	comboItens: function(){
-		i3GEO.util.comboItens(
-			"i3GEOFcentromassaItem",
-			$i("i3GEOFcentromassaPontos").value,
-			function(retorno){
-				$i("i3GEOondeItens").innerHTML = retorno.dados;
-				$i("i3GEOondeItens").style.display = "block";
-			},
-			"i3GEOondeItens",
-			"",
-			"",
-			"",
-			"form-control comboTema"
-		);
+	    i3GEO.util.comboItens(
+		    "i3GEOFcentromassaItem",
+		    $i("i3GEOFcentromassaPontos").value,
+		    function(retorno){
+			$i("i3GEOondeItens").innerHTML = retorno.dados;
+		    },
+		    "i3GEOondeItens",
+		    "",
+		    "",
+		    "",
+		    "form-control comboTema"
+	    );
 	}
 };

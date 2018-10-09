@@ -228,6 +228,7 @@ class Analise {
 	 */
 	function analiseDistriPt($locaplic, $dir_tmp, $R_path, $numclasses, $tipo, $cori, $corf, $tmpurl, $sigma = "", $limitepontos = "TRUE", $tema2 = "", $extendelimite = 5, $item = "") {
 		set_time_limit ( 120 );
+		//error_reporting(0);
 		//
 		// pega os dados do tema dois para as fun&ccedil;&otilde;es que o utilizam
 		//
@@ -235,7 +236,8 @@ class Analise {
 		$nomearq = $dados1 ["prefixoarquivo"];
 		$dimx = $dados1 ["dimx"];
 		$dimy = $dados1 ["dimy"];
-		$dimz = $dados1 ["dimz"];
+		$dimz = @$dados1 ["dimz"];
+
 		if (isset ( $tema2 ) && $tema2 != "") {
 			$dados2 = $this->gravaCoordenadasPt ( $tema2, $limitepontos, $extendelimite );
 			$nomearq2 = $dados2 ["prefixoarquivo"];
@@ -267,7 +269,7 @@ class Analise {
 				break;
 			case "relatorio" :
 				$r = $this->mapaRelatorioAnaliseDist ( $nomearq, $dimx, $dimy, $dir_tmp, $R_path, $locaplic );
-				return ($tmpurl . basename ( $this->diretorio ) . "/" . basename ( $nomearq ) . '.htm');
+				return file_get_contents($nomearq);
 				break;
 		}
 		// cria a imagem
@@ -367,6 +369,7 @@ class Analise {
 	function mapaRelatorioAnaliseDist($arqpt, $dimx, $dimy, $dir_tmp, $R_path, $locaplic) {
 		set_time_limit ( 180 );
 		$nomedir = dirname ( $arqpt ) . "/";
+		$nomeurl = str_replace("/tmp","",$nomedir);
 		$rcode [] = 'dadosx<-scan("' . $arqpt . 'x")';
 		$rcode [] = 'dadosy<-scan("' . $arqpt . 'y")';
 		$tipoimg = "bitmap";
@@ -384,7 +387,7 @@ class Analise {
 		$rcode [] = 'library(spatstat)';
 		$rcode [] = 'oppp <- ppp(dadosx, dadosy, ' . $dimx . ',' . $dimy . ')';
 		$rcode [] = 'img<-distmap(oppp)';
-		$rcode [] = 'zz <- file("' . $arqpt . '.htm", "w")';
+		$rcode [] = 'zz <- file("' . $arqpt . '", "w")';
 		$rcode [] = 'sink(zz)';
 		$rcode [] = 'cat("<br><b>Dist&acirc;ncia</b>\n", file = zz)';
 		$rcode [] = 'sink()';
@@ -393,7 +396,7 @@ class Analise {
 		$rcode [] = 'points(oppp$x,oppp$y,pch="x",col=1)';
 		$rcode [] = 'dev.off()';
 		$rcode [] = 'sink(zz)';
-		$rcode [] = 'cat("<br></pre><img src=distancia.png />\n", file = zz)';
+		$rcode [] = 'cat("<br></pre><img src='.$nomeurl.'/distancia.png />\n", file = zz)';
 		$rcode [] = 'cat("<br>Resumo<pre>\n", file = zz)';
 		$rcode [] = 'summary(img)';
 		$rcode [] = 'cat("<br></pre>Quartis<pre>\n", file = zz)';
@@ -406,14 +409,14 @@ class Analise {
 		$rcode [] = 'points(oppp$x,oppp$y,pch="x",col=2)';
 		$rcode [] = 'dev.off()';
 		$rcode [] = 'sink(zz)';
-		$rcode [] = 'cat("<br><img src=histdistancia.png />\n", file = zz)';
+		$rcode [] = 'cat("<br><img src='.$nomeurl.'/histdistancia.png />\n", file = zz)';
 		$rcode [] = 'cat("<br></pre>Perspectiva\n", file = zz)';
 		$rcode [] = 'sink()';
 		$rcode [] = $tipoimg . '(file="' . $nomedir . 'perspdistancia.png")';
 		$rcode [] = 'p<-persp.im(img,colmap=terrain.colors(128),shade=0.3,theta=30,phi=45,main="")';
 		$rcode [] = 'dev.off()';
 		$rcode [] = 'sink(zz)';
-		$rcode [] = 'cat("<br><img src=perspdistancia.png />\n", file = zz)';
+		$rcode [] = 'cat("<br><img src='.$nomeurl.'/perspdistancia.png />\n", file = zz)';
 		$rcode [] = 'cat("<br></pre>Contorno\n", file = zz)';
 		$rcode [] = 'sink()';
 		$rcode [] = $tipoimg . '(file="' . $nomedir . 'contordistancia.png")';
@@ -421,7 +424,7 @@ class Analise {
 		$rcode [] = 'points(oppp$x,oppp$y,pch="x",col=2)';
 		$rcode [] = 'dev.off()';
 		$rcode [] = 'sink(zz)';
-		$rcode [] = 'cat("<br><img src=contordistancia.png />\n", file = zz)';
+		$rcode [] = 'cat("<br><img src='.$nomeurl.'/contordistancia.png />\n", file = zz)';
 		$rcode [] = 'sink()';
 		$rcode [] = 'img<-density.ppp(oppp)';
 		$rcode [] = 'sink(zz)';
@@ -432,7 +435,7 @@ class Analise {
 		$rcode [] = 'points(oppp$x,oppp$y,pch="x",col=2)';
 		$rcode [] = 'dev.off()';
 		$rcode [] = 'sink(zz)';
-		$rcode [] = 'cat("<br></pre><img src=densidade.png />\n", file = zz)';
+		$rcode [] = 'cat("<br></pre><img src='.$nomeurl.'/densidade.png />\n", file = zz)';
 		$rcode [] = 'cat("<br>Resumo<pre>\n", file = zz)';
 		$rcode [] = 'summary(img)';
 		$rcode [] = 'cat("<br></pre>Quartis<pre>\n", file = zz)';
@@ -444,14 +447,14 @@ class Analise {
 		$rcode [] = 'hist.im(img,main="")';
 		$rcode [] = 'dev.off()';
 		$rcode [] = 'sink(zz)';
-		$rcode [] = 'cat("<br><img src=histdensidade.png />\n", file = zz)';
+		$rcode [] = 'cat("<br><img src='.$nomeurl.'/histdensidade.png />\n", file = zz)';
 		$rcode [] = 'cat("<br></pre>Perspectiva\n", file = zz)';
 		$rcode [] = 'sink()';
 		$rcode [] = $tipoimg . '(file="' . $nomedir . 'perspdensidade.png")';
 		$rcode [] = 'p<-persp.im(img,colmap=terrain.colors(128),shade=0.3,theta=30,phi=45,main="")';
 		$rcode [] = 'dev.off()';
 		$rcode [] = 'sink(zz)';
-		$rcode [] = 'cat("<br><img src=perspdensidade.png />\n", file = zz)';
+		$rcode [] = 'cat("<br><img src='.$nomeurl.'/perspdensidade.png />\n", file = zz)';
 		$rcode [] = 'cat("<br></pre>Contorno\n", file = zz)';
 		$rcode [] = 'sink()';
 		$rcode [] = $tipoimg . '(file="' . $nomedir . 'contordensidade.png")#,height =600, width = 600, res = 72)';
@@ -459,7 +462,7 @@ class Analise {
 		$rcode [] = 'points(oppp$x,oppp$y,pch="x",col=2)';
 		$rcode [] = 'dev.off()';
 		$rcode [] = 'sink(zz)';
-		$rcode [] = 'cat("<br><img src=contordensidade.png />\n", file = zz)';
+		$rcode [] = 'cat("<br><img src='.$nomeurl.'/contordensidade.png />\n", file = zz)';
 		$rcode [] = 'sink()';
 		$rcode [] = 'close(zz)';
 		$r = $this->executaR ( $rcode, $dir_tmp, $R_path );
@@ -1650,7 +1653,7 @@ class Analise {
 		else
 			dbase_close ( $db );
 			// adiciona no mapa atual o novo tema
-		$novolayer = criaLayer ( $this->mapa, MS_LAYER_POINT, MS_DEFAULT, ("Centr�ide (" . $nomeCentro . ")"), $metaClasse = "SIM" );
+		$novolayer = criaLayer ( $this->mapa, MS_LAYER_POINT, MS_DEFAULT, ("Centro de massa (" . $nomeCentro . ")"), $metaClasse = "SIM" );
 		$novolayer->set ( "data", $nomeshp . ".shp" );
 		$novolayer->setmetadata ( "DOWNLOAD", "SIM" );
 		$novolayer->set ( "template", "none.htm" );
@@ -1662,7 +1665,7 @@ class Analise {
 		if (file_exists ( $this->qyfile )) {
 			unlink ( $this->qyfile );
 		}
-		return ("ok");
+		return true;
 	}
 	/*
 	 * function: criaCentroide
@@ -2568,7 +2571,7 @@ class Analise {
 			unlink ( $this->qyfile );
 		}
 
-		return ("ok");
+		return true;
 	}
 	/*
 	 * Function aplicaFuncaoListaWKT

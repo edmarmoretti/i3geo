@@ -22,12 +22,6 @@
                 <h6>{{{d21t}}}</h6>
             </div>
             <div class="text-center form-group" style="margin: 4px; display: inline-block">
-                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.selecao();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
-                    <img style="margin-top: 4px;" src="../imagens/gisicons/select.png">
-                </a>
-                <h6>{{{d24t}}}</h6>
-            </div>
-            <div class="text-center form-group" style="margin: 4px; display: inline-block">
                 <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.geolocal();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
                     <img style="margin-top: 4px;" src="../imagens/gisicons/layer-gps.png">
                 </a>

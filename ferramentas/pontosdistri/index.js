@@ -87,7 +87,6 @@ i3GEOF.pontosdistri = {
 	    }
 	    i3GEO.janela._formModal.block();
 	    par.g_sid = i3GEO.configura.sid;
-	    par.tema = $i("i3GEOpontosdistritemasComSel").value;
 	    $.get(
 		    i3GEO.configura.locaplic+"/ferramentas/" + p.namespace + "/exec.php",
 		    par
@@ -150,6 +149,7 @@ i3GEOF.pontosdistri = {
 	    i3f = this,
 	    par = i3f.getFormData();
 	    par.funcao = "analiseDistriPt";
+	    par.tipo = "distancia";
 	    par.tema2 = "";
 	    par.ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
 	    i3f.get({
@@ -162,108 +162,71 @@ i3GEOF.pontosdistri = {
 	    });
 	},
 	analiseDensidade: function(btn){
-	    if(!$i("i3GEOpontosdistritemasComSel"))
-	    {return;}
-	    if(i3GEOF.pontosdistri.aguarde.visibility === "visible")
-	    {return;}
-	    i3GEOF.pontosdistri.aguarde.visibility = "visible";
-	    try{
-		var n = $i("i3GEOpontosdistrinumclasses").value,
-		ci = $i("i3GEOpontosdistricori").value,
-		cf = $i("i3GEOpontosdistricorf").value,
-		temp = function(){
-		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+	    var p = this._parameters,
+	    i3f = this,
+	    par = i3f.getFormData();
+	    par.funcao = "analiseDistriPt";
+	    par.tipo = "densidade";
+	    par.tema2 = "";
+	    par.ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+	    i3f.get({
+		snackbar: false,
+		fn: function(data){
 		    i3GEO.atualiza();
 		},
-		tema = $i("i3GEOpontosdistritemasComSel").value,
-		cp = new cpaint(),
-		p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=densidade&limitepontos="+$i("i3GEOpontosdistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosdistriextendelimite").value+"&ext="+i3GEO.parametros.mapexten;
-		if(tema === ""){
-		    i3GEO.janela.tempoMsg("Escolha um tema");
-		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
-		    return;
-		}
-		cp.set_response_type("JSON");
-		cp.call(p,"analiseDistriPt",temp);
-	    }
-	    catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosdistri.aguarde.visibility = "hidden";}
+		btn: btn,
+		par: par
+	    });
 	},
 	analiseKernel: function(btn){
-	    if(!$i("i3GEOpontosdistritemasComSel"))
-	    {return;}
-	    if(i3GEOF.pontosdistri.aguarde.visibility === "visible")
-	    {return;}
-	    i3GEOF.pontosdistri.aguarde.visibility = "visible";
-	    try{
-		var n = $i("i3GEOpontosdistrinumclasses").value,
-		ci = $i("i3GEOpontosdistricori").value,
-		cf = $i("i3GEOpontosdistricorf").value,
-		temp = function(){
-		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+	    var p = this._parameters,
+	    i3f = this,
+	    par = i3f.getFormData();
+	    par.funcao = "analiseDistriPt";
+	    par.tipo = "kernel";
+	    par.tema2 = "";
+	    par.ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+	    i3f.get({
+		snackbar: false,
+		fn: function(data){
 		    i3GEO.atualiza();
 		},
-		tema = $i("i3GEOpontosdistritemasComSel").value,
-		cp = new cpaint(),
-		p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=kernel&limitepontos="+$i("i3GEOpontosdistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosdistriextendelimite").value+"&sigma="+$i("i3GEOpontosdistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
-		if(tema === ""){
-		    i3GEO.janela.tempoMsg("Escolha um tema");
-		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
-		    return;
-		}
-		cp.set_response_type("JSON");
-		cp.call(p,"analiseDistriPt",temp);
-	    }
-	    catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosdistri.aguarde.visibility = "hidden";}
+		btn: btn,
+		par: par
+	    });
 	},
 	analiseDeldir: function(btn){
-	    if(!$i("i3GEOpontosdistritemasComSel"))
-	    {return;}
-	    if(i3GEOF.pontosdistri.aguarde.visibility === "visible")
-	    {return;}
-	    i3GEOF.pontosdistri.aguarde.visibility = "visible";
-	    try{
-		var tema = $i("i3GEOpontosdistritemasComSel").value,
-		temp = function(){
-		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
+	    var p = this._parameters,
+	    i3f = this,
+	    par = i3f.getFormData();
+	    par.funcao = "analiseDistriPt";
+	    par.tipo = "deldir";
+	    par.tema2 = "";
+	    par.ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+	    i3f.get({
+		snackbar: false,
+		fn: function(data){
 		    i3GEO.atualiza();
 		},
-		cp = new cpaint(),
-		p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses=&cori=&corf=&tipo=deldir&limitepontos=&extendelimite=&sigma=&ext="+i3GEO.parametros.mapexten;
-		if(tema === ""){
-		    i3GEO.janela.tempoMsg("Escolha um tema");
-		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
-		    return;
-		}
-		cp.set_response_type("JSON");
-		cp.call(p,"analiseDistriPt",temp);
-	    }
-	    catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosdistri.aguarde.visibility = "hidden";}
+		btn: btn,
+		par: par
+	    });
 	},
 	analiseRelatorio: function(btn){
-	    if(!$i("i3GEOpontosdistritemasComSel"))
-	    {return;}
-	    if(i3GEOF.pontosdistri.aguarde.visibility === "visible")
-	    {return;}
-	    i3GEOF.pontosdistri.aguarde.visibility = "visible";
-	    try{
-		var n = $i("i3GEOpontosdistrinumclasses").value,
-		ci = $i("i3GEOpontosdistricori").value,
-		cf = $i("i3GEOpontosdistricorf").value,
-		temp = function(retorno){
-		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
-		    window.open(retorno.data);
+	    var p = this._parameters,
+	    i3f = this,
+	    par = i3f.getFormData();
+	    par.funcao = "analiseDistriPt";
+	    par.tipo = "relatorio";
+	    par.tema2 = "";
+	    par.ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+	    i3f.get({
+		snackbar: false,
+		fn: function(data){
+		    i3GEO.janela.closeMsg("<div class='text-left container-fluid'>"+data+"</div>");
 		},
-		tema = $i("i3GEOpontosdistritemasComSel").value,
-		cp = new cpaint(),
-		p = i3GEO.configura.locaplic+"/ferramentas/pontosdistri/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=analiseDistriPt&tema2=&tema="+tema+"&numclasses="+n+"&cori="+ci+"&corf="+cf+"&tipo=relatorio&limitepontos="+$i("i3GEOpontosdistrilimitePontos").value+"&extendelimite="+$i("i3GEOpontosdistriextendelimite").value+"&sigma="+$i("i3GEOpontosdistrisigma").value+"&ext="+i3GEO.parametros.mapexten;
-		if(tema === ""){
-		    i3GEO.janela.tempoMsg("Escolha um tema");
-		    i3GEOF.pontosdistri.aguarde.visibility = "hidden";
-		    return;
-		}
-		cp.set_response_type("JSON");
-		cp.call(p,"analiseDistriPt",temp);
-	    }
-	    catch(e){i3GEO.janela.tempoMsg(e);i3GEOF.pontosdistri.aguarde.visibility = "hidden";}
+		btn: btn,
+		par: par
+	    });
 	}
 };

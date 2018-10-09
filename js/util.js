@@ -1391,7 +1391,7 @@ i3GEO.util =
 	    }
 	    var monta, temp, temp1, temp2;
 	    monta =	function(retorno) {
-		var i, comboTemas = '', n, nome = "", tema;
+		var i, comboTemas = '', n, nomeopt = "", tema;
 		if (retorno == undefined || retorno.length == 0 || (retorno.data && retorno.data.length == 0)) {
 		    retorno = {"data": [{"tema":"","nome":"---"}]};
 		    incluiVazio = false;
@@ -1413,14 +1413,14 @@ i3GEO.util =
 			}
 			for (i = 0; i < n; i++) {
 			    if (retorno[i].nome) {
-				nome = retorno[i].nome;
+				nomeopt = retorno[i].nome;
 				tema = retorno[i].tema;
 			    } else {
-				nome = retorno[i].tema;
+				nomeopt = retorno[i].tema;
 				tema = retorno[i].name;
 			    }
 			    if (retorno[i].escondido !== "sim") {
-				comboTemas += "<option value=" + tema + " >" + nome + "</option>";
+				comboTemas += "<option value=" + tema + " >" + nomeopt + "</option>";
 			    }
 			}
 			comboTemas += "</select><b class='caret careti'></b>";

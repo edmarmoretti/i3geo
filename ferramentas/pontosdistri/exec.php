@@ -3,15 +3,6 @@ include (dirname(__FILE__) . "/../safe2.php");
 verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
 switch (strtoupper($_GET["funcao"]))
 {
-/*
-Valor: ANALISEDISTRIPT
-
-Gera an&aacute;lise de distribui&ccedil;&atilde;o de pontos.
-
-Executa script R para gerar a imagem.
-
-<Analise->analiseDistriPt>
-*/
 	case "ANALISEDISTRIPT":
 		include(dirname(__FILE__)."/../../classesphp/classe_analise.php");
 		if(!isset($_GET["tema2"])){
@@ -26,9 +17,6 @@ Executa script R para gerar a imagem.
 		}
 		$retorno = $m->analiseDistriPt($_SESSION["locaplic"],$_SESSION["dir_tmp"],$_SESSION["R_path"],$_GET["numclasses"],$_GET["tipo"],$_GET["cori"],$_GET["corf"],$_SESSION["tmpurl"],$_GET["sigma"],$_GET["limitepontos"],$_GET["tema2"],$_GET["extendelimite"]);
 		$m->salva();
-		if($retorno != false){
-		    $retorno = true;
-		}
 	break;
 	case "VERPALETA":
 	    include(dirname(__FILE__)."/../../classesphp/class.palette.php");
