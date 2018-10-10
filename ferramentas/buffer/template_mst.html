@@ -1,48 +1,57 @@
-<div class='container-fluid'>
-	<div id='i3GEObufferresultado'>
-		<div id='i3GEOFgradeDePontost0'>
-			<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/buffer/exemplo.png' />
-			<h5>{{{descricao}}}</h5>
-			<h5>{{{descricao2}}}</h5>
-		</div>
-		<div id='i3GEOF.buffer.t1'>
-			<div style="width: 100%;" class='form-group label-fixed condensed'>
-				<label class="control-label" for="">{{{selecionaTema}}}</label>
-				<div style="width: 100%;" class="input-group">
-					<div id='i3GEObufferSelTemas'></div>
-				</div>
-			</div>
-		</div>
-		<div id='i3GEOF.buffer.t2'>
-			<div class='form-group label-fixed condensed'>
-				<label class="control-label" for="i3GEObufferd">{{{entorno}}}</label>
-				<input class="form-control input-lg" type='text' id='i3GEObufferd' value='0' />
-			</div>
-			<div style="width: 100%;" class='form-group label-fixed condensed'>
-				<label class="control-label" for="">{{{entornoAtributo}}}</label>
-				<div style="width: 100%;" class="input-group">
-					<div id='i3GEObufferondeItens'></div>
-				</div>
-			</div>
-			<div class='form-group label-fixed condensed'>
-				<label class="control-label" for="i3GEObufferdfator">{{{multiplica}}}</label>
-				<input class="form-control input-lg" type='text' id='i3GEObufferdfator' value='1' />
-			</div>
-			<div style="width: 100%;" class='form-group label-fixed condensed'>
-				<label class="control-label" for="">{{{agregaElementos}}}</label>
-				<div style="width: 100%;" class="input-group">
-					<select class="form-control" id="i3GEObufferunir">
-						<option value=nao selected>{{{nao}}}</option>
-						<option value=sim>{{{sim}}}</option>
-					</select>
-					<b class="caret careti"></b>
-				</div>
-			</div>
-		</div>
-		<div id='i3GEOF.buffer.t3'>
-			<h5>{{{adicionaTemaEntorno}}}</h5>
-			<button onclick="i3GEOF.buffer.criaBuffer()" class='btn btn-primary btn-sm btn-raised'>{{{criaEntorno}}}</button>
-			<h5 id='i3GEObufferfim'></h5>
-		</div>
-	</div>
+<div id='{{idContainer}}' class='container' style='text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEObufferresultado'>
+            <div id='i3GEOFgradeDePontost0'>
+                <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/buffer/exemplo.png' />
+                <h5>{{{descricao}}}</h5>
+                <h5>{{{descricao2}}}</h5>
+            </div>
+            <div id='i3GEOF.buffer.t1'>
+                <div style="width: 100%;" class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                    <div class="col-md-6">
+                        <div id='i3GEObufferSelTemas'></div>
+                    </div>
+                </div>
+            </div>
+            <div id='i3GEOF.buffer.t2'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{entorno}}}</label>
+                        <div class="col-md-6 ">
+                            <input class="form-control input-lg" type='number' id='i3GEObufferd' value='0' />
+                        </div>
+                    </div>
+                    <div style="width: 100%;" class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{entornoAtributo}}} </label>
+                        <div class="col-md-6">
+                            <div id='i3GEObufferondeItens'></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{multiplica}}} </label>
+                        <div class="col-md-6 ">
+                            <input class="form-control input-lg" type='number' id='i3GEObufferdfator' value='1' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{agregaElementos}}} </label>
+                        <div class="col-md-6">
+                            <select class="form-control" id="i3GEObufferunir">
+                                <option value=nao selected>{{{nao}}}</option>
+                                <option value=sim>{{{sim}}}</option>
+                            </select> <b class="caret careti"></b>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.buffer.t3'>
+                <div class='text-center'>
+                    <button onclick="i3GEOF.buffer.get(this)" class='btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criaEntorno}}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

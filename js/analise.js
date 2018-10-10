@@ -375,7 +375,7 @@ i3GEO.analise =
 			"buffer",
 			"buffer",
 			"dependencias.php",
-		"i3GEOF.buffer.iniciaJanelaFlutuante()");
+		"i3GEOF.buffer.start()");
 	    },
 	    /**
 	     * Function: distanciaptpt

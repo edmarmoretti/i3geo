@@ -173,11 +173,13 @@ i3GEO.listaDeFerramentas = {
 				id : "subAnalise5",
 				itemdata : [
 				    [
+					/*
 					{
 					    id : "omenudataAnalise13",
 					    text : $trad("u6"),
 					    url : "javascript:i3GEO.analise.dialogo.analisaGeometrias()"
 					},
+					*/
 					{
 					    id : "omenudataAnalise14",
 					    text : $trad("u10"),
