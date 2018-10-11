@@ -188,7 +188,7 @@ i3GEO.listaDeFerramentas = {
 					{
 					    id : "omenudataAnalise15",
 					    text : $trad("u26"),
-					    url : "javascript:i3GEO.analise.dialogo.agrupaElementos()"
+					    url : "javascript:i3GEO.analise.dialogo.agrupaelementos()"
 					},
 					{
 					    id : "omenudataAnalise16",
@@ -196,20 +196,17 @@ i3GEO.listaDeFerramentas = {
 					    url : "javascript:i3GEO.analise.dialogo.centroide()"
 					},
 					{
-					    id : "omenudataAnalise17",
-					    text : $trad("t37b"),
-					    url : "javascript:i3GEO.analise.dialogo.graficoInterativo1()"
-					},
-					{
 					    id : "omenudataAnalise20",
 					    text : $trad("saikuAba"),
 					    url : "javascript:i3GEO.analise.dialogo.saiku()"
 					},
+					/*
 					{
 					    id : "omenudataAnalise23",
 					    text : $trad("saikuMapa"),
 					    url : "javascript:i3GEO.analise.dialogo.saikuMapa()"
 					},
+					*/
 					{
 					    id : "omenudataAnalise21",
 					    text : $trad("x102"),
@@ -224,6 +221,11 @@ i3GEO.listaDeFerramentas = {
 					    id : "omenudataAnalise24",
 					    text : $trad("melhorcaminho"),
 					    url : "javascript:i3GEO.analise.dialogo.melhorcaminho()"
+					},
+					{
+					    id : "omenudataAnalise17",
+					    text : $trad("t37b"),
+					    url : "javascript:i3GEO.analise.dialogo.graficoInterativo1()"
 					}
 					]
 				    ]

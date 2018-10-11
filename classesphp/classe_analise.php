@@ -1743,7 +1743,7 @@ class Analise {
 		if (file_exists ( $this->qyfile )) {
 			unlink ( $this->qyfile );
 		}
-		return ("ok");
+		return true;
 	}
 
 	/*
@@ -2444,7 +2444,7 @@ class Analise {
 		$novolayer->set ( "data", $nomeshp . ".shp" );
 		$novolayer->setmetadata ( "DOWNLOAD", "SIM" );
 		$novolayer->setmetadata ( "TEMALOCAL", "SIM" );
-		return ("ok");
+		return true;
 	}
 
 	/*

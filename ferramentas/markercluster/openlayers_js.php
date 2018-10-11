@@ -21,7 +21,7 @@ $dir = dirname(__FILE__);
 include_once($dir."/../safe.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 include_once($dir."/funcoes.php");
-
+error_reporting(0);
 $layer = $_GET["layer"];
 $tipoEstilos = $_GET["tipoEstilos"];
 $coluna = $_GET["coluna"];

@@ -11,7 +11,7 @@ i3GEOF.heatmap.dicionario = {
 		es : "Todos los puntos del mapa ser&aacute;n considerados. Si desea utilizar solo algunos puntos, haga una selecci&oacute;n y cree un tema nuevo con el resultado. Vea la herramienta de selecci&oacute;n para m&aacute;s detalles. En cuanto a la implementaci&oacute;n de Heatmap en i3Geo, vea m&aacute;s detalles en: <br><a href=http://www.patrick-wied.at/static/heatmapjs/ target=_blank  >http://www.patrick-wied.at/static/heatmapjs/</a>"
 	} ],
 	'selecionaTema' : [ {
-		pt : "Tema, que ser&aacute; utilizado",
+		pt : "Tema que ser&aacute; utilizado",
 		en : "Theme that will be used",
 		es : "Tema que ser&aacute; utilizado"
 	} ],

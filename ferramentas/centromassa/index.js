@@ -115,7 +115,6 @@ i3GEOF.centromassa = {
 			$i("i3GEOcentromassaDivPontos").innerHTML = retorno.dados;
 			var c = $i("i3GEOFcentromassaPontos");
 			c.onchange = function(){
-			    i3GEO.janela.snackBar({content: $trad('o1')});
 			    i3GEOF.centromassa.comboItens();
 			};
 		    },

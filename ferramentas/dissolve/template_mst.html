@@ -6,22 +6,22 @@
                 <h5>{{{descricao}}}</h5>
             </div>
             <div id='i3GEOF.dissolve.t1'>
-                <div style="width: 100%;" class='form-group label-fixed condensed'>
-                    <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
-                    <div class="col-md-6">
-                        <div id='i3GEOdissolveSelTemas'></div>
+                <form class="form-horizontal">
+                    <div style="width: 100%;" class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOdissolveSelTemas'></div>
+                        </div>
                     </div>
-                </div>
+                    <div style="width: 100%;" class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaItem}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOdissolveDivItem'></div>
+                        </div>
+                    </div>
+                </form>
             </div>
             <div id='i3GEOF.dissolve.t2'>
-                <div style="width: 100%;" class='form-group label-fixed condensed'>
-                    <label class="col-md-6 control-label">{{{selecionaItem}}}</label>
-                    <div class="col-md-6">
-                        <div id='i3GEOdissolveDivItem'></div>
-                    </div>
-                </div>
-            </div>
-            <div id='i3GEOF.dissolve.t3'>
                 <div class='text-center'>
                     <button onclick="i3GEOF.{{namespace}}.get(this)" class='btn btn-primary btn-sm btn-raised'>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{dissolve}}}

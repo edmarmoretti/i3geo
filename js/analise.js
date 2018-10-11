@@ -74,7 +74,7 @@ i3GEO.analise =
 			"markercluster",
 			"markercluster",
 			"dependencias.php",
-		"i3GEOF.markercluster.iniciaJanelaFlutuante()");
+		"i3GEOF.markercluster.start()");
 	    },
 	    /**
 	     * Function: heatmap
@@ -87,7 +87,7 @@ i3GEO.analise =
 			"heatmap",
 			"heatmap",
 			"dependencias.php",
-		"i3GEOF.heatmap.iniciaJanelaFlutuante()");
+		"i3GEOF.heatmap.start()");
 	    },
 	    /**
 	     * Function: saiku
@@ -401,7 +401,7 @@ i3GEO.analise =
 			"centroide",
 			"centroide",
 			"dependencias.php",
-		"i3GEOF.centroide.iniciaJanelaFlutuante()");
+		"i3GEOF.centroide.start()");
 	    },
 	    /**
 	     * Function: dissolve
@@ -417,17 +417,17 @@ i3GEO.analise =
 		"i3GEOF.dissolve.start()");
 	    },
 	    /**
-	     * Function: agrupaElementos
+	     * Function: agrupaelementos
 	     *
 	     * Ferramenta agrupa elementos
 	     */
-	    agrupaElementos : function() {
+	    agrupaelementos : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.analise.dialogo.agrupaElementos()",
+			"i3GEO.analise.dialogo.agrupaelementos()",
 			"agrupaelementos",
-			"agrupaElementos",
+			"agrupaelementos",
 			"dependencias.php",
-		"i3GEOF.agrupaElementos.iniciaJanelaFlutuante()");
+		"i3GEOF.agrupaelementos.start()");
 	    },
 	    distancia : function() {
 		i3GEO.util.dialogoFerramenta(

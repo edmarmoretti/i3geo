@@ -516,6 +516,11 @@ button>.material-icons {
     margin-bottom: 0px;
 }
 
+.modal-content {
+	background-color: #f5eeee;
+	border: 1px solid #d4d4d4;
+}
+
 .modal-content .modal-body {
     padding-right: 10px;
     padding-bottom: 16px;

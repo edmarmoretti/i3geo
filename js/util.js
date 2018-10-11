@@ -2188,12 +2188,18 @@ i3GEO.util =
 	 * {string} - (opcional) id onde os botoes serao colocados
 	 */
 	proximoAnterior : function(anterior, proxima, texto, idatual, container, mantem, onde) {
+	    if (typeof (console) !== 'undefined')
+		console.info("proximoAnterior ");
+
 	    var c,temp = $i(idatual), botoes = "", ndiv = document.createElement("div"), nids, i;
 	    if (!mantem) {
 		mantem = false;
 	    }
 	    c = $i(container);
 	    if(!c){
+		if (typeof (console) !== 'undefined')
+			console.info(container + " nao encontrado");
+
 		return;
 	    }
 	    if (temp && mantem == false && c) {

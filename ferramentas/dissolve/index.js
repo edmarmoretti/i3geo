@@ -67,11 +67,7 @@ i3GEOF.dissolve = {
 	    i3GEOF.dissolve.comboTemas();
 	},
 	t2: function(){
-	    i3GEO.util.proximoAnterior("i3GEOF.dissolve.t1()","i3GEOF.dissolve.t3()","","i3GEOF.dissolve.t2","i3GEOdissolveresultado",true,"i3GEOToolFormModalFooter");
-	    i3GEOF.dissolve.comboItem();
-	},
-	t3: function(){
-	    i3GEO.util.proximoAnterior("i3GEOF.dissolve.t2()","","","i3GEOF.dissolve.t3","i3GEOdissolveresultado",true,"i3GEOToolFormModalFooter");
+	    i3GEO.util.proximoAnterior("i3GEOF.dissolve.t1()","","","i3GEOF.dissolve.t2","i3GEOdissolveresultado",true,"i3GEOToolFormModalFooter");
 	},
 	get: function(btn){
 	    var par = {
@@ -118,8 +114,9 @@ i3GEOF.dissolve = {
 		    "i3GEOdissolvetemasComSel",
 		    function(retorno){
 			$i("i3GEOdissolveSelTemas").innerHTML = retorno.dados;
-			$i("i3GEOdissolvetemasComSel").onchange = function(){
-			    i3GEO.mapa.ativaTema($i("i3GEOdissolvetemasComSel").value);
+			var c = $i("i3GEOdissolvetemasComSel");
+			c.onchange = function(){
+			    i3GEOF.dissolve.comboItem();
 			};
 		    },
 		    "i3GEOdissolveSelTemas",

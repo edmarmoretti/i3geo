@@ -1,48 +1,66 @@
-<div class='container-fluid'>
-	<div id='i3GEOheatmapresultado'>
-		<div id='i3GEOFgradeDePontost0'>
-			<img class="img-rounded pull-left" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/heatmap/exemplo.png' />
-			<h5>{{{ajuda}}}</h5>
-			<h5>{{{ajuda2}}}</h5>
-		</div>
-		<div id='i3GEOF.heatmap.t1'>
-			<div style="width: 100%;" class='form-group label-fixed condensed'>
-				<label class="control-label" for="">{{{selecionaTema}}}</label>
-				<div style="width: 100%;" class="input-group">
-					<div id='i3GEOheatmapSelTemas'></div>
-				</div>
-			</div>
-		</div>
-		<div id='i3GEOF.heatmap.t2'>
-			<div class='form-group label-fixed condensed'>
-				<label class="control-label" for="i3GEOheatmapd">{{{valorPonto}}}</label>
-				<input class="form-control input-lg" type='text' id='i3GEOheatmapd' value='1' />
-			</div>
-			<div style="width: 100%;" class='form-group label-fixed condensed'>
-				<label class="control-label" for="">{{{selecionaAtributo}}}</label>
-				<div style="width: 100%;" class="input-group">
-					<div id='i3GEOheatmapondeItens'></div>
-				</div>
-			</div>
-		</div>
-		<div id='i3GEOF.heatmap.t3'>
-			<div class='form-group label-fixed condensed'>
-				<label class="control-label" for="i3GEOheatmapTitulo">{{{tituloNovaCamada}}}</label>
-				<input class="form-control input-lg" type='text' id='i3GEOheatmapTitulo' value='Mapa de calor' />
-			</div>
-			<div class='form-group label-fixed condensed'>
-				<label class="control-label" for="i3GEOheatmapRaio">{{{valorRaio}}}</label>
-				<input class="form-control input-lg" type='text' id='i3GEOheatmapRaio' value='15' />
-			</div>
-			<div class='form-group label-fixed condensed'>
-				<label class="control-label" for="i3GEOheatmapOpacidade">{{{opacidade}}}</label>
-				<input class="form-control input-lg" type='text' id='i3GEOheatmapOpacidade' value='50' />
-			</div>
-		</div>
-		<div id='i3GEOF.heatmap.t4'>
-			<h5>{{{adicionaTema}}}</h5>
-			<button onclick="i3GEOF.heatmap.criaheatmap()" class='btn btn-primary btn-sm btn-raised'>{{{criaCamada}}}</button>
-			<h5 id='i3GEOheatmapfim'></h5>
-		</div>
-	</div>
+<div id='{{idContainer}}' class='container' style='text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEOheatmapresultado'>
+            <div id='i3GEOF.heatmap.t0'>
+                <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/heatmap/exemplo.png' />
+                <h5>{{{ajuda}}}</h5>
+                <h5>{{{ajuda2}}}</h5>
+            </div>
+            <div id='i3GEOF.heatmap.t1'>
+                <form class="form-horizontal">
+                    <div style="width: 100%;" class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOheatmapSelTemas'></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.heatmap.t2'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{valorPonto}}}</label>
+                        <div class="col-md-6 ">
+                            <input class="form-control input-lg" type='number' id='i3GEOheatmapd' value='1' />
+                        </div>
+                    </div>
+                    <div style="width: 100%;" class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{entornoAtributo}}} </label>
+                        <div class="col-md-6">
+                            <div id='i3GEOheatmapondeItens'></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.heatmap.t3'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{tituloNovaCamada}}}</label>
+                        <div class="col-md-6 ">
+                            <input class="form-control input-lg" type='text' id='i3GEOheatmapTitulo' value='Mapa de calor' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{valorRaio}}}</label>
+                        <div class="col-md-6 ">
+                            <input class="form-control input-lg" type='number' id='i3GEOheatmapRaio' value='15' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{opacidade}}}</label>
+                        <div class="col-md-6 ">
+                            <input class="form-control input-lg" type='number' id='i3GEOheatmapOpacidade' value='50' />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.heatmap.t4'>
+                <div class='text-center'>
+                    <button onclick="i3GEOF.heatmap.get(this)" class='btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criaCamada}}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

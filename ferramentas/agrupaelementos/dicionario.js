@@ -1,5 +1,5 @@
-//+$trad(1,i3GEOF.agrupaElementos.dicionario)+
-i3GEOF.agrupaElementos.dicionario = {
+//+$trad(1,i3GEOF.agrupaelementos.dicionario)+
+i3GEOF.agrupaelementos.dicionario = {
 	'descricao' : [ {
 		pt : "Essa ferramenta transforma v&aacute;rios elementos selecionados de um tema em um s&oacute; gerando um pol&iacute;gono para cada grupo (pol&iacute;gonos convexos).",
 		en : "This tool transforms selected features of a theme into a single feature, creating a polygon for each group (convex polygons).",
