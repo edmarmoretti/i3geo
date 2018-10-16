@@ -225,7 +225,7 @@ i3GEO.listaDeFerramentas = {
 					{
 					    id : "omenudataAnalise17",
 					    text : $trad("t37b"),
-					    url : "javascript:i3GEO.analise.dialogo.graficoInterativo1()"
+					    url : "javascript:i3GEO.analise.dialogo.graficointerativo()"
 					}
 					]
 				    ]

@@ -119,24 +119,17 @@ i3GEO.analise =
 		"i3GEOF.saiku.iniciaJanelaFlutuante2()");
 	    },
 	    /**
-	     *
-	     * Ferramenta graficointerativo versao flash
-	     */
-	    graficoInterativo : function() {
-		alert("depreciado. Use graficointerativo1");
-	    },
-	    /**
 	     * Function: graficoInterativo1
 	     *
 	     * Ferramenta gr&aacute;fico interativo
 	     */
-	    graficoInterativo1 : function() {
+	    graficointerativo : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.analise.dialogo.graficointerativo1()",
-			"graficointerativo1",
-			"graficointerativo1",
+			"i3GEO.analise.dialogo.graficointerativo()",
+			"graficointerativo",
+			"graficointerativo",
 			"dependencias.php",
-		"i3GEOF.graficointerativo1.iniciaJanelaFlutuante()");
+		"i3GEOF.graficointerativo.start()");
 	    },
 	    /**
 	     * Function: linhaDoTempo

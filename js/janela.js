@@ -699,6 +699,7 @@ i3GEO.janela =
 		i3GEO.janela._formModal.on('hidden.bs.modal', function (e) {
 		    $("#i3GEOToolFormModal").html("");
 		    $("#i3GEOToolFormModalHeader").html("");
+		    $("#i3GEOToolFormModalFooter").html("").css({display: "none"});
 		});
 		i3GEO.janela._formModal.resizable(resizable);
 		if(resizable.disabled == true){
@@ -734,9 +735,9 @@ i3GEO.janela =
 		    $("#i3GEOToolFormModalHeader").html(header);
 		}
 		if(footer){
-		    $("#i3GEOToolFormModalFooter").html(footer);
+		    $("#i3GEOToolFormModalFooter").html(footer).css({display: "block"});
 		} else {
-		    $("#i3GEOToolFormModalFooter").html("");
+		    $("#i3GEOToolFormModalFooter").html("").css({display: "none"});
 		}
 		i3GEO.janela._formModal.find(".modal-content").css("height","");
 

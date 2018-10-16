@@ -1,0 +1,194 @@
+<div id='{{idContainer}}' style='text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div id='i3GEOgraficointerativoresultado'>
+        <div class="container" id='i3GEOF.graficointerativo.t0'>
+            <h3 class="header">{{{escolhatipo}}}</h3>
+            <button onclick='i3GEOF.graficointerativo.ativaTipo("pizza_1");' class='btn btn-default btn-sm btn-raised'>
+                {{{pizza2d}}} <img class="img-rounded" style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-pie-icon.png' />
+            </button>
+            <button onclick='i3GEOF.graficointerativo.ativaTipo("area_1");' class='btn btn-default btn-sm btn-raised'>
+                {{{areasimp}}} <img class="img-rounded" style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-area-stacked-icon.png' />
+            </button>
+            <button onclick='i3GEOF.graficointerativo.ativaTipo("ponto_1");' class='btn btn-default btn-sm btn-raised'>
+                {{{distpt}}} <img class="img-rounded" style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-scatter-icon.png' />
+            </button>
+            <button onclick='i3GEOF.graficointerativo.ativaTipo("linha_1");' class='btn btn-default btn-sm btn-raised'>
+                {{{linhassimp}}} <img class="img-rounded" style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-line-stacked-icon.png' />
+            </button>
+            <button onclick='i3GEOF.graficointerativo.ativaTipo("arvore_1");' class='btn btn-default btn-sm btn-raised'>
+                {{{arvore}}} <img class="img-rounded" style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-bar-icon-t.png' />
+            </button>
+            <button onclick='i3GEOF.graficointerativo.ativaTipo("bar_1");' class='btn btn-default btn-sm btn-raised'>
+                {{{barrasv}}} <img class="img-rounded" style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-bar-icon.png' />
+            </button>
+            <button onclick='i3GEOF.graficointerativo.ativaTipo("bar_2");' class='btn btn-default btn-sm btn-raised'>
+                {{{barrash}}} <img class="img-rounded" style='cursor: text;' src='{{{locaplic}}}/imagens/oxygen/22x22/Actions-office-chart-bar-icon-h.png' />
+            </button>
+        </div>
+        <div class="container" id='i3GEOF.graficointerativo.t1'>
+            <h3 class="header">{{{fontedados}}}</h3>
+            <form class="form-horizontal">
+                <div style="width: 100%;" class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{tema}}}</label>
+                    <div class="col-md-6">
+                        <div id='i3GEOgraficointerativoComboTemas'></div>
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{titulo}}}</label>
+                    <div class="col-md-6 ">
+                        <input class="form-control input-lg" type='text' id='i3GEOgraficointerativoTitulo' value='' />
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{titux}}}</label>
+                    <div class="col-md-6 ">
+                        <input class="form-control input-lg" type='text' id='i3GEOgraficointerativoTituloX' value='' />
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{tituy}}}</label>
+                    <div class="col-md-6 ">
+                        <input class="form-control input-lg" type='text' id='i3GEOgraficointerativoTituloY' value='' />
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{itemcx}}}</label>
+                    <div class="col-md-6 ">
+                        <div id='i3GEOgraficointerativoComboX'></div>
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{itemcy}}}</label>
+                    <div class="col-md-6 ">
+                        <div id='i3GEOgraficointerativoComboY'></div>
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{excluirval}}}</label>
+                    <div class="col-md-6 ">
+                        <input class="form-control input-lg" type='text' id='i3GEOgraficointerativoexcluir' value='' />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <div class="container" id='i3GEOF.graficointerativo.t2'>
+            <h3 class="header">{{{configgr}}}</h3>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOgraficointerativoCoresA' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{geracor}}}
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input type="checkbox" onclick="i3GEOF.graficointerativo.atualiza = this.checked">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{atualizaNavegacao}}}
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOgraficointerativoxInclinado' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{inclinax}}}
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOgraficointerativoAdLinhas' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{adlinbarras}}}
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOgraficointerativoAcumula' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{utilizvalacum}}}
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOgraficointerativoRelativa' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{utilizvalrelat}}} (%)
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOgraficointerativoOrdenaX' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{ordenax}}}
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOgraficointerativoDadosPuros' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{naoprocessa}}}
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOFgraficointerativoativaStacked' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{stacked}}}
+                </label>
+            </div>
+            <div class="checkbox text-left">
+                <label>
+                    <input id='i3GEOFgraficointerativoativaRowsInColumns' type="checkbox">
+                    <span class="checkbox-material noprint"> <span class="check"></span>
+                    </span> {{{linhasnascols}}}
+                </label>
+            </div>
+            <div style="width: 50%;" class='form-group label-fixed condensed'>
+                <label class="control-label" for="">{{{tipoagregay}}}</label>
+                <div style="width: 100%;" class="input-group">
+                    <select onchange='i3GEOF.graficointerativo.obterDados()' class="form-control" id="i3GEOgraficointerativoTipoAgregacao">
+                        <option value='soma'>{{{soma}}}</option>
+                        <option value='media'>{{{media}}}</option>
+                    </select> <b class="caret careti"></b>
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="control-label" for="">{{{fatcalclarg}}}</label>
+                <input style="width: 50%" class="form-control input-lg" type='text' id='i3GEOgraficointerativoFatorTamanho' value='0' />
+            </div>
+
+            <div class='form-group label-fixed condensed'>
+                <label class="control-label" for="">Largura</label>
+                <input style="width: 50%" class="form-control input-lg" type='text' id='i3GEOgraficointerativoW' value='{{w}}' />
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="control-label" for="">Altura</label>
+                <input style="width: 50%" class="form-control input-lg" type='text' id='i3GEOgraficointerativoH' value='{{h}}' />
+            </div>
+        </div>
+        <div class="container" id='i3GEOF.graficointerativo.t3'>
+            <div class='text-center'>
+                <button onclick="i3GEOF.graficointerativo.obterDados(this)" class='btn btn-primary btn-sm btn-raised'>
+                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{obterdados}}}
+                </button>
+            </div>
+            <div id='i3GEOgraficointerativoDados'></div>
+        </div>
+        <div class="container" id='i3GEOF.graficointerativo.t4'>
+            <div class="form-group condensed">
+                <button onclick='i3GEOF.graficointerativo.alteraFatorPixelMenos()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">photo_size_select_small</span>
+                </button>
+                <button onclick='i3GEOF.graficointerativo.alteraFatorPixelMais()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">photo_size_select_large</span>
+                </button>
+                <button onclick='i3GEOF.graficointerativo.csv()' class="btn btn-xs" style="margin: 2px; padding: 2px;">CSV</button>
+                <button onclick='i3GEOF.graficointerativo.png()' class="btn btn-xs" style="margin: 2px; padding: 2px;">PNG</button>
+            </div>
+            <div id='i3GEOgraficointerativoguia4objCanvas' style='top: 35px;'></div>
+        </div>
+    </div>
+</div>
+<form method=post action='{{{locaplic}}}/pacotes/svg2img.php' id='i3GEOgraficointerativoPNG' target='_blank'>
+    <input type=hidden name='svg' value='' />
+</form>

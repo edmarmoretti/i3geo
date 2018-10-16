@@ -46,6 +46,7 @@ i3GEOF.gradepol = {
 		    this,
 		    {
 			texto: Mustache.render(p.mustache, hash),
+			footer: true,
 			onclose: i3f.destroy,
 			resizable: {
 			    disabled: false,

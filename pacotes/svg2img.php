@@ -1,9 +1,8 @@
 <?php
+error_reporting(0);
 define(I3GEO,true);
 include("validaacesso.php");
-if(simplexml_load_string($_POST["svg"])===FALSE) {
-	die;
-}
+
 ?>
 <html>
 <head>

@@ -348,12 +348,12 @@ i3GEO.mapa =
 	    // carrega o script do editor vetorial
 	    if (graficos.length > 0) {
 		var inicia = function() {
-		    i3GEOF.graficointerativo1.restauraGraficos(graficos);
+		    i3GEOF.graficointerativo.restauraGraficos(graficos);
 		};
 		i3GEO.util.scriptTag(
-			i3GEO.configura.locaplic + "/ferramentas/graficointerativo1/dependencias.php",
+			i3GEO.configura.locaplic + "/ferramentas/graficointerativo/dependencias.php",
 			inicia,
-			"graficointerativo1",
+			"graficointerativo",
 			true);
 	    }
 	},

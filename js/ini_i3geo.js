@@ -704,6 +704,7 @@ var i3GEO = {
 			    // caso o mapa atual tenha sido recuperado do banco de
 			    // dados
 			    //
+			    //TODO refazer essas funcionalidades
 			    if (retorno.data.customizacoesinit) {
 				// recupera os layers graficos
 				if (preferencias.geometriasbase64

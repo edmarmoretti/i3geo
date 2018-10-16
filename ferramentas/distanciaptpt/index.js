@@ -47,6 +47,7 @@ i3GEOF.distanciaptpt = {
 		    {
 			texto: Mustache.render(p.mustache, hash),
 			onclose: i3f.destroy,
+			footer: true,
 			resizable: {
 			    disabled: false,
 			    ghost: true,

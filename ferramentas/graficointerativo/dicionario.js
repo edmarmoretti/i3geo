@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.graficointerativo1.dicionario)+
-i3GEOF.graficointerativo1.dicionario =
+i3GEOF.graficointerativo.dicionario =
 	{
 		"tipo" : [
 			{
@@ -115,7 +115,7 @@ i3GEOF.graficointerativo1.dicionario =
 		],
 		"geracor" : [
 			{
-				pt : "gera cores aleat&oacute;rias",
+				pt : "Gera cores aleat&oacute;rias",
 				en : "generates random colors",
 				es : "genera colores aleatorios"
 			}
@@ -409,6 +409,22 @@ i3GEOF.graficointerativo1.dicionario =
 				pt : "Lista com os gr&aacute;ficos sobrepostos na atual composi&ccedil;&atilde;o:",
 				en : "List with overlapping charts in the current composition:",
 				es : "Lista con los gr&aacute;ficos superpuestos en la composici&oacute;n actual:",
+				it : ""
+			}
+		],
+		"parametros" : [
+			{
+				pt : "Par&acirc;metros",
+				en : "",
+				es : "",
+				it : ""
+			}
+		],
+		"fontedados" : [
+			{
+				pt : "Fonte dos dados",
+				en : "",
+				es : "",
 				it : ""
 			}
 		]
