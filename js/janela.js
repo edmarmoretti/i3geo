@@ -733,6 +733,8 @@ i3GEO.janela =
 		$("#i3GEOToolFormModal").html(texto);
 		if(header){
 		    $("#i3GEOToolFormModalHeader").html(header);
+		} else {
+		    $("#i3GEOToolFormModalHeader").html("");
 		}
 		if(footer){
 		    $("#i3GEOToolFormModalFooter").html(footer).css({display: "block"});

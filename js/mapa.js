@@ -741,31 +741,26 @@ i3GEO.mapa =
 	     *
 	     * Abre a janela de dialogo da ferramenta salvamapa
 	     */
-	    salvaMapa : function() {
-		if (i3GEO.parametros === "") {
-		    i3GEO.janela
-		    .tempoMsg("Essa opcao nao pode ser ativada. Consulte o administrador do sistema. Mapfile nao esta exposto.");
-		    return;
-		}
+	    salvamapa : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.salvaMapa()",
+			"i3GEO.mapa.dialogo.salvamapa()",
 			"salvamapa",
-			"salvaMapa",
+			"salvamapa",
 			"dependencias.php",
-		"i3GEOF.salvaMapa.iniciaJanelaFlutuante()");
+		"i3GEOF.salvamapa.start()");
 	    },
 	    /**
-	     * Function: carregaMapa
+	     * Function: carregamapa
 	     *
 	     * Abre a janela de dialogo da ferramenta carregamapa
 	     */
-	    carregaMapa : function() {
+	    carregamapa : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.tema.dialogo.carregaMapa()",
+			"i3GEO.mapa.dialogo.carregamapa()",
 			"carregamapa",
-			"carregaMapa",
+			"carregamapa",
 			"dependencias.php",
-		"i3GEOF.carregaMapa.iniciaJanelaFlutuante()");
+		"i3GEOF.carregamapa.start()");
 	    },
 	    /**
 	     * Function: convertews

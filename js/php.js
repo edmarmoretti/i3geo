@@ -643,20 +643,8 @@ i3GEO.php =
 		return;
 	    }
 	    retorno = function(retorno) {
-		switch (i3GEO.Interface.ATUAL) {
-		case "googlemaps":
-		    if (atualiza === true) {
-			i3GEO.Interface.googlemaps.zoom2extent(ext);
-		    }
-		    break;
-		case "openlayers":
-		    i3GEO.Interface.openlayers.zoom2ext(ext);
-		    break;
-		}
-		try {
-		    funcao.call(funcao, retorno);
-		} catch (e) {
-		}
+		i3GEO.Interface.openlayers.zoom2ext(ext);
+		funcao.call(funcao, retorno);
 	    };
 	    var p = locaplic + "/classesphp/mapa_controle.php";
 	    var par = "funcao=mudaext&tipoimagem=" + tipoimagem + "&ext=" + ext + "&g_sid=" + sid + "&geo=" + geo;

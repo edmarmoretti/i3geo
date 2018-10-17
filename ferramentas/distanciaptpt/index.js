@@ -46,21 +46,21 @@ i3GEOF.distanciaptpt = {
 		    this,
 		    {
 			texto: Mustache.render(p.mustache, hash),
-			onclose: i3f.destroy,
 			footer: true,
+			onclose: i3f.destroy,
 			resizable: {
 			    disabled: false,
 			    ghost: true,
 			    handles: "se,n"
 			},
-			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+			css: {'cursor': 'pointer', 'width':'', 'height': '50%','position': 'fixed','top': 0, 'left': 0, 'right': 0, bottom: 'unset', 'margin': 'auto'}
 		    });
 	    i3GEO.eventos.cliquePerm.ativa();
 	    i3GEOF.distanciaptpt.t0();
 	},
 	t0: function()
 	{
-	    i3GEO.util.proximoAnterior("","i3GEOF.distanciaptpt.t1()","","i3GEOFgradeDePontost0","i3GEOdistanciaptptresultado",true,"i3GEOToolFormModalFooter");
+	    i3GEO.util.proximoAnterior("","i3GEOF.distanciaptpt.t1()","","i3GEOF.distanciaptpt.t0","i3GEOdistanciaptptresultado",true,"i3GEOToolFormModalFooter");
 	},
 	t1: function(){
 	    i3GEO.util.proximoAnterior("i3GEOF.distanciaptpt.t0()","i3GEOF.distanciaptpt.t2()","","i3GEOF.distanciaptpt.t1","i3GEOdistanciaptptresultado",true,"i3GEOToolFormModalFooter");

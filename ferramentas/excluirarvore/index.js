@@ -29,10 +29,8 @@ i3GEOF.excluirarvore = {
 	    hash["namespace"] = p.namespace;
 	    hash["idContainer"] = p.idContainer;
 	    hash["idlista"] = p.idlista;
-	    i3GEO.janela.formModal({texto: Mustache.render(p.mustache, hash)});
 	    i3GEOF.excluirarvore.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
 	    i3GEOF.excluirarvore.lista();
-	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	},
 	lista: function(){
 	    var camadas = i3GEO.arvoreDeCamadas.CAMADAS,

@@ -3189,5 +3189,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "extatua" : [
+            {
+                pt : "Extens&atilde;o atualizada",
+                en : "",
+                es : ""
+            }
         ]
     };

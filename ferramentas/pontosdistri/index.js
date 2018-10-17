@@ -47,22 +47,16 @@ i3GEOF.pontosdistri = {
 		    this,
 		    {
 			texto: Mustache.render(p.mustache, hash),
+			footer: true,
 			onclose: i3f.destroy,
 			resizable: {
 			    disabled: false,
 			    ghost: true,
 			    handles: "se,n"
 			},
-			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+			css: {'cursor': 'pointer', 'width':'', 'height': '50%','position': 'fixed','top': 0, 'left': 0, 'right': 0, bottom: 'unset', 'margin': 'auto'}
+
 		    });
-	    i3GEO.guias.mostraGuiaFerramenta("i3GEO" + p.namespace + "guia1","i3GEO" + p.namespace + "guia");
-	    //eventos das guias
-	    $i("i3GEO" + p.namespace + "guia1").onclick = function(){
-		i3GEO.guias.mostraGuiaFerramenta("i3GEO" + p.namespace + "guia1","i3GEO" + p.namespace + "guia");
-	    };
-	    $i("i3GEO" + p.namespace + "guia2").onclick = function(){
-		i3GEO.guias.mostraGuiaFerramenta("i3GEO" + p.namespace + "guia2","i3GEO" + p.namespace + "guia");
-	    };
 	    i3GEO.util.aplicaAquarela(p.idContainer);
 	    i3GEO.util.comboTemas(
 		    "",
@@ -76,6 +70,17 @@ i3GEOF.pontosdistri = {
 		    " "
 	    );
 	    i3GEO.janela.snackBar({content: $trad('alerta1',i3GEOF.pontosdistri.dicionario)});
+	    i3GEOF.pontosdistri.t0();
+	},
+	t0: function()
+	{
+	    i3GEO.util.proximoAnterior("","i3GEOF.pontosdistri.t1()","","i3GEOF.pontosdistri.t0","i3GEOpontosdistriresultado",true,"i3GEOToolFormModalFooter");
+	},
+	t1: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.pontosdistri.t0()","i3GEOF.pontosdistri.t2()","","i3GEOF.pontosdistri.t1","i3GEOpontosdistriresultado",true,"i3GEOToolFormModalFooter");
+	},
+	t2: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.pontosdistri.t1()","","","i3GEOF.pontosdistri.t2","i3GEOpontosdistriresultado",true,"i3GEOToolFormModalFooter");
 	},
 	get: function({snackbar = true, btn = false, par = {}, fn = false} = {}){
 	    var p = this._parameters,

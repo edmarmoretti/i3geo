@@ -517,7 +517,6 @@ button>.material-icons {
 }
 
 .modal-content {
-	background-color: #f5eeee;
 	border: 1px solid #d4d4d4;
 }
 
@@ -595,7 +594,7 @@ a, a:focus, a:hover {
 	color: #767676;
 }
 
-.label, label {
+.label {
 	color: white;
 }
 

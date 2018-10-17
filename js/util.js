@@ -2212,12 +2212,12 @@ i3GEO.util =
 	    if (anterior !== "") {
 		anterior = anterior.replace("()","");
 		botoes +=
-		    "<li><a onclick='" + anterior + "()' class='withripple condensed' href='javascript:void(0)'><i class='material-icons'>navigate_before</i> " + $trad("anterior") + "</a></li>";
+		    "<li><a onclick='" + anterior + "();$(\"#" + container + "\").get(0).scrollIntoView();' class='withripple condensed' href='javascript:void(0)'><i class='material-icons'>navigate_before</i> " + $trad("anterior") + "</a></li>";
 	    }
 	    if (proxima !== "") {
 		proxima = proxima.replace("()","");
 		botoes +=
-		    "<li><a onclick='" + proxima + "()' class='withripple condensed' href='javascript:void(0)'>" + $trad("proximo") + " <i class='material-icons'>navigate_next</i></a></li>";
+		    "<li><a onclick='" + proxima + "();$(\"#" + container + "\").get(0).scrollIntoView();' class='withripple condensed' href='javascript:void(0)'>" + $trad("proximo") + " <i class='material-icons'>navigate_next</i></a></li>";
 	    }
 	    botoes += "</ul>";
 	    if (onde) {

@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.salvaMapa.dicionario)+
-i3GEOF.salvaMapa.dicionario = {
+i3GEOF.salvamapa.dicionario = {
 	'salvaMapa' : [ {
 		pt : "Salvar o mapa",
 		en : "Save the map",
@@ -21,7 +21,7 @@ i3GEOF.salvaMapa.dicionario = {
 		es : "Mapa guardado"
 	} ],
 	'ajuda' : [ {
-		pt : "Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente. Gr&aacute;ficos e desenhos tamb&eacute;m s&atilde;o salvos.",
+		pt : "Salvando o mapa atual, voc&ecirc; poder&aacute; carreg&aacute;-lo novamente. Apenas as camadas e suas configura&ccedil;&otilde;es ser&atilde;o salvas, elementos gr&aacute;ficos ser&atilde;o perdidos.",
 		en : "When saving the current map, it can be uploaded again. Graphics and drawings can also be saved.",
 		es : "Si usted guarda el mapa actual, usted puede volver a cargarlo. Gr&aacute;ficos y dibujos tambi&eacute;n se pueden guardar."
 	} ],
@@ -31,9 +31,9 @@ i3GEOF.salvaMapa.dicionario = {
 		es : "Almacene el archivo de configuraci&oacute;n del mapa en su equipo"
 	} ],
 	'ajuda4' : [ {
-		pt : "fazendo o download. Isso permitir&aacute; que voc&ecirc; fa&ccedil;a o upload desse mesmo arquivo, restaurando o mapa.",
-		en : "downloading it. This will allow you to upload the same file and restore the map.",
-		es : "haciendo la descarga. Esto le permitir&aacute; cargar el mismo archivo y restaurar el mapa."
+		pt : "Isso permitir&aacute; que voc&ecirc; fa&ccedil;a o upload desse mesmo arquivo, restaurando o mapa.",
+		en : "This will allow you to upload the same file and restore the map.",
+		es : "Esto le permitir&aacute; cargar el mismo archivo y restaurar el mapa."
 	} ],
 	'salvaArquivo' : [ {
 		pt : "Clique no link abaixo com o bot&atilde;o direito do mouse e salve o arquivo em seu computador. Para carregar o mapa salvo utilize a op&ccedil;&atilde;o de carregar mapa.",

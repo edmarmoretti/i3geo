@@ -46,14 +46,14 @@ i3GEOF.centroide = {
 		    this,
 		    {
 			texto: Mustache.render(p.mustache, hash),
-			onclose: i3f.destroy,
 			footer: true,
+			onclose: i3f.destroy,
 			resizable: {
 			    disabled: false,
 			    ghost: true,
 			    handles: "se,n"
 			},
-			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+			css: {'cursor': 'pointer', 'width':'', 'height': '50%','position': 'fixed','top': 0, 'left': 0, 'right': 0, bottom: 'unset', 'margin': 'auto'}
 		    });
 	    i3GEO.eventos.cliquePerm.ativa();
 	    i3f.t0();

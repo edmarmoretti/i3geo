@@ -376,14 +376,7 @@ function iniciaParGrafico($gw,$gh,$res,$dir_tmp,$gfile_name,$margem,$margemexter
 }
 function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$tipo,$percentual,$ext="",$incluicores=true,$ordenax="nao")
 {
-	global $interface;
-	//prepara o mapfile
-	//
-	$map = ms_newMapObj($map_file);
-	if($interface == "googlemaps"){
-		$projMapa = $map->getProjection();
-		$map->setProjection("init=epsg:4618,a=6378137,b=6378137");
-	}
+    $map = ms_newMapObj($map_file);
 	if($ext && $ext != ""){
 		$e = explode(" ",$ext);
 		$extatual = $map->extent;
@@ -392,7 +385,10 @@ function iniciaDadosGrafico($map_file,$tema,$exclui,$itemclasses,$itemvalores,$t
 	$layer = $map->getLayerByName($tema);
 	//verifica se tem selecao
 	$selecionados = carregaquery2($map_file,$layer,$map);
-	if ($exclui == ""){$exclui = "nulo";}
+	if ($exclui == ""){
+	    $exclui = "nulo";
+	}
+
 	//pega os valores
 	//$itemvalores pode ser um array de intens
 	$nnval = array();

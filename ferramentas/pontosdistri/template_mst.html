@@ -1,93 +1,78 @@
-<nav class='navbar navbar-default' style='margin-bottom: 0px; min-height: 35px'>
-    <div class="container" style="margin: 0px;">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
-                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
-            </button>
+<div id='{{idContainer}}' class='container' style='width: auto; text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div id='i3GEOpontosdistriresultado'>
+        <div id='i3GEOF.pontosdistri.t0'>
+            <form class="form-horizontal">
+                <div style="width: 100%;" class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                    <div class="col-md-6">
+                        <div id='i3GEOpontosdistriTemas'></div>
+                    </div>
+                </div>
+                <div style="width: 100%;" class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{restringeAnalise}}}</label>
+                    <div class="col-md-6">{{{limitePontos}}}</div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{extendeAbrangencia}}} %</label>
+                    <div class="col-md-6 ">
+                        <input class="form-control input-lg" type='number' name='extendelimite' value='10' />
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{desvioPadrao}}} N</label>
+                    <div class="col-md-6 ">
+                        <input class="form-control input-lg" type='number' name='sigma' value='' />
+                    </div>
+                </div>
+            </form>
         </div>
-        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse" style="padding: 10px; overflow-x: hidden; max-height: 200px;">
-            <ul class="nav navbar-nav ">
-                <li role="presentation"><a id='i3GEO{{namespace}}guia2' href="javascript:void(0);">
-                        <span class="material-icons">settings</span>
-                    </a></li>
-                <li class="active" role="presentation"><a id='i3GEO{{namespace}}guia1' href="javascript:void(0);">
-                        <em>{{{calculo}}}</em>
-                    </a></li>
-            </ul>
+        <div id='i3GEOF.pontosdistri.t1'>
+            <form class="form-horizontal">
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{numeroClasses}}}</label>
+                    <div class="col-md-4 ">
+                        <input class="form-control input-lg" type='number' name='numclasses' value='50' />
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{corInicial}}}</label>
+                    <div class="col-md-4 ">
+                        <input class="form-control input-lg i3geoFormIconeAquarela" type='text' name='cori' value='0,0,0' />
+                    </div>
+                </div>
+                <div class='form-group label-fixed condensed'>
+                    <label class="col-md-6 control-label">{{{corFinal}}}</label>
+                    <div class="col-md-4 ">
+                        <input class="form-control input-lg i3geoFormIconeAquarela" type='text' name='corf' value='255,255,255' />
+                    </div>
+                </div>
+            </form>
+            <div class="text-center" style="top: 10px">
+                <button onclick="i3GEOF.pontosdistri.verCores(this)" class='btn btn-primary btn-sm btn-raised'>
+                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{verCor}}}
+                </button>
+            </div>
+            <div id='i3GEOpontosdistrimostracores' style='display: block; top: 10px;'></div>
         </div>
-    </div>
-</nav>
-<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
-    <div id='i3GEO{{namespace}}guia1obj' class='container-fluid'>
-        <form class="form-horizontal">
-            <div style="width: 100%;" class='form-group label-fixed condensed'>
-                <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
-                <div class="col-md-6">
-                    <div id='i3GEOpontosdistriTemas'></div>
-                </div>
+        <div id='i3GEOF.pontosdistri.t2'>
+            <div class="text-center">
+                <button onclick="i3GEOF.pontosdistri.analiseDensidade(this)" class='btn btn-primary btn-sm btn-raised'>
+                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{densidadePontos}}}
+                </button>
+                <button onclick="i3GEOF.pontosdistri.analiseDistancia(this)" class='btn btn-primary btn-sm btn-raised'>
+                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{distanciaPontos}}}
+                </button>
+                <button onclick="i3GEOF.pontosdistri.analiseDeldir(this)" class='btn btn-primary btn-sm btn-raised'>
+                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> Delaunay/Voronoi
+                </button>
+                <button onclick="i3GEOF.pontosdistri.analiseKernel(this)" class='btn btn-primary btn-sm btn-raised'>
+                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> Kernel
+                </button>
+                <button onclick="i3GEOF.pontosdistri.analiseRelatorio(this)" class='btn btn-primary btn-sm btn-raised'>
+                    <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{relatorio}}}
+                </button>
             </div>
-            <div style="width: 100%;" class='form-group label-fixed condensed'>
-                <label class="col-md-6 control-label">{{{restringeAnalise}}}</label>
-                <div class="col-md-6">{{{limitePontos}}}</div>
-            </div>
-            <div class='form-group label-fixed condensed'>
-                <label class="col-md-6 control-label">{{{extendeAbrangencia}}} %</label>
-                <div class="col-md-6 ">
-                    <input class="form-control input-lg" type='number' name='extendelimite' value='10' />
-                </div>
-            </div>
-            <div class='form-group label-fixed condensed'>
-                <label class="col-md-6 control-label">{{{desvioPadrao}}} N</label>
-                <div class="col-md-6 ">
-                    <input class="form-control input-lg" type='number' name='sigma' value='' />
-                </div>
-            </div>
-        </form>
-        <div class="text-center" style="top: 10px">
-            <button onclick="i3GEOF.pontosdistri.analiseDensidade(this)" class='btn btn-primary btn-sm btn-raised'>
-                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{densidadePontos}}}
-            </button>
-            <button onclick="i3GEOF.pontosdistri.analiseDistancia(this)" class='btn btn-primary btn-sm btn-raised'>
-                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{distanciaPontos}}}
-            </button>
-            <button onclick="i3GEOF.pontosdistri.analiseDeldir(this)" class='btn btn-primary btn-sm btn-raised'>
-                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> Delaunay/Voronoi
-            </button>
-            <button onclick="i3GEOF.pontosdistri.analiseKernel(this)" class='btn btn-primary btn-sm btn-raised'>
-                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> Kernel
-            </button>
-            <button onclick="i3GEOF.pontosdistri.analiseRelatorio(this)" class='btn btn-primary btn-sm btn-raised'>
-                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{relatorio}}}
-            </button>
         </div>
-    </div>
-    <div id='i3GEO{{namespace}}guia2obj' class='container-fluid'>
-        <form class="form-horizontal">
-            <div class='form-group label-fixed condensed'>
-                <label class="col-md-6 control-label">{{{numeroClasses}}}</label>
-                <div class="col-md-4 ">
-                    <input class="form-control input-lg" type='number' name='numclasses' value='50' />
-                </div>
-            </div>
-            <div class='form-group label-fixed condensed'>
-                <label class="col-md-6 control-label">{{{corInicial}}}</label>
-                <div class="col-md-4 ">
-                    <input class="form-control input-lg i3geoFormIconeAquarela" type='text' name='cori' value='0,0,0' />
-                </div>
-            </div>
-            <div class='form-group label-fixed condensed'>
-                <label class="col-md-6 control-label">{{{corFinal}}}</label>
-                <div class="col-md-4 ">
-                    <input class="form-control input-lg i3geoFormIconeAquarela" type='text' name='corf' value='255,255,255' />
-                </div>
-            </div>
-        </form>
-        <div class="text-center" style="top: 10px">
-            <button onclick="i3GEOF.pontosdistri.verCores(this)" class='btn btn-primary btn-sm btn-raised'>
-                <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{verCor}}}
-            </button>
-        </div>
-        <div id='i3GEOpontosdistrimostracores' style='display: block;top: 10px;'></div>
     </div>
 </div>
 <input type='hidden' id='i3GEOpontosdistrilistadeitens' value='' />

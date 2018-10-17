@@ -1,16 +1,17 @@
-<div class='container-fluid'>
-	<h5></h5>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
 	<form class="form-horizontal" role="form" id='i3GEOcarregamapaf' target='i3GEOcarregamaiframe' action='{{{locaplic}}}/ferramentas/carregamapa/upload.php' method='post' ENCTYPE='multipart/form-data'>
-		<div class="input-group-btn">
-			<button style="margin-right:10px;" type="button" class="btn btn-primary btn-sm btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">{{{arquivo}}}</button>
-			<input name="i3GEOcarregamapafilemap" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
-			<span class="form-control upload">{{{insereArquivo}}}</span>
-		</div>
+		<div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{arquivo}}}</label>
+            <div class="col-md-6 ">
+                <input required onclick="$(this).parent().find('input[type=file]').click();" class="form-control input-lg" type='text' name="i3GEOcarregamapafilemap" />
+                <input name="i3GEOcarregamapafilemap" onchange="$(this).parent().find('.form-control').val($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file">
+                <b class="caret careti"></b>
+            </div>
+        </div>
 		<br>
 		<button name="submit" onclick="i3GEOF.carregaMapa.submete()" class='btn btn-primary btn-sm btn-raised'>{{{carregaArquivo}}}</button>
 		<input type='hidden' name='g_sid' value='{{{sid}}}'>
 		<input type='hidden' name='MAX_FILE_SIZE' value='100000'>
 	</form>
-
 	<iframe name='i3GEOcarregamaiframe' width='98%' height='70px' style='text-align: left; border: 1px solid gray;'></iframe>
 </div>

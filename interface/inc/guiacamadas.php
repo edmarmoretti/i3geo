@@ -38,6 +38,13 @@
                 <li><a onclick="i3GEO.mapa.limpasel({verifica:true})" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-erase"></span> {{{t4}}}
                     </a></li>
+                <li role="separator" class="divider"></li>
+                <li><a onclick="i3GEO.mapa.dialogo.salvamapa()" href="javascript:void(0)">
+                        <span class="glyphicon glyphicon-floppy-save"></span> {{{u17}}}
+                    </a></li>
+                <li><a onclick="i3GEO.mapa.dialogo.carregamapa()" href="javascript:void(0)">
+                        <span class="glyphicon glyphicon-floppy-open"></span> {{{u18}}}
+                    </a></li>
             </ul>
         </div>
         <button title="{{{iconeCatalogo}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj"

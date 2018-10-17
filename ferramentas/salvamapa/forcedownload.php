@@ -4,18 +4,26 @@ use Defuse\Crypto\Crypto;
 use Defuse\Crypto\Key;
 use Defuse\Crypto\File;
 
-include(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+include (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
 //
 //o usuario deve ter entrado pelo i3Geo
 //
-if(empty($fingerprint)){
+if(empty($_SESSION["fingerprint"])){
 	return;
 }
+$map_file = $_SESSION["map_file"];
 //
 //verifica se deve ser utilizado o metodo de criptografia
 //
 include(dirname(__FILE__)."/../../ms_configura.php");
+
+$mapa = ms_newMapObj($map_file);
+$e = explode(" ",str_replace(","," ",$_GET["ext"]));
+$extatual = $mapa->extent;
+$extatual->setextent($e[0],$e[1],$e[2],$e[3]);
+$mapa->save($map_file);
+
 if(isset($i3geoKeys)){
 	if(	$i3geoKeys["salvaMapfile"] != "" ){
 		$keyAscii = $i3geoKeys["salvaMapfile"];
@@ -75,7 +83,6 @@ for ($i=0;$i < $c;++$i){
 	}
 }
 $remover = array_unique($remover);
-
 $mapa->save($arquivo);
 $mapa = null;
 removeCabecalho($arquivo,$remover);
@@ -90,7 +97,8 @@ function removeCabecalho($arq,$remover){
 	$handle = fopen($arq, "r");
 	if ($handle){
 		$cabeca = array();
-		//$cabeca[] = "MAP\n";
+		$cabeca[] = "MAP\n";
+		$cabeca[] = "EXTENT " . str_replace(","," ",$_GET["ext"]) . " \n";
 		$grava = false;
 		while (!feof($handle)){
 			$linha = fgets($handle);

@@ -31,6 +31,7 @@ i3GEO.listaDeFerramentas = {
 			text : $trad("x68"),
 			url : "javascript:i3GEO.janela.tempoMsg(i3GEO.parametros.mensageminicia)"
 		    },
+		    /*
 		    {
 			id : "omenudataAjudamenu2",
 			text : $trad("u2"),
@@ -41,6 +42,7 @@ i3GEO.listaDeFerramentas = {
 			text : $trad("u4a"),
 			url : "javascript:i3GEO.ajuda.abreDoc('/documentacao/manual-i3geo-6_0-pt.pdf')"
 		    },
+		    */
 		    {
 			id : "omenudataAjudamenu4",
 			text : "Youtube",
@@ -233,16 +235,6 @@ i3GEO.listaDeFerramentas = {
 			}
 			],
 			"arquivos" : [
-			    {
-				id : "omenudataArquivos1",
-				text : $trad("u17"),
-				url : "javascript:i3GEO.mapa.dialogo.salvaMapa()"
-			    },
-			    {
-				id : "omenudataArquivos2",
-				text : $trad("u18"),
-				url : "javascript:i3GEO.mapa.dialogo.carregaMapa()"
-			    },
 			    {
 				id : "omenudataArquivos6",
 				text : $trad("x72"),
@@ -473,47 +465,6 @@ i3GEO.listaDeFerramentas = {
 										url : "javascript:i3GEO.mapa.dialogo.metaestatListaMapas()"
 									}
 						     */
-						    ]
-						]
-					}
-				    },
-				    // conexoes
-				    {
-					id : "omenudataFerramentas0c",
-					text : $trad("a15"),
-					submenu : {
-					    id : "subFerr4",
-					    itemdata : [
-						[
-						    {
-							id : "omenudataFerramentas14",
-							text : $trad("conexaoServicoGeo"),
-							url : "javascript:i3GEO.arvoreDeTemas.dialogo.conectaservico()"
-						    }
-						    /* TODO reativar?,
-									{
-										id : "omenudataFerramentas9i",
-										text : $trad("x85"),
-										url : "javascript:i3GEO.arvoreDeTemas.dialogo.vinde()"
-									}
-						     */
-						    ]
-						]
-					}
-				    },
-				    // upload
-				    {
-					id : "omenudataFerramentas0d",
-					text : 'Upload',
-					submenu : {
-					    id : "subFerr5",
-					    itemdata : [
-						[
-						    {
-							id : "omenudataFerramentas13",
-							text : $trad("uploadArquivoGeo"),
-							url : "javascript:i3GEO.arvoreDeTemas.dialogo.uploadarquivo()"
-						    }
 						    ]
 						]
 					}

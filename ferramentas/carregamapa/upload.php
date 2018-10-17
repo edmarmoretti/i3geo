@@ -3,15 +3,17 @@ require __DIR__ . '/../../pacotes/composer/vendor/autoload.php';
 use Defuse\Crypto\Key;
 use Defuse\Crypto\File;
 
-include(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+$_GET["g_sid"] = $_POST["g_sid"];
+include (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
 //
 //o usuario deve ter entrado pelo i3Geo
 //
-if(empty($fingerprint)){
+if(empty($_SESSION["fingerprint"])){
 	echo "<p class='paragrafo' >Erro ao enviar o arquivo. (1)";
 	return;
 }
+$locaplic = $_SESSION["locaplic"];
 include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 
 if(isset($logExec) && $logExec["upload"] == true){
@@ -29,7 +31,7 @@ if(isset($logExec) && $logExec["upload"] == true){
 <?php
 if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES['i3GEOcarregamapafilemap']['name'])) < 200){
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
-	$dirmap = $dir_tmp;
+	$dirmap = $_SESSION["dir_tmp"];
 	$Arquivo = $_FILES['i3GEOcarregamapafilemap']['name'];
 	$Arquivo = str_replace(".map","",$Arquivo) . md5(uniqid(rand(), true)) . "_up.map";
 
@@ -63,7 +65,8 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 		exit;
 	}
 	if($status == 1){
-		echo "<p class='paragrafo' >Arquivo enviado. Verificando o mapa...</p>";
+	    $map_file = $_SESSION["map_file"];
+	    echo "<p class='paragrafo' >Arquivo enviado. Verificando o mapa...</p>";
 		$map = ms_newMapObj($map_file);
 		//
 		//muda o arquivo de simbolo
@@ -159,7 +162,10 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 		validaAcessoTemas($map_file);
 		echo "<p class='paragrafo' >Ok. redesenhando.";
 		echo "<script>window.parent.i3GEO.atualiza();</script>";
-		//echo "<script>window.parent.i3GEO.navega.zoomExt(window.parent.i3GEO.configura.locaplic,window.parent.i3GEO.configura.sid,'nenhum','".$extatual."');</script>";
+		$e = $mapt->extent;
+		$ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
+		echo "<script>window.parent.i3GEO.navega.zoomExt('','','','".$ext."');</script>";
+		echo "<script>window.parent.i3GEO.janela.tempoMsg('Mapa carregado');</script>";
 	}
 	else{
 		echo "<p class='paragrafo' >Erro ao enviar o arquivo. (2)";
@@ -170,7 +176,7 @@ else{
 }
 paraAguarde();
 function paraAguarde(){
-	echo "<script>window.parent.i3GEOF.carregaMapa.aguarde.visibility='hidden';</script>";
+
 }
 function verificaNome($nome)
 {
