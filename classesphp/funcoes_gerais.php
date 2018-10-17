@@ -3077,6 +3077,7 @@ function restauraMapaAdmin($id_mapa, $dir_tmp)
     $dbh = null;
     $dbhw = null;
     $mapasalvo = $mapasalvo[0];
+    //var_dump($mapasalvo);exit;
     $base = "";
     if (! isset($mapasalvo["publicado"])) {
         $mapasalvo["publicado"] = "";

@@ -354,7 +354,6 @@ if (! isset($mapext) || empty($mapext)) {
     $mapext = "";
 } else {
     $mapext = str_replace(",", " ", $mapext);
-
 }
 $saikuUrl_ = $saikuUrl;
 $cachedir_ = $cachedir;
@@ -533,7 +532,6 @@ if (file_exists($base)) {
     $map = ms_newMapObj($locaplic . "/aplicmap/" . $base . ".map");
     $mapn = ms_newMapObj($locaplic . "/aplicmap/" . $base . ".map");
 }
-
 /*
  * Par&acirc;metros adicionais.
  *
@@ -653,7 +651,6 @@ if (isset($url_wms)) {
 }
 
 adaptaLayers($tmpfname, $versao);
-
 if ($interface != "mashup") {
     abreInterface($interface, $caminho);
 }
@@ -729,11 +726,15 @@ function abreInterface($interface, $caminho)
         }
         exit();
     } else {
+        //para efeitos de compatibilidade
+        $interface = str_replace("ol.htm","ol.php",$interface);
+        $interface = str_replace("osm.htm","osm.php",$interface);
         if (file_exists($caminho . $customDir . "/" . $interface)) {
             $urln = $caminho . $customDir . "/" . $interface . "?&" . session_id();
         } else {
             $urln = $interface . "?&" . session_id();
         }
+        //echo $urln;exit;
         if (! headers_sent()) {
             header("Location:" . $urln);
         } else {

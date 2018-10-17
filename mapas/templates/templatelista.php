@@ -4,14 +4,6 @@
 		<h4 class="list-group-item-heading">
 			<div class="hidden-xs">
 				<span class="pull-right">&nbsp;&nbsp;</span>
-				<a title="{{{outrosLinks}}}" onclick="mostraLinks('detalhe_{{ID_MAPA}}')" href="javascript:void(0)" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-					<i class="material-icons md-18">more_horiz</i>
-				</a>
-				<span class="pull-right">&nbsp;&nbsp;</span>
-				<a title="{{{linkDefault}}}" href="{{{LINK}}}" target="_blank" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-					<i class="material-icons md-18">launch</i>
-				</a>
-				<span class="pull-right">&nbsp;&nbsp;</span>
 				<a title="link" role="button" href="javascript:void(0)" data-toggle="quadroQrcode" data-url="{{{LINK}}}" class="btn btn-danger btn-fab btn-fab-mini pull-right">
 					<span class="glyphicon glyphicon-qrcode" aria-hidden="true"></span>
 				</a>
