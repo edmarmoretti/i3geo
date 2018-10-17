@@ -26,12 +26,14 @@ i3GEOF.imprimir = {
 	html:function() {
 	    var p = this._parameters,
 	    i3f = this,
-	    hash = i3GEO.idioma.objetoIdioma(i3GEOF[p.namespace].dicionario);
-	    hash["locaplic"] = i3GEO.configura.locaplic;
-	    hash["namespace"] = p.namespace;
-	    hash["idContainer"] = p.idContainer;
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
 	    i3f.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
-	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	},
 	pngExport: function(){
 	    i3GEO.janela.abreAguarde();

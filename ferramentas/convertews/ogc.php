@@ -3,7 +3,7 @@ include(dirname(__FILE__)."/../../classesphp/sani_request.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 include(dirname(__FILE__)."/../../ms_configura.php");
 $_GET = array_merge($_GET,$_POST);
-
+error_reporting(0);
 session_name("i3GeoPHP");
 session_id($_GET["sid"]);
 session_start();

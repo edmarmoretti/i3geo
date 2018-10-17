@@ -1,4 +1,7 @@
 <?php
+if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])){
+    exit;
+}
 include_once (dirname(__FILE__) . "/../classesphp/sani_request.php");
 error_reporting(0);
 ini_set("session.use_cookies", 0);

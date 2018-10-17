@@ -1,4 +1,7 @@
 <?php
+if (basename(__FILE__) == basename($_SERVER['SCRIPT_FILENAME'])){
+    exit;
+}
 include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
 error_reporting(0);
 $_GET = array_merge($_GET,$_POST);
@@ -62,11 +65,13 @@ if(isset($logExec) && $logExec["ferramentas"] == true){
 //
 //substitui a string de conex&atilde;o
 //
+/*
 if(!substituiCon($map_file,$postgis_mapa)){
 	unlink($map_file);
 	cpjson("erro",$cp);
 	return;
 }
+*/
 //
 function redesenhaMapa()
 {

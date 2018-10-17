@@ -1,121 +1,49 @@
-/*
-Title: Converte um mapa em kml
-
-Converte o mapa atual em KML. A convers&atilde;o &eacute; baseada na gera&ccedil;&atilde;o de um KML com a imagem do mapa sendo mostrada como um WMS.
-O Kml cont&eacute;m o elemento GroundOverlay.
-
-Veja:
-
-<i3GEO.mapa.convertekml>
-
-Arquivo:
-
-i3geo/ferramentas/converteMapaKml/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
-/*
-Classe: i3GEOF.converteMapaKml
-*/
-i3GEOF.converteMapaKml = {
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	//TODO verificar funcionamento sem expor mapfile
-	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.converteMapaKml.dicionario);
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["sid"] = i3GEO.configura.sid;
-		return dicionario;
+i3GEOF.convertemapakml = {
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "mustache": "",
+	    "idContainer": "i3GEOconvertemapakmlContainer",
+	    "namespace": "convertemapakml"
 	},
-
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Parametros:
-
-	divid {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-
-	*/
-	html:function(divid) {
-		var ins = Mustache.render(i3GEOF.converteMapaKml.MUSTACHE, i3GEOF.converteMapaKml.mustacheHash());
-		$i(divid).innerHTML += ins;
+	start : function(tema){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    p.tema = tema;
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
 	},
-	inicia: function(divid){
-		if(i3GEOF.converteMapaKml.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/convertemapakml/template_mst.html", function(template) {
-				i3GEOF.converteMapaKml.MUSTACHE = template;
-				i3GEOF.converteMapaKml.inicia(divid);
-			});
-			return;
-		}
-		i3GEOF.converteMapaKml.html(divid);
+	destroy: function(){
+	    //nao use this aqui
+	    //i3GEOF.legenda._parameters.mustache = "";
 	},
-	/*
-	Function: iniciaJanelaFlutuante
+	html:function() {
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
 
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var janela,divid,titulo;
-		if($i("i3GEOF.converteMapaKml")){
-			return;
-		}
-		cabecalho = function(){};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.converteMapaKml");
-		};
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >KML</span></div>";
-		janela = i3GEO.janela.cria(
-			"440px",
-			"325px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.converteMapaKml",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			true,
-			"",
-			"",
-			"",
-			"",
-			"13"
-		);
-		divid = janela[2].id;
-		i3GEOF.converteMapaKml.inicia(divid);
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    sid: i3GEO.configura.sid,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
+
 	}
 };

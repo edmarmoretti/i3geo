@@ -37,7 +37,7 @@
  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
  */
-
+error_reporting(0);
 /**
  * Fix a GE bug for filled polygons
  */
@@ -786,6 +786,7 @@ class LayerServer
      */
     function get_layer_list()
     {
+        error_reporting(0);
         $layer_list = array();
         for ($i = 0; $i < $this->map_object->numlayers; $i ++) {
             $layer = & $this->map_object->getLayer($i);

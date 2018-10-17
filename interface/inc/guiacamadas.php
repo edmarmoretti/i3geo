@@ -45,6 +45,12 @@
                 <li><a onclick="i3GEO.mapa.dialogo.carregamapa()" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-floppy-open"></span> {{{u18}}}
                     </a></li>
+                <li><a onclick="i3GEO.mapa.dialogo.convertews()" href="javascript:void(0)">
+                        <span class="glyphicon glyphicon-globe"></span> {{{u20}}}
+                    </a></li>
+                <li><a onclick="i3GEO.mapa.dialogo.convertemapakml()" href="javascript:void(0)">
+                        <span class="glyphicon glyphicon-globe"></span> {{{u20a}}}
+                    </a></li>
             </ul>
         </div>
         <button title="{{{iconeCatalogo}}}" style="width: unset; height: 3rem;" class="text-right" onclick="i3GEO.guias.ativa('adiciona',this)" data-idconteudo="guia2obj"

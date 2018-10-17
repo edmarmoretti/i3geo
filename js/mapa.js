@@ -771,22 +771,22 @@ i3GEO.mapa =
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.mapa.dialogo.convertews()",
 			"convertews",
-			"converteMapaWS",
+			"convertews",
 			"dependencias.php",
-		"i3GEOF.converteMapaWS.iniciaJanelaFlutuante()");
+		"i3GEOF.convertews.start()");
 	    },
 	    /**
 	     * Function: convertekml
 	     *
 	     * Abre a janela de dialogo da ferramenta convertemapakml
 	     */
-	    convertekml : function() {
+	    convertemapakml : function() {
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.mapa.dialogo.convertekml()",
 			"convertemapakml",
-			"converteMapaKml",
+			"convertemapakml",
 			"dependencias.php",
-		"i3GEOF.converteMapaKml.iniciaJanelaFlutuante()");
+		"i3GEOF.convertemapakml.start()");
 	    },
 	    /**
 	     * Function: queryMap

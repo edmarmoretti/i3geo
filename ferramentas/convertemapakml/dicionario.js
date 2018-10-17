@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.convertemapaKml.dicionario)+
-i3GEOF.converteMapaKml.dicionario = {
+i3GEOF.convertemapakml.dicionario = {
 	'ajuda' : [ {
 		pt : "Voc&ecirc; pode utilizar os endere&ccedil;os para visualizar o mapa atual em softwares que aceitam o formato kml",
 		en : "You can use the URLs to view the current map in a software that supports kml format",

@@ -1,8 +1,11 @@
 <?php
+if($_SERVER['SCRIPT_FILENAME'] == __FILE__){
+    exit;
+}
 //verifica se o pai esta na mesma pasta
 if (!strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 	if(!stristr(dirname($_SERVER['SCRIPT_FILENAME']),"/".basename(dirname(__FILE__)))){
-		exit;
+	    exit;
 	}
 }
 /*

@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.converteMapaWS.dicionario)+
-i3GEOF.converteMapaWS.dicionario = {
+i3GEOF.convertews.dicionario = {
 	'ajudaDesktop' : [ {
 		pt : "Voc&ecirc; pode utilizar o endere&ccedil;o em softwares de geoprocessamento instalados em seu computador, como por exemplo, o gvSIG ou QGIS",
 		en : "You can use the address in a geoprocessing software installed on your computer, such as gvSIG or QGIS",

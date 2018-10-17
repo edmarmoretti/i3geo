@@ -865,7 +865,7 @@ $wkt - boolean indicando se $xy e um WKT
 		}
 		if (!$this->layer)
 		{
-			$pinlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Ins",$metaClasse="SIM");
+			$pinlayer = criaLayer($this->mapa,MS_LAYER_LINE,MS_DEFAULT,"Ins","SIM");
 			$c = $pinlayer->getclass(0);
 			$c->set("name","");
 			$e = $c->getstyle(0);

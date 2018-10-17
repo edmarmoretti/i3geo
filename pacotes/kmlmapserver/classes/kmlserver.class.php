@@ -36,6 +36,7 @@ This file is part of KMLMAPSERVER.
     Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
 
 */
+error_reporting(0);
 if(function_exists("dl")){
 	if (!function_exists('ms_GetVersion'))
 	{dl( 'php_mapscript.'.PHP_SHLIB_SUFFIX );}

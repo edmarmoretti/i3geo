@@ -14,11 +14,6 @@ i3GEO.listaDeFerramentas = {
 		id : "analise"
 	    },
 	    {
-		nome : $trad("s4"),
-		descricao: $trad("descArquivos"),
-		id : "arquivos"
-	    },
-	    {
 		nome : $trad("operacoesMapaTema"),
 		descricao:  $trad("descOperacoesMapaTema"),
 		id : "ferramentas"
@@ -234,23 +229,6 @@ i3GEO.listaDeFerramentas = {
 			    }
 			}
 			],
-			"arquivos" : [
-			    {
-				id : "omenudataArquivos6",
-				text : $trad("x72"),
-				url : "javascript:i3GEO.mapa.dialogo.listaDeMapasBanco()"
-			    },
-			    {
-				id : "omenudataArquivos4",
-				text : $trad("u20"),
-				url : "javascript:i3GEO.mapa.dialogo.convertews()"
-			    },
-			    {
-				id : "omenudataArquivos5",
-				text : $trad("u20a"),
-				url : "javascript:i3GEO.mapa.dialogo.convertekml()"
-			    }
-			    ],
 			    "interface" : [
 				{
 				    id : "omenudataInterface0a",
