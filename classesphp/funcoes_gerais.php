@@ -554,6 +554,7 @@ function listaTrueType()
 function substituiCon($map_file, $postgis_mapa)
 {
     // error_reporting(0);
+    return;
     if (! empty($postgis_mapa) && (file_exists($map_file))) {
         if (! @ms_newMapObj($map_file)) {
             return false;

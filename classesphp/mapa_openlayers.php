@@ -318,6 +318,9 @@ if ($cache == true && $_GET["cache"] != "nao") {
 if (isset($_GET["map_size"])) {
     $map_size = explode(" ", $_GET["map_size"]);
     $mapa->setsize($map_size[0], $map_size[1]);
+} else {
+    $map_size = array(256,256);
+    $mapa->setsize($map_size[0], $map_size[1]);
 }
 
 if (isset($_GET["mapext"])) {
@@ -418,7 +421,6 @@ if ($qy != true) {
         $img = $mapa->drawQuery();
     } else {
         $img = $mapa->draw();
-
         $numclasses = $l->numclasses;
         if ($numclasses > 0) {
             $classe0 = $l->getClass(0);
@@ -476,7 +478,6 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
             readfile($nomer);
         }
     } else {
-
         // cache inativo
         if ($img->imagepath == "") {
             ilegal();

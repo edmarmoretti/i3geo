@@ -452,30 +452,52 @@ i3GEOF.identifica = {
 	},
 	filtrar : function(tema, item, valor) {
 	    i3GEO.janela.abreAguarde();
-	    var filtro = "",
-	    temp = function(retorno) {
-		i3GEO.janela.fechaAguarde();
-		i3GEO.Interface.atualizaTema(retorno, tema);
-	    },
-	    p = i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=sim&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro",
-	    cp = new cpaint();
-
-	    filtro = "(*[" + item + "]* = *" + valor + "*)";
-	    cp.set_response_type("JSON");
-	    cp.set_transfer_mode('POST');
-	    cp.call(p, "insereFiltro", temp, "tema=" + tema + "&filtro=" + i3GEO.util.base64encode(filtro));
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php",
+		    {
+			g_sid: i3GEO.configura.sid,
+			base64: "sim",
+			funcao: "inserefiltro",
+			tema: tema,
+			filtro: i3GEO.util.base64encode("(*[" + item + "]* = *" + valor + "*)")
+		    }
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.Interface.atualizaTema(data, tema);
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
 	},
 	removeFiltro : function(tema) {
 	    i3GEO.janela.abreAguarde();
-	    var temp = function(retorno) {
-		i3GEO.janela.fechaAguarde();
-		i3GEO.Interface.atualizaTema(retorno, tema);
-	    }, p =
-		i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php?base64=nao&g_sid=" + i3GEO.configura.sid + "&funcao=inserefiltro", cp =
-		    new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.set_transfer_mode('POST');
-	    cp.call(p, "insereFiltro", temp, "tema=" + tema + "&filtro=");
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php",
+		    {
+			g_sid: i3GEO.configura.sid,
+			funcao: "inserefiltro",
+			tema: tema,
+			filtro: ""
+		    }
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.Interface.atualizaTema(data, tema);
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela.fechaAguarde();
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
 	},
 	adicionaPontoRegiao : function(idjanela) {
 	    var p = i3GEO.configura.locaplic + "/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid=" + i3GEO.configura.sid, tema =

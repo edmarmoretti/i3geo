@@ -117,6 +117,7 @@ $ext - extens&atilde;o geogr&aacute;fica do mapa
   		$this->arquivo = str_replace(".map","",$map_file).".map";
   		if($tema != "" && @$this->mapa->getlayerbyname($tema))
  		$this->layer = $this->mapa->getlayerbyname($tema);
+
   		$this->nome = $tema;
 		$c = $this->mapa->numlayers;
 		for ($i=0;$i < $c;++$i)
@@ -882,6 +883,7 @@ $retornaShapes - retorna os shapes selecionados. Nesse caso, nao e gerado o arqu
 			$this->selecaoLimpa();
 			$tipo = "adiciona";
 		}
+
 		if(!$this->layer){
 			return "erro";
 		}
