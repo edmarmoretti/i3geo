@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.inserexy.dicionario)+
-i3GEOF.inserexy.dicionario = {
+i3GEOF.inserexy2.dicionario = {
 	'tema' : [ {
 		pt : "Tema",
 		en : "Theme",
@@ -66,9 +66,9 @@ i3GEOF.inserexy.dicionario = {
 		es : "Utilice el bot&oacute;n <i>crear uno nuevo</i>  si no hay ning&uacute;n tema de este tipo en el mapa."
 	} ],
 	'direcao' : [ {
-		pt : "&Acirc;ngulo (grau, minuto e segundo)",
-		en : "Angle (degrees, minutes and seconds)",
-		es : "&Aacute;ngulo (grados, minutos y segundos)"
+		pt : "grau, minuto, segundo e dist&acirc;ncia (km)",
+		en : "",
+		es : ""
 	} ],
 	'distancia' : [ {
 		pt : "Dist&acirc;ncia em Km",

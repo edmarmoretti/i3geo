@@ -1382,9 +1382,9 @@ g_traducao =
         ],
         "d22t" : [
             {
-                pt : "inserir pontos",
-                en : "insert points",
-                es : "insertar puntos"
+                pt : "Inserir pontos",
+                en : "Insert points",
+                es : "Insertar puntos"
             }
         ],
         "d23" : [

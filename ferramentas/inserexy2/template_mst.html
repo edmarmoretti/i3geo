@@ -1,179 +1,150 @@
-<div class='yui-navset' style='height:38px; top: 0px; cursor: pointer; margin-left: 2px;'>
-	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
-		<li>
-			<div id='i3GEOinserexyguia0' style='text-align: center; left: 0px;'>
-				<a>
-					<em><span class="material-icons">settings</span></em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOinserexyguia1' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{tema}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOinserexyguia2' style='text-align: center; left: 0px;'>
-				<a>
-					<em>Direc/dist</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOinserexyguia3' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{digita}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOinserexyguia4' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{cola}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOinserexyguia5' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{converte}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOinserexyguia6' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{coord}}}</em>
-				</a>
-			</div>
-		</li>
-	</ul>
+<nav class='navbar navbar-default' style='margin-bottom: 0px; min-height: 35px'>
+    <div class="container" style="margin: 0px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse" style="padding: 10px; overflow-x: hidden; max-height: 200px;">
+            <ul class="nav navbar-nav ">
+                <li role="presentation"><a id='i3GEO{{namespace}}guia0' href="javascript:void(0);">
+                        <span class="material-icons">settings</span>
+                    </a></li>
+                <li class="active" role="presentation"><a id='i3GEO{{namespace}}guia1' href="javascript:void(0);">
+                        <em>{{{tema}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia2' href="javascript:void(0);">
+                        <em>Direc/dist</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia3' href="javascript:void(0);">
+                        <em>{{{digita}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia4' href="javascript:void(0);">
+                        <em>{{{cola}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia5' href="javascript:void(0);">
+                        <em>{{{converte}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia6' href="javascript:void(0);">
+                        <em>{{{coord}}}</em>
+                    </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; z-index: 100; height: calc(100% - 10px);'>
+    <div id='i3GEO{{namespace}}guia0obj' class='container-fluid'>
+        <div class='form-group condensed' style='width: 50%'>
+            <label class="control-label">{{{projCoord}}}</label>
+            <div id='i3GEOinserexy2listaepsg'></div>
+        </div>
+    </div>
+    <div id='i3GEO{{namespace}}guia1obj' class='container-fluid'>
+        <div class="row">
+            <div class="col-md-6">
+                <div class='form-group condensed'>
+                    <label class="control-label">{{{selecionaTema}}}</label>
+                    <div id='i3GEOinserexy2shapefile'></div>
+                </div>
+                <div class="form-group condensed">
+                    <button onclick="i3GEOF.inserexy2.criatemaeditavel(this)" class='btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>{{{criaTemaEditavel}}}
+                    </button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div id='i3GEOinserexy2opcitens' style='display: none;'>
+                    <div class='form-group condensed'>
+                        <label class="control-label">{{{selecionaItem}}}</label>
+                        <div id='i3GEOinserexy2shapefileitem'></div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="control-label" for="i3GEOinserexy2valorItem">Valor</label>
+                        <input class="form-control input-lg" type='text' id='i3GEOinserexy2valorItem' value='' />
+                    </div>
+                </div>
+            </div>
+        </div>
+        <h5 class="alert alert-info">
+            {{{ajuda2}}} <br> {{{ajuda3}}} <br> {{{ajuda4}}}
+        </h5>
+    </div>
+    <div id='i3GEO{{namespace}}guia2obj' class='container-fluid'>
+        <div class="form-group condensed">
+            <label class="control-label" for="">{{{direcao}}}</label>
+            <br>
+            <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexy2xgdd' value='00' title='grau' />
+            <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexy2xmdd' value='00' title='minuto' />
+            <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexy2xsdd' value='00.00' title='segundo' />
+            <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexy2distdd' value='0.0' title='distancia' />
+        </div>
+        <button onclick="i3GEOF.inserexy2.inserirdd()" class='btn btn-primary btn-sm btn-raised'>{{{insere}}}</button>
+        <h5 class="alert alert-info">
+            {{{ajuda5}}} <br> {{{anguloDistancia}}}
+        </h5>
+    </div>
+    <div id='i3GEO{{namespace}}guia3obj' class='container-fluid'>
+        <h5>{{{tipoEntrada}}}</h5>
+        <div class="form-group condensed">
+            <div style="display: inline; width: 150px;" class="radio radio-primary condensed">
+                <label>
+                    <input onclick='i3GEOF.inserexy2.escolhedig(0)' type='radio' name='i3GEOinserexy2tipodig' id='i3GEOinserexy2tipodigmascara' checked />
+                    <span class="circle"></span> <span class="check"></span> {{{mascara}}}
+                </label>
+            </div>
+            <div style="display: inline; width: 150px;" class="radio radio-primary condensed">
+                <label>
+                    <input onclick='i3GEOF.inserexy2.escolhedig(1)' type='radio' name='i3GEOinserexy2tipodig' id='i3GEOinserexy2tipodigcampo' />
+                    <span class="circle"></span> <span class="check"></span> {{{campoUnico}}}
+                </label>
+            </div>
+        </div>
+        <div id='i3GEOinserexy2digmascara' style='left: 0px; display: block;'>
+            <div class="form-group condensed">
+                <h5 style="display: inline; padding-right: 15px;">X</h5>
+                <input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexy2xg' value='00' title='grau' />
+                <input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexy2xm' value='00' title='minuto' />
+                <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexy2xs' value='00.00' title='segundo' />
+            </div>
+            <div class="form-group condensed">
+                <h5 style="display: inline; padding-right: 15px;">Y</h5>
+                <input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexy2yg' value='00' title='grau' />
+                <input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexy2ym' value='00' title='minuto' />
+                <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexy2ys' value='00.00' title='segundo' />
+            </div>
+        </div>
+        <div id='i3GEOinserexy2digcampo' style='display: none; left: 0px'>
+            <div class="form-group condensed">
+                <h5 style="display: inline; padding-right: 15px;">X</h5>
+                <input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexy2longitude' value='' title='DMS' />
+            </div>
+            <div class="form-group condensed">
+                <h5 style="display: inline; padding-right: 15px;">Y</h5>
+                <input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexy2latitude' value='' title='DMS' />
+            </div>
+        </div>
+        <button onclick="i3GEOF.inserexy2.inserir()" class='btn btn-primary btn-sm btn-raised'>{{{insere}}}</button>
+        <h5 class="alert alert-info">
+            {{{ajuda6}}} <br> {{{ajuda7}}} <br> {{{ajuda8}}} <br> {{{ajuda9}}}
+        </h5>
+    </div>
+    <div id='i3GEO{{namespace}}guia4obj' class='container-fluid'>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOinserexy2colar">{{{insereListaCoords}}}</label>
+            <input class="form-control input-lg" type='text' title='pares de xy' id='i3GEOinserexy2colar' value='' />
+        </div>
+        <button onclick="i3GEOF.inserexy2.colar()" class='btn btn-primary btn-sm btn-raised'>{{{insere}}}</button>
+        <h5 class="alert alert-info">
+            Ex.: <br> -54.23 -12.5 -50 -5.33
+        </h5>
+    </div>
+    <div id='i3GEO{{namespace}}guia5obj' class='container-fluid'>
+        <button onclick="i3GEOF.inserexy2.criaPol(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criaTemaPoligono}}}</button>
+        <button onclick="i3GEOF.inserexy2.criaLin(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{criaTemaLinha}}}</button>
+    </div>
+    <div id='i3GEO{{namespace}}guia6obj' class='container-fluid'>
+    <button onclick="i3GEOF.inserexy2.wkt(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{listaWkt}}}</button>
+    <span class='copyToMemory' onclick='i3GEO.util.copyToClipboard("i3GEO{{namespace}}guia6obj");return false;'></span>
+    <div id="i3GEOinserexy2guia6objCoord"></div>
+    </div>
 </div>
-<div id='i3GEOinserexyguia0obj' class='container-fluid customScrollBarXY'>
-	<h5>{{{projCoord}}}</h5>
-	<div id='i3GEOinserexylistaepsg'></div>
-</div>
-<div id='i3GEOinserexyguia1obj' class='container-fluid customScrollBarXY'>
-	<div style="width: 100%;" class='form-group label-fixed condensed'>
-		<label class="control-label" for="">{{{selecionaTema}}}</label>
-		<div style="width: 100%" class="input-group" id='i3GEOinserexyshapefile'></div>
-	</div>
-	<div class="form-group condensed">
-		<button onclick="i3GEOF.inserexy.criatemaeditavel()" class='btn btn-primary btn-sm btn-raised'>{{{criaTemaEditavel}}}</button>
-		<button onclick="i3GEOF.inserexy.graficoPerfil()" class='btn btn-primary btn-sm btn-raised'>{{{graficoPerfil}}}</button>
-	</div>
-
-	<div id='i3GEOinserexyopcitens' style='display: none;'>
-		<div class='form-group condensed'>
-			<label class="control-label">{{{selecionaItem}}}</label>
-			<div style="width: 100%;" class="input-group">
-				<div id='i3GEOinserexyshapefileitem'></div>
-			</div>
-		</div>
-		<div class='form-group label-fixed condensed'>
-			<label class="control-label" for="i3GEOinserexyvalorItem">Valor</label>
-			<input class="form-control input-lg" type='text' id='i3GEOinserexyvalorItem' value='' />
-		</div>
-		<h5 class="alert alert-info">
-			{{{ajuda2}}}
-			<br>
-			{{{ajuda3}}}
-			<br>
-			{{{ajuda4}}}
-		</h5>
-	</div>
-</div>
-<div id='i3GEOinserexyguia2obj' class='container-fluid customScrollBarXY'>
-	<h5>{{{direcao}}}</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexyxgdd' value='00' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexyxmdd' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexyxsdd' value='00.00' title='segundo' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOinserexydistdd">{{{distancia}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOinserexydistdd' value='0.0' />
-	</div>
-	<button onclick="i3GEOF.inserexy.inserirdd()" class='btn btn-primary btn-sm btn-raised'>{{{insere}}}</button>
-	<h5 class="alert alert-info">
-		{{{ajuda5}}}
-		<br>
-		{{{anguloDistancia}}}
-	</h5>
-</div>
-<div class='container-fluid customScrollBarXY' id='i3GEOinserexyguia3obj'>
-	<h5>{{{tipoEntrada}}}</h5>
-	<div class="form-group condensed">
-		<div style="display: inline; width: 150px;" class="radio radio-primary condensed">
-			<label>
-				<input onclick='i3GEOF.inserexy.escolhedig(0)' type='radio' name='i3GEOinserexytipodig' id='i3GEOinserexytipodigmascara' checked />
-				<span class="circle"></span>
-				<span class="check"></span>
-				{{{mascara}}}
-			</label>
-		</div>
-		<div style="display: inline; width: 150px;" class="radio radio-primary condensed">
-			<label>
-				<input onclick='i3GEOF.inserexy.escolhedig(1)' type='radio' name='i3GEOinserexytipodig' id='i3GEOinserexytipodigcampo' />
-				<span class="circle"></span>
-				<span class="check"></span>
-				{{{campoUnico}}}
-			</label>
-		</div>
-	</div>
-	<div id='i3GEOinserexydigmascara' style='left: 0px; display: block;'>
-		<div class="form-group condensed">
-			<h5 style="display: inline; padding-right: 15px;">X</h5>
-			<input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexyxg' value='00' title='grau' />
-			<input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexyxm' value='00' title='minuto' />
-			<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexyxs' value='00.00' title='segundo' />
-		</div>
-		<div class="form-group condensed">
-			<h5 style="display: inline; padding-right: 15px;">Y</h5>
-			<input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexyyg' value='00' title='grau' />
-			<input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexyym' value='00' title='minuto' />
-			<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOinserexyys' value='00.00' title='segundo' />
-		</div>
-	</div>
-	<div id='i3GEOinserexydigcampo' style='display: none; left: 0px'>
-		<div class="form-group condensed">
-			<h5 style="display: inline; padding-right: 15px;">X</h5>
-			<input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexylongitude' value='' title='DMS' />
-		</div>
-		<div class="form-group condensed">
-			<h5 style="display: inline; padding-right: 15px;">Y</h5>
-			<input style="display: inline; width: 100px; margin-right: 15px;" class="form-control input-lg" type='text' id='i3GEOinserexylatitude' value='' title='DMS' />
-		</div>
-	</div>
-	<button onclick="i3GEOF.inserexy.inserir()" class='btn btn-primary btn-sm btn-raised'>{{{insere}}}</button>
-	<h5 class="alert alert-info">
-		{{{ajuda6}}}
-		<br>
-		{{{ajuda7}}}
-		<br>
-		{{{ajuda8}}}
-		<br>
-		{{{ajuda9}}}
-	</h5>
-</div>
-<div class='container-fluid customScrollBarXY' id='i3GEOinserexyguia4obj'>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOinserexycolar">{{{insereListaCoords}}}</label>
-		<input class="form-control input-lg" type='text' title='pares de xy' id='i3GEOinserexycolar' value='' />
-	</div>
-	<button onclick="i3GEOF.inserexy.colar()" class='btn btn-primary btn-sm btn-raised'>{{{insere}}}</button>
-	<h5 class="alert alert-info">
-		{{{insereXY}}}
-		<br>
-		-54.23 -12.5 -50 -5.33
-	</h5>
-</div>
-<div class='container-fluid customScrollBarXY' id='i3GEOinserexyguia5obj'>
-	<button onclick="i3GEOF.inserexy.wkt()" class='btn btn-primary btn-sm btn-raised'>{{{listaWkt}}}</button>
-	<button onclick="i3GEOF.inserexy.criaPol()" class='btn btn-primary btn-sm btn-raised'>{{{criaTemaPoligono}}}</button>
-	<button onclick="i3GEOF.inserexy.criaLin()" class='btn btn-primary btn-sm btn-raised'>{{{criaTemaLinha}}}</button>
-	<div id='i3GEOinserexywktres' style='display: block;'></div>
-</div>
-<div id='i3GEOinserexyguia6obj' class='container-fluid customScrollBarXY'></div>

@@ -219,7 +219,7 @@ i3GEO.caixaDeFerramentas = {
                 if(menu[i].url){
                     t = Mustache.to_html(
                             i3GEO.template.ferramentasLinks,
-                            {"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url,"opcional": menu[i].opcional}
+                            {"show": menu[i].show,"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url,"opcional": menu[i].opcional}
                     );
                     t = $(t);
                     f.idOndeLinks
@@ -270,7 +270,7 @@ i3GEO.caixaDeFerramentas = {
                 if(menu[i].url){
                     t = Mustache.to_html(
                             i3GEO.template.ferramentasLinks,
-                            {"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url,"opcional": menu[i].opcional}
+                            {"show":menu[i].show,"nome":menu[i].text,"target": menu[i].target,"url": menu[i].url,"opcional": menu[i].opcional}
                     );
                     t = $(t);
                     f.idOndeLinks

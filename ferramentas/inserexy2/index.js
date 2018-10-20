@@ -1,610 +1,384 @@
-/*
-Title: Insere ponto
-
-Inclui pontos no mapa no local clicado pelo usu&aacute;rio
-
-Veja:
-
-<i3GEO.mapa.dialogo.cliquePonto>
-
-Arquivo:
-
-i3geo/ferramentas/inserexy2/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
 if(typeof(i3GEOF) === 'undefined'){
     var i3GEOF = {};
 }
+i3GEOF.inserexy2 = {
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "mustache": "",
+	    "idContainer": "i3GEOinserexy2Container",
+	    "namespace": "inserexy2"
+	},
+	start : function(){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
+	},
+	destroy: function(){
+	    i3GEO.eventos.cliquePerm.ativa();
+	    i3GEO.eventos.MOUSECLIQUE.remove("i3GEOF.inserexy2.adiciona('xx yy')");
+	},
+	html:function() {
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    });
 
-/*
-Classe: i3GEOF.inserexy
+	    i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.inserexy2.adiciona('xx yy')"]);
+	    i3GEO.eventos.cliquePerm.desativa();
 
- */
-i3GEOF.inserexy = {
-        /*
-	Variavel: aguarde
+	    i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexy2guia1","i3GEOinserexy2guia");
+	    //eventos das guias
+	    $i("i3GEOinserexy2guia0").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexy2guia0","i3GEOinserexy2guia");
+	    };
+	    $i("i3GEOinserexy2guia1").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexy2guia1","i3GEOinserexy2guia");
+	    };
+	    $i("i3GEOinserexy2guia2").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexy2guia2","i3GEOinserexy2guia");
+	    };
+	    $i("i3GEOinserexy2guia3").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexy2guia3","i3GEOinserexy2guia");
+	    };
+	    $i("i3GEOinserexy2guia4").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexy2guia4","i3GEOinserexy2guia");
+	    };
+	    $i("i3GEOinserexy2guia5").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexy2guia5","i3GEOinserexy2guia");
+	    };
+	    $i("i3GEOinserexy2guia6").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexy2guia6","i3GEOinserexy2guia");
+	    };
+	    i3GEOF.inserexy2.montaComboLocal();
+	    i3GEO.util.comboEpsg("i3GEOinserexy2epsg","i3GEOinserexy2listaepsg");
 
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-         */
-        aguarde: "",
-        /**
-         * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-         */
-        MUSTACHE : "",
-        /**
-         * Susbtitutos para o template
-         */
-        mustacheHash : function() {
-            var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.inserexy.dicionario);
-            dicionario["locaplic"] = i3GEO.configura.locaplic;
-            return dicionario;
-        },
-        /*
-	Function: inicia
 
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
+	},
+	montaComboLocal: function(sel){
+	    i3GEO.util.comboTemas(
+		    "i3GEOinserexy2temasLocais",
+		    function(retorno){
+			$i("i3GEOinserexy2shapefile").innerHTML = retorno.dados;
+			if ($i("i3GEOinserexy2temasLocais")){
+			    if(sel){
+				$i("i3GEOinserexy2temasLocais").value = sel;
+				i3GEOF.inserexy2.listaItens();
+				i3GEOF.inserexy2.listaPontos();
+			    }
+			    $i("i3GEOinserexy2temasLocais").onchange = function(){
+				i3GEOF.inserexy2.listaItens();
+				i3GEOF.inserexy2.listaPontos();
+			    };
+			}
+		    },
+		    "i3GEOinserexy2shapefile",
+		    "",
+		    false,
+		    "locais",
+		    "",
+		    false,
+		    true,
+		    "form-control"
+	    );
+	},
+	get: function({snackbar = true, btn = false, par = {}, refresh = false, fn = false} = {}){
+	    var p = this._parameters,
+	    i3f = this;
+	    i3GEO.janela.abreAguarde();
+	    if(btn){
+		btn = $(btn);
+		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    }
+	    i3GEO.janela._formModal.block();
+	    par.g_sid = i3GEO.configura.sid;
+	    par.tema = $i("i3GEOinserexy2temasLocais").value;
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/" + p.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			if(snackbar){
+			    i3GEO.janela.snackBar({content: $trad('feito')});
+			}
+			if(refresh){
+			    i3GEO.atualiza();
+			    i3GEOF.inserexy2.montaComboLocal();			}
+			if(fn){
+			    fn(data);
+			}
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	},
+	criatemaeditavel: function(btn){
+	    var funcaoOK = function(data){
+		i3GEOF.inserexy2.get({
+		    snackbar: false,
+		    fn: function(retorno){
+			i3GEO.atualiza();
+			i3GEOF.inserexy2.montaComboLocal(retorno);
+		    },
+		    btn: btn,
+		    par: {
+			funcao: "criashpvazio",
+			tituloTema: $i("i3GEOjanelaprompt").value
+		    },
+		    refresh: false
+		});
 
-	Parametro:
+	    };
+	    i3GEO.janela.prompt($trad('tituloNovoTema',i3GEOF.inserexy2.dicionario),funcaoOK,$trad('pontosInseridos',i3GEOF.inserexy2.dicionario)+parseInt((Math.random() * 100),10));
+	},
+	listaItens: function(){
+	    i3GEO.util.comboItens(
+		    "i3GEOinserexy2Item",
+		    $i("i3GEOinserexy2temasLocais").value,
+		    function(retorno){
+			$i("i3GEOinserexy2shapefileitem").innerHTML = retorno.dados;
+			$i("i3GEOinserexy2opcitens").style.display = "block";
+		    },
+		    "i3GEOinserexy2shapefileitem",
+		    "display:block",
+		    "",
+		    "",
+		    "form-control"
+	    );
+	},
+	adiciona: function(xy){
+	    var temp,
+	    n,
+	    i,
+	    xyn;
 
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-         */
-        inicia: function(iddiv){
-            if(i3GEOF.inserexy.MUSTACHE == ""){
-                $.get(i3GEO.configura.locaplic + "/ferramentas/inserexy2/template_mst.html", function(template) {
-                    i3GEOF.inserexy.MUSTACHE = template;
-                    i3GEOF.inserexy.inicia(iddiv);
-                });
-                return;
-            }
-
-            var b;
-            $i(iddiv).innerHTML = i3GEOF.inserexy.html();
-            i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia1","i3GEOinserexyguia");
-            //eventos das guias
-            $i("i3GEOinserexyguia0").onclick = function(){
-                i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia0","i3GEOinserexyguia");
-            };
-            $i("i3GEOinserexyguia1").onclick = function(){
-                i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia1","i3GEOinserexyguia");
-            };
-            $i("i3GEOinserexyguia2").onclick = function(){
-                i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia2","i3GEOinserexyguia");
-            };
-            $i("i3GEOinserexyguia3").onclick = function(){
-                i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia3","i3GEOinserexyguia");
-            };
-            $i("i3GEOinserexyguia4").onclick = function()
-            {i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia4","i3GEOinserexyguia");};
-            $i("i3GEOinserexyguia5").onclick = function(){
-                i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia5","i3GEOinserexyguia");
-            };
-            $i("i3GEOinserexyguia6").onclick = function(){
-                i3GEO.guias.mostraGuiaFerramenta("i3GEOinserexyguia6","i3GEOinserexyguia");
-            };
-
-            i3GEOF.inserexy.ativaFoco();
-            i3GEOF.inserexy.montaComboLocal();
-            i3GEO.util.radioEpsg(
-                    function(retorno){
-                        $i("i3GEOinserexylistaepsg").innerHTML = retorno.dados;
-                    },
-                    "i3GEOinserexylistaepsg",
-                    "i3GEOinserexy"
-            );
-
-        },
-        /*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-         */
-        html:function() {
-            var ins = Mustache.render(i3GEOF.inserexy.MUSTACHE, i3GEOF.inserexy.mustacheHash());
-            return ins;
-        },
-        /*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-         */
-        iniciaJanelaFlutuante: function(){
-            i3GEO.janela.tempoMsg("<div style='text-align:left;'>" + $trad("ajuda",i3GEOF.inserexy.dicionario) + "</div>");
-            var minimiza,cabecalho,janela,divid,temp,titulo;
-            if ($i("i3GEOF.inserexy")) {
-                return;
-            }
-            //cria a janela flutuante
-            cabecalho = function(){
-                i3GEOF.inserexy.ativaFoco();
-            };
-            minimiza = function(){
-                i3GEO.janela.minimiza("i3GEOF.inserexy",200);
-            };
-            titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d22t") + "</span></div>";
-            janela = i3GEO.janela.cria(
-                    "520px",
-                    "310px",
-                    "",
-                    "",
-                    "",
-                    titulo,
-                    "i3GEOF.inserexy",
-                    false,
-                    "hd",
-                    cabecalho,
-                    minimiza,
-                    "",
-                    true,
-                    "",
-                    "",
-                    "",
-                    "",
-                    "83a"
-            );
-            divid = janela[2].id;
-            i3GEOF.inserexy.aguarde = $i("i3GEOF.inserexy_imagemCabecalho").style;
-            $i("i3GEOF.inserexy_corpo").style.backgroundColor = "white";
-            i3GEOF.inserexy.inicia(divid);
-
-            i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.inserexy.adicionaClique()"]);
-            i3GEO.eventos.cliquePerm.desativa();
-            temp = function(){
-                i3GEO.eventos.cliquePerm.ativa();
-                i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.inserexy.adicionaClique()"]);
-            };
-            YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-        },
-        /*
-	Function: ativaFoco
-
-	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
-         */
-        ativaFoco: function(){
-            i3GEO.eventos.cliquePerm.desativa();
-        },
-        /*
-	Function: montaComboLocal
-
-	Monta o combo com a lista de temas que podem ser editados (temas armazenados no diret&oacute;rio tempor&aacute;rio do i3Geo)
-
-	Veja:
-
-	<i3GEO.util.comboTemas>
-         */
-        montaComboLocal: function(){
-            i3GEO.util.comboTemas(
-                    "i3GEOinserexytemasLocais",
-                    function(retorno){
-                        $i("i3GEOinserexyshapefile").innerHTML = retorno.dados + '<span class="material-icons iconeComboTemas">playlist_add_check</span>';
-                        if ($i("i3GEOinserexytemasLocais")){
-                            $i("i3GEOinserexytemasLocais").onchange = function(){
-                                i3GEO.mapa.ativaTema($i("i3GEOinserexytemasLocais").value);
-                                i3GEOF.inserexy.listaItens();
-                                i3GEOF.inserexy.listaPontos();
-                            };
-                        }
-                        if(i3GEO.temaAtivo !== ""){
-                            var temp = $i("i3GEOinserexytemasLocais");
-                            if(temp){
-                                temp.value = i3GEO.temaAtivo;
-                                temp.onchange.call();
-                            }
-                        }
-                    },
-                    "i3GEOinserexyshapefile",
-                    "",
-                    false,
-                    "locais",
-                    "",
-                    false,
-                    true,
-                    "form-control comboTema"
-            );
-        },
-        /*
-	Function: criatemaeditavel
-
-	Cria um novo tema local para receber os pontos
-
-	Veja:
-
-	<CRIASHPVAZIO>
-         */
-        criatemaeditavel: function(){
-            if(i3GEOF.inserexy.aguarde.visibility === "visible")
-            {return;}
-            var funcaoOK = function(){
-                try{
-                    var tituloTema,cp,p;
-                    tituloTema = $i("i3GEOjanelaprompt").value;
-                    if(tituloTema === "")
-                    {tituloTema = "Pontos inseridos "+Math.random();}
-                    i3GEOF.inserexy.aguarde.visibility = "visible";
-                    temp = function(retorno){
-                        i3GEOF.inserexy.aguarde.visibility = "hidden";
-                        i3GEO.temaAtivo = retorno.data;
-                        i3GEO.atualiza();
-                        i3GEOF.inserexy.montaComboLocal();
-                    };
-                    cp = new cpaint();
-                    cp.set_response_type("JSON");
-                    p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=criashpvazio&tituloTema="+tituloTema;
-                    cp.call(p,"criaSHPvazio",temp);
-                }
-                catch(e){
-                    i3GEO.janela.tempoMsg("Erro: "+e);
-                    i3GEOF.inserexy.aguarde.visibility = "hidden";
-                }
-            };
-            i3GEO.janela.prompt($trad('tituloNovoTema',i3GEOF.inserexy.dicionario),funcaoOK,$trad('pontosInseridos',i3GEOF.inserexy.dicionario)+parseInt((Math.random() * 100),10));
-        },
-        /*
-	Function: listaPontos
-
-	Lista os pontos existentes no tema escolhido
-
-	Veja:
-
-	<LISTAPONTOSSHAPE>
-         */
-        listaPontos: function(){
-            var cp,p,temp;
-            temp = function(retorno){
-                if (retorno.data != undefined){
-                    var ins = [],i;
-                    for (i=0;i<retorno.data.length; i++)
-                    {ins.push("<div class='pontosInseridos' style='font-size:12px'>"+retorno.data[i].x+" "+retorno.data[i].y+"</div><br>");}
-                    $i("i3GEOinserexyguia6obj").innerHTML = ins.join("");
-                }
-                else
-                {$i("i3GEOinserexyguia6obj").innerHTML = "<p style=color:red >Erro<br>";}
-            };
-            cp = new cpaint();
-            cp.set_response_type("JSON");
-            p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=listaPontosShape&tema="+$i("i3GEOinserexytemasLocais").value;
-            cp.call(p,"listaPontosShape",temp);
-        },
-        /*
-	Function: listaItens
-
-	Lista os itens do tema escolhido para receber os pontos
-
-	Veja:
-
-	<i3GEO.util.comboItens>
-         */
-        listaItens: function(){
-            i3GEO.util.comboItens(
-                    "i3GEOinserexyItem",
-                    $i("i3GEOinserexytemasLocais").value,
-                    function(retorno){
-                        $i("i3GEOinserexyshapefileitem").innerHTML = retorno.dados;
-                        $i("i3GEOinserexyopcitens").style.display = "block";
-                    },
-                    "i3GEOinserexyshapefileitem",
-                    "display:block",
-                    "",
-                    "",
-                    "form-control"
-            );
-        },
-        /*
-	Function: adicionaClique
-
-	Adiciona um ponto no mapa no local onde o usu&aacute;rio clicar com o mouse
-
-	As coordenadas s&atilde;o obtidas do objeto objposicaocursor
-         */
-        adicionaClique: function(){
-            i3GEOF.inserexy.adiciona(objposicaocursor.ddx+" "+objposicaocursor.ddy,"cliqueMapa");
-        },
-        /*
-	Function: inserirdd
-
-	Insere um ponto com base na dire&ccedil;&atilde;o e distancia
-         */
-        inserirdd: function(){
-            try{
-                var regv,xgv,xmv,xsv,direcao,divs,x,y,xy;
-                regv = new RegExp(",", "g");
-                xgv = $i("i3GEOinserexyxgdd").value;
-                xmv = $i("i3GEOinserexyxmdd").value;
-                xsv = $i("i3GEOinserexyxsdd").value;
-                xsv = xsv.replace(regv,".");
-                direcao = i3GEO.calculo.dms2dd(xgv,xmv,xsv);
-                //pega o &uacute;ltimo ponto
-                divs = $i("i3GEOinserexyguia6obj").getElementsByClassName("i3GEOinserexyguia6obj");
-                divs = divs[divs.length - 1];
-                divs = divs.innerHTML.split(" ");
-                x = divs[0];
-                y = divs[1];
-                xy = i3GEO.calculo.destinoDD(x,y,$i("i3GEOinserexydistdd").value,direcao);
-                i3GEOF.inserexy.adiciona(xy[0]+" "+xy[1]);
-            }catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
-        },
-        /*
-	Function: inserir
-
-	Insere pontos digitando-se as coordenadas
-         */
-        inserir: function(){
-            try{
-                var reg = new RegExp("w|W|l|L|o|O|'|G|r", "g"),
-                regv = new RegExp(",", "g"),
-                v,xgv = 0,xmv = 0,xsv = 0,vv,ygv = 0,ymv = 0,ysv = 0,x,y;
-                if($i("i3GEOinserexytipodigcampo").checked){
-                    if (!$i("i3GEOinserexylongitude").value == ""){
-                        v = $i("i3GEOinserexylongitude").value + " 0" + " 0";
-                        v = v.replace(reg,"");
-                        v = v.replace(regv,".");
-                        v = v.split(" ");
-                        xgv = v[0];
-                        xmv = v[1];
-                        xsv = v[2];
-                        xsv = xsv.replace(",",".");
-                    }
-                    if (!$i("i3GEOinserexylatitude").value == ""){
-                        vv = $i("i3GEOinserexylatitude").value  + " 0" + " 0";
-                        vv = vv.replace(reg,"");
-                        vv = vv.replace(regv,".");
-                        vv = vv.split(" ");
-                        ygv = vv[0];
-                        ymv = vv[1];
-                        ysv = vv[2];
-                        ysv = ysv.replace(regv,".");
-                    }
-                }
-                if($i("i3GEOinserexytipodigmascara").checked){
-                    xgv = $i("i3GEOinserexyxg").value;
-                    xmv = $i("i3GEOinserexyxm").value;
-                    xsv = $i("i3GEOinserexyxs").value;
-                    xsv = xsv.replace(regv,".");
-                    ygv = $i("i3GEOinserexyyg").value;
-                    ymv = $i("i3GEOinserexyym").value;
-                    ysv = $i("i3GEOinserexyys").value;
-                    ysv = ysv.replace(regv,".");
-                }
-                x = i3GEO.calculo.dms2dd(xgv,xmv,xsv);
-                y = i3GEO.calculo.dms2dd(ygv,ymv,ysv);
-                i3GEOF.inserexy.adiciona(x+" "+y);
-            }
-            catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
-        },
-        /*
-	Functin: colar
-
-	Captura as coordenadas coladas pelo usu&aacute;rio e insere os pontos
-         */
-        colar: function(){
-            var regv = new RegExp(",", "g"),
-            valores = $i("i3GEOinserexycolar").value;
-            valores = valores.replace(regv,".");
-            i3GEOF.inserexy.adiciona(valores);
-        },
-        /*
-	Function: escolhedig
-
-	Define o tipo de entrada de coordenadas (dms ou dd)
-         */
-        escolhedig: function(q){
-            if(q === 0){
-                q = "i3GEOinserexydigmascara";
-            }
-            else{
-                q = "i3GEOinserexydigcampo";
-            }
-            $i("i3GEOinserexydigmascara").style.display="none";
-            $i("i3GEOinserexydigcampo").style.display="none";
-            $i(q).style.display="block";
-        },
-        /*
-	Function: pegaProjecao
-
-	Obt&eacute;m o c&oacute;digo da proje&ccedil;&atilde;o escolhida
-         */
-        pegaProjecao: function(){
-            var inputs = $i("i3GEOinserexylistaepsg").getElementsByTagName("input"),
-            i,
-            projecao = "";
-            for (i=0;i<inputs.length; i++){
-                if (inputs[i].checked == true)
-                {projecao = inputs[i].value;}
-            }
-            return(projecao);
-        },
-        /*
-	Function: adiciona
-
-	Adiciona um ponto no mapa
-
-	Parametros:
-
-	xy {string} - coordenadas x e y separadas por espa&ccedil;o
-
-	fonte {string} - (opcional) como a coordenada foi obtida. Se for "cliqueMapa" o parametro proje&ccedil;&atilde;o ser&aacute; enviado como vazio para o servidor
-
-	Veja:
-
-	<i3GEO.php.insereSHP>
-         */
-        adiciona: function(xy,fonte){
-            if(i3GEOF.inserexy.aguarde.visibility === "visible"){
-                return;
-            }
-            var tema,
-            item = "",
-            valoritem = "",
-            temp,
-            n,
-            i,
-            xyn,
-            projecao = i3GEOF.inserexy.pegaProjecao();
-            if(!$i("i3GEOinserexytemasLocais")){
-                tema = "";
-            }else{
-                tema = $i("i3GEOinserexytemasLocais").value;
-            }
-            xyn = xy.split(" ");
-            n = xyn.length;
-            temp = "";
-            for(i=0;i<n;i = i + 2){
-                temp += "<div class='pontosInseridos' style='font-size:12px' >" + xyn[i]+" "+xyn[i+1] + "</div><br>";
-            }
-            $i("i3GEOinserexyguia6obj").innerHTML += temp;
-            if($i("i3GEOinserexyItem") && $i("i3GEOinserexyvalorItem")){
-                item = $i("i3GEOinserexyItem").value;
-                valoritem = $i("i3GEOinserexyvalorItem").value;
-            }
-            if (tema === ""){
-                i3GEO.janela.tempoMsg($trad('msgNenhumTemaDefinido',i3GEOF.inserexy.dicionario));
-            }
-            else{
-                temp = function(retorno){
-                    if(i3GEO.Interface.ATUAL === "padrao")
-                    {i3GEO.atualiza();}
-                    i3GEO.Interface.atualizaTema(retorno,tema);
-                    i3GEOF.inserexy.aguarde.visibility = "hidden";
-                };
-                if(fonte !== undefined){
-                    projecao = "";
-                }
-                i3GEOF.inserexy.aguarde.visibility = "visible";
-                i3GEO.php.insereSHP(temp,tema,item,valoritem,xy,projecao);
-            }
-        },
-        /*
-	Function: criaLin
-
-	Converte os pontos de um tema em linhas
-
-	Veja:
-
-	<SPHPT2SHP>
-         */
-        criaLin: function(){
-            if(i3GEOF.inserexy.aguarde.visibility === "visible")
-            {return;}
-            i3GEOF.inserexy.aguarde.visibility = "visible";
-            var cp = new cpaint(),
-            p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=sphPT2shp&para=linha&tema="+$i("i3GEOinserexytemasLocais").value+"&ext="+i3GEO.parametros.mapexten,
-            temp = function(){
-                i3GEOF.inserexy.aguarde.visibility = "hidden";
-                i3GEO.atualiza();
-            };
-            cp.set_response_type("JSON");
-            cp.call(p,"sphPT2shp",temp);
-        },
-        /*
-	Function: criaPol
-
-	Converte os pontos de um tema em poligonos
-
-	Veja:
-
-	<SPHPT2SHP>
-         */
-        criaPol: function(){
-            if(i3GEOF.inserexy.aguarde.visibility === "visible")
-            {return;}
-            i3GEOF.inserexy.aguarde.visibility = "visible";
-            var cp = new cpaint(),
-            p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=sphPT2shp&para=poligono&tema="+$i("i3GEOinserexytemasLocais").value+"&ext="+i3GEO.parametros.mapexten,
-            temp = function(){
-                i3GEOF.inserexy.aguarde.visibility = "hidden";
-                i3GEO.atualiza();
-            };
-            cp.set_response_type("JSON");
-            cp.call(p,"sphPT2shp",temp);
-        },
-        /*
-	Function: wkt
-
-	Converte os pontos em WKT
-
-	Veja:
-
-	<MOSTRAWKT>
-         */
-        wkt: function(){
-            if(i3GEOF.inserexy.aguarde.visibility === "visible")
-            {return;}
-            i3GEOF.inserexy.aguarde.visibility = "visible";
-            try{
-                var divs = $i("i3GEOinserexyguia6obj").getElementsByClassName("pontosInseridos"),
-                n = divs.length,
-                xy = [],
-                cp = new cpaint(),
-                i,
-                mostra = function(retorno){
-                    i3GEOF.inserexy.aguarde.visibility = "hidden";
-                    if (retorno.data !== undefined){
-                        var ins = "<textarea class='form-control input-lg' style=height:80px >"+retorno.data[0]+"</textarea><br>";
-                        ins += "<textarea class='form-control input-lg' style=height:80px >"+retorno.data[1]+"</textarea><br>";
-                        ins += "<textarea class='form-control input-lg' style=height:80px >"+retorno.data[2]+"</textarea><br>";
-                        $i("i3GEOinserexywktres").innerHTML = "<p class=paragrafo >"+ins+"</p>";
-                    }
-                    else
-                    {$i("i3GEOinserexywktres").innerHTML = "<p style=color:red >Erro<br>";}
-                };
-                for (i=0;i<n;i++)
-                {xy.push(divs[i].innerHTML);}
-                xy = xy.join(" ");
-                cp.set_response_type("JSON");
-                cp.call(i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=mostrawkt&xy="+xy,"xy2wkt",mostra);
-            }
-            catch(e){i3GEO.janela.tempoMsg("Erro: "+e);i3GEOF.inserexy.aguarde.visibility = "hidden";}
-        },
-        /*
-	Function: graficoPerfil
-
-	Cria um gr&aacute;fico de perfil com base nos dados inseridos
-         */
-        graficoPerfil: function(){
-            var divs = $i("i3GEOinserexyguia6obj").getElementsByClassName("pontosInseridos"),
-            js = i3GEO.configura.locaplic+"/ferramentas/perfil/dependencias.php",
-            n = divs.length,
-            x = [],
-            y = [],
-            xy,
-            i;
-            for (i=0;i<n;i++){
-                xy = divs[i].innerHTML.split(" ");
-                x.push(xy[0]);
-                y.push(xy[1]);
-            }
-            if(x.length == 0){
-                i3GEO.janela.tempoMsg($trad('msgNenhumPontoEncontrado',i3GEOF.inserexy.dicionario));
-                return;
-            }
-            pontosdistobj = {
-                    xpt: x,
-                    ypt: y
-            };
-            i3GEO.util.scriptTag(js,"i3GEOF.perfil.iniciaJanelaFlutuante(pontosdistobj)","i3GEOF.perfil_script");
-        }
+	    xyn = xy.split(" ");
+	    n = xyn.length;
+	    temp = "";
+	    for(i=0;i<n;i = i + 2){
+		temp += "<div class='pontosInseridos' style='font-size:12px' >" + xyn[i]+" "+xyn[i+1] + "</div><br>";
+	    }
+	    $i("i3GEOinserexy2guia6objCoord").innerHTML += temp;
+	    i3GEOF.inserexy2.get({
+		snackbar: false,
+		fn: function(retorno){
+		    i3GEO.Interface.atualizaTema("",$i("i3GEOinserexy2temasLocais").value);
+		},
+		btn: false,
+		par: {
+		    funcao: "insereSHP",
+		    tema: $i("i3GEOinserexy2temasLocais").value,
+		    item: $i("i3GEOinserexy2Item").value,
+		    valoritem: $i("i3GEOinserexy2valorItem").value,
+		    projecao: i3GEOF.inserexy2.pegaProjecao(),
+		    xy: xy
+		},
+		refresh: false
+	    });
+	},
+	listaPontos: function(){
+	    i3GEOF.inserexy2.get({
+		snackbar: true,
+		fn: function(data){
+		    var ins = [],i;
+		    if (data != undefined){
+			for (i=0;i<data.length; i++){
+			    ins.push("<div class='pontosInseridos' style='font-size:12px'>"+data[i].x+" "+data[i].y+"</div><br>");
+			}
+			$i("i3GEOinserexy2guia6objCoord").innerHTML = ins.join("");
+		    }
+		    $i("i3GEOinserexy2guia6objCoord").innerHTML = ins.join("");
+		},
+		btn: false,
+		par: {
+		    funcao: "listaPontosShape",
+		    tema: $i("i3GEOinserexy2temasLocais").value
+		},
+		refresh: false
+	    });
+	},
+	inserirdd: function(){
+	    try{
+		var regv,xgv,xmv,xsv,direcao,divs,x,y,xy;
+		regv = new RegExp(",", "g");
+		xgv = $i("i3GEOinserexy2xgdd").value;
+		xmv = $i("i3GEOinserexy2xmdd").value;
+		xsv = $i("i3GEOinserexy2xsdd").value;
+		xsv = xsv.replace(regv,".");
+		direcao = i3GEO.calculo.dms2dd(xgv,xmv,xsv);
+		//pega o &uacute;ltimo ponto
+		divs = $i("i3GEOinserexy2guia6objCoord").getElementsByClassName("i3GEOinserexy2guia6obj");
+		divs = divs[divs.length - 1];
+		divs = divs.innerHTML.split(" ");
+		x = divs[0];
+		y = divs[1];
+		xy = i3GEO.calculo.destinoDD(x,y,$i("i3GEOinserexy2distdd").value,direcao);
+		i3GEOF.inserexy2.adiciona(xy[0]+" "+xy[1]);
+	    }catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
+	},
+	inserir: function(){
+	    try{
+		var reg = new RegExp("w|W|l|L|o|O|'|G|r", "g"),
+		regv = new RegExp(",", "g"),
+		v,xgv = 0,xmv = 0,xsv = 0,vv,ygv = 0,ymv = 0,ysv = 0,x,y;
+		if($i("i3GEOinserexy2tipodigcampo").checked){
+		    if (!$i("i3GEOinserexy2longitude").value == ""){
+			v = $i("i3GEOinserexy2longitude").value + " 0" + " 0";
+			v = v.replace(reg,"");
+			v = v.replace(regv,".");
+			v = v.split(" ");
+			xgv = v[0];
+			xmv = v[1];
+			xsv = v[2];
+			xsv = xsv.replace(",",".");
+		    }
+		    if (!$i("i3GEOinserexy2latitude").value == ""){
+			vv = $i("i3GEOinserexy2latitude").value  + " 0" + " 0";
+			vv = vv.replace(reg,"");
+			vv = vv.replace(regv,".");
+			vv = vv.split(" ");
+			ygv = vv[0];
+			ymv = vv[1];
+			ysv = vv[2];
+			ysv = ysv.replace(regv,".");
+		    }
+		}
+		if($i("i3GEOinserexy2tipodigmascara").checked){
+		    xgv = $i("i3GEOinserexy2xg").value;
+		    xmv = $i("i3GEOinserexy2xm").value;
+		    xsv = $i("i3GEOinserexy2xs").value;
+		    xsv = xsv.replace(regv,".");
+		    ygv = $i("i3GEOinserexy2yg").value;
+		    ymv = $i("i3GEOinserexy2ym").value;
+		    ysv = $i("i3GEOinserexy2ys").value;
+		    ysv = ysv.replace(regv,".");
+		}
+		x = i3GEO.calculo.dms2dd(xgv,xmv,xsv);
+		y = i3GEO.calculo.dms2dd(ygv,ymv,ysv);
+		i3GEOF.inserexy2.adiciona(x+" "+y);
+	    }
+	    catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
+	},
+	colar: function(){
+	    var regv = new RegExp(",", "g"),
+	    valores = $i("i3GEOinserexy2colar").value;
+	    valores = valores.replace(regv,".");
+	    i3GEOF.inserexy2.adiciona(valores);
+	},
+	escolhedig: function(q){
+	    if(q === 0){
+		q = "i3GEOinserexy2digmascara";
+	    }
+	    else{
+		q = "i3GEOinserexy2digcampo";
+	    }
+	    $i("i3GEOinserexy2digmascara").style.display="none";
+	    $i("i3GEOinserexy2digcampo").style.display="none";
+	    $i(q).style.display="block";
+	},
+	pegaProjecao: function(){
+	    return($i("i3GEOinserexy2epsg").value);
+	},
+	criaLin: function(btn){
+	    i3GEOF.inserexy2.get({
+		snackbar: true,
+		fn: function(data){
+		    i3GEO.atualiza();
+		},
+		btn: btn,
+		par: {
+		    funcao: "sphPT2shp",
+		    tema: $i("i3GEOinserexy2temasLocais").value,
+		    ext: i3GEO.parametros.mapexten,
+		    para: "linha"
+		},
+		refresh: false
+	    });
+	},
+	criaPol: function(btn){
+	    i3GEOF.inserexy2.get({
+		snackbar: true,
+		fn: function(data){
+		    i3GEO.atualiza();
+		},
+		btn: btn,
+		par: {
+		    funcao: "sphPT2shp",
+		    tema: $i("i3GEOinserexy2temasLocais").value,
+		    ext: i3GEO.parametros.mapexten,
+		    para: "poligono"
+		},
+		refresh: false
+	    });
+	},
+	wkt: function(btn){
+	    var divs = $i("i3GEOinserexy2guia6objCoord").getElementsByClassName("pontosInseridos"),
+	    n = divs.length,
+	    xy = [],
+	    i;
+	    for (i=0;i<n;i++){
+		xy.push(divs[i].innerHTML);
+	    }
+	    xy = xy.join(" ");
+	    i3GEOF.inserexy2.get({
+		snackbar: false,
+		fn: function(data){
+		    if (data !== undefined){
+			var ins = "<textarea class='form-control input-lg' style=height:80px >"+data[0]+"</textarea><br>";
+			ins += "<textarea class='form-control input-lg' style=height:80px >"+data[1]+"</textarea><br>";
+			ins += "<textarea class='form-control input-lg' style=height:80px >"+data[2]+"</textarea><br>";
+			i3GEO.janela.closeMsg(ins);
+		    }
+		},
+		btn: btn,
+		par: {
+		    funcao: "mostrawkt",
+		    xy: xy
+		},
+		refresh: false
+	    });
+	}
 };

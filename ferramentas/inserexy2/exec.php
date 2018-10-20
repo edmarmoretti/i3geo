@@ -1,31 +1,36 @@
 <?php
-include_once(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-//
-//faz a busca da fun&ccedil;&atilde;o que deve ser executada
-//
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
-switch (strtoupper($funcao))
-{
-/*
-Valor: INSERESHP
-
-Insere um ponto em um shape file existente.
-
-<SHP->insereSHP>
-*/
-	case "INSERESHP":
-		include_once(dirname(__FILE__)."/../../classesphp/classe_shp.php");
-		copiaSeguranca($map_file);
-		$m = new SHP($map_file,$tema);
-		if (!isset($_GET["projecao"])){$_GET["projecao"] = "";}
-		$m->insereSHP($_GET["xy"],$_GET["projecao"],$_GET["item"],$_GET["valor"]);
-		$_SESSION["contadorsalva"]++;
-		redesenhaMapa();
-	break;
+include (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
+include (dirname(__FILE__) . "/../../classesphp/classe_shp.php");
+switch (strtoupper($_GET["funcao"])) {
+    case "INSERESHP":
+        $m = new SHP($_SESSION["map_file"], $_GET["tema"]);
+        $retorno = $m->insereSHP($_GET["xy"], $_GET["projecao"], $_GET["item"], $_GET["valor"]);
+        break;
+    case "CRIASHPVAZIO":
+        $m = new SHP($_SESSION["map_file"]);
+        $retorno = $m->criaSHPvazio($_GET["tituloTema"]);
+        $m->salva();
+        break;
+    case "LISTAPONTOSSHAPE":
+        $m = new SHP($_SESSION["map_file"], $_GET["tema"]);
+        $retorno = $m->listaPontosShape();
+        break;
+    case "SPHPT2SHP":
+        $m = new SHP($_SESSION["map_file"], $_GET["tema"], $_SESSION["locaplic"], $_GET["ext"]);
+        $retorno = $m->shpPT2shp($_SESSION["locaplic"], $_GET["para"]);
+        $m->salva();
+        break;
+    case "MOSTRAWKT":
+        //vem de funcoes gerais
+        $res = xy2wkt($_GET["xy"]);
+        $retorno = array(
+            $res["ponto"],
+            $res["linha"],
+            $res["poligono"]
+        );
+        break;
 }
-if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-	restauraCon($map_file,$postgis_mapa);
-}
-cpjson($retorno);
-?>
+ob_clean();
+header("Content-type: application/json");
+echo json_encode($retorno);

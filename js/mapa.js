@@ -935,17 +935,17 @@ i3GEO.mapa =
 		);
 	    },
 	    /**
-	     * Function: cliquePonto
+	     * Function: inserexy2
 	     *
 	     * Abre a janela de dialogo da ferramenta inserexy2
 	     */
-	    cliquePonto : function() {
+	    inserexy2 : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.cliquePonto()",
+			"i3GEO.mapa.dialogo.inserexy2()",
 			"inserexy2",
-			"inserexy",
+			"inserexy2",
 			"dependencias.php",
-		"i3GEOF.inserexy.iniciaJanelaFlutuante()");
+		"i3GEOF.inserexy2.start()");
 	    },
 	    /**
 	     * Function: cliqueGrafico
