@@ -908,17 +908,17 @@ i3GEO.mapa =
 		"i3GEOF.gradeCoord.iniciaJanelaFlutuante()");
 	    },
 	    /**
-	     * Function: cliqueTexto
+	     * Function: inseretxt
 	     *
 	     * Abre a janela de dialogo da ferramenta inseretxt
 	     */
-	    cliqueTexto : function() {
+	    inseretxt : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.cliqueTexto()",
+			"i3GEO.mapa.dialogo.inseretxt()",
 			"inseretxt",
 			"inseretxt",
 			"dependencias.php",
-		"i3GEOF.inseretxt.iniciaJanelaFlutuante()");
+		"i3GEOF.inseretxt.start()");
 	    },
 	    /**
 	     * Function: selecao

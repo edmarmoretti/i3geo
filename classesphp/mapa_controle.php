@@ -1087,7 +1087,6 @@ switch (strtoupper($funcao)) {
      * <Temas->insereFeature>
      */
     case "INSEREFEATURE":
-
         include_once ("classe_temas.php");
         copiaSeguranca($map_file);
         $m = new Temas($map_file, "");
@@ -2134,7 +2133,6 @@ switch (strtoupper($funcao)) {
         if(isset($_pg["tema"])){
             $tema = $_pg["tema"];
         }
-
         $opcao = $_pg["opcao"];
         $xy = $_pg["xy"];
         $resolucao = $_pg["resolucao"];
@@ -2182,7 +2180,7 @@ switch (strtoupper($funcao)) {
         }
         $m = new Atributos($map_file, $tema, "", $ext);
         $xy = explode(",", $xy);
-        $retorno = $m->identificaQBP3($tema, $xy[0], $xy[1], $map_file, $resolucao, $item, $tiporetorno = "unico");
+        $retorno = $m->identificaQBP3($tema, $xy[0], $xy[1], $map_file, $resolucao, $item, "unico");
         break;
     /*
      * Valor: LISTATEXTO

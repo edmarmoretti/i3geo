@@ -1,54 +1,202 @@
-<div class='yui-navset' style='height: 38px; top: 0px; cursor: pointer; margin-left: 2px;'>
-	<ul class='yui-nav' style='border-width: 0pt 0pt 0px; border-color: rgb(240, 240, 240); border-bottom-color: white;'>
-		<li>
-			<div id='i3GEOinseretxtguia3' style='text-align: center; left: 0px;'>
-				<a>
-					<em><span class="material-icons">settings</span></em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOinseretxtguia1' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{digita}}}</em>
-				</a>
-			</div>
-		</li>
-		<li>
-			<div id='i3GEOinseretxtguia2' style='text-align: center; left: 0px;'>
-				<a>
-					<em>{{{captura}}}</em>
-				</a>
-			</div>
-		</li>
-	</ul>
+<nav class='navbar navbar-default' style='margin-bottom: 0px; min-height: 35px'>
+    <div class="container" style="margin: 0px;">
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
+                <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
+            </button>
+        </div>
+        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse" style="padding: 10px; overflow-x: hidden; max-height: 200px;">
+            <ul class="nav navbar-nav ">
+                <li role="presentation"><a id='i3GEO{{namespace}}guia3' href="javascript:void(0);">
+                        <span class="material-icons">settings</span>
+                    </a></li>
+                <li class="active" role="presentation"><a id='i3GEO{{namespace}}guia1' href="javascript:void(0);">
+                        <em>{{{digita}}}</em>
+                    </a></li>
+                <li role="presentation"><a id='i3GEO{{namespace}}guia2' href="javascript:void(0);">
+                        <em>{{{captura}}}</em>
+                    </a></li>
+            </ul>
+        </div>
+    </div>
+</nav>
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; z-index: 100; height: calc(100% - 10px);'>
+    <div class='container-fluid' id='i3GEOinseretxtguia1obj'>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="i3GEOinseretxttexto">{{{insereTexto}}}</label>
+            <input class="form-control input-lg" type='text' id='i3GEOinseretxttexto' value='' />
+        </div>
+        <div class="checkbox text-left">
+            <label>
+                <input checked id='i3GEOinseretxttextoconector' type="checkbox">
+                <span class="checkbox-material noprint"> <span class="check"></span>
+                </span> {{{insereConector}}}
+            </label>
+        </div>
+        <h5 class="alert alert-info">{{{ajuda}}}</h5>
+    </div>
+    <div class='container-fluid' id='i3GEOinseretxtguia2obj'>
+        <div style="width: 100%;" class='form-group label-fixed condensed'>
+            <label class="control-label" for="">{{{selecionaTema}}}</label>
+            <div style="width: 100%;" class="input-group" id='i3GEOinseretxtDivComboTemas'></div>
+        </div>
+        <div style="width: 100%;" class='form-group label-fixed condensed'>
+            <label class="control-label" for="">{{{selecionaItem}}}</label>
+            <div style="width: 100%;" class="input-group" id='i3GEOinseretxtDivComboItens'></div>
+        </div>
+        <h5 class="alert alert-info">{{{ajuda2}}}</h5>
+    </div>
+    <div class='container-fluid' id='i3GEOinseretxtguia3obj'>
+        <form class="form-horizontal">
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{larguraConector}}}</label>
+                <div class="col-md-6">
+                    <input class="form-control input-lg" type='text' name='i3GEOproplabeltamanho_c' value='2' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{corConector}}}</label>
+                <div class="col-md-6">
+                    <input class="form-control input-lg i3geoFormIconeAquarela" type='text' name='i3GEOproplabelfrente_c' value='0 0 0' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{fonte}}}</label>
+                <div class="col-md-6">
+                    <div id='i3GEOinseretxtDivListaFonte'></div>
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{tamanho}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='tamanho' value='12' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{angulo}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='text' name='angulo' value='0' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{deslocamentoTexto}}} X</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='offsetx' value='0' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{deslocamentoTexto}}} Y</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg " type='number' name='offsety' value='0' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{corTexto}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='cor' name='cor' value='0,0,0' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{corMascara}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='outlinecolor' name='outlinecolor' value='-1,-1,-1' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{posicionamento}}}</label>
+                <div class="col-md-6">
+                    <select class="form-control" name='position'>
+                        <option value='MS_AUTO'>auto</option>
+                        <option value='MS_UL'>UL</option>
+                        <option value='MS_UC'>UC</option>
+                        <option selected value='MS_UR'>UR</option>
+                        <option value='MS_CL'>CL</option>
+                        <option value='MS_CC'>CC</option>
+                        <option value='MS_CR'>CR</option>
+                        <option value='MS_LL'>LL</option>
+                        <option value='MS_LC'>LC</option>
+                        <option value='MS_LR'>LR</option>
+                    </select><b class="caret careti"></b>
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{corFundo}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='fundo' name='fundo' value='0,0,0' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{corSombraFundo}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='sombra' name='sombra' value='' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{deslocamentoSombraFundo}}} X</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg" type='text' name='sombrax' value='1' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{deslocamentoSombraFundo}}} Y</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg" type='text' name='sombray' value='1' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{corSombra}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='shadowcolor' name='shadowcolor' value='' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{deslocamentoSombra}}} X</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg" type='text' name='shadowsizex' value='1' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{deslocamentoSombra}}} Y</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg" type='text' name='shadowsizey' value='1' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{forcaColisaoTextos}}}</label>
+                <div class="col-md-6">
+                    <select class="form-control" name='force'>
+                        <option value='0'>{{{nao}}}</option>
+                        <option value='1'>{{{sim}}}</option>
+                    </select><b class="caret careti"></b>
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{distanciaMinTextos}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg" type='text' name='mindistance' value='auto' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{tamanhoMinElementoCarto}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg" type='text' name='minfeaturesize' value='auto' />
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{textoUltrapassaMapa}}}</label>
+                <div class="col-md-6">
+                    <select class="form-control" name='partials'>
+                        <option value='0'>{{{nao}}}</option>
+                        <option selected value='1'>{{{sim}}}</option>
+                    </select><b class="caret careti"></b>
+                </div>
+            </div>
+            <div class='form-group label-fixed condensed'>
+                <label class="col-md-6 control-label">{{{caracterQuebraTexto}}}</label>
+                <div class="col-md-6 ">
+                    <input class="form-control input-lg" type='text' name='wrap' value='' />
+                </div>
+            </div>
+        </form>
+    </div>
 </div>
-<div class='container-fluid customScrollBarXY' id='i3GEOinseretxtguia1obj'>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOinseretxttexto">{{{insereTexto}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOinseretxttexto' value='' />
-	</div>
-
-	<div class="checkbox text-left">
-		<label>
-			<input checked id='i3GEOinseretxttextoconector' type="checkbox">
-			<span class="checkbox-material noprint">
-				<span class="check"></span>
-			</span>
-			{{{insereConector}}}
-		</label>
-	</div>
-	<h5 class="alert alert-info">{{{ajuda}}}</h5>
-</div>
-<div class='container-fluid customScrollBarXY' id='i3GEOinseretxtguia2obj'>
-	<div style="width: 100%;" class='form-group label-fixed condensed'>
-		<label class="control-label" for="">{{{selecionaTema}}}</label>
-		<div style="width: 100%;" class="input-group" id='i3GEOinseretxtDivComboTemas'></div>
-	</div>
-	<div style="width: 100%;" class='form-group label-fixed condensed'>
-		<label class="control-label" for="">{{{selecionaItem}}}</label>
-		<div style="width: 100%;" class="input-group" id='i3GEOinseretxtDivComboItens'></div>
-	</div>
-	<h5 class="alert alert-info">{{{ajuda2}}}</h5>
-</div>
-<div class='container-fluid customScrollBarXY' id='i3GEOinseretxtguia3obj'></div>

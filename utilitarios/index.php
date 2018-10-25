@@ -40,7 +40,7 @@ include "../init/head.php";
 			<div class="col-sm-12 hidden">
 				<!-- Template para criacao dos quadros ver index.js -->
 				<div class="panel panel-default">
-					<div class="panel-body" id="botoesTpl">
+					<div class="panel-body" id="botoesTpl" style="display:block">
 						<div class="list-group" >
 							<div class="row-action-primary">
 								<div class="bs-component btn-group-sm pull-left">

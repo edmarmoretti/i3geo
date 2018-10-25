@@ -108,7 +108,7 @@ body{
 }
 
 /* conforme regra de acessibilidade */
-.navbar, .navbar.navbar-default, .btn.btn-fab.btn-primary {
+.navbar, .navbar.navbar-default {
     background-color: #5F4B8B;
 }
 .alert.alert-danger {

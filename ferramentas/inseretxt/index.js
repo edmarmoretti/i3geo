@@ -1,403 +1,249 @@
-/*
-Title: Insere textos
-
-Inclui um texto no mapa no ponto clicado pelo usu&aacute;rio
-
-Veja:
-
-<i3GEO.mapa.dialogo.cliqueTexto>
-
-Arquivo:
-
-i3geo/ferramentas/inseretxt/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-*/
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
-
-/*
-Classe: i3GEOF.inseretxt
-*/
 i3GEOF.inseretxt = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
-	aguarde: "",
-	/*
-	Variavel: contaPontos
-
-	Conta quantos pontos o usu&aacute;rio clicou na adi&ccedil;&atilde;o de um conector
-	*/
-	contaPontos: 0,
-	/*
-	Variavel: pontoi
-
-	Primeiro ponto do conector clicado no mapa em DD
-	*/
-	pontoi: "0,0",
-	/*
-	Variavel: parDefault
-
-	parametros padr&atilde;o utilizados para formatar o texto
-	*/
-	parDefault: "&position=MS_UR&partials=1&offsetx=0&offsety=0&minfeaturesize=auto&mindistance=auto&force=0&shadowsizex=1&shadowsizey=1&cor=0 0 0&sombray=1&sombrax=1&angulo=0&tamanho=8&fonte=bitmap&fundo=off&sombra=off&outlinecolor=off&shadowcolor=off&wrap=",
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.inseretxt.dicionario);
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		return dicionario;
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "mustache": "",
+	    "idContainer": "i3GEOinseretxtContainer",
+	    "namespace": "inseretxt",
+	    "_parameters.contaPontos": 0,
+	    "pontoi": "0,0",
+	    "contaPontos": 0
 	},
-	/*
-	Function: inicia
+	start : function(){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
+	},
+	destroy: function(){
+	    i3GEO.eventos.cliquePerm.ativa();
+	    i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.inseretxt.startAdd('xx yy')"]);
+	},
+	html:function() {
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    sim: $trad("x14"),
+		    nao: $trad("x15"),
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    });
 
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		if(i3GEOF.inseretxt.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/inseretxt/template_mst.html", function(template) {
-				i3GEOF.inseretxt.MUSTACHE = template;
-				i3GEOF.inseretxt.inicia(iddiv);
-			});
-			return;
-		}
-		try{
-			$i(iddiv).innerHTML = i3GEOF.inseretxt.html();
-			i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia1","i3GEOinseretxtguia");
-			//eventos das guias
-			$i("i3GEOinseretxtguia1").onclick = function(){
-				i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia1","i3GEOinseretxtguia");
-			};
-			$i("i3GEOinseretxtguia2").onclick = function(){
-				i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia2","i3GEOinseretxtguia");
-				i3GEO.util.comboTemas(
-					"i3GEOinseretxtComboTemas",
+	    i3GEO.eventos.cliquePerm.desativa();
+	    i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.inseretxt.startAdd('xx yy')"]);
+	    i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia1","i3GEOinseretxtguia");
+	    //eventos das guias
+	    $i("i3GEOinseretxtguia1").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia1","i3GEOinseretxtguia");
+	    };
+	    $i("i3GEOinseretxtguia2").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia2","i3GEOinseretxtguia");
+	    }
+	    i3GEO.util.comboTemas(
+		    "i3GEOinseretxtComboTemas",
+		    function(retorno){
+			$i("i3GEOinseretxtDivComboTemas").innerHTML = retorno.dados;
+			$i("i3GEOinseretxtDivComboTemas").style.display = "block";
+			if ($i("i3GEOinseretxtComboTemas")){
+			    $i("i3GEOinseretxtComboTemas").onchange = function(){
+				//combodeitens
+				i3GEO.util.comboItens(
+					"i3GEOinseretxtComboItens",
+					$i("i3GEOinseretxtComboTemas").value,
 					function(retorno){
-				 		$i("i3GEOinseretxtDivComboTemas").innerHTML = retorno.dados;
-				 		$i("i3GEOinseretxtDivComboTemas").style.display = "block";
-				 		if ($i("i3GEOinseretxtComboTemas")){
-				 			$i("i3GEOinseretxtComboTemas").onchange = function(){
-								i3GEO.mapa.ativaTema($i("i3GEOinseretxtComboTemas").value);
-				 				//combodeitens
-								i3GEO.util.comboItens(
-									"i3GEOinseretxtComboItens",
-									i3GEO.temaAtivo,
-									function(retorno){
-							 			$i("i3GEOinseretxtDivComboItens").innerHTML = retorno.dados;
-									},
-									"i3GEOinseretxtComboItens",
-									"",
-									"",
-									"",
-									"form-control"
-								);
-				 			};
-						}
-						if(i3GEO.temaAtivo !== ""){
-							$i("i3GEOinseretxtComboTemas").value = i3GEO.temaAtivo;
-							$i("i3GEOinseretxtComboTemas").onchange.call();
-						}
+					    $i("i3GEOinseretxtDivComboItens").innerHTML = retorno.dados;
 					},
-					"i3GEOinseretxtDivComboTemas",
+					"i3GEOinseretxtComboItens",
 					"",
-					false,
-					"ligados",
 					"",
-					false,
-					true,
+					"",
 					"form-control"
 				);
-			};
-			$i("i3GEOinseretxtguia3").onclick = function(){
-				//i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia3","i3GEOinseretxtguia");
-				i3GEO.util.scriptTag(
-					i3GEO.configura.locaplic+"/ferramentas/opcoes_label/dependencias.php",
-					"i3GEOF.proplabel.iniciaJanelaFlutuante(true)",
-					"i3GEOFproplabel",
-					false
-				);
-			};
-			i3GEOF.inseretxt.ativaFoco();
-		}
-		catch(erro){
-			i3GEO.janela.tempoMsg(erro);
-		}
-	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	*/
-	html:function() {
-		var ins = Mustache.render(i3GEOF.inseretxt.MUSTACHE, i3GEOF.inseretxt.mustacheHash());
-		return ins;
-	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var minimiza,cabecalho,janela,divid,temp,titulo;
-		if ($i("i3GEOF.inseretxt")) {
-			return;
-		}
-		//cria a janela flutuante
-		cabecalho = function(){
-			i3GEOF.inseretxt.ativaFoco();
-		};
-		minimiza = function(){
-			i3GEO.janela.minimiza("i3GEOF.inseretxt",200);
-		};
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("d25t") + "</span></div>";
-		janela = i3GEO.janela.cria(
-			"360px",
-			"250px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.inseretxt",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			true,
-			"",
-			"",
-			"",
-			"",
-			"83"
-		);
-		divid = janela[2].id;
-		i3GEOF.inseretxt.aguarde = $i("i3GEOF.inseretxt_imagemCabecalho").style;
-		$i("i3GEOF.inseretxt_corpo").style.backgroundColor = "white";
-		i3GEOF.inseretxt.inicia(divid);
-		i3GEO.eventos.adicionaEventos("MOUSECLIQUE",["i3GEOF.inseretxt.cria()"]);
-		i3GEO.eventos.cliquePerm.desativa();
-		temp = function(){
-			i3GEO.eventos.cliquePerm.ativa();
-			i3GEO.eventos.removeEventos("MOUSECLIQUE",["i3GEOF.inseretxt.cria()"]);
-		};
-		YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-	},
-	/*
-	Function: ativaFoco
-
-	Refaz a interface da ferramenta quando a janela flutuante tem seu foco ativado
-	*/
-	ativaFoco: function(){
-		i3GEO.eventos.cliquePerm.desativa();
-	},
-	/*
-	Function: corj
-
-	Abre a janela para o usu&aacute;rio selecionar uma cor interativamente
-	*/
-	corj: function(obj)
-	{i3GEO.util.abreCor("",obj);},
-	/*
-	Function: pegaPar
-
-	Pega os parametros para montar a chamada ajax que cria ou testa a topon&iacute;mia
-	*/
-	pegaPar: function(){
-		try{
-			var par = i3GEOF.proplabel.pegaPar();
-			i3GEOF.inseretxt.parDefault = par;
-		}
-		catch(e){
-			par = i3GEOF.inseretxt.parDefault;
-		}
-		return par;
-	},
-	/*
-	Function: cria
-
-	Cria um tema e insere o texto
-
-	Veja:
-
-	<i3GEO.php.identificaunico>
-	*/
-	cria: function(){
-		try{
-			if(i3GEOF.inseretxt.aguarde.visibility === "visible")
-			{return;}
-			if($i("i3GEOinseretxtguia3obj").style.display === "block"){
-				i3GEO.janela.tempoMsg($trad('ativaGuia',i3GEOF.inseretxt.dicionario));
-				return;
+			    };
 			}
-			i3GEOF.inseretxt.aguarde.visibility = "visible";
-			var temp,tema,item;
-			//
-			//de onde vem o texto
-			//
-			if($i("i3GEOinseretxtguia1obj").style.display === "block"){
-				i3GEOF.inseretxt.iniciaInsere();
-			}
-			else{
-				temp = function(retorno){
-					if(retorno.data[0] == " "){
-						i3GEO.janela.tempoMsg($trad('msgNadaEncontrado',i3GEOF.inseretxt.dicionario));
-						i3GEOF.inseretxt.aguarde.visibility = "hidden";
-						return;
-					}
-					$i("i3GEOinseretxttexto").value = retorno.data;
-					i3GEOF.inseretxt.iniciaInsere();
-				};
-				tema = $i("i3GEOinseretxtComboTemas").value;
-				item = $i("i3GEOinseretxtComboItens").value;
-				if(item == ""){
-					i3GEOF.inseretxt.contaPontos = 0;
-					return;
-				}
-				if(i3GEOF.inseretxt.contaPontos == 0){
-					i3GEO.php.identificaunico(temp,objposicaocursor.ddx+","+objposicaocursor.ddy,tema,item);
-				}
-				else{
-					i3GEOF.inseretxt.iniciaInsere();
-				}
-
-			}
-		}catch(e){i3GEO.janela.tempoMsg("Erro: ");i3GEOF.inseretxt.aguarde.visibility = "hidden";}
+		    },
+		    "i3GEOinseretxtDivComboTemas",
+		    "",
+		    false,
+		    "ligados",
+		    "",
+		    false,
+		    true,
+		    "form-control"
+	    );
+	    $i("i3GEOinseretxtguia3").onclick = function(){
+		i3GEO.guias.mostraGuiaFerramenta("i3GEOinseretxtguia3","i3GEOinseretxtguia");
+	    };
+	    i3GEO.util.comboFontes("fonte","i3GEOinseretxtDivListaFonte","form-control");
+	    i3GEO.util.aplicaAquarela(p.idContainer);
 	},
-	iniciaInsere: function(){
+	get: function({snackbar = true, btn = false, par = {}, refresh = false, fn = false} = {}){
+	    var p = this._parameters,
+	    i3f = this;
+	    i3GEO.janela.abreAguarde();
+	    if(btn){
+		btn = $(btn);
+		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    }
+	    i3GEO.janela._formModal.block();
+	    par.g_sid = i3GEO.configura.sid;
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/" + p.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			if(snackbar){
+			    i3GEO.janela.snackBar({content: $trad('feito')});
+			}
+			if(refresh){
+			    i3GEO.atualiza();			}
+			if(fn){
+			    fn(data);
+			}
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	},
+	getFormData: function(){
+	    var data = {
+		    ...i3GEO.util.getFormData("#i3GEOinseretxtguia3obj form")
+	    };
+	    if(data.fundo === ""){
+		data.fundo = "off";
+	    }
+	    if(data.sombra === ""){
+		data.sombra = "off";
+	    }
+	    if(data.outlinecolor === ""){
+		data.outlinecolor = "off";
+	    }
+	    if(data.cor === ""){
+		data.cor = "off";
+	    }
+	    if(data.minscale === ""){
+		data.minscale = "0";
+	    }
+	    if(data.maxscale === ""){
+		data.maxscale = "0";
+	    }
+	    if($i("i3GEOinseretxtComboItens")){
+		data.item = $i("i3GEOinseretxtComboItens").value;
+	    } else {
+		data.item = "";
+	    }
+	    return data
+	},
+	startAdd: function(xy){
+	    if($i("i3GEOinseretxtguia1obj").style.display === "block"){
 		var texto = $i("i3GEOinseretxttexto").value;
 		if(texto === ""){
-			i3GEOF.inseretxt.aguarde.visibility = "hidden";
-			return;
+		    return;
 		}
-		else{
-			if($i("i3GEOinseretxttextoconector").checked){
-				if(i3GEOF.inseretxt.contaPontos == 0){
-					i3GEOF.inseretxt.contaPontos = 1;
-					i3GEOF.inseretxt.pontoi = objposicaocursor.ddx+" "+objposicaocursor.ddy;
-					i3GEOF.inseretxt.aguarde.visibility = "hidden";
-					i3GEO.janela.tempoMsg($trad('clicaFimConcetor',i3GEOF.inseretxt.dicionario),1000);
-					return;
-				}
-				if(i3GEOF.inseretxt.contaPontos == 1){
-					i3GEOF.inseretxt.insere(texto);
-					i3GEOF.inseretxt.insereConector(i3GEOF.inseretxt.pontoi+" "+objposicaocursor.ddx+" "+objposicaocursor.ddy,texto);
-					i3GEOF.inseretxt.contaPontos = 0;
-					return;
-				}
-			}
-			else
-			{i3GEOF.inseretxt.insere(texto);}
-		}
+		i3GEOF.inseretxt.add(xy,texto);
+	    } else {
+		i3GEO.php.identificaunico(
+			function(retorno){
+			    $i("i3GEOinseretxttexto").value = retorno.data;
+			    i3GEOF.inseretxt.add(xy,retorno.data[0]);
+			},
+			xy.replace(" ",","),
+			$i("i3GEOinseretxtComboTemas").value,
+			$i("i3GEOinseretxtComboItens").value
+		);
+	    }
 	},
-	/*
-	Function: insere
-
-	Insere um texto no mapa
-
-	Veja:
-
-	<INSEREFEATURE>
-
-	Parametro:
-
-	texto {String}
-	*/
-	insere: function(texto){
-		var monta,par,p,nometema,temp,cp;
-		monta = function(){
-		 	i3GEOF.inseretxt.aguarde.visibility = "hidden";
-		 	i3GEO.atualiza();
-		};
-		temp = Math.random() + "b";
-		temp = temp.split(".");
-		nometema = "pin"+temp[1];
-		par = i3GEOF.inseretxt.pegaPar();
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
-				"&funcao=inserefeature&"+par+"&pin="+nometema+"&tipo=ANNOTATION&texto="+texto+"&xy="+objposicaocursor.ddx+" "+objposicaocursor.ddy;
-		if(par === false){
-			i3GEOF.inseretxt.aguarde.visibility = "hidden";
-			return;
+	add: function(xy,texto){
+	    if($i("i3GEOinseretxttextoconector").checked){
+		if(i3GEOF.inseretxt._parameters.contaPontos == 0){
+		    i3GEOF.inseretxt._parameters.contaPontos = 1;
+		    i3GEOF.inseretxt._parameters.pontoi = xy;
+		    i3GEO.janela.tempoMsg($trad('clicaFimConcetor',i3GEOF.inseretxt.dicionario));
 		}
-		cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"inserefeature",monta);
+		else {
+		    var texto = $i("i3GEOinseretxttexto").value;
+		    i3GEOF.inseretxt.addTextConector(i3GEOF.inseretxt._parameters.pontoi,xy,texto);
+		    i3GEOF.inseretxt._parameters.contaPontos = 0;
+		}
+	    }
+	    else{
+		i3GEOF.inseretxt.addText(xy,texto);
+	    }
 	},
-	/*
-	Function: insereConector
-
-	Insere um conector de textos
-
-	Veja:
-
-	<INSEREFEATURE>
-
-	Parametro:
-
-	xy {string} - lista de pontos
-	*/
-	insereConector: function(xy,texto){
-		var monta,par,p,nometema,temp;
-		monta = function(){
-		 	i3GEOF.inseretxt.aguarde.visibility = "hidden";
-		 	i3GEO.atualiza();
-		};
-		temp = Math.random() + "b";
-		temp = temp.split(".");
-		nometema = "pin"+temp[1];
-		par = i3GEOF.inseretxt.pegaPar();
-		if($i("i3GEOproplabeltamanho_c")){
-			par += "&tamanho="+$i("i3GEOproplabeltamanho_c").value;
-			par += "&cor="+$i("i3GEOproplabelfrente_c").value;
-		}
-		else{
-			par += "&tamanho=1";
-			par += "&cor=0 0 0";
-		}
-		p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?g_sid="+i3GEO.configura.sid+
-				"&funcao=inserefeature&"+par+"&pin="+nometema+"&tipo=LINE&nomeTema="+texto+" (conector)&xy="+xy;
-		if(par === false){
-			i3GEOF.inseretxt.aguarde.visibility = "hidden";
-			return;
-		}
-		cp = new cpaint();
-		cp.set_response_type("JSON");
-		cp.call(p,"inserefeature",monta);
+	addTextConector: function(xy1,xy2,texto){
+	    var par = i3GEOF.inseretxt.getFormData();
+	    par.funcao = "insereconector";
+	    par.pin = texto + " - " + i3GEO.util.generateId();
+	    par.texto = texto;
+	    par.xy1 = xy1;
+	    par.xy2 = xy2;
+	    i3GEOF.inseretxt.get({
+		snackbar: false,
+		fn: function(retorno){
+		    i3GEO.atualiza();
+		},
+		btn: false,
+		par,
+		refresh: false
+	    });
+	},
+	addText: function(xy,texto){
+	    var par = i3GEOF.inseretxt.getFormData();
+	    par.funcao = "inserefeature";
+	    par.pin = texto + " - " + i3GEO.util.generateId();
+	    par.texto = texto;
+	    par.xy = xy;
+	    i3GEOF.inseretxt.get({
+		snackbar: false,
+		fn: function(retorno){
+		    i3GEO.atualiza();
+		},
+		btn: false,
+		par,
+		refresh: false
+	    });
 	}
 };
