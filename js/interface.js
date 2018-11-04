@@ -493,7 +493,6 @@ i3GEO.Interface =
 		hash.texto = texto;
 
 		var createinfotooltip = function(){
-
 		    if (typeof (console) !== 'undefined')
 			console.info("createinfotooltip");
 
@@ -506,6 +505,9 @@ i3GEO.Interface =
 		    html,
 		    p = i3GEO.Interface.openlayers.BALAOPROP,
 		    removeBaloes = function(removeWkt) {
+			if (typeof (console) !== 'undefined')
+				console.info("Removendo baloes com removeWkt = " + removeWkt);
+
 			var nd,t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
 			for (i = 0; i < n; i++) {
 			    t = i3GEO.Interface.openlayers.BALAOPROP.baloes[i];
@@ -514,7 +516,7 @@ i3GEO.Interface =
 			    }
 			}
 			i3GEO.Interface.openlayers.BALAOPROP.baloes = [];
-			if(removeWkt !== false && i3GEO.desenho.layergrafico){
+			if(removeWkt == true && i3GEO.desenho.layergrafico){
 			    i3GEO.desenho[i3GEO.Interface.ATUAL].removePins();
 			} else if (i3GEO.desenho.layergrafico) {
 			    //muda o namespace para nao remover em um proximo evento de excluir o balao
@@ -529,16 +531,13 @@ i3GEO.Interface =
 			}
 			return false;
 		    };
-
-		    if (p.removeAoAdicionar === true) {
+		    if (p.removeAoAdicionar === true && i3GEO.Interface.openlayers.BALAOPROP.baloes.length > 0) {
 			removeBaloes(true);
 		    }
 		    if (i3GEO.eventos.cliquePerm.ativo === false) {
 			return;
 		    }
-
 		    hash.minWidth = p.minWidth;
-
 		    hash.lock_open = "hidden";
 		    hash.lock = "hidden";
 		    if (p.removeAoAdicionar === true) {
@@ -566,7 +565,7 @@ i3GEO.Interface =
 
 		    painel.innerHTML = Mustache.render(i3GEO.template.infotooltip, hash);
 
-		    $(painel).find("[data-info='close']").on("click",removeBaloes);
+		    $(painel).find("[data-info='close']").on("click",function(){removeBaloes(true);});
 		    $(painel).find("[data-info='wkt']").on("click",function(){removeBaloes(false);});
 		    $(painel).find("[data-info='info']").on("click",function(){
 			i3GEO.mapa.dialogo.cliqueIdentificaDefault(x,y,"");

@@ -418,6 +418,11 @@ if (! isset($i3geoPermiteLogin)) {
 } else {
     $i3geoPermiteLogin_ = $i3geoPermiteLogin;
 }
+if (! isset($i3geoBlFerramentas)) {
+    $i3geoBlFerramentas_ = "";
+} else {
+    $i3geoBlFerramentas_ = $i3geoBlFerramentas;
+}
 /*
  * Inicia a se&ccedil;&atilde;o
  *
@@ -482,6 +487,7 @@ $_SESSION["i3georendermode"] = $i3georendermode_;
 $_SESSION["saikuUrl"] = $saikuUrl_;
 $_SESSION["logExec"] = $logExec_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
+$_SESSION["i3geoBlFerramentas"] = $i3geoBlFerramentas_;
 
 // sao arrays
 $postgis_mapa = $postgis_mapa_;

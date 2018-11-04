@@ -32,29 +32,18 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao("admin/html/mapas") === false
     header("HTTP/1.1 403 Vc nao pode realizar essa operacao");
     exit();
 }
-if(isset($_POST["id_mapa"])){
-    $id_mapa = $_POST["id_mapa"];
-    \admin\php\funcoesAdmin\testaSafeNumerico(array(
-        $id_mapa
-    ));
+if (! empty($funcao)) {
+    if (isset($_POST["id_mapa"])) {
+        $id_mapa = $_POST["id_mapa"];
+        \admin\php\funcoesAdmin\testaSafeNumerico(array(
+            $id_mapa
+        ));
+    }
+    $funcao = strtoupper($funcao);
 }
-$funcao = strtoupper($funcao);
 switch ($funcao) {
     case "ADICIONAR":
-        $novo = \admin\catalogo\mapas\adicionar(
-            $_POST["publicado_mapa"],
-            $_POST["ordem_mapa"],
-            $_POST["perfil_mapa"],
-            $_POST["ligados_mapa"],
-            $_POST["temas_mapa"],
-            $_POST["desc_mapa"],
-            $_POST["ext_mapa"],
-            $_POST["imagem_mapa"],
-            $_POST["linkdireto_mapa"],
-            $_POST["nome_mapa"],
-            $_POST["outros_mapa"],
-            $dbhw
-        );
+        $novo = \admin\catalogo\mapas\adicionar($_POST["publicado_mapa"], $_POST["ordem_mapa"], $_POST["perfil_mapa"], $_POST["ligados_mapa"], $_POST["temas_mapa"], $_POST["desc_mapa"], $_POST["ext_mapa"], $_POST["imagem_mapa"], $_POST["linkdireto_mapa"], $_POST["nome_mapa"], $_POST["outros_mapa"], $dbhw);
         $dbhw = null;
         $dbh = null;
         if ($novo === false) {

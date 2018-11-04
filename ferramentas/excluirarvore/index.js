@@ -23,12 +23,15 @@ i3GEOF.excluirarvore = {
 	    }
 	},
 	html:function(){
-	    var p = i3GEOF.excluirarvore._parameters;
-	    var hash = i3GEO.idioma.objetoIdioma(i3GEOF.excluirarvore.dicionario);
-	    hash["locaplic"] = i3GEO.configura.locaplic;
-	    hash["namespace"] = p.namespace;
-	    hash["idContainer"] = p.idContainer;
-	    hash["idlista"] = p.idlista;
+	    var p = i3GEOF.excluirarvore._parameters,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    idlista: p.idlista,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
 	    i3GEOF.excluirarvore.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
 	    i3GEOF.excluirarvore.lista();
 	},

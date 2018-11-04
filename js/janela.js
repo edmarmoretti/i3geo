@@ -960,6 +960,29 @@ i3GEO.janela =
 		funcaoOk.call();
 	    });
 	},
+	alerta : function({html = "", pergunta = pergunta, funcaoOk = funcaoOk, parametros = parametros} ) {
+	    var botao = Mustache.render(
+		    i3GEO.template.botoes.padrao,
+		    {
+			style:'margin-right:10px;',
+			text: $trad("confirma"),
+			id: "i3GEOJanelapromptOk"
+		    }
+	    );
+	    var text = ""
+		+ "<div class='form-group label-fixed condensed' >"
+		+ "    <label class='control-label' for=''>"
+		+      pergunta
+		+ "    </label>"
+		+      html
+		+ "</div>"
+		+ botao;
+	    i3GEO.janela.closeMsg(text);
+	    $("#i3GEOJanelapromptOk").on("click",parametros,function(){
+		i3GEO.janela.closeMsg();
+		funcaoOk(parametros);
+	    });
+	},
 	mensagemSimples : function(texto) {
 	    this.closeMsg(texto);
 	},

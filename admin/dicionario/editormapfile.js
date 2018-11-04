@@ -383,7 +383,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : "Tabla"
 	} ],
     'colunaBd' : [ {
-		pt : "Coluna que identifica de forma &uacute;nica cada registro da tabela",
+		pt : "Coluna que identifica de forma &uacute;nica cada registro da tabela. Deve ser do tipo serial para permitir a inclus&atilde;o de novos registros de forma correta.",
 		en : "Column that uniquely identifies each table record",
 		es : "Columna que identifica de forma &uacute;nica cada registro de la tabla"
 	} ],
@@ -393,7 +393,7 @@ i3GEOadmin.mapfile.dicionario = {
 		es : "Columna con identificadores &uacute;nicos"
 	} ],
     'bdGeom' : [ {
-		pt : "Coluna que contem as geometrias da tabela e que poder&aacute; ser editada.",
+		pt : "Coluna que contem as geometrias da tabela e que poder&aacute; ser editada. Essa coluna deve ter o SRID conhecido para permitir a edi&ccedil;&atilde;o. Para isso &eacute; necess&aacute;rio que exista uma CONSTRAINT, como nesse exemplo: ALTER TABLE esquema.tabela ADD CONSTRAINT enforce_srid_geom CHECK (st_srid(coluna_geometria) = 4326);",
 		en : "Column that can be edited and contains geometries of the table.",
 		es : "Columna que contiene las geometr&iacute;as de la tabla y que puede ser editada."
 	} ],

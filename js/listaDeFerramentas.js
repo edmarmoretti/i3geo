@@ -311,12 +311,12 @@ i3GEO.listaDeFerramentas = {
 						{
 						    id : "omenudataCorFundo",
 						    text : $trad("p9"),
-						    url : "javascript:i3GEO.mapa.dialogo.corFundo()"
+						    url : "javascript:i3GEO.mapa.dialogo.opcoesfundo()"
 						},
 						{
 						    id : "gradeCoordenadas",
 						    text : $trad("p10"),
-						    url : "javascript:i3GEO.mapa.dialogo.gradeCoord()"
+						    url : "javascript:i3GEO.mapa.dialogo.gradecoord()"
 						},
 						{
 						    id : "mascara",

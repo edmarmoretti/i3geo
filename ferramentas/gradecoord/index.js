@@ -1,146 +1,83 @@
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
-/*
-Classe: i3GEOF.gradeCoord
-*/
-i3GEOF.gradeCoord = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	*/
-	aguarde: "",
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-		var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.gradeCoord.dicionario);
-		dicionario["locaplic"] = i3GEO.configura.locaplic;
-		dicionario["nao"] = $trad("x15");
-		dicionario["sim"] = $trad("x14");
-		dicionario["asp"] = '"';
-		return dicionario;
+i3GEOF.gradecoord = {
+	renderFunction: i3GEO.janela.formModal,
+	_parameters : {
+	    "mustache": "",
+	    "idContainer": "i3GEOgradecoordContainer",
+	    "namespace": "gradecoord"
 	},
-	/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	*/
-	inicia: function(iddiv){
-		if(i3GEOF.gradeCoord.MUSTACHE == ""){
-			$.get(i3GEO.configura.locaplic + "/ferramentas/gradecoord/template_mst.html", function(template) {
-				i3GEOF.gradeCoord.MUSTACHE = template;
-				i3GEOF.gradeCoord.inicia(iddiv);
-			});
-			return;
-		}
-		if(i3GEO.parametros.versaoint < 60400){
-            i3GEO.janela.tempoMsg($trad("versaoAntiga"));
-        }
-        $i(iddiv).innerHTML = i3GEOF.gradeCoord.html();
-		i3GEO.util.comboFontes("i3GEOgradeCoordfonte","i3GEOgradeCoordfontef","form-control");
-		i3GEO.util.aplicaAquarela("i3GEOF.gradeCoord_corpo");
+	start: function(iddiv){
+	    var i3f = this,
+	    p = i3f._parameters;
+	    if(p.mustache === ""){
+		$.get(i3GEO.configura.locaplic + "/ferramentas/" + p.namespace +"/template_mst.html", function(template) {
+		    p.mustache = template;
+		    i3f.html();
+		});
+		return;
+	    } else {
+		i3f.html();
+	    }
 	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	*/
-	html:function() {
-		var ins = Mustache.render(i3GEOF.gradeCoord.MUSTACHE, i3GEOF.gradeCoord.mustacheHash());
-		return ins;
+	html:function(){
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    nao: $trad("x15"),
+		    sim: $trad("x14"),
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    this.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash)
+		    }
+	    );
+	    i3GEO.util.aplicaAquarela(p.idContainer);
+	    i3GEO.util.comboFontes("font","i3GEOgradecoordfontef","form-control");
 	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	*/
-	iniciaJanelaFlutuante: function(){
-		var janela,divid,titulo;
-		if($i("i3GEOF.gradeCoord")){
-			return;
-		}
-		//cria a janela flutuante
-		titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("ge6") + "</span></div>";
-		janela = i3GEO.janela.cria(
-			"350px",
-			"440px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.gradeCoord",
-			true,
-			"hd",
-			"",
-			"",
-			"",
-			true,
-			"",
-			"",
-			"",
-			"",
-			"7"
-		);
-		divid = janela[2].id;
-		$i("i3GEOF.gradeCoord_corpo").style.backgroundColor = "white";
-		i3GEOF.gradeCoord.aguarde = $i("i3GEOF.gradeCoord_imagemCabecalho").style;
-		i3GEOF.gradeCoord.inicia(divid);
-	},
-	/*
-	Function: executa
-
-	Insere a grade no mapa
-
-	Veja:
-
-	<GRADECOORD>
-	*/
-	executa: function(){
-		if (($i("i3GEOgradeCoordintervalo").value == 0) || ($i("i3GEOgradeCoordintervalo").value == "")){
-			i3GEO.janela.tempoMsg($trad('distLinhas',i3GEOF.gradeCoord.dicionario));
-		}
-		else
-		{
-			if(i3GEOF.gradeCoord.aguarde.visibility === "visible"){
-				return;
+	get: function(btn){
+	    var par = i3GEOF.gradecoord.getFormData();
+	    par.g_sid = i3GEO.configura.sid;
+	    par.funcao = "gradecoord";
+	    i3GEO.janela.abreAguarde();
+	    btn = $(btn);
+	    btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    i3GEO.janela._formModal.block();
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/gradecoord/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			i3GEO.janela.snackBar({content: $trad('feito')});
+			i3GEO.atualiza();
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
 			}
-			i3GEOF.gradeCoord.aguarde.visibility = "visible";
-			var temp = function(){
-				i3GEO.atualiza();
-				i3GEOF.gradeCoord.aguarde.visibility = "hidden";
-			},
-			p,
-			cp;
-			p = i3GEO.configura.locaplic+"/ferramentas/gradecoord/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=gradeCoord";
-			p += "&intervalo="+$i("i3GEOgradeCoordintervalo").value;
-			p += "&corlinha="+$i("i3GEOgradeCoordcorlinha").value;
-			p += "&larguralinha="+$i("i3GEOgradeCoordlarguralinha").value;
-			p += "&tipolinha="+$i("i3GEOgradeCoordtipolinha").value;
-			p += "&tamanhotexto="+$i("i3GEOgradeCoordtamanhotexto").value;
-			p += "&cortexto="+$i("i3GEOgradeCoordcortexto").value;
-			p += "&incluitexto="+$i("i3GEOgradeCoordincluitexto").value;
-			p += "&mascara="+$i("i3GEOgradeCoordmascara_i").value;
-			p += "&shadowcolor="+$i("i3GEOgradeCoordshadowcolor").value;
-			p += "&shadowsizex="+$i("i3GEOgradeCoordshadowsizex").value;
-			p += "&shadowsizey="+$i("i3GEOgradeCoordshadowsizey").value;
-			p += "&fonte="+$i("i3GEOgradeCoordfonte").value;
-			cp = new cpaint();
-			cp.set_response_type("JSON");
-			cp.call(p,"gradeCoord",temp);
-		}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	},
+	getFormData: function(){
+	    var data = {
+		    ...i3GEO.util.getFormData("#i3GEOgradecoordContainer form")
+	    };
+	    return data
 	}
 };

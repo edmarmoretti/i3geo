@@ -175,7 +175,7 @@ i3GEOF.inseretxt = {
 	    } else {
 		data.item = "";
 	    }
-	    return data
+	    return data;
 	},
 	startAdd: function(xy){
 	    if($i("i3GEOinseretxtguia1obj").style.display === "block"){

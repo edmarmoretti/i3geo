@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.gradeCoord.dicionario)+
-i3GEOF.gradeCoord.dicionario = {
+i3GEOF.gradecoord.dicionario = {
 	'intervalo' : [ {
 		pt : "Intervalo em d&eacute;cimos de grau",
 		en : "Interval in decimal degree",

@@ -417,7 +417,7 @@ class Mapa
                     if ($wmstile == 1) {
                         $wmsurl = ($oLayer->connection);
                     }
-                    if($wmstile == ""){
+                    if ($wmstile == "") {
                         $wmstile = "0";
                     }
                 }
@@ -472,7 +472,7 @@ class Mapa
                     }
                     $ferramentas["storymap"] = json_decode(str_replace("'", '"', $f));
                 }
-                //wmstime
+                // wmstime
                 if ($oLayer->getmetadata("wmstime") != "") {
                     $f = $oLayer->getmetadata("wmstime");
                     if (! mb_detect_encoding($f, "UTF-8", true)) {
@@ -1115,29 +1115,30 @@ class Mapa
             } else {
                 $label = $classe->label;
             }
-
             $label->set("size", $tamanhotexto);
-            $label->set("type", MS_BITMAP);
             if ($fonte != "bitmap") {
-                $label->set("type", MS_TRUETYPE);
+                // $label->set("type",MS_TRUETYPE);
+                $label->updatefromstring("LABEL TYPE TRUETYPE END");
                 $label->set("font", $fonte);
-                $label->set("size", $tamanhotexto);
+                $label->set("size", $tamanho);
             } else {
-                $label->set("type", MS_BITMAP);
+                // $label->set("type",MS_BITMAP);
+                $label->updatefromstring("LABEL TYPE BITMAP END");
+                // $label->set("font",$fonte);
                 $t = MS_TINY;
-                if ($tamanhotexto > 5) {
+                if ($tamanho > 5) {
                     $t = MS_TINY;
                 }
-                if ($tamanhotexto >= 7) {
+                if ($tamanho >= 7) {
                     $t = MS_SMALL;
                 }
-                if ($tamanhotexto >= 10) {
+                if ($tamanho >= 10) {
                     $t = MS_MEDIUM;
                 }
-                if ($tamanhotexto >= 12) {
+                if ($tamanho >= 12) {
                     $t = MS_LARGE;
                 }
-                if ($tamanhotexto >= 14) {
+                if ($tamanho >= 14) {
                     $t = MS_GIANT;
                 }
                 $label->set("size", $t);
@@ -1199,132 +1200,119 @@ class Mapa
             // verifica se o tema &eacute; um arquivo php
             //
             $extensao = ".map";
-            if ((file_exists($locaplic . "/temas/" . $nome . ".php")) || (file_exists($nome . ".php"))) {
-                // $extensao = ".php";
+            if (file_exists($locaplic . "/temas/" . $nome . ".map")) {
+                $nomemap = $locaplic . "/temas/" . $nome . ".map";
             }
-            if ((file_exists($locaplic . "/temas/" . $nome . ".gvp")) || (file_exists($nome . ".gvp"))) {
-                $extensao = ".gvp";
+            if (file_exists($nome)) {
+                $nomemap = $nome;
             }
-            if ($extensao == ".php") {
-                // include_once($locaplic."/temas/".$nome.".php");
-                if (function_exists($nome)) {
-                    // eval($nome."(\$this->mapa);");
-                }
+            if (file_exists($nome . ".map")) {
+                $nomemap = $nome . ".map";
             }
-            if ($extensao == ".gvp") {
-                return;
-            }
-            if ($extensao == ".map") {
-                if (file_exists($locaplic . "/temas/" . $nome . ".map")) {
-                    $nomemap = $locaplic . "/temas/" . $nome . ".map";
-                }
-                if (file_exists($nome)) {
-                    $nomemap = $nome;
-                }
-                if (file_exists($nome . ".map")) {
-                    $nomemap = $nome . ".map";
-                }
-                if ($nomemap != "") {
-                    $nmap = ms_newMapObj($nomemap);
-                    $novosnomes = $nmap->getAllLayerNames();
-                    // define nomes unicos para os temas
-                    foreach ($novosnomes as $n) {
-                        if (! @$this->mapa->getlayerbyname($n)) {
-                            $random = "nao";
-                        }
-                        $random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;
+            if ($nomemap != "") {
+                $nmap = ms_newMapObj($nomemap);
+                $novosnomes = $nmap->getAllLayerNames();
+                // define nomes unicos para os temas
+                foreach ($novosnomes as $n) {
+                    if (! @$this->mapa->getlayerbyname($n)) {
+                        $random = "nao";
                     }
-                    // altera os temas para incluir o nome unico
-                    // include_once($locaplic."/classesphp/funcoes_gerais.php");
-                    foreach ($novosnomes as $n) {
-                        $nlayer = $nmap->getlayerbyname($n);
-                        // evita problemas no modo tile
-                        if ($this->v > 5) {
-                            $p = $nlayer->getProcessing();
-                            if (! in_array("LABEL_NO_CLIP=True", $p)) {
-                                $nlayer->setprocessing("LABEL_NO_CLIP=True");
-                            }
-                            if (! in_array("POLYLINE_NO_CLIP=True", $p)) {
-                                $nlayer->setprocessing("POLYLINE_NO_CLIP=True");
-                            }
+                    $random == "sim" ? $nomeunico[$n] = nomeRandomico() : $nomeunico[$n] = $n;
+                }
+                // altera os temas para incluir o nome unico
+                // include_once($locaplic."/classesphp/funcoes_gerais.php");
+                foreach ($novosnomes as $n) {
+                    $nlayer = $nmap->getlayerbyname($n);
+                    // evita problemas no modo tile
+                    if ($this->v > 5) {
+                        $p = $nlayer->getProcessing();
+                        if (! in_array("LABEL_NO_CLIP=True", $p)) {
+                            $nlayer->setprocessing("LABEL_NO_CLIP=True");
                         }
-                        // para impedir erros na legenda
-                        if ($nlayer->getmetadata("classe") == "") {
-                            $nlayer->setmetadata("classe", "");
+                        if (! in_array("POLYLINE_NO_CLIP=True", $p)) {
+                            $nlayer->setprocessing("POLYLINE_NO_CLIP=True");
                         }
-                        autoClasses($nlayer, $this->mapa);
-                        $nlayer->set("status", MS_DEFAULT);
-                        $nNome = str_replace(".map", "", basename($nomemap));
-                        $nlayer->setmetadata("arquivotemaoriginal", $nNome);
-                        $nlayer->setmetadata("nomeoriginal", $nlayer->name);
-
-                        $nlayer->set("name", $nomeunico[$n]);
-                        // altera o nome do grupo se existir
-                        if ($nlayer->group != " " && $nlayer->group != "") {
-                            $lr = $nlayer->group;
-                            if ($nomeunico[$lr])
-                                $nlayer->set("group", $nomeunico[$lr]);
+                    }
+                    // para impedir erros na legenda
+                    if ($nlayer->getmetadata("classe") == "") {
+                        $nlayer->setmetadata("classe", "");
+                    }
+                    autoClasses($nlayer, $this->mapa);
+                    $nlayer->set("status", MS_DEFAULT);
+                    $nNome = str_replace(".map", "", basename($nomemap));
+                    $nlayer->setmetadata("arquivotemaoriginal", $nNome);
+                    $nlayer->setmetadata("nomeoriginal", $nlayer->name);
+                    //ativa a obtencao do wkt se for editavel
+                    if(strtolower($nlayer->getmetadata("editavel")) == "sim"){
+                        $nlayer->setmetadata("wkttip","SIM");
+                        $nlayer->setmetadata("cache","nao");
+                    }
+                    $nlayer->set("name", $nomeunico[$n]);
+                    // altera o nome do grupo se existir
+                    if ($nlayer->group != " " && $nlayer->group != "") {
+                        $lr = $nlayer->group;
+                        if ($nomeunico[$lr])
+                            $nlayer->set("group", $nomeunico[$lr]);
+                    }
+                    //
+                    // verifica se &eacute; um WMS e se existem classes definidas
+                    // se existirem as classes, &eacute; criado um SLD para ser aplicado ao layer
+                    // O SLD so funciona se CLASSITEM estiver definido
+                    //
+                    if ($nlayer->classitem != "" && $nlayer->connectiontype == 7 && $nlayer->numclasses > 0 && $nlayer->getmetadata("wms_sld_body") == "") {
+                        $tipotemp = $nlayer->type;
+                        $tiporep = $nlayer->getmetadata("tipooriginal");
+                        $nlayer->set("type", MS_LAYER_POLYGON);
+                        if ($tiporep == "linear") {
+                            $nlayer->set("type", MS_LAYER_LINE);
                         }
-                        //
-                        // verifica se &eacute; um WMS e se existem classes definidas
-                        // se existirem as classes, &eacute; criado um SLD para ser aplicado ao layer
-                        // O SLD so funciona se CLASSITEM estiver definido
-                        //
-                        if ($nlayer->classitem != "" && $nlayer->connectiontype == 7 && $nlayer->numclasses > 0 && $nlayer->getmetadata("wms_sld_body") == "") {
-                            $tipotemp = $nlayer->type;
-                            $tiporep = $nlayer->getmetadata("tipooriginal");
-                            $nlayer->set("type", MS_LAYER_POLYGON);
-                            if ($tiporep == "linear") {
-                                $nlayer->set("type", MS_LAYER_LINE);
-                            }
-                            if ($tiporep == "pontual") {
-                                $nlayer->set("type", MS_LAYER_POINT);
-                            }
-                            $sld = $nlayer->generateSLD();
-                            if ($sld != "")
-                                $nlayer->setmetadata("wms_sld_body", str_replace('"', "'", $sld));
-                            $nlayer->set("type", $tipotemp);
+                        if ($tiporep == "pontual") {
+                            $nlayer->set("type", MS_LAYER_POINT);
                         }
-                        cloneInlineSymbol($nlayer, $nmap, $this->mapa);
-                        ms_newLayerObj($this->mapa, $nlayer);
-                        $l = $this->mapa->getlayerbyname($nlayer->name);
-                        if ($this->mapa->getmetadata("interface") == "googlemaps") {
-                            if (($l->opacity == 100 || $l->opacity == "") && ($l->type == 2 || $l->type == 3)) {
-                                $l->set("opacity", 50);
-                            }
+                        $sld = $nlayer->generateSLD();
+                        if ($sld != "")
+                            $nlayer->setmetadata("wms_sld_body", str_replace('"', "'", $sld));
+                        $nlayer->set("type", $tipotemp);
+                    }
+                    cloneInlineSymbol($nlayer, $nmap, $this->mapa);
+                    ms_newLayerObj($this->mapa, $nlayer);
+                    $l = $this->mapa->getlayerbyname($nlayer->name);
+                    if ($this->mapa->getmetadata("interface") == "googlemaps") {
+                        if (($l->opacity == 100 || $l->opacity == "") && ($l->type == 2 || $l->type == 3)) {
+                            $l->set("opacity", 50);
                         }
-                        // reposiciona o layer se for o caso
-                        if ($l->group == "") {
-                            $ltipo = $l->type;
-                            if (($ltipo == 2) || ($ltipo == 3)) { // poligono = 2
-                                $indicel = $l->index;
-                                $numlayers = $this->mapa->numlayers;
-                                $nummove = 0;
-                                for ($i = $numlayers - 1; $i > 0; $i --) {
-                                    $layerAbaixo = $this->mapa->getlayer($i);
-                                    $tipo = $layerAbaixo->type;
-                                    if ($layerAbaixo->numclasses > 0 && $l->numclasses > 0) {
-                                        $c = $layerAbaixo->getclass(0);
-                                        $c1 = $l->getclass(0);
-                                        if ($c->numstyles > 0 && $c1->numstyles > 0) {
-                                            if ($tipo == 2 && ($c->getstyle(0)->color->red == - 1) && ($c1->getstyle(0)->color->red != - 1)) {
-                                                $tipo = 0; // vai subir
-                                            }
+                    }
+                    // reposiciona o layer se for o caso
+                    if ($l->group == "") {
+                        $ltipo = $l->type;
+                        if (($ltipo == 2) || ($ltipo == 3)) { // poligono = 2
+                            $indicel = $l->index;
+                            $numlayers = $this->mapa->numlayers;
+                            $nummove = 0;
+                            for ($i = $numlayers - 1; $i > 0; $i --) {
+                                $layerAbaixo = $this->mapa->getlayer($i);
+                                $tipo = $layerAbaixo->type;
+                                if ($layerAbaixo->numclasses > 0 && $l->numclasses > 0) {
+                                    $c = $layerAbaixo->getclass(0);
+                                    $c1 = $l->getclass(0);
+                                    if ($c->numstyles > 0 && $c1->numstyles > 0) {
+                                        if ($tipo == 2 && ($c->getstyle(0)->color->red == - 1) && ($c1->getstyle(0)->color->red != - 1)) {
+                                            $tipo = 0; // vai subir
                                         }
                                     }
-                                    if (($tipo != 2) && ($tipo != 3)) {
-                                        $nummove ++;
-                                    }
                                 }
-                                for ($i = 0; $i < ($nummove); ++ $i) {
-                                    $indicel = $l->index;
-                                    $this->mapa->movelayerup($indicel);
+                                if (($tipo != 2) && ($tipo != 3)) {
+                                    $nummove ++;
                                 }
                             }
+                            for ($i = 0; $i < ($nummove); ++ $i) {
+                                $indicel = $l->index;
+                                $this->mapa->movelayerup($indicel);
+                            }
                         }
-                        corrigeLayerGrid($nlayer, $l);
-                        corrigeLayerPath($l, $this->mapa);
                     }
+                    corrigeLayerGrid($nlayer, $l);
+                    corrigeLayerPath($l, $this->mapa);
                 }
             }
         }
@@ -1586,7 +1574,7 @@ class Mapa
         $layer->setmetadata("wms_connectiontimeout", "30");
         $layer->setmetadata("wms_force_separate_request", "1");
         // esse parametro e especifico do i3geo. Se for 1 indica um servico do tipo tile
-        if($tile == ""){
+        if ($tile == "") {
             $tile = "0";
         }
         $layer->setmetadata("wms_tile", $tile);

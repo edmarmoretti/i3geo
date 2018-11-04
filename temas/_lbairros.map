@@ -4,27 +4,30 @@ MAP
   LAYER
     CONNECTION "i3geosaude"
     CONNECTIONTYPE POSTGIS
-    DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros ) as foo using unique co_bairro using srid=4326"
+    DATA "the_geom from (select gid, st_setsrid(the_geom,4326) as the_geom,co_bairro,no_bairro,no_distr,no_municip from i3geo_metaestat.bairros ) as foo using unique gid using srid=4326"
     METADATA
-      "TIP"	"no_bairro,id"
       "cache"	"sim"
+      "TIP"	"no_bairro,gid"
       "CLASSE"	"SIM"
       "permitekmz"	"SIM"
       "ITENSDESC"	"id,Código bairro,Nome,Distrito,Município"
-      "EDITAVEL"	"NAO"
+      "EDITAVEL"	"SIM"
       "extensao"	"-70.041740706664 -33.694583050265 -34.792884974458 2.8730391155742"
-      "wkttip"	"SIM"
       "permitedownload"	"SIM"
       "permitecomentario"	"NAO"
       "escondido"	"NAO"
+      "esquematabelaeditavel"	"i3geo_metaestat"
       "download"	"SIM"
-      "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
       "CONEXAOORIGINAL"	"i3geosaude"
-      "transitioneffect"	"NAO"
-      "permiteogc"	"SIM"
+      "ITENS"	"gid,co_bairro,no_bairro,no_distr,no_municip"
       "permitekml"	"SIM"
+      "permiteogc"	"SIM"
+      "transitioneffect"	"NAO"
       "TEMA"	"_Bairros POSTGIS"
+      "colunageometria"	"the_geom"
+      "colunaidunico"	"gid"
       "identifica"	"sim"
+      "tabelaeditavel"	"bairros"
     END # METADATA
     NAME "_lbairros"
     PROCESSING "LABEL_NO_CLIP=True"
@@ -39,9 +42,9 @@ MAP
       STYLE
         COLOR 255 0 0
         OUTLINECOLOR 255 255 255
-      END
+      END # STYLE
     END # CLASS
-
   END # LAYER
+
 END # MAP
 

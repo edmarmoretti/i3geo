@@ -2598,6 +2598,13 @@ g_traducao =
                 es : "crear lista de geometr&iacute;as"
             }
         ],
+        "ativaidentifica" : [
+            {
+                pt : "Ativa a fun&ccedil;&atilde;o de identifica&ccedil;&atilde;o",
+                en : "",
+                es : ""
+            }
+        ],
         "frente" : [
             {
                 pt : "trazer para frente",
@@ -3193,6 +3200,27 @@ g_traducao =
         "extatua" : [
             {
                 pt : "Extens&atilde;o atualizada",
+                en : "",
+                es : ""
+            }
+        ],
+        "delfeature" : [
+            {
+                pt : "O registro ser&aacute; apagado da camada de forma permanente, n&atilde;o podendo ser restaurado.",
+                en : "",
+                es : ""
+            }
+        ],
+        "editorsalvar" : [
+            {
+                pt : "Para salvar os atributos definitivamente, clique no &iacute;cone Save.",
+                en : "",
+                es : ""
+            }
+        ],
+        "selcomboeditavel" : [
+            {
+                pt : "Escolha a camada onde os dados ser&atilde;o inseridos",
                 en : "",
                 es : ""
             }

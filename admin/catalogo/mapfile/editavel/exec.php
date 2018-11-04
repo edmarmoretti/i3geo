@@ -30,16 +30,15 @@ if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/html/editormapfile" 
 	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
 	exit ();
 }
-
-$codigo = $_POST ["codigo"];
-$codigo = str_replace ( " ", "", \admin\php\funcoesAdmin\removeAcentos ( $codigo ) );
-$codigo = str_replace ( ".", "", $codigo );
-$codigo = strip_tags ( $codigo );
-$codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
-
-$id_tema = ( int ) $_POST ["id_tema"];
-
-$funcao = strtoupper ( $funcao );
+if(!empty ($funcao)){
+    $codigo = $_POST ["codigo"];
+    $codigo = str_replace ( " ", "", \admin\php\funcoesAdmin\removeAcentos ( $codigo ) );
+    $codigo = str_replace ( ".", "", $codigo );
+    $codigo = strip_tags ( $codigo );
+    $codigo = htmlspecialchars ( $codigo, ENT_QUOTES );
+    $id_tema = ( int ) $_POST ["id_tema"];
+    $funcao = strtoupper ( $funcao );
+}
 switch ($funcao) {
 	case "ALTERAR" :
 		$dados = \admin\catalogo\mapfile\editavel\alterar ( $_SESSION["locaplic"], $id_tema, $codigo, $_POST["editavel"], $_POST["esquematabelaeditavel"], $_POST["tabelaeditavel"], $_POST["colunaidunico"], $_POST["colunageometria"] );

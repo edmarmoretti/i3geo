@@ -2,7 +2,7 @@
     <div class="checkbox" style="display: inline;">
         <label class="{{{classeCss}}}" style="width: calc(100% - 100px); margin: 0px 0px 6px 50px;">
             <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
-                {{{checked}}} onclick="i3geoOL.getLayersGrBy('name','{{{name}}}')[0].setVisibility(this.checked);i3geoOL.getLayersGrBy('name','{{{name}}}')[0].changed()">
+                {{{checked}}} onclick="i3GEO.eventos.cliquePerm.ativa();i3geoOL.getLayersGrBy('name','{{{name}}}')[0].setVisibility(this.checked);i3geoOL.getLayersGrBy('name','{{{name}}}')[0].changed()">
             <span class="checkbox-material noprint"><span class="check"></span></span> {{{tema}}}
         </label>
     </div>
@@ -34,9 +34,6 @@
     </button>
     <button title="{{{modf}}}" onclick="i3GEO.editor.edit()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/edit.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
-    </button>
-    <button title="{{{listag}}}" onclick="i3GEO.editor.table('.layersGrForm')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
-        <img src="{{{locaplic}}}/imagens/gisicons/mActionPropertyItem.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
     <button title="{{{d24t}}}" onclick="i3GEO.editor.sel.one()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/select-one.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
@@ -86,11 +83,15 @@
     <button title="{{{cola}}}" onclick="i3GEO.editor.paste()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mActionEditPaste.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-
+    <button title="{{{ativaidentifica}}}" onclick="i3GEO.editor.removeInteracoes();i3GEO.eventos.cliquePerm.ativa();" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/pointer-info.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{listag}}}" onclick="i3GEO.editor.table('.layersGrForm')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/mActionPropertyItem.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
     <button title="{{{p13}}}" onclick="i3GEO.editor.properties('.layersGrForm')" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/settings.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
 </div>
 <div class="layersGrForm container-fluid"></div>
-
 <hr>
