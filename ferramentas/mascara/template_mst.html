@@ -1,12 +1,13 @@
-<div class='container-fluid'>
-	<div style="width: 100%;" class='form-group label-fixed condensed'>
-		<label class="control-label" for="">{{{fonte}}}</label>
-		<div id='i3GEOmascaraTema' style="width: 100%;" class="input-group"></div>
-	</div>
-	<div style="width: 100%;" class='form-group label-fixed condensed'>
-		<label class="control-label" for="">{{{listaTemas}}}</label>
-		<div id='i3GEOFmascaraLista' style="width: 100%;" class="input-group"></div>
-	</div>
-	<button onclick="i3GEOF.mascara.aplicar()" class='btn btn-primary btn-sm btn-raised'>{{{criaMascara}}}</button>
-
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <div class='form-group condensed'>
+        <label class="control-label">{{{fonte}}}</label>
+        <div id='i3GEOmascaraTema'></div>
+    </div>
+    <div class='form-group condensed'>
+        <label class="control-label">{{{listaTemas}}}</label>
+        <div id='i3GEOFmascaraLista' class="input-group"></div>
+    </div>
+    <button onclick="i3GEOF.mascara.aplicar(this)" class='btn btn-primary btn-sm btn-raised'>
+        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>{{{criaMascara}}}
+    </button>
 </div>

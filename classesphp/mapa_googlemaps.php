@@ -55,7 +55,7 @@
  * i3geo/classesphp/mapa_googlemaps.php
  *
  */
-include ("sani_request.php");
+//include ("sani_request.php");
 // para efeitos de compatibilidade
 if (! function_exists('ms_GetVersion')) {
     include_once ("carrega_ext.php");
@@ -142,14 +142,7 @@ if ($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "get
     $_GET["mapext"] = str_replace(",", " ", $_GET["BBOX"]);
 }
 // por seguranca
-include_once ("funcoes_gerais.php");
-
-$logExec = $_SESSION["logExec"];
-if (isset($logExec) && $logExec["mapa_"] == true) {
-    i3GeoLog("prog: mapa_googlemaps url: " . implode("&", array_merge($_GET, $_POST)), $_SESSION["dir_tmp"]);
-}
-
-restauraCon($map_fileX, $postgis_mapa);
+//include_once ("funcoes_gerais.php");
 
 $mapa = ms_newMapObj($map_fileX);
 $ret = $mapa->extent;
@@ -204,6 +197,9 @@ for ($i = 0; $i < $numlayers; ++ $i) {
         //a renderiazacao e sempre com opacidade 1
         $l->updateFromString('LAYER COMPOSITE OPACITY 100 END END');
         if ($l->getmetadata("classesnome") != "" || $l->getmetadata("palletefile") != "") {
+            if (! function_exists("autoClasses")) {
+                include_once ("funcoes_gerais.php");
+            }
             autoClasses($l, $mapa);
         }
         if (! empty($postgis_mapa)) {
@@ -521,6 +517,22 @@ function carregaCacheImagem()
         $nome = $c . "/$y.png";
         $tipo = "image/png";
     }
+
+    cabecalhoImagem($nome,$tipo);
+    if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
+        $leu = @readfile($nome);
+        if($leu == false){
+            header_remove();
+        }
+    } else {
+        if (file_exists($nome)) {
+            if (file_exists($nome)) {
+                header("X-Sendfile: ".$nome);
+                exit();
+            }
+        }
+    }
+    /*
     if (file_exists($nome)) {
         cabecalhoImagem($nome,$tipo);
         if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
@@ -530,6 +542,7 @@ function carregaCacheImagem()
         }
         exit();
     }
+    */
 }
 
 function nomeRand($n = 10)

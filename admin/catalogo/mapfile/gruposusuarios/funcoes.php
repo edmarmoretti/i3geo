@@ -16,11 +16,11 @@ function listar($dbh,$locaplic,$codigo){
 				".$esquemaadmin."i3geousr_grupotema.id_tema
 				from
 				".$esquemaadmin."i3geoadmin_temas
-				join ".$esquemaadmin."i3geousr_grupotema
-				on ".$esquemaadmin."i3geousr_grupotema.id_grupo = ".$esquemaadmin."i3geousr_grupos.id_grupo
-				join ".$esquemaadmin."i3geousr_grupos
-				on ".$esquemaadmin."i3geoadmin_temas.id_tema = ".$esquemaadmin."i3geousr_grupotema.id_tema
-				where codigo_tema = '".$codigo."' order by lower(nome)
+                join ".$esquemaadmin."i3geousr_grupotema
+                on ".$esquemaadmin."i3geoadmin_temas.id_tema = ".$esquemaadmin."i3geousr_grupotema.id_tema
+                join ".$esquemaadmin."i3geousr_grupos
+                on ".$esquemaadmin."i3geousr_grupotema.id_grupo = ".$esquemaadmin."i3geousr_grupos.id_grupo
+                where codigo_tema = '".$codigo."' order by lower(nome)
 			";
 		$dados = \admin\php\funcoesAdmin\pegaDados ( $sql, $dbh, false );
 	} else {

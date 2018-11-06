@@ -177,9 +177,8 @@ if ($funcao != "listaEpsg" && $funcao != "pegaTodosTemas" && $funcao != "downloa
     if (isset($_SESSION['fingerprint'])) {
         $f = explode(",", $_SESSION['fingerprint']);
         if ($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id())) {
-            include_once ("funcoes_gerais.php");
-            cpjson(". Tentativa de acesso nao permitida. Inicie um novo mapa.");
-            return;
+            header("HTTP/1.1 403 Tentativa de acesso nao permitida. Inicie um novo mapa.");
+            exit();
         }
     }
 } else {

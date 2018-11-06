@@ -55,7 +55,7 @@
  *
  */
 
-include ("sani_request.php");
+//include ("sani_request.php");
 // para efeitos de compatibilidade
 if (! function_exists('ms_GetVersion')) {
     include_once ("carrega_ext.php");
@@ -149,9 +149,7 @@ $map_fileX = $_SESSION["map_file"];
 if (! empty($_GET["request"])) {
     $_GET["REQUEST"] = $_GET["request"];
 }
-//
-// resolve o problema da selecao nas versoes mais recentes nova do mapserver
-//
+
 $qyfile = dirname($map_fileX) . "/" . $_GET["layer"] . "_qy.map";
 $qy = file_exists($qyfile);
 if (! isset($_GET["DESLIGACACHE"])) {
@@ -178,16 +176,7 @@ if (isset($_GET["tipolayer"]) && $_GET["tipolayer"] == "fundo") {
 $postgis_mapa = $_SESSION["postgis_mapa"];
 
 // por seguranca
-include_once ("funcoes_gerais.php");
-
-if (isset($_SESSION["logExec"])) {
-    if (@$_SESSION["logExec"]["mapa_"] == true) {
-        i3GeoLog("prog: mapa_openlayers url: " . implode("&", array_merge($_GET, $_POST)), $_SESSION["dir_tmp"]);
-    }
-}
-
-// restauraCon ( $map_fileX, $postgis_mapa );
-
+//include_once ("funcoes_gerais.php");
 $cachedir = $_SESSION["cachedir"];
 if (isset($_GET["BBOX"])) {
     $_GET["mapext"] = str_replace(",", " ", $_GET["BBOX"]);
@@ -472,6 +461,7 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
         // cache ativo. Salva a imagem em cache
         $nomer = salvaCacheImagem($cachedir, $map_fileX, $_GET["tms"]);
         cabecalhoImagem($nomer);
+        header("i3geocache: gerado");
         if ($_SESSION["i3georendermode"] == 2) {
             header("X-Sendfile: $nomer");
         } else {
@@ -497,6 +487,7 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
                 imagesavealpha($img, true);
             }
             cabecalhoImagem($nomer);
+            header("i3geocache: nao");
             imagepng($img);
             imagedestroy($img);
             exit();
@@ -589,17 +580,32 @@ function carregaCacheImagem($cachedir, $map, $tms, $i3georendermode = 0, $format
         $tipo = "image/png";
     }
 
+    cabecalhoImagem($nome,$tipo);
+    if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
+        header("i3geocache: sim");
+        $leu = @readfile($nome);
+        if($leu == false){
+            header_remove();
+        }
+    } else {
+        if (file_exists($nome)) {
+            if (file_exists($nome)) {
+            header("X-Sendfile: ".$nome);
+            exit();
+            }
+        }
+    }
+    /*
     if (file_exists($nome)) {
-
         cabecalhoImagem($nome,$tipo);
         if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
             readfile($nome);
         } else {
             header("X-Sendfile: ".$nome);
         }
-
         exit();
     }
+    */
 }
 
 function nomeRand($n = 10)

@@ -1,18 +1,32 @@
-<div class='container-fluid'>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="">WKT</label>
-		<textarea class="form-control input-lg" id='i3GEOFwkt2layerWkt' rows='3'>{{{wkt}}}</textarea>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="">{{{nometema}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOFwkt2layerTitulo' value='' />
-	</div>
-	<h5>{{{shapefile}}}</h5>
-	<button onclick="i3GEOF.wkt2layer.layer()" class='btn btn-primary btn-sm btn-raised'>Shape File</button>
-	<h5>{{{feature}}}</h5>
-	<button onclick="i3GEOF.wkt2layer.feature()" class='btn btn-primary btn-sm btn-raised'>Feature</button>
-	<h5>{{{texto}}}</h5>
-	<div class='form-group label-fixed condensed' >
-		<input class="form-control input-lg" type='text' id='i3GEOFwkt2layerTexto' value='{{{valortexto}}}' />
-	</div>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+
+    <form class="form-horizontal">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">WKT</label>
+            <div class="col-md-6">
+                <textarea class="form-control input-lg" id='i3GEOFwkt2layerWkt' rows='3'>{{{wkt}}}</textarea>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{nometema}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg" type='text' id='i3GEOFwkt2layerTitulo' value='' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-6 control-label">{{{texto}}}</label>
+            <div class="col-md-6">
+                <input class="form-control input-lg" type='text' id='i3GEOFwkt2layerTexto' value='{{{valortexto}}}' />
+            </div>
+        </div>
+    </form>
+    <br>
+    <button onclick="i3GEOF.wkt2layer.layer(this)" class='btn btn-primary btn-sm btn-raised'>
+        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>Shape File
+    </button>
+    <h5 class='alert alert-info'>{{{shapefile}}}</h5>
+    <button onclick="i3GEOF.wkt2layer.feature(this)" class='btn btn-primary btn-sm btn-raised'>
+        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>Feature
+    </button>
+    <h5 class='alert alert-info'>{{{feature}}}</h5>
 </div>

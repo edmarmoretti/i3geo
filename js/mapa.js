@@ -434,7 +434,7 @@ i3GEO.mapa =
 			"mascara",
 			"mascara",
 			"dependencias.php",
-		"i3GEOF.mascara.iniciaJanelaFlutuante()");
+		"i3GEOF.mascara.start()");
 	    },
 	    /**
 	     * Function: html2canvas
@@ -464,7 +464,7 @@ i3GEO.mapa =
 	     */
 	    wkt2layer : function(wkt, texto) {
 		var temp = function() {
-		    i3GEOF.wkt2layer.iniciaJanelaFlutuante(wkt, texto);
+		    i3GEOF.wkt2layer.start(wkt, texto);
 		};
 		i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.wkt2layer()", "wkt2layer", "wkt2layer", "dependencias.php", temp);
 	    },
