@@ -952,13 +952,13 @@ i3GEO.mapa =
 	     *
 	     * Abre a janela de dialogo da ferramenta inseregrafico
 	     */
-	    cliqueGrafico : function() {
+	    inseregrafico : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.cliqueGrafico()",
+			"i3GEO.mapa.dialogo.inseregrafico()",
 			"inseregrafico",
-			"insereGrafico",
+			"inseregrafico",
 			"dependencias.php",
-		"i3GEOF.insereGrafico.iniciaJanelaFlutuante()");
+		"i3GEOF.inseregrafico.start()");
 	    },
 	    /**
 	     * Function: cliqueIdentificaDefault

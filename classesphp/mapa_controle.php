@@ -209,7 +209,6 @@ if (isset($interfaceTemp) && $interfaceTemp != "") {
 // ativa o php mapscript e as extens&otilde;es necess&aacute;rias
 // se as extens&otilde;es j&aacute; estiverem carregadas no PHP, vc pode comentar essa linha para que o processamento fique mais r&aacute;pido
 //
-
 include_once ("carrega_ext.php");
 if (! function_exists("sobeAnno")) {
     include_once ("funcoes_gerais.php");
@@ -220,8 +219,10 @@ if ($funcao == "criaMapa") {
     if (session_status() == PHP_SESSION_ACTIVE) {
         // error_log("--------------Apagando a session");
         session_destroy();
+        //lembrete: validaAcessoTemas usa cookies
+        $_COOKIE = array();
     }
-    $_COOKIE = array();
+
     //
     // primeiro &eacute; necess&aacute;rio carregar o ms_configura.php para pegar a vari&aacute;vel $locaplic
     //
@@ -1543,22 +1544,6 @@ switch (strtoupper($funcao)) {
         $retorno = $m->ultimoXY();
         break;
 
-    /*
-     * Valor: INSERESHPGRAFICO
-     *
-     * Cria um gr&aacute;fico e insere no mapa em um local clicado no mapa.
-     *
-     * Os valores para o gr&aacute;fico s&atilde;o obtidos do tema indicado na classe. Para cada novo gr&aacute;fico &eacute; criado um tema no mapa.
-     *
-     * <SHP->insereSHPgrafico>
-     */
-    case "INSERESHPGRAFICO":
-        include_once ("classe_shp.php");
-        copiaSeguranca($map_file);
-        $m = new SHP($map_file, $_pg["tema"], $locaplic);
-        $retorno = $m->insereSHPgrafico($_pg["x"], $_pg["y"], $_pg["itens"], $_pg["width"], $_pg["inclinacao"], $_pg["shadow_height"], $_pg["ext"]);
-        $_SESSION["contadorsalva"] ++;
-        break;
     /*
      * Valor: MOSTRAWKT
      *

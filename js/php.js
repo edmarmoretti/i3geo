@@ -94,31 +94,7 @@ i3GEO.php =
 		i3GEO.janela.tempoMsg("i3GEO.php diz: variavel i3GEO.configura.sid n&atilde;o esta definida");
 	    }
 	},
-	/**
-	 * Function: insereSHPgrafico
-	 *
-	 * Insere um gr&aacute;fico no mapa
-	 */
-	insereSHPgrafico : function(funcao, tema, x, y, itens, shadow_height, width, inclinacao) {
-	    i3GEO.php.verifica();
-	    var p,par,ext,retorno;
-	    ext = i3GEO.parametros.mapexten;
-	    ext = i3GEO.util.extOSM2Geo(ext);
-	    p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php";
-	    par = "funcao=insereSHPgrafico&tipo=pizza&tema=" + tema + "&x=" + x + "&y=" + y + "&itens=" + itens + "&shadow_height="
-	    + shadow_height + "&width=" + width + "&inclinacao="
-	    + inclinacao
-	    + "&g_sid=" + i3GEO.configura.sid
-	    + "&ext=" + ext;
 
-	    retorno =
-		function(retorno) {
-		i3GEO.janela.fechaAguarde("insereSHPgrafico");
-		funcao.call(funcao, retorno);
-	    };
-	    i3GEO.janela.abreAguarde("insereSHPgrafico", $trad("o1"));
-	    cpJSON.call(p, "insereSHPgrafico", retorno, par);
-	},
 	/**
 	 * Function: insereSHP
 	 *

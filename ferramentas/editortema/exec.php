@@ -20,7 +20,7 @@ session_start([
     'read_and_close' => true
 ]);
 include_once (dirname(__FILE__) . "../../blacklist.php");
-verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
+verificaBlFerramentas(basename(dirname(__FILE__)), "", false);
 
 $retorno = "";
 // faz a busca da fun&ccedil;&atilde;o que deve ser executada

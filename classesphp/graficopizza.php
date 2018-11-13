@@ -68,9 +68,15 @@ function graficopizza($data,$width,$inclinacao,$shadow_height,$cores,$map_file,$
 	$show_text = true; // true = show text, false = don't show text.
 	$show_parts = false; // true = show parts, false = don't show parts.
 	$label_form = 'square'; // 'square' or 'round' label.
-	if(!isset($width)){$width = 50;}
-	if(!isset($inclinacao)){$inclinacao = 1.5;}
-	if(!isset($shadow_height)){$shadow_height = 10;};
+	if(!isset($width)){
+	    $width = 50;
+	}
+	if(!isset($inclinacao)){
+	    $inclinacao = 1.5;
+	}
+	if(!isset($shadow_height)){
+	    $shadow_height = 10;
+	};
 	$background_color = 'FFFFFF'; // background-color of the chart...
 	$text_color = '000000'; // text-color.
 	$colors = array('003366', 'CCD6E0', '7F99B2','F7EFC6', 'C6BE8C', 'CC6600','990000','520000','BFBFC1','808080'); // colors of the slices.

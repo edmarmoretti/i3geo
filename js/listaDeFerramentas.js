@@ -331,7 +331,7 @@ i3GEO.listaDeFerramentas = {
 						{
 						    id : "omenudataFerramentasCliqueGrafico",
 						    text : $trad("d23t"),
-						    url : "javascript:i3GEO.mapa.dialogo.cliqueGrafico()"
+						    url : "javascript:i3GEO.mapa.dialogo.inseregrafico()"
 						},
 						{
 						    id : "omenudataFerramentas5a",

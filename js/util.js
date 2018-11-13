@@ -1409,7 +1409,8 @@ i3GEO.util =
 			    comboTemas += "<select class='" + classe + "' id='" + id + "' name='" + nome + "'>";
 			}
 			if (incluiVazio === true) {
-			    comboTemas += "<option value=''>"+$trad("x92")+"</option>";
+			    //comboTemas += "<option value=''>"+$trad("x92")+"</option>";
+			    comboTemas += "<option value=''>---</option>";
 			}
 			for (i = 0; i < n; i++) {
 			    if (retorno[i].nome) {

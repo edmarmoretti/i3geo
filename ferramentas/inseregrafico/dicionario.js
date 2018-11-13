@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.insereGrafico.dicionario)+
-i3GEOF.insereGrafico.dicionario = {
+i3GEOF.inseregrafico.dicionario = {
 	'fonteDados' : [ {
 		pt : "Fonte dos dados",
 		en : "Data source",

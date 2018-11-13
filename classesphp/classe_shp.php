@@ -340,21 +340,34 @@ Include:
 			$oSymbol->setimagepath($img[0]);
 			$oSymbol->set("name",$nomes);
 			$pinlayer = criaLayer($this->mapa,MS_LAYER_POINT,MS_DEFAULT,"Gr&aacute;fico (".$temaedit.")","SIM");
+
 			$c = $pinlayer->getclass(0);
 			$e = $c->getstyle(0);
 			$pinlayer->set("name",$temaedit);
 			$c->set("name","");
-			if(!isset($tamanho)){$tamanho = 50;}
+			if(!isset($tamanho)){
+			    $tamanho = 50;
+			}
 			$e->set("size",$tamanho);
 			$e->set("symbolname",$nomes);
-			$pinlayer->set("opacity",MS_GD_ALPHA);
+
+			foreach ($itens as $i){
+			    $ii = explode(",",$i);
+			    $classe = ms_newClassObj($pinlayer);
+			    $novoestilo = ms_newStyleObj($classe);
+			    $novoestilo->set("symbolname", "ponto");
+			    $novoestilo->set("size", "20");
+			    $cor = $novoestilo->color;
+			    $cor->setRGB($ii[1], $ii[2], $ii[3]);
+			    $classe->set("name",$ii[0]);
+			}
 			$shp = ms_newshapeobj(MS_SHAPE_POINT);
 			$lin = ms_newlineobj();
 			$lin->addxy($x,$y);
 			$shp->add($lin);
 			$pinlayer->addfeature($shp);
 			$this->salva();
-			return("ok");
+			return(true);
 		}
 	}
 /*
