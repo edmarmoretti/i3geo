@@ -1,16 +1,19 @@
-<div class='container-fluid'>
-	<div id='i3GEOFmmscaleComboCabeca' class='form-group condensed' style='width: 100%'>
-		
-	</div>
-	<h5>{{{minscale}}}</h5>
-	<div class='form-group label-fixed condensed'>
-		<input class="form-control input-lg" type='text' id='i3GEOmmscaleMinscale' value='' />
-	</div>
-	<h5>{{{maxscale}}}</h5>
-	<div class='form-group label-fixed condensed'>
-		<input class="form-control input-lg" type='text' id='i3GEOmmscaleMaxscale' value='' />
-	</div>
-	<button onclick="i3GEOF.mmscale.aplica()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
-
-	<h5 class="alert alert-info">{{{cancelar}}}</h5>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <form class="form-horizontal">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-8 control-label">{{{minscale}}}</label>
+            <div class="col-md-4 ">
+                <input class="form-control input-lg " type='text' id='i3GEOmmscaleMinscale' value='' />
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-8 control-label">{{{maxscale}}}</label>
+            <div class="col-md-4 ">
+                <input class="form-control input-lg " type='text' id='i3GEOmmscaleMaxscale' value='' />
+            </div>
+        </div>
+    </form>
+    <button onclick="i3GEOF.mmscale.aplica(this)" class='btn btn-primary btn-sm btn-raised'><span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplica}}}</button>
+    <h5 class="alert alert-info">{{{cancelar}}}</h5>
+    <h5 class="alert alert-info">{{{ajuda}}}</h5>
 </div>

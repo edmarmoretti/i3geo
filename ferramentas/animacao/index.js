@@ -9,8 +9,8 @@ i3GEOF.animacao = {
 	    "namespace": "animacao",
 	    "idlista": "i3GEOanimacaoguiasContainerLista",
 	    "codigos": [],
+	    "atual": 1000
 	},
-	tempo: 1000,
 	start: function(){
 	    var i3f = this,
 	    p = i3f._parameters,
@@ -73,10 +73,10 @@ i3GEOF.animacao = {
 	    i3GEOF.animacao.anima(codigos.length);
 	},
 	maisrapido: function(){
-	    i3GEOF.animacao.tempo -= 100;
+	    i3GEOF.animacao._parameters.tempo -= 100;
 	},
 	maislento: function(){
-	    i3GEOF.animacao.tempo += 100;
+	    i3GEOF.animacao._parameters.tempo += 100;
 	},
 	anima: function(c){
 	    if(this._parameters.codigos.length === 0)
@@ -88,7 +88,7 @@ i3GEOF.animacao = {
 	    }
 	    else{
 		i3GEOF.animacao.ligaDesliga(this._parameters.codigos[c],'troca');
-		setTimeout("i3GEOF.animacao.anima("+(c - 1)+");",i3GEOF.animacao.tempo);
+		setTimeout("i3GEOF.animacao.anima("+(c - 1)+");",i3GEOF.animacao._parameters.tempo);
 	    }
 	},
 	desligaTodos: function(codigos){

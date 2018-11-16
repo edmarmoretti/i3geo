@@ -1949,9 +1949,9 @@ g_traducao =
         ],
         "x59" : [
             {
-                pt : "Localiza",
-                en : "Locate",
-                es : "Localiza"
+                pt : "Localiza regi&atilde;o",
+                en : "",
+                es : ""
             }
         ],
         "x60" : [

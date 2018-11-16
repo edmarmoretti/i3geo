@@ -33,7 +33,12 @@ i3GEOF.imprimir = {
 		    idContainer: p.idContainer,
 		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
 	    };
-	    i3f.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash)
+		    }
+	    );
 	},
 	pngExport: function(){
 	    i3GEO.janela.abreAguarde();

@@ -241,12 +241,14 @@ include ($configInc["inc"] . "/css.php");
 
                 //$(".guiaOverflow").css("height",i3GEO.parametros.h - 140);
 
+                /*
                 $(".guiaOverflow").mCustomScrollbar({
                     scrollbarPosition : "inside",
                     theme : "minimal-dark",
                     contentTouchScroll : false,
                     documentTouchScroll : false
                 });
+                */
                 tutorial.init();
                 new ol.control.FullScreen({
                     target: $i("i3GEOFullscreen"),

@@ -748,7 +748,7 @@ $id_mapa = $_GET["id_mapa"] * 1;
             afterStart : function(){
                 $('.iconeGuiaMovel').tooltip({animation: false, trigger: "manual", placement: "left"});
                 $('.iconeGuiaMovel').tooltip('show');
-                $("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
+                //$("#i3GEOguiaMovelConteudo").mCustomScrollbar({scrollbarPosition: "outside",theme:"inset-2-dark"});
 
                 i3GEOF.salvaMapaBanco.iniciaJanelaFlutuante(<?php echo $id_mapa;?>);
             },

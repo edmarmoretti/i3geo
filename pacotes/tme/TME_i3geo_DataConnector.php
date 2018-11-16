@@ -57,7 +57,9 @@ class DataConnector
 			$_SESSION = array();
 			session_name("i3GeoPHP");
 			session_id($sid);
-			session_start();
+			session_start([
+			    'read_and_close' => true
+			]);
 			if(@$_SESSION["fingerprint"])
 			{
 				$f = explode(",",$_SESSION["fingerprint"]);

@@ -1353,19 +1353,6 @@
 				"en": "It shows layers in a sequence and time interval defined by the user. Layers are automatically disconnected and connected to create a sequence that produce an animation effect",
 				"apijs": "i3GEO.mapa.dialogo.animacao()"
 			},
-			"108": {
-				"titulo": {
-					"pt": "Mapa tem&aacute;tico 3d",
-					"es": "Mapa tem&aacute;tico 3d",
-					"en": "3d thematic map"
-				},
-				"diretorio": "i3geo/ferramentas/tme",
-				"categoria": "5",
-				"pt": "Cria um arquivo no formato KML, representando os dados de uma coluna da tabela de atributos como elementos em 3d. Mais detalhes <a href='http://thematicmapping.org/' target=_blank >aqui</a>.<br>Os par&acirc;metros utilizados nessa ferramenta podem ser armazenados (por usu&aacute;rios cadastrados) no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos. As op&ccedil;&otilde;es que possibilitam isso s&atilde;o mostradas apenas quando o usu&aacute;rio estiver logado.",
-				"es": "Crea un archivo en formato KML que representa como entidades en 3d los datos de una columna de la tabla de atributos. M&aacute;s detalles <a href='http://thematicmapping.org/' target=_blank >aqu&iacute;</a>.<br>Los par&aacute;metros utilizados en esta herramienta pueden ser almacenados (por usuarios registrados) en el mapfile correspondiente al tema. Cuando se hace esto, la herramienta se abre con los par&aacute;metros predefinidos. Las opciones que permiten hacer esto solo se muestran cuando el usuario ha iniciado sesi&oacute;n.",
-				"en": "It creates a file in KML format that shows as 3D features data of a column of the attribute table. More details <a href='http://thematicmapping.org/' target=_blank>here</a>.<br>Parameters used for this tool can be stored (by registered users) in the mapfile corresponding to the theme. When you have done so, the tool will be open with predefined parameters. The options that allow you to do this will be only displayed when the user is logged in.",
-				"apijs": "i3GEO.tema.dialogo.tme()"
-			},
 			"109": {
 				"titulo": {
 					"pt": "Busca de metadados na INDE",
@@ -1625,19 +1612,6 @@
 				"es": "Define par&aacute;metros que modifican el comportamiento de una capa en funci&oacute;n de la escala del mapa o de la extensi&oacute;n espacial.",
 				"en": "It defines parameters that modify the behavior of a layer according to the map scale or the spatial extent.",
 				"apijs": "i3GEO.tema.dialogo.mmscale();"
-			},
-			"129": {
-				"titulo": {
-					"pt": "M&aacute;scara",
-					"es": "M&aacute;scara",
-					"en": "Mask"
-				},
-				"diretorio": "i3geo/ferramentas/mascara.js",
-				"categoria": "1",
-				"pt": "A m&aacute;scara &eacute; uma camada que ser&aacute; sobreposta as demais permitindo o desenho apenas dos elementos que intersectem.",
-				"es": "La m&aacute;scara es una capa que ser&aacute; superpuesta sobre las dem&aacute;s permitiendo solamente la visualizaci&oacute;n de las entidades que la intersecten.",
-				"en": "A mask is a layer that will overlap others layers. Features that intersect a mask will be visible",
-				"apijs": "i3GEO.mapa.dialogo.mascara();"
 			},
 			"130": {
 				"titulo": {

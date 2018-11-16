@@ -85,6 +85,7 @@ i3GEO.janela =
 	ULTIMOZINDEX : 5,
 	//aplica a estilizacao da barra de rolagem
 	//https://github.com/malihu/malihu-custom-scrollbar-plugin
+	//@TODO remover em breve
 	applyScrollBar: function(iddiv,seletor,config) {
 	    var a = i3GEO.janela.scrollBar;
 	    if(config){
@@ -93,12 +94,14 @@ i3GEO.janela =
 		    a[key] = value;
 		});
 	    }
+	    /*
 	    var i = $($i(iddiv));
 	    if(seletor && selector != ""){
 		i.find(seletor).mCustomScrollbar(a);
 	    } else {
 		i.mCustomScrollbar(a);
 	    }
+	    */
 	},
 	/**
 	 * Executa fun&ccedil;&otilde;es default antes de abrir a janela

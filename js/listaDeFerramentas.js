@@ -332,16 +332,6 @@ i3GEO.listaDeFerramentas = {
 						    id : "omenudataFerramentasCliqueGrafico",
 						    text : $trad("d23t"),
 						    url : "javascript:i3GEO.mapa.dialogo.inseregrafico()"
-						},
-						{
-						    id : "omenudataFerramentas5a",
-						    text : $trad("x59"),
-						    url : "javascript:i3GEO.mapa.dialogo.locregiao()"
-						},
-						{
-						    id : "omenudataFerramentas6a",
-						    text : $trad("x61"),
-						    url : "javascript:i3GEO.mapa.dialogo.filtraregiao()"
 						}
 						]
 					    ]
@@ -355,36 +345,6 @@ i3GEO.listaDeFerramentas = {
 					id : "camada",
 					itemdata : [
 					    [
-						{
-						    id : "omenudataFerramentas2b",
-						    text : $trad("t23"),
-						    url : "javascript:i3GEO.tema.dialogo.procuraratrib()" //feramentas/busca
-						},
-						{
-						    id : "omenudataFerramentas3b",
-						    text : $trad("t25"),
-						    url : "javascript:i3GEO.tema.dialogo.toponimia()"
-						},
-						{
-						    id : "omenudataFerramentas4b",
-						    text : $trad("t27"),
-						    url : "javascript:i3GEO.tema.dialogo.etiquetas()"
-						},
-						{
-						    id : "omenudataFerramentas8b",
-						    text : $trad("t37a"),
-						    url : "javascript:i3GEO.tema.dialogo.graficotema()"
-						},
-						{
-						    id : "omenudataFerramentas9b",
-						    text : $trad("t37b"),
-						    url : "javascript:i3GEO.analise.dialogo.graficoInterativo1()"
-						},
-						{
-						    id : "omenudataFerramentasmmscale",
-						    text : $trad("variaEscala"),
-						    url : "javascript:i3GEO.tema.dialogo.mmscale()"
-						},
 						{
 						    id : "omenudataFerramentas3e",
 						    text : $trad("t49"),
@@ -416,6 +376,11 @@ i3GEO.listaDeFerramentas = {
 						    id : "omenudataFerramentas1e",
 						    text : $trad("x57"),
 						    url : "javascript:i3GEO.mapa.dialogo.metaestat()"
+						},
+						{
+						    id : "omenudataFerramentas6a",
+						    text : $trad("x61"),
+						    url : "javascript:i3GEO.mapa.dialogo.filtraregiao()"
 						}
 						/* TODO ver se reativa isso
 									,
@@ -437,6 +402,11 @@ i3GEO.listaDeFerramentas = {
 					id : "subAnalise4",
 					itemdata : [
 					    [
+						{
+						    id : "omenudataFerramentas5a",
+						    text : $trad("x59"),
+						    url : "javascript:i3GEO.mapa.dialogo.locregiao()"
+						},
 						{
 						    id : "omenudataAnalise18",
 						    text : $trad("d30"),

@@ -36,7 +36,7 @@
 	"../pacotes/jquery/jquery-number/jquery.number.min.js",
 	"../pacotes/jquery/jquery-ui/jquery-ui.min.js",
 	//"../pacotes/jquery/jquery.ui.touch-punch/jquery.ui.touch-punch.min.js",
-	"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
+	//"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
 	"../pacotes/bootstrap/js/bootstrap.min.js",
 	"../pacotes/bootstrap-material-design/dist/js/material.min.js",
 	"../pacotes/nouislider/nouislider.min.js",
@@ -99,7 +99,7 @@
 	"../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
 	"../pacotes/yui290/build/slider/assets/skins/sam/slider.css",
 	"../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
-	"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css",
+	//"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css",
 	"../mashups/openlayers.css"
 	);
 	for (i = 0; i < cssfiles.length; i++)

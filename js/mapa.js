@@ -617,11 +617,13 @@ i3GEO.mapa =
 	     *
 	     * Abre a janela de dialogo da ferramenta de busca de regiao cadastrada no METAESTAT
 	     */
-	    locregiao : function(largura, altura, topo, esquerda) {
-		var temp = function() {
-		    i3GEOF.locregiao.iniciaDicionario(largura, altura, topo, esquerda);
-		};
-		i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.locregiao()", "metaestat", "locregiao", "locregiao.js", temp);
+	    locregiao : function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.mapa.dialogo.locregiao()",
+			"locregiao",
+			"locregiao",
+			"dependencias.php",
+		"i3GEOF.locregiao.start()");
 	    },
 	    /**
 	     * Function: filtraregiao
@@ -1250,7 +1252,7 @@ i3GEO.mapa =
 		    }
 		    html.push(texto);
 		    mostra = true;
-		  //para nao incluir mais de uma vez a geometria
+		    //para nao incluir mais de uma vez a geometria
 		    wkts = [];
 		});
 		textoSimples += html.join("<br>");

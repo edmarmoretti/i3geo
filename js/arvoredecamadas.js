@@ -644,6 +644,7 @@ i3GEO.arvoreDeCamadas =
 	    camada.contornoTexto = $trad("contorno");
 	    camada.opacidade = $trad("t20");
 	    camada.cortina = $trad("t42");
+	    camada.variaEscala = $trad("variaEscala");
 	    camada.opaCamada = temaObj.transparency;
 
 	    if (temaObj.zoomtema.toLowerCase() === "sim"){

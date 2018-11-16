@@ -17,4 +17,3 @@ switch (strtoupper($_GET["funcao"]))
 ob_clean();
 header("Content-type: application/json");
 echo json_encode($retorno);
-?>

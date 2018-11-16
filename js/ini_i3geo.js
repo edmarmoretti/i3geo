@@ -353,9 +353,11 @@ var i3GEO = {
 		if(c.components.referenceType){
 		    i3GEO.maparef.DEFAULTMAP = c.components.referenceType;
 		}
+		/*
 		if(c.components.scrollBar){
 		    i3GEO.janela.scrollBar = c.components.scrollBar;
 		}
+		*/
 		if(c.components.tooltip){
 		    var p = i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP;
 		    p.removeAoAdicionar = (c.components.tooltip.hasOwnProperty("removeAoAdicionar")) ? c.components.tooltip.removeAoAdicionar : true;

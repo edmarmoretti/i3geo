@@ -1,72 +1,112 @@
-<div class='container-fluid i3GEOTME customScrollBar'>
-	<div  id='i3GEOFtmeComboCabeca' class='form-group condensed' style='width:100%'>
-	
-	</div>
-	<div class="alert alert-info hidden" id='i3GEOTMEresultado'></div>
-	<div class="hidden" id='parametrosComLogin'>
-		<div class="checkbox text-left">
-			<label>
-				<input checked id='ativaAoAdic' type="checkbox">
-				<span class="checkbox-material noprint">
-					<span class="check"></span>
-				</span>
-				{{{ativaAoAdic}}}
-			</label>
-		</div>
-		<div class="checkbox text-left">
-			<label>
-				<input checked id='execAoAdic' type="checkbox">
-				<span class="checkbox-material noprint">
-					<span class="check"></span>
-				</span>
-				{{{execAoAdic}}}
-			</label>
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOTMEtitulo">{{{tituloMapa}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOTMEtitulo' value='' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOTMEdesc">{{{descricaoMapa}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOTMEdesc' value='' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOTMEbarSize">{{{alturaMaxBarras}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOTMEbarSize' value='5000' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOTMEmaxHeight">{{{larguraMaxBarras}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOTMEmaxHeight' value='2000000' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOTMEoutlinecolor">{{{outLineColor}}}</label>
-		<input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOTMEoutlinecolor' value='-1,-1,-1' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOTMEnumvertices">{{{numvertices}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOTMEnumvertices' value='8' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOTMEregioeslista">{{{colunaRegioes}}}</label>
-		<div style="width: 100%;" class="input-group">
-		<div id='i3GEOTMEregioeslista'></div>
-		</div>
-	</div>
+<div id='{{idContainer}}' class='container' style='width: auto; text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEOtmeresultado'>
+            <div id='i3GEOF.tme.t0'>
+                <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/tme/exemplo.png' />
+                <h5>{{{descricao}}}</h5>
+                <h5>{{{descricao1}}}</h5>
+            </div>
+            <div id='i3GEOF.tme.t1'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOtmeSelTemas'></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.tme.t2'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{tituloMapa}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOTMEtitulo' value='' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{descricaoMapa}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOTMEdesc' value='' />
+                        </div>
+                    </div>
+                    <div class="hidden" id='parametrosComLogin'>
+                        <div class="checkbox text-left">
+                            <label>
+                                <input checked id='ativaAoAdic' type="checkbox">
+                                <span class="checkbox-material noprint"> <span class="check"></span>
+                                </span> {{{ativaAoAdic}}}
+                            </label>
+                        </div>
+                        <div class="checkbox text-left">
+                            <label>
+                                <input checked id='execAoAdic' type="checkbox">
+                                <span class="checkbox-material noprint"> <span class="check"></span>
+                                </span> {{{execAoAdic}}}
+                            </label>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.tme.t3'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{alturaMaxBarras}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOTMEbarSize' value='5000' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{larguraMaxBarras}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOTMEmaxHeight' value='2000000' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{outLineColor}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOTMEoutlinecolor' value='-1,-1,-1' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{numvertices}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOTMEnumvertices' value='8' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{colunaRegioes}}}</label>
+                        <div class="col-md-6">
+                            <div class="input-group">
+                                <div id='i3GEOTMEregioeslista'></div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.tme.t4'>
+                <h5>{{{colunasDadosEstat}}}</h5>
+                <div id='i3GEOtmelistai'></div>
+            </div>
 
-	<h5>{{{colunasDadosEstat}}}</h5>
-	<div id='i3GEOtmelistai' ></div>
+            <div id='i3GEOF.tme.t5'>
+                <div class='text-center'>
+                    <button onclick="i3GEOF.tme.ativa()" class='btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{geraKml}}}
+                    </button>
+                    <button onclick="i3GEOF.tme.salvaParametros()" class='btn btn-primary btn-sm btn-raised hidden'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{salvaParametros}}}
+                    </button>
+                    <button onclick="i3GEOF.tme.removeParametros()" class='btn btn-primary btn-sm btn-raised hidden'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{removeParametros}}}
+                    </button>
+                </div>
+                <div class="alert alert-info" id='i3GEOTMEresultado'></div>
+                <h5 class="alert alert-info">Ser&aacute; criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regi&otilde;es define o nome que ser&aacute;
+                    mostrado para cada elemento mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, ser&aacute; mostrado um bot&atilde;o do tipo slide no Google
+                    Earth, mas isso s&oacute; ocorre se o nome da coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna dever&aacute; ser 1980</h5>
 
-	<button onclick="i3GEOF.tme.ativa()" class='btn btn-primary btn-sm btn-raised hidden'>{{{geraKml}}}</button>
-	<button onclick="i3GEOF.tme.salvaParametros()" class='btn btn-primary btn-sm btn-raised hidden'>{{{salvaParametros}}}</button>
-	<button onclick="i3GEOF.tme.removeParametros()" class='btn btn-primary btn-sm btn-raised hidden'>{{{removeParametros}}}</button>
-
-
-	<h5 class="alert alert-info">
-		Ser&aacute; criado um arquivo KML que pode ser aberto com o Google Earth. A coluna com os nomes das regi&otilde;es define o nome que ser&aacute; mostrado para cada elemento
-			mapeado. Quando os nomes das colunas com os valores corresponderem a um determinado ano, ser&aacute; mostrado um bot&atilde;o do tipo slide no Google Earth, mas isso s&oacute; ocorre se o nome da
-			coluna for o mesmo nome do ano, exemplo, para o ano de 1980 o nome da coluna dever&aacute; ser 1980
-	</h5>
-
-
+            </div>
+        </div>
+    </div>
 </div>

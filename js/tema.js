@@ -493,8 +493,7 @@ i3GEO.tema =
 		    tema = "";
 		}
 		var temp = function(){
-		    //i3GEO.mapa.ativaTema(tema);
-		    i3GEOF.tme.iniciaJanelaFlutuante(tema);
+		    i3GEOF.tme.start(tema);
 		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.tme()",
@@ -551,13 +550,15 @@ i3GEO.tema =
 	     *
 	     */
 	    mmscale : function(tema) {
-		i3GEO.mapa.ativaTema(tema);
+		var temp = function(){
+		    i3GEOF.mmscale.start(tema);
+		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.mmscale()",
 			"mmscale",
 			"mmscale",
 			"dependencias.php",
-		"i3GEOF.mmscale.iniciaJanelaFlutuante()");
+			temp);
 	    },
 	    /**
 	     * Function: atalhoscamada
@@ -763,7 +764,7 @@ i3GEO.tema =
 			"etiqueta",
 			"etiqueta",
 			"dependencias.php",
-		temp);
+			temp);
 	    },
 	    /**
 	     * Function: funcaojstip

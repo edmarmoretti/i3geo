@@ -669,6 +669,8 @@ class ThematicMap
 			//$zip->addFromString("doc.kml", $kml);
 			$zip->addFile($kml, 'doc.kml');//edmar
 			$zip->output($file);//edmar
+			//echo $this->nomeArquivo;exit;
+			file_put_contents(str_replace(".kmz",".kml",$file),$kml);
 		}
 
 		if($download){

@@ -320,9 +320,9 @@ class Mapa
                 //
                 // verifica se o layer &eacute; do tipo features
                 //
-                $f = "nao";
+                $features = "nao";
                 if (($oLayer->data == "") && ($oLayer->connection == "")) {
-                    $f = "sim";
+                    $features = "sim";
                 }
                 $ct = $oLayer->connectiontype;
                 //
@@ -499,7 +499,7 @@ class Mapa
                     $nSel,
                     $escala,
                     $down,
-                    $f,
+                    $features,
                     $ct,
                     $zoomtema,
                     $contextoescala,

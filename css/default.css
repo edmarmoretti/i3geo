@@ -1,3 +1,83 @@
+/** para ajustar itens de formularios */
+.modal-body .form-group .form-control {
+	color: initial;
+	background-color: initial;
+}
+.modal-body .form-group label {
+	color: initial;
+}
+.form-horizontal .form-group {
+	margin-right: -15px;
+	margin-left: -15px;
+	display: flex;
+	align-items: start;
+}
+.form-group label.control-label {
+	font-size: 1.5rem;
+	opacity: 0.8;
+	margin-top: 6px;
+}
+.form-group.label-floating.is-focused label.control-label, .form-group.label-floating:not
+	(.is-empty ) label.control-label, .form-group.label-static label.control-label
+	{
+	top: -30px;
+	left: 0;
+	font-size: 1.5rem;
+	line-height: 1.07142857;
+}
+.form-group .form-control {
+	font-size: 1.5rem;
+	color: white;
+	background-color: #477596;
+}
+.form-group input[type=number] {
+    margin-top: 14px;
+    margin-bottom: 0px;
+}
+.form-group select, .form-group input[type=text] {
+    margin-top: 6px;
+    margin-bottom: 0px;
+}
+.modal-body .form-group input[type=text]{
+    background-color: #f9f9f9 !Important;
+}
+.form-group label {
+	color: white;
+}
+.form-group.label-static label.control-label {
+	top: -40px;
+	left: 0;
+	font-size: 1.5rem;
+	line-height: 1.07142857;
+}
+.form-control.upload {
+	font-size: 1.5rem;
+	color: inherit;
+	font-weight: 400;
+}
+.form-group .help-block {
+	margin-top: 0;
+	font-size: 10px;
+	color: #BDBDBD;
+	font-weight: initial;
+}
+.form-group.label-fixed.is-focused>label, .form-group.label-floating.is-focused>label,
+	.form-group.label-static.is-focused>label, .form-group.label-floating.is-empty.is-focused>label,
+	.form-group.condensed.is-focused>label, .form-group.is-focused>label {
+	color: #BDBDBD;
+}
+.form-group.form-group-lg label.control-label {
+	color: #767676;
+}
+.form-group.form-group-lg .checkbox label, .form-group.form-group-lg .radio label,
+	.form-group.form-group-lg label {
+	color: #767676;
+}
+.form-group.condensed {
+	margin: 0px;
+	padding: 0px;
+}
+/**/
 .pager li {
     display: inline;
     margin: 0px 10px;
@@ -68,19 +148,19 @@
 /* barra de rolagem no chrome */
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
+    width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
     box-shadow: inset 0 0 1px #f3e5e4;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
     background: #f3e5e4;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 /* Handle on hover */
@@ -350,8 +430,8 @@ Para a barra de rolagem
 
 .bd .customScrollBar {
 	height: 100%;
-	width: 95%;
-	overflow: hidden;
+	width: 100%;
+	overflow: auto;
 	padding-right: 5px;
 }
 
@@ -418,14 +498,7 @@ h5 {
 	font-size: 1.6rem;
 }
 
-.form-group.label-floating.is-focused label.control-label, .form-group.label-floating:not
-	(.is-empty ) label.control-label, .form-group.label-static label.control-label
-	{
-	top: -30px;
-	left: 0;
-	font-size: 1.6rem;
-	line-height: 1.07142857;
-}
+
 /*
 tooltip dos botoes da guia movel
 */
@@ -456,10 +529,7 @@ tooltip balao info
 /*
 Botoes material
 */
-.form-group label.control-label {
-	font-size: 1.6rem;
-	opacity: 0.9;
-}
+
 
 .material-icons.md-18 {
 	font-size: 18px;
@@ -500,21 +570,7 @@ button>.material-icons {
 }
 */
 
-.form-group .form-control {
-	font-size: 1.5rem;
-	color: white;
-	background-color: #477596;
-}
 
-.form-group input[type=number] {
-    margin-top: 14px;
-    margin-bottom: 0px;
-}
-
-.form-group select, .form-group input[type=text] {
-    margin-top: 6px;
-    margin-bottom: 0px;
-}
 
 .modal-content {
 	border: 1px solid #d4d4d4;
@@ -526,44 +582,9 @@ button>.material-icons {
     padding-left: 0px;
 }
 
-.modal-body .form-group .form-control {
-	color: initial;
-	background-color: initial;
-}
 
-.form-group label {
-	color: white;
-}
 
-.modal-body .form-group label {
-	color: initial;
-}
 
-.form-group.label-static label.control-label {
-	top: -40px;
-	left: 0;
-	font-size: 1.5rem;
-	line-height: 1.07142857;
-}
-
-.form-control.upload {
-	font-size: 1.5rem;
-	color: inherit;
-	font-weight: 400;
-}
-
-.form-group .help-block {
-	margin-top: 0;
-	font-size: 10px;
-	color: #BDBDBD;
-	font-weight: initial;
-}
-
-.form-group.label-fixed.is-focused>label, .form-group.label-floating.is-focused>label,
-	.form-group.label-static.is-focused>label, .form-group.label-floating.is-empty.is-focused>label,
-	.form-group.condensed.is-focused>label, .form-group.is-focused>label {
-	color: #BDBDBD;
-}
 /*
 Para Bootstrap
 */
@@ -579,20 +600,14 @@ a, a:focus, a:hover {
 .alert.alert-info {
 	background-color: #03a9f4;
 	color: #002733;
+	text-align: left;
 }
 
 .alert.alert-warning {
 	background-color: #de3601;
 }
 
-.form-group.form-group-lg label.control-label {
-	color: #767676;
-}
 
-.form-group.form-group-lg .checkbox label, .form-group.form-group-lg .radio label,
-	.form-group.form-group-lg label {
-	color: #767676;
-}
 
 .label {
 	color: white;
@@ -610,10 +625,7 @@ hr {
 	margin: 4px;
 }
 
-.form-group.condensed {
-	margin: 0px;
-	padding: 0px;
-}
+
 
 .withripple.condensed, .pager.condensed {
 	margin: 0px;

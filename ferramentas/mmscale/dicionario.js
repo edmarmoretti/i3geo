@@ -19,5 +19,10 @@ i3GEOF.mmscale.dicionario = {
 		pt : "Para cancelar qualquer dos efeitos, utilize o valor 0, -1 ou vazio",
 		en : "Use 0, -1 or empty to cancel any effect",
 		es : "Para cancelar cualquier efecto utilice el valor 0, -1 o vac&iacute;o"
+	} ],
+	'ajuda' : [ {
+		pt: "Define par&acirc;metros que modificam o comportamento de uma camada em fun&ccedil;&atilde;o da escala do mapa ou da abrang&ecirc;ncia espacial.",
+		es: "Define par&aacute;metros que modifican el comportamiento de una capa en funci&oacute;n de la escala del mapa o de la extensi&oacute;n espacial.",
+		en: "It defines parameters that modify the behavior of a layer according to the map scale or the spatial extent."
 	} ]
 };

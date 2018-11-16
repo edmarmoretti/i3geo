@@ -173,7 +173,7 @@ $jsfiles = array(
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-number/jquery.number.min.js",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
-"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
+//"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.concat.min.js",
 "../pacotes/bootstrap/js/bootstrap.min.js",
 "../pacotes/nouislider/nouislider.min.js",
 "../pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js",
@@ -239,7 +239,7 @@ $cssfiles = array(
 "../pacotes/yui290/build/container/assets/skins/sam/container.css",
 "../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
-"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css",
+//"../pacotes/jquery/malihu-custom-scrollbar-plugin/3.1.5/jquery.mCustomScrollbar.min.css",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.css",
 "../mashups/theme/default/style.css",
 "../mashups/openlayers.css"

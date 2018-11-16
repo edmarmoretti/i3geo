@@ -5,8 +5,6 @@ verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
 $_GET = array_merge($_GET,$_POST);
 include("../../classesphp/funcoes_gerais.php");
-$kmlurl = $_GET ["kmlurl"];
-$legenda = $_GET ["legenda"];
 //define o centro, pegando as coordenadas do mapa de inicializacao
 $versao = versao();
 $versao = $versao["principal"];
@@ -111,9 +109,9 @@ body {
 <body>
 	<div id="cesiumContainer"></div>
 	<div id="legenda">
-		<img src='<?php echo strip_tags(str_replace("legend","logo",$legenda));?>' />
+		<img src='<?php //echo strip_tags(str_replace("legend","logo",$legenda));?>' />
 		<br>
-		<img src='<?php echo strip_tags($legenda);?>' />
+		<img src='readlegend.php?g_sid=<?php echo $_GET["g_sid"];?>' />
 	</div>
 	<script>
 	var extent = Cesium.Rectangle.fromDegrees(<?php echo $extensao;?>);
@@ -123,16 +121,17 @@ body {
 	var viewer = new Cesium.Viewer(
 		'cesiumContainer',
 		{
-			timeline : false
+			timeline : false,
+			baseLayerPicker : false,
+			imageryProvider : new Cesium.ArcGisMapServerImageryProvider({
+			        url : '//services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer'
+			    })
+
 		}
 	);
 	// Add a WMS imagery layer
-
-	var imageryLayers = viewer.imageryLayers;
-	if('<?php echo $kmlurl;?>' != ''){
-		viewer.dataSources.add(Cesium.KmlDataSource.load('<?php echo strip_tags($kmlurl);?>'))
-	}
-
+	//var imageryLayers = viewer.imageryLayers;
+	viewer.dataSources.add(Cesium.KmlDataSource.load("readkml.php?g_sid=<?php echo $_GET["g_sid"];?>"))
 </script>
 </body>
 </html>

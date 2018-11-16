@@ -1,42 +1,32 @@
 <?php
-include_once(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-//
-//faz a busca da fun&ccedil;&atilde;o que deve ser executada
-//
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
-switch (strtoupper($funcao))
+include (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
+switch (strtoupper($_GET["funcao"]))
 {
-/*
-Valor: MINMAX
-
-*/
-	case "MINMAX":
-		$mapa = ms_newMapObj($map_file);
-		$layer = $mapa->getlayerbyname($tema);
-		if(empty($_GET["maxscaledenom"])){
-			$_GET["maxscaledenom"] = -1;
-		}
-		if(empty($_GET["minscaledenom"])){
-			$_GET["minscaledenom"] = -1;
-		}
-		$layer->set("maxscaledenom",$_GET["maxscaledenom"]);
-		$layer->set("minscaledenom",$_GET["minscaledenom"]);
-		$layer->setmetadata("cache","");
-		$mapa->save($map_file);
-		$retorno = "ok";
-	break;
-	case "ATUAL":
-		$mapa = ms_newMapObj($map_file);
-		$layer = $mapa->getlayerbyname($tema);
-		$retorno = array(
-			"maxscaledenom"	=> $layer->maxscaledenom,
-			"minscaledenom"	=> $layer->minscaledenom
-		);
-	break;
+    case "ATUAL":
+        $mapa = ms_newMapObj($_SESSION["map_file"]);
+        $layer = $mapa->getlayerbyname($_GET["tema"]);
+        $retorno = array(
+            "maxscaledenom"	=> $layer->maxscaledenom,
+            "minscaledenom"	=> $layer->minscaledenom
+        );
+        break;
+    case "MINMAX":
+        $mapa = ms_newMapObj($_SESSION["map_file"]);
+        $layer = $mapa->getlayerbyname($_GET["tema"]);
+        if(empty($_GET["maxscaledenom"])){
+            $_GET["maxscaledenom"] = -1;
+        }
+        if(empty($_GET["minscaledenom"])){
+            $_GET["minscaledenom"] = -1;
+        }
+        $layer->set("maxscaledenom",$_GET["maxscaledenom"]);
+        $layer->set("minscaledenom",$_GET["minscaledenom"]);
+        $layer->setmetadata("cache","");
+        $mapa->save($_SESSION["map_file"]);
+        $retorno = true;
+        break;
 }
-if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
-	restauraCon($map_file,$postgis_mapa);
-}
-cpjson($retorno);
-?>
+ob_clean();
+header("Content-type: application/json");
+echo json_encode($retorno);

@@ -21,7 +21,7 @@
 
 // This file shows how maps can be created with the DataConnector
 // and ThematicMap classes.
-
+$_GET = array_merge($_GET,$_POST);
 
 // Can be changed to another data connector class
 require_once (dirname(__FILE__).'/TME_i3geo_DataConnector.php');
@@ -102,9 +102,9 @@ $file = $map->getKML($dataConnector->url,$download,$nomeFile);
 
 $nomeArquivo = $map->nomeArquivo;
 
-$legenda = str_replace("kmz","png",basename($nomeArquivo));
+$legenda = str_replace("kmz","png",$nomeArquivo);
 $legenda = str_replace("tme","legend",$legenda);
-$legenda = str_replace(basename($nomeArquivo),$legenda,$file);
+//$legenda = str_replace(basename($nomeArquivo),$legenda,$file);
 
 if (isset($inclusao) && $inclusao == true){
 	$download = true;
@@ -115,10 +115,16 @@ if(!$download){
 		require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 	}
 	if(!file_exists($nomeArquivo)){
-		echo "Nao foi possivel gerar o arquivo de visualizacao.";
+	    $_SESSION["downloadTmeKml"] = "";
+	    $_SESSION["downloadTmeKmz"] = "";
+	    $_SESSION["downloadTmeLegenda"] = "";
+	    session_write_close();
+	    header("HTTP/1.1 500 erro ao gerar arquivo");
 		exit;
 	}
-	cpjson(array('url' => $url, 'arquivo' => $nomeArquivo, 'legenda'=>$legenda));
+	$_SESSION["downloadTmeKmz"] = $nomeArquivo;
+	$_SESSION["downloadTmeKml"] = str_replace(".kmz",".kml",$nomeArquivo);
+	$_SESSION["downloadTmeLegenda"] = $legenda;
+	return true;
 }
-//echo "<p><a href='$file'>$file</a>";
 ?>
