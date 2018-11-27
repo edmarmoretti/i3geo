@@ -351,6 +351,7 @@ i3GEOF.geolocal =
 				})
 			    })
 		    );
+		    i3GEO.editor.setStyleDefault(feature);
 		    i3GEO.desenho.layergrafico.getSource().addFeature(feature);
 		    // linha
 		    if (ps[i + 1]) {
@@ -378,6 +379,7 @@ i3GEOF.geolocal =
 				})
 			);
 			feature.setId(i3GEO.util.uid());
+			i3GEO.editor.setStyleDefault(feature);
 			i3GEO.desenho.layergrafico.getSource().addFeature(feature);
 
 		    }

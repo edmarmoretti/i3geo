@@ -27,7 +27,7 @@ echo "
     <link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/css/bootstrap-material-design.min.css'>
     <link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/css/ripples.min.css'>
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap-accessibility-plugin/plugins/css/bootstrap-accessibility.css' rel='stylesheet'>
-
+    <script src='https://cdn.polyfill.io/v2/polyfill.min.js'></script>
     <script src='" . ONDEI3GEO . "/init/headjs.php'></script>";
 ?>
 <style>
@@ -360,7 +360,9 @@ h2 small {
     }
 
 }
-
+.amarelo {
+    color: yellow;
+}
 </style>
 
 </head>

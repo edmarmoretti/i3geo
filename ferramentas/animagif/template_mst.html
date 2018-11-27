@@ -1,100 +1,147 @@
-<div class='container-fluid i3GEOanimagif customScrollBar'>
-	<div  id='i3GEOFanimagifComboCabeca' class='form-group condensed' style='width:100%'>
-	
-	</div>
-
-	<div class="checkbox text-left hidden">
-		<label>
-			<input checked id='ativaAoAdic' type="checkbox">
-			<span class="checkbox-material noprint"><span class="check"></span></span> {{{ativaAoAdic}}}
-		</label>
-	</div>
-	<div class="checkbox text-left hidden">
-		<label>
-			<input checked id='execAoAdic' type="checkbox">
-			<span class="checkbox-material noprint"><span class="check"></span></span> {{{execAoAdic}}}
-		</label>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOANIMAGIFcolunatSel">{{{colunat}}}</label>
-		<div style="width: 100%;" class="input-group">
-		<div id='i3GEOANIMAGIFcolunatSel'></div>
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" >{{{tipocolunat}}}</label>
-		<div id='i3GEOANIMAGIFtipocolunat' style="width: 100%;" class="input-group">
-			<select class="form-control">
-				<option value='numero'>{{{numerico}}}</option>
-				<option value='string'>{{{texto}}}</option>
-			</select><b class="caret careti"></b>
-
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOANIMAGIFtempo">{{{tempo}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFtempo' value='40' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOANIMAGIFw">{{{w}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFw' value='500' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOANIMAGIFh">{{{h}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFh' value='500' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" >{{{cache}}}</label>
-		<div id='i3GEOANIMAGIFcache' style="width: 100%;" class="input-group">
-			<select class="form-control">
-			<option value='sim'>{{{sim}}}</option>
-			<option value='nao'>{{{nao}}}</option>
-			</select><b class="caret careti"></b>
-
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOANIMAGIFextensao">{{{extensao}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFextensao' value='' />
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" >{{{legenda}}}</label>
-		<div id='i3GEOANIMAGIFlegenda' style="width: 100%;" class="input-group">
-			<select class="form-control">
-			<option value='sim'>{{{sim}}}</option>
-			<option value='nao'>{{{nao}}}</option>
-			</select><b class="caret careti"></b>
-
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" >{{{transparencia}}}</label>
-		<div id='i3GEOANIMAGIFtransparencia' style="width: 100%;" class="input-group">
-			<select class="form-control">
-			<option value='sim'>{{{sim}}}</option>
-			<option value='nao'>{{{nao}}}</option>
-			</select><b class="caret careti"></b>
-
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" >{{{operador}}}</label>
-		<div id='i3GEOANIMAGIFoperador' style="width: 100%;" class="input-group">
-			<select class="form-control">
-			<option value=''>=</option>
-			<option value='lt'>lt</option>
-			<option value='gt'>gt</option>
-			</select><b class="caret careti"></b>
-
-		</div>
-	</div>
-	<div class='form-group label-fixed condensed'>
-		<label class="control-label" for="i3GEOANIMAGIFnulos">{{{nulos}}}</label>
-		<input class="form-control input-lg" type='text' id='i3GEOANIMAGIFnulos' value='' />
-	</div>
-
-	<button onclick='i3GEOF.animagif.ativa()' class='btn btn-primary btn-sm btn-raised'>{{{geragif}}}</button>
-	<button onclick='i3GEOF.animagif.salvaParametros()' class='btn btn-primary btn-sm btn-raised hidden'>{{{salvaParametros}}}</button>
-	<button onclick='i3GEOF.animagif.removeParametros()' class='btn btn-primary btn-sm btn-raised hidden'>{{{removeParametros}}}</button>
-
+<div id='{{idContainer}}' class='container' style='width: auto; text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEOanimagifresultado'>
+            <div id='i3GEOF.animagif.t0'>
+                <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/animagif/exemplo.png' />
+                <h5>{{{descricao}}}</h5>
+            </div>
+            <div id='i3GEOF.animagif.t1'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOFanimagifSelTemas'></div>
+                        </div>
+                    </div>
+                        <div class="checkbox text-left">
+                            <label>
+                                <input checked id='ativaAoAdic' type="checkbox">
+                                <span class="checkbox-material noprint"> <span class="check"></span>
+                                </span> {{{ativaAoAdic}}}
+                            </label>
+                        </div>
+                        <div class="checkbox text-left">
+                            <label>
+                                <input checked id='execAoAdic' type="checkbox">
+                                <span class="checkbox-material noprint"> <span class="check"></span>
+                                </span> {{{execAoAdic}}}
+                            </label>
+                        </div>
+                </form>
+            </div>
+            <div id='i3GEOF.animagif.t2'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{colunat}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOANIMAGIFcolunatSel'></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{tipocolunat}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOANIMAGIFtipocolunat' style="width: 100%;" class="input-group">
+                                <select class="form-control">
+                                    <option value='numero'>{{{numerico}}}</option>
+                                    <option value='string'>{{{texto}}}</option>
+                                </select><b class="caret careti"></b>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.animagif.t3'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{tempo}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOANIMAGIFtempo' value='40' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{w}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOANIMAGIFw' value='500' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{h}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOANIMAGIFh' value='500' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{cache}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOANIMAGIFcache' style="width: 100%;" class="input-group">
+                                <select class="form-control">
+                                    <option value='sim'>{{{sim}}}</option>
+                                    <option value='nao'>{{{nao}}}</option>
+                                </select><b class="caret careti"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{extensao}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOANIMAGIFextensao' value='{{{mapext}}}' />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{legenda}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOANIMAGIFlegenda' style="width: 100%;" class="input-group">
+                                <select class="form-control">
+                                    <option value='sim'>{{{sim}}}</option>
+                                    <option value='nao'>{{{nao}}}</option>
+                                </select><b class="caret careti"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{transparencia}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOANIMAGIFtransparencia' style="width: 100%;" class="input-group">
+                                <select class="form-control">
+                                    <option value='sim'>{{{sim}}}</option>
+                                    <option value='nao'>{{{nao}}}</option>
+                                </select><b class="caret careti"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{operador}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOANIMAGIFoperador' style="width: 100%;" class="input-group">
+                                <select class="form-control">
+                                    <option value=''>=</option>
+                                    <option value='lt'>lt</option>
+                                    <option value='gt'>gt</option>
+                                </select><b class="caret careti"></b>
+                            </div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{nulos}}}</label>
+                        <div class="col-md-6">
+                            <input class="form-control input-lg" type='text' id='i3GEOANIMAGIFnulos' value='' />
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOF.animagif.t4'>
+                <div class='text-center'>
+                    <button onclick='i3GEOF.animagif.ativa(this)' class='btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{geragif}}}
+                    </button>
+                    <button onclick='i3GEOF.animagif.salvaParametros(this)' class='btn btn-primary btn-sm btn-raised '>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{salvaParametros}}}
+                    </button>
+                    <button onclick='i3GEOF.animagif.removeParametros(this)' class='btn btn-primary btn-sm btn-raised '>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{removeParametros}}}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

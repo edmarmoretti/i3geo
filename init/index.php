@@ -51,11 +51,6 @@ if (file_exists($dir_tmp)) {
 // error_reporting ( 0 );
 include "head.php";
 ?>
-<style>
-.amarelo {
-	color: yellow;
-}
-</style>
 <body style="padding-top: 90px;" id="topo">
     <a href="#conteudoPrincipal" class="sr-only sr-only-focusable">
         <span class="well" style="background: white; color: #007e72;">Skip to main content</span>

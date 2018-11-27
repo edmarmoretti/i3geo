@@ -56,12 +56,21 @@ i3GEO.tema =
 	    if(camada.ferramentas && camada.ferramentas != ""){
 		var f = camada.ferramentas;
 		if(f.tme && f.tme.auto && f.tme.auto.toLowerCase() === "sim"){
+		    if (typeof (console) !== 'undefined')
+			console.info("i3GEO.tema.ativaFerramentas tme " + camada.name);
+
 		    i3GEO.tema.dialogo.tme(camada.name);
 		}
 		if(f.storymap && f.storymap.auto && f.storymap.auto.toLowerCase() === "sim"){
+		    if (typeof (console) !== 'undefined')
+			console.info("i3GEO.tema.ativaFerramentas storymap " + camada.name);
+
 		    i3GEO.tema.dialogo.storymap(camada.name);
 		}
 		if(f.animagif && f.animagif.auto && f.animagif.auto.toLowerCase() === "sim"){
+		    if (typeof (console) !== 'undefined')
+			console.info("i3GEO.tema.ativaFerramentas animagif " + camada.name);
+
 		    i3GEO.tema.dialogo.animagif(camada.name);
 		}
 	    }
@@ -447,7 +456,7 @@ i3GEO.tema =
 		    tema = "";
 		}
 		var temp = function(){
-		    i3GEOF.animagif.iniciaJanelaFlutuante(tema);
+		    i3GEOF.animagif.start(tema);
 		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.animagif()",
@@ -470,7 +479,7 @@ i3GEO.tema =
 		    tema = "";
 		}
 		var temp = function(){
-		    i3GEOF.storymap.iniciaJanelaFlutuante(tema);
+		    i3GEOF.storymap.start(tema);
 		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.storymap()",

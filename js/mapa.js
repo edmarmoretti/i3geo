@@ -570,6 +570,8 @@ i3GEO.mapa =
 	     * Function: metaestat
 	     *
 	     * Abre a janela de dialogo da ferramenta de cartogramas estatisticos METAESTAT
+
+	     *@TODO depreciado na versao 8
 	     */
 	    metaestat : function(largura, altura, topo, esquerda, Interface, conexao) {
 		var temp = function() {
@@ -590,6 +592,14 @@ i3GEO.mapa =
 			"dependencias.php",
 			temp
 		);
+	    },
+	    cartograma:  function() {
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.mapa.dialogo.cartograma()",
+			"cartograma",
+			"cartograma",
+			"dependencias.php",
+		"i3GEOF.cartograma.start()");
 	    },
 	    /**
 	     * Function: metaestatListaMapas
@@ -618,12 +628,16 @@ i3GEO.mapa =
 	     * Abre a janela de dialogo da ferramenta de busca de regiao cadastrada no METAESTAT
 	     */
 	    locregiao : function() {
+		var temp = function(){
+		    i3GEOF.locregiao._parameters.ATIVAFILTRO = false;
+		    i3GEOF.locregiao.start();
+		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.mapa.dialogo.locregiao()",
 			"locregiao",
 			"locregiao",
 			"dependencias.php",
-		"i3GEOF.locregiao.start()");
+		temp);
 	    },
 	    /**
 	     * Function: filtraregiao
@@ -633,9 +647,9 @@ i3GEO.mapa =
 	    filtraregiao : function() {
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.mapa.dialogo.filtraregiao()",
-			"metaestat",
 			"locregiao",
-			"locregiao.js",
+			"locregiao",
+			"dependencias.php",
 			"i3GEOF.locregiao.abreComFiltro()"
 		);
 	    },
@@ -1282,7 +1296,7 @@ i3GEO.mapa =
 		    f.setGeometry(g);
 		    f.setId(i3GEO.util.uid());
 		    i3GEO.editor.setStyleByTypeFeature(f);
-		    i3GEO.editor.sel.setPropertiesDefault(f);
+		    i3GEO.editor.setStyleDefault(f);
 		    wkts[r].wkt = "",
 		    //atributos
 		    f.setProperties({

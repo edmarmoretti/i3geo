@@ -1,309 +1,240 @@
-/*
-Title: STORYMAP
-
-Ferramenta para definir os parâmetros de configuração de storymap
-
-Abre apenas se o usuário estiver logado
-
-<i3GEO.tema.dialogo.storymap>
-
-Para testar utilize http://localhost/i3geo/ms_criamapa.php?temasa=_lreal
-
-Arquivo:
-
-i3geo/ferramentas/storymap/index.js.php
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
-GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
 if (typeof (i3GEOF) === 'undefined') {
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
-
-/*
- * Classe: i3GEOF.storymap
- *
- * Camadas podem ter as definicoes default de parametros armazenadas no metadata storymap Esse metadata e mantido no objeto
- * i3GEO.arvoreDeCamadas.CAMADAS
- *
- * Os campos definidos pelo usuario podem ser salvos no mapfile caso o usuario esteja logado
- *
- * Veja tambem i3geo/ferramentas/atalhosedicao
- */
-i3GEOF.storymap =
-	{
-		/*
-		 * Variavel: tema
-		 *
-		 * Tema que ser&aacute; utilizado
-		 *
-		 * Type: {string}
-		 */
-		tema : i3GEO.temaAtivo,
-		/*
-		 * Variavel: aguarde
-		 *
-		 * Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-		 */
-		aguarde : "",
-		/*
-		 * Para efeitos de compatibilidade antes da vers&atilde;o 4.7 que n&atilde;o tinha dicion&aacute;rio
-		 */
-		criaJanelaFlutuante : function() {
-			i3GEOF.storymap.iniciaDicionario();
-		},
-		/**
-		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-		 */
-		MUSTACHE : "",
-		/**
-		 * Susbtitutos para o template
-		 */
-		mustacheHash : function() {
-			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.storymap.dicionario);
-			return dicionario;
-		},
-		/*
-		 * Function: iniciaDicionario
-		 *
-		 * Carrega o dicion&aacute;rio e chama a fun&ccedil;&atilde;o que inicia a ferramenta
-		 *
-		 * O Javascript &eacute; carregado com o id i3GEOF.nomedaferramenta.dicionario_script
-		 */
-		iniciaDicionario : function() {
-			if (typeof (i3GEOF.storymap.dicionario) === 'undefined') {
-				i3GEO.util.scriptTag(
-					i3GEO.configura.locaplic + "/ferramentas/storymap/dicionario.js",
-					"i3GEOF.storymap.iniciaJanelaFlutuante()",
-					"i3GEOF.storymap.dicionario_script");
-			} else {
-				i3GEOF.storymap.iniciaJanelaFlutuante();
-			}
-		},
-		/*
-		 * Function: inicia
-		 *
-		 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-		 *
-		 * Parametro:
-		 *
-		 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-		 */
-		inicia : function(iddiv) {
-			if(i3GEOF.storymap.MUSTACHE == ""){
-				$.get(i3GEO.configura.locaplic + "/ferramentas/storymap/template_mst.html", function(template) {
-					i3GEOF.storymap.MUSTACHE = template;
-					i3GEOF.storymap.inicia(iddiv);
-				});
-				return;
-			}
-			var camada = "";
-
-			if (i3GEOF.storymap.tema === "") {
-				return;
-			}
-			$i(iddiv).innerHTML = i3GEOF.storymap.html();
-			if (!$i("i3GEOFstoComboCabecaSel")) {
-				i3GEO.janela.comboCabecalhoTemasBs(
-					"i3GEOFstoComboCabeca",
-					"i3GEOFstoComboCabecaSel",
-					"storymap",
-					"ligadosComTabela",
-					function(evt){
-						var botao = evt.target;
-						if (botao) {
-							if (botao.value != "") {
-								i3GEO.mapa.ativaTema(botao.value);
-								i3GEOF.storymap.tema = botao.value;
-								$i(iddiv).innerHTML = "";
-								i3GEOF.storymap.inicia(iddiv);
-							} else {
-								$i(iddiv).innerHTML = "";
-							}
-						}
-					});
-			}
-			if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
-				$(".i3GEOstorymap").find(".hidden").removeClass("hidden");
-			}
-			try {
-				//
-				// verifica se a camada possui definicao dos parametros
-				//
-				if (i3GEO.arvoreDeCamadas) {
-					camada = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.storymap.tema);
-				}
-				// cria os combos de opcao
-				var temp = function(r) {
-					var combo = function(dados, idonde) {
-						var n, i, ins;
-						n = dados.length;
-						ins = "<select class='form-control' id='" + idonde + "Combo' >";
-						ins += "<option value='' >---</option>";
-						for (i = 0; i < n; i++) {
-							ins += "<option value='" + dados[i]["item"] + "' >" + dados[i]["item"] + "</option>";
-						}
-						ins += "</select>";
-						$i(idonde).innerHTML = ins;
-					};
-					combo(r.data.valores, "i3GEOstocolcabecalho");
-					combo(r.data.valores, "i3GEOstocoltexto");
-					combo(r.data.valores, "i3GEOstocollocal");
-					combo(r.data.valores, "i3GEOstocolmedia");
-					combo(r.data.valores, "i3GEOstocollon");
-					combo(r.data.valores, "i3GEOstocollat");
-					// se os parametros da ferramenta estiverem definidos na camada
-					if (camada != "" && camada.ferramentas.storymap) {
-						$i("i3GEOStocabecalho").value = camada.ferramentas.storymap.cabecalho;
-						$i("i3GEOStotexto").value = camada.ferramentas.storymap.texto;
-						$i("i3GEOstocolcabecalhoCombo").value = camada.ferramentas.storymap.colcabecalho;
-						$i("i3GEOstocoltextoCombo").value = camada.ferramentas.storymap.coltexto;
-						$i("i3GEOstocollocalCombo").value = camada.ferramentas.storymap.collocal;
-						$i("i3GEOstocolmediaCombo").value = camada.ferramentas.storymap.colmedia;
-						$i("i3GEOstocollonCombo").value = camada.ferramentas.storymap.collon;
-						$i("i3GEOstocollatCombo").value = camada.ferramentas.storymap.collat;
-					}
-				};
-				i3GEO.php.listaItensTema(temp, i3GEOF.storymap.tema);
-			} catch (erro) {
-				i3GEO.janela.tempoMsg(erro);
-			}
-		},
-		/*
-		 * Function: html
-		 *
-		 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-		 *
-		 * Retorno:
-		 *
-		 * String com o c&oacute;digo html
-		 */
-		html : function() {
-			var ins = Mustache.render(i3GEOF.storymap.MUSTACHE, i3GEOF.storymap.mustacheHash());
-			return ins;
-		},
-		/*
-		 * Function: iniciaJanelaFlutuante
-		 *
-		 * Cria a janela flutuante para controle da ferramenta.
-		 */
-		iniciaJanelaFlutuante : function(tema) {
-			if(tema && tema != ""){
-				i3GEOF.storymap.tema = tema;
-				i3GEO.temaAtivo = tema;
-			} else {
-				i3GEOF.storymap.tema = i3GEO.temaAtivo;
-			}
-			var minimiza, cabecalho, janela, divid, temp, titulo;
-			if ($i("i3GEOF.storymap")) {
-				i3GEOF.storymap.inicia("i3GEOF.storymap_corpo");
-				return;
-			}
-			cabecalho = function() {
+i3GEOF.storymap = {
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "tema": "",
+	    "mustache": "",
+	    "idContainer": "i3GEOstorymapContainer",
+	    "namespace": "storymap"
+	},
+	start : function(tema){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    p.tema = tema;
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
+	},
+	destroy: function(){
+	    //nao use this aqui
+	},
+	html:function() {
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			footer: true,
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width':'', 'height': '50%','position': 'fixed','top': 0, 'left': 0, 'right': 0, bottom: 'unset', 'margin': 'auto'}
+		    });
+	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
+		$("#"+p.idContainer + " button").removeClass("hidden");
+	    }
+	    i3GEOF.storymap.comboTemas();
+	    i3f.t0();
+	},
+	t0: function(){
+	    i3GEO.util.proximoAnterior("","i3GEOF.storymap.t1()","","i3GEOF.storymap.t0","i3GEOstorymapresultado",true,"i3GEOToolFormModalFooter");
+	},
+	t1: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.storymap.t0()","i3GEOF.storymap.t2()","","i3GEOF.storymap.t1","i3GEOstorymapresultado",true,"i3GEOToolFormModalFooter");
+	},
+	t2: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.storymap.t1()","i3GEOF.storymap.t3()","","i3GEOF.storymap.t2","i3GEOstorymapresultado",true,"i3GEOToolFormModalFooter");
+	},
+	t3: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.storymap.t2()","i3GEOF.storymap.t4()","","i3GEOF.storymap.t3","i3GEOstorymapresultado",true,"i3GEOToolFormModalFooter");
+	},
+	t4: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.storymap.t3()","","","i3GEOF.storymap.t4","i3GEOstorymapresultado",true,"i3GEOToolFormModalFooter");
+	},
+	comboTemas: function(){
+	    i3GEO.util.comboTemas(
+		    "i3GEOFstorymaptemas",
+		    function(retorno){
+			$i("i3GEOFstorymapSelTemas").innerHTML = retorno.dados;
+			$i("i3GEOFstorymaptemas").value = i3GEOF.storymap._parameters.tema;
+			$i("i3GEOFstorymaptemas").onchange = function(){
+			    var p = i3GEOF.storymap._parameters;
+			    p.tema = this.value;
+			    i3GEOF.storymap.comboItens();
 			};
-			minimiza = function() {
-				i3GEO.janela.minimiza("i3GEOF.storymap");
-			};
-			// cria a janela flutuante
-			titulo = "<span class='i3GeoTituloJanelaBsNolink' >Storymap</span></div>";
-
-			janela = i3GEO.janela.cria(
-				"380px",
-				"320px",
-				"",
-				"",
-				"",
-				titulo,
-				"i3GEOF.storymap",
-				false,
-				"hd",
-				cabecalho,
-				minimiza,
-				"",
-				true,
-				"",
-				"",
-				"",
-				"",
-				"133"
-			);
-			divid = janela[2].id;
-			i3GEOF.storymap.aguarde = $i("i3GEOF.storymap_imagemCabecalho").style;
-			$i("i3GEOF.storymap_corpo").style.backgroundColor = "white";
-			i3GEOF.storymap.inicia(divid);
-			temp = function() {
-			};
-			YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-		},
-		salvaParametros : function() {
-			if(i3GEOF.storymap.aguarde.visibility == "visible"){
-				return;
+			//caso os parametros estiverem definidos na camada
+			//preenche o formulario
+			if(i3GEOF.storymap._parameters.tema != ""){
+			    $i("i3GEOstorymaptemasComSel").onchange.call();
 			}
-			var j;
-			j =
-				'{"cabecalho":"' + $i("i3GEOStocabecalho").value
-					+ '","texto":"'
-					+ $i("i3GEOStotexto").value
-					+ '","colcabecalho":"'
-					+ $i("i3GEOstocolcabecalhoCombo").value
-					+ '","coltexto":"'
-					+ $i("i3GEOstocoltextoCombo").value
-					+ '","collocal":"'
-					+ $i("i3GEOstocollocalCombo").value
-					+ '","colmedia":"'
-					+ $i("i3GEOstocolmediaCombo").value
-					+ '","collon":"'
-					+ $i("i3GEOstocollonCombo").value
-					+ '","collat":"'
-					+ $i("i3GEOstocollatCombo").value
-					+ '"}';
-
-				p = i3GEO.configura.locaplic + "/ferramentas/storymap/manutencao.php";
-				par =
-					"&g_sid=" + i3GEO.configura.sid
-						+ "&tema="
-						+ i3GEOF.storymap.tema
-						+ "&storymap="
-						+ j
-						+ "&funcao=inclui";
-
-				retorno = function(retorno) {
-					i3GEOF.storymap.aguarde.visibility = "hidden";
-				};
-				i3GEOF.storymap.aguarde.visibility = "visible";
-				cpJSON.call(p, "foo", retorno, par);
-
-		},
-		removeParametros : function() {
-			if(i3GEOF.storymap.aguarde.visibility == "visible"){
-				return;
-			}
-			p = i3GEO.configura.locaplic + "/ferramentas/storymap/manutencao.php";
-				par = "&g_sid=" + i3GEO.configura.sid + "&tema=" + i3GEOF.storymap.tema + "&funcao=remove";
-
-				retorno = function(retorno) {
-					i3GEOF.storymap.aguarde.visibility = "hidden";
-				};
-				i3GEOF.storymap.aguarde.visibility = "visible";
-				cpJSON.call(p, "foo", retorno, par);
+		    },
+		    "i3GEOFstorymapSelTemas",
+		    "",
+		    false,
+		    "comTabela",
+		    " ",
+		    false,
+		    true,
+		    "form-control"
+	    );
+	},
+	comboItens: function(){
+	    var camada = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[i3GEOF.storymap._parameters.tema];
+	    var temp = function(r) {
+		var combo = function(dados, idonde) {
+		    var n, i, ins;
+		    n = dados.length;
+		    ins = "<select class='form-control' id='" + idonde + "Combo' >";
+		    ins += "<option value='' >---</option>";
+		    for (i = 0; i < n; i++) {
+			ins += "<option value='" + dados[i]["item"] + "' >" + dados[i]["item"] + "</option>";
+		    }
+		    ins += "</select>";
+		    $i(idonde).innerHTML = ins;
+		};
+		combo(r.data.valores, "i3GEOFstorymapcabecalhoCol");
+		combo(r.data.valores, "i3GEOFstorymaptextoCol");
+		combo(r.data.valores, "i3GEOFstorymaplocal");
+		combo(r.data.valores, "i3GEOFstorymapmedia");
+		combo(r.data.valores, "i3GEOFstorymaplon");
+		combo(r.data.valores, "i3GEOFstorymaplat");
+		// se os parametros da ferramenta estiverem definidos na camada
+		if (camada != "" && camada.ferramentas.storymap) {
+		    $i("i3GEOFstorymapcabecalho").value = camada.ferramentas.storymap.cabecalho;
+		    $i("i3GEOFstorymaptexto").value = camada.ferramentas.storymap.texto;
+		    $i("i3GEOFstorymapcabecalhoColCombo").value = camada.ferramentas.storymap.colcabecalho;
+		    $i("i3GEOFstorymaptextoColCombo").value = camada.ferramentas.storymap.coltexto;
+		    $i("i3GEOFstorymaplocalCombo").value = camada.ferramentas.storymap.collocal;
+		    $i("i3GEOFstorymapmediaCombo").value = camada.ferramentas.storymap.colmedia;
+		    $i("i3GEOFstorymaplonCombo").value = camada.ferramentas.storymap.collon;
+		    $i("i3GEOFstorymaplatCombo").value = camada.ferramentas.storymap.collat;
 		}
-	};
+	    };
+	    i3GEO.php.listaItensTema(temp, i3GEOF.storymap._parameters.tema);
+	},
+	ativa : function(btn) {
+	    var j;
+	    j =
+		'{"cabecalho":"' + $i("i3GEOFstorymapcabecalho").value
+		+ '","texto":"'
+		+ $i("i3GEOFstorymaptexto").value
+		+ '","colcabecalho":"'
+		+ $i("i3GEOFstorymapcabecalhoColCombo").value
+		+ '","coltexto":"'
+		+ $i("i3GEOFstorymaptextoColCombo").value
+		+ '","collocal":"'
+		+ $i("i3GEOFstorymaplocalCombo").value
+		+ '","colmedia":"'
+		+ $i("i3GEOFstorymapmediaCombo").value
+		+ '","collon":"'
+		+ $i("i3GEOFstorymaplonCombo").value
+		+ '","collat":"'
+		+ $i("i3GEOFstorymaplatCombo").value
+		+ '"}';
+
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    "tema": $i("i3GEOFstorymaptemas").value,
+		    "g_sid": i3GEO.configura.sid,
+		    "storymap": i3GEO.util.base64encode(j),
+		    "funcao": "inclui"
+	    };
+	    i3f.post({
+		snackbar: true,
+		btn: btn,
+		par: par,
+		refresh: true,
+		fn: function(){
+		    window.open(i3GEO.configura.locaplic+"/ferramentas/storymap/default.php?layers=&tema=" + i3GEOF.storymap._parameters.tema);
+		},
+		prog: i3GEO.configura.locaplic + "/ferramentas/storymap/exec.php"
+	    });
+	},
+	removeParametros : function(btn) {
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    "tema": $i("i3GEOFstorymaptemas").value,
+		    "g_sid": i3GEO.configura.sid,
+		    "funcao": "remove"
+	    };
+	    i3f.post({
+		snackbar: true,
+		btn: btn,
+		par: par,
+		refresh: true,
+		prog: i3GEO.configura.locaplic + "/ferramentas/storymap/exec.php"
+	    });
+	},
+	post: function({snackbar = true, btn = false, par = {}, refresh = false, prog = "exec", fn = false} = {}){
+	    var p = this._parameters,
+	    i3f = this;
+	    i3GEO.janela.abreAguarde();
+	    if(btn){
+		btn = $(btn);
+		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    }
+	    i3GEO.janela._formModal.block();
+	    par.g_sid = i3GEO.configura.sid;
+	    delete par["refresh"];
+	    $.post(
+		    prog,
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			if(snackbar){
+			    i3GEO.janela.snackBar({content: $trad('feito')});
+			}
+			if(refresh){
+			    i3GEO.arvoreDeCamadas.CAMADAS = [];
+			    i3GEO.atualiza();
+			    i3GEO.Interface.atualizaTema("", i3GEOF.storymap._parameters.tema);
+			}
+			if(fn){
+			    fn(data);
+			}
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	}
+};

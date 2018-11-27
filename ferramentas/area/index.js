@@ -123,6 +123,7 @@ i3GEOF.area =
 		    }	));
 		    evt.feature.setId(i3GEO.util.uid());
 		    var m = i3GEOF.area.openlayers;
+		    i3GEO.editor.setStyleDefault(evt.feature);
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		});
 		m.draw.on('drawstart', function(evt) {

@@ -314,6 +314,7 @@ i3GEO.desenho =
 		f.setProperties({
 		    origem : namespace
 		});
+		i3GEO.editor.setStyleDefault(f);
 		i3GEO.desenho.layergrafico.getSource().addFeature(f);
 		return f;
 	    },
@@ -367,9 +368,11 @@ i3GEO.desenho =
 			    })
 			})
 		);
+		i3GEO.editor.setStyleDefault(f);
 		//FIXME como incluir o evento click?
 		//f.on('click',funcaoclick);
 		i3GEO.desenho.layergrafico.getSource().addFeature(f);
+		i3GEO.editor.tableRefresh();
 		return f;
 	    },
 	    removePins : function(namespace) {

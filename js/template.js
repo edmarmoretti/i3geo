@@ -1,16 +1,13 @@
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
-
 //utilizado para armazenar templates HTML
 //alguns templates sao carregados sob demanda, por isso sao definidos aqui como false
 //nesses casos, o HTML do template sao estruturados de outras formas, como em arquivos
 //que sao lidos quando necessario
-
 //exemplo de uso:
 //var html = Mustache.render(i3GEO.template.janela.aguarde, {id: "1234"});
 //var html = Mustache.render("{{#data}}<option value='{{{img}}}'>{{{name}}}</option>{{/data}}", {data: [{name: 'xx',img:'yy'}]})
-
 i3GEO.template = {
 	botoes: {
 	    //lista de botoes na forma de icones

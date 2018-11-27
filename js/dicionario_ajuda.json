@@ -1613,19 +1613,6 @@
 				"en": "It defines parameters that modify the behavior of a layer according to the map scale or the spatial extent.",
 				"apijs": "i3GEO.tema.dialogo.mmscale();"
 			},
-			"130": {
-				"titulo": {
-					"pt": "Anima&ccedil;&atilde;o Gif",
-					"es": "Animaci&oacute;n Gif",
-					"en": "Gif animation "
-				},
-				"diretorio": "i3geo/ferramentas/animagif",
-				"categoria": "5",
-				"pt": "Gera uma anima&ccedil;&atilde;o no formato Gif por meio da cria&ccedil;&atilde;o de quadros baseados em uma coluna na tabela de atributos. Para cada valor &uacute;nico existente na coluna &eacute; aplicado um filtro. Ao sobrepor v&aacute;rias imagens, cria-se um arquivo Gif.",
-				"es": "Genera una animaci&oacute;n en formato GIF mediante la creaci&oacute;n de cuadros basados en una columna de la tabla de atributos. Para cada valor &uacute;nico existente en la columna se aplica un filtro. Al sobreponer varias im&aacute;genes se crea un archivo GIF.",
-				"en": "It generates an animation in GIF format by creating frames based on a column of the attribute table. A filter is applied for each unique value of a column. When overlapping several images a GIF file will be created.",
-				"apijs": "i3GEO.tema.dialogo.animagif()"
-			},
 			"131": {
 				"titulo": {
 					"pt": "Par&acirc;metros",
@@ -1648,19 +1635,6 @@
 				"diretorio": "i3geo/ferramentas/funcaojstip",
 				"categoria": "5",
 				"pt": "Quando o usu&aacute;rio clica no mapa &eacute; mostrado uma etiqueta com informa&ccedil;&otilde;es. Essa etiqueta apresenta os dados obtidos da tabela de atributos das camadas e pode tamb&eacute;m mostrar links para fun&ccedil;&otilde;es especiais, que executam programas Javascript. Essas fun&ccedil;&otilde;es s&atilde;o definidas em cada camada por meio do sistema de administra&ccedil;&atilde;o e ficam armazenadas como uma string no formato JSON no METADATA chamado FUNCOESJS. Esse JSON cont&eacute;m os elementos tipo (se for layer o link para a fun&ccedil;&atilde;o ficar&aacute; no n&iacute;vel do tema e se for registro ficar&aacute; no n&iacute;vel do registro),titulo (nome que ser&aacute; mostrado na etiqueta), script (endere&ccedil;o do javascript que ser&aacute; inclu&iacute;do no mapa e que cont&eacute;m a fun&ccedil;&atilde;o que ser&aacute; executada), funcao (nome da fun&ccedil;&atilde;o que ser&aacute; executada), parametros (lista de nomes de colunas cujos valores ser&atilde;o enviadas como par&acirc;metros da fun&ccedil;&atilde;o)",
-				"es": "",
-				"en": "",
-				"apijs": ""
-			},
-			"133": {
-				"titulo": {
-					"pt": "Storymap",
-					"es": "Storymap",
-					"en": "Storymap"
-				},
-				"diretorio": "i3geo/ferramentas/storymap",
-				"categoria": "5",
-				"pt": "Permite a cria&ccedil;&atilde;o de uma p&aacute;gina no formato de uma 'Storymap', ou seja, um mapa que permite a navega&ccedil;&atilde;o por seus elementos de modo interativo na forma de uma hist&oacute;ria. &Eacute; poss&iacute;vel configurar sua hist&oacute;ria para utilizar elementos da pr&oacute;pria camada como textos ou ainda incluir links para p&aacute;ginas externas como v&iacute;deos e fotos.<br>Os par&acirc;metros utilizados nessa ferramenta podem ser armazenados (por usu&aacute;rios cadastrados) no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos.",
 				"es": "",
 				"en": "",
 				"apijs": ""

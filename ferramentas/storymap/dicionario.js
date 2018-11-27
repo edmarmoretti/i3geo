@@ -1,5 +1,20 @@
 //+$trad(1,i3GEOF.tme.dicionario)+
 i3GEOF.storymap.dicionario = {
+	'descricao' : [ {
+	    pt : "Permite a cria&ccedil;&atilde;o de uma p&aacute;gina no formato de uma 'Storymap', ou seja, um mapa que permite a navega&ccedil;&atilde;o por seus elementos de modo interativo na forma de uma hist&oacute;ria.",
+	    en : "",
+	    es : ""
+	} ],
+	'descricao1' : [ {
+	    pt : "&Eacute; poss&iacute;vel configurar sua hist&oacute;ria para utilizar elementos da pr&oacute;pria camada como textos ou ainda incluir links para p&aacute;ginas externas como v&iacute;deos e fotos.<br>Os par&acirc;metros utilizados nessa ferramenta podem ser armazenados no mapfile correspondente ao tema. Quando isso &eacute; feito, a ferramenta &eacute; aberta com esses par&acirc;metros pr&eacute;-definidos.",
+	    en : "",
+	    es : ""
+	} ],
+	'descricao2' : [ {
+	    pt : "Quando os par&acirc;metros s&atilde;o aramazenados na camada o aplicativo pode ser aberto diretamente, exemplo: http://localhost/i3geo/ferramentas/storymap/default.php?tema=_lreal&layers=_lbiomashp _llocali",
+	    en : "",
+	    es : ""
+	} ],
 	'aplicar' : [ {
 		pt : "Abre o aplicativo Storymap",
 		en : "Opens Storymap app",
@@ -79,5 +94,10 @@ i3GEOF.storymap.dicionario = {
 		pt : "Inclui os par&acirc;metros no tema?",
 		en : "&iquest;Quiere incluir los par&aacute;metros en el tema?",
 		es : "Do you want to add parameters in the theme?"
+	} ],
+	'selecionaTema' : [ {
+		pt : "Tema que ser&aacute; utilizado",
+		en : "Theme that will be used",
+		es : "Tema que se utilizar&aacute;"
 	} ]
 };

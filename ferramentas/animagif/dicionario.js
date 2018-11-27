@@ -1,5 +1,10 @@
 //+$trad(1,i3GEOF.animagif.dicionario)+
 i3GEOF.animagif.dicionario = {
+	'descricao' : [ {
+		pt: "Gera uma anima&ccedil;&atilde;o no formato Gif por meio da cria&ccedil;&atilde;o de quadros baseados em uma coluna na tabela de atributos. Para cada valor &uacute;nico existente na coluna &eacute; aplicado um filtro. Ao sobrepor v&aacute;rias imagens, cria-se um arquivo Gif.",
+		es: "Genera una animaci&oacute;n en formato GIF mediante la creaci&oacute;n de cuadros basados en una columna de la tabla de atributos. Para cada valor &uacute;nico existente en la columna se aplica un filtro. Al sobreponer varias im&aacute;genes se crea un archivo GIF.",
+		en: "It generates an animation in GIF format by creating frames based on a column of the attribute table. A filter is applied for each unique value of a column. When overlapping several images a GIF file will be created."
+	} ],
 	'ativaAoAdic' : [ {
 		pt : "Abre a ferramenta quando a camada &eacute; adicionada ao mapa, permitindo que o usu&aacute;rio escolha os par&acirc;metros",
 		en : "Opens the tool when the layer is added to the map, allowing the user to select the parameters",
@@ -109,5 +114,10 @@ i3GEOF.animagif.dicionario = {
 		pt : "Inclui os par&acirc;metros no tema?",
 		en : "Do you want to include the parameters in the theme?",
 		es : "&iquest;Se incluyen los par&aacute;metros en el tema?"
+	} ],
+	'selecionaTema' : [ {
+		pt : "Tema que ser&aacute; utilizado",
+		en : "Theme that will be used",
+		es : "Tema que se utilizar&aacute;"
 	} ]
 };

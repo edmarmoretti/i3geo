@@ -14,6 +14,8 @@ janelas modais criadas com BOOTSTRAP.
 
 Não são permitidas múltiplas janelas flutuantes.
 
+Foi removida a biblioteca  mCustomScrollbar
+
 -------------------------------------------------------------------------------------------------
 Para a versão 7.0
 

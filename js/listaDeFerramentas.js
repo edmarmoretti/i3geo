@@ -375,7 +375,7 @@ i3GEO.listaDeFerramentas = {
 						{
 						    id : "omenudataFerramentas1e",
 						    text : $trad("x57"),
-						    url : "javascript:i3GEO.mapa.dialogo.metaestat()"
+						    url : "javascript:i3GEO.mapa.dialogo.cartograma()"
 						},
 						{
 						    id : "omenudataFerramentas6a",

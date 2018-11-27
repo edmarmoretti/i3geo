@@ -20,7 +20,7 @@ i3GEOF.tme = {
 	start : function(tema){
 	    var p = this._parameters,
 	    i3f = this,
-	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html",
 	    t2 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/templateLista_mst.html";
 	    p.tema = tema;
 	    if(p.mustache === ""){
@@ -156,7 +156,7 @@ i3GEOF.tme = {
 		    " ",
 		    false,
 		    true,
-		    "form-control comboTema"
+		    "form-control"
 	    );
 	},
 	montaListaItens : function(retorno) {
@@ -275,7 +275,7 @@ i3GEOF.tme = {
 		    "descricao": $i("i3GEOTMEdesc").value,
 		    "outlinecolor": $i("i3GEOTMEoutlinecolor").value,
 		    "numvertices": $i("i3GEOTMEnumvertices").value,
-		    "tema": $i("i3GEOtmetemasComSel").value,
+		    "tema": p.tema,
 		    "sid": i3GEO.configura.sid
 	    };
 	    return par;
@@ -288,7 +288,6 @@ i3GEOF.tme = {
 		snackbar: true,
 		fn: function(retorno){
 		    //var data = jQuery.parseJSON(retorno).data;
-
 		    var url = i3GEO.configura.locaplic + "/ferramentas/tme/forcedownload.php?g_sid=" + i3GEO.configura.sid;
 		    var link = document.createElement("a");
 		    $(link).click(function(e) {

@@ -2,7 +2,7 @@
 include (dirname(__FILE__)."/../../classesphp/sani_request.php");
 include("../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),"",false);
-$url = strip_tags("./exec.php?".$_SERVER["QUERY_STRING"]);
+$url = strip_tags("./gif.php?".$_SERVER["QUERY_STRING"]);
 ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">

@@ -146,6 +146,7 @@ i3GEOF.distancia =
 				})
 			    })
 		    );
+		    i3GEO.editor.setStyleDefault(evt.feature);
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		    m.draw.setActive(false);
 		    m.draw.setActive(true);
@@ -262,7 +263,7 @@ i3GEOF.distancia =
 				    zIndex: 2
 				})
 			);
-
+			i3GEO.editor.setStyleDefault(circ);
 			i3GEO.desenho.layergrafico.getSource().addFeature(circ);
 		    }
 		    // desenha ponto
@@ -300,6 +301,7 @@ i3GEOF.distancia =
 				    })
 				})
 			);
+			i3GEO.editor.setStyleDefault(label);
 			i3GEO.desenho.layergrafico.getSource().addFeature(label);
 		    }
 		}

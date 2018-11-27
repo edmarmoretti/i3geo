@@ -66,6 +66,8 @@ i3GEOF.locregiao = {
 	    var p = i3GEOF.locregiao._parameters;
 	    p.ATIVAFILTRO = true;
 	    var divbotoes = $i("i3geoLocregiaoBotoesFiltro");
+	    i3GEOF.locregiao.start();
+	    /*
 	    if(!divbotoes){
 		i3GEOF.locregiao.start();
 	    }
@@ -74,8 +76,9 @@ i3GEOF.locregiao = {
 		$i("i3geoLocregiaoTipoRegiao").innerHTML = "";
 		p.ULTIMO_CODIGO_REGIAO = "";
 		p.ULTIMO_CODIGO_TIPO_REGIAO = "";
-		p.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
+		i3GEOF.locregiao.comboHierarquiaRegioes($i("i3geoLocregiaoTipoRegiao"));
 	    }
+	    */
 	},
 
 	/**
@@ -149,10 +152,18 @@ i3GEOF.locregiao = {
 		ins = '',
 		i,n,icone;
 		if(i3GEOF.locregiao._parameters.ATIVAFILTRO === true){
-		    icone = '<span style="cursor:pointer;" onclick="i3GEOF.locregiao.aplicaFiltro(this.parentNode.firstChild.firstChild.value,'+dados.regiaopai+')" class="material-icons" title="Aplica filtro">filter_list</span>';
+		    icone = Mustache.render(i3GEO.template.botoes.listaDeIcones, {
+			title: "Aplica filtro",
+			onclick: "i3GEOF.locregiao.aplicaFiltro(this.parentNode.firstChild.firstChild.value,'" + dados.regiaopai + "')",
+			icone: "filter_list"
+		    });
 		}
 		else{
-		    icone = '<span style="cursor:pointer;margin:auto;" onclick="i3GEOF.locregiao.zoom(this.parentNode.firstChild.firstChild.value)" class="material-icons" title="Zoom para...">search</span>';
+		    icone = Mustache.render(i3GEO.template.botoes.listaDeIcones, {
+			title: "Zoom para...",
+			onclick: "i3GEOF.locregiao.zoom(this.parentNode.firstChild.firstChild.value)",
+			icone: "search"
+		    });
 		}
 		if(dados.valores == ""){
 		    n = dados.regioes.length;

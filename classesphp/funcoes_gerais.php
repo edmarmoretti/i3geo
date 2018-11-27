@@ -643,7 +643,17 @@ function restauraCon($map_file, $postgis_mapa)
         $objMap->save($map_file);
     }
 }
-
+/*
+ * Function: restauraConObj
+ *
+ * Esconde a string de conex&atilde;o com o banco, caso necess&aacute;rio
+ *
+ * Parametros:
+ *
+ * $map_file {string} - arquivo mapfile
+ *
+ * $postgis_mapa {string} - lista de conex&atilde;o com o banco
+ */
 function restauraConObj($objMap, $postgis_mapa)
 {
     if (! empty($postgis_mapa)) {

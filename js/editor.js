@@ -115,6 +115,16 @@ i3GEO.editor =
 		i3GEO.editor._mascCompose = [a,b];
 	    }
 	},
+	restoreStyleDefault : function(feature){
+	    var p = feature.getProperties();
+	    if(p["styleDefault"]){
+		feature.setStyle(p["styleDefault"].clone());
+	    }
+	},
+	setStyleDefault : function(feature){
+	    var p = feature.getProperties();
+	    feature.setProperties({"styleDefault": feature.getStyle().clone()});
+	},
 	sel: {
 	    unselFeature : function(id) {
 		i3GEO.editor.sel.un(id);
@@ -170,40 +180,6 @@ i3GEO.editor =
 		i3GEO.editor._idsSelecionados = [];
 		i3GEO.editor.tableRefresh();
 	    },
-	    setPropertiesDefault : function(feature){
-		var style = feature.getStyle();
-		if(style && style.getImage()){
-		    if(style.getImage().getSrc){
-			feature.setProperties({
-			    fillColor: "",
-			    strokeColor: "",
-			    externalGraphic: style.getImage().getSrc(),
-			    graphicHeight : style.getImage().getSize()[1],
-			    graphicWidth : style.getImage().getSize()[0]
-			});
-		    }
-		    else{
-			feature.setProperties({
-			    fillColor: style.getImage().getFill().getColor(),
-			    strokeColor: style.getImage().getStroke().getColor(),
-			    externalGraphic: "",
-			    graphicHeight: "",
-			    graphicWidth: ""
-			});
-		    }
-		} else if (style){
-		    if(style.getFill()){
-			feature.setProperties({
-			    fillColor: style.getFill().getColor()
-			});
-		    }
-		    if(style.getStroke()){
-			feature.setProperties({
-			    strokeColor: style.getStroke().getColor()
-			});
-		    }
-		}
-	    },
 	    all: function(idfeature){
 		if(!idfeature){
 		    i3GEO.editor.sel.un();
@@ -224,10 +200,9 @@ i3GEO.editor =
 		    if(i3GEO.editor._idsSelecionados.indexOf(id) < 0){
 			i3GEO.editor._idsSelecionados.push(id);
 		    }
-		    i3GEO.editor.sel.setPropertiesDefault(f);
 		    st = f.getStyle();
 		    //para o caso de pontos
-		    if(st && st.getImage()){
+		    if(st && st.getImage && st.getImage()){
 			f.setStyle(
 				new ol.style.Style({
 				    image: new ol.style.Circle({
@@ -244,10 +219,10 @@ i3GEO.editor =
 			);
 		    }
 		    else if (st){
-			if(st.getFill()){
+			if(st.getFill && st.getFill()){
 			    st.getFill().setColor('rgba(255, 255, 255, 0.5)');
 			}
-			if(st.getStroke()){
+			if(st.getStroke && st.getStroke()){
 			    st.getStroke().setColor('blue');
 			}
 		    }
@@ -264,9 +239,10 @@ i3GEO.editor =
 		    }
 		    f = s.getFeatureById(i3GEO.editor._idsSelecionados[i]);
 		    if(f){
+			i3GEO.editor.restoreStyleDefault(f);
+			/*
 			st = f.getStyle();
-			//caso de ponto
-			if(st && st.getImage()){
+			if(st && st.getImage && st.getImage()){
 			    if(st.getImage().getSrc || f.getProperties().externalGraphic != ""){
 				f.setStyle(
 					new ol.style.Style({
@@ -295,13 +271,14 @@ i3GEO.editor =
 			    }
 			}
 			else if(st){
-			    if(f.getProperties().fillColor){
+			    if(st.getFill && st.getFill() && f.getProperties().fillColor){
 				st.getFill().setColor(f.getProperties().fillColor);
 			    }
-			    if(f.getProperties().strokeColor){
+			    if(st.getStroke && st.getStroke() && f.getProperties().strokeColor){
 				st.getStroke().setColor(f.getProperties().strokeColor);
 			    }
 			}
+			 */
 		    }
 		}
 		if(id){
@@ -332,13 +309,11 @@ i3GEO.editor =
 			    i3GEO.editor.sel.unselFeature(id);
 			}
 			else{
-			    id = i3GEO.util.uid();
+			    //id = i3GEO.util.uid();
 			    i3GEO.editor._idsSelecionados.push(id);
-			    f.setId(id);
-
+			    //f.setId(id);
 			    s = f.getStyle();
-
-			    if(s && s.getImage()){
+			    if(s && s.getImage && s.getImage()){
 				f.setStyle(
 					new ol.style.Style({
 					    image: new ol.style.Circle({
@@ -429,6 +404,7 @@ i3GEO.editor =
 		    proc = fwkt.readFeature(proc);
 		    proc.setId(i3GEO.util.uid());
 		    proc.setStyle(style);
+		    i3GEO.editor.setStyleDefault(proc);
 		    return proc;
 		};
 
@@ -472,6 +448,7 @@ i3GEO.editor =
 		    });
 		    feature.setId(i3GEO.util.uid());
 		    feature.setStyle(i3GEO.editor.getPolygonStyle());
+		    i3GEO.editor.setStyleDefault(feature);
 		    return feature;
 		}
 		if(process == "convexHull"){
@@ -613,6 +590,7 @@ i3GEO.editor =
 		    evt.feature.setStyle(
 			    i3GEO.editor.getPolygonStyle()
 		    );
+		    i3GEO.editor.setStyleDefault(evt.feature);
 		    evt.feature.setId(i3GEO.util.uid());
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		    i3GEO.editor.removeInteracoes();
@@ -641,6 +619,7 @@ i3GEO.editor =
 		    evt.feature.setStyle(
 			    i3GEO.editor.getTextStyle()
 		    );
+		    i3GEO.editor.setStyleDefault(evt.feature);
 		    evt.feature.setId(i3GEO.util.uid());
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		    i3GEO.editor.removeInteracoes();
@@ -667,6 +646,7 @@ i3GEO.editor =
 		    evt.feature.setStyle(
 			    i3GEO.editor.getPointStyle()
 		    );
+		    i3GEO.editor.setStyleDefault(evt.feature);
 		    evt.feature.setId(i3GEO.util.uid());
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		    i3GEO.editor.removeInteracoes();
@@ -696,6 +676,7 @@ i3GEO.editor =
 		    evt.feature.setStyle(
 			    i3GEO.editor.getLineStringStyle()
 		    );
+		    i3GEO.editor.setStyleDefault(evt.feature);
 		    evt.feature.setId(i3GEO.util.uid());
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		    i3GEO.editor.removeInteracoes();
@@ -722,6 +703,7 @@ i3GEO.editor =
 		    evt.feature.setStyle(
 			    i3GEO.editor.getPolygonStyle()
 		    );
+		    i3GEO.editor.setStyleDefault(evt.feature);
 		    evt.feature.setId(i3GEO.util.uid());
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		    i3GEO.editor.removeInteracoes();
@@ -747,6 +729,7 @@ i3GEO.editor =
 		    evt.feature.setStyle(
 			    i3GEO.editor.getPolygonStyle()
 		    );
+		    i3GEO.editor.setStyleDefault(evt.feature);
 		    evt.feature.setId(i3GEO.util.uid());
 		    i3GEO.desenho.layergrafico.getSource().addFeature(evt.feature);
 		    i3GEO.editor.removeInteracoes();
@@ -763,6 +746,19 @@ i3GEO.editor =
 	    }
 	},
 	removeInteracoes: function(){
+	    if(i3GEO.editor._interacoes instanceof ol.interaction.Modify) {
+		var s, i, nsel, f;
+		nsel = i3GEO.editor._idsSelecionados.length;
+		s = i3GEO.desenho.layergrafico.getSource();
+		for(i=0; i<nsel; i++){
+		    f = s.getFeatureById(i3GEO.editor._idsSelecionados[i]);
+		    if(f){
+			i3GEO.editor.restoreStyleDefault(f);
+		    }
+		}
+		i3GEO.editor._idsSelecionados = [];
+		i3GEO.editor.tableRefresh();
+	    }
 	    i3geoOL.removeInteraction(i3GEO.editor._interacoes);
 	    i3GEO.editor._interacoes = "";
 	},
@@ -771,6 +767,7 @@ i3GEO.editor =
 	    if(f){
 		i3GEO.editor._featuresBackup.push(f.clone());
 		s.removeFeature(f);
+		i3GEO.editor._idsSelecionados.remove(id);
 		i3GEO.editor.tableRefresh();
 	    }
 	},
@@ -785,6 +782,9 @@ i3GEO.editor =
 		f = i3GEO.desenho.layergrafico.getSource().getFeatureById(i3GEO.editor._idsSelecionados[nsel - 1]);
 		i3GEO.editor._featuresBackup.push(f.clone());
 		c = new ol.Collection();
+		f.setStyle(
+			i3GEO.editor.getVerticeStyle("0,0,255")
+		);
 		c.push(f);
 		draw = new ol.interaction.Modify({
 		    features: c,
@@ -851,12 +851,14 @@ i3GEO.editor =
 		    botoes.push({
 			"onclick": "i3GEO.editor.sel.un('" + id + "')",
 			"title": "Unsel",
-			"icone": "check_box_outline_blank"
+			"icone": "check_box_outline_blank",
+			"estiloicon": "color:orange"
 		    });
 		    botoes.push({
 			"onclick": "i3GEO.editor.sel.all('" + id + "')",
 			"title": "Sel",
-			"icone": "check_box"
+			"icone": "check_box_outline_blank",
+			"estiloicon": "color:blue"
 		    });
 		    botoes.push({
 			"onclick": "i3GEO.editor.exportFeatureById('" + id + "')",
@@ -1279,16 +1281,42 @@ i3GEO.editor =
 		})
 	    });
 	},
-	getLineStringStyle: function(){
+	getLineStringStyle: function(strokecolor){
+	    if(!strokecolor){
+		strokecolor = i3GEO.editor._simbologia.strokeColor;
+	    }
 	    return new ol.style.Style({
 		stroke: new ol.style.Stroke({
-		    color: 'rgba(' + i3GEO.editor._simbologia.strokeColor + ',' + i3GEO.editor._simbologia.opacidade + ')',
+		    color: 'rgba(' + strokecolor + ',' + i3GEO.editor._simbologia.opacidade + ')',
 		    width: i3GEO.editor._simbologia.strokeWidth
 		}),
 		fill: new ol.style.Fill({
 		    color: 'rgba(' + i3GEO.editor._simbologia.fillColor + ',' + i3GEO.editor._simbologia.opacidade + ')'
 		})
 	    });
+	},
+	getVerticeStyle: function(strokecolor){
+	    if(!strokecolor){
+		strokecolor = i3GEO.editor._simbologia.strokeColor;
+	    }
+	    var v = new ol.style.Style({
+		image: new ol.style.Circle({
+		    radius: i3GEO.editor._simbologia.pointRadius,
+		    fill: new ol.style.Fill({
+			color: 'rgba(' + i3GEO.editor._simbologia.fillColor + ',' + i3GEO.editor._simbologia.opacidade + ')'
+		    }),
+		    stroke: new ol.style.Stroke({
+			color: 'rgba(' + strokecolor + ',' + i3GEO.editor._simbologia.opacidade + ')',
+			width: i3GEO.editor._simbologia.pointRadius / 3
+		    })
+		}),
+		geometry: function(feature) {
+		    // return the coordinates of the first ring of the polygon
+		    var coordinates = feature.getGeometry().getCoordinates()[0];
+		    return new ol.geom.MultiPoint(coordinates);
+		}
+	    });
+	    return [i3GEO.editor.getLineStringStyle(strokecolor),v];
 	},
 	getPointStyle: function(){
 	    var simbolo, url;
