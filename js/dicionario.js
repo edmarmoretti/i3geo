@@ -2815,11 +2815,11 @@ g_traducao =
                 es : "no publicado"
             }
         ],
-        "operacoesMapaTema" : [
+        "operacoesMapa" : [
             {
-                pt : "Opera&ccedil;&otilde;es sobre o mapa ou tema",
-                en : "Operations on the map or theme",
-                es : "Operaciones sobre el mapa o tema"
+                pt : "Opera&ccedil;&otilde;es sobre o mapa",
+                en : "Operations on the map",
+                es : "Operaciones sobre el mapa"
             }
         ],
         "descMenuAjuda" : [
@@ -2843,11 +2843,11 @@ g_traducao =
                 es : "Guardar y cargar mapfile, lista de mapas..."
             }
         ],
-        "descOperacoesMapaTema" : [
+        "descOperacoesMapa" : [
             {
-                pt : "Tabela, legenda, imprimir,  upload, navega&ccedil;&atilde;o...",
-                en : "Table, legend, print, upload, browsing...",
-                es : "Tabla, leyenda, impresi&oacute;n, carga, navegaci&oacute;n..."
+                pt : "Inserir pontos, filtro de cores, fundo, m&aacute;scara...",
+                en : "",
+                es : ""
             }
         ],
         "descOgcWms" : [
@@ -3221,6 +3221,27 @@ g_traducao =
         "selcomboeditavel" : [
             {
                 pt : "Escolha a camada onde os dados ser&atilde;o inseridos",
+                en : "",
+                es : ""
+            }
+        ],
+        "camadaligada" : [
+            {
+                pt : "Camada foi ligada",
+                en : "",
+                es : ""
+            }
+        ],
+        "camadadesligada" : [
+            {
+                pt : "Camada foi desligada",
+                en : "",
+                es : ""
+            }
+        ],
+        "addcamada" : [
+            {
+                pt : "Aducionar camada ao mapa",
                 en : "",
                 es : ""
             }

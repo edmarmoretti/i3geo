@@ -81,7 +81,7 @@ if($itemagruparel != ""  && !in_array($itemagruparel,$itensrel))
 $mapa = ms_newMapObj($map_file);
 substituiConObj($mapa,$postgis_mapa);
 if($ext && $ext != ""){
-	$e = explode(" ",$ext);
+	$e = explode(" ",str_replace(","," ",$ext));
 	$extatual = $mapa->extent;
 	$extatual->setextent((min($e[0],$e[2])),(min($e[1],$e[3])),(max($e[0],$e[2])),(max($e[1],$e[3])));
 }
@@ -153,6 +153,7 @@ restauraCon($map_file,$postgis_mapa);
 
 if(isset($_GET["tiporel"]) && $_GET["tiporel"] == "csv"){
 	ob_end_clean();
+	header("Content-Disposition: attachment; filename=relatorio.csv");
 	header("Content-type: text/csv");
 	echo implode(";",explode(",",$nomesrel));
 	if($arearel == "true"){

@@ -12,9 +12,9 @@ Sobre segurança: https://softwarepublico.gov.br/gitlab/i3geo/i3geo/wikis/notas-
 
 # Guia de instalação
 
-O i3Geo pode ser instalado em diferentes sistemas operacionais Linux e também no Windows. Nesse tutorial será mostrado como instalar no Windows e no Ubuntu.
+O i3Geo pode ser instalado em diferentes sistemas operacionais Linux e também no Windows (para esse último recomenda-se o uso do Docker). Nesse tutorial será mostrado como instalar no Windows e no Ubuntu.
 
-Os arquivos do i3Geo estão disponíveis no Portal do Software Público Brasileiro (SPB). Para ter acesso a eles é desejável fazer um cadastro. O SPB, utiliza o Git, um sistema de controle de versões para disponibilizar o código. Assim, para obter os arquivos do i3Geo é necessário ter um cliente Git. No Windows pode ser utilizado o Tortoise. A utilização do Git é importante pois você poderá atualizar o software sempre que achar necessário.
+Os arquivos do i3Geo estão disponíveis no Portal do Software Público Brasileiro (SPB). Para ter acesso a eles é desejável fazer um cadastro. O SPB, utiliza o Git, um sistema de controle de versões para disponibilizar o código. Assim, para obter os arquivos do i3Geo diretamente é necessário ter um cliente Git. A utilização do Git é importante pois você poderá atualizar o software sempre que achar necessário.
 
 ## Docker
 
@@ -131,7 +131,7 @@ sudo mkdir /tmp/ms_tmp
 sudo ln -s /tmp/ms_tmp /var/www/html/ms_tmp
 ```
 
-Caso queira usar o software em conjunto com o i3Geo:
+Caso queira usar o software R em conjunto com o i3Geo:
 
 ```
 sudo apt-get install r-cran-spatstat

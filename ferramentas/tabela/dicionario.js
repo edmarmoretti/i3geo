@@ -254,5 +254,10 @@ i3GEOF.tabela.dicionario = {
 		pt : "Opera&ccedil;&otilde;es que s&atilde;o executadas considerando a lista de registros marcados",
 		en : "",
 		es : ""
+	} ],
+	'tipoextent' : [ {
+		pt : "Considerar apenas a regi&atilde;o vista no mapa",
+		en : "",
+		es : ""
 	} ]
 };

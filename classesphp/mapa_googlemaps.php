@@ -78,7 +78,7 @@ session_start([
 if (@$_SESSION["fingerprint"]) {
     $f = explode(",", $_SESSION["fingerprint"]);
     if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0]) {
-        ilegal();
+        ilegal("red");
     }
 } else {
     exit();
@@ -595,9 +595,9 @@ function filtraImg($nomer, $tipoimagem)
     }
 }
 
-function ilegal()
+function ilegal($img="")
 {
-    $img = imagecreatefrompng("../imagens/ilegal.png");
+    $img = imagecreatefrompng("../imagens/ilegal".$img.".png");
     imagealphablending($img, false);
     imagesavealpha($img, true);
     ob_clean();

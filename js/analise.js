@@ -136,7 +136,7 @@ i3GEO.analise =
 	     *
 	     * Ferramenta linha do tempo
 	     */
-	    linhaDoTempo : function() {
+	    linhadotempo : function() {
 		i3GEO.janela.cria(
 			"650px",
 			"450px",

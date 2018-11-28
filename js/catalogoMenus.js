@@ -60,6 +60,11 @@ i3GEO.catalogoMenus = {
 		if(ck != false && ck.onclick){
 		    ck.checked = !ck.checked;
 		    ck.onclick.call(ck);
+		    if(ck.checked == true){
+			i3GEO.janela.tempoMsg($trad("camadaligada"));
+		    } else {
+			i3GEO.janela.tempoMsg($trad("camadadesligada"));
+		    }
 		} else {
 		    i3GEO.janela.tempoMsg($trad("x76"));
 		}

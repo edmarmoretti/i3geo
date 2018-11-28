@@ -606,7 +606,11 @@ i3GEOF.tabela =
 		$i("i3GEOtabelanomesrelh").value = listanomes;
 		$i("i3GEOtabelaitensrelh").value = listai;
 		temp = $i("i3GEOtabelarelatorio").action;
-		$i("i3GEOtabelarelatorio").action += "?ext=" + i3GEO.parametros.mapexten;
+		if($i("i3GEOtabelatipoextent").checked){
+		    $i("i3GEOtabelarelatorio").action += "?ext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		} else {
+		    $i("i3GEOtabelarelatorio").action += "?ext=-180 -90 180 90";
+		}
 		$i("i3GEOtabelarelatorio").submit();
 		$i("i3GEOtabelarelatorio").action = temp;
 	    } catch (e) {
