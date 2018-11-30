@@ -28,7 +28,7 @@ Em seguida, acesse um navegador de sua preferência e insira o seguinte endereç
 
 `http://localhost/i3geo`
 
-Mais opções em https://hub.docker.com/u/i3geo/dashboard/
+Mais opções em https://hub.docker.com/u/i3geo/
 
 Dicas sobre Docker: https://www.digitalocean.com/community/tutorials/como-instalar-e-utilizar-o-docker-primeiros-passos-pt
 

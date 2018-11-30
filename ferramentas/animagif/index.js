@@ -57,12 +57,15 @@ i3GEOF.animagif = {
 		    });
 	    i3GEOF.animagif.comboTemas();
 	    i3f.t0();
+	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
+		$("#i3GEOFanimagift1").find(".hidden").removeClass("hidden");
+	    }
 	},
 	t0: function(){
 	    i3GEO.util.proximoAnterior("","i3GEOF.animagif.t1()","","i3GEOF.animagif.t0","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
 	},
 	t1: function(){
-	    i3GEO.util.proximoAnterior("i3GEOF.animagif.t0()","i3GEOF.animagif.t2()","","i3GEOF.animagif.t1","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
+	    i3GEO.util.proximoAnterior("i3GEOF.animagif.t0()","i3GEOF.animagif.t2()","","i3GEOFanimagift1","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
 	},
 	t2: function(){
 	    i3GEO.util.proximoAnterior("i3GEOF.animagif.t1()","i3GEOF.animagif.t3()","","i3GEOF.animagif.t2","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
