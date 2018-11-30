@@ -1,37 +1,73 @@
-
 if(typeof(i3GEOF) === 'undefined'){
     var i3GEOF = {};
 }
-
 i3GEOF.linhadotempo = {
-	/*
-	Variavel: aguarde
-
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-	 */
-	aguarde: "",
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-	    var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.linhadotempo.dicionario);
-	    return dicionario;
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "tema": "",
+	    "mustache": "",
+	    "idContainer": "i3GEOlinhadotempoContainer",
+	    "namespace": "linhadotempo"
 	},
-	tema : "",
-	iddiv: "",
-	/*
-	Function: inicia
+	start : function(tema){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/"+p.namespace+"/template_mst.html";
+	    p.tema = tema;
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.get(t1).done(function(r1) {
+		    p.mustache = r1;
+		    i3f.html();
+		    i3GEO.janela.fechaAguarde();
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
+	},
+	destroy: function(){
+	    //nao use this aqui
+	},
+	html:function() {
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			footer: true,
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width':'', 'height': '50%','position': 'fixed','top': 0, 'left': 0, 'right': 0, bottom: 'unset', 'margin': 'auto'}
+		    });
+	    i3GEOF.linhadotempo.comboTemas();
+	    i3GEOF.linhadotempo.parametrosAtuais();
+	    i3f.t0();
+	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
+		//$("#i3GEOFanimagift1").find(".hidden").removeClass("hidden");
+	    }
+	},
+	t0: function(){
+	    i3GEO.util.proximoAnterior("","i3GEOF.linhadotempo.t1()","","i3GEOF.linhadotempo.t0","i3GEOlinhadotemporesultado",true,"i3GEOToolFormModalFooter");
+	},
+	t1: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.animagif.t0()","i3GEOF.animagif.t2()","","i3GEOFanimagift1","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
+	},
 
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	 */
 	inicia: function(iddiv){
 	    if(i3GEOF.linhadotempo.MUSTACHE == ""){
 		$.get(i3GEO.configura.locaplic + "/ferramentas/linhadotempo/template_mst.html", function(template) {
@@ -56,63 +92,6 @@ i3GEOF.linhadotempo = {
 		i3GEOF.linhadotempo.parametrosAtuais();
 	    }
 	    catch(erro){i3GEO.janela.tempoMsg(erro);}
-	},
-	/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-	 */
-	html:function() {
-	    var ins = Mustache.render(i3GEOF.linhadotempo.MUSTACHE, i3GEOF.linhadotempo.mustacheHash());
-	    return ins;
-	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-	 */
-	iniciaJanelaFlutuante: function(){
-	    var janela,divid,temp,titulo,cabecalho,minimiza;
-	    i3GEOF.linhadotempo.tema = i3GEO.temaAtivo;
-	    if ($i("i3GEOF.linhadotempo")) {
-		return;
-	    }
-	    cabecalho = function(){};
-	    minimiza = function(){
-		i3GEO.janela.minimiza("i3GEOF.linhadotempo");
-	    };
-	    //cria a janela flutuante
-	    titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("opt",i3GEOF.linhadotempo.dicionario)+"</span></div>";
-	    janela = i3GEO.janela.cria(
-		    "400px",
-		    "500px",
-		    "",
-		    "",
-		    "",
-		    titulo,
-		    "i3GEOF.linhadotempo",
-		    false,
-		    "hd",
-		    cabecalho,
-		    minimiza,
-		    "",
-		    true,
-		    "",
-		    "",
-		    "",
-		    "",
-		    "88"
-	    );
-	    divid = janela[2].id;
-	    $i("i3GEOF.linhadotempo_corpo").style.backgroundColor = "white";
-	    $i("i3GEOF.linhadotempo_corpo").style.textAlign = "left";
-	    i3GEOF.linhadotempo.aguarde = $i("i3GEOF.linhadotempo_imagemCabecalho").style;
-	    i3GEOF.linhadotempo.inicia(divid);
-	    YAHOO.util.Event.addListener(janela[0].close, "click", temp);
 	},
 
 	salva: function(){

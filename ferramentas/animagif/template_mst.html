@@ -14,14 +14,14 @@
                         </div>
                     </div>
                 </form>
-                <div class="checkbox text-left hidden">
+                <div class="checkbox text-left {{{login}}}">
                     <label>
                         <input id='ativaAoAdic' type="checkbox">
                         <span class="checkbox-material noprint"> <span class="check"></span>
                         </span> {{{ativaAoAdic}}}
                     </label>
                 </div>
-                <div class="checkbox text-left hidden">
+                <div class="checkbox text-left {{{login}}}">
                     <label>
                         <input id='execAoAdic' type="checkbox">
                         <span class="checkbox-material noprint"> <span class="check"></span>
@@ -134,10 +134,10 @@
                     <button onclick='i3GEOF.animagif.ativa(this)' class='btn btn-primary btn-sm btn-raised'>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{geragif}}}
                     </button>
-                    <button onclick='i3GEOF.animagif.salvaParametros(this)' class='btn btn-primary btn-sm btn-raised '>
+                    <button onclick='i3GEOF.animagif.salvaParametros(this)' class='{{{login}}} btn btn-primary btn-sm btn-raised '>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{salvaParametros}}}
                     </button>
-                    <button onclick='i3GEOF.animagif.removeParametros(this)' class='btn btn-primary btn-sm btn-raised '>
+                    <button onclick='i3GEOF.animagif.removeParametros(this)' class='{{{login}}} btn btn-primary btn-sm btn-raised '>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{removeParametros}}}
                     </button>
                 </div>

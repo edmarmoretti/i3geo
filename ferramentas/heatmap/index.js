@@ -162,7 +162,7 @@ i3GEOF.heatmap = {
 		    "i3GEOheatmapSelTemas",
 		    "",
 		    false,
-		    "ligados",
+		    "comTabela",
 		    " ",
 		    false,
 		    true,

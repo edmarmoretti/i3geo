@@ -36,12 +36,16 @@ i3GEOF.animagif = {
 	    i3f = this,
 	    hash = {};
 	    hash = {
+		    login: "hidden",
 		    locaplic: i3GEO.configura.locaplic,
 		    namespace: p.namespace,
 		    idContainer: p.idContainer,
 		    mapext: i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten),
 		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
 	    };
+	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
+		hash.login = "";
+	    }
 	    i3f.renderFunction.call(
 		    this,
 		    {
@@ -57,9 +61,6 @@ i3GEOF.animagif = {
 		    });
 	    i3GEOF.animagif.comboTemas();
 	    i3f.t0();
-	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
-		$("#i3GEOFanimagift1").find(".hidden").removeClass("hidden");
-	    }
 	},
 	t0: function(){
 	    i3GEO.util.proximoAnterior("","i3GEOF.animagif.t1()","","i3GEOF.animagif.t0","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
