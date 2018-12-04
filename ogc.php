@@ -1254,7 +1254,6 @@ if(!isset($OUTPUTFORMAT) && !headers_sent()){
     header("Content-type: $contenttype");
 }
 //$ogrOutput vem de ms_configura.php
-
 //precisa limpar o cabecalho
 if(strtolower($OUTPUTFORMAT) == "geojson" || strtolower($OUTPUTFORMAT) == "json"){
 	$arq = $dir_tmp."/".$tema.".json";
@@ -1710,6 +1709,7 @@ function exportaGeojson(){
 	include("pacotes/gisconverter/gisconverter.php");
 	$decoder = new gisconverter\WKT();
 	$layer = $oMap->getlayer(0);
+	$layer->setmetadata("wfs_getfeature_formatlist","geojson");
 	$items = pegaItens($layer,$oMap);
 	$layer->querybyrect($oMap->extent);
 	$layer->open();
@@ -1730,7 +1730,7 @@ function exportaGeojson(){
 			if(is_string($v)){
 				$v = '"'.converteenc($v).'"';
 			}
-			$propriedades[] = array($item=>$v);
+			$propriedades[$item] = $v;
 		}
 		$wkt = $shape->towkt();
 
@@ -1746,7 +1746,8 @@ function exportaGeojson(){
 	);
 	$contents = json_encode($n[0]);
 	$contents = str_replace('\"','',$contents);
-	file_put_contents($arq.".json",$contents);
+
+	file_put_contents(str_replace(".json","",$arq).".json",$contents);
 	ob_clean();
 	header("Content-type: application/json; subtype=geojson");
 	echo $contents;

@@ -1,50 +1,101 @@
-<div style='margin-left: 5px'>
-	<p class='paragrafo'>{{{colunasTxt}}}:</p>
-	<div id="i3GEOlinhadotempocolunas">
-	</div>
-	<br>
-	<p class='paragrafo'>{{{ltempoformatodata}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoformatodata' />
-	</div>
-	<p class='paragrafo'>{{{ltempoiteminicio}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoiteminicio' />
-	</div>
-	<p class='paragrafo'>{{{ltempoitemfim}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoitemfim' />
-	</div>
-	<p class='paragrafo'>{{{ltempoitemtitulo}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoitemtitulo' />
-	</div>
-	<p class='paragrafo'>{{{ltempoitemdescricao}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoitemdescricao' />
-	</div>
-	<p class='paragrafo'>{{{ltempoconvencode}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoconvencode' />
-	</div>
-	<p class='paragrafo'>{{{ltempoitemtip}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoitemtip' />
-	</div>
-	<p class='paragrafo'>{{{ltempoitemimagem}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoitemimagem' />
-	</div>
-	<p class='paragrafo'>{{{ltempoitemicone}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoitemicone' />
-	</div>
-	<p class='paragrafo'>{{{ltempoitemlink}}}:</p>
-	<div class='i3geoForm i3geoFormIconeEdita'>
-		<input type='text' value='' id='i3GEOlinhadotempoltempoitemlink' />
-	</div>
-	<br>
-	<p class='paragrafo'>
-		<input onclick='i3GEOF.linhadotempo.salva(this)' id='i3GEOlinhadotempobotao1' size='16' type='button' value='{{{aplica}}}' />
-	</p>
+<div id='{{idContainer}}' class='container' style='width: auto; text-align: left; display: block; overflow: auto; z-index: 100; height: 100%;'>
+    <div class='container-fluid'>
+        <div id='i3GEOlinhadotemporesultado'>
+            <div id='i3GEOF.linhadotempo.t0'>
+                <img class="img-rounded" style="margin: 5px; width: 40px;" src='{{{locaplic}}}/ferramentas/linhadotempo/exemplo.png' />
+                <h5>{{{descricao}}}</h5>
+            </div>
+            <div id='i3GEOFlinhadotempot1'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{selecionaTema}}}</label>
+                        <div class="col-md-6">
+                            <div id='i3GEOFlinhadotempoSelTemas'></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOFlinhadotempot2'>
+                <form class="form-horizontal">
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoformatodata}}}</label>
+                        <div class="col-md-6">
+                            <input type='text' value='' name='ltempoformatodata' class="form-control input-lg" />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoconvencode}}}</label>
+                        <div class="col-md-6">
+                            <input type='text' value='' name='ltempoconvencode' class="form-control input-lg" />
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoiteminicio}}}</label>
+                        <div class="col-md-6">
+                            <div id="i3GEOlinhadotempoltempoiteminicio"></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoitemfim}}}</label>
+                        <div class="col-md-6">
+                            <div id="i3GEOlinhadotempoltempoitemfim"></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoitemtitulo}}}</label>
+                        <div class="col-md-6">
+                            <div id="i3GEOlinhadotempoltempoitemtitulo"></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoitemdescricao}}}</label>
+                        <div class="col-md-6">
+                            <div id="i3GEOlinhadotempoltempoitemdescricao"></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoitemtip}}}</label>
+                        <div class="col-md-6">
+                            <div id="i3GEOlinhadotempoltempoitemtip"></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoitemimagem}}}</label>
+                        <div class="col-md-6">
+                            <div id="i3GEOlinhadotempoltempoitemimagem"></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoitemicone}}}</label>
+                        <div class="col-md-6">
+                            <div id="i3GEOlinhadotempoltempoitemicone"></div>
+                        </div>
+                    </div>
+                    <div class='form-group label-fixed condensed'>
+                        <label class="col-md-6 control-label">{{{ltempoitemlink}}}</label>
+                        <div class="col-md-6">
+                            <div id="i3GEOlinhadotempoltempoitemlink"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div id='i3GEOFlinhadotempot3'>
+                <div class='text-center'>
+                    <button onclick='i3GEOF.linhadotempo.ativa(this)' class='btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{aplica}}}
+                    </button>
+
+                    <button onclick='i3GEOF.linhadotempo.salvaparametros(this)' class='{{{xlogin}}} btn btn-primary btn-sm btn-raised'>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{salvaParametros}}}
+                    </button>
+
+                    <button onclick='i3GEOF.linhadotempo.removeParametros(this)' class='{{{xlogin}}} btn btn-primary btn-sm btn-raised '>
+                        <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{removeParametros}}}
+                    </button>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

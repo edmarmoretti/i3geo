@@ -231,20 +231,21 @@ i3GEOF.animagif = {
 		prog: i3GEO.configura.locaplic + "/ferramentas/storymap/exec.php"
 	    });
 	},
-	removeParametros: function(){
-	    if(i3GEOF.animagif.aguarde.visibility == "visible"){
-		return;
-	    }
-	    p = i3GEO.configura.locaplic + "/ferramentas/animagif/manutencao.php";
-	    par = "&g_sid=" + i3GEO.configura.sid
-	    + "&tema=" + i3GEOF.animagif.tema
-	    + "&funcao=remove";
-
-	    retorno = function(retorno) {
-		i3GEOF.animagif.aguarde.visibility = "hidden";
+	removeParametros: function(btn){
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    "tema": i3GEOF.animagif.tema,
+		    "g_sid": i3GEO.configura.sid,
+		    "funcao": "remove"
 	    };
-	    i3GEOF.animagif.aguarde.visibility = "visible";
-	    cpJSON.call(p, "foo", retorno, par);
+	    i3f.post({
+		snackbar: true,
+		btn: btn,
+		par: par,
+		refresh: false,
+		prog: i3GEO.configura.locaplic + "/ferramentas/animagif/exec.php"
+	    });
 	},
 	ativa : function(btn) {
 	    var p = this._parameters,

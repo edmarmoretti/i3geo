@@ -30,7 +30,7 @@
                             <input class="form-control input-lg" type='text' id='i3GEOTMEdesc' value='' />
                         </div>
                     </div>
-                    <div class="hidden" id='parametrosComLogin'>
+                    <div class="{{{login}}}">
                         <div class="checkbox text-left">
                             <label>
                                 <input checked id='ativaAoAdic' type="checkbox">
@@ -94,10 +94,10 @@
                     <button onclick="i3GEOF.tme.ativa()" class='btn btn-primary btn-sm btn-raised'>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{geraKml}}}
                     </button>
-                    <button onclick="i3GEOF.tme.salvaParametros()" class='btn btn-primary btn-sm btn-raised hidden'>
+                    <button onclick="i3GEOF.tme.salvaParametros()" class='{{{login}}} btn btn-primary btn-sm btn-raised '>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{salvaParametros}}}
                     </button>
-                    <button onclick="i3GEOF.tme.removeParametros()" class='btn btn-primary btn-sm btn-raised hidden'>
+                    <button onclick="i3GEOF.tme.removeParametros()" class='{{{login}}} btn btn-primary btn-sm btn-raised '>
                         <span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span> {{{removeParametros}}}
                     </button>
                 </div>

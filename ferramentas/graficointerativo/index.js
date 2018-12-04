@@ -152,7 +152,7 @@ i3GEOF.graficointerativo =
 			};
 		    },
 		    "i3GEOgraficointerativoComboTemas",
-		    "ligados",
+		    "comTabela",
 		    false,
 		    "",
 		    " ",

@@ -150,7 +150,7 @@ i3GEOF.markercluster = {
 		    "i3GEOmarkerclusterSelTemas",
 		    "",
 		    false,
-		    "ligados",
+		    "comTabela",
 		    " ",
 		    false,
 		    true,

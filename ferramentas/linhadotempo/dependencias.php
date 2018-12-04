@@ -12,9 +12,9 @@ if(extension_loaded('zlib')){
 	ob_start('ob_gzhandler');
 }
 header("Content-type: text/javascript");
-include("../../pacotes/simile/timeline_2.3.0/timeline_js/timeline-api.js");
 include("index.js");
 include("dicionario.js");
+//include("../../pacotes/simile/timeline_2.3.0/timeline_js/timeline-api.js");
 echo "\n";
 
 if(extension_loaded('zlib')){

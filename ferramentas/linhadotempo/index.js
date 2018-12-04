@@ -36,11 +36,15 @@ i3GEOF.linhadotempo = {
 	    i3f = this,
 	    hash = {};
 	    hash = {
+		    login: "hidden",
 		    locaplic: i3GEO.configura.locaplic,
 		    namespace: p.namespace,
 		    idContainer: p.idContainer,
 		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
 	    };
+	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
+		hash.login = "";
+	    }
 	    i3f.renderFunction.call(
 		    this,
 		    {
@@ -55,99 +59,172 @@ i3GEOF.linhadotempo = {
 			css: {'cursor': 'pointer', 'width':'', 'height': '50%','position': 'fixed','top': 0, 'left': 0, 'right': 0, bottom: 'unset', 'margin': 'auto'}
 		    });
 	    i3GEOF.linhadotempo.comboTemas();
-	    i3GEOF.linhadotempo.parametrosAtuais();
+	    //
 	    i3f.t0();
-	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim" ) {
-		//$("#i3GEOFanimagift1").find(".hidden").removeClass("hidden");
-	    }
 	},
 	t0: function(){
 	    i3GEO.util.proximoAnterior("","i3GEOF.linhadotempo.t1()","","i3GEOF.linhadotempo.t0","i3GEOlinhadotemporesultado",true,"i3GEOToolFormModalFooter");
 	},
 	t1: function(){
-	    i3GEO.util.proximoAnterior("i3GEOF.animagif.t0()","i3GEOF.animagif.t2()","","i3GEOFanimagift1","i3GEOanimagifresultado",true,"i3GEOToolFormModalFooter");
+	    i3GEO.util.proximoAnterior("i3GEOF.linhadotempo.t0()","i3GEOF.linhadotempo.t2()","","i3GEOFlinhadotempot1","i3GEOlinhadotemporesultado",true,"i3GEOToolFormModalFooter");
 	},
-
-	inicia: function(iddiv){
-	    if(i3GEOF.linhadotempo.MUSTACHE == ""){
-		$.get(i3GEO.configura.locaplic + "/ferramentas/linhadotempo/template_mst.html", function(template) {
-		    i3GEOF.linhadotempo.MUSTACHE = template;
-		    i3GEOF.linhadotempo.inicia(iddiv);
-		});
-		return;
-	    }
-	    var b,box;
-	    if(iddiv){
-		i3GEOF.linhadotempo.iddiv = iddiv;
-	    }
-	    try{
-		$i(iddiv).innerHTML = i3GEOF.linhadotempo.html();
-		b = new YAHOO.widget.Button(
-			"i3GEOlinhadotempobotao1",
-			{onclick:{fn: i3GEOF.linhadotempo.salva}}
-		);
-		b.addClass("rodar150");
-
-		i3GEO.janela.tempoMsg($trad('msg',i3GEOF.linhadotempo.dicionario));
+	t2: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.linhadotempo.t1()","i3GEOF.linhadotempo.t3()","","i3GEOFlinhadotempot2","i3GEOlinhadotemporesultado",true,"i3GEOToolFormModalFooter");
+	},
+	t3: function(){
+	    i3GEO.util.proximoAnterior("i3GEOF.linhadotempo.t2()","","","i3GEOFlinhadotempot3","i3GEOlinhadotemporesultado",true,"i3GEOToolFormModalFooter");
+	},
+	comboTemas: function(){
+	    i3GEO.util.comboTemas(
+		    "i3GEOFlinhadotempotemas",
+		    function(retorno){
+			$i("i3GEOFlinhadotempoSelTemas").innerHTML = retorno.dados;
+			$i("i3GEOFlinhadotempotemas").value = i3GEOF.linhadotempo._parameters.tema;
+			$i("i3GEOFlinhadotempotemas").onchange = function(){
+			    if(this.value != undefined){
+				i3GEOF.linhadotempo._parameters.tema = this.value;
+			    }
+			    if(this.value != ""){
+				i3GEOF.linhadotempo.comboItens();
+			    }
+			};
+			//caso os parametros estiverem definidos na camada
+			//preenche o formulario
+			if(i3GEOF.linhadotempo._parameters.tema !== ""){
+			    $i("i3GEOFlinhadotempotemas").onchange.call();
+			}
+		    },
+		    "i3GEOFlinhadotempoSelTemas",
+		    "",
+		    false,
+		    "comTabela",
+		    " ",
+		    false,
+		    true,
+		    "form-control"
+	    );
+	},
+	comboItens : function() {
+	    var temp = function(r) {
+		var opt = "";
+		for (const d of r.data.valores) {
+		    opt += "<option value='" + d["item"] + "' >" + d["item"] + "</option>";
+		}
+		var combo = function(dados, idonde, name) {
+		    var ins = "<select class='form-control' name='" + name + "' >";
+		    ins += "<option value='' >---</option>";
+		    ins += opt;
+		    ins += "</select>";
+		    $i(idonde).innerHTML = ins;
+		};
+		combo(r.data.valores, "i3GEOlinhadotempoltempoiteminicio","ltempoiteminicio");
+		combo(r.data.valores, "i3GEOlinhadotempoltempoitemfim","ltempoitemfim");
+		combo(r.data.valores, "i3GEOlinhadotempoltempoitemtitulo","ltempoitemtitulo");
+		combo(r.data.valores, "i3GEOlinhadotempoltempoitemdescricao","ltempoitemdescricao");
+		combo(r.data.valores, "i3GEOlinhadotempoltempoitemtip","ltempoitemtip");
+		combo(r.data.valores, "i3GEOlinhadotempoltempoitemimagem","ltempoitemimagem");
+		combo(r.data.valores, "i3GEOlinhadotempoltempoitemicone","ltempoitemicone");
+		combo(r.data.valores, "i3GEOlinhadotempoltempoitemlink","ltempoitemlink");
 		i3GEOF.linhadotempo.parametrosAtuais();
-	    }
-	    catch(erro){i3GEO.janela.tempoMsg(erro);}
-	},
-
-	salva: function(){
-	    if(i3GEOF.linhadotempo.aguarde.visibility === "visible"){
-		return;
-	    }
-	    i3GEOF.linhadotempo.aguarde.visibility = "visible";
-	    var temp,
-	    p,
-	    cp;
-	    temp = function(){
-		i3GEOF.linhadotempo.aguarde.visibility = "hidden";
-		//refresh iframe
-		$i("i3GEOF.linhaDoTempoi").src = $i("i3GEOF.linhaDoTempoi").src.split("?")[0] + "?_=" + new Date().getTime();
 	    };
-	    p = i3GEO.configura.locaplic+"/ferramentas/linhadotempo/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=salva&tema=" + i3GEOF.linhadotempo.tema
-	    + "&ltempoformatodata=" + $i("i3GEOlinhadotempoltempoformatodata").value
-	    + "&ltempoiteminicio=" + $i("i3GEOlinhadotempoltempoiteminicio").value
-	    + "&ltempoitemfim=" + $i("i3GEOlinhadotempoltempoitemfim").value
-	    + "&ltempoitemtitulo=" + $i("i3GEOlinhadotempoltempoitemtitulo").value
-	    + "&ltempoitemdescricao=" + $i("i3GEOlinhadotempoltempoitemdescricao").value
-	    + "&ltempoconvencode=" + $i("i3GEOlinhadotempoltempoconvencode").value
-	    + "&ltempoitemtip=" + $i("i3GEOlinhadotempoltempoitemtip").value
-	    + "&ltempoitemimagem=" + $i("i3GEOlinhadotempoltempoitemimagem").value
-	    + "&ltempoitemicone=" + $i("i3GEOlinhadotempoltempoitemicone").value
-	    + "&ltempoitemlink=" + $i("i3GEOlinhadotempoltempoitemlink").value;
-	    cp = new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.call(p,"foo",temp);
+	    i3GEO.php.listaItensTema(temp, i3GEOF.linhadotempo._parameters.tema);
 	},
 	parametrosAtuais: function(){
-	    i3GEOF.linhadotempo.aguarde.visibility = "visible";
-	    var p = i3GEO.configura.locaplic+"/ferramentas/linhadotempo/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=parametros&tema=" + i3GEOF.linhadotempo.tema,
-	    cp = new cpaint(),
-	    temp = function(retorno){
-		try{
-		    if(retorno.data !== ""){
-			$i("i3GEOlinhadotempocolunas").innerHTML = retorno.data.colunas;
-			$i("i3GEOlinhadotempoltempoformatodata").value = retorno.data.ltempoformatodata;
-			$i("i3GEOlinhadotempoltempoiteminicio").value = retorno.data.ltempoiteminicio;
-			$i("i3GEOlinhadotempoltempoitemfim").value = retorno.data.ltempoitemfim;
-			$i("i3GEOlinhadotempoltempoitemtitulo").value = retorno.data.ltempoitemtitulo;
-			$i("i3GEOlinhadotempoltempoitemdescricao").value = retorno.data.ltempoitemdescricao;
-			$i("i3GEOlinhadotempoltempoconvencode").value = retorno.data.ltempoconvencode;
-			$i("i3GEOlinhadotempoltempoitemtip").value = retorno.data.ltempoitemtip;
-			$i("i3GEOlinhadotempoltempoitemimagem").value = retorno.data.ltempoitemimagem;
-			$i("i3GEOlinhadotempoltempoitemicone").value = retorno.data.ltempoitemicone;
-			$i("i3GEOlinhadotempoltempoitemlink").value = retorno.data.ltempoitemlink;
-		    }
-		    i3GEOF.linhadotempo.aguarde.visibility = "hidden";
-		}catch(e){
-		    i3GEO.janela.tempoMsg("Erro. "+e);
-		    i3GEOF.linhadotempo.aguarde.visibility = "hidden";
-		}
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    "tema": i3GEOF.linhadotempo._parameters.tema,
+		    "g_sid": i3GEO.configura.sid,
+		    "funcao": "parametros"
 	    };
-	    cp.set_response_type("JSON");
-	    cp.call(p,"foo",temp);
+	    i3f.post({
+		snackbar: false,
+		btn: false,
+		par: par,
+		refresh: false,
+		fn: function(data){
+		    i3GEO.util.setFormData("#i3GEOFlinhadotempot2",data);
+		},
+		prog: i3GEO.configura.locaplic + "/ferramentas/linhadotempo/exec.php"
+	    });
+	},
+	removeParametros: function(btn){
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    "tema": i3GEOF.linhadotempo._parameters.tema,
+		    "g_sid": i3GEO.configura.sid,
+		    "funcao": "remove"
+	    };
+	    i3f.post({
+		snackbar: true,
+		btn: true,
+		par: par,
+		refresh: false,
+		prog: i3GEO.configura.locaplic + "/ferramentas/linhadotempo/exec.php"
+	    });
+	},
+	salvaparametros: function(btn){
+	    var p = this._parameters,
+	    i3f = this,
+	    par = {
+		    "tema": i3GEOF.linhadotempo._parameters.tema,
+		    "g_sid": i3GEO.configura.sid,
+		    "funcao": "salva",
+		    ...i3GEO.util.getFormData("#i3GEOFlinhadotempot2")
+	    };
+	    i3f.post({
+		snackbar: true,
+		btn: true,
+		par: par,
+		refresh: false,
+		prog: i3GEO.configura.locaplic + "/ferramentas/linhadotempo/exec.php"
+	    });
+	},
+	post: function({snackbar = true, btn = false, par = {}, refresh = false, prog = "exec", fn = false} = {}){
+	    var p = this._parameters,
+	    i3f = this;
+	    i3GEO.janela.abreAguarde();
+	    if(btn){
+		btn = $(btn);
+		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    }
+	    i3GEO.janela._formModal.block();
+	    par.g_sid = i3GEO.configura.sid;
+	    delete par["refresh"];
+	    $.post(
+		    prog,
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			if(snackbar){
+			    i3GEO.janela.snackBar({content: $trad('feito')});
+			}
+			if(refresh){
+			    i3GEO.arvoreDeCamadas.CAMADAS = [];
+			    i3GEO.atualiza();
+			    i3GEO.Interface.atualizaTema("", i3GEOF.linhadotempo._parameters.tema);
+			}
+			if(fn){
+			    fn(data);
+			}
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
 	}
 };

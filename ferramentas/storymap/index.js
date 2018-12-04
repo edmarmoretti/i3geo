@@ -36,11 +36,16 @@ i3GEOF.storymap = {
 	    i3f = this,
 	    hash = {};
 	    hash = {
+		    login: "hidden",
 		    locaplic: i3GEO.configura.locaplic,
 		    namespace: p.namespace,
 		    idContainer: p.idContainer,
 		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
 	    };
+	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
+		hash.login = "";
+	    }
+
 	    i3f.renderFunction.call(
 		    this,
 		    {
@@ -54,9 +59,6 @@ i3GEOF.storymap = {
 			},
 			css: {'cursor': 'pointer', 'width':'', 'height': '50%','position': 'fixed','top': 0, 'left': 0, 'right': 0, bottom: 'unset', 'margin': 'auto'}
 		    });
-	    if (i3GEO.login.verificaCookieLogin() === true && i3GEO.parametros.editor === "sim") {
-		$("#"+p.idContainer + " button").removeClass("hidden");
-	    }
 	    i3GEOF.storymap.comboTemas();
 	    i3f.t0();
 	},

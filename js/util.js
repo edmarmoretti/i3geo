@@ -190,27 +190,6 @@ Array.prototype.getUnique = function() {
 })();
 
 
-/*
-Math.round10(55.55, -1); // 55.6
-Math.round10(55.549, -1); // 55.5
-Math.round10(55, 1); // 60
-Math.round10(54.9, 1); // 50
-Math.round10(-55.55, -1); // -55.5
-Math.round10(-55.551, -1); // -55.6
-Math.round10(-55, 1); // -50
-Math.round10(-55.1, 1); // -60
-
-Math.floor10(55.59, -1); // 55.5
-Math.floor10(59, 1); // 50
-Math.floor10(-55.51, -1); // -55.6
-Math.floor10(-51, 1); // -60
-
-Math.ceil10(55.51, -1); // 55.6
-Math.ceil10(51, 1); // 60
-Math.ceil10(-55.59, -1); // -55.5
-Math.ceil10(-59, 1); // -50
- */
-
 i3GEO.util =
 {
 	/**
@@ -1176,14 +1155,14 @@ i3GEO.util =
 		script = document.createElement('script');
 		script.type = 'text/javascript';
 		if (ini !== "") {
-			script.onload = function() {
-			    i3GEO.janela.fechaAguarde();
-			    if (ini.call) {
-				ini.call();
-			    } else {
-				eval(ini);
-			    }
-			};
+		    script.onload = function() {
+			i3GEO.janela.fechaAguarde();
+			if (ini.call) {
+			    ini.call();
+			} else {
+			    eval(ini);
+			}
+		    };
 		} else {
 		    i3GEO.janela.fechaAguarde();
 		}
@@ -1443,13 +1422,10 @@ i3GEO.util =
 			    };
 			}
 		    }
+		    eval("funcao(temp);");
 		} else {
-		    temp = {
-			    dados : "<p style=color:red >Ocorreu um erro<br>",
-			    tipo : "erro"
-		    };
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
 		}
-		eval("funcao(temp);");
 	    };
 	    if (tipoCombo === "ligados") {
 		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
@@ -1838,10 +1814,7 @@ i3GEO.util =
 			    tipo : "dados"
 		    };
 		} else {
-		    temp = {
-			    dados : '<div class=erro >Ocorreu um erro</div>',
-			    tipo : "erro"
-		    };
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
 		}
 		if (jQuery.isFunction(funcao)) {
 		    funcao.call(this, temp);
@@ -2199,7 +2172,7 @@ i3GEO.util =
 	    c = $i(container);
 	    if(!c){
 		if (typeof (console) !== 'undefined')
-			console.info(container + " nao encontrado");
+		    console.info(container + " nao encontrado");
 
 		return;
 	    }
@@ -3349,13 +3322,13 @@ i3GEO.util =
 		return clipboardData.setData("Text", texto);
 
 	    } else if (document.queryCommandSupported && document.queryCommandSupported("copy")) {
-    		var textarea = document.createElement("textarea");
-    		textarea.setAttribute('readonly', '');
-    		textarea.textContent = texto;
-    		textarea.value = texto;
-    		textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
-    		textarea.className = "copyToMemory";
-    		document.body.appendChild(textarea);
+		var textarea = document.createElement("textarea");
+		textarea.setAttribute('readonly', '');
+		textarea.textContent = texto;
+		textarea.value = texto;
+		textarea.style.position = "fixed";  // Prevent scrolling to bottom of page in MS Edge.
+		textarea.className = "copyToMemory";
+		document.body.appendChild(textarea);
 		textarea.focus();
 		textarea.select();
 		try {
@@ -3385,13 +3358,28 @@ i3GEO.util =
 	 */
 	getFormData: function(dom_query){
 	    var out = {};
-	    var s_data = $(dom_query).serializeArray();
-	    //transform into simple data/value object
-	    for(var i = 0; i<s_data.length; i++){
-		var record = s_data[i];
-		out[record.name] = record.value;
+	    for (const s_data of $(dom_query).find('input').serializeArray()) {
+		out[s_data.name] = s_data.value;
+	    }
+	    for (const s_data of $(dom_query).find('select').serializeArray()) {
+		out[s_data.name] = s_data.value;
 	    }
 	    return out;
+	},
+	/*
+	 * Baseado em http://codedevelopr.com/articles/form-field-values-jquery-plugin-get-and-set-all-form-field-values-with-javascript/
+	 */
+	setFormData: function(dom_query,data){
+	    for (const s_data of $(dom_query).find('input')) {
+		if(data[s_data.name]){
+		    s_data.value = data[s_data.name]
+		}
+	    }
+	    for (const s_data of $(dom_query).find('select')) {
+		if(data[s_data.name]){
+		    s_data.value = data[s_data.name]
+		}
+	    }
 	},
 	/**
 	 * Function: dynamicSortString
@@ -3410,12 +3398,12 @@ i3GEO.util =
 	dynamicSortString: function(property) {
 	    var sortOrder = 1;
 	    if(property[0] === "-") {
-	        sortOrder = -1;
-	        property = property.substr(1);
+		sortOrder = -1;
+		property = property.substr(1);
 	    }
 	    return function (a,b) {
-	        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
-	        return result * sortOrder;
+		var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+		return result * sortOrder;
 	    }
 	}
 };

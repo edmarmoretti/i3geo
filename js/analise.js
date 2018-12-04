@@ -136,13 +136,19 @@ i3GEO.analise =
 	     *
 	     * Ferramenta linha do tempo
 	     */
-	    linhadotempo : function() {
+	    linhadotempo : function(tema) {
+		if(!tema){
+		    tema = "";
+		}
+		var temp = function(){
+		    i3GEOF.linhadotempo.start(tema);
+		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.analise.dialogo.linhadotempo()",
 			"linhadotempo",
 			"linhadotempo",
 			"dependencias.php",
-		"i3GEOF.linhadotempo.start()");
+		temp);
 		/*
 		i3GEO.janela.cria(
 			"650px",
