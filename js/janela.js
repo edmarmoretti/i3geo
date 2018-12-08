@@ -617,7 +617,7 @@ i3GEO.janela =
 	//styles: snackbar|red
 	snackBar: function({content = "", style = "snackbar", timeout = 4000, htmlAllowed = true, onClose = function(){}}){
 	    $("#snackbar-container").find("div").filter(function(){
-		if($(this).css('opacity') < 1){
+		if($(this).hasClass('snackbar-opened') == false){
 		    $(this).remove();
 		}
 	    });

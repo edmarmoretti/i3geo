@@ -1247,6 +1247,9 @@ i3GEO.mapa =
 		var pixel = i3geoOL.getPixelFromCoordinate([x,y]);
 		var html = [];
 		i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
+		    if (typeof (console) !== 'undefined')
+			console.info("i3geoOL.forEachFeatureAtPixel " + layer.get("name"));
+
 		    var texto = "";
 		    var chaves = feature.getKeys();
 		    var prop = feature.getProperties();
