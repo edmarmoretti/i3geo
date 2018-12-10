@@ -74,6 +74,77 @@ i3GEOF.linhadotempo = {
 	t3: function(){
 	    i3GEO.util.proximoAnterior("i3GEOF.linhadotempo.t2()","","","i3GEOFlinhadotempot3","i3GEOlinhadotemporesultado",true,"i3GEOToolFormModalFooter");
 	},
+	ativa: function(){
+	    Timeline_ajax_url = i3GEO.configura.locaplic + "/pacotes/simile/timeline_2.3.0/timeline_ajax/simile-ajax-api.js";
+	    Timeline_urlPrefix = i3GEO.configura.locaplic + "/pacotes/simile/timeline_2.3.0/timeline_js/";
+	    Timeline_parameters = "bundle=true";
+	    //carrega o script
+	    i3GEO.util.scriptTag(i3GEO.configura.locaplic + "/pacotes/simile/timeline_2.3.0/timeline_js/timeline-api.js", i3GEOF.linhadotempo.show, "TimeLineScript");
+	},
+	show: function(){
+	    var p = this._parameters,
+	    i3f = this,
+	    ins = '<div class=paragrafo id="totaleventos" ></div>'
+		+ '<div class=paragrafo id="linhaDoTempoi3geo" ></div>';
+
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: ins,
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    });
+	    var eventSource1 = new Timeline.DefaultEventSource();
+	    i3f.bandas("linhaDoTempoi3geo");
+	    i3f.getData();
+	},
+	getData: function(){
+	    //alert(window.parent.i3GEO.parametros.mapexten)
+	    tl_el.innerHTML = "<span style=color:red; >"+$trad("o1")+"</span>";
+	    var retorna = function(retorno){
+		eventSource1.clear();
+		$i("totaleventos").innerHTML = retorno.data.events.length+" eventos";
+		tl = Timeline.create(tl_el, bandInfos, Timeline.HORIZONTAL);
+		eventSource1.loadJSON(retorno.data, '.'); // The data was stored into the
+		tl.layout(); // display the Timeline
+		tl.getBand(0).scrollToCenter(Timeline.DateTime.parseGregorianDateTime(retorno.data.maiorano));
+	    }
+	    var ext = window.parent.i3GEO.util.extOSM2Geo(window.parent.i3GEO.parametros.mapexten);
+	    var p = window.parent.i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=dadosLinhaDoTempo&g_sid="+window.parent.i3GEO.configura.sid+"&tema="+$i("tema").value+"&ext="+ext;
+	    cpJSON.call(p,"void",retorna);
+	},
+	bandas: function(id){
+	    tl_el = $i(id);
+	    var theme1 = Timeline.ClassicTheme.create();
+	    theme1.event.bubble.width = 250;
+	    theme1.autoWidth = false;
+	    bandInfos = [
+		Timeline.createBandInfo({
+		    width:          "20%",
+		    intervalUnit:   Timeline.DateTime.DECADE,
+		    intervalPixels: 200,
+		    overview:       true,
+		    eventSource:    eventSource1
+		}),
+
+		Timeline.createBandInfo({
+		    width:          "80%",
+		    intervalUnit:   Timeline.DateTime.YEAR,
+		    intervalPixels: 200,
+		    eventSource:    eventSource1,
+		    theme:          theme1,
+		    layout:         'original'  // original, overview, detailed
+		})
+		];
+	    bandInfos[1].syncWith = 0;
+	    bandInfos[0].highlight = true;
+	    var url = '.'; // The base url for image, icon and background image
+	},
 	comboTemas: function(){
 	    i3GEO.util.comboTemas(
 		    "i3GEOFlinhadotempotemas",
