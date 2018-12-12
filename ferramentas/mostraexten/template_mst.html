@@ -1,34 +1,52 @@
-<div class='container-fluid'>
-	<h5>{{{ajuda}}}</h5>
-	<div class='form-group label-fixed condensed'>
-		<textarea class="form-control input-lg" id='i3GEOmostraextenatual' rows='3'></textarea>
-	</div>
-	<h5>{{{digitaCoord}}}</h5>
+<div id='{{idContainer}}' class='container-fluid container-tools'>
+    <h5 class="text-left">{{{ajuda}}}</h5>
+    <div class='form-group label-fixed condensed'>
+        <textarea class="form-control input-lg" id='i3GEOmostraextenatual' rows='3'>{{{extenatual}}}</textarea>
+    </div>
+    <h5 class="text-left">{{{digitaCoord}}}</h5>
 
-	<h5>{{{longW}}}</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxg' value='00' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxm' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxs' value='00.00' title='segundo' />
-	</div>
-	<h5>{{{latS}}}</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenyg' value='00' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenym' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenys' value='00.00' title='segundo' />
-	</div>
-	<h5>{{{longE}}}</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxxg' value='00' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxxm' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxxs' value='00.00' title='segundo' />
-	</div>
-	<h5>{{{latN}}}</h5>
-	<div class="form-group condensed">
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenyyg' value='00' title='grau' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenyym' value='00' title='minuto' />
-		<input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenyys' value='00.00' title='segundo' />
-	</div>
-	<button onclick="i3GEOF.mostraexten.executa()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
+    <form class="form-horizontal">
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-4 control-label">{{{longW}}}</label>
+            <div class="col-md-8">
+                <div class="form-group condensed">
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxg' value='00' title='grau' />
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxm' value='00' title='minuto' />
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxs' value='00.00' title='segundo' />
+                </div>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-4 control-label">{{{latS}}}</label>
+            <div class="col-md-8">
+                <div class="form-group condensed">
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenyg' value='00' title='grau' />
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenym' value='00' title='minuto' />
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenys' value='00.00' title='segundo' />
+                </div>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-4 control-label">{{{longE}}}</label>
+            <div class="col-md-8">
+                <div class="form-group condensed">
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxxg' value='00' title='grau' />
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxxm' value='00' title='minuto' />
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenxxs' value='00.00' title='segundo' />
+                </div>
+            </div>
+        </div>
+        <div class='form-group label-fixed condensed'>
+            <label class="col-md-4 control-label">{{{latN}}}</label>
+            <div class="col-md-8">
+                <div class="form-group condensed">
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenyyg' value='00' title='grau' />
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenyym' value='00' title='minuto' />
+                    <input style="display: inline; width: 100px;" class="form-control input-lg" type='text' id='i3GEOmostraextenyys' value='00.00' title='segundo' />
+                </div>
+            </div>
+        </div>
+    </form>
 
+    <button onclick="i3GEOF.mostraexten.executa()" class='btn btn-primary btn-sm btn-raised'>{{{aplica}}}</button>
 </div>

@@ -16,10 +16,11 @@ $cp->start();
 $cp->return_data();
 function listaartigos()
 {
-	global $ret, $cp, $usuarioGeonames;
+	global $x,$y, $cp, $usuarioGeonames;
 	$e = explode(" ",$ret);
-	$url = "http://api.geonames.org/wikipediaBoundingBox?username=".$usuarioGeonames."&style=full&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=20";
+	//$url = "http://api.geonames.org/wikipediaBoundingBox?username=".$usuarioGeonames."&style=full&north=".$e[3]."&south=".$e[1]."&east=".$e[2]."&west=".$e[0]."&maxRows=20";
 	//echo $url;exit;
+	$url = "https://en.wikipedia.org/w/api.php?action=query&list=geosearch&gscoord=".$y."|".$x."&gsradius=10000&gslimit=10&format=json";
 	$xml = simplexml_load_file($url."&lang=pt");
 	$conta = 0;
 	$fim = array();
@@ -30,12 +31,6 @@ function listaartigos()
 		if (function_exists(mb_convert_encoding))
 		{$r = mb_convert_encoding($r[0],"HTML-ENTITIES","auto");}
 		$resultado .= "<h4>".$r."</h4> ";
-
-		//$r = $e->xpath('feature');
-		//if (function_exists(mb_convert_encoding))
-		//{$r = mb_convert_encoding($r[0],"HTML-ENTITIES","auto");}
-		//$resultado .=  "<span style=color:red >".$r."</span><br>";
-
 		$r = $e->xpath('summary');
 		if (function_exists(mb_convert_encoding))
 		{$r = mb_convert_encoding($r[0],"HTML-ENTITIES","auto");}

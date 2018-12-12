@@ -1543,14 +1543,6 @@ i3GEO.php =
 	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 		"&map_file=&funcao=listainterfaces";
 	    cpJSON.call(p, "foo", funcao, par);
-	},
-	/**
-	 * Function: vinde
-	 *
-	 * Obtem os dados do visualizador da INDE
-	 */
-	inde : function(funcao) {
-	    var p = i3GEO.configura.locaplic+"/ferramentas/vinde/wmsindejson.php";
-	    cpJSON.call(p, "foo", funcao);
 	}
+
 };

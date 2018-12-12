@@ -21,6 +21,7 @@ i3GEOF.buffer = {
 		    i3f.html();
 		    i3GEO.janela.fechaAguarde();
 		}).fail(function() {
+		    i3GEO.janela.fechaAguarde();
 		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
 		    return;
 		});

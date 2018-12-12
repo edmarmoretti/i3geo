@@ -1,169 +1,188 @@
 i3GEO.catalogoInde = {
 	config: {
-		'templateDir': 'templates/dir.html',
-		'templateTema': 'templates/tema.html',
-		'idCatalogoPrincipal': 'catalogoPrincipal',
-		'idCatalogoNavegacao': 'catalogoNavegacao',
-		'idOndeMigalha': 'catalogoMigalha'
+	    'templateDir': 'templates/dir.html',
+	    'templateTema': 'templates/tema.html',
+	    'idCatalogoPrincipal': 'catalogoPrincipal',
+	    'idCatalogoNavegacao': 'catalogoNavegacao',
+	    'idOndeMigalha': 'catalogoMigalha'
 	},
 	DADOS: "",
 	carregaTemplates: function(){
-		var t1 = i3GEO.catalogoInde.config.templateDir,
-			t2 = i3GEO.catalogoInde.config.templateTema,
-			t3 = $("#" + i3GEO.catalogoInde.config.idOndeMigalha).attr("data-template");
-		$.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
-			i3GEO.template.dir = r1[0];
-			i3GEO.template.catalogoMigalha = r2[0];
-			i3GEO.template.ferramentasMigalha = r3[0];
-			i3GEO.catalogoInde.inicia();
-		}).fail(function() {
-		    i3GEO.janela.closeMsg($trad("erroTpl"));
-		    return;
-		});
+	    var t1 = i3GEO.catalogoInde.config.templateDir,
+	    t2 = i3GEO.catalogoInde.config.templateTema,
+	    t3 = $("#" + i3GEO.catalogoInde.config.idOndeMigalha).attr("data-template");
+	    $.when( $.get(t1),$.get(t2),$.get(t3) ).done(function(r1,r2,r3) {
+		i3GEO.template.dir = r1[0];
+		i3GEO.template.catalogoMigalha = r2[0];
+		i3GEO.template.ferramentasMigalha = r3[0];
+		i3GEO.catalogoInde.inicia();
+	    }).fail(function() {
+		i3GEO.janela.closeMsg($trad("erroTpl"));
+		return;
+	    });
 	},
 	aguarde: function(){
-		$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).html($trad("o1"));
+	    $("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).html($trad("o1"));
 	},
 	atualizaMigalha: function(){
-		var migalha = i3GEO.catalogoInde.MIGALHA;
-		var n = migalha.length;
+	    var migalha = i3GEO.catalogoInde.MIGALHA;
+	    var n = migalha.length;
 
-		var nome = migalha[n - 1].nome;
-		var onclick = migalha[n - 2].onclick;
+	    var nome = migalha[n - 1].nome;
+	    var onclick = migalha[n - 2].onclick;
 
-		var t = Mustache.to_html(
-				i3GEO.template.catalogoMigalha,
-				{"nome":nome,"onclick":"i3GEO.catalogoInde.MIGALHA.pop();i3GEO.catalogoInde.MIGALHA.pop();" + onclick}
-			);
-		$("#" + i3GEO.catalogoInde.config.idOndeMigalha).html(t);
-		$("#i3GEOguiaMovelConteudo").scrollTop(0);
+	    var t = Mustache.to_html(
+		    i3GEO.template.catalogoMigalha,
+		    {"nome":nome,"onclick":"i3GEO.catalogoInde.MIGALHA.pop();i3GEO.catalogoInde.MIGALHA.pop();" + onclick}
+	    );
+	    $("#" + i3GEO.catalogoInde.config.idOndeMigalha).html(t);
+	    $("#i3GEOguiaMovelConteudo").scrollTop(0);
 
 	},
 	escondeCatalogoPrincipal: function(){
-		$("#" + i3GEO.catalogoInde.config.idCatalogoPrincipal).hide();
+	    $("#" + i3GEO.catalogoInde.config.idCatalogoPrincipal).hide();
 	},
 	mostraCatalogoPrincipal: function(){
-		$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).fadeOut( "fast", function(){
-			$("#" + i3GEO.catalogoInde.config.idOndeMigalha).hide();
-			$("#" + i3GEO.catalogoInde.config.idCatalogoPrincipal).show();
-		});
-		//i3GEO.catalogoInde.DADOS = "";
+	    $("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).fadeOut( "fast", function(){
+		$("#" + i3GEO.catalogoInde.config.idOndeMigalha).hide();
+		$("#" + i3GEO.catalogoInde.config.idCatalogoPrincipal).show();
+	    });
+	    //i3GEO.catalogoInde.DADOS = "";
 	},
-	adicionaTema : function(tid) {
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.catalogoInde.adicionaTema");
+	adicionaTema : function(url,layer,id,nome) {
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.catalogoInde.adicionaTema");
 
-		// confirma se o tema existe no mapa
-		if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
-			i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, true);
-		} else {
-			var layer = i3GEO.catalogoInde.DADOS.layers[tid][1];
-
-			i3GEO.php.adicionaTemaWMS(
-					'',
-					layer.url,
-					layer.layers,
-					i3GEO.catalogoInde.DADOS.layers[tid][0],
-					'EPSG:4326',
-					layer.format,
-					'1.1.1',
-					i3GEO.catalogoInde.DADOS.layers[tid][0],
-					'',
-					'nao',
-					"text/plain",
-					'',
-					'',
-					true
-			);
+	    // confirma se o tema existe no mapa
+	    if (i3GEO.arvoreDeCamadas.pegaTema(id) !== "") {
+		i3GEO.arvoreDeCamadas.ligaDesligaTemas(id, true);
+	    } else {
+		if(url.indexOf("?") == -1){
+		    url = url + "?";
 		}
+		i3GEO.php.adicionaTemaWMS(
+			'',
+			url,
+			layer,
+			"",
+			'EPSG:4326',
+			'image/png',
+			'1.1.1',
+			nome, //nome
+			'',
+			'nao',
+			"text/plain",
+			'',
+			'',
+			true
+		);
+	    }
 	},
 	inicia: function(config){
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.catalogoInde.inicia");
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.catalogoInde.inicia");
 
-		if(config){
-			$.each( config, function( i,v ) {
-				i3GEO.catalogoInde.config[i] = v;
-			});
-		}
-		i3GEO.catalogoInde.aguarde();
-		if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
-			i3GEO.catalogoInde.carregaTemplates();
-			return;
-		} else {
-			//i3GEO.catalogoInde.DADOS = "";
-			i3GEO.catalogoInde.MIGALHA = [
-			{"nome":"","onclick":"i3GEO.catalogoInde.mostraCatalogoPrincipal()"},
-			{"nome":"INDE-Br","onclick":"i3GEO.catalogoInde.inicia()"}
-			];
-			i3GEO.catalogoInde.atualizaMigalha();
-
-			config = i3GEO.catalogoInde.config;
-
-			i3GEO.catalogoInde.escondeCatalogoPrincipal();
-
-			$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).show();
-
-			var lista = function(dados){
-				if(i3GEO.catalogoInde.DADOS == ""){
-					i3GEO.janela.snackBar({content:$trad("indeOk")})
-				}
-				i3GEO.catalogoInde.DADOS = dados;
-				var clone = [],
-					t;
-
-				dados = dados.arvore;
-				//ajusta o nome
-				//verifica se o menu esta na lista de ids definidos em i3GEO.catalogoInde.IDSMENUS
-				$.each( dados, function( i,v ) {
-					clone.push({
-						"nome": i + " (" + dados[i].length + ")",
-						"onclick": "i3GEO.catalogoInde.listaTemas('" + i + "')"
-					});
-				});
-				t = Mustache.to_html(
-					"{{#data}}" + i3GEO.template.dir + "{{/data}}",
-					{"data":clone}
-				);
-				$("#" + config.idCatalogoNavegacao).html(t);
-
-				$("#" + i3GEO.catalogoInde.config.idCatalogoPrincipal).fadeOut( "fast", function(){
-					$("#" + i3GEO.catalogoInde.config.idOndeMigalha).show();
-					$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).show();
-				});
-
-			};
-			if(i3GEO.catalogoInde.DADOS == ""){
-				i3GEO.php.inde(lista);
-			} else {
-				lista(i3GEO.catalogoInde.DADOS);
-			}
-		}
-	},
-	listaTemas: function(sigla){
-		if (typeof (console) !== 'undefined')
-			console.info("i3GEO.catalogoInde.listaGrupos");
-
-		var clone = [],
-			temp;
-
-		i3GEO.catalogoInde.MIGALHA.push({"nome": sigla,"onclick":"i3GEO.catalogoInde.listaTemas('" + sigla + "')"});
+	    if(config){
+		$.each( config, function( i,v ) {
+		    i3GEO.catalogoInde.config[i] = v;
+		});
+	    }
+	    i3GEO.catalogoInde.aguarde();
+	    if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
+		i3GEO.catalogoInde.carregaTemplates();
+		return;
+	    } else {
+		//i3GEO.catalogoInde.DADOS = "";
+		i3GEO.catalogoInde.MIGALHA = [
+		    {"nome":"","onclick":"i3GEO.catalogoInde.mostraCatalogoPrincipal()"},
+		    {"nome":"INDE-Br","onclick":"i3GEO.catalogoInde.inicia()"}
+		    ];
 		i3GEO.catalogoInde.atualizaMigalha();
 
-		i3GEO.catalogoInde.aguarde();
-		var estilos = i3GEO.catalogoInde.DADOS.arvore[sigla];
-		$.each( estilos, function( i,v ) {
-			temp = v.split("#");
-			clone.push({
-				"nome": temp[0],
-				"onclick": "i3GEO.catalogoInde.adicionaTema('" + temp[1] + "')",
-				"link": "<a href='" + i3GEO.catalogoInde.DADOS.layers[temp[1]][1].metadataURL + "' target='_blank' >Metadata</a>"
-			});
+		config = i3GEO.catalogoInde.config;
+
+		i3GEO.catalogoInde.escondeCatalogoPrincipal();
+
+		$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).show();
+
+		var lista = function(){
+		    var dados = i3GEO.catalogoInde.DADOS;
+		    var clone = [],
+		    t;
+		    $.each( dados, function( i,v ) {
+			if(v.url.trim() != ""){
+			    clone.push({
+				"nome": v.descricao,
+				"onclick": "i3GEO.catalogoInde.listaTemas('" + v.url + "','" + v.descricao + "','" + v.id + "')"
+			    });
+			}
+		    });
+		    t = Mustache.to_html(
+			    "{{#data}}" + i3GEO.template.dir + "{{/data}}",
+			    {"data":clone}
+		    );
+		    $("#" + config.idCatalogoNavegacao).html(t);
+
+		    $("#" + i3GEO.catalogoInde.config.idCatalogoPrincipal).fadeOut( "fast", function(){
+			$("#" + i3GEO.catalogoInde.config.idOndeMigalha).show();
+			$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).show();
+		    });
+		};
+		if(i3GEO.catalogoInde.DADOS == ""){
+		    i3GEO.catalogoInde.aguarde();
+		    $.get(
+			    i3GEO.configura.locaplic + "/ferramentas/vinde/buscacamada.php",
+			    {g_sid: i3GEO.configura.sid}
+		    ).done(function(data) {
+			i3GEO.catalogoInde.DADOS = data;
+			lista();
+		    }).fail(function() {
+			i3GEO.janela.closeMsg($trad("erroTpl"));
+			return;
+		    });
+		} else {
+		    lista();
+		}
+	    }
+	},
+	listaTemas: function(url,descricao,id){
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.catalogoInde.listaGrupos");
+
+	    i3GEO.catalogoInde.MIGALHA.push({"nome": descricao,"onclick":"i3GEO.catalogoInde.listaTemas('" + url + "','" + descricao + "','" + id + "')"});
+	    i3GEO.catalogoInde.atualizaMigalha();
+	    i3GEO.catalogoInde.aguarde();
+	    var lista = function(data){
+		var clone = [],
+		temp;
+		$.each( data, function( i,v ) {
+		    var link = "";
+		    if(v.UuidMetadado != ""){
+			link = "<a href='http://www.metadados.inde.gov.br/geonetwork/srv/br/pdf?uuid=" + v.UuidMetadado + "' target='_blank' >Metadata</a>";
+		    }
+		    clone.push({
+			"nome": v.Titulo,
+			"onclick": "i3GEO.catalogoInde.adicionaTema('" + url + "','" + v.Camada + "','inde" + id + "-" + v.$id + "','" + v.Titulo + "')",
+			"link": link
+		    });
 		});
 		var t = Mustache.to_html(
 			"{{#data}}" + i3GEO.template.tema + "{{/data}}",
 			{"data":clone}
 		);
 		$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).html(t);
+	    };
+	    $.get(
+		    i3GEO.configura.locaplic + "/ferramentas/vinde/geoservicoget.php",
+		    {
+			g_sid: i3GEO.configura.sid,
+			url: url
+		    }
+	    ).done(function(data) {
+		lista(data);
+	    }).fail(function() {
+		i3GEO.janela.closeMsg($trad("erroTpl"));
+		return;
+	    });
 	}
 };
