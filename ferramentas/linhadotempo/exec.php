@@ -52,6 +52,10 @@ switch (strtoupper($_POST["funcao"])){
 	    $map->save($_SESSION["map_file"]);
 	    $retorno = true;
 	    break;
+	case "DADOS":
+	    include ("../../classesphp/graficos.php");
+	    $retorno = dadosLinhaDoTempo($_SESSION["map_file"], $_POST["tema"], $_POST["ext"]);
+	    break;
 }
 ob_clean();
 if ($retorno == false) {

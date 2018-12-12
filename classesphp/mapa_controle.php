@@ -1558,20 +1558,6 @@ switch (strtoupper($funcao)) {
         );
         break;
     /*
-     * Valor: DADOSLINHADOTEMPO
-     *
-     * Pega os dados de um tema para gera&ccedil;&atilde;o do gr&aacute;fico de linha do tempo.
-     *
-     * <dadosLinhaDoTempo>
-     */
-    case "DADOSLINHADOTEMPO":
-        include_once ("graficos.php");
-        if (! isset($_pg["ext"])) {
-            $_pg["ext"] = "";
-        }
-        $retorno = dadosLinhaDoTempo($map_file, $_pg["tema"], $_pg["ext"]);
-        break;
-    /*
      * Valor: DADOSPERFILRELEVO
      *
      * Pega os dados para elabora&ccedil;&atilde;o de gr&aacute;fico de perfil do relevo

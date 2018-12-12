@@ -218,12 +218,12 @@ i3GEO.listaDeFerramentas = {
 	    {
 		id : "omenudataNavegacao2",
 		text : $trad("d15t"),
-		url : "javascript:i3GEO.navega.dialogo.google()"
+		url : "javascript:i3GEO.navega.dialogo.googlemaps()"
 	    },
 	    {
 		id : "omenudataNavegacao4",
 		text : $trad("d8t"),
-		url : "javascript:i3GEO.mapa.dialogo.mostraExten()"
+		url : "javascript:i3GEO.mapa.dialogo.mostraexten()"
 	    },
 	    {
 		id : "omenudataNavegacaoWiki",

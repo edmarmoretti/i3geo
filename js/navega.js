@@ -815,39 +815,14 @@ i3GEO.navega =
 	     *
 	     * {array} - array com os pares de coordenadas x,y que ser&atilde;o adicionados ao mapa do google (opcional)
 	     */
-	    google : function(coordenadas) {
-		i3GEO.navega.dialogo.google.coordenadas = coordenadas;
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.navega.dialogo.google()");
-
-		var temp, janela, idgoogle = "googlemaps" + Math.random();
-		janela = i3GEO.janela.cria(
-			(i3GEO.parametros.w / 2.5) + 25 + "px",
-			(i3GEO.parametros.h / 2.5) + 18 + "px",
-			i3GEO.configura.locaplic
-			+ "/ferramentas/googlemaps1/index.php",
-			"",
-			"",
-			"<span class='i3GeoTituloJanelaBsNolink' >Google maps</span></div>",
-			idgoogle,
-			false,
-			"hd",
-			"",
-			"",
-			"",
-			false,
-			"",
-			"",
-			"",
-			"",
-			"68"
-		);
-
-		temp = function() {
-		    i3GEO.desenho.removePins("boxOndeGoogle");
-		    i3GEO.desenho.removePins("googlemaps");
-		};
-		$( janela[0].close ).click(temp);
+	    googlemaps : function(coordenadas) {
+		i3GEO.navega.dialogo.googlemaps.coordenadas = coordenadas;
+		i3GEO.util.dialogoFerramenta(
+			"i3GEO.navega.dialogo.googlemaps()",
+			"googlemaps",
+			"googlemaps",
+			"dependencias.php",
+		"i3GEOF.googlemaps.start()");
 	    },
 	    /**
 	     * Function: confluence

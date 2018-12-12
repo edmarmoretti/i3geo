@@ -714,17 +714,17 @@ i3GEO.mapa =
 		"i3GEOF.imprimir.start()");
 	    },
 	    /**
-	     * Function: mostraExten
+	     * Function: mostraexten
 	     *
 	     * Abre a janela de dialogo da ferramenta que mostra a extensao geografica atual do mapa
 	     */
-	    mostraExten : function() {
+	    mostraexten : function() {
 		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.mostraExten()",
+			"i3GEO.mapa.dialogo.mostraexten()",
 			"mostraexten",
-			"mostraExten",
+			"mostraexten",
 			"dependencias.php",
-		"i3GEOF.mostraExten.iniciaJanelaFlutuante()");
+		"i3GEOF.mostraexten.start()");
 	    },
 	    /**
 	     * Function: outputformat

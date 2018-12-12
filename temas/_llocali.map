@@ -43,6 +43,7 @@ MAP
       "identifica"	"sim"
       "LTEMPOCONVENCODE"	"SIM"
       "storymap"	""
+      "convcaracter"	"SIM"
     END # METADATA
     NAME "_llocali"
     PROCESSING "LABEL_NO_CLIP=True"

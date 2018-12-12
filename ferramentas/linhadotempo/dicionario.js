@@ -89,5 +89,15 @@ i3GEOF.linhadotempo.dicionario = {
 	    pt : "Remove par&acirc;metros do mapfile",
 	    en : "Remove parameters from the mapfile",
 	    es : "Eliminar par&aacute;metros del mapfile"
-	} ]
+	} ],
+	'sim' : [{
+		pt : "Sim",
+		en : "Yes",
+		es : "S&iacute;"
+	}],
+	'nao' : [{
+		pt : "N&atilde;o",
+		en : "No",
+		es : "No"
+	}]
 };

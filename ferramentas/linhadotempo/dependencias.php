@@ -14,7 +14,6 @@ if(extension_loaded('zlib')){
 header("Content-type: text/javascript");
 include("index.js");
 include("dicionario.js");
-//include("../../pacotes/simile/timeline_2.3.0/timeline_js/timeline-api.js");
 echo "\n";
 
 if(extension_loaded('zlib')){

@@ -319,7 +319,9 @@ i3GEO.desenho =
 		return f;
 	    },
 	    moveBox : function(box, xmin, ymin, xmax, ymax) {
-		box.getGeometry().setCoordinates([[[xmin,ymin],[xmin,ymax],[xmax,ymax],[xmax,ymin],[xmin,ymin]]]);
+		pol = new ol.geom.Polygon([[[xmin,ymin],[xmin,ymax],[xmax,ymax],[xmax,ymin],[xmin,ymin]]]);
+		pol = i3GEO.util.extGeo2OSM(pol);
+		box.getGeometry().setCoordinates(pol);
 		return box;
 	    },
 	    addPin : function(x, y, w, h, imagem, namespace, centro, funcaoclick) {

@@ -1,5 +1,5 @@
 //+$trad(1,i3GEOF.mostraExten.dicionario)+
-i3GEOF.mostraExten.dicionario = {
+i3GEOF.mostraexten.dicionario = {
 	'ajuda' : [ {
 		pt : "Extens&atilde;o geogr&aacute;fica atual, em d&eacute;cimos de grau. As coordenadas correspondem a menor longitude, menor latitude, maior longitude e maior latitude",
 		en : "Current geographical extent in decimal degrees. Coordinates correspond to the min longitude, min latitude, max longitude and max latitude",

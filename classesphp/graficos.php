@@ -538,14 +538,14 @@ function dadosLinhaDoTempo($map_file,$tema,$ext="")
 		$titulo = $dado[$itemtitulo];
 		$desc = $dado[$itemdescricao];
 		if(function_exists("mb_convert_encoding") && strtolower($converteE) == "sim"){
-			$titulo = mb_convert_encoding($titulo,"UTF-8","ISO-8859-1");
-			$desc = mb_convert_encoding($desc,"UTF-8","ISO-8859-1");
+		    $titulo = mb_convert_encoding($titulo,"UTF-8",mb_detect_encoding($titulo));
+		    $desc = mb_convert_encoding($desc,"UTF-8",mb_detect_encoding($desc));
 		}
 		if($dado[$iteminicio] != 0 && $dado[$iteminicio] != '-'){
 			$eventos[] = array(
 				'start'=>$dado[$iteminicio],
 				'end'=>$fim,
-				'title'=>"<span title='clique para selecionar' onclick='tituloclique(\"".$dado["centroide"]."\")' onmouseover='tituloover(\"".$dado["centroide"]."\")' onmouseout='tituloout()'>".$titulo."</span>",
+				'title'=>"<span onmouseover='tituloover(\"".$dado["centroide"]."\")' onmouseout='tituloout()'>".$titulo."</span>",
 				'description'=>$dado[$iteminicio]." ".$fim."<br>".$desc,
 				'icon'=>$icone,
 				'image'=>$image,
