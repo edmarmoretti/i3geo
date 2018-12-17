@@ -81,7 +81,11 @@ function inicializa(){
         temp = mapexten.split(" ");
         if(x < temp[2] && y < temp[3]){
             if(MARCA === false){
-                MARCA = i3GEO.desenho.addPin(x,y,"","",i3GEO.configura.locaplic+'/imagens/google/confluence.png',"googlemaps");
+                MARCA = i3GEO.desenho.addPin({
+        		    x: x,
+        		    y: y,
+        		    namespace: "googlemaps"
+        		});
             }
             else{
                 i3GEO.desenho.movePin(MARCA,x,y);

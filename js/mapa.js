@@ -637,7 +637,7 @@ i3GEO.mapa =
 			"locregiao",
 			"locregiao",
 			"dependencias.php",
-		temp);
+			temp);
 	    },
 	    /**
 	     * Function: filtraregiao
@@ -1114,7 +1114,7 @@ i3GEO.mapa =
 		i3GEO.configura, wkts = [];
 
 	    i3GEO.eventos.cliquePerm.status = true;
-	    mostra = false;
+	    mostra = true;
 	    if(retorno.data){
 		retorno = retorno.data;
 		temp = retorno[0].xy.split(",");
@@ -1244,42 +1244,65 @@ i3GEO.mapa =
 		    }
 		}
 		//caso seja um vetor
-		var pixel = i3geoOL.getPixelFromCoordinate([x,y]);
+		var pixel = i3geoOL.getPixelFromCoordinate(i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates());
 		var html = [];
-		i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
-		    if (typeof (console) !== 'undefined')
-			console.info("i3geoOL.forEachFeatureAtPixel " + layer.get("name"));
-
-		    var texto = "";
-		    var chaves = feature.getKeys();
-		    var prop = feature.getProperties();
-		    var c = chaves.length;
-		    for (var i = 0; i < c; i++) {
-			if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
-			    if(chaves[i] == "fat"){
-				$.each(prop[chaves[i]],function( index, element ){
-				    if(element.item != undefined){
-					texto += element.item + ": " + element.valor + "<br>";
-				    }
-				});
-			    } else {
-				texto += chaves[i] + ": " + prop[chaves[i]] + "<br>";
-			    }
-			}
-		    }
-		    html.push(texto);
-		    mostra = true;
-		    //para nao incluir mais de uma vez a geometria
-		    wkts = [];
-		});
 		textoSimples += html.join("<br>");
 		textCopy += html.join("<br>");
+		var afterCreate = function(){
+		    var painel = this.painel;
+		    var dados = {};
+		    i3geoOL.forEachFeatureAtPixel(
+			    pixel,
+			    function(feature, layer) {
+				if (typeof (console) !== 'undefined')
+				    console.info("i3geoOL.forEachFeatureAtPixel " + layer.get("name"));
+
+				var texto = "";
+				var chaves = feature.getKeys();
+				var prop = feature.getProperties();
+				var c = chaves.length;
+				for (var i = 0; i < c; i++) {
+				    if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
+					if(chaves[i] == "fat"){
+					    $.each(prop[chaves[i]],function( index, element ){
+						if(element.item != undefined){
+						    texto += element.item + ": " + element.valor + "<br>";
+						}
+					    });
+					} else {
+					    texto += chaves[i] + ": " + prop[chaves[i]] + "<br>";
+					}
+				    }
+				}
+				if(dados[layer.get("name")]){
+				    dados[layer.get("name")].push(texto);
+				} else {
+				    dados[layer.get("name")] = [texto];
+				}
+			    },
+			    {
+				hitTolerance: i3GEO.configura.ferramentas.identifica.resolution
+			    }
+		    );
+		    var html = [];
+		    for(let d of Object.keys(dados)){
+			if(i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[d]){
+			    html.push("<div class='toolTipBalaoTitulo'><b>" + i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[d].tema + "</b><br></div>");
+			} else {
+			    html.push("<div class='toolTipBalaoTitulo'><b>" + d + "</b></div>");
+			}
+			html.push("<div class='toolTipBalaoTexto'>" + dados[d].join("<br>") + "</div>");
+		    }
+		    if(painel){
+			$(painel).find(".tooltip-conteudo").prepend(html.join(""));
+		    }
+		};
 		if (mostra === true) {
 		    if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.modal == true){
 			i3GEO.janela.closeMsg(textoSimples);
 			return;
 		    } else {
-			i3GEO.Interface[i3GEO.Interface.ATUAL].balao(textoSimples, textCopy, x, y, true, wkts.length);
+			var painel = i3GEO.Interface.openlayers.balao(textoSimples, textCopy, x, y, true, wkts.length, afterCreate);
 		    }
 		}
 	    }

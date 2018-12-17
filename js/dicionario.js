@@ -1232,16 +1232,9 @@ g_traducao =
                 es : "Ingrese el nuevo valor de escala y haga clic en el bot&oacute;n aplicar para modificar la escala del mapa"
             }
         ],
-        "d11" : [
-            {
-                pt : "Busca dados na Wikipedia na abrang&ecirc;ncia atual do mapa. Fa&ccedil;a um zoom no mapa antes de abrir essa op&ccedil;&atilde;o. Regi&ocirc;es muito extensas podem tornar a busca muito demorada",
-                en : "Search for Wikipedia data in the current extent of the map. Zoom on the map before opening this option. Large regions can slow down searching",
-                es : "Busca datos en Wikipedia de la extensi&oacute;n actual del mapa. Haga zoom en el mapa antes de abrir esta opci&oacute;n. Regiones muy extensas pueden hacer que la b&uacute;squeda sea muy lenta"
-            }
-        ],
         "d11t" : [
             {
-                pt : "buscar na Wikip&eacute;dia",
+                pt : "Buscar na Wikip&eacute;dia",
                 en : "search on Wikipedia",
                 es : "buscar en Wikipedia"
             }
@@ -3242,6 +3235,20 @@ g_traducao =
         "addcamada" : [
             {
                 pt : "Aducionar camada ao mapa",
+                en : "",
+                es : ""
+            }
+        ],
+        "nadaenc" : [
+            {
+                pt : "Nada encontrado",
+                en : "Nothing found",
+                es : "No se encontr&oacute; nada"
+            }
+        ],
+        "aproxmais" : [
+            {
+                pt : "Aproxime mais",
                 en : "",
                 es : ""
             }

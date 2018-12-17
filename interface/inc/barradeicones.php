@@ -38,7 +38,7 @@
             <i class="material-icons">gps_fixed</i>
         </button>
         <button title="{{{itensvisib}}}" onclick="i3GEO.mapa.itensvisib(['.check','.ol-i3GEOcontrols','.iconesGuiaMovel','.ol-attribution button','.escalanumerica','.localizarxy','.i3GEOfechaGuia'])" style="float: left; cursor: pointer;">
-            <i class="material-icons">visibility</i>
+            <i class="material-icons">wallpaper</i>
         </button>
         <button class="hidden-xs toggle" title="{{{d18t}}}" onclick="i3GEO.navega.lente.start()" style="float: left; cursor: pointer; display: none;">
             <i class="material-icons">loupe</i>

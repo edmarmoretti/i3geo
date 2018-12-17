@@ -42,7 +42,6 @@ i3GEO.pluginI3geo =
 	 *
 	 * Utilizado no editor de mapfiles do sistema de administracao
 	 */
-	//XXX criar plugin geojson
 	//XXX criar plugin que aceite um JSON generico
 	PLUGINS : [
 	    {

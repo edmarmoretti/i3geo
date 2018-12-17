@@ -273,13 +273,11 @@ i3GEOF.geolocal =
 		return;
 	    }
 	    var posicao = i3GEOF.geolocal.posicoes[i];
-	    i3GEO.desenho.addPin(
-		    posicao.coords.longitude,
-		    posicao.coords.latitude,
-		    "",
-		    "",
-		    i3GEO.configura.locaplic + '/imagens/google/confluence.png',
-	    "pingeolocal");
+	    i3GEO.desenho.addPin({
+		x: posicao.coords.longitude,
+		y: posicao.coords.latitude,
+		namespace: "pingeolocal"
+	    });
 	},
 	escondexy : function() {
 	    i3GEO.desenho.removePins("pingeolocal");

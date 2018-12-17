@@ -775,7 +775,7 @@ i3GEO.navega =
 			"wiki",
 			"wiki",
 			"dependencias.php",
-		"i3GEOF.wiki.iniciaJanelaFlutuante()");
+		"i3GEOF.wiki.start()");
 	    },
 	    /**
 	     * Function: metar
@@ -906,13 +906,11 @@ i3GEO.navega =
 		var y = position.coords.latitude;
 		var x = position.coords.longitude;
 		i3GEO.navega.pan2ponto(x,y);
-		i3GEO.navega.geolocal._pin = i3GEO.desenho.addPin(
-			x,
-			y,
-			"",
-			"",
-			i3GEO.configura.locaplic + '/imagens/google/confluence.png',
-		"pingeolocal");
+		i3GEO.navega.geolocal._pin = i3GEO.desenho.addPin({
+		    x: x,
+		    y: y,
+		    namespace: "pingeolocal"
+		});
 	    },
 	    movePoint: function(position){
 		var retorno = function(position) {

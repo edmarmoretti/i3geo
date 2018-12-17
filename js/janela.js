@@ -628,7 +628,7 @@ i3GEO.janela =
 		    htmlAllowed: htmlAllowed, // allows HTML as content value
 		    onClose: onClose // callback called when the snackbar gets closed.
 	    };
-	    $.snackbar(options);
+	    return $.snackbar(options);
 	},
 	/**
 	 * Function: tempoMsg

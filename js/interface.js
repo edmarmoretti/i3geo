@@ -474,8 +474,8 @@ i3GEO.Interface =
 		return i3geoOL.getZoom();
 	    },
 	    //ver i3GEO.mapa
-	    //completo depreciado
-	    balao : function(texto, textCopy, x, y, botaoProp, nwkts) {
+	    //completo foi depreciado
+	    balao : function(texto, textCopy, x, y, botaoProp, nwkts, afterCreate) {
 		if (typeof (console) !== 'undefined')
 		    console.info("monta o balao de identificacao e mostra na tela");
 
@@ -605,11 +605,16 @@ i3GEO.Interface =
 		    p.baloes.push(b);
 		    i3geoOL.addOverlay(b);
 		    b.setPosition(i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates());
+		    //
 		    if(p.autoPan == true){
 			i3GEO.Interface.openlayers.pan2ponto(x,y,p.autoPanAnimation);
 		    } else {
-			i3GEO.Interface.openlayers.pan2ponto(x,y,false);
+			//i3GEO.Interface.openlayers.pan2ponto(x,y,false);
 		    }
+		    if(afterCreate){
+			afterCreate.call({painel: painel});
+		    }
+		    return painel;
 		};
 		if(i3GEO.template.infotooltip == false){
 		    $.get(i3GEO.configura.locaplic+"/js/templates/infotooltip.html").done(function(r) {

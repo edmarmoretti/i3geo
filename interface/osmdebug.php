@@ -323,7 +323,7 @@ include ($configInc["inc"] . "/css.php");
                     simple : true,
                     removeAoAdicionar : true,
                     //parametros exclusivos da interface openlayers
-                    autoPan : true,
+                    autoPan : false,
                     autoPanAnimation : {
                     duration : 250
                     },

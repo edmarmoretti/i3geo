@@ -128,7 +128,11 @@ function tituloover(wkt){
 	wkt = wkt.split("(")[1].split(")")[0];
 	wkt = wkt.split(" ");
 	if(MARCA === false){
-		MARCA = wpi.desenho.addPin(wkt[0]*1,wkt[1]*1,"","",wpi.configura.locaplic+'/imagens/google/confluence.png',"linhadotempo");
+        MARCA = i3GEO.desenho.addPin({
+            x: wkt[0]*1,
+            y: wkt[1]*1,
+            namespace: "linhadotempo"
+        });
 	}
 	else{
 		wi.i3GEO.desenho.movePin(MARCA,wkt[0]*1,wkt[1]*1);
