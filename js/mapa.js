@@ -1255,29 +1255,40 @@ i3GEO.mapa =
 			    pixel,
 			    function(feature, layer) {
 				if (typeof (console) !== 'undefined')
-				    console.info("i3geoOL.forEachFeatureAtPixel " + layer.get("name"));
+				    console.info("i3geoOL.forEachFeatureAtPixel mapa.js");
 
 				var texto = "";
-				var chaves = feature.getKeys();
 				var prop = feature.getProperties();
-				var c = chaves.length;
-				for (var i = 0; i < c; i++) {
-				    if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
-					if(chaves[i] == "fat"){
-					    $.each(prop[chaves[i]],function( index, element ){
-						if(element.item != undefined){
-						    texto += element.item + ": " + element.valor + "<br>";
-						}
-					    });
-					} else {
+				if(feature.get("fat")){
+				    var fat = feature.get("fat");
+				    var chaves = i3GEO.util.listaChaves(fat);
+				    var c = chaves.length;
+				    for (var i = 0; i < c; i++) {
+					$.each(chaves,function( index, element ){
+					    texto += element + ": " + fat[element] + "<br>";
+					});
+				    }
+				} else {
+				    var chaves = feature.getKeys();
+				    var c = chaves.length;
+				    for (var i = 0; i < c; i++) {
+					if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
 					    texto += chaves[i] + ": " + prop[chaves[i]] + "<br>";
 					}
 				    }
 				}
-				if(dados[layer.get("name")]){
-				    dados[layer.get("name")].push(texto);
-				} else {
-				    dados[layer.get("name")] = [texto];
+				if(layer){
+				    if(dados[layer.get("name")]){
+					dados[layer.get("name")].push(texto);
+				    } else {
+					dados[layer.get("name")] = [texto];
+				    }
+				} else if (prop.nameLayer && prop.nameLayer != "") {
+				    if(dados[prop.nameLayer]){
+					dados[prop.nameLayer].push(texto);
+				    } else {
+					dados[prop.nameLayer] = [texto];
+				    }
 				}
 			    },
 			    {

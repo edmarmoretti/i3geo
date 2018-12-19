@@ -16,9 +16,20 @@ i3GEOF.wiki = {
 	    i3GEO.desenho.removePins("wikiresults");
 	    for (const r of data) {
 		html.push("<div onmouseover='i3GEOF.wiki.mostraxy(" + r.lon + "," + r.lat + ")' onmouseout='i3GEOF.wiki.escondexy()'><h4>" + r.title + "</h4>");
-		html.push("<a href='http://pt.wikipedia.org/wiki?curid=" + r.pageid + "' target=blank >abrir Wikpedia</a>");
+		var link = "<a onclick='window.open(\"http://pt.wikipedia.org/wiki?curid=" + r.pageid + "\");return false;' href='javascript:void(0);' target=blank >Abrir Wikpedia</a>";
+		html.push(link);
 		html.push("</div><hr>");
-		i3GEO.desenho.addPin(r.lon*1,r.lat*1,32,37,i3GEO.configura.locaplic+'/imagens/mapicons/information.png',"wikiresults");
+		i3GEO.desenho.addPin({
+		    x: r.lon*1,
+		    y: r.lat*1,
+		    w: 32,
+		    h: 37,
+		    imagem: i3GEO.configura.locaplic+'/imagens/mapicons/information.png',
+		    namespace: "wikiresults",
+		    tooltiptext: r.title,
+		    nameLayer: "Wikipedia",
+		    fat: {"Link": link}
+		});
 	    }
 	    if(data[0] == "aproxmais"){
 		html = [$trad("aproxmais")];
@@ -32,6 +43,7 @@ i3GEOF.wiki = {
 		    timeout: 0,
 		    onClose: function(){
 			i3GEO.desenho.removePins("wikiresults");
+			i3GEO.desenho.removePins("wiki");
 			i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.wiki.getData()"]);
 		    }
 		});
@@ -39,7 +51,9 @@ i3GEOF.wiki = {
 		$(i3GEOF.wiki._parameters.snackbar).snackbar("show");
 	    }
 	    $i("wikiresults").innerHTML = html.join(" ");
-
+	    $( "#snackbar-container" ).find("a").click(function( event ) {
+		event.stopPropagation();
+	    });
 	},
 	getData: function(){
 	    if(parseInt(i3GEOF.wiki._parameters.startDate / 2000,10) == parseInt(Date.now() / 2000,10)){

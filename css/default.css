@@ -1,3 +1,17 @@
+/** cores de fundo padronizadas */
+.i3GeoBgc1 {
+	background-color: rgba(0,60,136,.5) !Important;
+}
+.i3GeoBgc1:hover {
+    background-color: rgba(180, 180, 180, 0.7) !Important;
+}
+.i3GeoBgc2 {
+	background-color: rgba(3, 40, 87, 0.5) !Important;
+}
+.i3GeoBgc2:hover {
+    background-color: rgba(180, 180, 180, 0.7) !Important;
+}
+
 /** para ajustar itens de formularios */
 .modal-body .form-group .form-control {
 	color: initial;
@@ -419,6 +433,11 @@ Barra de botoes de navegacao
 	font-size: 1.5em;
 	margin: 2px;
 	float: left;
+}
+
+.ol-control button:hover {
+    text-decoration: none;
+    background-color: rgba(180, 180, 180, 0.7);
 }
 /*
 Para a barra de rolagem

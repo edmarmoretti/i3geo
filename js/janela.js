@@ -101,7 +101,7 @@ i3GEO.janela =
 	    } else {
 		i.mCustomScrollbar(a);
 	    }
-	    */
+	     */
 	},
 	/**
 	 * Executa fun&ccedil;&otilde;es default antes de abrir a janela
@@ -628,7 +628,8 @@ i3GEO.janela =
 		    htmlAllowed: htmlAllowed, // allows HTML as content value
 		    onClose: onClose // callback called when the snackbar gets closed.
 	    };
-	    return $.snackbar(options);
+	    var snack = $.snackbar(options);
+	    return snack;
 	},
 	/**
 	 * Function: tempoMsg
@@ -661,7 +662,7 @@ i3GEO.janela =
 	    setTimeout(function() {
 		i3GEO.janela.tempoModal.modal("hide");
 	    }, tempo);
-	    */
+	     */
 	},
 	closeModal: false,
 	//utilizado para mensagens genericas com botao de close

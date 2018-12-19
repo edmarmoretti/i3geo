@@ -5,7 +5,7 @@
                 Esses parametros indicam qual o checkbox que define o tipo de busca, o local onde os dados serao mostrados e o template para formatar o resultado
                 -->
 <div data-traduzir="true" id='guia7obj' style='display: none; text-align: left; height: 100%'>
-    <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
+    <div class="i3GeoBgc2 i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
         <button>
             <span class="pull-left">{{{t23}}}</span> <span class="pull-right material-icons">cancel</span>
         </button>

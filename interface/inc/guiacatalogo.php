@@ -1,7 +1,7 @@
 
 <!-- Catalogo de temas -->
 <div id='guia2obj' data-traduzir="true" style='display: none; text-align: left; height: 100%;'>
-    <div class="i3GEOfechaGuia" style="display: flex;">
+    <div class="i3GeoBgc2 i3GEOfechaGuia" style="display: flex;">
         <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');i3GEO.catalogoMenus.mostraCatalogoPrincipal();">
             <span style="vertical-align: middle">{{{iconeCatalogo}}}</span>
         </button>

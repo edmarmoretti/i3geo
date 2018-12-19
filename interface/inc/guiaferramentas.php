@@ -1,7 +1,7 @@
 
 <!-- Ferramentas -->
 <div data-traduzir="true" id='guia8obj' style='display: none; text-align: left; height: 100%'>
-    <div class="i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
+    <div class="i3GeoBgc2 i3GEOfechaGuia" onclick="i3GEO.guias.abreFecha('fecha');">
         <button>
             <span class="pull-left">{{{iconeFerramentas}}}</span> <span class="pull-right material-icons">cancel</span>
         </button>

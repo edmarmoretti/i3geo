@@ -259,7 +259,9 @@ i3GEO.desenho =
 	 *
 	 * {boolean} - posiciona a marca no centro do ponto
 	 *
-	 * {function} - fun&ccedil;&atilde;o disparada no evento onclick
+	 * {fat} - atributos que serao adicionados a propriedade fat da feature
+	 *
+	 * {nameLayer} - string utilizada como nome do layer. Na opcao tooltip, se nao for vazio, sera utilizado como o titulo
 	 *
 	 * Return:
 	 *
@@ -267,7 +269,10 @@ i3GEO.desenho =
 	 *
 	 */
 	//addPin : function(x, y, w, h, imagem, namespace, centro, funcaoclick) {
-	addPin : function({x = 0, y = 0, w = 27, h = 27, imagem = "", namespace = "pin", centro = false, funcaoclick = false} = {}) {
+	addPin : function({nameLayer = "", fat = false, x = 0, y = 0, w = 27, h = 27, imagem = "", namespace = "pin", centro = false, funcaoclick = false, tooltiptext = ""} = {}) {
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.desenho.addPin()");
+
 	    //para efeitos de compatibilidade
 	    if(!x){
 		var x = arguments[0],
@@ -279,8 +284,14 @@ i3GEO.desenho =
 		centro = arguments[6],
 		funcaoclick = arguments[7]
 	    }
+	    if(isNaN(x)){
+		return;
+	    }
 	    if (!imagem || imagem === "") {
 		imagem = i3GEO.configura.locaplic + "/imagens/google/confluence.png";
+	    }
+	    if(!nameLayer){
+		nameLayer = "";
 	    }
 	    if (!funcaoclick) {
 		funcaoclick = function() {
@@ -303,6 +314,13 @@ i3GEO.desenho =
 	    f.setProperties({
 		origem : namespace
 	    });
+	    //objeto com atributos
+	    if(fat){
+		f.setProperties({
+		    fat : fat,
+		    nameLayer: nameLayer
+		});
+	    }
 	    f.setStyle(
 		    new ol.style.Style({
 			image: new ol.style.Icon({
@@ -313,9 +331,10 @@ i3GEO.desenho =
 		    })
 	    );
 	    f.setId(i3GEO.util.uid());
+	    if (tooltiptext && tooltiptext != ""){
+		f.set("tooltiptext", tooltiptext, true);
+	    }
 	    i3GEO.editor.setStyleDefault(f);
-	    //FIXME como incluir o evento click?
-	    //f.on('click',funcaoclick);
 	    i3GEO.desenho.layergrafico.getSource().addFeature(f);
 	    i3GEO.editor.tableRefresh();
 	    return f;

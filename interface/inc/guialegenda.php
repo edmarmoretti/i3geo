@@ -1,6 +1,6 @@
 <!-- Legenda -->
 <div data-traduzir="true" id='guia4obj' style='display: none; text-align: left; height: 100%;'>
-    <div class="i3GEOfechaGuia" style="display: flex;">
+    <div class="i3GeoBgc2 i3GEOfechaGuia" style="display: flex;">
         <button class="pull-left text-left" onclick="i3GEO.legenda.off('legendaHtml');i3GEO.guias.abreFecha('fecha');">
             <span style="vertical-align: middle">{{{iconeLegenda}}}</span>
         </button>

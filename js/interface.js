@@ -506,7 +506,7 @@ i3GEO.Interface =
 		    p = i3GEO.Interface.openlayers.BALAOPROP,
 		    removeBaloes = function(removeWkt) {
 			if (typeof (console) !== 'undefined')
-				console.info("Removendo baloes com removeWkt = " + removeWkt);
+			    console.info("Removendo baloes com removeWkt = " + removeWkt);
 
 			var nd,t, n = i3GEO.Interface.openlayers.BALAOPROP.baloes.length, i;
 			for (i = 0; i < n; i++) {
@@ -1591,6 +1591,20 @@ i3GEO.Interface =
 			    }
 			}
 		    }
+		    //para os layers vetoriais com tooltip
+
+		    var pixel = i3geoOL.getPixelFromCoordinate(e.coordinate);
+		    i3geoOL.forEachFeatureAtPixel(pixel, function(feature, layer) {
+			var c = feature.get("tooltiptext");
+			if(c){
+			    var ei = i3GEO.Interface.INFOOVERLAY.getElement();
+			    ei.style.visibility = "visible";
+			    ei.innerHTML += "<span style='display:block;'>" + c + "<span>";
+			    i3GEO.Interface.INFOOVERLAY.setPosition(e.coordinate);
+			    i3GEO.eventos.mouseOverData();
+			}
+		    });
+
 		});
 		i3geoOL.on("touchend", function(e) {
 		    e.preventDefault();
