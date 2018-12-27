@@ -1,103 +1,84 @@
 if(typeof(i3GEOF) === 'undefined'){
     var i3GEOF = {};
 }
-i3GEOF.wiki = {
+i3GEOF.confluence = {
 	_parameters: {
 	    snackbar: "",
 	    marca: false,
 	    startDate: 0
 	},
 	start: function(){
-	    var html = "Wikipedia. " + $trad("clickparar");
-	    i3GEOF.wiki._parameters.snackbar = i3GEO.janela.snackBar({
-		content: "<div id='wikiresults' style='max-width: 220px;'>" + html + "</div>",
+	    var html = "Confluence. " + $trad("clickparar");
+	    i3GEOF.confluence._parameters.snackbar = i3GEO.janela.snackBar({
+		content: "<div id='confluenceresults' style='max-width: 220px;'>" + html + "</div>",
 		timeout: 0,
 		onClose: function(){
-		    i3GEO.desenho.removePins("wikiresults");
-		    i3GEO.desenho.removePins("wiki");
-		    i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.wiki.getData()"]);
+		    i3GEO.desenho.removePins("confluenceresults");
+		    i3GEO.desenho.removePins("confluence");
+		    i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.confluence.getData()"]);
 		}
 	    });
-	    $(i3GEOF.wiki._parameters.snackbar).snackbar("show");
+	    $(i3GEOF.confluence._parameters.snackbar).snackbar("show");
 	    this.getData();
-	    i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEOF.wiki.getData()"]);
+	    i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEOF.confluence.getData()"]);
 	},
 	show: function(data){
 	    var html = "";
-	    i3GEO.desenho.removePins("wikiresults");
+	    i3GEO.desenho.removePins("confluenceresults");
 	    for (const r of data) {
-		var link = "<a onclick='window.open(\"http://pt.wikipedia.org/wiki?curid=" + r.pageid + "\");return false;' href='javascript:void(0);' target=blank >Abrir Wikpedia</a>";
+		var link = "<a onclick='window.open(\"http://www.confluence.org/confluence.php?lat=" + r.lat + "&lon=" + r.lon + "\");return false;' href='javascript:void(0);' target=blank >Abrir Confluence</a>";
 		i3GEO.desenho.addPin({
 		    x: r.lon*1,
 		    y: r.lat*1,
 		    w: 32,
 		    h: 37,
-		    imagem: i3GEO.configura.locaplic+'/imagens/mapicons/information.png',
-		    namespace: "wikiresults",
+		    imagem: i3GEO.configura.locaplic+'/imagens/mapicons/flag-export.png',
+		    namespace: "confluenceresults",
 		    tooltiptext: r.title,
-		    nameLayer: "Wikipedia",
-		    fat: {"Link": link}
+		    nameLayer: "Confluence",
+		    fat: {
+			"Link": link,
+			"Lat/Lon": r.lat + " / " + r.lon
+		    }
 		});
 	    }
-	    if(data[0] == "aproxmais"){
-		html = "Wikipedia. " + $trad("clickparar") + "<br>" + $trad("aproxmais");
+	    if(data.length == 0){
+		html = "Confluence. " + $trad("clickparar") + "<br>" + $trad("aproxmais");
+	    } else {
+		html = "Confluence. " + $trad("clickparar") + "<br>";
 	    }
-	    if(html.length == 0){
-		html = "Wikipedia. " + $trad("clickparar") + "<br>" + $trad("nadaenc");
-	    }
-	    $("#wikiresults").html(html);
+	    $("#confluenceresults").html(html);
 	},
 	getData: function(){
-	    if(parseInt(i3GEOF.wiki._parameters.startDate / 2000,10) == parseInt(Date.now() / 2000,10)){
+	    if(parseInt(i3GEOF.confluence._parameters.startDate / 2000,10) == parseInt(Date.now() / 2000,10)){
 		return;
 	    }
-	    i3GEOF.wiki._parameters.startDate = Date.now();
-	    var bbox = i3geoOL.getView().calculateExtent();
-	    var line = new ol.geom.LineString([[bbox[0],bbox[1]],[bbox[0],bbox[3]]]);
-	    if (i3GEO.Interface.openlayers.googleLike === false){
-		line = line.transform("EPSG:4326","EPSG:3857");
-	    }
-	    var raio = line.getLength() / 2;
-	    if(isNaN(raio)){
-		raio = 10001;
-	    }
-	    if(raio >= 10000){
-		i3GEOF.wiki.show(["aproxmais"]);
+	    i3GEOF.confluence._parameters.startDate = Date.now();
+	    if(i3GEO.parametros.mapscale > 8000000){
+		i3GEOF.confluence.show([]);
 	    } else {
-		$("#wikiresults").html("Wikipedia <span class='glyphicon glyphicon-repeat normal-right-spinner'></span>");
-		$.get(
-			i3GEO.configura.locaplic + "/ferramentas/wiki/geosearch.php",
-			{
-			    g_sid: i3GEO.configura.sid,
-			    funcao: "listaartigos",
-			    ext: i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten),
-			    raio: parseInt(raio,10)
+		$("#confluenceresults").html("Confluence <span class='glyphicon glyphicon-repeat normal-right-spinner'></span>");
+		var ins = "",yi,xi,ext,xini,yini,xfim,yfim,xs,dx,ys = [];
+		ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		ext = ext.split(" ");
+		xini = parseInt(ext[0],10);
+		yini = parseInt(ext[1],10);
+		xfim = parseInt(ext[2],10);
+		yfim = parseInt(ext[3],10);
+		data = [];
+		dx = xfim - xini;
+		if ((dx > 1) || (dx < -1)){
+		    for (yi=yini;yi<yfim;yi++){
+			for (xi=xini;xi<xfim;xi++){
+			    data.push({
+				lon: xi,
+				lat: yi,
+				title: "Lat: " + yi + " Lon: " + xi
+			    });
 			}
-		).done(function(data) {
-		    i3GEOF.wiki.show(data);
-		}).fail(function() {
-		    i3GEO.janela.snackBar({content: data.statusText, style:'red'});
-		    return;
-		});
-	    }
-	},
-	escondexy: function(){
-	    i3GEO.desenho.removePins("wiki");
-	    i3GEOF.wiki._parameters.marca = false;
-	},
-	mostraxy: function(x,y){
-	    if(i3GEOF.wiki._parameters.marca === false){
-		i3GEOF.wiki._parameters.marca = i3GEO.desenho.addPin({
-		    x: x*1,
-		    y: y*1,
-		    w: 32,
-		    h: 37,
-		    imagem: i3GEO.configura.locaplic+'/imagens/mapicons/smiley_happy.png',
-		    namespace: "wiki"
-		});
-	    }
-	    else{
-		i3GEO.desenho.movePin(i3GEOF.wiki._parameters.marca,x,y);
+		    }
+		}
+		i3GEOF.confluence.show(data);
 	    }
 	}
 };

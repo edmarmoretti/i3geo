@@ -1297,9 +1297,9 @@ g_traducao =
         ],
         "d17t" : [
             {
-                pt : "conflu&ecirc;ncias",
-                en : "confluences",
-                es : "confluencias"
+                pt : "Conflu&ecirc;ncias",
+                en : "Confluences",
+                es : "Confluencias"
             }
         ],
         "d18" : [

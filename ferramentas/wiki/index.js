@@ -80,24 +80,5 @@ i3GEOF.wiki = {
 		    return;
 		});
 	    }
-	},
-	escondexy: function(){
-	    i3GEO.desenho.removePins("wiki");
-	    i3GEOF.wiki._parameters.marca = false;
-	},
-	mostraxy: function(x,y){
-	    if(i3GEOF.wiki._parameters.marca === false){
-		i3GEOF.wiki._parameters.marca = i3GEO.desenho.addPin({
-		    x: x*1,
-		    y: y*1,
-		    w: 32,
-		    h: 37,
-		    imagem: i3GEO.configura.locaplic+'/imagens/mapicons/smiley_happy.png',
-		    namespace: "wiki"
-		});
-	    }
-	    else{
-		i3GEO.desenho.movePin(i3GEOF.wiki._parameters.marca,x,y);
-	    }
 	}
 };

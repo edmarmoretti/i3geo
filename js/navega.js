@@ -836,7 +836,7 @@ i3GEO.navega =
 			"confluence",
 			"confluence",
 			"dependencias.php",
-		"i3GEOF.confluence.iniciaJanelaFlutuante()");
+		"i3GEOF.confluence.start()");
 	    }
 	},
 	atualizaGoogle : function(idgoogle) {

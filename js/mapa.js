@@ -1263,11 +1263,11 @@ i3GEO.mapa =
 				    var fat = feature.get("fat");
 				    var chaves = i3GEO.util.listaChaves(fat);
 				    var c = chaves.length;
-				    for (var i = 0; i < c; i++) {
+				    //for (var i = 0; i < c; i++) {
 					$.each(chaves,function( index, element ){
 					    texto += element + ": " + fat[element] + "<br>";
 					});
-				    }
+				    //}
 				} else {
 				    var chaves = feature.getKeys();
 				    var c = chaves.length;

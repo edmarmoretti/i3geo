@@ -216,19 +216,24 @@ i3GEO.listaDeFerramentas = {
 		url : "javascript:i3GEO.analise.dialogo.linhadotempo()"
 	    },
 	    {
-		id : "omenudataNavegacao2",
-		text : $trad("d15t"),
-		url : "javascript:i3GEO.navega.dialogo.googlemaps()"
-	    },
-	    {
 		id : "omenudataNavegacao4",
 		text : $trad("d8t"),
 		url : "javascript:i3GEO.mapa.dialogo.mostraexten()"
 	    },
 	    {
+		id : "omenudataNavegacao2",
+		text : $trad("d15t"),
+		url : "javascript:i3GEO.navega.dialogo.googlemaps()"
+	    },
+	    {
 		id : "omenudataNavegacaoWiki",
 		text : $trad("d11t"),
 		url : "javascript:i3GEO.navega.dialogo.wiki()"
+	    },
+	    {
+		id : "omenudataNavegacaoConfluence",
+		text : $trad("d17t"),
+		url : "javascript:i3GEO.navega.dialogo.confluence()"
 	    },
 	    {
 		id : "omenudataNavegacaoMetar",
@@ -239,11 +244,6 @@ i3GEO.listaDeFerramentas = {
 		id : "omenudataNavegacaoFotos",
 		text : "Fotos",
 		url : "javascript:i3GEO.navega.dialogo.buscaFotos()"
-	    },
-	    {
-		id : "omenudataNavegacaoConfluence",
-		text : $trad("d17t"),
-		url : "javascript:i3GEO.navega.dialogo.confluence()"
 	    },
 	    {
 		id : "omenudataFerramentas7a",
