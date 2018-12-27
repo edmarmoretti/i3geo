@@ -8,17 +8,25 @@ i3GEOF.wiki = {
 	    startDate: 0
 	},
 	start: function(){
+	    var html = "Wikipedia. " + $trad("clickparar");
+	    i3GEOF.wiki._parameters.snackbar = i3GEO.janela.snackBar({
+		content: "<div id='wikiresults' style='max-width: 220px;'>" + html + "</div>",
+		timeout: 0,
+		onClose: function(){
+		    i3GEO.desenho.removePins("wikiresults");
+		    i3GEO.desenho.removePins("wiki");
+		    i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.wiki.getData()"]);
+		}
+	    });
+	    $(i3GEOF.wiki._parameters.snackbar).snackbar("show");
 	    this.getData();
 	    i3GEO.eventos.adicionaEventos("NAVEGAMAPA",["i3GEOF.wiki.getData()"]);
 	},
 	show: function(data){
-	    var html = [];
+	    var html = "";
 	    i3GEO.desenho.removePins("wikiresults");
 	    for (const r of data) {
-		html.push("<div onmouseover='i3GEOF.wiki.mostraxy(" + r.lon + "," + r.lat + ")' onmouseout='i3GEOF.wiki.escondexy()'><h4>" + r.title + "</h4>");
 		var link = "<a onclick='window.open(\"http://pt.wikipedia.org/wiki?curid=" + r.pageid + "\");return false;' href='javascript:void(0);' target=blank >Abrir Wikpedia</a>";
-		html.push(link);
-		html.push("</div><hr>");
 		i3GEO.desenho.addPin({
 		    x: r.lon*1,
 		    y: r.lat*1,
@@ -32,28 +40,12 @@ i3GEOF.wiki = {
 		});
 	    }
 	    if(data[0] == "aproxmais"){
-		html = [$trad("aproxmais")];
+		html = "Wikipedia. " + $trad("clickparar") + "<br>" + $trad("aproxmais");
 	    }
 	    if(html.length == 0){
-		html = [$trad("nadaenc")];
+		html = "Wikipedia. " + $trad("clickparar") + "<br>" + $trad("nadaenc");
 	    }
-	    if(!$i("wikiresults")){
-		i3GEOF.wiki._parameters.snackbar = i3GEO.janela.snackBar({
-		    content: "<div id='wikiresults' style='max-width: 220px;'></div>",
-		    timeout: 0,
-		    onClose: function(){
-			i3GEO.desenho.removePins("wikiresults");
-			i3GEO.desenho.removePins("wiki");
-			i3GEO.eventos.removeEventos("NAVEGAMAPA",["i3GEOF.wiki.getData()"]);
-		    }
-		});
-	    } else {
-		$(i3GEOF.wiki._parameters.snackbar).snackbar("show");
-	    }
-	    $i("wikiresults").innerHTML = html.join(" ");
-	    $( "#snackbar-container" ).find("a").click(function( event ) {
-		event.stopPropagation();
-	    });
+	    $("#wikiresults").html(html);
 	},
 	getData: function(){
 	    if(parseInt(i3GEOF.wiki._parameters.startDate / 2000,10) == parseInt(Date.now() / 2000,10)){
@@ -66,10 +58,13 @@ i3GEOF.wiki = {
 		line = line.transform("EPSG:4326","EPSG:3857");
 	    }
 	    var raio = line.getLength() / 2;
+	    if(isNaN(raio)){
+		raio = 10001;
+	    }
 	    if(raio >= 10000){
 		i3GEOF.wiki.show(["aproxmais"]);
 	    } else {
-		i3GEO.janela.abreAguarde();
+		$("#wikiresults").html("Wikipedia <span class='glyphicon glyphicon-repeat normal-right-spinner'></span>");
 		$.get(
 			i3GEO.configura.locaplic + "/ferramentas/wiki/geosearch.php",
 			{
@@ -79,10 +74,8 @@ i3GEOF.wiki = {
 			    raio: parseInt(raio,10)
 			}
 		).done(function(data) {
-		    i3GEO.janela.fechaAguarde();
 		    i3GEOF.wiki.show(data);
 		}).fail(function() {
-		    i3GEO.janela.fechaAguarde();
 		    i3GEO.janela.snackBar({content: data.statusText, style:'red'});
 		    return;
 		});

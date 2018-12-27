@@ -3252,5 +3252,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "clickparar" : [
+            {
+                pt : "Clique para parar",
+                en : "",
+                es : ""
+            }
         ]
     };
