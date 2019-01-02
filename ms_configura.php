@@ -505,8 +505,9 @@ $emailInstituicao = "geoprocessamento@mma.gov.br";
 
 	Chave utilizada pela API do Google maps.
 
-	A API do Google maps &eacute; utilizada em algumas funcionalidades do i3geo. Vc deve registrar uma chave
-	no site do Google para o seu endere&ccedil;o de servidor web. veja como fazer em:
+	A API do Google maps e utilizada em algumas funcionalidades do i3geo.
+	Vc deve registrar uma chave no site do Google para o seu endereco de servidor web.
+	Veja como fazer em:
 	http://code.google.com/apis/maps/signup.html
 
 	Tipo:

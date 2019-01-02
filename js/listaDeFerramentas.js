@@ -236,14 +236,9 @@ i3GEO.listaDeFerramentas = {
 		url : "javascript:i3GEO.navega.dialogo.confluence()"
 	    },
 	    {
-		id : "omenudataNavegacaoMetar",
-		text : $trad("d29"),
-		url : "javascript:i3GEO.navega.dialogo.metar()"
-	    },
-	    {
-		id : "omenudataNavegacaoFotos",
-		text : "Fotos",
-		url : "javascript:i3GEO.navega.dialogo.buscaFotos()"
+		id : "omenudataFerramentas10",
+		text : $trad("x93"),
+		url : "javascript:i3GEO.mapa.dialogo.geolocal()"
 	    },
 	    {
 		id : "omenudataFerramentas7a",
@@ -254,11 +249,6 @@ i3GEO.listaDeFerramentas = {
 		id : "omenudataFerramentas8a",
 		text : $trad("p12"),
 		url : "javascript:i3GEO.mapa.dialogo.autoredesenha()"
-	    },
-	    {
-		id : "omenudataFerramentas10",
-		text : $trad("x93"),
-		url : "javascript:i3GEO.mapa.dialogo.geolocal()"
 	    }],
 	    "ferramentasmapa" : [{
 		id : "omenudataFerramentas1a",

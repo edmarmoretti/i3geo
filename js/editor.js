@@ -240,45 +240,6 @@ i3GEO.editor =
 		    f = s.getFeatureById(i3GEO.editor._idsSelecionados[i]);
 		    if(f){
 			i3GEO.editor.restoreStyleDefault(f);
-			/*
-			st = f.getStyle();
-			if(st && st.getImage && st.getImage()){
-			    if(st.getImage().getSrc || f.getProperties().externalGraphic != ""){
-				f.setStyle(
-					new ol.style.Style({
-					    image: new ol.style.Icon({
-						src : f.getProperties().externalGraphic,
-						size : [f.getProperties().graphicWidth,f.getProperties().graphicHeight]
-					    })
-					})
-				);
-			    }
-			    else{
-				f.setStyle(
-					new ol.style.Style({
-					    image: new ol.style.Circle({
-						radius: i3GEO.editor._simbologia.pointRadius,
-						fill: new ol.style.Fill({
-						    color: f.getProperties().fillColor
-						}),
-						stroke: new ol.style.Stroke({
-						    color: f.getProperties().strokeColor,
-						    width: i3GEO.editor._simbologia.pointRadius / 3
-						})
-					    })
-					})
-				);
-			    }
-			}
-			else if(st){
-			    if(st.getFill && st.getFill() && f.getProperties().fillColor){
-				st.getFill().setColor(f.getProperties().fillColor);
-			    }
-			    if(st.getStroke && st.getStroke() && f.getProperties().strokeColor){
-				st.getStroke().setColor(f.getProperties().strokeColor);
-			    }
-			}
-			 */
 		    }
 		}
 		if(id){

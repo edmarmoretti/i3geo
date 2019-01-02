@@ -49,7 +49,7 @@
         </button>
 
         <br class="hidden-xs">
-        <button class="i3GeoBgc1" title="GPS" onclick="i3GEO.navega.geolocal.start()" style="float: left; cursor: pointer;">
+        <button class="i3GeoBgc1" title="GPS" onclick="i3GEO.geolocal.start()" style="float: left; cursor: pointer;">
             <i class="material-icons">gps_fixed</i>
         </button>
         <button class="i3GeoBgc1" title="{{{itensvisib}}}" onclick="i3GEO.mapa.itensvisib(['.check','.ol-i3GEOcontrols','.iconesGuiaMovel','.ol-attribution button','.escalanumerica','.localizarxy','.i3GEOfechaGuia'])" style="float: left; cursor: pointer;">

@@ -804,6 +804,9 @@ i3GEO.Interface =
 		    return {
 			toBBOX : function() {
 			    return e.join(",");
+			},
+			getGeometry : function(){
+			    return ol.geom.Polygon.fromExtent(e);
 			}
 		    };
 		};

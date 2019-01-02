@@ -615,6 +615,7 @@ i3GEO.janela =
 	},
 	//http://fezvrasta.github.io/snackbarjs/
 	//styles: snackbar|red
+	//$("#snackbarid").snackbar("hide");
 	snackBar: function({content = "", style = "snackbar", timeout = 4000, htmlAllowed = true, onClose = function(){}}){
 	    $("#snackbar-container").find("div").filter(function(){
 		if($(this).hasClass('snackbar-opened') == false){

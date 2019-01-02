@@ -8,7 +8,7 @@
     </div>
     <div class="separadorCabecalhoGuias">&nbsp;</div>
     <div style="overflow-y: scroll; height: calc(100% - 45px);">
-        <div class="form-inline" style="width: 100%;">
+        <div class="form-inline text-center" style="width: 100%;">
             <div class="text-center form-group" style="margin: 4px; display: inline-block">
                 <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.area();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
                     <img style="margin-top: 4px;" src="../imagens/gisicons/area-measure.png">
@@ -20,12 +20,6 @@
                     <img style="margin-top: 4px;" src="../imagens/gisicons/length-measure.png">
                 </a>
                 <h6>{{{d21t}}}</h6>
-            </div>
-            <div class="text-center form-group" style="margin: 4px; display: inline-block">
-                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.mapa.dialogo.geolocal();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
-                    <img style="margin-top: 4px;" src="../imagens/gisicons/layer-gps.png">
-                </a>
-                <h6>{{{localiza}}}</h6>
             </div>
         </div>
         <div class="clearfix"></div>
