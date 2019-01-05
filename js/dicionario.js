@@ -3259,5 +3259,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "geolocfalse" : [
+            {
+                pt : "Seu dispositivo n&atilde;o suporta geolocaliza&ccedil;&atilde;o",
+                en : "",
+                es : ""
+            }
         ]
     };

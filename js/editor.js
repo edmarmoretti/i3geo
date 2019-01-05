@@ -594,6 +594,21 @@ i3GEO.editor =
 		}
 		i3geoOL.addInteraction(draw);
 	    },
+	    gps : function(drawendcallback){
+		i3GEO.geolocal.events.add("afterShowOrMovePoint",function(xy){
+		    var feature = new ol.Feature({
+			geometry: i3GEO.util.extGeo2OSM(new ol.geom.Point(xy))
+		    });
+		    feature.setStyle(
+			    i3GEO.editor.getPointStyle()
+		    );
+		    i3GEO.editor.setStyleDefault(feature);
+		    feature.setId(i3GEO.util.uid());
+		    i3GEO.desenho.layergrafico.getSource().addFeature(feature);
+		    i3GEO.editor.tableRefresh();
+		});
+		i3GEO.geolocal.start();
+	    },
 	    point : function(drawendcallback){
 		i3GEO.eventos.cliquePerm.desativa();
 		i3GEO.editor.removeInteracoes();
