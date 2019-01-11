@@ -648,22 +648,6 @@ i3GEO.janela =
 		tempo = 4000;
 	    }
 	    i3GEO.janela.snackBar({content: texto, timeout: tempo});
-	    /*
-	    if(!i3GEO.janela.tempoModal){
-		i3GEO.janela.tempoModal = $(
-			Mustache.render(i3GEO.template.janela.msg, {"texto": texto})
-		);
-	    } else {
-		$i("i3GEOMensagemTempoModal").innerHTML = texto;
-	    }
-	    i3GEO.janela.tempoModal.modal("show");
-	    if(!tempo){
-		tempo = 3000;
-	    }
-	    setTimeout(function() {
-		i3GEO.janela.tempoModal.modal("hide");
-	    }, tempo);
-	     */
 	},
 	closeModal: false,
 	//utilizado para mensagens genericas com botao de close
@@ -690,7 +674,7 @@ i3GEO.janela =
 	},
 	_formModal: false,
 	//utilizado para mensagens de ferramentas com botao de close e outros parametros
-	formModal : function({resizable = {disabled: true, ghost: true, handles: "se"}, texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = false} = {}) {
+	formModal : function({expandable = true, resizable = {disabled: true, ghost: true, handles: "se"}, texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = false} = {}) {
 	    if(css == false){
 		css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'};
 	    }
@@ -731,6 +715,11 @@ i3GEO.janela =
 			i3GEO.janela._formModal.css({"top":"0px","left":"0px","width":"100%","height":"100%"});
 		    }
 		});
+	    }
+	    if(expandable == true){
+		i3GEO.janela._formModal.find(".expandModal").css("visibility","visible");
+	    } else {
+		i3GEO.janela._formModal.find(".expandModal").css("visibility","hidden");
 	    }
 	    if(texto == false){
 		i3GEO.janela._formModal.modal("hide");

@@ -2577,6 +2577,13 @@ g_traducao =
                 es : "cortar figura"
             }
         ],
+        "splitf" : [
+            {
+                pt : "divide figura",
+                en : "",
+                es : ""
+            }
+        ],
         "modf" : [
             {
                 pt : "modifica figura",
@@ -3040,6 +3047,11 @@ g_traducao =
         }],
         "desPol" : [{
             pt : "Desenhe um pol&iacute;gono",
+            en : "",
+            es : ""
+        }],
+        "desLin" : [{
+            pt : "Desenhe uma linha",
             en : "",
             es : ""
         }],

@@ -530,41 +530,65 @@ i3GEO.mapa =
 	     *
 	     * Congela a vis&atilde;o atual do mapa mostrando-o em uma janela flutuante
 	     */
-	    congelaMapa : function() {
-		var url = "", idjanela = i3GEO.util.generateId(), cabecalho = function() {
-		}, titulo, minimiza = function() {
-		    i3GEO.janela.minimiza(idjanela);
-		};
-		if (i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps") {
-		    url =
-			i3GEO.configura.locaplic + "/ferramentas/congelamapa/openlayers3.php?g_sid="
-			+ i3GEO.configura.sid
-			+ "&ext="
-			+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+	    congelamapa : function() {
+		i3GEO.janela.abreAguarde();
+		var url = i3GEO.configura.locaplic
+		+ "/ferramentas/congelamapa/exec.php?g_sid="
+		+ i3GEO.configura.sid
+		+ "&funcao=copy"
+		+ "&ext="
+		+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		$.get(url).done(function(data) {
+		    i3GEO.janela.fechaAguarde();
+		    var url = "", idjanela = i3GEO.util.generateId(), cabecalho = function() {
+		    }, titulo, minimiza = function() {
+			i3GEO.janela.minimiza(idjanela);
+		    };
+		    url = i3GEO.configura.locaplic + "/ferramentas/congelamapa/ogc.php?g_sid="
+		    + i3GEO.configura.sid;
 
-		    titulo = "<span class='i3GeoTituloJanelaBsNolink' ></span></div>";
-
-		    i3GEO.janela.cria(
-			    "520px",
-			    "370px",
-			    url,
-			    "",
-			    "",
-			    titulo,
-			    idjanela,
-			    false,
-			    "hd",
-			    cabecalho,
-			    minimiza,
-			    "",
-			    "",
-			    "",
-			    "",
-			    false,
-			    "",
-			    "123"
-		    );
-		}
+		    var map = new ol.Map({
+			layers: [
+			    //new ol.layer.Tile({source: new ol.source.OSM()}),
+			    new ol.layer.Image({
+				source : new ol.source.ImageWMS({
+				    url : url,
+				    params : {
+					'LAYERS' : '',
+					'VERSION' : '1.1.0'
+				    },
+				    projection : i3geoOL.getView().getProjection().getCode(),
+				    ratio : 1
+				}),
+				visible : true
+			    })
+			    ],
+			    //target: 'mapacongelado',
+			    controls: [new ol.control.Zoom()],
+			    view: new ol.View({
+				center: i3geoOL.getView().getCenter(),
+				zoom: i3geoOL.getView().getZoom()
+			    })
+		    });
+		    i3GEO.janela.formModal({
+			texto: "<div style='width:100%;height: calc(100% + 1px)' id='mapacongelado'></div>",
+			expandable: false,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n",
+			    stop: function(event, ui){
+				map.updateSize();
+			    }
+			},
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    });
+		    map.setTarget('mapacongelado');
+		}).fail(function() {
+		    i3GEO.janela.fechaAguarde();
+		    i3GEO.janela.snackBar({content: $trad("x43"),style: "red"});
+		    return;
+		});
 	    },
 	    /**
 	     * Function: metaestat
@@ -1264,9 +1288,9 @@ i3GEO.mapa =
 				    var chaves = i3GEO.util.listaChaves(fat);
 				    var c = chaves.length;
 				    //for (var i = 0; i < c; i++) {
-					$.each(chaves,function( index, element ){
-					    texto += element + ": " + fat[element] + "<br>";
-					});
+				    $.each(chaves,function( index, element ){
+					texto += element + ": " + fat[element] + "<br>";
+				    });
 				    //}
 				} else {
 				    var chaves = feature.getKeys();

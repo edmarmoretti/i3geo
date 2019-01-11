@@ -236,14 +236,9 @@ i3GEO.listaDeFerramentas = {
 		url : "javascript:i3GEO.navega.dialogo.confluence()"
 	    },
 	    {
-		id : "omenudataFerramentas10",
-		text : $trad("x93"),
-		url : "javascript:i3GEO.mapa.dialogo.geolocal()"
-	    },
-	    {
 		id : "omenudataFerramentas7a",
 		text : $trad("x64a"),
-		url : "javascript:i3GEO.mapa.dialogo.congelaMapa();"
+		url : "javascript:i3GEO.mapa.dialogo.congelamapa();"
 	    },
 	    {
 		id : "omenudataFerramentas8a",
