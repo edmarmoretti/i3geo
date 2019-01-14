@@ -912,7 +912,7 @@ $wkt - boolean indicando se $xy e um WKT
 					$e->set("symbol",$marca);
 					$pinlayer->setmetadata("tema","Poligonos inseridos");
 					$pinlayer->set("type",MS_LAYER_POLYGON);
-					$pinlayer->set("opacity","50");
+					$pinlayer->set("opacity",50);
 				break;
 				case "ANNOTATION":
 					//$c->set("status",MS_DELETE);

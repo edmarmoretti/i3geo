@@ -41,8 +41,10 @@
 }
 .form-group .form-control {
 	font-size: 1.5rem;
+	/*
 	color: white;
 	background-color: #477596;
+	*/
 }
 .form-group input[type=number] {
     margin-top: 14px;
@@ -56,7 +58,9 @@
     background-color: #f9f9f9 !Important;
 }
 .form-group label {
+	/*
 	color: white;
+	*/
 }
 .form-group.label-static label.control-label {
 	top: -40px;

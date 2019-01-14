@@ -3055,6 +3055,21 @@ g_traducao =
             en : "",
             es : ""
         }],
+        "nomemory" : [{
+            pt : "Nada em mem&oacute;ria para colar.",
+            en : "",
+            es : ""
+        }],
+        "pasteatt" : [{
+            pt : "Existem figuras selecionadas. Os atributos em mem&oacute;ria ser&atilde;o colados nessas figuras.",
+            en : "",
+            es : ""
+        }],
+        "pastetonew" : [{
+            pt : "Para colar como uma nova figura, limpe a sele&ccedil;&atilde;o.",
+            en : "",
+            es : ""
+        }],
         "union" : [{
             pt : "Uni&atilde;o",
             en : "",

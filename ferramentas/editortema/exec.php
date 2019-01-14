@@ -32,9 +32,7 @@ switch (strtoupper($_POST["funcao"])) {
             header("HTTP/1.1 403 Camada nao editavel.");
             exit();
         } else {
-
             $tabela = $layer->getmetadata("TABELAEDITAVEL");
-
             $esquema = $layer->getmetadata("ESQUEMATABELAEDITAVEL");
             $colunaidunico = $layer->getmetadata("COLUNAIDUNICO");
             $colunageometria = $layer->getmetadata("COLUNAGEOMETRIA");

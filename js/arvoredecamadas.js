@@ -189,8 +189,21 @@ i3GEO.arvoreDeCamadas =
 			"{{#data}}" + i3GEO.template.camadaGr + "{{/data}}",
 			{"data":lista}
 		);
-
 		$(temp).html(t);
+		$(".listaLayersGrBtn").draggable({
+		    helper: "clone",
+		    appendTo: $("body"),
+		    start: function(event, ui) {
+			$(this).hide();
+		    },
+		    stop: function(event, ui) {
+			$(this).css({"position":"absolute","top":(event.clientY - event.offsetY),"left": (event.clientX - event.offsetX)});
+			$(".layersGrForm").css({"background": "white","max-height": "300px","overflow":"auto"});
+			$("body").append($(this));
+			$(this).show();
+			$(this).css("display","");
+		    }
+		});
 	    }
 	},
 	existeCamadaSel: function({msg = true}={}){

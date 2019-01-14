@@ -700,6 +700,7 @@ i3GEO.janela =
 		i3GEO.janela._formModal.css(css);
 		i3GEO.janela._formModal.draggable(draggable);
 		$(i3GEO.janela._formModal).appendTo("#" + i3GEO.Interface.IDCORPO);
+
 		i3GEO.janela._formModal.find(".expandModal").on("click",function(){
 		    if($(this).data("expanded") == true){
 			$(this).data("expanded",false);
@@ -954,7 +955,7 @@ i3GEO.janela =
 		funcaoOk.call();
 	    });
 	},
-	alerta : function({html = "", pergunta = pergunta, funcaoOk = funcaoOk, parametros = parametros} ) {
+	alerta : function({html = "", pergunta = "", funcaoOk = false, parametros = false} = {} ) {
 	    var botao = Mustache.render(
 		    i3GEO.template.botoes.padrao,
 		    {
@@ -974,7 +975,9 @@ i3GEO.janela =
 	    i3GEO.janela.closeMsg(text);
 	    $("#i3GEOJanelapromptOk").on("click",parametros,function(){
 		i3GEO.janela.closeMsg();
-		funcaoOk(parametros);
+		if(funcaoOk){
+		    funcaoOk(parametros);
+		}
 	    });
 	},
 	mensagemSimples : function(texto) {

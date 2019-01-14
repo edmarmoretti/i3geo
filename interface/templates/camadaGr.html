@@ -1,4 +1,4 @@
-<div class="list-group condensed" style="cursor: move; margin-top: 10px;">
+<div class="list-group condensed" style="cursor: pointer; margin-top: 10px;">
     <div class="checkbox" style="display: inline;">
         <label class="{{{classeCss}}}" style="width: calc(100% - 100px); margin: 0px 0px 6px 50px;">
             <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
@@ -8,7 +8,7 @@
     </div>
     <div data-target="#listaLayersGrBtn" data-toggle="collapse" class="list-group pull-right collapsed" style="margin-bottom: 5px;"></div>
 </div>
-<div id="listaLayersGrBtn" class="listaLayersGrBtn collapse" style="overflow: none; width: 35rem;">
+<div id="listaLayersGrBtn" class="listaLayersGrBtn collapse" style="background:white; cursor:move; overflow: none; width: 35rem;">
     <button title="{{{dlinha}}}" onclick="i3GEO.editor.draw.lineString()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/line-create.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
@@ -54,7 +54,9 @@
     <button title="{{{frente}}}" onclick="i3GEO.editor.orderToFront()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/order-to-front.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-
+    <button title="{{{splitf}}}" onclick="i3GEO.editor.draw.editSplit()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/split.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
     <button title="{{{cortaf}}}" onclick="i3GEO.editor.draw.editCut()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/ring-add.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
@@ -79,6 +81,7 @@
     <button title="{{{masc}}}" onclick="i3GEO.editor.masc()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mLayoutItemPicture.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
+    <br>
     <button title="{{{x101}}}" onclick="i3GEO.editor.copy()" class="btn btn-xs" style="margin: 2px; padding: 2px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mActionEditCopy.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
@@ -101,6 +104,7 @@
             <span class="toggle" style="margin-right: 8px;"></span>snap
         </label>
     </div>
+    <br>
+    <div class="layersGrForm container-fluid"></div>
 </div>
-<div class="layersGrForm container-fluid"></div>
 <hr>

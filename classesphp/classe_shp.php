@@ -584,7 +584,7 @@ $para - linha|poligono
 		if ($para == "poligono")
 		{
 			$layer->set("type",MS_LAYER_POLYGON);
-			$layer->set("opacity","50");
+			$layer->set("opacity",50);
 			$layer->setmetadata("tema",$novonomelayer." (poligonal)");
 		}
 		return("ok");
