@@ -5,7 +5,7 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
 LAYER
-    #CONNECTION "http://www.geomobi.dftrans.df.gov.br/geoserver/ows?LAYERS=geonode:Paradas&STYLES=&TILED=true&"
+    #CONNECTION "http://www.geomobi.dftrans.df.gov.br/geoserver/ows?"
     CONNECTION "http://localhost/testeproxy.php?"
 
     CONNECTIONTYPE WMS

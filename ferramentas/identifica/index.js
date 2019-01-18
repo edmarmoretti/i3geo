@@ -263,8 +263,7 @@ i3GEOF.identifica = {
 	 * retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica3>
 	 */
 	mostraDadosTema : function(retorno) {
-
-	    var classeTemp="",codigo_tipo_regiao = "",alvo, filtro, camada, idreg, idsalva, paramsalva, i, res = "", ntemas, resultados, nres, cor, j, nitens, k, atualN = "todas", inicio =
+	    var classeTemp="",codigo_tipo_regiao = "",alvo, filtro, camada, idreg, idsalva, paramsalva, i, res = "", ntemas, resultados, nres, cor, j, nitens, k, inicio =
 		0, numResultados = 0, tip, link, textovalor;
 
 	    if (retorno == undefined || retorno == "") {
@@ -294,84 +293,42 @@ i3GEOF.identifica = {
 		    };
 		    i3GEOF.identifica._export.push(retorno[i].nome);
 		    resultados = retorno[i].resultado;
-
 		    // encontrou algo
 		    if (resultados[0] !== " ") {
-			nres = resultados.length;
-			numResultados = nres;
-			if (atualN != "todas") {
-			    nres = atualN * 1;
-			    inicio = atualN * 1 - 1;
-			}
 			var registros = [];
-			for (j = inicio; j < nres; j++) {
+			//for (j = inicio; j < nres; j++) {
+			for (let j of resultados){
 			    var linha = {};
-			    nitens = resultados[j].length;
 			    // pega o valor do item que e o id unico no sistema
 			    // METAESTAT
 			    idreg = "";
-			    for (k = 0; k < nitens; k++) {
-				if (resultados[j][k].item === retorno[i].colunaidunico) {
-				    idreg = resultados[j][k].valor;
+			    //for (k = 0; k < nitens; k++) {
+			    for (let k of j){
+				if (k.item === retorno[i].colunaidunico) {
+				    idreg = k.valor;
 				}
 			    }
 			    linha.idreg = idreg;
 			    linha.classeCssEditavel = "hidden";
-
-			    // opcao para apagar e mover o registro
-			    if (idreg != "" && retorno[i].editavel == "todos") {
-				linha.classeCssEditavel = "";
-				linha.tema = retorno[i].tema;
-				linha.apagaRegistro = $trad('apagaRegistro', i3GEOF.identifica.dicionario);
-				linha.move = $trad('move', i3GEOF.identifica.dicionario);
-			    }
 			    linha.colunas = [];
 
-			    for (k = 0; k < nitens; k++) {
-
+			    //for (k = 0; k < nitens; k++) {
+			    for (let k of j){
 				tip = "&nbsp;&nbsp;";
-				textovalor = resultados[j][k].valor;
+				textovalor = k.valor;
 				var coluna = {
 					"tip": "",
 					"textovalor": textovalor,
 					"classeCssEditavel": "hidden"
 				};
-				// insere o input para edicao
-				// se for uma regiao cadastrada, todos os campos
-				// sao editaveis
-				if (idreg != "" && (resultados[j][k].item === retorno[i].editavel || retorno[i].editavel == "todos")) {
-				    coluna.classeCssEditavel = "";
-				    if (retorno[i].tiposalva == "regiao") {
-					retorno[i].id_medida_variavel = 0;
-				    }
-				    idsalva =
-					"idsalva" + retorno[i].tema
-					+ "_"
-					+ idreg
-					+ "_"
-					+ resultados[j][k].item
-					+ "_"
-					+ retorno[i].tiposalva;
-				    paramsalva =
-					"\"" + retorno[i].tema
-					+ "\","
-					+ idreg
-					+ ",\""
-					+ resultados[j][k].item
-					+ "\",\""
-					+ retorno[i].tiposalva
-					+ "\"";
-				    coluna.idsalva = idsalva;
-				    coluna.paramsalva = paramsalva;
-				}
 				coluna.etiquetaAtiva = $trad('etiquetaAtiva', i3GEOF.identifica.dicionario);
-				if (resultados[j][k].tip && resultados[j][k].tip.toLowerCase() == "sim") {
+				if (k.tip && k.tip.toLowerCase() == "sim") {
 				    coluna.classeCssTip = "";
 				} else {
 				    coluna.classeCssTip = "hidden";
 				}
-				coluna.item = resultados[j][k].item;
-				coluna.valor = resultados[j][k].valor;
+				coluna.item = k.item;
+				coluna.valor = k.valor;
 				coluna.filtraValor = $trad('filtraValor', i3GEOF.identifica.dicionario);
 				coluna.tema = retorno[i].tema;
 
@@ -384,29 +341,29 @@ i3GEOF.identifica = {
 				}
 				// o mesmo problema pode ocorrer em raster,
 				// que possuem o nome da classe como valor
-				if (resultados[j][k].alias.search(">") >= 0 || resultados[j][k].alias.search("<") >= 0) {
+				if (k.alias.search(">") >= 0 || k.alias.search("<") >= 0) {
 				    filtro = "";
 				    coluna.classeCssFiltro = "hidden";
 				}
 
-				if (resultados[j][k].link === "") {
-				    coluna.alias = resultados[j][k].alias;
+				if (k.link === "") {
+				    coluna.alias = k.alias;
 				    coluna.textovalor = textovalor;
 				    coluna.link = "";
 				    coluna.classeCssLink = "hidden";
 				} else {
 				    try {
-					link = eval(resultados[j][k].link);
+					link = eval(k.link);
 				    } catch (e) {
-					link = resultados[j][k].link;
+					link = k.link;
 				    }
-				    if(resultados[j][k].idIframe){
-					alvo = resultados[j][k].idIframe;
+				    if(k.idIframe){
+					alvo = k.idIframe;
 				    }
 				    else{
 					alvo = "_blank";
 				    }
-				    coluna.alias = resultados[j][k].alias;
+				    coluna.alias = k.alias;
 				    coluna.link = link;
 				    coluna.textovalor = textovalor;
 				    coluna.alvo = alvo;
@@ -414,9 +371,9 @@ i3GEOF.identifica = {
 				}
 				coluna.classeCssImg = "hidden";
 				coluna.img = "";
-				if (resultados[j][k].img !== "") {
+				if (k.img !== "") {
 				    coluna.classeCssImg = "";
-				    coluna.img = resultados[j][k].img;
+				    coluna.img = k.img;
 				}
 				linha.colunas.push(coluna);
 				i3GEOF.identifica._export.push(coluna.alias + ":" + coluna.textovalor);

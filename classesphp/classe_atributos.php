@@ -2098,140 +2098,6 @@ class Atributos
         } else {
             $convC = true;
         }
-        //
-        // opera&ccedil;&atilde;o especial para o caso de wms
-        //
-        if ($layer->connectiontype == MS_WMS) {
-            $wkt = "nao";
-            $layer->set("toleranceunits", MS_PIXELS);
-            $layer->set("tolerance", $resolucao);
-            $mapa = desligatemas($mapa);
-            $mapa = desligamargem($mapa);
-            $imgo = $mapa->draw();
-            $ptimg = xy2imagem($map_file, array(
-                $x,
-                $y
-            ), $mapa);
-            // $formatoinfo = "MIME";
-            $formatosinfo = $layer->getmetadata("formatosinfo");
-            $formatosinfohtml = false;
-            if ($formatosinfo != "") {
-                $formatosinfo = explode(",", $formatosinfo);
-                if ($formatosinfo[0] != "") {
-                    $formatoinfo = $formatosinfo[0];
-                }
-                foreach ($formatosinfo as $f) {
-                    if (strtoupper($f) == "TEXT/PLAIN") {
-                        $formatoinfo = "text/plain";
-                    }
-                    if (strtoupper($f) == "TEXT/HTML") {
-                        $formatosinfohtml = true;
-                    }
-                }
-            } else {
-                $formatoinfo = $layer->getmetadata("wms_feature_info_type");
-                if ($formatoinfo == "") {
-                    $formatoinfo = $layer->getmetadata("wms_feature_info_mime_type");
-                }
-                if ($formatoinfo == "") {
-                    $formatoinfo = "text/plain";
-                }
-            }
-            $res = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1, $formatoinfo);
-            $res = str_replace("INFOFORMAT", "INFO_FORMAT", $res);
-            $res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1, "text/html");
-            $res2 = str_replace("INFOFORMAT", "INFO_FORMAT", $res2);
-            $resultado = array();
-            if (strtoupper($formatoinfo) != "TEXT/HTML" && strtoupper($formatoinfo) != "MIME") {
-                $resposta = file($res);
-                foreach ($resposta as $r) {
-                    $t = explode("=", $r);
-                    if (count($t) > 1) {
-                        $v = str_replace("\\n", "", $t[1]);
-                        $v = str_replace("\\r", "", $v);
-                        if (trim($v) != "") {
-                            $va = trim($v);
-                            if ($convC == true) {
-                                $va = $this->converte($va);
-                            }
-                            $resultado[trim($t[0])] = array(
-                                "alias" => trim($t[0]),
-                                "item" => trim($t[0]),
-                                "valor" => $va,
-                                "link" => "",
-                                "img" => ""
-                            );
-                        }
-                    }
-                }
-                // caso esri
-                if (count($resultado) > 0 && $resultado[0] == "") {
-                    $resposta = file($res);
-                    $cabecalho = str_replace('"   "', '"|"', $resposta[0]);
-                    $cabecalho = explode("|", $cabecalho);
-
-                    $linha = str_replace('"  "', '"|"', $resposta[1]);
-                    $linha = explode("|", $linha);
-                    for ($i = 0; $i < count($cabecalho); ++ $i) {
-                        if ($convC == true) {
-                            $va = $this->converte($linha[$i]);
-                        } else {
-                            $va = $linha[$i];
-                        }
-                        $resultado[$cabecalho[$i]] = array(
-                            "alias" => $cabecalho[$i],
-                            "item" => $cabecalho[$i],
-                            "valor" => $va,
-                            "link" => "",
-                            "img" => ""
-                        );
-                    }
-                }
-            }
-            $id = nomeRandomico();
-            // if(count($n) == 0 && strtoupper($formatoinfo) != "TEXT/HTML"){
-            // $formatoinfo = "MIME";
-            // }
-            // if(strtoupper($formatoinfo) == "TEXT/HTML" && $res != ""){
-            // $n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res."'></iframe>","link"=>"","img"=>"");
-            // }
-            if ($formatosinfohtml == true) {
-                $resultado[] = array(
-                    "alias" => "",
-                    "valor" => "<iframe width=250px id='" . $id . "' name='" . $id . "' src='" . $res2 . "'></iframe>",
-                    "link" => "",
-                    "img" => ""
-                );
-            }
-            if ($res != "") {
-                $resultado[] = array(
-                    "alias" => "Link WMS",
-                    "valor" => "getfeatureinfo " . $formatoinfo,
-                    "link" => $res,
-                    "img" => "",
-                    "idIframe" => $id
-                );
-            }
-            if ($res2 != "") {
-                $resultado[] = array(
-                    "alias" => "Link WMS",
-                    "valor" => "getfeatureinfo padr&atilde;o do servi&ccedil;o",
-                    "link" => $res2,
-                    "img" => "",
-                    "idIframe" => $id
-                );
-            }
-            if ($res == "" && $res2 == "") {
-                $resultado[] = array(
-                    "alias" => "Ocorreu um erro",
-                    "valor" => "",
-                    "link" => "",
-                    "img" => ""
-                );
-            }
-            $resultado = array($resultado);
-            //return array($n);
-        }
         // se o usuario estiver logado e o tema for editavel, a lista de itens
         // nao usa os alias para permitir a edicao dos dados
         if (! empty($_COOKIE["i3geocodigologin"]) && $layer->getmetadata("EDITAVEL") == "SIM") {
@@ -2315,7 +2181,190 @@ class Atributos
                 }
             }
         }
-        if ($layer->connectiontype != MS_WMS) {
+
+        //
+        // opera&ccedil;&atilde;o especial para o caso de wms
+        //
+        $resultado = array();
+        if ($layer->connectiontype == MS_WMS) {
+            $wkt = "nao";
+            $layer->set("toleranceunits", MS_PIXELS);
+            $layer->set("tolerance", $resolucao);
+            $mapa = desligatemas($mapa);
+            $mapa = desligamargem($mapa);
+            $imgo = $mapa->draw();
+            $ptimg = xy2imagem($map_file, array(
+                $x,
+                $y
+            ), $mapa);
+            // $formatoinfo = "MIME";
+            $formatosinfo = $layer->getmetadata("formatosinfo");
+            $formatosinfohtml = false;
+            if ($formatosinfo != "") {
+                $formatosinfo = explode(",", $formatosinfo);
+                if ($formatosinfo[0] != "") {
+                    $formatoinfo = $formatosinfo[0];
+                }
+                foreach ($formatosinfo as $f) {
+                    if (strtoupper($f) == "TEXT/PLAIN") {
+                        $formatoinfo = "text/plain";
+                    }
+                    if (strtoupper($f) == "TEXT/HTML") {
+                        $formatosinfohtml = true;
+                    }
+                }
+            } else {
+                $formatoinfo = $layer->getmetadata("wms_feature_info_type");
+                if ($formatoinfo == "") {
+                    $formatoinfo = $layer->getmetadata("wms_feature_info_mime_type");
+                }
+                if ($formatoinfo == "") {
+                    $formatoinfo = "text/plain";
+                }
+            }
+            $res = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1, $formatoinfo);
+            $res = str_replace("INFOFORMAT", "INFO_FORMAT", $res);
+            $res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 1, "text/html");
+            $res2 = str_replace("INFOFORMAT", "INFO_FORMAT", $res2);
+            $resultados = array();
+            if (strtoupper($formatoinfo) != "TEXT/HTML" && strtoupper($formatoinfo) != "MIME") {
+                $resposta = file($res);
+                foreach ($resposta as $r) {
+                    $t = explode("=", $r);
+                    if (count($t) > 1) {
+                        $v = str_replace("\\n", "", $t[1]);
+                        $v = str_replace("\\r", "", $v);
+                        if (trim($v) != "") {
+                            $va = trim($v);
+                            if ($convC == true) {
+                                $va = $this->converte($va);
+                            }
+                            $etiqueta = "nao";
+                            if (in_array(trim($t[0]), $tips)) {
+                                $etiqueta = "sim";
+                            }
+                            $d = array(
+                                "alias" => trim($t[0]),
+                                "item" => trim($t[0]),
+                                "valor" => $va,
+                                "link" => "",
+                                "img" => "",
+                                "tip" => $etiqueta
+                            );
+                            if ($etip == false){
+                                $resultados[] = $d;
+                            } else {
+                                $resultados[trim($t[0])] = $d;
+                            }
+                        }
+                    }
+                }
+                // caso esri
+                if (count($resultado) > 0 && $resultado[0] == "") {
+                    $resposta = file($res);
+                    $cabecalho = str_replace('"   "', '"|"', $resposta[0]);
+                    $cabecalho = explode("|", $cabecalho);
+
+                    $linha = str_replace('"  "', '"|"', $resposta[1]);
+                    $linha = explode("|", $linha);
+                    for ($i = 0; $i < count($cabecalho); ++ $i) {
+                        if ($convC == true) {
+                            $va = $this->converte($linha[$i]);
+                        } else {
+                            $va = $linha[$i];
+                        }
+                        $etiqueta = "nao";
+                        if (in_array(trim($t[0]), $tips)) {
+                            $etiqueta = "sim";
+                        }
+                        $d = array(
+                            "alias" => $cabecalho[$i],
+                            "item" => $cabecalho[$i],
+                            "valor" => $va,
+                            "link" => "",
+                            "img" => "",
+                            "tip" => $etiqueta
+                        );
+                        if ($etip == false){
+                            $resultados[] = $d;
+                        } else {
+                            $resultados[$cabecalho[$i]] = $d;
+                        }
+                    }
+                }
+            }
+            $id = nomeRandomico();
+            // if(count($n) == 0 && strtoupper($formatoinfo) != "TEXT/HTML"){
+            // $formatoinfo = "MIME";
+            // }
+            // if(strtoupper($formatoinfo) == "TEXT/HTML" && $res != ""){
+            // $n[] = array("alias"=>"","valor"=>"<iframe width=250px id='".$id."' name='".$id."' src='".$res."'></iframe>","link"=>"","img"=>"");
+            // }
+            if ($formatosinfohtml == true) {
+                $d = array(
+                    "alias" => "",
+                    "valor" => "<iframe width=250px id='" . $id . "' name='" . $id . "' src='" . $res2 . "'></iframe>",
+                    "link" => "",
+                    "img" => "",
+                    "tip" => "nao",
+                    "item" => "iframe"
+                );
+                if ($etip == false){
+                    $resultados[] = $d;
+                } else {
+                    $resultados["iframe"] = $d;
+                }
+            }
+            if ($res != "") {
+                $d = array(
+                    "alias" => "Link WMS",
+                    "valor" => "getfeatureinfo " . $formatoinfo,
+                    "link" => $res,
+                    "img" => "",
+                    "idIframe" => $id,
+                    "tip" => "nao",
+                    "item" => "LinkWms1"
+                );
+                if ($etip == false){
+                    $resultados[] = $d;
+                } else {
+                    $resultados["LinkWms1"] = $d;
+                }
+            }
+            if ($res2 != "") {
+                $d = array(
+                    "alias" => "Link WMS",
+                    "valor" => "getfeatureinfo padr&atilde;o do servi&ccedil;o",
+                    "link" => $res2,
+                    "img" => "",
+                    "idIframe" => $id,
+                    "tip" => "nao",
+                    "item" => "LinkWms2"
+                );
+                if ($etip == false){
+                    $resultados[] = $d;
+                } else {
+                    $resultados["LinkWms2"] = $d;
+                }
+            }
+            if ($res == "" && $res2 == "") {
+                $d = array(
+                    "alias" => "Ocorreu um erro",
+                    "valor" => "",
+                    "link" => "",
+                    "img" => "",
+                    "tip" => "nao",
+                    "item" => "erro"
+                );
+                if ($etip == false){
+                    $resultados[] = $d;
+                } else {
+                    $resultados["erro"] = $d;
+                }
+            }
+            $resultado[] = $resultados;
+        }
+        else {
             if ($layer->type == MS_LAYER_RASTER) {
                 $wkt = "nao";
                 $layer->set("toleranceunits", MS_PIXELS);
