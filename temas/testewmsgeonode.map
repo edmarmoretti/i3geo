@@ -1,0 +1,47 @@
+#http://localhost/i3geo/ms_criamapa.php?temasa=testewmsgeonode&interface=osmdebug.php
+#http://localhost/i3geo/ms_criamapa.php?temasa=testewmsgeonode&interface=openlayersdebug.php
+
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+LAYER
+    #CONNECTION "http://www.geomobi.dftrans.df.gov.br/geoserver/ows?LAYERS=geonode:Paradas&STYLES=&TILED=true&"
+    CONNECTION "http://localhost/testeproxy.php?"
+
+    CONNECTIONTYPE WMS
+    METADATA
+      "wms_srs"	"EPSG:4326"
+      "tipooriginal"	""
+      "wms_exceptions_format"	"application/vnd.ogc.se_xml"
+      "CLASSE"	"SIM"
+      "wfs"	"nao"
+      "wms_force_separate_request"	"1"
+      "TEXTO"	"NAO"
+      "legendawms"	"http://www.geomobi.dftrans.df.gov.br:8080/geoserver/wms?&request=getlegendgraphic&version=1.1.1&service=wms&layer=geonode:Itinerario_de_Linhas&format=image/png"
+      "formatosinfo"	"text/plain,application/vnd.ogc.gml,text/xml,application/vnd.ogc.gml/3.1.1,text/xml; subtype=gml/3.1.1,text/html,application/json"
+      "wms_name"	"geonode:Itinerario_de_Linhas"
+      "nomeoriginal"	"geonode:Itinerario_de_Linhas"
+      "wms_format"	"image/png"
+      "wms_formatlist"	"image/png,application/atom xml,application/atom+xml,application/json;type=utfgrid,application/openlayers,application/pdf,application/rss xml,application/rss+xml,application/vnd.google-earth.kml,application/vnd.google-earth.kml xml,application/vnd.google-earth.kml+xml,application/vnd.google-earth.kml+xml;mode=networklink,application/vnd.google-earth.kmz,application/vnd.google-earth.kmz xml,application/vnd.google-earth.kmz+xml,application/vnd.google-earth.kmz;mode=networklink,atom,image/geotiff,image/geotiff8,image/gif,image/gif;subtype=animated,image/jpeg,image/png8,image/png; mode=8bit,image/svg,image/svg xml,image/svg+xml,image/tiff,image/tiff8,image/vnd.jpeg-png,kml,kmz,openlayers,rss,text/html; subtype=openlayers,utfgrid"
+      "wms_tile"	"1"
+      "wms_connectiontimeout"	"30"
+      "tema"	"geonode:Itinerario_de_Linhas"
+      "wms_server_version"	"1.1.1"
+      "wms_styles"	""
+      "wms_TILED" "true"
+      "wms_crs"	"EPSG:4326"
+      "wms_LAYERS" "geonode:Itinerario_de_Linhas"
+      "identifica"	"sim"
+      "TIP"	"nome,linha"
+      "itens"	"nome,linha"
+    END # METADATA
+    NAME "testewmsgeonode"
+    OFFSITE 255 255 255
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE RASTER
+    UNITS METERS
+  END # LAYER
+
+
+  END

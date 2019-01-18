@@ -1570,7 +1570,9 @@ class Mapa
         $layer->setmetadata("wms_formatlist", $formato);
         $layer->setmetadata("formatosinfo", $formatosinfo);
         $layer->setmetadata("wms_exceptions_format", "application/vnd.ogc.se_xml");
-        $layer->setmetadata("wms_style", $nome);
+        //$layer->setmetadata("wms_style", $nome);
+        $layer->setmetadata("wms_LAYERS", $tema);
+        $layer->setmetadata("wms_STYLES", "");
         $layer->setmetadata("wms_connectiontimeout", "30");
         $layer->setmetadata("wms_force_separate_request", "1");
         // esse parametro e especifico do i3geo. Se for 1 indica um servico do tipo tile

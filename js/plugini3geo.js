@@ -81,9 +81,6 @@ i3GEO.pluginI3geo =
 		    console.info("i3GEO.pluginI3geo.inicia()");
 
 		if(camada.plugini3geo){
-		    if (i3GEO.janela) {
-			i3GEO.janela.abreAguarde();
-		    }
 		    // chama a funcao conforme o tipo de plugin e a interface atual
 		    // para cada plugin deve haver um objeto com as funcoes especificas
 		    // para

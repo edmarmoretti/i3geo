@@ -1056,6 +1056,7 @@ function pegaItens($layer, $mapa = "")
         }
         $url = $url . "&SERVICE=wfs&VERSION=1.1.0&REQUEST=DescribeFeatureType&TYPENAME=" . $layer->getmetadata("wms_name");
         // $url = "http://ogi.state.ok.us/geoserver/wfs?VERSION=1.1.0&REQUEST=DescribeFeatureType&TYPENAME=okcounties";
+        //echo $url;exit;
         $xml = simplexml_load_file($url);
         if ($xml == false) {
             return array();

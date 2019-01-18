@@ -680,6 +680,7 @@ i3GEO.janela =
 	    }
 	    if(draggable == "enable"){
 		css.cursor = "move";
+		css.right = "auto";
 	    }
 	    if(!i3GEO.janela._formModal){
 		i3GEO.janela._formModal = $(

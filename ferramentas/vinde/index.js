@@ -147,56 +147,5 @@ i3GEOF.vinde = {
 	html: function() {
 	    var ins = Mustache.render(i3GEOF.vinde.MUSTACHE, i3GEOF.vinde.mustacheHash());
 	    return ins;
-	},
-	/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-
-	Parametro:
-
-	tema {string} - codigo do tema
-
-	mx {numero} - (opcional) posi&ccedil;&atilde;o em x para onde a janela ser&aacute; movida ap&oacute;s ser criada
-
-	my {numero} - (opcional) posi&ccedil;&atilde;o em y para onde a janela ser&aacute; movida ap&oacute;s ser criada
-	 */
-	iniciaJanelaFlutuante: function(){
-	    if($i("i3GEOF.vinde")){
-		i3GEOF.vinde.inicia("i3GEOF.vinde_corpo");
-		return;
-	    }
-	    minimiza = function(){
-		i3GEO.janela.minimiza("i3GEOF.vinde",200);
-	    };
-	    var janela,divid,titulo;
-	    //cria a janela flutuante
-	    titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad('indeBrasil',i3GEOF.vinde.dicionario)+"</span></div>";
-	    janela = i3GEO.janela.cria(
-		    "300px",
-		    "320px",
-		    "",
-		    "",
-		    "",
-		    titulo,
-		    "i3GEOF.vinde",
-		    false,
-		    "hd",
-		    "",
-		    minimiza,
-		    "",
-		    true,
-		    "",
-		    "",
-		    "",
-		    "",
-		    "114"
-	    );
-	    divid = janela[2].id;
-	    i3GEOF.vinde.janela = janela[0];
-	    $i("i3GEOF.vinde_corpo").style.backgroundColor = "white";
-	    $i("i3GEOF.vinde_corpo").style.textAlign = "left";
-	    i3GEOF.vinde.aguarde = $i("i3GEOF.vinde_imagemCabecalho").style;
-	    i3GEOF.vinde.inicia(divid);
 	}
 };

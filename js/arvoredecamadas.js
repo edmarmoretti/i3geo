@@ -159,6 +159,7 @@ i3GEO.arvoreDeCamadas =
 		}
 	    }
 	},
+	//esssa funcao utiliza js/editor.js
 	adicionaLayersGr : function(){
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.arvoreDeCamadas.adicionaLayersGr()");
@@ -197,7 +198,7 @@ i3GEO.arvoreDeCamadas =
 			$(this).hide();
 		    },
 		    stop: function(event, ui) {
-			$(this).css({"position":"absolute","top":(event.clientY - event.offsetY),"left": (event.clientX - event.offsetX)});
+			$(this).css({"position":"absolute","top":(ui.position.top),"left": (ui.position.left)});
 			$(".layersGrForm").css({"background": "white","max-height": "300px","overflow":"auto"});
 			$("body").append($(this));
 			$(this).show();

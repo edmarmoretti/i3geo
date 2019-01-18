@@ -109,21 +109,20 @@ i3GEO.legenda =
 		console.info("i3GEO.legenda.montaLegenda()");
 
 	    var legenda = "",
-	    t,idleg;
+	    t,idleg, template;
 
 	    if(!idOndeLegenda){
 		idleg = $i(i3GEO.legenda.config.idLegenda);
 	    } else {
 		idleg = $i(idOndeLegenda);
 	    }
-
 	    if (retorno.data.legenda != "") {
 		$.each(retorno.data.legenda, function( index, value ) {
 		    if(value.tipo == "imagem"){
 			value.classes[0].checkbox = "hidden";
 		    }
 		    //altera a legenda quando for uma classe unica
-		    if(!value.classes[1]){
+		    if(!value.classes[1] && value.tipo != "imagem"){
 			value.hiddenTitle = "hidden";
 			value.classes[0].nome = value.nome;
 			if(i3geoOL.getLayersByName(value.layer)[0].getVisible() == true){

@@ -1162,6 +1162,9 @@ i3GEO.mapa =
 		    ntemas = temas.length;
 		}
 		for (j = 0; j < ntemas; j += 1) {
+		    if(!temas[j].resultado.todosItens){
+			continue;
+		    }
 		    titulo = temas[j].nome;
 		    textCopy.push(titulo);
 		    //para os nomes de funcoes embutidas
@@ -1289,7 +1292,14 @@ i3GEO.mapa =
 				    var c = chaves.length;
 				    //for (var i = 0; i < c; i++) {
 				    $.each(chaves,function( index, element ){
-					texto += element + ": " + fat[element] + "<br>";
+					var elementTitulo = element;
+					var e = fat[element];
+					if(e.alias && e.alias != ""){
+					    elementTitulo = e.alias;
+					}
+					if(e.tip != "nao" && e.valor != undefined){
+					    texto += elementTitulo + ": " + e.valor + "<br>";
+					}
 				    });
 				    //}
 				} else {
@@ -1331,6 +1341,33 @@ i3GEO.mapa =
 		    if(painel){
 			$(painel).find(".tooltip-conteudo").prepend(html.join(""));
 		    }
+		    if (typeof (console) !== 'undefined')
+			console.info("adicionando WKT");
+
+		    var n = wkts.length;
+		    if(n > 0){
+			i3GEO.desenho.openlayers.criaLayerGrafico();
+			var g, format, f, idunico,c = i3GEO.desenho.layergrafico.getSource();
+			format = new ol.format.WKT();
+			for(r = 0; r < n; r += 1){
+			    f = format.readFeatures(wkts[r].wkt.valor);
+			    f = f[0];
+			    g = f.getGeometry();
+			    g = i3GEO.util.projGeo2OSM(g);
+			    f.setGeometry(g);
+			    f.setId(i3GEO.util.uid());
+			    i3GEO.editor.setStyleByTypeFeature(f);
+			    i3GEO.editor.setStyleDefault(f);
+			    wkts[r].wkt = "",
+			    //atributos
+			    f.setProperties({
+				fat : wkts[r],
+				origem : "pin",
+				nameLayer: titulo + " (" + $trad("figura") + ")"
+			    });
+			    c.addFeature(f);
+			}
+		    }
 		};
 		if (mostra === true) {
 		    if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.modal == true){
@@ -1341,31 +1378,6 @@ i3GEO.mapa =
 		    }
 		}
 	    }
-	    if (typeof (console) !== 'undefined')
-		console.info("adicionando WKT");
 
-	    n = wkts.length;
-	    if(n > 0){
-		i3GEO.desenho.openlayers.criaLayerGrafico();
-		var g, format, f, idunico,c = i3GEO.desenho.layergrafico.getSource();
-		format = new ol.format.WKT();
-		for(r = 0; r < n; r += 1){
-		    f = format.readFeatures(wkts[r].wkt.valor);
-		    f = f[0];
-		    g = f.getGeometry();
-		    g = i3GEO.util.projGeo2OSM(g);
-		    f.setGeometry(g);
-		    f.setId(i3GEO.util.uid());
-		    i3GEO.editor.setStyleByTypeFeature(f);
-		    i3GEO.editor.setStyleDefault(f);
-		    wkts[r].wkt = "",
-		    //atributos
-		    f.setProperties({
-			fat : wkts[r],
-			origem : "pin"
-		    });
-		    c.addFeature(f);
-		}
-	    }
 	}
 };

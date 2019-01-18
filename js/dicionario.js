@@ -2493,6 +2493,13 @@ g_traducao =
                 es : "Seleccione una o m&aacute;s geometr&iacute;as"
             }
         ],
+        "selduas" : [
+            {
+                pt : "Selecione pelo manos duas geometrias",
+                en : "",
+                es : ""
+            }
+        ],
         "atrib" : [
             {
                 pt : "Atributos",
@@ -2584,6 +2591,13 @@ g_traducao =
                 es : ""
             }
         ],
+        "figura" : [
+            {
+                pt : "figura",
+                en : "",
+                es : ""
+            }
+        ],
         "modf" : [
             {
                 pt : "modifica figura",
@@ -2610,6 +2624,20 @@ g_traducao =
                 pt : "trazer para frente",
                 en : "send forward",
                 es : "traer al frente"
+            }
+        ],
+        "agrupa" : [
+            {
+                pt : "agrupa figuras",
+                en : "",
+                es : ""
+            }
+        ],
+        "desagrupa" : [
+            {
+                pt : "desagrupa figuras",
+                en : "",
+                es : ""
             }
         ],
         "studo" : [
@@ -3290,6 +3318,13 @@ g_traducao =
         "geolocfalse" : [
             {
                 pt : "Seu dispositivo n&atilde;o suporta geolocaliza&ccedil;&atilde;o",
+                en : "",
+                es : ""
+            }
+        ],
+        "catatua" : [
+            {
+                pt : "Cat&aacute;logo atualizado",
                 en : "",
                 es : ""
             }

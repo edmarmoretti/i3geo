@@ -229,7 +229,6 @@ function testaMapaImg($tema)
     }
     \admin\php\funcoesAdmin\substituiConObj($mapa, $postgis_mapa);
     \admin\php\funcoesAdmin\substituiConObj($nmapa, $postgis_mapa);
-
     $numlayers = $nmapa->numlayers;
     $dados = "";
     $simbolos = array();
@@ -268,6 +267,7 @@ function testaMapaImg($tema)
     $sca = $mapa->scalebar;
     $sca->set("status", MS_OFF);
     $objImagem = @$mapa->draw();
+
     // corrige o titulo da legenda
     $numlayers = $mapa->numlayers;
     for ($j = 0; $j < $numlayers; $j ++) {

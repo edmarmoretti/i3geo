@@ -200,6 +200,9 @@
   cursor: pointer;
   opacity: 0;
 }
+.snackbar.green {
+	background-color: green;
+}
 .snackbar.red {
 	background-color: red;
 }

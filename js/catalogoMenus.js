@@ -180,8 +180,9 @@ i3GEO.catalogoMenus = {
 		} else {
 		    $("#" + config.idCatalogoNavegacao).html(g + t);
 		}
+		$("#" + i3GEO.catalogoMenus.config.idOndeMigalha).show();
 		$("#" + config.idCatalogoPrincipal).fadeOut( "fast", function(){
-		    $("#" + i3GEO.catalogoMenus.config.idOndeMigalha).show();
+
 		    $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).show();
 		});
 	    };

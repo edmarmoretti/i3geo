@@ -8,6 +8,7 @@ i3GEO.catalogoOgc = {
 	    'idCatalogoNavegacao': 'catalogoNavegacao',
 	    'idOndeMigalha': 'catalogoMigalha'
 	},
+	wait: false,
 	carregaTemplates: function(){
 	    var t1 = i3GEO.catalogoOgc.config.templateDir,
 	    t2 = i3GEO.catalogoOgc.config.templateTema,
@@ -16,7 +17,7 @@ i3GEO.catalogoOgc = {
 		i3GEO.template.dir = r1[0];
 		i3GEO.template.tema = r2[0];
 		i3GEO.template.catalogoMigalha = r3[0];
-		i3GEO.caixaDeFerramentas.inicia();
+		//i3GEO.caixaDeFerramentas.inicia();
 	    }).fail(function() {
 		i3GEO.janela.closeMsg($trad("erroTpl"));
 		return;
@@ -51,6 +52,10 @@ i3GEO.catalogoOgc = {
 	    });
 	},
 	inicia: function(config){
+	    if(i3GEO.catalogoOgc.wait == true){
+		return;
+	    }
+	    i3GEO.catalogoOgc.wait = true;
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.catalogoOgc.inicia");
 
@@ -59,11 +64,12 @@ i3GEO.catalogoOgc = {
 		    i3GEO.catalogoOgc.config[i] = v;
 		});
 	    }
-	    i3GEO.catalogoOgc.aguarde();
 	    if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
+		i3GEO.catalogoOgc.wait = false;
 		i3GEO.catalogoOgc.carregaTemplates();
 		return;
 	    } else {
+		i3GEO.catalogoOgc.aguarde();
 		i3GEO.catalogoOgc.MIGALHA = [
 		    {"nome":"","onclick":"i3GEO.catalogoOgc.mostraCatalogoPrincipal()"},
 		    {"nome":"Webservices","onclick":"i3GEO.catalogoOgc.inicia()"}
@@ -115,20 +121,22 @@ i3GEO.catalogoOgc = {
 			    {"data":clone}
 		    );
 		    $("#" + config.idCatalogoNavegacao).html(i3GEO.catalogoOgc.getAddSercicesBtn() + t);
-
+		    $("#" + i3GEO.catalogoOgc.config.idOndeMigalha).show();
 		    $("#" + i3GEO.catalogoOgc.config.idCatalogoPrincipal).fadeOut( "fast", function(){
-			$("#" + i3GEO.catalogoOgc.config.idOndeMigalha).show();
 			$("#" + i3GEO.catalogoOgc.config.idCatalogoNavegacao).show();
 		    });
+		    i3GEO.janela.snackBar({content: $trad("catatua"),style: 'green'});
 		};
 		var t1 = i3GEO.configura.locaplic + "/classesphp/wscliente.php?funcao=listaRSSwsARRAY&tipo=WMS,ARCGISREST,KML,GEORSS,GEOJSON&rss="+["|"];
 		$.get(t1).done(function(r1) {
+		    i3GEO.catalogoOgc.wait = false;
 		    var dados = [];
 		    if(r1.data){
 			dados = r1.data;
 		    }
 		    lista(dados.sort(i3GEO.util.dynamicSortString("title")));
 		}).fail(function() {
+		    i3GEO.catalogoOgc.wait = false;
 		    i3GEO.janela.closeMsg($trad("erroTpl"));
 		    return;
 		});
@@ -137,6 +145,11 @@ i3GEO.catalogoOgc = {
 	listaCamadas: function(nomeMigalha, id_ws, nome, url, nivel, tipo_ws, layer){
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.catalogoOgc.listaCamadas");
+
+	    if(i3GEO.catalogoOgc.wait == true){
+		return;
+	    }
+	    i3GEO.catalogoOgc.wait = true;
 
 	    var monta;
 
@@ -154,6 +167,7 @@ i3GEO.catalogoOgc = {
 		    //de diretorios no elemento folders
 		    //na sequencia, retorna lista com os servicos
 		    //no ultimo nivel, ao listar o WMS, contem o elemento supportedExtensions
+		    i3GEO.catalogoOgc.wait = false;
 		    var data = retorno.data.folders,
 		    clone = [],
 		    g = "",
@@ -209,16 +223,18 @@ i3GEO.catalogoOgc = {
 				'undefined'
 			);
 		    }
-
+		    i3GEO.janela.snackBar({content: $trad("catatua"),style: 'green'});
 		};
-
 		if(nomeMigalha == nome){//busca a primeira lista de diretorios
+		    i3GEO.catalogoOgc.wait = true;
 		    i3GEO.php.listaLayersARCGISREST(monta, id_ws, "");
 		} else {
+		    i3GEO.catalogoOgc.wait = true;
 		    i3GEO.php.listaLayersARCGISREST(monta, id_ws, nome);
 		}
 	    } else {
 		monta = function(dados){
+		    i3GEO.catalogoOgc.wait = false;
 		    var data = dados.data,
 		    clone = [],
 		    g = "",
@@ -257,7 +273,9 @@ i3GEO.catalogoOgc = {
 			i3GEO.janela.snackBar({content: "Erro", style:'red'});
 			$("#" + i3GEO.catalogoOgc.config.idCatalogoNavegacao).html("");
 		    }
+		    i3GEO.janela.snackBar({content: $trad("catatua"),style: 'green'});
 		};
+		i3GEO.catalogoOgc.wait = true;
 		i3GEO.php.listaLayersWMS(monta, url, (nivel * 1) + 1, id_ws, layer,
 			tipo_ws);
 	    }
@@ -373,6 +391,10 @@ i3GEO.catalogoOgc = {
 	    "i3GEOF.wmstime_script");
 	},
 	addkml: function(url){
+	    if(i3GEO.catalogoOgc.wait == true){
+		return;
+	    }
+	    i3GEO.catalogoOgc.wait = true;
 	    i3GEO.janela.abreAguarde();
 	    var par = {
 		    g_sid: i3GEO.configura.sid,
@@ -385,6 +407,7 @@ i3GEO.catalogoOgc = {
 	    )
 	    .done(
 		    function(data, status){
+			i3GEO.catalogoOgc.wait = false;
 			i3GEO.atualiza();
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: $trad("camadaadic")});
@@ -392,12 +415,17 @@ i3GEO.catalogoOgc = {
 	    )
 	    .fail(
 		    function(data){
+			i3GEO.catalogoOgc.wait = false;
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 		    }
 	    );
 	},
 	addgeorss: function(url){
+	    if(i3GEO.catalogoOgc.wait == true){
+		return;
+	    }
+	    i3GEO.catalogoOgc.wait = true;
 	    i3GEO.janela.abreAguarde();
 	    var par = {
 		    g_sid: i3GEO.configura.sid,
@@ -410,6 +438,7 @@ i3GEO.catalogoOgc = {
 	    )
 	    .done(
 		    function(data, status){
+			i3GEO.catalogoOgc.wait = false;
 			i3GEO.atualiza();
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: $trad("camadaadic")});
@@ -417,12 +446,17 @@ i3GEO.catalogoOgc = {
 	    )
 	    .fail(
 		    function(data){
+			i3GEO.catalogoOgc.wait = false;
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 		    }
 	    );
 	},
 	addgeojson: function(url){
+	    if(i3GEO.catalogoOgc.wait == true){
+		return;
+	    }
+	    i3GEO.catalogoOgc.wait = true;
 	    i3GEO.janela.abreAguarde();
 	    var par = {
 		    g_sid: i3GEO.configura.sid,
@@ -435,6 +469,7 @@ i3GEO.catalogoOgc = {
 	    )
 	    .done(
 		    function(data, status){
+			i3GEO.catalogoOgc.wait = false;
 			i3GEO.atualiza();
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: $trad("camadaadic")});
@@ -442,6 +477,7 @@ i3GEO.catalogoOgc = {
 	    )
 	    .fail(
 		    function(data){
+			i3GEO.catalogoOgc.wait = false;
 			i3GEO.janela.fechaAguarde();
 			i3GEO.janela.snackBar({content: data.status, style:'red'});
 		    }

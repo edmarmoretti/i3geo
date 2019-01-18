@@ -30,7 +30,7 @@ i3GEOF.excluirarvore = {
 		    namespace: p.namespace,
 		    idContainer: p.idContainer,
 		    idlista: p.idlista,
-		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+		    ...i3GEO.idioma.objetoIdioma(i3GEOF.excluirarvore.dicionario)
 	    };
 	    i3GEOF.excluirarvore.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
 	    i3GEOF.excluirarvore.lista();

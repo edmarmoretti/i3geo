@@ -1035,9 +1035,8 @@ i3GEO.Interface =
 					    crossOrigin : "anonymous",
 					    url : urllayer,
 					    params : {
-						// 'LAYERS' : camada.wmsname,
-						'VERSION' : '1.1.0'
-						    // 'format' : camada.wmsformat
+						'VERSION' : '1.1.1',
+						'LAYERS' : camada.wmsname
 					    },
 					    projection : opcoes.projection
 					});

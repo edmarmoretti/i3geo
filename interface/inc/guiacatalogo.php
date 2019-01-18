@@ -41,7 +41,7 @@
     <div class="separadorCabecalhoGuias">&nbsp;</div>
 
     <div style="overflow-y: scroll; height: calc(100% - 45px);">
-        <div id="catalogoMigalha" style="display: block;" data-template="<?php echo $configInc["pathtemplates"];?>/catalogoMigalha.html"></div>
+        <div id="catalogoMigalha" style="display: none;height: 60px;" data-template="<?php echo $configInc["pathtemplates"];?>/catalogoMigalha.html"></div>
         <!-- aqui entra a lista de elementos quando uma das opcoes e clicada -->
         <div id="catalogoNavegacao"></div>
         <!-- Opcoes -->

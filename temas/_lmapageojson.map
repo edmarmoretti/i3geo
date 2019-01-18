@@ -1,4 +1,5 @@
 MAP
+  #localhost/i3geo/ms_criamapa.php?temasa=_lmapageojson&interface=osmdebug.php
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
