@@ -5,8 +5,8 @@ MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolos.sym"
 LAYER
-    #CONNECTION "http://www.geomobi.dftrans.df.gov.br/geoserver/ows?"
-    CONNECTION "http://localhost/testeproxy.php?"
+    CONNECTION "http://www.geomobi.dftrans.df.gov.br/geoserver/ows?"
+    #CONNECTION "http://localhost/i3geo/dftrans_wms.php?"
 
     CONNECTIONTYPE WMS
     METADATA
