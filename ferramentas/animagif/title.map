@@ -1,0 +1,45 @@
+MAP
+  FONTSET "../../symbols/fontes.txt"
+  SYMBOLSET "../../symbols/simbolos.sym"
+	LAYER
+		METADATA
+			"TEMA"	"NAO"
+			"ESCONDIDO" "SIM"
+			"cache" "nao"
+		END
+		NAME "title"
+		SIZEUNITS PIXELS
+		STATUS default
+		TOLERANCE 0
+		TOLERANCEUNITS PIXELS
+		TRANSFORM FALSE
+		TYPE POINT
+		UNITS METERS
+		CLASS
+			LABEL
+				TYPE TRUETYPE
+				FONT arial
+				BUFFER 5
+				SIZE 18
+				COLOR 0 0 0
+				FORCE FALSE
+				MINDISTANCE -1
+				MINFEATURESIZE -1
+				OFFSET 0 0
+				PARTIALS TRUE
+				POSITION LR
+				STYLE
+					GEOMTRANSFORM "labelpoly"
+					COLOR 255 255 255
+				END
+			END
+		END
+		FEATURE
+			POINTS
+				10 5
+			END
+			TEXT ""
+		END
+	END
+
+END
