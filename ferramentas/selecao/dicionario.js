@@ -199,5 +199,10 @@ i3GEOF.selecao.dicionario = {
 		pt : "Construtor de express&atilde;o",
 		en : "",
 		es : ""
+	} ],
+	'nofeature' : [ {
+		pt : "Nenhuma figura selecionada. Utilize o editor vetorial para criar ou selecionar figuras.",
+		en : "",
+		es : ""
 	} ]
 };
