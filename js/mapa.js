@@ -1093,7 +1093,7 @@ i3GEO.mapa =
 		    i3geoOL.removeOverlay(b);
 		    i3GEO.mapa.montaTip(retorno,x,y);
 		};
-		i3GEO.php.identifica3(
+		i3GEO.php.identifica(
 			temp,
 			x,
 			y,

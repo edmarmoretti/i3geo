@@ -303,7 +303,7 @@ i3GEO.catalogoOgc = {
 		    + config.versao + "','"
 		    + v.titulo + "','','nao','"
 		    + config.formatoinfo + "','','',"
-		    + "true)";
+		    + "true,'sim')";
 		v.nome = estilos[i].nome + " - " + estilos[i].titulo;
 		clone.push(v);
 	    });

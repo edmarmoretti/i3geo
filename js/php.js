@@ -854,7 +854,7 @@ i3GEO.php =
 	 * Adiciona tema WMS
 	 */
 	adicionaTemaWMS : function(funcao, servico, tema, nome, proj, formato, versao, nomecamada, tiporep, suportasld, formatosinfo,
-		locaplic, sid, checked) {
+		locaplic, sid, checked, allitens) {
 	    var s, p, camadaArvore, par, ck;
 	    if(funcao === ""){
 		funcao = function() {
@@ -862,6 +862,9 @@ i3GEO.php =
 		    i3GEO.janela.snackBar({content: $trad("camadaadic")});
 		    i3GEO.atualiza();
 		};
+	    }
+	    if(!allitens){
+		allitens = "nao";
 	    }
 	    if (!locaplic || locaplic === "") {
 		locaplic = i3GEO.configura.locaplic;
@@ -886,7 +889,7 @@ i3GEO.php =
 	    p = locaplic + "/classesphp/mapa_controle.php", par =
 		"g_sid=" + sid + "&funcao=adicionatemawms&servico=" + servico + "&tema=" + tema + "&nome=" + nome + "&proj=" + proj
 		+ "&formato=" + formato + "&versao=" + versao + "&nomecamada=" + nomecamada + "&tiporep=" + tiporep + "&suportasld="
-		+ suportasld + "&formatosinfo=" + formatosinfo;
+		+ suportasld + "&formatosinfo=" + formatosinfo + "&allitens=" + allitens;
 	    cpJSON.call(p, "adicionatemawms", funcao, par);
 	},
 	/**
@@ -916,13 +919,13 @@ i3GEO.php =
 	    cpJSON.call(p, "adicionaTemaIMG", retorno, par);
 	},
 	/**
-	 * Function: identifica3
+	 * Function: identifica
 	 *
 	 * Identifica um ponto no mapa
 	 */
-	identifica3 : function(funcao, x, y, resolucao, opcao, locaplic, sid, tema, ext, listaDeTemas, wkt) {
+	identifica : function(funcao, x, y, resolucao, opcao, locaplic, sid, tema, ext, listaDeTemas, wkt) {
 	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.php.identifica3()");
+		console.info("i3GEO.php.identifica()");
 
 	    if(x === null || y === null || (x == 0 && y == 0)){
 		return;
@@ -949,7 +952,7 @@ i3GEO.php =
 	    // verifica se nao e necessario alterar as coordenadas
 	    ext = i3GEO.util.extOSM2Geo(ext);
 	    var p = locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=identifica3&wkt=" + wkt + "&opcao=" + opcao + "&xy=" + x + "," + y + "&resolucao=" + resolucao + "&g_sid=" + sid + "&ext=" + ext
+		"funcao=identifica&wkt=" + wkt + "&opcao=" + opcao + "&xy=" + x + "," + y + "&resolucao=" + resolucao + "&g_sid=" + sid + "&ext=" + ext
 		+ "&listaDeTemas=" + listaDeTemas;
 	    if (opcao !== "tip") {
 		par += "&tema=" + tema;

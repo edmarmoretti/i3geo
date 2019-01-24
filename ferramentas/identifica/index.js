@@ -204,7 +204,7 @@ i3GEOF.identifica = {
 	    };
 	    // importante: os temas editaveis nao utilizam alias em seus nomes
 	    // se o usuario estiver logado
-	    i3GEO.php.identifica3(
+	    i3GEO.php.identifica(
 		    f,
 		    p.x,
 		    p.y,
@@ -260,7 +260,7 @@ i3GEOF.identifica = {
 	 *
 	 * Parametros:
 	 *
-	 * retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica3>
+	 * retorno {JSON} - objeto JSON com os dados <i3GEO.php.identifica>
 	 */
 	mostraDadosTema : function(retorno) {
 	    var classeTemp="",codigo_tipo_regiao = "",alvo, filtro, camada, idreg, idsalva, paramsalva, i, res = "", ntemas, resultados, nres, cor, j, nitens, k, inicio =

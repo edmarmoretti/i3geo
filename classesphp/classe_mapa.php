@@ -1478,10 +1478,11 @@ class Mapa
      * $formatosinfo - lista de formatos da requisi&ccedil;&atilde;o de atributos para a fun&ccedil;&atilde;o getfeatureinfo (default text/plain)
      * $time - espec&iacute;fico para WMS-T (par&acirc;mentro wms_time)
      * $tile - indica se o WMS e do tipo TILE ou nao (0 ou 1)
+     * &allitens - inclui todos os itens ou nao
      * Include:
      * <wmswfs.php>
      */
-    function adicionatemawms($tema, $servico, $nome, $proj, $formato, $locaplic, $tipo = "", $versao, $nomecamada, $dir_tmp, $imgdir, $imgurl, $tiporep, $suportasld, $formatosinfo = "text/plain", $time = "", $tile = 0)
+    function adicionatemawms($tema, $servico, $nome, $proj, $formato, $locaplic, $tipo = "", $versao, $nomecamada, $dir_tmp, $imgdir, $imgurl, $tiporep, $suportasld, $formatosinfo = "text/plain", $time = "", $tile = 0, $allitens = "nao")
     {
         if ($versao == "") {
             $versao = "1.1.1";
@@ -1533,7 +1534,7 @@ class Mapa
             $layer->set("connectiontype", MS_WMS);
         }
 
-        $epsg = "EPSG:4618";
+        $epsg = "EPSG:4326";
         $e4291 = "nao";
         $ecrs = "nao";
         $pos = str_replace(" ", ",", $proj);
@@ -1543,10 +1544,6 @@ class Mapa
                 $p = explode(":", $p);
                 if ($p[1] == "4326") {
                     $epsg = "EPSG:4326";
-                }
-                if ($p[1] == "4618") {
-                    $epsg = "EPSG:4618";
-                    $e4291 = "sim";
                 }
                 if ($p[1] == "84") {
                     $ecrs = "CRS:84";
@@ -1601,6 +1598,10 @@ class Mapa
         $layer->setmetadata("wms_format", $im);
         $layer->setmetadata("wfs", "nao");
         $layer->setmetadata("wfs", "nao");
+        if($allitens == "sim"){
+            $layer->setmetadata("tip", "allitens");
+        }
+
         $c = $layer->offsite;
         $c->setrgb(255, 255, 255);
         $of = $this->mapa->outputformat;

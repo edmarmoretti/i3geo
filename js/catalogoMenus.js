@@ -42,6 +42,7 @@ i3GEO.catalogoMenus = {
 	},
 	//utilizado tambem ao fechar a guia
 	mostraCatalogoPrincipal: function(){
+
 	    $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).fadeOut( "fast", function(){
 		$("#" + i3GEO.catalogoMenus.config.idOndeMigalha).hide();
 		$("#" + i3GEO.catalogoMenus.config.idCatalogoPrincipal).show();
@@ -175,14 +176,13 @@ i3GEO.catalogoMenus = {
 			"{{#data}}" + i3GEO.template.tema + "{{/data}}",
 			{"data":clone}
 		);
-		if(config.folderFirst == "false"){
-		    $("#" + config.idCatalogoNavegacao).html(t + g);
-		} else {
-		    $("#" + config.idCatalogoNavegacao).html(g + t);
-		}
-		$("#" + i3GEO.catalogoMenus.config.idOndeMigalha).show();
 		$("#" + config.idCatalogoPrincipal).fadeOut( "fast", function(){
-
+		    if(config.folderFirst == "false"){
+			$("#" + config.idCatalogoNavegacao).html(t + g);
+		    } else {
+			$("#" + config.idCatalogoNavegacao).html(g + t);
+		    }
+		    $("#" + i3GEO.catalogoMenus.config.idOndeMigalha).show();
 		    $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).show();
 		});
 	    };
@@ -237,13 +237,12 @@ i3GEO.catalogoMenus = {
 			"{{#data}}" + i3GEO.template.tema + "{{/data}}",
 			{"data":clone}
 		);
-
+		if(i3GEO.catalogoMenus.config.folderFirst == "false"){
+		    $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(t + g);
+		} else {
+		    $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(g + t);
+		}
 		$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).fadeOut( "fast", function(){
-		    if(i3GEO.catalogoMenus.config.folderFirst == "false"){
-			$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(t + g);
-		    } else {
-			$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(g + t);
-		    }
 		    $("#" + i3GEO.catalogoMenus.config.idOndeMigalha).show();
 		    $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).show();
 		});
@@ -284,6 +283,7 @@ i3GEO.catalogoMenus = {
 			{"data":clone}
 		);
 
+		$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html("");
 		$("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).fadeOut( "fast", function(){
 		    $("#" + i3GEO.catalogoMenus.config.idCatalogoNavegacao).html(t);
 		    $("#" + i3GEO.catalogoMenus.config.idOndeMigalha).show();

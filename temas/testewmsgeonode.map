@@ -7,7 +7,7 @@ MAP
 LAYER
     CONNECTION "http://www.geomobi.dftrans.df.gov.br/geoserver/ows?"
     #CONNECTION "http://localhost/i3geo/dftrans_wms.php?"
-
+	#CONNECTION "https://mapas.saude.df.gov.br/i3geo/ses/codigo/dftrans_wms.php?"
     CONNECTIONTYPE WMS
     METADATA
       "wms_srs"	"EPSG:4326"

@@ -1,0 +1,29 @@
+#http://localhost/i3geo/ms_criamapa.php?temasa=testewfsgeonode&interface=osmdebug.php
+#http://localhost/i3geo/ms_criamapa.php?temasa=testewfsgeonode&interface=openlayersdebug.php
+#http://www.geomobi.dftrans.df.gov.br/geoserver/ows?SERVICE=WFS&VERSION=1.0.0&TYPENAME=geonode:Itinerario_de_Linhas
+MAP
+  FONTSET "../symbols/fontes.txt"
+  SYMBOLSET "../symbols/simbolos.sym"
+LAYER
+    CONNECTION "http://www.geomobi.dftrans.df.gov.br/geoserver/ows?REQUEST=getFeature&SERVICE=WFS&TYPENAME=geonode:Itinerario_de_Linhas&srsName=EPSG:4326"
+    #CONNECTION "http://localhost/i3geo/dftrans_wms.php?"
+    CONNECTIONTYPE OGR
+    METADATA
+      "CLASSE"	"SIM"
+      "TEXTO"	"NAO"
+      "tema"	"geonode:Itinerario_de_Linhas wfs"
+      "TILES" "NAO"
+    END # METADATA
+    NAME "testewfsgeonode"
+    STATUS DEFAULT
+    TILEITEM "location"
+    TYPE LINE
+    UNITS METERS
+    CLASS
+    	NAME ""
+    	STYLE
+    		COLOR 255 0 0
+    	END
+    END
+  END # LAYER
+  END

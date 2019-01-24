@@ -782,7 +782,7 @@ i3GEO.arvoreDeCamadas =
 
 	    // YAHOO.log("Atualizando o farol da &aacute;rvore de camadas",
 	    // "i3geo");
-	    var cor,farol, l, ltema, escala, iu = i3GEO.util, im = i3GEO.configura.locaplic + "/imagens/", camadas =
+	    var title, cor,farol, l, ltema, escala, iu = i3GEO.util, im = i3GEO.configura.locaplic + "/imagens/", camadas =
 		i3GEO.arvoreDeCamadas.CAMADAS;
 	    farol = "maisamarelo.png";
 	    cor = "yellow";
@@ -795,18 +795,22 @@ i3GEO.arvoreDeCamadas =
 			if (escala * 1 < mapscale * 1) {
 			    farol = "maisverde.png";
 			    cor = "green";
+			    title = $trad("t9");
 			}
 			if (escala * 1 > mapscale * 1) {
 			    farol = "maisvermelho.png";
 			    cor = "red";
+			    title = $trad("t10");
 			}
 			if (escala * 1 === 0) {
 			    farol = "maisamarelo.png";
 			    cor = "yellow";
+			    title = $trad("t11");
 			}
 			//iu.defineValor("farol" + ltema.name, "src", im + farol);
 			//iu.defineValor("farol" + ltema.name, "src", im + farol);
 			$("#farol" + ltema.name).css("color",cor);
+			$("#farol" + ltema.name).attr("title",title);
 		    }
 		} while (l--);
 	    }

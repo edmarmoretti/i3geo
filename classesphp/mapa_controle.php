@@ -842,8 +842,10 @@ switch (strtoupper($funcao)) {
         include_once ("classe_mapa.php");
         copiaSeguranca($map_file);
         $m = new Mapa($map_file);
-
-        $m->adicionatemawms($_pg["tema"], $_pg["servico"], $_pg["nome"], $_pg["proj"], $_pg["formato"], $locaplic, $_pg["tipo"], $_pg["versao"], $_pg["nomecamada"], $dir_tmp, $imgdir, $imgurl, $_pg["tiporep"], $_pg["suportasld"], $_pg["formatosinfo"], $_pg["time"], $_pg["tile"]);
+        if(!isset($_pg["allitens"])){
+            $_pg["allitens"] = "nao";
+        }
+        $m->adicionatemawms($_pg["tema"], $_pg["servico"], $_pg["nome"], $_pg["proj"], $_pg["formato"], $locaplic, $_pg["tipo"], $_pg["versao"], $_pg["nomecamada"], $dir_tmp, $imgdir, $imgurl, $_pg["tiporep"], $_pg["suportasld"], $_pg["formatosinfo"], $_pg["time"], $_pg["tile"], $_pg["allitens"]);
 
         $_SESSION["contadorsalva"] ++;
         redesenhaMapa();
@@ -2034,71 +2036,12 @@ switch (strtoupper($funcao)) {
     /*
      * Valor: IDENTIFICA
      *
-     * Depreciado na vers&atilde;o 4.2 (utilize "identifica2")
      *
      * Identifica elementos no mapa.
      *
      * <Atributos->identifica>
      */
     case "IDENTIFICA":
-        $tema = $_pg["tema"];
-        $opcao = $_pg["opcao"];
-        $xy = $_pg["xy"];
-        $resolucao = $_pg["resolucao"];
-
-        if (! isset($tema)) {
-            $tema = "";
-        }
-        if (! isset($resolucao)) {
-            $resolucao = 5;
-        }
-        include_once ("classe_atributos.php");
-        $m = new Atributos($map_file, $tema);
-        $retorno = $m->identifica($opcao, $xy, $resolucao);
-        break;
-    /*
-     * Valor: IDENTIFICA2
-     *
-     * Depreciado na vers&atilde;o 4.7 (utilize "identifica3")
-     *
-     * Identifica elementos no mapa.
-     *
-     * <Atributos->identifica2>
-     */
-    case "IDENTIFICA2":
-        $tema = $_pg["tema"];
-        $opcao = $_pg["opcao"];
-        $xy = $_pg["xy"];
-        $resolucao = $_pg["resolucao"];
-        $ext = $_pg["ext"];
-        $opcao = $_pg["opcao"];
-        $listaDeTemas = $_pg["listaDeTemas"];
-        $wkt = $_pg["wkt"];
-
-        if (! isset($tema)) {
-            $tema = "";
-        }
-        if (! isset($resolucao)) {
-            $resolucao = 5;
-        }
-        include_once ("classe_atributos.php");
-        if (! isset($ext)) {
-            $ext = "";
-        }
-        if (! isset($wkt)) {
-            $wkt = "nao";
-        }
-        $m = new Atributos($map_file, $tema, "", $ext);
-        $retorno = $m->identifica2($opcao, $xy, $resolucao, $ext, $listaDeTemas, $wkt);
-        break;
-    /*
-     * Valor: IDENTIFICA3
-     *
-     * Identifica elementos no mapa.
-     *
-     * <Atributos->identifica3>
-     */
-    case "IDENTIFICA3":
         $tema = "";
         if(isset($_pg["tema"])){
             $tema = $_pg["tema"];
@@ -2125,7 +2068,7 @@ switch (strtoupper($funcao)) {
             $wkt = "nao";
         }
         $m = new Atributos($map_file, $tema, "", $ext);
-        $retorno = $m->identifica3($opcao, $xy, $resolucao, $ext, $listaDeTemas, $wkt);
+        $retorno = $m->identifica($opcao, $xy, $resolucao, $ext, $listaDeTemas, $wkt);
         break;
     /*
      * Valor: IDENTIFICAUNICO
