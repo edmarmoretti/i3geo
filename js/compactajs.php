@@ -132,6 +132,7 @@ packer("catalogoSistemas.js","compactados/catalogoSistemas_compacto.js","Normal"
 packer("catalogoDir.js","compactados/catalogoDir_compacto.js","Normal");
 packer("busca.js","compactados/busca_compacto.js","Normal");
 packer("legenda.js","compactados/legenda_compacto.js","Normal");
+packer("timer.js","compactados/timer_compacto.js","Normal");
 packer("caixaDeFerramentas.js","compactados/caixaDeFerramentas_compacto.js","Normal");
 //packer("../ferramentas/editorol/editorol.js","../ferramentas/editorol/editorol_compacto.js","Normal");
 //packer("../ferramentas/editorgm/editorgm.js","../ferramentas/editorgm/editorgm_compacto.js","Normal");
@@ -220,6 +221,7 @@ $jsfiles = array(
 "compactados/legenda_compacto.js",
 "compactados/busca_compacto.js",
 "compactados/caixaDeFerramentas_compacto.js",
+"compactados/timer_compacto.js",
 "template.js"
 );
 

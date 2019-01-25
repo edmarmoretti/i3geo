@@ -278,7 +278,6 @@ i3GEO.Interface =
 	    if ($i("mst")) {
 		$i("mst").style.display = "block";
 	    }
-	    i3GEO.navega.autoRedesenho.ativa();
 	    i3GEO.util.defineValor("i3geo_escalanum", "value", i3GEO.parametros.mapscale);
 	    if ((i3GEO.parametros.geoip === "nao") && ($i("ondeestou"))) {
 		$i("ondeestou").style.display = "none";

@@ -620,7 +620,9 @@ i3GEO.php =
 	    }
 	    retorno = function(retorno) {
 		i3GEO.Interface.openlayers.zoom2ext(ext);
-		funcao.call(funcao, retorno);
+		if(funcao){
+		    funcao.call(funcao, retorno);
+		}
 	    };
 	    var p = locaplic + "/classesphp/mapa_controle.php";
 	    var par = "funcao=mudaext&tipoimagem=" + tipoimagem + "&ext=" + ext + "&g_sid=" + sid + "&geo=" + geo;

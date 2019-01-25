@@ -243,7 +243,8 @@ i3GEO.listaDeFerramentas = {
 	    {
 		id : "omenudataFerramentas8a",
 		text : $trad("p12"),
-		url : "javascript:i3GEO.mapa.dialogo.autoredesenha()"
+		show : "hidden",
+		url : "javascript:i3GEO.timer.mapa.prompt()"
 	    }],
 	    "ferramentasmapa" : [{
 		id : "omenudataFerramentas1a",

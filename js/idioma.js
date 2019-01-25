@@ -436,7 +436,7 @@ var $trad = function(id, dic) {
 	str= temp.textContent || temp.innerText;
 	temp=null;
 	return str;
-    }
+    };
     if (!dic || dic == "g_traducao") {
 	return conv(i3GEO.idioma.OBJETOIDIOMA[id]);
     } else {

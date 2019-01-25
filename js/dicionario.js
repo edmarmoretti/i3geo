@@ -3328,5 +3328,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "intervalo_s" : [
+            {
+                pt : "Intervalo em segundos",
+                en : "",
+                es : ""
+            }
         ]
     };

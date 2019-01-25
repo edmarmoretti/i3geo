@@ -30,7 +30,7 @@ i3GEO.geolocal =
 	    if(i3GEO.geolocal._timer != ""){
 		i3GEO.geolocal.stop();
 	    } else {
-		var html = "<div class='text-center'> Geolocal. " + $trad("clickparar") + "</div><div id='geolocalresults' class='text-center'></div>";
+		var html = "<span class='text-center'> Geolocal. " + $trad("clickparar") + "</span><br><span id='geolocalresults' class='text-center'></span>";
 		i3GEO.geolocal._snackbar = i3GEO.janela.snackBar({
 		    content: html,
 		    onClose: function(){

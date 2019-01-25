@@ -241,17 +241,6 @@ include ($configInc["inc"] . "/css.php");
                             placement : "auto",
                             template : "<div class='tooltip ' ><div class='tooltip-inner'></div></div>"
                         });
-
-                //$(".guiaOverflow").css("height",i3GEO.parametros.h - 140);
-
-                /*
-                $(".guiaOverflow").mCustomScrollbar({
-                    scrollbarPosition : "inside",
-                    theme : "minimal-dark",
-                    contentTouchScroll : false,
-                    documentTouchScroll : false
-                });
-                */
                 tutorial.init();
                 new ol.control.FullScreen({
                     target: $i("i3GEOFullscreen"),
@@ -264,16 +253,13 @@ include ($configInc["inc"] . "/css.php");
                     target: $i("i3GEOzoomInOut")
                 }).setMap(i3geoOL);
 
-                //i3GEO.eventos.adicionaEventos("RESIZE", $(".guiaOverflow").css("height",i3GEO.parametros.h - 140));
-
-                //setTimeout(function() {
-                //  $('.iconeGuiaMovel').tooltip('destroy');
-                //}, 30000);
+                //
+                //Abre o mapa de referencia apos iniciar o mapa
                 //i3GEO.maparef.inicia();
                 //
-                //(largura, altura, topo, esquerda);
-                //i3GEO.mapa.dialogo.locregiao(215, "", 150, 150);
-                //i3GEO.mapa.dialogo.metaestat(215, "", 150, 150);
+
+                //ativa o timer de redesenho do mapa
+                //i3GEO.timer.mapa.ativa({intervalo: 5000});
 
                 //abre a legenda do mapa em uma janela flutuante
                 //i3GEO.legenda.inicia({
@@ -281,8 +267,10 @@ include ($configInc["inc"] . "/css.php");
                 //"templateLegenda": "templates/legenda.html",
                 //"janela": true
                 //});
+                //
                 //para abrir uma guia
                 //i3GEO.guias.ativa('temas',$("[data-idconteudo='guia1obj'"));
+                //
                 },
                 //parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas, balao de info, etc
                 components : {
@@ -344,6 +332,7 @@ include ($configInc["inc"] . "/css.php");
                     }
                 }
                 },
+                //
                 //parametros de configuracao das ferramentas que sao acionadas sob
                 //demanda. Veja em js/ini_i3geo.js e js/configura.js
                 //Algumas ferramentas localizadas em i3geo/ferramentas
@@ -365,29 +354,6 @@ include ($configInc["inc"] . "/css.php");
                 },
                 metaestat : {},
                 buscainde : {},
-                //ferramenta mapa de referencia
-                //difere das propriedades do mapa de referencia
-                //utilizado pela api openlayers ou googlemaps
-                opcoesmaparef : {
-                    //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
-                    images : [ {
-                    name : "Colorida",
-                    img : "referencia1"
-                    }, {
-                    name : "B & W",
-                    img : "referencia1cinza"
-                    } ]
-                },
-                //janela de conversao de coordenadas
-                wkt2layer : {
-                    position : [ 150, 150 ]
-                },
-                area : {
-                    position : [ 150, 10 ]
-                },
-                distancia : {
-                    position : [ 150, 10 ]
-                }
                 },
                 //configuracoes especificas para a interface que utiliza o OpenLayers
                 openLayers : {

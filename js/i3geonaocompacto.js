@@ -80,6 +80,7 @@
 	"legenda.js",
 	"busca.js",
 	"template.js",
+	"timer.js",
 	"caixaDeFerramentas.js"
 	);
 	var nocache = new Date().getTime();

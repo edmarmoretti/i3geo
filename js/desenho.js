@@ -162,8 +162,10 @@ i3GEO.desenho =
 	    f.setProperties({
 		origem : namespace
 	    });
+	    f.setId(i3GEO.util.uid());
 	    i3GEO.editor.setStyleDefault(f);
 	    i3GEO.desenho.layergrafico.getSource().addFeature(f);
+	    i3GEO.editor.tableRefresh();
 	    return f;
 	},
 	/**
@@ -186,7 +188,7 @@ i3GEO.desenho =
 	moveBox : function(box, xmin, ymin, xmax, ymax) {
 	    pol = new ol.geom.Polygon([[[xmin,ymin],[xmin,ymax],[xmax,ymax],[xmax,ymin],[xmin,ymin]]]);
 	    pol = i3GEO.util.extGeo2OSM(pol);
-	    box.getGeometry().setCoordinates(pol);
+	    box.getGeometry().setCoordinates(pol.getCoordinates());
 	    return box;
 	},
 	/**
@@ -326,6 +328,7 @@ i3GEO.desenho =
 		for (i = 0; i < n; i++) {
 		    i3GEO.desenho.layergrafico.getSource().removeFeature(remover[i]);
 		}
+		i3GEO.editor.tableRefresh();
 	    }
 	},
 	/**

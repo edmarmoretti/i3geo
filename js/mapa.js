@@ -764,17 +764,13 @@ i3GEO.mapa =
 		"i3GEOF.outputformat.iniciaJanelaFlutuante()");
 	    },
 	    /**
-	     * Function: autoredesenha
+	     * Function: autoredesenha depreciado na versao 8
 	     *
 	     * Abre a janela de dialogo da ferramenta opcoes_autoredesenha
 	     */
-	    autoredesenha : function() {
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.autoredesenha()",
-			"opcoes_autoredesenha",
-			"opcoesTempo",
-			"dependencias.php",
-		"i3GEOF.opcoesTempo.iniciaJanelaFlutuante()");
+	    autoredesenha : function(){
+		console.log("autoredesenha Depreciado. Utilize i3GEO.timer.mapa.start()");
+		i3GEO.timer.mapa.start();
 	    },
 	    /**
 	     * Function: salvaMapa
