@@ -1,3 +1,4 @@
+#http://localhost/i3geo/ms_criamapa.php?layers=_llocali&interface=openlayersdebug.php
 MAP
   #localhost/i3geo/ms_criamapa.php?temasa=_llocali&layers=_llocali&interface=osmdebug.php
   FONTSET "../symbols/fontes.txt"
@@ -8,7 +9,7 @@ MAP
     METADATA
       "METAESTAT_ID_MEDIDA_VARIAVEL"	""
       "TIP"	"TIPO,NOMELOC,ANOCRIA"
-      "cache"	"sim"
+      "cache"	"nao"
       "CLASSE"	"SIM"
       "LTEMPOITEMDESCRICAO"	"TIPO"
       "olopacity"	""
@@ -20,7 +21,7 @@ MAP
       "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
       "LTEMPOITEMTITULO"	"NOMELOC"
       "ITENSLINK"	",,,"
-      "TILES"	"SIM"
+      "TILES"	"NAO"
       "METAESTAT_CODIGO_TIPO_REGIAO"	""
       "arquivotemaoriginal"	""
       "nomeoriginal"	""
@@ -39,11 +40,12 @@ MAP
       "permiteogc"	"sim"
       "transitioneffect"	"NAO"
       "TEMA"	"Localidades (usar com timeline) para teste"
-      "cortepixels"	"40"
+      #"cortepixels"	"40"
       "identifica"	"sim"
       "LTEMPOCONVENCODE"	"SIM"
       "storymap"	""
       "convcaracter"	"SIM"
+      "UTFDATA"	"NOMELOC"
     END # METADATA
     NAME "_llocali"
     PROCESSING "LABEL_NO_CLIP=True"

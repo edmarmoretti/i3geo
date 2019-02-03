@@ -1,4 +1,4 @@
-<script src="https://cdn.polyfill.io/v2/polyfill.min.js"></script>
+<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
 <script src="<?php echo $configInc["pathjs"];?>/pacotes/ol4/ol.js"></script>
 <script src="<?php echo $configInc["pathjs"];?>/js/i3geo<?php echo $configInc["debug"];?>.js"></script>
 <!-- lista com os links que serao mostrados na guia ferramentas -->

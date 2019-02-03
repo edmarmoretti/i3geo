@@ -1,150 +1,4 @@
 <?php
-/*
- Title: Gerador de servi&ccedil;os OGC
-
-Gera web services nos padr&otilde;es OGC para os temas existentes na pasta i3geo/temas
-
-A lista de proje&ccedil;&otilde;es mostradas na fun&ccedil;&atilde;o getcapabilities &eacute; definida na vari&aacute;vel $listaepsg. Edite essa vari&aacute;vel diretamente no programa
-se forem necess&aacute;rias outras proje&ccedil;&otilde;es al&eacute;m das existentes
-
-Licen&ccedil;a:
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma copia da Licen&ccedil;a P&uacute;blica Geral do
-	GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-
-Arquivo: i3geo/ogc.php
-
-Par&acirc;metros:
-
-lista - (opcional) se for igual a 'temas', mostra uma lista de links em HTML dos temas dispon&iacute;veis,
-se for igual a 'temaswfs', mostra a lista de links WFS
-
-ajuda - (opcional) mostra uma ajuda ao usu&aacute;rio
-
-tema ou temas - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil;o. Se for definido, o web service conter&aacute; apenas esse tema. O tema &eacute; o nome do mapfile existente em i3geo/temas, mas pode ser especificado um mapfile existente em outra pasta. Nesse caso, deve-se especificar o caminho completo para o arquivo. Se n&atilde;o for definido, ser&atilde;o considerados todos os temas
-
-legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
-
-	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
-
-		legenda_imagecolor - cor RGB do fundo da legenda. Quando especificado,  o mapa deixa de ser transparente. Exemplo: &legenda_imagecolor=255,0,0
-
-		legenda_keysizex - largura da figura de cada classe
-
-		legenda_keysizey - altura da figura de cada classe
-
-		legenda_keyspacingx - distancia entre a figura e o inicio do texto de cada classe
-
-		legenda_keyspacingy - distancia entre as figuras de cada classe
-
-		legenda_position - posicao da legenda no mapa ul|uc|ur|ll|lc|lr
-
-		legenda_outlinecolor - cor RGB do contorno das figuras de cada classe
-
-		legenda_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
-
-		legenda_size - tamanho dos textos
-
-templateLegenda - (opcional) nome de um template HTML para uso em legendas do tipo text/html. Dever ser o caminho relativo a pasta
-onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a documentacao do Mapserver. exemplo &templateLegenda=aplicmap/legenda8.htm
-
-escala - (opcional) mostra a barra de escala no corpo do mapa sim|nao
-
-	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
-
-		escala_color - cor RGB dos trechos principais da barra. Exemplo: &escala_color=255,0,0
-
-		escala_backgroundcolor - cor dos trechos secundários
-
-		escala_outlinecolor - cor do contorno
-
-		escala_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
-
-		escala_size - tamanho dos textos
-
-		escala_position - posicao da legenda no mapa ul|uc|ur|ll|lc|lr
-
-		escala_width - largura da barra em pixels
-
-		escala_height - altura da barra em pixels
-
-		escala_style - estilo da barra 0|1
-
-		escala_intervals - numero de trechos da barra
-
-		escala_units - unidade de medida 0 (INCHES)|1 (FEET)|2 (milhas)|3 (METERS)|4 (KILOMETERS)|5 (DD)|6 (NAUTICALMILES)
-
-grade - (opcional) mostra a grade de coordenadas no corpo do mapa sim|nao
-
-	Obs.: a grade utiliza como template o mapfile temas/gridg.map
-
-	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as características:
-
-		grade_labelformat - formato dos textos indicativos das coordenadas da grade DD|DDMM|DDMMSS|C format string (mais detalhes em http://mapserver.org/mapfile/grid.html#grid )
-
-		grade_interval - intervalo entre as linhas da grade
-
-		grade_color - cor RGB da grade. Exemplo: &grade_color=255,0,0
-
-		grade_font - fonte (tipogafica) utilizada nos textos (arial, verdana...)
-
-		grade_size - tamanho dos textos
-
-		grade_position - posicao do texto auto|cc|ul|uc|ur|ll|lc|lr
-
-perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
-
-format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
-abrir o mashup do OpenLayers com as camadas definida em temas.
-Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
-
-OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile e csv para download de csv compactado
-
-ows_geomtype - permite definir o tipo de geometria conforme utilizado pelo parametro GEOMETRY do OGR (veja http://gdal.org/drv_csv.html)
-afeta o OUTPUTFORMAT csv. Por default utiliza &ows_geomtype=none para obter um csv sem a coluna geometry. Para obter a geometria utilize &ows_geomtypeAS_WKT
-
-id_medida_variavel - id da medida de variavel - utilizado apenas quando a fonte para definicao do layer for o sistema de metadados estatisticos
-nao deve ser utilizado junto com tema
-
-restauramapa - ID de um mapa salvo no sistema de administracao. O mapa e restaurado e tratado como WMS
-
-DESLIGACACHE (opcional) {sim|nao} - forca a nao usar o cache de imagens qd definido como 'sim', do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
-
-filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma: &map_layer_<nomedotema>_filter=
-
-Exemplo de filtro
-
-http://localhost/i3geo/ogc.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
-
-no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
-
-Exemplos:
-
-ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
-
-ogc.php?lista=temas
-
-ogc.php?tema=bioma
-
-ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
-
-*/
-
 if(count($_GET) == 0){
  echo "<pre>
 Par&acirc;metros:
@@ -227,7 +81,7 @@ grade - (opcional) mostra a grade de coordenadas no corpo do mapa sim|nao
 perfil - (opcional) perfil utilizado para restringir os temas que ser&atilde;o mostrados
 
 format - (opcional) pode ser utilizado a op&ccedil;&atilde;o &format=application/openlayers para
-abrir o mashup do OpenLayers com as camadas definida em temas.
+abrir o OpenLayers com as camadas definida em temas.
 Na gera&ccedil;&atilde;o da legenda pode ser utilizado text/html para gerar no formato html.
 
 OUTPUTFORMAT - em getfeature, aceita tamb&eacute;m shape-zip para download de shapefile e csv para download de csv compactado
@@ -246,17 +100,17 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 
 Exemplo de filtro
 
-http://localhost/i3geo/ogc.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4618&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
+http://localhost/i3geo/ogc.php?map_layer__lbiomashp_filter=(('[CD_LEGENDA]'='CAATINGA'))&tema=_lbiomashp&SRS=EPSG:4326&WIDTH=500&HEIGHT=500&BBOX=-76.5125927,-39.3925675209,-29.5851853,9.49014852081&FORMAT=image/png&service=wms&version=1.1.0&request=getmap&layers=_lbiomashp
 
 no caso de camadas Postgis basta usar map_layer__lbiomashp_filter=cd_legenda='CAATINGA'
 
 Exemplos:
 
-ogc.php?temas=biomashp&format=application/openlayers&bbox=-54,-14,-50,-10
+ogc.php?temas=_lbiomashp&format=application/openlayers&bbox=-54,-14,-50,-10
 
 ogc.php?lista=temas
 
-ogc.php?tema=bioma
+ogc.php?tema=_lbioma
 
 ogc.php?tema=/var/www/i3geo/aplicmap/geral1debianv6.map&layers=mundo
 
@@ -269,6 +123,9 @@ include(dirname(__FILE__)."/ms_configura.php");
 error_reporting(0);
 $_GET = array_merge($_GET,$_POST);
 //error_log($_SERVER['QUERY_STRING']);
+if(isset($_GET["bbox"])){
+    $_GET["BBOX"] = $_GET["bbox"];
+}
 if(isset($_GET["BBOX"])){
 	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
 }
@@ -500,11 +357,7 @@ if(!empty($_GET["restauramapa"])){
 //para operar como o Geoserver, abre o openlayers
 //
 if(isset($format) && strtolower($format) == "application/openlayers"){
-	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica,legenda&ativarodadomouse=true";
-	//caso exista o openlayers3
-	//if(file_exists(dirname(__FILE__)."/mashups/openlayers3.php")){
-	//	$urln = dirname($_SERVER["PHP_SELF"])."/mashups/openlayers3.php?layers=".$layers."&mapext=".$bbox."&botoes=pan,zoombox,zoomtot,identifica,legenda";
-	//}
+    $urln = dirname($_SERVER["PHP_SELF"])."/interface/layerpreview.php?layers=".$layers."&BBOX=".$_GET["BBOX"];
 	if(!headers_sent()){
 		header("Location:".$urln);
 	}

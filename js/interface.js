@@ -1,50 +1,3 @@
-/**
- * Title: Interface
- *
- * Funcoes que controlam o comportamento espec&iacute;fico de determinadas
- * interfaces
- *
- * As interfaces s&atilde;o definidas na inicializa&ccedil;&atilde;o do i3Geo,
- * por exemplo, openlayers,etc
- *
- * A classe "interface" cont&eacute;m os m&eacute;tdos espec&iacute;ficos
- * utilizados nessas interfaces
- *
- * Namespace:
- *
- * i3GEO.Interface
- *
- * Exemplo:
- *
- * Para iniciar o i3geo com uma interface espec&iacute;fica, utilize
- * http://localhost/i3geo/ms_criamapa.php?interface=black_gm.phtml
- *
- * O HTML deve conter as defini&ccedil;&otilde;es da interface criada e deve estar
- * armazenado em i3geo/aplicmap
- *
- * Veja:
- *
- * <http://localhost/i3geo/classesjs/classe_interface.js>
- */
-
-/**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
- * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite
- * 330, Boston, MA 02111-1307 USA.
- */
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
@@ -1109,14 +1062,15 @@ i3GEO.Interface =
 					    });
 					}
 					source.set("tipoServico", "WMTS");
-					opcoes.singleTile = false;
-					opcoes.title = "";
-					opcoes.name = camada.name+"_utfgrid";
-					opcoes.source = source;
-					opcoes.isBaseLayer = false;
-					opcoes.visible = true;
+					var cloneopcoes = {...opcoes};
+					cloneopcoes.singleTile = false;
+					cloneopcoes.title = "";
+					cloneopcoes.name = camada.name+"_utfgrid";
+					cloneopcoes.source = source;
+					cloneopcoes.isBaseLayer = false;
+					cloneopcoes.visible = true;
 					source.set("name", camada.name+"_utfgrid");
-					var layerutfgrid = new ol.layer.Tile(opcoes);
+					var layerutfgrid = new ol.layer.Tile(cloneopcoes);
 					camada.status == 0 ? layerutfgrid.setVisible(false) : layerutfgrid.setVisible(true);
 					i3GEO.Interface.LAYERSUTFGRID[camada.name+"_utfgrid"] = layerutfgrid;
 					//adiciona o Overlay para mostrar os dados de layers utfgrid
@@ -1203,6 +1157,7 @@ i3GEO.Interface =
 					i3GEO.Interface.openlayers.loadStopLayer(source.get("name"));
 				    });
 				}
+				//console.log("---------"+camada.name + " " +opcoes.singleTile)
 				if (opcoes.singleTile === true) {
 				    layer = new ol.layer.Image(opcoes);
 				} else {

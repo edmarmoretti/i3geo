@@ -1,3 +1,4 @@
+#http://localhost/i3geo/ms_criamapa.php?layers=_lbiomashp&interface=osmdebug.php
 MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
@@ -8,13 +9,13 @@ MAP
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
-      "cache"	"SIM"
+      "cache"	"NAO"
       "cacheprefixo" "prefixo"
       "CLASSE"	"SIM"
       "animagif"	""
       "permitekmz"	"SIM"
       "ITENSDESC"	"Teste de acentuação"
-      "TILES"	"SIM"
+      "TILES"	"NAO"
       "ESCALA"	"250000"
       "editavel"	""
       "extensao"	"-73.990940816816 -33.74827031115 -34.822855820777 5.272224303909"
@@ -24,7 +25,7 @@ MAP
       "escondido"	"NAO"
       "download"	"SIM"
       "esquematabelaeditavel"	""
-      "UTFDATA"	""
+      "UTFDATA"	"CD_LEGENDA"
       "itembuscarapida"	"CD_LEGENDA"
       "ITENS"	"CD_LEGENDA"
       "TIP"	"CD_LEGENDA"
