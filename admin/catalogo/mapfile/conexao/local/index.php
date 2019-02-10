@@ -44,7 +44,7 @@ $id_tema = (int) $_GET["id_tema"];
                 </h2>
                 <blockquote>{{{conexaoLayerLocal}}}</blockquote>
                 <div class="clearfix"></div>
-                <button onclick="i3GEOadmin.conexaolocal.testa('<?php echo $codigo; ?>')" href="javascript:void(0)" class="btn btn-primary" role="button" style="color:#5F4B8B;">{{{testaLayer}}}</button>
+                <button onclick="i3GEOadmin.conexaolocal.testa('<?php echo $codigo; ?>')" href="javascript:void(0)" class="btn btn-primary" role="button" style="color:#FF6F61;">{{{testaLayer}}}</button>
             </div>
             <div class="well hidden">
                 <div id="corpo"></div>

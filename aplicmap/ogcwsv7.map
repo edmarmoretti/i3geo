@@ -56,6 +56,14 @@ MAP
 		FORMATOPTION "FORM=SIMPLE"
 	END
 
+	OUTPUTFORMAT
+			NAME svg
+			MIMETYPE "image/svg+xml"
+			DRIVER cairo/svg
+			##FORMATOPTION  "COMPRESSED_OUTPUT=TRUE"
+			##FORMATOPTION  "FULL_RESOLUTION=TRUE"
+		END
+
 	PROJECTION
 		"+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs"
 	END

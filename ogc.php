@@ -454,6 +454,7 @@ if(file_exists($nomeMapfileTmp) && $tipo == ""){
 else{
 	if(empty($ogcwsmap)){
 		$oMap = ms_newMapobj($locaplic."/aplicmap/ogcwsv".$versao.".map");
+		//echo $locaplic."/aplicmap/ogcwsv".$versao.".map";exit;
 	}
 	else{
 		$oMap = ms_newMapobj($ogcwsmap);
@@ -804,7 +805,9 @@ else{
 	//a imagem do mapa recebera a barra de escala
 	//
 	if((isset($_GET["escala"])) && (strtolower($_GET["escala"]) == "sim")){
-		processaEscala();
+		processaEscala(true);
+	} else {
+	    processaEscala(false);
 	}
 	//
 	//aplica os parametros sobre a grade de coordenadas
@@ -1673,9 +1676,13 @@ function processaPluginI3geo(){
 		}
 	}
 }
-function processaEscala(){
+function processaEscala($escala=true){
 	global $oMap, $locaplic, $req;
 	$eb = $oMap->scalebar;
+	if($escala == false){
+	    $eb->set("status",MS_DELETE);
+	    return;
+	}
 	$eb->set("status",MS_EMBED);
 	if(!empty($_GET["escala_width"])){
 		$eb->set("width",$_GET["escala_width"]);

@@ -92,8 +92,10 @@
                 {{{checked}}} onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
             <span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} <span style="cursor: move;">{{{tema}}}</span>
             <!-- icones que trazem informacoes sobre o tema -->
+            <!--  temporizador -->
+            <span id="timerCamada{{name}}" class="glyphicon glyphicon-time {{{iconeTimer}}}" ></span>
             <!-- farol que indica a relacao com a escala do mapa -->
-            <span id="farol{{name}}" title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color: {{{farol"></span>
+            <span id="farol{{name}}" title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color: {{{farol}}}"></span>
             <!-- indica se os elementos da camada sao dependentes da escala do mapa -->
             <span title="{{{contextoescalaTitle}}}" class="glyphicon glyphicon-alert {{{contextoescala}}}" style="color: orange;"></span>
             <!-- links para formularios que sao especificos de cada plugin do i3Geo  e de ferramentas salvas na camada-->

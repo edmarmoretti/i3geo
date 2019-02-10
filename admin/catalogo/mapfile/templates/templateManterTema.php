@@ -65,7 +65,7 @@
 					</div>
 				</div>
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button" style="color:#5F4B8B;">{{salva}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#FF6F61;">{{salva}}</button>
 			</div>
 			</div>
 		</form>

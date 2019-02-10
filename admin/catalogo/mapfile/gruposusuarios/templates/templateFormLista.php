@@ -3,7 +3,7 @@
 	method="post"  >
 	{{{grupos}}}
 	<div class="pull-right">
-		<button type="submit" class="btn btn-primary" role="button" style="color:#5F4B8B;">{{salvar}}</button>
+		<button type="submit" class="btn btn-primary" role="button" style="color:#FF6F61;">{{salvar}}</button>
 	</div>
 	<div class="clearfix"></div>
 </form>

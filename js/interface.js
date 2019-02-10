@@ -1183,6 +1183,7 @@ i3GEO.Interface =
 		    // n&atilde;o use ===
 		    if (layer && layer != "") {
 			temp = camada.status == 0 ? layer.setVisible(false) : layer.setVisible(true);
+			i3GEO.timer.layers.add(camada);
 		    }
 		}
 		// inclui copyright

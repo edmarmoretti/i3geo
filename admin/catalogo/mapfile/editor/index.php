@@ -86,13 +86,13 @@ $versao = $versao ["principal"];
 				{{{ajudaEditor}}}
 				<a href="http://mapserver.org/mapfile/index.html#mapfile" target="_new">Mapserver</a>
 			</blockquote>
-            <a onclick="i3GEOadmin.editor.undo('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #5F4B8B;" href="#" role="button"> Undo </a>
-			<a onclick="i3GEOadmin.editor.salvar()" class="btn btn-primary" style="color: #5F4B8B;" href="#" role="button"> {{{salva}}} </a>
-			<a onclick="i3GEOadmin.editor.preview('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #5F4B8B;" href="#" role="button"> Preview </a>
-			<a onclick="i3GEOadmin.editor.testar('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #5F4B8B;" role="button"> {{{testaLayer}}} </a>
-			<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #5F4B8B;" href="javascript:void(0)"
+            <a onclick="i3GEOadmin.editor.undo('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #FF6F61;" href="#" role="button"> Undo </a>
+			<a onclick="i3GEOadmin.editor.salvar()" class="btn btn-primary" style="color: #FF6F61;" href="#" role="button"> {{{salva}}} </a>
+			<a onclick="i3GEOadmin.editor.preview('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #FF6F61;" href="#" role="button"> Preview </a>
+			<a onclick="i3GEOadmin.editor.testar('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #FF6F61;" role="button"> {{{testaLayer}}} </a>
+			<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #FF6F61;" href="javascript:void(0)"
 				role="button"> {{{testarI3geo}}} </a>
-			<a onclick="i3GEOadmin.editor.testaTabela('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #5F4B8B;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>
+			<a onclick="i3GEOadmin.editor.testaTabela('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #FF6F61;" href="javascript:void(0)" role="button"> {{{tabela}}} </a>
 		</div>
 	</div>
     <form id="form2" action="index.php" method="get">

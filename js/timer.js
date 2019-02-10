@@ -4,7 +4,7 @@ if (typeof (i3GEO) === 'undefined') {
 i3GEO.timer = {
 	ativa: function(){
 	    this.mapa.ativa();
-	    this.layers.ativa();
+	    //this.layers.ativa();
 	},
 	mapa: {
 	    _id : "",
@@ -101,6 +101,57 @@ i3GEO.timer = {
 	    }
 	},
 	layers: {
+	    _temporizadores: [],
+	    add: function(camada){
+		if (typeof (console) !== 'undefined')
+		    console.info("i3GEO.timer.layers.add() " + camada.name);
+
+		var me = i3GEO.timer.layers;
+		if (me._temporizadores[camada.name] != undefined || camada.temporizador == "") {
+		    return false;
+		}
+		me.start(camada.name,camada.temporizador);
+		return true;
+	    },
+	    remove: function(idtema){
+		var me = i3GEO.timer.layers;
+		window.clearInterval(me._temporizadores[idtema].temporizador);
+		delete(me._temporizadores[idtema]);
+		$("#timerCamada" + idtema).addClass("hidden");
+		i3GEO.Interface.atualizaTema("",idtema);
+	    },
+	    start: function(camada,tempo){
+		if (typeof (console) !== 'undefined')
+		    console.info("i3GEO.timer.layers.start() " + camada);
+
+		var me = i3GEO.timer.layers;
+		var t;
+		tempo = parseInt(tempo, 10)*1000;
+		if (tempo > 0) {
+		    var f = function(){
+			if (typeof (console) !== 'undefined')
+			    console.info("i3GEO.timer.layers refresh " + camada);
+
+			var layer = i3geoOL.getLayersByName(camada);
+			if(layer && layer.length > 0){
+			    layer = layer[0];
+			    if(layer.getVisible() == true){
+				i3GEO.Interface.atualizaTema("",camada);
+				if(i3GEO.Interface.LAYERSUTFGRID[camada+"_utfgrid"] != undefined){
+				    i3GEO.Interface.LAYERSUTFGRID[camada+"_utfgrid"].getSource().refresh();
+				}
+			    }
+			}
+		    };
+		    me._temporizadores[camada] = {
+			    tempo: tempo,
+			    temporizador: setInterval(
+				    f,
+				    tempo
+			    )
+		    };
+		}
+	    },
 	    ativa: function(){}
 	}
 };

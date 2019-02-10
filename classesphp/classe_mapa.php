@@ -379,6 +379,11 @@ class Mapa
                 if (strtoupper($oLayer->getmetadata("cache")) == "SIM") {
                     $cache = "sim";
                 }
+                $temporizador = "";
+                if($oLayer->getmetadata("temporizador") != ""){
+                    $cache = "nao";
+                    $temporizador = $oLayer->getmetadata("temporizador");
+                }
                 $cortepixels = 0;
                 if ($oLayer->getmetadata("cortepixels") != "") {
                     $cortepixels = $oLayer->getmetadata("cortepixels");
@@ -520,7 +525,7 @@ class Mapa
                     $wmssrs,
                     $wmstile,
                     $tiles,
-                    $oLayer->getmetadata("temporizador"),
+                    $temporizador,
                     $oLayer->getmetadata("permiteogc"),
                     $oLayer->getmetadata("itembuscarapida"),
                     $usasld,

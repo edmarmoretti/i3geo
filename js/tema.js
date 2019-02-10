@@ -1,48 +1,8 @@
-/**
- * Title: Temas
- *
- * Funcoes de dialogo e processamento de propriedades de um tema existente no mapa
- *
- * Em i3GEO.tema.dialogo estao as funcoes de abertura dos dialogos para alteracao das propriedades do tema,
- *
- * Namespace:
- *
- * i3GEO.tema
- *
- * Veja:
- *
- * <http://localhost/i3geo/classesjs/classe_tema.js>
- */
-/**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
- * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite
- * 330, Boston, MA 02111-1307 USA.
- */
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
-//TODO nova ferramenta para definir GEOMTRANSFORM
 i3GEO.tema =
 {
-	/**
-	 * Objeto que contem os identificadores dos temporizadores (setInterval) estabelecidos para cada camada
-	 *
-	 * Type: {objeto} - {idtema:{idtemporizador:,tempo:}}
-	 */
-	TEMPORIZADORESID : {},
 	/**
 	 * Function: ativaFerramentas
 	 *
@@ -347,53 +307,6 @@ i3GEO.tema =
 		i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
 	    };
 	    i3GEO.php.contorno(temp, idtema);
-	},
-	/**
-	 * Function: temporizador
-	 *
-	 * Aplica um temporizador para que a camada seja redesenhada em determinado intervalo de tempo.
-	 *
-	 * O campo com o valor de tempo (em segundos) e composto por "temporizador"+idtema
-	 *
-	 * Parametros:
-	 *
-	 * {string} - id que identifica o tema no map file.
-	 */
-	temporizador : function(idtema, tempo) {
-	    var t;
-	    if(!tempo){
-		if ($i("temporizador" + idtema)) {
-		    tempo = $i("temporizador" + idtema).value;
-		}
-		else{
-		    tempo = 0;
-		}
-	    }
-	    if (tempo != "" && parseInt(tempo, 10) > 0) {
-		//eval('i3GEO.tema.TEMPORIZADORESID.' + idtema + ' = {tempo: ' + tempo + ',idtemporizador: setInterval(function(' + idtema
-		//	+ '){if(!$i("arrastar_' + idtema + '")){delete(i3GEO.tema.TEMPORIZADORESID.' + idtema
-		//	+ ');return;}i3GEO.Interface.atualizaTema("",idtema);},parseInt(' + tempo + ',10)*1000)};');
-		t = function(){
-		    if(!$i("arrastar_" + idtema)){
-			delete(i3GEO.tema.TEMPORIZADORESID[idtema]);
-			return;
-		    }
-		    i3GEO.Interface.atualizaTema("",idtema);
-		};
-
-		i3GEO.tema.TEMPORIZADORESID[idtema] = {
-			tempo: tempo,
-			idtemporizador: setInterval(t,
-				parseInt(tempo,10)*1000
-			)
-		};
-	    } else {
-		try {
-		    window.clearInterval(i3GEO.tema.TEMPORIZADORESID[idtema].idtemporizador);
-		    delete (i3GEO.tema.TEMPORIZADORESID[idtema]);
-		} catch (e) {
-		}
-	    }
 	},
 	cortina : {
 	    _cortinaCompose: "",

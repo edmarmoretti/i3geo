@@ -139,7 +139,7 @@ if (! function_exists("ms_GetVersion")) {
                                     </button>
                                 </div>
                                 <div class="col-xs-6">
-                                    <a class="btn btn-primary" style="color: #5F4B8B;" href="{{{href}}}" role="button" target="{{{target}}}"> {{{abrir}}} </a>
+                                    <a class="btn btn-primary" style="color: #FF6F61;" href="{{{href}}}" role="button" target="{{{target}}}"> {{{abrir}}} </a>
                                 </div>
                             </div>
                         </div>
@@ -155,7 +155,7 @@ if (! function_exists("ms_GetVersion")) {
                     <img alt="Licen&ccedil;a Creative Commons" style="border-width: 0" src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" />
                 </a>
                 <br />O i3Geo est&aacute; licenciado com uma Licen&ccedil;a
-                <a tabindex="-1" rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" style="color: #5F4B8B;" target="_blank">Creative Commons - Licen&ccedil;a P&uacute;blica
+                <a tabindex="-1" rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" style="color: #FF6F61;" target="_blank">Creative Commons - Licen&ccedil;a P&uacute;blica
                     Geral GNU (&#34;GNU General Public License&#34;)</a>
             </div>
         </div>

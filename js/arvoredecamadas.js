@@ -592,26 +592,6 @@ i3GEO.arvoreDeCamadas =
 		console.info("depreciado i3GEO.arvoreDeCamadas.atualizaLegenda()");
 
 	},
-	/**
-	 * Monta o texto com o t&iacute;tulo do tema. Esse texto &eacute; o que ser&aacute; mostrado nos n&oacute;s principais da
-	 * &aacute;rvore e cont&eacute;m o checkbox para ligar e desligar o tema.
-	 *
-	 * Parametro:
-	 *
-	 * {Object} - objeto JSON com as propriedades do tema
-	 *
-	 * Return:
-	 *
-	 * {string} - texto formatado
-	 */
-	montaTextoTema : function(tema) {
-	    // adiciona o temporizador
-	    // que redesenha o tema de tempos em tempos
-	    if (i3GEO.tema.TEMPORIZADORESID[tema.name] == undefined && tema.temporizador != "") {
-		i3GEO.tema.temporizador(tema.name, tema.temporizador);
-	    }
-	    return (html);
-	},
 	montaOpcoesTema : function(temaObj,camada) {
 	    if (typeof (console) !== 'undefined')
 		console.info("montaOpcoesTema " + camada.name);
@@ -758,13 +738,10 @@ i3GEO.arvoreDeCamadas =
 		}
 		camada.iconeFerramentas = html;
 	    }
-	    //para testes
-	    /*
-			camada.farol = "red";
-			camada.farolTitle = $trad("t10");
-			camada.contextoescala = "";
-			camada.contextoescalaTitle = $trad("t36");
-	     */
+	    camada.iconeTimer = "hidden";
+	    if(temaObj.temporizador != ""){
+		camada.iconeTimer = "";
+	    }
 	    return camada;
 	},
 	/**
