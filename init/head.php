@@ -58,15 +58,6 @@ echo "
 	width: 22px;
 }
 
-#bandeiras img {
-	margin-left: 7px;
-}
-
-#bandeiras {
-	width: 100px;
-	text-align: left;
-}
-
 hr {
 	border-color: #fff -moz-use-text-color -moz-use-text-color;
 }

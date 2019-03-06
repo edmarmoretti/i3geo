@@ -692,7 +692,7 @@ i3GEO.pluginI3geo =
 			    });
 			    var styleCache = {};
 			    var v = true;
-			    if(camada.status === "0"){
+			    if(parseInt(camada.status,10) === 0){
 				v = false;
 			    }
 			    markercluster = new ol.layer.Vector({

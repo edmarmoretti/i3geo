@@ -176,8 +176,6 @@ g_traducao_ajuda_categorias = <?php echo json_encode($dicionario["dicionario_aju
 
 i3GEO.configura.locaplic = i3GEO.util.protocolo() + "://"
 + window.location.host + "/i3geo";
-i3GEO.idioma.IDSELETOR = "bandeiras";
-i3GEO.idioma.mostraSeletor();
 var idcategoria = "<?php echo $_GET["idcategoria"];?>";
 var idajuda = "<?php echo $_GET["idajuda"];?>";
 if(screen.availWidth > 700){

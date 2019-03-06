@@ -93,6 +93,7 @@ echo "<pre>";
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
+packer("../pacotes/cesium154/Build/CesiumUnminified/Cesium.js","../pacotes/cesium154/Build/CesiumUnminified/Cesium_compacto.js","None");
 packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
 packer("plugini3geo.js","compactados/plugini3geo_compacto.js","Normal");
 packer("marcador.js","compactados/marcador_compacto.js","Normal");

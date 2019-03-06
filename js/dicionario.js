@@ -3289,7 +3289,7 @@ g_traducao =
         ],
         "addcamada" : [
             {
-                pt : "Aducionar camada ao mapa",
+                pt : "Adicionar camada ao mapa",
                 en : "",
                 es : ""
             }

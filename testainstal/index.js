@@ -173,7 +173,6 @@ function mostraBotoes(){
 	$i("mensagemLogin").innerHTML = men;
 	i3GEO.configura = {"locaplic" : ".."};
 	i3GEO.idioma.IDSELETOR = "bandeiras";
-	i3GEO.idioma.mostraSeletor();
 	var ins = [],i,n = botoesIni.length,texto;
 	for(i=0;i<n;i++){
 		texto = '<div class="r" ><div class="ri" ><a target=_blank href="'+botoesIni[i].href+'" ><img style="max-height:77px;" src="'+botoesIni[i].img+'" /><br><br>'+botoesIni[i].titulo+'</a>';
@@ -208,7 +207,6 @@ function mostraBotoesBT(men){
 	$("#jumbotron").html(html);
 	i3GEO.configura = {"locaplic" : ".."};
 	i3GEO.idioma.IDSELETOR = "bandeiras";
-	i3GEO.idioma.mostraSeletor();
 	html = Mustache.to_html(
 		"{{#d}}" + $("#botoesTpl").html() + "{{/d}}",
 		{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}

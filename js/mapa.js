@@ -1293,8 +1293,12 @@ i3GEO.mapa =
 					if(e.alias && e.alias != ""){
 					    elementTitulo = e.alias;
 					}
-					if(e.tip != "nao" && e.valor != undefined){
-					    texto += elementTitulo + ": " + e.valor + "<br>";
+					if(e.tip != "nao"){
+					    if( e.valor != undefined){
+						texto += elementTitulo + ": " + e.valor + "<br>";
+					    } else {
+						texto += elementTitulo + ": " + e + "<br>";
+					    }
 					}
 				    });
 				    //}

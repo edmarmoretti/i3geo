@@ -43,7 +43,11 @@ i3GEOF.confluence = {
 		});
 	    }
 	    if(data.length == 0){
-		html = "Confluence. " + $trad("clickparar") + "<br>" + $trad("aproxmais");
+		if(i3GEO.parametros.mapscale > 8000000){
+		    html = "Confluence. " + $trad("clickparar") + "<br>" + $trad("aproxmais");
+		} else {
+		    html = "Confluence. " + $trad("clickparar") + "<br>" + $trad("nadaenc");
+		}
 	    } else {
 		html = "Confluence. " + $trad("clickparar") + "<br>";
 	    }

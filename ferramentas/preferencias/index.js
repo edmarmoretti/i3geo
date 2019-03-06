@@ -243,10 +243,6 @@ i3GEOF.preferencias = {
 						elemento: "",
 						funcao: "i3GEOF.preferencias.listaTemasOriginais(this)" //essa funcao atualiza o input oculto i3GEO.mapa.TEMASINICIAISLIGADOS
 					},{
-						titulo: $trad('mostraIdiomas',i3GEOF.preferencias.dicionario),
-						tipo: "boolean",
-						elemento: "i3GEO.idioma.MOSTRASELETOR"
-					},{
 						titulo: $trad('guardaExtensaoGeog',i3GEOF.preferencias.dicionario),
 						tipo: "boolean",
 						elemento: "i3GEO.configura.guardaExtensao"

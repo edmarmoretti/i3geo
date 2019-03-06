@@ -112,7 +112,7 @@ botoesIni = [
 	"href": "../utilitarios/index.php",
 	"titulo":$trad(33,g_traducao_init),
 	"subtitulo": $trad("33a",g_traducao_init),
-	"fa": "wrench",
+	"fa": "cogs",
 	"target": "_self"
 },
 /*
@@ -199,8 +199,6 @@ function mostraBotoesBT(men){
 	);
 	$("#jumbotron").html(html);
 	i3GEO.configura = {"locaplic" : ".."};
-	i3GEO.idioma.IDSELETOR = "bandeiras";
-	i3GEO.idioma.mostraSeletor();
 	html = Mustache.to_html(
 			"{{#d}}" + $("#botoesTpl").html() + "{{/d}}",
 			{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}

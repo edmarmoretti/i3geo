@@ -69,9 +69,6 @@ include "head.php";
                 <!-- template para permitir a traducao -->
                 <div id="menuTpl" class="hidden">
                     <ul class="nav navbar-nav">
-                        <li class="fa visible-lg"><a href="#" tabindex='-1'>
-                                <span id="bandeiras"></span>
-                            </a></li>
                         <li class="visible-lg"><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
                         <li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">OGC/Download</a></li>
                         <li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>

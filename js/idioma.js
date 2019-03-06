@@ -63,21 +63,6 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.idioma = {
 	/**
-	 * Propriedade: MOSTRASELETOR
-	 *
-	 * Define se o i3Geo ir&aacute; incluir no mapa as bandeiras de
-	 * sele&ccedil;&atilde;o de idiomas
-	 *
-	 * Tipo:
-	 *
-	 * {Boolean}
-	 *
-	 * Default:
-	 *
-	 * true
-	 */
-	MOSTRASELETOR : false,
-	/**
 	 * Propriedade: IDSELETOR
 	 *
 	 * Define o id do elemento HTML que receber&aacute; o seletor. Se n&atilde;o
@@ -319,73 +304,10 @@ i3GEO.idioma = {
 		    }
 		}
 	    },
-	    /**
-	     * Function: mostraSeletor
-	     *
-	     * Inclui as bandeiras no mapa permitindo a sele&ccedil;&atilde;o do idioma
-	     *
-	     * As imagens das bandeiras devem estar definidas no CSS do i3geo, recebendo
-	     * como identificadores os ids uk,brasil,italiano,espanhol
-	     */
+	    //remover na versao 9
 	    mostraSeletor : function() {
 		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.idioma.mostraSeletor()");
-
-		if (!i3GEO.idioma.MOSTRASELETOR) {
-		    return;
-		}
-		//
-		// monta o elemento HTML com as bandeiras
-		//
-		var ins, n, w, i, pos, novoel, temp;
-		ins = "";
-		n = i3GEO.idioma.SELETORES.length;
-		if ($i("i3geo")
-			&& i3GEO.parametros.w < 700) {
-		    w = "width:10px;";
-		} else {
-		    w = "";
-		}
-		for (i = 0; i < n; i++) {
-		    temp = i3GEO.idioma.SELETORES[i];
-		    ins += '<img  style="'
-			+ w
-			+ 'padding:0 0px;top:-7px;padding-right:0px;border: 1px solid white;" src="'
-			+ i3GEO.configura.locaplic + "/imagens/branco.gif"
-			+ '" onclick="i3GEO.idioma.trocaIdioma(\''
-			+ temp
-			+ '\')" ';
-		    if (temp === "en") {
-			ins += 'alt="Ingles" id="uk" />';
-		    }
-		    if (temp === "pt") {
-			ins += 'alt="Portugues" id="brasil" />';
-		    }
-		    if (temp === "es") {
-			ins += 'alt="Espanhol" id="espanhol" />';
-		    }
-		}
-		if (i3GEO.idioma.IDSELETOR !== ""
-		    && $i(i3GEO.idioma.IDSELETOR)) {
-		    $i(i3GEO.idioma.IDSELETOR).innerHTML = ins;
-		} else {
-		    pos = i3GEO.util.pegaPosicaoObjeto($i(i3GEO.Interface.IDCORPO));
-		    if (!$i("i3geoseletoridiomas")) {
-			novoel = document.createElement("div");
-			novoel.innerHTML = ins;
-			novoel.id = "i3geoseletoridiomas";
-			document.body.appendChild(novoel);
-		    } else {
-			novoel = $i("i3geoseletoridiomas");
-		    }
-		    novoel.style.position = "absolute";
-		    novoel.style.top = pos[1]
-		    - 17
-		    + "px";
-		    novoel.style.left = pos[0]
-		    + "px";
-		    novoel.style.zIndex = 5000;
-		}
+		    console.info("i3GEO.idioma.mostraSeletor() depreciado");
 	    },
 	    //guarda o objeto com os termos traduzidos
 	    OBJETOIDIOMA : "",

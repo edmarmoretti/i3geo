@@ -831,8 +831,6 @@ i3GEO.Interface =
 		montaMapa();
 
 		i3GEO.coordenadas.ativaEventos();
-		i3GEO.idioma.mostraSeletor();
-
 		if (i3GEO.parametros.kmlurl !== "") {
 		    i3GEO.Interface.openlayers.adicionaKml(true, i3GEO.parametros.kmlurl);
 		}
@@ -2182,9 +2180,6 @@ i3GEO.Interface =
 			i3GEO.Interface.googlemaps.registraEventos();
 			i3GEO.eventos.ativa($i(i3GEO.Interface.IDMAPA));
 			if (i3GEO.Interface.STATUS.trocando === false) {
-			    //	i3GEO.coordenadas.mostraCoordenadas();
-			    //i3GEO.gadgets.mostraMenuLista();
-			    i3GEO.idioma.mostraSeletor();
 			}
 			if (i3GEO.Interface.STATUS.trocando === true && $i(i3GEO.arvoreDeCamadas.IDHTML)) {
 			    $i(i3GEO.arvoreDeCamadas.IDHTML).innerHTML = "";

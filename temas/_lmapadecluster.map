@@ -36,7 +36,7 @@ MAP
     NAME "_lmapadecluster"
     PROCESSING "LABEL_NO_CLIP=True"
     PROCESSING "POLYLINE_NO_CLIP=True"
-    STATUS DEFAULT
+    STATUS OFF
     TEMPLATE "none.htm"
     TILEITEM "location"
     TYPE POINT
