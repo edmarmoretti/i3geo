@@ -307,19 +307,6 @@ i3GEO.analise =
 		);
 	    },
 	    /**
-	     * Function: analisaGeometrias
-	     *
-	     * Ferramenta de an&aacute;lise de geometrias
-	     */
-	    analisaGeometrias : function() {
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.tema.dialogo.tabela()",
-			"analisageometrias",
-			"analisaGeometrias",
-			"dependencias.php",
-		"i3GEOF.analisaGeometrias.iniciaJanelaFlutuante()");
-	    },
-	    /**
 	     * Function: pontosdistri
 	     *
 	     * Ferramenta de c&aacute;lculo de distribui&ccedil;&atilde;o de pontos

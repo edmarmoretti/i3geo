@@ -1,172 +1,136 @@
 if(typeof(i3GEOF) === 'undefined'){
-	var i3GEOF = {};
+    var i3GEOF = {};
 }
-/*
-Classe: i3GEOF.funcaojstip
- */
 i3GEOF.funcaojstip = {
-		/*
-	Variavel: aguarde
+	renderFunction: i3GEO.janela.formModal,
+	_parameters: {
+	    "tema": "",
+	    "mustache": "",
+	    "idContainer": "i3GEOfuncaojstipContainer",
+	    "namespace": "funcaojstip",
+	    "funcoesjs": ""
+	},
+	start : function(tema){
+	    var p = this._parameters,
+	    i3f = this,
+	    t1 = i3GEO.configura.locaplic + "/ferramentas/" + p.namespace + "/template_mst.html",
+	    t2 = i3GEO.configura.locaplic + "/ferramentas/" + p.namespace + "/exec.php?g_sid=" + i3GEO.configura.sid + "&funcao=pegaFuncoesJs&tema=" + tema;
+	    p.tema = tema;
+	    if(p.mustache === ""){
+		i3GEO.janela.abreAguarde();
+		$.when( $.get(t1),$.get(t2) ).done(function(r1,r2) {
+		    i3GEO.janela.fechaAguarde();
+		    p.mustache = r1[0];
+		    p.funcoesjs = i3GEO.util.base64decode(r2[0]);
+		    i3f.html();
 
-	Estilo do objeto DOM com a imagem de aguarde existente no cabe&ccedil;alho da janela.
-		 */
-		aguarde: "",
-		/*
-		 * Variavel: tema
-		 *
-		 * Tema que ser&aacute; utilizado
-		 *
-		 * Type: {string}
-		 */
-		tema : i3GEO.temaAtivo,
-		/**
-		 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-		 */
-		MUSTACHE : "",
-		MUSTACHELINHA: "",
-		FUNCOESJS : "",
-		/**
-		 * Susbtitutos para o template
-		 */
-		mustacheHash : function() {
-			var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.funcaojstip.dicionario);
-			return dicionario;
-		},
-		/*
-	Function: inicia
-
-	Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-
-	Parametro:
-
-	iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-		 */
-		inicia: function(iddiv){
-			if(i3GEOF.funcaojstip.MUSTACHE == ""){
-				var t1 = i3GEO.configura.locaplic + "/ferramentas/funcaojstip/template_mst.html",
-				t3 = i3GEO.configura.locaplic+"/ferramentas/funcaojstip/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=pegaFuncoesJs&tema="+i3GEOF.funcaojstip.tema;
-				$.when( $.get(t1),$.get(t3) ).done(function(r1,r3) {
-					i3GEOF.funcaojstip.MUSTACHE = r1[0];
-					i3GEOF.funcaojstip.FUNCOESJS = i3GEO.util.base64decode(jQuery.parseJSON(r3[0])["data"]);
-					i3GEOF.funcaojstip.inicia(iddiv);
-				}).fail(function() {
-					i3GEO.janela.closeMsg($trad("erroTpl"));
-					return;
-				});
-				return;
-			}
-			try{
-				$i(iddiv).innerHTML = i3GEOF.funcaojstip.html();
-				$i("i3GEOfuncaojstipfuncoes").value = i3GEOF.funcaojstip.FUNCOESJS;
-			}
-			catch(erro){i3GEO.janela.tempoMsg(erro);}
-		},
-		/*
-	Function: html
-
-	Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-
-	Retorno:
-
-	String com o c&oacute;digo html
-		 */
-		html:function(){
-			var ins = Mustache.render(i3GEOF.funcaojstip.MUSTACHE, i3GEOF.funcaojstip.mustacheHash());
-			return ins;
-		},
-		/*
-	Function: iniciaJanelaFlutuante
-
-	Cria a janela flutuante para controle da ferramenta.
-
-		 */
-		iniciaJanelaFlutuante: function(){
-			var janela,divid,temp,titulo = "";
-			if($i("i3GEOF.funcaojstip")){
-				i3GEOF.funcaojstip.inicia("i3GEOF.funcaojstip_corpo");
-				return;
-			}
-			titulo = "<span class='i3GeoTituloJanelaBsNolink' >"+$trad("funcaojstip")+"</span></div>";
-			janela = i3GEO.janela.cria(
-					"600px",
-					"260px",
-					"",
-					"",
-					"",
-					titulo,
-					"i3GEOF.funcaojstip",
-					false,
-					"hd",
-					"",
-					"",
-					"",
-					true,
-					"",
-					"",
-					"",
-					"",
-					"132"
-			);
-			divid = janela[2].id;
-			janela[0].bringToTop();
-			i3GEOF.funcaojstip.aguarde = $i("i3GEOF.funcaojstip_imagemCabecalho").style;
-			$i("i3GEOF.funcaojstip_corpo").style.backgroundColor = "white";
-			i3GEOF.funcaojstip.inicia(divid);
-		},
-		/*
-	Function: limpa
-
-	Limpa o filtro de um tema
-
-	Veja:
-
-	<INSERE>
-		 */
-		limpa: function(){
-			try{
-				if(i3GEOF.funcaojstip.aguarde.visibility === "visible")
-				{return;}
-				i3GEOF.funcaojstip.aguarde.visibility = "visible";
-				var p = i3GEO.configura.locaplic+"/ferramentas/funcaojstip/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=limpafuncoesjs&tema="+i3GEOF.funcaojstip.tema,
-				cp = new cpaint(),
-				temp = function(retorno){
-					i3GEOF.funcaojstip.aguarde.visibility = "hidden";
-					i3GEOF.funcaojstip.FUNCOESJS = i3GEO.util.base64decode(retorno.data);
-					$i("i3GEOfuncaojstipfuncoes").value = i3GEOF.funcaojstip.FUNCOESJS;
-				};
-				cp.set_response_type("JSON");
-				cp.call(p,"inserefuncaojstip",temp);
-			}
-			catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
-		},
-		/*
-	Function: aplica
-
-	Aplica um filtro ao tema
-
-	Veja:
-
-	<INSEREFILTRO>
-
-	Parametro:
-
-	testa {String} - sim|nao indica a realiza&ccedil;&atilde;o de teste ou aplica&ccedil;&atilde;o final do filtro
-		 */
-		aplica: function(idRetorno){
-			try{
-				if(i3GEOF.funcaojstip.aguarde.visibility === "visible")
-				{return;}
-				i3GEOF.funcaojstip.aguarde.visibility = "visible";
-				var p = i3GEO.configura.locaplic+"/ferramentas/funcaojstip/exec.php?g_sid="+i3GEO.configura.sid+"&funcao=inserefuncoesjs&tema="+i3GEOF.funcaojstip.tema+"&texto="+($i("i3GEOfuncaojstipfuncoes").value),
-				cp = new cpaint(),
-				temp = function(retorno){
-					i3GEOF.funcaojstip.aguarde.visibility = "hidden";
-					i3GEOF.funcaojstip.FUNCOESJS = i3GEO.util.base64decode(retorno.data);
-					$i("i3GEOfuncaojstipfuncoes").value = i3GEOF.funcaojstip.FUNCOESJS;
-				};
-				cp.set_response_type("JSON");
-				cp.call(p,"inserefuncaojstip",temp);
-			}
-			catch(e){i3GEO.janela.tempoMsg("Erro: "+e);}
+		}).fail(function() {
+		    i3GEO.janela.snackBar({content: $trad("erroTpl"),style: "red"});
+		    return;
+		});
+	    } else {
+		i3f.html();
+	    }
+	},
+	destroy: function(){
+	    //nao use this aqui
+	    //i3GEOF.legenda._parameters.mustache = "";
+	},
+	html:function() {
+	    var p = this._parameters,
+	    i3f = this,
+	    hash = {};
+	    hash = {
+		    locaplic: i3GEO.configura.locaplic,
+		    namespace: p.namespace,
+		    idContainer: p.idContainer,
+		    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+	    };
+	    i3f.renderFunction.call(
+		    this,
+		    {
+			texto: Mustache.render(p.mustache, hash),
+			onclose: i3f.destroy,
+			resizable: {
+			    disabled: false,
+			    ghost: true,
+			    handles: "se,n"
+			},
+			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
+		    }
+	    );
+	    $i("i3GEOfuncaojstipfuncoes").value = p.funcoesjs;
+	},
+	limpa: function(btn){
+	    i3GEOF.funcaojstip.get({
+		snackbar: true,
+		btn: btn,
+		par: {funcao: "limpafuncoesjs"},
+		refresh: true,
+		fn : function(data){
+		    i3GEOF.funcaojstip._parameters.funcoesjs = i3GEO.util.base64decode(data);
+		    $i("i3GEOfuncaojstipfuncoes").value = data;
 		}
+	    });
+	},
+	aplica: function(btn){
+	    //[{"titulo":"teste fake"},{"titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["CD_LEGENDA"]}]
+	    i3GEOF.funcaojstip.get({
+		snackbar: true,
+		btn: btn,
+		par: {
+		    funcao: "inserefuncoesjs",
+		    texto: $i("i3GEOfuncaojstipfuncoes").value
+		},
+		refresh: true,
+		fn : function(data){
+		    i3GEOF.funcaojstip._parameters.funcoesjs = i3GEO.util.base64decode(data);
+		    $i("i3GEOfuncaojstipfuncoes").value = i3GEOF.funcaojstip._parameters.funcoesjs;
+		}
+	    });
+	},
+	get: function({snackbar = true, btn = false, par = {}, refresh = false, fn = false} = {}){
+	    var p = this._parameters,
+	    i3f = this;
+	    i3GEO.janela.abreAguarde();
+	    if(btn){
+		btn = $(btn);
+		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    }
+	    i3GEO.janela._formModal.block();
+	    par.g_sid = i3GEO.configura.sid;
+	    par.tema = p.tema;
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/" + p.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			if(snackbar){
+			    i3GEO.janela.snackBar({content: $trad('feito')});
+			}
+			if(refresh){
+			    i3GEO.Interface.atualizaTema("", p.tema);
+			}
+			if(fn){
+			    fn(data);
+			}
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
+	}
 };

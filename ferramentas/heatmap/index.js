@@ -122,7 +122,7 @@ i3GEOF.heatmap = {
 		    raio: $i("i3GEOheatmapRaio").value
 	    };
 	    if(par.tema == ""){
-		i3GEO.janela.tempoMsg($trad('selecionaTema2',i3GEOF.centromassa.dicionario));
+		i3GEO.janela.tempoMsg($trad('selecionaTema2',i3GEOF.heatmap.dicionario));
 		return;
 	    }
 	    i3GEO.janela.abreAguarde();

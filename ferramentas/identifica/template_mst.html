@@ -1,5 +1,5 @@
 <!-- Guias -->
-<nav class='navbar navbar-default' >
+<nav class='navbar navbar-default'>
     <div class="container-fluid">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
@@ -37,7 +37,40 @@
     <!-- coordenadas e buffer -->
     <div class='container-fluid' id='i3GEO{{namespace}}guia5obj'>
         <div id='i3GEO{{namespace}}coord'></div>
-        <a href='javascript:void(0)' onclick="i3GEOF.identifica.buffer('')" class='btn btn-primary btn-sm btn-raised'>{{{criaBuffer}}}</a>
+
+        <div class="panel panel-default">
+            <div class="panel-heading" role="tab"">
+                <h4 class="panel-title">
+                    <a class="collapsed" role="button" data-toggle="collapse" href="#identificaBUfferCollapse" aria-expanded="false"> {{{criaBuffer}}} </a>
+                </h4>
+            </div>
+            <div id="identificaBUfferCollapse" class="panel-collapse collapse" role="tabpanel">
+                <div class="panel-body">
+                    <form data-refresh="true" style="" action="#" onsubmit="i3GEOF.identifica.buffer(this);return false;" role="form">
+                        <div class='form-group label-fixed condensed'>
+                            <label class='control-label' for=''>{{{entorno}}}</label>
+                            <input class='form-control input-lg' required type='number' name='distancia' value='' />
+                            <input type="hidden" value="nao" name="unir" />
+                            <input type="hidden" value="" name="tema" />
+                            <input type="hidden" value="criabuffer" name="funcao" />
+                            <input type="hidden" value="" name="itemdistancia" />
+                            <input type="hidden" value="1" name="multiplicar" />
+                            <input type="hidden" value="POINT({{{x}}} {{{y}}})" name="wkt" />
+                        </div>
+                        <div class='form-group condensed'>
+                            <div class="input-group">
+                                <label class="control-label">&nbsp;</label>
+                                <span class="input-group-btn">
+                                    <button role="button" type="submit" class="btn btn-primary btn-fab btn-fab-max">
+                                        <span class="material-icons ">send</span>
+                                    </button>
+                                </span>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
     <div class='container-fluid' id='i3GEO{{namespace}}guia6obj'>
         <div id='i3GEOidentificaSis'></div>

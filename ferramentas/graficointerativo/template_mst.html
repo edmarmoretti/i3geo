@@ -146,7 +146,7 @@
             <div style="width: 50%;" class='form-group label-fixed condensed'>
                 <label class="control-label" for="">{{{tipoagregay}}}</label>
                 <div style="width: 100%;" class="input-group">
-                    <select onchange='i3GEOF.graficointerativo.obterDados()' class="form-control" id="i3GEOgraficointerativoTipoAgregacao">
+                    <select onchange='i3GEOF.graficointerativo.obterDados(false)' class="form-control" id="i3GEOgraficointerativoTipoAgregacao">
                         <option value='soma'>{{{soma}}}</option>
                         <option value='media'>{{{media}}}</option>
                     </select> <b class="caret careti"></b>
@@ -175,12 +175,16 @@
             <div id='i3GEOgraficointerativoDados'></div>
         </div>
         <div class="container" id='i3GEOF.graficointerativo.t4'>
+            <p>{{{cliquefiltrar}}}</p>
             <div class="form-group condensed">
-                <button onclick='i3GEOF.graficointerativo.alteraFatorPixelMenos()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                <button title="{{{restaurar}}}" onclick='i3GEOF.graficointerativo.alteraFatorPixelMenos()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                     <span class="material-icons">photo_size_select_small</span>
                 </button>
-                <button onclick='i3GEOF.graficointerativo.alteraFatorPixelMais()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                <button title="{{{ampliar}}}" onclick='i3GEOF.graficointerativo.alteraFatorPixelMais()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
                     <span class="material-icons">photo_size_select_large</span>
+                </button>
+                <button title="{{{limparfiltros}}}" onclick='i3GEOF.graficointerativo.limparFiltros()' class="btn btn-xs" style="margin: 2px; padding: 2px;">
+                    <span class="material-icons">delete</span>
                 </button>
                 <button onclick='i3GEOF.graficointerativo.csv()' class="btn btn-xs" style="margin: 2px; padding: 2px;">CSV</button>
                 <button onclick='i3GEOF.graficointerativo.png()' class="btn btn-xs" style="margin: 2px; padding: 2px;">PNG</button>

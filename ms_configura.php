@@ -305,8 +305,8 @@ opcoes_autoredesenha,opcoes_label,salvamapfile,wmstime
 As seguintes ferramentas podem ser bloqueadas apenas impedindo-se a carga do javascript
 (as operacoes via PHP sao realizadas por outras classes que nao residem na pasta ferramentas ou n�o utiliza PHP)
 
-analisageometrias,animacao,atalhoscamada,atalhosedicao,atalhosmapa,bufferpt,busca,buscainde
-buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,geolocal,html2canvas,inseregrafico
+animacao,atalhosedicao,atalhosmapa,busca,buscainde
+buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,html2canvas,inseregrafico
 inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */

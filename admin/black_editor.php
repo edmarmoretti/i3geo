@@ -238,17 +238,6 @@ include ($configInc["inc"] . "/css.php");
                             placement : "auto",
                             template : "<div class='tooltip ' ><div class='tooltip-inner'></div></div>"
                         });
-
-                //$(".guiaOverflow").css("height",i3GEO.parametros.h - 140);
-
-                /*
-                $(".guiaOverflow").mCustomScrollbar({
-                    scrollbarPosition : "inside",
-                    theme : "minimal-dark",
-                    contentTouchScroll : false,
-                    documentTouchScroll : false
-                });
-                */
                 tutorial.init();
                 new ol.control.FullScreen({
                     target: $i("i3GEOFullscreen"),
@@ -261,27 +250,13 @@ include ($configInc["inc"] . "/css.php");
                     target: $i("i3GEOzoomInOut")
                 }).setMap(i3geoOL);
                 i3GEO.mapa.ativaTema("<?php echo strip_tags($_GET["temaEdicao"]); ?>");
-                i3GEO.mapa.dialogo.atalhosedicao();
-                //i3GEO.eventos.adicionaEventos("RESIZE", $(".guiaOverflow").css("height",i3GEO.parametros.h - 140));
-
-                //setTimeout(function() {
-                //  $('.iconeGuiaMovel').tooltip('destroy');
-                //}, 30000);
-                //i3GEO.maparef.inicia();
-                //
-                //(largura, altura, topo, esquerda);
-                //i3GEO.mapa.dialogo.locregiao(215, "", 150, 150);
-                //i3GEO.mapa.dialogo.metaestat(215, "", 150, 150);
-
-                //abre a legenda do mapa em uma janela flutuante
-                //i3GEO.legenda.inicia({
-                //"idLegenda": "legendaHtml",
-                //"templateLegenda": "templates/legenda.html",
-                //"janela": true
-                //});
-                //para abrir uma guia
-                //i3GEO.guias.ativa('temas',$("[data-idconteudo='guia1obj'"));
+                i3GEO.util.scriptTag(
+                        "catalogo/mapfile/ferramentas/atalhosedicao/dependencias.php",
+                        "i3GEOF.atalhosedicao.iniciaJanelaFlutuante()",
+                        "i3GEOF.atalhosedicao_script"
+                );
                 },
+
                 //parametros de configuracao de diferentes componentes do mapa, como o catalogo de temas, balao de info, etc
                 components : {
                 //restringe a inclusao de attribution apenas aos LAYERS adicionados manualmente

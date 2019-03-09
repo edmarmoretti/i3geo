@@ -74,5 +74,10 @@ i3GEOF.heatmap.dicionario = {
 		pt : "Valor m&aacute;ximo em cada ponto:",
 		en : "Maximum value at each point:",
 		es : "Valor m&aacute;ximo en cada punto:"
+	} ],
+	'selecionaTema2' : [ {
+		pt : "Selecione um tema",
+		en : "Select a theme",
+		es : "Seleccione un tema"
 	} ]
 };

@@ -840,46 +840,41 @@ i3GEO.janela =
 	 * {function} - (opcional) funcao do botao 2
 	 */
 	confirma : function(pergunta, w, resposta1, resposta2, funcao1, funcao2) {
-	    var b, f1, f2, f3, janela = YAHOO.i3GEO.janela.managerAguarde.find("confirma");
-	    if (!w || w == "") {
-		w = 300;
-	    }
+	    i3GEO.janela.closeMsg(" ");
+	    var msg = $("#i3GEOMensagemCloseModal");
+
+	    var f1, f2, f3;
+
 	    if (!funcao1 || funcao1 == "") {
 		f1 = function() {
-		    YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		    i3GEO.janela.closeMsg();
 		    return true;
 		};
 	    } else {
 		f1 = function() {
 		    funcao1.call();
-		    YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		    i3GEO.janela.closeMsg();
 		};
 	    }
 	    if (!funcao2 || funcao2 == "") {
 		f2 = function() {
-		    YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		    i3GEO.janela.closeMsg();
 		    return false;
 		};
 	    } else {
 		f2 = function() {
 		    funcao2.call();
-		    YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		    i3GEO.janela.closeMsg();
 		};
 	    }
 	    f3 = function() {
-		YAHOO.i3GEO.janela.managerAguarde.find("confirma").destroy();
+		i3GEO.janela.closeMsg();
 	    };
 	    if (!resposta1 || resposta1 == "") {
 		resposta1 = $trad("confirma");
 	    }
-	    if (janela) {
-		janela.destroy();
-	    }
 	    b = [
 		{
-		    text : $trad("x75"),
-		    handler : f3
-		}, {
 		    text : resposta1,
 		    handler : f1
 		}
@@ -890,33 +885,12 @@ i3GEO.janela =
 		    handler : f2
 		});
 	    }
-	    janela = new YAHOO.widget.SimpleDialog("confirma", {
-		width : w + "px",
-		fixedcenter : true,
-		visible : false,
-		draggable : false,
-		zIndex : 100000,
-		textAlign : "left",
-		close : false,
-		modal : false,
-		effect : {
-		    effect : YAHOO.widget.ContainerEffect.FADE,
-		    duration : 0.25
-		},
-		constraintoviewport : true,
-		text : "<h4 class='alertTitulo'>" + pergunta + "</h4>"
-	    });
-	    YAHOO.i3GEO.janela.managerAguarde.register(janela);
-	    janela.setHeader(" ");
-	    //botoes
-	    janela.setFooter("<div class='form-group condensed' id='confirmaFooter'></div>");
-	    janela.render(document.body);
+	    msg.html("<h4 class='alertTitulo'>" + pergunta + "</h4><div class='form-group condensed' id='confirmaFooter'></div>");
 	    var ins = "";
 	    $.each(b, function( index, value ) {
 		ins = Mustache.render(i3GEO.template.botoes.padrao, {style:'margin-right:10px;',text: value.text});
 		$('#confirmaFooter').append($(ins).click(value.handler));
 	    });
-	    janela.show();
 	},
 	/**
 	 * Function: prompt

@@ -1113,16 +1113,16 @@ i3GEO.pluginI3geo =
 		},
 		buscaParForm : function(nomecamada,novaCamada) {
 		    var p, cp, temp, s;
-		    temp = function(retorno) {
+		    temp = function(data) {
 			var camada;
-			retorno.data.ativo = "sim";
+			data.ativo = "sim";
 			// pega o objeto camada
 			if (i3GEO.arvoreDeCamadas) {
 			    camada = i3GEO.arvoreDeCamadas.pegaTema(nomecamada);
-			    camada.plugini3geo = retorno.data;
+			    camada.plugini3geo = data;
 			} else {
 			    camada = {
-				    plugini3geo : retorno.data,
+				    plugini3geo : data,
 				    name : nomecamada
 			    };
 			}
@@ -1148,10 +1148,9 @@ i3GEO.pluginI3geo =
 		    cp.call(p, "foo", temp);
 		},
 		inicia : function(camada) {
-
 		    i3GEO.janela.fechaAguarde("aguardePlugin");
 		    var iniciaform = function() {
-			i3GEOF.parametrossql.iniciaJanelaFlutuante(camada);
+			i3GEOF.parametrossql.start(camada);
 		    };
 		    i3GEO.util.scriptTag(
 			    (i3GEO.configura.locaplic + "/ferramentas/parametrossql/dependencias.php"),

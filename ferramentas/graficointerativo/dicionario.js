@@ -427,5 +427,29 @@ i3GEOF.graficointerativo.dicionario =
 				es : "",
 				it : ""
 			}
+		],
+		"ampliar" : [
+			{
+				pt : "Ampliar",
+				en : "",
+				es : "",
+				it : ""
+			}
+		],
+		"restaurar" : [
+			{
+				pt : "Restaurar tamanho",
+				en : "",
+				es : "",
+				it : ""
+			}
+		],
+		"cliquefiltrar" : [
+			{
+				pt : "Clique no gr&aacute;fico para filtrar o mapa",
+				en : "",
+				es : "",
+				it : ""
+			}
 		]
 	};

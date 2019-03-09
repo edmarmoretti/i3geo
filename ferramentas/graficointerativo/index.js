@@ -305,7 +305,7 @@ i3GEOF.graficointerativo =
 	atualizaListaDeRegistros : function() {
 	    if(i3GEOF.graficointerativo._parameters.listaregativo === true){
 		if (i3GEOF.graficointerativo._parameters.atualiza === true) {
-		    i3GEOF.graficointerativo.obterDados();
+		    i3GEOF.graficointerativo.obterDados(false);
 		    i3GEOF.graficointerativo.tabela2grafico();
 		}
 	    }
@@ -316,7 +316,7 @@ i3GEOF.graficointerativo =
 	 * Obt&eacute;m os dados que ser&atilde;o utilizados no gr&aacute;fico
 	 *
 	 */
-	obterDados : function() {
+	obterDados : function(btn) {
 	    var tema, excluir, cp, tipo, ordenax, monta, p, x, y, i, n, temp;
 	    tema = $i("i3GEOgraficointerativoComboTemasId").value;
 	    excluir = $i("i3GEOgraficointerativoexcluir").value;
@@ -378,27 +378,16 @@ i3GEOF.graficointerativo =
 		    tipo: tipo,
 		    ordenax: ordenax
 	    };
-	    i3GEO.janela.abreAguarde();
-	    i3GEO.janela._formModal.block();
-	    $.get(
-		    i3GEO.configura.locaplic+"/ferramentas/graficointerativo/exec.php",
-		    par
-	    )
-	    .done(
-		    function(data, status){
-			i3GEO.janela._formModal.unblock();
-			i3GEO.janela.fechaAguarde();
-			i3GEO.janela.snackBar({content: $trad('feito')});
-			i3GEOF.graficointerativo.montaTabelaDados(data);
-		    }
-	    )
-	    .fail(
-		    function(data){
-			i3GEO.janela._formModal.unblock();
-			i3GEO.janela.fechaAguarde();
-			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
-		    }
-	    );
+	    i3GEOF.graficointerativo.get({
+		snackbar: true,
+		fn: function(data){
+		    i3GEOF.graficointerativo.montaTabelaDados(data);
+		},
+		btn: btn,
+		par: par,
+		refresh: false
+	    });
+
 	},
 	/**
 	 * Pega os nomes das colunas
@@ -767,7 +756,6 @@ i3GEOF.graficointerativo =
 			    i3GEOF.graficointerativo.filtraCamada(filtro);
 			};
 			i3GEO.janela.confirma("Filtra a camada?",350,"Com base em X","Menor que Y",funcao1,funcao2);
-
 		    },
 		    baseAxisTitleFont : '9px sans-serif',
 		    yAxisTickFormatter : function(valor) {
@@ -843,7 +831,6 @@ i3GEOF.graficointerativo =
 		    return config.colors[this.index];
 		};
 	    }
-	    console.log(config)
 	    new pvc.BarChart(config).setData(dados, {
 		crosstabMode : ct,
 		seriesInRows : sr
@@ -878,7 +865,6 @@ i3GEOF.graficointerativo =
 	    }).render();
 	},
 	arvores : function(dados, maior, cores, legendaY, legendaX, tipo) {
-
 	    config = {
 		    canvas : "i3GEOgraficointerativoguia4objCanvas",
 		    title : legendaY,
@@ -967,26 +953,73 @@ i3GEOF.graficointerativo =
 	    }).render();
 	},
 	filtraCamada: function(filtro){
-	    var p, cp, temp,tema = i3GEOF.graficointerativo._parameters.tema;
-	    p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro&filtro="+i3GEO.util.base64encode(filtro);
-	    cp = new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.set_transfer_mode('POST');
-	    temp = function(retorno){
-		i3GEO.Interface.atualizaTema(retorno,tema);
-	    };
-	    cp.call(p,"insereFiltro",temp,"tema="+tema);
+	    i3GEOF.graficointerativo.get({
+		snackbar: true,
+		fn: false,
+		btn: false,
+		par: {
+		    tema: i3GEOF.graficointerativo._parameters.tema,
+		    funcao: "inserefiltro",
+		    filtro: i3GEO.util.base64encode(filtro)
+		},
+		refresh: true
+	    });
 	},
 	limparFiltros: function(){
-	    var i, p, cp, temp,tema;
-	    p = i3GEO.configura.locaplic+"/ferramentas/filtro/exec.php?base64=sim&g_sid="+i3GEO.configura.sid+"&funcao=inserefiltro";
-	    cp = new cpaint();
-	    cp.set_response_type("JSON");
-	    cp.set_transfer_mode('POST');
-	    tema = i3GEOF.graficointerativo._parameters.tema;
-	    temp = function(retorno){
-		i3GEO.Interface.atualizaTema(retorno,tema);
-	    };
-	    cp.call(p,"insereFiltro",temp,"tema="+tema+"&filtro=");
+	    i3GEOF.graficointerativo.get({
+		snackbar: true,
+		fn: false,
+		btn: false,
+		par: {
+		    tema: i3GEOF.graficointerativo._parameters.tema,
+		    funcao: "inserefiltro",
+		    filtro: ""
+		},
+		refresh: true
+	    });
+	},
+	get: function({snackbar = true, btn = false, par = {}, refresh = false, fn = false} = {}){
+	    var p = this._parameters,
+	    i3f = this;
+	    i3GEO.janela.abreAguarde();
+	    if(btn){
+		btn = $(btn);
+		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+	    }
+	    i3GEO.janela._formModal.block();
+	    par.g_sid = i3GEO.configura.sid;
+	    par.tema = p.tema;
+	    $.get(
+		    i3GEO.configura.locaplic+"/ferramentas/" + p.namespace + "/exec.php",
+		    par
+	    )
+	    .done(
+		    function(data, status){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			if(snackbar){
+			    i3GEO.janela.snackBar({content: $trad('feito')});
+			}
+			if(refresh){
+			    i3GEO.Interface.atualizaTema("", i3GEOF.graficointerativo._parameters.tema);
+			}
+			if(fn){
+			    fn(data);
+			}
+		    }
+	    )
+	    .fail(
+		    function(data){
+			i3GEO.janela._formModal.unblock();
+			i3GEO.janela.fechaAguarde();
+			if(btn){
+			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+			}
+			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+		    }
+	    );
 	}
 };

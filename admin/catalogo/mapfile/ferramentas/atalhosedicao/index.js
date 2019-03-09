@@ -1,14 +1,6 @@
 if (typeof (i3GEOF) === 'undefined') {
     var i3GEOF = {};
 }
-/*
- * Classe: i3GEOF.atalhosedicao
- */
-//TODO incluir minscale e maxscale
-//TODO incluir opcao para modificar o nome do layer
-//TODO bloquear fechamento da janela
-//TODO incluir opcao para incluir o link para a fonte
-//TODO criar nova opcao que permita editar um texto livre para a fonte e guarda-la no proprio mapfile
 i3GEOF.atalhosedicao =
 {
 	tema: "",
@@ -43,7 +35,6 @@ i3GEOF.atalhosedicao =
 	},
 	parametrosSql: function() {
 	    i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
-	    //i3GEO.pluginI3geo.parametrossql.buscaParForm(i3GEOF.atalhosedicao.tema);
 	    YAHOO.namespace("admin");
 	    YAHOO.namespace("admin.container");
 	    core_montaEditor("","450px","500px","","Plugin",true,false,false);

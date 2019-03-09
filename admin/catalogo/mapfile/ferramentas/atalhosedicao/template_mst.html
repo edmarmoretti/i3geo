@@ -14,7 +14,7 @@
 	<a title="{{{etiquetaTip}}}" onclick="i3GEO.tema.dialogo.etiquetas(i3GEOF.atalhosedicao.tema);" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{etiqueta}}}
 	</a>
-    <a title="{{{funcaojsTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEO.tema.dialogo.funcaojstip(i3GEO.temaAtivo);" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
+    <a title="{{{funcaojsTip}}}" onclick="i3GEO.tema.dialogo.funcaojstip(i3GEOF.atalhosedicao.tema);" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
     {{{funcaojsTitulo}}}
     </a>
 	<a title="{{{filtroTip}}}" onclick="i3GEO.tema.dialogo.filtro(i3GEOF.atalhosedicao.tema);" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
@@ -23,8 +23,7 @@
 	<a title="{{{temacomgraficoTip}}}" onclick="i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;i3GEOF.atalhosedicao.temaComGrafico(i3GEOF.atalhosedicao.tema);" class='btn btn-primary btn-lg btn-block btn-raised' href='javascript:void(0)' >
 	{{{temacomgrafico}}}
 	</a>
-
-	<div class="form-group label-static" >
+	<div style="margin-top:50px;" class="form-group label-static" >
 		<label class="control-label">{{{opacidade}}}</label>
 		<form onsubmit="i3GEO.tema.mudatransp(i3GEOF.atalhosedicao.tema,this[0].value);return false;">
 			<input id="i3GEOFatalhosedicaoOpacidade" class="form-control input-lg" type='text' value='{{{transparency}}}' />

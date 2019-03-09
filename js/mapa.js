@@ -469,24 +469,6 @@ i3GEO.mapa =
 		i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.wkt2layer()", "wkt2layer", "wkt2layer", "dependencias.php", temp);
 	    },
 	    /**
-	     * Function: atalhosedicao
-	     *
-	     * Janela com as principais opcoes de edicao de um layer. Utilizado pelo sistema de administracao
-	     *
-	     * Parametro:
-	     *
-	     * {string} - codigo do tema
-	     */
-	    atalhosedicao : function(idtema) {
-		i3GEO.mapa.ativaTema(idtema);
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.atalhosedicao()",
-			"atalhosedicao",
-			"atalhosedicao",
-			"dependencias.php",
-		"i3GEOF.atalhosedicao.iniciaJanelaFlutuante()");
-	    },
-	    /**
 	     * Function: geolocal
 	     *
 	     * Abre a janela de dialogo da ferramenta de geolocalizacao do usuario
@@ -751,19 +733,6 @@ i3GEO.mapa =
 		"i3GEOF.mostraexten.start()");
 	    },
 	    /**
-	     * Function: outputformat
-	     *
-	     * Abre a janela de dialogo da ferramenta outputformat
-	     */
-	    outputformat : function() {
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.outputformat()",
-			"outputformat",
-			"outputformat",
-			"dependencias.php",
-		"i3GEOF.outputformat.iniciaJanelaFlutuante()");
-	    },
-	    /**
 	     * Function: autoredesenha depreciado na versao 8
 	     *
 	     * Abre a janela de dialogo da ferramenta opcoes_autoredesenha
@@ -823,19 +792,6 @@ i3GEO.mapa =
 			"convertemapakml",
 			"dependencias.php",
 		"i3GEOF.convertemapakml.start()");
-	    },
-	    /**
-	     * Function: queryMap
-	     *
-	     * Abre a janela de dialogo da ferramenta opcoes_querymap
-	     */
-	    queryMap : function() {
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.mapa.dialogo.queryMap()",
-			"opcoes_querymap",
-			"opcoesQuery",
-			"dependencias.php",
-		"i3GEOF.opcoesQuery.iniciaJanelaFlutuante()");
 	    },
 	    /**
 	     * Function: template

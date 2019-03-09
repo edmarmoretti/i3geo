@@ -93,6 +93,7 @@ i3GEOF.selecao =
 			"form-control"
 		);
 	    };
+	    i3GEO.util.aplicaAquarela(p.idContainer);
 	    i3GEO.eventos.cliquePerm.desativa();
 	    i3f.nsel();
 	},
@@ -116,6 +117,7 @@ i3GEOF.selecao =
 	    par.tema = p.tema;
 	    par.tipo = $i("i3GEOselecaotipoOperacao").value;
 	    par.tolerancia = $i("i3GEOselecaotoleranciapt").value;
+	    par.cor = $i("i3GEOselecaocor").value;
 	    if(!par.ext){
 		par.ext = i3GEO.util.extOSM2Geo("-180 -90 180 90");
 	    }

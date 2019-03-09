@@ -54,5 +54,10 @@ i3GEOF.buffer.dicionario = {
 		pt : "Caso tenha escolhido um item, multiplicar os valores por",
 		en : "If you have selected a field, multiply values by",
 		es : "Si ha elegido un campo, multiplicar los valores por"
+	} ],
+	'selecionaTema2' : [ {
+		pt : "Selecione um tema",
+		en : "Select a theme",
+		es : "Seleccione un tema"
 	} ]
 };

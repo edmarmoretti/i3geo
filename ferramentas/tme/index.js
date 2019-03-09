@@ -125,10 +125,10 @@ i3GEOF.tme = {
 			$i("i3GEOtmetemasComSel").value = i3GEOF.tme._parameters.tema;
 			$i("i3GEOtmetemasComSel").onchange = function(){
 			    var p = i3GEOF.tme._parameters;
-			    p.tema = this.value;
+			    p.tema = $i("i3GEOtmetemasComSel").value;
 			    i3GEOF.tme.comboItensRegioes();
 			    var camada = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[p.tema];
-			    if (camada != "" && camada.ferramentas.tme) {
+			    if (camada && camada != "" && camada.ferramentas.tme) {
 				p.itemnomeregioes = camada.ferramentas.tme.colnome;
 				p.itemdados = camada.ferramentas.tme.colsdata.join(",");
 				if(camada.ferramentas.tme.auto === "sim"){

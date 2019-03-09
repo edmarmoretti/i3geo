@@ -561,22 +561,6 @@ switch (strtoupper($funcao)) {
         $retorno = $m->converteWS($locaplic, $_pg["h"]);
         break;
     /*
-     * Valor: QUERYMAPCOR
-     *
-     * Altera a cor de sele&ccedil;&atilde;o.
-     *
-     * <Mapa->corQM>
-     */
-    case "QUERYMAPCOR":
-        include_once ("classe_mapa.php");
-        copiaSeguranca($map_file);
-        $m = new Mapa($map_file);
-        $m->corQM($_pg["cor"]);
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
      * Valor: CORPO
      *
      * Redesenha o mapa.

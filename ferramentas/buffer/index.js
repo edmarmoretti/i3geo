@@ -91,7 +91,7 @@ i3GEOF.buffer = {
 		par.multiplicar = 1;
 	    }
 	    if(par.tema == ""){
-		i3GEO.janela.tempoMsg($trad('selecionaTema2',i3GEOF.centromassa.dicionario));
+		i3GEO.janela.tempoMsg($trad('selecionaTema2',i3GEOF.buffer.dicionario));
 		return;
 	    }
 	    i3GEO.janela.abreAguarde();

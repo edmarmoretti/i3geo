@@ -5,7 +5,7 @@
                 <span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
             </button>
         </div>
-        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse" style="padding: 10px;overflow-x: hidden;max-height: 150px;">
+        <div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse" style="padding: 10px; overflow-x: hidden; max-height: 150px;">
             <ul class="nav navbar-nav ">
                 <li role="presentation"><a id='i3GEO{{namespace}}guia4' href="javascript:void(0);">
                         <span class="material-icons">settings</span>
@@ -24,7 +24,7 @@
     </div>
 </nav>
 
-<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; z-index:100; height: calc(100% - 10px);'>
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; z-index: 100; height: calc(100% - 10px);'>
     <div id="i3GEOselecaoguia4obj" class="container-fluid">
         <div class="checkbox text-left">
             <label>
@@ -35,10 +35,12 @@
         </div>
         <div class='form-group label-fixed condensed'>
             <label class="control-label" for="">{{{distanciaSelecao}}}</label>
-            <input class="form-control input-lg" type='text' id='i3GEOselecaotoleranciapt' value='2' />
+            <input style="width: 300px;" class="form-control input-lg" type='text' id='i3GEOselecaotoleranciapt' value='2' />
         </div>
-        <button onclick="i3GEO.mapa.dialogo.queryMap()" class='btn btn-primary btn-sm btn-raised'>{{{p8}}}</button>
-        <h5 class="alert alert-info">{{{ajuda}}}</h5>
+        <div class='form-group label-fixed condensed'>
+            <label class="control-label" for="">{{{p8}}}</label>
+            <input style="width: 300px;" class="form-control input-lg i3geoFormIconeAquarela" type='text' id='i3GEOselecaocor' value='0,255,255' />
+        </div>
     </div>
     <div id="i3GEOselecaoguia1obj" class="container-fluid">
         <div class="form-group condensed">
@@ -84,8 +86,7 @@
                         class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
                         <span class="material-icons ">build</span>
                     </a>
-                </span>
-                <span class="input-group-btn"> <a onclick="i3GEOF.selecao.atributo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
+                </span> <span class="input-group-btn"> <a onclick="i3GEOF.selecao.atributo();return false;" role="button" type="button" class="btn btn-primary btn-fab btn-fab-max"
                         href="javascript:void(0)">
                         <span class="material-icons ">send</span>
                     </a>
@@ -94,7 +95,7 @@
         </div>
     </div>
     <div id="i3GEOselecaoguia3obj" class="container-fluid">
-         <div class='form-group condensed' style="max-width: 700px;">
+        <div class='form-group condensed' style="max-width: 700px;">
             <label class="control-label">{{{temaSelecaoMapa}}}</label>
             <div class="input-group">
                 <div style="display: contents;" class='form-group label-fixed'>
@@ -107,5 +108,5 @@
                 </span>
             </div>
         </div>
-     </div>
+    </div>
 </div>

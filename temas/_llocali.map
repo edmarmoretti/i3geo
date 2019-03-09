@@ -1,51 +1,44 @@
-#http://localhost/i3geo/ms_criamapa.php?layers=_llocali&interface=openlayersdebug.php
 MAP
-  #localhost/i3geo/ms_criamapa.php?temasa=_llocali&layers=_llocali&interface=osmdebug.php
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
+    COMPOSITE
+      OPACITY 50
+    END # COMPOSITE
+    COMPOSITE
+      OPACITY 40
+    END # COMPOSITE
+    COMPOSITE
+    END # COMPOSITE
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/locali.shp"
     METADATA
-      "METAESTAT_ID_MEDIDA_VARIAVEL"	""
-      "TIP"	"TIPO,NOMELOC,ANOCRIA"
       "cache"	"nao"
-      "CLASSE"	"SIM"
+      "TIP"	"TIPO,NOMELOC,ANOCRIA"
       "LTEMPOITEMDESCRICAO"	"TIPO"
-      "olopacity"	""
+      "CLASSE"	"SIM"
       "LTEMPOITEMINICIO"	"ANOCRIA"
-      "permitekmz"	"sim"
       "LTEMPOITEMTIP"	"ANOCRIA"
-      "gmopacity"	""
-      "gmstatus"	""
-      "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
+      "permitekmz"	"sim"
       "LTEMPOITEMTITULO"	"NOMELOC"
-      "ITENSLINK"	",,,"
+      "ITENSDESC"	"Município,TIPO,Localidade,ANOCRIA"
       "TILES"	"NAO"
-      "METAESTAT_CODIGO_TIPO_REGIAO"	""
-      "arquivotemaoriginal"	""
-      "nomeoriginal"	""
-      "olstatus"	""
-      "permitedownload"	"sim"
+      "ITENSLINK"	",,,"
       "LTEMPOFORMATODATA"	"iso8601"
-      "FILTROORIGINAL"	""
+      "permitedownload"	"sim"
       "permitecomentario"	"SIM"
-      "DATAORIGINAL"	""
-      "PLUGINI3GEO"	""
-      "metaestat"	""
       "download"	"SIM"
+      "UTFDATA"	"NOMELOC"
       "itembuscarapida"	"NOMELOC"
       "ITENS"	"NOMEMUN,TIPO,NOMELOC,ANOCRIA"
-      "permitekml"	"sim"
-      "permiteogc"	"sim"
       "transitioneffect"	"NAO"
-      "TEMA"	"Localidades (usar com timeline) para teste"
-      #"cortepixels"	"40"
-      "identifica"	"sim"
-      "LTEMPOCONVENCODE"	"SIM"
-      "storymap"	""
+      "permiteogc"	"sim"
+      "permitekml"	"sim"
       "convcaracter"	"SIM"
-      "UTFDATA"	"NOMELOC"
+      "TEMA"	"Localidades (usar com timeline) para teste"
+      "LTEMPOCONVENCODE"	"SIM"
+      "identifica"	"sim"
+      "storymap"	""
     END # METADATA
     NAME "_llocali"
     PROCESSING "LABEL_NO_CLIP=True"
@@ -62,7 +55,7 @@ MAP
         COLOR 250 193 4
         SIZE 20
         SYMBOL "http://localhost/i3geo/imagens/google/condominium.png"
-      END
+      END # STYLE
       TITLE ""
     END # CLASS
     CLASS

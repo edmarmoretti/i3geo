@@ -1,31 +1,21 @@
 <?php
-include(dirname(__FILE__)."/../safe.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
-$tema =  basename($_GET["tema"]);
-//
-//faz a busca da fun&ccedil;&atilde;o que deve ser executada
-//
-$retorno = ""; //string que ser&aacute; retornada ao browser via JSON
-switch (strtoupper($funcao))
+include (dirname(__FILE__) . "/../safe2.php");
+verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas"], false);
+switch (strtoupper($_GET["funcao"]))
 {
-	/*
-	 Valor: PARAMETROSPLUGIN
-
-	Obtem a string do plugin
-	*/
 	case "PARAMETROSPLUGIN":
 		//no mashup o nome do tema e sempre o nome do mapfile
-		if (file_exists($locaplic."/temas/".$tema.".map")){
-			$map1 = @ms_newMapObj($locaplic."/temas/".$tema.".map");
-			$layer1 = $map1->getlayerbyname($tema);
+	    if (file_exists($_SESSION["locaplic"]."/temas/".$_GET["tema"].".map")){
+	        $map1 = @ms_newMapObj($_SESSION["locaplic"]."/temas/".$_GET["tema"].".map");
+	        $layer1 = $map1->getlayerbyname($_GET["tema"]);
 		}
 		else{
 			//nesse caso, o mapfile vem da secao php
-			$map = ms_newMapObj($map_file);
-			$layer = $map->getlayerbyname($tema);
+		    $map = ms_newMapObj($_SESSION["map_file"]);
+			$layer = $map->getlayerbyname($_GET["tema"]);
 			//os parametros do plugin sao obtidos do mapfile original
-			if (file_exists($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map")){
-				$map1 = @ms_newMapObj($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map");
+			if (file_exists($_SESSION["locaplic"]."/temas/".$layer->getmetadata("nomeoriginal").".map")){
+			    $map1 = @ms_newMapObj($_SESSION["locaplic"]."/temas/".$layer->getmetadata("nomeoriginal").".map");
 				$layer1 = $map1->getlayerbyname($layer->getmetadata("nomeoriginal"));
 			}
 		}
@@ -50,11 +40,6 @@ switch (strtoupper($funcao))
 			$retorno = "Erro ao criar o mapa";
 		}
 		break;
-		/*
-		 Valor: APLICAR
-
-		Aplica a substituicao de chaves pelos valores enviados no parametro $valores com os valores separados por virgulas na sequencia das chaves
-		*/
 	case "APLICAR":
 		$valores = $_GET["valores"];
 		$valores = str_ireplace(array(" and ", " or ", "select","from","where","update","delete","insert","--","drop",";"),"",$valores);
@@ -75,14 +60,14 @@ switch (strtoupper($funcao))
 			$dados[$chaves[$i]] = array("valor"=>$valores[$i],"titulo"=>$titulos[$i]);
 		}
 
-		$map = ms_newMapObj($map_file);
+		$map = ms_newMapObj($_SESSION["map_file"]);
 		//pega o layer
-		$layer = $map->getlayerbyname($tema);
+		$layer = $map->getlayerbyname($_GET["tema"]);
 		if($_GET["nova"] == "true"){
 		    $layer = ms_newLayerObj($map,$layer);
 		    $layer->name = "novo".nomeRandomico();
 		}
-		$map1 = @ms_newMapObj($locaplic."/temas/".$layer->getmetadata("nomeoriginal").".map");
+		$map1 = @ms_newMapObj($_SESSION["locaplic"]."/temas/".$layer->getmetadata("nomeoriginal").".map");
 		if($map1){
 			$layer1 = $map1->getlayerbyname($layer->getmetadata("nomeoriginal"));
 			if($layer1 != ""){
@@ -132,7 +117,7 @@ switch (strtoupper($funcao))
 					if (connection_aborted()){
 						exit();
 					}
-					$salvo = $map->save($map_file);
+					$salvo = $map->save($_SESSION["map_file"]);
 					$retorno = "ok";
 				}
 			}
@@ -144,19 +129,7 @@ switch (strtoupper($funcao))
 			$retorno = "mapfile nao encontrado em temas";
 		}
 		break;
-	case "REMOVER":
-		$map = ms_newMapObj($map_file);
-		$layer = $map->getlayerbyname($tema);
-		if($layer != ""){
-			$layer->set("status",MS_DELETE);
-			$salvo = $map->save($map_file);
-		}
-		$retorno = "ok";
-		break;
-	/*
-	 * Retorna os valores obtidos de um programa PHP incluido nos parametros do plugin
-	 * Utilizado para pegar a lista de valores que sera apresentada ao usuario
-	 */
+
 	case "INCLUDEPROG":
 		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
 		$protocolo = $protocolo[0];
@@ -174,5 +147,6 @@ switch (strtoupper($funcao))
 		$retorno = json_decode($retorno,true);
 		break;
 }
-cpjson($retorno);
-?>
+ob_clean();
+header("Content-type: application/json");
+echo json_encode($retorno);

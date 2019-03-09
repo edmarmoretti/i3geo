@@ -62,35 +62,24 @@ switch (strtoupper($_GET["funcao"])) {
         $m = new Mapa($_SESSION["map_file"]);
         $retorno = $m->parametrosTemas();
         break;
-
-    /*
-     * Valor: SELECAOPOLI
-     *
-     * Sele&ccedil;&atilde;o por poligono (chamado via POST).
-     *
-     * <Selecao->selecaoPoli>
-     */
     case "SELECAOPOLI":
-        // esta opera&ccedil;&atilde;o &eacute; chamada com POST via cpaint
-        // por isso precisa ser executada com start
         copiaSeguranca($map_file);
         $retorno = selecaoPoli($_GET["xs"], $_GET["ys"], $tema, $_GET["tipo"], $_GET["buffer"]);
         $_SESSION["contadorsalva"] ++;
         redesenhaMapa();
         // restauraCon($map_file,$postgis_mapa);
         break;
-    /*
-     * Valor: LISTAPONTOSSHAPESEL
-     *
-     * Lista os pontos dos elementos selecionados de um layer
-     *
-     * <SHP->listaPontosShapeSel>
-     */
     case "LISTAPONTOSSHAPESEL":
         include_once (dirname(__FILE__) . "/../../classesphp/classe_shp.php");
-        $m = new SHP($map_file, $tema);
+        $m = new SHP($_SESSION["map_file"], $_GET["tema"]);
         $retorno = $m->listaPontosShapeSel();
         break;
+}
+if(isset($_GET["cor"]) && $_GET["cor"] != ""){
+    include_once (dirname(__FILE__) . "/../../classesphp/classe_mapa.php");
+    $m = new Mapa($_SESSION["map_file"]);
+    $m->corQM($_GET["cor"]);
+    $m->salva();
 }
 ob_clean();
 if (! $retorno) {

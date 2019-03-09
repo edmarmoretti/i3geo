@@ -20,8 +20,13 @@ switch (strtoupper($_GET["funcao"]))
         }
         $retorno = iniciaDadosGrafico($_SESSION["map_file"],$_GET["tema"],$_GET["exclui"],$_GET["itemclasses"],$itemvalores,$_GET["tipo"],false,$_GET["ext"],true,$_GET["ordenax"]);
     break;
+    case "INSEREFILTRO":
+        include (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
+        $m = new Temas($_SESSION["map_file"], $_GET["tema"]);
+        $retorno = $m->insereFiltro(base64_decode($_GET["filtro"]), "", "sim");
+        $m->salva();
+    break;
 }
 ob_clean();
 header("Content-type: application/json");
 echo json_encode($retorno);
-?>

@@ -62,6 +62,9 @@ i3GEOF.identifica = {
 	    hash["resolution"] = i3GEOF.identifica.resolution;
 	    hash["namespace"] = "identifica";
 	    hash["idContainer"] = p.idContainer;
+	    //var xy = i3GEO.util.extGeo2OSM(p.x + " " + p.y, true);
+	    hash["x"] = p.x;
+	    hash["y"] = p.y;
 
 	    i3GEOF.identifica.renderFunction.call(this,{texto: Mustache.render(p.mustache, hash)});
 
@@ -109,16 +112,35 @@ i3GEOF.identifica = {
 	    //i3GEO.janela.applyScrollBar(p.idContainer);
 	    i3GEOF.identifica.getData();
 	},
-	buffer: function(){
-	    var js = i3GEO.configura.locaplic + "/ferramentas/bufferpt/dependencias.php";
-	    i3GEO.util.scriptTag(
-		    js,
-		    "i3GEOF.bufferpt.iniciaJanelaFlutuante(" + i3GEOF.identifica._parameters.x
-		    + ","
-		    + i3GEOF.identifica._parameters.y
-		    + ")",
-		    "i3GEOF.bufferpt_script"
-	    );
+	buffer: function(form){
+	    var par = i3GEO.util.getFormData(form);
+	    par.g_sid = i3GEO.configura.sid;
+	    if (par.distancia*1 !== 0){
+		i3GEO.janela.abreAguarde();
+		i3GEO.janela._formModal.block();
+		$.get(
+			i3GEO.configura.locaplic+"/ferramentas/buffer/exec.php",
+			par
+		)
+		.done(
+			function(data, status){
+			    i3GEO.janela._formModal.unblock();
+			    i3GEO.janela.fechaAguarde();
+			    i3GEO.janela.snackBar({content: $trad('feito')});
+			    i3GEO.atualiza();
+			}
+		)
+		.fail(
+			function(data){
+			    i3GEO.janela._formModal.unblock();
+			    i3GEO.janela.fechaAguarde();
+			    i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+			}
+		);
+	    }
+	    else{
+		i3GEO.janela.tempoMsg($trad('erroDistancia',i3GEOF.identifica.dicionario));
+	    }
 	},
 	abreLinkGeohack : function() {
 	    var b, x, y, w, s, param;

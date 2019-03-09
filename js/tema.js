@@ -483,25 +483,6 @@ i3GEO.tema =
 			temp);
 	    },
 	    /**
-	     * Function: atalhoscamada
-	     *
-	     * Abre a janela de dialogo que abre os atalhos de configura&ccedil;&atilde;o de um tema (utilizad na &aacute;rvore de camadas)
-	     *
-	     * Parametros:
-	     *
-	     * {string} - codigo do tema escolhido
-	     *
-	     */
-	    atalhoscamada : function(tema) {
-		i3GEO.mapa.ativaTema(tema);
-		i3GEO.util.dialogoFerramenta(
-			"i3GEO.tema.dialogo.atalhoscamada()",
-			"atalhoscamada",
-			"atalhoscamada",
-			"dependencias.php",
-		"i3GEOF.atalhoscamada.iniciaJanelaFlutuante()");
-	    },
-	    /**
 	     * Function: abreKml
 	     *
 	     * Abre a janela de dialogo da ferramenta convertekml
@@ -699,13 +680,16 @@ i3GEO.tema =
 	     *
 	     * {string} - id que identifica o tema conforme definido no map file
 	     */
-	    funcaojstip : function() {
+	    funcaojstip : function(idtema) {
+		var temp = function(){
+		    i3GEOF.funcaojstip.start(idtema);
+		};
 		i3GEO.util.dialogoFerramenta(
 			"i3GEO.tema.dialogo.funcaojstip()",
 			"funcaojstip",
 			"funcaojstip",
 			"dependencias.php",
-		"i3GEOF.funcaojstip.iniciaJanelaFlutuante()");
+			temp);
 	    },
 	    /**
 	     * Function: editaLegenda

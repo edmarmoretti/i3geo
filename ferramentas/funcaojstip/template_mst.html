@@ -1,12 +1,10 @@
-<div class='container-fluid customScrollBar' style="height: calc(100% - 39px); overflow: auto;">
-	<div id='i3GEOfuncaojstipguia2obj' style='display: block;' class='container-fluid'>
-		<button onclick="i3GEOF.funcaojstip.aplica()" class='btn btn-primary btn-sm btn-raised'>{{{inclui}}}</button>
-		<button onclick="i3GEOF.funcaojstip.limpa()" class='btn btn-primary btn-sm btn-raised'>{{{remove}}}</button>
+<div id='{{idContainer}}' class='container-fluid' style='text-align: left; display: block; overflow: auto; z-index:100; height: calc(100% - 10px);'>
+		<button onclick="i3GEOF.funcaojstip.aplica(this)" class='btn btn-primary btn-sm btn-raised'>{{{inclui}}}</button>
+		<button onclick="i3GEOF.funcaojstip.limpa(this)" class='btn btn-primary btn-sm btn-raised'>{{{remove}}}</button>
 
 		<div class='form-group label-floating'>
 			<label class="control-label" for="i3GEOfuncaojstipfuncoes">{{{digitaFuncao}}}</label>
             <textarea class='form-control input-lg' id='i3GEOfuncaojstipfuncoes' style=height:80px ></textarea>
 		</div>
         <h5 class="alert alert-info">{{{ajuda}}}</h5>
-	</div>
 </div>
