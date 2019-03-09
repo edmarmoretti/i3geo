@@ -1274,20 +1274,6 @@ g_traducao =
                 es : "Google Maps"
             }
         ],
-        "d16" : [
-            {
-                pt : "Pesquisa documentos na base de dados Scielo (dados preliminares)",
-                en : "Search documents in the Scielo database (preliminary data)",
-                es : "B&uacute;squeda de documentos en la base de datos Scielo (datos preliminares)"
-            }
-        ],
-        "d16t" : [
-            {
-                pt : "Scielo",
-                en : "Scielo",
-                es : "Scielo"
-            }
-        ],
         "d17" : [
             {
                 pt : "Projeto Confluence. Pontos de intersec&ccedil;&atilde;o de coordenadas observadas em campo",

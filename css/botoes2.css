@@ -1,4 +1,4 @@
-#abreJanelaLegenda,#localizar,#barraedicao,#abregoogleearth,#uploadgpx,#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#scielo,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
+#abreJanelaLegenda,#localizar,#barraedicao,#abregoogleearth,#uploadgpx,#metar,#carouselTemas,#identificaBalao,#rota,#buscafotos,#area,#confluence,#wiki,#inseregrafico,#realca,#reinicia,#google,#zoomtot,#pan,#zoomli,#zoomlo,#zoomiauto,#zoomoauto,#identifica,#lentei,#reinicia,#exten,#selecao,#inserexy,#textofid,#mede,#perfil,#cruza,#tamanho,#imprimir,#salva,#carrega,#referencia,#pegaimagens,#v3d
 	{
 	margin: 2px;
 	cursor: pointer;
@@ -205,12 +205,6 @@
 	background-image: URL('../imagens/sprite2.png');
 	background-repeat: no-repeat;
 	background-position: 0px -336px;
-}
-
-#scielo {
-	background-image: URL('../imagens/sprite2.png');
-	background-repeat: no-repeat;
-	background-position: 0px -360px;
 }
 
 #confluence {
