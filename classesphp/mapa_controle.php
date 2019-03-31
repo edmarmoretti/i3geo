@@ -1135,22 +1135,6 @@ switch (strtoupper($funcao)) {
         $retorno = $m->fonteTema($_pg["tema"]);
         break;
     /*
-     * Valor: REORDENATEMAS
-     *
-     * Reordena os temas baseados na localiza&ccedil;&atilde;o de um segundo tema no mapa.
-     *
-     * <Temas->reordenatemas>
-     */
-    case "REORDENATEMAS":
-        include_once ("classe_temas.php");
-        copiaSeguranca($map_file);
-        $m = new Temas($map_file);
-        $m->reordenatemas($_pg["lista"]);
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
      * Valor: ZOOMTEMA
      *
      * Muda a extens&atilde;o geogr&aacute;fica do mapa de acordo com a abrang&ecirc;ncia de um tema.
@@ -1427,21 +1411,6 @@ switch (strtoupper($funcao)) {
         $_SESSION["contadorsalva"] ++;
         break;
     /*
-     * Valor: INVERTESTATUSCLASSE
-     *
-     * Altera o status de desenho de uma classe, tornando-a vi�sivel ou n&atilde;o.
-     *
-     * <Alteraclasse->statusClasse>
-     */
-    case "INVERTESTATUSCLASSE":
-        include_once ("classe_alteraclasse.php");
-        copiaSeguranca($map_file);
-        $m = new Alteraclasse($map_file, $_pg["tema"]);
-        $retorno = $m->statusClasse($_pg["classe"]);
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        break;
-    /*
      * Valor: VERPALETA
      *
      * Gera cores tendo como base uma cor inicial e uma cor final.
@@ -1564,34 +1533,6 @@ switch (strtoupper($funcao)) {
      *
      * <classe_menutemas.php>
      */
-    /*
-     * Valor: PEGALISTADEMENUS
-     *
-     * Pega a lista de menus para incluir na guia adiciona.
-     *
-     * <Menutemas->pegaListaDeMenus>
-     */
-    case "PEGALISTADEMENUS":
-        include_once ("classe_menutemas.php");
-        if (isset($_pg["editores"])) {
-            $editores = $_pg["editores"];
-        } else {
-            $editores = "";
-        }
-        if (isset($_pg["perfil"])) {
-            $perfil = $_pg["perfil"];
-        } else {
-            $perfil = "";
-        }
-        $idioma = $_pg["idioma"];
-        $filtraOgc = $_pg["filtraOgc"];
-        $filtraDown = $_pg["filtraDown"];
-        if (! isset($editores)) {
-            $editores = "";
-        }
-        $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $idioma);
-        $retorno = $m->pegaListaDeMenus($filtraOgc, $filtraDown);
-        break;
     case "PEGALISTADEMENUSCOMPLETA":
         $arq = $dir_tmp."/catalogoTemas.json";
         if (file_exists($arq)){
@@ -1636,61 +1577,6 @@ switch (strtoupper($funcao)) {
                 gravaDados([serialize($retorno)], $arq);
             }
         }
-        break;
-    /*
-     * Valor: PEGALISTADEGRUPOS
-     *
-     * Pega a lista de grupos do menu.
-     *
-     * <Menutemas->pegaListaDeGrupos>
-     */
-    case "PEGALISTADEGRUPOS":
-        include_once ("classe_menutemas.php");
-        if (isset($_pg["editores"])) {
-            $editores = $_pg["editores"];
-        } else {
-            $editores = "";
-        }
-        $perfil = $_pg["perfil"];
-        $idioma = $_pg["idioma"];
-        if (isset($_pg["filtro"])) {
-            $filtro = $_pg["filtro"];
-        } else {
-            $filtro = "";
-        }
-        $idmenu = $_pg["idmenu"];
-        $listasistemas = $_pg["listasistemas"];
-        $listasgrupos = $_pg["listasgrupos"];
-        $ordenaNome = $_pg["ordenaNome"];
-        $filtraOgc = $_pg["filtraOgc"];
-        $filtraDown = $_pg["filtraDown"];
-
-        if (! isset($urli3geo)) {
-            $urli3geo = "";
-        }
-        $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $idioma, $filtro);
-        if (! isset($idmenu)) {
-            $idmenu = "";
-        }
-        if (! isset($listasistemas)) {
-            $listasistemas = "nao";
-        }
-        if (! isset($listasgrupos)) {
-            $listasgrupos = "nao";
-        }
-        if (! isset($ordenaNome)) {
-            $ordenaNome = "nao";
-        }
-        if (! isset($filtraOgc)) {
-            $filtraOgc = "nao";
-        }
-        if (! isset($filtraDown)) {
-            $filtraDown = "nao";
-        }
-        $retorno = array(
-            "idmenu" => $idmenu,
-            "grupos" => $m->pegaListaDeGrupos($idmenu, $listasistemas, $listasgrupos, $ordenaNome, $filtraOgc, $filtraDown)
-        );
         break;
     /*
      * Valor: PEGASISTEMASIDENTIFICACAO
@@ -2444,36 +2330,6 @@ switch (strtoupper($funcao)) {
             $retorno = $m->pegaParametros($classe);
         }
         $_SESSION["contadorsalva"] ++;
-        break;
-    /*
-     * Valor: CRIALEGENDAHTML
-     *
-     * Gera a legenda processando o template HTML.
-     *
-     * <Legenda->criaLegenda>
-     */
-    case "CRIALEGENDAHTML":
-        include_once ("classe_legenda.php");
-        // para efeitos de compatibilidade com vers&otilde;es anteriores
-        if (isset($_pg["template"])) {
-            $_pg["templateLegenda"] = $_pg["template"];
-        }
-        $m = new Legenda($map_file, $locaplic, $_pg["tema"], $_pg["templateLegenda"]);
-        $r = $m->criaLegenda();
-        if (! $r) {
-            $r = "erro. Legenda nao disponivel";
-        }
-        $retorno = $r;
-        break;
-    case "CRIALEGENDAJSON":
-        include_once ("classe_legenda.php");
-        // para efeitos de compatibilidade com vers&otilde;es anteriores
-        $m = new Legenda($map_file, $locaplic, $_pg["tema"]);
-        $r = $m->criaLegendaJson($_pg["w"], $_pg["h"]);
-        if (! $r) {
-            $r = "erro. Legenda nao disponivel";
-        }
-        $retorno = $r;
         break;
     /*
      * Valor: CRIALEGENDAIMAGEM

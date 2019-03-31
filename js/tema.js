@@ -46,29 +46,62 @@ i3GEO.tema =
 	 *
 	 * {boolean} - confirma exclusao
 	 */
-	exclui : function(tema,confirma) {
+	exclui : function(temas,confirma,after) {
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.tema.exclui " + temas);
+
 	    if(confirma && confirma === true){
 		i3GEO.janela.confirma($trad("removerDoMapa"), 300, $trad("x14"),
 			"", function() {
-		    i3GEO.tema.exclui(tema);
+		    i3GEO.tema.exclui(temas,false,after);
 		});
 		return;
 	    }
-	    try {
-		i3GEO.pluginI3geo.removeCamada(tema);
-	    } catch (r) {}
-	    var excluir = [tema];
-	    var camada = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[tema];
 
-	    $.each(i3GEO.arvoreDeCamadas.CAMADAS, function( index, v ) {
-		if((camada.group != "" && camada.group == v.group) || camada.name == v.group){
-		    excluir.push(v.name);
+	    if(Array.isArray(temas)){
+		var excluir = temas;
+	    } else {
+		var excluir = [temas];
+	    }
+	    var grupos = [];
+	    for (const t of excluir){
+		var camada = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[t];
+		for(const c of i3GEO.arvoreDeCamadas.CAMADAS){
+		    if(c.group != "" && camada.group != ""){
+			if(c.name == camada.group || camada.group == c.group || camada.name == c.group){
+			    grupos.push(c.name);
+			}
+		    }
+		}
+		try {
+		    i3GEO.pluginI3geo.removeCamada(t);
+		} catch (r) {}
+	    }
+	    excluir = [...excluir,...grupos];
+	    i3GEO.request.get({
+		snackbar: true,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    temas: excluir.getUnique().join(","),
+		    funcao: "EXCLUIRTEMAS"
+		},
+		prog: "/serverapi",
+		fn: function(data){
+		    i3GEO.mapa.ativaTema();
+		    i3GEO.temaAtivo = "";
+		    for(const t of excluir){
+			var layer = i3geoOL.getLayersByName(t);
+			if (layer.length > 0) {
+			    i3geoOL.removeLayer(layer[0]);
+			}
+		    }
+		    i3GEO.atualiza();
+		    if (after){
+			after.call(after, data);
+		    }
 		}
 	    });
-
-	    i3GEO.php.excluitema(function(){i3GEO.atualiza();}, excluir);
-	    i3GEO.mapa.ativaTema();
-	    i3GEO.temaAtivo = "";
 	},
 	/**
 	 * Function: fonte

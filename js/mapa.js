@@ -282,7 +282,7 @@ i3GEO.mapa =
 	     *
 	     * Parametro:
 	     *
-	     * funcao {function} - funcao que recebera o resultado da chamada AJAX. O objeto CPAINT e enviado como parametro.
+	     * funcao {function} - funcao que recebera o resultado da chamada AJAX.
 	     */
 	    obtem : function(funcao) {
 		i3GEO.php.criaLegendaImagem(funcao);

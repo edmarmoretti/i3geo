@@ -72,11 +72,9 @@ i3GEOF.excluirarvore = {
 	    });
 	    temp = function(){
 		i3GEO.janela.formModal();
-		i3GEO.atualiza();
-
 	    };
 	    if(excluir.length > 0){
-		i3GEO.php.excluitema(temp,excluir);
+		i3GEO.tema.exclui(excluir,false,temp);
 	    } else {
 		i3GEO.janela.formModal();
 	    }

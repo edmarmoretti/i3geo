@@ -1,80 +1,6 @@
-/**
- * Title: PHP
- *
- * Chamadas em AJAX que executam programas no lado do servidor
- *
- * Muitos dos parametros exigidos pelos programas em PHP s&atilde;o obtidos da vari&aacute;vel de se&ccedil;&atilde;o aberta no servidor
- * quando o i3Geo &eacute; inicializado, &eacute; o caso por exemplo do nome do arquivo correspondente ao mapfile atualmente em uso
- *
- * Quando classe_php.js &eacute; carregado, &eacute; criado o objeto cpJSON que necessita da biblioteca CPAINT. Esse objeto &eacute;
- * utilizado nas chamadas AJAX.
- *
- * O objeto cpJSON possu&iacute; um m&eacute;todo .call que executa a opera&ccedil;&atilde;o AJAX. Esse m&eacute;todo utiliza basicamente
- * dois parametros, sendo o primeiro o endere&ccedil;o do programa PHP que ser&aacute; executado no servidor e o outro &eacute; o nome da
- * fun&ccedil;&atilde;o que ir&aacute; receber e processar os resultados do programa. Exemplo:
- *
- * cpJSON.call(p,"",funcao);
- *
- * "p" &eacute; a URL e funcao o nome da fun&ccedil;&atilde;o
- *
- * Para compor "p" o i3geo utiliza normalmente a vari&aacute;vel i3GEO.configura.locaplic e i3GEO.configura.sid, por exemplo:
- *
- * var p = i3GEO.configura.locaplic+"/classesphp/mapa_controle.php?funcao=insereSHPgrafico&g_sid="+i3GEO.configura.sid
- *
- * Para mais detalhes sobre as fun&ccedil;&otilde;es, veja <mapa_controle.php>
- *
- * Namespace:
- *
- * i3GEO.php
- *
- * Veja:
- *
- * <http://localhost/i3geo/classesjs/classe_php.js>
- */
-
-/**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
- * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite
- * 330, Boston, MA 02111-1307 USA.
- */
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
-/**
- * Object: cpJSON
- *
- * Objeto CPAINT (ver biblioteca CPAINT) utilizado nas chamadas AJAX ass&iacute;ncronas com retorno no formato JSON
- *
- * Exemplo:
- *
- * cpJSON.call()
- *
- * Return:
- *
- * O objeto CPAINT retorna os dados encapsulados em um objeto JSON. Os programas PHP que fazem uso dessa biblioteca (CPAINT) devem fazer o
- * include da mesma. Os dados de interesse retornados no objeto JSON, ficam embutidos na propriedade "data", por exemplo:
- *
- * var temp = function(retorno){alert(retorno.data);}
- *
- * cpJSON.call(p,"teste",temp);
- *
- * onde, p cont&eacute;m o nome do programa PHP e seus parametros "teste" &eacute; o nome da fun&ccedil;&atilde;o PHP (no caso do i3Geo,
- * isso n&atilde;o afeta em nada) e temp &eacute; a fun&ccedil;&atilde;o que tratar&aacute; o retorno dos dados.
- *
- */
 var cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
 cpJSON.set_transfer_mode("POST");
@@ -94,222 +20,32 @@ i3GEO.php =
 		i3GEO.janela.tempoMsg("i3GEO.php diz: variavel i3GEO.configura.sid n&atilde;o esta definida");
 	    }
 	},
-
-	/**
-	 * Function: insereSHP
-	 *
-	 * Insere um ponto em um shapefile
-	 */
-	insereSHP : function(funcao, tema, item, valoritem, xy, projecao) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/inserexy2/exec.php", par =
-		"funcao=insereSHP&item=" + item + "&valor=" + valoritem + "&tema=" + tema + "&xy=" + xy + "&projecao=" + projecao
-		+ "&g_sid=" + i3GEO.configura.sid, retorno = function(retorno) {
-		i3GEO.janela.fechaAguarde("insereSHPgrafico");
-		funcao.call(funcao, retorno);
-	    };
-	    cpJSON.call(p, "insereSHP", retorno, par);
+	excluitema : function() {
+	    console.error("Veja i3GEO.tema.exclui()");
 	},
-	/**
-	 * Function: pegaMensagens
-	 *
-	 * Pega as mensagens do metadata 'mensagem'
-	 */
-	pegaMensagens : function(funcao) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par = "funcao=pegaMensagens&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "pegaMensagem", funcao, par);
+	reordenatemas : function() {
+	    console.error("Veja i3GEO.arvoredecamadas.reordenatemas()");
 	},
-	/**
-	 * Function: areaPixel
-	 *
-	 * Calcula a &aacute;rea de um pixel da imagem do mapa
-	 */
-	areaPixel : function(funcao, g_celula) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=areaPixel&celsize=" + g_celula + "&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "areaPixel", funcao, par);
-	},
-	/**
-	 * Function: excluitema
-	 *
-	 * Exclui temas do mapa
-	 */
-	excluitema : function(funcao, temas) {
-	    var layer, retorno, p, n, i, par;
-	    i3GEO.php.verifica();
-	    retorno = function(retorno) {
-		n = temas.length;
-		for (i = 0; i < n; i++) {
-		    if (i3GEO.Interface.ATUAL === "openlayers") {
-			layer = i3geoOL.getLayersByName(temas[i]);
-			if (layer.length > 0) {
-			    i3geoOL.removeLayer(layer[0]);
-			}
-		    }
-		    if (i3GEO.Interface.ATUAL === "googlemaps") {
-			indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(temas[i]);
-			if (indice !== false) {
-			    i3GeoMap.overlayMapTypes.removeAt(indice);
-			}
-		    }
-		}
-		funcao.call(funcao, retorno);
-	    };
-	    p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php";
-	    par = "funcao=excluitema&temas=" + temas + "&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "excluitema", retorno, par);
-	},
-	/**
-	 * Function: reordenatemas
-	 *
-	 * Reordena os temas
-	 */
-	reordenatemas : function(funcao, lista) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=reordenatemas&lista=" + lista + "&g_sid=" + i3GEO.configura.sid, retorno = function(retorno) {
-		funcao.call(funcao, retorno);
-	    };
-	    cpJSON.call(p, "reordenatemas", retorno, par);
-	},
-	/**
-	 * Function: criaLegendaHTML
-	 *
-	 * Obtem a legenda de um tema
-	 */
 	criaLegendaHTML : function(funcao, tema, template) {
-	    i3GEO.php.verifica();
-	    if (arguments.length === 1) {
-		tema = "";
-		template = "legenda2.htm";
-	    }
-	    if (arguments.length === 2) {
-		template = "legenda2.htm";
-	    }
-	    cpJSON.call(
-		    i3GEO.configura.locaplic + "/classesphp/mapa_controle.php",
-		    "criaLegendaHTML",
-		    funcao,
-		    "funcao=criaLegendaHTML&tema=" + tema + "&templateLegenda=" + template + "&g_sid=" + i3GEO.configura.sid);
+	    console.error("criaLegendaHTML removido");
 	},
-	criaLegendaJSON : function(funcao, tema, w, h) {
-	    i3GEO.php.verifica();
-	    if (arguments.length === 1) {
-		tema = "";
-	    }
-	    cpJSON.call(
-		    i3GEO.configura.locaplic + "/classesphp/mapa_controle.php",
-		    "criaLegendaHTML",
-		    funcao,
-		    "funcao=criaLegendaJSON&tema=" + tema + "&g_sid=" + i3GEO.configura.sid + "&w=" + w + "&h=" + h);
+	criaLegendaJSON : function() {
+	    console.error("Veja i3GEO.legenda.criaLegendaJSON()");
 	},
-	/**
-	 * Function: inverteStatusClasse
-	 *
-	 * Inverte o status de uma classe de um layer
-	 */
-	inverteStatusClasse : function(funcao, tema, classe) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=inverteStatusClasse&g_sid=" + i3GEO.configura.sid + "&tema=" + tema + "&classe=" + classe, retorno =
-		    function(retorno) {
-		funcao.call(funcao, retorno);
-	    };
-	    cpJSON.call(p, "inverteStatusClasse", retorno, par);
+	inverteStatusClasse : function() {
+	    console.error("Veja i3GEO.legenda.inverteStatusClasse()");
 	},
-	/**
-	 * Function: ligatemas
-	 *
-	 * Liga e desliga uma lista de temas
-	 */
-	ligatemas : function(funcao, desligar, ligar, adicionar) {
-	    i3GEO.php.verifica();
-	    if (arguments.length === 3) {
-		adicionar = "nao";
-	    }
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=ligatemas&desligar=" + desligar + "&ligar=" + ligar + "&adicionar=" + adicionar + "&g_sid=" + i3GEO.configura.sid, retorno =
-		    function(retorno) {
-		// i3GEO.janela.fechaAguarde("ligatemas");
-		funcao.call(funcao, retorno);
-	    };
-	    // i3GEO.janela.abreAguarde("ligatemas",$trad("o1"));
-	    cpJSON.call(p, "ligaDesligaTemas", retorno, par);
+	ligatemas : function() {
+	    console.error("Veja i3GEO.arvoreDeCamadas.ligatemas()");
 	},
-	/**
-	 * Function: pegalistademenus
-	 *
-	 * Obtem a lista de menus
-	 */
-	pegalistademenus : function(funcao,filtraOgc,filtraDown) {
-	    i3GEO.php.verifica();
-	    if(!filtraOgc){
-		filtraOgc = "nao";
-	    }
-	    if(!filtraDown){
-		filtraDown = "nao";
-	    }
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=pegalistademenus&g_sid=" + i3GEO.configura.sid
-		+ "&map_file=&idioma=" + i3GEO.idioma.ATUAL
-		+ "&filtraOgc=" + filtraOgc
-		+ "&filtraDown=" + filtraDown;
-	    cpJSON.call(p, "pegalistademenus", funcao, par);
+	pegalistademenus : function() {
+	    console.error("Veja i3GEO.arvoreDeTemas.listaDeMenus()");
 	},
-	/**
-	 * Function: pegalistadegrupos
-	 *
-	 * Obtem a lista de grupos de um menu
-	 */
-	pegalistadegrupos : function(funcao, id_menu, listasgrupos, ordenaNome, filtraOgc, filtraDown) {
-	    i3GEO.php.verifica();
-	    if(!ordenaNome){
-		ordenaNome = "nao";
-	    }
-	    if(!filtraOgc){
-		filtraOgc = "nao";
-	    }
-	    if(!filtraDown){
-		filtraDown = "nao";
-	    }
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=pegalistadegrupos&map_file=&g_sid=" + i3GEO.configura.sid + "&idmenu=" + id_menu +
-		"&filtraOgc=" + filtraOgc +
-		"&filtraDown=" + filtraDown +
-		"&ordenaNome=" + ordenaNome + "&listasistemas=nao&listasgrupos=" + listasgrupos + "&idioma=" + i3GEO.idioma.ATUAL;
-	    //tipo de filtragem
-	    if(i3GEO.arvoreDeTemas){
-		if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD === true){
-		    par += "&filtro=download";
-		}
-		else if	(i3GEO.arvoreDeTemas.FILTRAOGC === true){
-		    par += "&filtro=ogc";
-		}
-	    }
-	    cpJSON.call(p, "pegalistadegrupos", funcao, par);
+	pegalistadegrupos : function() {
+	    console.error("Veja i3GEO.arvoreDeTemas.listaDeGrupos()");
 	},
-	/**
-	 * Function: pegalistadeSubgrupos
-	 *
-	 * Obtem a lista de subgrupos
-	 */
 	pegalistadeSubgrupos : function(funcao, id_menu, id_grupo) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=pegalistadeSubgrupos&g_sid=" + i3GEO.configura.sid + "&idmenu=" + id_menu + "&grupo=" + id_grupo
-		+ "&map_file=&idioma=" + i3GEO.idioma.ATUAL;
-	    //tipo de filtragem
-	    if(i3GEO.arvoreDeTemas){
-		if(i3GEO.arvoreDeTemas.FILTRADOWNLOAD === true){
-		    par += "&filtro=download";
-		}
-		else if	(i3GEO.arvoreDeTemas.FILTRAOGC === true){
-		    par += "&filtro=ogc";
-		}
-	    }
-	    cpJSON.call(p, "pegalistadeSubgrupos", funcao, par);
+	    console.error("Veja i3GEO.arvoreDeTemas.listaDeSubGrupos()");
 	},
 	/**
 	 * Function: pegalistadetemas

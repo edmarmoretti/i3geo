@@ -942,7 +942,7 @@ i3GEO.Interface =
 			// caso tenha, direciona para a classe_i3geoplugin
 			if (camada.plugini3geo && camada.plugini3geo != "" && camada.plugini3geo.parametros != undefined) {
 			    if (typeof (console) !== 'undefined')
-				console.info("i3GEO.pluginI3geo.inicia()" + camada);
+				console.info("i3GEO.pluginI3geo.inicia()" + camada.name);
 
 			    i3GEO.pluginI3geo.inicia(camada);
 			    continue;
@@ -1328,7 +1328,7 @@ i3GEO.Interface =
 			i3GEO.Interface.LAYERSUTFGRID[obj.value + "_utfgrid"].setVisibility(false);
 		    }
 		}
-		i3GEO.php.ligatemas(i3GEO.legenda.atualiza,desligar,ligar);
+		i3GEO.arvoreDeCamadas.ligatemas(i3GEO.legenda.atualiza,desligar,ligar);
 	    },
 	    /**
 	     * Define um dos layers existentes no mapa como baselayer
@@ -2476,7 +2476,7 @@ i3GEO.Interface =
 			}
 		    }
 		    if (desligar !== "" || ligar !== "") {
-			i3GEO.php.ligatemas(temp, desligar, ligar);
+			i3GEO.arvoreDeCamadas.ligatemas(temp, desligar, ligar);
 		    }
 		},
 		bbox : function() {

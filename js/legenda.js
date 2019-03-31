@@ -101,13 +101,37 @@ i3GEO.legenda =
 	    });
 	    if (atualiza == true) {
 		i3GEO.legenda.CAMADAS = i3GEO.util.cloneObj(i3GEO.arvoreDeCamadas.CAMADAS);
-		i3GEO.php.criaLegendaJSON(temp, "", tamanho[0], tamanho[1]);
+		i3GEO.legenda.criaLegendaJSON(tamanho[0], tamanho[1],temp);
 	    }
+	},
+	criaLegendaJSON : function(w, h, after){
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.legenda.criaLegendaJSON");
+
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    funcao: "criaLegendaJSON",
+		    w : w,
+		    h : h
+		},
+		prog: "/serverapi",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
 	},
 	montaLegenda : function(retorno,idOndeLegenda){
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.legenda.montaLegenda()");
 
+	    if(retorno.data){
+		retorno = retorno.data;
+	    }
 	    var legenda = "",
 	    t,idleg, template;
 
@@ -116,8 +140,8 @@ i3GEO.legenda =
 	    } else {
 		idleg = $i(idOndeLegenda);
 	    }
-	    if (retorno.data.legenda != "") {
-		$.each(retorno.data.legenda, function( index, value ) {
+	    if (retorno.legenda != "") {
+		$.each(retorno.legenda, function( index, value ) {
 		    if(value.tipo == "imagem"){
 			value.classes[0].checkbox = "hidden";
 		    }
@@ -137,7 +161,7 @@ i3GEO.legenda =
 		t = Mustache.to_html(
 			"{{#data}}" + i3GEO.template.legenda + "{{/data}}",
 			{
-			    "data":retorno.data.legenda,
+			    "data":retorno.legenda,
 			    "altera": $trad("p9")
 			}
 		);
@@ -194,9 +218,9 @@ i3GEO.legenda =
 		i3GEO.janela.fechaAguarde("redesenha");
 	    };
 	    if (!inputbox.checked) {
-		i3GEO.php.ligatemas(temp, inputbox.value, "");
+		i3GEO.arvoreDeCamadas.ligatemas(temp, inputbox.value, "");
 	    } else {
-		i3GEO.php.ligatemas(temp, "", inputbox.value);
+		i3GEO.arvoreDeCamadas.ligatemas(temp, "", inputbox.value);
 	    }
 	},
 	/**
@@ -209,10 +233,22 @@ i3GEO.legenda =
 	 * {Object input} - objeto do tipo INPUT com o id da classe e o id do tema
 	 */
 	inverteStatusClasse : function(leg) {
-	    var temp = function(retorno) {
-		i3GEO.Interface.atualizaTema(retorno, leg.name);
+	    var inverte = function(tema, classe, after){
+		i3GEO.request.get({
+		    snackbar: false,
+		    snackbarmsg: false,
+		    btn: false,
+		    par: {
+			tema: tema,
+			classe: classe,
+			funcao: "inverteStatusClasse"
+		    },
+		    prog: "/serverapi",
+		    fn: function(data){
+			i3GEO.Interface.atualizaTema(data, leg.name);
+		    }
+		});
 	    };
-
 	    //verifica se tem apenas uma classe para desligar a camada e nao a classe
 	    if(i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[leg.name].numclasses == 1){
 		if (typeof (console) !== 'undefined')
@@ -220,17 +256,15 @@ i3GEO.legenda =
 
 		var chkb = i3GEO.arvoreDeCamadas.capturaCheckBox(leg.name);
 		if(chkb){
-		    //chkb.checked = leg.checked;
-		    //i3GEO.Interface.ligaDesliga(chkb);
 		    i3geoOL.getLayersByName(leg.name)[0].setVisibility(leg.checked);
 		} else {
-		    i3GEO.php.inverteStatusClasse(temp, leg.name, leg.value);
+		    inverte(leg.name, leg.value);
 		}
 	    } else {
 		if (typeof (console) !== 'undefined')
 		    console.info("i3GEO.legenda.inverteStatusClasse() altera classe");
 
-		i3GEO.php.inverteStatusClasse(temp, leg.name, leg.value);
+		inverte(leg.name, leg.value);
 	    }
 	},
 	mudaCorClasse : function(tema,idclasse,objImg) {

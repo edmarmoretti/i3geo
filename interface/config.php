@@ -1,4 +1,5 @@
 <?php
+header("Content-type: application/x-javascript");
 //utilizado para facilitar a carga de javascript das interfaces do i3geo
 //tipo pode ser OL|OSM|GM (openlayers, OSM, google maps)
 
@@ -20,7 +21,6 @@ $u = basename(dirname(dirname(__FILE__)));
 echo 'i3GeoUrl = i3GEO.util.protocolo() + "://" + window.location.host + "/'.$u.'";';
 ?>
 i3GEO.janela.ativaAlerta();
-
 (function() {
 	if(typeof ol != "undefined" && i3GEO.Interface.openlayers.googleLike === false){
 		var eng = new ol.layer.Tile(

@@ -100,6 +100,7 @@ packer("marcador.js","compactados/marcador_compacto.js","Normal");
 packer("login.js","compactados/login_compacto.js","Normal");
 packer("arvoredecamadas.js","compactados/arvoredecamadas_compacto.js","Normal");
 packer("arvoredetemas.js","compactados/arvoredetemas_compacto.js","Normal");
+packer("request.js","compactados/request_compacto.js","Normal");
 packer("util.js","compactados/util_compacto.js","Normal");
 packer("calculo.js","compactados/calculo_compacto.js","Normal");
 packer("maparef.js","compactados/maparef_compacto.js","Normal");
@@ -183,6 +184,7 @@ $jsfiles = array(
 "compactados/material.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
+"compactados/request_compacto.js",
 "compactados/mustache.js",
 "compactados/util_compacto.js",
 "compactados/dicionario_compacto.js",

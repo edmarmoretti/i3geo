@@ -42,7 +42,7 @@ i3GEOF.filtroarvore = {
 	    var lista = i3GEO.arvoreDeCamadas.listaLigadosDesligados();
 	    if(lista[3].length > 0){
 		i3GEO.arvoreDeCamadas.FILTRO = "";
-		i3GEO.php.excluitema(i3GEO.atualiza,lista[3]);
+		i3GEO.tema.exclui(lista[3],false);
 	    }
 	}
 };

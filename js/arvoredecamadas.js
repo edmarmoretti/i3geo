@@ -367,14 +367,8 @@ i3GEO.arvoreDeCamadas =
 		    update: function( event, ui ) {
 			var els = i3GEO.arvoreDeCamadas.listaLigadosDesligadosArvore(config.idOnde);
 			var lista = els[2].join(",");
-			var temp = function(retorno) {
-			    i3GEO.atualiza(retorno);
-			    if (i3GEO.Interface.ATUAL === "openlayers") {
-				i3GEO.Interface.openlayers.ordenaLayers();
-			    }
-			    i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true);
-			};
-			i3GEO.php.reordenatemas(temp, lista);
+
+			i3GEO.arvoreDeCamadas.reordenatemas(lista);
 		    }
 		});
 	    }
@@ -827,16 +821,27 @@ i3GEO.arvoreDeCamadas =
 		i3GEO.janela.fechaAguarde("redesenha");
 	    };
 	    if (tipo === "normal") {
-		i3GEO.php.ligatemas(temp, t[1].toString(), t[0].toString());
+		i3GEO.arvoreDeCamadas.ligatemas(temp, t[1].toString(), t[0].toString());
 		return;
 	    }
 	    if (tipo === "ligartodos") {
-		i3GEO.php.ligatemas(temp, "", t[2].toString());
+		i3GEO.arvoreDeCamadas.ligatemas(temp, "", t[2].toString());
 		return;
 	    }
 	    if (tipo === "desligartodos") {
-		i3GEO.php.ligatemas(temp, t[2].toString(), "");
+		i3GEO.arvoreDeCamadas.ligatemas(temp, t[2].toString(), "");
 	    }
+	},
+	ligatemas : function(funcao, desligar, ligar){
+	    if (arguments.length === 3) {
+		adicionar = "nao";
+	    }
+	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
+		"funcao=ligatemas&desligar=" + desligar + "&ligar=" + ligar + "&adicionar=nao&g_sid=" + i3GEO.configura.sid,
+		temp = function(retorno) {
+			funcao.call(funcao, retorno);
+	    	};
+	    cpJSON.call(p, "ligaDesligaTemas", temp, par);
 	},
 	/**
 	 * Function: listaLigadosDesligados
@@ -1237,5 +1242,30 @@ i3GEO.arvoreDeCamadas =
 			"i3GEOF.excluirarvore.start()"
 		);
 	    }
+	},
+	reordenatemas : function(temas,after){
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.arvoredecamadas.reordenatemas " + temas);
+
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    temas: temas,
+		    funcao: "REORDENATEMAS"
+		},
+		prog: "/serverapi",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    } else {
+			i3GEO.atualiza();
+			i3GEO.Interface.openlayers.ordenaLayers();
+			i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true);
+		    }
+		}
+	    });
+
 	}
 };

@@ -1,36 +1,3 @@
-/**
- * Title: PluginI3Geo
- *
- * Implementa os plugins do i3Geo que adicionam camadas especiais ao mapa,
- * normalmente dados vetoriais processados no navegador Web.
- *
- * Namespace:
- *
- * i3GEO.pluginI3geo
- *
- * Veja:
- *
- * <http://localhost/i3geo/classesjs/classe_plugini3geo.js>
- */
-
-/**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a
- * P&uacute;blica Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do
- * GNU junto com este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite
- * 330, Boston, MA 02111-1307 USA.
- */
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
@@ -388,6 +355,9 @@ i3GEO.pluginI3geo =
 			return [];
 		    },
 		    inicia : function(camada, objMapa) {
+			if (typeof (console) !== 'undefined')
+			    console.info("i3GEO.pluginI3geo.inicia heatmap");
+
 			var p = i3GEO.configura.locaplic + "/ferramentas/heatmap/openlayers_js.php",criaLayer;
 			criaLayer = function() {
 			    if (typeof (console) !== 'undefined')
@@ -657,7 +627,7 @@ i3GEO.pluginI3geo =
 		    },
 		    inicia : function(camada, objMapa) {
 			if (typeof (console) !== 'undefined')
-			    console.info("i3GEO.pluginI3geo.markercluster.openlayers.inicia()");
+			    console.info("i3GEO.pluginI3geo.inicia markercluster");
 
 			// para uso com o mashup
 			if (!objMapa) {
@@ -918,7 +888,7 @@ i3GEO.pluginI3geo =
 		    },
 		    inicia : function(camada) {
 			if (typeof (console) !== 'undefined')
-			    console.info("i3GEO.plugin.layerkml.inicia");
+			    console.info("i3GEO.pluginI3geo.inicia layerkml");
 
 			var layerkml, url, temp;
 			url = i3GEO.configura.locaplic + "/ferramentas/layerkml/getkml.php?sid=" + i3GEO.configura.sid + "&tema=" + camada.name;
@@ -1137,17 +1107,22 @@ i3GEO.pluginI3geo =
 		    if (s === undefined) {
 			s = "";
 		    }
-		    // aqui e necessario buscar os parametros do plugin para poder abrir o formulario
-		    p =
-			i3GEO.configura.locaplic + "/ferramentas/parametrossql/exec.php?g_sid="
-			+ s
-			+ "&funcao=PARAMETROSPLUGIN&tema="
-			+ nomecamada;
-		    cp = new cpaint();
-		    cp.set_response_type("JSON");
-		    cp.call(p, "foo", temp);
+		    i3GEO.request.get({
+			snackbar: false,
+			snackbarmsg: false,
+			btn: false,
+			par: {
+				funcao: "PARAMETROSPLUGIN",
+				tema: nomecamada
+			},
+			prog: "/ferramentas/parametrossql/exec.php",
+			fn: temp
+		    });
 		},
 		inicia : function(camada) {
+		    if (typeof (console) !== 'undefined')
+			    console.info("i3GEO.pluginI3geo.inicia parametrossql");
+
 		    i3GEO.janela.fechaAguarde("aguardePlugin");
 		    var iniciaform = function() {
 			i3GEOF.parametrossql.start(camada);
@@ -1156,15 +1131,6 @@ i3GEO.pluginI3geo =
 			    (i3GEO.configura.locaplic + "/ferramentas/parametrossql/dependencias.php"),
 			    iniciaform,
 		    "parametrossql_script");
-		},
-		// @TODO permitir que os parametros sejam modificados mesmo depois de terem sido definidos
-		googlemaps : {
-		    inicia : function(camada) {
-			i3GEO.pluginI3geo.parametrossql.inicia(camada);
-		    },
-		    aplicaPropriedades : function(camada) {
-			return camada;
-		    }
 		},
 		openlayers : {
 		    inicia : function(camada) {
@@ -1255,7 +1221,8 @@ i3GEO.pluginI3geo =
 		    },
 		    inicia : function(camada) {
 			if (typeof (console) !== 'undefined')
-			    console.info("i3GEO.plugin.layergeojson.inicia");
+			    console.info("i3GEO.pluginI3geo.inicia layergeojson");
+
 
 			var layergeojson, url, temp;
 			url = i3GEO.configura.locaplic + "/ferramentas/layergeojson/getgeojson.php?sid=" + i3GEO.configura.sid + "&tema=" + camada.name;
