@@ -84,11 +84,17 @@ i3GEOF.inserexy2 = {
 
 
 	},
-	montaComboLocal: function(sel){
+	montaComboLocal: function(sel,titulo){
 	    i3GEO.util.comboTemas(
 		    "i3GEOinserexy2temasLocais",
-		    function(retorno){
-			$i("i3GEOinserexy2shapefile").innerHTML = retorno.dados;
+		    function(combo){
+			var c = combo._select + combo._option;
+			if(sel != undefined){
+			    c += "<option value='" + sel +"'>" + titulo  + "</option></select><b class='caret careti'></b>";
+			    $i("i3GEOinserexy2shapefile").innerHTML = c;
+			} else {
+			    $i("i3GEOinserexy2shapefile").innerHTML = combo.dados;
+			}
 			if ($i("i3GEOinserexy2temasLocais")){
 			    if(sel){
 				$i("i3GEOinserexy2temasLocais").value = sel;
@@ -161,7 +167,7 @@ i3GEOF.inserexy2 = {
 		    snackbar: false,
 		    fn: function(retorno){
 			i3GEO.atualiza();
-			i3GEOF.inserexy2.montaComboLocal(retorno);
+			i3GEOF.inserexy2.montaComboLocal(retorno,$i("i3GEOjanelaprompt").value);
 		    },
 		    btn: btn,
 		    par: {

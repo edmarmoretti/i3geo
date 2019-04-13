@@ -4,7 +4,6 @@ verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 include("../../ms_configura.php");
 $retorno = ""; //string que ser&aacute; retornada ao browser via JSON
 if(empty($navegadoresLocais)){
-	cpjson("veja ms_configura.php");
 	exit;
 }
 switch (strtoupper($funcao))
@@ -87,5 +86,6 @@ Lista os arquivos de um diretório.
 		}
 	break;
 }
-cpjson($retorno);
-?>
+ob_clean();
+header("Content-type: application/json");
+echo json_encode($retorno);

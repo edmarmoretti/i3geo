@@ -117,7 +117,7 @@ i3GEO.legenda =
 		    w : w,
 		    h : h
 		},
-		prog: "/serverapi",
+		prog: "/serverapi/map/",
 		fn: function(data){
 		    if (after){
 			after.call(after, data);
@@ -243,7 +243,7 @@ i3GEO.legenda =
 			classe: classe,
 			funcao: "inverteStatusClasse"
 		    },
-		    prog: "/serverapi",
+		    prog: "/serverapi/layer/",
 		    fn: function(data){
 			i3GEO.Interface.atualizaTema(data, leg.name);
 		    }

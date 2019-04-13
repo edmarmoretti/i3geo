@@ -1,40 +1,3 @@
-/**
- * Title: Mapa
- *
- * Executa opera&ccedil;&otilde;es obre o mapa principal
- *
- * Em i3GEO.mapa.dialogo estao as funcoes de abertura dos dialogos para
- * alteracao das propriedades do mapa, como cor de fundo, tipo de imagem,
- * legenda etc.
- *
- * Namespace:
- *
- * i3GEO.mapa
- *
- * Veja:
- *
- * <http://localhost/i3geo/classesjs/classe_mapa.js>
- */
-
-/**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a
- * P&uacute;blica Geral GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a
- * garantia impl&iacute;cita de COMERCIABILIDADE OU ADEQUACAO A UMA FINALIDADE ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a P&uacute;blica
- * Geral do GNU para mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da Licen&ccedil;a P&uacute;blica Geral do GNU junto com
- * este programa; se n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o 59 Temple Street, Suite 330, Boston, MA
- * 02111-1307 USA.
- *
- */
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
@@ -180,115 +143,6 @@ i3GEO.mapa =
 	    }
 	},
 	/**
-	 * Function: ativaLogo
-	 *
-	 * Ativa ou desativa a logo marca.
-	 */
-	ativaLogo : function() {
-	    if (i3GEO.Interface.ATUAL === "googlemaps") {
-		alert($trad("x21"));
-		return;
-	    }
-	    i3GEO.php.ativalogo(i3GEO.atualiza);
-	    var cr = $i("i3GEOcopyright");
-	    if (cr) {
-		if (cr.style.display === "block") {
-		    cr.style.display = "none";
-		} else {
-		    cr.style.display = "block";
-		}
-	    }
-	},
-	/**
-	 * Verifica se ocorreu algum problema na atualizacao do corpo do mapa e inicia o processo de tentativa de recuperacao
-	 *
-	 * Parametro:
-	 *
-	 * {objeto} - objeto recebido da funcao PHP de atualizacao do mapa
-	 */
-	verifica : function(retorno) {
-	    try {
-		if (retorno.data) {
-		    retorno = retorno.data;
-		}
-		if (retorno.variaveis) {
-		    retorno = retorno.variaveis;
-		}
-		if ((retorno === "erro") || (typeof (retorno) === 'undefined')) {
-		    i3GEO.janela.fechaAguarde();
-		    i3GEO.mapa.recupera.inicia();
-		}
-		i3GEO.mapa.recupera.TENTATIVA = 0;
-	    } catch (e) {
-		if (i3GEO.Interface.ATUAL === "openlayers" || i3GEO.Interface.ATUAL === "googlemaps") {
-		    i3GEO.janela.fechaAguarde();
-		    return;
-		}
-		if (this.recupera.TENTATIVA === 0) {
-		    i3GEO.janela.tempoMsg("Erro no mapa. Sera feita uma tentativa de recuperacao.");
-		    i3GEO.mapa.recupera.inicia();
-		} else {
-		    i3GEO.janela.tempoMsg("Recuperacao impossivel. Sera feita uma tentativa de reiniciar o mapa.");
-		    if (this.recupera.TENTATIVA === 1) {
-			this.recupera.TENTATIVA = 2;
-			i3GEO.php.reiniciaMapa(i3GEO.atualiza);
-		    }
-		}
-	    }
-	},
-	/**
-	 * Tenta recuperar o mapa caso ocorra algum problema
-	 *
-	 * O i3Geo mantem sempre uma copia do arquivo mapfile em uso. Essa funcao tenta usar essa copia para restaurar o funcionamento do
-	 * mapa
-	 */
-	recupera : {
-	    /**
-	     * Armazena a quantidade de tentativas de recuperacao que foram feitas
-	     *
-	     * Tipo {Integer}
-	     */
-	    TENTATIVA : 0,
-	    /**
-	     * Inicia a tentativa de recuperacao
-	     */
-	    inicia : function() {
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.mapa.inicia()");
-
-		i3GEO.janela.fechaAguarde();
-		if (this.recupera && this.recupera.TENTATIVA === 0) {
-		    this.recupera.TENTATIVA++;
-		    this.recupera.restaura();
-		}
-	    },
-	    /**
-	     * Restaura o mapa para a copia de seguranca existente no servidor
-	     */
-	    restaura : function() {
-		i3GEO.php.recuperamapa(i3GEO.atualiza);
-	    }
-	},
-	/**
-	 * Controla a obtencao da legenda do mapa na forma de uma imagem
-	 *
-	 * e utilizado principalmente para armazenar as imagens para a funcao de obtencao do historico do mapa
-	 */
-	legendaIMAGEM : {
-	    /**
-	     * Faz a chamada em AJAX que gera a legenda
-	     *
-	     * O resultado e processado pela funcao passada como parametro
-	     *
-	     * Parametro:
-	     *
-	     * funcao {function} - funcao que recebera o resultado da chamada AJAX.
-	     */
-	    obtem : function(funcao) {
-		i3GEO.php.criaLegendaImagem(funcao);
-	    }
-	},
-	/**
 	 * Function: compactaLayerGrafico
 	 *
 	 * Retorna uma string no formato base64 + JSON contendo as geometrias existentes no layer grafico do mapa Essas geometrias podem ser
@@ -409,6 +263,35 @@ i3GEO.mapa =
 		}
 	    }
 	},
+	mudatamanho : function(after, altura, largura) {
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    altura: altura,
+		    largura: "largura",
+		    funcao: "mudatamanho"
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
+	},
+	getExtent: function(){
+	    var bounds = i3geoOL.getExtent().toBBOX().split(","),
+	    s = bounds[0] + " " + bounds[1] + " " + bounds[2] + " " + bounds[3];
+
+	    return ({
+		string: s,
+		bounds: bounds,
+		osm: i3GEO.util.extGeo2OSM(s),
+		geo: i3GEO.util.extOSM2Geo(s)
+	    });
+	},
 	dialogo : {
 	    /**
 	     * Function: wms
@@ -519,7 +402,7 @@ i3GEO.mapa =
 		+ i3GEO.configura.sid
 		+ "&funcao=copy"
 		+ "&ext="
-		+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		+ i3GEO.mapa.getExtent().geo;
 		$.get(url).done(function(data) {
 		    i3GEO.janela.fechaAguarde();
 		    var url = "", idjanela = i3GEO.util.generateId(), cabecalho = function() {
@@ -1054,7 +937,7 @@ i3GEO.mapa =
 			i3GEO.configura.locaplic,
 			i3GEO.configura.sid,
 			"ligados",
-			i3GEO.parametros.mapexten,
+			i3GEO.mapa.getExtent().string,
 			"",
 		"sim");
 	    }

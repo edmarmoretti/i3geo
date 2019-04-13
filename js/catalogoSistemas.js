@@ -115,8 +115,25 @@ i3GEO.catalogoSistemas = {
 					$("#" + i3GEO.catalogoSistemas.config.idCatalogoNavegacao).show();
 				});
 			};
-			i3GEO.php.pegaSistemas(lista);
+			i3GEO.catalogoSistemas.pegaSistemas(lista);
 		}
+	},
+	pegaSistemas: function(after){
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    idioma: i3GEO.idioma.ATUAL,
+		    funcao: "pegalistadesistemas"
+		},
+		prog: "/serverapi/catalog/",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
 	},
 	listaFuncoes: function(id, nome){
 		if (typeof (console) !== 'undefined')

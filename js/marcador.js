@@ -60,7 +60,7 @@ i3GEO.marcador =
 	 * geografica
 	 */
 	armazena : function() {
-	    var coords, point, temp, cookies = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), ext = i3GEO.parametros.mapexten, nome = "Marcador", valor;
+	    var coords, point, temp, cookies = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), ext = i3GEO.mapa.getExtent().string, nome = "Marcador", valor;
 
 	    temp = ext.split(" ");
 	    ext = "";

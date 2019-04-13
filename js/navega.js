@@ -83,7 +83,7 @@ i3GEO.navega =
 
 	    var l = i3GEO.navega.EXTENSOES.lista,
 	    r = i3GEO.navega.EXTENSOES.redo,
-	    a = i3GEO.parametros.mapexten,
+	    a = i3GEO.mapa.getExtent().string,
 	    e;
 	    if(l.length > 0){
 		if(l.length > 1){
@@ -99,7 +99,7 @@ i3GEO.navega =
 		    }
 		}
 	    } else {
-		l.push(i3GEO.parametros.mapexten);
+		l.push(a);
 	    }
 	},
 	extensaoProximo : function() {
@@ -108,7 +108,7 @@ i3GEO.navega =
 
 	    var l = i3GEO.navega.EXTENSOES.lista,
 	    r = i3GEO.navega.EXTENSOES.redo,
-	    a = i3GEO.parametros.mapexten,
+	    a = i3GEO.mapa.getExtent().string,
 	    e;
 
 	    i3GEO.navega.EXTENSOES.emAcao = true;
@@ -197,7 +197,7 @@ i3GEO.navega =
 			    xy[0] * 1,
 			    xy[1] * 1,
 			    $i(i3GEO.Interface.IDMAPA),
-			    i3GEO.parametros.mapexten,
+			    i3GEO.mapa.getExtent().string,
 			    i3GEO.parametros.pixelsize);
 		i3GEO.util.criaPin("i3GeoCentroDoMapa", i3GEO.configura.locaplic + '/imagens/alvo.png', '30px', '30px');
 		i3GEO.util.posicionaImagemNoMapa("i3GeoCentroDoMapa", xy[0], xy[1]);
@@ -290,34 +290,32 @@ i3GEO.navega =
 	    if (sid !== "") {
 		i3GEO.configura.sid = sid;
 	    }
-	    i3GEO.php.zoomponto(i3GEO.atualiza,x,y,tamanho,simbolo,cor);
-	},
-	/**
-	 * Function: zoompontoIMG
-	 *
-	 * Centraliza o mapa em um ponto de coordenadas medidas na imagem do mapa
-	 *
-	 * Parametros:
-	 *
-	 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-	 *
-	 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-	 *
-	 * {Numeric} - coordenada x da imagem
-	 *
-	 * {Numeric} - coordenada y da imagem
-	 */
-	zoompontoIMG : function(locaplic, sid, x, y) {
-	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.navega.zoompontoIMG()");
 
-	    if (locaplic !== "") {
-		i3GEO.configura.locaplic = locaplic;
-	    }
-	    if (sid !== "") {
-		i3GEO.configura.sid = sid;
-	    }
-	    i3GEO.php.pan(i3GEO.atualiza, '', '', x, y);
+	    var retorno = function(retorno) {
+
+		    i3GEO.Interface.openlayers.pan2ponto(x, y);
+
+		    i3GEO.atualiza(retorno);
+	    };
+	    i3GEO.Interface.openlayers.pan2ponto(x, y);
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    funcao: "zoomponto",
+		    pin: "pin",
+		    xy: x + " " + y,
+		    marca: simbolo,
+		    tamanho: tamanho,
+		    cor: cor
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.atualiza();
+		}
+	    });
+
 	},
 	/**
 	 * Function: xy2xy
@@ -366,59 +364,6 @@ i3GEO.navega =
 		nex = novoxi + " " + novoyi + " " + novoxf + " " + novoyf;
 		i3GEO.navega.zoomExt(i3GEO.configura.locaplic, i3GEO.configura.sid, tipoimagem, nex);
 		return true;
-	    }
-	},
-	/**
-	 * Localiza as coordenadas baseadas no n&uacute;mero IP do usu&aacute;rio.
-	 *
-	 * Parametros:
-	 *
-	 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-	 *
-	 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-	 *
-	 * {Function} - fun&ccedil;&atilde;o que ser&aacute; executada ao concluir a chamada AJAX. Essa fun&ccedil;&atilde;o receber&aacute;
-	 * o objeto JSON obtido.
-	 */
-	localizaIP : function(locaplic, sid, funcao) {
-	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.navega.localizaIP()");
-
-	    if (locaplic !== "") {
-		i3GEO.configura.locaplic = locaplic;
-	    }
-	    if (sid !== "") {
-		i3GEO.configura.sid = sid;
-	    }
-	    i3GEO.php.localizaIP(funcao);
-	},
-	/**
-	 * Mostra no mapa um ponto baseado na localiza&ccedil;&atilde;o do usu&aacute;rio.
-	 *
-	 * Parametros:
-	 *
-	 * {String} - (opcional) endere&ccedil;o do i3geo utilizado na gera&ccedil;&atilde;o da URL para fazer a chamada AJAX
-	 *
-	 * {String} - (opcional) c&oacute;digo da se&ccedil;&atilde;o aberta no servidor pelo i3geo
-	 */
-	zoomIP : function(locaplic, sid) {
-	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.navega.zoomIP()");
-
-	    try {
-		if (arguments.length > 0) {
-		    i3GEO.configura.locaplic = locaplic;
-		    i3GEO.configura.sid = sid;
-		}
-		var mostraIP = function(retorno) {
-		    if (retorno.data.latitude !== null) {
-			i3GEO.navega.zoomponto(locaplic, sid, retorno.data.longitude, retorno.data.latitude);
-		    } else {
-			i3GEO.janela.tempoMsg("Nao foi possivel identificar a localizacao.");
-		    }
-		};
-		i3GEO.navega.localizaIP(locaplic, sid, mostraIP);
-	    } catch (e) {
 	    }
 	},
 	/**

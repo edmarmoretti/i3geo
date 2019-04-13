@@ -1132,7 +1132,7 @@ i3GEO.arvoreDeCamadas =
 		var ltema = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[no.value];
 		var temp = ltema.exttema;
 		if (temp !== "" && temp != undefined ) {
-		    if (i3GEO.util.intersectaBox(temp, i3GEO.parametros.mapexten) === false) {
+		    if (i3GEO.util.intersectaBox(temp, i3GEO.mapa.getExtent().string) === false) {
 			$(no).addClass(i3GEO.arvoreDeCamadas.config.verificaAbrangencia);
 		    } else {
 			$(no).removeClass(i3GEO.arvoreDeCamadas.config.verificaAbrangencia);
@@ -1255,7 +1255,7 @@ i3GEO.arvoreDeCamadas =
 		    temas: temas,
 		    funcao: "REORDENATEMAS"
 		},
-		prog: "/serverapi",
+		prog: "/serverapi/map/",
 		fn: function(data){
 		    if (after){
 			after.call(after, data);

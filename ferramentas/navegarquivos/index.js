@@ -199,6 +199,6 @@ i3GEOF.navegarquivos = {
 			while(ig<iglt);
 			i3GEOF.navegarquivos.ARVORE.draw();
 		};
-		i3GEO.php.listadrives(temp);
+		i3GEO.catalogoDir.getDrives(temp);
 	}
 };

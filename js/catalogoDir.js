@@ -88,9 +88,8 @@ i3GEO.catalogoDir = {
 					{"nome":$trad("a6"),"onclick":"i3GEO.catalogoDir.mostraCatalogoPrincipal()"}
 				);
 
-			var lista = function(retorno){
-				var dados = retorno.data,
-					clone = [],
+			var lista = function(dados){
+				var clone = [],
 					t;
 
 				//ajusta o nome
@@ -109,8 +108,25 @@ i3GEO.catalogoDir = {
 					$("#" + i3GEO.catalogoDir.config.idCatalogoNavegacao).show();
 				});
 			};
-			i3GEO.php.listadrives(lista);
+			i3GEO.catalogoDir.getDrives(lista);
 		}
+	},
+	getDrives : function(after) {
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    idioma: i3GEO.idioma.ATUAL,
+		    funcao: "listaDrives"
+		},
+		prog: "/ferramentas/navegarquivos/",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
 	},
 	listaDir: function(nome,path){
 		if (typeof (console) !== 'undefined')
@@ -121,9 +137,8 @@ i3GEO.catalogoDir = {
 
 		i3GEO.catalogoDir.aguarde();
 
-		var monta = function(dados){
-			var data = dados.data,
-				clone = [],
+		var monta = function(data){
+			var clone = [],
 				g = "",
 				t = "",
 				temas;
@@ -155,7 +170,25 @@ i3GEO.catalogoDir = {
 			}
 			$("#" + i3GEO.catalogoDir.config.idCatalogoNavegacao).html(t+g);
 		};
-		i3GEO.php.listaarquivos(monta, path);
+		i3GEO.catalogoDir.getFiles(monta, path);
+	},
+	getFiles : function(after, caminho) {
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    idioma: i3GEO.idioma.ATUAL,
+		    funcao: "listaArquivos",
+		    diretorio: caminho
+		},
+		prog: "/ferramentas/navegarquivos/",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
 	},
 	adiciona: function(path){
 		i3GEO.util.adicionaSHP(path);

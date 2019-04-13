@@ -293,7 +293,8 @@ class Mapa
             "maxscaledenom",
             "minscaledenom",
             "group",
-            "cacheprefixo"
+            "cacheprefixo",
+            "local"
         );
         foreach ($this->layers as $oLayer) {
             $sel = "nao";
@@ -371,6 +372,10 @@ class Mapa
                 $ltempo = "nao";
                 if ($oLayer->getmetadata("ltempoformatodata") !== "") {
                     $ltempo = "sim";
+                }
+                $local = "nao";
+                if($oLayer->getMetaData("TEMALOCAL") != ""){
+                    $local = "sim";
                 }
                 //
                 // verifica se o tema faz cache automatico
@@ -545,7 +550,8 @@ class Mapa
                     $oLayer->maxscaledenom,
                     $oLayer->minscaledenom,
                     $oLayer->group,
-                    $oLayer->getmetadata("cacheprefixo")
+                    $oLayer->getmetadata("cacheprefixo"),
+                    $local
                 );
             }
         }

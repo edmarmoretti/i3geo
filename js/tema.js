@@ -86,7 +86,7 @@ i3GEO.tema =
 		    temas: excluir.getUnique().join(","),
 		    funcao: "EXCLUIRTEMAS"
 		},
-		prog: "/serverapi",
+		prog: "/serverapi/map/",
 		fn: function(data){
 		    i3GEO.mapa.ativaTema();
 		    i3GEO.temaAtivo = "";

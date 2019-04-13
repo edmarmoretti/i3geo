@@ -267,7 +267,7 @@ i3GEO.Interface =
 	},
 	zoom2ext : function(mapexten) {
 	    if(!mapexten){
-		mapexten = i3GEO.parametros.mapexten;
+		mapexten = i3GEO.mapa.getExtent().string;
 	    }
 	    i3GEO.Interface[i3GEO.Interface.ATUAL].zoom2ext(mapexten);
 	},
@@ -1486,7 +1486,7 @@ i3GEO.Interface =
 			contadorPan--;
 			if(contadorPan == 0){
 			    modoAtual = "";
-			    i3GEO.navega.registraExt(i3GEO.parametros.mapexten);
+			    i3GEO.navega.registraExt(i3GEO.mapa.getExtent().string);
 			    i3GEO.Interface.openlayers.recalcPar();
 			    i3GEO.Interface.STATUS.pan = false;
 			    i3GEO.eventos.navegaMapa();
@@ -1586,9 +1586,8 @@ i3GEO.Interface =
 		    console.info("i3GEO.interface.openlayers.recalcpar()");
 
 		i3GEOtouchesPosMapa = "";
-		var bounds = i3geoOL.getExtent().toBBOX().split(","),
-		escalaAtual = i3geoOL.getScale();
-		i3GEO.parametros.mapexten = bounds[0] + " " + bounds[1] + " " + bounds[2] + " " + bounds[3];
+		var escalaAtual = i3geoOL.getScale();
+		i3GEO.parametros.mapexten = i3GEO.mapa.getExtent().string;
 		if (i3GEO.parametros.mapscale !== escalaAtual) {
 		    i3GEO.arvoreDeCamadas.atualizaFarol(escalaAtual);
 		}

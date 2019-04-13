@@ -366,32 +366,6 @@ i3GEObuscaRapida =
 				$i(i3GEObuscaRapida.idresultado).innerHTML += "<br><b>" + $trad("a7") + ":</b><br>" + ins;
 			}
 		},
-		/*
-		 * Function: zoom
-		 *
-		 * Aplica a opera&ccedil;&atilde;o de zoom quando o usu&aacute;rio clica no bot&atilde;o de adi&ccedil;&atilde;o de um resultado ao
-		 * mapa.
-		 *
-		 * Essa &eacute; a fun&ccedil;&atilde;o default utilizada pela ferramenta, podendo ser substitu&iacute;da por outra se desejado.
-		 *
-		 * Al&eacute;m de enquadrar o mapa a uma extens&atilde;o geogr&aacute;fica espec&iacute;fica, uma nova camada &eacute; adicionada,
-		 * mostrando o limite da ocorr&ecirc;ncia desejada.
-		 *
-		 * Veja:
-		 *
-		 * <i3GEO.php.mudaext>
-		 *
-		 * Parameters:
-		 *
-		 * wkt {String} - string no formato wkt que ser&aacute; usado para definir a abrang&ecirc;ncia do zoom
-		 *
-		 * layer {String} - nome do layer existente no servi&ccedil;o definido em i3GEObuscaRapida.servicowms e que ser&aacute; adicionado
-		 * ao mapa como uma camada WMS
-		 *
-		 * gid {String} - identificador que ser&aacute; utilizado no WMS para selecionar o elemento desejado
-		 *
-		 * nm {String} - nome que ser&aacute; dado a camada que ser&aacute; adicionada ao mapa
-		 */
 		zoom : function(wkt, layer, gid, nm) {
 			var adicionaCamada =
 				function(layer, gid, nm, ext) {
@@ -407,24 +381,11 @@ i3GEObuscaRapida =
 				alert("wkt invalido");
 				return;
 			}
-
-			i3GEO.php.mudaext(
-				adicionaCamada(layer, gid, nm, ext),
-				window.parent.i3GEO.configura.tipoimagem,
-				ext,
-				i3GEObuscaRapida.locaplic,
-				window.parent.i3GEO.configura.sid);
+			i3GEO.Interface.zoom2ext(ext);
+			adicionaCamada(layer, gid, nm, ext)
 		},
 		zoomExt : function(ext) {
-			if (window.parent.i3GEO.Interface.ATUAL == "googlemaps") {
-				window.parent.i3GEO.Interface.googlemaps.zoom2extent(ext);
-			}
-			if (window.parent.i3GEO.Interface.ATUAL == "googleearth") {
-				window.parent.i3GEO.Interface.googleearth.zoom2extent(ext);
-			}
-			if (window.parent.i3GEO.Interface.ATUAL == "openlayers") {
-				window.parent.i3GEO.Interface.openlayers.zoom2ext(ext);
-			}
+			window.parent.i3GEO.Interface.openlayers.zoom2ext(ext);
 		},
 		/*
 		 * Function: adicionatema

@@ -131,7 +131,7 @@ i3GEO.calculo =
 			];
 		}
 		if (arguments.length === 3) {
-		    ext = i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		    ext = i3GEO.mapa.getExtent().geo;
 		    cellsize = i3GEO.parametros.pixelsize;
 		}
 		if (arguments.length === 4) {

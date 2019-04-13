@@ -171,7 +171,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$("#grupos").html(temas.join(""));
 	    }
 	};
-	i3GEO.arvoreDeTemas.listaDeGrupos(temp, idMenu, "sim");
+	i3GEO.catalogoMenus.getGrupos(temp, idMenu, "sim");
     };
     /*
 	Function combosubgrupos
@@ -205,7 +205,7 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 		$("#subgrupos").html(temas.join(""));
 	    }
 	};
-	i3GEO.arvoreDeTemas.listaDeSubGrupos(sgrupos, "",idGrupo);
+	i3GEO.catalogoMenus.getSubGrupos(sgrupos, "",idGrupo);
     };
     /*
 	Function combotemas
@@ -220,12 +220,10 @@ function i3geo_gl_configura(loc_i3geo,nomeseltema,temasa,link,grupo,subgrupo,tem
 
 	idSubGrupo - id do sibgrupo
      */
-    this.combotemas = function (idGrupo,idSubGrupo,temas)
+    this.combotemas = function (idGrupo,idSubGrupo)
     {
-	if(temas == undefined)
-	{temas = "";}
 	$i($i3geo_gl.tema).innerHTML = "<span style=color:red >Aguarde...</span>";
-	i3GEO.arvoreDeTemas.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"","","",temas);
+	i3GEO.catalogoMenus.comboTemasMenu($i3geo_gl.loc_i3geo,"$i3geo_gl.preseltema",$i3geo_gl.tema,"",idGrupo,idSubGrupo,"","","");
     };
     this.combointerfaces = function(){
 	var temp = function(retorno){
@@ -369,7 +367,7 @@ function i3geo_gl_inicia(objeto_i3geo_gl_configura)
     }
     $i3geo_gl.combointerfaces();
     //pega a lista de menus e as
-    i3GEO.arvoreDeTemas.comboMenus($i3geo_gl.loc_i3geo,"$i3geo_gl.combogrupos",$i3geo_gl.menu,"","530","1","");
+    i3GEO.catalogoMenus.comboMenus($i3geo_gl.loc_i3geo,"$i3geo_gl.combogrupos",$i3geo_gl.menu,"","530","1","");
 }
 function alerta(texto,d){
     if(!d){

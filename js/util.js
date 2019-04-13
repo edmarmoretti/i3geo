@@ -1369,8 +1369,11 @@ i3GEO.util =
 		classe = "form-control";
 	    }
 	    var monta, temp, temp1, temp2;
-	    monta =	function(retorno) {
-		var i, comboTemas = '', n, nomeopt = "", tema;
+	    monta = function(retorno) {
+		if (typeof (console) !== 'undefined')
+		    console.info("i3GEO.util.comboTemas monta combo");
+
+		var i, comboTemas = '', n, nomeopt = "", tema, _select = "", _option = "";
 		if (retorno == undefined || retorno.length == 0 || (retorno.data && retorno.data.length == 0)) {
 		    retorno = {"data": [{"tema":"","nome":"---"}]};
 		    incluiVazio = false;
@@ -1387,9 +1390,10 @@ i3GEO.util =
 			} else {
 			    comboTemas += "<select class='" + classe + "' id='" + id + "' name='" + nome + "'>";
 			}
+			_select = comboTemas;
 			if (incluiVazio === true) {
-			    //comboTemas += "<option value=''>"+$trad("x92")+"</option>";
 			    comboTemas += "<option value=''>---</option>";
+			    _option += "<option value=''>---</option>";
 			}
 			for (i = 0; i < n; i++) {
 			    if (retorno[i].nome) {
@@ -1401,12 +1405,15 @@ i3GEO.util =
 			    }
 			    if (retorno[i].escondido !== "sim") {
 				comboTemas += "<option value=" + tema + " >" + nomeopt + "</option>";
+				_option += "<option value=" + tema + " >" + nomeopt + "</option>";
 			    }
 			}
 			comboTemas += "</select><b class='caret careti'></b>";
 			temp = {
 				dados : comboTemas,
-				tipo : "dados"
+				tipo : "dados",
+				_select : _select,
+				_option: _option
 			};
 		    } else {
 			if (tipoCombo === "poligonosSelecionados" || tipoCombo === "selecionados" || tipoCombo === "pontosSelecionados") {
@@ -1428,50 +1435,33 @@ i3GEO.util =
 		}
 	    };
 	    if (tipoCombo === "ligados") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listaTemas(monta, "ligados", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoCombo === "ligadosComTabela") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS);
-		    temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
-		    temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
-		    monta(temp1.concat(temp2));
-		} else {
-		    i3GEO.php.listaTemas(monta, "ligados", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS);
+		temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
+		temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
+		monta(temp1.concat(temp2));
 	    }
 	    if (tipoCombo === "comTabela") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 3, "menor", i3GEO.arvoreDeCamadas.CAMADAS);
-		    temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
-		    temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
-		    monta(temp1.concat(temp2));
-		}
+		temp = i3GEO.arvoreDeCamadas.filtraCamadas("status", 3, "menor", i3GEO.arvoreDeCamadas.CAMADAS);
+		temp1 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "menor", temp);
+		temp2 = i3GEO.arvoreDeCamadas.filtraCamadas("type", 8, "igual", temp);
+		monta(temp1.concat(temp2));
 	    }
 	    if (tipoCombo === "locais") {
-		i3GEO.php.listaTemasEditaveis(monta, i3GEO.configura.locaplic, i3GEO.configura.sid);
+		temp = i3GEO.arvoreDeCamadas.filtraCamadas("local", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS);
+		monta(temp);
 	    }
 	    if (tipoCombo === "editavel") {
 		temp = i3GEO.arvoreDeCamadas.filtraCamadas("editavel", "SIM", "igual", i3GEO.arvoreDeCamadas.CAMADAS);
 		monta(temp);
 	    }
 	    if (tipoCombo === "selecionados") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listaTemasComSel(monta, i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoCombo === "raster") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listatemasTipo(monta, "raster", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoCombo === "pontosSelecionados") {
 		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
@@ -1688,25 +1678,13 @@ i3GEO.util =
 		}
 	    };
 	    if (tipoLista === "ligados") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listaTemas(monta, "ligados", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("status", 2, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoLista === "selecionados") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listaTemasComSel(monta, i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("sel", "sim", "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoLista === "raster") {
-		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {
-		    monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
-		} else {
-		    i3GEO.php.listatemasTipo(monta, "raster", i3GEO.configura.locaplic, i3GEO.configura.sid);
-		}
+		monta(i3GEO.arvoreDeCamadas.filtraCamadas("type", 3, "igual", i3GEO.arvoreDeCamadas.CAMADAS));
 	    }
 	    if (tipoLista === "polraster") {
 		if (i3GEO.arvoreDeCamadas.CAMADAS !== "") {

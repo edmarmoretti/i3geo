@@ -185,15 +185,23 @@ i3GEOF.inseretxt = {
 		}
 		i3GEOF.inseretxt.add(xy,texto);
 	    } else {
-		i3GEO.php.identificaunico(
-			function(retorno){
-			    $i("i3GEOinseretxttexto").value = retorno.data;
-			    i3GEOF.inseretxt.add(xy,retorno.data[0]);
+		    i3GEOF.inseretxt.get({
+			snackbar: false,
+			fn: function(data){
+			    $i("i3GEOinseretxttexto").value = data;
+			    i3GEOF.inseretxt.add(xy,data[0]);
 			},
-			xy.replace(" ",","),
-			$i("i3GEOinseretxtComboTemas").value,
-			$i("i3GEOinseretxtComboItens").value
-		);
+			btn: false,
+			par: {
+			    xy: xy.replace(" ",","),
+			    funcao: "identificaunico",
+			    resolucao: 5,
+			    tema: $i("i3GEOinseretxtComboTemas").value,
+			    item: $i("i3GEOinseretxtComboItens").value,
+			    ext: i3GEO.parametros.mapexten
+			},
+			refresh: false
+		    });
 	    }
 	},
 	add: function(xy,texto){

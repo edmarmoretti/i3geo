@@ -345,19 +345,6 @@ var i3GEO = {
 		i3GEO.busca.SERVICO = (c.components.hasOwnProperty("searchService")) ? c.components.searchService : "";
 		i3GEO.busca.SERVICOWMS = (c.components.hasOwnProperty("searchWms")) ? c.components.searchWms : "";
 		i3GEO.mapa.BALAOATIVO = (c.components.hasOwnProperty("info")) ? c.components.info : true;
-		//i3GEO.mapa.INFOTEMPLATE = (c.components.hasOwnProperty("infoTemplate") && c.components.infoTemplate != "") ? c.components.infoTemplate : i3GEO.configura.locaplic + i3GEO.mapa.INFOTEMPLATE;
-		if(c.components.referenceMapPosition){
-		    i3GEO.maparef.TOP = c.components.referenceMapPosition[0];
-		    i3GEO.maparef.RIGHT = c.components.referenceMapPosition[1];
-		}
-		if(c.components.referenceType){
-		    i3GEO.maparef.DEFAULTMAP = c.components.referenceType;
-		}
-		/*
-		if(c.components.scrollBar){
-		    i3GEO.janela.scrollBar = c.components.scrollBar;
-		}
-		*/
 		if(c.components.tooltip){
 		    var p = i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP;
 		    p.removeAoAdicionar = (c.components.tooltip.hasOwnProperty("removeAoAdicionar")) ? c.components.tooltip.removeAoAdicionar : true;
@@ -692,12 +679,12 @@ var i3GEO = {
 					    i3GEO.parametros.mapexten);
 				});
 			    }
+
 			    // anula os cookies de login se for necessario
 			    // o servidor verifica se na sessao o login esta ativo
 			    if (i3GEO.parametros.logado === "nao") {
 				i3GEO.login.anulaCookie();
 			    }
-
 			    i3GEO.arvoreDeCamadas.registaCamadas(retorno.data.temas);
 			    i3GEO.Interface.inicia();
 			    //
@@ -735,7 +722,6 @@ var i3GEO = {
 		} catch (e) {
 		    if (typeof (console) !== 'undefined')
 			console.error(e.message)
-
 		}
 	    };
 	    if (!$i("i3geo")) {
@@ -882,16 +868,13 @@ var i3GEO = {
 	    //
 	    if (!retorno.data) {
 		alert("Ocorreu um erro ao carregar o mapa" + retorno);
-		i3GEO.mapa.recupera.inicia();
-		// corpoMapa.call();
 		return;
 	    }
 	    // verifica se o parametro retorno existe, caso contr&aacute;rio,
 	    // faz a chamada ao programa PHP para obter os parametros
 	    try {
 		if (retorno.data === "erro") {
-		    alert("Erro no mapa. Sera feita uma tentativa de recuperacao.");
-		    i3GEO.mapa.recupera.inicia();
+		    alert("Erro no mapa.");
 		    return;
 		} else if (retorno.data === "ok"
 		    || retorno.data === "") {
@@ -928,7 +911,6 @@ var i3GEO = {
 		if (arguments.length === 0) {
 		    return;
 		}
-		i3GEO.mapa.verifica(retorno);
 		mapscale = i3GEO.parametros.mapscale;
 		i3GEO.atualizaParametros(retorno.data.variaveis);
 
@@ -1021,17 +1003,6 @@ var i3GEO = {
 
 	    var diminuix, diminuiy, menos, novow, novoh, w, h, temp, antigoh = i3GEO.parametros.h;
 	    temp = $i(i3GEO.Interface.IDCORPO);
-	    /*
-		if(temp && temp.style && temp.style.width && temp.style.height){
-			i3GEO.parametros.w = parseInt(temp.style.width,10);
-			i3GEO.parametros.h = parseInt(temp.style.height,10);
-			i3GEO.eventos.resizeMapa();
-			return [
-				i3GEO.parametros.w,
-				i3GEO.parametros.h
-			];
-		}
-	     */
 	    menos = 0;
 	    document.body.style.width = "100%";
 	    temp = i3GEO.util.tamanhoBrowser();
@@ -1056,27 +1027,13 @@ var i3GEO = {
 	    i3GEO.parametros.w = w;
 	    i3GEO.parametros.h = h;
 	    temp = function() {
-		switch (i3GEO.Interface.ATUAL) {
-		case "googlemaps":
-		    i3GEO.Interface.googlemaps.zoom2extent(i3GEO.parametros.mapexten);
-		    break;
-		case "openlayers":
-		    i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
-		    i3geoOL.updateSize();
-
-		    break;
-		};
+		i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+		i3geoOL.updateSize();
 		i3GEO.guias.ALTURACORPOGUIAS = h;
 		i3GEO.eventos.resizeMapa();
-		return [
-		    w,
-		    h
-		    ];
+		return [w,h];
 	    };
-	    i3GEO.php.mudatamanho(
-		    temp,
-		    h,
-		    w);
+	    i3GEO.mapa.mudatamanho(temp,h,w);
 	},
 	/**
 	 * Atualiza os valores da vari&aacute;vel i3GEO.parametros

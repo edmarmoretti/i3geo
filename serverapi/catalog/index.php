@@ -33,6 +33,16 @@ switch (strtoupper($_GET["funcao"])) {
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"], $_GET["filtro"]);
         $retorno = $m->pegaListaDeSubGrupos($_GET["grupo"], $_GET["idmenu"]);
         break;
+    case "PEGALISTADETEMAS":
+        include ("../../classesphp/classe_menutemas.php");
+        $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
+        $retorno = $m->pegaListaDeTemas($_GET["grupo"], $_GET["subgrupo"], $_GET["idmenu"]);
+        break;
+    case "PEGALISTADESISTEMAS":
+        include ("../../classesphp/classe_menutemas.php");
+        $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
+        $retorno = $m->pegaSistemas();
+        break;
 }
 ob_clean();
 header("Content-type: application/json");

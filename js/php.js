@@ -39,211 +39,52 @@ i3GEO.php =
 	    console.error("Veja i3GEO.arvoreDeCamadas.ligatemas()");
 	},
 	pegalistademenus : function() {
-	    console.error("Veja i3GEO.arvoreDeTemas.listaDeMenus()");
+	    console.error("Veja i3GEO.catalogoMenus.getMenus()");
 	},
 	pegalistadegrupos : function() {
-	    console.error("Veja i3GEO.arvoreDeTemas.listaDeGrupos()");
+	    console.error("Veja i3GEO.catalogoMenus.listaDeGrupos()");
 	},
 	pegalistadeSubgrupos : function(funcao, id_menu, id_grupo) {
-	    console.error("Veja i3GEO.arvoreDeTemas.listaDeSubGrupos()");
+	    console.error("Veja i3GEO.catalogoMenus.getSubGrupos()");
 	},
-	/**
-	 * Function: pegalistadetemas
-	 *
-	 * Obtem a lista de temas de um item do catalogo
-	 */
 	pegalistadetemas : function(funcao, id_menu, id_grupo, id_subgrupo) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=pegalistadetemas&g_sid=" + i3GEO.configura.sid + "&idmenu=" + id_menu + "&grupo=" + id_grupo + "&subgrupo="
-		+ id_subgrupo + "&map_file=&idioma=" + i3GEO.idioma.ATUAL;
-	    cpJSON.call(p, "pegalistadetemas", funcao, par);
+	    console.error("Veja i3GEO.catalogoMenus.getTemas()");
 	},
-	/**
-	 * Function: listaTemas
-	 *
-	 * Lista os temas existentes no mapa
-	 */
 	listaTemas : function(funcao, tipo, locaplic, sid) {
-	    if (arguments.length === 2) {
-		locaplic = i3GEO.configura.locaplic;
-		sid = i3GEO.configura.sid;
-	    }
-	    var p = locaplic + "/classesphp/mapa_controle.php", par = "funcao=listatemas&g_sid=" + sid + "&tipo=" + tipo;
-	    cpJSON.call(p, "listaTemas", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: listaTemasEditaveis
-	 *
-	 * Lista os temas guardados na pasta temporaria (temas locais)
-	 */
 	listaTemasEditaveis : function(funcao, locaplic, sid) {
-	    if (arguments.length === 1) {
-		locaplic = i3GEO.configura.locaplic;
-		sid = i3GEO.configura.sid;
-	    }
-	    var p = locaplic + "/classesphp/mapa_controle.php", par = "funcao=listatemaslocais&g_sid=" + sid;
-	    cpJSON.call(p, "listatemaslocais", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: listaTemasComSel
-	 *
-	 * Lista os temas que possuem selecao
-	 */
 	listaTemasComSel : function(funcao, locaplic, sid) {
-	    if (arguments.length === 1) {
-		locaplic = i3GEO.configura.locaplic;
-		sid = i3GEO.configura.sid;
-	    }
-	    var p = locaplic + "/classesphp/mapa_controle.php", par = "funcao=listatemascomsel&g_sid=" + sid;
-	    cpJSON.call(p, "listaTemasComSel", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: listatemasTipo
-	 *
-	 * Lista os temas de um determinado tipo
-	 */
 	listatemasTipo : function(funcao, tipo, locaplic, sid) {
-	    if (arguments.length === 2) {
-		locaplic = i3GEO.configura.locaplic;
-		sid = i3GEO.configura.sid;
-	    }
-	    var p = locaplic + "/classesphp/mapa_controle.php", par = "funcao=&funcao=listatemasTipo&tipo=" + tipo + "&g_sid=" + sid;
-	    cpJSON.call(p, "listatemasTipo", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: pegaSistemas
-	 *
-	 * Pega a lista de sistemas de adicao de temas
-	 */
 	pegaSistemas : function(funcao) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par = "funcao=pegaSistemas&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "pegaSistemas", funcao, par);
+	    console.error("Veja i3GEO.catalogoSistemas.listaDeTemas()");
 	},
-	/**
-	 * Function: listadrives
-	 *
-	 * Lista o drives que permitem navegacao
-	 */
 	listadrives : function(funcao) {
-	    var p = i3GEO.configura.locaplic + "/ferramentas/navegarquivos/exec.php", par =
-		"funcao=listaDrives&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "listaDrives", funcao, par);
+	    console.error("Veja i3GEO.catalogoDir.getDrives()");
 	},
-	/**
-	 * Function: listaarquivos
-	 *
-	 * Lista os arquivos no servidor em um determinado caminho
-	 */
 	listaarquivos : function(funcao, caminho) {
-	    var p = i3GEO.configura.locaplic + "/ferramentas/navegarquivos/exec.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=listaArquivos&diretorio=" + caminho;
-	    cpJSON.call(p, "listaArquivos", funcao, par);
+	    console.error("Veja i3GEO.catalogoDir.getFiles()");
 	},
-	/**
-	 * Function: geo2utm
-	 */
-	geo2utm : function(funcao, x, y) {
-	    i3GEO.php.verifica();
-	    if ($i("aguardeGifAberto") || x < -180) {
-		return;
-	    }
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=geo2utm&x=" + x + "&y=" + y + "&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "geo2utm", funcao, par);
-	},
-	/**
-	 * Function: desativacgi
-	 *
-	 * Desativa o uso do modo CGI
-	 */
-	desativacgi : function(funcao) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par = "funcao=desativacgi&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "desativacgi", funcao, par);
-	},
-	/**
-	 * Function: pegaMapas
-	 *
-	 * Pega a lista de mapas cadastrados
-	 */
-	pegaMapas : function(funcao) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"&map_file=&funcao=pegaMapas&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "pegaMapas", funcao, par);
-	},
-	/**
-	 * Function: mudatamanho
-	 *
-	 * Muda o tamanho do mapa
-	 */
 	mudatamanho : function(funcao, altura, largura) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/ferramentas/opcoes_tamanho/exec.php", par =
-		"funcao=mudatamanho&altura=" + altura + "&largura=" + largura + "&g_sid=" + i3GEO.configura.sid, retorno =
-		    function(retorno) {
-		funcao.call(funcao, retorno);
-	    };
-	    cpJSON.call(p, "pegaSistemas", retorno, par);
+	    console.error("Veja i3GEO.mapa.mudatamanho()");
 	},
-	/**
-	 * Function: ativalogo
-	 *
-	 * Ativa a logomarca
-	 */
 	ativalogo : function(funcao, altura, largura) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par = "funcao=ativalogo&g_sid=" + i3GEO.configura.sid, retorno =
-		function(retorno) {
-		funcao.call(funcao, retorno);
-	    };
-	    cpJSON.call(p, "ativalogo", retorno, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: insereAnnotation
-	 *
-	 * Insere uma feature
-	 */
-	insereAnnotation : function(funcao, pin, xy, texto, position, partials, offsetx, offsety, minfeaturesize, mindistance, force,
-		shadowcolor, shadowsizex, shadowsizey, outlinecolor, cor, sombray, sombrax, sombra, fundo, angulo, tamanho, fonte) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=inserefeature&pin=" + pin + "&tipo=ANNOTATION&xy=" + xy + "&texto=" + texto + "&position=" + position
-		+ "&partials=" + partials + "&offsetx=" + offsetx + "&offsety=" + offsety + "&minfeaturesize=" + minfeaturesize
-		+ "&mindistance=" + mindistance + "&force=" + force + "&shadowcolor=" + shadowcolor + "&shadowsizex=" + shadowsizex
-		+ "&shadowsizey=" + shadowsizey + "&outlinecolor=" + outlinecolor + "&cor=" + cor + "&sombray=" + sombray + "&sombrax="
-		+ sombrax + "&sombra=" + sombra + "&fundo=" + fundo + "&angulo=" + angulo + "&tamanho=" + tamanho + "&fonte=" + fonte
-		+ "&g_sid=" + i3GEO.configura.sid, retorno = function(retorno) {
-		funcao.call(funcao, retorno);
-	    };
-	    cpJSON.call(p, "inserefeature", retorno, par);
+	insereAnnotation : function() {
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: identificaunico
-	 *
-	 * Idetifica um onto em um unico tema
-	 */
 	identificaunico : function(funcao, xy, tema, item) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=identificaunico&xy=" + xy + "&resolucao=5&tema=" + tema + "&item=" + item + "&g_sid=" + i3GEO.configura.sid
-		+ "&ext=" + i3GEO.parametros.mapexten;
-	    cpJSON.call(p, "identificaunico", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: recuperamapa
-	 *
-	 * Recupera o mapa atual
-	 */
 	recuperamapa : function(funcao) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par = "funcao=recuperamapa&g_sid=" + i3GEO.configura.sid, retorno =
-		function(retorno) {
-		funcao.call(funcao, retorno);
-	    };
-	    cpJSON.call(p, "recuperamapa", retorno, par);
+	    console.error("Removido na versao 8");
 	},
 	/**
 	 * Function: criaLegendaImagem
@@ -251,81 +92,19 @@ i3GEO.php =
 	 * Pega a legenda atual na forma de imagem
 	 */
 	criaLegendaImagem : function(funcao) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=criaLegendaImagem&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "criaLegendaImagem", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: referenciadinamica
-	 *
-	 * Obtem a imagem do mapa de referencia
-	 */
 	referenciadinamica : function(funcao, zoom, tipo, w, h) {
-	    i3GEO.php.verifica();
-	    if (!w) {
-		w = "";
-	    }
-	    if (!h) {
-		h = "";
-	    }
-	    if (arguments.length === 2) {
-		tipo = "dinamico";
-	    }
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=referenciadinamica&g_sid=" + i3GEO.configura.sid + "&zoom=" + zoom + "&tipo=" + tipo + "&ext="
-		+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten) + "&w=" + w + "&h=" + h;
-	    cpJSON.call(p, "retornaReferenciaDinamica", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: pan
-	 *
-	 * <PAN>
-	 */
 	pan : function(funcao, escala, tipo, x, y) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=pan&escala=" + escala + "&tipo=" + tipo + "&x=" + x + "&y=" + y + "&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "pan", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: zoomponto
-	 *
-	 * Zoom para um ponto
-	 */
 	zoomponto : function(funcao, x, y, tamanho, simbolo, cor) {
-	    i3GEO.php.verifica();
-	    if (!simbolo) {
-		simbolo = "ponto";
-	    }
-	    if (!tamanho) {
-		tamanho = 15;
-	    }
-	    if (!cor) {
-		cor = "255 0 0";
-	    }
-	    var retorno = function(retorno) {
-		if (i3GEO.Interface.ATUAL === "openlayers") {
-		    i3GEO.Interface.openlayers.pan2ponto(x, y);
-		}
-		if (i3GEO.Interface.ATUAL === "googlemaps") {
-		    i3GEO.Interface.googlemaps.pan2ponto(x, y);
-		}
-		funcao.call(funcao, retorno);
-	    }, p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=zoomponto&pin=pin&xy=" + x + " " + y + "&g_sid=" + i3GEO.configura.sid + "&marca=" + simbolo + "&tamanho="
-		+ tamanho + "&cor=" + cor;
-	    cpJSON.call(p, "zoomponto", retorno, par);
+	    console.error("Veja i3GEO.navega.zoomponto()");
 	},
-	/**
-	 * Function: localizaIP
-	 *
-	 * Localiza por um IP
-	 */
 	localizaIP : function(funcao) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par = "funcao=localizaIP&g_sid=" + i3GEO.configura.sid;
-	    cpJSON.call(p, "localizaIP", funcao, par);
+	    console.error("Removido na versao 8");
 	},
 	/**
 	 * Function: mudaext
@@ -355,7 +134,7 @@ i3GEO.php =
 		return;
 	    }
 	    retorno = function(retorno) {
-		i3GEO.Interface.openlayers.zoom2ext(ext);
+		i3GEO.Interface.zoom2ext(ext);
 		if(funcao){
 		    funcao.call(funcao, retorno);
 		}
@@ -386,7 +165,7 @@ i3GEO.php =
 	aplicaResolucao : function(funcao, resolucao) {
 	    i3GEO.php.verifica();
 	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=crialente&resolucao=" + resolucao + "&g_sid=" + i3GEO.configura.sid + "&ext=" + i3GEO.parametros.mapexten;
+		"funcao=crialente&resolucao=" + resolucao + "&g_sid=" + i3GEO.configura.sid + "&ext=" + i3GEO.mapa.getExtent().string;
 	    cpJSON.call(p, "crialente", funcao, par);
 	},
 	/**
@@ -485,7 +264,7 @@ i3GEO.php =
 		    break;
 		case "openlayers":
 		    i3GEO.atualizaParametros(retorno.data.variaveis);
-		    i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+		    i3GEO.Interface.openlayers.zoom2ext(i3GEO.mapa.getExtent().string);
 		    break;
 		}
 	    };
@@ -957,7 +736,7 @@ i3GEO.php =
 	 */
 	listaItensTema : function(funcao, tema) {
 	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=listaitens&tema=" + tema + "&ext=" + i3GEO.parametros.mapexten;
+		"g_sid=" + i3GEO.configura.sid + "&funcao=listaitens&tema=" + tema + "&ext=" + i3GEO.mapa.getExtent().string;
 	    cpJSON.call(p, "listaItensTema", funcao, par);
 	},
 	/**
@@ -968,7 +747,7 @@ i3GEO.php =
 	listaValoresItensTema : function(funcao, tema, itemTema) {
 	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
 		"g_sid=" + i3GEO.configura.sid + "&funcao=listaunica&tema=" + tema + "&item=" + itemTema + "&ext="
-		+ i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
+		+ i3GEO.mapa.getExtent().geo;
 	    cpJSON.call(p, "listaRegistros", funcao, par);
 	},
 	/**
