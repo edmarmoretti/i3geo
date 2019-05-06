@@ -411,7 +411,7 @@ i3GEO.editorOL = {
 			i3GEO.editorOL.substituiFeaturesSel(retorno.data);
 		    }
 		    if (operacao === "converteSHP") {
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 			i3GEO.janela.minimiza("paneltemaativo");
 		    }
 		};

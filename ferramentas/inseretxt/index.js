@@ -131,7 +131,7 @@ i3GEOF.inseretxt = {
 			    i3GEO.janela.snackBar({content: $trad('feito')});
 			}
 			if(refresh){
-			    i3GEO.atualiza();			}
+			    i3GEO.mapa.refresh();			}
 			if(fn){
 			    fn(data);
 			}
@@ -231,7 +231,7 @@ i3GEOF.inseretxt = {
 	    i3GEOF.inseretxt.get({
 		snackbar: false,
 		fn: function(retorno){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: false,
 		par,
@@ -247,7 +247,7 @@ i3GEOF.inseretxt = {
 	    i3GEOF.inseretxt.get({
 		snackbar: false,
 		fn: function(retorno){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: false,
 		par,

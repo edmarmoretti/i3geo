@@ -126,9 +126,7 @@ i3GEO.catalogoEstrelas = {
 
 		i3GEO.catalogoEstrelas.aguarde();
 
-		var lista = function(dados){
-			//pega os registros
-			data = dados.data;
+		var lista = function(data){
 			var clone = [];
 			$.each( data, function( i,v ) {
 				var temas,subgrupos;
@@ -160,14 +158,33 @@ i3GEO.catalogoEstrelas = {
 				);
 			$("#" + i3GEO.catalogoEstrelas.config.idCatalogoNavegacao).html(t);
 		};
-		i3GEO.php.procurartemasestrela(lista,numEstrelas * 1,i3GEO.catalogoEstrelas.config.valorEstrela * 1);
+		i3GEO.catalogoEstrelas.procurar(lista,numEstrelas * 1,i3GEO.catalogoEstrelas.config.valorEstrela * 1);
+	},
+	procurar : function(after, nivel, fatorestrela) {
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    funcao: "procurartemasestrela",
+		    nivel: nivel,
+		    fatorestrela: fatorestrela,
+		    idioma: i3GEO.idioma.ATUAL
+		},
+		prog: "/serverapi/catalog/",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
 	},
 	adiciona : function(tid){
 		// confirma se o tema existe no mapa
 		if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
 			i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, true);
 		} else {
-			i3GEO.php.adtema(i3GEO.atualiza, tid);
+			i3GEO.mapa.adtema(false, tid);
 		}
 	}
 };

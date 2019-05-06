@@ -143,7 +143,7 @@ i3GEOF.inserexy2 = {
 			    i3GEO.janela.snackBar({content: $trad('feito')});
 			}
 			if(refresh){
-			    i3GEO.atualiza();
+			    i3GEO.mapa.refresh();
 			    i3GEOF.inserexy2.montaComboLocal();			}
 			if(fn){
 			    fn(data);
@@ -166,7 +166,7 @@ i3GEOF.inserexy2 = {
 		i3GEOF.inserexy2.get({
 		    snackbar: false,
 		    fn: function(retorno){
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 			i3GEOF.inserexy2.montaComboLocal(retorno,$i("i3GEOjanelaprompt").value);
 		    },
 		    btn: btn,
@@ -332,7 +332,7 @@ i3GEOF.inserexy2 = {
 	    i3GEOF.inserexy2.get({
 		snackbar: true,
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: btn,
 		par: {
@@ -348,7 +348,7 @@ i3GEOF.inserexy2 = {
 	    i3GEOF.inserexy2.get({
 		snackbar: true,
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: btn,
 		par: {

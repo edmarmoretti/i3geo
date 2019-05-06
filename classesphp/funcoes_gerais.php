@@ -553,35 +553,7 @@ function listaTrueType()
  */
 function substituiCon($map_file, $postgis_mapa)
 {
-    // error_reporting(0);
     return;
-    if (! empty($postgis_mapa) && (file_exists($map_file))) {
-        if (! @ms_newMapObj($map_file)) {
-            return false;
-        }
-        $objMap = ms_newMapObj($map_file);
-        $numlayers = $objMap->numlayers;
-        for ($i = 0; $i < $numlayers; ++ $i) {
-            $layer = $objMap->getlayer($i);
-            if ($layer->connectiontype == MS_POSTGIS) {
-                $lcon = $layer->connection;
-                if (($lcon == " ") || ($lcon == "") || (in_array($lcon, array_keys($postgis_mapa)))) {
-                    //
-                    // o metadata CONEXAOORIGINAL guarda o valor original para posterior substitui&ccedil;&atilde;o
-                    //
-                    if (($lcon == " ") || ($lcon == "")) {
-                        $layer->set("connection", $postgis_mapa);
-                        $layer->setmetadata("CONEXAOORIGINAL", $lcon);
-                    } else {
-                        $layer->set("connection", $postgis_mapa[$lcon]);
-                        $layer->setmetadata("CONEXAOORIGINAL", $lcon);
-                    }
-                }
-            }
-        }
-        $objMap->save($map_file);
-    }
-    return true;
 }
 
 function substituiConObj($objMap, $postgis_mapa)

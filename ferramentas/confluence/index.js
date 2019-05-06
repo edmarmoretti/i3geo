@@ -43,7 +43,7 @@ i3GEOF.confluence = {
 		});
 	    }
 	    if(data.length == 0){
-		if(i3GEO.parametros.mapscale > 8000000){
+		if(i3geoOL.getScale() > 8000000){
 		    html = "Confluence. " + $trad("clickparar") + "<br>" + $trad("aproxmais");
 		} else {
 		    html = "Confluence. " + $trad("clickparar") + "<br>" + $trad("nadaenc");
@@ -58,7 +58,7 @@ i3GEOF.confluence = {
 		return;
 	    }
 	    i3GEOF.confluence._parameters.startDate = Date.now();
-	    if(i3GEO.parametros.mapscale > 8000000){
+	    if(i3geoOL.getScale() > 8000000){
 		i3GEOF.confluence.show([]);
 	    } else {
 		$("#confluenceresults").html("Confluence <span class='glyphicon glyphicon-repeat normal-right-spinner'></span>");

@@ -642,7 +642,7 @@ Toda vez que um objeto "map" &eacute; criado via PHP Mapscript, a string de cone
 Se n&atilde;o for desejado a substitui&ccedil;&atilde;o, deixe essa vari&aacute;vel em branco.
 Se vc especificar essa vari&aacute;vel, o mapa ser&aacute; for&ccedil;ado a recusar o modo de opera&ccedil;&atilde;o CGI.
 
-Para mais detalhes veja a fun&ccedil;&atilde;o substituiCon em classesphp/funcoes_gerais.php
+Para mais detalhes veja a fun&ccedil;&atilde;o substituiConObj em classesphp/funcoes_gerais.php
 
 exemplo -
 

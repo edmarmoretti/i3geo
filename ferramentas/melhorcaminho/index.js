@@ -409,7 +409,7 @@ i3GEOF.melhorcaminho = {
 		i3GEOF.melhorcaminho.aguarde.visibility = "visible";
 		fim = function(retorno){
 			i3GEOF.melhorcaminho.aguarde.visibility = "hidden";
-			i3GEO.atualiza("");
+			i3GEO.mapa.refresh();
 			//$i("i3GEOmelhorcaminhoresultadoFim").innerHTML = retorno.data;
 			i3GEOF.melhorcaminho.relatorio(retorno.data);
 		};

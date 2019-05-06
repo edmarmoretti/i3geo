@@ -151,22 +151,16 @@ i3GEO.busca = {
 		function(layer, gid, nm, ext) {
 		if (i3GEO.Interface.openlayers.googleLike === false) {
 		    var s = i3GEO.busca.SERVICOWMS + "?gid=" + gid + "&";
-		    i3GEO.php.adicionaTemaWMS(i3GEO.atualiza, s, layer, "default", "EPSG:4618", "image/png", "1.1.0", nm
-			    + " - " + layer, "", "nao", "", i3GEO.configura.locaplic, i3GEO.configura.sid);
+		    i3GEO.mapa.adicionaTemaWMS(i3GEO.mapa.refresh, s, layer, "default", "EPSG:4618", "image/png", "1.1.0", nm
+			    + " - " + layer, "", "nao", "");
 		}
-		i3GEO.busca.zoomExt(ext);
 	    };
 	    var ext = i3GEO.util.wkt2ext(wkt, "polygon");
 	    if (ext == false) {
 		return;
 	    }
-
-	    i3GEO.php.mudaext(
-		    adicionaCamada(layer, gid, nm, ext),
-		    i3GEO.configura.tipoimagem,
-		    ext,
-		    i3GEO.configura.locaplic,
-		    i3GEO.configura.sid);
+	    i3GEO.Interface.zoom2ext(ext);
+	    adicionaCamada(layer, gid, nm, ext)
 	},
 	mostraxy : function mostraxy(texto, tipo) {
 	    var ext,b;

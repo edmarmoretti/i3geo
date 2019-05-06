@@ -96,7 +96,7 @@ i3GEOF.centromassa = {
 			i3GEO.janela.fechaAguarde();
 			btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
 			i3GEO.janela.snackBar({content: $trad('feito')});
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 		    }
 	    )
 	    .fail(

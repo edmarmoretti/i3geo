@@ -563,7 +563,7 @@ i3GEOF.metaestat = {
              * Os parametros sao obtidos dos componentes de formulario ou variaveis ja definidas em
              * funcao das escolhas feitas pelo usuario
              * Ao executar, primeiro cria um mapfile temporario com i3GEO.php.mapfileMedidaVariavel() e
-             * depois adiciona com i3GEO.php.adtema()
+             * depois adiciona com i3GEO.mapa.adtema()
              * Atualiza o combo da janela de analise com i3GEOF.metaestat.analise.comboCamadas();
              */
             adicionaCamada: function(botao){
@@ -580,7 +580,6 @@ i3GEOF.metaestat = {
                         i3GEOF.metaestat.comum.desligaCamadas();
                         var atualiza = function(){
                             i3GEOF.metaestat.comum.aguarde("hidden");
-                            i3GEO.atualiza();
                             if(botao){
                                 $(botao).removeAttr('disabled');
                             }
@@ -589,7 +588,7 @@ i3GEOF.metaestat = {
                             i3GEOF.metaestat.analise.comboCamadas();
                         };
                         i3GEOF.metaestat.comum.aguarde();
-                        i3GEO.php.adtema(atualiza,retorno.mapfile);
+                        i3GEO.mapa.adtema(atualiza,retorno.mapfile);
                     }
                 };
                 if(v != true){

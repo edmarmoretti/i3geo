@@ -5,7 +5,7 @@ verificaBlFerramentas(basename(dirname(__FILE__)), $i3geoBlFerramentas, false);
 ?>
 <html>
 <head>
-<script type="text/javascript" src="http://maps.google.com/maps/api/js?key=<?php echo $googleApiKey; ?>"></script>
+<script type="text/javascript" src="https://maps.google.com/maps/api/js?key=<?php echo $googleApiKey; ?>"></script>
 <script src="index.js" type="text/javascript"></script>
 
 </head>

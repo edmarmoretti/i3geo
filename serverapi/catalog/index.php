@@ -43,6 +43,20 @@ switch (strtoupper($_GET["funcao"])) {
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->pegaSistemas();
         break;
+    case "PROCURARTEMASESTRELA":
+        include ("../../classesphp/classe_menutemas.php");
+        $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
+        $retorno = $m->procurartemasestrela($_GET["nivel"], $_GET["fatorestrela"]);
+        break;
+    case "LISTALAYERSWMS":
+        include ("../../classesphp/wmswfs.php");
+        $servico = $_GET["servico"];
+        $nivel = $_GET["nivel"];
+        $id_ws = $_GET["id_ws"];
+        $nomelayer = $_GET["nomelayer"];
+        $tipo_ws = $_GET["tipo_ws"];
+        $retorno = listaLayersWMS();
+        break;
 }
 ob_clean();
 header("Content-type: application/json");

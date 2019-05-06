@@ -61,7 +61,7 @@ i3GEO.catalogoInde = {
 		if(url.indexOf("?") == -1){
 		    url = url + "?";
 		}
-		i3GEO.php.adicionaTemaWMS(
+		i3GEO.mapa.adicionaTemaWMS(
 			'',
 			url,
 			layer,
@@ -73,8 +73,6 @@ i3GEO.catalogoInde = {
 			'',
 			'nao',
 			"text/plain",
-			'',
-			'',
 			true
 		);
 	    }

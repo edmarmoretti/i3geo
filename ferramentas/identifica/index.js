@@ -127,7 +127,7 @@ i3GEOF.identifica = {
 			    i3GEO.janela._formModal.unblock();
 			    i3GEO.janela.fechaAguarde();
 			    i3GEO.janela.snackBar({content: $trad('feito')});
-			    i3GEO.atualiza();
+			    i3GEO.mapa.refresh();
 			}
 		)
 		.fail(
@@ -221,21 +221,18 @@ i3GEOF.identifica = {
 	    var f = function(retorno) {
 		i3GEO.janela.fechaAguarde();
 		if(retorno){
-		    i3GEOF.identifica.mostraDadosTema(retorno.data);
+		    i3GEOF.identifica.mostraDadosTema(retorno);
 		}
 	    };
 	    // importante: os temas editaveis nao utilizam alias em seus nomes
 	    // se o usuario estiver logado
-	    i3GEO.php.identifica(
+	    i3GEO.mapa.identifica(
 		    f,
 		    p.x,
 		    p.y,
 		    i3GEOF.identifica.resolution,
 		    (p.tema != "" ? "tema" : "ligados"),
-		    i3GEO.configura.locaplic,
-		    i3GEO.configura.sid,
 		    p.tema,
-		    i3GEO.parametros.mapexten,
 		    "",
 	    "nao");
 	},

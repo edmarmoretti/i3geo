@@ -161,7 +161,7 @@ i3GEOF.toponimia = {
 			i3GEO.Interface.atualizaTema("",i3GEOF.toponimia._parameters.tema);
 		    }
 		    else{
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 		    }
 		},
 		btn: btn,

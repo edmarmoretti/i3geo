@@ -171,7 +171,7 @@ i3GEOF.mascara = {
 			    i3GEO.janela.snackBar({content: $trad('feito')});
 			}
 			if(refresh){
-			    i3GEO.atualiza();			}
+			    i3GEO.mapa.refresh();			}
 			if(fn){
 			    fn(data);
 			}

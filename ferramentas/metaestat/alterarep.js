@@ -188,12 +188,10 @@ i3GEOF.alterarep = {
 					return;
 				}
 				var atualiza = function(){
-					i3GEO.atualiza();
 					i3GEOF.metaestat.CAMADAS.push(retorno.data);
-					//i3GEO.mapa.ativaTema(retorno.data);
 					i3GEOF.metaestat.analise.comboCamadas();
 				};
-				i3GEO.php.adtema(atualiza,retorno.mapfile);
+				i3GEO.mapa.adtema(atualiza,retorno.mapfile);
 			};
 		i3GEO.janela.abreAguarde("alterarep1","Aguarde...");
 		if(tipo == "variatamanho"){

@@ -73,7 +73,7 @@ if (isset($_FILES['i3GEOaplicarsld']['name']) && strlen(basename($_FILES['i3GEOa
 		$layer->setmetadata("cache","");
 		$salvo = $mapa->save($map_file);
 		echo "<p class='paragrafo' >Aplicado!!! Redesenhando o mapa.";
-		echo "<script>window.parent.i3GEO.atualiza();window.parent.i3GEO.Interface.atualizaTema('',window.parent.i3GEO.temaAtivo);</script>";
+		echo "<script>window.parent.i3GEO.mapa.refresh();window.parent.i3GEO.Interface.atualizaTema('',window.parent.i3GEO.temaAtivo);</script>";
 	}
 	else
 	{

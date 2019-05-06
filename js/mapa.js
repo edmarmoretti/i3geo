@@ -64,15 +64,19 @@ i3GEO.mapa =
 		sel = true;
 	    }
 	    if(sel == true){
-		i3GEO.janela.abreAguarde();
-		i3GEO.php.limpasel(
-			function(retorno) {
-			    i3GEO.janela.fechaAguarde();
-			    i3GEO.atualiza();
-			    i3GEO.Interface.atualizaMapa();
-			},
-			""
-		);
+		i3GEO.request.get({
+		    snackbar: false,
+		    snackbarmsg: false,
+		    btn: false,
+		    par: {
+			funcao: "limpasel"
+		    },
+		    prog: "/serverapi/map/",
+		    fn: function(data){
+			i3GEO.mapa.refresh();
+			i3GEO.Interface.atualizaMapa();
+		    }
+		});
 	    }
 	},
 	infoxy: function(x,y){
@@ -263,6 +267,108 @@ i3GEO.mapa =
 		}
 	    }
 	},
+	adtema : function(after, temas) {
+	    i3GEO.request.get({
+		snackbar: true,
+		snackbarmsg: $trad("camadaadic"),
+		btn: false,
+		par: {
+		    funcao: "adtema",
+		    temas: temas
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
+	},
+	adicionaTemaWMS : function(after, servico, tema, nome, proj, formato, versao, nomecamada, tiporep, suportasld, formatosinfo,
+		checked, allitens) {
+
+	    // verifica se a camada ja existe no mapa
+	    if (checked || checked == false) {
+		var camadaArvore = i3GEO.arvoreDeCamadas.pegaTema(
+			(servico + "&layers=" + tema + "&style=" + nome).replace("&&", "&"),
+			"",
+			"wmsurl"
+		);
+		if (camadaArvore) {
+		    var ck = i3GEO.arvoreDeCamadas.capturaCheckBox(camadaArvore.name);
+		    ck.checked = checked;
+		    ck.onclick();
+		    return;
+		}
+	    }
+	    var par = {
+		    funcao: "adicionatemawms",
+		    servico: servico,
+		    tema: tema,
+		    nome: nome,
+		    proj: proj,
+		    formato: formato,
+		    versao: versao,
+		    nomecamada: nomecamada,
+		    tiporep: tiporep,
+		    suportasld: suportasld,
+		    formatosinfo: formatosinfo,
+		    allitens: allitens
+	    };
+	    if(!allitens){
+		par.allitens = "nao";
+	    }
+	    i3GEO.request.get({
+		snackbar: true,
+		snackbarmsg: $trad("camadaadic"),
+		btn: false,
+		par: par,
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
+	},
+	adicionaTemaSHP : function(after, arq){
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    arq: arq,
+		    funcao: "adicionaTemaSHP"
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
+	},
+	adicionaTemaIMG : function(after, arq) {
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    arq: arq,
+		    funcao: "adicionaTemaIMG"
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
+	},
 	mudatamanho : function(after, altura, largura) {
 	    i3GEO.request.get({
 		snackbar: false,
@@ -281,6 +387,38 @@ i3GEO.mapa =
 		}
 	    });
 	},
+	moveLayerUp: function(tema){
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    tema: tema,
+		    funcao: "moveLayerUp"
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		    i3GEO.Interface.openlayers.ordenaLayers();
+		}
+	    });
+	},
+	moveLayerDown: function(tema){
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    tema: tema,
+		    funcao: "moveLayerDown"
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		    i3GEO.Interface.openlayers.ordenaLayers();
+		}
+	    });
+	},
 	getExtent: function(){
 	    var bounds = i3geoOL.getExtent().toBBOX().split(","),
 	    s = bounds[0] + " " + bounds[1] + " " + bounds[2] + " " + bounds[3];
@@ -290,6 +428,97 @@ i3GEO.mapa =
 		bounds: bounds,
 		osm: i3GEO.util.extGeo2OSM(s),
 		geo: i3GEO.util.extOSM2Geo(s)
+	    });
+	},
+	extentToLayer: function(tema){
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    tema: tema,
+		    funcao: "extentToLayer"
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.Interface.openlayers.zoom2ext(data);
+		}
+	    });
+	},
+	identifica : function(after, x, y, resolucao, opcao, tema, listaDeTemas, wkt) {
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.mapa.identifica()");
+
+	    if(x === null || y === null || (x == 0 && y == 0)){
+		return;
+	    }
+	    if (listaDeTemas === undefined) {
+		listaDeTemas = "";
+	    }
+	    // verifica se nao e necessario alterar as coordenadas
+	    ext = i3GEO.mapa.getExtent().string;
+	    var par = {
+		    funcao: "identifica",
+		    wkt: wkt,
+		    opcao: opcao,
+		    xy: x + "," + y,
+		    resolucao: resolucao,
+		    ext: ext,
+		    listaDeTemas: listaDeTemas
+	    };
+	    if (opcao !== "tip") {
+		par.tema = tema;
+	    }
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: par,
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    }
+		}
+	    });
+	},
+	refresh : function(after){
+	    if (typeof (console) !== 'undefined')
+		console.info("i3GEO.refresh()");
+
+	    i3GEO.request.get({
+		snackbar: true,
+		snackbarmsg: $trad("maprefresh"),
+		btn: false,
+		par: {
+		    funcao: "parameters"
+		},
+		prog: "/serverapi/map/",
+		fn: function(data){
+		    i3GEO.atualizaParametros(data.variaveis);
+		    var temp = i3GEO.arvoreDeCamadas.converteChaveValor2normal(data.temas);
+		    try {
+			i3GEO.arvoreDeCamadas.atualiza(temp);
+			i3GEO.arvoreDeCamadas.atualizaFarol(i3geoOL.getScale());
+		    } catch (e) {}
+		    i3GEO.arvoreDeCamadas.registaCamadas(temp);
+		    // nesse ponto o layer sera adicionado ao mapa
+		    i3GEO.Interface.redesenha();
+		    if ($i("mensagemt")) {
+			$i("mensagemt").value = i3GEO.parametros.mapexten;
+		    }
+		    i3GEO.eventos.navegaMapa();
+		    //
+		    // verifica se deve ser feito o zoom em algum tema
+		    //
+		    temp = i3GEO.arvoreDeCamadas.verificaAplicaExtensao();
+		    if (temp !== "") {
+			i3GEO.mapa.extentToLayer(temp);
+		    }
+		    if (after){
+			after.call(after, data);
+		    }
+		}
 	    });
 	},
 	dialogo : {
@@ -928,16 +1157,13 @@ i3GEO.mapa =
 		    i3geoOL.removeOverlay(b);
 		    i3GEO.mapa.montaTip(retorno,x,y);
 		};
-		i3GEO.php.identifica(
+		i3GEO.mapa.identifica(
 			temp,
 			x,
 			y,
 			i3GEO.configura.ferramentas.identifica.resolution,
 			"tip",
-			i3GEO.configura.locaplic,
-			i3GEO.configura.sid,
 			"ligados",
-			i3GEO.mapa.getExtent().string,
 			"",
 		"sim");
 	    }
@@ -974,8 +1200,8 @@ i3GEO.mapa =
 
 	    i3GEO.eventos.cliquePerm.status = true;
 	    mostra = true;
-	    if(retorno.data){
-		retorno = retorno.data;
+
+	    if(retorno !== ""){
 		temp = retorno[0].xy.split(",");
 		x = temp[0]*1;
 		y = temp[1]*1;
@@ -985,11 +1211,12 @@ i3GEO.mapa =
 		mostra = true;
 		textoSimples = "";//$trad("balaoVazio");
 		wkt = [];
+		retorno = true;
 		if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.openTipNoData == false){
 		    mostra = false;
 		}
 	    }
-	    if (retorno !== "") {
+	    if (retorno) {
 		res = "";
 		ntemas = 0;
 		temas = retorno;

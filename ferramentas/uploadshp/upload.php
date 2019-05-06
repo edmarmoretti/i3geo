@@ -182,7 +182,7 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	$salvo = $mapa->save($map_file);
 	//grava os templates de cada tema
 	echo "<b><p class='paragrafo' >Tema criado!!! Redesenhando o mapa.";
-	echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza();window.parent.i3GEOF.uploadshp.doneok();</script>";
+	echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.mapa.refresh();window.parent.i3GEOF.uploadshp.doneok();</script>";
 }
 else
 {

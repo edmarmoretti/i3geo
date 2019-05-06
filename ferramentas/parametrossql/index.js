@@ -286,7 +286,7 @@ i3GEOF.parametrossql = {
 	    if(typeof i3geoOL != 'undefined' || typeof i3GeoMap != 'undefined'){
 		fim = function(){
 		    i3GEO.janela.destroi("i3GEOF.parametrossql");
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		    i3GEO.Interface.atualizaMapa();
 		};
 		i3GEOF.parametrossql.get({

@@ -16,6 +16,13 @@ switch (strtoupper($funcao))
 		}
 		$retorno = "ok";
 	break;
+	case "MUDATRANSP":
+	    include_once ($locaplic."/classesphp/classe_temas.php");
+	    $m = new Temas($map_file, $tema);
+	    $m->mudaTransparencia($_GET["valor"]);
+	    $m->salva($map_file);
+	    $retorno = "ok";
+	    break;
 }
 if(isset($map_file) && isset($postgis_mapa) && $map_file != ""){
 	restauraCon($map_file,$postgis_mapa);

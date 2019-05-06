@@ -3321,5 +3321,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "maprefresh" : [
+            {
+                pt : "Mapa atualizado",
+                en : "",
+                es : ""
+            }
         ]
     };

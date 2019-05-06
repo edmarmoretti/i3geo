@@ -791,23 +791,6 @@ i3GEO.util =
 	    }
 	},
 	/**
-	 * Function: adicionaSHP
-	 *
-	 * Inclui um arquivo shapefile no mapa atual como uma nova camada
-	 *
-	 * Parametros:
-	 *
-	 * {String} - caminho completo do shapefile
-	 */
-	adicionaSHP : function(path) {
-	    var temp = path.split(".");
-	    if ((temp[1] === "SHP") || (temp[1] === "shp")) {
-		i3GEO.php.adicionaTemaSHP(i3GEO.atualiza, path);
-	    } else {
-		i3GEO.php.adicionaTemaIMG(i3GEO.atualiza, path);
-	    }
-	},
-	/**
 	 * Function: abreCor
 	 *
 	 * Abre a janela flutuante para escolha de uma cor

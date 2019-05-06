@@ -22,10 +22,10 @@
             <li><a href="javascript:void(0)" onclick="i3GEO.tema.exclui('{{{name}}}',true)" title="{{{removerTitle}}}">
                     <span class="glyphicon glyphicon-trash"></span> {{{removerTexto}}}
                 </a></li>
-            <li><a href="javascript:void(0)" onclick="i3GEO.tema.sobe('{{{name}}}')" title="{{{sobeTitle}}}">
+            <li><a href="javascript:void(0)" onclick="i3GEO.mapa.moveLayerUp('{{{name}}}')" title="{{{sobeTitle}}}">
                     <span class="glyphicon glyphicon-menu-up"></span> {{{sobeTexto}}}
                 </a></li>
-            <li><a href="javascript:void(0)" onclick="i3GEO.tema.desce('{{{name}}}')" title="{{{desceTitle}}}">
+            <li><a href="javascript:void(0)" onclick="i3GEO.mapa.moveLayerDown('{{{name}}}')" title="{{{desceTitle}}}">
                     <span class="glyphicon glyphicon-menu-down"></span> {{{desceTexto}}}
                 </a></li>
             <li><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}" class='{{isnotvetor}} '>
@@ -34,7 +34,7 @@
             <li><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')" >
                     <span class="glyphicon glyphicon-th-list"></span> {{{editorlegendaTexto}}}
                 </a></li>
-            <li><a class="{{{zoomtema}}} " href="javascript:void(0)" onclick="i3GEO.tema.zoom('{{{name}}}')" title="{{{zoomtemaTitle}}}" >
+            <li><a class="{{{zoomtema}}} " href="javascript:void(0)" onclick="i3GEO.mapa.extentToLayer('{{{name}}}')" title="{{{zoomtemaTitle}}}" >
                     <span class="glyphicon glyphicon-fullscreen"></span> {{{zoomtemaTexto}}}
                 </a></li>
             <li><a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')" title="{{{linkTitle}}}">

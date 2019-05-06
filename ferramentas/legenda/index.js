@@ -139,7 +139,7 @@ i3GEOF.legenda =
 	 */
 	aposAlterarLegenda : function() {
 	    i3GEO.arvoreDeCamadas.CAMADAS = [];
-	    i3GEO.atualiza();
+	    i3GEO.mapa.refresh();
 	    i3GEO.Interface.atualizaTema("", i3GEOF.legenda._parameters.tema);
 	},
 	mostralegenda : function() {
@@ -490,7 +490,7 @@ i3GEOF.legenda =
 		i3GEOF.legenda.aposAlterarLegenda();
 		i3GEOF.legenda.mostralegenda();
 	    };
-	    i3GEO.php.aplicaCorClasseTema(retorna, i3GEOF.legenda._parameters.tema, id, $i("tempCorLegenda").value);
+	    i3GEO.tema.alteracorclasse(retorna, i3GEOF.legenda._parameters.tema, id, $i("tempCorLegenda").value);
 	},
 	filtro : function(idRetorno) {
 	    i3GEO.tema.dialogo.msQueryBuilder(i3GEOF.legenda._parameters.tema, idRetorno);

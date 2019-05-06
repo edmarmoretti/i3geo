@@ -33,6 +33,30 @@ i3GEOF.atalhosedicao =
 		mesmoTema : true
 	    });
 	},
+	mudatransp : function(valor) {
+	    if (valor !== "") {
+		var prog = i3GEO.configura.locaplic + "/admin/catalogo/mapfile/ferramentas/atalhosedicao/exec.php?funcao=mudatransp&g_sid="+i3GEO.configura.sid;
+		var sUrl = prog
+		+ "&tema=" + i3GEOF.atalhosedicao.tema
+		+ "&valor=" + valor;
+		var callback = {
+			success:function(o)	{
+			    try	{
+				if(JSON.parse(o.responseText) == "erro") {
+				}
+				else {
+				    i3GEO.Interface.aplicaOpacidade(valor,i3GEOF.atalhosedicao.tema);
+				}
+			    }
+			    catch(e){core_handleFailure(e,o.responseText);}
+			},
+			argument: { foo:"foo", bar:"bar" }
+		};
+		core_makeRequest(sUrl,callback,'POST');
+	    } else {
+		i3GEO.janela.tempoMsg($trad("x16"));
+	    }
+	},
 	parametrosSql: function() {
 	    i3GEO.temaAtivo = i3GEOF.atalhosedicao.tema;
 	    YAHOO.namespace("admin");
@@ -273,7 +297,7 @@ i3GEOF.atalhosedicao =
 				YAHOO.admin.container.panelEditor = null;
 				i3GEO.Interface.openlayers.removeTodosOsLayers();
 				i3GEO.arvoreDeCamadas.CAMADAS = [];
-				i3GEO.atualiza();
+				i3GEO.mapa.refresh();
 			    }
 			}
 			catch(e){core_handleFailure(e,o.responseText);}

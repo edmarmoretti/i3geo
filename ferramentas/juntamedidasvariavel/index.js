@@ -159,7 +159,7 @@ i3GEOF.juntamedidasvariavel = {
 		ps = i3GEOF.juntaMedidasVariaveis.pegaCalculos();
 		atualiza = function(retorno){
 			i3GEO.janela.fechaAguarde("aguardeAnalise");
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 			i3GEO.temaAtivo = retorno.data;
 		};
 		//i3GEO.util.ajaxGet(p,atualiza);

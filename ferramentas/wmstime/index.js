@@ -200,7 +200,7 @@ i3GEOF.wmstime = {
 			} else {
 				i3f.renderFunction();
 				i3GEO.janela.snackBar({content: $trad("concluido",i3f.dicionario)});
-				i3GEO.atualiza();
+				i3GEO.mapa.refresh();
 			}
 
 		    }

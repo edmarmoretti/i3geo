@@ -103,6 +103,6 @@ i3GEO.catalogoMapas = {
 		i3GEO.php.pegaMapas(lista);
 	},
 	adiciona : function(ID_MAPA, NOME){
-		i3GEO.php.adtema(i3GEO.atualiza, "mapaCadastrado_" + ID_MAPA);
+		i3GEO.mapa.adtema(false, "mapaCadastrado_" + ID_MAPA);
 	}
 };

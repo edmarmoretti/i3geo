@@ -96,7 +96,7 @@ i3GEO.tema =
 			    i3geoOL.removeLayer(layer[0]);
 			}
 		    }
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		    if (after){
 			after.call(after, data);
 		    }
@@ -133,45 +133,11 @@ i3GEO.tema =
 		);
 	    }
 	},
-	/**
-	 * Sobe um tema na ordem de desenho
-	 *
-	 * Parametros:
-	 *
-	 * {string} - codigo do tema
-	 */
 	sobe : function(tema) {
-	    i3GEO.php.sobetema(function(retorno) {
-		//
-		// atualiza apenas remonta a arvore
-		// no caso de interfaces como openlayers
-		// e necessario mover o DIV tbm
-		//
-		i3GEO.atualiza(retorno);
-		if (i3GEO.Interface.ATUAL === "openlayers") {
-		    i3GEO.Interface.openlayers.ordenaLayers();
-		}
-	    }, tema);
+	    console.error("Veja i3GEO.mapa.moveLayerUp()");
 	},
-	/**
-	 * Desce um tema na ordem de desenho
-	 *
-	 * Parametros:
-	 *
-	 * tema - codigo do tema
-	 */
 	desce : function(tema) {
-	    i3GEO.php.descetema(function(retorno) {
-		//
-		// atualiza apenas remonta a arvore
-		// no caso de interfaces como openlayers
-		// e necessario mover o DIV tbm
-		//
-		i3GEO.atualiza(retorno);
-		if (i3GEO.Interface.ATUAL === "openlayers") {
-		    i3GEO.Interface.openlayers.ordenaLayers();
-		}
-	    }, tema);
+	    console.error("Veja i3GEO.mapa.moveLayerDown()");
 	},
 	/**
 	 * Function: zoom
@@ -183,8 +149,7 @@ i3GEO.tema =
 	 * {string} - codigo do tema
 	 */
 	zoom : function(tema) {
-	    i3GEO.mapa.ativaTema(tema);
-	    i3GEO.php.zoomtema(i3GEO.atualiza, tema);
+	    console.error("Veja i3GEO.mapa.extentToLayer()");
 	},
 	/**
 	 * Function: zoomsel
@@ -196,8 +161,19 @@ i3GEO.tema =
 	 * {string} - codigo do tema
 	 */
 	zoomsel : function(tema) {
-	    i3GEO.mapa.ativaTema(tema);
-	    i3GEO.php.zoomsel(i3GEO.atualiza, tema);
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    tema: tema,
+		    funcao: "zoomsel"
+		},
+		prog: "/serverapi/layer/",
+		fn: function(data){
+		    i3GEO.Interface.openlayers.zoom2ext(data);
+		}
+	    });
 	},
 	/**
 	 * Function: limpasel
@@ -209,40 +185,21 @@ i3GEO.tema =
 	 * {string} - ID (name) do tema clicado
 	 */
 	limpasel : function(tema) {
-	    i3GEO.mapa.ativaTema(tema);
-	    i3GEO.php.limpasel(function(retorno) {
-		i3GEO.atualiza(retorno);
-		i3GEO.Interface.atualizaTema(retorno, tema);
-	    }, tema);
-	},
-	/**
-	 * Function: mudatransp
-	 *
-	 * Muda a transparencia de um tema
-	 *
-	 * Parametros:
-	 *
-	 * {string} - codigo do tema
-	 *
-	 * {numeric} - valor da transparencia
-	 */
-	mudatransp : function(idtema, valor) {
-	    i3GEO.mapa.ativaTema(idtema);
-	    // o campo input com o valor possui o prefixo 'tr' seguido pelo codigo do tema
-	    if (!valor) {
-		if ($i("tr" + idtema)) {
-		    valor = $i("tr" + idtema).value;
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    tema: tema,
+		    funcao: "limpasel"
+		},
+		prog: "/serverapi/layer/",
+		fn: function(data){
+		    i3GEO.Interface.atualizaTema("", tema);
 		}
-	    }
-	    if (valor !== "") {
-		i3GEO.php.mudatransp(function(retorno) {
-		    i3GEO.atualiza(retorno);
-		    i3GEO.Interface.atualizaTema(retorno, idtema);
-		}, idtema, valor);
-	    } else {
-		i3GEO.janela.tempoMsg($trad("x16"));
-	    }
+	    });
 	},
+
 	/**
 	 * Function: invertestatuslegenda
 	 *
@@ -252,13 +209,21 @@ i3GEO.tema =
 	 *
 	 * {string} - codigo do tema
 	 */
-	invertestatuslegenda : function(idtema) {
-	    //i3GEO.janela.tempoMsg($trad("x17"));
-	    i3GEO.mapa.ativaTema(idtema);
-	    i3GEO.php.invertestatuslegenda(function(retorno) {
-		i3GEO.atualiza(retorno);
-		i3GEO.arvoreDeCamadas.atualiza();
-	    }, idtema);
+	invertestatuslegenda : function(tema) {
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    tema: tema,
+		    funcao: "invertestatuslegenda"
+		},
+		prog: "/serverapi/layer/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		    i3GEO.arvoreDeCamadas.atualiza();
+		}
+	    });
 	},
 	/**
 	 * Function: alteracorclasse
@@ -273,27 +238,35 @@ i3GEO.tema =
 	 *
 	 * {string} - nova cor (r,g,b)
 	 */
-	alteracorclasse : function(idtema, idclasse, rgb, objImg) {
+	alteracorclasse : function(after,tema, idclasse, rgb, objImg) {
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.tema.alteracorclasse()");
 
-	    var w = 25, h = 25, temp;
-	    if(objImg && objImg.style && objImg.style.width){
-		w = parseInt(objImg.style.width,10);
-		h = parseInt(objImg.style.height,10);
-	    }
-
-	    i3GEO.mapa.ativaTema(idtema);
-	    temp = function(retorno) {
-		if(objImg){
-		    objImg.src = retorno.data;
-		} else {
-		    i3GEO.legenda.CAMADAS = "";
-		    i3GEO.atualiza();
+	    i3GEO.request.get({
+		snackbar: false,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    tema: tema,
+		    idclasse: idclasse,
+		    cor: rgb,
+		    funcao: "alteracor"
+		},
+		prog: "/serverapi/class/",
+		fn: function(data){
+		    if (after){
+			after.call(after, data);
+		    } else {
+			if(objImg){
+			    objImg.src = data;
+			} else {
+			    i3GEO.legenda.CAMADAS = "";
+			    i3GEO.mapa.refresh();
+			}
+			i3GEO.Interface.atualizaTema("", idtema);
+		    }
 		}
-		i3GEO.Interface.atualizaTema("", idtema);
-	    };
-	    i3GEO.php.aplicaCorClasseTema(temp, idtema, idclasse, rgb, w, h);
+	    });
 	},
 	/**
 	 * Function: mudanome
@@ -308,12 +281,13 @@ i3GEO.tema =
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.tema.mudanome() " + valor);
 
-	    i3GEO.mapa.ativaTema(idtema);
-	    if (!valor) {
-		return;
-	    }
 	    if (valor !== "") {
-		i3GEO.php.mudanome(i3GEO.atualiza, idtema, valor);
+		var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
+		    "funcao=mudanome&tema=" + idtema + "&valor=" + valor + "&g_sid=" + i3GEO.configura.sid, retorno = function(retorno) {
+		    i3GEO.mapa.refresh();
+		};
+		cpJSON.call(p, "mudanome", retorno, par);
+
 	    } else {
 		i3GEO.janela.tempoMsg($trad("x18"));
 	    }
@@ -328,18 +302,19 @@ i3GEO.tema =
 	 * {string} - codigo do tema
 	 */
 	copia : function(idtema) {
-	    i3GEO.php.copiatema(i3GEO.atualiza, idtema);
-	},
-	/**
-	 * Liga ou desliga o contorno das classes
-	 */
-	contorno: function(idtema) {
-	    var temp = function(){
-		i3GEO.atualiza();
-		i3GEO.Interface.atualizaTema("", idtema);
-		i3GEO.arvoreDeCamadas.atualizaLegenda(idtema);
-	    };
-	    i3GEO.php.contorno(temp, idtema);
+	    i3GEO.request.get({
+		snackbar: true,
+		snackbarmsg: false,
+		btn: false,
+		par: {
+		    tema: idtema,
+		    funcao: "copia"
+		},
+		prog: "/serverapi/layer/",
+		fn: function(data){
+		    i3GEO.mapa.refresh();
+		}
+	    });
 	},
 	cortina : {
 	    _cortinaCompose: "",

@@ -59,7 +59,7 @@ i3GEO.catalogoRegioes = {
 		} else {
 			var layer = i3GEO.catalogoRegioes.DADOS.layers[tid][1];
 
-			i3GEO.php.adicionaTemaWMS(
+			i3GEO.mapa.adicionaTemaWMS(
 					'',
 					layer.url,
 					layer.layers,
@@ -71,8 +71,6 @@ i3GEO.catalogoRegioes = {
 					'',
 					'nao',
 					"text/plain",
-					'',
-					'',
 					true
 			);
 		}
@@ -139,7 +137,7 @@ i3GEO.catalogoRegioes = {
 			+ "&g_sid="
 			+ i3GEO.configura.sid;
 		var funcao = function() {
-			i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		};
 		cpJSON.call(p, "foo", funcao);
 	}

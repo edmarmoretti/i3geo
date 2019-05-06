@@ -127,7 +127,7 @@ i3GEOF.wkt2layer = {
 	    i3f.post({
 		snackbar: false,
 		fn: function(retorno){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		    i3GEO.janela.tempoMsg($trad('fim',i3GEOF.wkt2layer.dicionario));
 		},
 		btn: btn,
@@ -147,7 +147,7 @@ i3GEOF.wkt2layer = {
 	    i3f.post({
 		snackbar: false,
 		fn: function(retorno){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		    i3GEO.janela.tempoMsg($trad('fim',i3GEOF.wkt2layer.dicionario));
 		},
 		btn: btn,
@@ -180,7 +180,7 @@ i3GEOF.wkt2layer = {
 			    i3GEO.janela.snackBar({content: $trad('feito')});
 			}
 			if(refresh){
-			    i3GEO.atualiza();			}
+			    i3GEO.mapa.refresh();			}
 			if(fn){
 			    fn(data);
 			}

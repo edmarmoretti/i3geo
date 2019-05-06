@@ -91,7 +91,7 @@ i3GEO.marcador =
 	exportaShp : function() {
 	    var c = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), temp = function(retorno) {
 		i3GEO.temaAtivo = retorno.data;
-		i3GEO.atualiza();
+		i3GEO.mapa.refresh();
 	    };
 	    if (c) {
 		i3GEO.php.marcadores2shp(temp);

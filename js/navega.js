@@ -295,7 +295,7 @@ i3GEO.navega =
 
 		    i3GEO.Interface.openlayers.pan2ponto(x, y);
 
-		    i3GEO.atualiza(retorno);
+		    i3GEO.mapa.refresh();
 	    };
 	    i3GEO.Interface.openlayers.pan2ponto(x, y);
 	    i3GEO.request.get({
@@ -312,7 +312,7 @@ i3GEO.navega =
 		},
 		prog: "/serverapi/map/",
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		}
 	    });
 
@@ -395,15 +395,7 @@ i3GEO.navega =
 	    if (tipoimagem === "") {
 		tipoimagem = "nenhum";
 	    }
-	    // verifica se nao e necessario alterar as coordenadas
-	    ext = i3GEO.util.extGeo2OSM(ext);
-	    i3GEO.php.mudaext(
-		    function(retorno){
-			i3GEO.atualiza(retorno);
-		    },
-		    tipoimagem,
-		    ext
-	    );
+	    i3GEO.Interface.zoom2ext(ext);
 	},
 	/**
 	 * Function: aplicaEscala
@@ -421,13 +413,7 @@ i3GEO.navega =
 	 * {Numeric} - denominador da escala
 	 */
 	aplicaEscala : function(escala) {
-	    if (i3GEO.Interface.ATUAL === "googlemaps") {
-		i3GeoMap.setZoom(i3GEO.Interface.googlemaps.escala2nzoom(escala));
-	    }
-	    if (i3GEO.Interface.ATUAL === "openlayers") {
-		i3geoOL.zoomToScale(escala, true);
-		i3GEO.parametros.mapscale = parseInt(i3geoOL.getScale(),10);
-	    }
+	    i3geoOL.zoomToScale(escala, true);
 	},
 	atualizaEscalaNumerica : function(escala) {
 	    var e = $i("i3GEOescalanum");
@@ -437,12 +423,7 @@ i3GEO.navega =
 	    if (arguments.length === 1) {
 		e.value = $.number(escala,0,$trad("dec"),$trad("mil"));
 	    } else {
-		if (i3GEO.Interface.ATUAL === "googlemaps") {
-		    e.value = parseInt(i3GEO.parametros.mapscale, 10);
-		}
-		if (i3GEO.Interface.ATUAL === "openlayers") {
-		    e.value = $.number(i3geoOL.getScale(),0,$trad("dec"),$trad("mil"));
-		}
+		e.value = $.number(i3geoOL.getScale(),0,$trad("dec"),$trad("mil"));
 	    }
 	},
 	panFixo : function() {

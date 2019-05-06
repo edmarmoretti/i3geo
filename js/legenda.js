@@ -203,25 +203,8 @@ i3GEO.legenda =
 	    }
 	    i3GEO.mapa.dialogo.html2canvas(obj);
 	},
-	/**
-	 * Liga ou desliga um unico tema. Utilizado pela legenda HTML, permitindo que um tema seja processado diretamente na legenda.
-	 *
-	 * Parametro:
-	 *
-	 * inputbox {object) - objeto do tipo input checkbox com a propriedade value indicando o codigo do tema que sera processado
-	 */
 	ativaDesativaTema : function(inputbox) {
-	    var temp = function() {
-		// i3GEO.contadorAtualiza++;
-		i3GEO.php.corpo(i3GEO.atualiza, i3GEO.configura.tipoimagem);
-		i3GEO.arvoreDeCamadas.atualiza("");
-		i3GEO.janela.fechaAguarde("redesenha");
-	    };
-	    if (!inputbox.checked) {
-		i3GEO.arvoreDeCamadas.ligatemas(temp, inputbox.value, "");
-	    } else {
-		i3GEO.arvoreDeCamadas.ligatemas(temp, "", inputbox.value);
-	    }
+	    console.error("Removido na versao 8");
 	},
 	/**
 	 * Liga ou desliga uma classe da legenda.
@@ -280,7 +263,7 @@ i3GEO.legenda =
 		novoel.type = "hidden";
 		novoel.onchange = function() {
 		    var obj = $("#tempinputcorclasse");
-		    i3GEO.tema.alteracorclasse(obj.attr("tema"), obj.attr("idclasse"), obj.val(),i3GEO.legenda.objImg);
+		    i3GEO.tema.alteracorclasse(false,obj.attr("tema"), obj.attr("idclasse"), obj.val(),i3GEO.legenda.objImg);
 		};
 		document.body.appendChild(novoel);
 	    }

@@ -279,10 +279,7 @@ if (! isset($locaplic)) {
 // substitui a string de conex&atilde;o
 //
 if ($funcao != "recuperamapa" && $funcao != "TEMA2SLD") {
-    //if (! substituiCon($map_file, $postgis_mapa)) {
-    //    cpjson("erro", $cp);
-    //    return;
-    //}
+
 }
 
 //
@@ -581,108 +578,6 @@ switch (strtoupper($funcao)) {
         $retorno = $m->redesenhaEntorno();
         break;
     /*
-     * Valor: ADICIONATEMASHP
-     *
-     * Adiciona um tema baseado em um arquivo shape file.
-     *
-     * <Mapa->adicionaTemaSHP>
-     */
-    case "ADICIONATEMASHP":
-        if (! empty($navegadoresLocais)) {
-            // verifica se est&aacute; cadastrado
-            $ipcliente = pegaIPcliente();
-            $retorno = array();
-            $ips = array();
-            // pega os nomes de cada ip
-            include ("../ms_configura.php");
-            foreach ($navegadoresLocais["ips"] as $n) {
-                $ips[] = gethostbyname($n);
-                $ips[] = $n;
-            }
-            if (in_array($ipcliente, $ips)) {
-                $drives = $navegadoresLocais["drives"];
-                // pega o caminho
-                // nome
-                $split = explode("/", $_pg["arq"]);
-                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
-                    $retorno = array();
-                } else {
-
-                    include_once ("classe_mapa.php");
-                    copiaSeguranca($map_file);
-                    $m = new Mapa($map_file);
-                    $path = $split[0];
-                    $split[0] = "";
-                    $shp = implode("/", $split);
-                    $shp = explode(".", $shp);
-                    $shp = $shp[0] . ".shp";
-                    $path = $drives[$path] . $shp;
-
-                    $retorno = $m->adicionaTemaSHP($path);
-                    if ($retorno != "erro") {
-                        $m->salva();
-                        $_SESSION["contadorsalva"] ++;
-                        redesenhaMapa();
-                    } else {
-                        $retorno = "erro.Nenhum dado espacializado foi encontrado.";
-                    }
-                }
-            } else {
-                $retorno = array();
-            }
-        }
-        break;
-    /*
-     * Valor: ADICIONATEMAIMG
-     *
-     * Adiciona um tema baseado em um arquivo de imagem.
-     *
-     * <Mapa->adicionaTemaIMG>
-     */
-    case "ADICIONATEMAIMG":
-        if (! empty($navegadoresLocais)) {
-            // verifica se est&aacute; cadastrado
-            $ipcliente = pegaIPcliente();
-            $retorno = array();
-            $ips = array();
-            // pega os nomes de cada ip
-            include ("../ms_configura.php");
-            foreach ($navegadoresLocais["ips"] as $n) {
-                $ips[] = gethostbyname($n);
-                $ips[] = $n;
-            }
-            if (in_array($ipcliente, $ips)) {
-                $drives = $navegadoresLocais["drives"];
-                // pega o caminho
-                // nome
-                $split = explode("/", $_pg["arq"]);
-                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
-                    $retorno = array();
-                } else {
-
-                    include_once ("classe_mapa.php");
-                    copiaSeguranca($map_file);
-                    $m = new Mapa($map_file);
-                    $path = $split[0];
-                    $split[0] = "";
-                    $shp = implode("/", $split);
-                    $path = $drives[$path] . $shp;
-                    error_log($path);
-                    $retorno = $m->adicionaTemaIMG($path);
-                    if ($retorno != "erro") {
-                        $m->salva();
-                        $_SESSION["contadorsalva"] ++;
-                        redesenhaMapa();
-                    } else {
-                        $retorno = "erro.Nenhum dado espacializado foi encontrado.";
-                    }
-                }
-            } else {
-                $retorno = array();
-            }
-        }
-        break;
-    /*
      * Valor: LISTATEMAS
      *
      * Lista os temas existentes em um mapa.
@@ -812,25 +707,6 @@ switch (strtoupper($funcao)) {
         $m = new Mapa($map_file);
         $temas = $m->excluiTemas($_pg["temas"]);
         $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
-     * Valor: ADICIONATEMAWMS
-     *
-     * Acrescenta um novo tema em um arquivo map file tendo como fonte um WMS.
-     *
-     * <Mapa->adicionatemawms>
-     */
-    case "ADICIONATEMAWMS":
-        include_once ("classe_mapa.php");
-        copiaSeguranca($map_file);
-        $m = new Mapa($map_file);
-        if(!isset($_pg["allitens"])){
-            $_pg["allitens"] = "nao";
-        }
-        $m->adicionatemawms($_pg["tema"], $_pg["servico"], $_pg["nome"], $_pg["proj"], $_pg["formato"], $locaplic, $_pg["tipo"], $_pg["versao"], $_pg["nomecamada"], $dir_tmp, $imgdir, $imgurl, $_pg["tiporep"], $_pg["suportasld"], $_pg["formatosinfo"], $_pg["time"], $_pg["tile"], $_pg["allitens"]);
-
         $_SESSION["contadorsalva"] ++;
         redesenhaMapa();
         break;
@@ -1090,38 +966,7 @@ switch (strtoupper($funcao)) {
         $_SESSION["contadorsalva"] ++;
         redesenhaMapa();
         break;
-    /*
-     * Valor: SOBETEMA
-     *
-     * Sobe um tema na ordem de desenho.
-     *
-     * <Temas->sobeTema>
-     */
-    case "SOBETEMA":
-        include_once ("classe_temas.php");
-        copiaSeguranca($map_file);
-        $m = new Temas($map_file, $_pg["tema"]);
-        $m->sobeTema();
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
-     * Valor: DESCETEMA
-     *
-     * Desce um tema na ordem de desenho.
-     *
-     * <Temas->desceTema>
-     */
-    case "DESCETEMA":
-        include_once ("classe_temas.php");
-        copiaSeguranca($map_file);
-        $m = new Temas($map_file, $_pg["tema"]);
-        $m->desceTema();
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
+
     /*
      * Valor: FONTETEMA
      *
@@ -1135,38 +980,6 @@ switch (strtoupper($funcao)) {
         $retorno = $m->fonteTema($_pg["tema"]);
         break;
     /*
-     * Valor: ZOOMTEMA
-     *
-     * Muda a extens&atilde;o geogr&aacute;fica do mapa de acordo com a abrang&ecirc;ncia de um tema.
-     *
-     * <Temas->zoomTema>
-     */
-    case "ZOOMTEMA":
-        include_once ("classe_temas.php");
-        copiaSeguranca($map_file);
-        $m = new Temas($map_file, $_pg["tema"]);
-        $m->zoomTema();
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
-     * Valor: ZOOMSEL
-     *
-     * Muda a extens&atilde;o geogr&aacute;fica do mapa de acordo com a abrang&ecirc;ncia dos elementos selecionados de um tema.
-     *
-     * <Temas->zoomSel>
-     */
-    case "ZOOMSEL":
-        include_once ("classe_temas.php");
-        copiaSeguranca($map_file);
-        $m = new Temas($map_file, $_pg["tema"]);
-        $m->zoomSel();
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
      * Valor: APLICAPROCESSOS
      *
      * Aplica processos em um tema do tipo imagem
@@ -1178,54 +991,6 @@ switch (strtoupper($funcao)) {
         copiaSeguranca($map_file);
         $m = new Temas($map_file, $_pg["tema"]);
         $m->aplicaProcessos($_pg["lista"]);
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
-     * Valor: INVERTESTATUSLEGENDA
-     *
-     * Inverte o metadata CLASSE
-     *
-     * <Temas->inverteStatusLegenda>
-     */
-    case "INVERTESTATUSLEGENDA":
-        include_once ("classe_temas.php");
-        copiaSeguranca($map_file);
-        $m = new Temas($map_file, $_pg["tema"]);
-        $m->inverteStatusLegenda();
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
-     * Valor: MUDATRANSP
-     *
-     * Altera a transpar&ecirc;ncia de um tema
-     *
-     * <Temas->mudaTransparencia>
-     */
-    case "MUDATRANSP":
-        include_once ("classe_temas.php");
-        copiaSeguranca($map_file);
-        $m = new Temas($map_file, $_pg["tema"]);
-        $m->mudaTransparencia($_pg["valor"]);
-        $m->salva();
-        $_SESSION["contadorsalva"] ++;
-        redesenhaMapa();
-        break;
-    /*
-     * Valor: COPIATEMA
-     *
-     * Cria uma copia de um tema
-     *
-     * <Temas->copia>
-     */
-    case "COPIATEMA":
-        include_once ("classe_temas.php");
-        copiaSeguranca($map_file);
-        $m = new Temas($map_file, $_pg["tema"]);
-        $m->copiaTema();
         $m->salva();
         $_SESSION["contadorsalva"] ++;
         redesenhaMapa();
@@ -1292,13 +1057,6 @@ switch (strtoupper($funcao)) {
         }
         if ($opcao == "desceclasse") {
             $retorno = $m->desceclasse($idclasse);
-        }
-        if ($opcao == "alteracor") {
-            if(!isset($_pg["w"])){
-                $_pg["w"] = 35;
-                $_pg["h"] = 25;
-            }
-            $retorno = $m->alteracor($idclasse, $_pg["cor"],$_pg["w"],$_pg["h"]);
         }
         if ($opcao == "adicionaopacidade") {
             $retorno = $m->adicionaopacidade();
@@ -1642,21 +1400,6 @@ switch (strtoupper($funcao)) {
         $retorno = $m->procurartemas2($procurar);
         break;
     /*
-     * Valor: PROCURARTEMASESTRELA
-     *
-     * Procura um tema com um certo n&uacute;mero de estrelas.
-     *
-     * <Menutemas->procurartemasestrela>
-     */
-    case "PROCURARTEMASESTRELA":
-        include_once ("classe_menutemas.php");
-        $editores = $_pg["editores"];
-        $perfil = $_pg["perfil"];
-        $idioma = $_pg["idioma"];
-        $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $idioma);
-        $retorno = $m->procurartemasestrela($_pg["nivel"], $_pg["fatorestrela"]);
-        break;
-    /*
      * Valor: PEGAMAPAS
      *
      * Pega a lista de links para outros mapas.
@@ -1841,43 +1584,6 @@ switch (strtoupper($funcao)) {
         }
         $m = new Atributos($map_file, $_pg["tema"], "", $_pg["ext"]);
         $retorno = $m->buscaRegistros($_pg["palavra"], $_pg["lista"], $_pg["tipo"], $_pg["onde"]);
-        break;
-    /*
-     * Valor: IDENTIFICA
-     *
-     *
-     * Identifica elementos no mapa.
-     *
-     * <Atributos->identifica>
-     */
-    case "IDENTIFICA":
-        $tema = "";
-        if(isset($_pg["tema"])){
-            $tema = $_pg["tema"];
-        }
-        $opcao = $_pg["opcao"];
-        $xy = $_pg["xy"];
-        $resolucao = $_pg["resolucao"];
-        $ext = $_pg["ext"];
-        $opcao = $_pg["opcao"];
-        $listaDeTemas = $_pg["listaDeTemas"];
-        $wkt = $_pg["wkt"];
-
-        if (! isset($tema)) {
-            $tema = "";
-        }
-        if (! isset($resolucao)) {
-            $resolucao = 5;
-        }
-        include_once ("classe_atributos.php");
-        if (! isset($ext)) {
-            $ext = "";
-        }
-        if (! isset($wkt)) {
-            $wkt = "nao";
-        }
-        $m = new Atributos($map_file, $tema, "", $ext);
-        $retorno = $m->identifica($opcao, $xy, $resolucao, $ext, $listaDeTemas, $wkt);
         break;
     /*
      * Valor: IDENTIFICAUNICO
@@ -2277,26 +1983,6 @@ switch (strtoupper($funcao)) {
         include_once ("classe_escala.php");
         $m = new Escala($map_file);
         $retorno = $m->retornaBarraEscala();
-        break;
-    /*
-     * Section: Sele&ccedil;&atilde;o
-     *
-     * Seleciona elementos do mapa ou processa a sele&ccedil;&atilde;o existente.
-     *
-     * <classe_selecao.php>
-     */
-    /*
-     * Valor: SELECAOATRIB
-     *
-     * Seleciona elementos com base nos atributos.
-     *
-     * <Selecao->selecaoAtributos>
-     */
-    case "LIMPASEL":
-        include_once ("classe_selecao.php");
-        $m = new Selecao($map_file, $_pg["tema"]);
-        $retorno = $m->selecaoLimpa();
-        redesenhaMapa();
         break;
     case "SELECAOATRIB":
         include_once ("classe_selecao.php");

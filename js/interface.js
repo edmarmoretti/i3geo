@@ -220,7 +220,7 @@ i3GEO.Interface =
 	    //
 	    // inicializa&ccedil;&atilde;o que afeta todas as interfaces
 	    //
-	    var temp = window.location.href.split("?")[0], gadgets = i3GEO.gadgets;
+	    var temp = window.location.href.split("?")[0];
 	    if ($i("i3GEOcompartilhar")) {
 		i3GEO.social.compartilhar("i3GEOcompartilhar", temp, temp, "semtotal");
 	    }
@@ -231,7 +231,7 @@ i3GEO.Interface =
 	    if ($i("mst")) {
 		$i("mst").style.display = "block";
 	    }
-	    i3GEO.util.defineValor("i3geo_escalanum", "value", i3GEO.parametros.mapscale);
+	    i3GEO.util.defineValor("i3geo_escalanum", "value", i3geoOL.getScale());
 	    if ((i3GEO.parametros.geoip === "nao") && ($i("ondeestou"))) {
 		$i("ondeestou").style.display = "none";
 	    }
@@ -2068,7 +2068,6 @@ i3GEO.Interface =
 		    //
 		    // n&atilde;o se atualiza um tema &uacute;nico, mas o mapa todo
 		    //
-		    // i3GEO.atualiza(retorno);
 		    var indice = i3GEO.Interface.googlemaps.retornaIndiceLayer(tema), objtemas;
 		    i3GeoMap.overlayMapTypes.removeAt(indice);
 		    i3GEO.Interface.googlemaps.posfixo += 1;
@@ -2511,27 +2510,6 @@ i3GEO.Interface =
 		    i3GEO.Interface.googlemaps.redesenha();
 		},
 		recalcPar : function() {
-		    i3GEOtouchesPosMapa = "";
-		    try {
-			var sw, ne, escalaAtual = i3GEO.parametros.mapscale;
-			sw = i3GeoMap.getBounds().getSouthWest();
-			ne = i3GeoMap.getBounds().getNorthEast();
-			i3GEO.parametros.mapexten = sw.lng() + " " + sw.lat() + " " + ne.lng() + " " + ne.lat();
-			i3GEO.parametros.mapscale = i3GEO.Interface.googlemaps.calcescala();
-			sw = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(0, 1));
-			ne = i3GeoMapOverlay.getProjection().fromContainerPixelToLatLng(new google.maps.Point(1, 0));
-			i3GEO.parametros.pixelsize = sw.lng() - ne.lng();
-			if (i3GEO.parametros.pixelsize < 0) {
-			    i3GEO.parametros.pixelsize = i3GEO.parametros.pixelsize * -1;
-			}
-
-			if (i3GEO.parametros.mapscale !== escalaAtual && escalaAtual !== 0) {
-			    i3GEO.arvoreDeCamadas.atualizaFarol(i3GEO.parametros.mapscale);
-			}
-		    } catch (e) {
-			i3GEO.parametros.mapexten = "0 0 0 0";
-			i3GEO.parametros.mapscale = 0;
-		    }
 		},
 		calcescala : function() {
 		    var zoom = i3GeoMap.getZoom();
@@ -2570,8 +2548,7 @@ i3GEO.Interface =
 		 *
 		 * {Boolean} - define se o mapa ser&aacute; deslocado para encaixar o KML
 		 *
-		 * {String} - URL do arquivo KML. Se n&atilde;o for definido, a URL ser&aacute; obtida do INPUT com id = i3geo_urlkml (veja
-		 * i3GEO.gadgets.mostraInserirKml)
+		 * {String} - URL do arquivo KML.
 		 *
 		 * {string} - titulo que aparecer&aacute; na &aacute;rvore. Se n&atilde;o for definido, ser&aacute; calculado aleatoriamente.
 		 *
@@ -2606,15 +2583,7 @@ i3GEO.Interface =
 		    i3GEO.Interface.googlemaps.adicionaNoArvoreGoogle(url, titulo, ativo, ngeoxml);
 		},
 		adicionaListaKml : function() {
-		    var monta = function(retorno) {
-			var raiz, nraiz, i;
-			raiz = retorno.data.canais;
-			nraiz = raiz.length;
-			for (i = 0; i < nraiz; i++) {
-			    i3GEO.Interface.googlemaps.adicionaKml(false, raiz[i].link, raiz[i].title, false);
-			}
-		    };
-		    i3GEO.php.listaRSSwsARRAY(monta, "KML");
+		    console.error("Removido na versao 8");
 		},
 		/**
 		 * Acrescenta na &aacute;rvore de camadas um novo tema no n&oacute; que mostra os arquivos KML inseridos no mapa

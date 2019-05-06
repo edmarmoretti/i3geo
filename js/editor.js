@@ -747,7 +747,7 @@ i3GEO.editor =
 		draw.on("drawend", function(evt) {
 		    var texto = window.prompt("Texto", "");
 		    evt.feature.setStyle(
-			    i3GEO.editor.getTextStyle()
+			    i3GEO.editor.getTextStyle(texto)
 		    );
 		    i3GEO.editor.setStyleDefault(evt.feature);
 		    evt.feature.setId(i3GEO.util.uid() + "_text");
@@ -1511,7 +1511,7 @@ i3GEO.editor =
 		image: simbolo
 	    });
 	},
-	getTextStyle: function(){
+	getTextStyle: function(texto){
 	    return new ol.style.Style({
 		text: new ol.style.Text({
 		    text: texto,

@@ -252,7 +252,7 @@ function abrePrancha(id)
 		i3GEO.arvoreDeCamadas.CAMADAS = [];
 		if(retorno.data.mapexten != "")
 		{i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,"nenhum",retorno.data.mapexten);}
-		i3GEO.atualiza();
+		i3GEO.mapa.refresh();
 	};
 	var p = i3GEO.configura.locaplic+"/classesphp/atlas_controle.php?g_sid="+i3GEO.configura.sid+"&funcao=abrePrancha&pranchaId="+id;
 	cpObjAtlas.call(p,"abrePrancha",monta);

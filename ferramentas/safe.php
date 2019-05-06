@@ -62,21 +62,9 @@ if(isset($logExec) && $logExec["ferramentas"] == true){
 	i3GeoLog("prog: ferramentas url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
 }
 
-//
-//substitui a string de conex&atilde;o
-//
-/*
-if(!substituiCon($map_file,$postgis_mapa)){
-	unlink($map_file);
-	cpjson("erro",$cp);
-	return;
-}
-*/
-//
 function redesenhaMapa()
 {
 	global $map_file,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
-	//substituiCon($map_file,$postgis_mapa);
 	if($tipoimagem != "nenhum" && $tipoimagem != "")
 	{$utilizacgi = "nao";}
 	if (connection_aborted()){exit();}

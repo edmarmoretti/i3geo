@@ -73,7 +73,7 @@ i3GEOF.conectargeorss = {
 			if(data.errorMsg != ""){
 			    i3GEO.janela.snackBar({content: data.errorMsg, style:'red'});
 			} else {
-			    i3GEO.atualiza();
+			    i3GEO.mapa.refresh();
 			    i3GEO.janela.snackBar({content: $trad("concluido",i3f.dicionario)});
 			}
 			i3f.destroy();

@@ -158,7 +158,7 @@ i3GEOF.mostraregiao = {
 		i3GEOF.mostraregiao.aguarde.visibility = "visible";
 		var temp = function(retorno){
 			i3GEOF.mostraregiao.aguarde.visibility = "hidden";
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 
 		};
 		if(nomes.checked == true){

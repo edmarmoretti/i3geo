@@ -308,12 +308,11 @@ i3GEOF.cartograma = {
 	    temp = function(retorno){
 		if(i3GEO.arvoreDeCamadas.pegaTema(retorno.layer) == ""){
 		    var atualiza = function(){
-			i3GEO.atualiza();
 			if(botao){
 			    $(botao).removeAttr('disabled');
 			}
 		    };
-		    i3GEO.php.adtema(atualiza,retorno.mapfile);
+		    i3GEO.mapa.adtema(atualiza,retorno.mapfile);
 		}
 	    };
 	    if(v != true){

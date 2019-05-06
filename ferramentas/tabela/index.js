@@ -419,11 +419,8 @@ i3GEOF.tabela =
 	    p.parentNode.removeChild(p);
 	},
 	zoomExt : function(ext, idjanela) {
-	    var funcao = function() {
-		i3GEOF.tabela.pegaRegistros();
-		i3GEO.atualiza();
-	    };
-	    i3GEO.php.mudaext(funcao, "nenhum", ext);
+	    i3GEO.Interface.zoom2ext(ext);
+	    i3GEOF.tabela.pegaRegistros();
 	},
 	registraLinha : function(linha) {
 	    i3GEOF.tabela._parameters.registros[linha.name] = linha.checked;
@@ -500,7 +497,7 @@ i3GEOF.tabela =
 			i3GEO.janela._formModal.unblock();
 			i3GEO.janela.fechaAguarde();
 			btn.prop("disabled",false).find("span").addClass("hidden");
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 		    }
 	    )
 	    .fail(

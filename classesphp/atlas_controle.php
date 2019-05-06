@@ -112,7 +112,7 @@ if ($map_file != ""){
 	//
 	//substitui a string de conex&atilde;o
 	//
-	substituiCon($map_file,$postgis_mapa);
+	substituiConObj($map_file,$postgis_mapa);
 }
 
 

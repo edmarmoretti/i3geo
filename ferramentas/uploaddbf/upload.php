@@ -195,7 +195,7 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 			{$novolayer->setProjection("init=epsg:".$uploaddbfEPSG);}
 			$salvo = $mapa->save($map_file);
 			echo "<b>Tema criado!!!";
-			echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza();window.parent.i3GEOF.uploaddbf.doneok();</script>";
+			echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.mapa.refresh();window.parent.i3GEOF.uploaddbf.doneok();</script>";
 		}
 	}
 	else

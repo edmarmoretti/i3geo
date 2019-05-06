@@ -70,7 +70,7 @@ i3GEO.catalogoMenus = {
 		    i3GEO.janela.tempoMsg($trad("x76"));
 		}
 	    } else {
-		i3GEO.php.adtema(i3GEO.atualiza, tid);
+		i3GEO.mapa.adtema(false, tid);
 	    }
 	},
 	listaMenus: function(config){

@@ -283,7 +283,7 @@ i3GEOF.animagif = {
 			}
 			if(refresh){
 			    i3GEO.arvoreDeCamadas.CAMADAS = [];
-			    i3GEO.atualiza();
+			    i3GEO.mapa.refresh();
 			    i3GEO.Interface.atualizaTema("", i3GEOF.animagif._parameters.tema);
 			}
 			if(fn){

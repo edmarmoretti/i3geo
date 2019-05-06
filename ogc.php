@@ -445,9 +445,6 @@ if(empty($ogcwsmap)){
 	$ogcwsmap = $_GET["ogcwsmap"];
 }
 if(file_exists($nomeMapfileTmp) && $tipo == ""){
-	//substituiCon($nomeMapfileTmp,$postgis_mapa);
-	//$oMap = ms_newMapobj($nomeMapfileTmp);
-	//restauraCon($nomeMapfileTmp,$postgis_mapa);
 	$oMap = ms_newMapobj($nomeMapfileTmp);
 	substituiConObj($oMap,$postgis_mapa);
 }

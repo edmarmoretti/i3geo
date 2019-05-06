@@ -169,7 +169,7 @@ i3GEOF.inseregrafico = {
 	    .done(
 		    function(data, status){
 			i3GEO.janela.fechaAguarde();
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 		    }
 	    )
 	    .fail(

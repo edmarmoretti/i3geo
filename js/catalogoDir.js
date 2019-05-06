@@ -191,6 +191,11 @@ i3GEO.catalogoDir = {
 	    });
 	},
 	adiciona: function(path){
-		i3GEO.util.adicionaSHP(path);
+	    var temp = path.split(".");
+	    if ((temp[1] === "SHP") || (temp[1] === "shp")) {
+		i3GEO.mapa.adicionaTemaSHP(false, path);
+	    } else {
+		i3GEO.mapa.adicionaTemaIMG(false, path);
+	    }
 	}
 };

@@ -160,7 +160,7 @@ i3GEOF.pontosdistri = {
 	    i3f.get({
 		snackbar: false,
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: btn,
 		par: par
@@ -177,7 +177,7 @@ i3GEOF.pontosdistri = {
 	    i3f.get({
 		snackbar: false,
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: btn,
 		par: par
@@ -194,7 +194,7 @@ i3GEOF.pontosdistri = {
 	    i3f.get({
 		snackbar: false,
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: btn,
 		par: par
@@ -211,7 +211,7 @@ i3GEOF.pontosdistri = {
 	    i3f.get({
 		snackbar: false,
 		fn: function(data){
-		    i3GEO.atualiza();
+		    i3GEO.mapa.refresh();
 		},
 		btn: btn,
 		par: par

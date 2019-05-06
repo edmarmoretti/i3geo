@@ -193,6 +193,6 @@ i3GEOF.saiku =
 				+ "&locaplic=" + i3GEO.configura.locaplic + "&mapext=" + mapext);
 		},
 		atualizaMapa : function() {
-			i3GEO.atualiza();
+			i3GEO.mapa.refresh();
 		}
 	};

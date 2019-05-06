@@ -217,7 +217,7 @@ i3GEOF.selecao =
 		    funcao: "selecaocriatema"
 	    };
 	    var temp = function(){
-		i3GEO.atualiza();
+		i3GEO.mapa.refresh();
 	    };
 	    i3GEOF.selecao.get({
 		snackbar: true,

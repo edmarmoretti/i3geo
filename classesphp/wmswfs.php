@@ -54,10 +54,11 @@
 
 function gravaCacheWMS($servico) {
 	global $dir_tmp, $i3geo_proxy_server;
+
 	if ($dir_tmp == "" || $i3geo_proxy_server == "") {
 		include (dirname ( __FILE__ ) . "/../ms_configura.php");
 	}
-	// error_reporting(0);
+	error_reporting(0);
 	try {
 		$teste = explode ( "=", $servico );
 		if (count ( $teste ) > 1) {
@@ -74,8 +75,9 @@ function gravaCacheWMS($servico) {
 			$wms_service_request .= "&VERSION=1.1.1";
 		}
 		$nome = $dir_tmp . "/wms" . md5 ( $servico ) . ".xml";
+
 		if (! file_exists ( $nome )) {
-			$curl = curl_init ();
+		    $curl = curl_init ();
 			curl_setopt ( $curl, CURLOPT_URL, $wms_service_request );
 			curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 );
 			curl_setopt ( $curl, CURLOPT_HEADER, 0 );
@@ -504,6 +506,7 @@ function listaLayersWMS() {
 	if (! isset ( $nomelayer )) {
 		$nomelayer = "undefined";
 	}
+
 	// para o caso do sistema de metadados estatisticos
 	$wms_service_request = gravaCacheWMS ( $servico );
 	if ($tipo_ws != "WMSMETAESTAT" && $nivel < 2) {
@@ -512,10 +515,10 @@ function listaLayersWMS() {
 			return;
 		}
 	}
+
 	$handle = fopen ( $wms_service_request, "r" );
 	$wms_capabilities = fread ( $handle, filesize ( $wms_service_request ) );
 	fclose ( $handle );
-
 	$dom = new DomDocument ();
 	$dom->loadXML ( $wms_capabilities );
 	$xpath = new DOMXPath ( $dom );
@@ -528,7 +531,7 @@ function listaLayersWMS() {
 		$layersanteriores = $xpath->query ( $q );
 		foreach ( $layersanteriores as $layeranterior ) {
 			$r1 = pegaTag ( $layeranterior );
-			// echo "<pre>";var_dump($layeranterior);
+			//echo "<pre>";var_dump($layeranterior);
 			if ($r1 ["nome"] == $nomelayer || $r1 ["titulo"] == $nomelayer) {
 				$layers = $xpath->query ( 'Layer', $layeranterior );
 				foreach ( $layers as $layer ) {
@@ -591,7 +594,6 @@ function listaLayersWMS() {
 			}
 		}
 	}
-	// exit;
 	return ($res);
 }
 function imprimeEstilos($es, $suporta, $retorna, $tval, $tituloalternativo) {

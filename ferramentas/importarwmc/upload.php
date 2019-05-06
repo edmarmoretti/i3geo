@@ -81,7 +81,7 @@ function incluiWMC(){
 	echo "Arquivo carregado com sucesso!";
 }
 function paraAguarde(){
-	echo "<script>window.parent.i3GEO.atualiza();window.parent.i3GEOF.importarwmc.doneok()</script>";
+	echo "<script>window.parent.i3GEO.mapa.refresh();window.parent.i3GEOF.importarwmc.doneok()</script>";
 }
 function verificaNome($nome)
 {

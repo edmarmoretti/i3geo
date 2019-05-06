@@ -161,7 +161,7 @@ if (isset($_FILES['i3GEOcarregamapafilemap']['name']) && strlen(basename($_FILES
 		$map->save($map_file);
 		validaAcessoTemas($map_file);
 		echo "<p class='paragrafo' >Ok. redesenhando.";
-		echo "<script>window.parent.i3GEO.atualiza();</script>";
+		echo "<script>window.parent.i3GEO.mapa.refresh();</script>";
 		$e = $mapt->extent;
 		$ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
 		echo "<script>window.parent.i3GEO.navega.zoomExt('','','','".$ext."');</script>";

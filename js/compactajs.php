@@ -184,6 +184,7 @@ $jsfiles = array(
 "compactados/material.js",
 "compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
+//"ini_i3geo.js",
 "compactados/request_compacto.js",
 "compactados/mustache.js",
 "compactados/util_compacto.js",

@@ -477,12 +477,13 @@ Calcula a extens&atilde;o geogr&aacute;fica de um tema e ajusta o mapa para essa
 		else{
 			$ret = explode(" ",$ret);
 			$extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
-			//echo "oi";exit;
 		}
 		if($this->mapa->getmetadata("interface") == "googlemaps"){
 			$this->mapa->setProjection($projO);
 		}
-		return("ok");
+		$e = $this->mapa->extent;
+		$ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
+		return($ext);
 	}
 	/*
 	 function: pegaFuncoesJs
@@ -699,7 +700,7 @@ Muda o metadata CLASSE, invertendo seu valor
 */
 	function inverteStatusLegenda()
 	{
-				//error_reporting(0);
+		//error_reporting(0);
 		$valor = $this->layer->getmetadata("classe");
 		if($valor == "" || strtolower($valor) == "sim")
 		{$valor = "NAO";}
@@ -1258,9 +1259,11 @@ Calcula a extens&atilde;o geogr&aacute;fica dos elementos selecionados de um tem
 			$ret->project($projInObj, $projOutObj);
 		}
 		$extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
-			if($this->mapa->getmetadata("interface") == "googlemaps")
+		if($this->mapa->getmetadata("interface") == "googlemaps")
 		{$this->mapa->setProjection($projO);}
-		return("ok");
+		$e = $this->mapa->extent;
+		$ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
+		return($ext);
 	}
 /*
 function: sld

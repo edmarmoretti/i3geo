@@ -106,7 +106,7 @@ if (isset($_FILES['i3GEOuploadgpx']['name']) && strlen(basename($_FILES['i3GEOup
 		$salvo = $mapa->save($map_file);
 		//grava os templates de cada tema
 		echo "<b><p class='paragrafo' >Camadas criadas!!! Redesenhando o mapa.";
-		echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.atualiza();window.parent.i3GEOF.uploadgpx.doneok();</script>";
+		echo "<script>window.scrollTo(0,10000);window.parent.i3GEO.mapa.refresh();window.parent.i3GEOF.uploadgpx.doneok();</script>";
 	}
 	else
 	{
