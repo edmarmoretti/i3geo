@@ -225,13 +225,13 @@ i3GEO.catalogoOgc = {
                     }
                     i3GEO.janela.snackBar({content: $trad("catatua"),style: 'green'});
                 };
-                if(nomeMigalha == nome){//busca a primeira lista de diretorios
-                    i3GEO.catalogoOgc.wait = true;
-                    i3GEO.php.listaLayersARCGISREST(monta, id_ws, "");
-                } else {
-                    i3GEO.catalogoOgc.wait = true;
-                    i3GEO.php.listaLayersARCGISREST(monta, id_ws, nome);
-                }
+                i3GEO.catalogoOgc.wait = true;
+                i3GEO.php.listaLayersARCGISREST(monta, id_ws, nomeMigalha == nome ? "":nome);
+
+
+
+
+
             } else {
                 monta = function(data){
                     i3GEO.catalogoOgc.wait = false;
@@ -285,7 +285,6 @@ i3GEO.catalogoOgc = {
                     + "&tipo_ws=" + tipo_ws;
                 $.get(p).done(function(r) {
                     i3GEO.catalogoOgc.wait = false;
-                    console.warn(r)
                     monta(r);
                 }).fail(function() {
                     i3GEO.catalogoOgc.wait = false;
