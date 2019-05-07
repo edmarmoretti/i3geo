@@ -48,14 +48,10 @@ switch (strtoupper($_GET["funcao"])) {
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->procurartemasestrela($_GET["nivel"], $_GET["fatorestrela"]);
         break;
-    case "LISTALAYERSWMS":
-        include ("../../classesphp/wmswfs.php");
-        $servico = $_GET["servico"];
-        $nivel = $_GET["nivel"];
-        $id_ws = $_GET["id_ws"];
-        $nomelayer = $_GET["nomelayer"];
-        $tipo_ws = $_GET["tipo_ws"];
-        $retorno = listaLayersWMS();
+    case "GETLAYERSWMS":
+        include ("../../classesphp/classe_ows.php");
+        $m = new Ows($_GET["servico"]);
+        $retorno = $m->getLayersWMS($_GET["nivel"],$_GET["id_ws"],$_GET["tipo_ws"],$_GET["nomelayer"]);
         break;
 }
 ob_clean();

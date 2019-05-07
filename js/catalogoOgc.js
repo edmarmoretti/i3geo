@@ -233,10 +233,9 @@ i3GEO.catalogoOgc = {
                     i3GEO.php.listaLayersARCGISREST(monta, id_ws, nome);
                 }
             } else {
-                monta = function(dados){
+                monta = function(data){
                     i3GEO.catalogoOgc.wait = false;
-                    var data = dados.data,
-                    clone = [],
+                    var clone = [],
                     g = "",
                     temas;
 
@@ -276,8 +275,23 @@ i3GEO.catalogoOgc = {
                     i3GEO.janela.snackBar({content: $trad("catatua"),style: 'green'});
                 };
                 i3GEO.catalogoOgc.wait = true;
-                i3GEO.php.listaLayersWMS(monta, url, (nivel * 1) + 1, id_ws, layer,
-                        tipo_ws);
+                var p = i3GEO.configura.locaplic
+                    + "/serverapi/catalog?"
+                    + "funcao=GETLAYERSWMS"
+                    + "&servico=" + url
+                    + "&nivel=" + ((nivel * 1) + 1)
+                    + "&id_ws=" + id_ws
+                    + "&nomelayer=" + layer
+                    + "&tipo_ws=" + tipo_ws;
+                $.get(p).done(function(r) {
+                    i3GEO.catalogoOgc.wait = false;
+                    console.warn(r)
+                    monta(r);
+                }).fail(function() {
+                    i3GEO.catalogoOgc.wait = false;
+                    i3GEO.janela.closeMsg($trad("erroTpl"));
+                    return;
+                });
             }
         },
         temas: function(config){

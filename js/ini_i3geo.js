@@ -752,8 +752,11 @@ var i3GEO = {
                     i3GEO.configura.sid = retorno.data;
                     i3GEO.inicia(retorno);
                 };
-                i3GEO.configura.mashuppar += "&interface="
-                    + i3GEO.Interface.ATUAL;
+                if(i3GEO.Interface.openlayers.googleLike == true){
+                    i3GEO.configura.mashuppar += "&interface=googlemaps";
+                } else {
+                    i3GEO.configura.mashuppar += "&interface=openlayers";
+                }
                 // acrescenta camadas iniciais
                 if (i3GEO.mapa.TEMASINICIAIS.length > 0) {
                     i3GEO.configura.mashuppar += "&temasa="
@@ -781,8 +784,12 @@ var i3GEO = {
                 par = "funcao=inicia&w=" + i3GEO.parametros.w
                 + "&h=" + i3GEO.parametros.h
                 + "&g_sid=" + i3GEO.configura.sid
-                + "&interface=" + i3GEO.Interface.ATUAL,
                 cp = new cpaint();
+                if(i3GEO.Interface.openlayers.googleLike == true){
+                    par += "&interface=googlemaps";
+                } else {
+                    par += "&interface=openlayers";
+                }
                 cp.set_response_type("JSON");
                 cp.set_async(true);
                 cp.set_transfer_mode("POST");

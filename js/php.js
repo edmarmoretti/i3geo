@@ -192,16 +192,8 @@ i3GEO.php =
 	listaRSSwsARRAY : function(funcao, tipo) {
 	    console.error("Removido na versao 8");
 	},
-	/**
-	 * listaLayersWMS
-	 *
-	 * <LISTALAYERSWMS>
-	 */
 	listaLayersWMS : function(funcao, servico, nivel, id_ws, nomelayer, tipo_ws) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=listaLayersWMS&servico=" + servico + "&nivel=" + nivel + "&id_ws=" + id_ws + "&nomelayer=" + nomelayer
-		+ "&tipo_ws=" + tipo_ws;
-	    cpJSON.call(p, "listaLayersWMS", funcao, par);
+	    console.error("Removido na versao 8");
 	},
 	listaLayersARCGISREST : function(funcao, id_ws, nomelayer) {
 	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
