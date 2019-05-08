@@ -1,66 +1,3 @@
-/**
- * Title: i3Geo
- *
- * A classe i3GEO possu&iacute; os m&eacute;todos de cria&ccedil;&atilde;o e
- * atualiza&ccedil;&atilde;o do mapa. Todas as subclasses s&atilde;o baseadas em
- * i3GEO, por exemplo, para criar uma janela flutuante sobre o mapa, utilize
- * i3GEO.janela.cria()
- *
- * Para inicializar o mapa, utilize i3GEO.inicia() e para atualizar o mapa,
- * utilize i3GEO.mapa.refresh(). Ap&oacute;s terminado o processo de
- * inicializa&ccedil;&atilde;o, pode-se executar uma fun&ccedil;&atilde;o de
- * ajuste. Essa fun&ccedil;&atilde;o deve ser definida em i3GEO.finaliza, por
- * exemplo i3GEO.finaliza = "funcaoDeAjuste()" ou i3GEO.finaliza = function(){}
- *
- * Ao inicializar ou atualizar o i3Geo, &eacute; feita uma chamada em AJAX para
- * a obten&ccedil;&atilde;o dos parametros necess&aacute;rios ao funcionamento
- * do mapa. Esses parametros s&atilde;o armazenados na vari&aacute;vel
- * i3GEO.parametros
- *
- * Nessa classe est&atilde;o dispon&iacute;veis vari&aacute;veis internas
- * utilizadas em v&aacute;rias fun&ccedil;&otilde;es, como i3GEO.temaAtivo
- *
- * Namespace:
- *
- * i3GEO
- *
- * Veja:
- *
- * <http://localhost/i3geo/classesjs/classe_i3geo.js>
- */
-/**
- * Licen&ccedil;a
- *
- * GPL2
- *
- * i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
- *
- * Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente
- * Brasil Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
- *
- * Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
- * e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
- * GNU conforme publicada pela Free Software Foundation;
- *
- * Este programa &eacute; distribu&iacute;do na expectativa de que seja
- * &uacute;til, por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia
- * impl&iacute;cita de COMERCIABILIDADE OU ADEQUAC&Atilde;O A UMA FINALIDADE
- * ESPEC&Iacute;FICA. Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para
- * mais detalhes. Voc&ecirc; deve ter recebido uma c&oacute;pia da
- * Licen&ccedil;a P&uacute;blica Geral do GNU junto com este programa; se
- * n&atilde;o, escreva para a Free Software Foundation, Inc., no endere&ccedil;o
- * 59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
- */
-/**
- * Section: i3GEOF
- *
- * Esse objeto recebe os m&eacute;todos sob demanda por meio de
- * inje&ccedil;&atilde;o de javascripts (script tag). &Eacute; utilizado pelas
- * ferramentas existentes em i3geo/ferramentas.
- *
- * Cada javascript inserido na p&aacute;gina adiciona novos objetos, como por
- * exemplo i3GEOF.buffer.
- */
 var i3GEOF = [];
 var i3GEOadmin = [];
 /**
@@ -664,11 +601,8 @@ var i3GEO = {
                                     nomecookie = "i3geoUltima_ExtensaoOSM";
                                 }
                                 temp = i3GEO.util.pegaCookie(nomecookie);
-                                if (temp
-                                        && temp != "") {
-                                    temp = temp.replace(
-                                            /[\+]/g,
-                                    " ");
+                                if (temp && temp != "") {
+                                    temp = temp.replace(/[\+]/g," ");
                                     i3GEO.parametros.mapexten = temp;
                                 }
                                 i3GEO.eventos.NAVEGAMAPA.push(function() {
@@ -783,7 +717,7 @@ var i3GEO = {
                 var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php",
                 par = "funcao=inicia&w=" + i3GEO.parametros.w
                 + "&h=" + i3GEO.parametros.h
-                + "&g_sid=" + i3GEO.configura.sid
+                + "&g_sid=" + i3GEO.configura.sid,
                 cp = new cpaint();
                 if(i3GEO.Interface.openlayers.googleLike == true){
                     par += "&interface=googlemaps";

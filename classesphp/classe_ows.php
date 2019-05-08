@@ -33,6 +33,18 @@ class Ows
             }
         }
     }
+    function getLayersARCGISREST(){
+        $curl = curl_init ();
+        curl_setopt ( $curl, CURLOPT_URL, $this->server."&f=json" );
+        curl_setopt ( $curl, CURLOPT_RETURNTRANSFER, 1 );
+        curl_setopt ( $curl, CURLOPT_HEADER, 0 );
+        if (isset ( $this->i3geo_proxy_server ) && $this->i3geo_proxy_server != "") {
+            curl_setopt ( $curl, CURLOPT_PROXY, $this->i3geo_proxy_server );
+        }
+        $list = curl_exec ( $curl );
+        curl_close ( $curl );
+        return $list;
+    }
     function getLayersWMS($nivel, $id_ws, $tipo_ws, $nomelayer = "")
     {
         // para o caso do sistema de metadados estatisticos
@@ -233,7 +245,7 @@ class Ows
         if (count($teste) == 1) {
             $wms_service_request .= "&VERSION=1.1.1";
         }
-        $nome = $this->dir_tmp . "/wms" . md5($servico) . ".xml";
+        $nome = $this->dir_tmp . "/wms" . md5($wms_service_request) . ".xml";
         if (! file_exists($nome)) {
             $curl = curl_init();
             curl_setopt($curl, CURLOPT_URL, $wms_service_request);

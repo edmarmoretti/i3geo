@@ -168,16 +168,16 @@ i3GEO.catalogoOgc = {
                     //na sequencia, retorna lista com os servicos
                     //no ultimo nivel, ao listar o WMS, contem o elemento supportedExtensions
                     i3GEO.catalogoOgc.wait = false;
-                    var data = retorno.data.folders,
+                    var data = retorno.folders,
                     clone = [],
                     g = "",
                     onclick = "",
                     temas;
-                    if(retorno.data.services && retorno.data.services.length > 0){
-                        data = retorno.data.services;
+                    if(retorno.services && retorno.services.length > 0){
+                        data = retorno.services;
                     }
                     //verifica se o proximo nivel e um wms
-                    if(!retorno.data.supportedExtensions){
+                    if(!retorno.supportedExtensions){
                         $.each( data, function( i,v ) {
                             if (v) {
                                 if (!v.name) {
@@ -216,7 +216,7 @@ i3GEO.catalogoOgc = {
                         i3GEO.catalogoOgc.listaCamadas(
                                 "WMSServer",
                                 id_ws,
-                                retorno.data.serviceDescription,
+                                retorno.serviceDescription,
                                 url.replace("rest/","") + nome + "/WMSServer?",
                                 0,
                                 'wms',
@@ -226,12 +226,20 @@ i3GEO.catalogoOgc = {
                     i3GEO.janela.snackBar({content: $trad("catatua"),style: 'green'});
                 };
                 i3GEO.catalogoOgc.wait = true;
-                i3GEO.php.listaLayersARCGISREST(monta, id_ws, nomeMigalha == nome ? "":nome);
-
-
-
-
-
+                var p = i3GEO.configura.locaplic
+                + "/serverapi/catalog?"
+                + "funcao=GETLAYERSARCGISREST"
+                + "&id_ws=" + id_ws
+                + "&nomelayer=" + (nomeMigalha == nome ? "":nome)
+                + "&tipo_ws=ARCGISREST";
+                $.get(p).done(function(r) {
+                    i3GEO.catalogoOgc.wait = false;
+                    monta(r);
+                }).fail(function() {
+                    i3GEO.catalogoOgc.wait = false;
+                    i3GEO.janela.closeMsg($trad("erroTpl"));
+                    return;
+                });
             } else {
                 monta = function(data){
                     i3GEO.catalogoOgc.wait = false;

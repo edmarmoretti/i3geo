@@ -53,6 +53,19 @@ switch (strtoupper($_GET["funcao"])) {
         $m = new Ows($_GET["servico"]);
         $retorno = $m->getLayersWMS($_GET["nivel"],$_GET["id_ws"],$_GET["tipo_ws"],$_GET["nomelayer"]);
         break;
+    case "GETLAYERSARCGISREST":
+        include("../../classesphp/conexao.php");
+        $sql = "SELECT link_ws from {$esquemaadmin}i3geoadmin_ws WHERE id_ws = '". $_GET["id_ws"]*1 ."'";
+        $q = $dbh->query($sql,PDO::FETCH_ASSOC)->fetchAll();
+        $servico = $q[0]["link_ws"];
+        include ("../../classesphp/classe_ows.php");
+        if(!empty($_GET["nomelayer"])){
+            $m = new Ows($servico . "/" . $_GET["nomelayer"]);
+        } else {
+            $m = new Ows($servico);
+        }
+        $retorno = json_decode($m->getLayersARCGISREST());
+        break;
 }
 ob_clean();
 header("Content-type: application/json");

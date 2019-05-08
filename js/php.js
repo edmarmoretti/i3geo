@@ -196,10 +196,7 @@ i3GEO.php =
 	    console.error("Removido na versao 8");
 	},
 	listaLayersARCGISREST : function(funcao, id_ws, nomelayer) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=listaLayersARCGISREST&id_ws=" + id_ws + "&nomelayer=" + nomelayer
-		+ "&tipo_ws=ARCGISREST";
-	    cpJSON.call(p, "listaLayersARCGISREST", funcao, par);
+	    console.error("Removido na versao 8");
 	},
 	/**
 	 * Function: buscaRapida
