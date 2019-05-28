@@ -547,7 +547,7 @@ var i3GEO = {
             i3GEO.eventos.cliquePerm.ativoinicial = i3GEO.eventos.cliquePerm.ativo;
             var montaMapa, mashup, tamanho, temp;
             i3GEO.mapa.aplicaPreferencias();
-            montaMapa = function(retorno) {
+            montaMapa = function(data) {
                 try {
                     delete i3GEO.parametrosMapa2mashuppar;
                     delete i3GEO.configMapa;
@@ -555,26 +555,24 @@ var i3GEO = {
                     var temp, nomecookie = "i3geoOLUltimaExtensao", preferencias = "";
                     // verifica se existe bloqueio em funcao da senha no
                     // ms_configura.php
-                    if (retorno.bloqueado) {
-                        alert(retorno.bloqueado);
+                    if (data.bloqueado) {
+                        alert(data.bloqueado);
                         return;
                     }
-                    if (retorno === "") {
+                    if (data === "") {
                         alert("Ocorreu um erro no mapa - i3GEO.inicia.montaMapa");
-                        retorno = {
-                                data : {
-                                    erro : "erro"
-                                }
+                        data = {
+                                erro : "erro"
                         };
                     }
-                    if (retorno.data.erro) {
+                    if (data.erro) {
                         // i3GEO.janela.fechaAguarde("montaMapa");
                         document.body.style.backgroundColor = "white";
                         document.body.innerHTML = "Ocorreu um erro ao criar o mapa";
                         return ("linkquebrado");
                     } else {
-                        if (retorno.data.variaveis) {
-                            i3GEO.parametros = retorno.data.variaveis;
+                        if (data.variaveis) {
+                            i3GEO.parametros = data.variaveis;
                             //
                             // converte string em n&uacute;mero
                             //
@@ -590,8 +588,8 @@ var i3GEO = {
                             // os parametros sao armazenados em base64 no objeto
                             // metadata do mapfile
                             //
-                            if (retorno.data.customizacoesinit) {
-                                preferencias = JSON.parse(retorno.data.customizacoesinit);
+                            if (data.customizacoesinit) {
+                                preferencias = JSON.parse(data.customizacoesinit);
                                 temp = i3GEO.util.base64decode(preferencias.preferenciasbase64);
                                 i3GEO.mapa.aplicaPreferencias(temp);
                             }
@@ -617,7 +615,7 @@ var i3GEO = {
                             if (i3GEO.parametros.logado === "nao") {
                                 i3GEO.login.anulaCookie();
                             }
-                            i3GEO.arvoreDeCamadas.registaCamadas(retorno.data.temas);
+                            i3GEO.arvoreDeCamadas.registaCamadas(data.temas);
                             i3GEO.Interface.inicia();
                             //
                             // obtem os parametros que foram armazenados ao salvar o
@@ -626,7 +624,7 @@ var i3GEO = {
                             // dados
                             //
                             //TODO refazer essas funcionalidades
-                            if (retorno.data.customizacoesinit) {
+                            if (data.customizacoesinit) {
                                 // recupera os layers graficos
                                 if (preferencias.geometriasbase64
                                         && preferencias.geometriasbase64 != "") {
@@ -646,7 +644,7 @@ var i3GEO = {
                             }
                         } else {
                             alert("Erro. Impossivel criar o mapa "
-                                    + retorno.data);
+                                    + data);
                             return;
                         }
                     }
@@ -672,7 +670,6 @@ var i3GEO = {
             // essa opera&ccedil;&atilde;o deve ser ass&iacute;ncrona
             //
             if (i3GEO.configura.sid === "") {
-
                 if (typeof (console) !== 'undefined')
                     console.info("criamapa pq sid vazio")
 
@@ -683,7 +680,7 @@ var i3GEO = {
                         alert(retorno.bloqueado);
                         return;
                     }
-                    i3GEO.configura.sid = retorno.data;
+                    i3GEO.configura.sid = retorno;
                     i3GEO.inicia(retorno);
                 };
                 if(i3GEO.Interface.openlayers.googleLike == true){
@@ -700,13 +697,18 @@ var i3GEO = {
                     i3GEO.configura.mashuppar += "&layers="
                         + i3GEO.mapa.TEMASINICIAISLIGADOS;
                 }
-                var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php",
-                par = "funcao=criaMapa&" + i3GEO.configura.mashuppar,
-                cp = new cpaint();
-                cp.set_response_type("JSON");
-                cp.set_async(true);
-                cp.set_transfer_mode("POST");
-                cp.call(p, "criaMapa", mashup, par);
+                i3GEO.request.get({
+                    snackbar: false,
+                    snackbarmsg: false,
+                    btn: false,
+                    par: {
+                        funcao: "create"
+                    },
+                    prog: "/serverapi/map/?" + i3GEO.configura.mashuppar,
+                    fn: function(data){
+                        mashup(data);
+                    }
+                });
             } else {
                 if (i3GEO.parametros.w === ""
                     || i3GEO.parametros.h === "") {
@@ -714,20 +716,21 @@ var i3GEO = {
                     i3GEO.parametros.w = tamanho[0];
                     i3GEO.parametros.h = tamanho[1];
                 }
-                var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php",
-                par = "funcao=inicia&w=" + i3GEO.parametros.w
-                + "&h=" + i3GEO.parametros.h
-                + "&g_sid=" + i3GEO.configura.sid,
-                cp = new cpaint();
-                if(i3GEO.Interface.openlayers.googleLike == true){
-                    par += "&interface=googlemaps";
-                } else {
-                    par += "&interface=openlayers";
-                }
-                cp.set_response_type("JSON");
-                cp.set_async(true);
-                cp.set_transfer_mode("POST");
-                cp.call(p, "iniciaMapa", montaMapa, par);
+                i3GEO.request.get({
+                    snackbar: false,
+                    snackbarmsg: false,
+                    btn: false,
+                    par: {
+                        funcao: "start",
+                        w: i3GEO.parametros.w,
+                        h: i3GEO.parametros.h,
+                        "interface": i3GEO.Interface.openlayers.googleLike ? "googlemaps" : "openlayers"
+                    },
+                    prog: "/serverapi/map/?",
+                    fn: function(data){
+                        montaMapa(data);
+                    }
+                });
             }
         },
         /**

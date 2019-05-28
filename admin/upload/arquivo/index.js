@@ -24,9 +24,8 @@ Free Software Foundation, Inc., no endere&ccedil;o
  */
 i3GEOadmin.uploadshp = {
 	listaEpsg: function(){
-		$.post(
-				"../../../classesphp/mapa_controle.php?funcao=listaEpsg",
-				"g_sid=&map_file="
+		$.get(
+				"../../../serverapi/catalog?funcao=epsglist"
 		)
 		.done(
 				function(data, status){

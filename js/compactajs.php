@@ -275,41 +275,17 @@ foreach ($cssfiles as $f)
 $abre = fopen("../css/i3geo_ferramentas8.css", "wt");
 $escreve = fwrite ($abre,$buffer);
 $fecha = fclose ($abre);
-//
-//compacta os codigos para o Mashup do OpenLayers
-//
-$jsfiles = array(
-"../pacotes/yui290/build/yahoo/yahoo-min.js",
-"../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
-"../pacotes/yui290/build/dom/dom-min.js",
-"../pacotes/yui290/build/utilities/utilities_compacto.js",
-"../pacotes/yui290/build/container/container_core_compacto.js",
-"../pacotes/yui290/build/menu/menu-min.js",
-"../pacotes/yui290/build/dragdrop/dragdrop-min.js",
-"../pacotes/yui290/build/slider/slider-min.js",
-"../pacotes/yui290/build/animation/animation-min270.js",
-"../pacotes/yui290/build/container/container_compacto.js",
-"../pacotes/yui290/build/element/element-min.js",
-"../pacotes/yui290/build/tabview/tabview-min.js",
-"../pacotes/yui290/build/treeview/treeview_compacto.js",
-"../pacotes/yui290/build/button/button-min.js",
-"../pacotes/yui290/build/carousel/carousel_compacto.js",
-"../pacotes/yui290/build/json/json-min.js",
-"../pacotes/yui290/build/storage/storage-min.js",
-"../pacotes/yui290/build/resize/resize_compacto.js",
-"../pacotes/yui290/build/progressbar/progressbar_compacto.js",
-"../pacotes/yui290/build/selector/selector-min.js",
-"../classesjs/compactados/calculo_compacto.js",
-"../classesjs/compactados/util_compacto.js",
-"../pacotes/openlayers/OpenLayers2131.js",
-"../js/compactados/desenho_compacto.js",
-"../js/compactados/janela_compacto.js",
-"../ferramentas/editorol/editorol_compacto.js",
-"compactados/dicionario_compacto.js",
-"compactados/idioma_compacto.js",
-"compactados/configura_compacto.js",
-"compactados/mustache.js"
-);
+//testa os scripts
+foreach ($jsfiles as $f)
+{
+    //echo "<script>console.log('".$f."');</script>";
+    //echo '<script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>';
+    echo '<script src="../pacotes/ol4/ol.js"></script>';
+    echo "<script src='".$f."'></script>";
+}
+
+
+
 function inicia($arquivo)
 {
 	$abre = fopen($arquivo, "r");

@@ -123,9 +123,9 @@ i3GEOF.linhadotempo = {
 	    );
 	},
 	comboItens : function() {
-	    var temp = function(r) {
+	    var temp = function(data) {
 		var opt = "";
-		for (const d of r.data.valores) {
+		for (const d of data.valores) {
 		    opt += "<option value='" + d["item"] + "' >" + d["item"] + "</option>";
 		}
 		var combo = function(dados, idonde, name) {
@@ -135,17 +135,17 @@ i3GEOF.linhadotempo = {
 		    ins += "</select><b class='caret careti'></b>";
 		    $i(idonde).innerHTML = ins;
 		};
-		combo(r.data.valores, "i3GEOlinhadotempoltempoiteminicio","ltempoiteminicio");
-		combo(r.data.valores, "i3GEOlinhadotempoltempoitemfim","ltempoitemfim");
-		combo(r.data.valores, "i3GEOlinhadotempoltempoitemtitulo","ltempoitemtitulo");
-		combo(r.data.valores, "i3GEOlinhadotempoltempoitemdescricao","ltempoitemdescricao");
-		combo(r.data.valores, "i3GEOlinhadotempoltempoitemtip","ltempoitemtip");
-		combo(r.data.valores, "i3GEOlinhadotempoltempoitemimagem","ltempoitemimagem");
-		combo(r.data.valores, "i3GEOlinhadotempoltempoitemicone","ltempoitemicone");
-		combo(r.data.valores, "i3GEOlinhadotempoltempoitemlink","ltempoitemlink");
+		combo(data.valores, "i3GEOlinhadotempoltempoiteminicio","ltempoiteminicio");
+		combo(data.valores, "i3GEOlinhadotempoltempoitemfim","ltempoitemfim");
+		combo(data.valores, "i3GEOlinhadotempoltempoitemtitulo","ltempoitemtitulo");
+		combo(data.valores, "i3GEOlinhadotempoltempoitemdescricao","ltempoitemdescricao");
+		combo(data.valores, "i3GEOlinhadotempoltempoitemtip","ltempoitemtip");
+		combo(data.valores, "i3GEOlinhadotempoltempoitemimagem","ltempoitemimagem");
+		combo(data.valores, "i3GEOlinhadotempoltempoitemicone","ltempoitemicone");
+		combo(data.valores, "i3GEOlinhadotempoltempoitemlink","ltempoitemlink");
 		i3GEOF.linhadotempo.parametrosAtuais();
 	    };
-	    i3GEO.php.listaItensTema(temp, i3GEOF.linhadotempo._parameters.tema);
+	    i3GEO.tema.itens(temp, i3GEOF.linhadotempo._parameters.tema);
 	},
 	parametrosAtuais: function(){
 	    var p = this._parameters,

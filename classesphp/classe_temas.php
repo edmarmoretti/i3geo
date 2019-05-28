@@ -571,7 +571,7 @@ $testa - Testa o filtro e retorna uma imagem.
 		$filtro = str_ireplace("update","",$filtro);
 		$filtro = str_ireplace("delete","",$filtro);
 		foreach($this->indices as $indice){
-			$layer = $this->mapa->getlayer($indice);
+		    $layer = $this->mapa->getlayer($indice);
 			$items = pegaItens($layer);
 			if(!$layer){
 				return "erro";
@@ -619,6 +619,7 @@ $testa - Testa o filtro e retorna uma imagem.
 				    }
 				}
 			}
+
 			$layer->setfilter($filtro);
 			if ($testa == ""){
 				$layer->setMetaData("cache","");
@@ -738,7 +739,7 @@ $valor - Novo nome.
 				$ll->setmetadata("tema",$valor);
 			}
 		}
-		return ("ok");
+		return true;
 	}
 	/*
 	 function: contorno

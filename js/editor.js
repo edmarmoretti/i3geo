@@ -688,16 +688,16 @@ i3GEO.editor =
 			    fwkt = format.writeFeatures([f]);
 			    cwkt = format.writeFeatures([c]);
 			    if(fwkt && cwkt){
-				temp = function(retorno) {
+				temp = function(data) {
 				    i3GEO.janela.fechaAguarde("i3GEO.cortador");
-				    if (retorno != "" && retorno.data && retorno.data != "") {
-					c.setGeometry(format.readGeometry(retorno.data));
+				    if (data && data != "") {
+					c.setGeometry(format.readGeometry(data));
 					i3GEO.editor.tableRefresh();
 				    }
 				    i3GEO.editor.ativaIdentifica();
 				};
 				i3GEO.janela.abreAguarde("i3GEO.cortador", "Cortando");
-				i3GEO.php.funcoesGeometriasWkt(temp, cwkt + "|" + fwkt, "difference");
+				i3GEO.editor.difference(temp, cwkt + "|" + fwkt, "difference");
 			    }
 			}
 			i3GEO.editor.tableRefresh();
@@ -1558,5 +1558,22 @@ i3GEO.editor =
 			elblock.find("button").prop("disabled",false);
 		    }
 	    );
-	}
+	},
+	difference : function(after, listaWkt) {
+            i3GEO.request.get({
+                snackbar: false,
+                snackbarmsg: false,
+                btn: false,
+                par: {
+                    funcao: "difference",
+                    geometry: listaWkt
+                },
+                prog: "/serverapi/geometry/",
+                fn: function(data){
+                      if (after){
+                        after.call(after, data);
+                    }
+                }
+            });
+        }
 };

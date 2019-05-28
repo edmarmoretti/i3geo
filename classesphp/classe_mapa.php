@@ -1396,7 +1396,7 @@ class Mapa
      *
      * $adicionar - sim|nao for&ccedil;a a adi&ccedil;&atilde;o de um tema se ele n&atilde;o existir no mapfile atual
      */
-    function ligaDesligaTemas($ligar, $desligar, $adicionar = "nao")
+    function ligaDesligaTemas($ligar="", $desligar="", $adicionar = "nao")
     {
         if (strTolower($adicionar) == "sim") {
             $teste = explode(",", $ligar);
@@ -1462,7 +1462,7 @@ class Mapa
                 }
             }
         }
-        return ("ok");
+        return true;
     }
 
     /*

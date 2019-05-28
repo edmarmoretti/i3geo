@@ -99,31 +99,31 @@
  *
  * (end)
  */
-function iniciaMapa()
+ function iniciaMapa($w, $h, $kmlurl)
 {
-    global $googleApiKey, $i3geoPermiteLogin, $dir_tmp, $logExec, $postgis_mapa, $statusFerramentas, $saikuUrl, $emailInstituicao, $openid, $interfacePadrao, $mensagemInicia, $kmlurl, $tituloInstituicao, $tempo, $navegadoresLocais, $locaplic, $map_file, $mapext, $w, $h, $R_path, $locmapserv, $utilizacgi, $expoeMapfile, $interface;
     //
     // verifica se algum tema e restrito a determinado usuario
     // as funcoes de validacao encontram-se em funcoes_gerais.php
     //
+    include ($_SESSION["locaplic"]."/classesphp/classe_mapa.php");
     if (! function_exists("validaAcessoTemas")) {
-        include_once ("funcoes_gerais.php");
+        include ($_SESSION["locaplic"]."/classesphp/funcoes_gerais.php");
     }
-    validaAcessoTemas($map_file);
+    validaAcessoTemas($_SESSION["map_file"]);
 
-    if ($dir_tmp != "" && isset($logExec) && $logExec["init"] == true) {
-        i3GeoLog("prog: iniciaMapa interface: $interface", $dir_tmp);
+    if ($_SESSION["dir_tmp"] != "" && isset($_SESSION["logExec"]) && $_SESSION["logExec"]["init"] == true) {
+        i3GeoLog("prog: iniciaMapa interface: ".$_SESSION["interface"], $_SESSION["dir_tmp"]);
     }
 
     if (! isset($kmlurl)) {
         $kmlurl = "";
     }
     // error_reporting(0);
-    if (! isset($interface)) {
-        $interface = "";
+    if (! isset($_SESSION["interface"])) {
+        $_SESSION["interface"] = "";
     }
-    if ($interface == "openlayers") {
-        $m = ms_newMapObj($map_file);
+    if ($_SESSION["interface"] == "openlayers") {
+        $m = ms_newMapObj($_SESSION["map_file"]);
         $e = $m->extent;
         $ext = ($e->minx) . " " . ($e->miny) . " " . ($e->maxx) . " " . ($e->maxy);
         $c = $m->numlayers;
@@ -137,13 +137,13 @@ function iniciaMapa()
             $layer->setmetadata("olopacity", $layer->opacity);
             // error_log($layer->name);
         }
-        $m->save($map_file);
+        $m->save($_SESSION["map_file"]);
     }
-    if ($interface == "googlemaps") {
-        $m = ms_newMapObj($map_file);
+    if ($_SESSION["interface"] == "googlemaps") {
+        $m = ms_newMapObj($_SESSION["map_file"]);
         $e = $m->extent;
         $ext = ($e->minx) . " " . ($e->miny) . " " . ($e->maxx) . " " . ($e->maxy);
-        if ($interface == "googlemaps") {
+        if ($_SESSION["interface"] == "googlemaps") {
             $m->setProjection("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m");
         }
         $c = $m->numlayers;
@@ -171,7 +171,7 @@ function iniciaMapa()
         $temp->set("status", MS_OFF);
         $c = $m->imagecolor;
         $c->setrgb(255, 255, 255);
-        if ($interface == "googleearth") {
+        if ($_SESSION["interface"] == "googleearth") {
             $m->selectOutputFormat("jpeg");
             $of = $m->outputformat;
             $of->set("driver", "AGG/PNG");
@@ -180,25 +180,21 @@ function iniciaMapa()
         }
         $of->set("imagemode", MS_IMAGEMODE_RGBA);
         $of->set("transparent", MS_ON);
-        $m->save($map_file);
+        $m->save($_SESSION["map_file"]);
     }
     $protocolo = explode("/", $_SERVER['SERVER_PROTOCOL']);
     $protocolo = $protocolo[0];
     $protocolo = strtolower($protocolo) . '://' . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
-    $urli3geo = str_replace("/classesphp/mapa_controle.php", "", $protocolo . $_SERVER["PHP_SELF"]);
+    $urli3geo = str_replace("/serverapi/map/index.php", "", $protocolo . $_SERVER["PHP_SELF"]);
     // altera o tamanho do query map para ficar igual ao do mapa
-    include_once ("classe_mapa.php");
-    // error_reporting(0);
-    if (! function_exists("sobeAnno")) {
-        include_once ("funcoes_gerais.php");
-    }
-    sobeAnno($map_file);
-    $m = new Mapa($map_file);
+    sobeAnno($_SESSION["map_file"]);
+    $m = new Mapa($_SESSION["map_file"]);
     if (isset($w)) {
         $m->mudaQS($w, $h);
-        $m = new Mapa($map_file);
+        $m = new Mapa($_SESSION["map_file"]);
         $m->mapa->setsize($w, $h);
     }
+
     // error_reporting(0);
     //
     // verifica se a legenda deve ser embebida no mapa
@@ -216,7 +212,7 @@ function iniciaMapa()
     //
     // $imgo = $m->mapa->draw();
     $imgo = $m->mapa->prepareImage();
-    $m->salva($map_file);
+    $m->salva($_SESSION["map_file"]);
     // $e = $m->mapa->extent;
     // $ext = ($e->minx)." ".($e->miny)." ".($e->maxx)." ".($e->maxy);
     $escalaMapa = $m->mapa->scaledenom;
@@ -224,9 +220,9 @@ function iniciaMapa()
     //
     // pega os parametros de cada tema
     //
-    $qyfile = str_replace(".map", ".qy", $map_file);
+    $qyfile = str_replace(".map", ".qy", $_SESSION["map_file"]);
     $arqsel = (file_exists($qyfile)) ? true : false;
-    $m = new Mapa($map_file, $locaplic);
+    $m = new Mapa($_SESSION["map_file"], $_SESSION["locaplic"]);
     $temas = $m->parametrosTemas();
     $versao = versao();
     $temp = $m->mapa->scalebar;
@@ -235,20 +231,16 @@ function iniciaMapa()
     $of->set("imagemode", MS_IMAGEMODE_RGBA);
     $of->setOption("QUANTIZE_FORCE", "OFF");
     $of->set("driver", "AGG/PNG");
-    $m->mapa->setmetadata("interface", $interface);
+    $m->mapa->setmetadata("interface", $_SESSION["interface"]);
     $m->salva();
     $nomes = nomeRandomico(12);
     if ($imgo->imagepath == "") {
         echo "Erro IMAGEPATH vazio";
         exit();
     }
+
     $nomer = ($imgo->imagepath) . "mapa" . $nomes . ".png";
-    // $imgo->saveImage($nomer);
-    if (isset($utilizacgi) && strtolower($utilizacgi) == "sim") {
-        $nomer = $locmapserv . "?map=" . $map_file . "&mode=map";
-    } else {
-        $nomer = ($imgo->imageurl) . basename($nomer);
-    }
+    $nomer = ($imgo->imageurl) . basename($nomer);
     // pega a cor de fundo do mapa
     $c = $m->mapa->imagecolor;
     $cordefundo = $c->red . "," . $c->green . "," . $c->blue;
@@ -271,7 +263,7 @@ function iniciaMapa()
     $res["papeis"] = array();
     $logado = "nao";
     $res["i3geoPermiteLogin"] = "sim";
-    if (isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false) {
+    if (isset($_SESSION["i3geoPermiteLogin"]) && $_SESSION["i3geoPermiteLogin"] == false) {
         $_COOKIE = array();
         $res["i3geoPermiteLogin"] = "nao";
     }
@@ -294,72 +286,60 @@ function iniciaMapa()
             }
         }
     }
-    //
+
     $res["mapexten"] = $ext;
     $res["mapscale"] = $escalaMapa;
     $res["mapres"] = $m->mapa->resolution;
     $res["pixelsize"] = $celula;
-    // TODO depreciar na documentacao e ms_configura
-    /*
-     * if ((isset($expoeMapfile)) && ($expoeMapfile == "nao"))
-     * {$res["mapfile"] = "";}
-     * else
-     * {$res["mapfile"] = $map_file;}
-     */
     $res["mapfile"] = "";
     $res["cgi"] = ""; // $locmapserv;
     $res["extentTotal"] = $ext;
     $res["mapimagem"] = ""; // $nomer;
     $geoip = "nao";
-    if (file_exists($locaplic . "/pacotes/geoip") && file_exists($locaplic . "/pacotes/geoip/GeoLiteCity.dat")) {
-        $geoip = "sim";
-    }
     $res["geoip"] = $geoip;
-    $res["listavisual"] = (file_exists($locaplic . "/imagens/visual")) ? implode(",", listaDiretorios($locaplic . "/imagens/visual")) : "";
+    $res["listavisual"] = "";
     // TODO depreciar na documentacao
     $res["utilizacgi"] = "nao"; // $utilizacgi;
     $res["versaoms"] = $versao["principal"];
     $res["versaomscompleta"] = $versao["completa"];
     $res["versaoint"] = $versao["inteiro"];
     $res["mensagens"] = $m->pegaMensagens();
-    $res["r"] = (isset($R_path)) ? "sim" : "nao";
+    $res["r"] = (isset($_SESSION["R_path"])) ? "sim" : "nao";
     $res["extentref"] = "";
     $res["kmlurl"] = $kmlurl;
-    $res["mensageminicia"] = $mensagemInicia;
-    $res["interfacePadrao"] = $interfacePadrao;
+    $res["mensageminicia"] = $_SESSION["mensagemInicia"];
+    $res["interfacePadrao"] = $_SESSION["interfacePadrao"];
     $res["w"] = $w;
     $res["h"] = $h;
-    $res["titulo"] = $tituloInstituicao;
-    $res["tempo"] = microtime(1) - $tempo;
+    $res["titulo"] = $_SESSION["tituloInstituicao"];
+    $res["tempo"] = "";
     $res["erro"] = '';
     $res["mappath"] = ""; // $imgo->imagepath;
     $res["mapurl"] = ""; // $imgo->imageurl;
-    $res["navegacaoDir"] = $navegadoresLocais;
-    if ($openid == true) {
+    $res["navegacaoDir"] = $_SESSION["navegadoresLocais"];
+    if ($_SESSION["openid"] == true) {
         $res["autenticadoopenid"] = "sim";
     } else {
         $res["autenticadoopenid"] = "nao";
     }
-    $res["emailInstituicao"] = $emailInstituicao;
+    $res["emailInstituicao"] = $_SESSION["emailInstituicao"];
     $res["cordefundo"] = $cordefundo;
     $res["copyright"] = $copyright;
     $res["logado"] = $logado;
-    $res["saikuUrl"] = $saikuUrl;
-    $res["statusFerramentas"] = $statusFerramentas;
-    $res["googleApiKey"] = $googleApiKey;
+    $res["saikuUrl"] = $_SESSION["saikuUrl"];
+    $res["statusFerramentas"] = $_SESSION["statusFerramentas"];
+    $res["googleApiKey"] = $_SESSION["googleApiKey"];
     // parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados
     $customizacoesinit = $m->mapa->getmetadata("CUSTOMIZACOESINIT");
     $res["editavel"] = $m->mapa->getmetadata("EDITAVEL");
     $m->mapa->setmetadata("CUSTOMIZACOESINIT", "");
     $m->salva();
-    restauraCon($map_file, $postgis_mapa);
-    copy($map_file, (str_replace(".map", "reinc.map", $map_file)));
-    copy($map_file, (str_replace(".map", "seguranca.map", $map_file)));
-    ob_clean();
-    cpjson(array(
+    restauraCon($_SESSION["map_file"], $_SESSION["postgis_mapa"]);
+    copy($_SESSION["map_file"], (str_replace(".map", "reinc.map", $_SESSION["map_file"])));
+    copy($_SESSION["map_file"], (str_replace(".map", "seguranca.map", $_SESSION["map_file"])));
+    return array(
         "variaveis" => $res,
         "temas" => $temas,
         "customizacoesinit" => $customizacoesinit
-    ));
+    );
 }
-?>

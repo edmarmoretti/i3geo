@@ -108,7 +108,7 @@ i3GEOF.tme = {
 				i3GEOF.tme.ativa();
 			    }
 			};
-			i3GEO.php.listaItensTema(temp, i3GEOF.tme._parameters.tema);
+			i3GEO.tema.itens(temp, i3GEOF.tme._parameters.tema);
 		    },
 		    "i3GEOTMEregioeslista",
 		    "",
@@ -160,15 +160,15 @@ i3GEOF.tme = {
 		    "form-control"
 	    );
 	},
-	montaListaItens : function(retorno) {
+	montaListaItens : function(data) {
 	    var p = this._parameters,
 	    i3f = this;
 	    var ins = [], i, n, item, litens,temp = {}, mustache = [];
 	    ins.push("<table>");
-	    n = retorno.data.valores.length;
+	    n = data.valores.length;
 	    for (i = 0; i < n; i++) {
 		temp = {};
-		temp.item = retorno.data.valores[i].item;
+		temp.item = data.valores[i].item;
 		mustache.push(temp);
 	    }
 	    $i("i3GEOtmelistai").innerHTML = Mustache.render(

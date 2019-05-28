@@ -130,7 +130,7 @@ if (isset($_pg["g_sid"])) {
 // TEMA2SLD e usado por datadownload.htm
 // PEGAMAPAS e utilizado em varias funcoes
 //
-if ($funcao != "listaEpsg" && $funcao != "pegaTodosTemas" && $funcao != "download3" && $funcao != "listainterfaces" && $funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS") {
+if ($funcao != "listaEpsg" && $funcao != "pegaTodosTemas" && $funcao != "download3" && $funcao != "pegalistadetemas" && $funcao != "pegalistadeSubgrupos" && $funcao != "procurartemasestrela" && $funcao != "pegalistadegrupos" && $funcao != "pegalistademenus" && $funcao != "criaMapa" && strtoupper($funcao) != "TEMA2SLD" && strtoupper($funcao) != "PEGAMAPAS") {
     session_name("i3GeoPHP");
     if (isset($g_sid) && $g_sid != "") {
         session_id($g_sid);
@@ -213,44 +213,6 @@ include_once ("carrega_ext.php");
 if (! function_exists("sobeAnno")) {
     include_once ("funcoes_gerais.php");
 }
-if ($funcao == "criaMapa") {
-    session_name("i3GeoPHP");
-    unset($GLOBALS);
-    if (session_status() == PHP_SESSION_ACTIVE) {
-        // error_log("--------------Apagando a session");
-        session_destroy();
-        //lembrete: validaAcessoTemas usa cookies
-        $_COOKIE = array();
-    }
-
-    //
-    // primeiro &eacute; necess&aacute;rio carregar o ms_configura.php para pegar a vari&aacute;vel $locaplic
-    //
-    $d = "";
-    include_once (dirname(__FILE__) . "/../ms_configura.php");
-    //
-    // &eacute; necess&aacute;rio mudar o diret&oacute;rio em fun&ccedil;&atilde;o dos includes que s&atilde;o feitos pelo ms_criamapa.php
-    //
-    // chdir($locaplic);
-    $interfaceTemp = $interface;
-    $interface = "mashup";
-
-    include_once (dirname(__FILE__) . "/../ms_criamapa.php");
-    if (isset($_SESSION["logExec"])) {
-        if(@$_SESSION["logExec"]["controle"] == true){
-            i3GeoLog("prog: mapa_controle url: " . implode("&", array_merge($_GET, $_POST)), $_SESSION["dir_tmp"]);
-        }
-    }
-    $_SESSION["interface"] = $interfaceTemp;
-    $temp = $_SESSION["map_file"];
-    $id = session_id();
-    session_write_close();
-    // ver funcoes_gerais.php
-    validaAcessoTemas($temp);
-    cpjson($id);
-    return;
-}
-
 if (! isset($map_file)) {
     // nesse caso &eacute; necess&aacute;rio criar o diret&oacute;rio tempor&aacute;rio e iniciar o mapa
     // $cp->set_data(array("erro"=>"linkquebrado"));
@@ -287,33 +249,8 @@ if ($funcao != "recuperamapa" && $funcao != "TEMA2SLD") {
 //
 
 $retorno = ""; // string que ser&aacute; retornada ao browser via JSON
+error_log("------------------mapa_controle.php ".$funcao);
 switch (strtoupper($funcao)) {
-    /*
-     * Section: Inicializa&ccedil;&atilde;o
-     *
-     * Inicia o mapa.
-     */
-    /*
-     * Valor: INICIA
-     *
-     * Inicia o mapa, pegando os par&acirc;metros necess&aacute;rios para a montagem inicial.
-     *
-     * <iniciaMapa>
-     */
-    case "INICIA":
-        include_once ("mapa_inicia.php");
-        if (isset($_pg["kmlurl"])) {
-            $kmlurl = $_pg["kmlurl"];
-        }
-        $w = $_pg["w"];
-        $h = $_pg["h"];
-        iniciaMapa();
-        break;
-    /*
-     * Valor: OPENLAYERS
-     *
-     * Prepara o mapa atual para funcionar na interface openlayers.
-     */
     case "OPENLAYERS":
         $interface = "openlayers";
         include_once ("mapa_inicia.php");
@@ -397,21 +334,6 @@ switch (strtoupper($funcao)) {
             $m->calculaGeometrias($dir_tmp, $imgdir, basename($retorno), "area");
             $m->calculaGeometrias($dir_tmp, $imgdir, basename($retorno), "perimetro");
         }
-        break;
-    /*
-     * Valor: FUNCOESGEOMETRIASWKT
-     *
-     * Processa geometrias recebidas como WKT gerando uma nova geometria.
-     * Uni&atilde;o, intersec&ccedil;&atilde;o, etc.
-     *
-     * A lista de WKTs deve usar o separador |
-     *
-     * <Analise->funcoesGeometriasWKT>
-     */
-    case "FUNCOESGEOMETRIASWKT":
-        include_once ("classe_analise.php");
-        $m = new Analise($map_file, "");
-        $retorno = $m->aplicaFuncaoListaWKT(explode("|", $_pg["geometrias"]), $_pg["operacao"], $dir_tmp, $imgdir);
         break;
     /*
      * Valor: CALCULAGEOMETRIAS
@@ -1337,22 +1259,6 @@ switch (strtoupper($funcao)) {
         }
         break;
     /*
-     * Valor: PEGASISTEMASIDENTIFICACAO
-     *
-     * Pega a lista de sistemas especiais de identifica&ccedil;&atilde;o de elementos no mapa
-     *
-     * <Menutemas->pegaSistemasI>
-     */
-    case "PEGASISTEMASIDENTIFICACAO":
-        include_once ("classe_menutemas.php");
-        $editores = $_pg["editores"];
-        $perfil = $_pg["perfil"];
-        $idioma = $_pg["idioma"];
-
-        $m = new Menutemas($map_file, $perfil, $locaplic, "", $editores, $idioma);
-        $retorno = $m->pegaSistemasI();
-        break;
-    /*
      * Valor: PEGATODOSTEMAS
      *
      * Pega a lista de todos os temas que nao possuem restricoes de acesso
@@ -1399,35 +1305,7 @@ switch (strtoupper($funcao)) {
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $idioma);
         $retorno = $m->procurartemas2($procurar);
         break;
-    /*
-     * Valor: PEGAMAPAS
-     *
-     * Pega a lista de links para outros mapas.
-     *
-     * Utilizado no preenchimento da guia mapas
-     *
-     * <Menutemas->pegaListaDeMapas>
-     */
-    case "PEGAMAPAS":
-        include_once ("classe_menutemas.php");
-        if (isset($_pg["perfil"])) {
-            $perfil = $_pg["perfil"];
-        } else {
-            $perfil = "";
-        }
-        if (isset($_pg["id_mapa"])) {
-            $id_mapa = $_pg["id_mapa"];
-        } else {
-            $id_mapa = "";
-        }
-        if (isset($_pg["idioma"])) {
-            $idioma = $_pg["idioma"];
-        } else {
-            $idioma = "pt";
-        }
-        $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $idioma);
-        $retorno = $m->pegaListaDeMapas($locmapas,$id_mapa);
-        break;
+
     /*
      * Section: Webservices
      *
@@ -1484,61 +1362,6 @@ switch (strtoupper($funcao)) {
         $servico = $_pg["servico"];
         restauraCon($map_file, $postgis_mapa);
         $retorno = temaswms();
-        break;
-    /*
-     * Section: Atributos
-     *
-     * Processa os atributos da tabela associada ao tema.
-     *
-     * <classe_atributos.php>
-     */
-    /*
-     * Valor: BUSCARAPIDA
-     *
-     * Acessa dados de um servi&ccedil;o de geonames ou busca dados nos temas existentes no mapa.
-     *
-     * A pesquisa em temas &eacute; feita apenas quando existir o metadata itembuscarapida
-     *
-     * <buscaRapida>
-     */
-    case "BUSCARAPIDA":
-        $servico = $_pg["servico"];
-        $palavra = $_pg["palavra"];
-        if ($servico != "temas") {
-            $retorno = buscaRapida($servico, $palavra);
-        } else {
-            include_once ("classe_mapa.php");
-            $m = new Mapa($map_file);
-            $lista = $m->listaTemasBuscaRapida();
-            if ($lista != "") {
-                include_once ("classe_atributos.php");
-                $m = new Atributos($map_file);
-                $dados = $m->buscaRegistros($palavra, $lista, "qualquer", "mapa");
-                foreach ($dados as $tema) {
-                    $rs = $tema["resultado"];
-                    foreach ($rs as $r) {
-                        $retorno[] = array(
-                            "box" => $r["box"],
-                            "valor" => $r["valores"][0]["valor"]
-                        );
-                    }
-                }
-            } else {
-                $retorno = "erro";
-            }
-        }
-        break;
-    /*
-     * Valor: LISTAITENS
-     *
-     * Lista os itens de um tema.
-     *
-     * <Atributos->listaItens>
-     */
-    case "LISTAITENS":
-        include_once ("classe_atributos.php");
-        $m = new Atributos($map_file, $_pg["tema"], "", $_pg["ext"]);
-        $retorno = $m->listaItens();
         break;
     /*
      * Valor: LISTAVALORESITENS
@@ -1858,23 +1681,6 @@ switch (strtoupper($funcao)) {
         $retorno = $r;
         break;
     /*
-     * Section: Legenda
-     *
-     * Processa a legenda do mapa e de temas espec&iacute;ficos.
-     *
-     * <classe_legenda.php>
-     */
-    /*
-     * Valor: GERACORESCOLOURRAMP
-     *
-     * Retorna uma lista de valores RGB de cores geradas com base nsa grades de cores existentes (ver i3geo/symbols/colourramps)
-     */
-    case "GERACORESCOLOURRAMP":
-        include_once ("class.palette.php");
-        $m = new palette();
-        $retorno = $m->geraCoresColourRamp("..", $_pg["codigo"], $_pg["inicio"], $_pg["fim"], $_pg["ncores"]);
-        break;
-    /*
      * Valor: EDITASIMBOLO
      *
      * Define as caracter&iacute;sticas de simbologia de uma classe, cria, adiciona e exclui estilos.
@@ -1963,35 +1769,12 @@ switch (strtoupper($funcao)) {
         redesenhaMapa();
         break;
     /*
-     * Section: Outros
-     *
-     * Op&ccedil;&otilde;es de uso geral.
-     */
-    /*
-     * Valor: LISTATRUETYPE
-     *
-     * Lista as fontes truetype dispon&iacute;veis.
-     */
-    case "LISTATRUETYPE":
-        $retorno = listaTrueType();
-        restauraCon($map_file, $postgis_mapa);
-        break;
-    /*
      * Valor: AREAPIXEL
      *
      * Calcula a &aacute;rea de um pixel da imagem.
      */
     case "AREAPIXEL":
         $retorno = calculaAreaPixel($map_file, $_pg["celsize"]);
-        break;
-    /*
-     * Valor: LISTAEPSG
-     *
-     * Pega os codigos de proje&ccedil;&atilde;o EPSG.
-     *
-     */
-    case "LISTAEPSG":
-        $retorno = listaEpsg();
         break;
     /*
      * Valor: LISTADIRETORIOS
@@ -2023,50 +1806,6 @@ switch (strtoupper($funcao)) {
      */
     case "CHAVEGOOGLE":
         $retorno = $googleApiKey;
-        break;
-    /*
-     * Valor: LISTAINTERFACES
-     *
-     * Lista as interfaces de abertura de mapas
-     *
-     * Pesquisa na pasta interfaces e na pasta definida em $customDir
-     */
-    case "LISTAINTERFACES":
-        include (dirname(__FILE__) . "/../ms_configura.php");
-        $pesquisarEm = array(
-            $locaplic . "/interface"
-        );
-        if (isset($customDir) && $customDir != "" && $customDir != "interface") {
-            $pesquisarEm[] = $locaplic . "/" . $customDir;
-        }
-        $retorno = array();
-        foreach ($pesquisarEm as $p) {
-            $r = listaArquivos($p);
-            // var_dump($r);exit;
-            $arqs = $r["arquivos"];
-            $ext = $r["extensoes"];
-            $nomes = $r["nomes"];
-            $n = count($arqs);
-            for ($i = 0; $i < $n; $i ++) {
-                if (in_array($ext[$i], array(
-                    "php",
-                    "phtml",
-                    "htm",
-                    "html"
-                ))) {
-                    // verifica se tem a carga do js i3geo.js
-                    $a = $p . "/" . $nomes[$i];
-                    if(file_exists($a)){
-                        $handle = fopen($a, "r");
-                        $conteudo = fread($handle, filesize($a));
-                        fclose($handle);
-                        if (strstr($conteudo, "i3geo.js")) {
-                            $retorno[] = "../" . basename($p) . "/" . $nomes[$i];
-                        }
-                    }
-                }
-            }
-        }
         break;
 }
 if (isset($map_file) && isset($postgis_mapa) && $map_file != "")

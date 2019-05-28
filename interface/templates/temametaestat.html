@@ -1,0 +1,15 @@
+<!--
+<div id="i3geoCartoParametros_imagemCabecalho" class="progress inline ferramenta" style="visibility: visible; display: block; top: 0px; height: 5px; margin: auto;">
+    <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width: 100%"></div>
+</div>
+-->
+<div class='container-fluid customScrollBar'>
+    <div class="form-group label-fixed condensed" id='i3geoCartoRegioesMedidasVariavel'>{{{aguarde}}}</div>
+    <div class="form-group label-fixed condensed" id='i3geoCartoTipoClassificacao'>{{{aguarde}}}</div>
+    <div class="form-group label-fixed condensed" id='i3geoCartoParametrosMedidasVariavel'>{{{aguarde}}}</div>
+    <input type=hidden value='{{{measure}}}' name='measure' />
+    <input type=hidden value='{{{variable}}}' name='variable' />
+    <input type=hidden value='{{{namevariable}}}' name='namevariable' />
+    <input type=hidden value='{{{namemeasure}}}' name='namemeasure' />
+    <button onclick="i3GEO.catalogoMetaestat.addLayer(this)" class='btn btn-primary btn-sm btn-raised'>{{{adiciona}}}</button>
+</div>

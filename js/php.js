@@ -4,7 +4,25 @@ if (typeof (i3GEO) === 'undefined') {
 var cpJSON = new cpaint();
 cpJSON.set_response_type("JSON");
 cpJSON.set_transfer_mode("POST");
-
+/*
+            i3GEO.request.get({
+                snackbar: false,
+                snackbarmsg: false,
+                btn: false,
+                par: {
+                    filtraOgc: "nao",
+                    filtraDown: "nao",
+                    idioma: i3GEO.idioma.ATUAL,
+                    funcao: "pegalistademenus"
+                },
+                prog: "/serverapi/catalog/",
+                fn: function(data){
+                    if (after){
+                        after.call(after, data);
+                    }
+                }
+            });
+ */
 i3GEO.php =
 {
 	verifica : function() {
@@ -198,350 +216,92 @@ i3GEO.php =
 	listaLayersARCGISREST : function(funcao, id_ws, nomelayer) {
 	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: buscaRapida
-	 *
-	 * Busca dados em um servico
-	 */
 	buscaRapida : function(funcao, locaplic, servico, palavra) {
-	    var p = locaplic + "/classesphp/mapa_controle.php", par =
-		"map_file=&funcao=buscaRapida&palavra=" + palavra + "&servico=" + servico;
-	    cpJSON.call(p, "buscaRapida", funcao, par);
+	    console.error("Veja i3GEO.busca.getData");
 	},
-	/**
-	 * Function: listaItensTema
-	 *
-	 * Lista as colunas de um tema
-	 */
 	listaItensTema : function(funcao, tema) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=listaitens&tema=" + tema + "&ext=" + i3GEO.mapa.getExtent().string;
-	    cpJSON.call(p, "listaItensTema", funcao, par);
+	    console.error("Veja i3GEO.tema.itens");
 	},
-	/**
-	 * Function: listaValoresItensTema
-	 *
-	 * Lista os valores de uma coluna
-	 */
 	listaValoresItensTema : function(funcao, tema, itemTema) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=listaunica&tema=" + tema + "&item=" + itemTema + "&ext="
-		+ i3GEO.mapa.getExtent().geo;
-	    cpJSON.call(p, "listaRegistros", funcao, par);
+	    console.error("Veja i3GEO.tema.valoresItem");
 	},
-	/**
-	 * Function: extRegistros
-	 *
-	 * Extensao geografica de um registro de um tema
-	 */
 	extRegistros : function(funcao, tema, reg) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=extregistros&registro=" + reg + "&tema=" + tema;
-	    cpJSON.call(p, "listaItensTema", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * listaFontesTexto
-	 *
-	 * <LISTATRUETYPE>
-	 */
 	listaFontesTexto : function(funcao) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=listatruetype";
-	    cpJSON.call(p, "listaTrueType", funcao, par);
+	    console.error("Veja i3GEO.mapa.textFont");
 	},
-	/**
-	 * listaEpsg
-	 *
-	 * <LISTAEPSG>
-	 */
 	listaEpsg : function(funcao) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=listaEpsg&map_file=";
-	    cpJSON.call(p, "listaEpsg", funcao, par);
+	    console.error("Veja i3GEO.mapa.epsglist");
 	},
-	/**
-	 * pegaData
-	 *
-	 * <PEGADATA>
-	 */
 	pegaData : function(funcao, tema) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=pegadata&tema=" + tema;
-	    cpJSON.call(p, "pegadata", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * pegaMetaData
-	 *
-	 * <PEGAMETADATA>
-	 */
 	pegaMetaData : function(funcao, tema) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=pegametadata&tema=" + tema;
-	    cpJSON.call(p, "pegametadata", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * alteraData
-	 *
-	 * <ALTERADATA>
-	 */
 	alteraData : function(funcao, tema, data, removemeta) {
-	    i3GEO.php.verifica();
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"g_sid=" + i3GEO.configura.sid + "&funcao=alteradata&tema=" + tema + "&novodata=" + data + "&removemeta=" + removemeta;
-	    cpJSON.call(p, "alteradata", funcao, par);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * dadosPerfilRelevo
-	 *
-	 * <DADOSPERFILRELEVO>
-	 */
 	dadosPerfilRelevo : function(funcao, opcao, pontos, amostragem, item) {
-	    i3GEO.php.verifica();
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid
-		+ "&funcao=dadosPerfilRelevo&opcao=" + opcao, cp = new cpaint();
-	    cp.set_transfer_mode('POST');
-	    cp.set_response_type("JSON");
-	    cp.call(p, "foo", funcao, "&pontos=" + pontos + "&amostragem=" + amostragem + "&item=" + item);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: funcoesGeometriasWkt
-	 *
-	 * Aplica uma operacao sobre uma geometria definida em WKT
-	 */
 	funcoesGeometriasWkt : function(funcao, listaWkt, operacao) {
-	    i3GEO.php.verifica();
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?g_sid=" + i3GEO.configura.sid
-		+ "&funcao=funcoesGeometriasWkt&operacao=" + operacao, cp = new cpaint();
-	    cp.set_transfer_mode('POST');
-	    cp.set_response_type("JSON");
-	    cp.call(p, "foo", funcao, "&geometrias=" + listaWkt);
+	    console.error("Veja i3GEO.editor.funcoesGeometriasWkt");
 	},
-	/**
-	 * listaVariavel
-	 *
-	 * Obt&eacute;m a lista de vari&aacute;veis do sistema de metadados estat&iacute;sticos
-	 */
 	listaVariavel : function(funcao, filtro_esquema) {
-	    if (!filtro_esquema) {
-		filtro_esquema = "";
-	    }
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaVariavel&g_sid=" + i3GEO.configura.sid
-		+ "&filtro_esquema=" + filtro_esquema;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Veja i3GEO.catalogoMetaestat.getVariables");
 	},
-	/**
-	 * listaMedidaVariavel
-	 *
-	 * Obt&eacute;m a lista medidas de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
-	 */
 	listaMedidaVariavel : function(codigo_variavel, funcao) {
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaMedidaVariavel&codigo_variavel=" + codigo_variavel
-		+ "&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Veja i3GEO.catalogoMetaestat.getMeasuresVariable");
 	},
-	/**
-	 * listaParametrosMedidaVariavel
-	 *
-	 * Obt&eacute;m a lista de par&acirc;metros de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
-	 */
+        listaRegioesMedidaVariavel : function(id_medida_variavel, funcao) {
+            console.error("Veja i3GEO.catalogoMetaestat.getRegionsMeasure");
+        },
+        listaClassificacaoMedida : function(id_medida_variavel, funcao) {
+            console.error("Veja i3GEO.catalogoMetaestat.getClassificationsMeasure");
+        },
 	listaParametrosMedidaVariavel : function(id_medida_variavel, funcao) {
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaParametro&id_medida_variavel=" + id_medida_variavel
-		+ "&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Veja i3GEO.catalogoMetaestat.getParametersMeasure");
 	},
-	/**
-	 * listaRegioesMedidaVariavel
-	 *
-	 * Obt&eacute;m a lista de regioes de uma medida de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
-	 */
-	listaRegioesMedidaVariavel : function(id_medida_variavel, funcao) {
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaRegioesMedida&id_medida_variavel=" + id_medida_variavel
-		+ "&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
-	},
-	/**
-	 * listaValoresParametroMedidaVariavel
-	 *
-	 * Obt&eacute;m a lista de valores de um par&acirc;metro de uma medida de uma vari&aacute;vel do sistema de metadados
-	 * estat&iacute;sticos
-	 */
 	listaValoresParametroMedidaVariavel : function(id_parametro_medida, funcao) {
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaValoresParametro&id_parametro_medida="
-		+ id_parametro_medida + "&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Veja i3GEO.catalogoMetaestat.getParametersMeasureValues");
 	},
-	/**
-	 * relatorioVariavel
-	 *
-	 * Relatorio descritivo de uma vari&aacute;vel do sistema de metadados estat&iacute;sticos
-	 */
 	relatorioVariavel : function(codigo_variavel, funcao) {
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=relatorioCompleto&codigo_variavel=" + codigo_variavel
-		+ "&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * listaClassificacaoMedida
-	 *
-	 * Lista as classificacoes de uma medida de variavel do sistema de metadados estat&iacute;sticos
-	 */
-	listaClassificacaoMedida : function(id_medida_variavel, funcao) {
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaClassificacaoMedida&id_medida_variavel="
-		+ id_medida_variavel + "&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
-	},
-	/**
-	 * listaClasseClassificacao
-	 *
-	 * Lista as classes de uma classificacao de uma medida de variavel do sistema de metadados estat&iacute;sticos
-	 */
 	listaClasseClassificacao : function(id_classificacao, funcao) {
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaClasseClassificacao&id_classificacao=" + id_classificacao;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * mapfileMedidaVariavel
-	 *
-	 * Adiciona uma camada ao mapa baseado no sistema de metadados estat&iacute;sticos
-	 */
 	mapfileMedidaVariavel : function(funcao, id_medida_variavel, filtro, todasascolunas, tipolayer, titulolayer, id_classificacao,
 		agruparpor, codigo_tipo_regiao, opacidade) {
-	    if (!opacidade) {
-		opacidade = "";
-	    }
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=mapfileMedidaVariavel&formato=json&codigo_tipo_regiao="
-		+ codigo_tipo_regiao + "&id_medida_variavel=" + id_medida_variavel + "&filtro=" + filtro + "&todasascolunas="
-		+ todasascolunas + "&tipolayer=" + tipolayer + "&titulolayer=" + titulolayer + "&id_classificacao=" + id_classificacao
-		+ "&agruparpor=" + agruparpor + "&opacidade=" + opacidade + "&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * listaTipoRegiao
-	 *
-	 * Lista as regioes cadastradas no sistema de metadados estatisticos
-	 */
 	listaTipoRegiao : function(funcao, codigo_tipo_regiao) {
-	    if (!codigo_tipo_regiao) {
-		codigo_tipo_regiao = "";
-	    }
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaTipoRegiao&codigo_tipo_regiao=" + codigo_tipo_regiao
-		+ "&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Veja i3GEO.catalogoRegioes.getRegions");
 	},
-	/**
-	 * mapfileTipoRegiao
-	 *
-	 * Adiciona ao mapa camada baseada nas regioes cadastradas no sistema de metadados estatisticos
-	 */
 	mapfileTipoRegiao : function(funcao, codigo_tipo_regiao, outlinecolor, width, nomes) {
-	    if (!outlinecolor) {
-		outlinecolor = "255,0,0";
-	    }
-	    if (!width) {
-		width = 1;
-	    }
-	    if (!nomes) {
-		nome = "nao";
-	    }
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=mapfileTipoRegiao&codigo_tipo_regiao=" + codigo_tipo_regiao
-		+ "&g_sid=" + i3GEO.configura.sid;
-	    p += "&outlinecolor=" + outlinecolor + "&width=" + width + "&nomes=" + nomes;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * listaHierarquiaRegioes
-	 *
-	 * Lista as regioes cadastradas no sistema de metadados estatisticos organizadas de forma hierarquica
-	 */
 	listaHierarquiaRegioes : function(funcao, codigo_tipo_regiao, codigoregiaopai, valorregiaopai) {
-	    if (!codigoregiaopai) {
-		codigoregiaopai = "";
-	    }
-	    if (!valorregiaopai) {
-		valorregiaopai = "";
-	    }
-	    if (!codigo_tipo_regiao) {
-		codigo_tipo_regiao = "";
-	    }
-	    var p =
-		i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaHierarquiaRegioes&codigo_tipo_regiao="
-		+ codigo_tipo_regiao + "&codigoregiaopai=" + codigoregiaopai + "&valorregiaopai=" + valorregiaopai + "&g_sid="
-		+ i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Veja i3GEO.catalogoRegioes.getRegionsTree");
 	},
-	/**
-	 * aplicaFiltroRegiao
-	 *
-	 * Aplica um filtro no SQL que define uma camada do sistema de metadados estatisticos para filtrar para uma regiao especifica
-	 */
 	aplicaFiltroRegiao : function(funcao, codigo_tipo_regiao, codigo_regiao) {
-	    var p =
-		i3GEO.configura.locaplic + "/ferramentas/metaestat/analise.php?funcao=aplicaFiltroRegiao&codigo_tipo_regiao="
-		+ codigo_tipo_regiao + "&codigo_regiao=" + codigo_regiao + "&g_sid=" + i3GEO.configura.sid;
-	    // p += "&tipo="+tipo+"&codigo_tipo_regiao_pai="+codigo_tipo_regiao_pai+"&codigo_regiao_pai="+codigo_regiao_pai;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * listaCamadasMetaestat
-	 *
-	 * Lista as camadas existentes no mapa e que se referem ao sistema METAESTAT
-	 */
 	listaCamadasMetaestat : function(funcao) {
-	    var p =
-		i3GEO.configura.locaplic + "/ferramentas/metaestat/analise.php?funcao=listaCamadasMetaestat&g_sid=" + i3GEO.configura.sid;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * listaGruposMapaMetaestat
-	 *
-	 * Lista os grupos cadastrados no sistema de publicacao de mapas do METAESTAT
-	 */
 	listaGruposMapaMetaestat : function(funcao, id_mapa) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaGruposMapa&id_mapa=" + id_mapa;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * listaTemasMapaMetaestat
-	 *
-	 * Lista os temas cadastrados no sistema de publicacao de mapas do METAESTAT
-	 */
 	listaTemasMapaMetaestat : function(funcao, id_mapa_grupo) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/metaestat_controle.php?funcao=listaTemasMapa&id_mapa_grupo=" + id_mapa_grupo;
-	    i3GEO.util.ajaxGet(p, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: marcadores2shp
-	 *
-	 * Converte os marcadores de lugar em uma camada shapefile
-	 */
 	marcadores2shp : function(funcao) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?";
-	    par = "funcao=marcadores2shp";
-	    i3GEO.util.ajaxGet(p + par, funcao);
+	    console.error("Removido na versao 8");
 	},
-	/**
-	 * Function: listaInterfaces
-	 *
-	 * Lista as interfaces que podem ser utilizadas para abrir um mapa
-	 */
 	listaInterfaces : function(funcao) {
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"&map_file=&funcao=listainterfaces";
-	    cpJSON.call(p, "foo", funcao, par);
+	    console.error("Removido na versao 8");
 	}
-
 };

@@ -351,7 +351,7 @@ i3GEO.pluginI3geo =
 			return camada;
 		    },
 		    layerMashup : function(camada, epsg){
-			i3GEO.pluginI3geo.heatmap.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+			i3GEO.pluginI3geo.heatmap.openlayers.inicia(camada,i3geoOL);
 			return [];
 		    },
 		    inicia : function(camada, objMapa) {
@@ -622,7 +622,7 @@ i3GEO.pluginI3geo =
 			return camada;
 		    },
 		    layerMashup : function(camada, epsg){
-			i3GEO.pluginI3geo.markercluster.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+			i3GEO.pluginI3geo.markercluster.openlayers.inicia(camada,i3geoOL);
 			return [];
 		    },
 		    inicia : function(camada, objMapa) {
@@ -883,7 +883,7 @@ i3GEO.pluginI3geo =
 			return camada;
 		    },
 		    layerMashup : function(camada, epsg){
-			i3GEO.pluginI3geo.layerkml.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+			i3GEO.pluginI3geo.layerkml.openlayers.inicia(camada,i3geoOL);
 			return [];
 		    },
 		    inicia : function(camada) {
@@ -1216,7 +1216,7 @@ i3GEO.pluginI3geo =
 			return camada;
 		    },
 		    layerMashup : function(camada, epsg){
-			i3GEO.pluginI3geo.layergeojson.openlayers.inicia(camada,i3GEO.editorOL.mapa);
+			i3GEO.pluginI3geo.layergeojson.openlayers.inicia(camada,i3geoOL);
 			return [];
 		    },
 		    inicia : function(camada) {

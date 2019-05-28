@@ -119,8 +119,10 @@ class Atributos
             include_once ($locaplic . "/funcoes_gerais.php");
         else
             include_once ("funcoes_gerais.php");
+
         $this->v = versao();
         $this->v = $this->v["principal"];
+        include_once($locaplic . "/classesphp/classe_vermultilayer.php");
         if ($map_file != "") {
 
             $this->locaplic = $locaplic;

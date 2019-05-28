@@ -1,136 +1,156 @@
 <?php
-	include_once (dirname(__FILE__)."/../../classesphp/sani_request.php");
-	$_GET = array_merge($_GET,$_POST);
-	include_once(dirname(__FILE__)."/../../classesphp/class.palette.php");
-	$m = new palette();
-	$lista = implode(",",($m->listaColourRamps(dirname(__FILE__)."/../..")));
-	if(!isset($_GET["ncores"])){
-		$_GET["ncores"] = 10;
-	}
-	if(empty($_GET["locaplic"])){
-		$_GET["locaplic"] = "../..";
-	}
+include_once (dirname(__FILE__) . "/../../classesphp/sani_request.php");
+$_GET = array_merge($_GET, $_POST);
+include_once (dirname(__FILE__) . "/../../classesphp/class.palette.php");
+$m = new palette();
+$lista = implode(",", ($m->listaColourRamps(dirname(__FILE__) . "/../..")));
+if (! isset($_GET["ncores"])) {
+    $_GET["ncores"] = 10;
+}
+if (empty($_GET["locaplic"])) {
+    $_GET["locaplic"] = "../..";
+}
 
-	$locaplic = $_GET["locaplic"];
-	$elemento = $_GET["elemento"];
-	$doc = $_GET["doc"];
+$locaplic = $_GET["locaplic"];
+$elemento = $_GET["elemento"];
+$doc = $_GET["doc"];
 ?>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<script type="text/javascript" src="<?php echo $locaplic;?>/js/i3geo.js"></script>
-<script type="text/javascript" src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/slider-min.js"></script>
-<link rel='stylesheet' type='text/css' href='<?php echo $locaplic;?>/css/i3geo6.css'/>
+<script src="<?php echo $locaplic;?>/pacotes/ol4/ol.js"></script>
+<script src="<?php echo $locaplic;?>/js/i3geo.js"></script>
+<script src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/slider-min.js"></script>
+<link rel='stylesheet' type='text/css' href='<?php echo $locaplic;?>/css/i3geo6.css' />
 <style>
-body{
-	padding:0;
+body {
+	padding: 0;
 	background-color: white;
 }
+
 #imagens {
-	border:1px solid #EBEBEB;
-	height:80px;
-	overflow:auto;
-	position:relative;
-	text-align:center;
-	width:250px;
-	left:8px;
+	border: 1px solid #EBEBEB;
+	height: 80px;
+	overflow: auto;
+	position: relative;
+	text-align: center;
+	width: 250px;
+	left: 8px;
 }
+
 #cores {
-	border:1px solid #EBEBEB;
-	height:80px;
-	overflow:auto;
-	position:relative;
-	text-align:center;
-	width:250px;
-	left:8px;
+	border: 1px solid #EBEBEB;
+	height: 80px;
+	overflow: auto;
+	position: relative;
+	text-align: center;
+	width: 250px;
+	left: 8px;
 }
-#imagens img{
+
+#imagens img {
 	width: 236px;
-	cursor:pointer;
-	left:10px;
+	cursor: pointer;
+	left: 10px;
 	height: 20px;
 }
+
 #demo_bg {
-    position: relative;
-    background: url(<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/dual_thumb_bg.gif) 0 5px no-repeat;
-    height: 28px;
-    width: 238px;
+	position: relative;
+	background:
+		url(<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/dual_thumb_bg.gif)
+		0 5px no-repeat;
+	height: 28px;
+	width: 238px;
 	left: 8px;
 }
 
 #demo_bg div {
-    position: absolute;
-    cursor: default;
-    top: 4px;
+	position: absolute;
+	cursor: default;
+	top: 4px;
 }
 
 /* Here's the highlight element */
 #demo_bg span {
-    position: absolute;
-    background: url(<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/dual_thumb_highlight.gif) 0 0 repeat-x;
-    top: 10px;
-    left: 12px;
-    height: 13px;
-    width: 226px;
+	position: absolute;
+	background:
+		url(<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/dual_thumb_highlight.gif)
+		0 0 repeat-x;
+	top: 10px;
+	left: 12px;
+	height: 13px;
+	width: 226px;
 }
 
 #demo_bg .caution {
-    background-position: 0 -13px;
+	background-position: 0 -13px;
 }
-#demo_bg .boom,
-#demo_bg .danger {
-    background-position: 0 -26px;
+
+#demo_bg .boom, #demo_bg .danger {
+	background-position: 0 -26px;
 }
 
 /* We'll use the same class names for the status report region */
 p .ok {
-    color: #3a3;
-    font-weight: bold;
-    text-transform: uppercase;
-}
-p .caution {
-    background: #ff3;
-    color: #770;
-    font-weight: bold;
-    font-style: italic;
-    padding: 0 1ex;
-    text-transform: uppercase;
-}
-p .danger {
-    color: #f33;
-    font-weight: bold;
-    text-decoration: blink;
-    text-transform: uppercase;
-}
-p .boom {
-    color: #fff;
-    background: #000;
-    padding: 0 1ex;
+	color: #3a3;
+	font-weight: bold;
+	text-transform: uppercase;
 }
 
+p .caution {
+	background: #ff3;
+	color: #770;
+	font-weight: bold;
+	font-style: italic;
+	padding: 0 1ex;
+	text-transform: uppercase;
+}
+
+p .danger {
+	color: #f33;
+	font-weight: bold;
+	text-decoration: blink;
+	text-transform: uppercase;
+}
+
+p .boom {
+	color: #fff;
+	background: #000;
+	padding: 0 1ex;
+}
 </style>
 <title></title>
 </head>
-<body class=" yui-skin-sam" style="margin:0px;width:253px;text-align:left;" >
-<p class=paragrafo style="position:relative;left:6px;width:100%;" >
-Quantas cores voc&ecirc; quer gerar? <input id=ncores type=text size=3 value=<?php echo $_GET["ncores"]; ?> /><br>
-Clique para escolher o modelo de cores
-</p>
-<div id="imagens" ></div>
-<div id="demo_bg" title="Range slider">
-    <span id="demo_highlight"></span>
-    <div id="demo_min_thumb"><img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/l-thumb-round.gif"></div>
-    <div id="demo_max_thumb"><img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/r-thumb-round.gif"></div>
-</div>
-<p style="text-align:center;width:250px"><span id="demo_range" >0-255</span></p>
-<div id=cores ></div>
-<p style="position:relative;left:6px;top:5px;text-align:left;" >
-<input id=voltar size="22" type="button" onclick="aplicarCores()" value="Aplicar cores">&nbsp;
-</p>
-<br>
-<p>Para atualizar a lista de cores geradas, clique novamente sobre a barra de cor. Voc&ecirc; pode tamb&eacute;m definir os limites inicial e final (use a barra deslizante) e alterar os valores obtidos editando diretamente o RGB</p>
-<script>
+<body class=" yui-skin-sam" style="margin: 0px; width: 253px; text-align: left;">
+    <p class=paragrafo style="position: relative; left: 6px; width: 100%;">
+        Quantas cores voc&ecirc; quer gerar?
+        <input id=ncores type=text size=3 value=<?php echo $_GET["ncores"]; ?> />
+        <br> Clique para escolher o modelo de cores
+    </p>
+    <div id="imagens"></div>
+    <div id="demo_bg" title="Range slider">
+        <span id="demo_highlight"></span>
+        <div id="demo_min_thumb">
+            <img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/l-thumb-round.gif">
+        </div>
+        <div id="demo_max_thumb">
+            <img src="<?php echo $locaplic;?>/pacotes/yui290/build/slider/assets/r-thumb-round.gif">
+        </div>
+    </div>
+    <p style="text-align: center; width: 250px">
+        <span id="demo_range">0-255</span>
+    </p>
+    <div id=cores></div>
+    <p style="position: relative; left: 6px; top: 5px; text-align: left;">
+        <input id=voltar size="22" type="button" onclick="aplicarCores()" value="Aplicar cores">
+        &nbsp;
+    </p>
+    <br>
+    <p>Para atualizar a lista de cores geradas, clique novamente sobre a barra de cor. Voc&ecirc; pode tamb&eacute;m definir os limites inicial e final (use a barra deslizante) e alterar os valores
+        obtidos editando diretamente o RGB</p>
+    <script>
 var lista = "<?php echo $lista;?>";
 lista = lista.split(",");
 var n = lista.length;
@@ -145,16 +165,16 @@ function geracores(codigo){
 	if(onde.innerHTML == "Aguarde...")
 	{return;}
 	onde.innerHTML = "Aguarde..."
-	var temp = function(retorno){
+	var temp = function(data){
 		onde.innerHTML = "";
 		var ins = "<table class=lista6 >",
-			n = retorno.data.length,
+			n = data.length,
 			i,
 			cor;
-		for(i in retorno.data){
+		for(i in data){
 			try{
-				if(retorno.data[i].r != undefined){
-					cor = retorno.data[i].r+","+retorno.data[i].g+","+retorno.data[i].b;
+				if(data[i].r != undefined){
+					cor = data[i].r+","+data[i].g+","+data[i].b;
 					ins += "<tr><td style='width:10px'><img src='<?php echo $locaplic;?>/imagens/x.png' style='cursor:pointer;' title='excluir' onclick='javascript:$i(\"cor_"+cor+"\").style.display=\"none\";this.style.display=\"none\"' </td><td style='width:100%' ><p id='cor_"+cor+"' style='width:100%;heigth:10px;background-color:rgb("+cor+")'><input onchange='javascript:$i(\"cor_"+cor+"\").style.backgroundColor=this.value;' type=text size=17 value=\"rgb("+cor+")\"/></p></td></tr>";
 				}
 			}catch(e){}
@@ -166,10 +186,23 @@ function geracores(codigo){
 	{nobj.value = 255;}
 	if(nobj.value > (slider.maxVal - slider.minVal))
 	{nobj.value = slider.maxVal - slider.minVal;}
-	var ncores = nobj.value;
-
-	var p = "<?php echo $locaplic;?>/classesphp/mapa_controle.php?funcao=geraCoresColourRamp&map_file=&g_sid=&codigo="+codigo+"&inicio="+slider.minVal+"&fim="+slider.maxVal+"&ncores="+ncores;
-	cpJSON.call(p,"foo",temp);
+	i3GEO.configura.sid = window.parent.i3GEO.configura.sid;
+    i3GEO.request.get({
+        snackbar: false,
+        snackbarmsg: false,
+        btn: false,
+        par: {
+            funcao: "getColourRamp",
+            id: codigo,
+            start: slider.minVal,
+            end: slider.maxVal,
+            numcolors: nobj.value
+        },
+        prog: "<?php echo $locaplic;?>/serverapi/class/",
+        fn: function(data){
+            temp(data);
+        }
+    });
 }
 
 //

@@ -26,6 +26,9 @@ i3GEO.template = {
 	forms : {
 	    horizontaltextinput : "<div class='form-group label-fixed condensed'><label class='col-md-6 control-label'>{{{label}}}</label><div class='col-md-6'><input class='form-control input-lg' type='text' id='{{{id}}}' name='{{{name}}}' value='{{{value}}}' /></div></div>"
 	},
+        metaestat :{
+            templateAdd: false
+        },
 	//lista generica de opcoes
 	listaopcoes: '<div class="list-group condensed"><div class="row-content text-left">{{{opcional}}}<label class="nomeTemaCurto" style="margin-bottom: 0px;"><a href="{{{url}}}" target="{{{target}}}" ><h4>{{{nome}}}</h4></a><h6>{{{descricao}}}</h6></label></div></div><hr>',
 	//formatacao da lista de camadas

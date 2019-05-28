@@ -88,15 +88,6 @@ i3GEO.marcador =
 	exporta : function() {
 	    i3GEO.util.copyToClipboard(i3GEO.util.pegaCookie("marcadoresDoI3Geo"));
 	},
-	exportaShp : function() {
-	    var c = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), temp = function(retorno) {
-		i3GEO.temaAtivo = retorno.data;
-		i3GEO.mapa.refresh();
-	    };
-	    if (c) {
-		i3GEO.php.marcadores2shp(temp);
-	    }
-	},
 	importa : function() {
 	    var temp = function() {
 		var cookies = i3GEO.util.pegaCookie("marcadoresDoI3Geo"), novos = "";
@@ -168,10 +159,6 @@ i3GEO.marcador =
 		title : $trad("x81"),
 		text: $trad("x81"),
 		onclick : "javascript:i3GEO.marcador.importa()"
-	    }, {
-		title : $trad("x84"),
-		text: $trad("x84"),
-		onclick : "javascript:i3GEO.marcador.exportaShp()"
 	    });
 	    return itens;
 	}

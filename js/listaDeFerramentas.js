@@ -196,11 +196,6 @@ i3GEO.listaDeFerramentas = {
 		}
 	    }],
 	    "cartogramas" :[{
-		id : "omenudataFerramentas1e",
-		text : $trad("addcamada"),
-		url : "javascript:i3GEO.mapa.dialogo.cartograma()"
-	    },
-	    {
 		id : "omenudataFerramentas6a",
 		text : $trad("x61"),
 		url : "javascript:i3GEO.mapa.dialogo.filtraregiao()"

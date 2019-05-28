@@ -39,6 +39,23 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         $retorno = true;
         break;
+    case "ITENS":
+        include ("../../classesphp/classe_atributos.php");
+        $m = new Atributos($_SESSION["map_file"], $_GET["tema"], "", $_GET["ext"]);
+        $retorno = $m->listaItens();
+        break;
+    case "VALORESITEM":
+        include ("../../classesphp/classe_atributos.php");
+        $m = new Atributos($_SESSION["map_file"], $_GET["tema"], "", $_GET["ext"]);
+        $retorno = $m->listaUnicoRapida($_GET["item"]);
+        break;
+    case "ALTERLAYERNAME":
+        include ("../../classesphp/classe_temas.php");
+        $valor = mb_convert_encoding($_GET["title"], "ISO-8859-1", mb_detect_encoding($_GET["title"]));
+        $m = new Temas($_SESSION["map_file"], $_GET["idlayer"]);
+        $retorno = $m->mudaNome($valor);
+        $m->salva();
+        break;
 }
 ob_clean();
 header("Content-type: application/json");

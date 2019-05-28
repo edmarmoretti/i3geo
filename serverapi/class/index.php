@@ -11,6 +11,11 @@ switch (strtoupper($_GET["funcao"])) {
         $retorno = $m->alteracor($_GET["idclasse"], $_GET["cor"],$_GET["w"],$_GET["h"]);
         $m->salva();
         break;
+    case "GETCOLOURRAMP":
+        include ("../../classesphp/class.palette.php");
+        $m = new palette();
+        $retorno = $m->geraCoresColourRamp($_SESSION["locaplic"], $_GET["id"], $_GET["start"], $_GET["end"], $_GET["numcolors"]);
+        break;
 }
 ob_clean();
 header("Content-type: application/json");

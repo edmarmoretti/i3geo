@@ -1313,7 +1313,7 @@ class MetaestatInfo{
     function listaVariavel($codigo_variavel="",$filtro_esquema=""){
         $sql = "select DISTINCT a.* from ".$this->esquemaadmin."i3geoestat_variavel as a ";
         if($codigo_variavel != ""){
-            $sql .= "WHERE a.codigo_variavel = $codigo_variavel ";
+            $sql .= "WHERE a.codigo_variavel = " . $codigo_variavel;
         }
         if($filtro_esquema != ""){
             $sql .= ", ".$this->esquemaadmin."i3geoestat_medida_variavel as b WHERE a.codigo_variavel = b.codigo_variavel and b.esquemadb = '$filtro_esquema' ";
@@ -2238,6 +2238,24 @@ class MetaestatInfo{
                 exit;
             }
         }
+    }
+    function adicionaLimiteRegiao($map_file,$codigo_tipo_regiao,$outlinecolor="50,50,50",$width=2){
+        $res = $this->mapfileTipoRegiao($codigo_tipo_regiao,$outlinecolor,$width);
+        $mapaNovo = ms_newMapObj($res["mapfile"]);
+        $layerNovo = $mapaNovo->getlayerbyname($res["layer"]);
+        $layerNovo->set("status",MS_DEFAULT);
+        $dataNovo = $layerNovo->data;
+        $mapa = ms_newMapObj($map_file);
+        $c = $mapa->numlayers;
+        for($i=0;$i < $c;++$i){
+            $l = $mapa->getlayer($i);
+            if($l->data == $dataNovo){
+                $l->set("status",MS_DELETE);
+            }
+        }
+        ms_newLayerObj($mapa, $layerNovo);
+        $mapa->save($map_file);
+        return true;
     }
 }
 ?>

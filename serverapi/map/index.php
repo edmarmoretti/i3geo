@@ -1,6 +1,32 @@
 <?php
 include ("../safe.php");
+include ("../../classesphp/classe_vermultilayer.php");
 switch (strtoupper($_GET["funcao"])) {
+    case "CREATE":
+        session_name("i3GeoPHP");
+        unset($GLOBALS);
+        if (session_status() == PHP_SESSION_ACTIVE) {
+            // error_log("--------------Apagando a session");
+            session_destroy();
+            //lembrete: validaAcessoTemas usa cookies
+            $_COOKIE = array();
+        }
+        include (dirname(__FILE__) . "/../../ms_configura.php");
+        $interfaceTemp = $_GET["interface"];
+        $interface = "mashup";
+        $funcao = $_GET["funcao"];
+        include (dirname(__FILE__) . "/../../ms_criamapa.php");
+        $_SESSION["interface"] = $interfaceTemp;
+        $temp = $_SESSION["map_file"];
+        $retorno = session_id();
+        session_write_close();
+        // ver funcoes_gerais.php
+        validaAcessoTemas($temp);
+        break;
+    case "START":
+        include ("../../classesphp/mapa_inicia.php");
+        $retorno = iniciaMapa($_GET["w"],$_GET["h"],$_GET["kmlurl"]);
+        break;
     case "EXCLUIRTEMAS":
         include_once ("../../classesphp/classe_mapa.php");
         $m = new Mapa($_SESSION["map_file"]);
@@ -170,7 +196,6 @@ switch (strtoupper($_GET["funcao"])) {
         if (! isset($resolucao)) {
             $resolucao = 5;
         }
-        include ("../../classesphp/classe_vermultilayer.php");
         include ("../../classesphp/classe_atributos.php");
         if (! isset($ext)) {
             $ext = "";
@@ -220,6 +245,71 @@ switch (strtoupper($_GET["funcao"])) {
                 "temas" => $par
             );
         }
+        break;
+    case "SEARCHINLAYERS":
+        include ("../../classesphp/classe_mapa.php");
+        $m = new Mapa($_SESSION["map_file"]);
+        $lista = $m->listaTemasBuscaRapida();
+        if ($lista != "") {
+            include ("../../classesphp/classe_atributos.php");
+            $m = new Atributos($_SESSION["map_file"]);
+            $dados = $m->buscaRegistros($_GET["palavra"], $lista, "qualquer", "mapa");
+            foreach ($dados as $tema) {
+                $rs = $tema["resultado"];
+                foreach ($rs as $r) {
+                    $retorno[] = array(
+                        "box" => $r["box"],
+                        "valor" => $r["valores"][0]["valor"]
+                    );
+                }
+            }
+        } else {
+            $retorno = false;
+        }
+        break;
+    case "TEXTFONT":
+        $retorno = listaTrueType($_SESSION["locaplic"], $_SESSION["imgdir"], $_SESSION["dir_tmp"]);
+        break;
+    case "ADDLAYERMETAESTAT":
+        include ("../../classesphp/classe_metaestatinfo.php");
+        $m = new MetaestatInfo();
+        if(!empty($_GET["filter"])){
+            $_GET["filter"] = str_replace('"', "'", $_GET["filter"]);
+            $final = array();
+            $sepands = explode("|",$_GET["filter"]);
+            foreach($sepands as $sepand){
+                $linhas = explode("*",$sepand);
+                if(!is_numeric(str_replace(array("'",","),"",$linhas[1]))){
+                    exit;
+                }
+                if(count(explode(",",$linhas[1])) == 1){
+                    $final[] = $linhas[0]." = ". $linhas[1];
+                } else {
+                    $final[] = $linhas[0]." IN (".$linhas[1].")";
+                }
+            }
+            $_GET["filter"] = implode(" and ", $final);
+        }
+        //array("mapfile"=>$arq,"layer"=>$nomeDoLayer,"titulolayer"=>$titulolayer)
+        $data = $m->mapfileMedidaVariavel($_GET["measure"], $_GET["filter"], 0, $_GET["layertype"], $_GET["title"], $_GET["classification"], $_GET["group"], $_GET["regiontype"], $_GET["opacity"], false);
+        include ("../../classesphp/classe_mapa.php");
+        $m = new Mapa($_SESSION["map_file"]);
+        $m->adicionaTema($data["mapfile"], $_SESSION["locaplic"]);
+        $m->salva();
+        validaAcessoTemas($_SESSION["map_file"]);
+        $retorno = true;
+        break;
+    case "ADDLAYERREGION":
+        include ("../../classesphp/classe_metaestatinfo.php");
+        $m = new MetaestatInfo();
+        $retorno = $m->adicionaLimiteRegiao($_SESSION["map_file"],$_GET["region"]);
+        validaAcessoTemas($_SESSION["map_file"]);
+        break;
+    case "TOGGLELAYERSVIS":
+        include ("../../classesphp/classe_mapa.php");
+        $m = new Mapa($_SESSION["map_file"]);
+        $retorno = $m->ligaDesligaTemas($_GET["on"], $_GET["off"], "nao");
+        $m->salva();
         break;
 }
 ob_clean();

@@ -1745,27 +1745,27 @@ i3GEO.util =
 		nome = "";
 	    }
 
-	    var monta = function(retorno) {
+	    var monta = function(data) {
 		if (typeof (console) !== 'undefined')
 		    console.info("monta combo");
 
 		var ins, temp, i, nm;
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    ins = [];
 		    ins.push("<select class='" + classe + "' " + estilo + " id='" + id + "' name='" + nome + "'>");
 		    ins.push("<option value='' >---</option>");
-		    temp = retorno.data.valores.length;
+		    temp = data.valores.length;
 		    for (i = 0; i < temp; i++) {
-			if (retorno.data.valores[i].tema === tema) {
+			if (data.valores[i].tema === tema) {
 			    if (alias == "sim") {
-				nm = retorno.data.valores[i].alias;
+				nm = data.valores[i].alias;
 				if (nm === "") {
-				    nm = retorno.data.valores[i].item;
+				    nm = data.valores[i].item;
 				}
 			    } else {
-				nm = retorno.data.valores[i].item;
+				nm = data.valores[i].item;
 			    }
-			    ins.push("<option value='" + retorno.data.valores[i].item + "' >" + nm + "</option>");
+			    ins.push("<option value='" + data.valores[i].item + "' >" + nm + "</option>");
 			}
 		    }
 		    ins.push("</select><b class='caret careti' ></b>");
@@ -1783,7 +1783,7 @@ i3GEO.util =
 		    eval("funcao(temp)");
 		}
 	    };
-	    i3GEO.php.listaItensTema(monta, tema);
+	    i3GEO.tema.itens(monta, tema);
 	},
 	/**
 	 * Function: comboValoresItem
@@ -1814,24 +1814,24 @@ i3GEO.util =
 	    if (arguments.length < 6) {
 		classe = "";
 	    }
-	    var monta = function(retorno) {
+	    var monta = function(data) {
 		if (typeof (console) !== 'undefined')
 		    console.info("monta");
 
 		var ins = [], i, pares, j, valoresSort = [];
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    ins.push("<select class='" + classe + "' id=" + id + " >");
 		    ins.push("<option value='' >---</option>");
-		    if(retorno.data[1].registros){
-			for (i = 0; i < retorno.data[1].registros.length; i++) {
-			    pares = retorno.data[1].registros[i].valores;
+		    if(data[1].registros){
+			for (i = 0; i < data[1].registros.length; i++) {
+			    pares = data[1].registros[i].valores;
 			    for (j = 0; j < pares.length; j++) {
 				valoresSort.push(pares[j].valor);
 			    }
 			}
 		    } else {
-			for (i = 0; i < retorno.data.length; i++) {
-			    valoresSort.push(retorno.data[i]);
+			for (i = 0; i < data.length; i++) {
+			    valoresSort.push(data[i]);
 			}
 		    }
 		    valoresSort.sort();
@@ -1856,7 +1856,7 @@ i3GEO.util =
 		    eval("funcao(temp)");
 		}
 	    };
-	    i3GEO.php.listaValoresItensTema(monta, tema, itemTema);
+	    i3GEO.tema.valoresItem(monta, tema, itemTema);
 	},
 	/**
 	 * Function: comboFontes
@@ -1873,13 +1873,13 @@ i3GEO.util =
 	    if(!classe){
 		classe= "";
 	    }
-	    var monta = function(retorno) {
+	    var monta = function(data) {
 		var ins = "", temp, i, dados;
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    ins += "<select name='font' class='" + classe + "' id='" + id + "'>";
 		    ins += "<option value='arial' >arial</option>";
 		    ins += "<option value='bitmap' >bitmap</option>";
-		    dados = retorno.data.split(",");
+		    dados = data.split(",");
 		    temp = dados.length;
 		    for (i = 0; i < temp; i++) {
 			ins += "<option value='" + dados[i] + "' >" + dados[i] + "</option>";
@@ -1891,7 +1891,7 @@ i3GEO.util =
 		    $i(id).value = sel;
 		}
 	    };
-	    i3GEO.php.listaFontesTexto(monta);
+	    i3GEO.mapa.textFont(monta);
 	},
 	/**
 	 * Function: comboSimNao
@@ -1952,29 +1952,29 @@ i3GEO.util =
 		$i(onde).innerHTML = "<span style=color:red;font-size:10px; >" + $trad("x65") + "</span>";
 	    }
 	    var monta =
-		function(retorno) {
+		function(data) {
 		var ins = [], i, temp, n;
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    if (ordenacao === "sim") {
 			ins.push("<table class=lista7 ><tr><td></td><td>" + $trad("x64") + "</td><td>Ordem</td>");
 		    } else {
 			ins.push("<table class=lista7 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
 		    }
-		    n = retorno.data.valores.length;
+		    n = data.valores.length;
 		    for (i = 0; i < n; i++) {
-			ins.push("<tr><td><div class='checkbox text-left'><label><input name='" + retorno.data.valores[i].tema + "' id='" + prefixo + retorno.data.valores[i].item +"' type='checkbox'><span class='checkbox-material noprint'><span class='check'></span></span></label></div>" + "</td>");
+			ins.push("<tr><td><div class='checkbox text-left'><label><input name='" + data.valores[i].tema + "' id='" + prefixo + data.valores[i].item +"' type='checkbox'><span class='checkbox-material noprint'><span class='check'></span></span></label></div>" + "</td>");
 			ins.push("<td><div class='form-group condensed' ><input class='form-control' style='width:" + size
 				+ "' id='"
 				+ prefixo
-				+ retorno.data.valores[i].item
-				+ retorno.data.valores[i].tema
+				+ data.valores[i].item
+				+ data.valores[i].tema
 				+ "' type=text value='"
-				+ retorno.data.valores[i].item
+				+ data.valores[i].item
 				+ "' /></div></td>");
 			if (ordenacao === "sim") {
 			    ins.push("<td><div class='form-group condensed' ><input class='form-control' id='ordem_" + prefixo
-				    + retorno.data.valores[i].item
-				    + retorno.data.valores[i].tema
+				    + data.valores[i].item
+				    + data.valores[i].tema
 				    + "' type=text size='3' value='"
 				    + i
 				    + "' /></div></td>");
@@ -1997,7 +1997,7 @@ i3GEO.util =
 		}
 		funcao.call(this, temp);
 	    };
-	    i3GEO.php.listaItensTema(monta, tema);
+	    i3GEO.tema.itens(monta, tema);
 	},
 	/**
 	 * Function: radioEpsg
@@ -2027,20 +2027,20 @@ i3GEO.util =
 		c = "";
 	    }
 	    var monta =
-		function(retorno) {
+		function(data) {
 		var ins = [], i, n, temp;
-		if (retorno.data !== undefined) {
+		if (data !== undefined) {
 		    ins.push("<table class=lista2 >");
-		    n = retorno.data.length;
+		    n = data.length;
 		    for (i = 0; i < n; i++) {
 			ins.push("<tr><td><input size=2 style='border:0px solid white;cursor:pointer' " + c
 				+ " name='"
 				+ prefixo
 				+ "EPSG' type=radio value='"
-				+ retorno.data[i].codigo
+				+ data[i].codigo
 				+ "' /></td>");
 			c = "";
-			ins.push("<td>" + retorno.data[i].nome + "</td></tr>");
+			ins.push("<td>" + data[i].nome + "</td></tr>");
 		    }
 		    ins.push("</table>");
 		    ins = ins.join('');
@@ -2056,7 +2056,7 @@ i3GEO.util =
 		}
 		funcao(temp);
 	    };
-	    i3GEO.php.listaEpsg(monta);
+	    i3GEO.mapa.epsgList(monta);
 	},
 	/**
 	 * Function: comboEpsg
@@ -2082,13 +2082,13 @@ i3GEO.util =
 	    if(!valorDefault){
 		valorDefault = "";
 	    }
-	    var monta = function(retorno) {
+	    var monta = function(data) {
 		var ins = [], i, n;
-		if (retorno.data !== undefined) {
-		    n = retorno.data.length;
+		if (data !== undefined) {
+		    n = data.length;
 		    ins.push("<select class='form-control' name='" + idCombo + "' id='" + idCombo + "' onChange='" + funcaoOnChange + "(this)' >");
 		    for (i = 0; i < n; i++) {
-			ins.push("<option value='" + retorno.data[i].codigo + "'>" + retorno.data[i].nome + "</option>");
+			ins.push("<option value='" + data[i].codigo + "'>" + data[i].nome + "</option>");
 		    }
 		    ins.push("</select><b class='caret careti' ></b>");
 		    ins = ins.join('');
@@ -2098,7 +2098,7 @@ i3GEO.util =
 		    onde.innerHTML = '<div class=erro >Ocorreu um erro</div>';
 		}
 	    };
-	    i3GEO.php.listaEpsg(monta);
+	    i3GEO.mapa.epsgList(monta);
 	},
 	/**
 	 * Function: proximoAnterior

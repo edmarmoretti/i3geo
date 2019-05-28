@@ -110,10 +110,6 @@ if (isset($inclusao) && $inclusao == true){
 	$download = true;
 }
 if(!$download){
-	if(!function_exists("cpjson"))
-	{
-		require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
-	}
 	if(!file_exists($nomeArquivo)){
 	    $_SESSION["downloadTmeKml"] = "";
 	    $_SESSION["downloadTmeKmz"] = "";

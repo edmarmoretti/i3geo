@@ -100,10 +100,19 @@ i3GEOF.identifica = {
 		if (i3GEOF.identifica.mostraSistemasAdicionais === true) {
 		    i3GEO.janela.abreAguarde();
 		    if (i3GEOF.identifica._sistemasAdicionais.length == 0) {
-			var p =
-			    i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?funcao=pegaSistemasIdentificacao&g_sid="
-			    + i3GEO.configura.sid;
-			cpJSON.call(p, "foo", i3GEOF.identifica.montaListaSistemas);
+			i3GEO.request.get({
+		                snackbar: false,
+		                snackbarmsg: false,
+		                btn: false,
+		                par: {
+		                    idioma: i3GEO.idioma.ATUAL,
+		                    funcao: "GETSIDENTIFY"
+		                },
+		                prog: "/serverapi/miscellaneous/",
+		                fn: function(data){
+		                    i3GEOF.identifica.montaListaSistemas(data);
+		                }
+		            });
 		    } else {
 			i3GEOF.identifica.montaListaSistemas("");
 		    }
@@ -174,12 +183,12 @@ i3GEOF.identifica = {
 	 * Cada sistema consiste em uma URL para a qual ser&atilde;o passados os parametros x e y.
 	 *
 	 */
-	montaListaSistemas : function(retorno) {
+	montaListaSistemas : function(data) {
 	    i3GEO.janela.fechaAguarde();
 	    var l, divins, ig, sistema, pub, exec, temp, t, linhas = [], ltema, i;
-	    if (retorno !== undefined ) {
-		if (retorno.data && i3GEOF.identifica._sistemasAdicionais.length == 0) {
-		    sis = retorno.data;
+	    if (data !== undefined ) {
+		if (data && i3GEOF.identifica._sistemasAdicionais.length == 0) {
+		    sis = data;
 		    for (ig = 0; ig < sis.length; ig++) {
 			if (sis[ig].PUBLICADO && sis[ig].PUBLICADO.toLowerCase() == "sim" ) {
 			    sistema = sis[ig].NOME;
@@ -474,61 +483,6 @@ i3GEOF.identifica = {
 			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
 		    }
 	    );
-	},
-	adicionaPontoRegiao : function(idjanela) {
-	    var p = i3GEO.configura.locaplic + "/ferramentas/editortema/exec.php?funcao=adicionaGeometria&g_sid=" + i3GEO.configura.sid, tema =
-		i3GEOF.identifica.propJanelas[idjanela].temaAtivo, temp = function(retorno) {
-		i3GEO.janela.fechaAguarde("aguardeSalvaPonto");
-		i3GEO.Interface.atualizaTema("", tema);
-		i3GEOF.identifica.buscaDadosTema(tema);
-	    };
-	    i3GEO.janela.AGUARDEMODAL = true;
-	    i3GEO.janela.abreAguarde("aguardeSalvaPonto", "Adicionando...");
-	    i3GEO.janela.AGUARDEMODAL = false;
-	    cpJSON.call(p, "foo", temp, "&tema=" + tema
-		    + "&wkt=POINT("
-		    + i3GEOF.identifica.propJanelas[idjanela].x
-		    + " "
-		    + i3GEOF.identifica.propJanelas[idjanela].y
-		    + ")");
-	},
-	apagaRegiao : function(tema, idreg) {
-	    var excluir =
-		function() {
-		var p =
-		    i3GEO.configura.locaplic + "/ferramentas/editortema/exec.php?funcao=excluiRegistro&g_sid=" + i3GEO.configura.sid, temp =
-			function() {
-		    i3GEO.janela.fechaAguarde("aguardeRemovendo");
-		    i3GEO.Interface.atualizaTema("", tema);
-		    i3GEOF.identifica.buscaDadosTema(tema);
-		};
-		i3GEO.janela.AGUARDEMODAL = true;
-		i3GEO.janela.abreAguarde("aguardeRemovendo", "Excluindo...");
-		i3GEO.janela.AGUARDEMODAL = false;
-		cpJSON.call(p, "foo", temp, "&tema=" + tema + "&identificador=" + idreg);
-	    };
-	    i3GEO.janela.confirma(
-		    $trad('removeRegistroBD', i3GEOF.identifica.dicionario),
-		    "",
-		    $trad('sim', i3GEOF.identifica.dicionario),
-		    $trad('cancela', i3GEOF.identifica.dicionario),
-		    excluir);
-	},
-	salvaDados : function(tema, idreg, coluna, tiposalva) {
-	    var p = i3GEO.configura.locaplic + "/ferramentas/editortema/exec.php?funcao=salvaRegistro&g_sid=" + i3GEO.configura.sid, idvalor =
-		$i("idsalva" + tema + "_" + idreg + "_" + coluna + "_" + tiposalva), temp = function(retorno) {
-		i3GEO.janela.fechaAguarde("aguardeSalvaAtributos");
-		i3GEO.Interface.atualizaTema("", i3GEOF.identifica.tema);
-	    };
-
-	    if (idvalor) {
-		i3GEO.janela.AGUARDEMODAL = true;
-		i3GEO.janela.abreAguarde("aguardeSalvaAtributos", "Salvando...");
-		i3GEO.janela.AGUARDEMODAL = false;
-		cpJSON.call(p, "foo", temp, "&tema=" + tema + "&coluna=" + coluna + "&valor=" + idvalor.value + "&identificador=" + idreg);
-	    } else {
-		alert("ocorreu um erro");
-	    }
 	}
 };
 //aplica ao codigo i3GEOF definicoes feitas na interface do mapa

@@ -52,7 +52,7 @@
 }
 .form-group select, .form-group input[type=text] {
     margin-top: 6px;
-    margin-bottom: 0px;
+    margin-bottom: 0px !important;
 }
 .modal-body .form-group input[type=text]{
     background-color: #f9f9f9 !Important;
@@ -396,8 +396,11 @@
 }
 
 #i3GEOoverlayInfo {
-	background-color: white;
-	padding: 5px;
+	background-color: #3c3a3ac7;
+	padding: 2px;
+	color: whitesmoke;
+	border: 0px solid;
+	border-radius: 5px 5px;
 }
 
 [data-toggle*=collapse]:after {

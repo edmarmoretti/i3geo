@@ -71,7 +71,6 @@ i3GEOF.filtro = {
 		    "",
 		    i3GEOF.filtro._parameters.tema,
 		    function(retorno) {
-
 			i3GEOF.filtro._parameters.comboItens = retorno.dados;
 			i3GEOF.filtro.adicionaLinhaFiltro();
 		    },

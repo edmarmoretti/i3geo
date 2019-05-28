@@ -65,18 +65,18 @@ i3GEOF.graficotema = {
 		i3GEO.guias.mostraGuiaFerramenta("i3GEOgraficotemaguia2","i3GEOgraficotemaguia");
 	    };
 	    i3GEO.util.aplicaAquarela(p.idContainer);
-	    i3GEO.php.listaItensTema(i3f.montaListaItens,p.tema);
+	    i3GEO.tema.itens(i3f.montaListaItens,p.tema);
 	},
-	montaListaItens: function(retorno){
+	montaListaItens: function(data){
 	    var i3f = i3GEOF.graficotema,
 	    p = i3f._parameters,
 	    ins = [],i,n, temp = {}, mustache = [];
 
-	    n = retorno.data.valores.length;
+	    n = data.valores.length;
 
 	    for (i=0;i<n; i++){
 		temp = {};
-		temp.item = retorno.data.valores[i].item;
+		temp.item = data.valores[i].item;
 		temp.rcor = i3GEO.util.randomRGB();
 		mustache.push(temp);
 	    }

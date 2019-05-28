@@ -108,7 +108,19 @@ include ($configInc["inc"] . "/css.php");
     </div>
     </script>
     <script>
-            //ativa o banner de inicializacao
+    //teste da funcao utilizada apos adicionar uma camada
+    /*
+    i3GEO.Interface.aposAdicNovaCamada = function(camada){
+        i3GEO.tema.ativaFerramentas(camada);
+        try{
+            var layer = i3geoOL.getLayersByName(camada.name);
+            layer[0].setExtent([-10948228,-5938851,-812066,1653485]);
+        } catch(e){}
+    };
+    */
+
+
+    //ativa o banner de inicializacao
             i3GEO.janela.tempoMsg(
                 $i("i3GEOlogoMarcaTemplate").innerHTML, 4000);
             (function() {

@@ -396,6 +396,26 @@ i3GEO.desenho =
 		i3GEO.desenho.criaLayerGrafico();
 	    }
 	},
+	adicionaFeatureWkt : function(wkt, atributos) {
+            var f, fwkt = new OpenLayers.Format.WKT();
+
+            if (atributos.externalGraphic && atributos.externalGraphic != "") {
+                var style_mark = OpenLayers.Util.extend({}, OpenLayers.Feature.Vector.style['default']);
+                style_mark.externalGraphic = atributos.externalGraphic;
+                style_mark.graphicWidth = atributos.graphicWidth;
+                style_mark.graphicHeight = atributos.graphicHeight;
+                style_mark.fillOpacity = atributos.opacidade;
+                f = fwkt.read(wkt);
+                f["attributes"] = atributos;
+                f["style"] = style_mark;
+            } else {
+                f = fwkt.read(wkt);
+                f["attributes"] = atributos;
+            }
+            i3GEO.desenho.layergrafico.addFeatures([
+                f
+                ]);
+        },
 	//para efeitos de compatibilidade
 	openlayers : {
 	    inicia : function() {

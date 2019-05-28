@@ -72,38 +72,6 @@ switch (strtoupper($funcao)) {
         retornaJSON($retorno);
         exit();
         break;
-    case "LISTAVARIAVEL":
-        $m = new MetaestatInfo();
-        if (!isset($_pg["filtro_esquema"])) {
-            $_pg["filtro_esquema"] = "";
-        }
-        if (!isset($_pg["codigo_variavel"])) {
-            $_pg["codigo_variavel"] = "";
-        }
-        retornaJSON($m->listaVariavel($_pg["codigo_variavel"], $_pg["filtro_esquema"]));
-        exit();
-        break;
-    case "LISTAMEDIDAVARIAVEL":
-        $m = new MetaestatInfo();
-        if(!isset($_pg["id_medida_variavel"])){
-            $_pg["id_medida_variavel"] = "";
-        }
-        retornaJSON($m->listaMedidaVariavel($_pg["codigo_variavel"], $_pg["id_medida_variavel"]));
-        exit();
-        break;
-    case "LISTAPARAMETRO":
-        $m = new MetaestatInfo();
-        if(!isset($_pg["id_medida_variavel"])){
-            $_pg["id_medida_variavel"] = "";
-        }
-        retornaJSON($m->listaParametro($_pg["id_medida_variavel"], $_pg["id_parametro_medida"]));
-        exit();
-        break;
-    case "LISTAVALORESPARAMETRO":
-        $m = new MetaestatInfo();
-        retornaJSON($m->listaValoresParametro($_pg["id_parametro_medida"]));
-        exit();
-        break;
     case "LISTAUNIDADEMEDIDA":
         $m = new MetaestatInfo();
         retornaJSON($m->listaUnidadeMedida($_pg["codigo_unidade_medida"]));
@@ -142,11 +110,6 @@ switch (strtoupper($funcao)) {
             "regioes" => $regioes,
             "valores" => $valores
         ));
-        exit();
-        break;
-    case "LISTAREGIOESMEDIDA":
-        $m = new MetaestatInfo();
-        retornaJSON($m->listaRegioesMedida($_pg["id_medida_variavel"]));
         exit();
         break;
     case "LISTAAGREGAREGIAO":
@@ -196,57 +159,6 @@ switch (strtoupper($funcao)) {
             $metaestatTemplates = $locaplic . $metaestatTemplates;
         }
         retornaJSON(listaArquivos($metaestatTemplates . "/logos"));
-        exit();
-        break;
-    case "LISTACLASSIFICACAOMEDIDA":
-        $m = new MetaestatInfo();
-        $lista = $m->listaClassificacaoMedida($_pg["id_medida_variavel"], $_pg["id_classificacao"]);
-        //if (count($lista) == 0) {
-            $lista[] =
-                array(
-                    "id_classificacao" => "",
-                    "nome" => "default (recalcula as classes com base em quartil)"
-                );
-        //}
-        retornaJSON($lista);
-        exit();
-        break;
-    case "MAPFILEMEDIDAVARIAVEL":
-        // $filtro usa aspas duplas para enviar os parametros
-        $m = new MetaestatInfo();
-        if (! isset($_pg["codigo_tipo_regiao"])) {
-            $_pg["codigo_tipo_regiao"] = "";
-        }
-        if (! isset($_pg["opacidade"])) {
-            $_pg["opacidade"] = "";
-        }
-        if ($_pg["cachemapfile"] === "nao") {
-            $_pg["cachemapfile"] = false;
-        } else {
-            $_pg["cachemapfile"] = true;
-        }
-        //valida o filtro
-
-        if(!empty($_pg["filtro"])){
-            $_pg["filtro"] = str_replace('"', "'", $_pg["filtro"]);
-            $final = array();
-            $sepands = explode("|",$_pg["filtro"]);
-            foreach($sepands as $sepand){
-                $linhas = explode("*",$sepand);
-                if(!is_numeric(str_replace(array("'",","),"",$linhas[1]))){
-                    exit;
-                }
-                if(count(explode(",",$linhas[1])) == 1){
-                    $final[] = $linhas[0]." = ". $linhas[1];
-                } else {
-                    $final[] = $linhas[0]." IN (".$linhas[1].")";
-                }
-            }
-            $_pg["filtro"] = implode(" and ", $final);
-        }
-        if ($_pg["formato"] == "json") {
-            retornaJSON($m->mapfileMedidaVariavel($_pg["id_medida_variavel"], $_pg["filtro"], $_GET["todasascolunas"], $_GET["tipolayer"], $_GET["titulolayer"], $_pg["id_classificacao"], $_GET["agruparpor"], $_pg["codigo_tipo_regiao"], $_GET["opacidade"], false, $_GET["cachemapfile"]));
-        }
         exit();
         break;
     case "LISTATODOSATRIBUTOSMEDIDAVARIAVELXY":

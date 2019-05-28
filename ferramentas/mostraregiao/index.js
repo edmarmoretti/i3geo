@@ -139,7 +139,7 @@ i3GEOF.mostraregiao = {
 			}
 			return ins;
 		};
-		i3GEO.php.listaTipoRegiao(temp);
+		i3GEO.catalogoRegioes.getRegions(temp);
 	},
 	/**
 	 * Obtem os parametros necessarios e adiciona ao mapa uma nova camada com a regiao
@@ -174,6 +174,5 @@ i3GEOF.mostraregiao = {
 			"&width="+$i("i3geomostraregiaoWidth").value+
 			"&nomes="+nomes;
 		i3GEO.util.ajaxGet(p,temp);
-		//i3GEO.php.mapfileTipoRegiao(temp,combo.value,$i("i3geomostraregiaoOutlinecolor").value,$i("i3geomostraregiaoWidth").value,nomes);
 	}
 };

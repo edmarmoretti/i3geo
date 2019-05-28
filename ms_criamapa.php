@@ -223,7 +223,6 @@ filtros - filtros podem ser adicionados incluindo o parametro da seguinte forma:
 // quando $funcao existe, &eacute; pq o ms_criamapa.php est&aacute;
 // sendo utilizado como um include em classesphp/mapa_controle.php
 //
-
 if (! isset($funcao)) {
     ob_end_clean();
     /*

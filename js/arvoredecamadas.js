@@ -832,16 +832,26 @@ i3GEO.arvoreDeCamadas =
 		i3GEO.arvoreDeCamadas.ligatemas(temp, t[2].toString(), "");
 	    }
 	},
-	ligatemas : function(funcao, desligar, ligar){
-	    if (arguments.length === 3) {
-		adicionar = "nao";
-	    }
-	    var p = i3GEO.configura.locaplic + "/classesphp/mapa_controle.php", par =
-		"funcao=ligatemas&desligar=" + desligar + "&ligar=" + ligar + "&adicionar=nao&g_sid=" + i3GEO.configura.sid,
-		temp = function(retorno) {
-			funcao.call(funcao, retorno);
-	    	};
-	    cpJSON.call(p, "ligaDesligaTemas", temp, par);
+	ligatemas : function(after, off, on){
+	    if (typeof (console) !== 'undefined')
+                console.info("i3GEO.arvoreDeCamadas.ligatemas()");
+
+	    i3GEO.request.get({
+                snackbar: false,
+                snackbarmsg: false,
+                btn: false,
+                par: {
+                    off: off,
+                    on: on,
+                    funcao: "toggleLayersVis"
+                },
+                prog: "/serverapi/map/",
+                fn: function(data){
+                    if (after){
+                        after.call(after, data);
+                    }
+                }
+            });
 	},
 	/**
 	 * Function: listaLigadosDesligados

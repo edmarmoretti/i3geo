@@ -138,13 +138,8 @@ include "../init/head.php";
 include ("templates/templatelinks.php");
 include ("templates/templatelista.php");
 ?>
-	<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
-    <script src='../js/compactados/dicionario_compacto.js'></script>
-    <script src='../js/compactados/util_compacto.js'></script>
-    <script src='../js/compactados/idioma_compacto.js'></script>
-    <script src='../js/compactados/login_compacto.js'></script>
-    <script src='../js/compactados/php_compacto.js'></script>
-    <script src='../js/compactados/mustache.js'></script>
+    <script src='../pacotes/ol4/ol.js'></script>
+    <script src='../js/i3geo_tudo_compacto8.js.php'></script>
     <script src='dicionario.js'></script>
     <script src='index.js'></script>
     <script>

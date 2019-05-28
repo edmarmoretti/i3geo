@@ -198,35 +198,6 @@ i3GEOF.locregiao = {
 		}
 		return ins;
 	    };
-	    i3GEO.php.listaHierarquiaRegioes(temp,codigo_tipo_regiao,codigoregiaopai,valorregiaopai);
-	},
-	/**
-	 * Aplica um filtro nas camadas do mapa oriundas do banco de metadados
-	 * O mapa ira mostrar apenas o que passar pelo filtro
-	 * Executa i3GEO.php.aplicaFiltroRegiao
-	 * @param codigo da regiao
-	 * @param codigo do tipo de regiao
-	 */
-	aplicaFiltro: function(codigo_regiao,codigo_tipo_regiao){
-	    if(codigo_regiao === "" || codigo_tipo_regiao === ""){
-		return;
-	    }
-	    codigo_regiao = codigo_regiao.split(";")[0];
-	    var temp = function(){
-		i3GEO.Interface.atualizaMapa();
-	    };
-	    i3GEO.php.aplicaFiltroRegiao(temp,codigo_tipo_regiao,codigo_regiao);
-	    i3GEO.janela.tempoMsg("O filtro &eacute; aplicado a todas as camadas oriundas do sistema de metadados estat&iacute;sticos.");
-	},
-	/**
-	 * Remove os filtros aplicados com aplicaFiltro
-	 * Executa i3GEO.php.aplicaFiltroRegiao
-	 */
-	removeFiltro: function(){
-	    var tipo = "",
-	    temp = function(){
-		i3GEO.Interface.atualizaMapa();
-	    };
-	    i3GEO.php.aplicaFiltroRegiao(temp,"","","","",tipo);
+	    i3GEO.catalogoRegioes.getRegionsTree(temp,codigo_tipo_regiao,codigoregiaopai,valorregiaopai);
 	}
 };

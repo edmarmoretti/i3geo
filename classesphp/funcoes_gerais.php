@@ -512,9 +512,8 @@ function gravaDados($dados, $arq)
  *
  * {string}
  */
-function listaTrueType()
+function listaTrueType($locaplic, $imgdir, $dir_tmp)
 {
-    global $locaplic, $imgdir, $dir_tmp;
     if (! file_exists($dir_tmp . "/comum/truetype.inc")) {
         $arq = $locaplic . "/symbols/fontes.txt";
         $h = fopen($arq, "r");

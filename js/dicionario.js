@@ -3328,5 +3328,19 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        'selecionaTipoLimiteGeog' : [
+            {
+                pt : "Tipo de limite geogr&aacute;fico",
+                en : "Select a geographic boundary type",
+                es : "Seleccione un tipo de l&iacute;mite geogr&aacute;fico"
+            }
+        ],
+        'selecionaTipoClassificacao' : [
+            {
+                pt : "Tipo de classifica&ccedil;&atilde;o",
+                en : "Select a classification type",
+                es : "Seleccione un tipo de clasificaci&oacute;n"
+            }
         ]
     };

@@ -44,7 +44,7 @@ include "../init/head.php";
 						<div class="list-group" >
 							<div class="row-action-primary">
 								<div class="bs-component btn-group-sm pull-left">
-									<a class="btn btn-primary btn-fab" href="{{{link}}}"> <i class="material-icons">launch</i>
+									<a class="btn btn-danger btn-fab" href="{{{link}}}"> <i class="material-icons">launch</i>
 									</a>
 								</div>
 							</div>

@@ -65,22 +65,22 @@ i3GEOF.busca = {
 	    $i("i3GEObuscaguia3").onclick = function(){
 		i3GEO.guias.mostraGuiaFerramenta("i3GEObuscaguia3","i3GEObuscaguia");
 	    };
-	    i3GEO.php.listaItensTema(
+	    i3GEO.tema.itens(
 		    i3GEOF.busca.montaListaItens,
 		    p.tema
 	    );
 	},
-	montaListaItens: function(retorno){
+	montaListaItens: function(data){
 	    var ins = "",
 	    hash = [],
 	    i,
 	    n;
-	    n = retorno.data.valores.length;
+	    n = data.valores.length;
 	    for (i=0;i<n; i++){
 		hash.push({
-		    label: retorno.data.valores[i].item,
-		    value: retorno.data.valores[i].item,
-		    name: retorno.data.valores[i].item
+		    label: data.valores[i].item,
+		    value: data.valores[i].item,
+		    name: data.valores[i].item
 		});
 	    }
 	    var template = '<div class="form-group">' + i3GEO.template.checkbox + '</div>';
