@@ -295,7 +295,7 @@ i3GEOF.atalhosedicao =
 			    else {
 				YAHOO.admin.container.panelEditor.destroy();
 				YAHOO.admin.container.panelEditor = null;
-				i3GEO.Interface.openlayers.removeTodosOsLayers();
+				i3GEO.Interface.removeTodosOsLayers();
 				i3GEO.arvoreDeCamadas.CAMADAS = [];
 				i3GEO.mapa.refresh();
 			    }

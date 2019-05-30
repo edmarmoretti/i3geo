@@ -162,7 +162,7 @@ i3GEO.tema =
                 },
                 prog: "/serverapi/layer/",
                 fn: function(data){
-                    i3GEO.Interface.openlayers.zoom2ext(data);
+                    i3GEO.Interface.zoom2ext(data);
                 }
             });
         },

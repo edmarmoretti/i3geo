@@ -282,7 +282,7 @@ var i3GEO = {
                 i3GEO.busca.SERVICOWMS = (c.components.hasOwnProperty("searchWms")) ? c.components.searchWms : "";
                 i3GEO.mapa.BALAOATIVO = (c.components.hasOwnProperty("info")) ? c.components.info : true;
                 if(c.components.tooltip){
-                    var p = i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP;
+                    var p = i3GEO.Interface.BALAOPROP;
                     p.removeAoAdicionar = (c.components.tooltip.hasOwnProperty("removeAoAdicionar")) ? c.components.tooltip.removeAoAdicionar : true;
                     p.autoPan = (c.components.tooltip.hasOwnProperty("autoPan")) ? c.components.tooltip.autoPan : true;
                     p.modal = (c.components.tooltip.hasOwnProperty("modal")) ? c.components.tooltip.modal : false;
@@ -302,11 +302,11 @@ var i3GEO = {
             if(c.hasOwnProperty("openLayers") && c.mapType !== "GM" ){
                 var d = c.openLayers;
                 i3GEO.Interface.ATUAL = "openlayers";
-                i3GEO.Interface.openlayers.googleLike = (c.mapType == "OSM") ? true:false;
+                i3GEO.Interface.googleLike = (c.mapType == "OSM") ? true:false;
                 //TODO singletile nao funciona
-                i3GEO.Interface.openlayers.TILES = (d.hasOwnProperty("singleTile") && d.singleTile != "") ? !d.singleTile:true;
-                i3GEO.Interface.openlayers.parametrosMap = d.MapOptions;
-                i3GEO.Interface.openlayers.parametrosView = d.ViewOptions;
+                i3GEO.Interface.TILES = (d.hasOwnProperty("singleTile") && d.singleTile != "") ? !d.singleTile:true;
+                i3GEO.Interface.parametrosMap = d.MapOptions;
+                i3GEO.Interface.parametrosView = d.ViewOptions;
             }
             if(c.hasOwnProperty("googleMaps") && c.mapType == "GM"){
                 i3GEO.Interface.ATUAL = "googlemaps";
@@ -548,7 +548,7 @@ var i3GEO = {
             var montaMapa, mashup, tamanho, temp;
             i3GEO.mapa.aplicaPreferencias();
             montaMapa = function(data) {
-                try {
+                //try {
                     delete i3GEO.parametrosMapa2mashuppar;
                     delete i3GEO.configMapa;
                     delete i3GEO.init;
@@ -595,7 +595,7 @@ var i3GEO = {
                             }
                             // obtem o cookie com a ultima extensao geografica
                             if (i3GEO.configura.guardaExtensao === true) {
-                                if (i3GEO.Interface.openlayers.googleLike === true) {
+                                if (i3GEO.Interface.googleLike === true) {
                                     nomecookie = "i3geoUltima_ExtensaoOSM";
                                 }
                                 temp = i3GEO.util.pegaCookie(nomecookie);
@@ -649,10 +649,10 @@ var i3GEO = {
                         }
                     }
                     i3GEO.aposIniciar();
-                } catch (e) {
-                    if (typeof (console) !== 'undefined')
-                        console.error(e.message)
-                }
+                //} catch (e) {
+                //    if (typeof (console) !== 'undefined')
+                //        console.error(e.message)
+               // }
             };
             if (!$i("i3geo")) {
                 document.body.id = "i3geo";
@@ -683,7 +683,7 @@ var i3GEO = {
                     i3GEO.configura.sid = retorno;
                     i3GEO.inicia(retorno);
                 };
-                if(i3GEO.Interface.openlayers.googleLike == true){
+                if(i3GEO.Interface.googleLike == true){
                     i3GEO.configura.mashuppar += "&interface=googlemaps";
                 } else {
                     i3GEO.configura.mashuppar += "&interface=openlayers";
@@ -724,7 +724,7 @@ var i3GEO = {
                         funcao: "start",
                         w: i3GEO.parametros.w,
                         h: i3GEO.parametros.h,
-                        "interface": i3GEO.Interface.openlayers.googleLike ? "googlemaps" : "openlayers"
+                        "interface": i3GEO.Interface.googleLike ? "googlemaps" : "openlayers"
                     },
                     prog: "/serverapi/map/?",
                     fn: function(data){
@@ -835,7 +835,7 @@ var i3GEO = {
             i3GEO.parametros.w = w;
             i3GEO.parametros.h = h;
             temp = function() {
-                i3GEO.Interface.openlayers.zoom2ext(i3GEO.parametros.mapexten);
+                i3GEO.Interface.zoom2ext(i3GEO.parametros.mapexten);
                 i3geoOL.updateSize();
                 i3GEO.guias.ALTURACORPOGUIAS = h;
                 i3GEO.eventos.resizeMapa();

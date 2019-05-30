@@ -15,7 +15,7 @@ i3GEO.maparef =
 		    collapsed: false,
 		    layers: [i3geoOL.getLayerBase()],
 		    view: new ol.View(
-			    i3GEO.Interface.openlayers.parametrosView
+			    i3GEO.Interface.parametrosView
 		    )
 		});
 		i3GEO.maparef.APIOBJ.setMap(i3geoOL);

@@ -180,7 +180,7 @@ i3GEO.mapa =
                 if(!i3GEO.desenho.layergrafico){
                     i3GEO.desenho.criaLayerGrafico();
                 }
-                i3GEO.editor[i3GEO.Interface.ATUAL].ativaPainel();
+                i3GEO.editor.openlayers.ativaPainel();
                 var n = geometrias.length, i;
                 for (i = 0; i < n; i++) {
                     i3GEO.desenho.adicionaFeatureWkt(geometrias[i].geometria, geometrias[i].atributos);
@@ -421,7 +421,7 @@ i3GEO.mapa =
                 prog: "/serverapi/map/",
                 fn: function(data){
                     i3GEO.mapa.refresh();
-                    i3GEO.Interface.openlayers.ordenaLayers();
+                    i3GEO.Interface.ordenaLayers();
                 }
             });
         },
@@ -437,7 +437,7 @@ i3GEO.mapa =
                 prog: "/serverapi/map/",
                 fn: function(data){
                     i3GEO.mapa.refresh();
-                    i3GEO.Interface.openlayers.ordenaLayers();
+                    i3GEO.Interface.ordenaLayers();
                 }
             });
         },
@@ -463,7 +463,7 @@ i3GEO.mapa =
                 },
                 prog: "/serverapi/map/",
                 fn: function(data){
-                    i3GEO.Interface.openlayers.zoom2ext(data);
+                    i3GEO.Interface.zoom2ext(data);
                 }
             });
         },
@@ -1158,19 +1158,19 @@ i3GEO.mapa =
                 if (etiquetas === false) {
                     return;
                 }
-                if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.url != "" && i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.templateModal == ""){
-                    $.get( i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.url + "&xx=" + x + "&yy=" + y, function( data ) {
+                if(i3GEO.Interface.BALAOPROP.url != "" && i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.templateModal == ""){
+                    $.get( i3GEO.Interface.BALAOPROP.url + "&xx=" + x + "&yy=" + y, function( data ) {
                         i3GEO.janela.closeMsg(data);
                     });
                     return;
                 }
-                if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.templateModal != ""){
-                    if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.url != ""){
-                        var temp = i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.url + "&xx=" + x + "&yy=" + y;
-                        temp = i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.templateModal.replace("{{{url}}}",temp);
+                if(i3GEO.Interface.BALAOPROP.templateModal != ""){
+                    if(i3GEO.Interface.BALAOPROP.url != ""){
+                        var temp = i3GEO.Interface.BALAOPROP.url + "&xx=" + x + "&yy=" + y;
+                        temp = i3GEO.Interface.BALAOPROP.templateModal.replace("{{{url}}}",temp);
                         i3GEO.janela.closeMsg(temp);
                     } else {
-                        i3GEO.janela.closeMsg(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.templateModal);
+                        i3GEO.janela.closeMsg(i3GEO.Interface.BALAOPROP.templateModal);
                     }
                     return;
                 }
@@ -1234,7 +1234,7 @@ i3GEO.mapa =
                 textoSimples = "";//$trad("balaoVazio");
                 wkt = [];
                 retorno = true;
-                if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.openTipNoData == false){
+                if(i3GEO.Interface.BALAOPROP.openTipNoData == false){
                     mostra = false;
                 }
             }
@@ -1434,7 +1434,7 @@ i3GEO.mapa =
 
                     var n = wkts.length;
                     if(n > 0){
-                        i3GEO.desenho.openlayers.criaLayerGrafico();
+                        i3GEO.desenho.criaLayerGrafico();
                         var g, format, f, idunico,c = i3GEO.desenho.layergrafico.getSource();
                         format = new ol.format.WKT();
                         for(r = 0; r < n; r += 1){
@@ -1458,11 +1458,11 @@ i3GEO.mapa =
                     }
                 };
                 if (mostra === true) {
-                    if(i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.modal == true){
+                    if(i3GEO.Interface.BALAOPROP.modal == true){
                         i3GEO.janela.closeMsg(textoSimples);
                         return;
                     } else {
-                        var painel = i3GEO.Interface.openlayers.balao(textoSimples, textCopy, x, y, true, wkts.length, afterCreate);
+                        var painel = i3GEO.Interface.balao(textoSimples, textCopy, x, y, true, wkts.length, afterCreate);
                     }
                 }
             }

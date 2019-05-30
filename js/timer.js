@@ -89,7 +89,7 @@ i3GEO.timer = {
 		clearTimeout(me._counter);
 		clearTimeout(me._timeout);
 		me.reinicia();
-		i3GEO.Interface.openlayers.atualizaMapa();
+		i3GEO.Interface.atualizaMapa();
 	    },
 	    contagem : function(){
 		var me = i3GEO.timer.mapa,

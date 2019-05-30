@@ -309,7 +309,7 @@ i3GEO.editor =
 		i3GEO.editor.removeInteracoes();
 		var sel = new ol.interaction.Select();
 		i3GEO.editor._interacoes = sel;
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		sel.on("select", function(evt) {
 		    var s,i, n, id, f;
 		    n = evt.selected.length;
@@ -643,7 +643,7 @@ i3GEO.editor =
 		    });
 		    //adiciona a interacao para poder ser removida
 		    i3GEO.editor._interacoes = draw;
-		    i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		    i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		    draw.on("drawend", function(evt) {
 			var temp, f, c, format, fwkt, cwkt;
 			f = evt.feature;
@@ -676,7 +676,7 @@ i3GEO.editor =
 		    });
 		    //adiciona a interacao para poder ser removida
 		    i3GEO.editor._interacoes = draw;
-		    i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		    i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		    draw.on("drawend", function(evt) {
 			var temp, f, c, format, fwkt, cwkt;
 			f = evt.feature;
@@ -715,7 +715,7 @@ i3GEO.editor =
 		});
 		//adiciona a interacao para poder ser removida
 		i3GEO.editor._interacoes = draw;
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		draw.on("drawend", function(evt) {
 		    evt.feature.setStyle(
 			    i3GEO.editor.getPolygonStyle()
@@ -743,7 +743,7 @@ i3GEO.editor =
 		});
 		//adiciona a interacao para poder ser removida
 		i3GEO.editor._interacoes = draw;
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		draw.on("drawend", function(evt) {
 		    var texto = window.prompt("Texto", "");
 		    evt.feature.setStyle(
@@ -786,7 +786,7 @@ i3GEO.editor =
 		});
 		//adiciona a interacao para poder ser removida
 		i3GEO.editor._interacoes = draw;
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		draw.on("drawend", function(evt) {
 		    evt.feature.setStyle(
 			    i3GEO.editor.getPointStyle()
@@ -816,7 +816,7 @@ i3GEO.editor =
 		//adiciona a interacao para poder ser removida
 		i3GEO.editor._interacoes = draw;
 		//desativa ol.interaction.DoubleClickZoom
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		draw.on("drawend", function(evt) {
 		    evt.feature.setStyle(
 			    i3GEO.editor.getLineStringStyle()
@@ -842,7 +842,7 @@ i3GEO.editor =
 		});
 		//adiciona a interacao para poder ser removida
 		i3GEO.editor._interacoes = draw;
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		draw.on("drawend", function(evt) {
 		    evt.feature.setStyle(
 			    i3GEO.editor.getPolygonStyle()
@@ -867,7 +867,7 @@ i3GEO.editor =
 		});
 		//adiciona a interacao para poder ser removida
 		i3GEO.editor._interacoes = draw;
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		draw.on("drawend", function(evt) {
 		    evt.feature.setStyle(
 			    i3GEO.editor.getPolygonStyle()
@@ -942,7 +942,7 @@ i3GEO.editor =
 		    }
 		});
 		i3GEO.editor._interacoes = draw;
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		i3geoOL.addInteraction(draw);
 		i3GEO.editor.toggleSnap();
 	    }
@@ -1403,7 +1403,7 @@ i3GEO.editor =
 		    },1000);
 		});
 		i3GEO.editor._interacoes = draw;
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		i3geoOL.addInteraction(draw);
 	    }
 	    else{

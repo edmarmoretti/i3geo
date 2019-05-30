@@ -64,7 +64,7 @@ i3GEO.marcador =
 
 	    temp = ext.split(" ");
 	    ext = "";
-	    if (i3GEO.Interface.openlayers.googleLike === true) {
+	    if (i3GEO.Interface.googleLike === true) {
 		point = new ol.geom.Point([temp[0]*1, temp[1]*1]);
 		point.transform("EPSG:3857","EPSG:4326");
 		ext = point.getCoordinates()[0] + " " + point.getCoordinates()[1];

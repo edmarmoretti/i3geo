@@ -183,7 +183,7 @@ i3GEO.configura =
 				if(data.errorMsg != ""){
 				    i3GEO.janela.snackBar({content: data.errorMsg, style:'red'});
 				} else {
-				    i3GEO.Interface.openlayers.atualizaTema("",temaObj.name);
+				    i3GEO.Interface.atualizaTema("",temaObj.name);
 				    i3GEO.janela.snackBar({content: $trad("camadaatualizada")});
 				}
 

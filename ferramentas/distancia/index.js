@@ -132,7 +132,7 @@ i3GEOF.distancia =
 		m.draw = new ol.interaction.Draw({
 		    type : "LineString"
 		});
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		m.draw.on("drawend", function(evt) {
 		    evt.feature.setProperties({
 			origem : "medeDistancia"
@@ -195,7 +195,7 @@ i3GEOF.distancia =
 		    x2 = coord[0];
 		    y2 = coord[1];
 		    // projeta
-		    if (i3GEO.Interface.openlayers.googleLike) {
+		    if (i3GEO.Interface.googleLike) {
 			temp = i3GEO.util.extOSM2Geo(x1 + " " + y1 + " " + x2 + " " + y2);
 			temp = temp.split(" ");
 			x1 = temp[0];
@@ -230,7 +230,7 @@ i3GEOF.distancia =
 		    y2 = coord[1];
 		    raio = new ol.geom.LineString([[x1, y1],[x2, y2]]).getLength();
 		    // projeta
-		    if (i3GEO.Interface.openlayers.googleLike) {
+		    if (i3GEO.Interface.googleLike) {
 			temp = i3GEO.util.extOSM2Geo(x1 + " " + y1 + " " + x2 + " " + y2);
 			temp = temp.split(" ");
 			x1 = temp[0];
@@ -322,7 +322,7 @@ i3GEOF.distancia =
 	     * atributo "origem" Os raios e pontos sao sempre removidos
 	     */
 	    fechaJanela : function() {
-		i3GEO.Interface.openlayers.parametrosMap.interactions[0].setActive(false);
+		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
 		var m = i3GEOF.distancia.openlayers;
 		ol.Observable.unByKey(m.featureListener);
 		m.featureListener = null;

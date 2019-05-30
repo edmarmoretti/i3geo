@@ -506,7 +506,7 @@ i3GEO.arvoreDeCamadas =
 		if(temp && $("#" + config.idListaFundo).html() == ""){
 		    //clone = [{"name":"camadaDeFundo","value":"nenhum","title":$trad("nenhum")}];
 		    clone= [];
-		    $.each(i3GEO.Interface.openlayers.LAYERSADICIONAIS, function( i , layer ){
+		    $.each(i3GEO.Interface.LAYERSADICIONAIS, function( i , layer ){
 			camada = {};
 			temp = layer.getProperties();
 			camada.name = "camadaDeFundo";
@@ -1271,7 +1271,7 @@ i3GEO.arvoreDeCamadas =
 			after.call(after, data);
 		    } else {
 			i3GEO.mapa.refresh();
-			i3GEO.Interface.openlayers.ordenaLayers();
+			i3GEO.Interface.ordenaLayers();
 			i3GEO.arvoreDeCamadas.atualiza(i3GEO.arvoreDeCamadas.CAMADAS,true);
 		    }
 		}

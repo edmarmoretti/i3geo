@@ -45,7 +45,7 @@ i3GEO.navega =
 	    }
 	    if (i3GEO.Interface.ATUAL === "openlayers") {
 		marcadorZoom = "";
-		i3GEO.Interface.openlayers.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);
+		i3GEO.Interface.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);
 	    }
 	},
 	/**
@@ -137,8 +137,8 @@ i3GEO.navega =
 	 * {numerico} - latitude
 	 */
 	pan2ponto : function(x, y) {
-	    i3GEO.Interface[i3GEO.Interface.ATUAL].pan2ponto(x, y);
-	    i3GEO.Interface[i3GEO.Interface.ATUAL].recalcPar();
+	    i3GEO.Interface.pan2ponto(x, y);
+	    i3GEO.Interface.recalcPar();
 	},
 	/**
 	 * Function: centroDoMapa
@@ -205,7 +205,7 @@ i3GEO.navega =
 	},
 	removeCookieExtensao : function() {
 	    var nomecookie = "i3geoOLUltimaExtensao";
-	    if (i3GEO.Interface.openlayers.googleLike === true) {
+	    if (i3GEO.Interface.googleLike === true) {
 		nomecookie = "i3geoUltima_ExtensaoOSM";
 	    }
 	    i3GEO.util.insereCookie(nomecookie, "");
@@ -293,11 +293,11 @@ i3GEO.navega =
 
 	    var retorno = function(retorno) {
 
-		    i3GEO.Interface.openlayers.pan2ponto(x, y);
+		    i3GEO.Interface.pan2ponto(x, y);
 
 		    i3GEO.mapa.refresh();
 	    };
-	    i3GEO.Interface.openlayers.pan2ponto(x, y);
+	    i3GEO.Interface.pan2ponto(x, y);
 	    i3GEO.request.get({
 		snackbar: false,
 		snackbarmsg: false,

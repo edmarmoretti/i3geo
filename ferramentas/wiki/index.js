@@ -54,7 +54,7 @@ i3GEOF.wiki = {
 	    i3GEOF.wiki._parameters.startDate = Date.now();
 	    var bbox = i3geoOL.getView().calculateExtent();
 	    var line = new ol.geom.LineString([[bbox[0],bbox[1]],[bbox[0],bbox[3]]]);
-	    if (i3GEO.Interface.openlayers.googleLike === false){
+	    if (i3GEO.Interface.googleLike === false){
 		line = line.transform("EPSG:4326","EPSG:3857");
 	    }
 	    var raio = line.getLength() / 2;

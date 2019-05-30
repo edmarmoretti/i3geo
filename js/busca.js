@@ -96,7 +96,7 @@ i3GEO.busca = {
         zoom : function(wkt, layer, gid, nm) {
             var adicionaCamada =
                 function(layer, gid, nm, ext) {
-                if (i3GEO.Interface.openlayers.googleLike === false) {
+                if (i3GEO.Interface.googleLike === false) {
                     var s = i3GEO.busca.SERVICOWMS + "?gid=" + gid + "&";
                     i3GEO.mapa.adicionaTemaWMS(i3GEO.mapa.refresh, s, layer, "default", "EPSG:4618", "image/png", "1.1.0", nm
                             + " - " + layer, "", "nao", "");
@@ -131,6 +131,6 @@ i3GEO.busca = {
             i3GEO.desenho.removePins("boxOndeBusca");
         },
         zoomExt : function(ext) {
-            i3GEO.Interface.openlayers.zoom2ext(ext);
+            i3GEO.Interface.zoom2ext(ext);
         }
 };

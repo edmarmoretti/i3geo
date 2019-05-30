@@ -246,7 +246,7 @@ function abrePrancha(id)
 			if(i3GEO.Interface.ATUAL == "googlemaps")
 			{i3GEO.Interface.googlemaps.removeTodosLayers();}
 			if(i3GEO.Interface.ATUAL == "openlayers")
-			{i3GEO.Interface.openlayers.removeTodosOsLayers();}
+			{i3GEO.Interface.removeTodosOsLayers();}
 		}
 		catch(e){}
 		i3GEO.arvoreDeCamadas.CAMADAS = [];
