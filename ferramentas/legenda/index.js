@@ -124,7 +124,7 @@ i3GEOF.legenda =
 	    i3GEO.tema.dialogo.aplicarsld(i3GEOF.legenda._parameters.tema);
 	},
 	slde: function() {
-	    window.open(i3GEO.configura.locaplic + "/ferramentas/legenda/exec.php?funcao=tema2sld&tema="
+	    window.open(i3GEO.configura.locaplic + "/ferramentas/legenda/exectemas.php?funcao=tema2sld&tema="
 		    + i3GEOF.legenda._parameters.tema
 		    + "&g_sid="
 		    + i3GEO.configura.sid);

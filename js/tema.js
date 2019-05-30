@@ -828,23 +828,6 @@ i3GEO.tema =
                 window.open(i3GEO.configura.locaplic+"/ogc.htm?temaOgc="+idtema);
             },
             /**
-             * Function: sld
-             *
-             * Converte a legenda do tema para o formato SLD (utilizado em requisicoes de Web Services OGC)
-             *
-             * O SLD e mostrado em uma janela sobre o mapa
-             *
-             * Parametros:
-             *
-             * {string} - id que identifica o tema no map file.
-             */
-            sld : function(idtema) {
-                i3GEO.mapa.ativaTema(idtema);
-                i3GEO.janela.cria("500px", "350px", i3GEO.configura.locaplic + "/classesphp/mapa_controle.php?funcao=tema2sld&tema="
-                        + idtema + "&g_sid=" + i3GEO.configura.sid, "", "", "<div class='i3GeoTituloJanela'>SLD<a class=ajuda_usuario target=_blank href='"
-                        + i3GEO.configura.locaplic + "/ajuda_usuario.php?idcategoria=5&idajuda=41' ><b> </b></a></div>");
-            },
-            /**
              * Function: aplicarsld
              *
              * Fax o upload de um arquivo SLD (xml) e aplica ao tema

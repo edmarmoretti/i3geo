@@ -7,49 +7,22 @@ if (! @empty($_GET["g_sid"])) {
     $urli3geo = $_SESSION["urli3geo"];
     $editores = $_SESSION["editores"];
 } else {
+    include ("../../classesphp/funcoes_gerais.php");
     include ("../../ms_configura.php");
     $map_file = "";
     $perfil = "";
     $urli3geo = "";
     $editores = "";
 }
-$bl = array(
-    "exec ",
-    "exec(",
-    "password",
-    "select",
-    "_decode",
-    "passthru",
-    "shell_exec",
-    "escapeshellarg",
-    "escapeshellcmd",
-    "proc_close",
-    "proc_open",
-    "popen",
-    "delete",
-    "drop",
-    "update",
-    "insert",
-    "system",
-    ";"
-);
-foreach (array_keys($_GET) as $k) {
-    $k = str_ireplace($bl, "", $k);
-    $k = filter_var($k, FILTER_SANITIZE_STRING);
-    if ($_GET[$k] != "''") {
-        $v = strip_tags($_GET[$k]);
-        $v = str_ireplace($bl, "", $v);
-        $_GET[$k] = trim($v);
-    }
-}
-
 switch (strtoupper($_GET["funcao"])) {
     case "PEGALISTADEMENUS":
+        verifySql();
         include ("../../classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->pegaListaDeMenus($_GET["filtraOgc"], $_GET["filtraDown"]);
         break;
     case "PEGALISTADEGRUPOS":
+        verifySql();
         include ("../../classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"], $_GET["filtro"]);
         $retorno = array(
@@ -58,31 +31,37 @@ switch (strtoupper($_GET["funcao"])) {
         );
         break;
     case "PEGALISTADESUBGRUPOS":
+        verifySql();
         include ("../../classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"], $_GET["filtro"]);
         $retorno = $m->pegaListaDeSubGrupos($_GET["grupo"], $_GET["idmenu"]);
         break;
     case "PEGALISTADETEMAS":
+        verifySql();
         include ("../../classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->pegaListaDeTemas($_GET["grupo"], $_GET["subgrupo"], $_GET["idmenu"]);
         break;
     case "PEGALISTADESISTEMAS":
+        verifySql();
         include ("../../classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->pegaSistemas();
         break;
     case "PROCURARTEMASESTRELA":
+        verifySql();
         include ("../../classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->procurartemasestrela($_GET["nivel"], $_GET["fatorestrela"]);
         break;
     case "GETLAYERSWMS":
+        verifySql();
         include ("../../classesphp/classe_ows.php");
         $m = new Ows($_GET["servico"]);
         $retorno = $m->getLayersWMS($_GET["nivel"], $_GET["id_ws"], $_GET["tipo_ws"], $_GET["nomelayer"]);
         break;
     case "GETLAYERSARCGISREST":
+        verifySql();
         include ("../../classesphp/conexao.php");
         $sql = "SELECT link_ws from {$esquemaadmin}i3geoadmin_ws WHERE id_ws = '" . $_GET["id_ws"] * 1 . "'";
         $q = $dbh->query($sql, PDO::FETCH_ASSOC)->fetchAll();
@@ -99,11 +78,13 @@ switch (strtoupper($_GET["funcao"])) {
         $retorno = listaEpsg();
         break;
     case "GETVARIABLES":
+        verifySql();
         include ("../../classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $retorno = $m->listaVariavel("", $_GET["filtro_esquema"]);
         break;
     case "GETMEASURESVARIABLE":
+        verifySql();
         include ("../../classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $data = $m->listaMedidaVariavel($_GET["variable"]);
@@ -117,6 +98,7 @@ switch (strtoupper($_GET["funcao"])) {
         }
         break;
     case "GETREGIONSMEASURE":
+        verifySql();
         include ("../../classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $data = $m->listaRegioesMedida($_GET["measure"]);
@@ -129,6 +111,7 @@ switch (strtoupper($_GET["funcao"])) {
         }
         break;
     case "GETCLASSIFICATIONSMEASURE":
+        verifySql();
         include ("../../classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $retorno = $m->listaClassificacaoMedida($_GET["measure"]);
@@ -139,6 +122,7 @@ switch (strtoupper($_GET["funcao"])) {
         );
         break;
     case "GETPARAMETERSMEASURE":
+        verifySql();
         include ("../../classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $data = $m->listaParametro($_GET["measure"]);
@@ -154,16 +138,19 @@ switch (strtoupper($_GET["funcao"])) {
         }
         break;
     case "GETPARAMETERSMEASUREVALUES":
+        verifySql();
         include ("../../classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $retorno = $m->listaValoresParametro($_GET["parameter"]);
         break;
     case "GETREGIONS":
+        verifySql();
         include ("../../classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $retorno = $m->listaTipoRegiao("", false);
         break;
     case "GETREGIONSTREE":
+        verifySql();
         include ("../../classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $regioes = $m->listaHierarquiaRegioes($_GET["region"]);
@@ -217,11 +204,52 @@ switch (strtoupper($_GET["funcao"])) {
         }
         break;
     case "GETMAPS":
+        verifySql();
         include ("../../classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $_GET["perfil"]);
         $retorno = $m->pegaListaDeMapas();
+        break;
+    case "DOWNLOADLAYER":
+        session_name("i3GeoPHP");
+        session_start();
+        $retorno = downloadTema2("", $_GET["tema"], $locaplic, $dir_tmp, $postgis_mapa);
+        $retorno["arquivos"] = "";
+        $retorno["datas"] = "";
+        $_SESSION["downloadZipTema"] = $retorno["shape-zip"];
+        $retorno["shape-zip"] = basename($retorno["shape-zip"]);
         break;
 }
 ob_clean();
 header("Content-type: application/json");
 echo json_encode($retorno);
+function verifySql(){
+    $bl = array(
+        "exec ",
+        "exec(",
+        "password",
+        "select",
+        "_decode",
+        "passthru",
+        "shell_exec",
+        "escapeshellarg",
+        "escapeshellcmd",
+        "proc_close",
+        "proc_open",
+        "popen",
+        "delete",
+        "drop",
+        "update",
+        "insert",
+        "system",
+        ";"
+    );
+    foreach (array_keys($_GET) as $k) {
+        $k = str_ireplace($bl, "", $k);
+        $k = filter_var($k, FILTER_SANITIZE_STRING);
+        if ($_GET[$k] != "''") {
+            $v = strip_tags($_GET[$k]);
+            $v = str_ireplace($bl, "", $v);
+            $_GET[$k] = trim($v);
+        }
+    }
+}

@@ -55,17 +55,15 @@ Lista de menus
 	mostraLinksDownload: function(codigo_tema){
 	    $(".modal-body").html('<i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i><span class="sr-only">Aguarde</span>');
 	    tradLinks["tema"] = codigo_tema;
-	    $.post(
-		    "../classesphp/mapa_controle.php",
-		    "map_file=&funcao=download3&tema="+codigo_tema
+	    $.get(
+		    "../serverapi/catalog/index.php/?funcao=downloadlayer&tema="+codigo_tema
 	    )
 	    .done(
 		    function(data, status){
-			var retorno = jQuery.parseJSON(data).data;
 			var html,arqs,i,n,ins = "";
-			tradLinks["mapfile"] = window.location.protocol + "//" + window.location.host + "/" + retorno.mapfileurl;
-			tradLinks["sldurl"] = tradLinks["urli3geo"] + "/ferramentas/legenda/exec.php?funcao=TEMA2SLD&tema=" + retorno.tema + "&map_file=" + retorno.mapfile;
-			arqs = retorno.arquivos.split(",");
+			tradLinks["mapfile"] = window.location.protocol + "//" + window.location.host + "/" + data.mapfileurl;
+			tradLinks["sldurl"] = tradLinks["urli3geo"] + "/ferramentas/legenda/exec.php?funcao=TEMA2SLD&tema=" + data.tema + "&map_file=" + data.mapfile;
+			arqs = data.arquivos.split(",");
 			n = arqs.length;
 			for (i=0; i<n; i++){
 			    ins += "<p><a href='"+window.location.protocol+"//"+window.location.host+"/"+arqs[i]+"'>"+arqs[i]+"</a></p>";
