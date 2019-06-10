@@ -1455,6 +1455,7 @@ i3GEO.mapa =
                             });
                             c.addFeature(f);
                         }
+                        i3GEO.editor.tableRefresh();
                     }
                 };
                 if (mostra === true) {
