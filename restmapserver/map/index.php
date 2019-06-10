@@ -1,8 +1,26 @@
 <?php
-define("I3GEOPATH", explode("serverapi",__FILE__)[0]);
-include (I3GEOPATH."/serverapi/safe.php");
+//http://localhost/i3geo/restmapserver/map/create/joao?funcao=create
+define("I3GEOPATH", explode("restmapserver",__FILE__)[0]);
+include (I3GEOPATH."/restmapserver/safe.php");
 include (I3GEOPATH."/classesphp/classe_vermultilayer.php");
-switch (strtoupper($_GET["funcao"])) {
+
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Http\Message\ResponseInterface as Response;
+
+require '../vendor/autoload.php';
+
+$app = new \Slim\App;
+$app->get('/create/{name}', function (Request $request, Response $response, array $args) {
+    $name = $args['name'];
+    $response->getBody()->write("Hello, $name");
+
+    return $response;
+});
+$app->run();
+exit;
+
+
+switch ("none") {
     case "CREATE":
         session_name("i3GeoPHP");
         unset($GLOBALS);

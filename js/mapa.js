@@ -478,7 +478,7 @@ i3GEO.mapa =
                 listaDeTemas = "";
             }
             // verifica se nao e necessario alterar as coordenadas
-            ext = i3GEO.mapa.getExtent().string;
+            ext = i3GEO.mapa.getExtent().geo;
             var par = {
                     funcao: "identifica",
                     wkt: wkt,

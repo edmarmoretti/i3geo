@@ -1,14 +1,15 @@
 <?php
+define("I3GEOPATH", explode("serverapi",__FILE__)[0]);
 if (! @empty($_GET["g_sid"])) {
-    include ("../safe.php");
+    include (I3GEOPATH."/serverapi/safe.php");
     $map_file = $_SESSION["map_file"];
     $perfil = $_SESSION["perfil"];
     $locaplic = $_SESSION["locaplic"];
     $urli3geo = $_SESSION["urli3geo"];
     $editores = $_SESSION["editores"];
 } else {
-    include ("../../classesphp/funcoes_gerais.php");
-    include ("../../ms_configura.php");
+    include (I3GEOPATH."/classesphp/funcoes_gerais.php");
+    include (I3GEOPATH."/ms_configura.php");
     $map_file = "";
     $perfil = "";
     $urli3geo = "";
@@ -17,13 +18,13 @@ if (! @empty($_GET["g_sid"])) {
 switch (strtoupper($_GET["funcao"])) {
     case "PEGALISTADEMENUS":
         verifySql();
-        include ("../../classesphp/classe_menutemas.php");
+        include (I3GEOPATH."/classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->pegaListaDeMenus($_GET["filtraOgc"], $_GET["filtraDown"]);
         break;
     case "PEGALISTADEGRUPOS":
         verifySql();
-        include ("../../classesphp/classe_menutemas.php");
+        include (I3GEOPATH."/classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"], $_GET["filtro"]);
         $retorno = array(
             "idmenu" => $_GET["idmenu"] * 1,
@@ -32,41 +33,41 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "PEGALISTADESUBGRUPOS":
         verifySql();
-        include ("../../classesphp/classe_menutemas.php");
+        include (I3GEOPATH."/classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"], $_GET["filtro"]);
         $retorno = $m->pegaListaDeSubGrupos($_GET["grupo"], $_GET["idmenu"]);
         break;
     case "PEGALISTADETEMAS":
         verifySql();
-        include ("../../classesphp/classe_menutemas.php");
+        include (I3GEOPATH."/classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->pegaListaDeTemas($_GET["grupo"], $_GET["subgrupo"], $_GET["idmenu"]);
         break;
     case "PEGALISTADESISTEMAS":
         verifySql();
-        include ("../../classesphp/classe_menutemas.php");
+        include (I3GEOPATH."/classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->pegaSistemas();
         break;
     case "PROCURARTEMASESTRELA":
         verifySql();
-        include ("../../classesphp/classe_menutemas.php");
+        include (I3GEOPATH."/classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->procurartemasestrela($_GET["nivel"], $_GET["fatorestrela"]);
         break;
     case "GETLAYERSWMS":
         verifySql();
-        include ("../../classesphp/classe_ows.php");
+        include (I3GEOPATH."/classesphp/classe_ows.php");
         $m = new Ows($_GET["servico"]);
         $retorno = $m->getLayersWMS($_GET["nivel"], $_GET["id_ws"], $_GET["tipo_ws"], $_GET["nomelayer"]);
         break;
     case "GETLAYERSARCGISREST":
         verifySql();
-        include ("../../classesphp/conexao.php");
+        include (I3GEOPATH."/classesphp/conexao.php");
         $sql = "SELECT link_ws from {$esquemaadmin}i3geoadmin_ws WHERE id_ws = '" . $_GET["id_ws"] * 1 . "'";
         $q = $dbh->query($sql, PDO::FETCH_ASSOC)->fetchAll();
         $servico = $q[0]["link_ws"];
-        include ("../../classesphp/classe_ows.php");
+        include (I3GEOPATH."/classesphp/classe_ows.php");
         if (! empty($_GET["nomelayer"])) {
             $m = new Ows($servico . "/" . $_GET["nomelayer"]);
         } else {
@@ -79,13 +80,13 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "GETVARIABLES":
         verifySql();
-        include ("../../classesphp/classe_metaestatinfo.php");
+        include (I3GEOPATH."/classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $retorno = $m->listaVariavel("", $_GET["filtro_esquema"]);
         break;
     case "GETMEASURESVARIABLE":
         verifySql();
-        include ("../../classesphp/classe_metaestatinfo.php");
+        include (I3GEOPATH."/classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $data = $m->listaMedidaVariavel($_GET["variable"]);
         $retorno = array();
@@ -99,7 +100,7 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "GETREGIONSMEASURE":
         verifySql();
-        include ("../../classesphp/classe_metaestatinfo.php");
+        include (I3GEOPATH."/classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $data = $m->listaRegioesMedida($_GET["measure"]);
         $retorno = array();
@@ -112,7 +113,7 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "GETCLASSIFICATIONSMEASURE":
         verifySql();
-        include ("../../classesphp/classe_metaestatinfo.php");
+        include (I3GEOPATH."/classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $retorno = $m->listaClassificacaoMedida($_GET["measure"]);
         $retorno[] = array(
@@ -123,7 +124,7 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "GETPARAMETERSMEASURE":
         verifySql();
-        include ("../../classesphp/classe_metaestatinfo.php");
+        include (I3GEOPATH."/classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $data = $m->listaParametro($_GET["measure"]);
         $retorno = array();
@@ -139,19 +140,19 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "GETPARAMETERSMEASUREVALUES":
         verifySql();
-        include ("../../classesphp/classe_metaestatinfo.php");
+        include (I3GEOPATH."/classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $retorno = $m->listaValoresParametro($_GET["parameter"]);
         break;
     case "GETREGIONS":
         verifySql();
-        include ("../../classesphp/classe_metaestatinfo.php");
+        include (I3GEOPATH."/classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $retorno = $m->listaTipoRegiao("", false);
         break;
     case "GETREGIONSTREE":
         verifySql();
-        include ("../../classesphp/classe_metaestatinfo.php");
+        include (I3GEOPATH."/classesphp/classe_metaestatinfo.php");
         $m = new MetaestatInfo();
         $regioes = $m->listaHierarquiaRegioes($_GET["region"]);
         $valores = "";
@@ -167,7 +168,7 @@ switch (strtoupper($_GET["funcao"])) {
         break;
 
     case "GETINTERFACES":
-        include ("../../classesphp/funcoes_gerais.php");
+        include (I3GEOPATH."/classesphp/funcoes_gerais.php");
         $pesquisarEm = array(
             $locaplic . "/interface"
         );
@@ -205,7 +206,7 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "GETMAPS":
         verifySql();
-        include ("../../classesphp/classe_menutemas.php");
+        include (I3GEOPATH."/classesphp/classe_menutemas.php");
         $m = new Menutemas($map_file, $_GET["perfil"]);
         $retorno = $m->pegaListaDeMapas();
         break;
