@@ -461,6 +461,8 @@ var i3GEO = {
          * interface &eacute; definida em <i3GEO.Interface.ATUAL>
          */
         cria : function() {
+            if (typeof (console) !== 'undefined')
+                console.info("i3GEO.cria()");
             //calcula a largura da barra de rolagem para adicionar ao tamanho do mapa
             i3GEO.scrollerWidth = i3GEO.util.getScrollerWidth();
             var tamanho, temp;
@@ -504,7 +506,6 @@ var i3GEO = {
             //
             // calcula o tamanho do mapa
             //
-
             temp = $i(i3GEO.Interface.IDCORPO);
             if (temp && temp.style && temp.style.width && temp.style.height) {
                 i3GEO.Interface.cria(
@@ -542,12 +543,16 @@ var i3GEO = {
          * <i3GEO.Interface.inicia>
          */
         inicia : function(retorno) {
+            if (typeof (console) !== 'undefined')
+                console.info("i3GEO.inicia()");
             // define o valor inicial da variavel que controla as etiquetas quando o
             // usuario clica no mapa
             i3GEO.eventos.cliquePerm.ativoinicial = i3GEO.eventos.cliquePerm.ativo;
             var montaMapa, mashup, tamanho, temp;
             i3GEO.mapa.aplicaPreferencias();
             montaMapa = function(data) {
+                if (typeof (console) !== 'undefined')
+                    console.info("i3GEO.inicia() montamapa");
                 //try {
                     delete i3GEO.parametrosMapa2mashuppar;
                     delete i3GEO.configMapa;
@@ -591,7 +596,7 @@ var i3GEO = {
                             if (data.customizacoesinit) {
                                 preferencias = JSON.parse(data.customizacoesinit);
                                 temp = i3GEO.util.base64decode(preferencias.preferenciasbase64);
-                                i3GEO.mapa.aplicaPreferencias(temp);
+                                //i3GEO.mapa.aplicaPreferencias(temp);
                             }
                             // obtem o cookie com a ultima extensao geografica
                             if (i3GEO.configura.guardaExtensao === true) {
@@ -673,7 +678,7 @@ var i3GEO = {
                 if (typeof (console) !== 'undefined')
                     console.info("criamapa pq sid vazio")
 
-                    mashup = function(retorno) {
+                mashup = function(retorno) {
                     // verifica se existe bloqueio em funcao da senha no
                     // ms_configura.php
                     if (retorno.bloqueado) {
@@ -710,6 +715,9 @@ var i3GEO = {
                     }
                 });
             } else {
+                if (typeof (console) !== 'undefined')
+                    console.info("i3GEO.inicia() mapa criado anteriormente");
+
                 if (i3GEO.parametros.w === ""
                     || i3GEO.parametros.h === "") {
                     tamanho = i3GEO.calculaTamanho();
@@ -728,6 +736,7 @@ var i3GEO = {
                     },
                     prog: "/serverapi/map/?",
                     fn: function(data){
+                        //console.log(data);
                         montaMapa(data);
                     }
                 });

@@ -3089,6 +3089,7 @@ function restauraMapaAdmin($id_mapa, $dir_tmp)
         ), "", $mapfile);
         $s = fwrite($baseh, $mapfile);
         fclose($baseh);
+        //echo $base;exit;
         if (@ms_newMapObj($base)) {
             return $base;
         } else {

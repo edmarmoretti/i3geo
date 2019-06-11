@@ -26,6 +26,12 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "START":
         include (I3GEOPATH."/classesphp/mapa_inicia.php");
+        //e necessario definir a interface pois o mapa pode ter sido criado
+        //com ms_criamapa.php, que desconhece qual e a interface
+        if(@$_GET["interface"] != ""){
+            session_start();
+            $_SESSION["interface"] = $_GET["interface"];
+        }
         $retorno = iniciaMapa($_GET["w"],$_GET["h"],$_GET["kmlurl"]);
         break;
     case "EXCLUIRTEMAS":

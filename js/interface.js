@@ -516,9 +516,6 @@ i3GEO.Interface =
                 $i("mst").style.display = "block";
             }
             i3GEO.util.defineValor("i3geo_escalanum", "value", i3geoOL.getScale());
-            if ((i3GEO.parametros.geoip === "nao") && ($i("ondeestou"))) {
-                $i("ondeestou").style.display = "none";
-            }
             //
             //verifica se a projecao esta correta
             //

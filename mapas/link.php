@@ -5,6 +5,7 @@ if(empty($_GET["id"])){
 include_once ("../classesphp/classe_menutemas.php");
 $m = new Menutemas();
 $mapas = $m->pegaListaDeMapas("",(int) $_GET["id"]);
+//var_dump($mapas);exit;
 if(count($mapas["mapas"]) > 0){
     $mapa = $mapas["mapas"];
     $link = $mapa["LINK"];
