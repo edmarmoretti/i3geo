@@ -235,7 +235,7 @@ i3GEOF.identifica = {
 	    };
 	    // importante: os temas editaveis nao utilizam alias em seus nomes
 	    // se o usuario estiver logado
-	    i3GEO.mapa.identifica(
+	    i3GEO.identify.identifica(
 		    f,
 		    p.x,
 		    p.y,

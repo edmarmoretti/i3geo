@@ -815,7 +815,6 @@ class MetaestatInfo{
                 fwrite($fp,$dado."\n");
             }
         }
-
         return array("mapfile"=>$arq,"layer"=>$nomeDoLayer,"titulolayer"=>$titulolayer);
     }
     /**

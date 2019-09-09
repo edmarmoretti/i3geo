@@ -1,3 +1,10 @@
+/** botoes do editor vetorial */
+.editorBlock {
+	opacity: 0.2;
+}
+.editorIcon {
+}
+
 /** cores de fundo padronizadas */
 .i3GeoBgc1 {
 	background-color: rgba(0,60,136,.5) !Important;

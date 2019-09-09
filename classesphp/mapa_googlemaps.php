@@ -248,7 +248,6 @@ for ($i = 0; $i < $numlayers; ++ $i) {
         exit();
     }
 }
-
 //
 // qd a cahamda e para um WMS, redireciona para ogc.php
 //
@@ -428,7 +427,27 @@ if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
         if ($img->imagepath == "") {
             ilegal();
         }
+        // se for necessario cortar a imagem, $img->saveImage() nao funciona
         if ($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)) {
+            $nomer = ($img->imagepath) . "temp" . nomeRand() . ".png";
+            $img->saveImage($nomer);
+            //
+            // corta a imagem gerada para voltar ao tamanho normal
+            //
+            if ($cortePixels > 0) {
+                $img = cortaImagemDisco($nomer, $cortePixels, $_GET["WIDTH"]);
+            } else {
+                $img = imagecreatefrompng($nomer);
+                imagealphablending($img, false);
+                imagesavealpha($img, true);
+            }
+            cabecalhoImagem($nomer);
+            header("i3geocache: nao");
+            imagepng($img);
+            imagedestroy($img);
+            exit();
+        }
+        if ($_SESSION["i3georendermode"] == 1) {
             ob_clean();
             header('Content-Type: image/png');
             $img->saveImage();

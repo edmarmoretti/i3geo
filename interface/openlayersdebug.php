@@ -204,7 +204,6 @@ include ($configInc["inc"] . "/css.php");
                 //tipo de mapa. Pode ser:
                 //OL - utiliza o OpenLayers e coordenadas geograficas
                 //OSM - utiliza o OpenLayers e o OpenStreetMap como fundo, em projecao semelhante ao GoogleMaps
-                //GM - utiliza o GoogleMaps como motor de controle do mapa
                 mapType : "OL",
                 //mostra ou nao a barra de progresso do carregamento de camadas
                 layerProgressBar: false,

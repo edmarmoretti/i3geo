@@ -116,6 +116,7 @@ packer("eventos.js","compactados/eventos_compacto.js","Normal");
 packer("editor.js","compactados/editor_compacto.js","Normal");
 packer("guias.js","compactados/guias_compacto.js","Normal");
 packer("mapa.js","compactados/mapa_compacto.js","Normal");
+packer("identify.js","compactados/identify_compacto.js","Normal");
 packer("desenho.js","compactados/desenho_compacto.js","Normal");
 packer("tema.js","compactados/tema_compacto.js","Normal");
 packer("analise.js","compactados/analise_compacto.js","Normal");
@@ -136,8 +137,6 @@ packer("busca.js","compactados/busca_compacto.js","Normal");
 packer("legenda.js","compactados/legenda_compacto.js","Normal");
 packer("timer.js","compactados/timer_compacto.js","Normal");
 packer("caixaDeFerramentas.js","compactados/caixaDeFerramentas_compacto.js","Normal");
-//packer("../ferramentas/editorol/editorol.js","../ferramentas/editorol/editorol_compacto.js","Normal");
-//packer("../ferramentas/editorgm/editorgm.js","../ferramentas/editorgm/editorgm_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container.js","../pacotes/yui290/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container_core.js","../pacotes/yui290/build/container/container_core_compacto.js","Normal");
 packer("../pacotes/yui290/build/utilities/utilities.js","../pacotes/yui290/build/utilities/utilities_compacto.js","Normal");
@@ -194,6 +193,7 @@ $jsfiles = array(
 "compactados/desenho_compacto.js",
 "compactados/interface_compacto.js",
 "compactados/mapa_compacto.js",
+"compactados/identify_compacto.js",
 "compactados/tema_compacto.js",
 "compactados/analise_compacto.js",
 "compactados/maparef_compacto.js",

@@ -3,27 +3,6 @@ define("I3GEOPATH", explode("serverapi",__FILE__)[0]);
 include (I3GEOPATH."/serverapi/safe.php");
 include (I3GEOPATH."/classesphp/classe_vermultilayer.php");
 switch (strtoupper($_GET["funcao"])) {
-    case "CREATE":
-        session_name("i3GeoPHP");
-        unset($GLOBALS);
-        if (session_status() == PHP_SESSION_ACTIVE) {
-            // error_log("--------------Apagando a session");
-            session_destroy();
-            //lembrete: validaAcessoTemas usa cookies
-            $_COOKIE = array();
-        }
-        include (I3GEOPATH."/ms_configura.php");
-        $interfaceTemp = $_GET["interface"];
-        $interface = "mashup";
-        $funcao = $_GET["funcao"];
-        include (I3GEOPATH."/ms_criamapa.php");
-        $_SESSION["interface"] = $interfaceTemp;
-        $temp = $_SESSION["map_file"];
-        $retorno = session_id();
-        session_write_close();
-        // ver funcoes_gerais.php
-        validaAcessoTemas($temp);
-        break;
     case "START":
         include (I3GEOPATH."/classesphp/mapa_inicia.php");
         //e necessario definir a interface pois o mapa pode ter sido criado
@@ -55,11 +34,13 @@ switch (strtoupper($_GET["funcao"])) {
         $retorno = $r;
         break;
     case "MUDATAMANHO":
+        include_once (I3GEOPATH."/classesphp/classe_mapa.php");
         $map = ms_newMapObj($_SESSION["map_file"]);
         $map->setsize($_GET["largura"], $_GET["altura"]);
         $salvo = $map->save($_SESSION["map_file"]);
         $m = new Mapa($_SESSION["map_file"]);
         $m->mudaQS($_GET["largura"], $_GET["altura"]);
+
         $retorno = true;
         break;
     case "ZOOMPONTO":

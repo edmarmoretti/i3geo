@@ -1,6 +1,6 @@
 <?php
 //
-//veja i3GEO.mapa.dialogo.cliqueIdentificaDefault
+//veja i3GEO.identify.dialogo.cliqueIdentificaDefault
 //
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)));

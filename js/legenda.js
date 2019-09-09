@@ -113,11 +113,10 @@ i3GEO.legenda =
 		snackbarmsg: false,
 		btn: false,
 		par: {
-		    funcao: "criaLegendaJSON",
 		    w : w,
 		    h : h
 		},
-		prog: "/serverapi/map/",
+		prog: "/restmapserver/map/" + i3GEO.configura.sid + "/getLegendParameters",
 		fn: function(data){
 		    if (after){
 			after.call(after, data);
@@ -168,6 +167,7 @@ i3GEO.legenda =
 		idleg.innerHTML = t;
 
 		$("#" + i3GEO.legenda.config.idLegenda).find(".draggable").draggable({
+		    delay: 800,
 		    helper: "clone",
 		    appendTo: "body",
 		    start: function(event, ui) {

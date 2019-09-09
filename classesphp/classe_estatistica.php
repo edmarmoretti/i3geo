@@ -39,6 +39,8 @@ class estatistica
 {
 	var $resultado;  //array com os calculos
 	var $indice; //nomes dos indices calculados
+	function __construct(){
+	}
 /*
 function: calcula
 

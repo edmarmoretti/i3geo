@@ -284,7 +284,6 @@ $image_wms = @$parurl["image_wms"];
 $versao_wms = @$parurl["versao_wms"];
 $gvsigview = @$parurl["gvsigview"];
 $restauramapa = @$parurl["restauramapa"];
-
 $versao = versao();
 $versao = $versao["principal"];
 
@@ -320,6 +319,7 @@ if (! empty($restauramapa)) {
         $base = $tempBaseX;
     }
 }
+
 // verifica se o usuario trocou a senha do master
 if ($_SERVER['SERVER_NAME'] != "localhost" && ($i3geomaster[0]["usuario"] == "admin" && $i3geomaster[0]["senha"] == "admin")) {
     echo json_encode(array(
@@ -487,7 +487,11 @@ $_SESSION["saikuUrl"] = $saikuUrl_;
 $_SESSION["logExec"] = $logExec_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
 $_SESSION["i3geoBlFerramentas"] = $i3geoBlFerramentas_;
-
+if($esquemaadmin != ""){
+    $_SESSION["esquemaadmin"] = str_replace(".","",$esquemaadmin).".";
+} else {
+    $_SESSION["esquemaadmin"] = "";
+}
 // sao arrays
 $postgis_mapa = $postgis_mapa_;
 $_SESSION["statusFerramentas"] = $statusFerramentas_;

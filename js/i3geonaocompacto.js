@@ -52,6 +52,7 @@
 	"desenho.js",
 	"interface.js",
 	"mapa.js",
+	"identify.js",
 	"tema.js",
 	"analise.js",
 	"maparef.js",

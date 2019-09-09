@@ -1472,21 +1472,21 @@ class Mapa
      *
      * Parametros:
      *
-     * $tema - Tema que ser&aacute; adicionado.
-     * $servico - Endere&ccedil;o do web service.
-     * $nome - Nome do tema para a legenda.
+     * $tema $wmslayertitle - Tema que ser&aacute; adicionado.
+     * $servico $url - Endere&ccedil;o do web service.
+     * $nome $legendtitle - Nome do tema para a legenda.
      * $proj - Lista das proje&ccedil;&otilde;es suportadas separadas por v&iacute;rgula.
-     * $formato - Lista dos formatos de imagem separadas por v&iacute;rgula.
+     * $formato $formatlist - Lista dos formatos de imagem separadas por v&iacute;rgula.
      * $locaplic - Diret&oacute;rio onde fica a aplica&ccedil;&atilde;o.
-     * $tipo - Tipo de representa&ccedil;&atilde;o poligonal|linear|pontual.
-     * $versao - Vers&atilde;o do getcapabilities
-     * $nomecamada - nome da camada do WMS
+     * $tipo $type - Tipo de representa&ccedil;&atilde;o poligonal|linear|pontual.
+     * $versao $version - Vers&atilde;o do getcapabilities
+     * $nomecamada $wmslayername - nome da camada do WMS
      * $dir_tmp - diret&oacute;rio tempor&aacute;rio do I3Geo
      * $imgdir - diret&oacute;rio tempor&aacute;rio das imagens
      * $imgurl - url do imgdir
-     * $tiporep - tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es do mapa. Quando definido, &eacute; criado um sld para ser aplicado ao layer. poligonal|linear|pontual
-     * $suportasld - Suporta SLD sim|nao.
-     * $formatosinfo - lista de formatos da requisi&ccedil;&atilde;o de atributos para a fun&ccedil;&atilde;o getfeatureinfo (default text/plain)
+     * $tiporep $representationtype - tipo de representa&ccedil;&atilde;o das fei&ccedil;&otilde;es do mapa. Quando definido, &eacute; criado um sld para ser aplicado ao layer. poligonal|linear|pontual
+     * $suportasld $suportsld - Suporta SLD sim|nao.
+     * $formatosinfo $infoformat - lista de formatos da requisi&ccedil;&atilde;o de atributos para a fun&ccedil;&atilde;o getfeatureinfo (default text/plain)
      * $time - espec&iacute;fico para WMS-T (par&acirc;mentro wms_time)
      * $tile - indica se o WMS e do tipo TILE ou nao (0 ou 1)
      * &allitens - inclui todos os itens ou nao

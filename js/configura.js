@@ -208,7 +208,7 @@ i3GEO.configura =
 	 */
 	ferramentas: {
 	    identifica : {
-		resolution : 8 //utilizado em verificaTipDefault (i3GEO.mapa)
+		resolution : 8 //utilizado em verificaTipDefault (i3GEO.identify)
 	    }
 	},
 	/**

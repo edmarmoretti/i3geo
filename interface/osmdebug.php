@@ -428,7 +428,7 @@ include ($configInc["inc"] . "/css.php");
                 }
                 }
             };
-            //
+            //openlayersdebug.php
             //inicia o mapa
             //Veja tambem config.php
             //

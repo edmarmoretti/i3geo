@@ -1691,6 +1691,7 @@ class Atributos
                                 );
                                 $valori["wkt"] = $arraytemp;
                             }
+                            $valori["hash"] = sha1(serialize($valori));
                             $resultado[] = $valori;
                         }
                     }

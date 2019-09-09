@@ -191,7 +191,7 @@ i3GEOF.busca = {
 			y = (valores[1] * 1) + ((((valores[1] * -1) - (valores[3] * -1)) / 2) * 1);
 
 			ins.push("<button title='zoom' onclick='i3GEO.navega.zoomExt(\"\",\"\",\"\",\""+linhas[linha].box+"\")' class='btn btn-xs' ><span class='material-icons'>gps_fixed</span></button>");
-			ins.push("<button title='pin' onclick='i3GEO.navega.zoomponto(\"\",\"\","+x+","+y+")'' class='btn btn-xs' ><span class='material-icons'>room</span></button>");
+			ins.push("<button title='pin' onclick='i3GEO.navega.zoomponto({x:"+x+",y:"+y+"})' class='btn btn-xs' ><span class='material-icons'>room</span></button>");
 			for (i=0;i<linhas[linha].valores.length; i++){
 			    er = new RegExp(palavra, "gi");
 			    tr = (linhas[linha].valores[i].valor).replace(er,"<span style=color:red;text-align:left >"+palavra+"</span>");

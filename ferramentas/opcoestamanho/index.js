@@ -61,32 +61,14 @@ i3GEOF.opcoestamanho = {
 	    return data
 	},
 	mudatamanho: function(btn){
-	    i3GEO.janela.abreAguarde();
-	    btn = $(btn);
-	    btn.prop("disabled",true).find("span").removeClass("hidden");
-	    var par = this.getFormData(),
-	    	i3f = this;
-	    par.g_sid = i3GEO.configura.sid;
-	    par.funcao = "mudatamanho";
-	    $.get(
-		    i3GEO.configura.locaplic+"/ferramentas/" + i3f._parameters.namespace + "/exec.php",
-		    par
-	    )
-	    .done(
-		    function(data, status){
-			btn.prop("disabled",false).find("span").addClass("hidden");
-			i3GEO.janela.fechaAguarde();
-			i3GEO.janela.snackBar({content: $trad("concluido",i3f.dicionario)});
-			i3f.destroy();
-		    }
-	    )
-	    .fail(
-		    function(data){
-			btn.prop("disabled",false).find("span").addClass("hidden");
-			i3GEO.janela.fechaAguarde();
-			i3GEO.janela.snackBar({content: data.status, style:'red'});
-			i3f.destroy();
-		    }
-	    );
+	    var par = this.getFormData();
+	    i3GEO.mapa.mudatamanho({
+	        after: function(){
+	            i3GEOF.opcoestamanho.destroy();
+	        },
+	        altura: par.altura,
+	        largura: par.largura,
+	        btn: btn,
+	    });
 	}
 };

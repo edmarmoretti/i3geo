@@ -380,7 +380,7 @@ $saikuConfigDataSource = array(
 	1 - utiliza a funcao do Mapserver saveImage() para enviar a imagem ao navegador (e mais rapida, mas nao funciona em algumas versoes do Mapserver)
 	2 - utiliza X-Sendfile (mais rapido que as outras opcoes) mas exige modificacoes na instalacao do Apache. Veja em: https://tn123.org/mod_xsendfile/ e http://edmarmoretti.blogspot.com.br/
  */
-$i3georendermode = 0;
+$i3georendermode = 1;
 /*
 	Variavel: linkedinoauth (ainda n&atilde;o implementado)
 

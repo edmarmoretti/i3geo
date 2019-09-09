@@ -1,4 +1,3 @@
-//+$trad(1,i3GEOF.opcoesTamanho.dicionario)+
 i3GEOF.opcoesmaparef.dicionario = {
     'imagemTxt' : [ {
         pt : "Imagem de refer&ecirc;ncia",

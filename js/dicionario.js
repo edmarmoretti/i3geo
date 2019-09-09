@@ -3342,5 +3342,19 @@ g_traducao =
                 en : "Select a classification type",
                 es : "Seleccione un tipo de clasificaci&oacute;n"
             }
+        ],
+        'importFeaturesLayer' : [
+            {
+                pt : "Importa os elementos de uma camada",
+                en : "",
+                es : ""
+            }
+        ],
+        'layerData' : [
+            {
+                pt : "Camada com os dados",
+                en : "",
+                es : ""
+            }
         ]
     };

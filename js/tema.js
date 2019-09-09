@@ -83,10 +83,9 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {
-                    temas: excluir.getUnique().join(","),
-                    funcao: "EXCLUIRTEMAS"
+                    layernames: excluir.getUnique().join(",")
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/layersDelete",
                 fn: function(data){
                     i3GEO.mapa.ativaTema();
                     i3GEO.temaAtivo = "";
@@ -133,11 +132,33 @@ i3GEO.tema =
                 );
             }
         },
-        sobe : function(tema) {
-            console.error("Veja i3GEO.mapa.moveLayerUp()");
+        moveUp: function(layerName){
+            i3GEO.request.get({
+                snackbar: false,
+                snackbarmsg: false,
+                btn: false,
+                par: {},
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/moveUp",
+                fn: function(data){
+                    i3GEO.mapa.refresh(
+                            i3GEO.Interface.ordenaLayers
+                    );
+                }
+            });
         },
-        desce : function(tema) {
-            console.error("Veja i3GEO.mapa.moveLayerDown()");
+        moveDown: function(layerName){
+            i3GEO.request.get({
+                snackbar: false,
+                snackbarmsg: false,
+                btn: false,
+                par: {},
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/moveDown",
+                fn: function(data){
+                    i3GEO.mapa.refresh(
+                            i3GEO.Interface.ordenaLayers
+                    );
+                }
+            });
         },
         zoom : function(tema) {
             console.error("Veja i3GEO.mapa.extentToLayer()");
@@ -200,6 +221,25 @@ i3GEO.tema =
                     if (after){
                         after.call(after, data);
                     }
+                }
+            });
+        },
+        queryByRect : function(after,layerName,wkt,extent) {
+            i3GEO.request.get({
+                snackbar: false,
+                snackbarmsg: false,
+                btn: false,
+                par: {
+                    extent: extent ? extent : i3GEO.mapa.getExtent().geo,
+                    wkt: wkt ? wkt : false
+                },
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/queryByRect",
+                fn: function(data){
+                    if (after){
+                        after.call(after, data);
+                    }
+                    //console.log(data)
+                    return data;
                 }
             });
         },

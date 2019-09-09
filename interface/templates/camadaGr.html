@@ -2,107 +2,110 @@
     <div class="checkbox" style="display: inline;">
         <label class="{{{classeCss}}}" style="width: calc(100% - 100px); margin: 0px 0px 6px 50px;">
             <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
-                {{{checked}}} onclick="i3GEO.eventos.cliquePerm.ativa();i3geoOL.getLayersGrBy('name','{{{name}}}')[0].setVisibility(this.checked);i3geoOL.getLayersGrBy('name','{{{name}}}')[0].changed()">
+                {{{checked}}} onclick="i3GEO.editor.removeInteracoes();i3GEO.editor.unblockIcons();i3GEO.eventos.cliquePerm.ativa();i3geoOL.getLayersGrBy('name','{{{name}}}')[0].setVisibility(this.checked);i3geoOL.getLayersGrBy('name','{{{name}}}')[0].changed()">
             <span class="checkbox-material noprint"><span class="check"></span></span> {{{tema}}}
         </label>
     </div>
     <div data-target="#listaLayersGrBtn" data-toggle="collapse" class="list-group pull-right collapsed" style="margin-bottom: 5px;"></div>
 </div>
 <div id="listaLayersGrBtn" class="listaLayersGrBtn collapse" style="background:white; cursor:move; overflow: none; width: 35rem;">
-    <button title="{{{dlinha}}}" onclick="i3GEO.editor.draw.lineString()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{dlinha}}}" onclick="i3GEO.editor.draw.lineString(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/line-create.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{dpol}}}" onclick="i3GEO.editor.draw.polygon()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{dpol}}}" onclick="i3GEO.editor.draw.polygon(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/polygon-create.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{fillring}}}" onclick="i3GEO.editor.jsts.fillRing()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{fillring}}}" onclick="i3GEO.editor.jsts.fillRing(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mActionFillRing.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{dponto}}}" onclick="i3GEO.editor.draw.point()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{dponto}}}" onclick="i3GEO.editor.draw.point(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/point-create.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button onclick="i3GEO.editor.draw.circle()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button onclick="i3GEO.editor.draw.circle(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/circle-create.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button onclick="i3GEO.editor.draw.rectangle()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button onclick="i3GEO.editor.draw.rectangle(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/rectangle-create.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{dtexto}}}" onclick="i3GEO.editor.draw.text()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{dtexto}}}" onclick="i3GEO.editor.draw.text(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/text-add.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="Gps" onclick="i3GEO.editor.draw.gps()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="Gps" onclick="i3GEO.editor.draw.gps()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/gps.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{modf}}}" onclick="i3GEO.editor.edit()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{modf}}}" onclick="i3GEO.editor.edit(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/edit.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{d24t}}}" onclick="i3GEO.editor.sel.one()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{d24t}}}" onclick="i3GEO.editor.sel.one(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/select-one.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{ustudo}}}" onclick="i3GEO.editor.sel.un()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{ustudo}}}" onclick="i3GEO.editor.sel.un(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/select-cancel.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{studo}}}" onclick="i3GEO.editor.sel.all()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{studo}}}" onclick="i3GEO.editor.sel.all()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/selectall.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{excsel}}}" onclick="i3GEO.editor.sel.confirmDelete()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{excsel}}}" onclick="i3GEO.editor.sel.confirmDelete()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/selected-delete.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button onclick="i3GEO.editor.panSelection()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button onclick="i3GEO.editor.panSelection(this)" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/pan-selection.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{frente}}}" onclick="i3GEO.editor.orderToFront()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{frente}}}" onclick="i3GEO.editor.orderToFront()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/order-to-front.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{agrupa}}}" onclick="i3GEO.editor.group()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{agrupa}}}" onclick="i3GEO.editor.group()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/group.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{desagrupa}}}" onclick="i3GEO.editor.ungroup()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{desagrupa}}}" onclick="i3GEO.editor.ungroup()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/ungroup.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{splitf}}}" onclick="i3GEO.editor.draw.editSplit()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{splitf}}}" onclick="i3GEO.editor.draw.editSplit()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/split.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{cortaf}}}" onclick="i3GEO.editor.draw.editCut()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{cortaf}}}" onclick="i3GEO.editor.draw.editCut()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/ring-add.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{union}}}" onclick="i3GEO.editor.jsts.union()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{union}}}" onclick="i3GEO.editor.jsts.union()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mAlgorithmUnion.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{intersect}}}" onclick="i3GEO.editor.jsts.intersect()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{intersect}}}" onclick="i3GEO.editor.jsts.intersect()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mAlgorithmIntersect.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{symdif}}}" onclick="i3GEO.editor.jsts.symdif()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{symdif}}}" onclick="i3GEO.editor.jsts.symdif()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mAlgorithmSymmetricalDifference.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{dif}}}" onclick="i3GEO.editor.jsts.dif()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{dif}}}" onclick="i3GEO.editor.jsts.dif()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mAlgorithmDifference.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{extent}}}" onclick="i3GEO.editor.jsts.boundary()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{extent}}}" onclick="i3GEO.editor.jsts.boundary()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mAlgorithmExtractLayerExtent.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="Convex" onclick="i3GEO.editor.jsts.convexHull()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="Convex" onclick="i3GEO.editor.jsts.convexHull()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mAlgorithmConvexHull.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{masc}}}" onclick="i3GEO.editor.masc()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{masc}}}" onclick="i3GEO.editor.masc()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mLayoutItemPicture.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
     <br>
-    <button title="{{{x101}}}" onclick="i3GEO.editor.copy()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{x101}}}" onclick="i3GEO.editor.copy()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mActionEditCopy.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{cola}}}" onclick="i3GEO.editor.paste()" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{cola}}}" onclick="i3GEO.editor.paste()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mActionEditPaste.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{ativaidentifica}}}" onclick="i3GEO.editor.ativaIdentifica()" class="btn btn-xs"
+    <button title="{{{ativaidentifica}}}" onclick="i3GEO.editor.ativaIdentifica()" class="editorIcon btn btn-xs"
         style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/pointer-info.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{listag}}}" onclick="i3GEO.editor.table('.layersGrForm')" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{listag}}}" onclick="i3GEO.editor.table('.layersGrForm')" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/mActionPropertyItem.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
-    <button title="{{{p13}}}" onclick="i3GEO.editor.properties('.layersGrForm')" class="btn btn-xs" style="margin: 1px; padding: 1px;">
+    <button title="{{{p13}}}" onclick="i3GEO.editor.properties('.layersGrForm')" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
         <img src="{{{locaplic}}}/imagens/gisicons/settings.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
+    </button>
+    <button title="{{{importFeaturesLayer}}}" onclick="i3GEO.editor.importFeaturesLayer()" class="editorIcon btn btn-xs" style="margin: 1px; padding: 1px;">
+        <img src="{{{locaplic}}}/imagens/gisicons/layer-open.png" style="padding: 1px; border: 1px solid rgb(233, 233, 233)" />
     </button>
     <div class="togglebutton text-left" style="display: inline;">
         <label>

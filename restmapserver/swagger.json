@@ -2,46 +2,529 @@
     "swagger": "2.0",
     "info": {
         "title": "i3Geo Map Server API",
-        "description": "Api description...",
-        "termsOfService": "",
+        "description": "Server side end points to create and update maps.",
         "contact": {
             "email": "edmar.moretti@gmail.com"
         },
         "license": {
-            "name": "GPL2"
+            "name": "GPL 2"
         },
-        "version": "8.0.0"
+        "version": "8.0"
     },
-    "host": "API_HOST",
-    "basePath": "/",
-    "schemes": [
-        "http",
-        "https"
-    ],
     "paths": {
-        "/users/{id}": {
+        "/i3geo/restmapserver/layer/{mapId}/{layerName}/queryByrect/": {
             "get": {
                 "tags": [
-                    "users"
+                    "layer"
                 ],
-                "summary": "Fetch user details",
-                "operationId": "getUser",
+                "summary": "Get data by rect",
+                "operationId": "queryByrect",
                 "parameters": [
                     {
-                        "name": "id",
+                        "name": "mapId",
                         "in": "path",
-                        "description": "UUID",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerName",
+                        "in": "path",
+                        "description": "Layer name",
                         "required": true,
                         "type": "string"
                     }
                 ],
-                "responses": {}
+                "responses": {
+                    "200": {
+                        "description": "data"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/create/": {
+            "get": {
+                "tags": [
+                    "map"
+                ],
+                "summary": "Create a new map. Example to open the created map: http://localhost/i3geo/interface/openlayersdebug.php?&projection=osm",
+                "operationId": "create",
+                "parameters": [
+                    {
+                        "name": "projection",
+                        "in": "path",
+                        "description": "Projection type",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "osm",
+                            "geo"
+                        ]
+                    },
+                    {
+                        "name": "mapfilebase",
+                        "in": "query",
+                        "description": "Arquivo mapfile que servirao; de base para a\n *            criacao do mapa. Por default, sao utilizados\n *            os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)\n *            Essa variavel pode ser definida em ms_configura tambem.\n *            Se nao estiver definida em nenhum lugar, o i3Geo\n *            tentara descobrir o arquivo adequado a ser utilizado.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "restoreMapId",
+                        "in": "query",
+                        "description": "ID do mapa salvo no banco de dados de administracao.",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "mapext",
+                        "in": "query",
+                        "description": "Extensao geografica xmin,ymin,xmax,ymax",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layersadd",
+                        "in": "query",
+                        "description": "Lista de layers que serao adicionados ao mapa (ver pasta i3geo/temas).",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerson",
+                        "in": "query",
+                        "description": "Lista de layers que serao ligados (visiveis).",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layersoff",
+                        "in": "query",
+                        "description": "Lista de layers que serao desligados.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "metaestatids",
+                        "in": "query",
+                        "description": "Lista de codigos de medidas de variaveis cadastradas no\n *            sistema de metadados estatisticos. Cada medida sera adicionada como\n *            um novo layer no mapa.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "wkt",
+                        "in": "query",
+                        "description": "Coordenadas, no formato WKT que serao adicionadas ao mapa como uma camada nova.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "namewkt",
+                        "in": "query",
+                        "description": "Titulo da camada WKT quando &wkt for definido.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "points",
+                        "in": "query",
+                        "description": "Coordenadas de pontos que serao adicionadas ao mapa como uma camada nova.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "namepoints",
+                        "in": "query",
+                        "description": "Titulo da camada quando &points for definido.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "lines",
+                        "in": "query",
+                        "description": "Coordenadas das linhas que serao adicionadas ao mapa como uma camada nova. Exemplo: -54 -12 -50 -12,-50 -1 -50 -2 -50 -3",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "namelines",
+                        "in": "query",
+                        "description": "Titulo da camada quando &lines for definido.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "polygons",
+                        "in": "query",
+                        "description": "Coordenadas dos poligonos que serao adicionadas ao mapa como uma camada nova. Exemplo: -54 -12 -50 -12 -50 -10 -54 -12",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "namepolygons",
+                        "in": "query",
+                        "description": "Titulo da camada quando &polygons for definido.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "symbol",
+                        "in": "query",
+                        "description": "Simbolo utilizado para eleemtnso adicionados via coordenadas (wkt por exemplo).",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "symbolsize",
+                        "in": "query",
+                        "description": "Tamanho utilizado no simbolo definido com &symbol.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "symbolcolor",
+                        "in": "query",
+                        "description": "Cor do simbolo (rgb) definido com &symbol.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "urlwms",
+                        "in": "query",
+                        "description": "Url de um servico WMS cujo layer sera adicionado ao mapa.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "titlewms",
+                        "in": "query",
+                        "description": "Titulo da camada com o WMS.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "srswms",
+                        "in": "query",
+                        "description": "SRS exemplo: EPSG:4326",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerwms",
+                        "in": "query",
+                        "description": "Codigo do layer existente no servico WMS.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "imagewms",
+                        "in": "query",
+                        "description": "Lista de tipos de imagens possiveis. Exemplo: image/png,image/jpeg.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "stylewms",
+                        "in": "query",
+                        "description": "Codigo do estilo do LAYER existente no WMS.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "versionwms",
+                        "in": "query",
+                        "description": "Versao do WMS.",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "map_layer_<layername>_filter",
+                        "in": "query",
+                        "description": "Aplica filtros a um layer utilizando uma expressao Mapfile.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "mapId - id do mapa criado"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/getParameters/": {
+            "get": {
+                "tags": [
+                    "map"
+                ],
+                "summary": "Get the parameters of the map that was created",
+                "operationId": "getParameters",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "parameters"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/layersDelete/": {
+            "get": {
+                "tags": [
+                    "map update"
+                ],
+                "summary": "Delete layers from a map",
+                "operationId": "layersDelete",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layernames",
+                        "in": "query",
+                        "description": "List of layer names",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/reorderLayers/": {
+            "get": {
+                "tags": [
+                    "map update"
+                ],
+                "summary": "Reorder the layers in a map",
+                "operationId": "reorderLayers",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layernames",
+                        "in": "query",
+                        "description": "List of layer names in the desidered order",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/getLegendParameters/": {
+            "get": {
+                "tags": [
+                    "map",
+                    "legend"
+                ],
+                "summary": "Get legend parameters",
+                "operationId": "getLegendParameters",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "w",
+                        "in": "query",
+                        "description": "Icon width",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "h",
+                        "in": "query",
+                        "description": "Icon heigth",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/setSize/": {
+            "get": {
+                "tags": [
+                    "map update"
+                ],
+                "summary": "Update map size",
+                "operationId": "setSize",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "h",
+                        "in": "query",
+                        "description": "Height",
+                        "required": true,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "w",
+                        "in": "query",
+                        "description": "Width",
+                        "required": true,
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/centerPoint/": {
+            "get": {
+                "tags": [
+                    "map navigation"
+                ],
+                "summary": "Change map center",
+                "operationId": "centerPoint",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "x",
+                        "in": "query",
+                        "description": "Longitude",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "y",
+                        "in": "query",
+                        "description": "Latitude",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/addPointFeature/": {
+            "get": {
+                "tags": [
+                    "map feature"
+                ],
+                "summary": "Add point",
+                "operationId": "addPointFeature",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "x",
+                        "in": "query",
+                        "description": "Longitude",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "y",
+                        "in": "query",
+                        "description": "Latitude",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "symbol",
+                        "in": "query",
+                        "description": "Symbol name",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "size",
+                        "in": "query",
+                        "description": "Symbol size",
+                        "required": false,
+                        "type": "integer"
+                    },
+                    {
+                        "name": "color",
+                        "in": "query",
+                        "description": "R,G,B color",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "offsetx",
+                        "in": "query",
+                        "description": "X symbol offset position",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "offsety",
+                        "in": "query",
+                        "description": "Y symbol offset position",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerTitle",
+                        "in": "query",
+                        "description": "New layer title",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
             }
         }
     },
-    "definitions": {},
-    "externalDocs": {
-        "description": "Find out more about i3Geo",
-        "url": "https://softwarepublico.gov.br/gitlab/i3geo/i3geo/wikis/home"
-    }
+    "definitions": {}
 }

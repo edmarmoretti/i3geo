@@ -318,11 +318,11 @@ i3GEO.coordenadas =
 		    + 'ym\').value,$i(\''
 		    + prefixo
 		    + 'ys\').value);'
-		    + 'i3GEO.navega.zoomponto(i3GEO.configura.locaplic,i3GEO.configura.sid,'
+		    + 'i3GEO.navega.zoomponto({x:'
 		    + prefixo
-		    + 'xxx,'
+		    + 'xxx,y:'
 		    + prefixo
-		    + 'yyy);';
+		    + 'yyy});';
 	    ins +=
 		'<img class=ticfind style="margin-left:8px;" title=zoom onclick="' + temp
 		+ '" src="'
@@ -798,7 +798,7 @@ i3GEO.coordenadas =
 			codigo = idobj;
 		    }
 		    codigo = i3GEO.coordenadas.geohash.decodeGeoHash(codigo);
-		    i3GEO.navega.zoomponto(i3GEO.configura.locaplic, i3GEO.configura.sid, codigo.longitude, codigo.latitude);
+		    i3GEO.navega.zoomponto({x:codigo.longitude, y:codigo.latitude});
 		}
 	},
 	zoomPonto: function(){
@@ -812,12 +812,10 @@ i3GEO.coordenadas =
 		    $i('localizarxygeoProjym').value*1,
 		    $i('localizarxygeoProjys').value.replace(",",".")*1
 	    );
-	    i3GEO.navega.zoomponto(
-		    i3GEO.configura.locaplic,
-		    i3GEO.configura.sid,
-		    localizarxygeoProjxxx,
-		    localizarxygeoProjyyy
-	    );
+	    i3GEO.navega.zoomponto({
+		    x: localizarxygeoProjxxx,
+		    y: localizarxygeoProjyyy
+	    });
 	},
 	zoomPontoGeo: function(){
 	    i3GEO.coordenadas.zoomPonto();

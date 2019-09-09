@@ -3,8 +3,6 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.mapa =
 {
-        //permite ou nao que o balao de info funcione ao clicar no mapa
-        BALAOATIVO: true,
         //mostra ou nao o balao de informacoes mesmo se nao existirem dados retornados
         OPENTIPIFEMPTY: true,
         /**
@@ -80,7 +78,7 @@ i3GEO.mapa =
             }
         },
         infoxy: function(x,y){
-            i3GEO.mapa.dialogo.verificaTipDefault(x,y);
+            i3GEO.identify.dialogo.verificaTipDefault(x,y);
         },
         /**
          * Ativa o redimensionamento automatico do mapa sempre que o navegador for redimensionado
@@ -106,27 +104,19 @@ i3GEO.mapa =
                 ativo = false;
             };
         },
+        //depreciado na versao 8
         ativaIdentifica: function(){
             if (typeof (console) !== 'undefined')
-                console.info("i3GEO.mapa.ativaIdentifica()");
+                console.info("i3GEO.mapa.ativaIdentifica depreciado utilize i3GEO.identify.ativaIdentifica()");
 
-            i3GEO.eventos.MOUSECLIQUE = ["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"];
-            i3GEO.eventos.adicionaEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
-            i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.verificaTipDefault()"]);
-            i3GEO.eventos.cliquePerm.ativa();
+            i3GEO.identify.ativaIdentifica();
         },
+        //depreciado na versao 8
         ativaIdentificaBalao: function(){
             if (typeof (console) !== 'undefined')
-                console.info("i3GEO.mapa.ativaIdentificaBalao()");
+                console.info("i3GEO.mapa.ativaIdentificaBalao depreciado utilize i3GEO.identify.ativaIdentificaBalao()");
 
-            //if (i3GEO.arvoreDeCamadas.filtraCamadas("etiquetas", "", "diferente", i3GEO.arvoreDeCamadas.CAMADAS) === "") {
-            //	i3GEO.janela.tempoMsg($trad("d31"));
-            //	return;
-            //}
-
-            i3GEO.eventos.removeEventos("MOUSECLIQUEPERM",["i3GEO.mapa.dialogo.cliqueIdentificaDefault()"]);
-            i3GEO.eventos.MOUSECLIQUE = ["i3GEO.mapa.dialogo.verificaTipDefault()"];
-            i3GEO.eventos.cliquePerm.ativa();
+            i3GEO.identify.ativaIdentificaBalao();
         },
         /**
          * Function: ativaTema
@@ -391,53 +381,20 @@ i3GEO.mapa =
                 }
             });
         },
-        mudatamanho : function(after, altura, largura) {
+        mudatamanho : function({after = false, altura = 500, largura = 500, btn = false, snackbarmsg = false, snackbar = false} = {}) {
             i3GEO.request.get({
-                snackbar: false,
-                snackbarmsg: false,
-                btn: false,
+                snackbar: snackbar,
+                snackbarmsg: snackbarmsg,
+                btn: btn,
                 par: {
-                    altura: altura,
-                    largura: "largura",
-                    funcao: "mudatamanho"
+                    h: altura,
+                    w: largura
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/setSize",
                 fn: function(data){
                     if (after){
                         after.call(after, data);
                     }
-                }
-            });
-        },
-        moveLayerUp: function(tema){
-            i3GEO.request.get({
-                snackbar: false,
-                snackbarmsg: false,
-                btn: false,
-                par: {
-                    tema: tema,
-                    funcao: "moveLayerUp"
-                },
-                prog: "/serverapi/map/",
-                fn: function(data){
-                    i3GEO.mapa.refresh();
-                    i3GEO.Interface.ordenaLayers();
-                }
-            });
-        },
-        moveLayerDown: function(tema){
-            i3GEO.request.get({
-                snackbar: false,
-                snackbarmsg: false,
-                btn: false,
-                par: {
-                    tema: tema,
-                    funcao: "moveLayerDown"
-                },
-                prog: "/serverapi/map/",
-                fn: function(data){
-                    i3GEO.mapa.refresh();
-                    i3GEO.Interface.ordenaLayers();
                 }
             });
         },
@@ -452,55 +409,17 @@ i3GEO.mapa =
                 geo: i3GEO.util.extOSM2Geo(s)
             });
         },
-        extentToLayer: function(tema){
+        extentToLayer: function(layerName){
             i3GEO.request.get({
                 snackbar: false,
                 snackbarmsg: false,
                 btn: false,
                 par: {
-                    tema: tema,
-                    funcao: "extentToLayer"
+                    layerName: layerName
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/extentToLayer",
                 fn: function(data){
                     i3GEO.Interface.zoom2ext(data);
-                }
-            });
-        },
-        identifica : function(after, x, y, resolucao, opcao, tema, listaDeTemas, wkt) {
-            if (typeof (console) !== 'undefined')
-                console.info("i3GEO.mapa.identifica()");
-
-            if(x === null || y === null || (x == 0 && y == 0)){
-                return;
-            }
-            if (listaDeTemas === undefined) {
-                listaDeTemas = "";
-            }
-            // verifica se nao e necessario alterar as coordenadas
-            ext = i3GEO.mapa.getExtent().geo;
-            var par = {
-                    funcao: "identifica",
-                    wkt: wkt,
-                    opcao: opcao,
-                    xy: x + "," + y,
-                    resolucao: resolucao,
-                    ext: ext,
-                    listaDeTemas: listaDeTemas
-            };
-            if (opcao !== "tip") {
-                par.tema = tema;
-            }
-            i3GEO.request.get({
-                snackbar: false,
-                snackbarmsg: false,
-                btn: false,
-                par: par,
-                prog: "/serverapi/map/",
-                fn: function(data){
-                    if (after){
-                        after.call(after, data);
-                    }
                 }
             });
         },
@@ -1086,108 +1005,18 @@ i3GEO.mapa =
                         "dependencias.php",
                 "i3GEOF.inseregrafico.start()");
             },
-            /**
-             * Function: cliqueIdentificaDefault
-             *
-             * Abre a janela de dialogo da ferramenta identifica
-             *
-             *
-             * Parametros:
-             *
-             * {numerico} - (opcional) coordenada x
-             *
-             * {numerco} - (opcional) coordenada y
-             *
-             */
+            //depreciado na versao 8
             cliqueIdentificaDefault : function(x, y, tema) {
                 if (typeof (console) !== 'undefined')
-                    console.info("i3GEO.mapa.dialogo.cliqueIdentificaDefault()");
+                    console.info("depreciado i3GEO.mapa.dialogo.cliqueIdentificaDefault() utilize i3GEO.identify.dialogo.cliqueIdentificaDefault()");
 
-                if(!x){
-                    x = objposicaocursor.ddx;
-                    y = objposicaocursor.ddy;
-                }
-                var temp = function() {
-                    i3GEOF.identifica.start({"x":x,"y":y,"tema": tema});
-                };
-                // javascript nao foi carregado
-                if (typeof (i3GEOF.identifica) === 'undefined') {
-                    // javascript que sera carregado
-                    var js = i3GEO.configura.locaplic + "/ferramentas/identifica/dependencias.php";
-                    // carrega o script
-                    i3GEO.util.scriptTag(js, temp, "i3GEOF.identifica_script");
-                } else {
-                    temp();
-                }
+                i3GEO.identify.dialogo.cliqueIdentificaDefault();
             },
-            /**
-             * Mostra etiquetas no mapa com informacoes sobre os temas com etiquetas ativas
-             *
-             * Essa e a funcao padrao definida em i3GEO.configura
-             */
             verificaTipDefault : function(x,y) {
                 if (typeof (console) !== 'undefined')
-                    console.info("i3GEO.mapa.dialogo.verificaTipDefault()" + x + " " + y );
+                    console.info("depreciado i3GEO.mapa.dialogo.verificaTipDefault() utilize i3GEO.identify.dialogo.verificaTipDefault()");
 
-                if(i3GEO.mapa.BALAOATIVO == false){
-                    if (typeof (console) !== 'undefined')
-                        console.info("balao desativado");
-
-                    return;
-                }
-                if(!x){
-                    x = objposicaocursor.ddx;
-                }
-                if(!y){
-                    y = objposicaocursor.ddy;
-                }
-                if(x === -1 || y === -1 || i3GEO.eventos.cliquePerm.ativo === false || i3GEO.eventos.cliquePerm.status === false){
-                    return;
-                }
-                i3GEO.eventos.cliquePerm.status = false;
-                //para evitar duplo clique
-                objposicaocursor.ddx = -1;
-                objposicaocursor.ddy = -1;
-                var ntemas = i3GEO.arvoreDeCamadas.CAMADAS.length;
-                var etiquetas = false;
-                for (var j = 0; j < ntemas; j += 1) {
-                    if (i3GEO.arvoreDeCamadas.CAMADAS[j].etiquetas !== "" || i3GEO.arvoreDeCamadas.CAMADAS[j].identifica == "SIM") {
-                        etiquetas = true;
-                    }
-                }
-                if (etiquetas === false) {
-                    return;
-                }
-                if(i3GEO.Interface.BALAOPROP.url != "" && i3GEO.Interface[i3GEO.Interface.ATUAL].BALAOPROP.templateModal == ""){
-                    $.get( i3GEO.Interface.BALAOPROP.url + "&xx=" + x + "&yy=" + y, function( data ) {
-                        i3GEO.janela.closeMsg(data);
-                    });
-                    return;
-                }
-                if(i3GEO.Interface.BALAOPROP.templateModal != ""){
-                    if(i3GEO.Interface.BALAOPROP.url != ""){
-                        var temp = i3GEO.Interface.BALAOPROP.url + "&xx=" + x + "&yy=" + y;
-                        temp = i3GEO.Interface.BALAOPROP.templateModal.replace("{{{url}}}",temp);
-                        i3GEO.janela.closeMsg(temp);
-                    } else {
-                        i3GEO.janela.closeMsg(i3GEO.Interface.BALAOPROP.templateModal);
-                    }
-                    return;
-                }
-                var b = i3GEO.mapa.createWaitOverlay(x,y);
-                var temp = function(retorno){
-                    i3geoOL.removeOverlay(b);
-                    i3GEO.mapa.montaTip(retorno,x,y);
-                };
-                i3GEO.mapa.identifica(
-                        temp,
-                        x,
-                        y,
-                        i3GEO.configura.ferramentas.identifica.resolution,
-                        "tip",
-                        "ligados",
-                        "",
-                "sim");
+                i3GEO.identify.dialogo.verificaTipDefault(x,y);
             }
         },
         createWaitOverlay: function(x,y){
@@ -1213,260 +1042,40 @@ i3GEO.mapa =
             i3geoOL.addOverlay(b);
             return b;
         },
-        montaTip: function (retorno,xx,yy){
+        addWktToGraphicLayer: function(wkts,titulo){
             if (typeof (console) !== 'undefined')
-                console.info("i3GEO.mapa.montaTip()");
-
-            var textCopy = [],textoSimples = "", textoTempSimples = "", x, y, temp, n, mostra, res, temas, ntemas, titulo, tips, j, ntips, r, ds, nds, s, configura =
-                i3GEO.configura, wkts = [];
-
-            i3GEO.eventos.cliquePerm.status = true;
-            mostra = true;
-
-            if(retorno !== ""){
-                temp = retorno[0].xy.split(",");
-                x = temp[0]*1;
-                y = temp[1]*1;
-            } else {
-                x = xx;
-                y = yy;
-                mostra = true;
-                textoSimples = "";//$trad("balaoVazio");
-                wkt = [];
-                retorno = true;
-                if(i3GEO.Interface.BALAOPROP.openTipNoData == false){
-                    mostra = false;
-                }
-            }
-            if (retorno) {
-                res = "";
-                ntemas = 0;
-                temas = retorno;
-                if (temas) {
-                    ntemas = temas.length;
-                }
-                for (j = 0; j < ntemas; j += 1) {
-                    if(!temas[j].resultado.todosItens){
-                        continue;
-                    }
-                    titulo = temas[j].nome;
-                    textCopy.push(titulo);
-                    //para os nomes de funcoes embutidas
-                    //funcoes sao configuradas no mapfile
-                    //exemplo do METADATA
-                    //"FUNCOESJS" '[{"tipo":"layer","titulo":"teste fake"},{"tipo":"registro","titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["FIPS_CNTRY","LONG_NAME"]}]'
-                    var temp1 = [];
-                    $.each( temas[j].funcoesjs, function( key, value ) {
-                        if(value.tipo == "layer"){
-                            var parametros = [x,y,temas[j].tema];
-                            $.each( value.parametros, function( key1, value1 ) {
-                                parametros.push(ds[s][value1].valor);
-                            });
-                            parametros = "\"" + parametros.join("\",\"") + "\"";
-                            temp1.push("<a class='toolTipBalaoFuncoes' href='javascript:void(0);' onclick='" + value.funcao + "(" + parametros + ")' >" + value.titulo + "</a><br>");
-
-                            //adiciona o javascript que contem a funcao
-                            if(value.script && value.script != ""){
-                                i3GEO.util.scriptTag(value.script, "", "funcaolayer"+value.funcao, false);
-                            }
+                console.info("adicionando WKT");
+            var n = wkts.length;
+            if(n > 0){
+                i3GEO.desenho.criaLayerGrafico();
+                var g, format, f, c = i3GEO.desenho.layergrafico.getSource();
+                format = new ol.format.WKT();
+                for(r = 0; r < n; r += 1){
+                    f = format.readFeatures(wkts[r].wkt.valor);
+                    f = f[0];
+                    g = f.getGeometry();
+                    g = i3GEO.util.projGeo2OSM(g);
+                    f.setGeometry(g);
+                    if(wkts[r].hash){
+                        if(c.getFeatureById(wkts[r].hash)){
+                            continue;
                         }
-                    });
-                    temp1 = temp1.join(" ");
-
-                    var mais = "<button style='margin: 2px;padding: 0px;vertical-align: middle;position: relative;top: -7px;' class='btn btn-default btn-xs' onclick=\"i3GEO.mapa.dialogo.cliqueIdentificaDefault(" + x + "," + y + ",'" + temas[j].tema + "');return false;\" ><span style='opacity:0.5;vertical-align: middle;padding: 0px;' class='material-icons'>info</span></button>";
-                    if(ntemas == 1){
-                        mais = "";
-                    }
-                    titulo = "<div class='toolTipBalaoTitulo'>" + mais + " <b>" + titulo + "</b><br>" + temp1 + "</div>";
-                    tips = temas[j].resultado.todosItens;
-                    ntips = tips.length;
-                    ins = "";
-                    textoTempSimples = "";
-                    ds = temas[j].resultado.dados;
-                    if (ds !== " " && ds[0] && ds[0] != " ") {
-                        try {
-                            nds = ds.length;
-                            for (s = 0; s < nds; s += 1) {
-                                textoTempSimples += "<div class='toolTipBalaoTexto'>";
-                                for (r = 0; r < ntips; r += 1) {
-                                    try {
-                                        temp = "";
-                                        var alias = ds[s][tips[r]].alias;
-                                        var valor = ds[s][tips[r]].valor;
-                                        var link = ds[s][tips[r]].link;
-                                        var img = ds[s][tips[r]].img;
-                                        var estilo = "tooltip-"+temas[j].tema;
-                                        if (valor !== "" && link === "") {
-                                            temp += "<span class='"+estilo+"'><label>" + alias + ": </label>" + valor + "</span><br>";
-                                            textCopy.push(alias + ":" + valor);
-                                        }
-                                        if (valor !== "" && link !== "") {
-                                            temp +=
-                                                "<span class='"+estilo+"'><label>" + alias
-                                                + " : </label><a style='color:blue;cursor:pointer' target=_blanck href='"
-                                                + link
-                                                + "' >"
-                                                + valor
-                                                + "</a></span><br>";
-                                            textCopy.push(alias + ":" + valor);
-                                        }
-                                        if (img !== "") {
-                                            temp += img + "<br>";
-                                        }
-                                        if (ds[s][tips[r]].tip.toLowerCase() === "sim") {
-                                            textoTempSimples += temp;
-                                        }
-                                        mostra = true;
-                                    } catch (e) {}
-                                }
-                                //para os nomes de funcoes embutidas
-                                //funcoes sao configuradas no mapfile
-                                //exemplo do METADATA
-                                //"FUNCOESJS" '[{"tipo":"layer","titulo":"teste fake"},{"tipo":"registro","titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["FIPS_CNTRY","LONG_NAME"]}]'
-                                var temp1 = [];
-                                $.each( temas[j].funcoesjs, function( key, value ) {
-                                    if(value.tipo == "registro"){
-                                        var parametros = [x,y,temas[j].tema];
-                                        $.each( value.parametros, function( key1, value1 ) {
-                                            parametros.push(ds[s][value1].valor);
-                                        });
-                                        parametros = "\"" + parametros.join("\",\"") + "\"";
-                                        temp1.push("<a class='toolTipBalaoFuncoes' href='javascript:void(0);' onclick='" + value.funcao + "(" + parametros + ")' >" + value.titulo + "</a><br>");
-                                        //adiciona o javascript que contem a funcao
-                                        if(value.script && value.script != ""){
-                                            i3GEO.util.scriptTag(value.script, "", "funcaolayer"+value.funcao, false);
-                                        }
-                                    }
-                                });
-                                temp1 = temp1.join(" ");
-                                textoTempSimples += temp1 + "</div>";
-                                //insere o wkt se existir
-                                if(ds[s].wkt && ds[s].wkt.valor != ""){
-                                    ds[s].tema = temas[j].tema;
-                                    ds[s].titulo = temas[j].nome;
-                                    wkts.push(ds[s]);
-                                }
-                            }
-                        } catch (e) {
-                        }
-                    }
-                    if (textoTempSimples !== "") {
-                        textoSimples += titulo + textoTempSimples;
-                    }
-                }
-                //caso seja um vetor
-                var pixel = i3geoOL.getPixelFromCoordinate(i3GEO.util.projGeo2OSM(new ol.geom.Point([x, y])).getCoordinates());
-                var html = [];
-                textoSimples += html.join("<br>");
-                textCopy += html.join("<br>");
-                var afterCreate = function(){
-                    var painel = this.painel;
-                    var dados = {};
-                    i3geoOL.forEachFeatureAtPixel(
-                            pixel,
-                            function(feature, layer) {
-                                if (typeof (console) !== 'undefined')
-                                    console.info("i3geoOL.forEachFeatureAtPixel mapa.js");
-
-                                var texto = "";
-                                var prop = feature.getProperties();
-                                if(feature.get("fat")){
-                                    var fat = feature.get("fat");
-                                    var chaves = i3GEO.util.listaChaves(fat);
-                                    var c = chaves.length;
-                                    //for (var i = 0; i < c; i++) {
-                                    $.each(chaves,function( index, element ){
-                                        var elementTitulo = element;
-                                        var e = fat[element];
-                                        if(e.alias && e.alias != ""){
-                                            elementTitulo = e.alias;
-                                        }
-                                        if(e.tip != "nao"){
-                                            if( e.valor != undefined){
-                                                texto += elementTitulo + ": " + e.valor + "<br>";
-                                            } else {
-                                                texto += elementTitulo + ": " + e + "<br>";
-                                            }
-                                        }
-                                    });
-                                    //}
-                                } else {
-                                    var chaves = feature.getKeys();
-                                    var c = chaves.length;
-                                    for (var i = 0; i < c; i++) {
-                                        if (chaves[i] != "geometry" && chaves[i] != "styleUrl") {
-                                            texto += chaves[i] + ": " + prop[chaves[i]] + "<br>";
-                                        }
-                                    }
-                                }
-                                if(layer){
-                                    if(dados[layer.get("name")]){
-                                        dados[layer.get("name")].push(texto);
-                                    } else {
-                                        dados[layer.get("name")] = [texto];
-                                    }
-                                } else if (prop.nameLayer && prop.nameLayer != "") {
-                                    if(dados[prop.nameLayer]){
-                                        dados[prop.nameLayer].push(texto);
-                                    } else {
-                                        dados[prop.nameLayer] = [texto];
-                                    }
-                                }
-                            },
-                            {
-                                hitTolerance: i3GEO.configura.ferramentas.identifica.resolution
-                            }
-                    );
-                    var html = [];
-                    for(let d of Object.keys(dados)){
-                        if(i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[d]){
-                            html.push("<div class='toolTipBalaoTitulo'><b>" + i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[d].tema + "</b><br></div>");
-                        } else {
-                            html.push("<div class='toolTipBalaoTitulo'><b>" + d + "</b></div>");
-                        }
-                        html.push("<div class='toolTipBalaoTexto'>" + dados[d].join("<br>") + "</div>");
-                    }
-                    if(painel){
-                        $(painel).find(".tooltip-conteudo").prepend(html.join(""));
-                    }
-                    if (typeof (console) !== 'undefined')
-                        console.info("adicionando WKT");
-
-                    var n = wkts.length;
-                    if(n > 0){
-                        i3GEO.desenho.criaLayerGrafico();
-                        var g, format, f, idunico,c = i3GEO.desenho.layergrafico.getSource();
-                        format = new ol.format.WKT();
-                        for(r = 0; r < n; r += 1){
-                            f = format.readFeatures(wkts[r].wkt.valor);
-                            f = f[0];
-                            g = f.getGeometry();
-                            g = i3GEO.util.projGeo2OSM(g);
-                            f.setGeometry(g);
-                            f.setId(i3GEO.util.uid());
-                            i3GEO.editor.setStyleByTypeFeature(f);
-                            i3GEO.editor.setStyleDefault(f);
-                            wkts[r].wkt = "",
-                            //atributos
-                            f.setProperties({
-                                fat : wkts[r],
-                                origem : "pin",
-                                nameLayer: titulo + " (" + $trad("figura") + ")"
-                            });
-                            c.addFeature(f);
-                        }
-                        i3GEO.editor.tableRefresh();
-                    }
-                };
-                if (mostra === true) {
-                    if(i3GEO.Interface.BALAOPROP.modal == true){
-                        i3GEO.janela.closeMsg(textoSimples);
-                        return;
+                        f.setId(wkts[r].hash);
                     } else {
-                        var painel = i3GEO.Interface.balao(textoSimples, textCopy, x, y, true, wkts.length, afterCreate);
+                        f.setId(i3GEO.util.uid());
                     }
+                    i3GEO.editor.setStyleByTypeFeature(f);
+                    i3GEO.editor.setStyleDefault(f);
+                    wkts[r].wkt = "",
+                    //atributos
+                    f.setProperties({
+                        fat : wkts[r],
+                        origem : "pin",
+                        nameLayer: titulo + " (" + $trad("figura") + ")"
+                    });
+                    c.addFeature(f);
                 }
+                i3GEO.editor.tableRefresh();
             }
-
         }
 };

@@ -63,48 +63,54 @@ i3GEO.request =
 		    }
 	    );
 	},
-	post: function({snackbar = true, snackbarmsg = false, btn = false, par = {}, prog = "", fn = false} = {}){
-	    if (typeof (console) !== 'undefined')
-		console.log('---> i3GEO.request.post() ' + prog, 'background: #222; color: #bada55');
+        post: function({snackbar = true, snackbarmsg = false, btn = false, par = {}, prog = "", fn = false} = {}){
+            if (typeof (console) !== 'undefined')
+                console.log('%c ---> i3GEO.request.post() ' + prog, 'background: #222; color: #0cb73e');
 
-	    i3GEO.janela.abreAguarde();
-	    if(btn){
-		btn = $(btn);
-		btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
-	    }
-	    i3GEO.janela._formModal.block();
-	    par.g_sid = i3GEO.configura.sid;
-	    $.post(
-		    i3GEO.configura.locaplic + prog,
-		    par
-	    )
-	    .done(
-		    function(data, status){
-			i3GEO.janela._formModal.unblock();
-			i3GEO.janela.fechaAguarde();
-			if(btn){
-			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
-			}
-			if(snackbar){
-			    if(snackbarmsg == false){
-				snackbarmsg = $trad('feito');
-			    }
-			    i3GEO.janela.snackBar({content: snackbarmsg});
-			}
-			if(fn){
-			    fn(data);
-			}
-		    }
-	    )
-	    .fail(
-		    function(data){
-			i3GEO.janela._formModal.unblock();
-			i3GEO.janela.fechaAguarde();
-			if(btn){
-			    btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
-			}
-			i3GEO.janela.snackBar({content: data.statusText, style:'red'});
-		    }
-	    );
-	}
+            i3GEO.janela.abreAguarde();
+            if(btn){
+                btn = $(btn);
+                btn.prop("disabled",true).find("span .glyphicon").removeClass("hidden");
+            }
+            if(i3GEO.janela._formModal){
+                i3GEO.janela._formModal.block();
+            }
+            par.g_sid = i3GEO.configura.sid;
+            $.post(
+                    i3GEO.configura.locaplic + prog,
+                    par
+            )
+            .done(
+                    function(data, status){
+                        if(i3GEO.janela._formModal){
+                            i3GEO.janela._formModal.unblock();
+                        }
+                        i3GEO.janela.fechaAguarde();
+                        if(btn){
+                            btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+                        }
+                        if(snackbar){
+                            if(snackbarmsg == false){
+                                snackbarmsg = $trad('feito');
+                            }
+                            i3GEO.janela.snackBar({content: snackbarmsg});
+                        }
+                        if(fn){
+                            fn(data);
+                        }
+                    }
+            )
+            .fail(
+                    function(data){
+                        if(i3GEO.janela._formModal){
+                            i3GEO.janela._formModal.unblock();
+                        }
+                        i3GEO.janela.fechaAguarde();
+                        if(btn){
+                            btn.prop("disabled",false).find("span .glyphicon").addClass("hidden");
+                        }
+                        i3GEO.janela.snackBar({content: data.statusText, style:'red'});
+                    }
+            );
+        }
 };

@@ -247,6 +247,7 @@ function RGB2hex($rgb)
  */
 function nomeRandomico($n = 10)
 {
+    //uniqid("i3geomap")
     $nomes = "";
     $a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $max = 51;

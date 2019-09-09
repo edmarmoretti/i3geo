@@ -192,6 +192,7 @@ i3GEO.arvoreDeCamadas =
 		);
 		$(temp).html(t);
 		$(".listaLayersGrBtn").draggable({
+		    delay: 800,
 		    helper: "clone",
 		    appendTo: $("body"),
 		    start: function(event, ui) {
@@ -361,13 +362,13 @@ i3GEO.arvoreDeCamadas =
 		$("#" + config.idOnde).html(t);
 
 		$("#" + config.idOnde).sortable({
+		    delay: 800,
 		    scroll: false,
 		    axis: "y",
 		    revert: true,
 		    update: function( event, ui ) {
 			var els = i3GEO.arvoreDeCamadas.listaLigadosDesligadosArvore(config.idOnde);
 			var lista = els[2].join(",");
-
 			i3GEO.arvoreDeCamadas.reordenatemas(lista);
 		    }
 		});
@@ -927,7 +928,7 @@ i3GEO.arvoreDeCamadas =
 	    n = camadas.length;
 	    for(i=0; i<n; i++){
 		camada = camadas[i];
-		todos.push(camada.value);
+		todos.push(camada["name"]);
 		if (camada.checked == true) {
 		    ligados.push(camada["name"]);
 		} else {
@@ -1262,10 +1263,9 @@ i3GEO.arvoreDeCamadas =
 		snackbarmsg: false,
 		btn: false,
 		par: {
-		    temas: temas,
-		    funcao: "REORDENATEMAS"
+		    layernames: temas
 		},
-		prog: "/serverapi/map/",
+		prog: "/restmapserver/map/" + i3GEO.configura.sid + "/reorderLayers",
 		fn: function(data){
 		    if (after){
 			after.call(after, data);
@@ -1276,6 +1276,5 @@ i3GEO.arvoreDeCamadas =
 		    }
 		}
 	    });
-
 	}
 };

@@ -18,6 +18,7 @@ if($_GET["funcao"] != "create"){
     ]);
 
     $f = explode(",", $_SESSION["fingerprint"]);
+
     if ($f[0] != md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . $_GET["g_sid"])) {
         header("Content-type: application/json");
         echo json_encode(array(

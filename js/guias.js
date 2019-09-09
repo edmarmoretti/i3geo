@@ -119,7 +119,7 @@ i3GEO.guias =
                     if (typeof (console) !== 'undefined')
                         console.info("click no botao identifica balao");
 
-                    i3GEO.mapa.ativaIdentificaBalao();
+                    i3GEO.identify.ativaIdentificaBalao();
                 }
             },
             "identifica" : {
@@ -132,7 +132,7 @@ i3GEO.guias =
                         console.info("click no botao identifica");
 
                     //$('.iconeGuiaMovel').tooltip('destroy');
-                    i3GEO.mapa.ativaIdentifica();
+                    i3GEO.identify.ativaIdentifica();
 
                 }
             },
