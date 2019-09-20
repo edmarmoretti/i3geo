@@ -55,27 +55,20 @@ i3GEO.mapa =
          *
          */
         limpasel : function({verifica = false}={}) {
-            var sel = false;
-            if(verifica == true){
-                sel = i3GEO.arvoreDeCamadas.existeCamadaSel({msg: true});
-            } else {
-                sel = true;
+            if(i3GEO.arvoreDeCamadas.existeCamadaSel({msg: true}) == false){
+                return;
             }
-            if(sel == true){
-                i3GEO.request.get({
-                    snackbar: false,
-                    snackbarmsg: false,
-                    btn: false,
-                    par: {
-                        funcao: "limpasel"
-                    },
-                    prog: "/serverapi/map/",
-                    fn: function(data){
-                        i3GEO.mapa.refresh();
-                        i3GEO.Interface.atualizaMapa();
-                    }
-                });
-            }
+            i3GEO.request.get({
+                snackbar: false,
+                snackbarmsg: false,
+                btn: false,
+                par: {},
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/clearSel",
+                fn: function(data){
+                    i3GEO.mapa.refresh();
+                    i3GEO.Interface.atualizaMapa();
+                }
+            });
         },
         infoxy: function(x,y){
             i3GEO.identify.dialogo.verificaTipDefault(x,y);

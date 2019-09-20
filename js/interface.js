@@ -156,15 +156,19 @@ i3GEO.Interface =
          */
         aplicaOpacidade : function(opacidade, layer) {
             if (typeof (console) !== 'undefined')
-                console.info("i3GEO.Interface.aplicaOpacidade");
+                console.info("i3GEO.Interface.aplicaOpacidade " +  layer);
 
             if(opacidade > 1){
                 opacidade = opacidade / 100;
             }
 
             if(layer){
-                i3geoOL.getLayersByName(layer)[0].setOpacity(opacidade*1);
-                return;
+                var temp = i3geoOL.getLayersByName(layer);
+                if(temp.length > 0){
+                    i3geoOL.getLayersByName(layer)[0].setOpacity(opacidade*1);
+                    return;
+                }
+                layer = "";
             } else {
                 layer = "";
             }

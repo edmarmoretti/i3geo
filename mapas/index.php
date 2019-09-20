@@ -144,7 +144,7 @@ include ("templates/templatelista.php");
     <script src='index.js'></script>
     <script>
 	$(document).ready(function(){
-		i3GEO.configura = {"locaplic" : window.location.href.split("/mapas")[0],"sid": ""};
+		i3GEO.configura = {"locaplic" : window.location.href.split("/mapas/index.php")[0],"sid": ""};
 		//traducoes de alguns elementos individualmente
 		$(".active").html(
 			$trad("mapas",g_traducao_mapas)

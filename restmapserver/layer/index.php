@@ -52,9 +52,14 @@ $app->map([
 ],'/{mapId}/{layerName}/queryByRect', function (Request $request, Response $response, $args) {
     $param = $this->util->sanitizestrings($request->getQueryParams());
     $data = $this->layer->queryByrect($args["mapId"],$args["layerName"],json_decode($param["wkt"]),$param["extent"]);
+    $json = json_encode($data);
+    $jsonError = $this->util->jsonError();
+    if($jsonError != false){
+        $json = $jsonError;
+    }
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
-    ->write(json_encode($data));
+    ->write($json);
     return $response;
 });
 $app->map([

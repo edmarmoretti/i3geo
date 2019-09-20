@@ -454,7 +454,7 @@ class Layer
                 $valori["wkt"] = $arraytemp;
             }
             $valori["tema"] = $layerObj->name;
-            $valori["titulo"] = $layerObj->getmetadata("tema");
+            $valori["titulo"] = $this->util->txt2utf($layerObj->getmetadata("tema"));
             $valori["hash"] = sha1(serialize($valori));
             $resultado[] = $valori;
         }

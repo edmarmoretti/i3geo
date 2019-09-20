@@ -1826,4 +1826,28 @@ class Map
         $mapObj->save($_SESSION["map_file"]);
         return($ext);
     }
+    function clearSel($mapId)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        $qyfile = str_replace(".map","_qy.map",$_SESSION["map_file"]);
+        $c = $mapObj->numlayers;
+        for ($i=0;$i < $c;$i++){
+            $l = $mapObj->getlayer($i);
+            $file = dirname($_SESSION["map_file"])."/".$l->name.".php";
+            if (file_exists($file)){
+                unlink ($file);
+            }
+            $file = dirname($_SESSION["map_file"])."/".$l->name."_qy.map";
+            if (file_exists($file)){
+                unlink ($file);
+            }
+        }
+        if (file_exists($qyfile)){
+            unlink ($qyfile);
+        }
+        return true;
+    }
 }

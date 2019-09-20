@@ -627,16 +627,41 @@ $app->map([
     ->write(json_encode($data));
     return $response;
 });
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/clearSel/",
+ * 		tags={"map update"},
+ * 		operationId="clearSel",
+ * 		summary="Clear all layers selections",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/clearSel', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = $this->map->clearSel($args["mapId"]);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data));
+    return $response;
+});
 $app->run();
 exit();
 
 switch ("none") {
-    case "LIMPASEL":
-        include (I3GEOPATH . "/classesphp/classe_selecao.php");
-        $m = new Selecao($_SESSION["map_file"]);
-        $m->selecaoLimpa();
-        $retorno = true;
-        break;
     case "ADICIONATEMAWMS":
         include (I3GEOPATH . "/classesphp/classe_mapa.php");
         $m = new Mapa($_SESSION["map_file"]);
