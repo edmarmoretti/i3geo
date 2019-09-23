@@ -38,9 +38,9 @@ i3GEO.editor =
         _snapInteraction: "",
         _tolerance: 10,
         blockIcons: function(btn){
-            $(".editorIcon").addClass("editorBlock");
+            $(".editorIcon").removeClass("editorBlock");
             if (btn){
-                $(btn).removeClass("editorBlock");
+                $(btn).addClass("editorBlock");
             }
         },
         unblockIcons: function(){

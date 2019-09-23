@@ -18,6 +18,7 @@ if(count($mapas["mapas"]) > 0){
             $link .= "&" . $mapa["OUTROS"];
         }
     }
+    //echo $link;exit;
     echo "<meta http-equiv='refresh' content='0;url=$link'>";
 }
 ?>

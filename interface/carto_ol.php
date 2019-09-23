@@ -1,0 +1,2 @@
+<?php
+include("osm.php");
