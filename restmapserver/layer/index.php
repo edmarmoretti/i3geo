@@ -40,6 +40,21 @@ $container['layer'] = function ($c) {
  * 			type="string",
  * 			description="Layer name"
  * 		),
+ * 		@SWG\Parameter(
+ * 			name="wkt",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Get results geometry",
+ *          enum={"true", "false"}
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="extent",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Geographic extent (xmin, ymin, xmax, ymax)"
+ * 		),
  *      @SWG\Response(
  * 			response="200",
  *          description="data",

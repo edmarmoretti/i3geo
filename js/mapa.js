@@ -290,46 +290,28 @@ i3GEO.mapa =
                 }
             });
         },
-        adicionaTemaWMS : function(after, servico, tema, nome, proj, formato, versao, nomecamada, tiporep, suportasld, formatosinfo,
-                checked, allitens) {
-
-            // verifica se a camada ja existe no mapa
-            if (checked || checked == false) {
-                var camadaArvore = i3GEO.arvoreDeCamadas.pegaTema(
-                        (servico + "&layers=" + tema + "&style=" + nome).replace("&&", "&"),
-                        "",
-                        "wmsurl"
-                );
-                if (camadaArvore) {
-                    var ck = i3GEO.arvoreDeCamadas.capturaCheckBox(camadaArvore.name);
-                    ck.checked = checked;
-                    ck.onclick();
-                    return;
-                }
-            }
+        adicionaTemaWMS : function({after=false, layerTitle = "default", wms_name, url, proj, formatlist, version = "1.1.1", wms_style = "default", representationtype = "", suportsld = false, infoformat = "text/plain", time = "", tile = 0, allitens = false} = {}) {
             var par = {
-                    funcao: "adicionatemawms",
-                    servico: servico,
-                    tema: tema,
-                    nome: nome,
-                    proj: proj,
-                    formato: formato,
-                    versao: versao,
-                    nomecamada: nomecamada,
-                    tiporep: tiporep,
-                    suportasld: suportasld,
-                    formatosinfo: formatosinfo,
-                    allitens: allitens
+                wms_name: wms_name,
+                url: url,
+                proj: proj,
+                formatlist: formatlist,
+                version: version,
+                wms_style: wms_style,
+                representationtype: representationtype,
+                suportsld: suportsld,
+                infoformat: infoformat,
+                time: time,
+                tile: tile,
+                allitens: allitens,
+                layerTitle: layerTitle
             };
-            if(!allitens){
-                par.allitens = "nao";
-            }
             i3GEO.request.get({
                 snackbar: true,
                 snackbarmsg: $trad("camadaadic"),
                 btn: false,
                 par: par,
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerWms",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     if (after){

@@ -61,20 +61,15 @@ i3GEO.catalogoInde = {
 		if(url.indexOf("?") == -1){
 		    url = url + "?";
 		}
-		i3GEO.mapa.adicionaTemaWMS(
-			'',
-			url,
-			layer,
-			"",
-			'EPSG:4326',
-			'image/png',
-			'1.1.1',
-			nome, //nome
-			'',
-			'nao',
-			"text/plain",
-			true
-		);
+		i3GEO.mapa.adicionaTemaWMS({
+		    wms_name: layer,
+		    url: url,
+		    proj: 'EPSG:4326',
+		    formatlist: 'image/png',
+		    version: '1.1.1',
+		    infoformat: "text/plain",
+		    layerTitle: nome
+		});
 	    }
 	},
 	inicia: function(config){
@@ -145,7 +140,7 @@ i3GEO.catalogoInde = {
 			lista();
 		    }).fail(function() {
 			i3GEO.catalogoOgc.wait = false;
-			i3GEO.janela.closeMsg($trad("erroTpl"));
+			i3GEO.janela.closeMsg($trad("erroLoad"));
 			return;
 		    });
 		} else {

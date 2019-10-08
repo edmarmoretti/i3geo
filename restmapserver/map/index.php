@@ -658,90 +658,130 @@ $app->map([
     ->write(json_encode($data));
     return $response;
 });
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/addLayerWms/",
+ * 		tags={"map update"},
+ * 		operationId="addLayerWms",
+ * 		summary="Add layer by WMS",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="wms_name",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Wms layer name"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="url",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Service url"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="proj",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Request projection"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="formatlist",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Image response format"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerTitle",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="New layer title"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="version",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Request version"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="representationtype",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="Layer features type",
+ *          enum={"poligonal", "linear", "pontual"}
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="suportsld",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="SLD support",
+ *          enum={"true", "false"}
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="infoformat",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="MIME types for a GetFeature request"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="time",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="Value to use for the TIME parameter in GetMap requests"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="tile",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="Tiles support",
+ *          enum={"true", "false"}
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="allitens",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="Enable tooltip",
+ *          enum={"true", "false"}
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/addLayerWms', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = $this->map->addLayerWms($args["mapId"],$param["wms_name"], $param["url"], $param["proj"], $param["formatlist"], $param["layerTitle"], $param["version"], $param["wms_style"], $param["representationtype"], $param["suportsld"], $param["infoformat"],$param["time"], $param["tile"], json_decode($param["allitens"]));
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data));
+    return $response;
+});
 $app->run();
 exit();
 
 switch ("none") {
-    case "ADICIONATEMAWMS":
-        include (I3GEOPATH . "/classesphp/classe_mapa.php");
-        $m = new Mapa($_SESSION["map_file"]);
-        $m->adicionatemawms($_GET["tema"], $_GET["servico"], $_GET["nome"], $_GET["proj"], $_GET["formato"], $_SESSION["locaplic"], $_GET["tipo"], $_GET["versao"], $_GET["nomecamada"], $_SESSION["dir_tmp"], $_SESSION["imgdir"], $_SESSION["imgurl"], $_GET["tiporep"], $_GET["suportasld"], $_GET["formatosinfo"], $_GET["time"], $_GET["tile"], $_GET["allitens"]);
-        $retorno = true;
-        break;
-    case "ADICIONATEMASHP":
-        $retorno = array();
-        if ($_SESSION["navegadoresLocais"] == "sim") {
-            include (I3GEOPATH . "/ms_configura.php");
-            // verifica se esta cadastrado
-            $ipcliente = pegaIPcliente();
-            $ips = array();
-            // pega os nomes de cada ip
-            foreach ($navegadoresLocais["ips"] as $n) {
-                $ips[] = gethostbyname($n);
-                $ips[] = $n;
-            }
-            if (in_array($ipcliente, $ips)) {
-                $drives = $navegadoresLocais["drives"];
-                // pega o caminho
-                // nome
-                $split = explode("/", $_GET["arq"]);
-                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
-                    $retorno = array();
-                } else {
-                    include (I3GEOPATH . "/classesphp/classe_mapa.php");
-                    $m = new Mapa($_SESSION["map_file"]);
-                    $path = $split[0];
-                    $split[0] = "";
-                    $shp = implode("/", $split);
-                    $shp = explode(".", $shp);
-                    $shp = $shp[0] . ".shp";
-                    $path = $drives[$path] . $shp;
-                    $retorno = $m->adicionaTemaSHP($path);
-                    if ($retorno != "erro") {
-                        $m->salva();
-                    } else {
-                        $retorno = array();
-                    }
-                }
-            }
-        }
-        break;
-    case "ADICIONATEMAIMG":
-        $retorno = array();
-        if ($_SESSION["navegadoresLocais"] == "sim") {
-            include (I3GEOPATH . "/ms_configura.php");
-            // verifica se est&aacute; cadastrado
-            $ipcliente = pegaIPcliente();
-            $ips = array();
-            // pega os nomes de cada ip
-            foreach ($navegadoresLocais["ips"] as $n) {
-                $ips[] = gethostbyname($n);
-                $ips[] = $n;
-            }
-            if (in_array($ipcliente, $ips)) {
-                $drives = $navegadoresLocais["drives"];
-                // pega o caminho
-                // nome
-                $split = explode("/", $_GET["arq"]);
-                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
-                    $retorno = array();
-                } else {
-                    include (I3GEOPATH . "/classesphp/classe_mapa.php");
-                    $m = new Mapa($_SESSION["map_file"]);
-                    $path = $split[0];
-                    $split[0] = "";
-                    $shp = implode("/", $split);
-                    $path = $drives[$path] . $shp;
-                    $retorno = $m->adicionaTemaIMG($path);
-                    if ($retorno != "erro") {
-                        $m->salva();
-                    } else {
-                        $retorno = array();
-                    }
-                }
-            }
-        }
-        break;
+
     case "IDENTIFICA":
         $tema = "";
         if (isset($_GET["tema"])) {
@@ -880,6 +920,80 @@ switch ("none") {
         $m = new Mapa($_SESSION["map_file"]);
         $retorno = $m->ligaDesligaTemas($_GET["on"], $_GET["off"], "nao");
         $m->salva();
+        break;
+    case "ADICIONATEMASHP":
+        $retorno = array();
+        if ($_SESSION["navegadoresLocais"] == "sim") {
+            include (I3GEOPATH . "/ms_configura.php");
+            // verifica se esta cadastrado
+            $ipcliente = pegaIPcliente();
+            $ips = array();
+            // pega os nomes de cada ip
+            foreach ($navegadoresLocais["ips"] as $n) {
+                $ips[] = gethostbyname($n);
+                $ips[] = $n;
+            }
+            if (in_array($ipcliente, $ips)) {
+                $drives = $navegadoresLocais["drives"];
+                // pega o caminho
+                // nome
+                $split = explode("/", $_GET["arq"]);
+                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
+                    $retorno = array();
+                } else {
+                    include (I3GEOPATH . "/classesphp/classe_mapa.php");
+                    $m = new Mapa($_SESSION["map_file"]);
+                    $path = $split[0];
+                    $split[0] = "";
+                    $shp = implode("/", $split);
+                    $shp = explode(".", $shp);
+                    $shp = $shp[0] . ".shp";
+                    $path = $drives[$path] . $shp;
+                    $retorno = $m->adicionaTemaSHP($path);
+                    if ($retorno != "erro") {
+                        $m->salva();
+                    } else {
+                        $retorno = array();
+                    }
+                }
+            }
+        }
+        break;
+    case "ADICIONATEMAIMG":
+        $retorno = array();
+        if ($_SESSION["navegadoresLocais"] == "sim") {
+            include (I3GEOPATH . "/ms_configura.php");
+            // verifica se est&aacute; cadastrado
+            $ipcliente = pegaIPcliente();
+            $ips = array();
+            // pega os nomes de cada ip
+            foreach ($navegadoresLocais["ips"] as $n) {
+                $ips[] = gethostbyname($n);
+                $ips[] = $n;
+            }
+            if (in_array($ipcliente, $ips)) {
+                $drives = $navegadoresLocais["drives"];
+                // pega o caminho
+                // nome
+                $split = explode("/", $_GET["arq"]);
+                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
+                    $retorno = array();
+                } else {
+                    include (I3GEOPATH . "/classesphp/classe_mapa.php");
+                    $m = new Mapa($_SESSION["map_file"]);
+                    $path = $split[0];
+                    $split[0] = "";
+                    $shp = implode("/", $split);
+                    $path = $drives[$path] . $shp;
+                    $retorno = $m->adicionaTemaIMG($path);
+                    if ($retorno != "erro") {
+                        $m->salva();
+                    } else {
+                        $retorno = array();
+                    }
+                }
+            }
+        }
         break;
 }
 ob_clean();

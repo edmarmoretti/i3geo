@@ -1,0 +1,11 @@
+Nomes de variávies
+
+$layerObj - objeto layer Mapserver
+
+$mapObj - objeto map Mapserver
+
+$extent - extensao geografica $e = explode(",", str_replace(" ", ",", $extent));
+
+$layerTitle - título de um layer
+
+$layerNames - lista de nomes de layers $e = explode(",", str_replace(" ", ",", $layerNames));

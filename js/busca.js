@@ -98,8 +98,15 @@ i3GEO.busca = {
                 function(layer, gid, nm, ext) {
                 if (i3GEO.Interface.googleLike === false) {
                     var s = i3GEO.busca.SERVICOWMS + "?gid=" + gid + "&";
-                    i3GEO.mapa.adicionaTemaWMS(i3GEO.mapa.refresh, s, layer, "default", "EPSG:4618", "image/png", "1.1.0", nm
-                            + " - " + layer, "", "nao", "");
+                    i3GEO.mapa.adicionaTemaWMS({
+                        wms_name: layer,
+                        url: s,
+                        proj: 'EPSG:4618',
+                        formatlist: 'image/png',
+                        version: '1.1.0',
+                        infoformat: "text/plain",
+                        layerTitle: nm + " - " + layer
+                    });
                 }
             };
             var ext = i3GEO.util.wkt2ext(wkt, "polygon");

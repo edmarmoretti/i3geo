@@ -118,6 +118,15 @@ class Layer
         if (strtolower($layerObj->getmetadata("TEMA")) == "nao") {
             return false;
         }
+        if ($layerObj->connectiontype != MS_WMS) {
+            $this->setCon($layerObj);
+            $sopen = $layerObj->open();
+            $this->hiddeCon($layerObj);
+            if ($sopen == MS_FAILURE) {
+                return false;
+            }
+            $layerObj->close();
+        }
         return true;
     }
 
@@ -174,7 +183,7 @@ class Layer
             $locimg = $layerObj->getmetadata("IMGLOC"); // indica o local onde est&atilde;o os &iacute;cones
         }
         $tips = $layerObj->getmetadata("TIP");
-        $nitens = count($itensLayer);
+        //$nitens = count($itensLayer);
         if ($itens == "") {
             $itens = $itensLayer;
         } else {
@@ -229,7 +238,7 @@ class Layer
                 $locimg = $layerObj->getmetadata("IMGLOC"); // indica o local onde est&atilde;o os &iacute;cones
             }
             $tips = $layerObj->getmetadata("TIP");
-            $nitens = count($itensLayer);
+            //$nitens = count($itensLayer);
             if ($itens == "") {
                 $itens = $itensLayer;
             } else {

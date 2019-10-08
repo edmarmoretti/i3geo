@@ -3356,5 +3356,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        'erroLoad' : [
+            {
+                pt : "N&atilde;o foi poss&iacute;vel obter os dados",
+                en : "",
+                es : ""
+            }
         ]
     };

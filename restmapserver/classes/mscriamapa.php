@@ -51,20 +51,20 @@ class Mscriamapa
             $this->map->layersOff($mapId, $param["layersoff"]);
         }
         if (isset($param["metaestatids"])) {
-            $this->map->addLayersMetaestat($param["metaestatids"], $param["layerson"]);
+            $this->map->addLayersMetaestat($mapId,$param["metaestatids"], $param["layerson"]);
         }
         // processa parametros de inclusao de dados
         if (isset($param["wkt"])) {
-            $this->map->addLayerByWkt($param["wkt"], $param["namewkt"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
+            $this->map->addLayerByWkt($mapId,$param["wkt"], $param["namewkt"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
         }
         if (isset($param["points"])) {
-            $this->map->addLayerByPoints($param["points"], $param["namepoints"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
+            $this->map->addLayerByPoints($mapId,$param["points"], $param["namepoints"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
         }
         if (isset($param["lines"])) {
-            $this->map->addLayerByLines($param["lines"], $param["namelines"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
+            $this->map->addLayerByLines($mapId,$param["lines"], $param["namelines"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
         }
         if (isset($param["polygons"])) {
-            $this->map->addLayerByLines($param["polygons"], $param["namepolygons"], $param["symbolcolor"]);
+            $this->map->addLayerByPolygons($mapId,$param["polygons"], $param["namepolygons"], $param["symbolcolor"]);
         }
         /*
          * $param["titlewms"] = "estados";
@@ -76,7 +76,7 @@ class Mscriamapa
          * $param["versionwms$i3GeoProjDefault"] = "1.1.1";
          */
         if (isset($param["urlwms"])) {
-            $this->map->addLayerWms($param["titlewms"], $param["urlwms"], $param["srswms"], $param["imagewms"], "", $param["versionwms"], $param["layerwms"]);
+            $this->map->addLayerWms($mapId, $param["titlewms"], $param["urlwms"], $param["srswms"], $param["imagewms"], "", $param["versionwms"], $param["layerwms"]);
         }
         $this->map->removeRestrictLayers();
         $this->map->hiddeCon();

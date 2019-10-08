@@ -315,16 +315,18 @@ i3GEO.catalogoOgc = {
                 if(config.proj == ""){
                     config.proj = i3geoOL.getView().getProjection().getCode();
                 }
-                v.onclick = "i3GEO.mapa.adicionaTemaWMS('','"
-                    + config.servico + "','"
-                    + config.layer + "','"
-                    + v.nome + "','"
-                    + config.proj + "','"
-                    + config.formatoimg + "','"
-                    + config.versao + "','"
-                    + v.titulo + "','','nao','"
-                    + config.formatoinfo + "',"
-                    + "true,'sim')";
+
+
+                i3GEO.mapa.adicionaTemaWMS({
+                    wms_name: config.layer,
+                    url: config.servico,
+                    proj: 'EPSG:4326',
+                    formatlist: config.formatoimg,
+                    version: config.versao,
+                    infoformat: config.formatoinfo,
+                    layerTitle: v.titulo
+                });
+
                 v.nome = estilos[i].nome + " - " + estilos[i].titulo;
                 clone.push(v);
             });

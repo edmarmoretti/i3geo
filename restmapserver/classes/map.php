@@ -61,6 +61,9 @@ class Map
         $of->set("transparent", MS_ON);
         $of->setOption("QUANTIZE_FORCE", "OFF");
         $of->set("driver", "AGG/PNG");
+        if(empty(@$_SESSION["interface"])){
+            $_SESSION["interface"] = "googlemaps";
+        }
         if ($_SESSION["interface"] == "googlemaps") {
             $mapObj->setProjection("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m");
         }
@@ -574,11 +577,14 @@ class Map
      * @param string $metaestatids
      * @param string $layerson
      */
-    function addLayersMetaestat($metaestatids = "", $layerson = "")
+    function addLayersMetaestat($mapId,$metaestatids = "", $layerson = "")
     {
         $metaestatids = explode(",", $metaestatids);
         if (count($metaestatids) == 0) {
             return;
+        }
+        if ($this->open($mapId) == false) {
+            return false;
         }
         $metaestatidsligados = explode(",", $layerson);
         foreach ($metaestatids as $metaestatid) {
@@ -613,8 +619,11 @@ class Map
         }
     }
 
-    function addLayerWms($wmslayertitle, $url, $proj, $formatlist, $type = "", $version = "1.1.1", $wmslayername = "", $representationtype = "", $suportsld = false, $infoformat = "text/plain", $time = "", $tile = 0, $allitens = false)
+    function addLayerWms($mapId, $wms_name, $url, $proj, $formatlist, $layerTitle = "", $version = "1.1.1", $wms_style = "", $representationtype = "", $suportsld = false, $infoformat = "text/plain", $time = "", $tile = 0, $allitens = false)
     {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
         $mapa = ms_newMapObj($_SESSION["map_file"]);
         include_once (I3GEOPATH . "/classesphp/wmswfs.php");
 
@@ -622,14 +631,17 @@ class Map
         $this->clearQyfile($_SESSION["map_file"]);
         $layer = ms_newLayerObj($mapa);
         $layer->set("status", MS_DEFAULT);
-        $nomecamada = mb_convert_encoding($wmslayername, "ISO-8859-1", "AUTO");
-        if ($wmslayername == "default") {
-            $nomecamada = $wmslayertitle;
+        $nomecamada = mb_convert_encoding($wms_style, "ISO-8859-1", "AUTO");
+        if ($wms_style == "default") {
+            $nomecamada = $wms_name;
+        }
+        if(!empty($layerTitle)){
+            $nomecamada = mb_convert_encoding($layerTitle, "ISO-8859-1", "AUTO");
         }
         $layer->setmetadata("CLASSE", "SIM");
         $layer->setmetadata("TEXTO", "NAO");
         $layer->setmetadata("tema", $nomecamada);
-        $layer->setmetadata("nomeoriginal", $wmslayertitle); // nome original do layer no web service
+        $layer->setmetadata("nomeoriginal", $wms_name); // nome original do layer no web service
         $layer->setmetadata("tipooriginal", $representationtype);
         $layer->set("name", uniqid("wms_"));
         if ($representationtype != "") {
@@ -680,19 +692,20 @@ class Map
         $epsg = trim($epsg);
         $layer->setmetadata("wms_srs", $epsg);
         $layer->setmetadata("wms_crs", $epsg);
-        $layer->setmetadata("wms_name", $wmslayertitle);
+        $layer->setmetadata("wms_name", $wms_name);
         $layer->setmetadata("wms_server_version", $version);
 
         $layer->setmetadata("wms_formatlist", $formatlist);
         $layer->setmetadata("formatosinfo", $infoformat);
         $layer->setmetadata("wms_exceptions_format", "application/vnd.ogc.se_xml");
-        $layer->setmetadata("wms_LAYERS", $wmslayertitle);
-        $layer->setmetadata("wms_STYLES", "");
+        //$layer->setmetadata("wms_LAYERS", $wmslayertitle);
+        $layer->setmetadata("wms_style", $wms_style);
         $layer->setmetadata("wms_connectiontimeout", "30");
         $layer->setmetadata("wms_force_separate_request", "1");
         $layer->setmetadata("wms_tile", $tile);
-        if ($time != "")
+        if ($time != ""){
             $layer->setmetadata("wms_time", $time);
+        }
         // pega o tipo de formato de imagem que deve ser requisitado
         // a prefer&ecirc;ncia &eacute; png, mas se n&atilde;o for poss&iacute;vel, pega o primeiro da lista de formatos
         // dispon&iacute;veis no formato
@@ -706,7 +719,7 @@ class Map
             $layer->setmetadata("wms_sld_url", $_SESSION["imgurl"] . $layer->name . "sld.xml");
             $layer->setmetadata("sld", $_SESSION["map_file"] . "/" . $layer->name . "sld.xml");
         } else {
-            $urllegenda = $url . "&request=getlegendgraphic&version=" . $version . "&service=wms&layer=" . $wmslayertitle . "&format=" . $im;
+            $urllegenda = $url . "&request=getlegendgraphic&version=" . $version . "&service=wms&layer=" . $wms_name . "&format=" . $im;
             $layer->setmetadata("legendawms", $urllegenda);
         }
         $layer->setmetadata("wms_format", $im);
@@ -718,11 +731,9 @@ class Map
 
         $c = $layer->offsite;
         $c->setrgb(255, 255, 255);
-        $of = $this->mapa->outputformat;
-
         $salvo = $mapa->save($_SESSION["map_file"]);
         return array(
-            "layer" => layer
+            "layer" => $layer->name
         );
     }
 
@@ -737,9 +748,12 @@ class Map
      * @param string $symbolcolor
      * @return array("name"=>"","shapefile"=>"")
      */
-    function addLayerByLines($lines = "", $namelines = "Linhas", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
+    function addLayerByLines($mapId, $lines = "", $namelines = "Linhas", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
     {
         if (empty($lines)) {
+            return false;
+        }
+        if ($this->open($mapId) == false) {
             return false;
         }
         include (I3GEOPATH . "/pacotes/phpxbase/api_conversion.php");
@@ -835,9 +849,12 @@ class Map
      * @param string $symbolcolor
      * @return array("name"=>"","shapefile"=>"")
      */
-    function addLayerByPolygons($polygons = "", $namepolygons = "Poligonos", $symbolcolor = "255 0 0")
+    function addLayerByPolygons($mapId, $polygons = "", $namepolygons = "Poligonos", $symbolcolor = "255 0 0")
     {
         if (empty($polygons)) {
+            return false;
+        }
+        if ($this->open($mapId) == false) {
             return false;
         }
         include (I3GEOPATH . "/pacotes/phpxbase/api_conversion.php");
@@ -931,9 +948,12 @@ class Map
      * @param string $symbolcolor
      * @return array("name"=>"","shapefile"=>"")
      */
-    function addLayerByPoints($points = "", $namepoints = "Pontos", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
+    function addLayerByPoints($mapId, $points = "", $namepoints = "Pontos", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
     {
         if (empty($points)) {
+            return false;
+        }
+        if ($this->open($mapId) == false) {
             return false;
         }
         include (I3GEOPATH . "/pacotes/phpxbase/api_conversion.php");
@@ -1022,9 +1042,12 @@ class Map
      * @param string $symbolcolor
      * @return array("name"=>"","shapefile"=>"")
      */
-    function addLayerByWkt($wkt = "", $namewkt = "wktlayer", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
+    function addLayerByWkt($mapId, $wkt = "", $namewkt = "wktlayer", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
     {
         if (empty($wkt)) {
+            return false;
+        }
+        if ($this->open($mapId) == false) {
             return false;
         }
         include (I3GEOPATH . "/pacotes/phpxbase/api_conversion.php");

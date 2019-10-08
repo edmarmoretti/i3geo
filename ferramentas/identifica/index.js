@@ -330,33 +330,34 @@ i3GEOF.identifica = {
 			    // pega o valor do item que e o id unico no sistema
 			    // METAESTAT
 			    idreg = "";
-			    //for (k = 0; k < nitens; k++) {
-			    for (let k of j){
-				if (k.item === retorno[i].colunaidunico) {
-				    idreg = k.valor;
+			    for (let k of Object.keys(j)){
+				if (j[k].item && j[k].item === retorno[i].colunaidunico) {
+				    idreg = j[k].valor;
 				}
 			    }
 			    linha.idreg = idreg;
 			    linha.classeCssEditavel = "hidden";
 			    linha.colunas = [];
 
-			    //for (k = 0; k < nitens; k++) {
-			    for (let k of j){
-				tip = "&nbsp;&nbsp;";
-				textovalor = k.valor;
+			    for (let k of Object.keys(j)){
+			        if(!j[k].item){
+			            continue;
+			        }
+			        tip = "&nbsp;&nbsp;";
+				textovalor = j[k].valor;
 				var coluna = {
 					"tip": "",
 					"textovalor": textovalor,
 					"classeCssEditavel": "hidden"
 				};
 				coluna.etiquetaAtiva = $trad('etiquetaAtiva', i3GEOF.identifica.dicionario);
-				if (k.tip && k.tip.toLowerCase() == "sim") {
+				if (j[k].tip && j[k].tip.toLowerCase() == "sim") {
 				    coluna.classeCssTip = "";
 				} else {
 				    coluna.classeCssTip = "hidden";
 				}
-				coluna.item = k.item;
-				coluna.valor = k.valor;
+				coluna.item = j[k].item;
+				coluna.valor = j[k].valor;
 				coluna.filtraValor = $trad('filtraValor', i3GEOF.identifica.dicionario);
 				coluna.tema = retorno[i].tema;
 
@@ -369,24 +370,24 @@ i3GEOF.identifica = {
 				}
 				// o mesmo problema pode ocorrer em raster,
 				// que possuem o nome da classe como valor
-				if (k.alias.search(">") >= 0 || k.alias.search("<") >= 0) {
+				if (j[k].alias.search(">") >= 0 || j[k].alias.search("<") >= 0) {
 				    filtro = "";
 				    coluna.classeCssFiltro = "hidden";
 				}
 
-				if (k.link === "") {
-				    coluna.alias = k.alias;
+				if (j[k].link === "") {
+				    coluna.alias = j[k].alias;
 				    coluna.textovalor = textovalor;
 				    coluna.link = "";
 				    coluna.classeCssLink = "hidden";
 				} else {
 				    try {
-					link = eval(k.link);
+					link = eval(j[k].link);
 				    } catch (e) {
-					link = k.link;
+					link = j[k].link;
 				    }
-				    if(k.idIframe){
-					alvo = k.idIframe;
+				    if(j[k].idIframe){
+					alvo = j[k].idIframe;
 				    }
 				    else{
 					alvo = "_blank";
@@ -399,9 +400,9 @@ i3GEOF.identifica = {
 				}
 				coluna.classeCssImg = "hidden";
 				coluna.img = "";
-				if (k.img !== "") {
+				if (j[k].img !== "") {
 				    coluna.classeCssImg = "";
-				    coluna.img = k.img;
+				    coluna.img = j[k].img;
 				}
 				linha.colunas.push(coluna);
 				i3GEOF.identifica._export.push(coluna.alias + ":" + coluna.textovalor);

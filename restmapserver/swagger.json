@@ -524,6 +524,183 @@
                     }
                 }
             }
+        },
+        "/i3geo/restmapserver/map/{mapId}/extentToLayer/": {
+            "get": {
+                "tags": [
+                    "map navigation"
+                ],
+                "summary": "Change map extent to layer extent",
+                "operationId": "extentToLayer",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerName",
+                        "in": "query",
+                        "description": "Layer name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/clearSel/": {
+            "get": {
+                "tags": [
+                    "map update"
+                ],
+                "summary": "Clear all layers selections",
+                "operationId": "clearSel",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/addLayerWms/": {
+            "get": {
+                "tags": [
+                    "map update add"
+                ],
+                "summary": "Add layer by WMS",
+                "operationId": "addLayerWms",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "wms_name",
+                        "in": "query",
+                        "description": "Wms layer name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "url",
+                        "in": "query",
+                        "description": "Service url",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "proj",
+                        "in": "query",
+                        "description": "Request projection",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "formatlist",
+                        "in": "query",
+                        "description": "Image response format",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerTitle",
+                        "in": "query",
+                        "description": "New layer title",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "version",
+                        "in": "query",
+                        "description": "Request version",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "representationtype",
+                        "in": "query",
+                        "description": "Layer features type",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "poligonal",
+                            "linear",
+                            "pontual"
+                        ]
+                    },
+                    {
+                        "name": "suportsld",
+                        "in": "query",
+                        "description": "SLD support",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "true",
+                            "false"
+                        ]
+                    },
+                    {
+                        "name": "infoformat",
+                        "in": "query",
+                        "description": "MIME types for a GetFeature request",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "time",
+                        "in": "query",
+                        "description": "Value to use for the TIME parameter in GetMap requests",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "tile",
+                        "in": "query",
+                        "description": "Tiles support",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "true",
+                            "false"
+                        ]
+                    },
+                    {
+                        "name": "allitens",
+                        "in": "query",
+                        "description": "Enable tooltip",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "true",
+                            "false"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
         }
     },
     "definitions": {}
