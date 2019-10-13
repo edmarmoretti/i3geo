@@ -23,6 +23,10 @@ $container['map'] = function ($c) {
     include (I3GEOPATH . "/restmapserver/classes/map.php");
     return new \restmapserver\Map();
 };
+$container['identify'] = function ($c) {
+    include (I3GEOPATH . "/restmapserver/classes/identify.php");
+    return new \restmapserver\Identify();
+};
 /**
  *
  * @SWG\Get(
@@ -777,42 +781,90 @@ $app->map([
     ->write(json_encode($data));
     return $response;
 });
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/identify/",
+ * 		tags={"map attributes"},
+ * 		operationId="identify",
+ * 		summary="Get layers data from point",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="x",
+ * 			in="query",
+ * 			required=true,
+ * 			type="number",
+ * 			description="X coordinate"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="y",
+ * 			in="query",
+ * 			required=true,
+ * 			type="number",
+ * 			description="Y coordinate"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="resolution",
+ * 			in="query",
+ * 			required=false,
+ * 			type="number",
+ * 			description="Search resolution in pixels"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="extent",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="Geographic coordinates of a rect to search (xmin,ymin,xmax,ymax)"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerNames",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="Search layers list"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="allColumns",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="Show all columns",
+ *          enum={"true", "false"}
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/identify', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = $this->identify->query($args["mapId"],$param["x"], $param["y"], $param["resolution"], @$param["extent"], @$param["layerNames"], json_decode(@$param["allColumns"]));
+    $json = json_encode($data);
+    $jsonError = $this->util->jsonError();
+    if($jsonError != false){
+        $json = $jsonError;
+    }
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write($json);
+    return $response;
+});
 $app->run();
 exit();
 
 switch ("none") {
 
-    case "IDENTIFICA":
-        $tema = "";
-        if (isset($_GET["tema"])) {
-            $tema = $_GET["tema"];
-        }
-        $opcao = $_GET["opcao"];
-        $xy = $_GET["xy"];
-        $resolucao = $_GET["resolucao"];
-        $ext = $_GET["ext"];
-        $opcao = $_GET["opcao"];
-        $listaDeTemas = $_GET["listaDeTemas"];
-        $wkt = $_GET["wkt"];
-        if (! isset($tema)) {
-            $tema = "";
-        }
-        if (! isset($listaDeTemas)) {
-            $listaDeTemas = "";
-        }
-        if (! isset($resolucao)) {
-            $resolucao = 5;
-        }
-        include (I3GEOPATH . "/classesphp/classe_atributos.php");
-        if (! isset($ext)) {
-            $ext = "";
-        }
-        if (! isset($wkt)) {
-            $wkt = "nao";
-        }
-        $m = new Atributos($_SESSION["map_file"], $tema, "", $ext);
-        $retorno = $m->identifica($opcao, $xy, $resolucao, $ext, $listaDeTemas, $wkt);
-        break;
     case "ADTEMA":
         include (I3GEOPATH . "/classesphp/classe_mapa.php");
         $m = new Mapa($_SESSION["map_file"]);

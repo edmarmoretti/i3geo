@@ -38,7 +38,7 @@ MAP
       "TEMA"	"Biomas shapefile (acentuação)"
       "colunaidunico"	""
       "colunageometria"	""
-      "identifica"	"nao"
+      "identifica"	"sim"
       "tabelaeditavel"	""
       "storymap"	""
       "temporizador"	"15"

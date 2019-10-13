@@ -1558,7 +1558,7 @@ class Map
                     );
                     $legenda[] = array(
                         "layer" => $la->name,
-                        "nome" => $this->util->utf2iso($la->getmetadata("tema")),
+                        "nome" => $this->util->iso2utf($la->getmetadata("tema")),
                         "classes" => $classes,
                         "tipo" => "imagem"
                     );
@@ -1602,7 +1602,7 @@ class Map
                         }
                         $imagem = $classe->createLegendIcon($w, $h)->saveWebImage();
                         $classes[] = array(
-                            "nome" => $this->util->utf2iso($classe->name),
+                            "nome" => $this->util->iso2utf($classe->name),
                             "img" => $imagem,
                             "checked" => $ck,
                             "index" => $c,
@@ -1617,7 +1617,7 @@ class Map
                     }
                     $legenda[] = array(
                         "layer" => $la->name,
-                        "nome" => $this->util->utf2iso($la->getmetadata("tema")),
+                        "nome" => $this->util->iso2utf($la->getmetadata("tema")),
                         "classes" => $classes,
                         "tipo" => ""
                     );

@@ -106,7 +106,6 @@ i3GEO.catalogoInde = {
 		$("#" + i3GEO.catalogoInde.config.idCatalogoNavegacao).show();
 
 		var lista = function(){
-
 		    var dados = i3GEO.catalogoInde.DADOS;
 		    var clone = [],
 		    t;
@@ -140,7 +139,9 @@ i3GEO.catalogoInde = {
 			lista();
 		    }).fail(function() {
 			i3GEO.catalogoOgc.wait = false;
-			i3GEO.janela.closeMsg($trad("erroLoad"));
+			i3GEO.janela.snackBar({content: $trad("erroLoad"),style: 'red'});
+			$("#" + config.idCatalogoNavegacao).html("");
+			$("#" + i3GEO.catalogoInde.config.idOndeMigalha).show();
 			return;
 		    });
 		} else {
@@ -192,7 +193,7 @@ i3GEO.catalogoInde = {
 		lista(data);
 	    }).fail(function() {
 		i3GEO.catalogoOgc.wait = false;
-		i3GEO.janela.closeMsg($trad("erroTpl"));
+		i3GEO.janela.snackBar({content: $trad("erroLoad"),style: 'red'});
 		return;
 	    });
 	}

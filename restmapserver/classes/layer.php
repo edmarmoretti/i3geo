@@ -336,6 +336,9 @@ class Layer
                 }
             }
         }
+        if ($layerObj->connectiontype == MS_WMS) {
+            $tips = $itens;
+        }
         return array(
             "itens" => $itens,
             "lks" => $lks,
@@ -369,7 +372,7 @@ class Layer
             if ($xml == false) {
                 return array();
             }
-            $dom = new DOMDocument();
+            $dom = new \DOMDocument();
             $dom->loadXML($xml->asxml());
             $sequences = $dom->getElementsByTagName("sequence");
 
@@ -403,7 +406,7 @@ class Layer
     {
         if (strtoupper($layerObj->getmetadata("convcaracter")) == "NAO") {
             $convert = function ($text) {
-                return $this->util->utf2iso($text);
+                return $this->util->iso2utf($text);
             };
         } else {
             $convert = function ($text) {

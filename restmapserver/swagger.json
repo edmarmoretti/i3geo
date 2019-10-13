@@ -33,6 +33,24 @@
                         "description": "Layer name",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "wkt",
+                        "in": "path",
+                        "description": "Get results geometry",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "true",
+                            "false"
+                        ]
+                    },
+                    {
+                        "name": "extent",
+                        "in": "path",
+                        "description": "Geographic extent (xmin, ymin, xmax, ymax)",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "responses": {
@@ -581,7 +599,7 @@
         "/i3geo/restmapserver/map/{mapId}/addLayerWms/": {
             "get": {
                 "tags": [
-                    "map update add"
+                    "map update"
                 ],
                 "summary": "Add layer by WMS",
                 "operationId": "addLayerWms",
@@ -687,6 +705,75 @@
                         "name": "allitens",
                         "in": "query",
                         "description": "Enable tooltip",
+                        "required": false,
+                        "type": "string",
+                        "enum": [
+                            "true",
+                            "false"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/identify/": {
+            "get": {
+                "tags": [
+                    "map attributes"
+                ],
+                "summary": "Get layers data from point",
+                "operationId": "identify",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "x",
+                        "in": "query",
+                        "description": "X coordinate",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "y",
+                        "in": "query",
+                        "description": "Y coordinate",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "resolution",
+                        "in": "query",
+                        "description": "Search resolution in pixels",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "extent",
+                        "in": "query",
+                        "description": "Geographic coordinates of a rect to search (xmin,ymin,xmax,ymax)",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerNames",
+                        "in": "query",
+                        "description": "Search layers list",
+                        "required": false,
+                        "type": "string"
+                    },
+                    {
+                        "name": "allColumns",
+                        "in": "query",
+                        "description": "Show all columns",
                         "required": false,
                         "type": "string",
                         "enum": [

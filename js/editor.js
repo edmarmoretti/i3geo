@@ -1222,7 +1222,7 @@ i3GEO.editor =
                         "icone": "import_export"
                     });
                     var prop = f.getProperties();
-                    if(prop.fat && i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[prop.fat.tema].editavel == "SIM"){
+                    if(prop.fat && prop.fat.tema && i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[prop.fat.tema].editavel == "SIM"){
                         botoes.push({
                             "onclick": "i3GEO.editor.formEditFeatureById('" + id + "')",
                             "title": "Form",
@@ -1513,12 +1513,21 @@ i3GEO.editor =
             f = s.getFeatureById(id),
             fat = f.getProperties().fat;
             $.each(fat,function(i,e){
-                if(e.item){
-                    data.push({
-                        "name": e.item,
-                        "label": e.alias,
-                        "value": e.valor
-                    });
+                if(typeof e === 'object'){
+                    //para efeitos de compatibilidade
+                    if(e.item){
+                        data.push({
+                            "name": e.item,
+                            "label": e.alias,
+                            "value": e.valor
+                        });
+                    } else {
+                        data.push({
+                            "name": e.column,
+                            "label": e.alias,
+                            "value": e.value
+                        });
+                    }
                 }
             });
             ins = "<div class='container-fluid'>"

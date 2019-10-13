@@ -205,7 +205,7 @@ i3GEO.eventos =
 	 *
 	 * i3GEO.configura.funcaoTip
 	 */
-	MOUSECLIQUEPERM : ["i3GEO.identify.dialogo.verificaTipDefault(xx,yy)"],
+	MOUSECLIQUEPERM : ["i3GEO.identify.mapTooltip({x:xx,y:yy,allColumns:false})"],
 	/**
 	 * Timer utilizado pelo contador do mouse parado
 	 *

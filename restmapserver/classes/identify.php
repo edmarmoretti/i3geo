@@ -8,7 +8,9 @@ class Identify
     {
         include_once (I3GEOPATH . "/restmapserver/classes/util.php");
         $this->util = new \restmapserver\Util();
-        include_once (I3GEOPATH . "/restmapserver/classes/util.php");
+        include_once (I3GEOPATH . "/restmapserver/classes/map.php");
+        $this->map = new \restmapserver\Map();
+        include_once (I3GEOPATH . "/restmapserver/classes/layer.php");
         $this->layer = new \restmapserver\Layer();
     }
 
@@ -40,7 +42,7 @@ class Identify
         return true;
     }
 
-    function query($mapId, $x, $y, $resolution, $extent = "", $layerNames = "", $wkt = false)
+    function query($mapId, $x, $y, $resolution, $extent = "", $layerNames = "", $wkt = false, $allColumns = false)
     {
         if ($this->open($mapId) == false) {
             return false;
@@ -62,42 +64,60 @@ class Identify
             }
         }
         foreach ($layers as $layer) {
-            $r = $this->getData($layer->name, $x, $y, $resolution, $wkt);
-            $resultados[$layer->name] = array(
-                "todosItens" => $r["itensLayer"],
-                "tips" => $layer->getmetadata("TIP"),
-                "dados" => $r["resultado"]
-            );
+            $resultados[$layer->name] = $this->getData($layer, $mapObj, $x, $y, $resolution, $wkt, $allColumns);
         }
         if (count($resultados) > 0) {
-            $res = $this->format($mapObj, $layers, $x, $y, $resultados);
-            return ($res);
+            $res = $this->format($mapObj, $layers, $resultados);
+            return array(
+                "point" => array(
+                    "x" => $x * 1,
+                    "y" => $y * 1
+                ),
+                "layers" => $res
+            );
         } else {
             return (false);
         }
     }
-    function getData($layerObj, $mapObj, $x, $y, $resolution, $wkt = false)
+
+    function getData($layerObj, $mapObj, $x, $y, $resolution, $allColumns = false)
     {
         $pt = ms_newPointObj();
         $pt->setXY($x, $y);
-        if (strtoupper($layerObj->getmetadata("convcaracter")) == "NAO") {
+        if (strtoupper($layerObj->getmetadata("convcaracter")) == "SIM") {
             $convC = function ($texto) {
-                return $this->util->utf2iso($texto);
+                return $this->util->iso2utf($texto);
             };
         } else {
             $convC = function ($texto) {
                 return $texto;
             };
         }
+        $wkt = false;
+        if (strtoupper($layerObj->getmetadata("wkttip")) == "SIM") {
+            $wkt = true;
+        }
         $this->layer->setCon($layerObj);
         $itensLayer = $this->layer->getItens($layerObj, $mapObj);
         $itensParameters = $this->layer->getItensParameters($layerObj, $itensLayer);
+        if ($allColumns == true) {
+            $itensParameters["tips"] = $itensParameters["itens"];
+        }
         $resultado = array();
-        if ($layer->connectiontype == MS_WMS) {
-            $this->getDataFromWms($mapObj, $layerObj, $x, $y);
+        $layerObj->set("toleranceunits", MS_PIXELS);
+        $layerObj->set("tolerance", $resolution);
+        if ($layerObj->connectiontype == MS_WMS) {
+            $valori = $this->getDataFromWms($mapObj, $layerObj, $itensParameters, $x, $y);
+            $resultado[] = array(
+                "values" => $valori,
+                "hash" => sha1(serialize($valori))
+            );
+            //adiciona o item na lista
+            if(@$valori["htmlresult"]){
+                $itensParameters["itens"] = array("htmlresult");
+                $itensParameters["tips"] = array("htmlresult");
+            }
         } else {
-            $layerObj->set("toleranceunits", MS_PIXELS);
-            $layerObj->set("tolerance", $resolution);
             if ($layerObj->type == MS_LAYER_RASTER) {
                 $wkt = false;
                 $ident = @$layerObj->queryByPoint($pt, 0, 0); // 0.01);
@@ -108,9 +128,9 @@ class Identify
                 $sopen = $layerObj->open();
                 $res_count = $layerObj->getNumresults();
                 for ($i = 0; $i < $res_count; ++ $i) {
-                    $valori = array();
                     $shape = $layerObj->getShape($layerObj->getResult($i));
                     $conta = 0;
+                    $valori = array();
                     foreach ($itensParameters["itens"] as $it) {
                         $val = $convC($shape->values[$it]);
                         $link = $itensParameters["lks"][$conta];
@@ -132,53 +152,55 @@ class Identify
                         if (in_array($it, $itensParameters["tips"])) {
                             $etiqueta = "sim";
                         }
+                        if ($allColumns == false && $etiqueta == "nao") {
+                            continue;
+                        }
                         $arraytemp = array(
-                            "item" => $it,
-                            "alias" => $this->util->utf2iso($itensParameters["itensdesc"][$conta]),
-                            "valor" => $val,
+                            "column" => $it,
+                            "alias" => $this->util->iso2utf($itensParameters["itensdesc"][$conta]),
+                            "value" => $val,
                             "link" => $link,
                             "img" => $img,
                             "tip" => $etiqueta
                         );
                         $valori[$it] = $arraytemp;
                         $conta = $conta + 1;
-                        if ($wkt == "sim" && strtolower($layerObj->getmetadata("wkttip")) == "sim") {
+                        if ($wkt == true) {
                             $arraytemp = array(
                                 "alias" => "wkt",
-                                "valor" => $shape->towkt(),
+                                "value" => $shape->towkt(),
                                 "link" => "",
                                 "img" => "",
                                 "tip" => ""
                             );
                             $valori["wkt"] = $arraytemp;
                         }
-                        $valori["hash"] = sha1(serialize($valori));
-                        $resultado[] = $valori;
                     }
+                    $resultado[] = array(
+                        "values" => $valori,
+                        "hash" => sha1(serialize($valori))
+                    );
                 }
                 $layerObj->close();
-            } else {
-                $resultado[] = " ";
             }
         }
-        return $resultado;
+        return array(
+            "columns" => $itensParameters["itens"],
+            "tips" => $itensParameters["tips"],
+            "result" => $resultado
+        );
     }
 
-    function getDataFromWms($mapObj, $layer, $x, $y)
+    function getDataFromWms($mapObj, $layerObj, $itensParameters, $x, $y)
     {
         $resultado = array();
         $wkt = "nao";
-        $layer->set("toleranceunits", MS_PIXELS);
-        $layer->set("tolerance", $resolucao);
-        $mapa = desligatemas($mapa);
-        $mapa = desligamargem($mapa);
-        $imgo = $mapa->draw();
-        $ptimg = xy2imagem($map_file, array(
-            $x,
-            $y
-        ), $mapa);
-        // $formatoinfo = "MIME";
-        $formatosinfo = $layer->getmetadata("formatosinfo");
+        if ($mapObj->getmetadata("interface") == "googlemaps") {
+            $projO = $mapObj->getProjection();
+            $mapObj->setProjection($_SESSION["i3GeoProjDefault"]["proj4"]);
+        }
+        $ptimg = $this->map->xy2pixel($mapObj, $x, $y);
+        $formatosinfo = $layerObj->getmetadata("formatosinfo");
         $formatosinfohtml = false;
         if ($formatosinfo != "") {
             $formatosinfo = explode(",", $formatosinfo);
@@ -194,101 +216,102 @@ class Identify
                 }
             }
         } else {
-            $formatoinfo = $layer->getmetadata("wms_feature_info_type");
+            $formatoinfo = $layerObj->getmetadata("wms_feature_info_type");
             if ($formatoinfo == "") {
-                $formatoinfo = $layer->getmetadata("wms_feature_info_mime_type");
+                $formatoinfo = $layerObj->getmetadata("wms_feature_info_mime_type");
             }
             if ($formatoinfo == "") {
                 $formatoinfo = "text/plain";
             }
         }
-        $res = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 50, $formatoinfo);
+        $res = $layerObj->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 50, $formatoinfo);
         $res = str_replace("INFOFORMAT", "INFO_FORMAT", $res);
-        $res2 = $layer->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 50, "text/html");
+        $res2 = $layerObj->getWMSFeatureInfoURL($ptimg->x, $ptimg->y, 50, "text/html");
         $res2 = str_replace("INFOFORMAT", "INFO_FORMAT", $res2);
+        // retorna a projecao inicial do mapa
+        $mapObj->setProjection($projO);
         $registros = array();
-        if (strtoupper($formatoinfo) != "TEXT/HTML" && strtoupper($formatoinfo) != "MIME") {
-            $resposta = file($res); // retorna cada linha da chamada wms
-            $firstitem = "";
-            foreach ($resposta as $r) {
-                // verifica se a linha contem dados
-                $t = explode("=", $r);
-                if (count($t) > 1) {
-                    $v = str_replace("\\n", "", $t[1]);
-                    $v = str_replace("\\r", "", $v);
-                    if (trim($v) != "") {
-                        $va = trim($v);
-                        if ($convC == true) {
-                            $va = $this->converte($va);
-                        }
-                        if ($firstitem == trim($t[0])) {
-                            $firstitem = "";
-                            $resultado[] = $registros;
-                            $registros = array();
-                        }
-                        if ($firstitem == "") {
-                            $firstitem = trim($t[0]);
-                        }
-
-                        $etiqueta = "nao";
-                        if (in_array(trim($t[0]), $tips)) {
-                            $etiqueta = "sim";
-                        }
-                        $d = array(
-                            "alias" => trim($t[0]),
-                            "item" => trim($t[0]),
-                            "valor" => trim($va, "'"),
-                            "link" => "",
-                            "img" => "",
-                            "tip" => $etiqueta
-                        );
-                        if ($etip == false) {
-                            $registros[] = $d;
-                        } else {
-                            $registros[trim($t[0])] = $d;
-                        }
-                    }
-                }
+        $resposta = file($res); // retorna cada linha da chamada wms
+        $firstitem = "";
+        foreach ($resposta as $r) {
+            // verifica se a linha contem dados
+            if (strpos($r, '<?xml') !== false) {
+                continue;
             }
-            $resultado[] = $registros;
-            // caso esri
-            if (count($resultado) > 0 && $resultado[0] == "") {
-                $resposta = file($res);
-                $cabecalho = str_replace('"   "', '"|"', $resposta[0]);
-                $cabecalho = explode("|", $cabecalho);
-
-                $linha = str_replace('"  "', '"|"', $resposta[1]);
-                $linha = explode("|", $linha);
-                for ($i = 0; $i < count($cabecalho); ++ $i) {
-                    if ($convC == true) {
-                        $va = $this->converte($linha[$i]);
-                    } else {
-                        $va = $linha[$i];
+            $t = explode("=", $r);
+            if (count($t) > 1) {
+                $v = str_replace("\\n", "", $t[1]);
+                $v = str_replace("\\r", "", $v);
+                if (trim($v) != "") {
+                    $va = trim($v);
+                    if ($firstitem == trim($t[0])) {
+                        $firstitem = "";
+                        $resultado[] = $registros;
+                        $registros = array();
+                    }
+                    if ($firstitem == "") {
+                        $firstitem = trim($t[0]);
                     }
                     $etiqueta = "nao";
-                    if (in_array(trim($t[0]), $tips)) {
+                    if (in_array(trim($t[0]), $itensParameters["tips"])) {
                         $etiqueta = "sim";
                     }
                     $d = array(
-                        "alias" => $cabecalho[$i],
-                        "item" => $cabecalho[$i],
-                        "valor" => $va,
+                        "alias" => trim($t[0]),
+                        "column" => trim($t[0]),
+                        "value" => trim($va, "'"),
                         "link" => "",
                         "img" => "",
-                        "tip" => $etiqueta
+                        "tip" => $etiqueta,
+                        "html" => false
                     );
-                    if ($etip == false) {
-                        $registros[] = $d;
-                    } else {
-                        $registros[$cabecalho[$i]] = $d;
-                    }
+                    $registros[trim($t[0])] = $d;
                 }
-                $resultado[] = $registros;
             }
         }
-        return $resultado;
+        // caso esri
+        if (count($registros) > 0 && @$registros[0] == "") {
+            $resposta = file($res);
+            $cabecalho = str_replace('"   "', '"|"', $resposta[0]);
+            $cabecalho = explode("|", $cabecalho);
+            $linha = str_replace('"  "', '"|"', $resposta[1]);
+            $linha = explode("|", $linha);
+            for ($i = 0; $i < count($cabecalho); ++ $i) {
+                $va = $linha[$i];
+                $etiqueta = "nao";
+                if (in_array(trim($t[0]), $itensParameters["tips"])) {
+                    $etiqueta = "sim";
+                }
+                $d = array(
+                    "alias" => $cabecalho[$i],
+                    "column" => $cabecalho[$i],
+                    "value" => $va,
+                    "link" => "",
+                    "img" => "",
+                    "tip" => $etiqueta,
+                    "html" => false
+                );
+                $registros[$cabecalho[$i]] = $d;
+            }
+        }
+        // tenta como html
+        if (empty($registros)) {
+            $resposta = file($res2);
+            $d = array(
+                "alias" => "",
+                "column" => "htmlresult",
+                "value" => implode("",$resposta),
+                "link" => "",
+                "img" => "",
+                "tip" => "sim",
+                "html" => true
+            );
+            $registros["htmlresult"] = $d;
+        }
+        return $registros;
     }
-    function format($mapObj, $layers, $x, $y, $resultados)
+
+    function format($mapObj, $layers, $resultados)
     {
         $final = array();
         foreach ($layers as $layer) {
@@ -298,72 +321,20 @@ class Identify
             } else if ($layer->getMetaData("ALTTEMA") != "") {
                 $nometmp = $layer->getMetaData("ALTTEMA");
             }
-            $nometmp = $this->converte($nometmp);
-            // identificador que marca o tipo de dados que podem ser salvos
-            $tiposalva = "";
-            // verifica se e editavel
-            if ($layer->getmetadata("EDITAVEL") == "SIM") {
-                // verifica login
-                session_write_close();
-                session_name("i3GeoLogin");
-                if (! empty($_COOKIE["i3geocodigologin"])) {
-                    session_id($_COOKIE["i3geocodigologin"]);
-                    session_start();
-                    // verifica usuario
-                    if ($_SESSION["usuario"] == $_COOKIE["i3geousuariologin"]) {
-                        // verifica se e administrador
-                        foreach ($_SESSION["papeis"] as $p) {
-                            if ($p == 1) {
-                                $editavel = "sim";
-                            }
-                        }
-                        // verifica operacao
-                        if (! empty($_SESSION["operacoes"]["admin/metaestat/geral"])) {
-                            $editavel = "sim";
-                        }
-                        if ($editavel == "sim") {
-
-                            $editavel = "nao";
-                            $id_medida_variavel = $layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL");
-                            $colunaidunico = $layer->getMetaData("COLUNAIDUNICO");
-
-                            if ($id_medida_variavel != "" || $codigo_tipo_regiao != "") {
-                                include_once (dirname(__FILE__) . "/classe_metaestatinfo.php");
-                                $m = new MetaestatInfo();
-                                if ($id_medida_variavel != "") {
-                                    $medidaVariavel = $m->listaMedidaVariavel("", $id_medida_variavel);
-                                    $editavel = $medidaVariavel["colunavalor"];
-                                    $tiposalva = "medida_variavel";
-                                }
-                                if ($codigo_tipo_regiao != "") {
-                                    $regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
-                                    // todas as colunas podem ser alteradas
-                                    $editavel = "todos";
-                                    $tiposalva = "regiao";
-                                }
-                            }
-                            // verifica se os parametros de edicao estao disponiveis, pois podem ter sido definidos pelo sistema de administracao
-                            if ($layer->getMetaData("ESQUEMATABELAEDITAVEL") != "" && $layer->getMetaData("TABELAEDITAVEL") != "" && $layer->getMetaData("COLUNAIDUNICO") != "") {
-                                $editavel = "todos";
-                                $tiposalva = "regiao";
-                            }
-                        }
-                    }
-                }
+            $nometmp = $this->util->iso2utf($nometmp);
+            $js = $layer->getMetaData("FUNCOESJS");
+            if ($js != "") {
+                $funcoesjs = json_decode($this->util->iso2utf($js));
+            } else {
+                $funcoesjs = false;
             }
-            $codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
-            $funcoesjs = json_decode($this->converte($layer->getMetaData("FUNCOESJS")));
-            $final[] = array(
+            $final[$layer->name] = array(
                 "funcoesjs" => $funcoesjs,
-                "xy" => $xy,
-                "tema" => $tema,
-                "tiposalva" => $tiposalva,
-                "nome" => $nometmp,
-                "resultado" => $resultados[$tema],
-                "editavel" => $editavel,
-                "colunaidunico" => $colunaidunico,
-                "id_medida_variavel" => $id_medida_variavel,
-                "codigo_tipo_regiao" => $codigo_tipo_regiao
+                "layerName" => $layer->name,
+                "layerTitle" => $nometmp,
+                "columns" => $resultados[$layer->name]["columns"],
+                "tips" => $resultados[$layer->name]["tips"],
+                "data" => $resultados[$layer->name]["result"]
             );
         }
         return $final;

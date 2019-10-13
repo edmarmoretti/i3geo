@@ -71,7 +71,7 @@ i3GEO.mapa =
             });
         },
         infoxy: function(x,y){
-            i3GEO.identify.dialogo.verificaTipDefault(x,y);
+            i3GEO.identify.mapTooltip({x: x,y: y, allColumns: false});
         },
         /**
          * Ativa o redimensionamento automatico do mapa sempre que o navegador for redimensionado
@@ -98,18 +98,10 @@ i3GEO.mapa =
             };
         },
         //depreciado na versao 8
-        ativaIdentifica: function(){
-            if (typeof (console) !== 'undefined')
-                console.info("i3GEO.mapa.ativaIdentifica depreciado utilize i3GEO.identify.ativaIdentifica()");
-
-            i3GEO.identify.ativaIdentifica();
-        },
-        //depreciado na versao 8
         ativaIdentificaBalao: function(){
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.mapa.ativaIdentificaBalao depreciado utilize i3GEO.identify.ativaIdentificaBalao()");
 
-            i3GEO.identify.ativaIdentificaBalao();
         },
         /**
          * Function: ativaTema
@@ -290,7 +282,7 @@ i3GEO.mapa =
                 }
             });
         },
-        adicionaTemaWMS : function({after=false, layerTitle = "default", wms_name, url, proj, formatlist, version = "1.1.1", wms_style = "default", representationtype = "", suportsld = false, infoformat = "text/plain", time = "", tile = 0, allitens = false} = {}) {
+        adicionaTemaWMS : function({after=false, layerTitle = "default", wms_name, url, proj, formatlist, version = "1.1.1", wms_style = "", representationtype = "", suportsld = false, infoformat = "text/plain", time = "", tile = 0, allitens = false} = {}) {
             var par = {
                 wms_name: wms_name,
                 url: url,
@@ -984,14 +976,12 @@ i3GEO.mapa =
             cliqueIdentificaDefault : function(x, y, tema) {
                 if (typeof (console) !== 'undefined')
                     console.info("depreciado i3GEO.mapa.dialogo.cliqueIdentificaDefault() utilize i3GEO.identify.dialogo.cliqueIdentificaDefault()");
-
-                i3GEO.identify.dialogo.cliqueIdentificaDefault();
             },
             verificaTipDefault : function(x,y) {
                 if (typeof (console) !== 'undefined')
                     console.info("depreciado i3GEO.mapa.dialogo.verificaTipDefault() utilize i3GEO.identify.dialogo.verificaTipDefault()");
 
-                i3GEO.identify.dialogo.verificaTipDefault(x,y);
+                i3GEO.identify.mapTooltip({x:x,y:y,allColumns:false});
             }
         },
         createWaitOverlay: function(x,y){

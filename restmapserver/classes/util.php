@@ -185,7 +185,7 @@ class Util
             return $i3GeoProjDefault[$tipo];
         }
     }
-    function utf2iso($texto)
+    function iso2utf($texto)
     {
         if (function_exists("mb_convert_encoding")) {
             if (! mb_detect_encoding($texto, "UTF-8", true)) {

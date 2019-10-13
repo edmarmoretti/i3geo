@@ -164,6 +164,7 @@ class Mscriamapa
         $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin;
         $_SESSION["i3geoBlFerramentas"] = $i3geoBlFerramentas;
         $_SESSION["i3GeoProjDefault"] = $i3GeoProjDefault;
+        $_SESSION["i3geo_proxy_server"] = $i3geo_proxy_server;
         if ($esquemaadmin != "") {
             $_SESSION["esquemaadmin"] = str_replace(".", "", $esquemaadmin) . ".";
         } else {

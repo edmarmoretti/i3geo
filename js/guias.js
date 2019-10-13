@@ -110,32 +110,6 @@ i3GEO.guias =
                     return;
                 }
             },
-            "identificaBalao" : {
-                icone : "imagens/gisicons/tips.png",
-                titulo : $trad("d7a"),
-                id : "guiaIdentificaBalao",
-                idconteudo : "",
-                click : function() {
-                    if (typeof (console) !== 'undefined')
-                        console.info("click no botao identifica balao");
-
-                    i3GEO.identify.ativaIdentificaBalao();
-                }
-            },
-            "identifica" : {
-                icone : "imagens/gisicons/pointer-info.png",
-                titulo : $trad("d7"),
-                id : "guiaIdentifica",
-                idconteudo : "",
-                click : function() {
-                    if (typeof (console) !== 'undefined')
-                        console.info("click no botao identifica");
-
-                    //$('.iconeGuiaMovel').tooltip('destroy');
-                    i3GEO.identify.ativaIdentifica();
-
-                }
-            },
             "buscaRapida" : {
                 icone : "imagens/gisicons/search.png",
                 titulo : "",
