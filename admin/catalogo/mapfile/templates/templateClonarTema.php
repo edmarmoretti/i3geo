@@ -19,7 +19,7 @@
 				</div>
 				<input type="hidden" value="{{codigoAtual}}" class="form-control" name="codigo" >
 			<div class="pull-right">
-				<button type="submit" class="btn btn-primary" role="button" style="color:#FF6F61;">{{criaCopia}}</button>
+				<button type="submit" class="btn btn-primary" role="button" style="color:#0f4c81;">{{criaCopia}}</button>
 			</div>
 			</div>
 		</form>

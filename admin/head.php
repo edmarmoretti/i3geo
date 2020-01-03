@@ -193,7 +193,7 @@ body {
 }
 /* conforme regra de acessibilidade */
 .navbar, .navbar.navbar-default {
-	background-color: #FF6F61;
+	background-color: #0f4c81;
 }
 
 .breadcrumb a, .breadcrumb a:focus, .breadcrumb a:hover {
@@ -205,7 +205,7 @@ body {
 }
 
 a, a:focus, a:hover {
-	color: #FF6F61;
+	color: #0f4c81;
 }
 
 .alert.alert-warning {
@@ -447,8 +447,8 @@ a.collapsed .readLess {
 	<h4 class="pull-right">{{{mensagem}}}</h4>
 	<div class="clearfix"></div>
 	<div class="pull-right">
-		<button onclick="{{{onBotao1}}}" class="btn btn-primary" role="button" style="color:#FF6F61;">{{{botao1}}}</button>
-		<button onclick="{{{onBotao2}}}" class="btn btn-primary" role="button" style="color:#FF6F61;">{{{botao2}}}</button>
+		<button onclick="{{{onBotao1}}}" class="btn btn-primary" role="button" style="color:#0f4c81;">{{{botao1}}}</button>
+		<button onclick="{{{onBotao2}}}" class="btn btn-primary" role="button" style="color:#0f4c81;">{{{botao2}}}</button>
 	</div>
 	<div class="clearfix"></div>
 </script>

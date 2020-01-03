@@ -112,7 +112,7 @@ if (! function_exists("ms_GetVersion")) {
                 <div class="cartao {{{fa}}} col-xs-12 center-block" style="width: 30rem; min-width: 30rem; max-width: 30rem;">
                     <div class="panel panel-default">
                         <div class="panel-heading" style="padding:0px;">
-                            <h5 style="height: 35px;padding:10px 10px;">{{{titulo}}}</h5>
+                            <h5 style="font-size: 1.7rem; height: 35px;padding:10px 10px;">{{{titulo}}}</h5>
 
                                 <a tabindex="-1" target="{{{target}}}" href="{{{href}}}">
                                     <img alt="{{{titulo}}}" tabindex="-1" style="height: 100px; width: 100%; border-radius: 0px;" src="{{{img}}}" />
@@ -127,11 +127,11 @@ if (! function_exists("ms_GetVersion")) {
                                 <div class="col-xs-6" style="line-height: 3.5; text-align: left;">
                                     <!-- o texto no span e para acessibilidade-->
                                     <button tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini"
-                                        style="opacity: 0.2; padding-left: 8px; padding-top: 7px; margin: auto;">
+                                        style="padding-left: 8px; padding-top: 7px; margin: auto;">
                                         <span class="glyphicon glyphicon-qrcode" aria-hidden="true">&nbsp;&nbsp;qrcode</span>
                                     </button>
 
-                                    <button tabindex="-1" role="button" style="opacity: 0.2;" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
+                                    <button tabindex="-1" role="button" style="" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
                                         <span data-cookie="{{{img}}}"><i class="material-icons">grade</i></span>
                                     </button>
                                 </div>

@@ -162,7 +162,7 @@ $comboAliasConexao .= "</select>";
 						</div>
 						<div class="col-md-12">
 							<div class="pull-right">
-								<button type="submit" class="btn btn-primary" role="button" style="color: #FF6F61;">{{envia}}</button>
+								<button type="submit" class="btn btn-primary" role="button" style="color: #0f4c81;">{{envia}}</button>
 							</div>
 						</div>
 					</div>

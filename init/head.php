@@ -31,33 +31,6 @@ echo "
     <script src='" . ONDEI3GEO . "/init/headjs.php'></script>";
 ?>
 <style>
-#brasil {
-	background-image: url("../imagens/sprite.png");
-	background-position: 0 -600px;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	height: 13px;
-	width: 22px;
-}
-
-#uk {
-	background-image: url("../imagens/sprite.png");
-	background-position: 0 -625px;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	height: 13px;
-	width: 22px;
-}
-
-#espanhol {
-	background-image: url("../imagens/sprite.png");
-	background-position: 0 -1400px;
-	background-repeat: no-repeat;
-	cursor: pointer;
-	height: 13px;
-	width: 22px;
-}
-
 hr {
 	border-color: #fff -moz-use-text-color -moz-use-text-color;
 }
@@ -100,7 +73,7 @@ body{
 
 /* conforme regra de acessibilidade */
 .navbar, .navbar.navbar-default {
-    background-color: #FF6F61;
+    background-color: #0f4c81;
 }
 .alert.alert-danger {
 	background-color: #e13023;
@@ -109,7 +82,7 @@ body{
     background-color: #de3601;
 }
 a, a:focus, a:hover {
-    color: #FF6F61;
+    color: #0f4c81;
 }
 
 .breadcrumb a, .breadcrumb a:focus, .breadcrumb a:hover {
@@ -121,7 +94,7 @@ a, a:focus, a:hover {
 }
 
 a, a:focus, a:hover {
-	color: #FF6F61;
+	color: #0f4c81;
 }
 
 .alert.alert-warning {

@@ -201,7 +201,7 @@ function formConexaoLocalSelCon(valor){
 		</div>
 	</div>
 	<div class="pull-right">
-		<button type="submit" class="btn btn-primary" role="button" style="color:#FF6F61;">{{salvar}}</button>
+		<button type="submit" class="btn btn-primary" role="button" style="color:#0f4c81;">{{salvar}}</button>
 	</div>
 	<div class="clearfix"></div>
 </form>
