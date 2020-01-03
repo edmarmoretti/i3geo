@@ -67,10 +67,10 @@ i3GEO.busca = {
                 snackbarmsg: false,
                 btn: false,
                 par: {
-                    funcao: "searchInLayers",
-                    palavra: palavra
+                    search: palavra,
+                    extent: i3GEO.mapa.getExtent().geo
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/searchInLayers",
                 fn: function(data){
                     after.call(after, data);
                 }
@@ -80,13 +80,16 @@ i3GEO.busca = {
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.busca.resultadoTemasMapa ");
 
-            var t,config = i3GEO.busca.config;
+            var t = "",config = i3GEO.busca.config;
             try {
                 if (data) {
-                    t = Mustache.to_html(
-                            "{{#data}}" + i3GEO.template.buscaEmTemas + "{{/data}}",
-                            {"data":data}
-                    );
+                    for (const layer of Object.keys(data)) {
+                        t += "<div><b>" + data[layer]["layerTitle"] + "</b></div>";
+                        t += Mustache.to_html(
+                                "{{#data}}" + i3GEO.template.buscaEmTemas + "{{/data}}",
+                                {"data": data[layer].data}
+                        );
+                    }
                     $(config.ondeConteiner).find(config.ondeTemasMapa).html(t);
                 }
             } catch (e) {

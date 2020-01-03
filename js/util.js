@@ -1874,24 +1874,21 @@ i3GEO.util =
 		classe= "";
 	    }
 	    var monta = function(data) {
-		var ins = "", temp, i, dados;
-		if (data !== undefined) {
+		var ins = "", temp, i;
 		    ins += "<select name='font' class='" + classe + "' id='" + id + "'>";
 		    ins += "<option value='arial' >arial</option>";
 		    ins += "<option value='bitmap' >bitmap</option>";
-		    dados = data.split(",");
-		    temp = dados.length;
+		    temp = data.length;
 		    for (i = 0; i < temp; i++) {
-			ins += "<option value='" + dados[i] + "' >" + dados[i] + "</option>";
+			ins += "<option value='" + data[i] + "' >" + data[i] + "</option>";
 		    }
 		    ins += "</select><b class='caret careti' ></b>";
-		}
 		$i(onde).innerHTML = ins;
 		if(sel){
 		    $i(id).value = sel;
 		}
 	    };
-	    i3GEO.mapa.textFont(monta);
+	    i3GEO.mapa.textFontList(monta);
 	},
 	/**
 	 * Function: comboSimNao

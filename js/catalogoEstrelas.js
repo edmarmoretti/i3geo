@@ -184,7 +184,7 @@ i3GEO.catalogoEstrelas = {
 		if (i3GEO.arvoreDeCamadas.pegaTema(tid) !== "") {
 			i3GEO.arvoreDeCamadas.ligaDesligaTemas(tid, true);
 		} else {
-			i3GEO.mapa.adtema(false, tid);
+			i3GEO.mapa.addLayers(false, tid);
 		}
 	}
 };

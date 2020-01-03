@@ -8,9 +8,7 @@ class Mscriamapa
 
     function __construct()
     {
-        include_once (I3GEOPATH . "/restmapserver/classes/util.php");
         $this->util = new \restmapserver\Util();
-        include_once (I3GEOPATH . "/restmapserver/classes/map.php");
         $this->map = new \restmapserver\Map();
     }
 
@@ -42,7 +40,7 @@ class Mscriamapa
             $_SESSION["base"] = $basemapfile;
         }
         if (isset($param["layersadd"])) {
-            $this->map->layersAdd($mapId, $param["layersadd"]);
+            $this->map->addLayers($mapId, $param["layersadd"]);
         }
         if (isset($param["layerson"])) {
             $this->map->layersOn($mapId, $param["layerson"]);

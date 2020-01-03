@@ -670,7 +670,6 @@ var i3GEO = {
                     snackbarmsg: false,
                     btn: false,
                     par: {},
-                    //prog: "/serverapi/map/?" + i3GEO.configura.mashuppar,
                     prog: "/restmapserver/map/create/?" + parameters,
                     fn: function(data){
                         // verifica se existe bloqueio em funcao da senha no
@@ -827,6 +826,9 @@ var i3GEO = {
          * do servidor por meio de uma chamada AJAX
          */
         atualizaParametros : function(variaveis) {
+            if (typeof (console) !== 'undefined')
+                console.info("i3GEO.atualizaParametros()");
+
             i3GEO.parametros.mapscale = i3geoOL.getScale() * 1;
             i3GEO.parametros.mapres = variaveis.mapres * 1;
             i3GEO.parametros.pixelsize = variaveis.pixelsize * 1;

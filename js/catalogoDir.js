@@ -193,9 +193,9 @@ i3GEO.catalogoDir = {
 	adiciona: function(path){
 	    var temp = path.split(".");
 	    if ((temp[1] === "SHP") || (temp[1] === "shp")) {
-		i3GEO.mapa.adicionaTemaSHP(false, path);
+		i3GEO.mapa.addLayerShp(false, path);
 	    } else {
-		i3GEO.mapa.adicionaTemaIMG(false, path);
+		i3GEO.mapa.addLayerImg(false, path);
 	    }
 	}
 };

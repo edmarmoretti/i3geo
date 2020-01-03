@@ -6,16 +6,9 @@ class Map
 
     function __construct()
     {
-        include_once (I3GEOPATH . "/restmapserver/classes/util.php");
         $this->util = new \restmapserver\Util();
-        include_once (I3GEOPATH . "/restmapserver/classes/layer.php");
         $this->layer = new \restmapserver\Layer();
-        include_once (I3GEOPATH . "/restmapserver/classes/admin.php");
-        $this->admin = new \restmapserver\Admin();
-        include_once (I3GEOPATH . "/restmapserver/classes/metaestatinfo.php");
-        $this->metaestatinfo = new \restmapserver\MetaestatInfo();
     }
-
     function open($mapId = "")
     {
         if ($mapId == "") {
@@ -43,8 +36,16 @@ class Map
         }
         return true;
     }
+    function getMapObj($mapId)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        return $mapObj;
+    }
 
-    function getParameters($mapId, $w = "", $h = "")
+    function getParameters($mapId, $w = 0, $h = 0)
     {
         if ($this->open($mapId) == false) {
             return false;
@@ -61,7 +62,7 @@ class Map
         $of->set("transparent", MS_ON);
         $of->setOption("QUANTIZE_FORCE", "OFF");
         $of->set("driver", "AGG/PNG");
-        if(empty(@$_SESSION["interface"])){
+        if (empty(@$_SESSION["interface"])) {
             $_SESSION["interface"] = "googlemaps";
         }
         if ($_SESSION["interface"] == "googlemaps") {
@@ -69,6 +70,9 @@ class Map
         }
         if (! empty($w)) {
             $mapObj->setsize($w, $h);
+        } else {
+            $w = $mapObj->width;
+            $h = $mapObj->height;
         }
         $legenda = $mapObj->legend;
         $legenda->set("status", MS_OFF);
@@ -102,9 +106,9 @@ class Map
         $cordefundo = $c->red . "," . $c->green . "," . $c->blue;
         // pega o texto de copyright
         $copyright = "";
-        $lc = @$mapObj->getlayerbyname("copyright");
-        if ($lc != "" && $lc->status == MS_DEFAULT) {
-            $shape = $lc->getShape(new \resultObj(0));
+        $layerObj = @$mapObj->getlayerbyname("copyright");
+        if ($layerObj != "" && $layerObj->status == MS_DEFAULT) {
+            $shape = $layerObj->getShape(new \resultObj(0));
             $copyright = $shape->text;
         }
         $res["editor"] = "nao";
@@ -186,7 +190,8 @@ class Map
     function getLayersParameters($mapObj)
     {
         // obtem os dados sobre todos os temas no banco de dados de administracao
-        $dadosTemas = $this->admin->getData("select codigo_tema,link_tema from " . $_SESSION["esquemaadmin"] . "i3geoadmin_temas");
+        $Admin = new \restmapserver\Admin();
+        $dadosTemas = $Admin->getData("select codigo_tema,link_tema from " . $_SESSION["esquemaadmin"] . "i3geoadmin_temas");
         $temas = array();
         $existesel = false;
         $dir = dirname($_SESSION["map_file"]);
@@ -247,11 +252,11 @@ class Map
         );
         $c = $mapObj->numlayers;
         for ($i = 0; $i < $c; ++ $i) {
-            $oLayer = $mapObj->getlayer($i);
-            $oLayer->set("template", "none.htm");
+            $layerObj = $mapObj->getlayer($i);
+            $layerObj->set("template", "none.htm");
             $sel = "nao";
             $nSel = 0;
-            $arqS = $dir . "/" . $oLayer->name . "_qy.map";
+            $arqS = $dir . "/" . $layerObj->name . "_qy.map";
             if (file_exists($arqS)) {
                 $sel = "sim";
                 $existesel = true;
@@ -260,53 +265,53 @@ class Map
                 fclose($handle);
                 $nSel = count(unserialize($conteudo));
             }
-            $escondido = $oLayer->getmetadata("escondido");
+            $escondido = $layerObj->getmetadata("escondido");
             if ($escondido == "") {
                 $escondido = "nao";
             }
-            if ((strtoupper($oLayer->getmetadata("tema")) != "NAO")) {
-                $escala = $oLayer->getmetadata("escala");
+            if ((strtoupper($layerObj->getmetadata("tema")) != "NAO")) {
+                $escala = $layerObj->getmetadata("escala");
                 if ($escala == "") {
                     $escala = 0;
                 }
-                $down = $oLayer->getmetadata("download");
+                $down = $layerObj->getmetadata("download");
                 //
                 // verifica se o layer &eacute; do tipo features
                 //
                 $features = "nao";
-                if (($oLayer->data == "") && ($oLayer->connection == "")) {
+                if (($layerObj->data == "") && ($layerObj->connection == "")) {
                     $features = "sim";
                 }
-                $ct = $oLayer->connectiontype;
+                $ct = $layerObj->connectiontype;
                 //
                 // verifica se o tema tem wfs
                 //
-                $wfs = $oLayer->getmetadata("wfs");
+                $wfs = $layerObj->getmetadata("wfs");
                 //
                 // verifica se o tema utiliza SLD
                 //
                 $usasld = "nao";
-                if ($oLayer->getmetadata("wms_sld_body") !== "" || $oLayer->getmetadata("wms_sld_url") !== "") {
+                if ($layerObj->getmetadata("wms_sld_body") !== "" || $layerObj->getmetadata("wms_sld_url") !== "") {
                     $usasld = "sim";
                 }
                 //
                 // verifica se o tema pode receber a opera&ccedil;&atilde;o de zoom para o tema
                 //
-                if (($ct != 1) && ($oLayer->getmetadata("extensao") == "" && $oLayer->getmetadata("exttema") == "")) {
+                if (($ct != 1) && ($layerObj->getmetadata("extensao") == "" && $layerObj->getmetadata("exttema") == "")) {
                     $zoomtema = "nao";
                     $exttema = "";
                 } else {
                     $zoomtema = "sim";
-                    $exttema = $oLayer->getmetadata("extensao");
+                    $exttema = $layerObj->getmetadata("extensao");
                     if ($exttema == "") {
-                        $exttema = $oLayer->getmetadata("extensao");
+                        $exttema = $layerObj->getmetadata("extensao");
                     }
                 }
                 //
                 // verifica se existe restri&ccedil;&atilde;o de escala
                 //
                 $contextoescala = "nao";
-                if (($oLayer->minscaledenom > 0) || ($oLayer->maxscaledenom > 0)) {
+                if (($layerObj->minscaledenom > 0) || ($layerObj->maxscaledenom > 0)) {
                     $contextoescala = "sim";
                 }
                 //
@@ -314,7 +319,7 @@ class Map
                 //
                 $editorsql = "nao";
                 if ($ct == 3 || $ct == 4 || $ct == 6 || $ct == 8) {
-                    if (strtoupper($oLayer->getmetadata("editorsql")) != "NAO") {
+                    if (strtoupper($layerObj->getmetadata("editorsql")) != "NAO") {
                         $editorsql = "sim";
                     }
                 }
@@ -322,42 +327,42 @@ class Map
                 // verifica se o tema pode ser utilizado para gerar gr&aacute;ficos de linha do tempo
                 //
                 $ltempo = "nao";
-                if ($oLayer->getmetadata("ltempoformatodata") !== "") {
+                if ($layerObj->getmetadata("ltempoformatodata") !== "") {
                     $ltempo = "sim";
                 }
                 $local = "nao";
-                if ($oLayer->getMetaData("TEMALOCAL") != "") {
+                if ($layerObj->getMetaData("TEMALOCAL") != "") {
                     $local = "sim";
                 }
                 // verifica se o tema faz cache automatico
                 //
                 $cache = "nao";
-                if (strtoupper($oLayer->getmetadata("cache")) == "SIM") {
+                if (strtoupper($layerObj->getmetadata("cache")) == "SIM") {
                     $cache = "sim";
                 }
                 $temporizador = "";
-                if ($oLayer->getmetadata("temporizador") != "") {
+                if ($layerObj->getmetadata("temporizador") != "") {
                     $cache = "nao";
-                    $temporizador = $oLayer->getmetadata("temporizador");
+                    $temporizador = $layerObj->getmetadata("temporizador");
                 }
                 $cortepixels = 0;
-                if ($oLayer->getmetadata("cortepixels") != "") {
-                    $cortepixels = $oLayer->getmetadata("cortepixels");
+                if ($layerObj->getmetadata("cortepixels") != "") {
+                    $cortepixels = $layerObj->getmetadata("cortepixels");
                 }
                 //
                 // verifica se o tema receber&aacute; efeito de transi&ccedil;&atilde;o de zoom
                 //
                 $transitioneffect = "nao";
-                if ($oLayer->getmetadata("transitioneffect") == "SIM") {
+                if ($layerObj->getmetadata("transitioneffect") == "SIM") {
                     $transitioneffect = "sim";
                 }
                 //
                 $permitecomentario = "nao";
-                if ($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("permitecomentario")) != "NAO") {
+                if ($layerObj->getmetadata("nomeoriginal") != "" && strtoupper($layerObj->getmetadata("permitecomentario")) != "NAO") {
                     $permitecomentario = "sim";
                 }
                 $aplicaextensao = "nao";
-                if (strtoupper($oLayer->getmetadata("aplicaextensao")) == "SIM") {
+                if (strtoupper($layerObj->getmetadata("aplicaextensao")) == "SIM") {
                     $aplicaextensao = "sim";
                 }
                 $wmsurl = "";
@@ -365,18 +370,18 @@ class Map
                 $wmssrs = "";
                 $wmstile = "0";
                 $wmsname = "";
-                if ($ct == 7 && strtoupper($oLayer->getmetadata("cache")) != "SIM") {
-                    $wmsurl = ($oLayer->connection) . "&layers=" . ($oLayer->getmetadata("wms_name")) . "&style=" . ($oLayer->getmetadata("wms_style"));
-                    $tempo = $oLayer->getmetadata("wms_time");
+                if ($ct == 7 && strtoupper($layerObj->getmetadata("cache")) != "SIM") {
+                    $wmsurl = ($layerObj->connection) . "&layers=" . ($layerObj->getmetadata("wms_name")) . "&style=" . ($layerObj->getmetadata("wms_style"));
+                    $tempo = $layerObj->getmetadata("wms_time");
                     if ($tempo != "") {
                         $wmsurl .= "&TIME=" . $tempo;
                     }
-                    $wmsformat = $oLayer->getmetadata("wms_format");
-                    $wmssrs = $oLayer->getmetadata("wms_srs");
-                    $wmstile = $oLayer->getmetadata("wms_tile");
-                    $wmsname = $oLayer->getmetadata("wms_name");
+                    $wmsformat = $layerObj->getmetadata("wms_format");
+                    $wmssrs = $layerObj->getmetadata("wms_srs");
+                    $wmstile = $layerObj->getmetadata("wms_tile");
+                    $wmsname = $layerObj->getmetadata("wms_name");
                     if ($wmstile == 1) {
-                        $wmsurl = ($oLayer->connection);
+                        $wmsurl = ($layerObj->connection);
                     }
                     if ($wmstile == "") {
                         $wmstile = "0";
@@ -385,10 +390,10 @@ class Map
                 //
                 // indica se a camada sera inserida no mapa como singletile ou nao
                 //
-                $tiles = strtolower($oLayer->getmetadata("TILES"));
+                $tiles = strtolower($layerObj->getmetadata("TILES"));
                 $plugini3geo = "";
-                if ($oLayer->getmetadata("PLUGINI3GEO") != "") {
-                    $plugini3geo = $oLayer->getmetadata("PLUGINI3GEO");
+                if ($layerObj->getmetadata("PLUGINI3GEO") != "") {
+                    $plugini3geo = $layerObj->getmetadata("PLUGINI3GEO");
                     if (! mb_detect_encoding($plugini3geo, "UTF-8", true)) {
                         $plugini3geo = mb_convert_encoding($plugini3geo, "UTF-8", "ISO-8859-1");
                     }
@@ -396,7 +401,7 @@ class Map
                 }
                 // pega dados do banco
                 $link_tema = "";
-                $temp = $oLayer->getmetadata("nomeoriginal");
+                $temp = $layerObj->getmetadata("nomeoriginal");
                 if ($temp != "" && array_key_exists($temp, $dadosTemas)) {
                     $link_tema = $dadosTemas[$temp];
                     $link_tema = $link_tema["link_tema"];
@@ -404,16 +409,16 @@ class Map
                 // aqui pega o valor link_tema em METADATA
                 // esse METADATA nao e definido pelo i3Geo e teria de ser incluido manualmente,
                 // por uma aplicacao por exemplo
-                if ($link_tema == "" && $oLayer->getmetadata("link_tema") != "") {
-                    $link_tema = $oLayer->getmetadata("link_tema");
+                if ($link_tema == "" && $layerObj->getmetadata("link_tema") != "") {
+                    $link_tema = $layerObj->getmetadata("link_tema");
                 }
                 //
                 // parametros para ferramentas especiaifcas
                 //
                 $ferramentas = array();
                 // mapa 3d
-                if ($oLayer->getmetadata("tme") != "") {
-                    $f = $oLayer->getmetadata("tme");
+                if ($layerObj->getmetadata("tme") != "") {
+                    $f = $layerObj->getmetadata("tme");
                     if (! mb_detect_encoding($f, "UTF-8", true)) {
                         $f = mb_convert_encoding($f, "UTF-8", "ISO-8859-1");
                     }
@@ -421,40 +426,40 @@ class Map
                 }
                 // utfgrid
                 $utfgrid = "nao";
-                if ($oLayer->getmetadata("UTFITEM") != "" || $oLayer->getmetadata("UTFDATA") != "") {
+                if ($layerObj->getmetadata("UTFITEM") != "" || $layerObj->getmetadata("UTFDATA") != "") {
                     $utfgrid = "sim";
                 }
                 // storymap
-                if ($oLayer->getmetadata("storymap") != "") {
-                    $f = $oLayer->getmetadata("storymap");
+                if ($layerObj->getmetadata("storymap") != "") {
+                    $f = $layerObj->getmetadata("storymap");
                     if (! mb_detect_encoding($f, "UTF-8", true)) {
                         $f = mb_convert_encoding($f, "UTF-8", "ISO-8859-1");
                     }
                     $ferramentas["storymap"] = json_decode(str_replace("'", '"', $f));
                 }
                 // wmstime
-                if ($oLayer->getmetadata("wmstime") != "") {
-                    $f = $oLayer->getmetadata("wmstime");
+                if ($layerObj->getmetadata("wmstime") != "") {
+                    $f = $layerObj->getmetadata("wmstime");
                     if (! mb_detect_encoding($f, "UTF-8", true)) {
                         $f = mb_convert_encoding($f, "UTF-8", "ISO-8859-1");
                     }
                     $ferramentas["wmstime"] = json_decode(str_replace("'", '"', $f));
                 }
                 // animagif
-                if ($oLayer->getmetadata("animagif") != "") {
-                    $f = $oLayer->getmetadata("animagif");
+                if ($layerObj->getmetadata("animagif") != "") {
+                    $f = $layerObj->getmetadata("animagif");
                     if (! mb_detect_encoding($f, "UTF-8", true)) {
                         $f = mb_convert_encoding($f, "UTF-8", "ISO-8859-1");
                     }
                     $ferramentas["animagif"] = json_decode(str_replace("'", '"', $f));
                 }
                 $temas[] = array(
-                    $oLayer->name,
-                    $oLayer->getmetadata("nomeoriginal"),
-                    $oLayer->status,
-                    mb_convert_encoding(($oLayer->getmetadata("tema")), "UTF-8", "ISO-8859-1"),
-                    $oLayer->opacity,
-                    $oLayer->type,
+                    $layerObj->name,
+                    $layerObj->getmetadata("nomeoriginal"),
+                    $layerObj->status,
+                    mb_convert_encoding(($layerObj->getmetadata("tema")), "UTF-8", "ISO-8859-1"),
+                    $layerObj->opacity,
+                    $layerObj->type,
                     $sel,
                     $nSel,
                     $escala,
@@ -463,13 +468,13 @@ class Map
                     $ct,
                     $zoomtema,
                     $contextoescala,
-                    $oLayer->getmetadata("TIP"),
-                    $oLayer->getmetadata("IDENTIFICA"),
+                    $layerObj->getmetadata("TIP"),
+                    $layerObj->getmetadata("IDENTIFICA"),
                     $editorsql,
                     $ltempo,
                     strtolower($escondido),
-                    $oLayer->getmetadata("iconetema"),
-                    $oLayer->getmetadata("classe"),
+                    $layerObj->getmetadata("iconetema"),
+                    $layerObj->getmetadata("classe"),
                     $permitecomentario,
                     $exttema,
                     $aplicaextensao,
@@ -481,26 +486,26 @@ class Map
                     $wmstile,
                     $tiles,
                     $temporizador,
-                    $oLayer->getmetadata("permiteogc"),
-                    $oLayer->getmetadata("itembuscarapida"),
+                    $layerObj->getmetadata("permiteogc"),
+                    $layerObj->getmetadata("itembuscarapida"),
                     $usasld,
                     $cache,
-                    $oLayer->getmetadata("EDITAVEL"),
-                    $oLayer->getmetadata("COLUNAIDUNICO"),
+                    $layerObj->getmetadata("EDITAVEL"),
+                    $layerObj->getmetadata("COLUNAIDUNICO"),
                     $cortepixels,
                     $plugini3geo,
                     $link_tema,
                     $ferramentas,
-                    $oLayer->getmetadata("legendaimg"),
-                    $oLayer->offsite->red . "," . $oLayer->offsite->green . "," . $oLayer->offsite->blue,
-                    $oLayer->numclasses,
-                    $oLayer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"),
-                    $oLayer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"),
+                    $layerObj->getmetadata("legendaimg"),
+                    $layerObj->offsite->red . "," . $layerObj->offsite->green . "," . $layerObj->offsite->blue,
+                    $layerObj->numclasses,
+                    $layerObj->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"),
+                    $layerObj->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"),
                     $utfgrid,
-                    $oLayer->maxscaledenom,
-                    $oLayer->minscaledenom,
-                    $oLayer->group,
-                    $oLayer->getmetadata("cacheprefixo"),
+                    $layerObj->maxscaledenom,
+                    $layerObj->minscaledenom,
+                    $layerObj->group,
+                    $layerObj->getmetadata("cacheprefixo"),
                     $local
                 );
             }
@@ -517,9 +522,9 @@ class Map
         $mensagem = "";
         $c = $mapObj->numlayers;
         for ($i = 0; $i < $c; ++ $i) {
-            $l = $mapObj->getlayer($i);
-            if ($l->status == MS_DEFAULT) {
-                $mensagem .= $l->getmetadata("mensagem");
+            $layerObj = $mapObj->getlayer($i);
+            if ($layerObj->status == MS_DEFAULT) {
+                $mensagem .= $layerObj->getmetadata("mensagem");
             }
         }
         if (function_exists("mb_convert_encoding")) {
@@ -552,16 +557,16 @@ class Map
         $mapObj = ms_newMapObj($map_file);
         $numlayers = $mapObj->numlayers;
         for ($i = 0; $i < $numlayers; ++ $i) {
-            $layer = $mapObj->getlayer($i);
-            if ($layer->connectiontype == MS_POSTGIS) {
-                $conec = $layer->connection;
-                $layer->set("connection", "");
-                if ($layer->getmetadata("conexaooriginal") != "") {
-                    $layer->set("connection", $layer->getmetadata("conexaooriginal"));
+            $layerObj = $mapObj->getlayer($i);
+            if ($layerObj->connectiontype == MS_POSTGIS) {
+                $conec = $layerObj->connection;
+                $layerObj->set("connection", "");
+                if ($layerObj->getmetadata("conexaooriginal") != "") {
+                    $layerObj->set("connection", $layerObj->getmetadata("conexaooriginal"));
                 } else {
                     foreach ($keys as $k) {
                         if ($postgis_mapa[$k] == $conec || $k == $conec) {
-                            $layer->set("connection", $k);
+                            $layerObj->set("connection", $k);
                         }
                     }
                 }
@@ -577,8 +582,10 @@ class Map
      * @param string $metaestatids
      * @param string $layerson
      */
-    function addLayersMetaestat($mapId,$metaestatids = "", $layerson = "")
+    function addLayersMetaestat($mapId, $metaestatids = "", $layerson = "")
     {
+        $Metaestatinfo = new \restmapserver\MetaestatInfo();
+        $Admin = new \restmapserver\Admin();
         $metaestatids = explode(",", $metaestatids);
         if (count($metaestatids) == 0) {
             return;
@@ -588,32 +595,31 @@ class Map
         }
         $metaestatidsligados = explode(",", $layerson);
         foreach ($metaestatids as $metaestatid) {
-            $parametros = $this->admin->i3geoestat_parametro_medida($metaestatid, "", "", true, true);
+            $parametros = $Admin->i3geoestat_parametro_medida($metaestatid, "", "", true, true);
             // id_parametro_medida,coluna
             $filtroPar = array();
             $tituloPar = array();
             foreach ($parametros as $parametro) {
-                $valoresparametro = $this->metaestatinfo->valorUnicoMedidaVariavel($metaestatid, $parametro["coluna"]);
+                $valoresparametro = $Metaestatinfo->valorUnicoMedidaVariavel($metaestatid, $parametro["coluna"]);
                 $valormaior = $valoresparametro[count($valoresparametro) - 1];
                 $filtroPar[] = " " . $parametro["coluna"] . "::text = '" . $valormaior[$parametro["coluna"]] . "' ";
                 $tituloPar[] = $parametro["coluna"] . ": " . $valormaior[$parametro["coluna"]];
             }
-            $dadosMedida = $this->admin->i3geoestat_medida_variavel_variavel("", $metaestatid);
-            // var_dump($dadosMedida);exit;
+            $dadosMedida = $Admin->i3geoestat_medida_variavel_variavel("", $metaestatid);
             $tituloCamada = mb_convert_encoding($dadosMedida["nomemedida"], "ISO-8859-1", mb_detect_encoding($dadosMedida["nomemedida"]));
             if (count($tituloPar) > 0) {
                 $tituloCamada = $tituloCamada . " (" . implode(" ,", $tituloPar) . " )";
             }
-            $mapfilemetaestat = $this->metaestatinfo->mapfileMedidaVariavel($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true, $_SESSION["dir_tmp"] . "/metaestatTempInit" . $metaestatid . ".map");
+            $mapfilemetaestat = $Metaestatinfo->mapfileMeasure($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true, $_SESSION["dir_tmp"] . "/metaestatTempInit" . $metaestatid . ".map");
             // echo $mapfilemetaestat["mapfile"];exit;
             $map = ms_newMapObj($_SESSION["map_file"]);
             $mapTemp = ms_newMapObjFromString($mapfilemetaestat["mapfile"]);
-            $l = $mapTemp->getlayerbyname($mapfilemetaestat["layer"]);
-            $l->set("status", MS_DEFAULT);
-            if ($l->type == MS_LAYER_POLYGON) {
-                $map->insertLayer($l, 0);
+            $layerObj = $mapTemp->getlayerbyname($mapfilemetaestat["layer"]);
+            $layerObj->set("status", MS_DEFAULT);
+            if ($layerObj->type == MS_LAYER_POLYGON) {
+                $map->insertLayer($layerObj, 0);
             } else {
-                $map->insertLayer($l, - 1);
+                $map->insertLayer($layerObj, - 1);
             }
             $map->save($_SESSION["map_file"]);
         }
@@ -624,46 +630,46 @@ class Map
         if ($this->open($mapId) == false) {
             return false;
         }
-        $mapa = ms_newMapObj($_SESSION["map_file"]);
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
         include_once (I3GEOPATH . "/classesphp/wmswfs.php");
 
         // limpa selecao
         $this->clearQyfile($_SESSION["map_file"]);
-        $layer = ms_newLayerObj($mapa);
-        $layer->set("status", MS_DEFAULT);
+        $layerObj = ms_newLayerObj($mapObj);
+        $layerObj->set("status", MS_DEFAULT);
         $nomecamada = mb_convert_encoding($wms_style, "ISO-8859-1", "AUTO");
         if ($wms_style == "default") {
             $nomecamada = $wms_name;
         }
-        if(!empty($layerTitle)){
+        if (! empty($layerTitle)) {
             $nomecamada = mb_convert_encoding($layerTitle, "ISO-8859-1", "AUTO");
         }
-        $layer->setmetadata("CLASSE", "SIM");
-        $layer->setmetadata("TEXTO", "NAO");
-        $layer->setmetadata("tema", $nomecamada);
-        $layer->setmetadata("nomeoriginal", $wms_name); // nome original do layer no web service
-        $layer->setmetadata("tipooriginal", $representationtype);
-        $layer->set("name", uniqid("wms_"));
+        $layerObj->setmetadata("CLASSE", "SIM");
+        $layerObj->setmetadata("TEXTO", "NAO");
+        $layerObj->setmetadata("tema", $nomecamada);
+        $layerObj->setmetadata("nomeoriginal", $wms_name); // nome original do layer no web service
+        $layerObj->setmetadata("tipooriginal", $representationtype);
+        $layerObj->set("name", uniqid("wms_"));
         if ($representationtype != "") {
-            $layer->set("type", MS_LAYER_POLYGON);
+            $layerObj->set("type", MS_LAYER_POLYGON);
             if ($representationtype == "linear") {
-                $layer->set("type", MS_LAYER_LINE);
-                $classe = ms_newClassObj($layer);
+                $layerObj->set("type", MS_LAYER_LINE);
+                $classe = ms_newClassObj($layerObj);
                 $estilo = ms_newStyleObj($classe);
                 $cor = $estilo->color;
                 $cor->setRGB(- 1, - 1, - 1);
             }
             if ($representationtype == "pontual") {
-                $layer->set("type", MS_LAYER_POINT);
+                $layerObj->set("type", MS_LAYER_POINT);
             }
-            $sld = $layer->generateSLD();
-            $fp = fopen(dirname($_SESSION["map_file"]) . "/" . $layer->name . "sld.xml", "a");
+            $sld = $layerObj->generateSLD();
+            $fp = fopen(dirname($_SESSION["map_file"]) . "/" . $layerObj->name . "sld.xml", "a");
             fputs($fp, $sld);
             fclose($fp);
         }
-        $layer->set("type", MS_LAYER_RASTER);
-        $layer->set("connection", $url);
-        $layer->setconnectiontype(MS_WMS);
+        $layerObj->set("type", MS_LAYER_RASTER);
+        $layerObj->set("connection", $url);
+        $layerObj->setconnectiontype(MS_WMS);
         $epsg = "EPSG:4326";
         $e4291 = "nao";
         $ecrs = "nao";
@@ -690,21 +696,21 @@ class Map
             $epsg = $ecrs;
         }
         $epsg = trim($epsg);
-        $layer->setmetadata("wms_srs", $epsg);
-        $layer->setmetadata("wms_crs", $epsg);
-        $layer->setmetadata("wms_name", $wms_name);
-        $layer->setmetadata("wms_server_version", $version);
+        $layerObj->setmetadata("wms_srs", $epsg);
+        $layerObj->setmetadata("wms_crs", $epsg);
+        $layerObj->setmetadata("wms_name", $wms_name);
+        $layerObj->setmetadata("wms_server_version", $version);
 
-        $layer->setmetadata("wms_formatlist", $formatlist);
-        $layer->setmetadata("formatosinfo", $infoformat);
-        $layer->setmetadata("wms_exceptions_format", "application/vnd.ogc.se_xml");
-        //$layer->setmetadata("wms_LAYERS", $wmslayertitle);
-        $layer->setmetadata("wms_style", $wms_style);
-        $layer->setmetadata("wms_connectiontimeout", "30");
-        $layer->setmetadata("wms_force_separate_request", "1");
-        $layer->setmetadata("wms_tile", $tile);
-        if ($time != ""){
-            $layer->setmetadata("wms_time", $time);
+        $layerObj->setmetadata("wms_formatlist", $formatlist);
+        $layerObj->setmetadata("formatosinfo", $infoformat);
+        $layerObj->setmetadata("wms_exceptions_format", "application/vnd.ogc.se_xml");
+        // $layerObj->setmetadata("wms_LAYERS", $wmslayertitle);
+        $layerObj->setmetadata("wms_style", $wms_style);
+        $layerObj->setmetadata("wms_connectiontimeout", "30");
+        $layerObj->setmetadata("wms_force_separate_request", "1");
+        $layerObj->setmetadata("wms_tile", $tile);
+        if ($time != "") {
+            $layerObj->setmetadata("wms_time", $time);
         }
         // pega o tipo de formato de imagem que deve ser requisitado
         // a prefer&ecirc;ncia &eacute; png, mas se n&atilde;o for poss&iacute;vel, pega o primeiro da lista de formatos
@@ -716,25 +722,142 @@ class Map
             $im = $im[0];
         }
         if (($representationtype != "") && ($suportsld == true)) {
-            $layer->setmetadata("wms_sld_url", $_SESSION["imgurl"] . $layer->name . "sld.xml");
-            $layer->setmetadata("sld", $_SESSION["map_file"] . "/" . $layer->name . "sld.xml");
+            $layerObj->setmetadata("wms_sld_url", $_SESSION["imgurl"] . $layerObj->name . "sld.xml");
+            $layerObj->setmetadata("sld", $_SESSION["map_file"] . "/" . $layerObj->name . "sld.xml");
         } else {
             $urllegenda = $url . "&request=getlegendgraphic&version=" . $version . "&service=wms&layer=" . $wms_name . "&format=" . $im;
-            $layer->setmetadata("legendawms", $urllegenda);
+            $layerObj->setmetadata("legendawms", $urllegenda);
         }
-        $layer->setmetadata("wms_format", $im);
-        $layer->setmetadata("wfs", "nao");
-        $layer->setmetadata("wfs", "nao");
+        $layerObj->setmetadata("wms_format", $im);
+        $layerObj->setmetadata("wfs", "nao");
+        $layerObj->setmetadata("wfs", "nao");
         if ($allitens == true) {
-            $layer->setmetadata("tip", "allitens");
+            $layerObj->setmetadata("tip", "allitens");
         }
 
-        $c = $layer->offsite;
+        $c = $layerObj->offsite;
         $c->setrgb(255, 255, 255);
-        $salvo = $mapa->save($_SESSION["map_file"]);
+        $salvo = $mapObj->save($_SESSION["map_file"]);
         return array(
-            "layer" => $layer->name
+            "layer" => $layerObj->name
         );
+    }
+
+    function verifyPermissionFile($mapId, $arq)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        if ($_SESSION["navegadoresLocais"] != "") {
+            // verifica se esta cadastrado
+            $ipcliente = $this->util->getIpClient();
+            $ips = array();
+            // pega os nomes de cada ip
+            foreach ($_SESSION["navegadoresLocais"]["ips"] as $n) {
+                $ips[] = gethostbyname($n);
+                $ips[] = $n;
+            }
+            if (in_array($ipcliente, $ips)) {
+                $drives = $_SESSION["navegadoresLocais"]["drives"];
+                // pega o caminho
+                // nome
+                $split = explode("/", $arq);
+                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
+                    return false;
+                }
+                $formats = array("shp","img","tif","tiff","dwg","dxf","png","lan");
+                $ext = explode(".",$arq)[1];
+                if(in_array($ext,$formats)){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    function getLocalShpPath($mapId, $arq)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $drives = $_SESSION["navegadoresLocais"]["drives"];
+        // pega o caminho
+        // nome
+        $split = explode("/", $arq);
+        if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
+            return false;
+        }
+        $path = $split[0];
+        $split[0] = "";
+        $shp = implode("/", $split);
+        $shp = explode(".", $shp);
+        $shp = $shp[0] . ".shp";
+        return $drives[$path] . $shp;
+    }
+    function getLocalImgPath($mapId, $arq)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $drives = $_SESSION["navegadoresLocais"]["drives"];
+        // pega o caminho
+        // nome
+        $split = explode("/", $arq);
+        if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
+            return false;
+        }
+        $path = $split[0];
+        $split[0] = "";
+        $file = implode("/", $split);
+        return $drives[$path] . $file;
+    }
+
+    function addLayerShp($mapId, $arq, $mapObj = false)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        if ($mapObj == false) {
+            $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        }
+        $arq = str_replace(".shp", "", $arq);
+        $arq = str_replace(".", "", $arq) . ".shp";
+        $s = ms_newShapefileObj($arq, - 1);
+        $shape = $s->getshape(0);
+        $t = $shape->type;
+        $tipo = MS_LAYER_POLYGON;
+        if ($t == 0) {
+            $tipo = MS_LAYER_POINT;
+        }
+        if ($t == 1) {
+            $tipo = MS_LAYER_LINE;
+        }
+        $layerObj = $this->createEmptyLayer($mapObj, $tipo, MS_DEFAULT, basename($arq), "SIM");
+        $layerObj->set("data", $arq);
+        // verifica se existe o arquivo PRJ
+        if (file_exists(str_replace(".shp", "", $arq) . ".prj")) {
+            $layerObj->setprojection("AUTO");
+        }
+        $layerObj->setmetadata("DOWNLOAD", "nao");
+        $layerObj->setmetadata("TEMALOCAL", "NAO");
+        $layerObj->setmetadata("nomeoriginal", "NAO");
+        $salvo = $mapObj->save($_SESSION["map_file"]);
+        return $layerObj;
+    }
+    function addLayerImg($mapId, $arq, $mapObj = false)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        if ($mapObj == false) {
+            $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        }
+        $layerObj = $this->createEmptyLayer($mapObj, MS_LAYER_RASTER, MS_DEFAULT, basename($arq), "SIM");
+        $layerObj->set("data", $arq);
+        $layerObj->setmetadata("DOWNLOAD", "nao");
+        $layerObj->setmetadata("TEMALOCAL", "NAO");
+        $salvo = $mapObj->save($_SESSION["map_file"]);
+        return $layerObj;
     }
 
     /**
@@ -810,17 +933,17 @@ class Map
         $novoshpf->free();
         xbase_close($db);
         // adiciona o layer
-        $mapa = ms_newMapObj($_SESSION["map_file"]);
-        $layer = ms_newLayerObj($mapa);
-        $layer->set("name", basename($nomeshp));
-        $layer->set("data", $nomeshp . ".shp");
-        $layer->setmetadata("DOWNLOAD", "sim");
-        $layer->setmetadata("temalocal", "sim");
-        $layer->setmetadata("tema", $namelines);
-        $layer->setmetadata("classe", "sim");
-        $layer->set("type", MS_LAYER_LINE);
-        $layer->set("status", MS_DEFAULT);
-        $classe = ms_newClassObj($layer);
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        $layerObj = ms_newLayerObj($mapObj);
+        $layerObj->set("name", basename($nomeshp));
+        $layerObj->set("data", $nomeshp . ".shp");
+        $layerObj->setmetadata("DOWNLOAD", "sim");
+        $layerObj->setmetadata("temalocal", "sim");
+        $layerObj->setmetadata("tema", $namelines);
+        $layerObj->setmetadata("classe", "sim");
+        $layerObj->set("type", MS_LAYER_LINE);
+        $layerObj->set("status", MS_DEFAULT);
+        $classe = ms_newClassObj($layerObj);
         $classe->set("name", " ");
         $estilo = ms_newStyleObj($classe);
         if (! empty($symbol)) {
@@ -831,7 +954,7 @@ class Map
         $corsimbolo = str_replace(" ", ",", $symbolcolor);
         $corsimbolo = explode(",", $corsimbolo);
         $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-        $salvo = $mapa->save($_SESSION["map_file"]);
+        $salvo = $mapObj->save($_SESSION["map_file"]);
         return array(
             "name" => basename($nomeshp),
             "shapefile" => $nomeshp
@@ -910,19 +1033,19 @@ class Map
         $novoshpf->free();
         xbase_close($db);
         // adiciona o layer
-        $mapa = ms_newMapObj($_SESSION["map_file"]);
-        $layer = ms_newLayerObj($mapa);
-        $layer->set("name", basename($nomeshp));
-        $layer->set("data", $nomeshp . ".shp");
-        $layer->setmetadata("DOWNLOAD", "sim");
-        $layer->setmetadata("temalocal", "sim");
-        $layer->setmetadata("tema", $namepolygons);
-        $layer->setmetadata("classe", "sim");
-        $layer->setmetadata("ATLAS", "nao");
-        $layer->set("type", MS_LAYER_POLYGON);
-        $layer->set("opacity", "50");
-        $layer->set("status", MS_DEFAULT);
-        $classe = ms_newClassObj($layer);
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        $layerObj = ms_newLayerObj($mapObj);
+        $layerObj->set("name", basename($nomeshp));
+        $layerObj->set("data", $nomeshp . ".shp");
+        $layerObj->setmetadata("DOWNLOAD", "sim");
+        $layerObj->setmetadata("temalocal", "sim");
+        $layerObj->setmetadata("tema", $namepolygons);
+        $layerObj->setmetadata("classe", "sim");
+        $layerObj->setmetadata("ATLAS", "nao");
+        $layerObj->set("type", MS_LAYER_POLYGON);
+        $layerObj->set("opacity", "50");
+        $layerObj->set("status", MS_DEFAULT);
+        $classe = ms_newClassObj($layerObj);
         $classe->set("name", " ");
         $estilo = ms_newStyleObj($classe);
 
@@ -931,7 +1054,7 @@ class Map
         $corsimbolo = explode(",", $corsimbolo);
         $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
 
-        $salvo = $mapa->save($_SESSION["map_file"]);
+        $salvo = $mapObj->save($_SESSION["map_file"]);
         return array(
             "name" => basename($nomeshp),
             "shapefile" => $nomeshp
@@ -1003,17 +1126,17 @@ class Map
         $novoshpf->free();
         xbase_close($db);
         // adiciona o layer
-        $mapa = ms_newMapObj($_SESSION["map_file"]);
-        $layer = ms_newLayerObj($mapa);
-        $layer->set("name", basename($nomeshp));
-        $layer->set("data", $nomeshp . ".shp");
-        $layer->setmetadata("DOWNLOAD", "sim");
-        $layer->setmetadata("tema", $namepoints);
-        $layer->setmetadata("classe", "sim");
-        $layer->setmetadata("temalocal", "sim");
-        $layer->set("type", MS_LAYER_POINT);
-        $layer->set("status", MS_DEFAULT);
-        $classe = ms_newClassObj($layer);
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        $layerObj = ms_newLayerObj($mapObj);
+        $layerObj->set("name", basename($nomeshp));
+        $layerObj->set("data", $nomeshp . ".shp");
+        $layerObj->setmetadata("DOWNLOAD", "sim");
+        $layerObj->setmetadata("tema", $namepoints);
+        $layerObj->setmetadata("classe", "sim");
+        $layerObj->setmetadata("temalocal", "sim");
+        $layerObj->set("type", MS_LAYER_POINT);
+        $layerObj->set("status", MS_DEFAULT);
+        $classe = ms_newClassObj($layerObj);
         $classe->set("name", " ");
         $estilo = ms_newStyleObj($classe);
         $estilo->set("symbolname", $symbol);
@@ -1025,7 +1148,7 @@ class Map
         $corsimbolo = str_replace(" ", ",", $symbolcolor);
         $corsimbolo = explode(",", $corsimbolo);
         $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-        $salvo = $mapa->save($_SESSION["map_file"]);
+        $salvo = $mapObj->save($_SESSION["map_file"]);
         return array(
             "name" => basename($nomeshp),
             "shapefile" => $nomeshp
@@ -1091,17 +1214,17 @@ class Map
         $novoshpf->free();
         xbase_close($db);
         // adiciona o layer
-        $mapa = ms_newMapObj($_SESSION["map_file"]);
-        $layer = ms_newLayerObj($mapa);
-        $layer->set("name", basename($nomeshp));
-        $layer->set("data", $nomeshp . ".shp");
-        $layer->setmetadata("DOWNLOAD", "sim");
-        $layer->setmetadata("temalocal", "sim");
-        $layer->setmetadata("tema", $namewkt);
-        $layer->setmetadata("classe", "sim");
-        $layer->set("type", $shape->type);
-        $layer->set("status", MS_DEFAULT);
-        $classe = ms_newClassObj($layer);
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        $layerObj = ms_newLayerObj($mapObj);
+        $layerObj->set("name", basename($nomeshp));
+        $layerObj->set("data", $nomeshp . ".shp");
+        $layerObj->setmetadata("DOWNLOAD", "sim");
+        $layerObj->setmetadata("temalocal", "sim");
+        $layerObj->setmetadata("tema", $namewkt);
+        $layerObj->setmetadata("classe", "sim");
+        $layerObj->set("type", $shape->type);
+        $layerObj->set("status", MS_DEFAULT);
+        $classe = ms_newClassObj($layerObj);
         $classe->set("name", " ");
         $estilo = ms_newStyleObj($classe);
         if ($shape->type == 0) {
@@ -1113,13 +1236,13 @@ class Map
             $estilo->set("width", $symbolsize);
         }
         if ($shape->type == 2) {
-            $layer->set("opacity", "50");
+            $layerObj->set("opacity", "50");
         }
         $cor = $estilo->color;
         $corsimbolo = str_replace(" ", ",", $symbolcolor);
         $corsimbolo = explode(",", $corsimbolo);
         $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-        $salvo = $mapa->save($_SESSION["map_file"]);
+        $salvo = $mapObj->save($_SESSION["map_file"]);
         return array(
             "name" => basename($nomeshp),
             "shapefile" => $nomeshp
@@ -1153,20 +1276,20 @@ class Map
             $util = new \restmapserver\Util();
             $gruposusr = $util->getGruposUsrLogin();
             if (! is_object($map_file)) {
-                $m = @ms_newMapObj($map_file);
+                $mapObj = @ms_newMapObj($map_file);
             } else {
-                $m = $map_file;
+                $mapObj = $map_file;
             }
-            $c = $m->numlayers;
+            $c = $mapObj->numlayers;
             for ($i = 0; $i < $c; ++ $i) {
-                $layer = $m->getlayer($i);
-                $meta = $layer->getmetadata("arquivotemaoriginal");
+                $layerObj = $mapObj->getlayer($i);
+                $meta = $layerObj->getmetadata("arquivotemaoriginal");
                 // pode ser que o metadata nao esteja definido ainda
                 if ($meta == "") {
                     $meta = str_replace(".map", "", basename($map_file));
                 }
                 if ($meta != "") {
-                    if (in_array($meta, array_keys($restritos)) || in_array($layer->name, array_keys($restritos))) {
+                    if (in_array($meta, array_keys($restritos)) || in_array($layerObj->name, array_keys($restritos))) {
                         $indevido = true;
                         foreach ($gruposusr as $g) {
                             foreach ($restritos[$meta] as $r) {
@@ -1176,7 +1299,7 @@ class Map
                             }
                         }
                         if ($indevido == true) {
-                            array_push($indevidos, $layer->name);
+                            array_push($indevidos, $layerObj->name);
                         }
                     }
                 }
@@ -1202,16 +1325,16 @@ class Map
         if (count($indevidos) > 0) {
             $existeIndevidos = true;
             if (! is_object($map_file)) {
-                $m = ms_newMapObj($map_file);
+                $mapObj = ms_newMapObj($map_file);
             } else {
-                $m = $map_file;
+                $mapObj = $map_file;
                 $salva = false;
             }
             foreach ($indevidos as $i) {
-                $l = $m->getlayerbyname($i);
-                $l->set("status", MS_DELETE);
+                $layerObj = $mapObj->getlayerbyname($i);
+                $layerObj->set("status", MS_DELETE);
             }
-            $m->save($map_file);
+            $mapObj->save($map_file);
         }
         return $existeIndevidos;
     }
@@ -1222,7 +1345,7 @@ class Map
      * @param string $layers
      *            Nomes dos arquivos mapfile existentes na pasta i3geo/temas
      */
-    function layersAdd($mapId, $layernames, $save = true, $mapObj = false)
+    function addLayers($mapId, $layernames, $save = true, $mapObj = false)
     {
         $temasdir = I3GEOPATH . "/temas";
         $layernames = str_replace(" ", ",", $layernames);
@@ -1271,16 +1394,16 @@ class Map
                             $l->set("type", $tipotemp);
                             $l->set("status", $statustemp);
                         }
-                        $this->layer->cloneInlineSymbol($maptemp, $l, $map);
+                        $this->layer->cloneInlineSymbol($maptemp, $l, $mapObj);
                         if ($l->type == MS_LAYER_POLYGON && $l->getmetadata("METAESTAT") == "SIM") {
                             $mapObj->insertLayer($l, 0);
                         } else {
                             $mapObj->insertLayer($l, - 1);
                         }
-                        $layerobj = $mapObj->getlayerbyname($l->name);
-                        $this->layer->fixLayerGrid($l, $layerobj);
-                        $this->correctShapefilePath($mapObj, $layerobj);
-                        $this->correctClassLegend($layerobj);
+                        $layerObj = $mapObj->getlayerbyname($l->name);
+                        $this->layer->fixLayerGrid($l, $layerObj);
+                        $this->correctShapefilePath($mapObj, $layerObj);
+                        $this->correctClassLegend($layerObj);
                     }
                 }
             }
@@ -1313,15 +1436,15 @@ class Map
                 continue;
             }
             if (@$mapObj->getLayerByName($l)) {
-                $layer = $mapObj->getLayerByName($l);
-                $layer->set("status", MS_DEFAULT);
+                $layerObj = $mapObj->getLayerByName($l);
+                $layerObj->set("status", MS_DEFAULT);
             }
             $grupos = $mapObj->getLayersIndexByGroup($l);
             if (count($grupos) > 0) {
                 for ($i = 0; $i < count($grupos); ++ $i) {
-                    $layer = $mapObj->getLayer($grupos[$i]);
-                    if (strtolower($layer->group) == strtolower($l)) {
-                        $layer->set("status", MS_DEFAULT);
+                    $layerObj = $mapObj->getLayer($grupos[$i]);
+                    if (strtolower($layerObj->group) == strtolower($l)) {
+                        $layerObj->set("status", MS_DEFAULT);
                     }
                 }
             }
@@ -1390,15 +1513,15 @@ class Map
                 continue;
             }
             if (@$mapObj->getLayerByName($l)) {
-                $layer = $mapObj->getLayerByName($l);
-                $layer->set("status", MS_OFF);
+                $layerObj = $mapObj->getLayerByName($l);
+                $layerObj->set("status", MS_OFF);
             }
             $grupos = $mapObj->getLayersIndexByGroup($l);
             if (count($grupos) > 0) {
                 for ($i = 0; $i < count($grupos); ++ $i) {
-                    $layer = $mapObj->getLayer($grupos[$i]);
-                    if (strtolower($layer->group) == strtolower($l)) {
-                        $layer->set("status", MS_OFF);
+                    $layerObj = $mapObj->getLayer($grupos[$i]);
+                    if (strtolower($layerObj->group) == strtolower($l)) {
+                        $layerObj->set("status", MS_OFF);
                     }
                 }
             }
@@ -1407,32 +1530,32 @@ class Map
         return true;
     }
 
-    function correctShapefilePath($mapobj, $layerobj)
+    function correctShapefilePath($mapObj, $layerObj)
     {
-        if ($layerobj->connectiontype == MS_SHAPEFILE) {
-            if ($mapobj->shapepath != "") {
+        if ($layerObj->connectiontype == MS_SHAPEFILE) {
+            if ($mapObj->shapepath != "") {
                 // o nome do arquivo pode conter .shp ou nao
-                if (file_exists($mapobj->shapepath . "/" . $layerobj->data)) {
-                    $layerobj->set("data", $mapobj->shapepath . "/" . $l->data);
+                if (file_exists($mapObj->shapepath . "/" . $layerObj->data)) {
+                    $layerObj->set("data", $mapObj->shapepath . "/" . $layerObj->data);
                 }
-                if (file_exists($mapobj->shapepath . "/" . $layerobj->data . ".shp")) {
-                    $layerobj->set("data", $mapobj->shapepath . "/" . $layerobj->data . ".shp");
+                if (file_exists($mapObj->shapepath . "/" . $layerObj->data . ".shp")) {
+                    $layerObj->set("data", $mapObj->shapepath . "/" . $layerObj->data . ".shp");
                 }
             }
         }
     }
 
-    function correctClassLegend($layerobj)
+    function correctClassLegend($layerObj)
     {
-        if ($layerobj->getmetadata("classe") == "") {
-            $layerobj->setmetadata("classe", "");
+        if ($layerObj->getmetadata("classe") == "") {
+            $layerObj->setmetadata("classe", "");
         }
-        $pr = $layerobj->getProcessing();
+        $pr = $layerObj->getProcessing();
         if (! in_array("LABEL_NO_CLIP=True", $pr)) {
-            $layerobj->setprocessing("LABEL_NO_CLIP=True");
+            $layerObj->setprocessing("LABEL_NO_CLIP=True");
         }
         if (! in_array("POLYLINE_NO_CLIP=True", $pr)) {
-            $layerobj->setprocessing("POLYLINE_NO_CLIP=True");
+            $layerObj->setprocessing("POLYLINE_NO_CLIP=True");
         }
     }
 
@@ -1463,14 +1586,14 @@ class Map
                 continue;
             }
             if (@$mapObj->getLayerByName($l)) {
-                $layer = $mapObj->getLayerByName($l);
-                $layer->set("status", MS_DELETE);
+                $layerObj = $mapObj->getLayerByName($l);
+                $layerObj->set("status", MS_DELETE);
             }
             $grupos = $mapObj->getLayersIndexByGroup($l);
             if (count($grupos) > 0) {
                 for ($i = 0; $i < count($grupos); ++ $i) {
-                    $layer = $mapObj->getLayer($grupos[$i]);
-                    if (strtolower($layer->group) == strtolower($l)) {
+                    $layerObj = $mapObj->getLayer($grupos[$i]);
+                    if (strtolower($layerObj->group) == strtolower($l)) {
                         $layer->set("status", MS_DELETE);
                     }
                 }
@@ -1535,18 +1658,18 @@ class Map
         $desligar = array();
         $legenda = array();
         for ($i = 0; $i < $numlayers; ++ $i) {
-            $la = $mapObj->getlayer($i);
-            if (strtoupper($la->getmetadata("CLASSE")) == "NAO" || strtoupper($la->getmetadata("ESCONDIDO")) == "SIM") {
-                $la->set("status", MS_OFF);
+            $layerObj = $mapObj->getlayer($i);
+            if (strtoupper($layerObj->getmetadata("CLASSE")) == "NAO" || strtoupper($layerObj->getmetadata("ESCONDIDO")) == "SIM") {
+                $layerObj->set("status", MS_OFF);
             }
             $desligarLayer = array();
-            if ($la->status == MS_DEFAULT) {
+            if ($layerObj->status == MS_DEFAULT) {
                 // "legendawms" "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=biomas&format=image/png"
 
-                if ($la->getmetadata("legendaimg") != "" || $la->getmetadata("legendawms") != "") {
-                    $imagem = $la->getmetadata("legendaimg");
+                if ($layerObj->getmetadata("legendaimg") != "" || $layerObj->getmetadata("legendawms") != "") {
+                    $imagem = $layerObj->getmetadata("legendaimg");
                     if ($imagem == "") {
-                        $imagem = $la->getmetadata("legendawms");
+                        $imagem = $layerObj->getmetadata("legendawms");
                     }
                     $classes = array();
                     $classes[] = array(
@@ -1554,22 +1677,22 @@ class Map
                         "img" => $imagem,
                         "checked" => "checked",
                         "index" => 0,
-                        "layer" => $la->name
+                        "layer" => $layerObj->name
                     );
                     $legenda[] = array(
-                        "layer" => $la->name,
-                        "nome" => $this->util->iso2utf($la->getmetadata("tema")),
+                        "layer" => $layerObj->name,
+                        "nome" => $this->util->iso2utf($layerObj->getmetadata("tema")),
                         "classes" => $classes,
                         "tipo" => "imagem"
                     );
                 } else {
-                    $la->set("minscaledenom", 0);
-                    $la->set("maxscaledenom", 0);
-                    $nc = $la->numclasses;
+                    $layerObj->set("minscaledenom", 0);
+                    $layerObj->set("maxscaledenom", 0);
+                    $nc = $layerObj->numclasses;
                     $classes = array();
                     for ($c = 0; $c < $nc; $c ++) {
                         $ck = "checked";
-                        $classe = $la->getclass($c);
+                        $classe = $layerObj->getclass($c);
                         if ($classe->status == MS_OFF) {
                             $ck = "";
                         }
@@ -1606,7 +1729,7 @@ class Map
                             "img" => $imagem,
                             "checked" => $ck,
                             "index" => $c,
-                            "layer" => $la->name,
+                            "layer" => $layerObj->name,
                             "cor" => $cor,
                             "w" => $w,
                             "h" => $h,
@@ -1616,8 +1739,8 @@ class Map
                         );
                     }
                     $legenda[] = array(
-                        "layer" => $la->name,
-                        "nome" => $this->util->iso2utf($la->getmetadata("tema")),
+                        "layer" => $layerObj->name,
+                        "nome" => $this->util->iso2utf($layerObj->getmetadata("tema")),
                         "classes" => $classes,
                         "tipo" => ""
                     );
@@ -1758,16 +1881,16 @@ class Map
 
     function createLayer($mapObj, $ms_tipo, $ms_status, $title)
     {
-        $l = ms_newLayerObj($mapObj);
-        $l->set("type", $ms_tipo);
-        $l->set("name", uniqid("i3geomap"));
-        $l->setmetadata("tema", $title);
-        $l->setmetadata("classe", "SIM");
-        $l->set("status", $ms_status);
-        $l->set("template", "none.htm");
-        $l->setprocessing("LABEL_NO_CLIP=True");
-        $l->setprocessing("POLYLINE_NO_CLIP=True");
-        $classe = ms_newClassObj($l);
+        $layerObj = ms_newLayerObj($mapObj);
+        $layerObj->set("type", $ms_tipo);
+        $layerObj->set("name", uniqid("i3geomap"));
+        $layerObj->setmetadata("tema", $title);
+        $layerObj->setmetadata("classe", "SIM");
+        $layerObj->set("status", $ms_status);
+        $layerObj->set("template", "none.htm");
+        $layerObj->setprocessing("LABEL_NO_CLIP=True");
+        $layerObj->setprocessing("POLYLINE_NO_CLIP=True");
+        $classe = ms_newClassObj($layerObj);
         $classe->set("name", "");
         $estilo = ms_newStyleObj($classe);
         $cor = $estilo->color;
@@ -1779,9 +1902,9 @@ class Map
             $estilo->set("symbolname", "ponto");
         }
         // reposiciona o layer na pilha
-        $ltipo = $l->type;
+        $ltipo = $layerObj->type;
         if (($ltipo == 2) || ($ltipo == 3)) {
-            $indicel = $l->index;
+            $indicel = $layerObj->index;
             $numlayers = $mapObj->numlayers;
             $nummove = 0;
             for ($i = $numlayers - 1; $i > 0; $i --) {
@@ -1797,7 +1920,7 @@ class Map
                 }
             }
         }
-        return $l;
+        return $layerObj;
     }
 
     function extentToLayer($mapId, $layerName)
@@ -1807,70 +1930,341 @@ class Map
         }
         $mapObj = ms_newMapObj($_SESSION["map_file"]);
         $layerObj = $mapObj->getLayerByname($layerName);
-        if($mapObj->getmetadata("interface") == "googlemaps"){
+        if ($mapObj->getmetadata("interface") == "googlemaps") {
             $projO = $mapObj->getProjection();
             $mapObj->setProjection($_SESSION["i3GeoProjDefault"]["proj4"]);
         }
         $prjMapa = "";
         $prjTema = "";
-        if($layerObj->type != MS_LAYER_RASTER){
+        if ($layerObj->type != MS_LAYER_RASTER) {
             $prjMapa = $mapObj->getProjection();
             $prjTema = $layerObj->getProjection();
         }
         $extatual = $mapObj->extent;
         $ret = $layerObj->getmetadata("extensao");
         //
-        //necess&aacute;rio para evitar que em qualquer redesenho do mapa, seja aplicado o zoom para o tema marcado com aplicaextensao
+        // necess&aacute;rio para evitar que em qualquer redesenho do mapa, seja aplicado o zoom para o tema marcado com aplicaextensao
         //
-        $layerObj->setmetadata("aplicaextensao","");
-        if($ret == "" && $layerObj->type == MS_LAYER_RASTER){
+        $layerObj->setmetadata("aplicaextensao", "");
+        if ($ret == "" && $layerObj->type == MS_LAYER_RASTER) {
             $ret = "-75.233614607 -33.7515829981 -27.592958622 5.272156";
         }
-        if ($ret == ""){
+        if ($ret == "") {
             $ret = $layerObj->getextent();
-            //reprojeta o retangulo
-            if (($prjTema != "") && ($prjMapa != $prjTema))
-            {
+            // reprojeta o retangulo
+            if (($prjTema != "") && ($prjMapa != $prjTema)) {
                 $projInObj = ms_newprojectionobj($prjTema);
                 $projOutObj = ms_newprojectionobj($prjMapa);
                 $ret->project($projInObj, $projOutObj);
             }
-            $extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
+            $extatual->setextent($ret->minx, $ret->miny, $ret->maxx, $ret->maxy);
+        } else {
+            $ret = explode(" ", $ret);
+            $extatual->setextent($ret[0], $ret[1], $ret[2], $ret[3]);
         }
-        else{
-            $ret = explode(" ",$ret);
-            $extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
-        }
-        if($mapObj->getmetadata("interface") == "googlemaps"){
+        if ($mapObj->getmetadata("interface") == "googlemaps") {
             $mapObj->setProjection($projO);
         }
         $e = $mapObj->extent;
         $ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
         $mapObj->save($_SESSION["map_file"]);
-        return($ext);
+        return ($ext);
     }
+
     function clearSel($mapId)
     {
         if ($this->open($mapId) == false) {
             return false;
         }
         $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        $qyfile = str_replace(".map","_qy.map",$_SESSION["map_file"]);
+        $qyfile = str_replace(".map", "_qy.map", $_SESSION["map_file"]);
         $c = $mapObj->numlayers;
-        for ($i=0;$i < $c;$i++){
-            $l = $mapObj->getlayer($i);
-            $file = dirname($_SESSION["map_file"])."/".$l->name.".php";
-            if (file_exists($file)){
-                unlink ($file);
+        for ($i = 0; $i < $c; $i ++) {
+            $layerObj = $mapObj->getlayer($i);
+            $file = dirname($_SESSION["map_file"]) . "/" . $layerObj->name . ".php";
+            if (file_exists($file)) {
+                unlink($file);
             }
-            $file = dirname($_SESSION["map_file"])."/".$l->name."_qy.map";
-            if (file_exists($file)){
-                unlink ($file);
+            $file = dirname($_SESSION["map_file"]) . "/" . $layerObj->name . "_qy.map";
+            if (file_exists($file)) {
+                unlink($file);
             }
         }
-        if (file_exists($qyfile)){
-            unlink ($qyfile);
+        if (file_exists($qyfile)) {
+            unlink($qyfile);
         }
         return true;
+    }
+
+    function getSearchLayers($mapObj)
+    {
+        $data = array();
+        $numlayers = $mapObj->numlayers;
+        for ($i = 0; $i < $numlayers; ++ $i) {
+            $layerObj = $mapObj->getlayer($i);
+            $metadata = $layerObj->getmetadata("itembuscarapida");
+            if ($metadata != "") {
+                $data[$layerObj->name] = array(
+                    "layerName" => $layerObj->name,
+                    "layerObj" => $layerObj,
+                    "column" => $metadata
+                );
+            }
+        }
+        return $data;
+    }
+
+    function searchInLayers($mapId, $search, $extent)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        $layersSearch = $this->getSearchLayers($mapObj);
+        $data = array();
+        if (count($layersSearch) > 0) {
+            foreach ($layersSearch as $l) {
+                $reg = $this->layer->searchColumn($mapObj, $l["layerObj"], $search, $l["column"], $extent);
+                $data[$l["layerObj"]->name] = $reg;
+            }
+        }
+        return $data;
+    }
+
+    function textFontList($mapId)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $arq = $_SESSION["locaplic"] . "/symbols/fontes.txt";
+        $h = fopen($arq, "r");
+        while ($i = fscanf($h, "%s\t%s\t")) {
+            list ($f, $g) = $i;
+            $nome[] = $f;
+        }
+        return ($nome);
+    }
+
+    function addLayerMetaestatFilter($mapId, $measure, $filter, $classification, $opacity, $regiontype)
+    {
+        $Metaestatinfo = new \restmapserver\MetaestatInfo();
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        if (! empty($filter)) {
+            $filter = str_replace('"', "'", $filter);
+            $final = array();
+            $sepands = explode("|", $filter);
+            foreach ($sepands as $sepand) {
+                $linhas = explode("*", $sepand);
+                if (! is_numeric(str_replace(array(
+                    "'",
+                    ","
+                ), "", $linhas[1]))) {
+                    exit();
+                }
+                if (count(explode(",", $linhas[1])) == 1) {
+                    $final[] = $linhas[0] . " = " . $linhas[1];
+                } else {
+                    $final[] = $linhas[0] . " IN (" . $linhas[1] . ")";
+                }
+            }
+            $filter = implode(" and ", $final);
+        }
+        $data = $Metaestatinfo->mapfileMeasure($measure, $filter, 0, "polygon", "", $classification, "", $regiontype, $opacity, false);
+        $layerObj = $data["mapObj"]->getLayerByName($data["layerName"]);
+        $layerObj->set("status", MS_DEFAULT);
+        ms_newLayerObj($mapObj, $layerObj);
+        $mapObj->save($_SESSION["map_file"]);
+        return (true);
+    }
+
+    function addLayerRegion($mapId, $codigo_tipo_regiao, $outlinecolor = "50,50,50", $width = 2)
+    {
+        $Metaestatinfo = new \restmapserver\MetaestatInfo();
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        $data = $Metaestatinfo->mapfileRegion($codigo_tipo_regiao, $outlinecolor, $width);
+        $layerObj = $data["mapObj"]->getLayerByName($data["layerName"]);
+        $layerObj->set("status", MS_DEFAULT);
+        ms_newLayerObj($mapObj, $layerObj);
+        $mapObj->save($_SESSION["map_file"]);
+        return (true);
+    }
+
+    function createEmptyLayer($mapObj, $ms_tipo, $ms_status, $metaTema, $metaClasse = "SIM", $reposiciona = true)
+    {
+        $layerObj = ms_newLayerObj($mapObj);
+        $layerObj->set("type", $ms_tipo);
+        $layerObj->set("name", uniqid("shapefile"));
+        $layerObj->setmetadata("tema", $metaTema);
+        $layerObj->setmetadata("classe", $metaClasse);
+        $layerObj->set("status", $ms_status);
+        $layerObj->set("template", "none.htm");
+        // evita problemas no modo tile
+        $layerObj->setprocessing("LABEL_NO_CLIP=True");
+        $layerObj->setprocessing("POLYLINE_NO_CLIP=True");
+        $classe = ms_newClassObj($layerObj);
+        $classe->set("name", "");
+        $estilo = ms_newStyleObj($classe);
+        $cor = $estilo->color;
+        $cor->setrgb(31, 165, 165);
+        $coro = $estilo->outlinecolor;
+        $coro->setrgb(0, 0, 0);
+        if ($ms_tipo == MS_LAYER_POINT) {
+            $estilo->set("size", 4);
+            $estilo->set("symbolname", "ponto");
+        }
+        // reposiciona o layer na pilha
+        if ($reposiciona == true) {
+            $ltipo = $layerObj->type;
+            if (($ltipo == 2) || ($ltipo == 3)) {
+                $indicel = $layerObj->index;
+                $numlayers = $mapObj->numlayers;
+                $nummove = 0;
+                for ($i = $numlayers - 1; $i > 0; $i --) {
+                    $layerAbaixo = $mapObj->getlayer($i);
+                    $tipo = $layerAbaixo->type;
+                    if (($tipo != 2) && ($tipo != 3)) {
+                        $nummove ++;
+                    }
+                }
+                if ($nummove > 2) {
+                    for ($i = 0; $i <= ($nummove - 3); ++ $i) {
+                        $mapObj->movelayerup($indicel);
+                    }
+                }
+            }
+        }
+        return $layerObj;
+    }
+
+    function getLegendJson($mapId, $w = 25, $h = 25)
+    {
+        if ($this->open($mapId) == false) {
+            return false;
+        }
+        $mapObj = ms_newMapObj($_SESSION["map_file"]);
+        $l = "";
+        $numlayers = $this->mapa->numlayers;
+        if ($this->nome != "") {
+            // verifica se &eacute; wms ou se o metadata legendaimg est&aacute; definido
+            $c = $this->layer->connectiontype;
+            if ($c == 7 || $this->layer->getmetadata("legendaimg") != "") {
+                // return ($this->tabelaLegenda());
+            }
+            for ($i = 0; $i < $numlayers; ++ $i) {
+                $la = $this->mapa->getlayer($i);
+                if ($la->name != $this->nome) {
+                    $la->set("status", MS_OFF);
+                }
+                if ($la->group == $this->nome) {
+                    $la->set("status", MS_DEFAULT);
+                }
+                $la->set("minscaledenom", 0);
+                $la->set("maxscaledenom", 0);
+            }
+            $this->layer->set("status", MS_DEFAULT);
+        }
+        $desligar = array();
+        $legenda = array();
+        for ($i = 0; $i < $numlayers; ++ $i) {
+            $la = $this->mapa->getlayer($i);
+            if (strtoupper($la->getmetadata("CLASSE")) == "NAO" || strtoupper($la->getmetadata("ESCONDIDO")) == "SIM") {
+                $la->set("status", MS_OFF);
+            }
+            $desligarLayer = array();
+            if ($la->status == MS_DEFAULT) {
+                // "legendawms" "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=biomas&format=image/png"
+
+                if ($la->getmetadata("legendaimg") != "" || $la->getmetadata("legendawms") != "") {
+                    $imagem = $la->getmetadata("legendaimg");
+                    if ($imagem == "") {
+                        $imagem = $la->getmetadata("legendawms");
+                    }
+                    $classes = array();
+                    $classes[] = array(
+                        "nome" => "",
+                        "img" => $imagem,
+                        "checked" => "checked",
+                        "index" => 0,
+                        "layer" => $la->name
+                    );
+                    $legenda[] = array(
+                        "layer" => $la->name,
+                        "nome" => $this->converte($la->getmetadata("tema")),
+                        "classes" => $classes,
+                        "tipo" => "imagem"
+                    );
+                } else {
+                    $la->set("minscaledenom", 0);
+                    $la->set("maxscaledenom", 0);
+                    $nc = $la->numclasses;
+                    $classes = array();
+                    for ($c = 0; $c < $nc; $c ++) {
+                        $ck = "checked";
+                        $classe = $la->getclass($c);
+                        if ($classe->status == MS_OFF) {
+                            $ck = "";
+                        }
+                        $cores = array(
+                            "color" => "-1 -1 -1",
+                            "outline" => "-1 -1 -1",
+                            "background" => "-1 -1 -1"
+                        );
+                        // o simbolo pode ser definido apenas com base nas cores
+                        $simple = true;
+
+                        // remove o offset em simbolos do tipo imagem
+                        if ($classe->numstyles > 0) {
+                            $estilo = $classe->getstyle(0);
+                            $simbolo = $this->mapa->getSymbolObjectById($estilo->symbol);
+                            if ($simbolo != "") {
+                                if ($estilo->symbolname != "" && $simbolo->imagepath != "") {
+                                    $estilo->set("offsetx", 0);
+                                    $estilo->set("offsety", 0);
+                                }
+                            }
+                            $cor = array(
+                                "color" => corRGB($estilo->color),
+                                "outline" => corRGB($estilo->outlinecolor),
+                                "background" => corRGB($estilo->backgroundcolor)
+                            );
+                            if ($estilo->symbolname != "" && $estilo->symbolname != "linha" && $estilo->symbolname != "ponto") {
+                                $simple = false;
+                            }
+                        }
+                        $imagem = $classe->createLegendIcon($w, $h)->saveWebImage();
+
+                        $classes[] = array(
+                            "nome" => $this->converte($classe->name),
+                            "img" => $imagem,
+                            "checked" => $ck,
+                            "index" => $c,
+                            "layer" => $la->name,
+                            "cor" => $cor,
+                            "w" => $w,
+                            "h" => $h,
+                            "minscaledenom" => $classe->minscaledenom,
+                            "maxscaledenom" => $classe->maxscaledenom,
+                            "simple" => $simple
+                        );
+                    }
+                    $legenda[] = array(
+                        "layer" => $la->name,
+                        "nome" => $this->converte($la->getmetadata("tema")),
+                        "classes" => $classes,
+                        "tipo" => ""
+                    );
+                }
+            }
+            $desligar[$la->name] = $desligarLayer;
+        }
+        return (array(
+            "legenda" => $legenda
+        ));
     }
 }

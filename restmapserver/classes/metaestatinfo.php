@@ -8,10 +8,9 @@ class MetaestatInfo
 
     function __construct()
     {
-        include_once (I3GEOPATH . "/restmapserver/classes/admin.php");
         $this->admin = new \restmapserver\Admin();
-        include_once (I3GEOPATH . "/restmapserver/classes/statistics.php");
         $this->statistics = new \restmapserver\Statistics();
+        $this->util = new \restmapserver\Util();
     }
 
     function execSQL($sql)
@@ -83,6 +82,7 @@ class MetaestatInfo
                 $filtro = $filtro . " AND (" . $dados["filtro"] . ")";
             }
         }
+
         // parametros da medida da variavel
         $parametrosMedida = array();
         $pp = $this->admin->i3geoestat_parametro_medida($id_medida_variavel, "", 0);
@@ -155,14 +155,12 @@ class MetaestatInfo
                 $titulo .= " - media";
             }
         }
-
         // obtem o SQL que faz o acesso aos dados da media da variavel
         if ($dados["colunavalor"] == "") {
             $nomevalorcalculado = "'1'::numeric";
         } else {
             $nomevalorcalculado = $dados["colunavalor"];
         }
-
         $sqlDadosMedidaVariavel = "SELECT " . $dados["colunaidgeo"] . " AS cod_regiao,$tipoconta(" . $nomevalorcalculado . ") AS valorcalculado FROM " . $dados["esquemadb"] . "." . $dados["tabela"];
         if ($suportaWMST == true && $direto == false) {
             $sqlDadosMedidaVariavel = "SELECT $sqlWMST as dimtempo," . $dados["colunaidgeo"] . " AS cod_regiao," . $nomevalorcalculado . " AS valorcalculado FROM " . $dados["esquemadb"] . "." . $dados["tabela"];
@@ -467,29 +465,34 @@ class MetaestatInfo
             "colunas" => $colunas
         );
     }
+
     /**
      * Lista os registros de uma tabela que e uma regiao
-     * @param codigo do tipo de regiao
+     *
+     * @param
+     *            codigo do tipo de regiao
      */
-    function listaDadosGeometriaRegiao($codigo_tipo_regiao){
-        //pega a tabela, esquema e conexao para acessar os dados da regiao
+    function listaDadosGeometriaRegiao($codigo_tipo_regiao)
+    {
+        // pega a tabela, esquema e conexao para acessar os dados da regiao
         $regiao = $this->admin->i3geoestat_tipo_regiao($codigo_tipo_regiao);
-        //$c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
+        // $c = $this->listaConexao($regiao["codigo_estat_conexao"],true);
         $c = $this->listaConexaoMetaestat();
-        $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+        $dbh = new PDO('pgsql:dbname=' . $c["bancodedados"] . ';user=' . $c["usuario"] . ';password=' . $c["senha"] . ';host=' . $c["host"] . ';port=' . $c["porta"]);
         $c = $regiao["colunageo"];
         $s = "ST_dimension($c) as dimension ";
-        $sql = "select $s,".$regiao["colunanomeregiao"]." as nome_regiao,".$regiao["identificador"]." as identificador_regiao from ".$regiao["esquemadb"].".".$regiao["tabela"];
+        $sql = "select $s," . $regiao["colunanomeregiao"] . " as nome_regiao," . $regiao["identificador"] . " as identificador_regiao from " . $regiao["esquemadb"] . "." . $regiao["tabela"];
         $sql .= " limit 1";
-        $q = $dbh->query($sql,PDO::FETCH_ASSOC);
+        $q = $dbh->query($sql, PDO::FETCH_ASSOC);
         $r = array();
-        if($q){
+        if ($q) {
             $r = $q->fetchAll();
             return $r[0];
         } else {
             return false;
         }
     }
+
     /**
      * Cria um arquivo mapfile para uma medida de variavel
      * Inclui no arquivo o layer de acesso aos dados
@@ -521,7 +524,7 @@ class MetaestatInfo
      *            faz o cache do mapfile
      * @return array("mapfile"=>,"layer"=>,"titulolayer"=>)
      */
-    function mapfileMedidaVariavel($id_medida_variavel, $filtro = "", $todasascolunas = 0, $tipolayer = "polygon", $titulolayer = "", $id_classificacao = "", $agruparpor = "", $codigo_tipo_regiao = "", $opacidade = "", $suportaWMST = false)
+    function mapfileMeasure($id_medida_variavel, $filtro = "", $todasascolunas = 0, $tipolayer = "polygon", $titulolayer = "", $id_classificacao = "", $agruparpor = "", $codigo_tipo_regiao = "", $opacidade = "", $suportaWMST = false)
     {
         // para permitir a inclusao de filtros, o fim do sql e marcado com /*FW*//*FW*/
         // indicando onde deve comecar e terminar uma possivel clausula where
@@ -540,13 +543,16 @@ class MetaestatInfo
         }
         $dconexao = $this->listaConexaoMetaestat();
         $conexao = "user=" . $dconexao["usuario"] . " password=" . $dconexao["senha"] . " dbname=" . $dconexao["bancodedados"] . " host=" . $dconexao["host"] . " port=" . $dconexao["porta"] . "";
+
         $sql = $this->sqlMedidaVariavel($id_medida_variavel, $agruparpor, $tipolayer, $codigo_tipo_regiao, $suportaWMST, $filtro);
+
         if (empty($codigo_tipo_regiao)) {
             $codigo_tipo_regiao = $meta["codigo_tipo_regiao"];
         }
         if (empty($codigo_tipo_regiao)) {
             return false;
         }
+
         // define o tipo correto de layer
         $dg = $this->listaDadosGeometriaRegiao($codigo_tipo_regiao);
         if (empty($tipolayer) || ! isset($dg["dimension"]) || $dg == false || empty($dg) || $dg["dimension"] == "") {
@@ -567,6 +573,7 @@ class MetaestatInfo
             $classificacoes = $this->admin->i3geoestat_classificacao($id_medida_variavel);
             $classes = $this->admin->i3geoestat_classes($classificacoes[0]["id_classificacao"]);
         }
+
         if ($classes == false) {
             $valores = $this->dadosMedidaVariavel($id_medida_variavel, $filtro . " AND " . $meta["colunavalor"] . " > 0 ");
             $valores = array_column($valores, $meta["colunavalor"]);
@@ -574,16 +581,226 @@ class MetaestatInfo
             $classes = array();
             $cores = array();
             // cores baseadas em colorbrewer
-            $cores[] = array(array(179,205,227),array(140,150,198),array(136,86,167),array(129,15,124));
-            $cores[] = array(array(178,226,226),array(102,194,164),array(44,162,95),array(0,109,44));
-            $cores[] = array(array(186,228,188),array(123,204,196),array(67,162,202),array(8,104,172));
-            $cores[] = array(array(253,204,138),array(252,141,89),array(227,74,51),array(179,0,0));
-            $cores[] = array(array(189,201,225),array(116,169,207),array(43,140,190),array(4,90,141));
-            $cores[] = array(array(189,201,225),array(103,169,207),array(28,144,153),array(1,108,89));
-            $cores[] = array(array(215,181,216),array(223,101,176),array(221,28,119),array(152,0,67));
-            $cores[] = array(array(251,180,185),array(247,104,161),array(197,27,138),array(122,1,119));
-            $cores[] = array(array(194,230,153),array(120,198,121),array(49,163,84),array(0,104,55));
-            $cores[] = array(array(255,255,178),array(254,204,92),array(253,141,60),array(240,59,32));
+            $cores[] = array(
+                array(
+                    179,
+                    205,
+                    227
+                ),
+                array(
+                    140,
+                    150,
+                    198
+                ),
+                array(
+                    136,
+                    86,
+                    167
+                ),
+                array(
+                    129,
+                    15,
+                    124
+                )
+            );
+            $cores[] = array(
+                array(
+                    178,
+                    226,
+                    226
+                ),
+                array(
+                    102,
+                    194,
+                    164
+                ),
+                array(
+                    44,
+                    162,
+                    95
+                ),
+                array(
+                    0,
+                    109,
+                    44
+                )
+            );
+            $cores[] = array(
+                array(
+                    186,
+                    228,
+                    188
+                ),
+                array(
+                    123,
+                    204,
+                    196
+                ),
+                array(
+                    67,
+                    162,
+                    202
+                ),
+                array(
+                    8,
+                    104,
+                    172
+                )
+            );
+            $cores[] = array(
+                array(
+                    253,
+                    204,
+                    138
+                ),
+                array(
+                    252,
+                    141,
+                    89
+                ),
+                array(
+                    227,
+                    74,
+                    51
+                ),
+                array(
+                    179,
+                    0,
+                    0
+                )
+            );
+            $cores[] = array(
+                array(
+                    189,
+                    201,
+                    225
+                ),
+                array(
+                    116,
+                    169,
+                    207
+                ),
+                array(
+                    43,
+                    140,
+                    190
+                ),
+                array(
+                    4,
+                    90,
+                    141
+                )
+            );
+            $cores[] = array(
+                array(
+                    189,
+                    201,
+                    225
+                ),
+                array(
+                    103,
+                    169,
+                    207
+                ),
+                array(
+                    28,
+                    144,
+                    153
+                ),
+                array(
+                    1,
+                    108,
+                    89
+                )
+            );
+            $cores[] = array(
+                array(
+                    215,
+                    181,
+                    216
+                ),
+                array(
+                    223,
+                    101,
+                    176
+                ),
+                array(
+                    221,
+                    28,
+                    119
+                ),
+                array(
+                    152,
+                    0,
+                    67
+                )
+            );
+            $cores[] = array(
+                array(
+                    251,
+                    180,
+                    185
+                ),
+                array(
+                    247,
+                    104,
+                    161
+                ),
+                array(
+                    197,
+                    27,
+                    138
+                ),
+                array(
+                    122,
+                    1,
+                    119
+                )
+            );
+            $cores[] = array(
+                array(
+                    194,
+                    230,
+                    153
+                ),
+                array(
+                    120,
+                    198,
+                    121
+                ),
+                array(
+                    49,
+                    163,
+                    84
+                ),
+                array(
+                    0,
+                    104,
+                    55
+                )
+            );
+            $cores[] = array(
+                array(
+                    255,
+                    255,
+                    178
+                ),
+                array(
+                    254,
+                    204,
+                    92
+                ),
+                array(
+                    253,
+                    141,
+                    60
+                ),
+                array(
+                    240,
+                    59,
+                    32
+                )
+            );
 
             $cores = $cores[mt_rand(0, 9)];
             $estat = $this->statistics->basic($valores);
@@ -619,11 +836,7 @@ class MetaestatInfo
                 );
             }
         }
-        if (! empty($titulolayer)) {
-            // $titulolayer = mb_convert_encoding($titulolayer,"ISO-8859-1",mb_detect_encoding($titulolayer));
-        } else {
-            $titulolayer = mb_convert_encoding($sql["titulo"], "ISO-8859-1", mb_detect_encoding($sql["titulo"]));
-        }
+        $titulolayer = mb_convert_encoding($sql["titulo"], "ISO-8859-1", mb_detect_encoding($sql["titulo"]));
         // necessario para evitar problemas com ITENSDESC
         $titulolayer = str_replace(",", " ", $titulolayer);
         $titulolayer = str_replace("=", ": ", $titulolayer);
@@ -744,37 +957,191 @@ class MetaestatInfo
         $dados[] = "END";
         return array(
             "mapfile" => implode("\n", $dados),
-            "layer" => $nomeDoLayer,
-            "titulolayer" => $titulolayer
+            "layerName" => $nomeDoLayer,
+            "layerTitle" => $titulolayer,
+            "mapObj" => ms_newMapObjFromString(implode("\n", $dados))
         );
     }
+
     /**
      * Obtem os dados de uma medida de variavel
-     * @param id da medida
-     * @param filtro que sera concatenado ao sql
-     * @param 0|1 mostra ou nao todas as colunas da tabela com os dados
-     * @param coluna de agrupamento
-     * @param limite do numero de registros
-     * @param le os dados diretamente da tabela sem nenhum tipo de agrupamento, seja por data ou outro parametro
+     *
+     * @param
+     *            id da medida
+     * @param
+     *            filtro que sera concatenado ao sql
+     * @param
+     *            0|1 mostra ou nao todas as colunas da tabela com os dados
+     * @param
+     *            coluna de agrupamento
+     * @param
+     *            limite do numero de registros
+     * @param
+     *            le os dados diretamente da tabela sem nenhum tipo de agrupamento, seja por data ou outro parametro
      * @return string
      */
-    function dadosMedidaVariavel($id_medida_variavel,$filtro="",$todasascolunas = 0,$agruparpor = "",$limite="",$direto=false){
+    function dadosMedidaVariavel($id_medida_variavel, $filtro = "", $todasascolunas = 0, $agruparpor = "", $limite = "", $direto = false)
+    {
         set_time_limit(0);
-        $sql = $this->sqlMedidaVariavel($id_medida_variavel,$agruparpor,"polygon","",false,$filtro,$direto);
+        $sql = $this->sqlMedidaVariavel($id_medida_variavel, $agruparpor, "polygon", "", false, $filtro, $direto);
         $sqlf = $sql["sqlmapserver"];
-        //remove marcadores geo
-        $sqlf = explode("/*SE*/",$sqlf);
-        $sqlf = explode("/*SG*/",$sqlf[1]);
-        $sqlf = $sqlf[0]." ".$sqlf[2];
-        if($limite != ""){
-            $sqlf .= " limit ".$limite;
+        // remove marcadores geo
+        $sqlf = explode("/*SE*/", $sqlf);
+        $sqlf = explode("/*SG*/", $sqlf[1]);
+        $sqlf = $sqlf[0] . " " . $sqlf[2];
+        if ($limite != "") {
+            $sqlf .= " limit " . $limite;
         }
-        $sqlf = str_replace(",  FROM"," FROM",$sqlf);
-        $metaVariavel = $this->admin->i3geoestat_medida_variavel_variavel("",$id_medida_variavel);
-        if(!empty($metaVariavel["codigo_estat_conexao"])){
+        $sqlf = str_replace(",  FROM", " FROM", $sqlf);
+        $metaVariavel = $this->admin->i3geoestat_medida_variavel_variavel("", $id_medida_variavel);
+        if (! empty($metaVariavel["codigo_estat_conexao"])) {
             $res = $this->execSQL($sqlf);
             return $res;
         }
         return false;
+    }
+
+    function mapfileRegion($codigo_tipo_regiao, $outlinecolor = "255,0,0", $width = 1, $nomes = "nao", $forcaArquivo = false)
+    {
+        $tipolayer = "polygon";
+        // define o tipo correto de layer
+        $dg = $this->admin->regionGeometry($codigo_tipo_regiao);
+        $nomeDoLayer = uniqid("metaestat");
+        if (empty($tipolayer)) {
+            $tipolayer = "polygon";
+        }
+        if ($dg["dimension"] == 0) {
+            $tipolayer = "point";
+        }
+        if ($dg["dimension"] == 1) {
+            $tipolayer = "line";
+        }
+
+        $meta = $this->admin->i3geoestat_tipo_regiao($codigo_tipo_regiao);
+        $titulolayer = $titulolayer = mb_convert_encoding($meta["nome_tipo_regiao"], "ISO-8859-1", mb_detect_encoding($meta["nome_tipo_regiao"]));;
+        //$titulolayer = $this->util->iso2utf($titulolayer);;
+        // $conexao = $this->listaConexao($meta["codigo_estat_conexao"],true);
+        $conexao = $this->admin->metaestatConection();
+        $conexao = "user=" . $conexao["usuario"] . " password=" . $conexao["senha"] . " dbname=" . $conexao["bancodedados"] . " host=" . $conexao["host"] . " port=" . $conexao["porta"] . "";
+        $colunageo = $meta["colunageo"];
+        $srid = $meta["srid"];
+        // pega as colunas menos as do tipo geometry
+        $colunastabela = $this->admin->tableColumns($meta["codigo_estat_conexao"], $meta["esquemadb"], $meta["tabela"], "geometry", "!=");
+        // define as colunas que serao mostradas no sql
+        $vis = $meta["colunasvisiveis"];
+        if ($vis != "") {
+            $vis = str_replace(";", ",", $vis);
+            $vis = str_replace(",,", ",", $vis);
+            $vis = explode(",", $vis);
+            $itens = $vis; // array
+            $vis[] = $meta["identificador"];
+            $vis = array_unique($vis);
+            $visiveis = array();
+            // verifica se as colunas existem mesmo
+            foreach ($vis as $v) {
+                if (in_array($v, $colunastabela)) {
+                    $visiveis[] = $v;
+                }
+            }
+            $vis = implode(",", $visiveis);
+            // apelidos
+            $apelidos = $meta["apelidos"];
+            if ($apelidos == "") {
+                $apelidos = "Nome";
+            }
+            $apelidos = str_replace(";", ",", $apelidos);
+            $apelidos = str_replace(",,", ",", $apelidos);
+            $apelidos = $this->util->iso2utf($apelidos);
+            $apelidos = explode(",", $apelidos);
+            $apelidos = array_unique($apelidos);
+        } else {
+            $itens = array();
+            $apelidos = array();
+            $vis = implode(",", $colunastabela);
+        }
+        $sqlf = $colunageo . " from (select st_setsrid(" . $colunageo . "," . $srid . ") as $colunageo,$vis from " . $meta["esquemadb"] . "." . $meta["tabela"] . " /*FW*//*FW*/) as foo using unique " . $meta["identificador"] . " using srid=" . $srid;
+        $sqlf = str_replace(",,", ",", $sqlf);
+        $outlinecolor = str_replace(",", " ", $outlinecolor);
+        $dados[] = "MAP";
+        $dados[] = 'SYMBOLSET "' . $_SESSION["locaplic"] . '/symbols/simbolosv7.sym"';
+        $dados[] = 'FONTSET   "' . $_SESSION["locaplic"] . '/symbols/fontes.txt"';
+        $dados[] = "LAYER";
+        $dados[] = '	NAME "' . $nomeDoLayer . '"';
+        $dados[] = "	TYPE $tipolayer";
+        $dados[] = '	DATA "' . $sqlf . '"';
+        $dados[] = '	CONNECTION "metaestat"';
+        $dados[] = '	CONNECTIONTYPE POSTGIS';
+        $dados[] = '	TEMPLATE "none.htm"';
+        $dados[] = '	STATUS OFF';
+        $dados[] = '	METADATA';
+        $dados[] = '		TEMA "' . $titulolayer . '"';
+        $dados[] = '		CLASSE "SIM"';
+        $dados[] = '		METAESTAT "SIM"';
+        $dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "' . $codigo_tipo_regiao . '"';
+        $dados[] = '		TIP "' . $meta["colunanomeregiao"] . '"';
+        if (count($itens) == count($apelidos)) {
+            $dados[] = '		ITENS "' . implode(",", $itens) . '"';
+            $dados[] = '		ITENSDESC "' . implode(",", $apelidos) . '"';
+        }
+        $dados[] = '	END';
+        $dados[] = '    CLASS';
+        $dados[] = '        NAME ""';
+        $dados[] = '        STYLE';
+        $dados[] = '        	OUTLINECOLOR ' . $outlinecolor;
+        $dados[] = '        	WIDTH ' . $width;
+        if (strtolower($tipolayer) == "point") {
+            $dados[] = '        SYMBOL "ponto"';
+            $dados[] = '        SIZE 5';
+            $dados[] = '        COLOR 0 0 0 ';
+        } else {
+            $dados[] = '        	COLOR -1 -1 -1';
+        }
+        $dados[] = '        END';
+        $dados[] = '    END';
+        $dados[] = "END";
+        // toponimia
+        if ($nomes == "sim") {
+            $dados[] = "LAYER";
+            $dados[] = '	NAME "' . $nomeDoLayer . '_anno"';
+            $dados[] = "	TYPE POINT";
+            $dados[] = '	DATA "' . $sqlf . '"';
+            $dados[] = '	CONNECTION "metaestat"';
+            $dados[] = '	CONNECTIONTYPE POSTGIS';
+            $dados[] = '	TEMPLATE "none.htm"';
+            $dados[] = '	STATUS OFF';
+            $dados[] = '    LABELITEM "' . $meta["colunanomeregiao"] . '"';
+            $dados[] = '	METADATA';
+            $dados[] = '		TEMA "' . $titulolayer . ' (nomes)"';
+            $dados[] = '		CLASSE "SIM"';
+            $dados[] = '		METAESTAT "SIM"';
+            $dados[] = '		METAESTAT_CODIGO_TIPO_REGIAO "' . $codigo_tipo_regiao . '"';
+            $dados[] = '	END';
+            $dados[] = '    CLASS';
+            $dados[] = '        NAME ""';
+            $dados[] = '        LABEL';
+            $dados[] = '           FONT "arial"';
+            $dados[] = '           SIZE 10';
+            $dados[] = '           COLOR 0 0 0';
+            $dados[] = '           MINDISTANCE 0';
+            $dados[] = '           MINFEATURESIZE 0';
+            $dados[] = '           OFFSET 0 0';
+            $dados[] = '           OUTLINECOLOR 255 255 255';
+            $dados[] = '           PARTIALS FALSE';
+            $dados[] = '           POSITION AUTO';
+            $dados[] = '           SHADOWSIZE 1 1';
+            $dados[] = '           TYPE TRUETYPE';
+            $dados[] = '        END';
+            $dados[] = '    END';
+            $dados[] = "END";
+        }
+        $dados[] = "END";
+
+        return array(
+            "mapfile" => implode("\n", $dados),
+            "layerName" => $nomeDoLayer,
+            "layerTitle" => $titulolayer,
+            "mapObj" => ms_newMapObjFromString(implode("\n", $dados)),
+            "codigo_tipo_regiao" => $codigo_tipo_regiao
+        );
     }
 }

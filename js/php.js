@@ -178,7 +178,7 @@ i3GEO.php =
 	    console.error("Veja i3GEO.catalogoEstrelas.identifica()");
 	},
 	adtema : function(funcao, temas, locaplic, sid) {
-	    console.error("Veja i3GEO.mapa.adtema()");
+	    console.error("Veja i3GEO.mapa.addLayers()");
 	},
 	escalagrafica : function(funcao) {
 	    console.error("Removido na versao 8");
@@ -229,7 +229,7 @@ i3GEO.php =
 	    console.error("Removido na versao 8");
 	},
 	listaFontesTexto : function(funcao) {
-	    console.error("Veja i3GEO.mapa.textFont");
+	    console.error("Veja i3GEO.mapa.textFontList");
 	},
 	listaEpsg : function(funcao) {
 	    console.error("Veja i3GEO.mapa.epsglist");

@@ -843,10 +843,9 @@ i3GEO.arvoreDeCamadas =
                 btn: false,
                 par: {
                     off: off,
-                    on: on,
-                    funcao: "toggleLayersVis"
+                    on: on
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/toggleLayersVis",
                 fn: function(data){
                     if (after){
                         after.call(after, data);

@@ -36,7 +36,7 @@
                     },
                     {
                         "name": "wkt",
-                        "in": "path",
+                        "in": "query",
                         "description": "Get results geometry",
                         "required": true,
                         "type": "string",
@@ -47,8 +47,135 @@
                     },
                     {
                         "name": "extent",
-                        "in": "path",
+                        "in": "query",
                         "description": "Geographic extent (xmin, ymin, xmax, ymax)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/layer/{mapId}/{layerName}/moveUp/": {
+            "get": {
+                "tags": [
+                    "layer"
+                ],
+                "summary": "Change layer position in a map",
+                "operationId": "moveUp",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerName",
+                        "in": "path",
+                        "description": "Layer name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/layer/{mapId}/{layerName}/moveDown/": {
+            "get": {
+                "tags": [
+                    "layer"
+                ],
+                "summary": "Change layer position in a map",
+                "operationId": "moveUp",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerName",
+                        "in": "path",
+                        "description": "Layer name",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/layer/{mapId}/{layerName}/toggleStatusClass/": {
+            "get": {
+                "tags": [
+                    "layer class"
+                ],
+                "summary": "Change class status",
+                "operationId": "toggleStatusClass",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerName",
+                        "in": "path",
+                        "description": "Layer name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "classIds",
+                        "in": "query",
+                        "description": "Class ids list",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "data"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/layer/{mapId}/{layerName}/zoomSel/": {
+            "get": {
+                "tags": [
+                    "layer"
+                ],
+                "summary": "Set map extent by layer selected shapes",
+                "operationId": "zoomSel",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerName",
+                        "in": "path",
+                        "description": "Layer name",
                         "required": true,
                         "type": "string"
                     }
@@ -355,8 +482,7 @@
         "/i3geo/restmapserver/map/{mapId}/getLegendParameters/": {
             "get": {
                 "tags": [
-                    "map",
-                    "legend"
+                    "map legend"
                 ],
                 "summary": "Get legend parameters",
                 "operationId": "getLegendParameters",
@@ -599,7 +725,7 @@
         "/i3geo/restmapserver/map/{mapId}/addLayerWms/": {
             "get": {
                 "tags": [
-                    "map update"
+                    "map add layer"
                 ],
                 "summary": "Add layer by WMS",
                 "operationId": "addLayerWms",
@@ -780,6 +906,251 @@
                             "true",
                             "false"
                         ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/addLayers/": {
+            "get": {
+                "tags": [
+                    "map add layer"
+                ],
+                "summary": "Add new layers to map",
+                "operationId": "addLayers",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "layerNames",
+                        "in": "query",
+                        "description": "Layers list. Map files with the same names defined in the list must exist in the i3geo/temas folder.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/searchInLayers/": {
+            "get": {
+                "tags": [
+                    "map attributes"
+                ],
+                "summary": "Search for data in existing layers on the map that allow searching.",
+                "operationId": "searchInLayers",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "search",
+                        "in": "query",
+                        "description": "Search string",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/addLayerMetaestatFilter/": {
+            "get": {
+                "tags": [
+                    "map add layer"
+                ],
+                "summary": "Add a new layer to the map based on the statistical metadata system.",
+                "operationId": "addLayerMetaestatFilter",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "measure",
+                        "in": "query",
+                        "description": "Measure id.",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "filter",
+                        "in": "query",
+                        "description": "Filters that will be applied. Format: columnName * value | columName * value .",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "classification",
+                        "in": "query",
+                        "description": "Classification type code when there are more than one.",
+                        "required": true,
+                        "type": "number"
+                    },
+                    {
+                        "name": "opacity",
+                        "in": "query",
+                        "description": "Layer opacity.",
+                        "required": false,
+                        "type": "number"
+                    },
+                    {
+                        "name": "regiontype",
+                        "in": "query",
+                        "description": "Region type code.",
+                        "required": false,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/addLayerRegion/": {
+            "get": {
+                "tags": [
+                    "map add layer"
+                ],
+                "summary": "Add a new layer to the map based on the statistical metadata system and regions.",
+                "operationId": "addLayerRegion",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "region",
+                        "in": "query",
+                        "description": "Region id.",
+                        "required": true,
+                        "type": "number"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/toggleLayersVis/": {
+            "get": {
+                "tags": [
+                    "map update"
+                ],
+                "summary": "Turn layers visibility on or off",
+                "operationId": "toggleLayersVis",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "on",
+                        "in": "query",
+                        "description": "Layers to turn on",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "off",
+                        "in": "query",
+                        "description": "Layers to turn off",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/addLayerShp/": {
+            "get": {
+                "tags": [
+                    "map add layer"
+                ],
+                "summary": "Add layer by shapefile",
+                "operationId": "addLayerShp",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "arq",
+                        "in": "query",
+                        "description": "Shape file. You must configure file system access permissions. See in ms_configura.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Result status"
+                    }
+                }
+            }
+        },
+        "/i3geo/restmapserver/map/{mapId}/addLayerImg/": {
+            "get": {
+                "tags": [
+                    "map add layer"
+                ],
+                "summary": "Add layer by image file",
+                "operationId": "addLayerImg",
+                "parameters": [
+                    {
+                        "name": "mapId",
+                        "in": "path",
+                        "description": "Map id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "arq",
+                        "in": "query",
+                        "description": "Image file. You must configure file system access permissions. See in ms_configura.",
+                        "required": true,
+                        "type": "string"
                     }
                 ],
                 "responses": {

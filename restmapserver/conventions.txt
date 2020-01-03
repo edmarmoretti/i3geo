@@ -10,6 +10,12 @@ Nomes de variávies
 
     $layerNames - lista de nomes de layers $e = explode(",", str_replace(" ", ",", $layerNames));
 
+    $classIds - lista de ids de classes de um layer
+
+    $classObj - objeto class de um layer
+
+    $styleObj - objeto style de uma classe
+
 Get:
 
     i3GEO.request.get({
@@ -28,3 +34,9 @@ Get:
 Functions:
 
     limpasel : function({verifica = false}={}) {}
+
+Snippets:
+
+    for (const column of Object.keys(data.values)) {
+        var alias = data.values[column].alias;
+    }

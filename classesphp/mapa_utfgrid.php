@@ -64,7 +64,12 @@ if ($cache == true && $_GET["cache"] != "nao") {
             chmod(dirname($nome), 0744);
         }
         ms_iostripstdoutbuffercontenttype();
-        file_put_contents($nome,ms_iogetstdoutbufferstring());
+        //foi identificado um erro qd se usa file_put_contents
+        //e feito o acrescimo da string no arquivo ao inves de zerar o conteudo
+        //file_put_contents($nome,ms_iogetstdoutbufferstring());
+        $handle = fopen($nome, "x+");
+        fwrite($handle, ms_iogetstdoutbufferstring);
+        fclose($handle);
         chmod($nome, 0744);
     }
 }

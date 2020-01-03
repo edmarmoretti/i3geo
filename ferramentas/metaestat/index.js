@@ -406,7 +406,7 @@ i3GEOF.metaestat = {
                             i3GEOF.metaestat.analise.comboCamadas();
                         };
                         i3GEOF.metaestat.comum.aguarde();
-                        i3GEO.mapa.adtema(atualiza,retorno.mapfile);
+                        i3GEO.mapa.addLayers(atualiza,retorno.mapfile);
                     }
                 };
                 if(v != true){

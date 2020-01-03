@@ -6,36 +6,7 @@ class Layer
 
     function __construct()
     {
-        include_once (I3GEOPATH . "/restmapserver/classes/util.php");
         $this->util = new \restmapserver\Util();
-    }
-
-    function open($mapId = "")
-    {
-        if ($mapId == "") {
-            return false;
-        }
-        if (isset($_SESSION["map_file"])) {
-            return true;
-        }
-        ini_set("session.use_cookies", 0);
-        session_name("i3GeoPHP");
-        session_id($mapId);
-        session_start([
-            'read_and_close' => true
-        ]);
-        if (@$_SESSION["fingerprint"]) {
-            $f = explode(",", $_SESSION["fingerprint"]);
-            if (md5('I3GEOSEC' . $_SERVER['HTTP_USER_AGENT'] . session_id()) != $f[0]) {
-                return false;
-            }
-        } else {
-            return false;
-        }
-        if (! isset($_SESSION["map_file"])) {
-            return false;
-        }
-        return true;
     }
 
     /**
@@ -109,6 +80,9 @@ class Layer
         if ($layerObj == "") {
             return false;
         }
+        if ($layerObj->connectiontype == MS_GRATICULE) {
+            return false;
+        }
         if (strtolower($layerObj->getmetadata("identifica")) == "nao") {
             return false;
         }
@@ -118,14 +92,20 @@ class Layer
         if (strtolower($layerObj->getmetadata("TEMA")) == "nao") {
             return false;
         }
+        if ($layerObj->getmetadata("PLUGINI3GEO") != "") {
+            $teste = json_decode($layerObj->getmetadata("PLUGINI3GEO"), true);
+            if ($teste["plugin"] == "layergeojson") {
+                return false;
+            }
+        }
         if ($layerObj->connectiontype != MS_WMS) {
             $this->setCon($layerObj);
             $sopen = $layerObj->open();
             $this->hiddeCon($layerObj);
+            $layerObj->close();
             if ($sopen == MS_FAILURE) {
                 return false;
             }
-            $layerObj->close();
         }
         return true;
     }
@@ -138,6 +118,9 @@ class Layer
      */
     function setMapExtent($mapObj, $extent = false)
     {
+        if(!$mapObj){
+            return false;
+        }
         if ($extent) {
             $extmapa = $mapObj->extent;
             $e = explode(",", str_replace(" ", ",", $extent));
@@ -183,7 +166,7 @@ class Layer
             $locimg = $layerObj->getmetadata("IMGLOC"); // indica o local onde est&atilde;o os &iacute;cones
         }
         $tips = $layerObj->getmetadata("TIP");
-        //$nitens = count($itensLayer);
+        // $nitens = count($itensLayer);
         if ($itens == "") {
             $itens = $itensLayer;
         } else {
@@ -238,7 +221,7 @@ class Layer
                 $locimg = $layerObj->getmetadata("IMGLOC"); // indica o local onde est&atilde;o os &iacute;cones
             }
             $tips = $layerObj->getmetadata("TIP");
-            //$nitens = count($itensLayer);
+            // $nitens = count($itensLayer);
             if ($itens == "") {
                 $itens = $itensLayer;
             } else {
@@ -474,13 +457,11 @@ class Layer
         return $resultado;
     }
 
-    function queryByrect($mapId, $layerName, $wkt = false, $extent = false)
+    function queryByrect($mapObj, $layerName, $wkt = false, $extent = false)
     {
-        if ($this->open($mapId) == false) {
+        if(!$mapObj){
             return false;
         }
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-
         $layer = $mapObj->getLayerByname($layerName);
         if ($this->getAttributesIsValid($layer) == false) {
             return false;
@@ -498,7 +479,64 @@ class Layer
             return false;
         }
     }
-    function setCon($layerObj){
+
+    function searchColumn($mapObj, $layerObj, $search, $column, $extent)
+    {
+        if(!$mapObj){
+            return false;
+        }
+        if (strtoupper($layerObj->getmetadata("convcaracter")) == "SIM") {
+            $convC = function ($texto) {
+                return $this->util->iso2utf($texto);
+            };
+        } else {
+            $convC = function ($texto) {
+                return $texto;
+            };
+        }
+        $this->ativateQuery($layerObj);
+        $itensLayer = $this->getItens($layerObj);
+        $itensParameters = $this->getItensParameters($layerObj, $itensLayer);
+        $keys = array_combine($itensParameters["itens"], $itensParameters["itensdesc"]);
+        $columnTitle = $column;
+        if ($keys[$column]) {
+            $columnTitle = $keys[$column];
+        }
+        $this->setCon($layerObj);
+        $rectObj = $this->setMapExtent($mapObj, $extent);
+        $result = @$layerObj->queryByRect($rectObj);
+        $this->hiddeCon($layerObj);
+
+        $resultado = array();
+        $registers = array();
+        if ($result == MS_SUCCESS) {
+            $search = $this->util->remove_accents(strtolower($search));
+            $layerObj->open();
+            $res_count = $layerObj->getNumresults();
+            for ($i = 0; $i < $res_count; ++ $i) {
+                $shapeObj = $layerObj->getShape($layerObj->getResult($i));
+                $valor = trim($shapeObj->values[$column]);
+                $valorSemAcento = $this->util->remove_accents(strtolower($valor));
+                if (stristr($valorSemAcento, $search)) {
+                    $registers[] = array(
+                        "box" => $this->shapeExtent($mapObj, $layerObj, $shapeObj),
+                        "value" => $convC($valor)
+                    );
+                }
+            }
+            $resultado = array(
+                "layerName" => $layerObj->name,
+                "layerTitle" => $this->util->iso2utf($layerObj->getmetadata("tema")),
+                "columnTitle" => $this->util->iso2utf($columnTitle),
+                "column" => $column,
+                "data" => $registers
+            );
+        }
+        return ($resultado);
+    }
+
+    function setCon($layerObj)
+    {
         if ($layerObj->connectiontype == MS_POSTGIS) {
             $lcon = $layerObj->connection;
             if (($lcon == " ") || ($lcon == "") || (in_array($lcon, array_keys($_SESSION["postgis_mapa"])))) {
@@ -510,95 +548,263 @@ class Layer
             }
         }
     }
-    function hiddeCon($objLayer){
+
+    function hiddeCon($objLayer)
+    {
         if ($objLayer->connectiontype == MS_POSTGIS) {
             $objLayer->set("connection", $objLayer->getmetadata("CONEXAOORIGINAL"));
         }
     }
-    function moveUp($mapId, $layerName)
+
+    function moveUp($mapObj, $layerName)
     {
-        if ($this->open($mapId) == false) {
+        if(!$mapObj){
             return false;
         }
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
         $layerObj = $mapObj->getLayerByname($layerName);
         $qyfile = str_replace(".map", ".qy", $_SESSION["map_file"]);
-        if (file_exists($qyfile)){
-            unlink ($qyfile);
+        if (file_exists($qyfile)) {
+            unlink($qyfile);
         }
         $nl = $mapObj->numlayers;
         $mover = 1;
         $indice = $layerObj->index;
-        if ($indice < ($nl - 1))
-        {
+        if ($indice < ($nl - 1)) {
             $conta = $indice + 1;
             $tmpl = $mapObj->getlayer($conta);
-            if (($tmpl->getmetadata("escondido") != ""))
-            {
+            if (($tmpl->getmetadata("escondido") != "")) {
                 $mover = $mover + 1;
                 $conta = $conta + 1;
             }
             $tmpl = $mapObj->getlayer($conta);
-            if (($tmpl->group) <> "")
-            {
+            if (($tmpl->group) != "") {
                 $gr = $tmpl->group;
                 $conta = $conta + 1;
                 $tmpl = $mapObj->getlayer($conta);
-                while($gr == $tmpl->group)
-                {
-                    $mover= $mover + 1;
+                while ($gr == $tmpl->group) {
+                    $mover = $mover + 1;
                     $conta = $conta + 1;
                     $tmpl = $mapObj->getlayer($conta);
                 }
             }
         }
-        for ($i=0;$i<$mover;++$i){
+        for ($i = 0; $i < $mover; ++ $i) {
             $moveu = $mapObj->moveLayerDown($indice);
         }
         $mapObj->save($_SESSION["map_file"]);
         return true;
     }
-    function moveDown($mapId, $layerName)
+
+    function moveDown($mapObj, $layerName)
     {
-        if ($this->open($mapId) == false) {
+        if(!$mapObj){
             return false;
         }
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
         $layerObj = $mapObj->getLayerByname($layerName);
         $qyfile = str_replace(".map", ".qy", $_SESSION["map_file"]);
-        if (file_exists($qyfile)){
-            unlink ($qyfile);
+        if (file_exists($qyfile)) {
+            unlink($qyfile);
         }
         $nl = $mapObj->numlayers;
         $mover = 1;
         $indice = $layerObj->index;
-        if ($indice < $nl)
-        {
+        if ($indice < $nl) {
             $conta = $indice - 1;
             $tmpl = $mapObj->getlayer($conta);
-            if (($tmpl->getmetadata("escondido") != ""))
-            {
+            if (($tmpl->getmetadata("escondido") != "")) {
                 $mover = $mover + 1;
                 $conta = $conta - 1;
             }
             $tmpl = $mapObj->getlayer($conta);
-            if (($tmpl->group) <> "")
-            {
+            if (($tmpl->group) != "") {
                 $gr = $tmpl->group;
                 $conta = $conta - 1;
                 $tmpl = $mapObj->getlayer($conta);
-                while($gr == $tmpl->group)
-                {
-                    $mover= $mover + 1;
+                while ($gr == $tmpl->group) {
+                    $mover = $mover + 1;
                     $conta = $conta - 1;
                     $tmpl = $mapObj->getlayer($conta);
                 }
             }
         }
-        for ($i=0;$i<$mover;++$i){
+        for ($i = 0; $i < $mover; ++ $i) {
             $moveu = $mapObj->moveLayerUp($indice);
         }
         $mapObj->save($_SESSION["map_file"]);
         return true;
+    }
+    function shapeExtent($mapObj, $layerObj, $shapeObj)
+    {
+        if(!$mapObj){
+            return false;
+        }
+        $prjMapa = $mapObj->getProjection();
+        $prjTema = $layerObj->getProjection();
+        $ret = $shapeObj->bounds;
+        //
+        // verifica se o retangulo est&aacute; ou n&atilde;o em coordenadas geogr&aacute;ficas
+        //
+        if ($ret->minx > 180 || $ret->minx < - 180) {
+            // reprojeta o retangulo
+            if (($prjTema != "") && ($prjMapa != $prjTema)) {
+                $projInObj = ms_newprojectionobj($prjTema);
+                $projOutObj = ms_newprojectionobj($prjMapa);
+                $ret->project($projInObj, $projOutObj);
+            }
+        }
+        $ext = $ret->minx . " " . $ret->miny . " " . $ret->maxx . " " . $ret->maxy;
+        if (($shapeObj->type == MS_SHP_POINT) || ($shapeObj->type == 0)) {
+            $minx = $ret->minx;
+            $minx = $minx - 0.03;
+            $maxx = $ret->maxx;
+            $maxx = $maxx + 0.03;
+            $miny = $ret->miny;
+            $miny = $miny - 0.03;
+            $maxy = $ret->maxy;
+            $maxy = $maxy + 0.03;
+            $ext = $minx . " " . $miny . " " . $maxx . " " . $maxy;
+        }
+        return $ext;
+    }
+
+    function toggleStatusClass($mapObj, $layerName, $classIds)
+    {
+        if(!$mapObj){
+            return false;
+        }
+        $layerObj = $mapObj->getLayerByname($layerName);
+        $classIds = explode(",", str_replace(" ", ",", $classIds));
+        foreach($classIds as $classId){
+            $classObj = $layerObj->getclass($classId);
+            $status = $classObj->status;
+            if ($status == MS_OFF) {
+                $classObj->set("status", MS_ON);
+                if ($layerObj->type == 3) {
+                    $styleObj = $classObj->getstyle(0);
+                    $styleObj->set("opacity", 100);
+                }
+            } else {
+                $classObj->set("status", MS_OFF);
+                if ($layerObj->type == 3) {
+                    $styleObj = $classObj->getstyle(0);
+                    $styleObj->set("opacity", 0);
+                }
+            }
+            $layerObj->setMetaData("cache", "");
+        }
+        $mapObj->save($_SESSION["map_file"]);
+        return true;
+    }
+
+    function zoomSel($mapObj, $layerName)
+    {
+        if(!$mapObj){
+            return false;
+        }
+        $layerObj = $mapObj->getLayerByname($layerName);
+        if($mapObj->getmetadata("interface") == "googlemaps"){
+            $projO = $mapObj->getProjection();
+            $projecao = $this->util->getDefaultProjection("epsg");
+            $mapObj->setProjection("init=epsg:".$projecao);
+        }
+        $extatual = $mapObj->extent;
+        $prjMapa = $mapObj->getProjection();
+        $prjTema = $layerObj->getProjection();
+        $xmin = array();
+        $xmax = array();
+        $ymin = array();
+        $ymax = array();
+        $shapes = $this->getSelectedShapes($layerObj,$mapObj);
+        $xmin = array();
+        $xmax = array();
+        $ymin = array();
+        $ymax = array();
+        foreach($shapes as $shape)
+        {
+            $bound = $shape->bounds;
+            $xmin[] = $bound->minx;
+            $xmax[] = $bound->maxx;
+            $ymin[] = $bound->miny;
+            $ymax[] = $bound->maxy;
+        }
+        $ret = ms_newRectObj();
+        $ret->set("minx",min($xmin));
+        $ret->set("miny",min($ymin));
+        $ret->set("maxx",max($xmax));
+        $ret->set("maxy",max($ymax));
+        if (($prjTema != "") && ($prjMapa != $prjTema))
+        {
+            $projInObj = ms_newprojectionobj($prjTema);
+            $projOutObj = ms_newprojectionobj($prjMapa);
+            $ret->project($projInObj, $projOutObj);
+        }
+        $extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
+        if($mapObj->getmetadata("interface") == "googlemaps"){
+            $mapObj->setProjection($projO);
+        }
+        $e = $mapObj->extent;
+        $ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
+        return($ext);
+    }
+
+    function getSelectedShapes($objLayer, $objMapa)
+    {
+        $shapes = array();
+        $qyfile = dirname($_SESSION["map_file"]) . "/" . $objLayer->name . "_qy.map";
+        if (! file_exists($qyfile)) {
+            return $shapes;
+        }
+        $handle = fopen($qyfile, "r");
+        $conteudo = fread($handle, filesize($qyfile));
+        fclose($handle);
+        $listaDeIndices = unserialize($conteudo);
+        if (count($listaDeIndices) == 0) {
+            return $shapes;
+        }
+        if ($objLayer->connectiontype != MS_POSTGIS) {
+            $this->loadQuery($objLayer, $objMapa);
+            $sopen = $objLayer->open();
+            $res_count = $objLayer->getNumresults();
+            $centroides = array();
+            $shapes = array();
+            for ($i = 0; $i < $res_count; ++ $i) {
+                $shape = $objLayer->getShape($objLayer->getResult($i));
+                $shp_index = $shape->index;
+                $shapes[] = $shape;
+            }
+            $fechou = $objLayer->close();
+        } else {
+            $rect = ms_newRectObj();
+            $rect->set("minx", - 180);
+            $rect->set("miny", - 90);
+            $rect->set("maxx", 180);
+            $rect->set("maxy", 90);
+            $status = $objLayer->open();
+            $status = $objLayer->whichShapes($rect);
+            while ($shape = $objLayer->nextShape()) {
+                if (in_array($shape->index, $listaDeIndices)) {
+                    $shapes[] = $shape;
+                }
+            }
+            $objLayer->close();
+        }
+        return $shapes;
+    }
+
+    function loadQuery($objlayer, &$objmapa)
+    {
+        $qyfile = dirname($_SESSION["map_file"]) . "/" . $objlayer->name . "_qy.map";
+        if (file_exists($qyfile)) {
+            $indxlayer = $objlayer->index;
+            $handle = fopen($qyfile, "r");
+            $conteudo = fread($handle, filesize($qyfile));
+            fclose($handle);
+            $shp = unserialize($conteudo);
+            foreach ($shp as $indx) {
+                $objmapa->querybyindex($indxlayer, - 1, $indx, MS_TRUE);
+            }
+            return true;
+        }
+        return false;
     }
 }

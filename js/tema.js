@@ -172,16 +172,13 @@ i3GEO.tema =
          *
          * {string} - codigo do tema
          */
-        zoomsel : function(tema) {
+        zoomsel : function(layerName) {
             i3GEO.request.get({
                 snackbar: false,
                 snackbarmsg: false,
                 btn: false,
-                par: {
-                    tema: tema,
-                    funcao: "zoomsel"
-                },
-                prog: "/serverapi/layer/",
+                par: {},
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/zoomSel",
                 fn: function(data){
                     i3GEO.Interface.zoom2ext(data);
                 }

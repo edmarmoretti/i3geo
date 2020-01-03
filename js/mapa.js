@@ -232,16 +232,15 @@ i3GEO.mapa =
                 }
             }
         },
-        adtema : function(after, temas) {
+        addLayers : function(after, layerNames) {
             i3GEO.request.get({
                 snackbar: true,
                 snackbarmsg: $trad("camadaadic"),
                 btn: false,
                 par: {
-                    funcao: "adtema",
-                    temas: temas
+                    layerNames: layerNames
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayers",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     if (after){
@@ -250,15 +249,13 @@ i3GEO.mapa =
                 }
             });
         },
-        textFont : function(after) {
+        textFontList : function(after) {
             i3GEO.request.get({
                 snackbar: false,
                 snackbarmsg: false,
                 btn: false,
-                par: {
-                    funcao: "textfont"
-                },
-                prog: "/serverapi/map/",
+                par: {},
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/textFontList",
                 fn: function(data){
                     if (after){
                         after.call(after, data);
@@ -312,16 +309,15 @@ i3GEO.mapa =
                 }
             });
         },
-        adicionaTemaSHP : function(after, arq){
+        addLayerShp : function(after, arq){
             i3GEO.request.get({
                 snackbar: false,
                 snackbarmsg: false,
                 btn: false,
                 par: {
-                    arq: arq,
-                    funcao: "adicionaTemaSHP"
+                    arq: arq
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerShp",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     if (after){
@@ -330,16 +326,15 @@ i3GEO.mapa =
                 }
             });
         },
-        adicionaTemaIMG : function(after, arq) {
+        addLayerImg : function(after, arq) {
             i3GEO.request.get({
                 snackbar: false,
                 snackbarmsg: false,
                 btn: false,
                 par: {
-                    arq: arq,
-                    funcao: "adicionaTemaIMG"
+                    arq: arq
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerImg",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     if (after){
@@ -398,11 +393,11 @@ i3GEO.mapa =
                 snackbar: true,
                 snackbarmsg: $trad("maprefresh"),
                 btn: false,
-                par: {
-                    funcao: "parameters"
-                },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/getParameters",
                 fn: function(data){
+                    if (typeof (console) !== 'undefined')
+                        console.info("i3GEO.mapa.refresh()");
+
                     i3GEO.atualizaParametros(data.variaveis);
                     var temp = i3GEO.arvoreDeCamadas.converteChaveValor2normal(data.temas);
                     try {

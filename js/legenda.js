@@ -101,12 +101,12 @@ i3GEO.legenda =
 	    });
 	    if (atualiza == true) {
 		i3GEO.legenda.CAMADAS = i3GEO.util.cloneObj(i3GEO.arvoreDeCamadas.CAMADAS);
-		i3GEO.legenda.criaLegendaJSON(tamanho[0], tamanho[1],temp);
+		i3GEO.legenda.getLegendParameters(tamanho[0], tamanho[1],temp);
 	    }
 	},
-	criaLegendaJSON : function(w, h, after){
+	getLegendParameters : function(w, h, after){
 	    if (typeof (console) !== 'undefined')
-		console.info("i3GEO.legenda.criaLegendaJSON");
+		console.info("i3GEO.legenda.getLegendParameters");
 
 	    i3GEO.request.get({
 		snackbar: false,
@@ -217,20 +217,22 @@ i3GEO.legenda =
 	 */
 	inverteStatusClasse : function(leg) {
 	    var inverte = function(tema, classe, after){
-		i3GEO.request.get({
-		    snackbar: false,
-		    snackbarmsg: false,
-		    btn: false,
-		    par: {
-			tema: tema,
-			classe: classe,
-			funcao: "inverteStatusClasse"
-		    },
-		    prog: "/serverapi/layer/",
-		    fn: function(data){
-			i3GEO.Interface.atualizaTema(data, leg.name);
-		    }
-		});
+	        i3GEO.request.get({
+	            snackbar: false,
+	            snackbarmsg: false,
+	            btn: false,
+	            par: {
+                        classIds: classe
+                    },
+	            prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + tema + "/toggleStatusClass",
+	            fn: function(data){
+	                if (after){
+	                    after.call(after, data);
+	                } else {
+	                    i3GEO.Interface.atualizaTema(data, leg.name);
+	                }
+	            }
+	        });
 	    };
 	    //verifica se tem apenas uma classe para desligar a camada e nao a classe
 	    if(i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[leg.name].numclasses == 1){

@@ -544,7 +544,7 @@ Exemplo:
 $navegadoresLocais = array(
 		"drives"=>array(
 			"dados"=>"/var/www/i3geo/aplicmap/dados",
-			"geodados"=>"/var/www/i3geo/aplicmap"
+			"geodados"=>"/var/www/geodados"
 		),
 		"ips"=>array("localhost","1.1.1.1")
 	);

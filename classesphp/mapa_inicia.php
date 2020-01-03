@@ -185,7 +185,7 @@
     $protocolo = explode("/", $_SERVER['SERVER_PROTOCOL']);
     $protocolo = $protocolo[0];
     $protocolo = strtolower($protocolo) . '://' . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
-    $urli3geo = str_replace("/serverapi/map/index.php", "", $protocolo . $_SERVER["PHP_SELF"]);
+    $urli3geo = str_replace("/restmapserver/map/index.php", "", $protocolo . $_SERVER["PHP_SELF"]);
     // altera o tamanho do query map para ficar igual ao do mapa
     sobeAnno($_SESSION["map_file"]);
     $m = new Mapa($_SESSION["map_file"]);

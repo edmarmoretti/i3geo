@@ -360,17 +360,13 @@ i3GEO.catalogoMetaestat = {
                 snackbarmsg: false,
                 btn: false,
                 par: {
-                    funcao: "addLayerMetaestat",
                     measure: i3GEO.catalogoMetaestat._parameters[0].id_medida_variavel,
                     filter: i3GEO.catalogoMetaestat.getFilter(),
-                    title: "",
                     classification: $("#i3geoCartoTipoClassificacao select").val(),
-                    group: "",
                     regiontype: $("#i3geoCartoRegioesMedidasVariavel select").val(),
-                    layertype: "",
                     opacity: 70
                 },
-                prog: "/serverapi/map/",
+                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerMetaestatFilter",
                 fn: function(){
                     i3GEO.mapa.refresh();
                 }

@@ -10,17 +10,20 @@ $config['addContentLengthHeader'] = false;
 $app = new \Slim\App([
     'settings' => $config
 ]);
+include (I3GEOPATH . "/restmapserver/classes/map.php");
+include (I3GEOPATH . "/restmapserver/classes/layer.php");
+include (I3GEOPATH . "/restmapserver/classes/util.php");
+include (I3GEOPATH . "/restmapserver/classes/admin.php");
+include (I3GEOPATH . "/restmapserver/classes/metaestatinfo.php");
+include (I3GEOPATH . "/restmapserver/classes/statistics.php");
 $container = $app->getContainer();
 $container['util'] = function ($c) {
-    include (I3GEOPATH . "/restmapserver/classes/util.php");
     return new \restmapserver\Util();
 };
 $container['mscriamapa'] = function ($c) {
-    include (I3GEOPATH . "/restmapserver/classes/mscriamapa.php");
     return new \restmapserver\Mscriamapa();
 };
 $container['map'] = function ($c) {
-    include (I3GEOPATH . "/restmapserver/classes/map.php");
     return new \restmapserver\Map();
 };
 $container['identify'] = function ($c) {
@@ -258,6 +261,7 @@ $app->map([
     'POST'
 ], '/create/', function (Request $request, Response $response, $args) {
     $param = $this->util->sanitizestrings($request->getQueryParams());
+    include (I3GEOPATH . "/restmapserver/classes/mscriamapa.php");
     $mapid = $this->mscriamapa->createMap($param);
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
@@ -375,7 +379,7 @@ $app->map([
  *
  * @SWG\Get(
  * 		path="/i3geo/restmapserver/map/{mapId}/getLegendParameters/",
- * 		tags={"map","legend"},
+ * 		tags={"map legend"},
  * 		operationId="getLegendParameters",
  * 		summary="Get legend parameters",
  * 		@SWG\Parameter(
@@ -587,7 +591,7 @@ $app->map([
     'POST'
 ], '/{mapId}/createLayerPointFeature', function (Request $request, Response $response, $args) {
     $param = $this->util->sanitizestrings($request->getQueryParams());
-    $data = $this->map->createLayerPointFeature($args["mapId"],$param["symbol"], $param["x"], $param["y"], $param["offsetx"], $param["offsety"], $param["color"], $param["size"], $param["layerTitle"]);
+    $data = $this->map->createLayerPointFeature($args["mapId"], $param["symbol"], $param["x"], $param["y"], $param["offsetx"], $param["offsety"], $param["color"], $param["size"], $param["layerTitle"]);
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
         ->write(json_encode($data));
@@ -625,10 +629,10 @@ $app->map([
     'POST'
 ], '/{mapId}/extentToLayer', function (Request $request, Response $response, $args) {
     $param = $this->util->sanitizestrings($request->getQueryParams());
-    $data = $this->map->extentToLayer($args["mapId"],$param["layerName"]);
+    $data = $this->map->extentToLayer($args["mapId"], $param["layerName"]);
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
-    ->write(json_encode($data));
+        ->write(json_encode($data));
     return $response;
 });
 /**
@@ -659,14 +663,14 @@ $app->map([
     $data = $this->map->clearSel($args["mapId"]);
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
-    ->write(json_encode($data));
+        ->write(json_encode($data));
     return $response;
 });
 /**
  *
  * @SWG\Get(
  * 		path="/i3geo/restmapserver/map/{mapId}/addLayerWms/",
- * 		tags={"map update"},
+ * 		tags={"map add layer"},
  * 		operationId="addLayerWms",
  * 		summary="Add layer by WMS",
  * 		@SWG\Parameter(
@@ -775,10 +779,10 @@ $app->map([
     'POST'
 ], '/{mapId}/addLayerWms', function (Request $request, Response $response, $args) {
     $param = $this->util->sanitizestrings($request->getQueryParams());
-    $data = $this->map->addLayerWms($args["mapId"],$param["wms_name"], $param["url"], $param["proj"], $param["formatlist"], $param["layerTitle"], $param["version"], $param["wms_style"], $param["representationtype"], $param["suportsld"], $param["infoformat"],$param["time"], $param["tile"], json_decode($param["allitens"]));
+    $data = $this->map->addLayerWms($args["mapId"], $param["wms_name"], $param["url"], $param["proj"], $param["formatlist"], $param["layerTitle"], $param["version"], $param["wms_style"], $param["representationtype"], $param["suportsld"], $param["infoformat"], $param["time"], $param["tile"], json_decode($param["allitens"]));
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
-    ->write(json_encode($data));
+        ->write(json_encode($data));
     return $response;
 });
 /**
@@ -849,205 +853,369 @@ $app->map([
     'POST'
 ], '/{mapId}/identify', function (Request $request, Response $response, $args) {
     $param = $this->util->sanitizestrings($request->getQueryParams());
-    $data = $this->identify->query($args["mapId"],$param["x"], $param["y"], $param["resolution"], @$param["extent"], @$param["layerNames"], json_decode(@$param["allColumns"]));
+    $data = $this->identify->query($args["mapId"], $param["x"], $param["y"], $param["resolution"], @$param["extent"], @$param["layerNames"], json_decode(@$param["allColumns"]));
     $json = json_encode($data);
     $jsonError = $this->util->jsonError();
-    if($jsonError != false){
+    if ($jsonError != false) {
         $json = $jsonError;
     }
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
-    ->write($json);
+        ->write($json);
     return $response;
 });
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/addLayers/",
+ * 		tags={"map add layer"},
+ * 		operationId="addLayers",
+ * 		summary="Add new layers to map",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerNames",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layers list. Map files with the same names defined in the list must exist in the i3geo/temas folder."
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/addLayers', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = $this->map->addLayers($args["mapId"], $param["layerNames"]);
+    $this->map->removeRestrictLayers();
+    $this->map->hiddeCon();
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+        ->write(json_encode($data));
+    return $response;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/searchInLayers/",
+ * 		tags={"map attributes"},
+ * 		operationId="searchInLayers",
+ * 		summary="Search for data in existing layers on the map that allow searching.",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="search",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Search string"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/searchInLayers', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    if (empty($param["search"])) {
+        $data = array();
+    } else {
+        $data = $this->map->searchInLayers($args["mapId"], $param["search"], $param["extent"]);
+    }
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+        ->write(json_encode($data));
+    return $response;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/searchInLayers/",
+ * 		tags={"map"},
+ * 		operationId="textFontList",
+ * 		summary="Get list of text fonts.",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/textFontList', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = $this->map->textFontList($args["mapId"]);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+        ->write(json_encode($data));
+    return $response;
+});
+
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/addLayerMetaestatFilter/",
+ * 		tags={"map add layer"},
+ * 		operationId="addLayerMetaestatFilter",
+ * 		summary="Add a new layer to the map based on the statistical metadata system.",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="measure",
+ * 			in="query",
+ * 			required=true,
+ * 			type="number",
+ * 			description="Measure id."
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="filter",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Filters that will be applied. Format: columnName * value | columName * value ."
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="classification",
+ * 			in="query",
+ * 			required=true,
+ * 			type="number",
+ * 			description="Classification type code when there are more than one."
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="opacity",
+ * 			in="query",
+ * 			required=false,
+ * 			type="number",
+ * 			description="Layer opacity."
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="regiontype",
+ * 			in="query",
+ * 			required=false,
+ * 			type="string",
+ * 			description="Region type code."
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/addLayerMetaestatFilter', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = $this->map->addLayerMetaestatFilter($args["mapId"], $param["measure"], $param["filter"], $param["classification"], $param["opacity"], $param["regiontype"]);
+    $this->map->removeRestrictLayers();
+    $this->map->hiddeCon();
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+        ->write(json_encode($data));
+    return $response;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/addLayerRegion/",
+ * 		tags={"map add layer"},
+ * 		operationId="addLayerRegion",
+ * 		summary="Add a new layer to the map based on the statistical metadata system and regions.",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="region",
+ * 			in="query",
+ * 			required=true,
+ * 			type="number",
+ * 			description="Region id."
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/addLayerRegion', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = $this->map->addLayerRegion($args["mapId"], $param["region"]);
+    $this->map->removeRestrictLayers();
+    $this->map->hiddeCon();
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+        ->write(json_encode($data));
+    return $response;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/toggleLayersVis/",
+ * 		tags={"map update"},
+ * 		operationId="toggleLayersVis",
+ * 		summary="Turn layers visibility on or off",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="on",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layers to turn on"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="off",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layers to turn off"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/toggleLayersVis', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $this->map->layersOn($args["mapId"], $param["on"]);
+    $this->map->layersOff($args["mapId"], $param["off"]);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+        ->write(json_encode(true));
+    return true;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/addLayerShp/",
+ * 		tags={"map add layer"},
+ * 		operationId="addLayerShp",
+ * 		summary="Add layer by shapefile",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="arq",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Shape file. You must configure file system access permissions. See in ms_configura."
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/addLayerShp', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = false;
+    $permission = $this->map->verifyPermissionFile($args["mapId"], $param["arq"]);
+    if ($permission == true) {
+        $path = $this->map->getLocalShpPath($args["mapId"], $param["arq"], false);
+        $data = $this->map->addLayerShp($args["mapId"], $path, false);
+    }
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+        ->write(json_encode($data->name));
+    return true;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/map/{mapId}/addLayerImg/",
+ * 		tags={"map add layer"},
+ * 		operationId="addLayerImg",
+ * 		summary="Add layer by image file",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="arq",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Image file. You must configure file system access permissions. See in ms_configura."
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="Result status",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+], '/{mapId}/addLayerImg', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $data = false;
+    $permission = $this->map->verifyPermissionFile($args["mapId"], $param["arq"]);
+    if ($permission == true) {
+        $path = $this->map->getLocalImgPath($args["mapId"], $param["arq"], false);
+        $data = $this->map->addLayerImg($args["mapId"], $path, false);
+    }
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data->name));
+    return true;
+});
 $app->run();
-exit();
-
-switch ("none") {
-
-    case "ADTEMA":
-        include (I3GEOPATH . "/classesphp/classe_mapa.php");
-        $m = new Mapa($_SESSION["map_file"]);
-        $salvar = $m->adicionaTema($_GET["temas"], $_SESSION["locaplic"]);
-        if ($salvar) {
-            $m->salva();
-        }
-        validaAcessoTemas($_SESSION["map_file"]);
-        $retorno = true;
-        break;
-    case "PARAMETERS":
-        include (I3GEOPATH . "/classesphp/classe_mapa.php");
-        $m = new Mapa($_SESSION["map_file"]);
-        $par = $m->parametrosTemas();
-        $e = $m->mapa->extent;
-        $ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
-        $res = array();
-        $res["mapimagem"] = "";
-        $res["mapexten"] = $ext;
-        $res["mapres"] = "";
-        $res["erro"] = "";
-        $res["mapscale"] = "";
-        $res["pixelsize"] = "";
-        $res["mapimagem"] = "";
-        $res["w"] = $m->mapa->width;
-        $res["h"] = $m->mapa->height;
-        $res["mappath"] = "";
-        $res["mapurl"] = "";
-        $res["mensagens"] = $m->pegaMensagens();
-        $res["tempo"] = "";
-        restauraCon($_SESSION["map_file"], $_SESSION["postgis_mapa"]);
-        if ($par == "") {
-            $retorno = false;
-        } else {
-            $retorno = array(
-                "variaveis" => $res,
-                "temas" => $par
-            );
-        }
-        break;
-    case "SEARCHINLAYERS":
-        include (I3GEOPATH . "/classesphp/classe_mapa.php");
-        $m = new Mapa($_SESSION["map_file"]);
-        $lista = $m->listaTemasBuscaRapida();
-        if ($lista != "") {
-            include (I3GEOPATH . "/classesphp/classe_atributos.php");
-            $m = new Atributos($_SESSION["map_file"]);
-            $dados = $m->buscaRegistros($_GET["palavra"], $lista, "qualquer", "mapa");
-            foreach ($dados as $tema) {
-                $rs = $tema["resultado"];
-                foreach ($rs as $r) {
-                    $retorno[] = array(
-                        "box" => $r["box"],
-                        "valor" => $r["valores"][0]["valor"]
-                    );
-                }
-            }
-        } else {
-            $retorno = false;
-        }
-        break;
-    case "TEXTFONT":
-        $retorno = listaTrueType($_SESSION["locaplic"], $_SESSION["imgdir"], $_SESSION["dir_tmp"]);
-        break;
-    case "ADDLAYERMETAESTAT":
-        include (I3GEOPATH . "/classesphp/classe_metaestatinfo.php");
-        $m = new MetaestatInfo();
-        if (! empty($_GET["filter"])) {
-            $_GET["filter"] = str_replace('"', "'", $_GET["filter"]);
-            $final = array();
-            $sepands = explode("|", $_GET["filter"]);
-            foreach ($sepands as $sepand) {
-                $linhas = explode("*", $sepand);
-                if (! is_numeric(str_replace(array(
-                    "'",
-                    ","
-                ), "", $linhas[1]))) {
-                    exit();
-                }
-                if (count(explode(",", $linhas[1])) == 1) {
-                    $final[] = $linhas[0] . " = " . $linhas[1];
-                } else {
-                    $final[] = $linhas[0] . " IN (" . $linhas[1] . ")";
-                }
-            }
-            $_GET["filter"] = implode(" and ", $final);
-        }
-        // array("mapfile"=>$arq,"layer"=>$nomeDoLayer,"titulolayer"=>$titulolayer)
-        $data = $m->mapfileMedidaVariavel($_GET["measure"], $_GET["filter"], 0, $_GET["layertype"], $_GET["title"], $_GET["classification"], $_GET["group"], $_GET["regiontype"], $_GET["opacity"], false);
-        include (I3GEOPATH . "/classesphp/classe_mapa.php");
-        $m = new Mapa($_SESSION["map_file"]);
-        $m->adicionaTema($data["mapfile"], $_SESSION["locaplic"]);
-        $m->salva();
-        validaAcessoTemas($_SESSION["map_file"]);
-        $retorno = true;
-        break;
-    case "ADDLAYERREGION":
-        include (I3GEOPATH . "/classesphp/classe_metaestatinfo.php");
-        $m = new MetaestatInfo();
-        $retorno = $m->adicionaLimiteRegiao($_SESSION["map_file"], $_GET["region"]);
-        validaAcessoTemas($_SESSION["map_file"]);
-        break;
-    case "TOGGLELAYERSVIS":
-        include (I3GEOPATH . "/classesphp/classe_mapa.php");
-        $m = new Mapa($_SESSION["map_file"]);
-        $retorno = $m->ligaDesligaTemas($_GET["on"], $_GET["off"], "nao");
-        $m->salva();
-        break;
-    case "ADICIONATEMASHP":
-        $retorno = array();
-        if ($_SESSION["navegadoresLocais"] == "sim") {
-            include (I3GEOPATH . "/ms_configura.php");
-            // verifica se esta cadastrado
-            $ipcliente = pegaIPcliente();
-            $ips = array();
-            // pega os nomes de cada ip
-            foreach ($navegadoresLocais["ips"] as $n) {
-                $ips[] = gethostbyname($n);
-                $ips[] = $n;
-            }
-            if (in_array($ipcliente, $ips)) {
-                $drives = $navegadoresLocais["drives"];
-                // pega o caminho
-                // nome
-                $split = explode("/", $_GET["arq"]);
-                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
-                    $retorno = array();
-                } else {
-                    include (I3GEOPATH . "/classesphp/classe_mapa.php");
-                    $m = new Mapa($_SESSION["map_file"]);
-                    $path = $split[0];
-                    $split[0] = "";
-                    $shp = implode("/", $split);
-                    $shp = explode(".", $shp);
-                    $shp = $shp[0] . ".shp";
-                    $path = $drives[$path] . $shp;
-                    $retorno = $m->adicionaTemaSHP($path);
-                    if ($retorno != "erro") {
-                        $m->salva();
-                    } else {
-                        $retorno = array();
-                    }
-                }
-            }
-        }
-        break;
-    case "ADICIONATEMAIMG":
-        $retorno = array();
-        if ($_SESSION["navegadoresLocais"] == "sim") {
-            include (I3GEOPATH . "/ms_configura.php");
-            // verifica se est&aacute; cadastrado
-            $ipcliente = pegaIPcliente();
-            $ips = array();
-            // pega os nomes de cada ip
-            foreach ($navegadoresLocais["ips"] as $n) {
-                $ips[] = gethostbyname($n);
-                $ips[] = $n;
-            }
-            if (in_array($ipcliente, $ips)) {
-                $drives = $navegadoresLocais["drives"];
-                // pega o caminho
-                // nome
-                $split = explode("/", $_GET["arq"]);
-                if (empty($split[0]) || ! in_array($split[0], array_keys($drives))) {
-                    $retorno = array();
-                } else {
-                    include (I3GEOPATH . "/classesphp/classe_mapa.php");
-                    $m = new Mapa($_SESSION["map_file"]);
-                    $path = $split[0];
-                    $split[0] = "";
-                    $shp = implode("/", $split);
-                    $path = $drives[$path] . $shp;
-                    $retorno = $m->adicionaTemaIMG($path);
-                    if ($retorno != "erro") {
-                        $m->salva();
-                    } else {
-                        $retorno = array();
-                    }
-                }
-            }
-        }
-        break;
-}
-ob_clean();
-header("Content-type: application/json");
-echo json_encode($retorno);

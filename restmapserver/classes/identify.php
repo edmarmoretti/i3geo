@@ -6,11 +6,8 @@ class Identify
 
     function __construct()
     {
-        include_once (I3GEOPATH . "/restmapserver/classes/util.php");
         $this->util = new \restmapserver\Util();
-        include_once (I3GEOPATH . "/restmapserver/classes/map.php");
         $this->map = new \restmapserver\Map();
-        include_once (I3GEOPATH . "/restmapserver/classes/layer.php");
         $this->layer = new \restmapserver\Layer();
     }
 
@@ -55,6 +52,7 @@ class Identify
         }
         $listatemas = array();
         $resultados = array();
+        $layers = array();
         $layerNames = explode(",", str_replace(" ", ",", $layerNames));
         foreach ($layerNames as $layerName) {
             $layerObj = $mapObj->getlayerbyname($layerName);
@@ -76,7 +74,13 @@ class Identify
                 "layers" => $res
             );
         } else {
-            return (false);
+            return array(
+                "point" => array(
+                    "x" => $x * 1,
+                    "y" => $y * 1
+                ),
+                "layers" => []
+            );
         }
     }
 
@@ -84,6 +88,7 @@ class Identify
     {
         $pt = ms_newPointObj();
         $pt->setXY($x, $y);
+        /*
         if (strtoupper($layerObj->getmetadata("convcaracter")) == "SIM") {
             $convC = function ($texto) {
                 return $this->util->iso2utf($texto);
@@ -93,6 +98,10 @@ class Identify
                 return $texto;
             };
         }
+        */
+        $convC = function ($texto) {
+            return $this->util->iso2utf($texto);
+        };
         $wkt = false;
         if (strtoupper($layerObj->getmetadata("wkttip")) == "SIM") {
             $wkt = true;

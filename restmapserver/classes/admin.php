@@ -18,7 +18,22 @@ class Admin
     function getData($sql = "")
     {
         $resultado = array();
-        include_once (I3GEOPATH . "/classesphp/conexao.php");
+        include (I3GEOPATH . "/classesphp/conexao.php");
+        error_reporting(0);
+        $q = $dbh->query($sql, PDO::FETCH_ASSOC);
+        if ($q) {
+            $resultado = $q->fetchAll();
+            return $resultado;
+        } else {
+            return false;
+        }
+    }
+    function getDataDb($sql){
+        $buscar = array("drop","update","insert","delete");
+        $sql = str_ireplace($buscar,"",$sql);
+        //$c = $this->listaConexao($codigo_estat_conexao,true);
+        $c = $this->metaestatConection();
+        $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
         error_reporting(0);
         $q = $dbh->query($sql, PDO::FETCH_ASSOC);
         if ($q) {
@@ -227,5 +242,77 @@ class Admin
             $sql .= " ORDER BY id_pai";
         }
         return $this->getData($sql);
+    }
+    //listaConexaoMetaestat
+    function metaestatConection(){
+        $postgis_mapa = $_SESSION["postgis_mapa"];
+        if(isset($postgis_mapa["metaestat"])){
+            $m = $postgis_mapa["metaestat"];
+            if($m == ""){
+                return false;
+            }
+            $lista = explode(" ",$m);
+            $con = array();
+            foreach($lista as $l){
+                $teste = explode("=",$l);
+                $con[trim($teste[0])] = trim($teste[1]);
+            }
+            $c = array(
+                "codigo_estat_conexao" => "metaestat",
+                "bancodedados" => $con["dbname"],
+                "host" => $con["host"],
+                "porta" => $con["port"],
+                "usuario" => $con["user"],
+                "senha" => $con["password"],
+                "options" => $con["options"],
+                "fonte" => "ms_configura"
+            );
+            return $c;
+        } else {
+            return false;
+        }
+    }
+    //listaDadosGeometriaRegiao
+    function regionGeometry($codigo_tipo_regiao){
+        //pega a tabela, esquema e conexao para acessar os dados da regiao
+        $regiao = $this->i3geoestat_tipo_regiao($codigo_tipo_regiao);
+        $c = $this->metaestatConection();
+        $dbh = new PDO('pgsql:dbname='.$c["bancodedados"].';user='.$c["usuario"].';password='.$c["senha"].';host='.$c["host"].';port='.$c["porta"]);
+        $c = $regiao["colunageo"];
+        $s = "ST_dimension($c) as dimension ";
+        $sql = "select $s,".$regiao["colunanomeregiao"]." as nome_regiao,".$regiao["identificador"]." as identificador_regiao from ".$regiao["esquemadb"].".".$regiao["tabela"];
+        $sql .= " limit 1";
+        $q = $dbh->query($sql,PDO::FETCH_ASSOC);
+        $r = array();
+        if($q){
+            $r = $q->fetchAll();
+            return $r[0];
+        } else {
+            return false;
+        }
+    }
+    //colunasTabela
+    function tableColumns($codigo_estat_conexao,$nome_esquema,$nome_tabela,$tipo="",$tipotratamento="="){
+        $colunas = array();
+        $sql = "SELECT column_name as coluna,udt_name, data_type FROM information_schema.columns where table_schema = '$nome_esquema' and table_name = '$nome_tabela'";
+        if($tipo != ""){
+            $sql = "SELECT column_name as coluna,udt_name, data_type FROM information_schema.columns where table_schema = '$nome_esquema' and udt_name $tipotratamento '$tipo' and table_name = '$nome_tabela'";
+        }
+        $res = $this->getDataDb($sql);
+        foreach($res as $c){
+            $colunas[] = $c["coluna"];
+        }
+        return $colunas;
+    }
+    //listaTipoRegiaoSerial
+    function regionSerial($codigo_tipo_regiao){
+        $sql = "select * from ".$this->esquemaadmin."i3geoestat_tipo_regiao WHERE codigo_tipo_regiao = $codigo_tipo_regiao ";
+        $regiao = $this->getData($sql);
+        $nome_esquema = $regiao["esquemadb"];
+        $nome_tabela = $regiao["tabela"];
+        $sql = "SELECT a.attname as coluna FROM pg_class s JOIN pg_depend d ON d.objid = s.oid JOIN pg_class t ON d.objid = s.oid AND d.refobjid = t.oid JOIN pg_attribute a ON (d.refobjid, d.refobjsubid) = (a.attrelid, a.attnum) JOIN pg_namespace n ON n.oid = s.relnamespace WHERE s.relkind = 'S' AND n.nspname = '$nome_esquema' AND t.relname = '$nome_tabela'";
+        $colunas = $this->getData($sql);
+        $colunas = $colunas[0];
+        return $colunas["coluna"];
     }
 }
