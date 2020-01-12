@@ -118,7 +118,7 @@ class Layer
      */
     function setMapExtent($mapObj, $extent = false)
     {
-        if(!$mapObj){
+        if (! $mapObj) {
             return false;
         }
         if ($extent) {
@@ -459,7 +459,7 @@ class Layer
 
     function queryByrect($mapObj, $layerName, $wkt = false, $extent = false)
     {
-        if(!$mapObj){
+        if (! $mapObj) {
             return false;
         }
         $layer = $mapObj->getLayerByname($layerName);
@@ -482,7 +482,7 @@ class Layer
 
     function searchColumn($mapObj, $layerObj, $search, $column, $extent)
     {
-        if(!$mapObj){
+        if (! $mapObj) {
             return false;
         }
         if (strtoupper($layerObj->getmetadata("convcaracter")) == "SIM") {
@@ -558,7 +558,7 @@ class Layer
 
     function moveUp($mapObj, $layerName)
     {
-        if(!$mapObj){
+        if (! $mapObj) {
             return false;
         }
         $layerObj = $mapObj->getLayerByname($layerName);
@@ -597,7 +597,7 @@ class Layer
 
     function moveDown($mapObj, $layerName)
     {
-        if(!$mapObj){
+        if (! $mapObj) {
             return false;
         }
         $layerObj = $mapObj->getLayerByname($layerName);
@@ -633,9 +633,10 @@ class Layer
         $mapObj->save($_SESSION["map_file"]);
         return true;
     }
+
     function shapeExtent($mapObj, $layerObj, $shapeObj)
     {
-        if(!$mapObj){
+        if (! $mapObj) {
             return false;
         }
         $prjMapa = $mapObj->getProjection();
@@ -669,12 +670,12 @@ class Layer
 
     function toggleStatusClass($mapObj, $layerName, $classIds)
     {
-        if(!$mapObj){
+        if (! $mapObj) {
             return false;
         }
         $layerObj = $mapObj->getLayerByname($layerName);
         $classIds = explode(",", str_replace(" ", ",", $classIds));
-        foreach($classIds as $classId){
+        foreach ($classIds as $classId) {
             $classObj = $layerObj->getclass($classId);
             $status = $classObj->status;
             if ($status == MS_OFF) {
@@ -698,14 +699,14 @@ class Layer
 
     function zoomSel($mapObj, $layerName)
     {
-        if(!$mapObj){
+        if (! $mapObj) {
             return false;
         }
         $layerObj = $mapObj->getLayerByname($layerName);
-        if($mapObj->getmetadata("interface") == "googlemaps"){
+        if ($mapObj->getmetadata("interface") == "googlemaps") {
             $projO = $mapObj->getProjection();
             $projecao = $this->util->getDefaultProjection("epsg");
-            $mapObj->setProjection("init=epsg:".$projecao);
+            $mapObj->setProjection("init=epsg:" . $projecao);
         }
         $extatual = $mapObj->extent;
         $prjMapa = $mapObj->getProjection();
@@ -714,13 +715,12 @@ class Layer
         $xmax = array();
         $ymin = array();
         $ymax = array();
-        $shapes = $this->getSelectedShapes($layerObj,$mapObj);
+        $shapes = $this->getSelectedShapes($layerObj, $mapObj);
         $xmin = array();
         $xmax = array();
         $ymin = array();
         $ymax = array();
-        foreach($shapes as $shape)
-        {
+        foreach ($shapes as $shape) {
             $bound = $shape->bounds;
             $xmin[] = $bound->minx;
             $xmax[] = $bound->maxx;
@@ -728,23 +728,22 @@ class Layer
             $ymax[] = $bound->maxy;
         }
         $ret = ms_newRectObj();
-        $ret->set("minx",min($xmin));
-        $ret->set("miny",min($ymin));
-        $ret->set("maxx",max($xmax));
-        $ret->set("maxy",max($ymax));
-        if (($prjTema != "") && ($prjMapa != $prjTema))
-        {
+        $ret->set("minx", min($xmin));
+        $ret->set("miny", min($ymin));
+        $ret->set("maxx", max($xmax));
+        $ret->set("maxy", max($ymax));
+        if (($prjTema != "") && ($prjMapa != $prjTema)) {
             $projInObj = ms_newprojectionobj($prjTema);
             $projOutObj = ms_newprojectionobj($prjMapa);
             $ret->project($projInObj, $projOutObj);
         }
-        $extatual->setextent($ret->minx,$ret->miny,$ret->maxx,$ret->maxy);
-        if($mapObj->getmetadata("interface") == "googlemaps"){
+        $extatual->setextent($ret->minx, $ret->miny, $ret->maxx, $ret->maxy);
+        if ($mapObj->getmetadata("interface") == "googlemaps") {
             $mapObj->setProjection($projO);
         }
         $e = $mapObj->extent;
         $ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
-        return($ext);
+        return ($ext);
     }
 
     function getSelectedShapes($objLayer, $objMapa)
@@ -806,5 +805,69 @@ class Layer
             return true;
         }
         return false;
+    }
+
+    function clearSel($mapObj, $layerName)
+    {
+        if (! $mapObj) {
+            return false;
+        }
+        $layerObj = $mapObj->getLayerByname($layerName);
+        $qyfile = str_replace(".map", "_qy.map", $_SESSION["map_file"]);
+        $c = $mapObj->numlayers;
+        for ($i = 0; $i < $c; $i ++) {
+            $layerObj = $mapObj->getlayer($i);
+            $file = dirname($_SESSION["map_file"]) . "/" . $layerObj->name . ".php";
+            if (file_exists($file)) {
+                unlink($file);
+            }
+            $file = dirname($_SESSION["map_file"]) . "/" . $layerObj->name . "_qy.map";
+            if (file_exists($file)) {
+                unlink($file);
+            }
+        }
+        if (file_exists($qyfile)) {
+            unlink($qyfile);
+        }
+        return true;
+    }
+
+    function toggleLegend($mapObj, $layerName)
+    {
+        if (! $mapObj) {
+            return false;
+        }
+        $layerObj = $mapObj->getLayerByname($layerName);
+        // error_reporting(0);
+        $valor = $layerObj->getmetadata("classe");
+        if ($valor == "" || strtolower($valor) == "sim") {
+            $valor = "NAO";
+        } else {
+            $valor = "SIM";
+        }
+        $layerObj->setmetaData("classe", $valor);
+        $mapObj->save($_SESSION["map_file"]);
+        return true;
+    }
+
+    function copy($mapObj, $layerName)
+    {
+        if (! $mapObj) {
+            return false;
+        }
+        $layerObj = $mapObj->getLayerByname($layerName);
+
+        $layer = ms_newLayerObj($mapObj, $layerObj);
+        $layer->setmetadata("nomeoriginal", $layerObj->getmetadata("nomeoriginal"));
+        $meta = $layer->getmetadata("tema");
+        if (($meta != "") && ($meta != "NAO")) {
+            $layer->setmetadata("tema", "Copia de " . $meta);
+        }
+        $layer->setmetadata("cache", "");
+        $layer->set("group","");
+        $novoname = "copia" . uniqid("i3geomap");
+        $layer->set("name", $novoname);
+        $mapObj->save($_SESSION["map_file"]);
+        return true;
     }
 }

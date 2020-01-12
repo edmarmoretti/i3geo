@@ -61,10 +61,13 @@ i3GEO.legenda =
 	 *
 	 * Atualiza o elemento HTML do mapa utilizado para mostrar a legenda
 	 */
-	atualiza : function() {
+	atualiza : function({force = false}={}) {
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.legenda.atualiza()");
 
+	    if(force == true){
+	        i3GEO.legenda.CAMADAS = [];
+	    }
 	    //a legenda nao foi inicializada ainda
 	    if(i3GEO.template.legenda == undefined){
 		if (typeof (console) !== 'undefined')
@@ -73,7 +76,7 @@ i3GEO.legenda =
 		return;
 	    }
 	    var temp, i, tamanho, atualiza = false;
-	    if (i3GEO.arvoreDeCamadas.comparaTemas(i3GEO.legenda.CAMADAS, i3GEO.arvoreDeCamadas.CAMADAS)) {
+	    if (force == false && i3GEO.arvoreDeCamadas.comparaTemas(i3GEO.legenda.CAMADAS, i3GEO.arvoreDeCamadas.CAMADAS)) {
 		if (typeof (console) !== 'undefined')
 		    console.info("i3GEO.legenda.atualiza() nao precisa atualizar");
 

@@ -248,30 +248,127 @@ $app->map([
     ->write(json_encode($data));
     return $response;
 });
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/clearSel/",
+ * 		tags={"layer"},
+ * 		operationId="clearSel",
+ * 		summary="Clear layer selections",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerName",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layer name"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="data",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+],'/{mapId}/{layerName}/clearSel', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $mapObj = $this->map->getMapObj($args["mapId"]);
+    $data = $this->layer->clearSel($mapObj,$args["layerName"]);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data));
+    return $response;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/toggleLegend/",
+ * 		tags={"layer legend"},
+ * 		operationId="toggleLegend",
+ * 		summary="Toggle layer legend",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerName",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layer name"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="data",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+],'/{mapId}/{layerName}/toggleLegend', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $mapObj = $this->map->getMapObj($args["mapId"]);
+    $data = $this->layer->toggleLegend($mapObj,$args["layerName"]);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data));
+    return $response;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/copy/",
+ * 		tags={"layer"},
+ * 		operationId="copy",
+ * 		summary="Copy layer",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerName",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layer name"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="data",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+],'/{mapId}/{layerName}/copy', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $mapObj = $this->map->getMapObj($args["mapId"]);
+    $data = $this->layer->copy($mapObj,$args["layerName"]);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data));
+    return $response;
+});
 $app->run();
 exit;
 
 switch (strtoupper($_GET["funcao"])) {
-    case "LIMPASEL":
-        include (I3GEOPATH."/classesphp/classe_selecao.php");
-        $m = new Selecao($_SESSION["map_file"], $_GET["tema"]);
-        $m->selecaoLimpa();
-        $retorno = true;
-        break;
-    case "INVERTESTATUSLEGENDA":
-        include (I3GEOPATH."/classesphp/classe_temas.php");
-        $m = new Temas($_SESSION["map_file"], $_GET["tema"]);
-        $m->inverteStatusLegenda();
-        $m->salva();
-        $retorno = true;
-        break;
-    case "COPIA":
-        include (I3GEOPATH."/classesphp/classe_temas.php");
-        $m = new Temas($_SESSION["map_file"], $_GET["tema"]);
-        $m->copiaTema();
-        $m->salva();
-        $retorno = true;
-        break;
     case "ITENS":
         include (I3GEOPATH."/classesphp/classe_atributos.php");
         $m = new Atributos($_SESSION["map_file"], $_GET["tema"], "", $_GET["ext"]);

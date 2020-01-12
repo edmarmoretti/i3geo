@@ -18,7 +18,7 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "ALTERACLASSES":
-        $retorno = $m->alteraclasses($_GET["tema"], $_GET["nomes"], $_GET["exps"], "nao", $_GET["minScales"], $_GET["maxScales"], $_GET["separador"]);
+        $retorno = $m->alteraclasses($_GET["nomes"], $_GET["exps"], "nao", $_GET["minScales"], $_GET["maxScales"], $_GET["separador"]);
         $m->salva();
         break;
     case "ADICIONACLASSE":
@@ -35,6 +35,10 @@ switch (strtoupper($_GET["funcao"])) {
         break;
     case "ORDENACLASSES":
         $retorno = $m->ordenaClasses();
+        $m->salva();
+        break;
+    case "EXCLUICLASSE":
+        $retorno = $m->excluiclasse($_GET["idclasse"]);
         $m->salva();
         break;
     case "SOBECLASSE":

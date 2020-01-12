@@ -249,22 +249,22 @@ i3GEO.tema =
          *
          * {string} - ID (name) do tema clicado
          */
-        limpasel : function(tema) {
+        limpasel : function(layerName) {
             i3GEO.request.get({
                 snackbar: false,
                 snackbarmsg: false,
                 btn: false,
-                par: {
-                    tema: tema,
-                    funcao: "limpasel"
-                },
-                prog: "/serverapi/layer/",
+                par: {},
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/clearSel",
                 fn: function(data){
-                    i3GEO.Interface.atualizaTema("", tema);
+                    if(data == true){
+                        i3GEO.mapa.refresh(
+                                i3GEO.Interface.atualizaTema("", layerName)
+                        );
+                    }
                 }
             });
         },
-
         /**
          * Function: invertestatuslegenda
          *
@@ -274,19 +274,19 @@ i3GEO.tema =
          *
          * {string} - codigo do tema
          */
-        invertestatuslegenda : function(tema) {
+        invertestatuslegenda : function(layerName) {
             i3GEO.request.get({
                 snackbar: false,
                 snackbarmsg: false,
                 btn: false,
-                par: {
-                    tema: tema,
-                    funcao: "invertestatuslegenda"
-                },
-                prog: "/serverapi/layer/",
+                par: {},
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/toggleLegend",
                 fn: function(data){
-                    i3GEO.mapa.refresh();
-                    i3GEO.arvoreDeCamadas.atualiza();
+                    if(data == true){
+                        i3GEO.mapa.refresh(
+                                i3GEO.Interface.atualizaTema("", layerName)
+                        );
+                    }
                 }
             });
         },
@@ -374,18 +374,17 @@ i3GEO.tema =
          *
          * {string} - codigo do tema
          */
-        copia : function(idtema) {
+        copia : function(layerName) {
             i3GEO.request.get({
                 snackbar: true,
                 snackbarmsg: false,
                 btn: false,
-                par: {
-                    tema: idtema,
-                    funcao: "copia"
-                },
-                prog: "/serverapi/layer/",
+                par: {},
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/copy",
                 fn: function(data){
-                    i3GEO.mapa.refresh();
+                    if(data == true){
+                        i3GEO.mapa.refresh();
+                    }
                 }
             });
         },

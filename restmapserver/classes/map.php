@@ -1594,7 +1594,7 @@ class Map
                 for ($i = 0; $i < count($grupos); ++ $i) {
                     $layerObj = $mapObj->getLayer($grupos[$i]);
                     if (strtolower($layerObj->group) == strtolower($l)) {
-                        $layer->set("status", MS_DELETE);
+                        $layerObj->set("status", MS_DELETE);
                     }
                 }
             }

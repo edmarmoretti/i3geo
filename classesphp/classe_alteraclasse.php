@@ -202,7 +202,7 @@ class Alteraclasse
      *
      * $maxScales - lista com valores para maxscaledenom
      */
-    function alteraclasses($ids, $nomes, $exps, $base64 = "nao", $minScales = "", $maxScales = "",$separador=";")
+    function alteraclasses($nomes, $exps, $base64 = "nao", $minScales = "", $maxScales = "",$separador=";")
     {
         if ($base64 == "sim") {
             //$ids = base64_decode($ids);
@@ -210,63 +210,35 @@ class Alteraclasse
             $exps = base64_decode($exps);
         }
         // prepara os arrays com os valores
-        $ids = explode($separador, $ids);
         $minScales = explode($separador, $minScales);
         $maxScales = explode($separador, $maxScales);
-
         $nomes = $this->converteTexto($nomes);
         $nomes = explode($separador, $nomes);
         $exps = mb_convert_encoding($exps, "ISO-8859-1", "UTF-8");
         $exps = explode($separador, $exps);
-        // pega os layers existentes no array ids e armazena no array t
-        $c = count($ids);
+        $this->layer->setmetadata("cache", "");
+        $c = count($nomes);
         for ($i = 0; $i < $c; ++ $i) {
-            $tx = explode("-", $ids[$i]);
-            $t[] = $tx[0];
-        }
-        // elimina nomes de layers duplicados
-        $t = array_unique($t);
-        // elimina as classes existentes atualmente em cada layer
-        foreach ($t as $tema) {
-            $layer = $this->mapa->getlayerbyname($tema);
-            $layer->setmetadata("cache", "");
-            $nc = $layer->numclasses;
-            if ($nc > 0) {
-                for ($i = 0; $i < $nc; ++ $i) {
-                    $class = $layer->getclass($i);
-                    $class->set("status", MS_DELETE);
+            $classe = $layer->getclass($i);
+            $classe->set("status", MS_DEFAULT);
+            $classe->set("name", $nomes[$i]);
+            $e = $exps[$i];
+            $e = str_replace("\\", "'", $e);
+            $e = str_replace('"', "'", $e);
+            $e = str_replace("''", "'", $e);
+            $e = str_replace("##", "'", $e);
+            $classe->setexpression($e);
+            if ($minScales[$i]) {
+                if ($minScales[$i] == 0 || $minScales[$i] == "") {
+                    $minScales[$i] = - 1;
                 }
+                $classe->set("minscaledenom", $minScales[$i]);
             }
-        }
-        // acrescenta as classes definidas
-        $c = count($ids);
-        for ($i = 0; $i < $c; ++ $i) {
-            $layerc = explode("-", $ids[$i]); // nome do layer &eacute; o indice 0 do array
-            $layer = $this->mapa->getlayerbyname($layerc[0]);
-            $layer->setMetaData("cache", "");
-            $ncl = $layer->numclasses;
-            if ($layerc[1] < $ncl) {
-                $classe = $layer->getclass($layerc[1]);
-                $classe->set("status", MS_DEFAULT);
-                $classe->set("name", $nomes[$i]);
-                $e = $exps[$i];
-                $e = str_replace("\\", "'", $e);
-                $e = str_replace('"', "'", $e);
-                $e = str_replace("''", "'", $e);
-                $e = str_replace("##", "'", $e);
-                $classe->setexpression($e);
-                if ($minScales[$i]) {
-                    if ($minScales[$i] == 0 || $minScales[$i] == "") {
-                        $minScales[$i] = - 1;
-                    }
-                    $classe->set("minscaledenom", $minScales[$i]);
+            if ($maxScales[$i]) {
+                if ($maxScales[$i] == 0 || $maxScales[$i] == "") {
+                    $maxScales[$i] = - 1;
                 }
-                if ($maxScales[$i]) {
-                    if ($maxScales[$i] == 0 || $maxScales[$i] == "") {
-                        $maxScales[$i] = - 1;
-                    }
-                    $classe->set("maxscaledenom", $maxScales[$i]);
-                }
+                $classe->set("maxscaledenom", $maxScales[$i]);
             }
         }
         return true;
@@ -1280,6 +1252,16 @@ class Alteraclasse
             }
         }
         return $texto;
+    }
+    function excluiClasse($idclasse)
+    {
+        if (! $this->layer) {
+            return "erro";
+        }
+        $classe = $this->layer->getclass($idclasse);
+        $classe->set("status",MS_DELETE);
+        $this->layer->setMetaData("cache", "");
+        return true;
     }
 }
 ?>

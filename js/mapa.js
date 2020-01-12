@@ -421,6 +421,7 @@ i3GEO.mapa =
                     if (after){
                         after.call(after, data);
                     }
+                    i3GEO.legenda.atualiza({"force":true});
                 }
             });
         },
