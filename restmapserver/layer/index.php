@@ -365,15 +365,51 @@ $app->map([
     ->write(json_encode($data));
     return $response;
 });
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/getItensParameters/",
+ * 		tags={"layer"},
+ * 		operationId="getItensParameters",
+ * 		summary="Get itens layer",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerName",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layer name"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="data",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+],'/{mapId}/{layerName}/getItensParameters', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $mapObj = $this->map->getMapObj($args["mapId"]);
+    $layerObj = $mapObj->getLayerByName($args["layerName"]);
+    $itensLayer = $this->layer->getItens($layerObj);
+    $data = $this->layer->getItensParameters($layerObj, $itensLayer);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data));
+    return $response;
+});
 $app->run();
 exit;
 
 switch (strtoupper($_GET["funcao"])) {
-    case "ITENS":
-        include (I3GEOPATH."/classesphp/classe_atributos.php");
-        $m = new Atributos($_SESSION["map_file"], $_GET["tema"], "", $_GET["ext"]);
-        $retorno = $m->listaItens();
-        break;
     case "VALORESITEM":
         include (I3GEOPATH."/classesphp/classe_atributos.php");
         $m = new Atributos($_SESSION["map_file"], $_GET["tema"], "", $_GET["ext"]);

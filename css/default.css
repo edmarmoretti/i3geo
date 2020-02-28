@@ -800,7 +800,7 @@ hr {
 .i3GEOfechaGuia {
 	cursor: pointer;
 	top: 0px;
-	min-height: 40px;
+	height: 40px;
 	text-align: left;
 	padding: 2px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -1108,7 +1108,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 .localizarxy {
 	z-index: 50;
 	color: white;
-	width: 350px;
+	width: 30em;
 	left: 120px;
 	text-align: left;
 	font-size: 1em;

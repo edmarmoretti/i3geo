@@ -592,7 +592,7 @@ i3GEOF.tabela =
 			listai.push(inputs[i].id + "|" + inputs[i].name);
 			nome = $i(inputs[i].id + inputs[i].name).value;
 			listanomes.push(nome);
-			ordem = $i("ordem_" + inputs[i].id + inputs[i].name).value;
+			ordem = $i("ordem_" + inputs[i].id).value;
 			if (ordem === "") {
 			    ordem = 0;
 			}
@@ -611,7 +611,7 @@ i3GEOF.tabela =
 		$i("i3GEOtabelarelatorio").submit();
 		$i("i3GEOtabelarelatorio").action = temp;
 	    } catch (e) {
-		i3GEO.janela.tempoMsg(e);
+		console.log(e);
 	    }
 	},
 	/*

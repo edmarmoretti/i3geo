@@ -84,14 +84,14 @@ if (empty($_POST["senha"]) || empty($_POST["usuario"])) {
     $d = dirname(dirname(__FILE__));
     echo <<<HTML
 		<div class="alert alert-danger" role="alert">
- 			Essa conexão pode não ser segura e os dados de usuário/senha podem ser descobertos
+ 			Essa conex&atilde;o pode n&atilde;o ser segura e os dados de usu&aacute;rio/senha podem ser descobertos
  		</div>
  		<div class="col-lg-2 col-md-0">
  		</div>
  		<div class="well bs-component col-lg-8 col-md-12">
 			<form action="index.php" method="post" id="formularioLoginMaster">
 		 		<div class="form-group">
-		 			<label for="inputUsuario" >Digite o nome do usuário master cadastrado em ms_configura.php</label>
+		 			<label for="inputUsuario" >Digite o nome do usu&aacute;rio master cadastrado em ms_configura.php</label>
 		 			<input type="text" class="form-control" id="inputUsuario" placeholder="usu&aacute;rio" name="usuario">
 		 		</div>
 		 		<div class="form-group">
@@ -172,7 +172,7 @@ $versao = versao();
 $versao = $versao["principal"];
 $exts = get_loaded_extensions();
 if (! function_exists("ms_GetVersion")) {
-    echo '<div class="alert alert-danger" role="alert">Verifique se PHP-Mapscript está instalado</div>';
+    echo '<div class="alert alert-danger" role="alert">Verifique se PHP-Mapscript est&aacute; instalado</div>';
 }
 echo "<h3>MapServer:</h3><pre>";
 echo ms_GetVersion();

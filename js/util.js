@@ -1754,19 +1754,14 @@ i3GEO.util =
 		    ins = [];
 		    ins.push("<select class='" + classe + "' " + estilo + " id='" + id + "' name='" + nome + "'>");
 		    ins.push("<option value='' >---</option>");
-		    temp = data.valores.length;
+		    temp = data.itens.length;
 		    for (i = 0; i < temp; i++) {
-			if (data.valores[i].tema === tema) {
 			    if (alias == "sim") {
-				nm = data.valores[i].alias;
-				if (nm === "") {
-				    nm = data.valores[i].item;
-				}
+				nm = data.itensdesc[i];
 			    } else {
-				nm = data.valores[i].item;
+				nm = data.itens[i];
 			    }
-			    ins.push("<option value='" + data.valores[i].item + "' >" + nm + "</option>");
-			}
+			    ins.push("<option value='" + data.itens[i] + "' >" + nm + "</option>");
 		    }
 		    ins.push("</select><b class='caret careti' ></b>");
 		    ins = ins.join('');
@@ -1783,7 +1778,7 @@ i3GEO.util =
 		    eval("funcao(temp)");
 		}
 	    };
-	    i3GEO.tema.itens(monta, tema);
+	    i3GEO.tema.getItensParameters(monta, tema);
 	},
 	/**
 	 * Function: comboValoresItem
@@ -1957,21 +1952,20 @@ i3GEO.util =
 		    } else {
 			ins.push("<table class=lista7 ><tr><td></td><td>" + $trad("x64") + "</td><td></td>");
 		    }
-		    n = data.valores.length;
+		    n = data.itens.length;
 		    for (i = 0; i < n; i++) {
-			ins.push("<tr><td><div class='checkbox text-left'><label><input name='" + data.valores[i].tema + "' id='" + prefixo + data.valores[i].item +"' type='checkbox'><span class='checkbox-material noprint'><span class='check'></span></span></label></div>" + "</td>");
+			ins.push("<tr><td><div class='checkbox text-left'><label><input name='" + tema + "' id='" + prefixo + data.itens[i] +"' type='checkbox'><span class='checkbox-material noprint'><span class='check'></span></span></label></div>" + "</td>");
 			ins.push("<td><div class='form-group condensed' ><input class='form-control' style='width:" + size
 				+ "' id='"
 				+ prefixo
-				+ data.valores[i].item
-				+ data.valores[i].tema
+				+ data.itens[i]
+				+ tema
 				+ "' type=text value='"
-				+ data.valores[i].item
+				+ data.itensdesc[i]
 				+ "' /></div></td>");
 			if (ordenacao === "sim") {
 			    ins.push("<td><div class='form-group condensed' ><input class='form-control' id='ordem_" + prefixo
-				    + data.valores[i].item
-				    + data.valores[i].tema
+				    + data.itens[i]
 				    + "' type=text size='3' value='"
 				    + i
 				    + "' /></div></td>");
@@ -1994,7 +1988,7 @@ i3GEO.util =
 		}
 		funcao.call(this, temp);
 	    };
-	    i3GEO.tema.itens(monta, tema);
+	    i3GEO.tema.getItensParameters(monta, tema);
 	},
 	/**
 	 * Function: radioEpsg

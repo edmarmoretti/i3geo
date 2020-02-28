@@ -184,17 +184,13 @@ i3GEO.tema =
                 }
             });
         },
-        itens : function(after,tema) {
+        getItensParameters : function(after,layerName) {
             i3GEO.request.get({
                 snackbar: false,
                 snackbarmsg: false,
                 btn: false,
-                par: {
-                    tema: tema,
-                    ext: i3GEO.mapa.getExtent().string,
-                    funcao: "itens"
-                },
-                prog: "/serverapi/layer/",
+                par: {},
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/getItensParameters",
                 fn: function(data){
                     if (after){
                         after.call(after, data);

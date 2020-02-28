@@ -76,7 +76,7 @@ i3GEOF.inseregrafico = {
 		    function(retorno){
 			$i("i3GEOinseregraficotemasi").innerHTML = retorno.dados;
 			$i("i3GEOinseregraficotemasLigados").onchange = function(){
-			    i3GEO.tema.itens(
+			    i3GEO.tema.getItensParameters(
 				    i3GEOF.inseregrafico.listaItens,
 				    $i("i3GEOinseregraficotemasLigados").value
 			    );
@@ -96,13 +96,13 @@ i3GEOF.inseregrafico = {
 	    var i,c,
 	    n,
 	    ins = "";
-	    n = data.valores.length;
+	    n = data.itens.length;
 	    for (i=0;i<n; i++){
 		ins += '<li><div class="form-group condensed"><div style="display:inline;width:100px;" class="checkbox text-left"><label>'
 		    + '<input type="checkbox" name="'
-		    + data.valores[i].item + '">'
+		    + data.itens[i] + '">'
 		    + '<span class="checkbox-material noprint"><span class="check"></span></span> '
-		    + data.valores[i].item
+		    + data.itensdesc[i]
 		    + '</label></div>';
 
 		ins += 	'&nbsp;<div style="display:inline-block;" class="form-group label-fixed condensed" >'

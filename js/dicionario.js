@@ -345,9 +345,9 @@ g_traducao =
         ],
         "u15a" : [
             {
-                pt : "Caixa de ferramentas",
+                pt : "Ferramentas",
                 en : "Tool box",
-                es : "Caja de herramientas"
+                es : "Herramientas"
             }
         ],
         "u16" : [
@@ -2963,24 +2963,24 @@ g_traducao =
             }
         ],
         "iconeFerramentas" : [{
-            pt : "Caixa de ferramentas",
+            pt : "Ferramentas",
             en : "Tool box",
-            es : "Caja de herramientas"
+            es : "Herramientas"
         }],
         "iconeMapa" : [{
-            pt : "Camadas inclu&iacute;das",
-            en : "Layers included",
-            es : "Capas incluidas"
+            pt : "Camadas",
+            en : "Layers",
+            es : "Capas"
         }],
         "iconeCatalogo" : [{
-            pt : "Incluir mais camadas",
-            en : "Add more layers",
-            es : "Incluir m&aacute;s capas"
+            pt : "Cat&aacute;logo",
+            en : "+ layers",
+            es : "+ capas"
         }],
         "iconeLegenda" : [{
-            pt : "Legenda do mapa",
-            en : "Map Legend",
-            es : "Leyenda del mapa"
+            pt : "Legenda",
+            en : "Legend",
+            es : "Leyenda"
         }],
         "iconeBalao" : [{
             pt : "Info resumida",

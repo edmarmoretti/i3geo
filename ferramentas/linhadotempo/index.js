@@ -124,9 +124,10 @@ i3GEOF.linhadotempo = {
 	},
 	comboItens : function() {
 	    var temp = function(data) {
-		var opt = "";
-		for (const d of data.valores) {
-		    opt += "<option value='" + d["item"] + "' >" + d["item"] + "</option>";
+		var opt = "",i,n;
+	            n = data.itens.length;
+	        for (i=0;i<n; i++){
+		    opt += "<option value='" + data.itens[i] + "' >" + data.itensdesc[i] + "</option>";
 		}
 		var combo = function(dados, idonde, name) {
 		    var ins = "<select class='form-control' name='" + name + "' >";
@@ -135,17 +136,17 @@ i3GEOF.linhadotempo = {
 		    ins += "</select><b class='caret careti'></b>";
 		    $i(idonde).innerHTML = ins;
 		};
-		combo(data.valores, "i3GEOlinhadotempoltempoiteminicio","ltempoiteminicio");
-		combo(data.valores, "i3GEOlinhadotempoltempoitemfim","ltempoitemfim");
-		combo(data.valores, "i3GEOlinhadotempoltempoitemtitulo","ltempoitemtitulo");
-		combo(data.valores, "i3GEOlinhadotempoltempoitemdescricao","ltempoitemdescricao");
-		combo(data.valores, "i3GEOlinhadotempoltempoitemtip","ltempoitemtip");
-		combo(data.valores, "i3GEOlinhadotempoltempoitemimagem","ltempoitemimagem");
-		combo(data.valores, "i3GEOlinhadotempoltempoitemicone","ltempoitemicone");
-		combo(data.valores, "i3GEOlinhadotempoltempoitemlink","ltempoitemlink");
+		combo(data, "i3GEOlinhadotempoltempoiteminicio","ltempoiteminicio");
+		combo(data, "i3GEOlinhadotempoltempoitemfim","ltempoitemfim");
+		combo(data, "i3GEOlinhadotempoltempoitemtitulo","ltempoitemtitulo");
+		combo(data, "i3GEOlinhadotempoltempoitemdescricao","ltempoitemdescricao");
+		combo(data, "i3GEOlinhadotempoltempoitemtip","ltempoitemtip");
+		combo(data, "i3GEOlinhadotempoltempoitemimagem","ltempoitemimagem");
+		combo(data, "i3GEOlinhadotempoltempoitemicone","ltempoitemicone");
+		combo(data, "i3GEOlinhadotempoltempoitemlink","ltempoitemlink");
 		i3GEOF.linhadotempo.parametrosAtuais();
 	    };
-	    i3GEO.tema.itens(temp, i3GEOF.linhadotempo._parameters.tema);
+	    i3GEO.tema.getItensParameters(temp, i3GEOF.linhadotempo._parameters.tema);
 	},
 	parametrosAtuais: function(){
 	    var p = this._parameters,

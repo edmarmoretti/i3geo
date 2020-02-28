@@ -292,11 +292,18 @@ $app->map([
     'GET',
     'POST'
 ], '/{mapId}/getParameters', function (Request $request, Response $response, $args) {
-    $param = $this->util->sanitizestrings($request->getQueryParams());
+	$param = $this->util->sanitizestrings($request->getQueryParams());
     $data = $this->map->getParameters($args["mapId"], @$param["w"], @$param["h"]);
-    $response = $response->withHeader('Content-Type', 'application/json');
+    
+    $json = json_encode($data);
+    $jsonError = $this->util->jsonError();
+    
+    if ($jsonError != false) {
+        $json = $jsonError;
+    }
+	$response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
-        ->write(json_encode($data));
+        ->write($json);
     return $response;
 });
 /**

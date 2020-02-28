@@ -65,7 +65,7 @@ i3GEOF.busca = {
 	    $i("i3GEObuscaguia3").onclick = function(){
 		i3GEO.guias.mostraGuiaFerramenta("i3GEObuscaguia3","i3GEObuscaguia");
 	    };
-	    i3GEO.tema.itens(
+	    i3GEO.tema.getItensParameters(
 		    i3GEOF.busca.montaListaItens,
 		    p.tema
 	    );
@@ -75,20 +75,18 @@ i3GEOF.busca = {
 	    hash = [],
 	    i,
 	    n;
-	    n = data.valores.length;
+	    n = data.itens.length;
 	    for (i=0;i<n; i++){
 		hash.push({
-		    label: data.valores[i].item,
-		    value: data.valores[i].item,
-		    name: data.valores[i].item
+		    label: data.itensdesc[i],
+		    value: data.itens[i],
+		    name: data.itens[i]
 		});
 	    }
 	    var template = '<div class="form-group">' + i3GEO.template.checkbox + '</div>';
 	    ins = Mustache.to_html(
 		    "{{#data}}" + template + "{{/data}}",
 		    {"data":hash});
-
-
 	    $i("i3GEObuscalistai").innerHTML = ins;
 	},
 	get: function({snackbar = true, par = {}, prog = "exec", fn = false} = {}){

@@ -453,11 +453,15 @@ class Map
                     }
                     $ferramentas["animagif"] = json_decode(str_replace("'", '"', $f));
                 }
+                $tituloTema = $layerObj->getmetadata("tema");
+                if (! mb_detect_encoding($tituloTema, "UTF-8", true)) {
+                    $tituloTema = mb_convert_encoding($tituloTema, "UTF-8", "ISO-8859-1");
+                }
                 $temas[] = array(
                     $layerObj->name,
                     $layerObj->getmetadata("nomeoriginal"),
                     $layerObj->status,
-                    mb_convert_encoding(($layerObj->getmetadata("tema")), "UTF-8", "ISO-8859-1"),
+                    $tituloTema,
                     $layerObj->opacity,
                     $layerObj->type,
                     $sel,

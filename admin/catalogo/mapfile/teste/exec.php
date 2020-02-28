@@ -67,6 +67,7 @@ switch ($funcao) {
 
 function mapaBase($locaplic, $versao, $base)
 {
+    include ($_SESSION["locaplic"] . "/ms_configura.php");
     if ($base == "" || ! isset($base)) {
         $base = "";
         if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {

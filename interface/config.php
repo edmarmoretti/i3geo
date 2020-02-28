@@ -133,45 +133,22 @@ i3GEO.janela.ativaAlerta();
 				visible : false,
 				isBaseLayer : true,
 				name : "aquarela",
-				source: new ol.source.OSM({
-			    	  attributions : [new ol.Attribution({html: attribStamen})],
-			    	  crossOrigin : "anonymous",
-			    	  url : "https://tile.stamen.com/watercolor/{z}/{x}/{y}.jpg"
-			      })
+                source: new ol.source.Stamen({layer: 'watercolor'})
 			    });
 			var toner = new ol.layer.Tile({
 				title : "Toner",
 				visible : false,
 				isBaseLayer : true,
 				name : "toner",
-				source: new ol.source.OSM({
-			    	  attributions : [new ol.Attribution({html: attribStamen})],
-			    	  crossOrigin : "anonymous",
-			    	  url : "https://tile.stamen.com/toner/{z}/{x}/{y}.png"
-			      })
+				source: new ol.source.Stamen({layer: 'toner'})
 			    });
 			var tonerlite = new ol.layer.Tile({
 				title : "Toner Lite",
 				visible : false,
 				isBaseLayer : true,
 				name : "tonerlite",
-				source: new ol.source.OSM({
-			    	  attributions : [new ol.Attribution({html: attribStamen})],
-			    	  crossOrigin : "anonymous",
-			    	  url : "https://tile.stamen.com/toner-lite/{z}/{x}/{y}.png"
-			      })
+                source: new ol.source.Stamen({layer: 'toner-lite'})
 			    });
-			var layMapQuestAerial = new ol.layer.Tile({
-				title : "MapQuest Open Aerial",
-				visible : false,
-				isBaseLayer : true,
-				name : "layMapQuestAerial",
-				source: new ol.source.OSM({
-			    	  attributions : [new ol.Attribution({html: attribMapQuestAerial})],
-			    	  crossOrigin : "anonymous",
-			    	  url : "https://oatile4.mqcdn.com/tiles/1.0.0/sat/{z}/{x}/{y}.jpg"
-			      })
-			    });
-			i3GEO.Interface.LAYERSADICIONAIS = [ osm, aquarela, toner, tonerlite, layMapQuestAerial ];
+			i3GEO.Interface.LAYERSADICIONAIS = [ osm, aquarela, toner, tonerlite ];
 	}
 })();

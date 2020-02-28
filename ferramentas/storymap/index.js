@@ -109,21 +109,21 @@ i3GEOF.storymap = {
 	    var temp = function(data) {
 		var combo = function(dados, idonde) {
 		    var n, i, ins;
-		    n = dados.length;
+		    n = data.itens.length;
 		    ins = "<select class='form-control' id='" + idonde + "Combo' >";
 		    ins += "<option value='' >---</option>";
 		    for (i = 0; i < n; i++) {
-			ins += "<option value='" + dados[i]["item"] + "' >" + dados[i]["item"] + "</option>";
+			ins += "<option value='" + data.itens[i] + "' >" + data.itensdesc[i] + "</option>";
 		    }
 		    ins += "</select>";
 		    $i(idonde).innerHTML = ins;
 		};
-		combo(data.valores, "i3GEOFstorymapcabecalhoCol");
-		combo(data.valores, "i3GEOFstorymaptextoCol");
-		combo(data.valores, "i3GEOFstorymaplocal");
-		combo(data.valores, "i3GEOFstorymapmedia");
-		combo(data.valores, "i3GEOFstorymaplon");
-		combo(data.valores, "i3GEOFstorymaplat");
+		combo(data, "i3GEOFstorymapcabecalhoCol");
+		combo(data, "i3GEOFstorymaptextoCol");
+		combo(data, "i3GEOFstorymaplocal");
+		combo(data, "i3GEOFstorymapmedia");
+		combo(data, "i3GEOFstorymaplon");
+		combo(data, "i3GEOFstorymaplat");
 		// se os parametros da ferramenta estiverem definidos na camada
 		if (camada != "" && camada.ferramentas.storymap) {
 		    $i("i3GEOFstorymapcabecalho").value = camada.ferramentas.storymap.cabecalho;
@@ -136,7 +136,7 @@ i3GEOF.storymap = {
 		    $i("i3GEOFstorymaplatCombo").value = camada.ferramentas.storymap.collat;
 		}
 	    };
-	    i3GEO.tema.itens(temp, i3GEOF.storymap._parameters.tema);
+	    i3GEO.tema.getItensParameters(temp, i3GEOF.storymap._parameters.tema);
 	},
 	ativa : function(btn) {
 	    var j;

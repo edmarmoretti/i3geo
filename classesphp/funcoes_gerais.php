@@ -278,7 +278,7 @@ function nomeRandomico($n = 10)
  */
 function listaEpsg()
 {
-    $abre = fopen("../ferramentas/epsg.txt", "r");
+    $abre = fopen($_SESSION["locaplic"]."/ferramentas/epsg.txt", "r");
     while (! feof($abre)) {
         $buffer = fgets($abre);
         $linhas[] = $buffer;

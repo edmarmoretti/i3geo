@@ -323,6 +323,7 @@ class Layer
             $tips = $itens;
         }
         return array(
+            "allItens" => $itensLayer,
             "itens" => $itens,
             "lks" => $lks,
             "itemimg" => $itemimg,
@@ -870,4 +871,5 @@ class Layer
         $mapObj->save($_SESSION["map_file"]);
         return true;
     }
+
 }

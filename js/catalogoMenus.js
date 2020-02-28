@@ -27,8 +27,8 @@ i3GEO.catalogoMenus = {
 		return;
 	    });
 	},
-	aguarde: function(){
-	    $("#" + i3GEO.catalogoMenus.config.idOndeMenus).html($trad("o1"));
+	aguarde: function(onde){
+	    $("#" + onde).html('<div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" style="width: 100%; height:5px;"></div>');
 	},
 	atualizaMigalha: function(nome,onclick){
 	    var t = Mustache.to_html(
@@ -83,7 +83,7 @@ i3GEO.catalogoMenus = {
 		});
 	    }
 
-	    i3GEO.catalogoMenus.aguarde();
+	    i3GEO.catalogoMenus.aguarde(i3GEO.catalogoMenus.config.idOndeMenus);
 	    if(!i3GEO.template.dir || !i3GEO.template.tema || !i3GEO.template.catalogoMigalha){
 		i3GEO.catalogoMenus.carregaTemplates();
 		return;
@@ -147,8 +147,7 @@ i3GEO.catalogoMenus = {
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.catalogoMenus.listaGrupos");
 
-	    //i3GEO.catalogoMenus.aguarde();
-
+	    i3GEO.catalogoMenus.aguarde(i3GEO.catalogoMenus.config.idCatalogoNavegacao);
 	    $("#i3GEOguiaMovelConteudo").scrollTop(0);
 	    i3GEO.catalogoMenus.MENU = nomeMigalha;
 	    i3GEO.catalogoMenus.atualizaMigalha(nomeMigalha,"i3GEO.catalogoMenus.mostraCatalogoPrincipal()");
@@ -252,7 +251,7 @@ i3GEO.catalogoMenus = {
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.catalogoMenus.listaSubGrupos");
 
-	    //i3GEO.catalogoMenus.aguarde();
+	    i3GEO.catalogoMenus.aguarde(i3GEO.catalogoMenus.config.idCatalogoNavegacao);
 	    i3GEO.catalogoMenus.GRUPO = nomeMigalha;
 	    i3GEO.catalogoMenus.escondeCatalogoPrincipal();
 	    i3GEO.catalogoMenus.atualizaMigalha(nomeMigalha,"i3GEO.catalogoMenus.listaGrupos('" + idmenu + "','" + i3GEO.catalogoMenus.MENU + "')");
@@ -337,7 +336,7 @@ i3GEO.catalogoMenus = {
 	    if (typeof (console) !== 'undefined')
 		console.info("i3GEO.catalogoMenus.listaTemasSubgrupo");
 
-	    //i3GEO.catalogoMenus.aguarde();
+	    i3GEO.catalogoMenus.aguarde(i3GEO.catalogoMenus.config.idCatalogoNavegacao);
 	    i3GEO.catalogoMenus.SUBGRUPO = nomeMigalha;
 	    i3GEO.catalogoMenus.escondeCatalogoPrincipal();
 
@@ -526,19 +525,19 @@ i3GEO.catalogoMenus = {
 	getUploadBtn: function(){
 	    var itens = [];
 	    itens.push({
-		title : "",
+		title : "Upload",
 		text: "SHP",
 		onclick : "i3GEO.catalogoMenus.shp()"
 	    },{
-		title : "",
+		title : "Upload",
 		text: "DBF/CSV",
 		onclick : "i3GEO.catalogoMenus.dbfcsv()"
 	    },{
-		title : "",
+		title : "Upload",
 		text: "GPX",
 		onclick : "i3GEO.catalogoMenus.gpx()"
 	    },{
-		title : "",
+		title : "Upload",
 		text: "KML",
 		onclick : "i3GEO.catalogoMenus.kml()"
 	    });
@@ -549,7 +548,6 @@ i3GEO.catalogoMenus = {
 	    var btn = ""
 		+ "<div class='uploadbtn container-fluid container-tools'>"
 		+ "<div class='form-group condensed'>"
-		+ "<span style='vertical-align: middle;color:#ccc;' class='material-icons'>cloud_upload</span> "
 		+ t
 		+ "</div>"
 		+ "</div>";

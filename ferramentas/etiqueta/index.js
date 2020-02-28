@@ -61,7 +61,7 @@ i3GEOF.etiqueta = {
 			css: {'cursor': 'pointer', 'width': '100%', 'height': '50%','position': 'fixed','top': '', 'left': 0, 'right': 0, 'margin': 'auto', 'bottom': 0}
 		    });
 
-	    i3GEO.tema.itens(
+	    i3GEO.tema.getItensParameters(
 		    i3GEOF.etiqueta.montaListaItens,
 		    p.tema
 	    );
@@ -71,10 +71,10 @@ i3GEOF.etiqueta = {
 		var mustache = [], ins,i,n,itensatuais,item, ck = '',temp;
 		itensatuais = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.etiqueta._parameters.tema);
 		itensatuais = itensatuais.etiquetas.split(",");
-		n = data.valores.length;
+		n = data.allItens.length;
 		for (i=0;i<n; i++){
 		    temp = {};
-		    item = data.valores[i].item;
+		    item = data.allItens[i];
 		    temp.item = item;
 		    if(i3GEO.util.in_array(item,lista.itens) || i3GEO.util.in_array(item,itensatuais) || lista.itembuscarapida[item]){
 			temp.ckIdentifica = "checked";
@@ -264,7 +264,7 @@ i3GEOF.etiqueta = {
 	    i3GEOF.etiqueta.get({
 		snackbar: false,
 		fn: function(){
-		    i3GEO.tema.itens(
+		    i3GEO.tema.getItensParameters(
 			    i3GEOF.etiqueta.montaListaItens,
 			    i3GEOF.etiqueta._parameters.tema
 		    );
