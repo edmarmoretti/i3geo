@@ -444,13 +444,9 @@ function ajuda()
 <script src="listaDeFerramentas.js"></script>
 <!-- configuracoes default tipo pode ser OL (openLayers) ou GM (googlemaps) -->
 <script src="../interface/config.php?tipo=OL"></script>
-<script src="../ferramentas/editorol/editorol.js"></script>
 <link rel="stylesheet" type="text/css" href="../pacotes/ol4/ol.css">
 <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
-<!-- <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap-material-design/dist/css/ripples.min.css">-->
-
-<!-- <link rel="stylesheet" type="text/css" href="../pacotes/bootstrap-accessibility-plugin/plugins/js/bootstrap-accessibility.min.js"> -->
 <link rel="stylesheet" type="text/css" href="../css/default.css">
 <style>
 .ol-attribution.ol-uncollapsible {
@@ -1032,11 +1028,11 @@ function ajuda()
 
     <script>
 	//desativa os layers de fundo
-	$.each(i3GEO.Interface.openlayers.LAYERSADICIONAIS, function( index, value ) {
-		i3GEO.Interface.openlayers.LAYERSADICIONAIS[index].setVisible(false);
+	$.each(i3GEO.Interface.LAYERSADICIONAIS, function( index, value ) {
+		i3GEO.Interface.LAYERSADICIONAIS[index].setVisible(false);
 		//ativa o layer de fundo
-		if(i3GEO.Interface.openlayers.LAYERSADICIONAIS[index].get("name") == "<?php echo str_replace("e_","",$parurl["fundo"]);?>"){
-			i3GEO.Interface.openlayers.LAYERSADICIONAIS[index].setVisible(true);
+		if(i3GEO.Interface.LAYERSADICIONAIS[index].get("name") == "<?php echo str_replace("e_","",$parurl["fundo"]);?>"){
+			i3GEO.Interface.LAYERSADICIONAIS[index].setVisible(true);
 		}
 	});
 

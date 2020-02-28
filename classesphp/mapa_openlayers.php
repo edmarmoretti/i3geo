@@ -195,19 +195,22 @@ for ($i = 0; $i < $numlayers; ++ $i) {
     if ($layerName != $_GET["layer"]) {
         $l->set("status", MS_OFF);
     }
+    //corrige um bug do mapserver que adiciona o shapepath
+    //de forma errada quando se usa tileindex
+    if($l->tileindex != ""){
+        $mapa->set("shapepath","");
+    }
     // no caso de haver uma mascara definida no layer
-    if (ms_GetVersionInt() >= 60200) {
-        if ($l->mask != "") {
-            $lmask = $mapa->getlayerbyname($l->mask);
-            if (! empty($postgis_mapa)) {
-                if ($lmask->connectiontype == MS_POSTGIS) {
-                    $lcon = $l->connection;
-                    if (($lcon == " ") || ($lcon == "") || (in_array($lcon, array_keys($postgis_mapa)))) {
-                        if (($lcon == " ") || ($lcon == "")) {
-                            $lmask->set("connection", $postgis_mapa);
-                        } else {
-                            $lmask->set("connection", $postgis_mapa[$lcon]);
-                        }
+    if ($l->mask != "") {
+        $lmask = $mapa->getlayerbyname($l->mask);
+        if (! empty($postgis_mapa)) {
+            if ($lmask->connectiontype == MS_POSTGIS) {
+                $lcon = $l->connection;
+                if (($lcon == " ") || ($lcon == "") || (in_array($lcon, array_keys($postgis_mapa)))) {
+                    if (($lcon == " ") || ($lcon == "")) {
+                        $lmask->set("connection", $postgis_mapa);
+                    } else {
+                        $lmask->set("connection", $postgis_mapa[$lcon]);
                     }
                 }
             }

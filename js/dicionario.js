@@ -2341,9 +2341,9 @@ g_traducao =
         ],
         "variaEscala" : [
             {
-                pt : "Depend&ecirc;ncia da escala",
-                en : "Scale dependency",
-                es : "Dependencia de escala"
+                pt : "Depend. da escala",
+                en : "Scale depend.",
+                es : "Depend. de escala"
             }
         ],
         "mostraTodosLegenda" : [
