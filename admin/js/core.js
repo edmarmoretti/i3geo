@@ -1,4 +1,4 @@
-//veja tambem aplicmap black_editor.php
+//veja tambem aplicmap editor.php
 /*
 Function: $i
 

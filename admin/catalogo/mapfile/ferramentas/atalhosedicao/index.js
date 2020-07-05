@@ -3,26 +3,78 @@ if (typeof (i3GEOF) === 'undefined') {
 }
 i3GEOF.atalhosedicao =
 {
-	tema: "",
-	/**
-	 * Template no formato mustache. E preenchido na carga do javascript com o programa dependencias.php
-	 */
-	MUSTACHE : "",
-	/**
-	 * Susbtitutos para o template
-	 */
-	mustacheHash : function() {
-	    var dicionario = i3GEO.idioma.objetoIdioma(i3GEOF.atalhosedicao.dicionario);
-	    dicionario["locaplic"] = i3GEO.configura.locaplic;
-	    return dicionario;
-	},
-	/*
-	 * Function: iniciaDicionario (Depreciado na versao 6.0)
-	 *
-	 */
-	iniciaDicionario : function() {
-	    i3GEOF.atalhosedicao.iniciaJanelaFlutuante();
-	},
+        _parameters : {
+            "mustache": "",
+            "idContainer": "i3GEOatalhosedicaoContainer",
+            "namespace": "atalhosedicao"
+        },
+        _formModal: true,
+        start : function(){
+            var p = this._parameters,
+            i3f = this,
+            t1 = i3GEO.configura.locaplic + "/admin/catalogo/mapfile/ferramentas/atalhosedicao/template_mst.html";
+            if(p.mustache === ""){
+                $.get(t1, function(template) {
+                    p.mustache = template;
+                    i3f.html();
+                }).fail(function() {
+                    i3GEO.janela.tempoMsg($trad("erroTpl"));
+                });
+            } else {
+                i3f.html();
+            }
+        },
+        destroy: function(){
+            i3GEOF.atalhosedicao._parameters.mustache = "";
+            //i3GEOF.opcoeslegenda._parameters.dataForm = "";
+            i3GEOF.atalhosedicao.start();
+        },
+        html:function() {
+            var p = this._parameters,
+            i3f = this,
+            tema,
+            hash = {};
+            hash = {
+                    locaplic: i3GEO.configura.locaplic,
+                    namespace: p.namespace,
+                    idContainer: p.idContainer,
+                    ...i3GEO.idioma.objetoIdioma(i3f.dicionario)
+            };
+            i3GEOF.atalhosedicao._formModal = i3GEO.janela.formModal(
+                    {
+                        idForm: "Editor",
+                        objJanela: i3GEOF.atalhosedicao._formModal,
+                        expandable: false,
+                        texto: Mustache.render(p.mustache, hash),
+                        resizable: {
+                            disabled: true,
+                            ghost: true,
+                            handles: "se,n"
+                        },
+                        css: {'cursor': 'pointer', 'width': '300px','position': 'fixed','top': 0, 'left': 100, 'right': 0, 'margin': 'auto', 'bottom': ''},
+                        onclose: false
+                    }
+            );
+            i3GEOF.atalhosedicao._formModal.find(".closeModal").css("visibility","hidden");
+            if(i3GEOF.atalhosedicao.tema === ""){
+                i3GEOF.atalhosedicao.tema = i3GEO.temaAtivo;
+            }
+            //
+            //atualiza os campos que dependem de parametros de cada camada
+            //
+            tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.atalhosedicao.tema);
+            if(tema.cache.toLowerCase() === "sim"){
+                $i("i3GEOFatalhosedicaoCache").checked = true;
+            }
+            if(tema.classe.toLowerCase() === "nao"){
+                $i("i3GEOFatalhosedicaoClasse").checked = false;
+            }
+            if(tema.identifica.toLowerCase() === "nao"){
+                $i("i3GEOFatalhosedicaoIdentifica").checked = false;
+            }
+            $i("i3GEOFatalhosedicaoOpacidade").value = tema.transparency;
+        },
+        tema: "",
 	salva: function(){
 	    i3GEOF.atalhosedicao.metadata($i("i3GEOFatalhosedicaoCache"),true);
 	    i3GEO.tema.dialogo.salvaMapfile(i3GEOF.atalhosedicao.tema);
@@ -143,97 +195,6 @@ i3GEOF.atalhosedicao =
 		);
 	    };
 	    core_pegaDados("",sUrl,montaEditorPlugin);
-	},
-	/*
-	 * Function: inicia
-	 *
-	 * Inicia a ferramenta. &Eacute; chamado por criaJanelaFlutuante
-	 *
-	 * Parametro:
-	 *
-	 * iddiv {String} - id do div que receber&aacute; o conteudo HTML da ferramenta
-	 */
-	inicia : function(iddiv, idjanela) {
-	    var tema;
-	    i3GEO.janela.comboCabecalhoTemas(
-		    "i3GEOFatalhosedicaoComboCabeca",
-		    "i3GEOFatalhosedicaoComboCabecaSel",
-		    "atalhosedicao",
-	    "ligadosComTabela");
-	    if(i3GEOF.atalhosedicao.tema === ""){
-		i3GEOF.atalhosedicao.tema = i3GEO.temaAtivo;
-	    }
-	    $i(iddiv).innerHTML = i3GEOF.atalhosedicao.html(idjanela);
-	    //
-	    //atualiza os campos que dependem de parametros de cada camada
-	    //
-	    tema = i3GEO.arvoreDeCamadas.pegaTema(i3GEOF.atalhosedicao.tema);
-	    if(tema.cache.toLowerCase() === "sim"){
-		$i("i3GEOFatalhosedicaoCache").checked = true;
-	    }
-	    if(tema.classe.toLowerCase() === "nao"){
-		$i("i3GEOFatalhosedicaoClasse").checked = false;
-	    }
-	    if(tema.identifica.toLowerCase() === "nao"){
-		$i("i3GEOFatalhosedicaoIdentifica").checked = false;
-	    }
-	    $i("i3GEOFatalhosedicaoOpacidade").value = tema.transparency;
-	},
-	/*
-	 * Function: html
-	 *
-	 * Gera o c&oacute;digo html para apresenta&ccedil;&atilde;o das op&ccedil;&otilde;es da ferramenta
-	 *
-	 * Retorno:
-	 *
-	 * String com o c&oacute;digo html
-	 */
-	html : function(idjanela) {
-	    var ins = Mustache.render(i3GEOF.atalhosedicao.MUSTACHE, i3GEOF.atalhosedicao.mustacheHash());
-	    return ins;
-	},
-	/*
-	 * Function: criaJanelaFlutuante
-	 *
-	 * Cria a janela flutuante para controle da ferramenta.
-	 */
-	iniciaJanelaFlutuante : function() {
-	    var minimiza, cabecalho, janela, divid, titulo;
-
-	    if($i("i3GEOF.atalhosedicao")){
-		return;
-	    }
-	    cabecalho = function() {
-	    };
-	    minimiza = function() {
-		i3GEO.janela.minimiza("i3GEOF.atalhosedicao",200);
-	    };
-	    // cria a janela flutuante
-	    titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + i3GEO.temaAtivo + "</span></div>";
-	    janela =
-		i3GEO.janela.cria(
-			"300px",
-			"350px",
-			"",
-			"",
-			"",
-			titulo,
-			"i3GEOF.atalhosedicao",
-			false,
-			"hd",
-			cabecalho,
-			minimiza,
-			"",
-			true,
-			"",
-			"",
-			"",
-			""
-		);
-	    divid = janela[2].id;
-	    janela[0].moveTo(180,60);
-	    $i("i3GEOF.atalhosedicao_corpo").style.backgroundColor = "white";
-	    i3GEOF.atalhosedicao.inicia(divid, "i3GEOF.atalhosedicao");
 	},
 	/**
 	 * Aplica ao objeto CAMADAS o parametro definido

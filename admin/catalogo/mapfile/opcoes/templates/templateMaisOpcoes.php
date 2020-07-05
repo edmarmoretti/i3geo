@@ -52,7 +52,7 @@
 <div class="list-group-item">
 	<div class="row-content" >
 		<h4 class="list-group-item-heading">
-			<a title="{{{editarI3geo}}}" onclick="window.open('../../../../admin/black_editor.php?temaEdicao={{codigo}}&mapext={{mapext}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
+			<a title="{{{editarI3geo}}}" onclick="window.open('../../../../admin/editor.php?temaEdicao={{codigo}}&mapext={{mapext}}')" href="javascript:void(0)" class="pull-right btn btn-danger btn-fab btn-fab-mini" role="button">
 				<i class="material-icons  md-18">map</i>
 			</a>
 			{{{editarI3geo}}}

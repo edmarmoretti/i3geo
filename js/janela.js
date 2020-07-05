@@ -674,7 +674,13 @@ i3GEO.janela =
 	},
 	_formModal: false,
 	//utilizado para mensagens de ferramentas com botao de close e outros parametros
-	formModal : function({expandable = true, resizable = {disabled: true, ghost: true, handles: "se"}, texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = false} = {}) {
+	//utilize objJanela como uma variavel vazia que recebera o objeto criado e idForm para definir os IDs
+	//dos elementos HTML internos da janela. Dessa forma a janela funcionara de forma indipendente
+	formModal : function({objJanela = false, idForm = "", expandable = true, resizable = {disabled: true, ghost: true, handles: "se"}, texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = false} = {}) {
+	    var obj = false;
+	    if(objJanela == false){
+	        obj = i3GEO.janela._formModal;
+	    }
 	    if(css == false){
 		css = {'cursor': 'pointer', 'width': '', 'height': '','position': 'fixed','top': 0, 'left': 0, 'right': 0, 'margin': 'auto'};
 	    }
@@ -682,76 +688,76 @@ i3GEO.janela =
 		css.cursor = "move";
 		css.right = "auto";
 	    }
-	    if(!i3GEO.janela._formModal){
-		i3GEO.janela._formModal = $(
-			Mustache.render(i3GEO.template.janela.formModal, {"texto": "","header": ""})
+	    if(!obj){
+	        obj = $(
+			Mustache.render(i3GEO.template.janela.formModal, {"texto": "","header": "", "id": idForm})
 		);
-		i3GEO.janela._formModal.on('hidden.bs.modal', function (e) {
-		    $("#i3GEOToolFormModal").html("");
-		    $("#i3GEOToolFormModalHeader").html("");
-		    $("#i3GEOToolFormModalFooter").html("").css({display: "none"});
+		obj.on('hidden.bs.modal', function (e) {
+		    $("#i3GEOToolFormModal" + idForm).html("");
+		    $("#i3GEOToolFormModalHeader" + idForm).html("");
+		    $("#i3GEOToolFormModalFooter" + idForm).html("").css({display: "none"});
 		});
-		i3GEO.janela._formModal.resizable(resizable);
+		obj.resizable(resizable);
 		if(resizable.disabled == true){
-		    i3GEO.janela._formModal.resizable( "destroy" );
+		    obj.resizable( "destroy" );
 		}
-		i3GEO.janela._formModal.draggable({
+		obj.draggable({
 		    handle: ".handleDraggable"
 		});
-		i3GEO.janela._formModal.css(css);
-		i3GEO.janela._formModal.draggable(draggable);
-		$(i3GEO.janela._formModal).appendTo("#" + i3GEO.Interface.IDCORPO);
+		obj.css(css);
+		obj.draggable(draggable);
+		$(obj).appendTo("#" + i3GEO.Interface.IDCORPO);
 
-		i3GEO.janela._formModal.find(".expandModal").on("click",function(){
+		obj.find(".expandModal").on("click",function(){
 		    if($(this).data("expanded") == true){
 			$(this).data("expanded",false);
-			i3GEO.janela._formModal.css($(this).data("original"));
+			obj.css($(this).data("original"));
 		    } else {
 			$(this).data("expanded",true);
 			$(this).data("original",{
-			    top: i3GEO.janela._formModal.css("top"),
-			    left: i3GEO.janela._formModal.css("left"),
-			    width: i3GEO.janela._formModal.css("width"),
-			    height: i3GEO.janela._formModal.css("height")
+			    top: obj.css("top"),
+			    left: obj.css("left"),
+			    width: obj.css("width"),
+			    height: obj.css("height")
 			});
-			i3GEO.janela._formModal.css({"top":"0px","left":"0px","width":"100%","height":"100%"});
+			obj.css({"top":"0px","left":"0px","width":"100%","height":"100%"});
 		    }
 		});
 	    }
 	    if(expandable == true){
-		i3GEO.janela._formModal.find(".expandModal").css("visibility","visible");
+	        obj.find(".expandModal").css("visibility","visible");
 	    } else {
-		i3GEO.janela._formModal.find(".expandModal").css("visibility","hidden");
+	        obj.find(".expandModal").css("visibility","hidden");
 	    }
 	    if(texto == false){
-		i3GEO.janela._formModal.modal("hide");
+	        obj.modal("hide");
 	    } else {
-		$("#i3GEOToolFormModal").html(texto);
+		$("#i3GEOToolFormModal" + idForm).html(texto);
 		if(header){
-		    $("#i3GEOToolFormModalHeader").html(header);
+		    $("#i3GEOToolFormModalHeader" + idForm).html(header);
 		} else {
-		    $("#i3GEOToolFormModalHeader").html("");
+		    $("#i3GEOToolFormModalHeader" + idForm).html("");
 		}
 		if(footer){
-		    $("#i3GEOToolFormModalFooter").html(footer).css({display: "block"});
+		    $("#i3GEOToolFormModalFooter" + idForm).html(footer).css({display: "block"});
 		} else {
-		    $("#i3GEOToolFormModalFooter").html("").css({display: "none"});
+		    $("#i3GEOToolFormModalFooter" + idForm).html("").css({display: "none"});
 		}
-		i3GEO.janela._formModal.find(".modal-content").css("height","");
+		obj.find(".modal-content").css("height","");
 
-		i3GEO.janela._formModal.css(css);
+		obj.css(css);
 
-		i3GEO.janela._formModal.modal({
+		obj.modal({
 		    backdrop: backdrop
 		});
-		i3GEO.janela._formModal.draggable(draggable);
-		i3GEO.janela._formModal.resizable(resizable);
+		obj.draggable(draggable);
+		obj.resizable(resizable);
 		if(resizable.disabled == true){
-		    i3GEO.janela._formModal.resizable( "destroy" );
+		    obj.resizable( "destroy" );
 		} else {
-		    i3GEO.janela._formModal.find(".modal-content").css("height","100%");
+		    obj.find(".modal-content").css("height","100%");
 		}
-		i3GEO.janela._formModal.css("padding-left",0);
+		obj.css("padding-left",0);
 	    }
 	    //fecha as guias em dispositivos com tela pequena
 	    if(i3GEO.parametros.w < 420){
@@ -761,20 +767,24 @@ i3GEO.janela =
 		if (typeof (console) !== 'undefined')
 		    console.info("onclose janela._formModal");
 
-		i3GEO.janela._formModal.on("hidden.bs.modal",function(){
+		obj.on("hidden.bs.modal",function(){
 		    onclose();
-		    i3GEO.janela._formModal.unbind("hidden.bs.modal");
+		    obj.unbind("hidden.bs.modal");
 		});
 	    } else {
-		i3GEO.janela._formModal.unbind("hidden.bs.modal");
+	        obj.unbind("hidden.bs.modal");
 	    }
-	    i3GEO.janela._formModal.block = function(){
+	    obj.block = function(){
 		$("#i3GEOToolFormModalWrap").css("display","block");
 	    };
-	    i3GEO.janela._formModal.unblock = function(){
-		$("#i3GEOToolFormModalWrap").css("display","none");
+	    obj.unblock = function(){
+		$("#i3GEOToolFormModalWrap" + idForm).css("display","none");
 	    };
 	    $("#i3GEOToolFormModalWrap").css("display","none");
+	    if(objJanela == false){
+	        i3GEO.janela._formModal = obj;
+	    }
+	    return obj;
 	},
 	/**
 	 * Function: ativaAlerta
