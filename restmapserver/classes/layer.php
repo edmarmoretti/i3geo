@@ -160,7 +160,7 @@ class Layer
             $locimg = "";
         } else {
             $itens = $layerObj->getmetadata("ITENS"); // itens
-            $itensdesc = $layerObj->getmetadata("ITENSDESC"); // descri&ccedil;&atilde;o dos itens
+            $itensdesc = $this->util->txt2utf($layerObj->getmetadata("ITENSDESC")); // descri&ccedil;&atilde;o dos itens
             $lks = $layerObj->getmetadata("ITENSLINK"); // link dos itens
             $itemimg = $layerObj->getmetadata("ITEMIMG"); // indica um item que ser&aacute; utilizado para colocar um &iacute;cone
             $locimg = $layerObj->getmetadata("IMGLOC"); // indica o local onde est&atilde;o os &iacute;cones
@@ -479,6 +479,26 @@ class Layer
         } else {
             return false;
         }
+    }
+
+    function getUniqueValuesItem($layerObj, $itemName){
+        $this->ativateQuery($layerObj);
+        $this->setCon($layerObj);
+        $rectObj = $layerObj->getExtent();
+        $result = @$layerObj->queryByRect($rectObj);
+        $this->hiddeCon($layerObj);
+        $valores = array();
+        if ($result == MS_SUCCESS) {
+            $layerObj->open();
+            $res_count = $layerObj->getNumresults();
+            for ($i = 0; $i < $res_count; ++ $i) {
+                $shapeObj = $layerObj->getShape($layerObj->getResult($i));
+                $valores[] = $this->util->txt2utf(trim($shapeObj->values[$itemName]));
+            }
+        }
+        $valoresunicos = array_unique($valores);
+        sort($valoresunicos);
+        return $valoresunicos;
     }
 
     function searchColumn($mapObj, $layerObj, $search, $column, $extent)

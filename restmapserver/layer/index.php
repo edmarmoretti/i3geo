@@ -406,15 +406,23 @@ $app->map([
     ->write(json_encode($data));
     return $response;
 });
+$app->map([
+    'GET',
+    'POST'
+],'/{mapId}/{layerName}/getUniqueValuesItem', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $mapObj = $this->map->getMapObj($args["mapId"]);
+    $layerObj = $mapObj->getLayerByName($args["layerName"]);
+    $data = $this->layer->getUniqueValuesItem($layerObj, $itemName);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data));
+    return $response;
+});
 $app->run();
 exit;
 
 switch (strtoupper($_GET["funcao"])) {
-    case "VALORESITEM":
-        include (I3GEOPATH."/classesphp/classe_atributos.php");
-        $m = new Atributos($_SESSION["map_file"], $_GET["tema"], "", $_GET["ext"]);
-        $retorno = $m->listaUnicoRapida($_GET["item"]);
-        break;
     case "ALTERLAYERNAME":
         include (I3GEOPATH."/classesphp/classe_temas.php");
         $valor = mb_convert_encoding($_GET["title"], "ISO-8859-1", mb_detect_encoding($_GET["title"]));

@@ -85,13 +85,13 @@ if(empty($w)){
 if(empty($h)){
     $h = 500;
 }
-if(empty($nulos)){
+if(!isset($nulos)){
     $nulos = "";
 }
 if(empty($tipocolunat)){
     $tipocolunat = "string";
 }
-if(empty($operador)){
+if(empty($operador) || @$operador == "eq"){
     $operador = "=";
 }
 else{
@@ -173,18 +173,14 @@ else{
         $base = $locaplic."/aplicmap/".$base;
     }
 }
-//desenv /var/www/html/i3geo/i3geo/sage/camadas/base_linux.map
 $mapa = ms_newMapObj($base);
-//remove as camadas do mapa base
 if(!isset($_GET["sid"])){
     $numlayers = $mapa->numlayers;
     for ($i=0;$i < $numlayers;$i++){
         $layern = $mapa->getlayer($i);
-        $layern->set("status",MS_DEFAULT);
+        $layern->set("status",MS_DELETE);
     }
-}
-//adiciona ao mapa base as camadas do mapfile indicado em $tema
-if(!isset($_GET["sid"])){
+    //adiciona ao mapa base as camadas do mapfile indicado em $tema
     $nmapa = ms_newMapObj($locaplic."/temas/".$tema.".map");
     $numlayers = $nmapa->numlayers;
     for ($i=0;$i < $numlayers;$i++){
@@ -193,8 +189,8 @@ if(!isset($_GET["sid"])){
         cloneInlineSymbol($layern,$nmapa,$mapa);
         ms_newLayerObj($mapa, $layern);
     }
-
 }
+
 //aplica a extensao geografica
 $layer = $mapa->getlayerbyname($tema);
 $extatual = $mapa->extent;
@@ -250,14 +246,17 @@ restauraConObj($mapa,$postgis_mapa);
 $mapatit = ms_newMapObj(dirname(__FILE__)."/title.map");
 $layertit = $mapatit->getlayer(0);
 ms_newLayerObj($mapa, $layertit);
-
 $mapa->save($arqtemp.".map");
 $mapa = ms_newMapObj($arqtemp.".map");
-
 //pega a lista de valores unicos da $colunat
-include_once("../../classesphp/classe_atributos.php");
-$m = new Atributos($arqtemp.".map",$tema);
-$lista = $m->listaUnicoRapida($colunat);
+include("../../restmapserver/classes/util.php");
+include("../../restmapserver/classes/layer.php");
+$layer = $mapa->getlayerbyname($tema);
+$layer->set("status",MS_DEFAULT);
+
+$m = new \restmapserver\Layer();
+$lista = $m->getUniqueValuesItem($layer, $colunat);
+
 $listaunica = array();
 foreach($lista as $l){
     $l = str_replace($nulos,"",$l);
@@ -265,17 +264,14 @@ foreach($lista as $l){
         $listaunica[] = $l;
     }
 }
-//$mapa = ms_newMapObj($arqtemp.".map");
-//cria as imagens para cada periodo
-$layer = $mapa->getlayerbyname($tema);
-$layer->set("status",MS_DEFAULT);
 
-//$mapa->moveLayerdown(0);
-//$mapa->save($arqtemp.".map");
 substituiConObj($mapa,$postgis_mapa);
 $numlayers = $mapa->numlayers;
 for ($i = 0; $i < $numlayers; ++ $i) {
     $l = $mapa->getlayer($i);
+    if ($l->getProjection() == "") {
+        $l->setProjection("proj=latlong,a=6378137,b=6378137");
+    }
     if (($l->data != "") && (strtoupper($l->getmetadata("escondido")) != "SIM") && (strtoupper($l->getmetadata("tema")) != "NAO")) {
         if ($l->numclasses > 0) {
             $cl = $l->getclass(0);
@@ -298,77 +294,49 @@ for ($i = 0; $i < $numlayers; ++ $i) {
 $copyright = $mapa->getlayerbyname("title");
 if($copyright != ""){
     $c = $copyright->getclass(0);
-    if($vi >= 60200){
-        $label = $c->getLabel(0);
-    }
-    else{
-        $label = $c->label;
-    }
+    $label = $c->getLabel(0);
 }
+
 $imagens = array();
 $duracao = array();
 $objImagem = "";
-
+$layer = $mapa->getlayerbyname($tema);
+$layer->set("status",MS_OFF);
+$s = "LABEL TEXT '' END";
+$label->updateFromString($s);
+$objImagem = $mapa->draw();
+$objImagem->saveImage($arqtemp."0.png");
+$layer->set("status",MS_DEFAULT);
+$imagens[] = $arqtemp."0.png";
+$duracao[] = $tempo;
 foreach($listaunica as $d){
-    $layer = $mapa->getlayerbyname($tema);
-
-    /*
-    if(strtoupper($colunat) == $colunat){
-        $filtro = "(('[$colunat]' $operador '$d'))";
-        if($tipocolunat == "numerico" || $tipocolunat == "numero"){
-            $filtro = "(([$colunat] $operador $d))";
-        }
-    }
-    else{
-        $filtro = "$colunat $operador '$d'";
-        if($tipocolunat == "numerico"  || $tipocolunat == "numero"){
-            $filtro = " $colunat $operador $d ";
-        }
-    }
-    */
     $filtro = "(('[$colunat]' $operador '$d'))";
     if($tipocolunat == "numerico" || $tipocolunat == "numero"){
         $filtro = "(([$colunat] $operador $d))";
     }
     $layer->setfilter($filtro);
     $nomec = $arqtemp.$d.".png";
-    if($copyright != "" && $vi >= 60300){
-        $s = "LABEL TEXT '".$d."' END";
-        $label->updateFromString($s);
-    }
-    else{
-        $classe->title = $d;
-    }
-
-    //$mapa->save($arqtemp."teste.map");
-    if(!file_exists($nomec)){
-        if($objImagem == ""){
-            $objImagem = $mapa->draw();
-            $objImagem->saveImage($nomec);
-        }
-        else{
-            $i = $mapa->draw();
-            $objImagem->pasteImage($i,-1);
-            $objImagem->saveImage($nomec);
-        }
-    }
+    $s = "LABEL TEXT '".$d."' END";
+    $label->updateFromString($s);
+    $i = $mapa->draw();
+    $objImagem->pasteImage($i,-1);
+    $objImagem->saveImage($nomec);
     $imagens[] = $nomec;
     $duracao[] = $tempo;
 }
 
 restauraConObj($mapa,$postgis_mapa);
-//$mapa->save($arqtemp.".map");
-
-//unlink($arqtemp.".map");
 $mapa = null;
 //junta as imagens no gif
-
 include("../../pacotes/gifcreator/GifCreator.php");
 
 $gc = new GifCreator();
 $gc->create($imagens, $duracao, 0);
 $gifBinary = $gc->getGif();
 file_put_contents($arqtemp.".gif", $gifBinary);
+foreach($imagens as $i){
+    unlink($i);
+}
 //retorna o gif para o navegador
 ob_clean();
 header('Content-type: image/gif');

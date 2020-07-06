@@ -66,7 +66,7 @@ i3GEOF.animagif.dicionario = {
 		es : "Se utiliza '=' como operador por defecto de la conexi&oacute;n entre la columna y el valor de la fecha, pero se puede emplear tambi&eacute;n 'lt' (menor que) o 'gt' (mayor que)"
 	} ],
 	'geragif' : [{
-		pt : "Cria o gif animado",
+		pt : "Cria o gif",
 		en : "Create an animated gif",
 		es : "Crea un gif animado"
 	}],
