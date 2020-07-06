@@ -338,28 +338,22 @@ i3GEO.tema =
          *
          * {string} - codigo do tema
          */
-        mudanome : function(idlayer,title) {
-            if (typeof (console) !== 'undefined')
-                console.info("i3GEO.tema.mudanome() ");
-
-            if (title !== "") {
-                i3GEO.request.get({
-                    snackbar: false,
-                    snackbarmsg: false,
-                    btn: false,
-                    par: {
-                        title: title,
-                        idlayer: idlayer,
-                        funcao: "alterLayerName"
-                    },
-                    prog: "/serverapi/layer/",
-                    fn: function(data){
-                        i3GEO.mapa.refresh();
-                    }
-                });
-            } else {
+        mudanome : function(layerName,layerTitle) {
+            if (layerTitle == "") {
                 i3GEO.janela.tempoMsg($trad("x18"));
             }
+            i3GEO.request.get({
+                snackbar: true,
+                snackbarmsg: false,
+                btn: false,
+                par: {"layerTitle": layerTitle},
+                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/alterName",
+                fn: function(data){
+                    if(data == true){
+                        i3GEO.mapa.refresh();
+                    }
+                }
+            });
         },
         /**
          * Function: copia

@@ -892,4 +892,20 @@ class Layer
         return true;
     }
 
+    function alterName($mapObj, $layerName,$layerTitle)
+    {
+        if (! $mapObj) {
+            return false;
+        }
+        $layerObj = $mapObj->getLayerByname($layerName);
+        $layerTitle = str_replace("*","&",$layerTitle);
+        $layerTitle = str_replace("|",";",$layerTitle);
+        $layerTitle = html_entity_decode($layerTitle);
+        $meta = $layerObj->getmetadata("tema");
+        if (($meta != "") && ($meta != "NAO")){
+            $layerObj->setmetadata("tema",$this->util->txt2utf($layerTitle));
+        }
+        $mapObj->save($_SESSION["map_file"]);
+        return true;
+    }
 }

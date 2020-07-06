@@ -406,6 +406,40 @@ $app->map([
     ->write(json_encode($data));
     return $response;
 });
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/getUniqueValuesItem/",
+ * 		tags={"layer"},
+ * 		operationId="getUniqueValuesItem",
+ * 		summary="Get item unique values",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerName",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layer name"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="itemName",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Item name"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="data",
+ * 		)
+ * )
+ */
 $app->map([
     'GET',
     'POST'
@@ -413,7 +447,53 @@ $app->map([
     $param = $this->util->sanitizestrings($request->getQueryParams());
     $mapObj = $this->map->getMapObj($args["mapId"]);
     $layerObj = $mapObj->getLayerByName($args["layerName"]);
-    $data = $this->layer->getUniqueValuesItem($layerObj, $itemName);
+    $data = $this->layer->getUniqueValuesItem($layerObj, @$param["itemName"]);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write(json_encode($data));
+    return $response;
+});
+/**
+ *
+ * @SWG\Get(
+ * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/alterName/",
+ * 		tags={"layer"},
+ * 		operationId="getUniqueValuesItem",
+ * 		summary="Get item unique values",
+ * 		@SWG\Parameter(
+ * 			name="mapId",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Map id"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerName",
+ * 			in="path",
+ * 			required=true,
+ * 			type="string",
+ * 			description="Layer name"
+ * 		),
+ * 		@SWG\Parameter(
+ * 			name="layerTitle",
+ * 			in="query",
+ * 			required=true,
+ * 			type="string",
+ * 			description="New name"
+ * 		),
+ *      @SWG\Response(
+ * 			response="200",
+ *          description="data",
+ * 		)
+ * )
+ */
+$app->map([
+    'GET',
+    'POST'
+],'/{mapId}/{layerName}/alterName', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $mapObj = $this->map->getMapObj($args["mapId"]);
+    $data = $this->layer->alterName($mapObj,$args["layerName"], @$param["layerTitle"]);
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
     ->write(json_encode($data));
@@ -421,13 +501,3 @@ $app->map([
 });
 $app->run();
 exit;
-
-switch (strtoupper($_GET["funcao"])) {
-    case "ALTERLAYERNAME":
-        include (I3GEOPATH."/classesphp/classe_temas.php");
-        $valor = mb_convert_encoding($_GET["title"], "ISO-8859-1", mb_detect_encoding($_GET["title"]));
-        $m = new Temas($_SESSION["map_file"], $_GET["idlayer"]);
-        $retorno = $m->mudaNome($valor);
-        $m->salva();
-        break;
-}

@@ -23,7 +23,6 @@ if ($l->getmetadata("UTFITEM") != "") {
     $l->updateFromString("LAYER UTFITEM '" . $temp . "' END");
 }
 if ($l->getmetadata("UTFDATA") != "") {
-    //"UTFDATA" "{\"text\":\"[FIPS_CNTRY]\"}"
     $temp = "{\"text\":\"[" . $l->getmetadata("UTFDATA") . "]\"}";
     $l->updateFromString("LAYER UTFDATA '" . $temp . "' END");
 }
