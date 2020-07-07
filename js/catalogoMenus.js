@@ -130,12 +130,10 @@ i3GEO.catalogoMenus = {
 		snackbarmsg: false,
 		btn: false,
 		par: {
-		    filtraOgc: "nao",
-		    filtraDown: "nao",
-		    idioma: i3GEO.idioma.ATUAL,
-		    funcao: "pegalistademenus"
+		    lang: i3GEO.idioma.ATUAL,
+		    mapId: i3GEO.configura.sid
 		},
-		prog: "/serverapi/catalog/",
+		prog: "/restmapserver/catalog/getMenus",
 		fn: function(data){
 		    if (after){
 			after.call(after, data);
