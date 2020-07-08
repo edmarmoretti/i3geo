@@ -758,6 +758,19 @@ i3GEO.mapa =
                 i3GEO.timer.mapa.start();
             },
             /**
+             * Function: linkMapaOriginal
+             *
+             * Abre a janela de dialogo da ferramenta salvamapa
+             */
+            linkMapaOriginal : function() {
+                i3GEO.util.dialogoFerramenta(
+                        "i3GEO.mapa.dialogo.linkMapaOriginal()",
+                        "linkmapaoriginal",
+                        "linkmapaoriginal",
+                        "dependencias.php",
+                "i3GEOF.linkMapaOriginal.start()");
+            },
+            /**
              * Function: salvaMapa
              *
              * Abre a janela de dialogo da ferramenta salvamapa

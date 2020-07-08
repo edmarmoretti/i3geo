@@ -85,6 +85,10 @@ class Catalog
         }
         return $resultado;
     }
+
+    function getMenuGroups($id_menu,$lang)
+    {
+    }
     function getRootMenusLayers($lang){
         $coluna = $lang;
         if ($lang == "pt") {

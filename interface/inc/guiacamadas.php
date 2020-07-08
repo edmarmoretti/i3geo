@@ -42,6 +42,9 @@
                         <span class="glyphicon glyphicon-repeat"></span> {{{p12}}}
                     </a></li>
                 <li role="separator" class="divider"></li>
+                <li><a onclick="i3GEO.mapa.dialogo.linkMapaOriginal()" href="javascript:void(0)">
+                        <span class="glyphicon glyphicon-link"></span> {{{linkMapaOriginal}}}
+                    </a></li>
                 <li><a onclick="i3GEO.mapa.dialogo.salvamapa()" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-floppy-save"></span> {{{u17}}}
                     </a></li>

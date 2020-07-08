@@ -3363,5 +3363,12 @@ g_traducao =
                 en : "",
                 es : ""
             }
+        ],
+        "linkMapaOriginal" : [
+            {
+                pt : "Link para o mapa original",
+                en : "",
+                es : ""
+            }
         ]
     };

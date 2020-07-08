@@ -78,7 +78,6 @@ botoesIni = [
 	"fa": "bar-chart",
 	"target": "_self"
 },
-*/
 {
 	"img":"imagens/insert-link.png",
 	"href": "../permlinks/index.php",
@@ -86,7 +85,9 @@ botoesIni = [
 	"subtitulo": $trad("13a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_self"
-},{
+},
+*/
+{
 	"img":"imagens/openlayersdebug.png",
 	"href": location.href.replace("init/index.php"+window.location.search,"") +  customDir + "/openlayersdebug.php",
 	"titulo":$trad(5,g_traducao_init),

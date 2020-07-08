@@ -65,6 +65,19 @@ $app->map([
         ->write($json);
     return $response;
 });
+$app->map([
+    'GET',
+    'POST'
+], '/getMenuGroups', function (Request $request, Response $response, $args) {
+    $param = $this->util->sanitizestrings($request->getQueryParams());
+    $this->map->open($param["mapId"]);
+    $data = $this->catalog->getMenuGroups($param["id_menu"],$param["lang"]);
+    $json = $this->util->toJson($data);
+    $response = $response->withHeader('Content-Type', 'application/json');
+    $response->getBody()
+    ->write($json);
+    return $response;
+});
 $app->run();
 exit;
 
