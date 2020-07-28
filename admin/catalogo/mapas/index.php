@@ -21,9 +21,9 @@ include "../../head.php";
                     <i class="material-icons">search</i>
                 </button>
                 <h2>
-                    <small>{{{txtTitulo}}}</small>
+                    <small>{{{txtTituloMapas}}}</small>
                 </h2>
-                <blockquote>{{{txtDesc}}}<br>
+                <blockquote>{{{txtDescMapas}}}<br>
                     <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
                         <span class="text-primary readMore">
                             <i class="material-icons">keyboard_arrow_down</i>

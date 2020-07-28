@@ -1,10 +1,10 @@
 i3GEOadmin.mapas.dicionario = {
-	'txtDesc' : [ {
+	'txtDescMapas' : [ {
 		pt : "Mapas recebem um identificador &uacute;nico e usam URLs curtas para inicializa&ccedil;&atilde;o. Os mapas podem ter sido salvos (mapfile salvo no banco de dados) por meio da ferramenta 'salvar mapa' ou podem ser apenas par&acirc;metros definidos ao criar um novo mapa nas op&ccedil;&otilde;es abaixo. Na p&aacute;gina principal do i3Geo existe uma op&ccedil;&atilde;o que permite ao usu&aacute;rio abrir os mapas.",
 		en : "Maps have a unique identifier and use short URLs for startup. Maps may have been saved (mapfile saved in the database) through 'save map' option or they can be just parameters defined when creating a new map in the options below.",
 		es : "Los mapas reciben un identificador &uacute;nico y utilizan direcciones URL cortas para el inicio. Los mapas pueden haber sido guardados (mapfile guardado en la base de datos) a trav&eacute;s de la herramienta 'Guardar Mapa' o pueden ser solo par&aacute;metros definidos al crear un nuevo mapa en las siguientes opciones. En la p&aacute;gina principal de i3Geo existe una opci&oacute;n que permite al usuario abrir los mapas."
 	} ],
-	'txtTitulo' : [ {
+	'txtTituloMapas' : [ {
 		pt : "Links para mapas",
 		en : "Links to maps",
 		es : "Enlaces a los mapas"
