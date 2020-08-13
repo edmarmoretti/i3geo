@@ -401,7 +401,6 @@ if(isset($_GET["version"]) && !isset($_GET["VERSION"])){
 if(!isset($VERSION) || $VERSION == ""){
 	$req->setParameter("VeRsIoN","1.1.1");
 }
-
 //
 //nome do mapfile que ficara em cache
 //
@@ -572,6 +571,14 @@ else{
 							$l->set("dump",MS_TRUE);
 							$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 							$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+							if($l->getmetadata("ows_featureid") == "" && $l->connectiontype == MS_POSTGIS){
+							    //tenta obter da string do data
+							    $teste = explode("using unique",$l->data);
+							    $teste = explode(" ",ltrim($teste[1]));
+							    if(!empty(trim($teste[0]))){
+							     $l->setmetadata("ows_featureid",trim($teste[0]));
+							    }
+							}
 
 							if(file_exists($locaplic."/temas/miniaturas/".$t.".map.mini.png")){
 								$mini = $proto.$server.dirname($_SERVER['PHP_SELF'])."/temas/miniaturas/".$t.".map.mini.png";
