@@ -436,7 +436,7 @@ $arrayget["TileMatrix"] = "";
 $arrayget["TileCol"] = "";
 $arrayget["TileRow"] = "";
 
-$nomeMapfileTmp = $dir_tmp."/ogc_".md5(implode("",$arrayget))."_".$agora.".map";
+$nomeMapfileTmp = $dir_tmp."/ogc8_".md5(implode("",$arrayget))."_".$agora.".map";
 
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
@@ -573,7 +573,7 @@ else{
 							$l->setmetadata("WFS_INCLUDE_ITEMS","all");
 							if($l->getmetadata("ows_featureid") == "" && $l->connectiontype == MS_POSTGIS){
 							    //tenta obter da string do data
-							    $teste = explode("using unique",$l->data);
+							    $teste = explode("using unique",strtolower($l->data));
 							    $teste = explode(" ",ltrim($teste[1]));
 							    if(!empty(trim($teste[0]))){
 							     $l->setmetadata("ows_featureid",trim($teste[0]));
@@ -834,6 +834,7 @@ else{
 	$oMap->save($nomeMapfileTmp);
 	validaAcessoTemas($oMap,true);
 	substituiConObj($oMap,$postgis_mapa);
+	//echo file_get_contents($nomeMapfileTmp);exit;
 }
 if(ob_get_contents ()){
 	ob_end_clean();
