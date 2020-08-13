@@ -129,7 +129,7 @@ if(isset($_GET["bbox"])){
 if(isset($_GET["BBOX"])){
 	$_GET["BBOX"] = str_replace(" ",",",$_GET["BBOX"]);
 }
-
+//
 if(isset($_GET["tema"])){
 	$tema = $_GET["tema"];
 }
@@ -436,7 +436,7 @@ $arrayget["TileMatrix"] = "";
 $arrayget["TileCol"] = "";
 $arrayget["TileRow"] = "";
 
-$nomeMapfileTmp = $dir_tmp."/ogc8_".md5(implode("",$arrayget))."_".$agora.".map";
+$nomeMapfileTmp = $dir_tmp."/ogc8q_".md5(implode("",$arrayget))."_".$agora.".map";
 
 //essa variavel e usada para definir se a imagem final gerada devera ser cortada ou nao
 $cortePixels = 0;
@@ -571,6 +571,8 @@ else{
 							$l->set("dump",MS_TRUE);
 							$l->setmetadata("WMS_INCLUDE_ITEMS","all");
 							$l->setmetadata("WFS_INCLUDE_ITEMS","all");
+							//
+							//$l->setmetadata("wfs_return_srs_as_urn", false);
 							if($l->getmetadata("ows_featureid") == "" && $l->connectiontype == MS_POSTGIS){
 							    //tenta obter da string do data
 							    $teste = explode("using unique",strtolower($l->data));
@@ -1084,6 +1086,11 @@ if(strtolower($req->getValueByName("REQUEST")) == "getfeature"){
 	}
 	if(strtolower($req->getValueByName("SRS")) == "epsg:900913"){
 		$req->setParameter("SRS","EPSG:3857");
+	}
+	//remove a string ,urn:ogc:def:crs:EPSG::4326: 3/3
+	if(!empty($_GET["BBOX"])){
+	   $temp = explode(",",$_GET["BBOX"]);
+	   $req->setParameter("BBOX",$temp[0].",".$temp[1].",".$temp[2].",".$temp[3]);
 	}
 }
 if(strtolower($req->getValueByName("REQUEST")) == "getfeatureinfo"){
