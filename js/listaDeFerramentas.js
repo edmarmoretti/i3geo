@@ -95,11 +95,6 @@ i3GEO.listaDeFerramentas = {
 		url : "javascript:i3GEO.analise.dialogo.centroide()"
 	    },
 	    {
-		id : "omenudataAnalise20",
-		text : $trad("saikuAba"),
-		url : "javascript:i3GEO.analise.dialogo.saiku()"
-	    },
-	    {
 		id : "omenudataAnalise21",
 		text : $trad("x102"),
 		url : "javascript:i3GEO.analise.dialogo.heatmap()"
