@@ -39,7 +39,7 @@ i3GEOF.distancia =
 		    ypt : []
 	    };
 	    i3GEOF.distancia._parameters.ultimaMedida = "";
-	    i3GEOF.distancia[i3GEO.Interface["ATUAL"]].fechaJanela();
+	    i3GEOF.distancia.fechaJanela();
 	    i3GEOF.distancia._parameters.pontos = {};
 	},
 	html:function() {
@@ -60,7 +60,7 @@ i3GEOF.distancia =
 			onclose: i3f.destroy
 		    });
 	    i3GEO.eventos.cliquePerm.desativa();
-	    i3GEOF.distancia[i3GEO.Interface["ATUAL"]].inicia();
+	    i3GEOF.distancia.inicia();
 	    i3GEO.janela.snackBar({content: $trad("inicia",i3f.dicionario)});
 	},
 	perfil: function (){
@@ -88,18 +88,14 @@ i3GEOF.distancia =
 	    return "LINESTRING(" + pontos.join(",") + ")";
 	},
 	removeFiguras : function(){
-	    i3GEOF.distancia[i3GEO.Interface["ATUAL"]].removeFiguras();
+	    i3GEOF.distancia.removeFiguras();
 	},
 	mostraTotal : function(trecho, total){
-	    i3GEOF.distancia[i3GEO.Interface["ATUAL"]].mostraTotal(trecho, total);
+	    i3GEOF.distancia.mostraTotal(trecho, total);
 	},
 	mostraParcial : function(trecho, parcial, direcao){
-	    i3GEOF.distancia[i3GEO.Interface["ATUAL"]].mostraParcial(trecho, parcial, direcao);
+	    i3GEOF.distancia.mostraParcial(trecho, parcial, direcao);
 	},
-	/**
-	 * Funcoes especificas da interface openlayers
-	 */
-	openlayers : {
 	    draw : "",
 	    estilo: "",
 	    featureListener : null,
@@ -107,15 +103,15 @@ i3GEOF.distancia =
 	    //utilizado para saber se houve um clique ou nao
 	    numpontos : 0,
 	    removeControle : function() {
-		i3geoOL.removeInteraction(i3GEOF.distancia.openlayers.draw);
-		i3GEOF.distancia.openlayers.draw = "";
+			i3geoOL.removeInteraction(i3GEOF.distancia.draw);
+			i3GEOF.distancia.draw = "";
 	    },
 	    /**
 	     * Inicializa o processo Cria a variavel para guardar os pontos Executa a funcao de inicializacao do desenho, que cria o
 	     * layer para receber os graficos
 	     */
 	    inicia : function() {
-		i3GEOF.distancia.openlayers.estilo =
+		i3GEOF.distancia.estilo =
 		    new ol.style.Style({
 			stroke: new ol.style.Stroke({
 			    color: '#ffcc33',
@@ -126,8 +122,8 @@ i3GEOF.distancia =
 			})
 		    });
 		i3GEO.desenho.estiloPadrao = "normal";
-		var m = i3GEOF.distancia.openlayers;
-		i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
+		var m = i3GEOF.distancia;
+		i3GEO.desenho.inicia();
 		m.removeControle();
 		m.draw = new ol.interaction.Draw({
 		    type : "LineString"
@@ -137,7 +133,7 @@ i3GEOF.distancia =
 		    evt.feature.setProperties({
 			origem : "medeDistancia"
 		    });
-		    var m = i3GEOF.distancia.openlayers;
+		    var m = i3GEOF.distancia;
 		    evt.feature.setStyle(
 			    new ol.style.Style({
 				stroke: new ol.style.Stroke({
@@ -162,7 +158,7 @@ i3GEOF.distancia =
 			    xpt : [],
 			    ypt : []
 		    };
-		    var m = i3GEOF.distancia.openlayers,
+		    var m = i3GEOF.distancia,
 		    sketch = evt.feature;
 		    m.estilo = sketch.getStyle();
 		    m.numpontos = 1;
@@ -171,7 +167,7 @@ i3GEOF.distancia =
 			geom = evt.target,
 			coords = geom.getCoordinates(),
 			n = coords.length,
-			m = i3GEOF.distancia.openlayers;
+			m = i3GEOF.distancia;
 			ponto = new ol.geom.Point(coords[n-1]);
 			if(m.numpontos === n-1){
 			    //clicou
@@ -205,7 +201,7 @@ i3GEOF.distancia =
 		    }
 		    //console.info(x1+" "+y1+" "+x2+" "+y2)
 		    trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
-		    parcial = i3GEOF.distancia.openlayers.somaDist();
+		    parcial = i3GEOF.distancia.somaDist();
 		    direcao = i3GEO.calculo.direcao(x1, y1, x2, y2);
 		    direcao = i3GEO.calculo.dd2dms(direcao, direcao);
 		    direcao = direcao[0];
@@ -240,7 +236,7 @@ i3GEOF.distancia =
 		    }
 		    trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
 		    i3GEOF.distancia._parameters.pontos.dist.push(trecho);
-		    total = i3GEOF.distancia.openlayers.somaDist();
+		    total = i3GEOF.distancia.somaDist();
 		    i3GEOF.distancia.mostraTotal(trecho, total);
 		    i3GEOF.distancia._parameters.ultimoWkt = i3GEOF.distancia.pontos2wkt();
 		    // raio
@@ -323,13 +319,13 @@ i3GEOF.distancia =
 	     */
 	    fechaJanela : function() {
 		i3GEO.Interface.parametrosMap.interactions[0].setActive(false);
-		var m = i3GEOF.distancia.openlayers;
+		var m = i3GEOF.distancia;
 		ol.Observable.unByKey(m.featureListener);
 		m.featureListener = null;
 		m.removeControle();
 		m.numpontos = 0;
 		i3GEO.eventos.cliquePerm.ativa();
-		i3GEOF.distancia.openlayers.removeFiguras();
+		i3GEOF.distancia.removeFiguras();
 	    },
 	    removeFiguras: function(){
 		var features, n, f, i, remover = [], temp;
@@ -395,240 +391,6 @@ i3GEOF.distancia =
 		    mostra.innerHTML = texto;
 		}
 	    }
-	},
-	googlemaps : {
-	    /**
-	     * Inicializa o processo Cria a variavel para guardar os pontos Executa a funcao de inicializacao do desenho, que cria o
-	     * layer para receber os graficos
-	     */
-	    inicia : function() {
-		i3GEOF.distancia._parameters.pontos = {
-			xpt : [],
-			ypt : [],
-			dist : []
-		};
-		i3GEO.desenho[i3GEO.Interface["ATUAL"]].inicia();
-		i3GeoMap.setOptions({
-		    disableDoubleClickZoom : true
-		});
-		i3GeoMap.setOptions({
-		    draggableCursor : 'crosshair'
-		});
-		var t, evtdblclick = null, evtclick = null, evtmousemove = null, pontos = {
-			xpt : [],
-			ypt : [],
-			dist : [],
-			mvcLine : new google.maps.MVCArray(),
-			mvcMarkers : new google.maps.MVCArray(),
-			line : null,
-			polygon : null
-		}, termina = function() {
-		    google.maps.event.removeListener(evtdblclick);
-		    google.maps.event.removeListener(evtclick);
-		    google.maps.event.removeListener(evtmousemove);
-		    pontos.line.setOptions({
-			clickable : true
-		    });
-		    google.maps.event.addListener(pontos.line, 'click', function(shape) {
-			if (shape.setEditable) {
-			    shape.setEditable(!shape.editable);
-			}
-		    });
-		    i3GEOF.distancia._parameters.ultimoWkt = i3GEOF.distancia.pontos2wkt();
-		    t = i3GEOF.distancia.googlemaps.somaDist(pontos);
-		    i3GEOF.distancia._parameters.ultimaMedida = t.toFixed(3) + " km";
-		    if (pontos) {
-			i3GEO.desenho.googlemaps.shapes.push(pontos.mvcLine);
-			i3GEO.desenho.googlemaps.shapes.push(pontos.line);
-			pontos = null;
-		    }
-		};
-		evtclick = google.maps.event.addListener(i3GeoMap, "click", function(evt) {
-		    i3GEO.eventos.cliquePerm.desativa();
-		    var x1, x2, y1, y2, trecho = 0, total, n;
-		    // When the map is clicked, pass the LatLng obect to the
-		    // measureAdd function
-		    pontos.mvcLine.push(evt.latLng);
-		    pontos.xpt.push(evt.latLng.lng());
-		    pontos.ypt.push(evt.latLng.lat());
-		    i3GEOF.distancia._parameters.pontos.xpt.push(evt.latLng.lng());
-		    i3GEOF.distancia._parameters.pontos.ypt.push(evt.latLng.lat());
-		    n = pontos.xpt.length;
-		    // desenha um circulo
-		    if (pontos.mvcLine.getLength() > 1) {
-			x1 = pontos.xpt[n - 2];
-			y1 = pontos.ypt[n - 2];
-			x2 = evt.latLng.lng();
-			y2 = evt.latLng.lat();
-			// raio =
-			    // google.maps.geometry.spherical.computeDistanceBetween(evt.latLng,new
-			// google.maps.LatLng(y1,x1))
-			trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
-			pontos.dist.push(trecho);
-			total = i3GEOF.distancia.googlemaps.somaDist(pontos);
-			i3GEOF.distancia.mostraTotal(trecho, total);
-			if ($i("pararraios") && $i("pararraios").checked === true) {
-			    i3GEO.desenho.googlemaps.shapes.push(new google.maps.Circle({
-				map : i3GeoMap,
-				fillOpacity : 0,
-				clickable : false,
-				strokeColor : "black",
-				strokeOpacity : 1,
-				strokeWeight : 2,
-				center : new google.maps.LatLng(y1, x1),
-				radius : trecho * 1000,
-				origem : "medeDistanciaExcluir"
-			    }));
-			}
-		    }
-		    // desenha uma marca no ponto
-		    if ($i("parartextos") && $i("parartextos").checked === true) {
-			i3GEO.desenho.googlemaps.shapes.push(new google.maps.Marker({
-			    map : i3GeoMap,
-			    fillOpacity : 0,
-			    clickable : false,
-			    position : evt.latLng,
-			    icon : {
-				path : google.maps.SymbolPath.CIRCLE,
-				scale : 2.5,
-				strokeColor : "#ffffff",
-				title : trecho.toFixed(0) + " km"
-			    },
-			    origem : "medeDistanciaExcluir"
-			}));
-		    }
-		    // mais um ponto para criar uma linha movel
-		    pontos.mvcLine.push(evt.latLng);
-		});
-		evtmousemove =
-		    google.maps.event.addListener(i3GeoMap, "mousemove", function(evt) {
-			if (!$i("mostradistancia_calculo")) {
-			    termina.call();
-			    return;
-			}
-			var x1, y1, x2, y2, direcao, parcial, estilo = i3GEO.desenho.estilos[i3GEO.desenho.estiloPadrao], n =
-			    pontos.xpt.length;
-
-			// If there is more than one vertex on the line
-			if (pontos.mvcLine.getLength() > 0) {
-			    // If the line hasn't been created yet
-			    if (!pontos.line) {
-				// Create the line (google.maps.Polyline)
-				pontos.line = new google.maps.Polyline({
-				    map : i3GeoMap,
-				    clickable : false,
-				    strokeColor : estilo.linecolor,
-				    strokeOpacity : 1,
-				    strokeWeight : estilo.linewidth,
-				    path : pontos.mvcLine,
-				    origem : "medeDistancia"
-				});
-			    }
-			    pontos.mvcLine.pop();
-			    pontos.mvcLine.push(evt.latLng);
-			    parcial = i3GEOF.distancia.googlemaps.somaDist(pontos);
-			    x1 = pontos.xpt[n - 1];
-			    y1 = pontos.ypt[n - 1];
-			    x2 = evt.latLng.lng();
-			    y2 = evt.latLng.lat();
-			    // raio =
-				// google.maps.geometry.spherical.computeDistanceBetween(evt.latLng,new
-					// google.maps.LatLng(y1,x1))
-			    trecho = i3GEO.calculo.distancia(x1, y1, x2, y2);
-			    direcao = i3GEO.calculo.direcao(x1, y1, x2, y2);
-			    direcao = i3GEO.calculo.dd2dms(direcao, direcao);
-			    direcao = direcao[0];
-			    i3GEOF.distancia.mostraParcial(trecho, parcial, direcao);
-			}
-		    });
-		evtdblclick = google.maps.event.addListener(i3GeoMap, "dblclick", function(evt) {
-		    termina.call();
-		});
-	    },
-	    /**
-	     * Soma os valores de distancia guardados em pontos.dist
-	     */
-	    somaDist : function(pontos) {
-		var n, i, total = 0;
-		n = pontos.dist.length;
-		for (i = 0; i < n; i++) {
-		    total += pontos.dist[i];
-		}
-		return total;
-	    },
-	    /**
-	     * Fecha a janela que mostra os dados Pergunta ao usuario se os graficos devem ser removidos Os graficos sao marcados com o
-	     * atributo "origem" Os raios e pontos sao sempre removidos
-	     */
-	    fechaJanela : function() {
-		i3GeoMap.setOptions({
-		    disableDoubleClickZoom : false
-		});
-		i3GeoMap.setOptions({
-		    draggableCursor : undefined
-		});
-		i3GEOF.distancia.googlemaps.removeFiguras();
-	    },
-	    removeFiguras: function(){
-		var f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem", "medeDistancia");
-		if (f && f.length > 0) {
-		    temp = window.confirm($trad("x94"));
-		    if (temp) {
-			i3GEO.desenho.googlemaps.destroyFeatures(f);
-		    }
-		}
-		f = i3GEO.desenho.googlemaps.getFeaturesByAttribute("origem", "medeDistanciaExcluir");
-		if (f && f.length > 0) {
-		    i3GEO.desenho.googlemaps.destroyFeatures(f);
-		}
-	    },
-	    /**
-	     * Mostra a totalizacao das linhas ja digitalizadas
-	     */
-	    mostraTotal : function(trecho, total) {
-		var mostra = $i("mostradistancia_calculo"), texto;
-		if (mostra) {
-		    texto =
-			"<b>" + $trad("x96")
-			+ ":</b> "
-			+ total.toFixed(3)
-			+ " km"
-			+ "<br><b>"
-			+ $trad("x96")
-			+ ":</b> "
-			+ (total * 1000).toFixed(2)
-			+ " m"
-			+ "<br>"
-			+ $trad("x25")
-			+ ": "
-			+ i3GEO.calculo.metododistancia;
-		    mostra.innerHTML = texto;
-		}
-	    },
-	    /**
-	     * Mostra o valor do trecho entre o ultimo ponto clicado e a posicao do mouse
-	     */
-	    mostraParcial : function(trecho, parcial, direcao) {
-		var mostra = $i("mostradistancia_calculo_movel"), texto;
-		if (mostra) {
-		    texto =
-			"<b>" + $trad("x95")
-			+ ":</b> "
-			+ trecho.toFixed(3)
-			+ " km"
-			+ "<br><b>"
-			+ $trad("x97")
-			+ ":</b> "
-			+ (parcial + trecho).toFixed(3)
-			+ " km"
-			+ "<br><b>"
-			+ $trad("x23")
-			+ " (DMS):</b> "
-			+ direcao;
-		    mostra.innerHTML = texto;
-		}
-	    }
-	}
 };
 //aplica ao codigo i3GEOF definicoes feitas na interface do mapa
 //isso permite a substituicao de funcoes e parametros
