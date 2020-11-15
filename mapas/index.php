@@ -76,7 +76,7 @@ include "../init/head.php";
     <nav id="navbar" class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <a class="navbar-brand" href="../init/index.php?home="><?php echo $mensagemInicia;?> <i class="fa fa-home fa-1x"></i>
+                <a class="navbar-brand" href="../init/index.php?home="><span class="material-icons md-18">home</span> <?php echo $mensagemInicia;?>
                 </a>
             </div>
             <ul class="nav navbar-nav sr-only">

@@ -28,7 +28,7 @@ include ("../init/head.php");
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" href="../init/index.php?home=">
-				<?php echo $mensagemInicia;?> <i class="fa fa-home fa-1x"></i>
+				<span class="material-icons md-18">home</span> <?php echo $mensagemInicia;?>
                 </a>
             </div>
         </div>
@@ -197,7 +197,7 @@ echo <<<HTML
 		<h3>Acentua&ccedil;&atilde;o</h3>
 		<pre>
 As seguintes letras devem aparecer corretamente acentuadas:
-<b>çÇãâáÁóÓ</b>
+<b>ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½</b>
 Caso contr&aacute;rio, verifique os par&acirc;metros de configura&ccedil;&atilde;o do Apache
 <b>AddDefaultCharset (httpd.conf) e default_charset (php.ini)</b>
 (default_charset='' no php.ini geralmente funciona)

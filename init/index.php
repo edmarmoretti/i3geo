@@ -62,8 +62,9 @@ include "head.php";
                     <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#">
-				<?php echo $mensagemInicia;?> <i class="fa fa-home fa-1x"></i>
+				<span class="material-icons md-18">home</span> <?php echo $mensagemInicia;?>
                 </a>
+                
             </div>
             <div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
                 <!-- template para permitir a traducao -->
@@ -104,7 +105,7 @@ include "head.php";
 <?php
 include_once ("../classesphp/carrega_ext.php");
 if (! function_exists("ms_GetVersion")) {
-    echo '<div class="alert alert-danger" role="alert">Verifique se PHP-Mapscript está instalado</div>';
+    echo '<div class="alert alert-danger" role="alert">Verifique se PHP-Mapscript estï¿½ instalado</div>';
 }
 ?>
 			<!-- Template para criacao dos quadros ver index.js -->
