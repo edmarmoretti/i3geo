@@ -647,8 +647,8 @@ Para mais detalhes veja a fun&ccedil;&atilde;o substituiConObj em classesphp/fun
 exemplo -
 
 $postgis_mapa = array(
-		"teste"=>"user=geodados password=geodados dbname=geodados host=10.1.1.36 port=5432 options='-c client_encoding=LATIN1'",
-		"conexao2"=>"user=geodados password=geodados dbname=geodadosteste host=10.1.1.36 port=5432"
+		"teste"=>"user=xxx password=xxx dbname=xxx host=xxx port=5432 options='-c client_encoding=LATIN1'",
+		"conexao2"=>"user=xxx password=xxx dbname=xxx host=xxx port=5432"
 )
 
 No exemplo, vc pode usar "teste" ou "conexao2" no seu mapfile veja em i3geo/temas/testesubstring.map
