@@ -40,11 +40,7 @@ i3GEO.legenda =
 		    return;
 		}
 		i3GEO.eventos.adicionaEventos("NAVEGAMAPA", ["i3GEO.legenda.atualiza()"]);
-		if(config.janela == true){
-		    i3GEO.legenda.janela();
-		} else {
-		    i3GEO.legenda.registra(config.idLegenda);
-		}
+		i3GEO.legenda.registra(config.idLegenda);
 		i3GEO.legenda.atualiza();
 	    }
 	},
@@ -239,21 +235,21 @@ i3GEO.legenda =
 	    };
 	    //verifica se tem apenas uma classe para desligar a camada e nao a classe
 	    if(i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[leg.name].numclasses == 1){
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.legenda.inverteStatusClasse() altera layer");
-
-		var chkb = i3GEO.arvoreDeCamadas.capturaCheckBox(leg.name);
-		if(chkb){
-		    i3geoOL.getLayersByName(leg.name)[0].setVisibility(leg.checked);
-		} else {
-		    inverte(leg.name, leg.value);
-		}
-	    } else {
-		if (typeof (console) !== 'undefined')
-		    console.info("i3GEO.legenda.inverteStatusClasse() altera classe");
-
-		inverte(leg.name, leg.value);
-	    }
+			if (typeof (console) !== 'undefined')
+			    console.info("i3GEO.legenda.inverteStatusClasse() altera layer");
+	
+			var chkb = i3GEO.arvoreDeCamadas.capturaCheckBox(leg.name);
+			if(chkb){
+			    i3geoOL.getLayersByName(leg.name)[0].setVisibility(leg.checked);
+			} else {
+			    inverte(leg.name, leg.value);
+			}
+		 } else {
+			if (typeof (console) !== 'undefined')
+			    console.info("i3GEO.legenda.inverteStatusClasse() altera classe");
+	
+			inverte(leg.name, leg.value);
+	     }
 	},
 	mudaCorClasse : function(tema,idclasse,objImg) {
 	    if (typeof (console) !== 'undefined')
@@ -274,66 +270,5 @@ i3GEO.legenda =
 	    }
 	    $("#tempinputcorclasse").attr({"tema":tema,"idclasse":idclasse});
 	    i3GEO.util.abreCor("", "tempinputcorclasse");
-	},
-	janela : function(largura, altura, topo, esquerda, atualiza) {
-	    if (!largura) {
-		largura = 360;
-	    }
-	    if (!altura) {
-		altura = 300;
-	    }
-	    var cabecalho, minimiza, janela, titulo, temp;
-	    //
-	    // remove a janela se ja existir
-	    //
-	    janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
-	    if (janela) {
-		i3GEO.janela.destroi("wlegenda");
-	    }
-	    cabecalho = function() {
-	    };
-	    minimiza = function() {
-		var t = i3GEO.janela.minimiza("wlegenda", "200px");
-		if (t === "min") {
-		    $i("legendaTituloI").style.display = "none";
-		} else {
-		    $i("legendaTituloI").style.display = "block";
-		}
-	    };
-	    titulo = "<span class='i3GeoTituloJanelaBsNolink' >" + $trad("p3") + "</span></div>";
-
-	    janela = i3GEO.janela.cria(
-		    largura + "px",
-		    altura + "px",
-		    "",
-		    "",
-		    "",
-		    titulo,
-		    "wlegenda",
-		    false,
-		    "hd",
-		    cabecalho,
-		    minimiza,
-		    "",
-		    "",
-		    "",
-		    "",
-		    "nao",
-		    ""
-	    );
-
-	    temp = function() {
-		i3GEO.legenda.IDS.remove("wlegenda_corpo");
-	    };
-	    YAHOO.util.Event.addListener(janela[0].close, "click", temp);
-	    i3GEO.legenda.registra("wlegenda_corpo");
-	    if (topo && esquerda) {
-		janela = YAHOO.i3GEO.janela.manager.find("wlegenda");
-		janela.moveTo(esquerda, topo);
-	    }
-	    i3GEO.legenda.CAMADAS = "";
-	    if(atualiza == true){
-		i3GEO.legenda.atualiza();
-	    }
 	}
 };

@@ -241,7 +241,7 @@ i3GEO.Interface =
                 source.refresh();
             }
 
-            if (retorno === "") {
+            if (retorno === "" || retorno == true) {
                 return;
             }
             //para efeitos de compatibilidade
