@@ -299,7 +299,7 @@ i3GEO.tema =
          *
          * {string} - nova cor (r,g,b)
          */
-        alteracorclasse : function(after,tema, idclasse, rgb, objImg) {
+        alteracorclasse : function(after,idtema, idclasse, rgb, objImg) {
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.tema.alteracorclasse()");
 
@@ -308,7 +308,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {
-                    tema: tema,
+                    tema: idtema,
                     idclasse: idclasse,
                     cor: rgb,
                     funcao: "alteracor"
