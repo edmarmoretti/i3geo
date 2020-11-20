@@ -299,7 +299,7 @@ As seguintes ferramentas nao podem ser bloqueadas:
 sao agregadores de outras ferramentas ou nao utilizam PHP)
 
 colorpicker,colourramp,convertekml,download,editorgm,editorol,excluirarvore,opacidademapa,
-opcoes_autoredesenha,opcoes_label,salvamapfile,wmstime
+opcoes_autoredesenha,salvamapfile,wmstime
 
 As seguintes ferramentas podem ser bloqueadas apenas impedindo-se a carga do javascript
 (as operacoes via PHP sao realizadas por outras classes que nao residem na pasta ferramentas ou n�o utiliza PHP)

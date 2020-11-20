@@ -63,12 +63,6 @@ i3GEOF.distancia =
 	    i3GEOF.distancia.inicia();
 	    i3GEO.janela.snackBar({content: $trad("inicia",i3f.dicionario)});
 	},
-	perfil: function (){
-	    var js = i3GEO.configura.locaplic + "/ferramentas/perfil/dependencias.php", temp = function() {
-		i3GEOF.perfil.iniciaJanelaFlutuante(i3GEO.analise.pontos);
-	    };
-	    i3GEO.util.scriptTag(js, temp, "i3GEOF.perfil_script");
-	},
 	isOn : function() {
 	    if($i("i3GEOF.distancia")){
 		return true;
