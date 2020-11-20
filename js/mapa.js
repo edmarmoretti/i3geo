@@ -676,19 +676,6 @@ i3GEO.mapa =
                 );
             },
             /**
-             * Function: filtraperiodo
-             * Utilizado com camadas metaestat
-             */
-            filtraperiodo : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.filtraperiodo()",
-                        "filtraperiodo",
-                        "filtraperiodo",
-                        "dependencias.php",
-                        "i3GEOF.filtraperiodo.iniciaJanelaFlutuante()"
-                );
-            },
-            /**
              * Function: animacao
              *
              * Abre a janela de dialogo da ferramenta que permite animar o mapa atual
