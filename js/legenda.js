@@ -186,22 +186,6 @@ i3GEO.legenda =
 		idleg.innerHTML = "";
 	    }
 	},
-	png: function() {
-	    var obj = $i("i3GEOconteudoLegenda");
-	    if($i("wlegenda")){
-		obj.style.width = $i("wlegenda").style.width;
-	    }
-	    else{
-		obj.style.width ="400px";
-	    }
-	    if($i("wlegenda_corpo")){
-		obj.style.height = $i("wlegenda_corpo").style.height;
-	    }
-	    else{
-		obj.style.height ="400px";
-	    }
-	    i3GEO.mapa.dialogo.html2canvas(obj);
-	},
 	ativaDesativaTema : function(inputbox) {
 	    console.error("Removido na versao 8");
 	},

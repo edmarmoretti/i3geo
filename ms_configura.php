@@ -306,7 +306,7 @@ As seguintes ferramentas podem ser bloqueadas apenas impedindo-se a carga do jav
 (as operacoes via PHP sao realizadas por outras classes que nao residem na pasta ferramentas ou n�o utiliza PHP)
 
 animacao,atalhosedicao,atalhosmapa,busca,buscainde
-buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,html2canvas,inseregrafico
+buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,inseregrafico
 inseretxt,mostraexten,outputformat,perfil,tipoimagem
 
 */

@@ -453,21 +453,6 @@ i3GEO.mapa =
                 "i3GEOF.mascara.start()");
             },
             /**
-             * Function: html2canvas
-             *
-             * Abre uma janela com a conversão de um objeto HTML em PNG
-             *
-             * Parametros:
-             *
-             * {obj} - objeto dom contendo o html a ser convertido
-             */
-            html2canvas : function(obj) {
-                var temp = function() {
-                    i3GEOF.html2canvas.iniciaJanelaFlutuante(obj);
-                };
-                i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.html2canvas()", "html2canvas", "html2canvas", "dependencias.php", temp);
-            },
-            /**
              * Function: wkt2layer
              *
              * Janela de conversao de wkt em layer
