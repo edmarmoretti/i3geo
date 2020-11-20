@@ -255,24 +255,7 @@ i3GEOF.identifica = {
          */
         mostraDadosSistema : function(exec, target) {
             exec += "&x=" + i3GEOF.identifica._parameters.x + "&y=" + i3GEOF.identifica._parameters.y;
-            if (target === "target") {
-                window.open(exec);
-            } else {
-                i3GEOF.identifica.abrejanelaIframe("500", "500", exec);
-            }
-        },
-        abrejanelaIframe : function(w, h, s) {
-            i3GEO.janela.formModal();
-            i3GEO.janela.cria(
-                    w,
-                    h,
-                    s,
-                    parseInt(Math.random() * 100, 10),
-                    10,
-                    "",
-                    "janela" + i3GEO.util.randomRGB(),
-                    false
-            );
+            window.open(exec);
         },
         mostraDadosTema : function(retorno) {
             console.log("i3GEOF.identifica.mostraDadosTema()");

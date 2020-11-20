@@ -2318,13 +2318,6 @@ g_traducao =
                 es : "Operaci&oacute;n no autorizada para este usuario"
             }
         ],
-        "melhorcaminho" : [
-            {
-                pt : "Melhor caminho (raster)",
-                en : "Best way (raster)",
-                es : "Mejor camino (raster)"
-            }
-        ],
         "tolerancia" : [
             {
                 pt : "Toler&acirc;ncia de busca (em pixels)",

@@ -105,11 +105,6 @@ i3GEO.listaDeFerramentas = {
 		url : "javascript:i3GEO.analise.dialogo.markercluster()"
 	    },
 	    {
-		id : "omenudataAnalise24",
-		text : $trad("melhorcaminho"),
-		url : "javascript:i3GEO.analise.dialogo.melhorcaminho()"
-	    },
-	    {
 		id : "omenudataAnalise17",
 		text : $trad("t37b"),
 		url : "javascript:i3GEO.analise.dialogo.graficointerativo()"

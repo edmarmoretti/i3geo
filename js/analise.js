@@ -245,18 +245,6 @@ i3GEO.analise =
 		i3GEO.janela.tempoMsg("Clique o ponto de origem da rota");
 	    },
 	    /**
-	     * Function: melhorcaminho
-	     *
-	     * Ferramenta melhor caminho
-	     */
-	    melhorcaminho : function() {
-		if (i3GEO.parametros.statusFerramentas && i3GEO.parametros.statusFerramentas.melhorcaminho === false) {
-		    i3GEO.janela.tempoMsg($trad("naoInstalado"));
-		    return;
-		}
-		i3GEO.util.dialogoFerramenta("i3GEO.analise.dialogo.melhorcaminho()", "melhorcaminho", "melhorcaminho");
-	    },
-	    /**
 	     * Function: gradePontos
 	     *
 	     * Ferramenta grade de pontos
