@@ -810,13 +810,13 @@ i3GEO.mapa =
                 "i3GEOF.convertews.start()");
             },
             /**
-             * Function: convertekml
+             * Function: convertemapakml
              *
              * Abre a janela de dialogo da ferramenta convertemapakml
              */
             convertemapakml : function() {
                 i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.convertekml()",
+                        "i3GEO.mapa.dialogo.convertemapakml()",
                         "convertemapakml",
                         "convertemapakml",
                         "dependencias.php",

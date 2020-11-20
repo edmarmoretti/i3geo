@@ -127,10 +127,6 @@ i3GEO.janela =
 	 *
 	 * retorno[2].innerHTML
 	 *
-	 * Vc pode recuperar uma janela com o comando
-	 *
-	 * YAHOO.i3GEO.janela.manager.find(id);
-	 *
 	 * Parametros:
 	 *
 	 * {integer} - largura da janela em pixels
@@ -171,9 +167,6 @@ i3GEO.janela =
 	 *
 	 * {sim|nao} - (opcional) indica se o efeito de transpar&ecirc;ncia nos eventos mouseover/out ser&aacute; aplicado
 	 *
-	 * Return:
-	 *
-	 * {Array} Array contendo objeto YAHOO.panel criado,elemento HTML com o cabecalho, elemento HTML com o corpo
 	 */
 	cria : function(wlargura, waltura, wsrc, nx, ny, texto, id, modal, classe, funcaoCabecalho, funcaoMinimiza, funcaoAposRedim,
 		dimensionavel, icone, funcaoDuplica, opacidade, classeAdicional, idajuda) {
