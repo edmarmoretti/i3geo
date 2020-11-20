@@ -45,7 +45,7 @@ include ("../init/head.php");
         <div class="container-fluid" id="mensagemLogin"></div>
     </nav>
     <div class="container-fluid">
-		<?php
+<?php
 // TODO Incluir opcoes para carregar as listas default do i3Geo como sistemas de identificacao e WMS
 // verifica se o login pode ser realizado
 if (isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false) {
@@ -157,14 +157,6 @@ echo <<<HTML
 		Observa&ccedil;&atilde;o: se voc&ecirc; estiver usando Linux e a biblioteca CAIRO estiver
 		instalada corretamente no Mapserver, edite os arquivos i3geo/aplicmap/geral1fedorav6.map e
 		geral1debianv6.map para remover os coment&aacute;rios do OUTPUTFORMAT que utiliza SVG com o drive Cairo
-		</div>
-		<div class="alert alert-info" role="alert">
-		Para mais informa&ccedil;&otilde;es sobre a instala&ccedil;&atilde;o de pacotes complementares,
-		como o SAIKU e ferramentas que precisam de softwares espec&iacute;ficos</div>
-		<div class="alert alert-success" role="alert">
-			<li>Seu endere&ccedil;o IP <span class="label label-default">$ip</span></li>
-			<li>Sistema operacional <span class="label label-default">$os</span></li>
-			<li>PHP (a vers&atilde;o deve ser a 5x) <span class="label label-default">$phpversion</span></li>
 		</div>
 HTML;
 

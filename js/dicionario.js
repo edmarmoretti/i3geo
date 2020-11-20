@@ -2283,20 +2283,6 @@ g_traducao =
                 es : "Conexi&oacute;n con servicios geo"
             }
         ],
-        "saikuAba" : [
-            {
-                pt : "SAIKU - OLAP (abrir em nova aba)",
-                en : "SAIKU - OLAP (open in a new tab)",
-                es : "SAIKU - OLAP (abrir en una nueva pesta&ntilde;a)"
-            }
-        ],
-        "saikuMapa" : [
-            {
-                pt : "SAIKU - OLAP (abrir em janela interna)",
-                en : "SAIKU - OLAP (open in an inner window)",
-                es : "SAIKU - OLAP (abrir en una ventana interna)"
-            }
-        ],
         "refMapaAtual" : [
             {
                 pt : "Mapa atual",

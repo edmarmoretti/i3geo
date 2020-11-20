@@ -39,7 +39,6 @@ if(!empty($_SESSION["map_file"])){
 	}
 }
 $map_file = markerclusterMapfile();
-//no caso do SAIKU, o nome do mapfile pode estar na sessao
 if($map_file == ""){
 	$map_file = $_SESSION["map_file"];
 }

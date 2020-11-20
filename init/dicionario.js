@@ -294,14 +294,7 @@ g_traducao_init =
 				en : "Description of JavaScript components that can be modified or used to create interfaces for your maps.",
 				es : "Descripci&oacute;n de las funciones JavaScript que se pueden modificar o utilizar para crear interfaces para sus mapas."
 			}
-		],
-		25 : [
-			{
-				pt : "i3Geo + <a  tabindex='-1' href='http://community.meteorite.bi/' >SAIKU </a>",
-				en : "i3Geo + <a  tabindex='-1' href='http://community.meteorite.bi/' >SAIKU </a>",
-				es : "i3Geo + <a  tabindex='-1' href='http://community.meteorite.bi/' >SAIKU </a>"
-			}
-		],
+		],,
 		"25a" : [
 			{
 				pt : "Ferramenta OLAP que permite cruzar dados tabulares definidos por meio do m&oacute;dulo METAESTAT.",

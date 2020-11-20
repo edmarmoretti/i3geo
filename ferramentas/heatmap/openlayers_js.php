@@ -40,7 +40,6 @@ if($g_sid != ""){
 	}
 }
 $map_file = heatmapMapfile();
-//no caso do SAIKU, o nome do mapfile pode estar na sessao
 if($map_file == ""){
 	session_name("i3GeoPHP");
 	session_start();

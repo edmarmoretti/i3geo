@@ -326,7 +326,6 @@
     $res["cordefundo"] = $cordefundo;
     $res["copyright"] = $copyright;
     $res["logado"] = $logado;
-    $res["saikuUrl"] = $_SESSION["saikuUrl"];
     $res["statusFerramentas"] = $_SESSION["statusFerramentas"];
     $res["googleApiKey"] = $_SESSION["googleApiKey"];
     // parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados

@@ -174,7 +174,6 @@ class Map
         $res["cordefundo"] = $cordefundo;
         $res["copyright"] = $copyright;
         $res["logado"] = $logado;
-        $res["saikuUrl"] = $_SESSION["saikuUrl"];
         $res["perfil"] = !empty($_SESSION["perfil"]) ? $_SESSION["perfil"] : "";
         $res["statusFerramentas"] = $_SESSION["statusFerramentas"];
         $res["googleApiKey"] = $_SESSION["googleApiKey"];

@@ -354,7 +354,6 @@ if (! isset($mapext) || empty($mapext)) {
 } else {
     $mapext = str_replace(",", " ", $mapext);
 }
-$saikuUrl_ = $saikuUrl;
 $cachedir_ = $cachedir;
 $dir_tmp_ = $dir_tmp;
 $emailInstituicao_ = $emailInstituicao;
@@ -483,7 +482,6 @@ $_SESSION["mapdir"] = $diretorios[1];
 $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0; // essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 $_SESSION["i3georendermode"] = $i3georendermode_;
-$_SESSION["saikuUrl"] = $saikuUrl_;
 $_SESSION["logExec"] = $logExec_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
 $_SESSION["i3geoBlFerramentas"] = $i3geoBlFerramentas_;
@@ -607,7 +605,6 @@ if ((isset($mapext)) && ($mapext != "")) {
         $ext->setextent($newext[0], $newext[1], $newext[2], $newext[3]);
     }
 } else {
-    // algumas aplicacoes usam essa variavel (SAIKU)
     $mapext = $ext->minx . " " . $ext->miny . " " . $ext->maxx . " " . $ext->maxy;
 }
 
@@ -1477,11 +1474,6 @@ function criaDirMapa($dir_tmp, $cachedir = "")
         $tmpimgname = "img" . $tmpdirname;
         if (! file_exists($dir_tmp . "/comum")) {
             @mkdir($dir_tmp . "/comum", 0744);
-        }
-        if (! file_exists($dir_tmp . "/saiku-datasources")) {
-            // utilizado para armazenar os arquivos de fonte de dados do SAIKU
-            @mkdir($dir_tmp . "/saiku-datasources", 0744);
-            chmod($dir_tmp . "/saiku-datasources", 0744);
         }
         //
         if ($cachedir == "") {

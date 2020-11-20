@@ -14,39 +14,6 @@ botoesIni = [
 	"fa": "map-o",
 	"target": "_blank"
 },
-/*
-,{
-	"img":"imagens/mashup.png",
-	"href": "../mashups/index.php",
-	"titulo":$trad(18,g_traducao_init) + "<br><a href='../mashups/osm.php?temas=&largura=800&altura=500' target=_blank >OSM</a>" + " - <a href='../mashups/openlayers.php?temas=&largura=800&altura=500' target=_blank >OpenLayers</a>",
-	"subtitulo": $trad("18a",g_traducao_init),
-	"fa": "map-o",
-	"target": "_self"
-}
-,{
-	"img":"imagens/googlemaps.png",
-	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/gm.phtml",
-	"titulo":$trad(6,g_traducao_init),
-	"subtitulo": $trad("6a",g_traducao_init),
-	"fa": "map-o",
-	"target": "_blank"
-}
-{
-	"img":"cartogramas",
-	"href": location.href.replace("init/index.php"+window.location.search,"") + customDir + "/carto_ol.htm",
-	"titulo":$trad(8,g_traducao_init),
-	"subtitulo": $trad("8a",g_traducao_init),
-	"fa": "map-o",
-	"target": "_blank"
-},{
-	"img":"editor",
-	"href": "../ferramentas/metaestat/editorlimites.php",
-	"titulo":$trad(9,g_traducao_init),
-	"subtitulo": $trad("9a",g_traducao_init),
-	"fa": "map-o",
-	"target": "_blank"
-},
-*/
 {
 	"img":"imagens/window-duplicate.png",
 	"href": "../mapas/index.php",
@@ -69,24 +36,6 @@ botoesIni = [
 	"fa": "download",
 	"target": "_self"
 },
-/*
-{
-	"img":"saiku_free_small",
-	"href": "../ferramentas/saiku/startsaiku.php?locaplic="+window.location.href.replace("/init/index.php",""),
-	"titulo":$trad(25,g_traducao_init),
-	"subtitulo": $trad("25a",g_traducao_init),
-	"fa": "bar-chart",
-	"target": "_self"
-},
-{
-	"img":"imagens/insert-link.png",
-	"href": "../permlinks/index.php",
-	"titulo":$trad(13,g_traducao_init),
-	"subtitulo": $trad("13a",g_traducao_init),
-	"fa": "map-o",
-	"target": "_self"
-},
-*/
 {
 	"img":"imagens/openlayersdebug.png",
 	"href": location.href.replace("init/index.php"+window.location.search,"") +  customDir + "/openlayersdebug.php",

@@ -158,7 +158,6 @@ class Mscriamapa
         $_SESSION["customDir"] = (! isset($customDir)) ? "" : $customDir;
         $_SESSION["contadorsalva"] = 0; // essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
         $_SESSION["i3georendermode"] = $i3georendermode;
-        $_SESSION["saikuUrl"] = $saikuUrl;
         $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin;
         $_SESSION["i3geoBlFerramentas"] = $i3geoBlFerramentas;
         $_SESSION["i3GeoProjDefault"] = $i3GeoProjDefault;
@@ -204,11 +203,6 @@ class Mscriamapa
             $tmpimgname = "img" . $tmpdirname;
             if (! file_exists($dir_tmp . "/comum")) {
                 @mkdir($dir_tmp . "/comum", 0744);
-            }
-            if (! file_exists($dir_tmp . "/saiku-datasources")) {
-                // utilizado para armazenar os arquivos de fonte de dados do SAIKU
-                @mkdir($dir_tmp . "/saiku-datasources", 0744);
-                chmod($dir_tmp . "/saiku-datasources", 0744);
             }
             //
             if ($cachedir == "") {

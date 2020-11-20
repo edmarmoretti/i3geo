@@ -1,27 +1,27 @@
 GUIA DE UPDATES e UPGRADES
 
-Para a versão 8.0
+Para a versï¿½o 8.0
 
-As requisições AJAX agora são feitas usando jQuery. As requisições feitas em
+As requisiï¿½ï¿½es AJAX agora sï¿½o feitas usando jQuery. As requisiï¿½ï¿½es feitas em
 cada ferramenta utilizam programas em PHP localizados na pasta
 ferramentas/nome_da_ferramenta.
 
-Foram padronizados os nomes das ferramentas e das variáveis javascript que
-essas utilizam. Os nomes agora são sempre em caixa baixa e sem o uso de "_".
+Foram padronizados os nomes das ferramentas e das variï¿½veis javascript que
+essas utilizam. Os nomes agora sï¿½o sempre em caixa baixa e sem o uso de "_".
 
-As janelas flutuantes, baseadas na biblioteca YUI, foram substituídas por
+As janelas flutuantes, baseadas na biblioteca YUI, foram substituï¿½das por
 janelas modais criadas com BOOTSTRAP.
 
-Não são permitidas múltiplas janelas flutuantes.
+Nï¿½o sï¿½o permitidas mï¿½ltiplas janelas flutuantes.
 
 Foi removida a biblioteca  mCustomScrollbar
 
 -------------------------------------------------------------------------------------------------
-Para a versão 7.0
+Para a versï¿½o 7.0
 
-Inclusão da variável $ogrOutput em ms_configura.php, que indica se o OGR esta corretamente instalado, permitindo o seu uso nos servicos OGC de exportacao de dados
+Inclusï¿½o da variï¿½vel $ogrOutput em ms_configura.php, que indica se o OGR esta corretamente instalado, permitindo o seu uso nos servicos OGC de exportacao de dados
 
-Inclusão da variável $logTransacoes em ms_configura.php para ativar/desativar o log de transações com o banco de dados de administração
+Inclusï¿½o da variï¿½vel $logTransacoes em ms_configura.php para ativar/desativar o log de transaï¿½ï¿½es com o banco de dados de administraï¿½ï¿½o
 
 Os programas javascript do core do i3Geo agora ficam na pasta i3geo/js
 
@@ -29,109 +29,108 @@ O aplicativo datadownload foi removido
 
 As funcionalidades de download foram concentrados no aplicativo de acesso aos webservices OGC
 
-A string de conexão com o sistema de metadados estatísticos deve ser definida em ms_configura.php e não mais no banco de dados de administração
+A string de conexï¿½o com o sistema de metadados estatï¿½sticos deve ser definida em ms_configura.php e nï¿½o mais no banco de dados de administraï¿½ï¿½o
 
 -------------------------------------------------------------------------------------------------
-Para a versão 6.0
+Para a versï¿½o 6.0
 
-- para permitir o retorno da requisição WMS getfeatureinfo em JSON, foi incluído no mapfile base utilizado para
-gerar os serviços OGC a linha "wms_feature_info_mime_type" "application/json" em WEB->METADATA
-Caso você utilize um mapfile específico da sua instalação, veja o arquivo original existente em i3geo/aplicmap
-para fazer as adaptações.
+- para permitir o retorno da requisiï¿½ï¿½o WMS getfeatureinfo em JSON, foi incluï¿½do no mapfile base utilizado para
+gerar os serviï¿½os OGC a linha "wms_feature_info_mime_type" "application/json" em WEB->METADATA
+Caso vocï¿½ utilize um mapfile especï¿½fico da sua instalaï¿½ï¿½o, veja o arquivo original existente em i3geo/aplicmap
+para fazer as adaptaï¿½ï¿½es.
 
-- style.overflow passou a ser definido automaticamente como "hidden" para previnir problemas com as janelas de informação.
-Essa definição ocorre apenas quando o elemento body do HTML contiver o id definido como "i3geo" e quando seu estilo
-"overflow" não estiver previamente definido.
+- style.overflow passou a ser definido automaticamente como "hidden" para previnir problemas com as janelas de informaï¿½ï¿½o.
+Essa definiï¿½ï¿½o ocorre apenas quando o elemento body do HTML contiver o id definido como "i3geo" e quando seu estilo
+"overflow" nï¿½o estiver previamente definido.
 
-- Remoção da biblioteca baloon-tooltips em prol das rotinas específicas de cada API para construção de janelas
-de informação
+- Remoï¿½ï¿½o da biblioteca baloon-tooltips em prol das rotinas especï¿½ficas de cada API para construï¿½ï¿½o de janelas
+de informaï¿½ï¿½o
 
-- Inclusão da variável $i3geo_proxy_server no ms_configura.php para uso em algumas operações baseadas no acesso
+- Inclusï¿½o da variï¿½vel $i3geo_proxy_server no ms_configura.php para uso em algumas operaï¿½ï¿½es baseadas no acesso
 a outros servidores via Curl e OGC
 
-- Inclusão da variável $statusFerramentas no ms_configura para controlar o status de ferramentas que
-dependem de configuração específica do servidor
+- Inclusï¿½o da variï¿½vel $statusFerramentas no ms_configura para controlar o status de ferramentas que
+dependem de configuraï¿½ï¿½o especï¿½fica do servidor
 
-- Foram incluídos subitens no menu suspenso para acomodar o grande número de opções. Os códigos locais que
-manipulam o menu suspenso devem ser revisados para verificar o funcionamento nessa nova condição.
+- Foram incluï¿½dos subitens no menu suspenso para acomodar o grande nï¿½mero de opï¿½ï¿½es. Os cï¿½digos locais que
+manipulam o menu suspenso devem ser revisados para verificar o funcionamento nessa nova condiï¿½ï¿½o.
 
-- Nova variável em ms_configura chamada $customDir que indica a pasta com as customizações dos mapas
+- Nova variï¿½vel em ms_configura chamada $customDir que indica a pasta com as customizaï¿½ï¿½es dos mapas
 
-- nas interfaces que utilizam a API do google maps agora é necessário carregar a biblioteca geometry com o seguinte código:
+- nas interfaces que utilizam a API do google maps agora ï¿½ necessï¿½rio carregar a biblioteca geometry com o seguinte cï¿½digo:
 <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false&libraries=drawing,geometry"></script>
 
-- os links para a árvore hiperbólica foram removidos.
+- os links para a ï¿½rvore hiperbï¿½lica foram removidos.
 
-- a biblioteca pacotes/wicket/wicket.js agora é carregada com i3geo.js
+- a biblioteca pacotes/wicket/wicket.js agora ï¿½ carregada com i3geo.js
 
 - a biblioteca Richdraw foi removida em favor das bibliotecas de desenho nativas de cada API utilizada nos mapas
 
-- o código dos editores vetoriais para as interfaces Openlayers e Googlemaps foram movidos para a pasta i3geo/classesjs
+- o cï¿½digo dos editores vetoriais para as interfaces Openlayers e Googlemaps foram movidos para a pasta i3geo/classesjs
 
-- a ordem dos botões na barra de botões foi alterada para mostrar primeiro o botão da barra de edição
+- a ordem dos botï¿½es na barra de botï¿½es foi alterada para mostrar primeiro o botï¿½o da barra de ediï¿½ï¿½o
 
-- as funções de desenho de elementos gráficos utilizados pela interface GoogleEarth foram movidos de classesjs/classe_interface.js
+- as funï¿½ï¿½es de desenho de elementos grï¿½ficos utilizados pela interface GoogleEarth foram movidos de classesjs/classe_interface.js
 para classe_desenho.js
 
-- por default a árvore de temas agora é mostrada com checkbox ao invés de botão do tipo radio
+- por default a ï¿½rvore de temas agora ï¿½ mostrada com checkbox ao invï¿½s de botï¿½o do tipo radio
 
-- a árvore de temas agora pode ser utilizada para ligar/desligar camadas já existentes no mapa
+- a ï¿½rvore de temas agora pode ser utilizada para ligar/desligar camadas jï¿½ existentes no mapa
 
-- alteração na estrutura do objeto que contém as informações sobre as camadas existentes no mapa. Esse objeto foi reduzido em
-tamanho passando a usar uma lista de chaves e um array com os valores. Esse objeto é estruturado no servidor por classe_temas.php
+- alteraï¿½ï¿½o na estrutura do objeto que contï¿½m as informaï¿½ï¿½es sobre as camadas existentes no mapa. Esse objeto foi reduzido em
+tamanho passando a usar uma lista de chaves e um array com os valores. Esse objeto ï¿½ estruturado no servidor por classe_temas.php
 
-- remoção do arquivo css/botoes.css em favor de css/botoes2.css
+- remoï¿½ï¿½o do arquivo css/botoes.css em favor de css/botoes2.css
 
-- as opções da guia móvel foram alteradas. Podem ser necessários ajustes nos estilos inline das interfaces em uso
+- as opï¿½ï¿½es da guia mï¿½vel foram alteradas. Podem ser necessï¿½rios ajustes nos estilos inline das interfaces em uso
 para posicionar corretamente os elementos dentro das guias
 
 -------------------------------------------------------------------------------------------------
-Para a versão 5.0
+Para a versï¿½o 5.0
 
-- O usuário agora pode ver a pasta i3geo/aplicmap/dados e navegar pelos arquivos para adicionar camadas ao mapa
-Se você não quiser permitir isso, inclua na interface do seu mapa a variável javascript
+- O usuï¿½rio agora pode ver a pasta i3geo/aplicmap/dados e navegar pelos arquivos para adicionar camadas ao mapa
+Se vocï¿½ nï¿½o quiser permitir isso, inclua na interface do seu mapa a variï¿½vel javascript
 i3GEO.arvoreDeTemas.OPCOESADICIONAIS.navegacaoDir = false;
 
-- Novas variáveis no i3geo/ms_configura.php:
-	$saikuUrl e $saikuConfigDataSource para controle da integração com o SAIKU
+- Novas variï¿½veis no i3geo/ms_configura.php:
 
-	$ogcwsmap permite definir qual arquivo map será utilizado pelo gerador de serviços OGC
+	$ogcwsmap permite definir qual arquivo map serï¿½ utilizado pelo gerador de serviï¿½os OGC
 
 
 -------------------------------------------------------------------------------------------------
-Para a versão 4.7
+Para a versï¿½o 4.7
 
-- para testar via javascript se a versão é a 4.7, utilize:
+- para testar via javascript se a versï¿½o ï¿½ a 4.7, utilize:
 
 	if(i3GEO.eventos.cliquePerm){
 		//seu codigo vai aqui
 	}
 
-- Criada a pasta init que contém uma nova página de inicialização
-- O banco de dados de administração foi alterado. Deve ser executado o programa de upgrade do banco, existente em i3geo/admin.
-- Para permitir o upgrade é necessário ter um usuário master cadastrado em i3geo/ms_configura.php
+- Criada a pasta init que contï¿½m uma nova pï¿½gina de inicializaï¿½ï¿½o
+- O banco de dados de administraï¿½ï¿½o foi alterado. Deve ser executado o programa de upgrade do banco, existente em i3geo/admin.
+- Para permitir o upgrade ï¿½ necessï¿½rio ter um usuï¿½rio master cadastrado em i3geo/ms_configura.php
 - A interface Flamingo foi removida definitivamente
 - A interface "padrao" (geral) foi removida definitivamente
 - O gadget "quadro" foi removido
-- A opção de ativação/desativação do entorno foi removida
-- Remoção da pasta i3geo/classesjs/zerocal
-- Remoção da pasta i3geo/mobile
-- Remoção da pasta i3geo/pacotes/yui270
-- Remoção dos arquivos de exemplo de i3geo/ferramentas
-- Remoção das pastas depreciadas de i3geo/ferramentas
-- Remoção da pasta i3geo/pacotes/rlib
-- Remoção da pasta i3geo/pacotes/jsts
-- Remoção da pasta i3geo/pacotes/jsobjects
-- Remoção dos arquivos js da raiz de i3geo/ferramentas
-- Os arquivos javascript das ferramentas foram renomeados, removendo-se a extensão .php
-- As tabelas do sistema de administração agora já podem ser armazenadas em um esquema diferente do public
+- A opï¿½ï¿½o de ativaï¿½ï¿½o/desativaï¿½ï¿½o do entorno foi removida
+- Remoï¿½ï¿½o da pasta i3geo/classesjs/zerocal
+- Remoï¿½ï¿½o da pasta i3geo/mobile
+- Remoï¿½ï¿½o da pasta i3geo/pacotes/yui270
+- Remoï¿½ï¿½o dos arquivos de exemplo de i3geo/ferramentas
+- Remoï¿½ï¿½o das pastas depreciadas de i3geo/ferramentas
+- Remoï¿½ï¿½o da pasta i3geo/pacotes/rlib
+- Remoï¿½ï¿½o da pasta i3geo/pacotes/jsts
+- Remoï¿½ï¿½o da pasta i3geo/pacotes/jsobjects
+- Remoï¿½ï¿½o dos arquivos js da raiz de i3geo/ferramentas
+- Os arquivos javascript das ferramentas foram renomeados, removendo-se a extensï¿½o .php
+- As tabelas do sistema de administraï¿½ï¿½o agora jï¿½ podem ser armazenadas em um esquema diferente do public
 - O arquivo mashups/openlayers.js.php foi substituido por mashups/openlayers.js
-- O mapa com os estados do Brasil foi comentado nos mapfiles de inicialização. Para reativá-lo, deve-se remover os comentários do layer brasil existentes nos arquivos .map existentes em i3Geo/aplicmap
-- O layer com os limites estaduais não são mais carregados automaticamente, o layer estadosl está agora nos mapfiles de inicialização, porém, comentado para não ser ativado automaticamente
-- Os layers com a ZEE e base raster do MMA foram removidos dos mapfiles de inicialização
+- O mapa com os estados do Brasil foi comentado nos mapfiles de inicializaï¿½ï¿½o. Para reativï¿½-lo, deve-se remover os comentï¿½rios do layer brasil existentes nos arquivos .map existentes em i3Geo/aplicmap
+- O layer com os limites estaduais nï¿½o sï¿½o mais carregados automaticamente, o layer estadosl estï¿½ agora nos mapfiles de inicializaï¿½ï¿½o, porï¿½m, comentado para nï¿½o ser ativado automaticamente
+- Os layers com a ZEE e base raster do MMA foram removidos dos mapfiles de inicializaï¿½ï¿½o
 - ms_configura.php
-	- Nova variável de configuração para indicar o local das bibliotecas adicionais do software R: R_libpath
-- Funções removidas de classesphp/funcoes_gerais.php e inseridas nos respectivos programas que as chamam:
+	- Nova variï¿½vel de configuraï¿½ï¿½o para indicar o local das bibliotecas adicionais do software R: R_libpath
+- Funï¿½ï¿½es removidas de classesphp/funcoes_gerais.php e inseridas nos respectivos programas que as chamam:
 	classesRasterI
 	fusaoGrafico
 	executaR
@@ -143,48 +142,48 @@ Para a versão 4.7
 	criaDirMapa
 	permissoesarquivo
 -------------------------------------------------------------------------------------------------
-Para a versão 4.6
+Para a versï¿½o 4.6
 
 	Simbologia
 
-		Verifique o uso de símbolos lineares.
+		Verifique o uso de sï¿½mbolos lineares.
 			Utilize WIDTH no lugar de SIZE
-			No símbolo chamado "linhas", utilize um símbolo simples, exemplo:
+			No sï¿½mbolo chamado "linhas", utilize um sï¿½mbolo simples, exemplo:
 				STYLE
 					WIDTH 3
 					COLOR 255 0 0
 				END
 	Layout
 
-		Para utilizar o padrão CSS3 foi incluído nas páginas o doctype:
+		Para utilizar o padrï¿½o CSS3 foi incluï¿½do nas pï¿½ginas o doctype:
 		<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 
-		Se vc usa customizações, verifique se o seu HTML é compatível com CSS3.
-		Um dos principais problemas é a necessidade de uso de "px" sempre que forem utilizados os estilos top, left, width e height
+		Se vc usa customizaï¿½ï¿½es, verifique se o seu HTML ï¿½ compatï¿½vel com CSS3.
+		Um dos principais problemas ï¿½ a necessidade de uso de "px" sempre que forem utilizados os estilos top, left, width e height
 -------------------------------------------------------------------------------------------------
-Para a versão 4.5 + SP11
+Para a versï¿½o 4.5 + SP11
 
-	Mudanças que foram feitas para uso da versão 6 do Mapserver:
+	Mudanï¿½as que foram feitas para uso da versï¿½o 6 do Mapserver:
 
-		Os mapfiles de inicialização geral1.map, geral1debian.map e geral1windows.map, existentes em i3geo/aplicmap,
-		foram mantidos para efeitos de compatibilidade. Os novos mapfiles de inicialização agora são:
+		Os mapfiles de inicializaï¿½ï¿½o geral1.map, geral1debian.map e geral1windows.map, existentes em i3geo/aplicmap,
+		foram mantidos para efeitos de compatibilidade. Os novos mapfiles de inicializaï¿½ï¿½o agora sï¿½o:
 			geral1v5.map
 			geral1v6.map
 			geral1debianv5.map
 			geral1debianv6.map
 			geral1windowsv5.map
 			gral1windowsv6.map
-		"vX" indica a versão do Mapserver
+		"vX" indica a versï¿½o do Mapserver
 
-		Caso o i3Geo seja inicializado com um mapfile diferente dos que são padrão, existentes em i3geo/aplicmap, é
-		necessário alterar esse mapfile para compatibilizá-lo com a versão 6 do Mapserver.
+		Caso o i3Geo seja inicializado com um mapfile diferente dos que sï¿½o padrï¿½o, existentes em i3geo/aplicmap, ï¿½
+		necessï¿½rio alterar esse mapfile para compatibilizï¿½-lo com a versï¿½o 6 do Mapserver.
 		Utilize o arquivo i3geo/aplicmap/geral1.map ou geral1windows.map para copiar
-		os elementos iniciais (de MAP até o primeiro LAYER) para o mapfile de inicialização desejado.
+		os elementos iniciais (de MAP atï¿½ o primeiro LAYER) para o mapfile de inicializaï¿½ï¿½o desejado.
 
-		Arquivos de definição de símbolos:
-			i3geo/symbols/simbolos.sym não deve mais ser usado, continua a existir apenas para compatibilidade
-			novos símbolos devem ser inseridos em i3geo/symbols/simbolosv5.sym ou em i3geo/symbols/simbolosv6.sym,
-			conforme a versão do Mapserver em uso
+		Arquivos de definiï¿½ï¿½o de sï¿½mbolos:
+			i3geo/symbols/simbolos.sym nï¿½o deve mais ser usado, continua a existir apenas para compatibilidade
+			novos sï¿½mbolos devem ser inseridos em i3geo/symbols/simbolosv5.sym ou em i3geo/symbols/simbolosv6.sym,
+			conforme a versï¿½o do Mapserver em uso
 
 			Nos mapfiles existentes em i3geo/temas, deve-se substituir a linha
 			SYMBOLSET ../symbols/simbolos.sym
@@ -192,33 +191,33 @@ Para a versão 4.5 + SP11
 			SYMBOLSET ../symbols/simbolosv6.sym
 			ou
 			SYMBOLSET ../symbols/simbolosv5.sym
-			conforme a versão do Mapserver em uso
-			Sem essa mudança, o i3Geo continuará a funcionar, mas se forem criados novos símbolos em um arquivo
+			conforme a versï¿½o do Mapserver em uso
+			Sem essa mudanï¿½a, o i3Geo continuarï¿½ a funcionar, mas se forem criados novos sï¿½mbolos em um arquivo
 			simbolosv5.sym ou simbolosv6.sym, deve-se fazer o mesmo em simbolos.sym
 
 
-Para a versão 4.5 + SP8
+Para a versï¿½o 4.5 + SP8
 
-	As interfaces Openlayers e Googlemaps por default passaram a utilizar as guias na forma "retrátil"
+	As interfaces Openlayers e Googlemaps por default passaram a utilizar as guias na forma "retrï¿½til"
 	As interfaces com a guia lateral anterior foram renomeadas para i3geo/interface/openlayers1.htm e googlemaps1.phtml
 
-Para a versão 4.5
+Para a versï¿½o 4.5
 
-	Os arquivos com as interfaces HTML dos diferentes mapas do i3Geo foram movidos do diretório
-	i3geo/aplicmap para o diretório i3geo/interface. Caso existam links apontando diretamente para
+	Os arquivos com as interfaces HTML dos diferentes mapas do i3Geo foram movidos do diretï¿½rio
+	i3geo/aplicmap para o diretï¿½rio i3geo/interface. Caso existam links apontando diretamente para
 	esses arquivos, vc pode simplesmente copiar os arquivos existentes na nova pasta (i3geo/interface)
 	para a antiga (i3geo/aplicmap).
 
-	As variáveis de configuração $temasdir e $temasaplic foram removidas. Se vc desenvolveu programas em PHP,
-	no lugar dessas variáveis utilize $locaplic e o local fixo dos arquivos, por exemplo $locaplic."/temas"
+	As variï¿½veis de configuraï¿½ï¿½o $temasdir e $temasaplic foram removidas. Se vc desenvolveu programas em PHP,
+	no lugar dessas variï¿½veis utilize $locaplic e o local fixo dos arquivos, por exemplo $locaplic."/temas"
 	e $locaplic."/aplicmap"
 
-	A opção de administração com base em arquivos XML em disco foi removida. Agora, deve-se sempre utilizar o banco de dados
-	de admnistração.
+	A opï¿½ï¿½o de administraï¿½ï¿½o com base em arquivos XML em disco foi removida. Agora, deve-se sempre utilizar o banco de dados
+	de admnistraï¿½ï¿½o.
 
-	O banco de dados de administração sofreu alterações. Veja em "Outras opções", no sistema de admnistração.
+	O banco de dados de administraï¿½ï¿½o sofreu alteraï¿½ï¿½es. Veja em "Outras opï¿½ï¿½es", no sistema de admnistraï¿½ï¿½o.
 
-	O arquivo admin.db (banco de dados de admnistração default) foi movido de i3geo/menutemas para i3geo/admin
+	O arquivo admin.db (banco de dados de admnistraï¿½ï¿½o default) foi movido de i3geo/menutemas para i3geo/admin
 
 	O "alias" para a interface "zerocal" foi removido, utilize em seu lugar:
 	http://localhost/i3geo/ms_criamapa.php?interface=zerocal.htm ou
@@ -226,191 +225,191 @@ Para a versão 4.5
 
 	A pasta "images" foi removida e as imagens movidas para a pasta "imagens\depreciado"
 
-	Opção de comentários em temas
-		Foram acrescentadas novas variáveis em ms_configura.php. Veja esse arquivo para editar as variáveis e registrar
+	Opï¿½ï¿½o de comentï¿½rios em temas
+		Foram acrescentadas novas variï¿½veis em ms_configura.php. Veja esse arquivo para editar as variï¿½veis e registrar
 		as APIs das redes sociais como Twitter e Facebook
-		Por default, todos os temas agora podem receber comentários. Para bloquear comentários em temas específicos,
-		utilize o editor de mapfiles do sistema de admnistração para bloquear essa opção em cada tema
-		Os comentários são armazenados em uma tabela no banco de dados de administração. Essa tabela precisa ser criada no banco.
-		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
+		Por default, todos os temas agora podem receber comentï¿½rios. Para bloquear comentï¿½rios em temas especï¿½ficos,
+		utilize o editor de mapfiles do sistema de admnistraï¿½ï¿½o para bloquear essa opï¿½ï¿½o em cada tema
+		Os comentï¿½rios sï¿½o armazenados em uma tabela no banco de dados de administraï¿½ï¿½o. Essa tabela precisa ser criada no banco.
+		Para criar a tabela veja o item "Outras opï¿½ï¿½es" em http://localhost/i3geo/admin
 
-	Contagem do número de acessos de cada tema
-		Foi criada uma nova tabela no sistema de administração para guardar o número de vezes que um tema é acessado. Antes
-		a contagem era mantida na tabela i3geoadmin_temas, cuja coluna nacessos foi depreciada. Essa nova tabela guarda também o dia do acesso.
-		Para criar a tabela veja o item "Outras opções" em http://localhost/i3geo/admin
+	Contagem do nï¿½mero de acessos de cada tema
+		Foi criada uma nova tabela no sistema de administraï¿½ï¿½o para guardar o nï¿½mero de vezes que um tema ï¿½ acessado. Antes
+		a contagem era mantida na tabela i3geoadmin_temas, cuja coluna nacessos foi depreciada. Essa nova tabela guarda tambï¿½m o dia do acesso.
+		Para criar a tabela veja o item "Outras opï¿½ï¿½es" em http://localhost/i3geo/admin
 
-	O nome dos arquivos js e ccs compactados foram renomeados, incluindo o valor da versão no final. Isso foi feito para se
-	evitar problemas de cache de versões antigas. Os arquivos renomeados foram:
+	O nome dos arquivos js e ccs compactados foram renomeados, incluindo o valor da versï¿½o no final. Isso foi feito para se
+	evitar problemas de cache de versï¿½es antigas. Os arquivos renomeados foram:
 		classesjs/i3geo_tudo_compacto45.js
 		css/i3geo_ferramentas45.css
 
 	Testado o uso de zlib.output_compression = On no php.ini
 
-	Variáveis ou funções removidas
-		i3GEO.interface (utilize i3GEO.Interface, com "I" maiúsculo)
+	Variï¿½veis ou funï¿½ï¿½es removidas
+		i3GEO.interface (utilize i3GEO.Interface, com "I" maiï¿½sculo)
 		g_postpx
 		g_tipotop
 		g_tipoleft
 
-	A inicialização da interface Google Earth (interface/googleearth.phtml) foi incluida na tag "body":
+	A inicializaï¿½ï¿½o da interface Google Earth (interface/googleearth.phtml) foi incluida na tag "body":
 		<body id="i3geo" onload='i3GEO.inicia();'>
 
-	e-mail institucional (incluido no arquivo de correções SP7)
-		em ms_configura.php pode ser definido um e-mail padrão que é utilizado nas interfaces dos mapas
-		Para que o e-mail definido seja mostrado, é necessário adicionar um elemento HTML com id=emailInstituicao no mapa
+	e-mail institucional (incluido no arquivo de correï¿½ï¿½es SP7)
+		em ms_configura.php pode ser definido um e-mail padrï¿½o que ï¿½ utilizado nas interfaces dos mapas
+		Para que o e-mail definido seja mostrado, ï¿½ necessï¿½rio adicionar um elemento HTML com id=emailInstituicao no mapa
 
 -------------------------------------------------------------------------------------------------
-Para a versão 4.4
+Para a versï¿½o 4.4
 
-	Verifique se o PHP está configurado (php.ini) para permitir a passagem de parâmetros por referência
-	(dependendo da versão do PHP, esse parâmetro é definido como "Off" por default):
+	Verifique se o PHP estï¿½ configurado (php.ini) para permitir a passagem de parï¿½metros por referï¿½ncia
+	(dependendo da versï¿½o do PHP, esse parï¿½metro ï¿½ definido como "Off" por default):
 	allow_call_time_pass_reference = On
 
-	Foi acrescentado um novo LAYER em i3geo/aplicmp/geral1.map e geral1windows.map com dados do Open Street Map. Caso vc não
-	queira que essa camada nova apareça, basta removê-las desses arquivos.
+	Foi acrescentado um novo LAYER em i3geo/aplicmp/geral1.map e geral1windows.map com dados do Open Street Map. Caso vc nï¿½o
+	queira que essa camada nova apareï¿½a, basta removï¿½-las desses arquivos.
 
-	Foi incluida a remoção de cookies no ms_criamapa.php, que inicializa o i3geo ($_COOKIE = array();). Se vc precisa definir cookies,
-	considere a necessidade de comentar a linha de código do ms_criamapa.php.
+	Foi incluida a remoï¿½ï¿½o de cookies no ms_criamapa.php, que inicializa o i3geo ($_COOKIE = array();). Se vc precisa definir cookies,
+	considere a necessidade de comentar a linha de cï¿½digo do ms_criamapa.php.
 
 	Por default, o i3Geo passou a usar a interface openlayers.htm. Se vc quiser modificar isso, altere o ms_configura.php.
 -------------------------------------------------------------------------------------------------
-Para a versão 4.3
+Para a versï¿½o 4.3
 
-	O banco de dados de administração sofreu as seguintes alterações (vc deve incluir as novas colunas
+	O banco de dados de administraï¿½ï¿½o sofreu as seguintes alteraï¿½ï¿½es (vc deve incluir as novas colunas
 	para que o i3Geo funcione corretamente:
 
-	- acréscimo das colunas en,es,it nas tabelas (tipo texto)
+	- acrï¿½scimo das colunas en,es,it nas tabelas (tipo texto)
 		i3geoadmin_menus
 		i3geoadmin_temas
 		i3geoadmin_grupos
 		i3geoadmin_subgrupos
 
-	- acréscimo da coluna kmz_tema em i3geoadmin_temas (tipo texto)
+	- acrï¿½scimo da coluna kmz_tema em i3geoadmin_temas (tipo texto)
 
-	Foi incluida uma nova opção que permite ao usuário alterar o SQL que faz o acesso aos dados em
-	um LAYER (elemento DATA do mapfile). Mostrar ou não essa opção é controlado por um metadata
-	em cada LAYER. Por default, o i3Geo entende que esse metadata é marcado como SIM. Se vc não quer
-	que o usuário possa acessar essa funcionalidade, utilize o sistema de administração para editar
-	esse metadata de cada LAYER presente em um mapfile ou então, inclua o metadata "editorsql" "nao".
+	Foi incluida uma nova opï¿½ï¿½o que permite ao usuï¿½rio alterar o SQL que faz o acesso aos dados em
+	um LAYER (elemento DATA do mapfile). Mostrar ou nï¿½o essa opï¿½ï¿½o ï¿½ controlado por um metadata
+	em cada LAYER. Por default, o i3Geo entende que esse metadata ï¿½ marcado como SIM. Se vc nï¿½o quer
+	que o usuï¿½rio possa acessar essa funcionalidade, utilize o sistema de administraï¿½ï¿½o para editar
+	esse metadata de cada LAYER presente em um mapfile ou entï¿½o, inclua o metadata "editorsql" "nao".
 
 -------------------------------------------------------------------------------------------------
-Para a versão 4.1
+Para a versï¿½o 4.1
 
-Sistema de administração
+Sistema de administraï¿½ï¿½o
 
-	A administração do i3geo pode ser feita através de um sistema de formulários  web desde que vc opte por isso.
+	A administraï¿½ï¿½o do i3geo pode ser feita atravï¿½s de um sistema de formulï¿½rios  web desde que vc opte por isso.
 
-	Se vc quiser continuar usando os arquivos XML existentes em i3geo/menutemas, não tem problema, mas nesse
-	caso o sistema de administração não lhe será útil.
+	Se vc quiser continuar usando os arquivos XML existentes em i3geo/menutemas, nï¿½o tem problema, mas nesse
+	caso o sistema de administraï¿½ï¿½o nï¿½o lhe serï¿½ ï¿½til.
 
-	A opção pelo uso do sistema de administração é default na versão 4.1. Se vc não quiser usá-la, deverá
-	editar o arquivo i3geo/ms_configura.php e colocar os nomes dos arquivos XML nas opções desejadas. Esse
-	arquivo está documentado, basta ler para entender o que deve ser feito.
+	A opï¿½ï¿½o pelo uso do sistema de administraï¿½ï¿½o ï¿½ default na versï¿½o 4.1. Se vc nï¿½o quiser usï¿½-la, deverï¿½
+	editar o arquivo i3geo/ms_configura.php e colocar os nomes dos arquivos XML nas opï¿½ï¿½es desejadas. Esse
+	arquivo estï¿½ documentado, basta ler para entender o que deve ser feito.
 
-	O sistema de administração é acessível no endereço i3geo/admin (http://localhost/i3geo/admin). Apenas editores
-	cadastrados podem usar esse sistema. O cadastramento é feito por número IP (veja i3geo/ms_configura.php).
-	Por default, "localhost" é um editor cadastrado.
+	O sistema de administraï¿½ï¿½o ï¿½ acessï¿½vel no endereï¿½o i3geo/admin (http://localhost/i3geo/admin). Apenas editores
+	cadastrados podem usar esse sistema. O cadastramento ï¿½ feito por nï¿½mero IP (veja i3geo/ms_configura.php).
+	Por default, "localhost" ï¿½ um editor cadastrado.
 
-	Os arquivos mapfiles existentes em i3geo/temas continuam sendo necessários e vc pode editá-los manualmente
-	ou por meio do sistema de administração.
+	Os arquivos mapfiles existentes em i3geo/temas continuam sendo necessï¿½rios e vc pode editï¿½-los manualmente
+	ou por meio do sistema de administraï¿½ï¿½o.
 
-	Os arquivos XML que vc já possuí em i3geo/menutemas devem ser importados para o sistema de administração.
-	Utilize as opções existentes em i3geo/admin para fazer isso.
+	Os arquivos XML que vc jï¿½ possuï¿½ em i3geo/menutemas devem ser importados para o sistema de administraï¿½ï¿½o.
+	Utilize as opï¿½ï¿½es existentes em i3geo/admin para fazer isso.
 
-	O banco de dados default do i3geo é em SQLITE e fica em i3geo/menutemas/admin.db.
-	Vc deve apagar esse arquivo e criar outro antes de importar seus arquivos XML. No sistema de administração
-	existe uma opção para criar o banco, o que deve ser feito depois que vc apagar o arquivo que vai com o i3geo.
+	O banco de dados default do i3geo ï¿½ em SQLITE e fica em i3geo/menutemas/admin.db.
+	Vc deve apagar esse arquivo e criar outro antes de importar seus arquivos XML. No sistema de administraï¿½ï¿½o
+	existe uma opï¿½ï¿½o para criar o banco, o que deve ser feito depois que vc apagar o arquivo que vai com o i3geo.
 
-	Se vc não quiser usar o SQLITE vc deve criar um arquivo de conexão com seu banco de dados e registrar o endereço
-	desse arquivo em uma variável no i3geo/ms_configura.php. Um exemplo de arquivo de configuração para POSTGRE
-	pode ser visto em i3geo/admin/php/conexaomm.php. Ao usar a opção de criação do banco existente no sistema
-	de administração, as tabelas serão criadas no banco de dados indicado.
+	Se vc nï¿½o quiser usar o SQLITE vc deve criar um arquivo de conexï¿½o com seu banco de dados e registrar o endereï¿½o
+	desse arquivo em uma variï¿½vel no i3geo/ms_configura.php. Um exemplo de arquivo de configuraï¿½ï¿½o para POSTGRE
+	pode ser visto em i3geo/admin/php/conexaomm.php. Ao usar a opï¿½ï¿½o de criaï¿½ï¿½o do banco existente no sistema
+	de administraï¿½ï¿½o, as tabelas serï¿½o criadas no banco de dados indicado.
 
 PHP
 
-	O sistema de administração do i3geo é baseado na biblioteca PHP chamada "PDO". Nas versões mais recentes do
-	PHP e no MS4W essa biblioteca já vem habilitada. Se no seu PHP não existir o PDO vc deverá instalá-lo.
+	O sistema de administraï¿½ï¿½o do i3geo ï¿½ baseado na biblioteca PHP chamada "PDO". Nas versï¿½es mais recentes do
+	PHP e no MS4W essa biblioteca jï¿½ vem habilitada. Se no seu PHP nï¿½o existir o PDO vc deverï¿½ instalï¿½-lo.
 
 YAHOO
 
-	A bibblioteca do YAHOO (YUI) foi atualizada. A versão antiga continua em i3geo/pacotes. Se vc desenvolveu
-	programas baseados na versão antiga, é bom verificar se tudo funcionará corretamente pois o arquivo
-	i3geo/classesjs/i3geo.js agora utiliza essa nova versão da YUI.
+	A bibblioteca do YAHOO (YUI) foi atualizada. A versï¿½o antiga continua em i3geo/pacotes. Se vc desenvolveu
+	programas baseados na versï¿½o antiga, ï¿½ bom verificar se tudo funcionarï¿½ corretamente pois o arquivo
+	i3geo/classesjs/i3geo.js agora utiliza essa nova versï¿½o da YUI.
 
 JSOBJECTS
 
-	Essa biblioteca não será mais utilizada pelo i3geo, sendo substituída pelo YUI. Se vc utilizava as funcionalidades
-	dessa biblioteca, embutida no i3geo.js, deverá verificar seu código ou então embutir novamente essa
-	biblioteca no i3geo.js. Para isso vc deve alterar o programa i3geo/classesjs/compactajs.php e executá-lo
+	Essa biblioteca nï¿½o serï¿½ mais utilizada pelo i3geo, sendo substituï¿½da pelo YUI. Se vc utilizava as funcionalidades
+	dessa biblioteca, embutida no i3geo.js, deverï¿½ verificar seu cï¿½digo ou entï¿½o embutir novamente essa
+	biblioteca no i3geo.js. Para isso vc deve alterar o programa i3geo/classesjs/compactajs.php e executï¿½-lo
 	para gerar os arquivos compactados do i3geo.
 
 Classes JS e namespaces
 
-	O modelo de desenvolvimento dos programas javascript estão sendo migrados aos poucos para estruturas
-	baseadas em classes. Isso facilitará a compreensão dos códigos e sua documentação, facilitando a vida
-	dos desenvolvedores e permitindo uma melhor evolução dos códigos.
+	O modelo de desenvolvimento dos programas javascript estï¿½o sendo migrados aos poucos para estruturas
+	baseadas em classes. Isso facilitarï¿½ a compreensï¿½o dos cï¿½digos e sua documentaï¿½ï¿½o, facilitando a vida
+	dos desenvolvedores e permitindo uma melhor evoluï¿½ï¿½o dos cï¿½digos.
 
-	As classes desenvolvidas ficarão em arquivos únicos de cada classe e devem usar o namespace i3GEO. Essa
-	regra evitará conflitos entre bibliotecas javascript adicionadas ao i3geo.
-	Exemplo, para remover a acentuação de uma palavra vc pode usar a classe i3GEO.util:
+	As classes desenvolvidas ficarï¿½o em arquivos ï¿½nicos de cada classe e devem usar o namespace i3GEO. Essa
+	regra evitarï¿½ conflitos entre bibliotecas javascript adicionadas ao i3geo.
+	Exemplo, para remover a acentuaï¿½ï¿½o de uma palavra vc pode usar a classe i3GEO.util:
 
-	var palavraAcentuada = "coração";
+	var palavraAcentuada = "coraï¿½ï¿½o";
 	var palavraSemAcento = i3GEO.util.removeAcentos(palavraAcentuada);
 
 Googlemaps
 
-	A chave de registro da API do Google agora deve ser incluída no arquivo i3geo/ms_configura.php na
-	variável $googleApiKey.
+	A chave de registro da API do Google agora deve ser incluï¿½da no arquivo i3geo/ms_configura.php na
+	variï¿½vel $googleApiKey.
 
-	Isso foi necessário porque a API do Google será utilizada em outras ferramentas do i3geo.
+	Isso foi necessï¿½rio porque a API do Google serï¿½ utilizada em outras ferramentas do i3geo.
 
-	A ferramenta googlemaps agora é chamada com ferramentas/googlemaps/index.php
+	A ferramenta googlemaps agora ï¿½ chamada com ferramentas/googlemaps/index.php
 
 Idiomas
 
-	A lista de palavras e suas traduções foram retiradas do arquivo i3geo/classesjs/configura.js e incluidas no
+	A lista de palavras e suas traduï¿½ï¿½es foram retiradas do arquivo i3geo/classesjs/configura.js e incluidas no
 	novo arquivo i3geo/classesjs/dicionario.js
 
-	Foi criada uma classe específica para manipular a internacionalização. Veja a documentação em
+	Foi criada uma classe especï¿½fica para manipular a internacionalizaï¿½ï¿½o. Veja a documentaï¿½ï¿½o em
 	http://localhost/i3geo/documentacao/files/classesjs/classe_idioma-js.html
 
-Árvore de temas
+ï¿½rvore de temas
 
-	A árvore de temas, que aparece na guia "Mapa", agora é montada com a biblioteca YUI. Foi criada uma classe
-	javascript específica para manipular essa árvore. Veja a documentação em
+	A ï¿½rvore de temas, que aparece na guia "Mapa", agora ï¿½ montada com a biblioteca YUI. Foi criada uma classe
+	javascript especï¿½fica para manipular essa ï¿½rvore. Veja a documentaï¿½ï¿½o em
 	http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredecamadas-js.html
-	Os aplicativos que usam árvores também utilizam agora essa classe, como o i3geo/datadownload.htm
+	Os aplicativos que usam ï¿½rvores tambï¿½m utilizam agora essa classe, como o i3geo/datadownload.htm
 
-Árvore de camadas
+ï¿½rvore de camadas
 
-	A árvore de camadas, que aparece na guia "+ temas", agora é montada com a biblioteca YUI. Foi criada uma classe
-	javascript específica para manipular essa árvore. Veja a documentação em
+	A ï¿½rvore de camadas, que aparece na guia "+ temas", agora ï¿½ montada com a biblioteca YUI. Foi criada uma classe
+	javascript especï¿½fica para manipular essa ï¿½rvore. Veja a documentaï¿½ï¿½o em
 	http://localhost/i3geo/documentacao/files/classesjs/classe_arvoredetemas-js.html
 
-Utilitários
+Utilitï¿½rios
 
-	Foi criada uma classe específica com funções de uso geral. Veja em:
+	Foi criada uma classe especï¿½fica com funï¿½ï¿½es de uso geral. Veja em:
 	http://localhost/i3geo/documentacao/files/classesjs/classe_util-js.html
 
-Cálculos
+Cï¿½lculos
 
-	Os cálculos agora estão na classe i3GEO.calculo, por exemplo, para converter coordenadas de dd para dms, utilize:
+	Os cï¿½lculos agora estï¿½o na classe i3GEO.calculo, por exemplo, para converter coordenadas de dd para dms, utilize:
 	i3GEO.calculo.dd2dms(dd)
 
 objmapa
 
-	A forma de inicialização do i3geo do lado do navegador (javascript) agora é controlado pela classe i3GEO.
-	O "objmapa" não é mais utilizado.
-	Os parâmetros do mapa, como extensão geográfica, tamanho do pixel, etc, são agora acessados por meio
-	de i3GEO.parametros, por exemplo, para obter a extensão geográfica do mapa atual, utilize:
+	A forma de inicializaï¿½ï¿½o do i3geo do lado do navegador (javascript) agora ï¿½ controlado pela classe i3GEO.
+	O "objmapa" nï¿½o ï¿½ mais utilizado.
+	Os parï¿½metros do mapa, como extensï¿½o geogrï¿½fica, tamanho do pixel, etc, sï¿½o agora acessados por meio
+	de i3GEO.parametros, por exemplo, para obter a extensï¿½o geogrï¿½fica do mapa atual, utilize:
 	alert(i3GEO.parametros.mapexten)
 	A lista completa de i3GEO.parametros pode ser vista em i3geo/classesjs/classe_i3geo.js
 
-Variáveis de configuração
+Variï¿½veis de configuraï¿½ï¿½o
 
-	Muitas das novas classes possuem seus próprios métodos de configuração. Porém os parâmetros principais
-	de configuração do mapa ficam agora na classe i3GEO.configura
-	Por exemplo, para obter o diretório onde o i3geo está instalado, antes utilizava-se g_locaplic, agora utiliza-se
+	Muitas das novas classes possuem seus prï¿½prios mï¿½todos de configuraï¿½ï¿½o. Porï¿½m os parï¿½metros principais
+	de configuraï¿½ï¿½o do mapa ficam agora na classe i3GEO.configura
+	Por exemplo, para obter o diretï¿½rio onde o i3geo estï¿½ instalado, antes utilizava-se g_locaplic, agora utiliza-se
 	i3GEO.configura.locaplic
 
 Chamada aos programas PHP

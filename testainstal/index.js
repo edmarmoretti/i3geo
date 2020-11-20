@@ -77,13 +77,6 @@ botoesIni = [
 	"fa": "download",
 	"target": "_self"
 },{
-	"img":"../imagens/saiku_free_small.png",
-	"href":"../ferramentas/saiku/startsaiku.php?locaplic="+window.location.href.replace("/init/index.php",""),
-	"titulo":$trad(25,g_traducao_init),
-	"subtitulo": $trad("25a",g_traducao_init),
-	"fa": "bar-chart",
-	"target": "_self"
-},{
 	"img":"insert-link.png",
 	"href":"../geradordelinks.htm",
 	"titulo":$trad(13,g_traducao_init),
