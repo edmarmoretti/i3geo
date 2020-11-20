@@ -39,7 +39,7 @@ A lista de drives &eacute; definida no ms_configura e permite que o usu&aacute;r
 /*
 Valor: LISTAARQUIVOS*
 
-Lista os arquivos de um diretório.
+Lista os arquivos de um diretï¿½rio.
 */
 	case "LISTAARQUIVOS":
 		if(!empty($navegadoresLocais)){
