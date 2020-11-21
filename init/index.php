@@ -106,39 +106,41 @@ if (! function_exists("ms_GetVersion")) {
 ?>
 			<!-- Template para criacao dos quadros ver index.js -->
             <div id="botoesTpl" class="hidden">
-                <div class="cartao {{{fa}}} col-xs-12 center-block" style="width: 30rem; min-width: 30rem; max-width: 30rem;">
-                    <div class="panel panel-default">
-                        <div class="panel-heading" style="padding:0px;">
-                            <h5 style="font-size: 1.7rem; height: 35px;padding:10px 10px;">{{{titulo}}}</h5>
-
-                                <a tabindex="-1" target="{{{target}}}" href="{{{href}}}">
-                                    <img alt="{{{titulo}}}" tabindex="-1" style="height: 100px; width: 100%; border-radius: 0px;" src="{{{img}}}" />
-                                </a>
-
-                        </div>
-                        <div class="panel-body" tabindex="-1" style="background-color: rgb(250, 250, 250)">
-                            <h5 tabindex="-1" class="hidden-xs" style="height: 10rem; font-size: 1.7rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
-                        </div>
-                        <div class="panel-footer text-right" style="padding: 0px; padding-right: 15px; border: 0px; background-color: rgb(250, 250, 250);">
-                            <div class="row center-block">
-                                <div class="col-xs-6" style="line-height: 3.5; text-align: left;">
-                                    <!-- o texto no span e para acessibilidade-->
-                                    <button tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini"
-                                        style="padding-left: 8px; padding-top: 7px; margin: auto;">
-                                        <span class="glyphicon glyphicon-qrcode" aria-hidden="true">&nbsp;&nbsp;qrcode</span>
-                                    </button>
-
-                                    <button tabindex="-1" role="button" style="" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
-                                        <span data-cookie="{{{img}}}"><i class="material-icons">grade</i></span>
-                                    </button>
-                                </div>
-                                <div class="col-xs-6">
-                                    <a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}"> {{{abrir}}} </a>
+                <template  id="botoesTpl_template">
+                    <div class="cartao {{{fa}}} col-xs-12 center-block" style="width: 30rem; min-width: 30rem; max-width: 30rem;">
+                        <div class="panel panel-default">
+                            <div class="panel-heading" style="padding:0px;">
+                                <h5 style="font-size: 1.7rem; height: 35px;padding:10px 10px;">{{{titulo}}}</h5>
+    
+                                    <a tabindex="-1" target="{{{target}}}" href="{{{href}}}">
+                                        <img alt="{{{titulo}}}" tabindex="-1" style="height: 100px; width: 100%; border-radius: 0px;" src="{{{img}}}" />
+                                    </a>
+    
+                            </div>
+                            <div class="panel-body" tabindex="-1" style="background-color: rgb(250, 250, 250)">
+                                <h5 tabindex="-1" class="hidden-xs" style="height: 10rem; font-size: 1.7rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
+                            </div>
+                            <div class="panel-footer text-right" style="padding: 0px; padding-right: 15px; border: 0px; background-color: rgb(250, 250, 250);">
+                                <div class="row center-block">
+                                    <div class="col-xs-6" style="line-height: 3.5; text-align: left;">
+                                        <!-- o texto no span e para acessibilidade-->
+                                        <button tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini"
+                                            style="padding-left: 8px; padding-top: 7px; margin: auto;">
+                                            <span class="glyphicon glyphicon-qrcode" aria-hidden="true">&nbsp;&nbsp;qrcode</span>
+                                        </button>
+    
+                                        <button tabindex="-1" role="button" style="" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
+                                            <span data-cookie="{{{img}}}"><i class="material-icons">grade</i></span>
+                                        </button>
+                                    </div>
+                                    <div class="col-xs-6">
+                                        <a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}"> {{{abrir}}} </a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </template>
             </div>
         </div>
     </div>

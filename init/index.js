@@ -115,7 +115,7 @@ function mostraBotoesBT(men){
 	$("#jumbotron").html(html);
 	i3GEO.configura = {"locaplic" : ".."};
 	html = Mustache.to_html(
-			"{{#d}}" + $("#botoesTpl").html() + "{{/d}}",
+			"{{#d}}" + $("#botoesTpl_template").html() + "{{/d}}",
 			{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}
 	);
 	$("#botoesTpl").html(html);
