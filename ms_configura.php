@@ -821,12 +821,18 @@ else //se for linux
  * Para trocar, altere a linha abaixo
  */
 if(empty($_COOKIE["i3geolingua"]) && array_key_exists('HTTP_ACCEPT_LANGUAGE',$_SERVER)){
-	$lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
+    $arr_cookie_options = array (
+        'expires' => time() + 60*60*24*365,
+        'path' => '/',
+        'secure' => true,     // or false
+        'samesite' => 'Strict' // None || Lax  || Strict
+    );
+    $lang = substr($_SERVER['HTTP_ACCEPT_LANGUAGE'], 0, 2);
 	$l = "pt";
 	if($lang == "en" || $lang == "es"){
 		$l = $lang;
 	}
-	setcookie('i3geolingua', $l, time()+60*60*24*365, '/');
+	setcookie('i3geolingua', $l, $arr_cookie_options);
 }
 error_reporting(0);
 ?>

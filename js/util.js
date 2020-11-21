@@ -272,7 +272,7 @@ i3GEO.util =
 			}
 			var exdate = new Date();
 			exdate.setDate(exdate.getDate() + expira);
-			document.cookie = nome + "=" + valor + "; expires=" + exdate.toUTCString() + ";path=/";
+			document.cookie = nome + "=" + valor + "; expires=" + exdate.toUTCString() + ";path=/" + ";SameSite=Strict";
 		},
 		/**
 		 * Function: pegaCookie

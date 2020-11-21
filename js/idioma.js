@@ -381,7 +381,7 @@ var $trad = function(id, dic) {
 	if(lang == "en" || lang == "es" || lang == "pt"){
 	    l = lang;
 	}
-	document.cookie = "i3geolingua=" + l + "; expires=" + exdate.toUTCString() + ";path=/";
+	document.cookie = "i3geolingua=" + l + "; expires=" + exdate.toUTCString() + ";path=/" + ";SameSite=Strict";
     }
     var c = i3GEO.util.pegaCookie("i3geolingua");
     if (c) {

@@ -1,7 +1,14 @@
 //utilize $trad("p1") para retornar o texto
 g_traducao =
     {
-        // utilizado em numeros
+        "src": [
+            {
+                pt : "src",
+                en : "src",
+                es : "src"
+            }
+        ],
+		// utilizado em numeros
         "dec" : [
             {
                 pt : ",",

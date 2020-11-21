@@ -98,7 +98,13 @@ class Mscriamapa
         $protocolo = strtolower($protocolo) . '://' . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
         $_SESSION["urli3geo"] = str_replace("/restmapserver/map/index.php", "", $protocolo . $_SERVER["PHP_SELF"]);
         if ($param["idioma"] != "") {
-            setcookie("i3geolingua", $param["idioma"]);
+            $arr_cookie_options = array (
+                'expires' => time() + 60*60*24*365,
+                'path' => '/',
+                'secure' => true,     // or false
+                'samesite' => 'Strict' // None || Lax  || Strict
+            );
+            setcookie("i3geolingua", $param["idioma"],$arr_cookie_options);
         }
         return $mapId;
     }
@@ -115,6 +121,7 @@ class Mscriamapa
             session_destroy();
         }
         $_SESSION = array();
+        ini_set("session.cookie_secure", 1);
         session_start();
         $this->mapid = session_id();
         return $this->mapid;

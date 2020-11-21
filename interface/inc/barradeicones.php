@@ -8,7 +8,7 @@
             <i class="material-icons">picture_in_picture</i>
         </button>
         <button class="i3GeoBgc2 hidden-xs toggle" title="{{{d11t}}}" onclick="i3GEO.navega.dialogo.wiki()" style="float: left; cursor: pointer; display: none;">
-            <img style="width:20px;" src="{{{locaplic}}}/imagens/wwikipedia.png">
+            <img style="width:20px;" {{src}}="{{{locaplic}}}/imagens/wwikipedia.png">
         </button>
 
         <br class="hidden-xs">
@@ -18,7 +18,7 @@
             <i class="material-icons">bookmark_border</i>
         </button>
         <button class="i3GeoBgc2 hidden-xs toggle" title="{{{d15t}}}" onclick="i3GEO.navega.dialogo.googlemaps()" style="float: left; cursor: pointer; display: none;">
-            <img style="width:20px;" src="{{{locaplic}}}/imagens/googlemaps.png">
+            <img style="width:20px;" {{src}}="{{{locaplic}}}/imagens/googlemaps.png">
         </button>
 
         <br class="hidden-xs">
@@ -32,7 +32,7 @@
             <i class="material-icons">grid_on</i>
         </button>
         <button class="i3GeoBgc2 hidden-xs toggle" title="{{{d17}}}" onclick="i3GEO.navega.dialogo.confluence()" style="float: left; cursor: pointer; display: none;">
-            <img style="width:20px;" src="{{{locaplic}}}/imagens/confluence.png">
+            <img style="width:20px;" {{src}}="{{{locaplic}}}/imagens/confluence.png">
         </button>
 
         <br class="hidden-xs">
