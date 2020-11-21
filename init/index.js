@@ -13,8 +13,7 @@ botoesIni = [
 	"subtitulo": $trad("23a",g_traducao_init),
 	"fa": "map-o",
 	"target": "_blank"
-},
-{
+},{
 	"img":"imagens/window-duplicate.png",
 	"href": "../mapas/index.php",
 	"titulo":$trad(34,g_traducao_init),
@@ -35,8 +34,7 @@ botoesIni = [
 	"subtitulo": $trad("12a",g_traducao_init),
 	"fa": "download",
 	"target": "_self"
-},
-{
+},{
 	"img":"imagens/openlayersdebug.png",
 	"href": location.href.replace("init/index.php"+window.location.search,"") +  customDir + "/openlayersdebug.php",
 	"titulo":$trad(5,g_traducao_init),
@@ -64,40 +62,7 @@ botoesIni = [
 	"subtitulo": $trad("33a",g_traducao_init),
 	"fa": "cogs",
 	"target": "_self"
-},
-/*
-{
-	"img":"folder-image",
-	"href": "../exemplos/index.php",
-	"titulo":$trad(14,g_traducao_init),
-	"subtitulo": $trad("14a",g_traducao_init),
-	"fa": "cogs",
-	"target": "_self"
-},
-{
-	"img":"guiamigracao",
-	"href": "../guia_de_migracao.txt",
-	"titulo":$trad(17,g_traducao_init),
-	"subtitulo": $trad("17a",g_traducao_init),
-	"fa": "cogs",
-	"target": "_self"
 },{
-	"img":"docapi",
-	"href": "../documentacao",
-	"titulo":$trad(24,g_traducao_init),
-	"subtitulo": $trad("24a",g_traducao_init),
-	"fa": "book",
-	"target": "_self"
-},{
-	"img":"gvsigtraining",
-	"href":"http://moodle.gvsig-training.com/course/view.php?id=11",
-	"titulo":$trad(28,g_traducao_init),
-	"subtitulo": $trad("28a",g_traducao_init),
-	"fa": "book",
-	"target": "_self"
-},
-*/
-{
 	"img":"imagens/tools-report-bug.png",
 	"href":"https://softwarepublico.gov.br/gitlab/i3geo/i3geo/issues",
 	"titulo":$trad(16,g_traducao_init),
