@@ -668,7 +668,7 @@ i3GEO.janela =
 	_formModal: false,
 	//utilizado para mensagens de ferramentas com botao de close e outros parametros
 	//utilize objJanela como uma variavel vazia que recebera o objeto criado e idForm para definir os IDs
-	//dos elementos HTML internos da janela. Dessa forma a janela funcionara de forma indipendente
+	//dos elementos HTML internos da janela. Dessa forma a janela funcionara de forma independente
 	formModal : function({objJanela = false, idForm = "", expandable = true, resizable = {disabled: true, ghost: true, handles: "se"}, texto = false, footer = false, header = false, onclose = false, backdrop = false, draggable = "enable", css = false} = {}) {
 	    var obj = false;
 	    if(objJanela == false){
