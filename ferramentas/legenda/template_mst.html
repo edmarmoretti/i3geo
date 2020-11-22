@@ -874,8 +874,23 @@ Outros parametros devem ser enviados via form
 		<button onclick="i3GEOF.legenda.slde()"
 			class='btn btn-primary btn-sm btn-raised'>{{{exportaSLD}}}</button>
 		<h4>{{{msgAplicaSLD}}}</h4>
-		<button onclick="i3GEOF.legenda.sldi()"
-			class='btn btn-primary btn-sm btn-raised'>{{{aplicaSLD}}}</button>
+
+		<div class='container-fluid'>
+		    <form class="form-horizontal" role="form" id='i3GEOaplicarsldf' target='i3GEOaplicarsldiframe' action='{{{locaplic}}}/ferramentas/legenda/uploadsld.php?layerName={{{layerName}}}' method='post'
+		        ENCTYPE='multipart/form-data'>
+		        <div class="input-group-btn">
+		            <button style="margin-right: 10px;" type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">SLD</button>
+		            <input name="i3GEOaplicarsld" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file"> <span
+		                class="form-control upload"></span>
+		        </div>
+		        <br>
+		        <button onclick="submit" class='btn btn-primary btn-sm btn-raised' name='submit'>{{{aplica}}}</button>
+		        <input type='hidden' name='mapId' value='{{{mapId}}}'> <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
+		    </form>
+		    <br>
+		    <iframe name='i3GEOaplicarsldiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+		</div>
+
 	</div>
 
 	<!-- cluster -->

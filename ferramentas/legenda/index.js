@@ -72,6 +72,8 @@ i3GEOF.legenda =
             	    x14: $trad("x14"),
                     opcoes: $trad("opcoes"),
                     values: values,
+                    mapId: i3GEO.configura.sid,
+                    layerName: p.tema,
                     ...p.objdicionario
             };
             i3f.renderFunction.call(

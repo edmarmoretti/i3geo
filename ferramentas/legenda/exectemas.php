@@ -77,8 +77,7 @@ switch (strtoupper($_GET["funcao"])) {
         $m->salva();
         break;
     case "TEMA2SLD":
-        $sld = $m->sld();
-        echo header('Content-Disposition: attachment; filename="' . $tema . '.sld"');
+        echo header('Content-Disposition: attachment; filename="' . $_GET["tema"] . '.sld"');
         echo header("Content-type: application/xml");
         echo $m->sld();
         exit();

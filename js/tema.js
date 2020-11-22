@@ -854,24 +854,6 @@ i3GEO.tema =
                 window.open(i3GEO.configura.locaplic+"/ogc.htm?temaOgc="+idtema);
             },
             /**
-             * Function: aplicarsld
-             *
-             * Fax o upload de um arquivo SLD (xml) e aplica ao tema
-             *
-             * Parametros:
-             *
-             * {string} - id que identifica o tema no map file.
-             */
-            aplicarsld : function(idtema) {
-                i3GEO.mapa.ativaTema(idtema);
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.tema.dialogo.aplicarsld()",
-                        "aplicarsld",
-                        "aplicarsld",
-                        "dependencias.php",
-                "i3GEOF.aplicarsld.iniciaJanelaFlutuante()");
-            },
-            /**
              * Function: mudanome
              *
              * Abre uma janela para o usuario definir o novo nome do tema

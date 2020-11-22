@@ -1122,5 +1122,10 @@ i3GEOF.legenda.dicionario =
 			pt : "Mantenha essa janela aberta ao aplicar para que as propriedades sejam consideradas",
 			en : "Keep this window open while applying changes so that properties would be considered",
 			es : "Mantenga esta ventana abierta al aplicar para que las propiedades sean consideradas"
+		} ],
+		'arquivoSld' : [ {
+			pt : "Arquivo SLD",
+			en : "SLD file",
+			es : "Archivo SLD"
 		} ]
 	};
