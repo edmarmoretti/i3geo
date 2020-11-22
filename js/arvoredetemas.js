@@ -100,17 +100,6 @@ i3GEO.arvoreDeTemas = {
 		"i3GEOF.importarwmc_script");
 	    },
 	    /**
-	     * Function: dialogo.conectarwfs
-	     *
-	     * Abre a janela para adicionar temas tendo como fonte um web service do
-	     * tipo wfs
-	     */
-	    conectarwfs : function() {
-		i3GEO.janela.cria("400px", "300px", i3GEO.configura.locaplic
-			+ "/ferramentas/conectarwfs/index.htm", "", "",
-		"<div class='i3GeoTituloJanela'>WFS</div>");
-	    },
-	    /**
 	     * Function: dialogo.downloadbase
 	     *
 	     * Abre o aplicativo datadownload
