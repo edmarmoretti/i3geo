@@ -427,19 +427,6 @@ i3GEO.mapa =
         },
         dialogo : {
             /**
-             * Function: wms
-             *
-             * Abre a janela de di&aacute;logo com as ferramenta de conexao com wms
-             */
-            wms : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.wms()",
-                        "conectarwms",
-                        "conectarwms",
-                        "dependencias.php",
-                "i3GEOF.conectarwms.iniciaJanelaFlutuante()");
-            },
-            /**
              * Function: mascara
              *
              * Abre a janela de di&aacute;logo com as ferramenta mascara

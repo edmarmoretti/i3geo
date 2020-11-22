@@ -76,20 +76,6 @@ i3GEO.arvoreDeTemas = {
 		"i3GEOF.nuvemtags_script");
 	    },
 	    /**
-	     * Function: dialogo.nuvemTagsFlash
-	     *
-	     * Mostra a nuvem de tags para escolha de temas baseado nos tags
-	     * registrados nos menus de temas.
-	     *
-	     * Essa ferramenta e alternativa a ferramenta nuvemTags, mostrando tbm a
-	     * nuvem com um aplicativo em flash
-	     */
-	    nuvemTagsFlash : function() {
-		i3GEO.janela.cria("550px", "350px", i3GEO.configura.locaplic
-			+ "/ferramentas/nuvemtagsflash/index.htm", "", "",
-			$trad("x44"));
-	    },
-	    /**
 	     * Function: dialogo.navegacaoDir
 	     *
 	     * Abre a janela para adicionar temas navegando pelos diretorios do
