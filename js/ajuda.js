@@ -45,22 +45,6 @@ i3GEO.ajuda =
 			}
 			window.open(i3GEO.configura.locaplic + url);
 		},
-		/**
-		 * Function: redesSociais
-		 *
-		 * Abre uma janela com informa&ccedil;&otilde;es sobre a presen&ccedil;a do
-		 * i3Geo em redes sociais
-		 */
-		redesSociais : function() {
-			i3GEO.janela.cria(
-				"400px",
-				"400px",
-				i3GEO.configura.locaplic + "/ferramentas/redessociais/index.php",
-				"",
-				"",
-				"<div class='i3GeoTituloJanela'>" + $trad("u5c") + "</div>",
-				i3GEO.util.generateId("redes"));
-		},
 		ferramenta : function(idajuda){
 			var url = i3GEO.configura.locaplic + "/ferramentas/ajuda_usuario.php?"
 				+ "&idajuda="
