@@ -470,32 +470,6 @@ i3GEO.mapa =
                 "i3GEOF.geolocal.iniciaJanelaFlutuante()");
             },
             /**
-             * Function: listaDeMapasBanco
-             *
-             * Lista os mapas cadastrados no sistema de administracao do i3geo
-             */
-            listaDeMapasBanco : function(idonde) {
-                if(idonde){
-                    i3GEO.guias.CONFIGURA["mapas"].click.call(this, idonde);
-                    return;
-                }
-                if (i3GEO.guias.CONFIGURA["mapas"]) {
-                    var temp, janela, id = "listaMapa" + Math.random();
-                    janela = i3GEO.janela.cria(
-                            "800px",
-                            "500px",
-                            i3GEO.configura.locaplic
-                            + "/mapas/indexnomenu.php",
-                            "",
-                            "",
-                            "<span class='i3GeoTituloJanelaBsNolink' ></span></div>",
-                            id
-                    );
-                } else {
-                    window.open(i3GEO.configura.locaplic + "/rss/rssmapas.php", "_blank");
-                }
-            },
-            /**
              * Function: congelaMapa
              *
              * Congela a vis&atilde;o atual do mapa mostrando-o em uma janela flutuante
@@ -719,7 +693,7 @@ i3GEO.mapa =
             /**
              * Function: linkMapaOriginal
              *
-             * Abre a janela de dialogo da ferramenta salvamapa
+             * Abre a janela de dialogo da ferramenta linkMapaOriginal
              */
             linkMapaOriginal : function() {
                 i3GEO.util.dialogoFerramenta(
@@ -780,21 +754,6 @@ i3GEO.mapa =
                         "convertemapakml",
                         "dependencias.php",
                 "i3GEOF.convertemapakml.start()");
-            },
-            /**
-             * Function: template
-             *
-             * Abre a janela de dialogo da ferramenta template
-             */
-            template : function() {
-                i3GEO.janela.cria(
-                        "300px",
-                        "400px",
-                        i3GEO.configura.locaplic + "/ferramentas/template/index.htm",
-                        "",
-                        "",
-                        "<div class='i3GeoTituloJanela'>Template<a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-                        + "/ajuda_usuario.php?idcategoria=1&idajuda=8' ><b> </b></a></div>");
             },
             /**
              * Function: tamanho

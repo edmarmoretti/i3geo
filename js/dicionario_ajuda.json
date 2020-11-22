@@ -92,19 +92,6 @@
 				"en": "A coordinate grid is made up of vertical and horizontal lines representing latitudes and longitudes. The grid is one of the main elements in map definition, and is used for printing or picture creation.<br>When you add a grid, a new layer is created on the map, allowing you to create more than one grid. A grid may or may not contain texts indicating lat and long values, allowing you to create a grid with line spacing different from the spacing of the texts.",
 				"apijs": "i3GEO.mapa.dialogo.gradeCoord()"
 			},
-			"8": {
-				"titulo": {
-					"pt": "Templates",
-					"es": "Plantillas",
-					"en": "Templates"
-				},
-				"diretorio": "i3geo/ferramentas/template",
-				"categoria": "1",
-				"pt": "Um template define como os componentes de um mapa s&atilde;o organizados no navegador. O administrador do i3Geo pode criar templates diferentes conforme as necessidades do usu&aacute;rio, sendo que alguns templates s&atilde;o fornecidos com o pr&oacute;prio i3Geo.<br>A cria&ccedil;&atilde;o de templates &eacute; uma tarefa do administrador do i3Geo. Para abrir um template espec&iacute;fico diretamente, utilize a URL que &eacute; mostrada no navegador quando um template &eacute; escolhido.",
-				"es": "Una plantilla define c&oacute;mo se organizan los componentes de un mapa en el explorador. El administrador de i3Geo puede crear plantillas diferentes seg&uacute;n las necesidades del usuario. Algunas plantillas se suministran con el propio i3Geo.<br>La creaci&oacute;n de plantillas es una tarea del administrador de i3Geo. Para abrir una plantilla espec&iacute;fica directamente utilice la URL que se muestra en el navegador cuando se elige una plantilla.",
-				"en": "A template defines how map components are organized in the browser. The i3Geo administrator can create different templates according to the user goals, and some templates are provided with i3Geo itself.<br>The i3Geo administrator is responsible for creating templates. Use the URL that is displayed in the browser when a template is selected to open a specific template directly.",
-				"apijs": "i3GEO.mapa.dialogo.template()"
-			},
 			"9": {
 				"titulo": {
 					"pt": "Temporizador",

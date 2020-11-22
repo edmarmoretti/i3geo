@@ -118,19 +118,7 @@ i3GEO.tema =
             if(!link){
                 link = i3GEO.configura.locaplic + "/ferramentas/abrefontemapfile.php?tema=" + tema;
             }
-            if (!popup) {
-                window.open(link);
-            } else {
-                i3GEO.janela.cria(
-                        (i3GEO.parametros.w / 2) + 25 + "px",
-                        (i3GEO.parametros.h / 2) + 18 + "px",
-                        link,
-                        "",
-                        "",
-                        "<div class='i3GeoTituloJanela'>Metadata</div>",
-                        "metadata" + tema
-                );
-            }
+            window.open(link);
         },
         moveUp: function(layerName){
             i3GEO.request.get({
