@@ -2684,53 +2684,6 @@ i3GEO.util =
 			return ret;
 		},
 		/**
-		 * Function: ajaxGet
-		 *
-		 * Faz uma requisi&ccedil;&atilde;o ao servidor por meio de AJAX
-		 *
-		 * A fun&ccedil;&atilde;o de processamento do resultado ir&aacute; receber um objeto JSON como par&acirc;metro
-		 *
-		 * Exemplo:
-		 *
-		 * i3GEO.util.ajaxGet("http://localhost/teste.php",function(retorno){alert(retorno);})
-		 *
-		 * Parametros:
-		 *
-		 * {string} - url que ser&aacute; requisitada
-		 *
-		 * {function} - fun&ccedil;&atilde;o que ir&aacute; processar o resultado
-		 */
-		ajaxGet : function(sUrl, funcaoRetorno) {
-			var re,falhou, callback;
-			sUrl = escape(sUrl);
-			re = new RegExp("%3F", "g");
-			sUrl = sUrl.replace(re, '?');
-			re = new RegExp("%3D", "g");
-			sUrl = sUrl.replace(re, '=');
-			re = new RegExp("%26", "g");
-			sUrl = sUrl.replace(re, '&');
-
-			re = new RegExp("%3A", "g");
-			sUrl = sUrl.replace(re, ':');
-			falhou = function(e) {
-			};
-			callback = {
-					success : function(o) {
-						try {
-							funcaoRetorno.call("", JSON.parse(o.responseText));
-						} catch (e) {
-							falhou(e);
-						}
-					},
-					failure : falhou,
-					argument : {
-						foo : "foo",
-						bar : "bar"
-					}
-			};
-			YAHOO.util.Connect.asyncRequest("GET", sUrl, callback);
-		},
-		/**
 		 * Verifica se a funcao html de armazenamento local esta disponivel no navegador
 		 */
 		verifica_html5_storage : function() {

@@ -1,9 +1,9 @@
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
-var cpJSON = new cpaint();
-cpJSON.set_response_type("JSON");
-cpJSON.set_transfer_mode("POST");
+//var cpJSON = new cpaint();
+//cpJSON.set_response_type("JSON");
+//cpJSON.set_transfer_mode("POST");
 /*
             i3GEO.request.get({
                 snackbar: false,

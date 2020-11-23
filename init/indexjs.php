@@ -3,8 +3,8 @@ if (extension_loaded ( 'zlib' )) {
 	ob_start ( 'ob_gzhandler' );
 }
 header ( "Content-type: text/javascript" );
-include ('../pacotes/cpaint/cpaint2_compacto.inc.js');
-echo "\n";
+//include ('../pacotes/cpaint/cpaint2_compacto.inc.js');
+//echo "\n";
 include ('../js/compactados/dicionario_compacto.js');
 echo "\n";
 include ('../js/compactados/util_compacto.js');

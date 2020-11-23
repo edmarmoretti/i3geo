@@ -137,6 +137,7 @@ packer("busca.js","compactados/busca_compacto.js","Normal");
 packer("legenda.js","compactados/legenda_compacto.js","Normal");
 packer("timer.js","compactados/timer_compacto.js","Normal");
 packer("caixaDeFerramentas.js","compactados/caixaDeFerramentas_compacto.js","Normal");
+/*
 packer("../pacotes/yui290/build/container/container.js","../pacotes/yui290/build/container/container_compacto.js","Normal");
 packer("../pacotes/yui290/build/container/container_core.js","../pacotes/yui290/build/container/container_core_compacto.js","Normal");
 packer("../pacotes/yui290/build/utilities/utilities.js","../pacotes/yui290/build/utilities/utilities_compacto.js","Normal");
@@ -144,6 +145,7 @@ packer("../pacotes/yui290/build/treeview/treeview.js","../pacotes/yui290/build/t
 packer("../pacotes/yui290/build/carousel/carousel-min.js","../pacotes/yui290/build/carousel/carousel_compacto.js","Normal");
 packer("../pacotes/yui290/build/resize/resize-min.js","../pacotes/yui290/build/resize/resize_compacto.js","Normal");
 packer("../pacotes/cpaint/cpaint2.inc.js","../pacotes/cpaint/cpaint2_compacto.inc.js","Normal");
+*/
 packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
 packer("../pacotes/proj4js/lib/proj4js.js","compactados/proj4js.js","Normal");
@@ -156,6 +158,7 @@ $jsfiles = array(
 "../pacotes/jsts/jsts_min.js",
 "../pacotes/mobileesp/mdetect_compacto.js",
 "compactados/proj4js.js",
+/*
 "../pacotes/cpaint/cpaint2_compacto.inc.js",
 "../pacotes/yui290/build/yahoo/yahoo-min.js",
 "../pacotes/yui290/build/yahoo-dom-event/yahoo-dom-event.js",
@@ -173,6 +176,7 @@ $jsfiles = array(
 "../pacotes/yui290/build/resize/resize_compacto.js",
 "../pacotes/yui290/build/progressbar/progressbar_compacto.js",
 "../pacotes/yui290/build/selector/selector-min.js",
+*/
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-number/jquery.number.min.js",
 "../pacotes/jquery/jquery-ui/jquery-ui.min.js",
@@ -239,6 +243,7 @@ salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto8.js","js");
 $cssfiles = array(
 "../css/input.css",
 "../css/geral.css",
+/*
 "../pacotes/yui290/build/fonts/fonts-min.css",
 "../pacotes/yui290/build/reset-fonts-grids/reset-fonts-grids.css",
 "../pacotes/yui290/build/grids/grids-min.css",
@@ -246,6 +251,7 @@ $cssfiles = array(
 "../pacotes/yui290/build/container/assets/skins/sam/container.css",
 "../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
 "../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
+*/
 "../pacotes/jquery/jquery-ui/jquery-ui.min.css",
 "../pacotes/pickr/themes/classic.min.css",
 "../mashups/theme/default/style.css",
@@ -260,8 +266,8 @@ $cssfiles = array(
 "../css/geral.css",
 "../css/button.css",
 "../css/ferramentas.css",
-"../pacotes/yui290/build/container/assets/skins/sam/container.css",
-"../pacotes/yui290/build/menu/assets/skins/sam/menu-skin.css",
+//"../pacotes/yui290/build/container/assets/skins/sam/container.css",
+//"../pacotes/yui290/build/menu/assets/skins/sam/menu-skin.css",
 "../css/tabview.css"
 );
 $buffer = "";

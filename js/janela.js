@@ -35,37 +35,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-/**
- * YAHOO.namespace
- *
- * Namespace da biblioteca YUI utilizado para armazenar janelas flutuantes
- */
-if(typeof YAHOO != 'undefined'){
-	YAHOO.namespace("i3GEO.janela");
-	/**
-	 * Variavel: YAHOO.widget.OverlayManager
-	 *
-	 * Gerenciador das janelas flutuantes da biblioteca YUI
-	 *
-	 * Type:
-	 *
-	 * {YAHOO.widget.OverlayManager}
-	 */
-	YAHOO.i3GEO.janela.manager = new YAHOO.widget.OverlayManager();
-	//para efeitos de compatibilidade com a vers&atilde;o 4.6
-	YAHOO.namespace("janelaDoca.xp");
-	YAHOO.janelaDoca.xp.manager = new YAHOO.widget.OverlayManager();
-	/**
-	 * Variavel: YAHOO.i3GEO.janela.managerAguarde
-	 *
-	 * Gerenciador das janelas flutuantes de aguarde
-	 *
-	 * Type:
-	 *
-	 * {YAHOO.widget.OverlayManager}
-	 */
-	YAHOO.i3GEO.janela.managerAguarde = new YAHOO.widget.OverlayManager();
-}
 //TODO criar janela que permita inserir um link e salva-la junto com o mapa
 i3GEO.janela =
 {
@@ -119,104 +88,6 @@ i3GEO.janela =
 			iu.escondeBox();
 		},
 		/**
-		 * Minimiza uma janela na forma de um icone com opcoes de fechar e abrir novamente
-		 *
-		 * Parametro:
-		 *
-		 * {string} - id da janela
-		 *
-		 * {number} - largura em pixels da janela iconizada
-		 *
-		 * {string} - (opcional) id do rodape da janela
-		 */
-		iconiza : function(id,w,rodape){
-			var j,r,t = i3GEO.janela.minimiza(id, w+"px",rodape);
-			r = YAHOO.util.Resize.getResizeById(id);
-			j = $i(id + "I");
-			if(!j){
-				return;
-			}
-			if (t === "min") {
-				j.style.display = "none";
-				if(r){
-					r.lock();
-				}
-				if(rodape){
-					$i(rodape).style.display = "none";
-				}
-			} else {
-				j.style.display = "block";
-				if(r){
-					r.unlock();
-				}
-				if(rodape){
-					$i(rodape).style.display = "block";
-				}
-			}
-		},
-		/**
-		 * Minimiza ou maximiza a janela
-		 *
-		 * Parametro:
-		 *
-		 * {string} - prefixo utilizado na composi&ccedil;&atilde;o do id da janela
-		 *
-		 * {string} - (opcional) largura minima da janela
-		 *
-		 * Return:
-		 *
-		 * {min|max} indicativo se minimizou ou maximizou
-		 */
-		minimiza : function(id, min) {
-			var temp = $i(id + "_corpo"), n, i, m = YAHOO.i3GEO.janela.manager.find(id), c = $i(id), t = "min", r = YAHOO.util.Resize.getResizeById(id),
-			tipo = "";
-
-			if (temp) {
-				if (temp.style.display === "block") {
-					temp.style.display = "none";
-					if (m) {
-						m.hideIframe();
-					}
-					m.winicial = c.style.width;
-					if (min) {
-						c.style.width = parseInt(min,10)+"px";
-					}
-					tipo = "none";
-					if(r){
-						r.lock();
-					}
-				} else {
-					temp.style.display = "block";
-					if (m) {
-						m.showIframe();
-					}
-					c.style.width = m.winicial;
-					t = "max";
-					tipo = "block";
-					if(r){
-						r.unlock();
-					}
-				}
-			}
-			temp = $i(id + "_c");
-			if (temp) {
-				$(temp).find(".comboTemasCabecalhoBs,.ft,.yui-resize-handle,.underlay,.bd").css("display",tipo);
-			}
-			temp = $i(id + "_corpo");
-			if (temp) {
-				temp.style.display = tipo;
-			}
-			temp = $i(id);
-			if (temp) {
-				if (tipo === "block") {
-					temp.style.height = "100%";
-				} else {
-					temp.style.height = "10%";
-				}
-			}
-			return t;
-		},
-		/**
 		 * Elimina alguns objetos que s&atilde;o comumente adicionados por algumas
 		 * opera&ccedil;&otilde;es do i3geo como box, pin
 		 *
@@ -243,35 +114,6 @@ i3GEO.janela =
 				id = args.id;
 			}
 			i3GEO.janela.destroi(id);
-		},
-		/**
-		 * Destroi uma janela sem aplicar as funcoes adicionais
-		 *
-		 * Parametros:
-		 *
-		 * id {string} - id da janela
-		 */
-		destroi : function(id) {
-			if (typeof (console) !== 'undefined')
-				console.info("i3GEO.janela.destroi() " + id);
-
-			if(typeof(YAHOO) != "undefined"){
-				var janela = YAHOO.i3GEO.janela.manager.find(id);
-				i3GEO.util.removeScriptTag(id + "_script");
-				i3GEO.util.removeScriptTag(id + ".dicionario_script");
-				if (janela) {
-					YAHOO.i3GEO.janela.manager.remove(janela);
-					// janela.destroy();
-					// destroy remove os listeners!!!!
-					janela = $i(id + "_c");
-					if(janela){
-						janela.parentNode.removeChild(janela);
-						try{
-							YAHOO.util.Resize.getResizeById(id).destroy();
-						} catch(e){}
-					}
-				}
-			}
 		},
 		/**
 		 * Function: alteraTamanho
@@ -515,43 +357,7 @@ i3GEO.janela =
 		 * Substitui a janel&ccedil;a de alerta padr&atilde;o do sistema operacional por uma outra customizada
 		 */
 		ativaAlerta : function() {
-			window.alert = function(texto) {
-				var textoI, janela = YAHOO.i3GEO.janela.managerAguarde.find("alerta");
-				if (!janela) {
-					janela = new YAHOO.widget.SimpleDialog("alerta", {
-						width : "300px",
-						fixedcenter : true,
-						visible : false,
-						draggable : false,
-						zIndex : 100000,
-						textAlign : "left",
-						close : false,
-						modal : false,
-						effect : {
-							effect : YAHOO.widget.ContainerEffect.FADE,
-							duration : 0.25
-						},
-						constraintoviewport : true,
-						text : ""
-					});
-					// YAHOO.i3GEO.janela.dialogInfo.cfg.setProperty("icon",YAHOO.widget.SimpleDialog.ICON_WARN);
-					YAHOO.i3GEO.janela.managerAguarde.register(janela);
-					janela.setHeader(" ");
 
-					janela.render(document.body);
-					janela.setFooter("<div class='form-group condensed' id='alertFooter'></div>");
-					var ins = Mustache.render(i3GEO.template.botoes.padrao, {text: $trad("x74")});
-					var fecha = function(){YAHOO.i3GEO.janela.managerAguarde.find("alerta").destroy();};
-					$('#alertFooter').append($(ins).click(fecha));
-				}
-				textoI = janela.cfg.getProperty("text");
-				if (textoI != "") {
-					textoI += "<br>";
-				}
-				texto = textoI + texto;
-				janela.cfg.setProperty("text", "<h4 class='alertTitulo'>" + texto + "</h4>");
-				janela.show();
-			};
 		},
 		/**
 		 * Function: confirma
@@ -690,89 +496,6 @@ i3GEO.janela =
 		},
 		mensagemSimples : function(texto) {
 			this.closeMsg(texto);
-		},
-		/**
-		 * Adiciona no cabe&ccedil;alho da janela um combo com a lista de temas para janelas abertas por ferramentas
-		 *
-		 * Essa fun&ccedil;&atilde;o &eacute; utilizada pelas ferramentas que operam sobre um determinado tema. O combo permite que o
-		 * usu&aacute;rio selecione um tema e ative a ferramenta para funcionar com esse tema
-		 *
-		 * Parametros:
-		 *
-		 * idDiv {string} - id do elemento HTML que receber&aacute; o combo
-		 *
-		 * idCombo {string} - id do combo que ser&aacute; criado
-		 *
-		 * ferramenta {string} - nome da ferramenta (namespace da classe, por exemplo "tabela" para a classe i3GEOF.tabela
-		 *
-		 * tipo {string} - tipo de combo
-		 *
-		 * onButtonClick {function} - funcao que sera executada no evento onchange do combo a ser criado
-		 */
-		comboCabecalhoTemas : function(idDiv, idCombo, ferramenta, tipo, onButtonClick, temaSel) {
-			var temp = $i(idDiv);
-			// tenta pegar o tema que ja foi escolhido antes
-			if (!temaSel) {
-				temaSel = "";
-			}
-			if (temaSel == "" && i3GEOF[ferramenta] && i3GEOF[ferramenta].tema && i3GEOF[ferramenta].tema != "") {
-				// o tema escolhido pode estar definido na variavel da ferramenta
-				temaSel = i3GEOF[ferramenta].tema;
-			}
-			if (temp) {
-				i3GEO.util.comboTemas(temp.id + "Sel", function(retorno) {
-					var tema, container = $i(idDiv), botao;
-					container.innerHTML = retorno.dados;
-					botao = new YAHOO.widget.Button(idCombo, {
-						type : "menu",
-						menu : idCombo + "select"
-					});
-					if (temaSel != "") {
-						tema = i3GEO.arvoreDeCamadas.pegaTema(temaSel);
-						if (tema && tema != undefined) {
-							botao.set("label", "<span class='cabecalhoTemas' >" + tema.tema + "</span>&nbsp;&nbsp;");
-						} else {
-							botao.set("label", "<span class='cabecalhoTemas' >" + $trad("x92") + "</span>&nbsp;&nbsp;");
-						}
-					} else {
-						botao.set("label", "<span class='cabecalhoTemas' >" + $trad("x92") + "</span>&nbsp;&nbsp;");
-					}
-					if (!onButtonClick) {
-						onButtonClick =
-							function(p_sType, p_aArgs) {
-							var oMenuItem = p_aArgs[1];
-							if (oMenuItem) {
-								i3GEO.mapa.ativaTema(oMenuItem.value);
-								if (oMenuItem.value === "") {
-									i3GEO.temaAtivo = "";
-									botao.set("label", "<span class='cabecalhoTemas' >" + $trad("x92") + "</span>&nbsp;&nbsp;");
-								} else {
-									botao.set("label", "<span class='cabecalhoTemas' >" + oMenuItem.cfg.getProperty("text")
-											+ "</span>&nbsp;&nbsp;");
-								}
-								if (i3GEOF[ferramenta]) {
-									i3GEOF[ferramenta].tema = oMenuItem.value;
-									if ($i("i3GEOF." + ferramenta + "_corpo")) {
-										$i("i3GEOF." + ferramenta + "_corpo").innerHTML = "";
-										eval("i3GEOF." + ferramenta + ".inicia('i3GEOF." + ferramenta + "_corpo');");
-									}
-								}
-							}
-						};
-						//
-						// a busca nao funciona com parametros dentro de parenteses
-						// por isso e necessario zerar o array
-						//
-						if (i3GEO.eventos.ATUALIZAARVORECAMADAS.length > 20) {
-							i3GEO.eventos.ATUALIZAARVORECAMADAS = [];
-						}
-						i3GEO.eventos.adicionaEventos("ATUALIZAARVORECAMADAS", [
-							"i3GEO.janela.comboCabecalhoTemas('" + idDiv + "','" + idCombo + "','" + ferramenta + "','" + tipo + "')"
-							]);
-					}
-					botao.getMenu().subscribe("click", onButtonClick, botao);
-				}, temp.id, "", false, tipo, "", true, true, "");
-			}
 		},
 		comboCabecalhoTemasBs : function(idDiv, idCombo, ferramenta, tipo, onButtonClick, temaSel) {
 			var temp = $i(idDiv);

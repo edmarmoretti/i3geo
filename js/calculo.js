@@ -363,7 +363,7 @@ i3GEO.calculo =
 	 *
 	 * Calcula a distância em km entre dois pontos (m&eacute;todo Haversine).
 	 *
-	 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
+	 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@)
 	 *
 	 * Em vers&otilde;es anteriores utilizava-se o c&aacute;lculo proposto em http://www.wcrl.ars.usda.gov/cec/java/lat-long.htm
 	 *
@@ -477,7 +477,7 @@ i3GEO.calculo =
 	 *
 	 * Calcula a dire&ccedil;&atilde;o (0 a 360 graus) entre dois pontos.
 	 *
-	 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
+	 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@)
 	 *
 	 * Parametros:
 	 *
@@ -516,7 +516,7 @@ i3GEO.calculo =
 	 *
 	 * O novo ponto &eacute; calculado em coordenadas geogr&aacute;ficas em DD
 	 *
-	 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@yahoo.com.br)
+	 * Baseado no site http://www.movable-type.co.uk/scripts/latlong.html (indicado por louriques@)
 	 *
 	 * Parametros:
 	 *

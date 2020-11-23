@@ -1,19 +1,6 @@
 var i3GEOF = [];
 var i3GEOadmin = [];
 /**
- * Section: YAHOO.i3GEO
- *
- * Namespace da biblioteca YUI que &eacute; reutiliz&aacute;vel em v&aacute;rios
- * trechos de c&oacute;digo do i3Geo
- *
- * Type:
- *
- * {YAHOO.namespace}
- */
-if(typeof YAHOO != "undefined" ){
-    YAHOO.namespace("i3GEO");
-}
-/**
  * Section: i3GEO
  */
 var i3GEO = {
