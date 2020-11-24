@@ -20,7 +20,7 @@ echo "
     <title>i3Geo</title>
     <!-- Material Design fonts -->
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>
-<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio:300,400,500,700'>
+    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio'>
     <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons'>
     <!-- Bootstrap core CSS -->
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
@@ -32,6 +32,10 @@ echo "
     <script src='" . ONDEI3GEO . "/init/headjs.php'></script>";
 ?>
 <style>
+.longText{
+    font-family: Gelasio,Roboto,Helvetica,Arial,sans-serif;
+    color: #0f0e0e66;
+}
 hr {
 	border-color: #fff -moz-use-text-color -moz-use-text-color;
 }
@@ -275,10 +279,6 @@ h2 small {
     display: flex;
     justify-content: flex-start;
     flex-wrap: wrap;
-}
-h5, h6 {
-    font-family: Gelasio,Roboto,Helvetica,Arial,sans-serif;
-    font-weight: 300;
 }
 @media (max-width: 767px) {
   #snackbar-container {

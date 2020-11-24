@@ -63,14 +63,6 @@ i3GEO.janela =
 					a[key] = value;
 				});
 			}
-			/*
-	    var i = $($i(iddiv));
-	    if(seletor && selector != ""){
-		i.find(seletor).mCustomScrollbar(a);
-	    } else {
-		i.mCustomScrollbar(a);
-	    }
-			 */
 		},
 		/**
 		 * Executa fun&ccedil;&otilde;es default antes de abrir a janela

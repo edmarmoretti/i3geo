@@ -132,20 +132,7 @@ Utilizado na janela do buscador INDE
 .botoesLegendaFlutuante {
 	font-size: 10px;
 }
-/*
-.legendaExpImagemPng .first-child button {
-	background: url(../imagens/oxygen/16x16/image-x-generic.png) 5% 50% no-repeat;
-	width: 60px;
-}
-.legendaMostraTodosTemas .first-child button {
-	background: url(../imagens/oxygen/16x16/layer-visible-on.png) 5% 50% no-repeat;
-	width: 80px;
-}
-.legendaMostraSoTemas .first-child button {
-	background: url(../imagens/oxygen/16x16/layer-visible-off.png) 5% 50% no-repeat;
-	width: 90px;
-}
-*/
+
 
 .i3GEOconteudoLegendaClass{
 	font-family: Verdana, Arial, Helvetica, sans-serif;
@@ -646,12 +633,6 @@ td {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
-div {
-	border: 0px solid #FFFFFF;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	position: relative;
-}
-
 H1 {
 	COLOR: #2F4632;
 	text-align: left;
@@ -736,17 +717,7 @@ H1 {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
-.button {
-	visibility: visible;
-	color: #2F4632;
-	background: #ffffff;
-	text-align: center;
-	font-family: Verdana, Arial, Helvetica, sans-serif;
-	font-size: 10px;
-	border-style: outset;
-	border-width: 3px;
-	cursor: pointer
-}
+
 
 .filme {
 	cursor: pointer;

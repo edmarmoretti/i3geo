@@ -72,6 +72,7 @@ $i = function(id)
 	}
 	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/font/material-icons.css'/>");
 	document.write("<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>");
+	document.write("<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio'>");
 	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/i3geo8.css.php'></link>");
 	document.write("<script type='text/javascript' src='" + scriptLocation + "i3geo_tudo_compacto8.js.php'></script>");
 })();

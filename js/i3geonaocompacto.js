@@ -93,17 +93,10 @@
 	//css
 	var allCssTags = "";
 	var cssfiles = new Array(
-	"../css/input.css",
-	"../css/geral.css",
-//	"../pacotes/yui290/build/fonts/fonts-min.css",
-//	"../pacotes/yui290/build/reset-fonts-grids/reset-fonts-grids.css",
-//	"../pacotes/yui290/build/grids/grids-min.css",
-//	"../pacotes/yui290/build/container/assets/skins/sam/container.css",
-//	"../pacotes/yui290/build/tabview/assets/skins/sam/tabview.css",
-//	"../pacotes/yui290/build/slider/assets/skins/sam/slider.css",
-//	"../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
-	"../pacotes/pickr/themes/classic.min.css",
-	"../mashups/openlayers.css"
+	//"../css/input.css",
+	//"../css/geral.css",
+	"../pacotes/pickr/themes/classic.min.css"
+	//"../mashups/openlayers.css"
 	);
 	for (i = 0; i < cssfiles.length; i++)
 	{
@@ -113,7 +106,7 @@
 	allCssTags += "<link rel='stylesheet' type='text/css' href='../pacotes/jquery/jquery-ui/jquery-ui.min.css'/>";
 	allCssTags += "<link rel='stylesheet' type='text/css' href='../css/font/material-icons.css'/>";
 	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>";
-	//allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio:400'>";
+	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio'>";
 	document.write(allCssTags);
 	document.write(allScriptTags);
 

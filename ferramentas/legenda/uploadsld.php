@@ -19,8 +19,7 @@ $layerName = $_GET["layerName"];
 ?>
 <html>
 <head>
-<link rel="stylesheet" type="text/css" href="../../css/input.css" />
-<link rel="stylesheet" type="text/css" href="../../css/geral.css" />
+<link rel="stylesheet" type="text/css" href="../../css/default.css" />
 <title></title>
 </head>
 <body bgcolor="white" style="background-color:white;text-align:left;">

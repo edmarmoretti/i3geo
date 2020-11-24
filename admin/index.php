@@ -75,16 +75,16 @@ include "head.php";
 
 						<div class="well">
 						<h1>{{{adminI3geo}}}</h1>
-						<p>{{{msgBemVindo}}}</p>
-						<p>{{{msgLogin}}}</p>
-						<p>{{{msgFerramentas}}}</p>
-						<p>{{{msgUsr}}}</p>
-						<p>{{{msgMetaestat}}}</p>
-						<p>{{{msgUpload}}}</p>
-						<p>{{{msgCatalogo}}}</p>
-						<p>{{{msgCadastro}}}</p>
-						<p>{{{msgSqlite}}}</p>
-						<p>
+						<p class="longText">{{{msgBemVindo}}}</p>
+						<p class="longText">{{{msgLogin}}}</p>
+						<p class="longText">{{{msgFerramentas}}}</p>
+						<p class="longText">{{{msgUsr}}}</p>
+						<p class="longText">{{{msgMetaestat}}}</p>
+						<p class="longText">{{{msgUpload}}}</p>
+						<p class="longText">{{{msgCatalogo}}}</p>
+						<p class="longText">{{{msgCadastro}}}</p>
+						<p class="longText">{{{msgSqlite}}}</p>
+						<p  class="longText">
 							<a href="../documentacao/diagramas/mer_banco_de_dados_de_administracao.png"
 								target="_blank">{{merBdAdmin}}</a><br>
 							<a href="../documentacao/diagramas/cadastrodeusuarios/dbdocs/index.html"
@@ -93,8 +93,6 @@ include "head.php";
 			                   target="_blank">{{{merBdMetaestat}}}</a><br>
 						</p>
 						</div>
-						<div class="alert alert-warning">{{{leiaMe}}}</div>
-                        <div class="alert alert-warning">{{{leiaMe1}}}</div>
 
 			</div>
 		</div>

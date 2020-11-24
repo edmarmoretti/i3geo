@@ -241,7 +241,7 @@ salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto8.js","js");
 //
 
 $cssfiles = array(
-"../css/input.css",
+//"../css/input.css",
 "../css/geral.css",
 /*
 "../pacotes/yui290/build/fonts/fonts-min.css",
@@ -253,35 +253,13 @@ $cssfiles = array(
 "../pacotes/yui290/build/resize/assets/skins/sam/resize.css",
 */
 "../pacotes/jquery/jquery-ui/jquery-ui.min.css",
-"../pacotes/pickr/themes/classic.min.css",
-"../mashups/theme/default/style.css",
-"../mashups/openlayers.css"
+"../pacotes/pickr/themes/classic.min.css"
+//"../mashups/theme/default/style.css"
+//"../mashups/openlayers.css"
 );
 
 $buffer = "";
 salvatudojs($cssfiles,$buffer,"../css/i3geo8.css","css");
-//css das ferramentas
-$cssfiles = array(
-"../css/input.css",
-"../css/geral.css",
-"../css/button.css",
-"../css/ferramentas.css",
-//"../pacotes/yui290/build/container/assets/skins/sam/container.css",
-//"../pacotes/yui290/build/menu/assets/skins/sam/menu-skin.css",
-"../css/tabview.css"
-);
-$buffer = "";
-foreach ($cssfiles as $f)
-{
-	$abre = fopen($f, "r");
-	while (!feof($abre))
-	{$buffer .= fgets($abre);}
-	fclose($abre);
-	$buffer .= "\n";
-}
-$abre = fopen("../css/i3geo_ferramentas8.css", "wt");
-$escreve = fwrite ($abre,$buffer);
-$fecha = fclose ($abre);
 //testa os scripts
 foreach ($jsfiles as $f)
 {

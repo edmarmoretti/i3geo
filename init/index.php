@@ -113,12 +113,12 @@ if (! function_exists("ms_GetVersion")) {
                                 <h4 style="height: 35px;padding:10px 10px;">{{{titulo}}}</h4>
     
                                     <a tabindex="-1" target="{{{target}}}" href="{{{href}}}">
-                                        <img alt="{{{titulo}}}" tabindex="-1" style="height: 100px; width: 100%; border-radius: 0px;" src="{{{img}}}" />
+                                        <img alt="{{{titulo}}}" tabindex="-1" style="padding:1px;height: 100px; width: 100%; border-radius: 0px;" src="{{{img}}}" />
                                     </a>
     
                             </div>
                             <div class="panel-body" tabindex="-1" style="background-color: rgb(250, 250, 250)">
-                                <h5 tabindex="-1" class="hidden-xs" style="height: 10rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
+                                <h5 tabindex="-1" class="hidden-xs longText" style="height: 10rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
                             </div>
                             <div class="panel-footer text-right" style="padding: 0px; padding-right: 15px; border: 0px; background-color: rgb(250, 250, 250);">
                                 <div class="row center-block">
