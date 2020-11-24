@@ -2,7 +2,6 @@
 namespace admin\php\login;
 //error_reporting(E_ALL ^E_NOTICE);
 error_log("checaLogin OK",0);
-
 // junta get e post
 $_GET = array_merge ( $_GET, $_POST );
 // black list

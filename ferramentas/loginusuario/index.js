@@ -64,6 +64,25 @@ i3GEOF.loginusuario = {
 	    var data = i3GEO.util.getFormData("#" + this._parameters.idContainer + " form");
 	    return data;
 	},
+	abreLogout : function() {
+		var r = confirm($trad("x26"));
+		if (r == true) {
+			i3GEO.login.anulaCookie();
+			if ($i(i3GEO.login.divnomelogin)) {
+				$i(i3GEO.login.divnomelogin).innerHTML = "";
+			}
+			if (i3GEO.parametros) {
+				i3GEO.parametros.editor = "nao";
+				if(i3GEO.catalogoMenus){
+					i3GEO.catalogoMenus.listaMenus();
+				}
+			}
+			i3GEOF.loginusuario.destroy();
+			if (i3GEO.login.recarrega === true) {
+				document.location.reload();
+			}
+		}
+	},
 	/*
 	Function: enviar
 

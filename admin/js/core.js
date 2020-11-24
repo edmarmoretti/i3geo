@@ -482,7 +482,6 @@ function core_makeRequest(sUrl,callback,tipo,postpar)
 	if(arguments.length == 2)
 	{tipo = "GET";}
 	if(postpar){
-		//YAHOO.util.Connect.setDefaultPostHeader('application/json;charset=ISO-8859-1');
 		YAHOO.util.Connect.asyncRequest('POST', sUrl, callback, postpar);
 	}
 	else{

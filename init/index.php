@@ -110,7 +110,7 @@ if (! function_exists("ms_GetVersion")) {
                     <div class="cartao {{{fa}}} col-xs-12 center-block" style="width: 30rem; min-width: 30rem; max-width: 30rem;">
                         <div class="panel panel-default">
                             <div class="panel-heading" style="padding:0px;">
-                                <h5 style="font-size: 1.7rem; height: 35px;padding:10px 10px;">{{{titulo}}}</h5>
+                                <h4 style="height: 35px;padding:10px 10px;">{{{titulo}}}</h4>
     
                                     <a tabindex="-1" target="{{{target}}}" href="{{{href}}}">
                                         <img alt="{{{titulo}}}" tabindex="-1" style="height: 100px; width: 100%; border-radius: 0px;" src="{{{img}}}" />
@@ -118,7 +118,7 @@ if (! function_exists("ms_GetVersion")) {
     
                             </div>
                             <div class="panel-body" tabindex="-1" style="background-color: rgb(250, 250, 250)">
-                                <h5 tabindex="-1" class="hidden-xs" style="height: 10rem; font-size: 1.7rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
+                                <h5 tabindex="-1" class="hidden-xs" style="height: 10rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
                             </div>
                             <div class="panel-footer text-right" style="padding: 0px; padding-right: 15px; border: 0px; background-color: rgb(250, 250, 250);">
                                 <div class="row center-block">

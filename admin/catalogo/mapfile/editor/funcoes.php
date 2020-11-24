@@ -236,7 +236,7 @@ function salvaMapfile()
 }
 
 //
-// salva um LAYER existente em um mapfile temporario na pasta i3geo/temas
+// salva um LAYER existente na pasta i3geo/temas
 // utilizado no editor de mapfiles
 //
 function refazerLayer($nomelayer, $codigomap, $locaplic, $dir_tmp, $cachedir, $maporigem, $classe, $cache = "", $identifica = "sim")

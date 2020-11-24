@@ -58,10 +58,6 @@ if(!empty($fingerprint) && !empty($g_sid))	{
 include_once($locaplic."/classesphp/classe_vermultilayer.php");
 include_once($locaplic."/classesphp/classe_estatistica.php");
 
-if(isset($logExec) && $logExec["ferramentas"] == true){
-	i3GeoLog("prog: ferramentas url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
-}
-
 //
 //substitui a string de conex&atilde;o
 //

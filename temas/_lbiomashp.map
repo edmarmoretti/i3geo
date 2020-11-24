@@ -1,47 +1,45 @@
-#http://localhost/i3geo/ms_criamapa.php?layers=_lbiomashp&interface=osmdebug.php
 MAP
   FONTSET "../symbols/fontes.txt"
   SYMBOLSET "../symbols/simbolosv6.sym"
   LAYER
     COMPOSITE
       OPACITY 50
-    END # COMPOSITE
+    END
     CONNECTION ""
     DATA "/var/www/i3geo/aplicmap/dados/biomas.shp"
     METADATA
-      "cache"	"NAO"
-      "cacheprefixo" "prefixo"
+      "TIP"	"CD_LEGENDA"
+      "cache"	"nao"
       "CLASSE"	"SIM"
       "animagif"	""
+      "temporizador"	"15"
       "permitekmz"	"SIM"
-      "ITENSDESC"	"Teste de acentuação"
-      "TILES"	"NAO"
-      "ESCALA"	"250000"
+      "ITENSDESC"	"CD_LEGENDA"
       "editavel"	""
+      "ESCALA"	"250000"
+      "TILES"	"NAO"
       "extensao"	"-73.990940816816 -33.74827031115 -34.822855820777 5.272224303909"
-      "FUNCOESJS"	'[{"titulo":"teste fake"},{"titulo":"teste de nome de uma função","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["CD_LEGENDA"]}]'
+      "FUNCOESJS"	'[{"titulo":"teste fake"},{"titulo":"teste de nome de uma funÃ§Ã£o","script":"../aplicmap/dados/testefuncaojs.js","funcao":"funcao1","parametros":["CD_LEGENDA"]}]'
       "permitedownload"	"SIM"
       "permitecomentario"	"NAO"
+      "cacheprefixo"	"prefixo"
       "escondido"	"NAO"
-      "download"	"SIM"
       "esquematabelaeditavel"	""
+      "download"	"SIM"
       "UTFDATA"	"CD_LEGENDA"
       "itembuscarapida"	"CD_LEGENDA"
-      "ITENS"	"CD_LEGENDA"
-      "TIP"	"CD_LEGENDA"
-      "ITENSDESC"	"CD_LEGENDA"
       "tme"	""
-      "permitekml"	"SIM"
-      "permiteogc"	"SIM"
+      "ITENS"	"CD_LEGENDA"
       "transitioneffect"	"NAO"
+      "permiteogc"	"SIM"
+      "permitekml"	"SIM"
+      "TEMA"	"Biomas shapefile (acentuaÃ§Ã£o)"
       "convcaracter"	"SIM"
-      "TEMA"	"Biomas shapefile (acentuação)"
-      "colunaidunico"	""
       "colunageometria"	""
+      "colunaidunico"	""
       "identifica"	"sim"
-      "tabelaeditavel"	""
       "storymap"	""
-      "temporizador"	"15"
+      "tabelaeditavel"	""
     END # METADATA
     NAME "_lbiomashp"
     PROCESSING "ITEMS=CD_LEGENDA"
@@ -89,7 +87,7 @@ MAP
       TITLE ""
     END # CLASS
     CLASS
-      NAME "AMAZÔNIA"
+      NAME "AMAZï¿½NIA"
       EXPRESSION ('[CD_LEGENDA]'eq'AMAZÃ”NIA')
       STYLE
         COLOR 16 67 6

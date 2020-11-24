@@ -113,6 +113,7 @@
 	allCssTags += "<link rel='stylesheet' type='text/css' href='../pacotes/jquery/jquery-ui/jquery-ui.min.css'/>";
 	allCssTags += "<link rel='stylesheet' type='text/css' href='../css/font/material-icons.css'/>";
 	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>";
+	//allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio:400'>";
 	document.write(allCssTags);
 	document.write(allScriptTags);
 

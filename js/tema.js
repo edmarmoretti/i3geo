@@ -565,19 +565,6 @@ i3GEO.tema =
                 }
             },
             /**
-             * Function: salvaMapfile
-             *
-             * Abre a janela de dialogo da ferramenta salvamapfile
-             *
-             * Parametros:
-             *
-             * {string} - codigo do tema
-             */
-            salvaMapfile : function(idtema) {
-                i3GEO.mapa.ativaTema(idtema);
-                i3GEO.util.dialogoFerramenta("i3GEO.tema.dialogo.salvaMapfile()", "salvamapfile", "salvamapfile");
-            },
-            /**
              * Function: graficotema
              *
              * Abre a janela de dialogo da ferramenta graficotema
