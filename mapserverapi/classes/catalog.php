@@ -1,5 +1,5 @@
 <?php
-namespace restmapserver;
+namespace mapserverapi;
 use PDO;
 use PDOException;
 class Catalog
@@ -7,7 +7,7 @@ class Catalog
 
     function __construct()
     {
-        $this->util = new \restmapserver\Util();
+        $this->util = new \mapserverapi\Util();
         include ("../../classesphp/conexao.php");
         $this->locaplic = $locaplic;
         $this->esquemaadmin = $esquemaadmin;

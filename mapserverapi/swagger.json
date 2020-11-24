@@ -12,7 +12,7 @@
         "version": "8.0"
     },
     "paths": {
-        "/i3geo/restmapserver/layer/{mapId}/{layerName}/queryByrect/": {
+        "/i3geo/mapserverapi/layer/{mapId}/{layerName}/queryByrect/": {
             "get": {
                 "tags": [
                     "layer"
@@ -60,7 +60,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/layer/{mapId}/{layerName}/moveUp/": {
+        "/i3geo/mapserverapi/layer/{mapId}/{layerName}/moveUp/": {
             "get": {
                 "tags": [
                     "layer"
@@ -90,7 +90,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/layer/{mapId}/{layerName}/moveDown/": {
+        "/i3geo/mapserverapi/layer/{mapId}/{layerName}/moveDown/": {
             "get": {
                 "tags": [
                     "layer"
@@ -120,7 +120,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/layer/{mapId}/{layerName}/toggleStatusClass/": {
+        "/i3geo/mapserverapi/layer/{mapId}/{layerName}/toggleStatusClass/": {
             "get": {
                 "tags": [
                     "layer class"
@@ -157,7 +157,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/layer/{mapId}/{layerName}/zoomSel/": {
+        "/i3geo/mapserverapi/layer/{mapId}/{layerName}/zoomSel/": {
             "get": {
                 "tags": [
                     "layer"
@@ -187,7 +187,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/create/": {
+        "/i3geo/mapserverapi/map/create/": {
             "get": {
                 "tags": [
                     "map"
@@ -396,7 +396,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/getParameters/": {
+        "/i3geo/mapserverapi/map/{mapId}/getParameters/": {
             "get": {
                 "tags": [
                     "map"
@@ -419,7 +419,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/layersDelete/": {
+        "/i3geo/mapserverapi/map/{mapId}/layersDelete/": {
             "get": {
                 "tags": [
                     "map update"
@@ -449,7 +449,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/reorderLayers/": {
+        "/i3geo/mapserverapi/map/{mapId}/reorderLayers/": {
             "get": {
                 "tags": [
                     "map update"
@@ -479,7 +479,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/getLegendParameters/": {
+        "/i3geo/mapserverapi/map/{mapId}/getLegendParameters/": {
             "get": {
                 "tags": [
                     "map legend"
@@ -516,7 +516,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/setSize/": {
+        "/i3geo/mapserverapi/map/{mapId}/setSize/": {
             "get": {
                 "tags": [
                     "map update"
@@ -553,7 +553,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/centerPoint/": {
+        "/i3geo/mapserverapi/map/{mapId}/centerPoint/": {
             "get": {
                 "tags": [
                     "map navigation"
@@ -590,7 +590,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/addPointFeature/": {
+        "/i3geo/mapserverapi/map/{mapId}/addPointFeature/": {
             "get": {
                 "tags": [
                     "map feature"
@@ -669,7 +669,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/extentToLayer/": {
+        "/i3geo/mapserverapi/map/{mapId}/extentToLayer/": {
             "get": {
                 "tags": [
                     "map navigation"
@@ -699,7 +699,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/clearSel/": {
+        "/i3geo/mapserverapi/map/{mapId}/clearSel/": {
             "get": {
                 "tags": [
                     "map update"
@@ -722,7 +722,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/addLayerWms/": {
+        "/i3geo/mapserverapi/map/{mapId}/addLayerWms/": {
             "get": {
                 "tags": [
                     "map add layer"
@@ -846,7 +846,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/identify/": {
+        "/i3geo/mapserverapi/map/{mapId}/identify/": {
             "get": {
                 "tags": [
                     "map attributes"
@@ -915,7 +915,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/addLayers/": {
+        "/i3geo/mapserverapi/map/{mapId}/addLayers/": {
             "get": {
                 "tags": [
                     "map add layer"
@@ -945,7 +945,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/searchInLayers/": {
+        "/i3geo/mapserverapi/map/{mapId}/searchInLayers/": {
             "get": {
                 "tags": [
                     "map attributes"
@@ -975,7 +975,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/addLayerMetaestatFilter/": {
+        "/i3geo/mapserverapi/map/{mapId}/addLayerMetaestatFilter/": {
             "get": {
                 "tags": [
                     "map add layer"
@@ -1033,7 +1033,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/addLayerRegion/": {
+        "/i3geo/mapserverapi/map/{mapId}/addLayerRegion/": {
             "get": {
                 "tags": [
                     "map add layer"
@@ -1063,7 +1063,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/toggleLayersVis/": {
+        "/i3geo/mapserverapi/map/{mapId}/toggleLayersVis/": {
             "get": {
                 "tags": [
                     "map update"
@@ -1100,7 +1100,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/addLayerShp/": {
+        "/i3geo/mapserverapi/map/{mapId}/addLayerShp/": {
             "get": {
                 "tags": [
                     "map add layer"
@@ -1130,7 +1130,7 @@
                 }
             }
         },
-        "/i3geo/restmapserver/map/{mapId}/addLayerImg/": {
+        "/i3geo/mapserverapi/map/{mapId}/addLayerImg/": {
             "get": {
                 "tags": [
                     "map add layer"

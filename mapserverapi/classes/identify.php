@@ -1,14 +1,14 @@
 <?php
-namespace restmapserver;
+namespace mapserverapi;
 
 class Identify
 {
 
     function __construct()
     {
-        $this->util = new \restmapserver\Util();
-        $this->map = new \restmapserver\Map();
-        $this->layer = new \restmapserver\Layer();
+        $this->util = new \mapserverapi\Util();
+        $this->map = new \mapserverapi\Map();
+        $this->layer = new \mapserverapi\Layer();
     }
 
     function open($mapId = "")

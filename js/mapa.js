@@ -63,7 +63,7 @@ i3GEO.mapa =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/clearSel",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/clearSel",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     i3GEO.Interface.atualizaMapa();
@@ -240,7 +240,7 @@ i3GEO.mapa =
                 par: {
                     layerNames: layerNames
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayers",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/addLayers",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     if (after){
@@ -255,7 +255,7 @@ i3GEO.mapa =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/textFontList",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/textFontList",
                 fn: function(data){
                     if (after){
                         after.call(after, data);
@@ -300,7 +300,7 @@ i3GEO.mapa =
                 snackbarmsg: $trad("camadaadic"),
                 btn: false,
                 par: par,
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerWms",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/addLayerWms",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     if (after){
@@ -317,7 +317,7 @@ i3GEO.mapa =
                 par: {
                     arq: arq
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerShp",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/addLayerShp",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     if (after){
@@ -334,7 +334,7 @@ i3GEO.mapa =
                 par: {
                     arq: arq
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerImg",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/addLayerImg",
                 fn: function(data){
                     i3GEO.mapa.refresh();
                     if (after){
@@ -352,7 +352,7 @@ i3GEO.mapa =
                     h: altura,
                     w: largura
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/setSize",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/setSize",
                 fn: function(data){
                     if (after){
                         after.call(after, data);
@@ -379,7 +379,7 @@ i3GEO.mapa =
                 par: {
                     layerName: layerName
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/extentToLayer",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/extentToLayer",
                 fn: function(data){
                     i3GEO.Interface.zoom2ext(data);
                 }
@@ -393,7 +393,7 @@ i3GEO.mapa =
                 snackbar: true,
                 snackbarmsg: $trad("maprefresh"),
                 btn: false,
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/getParameters",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/getParameters",
                 fn: function(data){
                     if (typeof (console) !== 'undefined')
                         console.info("i3GEO.mapa.refresh()");

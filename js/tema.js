@@ -85,7 +85,7 @@ i3GEO.tema =
                 par: {
                     layernames: excluir.getUnique().join(",")
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/layersDelete",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/layersDelete",
                 fn: function(data){
                     i3GEO.mapa.ativaTema();
                     i3GEO.temaAtivo = "";
@@ -126,7 +126,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/moveUp",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/moveUp",
                 fn: function(data){
                     i3GEO.mapa.refresh(
                             i3GEO.Interface.ordenaLayers
@@ -140,7 +140,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/moveDown",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/moveDown",
                 fn: function(data){
                     i3GEO.mapa.refresh(
                             i3GEO.Interface.ordenaLayers
@@ -166,7 +166,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/zoomSel",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/zoomSel",
                 fn: function(data){
                     i3GEO.Interface.zoom2ext(data);
                 }
@@ -178,7 +178,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/getItensParameters",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/getItensParameters",
                 fn: function(data){
                     if (after){
                         after.call(after, data);
@@ -214,7 +214,7 @@ i3GEO.tema =
                     extent: extent ? extent : i3GEO.mapa.getExtent().geo,
                     wkt: wkt ? wkt : false
                 },
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/queryByRect",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/queryByRect",
                 fn: function(data){
                     if (after){
                         after.call(after, data);
@@ -239,7 +239,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/clearSel",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/clearSel",
                 fn: function(data){
                     if(data == true){
                         i3GEO.mapa.refresh(
@@ -264,7 +264,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/toggleLegend",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/toggleLegend",
                 fn: function(data){
                     if(data == true){
                         i3GEO.mapa.refresh(
@@ -335,7 +335,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {"layerTitle": layerTitle},
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/alterName",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/alterName",
                 fn: function(data){
                     if(data == true){
                         i3GEO.mapa.refresh();
@@ -358,7 +358,7 @@ i3GEO.tema =
                 snackbarmsg: false,
                 btn: false,
                 par: {},
-                prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + layerName + "/copy",
+                prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + layerName + "/copy",
                 fn: function(data){
                     if(data == true){
                         i3GEO.mapa.refresh();

@@ -719,7 +719,7 @@ i3GEO.arvoreDeCamadas =
                     off: off,
                     on: on
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/toggleLayersVis",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/toggleLayersVis",
                 fn: function(data){
                     if (after){
                         after.call(after, data);
@@ -1138,7 +1138,7 @@ i3GEO.arvoreDeCamadas =
 		par: {
 		    layernames: temas
 		},
-		prog: "/restmapserver/map/" + i3GEO.configura.sid + "/reorderLayers",
+		prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/reorderLayers",
 		fn: function(data){
 		    if (after){
 			after.call(after, data);

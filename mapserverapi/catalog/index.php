@@ -1,5 +1,5 @@
 <?php
-define("I3GEOPATH", explode("restmapserver", __FILE__)[0]);
+define("I3GEOPATH", explode("mapserverapi", __FILE__)[0]);
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -10,24 +10,24 @@ $config['addContentLengthHeader'] = false;
 $app = new \Slim\App([
     'settings' => $config
 ]);
-include (I3GEOPATH . "/restmapserver/classes/catalog.php");
-include (I3GEOPATH . "/restmapserver/classes/util.php");
-include (I3GEOPATH . "/restmapserver/classes/map.php");
-include (I3GEOPATH . "/restmapserver/classes/layer.php");
+include (I3GEOPATH . "/mapserverapi/classes/catalog.php");
+include (I3GEOPATH . "/mapserverapi/classes/util.php");
+include (I3GEOPATH . "/mapserverapi/classes/map.php");
+include (I3GEOPATH . "/mapserverapi/classes/layer.php");
 $container = $app->getContainer();
 $container['util'] = function ($c) {
-    return new \restmapserver\Util();
+    return new \mapserverapi\Util();
 };
 $container['catalog'] = function ($c) {
-    return new \restmapserver\Catalog();
+    return new \mapserverapi\Catalog();
 };
 $container['map'] = function ($c) {
-    return new \restmapserver\Map();
+    return new \mapserverapi\Map();
 };
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/catalog/getMenus/",
+ * 		path="/i3geo/mapserverapi/catalog/getMenus/",
  * 		tags={"map"},
  * 		operationId="getMenus",
  * 		summary="Get menus and layers in root node",

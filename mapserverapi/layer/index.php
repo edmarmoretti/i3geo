@@ -1,5 +1,5 @@
 <?php
-define("I3GEOPATH", explode("restmapserver", __FILE__)[0]);
+define("I3GEOPATH", explode("mapserverapi", __FILE__)[0]);
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -10,26 +10,26 @@ $config['addContentLengthHeader'] = false;
 $app = new \Slim\App([
     'settings' => $config
 ]);
-include (I3GEOPATH . "/restmapserver/classes/util.php");
-include (I3GEOPATH . "/restmapserver/classes/layer.php");
-include (I3GEOPATH . "/restmapserver/classes/map.php");
-include (I3GEOPATH . "/restmapserver/classes/admin.php");
-include (I3GEOPATH . "/restmapserver/classes/metaestatinfo.php");
-include (I3GEOPATH . "/restmapserver/classes/statistics.php");
+include (I3GEOPATH . "/mapserverapi/classes/util.php");
+include (I3GEOPATH . "/mapserverapi/classes/layer.php");
+include (I3GEOPATH . "/mapserverapi/classes/map.php");
+include (I3GEOPATH . "/mapserverapi/classes/admin.php");
+include (I3GEOPATH . "/mapserverapi/classes/metaestatinfo.php");
+include (I3GEOPATH . "/mapserverapi/classes/statistics.php");
 $container = $app->getContainer();
 $container['util'] = function ($c) {
-    return new \restmapserver\Util();
+    return new \mapserverapi\Util();
 };
 $container['layer'] = function ($c) {
-    return new \restmapserver\Layer();
+    return new \mapserverapi\Layer();
 };
 $container['map'] = function ($c) {
-    return new \restmapserver\Map();
+    return new \mapserverapi\Map();
 };
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/queryByrect/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/queryByrect/",
  * 		tags={"layer"},
  * 		operationId="queryByrect",
  * 		summary="Get data by rect",
@@ -88,7 +88,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/moveUp/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/moveUp/",
  * 		tags={"layer"},
  * 		operationId="moveUp",
  * 		summary="Change layer position in a map",
@@ -127,7 +127,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/moveDown/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/moveDown/",
  * 		tags={"layer"},
  * 		operationId="moveUp",
  * 		summary="Change layer position in a map",
@@ -166,7 +166,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/toggleStatusClass/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/toggleStatusClass/",
  * 		tags={"layer class"},
  * 		operationId="toggleStatusClass",
  * 		summary="Change class status",
@@ -212,7 +212,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/zoomSel/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/zoomSel/",
  * 		tags={"layer"},
  * 		operationId="zoomSel",
  * 		summary="Set map extent by layer selected shapes",
@@ -251,7 +251,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/clearSel/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/clearSel/",
  * 		tags={"layer"},
  * 		operationId="clearSel",
  * 		summary="Clear layer selections",
@@ -290,7 +290,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/toggleLegend/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/toggleLegend/",
  * 		tags={"layer legend"},
  * 		operationId="toggleLegend",
  * 		summary="Toggle layer legend",
@@ -329,7 +329,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/copy/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/copy/",
  * 		tags={"layer"},
  * 		operationId="copy",
  * 		summary="Copy layer",
@@ -368,7 +368,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/getItensParameters/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/getItensParameters/",
  * 		tags={"layer"},
  * 		operationId="getItensParameters",
  * 		summary="Get itens layer",
@@ -409,7 +409,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/getUniqueValuesItem/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/getUniqueValuesItem/",
  * 		tags={"layer"},
  * 		operationId="getUniqueValuesItem",
  * 		summary="Get item unique values",
@@ -456,7 +456,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/layer/{mapId}/{layerName}/alterName/",
+ * 		path="/i3geo/mapserverapi/layer/{mapId}/{layerName}/alterName/",
  * 		tags={"layer"},
  * 		operationId="getUniqueValuesItem",
  * 		summary="Get item unique values",

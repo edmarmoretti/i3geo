@@ -1,12 +1,12 @@
 <?php
-namespace restmapserver;
+namespace mapserverapi;
 
 class Layer
 {
 
     function __construct()
     {
-        $this->util = new \restmapserver\Util();
+        $this->util = new \mapserverapi\Util();
     }
 
     /**

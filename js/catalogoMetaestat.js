@@ -366,7 +366,7 @@ i3GEO.catalogoMetaestat = {
                     regiontype: $("#i3geoCartoRegioesMedidasVariavel select").val(),
                     opacity: 70
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerMetaestatFilter",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/addLayerMetaestatFilter",
                 fn: function(){
                     i3GEO.mapa.refresh();
                 }

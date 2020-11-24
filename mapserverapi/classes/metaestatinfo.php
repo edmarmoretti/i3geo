@@ -1,5 +1,5 @@
 <?php
-namespace restmapserver;
+namespace mapserverapi;
 
 use PDO;
 
@@ -8,9 +8,9 @@ class MetaestatInfo
 
     function __construct()
     {
-        $this->admin = new \restmapserver\Admin();
-        $this->statistics = new \restmapserver\Statistics();
-        $this->util = new \restmapserver\Util();
+        $this->admin = new \mapserverapi\Admin();
+        $this->statistics = new \mapserverapi\Statistics();
+        $this->util = new \mapserverapi\Util();
     }
 
     function execSQL($sql)

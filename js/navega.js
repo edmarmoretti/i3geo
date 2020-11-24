@@ -293,7 +293,7 @@ i3GEO.navega =
                     offsety: offsety,
                     layerTitle: layerTitle
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/createLayerPointFeature",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/createLayerPointFeature",
                 fn: function(data){
                      i3GEO.mapa.refresh();
                 }

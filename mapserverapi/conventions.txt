@@ -1,4 +1,4 @@
-Nomes de variávies
+Nomes de variï¿½vies
 
     $layerObj - objeto layer Mapserver
 
@@ -6,7 +6,7 @@ Nomes de variávies
 
     $extent - extensao geografica $e = explode(",", str_replace(" ", ",", $extent));
 
-    $layerTitle - título de um layer
+    $layerTitle - tï¿½tulo de um layer
 
     $layerNames - lista de nomes de layers $e = explode(",", str_replace(" ", ",", $layerNames));
 
@@ -23,7 +23,7 @@ Get:
         snackbarmsg: false,
         btn: false,
         par: par,
-        prog: "/restmapserver/map/" + i3GEO.configura.sid + "/clearSel",
+        prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/clearSel",
         fn: function(data){
             if (after){
                 after.call(after, data);

@@ -70,7 +70,7 @@ i3GEO.busca = {
                     search: palavra,
                     extent: i3GEO.mapa.getExtent().geo
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/searchInLayers",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/searchInLayers",
                 fn: function(data){
                     after.call(after, data);
                 }

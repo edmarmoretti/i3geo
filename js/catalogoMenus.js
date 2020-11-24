@@ -133,7 +133,7 @@ i3GEO.catalogoMenus = {
 		    lang: i3GEO.idioma.ATUAL,
 		    mapId: i3GEO.configura.sid
 		},
-		prog: "/restmapserver/catalog/getMenus",
+		prog: "/mapserverapi/catalog/getMenus",
 		fn: function(data){
 		    if (after){
 			after.call(after, data);

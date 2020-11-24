@@ -1,13 +1,13 @@
 <?php
-namespace restmapserver;
+namespace mapserverapi;
 
 class Map
 {
 
     function __construct()
     {
-        $this->util = new \restmapserver\Util();
-        $this->layer = new \restmapserver\Layer();
+        $this->util = new \mapserverapi\Util();
+        $this->layer = new \mapserverapi\Layer();
     }
     function open($mapId = "")
     {
@@ -190,7 +190,7 @@ class Map
     function getLayersParameters($mapObj)
     {
         // obtem os dados sobre todos os temas no banco de dados de administracao
-        $Admin = new \restmapserver\Admin();
+        $Admin = new \mapserverapi\Admin();
         $dadosTemas = $Admin->getData("select codigo_tema,link_tema from " . $_SESSION["esquemaadmin"] . "i3geoadmin_temas");
         $temas = array();
         $existesel = false;
@@ -588,8 +588,8 @@ class Map
      */
     function addLayersMetaestat($mapId, $metaestatids = "", $layerson = "")
     {
-        $Metaestatinfo = new \restmapserver\MetaestatInfo();
-        $Admin = new \restmapserver\Admin();
+        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
+        $Admin = new \mapserverapi\Admin();
         $metaestatids = explode(",", $metaestatids);
         if (count($metaestatids) == 0) {
             return;
@@ -1255,8 +1255,8 @@ class Map
 
     function getAllRestrictLayers()
     {
-        include_once (I3GEOPATH . "/restmapserver/classes/admin.php");
-        $admin = new \restmapserver\Admin();
+        include_once (I3GEOPATH . "/mapserverapi/classes/admin.php");
+        $admin = new \mapserverapi\Admin();
         $res = $admin->i3geousr_grupotema();
         $restritos = array();
         foreach ($res as $r) {
@@ -1276,8 +1276,8 @@ class Map
         $indevidos = array();
         $restritos = $this->getAllRestrictLayers();
         if (count($restritos) > 0) {
-            include_once (I3GEOPATH . "/restmapserver/classes/util.php");
-            $util = new \restmapserver\Util();
+            include_once (I3GEOPATH . "/mapserverapi/classes/util.php");
+            $util = new \mapserverapi\Util();
             $gruposusr = $util->getGruposUsrLogin();
             if (! is_object($map_file)) {
                 $mapObj = @ms_newMapObj($map_file);
@@ -2051,7 +2051,7 @@ class Map
 
     function addLayerMetaestatFilter($mapId, $measure, $filter, $classification, $opacity, $regiontype)
     {
-        $Metaestatinfo = new \restmapserver\MetaestatInfo();
+        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
         if ($this->open($mapId) == false) {
             return false;
         }
@@ -2086,7 +2086,7 @@ class Map
 
     function addLayerRegion($mapId, $codigo_tipo_regiao, $outlinecolor = "50,50,50", $width = 2)
     {
-        $Metaestatinfo = new \restmapserver\MetaestatInfo();
+        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
         if ($this->open($mapId) == false) {
             return false;
         }

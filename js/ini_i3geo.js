@@ -657,7 +657,7 @@ var i3GEO = {
                     snackbarmsg: false,
                     btn: false,
                     par: {},
-                    prog: "/restmapserver/map/create/?" + parameters,
+                    prog: "/mapserverapi/map/create/?" + parameters,
                     fn: function(data){
                         // verifica se existe bloqueio em funcao da senha no
                         // ms_configura.php
@@ -687,7 +687,7 @@ var i3GEO = {
                         w: i3GEO.parametros.w,
                         h: i3GEO.parametros.h
                     },
-                    prog: "/restmapserver/map/" + i3GEO.configura.sid + "/getParameters",
+                    prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/getParameters",
                     fn: function(data){
                         montaMapa(data);
                     }

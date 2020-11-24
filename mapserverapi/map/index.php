@@ -1,5 +1,5 @@
 <?php
-define("I3GEOPATH", explode("restmapserver", __FILE__)[0]);
+define("I3GEOPATH", explode("mapserverapi", __FILE__)[0]);
 
 use Psr\Http\Message\ServerRequestInterface as Request;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -10,30 +10,30 @@ $config['addContentLengthHeader'] = false;
 $app = new \Slim\App([
     'settings' => $config
 ]);
-include (I3GEOPATH . "/restmapserver/classes/map.php");
-include (I3GEOPATH . "/restmapserver/classes/layer.php");
-include (I3GEOPATH . "/restmapserver/classes/util.php");
-include (I3GEOPATH . "/restmapserver/classes/admin.php");
-include (I3GEOPATH . "/restmapserver/classes/metaestatinfo.php");
-include (I3GEOPATH . "/restmapserver/classes/statistics.php");
+include (I3GEOPATH . "/mapserverapi/classes/map.php");
+include (I3GEOPATH . "/mapserverapi/classes/layer.php");
+include (I3GEOPATH . "/mapserverapi/classes/util.php");
+include (I3GEOPATH . "/mapserverapi/classes/admin.php");
+include (I3GEOPATH . "/mapserverapi/classes/metaestatinfo.php");
+include (I3GEOPATH . "/mapserverapi/classes/statistics.php");
 $container = $app->getContainer();
 $container['util'] = function ($c) {
-    return new \restmapserver\Util();
+    return new \mapserverapi\Util();
 };
 $container['mscriamapa'] = function ($c) {
-    return new \restmapserver\Mscriamapa();
+    return new \mapserverapi\Mscriamapa();
 };
 $container['map'] = function ($c) {
-    return new \restmapserver\Map();
+    return new \mapserverapi\Map();
 };
 $container['identify'] = function ($c) {
-    include (I3GEOPATH . "/restmapserver/classes/identify.php");
-    return new \restmapserver\Identify();
+    include (I3GEOPATH . "/mapserverapi/classes/identify.php");
+    return new \mapserverapi\Identify();
 };
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/create/",
+ * 		path="/i3geo/mapserverapi/map/create/",
  * 		tags={"map"},
  * 		operationId="create",
  * 		summary="Create a new map. Example to open the created map: http://localhost/i3geo/interface/openlayersdebug.php?&projection=osm",
@@ -261,7 +261,7 @@ $app->map([
     'POST'
 ], '/create/', function (Request $request, Response $response, $args) {
     $param = $this->util->sanitizestrings($request->getQueryParams());
-    include (I3GEOPATH . "/restmapserver/classes/mscriamapa.php");
+    include (I3GEOPATH . "/mapserverapi/classes/mscriamapa.php");
     $mapid = $this->mscriamapa->createMap($param);
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
@@ -271,7 +271,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/getParameters/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/getParameters/",
  * 		tags={"map"},
  * 		operationId="getParameters",
  * 		summary="Get the parameters of the map that was created",
@@ -309,7 +309,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/layersDelete/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/layersDelete/",
  * 		tags={"map update"},
  * 		operationId="layersDelete",
  * 		summary="Delete layers from a map",
@@ -347,7 +347,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/reorderLayers/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/reorderLayers/",
  * 		tags={"map update"},
  * 		operationId="reorderLayers",
  * 		summary="Reorder the layers in a map",
@@ -385,7 +385,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/getLegendParameters/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/getLegendParameters/",
  * 		tags={"map legend"},
  * 		operationId="getLegendParameters",
  * 		summary="Get legend parameters",
@@ -430,7 +430,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/setSize/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/setSize/",
  * 		tags={"map update"},
  * 		operationId="setSize",
  * 		summary="Update map size",
@@ -475,7 +475,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/centerPoint/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/centerPoint/",
  * 		tags={"map navigation"},
  * 		operationId="centerPoint",
  * 		summary="Change map center",
@@ -520,7 +520,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/addPointFeature/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/addPointFeature/",
  * 		tags={"map feature"},
  * 		operationId="addPointFeature",
  * 		summary="Add point",
@@ -607,7 +607,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/extentToLayer/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/extentToLayer/",
  * 		tags={"map navigation"},
  * 		operationId="extentToLayer",
  * 		summary="Change map extent to layer extent",
@@ -645,7 +645,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/clearSel/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/clearSel/",
  * 		tags={"map update"},
  * 		operationId="clearSel",
  * 		summary="Clear all layers selections",
@@ -676,7 +676,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/addLayerWms/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/addLayerWms/",
  * 		tags={"map add layer"},
  * 		operationId="addLayerWms",
  * 		summary="Add layer by WMS",
@@ -795,7 +795,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/identify/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/identify/",
  * 		tags={"map attributes"},
  * 		operationId="identify",
  * 		summary="Get layers data from point",
@@ -874,7 +874,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/addLayers/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/addLayers/",
  * 		tags={"map add layer"},
  * 		operationId="addLayers",
  * 		summary="Add new layers to map",
@@ -914,7 +914,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/searchInLayers/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/searchInLayers/",
  * 		tags={"map attributes"},
  * 		operationId="searchInLayers",
  * 		summary="Search for data in existing layers on the map that allow searching.",
@@ -956,7 +956,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/searchInLayers/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/searchInLayers/",
  * 		tags={"map"},
  * 		operationId="textFontList",
  * 		summary="Get list of text fonts.",
@@ -988,7 +988,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/addLayerMetaestatFilter/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/addLayerMetaestatFilter/",
  * 		tags={"map add layer"},
  * 		operationId="addLayerMetaestatFilter",
  * 		summary="Add a new layer to the map based on the statistical metadata system.",
@@ -1056,7 +1056,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/addLayerRegion/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/addLayerRegion/",
  * 		tags={"map add layer"},
  * 		operationId="addLayerRegion",
  * 		summary="Add a new layer to the map based on the statistical metadata system and regions.",
@@ -1096,7 +1096,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/toggleLayersVis/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/toggleLayersVis/",
  * 		tags={"map update"},
  * 		operationId="toggleLayersVis",
  * 		summary="Turn layers visibility on or off",
@@ -1142,7 +1142,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/addLayerShp/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/addLayerShp/",
  * 		tags={"map add layer"},
  * 		operationId="addLayerShp",
  * 		summary="Add layer by shapefile",
@@ -1185,7 +1185,7 @@ $app->map([
 /**
  *
  * @SWG\Get(
- * 		path="/i3geo/restmapserver/map/{mapId}/addLayerImg/",
+ * 		path="/i3geo/mapserverapi/map/{mapId}/addLayerImg/",
  * 		tags={"map add layer"},
  * 		operationId="addLayerImg",
  * 		summary="Add layer by image file",

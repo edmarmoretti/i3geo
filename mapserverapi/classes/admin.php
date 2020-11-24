@@ -1,5 +1,5 @@
 <?php
-namespace restmapserver;
+namespace mapserverapi;
 
 use PDO;
 

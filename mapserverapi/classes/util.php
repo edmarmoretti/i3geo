@@ -1,5 +1,5 @@
 <?php
-namespace restmapserver;
+namespace mapserverapi;
 
 class Util
 {
@@ -82,8 +82,8 @@ class Util
      */
     function getSavedMap($id_mapa = 0)
     {
-        include_once (I3GEOPATH . "/restmapserver/classes/admin.php");
-        $admin = new \restmapserver\Admin();
+        include_once (I3GEOPATH . "/mapserverapi/classes/admin.php");
+        $admin = new \mapserverapi\Admin();
         $maps = $admin->i3geoadmin_mapas($id_mapa);
         return $maps;
     }

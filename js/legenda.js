@@ -115,7 +115,7 @@ i3GEO.legenda =
 		    w : w,
 		    h : h
 		},
-		prog: "/restmapserver/map/" + i3GEO.configura.sid + "/getLegendParameters",
+		prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/getLegendParameters",
 		fn: function(data){
 		    if (after){
 			after.call(after, data);
@@ -207,7 +207,7 @@ i3GEO.legenda =
 	            par: {
                         classIds: classe
                     },
-	            prog: "/restmapserver/layer/" + i3GEO.configura.sid + "/" + tema + "/toggleStatusClass",
+	            prog: "/mapserverapi/layer/" + i3GEO.configura.sid + "/" + tema + "/toggleStatusClass",
 	            fn: function(data){
 	                if (after){
 	                    after.call(after, data);

@@ -142,7 +142,7 @@ i3GEO.catalogoRegioes = {
                 par: {
                     region: region
                 },
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/addLayerRegion",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/addLayerRegion",
                 fn: function(){
                     i3GEO.mapa.refresh();
                 }

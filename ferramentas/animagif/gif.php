@@ -249,12 +249,12 @@ ms_newLayerObj($mapa, $layertit);
 $mapa->save($arqtemp.".map");
 $mapa = ms_newMapObj($arqtemp.".map");
 //pega a lista de valores unicos da $colunat
-include("../../restmapserver/classes/util.php");
-include("../../restmapserver/classes/layer.php");
+include("../../mapserverapi/classes/util.php");
+include("../../mapserverapi/classes/layer.php");
 $layer = $mapa->getlayerbyname($tema);
 $layer->set("status",MS_DEFAULT);
 
-$m = new \restmapserver\Layer();
+$m = new \mapserverapi\Layer();
 $lista = $m->getUniqueValuesItem($layer, $colunat);
 
 $listaunica = array();

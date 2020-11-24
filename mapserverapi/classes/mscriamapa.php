@@ -1,5 +1,5 @@
 <?php
-namespace restmapserver;
+namespace mapserverapi;
 
 class Mscriamapa
 {
@@ -8,8 +8,8 @@ class Mscriamapa
 
     function __construct()
     {
-        $this->util = new \restmapserver\Util();
-        $this->map = new \restmapserver\Map();
+        $this->util = new \mapserverapi\Util();
+        $this->map = new \mapserverapi\Map();
     }
 
     function createMap($param = [])
@@ -96,7 +96,7 @@ class Mscriamapa
 
         $protocolo = $protocolo[0];
         $protocolo = strtolower($protocolo) . '://' . $_SERVER['SERVER_NAME'] . ":" . $_SERVER['SERVER_PORT'];
-        $_SESSION["urli3geo"] = str_replace("/restmapserver/map/index.php", "", $protocolo . $_SERVER["PHP_SELF"]);
+        $_SESSION["urli3geo"] = str_replace("/mapserverapi/map/index.php", "", $protocolo . $_SERVER["PHP_SELF"]);
         if ($param["idioma"] != "") {
             $arr_cookie_options = array (
                 'expires' => time() + 60*60*24*365,

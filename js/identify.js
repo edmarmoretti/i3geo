@@ -254,7 +254,7 @@ i3GEO.identify =
                 snackbarmsg: false,
                 btn: false,
                 par: par,
-                prog: "/restmapserver/map/" + i3GEO.configura.sid + "/identify",
+                prog: "/mapserverapi/map/" + i3GEO.configura.sid + "/identify",
                 fn: function(data){
                     if (after){
                         after.call(after, data);
