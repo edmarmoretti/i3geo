@@ -1,36 +1,5 @@
 <?php
 /*
-Title: classe_arvore.php
-
-Fun&ccedil;&otilde;es para montagem da &aacute;rvore de temas
-
-Licenca:
-
-GPL2
-
-i3Geo Interface Integrada de Ferramentas de Geoprocessamento para Internet
-
-Direitos Autorais Reservados (c) 2006 Minist&eacute;rio do Meio Ambiente Brasil
-Desenvolvedor: Edmar Moretti edmar.moretti@gmail.com
-
-Este programa &eacute; software livre; voc&ecirc; pode redistribu&iacute;-lo
-e/ou modific&aacute;-lo sob os termos da Licen&ccedil;a P&uacute;blica Geral
-GNU conforme publicada pela Free Software Foundation;
-
-Este programa &eacute; distribu&iacute;do na expectativa de que seja &uacute;til,
-por&eacute;m, SEM NENHUMA GARANTIA; nem mesmo a garantia impl&iacute;cita
-de COMERCIABILIDADE OU ADEQUA&Ccedil;&Atilde;O A UMA FINALIDADE ESPEC&Iacute;FICA.
-Consulte a Licen&ccedil;a P&uacute;blica Geral do GNU para mais detalhes.
-Voc&ecirc; deve ter recebido uma cï¿½pia da Licen&ccedil;a P&uacute;blica Geral do
-	GNU junto com este programa; se n&atilde;o, escreva para a
-Free Software Foundation, Inc., no endere&ccedil;o
-59 Temple Street, Suite 330, Boston, MA 02111-1307 USA.
-
-Arquivo:
-
-classe_arvore.php
-*/
-/*
 Classe: Arvore
 
 Classe utilizada para compor a &aacute;rvore de temas ou obter dados espec&iacute;ficos da &aacute;rvore.
@@ -74,7 +43,8 @@ class Arvore
 		$this->filtro = $filtro;
 		$dbh = "";
 		//error_reporting(0);
-
+		$esquemaadmin = "";
+		$convUTF = false;
 		include($locaplic."/classesphp/conexao.php");
 
 		$this->esquemaadmin = $esquemaadmin;
@@ -164,7 +134,7 @@ class Arvore
 
 	{array}
 	*/
-	function pegaListaDeMenus($perfil="",$filtraOgc="nao",$filtraDown="nao")
+	function pegaListaDeMenus($perfil="",$filtraOgc="nao",$filtraDown="nao",$idmenu="")
 	{
 		if($this->idioma == "pt"){
 			$coluna = "nome_menu";
@@ -178,7 +148,11 @@ class Arvore
 			$sql = "SELECT publicado_menu,'' as perfil_menu,aberto,desc_menu,id_menu,CASE $coluna WHEN '' THEN nome_menu ELSE $coluna END as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus order by nome_menu";
 		}
 		else{
-			$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,CASE $coluna WHEN '' THEN nome_menu ELSE $coluna END as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus where publicado_menu != 'NAO' or publicado_menu is null order by nome_menu";
+			$whereid = "";
+			if($idmenu != ""){
+			    $whereid = " id_menu = " . $idmenu . " and ";
+			}
+			$sql = "SELECT publicado_menu,perfil_menu,aberto,desc_menu,id_menu,CASE $coluna WHEN '' THEN nome_menu ELSE $coluna END as nome_menu from ".$this->esquemaadmin."i3geoadmin_menus where " . $whereid . "(publicado_menu != 'NAO' or publicado_menu is null) order by nome_menu";
 		}
 		$regs = $this->execSQL($sql);
 		$resultado = array();
@@ -433,10 +407,10 @@ class Arvore
 						{
 							$t = $this->pegaTema($tema["id_tema"]);
 							$t = $t[0];
-							$nome = $this->removeAcentos($tema["nome_tema"]);
-							$tags = $this->removeAcentos($tema["tags_tema"]);
-							$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
-							$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
+							//$nome = $this->removeAcentos($tema["nome_tema"]);
+							//$tags = $this->removeAcentos($tema["tags_tema"]);
+							//$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
+							//$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
 							$miniatura = "nao";
 							if(file_exists($this->locaplic."/temas/miniaturas/".$t["codigo_tema"].".map.mini.png"))
 							{
@@ -474,10 +448,10 @@ class Arvore
 								{
 									$t = $this->pegaTema($tema["id_tema"]);
 									$t = $t[0];
-									$nome = $this->removeAcentos($tema["nome_tema"]);
-									$tags = $this->removeAcentos($tema["tags_tema"]);
-									$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
-									$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
+									//$nome = $this->removeAcentos($tema["nome_tema"]);
+									//$tags = $this->removeAcentos($tema["tags_tema"]);
+									//$tags1 = $this->removeAcentos(mb_convert_encoding($tema["tags_tema"],"ISO-8859-1","UTF-8"));
+									//$nome1 = $this->removeAcentos(mb_convert_encoding($tema["nome_tema"],"ISO-8859-1","UTF-8"));
 									$miniatura = "nao";
 									if(file_exists($this->locaplic."/temas/miniaturas/".$tema["codigo_tema"].".map.mini.png"))
 									{
@@ -686,6 +660,14 @@ class Arvore
 			return $q;
 		}
 	}
+	function pegaTemas($ids)
+	{
+	    $ids = implode("','",$ids);
+	    $q =  $this->execSQL($this->sql_temas." and id_tema in ('$ids') ");
+	    if($q){
+	        return $q;
+	    }
+	}
 	/*
 	Function: pegaTemaPorCodigo
 
@@ -774,11 +756,13 @@ class Arvore
 	{
 		//error_reporting(0);
 		$dados = $this->pegaGruposMenu($id_menu,$ordenaNome);
-		$resultado = array();
 		$temasraiz = array();
+		$formatar = [];
 		foreach($dados["raiz"] as $temar){
-			$temasraiz[] = $this->formataTema($temar["id_tema"]);
+			//$temasraiz[] = $this->formataTema($temar["id_tema"]);
+		    $formatar[] = $temar["id_tema"];
 		}
+		$temasraiz = $this->formataTemas($formatar);
 		if(count($dados["grupos"]) == 0){
 			$grupos[] = array();
 		}
@@ -789,15 +773,17 @@ class Arvore
 			$a = str_replace(" ",",",$a);
 			if($this->verificaOcorrencia($perfil,explode(",",$a)) == true)
 			{
-				$temas = array();
 				//$raizgrupo = $this->pegaTemasRaizGrupo($id_menu,$grupo["id_n1"],$filtraOgc,$filtraDown);
 				$grupodown = "nao";
 				$grupoogc = "nao";
+				$formatar = [];
 				foreach($raizgrupos as $tema){
 					if($tema["id_nivel"] == $grupo["id_n1"]){
-						$temas[] = $this->formataTema($tema["id_tema"]);
+						//$temas[] = $this->formataTema($tema["id_tema"]);
+					    $formatar[] = $tema["id_tema"];
 					}
 				}
+				$temas = $this->formataTemas($formatar);
 				if($temas > 0){
 					$grupodown = "sim";
 					$grupoogc = "sim";
@@ -845,8 +831,6 @@ class Arvore
 			}
 		}
 		$grupos[] = array("temasraiz"=>$temasraiz);
-		//pega os sistemas checando os perfis
-		$sistemas = array();
 		$grupos[] = array("idmenu"=>$id_menu);
 		$grupos[] = array("sistemas"=>"");
 		return($grupos);
@@ -871,15 +855,11 @@ class Arvore
 	function formataSubgruposGrupo ($id_menu,$id_n1,$perfil)
 	{
 		$dados = $this->pegaSubgruposGrupo($id_menu,$id_n1);
-		$resultado = array();
+		//$resultado = array();
 		$temasraiz = array();
 		foreach($dados["raiz"] as $temar)
 		{
 			$temasraiz[] = $this->formataTema($temar["id_tema"]);
-		}
-		if(count($dados["subgrupos"]) == 0)
-		{
-			$sgrupos[] = array();
 		}
 		$subgrupos = array();
 		foreach($dados["subgrupos"] as $sgrupo)
@@ -990,6 +970,52 @@ class Arvore
 		//codigo_tema para fins de compatibilidade
 		return array("codigo_tema"=>($recordset["codigo_tema"]),"tipoa_tema"=>$recordset["tipoa_tema"],"publicado"=>$publicado,"nacessos"=>($recordset["nacessos"]),"tid"=>($recordset["codigo_tema"]),"nome"=>$this->converte($recordset["nome_tema"]),"link"=>$link,"download"=>$down,"ogc"=>$ogc,"kmz"=>$kmz);
 	}
+	function formataTemas($ids,$publicado="SIM")
+	{
+	    $recordsets = $this->pegaTemas($ids);
+	    $retorno = array();
+	    foreach ($recordsets as $recordset){
+    	    $down = "sim";
+    	    $ogc = "sim";
+    	    $link = " ";
+    	    $kmz = "nao";
+    	    if (strtolower($recordset["download_tema"]) == "nao")
+    	    {
+    	        $down = "nao";
+    	    }
+    	    if (strtolower($recordset["ogc_tema"]) == "nao")
+    	    {
+    	        $ogc = "nao";
+    	    }
+    	    if(strtolower($recordset["tipoa_tema"]) == "wms")
+    	    {
+    	        $down = "nao";
+    	        $ogc = "nao";
+    	    }
+    	    if ($recordset["link_tema"] != "")
+    	    {
+    	        $link = $recordset["link_tema"];
+    	    }
+    	    if (strtolower($recordset["kmz_tema"]) == "sim")
+    	    {
+    	        $kmz = "sim";
+    	    }
+    	    //codigo_tema para fins de compatibilidade
+    	    $retorno[] = array(
+    	        "codigo_tema"=>($recordset["codigo_tema"]),
+    	        "tipoa_tema"=>$recordset["tipoa_tema"],
+    	        "publicado"=>$publicado,
+    	        "nacessos"=>($recordset["nacessos"]),
+    	        "tid"=>($recordset["codigo_tema"]),
+    	        "nome"=>$this->converte($recordset["nome_tema"]),
+    	        "link"=>$link,
+    	        "download"=>$down,
+    	        "ogc"=>$ogc,
+    	        "kmz"=>$kmz
+    	    );
+	    }
+	    return $retorno;
+	}
 	/*
 	Function: execSQL
 
@@ -1069,22 +1095,18 @@ class Arvore
 		}
 		return true;
 	}
-	/**
-	 *
-	 * TODO Verificar ao fechar versao - verificar a acentuacao das palavras nessa funcao
-	 */
 	function removeAcentos($s)
 	{
-		$s = ereg_replace("[&aacute;à&acirc;&atilde;]","a",$s);
-		$s = ereg_replace("[&Aacute;À&Acirc;&Atilde;]","A",$s);
-		$s = ereg_replace("[&eacute;è&ecirc;]","e",$s);
+		$s = ereg_replace("[&aacute;Ã¢&acirc;&atilde;]","a",$s);
+		$s = ereg_replace("[&Aacute;Ã‚&Acirc;&Atilde;]","A",$s);
+		$s = ereg_replace("[&eacute;Ã¡&ecirc;]","e",$s);
 		$s = ereg_replace("[&iacute;]","i",$s);
 		$s = ereg_replace("[&Iacute;]","I",$s);
-		$s = ereg_replace("[&Eacute;È&Ecirc;]","E",$s);
-		$s = ereg_replace("[óò&ocirc;&otilde;]","o",$s);
-		$s = ereg_replace("[ÓÒ&Ocirc;&Otilde;]","O",$s);
-		$s = ereg_replace("[&uacute;ùû]","u",$s);
-		$s = ereg_replace("[&Uacute;ÙÛ]","U",$s);
+		$s = ereg_replace("[&Eacute;Ã‰&Ecirc;]","E",$s);
+		$s = ereg_replace("[Ã´Ãµ&ocirc;&otilde;]","o",$s);
+		$s = ereg_replace("[Ã”Ã•&Ocirc;&Otilde;]","O",$s);
+		$s = ereg_replace("[&uacute;Ãº]","u",$s);
+		$s = ereg_replace("[&Uacute;Ãš]","U",$s);
 		$s = str_replace("&ccedil;","c",$s);
 		$s = str_replace("&Ccedil;","C",$s);
 		//$str = htmlentities($s);

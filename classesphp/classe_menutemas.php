@@ -106,16 +106,12 @@ Parametros:
 return:
 array
 */
-	function pegaListaDeMenus($filtraOgc="nao",$filtraDown="nao")
+	function pegaListaDeMenus($filtraOgc="nao",$filtraDown="nao",$idmenu="")
 	{
 		$resultado = array();
-		//necess&aacute;rio por conta da inclusao do conexao.php
-		$locaplic = $this->locaplic;
-		if(!isset($this->locaplic))
-		{return "locaplic nao foi definido";}
 		include_once($this->locaplic."/classesphp/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma);
-		$resultado = $arvore->pegaListaDeMenus($this->perfil,$filtraOgc,$filtraDown);
+		$resultado = $arvore->pegaListaDeMenus($this->perfil,$filtraOgc,$filtraDown,$idmenu);
 		$final = array();
 		//pega os temas na raiz
 		foreach($resultado as $r){
@@ -149,12 +145,7 @@ array
 */
 	function pegaListaDeGrupos($idmenu="",$listasistemas="sim",$listasgrupos="sim",$ordenaNome="nao",$filtraOgc="nao",$filtraDown="nao")
 	{
-		$locaplic = $this->locaplic;
-		if($listasgrupos == "sim")
-		{$tipo = "";}
-		else
-		{$tipo = "gruposeraiz";}
-		$tempm = $this->pegaListaDeMenus($filtraOgc,$filtraDown);
+	    $tempm = $this->pegaListaDeMenus($filtraOgc,$filtraDown,$idmenu);
 		include_once(dirname(__FILE__)."/../classesphp/classe_arvore.php");
 		$arvore = new Arvore($this->locaplic,$this->idioma,$this->filtro);
 		foreach($tempm as $menu)
