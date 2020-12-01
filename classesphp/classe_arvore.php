@@ -759,7 +759,6 @@ class Arvore
 		$temasraiz = array();
 		$formatar = [];
 		foreach($dados["raiz"] as $temar){
-			//$temasraiz[] = $this->formataTema($temar["id_tema"]);
 		    $formatar[] = $temar["id_tema"];
 		}
 		$temasraiz = $this->formataTemas($formatar);
@@ -779,7 +778,6 @@ class Arvore
 				$formatar = [];
 				foreach($raizgrupos as $tema){
 					if($tema["id_nivel"] == $grupo["id_n1"]){
-						//$temas[] = $this->formataTema($tema["id_tema"]);
 					    $formatar[] = $tema["id_tema"];
 					}
 				}
@@ -855,12 +853,13 @@ class Arvore
 	function formataSubgruposGrupo ($id_menu,$id_n1,$perfil)
 	{
 		$dados = $this->pegaSubgruposGrupo($id_menu,$id_n1);
-		//$resultado = array();
-		$temasraiz = array();
+		$formatar = [];
 		foreach($dados["raiz"] as $temar)
 		{
-			$temasraiz[] = $this->formataTema($temar["id_tema"]);
+		    $formatar[] = $temar["id_tema"];
 		}
+		$temasraiz = $this->formataTemas($formatar);
+		
 		$subgrupos = array();
 		foreach($dados["subgrupos"] as $sgrupo)
 		{
@@ -911,16 +910,17 @@ class Arvore
 	function formataTemasSubgrupo($id_n2,$perfil)
 	{
 		$dados = $this->pegaTemasSubGrupo($id_n2);
-		$temas = array();
+		$formatar = [];
 		foreach($dados as $tema)
 		{
 			$a = $tema["n3_perfil"];
 			$a = str_replace(" ",",",$a);
 			if($this->verificaOcorrencia($perfil,explode(",",$a)))
 			{
-				$temas[] = $this->formataTema($tema["id_tema"],$tema["publicado"]);
+			    $formatar[] = $tema["id_tema"];
 			}
 		}
+		$temas = $this->formataTemas($formatar);
 		return $temas;
 	}
 	/*

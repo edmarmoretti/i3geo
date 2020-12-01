@@ -177,8 +177,6 @@ array
 */
 	function pegaListaDeSubGrupos($codgrupo,$idmenu="")
 	{
-		$locaplic=$this->locaplic;
-		$tipo = "subgrupos";
 		foreach($this->pegaListaDeMenus() as $menu)
 		{
 			if($menu["idmenu"] == $idmenu || $idmenu == "")
@@ -190,7 +188,6 @@ array
 				return($subGrupos);
 			}
 		}
-		$conta = 0;
 		$subgrupos[] = array();
 		return (array("subgrupo"=>$subgrupos,"temasgrupo"=>$temas));
 	}
