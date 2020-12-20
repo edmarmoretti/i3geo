@@ -361,7 +361,6 @@ $locaplic_ = $locaplic;
 $R_path_ = $R_path;
 $mapext_ = $mapext;
 
-$debug_ = @$debug;
 $ler_extensoes_ = $ler_extensoes;
 $postgis_mapa_ = $postgis_mapa;
 $tituloInstituicao_ = $tituloInstituicao;
@@ -442,7 +441,6 @@ $_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
 $_SESSION["R_path"] = $R_path_;
 $_SESSION["mapext"] = $mapext_;
-$_SESSION["debug"] = $debug_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
 $_SESSION["perfil"] = $perfil_;
