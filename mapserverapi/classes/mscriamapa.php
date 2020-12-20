@@ -156,7 +156,6 @@ class Mscriamapa
         $_SESSION["navegadoresLocais"] = $navegadoresLocais;
         $_SESSION["utilizacgi"] = $utilizacgi;
         $_SESSION["tituloInstituicao"] = $tituloInstituicao;
-        $_SESSION["expoeMapfile"] = $expoeMapfile;
         $_SESSION["googleApiKey"] = $googleApiKey;
         $_SESSION["mensagemInicia"] = $mensagemInicia;
         $_SESSION["interfacePadrao"] = $interfacePadrao;

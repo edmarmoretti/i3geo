@@ -649,17 +649,6 @@ Tipo:
 */
 $utilizacgi = "nao";
 /*
-Variable: expoeMapfile (depreciado)
-
-Essa vari&aacute;vel controla se o nome do mapfile atual ser&aacute; ou n&atilde;o retornado para a aplica&ccedil;&atilde;o via ajax.
-
-Quando essa vari&aacute;vel for definida como "nao" algumas das funcionalidades do i3geo poder&atilde;o ficar prejudicadas, mas sem comprometimento das fun&ccedil;&otilde;es principais.
-
-Tipo:
-{string}
-*/
-$expoeMapfile = "sim";
-/*
 Variable: conexaoadmin
 
 Arquivo PHP que define a string de conexao (PDO) com o banco de dados administrativo.
