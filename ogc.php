@@ -11,7 +11,7 @@ tema ou temas - (opcional) nome do tema que ser&aacute; mostrado no servi&ccedil
 
 legenda - (opcional) mostra a legenda no corpo do mapa sim|nao
 
-	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
+	Ao ativar a legenda dentro do mapa, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
 
 		legenda_imagecolor - cor RGB do fundo da legenda. Quando especificado,  o mapa deixa de ser transparente. Exemplo: &legenda_imagecolor=255,0,0
 
@@ -36,11 +36,11 @@ onde o i3Geo esta instalado e deve usar a extensao .htm. Sobre templates, veja a
 
 escala - (opcional) mostra a barra de escala no corpo do mapa sim|nao
 
-	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as características:
+	Ao ativar a barra dentro do mapa, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
 
 		escala_color - cor RGB dos trechos principais da barra. Exemplo: &escala_color=255,0,0
 
-		escala_backgroundcolor - cor dos trechos secundários
+		escala_backgroundcolor - cor dos trechos secundï¿½rios
 
 		escala_outlinecolor - cor do contorno
 
@@ -64,7 +64,7 @@ grade - (opcional) mostra a grade de coordenadas no corpo do mapa sim|nao
 
 	Obs.: a grade utiliza como template o mapfile temas/gridg.map
 
-	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as características:
+	Ao ativar a grade, os seguintes parametros podem ser utilizados para controlar as caracterï¿½sticas:
 
 		grade_labelformat - formato dos textos indicativos das coordenadas da grade DD|DDMM|DDMMSS|C format string (mais detalhes em http://mapserver.org/mapfile/grid.html#grid )
 
@@ -316,7 +316,7 @@ if(strtolower($OUTPUTFORMAT) == "shape-zip" && $ogrOutput == false){
 	exit;
 }
 //
-//caso seja uma requisição WMS com format
+//caso seja uma requisiï¿½ï¿½o WMS com format
 //
 $format = $_GET["format"];
 if(strpos(strtolower($format),"kml") !== false){
@@ -620,9 +620,6 @@ else{
 									}
 								}
 							}
-
-							autoClasses($l,$oMap);
-
 							if($versao > 5){
 								$pr = $l->getProcessing();
 								if(!in_array("LABEL_NO_CLIP=True",$pr)){

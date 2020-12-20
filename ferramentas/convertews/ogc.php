@@ -124,7 +124,7 @@ if(strtolower($OUTPUTFORMAT) == "shape-zip" && $ogrOutput == false){
 	exit;
 }
 //
-//caso seja uma requisição WMS com format
+//caso seja uma requisiï¿½ï¿½o WMS com format
 //
 $format = $_GET["format"];
 if(strpos(strtolower($format),"kml") !== false){
@@ -408,8 +408,6 @@ substituiConObj($oMap,$postgis_mapa);
 									}
 								}
 							}
-
-							autoClasses($l,$oMap);
 
 							if($versao > 5){
 								$pr = $l->getProcessing();

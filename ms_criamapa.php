@@ -630,7 +630,7 @@ if (isset($parurl["largura"]) && isset($parurl["altura"])) {
 }
 
 $tmpfname = str_replace(".map", "", $tmpfname) . ".map";
-$salvo = $mapn->save($tmpfname);
+$mapn->save($tmpfname);
 
 $_SESSION["imgurl"] = strtolower($protocolo[0]) . "://" . $_SERVER['HTTP_HOST'] . $atual . $diretorios[2] . "/";
 $_SESSION["tmpurl"] = strtolower($protocolo[0]) . "://" . $_SERVER['HTTP_HOST'] . $atual;
@@ -725,7 +725,6 @@ function abreInterface($interface, $caminho)
     if(empty($customDir)){
         $customDir = "interface";
     }
-    $nomeInterface = explode(".", basename($interface));
     if (count(explode(".xphp", $interface)) > 1) {
         if (file_exists($caminho . $customDir . "/" . $interface)) {
             include_once ($caminho . $customDir . "/" . $interface);
@@ -881,7 +880,6 @@ function incluiTemasIniciais()
         }
     }
 
-    $existeraster = false;
     foreach ($alayers as $arqt) {
         $arqtemp = "";
         $arqt = trim($arqt);
@@ -912,16 +910,12 @@ function incluiTemasIniciais()
                 for ($i = 0; $i < ($maptemp->numlayers); ++ $i) {
                     // error_reporting(0);
                     $layern = $maptemp->getLayer($i);
-                    if ($layern->type == MS_LAYER_RASTER) {
-                        $existeraster = true;
-                    }
                     if ($layern->name == "estadosl") {
                         $layern->set("data", $locaplic . "/aplicmap/dados/estados.shp");
                     }
                     $layern->setmetadata("nomeoriginal", $layern->name);
                     $nNome = str_replace(".map", "", basename($arqtemp));
                     $layern->setmetadata("arquivotemaoriginal", $nNome);
-                    autoClasses($layern, $mapn);
                     //
                     // necess&aacute;rio para n&atilde;o alterar a extens&atilde;o do mapa por esse par&acirc;metro
                     //

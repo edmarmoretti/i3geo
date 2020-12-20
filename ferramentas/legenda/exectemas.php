@@ -5,43 +5,6 @@ $retorno = "";
 include_once (dirname(__FILE__) . "/../../classesphp/classe_temas.php");
 $m = new Temas($_SESSION["map_file"], $_GET["tema"]);
 switch (strtoupper($_GET["funcao"])) {
-    case "SALVAPARAMETROSAUTO":
-        $map = ms_newMapObj($_SESSION["map_file"]);
-        $layer = $map->getlayerbyname($_GET["tema"]);
-        $layer->setmetadata("classesitem", $_GET["classesitem"]);
-        $layer->setmetadata("classesnome", $_GET["classesnome"]);
-        $layer->setmetadata("classescor", $_GET["classescor"]);
-        $layer->setmetadata("classessimbolo", $_GET["classessimbolo"]);
-        $layer->setmetadata("classestamanho", $_GET["classestamanho"]);
-        $layer->setmetadata("palletefile", $_GET["palletefile"]);
-        $layer->setmetadata("palletestep", $_GET["palletestep"]);
-        $layer->setmetadata("cache", "nao");
-        $layer->setmetadata("TILES", "nao");
-        autoClasses($layer, $map, $_SESSION["locaplic"]);
-        $layer->setmetadata("classesnome", "");
-        $layer->setmetadata("palletefile", "");
-        $map->save($_SESSION["map_file"]);
-        $retorno = true;
-        break;
-    case "PARAMETROSAUTO":
-        $map = ms_newMapObj($_SESSION["map_file"]);
-        $layer = $map->getlayerbyname($_GET["tema"]);
-        $retorno = array();
-        $retorno["classesitem"] = $layer->getmetadata("classesitem");
-        $retorno["classesnome"] = $layer->getmetadata("classesnome");
-        $retorno["classescor"] = $layer->getmetadata("classescor");
-        $retorno["classessimbolo"] = $layer->getmetadata("classessimbolo");
-        $retorno["classestamanho"] = $layer->getmetadata("classestamanho");
-        $retorno["palletefile"] = $layer->getmetadata("palletefile");
-        $retorno["palletestep"] = $layer->getmetadata("palletestep");
-        $sopen = $layer->open();
-        if ($sopen != MS_FAILURE) {
-            $items = $layer->getItems();
-        } else {
-            $items = array();
-        }
-        $retorno["colunas"] = implode(",", $items);
-        break;
     case "APLICARCLUSTER":
         $retorno = $m->criaCluster($_GET["group"], $_GET["filter"], $_GET["maxdistance"], $_GET["region"], $_GET["buffer"]);
         $m->salva();

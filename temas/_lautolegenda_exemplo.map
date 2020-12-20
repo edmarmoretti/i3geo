@@ -11,14 +11,11 @@
       "ltempoitemtip"	""
       "permitekmz"	"nao"
       "ITENSDESC"	"Nome"
-      "CLASSESNOME"	"CD_LEGENDA"
       "permitedownload"	"sim"
-      "CLASSESITEM"	"ID"
-      "CLASSESCOR"	"COR"
       "ITENS"	"CD_LEGENDA"
       "permiteogc"	"sim"
       "permitekml"	"sim"
-      "TEMA"	"_Teste de geração automática de classes em dados vetoriais"
+      "TEMA"	"_Teste de geraï¿½ï¿½o automï¿½tica de classes em dados vetoriais"
     END # METADATA
     NAME "_lautolegenda_exemplo"
     STATUS OFF

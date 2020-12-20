@@ -815,7 +815,6 @@ function removeCabecalhoMapfile($arq,$symbolset=true){
 	$final = array_merge($cabeca,$final);
 	$handle = fopen($arq, "w+");
 	if($handle !== false){
-		//$testar = array("LEGENDAWMS","LEGENDAIMG","KEYIMAGE","TILEINDEX","TILEITEM","SYMBOL","LABELITEM","FILTERITEM","GROUP","ENCODING","TIP","CLASSE","ITENSDESC","CLASSESNOME","ITENSLINK","ESCALA","CLASSESSIMBOLO","MENSAGEM","EXTENSAO","CLASSESITEM","ESCONDIDO","CLASSESCOR","DOWNLOAD","CLASSESTAMANHO","ITENS","TEMA","APLICAEXTENSAO","IDENTIFICA","TRANSITIONEFFECT");
 	    $testar = array(
 	        "TEMPORIZADOR",
 	        "PALLETESTEP",
@@ -865,17 +864,12 @@ function removeCabecalhoMapfile($arq,$symbolset=true){
 	        "TIP",
 	        "CLASSE",
 	        "ITENSDESC",
-	        "CLASSESNOME",
 	        "ITENSLINK",
 	        "ESCALA",
-	        "CLASSESSIMBOLO",
 	        "MENSAGEM",
 	        "EXTENSAO",
-	        "CLASSESITEM",
 	        "ESCONDIDO",
-	        "CLASSESCOR",
 	        "DOWNLOAD",
-	        "CLASSESTAMANHO",
 	        "ITENS",
 	        "TEMA",
 	        "APLICAEXTENSAO",

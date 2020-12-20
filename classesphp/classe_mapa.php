@@ -1060,7 +1060,6 @@ class Mapa
                     if ($nlayer->getmetadata("classe") == "") {
                         $nlayer->setmetadata("classe", "");
                     }
-                    autoClasses($nlayer, $this->mapa);
                     $nlayer->set("status", MS_DEFAULT);
                     $nNome = str_replace(".map", "", basename($nomemap));
                     $nlayer->setmetadata("arquivotemaoriginal", $nNome);

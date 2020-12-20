@@ -883,46 +883,6 @@ i3GEOF.legenda.dicionario =
    				es : "Color que se considerar&aacute; como NODATA y transparente en el caso de capas de tipo imagen (RGB separado por comas)"
    			}
    		],
-   	    'autoClasses' : [ {
-   			pt : "A gera&ccedil;&atilde;o de classes pode ser feita automaticamente por meio da defini&ccedil;&atilde;o de colunas, existentes na tabela de atributos do tema, e que armazenem as informa&ccedil;&otilde;es sobre cor, tamanho, etc.",
-   			en : "Class generation can be done automatically by defining columns of the attribute table that store information about color, size, etc.",
-   			es : "La generaci&oacute;n de clases se puede realizar autom&aacute;ticamente mediante la definici&oacute;n de columnas existentes en la tabla de atributos del tema que almacenan informaci&oacute;n sobre el color, tama&ntilde;o, etc."
-   		} ],
-   		'classesitem' : [ {
-   			pt : "Qual a coluna da tabela que identifica unicamente cada classe. Para cada valor ser&aacute; criada uma classe. O tema que utiliza a gera&ccedil;&atilde;o de classes de forma autom&aacute;tica, deve ter definido apenas uma classe. Essa classe ser&aacute; utilizada como padr&atilde;o para gera&ccedil;&atilde;o das demais.",
-   			en : "Which is the column of the table that uniquely identifies each class? For each value a class will be created. The theme that will be used to generate classes automatically must have only one class. This class will be used as a template for the other classes.",
-   			es : "&iquest;Cu&aacute;l es la columna de la tabla que identifica exclusivamente a cada clase? Para cada valor se crear&aacute; una clase. En el tema que se utilizar&aacute; para la generaci&oacute;n autom&aacute;tica de las clases debe estar definida solo una clase. Esta clase se utilizar&aacute; como patr&oacute;n para la generaci&oacute;n de las dem&aacute;s."
-   		} ],
-   	    'classesnome' : [ {
-   			pt : "Nome da coluna que ser&aacute; utilizada para compor o nome das classes geradas automaticamente.",
-   			en : "Column names that will be used to name classes generated automatically.",
-   			es : "Nombre de la columna que se utilizar&aacute; para poner el nombre de las clases generadas autom&aacute;ticamente."
-   		} ],
-   	    'classescor' : [ {
-   			pt : "Nome da coluna que definir&aacute; a cor do s&iacute;mbolo utilizado em cada classe. As cores devem ser definidas em RGB.",
-   			en : "Column name that will define the symbol color used in each class. Colors must be set in RGB.",
-   			es : "Nombre de columna que definir&aacute; el color del s&iacute;mbolo utilizado en cada clase. Los colores se deben definir en RGB."
-   		} ],
-   	    'classessimbolo' : [ {
-   			pt : "Nome da coluna que definir&aacute; o s&iacute;mbolo utilizado em cada classe.",
-   			en : "Column name that will define the symbol used in each class.",
-   			es : "Nombre de la columna que definir&aacute; el s&iacute;mbolo utilizado en cada clase."
-   		} ],
-   	    'classestamanho' : [ {
-   			pt : "Nome da coluna que definir&aacute; o tamanho de cada s&iacute;mbolo.",
-   			en : "Column name that will define the size of each symbol.",
-   			es : "Nombre de la columna que definir&aacute; el tama&ntilde;o de cada s&iacute;mbolo."
-   		} ],
-   	    'palletefile' : [ {
-   			pt : "Palete de cores. Endere&ccedil;o do arquivo no servidor (opcional)",
-   			en : "Color palette. File address on the server (optional)",
-   			es : "Paleta de colores. Direcci&oacute;n del archivo en el servidor (opcional)"
-   		} ],
-   	    'palletestep' : [ {
-   			pt : "Quantas cores em cada n&iacute;vel da palete (opcional)",
-   			en : "How many colors on each palette level? (optional)",
-   			es : "&iquest;Cu&aacute;ntos colores en cada nivel de la paleta? (opcional)"
-   		} ],
    		"colunasTxt" : [ {
    			pt : "Colunas dispon&iacute;veis",
    			en : "Available columns",

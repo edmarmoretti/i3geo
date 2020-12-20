@@ -146,7 +146,6 @@ else{
 			}
 		}
 	}
-	autoClasses($l,$oMap);
 	if($versao > 5){
 		$pr = $l->getProcessing();
 		if(!in_array("LABEL_NO_CLIP=True",$pr)){

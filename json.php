@@ -121,7 +121,6 @@ if (!empty($postgis_mapa)){
         }
     }
 }
-autoClasses($l,$oMap);
 ms_newLayerObj($oMap, $l);
 
 $oMap->save($nomeMapfileTmp);

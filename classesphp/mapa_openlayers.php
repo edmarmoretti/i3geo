@@ -214,12 +214,6 @@ for ($i = 0; $i < $numlayers; ++ $i) {
         }
     }
     if ($layerName == $_GET["layer"] || $l->group == $_GET["layer"] && $l->group != "") {
-        if ($l->getmetadata("classesnome") != "" || $l->getmetadata("palletefile") != "") {
-            if (! function_exists("autoClasses")) {
-                include_once ("funcoes_gerais.php");
-            }
-            autoClasses($l, $mapa);
-        }
         //
         // numero de pixels que serao considerados para corte da imagem no caso de cache ativo e tema de pontos
         //
@@ -590,45 +584,6 @@ function nomeRand($n = 10)
         $nomes .= $a{mt_rand(0, $max)};
     }
     return $nomes;
-}
-
-function filtraImg($nomer, $tipoimagem)
-{
-    include_once ("classe_imagem.php");
-    $tiposImagem = explode(" ", $tipoimagem);
-    foreach ($tiposImagem as $tipoimagem) {
-        $m = new Imagem($nomer);
-        if ($tipoimagem == "cinza") {
-            imagepng($m->cinzaNormal(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "sepiaclara") {
-            imagepng($m->sepiaClara(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "sepianormal") {
-            imagepng($m->sepiaNormal(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "negativo") {
-            imagepng($m->negativo(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "detectaBordas") {
-            imagepng($m->detectaBordas(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "embassa") {
-            imagepng($m->embassa(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "gaussian_blur") {
-            imagepng($m->gaussian_blur(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "selective_blur") {
-            imagepng($m->selective_blur(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "mean_removal") {
-            imagepng($m->mean_removal(), str_replace("\\", "/", $nomer));
-        }
-        if ($tipoimagem == "pixelate") {
-            imagepng($m->pixelate(), str_replace("\\", "/", $nomer));
-        }
-    }
 }
 
 function inicializa()
