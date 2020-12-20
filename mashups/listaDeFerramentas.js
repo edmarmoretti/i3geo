@@ -348,11 +348,6 @@ i3GEO.listaDeFerramentas = {
 										url : "javascript:i3GEO.mapa.dialogo.imprimir()"
 									},
 									{
-										id : "omenudataTipoImg",
-										text : $trad("p2"),
-										url : "javascript:i3GEO.mapa.dialogo.tipoimagem()"
-									},
-									{
 										id : "omenudataCorFundo",
 										text : $trad("p9"),
 										url : "javascript:i3GEO.mapa.dialogo.corFundo()"

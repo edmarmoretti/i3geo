@@ -4,7 +4,7 @@ exit;
  * Utilize proxy.php para acessar URLs por intermedio do servidor, via CURL
  * Voce pode usar o parametro proxy?url=
  * ou entao, enviar a URL e seus parametros apos o sinal "?"
- * http://localhost/i3geo/classesphp/proxy.php?http://localhost/i3geo/classesphp/mapa_openlayers.php?g_sid=e7oi2d2645gt712e4cjmt93pf5&TIPOIMAGEM=nenhum&DESLIGACACHE=sim&layer=mundo&REQUEST=getfeature&service=wfs&version=1.0.0&OUTPUTFORMAT=gml2
+ * http://localhost/i3geo/classesphp/proxy.php?http://localhost/i3geo/classesphp/mapa_openlayers.php?g_sid=e7oi2d2645gt712e4cjmt93pf5&DESLIGACACHE=sim&layer=mundo&REQUEST=getfeature&service=wfs&version=1.0.0&OUTPUTFORMAT=gml2
  *
  * Para controlar o retorno dos dados, utilize o arametro &tipoRetornoProxy, que pode ter os seguintes valores:
  * (se nao for definido retorna no formato nativo)

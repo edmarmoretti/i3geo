@@ -1032,7 +1032,6 @@ i3GEO.Interface =
                 projectionExtent = ol.proj.get('EPSG:4326').getExtent();
             }
             url += "g_sid=" + i3GEO.configura.sid;
-            url += "&TIPOIMAGEM=" + configura.tipoimagem;
 
             size = ol.extent.getWidth(projectionExtent) / 256;
             resolutions = new Array(40);

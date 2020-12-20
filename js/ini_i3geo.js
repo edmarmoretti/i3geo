@@ -245,9 +245,6 @@ var i3GEO = {
         configMapa : function(c){
             i3GEO.configura.guardaExtensao = (c.hasOwnProperty("saveExtension") && c.saveExtension == true) ? true:false;
             i3GEO.Interface.LAYERPROGRESSBAR = (c.hasOwnProperty("layerProgressBar") && c.layerProgressBar == true) ? true:false;
-            //TODO implementar composite para versao 7 do Mapserver
-            i3GEO.configura.tipoimagem = (c.hasOwnProperty("posRenderType") && c.posRenderType != "") ? c.posRenderType:"nenhum";
-
             i3GEO.configura.locaplic = (c.hasOwnProperty("i3GeoServer") && c.i3GeoServer != "") ? c.i3GeoServer:i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo";
             //
             if(c.hasOwnProperty("tools")){

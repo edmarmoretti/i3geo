@@ -110,7 +110,7 @@ include ($configInc["inc"] . "/css.php");
             //parametros aplicados na criacao do arquivo mapfile
             var parametrosMapa = {
                 //arquivo mapfile que servira de base para a criacao do mapa. Por default, sao utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
-                //Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Voce pode utilizar essa opcao para abrir um mapa com as camadas que voce quiser, mas para evitar redundâncias, prefira o uso de &temasa
+                //Essa variavel pode ser definida em ms_configura tambem. Se nao estiver definida em nenhum lugar, o i3Geo tentara descobrir o arquivo adequado a ser utilizado. Voce pode utilizar essa opcao para abrir um mapa com as camadas que voce quiser, mas para evitar redundï¿½ncias, prefira o uso de &temasa
                 mapfilebase : "",
                 //extensao geografica do mapa
                 //deve ser definida em coordenadas no formato decimos de grau e na projecao geografica na sequencia xmin ymin xmax ymax
@@ -207,8 +207,6 @@ include ($configInc["inc"] . "/css.php");
 
                 //armazena em um cookie a ultima extensao geografica do mapa e utiliza essa extensao quando o mapa for aberto
                 saveExtension : false,
-                //aplica um filtro de cores apos a renderizacao da imagem de cada camada que compoe o mapa cinza|sepiaclara|sepianormal
-                posRenderType : "",
                 //Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
                 //Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
                 //Para facilitar as coisas, i3GeoUrl e definida em interface/config.php

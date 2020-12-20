@@ -302,7 +302,7 @@ As seguintes ferramentas podem ser bloqueadas apenas impedindo-se a carga do jav
 
 animacao,atalhosedicao,atalhosmapa,busca,buscainde
 buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,inseregrafico
-inseretxt,mostraexten,outputformat,perfil,tipoimagem
+inseretxt,mostraexten,outputformat,perfil
 
 */
 $i3geoBlFerramentas = array();

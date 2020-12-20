@@ -108,7 +108,7 @@ i3GEO.php =
 	localizaIP : function(funcao) {
 	    console.error("Removido na versao 8");
 	},
-	mudaext : function(funcao, tipoimagem, ext, locaplic, sid, atualiza, geo) {
+	mudaext : function() {
 	    console.error("Veja i3GEO.Interface.zoom2ext()");
 	},
 	mudaescala : function(funcao, escala) {
@@ -189,7 +189,7 @@ i3GEO.php =
 	openlayers : function(funcao) {
 	    console.error("Removido na versao 8");
 	},
-	corpo : function(funcao, tipoimagem) {
+	corpo : function() {
 	    console.error("Veja i3GEO.mapa.refresh()");
 	},
 	converte2googlemaps : function(funcao) {

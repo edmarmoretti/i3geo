@@ -43,13 +43,13 @@ i3GEOF.mostraexten = {
 	    y = i3GEO.calculo.dms2dd($i("i3GEOmostraextenyg").value,$i("i3GEOmostraextenym").value,$i("i3GEOmostraextenys").value),
 	    yy = i3GEO.calculo.dms2dd($i("i3GEOmostraextenyyg").value,$i("i3GEOmostraextenyym").value,$i("i3GEOmostraextenyys").value);
 	    if ((x == xx) || (y == yy)){
-		i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.parametros.tipoimagem,$i("i3GEOmostraextenatual").value);
+		i3GEO.navega.zoomExt(i3GEO.configura.locaplic,$i("i3GEOmostraextenatual").value);
 		return;
 	    }
 	    if ((x > xx) || (y > yy)){
-		i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.parametros.tipoimagem,$i("i3GEOmostraextenatual").value);
+		i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,$i("i3GEOmostraextenatual").value);
 		return;
 	    }
-	    i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,i3GEO.parametros.tipoimagem,(x+" "+y+" "+xx+" "+yy));
+	    i3GEO.navega.zoomExt(i3GEO.configura.locaplic,i3GEO.configura.sid,(x+" "+y+" "+xx+" "+yy));
 	}
 };

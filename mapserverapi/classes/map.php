@@ -148,7 +148,6 @@ class Map
         $res["mapfile"] = "";
         $res["cgi"] = ""; // $locmapserv;
         $res["extentTotal"] = $ext;
-        $res["mapimagem"] = ""; // $nomer;
         $res["geoip"] = "nao";
         $res["listavisual"] = "";
         $res["utilizacgi"] = "nao"; // $utilizacgi;

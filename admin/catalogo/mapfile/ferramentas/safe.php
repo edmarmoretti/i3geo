@@ -71,10 +71,7 @@ if(!substituiCon($map_file,$postgis_mapa)){
 //
 function redesenhaMapa()
 {
-    global $locaplic,$map_file,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
-	//substituiCon($map_file,$postgis_mapa);
-	if($tipoimagem != "nenhum" && $tipoimagem != "")
-	{$utilizacgi = "nao";}
+    global $locaplic,$map_file,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
 	if (connection_aborted()){exit();}
 	include_once($locaplic."/classesphp/classe_mapa.php");
 	$m = New Mapa($map_file);
@@ -84,13 +81,11 @@ function redesenhaMapa()
 	//
 	$e = $m->mapa->extent;
 	$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
-	$res["mapimagem"] = "";
 	$res["mapexten"] = $ext;
 	$res["mapres"] = "";
 	$res["erro"] = "";
 	$res["mapscale"] = "";
 	$res["pixelsize"] = "";
-	$res["mapimagem"] = "";
 	$res["w"] = $m->mapa->width;
 	$res["h"] = $m->mapa->height;
 	$res["mappath"] = "";

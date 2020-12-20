@@ -24,9 +24,6 @@
  *
  * DESLIGACACHE {sim|nao} - for&ccedil;a a n&atilde;o usar o cache de imagens qd definido como "sim", do contr&aacute;rio, o uso ou n&atilde;o do cache ser&aacute; definido automaticamente
  *
- * TIPOIMAGEM {cinza|sepiaclara|sepianormal|negativo|detectaBordas|embassa|gaussian_blur|selective_blur|mean_removal|pixelate
- * } - filtro de imagem que ser&aacute; aplicado na imagem
- *
  *
  * Licenca:
  *
@@ -55,7 +52,7 @@
  * i3geo/classesphp/mapa_googlemaps.php
  *
  */
-//include ("sani_request.php");
+// include ("sani_request.php");
 // para efeitos de compatibilidade
 if (! function_exists('ms_GetVersion')) {
     include_once ("carrega_ext.php");
@@ -86,7 +83,7 @@ if (@$_SESSION["fingerprint"]) {
 if (! isset($_SESSION["map_file"])) {
     exit();
 }
-if(!isset($_GET["cacheprefixo"])){
+if (! isset($_GET["cacheprefixo"])) {
     $_GET["cacheprefixo"] = "";
 }
 $map_fileX = $_SESSION["map_file"];
@@ -142,7 +139,7 @@ if ($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "get
     $_GET["mapext"] = str_replace(",", " ", $_GET["BBOX"]);
 }
 // por seguranca
-//include_once ("funcoes_gerais.php");
+// include_once ("funcoes_gerais.php");
 
 $mapa = ms_newMapObj($map_fileX);
 $mapa->setProjection("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m");
@@ -158,10 +155,10 @@ for ($i = 0; $i < $numlayers; ++ $i) {
     $l = $mapa->getlayer($i);
     $layerName = $l->name;
     $l->set("status", MS_OFF);
-    //corrige um bug do mapserver que adiciona o shapepath
-    //de forma errada quando se usa tileindex
-    if($l->tileindex != ""){
-        $mapa->set("shapepath","");
+    // corrige um bug do mapserver que adiciona o shapepath
+    // de forma errada quando se usa tileindex
+    if ($l->tileindex != "") {
+        $mapa->set("shapepath", "");
     }
     // no caso de haver uma mascara definida no layer
     if ($l->mask != "") {
@@ -197,8 +194,8 @@ for ($i = 0; $i < $numlayers; ++ $i) {
         $l->set("maxscaledenom", $l->maxscaledenom * 100000);
         $l->set("minscaledenom", $l->minscaledenom * 100000);
         $l->set("symbolscaledenom", $l->symbolscaledenom * 100000);
-        //a opacidade e controlada pela aplicacao
-        //a renderiazacao e sempre com opacidade 1
+        // a opacidade e controlada pela aplicacao
+        // a renderiazacao e sempre com opacidade 1
         $l->updateFromString('LAYER COMPOSITE OPACITY 100 END END');
         if ($l->getmetadata("classesnome") != "" || $l->getmetadata("palletefile") != "") {
             if (! function_exists("autoClasses")) {
@@ -287,8 +284,6 @@ if ($_GET["layer"] == "") {
 
 if (($_GET == false) || ($qy) || (strtolower($_GET["DESLIGACACHE"]) == "sim")) {
     $cache = false;
-} elseif (trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum") {
-    $cache = false;
 }
 if ($_GET["WIDTH"] != 256) {
     $cache = false;
@@ -306,10 +301,6 @@ $legenda = $mapa->legend;
 $legenda->set("status", MS_OFF);
 $escala = $mapa->scalebar;
 $escala->set("status", MS_OFF);
-
-if (trim($_GET["TIPOIMAGEM"]) != "" && trim($_GET["TIPOIMAGEM"]) != "nenhum") {
-    $o->setOption("QUANTIZE_FORCE", "OFF");
-}
 
 //
 // se o layer foi marcado para corte altera os parametros para ampliar o mapa
@@ -329,16 +320,16 @@ if ($cortePixels > 0) {
 if ($qy != true) {
     $img = $mapa->draw();
 } else {
-    //$handle = fopen($qyfile, "r");
-    //$conteudo = fread($handle, filesize($qyfile));
-    //fclose($handle);
+    // $handle = fopen($qyfile, "r");
+    // $conteudo = fread($handle, filesize($qyfile));
+    // fclose($handle);
     $conteudo = file_get_contents($qyfile);
     $shp = unserialize($conteudo);
     $l = $mapa->getLayerByname($_GET["layer"]);
     $c = $mapa->querymap->color;
     $indxlayer = $l->index;
     if ($l->connectiontype != MS_POSTGIS) {
-        if($l->type == MS_LAYER_POINT){
+        if ($l->type == MS_LAYER_POINT) {
             $numclasses = $l->numclasses;
             if ($numclasses > 0) {
                 $classe0 = $l->getClass(0);
@@ -349,12 +340,12 @@ if ($qy != true) {
                     $classe->set("status", MS_DELETE);
                 }
             }
-            if($l->type == MS_LAYER_POINT){
-                $classe0->getstyle(0)->set("symbolname","ponto");
+            if ($l->type == MS_LAYER_POINT) {
+                $classe0->getstyle(0)->set("symbolname", "ponto");
             }
         }
         foreach ($shp as $indx) {
-            $mapa->querybyindex($indxlayer, -1, $indx, MS_TRUE);
+            $mapa->querybyindex($indxlayer, - 1, $indx, MS_TRUE);
         }
         $qm = $mapa->querymap;
         $qm->set("width", 256);
@@ -372,21 +363,21 @@ if ($qy != true) {
                 $classe->set("status", MS_DELETE);
             }
         }
-        if($l->type == MS_LAYER_POINT){
-            $classe0->getstyle(0)->set("symbolname","ponto");
+        if ($l->type == MS_LAYER_POINT) {
+            $classe0->getstyle(0)->set("symbolname", "ponto");
         }
         $cor = $classe0->getstyle(0)->color;
         $cor->setrgb($c->red, $c->green, $c->blue);
         $status = $l->open();
         $rect = $mapa->extent;
-        $rect->project($projOutObj,$projInObj);
+        $rect->project($projOutObj, $projInObj);
         $status = $l->whichShapes($rect);
         while ($shape = $l->nextShape()) {
-            //$shape->project($projInObj,$projOutObj);
-            if (in_array($shape->index, $shp)){
-                $shape->project($projInObj,$projOutObj);
-                //echo $shape->toWkt();exit;
-                //$shape = ms_shapeObjFromWkt($shape->toWkt());
+            // $shape->project($projInObj,$projOutObj);
+            if (in_array($shape->index, $shp)) {
+                $shape->project($projInObj, $projOutObj);
+                // echo $shape->toWkt();exit;
+                // $shape = ms_shapeObjFromWkt($shape->toWkt());
                 $shape->draw($mapa, $l, $img);
             }
         }
@@ -394,83 +385,60 @@ if ($qy != true) {
     }
     $cache = false;
 }
-//exit;
-if ($_GET["TIPOIMAGEM"] != "" && $_GET["TIPOIMAGEM"] != "nenhum") {
+if ($cache == true && $_GET["cache"] != "nao") {
+    // cache ativo. Salva a imagem em cache
+    $nomer = salvaCacheImagem($cachedir, $map_fileX, $_GET["tms"]);
+    cabecalhoImagem($nomer);
+    if ($_SESSION["i3georendermode"] == 2) {
+        header("X-Sendfile: $nomer");
+    } else {
+        readfile($nomer);
+    }
+} else {
+    // cache inativo
     if ($img->imagepath == "") {
-        echo "Erro IMAGEPATH vazio";
+        ilegal();
+    }
+    // se for necessario cortar a imagem, $img->saveImage() nao funciona
+    if ($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)) {
+        $nomer = ($img->imagepath) . "temp" . nomeRand() . ".png";
+        $img->saveImage($nomer);
+        //
+        // corta a imagem gerada para voltar ao tamanho normal
+        //
+        if ($cortePixels > 0) {
+            $img = cortaImagemDisco($nomer, $cortePixels, $_GET["WIDTH"]);
+        } else {
+            $img = imagecreatefrompng($nomer);
+            imagealphablending($img, false);
+            imagesavealpha($img, true);
+        }
+        cabecalhoImagem($nomer);
+        header("i3geocache: nao");
+        imagepng($img);
+        imagedestroy($img);
         exit();
     }
-    $nomer = ($img->imagepath) . "filtroimgtemp" . nomeRand() . ".png";
-    $img->saveImage($nomer);
-    //
-    // corta a imagem gerada para voltar ao tamanho normal
-    //
-    if ($cortePixels > 0) {
-        cortaImagemDisco($nomer, $cortePixels, 256);
+    if ($_SESSION["i3georendermode"] == 1) {
+        ob_clean();
+        header('Content-Type: image/png');
+        $img->saveImage();
     }
-    filtraImg($nomer, trim($_GET["TIPOIMAGEM"]));
-    $img = imagecreatefrompng($nomer);
-    imagealphablending($img, false);
-    imagesavealpha($img, true);
-    cabecalhoImagem($nomer);
-    imagepng($img);
-    //imagedestroy($img);
-} else {
-    if ($cache == true && $_GET["cache"] != "nao") {
-        // cache ativo. Salva a imagem em cache
-        $nomer = salvaCacheImagem($cachedir, $map_fileX, $_GET["tms"]);
+    if ($_SESSION["i3georendermode"] == 2) {
+        $nomer = ($img->imagepath) . "temp" . nomeRand() . ".png";
+        $img->saveImage($nomer);
+        //
+        // corta a imagem gerada para voltar ao tamanho normal
+        //
+        if ($cortePixels > 0) {
+            $img = cortaImagemDisco($nomer, $cortePixels, $_GET["WIDTH"]);
+        }
         cabecalhoImagem($nomer);
-        if ($_SESSION["i3georendermode"] == 2) {
-            header("X-Sendfile: $nomer");
-        } else {
-            readfile($nomer);
-        }
-    } else {
-        // cache inativo
-        if ($img->imagepath == "") {
-            ilegal();
-        }
-        // se for necessario cortar a imagem, $img->saveImage() nao funciona
-        if ($_SESSION["i3georendermode"] == 0 || ($_SESSION["i3georendermode"] == 1 && $cortePixels > 0)) {
-            $nomer = ($img->imagepath) . "temp" . nomeRand() . ".png";
-            $img->saveImage($nomer);
-            //
-            // corta a imagem gerada para voltar ao tamanho normal
-            //
-            if ($cortePixels > 0) {
-                $img = cortaImagemDisco($nomer, $cortePixels, $_GET["WIDTH"]);
-            } else {
-                $img = imagecreatefrompng($nomer);
-                imagealphablending($img, false);
-                imagesavealpha($img, true);
-            }
-            cabecalhoImagem($nomer);
-            header("i3geocache: nao");
-            imagepng($img);
-            imagedestroy($img);
-            exit();
-        }
-        if ($_SESSION["i3georendermode"] == 1) {
-            ob_clean();
-            header('Content-Type: image/png');
-            $img->saveImage();
-        }
-        if ($_SESSION["i3georendermode"] == 2) {
-            $nomer = ($img->imagepath) . "temp" . nomeRand() . ".png";
-            $img->saveImage($nomer);
-            //
-            // corta a imagem gerada para voltar ao tamanho normal
-            //
-            if ($cortePixels > 0) {
-                $img = cortaImagemDisco($nomer, $cortePixels, $_GET["WIDTH"]);
-            }
-            cabecalhoImagem($nomer);
-            header("X-Sendfile: ".$nomer);
-        }
+        header("X-Sendfile: " . $nomer);
     }
 }
 
-function cabecalhoImagem($nome,$tipo="image/png")
+function cabecalhoImagem($nome, $tipo = "image/png")
 {
     if (ob_get_contents()) {
         ob_clean();
@@ -533,7 +501,7 @@ function carregaCacheImagem()
         $cachedir = dirname(dirname($map_fileX)) . "/cache";
     }
     $c = $cachedir . "/googlemaps/$layer/$z/$x";
-    if($_GET["FORMAT"] == "utfgrid"){
+    if ($_GET["FORMAT"] == "utfgrid") {
         $nome = $c . "/$y.json";
         $tipo = "application/json; subtype=json";
     } else {
@@ -541,31 +509,31 @@ function carregaCacheImagem()
         $tipo = "image/png";
     }
 
-    cabecalhoImagem($nome,$tipo);
+    cabecalhoImagem($nome, $tipo);
     if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
         $leu = @readfile($nome);
-        if($leu == false){
+        if ($leu == false) {
             header_remove();
         }
     } else {
         if (file_exists($nome)) {
             if (file_exists($nome)) {
-                header("X-Sendfile: ".$nome);
+                header("X-Sendfile: " . $nome);
                 exit();
             }
         }
     }
     /*
-    if (file_exists($nome)) {
-        cabecalhoImagem($nome,$tipo);
-        if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
-            readfile($nome);
-        } else {
-            header("X-Sendfile: $nome");
-        }
-        exit();
-    }
-    */
+     * if (file_exists($nome)) {
+     * cabecalhoImagem($nome,$tipo);
+     * if ($i3georendermode = 0 || $i3georendermode = 1 || empty($i3georendermode)) {
+     * readfile($nome);
+     * } else {
+     * header("X-Sendfile: $nome");
+     * }
+     * exit();
+     * }
+     */
 }
 
 function nomeRand($n = 10)
@@ -618,9 +586,9 @@ function filtraImg($nomer, $tipoimagem)
     }
 }
 
-function ilegal($img="")
+function ilegal($img = "")
 {
-    $img = imagecreatefrompng("../imagens/ilegal".$img.".png");
+    $img = imagecreatefrompng("../imagens/ilegal" . $img . ".png");
     imagealphablending($img, false);
     imagesavealpha($img, true);
     ob_clean();

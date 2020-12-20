@@ -1,19 +1,6 @@
 {
 	"dicionario_ajuda": {
 		"ferramentas": {
-			"1": {
-				"titulo": {
-					"pt": "Filtro de cores",
-					"es": "Filtro de colores",
-					"en": "Color Filter"
-				},
-				"diretorio": "i3geo/ferramentas/tipoimagem",
-				"categoria": "1",
-				"pt": "O filtro possibilita gerar efeitos de colora&ccedil;&atilde;o no mapa. &Eacute; aplicado sobre a imagem gerada toda vez que o mapa &eacute; alterado. No caso de temas baseados em dados RASTER, os n&iacute;veis de cores obtidos com a ferramenta de identifica&ccedil;&atilde;o n&atilde;o s&atilde;o alterados.<br>Os filtros podem provocar um tempo maior de desenho do mapa, devendo ser utilizados com cuidado. As op&ccedil;&otilde;es s&eacute;pia e tons de cinza utilizam algor&iacute;tmos pr&oacute;prios do i3Geo, j&aacute; as demais, utilizam a op&ccedil;&atilde;o de filtro dispon&iacute;vel com o PHP 5. Mais detalhes <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php' >aqui</a>.",
-				"es": "El filtro permite generar efectos de colores en el mapa. Se aplica sobre la imagen generada cada vez que se cambia el mapa. En el caso de temas basados en datos RASTER los niveles de colores obtenidos con la herramienta de identificaci&oacute;n no cambian.<br>Los filtros deben utilizarse con cuidado ya que pueden hacer que el tiempo de renderizaci&oacute;n del mapa sea mayor. Las opciones sepia y los tonos grises utilizan algoritmos propios de i3Geo, el resto utiliza la opci&oacute;n de filtro disponible en PHP 5. M&aacute;s detalles <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php'>aqu&iacute;</a>.",
-				"en": "The filter allows you to generate color effects on the map. It is applied on the generated image every time the map is changed. In the case of themes based on RASTER dataset, the color levels obtained with the identification tool are not changed.<br>Filters can generate delays in map rendering so they should be used with care. Sepia and grayscale options use i3Geo algorithms, while others use the filter option available with PHP 5. More details <a href='http://www.php.net/manual/pt_BR/function.imagefilter.php'>here</a>.",
-				"apijs": "i3GEO.mapa.dialogo.tipoimagem()"
-			},
 			"2": {
 				"titulo": {
 					"pt": "Legenda",

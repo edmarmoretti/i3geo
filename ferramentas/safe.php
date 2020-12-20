@@ -64,9 +64,7 @@ if(isset($logExec) && $logExec["ferramentas"] == true){
 
 function redesenhaMapa()
 {
-	global $map_file,$tipoimagem,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
-	if($tipoimagem != "nenhum" && $tipoimagem != "")
-	{$utilizacgi = "nao";}
+	global $map_file,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
 	if (connection_aborted()){exit();}
 	if($interface == "googleearth" && $mapexten != ""){
 		include_once(dirname(__FILE__)."/../classesphp/classe_navegacao.php");
@@ -82,13 +80,11 @@ function redesenhaMapa()
 	//
 	$e = $m->mapa->extent;
 	$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
-	$res["mapimagem"] = "";
 	$res["mapexten"] = $ext;
 	$res["mapres"] = "";
 	$res["erro"] = "";
 	$res["mapscale"] = "";
 	$res["pixelsize"] = "";
-	$res["mapimagem"] = "";
 	$res["w"] = $m->mapa->width;
 	$res["h"] = $m->mapa->height;
 	$res["mappath"] = "";

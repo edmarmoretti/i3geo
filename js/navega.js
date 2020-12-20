@@ -322,7 +322,7 @@ i3GEO.navega =
          *
          * {String} - tipo de imagem atual do mapa (sepia,nenhum,cinza)
          */
-        xy2xy : function(locaplic, sid, xi, yi, xf, yf, ext, tipoimagem) {
+        xy2xy : function(locaplic, sid, xi, yi, xf, yf, ext) {
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.navega.xy2xy()");
 
@@ -344,7 +344,7 @@ i3GEO.navega =
                 return false;
             } else {
                 nex = novoxi + " " + novoyi + " " + novoxf + " " + novoyf;
-                i3GEO.navega.zoomExt(i3GEO.configura.locaplic, i3GEO.configura.sid, tipoimagem, nex);
+                i3GEO.navega.zoomExt(i3GEO.configura.locaplic, i3GEO.configura.sid, nex);
                 return true;
             }
         },
@@ -363,7 +363,7 @@ i3GEO.navega =
          *
          * {String} - Extens&atilde;o geogr&aacute;fica no formato xmin ymin xmax ymax
          */
-        zoomExt : function(locaplic, sid, tipoimagem, ext) {
+        zoomExt : function(locaplic, sid, ext) {
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.navega.zoomExt()" + ext);
 
@@ -373,9 +373,6 @@ i3GEO.navega =
             }
             if (sid !== "") {
                 i3GEO.configura.sid = sid;
-            }
-            if (tipoimagem === "") {
-                tipoimagem = "nenhum";
             }
             i3GEO.Interface.zoom2ext(ext);
         },

@@ -769,19 +769,6 @@ i3GEO.mapa =
                 "i3GEOF.opcoestamanho.start()");
             },
             /**
-             * Function: tipoimagem
-             *
-             * Abre a janela de dialogo da ferramenta tipoimagem
-             */
-            tipoimagem : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.tipoimagem()",
-                        "tipoimagem",
-                        "tipoimagem",
-                        "dependencias.php",
-                "i3GEOF.tipoimagem.start()");
-            },
-            /**
              * Function: corfundo
              *
              * Abre a janela de dialogo da ferramenta opcoes_fundo

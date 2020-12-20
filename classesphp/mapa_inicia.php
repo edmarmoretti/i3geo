@@ -294,7 +294,6 @@
     $res["mapfile"] = "";
     $res["cgi"] = ""; // $locmapserv;
     $res["extentTotal"] = $ext;
-    $res["mapimagem"] = ""; // $nomer;
     $geoip = "nao";
     $res["geoip"] = $geoip;
     $res["listavisual"] = "";
