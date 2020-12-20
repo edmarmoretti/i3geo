@@ -159,7 +159,6 @@ class Mscriamapa
         $_SESSION["googleApiKey"] = $googleApiKey;
         $_SESSION["mensagemInicia"] = $mensagemInicia;
         $_SESSION["interfacePadrao"] = $interfacePadrao;
-        $_SESSION["logExec"] = $logExec;
         $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin;
         $_SESSION["customDir"] = (! isset($customDir)) ? "" : $customDir;
         $_SESSION["contadorsalva"] = 0; // essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)

@@ -33,10 +33,6 @@ if (isset($_FILES['i3GEOuploaddbffile']['name']) && strlen(basename($_FILES['i3G
 	include(dirname(__FILE__)."/../blacklist.php");
 	verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 
-	if(isset($logExec) && $logExec["upload"] == true){
-		i3GeoLog("prog: uploaddbf filename:" . $_FILES['i3GEOuploaddbffile']['name'],$dir_tmp);
-	}
-
 	$mapa = ms_newMapObj($map_file);
 	echo "<p class='paragrafo'>Carregando o arquivo...</p>";
 	ob_flush();

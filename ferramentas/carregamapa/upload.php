@@ -15,10 +15,6 @@ if(empty($_SESSION["fingerprint"])){
 }
 $locaplic = $_SESSION["locaplic"];
 include(dirname(__FILE__)."/../../classesphp/carrega_ext.php");
-
-if(isset($logExec) && $logExec["upload"] == true){
-	i3GeoLog("prog: carregamapa filename:" . $_FILES['i3GEOcarregamapafilemap']['name'],$dir_tmp);
-}
 ?>
 <html>
 <head>

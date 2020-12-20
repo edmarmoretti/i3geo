@@ -39,10 +39,6 @@ if (isset($_FILES['i3GEOuploadshp']['name']))
 	include(dirname(__FILE__)."/../blacklist.php");
 	verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 
-	if(isset($logExec) && $logExec["upload"] == true){
-		i3GeoLog("prog: upload filename:" . $_FILES['i3GEOuploadshp']['name'],$dir_tmp);
-	}
-
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	ob_flush();
 	flush();

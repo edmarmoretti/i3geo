@@ -23,10 +23,6 @@ error_reporting(0);
 $dirmap = dirname($map_file);
 $arquivo = "";
 
-if(isset($logExec) && $logExec["upload"] == true){
-	i3GeoLog("prog: importarwmc filename:" . $_FILES['i3GEOimportarwmc']['name'],$dir_tmp);
-}
-
 if(isset($_FILES['i3GEOimportarwmc']['name']) && strlen(basename($_FILES['i3GEOimportarwmc']['name'])) < 200)
 {
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";

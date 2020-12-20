@@ -58,10 +58,6 @@ include_once(dirname(__FILE__)."/blacklist.php");
 include_once(dirname(__FILE__)."/../classesphp/classe_vermultilayer.php");
 include_once(dirname(__FILE__)."/../classesphp/classe_estatistica.php");
 
-if(isset($logExec) && $logExec["ferramentas"] == true){
-	i3GeoLog("prog: ferramentas url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
-}
-
 function redesenhaMapa()
 {
 	global $map_file,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;

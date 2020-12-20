@@ -192,24 +192,6 @@ $i3geoEsquemasWL = array();
 $i3geoUploadDataWL = array();
 
 /*
- Variale: $logExec
-
- Ativa a geracao do log em ms_tmp/.log_i3geo_
-
- Para evitar o log, basta definir os valores como false ou $logExec = ''
-
- Tipo:
- {array}
-*/
-$logExec = array(
-	"mapa_" => false, //mapa_openlayers e mapa_googlemaps
-	"init" => false, //ms_criamapa mapa_inicia
-	"ogc" => false, //servico ogc
-	"upload" => false, //ferramentas de upload
-	"ferramentas" => false, //todas as ferramentas que usam safe.php
-	"controle" => false //tudo que passa por mapa_controle.php
-);
-/*
  Variable: $i3GeoProjDefault
 
 Parametros de projecao cartografica utilizados nos mapas e nas exportacoes de arquivos.

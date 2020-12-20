@@ -32,10 +32,6 @@ if (isset($_FILES['i3GEOuploadkml']['name']) && strlen(basename($_FILES['i3GEOup
 	include(dirname(__FILE__)."/../blacklist.php");
 	verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 
-	if(isset($logExec) && $logExec["upload"] == true){
-		i3GeoLog("prog: uploadkml filename:" . $_FILES['i3GEOuploadkml']['name'],$dir_tmp);
-	}
-
 	$mapa = ms_newMapObj($map_file);
 	echo "<p class='paragrafo' >Carregando o arquivo...</p>";
 	ob_flush();

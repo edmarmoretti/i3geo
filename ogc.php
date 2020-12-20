@@ -223,10 +223,6 @@ if(isset($_GET["outputformat"]) && $_GET["outputformat"] != ""){
 $cache = true;
 
 include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
-
-if(isset($logExec) && $logExec["ogc"] == true){
-	i3GeoLog("prog: ogc url: ".implode("&",array_merge($_GET,$_POST)),$_SESSION["dir_tmp"]);
-}
 //
 //ajusta o default
 //

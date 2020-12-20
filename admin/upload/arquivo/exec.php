@@ -77,10 +77,6 @@ if (isset ( $_FILES ['i3GEOuploadshp'] ['name'] )) {
 	// $dirDestino = str_replace ( $checaDestino, "", $dirDestino );
 	// $dirDestino = $checaDestino . "/" . $dirDestino;
 
-	if (isset ( $logExec ) && $logExec ["upload"] == true) {
-		i3GeoLog ( "prog: upload filename:" . $_FILES ['i3GEOuploadshp'] ['name'], $dir_tmp );
-	}
-
 	echo "<div class='alert alert-success' role='alert'>Carregando o arquivo...</div>";
 
 	ob_flush ();flush (); sleep ( 2 );

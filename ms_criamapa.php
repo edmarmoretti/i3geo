@@ -301,9 +301,6 @@ if (! isset($dir_tmp)) {
         $interface = $parurl["interface"];
     }
 }
-if (isset($logExec) && $logExec["init"] == true) {
-    i3GeoLog("prog: ms_criamapa url: " . implode("&", array_merge($_GET, $_POST)), $dir_tmp);
-}
 if (! empty($restauramapa)) {
     $base = restauraMapaAdmin($restauramapa, $dir_tmp);
     $m = ms_newMapObj($base);
@@ -404,11 +401,6 @@ if (empty($statusFerramentas)) {
 } else {
     $statusFerramentas_ = $statusFerramentas;
 }
-if (empty($logExec)) {
-    $logExec_ = "";
-} else {
-    $logExec_ = $logExec;
-}
 if (! isset($i3geoPermiteLogin)) {
     $i3geoPermiteLogin_ = "";
 } else {
@@ -460,7 +452,6 @@ $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
 $_SESSION["googleApiKey"] = $googleApiKey_;
 $_SESSION["mensagemInicia"] = $mensagemInicia_;
 $_SESSION["interfacePadrao"] = $interfacePadrao_;
-$_SESSION["logExec"] = $logExec_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
 if (! isset($customDir)) {
     $customDir = "";
@@ -479,7 +470,6 @@ $_SESSION["mapdir"] = $diretorios[1];
 $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0; // essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 $_SESSION["i3georendermode"] = $i3georendermode_;
-$_SESSION["logExec"] = $logExec_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
 $_SESSION["i3geoBlFerramentas"] = $i3geoBlFerramentas_;
 if($esquemaadmin != ""){
