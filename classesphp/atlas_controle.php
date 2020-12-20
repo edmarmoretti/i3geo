@@ -53,7 +53,6 @@ Vari&aacute;veis de Se&ccedil;&atilde;o:
 dir_tmp - diretorio, no servidor, tempor&aacute;rio utilizado pelo I3Geo, exemplo: c:/ms4w/tmp/ms_tmp
 locmapserv - localiza&ccedil;&atilde;o, no servidor, do CGI, exemplo: /cgi-bin/mapserv.exe
 locaplic - localiza&ccedil;&atilde;o, no servidor, do I3Geo, exemplo: c:/ms4w/apache/htdocs/i3geo
-R_path - localiza&ccedil;&atilde;o, no servidor, do execut&aacute;vel do pacote R, exemplo: c:/ms4w/apache/htdocs/i3geo/pacotes/r/win/bin/R.exe
 imgurl - url das imagens geradas pelo mapa, exemplo: http://localhost/ms_tmp/imgTVHbdijFMk/
 tmpurl - url do diretorio tempor&aacute;rio, exemplo: http://localhost/ms_tmp/
 map_file - endere&ccedil;o, no servidor, do mapfile atual, exemplo: c:/ms4w/tmp/ms_tmp/TVHbdijFMk/TVHbdijFMk.map

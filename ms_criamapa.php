@@ -69,7 +69,7 @@
  * base - arquivo mapfile que servir&aacute; de base para a cria&ccedil;&atilde;o do mapa. Por default, s&atilde;o utilizados os arquivos existentes em i3geo/aplicmap (geral1windows, geral1,...)
  * Essa vari&aacute;vel pode ser definida em ms_configura tamb&eacute;m. Se n&atilde;o estiver definida em nenhum lugar, o i3Geo tentar&aacute; descobrir o arquivo adequado a ser utilizado. Voc&ecirc; pode utilizar essa op&ccedil;&atilde;o para abrir um mapa com as camadas que voc&ecirc; quiser, mas para evitar redund&acirc;ncias, prefira o uso de &temasa
  *
- * temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map ou gvsig que ser&atilde;o adicionados ao mapa. Se o arquivo n&atilde;o estiver no diret&oacute;rio i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
+ * temasa - lista, separada por espa&ccedil;os, com os nomes dos arquivos map que ser&atilde;o adicionados ao mapa. Se o arquivo n&atilde;o estiver no diret&oacute;rio i3geo/temas, o nome deve incluir o caminho completo no servidor. O arquivo pode conter mais de um layer pois todos os existentes ser&atilde;o adicionados ao mapa. Por default, todos os layers encontrados nos mapfiles s&atilde;o adicionados ao mapa com o status de desenho em OFF.
  *
  * layers - lista, separada por espa&ccedil;os, com os nomes dos layers que ser&atilde;o ligados. A lista deve conter os nomes dos layers e n&atilde;o os nomes dos mapfiles acrescentados ao mapa. Por exemplo, ao adicionar com "temasa" um mapfile chamado "transporte" que contenha os layers "estradas" e "ferrovias" os dois layers ser&atilde;o adicionados ao mapa. Para que esses dois layers fiquem vis&iacute;veis no mapa deve-se utilizar &layers=estradas ferrovias.
  *
@@ -281,7 +281,6 @@ $nome_wms = @$parurl["nome_wms"];
 $srs_wms = @$parurl["srs_wms"];
 $image_wms = @$parurl["image_wms"];
 $versao_wms = @$parurl["versao_wms"];
-$gvsigview = @$parurl["gvsigview"];
 $restauramapa = @$parurl["restauramapa"];
 $versao = versao();
 $versao = $versao["principal"];
@@ -1369,12 +1368,6 @@ function incluiTemaWms()
     // echo $tmpfname;exit;
     erroCriacao();
 }
-
-/*
- * Projeto gvsig
- */
-function incluiMapaGvsig($gvsiggvp, $gvsigview = "")
-{}
 
 /*
  * Captura e mostra os erros de processamento do mapserver
