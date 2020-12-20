@@ -375,14 +375,10 @@ if (isset($kmlurl)) {
 // se houver string de conex&atilde;o para substitui&ccedil;&atilde;o
 // o modo cgi n&atilde;o ir&aacute; funcionar
 //
-if ($postgis_mapa != "") {
-    $utilizacgi = "nao";
-}
 if (! isset($perfil)) {
     $perfil = "";
 }
 $perfil_ = $perfil;
-$utilizacgi_ = $utilizacgi;
 if ((isset($navegadoresLocais)) && ($navegadoresLocais != "")) {
     $navegadoresLocais_ = "sim";
 } else {
@@ -442,7 +438,6 @@ $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
 $_SESSION["perfil"] = $perfil_;
 $_SESSION["navegadoresLocais"] = $navegadoresLocais_;
-$_SESSION["utilizacgi"] = $utilizacgi_;
 $_SESSION["tituloInstituicao"] = $tituloInstituicao_;
 $_SESSION["googleApiKey"] = $googleApiKey_;
 $_SESSION["mensagemInicia"] = $mensagemInicia_;

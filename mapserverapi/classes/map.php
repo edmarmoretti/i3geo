@@ -150,7 +150,6 @@ class Map
         $res["extentTotal"] = $ext;
         $res["geoip"] = "nao";
         $res["listavisual"] = "";
-        $res["utilizacgi"] = "nao"; // $utilizacgi;
         $res["versaoms"] = $versao["principal"];
         $res["versaomscompleta"] = $versao["completa"];
         $res["versaoint"] = $versao["inteiro"];

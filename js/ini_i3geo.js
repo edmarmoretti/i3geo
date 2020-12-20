@@ -56,8 +56,6 @@ var i3GEO = {
          * geoip {sim|nao} - indica se o geoip est&aacute; instalado
          *
          *
-         * utilizacgi {sim|nao} - indica se o mapa atual est&aacute; no modo CGI
-         *
          * versaoms {String} - vers&atilde;o do Mapserver instalado no servidor
          * (maior)
          *
@@ -121,7 +119,6 @@ var i3GEO = {
             extentTotal : "",
             mapimagem : "",
             geoip : "",
-            utilizacgi : "",
             versaoms : "",
             versaomscompleta : "",
             mensagens : "",

@@ -208,7 +208,6 @@ function gravaid()
 {
 	global $atlasId_,$tmpfname;//a variavel tmpfname vem do ms_criamapa.php
 	$_SESSION["atlasId"] = $atlasId_;
-	$_SESSION["utilizacgi"] = "nao";
 	$m = ms_newMapObj($tmpfname);
 	$c = $m->numlayers;
 	for ($i=0;$i < $c;++$i)

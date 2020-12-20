@@ -613,24 +613,6 @@ if(getenv('DB_HOST')){
 }
 */
 /*
-Variable: utilizacgi
-
-Vari&aacute;vel indicando se o desenho do corpo do mapa ser&aacute; baseado no modo cgi.
-
-Por default, o mapserver desenha o mapa via php, por&eacute;m, pode-se alterar o modo de desenho.
-
-No modo normal, a imagem do mapa &eacute; gerada e armazenada no diret&oacute;rio ms_tmp. Ap&oacute;s a gera&ccedil;&atilde;o da imagem
-o endere&ccedil;o do arquivo &eacute; retornado ao mapa (retorno via Ajax) e o javascript se encarrega de alterar o
-endere&ccedil;o da imagem no navegador. Com o uso do CGI a imagem n&atilde;o &eacute; gerada, sendo repassado ao navegador
-o endere&ccedil;o do cgi acrescentado do nome do mapfile, fazendo com que a imagem seja retornada diretamente.
-
-Em alguns casos o uso do cgi torna a aplica&ccedil;&atilde;o mais r&aacute;pida.
-
-Tipo:
-{string}
-*/
-$utilizacgi = "nao";
-/*
 Variable: conexaoadmin
 
 Arquivo PHP que define a string de conexao (PDO) com o banco de dados administrativo.

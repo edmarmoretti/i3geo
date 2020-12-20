@@ -297,8 +297,6 @@
     $geoip = "nao";
     $res["geoip"] = $geoip;
     $res["listavisual"] = "";
-    // TODO depreciar na documentacao
-    $res["utilizacgi"] = "nao"; // $utilizacgi;
     $res["versaoms"] = $versao["principal"];
     $res["versaomscompleta"] = $versao["completa"];
     $res["versaoint"] = $versao["inteiro"];

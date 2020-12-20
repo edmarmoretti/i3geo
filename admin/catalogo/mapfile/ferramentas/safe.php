@@ -71,7 +71,7 @@ if(!substituiCon($map_file,$postgis_mapa)){
 //
 function redesenhaMapa()
 {
-    global $locaplic,$map_file,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
+    global $locaplic,$map_file,$cp,$postgis_mapa,$locmapserv,$interface,$mapexten;
 	if (connection_aborted()){exit();}
 	include_once($locaplic."/classesphp/classe_mapa.php");
 	$m = New Mapa($map_file);

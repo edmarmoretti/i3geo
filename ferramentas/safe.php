@@ -60,7 +60,7 @@ include_once(dirname(__FILE__)."/../classesphp/classe_estatistica.php");
 
 function redesenhaMapa()
 {
-	global $map_file,$cp,$postgis_mapa,$utilizacgi,$locmapserv,$interface,$mapexten;
+	global $map_file,$cp,$postgis_mapa,$locmapserv,$interface,$mapexten;
 	if (connection_aborted()){exit();}
 	if($interface == "googleearth" && $mapexten != ""){
 		include_once(dirname(__FILE__)."/../classesphp/classe_navegacao.php");

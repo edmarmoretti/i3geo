@@ -154,7 +154,6 @@ class Mscriamapa
         $_SESSION["postgis_mapa"] = $postgis_mapa;
         $_SESSION["perfil"] = $perfil;
         $_SESSION["navegadoresLocais"] = $navegadoresLocais;
-        $_SESSION["utilizacgi"] = $utilizacgi;
         $_SESSION["tituloInstituicao"] = $tituloInstituicao;
         $_SESSION["googleApiKey"] = $googleApiKey;
         $_SESSION["mensagemInicia"] = $mensagemInicia;
