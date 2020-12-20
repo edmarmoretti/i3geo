@@ -165,7 +165,6 @@ Esse programa &eacute; chamado diretamente, por exemplo, i3geo/classesphp/atlas_
 		//
 		// a fun&ccedil;&atilde;o gravaId ser&aacute; executada no final do processo de gera&ccedil;&atilde;o do mapa (ver ms_criamapa.php)
 		//
-		$executa = "gravaId";
 		$temasa = "";
 		include_once(dirname(__FILE__)."/../ms_criamapa.php");
 		exit;

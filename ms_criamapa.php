@@ -259,7 +259,6 @@ $temasa = @$parurl["temasa"];
 $layers = @$parurl["layers"];
 $desligar = @$parurl["desligar"];
 $mapext = @$parurl["mapext"];
-$executa = ""; // $parurl["executa"];
 $perfil = @$parurl["perfil"];
 $caminho = @$parurl["caminho"];
 $pontos = @$parurl["pontos"];
@@ -431,7 +430,6 @@ if (isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined") {
  *
  * Monta a apresenta&ccedil;&atilde;o do aguarde.
  *
- * Aqui &eacute; necess&aacute;rio verificar se $executa est&aacute; definido
  * isso pq algumas aplica&ccedil;&otilde;es podem ser prejudicadas caso o aguarde seja mostrado
  */
 $_SESSION["dir_tmp"] = $dir_tmp_;
@@ -532,18 +530,6 @@ if (file_exists($base)) {
 if (! isset($mapext)) {
     $mapext = $map->extent->minx . " " . $map->extent->miny . " " . $map->extent->maxx . " " . $map->extent->maxy;
 }
-// arquivo com a imagem de refer&ecirc;ncia
-if (! isset($map_reference_image)) {
-    $map_reference_image = $map->reference->image;
-    //verifica o caminho
-    if(!file_exists($map_reference_image)){
-        $map_reference_image = $locaplic . "/imagens/" . basename($map_reference_image);
-    }
-}
-// extens&atilde;o geogr&aacute;fica da imagem do mapa de refer&ecirc;ncia
-if (! isset($map_reference_extent)) {
-    $map_reference_extent = $map->reference->extent->minx . " " . $map->reference->extent->miny . " " . $map->reference->extent->maxx . " " . $map->reference->extent->maxy;
-}
 if (empty($interface)) {
     if (! isset($interfacePadrao)) {
         $interfacePadrao = "ol.htm";
@@ -561,22 +547,6 @@ if (isset($layers)) {
     ligaTemas();
 }
 desligaTemasIniciais();
-
-if (isset($map_reference_image)) {
-    $mapn->reference->set("image", $map_reference_image);
-}
-$extr = $mapn->reference->extent;
-if (isset($map_reference_extent)) {
-    $temp = explode(" ", $map_reference_extent);
-    foreach ($temp as $t) {
-        if ($t != "") {
-            $newext[] = $t;
-        }
-    }
-    if (count($newext) == 4) {
-        $extr->setextent($newext[0], $newext[1], $newext[2], $newext[3]);
-    }
-}
 $ext = $mapn->extent;
 $newext = array();
 if ((isset($mapext)) && ($mapext != "")) {
