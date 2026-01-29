@@ -591,37 +591,6 @@ i3GEO.mapa =
                 i3GEO.util.dialogoFerramenta("i3GEO.mapa.dialogo.preferencias()", "preferencias", "preferencias");
             },
             /**
-             * Function: locregiao
-             *
-             * Abre a janela de dialogo da ferramenta de busca de regiao cadastrada no METAESTAT
-             */
-            locregiao : function() {
-                var temp = function(){
-                    i3GEOF.locregiao._parameters.ATIVAFILTRO = false;
-                    i3GEOF.locregiao.start();
-                };
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.locregiao()",
-                        "locregiao",
-                        "locregiao",
-                        "dependencias.php",
-                        temp);
-            },
-            /**
-             * Function: filtraregiao
-             *
-             * Abre a janela de dialogo da ferramenta de busca de regioes cadastradas no METAESTAT com opcao de filtrar a regiao escolhida
-             */
-            filtraregiao : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.filtraregiao()",
-                        "locregiao",
-                        "locregiao",
-                        "dependencias.php",
-                        "i3GEOF.locregiao.abreComFiltro()"
-                );
-            },
-            /**
              * Function: animacao
              *
              * Abre a janela de dialogo da ferramenta que permite animar o mapa atual

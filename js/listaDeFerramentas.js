@@ -18,11 +18,6 @@ i3GEO.listaDeFerramentas = {
 			id : "ferramentasmapa"
 		},
 		{
-			nome : $trad("x57"),
-			descricao:  "",
-			id : "cartogramas"
-		},
-		{
 			nome : $trad("x105"),
 			descricao:  "",
 			id : "navegacao"
@@ -40,21 +35,9 @@ i3GEO.listaDeFerramentas = {
 				target : "_blank"
 			},
 			{
-				id : "omenudataAjudamenu5",
-				text : $trad("u5a"),
-				url : "http://www.softwarepublico.gov.br",
-				target : "_blank"
-			},
-			{
-				id : "omenudataAjudamenu1",
-				text : $trad("x67"),
-				url : "https://softwarepublico.gov.br/social/i3geo",
-				target : "_blank"
-			},
-			{
 				id : "omenudataAjudamenu7",
 				text : "Git",
-				url : "https://softwarepublico.gov.br/gitlab/groups/i3geo",
+				url : "https://github.com/edmarmoretti/i3geo",
 				target : "_blank"
 			}],
 			"analise" : [{
@@ -185,16 +168,7 @@ i3GEO.listaDeFerramentas = {
 					}]]
 				}
 			}],
-			"cartogramas" :[{
-				id : "omenudataFerramentas6a",
-				text : $trad("x61"),
-				url : "javascript:i3GEO.mapa.dialogo.filtraregiao()"
-			}],
-			"navegacao" :[{
-				id : "omenudataFerramentas5a",
-				text : $trad("x59"),
-				url : "javascript:i3GEO.mapa.dialogo.locregiao()"
-			},
+			"navegacao" :[
 			{
 				id : "omenudataAnalise18",
 				text : $trad("d30"),
