@@ -66,13 +66,6 @@ include "head.php";
                 <!-- template para permitir a traducao -->
                 <div id="menuTpl" class="hidden">
                     <ul class="nav navbar-nav">
-                        <li class="visible-lg"><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.map-o').fadeIn(600);">{{{mapas}}}</a></li>
-                        <li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.download').fadeIn(600);">OGC/Download</a></li>
-                        <li><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.cogs').fadeIn(600);">{{{admin}}}</a></li>
-                        <li class="visible-lg"><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.book').fadeIn(600);">{{{docs}}}</a></li>
-                        <li class="visible-lg"><a data-toggle="collapse" data-target=".in" role="button" href="#topo" onclick="$('.cartao').hide();$('.group').fadeIn(600);">{{{comunidade}}}</a></li>
-                        <li><a role="button" href="../social/index.php">Social</a></li>
-                        <li><a role="button" href="../rss/index.php">RSS</a></li>
                         <li <?php if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false) { echo "style=display:none "; }?>><a role="button"
                                 onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../');" href="#topo" data-toggle="modal" data-target="#modalLogin">
                                 Login <i class="material-icons md-18">input</i>
@@ -121,18 +114,7 @@ if (! function_exists("ms_GetVersion")) {
                                 <h5 tabindex="-1" class="hidden-xs longText" style="height: 10rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
                             </div>
                             <div class="panel-footer text-right" style="padding: 0px; padding-right: 15px; border: 0px; background-color: rgb(250, 250, 250);">
-                                <div class="row center-block">
-                                    <div class="col-xs-6" style="line-height: 3.5; text-align: left;">
-                                        <!-- o texto no span e para acessibilidade-->
-                                        <button tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}" class="btn btn-primary btn-fab btn-fab-mini"
-                                            style="padding-left: 8px; padding-top: 7px; margin: auto;">
-                                            <span class="glyphicon glyphicon-qrcode" aria-hidden="true">&nbsp;&nbsp;qrcode</span>
-                                        </button>
-    
-                                        <button tabindex="-1" role="button" style="" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
-                                            <span data-cookie="{{{img}}}"><i class="material-icons">grade</i></span>
-                                        </button>
-                                    </div>
+                                <div class="row right-block">
                                     <div class="col-xs-6">
                                         <a class="btn btn-primary" href="{{{href}}}" role="button" target="{{{target}}}"> {{{abrir}}} </a>
                                     </div>
@@ -147,9 +129,6 @@ if (! function_exists("ms_GetVersion")) {
     <div tabindex="-1" class="container-fluid" style="background-color: #fff; margin-top: 10px; padding-top: 10px;">
         <div class="row text-center hidden">
             <div class="col-lg-12 center-block">
-                <a tabindex="-1" rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">
-                    <img alt="Licen&ccedil;a Creative Commons" style="border-width: 0" src="https://i.creativecommons.org/l/GPL/2.0/88x62.png" />
-                </a>
                 <br />O i3Geo est&aacute; licenciado com uma Licen&ccedil;a
                 <a tabindex="-1" rel="license" href="http://creativecommons.org/licenses/GPL/2.0/legalcode.pt" target="_blank">Creative Commons - Licen&ccedil;a P&uacute;blica
                     Geral GNU (&#34;GNU General Public License&#34;)</a>

@@ -35,60 +35,11 @@ botoesIni = [
 	"fa": "download",
 	"target": "_self"
 },{
-	"img":"imagens/openlayersdebug.png",
-	"href": location.href.replace("init/index.php"+window.location.search,"") +  customDir + "/openlayersdebug.php",
-	"titulo":$trad(5,g_traducao_init),
-	"subtitulo": $trad("5a",g_traducao_init),
-	"fa": "cogs",
-	"target": "_blank"
-},{
-	"img":"imagens/certificate-server.png",
-	"href": "../testainstal/index.php",
-	"titulo":$trad(2,g_traducao_init),
-	"subtitulo": $trad("2a",g_traducao_init),
-	"fa": "cogs",
-	"target": "_self"
-},{
 	"img":"imagens/applications-development-web.png",
 	"href": "../admin/index.php",
 	"titulo":$trad(3,g_traducao_init),
 	"subtitulo": $trad("3a",g_traducao_init),
 	"fa": "cogs",
-	"target": "_self"
-},{
-	"img":"imagens/applications-development.png",
-	"href": "../utilitarios/index.php",
-	"titulo":$trad(33,g_traducao_init),
-	"subtitulo": $trad("33a",g_traducao_init),
-	"fa": "cogs",
-	"target": "_self"
-},{
-	"img":"imagens/tools-report-bug.png",
-	"href":"https://softwarepublico.gov.br/gitlab/i3geo/i3geo/issues",
-	"titulo":$trad(16,g_traducao_init),
-	"subtitulo": $trad("16a",g_traducao_init),
-	"fa": "group",
-	"target": "_self"
-},{
-	"img":"imagens/apple-touch-icon.png",
-	"href":"https://softwarepublico.gov.br/gitlab/groups/i3geo",
-	"titulo":$trad(30,g_traducao_init),
-	"subtitulo": $trad("30a",g_traducao_init),
-	"fa": "book",
-	"target": "_self"
-},{
-	"img":"imagens/logo_psp.png",
-	"href":"https://portal.softwarepublico.gov.br/social/i3geo/",
-	"titulo":$trad(31,g_traducao_init),
-	"subtitulo": $trad("31a",g_traducao_init),
-	"fa": "group",
-	"target": "_self"
-},{
-	"img":"imagens/mailman.png",
-	"href":"http://lists.osgeo.org/cgi-bin/mailman/listinfo/i3geo",
-	"titulo":$trad(32,g_traducao_init),
-	"subtitulo": $trad("32a",g_traducao_init),
-	"fa": "group",
 	"target": "_self"
 }
 ];
@@ -119,7 +70,6 @@ function mostraBotoesBT(men){
 			{"d":botoesIni,"abrir" : $trad(36,g_traducao_init)}
 	);
 	$("#botoesTpl").html(html);
-	aplicaFavoritos();
 }
 function findBootstrapDeviceSize() {
 	var dsize = ['lg', 'md', 'sm', 'xs'];
@@ -136,55 +86,6 @@ function findBootstrapDeviceSize() {
 		}
 	}
 	return 'unknown';
-}
-//cookies sao armazenados em favoritosInit
-function favorita(obj){
-	$(obj).find("span").toggleClass("amarelo");
-	//
-	//modifica os cookies
-	//
-	var cookies = [];
-	$(".amarelo").each(
-			function(i,el){
-				cookies.push($(el).attr("data-cookie"));
-			}
-	);
-	i3GEO.util.insereCookie("favoritosInit",cookies.join("|"),200);
-}
-function aplicaFavoritos(){
-	var favoritos = i3GEO.util.pegaCookie("favoritosInit");
-	if(favoritos){
-		favoritos = favoritos.split("|");
-		$(favoritos).each(
-				function(i,el){
-					$('span[data-cookie="'+el+'"]').toggleClass("amarelo");
-				}
-		);
-	}
-}
-function reordenaBotoesPorFavoritos(){
-	var f = [],
-	nf = [],
-	favoritos = i3GEO.util.pegaCookie("favoritosInit");
-	$(botoesIni).each(
-		function(i,el){
-			el.href = el.href.replace("#topo","");
-		}
-	);
-	if(favoritos){
-		favoritos = favoritos.split("|");
-		$(botoesIni).each(
-				function(i,el){
-					if(jQuery.inArray(el.img,favoritos) >= 0){
-						f.push(el);
-					}
-					else{
-						nf.push(el);
-					}
-				}
-		);
-		botoesIni = jQuery.merge( f, nf );
-	}
 }
 
 

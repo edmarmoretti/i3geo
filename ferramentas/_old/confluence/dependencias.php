@@ -1,4 +1,5 @@
 <?php
+exit;
 include(dirname(__FILE__)."/../blacklist.php");
 verificaBlFerramentas(basename(dirname(__FILE__)));
 if(extension_loaded('zlib')){

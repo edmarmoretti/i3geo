@@ -59,14 +59,17 @@ include ($configInc["inc"] . "/css.php");
         <!-- configuracao para todos os botoes
             data-idconteudo - id do DIV que contem o conteudo da guia e que sera mostrado ao ser clicado
         -->
+    <div id="i3GEOguiaMovel">
+        <!-- configuracao para todos os botoes
+            data-idconteudo - id do DIV que contem o conteudo da guia e que sera mostrado ao ser clicado
+        -->
         <div class="iconesGuiaMovel ol-control" data-traduzir="true">
             <?php
-            include ($configInc["inc"] . "/iconeferramentas.php");
             include ($configInc["inc"] . "/iconecamadas.php");
             include ($configInc["inc"] . "/iconecatalogo.php");
             include ($configInc["inc"] . "/iconelegenda.php");
             include ($configInc["inc"] . "/iconebusca.php");
-            //include ($configInc["inc"] . "/iconeinfo.php");
+            include ($configInc["inc"] . "/iconeferramentas.php");
             include ($configInc["inc"] . "/iconetutorial.php");
             ?>
         </div>
@@ -76,11 +79,26 @@ include ($configInc["inc"] . "/css.php");
         <div id="i3GEOguiaMovelMolde">
             <div id="i3GEOguiaMovelConteudo">
                 <?php
-                include ($configInc["inc"] . "/guiaferramentas.php");
                 include ($configInc["inc"] . "/guiacamadas.php");
                 include ($configInc["inc"] . "/guiacatalogo.php");
                 include ($configInc["inc"] . "/guialegenda.php");
                 include ($configInc["inc"] . "/guiabusca.php");
+                include ($configInc["inc"] . "/guiaferramentas.php");
+                ?>
+            </div>
+        </div>
+    </div>
+        <!-- veja i3GEO.guias.CONFIGURA -->
+        <!-- Os IDs sao definidos no botao que ativa a guia veja: "i3GEOguiaMovel" -->
+        <!-- se height nao estiver definido sera utilizada a altura do mapa -->
+        <div id="i3GEOguiaMovelMolde">
+            <div id="i3GEOguiaMovelConteudo">
+                <?php
+                include ($configInc["inc"] . "/guiacamadas.php");
+                include ($configInc["inc"] . "/guiacatalogo.php");
+                include ($configInc["inc"] . "/guialegenda.php");
+                include ($configInc["inc"] . "/guiabusca.php");
+                include ($configInc["inc"] . "/iconeferramentas.php");
                 ?>
             </div>
         </div>
@@ -247,15 +265,15 @@ include ($configInc["inc"] . "/css.php");
                 tutorial.init();
                 new ol.control.FullScreen({
                     target: $i("i3GEOFullscreen"),
-                    className: "ol-FullScreen",
+                    className: "i3GeoBgc2 ol-FullScreen",
                     tipLabel: $trad("fullscreen"),
                     source: "i3geo"
 
                 }).setMap(i3geoOL);
                 new ol.control.Zoom({
-                    target: $i("i3GEOzoomInOut")
+                    target: $i("i3GEOzoomInOut"),
+                    className: "i3GeoBgc2 ol-zoom ol-unselectable ol-control"
                 }).setMap(i3geoOL);
-
                 //i3GEO.eventos.adicionaEventos("RESIZE", $(".guiaOverflow").css("height",i3GEO.parametros.h - 140));
 
                 //setTimeout(function() {
