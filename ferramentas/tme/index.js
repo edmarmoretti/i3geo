@@ -101,7 +101,8 @@ i3GEOF.tme = {
 			}
 			// lista para escolher as colunas com os valores
 			var temp = function(r) {
-			    i3GEOF.tme.montaListaItens(r);
+				
+				i3GEOF.tme.montaListaItens(r);
 			    // se os parametros da ferramenta estiverem definidos na camada
 			    camada = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[i3GEOF.tme._parameters.tema];
 			    if (camada != "" && camada.ferramentas.tme && camada.ferramentas.tme.exec === "sim") {
@@ -161,16 +162,17 @@ i3GEOF.tme = {
 	    );
 	},
 	montaListaItens : function(data) {
-	    var p = this._parameters,
+		var p = this._parameters,
 	    i3f = this;
-	    var ins = [], i, n, item, litens,temp = {}, mustache = [];
+	    var ins = [], i, n, litens,temp = {}, mustache = [];
 	    ins.push("<table>");
-	    n = data.length;
+	    n = data.allItens.length;
 	    for (i = 0; i < n; i++) {
 		temp = {};
-		temp.item = data.item[i];
+		temp.item = data.allItens[i];
 		mustache.push(temp);
 	    }
+
 	    $i("i3GEOtmelistai").innerHTML = Mustache.render(
 		    p.mustachelista,
 		    {
