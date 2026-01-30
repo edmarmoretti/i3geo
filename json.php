@@ -37,10 +37,12 @@ format -  storymap|gdocs
 No caso de storymap, o fornecimento dos dados depende dos parametros definidos no METADATA storymap existente no tema
 
 */
-include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+//include_once (dirname(__FILE__)."/classesphp/sani_request.php");
+include_once(dirname(__FILE__)."/ferramentas/safe2.php");
 $_GET = array_merge($_GET,$_POST);
+
 include(dirname(__FILE__)."/ms_configura.php");
-include(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
+include_once(dirname(__FILE__)."/classesphp/funcoes_gerais.php");
 //
 //pega os enderecos para compor a url de chamada do gerador de web services
 //
@@ -95,6 +97,7 @@ if(!$testemap){
 } else {
     $testemap->save($nomeMapfileTmp);
 }
+
 $tema = $_GET["tema"];
 $oMap = ms_newMapobj($nomeMapfileTmp);
 $nmap = ms_newMapobj($locaplic."/temas/".$tema.".map");
@@ -125,6 +128,7 @@ ms_newLayerObj($oMap, $l);
 
 $oMap->save($nomeMapfileTmp);
 validaAcessoTemas($nomeMapfileTmp,true);
+//echo $nomeMapfileTmp;exit;
 $oMap = ms_newMapobj($nomeMapfileTmp);
 restauraCon($nomeMapfileTmp,$postgis_mapa);
 
@@ -140,8 +144,13 @@ if($format == "storymap"){
     //parametros via URL
     $storymap = $layer->getmetadata("storymap");
     if($storymap == ""){
-        echo "Parametros nao definidos no METADATA storymap";
-        exit;
+        $mapaAtual = ms_newMapObj($_SESSION["map_file"]);
+        $layerAtual = $mapaAtual->getlayerbyname($tema);
+        $storymap = $layerAtual->getmetadata("storymap");  
+        if($storymap == ""){
+            echo "Parametros nao definidos no METADATA storymap";
+            exit;
+        }
     }
     $storymap = str_replace("'",'"',$storymap);
     $storymap = json_decode(converteenc($storymap),true);
@@ -228,6 +237,9 @@ function gdocs(){
 
 function storymap($par){
     global $data, $nomeArq, $jsonp;
+    $projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
+    $projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+
     $items = $data["items"];
     $colunaTexto = array_search($par["coltexto"],$items);
     $colcabecalho = array_search($par["colcabecalho"],$items);
