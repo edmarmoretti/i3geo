@@ -172,7 +172,7 @@ i3GEOF.storymap = {
 		par: par,
 		refresh: true,
 		fn: function(){
-		    window.open(i3GEO.configura.locaplic+"/ferramentas/storymap/default.php?layers=&tema=" + i3GEOF.storymap._parameters.tema);
+		    window.open(i3GEO.configura.locaplic+"/ferramentas/storymap/default.php?g_sid=" + i3GEO.configura.sid + "&tema=" + i3GEOF.storymap._parameters.tema);
 		},
 		prog: i3GEO.configura.locaplic + "/ferramentas/storymap/exec.php"
 	    });
