@@ -118,19 +118,20 @@ body {
 
 	Cesium.Camera.DEFAULT_VIEW_RECTANGLE = extent;
 	Cesium.Camera.DEFAULT_VIEW_FACTOR = 0;
+	const osm = new Cesium.OpenStreetMapImageryProvider({
+    url : 'https://tile.openstreetmap.org/'
+});
 	var viewer = new Cesium.Viewer(
 		'cesiumContainer',
 		{
 			timeline : false,
 			baseLayerPicker : false,
-			imageryProvider : new Cesium.ArcGisMapServerImageryProvider({
-			        url : '//services.arcgisonline.com/ArcGIS/rest/services/World_Street_Map/MapServer'
-			    })
+			imageryProvider : osm
 
 		}
 	);
 	// Add a WMS imagery layer
-	//var imageryLayers = viewer.imageryLayers;
+	var imageryLayers = viewer.imageryLayers;
 	viewer.dataSources.add(Cesium.KmlDataSource.load("readkml.php?g_sid=<?php echo $_GET["g_sid"];?>"))
 </script>
 </body>

@@ -88,11 +88,6 @@ i3GEO.listaDeFerramentas = {
 				url : "javascript:i3GEO.analise.dialogo.markercluster()"
 			},
 			{
-				id : "omenudataAnalise17",
-				text : $trad("t37b"),
-				url : "javascript:i3GEO.analise.dialogo.graficointerativo()"
-			},
-			{
 				id : "omenudataMedirArea",
 				text : $trad("d21at"),
 				show: "hidden",
@@ -252,11 +247,6 @@ i3GEO.listaDeFerramentas = {
 				id : "wkt2layer",
 				text : $trad("wkt2layer"),
 				url : "javascript:i3GEO.mapa.dialogo.wkt2layer()"
-			},
-			{
-				id : "omenudataFerramentasCliqueGrafico",
-				text : $trad("d23t"),
-				url : "javascript:i3GEO.mapa.dialogo.inseregrafico()"
 			}]
 		}
 };
