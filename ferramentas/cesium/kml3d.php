@@ -109,25 +109,26 @@ body {
 <body>
 	<div id="cesiumContainer"></div>
 	<div id="legenda">
-		<img src='<?php //echo strip_tags(str_replace("legend","logo",$legenda));?>' />
 		<br>
 		<img src='readlegend.php?g_sid=<?php echo $_GET["g_sid"];?>' />
 	</div>
 	<script>
+	Cesium.Ion.defaultAccessToken = null;
 	var extent = Cesium.Rectangle.fromDegrees(<?php echo $extensao;?>);
 
 	Cesium.Camera.DEFAULT_VIEW_RECTANGLE = extent;
 	Cesium.Camera.DEFAULT_VIEW_FACTOR = 0;
-	const osm = new Cesium.OpenStreetMapImageryProvider({
-    url : 'https://tile.openstreetmap.org/'
-});
+
 	var viewer = new Cesium.Viewer(
 		'cesiumContainer',
 		{
-			timeline : false,
-			baseLayerPicker : false,
-			imageryProvider : osm
-
+			timeline: false,
+			animation: false,
+			sceneModePicker: true,
+			baseLayerPicker: true,
+			baseLayer: new Cesium.ImageryLayer(new Cesium.OpenStreetMapImageryProvider({
+      url: "https://tile.openstreetmap.org/"
+    }))
 		}
 	);
 	// Add a WMS imagery layer
