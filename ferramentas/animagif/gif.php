@@ -119,7 +119,7 @@ if(isset($_GET["sid"])){
 }
 $nulos = explode(",",$nulos);
 $arqtemp = $dir_tmp."/".$nometemp;
-if(file_exists($arqtemp.".xgif")){
+if(file_exists($arqtemp.".gif")){
     if(getimagesize($arqtemp.".gif") == false){
         echo "";
         exit;

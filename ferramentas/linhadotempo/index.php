@@ -5,8 +5,6 @@ verificaBlFerramentas(basename(dirname(__FILE__)), $i3geoBlFerramentas, false);
 ?>
 <html>
 <head>
-<script src="../../pacotes/ol4/ol.js"></script>
-<script src="../../js/i3geonaocompacto.js" type="text/javascript"></script>
 <script>
 Timeline_ajax_url="../../pacotes/simile/timeline_2.3.0/timeline_ajax/simile-ajax-api.js";
 Timeline_urlPrefix='../../pacotes/simile/timeline_2.3.0/timeline_js/';
@@ -50,9 +48,15 @@ $i = function(id){
 var tl;
 var eventSource1 = new Timeline.DefaultEventSource();
 MARCA = false;
-const wpi = window.parent.i3GEO;
+//A ferramenta roda em um iframe, por isso precisa pegar os objetos do parent
+i3GEO = window.parent.i3GEO;
+i3geoOL = window.parent.i3geoOL;
+$trad = window.parent.i3GEO.idioma.objetoIdioma;
+var resizeTimerID = null;
+
 const wpf = window.parent.i3GEOF.linhadotempo;
 const tema = window.parent.i3GEOF.linhadotempo._parameters.tema;
+
 function inicializa(){
 	document.body.className = "";
 	document.body.style.background = "white";
@@ -63,7 +67,7 @@ function inicializa(){
 /*
 Function: bandas
 
-Cria o objeto bandInfos com os parâmetros necess&aacute;rios para a cria&ccedil;&atilde;o do gr&aacute;fico
+Cria o objeto bandInfos com os parï¿½metros necess&aacute;rios para a cria&ccedil;&atilde;o do gr&aacute;fico
 */
 function bandas(){
 	tl_el = $i("tl");
@@ -103,9 +107,9 @@ function carregaDados(){
 	tl_el.innerHTML = "<span style=color:red; >"+$trad("o1")+"</span>";
     par = {
         "tema": wpf._parameters.tema,
-        "g_sid": wpi.configura.sid,
+        "g_sid": i3GEO.configura.sid,
         "funcao": "dados",
-        "ext": wpi.util.extOSM2Geo(wpi.parametros.mapexten)
+        "ext": i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten)
     };
     wpf.post({
         snackbar: true,
@@ -119,7 +123,7 @@ function carregaDados(){
 		  tl.layout(); // display the Timeline
 		  tl.getBand(0).scrollToCenter(Timeline.DateTime.parseGregorianDateTime(data.maiorano));
         },
-        prog: wpi.configura.locaplic + "/ferramentas/linhadotempo/exec.php"
+        prog: i3GEO.configura.locaplic + "/ferramentas/linhadotempo/exec.php"
     });
 }
 function tituloover(wkt){
@@ -135,7 +139,7 @@ function tituloover(wkt){
         });
 	}
 	else{
-		wi.i3GEO.desenho.movePin(MARCA,wkt[0]*1,wkt[1]*1);
+		i3GEO.desenho.movePin(MARCA,wkt[0]*1,wkt[1]*1);
 	}
 }
 /*
@@ -145,7 +149,7 @@ Remove do mapa a marca de localiza&ccedil;&atilde;o do evento quando o usu&aacut
 
 */
 function tituloout(){
-    wpi.desenho.removePins("linhadotempo");
+    i3GEO.desenho.removePins("linhadotempo");
 	MARCA = false;
 }
 /*
