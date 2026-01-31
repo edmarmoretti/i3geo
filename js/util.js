@@ -2753,6 +2753,9 @@ i3GEO.util =
 		 * Converte string 'xmin ymin xmax ymax' ou 'xmin ymin' de geo para a projecao OSM
 		 */
 		extGeo2OSM : function(ext, retornaArray) {
+			if (typeof (console) !== 'undefined')
+                console.info("i3GEO.util.extGeo2OSM()");
+
 			var projView = i3geoOL.getView().getProjection().getCode(),
 			metrica, point, temp, sep;
 			sep = " ";
