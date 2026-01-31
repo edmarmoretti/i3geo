@@ -191,6 +191,9 @@ if(!isset($_GET["sid"])){
     }
 }
 
+$projInObj = ms_newprojectionobj("proj=latlong,a=6378137,b=6378137");
+$projOutObj = ms_newprojectionobj("proj=merc,a=6378137,b=6378137,lat_ts=0.0,lon_0=0.0,x_0=0.0,y_0=0,k=1.0,units=m");
+
 //aplica a extensao geografica
 $layer = $mapa->getlayerbyname($tema);
 $extatual = $mapa->extent;
@@ -204,6 +207,12 @@ else{
 if ($ret != ""){
     $ret = explode(" ",$ret);
     $extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
+    if ($mapa->getmetadata("interface") == "googlemaps") {
+        $ret = $mapa->extent;
+        // reprojeta o retangulo
+        $ret->project($projInObj, $projOutObj);
+        $extatual->setextent($ret->minx, $ret->miny, $ret->maxx, $ret->maxy);
+    }
 }
 $mapa->setsize($w,$h);
 $sca = $mapa->scalebar;
@@ -313,19 +322,24 @@ foreach($listaunica as $d){
     $filtro = "(('[$colunat]' $operador '$d'))";
     if($tipocolunat == "numerico" || $tipocolunat == "numero"){
         $filtro = "(([$colunat] $operador $d))";
+        if(!is_numeric($d)){
+            continue;
+        }
     }
     $layer->setfilter($filtro);
     $nomec = $arqtemp.$d.".png";
     $s = "LABEL TEXT '".$d."' END";
     $label->updateFromString($s);
-    $i = $mapa->draw();
-    $objImagem->pasteImage($i,-1);
+    $objImagem = $mapa->draw();
+    //$objImagem->pasteImage($i,-1);
     $objImagem->saveImage($nomec);
-    $imagens[] = $nomec;
-    $duracao[] = $tempo;
+    if(file_exists($nomec)){ 
+        $imagens[] = $nomec;
+        $duracao[] = $tempo;
+    }
 }
-
 restauraConObj($mapa,$postgis_mapa);
+//$mapa->save($arqtemp.".map");
 $mapa = null;
 //junta as imagens no gif
 include("../../pacotes/gifcreator/GifCreator.php");
@@ -335,7 +349,9 @@ $gc->create($imagens, $duracao, 0);
 $gifBinary = $gc->getGif();
 file_put_contents($arqtemp.".gif", $gifBinary);
 foreach($imagens as $i){
-    unlink($i);
+    if(file_exists($i)){
+        unlink($i);
+    }
 }
 //retorna o gif para o navegador
 ob_clean();
