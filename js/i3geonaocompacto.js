@@ -71,10 +71,9 @@
 	"timer.js",
 	"caixaDeFerramentas.js"
 	);
-	var nocache = new Date().getTime();
 	for (i = 0; i < jsfiles.length; i++)
 	{
-		var currentScriptTag = "<script type='text/javascript' src='" + scriptLocation + jsfiles[i] + "?time=" + nocache + "'></script>";
+		var currentScriptTag = "<script type='text/javascript' src='" + scriptLocation + jsfiles[i] + "'></script>";
 		allScriptTags += currentScriptTag;
 	}
 	//css
@@ -87,7 +86,7 @@
 	);
 	for (i = 0; i < cssfiles.length; i++)
 	{
-		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i]  + "?" + nocache + "'/>";
+		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";
 		allCssTags += currentCssTag;
 	}
 	allCssTags += "<link rel='stylesheet' type='text/css' href='../pacotes/jquery/jquery-ui/jquery-ui.min.css'/>";
@@ -96,5 +95,4 @@
 	allCssTags += "<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio'>";
 	document.write(allCssTags);
 	document.write(allScriptTags);
-
 })();
