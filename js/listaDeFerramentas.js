@@ -180,16 +180,6 @@ i3GEO.listaDeFerramentas = {
 				url : "javascript:i3GEO.navega.dialogo.googlemaps()"
 			},
 			{
-				id : "omenudataNavegacaoWiki",
-				text : $trad("d11t"),
-				url : "javascript:i3GEO.navega.dialogo.wiki()"
-			},
-			{
-				id : "omenudataNavegacaoConfluence",
-				text : $trad("d17t"),
-				url : "javascript:i3GEO.navega.dialogo.confluence()"
-			},
-			{
 				id : "omenudataFerramentas7a",
 				text : $trad("x64a"),
 				url : "javascript:i3GEO.mapa.dialogo.congelamapa();"

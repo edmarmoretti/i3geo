@@ -566,48 +566,6 @@ i3GEO.navega =
          */
         dialogo : {
             /**
-             * Function: wiki
-             *
-             * Abre a janela de di&aacute;logo da ferramenta wiki permitindo a navega&ccedil;&atilde;o integrada com a Wikip&eacute;dia
-             */
-            wiki : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.navega.dialogo.wiki()",
-                        "wiki",
-                        "wiki",
-                        "dependencias.php",
-                "i3GEOF.wiki.start()");
-            },
-            /**
-             * Function: metar
-             *
-             * Abre a janela de di&aacute;logo da ferramenta metar permitindo a navega&ccedil;&atilde;o integrada com a rede de dados
-             * meteorol&oacute;gicos
-             */
-            metar : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.navega.dialogo.metar()",
-                        "metar",
-                        "metar",
-                        "dependencias.php",
-                "i3GEOF.metar.iniciaJanelaFlutuante()");
-            },
-            /**
-             * Function: buscaFotos
-             *
-             * Abre a janela de di&aacute;logo da ferramenta metar permitindo a navega&ccedil;&atilde;o integrada com servi&ccedil;os de
-             * armazenamento de fotografias
-             */
-            buscaFotos : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.navega.dialogo.buscaFotos()",
-                        "buscafotos",
-                        "buscaFotos",
-                        "dependencias.php",
-                        "i3GEOF.buscaFotos.iniciaJanelaFlutuante()"
-                );
-            },
-            /**
              * Function: google
              *
              * Abre a janela de di&aacute;logo da ferramenta google permitindo a navega&ccedil;&atilde;o integrada com o GoogleMaps
@@ -624,20 +582,6 @@ i3GEO.navega =
                         "googlemaps",
                         "dependencias.php",
                 "i3GEOF.googlemaps.start()");
-            },
-            /**
-             * Function: confluence
-             *
-             * Abre a janela de di&aacute;logo da ferramenta confluence permitindo a navega&ccedil;&atilde;o integrada com a
-             * localiza&ccedil;&atilde;o de conflu&ecirc;ncias
-             */
-            confluence : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.navega.dialogo.confluence()",
-                        "confluence",
-                        "confluence",
-                        "dependencias.php",
-                "i3GEOF.confluence.start()");
             }
         },
         atualizaGoogle : function(idgoogle) {
