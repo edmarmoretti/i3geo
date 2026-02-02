@@ -946,7 +946,6 @@ function mostraAguarde()
         echo "<td colspan=3 ><center><img src='" . dirname(__FILE__) . "/imagens/i3geo1.jpg'></td></tr>";
         echo "<tr><td><center><img src='" . dirname(__FILE__) . "/imagens/pspb.png'></td>";
         echo "<td><center><img src='" . dirname(__FILE__) . "/imagens/mapserv.png'></td>";
-        echo "<td><center><img src='" . dirname(__FILE__) . "/imagens/yui-logo.png'></td>";
         echo "<td><center><a href='http://mapas.mma.gov.br/download' target=blank ><img src='" . dirname(__FILE__) . "/imagens/somerights20_pt.gif' ></a></td>";
         echo "</tr></table>";
         echo '<BODY bgcolor="white" style="background-color:white">';

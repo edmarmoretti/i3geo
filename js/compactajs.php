@@ -93,7 +93,6 @@ echo "<pre>";
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
-packer("../pacotes/cesium154/Build/CesiumUnminified/Cesium.js","../pacotes/cesium154/Build/CesiumUnminified/Cesium_compacto.js","None");
 packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
 packer("plugini3geo.js","compactados/plugini3geo_compacto.js","Normal");
 packer("marcador.js","compactados/marcador_compacto.js","Normal");
@@ -207,7 +206,7 @@ $jsfiles = array(
 $removeQuebra = array();
 
 $buffer = "\$i = function(id){return document.getElementById(id);};\n";
-salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto8.js","js");
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
 //
 //gera um unico css
 //
@@ -219,7 +218,7 @@ $cssfiles = array(
 );
 
 $buffer = "";
-salvatudojs($cssfiles,$buffer,"../css/i3geo8.css","css");
+salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");
 //testa os scripts
 foreach ($jsfiles as $f)
 {
