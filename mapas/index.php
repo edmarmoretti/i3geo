@@ -139,7 +139,7 @@ include ("templates/templatelinks.php");
 include ("templates/templatelista.php");
 ?>
     <script src='../pacotes/ol4/ol.js'></script>
-    <script src='../js/i3geo_tudo_compacto8.js.php'></script>
+    <script src='../js/i3geo_tudo_compacto.js.php'></script>
     <script src='dicionario.js'></script>
     <script src='index.js'></script>
     <script>

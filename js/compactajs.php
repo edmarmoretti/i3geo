@@ -206,7 +206,7 @@ $jsfiles = array(
 $removeQuebra = array();
 
 $buffer = "\$i = function(id){return document.getElementById(id);};\n";
-salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto8.js","js");
+salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
 //
 //gera um unico css
 //
@@ -218,7 +218,7 @@ $cssfiles = array(
 );
 
 $buffer = "";
-salvatudojs($cssfiles,$buffer,"../css/i3geo8.css","css");
+salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");
 //testa os scripts
 foreach ($jsfiles as $f)
 {
