@@ -10,5 +10,5 @@
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=kmlwms&bbox={{mapext}}&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}" >{{{kmlwms}}}</a>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=kml&bbox={{mapext}}&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}" >{{{kml}}}</a>
 <p><a target=blank href="{{{servico}}}OUTPUTFORMAT=geojson&bbox={{mapext}}&service=wfs&version=1.1.0&request=getfeature&layers={{{tema}}}&typeName={{{tema}}}" >GeoJson</a>
-<p><a target=blank href="{{{urli3geo}}}/ferramentas/recline/default.php?tema={{{tema}}}" >{{{explore}}}</a>
+
 </script>
