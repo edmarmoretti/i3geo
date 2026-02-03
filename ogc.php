@@ -160,12 +160,7 @@ if(isset($_GET["typeName"])){
 if(!isset($tema) && isset($_GET["typename"])){
 	$tema = $_GET["typename"];
 }
-//
-//define um nome para o mapfile caso a origem seja o sistema de metadados estatisticos
-//
-if(isset($_GET["id_medida_variavel"]) && $_GET["id_medida_variavel"] != ""){
-	$tema = "ogcmetaestat".$_GET["id_medida_variavel"];
-}
+
 if(isset($_GET["TileMatrix"])){
 	$_GET["WIDTH"] = 256;
 	$_GET["HEIGHT"] = 256;
@@ -503,26 +498,6 @@ else{
 				$extensao = ".gvp";
 			}
 			if($extensao == ".map"){
-				//cria o mapfile com base no sistema de metadados estatisticos
-				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
-				if(!isset($_GET["id_medida_variavel"]) && $temai3geo == true){
-					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
-					$l = $nmap->getlayer(0);
-					$teste = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
-					if($teste != "" && $l->data == ""){
-						$_GET["id_medida_variavel"] = $teste;
-					}
-				}
-				if(isset($_GET["id_medida_variavel"])){
-					$temai3geo = false;
-					include("classesphp/classe_metaestatinfo.php");
-					$m = new MetaestatInfo();
-					$m->nomecache = "ogcmetaestat".$_GET["id_medida_variavel"];
-					$mapfileMetaestat = $m->mapfileMedidaVariavel($_GET["id_medida_variavel"],"",1,"","","","","","",true);
-					$nmap = ms_newMapobj($mapfileMetaestat["mapfile"]);
-					$nmap->setmetadata("ows_enable_request","*");
-					$req->setParameter("LAYERS", "ogcmetaestat".$_GET["id_medida_variavel"]);
-				}
 				if($temai3geo == true){
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
 					$nmap->setmetadata("ows_enable_request","*");

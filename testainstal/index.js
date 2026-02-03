@@ -42,13 +42,6 @@ botoesIni = [
 	"fa": "map-o",
 	"target": "_blank"
 },{
-	"img":"editor.png",
-	"href":"../ferramentas/metaestat/editorlimites.php",
-	"titulo":$trad(9,g_traducao_init),
-	"subtitulo": $trad("9a",g_traducao_init),
-	"fa": "map-o",
-	"target": "_blank"
-},{
 	"img":"window-duplicate.png",
 	"href":"../ferramentas/salvamapa/lista.htm",
 	"titulo":$trad(34,g_traducao_init),

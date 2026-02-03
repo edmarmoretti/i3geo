@@ -501,8 +501,6 @@ class Map
                     $layerObj->getmetadata("legendaimg"),
                     $layerObj->offsite->red . "," . $layerObj->offsite->green . "," . $layerObj->offsite->blue,
                     $layerObj->numclasses,
-                    $layerObj->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"),
-                    $layerObj->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"),
                     $utfgrid,
                     $layerObj->maxscaledenom,
                     $layerObj->minscaledenom,
@@ -576,55 +574,6 @@ class Map
         }
         $mapObj->save($map_file);
         $mapObj->free();
-    }
-
-    /**
-     * Adiciona uma camada baseada no sistema de metadados estatisticos
-     *
-     * @param string $metaestatids
-     * @param string $layerson
-     */
-    function addLayersMetaestat($mapId, $metaestatids = "", $layerson = "")
-    {
-        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
-        $Admin = new \mapserverapi\Admin();
-        $metaestatids = explode(",", $metaestatids);
-        if (count($metaestatids) == 0) {
-            return;
-        }
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        $metaestatidsligados = explode(",", $layerson);
-        foreach ($metaestatids as $metaestatid) {
-            $parametros = $Admin->i3geoestat_parametro_medida($metaestatid, "", "", true, true);
-            // id_parametro_medida,coluna
-            $filtroPar = array();
-            $tituloPar = array();
-            foreach ($parametros as $parametro) {
-                $valoresparametro = $Metaestatinfo->valorUnicoMedidaVariavel($metaestatid, $parametro["coluna"]);
-                $valormaior = $valoresparametro[count($valoresparametro) - 1];
-                $filtroPar[] = " " . $parametro["coluna"] . "::text = '" . $valormaior[$parametro["coluna"]] . "' ";
-                $tituloPar[] = $parametro["coluna"] . ": " . $valormaior[$parametro["coluna"]];
-            }
-            $dadosMedida = $Admin->i3geoestat_medida_variavel_variavel("", $metaestatid);
-            $tituloCamada = mb_convert_encoding($dadosMedida["nomemedida"], "ISO-8859-1", mb_detect_encoding($dadosMedida["nomemedida"]));
-            if (count($tituloPar) > 0) {
-                $tituloCamada = $tituloCamada . " (" . implode(" ,", $tituloPar) . " )";
-            }
-            $mapfilemetaestat = $Metaestatinfo->mapfileMeasure($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true, $_SESSION["dir_tmp"] . "/metaestatTempInit" . $metaestatid . ".map");
-            // echo $mapfilemetaestat["mapfile"];exit;
-            $map = ms_newMapObj($_SESSION["map_file"]);
-            $mapTemp = ms_newMapObjFromString($mapfilemetaestat["mapfile"]);
-            $layerObj = $mapTemp->getlayerbyname($mapfilemetaestat["layer"]);
-            $layerObj->set("status", MS_DEFAULT);
-            if ($layerObj->type == MS_LAYER_POLYGON) {
-                $map->insertLayer($layerObj, 0);
-            } else {
-                $map->insertLayer($layerObj, - 1);
-            }
-            $map->save($_SESSION["map_file"]);
-        }
     }
 
     function addLayerWms($mapId, $wms_name, $url, $proj, $formatlist, $layerTitle = "", $version = "1.1.1", $wms_style = "", $representationtype = "", $suportsld = false, $infoformat = "text/plain", $time = "", $tile = 0, $allitens = false)
@@ -1397,11 +1346,7 @@ class Map
                             $l->set("status", $statustemp);
                         }
                         $this->layer->cloneInlineSymbol($maptemp, $l, $mapObj);
-                        if ($l->type == MS_LAYER_POLYGON && $l->getmetadata("METAESTAT") == "SIM") {
-                            $mapObj->insertLayer($l, 0);
-                        } else {
-                            $mapObj->insertLayer($l, - 1);
-                        }
+                        $mapObj->insertLayer($l, - 1);
                         $layerObj = $mapObj->getlayerbyname($l->name);
                         $this->layer->fixLayerGrid($l, $layerObj);
                         $this->correctShapefilePath($mapObj, $layerObj);
@@ -2047,55 +1992,6 @@ class Map
         return ($nome);
     }
 
-    function addLayerMetaestatFilter($mapId, $measure, $filter, $classification, $opacity, $regiontype)
-    {
-        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        if (! empty($filter)) {
-            $filter = str_replace('"', "'", $filter);
-            $final = array();
-            $sepands = explode("|", $filter);
-            foreach ($sepands as $sepand) {
-                $linhas = explode("*", $sepand);
-                if (! is_numeric(str_replace(array(
-                    "'",
-                    ","
-                ), "", $linhas[1]))) {
-                    exit();
-                }
-                if (count(explode(",", $linhas[1])) == 1) {
-                    $final[] = $linhas[0] . " = " . $linhas[1];
-                } else {
-                    $final[] = $linhas[0] . " IN (" . $linhas[1] . ")";
-                }
-            }
-            $filter = implode(" and ", $final);
-        }
-        $data = $Metaestatinfo->mapfileMeasure($measure, $filter, 0, "polygon", "", $classification, "", $regiontype, $opacity, false);
-        $layerObj = $data["mapObj"]->getLayerByName($data["layerName"]);
-        $layerObj->set("status", MS_DEFAULT);
-        ms_newLayerObj($mapObj, $layerObj);
-        $mapObj->save($_SESSION["map_file"]);
-        return (true);
-    }
-
-    function addLayerRegion($mapId, $codigo_tipo_regiao, $outlinecolor = "50,50,50", $width = 2)
-    {
-        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        $data = $Metaestatinfo->mapfileRegion($codigo_tipo_regiao, $outlinecolor, $width);
-        $layerObj = $data["mapObj"]->getLayerByName($data["layerName"]);
-        $layerObj->set("status", MS_DEFAULT);
-        ms_newLayerObj($mapObj, $layerObj);
-        $mapObj->save($_SESSION["map_file"]);
-        return (true);
-    }
 
     function createEmptyLayer($mapObj, $ms_tipo, $ms_status, $metaTema, $metaClasse = "SIM", $reposiciona = true)
     {

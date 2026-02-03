@@ -254,7 +254,6 @@ if (empty($base) && ! empty($parurl["base"])) {
 }
 
 ms_ResetErrorList();
-$metaestatids = @$parurl["metaestatids"];
 $temasa = @$parurl["temasa"];
 $layers = @$parurl["layers"];
 $desligar = @$parurl["desligar"];
@@ -769,7 +768,7 @@ function ligaTemas()
  */
 function incluiTemasIniciais()
 {
-    global $temasa, $mapn, $locaplic, $metaestatids, $layers;
+    global $temasa, $mapn, $locaplic, $layers;
     if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         $temasdir = $locaplic . "\\temas";
     } else {
@@ -780,54 +779,6 @@ function incluiTemasIniciais()
     }
     $temasa = str_replace(',', " ", $temasa);
     $alayers = explode(" ", $temasa);
-    if (isset($metaestatids)) {
-        // localhost/i3geo/ms_criamapa.php?metaestatids=25,12&layers=25
-        include_once (dirname(__FILE__) . "/classesphp/classe_metaestatinfo.php");
-        $metaestatids = str_replace(',', " ", $metaestatids);
-        $metaestatids = explode(" ", $metaestatids);
-        $metaestatidsligados = $layers;
-        $metaestatidsligados = str_replace(',', " ", $metaestatidsligados);
-        $metaestatidsligados = explode(" ", $metaestatidsligados);
-        foreach ($metaestatids as $metaestatid) {
-            if(!file_exists($_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map")){
-                $m = new MetaestatInfo();
-                $parametros = $m->listaParametro($metaestatid, "", "", true, true);
-                // id_parametro_medida,coluna
-                $filtroPar = array();
-                $tituloPar = array();
-                foreach ($parametros as $parametro) {
-                    $valoresparametro = $m->valorUnicoMedidaVariavel($metaestatid, $parametro["coluna"]);
-                    //var_dump($valoresparametro);
-                    //exit();
-                    $valormaior = $valoresparametro[count($valoresparametro) - 1];
-                    $filtroPar[] = " " . $parametro["coluna"] . "::text = '" . $valormaior[$parametro["coluna"]] . "' ";
-                    $tituloPar[] = $parametro["coluna"] . ": " . $valormaior[$parametro["coluna"]];
-                }
-                $dadosMedida = $m->listaMedidaVariavel("", $metaestatid);
-                // var_dump($dadosMedida);exit;
-                $tituloCamada = mb_convert_encoding($dadosMedida["nomemedida"],"ISO-8859-1",mb_detect_encoding($dadosMedida["nomemedida"]));
-                if(count($tituloPar)>0){
-                    $tituloCamada = $tituloCamada." (".implode(" ,",$tituloPar)." )";
-                }
-                $mapfilemetaestat = $m->mapfileMedidaVariavel($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true,$_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map");
-            } else {
-                $mapfilemetaestat = array(
-                    "mapfile" => $_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map",
-                    "layer" => "metaestatTempInit".$metaestatid
-                );
-            }
-            // array(3) { ["mapfile"]=> string(52) "/tmp/ms_tmp/AAAAc20ad4d76fe97759aa27a0c99bff6710.map" ["layer"]=> string(36) "AAAAc20ad4d76fe97759aa27a0c99bff6710" ["titulolayer"]=> string(0) "" }
-            // var_dump ($mapfilemetaestat);
-            // exit;
-            array_push($alayers, $mapfilemetaestat["mapfile"]);
-
-            if (in_array($metaestatid, $metaestatidsligados)) {
-                $maptemp = @ms_newMapObj($mapfilemetaestat["mapfile"]);
-                $maptemp->getlayerbyname($mapfilemetaestat["layer"])->set("status", MS_DEFAULT);
-                $maptemp->save($mapfilemetaestat["mapfile"]);
-            }
-        }
-    }
 
     foreach ($alayers as $arqt) {
         $arqtemp = "";
@@ -889,12 +840,7 @@ function incluiTemasIniciais()
                         $layern->set("status", $statustemp);
                     }
                     cloneInlineSymbol($layern, $maptemp, $mapn);
-                    //$layerAdicionado = ms_newLayerObj($mapn, $layern);
-                    if($layern->type == MS_LAYER_POLYGON && $layern->getmetadata("METAESTAT") == "SIM"){
-                        $mapn->insertLayer($layern,0);
-                    } else {
-                        $mapn->insertLayer($layern,-1);
-                    }
+                    $mapn->insertLayer($layern,-1);
                     // echo $layern->name;
                     //corrigeLayerGrid($layern, $layerAdicionado);
                     corrigeLayerGrid($layern, $mapn->getlayerbyname($layern->name));

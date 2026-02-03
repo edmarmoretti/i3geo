@@ -99,34 +99,6 @@ g_traducao_init =
 				es : "Con el plugin de GE este mapa permite visualizar capas superpuestas al relieve terrestre visto en la forma de un globo con navegaci&oacute;n en 3d."
 			}
 		],
-		8 : [
-			{
-				pt : "Cartogramas",
-				en : "Cartogram",
-				es : "Cartogramas"
-			}
-		],
-		"8a" : [
-			{
-				pt : "Com o m&oacute;dulo METAESTAT, um sistema de cadastramento de vari&aacute;veis estat&iacute;sticas, construa cartogramas com fun&ccedil;&otilde;es de agrega&ccedil;&atilde;o geogr&aacute;fica, temporal  e diferentes classifica&ccedil;&otilde;es.",
-				en : "With the METAESTAT module, a system for recording statistical variables builds cartograms with geographical and time aggregation functions as well as various classifications.",
-				es : "Con el m&oacute;dulo METAESTAT, un sistema de registro de variables estad&iacute;sticas construye cartogramas con funciones de agregaci&oacute;n geogr&aacute;fica y temporal as&iacute; como clasificaciones diversas."
-			}
-		],
-		9 : [
-			{
-				pt : "Editor de regi&otilde;es",
-				en : "Region editor",
-				es : "Editor de regiones"
-			}
-		],
-		"9a" : [
-			{
-				pt : "Utilize esse editor vetorial para criar ou modificar as localidades ou regi&otilde;es geogr&aacute;ficas utilizadas nos cartogramas estat&iacute;sticos.",
-				en : "Use this vector editor to create or modify geographic locations or regions used for statistical cartograms.",
-				es : "Utilice este editor vectorial para crear o modificar las localidades o regiones geogr&aacute;ficas utilizadas en los mapas estad&iacute;sticos."
-			}
-		],
 		10 : [
 			{
 				pt : "Download de dados",
@@ -293,13 +265,6 @@ g_traducao_init =
 				pt : "Descri&ccedil;&atilde;o das fun&ccedil;&otilde;es javascript que podem ser modificadas ou utilizadas para criar interfaces para os seus mapas.",
 				en : "Description of JavaScript components that can be modified or used to create interfaces for your maps.",
 				es : "Descripci&oacute;n de las funciones JavaScript que se pueden modificar o utilizar para crear interfaces para sus mapas."
-			}
-		],
-		"25a" : [
-			{
-				pt : "Ferramenta OLAP que permite cruzar dados tabulares definidos por meio do m&oacute;dulo METAESTAT.",
-				en : "OLAP tool that allows you to cross data tables defined through the METAESTAT module.",
-				es : "Herramienta OLAP que permite cruzar tablas de datos definidos a trav&eacute;s del m&oacute;dulo METAESTAT."
 			}
 		],
 		26 : [

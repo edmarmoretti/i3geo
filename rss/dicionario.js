@@ -1,11 +1,6 @@
 //veja em index.js o objeto que utiliza essa traducao
 g_traducao_rss =
 {
-		'xmlWmsMetaestat' : [ {
-			pt : "XML com a lista de servi&ccedil;os WMS originados do sistema de metadados estat&iacute;sticos",
-			en : "",
-			es : ""
-		} ],
 		'verRss' : [ {
 			pt : "RSS com a lista de mapas cadastrados",
 			en : "",

@@ -40,11 +40,6 @@ i3GEOadmin.menup.dicionario = {
 		en : "Groups and relationship with users",
 		es : "Grupos y relaci&oacute;n con los usuarios"
 	} ],
-	'metadadosEstatisticos' : [ {
-		pt : "Metaestat",
-		en : "Metaestat",
-		es : "Metaestat"
-	} ],
 	'documentacao' : [ {
 		pt : "Documenta&ccedil;&atilde;o (baseada no i3GeoSa&uacute;de)",
 		en : "Documentation (based on i3GeoSa&uacute;de)",
@@ -89,11 +84,6 @@ i3GEOadmin.menup.dicionario = {
 		pt : "Gerenciador de banco de dados. Upload de SHP e CSV para armazenamento no Postgis",
 		en : "Database manager. Uploading of SHP and CSV files to Postgis storage",
 		es : "Administrador de bases de datos. Carga de SHP y CSV para el almacenamiento en Postgis"
-	} ],
-	'xmlWmsMetaestat' : [ {
-		pt : "XML com a lista de servi&ccedil;os WMS originados do sistema de metadados estat&iacute;sticos",
-		en : "XML with the list of WMS services originating from the statistical metadata system",
-		es : "XML con la lista de servicios WMS originados en el sistema de metadatos estad&iacute;sticos"
 	} ],
 	'verRss' : [ {
 		pt : "RSS com a lista de mapas cadastrados",

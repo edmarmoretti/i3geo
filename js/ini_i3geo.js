@@ -324,9 +324,6 @@ var i3GEO = {
                     //par.push("&desligar="+p.layers.off.join(","));
                     par.push("&layersoff="+p.layers.off.join(","));
                 }
-                if(p.layers.metaestat && p.layers.metaestat.length > 0){
-                    par.push("&metaestatids="+p.layers.metaestat.join(","));
-                }
             }
             if(p.hasOwnProperty("points") && p.points.coord.length > 0){
                 par.push("&namepoints="+p.points.title);

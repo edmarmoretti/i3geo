@@ -45,7 +45,7 @@ if (! empty($funcao)) {
 }
 switch ($funcao) {
     case "ALTERAR":
-        $dados = \admin\catalogo\mapfile\conexao\local\alterar($_SESSION["locaplic"], $codigo, $_POST["connection"], $_POST["connectiontype"], $_POST["data"], $_POST["tileindex"], $_POST["tileitem"], $_POST["type"], $_POST["projection"], $_POST["convcaracter"], $_POST["metaestat"], $_POST["metaestat_id_medida_variavel"], $dbhw);
+        $dados = \admin\catalogo\mapfile\conexao\local\alterar($_SESSION["locaplic"], $codigo, $_POST["connection"], $_POST["connectiontype"], $_POST["data"], $_POST["tileindex"], $_POST["tileitem"], $_POST["type"], $_POST["projection"], $_POST["convcaracter"], $dbhw);
         if ($dados === false) {
             header("HTTP/1.1 500 erro ao definir as propriedades");
         }

@@ -249,13 +249,6 @@
                         "type": "string"
                     },
                     {
-                        "name": "metaestatids",
-                        "in": "query",
-                        "description": "Lista de codigos de medidas de variaveis cadastradas no\n *            sistema de metadados estatisticos. Cada medida sera adicionada como\n *            um novo layer no mapa.",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
                         "name": "wkt",
                         "in": "query",
                         "description": "Coordenadas, no formato WKT que serao adicionadas ao mapa como uma camada nova.",
@@ -966,94 +959,6 @@
                         "description": "Search string",
                         "required": true,
                         "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Result status"
-                    }
-                }
-            }
-        },
-        "/i3geo/mapserverapi/map/{mapId}/addLayerMetaestatFilter/": {
-            "get": {
-                "tags": [
-                    "map add layer"
-                ],
-                "summary": "Add a new layer to the map based on the statistical metadata system.",
-                "operationId": "addLayerMetaestatFilter",
-                "parameters": [
-                    {
-                        "name": "mapId",
-                        "in": "path",
-                        "description": "Map id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "measure",
-                        "in": "query",
-                        "description": "Measure id.",
-                        "required": true,
-                        "type": "number"
-                    },
-                    {
-                        "name": "filter",
-                        "in": "query",
-                        "description": "Filters that will be applied. Format: columnName * value | columName * value .",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "classification",
-                        "in": "query",
-                        "description": "Classification type code when there are more than one.",
-                        "required": true,
-                        "type": "number"
-                    },
-                    {
-                        "name": "opacity",
-                        "in": "query",
-                        "description": "Layer opacity.",
-                        "required": false,
-                        "type": "number"
-                    },
-                    {
-                        "name": "regiontype",
-                        "in": "query",
-                        "description": "Region type code.",
-                        "required": false,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "Result status"
-                    }
-                }
-            }
-        },
-        "/i3geo/mapserverapi/map/{mapId}/addLayerRegion/": {
-            "get": {
-                "tags": [
-                    "map add layer"
-                ],
-                "summary": "Add a new layer to the map based on the statistical metadata system and regions.",
-                "operationId": "addLayerRegion",
-                "parameters": [
-                    {
-                        "name": "mapId",
-                        "in": "path",
-                        "description": "Map id",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "region",
-                        "in": "query",
-                        "description": "Region id.",
-                        "required": true,
-                        "type": "number"
                     }
                 ],
                 "responses": {

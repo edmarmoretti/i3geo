@@ -48,9 +48,6 @@ class Mscriamapa
         if (isset($param["layersoff"])) {
             $this->map->layersOff($mapId, $param["layersoff"]);
         }
-        if (isset($param["metaestatids"])) {
-            $this->map->addLayersMetaestat($mapId,$param["metaestatids"], $param["layerson"]);
-        }
         // processa parametros de inclusao de dados
         if (isset($param["wkt"])) {
             $this->map->addLayerByWkt($mapId,$param["wkt"], $param["namewkt"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);

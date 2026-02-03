@@ -310,16 +310,6 @@ substituiConObj($oMap,$postgis_mapa);
 				$extensao = ".gvp";
 			}
 			if($extensao == ".map"){
-				//cria o mapfile com base no sistema de metadados estatisticos
-				//verifica se o id_medida_variavel existe no mapfile e nao foi passado como um parametro
-				if(!isset($_GET["id_medida_variavel"]) && $temai3geo == true){
-					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");
-					$l = $nmap->getlayer(0);
-					$teste = $l->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL");
-					if($teste != "" && $l->data == ""){
-						$_GET["id_medida_variavel"] = $teste;
-					}
-				}
 
 				if($temai3geo == true){
 					$nmap = ms_newMapobj($locaplic."/temas/".$tx.".map");

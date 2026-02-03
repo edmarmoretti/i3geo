@@ -96,7 +96,6 @@ Obt&eacute;m a lista
 												"excluir": i3GEOadmin.mapfile.dicionario.cancelar,
 												"onExcluir": "i3GEOadmin.core.fechaModalGeral",//funcao
 												"onSalvar": "i3GEOadmin.mapfile.adiciona",
-												"metaestatnao": "selected",
 												"acessopublico": "checked",
 												"criaMapfileTxt": i3GEOadmin.mapfile.dicionario.criaMapfile,
 												"criaMapfileDescTxt": i3GEOadmin.mapfile.dicionario.criaMapfileDesc

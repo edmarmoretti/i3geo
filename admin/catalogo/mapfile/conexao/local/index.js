@@ -59,19 +59,6 @@ i3GEOadmin.conexaolocal = {
 																hash
 														);
 													},
-													"metaestat":  function(){
-														var hash = {
-																"sim": i3GEOadmin.conexaolocal.dicionario.sim,
-																"nao": i3GEOadmin.conexaolocal.dicionario.nao,
-																"NAO-sel" : "",
-																"SIM-sel": ""
-															};
-														hash[json.dados.metaestat + "-sel"] = "selected";
-														return Mustache.to_html(
-																$("#templateOpcoesPublicado").html(),
-																hash
-														);
-													},
 													"type": function(){
 														var hash = {};
 														hash[json.dados.type + "-sel"] = "selected";

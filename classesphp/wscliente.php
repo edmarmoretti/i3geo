@@ -161,7 +161,7 @@ $cp {CPAINT} - Objeto CPAINT.
 
 $rss {string} - Endere&ccedil;os dos RSS.
 
-$tipo {string} - Tipo de recurso, permite a escolha do programa PHP que ser&aacute; usado GEORSS|WMS|WS|DOWNLOAD|WMSMETAESTAT
+$tipo {string} - Tipo de recurso, permite a escolha do programa PHP que ser&aacute; usado GEORSS|WMS|WS|DOWNLOAD
 
 Retorno:
 
@@ -200,10 +200,6 @@ function listaRSSwsARRAY()
             }
             if($tipo == "WMS" || $tipo == "WMS-Tile" || $tipo == "WMS-Time"){
                 $canali = simplexml_load_string(geraXmlWMS($locaplic));
-                $linkrss = $urli3geo."/rss/xmlservicoswms.php";
-            }
-            if($tipo == "WMSMETAESTAT") {
-                $canali = simplexml_load_string(geraXmlWMSmetaestat($locaplic));
                 $linkrss = $urli3geo."/rss/xmlservicoswms.php";
             }
             if($tipo == "WS"){

@@ -62,11 +62,6 @@ i3GEOadmin.mapfile.dicionario = {
 		en : "Allow to get data via download and Web Services (WMS, WFS, etc.)",
 		es : "Permitir el acceso a los datos a trav&eacute;s de la descarga y los servicios web (WMS, WFS, etc.)"
 	} ],
-    'metaestatTxt' : [ {
-		pt : "Esse mapfile baseia-se no sistema de metadados estat&iacute;sticos? Caso escolha sim, a conex&atilde;o com o banco e o sql de acesso aos dados ser&atilde;o constru&iacute;dos de forma din&acirc;mica quando a camada for adicionada ao mapa",
-		en : "Is this a mapfile based on the statistical metadata system? If you choose yes, the database connection and sql to get data will be dynamically created when the layer is added to the map",
-		es : "&iquest;Este mapfile se basa en el sistema de metadatos estad&iacute;sticos? Si selecciona s&iacute;, la conexi&oacute;n con la base de datos y el sql de acceso a los datos se construir&aacute; de forma din&aacute;mica cuando se a&ntilde;ada la capa al mapa"
-	} ],
     'tituloTema' : [ {
 		pt : "T&iacute;tulo para o catálogo",
 		en : "Title for the catalog",
@@ -246,26 +241,6 @@ i3GEOadmin.mapfile.dicionario = {
 		pt : "Extende e corta imagem em pixels (cortepixels)",
 		en : "Stretch and crop image to pixels (cortepixels)",
 		es : "Extiende y corta la imagen en pixeles (cortepixels)"
-	} ],
-    'Metaestat' : [ {
-		pt : "Indica se as defini&ccedil;&otilde;es da camada est&atilde;o relacionadas ao sistema de metadados estat&iacute;sticos. Se estiver, alguns par&acirc;metros s&atilde;o obtidos de forma autom&aacute;tica quando a camada for adicionada ao mapa.",
-		en : "It indicates if layer definitions are related to the statistical metadata system. If available, some parameters are automatically obtained when the layer is added to the map.",
-		es : "Indica si las definiciones de la capa est&aacute;n relacionadas con el sistema de metadatos estad&iacute;sticos. Si est&aacute;n disponibles, algunos par&aacute;metros se obtienen de forma autom&aacute;tica cuando se a&ntilde;ade la capa al mapa."
-	} ],
-    'metaestatTitulo' : [ {
-		pt : "Esse mapfile est&aacute; integrado ao sistema de metadados estat&iacute;sticos?",
-		en : "Is the mapfile integrated with the statistical metadata system?",
-		es : "&iquest;Este mapfile est&aacute; integrado al sistema de metadatos estat&iacute;sticos?"
-	} ],
-    'medidaVariavel' : [ {
-		pt : "ID da medida da vari&aacute;vel que relaciona a camada ao sistema de metadados estat&iacute;sticos. S&oacute; deve ser definido se o mapfile for integrado a esse sistema.",
-		en : "Measure ID of the variable that relates the layer with the statistical metadata system. It should only be defined if the mapfile is integrated into the system.",
-		es : "ID de la medida de la variable que relaciona la capa con el sistema de metadados estad&iacute;sticos. Solo debe ser definido si el mapfile se integra al sistema."
-	} ],
-    'medidaVariavelTitulo' : [ {
-		pt : "ID da vari&aacute;vel no sistema de metadados estat&iacute;sticos ",
-		en : "Variable ID of statistical metadata system ",
-		es : "ID de la variable del sistema de metadatos estad&iacute;sticos "
 	} ],
     'convCaracter' : [ {
 		pt : "Aplica a convers&atilde;o de caracteres nas ferramentas que obt&eacute;m os dados descritivos referentes aos elementos do LAYER. Em alguns casos, a convers&atilde;o pode provocar problemas de acentua&ccedil;&atilde;o. Se isso ocorrer, na ferramenta tabela por exemplo, experimente marcar essa op&ccedil;&atilde;o como 'nao'",

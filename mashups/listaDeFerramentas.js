@@ -455,31 +455,6 @@ i3GEO.listaDeFerramentas = {
 							]
 						}
 					},
-					// cartogramas
-					{
-						id : "omenudataFerramentas0e",
-						text : $trad("x60"),
-						submenu : {
-							id : "subFerr3",
-							itemdata : [
-								[
-									{
-										id : "omenudataFerramentas1e",
-										text : $trad("x57"),
-										url : "javascript:i3GEO.mapa.dialogo.metaestat()"
-									}
-									/* TODO ver se reativa isso
-									,
-									{
-										id : "omenudataFerramentas4e",
-										text : $trad("x71"),
-										url : "javascript:i3GEO.mapa.dialogo.metaestatListaMapas()"
-									}
-									*/
-								]
-							]
-						}
-					},
 					// conexoes
 					{
 						id : "omenudataFerramentas0c",

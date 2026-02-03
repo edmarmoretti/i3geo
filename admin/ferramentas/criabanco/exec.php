@@ -56,24 +56,7 @@ include "index.php";
 								"CREATE TABLE " . $esquemaadmin . "i3geousr_operacoespapeis (id_operacao NUMERIC, id_papel NUMERIC)",
 								"CREATE TABLE " . $esquemaadmin . "i3geousr_grupousuario (id_usuario NUMERIC, id_grupo NUMERIC)",
 								"CREATE TABLE " . $esquemaadmin . "i3geousr_grupotema (id_grupo NUMERIC, id_tema NUMERIC)",
-								"CREATE TABLE " . $esquemaadmin . "i3geousr_grupos (id_grupo INTEGER PRIMARY KEY, nome TEXT, descricao TEXT)",
-								// tabelas do sistema metaestat
-								"create table " . $esquemaadmin . "i3geoestat_conexao (codigo_estat_conexao INTEGER PRIMARY KEY,bancodedados text,host text,porta text,usuario text,senha text)",
-								"create table " . $esquemaadmin . "i3geoestat_tipo_regiao(codigo_tipo_regiao INTEGER PRIMARY KEY,nome_tipo_regiao text,descricao_tipo_regiao text,codigo_estat_conexao integer,esquemadb text,tabela text,colunageo text,data text,identificador text,colunanomeregiao text,srid text,colunacentroide text, colunasvisiveis text, apelidos text)",
-								"create table " . $esquemaadmin . "i3geoestat_agregaregiao(id_agregaregiao INTEGER PRIMARY KEY,codigo_tipo_regiao integer,codigo_tipo_regiao_pai integer,colunaligacao_regiaopai text)",
-								"create table " . $esquemaadmin . "i3geoestat_tipo_periodo(codigo_tipo_periodo INTEGER PRIMARY KEY,nome text,descricao text)",
-								"create table " . $esquemaadmin . "i3geoestat_unidade_medida(codigo_unidade_medida INTEGER PRIMARY KEY,nome text,sigla text,permitesoma integer default 0,permitemedia integer default 0)",
-								"create table " . $esquemaadmin . "i3geoestat_variavel(codigo_variavel INTEGER PRIMARY KEY,nome text,descricao text)",
-								"create table " . $esquemaadmin . "i3geoestat_medida_variavel(id_medida_variavel INTEGER PRIMARY KEY,codigo_unidade_medida integer,codigo_tipo_periodo integer,codigo_variavel integer,codigo_tipo_regiao integer,codigo_estat_conexao integer,esquemadb text,tabela text,colunavalor text,colunaidgeo text,filtro text,nomemedida text,colunaidunico text)",
-								"create table " . $esquemaadmin . "i3geoestat_classificacao(id_classificacao INTEGER PRIMARY KEY,nome text,id_medida_variavel integer,observacao text)",
-								"create table " . $esquemaadmin . "i3geoestat_classes(id_classe INTEGER PRIMARY KEY,expressao text,titulo text,vermelho text,verde text,azul text,id_classificacao integer,tamanho text,simbolo text,overmelho text,overde text,oazul text,otamanho text)",
-								"create table " . $esquemaadmin . "i3geoestat_fonteinfo(id_fonteinfo INTEGER PRIMARY KEY,titulo text unique,link text)",
-								"create table " . $esquemaadmin . "i3geoestat_fonteinfo_medida(id_medida_variavel integer not null,id_fonteinfo integer not null)",
-								"create table " . $esquemaadmin . "i3geoestat_medida_variavel_link(link text,id_medida_variavel integer,nome text,id_link INTEGER PRIMARY KEY)",
-								"create table " . $esquemaadmin . "i3geoestat_parametro_medida(id_parametro_medida INTEGER PRIMARY KEY,coluna text,nome text,descricao text,id_pai integer default 0,id_medida_variavel integer, tipo integer default 0)",
-								"create table " . $esquemaadmin . "i3geoestat_mapa(id_mapa INTEGER PRIMARY KEY,titulo text,template text,logoesquerdo text,logodireito text,publicado integer)",
-								"create table " . $esquemaadmin . "i3geoestat_mapa_grupo(id_mapa_grupo INTEGER PRIMARY KEY,id_mapa integer,titulo text)",
-								"create table " . $esquemaadmin . "i3geoestat_mapa_tema (id_mapa_tema INTEGER PRIMARY KEY,id_mapa_grupo integer,titulo text,id_medida_variavel integer)"
+								"CREATE TABLE " . $esquemaadmin . "i3geousr_grupos (id_grupo INTEGER PRIMARY KEY, nome TEXT, descricao TEXT)"
 						);
 
 						if ($conexaoadmin == "") {
@@ -135,8 +118,6 @@ include "index.php";
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')";
 						if (! in_array ( 4, $teste ) || $_POST ["mostraSoSQL"] == "on")
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')";
-						if (! in_array ( 5, $teste ) || $_POST ["mostraSoSQL"] == "on")
-							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papeis VALUES ('Podem administrar o sistema METAESTAT','5', 'adminmetaestat')";
 
 						if ($_POST ["mostraSoSQL"] != "on") {
 							$teste = listaSql ( "select * from " . $esquemaadmin . "i3geousr_usuarios", "id_usuario" );
@@ -194,10 +175,6 @@ include "index.php";
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES(16,'admin/php/editortexto','editor de texto para mapfiles')";
 						if (! in_array ( 17, $teste ) || $_POST ["mostraSoSQL"] == "on")
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES('17', 'admin/html/usuarios', 'cadastro de usuarios')";
-						if (! in_array ( 18, $teste ) || $_POST ["mostraSoSQL"] == "on")
-							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES('18', 'admin/metaestat/geral', 'permite edicoes mais comuns do sistema de metadados estatisticos')";
-						if (! in_array ( 19, $teste ) || $_POST ["mostraSoSQL"] == "on")
-							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES('19', 'admin/metaestat/editorbanco', 'permite gerenciar as tabelas do banco')";
 
 						if ($_POST ["mostraSoSQL"] != "on") {
 							$teste = listaSql ( "select * from " . $esquemaadmin . "i3geousr_operacoespapeis", "id_operacao", "id_papel" );
@@ -231,8 +208,8 @@ include "index.php";
 
 						$sql [] = "INSERT INTO " . $esquemaadmin . "i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUES ('1', 'Anual', '')";
 						$sql [] = "INSERT INTO " . $esquemaadmin . "i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUES ('2', 'Mensal', '')";
-						$sql [] = "INSERT INTO " . $esquemaadmin . "i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUES ('3', 'Diário', '')";
-						$sql [] = "INSERT INTO " . $esquemaadmin . "i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUES ('4', 'Horário', '')";
+						$sql [] = "INSERT INTO " . $esquemaadmin . "i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUES ('3', 'Diï¿½rio', '')";
+						$sql [] = "INSERT INTO " . $esquemaadmin . "i3geoestat_tipo_periodo (codigo_tipo_periodo, nome, descricao) VALUES ('4', 'Horï¿½rio', '')";
 
 						echo "<h4>Inserts:</h4>";
 						foreach ( $sql as $s ) {

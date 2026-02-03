@@ -509,12 +509,6 @@ function listaLayersWMS() {
 
 	// para o caso do sistema de metadados estatisticos
 	$wms_service_request = gravaCacheWMS ( $servico );
-	if ($tipo_ws != "WMSMETAESTAT" && $nivel < 2) {
-		if ($wms_service_request == "erro") {
-			$cp->set_data ( "Erro de acesso" );
-			return;
-		}
-	}
 
 	$handle = fopen ( $wms_service_request, "r" );
 	$wms_capabilities = fread ( $handle, filesize ( $wms_service_request ) );

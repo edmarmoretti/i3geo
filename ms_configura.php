@@ -181,7 +181,7 @@ $i3geoEsquemasWL = array();
  		"Pasta 1"=>"/tmp/ms_tmp"
  	),
  	"postgis" => array(
- 		"esquemas"=>array("esquema1","i3geo_metaestat","public"),
+ 		"esquemas"=>array("esquema1","public"),
  		"conexao"=>array("user"=> "postgres", "password"=>"postgres", "dbname"=>"i3geosaude", "host"=>"localhost", "port"=>"5432")
  	)
  );
@@ -438,18 +438,6 @@ $emailInstituicao = "geoprocessamento@mma.gov.br";
 */
 $googleApiKey = "";
 /*
-Variable: metaestatTemplates
-
-Indica a pasta onde ficam os templates utilizados para a publicacao de mapas. E utilizado pelo sistema de metadados estatisticos.
-O default e a pasta /ferramentas/metaestat/templates
-A pasta deve estar dentro do diretorio onde esta instalado o i3geo
-A pasta com os templates deve conter uma pasta chamada "logos" para guardar as logomarcas utilizadas pelos mapas
-
-Tipo:
-{string}
-*/
-$metaestatTemplates = "/ferramentas/metaestat/templates";
-/*
 Variable: navegadoresLocais
 
 O i3geo possibilita que os usu&aacute;rios acessem dados geogr&aacute;ficos no servidor diretamente,
@@ -575,10 +563,6 @@ $postgis_mapa = array(
 )
 
 No exemplo, vc pode usar "teste" ou "conexao2" no seu mapfile veja em i3geo/temas/testesubstring.map
-
-A chave "metaestat" e utilizada pelo sistema de metadados estatisticos e indica o local onde as tabelas
-com os dados estatisticos estao armazenadas. Ate a versao 6.0, a definicao da conexao era feita por meio
-do banco de dados de administracao
 
 Se vc n&atilde;o quiser usar essa substitui&ccedil;&atilde;o, deixe como est&aacute; ou use
 

@@ -145,10 +145,6 @@ include ($configInc["inc"] . "/css.php");
                 on : [<?php echo LISTADETEMAS; ?>],
                 //array com os layers desligados
                 off : [],
-                //array com a lista de IDs que identificam medidas registradas no sistema de metadados
-                //estatisticos
-                metaestat : []
-                },
                 //lista de coordenadas x e y que serao adicionadas como pontos no mapa
                 points : {
                 //array com a lista de coordenadas
@@ -322,7 +318,6 @@ include ($configInc["inc"] . "/css.php");
                     templateDir : i3GeoUrl
                         + "/ferramentas/legenda"
                 },
-                metaestat : {},
                 buscainde : {},
                 //ferramenta mapa de referencia
                 //difere das propriedades do mapa de referencia

@@ -1,8 +1,5 @@
 botoesIni = [
-             {
-            	 "link": "xmlmetaestatogc.php",
-            	 "corpo": $trad("xmlWmsMetaestat",g_traducao_rss)
-             },{
+{
             	 "link": "rssmapas.php",
             	 "corpo": $trad("verRss",g_traducao_rss)
              },{

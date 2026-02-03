@@ -40,22 +40,6 @@ menuPrincipal = [
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin/usuarios/grupos/index.php' >"+$trad("cadastroGrupos",i3GEOadmin.menup.dicionario)+"</a>"
 		}
 	]},{
-	html: $trad("metadadosEstatisticos",i3GEOadmin.menup.dicionario),
-	children:[
-		{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin/metaestat/variaveis/index.php' >"+$trad("cadastroVariav",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin/metaestat/unidades/index.php' >"+$trad("cadastroMedidas",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin/metaestat/periodos/index.php' >"+$trad("cadastroPeriodos",i3GEOadmin.menup.dicionario)+"</a>"
-		}
-		//,{html: "<a href='" + i3GEO.configura.locaplic + "/admin/metaestat/conexoes/index.php' >"+$trad("cadastroConexoes",i3GEOadmin.menup.dicionario)+"</a>"}
-		,{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin/metaestat/regioes/index.php' >"+$trad("cadastroTabelas",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin/metaestat/fontes/index.php' >"+$trad("cadastroFonte",i3GEOadmin.menup.dicionario)+"</a>"
-		}
-	]},{
 	html: $trad("enviarArquivo",i3GEOadmin.menup.dicionario),
 	type: "html",
 	children:[

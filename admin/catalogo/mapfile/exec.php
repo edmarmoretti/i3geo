@@ -50,7 +50,7 @@ switch ($funcao) {
         if (empty($_POST["titulolegenda"])) {
             $_POST["titulolegenda"] = $_POST["nome_tema"];
         }
-        $novo = \admin\catalogo\mapfile\adicionar($_SESSION["locaplic"], $_POST["titulolegenda"], $_POST["link_tema"], $codigo, $_POST["acessopublico"], $_POST["metaestat"], $_POST["nome_tema"], $_POST["desc_tema"], $_POST["en"], $_POST["es"], true, $dbhw);
+        $novo = \admin\catalogo\mapfile\adicionar($_SESSION["locaplic"], $_POST["titulolegenda"], $_POST["link_tema"], $codigo, $_POST["acessopublico"], $_POST["nome_tema"], $_POST["desc_tema"], $_POST["en"], $_POST["es"], true, $dbhw);
         $dbhw = null;
         $dbh = null;
         if ($novo === false) {
@@ -67,7 +67,7 @@ switch ($funcao) {
             $_POST["titulolegenda"] = $_POST["nome_tema"];
         }
         // quando e feita a listagem unica, o mapfile ja foi registrado no banco se nao tinha sido antes
-        $novo = \admin\catalogo\mapfile\alterar($_SESSION["locaplic"], $_POST["id_tema"], $_POST["titulolegenda"], $_POST["link_tema"], $codigo, $_POST["acessopublico"], $_POST["metaestat"], $_POST["nome_tema"], $_POST["desc_tema"], $_POST["en"], $_POST["es"], true, $dbhw);
+        $novo = \admin\catalogo\mapfile\alterar($_SESSION["locaplic"], $_POST["id_tema"], $_POST["titulolegenda"], $_POST["link_tema"], $codigo, $_POST["acessopublico"], $_POST["nome_tema"], $_POST["desc_tema"], $_POST["en"], $_POST["es"], true, $dbhw);
         $dbhw = null;
         $dbh = null;
         if ($novo === false) {

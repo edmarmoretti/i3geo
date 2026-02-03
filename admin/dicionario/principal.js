@@ -30,11 +30,6 @@ i3GEOadmin.principal.dicionario = {
 		en : "On the <kbd>Users</kbd> tab you can create and handle users, user groups, and operations that each component can perform within the system.",
 		es : "En la pesta&ntilde;a <kbd>Usuarios</kbd> usted puede crear y manipular los usuarios, grupos de usuarios y las operaciones que cada componente puede realizar dentro del sistema."
 	} ],
-	'msgMetaestat' : [ {
-		pt : "Em <kbd>Metaestat</kbd> &eacute; poss&iacute;vel cadastrar vari&aacute;veis e medidas que compor&atilde;o metadados para a visualiza&ccedil;&atilde;o de informa&ccedil;&otilde;es estat&iacute;sticas em uma determinada regi&atilde;o, os chamados metadados estat&iacute;sticos. Dessa forma, &eacute; poss&iacute;vel configurar visualiza&ccedil;&otilde;es espaciais padr&atilde;o para vari&aacute;veis estat&iacute;sticas.",
-		en : "<kbd>Metaestat</kbd> allows you to register variables and measures that will make up metadata for statistical information visualization of a  given region, the so-called statistical metadata. In this way, you can configure default spatial views for statistical variables.",
-		es : "En <kbd>Metaestat</kbd> es posible registrar variables y medidas que conformar&aacute;n los metadatos para la visualizaci&oacute;n de informaciones estad&iacute;sticas de una determinada regi&oacute;n, los llamados metadatos estad&iacute;sticos. De esta manera, es posible configurar vistas espaciales est&aacute;ndar para variables estad&iacute;sticas."
-	} ],
 	'msgUpload' : [ {
 		pt : "No m&oacute;dulo <kbd>Upload</kbd> voc&ecirc; pode realizar a subida para o servidor ou diretamente para o banco de dados de arquivos nos formato shapefile ou CSV. Para isso, &eacute; preciso configurar a vari&aacute;vel  <code>$i3geoUploadDataWL</code> do arquivo <samp>i3geo/ms_configura</samp> com as pastas no servidor que podem receber arquivos ou com a string de conex&atilde;o com banco e esquema, no caso de carga em banco de dados.",
 		en : "The <kbd>Upload</kbd> module allows you to upload to the server or directly to the database, files in shapefile or CSV format. To do this, you must set up the <code>$i3geoUploadDataWL</code> variable of the <samp>i3geo/ms_configura</samp> file with the folders on the server that can receive files or in the case of database loading,  with the connection string of the database and schema.",
@@ -69,11 +64,6 @@ i3GEOadmin.principal.dicionario = {
 		pt : "diagrama MER do banco de dados de usu&aacute;rios.",
 		en : "MER diagram of the user database.",
 		es : "diagrama MER de la base de datos de usuarios."
-	} ],
-    'merBdMetaestat' : [ {
-		pt : "diagrama MER do banco de dados do sistema de metadados estat&iacute;sticos.",
-		en : "MER diagram of the database for the statistical metadata system.",
-		es : "diagrama MER de la base de datos del sistema de metadatos estad&iacute;sticos."
 	} ],
     'leiaMe' : [ {
 		pt : "Entre uma vers&atilde;o e outra do i3Geo o banco de dados de administra&ccedil;&atilde;o pode sofrer altera&ccedil;&otilde;es. Consulte o documento <samp>i3geo/guia_de_migracao.txt</samp> para verificar os detalhes.",
