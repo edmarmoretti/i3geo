@@ -51,8 +51,6 @@ include "head.php";
 				<!-- Template para mensagem do i3Geo -->
 				<ul class="list-inline">
 					<li><img class="pull-left" alt="i3Geo Logo" src='../imagens/i3Geo_bigTransp.png'
-						style='width: 80px; margin: 5px;' /> <img alt="qrcode site" class="pull-right hidden-xs"
-						src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}'
 						style='width: 80px; margin: 5px;' />
 						<p>{{{jumbotron}}}</p></li>
 				</ul>
@@ -89,17 +87,6 @@ include "head.php";
 						<div class="panel-footer text-right"
 							style="padding: 0px; padding-right: 15px; border: 0px; background-color: white;">
 							<div class="row center-block">
-								<div class="col-xs-6" style="line-height: 3.5; text-align: left;">
-									<!-- o texto no span e para acessibilidade-->
-									<button tabindex="-1" role="button" data-toggle="quadroQrcode" data-url="{{{href}}}"
-										class="btn btn-primary btn-fab btn-fab-mini" > <span
-										class="glyphicon glyphicon-qrcode" aria-hidden="true">&nbsp;&nbsp;qrcode</span>
-									</button>
-
-									<button tabindex="-1" role="button" onclick="favorita(this);return false;" class="btn btn-primary btn-fab btn-fab-mini">
-										<span data-cookie="{{{img}}}" ><i class="material-icons">grade</i></span>
-									</button>
-								</div>
 								<div class="col-xs-6">
 									<a class="btn btn-primary" style="color:#0f4c81;" href="{{{href}}}" role="button" target="{{{target}}}">
 										{{{abrir}}} </a>
@@ -157,15 +144,6 @@ include "head.php";
 		var u = window.location.origin + window.location.pathname + "?home=";
 		window.history.replaceState(null,null,u);
 
-		$('[data-toggle="quadroQrcode"]').popover({
-			html: true,
-			placement: "auto",
-			trigger: "focus",
-			content: function(){
-				var urlqr = "../pacotes/qrcode/php/qr_img.php?host=" + window.location.host + "&u=" + $(this).attr("data-url");
-				return "<img style='width:200px; height: 200px;' src='" + urlqr + "' '></a>";
-			}
-		});
 		$.material.init();
 	});
 	</script>

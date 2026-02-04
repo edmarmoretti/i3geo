@@ -60,7 +60,7 @@ include "head.php";
                 <a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#">
 				<span class="material-icons md-18">home</span> <?php echo $mensagemInicia;?>
                 </a>
-                
+
             </div>
             <div id="navbar" class="navbar-collapse collapse navbar-responsive-collapse">
                 <!-- template para permitir a traducao -->
@@ -80,8 +80,7 @@ include "head.php";
             <div class="jumbotron hidden-xs" id="jumbotron" style="background: rgb(255, 255, 255); background: rgba(255, 255, 255, 0.8);">
                 <!-- Template para mensagem do i3Geo -->
                 <ul class="list-inline">
-                    <li><img class="pull-left" alt="i3Geo Logo" src='../imagens/i3Geo_bigTransp.png' style='width: 80px; margin: 5px;' /> <img alt="qrcode site" class="pull-right hidden-xs"
-                        src='../pacotes/qrcode/php/qr_img.php?host={{{host}}}&d={{{href}}}' style='width: 80px; margin: 5px;' />
+                    <li><img class="pull-left" alt="i3Geo Logo" src='../imagens/i3Geo_bigTransp.png' style='width: 80px; margin: 5px;' />
                         <p>{{{jumbotron}}}</p></li>
                 </ul>
                 <div id="mensagemLogin"></div>
@@ -104,11 +103,11 @@ if (! function_exists("ms_GetVersion")) {
                         <div class="panel panel-default">
                             <div class="panel-heading" style="padding:0px;">
                                 <h4 style="height: 35px;padding:10px 10px;">{{{titulo}}}</h4>
-    
+
                                     <a tabindex="-1" target="{{{target}}}" href="{{{href}}}">
                                         <img alt="{{{titulo}}}" tabindex="-1" style="padding:1px;height: 100px; width: 100%; border-radius: 0px;" src="{{{img}}}" />
                                     </a>
-    
+
                             </div>
                             <div class="panel-body" tabindex="-1" style="background-color: rgb(250, 250, 250)">
                                 <h5 tabindex="-1" class="hidden-xs longText" style="height: 10rem; color: #0f0e0e66;">{{{subtitulo}}}</h5>
@@ -167,15 +166,6 @@ if (! function_exists("ms_GetVersion")) {
 		var u = window.location.origin + window.location.pathname + "?home=";
 		window.history.replaceState(null,null,u);
 
-		$('[data-toggle="quadroQrcode"]').popover({
-			html: true,
-			placement: "auto",
-			trigger: "focus",
-			content: function(){
-				var urlqr = "../pacotes/qrcode/php/qr_img.php?host=" + window.location.host + "&u=" + $(this).attr("data-url");
-				return "<img style='width:200px; height: 200px;' src='" + urlqr + "' '></a>";
-			}
-		});
 		$.material.init();
 	});
 	</script>
