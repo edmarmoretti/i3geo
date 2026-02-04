@@ -1,28 +1,6 @@
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
-//var cpJSON = new cpaint();
-//cpJSON.set_response_type("JSON");
-//cpJSON.set_transfer_mode("POST");
-/*
-            i3GEO.request.get({
-                snackbar: false,
-                snackbarmsg: false,
-                btn: false,
-                par: {
-                    filtraOgc: "nao",
-                    filtraDown: "nao",
-                    idioma: i3GEO.idioma.ATUAL,
-                    funcao: "pegalistademenus"
-                },
-                prog: "/serverapi/catalog/",
-                fn: function(data){
-                    if (after){
-                        after.call(after, data);
-                    }
-                }
-            });
- */
 i3GEO.php =
 {
 	verifica : function() {

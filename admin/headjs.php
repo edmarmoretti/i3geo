@@ -18,8 +18,6 @@ include (ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/js/material.min.js
 echo "\n";
 include (ONDEI3GEO . "/pacotes/bootstrap-accessibility-plugin/plugins/js/bootstrap-accessibility.min.js");
 echo "\n";
-include (ONDEI3GEO . "/pacotes/cpaint/cpaint2_compacto.inc.js");
-echo "\n";
 include (ONDEI3GEO . "/js/compactados/dicionario_compacto.js");
 echo "\n";
 include (ONDEI3GEO . "/js/compactados/util_compacto.js");

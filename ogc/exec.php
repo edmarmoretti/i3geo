@@ -77,7 +77,7 @@ ORDER BY lower(n0.nome_menu)
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-		retornaJSONutf8 ( array("dados"=>$dados) );
+		echo json_encode(utf8_converter( array("dados"=>$dados)), JSON_UNESCAPED_UNICODE);
 		break;
 
 	case "LISTATODAS":
@@ -99,8 +99,7 @@ ORDER BY lower(n0.nome_menu)
 			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
 			exit ();
 		}
-
-		retornaJSONutf8 ( array("dados"=>"","camadas"=>$camadas) );
+		echo json_encode(utf8_converter( array("dados"=>"","camadas"=>$camadas) ), JSON_UNESCAPED_UNICODE);
 	break;
 }
 ?>

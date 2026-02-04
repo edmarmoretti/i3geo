@@ -63,7 +63,7 @@ ORDER BY lower(subgrupo.nome_subgrupo)
 		$camadas = pegaDadosAdmin ( $sqlCamadas, $dbh );
 		$dbhw = null;
 		$dbh = null;
-		retornaJSONutf8 ( array("dados"=>$dados,"camadas"=>$camadas) );
+		echo json_encode(utf8_converter( array("dados"=>$dados,"camadas"=>$camadas)), JSON_UNESCAPED_UNICODE);
 		break;
 }
 ?>
