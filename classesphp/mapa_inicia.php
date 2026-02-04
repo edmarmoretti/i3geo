@@ -53,7 +53,6 @@
  *
  * $navegadoresLocais - array que indica quais usu&aacute;rios podem navegar no servidor
  *
- * $cp - Objeto CPAINT.
  *
  * $map_file - Arquivo map file.
  *

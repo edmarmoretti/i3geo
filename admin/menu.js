@@ -61,8 +61,6 @@ menuPrincipal = [
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin/catalogo/mapas/index.php' >"+$trad("linkMapas",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
-		html: "<a href='" + i3GEO.configura.locaplic + "/admin/catalogo/atlas/index.php' >"+$trad("atlas",i3GEOadmin.menup.dicionario)+"</a>"
-		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin/catalogo/menus/grupos/listadegrupos/index.php' >"+$trad("listaDeGrupos",i3GEOadmin.menup.dicionario)+"</a>"
 		},{
 		html: "<a href='" + i3GEO.configura.locaplic + "/admin/catalogo/menus/grupos/subgrupos/listadesubgrupos/index.php' >"+$trad("listaDeSubGrupos",i3GEOadmin.menup.dicionario)+"</a>"

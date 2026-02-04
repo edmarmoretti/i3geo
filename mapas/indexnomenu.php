@@ -104,7 +104,6 @@ include "../init/head.php";
 	<?php
 	include("templates/templatelinks.php");
 	include("templates/templatelista.php");
-	//<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
 	?>
 	
 	<script src='../js/compactados/dicionario_compacto.js'></script>

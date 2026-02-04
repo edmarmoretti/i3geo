@@ -274,13 +274,6 @@ g_traducao_init =
 				es : "Prueba del convertidor de proyecto GVP a Mapfile"
 			}
 		],
-		27 : [
-			{
-				pt : "Lista de Atlas cadastrados",
-				en : "List of recorded Atlas",
-				es : "Lista de Atlas registrados"
-			}
-		],
 		28 : [
 			{
 				pt : "Curso em Gvsig-training",

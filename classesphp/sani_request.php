@@ -16,14 +16,11 @@ if (isset($_GET)){
 		}
 	}
 }
-//array(3) { ["cpaint_function"]=> string(8) "criaMapa" ["cpaint_argument"]=> array(1) { [0]=> string(54) ""funcao=criaMapa&&desligar=mundo&interface=openlayers"" } ["cpaint_response_type"]=> string(4) "JSON" }
 if (isset($_POST)){
 	if (isset($_POST["cpaint_argument"]) && $_POST["cpaint_argument"][0] != "")
 	{
-		//var_dump( $_POST["cpaint_argument"]);exit;
 		$argumento_ = $_POST["cpaint_argument"][0];
 		if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-			//$argumento_ = str_replace("\\\"","",$argumento_);
             $argumento_ = str_replace("\"","",$argumento_);
 		}
 		else{

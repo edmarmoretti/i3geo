@@ -195,16 +195,6 @@ i3GEOadmin.menup.dicionario = {
 		en : "Tags (keywords)",
 		es : "Etiquetas (palabras clave)"
 	} ],
-    'atlas' : [ {
-		pt : "Atlas",
-		en : "Atlas",
-		es : "Atlas"
-	} ],
-	'editaAtlas' : [ {
-		pt : "Edi&ccedil;&atilde;o dos atlas",
-		en : "Atlas editing",
-		es : "Edici&oacute;n de los atlas"
-	} ],
 	'webServ' : [ {
 		pt : "Endere&ccedil;os de servi&ccedil;os (utilizados nas ferramentas de conex&atilde;o com dados externos)",
 		en : "Service addresses (used for connection tools to external data)",

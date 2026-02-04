@@ -34,11 +34,8 @@ include "index.php";
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_ws (nacessos INTEGER, nacessosok INTEGER, autor_ws TEXT, desc_ws TEXT, id_ws INTEGER PRIMARY KEY, link_ws TEXT, nome_ws TEXT, tipo_ws TEXT)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_tags (id_tag INTEGER PRIMARY KEY, nome TEXT)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_perfis (id_perfil INTEGER PRIMARY KEY, perfil TEXT)",
-								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_atlasp (ordem_prancha NUMERIC, desc_prancha TEXT, h_prancha NUMERIC, icone_prancha TEXT, id_atlas NUMERIC, id_prancha INTEGER PRIMARY KEY, link_prancha TEXT, mapext_prancha TEXT, titulo_prancha TEXT, w_prancha NUMERIC)",
-								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_atlast (ordem_tema NUMERIC, codigo_tema TEXT, id_prancha TEXT, id_tema INTEGER PRIMARY KEY, ligado_tema TEXT)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_menus (publicado_menu TEXT, perfil_menu TEXT, aberto TEXT, desc_menu TEXT, id_menu INTEGER PRIMARY KEY, nome_menu TEXT, it TEXT, es TEXT, en TEXT)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_mapas (publicado_mapa TEXT, ordem_mapa NUMERIC, perfil_mapa TEXT, ligados_mapa TEXT, temas_mapa TEXT, desc_mapa TEXT, ext_mapa TEXT, id_mapa INTEGER PRIMARY KEY, imagem_mapa TEXT, linkdireto_mapa TEXT, nome_mapa TEXT, outros_mapa TEXT, mapfile TEXT)",
-								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_atlas (publicado_atlas TEXT, ordem_atlas NUMERIC, basemapfile_atlas TEXT, desc_atlas TEXT, h_atlas NUMERIC, icone_atlas TEXT, id_atlas INTEGER PRIMARY KEY, link_atlas TEXT, pranchadefault_atlas TEXT, template_atlas TEXT, tipoguias_atlas TEXT, titulo_atlas TEXT, w_atlas NUMERIC)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_sistemas (publicado_sistema TEXT, id_sistema INTEGER PRIMARY KEY, nome_sistema TEXT, perfil_sistema TEXT)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_identifica (publicado_i TEXT, abrir_i TEXT, id_i INTEGER PRIMARY KEY, nome_i TEXT, target_i TEXT)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_raiz (ordem NUMERIC, id_tema NUMERIC, id_menu NUMERIC, id_nivel NUMERIC, id_raiz INTEGER PRIMARY KEY, nivel NUMERIC, perfil TEXT)",
@@ -115,7 +112,7 @@ include "index.php";
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papeis VALUES('Podem criar/editar qualquer tema (mapfile) mas nao podem editar a arvore do catalogo de temas',2,'editores')";
 						}
 						if (! in_array ( 3, $teste ) || $_POST ["mostraSoSQL"] == "on")
-							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papeis VALUES('Podem alterar a arvore do catalogo e dos atlas',3,'publicadores')";
+							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papeis VALUES('Podem alterar a arvore do catalogo',3,'publicadores')";
 						if (! in_array ( 4, $teste ) || $_POST ["mostraSoSQL"] == "on")
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_papeis VALUES('Podem editar dados geograficos',4,'editoresgeo')";
 
@@ -153,8 +150,6 @@ include "index.php";
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES(5,'admin/html/menus','edicao da lista de menus')";
 						if (! in_array ( 6, $teste ) || $_POST ["mostraSoSQL"] == "on")
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES(6,'admin/html/ogcws','edicao das preferencias do servico WMS')";
-						if (! in_array ( 7, $teste ) || $_POST ["mostraSoSQL"] == "on")
-							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES(7,'admin/html/atlas','edicao de atlas')";
 						if (! in_array ( 8, $teste ) || $_POST ["mostraSoSQL"] == "on")
 							$sql [] = "INSERT INTO " . $esquemaadmin . "i3geousr_operacoes VALUES(8,'admin/html/identifica','lista de sistemas incluidos na ferramenta de identificacao')";
 						if (! in_array ( 9, $teste ) || $_POST ["mostraSoSQL"] == "on")

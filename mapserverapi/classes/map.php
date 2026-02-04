@@ -992,7 +992,6 @@ class Map
         $layerObj->setmetadata("temalocal", "sim");
         $layerObj->setmetadata("tema", $namepolygons);
         $layerObj->setmetadata("classe", "sim");
-        $layerObj->setmetadata("ATLAS", "nao");
         $layerObj->set("type", MS_LAYER_POLYGON);
         $layerObj->set("opacity", "50");
         $layerObj->set("status", MS_DEFAULT);

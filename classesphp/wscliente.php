@@ -6,7 +6,7 @@ Executa requisi&ccedil;&otilde;es a Web Services convencionais ou nos padr&otild
 
 Possibilita a leitura dos metadados dos servi&ccedil;os e tamb&eacute;m a execu&ccedil;&atilde;o das fun&ccedil;&otilde;es existentes.
 
-&Eacute; utilizado apenas pela aplica&ccedil;&atilde;o wscliente e as requisi&ccedil;&otilde;es s&atilde;o feitas por meio de AJAX utilizando-se abiblioteca CPAINT.
+&Eacute; utilizado apenas pela aplica&ccedil;&atilde;o wscliente .
 
 Licenca:
 
