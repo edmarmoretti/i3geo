@@ -1,3 +1,5 @@
+Atlas é um módulo do i3Geo que foi descontinuado e removido na versão 8.0; Esse branch foi criado para manter o código apenas para fins históricos, com o objetivo de no futuro reconstruir esse módulo com bibliotecas atualizadas, principalmente com a substituição da biblioteca CPAINT.
+
 # Versão em desenvolvimento do i3Geo
 
 Para versões do Mapserver 7.x ou posteriores e Openlayers 4
