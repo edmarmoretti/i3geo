@@ -201,6 +201,7 @@ include ($configInc["inc"] . "/css.php");
                 expression : ""
                 } ],
                 restoreMapId : ""
+}
             };
             var config = {
                 mapBody : "mapai3Geo",
