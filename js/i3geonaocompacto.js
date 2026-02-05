@@ -17,7 +17,6 @@
 		"../pacotes/jsts/jsts_min.js",
 		"../pacotes/mobileesp/mdetect.js",
 		"../pacotes/proj4js/lib/proj4js-compressed.js",
-		"../pacotes/wicket/wicket.js",
 		"../pacotes/mustache.js-master/mustache.js",
 		"../pacotes/jquery/dist/jquery.min.js",
 		"../pacotes/jquery/jquery-number/jquery.number.min.js",
