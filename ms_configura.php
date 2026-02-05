@@ -514,31 +514,6 @@ Tipo:
 */
 $locmapas = "";
 /*
-Variable: R_path
-
-Onde esta o executavel do software R
-
-O R &eacute; um pacote estat&iacute;stico utilizado pelo I3Geo para gera&ccedil;&atilde;o de gr&aacute;ficos e an&aacute;lises estat&iacute;sticas
-Se vc n&atilde;o possui o R instalado, comente a linha abaixo
-
-Tipo:
-{string}
-*/
-//ver opcao especifica abaixo para o sistema operacional
-$R_path = "";
-/*
-Variable: R_pathlib
-
-Onde ficam as bibliotecas adicionais necess&aacute;rias ao funcionamento do R
-
-Instale no R as bibliotecas SPATSTAT e DELDIR. No Ubuntu, experimente usar o software RKWard que possui um instalador de bibliotecas
-
-Tipo:
-{string}
-*/
-//ver opcao especifica abaixo para o sistema operacional
-$R_libpath = "";
-/*
 Variable: postgis_mapa
 
 String de conex&atilde;o para acesso aos dados (opcional).
@@ -729,8 +704,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	$dir_tmp = "c:/ms4w/tmp/ms_tmp";
 	$locmapserv = "/cgi-bin/mapserv.exe";
-	$R_path = "c:/r/win/bin/R.exe";
-	$R_libpath = "c:/r/win/library";
     $ogrOutput = false;
 }
 else //se for linux
@@ -743,8 +716,6 @@ else //se for linux
 		$dir_tmp = "/tmp/ms_tmp";
 	}
 	$locmapserv = "/cgi-bin/mapserv";
-	$R_path = "R";
-	$R_libpath = "";
 }
 /**
  * Define o idioma de inicializacao (cookies nao devem ter sido definidos anteriormente)

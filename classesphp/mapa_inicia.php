@@ -62,8 +62,6 @@
  *
  * $h - Altura da imagem do mapa.
  *
- * $R_path - Vari&aacute;vel definida no arquivo ms_configura.php que indica se o software R est&aacute; instalado.
- *
  * $locmapserv - Vari&aacute;vel definida no arquivo ms_configura.php que indica nome do mapserver cgi.
  *
  * $kmlurl - url de um arquivo kml que ser&aacute; inserido no mapa. V&aacute;lido para a interface google maps

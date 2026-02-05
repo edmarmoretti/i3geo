@@ -720,9 +720,6 @@ function ajuda()
                                             <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a> -->
                                         </p>
                                         <p>
-                                            <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a> -->
-                                        </p>
-                                        <p>
                                             <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
                                         </p>
                                         <p>

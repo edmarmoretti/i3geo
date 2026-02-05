@@ -131,7 +131,6 @@ class Mscriamapa
         $_SESSION["emailInstituicao"] = $emailInstituicao;
         $_SESSION["locmapserv"] = $locmapserv;
         $_SESSION["locaplic"] = $locaplic;
-        $_SESSION["R_path"] = $R_path;
         $_SESSION["debug"] = false;
         $_SESSION["ler_extensoes"] = [];
         $_SESSION["postgis_mapa"] = $postgis_mapa;

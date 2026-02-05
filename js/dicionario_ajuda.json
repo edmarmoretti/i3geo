@@ -1028,19 +1028,6 @@
 				"en": "",
 				"apijs": "i3GEO.analise.dialogo.graficoInterativo1()"
 			},
-			"85": {
-				"titulo": {
-					"pt": "Miniaturas",
-					"es": "Miniaturas",
-					"en": "Thumbnails"
-				},
-				"diretorio": "i3geo/ferramentas/carouseltemas",
-				"categoria": "6",
-				"pt": "Abre uma janela flutuante que mostra imagens miniatura de cada tema existente na &aacute;rvore de temas. O usu&aacute;rio pode clicar em uma das imagens para adicionar o tema ao mapa atual.<br>As miniaturas devem existir previamente para aparecerem nessa ferramenta. Para gerar as miniaturas, o administrador do i3Geo pode usar o sistema de administra&ccedil;&atilde;o.",
-				"es": "Abre una ventana flotante que muestra im&aacute;genes en miniatura de cada tema del &aacute;rbol de temas. El usuario puede hacer clic en una de las im&aacute;genes para agregar el tema al mapa actual.<br>Las miniaturas deben estar previamente en el sistema para aparecer en esta herramienta. Para generar las miniaturas el administrador de i3Geo puede utilizar el sistema de administraci&oacute;n.",
-				"en": "It opens a floating window that shows thumbnails of each theme on the theme tree. The user can click on one of the thumbnails to add a theme to the current map.<br>Thumbnails must be previously in the system to use them. The i3Geo administrator can use the management system to generate thumbnails.",
-				"apijs": "i3GEO.arvoreDeTemas.dialogo.carouselTemas()"
-			},
 			"86": {
 				"titulo": {
 					"pt": "Editor SQL",

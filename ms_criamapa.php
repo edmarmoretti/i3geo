@@ -355,7 +355,6 @@ $locmapserv_ = $locmapserv;
 $locaplic_ = $locaplic;
 // $locsistemas_ = $locsistemas;
 // $locidentifica_ = $locidentifica;
-$R_path_ = $R_path;
 $mapext_ = $mapext;
 
 $ler_extensoes_ = $ler_extensoes;
@@ -431,7 +430,6 @@ $_SESSION["cachedir"] = $cachedir_;
 $_SESSION["emailInstituicao"] = $emailInstituicao_;
 $_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
-$_SESSION["R_path"] = $R_path_;
 $_SESSION["mapext"] = $mapext_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
