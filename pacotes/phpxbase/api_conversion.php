@@ -45,7 +45,7 @@ function xbase_close($xbase_identifier=false) { // - Close a dBase database
 	$xbase->close();
 }
 function xbase_create($filename,$fields) { // - Creates a dBase database
-	if ($xbase =& XBaseWritableTable::create($filename,$fields)) return xbase_addInstance($xbase);
+	if ($xbase = XBaseWritableTable::create($filename,$fields)) return xbase_addInstance($xbase);
 	return false;
 }
 function xbase_delete_record($xbase_identifier=false,$record) { // - Deletes a record from a dBase database
@@ -98,10 +98,10 @@ function xbase_numrecords($xbase_identifier=false) { // - Find out how many reco
 }
 function xbase_open($filename,$flags=0) { // - Opens a dBase database - flags : Typically 0 means read-only, 1 means write-only, and 2 means read and write
 	if ($flags==0) {
-		$xbase =& new XBaseTable($filename);
+		$xbase = new XBaseTable($filename);
 		if (!$xbase->open()) return false;
 	} else {
-		$xbase =& new XBaseWritableTable($filename);
+		$xbase = new XBaseWritableTable($filename);
 		if (!$xbase->openWrite()) return false;
 	}
 	return xbase_addInstance($xbase);
