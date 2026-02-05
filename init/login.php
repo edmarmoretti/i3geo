@@ -4,7 +4,7 @@ include_once (dirname(__FILE__)."/../classesphp/sani_request.php");
 //error_reporting ( 0 );
 include "head.php";
 ?>
-<link href='imagens/sprites.css' rel='stylesheet'>
+
 <style>
 .amarelo {
 	color: yellow;
