@@ -137,7 +137,6 @@ packer("caixaDeFerramentas.js","compactados/caixaDeFerramentas_compacto.js","Nor
 packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
 packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
 packer("../pacotes/proj4js/lib/proj4js.js","compactados/proj4js.js","Normal");
-packer("../pacotes/wicket/wicket.js","compactados/wicket.js","Normal");
 packer("../pacotes/bootstrap-material-design/dist/js/material.js","compactados/material.js","Normal");
 //
 //gera um unico js para a inicializacao do I3Geo
@@ -154,7 +153,6 @@ $jsfiles = array(
 "../pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js",
 "../pacotes/pickr/pickr.min.js",
 "compactados/material.js",
-"compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
 "compactados/request_compacto.js",
 "compactados/mustache.js",
