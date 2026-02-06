@@ -1,4 +1,24 @@
-
+<?php
+include_once("../ms_configura.php");
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
+$carregaMapa = "";
+if(isset($i3geoBlFerramentas) && in_array("carregamapa",$i3geoBlFerramentas)){
+    $carregaMapa = " style='display:none' ";
+    if($_SERVER["HTTP_HOST"] === "localhost"){
+        $carregaMapa = " style='background-color:red' ";
+    }
+    echo "<script>console.warn('carregamapa ================== Bloqueado ==================');</script>";
+}
+$salvaMapa = "";
+if(isset($i3geoBlFerramentas) && in_array("salvamapa",$i3geoBlFerramentas)){
+    $salvaMapa = " style='display:none' ";
+    if($_SERVER["HTTP_HOST"] === "localhost"){
+        $salvaMapa = " style='background-color:red' ";
+    }
+    echo "<script>console.warn('salvamapa ================== Bloqueado ==================');</script>";
+}
+?>
 <!-- camadas existentes no mapa -->
 <div id='guia1obj' data-traduzir="true" style='display: none; height: 100%;'>
     <div class="i3GeoBgc2 i3GEOfechaGuia" style="display: flex;">
@@ -45,10 +65,10 @@
                 <li><a onclick="i3GEO.mapa.dialogo.linkMapaOriginal()" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-link"></span> {{{linkMapaOriginal}}}
                     </a></li>
-                <li><a onclick="i3GEO.mapa.dialogo.salvamapa()" href="javascript:void(0)">
+                <li <?php echo $salvaMapa;?>><a onclick="i3GEO.mapa.dialogo.salvamapa()" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-floppy-save"></span> {{{u17}}}
                     </a></li>
-                <li><a onclick="i3GEO.mapa.dialogo.carregamapa()" href="javascript:void(0)">
+                <li <?php echo $carregaMapa;?>><a onclick="i3GEO.mapa.dialogo.carregamapa()" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-floppy-open"></span> {{{u18}}}
                     </a></li>
                 <li><a onclick="i3GEO.mapa.dialogo.convertews()" href="javascript:void(0)">

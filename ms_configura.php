@@ -2,6 +2,9 @@
 if($_SERVER['SCRIPT_FILENAME'] == __FILE__){
     exit;
 }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 //verifica se o pai esta na mesma pasta
 if (!strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 	if(!stristr(dirname($_SERVER['SCRIPT_FILENAME']),"/".basename(dirname(__FILE__)))){
@@ -287,7 +290,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,inse
 inseretxt,mostraexten,outputformat,perfil
 
 */
-$i3geoBlFerramentas = array("upload");
+$i3geoBlFerramentas = array("upload","uploaddbf","uploadgpx","uploadkml","uploadshp","salvamapa","carregamapa");
 /*
 Variable: $ogrOutput
 
@@ -636,7 +639,9 @@ else //se for linux
  * Para trocar, altere a linha abaixo
  */
 if(empty($_COOKIE["i3geolingua"]) && array_key_exists('HTTP_ACCEPT_LANGUAGE',$_SERVER)){
-    $arr_cookie_options = array (
+    error_reporting(0);
+	//expires, path, domain, secure, httponly e samesite
+	$arr_cookie_options = array (
         'expires' => time() + 60*60*24*365,
         'path' => '/',
         'secure' => true,     // or false
