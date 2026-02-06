@@ -300,7 +300,7 @@ if (isset($parurl["pontos"])) {
 if(isset($parurl["marca"])){
     $marca = $parurl["marca"];
 } else {
-    $marca = "../pacotes/openlayers/img/marker-gold.png";
+    $marca = "../imagens/openlayers/marker-gold.png";
 }
 if(isset($parurl["tiles"])){
     $tiles = $parurl["tiles"];
