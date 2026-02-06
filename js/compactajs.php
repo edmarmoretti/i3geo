@@ -95,7 +95,6 @@ echo "<pre>";
 //gera um arquivo compactado para cada um
 //
 echo "Compactando os arquivos...\n\n";
-packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
 packer("plugini3geo.js","compactados/plugini3geo_compacto.js","Normal");
 packer("marcador.js","compactados/marcador_compacto.js","Normal");
 packer("login.js","compactados/login_compacto.js","Normal");
@@ -137,7 +136,7 @@ packer("legenda.js","compactados/legenda_compacto.js","Normal");
 packer("timer.js","compactados/timer_compacto.js","Normal");
 packer("caixaDeFerramentas.js","compactados/caixaDeFerramentas_compacto.js","Normal");
 packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
-packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
+packer("../pacotes/mustache/mustache.js","compactados/mustache.js","Normal");
 packer("../pacotes/proj4js/lib/proj4js.js","compactados/proj4js.js","Normal");
 packer("../pacotes/bootstrap-material-design/dist/js/material.js","compactados/material.js","Normal");
 //
@@ -145,7 +144,6 @@ packer("../pacotes/bootstrap-material-design/dist/js/material.js","compactados/m
 //
 $jsfiles = array(
 "../pacotes/jsts/jsts_min.js",
-"../pacotes/mobileesp/mdetect_compacto.js",
 "compactados/proj4js.js",
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-number/jquery.number.min.js",

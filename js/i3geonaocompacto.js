@@ -15,9 +15,8 @@
 	var allScriptTags = "";
 	var jsfiles = new Array(
 		"../pacotes/jsts/jsts_min.js",
-		"../pacotes/mobileesp/mdetect.js",
 		"../pacotes/proj4js/lib/proj4js-compressed.js",
-		"../pacotes/mustache.js-master/mustache.js",
+		"../pacotes/mustache/mustache.js",
 		"../pacotes/jquery/dist/jquery.min.js",
 		"../pacotes/jquery/jquery-number/jquery.number.min.js",
 		"../pacotes/jquery/jquery-ui/jquery-ui.min.js",

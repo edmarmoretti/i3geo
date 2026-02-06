@@ -2571,24 +2571,6 @@ i3GEO.util =
 		];
 	},
 	/**
-	 * Function: detectaTablet
-	 *
-	 * Verifica se esta em uso um dispositivo do tipo tablet
-	 *
-	 * Se for detectado, utiliza a interface alternativa definida em i3GEO.Interface.ALTTABLET
-	 *
-	 * A deteccao e feita com base em i3geo/pacotes/mobileesp/mdetect.js
-	 *
-	 */
-	detectaTablet: function () {
-		var c = DetectaMobile("DetectTierTablet");
-		if (c === false) {
-			return false;
-		} else {
-			return true;
-		}
-	},
-	/**
 	 * Function: detectaMobile
 	 *
 	 * Verifica se esta em uso um dispositivo do tipo movel
@@ -2599,11 +2581,10 @@ i3GEO.util =
 	 *
 	 */
 	detectaMobile: function () {
-		var c = DetectaMobile("DetectMobileLong");
-		if (c === false) {
-			return false;
-		} else {
+		if (/Android|iPhone|iPad|iPod|Mobile|Opera Mini/i.test(navigator.userAgent)) {
 			return true;
+		} else {
+			return false;
 		}
 	},
 	/**
