@@ -122,25 +122,6 @@ class Map
             $_COOKIE = array();
             $res["i3geoPermiteLogin"] = "nao";
         }
-        if (! empty($_COOKIE["i3geocodigologin"])) {
-            session_write_close();
-            session_name("i3GeoLogin");
-            session_id($_COOKIE["i3geocodigologin"]);
-            session_start();
-            // var_dump($_SESSION);exit;
-            $logado = "sim";
-            if (! empty($_SESSION["usuario"]) && $_SESSION["usuario"] == $_COOKIE["i3geousuariologin"]) {
-                $res["papeis"] = $_SESSION["papeis"];
-            } else {
-                $logado = "nao";
-            }
-            // verifica se o usuario logado pode ver as opcoes de edicao do sistema de admin dentro do mapa
-            foreach ($res["papeis"] as $p) {
-                if ($p < 3) {
-                    $res["editor"] = "sim";
-                }
-            }
-        }
         $res["mapexten"] = $ext;
         $res["mapscale"] = $escalaMapa;
         $res["mapres"] = $mapObj->resolution;
@@ -154,7 +135,6 @@ class Map
         $res["versaomscompleta"] = $versao["completa"];
         $res["versaoint"] = $versao["inteiro"];
         $res["mensagens"] = $this->getLayersMessages($mapObj);
-        $res["r"] = (isset($_SESSION["R_path"])) ? "sim" : "nao";
         $res["extentref"] = "";
         $res["kmlurl"] = ""; // @$kmlurl;
         $res["mensageminicia"] = $_SESSION["mensagemInicia"];
@@ -174,10 +154,30 @@ class Map
         $res["logado"] = $logado;
         $res["perfil"] = !empty($_SESSION["perfil"]) ? $_SESSION["perfil"] : "";
         $res["statusFerramentas"] = $_SESSION["statusFerramentas"];
+        $res["i3geoBlFerramentas"] = $_SESSION["i3geoBlFerramentas"];
         $res["googleApiKey"] = $_SESSION["googleApiKey"];
         // parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados
         $customizacoesinit = $mapObj->getmetadata("CUSTOMIZACOESINIT");
         $res["editavel"] = $mapObj->getmetadata("EDITAVEL");
+        if (! empty($_COOKIE["i3geocodigologin"])) {
+            session_write_close();
+            session_name("i3GeoLogin");
+            session_id($_COOKIE["i3geocodigologin"]);
+            session_start();
+            $logado = "sim";
+            if (! empty($_SESSION["usuario"]) && $_SESSION["usuario"] == $_COOKIE["i3geousuariologin"]) {
+                $res["papeis"] = $_SESSION["papeis"];
+            } else {
+                $logado = "nao";
+            }
+            // verifica se o usuario logado pode ver as opcoes de edicao do sistema de admin dentro do mapa
+            foreach ($res["papeis"] as $p) {
+                if ($p < 3) {
+                    $res["editor"] = "sim";
+                }
+            }
+        }
+
         return array(
             "variaveis" => $res,
             "temas" => $temas,

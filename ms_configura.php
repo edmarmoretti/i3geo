@@ -287,7 +287,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,inse
 inseretxt,mostraexten,outputformat,perfil
 
 */
-$i3geoBlFerramentas = array();
+$i3geoBlFerramentas = array("upload");
 /*
 Variable: $ogrOutput
 
@@ -304,96 +304,7 @@ $ogrOutput = false;
 	2 - utiliza X-Sendfile (mais rapido que as outras opcoes) mas exige modificacoes na instalacao do Apache. Veja em: https://tn123.org/mod_xsendfile/ e http://edmarmoretti.blogspot.com.br/
  */
 $i3georendermode = 1;
-/*
-	Variavel: linkedinoauth (ainda n&atilde;o implementado)
 
-	Par&acirc;metros registrados no Linkedin para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
-
-	O Linkedin exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
-
-	Veja o site para maiores informa&ccedil;&otilde;es: http://developer.linkedin.com/docs/DOC-1008
-
-	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
-
-	Ao registrai3geo/testamapfile.phpr utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
-
-	Exemplo:
-
-	$linkedinoauth = array(
-		"consumerkey" => "",
-		"consumersecret" => ""
-	);
-
-	Tipo:
-	{array}
-*/
-$linkedinoauth = "";
-/*
-	Variavel: facebookoauth
-
-	Par&acirc;metros registrados no Facebook para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
-
-	O Facebook exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
-
-	Veja o site para maiores informa&ccedil;&otilde;es: http://developers.facebook.com/setup/
-
-	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
-
-	Ao registrar utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
-
-	Exemplo:
-
-	$facebookoauth = array(
-		"consumerkey" => "",
-		"consumersecret" => ""
-	);
-
-	Tipo:
-	{array}
-*/
-$facebookoauth = array(
-	"consumerkey" => "",
-	"consumersecret" => ""
-);
-/*
-	Variavel: twitteroauth
-
-	Par&acirc;metros registrados no Twitter para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
-
-	O Twitter exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
-
-	Veja o site para maiores informa&ccedil;&otilde;es: http://www.snipe.net/2009/07/writing-your-first-twitter-application-with-oauth/
-
-	Lista de aplica&ccedil;&otilde;es cadastradas: https://twitter.com/oauth_clients/
-
-	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
-
-	$twitteroauth = "";
-
-	Ao registrar a aplica&ccedil;&atilde;o, utilize o endere&ccedil;o do i3geo em Application Website, por exemplo http://meuservidor/i3geo
-
-	Ao registrar utilize como "Callback URL" o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
-
-	Exemplo:
-
-	$twitteroauth = array(
-		"consumerkey" => "",
-		"consumersecret" => "",
-		"requesttokenurl" => "https://twitter.com/oauth/request_token",
-		"accesstokenurl" => "https://twitter.com/oauth/access_token",
-		"authorizeurl" => "https://twitter.com/oauth/authorize"
-	);
-
-	Tipo:
-	{array}
-*/
-$twitteroauth = array(
-	"consumerkey" => "",
-	"consumersecret" => "",
-	"requesttokenurl" => "https://twitter.com/oauth/request_token",
-	"accesstokenurl" => "https://twitter.com/oauth/access_token",
-	"authorizeurl" => "https://twitter.com/oauth/authorize"
-);
 /*
 	Variavel: mensagemInicia
 

@@ -298,7 +298,6 @@
     $res["versaomscompleta"] = $versao["completa"];
     $res["versaoint"] = $versao["inteiro"];
     $res["mensagens"] = $m->pegaMensagens();
-    $res["r"] = (isset($_SESSION["R_path"])) ? "sim" : "nao";
     $res["extentref"] = "";
     $res["kmlurl"] = $kmlurl;
     $res["mensageminicia"] = $_SESSION["mensagemInicia"];
@@ -321,6 +320,7 @@
     $res["copyright"] = $copyright;
     $res["logado"] = $logado;
     $res["statusFerramentas"] = $_SESSION["statusFerramentas"];
+    $res["i3geoBlFerramentas"] = $_SESSION["i3geoBlFerramentas"];
     $res["googleApiKey"] = $_SESSION["googleApiKey"];
     // parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados
     $customizacoesinit = $m->mapa->getmetadata("CUSTOMIZACOESINIT");

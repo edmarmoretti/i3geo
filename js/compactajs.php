@@ -1,4 +1,5 @@
 <html>
+	<meta charset='utf-8'>
 <title>Compacta js</title>
 	<body>
 	<h1>Compactador de c&oacute;digo Javascript</h1>
@@ -93,6 +94,7 @@ echo "<pre>";
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
+echo "Compactando os arquivos...\n\n";
 packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
 packer("plugini3geo.js","compactados/plugini3geo_compacto.js","Normal");
 packer("marcador.js","compactados/marcador_compacto.js","Normal");
@@ -200,6 +202,7 @@ $jsfiles = array(
 $removeQuebra = array();
 
 $buffer = "\$i = function(id){return document.getElementById(id);};\n";
+echo "\n\nJuntando os arquivos javascript...\n\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
 //
 //gera um unico css
@@ -212,6 +215,7 @@ $cssfiles = array(
 );
 
 $buffer = "";
+echo "\n\nJuntando os arquivos CSS...\n\n";
 salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");
 //testa os scripts
 foreach ($jsfiles as $f)
@@ -279,8 +283,13 @@ function packer($src,$out,$tipo="None")
 	$packed = $packer->pack();
 	$t2 = microtime(true);
 	$time = sprintf('%.4f', ($t2 - $t1) );
-	echo 'script ', $src, ' packed in ' , $out, ', in ', $time, ' s.', "\n";
+
 	file_put_contents($out, $packed);
+	if (file_exists($out) == true){
+		echo 'script ', $src, ' packed in ' , $out, ', in ', $time, ' s.', "\n";
+	} else {
+		echo "Arquivo ".$out." não foi criado.\n";
+	}
 }
 function salvatudojs($jsfiles,$buffer,$final,$tipo)
 {
@@ -293,7 +302,11 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 
 	foreach ($jsfiles as $f)
 	{
-		echo $f;
+		if(file_exists($f) == false){
+			echo "\nArquivo n&atilde;o encontrado: ".$f."\n";
+			continue;
+		}
+		echo "\n".$f;
 		if($tipo == "js"){
 			$buffer .= "//\n//".$f."\n";
 		}

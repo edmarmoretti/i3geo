@@ -458,7 +458,7 @@ $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0; // essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 $_SESSION["i3georendermode"] = $i3georendermode_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
-$_SESSION["i3geoBlFerramentas"] = $i3geoBlFerramentas_;
+$_SESSION["i3geoBlFerramentas"] = explode(",", $i3geoBlFerramentas_);
 if($esquemaadmin != ""){
     $_SESSION["esquemaadmin"] = str_replace(".","",$esquemaadmin).".";
 } else {
