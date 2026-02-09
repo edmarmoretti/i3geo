@@ -148,10 +148,7 @@ include ($configInc["inc"] . "/css.php");
                 //array com a lista dos layers que serao adicionados mas nao ligados. Inclusive IDs do sistema de metadados estatisticos
                 on : [],
                 //array com os layers desligados
-                off : [],
-                //array com a lista de IDs que identificam medidas registradas no sistema de metadados
-                //estatisticos
-                metaestat : []
+                off : []
                 },
                 //lista de coordenadas x e y que serao adicionadas como pontos no mapa
                 points : {
@@ -368,7 +365,6 @@ include ($configInc["inc"] . "/css.php");
                     templateDir : i3GeoUrl
                         + "/ferramentas/legenda"
                 },
-                metaestat : {},
                 buscainde : {},
                 },
                 //configuracoes especificas para a interface que utiliza o OpenLayers

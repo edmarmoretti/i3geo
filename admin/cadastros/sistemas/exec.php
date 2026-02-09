@@ -88,7 +88,7 @@ switch ($funcao) {
         if ($dados === false) {
             $dbhw = null;
             $dbh = null;
-            header("HTTP/1.1 500 erro ao consultar banco de dados tabela de atlas");
+            header("HTTP/1.1 500 erro ao consultar banco de dados");
             exit();
         }
         include ("../perfis/funcoes.php");

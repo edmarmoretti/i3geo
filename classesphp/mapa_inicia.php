@@ -53,7 +53,6 @@
  *
  * $navegadoresLocais - array que indica quais usu&aacute;rios podem navegar no servidor
  *
- * $cp - Objeto CPAINT.
  *
  * $map_file - Arquivo map file.
  *
@@ -62,8 +61,6 @@
  * $w - Largura da imagem do mapa.
  *
  * $h - Altura da imagem do mapa.
- *
- * $R_path - Vari&aacute;vel definida no arquivo ms_configura.php que indica se o software R est&aacute; instalado.
  *
  * $locmapserv - Vari&aacute;vel definida no arquivo ms_configura.php que indica nome do mapserver cgi.
  *
@@ -301,7 +298,6 @@
     $res["versaomscompleta"] = $versao["completa"];
     $res["versaoint"] = $versao["inteiro"];
     $res["mensagens"] = $m->pegaMensagens();
-    $res["r"] = (isset($_SESSION["R_path"])) ? "sim" : "nao";
     $res["extentref"] = "";
     $res["kmlurl"] = $kmlurl;
     $res["mensageminicia"] = $_SESSION["mensagemInicia"];
@@ -324,6 +320,7 @@
     $res["copyright"] = $copyright;
     $res["logado"] = $logado;
     $res["statusFerramentas"] = $_SESSION["statusFerramentas"];
+    $res["i3geoBlFerramentas"] = $_SESSION["i3geoBlFerramentas"];
     $res["googleApiKey"] = $_SESSION["googleApiKey"];
     // parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados
     $customizacoesinit = $m->mapa->getmetadata("CUSTOMIZACOESINIT");

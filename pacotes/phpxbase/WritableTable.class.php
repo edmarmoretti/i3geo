@@ -23,26 +23,26 @@ error_reporting(0);
 class XBaseWritableTable extends XBaseTable {
 
 	/* static */
-	function cloneFrom($table) {
-		$result =& new XBaseWritableTable($table->name);
-	    $result->version=$table->version;
-	    $result->modifyDate=$table->modifyDate;
-	    $result->recordCount=0;
-	    $result->recordByteLength=$table->recordByteLength;
-	    $result->inTransaction=$table->inTransaction;
-	    $result->encrypted=$table->encrypted;
-	    $result->mdxFlag=$table->mdxFlag;
-	    $result->languageCode=$table->languageCode;
-	    $result->columns=$table->columns;
-	    $result->columnNames=$table->columnNames;
-	    $result->headerLength=$table->headerLength;
-	    $result->backlist=$table->backlist;
-	    $result->foxpro=$table->foxpro;
-	    return $result;
+	static function cloneFrom($table) {
+		$result = new XBaseWritableTable($table->name);
+		$result->version=$table->version;
+		$result->modifyDate=$table->modifyDate;
+		$result->recordCount=0;
+		$result->recordByteLength=$table->recordByteLength;
+		$result->inTransaction=$table->inTransaction;
+		$result->encrypted=$table->encrypted;
+		$result->mdxFlag=$table->mdxFlag;
+		$result->languageCode=$table->languageCode;
+		$result->columns=$table->columns;
+		$result->columnNames=$table->columnNames;
+		$result->headerLength=$table->headerLength;
+		$result->backlist=$table->backlist;
+		$result->foxpro=$table->foxpro;
+		return $result;
 	}
 
 	/* static */
-	function create($filename,$fields) {
+	static function create($filename,$fields) {
 		if (!$fields || !is_array($fields)) trigger_error ("cannot create xbase with no fields", E_USER_ERROR);
 		$recordByteLength=1;
 		$columns=array();
@@ -50,14 +50,14 @@ class XBaseWritableTable extends XBaseTable {
 		$i=0;
 		foreach ($fields as $field) {
 			if (!$field || !is_array($field) || sizeof($field)<2) trigger_error ("fields argument error, must be array of arrays", E_USER_ERROR);
-			$column =& new XBaseColumn($field[0],$field[1],0,@$field[2],@$field[3],0,0,0,0,0,0,$i,$recordByteLength);
+			$column = new XBaseColumn($field[0],$field[1],0,@$field[2],@$field[3],0,0,0,0,0,0,$i,$recordByteLength);
 			$recordByteLength += $column->getDataLength();
 			$columnNames[$i]=$field[0];
 			$columns[$i]=$column;
 			$i++;
 		}
 
-		$result =& new XBaseWritableTable($filename);
+		$result = new XBaseWritableTable($filename);
 	    $result->version=131;
 	    $result->modifyDate=time();
 	    $result->recordCount=0;
@@ -120,8 +120,8 @@ class XBaseWritableTable extends XBaseTable {
         }
         $this->writeChar(0x0d);
 	}
-	function &appendRecord() {
-		$this->record =& new XBaseRecord($this,$this->recordCount);
+	function appendRecord() {
+		$this->record = new XBaseRecord($this,$this->recordCount);
 		$this->recordCount+=1;
 		return $this->record;
 	}

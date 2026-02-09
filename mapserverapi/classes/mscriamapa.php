@@ -48,22 +48,6 @@ class Mscriamapa
         if (isset($param["layersoff"])) {
             $this->map->layersOff($mapId, $param["layersoff"]);
         }
-        if (isset($param["metaestatids"])) {
-            $this->map->addLayersMetaestat($mapId,$param["metaestatids"], $param["layerson"]);
-        }
-        // processa parametros de inclusao de dados
-        if (isset($param["wkt"])) {
-            $this->map->addLayerByWkt($mapId,$param["wkt"], $param["namewkt"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
-        }
-        if (isset($param["points"])) {
-            $this->map->addLayerByPoints($mapId,$param["points"], $param["namepoints"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
-        }
-        if (isset($param["lines"])) {
-            $this->map->addLayerByLines($mapId,$param["lines"], $param["namelines"], $param["symbol"], $param["symbolsize"], $param["symbolcolor"]);
-        }
-        if (isset($param["polygons"])) {
-            $this->map->addLayerByPolygons($mapId,$param["polygons"], $param["namepolygons"], $param["symbolcolor"]);
-        }
         /*
          * $param["titlewms"] = "estados";
          * $param["urlwms"] = "http://bdgex.eb.mil.br/mapcache?";
@@ -115,7 +99,6 @@ class Mscriamapa
             return $this->mapid;
         }
         session_name("i3GeoPHP");
-        unset($GLOBALS);
         $_COOKIE = array();
         if (session_status() == PHP_SESSION_ACTIVE) {
             session_destroy();
@@ -148,7 +131,6 @@ class Mscriamapa
         $_SESSION["emailInstituicao"] = $emailInstituicao;
         $_SESSION["locmapserv"] = $locmapserv;
         $_SESSION["locaplic"] = $locaplic;
-        $_SESSION["R_path"] = $R_path;
         $_SESSION["debug"] = false;
         $_SESSION["ler_extensoes"] = [];
         $_SESSION["postgis_mapa"] = $postgis_mapa;

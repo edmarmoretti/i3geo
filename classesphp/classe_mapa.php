@@ -544,8 +544,6 @@ class Mapa
                     $oLayer->getmetadata("legendaimg"),
                     $oLayer->offsite->red . "," . $oLayer->offsite->green . "," . $oLayer->offsite->blue,
                     $oLayer->numclasses,
-                    $oLayer->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"),
-                    $oLayer->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"),
                     $utfgrid,
                     $oLayer->maxscaledenom,
                     $oLayer->minscaledenom,

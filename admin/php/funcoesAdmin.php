@@ -4,37 +4,15 @@ use PDO;
 use PDOException;
 use Services_JSON;
 
-function listaConexaoMetaestat(){
-    if(!isset($_SESSION["postgis_mapa"])){
-        include(dirname(__FILE__)."/../../ms_configura.php");
-    } else {
-        $postgis_mapa = $_SESSION["postgis_mapa"];
-    }
-    if(isset($postgis_mapa["metaestat"])){
-        $m = $postgis_mapa["metaestat"];
-        if($m == ""){
-            return false;
+function utf8_converter($array) {
+    array_walk_recursive($array, function(&$item, $key) {
+        if (!mb_detect_encoding($item, 'UTF-8', true)) {
+            $item = utf8_encode($item);
         }
-        $lista = explode(" ",$m);
-        $con = array();
-        foreach($lista as $l){
-            $teste = explode("=",$l);
-            $con[trim($teste[0])] = trim($teste[1]);
-        }
-        $c = array(
-            "codigo_estat_conexao" => "metaestat",
-            "bancodedados" => $con["dbname"],
-            "host" => $con["host"],
-            "porta" => $con["port"],
-            "usuario" => $con["user"],
-            "senha" => $con["password"],
-            "fonte" => "ms_configura"
-        );
-        return $c;
-    } else {
-        return false;
-    }
+    });
+    return $array;
 }
+
 //
 // verifica se um determinado papel esta registrado na variavel SESSION
 //
@@ -100,7 +78,7 @@ function testaNumerico($valores){
 /*
  Function: \admin\php\funcoesAdmin\retornaJSON
 
-Converte um array em um objeto do tipo JSON utilizando a biblioteca CPAINT
+Converte um array em um objeto do tipo JSON
 
 Parametro:
 
@@ -113,15 +91,9 @@ Imprime na saida a string JSON
 function retornaJSON($obj)
 {
 	$locaplic = $_SESSION["locaplic"];
-	include_once($locaplic."/pacotes/cpaint/JSON/json2.php");
-	//error_reporting (E_ALL);
 	ob_end_clean();
-	$j = new Services_JSON();
-	$texto = $j->encode($obj);
-	if (!mb_detect_encoding($texto,"UTF-8",true)){
-		$texto = utf8_encode($texto);
-	}
-	echo $texto;
+	$texto = \admin\php\funcoesAdmin\utf8_converter($obj);
+	echo json_encode($texto, JSON_UNESCAPED_UNICODE);
 }
 /*
  Function: \admin\php\funcoesAdmin\verificaDuplicados
@@ -482,8 +454,9 @@ function nomeRandomico($n=10)
 	$nomes = "";
 	$a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
 	$max = 51;
-	for($i=0; $i < $n; ++$i)
-	{$nomes .= $a{mt_rand(0, $max)};}
+	for($i=0; $i < $n; ++$i) {
+		$nomes .= $a[mt_rand(0, $max)];
+	}
 	return $nomes;
 }
 /*
@@ -819,7 +792,6 @@ function removeCabecalhoMapfile($arq,$symbolset=true){
 	        "TEMPORIZADOR",
 	        "PALLETESTEP",
 	        "LTEMPOITEMIMAGEM",
-	        "METAESTAT_ID_MEDIDA_VARIAVEL",
 	        "GMOPACITY",
 	        "GMSTATUS",
 	        "ICONETEMA",
@@ -827,7 +799,6 @@ function removeCabecalhoMapfile($arq,$symbolset=true){
 	        "DESCRIPTION_TEMPLATE",
 	        "LTEMPOITEMLINK",
 	        "TILES",
-	        "METAESTAT_CODIGO_TIPO_REGIAO",
 	        "ARQUIVOTEMAORIGINAL",
 	        "PALLETEFILE",
 	        "NOMEORIGINAL",
@@ -839,7 +810,6 @@ function removeCabecalhoMapfile($arq,$symbolset=true){
 	        "LTEMPOITEMICONE",
 	        "DATAORIGINAL",
 	        "PLUGINI3GEO",
-	        "METAESTAT",
 	        "ITEMBUSCARAPIDA",
 	        "ARQUIVODOWNLOAD",
 	        "ARQUIVOKMZ",

@@ -40,7 +40,7 @@ function excluir($codigo, $dbhw) {
 	unlink ( "$locaplic/temas/" . $codigo . ".map" );
 	return true;
 }
-function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
+function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $acessopublico, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
 	$convUTF = $_SESSION["convUTF"];
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
@@ -71,13 +71,6 @@ function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $aces
 	$layer->setmetadata ( "permitekml", $acessopublico );
 	$layer->setmetadata ( "permitekmz", $acessopublico );
 	$layer->setmetadata ( "TEMA", $titulolegenda );
-	if (! empty ( $metaestat ) && $metaestat == "SIM") {
-		$layer->setmetadata ( "METAESTAT", "SIM" );
-		$tipoa_tema = "META";
-	} else {
-		$layer->setmetadata ( "METAESTAT", "" );
-		$tipoa_tema = "";
-	}
 	try {
 		$dataCol = array (
 				"link_tema" => $link_tema,
@@ -105,7 +98,7 @@ function alterar($locaplic, $id_tema, $titulolegenda, $link_tema, $codigo, $aces
 		return false;
 	}
 }
-function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublico, $metaestat, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
+function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublico, $titulo, $desc_tema, $tituloEN, $tituloES, $registraBanco, $dbhw) {
 	$convUTF = $_SESSION["convUTF"];
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 
@@ -129,10 +122,6 @@ function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublic
 	$dados [] = "LAYER";
 	$dados [] = '	NAME "' . $codigo . '"';
 	$dados [] = '	TEMPLATE "none.htm"';
-	if (! empty ( $metaestat ) && $metaestat == "SIM") {
-		$dados [] = '	CONNECTIONTYPE POSTGIS';
-		$tipoLayer = "polygon";
-	}
 	$dados [] = "	TYPE " . $tipoLayer;
 	$dados [] = '	DATA ""';
 	$dados [] = '	CONNECTION ""';
@@ -143,11 +132,7 @@ function adicionar($locaplic, $titulolegenda, $link_tema, $codigo, $acessopublic
 	$dados [] = '		CLASSE "SIM"';
 	$dados [] = '		TILES "SIM"';
 	$tipoa_tema = "";
-	if (! empty ( $metaestat ) && $metaestat == "SIM") {
-		$dados [] = '		METAESTAT "SIM"';
-		// para marcar no banco de dados de administracao
-		$tipoa_tema = "META";
-	}
+
 	$dados [] = '		permiteogc "' . $acessopublico . '"';
 	$dados [] = '		permitedownload "' . $acessopublico . '"';
 	$dados [] = '		permitekml "' . $acessopublico . '"';
@@ -413,7 +398,6 @@ function listaUnico($dbhw, $codigo) {
 	if ($convUTF != false) {
 	    $titulolegenda = utf8_decode ( $titulolegenda );
 	}
-	$metaestat = $layer->getmetadata("METAESTAT");
 	$dados = \admin\php\funcoesAdmin\pegaDados ( "SELECT * from ".$esquemaadmin."i3geoadmin_temas WHERE codigo_tema = '$codigo' ", $dbhw, false );
 	//se nao existir no sistema de admin, faz o registro
 	if(count($dados) == 0){
@@ -450,13 +434,7 @@ function listaUnico($dbhw, $codigo) {
 	if(strtolower($dados[0]["ogc_tema"]) !== "nao" || strtolower($dados[0]["download_tema"]) !== "nao"){
 		$acessopublico = "checked";
 	}
-	if($metaestat == ""){
-		$dados[0]["metaestatnao"] = "selected";
-	} else {
-		$dados[0]["metaestatsim"] = "selected";
-	}
 	$dados[0]["acessopublico"] = $acessopublico;
-	$dados[0]["metaestat"] = $metaestat;
 	//a pagina e utf e o texto pode ser iso
 	if(mb_detect_encoding($titulolegenda,'UTF-8, ISO-8859-1') == "ISO-8859-1"){
 		$titulolegenda = utf8_encode($titulolegenda);

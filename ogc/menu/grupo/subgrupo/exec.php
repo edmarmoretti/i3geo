@@ -50,7 +50,8 @@ ORDER BY lower(t.nome_tema)
 			exit ();
 		}
 
-		retornaJSONutf8 ( array("dados"=>"","camadas"=>$camadas) );
+		echo json_encode(utf8_converter( array("dados"=>"","camadas"=>$camadas)), JSON_UNESCAPED_UNICODE);
+
 		break;
 }
 ?>

@@ -14,7 +14,6 @@ include (I3GEOPATH . "/mapserverapi/classes/util.php");
 include (I3GEOPATH . "/mapserverapi/classes/layer.php");
 include (I3GEOPATH . "/mapserverapi/classes/map.php");
 include (I3GEOPATH . "/mapserverapi/classes/admin.php");
-include (I3GEOPATH . "/mapserverapi/classes/metaestatinfo.php");
 include (I3GEOPATH . "/mapserverapi/classes/statistics.php");
 $container = $app->getContainer();
 $container['util'] = function ($c) {

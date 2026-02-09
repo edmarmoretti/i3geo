@@ -14,7 +14,6 @@ include (I3GEOPATH . "/mapserverapi/classes/map.php");
 include (I3GEOPATH . "/mapserverapi/classes/layer.php");
 include (I3GEOPATH . "/mapserverapi/classes/util.php");
 include (I3GEOPATH . "/mapserverapi/classes/admin.php");
-include (I3GEOPATH . "/mapserverapi/classes/metaestatinfo.php");
 include (I3GEOPATH . "/mapserverapi/classes/statistics.php");
 $container = $app->getContainer();
 $container['util'] = function ($c) {
@@ -91,15 +90,6 @@ $container['identify'] = function ($c) {
  * 			required=false,
  * 			type="string",
  * 			description="Lista de layers que serao desligados."
- * 		),
- * 		@SWG\Parameter(
- * 			name="metaestatids",
- * 			in="query",
- * 			required=false,
- * 			type="string",
- * 			description="Lista de codigos de medidas de variaveis cadastradas no
- *            sistema de metadados estatisticos. Cada medida sera adicionada como
- *            um novo layer no mapa."
  * 		),
  * 		@SWG\Parameter(
  * 			name="wkt",
@@ -979,75 +969,6 @@ $app->map([
 ], '/{mapId}/textFontList', function (Request $request, Response $response, $args) {
     $param = $this->util->sanitizestrings($request->getQueryParams());
     $data = $this->map->textFontList($args["mapId"]);
-    $response = $response->withHeader('Content-Type', 'application/json');
-    $response->getBody()
-        ->write(json_encode($data));
-    return $response;
-});
-
-/**
- *
- * @SWG\Get(
- * 		path="/i3geo/mapserverapi/map/{mapId}/addLayerMetaestatFilter/",
- * 		tags={"map add layer"},
- * 		operationId="addLayerMetaestatFilter",
- * 		summary="Add a new layer to the map based on the statistical metadata system.",
- * 		@SWG\Parameter(
- * 			name="mapId",
- * 			in="path",
- * 			required=true,
- * 			type="string",
- * 			description="Map id"
- * 		),
- * 		@SWG\Parameter(
- * 			name="measure",
- * 			in="query",
- * 			required=true,
- * 			type="number",
- * 			description="Measure id."
- * 		),
- * 		@SWG\Parameter(
- * 			name="filter",
- * 			in="query",
- * 			required=true,
- * 			type="string",
- * 			description="Filters that will be applied. Format: columnName * value | columName * value ."
- * 		),
- * 		@SWG\Parameter(
- * 			name="classification",
- * 			in="query",
- * 			required=true,
- * 			type="number",
- * 			description="Classification type code when there are more than one."
- * 		),
- * 		@SWG\Parameter(
- * 			name="opacity",
- * 			in="query",
- * 			required=false,
- * 			type="number",
- * 			description="Layer opacity."
- * 		),
- * 		@SWG\Parameter(
- * 			name="regiontype",
- * 			in="query",
- * 			required=false,
- * 			type="string",
- * 			description="Region type code."
- * 		),
- *      @SWG\Response(
- * 			response="200",
- *          description="Result status",
- * 		)
- * )
- */
-$app->map([
-    'GET',
-    'POST'
-], '/{mapId}/addLayerMetaestatFilter', function (Request $request, Response $response, $args) {
-    $param = $this->util->sanitizestrings($request->getQueryParams());
-    $data = $this->map->addLayerMetaestatFilter($args["mapId"], $param["measure"], $param["filter"], $param["classification"], $param["opacity"], $param["regiontype"]);
-    $this->map->removeRestrictLayers();
-    $this->map->hiddeCon();
     $response = $response->withHeader('Content-Type', 'application/json');
     $response->getBody()
         ->write(json_encode($data));

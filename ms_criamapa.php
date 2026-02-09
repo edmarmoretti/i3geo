@@ -254,7 +254,6 @@ if (empty($base) && ! empty($parurl["base"])) {
 }
 
 ms_ResetErrorList();
-$metaestatids = @$parurl["metaestatids"];
 $temasa = @$parurl["temasa"];
 $layers = @$parurl["layers"];
 $desligar = @$parurl["desligar"];
@@ -356,7 +355,6 @@ $locmapserv_ = $locmapserv;
 $locaplic_ = $locaplic;
 // $locsistemas_ = $locsistemas;
 // $locidentifica_ = $locidentifica;
-$R_path_ = $R_path;
 $mapext_ = $mapext;
 
 $ler_extensoes_ = $ler_extensoes;
@@ -432,7 +430,6 @@ $_SESSION["cachedir"] = $cachedir_;
 $_SESSION["emailInstituicao"] = $emailInstituicao_;
 $_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
-$_SESSION["R_path"] = $R_path_;
 $_SESSION["mapext"] = $mapext_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
 $_SESSION["postgis_mapa"] = $postgis_mapa_;
@@ -461,7 +458,7 @@ $_SESSION["imgdir"] = $diretorios[2];
 $_SESSION["contadorsalva"] = 0; // essa variavel e utilizada pela ferramenta telaremota. Toda vez que o mapa e salvo, acrescenta 1 (veja classesphp/mapa_controle.php)
 $_SESSION["i3georendermode"] = $i3georendermode_;
 $_SESSION["i3geoPermiteLogin"] = $i3geoPermiteLogin_;
-$_SESSION["i3geoBlFerramentas"] = $i3geoBlFerramentas_;
+$_SESSION["i3geoBlFerramentas"] = explode(",", $i3geoBlFerramentas_);
 if($esquemaadmin != ""){
     $_SESSION["esquemaadmin"] = str_replace(".","",$esquemaadmin).".";
 } else {
@@ -585,21 +582,6 @@ $_SESSION["imgurl"] = strtolower($protocolo[0]) . "://" . $_SERVER['HTTP_HOST'] 
 $_SESSION["tmpurl"] = strtolower($protocolo[0]) . "://" . $_SERVER['HTTP_HOST'] . $atual;
 $_SESSION["map_file"] = $tmpfname;
 $_SESSION["mapext"] = $mapext;
-if (isset($wkt)) {
-    insereWKTUrl();
-}
-
-if (isset($pontos)) {
-    inserePontosUrl();
-}
-
-if (isset($linhas)) {
-    insereLinhasUrl();
-}
-
-if (isset($poligonos)) {
-    inserePoligonosUrl();
-}
 
 if (isset($url_wms)) {
     incluiTemaWms();
@@ -769,7 +751,7 @@ function ligaTemas()
  */
 function incluiTemasIniciais()
 {
-    global $temasa, $mapn, $locaplic, $metaestatids, $layers;
+    global $temasa, $mapn, $locaplic, $layers;
     if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
         $temasdir = $locaplic . "\\temas";
     } else {
@@ -780,54 +762,6 @@ function incluiTemasIniciais()
     }
     $temasa = str_replace(',', " ", $temasa);
     $alayers = explode(" ", $temasa);
-    if (isset($metaestatids)) {
-        // localhost/i3geo/ms_criamapa.php?metaestatids=25,12&layers=25
-        include_once (dirname(__FILE__) . "/classesphp/classe_metaestatinfo.php");
-        $metaestatids = str_replace(',', " ", $metaestatids);
-        $metaestatids = explode(" ", $metaestatids);
-        $metaestatidsligados = $layers;
-        $metaestatidsligados = str_replace(',', " ", $metaestatidsligados);
-        $metaestatidsligados = explode(" ", $metaestatidsligados);
-        foreach ($metaestatids as $metaestatid) {
-            if(!file_exists($_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map")){
-                $m = new MetaestatInfo();
-                $parametros = $m->listaParametro($metaestatid, "", "", true, true);
-                // id_parametro_medida,coluna
-                $filtroPar = array();
-                $tituloPar = array();
-                foreach ($parametros as $parametro) {
-                    $valoresparametro = $m->valorUnicoMedidaVariavel($metaestatid, $parametro["coluna"]);
-                    //var_dump($valoresparametro);
-                    //exit();
-                    $valormaior = $valoresparametro[count($valoresparametro) - 1];
-                    $filtroPar[] = " " . $parametro["coluna"] . "::text = '" . $valormaior[$parametro["coluna"]] . "' ";
-                    $tituloPar[] = $parametro["coluna"] . ": " . $valormaior[$parametro["coluna"]];
-                }
-                $dadosMedida = $m->listaMedidaVariavel("", $metaestatid);
-                // var_dump($dadosMedida);exit;
-                $tituloCamada = mb_convert_encoding($dadosMedida["nomemedida"],"ISO-8859-1",mb_detect_encoding($dadosMedida["nomemedida"]));
-                if(count($tituloPar)>0){
-                    $tituloCamada = $tituloCamada." (".implode(" ,",$tituloPar)." )";
-                }
-                $mapfilemetaestat = $m->mapfileMedidaVariavel($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true,$_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map");
-            } else {
-                $mapfilemetaestat = array(
-                    "mapfile" => $_SESSION["dir_tmp"]."/metaestatTempInit".$metaestatid.".map",
-                    "layer" => "metaestatTempInit".$metaestatid
-                );
-            }
-            // array(3) { ["mapfile"]=> string(52) "/tmp/ms_tmp/AAAAc20ad4d76fe97759aa27a0c99bff6710.map" ["layer"]=> string(36) "AAAAc20ad4d76fe97759aa27a0c99bff6710" ["titulolayer"]=> string(0) "" }
-            // var_dump ($mapfilemetaestat);
-            // exit;
-            array_push($alayers, $mapfilemetaestat["mapfile"]);
-
-            if (in_array($metaestatid, $metaestatidsligados)) {
-                $maptemp = @ms_newMapObj($mapfilemetaestat["mapfile"]);
-                $maptemp->getlayerbyname($mapfilemetaestat["layer"])->set("status", MS_DEFAULT);
-                $maptemp->save($mapfilemetaestat["mapfile"]);
-            }
-        }
-    }
 
     foreach ($alayers as $arqt) {
         $arqtemp = "";
@@ -889,12 +823,7 @@ function incluiTemasIniciais()
                         $layern->set("status", $statustemp);
                     }
                     cloneInlineSymbol($layern, $maptemp, $mapn);
-                    //$layerAdicionado = ms_newLayerObj($mapn, $layern);
-                    if($layern->type == MS_LAYER_POLYGON && $layern->getmetadata("METAESTAT") == "SIM"){
-                        $mapn->insertLayer($layern,0);
-                    } else {
-                        $mapn->insertLayer($layern,-1);
-                    }
+                    $mapn->insertLayer($layern,-1);
                     // echo $layern->name;
                     //corrigeLayerGrid($layern, $layerAdicionado);
                     corrigeLayerGrid($layern, $mapn->getlayerbyname($layern->name));
@@ -952,398 +881,7 @@ function mostraAguarde()
     }
 }
 
-/*
- * Insere elementos no mapa a partir de uma string definida em wkt
- */
-function insereWKTUrl()
-{
-    global $tamanhosimbolo, $simbolo, $corsimbolo, $wkt, $nometemawkt, $dir_tmp, $imgdir, $tmpfname, $locaplic;
-    include_once "pacotes/phpxbase/api_conversion.php";
-    if (! isset($nometemapontos)) {
-        $nometemapontos = "WKT";
-    }
-    if ($nometemapontos == "") {
-        $nometemapontos = "WKT";
-    }
-    //
-    // cria o shape file
-    //
-    $shape = ms_shapeObjFromWkt($wkt);
-    $tipol = $shape->type;
-    if ($tipol == 0) {
-        $tipol = 3;
-    }
-    $nomeshp = $dir_tmp . "/" . $imgdir . "/wkts";
-    // cria o dbf
-    $def = array();
-    $items = array(
-        "COORD"
-    );
-    foreach ($items as $ni) {
-        $def[] = array(
-            $ni,
-            "C",
-            "254"
-        );
-    }
-    if (! function_exists(dbase_create)) {
-        xbase_create($nomeshp . ".dbf", $def);
-    } else {
-        dbase_create($nomeshp . ".dbf", $def);
-    }
-    $dbname = $nomeshp . ".dbf";
-    $db = xbase_open($dbname, 2);
-    if ($tipol == 1) {
-        $novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);
-    }
-    if ($tipol == 3) {
-        $novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_MULTIPOINT);
-    }
-    if ($tipol == 2) {
-        $novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
-    }
-    $reg[] = "";
-    $novoshpf->addShape($shape);
-    xbase_add_record($db, $reg);
-    $novoshpf->free();
-    xbase_close($db);
-    // adiciona o layer
-    $mapa = ms_newMapObj($tmpfname);
-    $layer = ms_newLayerObj($mapa);
-    $layer->set("name", "wktins");
-    $layer->set("data", $nomeshp . ".shp");
-    $layer->setmetadata("DOWNLOAD", "sim");
-    $layer->setmetadata("temalocal", "sim");
-    $layer->setmetadata("tema", $nometemawkt);
-    $layer->setmetadata("classe", "sim");
-    $layer->set("type", $shape->type);
-    $layer->set("status", MS_DEFAULT);
-    $classe = ms_newClassObj($layer);
-    $classe->set("name", " ");
-    $estilo = ms_newStyleObj($classe);
-    if ($shape->type == 0) {
-        if (! isset($simbolo))
-            $estilo->set("symbolname", "ponto");
-        if (! isset($tamanhosimbolo))
-            $estilo->set("size", 6);
-    }
-    if ($shape->type == 1) {
-        if (! isset($simbolo))
-            //$estilo->set("symbolname", "linha");
-        if (! isset($tamanhosimbolo))
-            $estilo->set("width", 3);
-    }
-    if ($shape->type == 2) {
-        $layer->set("opacity", "50");
-    }
 
-    $cor = $estilo->color;
-    if (! isset($corsimbolo)) {
-        $corsimbolo = "255,0,0";
-    }
-    $corsimbolo = str_replace(" ", ",", $corsimbolo);
-    $corsimbolo = explode(",", $corsimbolo);
-    $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-
-    $salvo = $mapa->save($tmpfname);
-    erroCriacao();
-}
-
-/*
- * Insere um tema do tipo ponto
- *
- */
-function inserePontosUrl()
-{
-    global $pontos, $tamanhosimbolo, $simbolo, $corsimbolo, $nometemapontos, $dir_tmp, $imgdir, $tmpfname, $locaplic;
-    include_once "pacotes/phpxbase/api_conversion.php";
-    if (! isset($nometemapontos)) {
-        $nometemapontos = "Pontos";
-    }
-    if ($nometemapontos == "") {
-        $nometemapontos = "Pontos";
-    }
-    //
-    // cria o shape file
-    //
-    $tipol = MS_SHP_POINT;
-    $nomeshp = $dir_tmp . "/" . $imgdir . "/" . nomeRandomico();
-    // cria o dbf
-    $def = array();
-    $items = array(
-        "COORD"
-    );
-    foreach ($items as $ni) {
-        $def[] = array(
-            $ni,
-            "C",
-            "254"
-        );
-    }
-    if (! function_exists(dbase_create)) {
-        xbase_create($nomeshp . ".dbf", $def);
-    } else {
-        dbase_create($nomeshp . ".dbf", $def);
-    }
-    $dbname = $nomeshp . ".dbf";
-    $db = xbase_open($dbname, 2);
-    $novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-    $pontos = explode(" ", trim($pontos));
-    if (count($pontos) == 1) {
-        $pontos = explode(",", trim($pontos[0]));
-    }
-    foreach ($pontos as $p) {
-        if (is_numeric($p)) {
-            $pontosn[] = $p;
-        }
-    }
-    $pontos = $pontosn;
-    for ($ci = 0; $ci < count($pontos); $ci = $ci + 2) {
-        $reg = array();
-        $reg[] = $pontos[$ci] . " " . $pontos[$ci + 1];
-        $shape = ms_newShapeObj($tipol);
-        $linha = ms_newLineObj();
-        $linha->addXY($pontos[$ci], $pontos[$ci + 1]);
-        $shape->add($linha);
-        $novoshpf->addShape($shape);
-        xbase_add_record($db, $reg);
-    }
-    $novoshpf->free();
-    xbase_close($db);
-    // adiciona o layer
-    $mapa = ms_newMapObj($tmpfname);
-    $layer = ms_newLayerObj($mapa);
-    $layer->set("name", "pontoins");
-    $layer->set("data", $nomeshp . ".shp");
-    $layer->setmetadata("DOWNLOAD", "sim");
-    $layer->setmetadata("tema", $nometemapontos);
-    $layer->setmetadata("classe", "sim");
-    $layer->setmetadata("temalocal", "sim");
-    $layer->setmetadata("ATLAS", "nao");
-    $layer->set("type", MS_LAYER_POINT);
-    $layer->set("status", MS_DEFAULT);
-    $classe = ms_newClassObj($layer);
-    $classe->set("name", " ");
-    $estilo = ms_newStyleObj($classe);
-
-    if (! isset($simbolo)) {
-        $simbolo = "ponto";
-    }
-    $estilo->set("symbolname", $simbolo);
-    if (! isset($tamanhosimbolo)) {
-        $tamanhosimbolo = 6;
-    }
-    $estilo->set("size", $tamanhosimbolo);
-    $cor = $estilo->color;
-    if (! isset($corsimbolo)) {
-        $corsimbolo = "255,0,0";
-    }
-    $corsimbolo = str_replace(" ", ",", $corsimbolo);
-    $corsimbolo = explode(",", $corsimbolo);
-    $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-
-    $salvo = $mapa->save($tmpfname);
-    erroCriacao();
-}
-
-/*
- * Insere um tema do tipo linear
- *
- * As linhas devem ter os pontos separados por espa&ccedil;os e cada linha separada por v&iacute;rgula
- *
- */
-function insereLinhasUrl()
-{
-    global $tamanhosimbolo, $simbolo, $corsimbolo, $linhas, $nometemalinhas, $dir_tmp, $imgdir, $tmpfname, $locaplic;
-    include_once "pacotes/phpxbase/api_conversion.php";
-    if (! isset($nometemalinhas)) {
-        $nometemalinhas = "Linhas";
-    }
-    if ($nometemalinhas == "") {
-        $nometemalinhas = "Linhas";
-    }
-    //
-    // cria o shape file
-    //
-    $tipol = MS_SHP_ARC;
-    $nomeshp = $dir_tmp . "/" . $imgdir . "/" . nomeRandomico();
-    // cria o dbf
-    $def = array();
-    $items = array(
-        "COORD"
-    );
-    foreach ($items as $ni) {
-        $def[] = array(
-            $ni,
-            "C",
-            "254"
-        );
-    }
-    if (! function_exists(dbase_create)) {
-        xbase_create($nomeshp . ".dbf", $def);
-    } else {
-        dbase_create($nomeshp . ".dbf", $def);
-    }
-    $dbname = $nomeshp . ".dbf";
-    $db = xbase_open($dbname, 2);
-    $novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-    $linhas = explode(",", trim($linhas));
-    $pontosLinhas = array(); // guarda os pontos de cada linha em arrays
-    foreach ($linhas as $l) {
-        $tempPTs = explode(" ", trim($l));
-        $temp = array();
-        foreach ($tempPTs as $p) {
-            if (is_numeric($p)) {
-                $temp[] = $p;
-            }
-        }
-        $pontosLinhas[] = $temp;
-    }
-    foreach ($pontosLinhas as $ptsl) {
-        $linhas = $ptsl;
-        $shape = ms_newShapeObj(MS_SHAPE_LINE);
-        $linha = ms_newLineObj();
-        $reg = array();
-        $reg[] = implode(",", $ptsl);
-        for ($ci = 0; $ci < count($linhas); $ci = $ci + 2) {
-            $linha->addXY($linhas[$ci], $linhas[$ci + 1]);
-        }
-        $shape->add($linha);
-        $novoshpf->addShape($shape);
-        xbase_add_record($db, $reg);
-    }
-    $novoshpf->free();
-    xbase_close($db);
-    // adiciona o layer
-    $mapa = ms_newMapObj($tmpfname);
-    $layer = ms_newLayerObj($mapa);
-    $layer->set("name", "linhains");
-    $layer->set("data", $nomeshp . ".shp");
-    $layer->setmetadata("DOWNLOAD", "sim");
-    $layer->setmetadata("temalocal", "sim");
-    $layer->setmetadata("tema", $nometemalinhas);
-    $layer->setmetadata("classe", "sim");
-    $layer->setmetadata("ATLAS", "nao");
-    $layer->set("type", MS_LAYER_LINE);
-    $layer->set("status", MS_DEFAULT);
-    $classe = ms_newClassObj($layer);
-    $classe->set("name", " ");
-    $estilo = ms_newStyleObj($classe);
-
-    if (isset($simbolo)) {
-        $simbolo = "linha";
-        $estilo->set("symbolname", $simbolo);
-    }
-    if (! isset($tamanhosimbolo)) {
-        $tamanhosimbolo = 4;
-    }
-    $estilo->set("width", $tamanhosimbolo);
-    $cor = $estilo->color;
-    if (! isset($corsimbolo)) {
-        $corsimbolo = "255,0,0";
-    }
-    $corsimbolo = str_replace(" ", ",", $corsimbolo);
-    $corsimbolo = explode(",", $corsimbolo);
-    $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-
-    $salvo = $mapa->save($tmpfname);
-    erroCriacao();
-}
-
-/*
- * Insere um tema poligonal.
- *
- * Os pol&iacute;gonos devem ter os pontos separados por espa&ccedil;os e cada pol&iacute;gono separado por v&iacute;rgula
- */
-function inserePoligonosUrl()
-{
-    global $tamanhosimbolo, $simbolo, $corsimbolo, $poligonos, $nometemapoligonos, $dir_tmp, $imgdir, $tmpfname, $locaplic;
-    include_once "pacotes/phpxbase/api_conversion.php";
-    if (! isset($nometemapoligonos)) {
-        $nometemapoligonos = "Poligonos";
-    }
-    if ($nometemapoligonos == "") {
-        $nometemapoligonos = "Poligonos";
-    }
-    //
-    // cria o shape file
-    //
-    $tipol = MS_SHP_POLYGON;
-    $nomeshp = $dir_tmp . "/" . $imgdir . "/" . nomeRandomico();
-    // cria o dbf
-    $def = array();
-    $items = array(
-        "COORD"
-    );
-    foreach ($items as $ni) {
-        $def[] = array(
-            $ni,
-            "C",
-            "254"
-        );
-    }
-    if (! function_exists(dbase_create)) {
-        xbase_create($nomeshp . ".dbf", $def);
-    } else {
-        dbase_create($nomeshp . ".dbf", $def);
-    }
-    $dbname = $nomeshp . ".dbf";
-    $db = xbase_open($dbname, 2);
-    $novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-    $linhas = explode(",", trim($poligonos));
-    $pontosLinhas = array(); // guarda os pontos de cada linha em arrays
-    foreach ($linhas as $l) {
-        $tempPTs = explode(" ", trim($l));
-        $temp = array();
-        foreach ($tempPTs as $p)
-            if (is_numeric($p)) {
-                $temp[] = $p;
-            }
-        $pontosLinhas[] = $temp;
-    }
-    foreach ($pontosLinhas as $ptsl) {
-        $linhas = $ptsl;
-        $shape = ms_newShapeObj(MS_SHAPE_POLYGON);
-        $linha = ms_newLineObj();
-        $reg = array();
-        $reg[] = "";
-        for ($ci = 0; $ci < count($linhas); $ci = $ci + 2) {
-            $linha->addXY($linhas[$ci], $linhas[$ci + 1]);
-        }
-        $shape->add($linha);
-        $novoshpf->addShape($shape);
-        xbase_add_record($db, $reg);
-    }
-    $novoshpf->free();
-    xbase_close($db);
-    // adiciona o layer
-    $mapa = ms_newMapObj($tmpfname);
-    $layer = ms_newLayerObj($mapa);
-    $layer->set("name", "linhains");
-    $layer->set("data", $nomeshp . ".shp");
-    $layer->setmetadata("DOWNLOAD", "sim");
-    $layer->setmetadata("temalocal", "sim");
-    $layer->setmetadata("tema", $nometemapoligonos);
-    $layer->setmetadata("classe", "sim");
-    $layer->setmetadata("ATLAS", "nao");
-    $layer->set("type", MS_LAYER_POLYGON);
-    $layer->set("opacity", "50");
-    $layer->set("status", MS_DEFAULT);
-    $classe = ms_newClassObj($layer);
-    $classe->set("name", " ");
-    $estilo = ms_newStyleObj($classe);
-
-    $cor = $estilo->color;
-    if (! isset($corsimbolo)) {
-        $corsimbolo = "255,0,0";
-    }
-    $corsimbolo = str_replace(" ", ",", $corsimbolo);
-    $corsimbolo = explode(",", $corsimbolo);
-    $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-
-    $salvo = $mapa->save($tmpfname);
-    erroCriacao();
-}
 
 /*
  * Inclui no mapa um tema do tipo WMS

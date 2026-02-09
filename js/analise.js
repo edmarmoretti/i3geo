@@ -44,257 +44,244 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.analise =
 {
+	/**
+	 * Armazena os pontos clicados da ultima linha
+	 */
+	pontos: {
+		xpt: [],
+		ypt: []
+	},
+	/**
+	 * Classe: i3GEO.analise.dialogo
+	 *
+	 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de an&aacute;lise
+	 *
+	 * Exemplo:
+	 *
+	 * Para abrir a mensagem de di&aacute;logo de gera&ccedil;&atilde;o de buffer, utilize
+	 *
+	 * i3GEO.analise.dialogo.buffer()
+	 */
+	dialogo: {
 		/**
-		 * Armazena os pontos clicados da ultima linha
+		 * Function: markercluster
+		 *
+		 * Ferramenta mapa agrupamento de pontos
 		 */
-		pontos : {
-			xpt : [],
-			ypt : []
+		markercluster: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.markercluster()",
+				"markercluster",
+				"markercluster",
+				"dependencias.php",
+				"i3GEOF.markercluster.start()");
 		},
 		/**
-		 * Classe: i3GEO.analise.dialogo
+		 * Function: heatmap
 		 *
-		 * Abre as telas de di&aacute;logo das op&ccedil;&otilde;es de an&aacute;lise
-		 *
-		 * Exemplo:
-		 *
-		 * Para abrir a mensagem de di&aacute;logo de gera&ccedil;&atilde;o de buffer, utilize
-		 *
-		 * i3GEO.analise.dialogo.buffer()
+		 * Ferramenta mapa de calor
 		 */
-		dialogo : {
-			/**
-			 * Function: markercluster
-			 *
-			 * Ferramenta mapa agrupamento de pontos
-			 */
-			markercluster : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.markercluster()",
-						"markercluster",
-						"markercluster",
-						"dependencias.php",
-				"i3GEOF.markercluster.start()");
-			},
-			/**
-			 * Function: heatmap
-			 *
-			 * Ferramenta mapa de calor
-			 */
-			heatmap : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.heatmap()",
-						"heatmap",
-						"heatmap",
-						"dependencias.php",
+		heatmap: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.heatmap()",
+				"heatmap",
+				"heatmap",
+				"dependencias.php",
 				"i3GEOF.heatmap.start()");
-			},
-			/**
-			 * Function: graficoInterativo1
-			 *
-			 * Ferramenta gr&aacute;fico interativo
-			 */
-			graficointerativo : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.graficointerativo()",
-						"graficointerativo",
-						"graficointerativo",
-						"dependencias.php",
+		},
+		/**
+		 * Function: graficoInterativo1
+		 *
+		 * Ferramenta gr&aacute;fico interativo
+		 */
+		graficointerativo: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.graficointerativo()",
+				"graficointerativo",
+				"graficointerativo",
+				"dependencias.php",
 				"i3GEOF.graficointerativo.start()");
-			},
-			/**
-			 * Function: linhaDoTempo
-			 *
-			 * Ferramenta linha do tempo
-			 */
-			linhadotempo : function(tema) {
-				if(!tema){
-					tema = "";
-				}
-				var temp = function(){
-					i3GEOF.linhadotempo.start(tema);
-				};
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.linhadotempo()",
-						"linhadotempo",
-						"linhadotempo",
-						"dependencias.php",
-						temp);
-			},
-			/**
-			 * Function: gradePontos
-			 *
-			 * Ferramenta grade de pontos
-			 */
-			gradepontos : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.gradepontos()",
-						"gradepontos",
-						"gradepontos",
-						"dependencias.php",
-						"i3GEOF.gradepontos.start()"
-				);
-			},
-			/**
-			 * Function: gradePol
-			 *
-			 * Ferramenta grade de pol&iacute;gonos
-			 */
-			gradepol : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.gradepol()",
-						"gradepol",
-						"gradepol",
-						"dependencias.php",
-						"i3GEOF.gradepol.start()"
-				);
-			},
-			/**
-			 * Function: gradeHex
-			 *
-			 * Ferramenta grade de hex&aacute;gonos
-			 */
-			gradehex : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.gradehex()",
-						"gradehex",
-						"gradehex",
-						"dependencias.php",
-						"i3GEOF.gradehex.start()"
-				);
-			},
-			/**
-			 * Function: pontosdistri
-			 *
-			 * Ferramenta de c&aacute;lculo de distribui&ccedil;&atilde;o de pontos
-			 */
-			pontosdistri : function() {
-				i3GEO.parametros.r === "nao" ? i3GEO.janela.tempoMsg($trad("x22")) : i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.pontosdistri()",
-						"pontosdistri",
-						"pontosdistri",
-						"dependencias.php",
-				"i3GEOF.pontosdistri.start()");
-			},
-			/**
-			 * Function: pontoempoligono
-			 *
-			 * Ferramenta ponto em pol&iacute;gono
-			 */
-			pontoempoligono : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.pontoempoligono()",
-						"pontoempoligono",
-						"pontoempoligono",
-						"dependencias.php",
-				"i3GEOF.pontoempoligono.start()");
-			},
-			/**
-			 * Function: centromassa
-			 *
-			 * Ferramenta centro m&eacute;dio
-			 */
-			centromassa : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.centromassa()",
-						"centromassa",
-						"centromassa",
-						"dependencias.php",
-				"i3GEOF.centromassa.start()");
-			},
-			/**
-			 * Function: nptPol
-			 *
-			 * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
-			 */
-			nptpol : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.nptpol()",
-						"nptpol",
-						"nptpol",
-						"dependencias.php",
-				"i3GEOF.nptpol.start()");
-			},
-			/**
-			 * Function: buffer
-			 *
-			 * Ferramenta buffer
-			 */
-			buffer : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.buffer()",
-						"buffer",
-						"buffer",
-						"dependencias.php",
-				"i3GEOF.buffer.start()");
-			},
-			/**
-			 * Function: distanciaptpt
-			 *
-			 * Ferramenta dist&acirc;ncia entre pontos
-			 */
-			distanciaptpt : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.distanciaptpt()",
-						"distanciaptpt",
-						"distanciaptpt",
-						"dependencias.php",
-				"i3GEOF.distanciaptpt.start()");
-			},
-			/**
-			 * Function: centroide
-			 *
-			 * Ferramenta centr&oacute;ide
-			 */
-			centroide : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.centroide()",
-						"centroide",
-						"centroide",
-						"dependencias.php",
-				"i3GEOF.centroide.start()");
-			},
-			/**
-			 * Function: dissolve
-			 *
-			 * Ferramenta dissolve bordas comuns
-			 */
-			dissolve : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.dissolve()",
-						"dissolve",
-						"dissolve",
-						"dependencias.php",
-				"i3GEOF.dissolve.start()");
-			},
-			/**
-			 * Function: agrupaelementos
-			 *
-			 * Ferramenta agrupa elementos
-			 */
-			agrupaelementos : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.agrupaelementos()",
-						"agrupaelementos",
-						"agrupaelementos",
-						"dependencias.php",
-				"i3GEOF.agrupaelementos.start()");
-			},
-			distancia : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.distancia()",
-						"distancia",
-						"distancia",
-						"dependencias.php",
-				"i3GEOF.distancia.start()");
-			},
-			area : function() {
-				i3GEO.util.dialogoFerramenta(
-						"i3GEO.analise.dialogo.area()",
-						"area",
-						"area",
-						"dependencias.php",
-				"i3GEOF.area.start()");
+		},
+		/**
+		 * Function: linhaDoTempo
+		 *
+		 * Ferramenta linha do tempo
+		 */
+		linhadotempo: function (tema) {
+			if (!tema) {
+				tema = "";
 			}
+			var temp = function () {
+				i3GEOF.linhadotempo.start(tema);
+			};
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.linhadotempo()",
+				"linhadotempo",
+				"linhadotempo",
+				"dependencias.php",
+				temp);
+		},
+		/**
+		 * Function: gradePontos
+		 *
+		 * Ferramenta grade de pontos
+		 */
+		gradepontos: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.gradepontos()",
+				"gradepontos",
+				"gradepontos",
+				"dependencias.php",
+				"i3GEOF.gradepontos.start()"
+			);
+		},
+		/**
+		 * Function: gradePol
+		 *
+		 * Ferramenta grade de pol&iacute;gonos
+		 */
+		gradepol: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.gradepol()",
+				"gradepol",
+				"gradepol",
+				"dependencias.php",
+				"i3GEOF.gradepol.start()"
+			);
+		},
+		/**
+		 * Function: gradeHex
+		 *
+		 * Ferramenta grade de hex&aacute;gonos
+		 */
+		gradehex: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.gradehex()",
+				"gradehex",
+				"gradehex",
+				"dependencias.php",
+				"i3GEOF.gradehex.start()"
+			);
+		},
+		/**
+		 * Function: pontoempoligono
+		 *
+		 * Ferramenta ponto em pol&iacute;gono
+		 */
+		pontoempoligono: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.pontoempoligono()",
+				"pontoempoligono",
+				"pontoempoligono",
+				"dependencias.php",
+				"i3GEOF.pontoempoligono.start()");
+		},
+		/**
+		 * Function: centromassa
+		 *
+		 * Ferramenta centro m&eacute;dio
+		 */
+		centromassa: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.centromassa()",
+				"centromassa",
+				"centromassa",
+				"dependencias.php",
+				"i3GEOF.centromassa.start()");
+		},
+		/**
+		 * Function: nptPol
+		 *
+		 * Ferramenta n&uacute;mero de pontos em pol&iacute;gono
+		 */
+		nptpol: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.nptpol()",
+				"nptpol",
+				"nptpol",
+				"dependencias.php",
+				"i3GEOF.nptpol.start()");
+		},
+		/**
+		 * Function: buffer
+		 *
+		 * Ferramenta buffer
+		 */
+		buffer: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.buffer()",
+				"buffer",
+				"buffer",
+				"dependencias.php",
+				"i3GEOF.buffer.start()");
+		},
+		/**
+		 * Function: distanciaptpt
+		 *
+		 * Ferramenta dist&acirc;ncia entre pontos
+		 */
+		distanciaptpt: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.distanciaptpt()",
+				"distanciaptpt",
+				"distanciaptpt",
+				"dependencias.php",
+				"i3GEOF.distanciaptpt.start()");
+		},
+		/**
+		 * Function: centroide
+		 *
+		 * Ferramenta centr&oacute;ide
+		 */
+		centroide: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.centroide()",
+				"centroide",
+				"centroide",
+				"dependencias.php",
+				"i3GEOF.centroide.start()");
+		},
+		/**
+		 * Function: dissolve
+		 *
+		 * Ferramenta dissolve bordas comuns
+		 */
+		dissolve: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.dissolve()",
+				"dissolve",
+				"dissolve",
+				"dependencias.php",
+				"i3GEOF.dissolve.start()");
+		},
+		/**
+		 * Function: agrupaelementos
+		 *
+		 * Ferramenta agrupa elementos
+		 */
+		agrupaelementos: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.agrupaelementos()",
+				"agrupaelementos",
+				"agrupaelementos",
+				"dependencias.php",
+				"i3GEOF.agrupaelementos.start()");
+		},
+		distancia: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.distancia()",
+				"distancia",
+				"distancia",
+				"dependencias.php",
+				"i3GEOF.distancia.start()");
+		},
+		area: function () {
+			i3GEO.util.dialogoFerramenta(
+				"i3GEO.analise.dialogo.area()",
+				"area",
+				"area",
+				"dependencias.php",
+				"i3GEOF.area.start()");
 		}
+	}
 };

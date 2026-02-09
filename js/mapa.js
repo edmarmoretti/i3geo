@@ -535,54 +535,6 @@ i3GEO.mapa =
                 });
             },
             /**
-             * Function: metaestat
-             *
-             * Abre a janela de dialogo da ferramenta de cartogramas estatisticos METAESTAT
-
-             *@TODO depreciado na versao 8
-             */
-            metaestat : function(largura, altura, topo, esquerda, Interface, conexao) {
-                var temp = function() {
-                    i3GEOF.metaestat.MULTIPARAMETROS = true;
-                    if(Interface){
-                        i3GEOF.metaestat.INTERFACE = Interface;
-                    }
-                    if(conexao){
-                        i3GEOF.metaestat.CONEXAODEFAULT = conexao;
-                    }
-                    i3GEOF.metaestat.INTERFACE = "flutuante";
-                    i3GEOF.metaestat.principal.inicia(null, largura, altura, topo, esquerda);
-                };
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.metaestat()",
-                        "metaestat",
-                        "metaestat",
-                        "dependencias.php",
-                        temp
-                );
-            },
-            cartograma:  function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.cartograma()",
-                        "cartograma",
-                        "cartograma",
-                        "dependencias.php",
-                "i3GEOF.cartograma.start()");
-            },
-            /**
-             * Function: metaestatListaMapas
-             *
-             * Lista os mapas publicados no METAESTAT
-             */
-            metaestatListaMapas : function() {
-                i3GEO.util.dialogoFerramenta(
-                        "i3GEO.mapa.dialogo.metaestatListaMapas()",
-                        "metaestat",
-                        "listamapas",
-                        "listamapas.js",
-                "i3GEOF.listamapas.iniciaJanelaFlutuante()");
-            },
-            /**
              * Function: preferencias
              *
              * Preferencias do usuario

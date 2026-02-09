@@ -10,18 +10,6 @@ if (! empty ( $_GET ["customDir"] )) {
 include "../init/head.php";
 ?>
 <style>
-.btn-qrcode {
-	background-color: #fff;
-	color: #ddd;
-	margin: 5px;
-	width: 13px;
-	position: absolute;
-	top: 12px;
-	left: 28px;
-	text-align: center;
-	border-radius: 20%;
-}
-
 .list-group .list-group-separator::before {
 	width: 100%;
 }
@@ -104,9 +92,8 @@ include "../init/head.php";
 	<?php
 	include("templates/templatelinks.php");
 	include("templates/templatelista.php");
-	//<script src='../pacotes/cpaint/cpaint2_compacto.inc.js'></script>
 	?>
-	
+
 	<script src='../js/compactados/dicionario_compacto.js'></script>
 	<script src='../js/compactados/util_compacto.js'></script>
 	<script src='../js/compactados/idioma_compacto.js'></script>

@@ -1,0 +1,13 @@
+{
+    "editor.tabSize": 4,
+    "editor.insertSpaces": true,
+    "editor.formatOnSave": true,
+    "[php]": {
+        "editor.defaultFormatter": "junstyle.php-cs-fixer",
+        "editor.tabSize": 4,
+        "editor.insertSpaces": true
+    },
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "php-cs-fixer.executablePath": "/home/edmar/.config/composer/vendor/bin/php-cs-fixer"
+}

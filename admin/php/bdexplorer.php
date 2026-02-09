@@ -15,14 +15,9 @@ include ("funcoesAdmin.php");
 //
 include ($_SESSION ["locaplic"] . "/classesphp/carrega_ext.php");
 include ($_SESSION ["locaplic"] . "/classesphp/classe_bdexplorer.php");
-include ($_SESSION ["locaplic"] . "/classesphp/classe_metaestatinfo.php");
 /**
  * ************************************************************
  */
-if (\admin\php\funcoesAdmin\verificaOperacaoSessao ( "admin/metaestat/geral" ) === false) {
-	header ( "HTTP/1.1 403 Vc nao pode realizar essa operacao" );
-	exit ();
-}
 $funcao = strtoupper ( $funcao );
 switch ($funcao) {
 	case "LISTARESQUEMAS" :
@@ -44,14 +39,7 @@ switch ($funcao) {
 		}
 		break;
 	case "LISTARTABELAS" :
-		// pega os parametros de conexao
-		if (empty ( $_POST ["codigo_estat_conexao"] )) {
-			$parametros = $dbh;
-		} else {
-			$mt = new MetaestatInfo ();
-			//$parametros = $mt->listaConexao ( ( int ) $_POST ["codigo_estat_conexao"], true, false );
-			$parametros = $mt->listaConexaoMetaestat();
-		}
+		$parametros = $dbh;
 		$bd = new \i3geo\classesphp\bdexplorer\Bdexplorer ( $_SESSION ["locaplic"], $parametros );
 		$dados = $bd->listaDeTabelas ( $_POST ["esquema"] );
 		if ($dados === false) {
@@ -74,37 +62,10 @@ switch ($funcao) {
 		}
 		break;
 	case "LISTARCOLUNAS" :
-		// pega os parametros de conexao
-		$mt = new MetaestatInfo ();
-		//$parametros = $mt->listaConexao ( ( int ) $_POST ["codigo_estat_conexao"], true, false );
-		$parametros = $mt->listaConexaoMetaestat();
-		$bd = new \i3geo\classesphp\bdexplorer\Bdexplorer ( $_SESSION ["locaplic"], $parametros );
-		$dados = $bd->listaDeColunas ( $_POST ["esquema"], $_POST ["tabela"] );
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-		} else {
-			\admin\php\funcoesAdmin\retornaJSON ( $dados );
-		}
 		break;
 	case "LISTARCODIGOSCONEXAO" :
 		// pega os parametros de conexao
 	    \admin\php\funcoesAdmin\retornaJSON ( array() );
-	    /*
-		$mt = new MetaestatInfo ();
-		$dados = $mt->listaConexaoMetaestat();
-		if ($dados === false) {
-			header ( "HTTP/1.1 500 erro ao consultar banco de dados" );
-		} else {
-			$kv = array ();
-			foreach ( $dados as $d ) {
-				$kv [] = array (
-						"chave" => $d ["bancodedados"],
-						"valor" => $d ["codigo_estat_conexao"]
-				);
-			}
-			\admin\php\funcoesAdmin\retornaJSON ( $kv );
-		}
-		*/
 		break;
 	default :
 		if (! empty ( $funcao ))

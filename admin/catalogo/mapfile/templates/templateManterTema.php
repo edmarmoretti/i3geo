@@ -48,15 +48,6 @@
 						</div>
 					</div>
 					<div class="form-group form-group-lg">
-						<label class="col-md-6 control-label" for="metaestat">{{{metaestatTxt}}}</label>
-						<div class="col-md-6">
-							<select title="{{{Metaestat}}}" class="form-control" name="metaestat">
-								<option value="SIM" {{{metaestatsim}}} >{{{sim}}}</option>
-								<option value="NAO" {{{metaestatnao}}} >{{{nao}}}</option>
-							</select>
-						</div>
-					</div>
-					<div class="form-group form-group-lg">
 						<div class="checkbox col-md-12">
 							<label>
 								<input title="{{{permiteOgc}}}" type="checkbox" {{acessopublico}} name="acessopublico" /> {{{permiteOgc}}}

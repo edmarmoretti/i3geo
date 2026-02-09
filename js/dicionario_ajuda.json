@@ -222,19 +222,6 @@
 				"en": "Point in polygon is an operation that results in a new theme that contains the intersection between a point-based theme and polygon-based themes. The result is a new polygon theme whose attribute table will contain a field showing the total points in each polygon.<br>The use of this tool is recommended in situations in which it is required to add point-based data within polygons, making possible data visualization through classification techniques and choropleth maps.",
 				"apijs": "i3GEO.analise.dialogo.nptPol()"
 			},
-			"20": {
-				"titulo": {
-					"pt": "Distribui&ccedil;&atilde;o de pontos",
-					"es": "Distribuci&oacute;n de puntos",
-					"en": "Point distribution"
-				},
-				"diretorio": "i3geo/ferramentas/pontosdistri",
-				"categoria": "3",
-				"pt": "Essa op&ccedil;&atilde;o disponibiliza v&aacute;rias ferramentas de an&aacute;lise de distribui&ccedil;&atilde;o de pontos, a maior parte baseia-se no software estat&iacute;stico <a href='https://www.r-project.org/' target=blanck >R</a>. Algumas das an&aacute;lises geram como resultado imagens RASTER e outras temas lineares e poligonais. A op&ccedil;&atilde;o de relat&oacute;rio gera uma nova p&aacute;gina com v&aacute;rios &iacute;ndices calculados com o software R.<br>A imagem RASTER resultante utiliza a resolu&ccedil;&atilde;o (tamanho do pixel) compat&iacute;vel com a escala utilizada no mapa que est&aacute; sendo visto. A representa&ccedil;&atilde;o utiliza, por padr&atilde;o, tons de cinza. A altera&ccedil;&atilde;o nas cores utilizadas na representa&ccedil;&atilde;o podem melhorar de forma significativa a visualiza&ccedil;&atilde;o dos resultados. Utilize a op&ccedil;&atilde;o de edi&ccedil;&atilde;o da legenda do tema para fazer isso. As an&aacute;lises de distribui&ccedil;&atilde;o de pontos s&atilde;o realizadas com o software R. As an&aacute;lises de densidade de pontos, dist&acirc;ncia entre pontos e kernel, foram implantadas utilizando-se a biblioteca <a href='http://cran.r-project.org/web/packages/spatstat' target=blanck >SPATSTAT</a> do R. As an&aacute;lises de Delaunay e Voronoi utilizam a biblioteca <a href='http://cran.r-project.org/web/packages/deldir' target=blanck >DELDIR</a> e a an&aacute;lise de cluster espacial utiliza o <a href='http://cran.r-project.org/web/packages/spatclus' target=blanck >SPATCLUS</a>. As an&aacute;lises podem consumir muito tempo de processamento, portanto, tenha cuidado com o n&uacute;mero de pontos.",
-				"es": "Esta opci&oacute;n ofrece varias herramientas de an&aacute;lisis de distribuci&oacute;n de puntos, la mayor&iacute;a se basa en el software estad&iacute;stico <a href='www.r-project.org' target=blanck >R</a>. Algunos de los an&aacute;lisis generan como resultado im&aacute;genes RASTER y otros temas de l&iacute;neas y pol&iacute;gonos. La opci&oacute;n de informe genera una p&aacute;gina nueva con varios &iacute;ndices calculados con el software R.<br>La imagen RASTER resultante utiliza la resoluci&oacute;n (tama&ntilde;o de p&iacute;xel) compatible con la escala utilizada en el mapa que se est&aacute; visualizando. La representaci&oacute;n utiliza de forma predeterminada tonos de gris. El cambio en los colores utilizados en la representaci&oacute;n puede mejorar significativamente la visualizaci&oacute;n de los resultados. Utilice la opci&oacute;n de edici&oacute;n de la leyenda del tema para hacer esto. Los an&aacute;lisis de distribuci&oacute;n de puntos se realizan con el software R. Los an&aacute;lisis de densidad de puntos, distancia entre puntos y kernel, se implementaron utilizando la biblioteca <a href='http://cran.r-project.org/web/packages/spatstat' target=blanck >SPATSTAT</a> de R. Los an&aacute;lisis de Delaunay y Voronoi utilizan la biblioteca <a href='http://cran.r-project.org/web/packages/deldir' target=blanck >DELDIR</a> y el an&aacute;lisis del cluster espacial utiliza <a href='http://cran.r-project.org/web/packages/spatclus' target=blanck >SPATCLUS</a>. Los an&aacute;lisis pueden consumir mucho tiempo de procesamiento, por lo tanto, tenga cuidado con el n&uacute;mero de puntos.",
-				"en": "This option offers various analysis tools for point distribution, most of them are based on <a href='https://www.r-project.org/' target=blank >R</a> statistical software. Some of the analyses result in RASTER images and others in line and polygon themes. The report option generates a new page with several indexes calculated with R.<br>The resulting RASTER image has a resolution (pixel size) compatible with the map scale that is being displayed. By default, rendering is in grayscale. If you change colors used for rendering you can significantly improve the visualization of the results. Use the editing option of the theme legend to do this. Point distribution analyses are performed with R. Density, distance between points and kernel analyses were implemented using the <a href='http://cran.r-project.org/web/packages/spatstat' target=blanck >SPATSTAT</a> library of R. Delaunay and Voronoi analyses use the <a href='http://cran.r-project.org/web/packages/deldir' target=blanck >DELDIR</a> library and spatial cluster analysis uses <a href='http://cran.r-project.org/web/packages/spatclus' target=blanck >SPATCLUS</a>. Analyses can consume a lot of processing time, therefore, be careful with the number of points.",
-				"apijs": ""
-			},
 			"21": {
 				"titulo": {
 					"pt": "Centr&oacute;ide",
@@ -1041,19 +1028,6 @@
 				"en": "",
 				"apijs": "i3GEO.analise.dialogo.graficoInterativo1()"
 			},
-			"85": {
-				"titulo": {
-					"pt": "Miniaturas",
-					"es": "Miniaturas",
-					"en": "Thumbnails"
-				},
-				"diretorio": "i3geo/ferramentas/carouseltemas",
-				"categoria": "6",
-				"pt": "Abre uma janela flutuante que mostra imagens miniatura de cada tema existente na &aacute;rvore de temas. O usu&aacute;rio pode clicar em uma das imagens para adicionar o tema ao mapa atual.<br>As miniaturas devem existir previamente para aparecerem nessa ferramenta. Para gerar as miniaturas, o administrador do i3Geo pode usar o sistema de administra&ccedil;&atilde;o.",
-				"es": "Abre una ventana flotante que muestra im&aacute;genes en miniatura de cada tema del &aacute;rbol de temas. El usuario puede hacer clic en una de las im&aacute;genes para agregar el tema al mapa actual.<br>Las miniaturas deben estar previamente en el sistema para aparecer en esta herramienta. Para generar las miniaturas el administrador de i3Geo puede utilizar el sistema de administraci&oacute;n.",
-				"en": "It opens a floating window that shows thumbnails of each theme on the theme tree. The user can click on one of the thumbnails to add a theme to the current map.<br>Thumbnails must be previously in the system to use them. The i3Geo administrator can use the management system to generate thumbnails.",
-				"apijs": "i3GEO.arvoreDeTemas.dialogo.carouselTemas()"
-			},
 			"86": {
 				"titulo": {
 					"pt": "Editor SQL",
@@ -1353,32 +1327,6 @@
 				"en": "It shows a list of layers that are on the map so that you can select which layer you want to delete. Layers in use at the beginning of the map are not ticked on the list.",
 				"apijs": "i3GEO.arvoreDeCamadas.dialogo.excluir()"
 			},
-			"111": {
-				"titulo": {
-					"pt": "Localiza regi&otilde;es cadastradas",
-					"es": "Localiza regiones registradas",
-					"en": "Locate registered regions"
-				},
-				"diretorio": "i3geo/ferramentas/metaestat",
-				"categoria": "6",
-				"pt": "Lista as regi&otilde;es cadastradas no sistema de metadados estat&iacute;sticos conforme a hierarquia definida. Conforme uma regi&atilde;o &eacute; escolhida, o mapa tem a extens&atilde;o geogr&aacute;fica alterada, destacando a escolha. Essa mesma ferramenta &eacute; usada para aplicar filtros. Os filtros funcionam apenas nas camadas que forem oriundas da aplica&ccedil;&atilde;o de gera&ccedil;&atilde;o de cartogramas estat&iacute;sticos.",
-				"es": "Presenta una lista de las regiones registradas en el sistema de metadatos estad&iacute;sticos de acuerdo a la jerarqu&iacute;a definida. Cuando se selecciona una regi&oacute;n se altera la extensi&oacute;n geogr&aacute;fica del mapa, destac&aacute;ndose de esta manera la selecci&oacute;n. Esta herramienta se utiliza tambi&eacute;n para aplicar filtros. Los filtros solo funcionan en las capas que se derivan de la aplicaci&oacute;n que genera cartogramas estad&iacute;sticos.",
-				"en": "It shows a list of regions registered in the statistical metadata system according to a defined hierarchy. When you select a region, the map extent is modified and the selection is highlighted. This tool is also used to apply filters. Filters only work on layers derived from the application that creates statistical cartograms.",
-				"apijs": "i3GEO.mapa.dialogo.locregiao()"
-			},
-			"112": {
-				"titulo": {
-					"pt": "&Aacute;rvore de endere&ccedil;os WMS Metaestat",
-					"es": "&Aacute;rbol de direcciones WMS Metaestat",
-					"en": "Web address tree of WMS Metaestat"
-				},
-				"diretorio": "classe_arvoredetemas.js",
-				"categoria": "4",
-				"pt": "Mostra os WMS cuja origem &eacute; o sistema de metadados estat&iacute;sticos. Esse sistema apresenta cartogramas gerados de forma din&acirc;mica no padr&atilde;o WMS-Time.",
-				"es": "Muestra los WMS cuyo origen es el sistema de metadatos estad&iacute;sticos. Este sistema presenta cartogramas generados de forma din&aacute;mica en el est&aacute;ndar WMS-Time.",
-				"en": "It shows WMS originated from the statistical metadata system. This system shows cartograms dynamically created according to the WMS-Time standard.",
-				"apijs": "i3GEO.arvoreDeTemas.listaWMSmetaestat(node)"
-			},
 			"113": {
 				"titulo": {
 					"pt": "Marcador",
@@ -1508,32 +1456,6 @@
 				"es": "Abre una ventana nueva con la vista actual del mapa en la que se mantiene el nivel de zoom y las capas activas.<br>El mapa se visualiza en la forma de una imagen, es decir, mantiene los elementos de un mapa est&aacute;tico, aun cuando se desactiven las capas o cambie la vista del mapa original. Esta herramienta es &uacute;til cuando se desea mantener una determinada &aacute;rea del mapa siempre visible mientras se navegue hacia otras zonas del mismo.",
 				"en": "It opens a new window that shows the current view of the map and keeps a certain zoom level and active layers.<br>The map is displayed as an image, that is, it is technically a static map, even when you turn off or change the view of the original map. This tool is useful when you want to keep a certain area of the map always visible while browsing to other areas of the map.",
 				"apijs": "i3GEO.mapa.dialogo.congelaMapa();"
-			},
-			"124": {
-				"titulo": {
-					"pt": "Cartogramas estat&iacute;sticos",
-					"es": "Cartogramas estad&iacute;sticos",
-					"en": "Statistical cartograms"
-				},
-				"diretorio": "i3geo/ferramentas/metaestat/index.js",
-				"categoria": "9",
-				"pt": "A ferramenta Cartogramas Estat&iacute;sticos &eacute; utilizada como uma integra&ccedil;&atilde;o entre o mapa interativo e o sistema de metadados estat&iacute;sticos.<br>Voc&ecirc; pode construir uma camada a partir da escolha do tipo de limite geogr&aacute;fico, tipo de classifica&ccedil;&atilde;o e par&acirc;metros constantes no sistema de metadados estat&iacute;sticos. Basta selecionar os componentes da camada e clicar em ''Adiciona'.<p>As vari&aacute;veis, medidas de vari&aacute;veis e par&acirc;metros s&atilde;o definidos no m&oacute;dulo &lsquo;Metaest&rsquo; do sistema de administra&ccedil;&atilde;o do i3Geo.",
-				"es": "La herramienta Cartogramas Estad&iacute;sticos se utiliza como una integraci&oacute;n entre el mapa interactivo y el sistema de metadatos estad&iacute;sticos.<br>Usted puede construir una capa a partir de la selecci&oacute;n del tipo de l&iacute;mite geogr&aacute;fico, tipo de clasificaci&oacute;n y par&aacute;metros constantes en el sistema de metadatos estad&iacute;sticos. Solo tiene que seleccionar los componentes de la capa y hacer clic en '' Agregar '.<p>Las variables, medidas de variables y par&aacute;metros se definen en el m&oacute;dulo Metaest del sistema de administraci&oacute;n de i3Geo.",
-				"en": "The Statistical Cartograms tool is used as an integration between an interactive map and the statistical metadata system.<br>You can build a layer by selecting a type of geographic boundary, type of classification and constant parameters in the statistical metadata system. Just select layer components and click on ''Add''.<p>Variables, measures of variables and parameters are defined in the Metaest module of the i3Geo management system.",
-				"apijs": "i3GEO.mapa.dialogo.metaestat();"
-			},
-			"125": {
-				"titulo": {
-					"pt": "Aplicativos estat&iacute;sticos cadastrados",
-					"es": "Aplicaciones estad&iacute;sticas registradas",
-					"en": "Registered statistical applications"
-				},
-				"diretorio": "i3geo/ferramentas/metaestat/listamapas.js",
-				"categoria": "9",
-				"pt": "Lista os mapas cadastrados pelo publicador de mapas do sistema de metadados estat&iacute;sticos, apresentando as diferentes op&ccedil;&otilde;es de interface para abri-los.",
-				"es": "Presenta una lista de los mapas registrados por el publicador de mapas del sistema de metadatos estad&iacute;sticos. Muestra tambi&eacute;n las diferentes opciones de interfaz para abrirlos.",
-				"en": "It shows a list of maps registered by the map publisher of the statistical metadata system. It also shows different interface options to open them.",
-				"apijs": "i3GEO.mapa.dialogo.metaestatListaMapas();"
 			},
 			"126": {
 				"titulo": {

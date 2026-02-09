@@ -39,16 +39,9 @@ function listar($locaplic, $codigo) {
 		$dados ["convcaracter"] = "NAO";
 	}
 	$dados ["convcaracter"] = strtoupper($dados ["convcaracter"]);
-	// informacoes sobre a integracao com o sistema de metadados estatisticos
-	$dados ["metaestat"] = $layer->getmetadata ( "metaestat" );
-	if ($dados ["metaestat"] == "") {
-		$dados ["metaestat"] = "NAO";
-	}
-	$dados ["metaestat"] = strtoupper($dados ["metaestat"]);
-	$dados ["metaestat_id_medida_variavel"] = $layer->getmetadata ( "metaestat_id_medida_variavel" );
 	return $dados;
 }
-function alterar($locaplic,$codigo,$connection,$connectiontype,$data,$tileindex,$tileitem,$type,$projection,$convcaracter,$metaestat,$metaestat_id_medida_variavel,$dbhw) {
+function alterar($locaplic,$codigo,$connection,$connectiontype,$data,$tileindex,$tileitem,$type,$projection,$convcaracter,$dbhw) {
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
 	if ($codigo == "" || ! file_exists ( $arq )) {
@@ -60,32 +53,10 @@ function alterar($locaplic,$codigo,$connection,$connectiontype,$data,$tileindex,
 	if ($layer == "") {
 		return false;
 	}
-	if(strtoupper($metaestat) == "SIM"){
-		if(empty($metaestat_id_medida_variavel)){
-			header ( "HTTP/1.1 400 id da medida esta vazio" );
-			exit ();
-		}
-		$connectiontype = 6;
-		$filteritem = "";
-		$filter = "";
-		$data = "";
-		$connection = "";
-		$dataCol = array(
-				"tipoa_tema" => "META"
-		);
-		\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigo'");
-		$layer->setmetadata("metaestat","SIM");
-		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL",$metaestat_id_medida_variavel);
-	}
-	else{
-		$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
-		$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
-		$layer->setmetadata("metaestat","");
 		$dataCol = array(
 				"tipoa_tema" => ""
 		);
 		\admin\php\funcoesAdmin\i3GeoAdminUpdate($dbhw,"i3geoadmin_temas",$dataCol,"WHERE codigo_tema = '$codigo'");
-	}
 	//verifica a simbologia
 	//evita que o LAYER falhe ao ser testado por nao ter o simbolo definido
 	if($type == 0){

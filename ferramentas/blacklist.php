@@ -16,7 +16,9 @@ function verificaBlFerramentas($dir,$i3geoBlFerramentas="",$js=true){
 			if($js != true){
 				header ( "HTTP/1.1 403 operacao nao permitida" );
 			} else {
-				echo "alert('operacao nao permitida');";
+				header("Content-type: text/javascript");
+				echo "console.warn('Operacao bloqueada $dir');";
+				ob_end_flush();
 			}
 			exit;
 		}

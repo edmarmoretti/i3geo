@@ -120,40 +120,6 @@
                 </div>
             </div>
             <hr>
-            <!--  regioes cadastradas no sistema de metadados -->
-            <div class="list-group condensed">
-                <div class="row-content text-left">
-                    <label style="width: 300px; vertical-align: middle;">
-                        <a onclick="i3GEO.catalogoRegioes.inicia()" role="button" href="javascript:void(0)">
-                            <h4>
-                                <i class="material-icons" style="vertical-align: text-bottom;">domain</i> {{{x87}}}
-                            </h4>
-                        </a>
-                        <h6>{{{descLimLoc}}}</h6>
-                    </label>
-                    <a onclick="i3GEO.catalogoRegioes.inicia();" role="button" class="" href="javascript:void(0)">
-                        <i style="opacity: 0.8; margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
-                    </a>
-                </div>
-            </div>
-            <hr>
-            <!--  camadas que vem do sistema de metadados estatisticos -->
-            <div class="list-group condensed">
-                <div class="row-content text-left" style="opacity: 0.8;">
-                    <label style="width: 300px; vertical-align: middle;">
-                        <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" href="javascript:void(0)">
-                            <h4>
-                                <i class="material-icons" style="vertical-align: text-bottom;">trending_up</i> {{{x57}}}
-                            </h4>
-                        </a>
-                        <h6>{{{descMeta}}}</h6>
-                    </label>
-                    <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="" href="javascript:void(0)">
-                        <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
-                    </a>
-                </div>
-            </div>
-            <hr>
             <!--  camadas por estrelas -->
             <div class="list-group condensed">
                 <div class="row-content text-left" style="opacity: 0.8;">

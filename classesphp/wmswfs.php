@@ -509,12 +509,6 @@ function listaLayersWMS() {
 
 	// para o caso do sistema de metadados estatisticos
 	$wms_service_request = gravaCacheWMS ( $servico );
-	if ($tipo_ws != "WMSMETAESTAT" && $nivel < 2) {
-		if ($wms_service_request == "erro") {
-			$cp->set_data ( "Erro de acesso" );
-			return;
-		}
-	}
 
 	$handle = fopen ( $wms_service_request, "r" );
 	$wms_capabilities = fread ( $handle, filesize ( $wms_service_request ) );
@@ -709,73 +703,6 @@ function pegaTag($layer) {
 	return $resultado;
 }
 
-/*
- * temaswfs
- *
- * Lista os temas de um web service WFS.
- *
- * parameters:
- * $servico - Endere&ccedil;o do web service.
- *
- * $cp - Objeto CPAINT.
- */
-function temaswfs() {
-	global $servico, $cp;
-	$teste = explode ( "=", $servico );
-	if (count ( $teste ) > 1) {
-		$servico = $servico . "&";
-	}
-	$wms_service_request = $servico . "REQUEST=GetCapabilities&SERVICE=WFS";
-	// -------------------------------------------------------------
-	// Test that the capabilites file has successfully downloaded.
-	//
-	if (! ($wms_capabilities = file ( $wms_service_request ))) {
-		// Cannot download the capabilities file.
-		$cp->set_data ( "Erro de acesso" );
-		return;
-	}
-	$wms_capabilities = implode ( "", $wms_capabilities );
-	$dom = new DomDocument ();
-	$dom->loadXML ( $wms_capabilities );
-	$services = $dom->getElementsByTagName ( "Service" );
-	foreach ( $services as $service ) {
-		$vs = $service->getElementsByTagName ( "Name" );
-		$serv = "";
-		foreach ( $vs as $v ) {
-			$serv .= $v->nodeValue;
-		}
-	}
-	$layers = $dom->getElementsByTagName ( "FeatureType" );
-	foreach ( $layers as $layer ) {
-		$vs = $layer->getElementsByTagName ( "Title" );
-		$temp1 = "";
-		foreach ( $vs as $v ) {
-			$temp1 .= $v->nodeValue;
-		}
-
-		$vs = $layer->getElementsByTagName ( "Abstract" );
-		$temp2 = "";
-		foreach ( $vs as $v ) {
-			$temp2 .= $v->nodeValue;
-		}
-
-		$vs = $layer->getElementsByTagName ( "SRS" );
-		$temp3 = array ();
-		foreach ( $vs as $v ) {
-			$temp3 [] = $v->nodeValue;
-		}
-		$temp3 = implode ( "#", $temp3 );
-
-		$vs = $layer->getElementsByTagName ( "Name" );
-		$temp = "";
-		foreach ( $vs as $v ) {
-			$temp .= $v->nodeValue;
-		}
-		$temp = "<input style='cursor:pointer' type=radio NAME='checks' onClick='i3GEOF.conectarwms.seltema(\"" . $temp . "\",\"" . $temp1 . "\",\"" . $temp3 . "\",\"" . $serv . "\")' /><span style=color:red >" . $temp . "</span><br>";
-		$retorno .= "<br>" . $temp . $temp1 . "<br>" . $temp2 . "<hr>";
-	}
-	$cp->set_data ( $retorno );
-}
 /*
  * Function: xml2html
  *

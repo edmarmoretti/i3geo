@@ -1122,11 +1122,8 @@ class Atributos
     {
         $final = array();
         foreach ($listatemas as $tema) {
-            // para dados que sao oriundos do METAESTAT
             $editavel = "";
             $colunaidunico = "";
-            $id_medida_variavel = "";
-            //
             $layer = $map->getlayerbyname($tema);
             $nometmp = $tema;
             if (strtoupper($layer->getMetaData("TEMA")) != "NAO") {
@@ -1154,40 +1151,19 @@ class Atributos
                             }
                         }
                         // verifica operacao
-                        if (! empty($_SESSION["operacoes"]["admin/metaestat/geral"])) {
-                            $editavel = "sim";
-                        }
                         if ($editavel == "sim") {
 
                             $editavel = "nao";
-                            $id_medida_variavel = $layer->getMetaData("METAESTAT_ID_MEDIDA_VARIAVEL");
                             $colunaidunico = $layer->getMetaData("COLUNAIDUNICO");
 
-                            if ($id_medida_variavel != "" || $codigo_tipo_regiao != "") {
-                                include_once (dirname(__FILE__) . "/classe_metaestatinfo.php");
-                                $m = new MetaestatInfo();
-                                if ($id_medida_variavel != "") {
-                                    $medidaVariavel = $m->listaMedidaVariavel("", $id_medida_variavel);
-                                    $editavel = $medidaVariavel["colunavalor"];
-                                    $tiposalva = "medida_variavel";
-                                }
-                                if ($codigo_tipo_regiao != "") {
-                                    $regiao = $m->listaTipoRegiao($codigo_tipo_regiao);
-                                    // todas as colunas podem ser alteradas
-                                    $editavel = "todos";
-                                    $tiposalva = "regiao";
-                                }
-                            }
                             // verifica se os parametros de edicao estao disponiveis, pois podem ter sido definidos pelo sistema de administracao
                             if ($layer->getMetaData("ESQUEMATABELAEDITAVEL") != "" && $layer->getMetaData("TABELAEDITAVEL") != "" && $layer->getMetaData("COLUNAIDUNICO") != "") {
                                 $editavel = "todos";
-                                $tiposalva = "regiao";
                             }
                         }
                     }
                 }
             }
-            $codigo_tipo_regiao = $layer->getMetaData("METAESTAT_CODIGO_TIPO_REGIAO");
             $funcoesjs = json_decode($this->converte($layer->getMetaData("FUNCOESJS")));
             $final[] = array(
                 "funcoesjs" => $funcoesjs,
@@ -1197,9 +1173,7 @@ class Atributos
                 "nome" => $nometmp,
                 "resultado" => $resultados[$tema],
                 "editavel" => $editavel,
-                "colunaidunico" => $colunaidunico,
-                "id_medida_variavel" => $id_medida_variavel,
-                "codigo_tipo_regiao" => $codigo_tipo_regiao
+                "colunaidunico" => $colunaidunico
             );
         }
         return $final;
@@ -1509,73 +1483,7 @@ class Atributos
                     $resultado[] = $registros;
                 }
             }
-            /*
-            $id = nomeRandomico();
-            if ($formatosinfohtml == true) {
-                $d = array(
-                    "alias" => "",
-                    "valor" => "<iframe width=250px id='" . $id . "' name='" . $id . "' src='" . $res2 . "'></iframe>",
-                    "link" => "",
-                    "img" => "",
-                    "tip" => "nao",
-                    "item" => "iframe"
-                );
-                if ($etip == false){
-                    $resultados[] = $d;
-                } else {
-                    $resultados["iframe"] = $d;
-                }
-            }
-            if ($res != "") {
-                $d = array(
-                    "alias" => "Link WMS",
-                    "valor" => "getfeatureinfo " . $formatoinfo,
-                    "link" => $res,
-                    "img" => "",
-                    "idIframe" => $id,
-                    "tip" => "nao",
-                    "item" => "LinkWms1"
-                );
-                if ($etip == false){
-                    $resultados[] = $d;
-                } else {
-                    $resultados["LinkWms1"] = $d;
-                }
-            }
-            if ($res2 != "") {
-                $d = array(
-                    "alias" => "Link WMS",
-                    "valor" => "getfeatureinfo padr&atilde;o do servi&ccedil;o",
-                    "link" => $res2,
-                    "img" => "",
-                    "idIframe" => $id,
-                    "tip" => "nao",
-                    "item" => "LinkWms2"
-                );
-                if ($etip == false){
-                    $resultados[] = $d;
-                } else {
-                    $resultados["LinkWms2"] = $d;
-                }
-            }
-            if ($res == "" && $res2 == "") {
-                $d = array(
-                    "alias" => "Ocorreu um erro",
-                    "valor" => "",
-                    "link" => "",
-                    "img" => "",
-                    "tip" => "nao",
-                    "item" => "erro"
-                );
-                if ($etip == false){
-                    $resultados[] = $d;
-                } else {
-                    $resultados["erro"] = $d;
-                }
-            }
 
-            $resultado[] = $registros;
-            */
         }
         else {
             if ($layer->type == MS_LAYER_RASTER) {
@@ -1595,8 +1503,6 @@ class Atributos
                 $ident = @$layer->queryByPoint($pt, 1, - 1);
             }
             if ($ident == MS_SUCCESS) {
-                // $ident = @$layer->queryByPoint($pt, 1, -1);
-                // verifica se o layer e editavel no sistema METAESTAT
                 $editavel = "nao";
                 //
                 $sopen = $layer->open();

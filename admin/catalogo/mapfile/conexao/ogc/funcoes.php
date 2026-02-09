@@ -45,9 +45,6 @@ function alterar($locaplic,$codigo,$connection,$connectiontype,$ows_srs,$ows_nam
 	if ($layer == "") {
 		return false;
 	}
-	$layer->setmetadata("METAESTAT_CODIGO_TIPO_REGIAO","");
-	$layer->setmetadata("METAESTAT_ID_MEDIDA_VARIAVEL","");
-	$layer->setmetadata("metaestat","");
 	$layer->set("connection",$connection);
 	$layer->setconnectiontype($connectiontype);
 	$layer->set("type",$type);

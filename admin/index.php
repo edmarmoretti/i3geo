@@ -79,7 +79,6 @@ include "head.php";
 						<p class="longText">{{{msgLogin}}}</p>
 						<p class="longText">{{{msgFerramentas}}}</p>
 						<p class="longText">{{{msgUsr}}}</p>
-						<p class="longText">{{{msgMetaestat}}}</p>
 						<p class="longText">{{{msgUpload}}}</p>
 						<p class="longText">{{{msgCatalogo}}}</p>
 						<p class="longText">{{{msgCadastro}}}</p>
@@ -89,8 +88,7 @@ include "head.php";
 								target="_blank">{{merBdAdmin}}</a><br>
 							<a href="../documentacao/diagramas/cadastrodeusuarios/dbdocs/index.html"
 								target="_blank">{{merBdUsr}}</a><br>
-							<a href="../documentacao/diagramas/metaestat/dbdocs/index.html"
-			                   target="_blank">{{{merBdMetaestat}}}</a><br>
+
 						</p>
 						</div>
 

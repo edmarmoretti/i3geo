@@ -68,9 +68,6 @@ i3GEO.navega =
                 }
                 l.push(ext);
 
-                if (typeof (console) !== 'undefined')
-                    console.info(ext);
-
             } else {
                 i3GEO.navega.EXTENSOES.emAcao = false;
             }

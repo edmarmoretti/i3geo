@@ -122,34 +122,6 @@ function formConexaoLocalSelCon(valor){
 	<div class="col-md-12">
 		<div class="form-group form-group-lg">
 			<div class="col-md-6">
-				<label class="control-label text-left" for="metaestat">
-					{{{metaestatTitulo}}}
-				</label>
-               	<p class="small" >{{{Metaestat}}}</p>
-			</div>
-			<div class="col-md-6">
-				<select title="{{{metaestatTitulo}}}" name="metaestat" class="form-control">
-					{{{metaestat}}}
-				</select>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-12">
-		<div class="form-group form-group-lg">
-			<div class="col-md-6">
-				<label class="control-label text-left" for="metaestat_id_medida_variavel">
-					{{{medidaVariavelTitulo}}}
-				</label>
-               	<p class="small" >{{{medidaVariavel}}}</p>
-			</div>
-			<div class="col-md-6">
-				<input title="{{{medidaVariavelTitulo}}}" type="text" value="{{{metaestat_id_medida_variavel}}}" class="form-control" name="metaestat_id_medida_variavel" >
-			</div>
-		</div>
-	</div>
-	<div class="col-md-12">
-		<div class="form-group form-group-lg">
-			<div class="col-md-6">
 				<label class="control-label" for="tileindex">
 					tileIndex
 				</label>

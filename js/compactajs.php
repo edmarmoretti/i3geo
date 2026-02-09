@@ -1,4 +1,5 @@
 <html>
+	<meta charset='utf-8'>
 <title>Compacta js</title>
 	<body>
 	<h1>Compactador de c&oacute;digo Javascript</h1>
@@ -93,7 +94,7 @@ echo "<pre>";
 //compacta os arquivos do i3geo
 //gera um arquivo compactado para cada um
 //
-packer("../pacotes/mobileesp/mdetect.js","../pacotes/mobileesp/mdetect_compacto.js","None");
+echo "Compactando os arquivos...\n\n";
 packer("plugini3geo.js","compactados/plugini3geo_compacto.js","Normal");
 packer("marcador.js","compactados/marcador_compacto.js","Normal");
 packer("login.js","compactados/login_compacto.js","Normal");
@@ -126,8 +127,6 @@ packer("social.js","compactados/social_compacto.js","Normal");
 packer("catalogoMenus.js","compactados/catalogoMenus_compacto.js","Normal");
 packer("catalogoInde.js","compactados/catalogoInde_compacto.js","Normal");
 packer("catalogoOgc.js","compactados/catalogoOgc_compacto.js","Normal");
-packer("catalogoRegioes.js","compactados/catalogoRegioes_compacto.js","Normal");
-packer("catalogoMetaestat.js","compactados/catalogoMetaestat_compacto.js","Normal");
 packer("catalogoMapas.js","compactados/catalogoMapas_compacto.js","Normal");
 packer("catalogoEstrelas.js","compactados/catalogoEstrelas_compacto.js","Normal");
 packer("catalogoSistemas.js","compactados/catalogoSistemas_compacto.js","Normal");
@@ -137,16 +136,14 @@ packer("legenda.js","compactados/legenda_compacto.js","Normal");
 packer("timer.js","compactados/timer_compacto.js","Normal");
 packer("caixaDeFerramentas.js","compactados/caixaDeFerramentas_compacto.js","Normal");
 packer("../pacotes/base64.js","compactados/base64_compacto.js","Normal");
-packer("../pacotes/mustache.js-master/mustache.js","compactados/mustache.js","Normal");
+packer("../pacotes/mustache/mustache.js","compactados/mustache.js","Normal");
 packer("../pacotes/proj4js/lib/proj4js.js","compactados/proj4js.js","Normal");
-packer("../pacotes/wicket/wicket.js","compactados/wicket.js","Normal");
 packer("../pacotes/bootstrap-material-design/dist/js/material.js","compactados/material.js","Normal");
 //
 //gera um unico js para a inicializacao do I3Geo
 //
 $jsfiles = array(
 "../pacotes/jsts/jsts_min.js",
-"../pacotes/mobileesp/mdetect_compacto.js",
 "compactados/proj4js.js",
 "../pacotes/jquery/dist/jquery.min.js",
 "../pacotes/jquery/jquery-number/jquery.number.min.js",
@@ -156,7 +153,6 @@ $jsfiles = array(
 "../pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js",
 "../pacotes/pickr/pickr.min.js",
 "compactados/material.js",
-"compactados/wicket.js",
 "compactados/ini_i3geo_compacto.js",
 "compactados/request_compacto.js",
 "compactados/mustache.js",
@@ -190,8 +186,6 @@ $jsfiles = array(
 "compactados/catalogoMenus_compacto.js",
 "compactados/catalogoInde_compacto.js",
 "compactados/catalogoOgc_compacto.js",
-"compactados/catalogoRegioes_compacto.js",
-"compactados/catalogoMetaestat_compacto.js",
 "compactados/catalogoMapas_compacto.js",
 "compactados/catalogoEstrelas_compacto.js",
 "compactados/catalogoSistemas_compacto.js",
@@ -206,6 +200,7 @@ $jsfiles = array(
 $removeQuebra = array();
 
 $buffer = "\$i = function(id){return document.getElementById(id);};\n";
+echo "\n\nJuntando os arquivos javascript...\n\n";
 salvatudojs($jsfiles,$buffer,"i3geo_tudo_compacto.js","js");
 //
 //gera um unico css
@@ -218,6 +213,7 @@ $cssfiles = array(
 );
 
 $buffer = "";
+echo "\n\nJuntando os arquivos CSS...\n\n";
 salvatudojs($cssfiles,$buffer,"../css/i3geo.css","css");
 //testa os scripts
 foreach ($jsfiles as $f)
@@ -285,8 +281,13 @@ function packer($src,$out,$tipo="None")
 	$packed = $packer->pack();
 	$t2 = microtime(true);
 	$time = sprintf('%.4f', ($t2 - $t1) );
-	echo 'script ', $src, ' packed in ' , $out, ', in ', $time, ' s.', "\n";
+
 	file_put_contents($out, $packed);
+	if (file_exists($out) == true){
+		echo 'script ', $src, ' packed in ' , $out, ', in ', $time, ' s.', "\n";
+	} else {
+		echo "Arquivo ".$out." não foi criado.\n";
+	}
 }
 function salvatudojs($jsfiles,$buffer,$final,$tipo)
 {
@@ -299,7 +300,11 @@ function salvatudojs($jsfiles,$buffer,$final,$tipo)
 
 	foreach ($jsfiles as $f)
 	{
-		echo $f;
+		if(file_exists($f) == false){
+			echo "\nArquivo n&atilde;o encontrado: ".$f."\n";
+			continue;
+		}
+		echo "\n".$f;
 		if($tipo == "js"){
 			$buffer .= "//\n//".$f."\n";
 		}

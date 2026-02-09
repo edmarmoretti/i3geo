@@ -299,7 +299,7 @@ if (isset($parurl["pontos"])) {
 if (isset($parurl["marca"])) {
     $marca = $parurl["marca"];
 } else {
-    $marca = "../pacotes/openlayers/img/marker-gold.png";
+    $marca = "../imagens/openlayers/marker-gold.png";
 }
 if (isset($parurl["tiles"])) {
     $tiles = $parurl["tiles"];
@@ -706,13 +706,7 @@ function ajuda()
                                         <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.nuvemTags()">{{{a5a}}}</a> -->
                                     </p>
                                     <p>
-                                        <!-- <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.carouselTemas()">Miniaturas</a> -->
-                                    </p>
-                                    <p>
                                         <a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.buscaInde()">Busca na INDE</a>
-                                    </p>
-                                    <p>
-                                        <a href="javascript:void(0)" onclick="i3GEO.mapa.dialogo.metaestat()">Cartogramas estatisticos</a>
                                     </p>
                                     <p>
                                         <a href="http://localhost/i3geo/kml.php?tipoxml=kml" target="_blank">{{{a13}}}</a>
@@ -797,28 +791,6 @@ function ajuda()
                                 </div>
                             </div>
                             <hr>
-                            <!--  camadas que vem do sistema de metadados estatisticos -->
-                            <div class="list-group condensed">
-                                <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-                                    <label style="width: 255px; vertical-align: middle;"> <a onclick="i3GEO.catalogoMetaestat.inicia()" role="button" href="javascript:void(0)">
-                                            <h4>{{{x57}}}</h4>
-                                    </a>
-                                        <h6>{{{descMeta}}}</h6>
-                                    </label>
-                                </div>
-                            </div>
-                            <hr>
-                            <!--  mapas cadastrados no sistema de administracao (nao funcional)
-						<div class="list-group condensed"><div class="row-content text-left">
-							<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)"><span class="material-icons ">folder_open</span></a>
-							<label style="width: 255px;vertical-align: middle;">
-								<a onclick="i3GEO.catalogoMapas.inicia({'seletorTemplateDir': '#guia2objTemplateDir','seletorTemplateTema': '#guia2objTemplateTema','idCatalogoPrincipal':'catalogoPrincipal','idCatalogoNavegacao':'catalogoNavegacao','idOndeMigalha':'catalogoMigalha'})" role="button" href="javascript:void(0)">
-								<h4>{{{x90}}}</h4></a>
-								<h6>{{{descMapas}}}</h6>
-							</label>
-						</div></div><hr>
-						-->
                             <!--  camadas por estrelas -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">

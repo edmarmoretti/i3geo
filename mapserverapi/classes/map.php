@@ -122,25 +122,6 @@ class Map
             $_COOKIE = array();
             $res["i3geoPermiteLogin"] = "nao";
         }
-        if (! empty($_COOKIE["i3geocodigologin"])) {
-            session_write_close();
-            session_name("i3GeoLogin");
-            session_id($_COOKIE["i3geocodigologin"]);
-            session_start();
-            // var_dump($_SESSION);exit;
-            $logado = "sim";
-            if (! empty($_SESSION["usuario"]) && $_SESSION["usuario"] == $_COOKIE["i3geousuariologin"]) {
-                $res["papeis"] = $_SESSION["papeis"];
-            } else {
-                $logado = "nao";
-            }
-            // verifica se o usuario logado pode ver as opcoes de edicao do sistema de admin dentro do mapa
-            foreach ($res["papeis"] as $p) {
-                if ($p < 3) {
-                    $res["editor"] = "sim";
-                }
-            }
-        }
         $res["mapexten"] = $ext;
         $res["mapscale"] = $escalaMapa;
         $res["mapres"] = $mapObj->resolution;
@@ -154,7 +135,6 @@ class Map
         $res["versaomscompleta"] = $versao["completa"];
         $res["versaoint"] = $versao["inteiro"];
         $res["mensagens"] = $this->getLayersMessages($mapObj);
-        $res["r"] = (isset($_SESSION["R_path"])) ? "sim" : "nao";
         $res["extentref"] = "";
         $res["kmlurl"] = ""; // @$kmlurl;
         $res["mensageminicia"] = $_SESSION["mensagemInicia"];
@@ -174,10 +154,30 @@ class Map
         $res["logado"] = $logado;
         $res["perfil"] = !empty($_SESSION["perfil"]) ? $_SESSION["perfil"] : "";
         $res["statusFerramentas"] = $_SESSION["statusFerramentas"];
+        $res["i3geoBlFerramentas"] = $_SESSION["i3geoBlFerramentas"];
         $res["googleApiKey"] = $_SESSION["googleApiKey"];
         // parametros de inicializacao armazenados com o mapa quando o usuario utiliza a opcao de salvar mapa no nbanco de dados
         $customizacoesinit = $mapObj->getmetadata("CUSTOMIZACOESINIT");
         $res["editavel"] = $mapObj->getmetadata("EDITAVEL");
+        if (! empty($_COOKIE["i3geocodigologin"])) {
+            session_write_close();
+            session_name("i3GeoLogin");
+            session_id($_COOKIE["i3geocodigologin"]);
+            session_start();
+            $logado = "sim";
+            if (! empty($_SESSION["usuario"]) && $_SESSION["usuario"] == $_COOKIE["i3geousuariologin"]) {
+                $res["papeis"] = $_SESSION["papeis"];
+            } else {
+                $logado = "nao";
+            }
+            // verifica se o usuario logado pode ver as opcoes de edicao do sistema de admin dentro do mapa
+            foreach ($res["papeis"] as $p) {
+                if ($p < 3) {
+                    $res["editor"] = "sim";
+                }
+            }
+        }
+
         return array(
             "variaveis" => $res,
             "temas" => $temas,
@@ -501,8 +501,6 @@ class Map
                     $layerObj->getmetadata("legendaimg"),
                     $layerObj->offsite->red . "," . $layerObj->offsite->green . "," . $layerObj->offsite->blue,
                     $layerObj->numclasses,
-                    $layerObj->getmetadata("METAESTAT_ID_MEDIDA_VARIAVEL"),
-                    $layerObj->getmetadata("METAESTAT_CODIGO_TIPO_REGIAO"),
                     $utfgrid,
                     $layerObj->maxscaledenom,
                     $layerObj->minscaledenom,
@@ -576,55 +574,6 @@ class Map
         }
         $mapObj->save($map_file);
         $mapObj->free();
-    }
-
-    /**
-     * Adiciona uma camada baseada no sistema de metadados estatisticos
-     *
-     * @param string $metaestatids
-     * @param string $layerson
-     */
-    function addLayersMetaestat($mapId, $metaestatids = "", $layerson = "")
-    {
-        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
-        $Admin = new \mapserverapi\Admin();
-        $metaestatids = explode(",", $metaestatids);
-        if (count($metaestatids) == 0) {
-            return;
-        }
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        $metaestatidsligados = explode(",", $layerson);
-        foreach ($metaestatids as $metaestatid) {
-            $parametros = $Admin->i3geoestat_parametro_medida($metaestatid, "", "", true, true);
-            // id_parametro_medida,coluna
-            $filtroPar = array();
-            $tituloPar = array();
-            foreach ($parametros as $parametro) {
-                $valoresparametro = $Metaestatinfo->valorUnicoMedidaVariavel($metaestatid, $parametro["coluna"]);
-                $valormaior = $valoresparametro[count($valoresparametro) - 1];
-                $filtroPar[] = " " . $parametro["coluna"] . "::text = '" . $valormaior[$parametro["coluna"]] . "' ";
-                $tituloPar[] = $parametro["coluna"] . ": " . $valormaior[$parametro["coluna"]];
-            }
-            $dadosMedida = $Admin->i3geoestat_medida_variavel_variavel("", $metaestatid);
-            $tituloCamada = mb_convert_encoding($dadosMedida["nomemedida"], "ISO-8859-1", mb_detect_encoding($dadosMedida["nomemedida"]));
-            if (count($tituloPar) > 0) {
-                $tituloCamada = $tituloCamada . " (" . implode(" ,", $tituloPar) . " )";
-            }
-            $mapfilemetaestat = $Metaestatinfo->mapfileMeasure($metaestatid, implode(" AND ", $filtroPar), 0, "polygon", $tituloCamada, "", "", "", "", false, true, $_SESSION["dir_tmp"] . "/metaestatTempInit" . $metaestatid . ".map");
-            // echo $mapfilemetaestat["mapfile"];exit;
-            $map = ms_newMapObj($_SESSION["map_file"]);
-            $mapTemp = ms_newMapObjFromString($mapfilemetaestat["mapfile"]);
-            $layerObj = $mapTemp->getlayerbyname($mapfilemetaestat["layer"]);
-            $layerObj->set("status", MS_DEFAULT);
-            if ($layerObj->type == MS_LAYER_POLYGON) {
-                $map->insertLayer($layerObj, 0);
-            } else {
-                $map->insertLayer($layerObj, - 1);
-            }
-            $map->save($_SESSION["map_file"]);
-        }
     }
 
     function addLayerWms($mapId, $wms_name, $url, $proj, $formatlist, $layerTitle = "", $version = "1.1.1", $wms_style = "", $representationtype = "", $suportsld = false, $infoformat = "text/plain", $time = "", $tile = 0, $allitens = false)
@@ -862,395 +811,6 @@ class Map
         return $layerObj;
     }
 
-    /**
-     * Adiciona ao mapa um layer com base em uma string com coordenadas
-     *
-     * @param string $lines
-     *            -54 -12 -50 -12,-50 -1 -50 -2 -50 -3
-     * @param string $namelines
-     * @param string $symbol
-     * @param number $symbolsize
-     * @param string $symbolcolor
-     * @return array("name"=>"","shapefile"=>"")
-     */
-    function addLayerByLines($mapId, $lines = "", $namelines = "Linhas", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
-    {
-        if (empty($lines)) {
-            return false;
-        }
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        include (I3GEOPATH . "/pacotes/phpxbase/api_conversion.php");
-        //
-        // cria o shape file
-        //
-        $tipol = MS_SHP_ARC;
-        $nomeshp = dirname($_SESSION["map_file"]) . "/" . uniqid("lines");
-        // cria o dbf
-        $def = array();
-        $items = array(
-            "COORD"
-        );
-        foreach ($items as $ni) {
-            $def[] = array(
-                $ni,
-                "C",
-                "254"
-            );
-        }
-        if (! function_exists(dbase_create)) {
-            xbase_create($nomeshp . ".dbf", $def);
-        } else {
-            dbase_create($nomeshp . ".dbf", $def);
-        }
-        $dbname = $nomeshp . ".dbf";
-        $db = xbase_open($dbname, 2);
-        $novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-        $linhas = explode(",", $lines);
-        $pontosLinhas = array(); // guarda os pontos de cada linha em arrays
-        foreach ($linhas as $l) {
-            $tempPTs = explode(" ", $l);
-            $temp = array();
-            foreach ($tempPTs as $p) {
-                if (is_numeric($p)) {
-                    $temp[] = $p;
-                }
-            }
-            $pontosLinhas[] = $temp;
-        }
-        foreach ($pontosLinhas as $ptsl) {
-            $linhas = $ptsl;
-            $shape = ms_newShapeObj(MS_SHAPE_LINE);
-            $linha = ms_newLineObj();
-            $reg = array();
-            $reg[] = implode(",", $ptsl);
-            for ($ci = 0; $ci < count($linhas); $ci = $ci + 2) {
-                $linha->addXY($linhas[$ci], $linhas[$ci + 1]);
-            }
-            $shape->add($linha);
-            $novoshpf->addShape($shape);
-            xbase_add_record($db, $reg);
-        }
-        $novoshpf->free();
-        xbase_close($db);
-        // adiciona o layer
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        $layerObj = ms_newLayerObj($mapObj);
-        $layerObj->set("name", basename($nomeshp));
-        $layerObj->set("data", $nomeshp . ".shp");
-        $layerObj->setmetadata("DOWNLOAD", "sim");
-        $layerObj->setmetadata("temalocal", "sim");
-        $layerObj->setmetadata("tema", $namelines);
-        $layerObj->setmetadata("classe", "sim");
-        $layerObj->set("type", MS_LAYER_LINE);
-        $layerObj->set("status", MS_DEFAULT);
-        $classe = ms_newClassObj($layerObj);
-        $classe->set("name", " ");
-        $estilo = ms_newStyleObj($classe);
-        if (! empty($symbol)) {
-            $estilo->set("symbolname", $symbol);
-        }
-        $estilo->set("width", $symbolsize);
-        $cor = $estilo->color;
-        $corsimbolo = str_replace(" ", ",", $symbolcolor);
-        $corsimbolo = explode(",", $corsimbolo);
-        $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-        $salvo = $mapObj->save($_SESSION["map_file"]);
-        return array(
-            "name" => basename($nomeshp),
-            "shapefile" => $nomeshp
-        );
-    }
-
-    /**
-     * Adiciona ao mapa um layer com base em uma string com coordenadas
-     *
-     * @param string $polygons
-     *            -54 -12 -50 -12 -50 -10 -54 -12
-     * @param string $namepolygons
-     * @param string $symbol
-     * @param number $symbolsize
-     * @param string $symbolcolor
-     * @return array("name"=>"","shapefile"=>"")
-     */
-    function addLayerByPolygons($mapId, $polygons = "", $namepolygons = "Poligonos", $symbolcolor = "255 0 0")
-    {
-        if (empty($polygons)) {
-            return false;
-        }
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        include (I3GEOPATH . "/pacotes/phpxbase/api_conversion.php");
-        //
-        // cria o shape file
-        //
-        $tipol = MS_SHP_POLYGON;
-        $nomeshp = dirname($_SESSION["map_file"]) . "/" . uniqid("polys");
-        // cria o dbf
-        $def = array();
-        $items = array(
-            "COORD"
-        );
-        foreach ($items as $ni) {
-            $def[] = array(
-                $ni,
-                "C",
-                "254"
-            );
-        }
-        if (! function_exists(dbase_create)) {
-            xbase_create($nomeshp . ".dbf", $def);
-        } else {
-            dbase_create($nomeshp . ".dbf", $def);
-        }
-        $dbname = $nomeshp . ".dbf";
-        $db = xbase_open($dbname, 2);
-        $novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-        $linhas = explode(",", trim($polygons));
-        $pontosLinhas = array(); // guarda os pontos de cada linha em arrays
-        foreach ($linhas as $l) {
-            $tempPTs = explode(" ", trim($l));
-            $temp = array();
-            foreach ($tempPTs as $p)
-                if (is_numeric($p)) {
-                    $temp[] = $p;
-                }
-            $pontosLinhas[] = $temp;
-        }
-        foreach ($pontosLinhas as $ptsl) {
-            $linhas = $ptsl;
-            $shape = ms_newShapeObj(MS_SHAPE_POLYGON);
-            $linha = ms_newLineObj();
-            $reg = array();
-            $reg[] = "";
-            for ($ci = 0; $ci < count($linhas); $ci = $ci + 2) {
-                $linha->addXY($linhas[$ci], $linhas[$ci + 1]);
-            }
-            $shape->add($linha);
-            $novoshpf->addShape($shape);
-            xbase_add_record($db, $reg);
-        }
-        $novoshpf->free();
-        xbase_close($db);
-        // adiciona o layer
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        $layerObj = ms_newLayerObj($mapObj);
-        $layerObj->set("name", basename($nomeshp));
-        $layerObj->set("data", $nomeshp . ".shp");
-        $layerObj->setmetadata("DOWNLOAD", "sim");
-        $layerObj->setmetadata("temalocal", "sim");
-        $layerObj->setmetadata("tema", $namepolygons);
-        $layerObj->setmetadata("classe", "sim");
-        $layerObj->setmetadata("ATLAS", "nao");
-        $layerObj->set("type", MS_LAYER_POLYGON);
-        $layerObj->set("opacity", "50");
-        $layerObj->set("status", MS_DEFAULT);
-        $classe = ms_newClassObj($layerObj);
-        $classe->set("name", " ");
-        $estilo = ms_newStyleObj($classe);
-
-        $cor = $estilo->color;
-        $corsimbolo = str_replace(" ", ",", $symbolcolor);
-        $corsimbolo = explode(",", $corsimbolo);
-        $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-
-        $salvo = $mapObj->save($_SESSION["map_file"]);
-        return array(
-            "name" => basename($nomeshp),
-            "shapefile" => $nomeshp
-        );
-    }
-
-    /**
-     * Adiciona ao mapa um layer com base em uma string com coordenadas
-     *
-     * @param string $points
-     * @param string $namepoints
-     * @param string $symbol
-     * @param number $symbolsize
-     * @param string $symbolcolor
-     * @return array("name"=>"","shapefile"=>"")
-     */
-    function addLayerByPoints($mapId, $points = "", $namepoints = "Pontos", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
-    {
-        if (empty($points)) {
-            return false;
-        }
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        include (I3GEOPATH . "/pacotes/phpxbase/api_conversion.php");
-        //
-        // cria o shape file
-        //
-        $tipol = MS_SHP_POINT;
-        $nomeshp = dirname($_SESSION["map_file"]) . "/" . uniqid("points");
-
-        // cria o dbf
-        $def = array();
-        $items = array(
-            "COORD"
-        );
-        foreach ($items as $ni) {
-            $def[] = array(
-                $ni,
-                "C",
-                "254"
-            );
-        }
-        if (! function_exists(dbase_create)) {
-            xbase_create($nomeshp . ".dbf", $def);
-        } else {
-            dbase_create($nomeshp . ".dbf", $def);
-        }
-        $dbname = $nomeshp . ".dbf";
-        $db = xbase_open($dbname, 2);
-        $novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-        $pontos = explode(",", trim(str_replace(" ", ",", $points)));
-        foreach ($pontos as $p) {
-            if (is_numeric($p)) {
-                $pontosn[] = $p;
-            }
-        }
-        $pontos = $pontosn;
-        for ($ci = 0; $ci < count($pontos); $ci = $ci + 2) {
-            $reg = array();
-            $reg[] = $pontos[$ci] . " " . $pontos[$ci + 1];
-            $shape = ms_newShapeObj($tipol);
-            $linha = ms_newLineObj();
-            $linha->addXY($pontos[$ci], $pontos[$ci + 1]);
-            $shape->add($linha);
-            $novoshpf->addShape($shape);
-            xbase_add_record($db, $reg);
-        }
-        $novoshpf->free();
-        xbase_close($db);
-        // adiciona o layer
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        $layerObj = ms_newLayerObj($mapObj);
-        $layerObj->set("name", basename($nomeshp));
-        $layerObj->set("data", $nomeshp . ".shp");
-        $layerObj->setmetadata("DOWNLOAD", "sim");
-        $layerObj->setmetadata("tema", $namepoints);
-        $layerObj->setmetadata("classe", "sim");
-        $layerObj->setmetadata("temalocal", "sim");
-        $layerObj->set("type", MS_LAYER_POINT);
-        $layerObj->set("status", MS_DEFAULT);
-        $classe = ms_newClassObj($layerObj);
-        $classe->set("name", " ");
-        $estilo = ms_newStyleObj($classe);
-        $estilo->set("symbolname", $symbol);
-        $estilo->set("size", $symbolsize);
-        $cor = $estilo->color;
-        if (! isset($corsimbolo)) {
-            $corsimbolo = "255,0,0";
-        }
-        $corsimbolo = str_replace(" ", ",", $symbolcolor);
-        $corsimbolo = explode(",", $corsimbolo);
-        $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-        $salvo = $mapObj->save($_SESSION["map_file"]);
-        return array(
-            "name" => basename($nomeshp),
-            "shapefile" => $nomeshp
-        );
-    }
-
-    /**
-     * Adiciona ao mapa um layer com base em uma string wkt
-     *
-     * @param string $wkt
-     * @param string $namewkt
-     * @param string $symbol
-     * @param number $symbolsize
-     * @param string $symbolcolor
-     * @return array("name"=>"","shapefile"=>"")
-     */
-    function addLayerByWkt($mapId, $wkt = "", $namewkt = "wktlayer", $symbol = "ponto", $symbolsize = 10, $symbolcolor = "255 0 0")
-    {
-        if (empty($wkt)) {
-            return false;
-        }
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        include (I3GEOPATH . "/pacotes/phpxbase/api_conversion.php");
-        $shape = ms_shapeObjFromWkt($wkt);
-        $tipol = $shape->type;
-        if ($tipol == 0) {
-            $tipol = 3;
-        }
-        $nomeshp = dirname($_SESSION["map_file"]) . "/" . uniqid("wkt");
-        // cria o dbf
-        $def = array();
-        $items = array(
-            "COORD"
-        );
-        foreach ($items as $ni) {
-            $def[] = array(
-                $ni,
-                "C",
-                "254"
-            );
-        }
-        if (! function_exists(dbase_create)) {
-            xbase_create($nomeshp . ".dbf", $def);
-        } else {
-            dbase_create($nomeshp . ".dbf", $def);
-        }
-        $dbname = $nomeshp . ".dbf";
-        $db = xbase_open($dbname, 2);
-        if ($tipol == 1) {
-            $novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_ARC);
-        }
-        if ($tipol == 3) {
-            $novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_MULTIPOINT);
-        }
-        if ($tipol == 2) {
-            $novoshpf = ms_newShapefileObj($nomeshp, MS_SHP_POLYGON);
-        }
-        $reg[] = "";
-        $novoshpf->addShape($shape);
-        xbase_add_record($db, $reg);
-        $novoshpf->free();
-        xbase_close($db);
-        // adiciona o layer
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        $layerObj = ms_newLayerObj($mapObj);
-        $layerObj->set("name", basename($nomeshp));
-        $layerObj->set("data", $nomeshp . ".shp");
-        $layerObj->setmetadata("DOWNLOAD", "sim");
-        $layerObj->setmetadata("temalocal", "sim");
-        $layerObj->setmetadata("tema", $namewkt);
-        $layerObj->setmetadata("classe", "sim");
-        $layerObj->set("type", $shape->type);
-        $layerObj->set("status", MS_DEFAULT);
-        $classe = ms_newClassObj($layerObj);
-        $classe->set("name", " ");
-        $estilo = ms_newStyleObj($classe);
-        if ($shape->type == 0) {
-            $estilo->set("symbolname", $symbol);
-            $estilo->set("size", $symbolsize);
-        }
-        if ($shape->type == 1) {
-            $estilo->set("symbolname", $symbol);
-            $estilo->set("width", $symbolsize);
-        }
-        if ($shape->type == 2) {
-            $layerObj->set("opacity", "50");
-        }
-        $cor = $estilo->color;
-        $corsimbolo = str_replace(" ", ",", $symbolcolor);
-        $corsimbolo = explode(",", $corsimbolo);
-        $cor->setRGB($corsimbolo[0], $corsimbolo[1], $corsimbolo[2]);
-        $salvo = $mapObj->save($_SESSION["map_file"]);
-        return array(
-            "name" => basename($nomeshp),
-            "shapefile" => $nomeshp
-        );
-    }
-
     function getAllRestrictLayers()
     {
         include_once (I3GEOPATH . "/mapserverapi/classes/admin.php");
@@ -1397,11 +957,7 @@ class Map
                             $l->set("status", $statustemp);
                         }
                         $this->layer->cloneInlineSymbol($maptemp, $l, $mapObj);
-                        if ($l->type == MS_LAYER_POLYGON && $l->getmetadata("METAESTAT") == "SIM") {
-                            $mapObj->insertLayer($l, 0);
-                        } else {
-                            $mapObj->insertLayer($l, - 1);
-                        }
+                        $mapObj->insertLayer($l, - 1);
                         $layerObj = $mapObj->getlayerbyname($l->name);
                         $this->layer->fixLayerGrid($l, $layerObj);
                         $this->correctShapefilePath($mapObj, $layerObj);
@@ -2047,55 +1603,6 @@ class Map
         return ($nome);
     }
 
-    function addLayerMetaestatFilter($mapId, $measure, $filter, $classification, $opacity, $regiontype)
-    {
-        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        if (! empty($filter)) {
-            $filter = str_replace('"', "'", $filter);
-            $final = array();
-            $sepands = explode("|", $filter);
-            foreach ($sepands as $sepand) {
-                $linhas = explode("*", $sepand);
-                if (! is_numeric(str_replace(array(
-                    "'",
-                    ","
-                ), "", $linhas[1]))) {
-                    exit();
-                }
-                if (count(explode(",", $linhas[1])) == 1) {
-                    $final[] = $linhas[0] . " = " . $linhas[1];
-                } else {
-                    $final[] = $linhas[0] . " IN (" . $linhas[1] . ")";
-                }
-            }
-            $filter = implode(" and ", $final);
-        }
-        $data = $Metaestatinfo->mapfileMeasure($measure, $filter, 0, "polygon", "", $classification, "", $regiontype, $opacity, false);
-        $layerObj = $data["mapObj"]->getLayerByName($data["layerName"]);
-        $layerObj->set("status", MS_DEFAULT);
-        ms_newLayerObj($mapObj, $layerObj);
-        $mapObj->save($_SESSION["map_file"]);
-        return (true);
-    }
-
-    function addLayerRegion($mapId, $codigo_tipo_regiao, $outlinecolor = "50,50,50", $width = 2)
-    {
-        $Metaestatinfo = new \mapserverapi\MetaestatInfo();
-        if ($this->open($mapId) == false) {
-            return false;
-        }
-        $mapObj = ms_newMapObj($_SESSION["map_file"]);
-        $data = $Metaestatinfo->mapfileRegion($codigo_tipo_regiao, $outlinecolor, $width);
-        $layerObj = $data["mapObj"]->getLayerByName($data["layerName"]);
-        $layerObj->set("status", MS_DEFAULT);
-        ms_newLayerObj($mapObj, $layerObj);
-        $mapObj->save($_SESSION["map_file"]);
-        return (true);
-    }
 
     function createEmptyLayer($mapObj, $ms_tipo, $ms_status, $metaTema, $metaClasse = "SIM", $reposiciona = true)
     {

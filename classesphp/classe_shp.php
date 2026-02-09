@@ -155,6 +155,9 @@ return:
 Nome do tema criado.
 */
 	function criaSHPvazio($tituloTema="",$nomeshp="",$def="",$tipol=""){
+	//error_reporting(E_ALL);
+	//ini_set('display_errors', 1);
+
 		$novonomelayer = nomeRandomico();
 		if($nomeshp == ""){
 			$diretorio = dirname($this->arquivo);

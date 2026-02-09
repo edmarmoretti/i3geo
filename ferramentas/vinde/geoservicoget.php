@@ -2,7 +2,7 @@
 include_once(dirname(__FILE__)."/../safe2.php");
 verificaBlFerramentas(basename(dirname(__FILE__)),$_SESSION["i3geoBlFerramentas"],false);
 $ch = curl_init();
-curl_setopt($ch, CURLOPT_URL, "https://visualizador.inde.gov.br/api/geoservico/get?url=".$_GET["url"]);
+curl_setopt($ch, CURLOPT_URL, "https://visualizador.inde.gov.br/api/geoservico?url=".$_GET["url"]);
 curl_setopt($ch, CURLOPT_HEADER, 0);
 curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
 curl_setopt($ch, CURLOPT_TIMEOUT, 120);

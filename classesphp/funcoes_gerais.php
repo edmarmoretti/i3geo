@@ -32,6 +32,17 @@
  *
  * i3geo/classesphp/funcoes_gerais.php
  */
+
+function utf8_converter($array) {
+    array_walk_recursive($array, function(&$item, $key) {
+        if (!mb_detect_encoding($item, 'UTF-8', true)) {
+            $item = utf8_encode($item);
+        }
+    });
+    return $array;
+}
+
+
 /*
  * Section: cor
  */
@@ -251,8 +262,8 @@ function nomeRandomico($n = 10)
     $nomes = "";
     $a = 'azertyuiopqsdfghjklmwxcvbnABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $max = 51;
-    for ($i = 0; $i < $n; ++ $i) {
-        $nomes .= $a{mt_rand(0, $max)};
+    for ($i = 0; $i < $n; ++$i) {
+        $nomes .= $a[mt_rand(0, $max)];
     }
     return $nomes;
 }
@@ -500,8 +511,6 @@ function gravaDados($dados, $arq)
  * O arquivo para include armazena a vari&aacute;vel res que cont&eacute;m a lista de fontes separadas por v&iacute;rgula.
  *
  * Parametros:
- *
- * $cp {CAPAINT} - Objeto CPAINT.
  *
  * $locaplic {string} - Localiza&ccedil;&atilde;o da aplica&ccedil;&atilde;o no servidor.
  *
@@ -2301,15 +2310,14 @@ function removeAcentos($string){
  *
  * $a {array}
  *
- * $cpaint {boolean} - se for true &eacute; acrescentado o elemento "data" como chave no array, mantendo a compatibilidade da resposta com o CPAINT
  *
  * Retorno:
  *
  * {JSON}
  */
-function array2json($a, $cpaint = true)
+function array2json($a, $data = true)
 {
-    if ($cpaint == true) {
+    if ($data == true) {
         $a = array(
             "data" => $a
         );
@@ -2368,31 +2376,9 @@ function cpjson($obj)
     if (ob_get_contents()) {
         ob_end_clean();
     }
-    if (function_exists("json_encode")) {
-        echojson(array2json($obj));
-    } else {
-        include_once (dirname(__FILE__) . "/../pacotes/cpaint/cpaint2.inc.php");
-        $cp = new cpaint();
-        $cp->set_data($obj);
-        $cp->return_data();
-        exit();
-    }
+    echojson(array2json($obj));
 }
-function retornaJSONutf8($obj)
-{
-    include_once(dirname(__FILE__) . "/../pacotes/cpaint/JSON/json2.php");
-    error_reporting(0);
-    if (ob_get_contents()) {
-        ob_end_clean();
-    }
-    $j = new Services_JSON();
-    $texto = $j->encode($obj);
-    if (!mb_detect_encoding($texto,"UTF-8",true)){
-        $texto = utf8_encode($texto);
-    }
-    echo $texto;
-    exit;
-}
+
 /*
  * Function: removeLinha
  *

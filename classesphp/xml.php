@@ -78,8 +78,8 @@ function geraXmlSistemas($perfil="",$locaplic="",$editores="")
 	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
 	$xml .= "\n<SISTEMAS>\n";
 	$q = "select * from ".$esquemaadmin."i3geoadmin_sistemas";
-	$qatlas = $dbh->query($q);
-	foreach($qatlas as $row)
+	$qsis = $dbh->query($q);
+	foreach($qsis as $row)
 	{
 		if($row["perfil_sistema"] == "")
 		$mostra = true;
@@ -290,31 +290,6 @@ function geraXmlARCGISREST($locaplic,$output)
     return geraXmlRSS($locaplic,$sql,"WMS ARCGIS (rest)",$output);
 }
 /*
-Function: geraXmlWMSmetaestat
-
-RSS com a lista de WMS das variaveis cadastradas no sistema de metadados estatisticos
-
-Parametros:
-
-locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
-
-Retorno:
-
-RSS
-*/
-function geraXmlWMSmetaestat($locaplic)
-{
-	global $esquemaadmin;
-	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$c = "/classesphp/xml.php";
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-		$c = "\classesphp\xml.php";
-	}
-	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace($c,"",__FILE__)));
-	$sql = "select DISTINCT b.id_medida_variavel as id_ws, 'WMSMETAESTAT' as tipo_ws,'".$url."/ogc.php?id_medida_variavel='||b.id_medida_variavel as link_ws,a.nome||' -> '||b.nomemedida as nome_ws,a.descricao as desc_ws, '' as autor_ws from i3geoestat_variavel as a ,i3geoestat_medida_variavel as b WHERE a.codigo_variavel = b.codigo_variavel ORDER BY a.nome";
-	return geraXmlRSS($locaplic,$sql,"Web services WMS-TIME OGC");
-}
-/*
 Function: geraXmlGeorss
 
 RSS com a lista de GEORSS cadastrados
@@ -389,8 +364,8 @@ function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 		"language"=>"pt-br"
 	);
 	$jsonItems = array();
-	$qatlas = $dbh->query($sql);
-	foreach($qatlas as $row) {
+	$qsis = $dbh->query($sql);
+	foreach($qsis as $row) {
 		$xml .= "<item>\n";
 		$xml .= "<category/>\n";
 		$xml .= "<title>".entity_decode($row["nome_ws"])."</title>\n";
@@ -430,55 +405,6 @@ function geraXmlRSS($locaplic,$sql,$descricao,$output="xml")
 	else{
 		return json_encode($json);
 	}
-}
-function geraXmlAtlas($locaplic,$editores)
-{
-	global $esquemaadmin;
-	//error_reporting(0);
-	$dbh = "";
-	include($locaplic."/classesphp/conexao.php");
-
-	if($convUTF)
-	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
-	else
-	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
-	$xml .= "\n<RAIZ>\n";
-	//$q = "select * from i3geoadmin_atlas";
-	$qatlas = $dbh->query("select * from ".$esquemaadmin."i3geoadmin_atlas");
-
-	$editor = "nao";//$editor = verificaEditores($editores);
-	foreach($qatlas as $row)
-	{
-		$mostra = true;
-		if(strtolower($row["publicado_atlas"] == "nao"))
-		{$mostra = false;}
-		if($editor)
-		{$mostra = true;}
-		if($mostra)
-		{
-			$xml .= "<ATLAS>\n";
-			$xml .= " <ID>".$row["id_atlas"]."</ID>\n";
-			$xml .= " <PUBLICADO>".$row["publicado_atlas"]."</PUBLICADO>\n";
-			$xml .= " <TITULO>".xmlTexto_prepara($row["titulo_atlas"])."</TITULO>\n";
-			$xml .= " <DESCRICAO>".xmlTexto_prepara($row["desc_atlas"])."</DESCRICAO>\n";
-			$xml .= " <ICONE>".$row["icone_atlas"]."</ICONE>\n";
-			$xml .= " <LINKMAISINFO><![CDATA[".xmlTexto_prepara($row["link_atlas"])."]]></LINKMAISINFO>\n";
-			$xml .= " <TEMPLATEHTML>".xmlTexto_prepara($row["template_atlas"])."</TEMPLATEHTML>\n";
-			$xml .= " <WABERTURA>".$row["w_atlas"]."</WABERTURA>\n";
-			$xml .= " <HABERTURA>".$row["h_atlas"]."</HABERTURA>\n";
-			$xml .= " <PRANCHADEFAULT>".$row["pranchadefault_atlas"]."</PRANCHADEFAULT>\n";
-			$xml .= " <TIPOGUIAS>".$row["tipoguias_atlas"]."</TIPOGUIAS>\n";
-			$xml .= " <BASEMAPFILE>".$row["basemapfile_atlas"]."</BASEMAPFILE>\n";
-			$xml .= " <PRANCHAS>\n";
-			$xml = geraXmlAtlas_pegapranchas($xml,$row["id_atlas"],$dbh);
-			$xml .= " </PRANCHAS>\n";
-			$xml .= " </ATLAS>\n";
-		}
-	}
-	$xml .= "</RAIZ>\n";
-	$dbh = null;
-	$dbhw = null;
-	return $xml;
 }
 function geraXmlIdentifica($perfil,$locaplic,$editores="")
 {
@@ -747,46 +673,6 @@ function geraXmlMenutemas_notema($qtemas,$xml,$perfil)
 			$xml .= "<NACESSOS></NACESSOS>\n";
 			$xml .= "</TEMA>\n";
 		}
-	}
-	return $xml;
-}
-function geraXmlAtlas_pegapranchas($xml,$id_atlas,$dbh)
-{
-	global $esquemaadmin;
-	xml_testaNum([$id_atlas]);
-	$q = "select * from ".$esquemaadmin."i3geoadmin_atlasp as p where p.id_atlas = $id_atlas order by ordem_prancha";
-	$qpranchas = $dbh->query($q);
-	foreach($qpranchas as $row)
-	{
-		$xml .= "  <PRANCHA>\n";
-		$xml .= "   <ID>".$row["id_prancha"]."</ID>\n";
-		$xml .= "   <TITULO>".xmlTexto_prepara($row["titulo_prancha"])."</TITULO>\n";
-		$xml .= "   <DESCRICAO>".xmlTexto_prepara($row["desc_prancha"])."</DESCRICAO>\n";
-		$xml .= "   <ICONE>".$row["icone_prancha"]."</ICONE>\n";
-		$xml .= "   <LINKMAISINFO><![CDATA[".xmlTexto_prepara($row["link_prancha"])."]]></LINKMAISINFO>\n";
-		$xml .= "   <WABERTURA>".$row["w_prancha"]."</WABERTURA>\n";
-		$xml .= "   <HABERTURA>".$row["h_prancha"]."</HABERTURA>\n";
-		$xml .= "   <MAPEXT>".$row["mapext_prancha"]."</MAPEXT>\n";
-		$xml .= "   <TEMAS>\n";
-		$xml = geraXmlAtlas_pegatemas($xml,$row["id_prancha"],$dbh);
-		$xml .= "   </TEMAS>\n";
-		$xml .= "  </PRANCHA>\n";
-	}
-	return $xml;
-}
-function geraXmlAtlas_pegatemas($xml,$id_prancha,$dbh)
-{
-	global $esquemaadmin;
-	xml_testaNum([$id_prancha]);
-	$q = "select t.codigo_tema,t.ligado_tema from ".$esquemaadmin."i3geoadmin_atlast as t where t.id_prancha = '$id_prancha' order by ordem_tema";
-	//echo $q;
-	$qtemas = $dbh->query($q);
-	foreach($qtemas as $row)
-	{
-		$xml .= "<TEMA>\n";
-		$xml .= "<CODIGO>".$row["codigo_tema"]."</CODIGO>\n";
-		$xml .= "<LIGADO>".$row["ligado_tema"]."</LIGADO>\n";
-		$xml .= "</TEMA>\n";
 	}
 	return $xml;
 }

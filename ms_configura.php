@@ -2,6 +2,9 @@
 if($_SERVER['SCRIPT_FILENAME'] == __FILE__){
     exit;
 }
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
+
 //verifica se o pai esta na mesma pasta
 if (!strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
 	if(!stristr(dirname($_SERVER['SCRIPT_FILENAME']),"/".basename(dirname(__FILE__)))){
@@ -181,7 +184,7 @@ $i3geoEsquemasWL = array();
  		"Pasta 1"=>"/tmp/ms_tmp"
  	),
  	"postgis" => array(
- 		"esquemas"=>array("esquema1","i3geo_metaestat","public"),
+ 		"esquemas"=>array("esquema1","public"),
  		"conexao"=>array("user"=> "postgres", "password"=>"postgres", "dbname"=>"i3geosaude", "host"=>"localhost", "port"=>"5432")
  	)
  );
@@ -287,7 +290,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,inse
 inseretxt,mostraexten,outputformat,perfil
 
 */
-$i3geoBlFerramentas = array();
+$i3geoBlFerramentas = array("upload","uploaddbf","uploadgpx","uploadkml","uploadshp","salvamapa","carregamapa");
 /*
 Variable: $ogrOutput
 
@@ -304,96 +307,7 @@ $ogrOutput = false;
 	2 - utiliza X-Sendfile (mais rapido que as outras opcoes) mas exige modificacoes na instalacao do Apache. Veja em: https://tn123.org/mod_xsendfile/ e http://edmarmoretti.blogspot.com.br/
  */
 $i3georendermode = 1;
-/*
-	Variavel: linkedinoauth (ainda n&atilde;o implementado)
 
-	Par&acirc;metros registrados no Linkedin para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
-
-	O Linkedin exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
-
-	Veja o site para maiores informa&ccedil;&otilde;es: http://developer.linkedin.com/docs/DOC-1008
-
-	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
-
-	Ao registrai3geo/testamapfile.phpr utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
-
-	Exemplo:
-
-	$linkedinoauth = array(
-		"consumerkey" => "",
-		"consumersecret" => ""
-	);
-
-	Tipo:
-	{array}
-*/
-$linkedinoauth = "";
-/*
-	Variavel: facebookoauth
-
-	Par&acirc;metros registrados no Facebook para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
-
-	O Facebook exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
-
-	Veja o site para maiores informa&ccedil;&otilde;es: http://developers.facebook.com/setup/
-
-	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
-
-	Ao registrar utilize o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
-
-	Exemplo:
-
-	$facebookoauth = array(
-		"consumerkey" => "",
-		"consumersecret" => ""
-	);
-
-	Tipo:
-	{array}
-*/
-$facebookoauth = array(
-	"consumerkey" => "",
-	"consumersecret" => ""
-);
-/*
-	Variavel: twitteroauth
-
-	Par&acirc;metros registrados no Twitter para permitir que o i3Geo fa&ccedil;a autentica&ccedil;&atilde;o com base na conta do usu&aacute;rio
-
-	O Twitter exige que cada site seja registrado para permitir que a API de autentica&ccedil;&atilde;o funcione
-
-	Veja o site para maiores informa&ccedil;&otilde;es: http://www.snipe.net/2009/07/writing-your-first-twitter-application-with-oauth/
-
-	Lista de aplica&ccedil;&otilde;es cadastradas: https://twitter.com/oauth_clients/
-
-	Caso vc n&atilde;o queira permitir essa op&ccedil;&atilde;o, deixe essa vari&aacute;vel vazia, e.x
-
-	$twitteroauth = "";
-
-	Ao registrar a aplica&ccedil;&atilde;o, utilize o endere&ccedil;o do i3geo em Application Website, por exemplo http://meuservidor/i3geo
-
-	Ao registrar utilize como "Callback URL" o valor http://meuservidor/i3geo/pacotes/openid/login.php?login
-
-	Exemplo:
-
-	$twitteroauth = array(
-		"consumerkey" => "",
-		"consumersecret" => "",
-		"requesttokenurl" => "https://twitter.com/oauth/request_token",
-		"accesstokenurl" => "https://twitter.com/oauth/access_token",
-		"authorizeurl" => "https://twitter.com/oauth/authorize"
-	);
-
-	Tipo:
-	{array}
-*/
-$twitteroauth = array(
-	"consumerkey" => "",
-	"consumersecret" => "",
-	"requesttokenurl" => "https://twitter.com/oauth/request_token",
-	"accesstokenurl" => "https://twitter.com/oauth/access_token",
-	"authorizeurl" => "https://twitter.com/oauth/authorize"
-);
 /*
 	Variavel: mensagemInicia
 
@@ -437,18 +351,6 @@ $emailInstituicao = "geoprocessamento@mma.gov.br";
 	{string}
 */
 $googleApiKey = "";
-/*
-Variable: metaestatTemplates
-
-Indica a pasta onde ficam os templates utilizados para a publicacao de mapas. E utilizado pelo sistema de metadados estatisticos.
-O default e a pasta /ferramentas/metaestat/templates
-A pasta deve estar dentro do diretorio onde esta instalado o i3geo
-A pasta com os templates deve conter uma pasta chamada "logos" para guardar as logomarcas utilizadas pelos mapas
-
-Tipo:
-{string}
-*/
-$metaestatTemplates = "/ferramentas/metaestat/templates";
 /*
 Variable: navegadoresLocais
 
@@ -526,31 +428,6 @@ Tipo:
 */
 $locmapas = "";
 /*
-Variable: R_path
-
-Onde esta o executavel do software R
-
-O R &eacute; um pacote estat&iacute;stico utilizado pelo I3Geo para gera&ccedil;&atilde;o de gr&aacute;ficos e an&aacute;lises estat&iacute;sticas
-Se vc n&atilde;o possui o R instalado, comente a linha abaixo
-
-Tipo:
-{string}
-*/
-//ver opcao especifica abaixo para o sistema operacional
-$R_path = "";
-/*
-Variable: R_pathlib
-
-Onde ficam as bibliotecas adicionais necess&aacute;rias ao funcionamento do R
-
-Instale no R as bibliotecas SPATSTAT e DELDIR. No Ubuntu, experimente usar o software RKWard que possui um instalador de bibliotecas
-
-Tipo:
-{string}
-*/
-//ver opcao especifica abaixo para o sistema operacional
-$R_libpath = "";
-/*
 Variable: postgis_mapa
 
 String de conex&atilde;o para acesso aos dados (opcional).
@@ -575,10 +452,6 @@ $postgis_mapa = array(
 )
 
 No exemplo, vc pode usar "teste" ou "conexao2" no seu mapfile veja em i3geo/temas/testesubstring.map
-
-A chave "metaestat" e utilizada pelo sistema de metadados estatisticos e indica o local onde as tabelas
-com os dados estatisticos estao armazenadas. Ate a versao 6.0, a definicao da conexao era feita por meio
-do banco de dados de administracao
 
 Se vc n&atilde;o quiser usar essa substitui&ccedil;&atilde;o, deixe como est&aacute; ou use
 
@@ -745,8 +618,6 @@ if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
 {
 	$dir_tmp = "c:/ms4w/tmp/ms_tmp";
 	$locmapserv = "/cgi-bin/mapserv.exe";
-	$R_path = "c:/r/win/bin/R.exe";
-	$R_libpath = "c:/r/win/library";
     $ogrOutput = false;
 }
 else //se for linux
@@ -759,8 +630,6 @@ else //se for linux
 		$dir_tmp = "/tmp/ms_tmp";
 	}
 	$locmapserv = "/cgi-bin/mapserv";
-	$R_path = "R";
-	$R_libpath = "";
 }
 /**
  * Define o idioma de inicializacao (cookies nao devem ter sido definidos anteriormente)
@@ -770,7 +639,9 @@ else //se for linux
  * Para trocar, altere a linha abaixo
  */
 if(empty($_COOKIE["i3geolingua"]) && array_key_exists('HTTP_ACCEPT_LANGUAGE',$_SERVER)){
-    $arr_cookie_options = array (
+    error_reporting(0);
+	//expires, path, domain, secure, httponly e samesite
+	$arr_cookie_options = array (
         'expires' => time() + 60*60*24*365,
         'path' => '/',
         'secure' => true,     // or false

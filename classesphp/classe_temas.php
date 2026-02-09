@@ -216,17 +216,8 @@ class Temas
      */
     function pegaMetadata()
     {
-        if (! $this->layer) {
-            return "erro";
-        }
-        $buscar = array(
-            "METAESTAT",
-            "METAESTAT_ID_MEDIDA_VARIAVEL"
-        );
         $meta = array();
-        foreach ($buscar as $b) {
-            $meta[$b] = $this->layer->getmetadata($b);
-        }
+
         return array(
             $this->layer->name => $meta
         );

@@ -58,17 +58,7 @@ if(!empty($fingerprint) && !empty($g_sid))	{
 include_once($locaplic."/classesphp/classe_vermultilayer.php");
 include_once($locaplic."/classesphp/classe_estatistica.php");
 
-//
-//substitui a string de conex&atilde;o
-//
-/*
-if(!substituiCon($map_file,$postgis_mapa)){
-	unlink($map_file);
-	cpjson("erro",$cp);
-	return;
-}
-*/
-//
+
 function redesenhaMapa()
 {
     global $locaplic,$map_file,$cp,$postgis_mapa,$locmapserv,$interface,$mapexten;

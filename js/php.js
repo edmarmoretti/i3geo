@@ -1,28 +1,6 @@
 if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
-//var cpJSON = new cpaint();
-//cpJSON.set_response_type("JSON");
-//cpJSON.set_transfer_mode("POST");
-/*
-            i3GEO.request.get({
-                snackbar: false,
-                snackbarmsg: false,
-                btn: false,
-                par: {
-                    filtraOgc: "nao",
-                    filtraDown: "nao",
-                    idioma: i3GEO.idioma.ATUAL,
-                    funcao: "pegalistademenus"
-                },
-                prog: "/serverapi/catalog/",
-                fn: function(data){
-                    if (after){
-                        after.call(after, data);
-                    }
-                }
-            });
- */
 i3GEO.php =
 {
 	verifica : function() {
@@ -248,55 +226,6 @@ i3GEO.php =
 	},
 	funcoesGeometriasWkt : function(funcao, listaWkt, operacao) {
 	    console.error("Veja i3GEO.editor.funcoesGeometriasWkt");
-	},
-	listaVariavel : function(funcao, filtro_esquema) {
-	    console.error("Veja i3GEO.catalogoMetaestat.getVariables");
-	},
-	listaMedidaVariavel : function(codigo_variavel, funcao) {
-	    console.error("Veja i3GEO.catalogoMetaestat.getMeasuresVariable");
-	},
-        listaRegioesMedidaVariavel : function(id_medida_variavel, funcao) {
-            console.error("Veja i3GEO.catalogoMetaestat.getRegionsMeasure");
-        },
-        listaClassificacaoMedida : function(id_medida_variavel, funcao) {
-            console.error("Veja i3GEO.catalogoMetaestat.getClassificationsMeasure");
-        },
-	listaParametrosMedidaVariavel : function(id_medida_variavel, funcao) {
-	    console.error("Veja i3GEO.catalogoMetaestat.getParametersMeasure");
-	},
-	listaValoresParametroMedidaVariavel : function(id_parametro_medida, funcao) {
-	    console.error("Veja i3GEO.catalogoMetaestat.getParametersMeasureValues");
-	},
-	relatorioVariavel : function(codigo_variavel, funcao) {
-	    console.error("Removido na versao 8");
-	},
-	listaClasseClassificacao : function(id_classificacao, funcao) {
-	    console.error("Removido na versao 8");
-	},
-	mapfileMedidaVariavel : function(funcao, id_medida_variavel, filtro, todasascolunas, tipolayer, titulolayer, id_classificacao,
-		agruparpor, codigo_tipo_regiao, opacidade) {
-	    console.error("Removido na versao 8");
-	},
-	listaTipoRegiao : function(funcao, codigo_tipo_regiao) {
-	    console.error("Veja i3GEO.catalogoRegioes.getRegions");
-	},
-	mapfileTipoRegiao : function(funcao, codigo_tipo_regiao, outlinecolor, width, nomes) {
-	    console.error("Removido na versao 8");
-	},
-	listaHierarquiaRegioes : function(funcao, codigo_tipo_regiao, codigoregiaopai, valorregiaopai) {
-	    console.error("Veja i3GEO.catalogoRegioes.getRegionsTree");
-	},
-	aplicaFiltroRegiao : function(funcao, codigo_tipo_regiao, codigo_regiao) {
-	    console.error("Removido na versao 8");
-	},
-	listaCamadasMetaestat : function(funcao) {
-	    console.error("Removido na versao 8");
-	},
-	listaGruposMapaMetaestat : function(funcao, id_mapa) {
-	    console.error("Removido na versao 8");
-	},
-	listaTemasMapaMetaestat : function(funcao, id_mapa_grupo) {
-	    console.error("Removido na versao 8");
 	},
 	marcadores2shp : function(funcao) {
 	    console.error("Removido na versao 8");
