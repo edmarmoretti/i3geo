@@ -22,7 +22,6 @@
 		"../pacotes/jquery/jquery-ui/jquery-ui.min.js",
 		"../pacotes/bootstrap/js/bootstrap.min.js",
 		"../pacotes/bootstrap-material-design/dist/js/material.min.js",
-		"../pacotes/nouislider/nouislider.min.js",
 		"../pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js",
 		"../pacotes/pickr/pickr.min.js",
 		"ini_i3geo.js",
