@@ -2,7 +2,6 @@
 <link rel="stylesheet" type="text/css" href="<?php echo $configInc["pathcss"];?>/pacotes/bootstrap/css/bootstrap.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo $configInc["pathcss"];?>/pacotes/bootstrap-material-design/dist/css/bootstrap-material-design.min.css">
 <!-- botao do tipo slider -->
-<link rel="stylesheet" href="<?php echo $configInc["pathcss"];?>/pacotes/nouislider/nouislider.min.css">
 <link rel="stylesheet" type="text/css" href="<?php echo $configInc["pathcss"];?>/css/default.css?<?php echo $configInc["nocache"];?>">
 <link href="<?php echo $configInc["pathcss"];?>/pacotes/bootstrap-tour/build/css/bootstrap-tour.css" rel="stylesheet">
 <!-- para caixas de listagens dinamicas -->
