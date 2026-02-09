@@ -570,7 +570,7 @@ class Alteraclasse
         }
         $valores = $this->pegaValores($this->mapa, $this->layer, $item, true, $ignorar);
         if (count($valores) > 0) {
-            include (dirname(__FILE__) . "/../pacotes/jenks-master/jenks.php");
+            include (dirname(__FILE__) . "/../pacotes/jenks/jenks.php");
             $classBreaks = getJenksClasses($nclasses, $valores);
             // echo "<pre>";var_dump($classBreaks);exit;
             $numclassesatual = $this->layer->numclasses;

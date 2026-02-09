@@ -1290,7 +1290,7 @@ function nomeRand($n=10)
 	$max = 51;
 	for($i=0; $i < $n; ++$i)
 	{
-		$nomes .= $a{mt_rand(0, $max)};
+		$nomes .= $a[mt_rand(0, $max)];
 	}
 	return $nomes;
 }
