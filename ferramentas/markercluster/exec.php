@@ -15,6 +15,8 @@ switch (strtoupper($_GET["funcao"]))
         $novolayer->setmetadata("tema",$_GET["titulo"]);
         $novolayer->updateFromString('LAYER COMPOSITE OPACITY '.$_GET["opacidade"].'END END');
         $novolayer->set("group","");
+        $novolayer->set("status", MS_DEFAULT);
+        $novolayer->set("template", "none.htm");
         $map->save($_SESSION["map_file"]);
         $retorno = $nameLayer;
     break;
