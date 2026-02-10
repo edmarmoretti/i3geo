@@ -108,7 +108,7 @@ class Analise {
 		}
 		$this->v = versao ();
 		$this->v = $this->v ["principal"];
-		$this->dbaseExiste = true;
+		$this->dbaseExiste = false;
 		if (function_exists ( "dbase_create" )) {
 			$this->dbaseExiste = true;
 		}
@@ -571,9 +571,9 @@ class Analise {
 			$listaShapes = retornaShapesSelecionados ( $this->layer, $this->arquivo, $this->mapa );
 		} else {
 			$s = ms_shapeObjFromWkt ( $wkt );
-			$s->values ["ID"] = 0;
-			$items [] = "ID";
-			$listaShapes [] = $s;
+			$s->values["ID"] = 0;
+			$items[] = "ID";
+			$listaShapes[] = $s;
 		}
 		foreach ( $listaShapes as $shape ) {
 			// calcula a extens&atilde;o geografica

@@ -2,8 +2,8 @@
 if($_SERVER['SCRIPT_FILENAME'] == __FILE__){
     exit;
 }
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 //verifica se o pai esta na mesma pasta
 if (!strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
