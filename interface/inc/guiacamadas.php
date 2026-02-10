@@ -18,6 +18,14 @@ if(isset($i3geoBlFerramentas) && in_array("salvamapa",$i3geoBlFerramentas)){
     }
     echo "<script>console.warn('salvamapa ================== Bloqueado ==================');</script>";
 }
+$imprimir = "";
+if(isset($i3geoBlFerramentas) && in_array("imprimir",$i3geoBlFerramentas)){
+    $imprimir = " style='display:none' ";
+    if($_SERVER["HTTP_HOST"] === "localhost"){
+        $imprimir = " style='background-color:red' ";
+    }
+    echo "<script>console.warn('imprimir ================== Bloqueado ==================');</script>";
+}
 ?>
 <!-- camadas existentes no mapa -->
 <div id='guia1obj' data-traduzir="true" style='display: none; height: 100%;'>
@@ -52,7 +60,7 @@ if(isset($i3geoBlFerramentas) && in_array("salvamapa",$i3geoBlFerramentas)){
                 <li><a onclick="i3GEO.mapa.dialogo.animacao()" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-film"></span> {{{p21}}}
                     </a></li>
-                <li><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)">
+                <li <?php echo $imprimir;?> ><a onclick="i3GEO.mapa.dialogo.imprimir()" href="javascript:void(0)">
                         <span class="glyphicon glyphicon-print"></span> {{{d12}}}
                     </a></li>
                 <li><a onclick="i3GEO.mapa.limpasel({verifica:true})" href="javascript:void(0)">

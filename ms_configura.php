@@ -290,7 +290,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,inse
 inseretxt,mostraexten,outputformat,perfil
 
 */
-$i3geoBlFerramentas = array("upload","uploaddbf","uploadgpx","uploadkml","uploadshp","salvamapa","carregamapa");
+$i3geoBlFerramentas = array("imprimir","upload","uploaddbf","uploadgpx","uploadkml","uploadshp","salvamapa","carregamapa");
 /*
 Variable: $ogrOutput
 
