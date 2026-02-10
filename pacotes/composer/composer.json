@@ -1,5 +1,0 @@
-{
-    "require": {
-        "defuse/php-encryption": "^2.1"
-    }
-}
