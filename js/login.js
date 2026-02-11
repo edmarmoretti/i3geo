@@ -55,7 +55,7 @@ i3GEO.login = {
 	 *
 	 * i3GEONomeLogin
 	 */
-	divnomelogin : "i3GEONomeLogin",
+	divnomelogin: "i3GEONomeLogin",
 	/**
 	 * Propriedade: recarrega
 	 *
@@ -69,7 +69,7 @@ i3GEO.login = {
 	 *
 	 * false
 	 */
-	recarrega : false,
+	recarrega: false,
 	/**
 	 * Propriedade: funcaoLoginOk
 	 *
@@ -83,7 +83,7 @@ i3GEO.login = {
 	 *
 	 * null
 	 */
-	funcaoLoginOk : null,
+	funcaoLoginOk: null,
 	/**
 	 * Propriedade: funcaoLoginErro
 	 *
@@ -97,11 +97,11 @@ i3GEO.login = {
 	 *
 	 * null
 	 */
-	funcaoLoginErro : null,
+	funcaoLoginErro: null,
 	/**
 	 * Remove os cookies que guardam a informacao de login
 	 */
-	anulaCookie : function() {
+	anulaCookie: function () {
 		i3GEO.util.insereCookie(
 			"i3geocodigologin",
 			"",
@@ -126,7 +126,7 @@ i3GEO.login = {
 	 *
 	 * Boolean
 	 */
-	verificaCookieLogin : function() {
+	verificaCookieLogin: function () {
 		var a = i3GEO.util.pegaCookie("i3geocodigologin"), b = i3GEO.util.pegaCookie("i3geousuarionome");
 		if (a
 			&& b
@@ -152,13 +152,13 @@ i3GEO.login = {
 	 *
 	 * i3GEO.login.dialogo.abreLogout()
 	 */
-	dialogo : {
+	dialogo: {
 		/**
 		 * Function: abreLogin
 		 *
 		 * Abre a tela de login
 		 */
-		abreLogin : function(locaplic) {
+		abreLogin: function (locaplic) {
 			var js;
 			if (!locaplic || locaplic == "") {
 				locaplic = i3GEO.configura.locaplic;
@@ -169,7 +169,7 @@ i3GEO.login = {
 				i3GEO.util.scriptTag(
 					js,
 					"i3GEOF.loginusuario.start()",
-					"i3GEOF.loginusuario_script()");
+					"i3GEOF.loginusuario_script");
 			} else {
 				i3GEOF.loginusuario.start();
 			}
@@ -179,11 +179,11 @@ i3GEO.login = {
 		 *
 		 * Abre a tela de logout
 		 */
-		abreLogout : function() {
+		abreLogout: function () {
 			var r = confirm($trad("x26"));
 			if (r == true) {
 				i3GEO.login.anulaCookie();
-				if(i3GEO.janela){
+				if (i3GEO.janela) {
 					i3GEO.janela.destroi("i3GEOF.loginusuario");
 				}
 				if ($i(i3GEO.login.divnomelogin)) {
@@ -194,7 +194,7 @@ i3GEO.login = {
 				}
 				if (i3GEO.parametros) {
 					i3GEO.parametros.editor = "nao";
-					if(i3GEO.catalogoMenus){
+					if (i3GEO.catalogoMenus) {
 						i3GEO.catalogoMenus.listaMenus();
 					}
 				}

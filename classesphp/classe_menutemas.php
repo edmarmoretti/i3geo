@@ -64,14 +64,18 @@ $idioma - (opcional) pt|en|es|it
 	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt", $filtro="")
 	{
 		include(dirname(__FILE__)."/../ms_configura.php");
-		$this->postgis_mapa = $postgis_mapa;
+		$dbh = "";
+		include($locaplic."/classesphp/conexao.php");
 
+		$this->postgis_mapa = $postgis_mapa;
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->locaplic = $locaplic;
 		$this->urli3geo = $urli3geo;
 		$this->idioma = $idioma;
 		$this->filtro = $filtro;
+		$this->esquemaadmin = $esquemaadmin;
+		$this->dbh = $dbh;
 		if (($map_file != "") && (file_exists($map_file)))
 		{
 			$this->mapa = ms_newMapObj($map_file);
@@ -283,37 +287,55 @@ Array
 	function pegaSistemas()
 	{
 		//error_reporting(0);
-		include_once($this->locaplic."/classesphp/xml.php");
-		$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic));
+		//include_once($this->locaplic."/classesphp/xml.php");
+		//return geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic);
+		$q = "select * from ".$this->esquemaadmin."i3geoadmin_sistemas";
+		$qsis = $this->dbh->query($q);
 		$sistemas = array();
-		foreach($xmlsistemas->SISTEMA as $s)
+		while ($row = $qsis->fetch(PDO::FETCH_ASSOC))
 		{
-			$publicado = $this->ixml($s,"PUBLICADO");
-
+			$publicado = $row["publicado_sistema"];
 			if(strtolower($publicado) != "nao" || $this->editor)
 			{
-				$nomesis = $this->ixml($s,"NOMESIS");
-				$ps = $this->ixml($s,"PERFIL");
+				$nomesis = $row["nome_sistema"];
+				$ps = $row["perfil_sistema"];
 				$perfis = str_replace(","," ",$ps);
 				$perfis = explode(" ",$perfis);
+				$funcoes = $this->pegafuncoes($row["id_sistema"]);
 				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 				{
-					$funcoes = array();
-					foreach($s->FUNCAO as $f)
-					{
-						$n = $this->ixml($f,"NOMEFUNCAO");
-						$a = $this->ixml($f,"ABRIR");
-						$w = $this->ixml($f,"JANELAW");
-						$h = $this->ixml($f,"JANELAH");
-						$p = $this->ixml($f,"PERFIL");
-						if (($this->array_in_array($this->perfil,$perfis)) || ($p == ""))
-						{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
-					}
-					$sistemas[] =  array("PUBLICADO"=>$publicado,"NOME"=>$nomesis,"FUNCOES"=>$funcoes);
+					$sistemas[] = array("PUBLICADO"=>$publicado,"NOME"=>$nomesis,"TARGET"=>($row["target_sistema"]),"ABRIR"=>($row["abrir_sistema"]),"FUNCOES"=>$funcoes);
 				}
 			}
 		}
 		return $sistemas;
+	}
+	function pegafuncoes($id_sistema)
+	{
+		$q = "select * from ".$this->esquemaadmin."i3geoadmin_sistemasf where id_sistema = '$id_sistema'";
+		$qfun = $this->dbh->query($q);
+		$funcoes = array();
+		foreach($qfun as $row)
+		{
+			if($row["perfil_funcao"] == "")
+			$mostra = true;
+			else
+			{
+				$perfilF = explode(" ",str_replace(","," ",$row["perfil_funcao"]));
+				$mostra = $this->array_in_array($this->perfil,$perfilF);
+			}
+			if($mostra)
+			{
+				$funcoes[] = array(
+					"NOME"=>$row["nome_funcao"],
+					"ABRIR"=>$row["abrir_funcao"],
+					"wW"=>$row["w_funcao"],
+					"H"=>$row["h_funcao"],
+					"PERFIL"=>$row["perfil_funcao"]
+				);
+			}
+		}
+		return $funcoes;
 	}
 /*
 function: pegaSistemasI

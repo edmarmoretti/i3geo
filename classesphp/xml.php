@@ -79,6 +79,7 @@ function geraXmlSistemas($perfil="",$locaplic="",$editores="")
 	$xml .= "\n<SISTEMAS>\n";
 	$q = "select * from ".$esquemaadmin."i3geoadmin_sistemas";
 	$qsis = $dbh->query($q);
+	$sistemas = array();
 	foreach($qsis as $row)
 	{
 		if($row["perfil_sistema"] == "")
@@ -100,12 +101,21 @@ function geraXmlSistemas($perfil="",$locaplic="",$editores="")
 			$xml .= " <NOMESIS>".xmlTexto_prepara($row["nome_sistema"])."</NOMESIS>\n";
 			$xml = geraXmlSistemas_pegafuncoes($perfil,$xml,$row["id_sistema"],$dbh);
 			$xml .= "</SISTEMA>\n";
+			$funcoesSistema = geraXmlSistemas_pegafuncoes($perfil,$xml,$row["id_sistema"],$dbh);
+			$sistemas[] = array(
+				"perfil"=>$row["perfil_sistema"],
+				"publicado"=>$row["publicado_sistema"],
+				"nome"=>$row["nome_sistema"],
+				"id"=>$row["id_sistema"],
+				"funcoes"=>$funcoesSistema
+			);
 		}
 	}
 	$xml .= "</SISTEMAS>\n";
 	$dbh = null;
 	$dbhw = null;
-	return $xml;
+	//var_dump($sistemas);exit;
+	return $sistemas;
 }
 /*
 Function: geraRSStemas
@@ -134,35 +144,7 @@ function geraRSStemas($locaplic,$id_n2,$output="xml")
 		where i3geousr_grupotema.id_grupo is null and i3geoadmin_temas.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' and n3.publicado != 'NAO' order by nome_ws";
 	return geraXmlRSS($locaplic,$sql,"Lista de temas",$output);
 }
-/*
-Function: geraRSStemasRaiz
 
-RSS com os temas localizados na raiz de um n&iacute;vel
-
-Parametros:
-
-locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
-
-id {string} - codigo do no
-
-nivel {string} - n&iacute;vel do no
-
-Retorno:
-
-RSS
-*/
-function geraRSStemasRaiz($locaplic,$id,$nivel)
-{
-	global $esquemaadmin;
-	xml_testaNum([$id,$nivel]);
-	$sql = "
-	select '' as tipo_ws, i3geoadmin_temas.codigo_tema as id_ws,i3geoadmin_temas.nome_tema as nome_ws,'' as desc_ws,'../ms_criamapa.php?layers='||i3geoadmin_temas.codigo_tema as link_ws,i3geoadmin_temas.link_tema as autor_ws
-	from ".$esquemaadmin."i3geoadmin_raiz as r
-	LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = r.id_tema
-	LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON r.id_tema = i3geousr_grupotema.id_tema
-	where i3geousr_grupotema.id_grupo is null and i3geoadmin_temas.id_tema = r.id_tema and r.nivel = '$nivel' and r.id_nivel = '$id' order by nome_ws";
-	return geraXmlRSS($locaplic,$sql,"Temas na raiz");
-}
 /*
 Function: geraRSSsubgrupos
 
@@ -676,34 +658,7 @@ function geraXmlMenutemas_notema($qtemas,$xml,$perfil)
 	}
 	return $xml;
 }
-function geraXmlSistemas_pegafuncoes($perfil,$xml,$id_sistema,$dbh)
-{
-	global $esquemaadmin;
-	xml_testaNum([$id_sistema]);
-	$q = "select * from ".$esquemaadmin."i3geoadmin_sistemasf where id_sistema = '$id_sistema'";
-	$qtemas = $dbh->query($q);
-	foreach($qtemas as $row)
-	{
-		if($row["perfil_funcao"] == "")
-		$mostra = true;
-		else
-		{
-			$perfilF = explode(" ",str_replace(","," ",$row["perfil_funcao"]));
-			$mostra = array_in_array($perfil,$perfilF);
-		}
-		if($mostra)
-		{
-			$xml .= "<FUNCAO>\n";
-			$xml .= " <NOMEFUNCAO>".xmlTexto_prepara($row["nome_funcao"])."</NOMEFUNCAO>\n";
-			$xml .= " <ABRIR>".xmlTexto_prepara($row["abrir_funcao"])."</ABRIR>\n";
-			$xml .= " <JANELAW>".$row["w_funcao"]."</JANELAW>\n";
-			$xml .= " <JANELAH>".$row["h_funcao"]."</JANELAH>\n";
-			$xml .= " <PERFIL>".$row["perfil_funcao"]."</PERFIL>\n";
-			$xml .= "</FUNCAO>\n";
-		}
-	}
-	return $xml;
-}
+
 function array_in_array($needle, $haystack)
 {
 		//Make sure $needle is an array for foreach

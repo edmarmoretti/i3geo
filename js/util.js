@@ -1248,7 +1248,7 @@ i3GEO.util =
 		console.log("========= " + id);
 		//Obtem o identificador da ferramenta para ver se está bloqueada
 		var dir = id.replace("i3GEOF.", "").replace("_script", "");
-		if (i3GEO.parametros.i3geoBlFerramentas.lastIndexOf(dir) >= 0) {
+		if (i3GEO.parametros?.i3geoBlFerramentas?.lastIndexOf(dir) >= 0) {
 			console.warn(dir + " ================== Bloqueado ==================");
 			return;
 		}
