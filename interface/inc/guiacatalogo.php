@@ -107,14 +107,14 @@
             <div class="list-group condensed">
                 <div class="row-content text-left" style="opacity: 0.8;">
                     <label style="width: 300px; vertical-align: middle;">
-                        <a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
+                        <a onclick="i3GEO.catalogoWs.inicia()" role="button" href="javascript:void(0)">
                             <h4>
                                 <i class="material-icons" style="vertical-align: text-bottom;">cloud_queue</i> Webservices
                             </h4>
                         </a>
                         <h6>{{{descws}}}</h6>
                     </label>
-                    <a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="" href="javascript:void(0)">
+                    <a onclick="i3GEO.catalogoWs.inicia();return false;" role="button" class="" href="javascript:void(0)">
                         <i style="margin-bottom: 10px; margin-top: 10px;" class="pull-right material-icons">navigate_next</i>
                     </a>
                 </div>

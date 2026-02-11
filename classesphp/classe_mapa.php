@@ -263,7 +263,6 @@ class Mapa
             "escondido",
             "iconetema",
             "classe",
-            "permitecomentario",
             "exttema",
             "aplicaextensao",
             "transitioneffect",
@@ -400,11 +399,6 @@ class Mapa
                 if ($oLayer->getmetadata("transitioneffect") == "SIM") {
                     $transitioneffect = "sim";
                 }
-                //
-                $permitecomentario = "nao";
-                if ($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("permitecomentario")) != "NAO") {
-                    $permitecomentario = "sim";
-                }
                 $aplicaextensao = "nao";
                 if (strtoupper($oLayer->getmetadata("aplicaextensao")) == "SIM") {
                     $aplicaextensao = "sim";
@@ -520,7 +514,6 @@ class Mapa
                     strtolower($escondido),
                     $oLayer->getmetadata("iconetema"),
                     $oLayer->getmetadata("classe"),
-                    $permitecomentario,
                     $exttema,
                     $aplicaextensao,
                     $transitioneffect,

@@ -1106,19 +1106,6 @@
 				"en": "It saves a layer configuration in its source mapfile.<br>This option is only enabled for users who are administrators. It allows you to modify a layer, for example, modifying the legend and saving changes in the original configuration of a layer.",
 				"apijs": "i3GEO.tema.dialogo.salvaMapfile()"
 			},
-			"93": {
-				"titulo": {
-					"pt": "Coment&aacute;rios",
-					"es": "Comentarios",
-					"en": "Comments"
-				},
-				"diretorio": "i3geo/ferramentas/comentarios",
-				"categoria": "5",
-				"pt": "Mostra os coment&aacute;rios existentes sobre o tema e permite ao usu&aacute;rio inserir novos.<br>Para entar com um coment&aacute;rio, o usu&aacute;rio precisa ser autenticado em alguma das redes sociais compat&iacute;veis com a rotina de login dispon&iacute;vel no i3Geo",
-				"es": "Muestra los comentarios existentes sobre el tema y permite al usuario insertar nuevos.<br>Para ingresar un comentario el usuario necesita estar registrado en alguna de las redes sociales compatibles con la rutina de inicio de sesi&oacute;n disponible en i3Geo",
-				"en": "It shows existing comments about a theme and allows the user to insert new ones.<br>In order to enter a comment, the user needs to be registered in any of the social networks compatible with the login routine available in i3Geo",
-				"apijs": "i3GEO.tema.dialogo.comentario()"
-			},
 			"94": {
 				"titulo": {
 					"pt": "Centro m&eacute;dio",

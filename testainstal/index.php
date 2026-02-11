@@ -321,7 +321,6 @@ $tabelas = array(
     "i3geoadmin_subgrupos" => "it,es,en,desc_subgrupo,id_subgrupo,nome_subgrupo",
     "i3geoadmin_temas" => "it,es,en,kmz_tema,id_tema,kml_tema,ogc_tema,download_tema,tags_tema,tipoa_tema,link_tema,desc_tema,nome_tema,codigo_tema",
     "i3geoadmin_menus" => "it,es,en,publicado_menu,perfil_menu,aberto,desc_menu,id_menu,nome_menu",
-    "i3geoadmin_comentarios" => "comentario,data,openidnome,openidimagem,openidservico,openidusuario,openidurl,id_tema",
     "i3geoadmin_acessostema" => "codigo_tema,nacessos,dia,mes,ano",
     "i3geoadmin_log" => "id_log,sql,serializedata,usuario,ip,timestamp,outros",
     "i3geousr_usuarios" => "id_usuario,ativo,data_cadastro,email,login,nome_usuario,senha",

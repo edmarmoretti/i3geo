@@ -495,31 +495,6 @@ i3GEO.tema =
             i3GEO.janela.mensagemSimples(i3GEO.configura.locaplic + "/ogc.php?tema=" + tema, "WMS url");
         },
         /**
-         * Function: comentario
-         *
-         * Abre a janela de dialogo para o usuario ver e inserir comentarios em um tema
-         *
-         * Parametros:
-         *
-         * {string} - codigo do tema escolhido
-         */
-        comentario: function (tema) {
-            i3GEO.janela
-                .cria(
-                    "530px",
-                    "330px",
-                    i3GEO.configura.locaplic + "/ferramentas/comentarios/index.php?tema=" + tema + "&g_sid=" + i3GEO.configura.sid
-                    + "&locaplic=" + i3GEO.configura.locaplic,
-                    "",
-                    "",
-                    "<img src='"
-                    + i3GEO.configura.locaplic
-                    + "/imagens/player_volta.png' style=cursor:pointer onclick='javascript:history.go(-1)'><span style=position:relative;top:-2px; > "
-                    + $trad("x19") + " " + tema + "</span><a class=ajuda_usuario target=_blank href='" + i3GEO.configura.locaplic
-                    + "/ajuda_usuario.php?idcategoria=7&idajuda=68' ><b> </b></a>",
-                    "comentario" + Math.random());
-        },
-        /**
          * Function: mmscale
          *
          * Abre a janela de dialogo que permite definir o comportamento do mapa em fun&ccedil;&atilde;o da escala

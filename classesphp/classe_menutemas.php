@@ -369,7 +369,31 @@ Array
 		}
 		return $sistemas;
 	}
-/*
+
+	function pegaListaDeWebservices()
+	{
+		$q = "select * from ".$this->esquemaadmin."i3geoadmin_ws where nome_ws <> ''";
+		$qw = $this->dbh->query($q);
+		$webservices = array();
+		while ($row = $qw->fetch(PDO::FETCH_ASSOC))
+		{
+			$publicado = $row["publicado_ws"];
+			if(strtolower($publicado) != "nao" || $this->editor)
+			{
+				$webservices[] = array(
+					"nome"=>$row["nome_ws"],
+					"descricao"=>$row["desc_ws"],
+					"link"=>$row["link_ws"],
+					"author"=>$row["autor_ws"],
+					"id_ws"=>$row["id_ws"],
+					"tipo_ws"=>$row["tipo_ws"]
+				);
+			}
+		}
+		return $webservices;
+	}
+
+	/*
 function: procurartemas
 
 Procura um tema no menu de temas considerando apenas os subgrupos.
