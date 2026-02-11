@@ -67,14 +67,6 @@ include "../init/head.php";
                 <a class="navbar-brand" href="../init/index.php?home="><span class="material-icons md-18">home</span> <?php echo $mensagemInicia;?>
                 </a>
             </div>
-            <ul class="nav navbar-nav sr-only">
-                <li><a title="RSS" href="../rss/rssmapas.php">
-                        <i class="material-icons ">rss_feed</i>
-                    </a></li>
-                <li><a title="JSON" href="../rss/rssmapas.php?output=json">
-                        <i class="material-icons ">code</i>
-                    </a></li>
-            </ul>
         </div>
     </nav>
     <div class="container-fluid migalha">
@@ -93,10 +85,6 @@ include "../init/head.php";
             <div class="col-md-12">
                 <div class="well hidden escondido">
                     <blockquote id="titulo"></blockquote>
-
-                    <a title="RSS" href="../rss/rssmapas.php" target="_blank" class="btn btn-danger btn-fab btn-fab-mini pull-right" role="button">
-                        <i class="material-icons md-18">rss_feed</i>
-                    </a>
                     <span>&nbsp;&nbsp;</span>
                 </div>
             </div>

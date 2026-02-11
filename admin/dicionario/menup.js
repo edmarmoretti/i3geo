@@ -85,11 +85,6 @@ i3GEOadmin.menup.dicionario = {
 		en: "Database manager. Uploading of SHP and CSV files to Postgis storage",
 		es: "Administrador de bases de datos. Carga de SHP y CSV para el almacenamiento en Postgis"
 	}],
-	'verRss': [{
-		pt: "RSS com a lista de mapas cadastrados",
-		en: "RSS with the list of registered maps",
-		es: "RSS con la lista de mapas registrados"
-	}],
 	'enviarArquivo': [{
 		pt: "Upload",
 		en: "Upload",
@@ -120,21 +115,6 @@ i3GEOadmin.menup.dicionario = {
 		en: "Theme tree",
 		es: "&Aacute;rbol de temas"
 	}],
-	'rssArvore': [{
-		pt: "RSS com os grupos, subgrupos e temas",
-		en: "RSS with groups, subgroups and themes",
-		es: "RSS con grupos, subgrupos y temas"
-	}],
-	'rssArvoreJson': [{
-		pt: "JSON com os grupos, subgrupos e temas",
-		en: "JSON with groups, subgroups and themes",
-		es: "JSON con grupos, subgrupos y temas"
-	}],
-	'rssComentarios': [{
-		pt: "RSS com os coment&aacute;rios sobre os temas",
-		en: "RSS with comments about themes",
-		es: "RSS con los comentarios sobre los temas"
-	}],
 	'linkMapas': [{
 		pt: "Mapas",
 		en: "Maps",
@@ -154,16 +134,6 @@ i3GEOadmin.menup.dicionario = {
 		pt: "XML com a lista de mapas",
 		en: "XML with the map list",
 		es: "XML con la lista de mapas"
-	}],
-	'rssMapas': [{
-		pt: "RSS com a lista de mapas",
-		en: "RSS with the map list",
-		es: "RSS con la lista de mapas"
-	}],
-	'rssMapasJson': [{
-		pt: "RSS com a lista de mapas (JSON)",
-		en: "RSS with the map list (RSS)",
-		es: "RSS con la lista de mapas (JSON)"
 	}],
 	'editaMenus': [{
 		pt: "Edi&ccedil;&atilde;o dos menus de adi&ccedil;&atilde;o de temas",
@@ -204,11 +174,6 @@ i3GEOadmin.menup.dicionario = {
 		pt: "Edi&ccedil;&atilde;o do cadastro",
 		en: "Register editing",
 		es: "Edici&oacute;n del registro"
-	}],
-	'xmlWebServ': [{
-		pt: "RSS com a lista de servi&ccedil;os WS (webservices convencionais)",
-		en: "RSS with list of WS services (tradition webservices)",
-		es: "RSS con la lista de servicios WS (webservices convencionales)"
 	}],
 	'sistIdentifica': [{
 		pt: "Sistemas especiais de identifica&ccedil;&atilde;o",

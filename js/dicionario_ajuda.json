@@ -326,19 +326,6 @@
 				"en": "A WMS connection allows data available on other servers to be included as layers in i3Geo. A list of previously registered addresses is displayed in the connection tool, but any other address can be entered, provided it is a service in WMS standard. Once a service is selected, the available layer list is displayed in the 'Included layers' tab.<br>Layers obtained through the WMS connection do not allow to execute some operations available in i3Geo, such as legend modification, selection, and so on. When a server has issues a layer cannot be added.",
 				"apijs": "i3GEO.arvoreDeTemas.dialogo.conectaservico()"
 			},
-			"29": {
-				"titulo": {
-					"pt": "Conex&atilde;o GeoRSS",
-					"es": "Conexi&oacute;n GeoRSS",
-					"en": "GeoRSS connection"
-				},
-				"diretorio": "i3geo/ferramentas/conectargeorss",
-				"categoria": "4",
-				"pt": "Uma conex&atilde;o GeoRSS permite obter a localiza&ccedil;&atilde;o de conte&uacute;dos dispon&iacute;veis no formato RSS com coordenadas geogr&aacute;ficas inclu&iacute;das. Na ferramenta de conex&atilde;o &eacute; mostrada uma lista de endere&ccedil;os previamente cadastrados, mas pode-se digitar um outro endere&ccedil;o qualquer, desde que seja um servi&ccedil;o no padr&atilde;o GeoRSS.<br>A camada adicionada ao mapa baseia-se em um arquivo shapefile criado temporariamente pelo i3Geo. Caso o servi&ccedil;o GeoRSS sofra altera&ccedil;&otilde;es, como a inclus&atilde;o de um novo item, &eacute; necess&aacute;rio fazer novamente a conex&atilde;o para que a camada reflita a altera&ccedil;&atilde;o.",
-				"es": "Una conexi&oacute;n GeoRSS permite obtener la ubicaci&oacute;n de contenidos disponibles en formato RSS con coordenadas geogr&aacute;ficas incluidas. En la herramienta de conexi&oacute;n se muestra una lista de direcciones previamente registradas, pero se puede escribir otra direcci&oacute;n cualquiera siempre que sea un servicio en el est&aacute;ndar GeoRSS.<br>La capa agregada al mapa se basa en un archivo shapefile creado temporalmente por  i3Geo. Si el servicio GeoRSS sufre cambios, como la inclusi&oacute;n de una entidad nueva, es necesario volver a establecer la conexi&oacute;n para que la capa refleje el cambio.",
-				"en": "A GeoRSS connection allows you to obtain locations of available contents in RSS format including their geographic coordinates. A list of previously registered addresses is displayed in the connection tool, but any other address can be entered whenever it is a service in GeoRSS standard.<br>The layer added to the map is a temporary shapefile created by i3Geo. If the GeoRSS service undergoes changes, such as the inclusion of a new feature, it is necessary to re-establish the connection so that changes are reflected by the layer.",
-				"apijs": "i3GEO.arvoreDeTemas.dialogo.conectaservico()"
-			},
 			"30": {
 				"titulo": {
 					"pt": "Nuvem de tags",

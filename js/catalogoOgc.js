@@ -340,10 +340,6 @@ i3GEO.catalogoOgc = {
             onclick: "i3GEO.catalogoOgc.kml()"
         }, {
             title: "",
-            text: "GeoRSS",
-            onclick: "i3GEO.catalogoOgc.georss()"
-        }, {
-            title: "",
             text: "GeoJson",
             onclick: "i3GEO.catalogoOgc.geojson()"
         }, {
@@ -381,12 +377,6 @@ i3GEO.catalogoOgc = {
             + "/ferramentas/conectargeojson/dependencias.php",
             "i3GEOF.conectargeojson.start()",
             "i3GEOF.conectargeojson_script");
-    },
-    georss: function () {
-        i3GEO.util.scriptTag(i3GEO.configura.locaplic
-            + "/ferramentas/conectargeorss/dependencias.php",
-            "i3GEOF.conectargeorss.start()",
-            "i3GEOF.conectargeorss_script");
     },
     wmst: function () {
         i3GEO.util.scriptTag(i3GEO.configura.locaplic

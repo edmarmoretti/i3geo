@@ -286,9 +286,6 @@ Array
 */
 	function pegaSistemas()
 	{
-		//error_reporting(0);
-		//include_once($this->locaplic."/classesphp/xml.php");
-		//return geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic);
 		$q = "select * from ".$this->esquemaadmin."i3geoadmin_sistemas";
 		$qsis = $this->dbh->query($q);
 		$sistemas = array();
