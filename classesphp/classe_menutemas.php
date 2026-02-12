@@ -233,46 +233,47 @@ array
 */
 	function pegaListaDeMapas($locmapas,$id_mapa="")
 	{
-		//necess&aacute;rio por conta da inclusao do conexao.php
-		$locaplic = $this->locaplic;
-		$perfilgeral = implode(" ",$this->perfil);
-		if($locmapas != "")	{
-		    $this->xml = simplexml_load_file($locmapas);
+
+		$q = "select * from ".$this->esquemaadmin."i3geoadmin_mapas";
+		if($id_mapa != ""){
+			$q .= " where id_mapa = '$id_mapa'";
 		}
-		else{
-			include_once($this->locaplic."/classesphp/xml.php");
-			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic));
-		}
-		//print_r($this->xml);exit;
+		$qmapas = $this->dbh->query($q);
 		$mapas = array();
-		//pega os mapas checando os perfis
-		foreach($this->xml->MAPA as $s){
-			$ps = $this->ixml($s,"PERFIL");
-			$perfis = str_replace(","," ",$ps);
-			$perfis = explode(" ",$perfis);
-			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == "")){
-				$n = $this->ixml($s,"NOME");
-				$i = $this->ixml($s,"IMAGEM");
-				$t = $this->ixml($s,"TEMAS");
-				$l = $this->ixml($s,"LIGADOS");
-				$e = $this->ixml($s,"EXTENSAO");
-				$o = $this->ixml($s,"OUTROS");
-				$k = $this->ixml($s,"LINKDIRETO");
-				$p = $this->ixml($s,"PUBLICADO");
-				$m = $this->ixml($s,"CONTEMMAPFILE");
-				$id = $this->ixml($s,"ID_MAPA");
-				$dm = $this->ixml($s,"DESCRICAO");
-				//echo $p;
-				if($id_mapa != "" && $id == $id_mapa && strtoupper($p) != "NAO"){
-				    return array("mapas"=>array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m,"DESCRICAO"=>$dm));
-				}
-				if($id_mapa == "" && strtoupper($p) != "NAO"){
-				    $mapas[] =  array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m,"DESCRICAO"=>$dm);
+		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+		$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("classesphp/classe_menutemas","",__FILE__)));
+		while ($row = $qmapas->fetch(PDO::FETCH_ASSOC))
+		{
+			$publicado = strtolower($row["publicado_mapa"]);
+			if($publicado != "nao" || $this->editor)
+			{
+				$ps = $row["perfil_mapa"];
+				$perfis = str_replace(","," ",$ps);
+				$perfis = explode(" ",$perfis);
+				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
+				{
+			    	$linkdireto = $row["linkdireto_mapa"];
+					if(empty($linkdireto)){
+						$linkdireto = $url."/ms_criamapa.php?mapext=".$row["extensao_mapa"]."&perfil=".$this->perfil."&temasa=".$row["temas_mapa"]."&layers=".$row["ligados_mapa"].$row["outros_mapa"];
+					}
+					$mapas[] =  array(
+						"ID_MAPA"=>$row["id_mapa"],
+						"PUBLICADO"=>$row["publicado_mapa"],
+						"NOME"=>$row["nome_mapa"],
+						"IMAGEM"=>$row["imagem_mapa"],
+						"TEMAS"=>$row["temas_mapa"],
+						"LIGADOS"=>$row["ligados_mapa"],"EXTENSAO"=>$row["extensao_mapa"],
+						"OUTROS"=>$row["outros_mapa"],
+						"LINKDIRETO"=>$linkdireto,
+						"CONTEMMAPFILE"=>$row["mapfile"] != "" ? "sim" : "nao",
+						"DESCRICAO"=>$row["descricao_mapa"]
+					);
 				}
 			}
 		}
 		return (array("mapas"=>$mapas));
 	}
+
 /*
 function: pegaSistemas
 

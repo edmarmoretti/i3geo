@@ -79,78 +79,6 @@ function geraXmlSistemas($perfil="",$locaplic="",$editores="")
 	return $sistemas;
 }
 /*
-Function: geraRSStemas
-
-RSS com os temas cadastrados
-
-Parametros:
-
-locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
-
-id_n2 {string} - c�digo do subgrupo do sistema de administra&ccedil;&atilde;o
-
-Retorno:
-
-RSS
-*/
-function geraRSStemas($locaplic,$id_n2,$output="xml")
-{
-	global $esquemaadmin;
-	xml_testaNum([$id_n2]);
-	$sql = "
-		select '' as tipo_ws, i3geoadmin_temas.codigo_tema as id_ws,i3geoadmin_temas.nome_tema as nome_ws,'' as desc_ws,'../ms_criamapa.php?layers='||i3geoadmin_temas.codigo_tema as link_ws,i3geoadmin_temas.link_tema as autor_ws
-		from ".$esquemaadmin."i3geoadmin_n3 as n3
-		LEFT JOIN ".$esquemaadmin."i3geoadmin_temas ON i3geoadmin_temas.id_tema = n3.id_tema
-		LEFT JOIN ".$esquemaadmin."i3geousr_grupotema ON n3.id_tema = i3geousr_grupotema.id_tema
-		where i3geousr_grupotema.id_grupo is null and i3geoadmin_temas.id_tema = n3.id_tema and n3.id_n2 = '$id_n2' and n3.n3_perfil = '' and n3.publicado != 'NAO' order by nome_ws";
-	return geraXmlRSS($locaplic,$sql,"Lista de temas",$output);
-}
-
-/*
-Function: geraRSSsubgrupos
-
-RSS com os subgrupos cadastrados
-
-Parametros:
-
-locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
-
-id_n1 {string} - c�digo do grupo do sistema de administra&ccedil;&atilde;o
-
-Retorno:
-
-RSS
-*/
-function geraRSSsubgrupos($locaplic,$id_n1,$output="json")
-{
-	global $esquemaadmin;
-	xml_testaNum([$id_n1]);
-	$sql = "select '' as tipo_ws, n2.id_n2 as id_ws,g.nome_subgrupo as nome_ws,'' as desc_ws,'rsstemas.php?id='||n2.id_n2 as link_ws,'' as autor_ws from ".$esquemaadmin."i3geoadmin_n2 as n2,".$esquemaadmin."i3geoadmin_subgrupos as g ";
-	$sql .= " where g.id_subgrupo = n2.id_subgrupo and n2.id_n1 = '$id_n1' and n2.n2_perfil = '' and n2.publicado != 'NAO' order by nome_ws";
-	return geraXmlRSS($locaplic,$sql,"Lista de sub-grupos",$output);
-}
-/*
-Function: geraRSSgrupos
-
-RSS com os grupos cadastrados
-
-Parametros:
-
-locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
-
-Retorno:
-
-RSS
-*/
-function geraRSSgrupos($locaplic,$output="xml")
-{
-	global $esquemaadmin;
-	$sql = "select '' as tipo_ws, n1.id_n1 as id_ws, g.nome_grupo as nome_ws,'rsstemasraiz.php?nivel=1&id='||n1.id_n1 as desc_ws,'rsssubgrupos.php?id='||n1.id_n1 as link_ws,'' as autor_ws ";
-	$sql .= "from ".$esquemaadmin."i3geoadmin_n1 as n1,".$esquemaadmin."i3geoadmin_grupos as g ";
-	$sql .= "where g.id_grupo = n1.id_grupo and n1.n1_perfil = '' and n1.publicado != 'NAO' group by id_ws,tipo_ws,nome_ws,desc_ws,link_ws,autor_ws order by nome_ws";
-	return geraXmlRSS($locaplic,$sql,"Lista de grupos",$output);
-}
-/*
 Function: geraXmlDownload
 
 RSS com os links para sistemas de download
@@ -231,25 +159,6 @@ function geraXmlARCGISREST($locaplic,$output)
     global $esquemaadmin;
     $sql = "select * from ".$esquemaadmin."i3geoadmin_ws where (tipo_ws = 'ARCGISREST') and nome_ws <> '' order by nome_ws";
     return geraXmlRSS($locaplic,$sql,"WMS ARCGIS (rest)",$output);
-}
-/*
-Function: geraXmlGeorss
-
-RSS com a lista de GEORSS cadastrados
-
-Parametros:
-
-locaplic {string} - localiza&ccedil;&atilde;o do i3Geo no sistema de arquivos
-
-Retorno:
-
-RSS
-*/
-function geraXmlGeorss($locaplic,$output)
-{
-	global $esquemaadmin;
-	$sql = "select * from ".$esquemaadmin."i3geoadmin_ws where tipo_ws = 'GEORSS' and nome_ws <> ''";
-	return geraXmlRSS($locaplic,$sql,"Georss",$output);
 }
 function geraXmlGeojson($locaplic,$output)
 {
@@ -389,100 +298,6 @@ function geraXmlIdentifica($perfil,$locaplic,$editores="")
 	$dbhw = null;
 	return $xml;
 }
-function geraXmlMapas($perfil,$locaplic,$editores="")
-{
-	global $esquemaadmin;
-	if (!isset($perfil)){$perfil = "";}
-	$perfil = str_replace(","," ",$perfil);
-	$perfil = explode(" ",$perfil);
-	$dbh = "";
-	include($locaplic."/classesphp/conexao.php");
-	if($convUTF)
-	$xml = "<"."\x3F"."xml version='1.0' encoding='UTF-8' "."\x3F".">";
-	else
-	$xml = "<"."\x3F"."xml version='1.0' encoding='ISO-8859-1' "."\x3F".">";
-	$xml .= "\n<MAPAS>\n";
-	$q = "select * from ".$esquemaadmin."i3geoadmin_mapas";
-	$q = $dbh->query($q);
-	$editor = "nao";//$editor = "nao";//verificaEditores($editores);
-	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$c = "/classesphp/xml.php";
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-		$c = "\classesphp\xml.php";
-	}
-	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace($c,"",__FILE__)));
-	foreach($q as $row)
-	{
-		$mostraMapa = false;
-		if($row["perfil_mapa"] == "")
-		{$mostraMapa = true;}
-		else
-		{
-			$perfilMapa = explode(" ",str_replace(","," ",$row["perfil_mapa"]));
-			$mostraMapa = array_in_array($perfil,$perfilMapa);
-		}
-		if(strtolower($row["publicado_mapa"] == "nao"))
-		{$mostraMapa = false;}
-		if($editor)
-		{$mostraMapa = true;}
-
-		if($mostraMapa)
-		{
-			$xml .= "<MAPA>\n";
-			$perfil = $row["perfil_mapa"];
-			$xml .= " <PERFIL>".$perfil."</PERFIL>\n";
-			$xml .= " <NOME>".xmlTexto_prepara($row["nome_mapa"])."</NOME>\n";
-			$xml .= " <DESCRICAO>".xmlTexto_prepara($row["desc_mapa"])."</DESCRICAO>\n";
-			$xml .= " <IMAGEM>".xmlTexto_prepara($row["imagem_mapa"])."</IMAGEM>\n";
-			$xml .= " <TEMAS>".$row["temas_mapa"]."</TEMAS>\n";
-			$xml .= " <LIGADOS>".$row["ligados_mapa"]."</LIGADOS>\n";
-			$extensao = $row["ext_mapa"];
-			$xml .= " <EXTENSAO>".$extensao."</EXTENSAO>\n";
-			$outros = xmlTexto_prepara($row["outros_mapa"]);
-			$xml .= " <OUTROS><![CDATA[".$outros."]]></OUTROS>\n";
-			$linkdireto = xmlTexto_prepara($row["linkdireto_mapa"]);
-			if(empty($linkdireto)){
-			    $linkdireto = $url."/ms_criamapa.php?mapext=".$extensao."&perfil=".$perfil."&temasa=".$row["temas_mapa"]."&layers=".$row["ligados_mapa"].$row["outros_mapa"];
-				$linkdireto = xmlTexto_prepara($linkdireto);
-			}
-			$xml .= " <LINKDIRETO><![CDATA[".$linkdireto."]]></LINKDIRETO>\n";
-			$xml .= " <PUBLICADO>".$row["publicado_mapa"]."</PUBLICADO>\n";
-			$xml .= " <ID_MAPA>".$row["id_mapa"]."</ID_MAPA>\n";
-			if($row["mapfile"] != ""){
-				$xml .= " <CONTEMMAPFILE>sim</CONTEMMAPFILE>\n";
-			}
-			else{
-				$xml .= " <CONTEMMAPFILE>nao</CONTEMMAPFILE>\n";
-			}
-			$xml .= "</MAPA>\n";
-		}
-	}
-	$xml .= "</MAPAS>\n";
-	$dbh = null;
-	$dbhw = null;
-	return $xml;
-}
-//mostra apenas os mapas que possuem outros_mapa definido, o que e tipico do sistema de metadados estatisticos
-function geraRSSmapas($locaplic,$output="xml")
-{
-	global $esquemaadmin;
-	$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
-	$c = "/classesphp/xml.php";
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-		$c = "\classesphp\xml.php";
-	}
-	$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace($c,"",__FILE__)));
-	$descricao = "'<![CDATA[Outros links<br>";
-	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||'&fundo=e_wsm >Openlayers 1</a><br><br>";
-	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||'&fundo= >Openlayers 2</a><br><br>";
-	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||'&fundo=e_wsm&botoes=legenda pan zoombox zoomtot zoomin zoomout distancia area identifica >Openlayers 3</a><br><br>";
-	$descricao .= "<a href=$url/mashups/openlayers.php?restauramapa='||id_mapa||' >Openlayers 4</a><br><br>";
-	$descricao .= "<img src=$url/ferramentas/salvamapa/geraminiatura.php?w=300&h=300&restauramapa='||id_mapa||' >]]>'";
-	$sql = "select '' as tipo_ws,'".$url."/ms_criamapa.php?restauramapa='||id_mapa as link_ws, nome_mapa as nome_ws, ".$descricao." as desc_ws, '' as autor_ws from ".$esquemaadmin."i3geoadmin_mapas WHERE publicado_mapa = 'sim' AND mapfile != ''";
-	//echo $sql;exit;
-	return geraXmlRSS($locaplic,$sql,"Mapas cadastrados",$output);
-}
-
 //
 //$id_menu = id do menu que ser&aacute; montado
 //$perfil = perfis separados por espa&ccedil;os
