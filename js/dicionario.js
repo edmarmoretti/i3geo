@@ -1657,13 +1657,6 @@ g_traducao =
             es: "Nombre no definido"
         }
     ],
-    "x19": [
-        {
-            pt: "Coment&aacute;rios de",
-            en: "Reviews of",
-            es: "Comentarios de"
-        }
-    ],
     "x20": [
         {
             pt: "Clique no mapa para desenhar o pol&iacute;gono",

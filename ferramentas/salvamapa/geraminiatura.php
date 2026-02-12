@@ -9,7 +9,8 @@
  */
 include_once (dirname(__FILE__)."/../../ms_configura.php");
 include(dirname(__FILE__)."/../blacklist.php");
-verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
+//utilizado na lista de mapas. Não pode bloquear
+//verificaBlFerramentas(basename(dirname(__FILE__)),$i3geoBlFerramentas,false);
 include_once (dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 
 if (filter_var($_GET["restauramapa"], FILTER_VALIDATE_INT) === false){

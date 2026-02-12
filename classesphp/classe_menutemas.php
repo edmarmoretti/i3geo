@@ -64,14 +64,18 @@ $idioma - (opcional) pt|en|es|it
 	function __construct($map_file="",$perfil="",$locaplic="",$urli3geo="",$editores="",$idioma="pt", $filtro="")
 	{
 		include(dirname(__FILE__)."/../ms_configura.php");
-		$this->postgis_mapa = $postgis_mapa;
+		$dbh = "";
+		include($locaplic."/classesphp/conexao.php");
 
+		$this->postgis_mapa = $postgis_mapa;
 		$perfil = str_replace(" ",",",$perfil);
 		$this->perfil = explode(",",$perfil);
 		$this->locaplic = $locaplic;
 		$this->urli3geo = $urli3geo;
 		$this->idioma = $idioma;
 		$this->filtro = $filtro;
+		$this->esquemaadmin = $esquemaadmin;
+		$this->dbh = $dbh;
 		if (($map_file != "") && (file_exists($map_file)))
 		{
 			$this->mapa = ms_newMapObj($map_file);
@@ -229,46 +233,47 @@ array
 */
 	function pegaListaDeMapas($locmapas,$id_mapa="")
 	{
-		//necess&aacute;rio por conta da inclusao do conexao.php
-		$locaplic = $this->locaplic;
-		$perfilgeral = implode(" ",$this->perfil);
-		if($locmapas != "")	{
-		    $this->xml = simplexml_load_file($locmapas);
+
+		$q = "select * from ".$this->esquemaadmin."i3geoadmin_mapas";
+		if($id_mapa != ""){
+			$q .= " where id_mapa = '$id_mapa'";
 		}
-		else{
-			include_once($this->locaplic."/classesphp/xml.php");
-			$this->xml = simplexml_load_string(geraXmlMapas(implode(" ",$this->perfil),$this->locaplic));
-		}
-		//print_r($this->xml);exit;
+		$qmapas = $this->dbh->query($q);
 		$mapas = array();
-		//pega os mapas checando os perfis
-		foreach($this->xml->MAPA as $s){
-			$ps = $this->ixml($s,"PERFIL");
-			$perfis = str_replace(","," ",$ps);
-			$perfis = explode(" ",$perfis);
-			if (($this->array_in_array($this->perfil,$perfis)) || ($ps == "")){
-				$n = $this->ixml($s,"NOME");
-				$i = $this->ixml($s,"IMAGEM");
-				$t = $this->ixml($s,"TEMAS");
-				$l = $this->ixml($s,"LIGADOS");
-				$e = $this->ixml($s,"EXTENSAO");
-				$o = $this->ixml($s,"OUTROS");
-				$k = $this->ixml($s,"LINKDIRETO");
-				$p = $this->ixml($s,"PUBLICADO");
-				$m = $this->ixml($s,"CONTEMMAPFILE");
-				$id = $this->ixml($s,"ID_MAPA");
-				$dm = $this->ixml($s,"DESCRICAO");
-				//echo $p;
-				if($id_mapa != "" && $id == $id_mapa && strtoupper($p) != "NAO"){
-				    return array("mapas"=>array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m,"DESCRICAO"=>$dm));
-				}
-				if($id_mapa == "" && strtoupper($p) != "NAO"){
-				    $mapas[] =  array("ID_MAPA"=>$id,"PUBLICADO"=>$p,"NOME"=>$n,"IMAGEM"=>$i,"TEMAS"=>$t,"LIGADOS"=>$l,"EXTENSAO"=>$e,"OUTROS"=>$o,"LINK"=>$k,"CONTEMMAPFILE"=>$m,"DESCRICAO"=>$dm);
+		$protocolo = explode("/",$_SERVER['SERVER_PROTOCOL']);
+		$url = strtolower($protocolo[0])."://".$_SERVER['HTTP_HOST']."/".(basename(str_replace("classesphp/classe_menutemas","",__FILE__)));
+		while ($row = $qmapas->fetch(PDO::FETCH_ASSOC))
+		{
+			$publicado = strtolower($row["publicado_mapa"]);
+			if($publicado != "nao" || $this->editor)
+			{
+				$ps = $row["perfil_mapa"];
+				$perfis = str_replace(","," ",$ps);
+				$perfis = explode(" ",$perfis);
+				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
+				{
+			    	$linkdireto = $row["linkdireto_mapa"];
+					if(empty($linkdireto)){
+						$linkdireto = $url."/ms_criamapa.php?mapext=".$row["extensao_mapa"]."&perfil=".$this->perfil."&temasa=".$row["temas_mapa"]."&layers=".$row["ligados_mapa"].$row["outros_mapa"];
+					}
+					$mapas[] =  array(
+						"ID_MAPA"=>$row["id_mapa"],
+						"PUBLICADO"=>$row["publicado_mapa"],
+						"NOME"=>$row["nome_mapa"],
+						"IMAGEM"=>$row["imagem_mapa"],
+						"TEMAS"=>$row["temas_mapa"],
+						"LIGADOS"=>$row["ligados_mapa"],"EXTENSAO"=>$row["extensao_mapa"],
+						"OUTROS"=>$row["outros_mapa"],
+						"LINKDIRETO"=>$linkdireto,
+						"CONTEMMAPFILE"=>$row["mapfile"] != "" ? "sim" : "nao",
+						"DESCRICAO"=>$row["descricao_mapa"]
+					);
 				}
 			}
 		}
 		return (array("mapas"=>$mapas));
 	}
+
 /*
 function: pegaSistemas
 
@@ -282,38 +287,53 @@ Array
 */
 	function pegaSistemas()
 	{
-		//error_reporting(0);
-		include_once($this->locaplic."/classesphp/xml.php");
-		$xmlsistemas = simplexml_load_string(geraXmlSistemas(implode(" ",$this->perfil),$this->locaplic));
+		$q = "select * from ".$this->esquemaadmin."i3geoadmin_sistemas";
+		$qsis = $this->dbh->query($q);
 		$sistemas = array();
-		foreach($xmlsistemas->SISTEMA as $s)
+		while ($row = $qsis->fetch(PDO::FETCH_ASSOC))
 		{
-			$publicado = $this->ixml($s,"PUBLICADO");
-
+			$publicado = $row["publicado_sistema"];
 			if(strtolower($publicado) != "nao" || $this->editor)
 			{
-				$nomesis = $this->ixml($s,"NOMESIS");
-				$ps = $this->ixml($s,"PERFIL");
+				$nomesis = $row["nome_sistema"];
+				$ps = $row["perfil_sistema"];
 				$perfis = str_replace(","," ",$ps);
 				$perfis = explode(" ",$perfis);
+				$funcoes = $this->pegafuncoes($row["id_sistema"]);
 				if (($this->array_in_array($this->perfil,$perfis)) || ($ps == ""))
 				{
-					$funcoes = array();
-					foreach($s->FUNCAO as $f)
-					{
-						$n = $this->ixml($f,"NOMEFUNCAO");
-						$a = $this->ixml($f,"ABRIR");
-						$w = $this->ixml($f,"JANELAW");
-						$h = $this->ixml($f,"JANELAH");
-						$p = $this->ixml($f,"PERFIL");
-						if (($this->array_in_array($this->perfil,$perfis)) || ($p == ""))
-						{$funcoes[] = array("NOME"=>$n,"ABRIR"=>$a,"W"=>$w,"H"=>$h);}
-					}
-					$sistemas[] =  array("PUBLICADO"=>$publicado,"NOME"=>$nomesis,"FUNCOES"=>$funcoes);
+					$sistemas[] = array("PUBLICADO"=>$publicado,"NOME"=>$nomesis,"TARGET"=>($row["target_sistema"]),"ABRIR"=>($row["abrir_sistema"]),"FUNCOES"=>$funcoes);
 				}
 			}
 		}
 		return $sistemas;
+	}
+	function pegafuncoes($id_sistema)
+	{
+		$q = "select * from ".$this->esquemaadmin."i3geoadmin_sistemasf where id_sistema = '$id_sistema'";
+		$qfun = $this->dbh->query($q);
+		$funcoes = array();
+		foreach($qfun as $row)
+		{
+			if($row["perfil_funcao"] == "")
+			$mostra = true;
+			else
+			{
+				$perfilF = explode(" ",str_replace(","," ",$row["perfil_funcao"]));
+				$mostra = $this->array_in_array($this->perfil,$perfilF);
+			}
+			if($mostra)
+			{
+				$funcoes[] = array(
+					"NOME"=>$row["nome_funcao"],
+					"ABRIR"=>$row["abrir_funcao"],
+					"wW"=>$row["w_funcao"],
+					"H"=>$row["h_funcao"],
+					"PERFIL"=>$row["perfil_funcao"]
+				);
+			}
+		}
+		return $funcoes;
 	}
 /*
 function: pegaSistemasI
@@ -350,7 +370,31 @@ Array
 		}
 		return $sistemas;
 	}
-/*
+
+	function pegaListaDeWebservices()
+	{
+		$q = "select * from ".$this->esquemaadmin."i3geoadmin_ws where nome_ws <> ''";
+		$qw = $this->dbh->query($q);
+		$webservices = array();
+		while ($row = $qw->fetch(PDO::FETCH_ASSOC))
+		{
+			$publicado = $row["publicado_ws"];
+			if(strtolower($publicado) != "nao" || $this->editor)
+			{
+				$webservices[] = array(
+					"nome"=>$row["nome_ws"],
+					"descricao"=>$row["desc_ws"],
+					"link"=>$row["link_ws"],
+					"author"=>$row["autor_ws"],
+					"id_ws"=>$row["id_ws"],
+					"tipo_ws"=>$row["tipo_ws"]
+				);
+			}
+		}
+		return $webservices;
+	}
+
+	/*
 function: procurartemas
 
 Procura um tema no menu de temas considerando apenas os subgrupos.

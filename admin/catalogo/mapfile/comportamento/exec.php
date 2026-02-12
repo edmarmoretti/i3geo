@@ -46,7 +46,7 @@ if (! empty($funcao)) {
 switch ($funcao) {
     case "ALTERAR":
         // quando e feita a listagem unica, o mapfile ja foi registrado no banco se nao tinha sido antes
-        $dados = \admin\catalogo\mapfile\comportamento\alterar($_SESSION["locaplic"], $id_tema, $codigo, $_POST["aplicaextensao"], $_POST["permitecomentario"], $_POST["temporizador"], $_POST["escondido"], $_POST["transitioneffect"], $_POST["status"], $_POST["iconetema"], $_POST["mensagem"], $_POST["wkttip"]);
+        $dados = \admin\catalogo\mapfile\comportamento\alterar($_SESSION["locaplic"], $id_tema, $codigo, $_POST["aplicaextensao"], $_POST["temporizador"], $_POST["escondido"], $_POST["transitioneffect"], $_POST["status"], $_POST["iconetema"], $_POST["mensagem"], $_POST["wkttip"]);
         if ($dados === false) {
             header("HTTP/1.1 500 erro ao alterar");
         }

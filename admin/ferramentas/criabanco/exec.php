@@ -42,7 +42,6 @@ include "index.php";
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_n1 (publicado TEXT, ordem NUMERIC, id_menu NUMERIC, id_grupo NUMERIC, id_n1 INTEGER PRIMARY KEY, n1_perfil TEXT)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_n2 (publicado TEXT, ordem NUMERIC, id_n1 NUMERIC, id_n2 INTEGER PRIMARY KEY, id_subgrupo NUMERIC, n2_perfil TEXT)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_n3 (publicado TEXT, ordem NUMERIC, id_n2 NUMERIC, id_n3 INTEGER PRIMARY KEY, id_tema NUMERIC, n3_perfil TEXT)",
-								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_comentarios (comentario TEXT, data TEXT, openidnome TEXT, openidimagem TEXT, openidservico TEXT, openidusuario TEXT, openidurl TEXT, id_tema NUMERIC)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_acessostema (codigo_tema TEXT, nacessos NUMERIC,dia NUMERIC, mes NUMERIC, ano NUMERIC)",
 								"CREATE TABLE " . $esquemaadmin . "i3geoadmin_log (id_log INTEGER PRIMARY KEY,sql TEXT,serializedata TEXT,usuario TEXT,ip TEXT,timestamp TEXT,outros TEXT)",
 								// tabelas do sistema de controle de usuarios

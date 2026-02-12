@@ -788,11 +788,11 @@ function ajuda()
                             <!-- lista de wms cadastrados no sistema de administracao -->
                             <div class="list-group condensed">
                                 <div class="row-content text-left">
-                                    <a onclick="i3GEO.catalogoOgc.inicia();return false;" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
+                                    <a onclick="i3GEO.catalogoWs.inicia();return false;" role="button" class="btn btn-primary btn-fab btn-fab-max" href="javascript:void(0)">
                                         <span class="material-icons ">folder_open</span>
                                     </a>
                                     <label style="width: 255px; vertical-align: middle;">
-                                        <a onclick="i3GEO.catalogoOgc.inicia()" role="button" href="javascript:void(0)">
+                                        <a onclick="i3GEO.catalogoWs.inicia()" role="button" href="javascript:void(0)">
                                             <h4>OGC-WMS</h4>
                                         </a>
                                         <h6>{{{descOgcWms}}}</h6>

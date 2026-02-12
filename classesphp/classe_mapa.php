@@ -263,7 +263,6 @@ class Mapa
             "escondido",
             "iconetema",
             "classe",
-            "permitecomentario",
             "exttema",
             "aplicaextensao",
             "transitioneffect",
@@ -400,11 +399,6 @@ class Mapa
                 if ($oLayer->getmetadata("transitioneffect") == "SIM") {
                     $transitioneffect = "sim";
                 }
-                //
-                $permitecomentario = "nao";
-                if ($oLayer->getmetadata("nomeoriginal") != "" && strtoupper($oLayer->getmetadata("permitecomentario")) != "NAO") {
-                    $permitecomentario = "sim";
-                }
                 $aplicaextensao = "nao";
                 if (strtoupper($oLayer->getmetadata("aplicaextensao")) == "SIM") {
                     $aplicaextensao = "sim";
@@ -520,7 +514,6 @@ class Mapa
                     strtolower($escondido),
                     $oLayer->getmetadata("iconetema"),
                     $oLayer->getmetadata("classe"),
-                    $permitecomentario,
                     $exttema,
                     $aplicaextensao,
                     $transitioneffect,
@@ -1533,7 +1526,7 @@ class Mapa
     /*
      * Method: adicionaTemaGeoJson
      *
-     * Adiciona um canal GeoRSS como um tema no mapa.
+     *
      *
      * Parametros:
      *
@@ -1590,213 +1583,6 @@ class Mapa
             $novolayer->set("template", "none.htm");
         }
         return "ok";
-    }
-
-    /*
-     * Method: adicionaTemaGeoRSS
-     *
-     * Adiciona um canal GeoRSS como um tema no mapa.
-     *
-     * Parametros:
-     *
-     * $servico - Endere&ccedil;o (url) do RSS.
-     * $dir_tmp - Diret&oacute;rio onde o arquivo ser&aacute; criado.
-     * $locaplic - Localiza&ccedil;&atilde;o do I3geo
-     * $canal - Identificador do canal (ordem em que est&aacute; no RSS)
-     */
-    function adicionaTemaGeoRSS($servico, $dir_tmp, $locaplic)
-    {
-        error_reporting(0);
-        $xml = simplexml_load_file($servico);
-        $resultado = array();
-        foreach ($xml->channel as $c) {
-            $canal = $c;
-            $nos = $canal->item;
-            // verifica se o canal faz referencia a elementos externos
-            // se sim, usa todos os elementos do xml no lugar do canal
-            foreach ($canal->items as $t) {
-                foreach ($t->xpath('rdf:Seq') as $x) {
-                    foreach ($x->xpath('rdf:li') as $z) {
-                        $nos = $xml->item;
-                    }
-                }
-            }
-            $tipog = "";
-            foreach ($nos as $item) {
-                $env = array();
-                // define o tipo
-                if ($item->xpath('geo:lat')) {
-                    $tipog = "geo";
-                }
-                if ($item->xpath('georss:point')) {
-                    $tipog = "georsspoint";
-                }
-                if ($item->xpath('georss:where')) {
-                    $tipog = "envelope";
-                }
-                if ($tipog == "envelope") {
-                    foreach ($item->xpath('georss:where') as $w) {
-                        foreach ($w->xpath('gml:Envelope') as $e) {
-                            // $lc = $e->xpath('gml:lowerCorner');
-                            $lc = (string) $e->children('gml', TRUE)->lowerCorner;
-                            // $uc = $e->xpath('gml:upperCorner');
-                            $uc = (string) $e->children('gml', TRUE)->upperCorner;
-                            $lc = explode(" ", $lc);
-                            $uc = explode(" ", $uc);
-                            if (is_numeric($lc[0])) {
-                                $ymin = $lc[0];
-                                $ymax = $uc[0];
-                                $xmin = $lc[1];
-                                $xmax = $uc[1];
-                                if ($ymin != "") {
-                                    $env = array(
-                                        $xmin,
-                                        $ymin,
-                                        $xmax,
-                                        $ymax
-                                    );
-                                }
-                            }
-                        }
-                    }
-                }
-                if ($tipog == "geo") {
-                    if ($item->xpath('geo:lon')) {
-                        $x = (string) $item->children('geo', TRUE)->lon;
-                    } else {
-                        $x = (string) $item->children('geo', TRUE)->long;
-                    }
-                    // $y = $item->xpath('geo:lat');
-                    $y = (string) $item->children('geo', TRUE)->lat;
-                    $env = array(
-                        $y,
-                        $x
-                    );
-                }
-                if ($tipog == "georsspoint") {
-                    // $temp = $item->xpath('georss:point');
-                    $temp = (string) $item->children('georss', TRUE)->point;
-                    $env = (explode(" ", $temp));
-                }
-                if (count($env) > 0) {
-                    $resultado[] = array(
-                        ixml($item, "title"),
-                        ixml($item, "link"),
-                        ixml($item, "description"),
-                        ixml($item, "category"),
-                        $env
-                    );
-                }
-            }
-        }
-        // cria o shapefile com os dados
-        if (count($resultado) > 0) {
-            // para manipular dbf
-            include_once (dirname(__FILE__) . "/../pacotes/phpxbase/api_conversion.php");
-            $diretorio = dirname($this->arquivo);
-            $tipol = MS_SHP_POLYGON;
-            if ($tipog == "georsspoint") {
-                $tipol = MS_SHP_POINT;
-            }
-            if ($tipog == "geo") {
-                $tipol = MS_SHP_POINT;
-            }
-            $novonomelayer = nomeRandomico(10) . "georss";
-            $nomeshp = $diretorio . "/" . $novonomelayer;
-            $novoshpf = ms_newShapefileObj($nomeshp, $tipol);
-            $def[] = array(
-                "TITULO",
-                "C",
-                "254"
-            );
-            $def[] = array(
-                "LINK",
-                "C",
-                "254"
-            );
-            $def[] = array(
-                "DESC",
-                "C",
-                "254"
-            );
-            $def[] = array(
-                "CATEGORIA",
-                "C",
-                "254"
-            );
-            if (! function_exists(dbase_create)) {
-                $db = xbase_create($nomeshp . ".dbf", $def);
-                xbase_close($db);
-            } else {
-                $db = dbase_create($nomeshp . ".dbf", $def);
-                dbase_close($db);
-            }
-            // acrescenta os pontos no novo shapefile
-            $dbname = $nomeshp . ".dbf";
-            $db = xbase_open($dbname, 2);
-            $reg = array();
-            $novoshpf = ms_newShapefileObj($nomeshp . ".shp", - 2);
-            // acrescenta os shapes
-            foreach ($resultado as $r) {
-                $pts = $r[4];
-                if ($tipol == MS_SHP_POLYGON) {
-                    $shp = ms_newShapeObj(MS_SHP_POLYGON);
-                    $linha = ms_newLineObj();
-                    $linha->addXY($pts[0], $pts[3]);
-                    $linha->addXY($pts[2], $pts[3]);
-                    $linha->addXY($pts[2], $pts[1]);
-                    $linha->addXY($pts[0], $pts[1]);
-                    $linha->addXY($pts[0], $pts[3]);
-                } else {
-                    $shp = ms_newShapeObj(MS_SHP_POINT);
-                    $linha = ms_newLineObj();
-                    $linha->addXY($pts[1], $pts[0]);
-                }
-                $shp->add($linha);
-                $novoshpf->addShape($shp);
-                $reg = array(
-                    $r[0],
-                    $r[1],
-                    $r[2],
-                    $r[3]
-                );
-                xbase_add_record($db, $reg);
-                $reg = array();
-            }
-            xbase_close($db);
-
-            if ($tipog == "georsspoint" || $tipog == "geo") {
-                $tipol = MS_LAYER_POINT;
-            } else {
-                $tipol = MS_LAYER_POLYGON;
-            }
-
-            $layer = criaLayer($this->mapa, $tipol, MS_DEFAULT, "GeoRSS", "SIM");
-            $layer->set("data", $nomeshp . ".shp");
-            $layer->set("name", basename($nomeshp));
-            $layer->setmetadata("DOWNLOAD", "sim");
-            $layer->setmetadata("TEMALOCAL", "SIM");
-            // evita problemas no modo tile
-            if ($this->v > 5) {
-                $layer->setprocessing("LABEL_NO_CLIP=True");
-                $layer->setprocessing("POLYLINE_NO_CLIP=True");
-            }
-            if ($tipol == MS_LAYER_POLYGON) {
-                $classe = $layer->getclass(0);
-                $estilo = $classe->getstyle(0);
-                $estilo->set("symbolname", "p4");
-                $estilo->set("size", 5);
-                $cor = $estilo->color;
-                $cor->setrgb(255, 0, 0);
-                $coro = $estilo->outlinecolor;
-                $coro->setrgb(255, 0, 0);
-            }
-            // $layer->set("transparency",50);
-            $layer->setmetadata("nomeoriginal", basename($nomeshp));
-            // echo $tipol;
-            return ("ok");
-        }
-        return ("erro");
     }
 
     /*

@@ -107,7 +107,6 @@ function salvaMapfile()
             "PERMITEDOWNLOAD",
             "LTEMPOFORMATODATA",
             "FILTROORIGINAL",
-            "PERMITECOMENTARIO",
             "LTEMPOITEMICONE",
             "DATAORIGINAL",
             "PLUGINI3GEO",

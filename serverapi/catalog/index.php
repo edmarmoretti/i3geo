@@ -49,6 +49,12 @@ switch (strtoupper($_GET["funcao"])) {
         $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
         $retorno = $m->pegaSistemas();
         break;
+    case "PEGALISTADEWEBSERVICES":
+        verifySql();
+        include (I3GEOPATH."/classesphp/classe_menutemas.php");
+        $m = new Menutemas($map_file, $perfil, $locaplic, $urli3geo, $editores, $_GET["idioma"]);
+        $retorno = $m->pegaListaDeWebServices();
+        break;
     case "PROCURARTEMASESTRELA":
         verifySql();
         include (I3GEOPATH."/classesphp/classe_menutemas.php");

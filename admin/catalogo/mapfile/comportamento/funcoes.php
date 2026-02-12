@@ -17,10 +17,6 @@ function listar($locaplic,$codigo){
 	if (empty ( $dados ["aplicaextensao"] )) {
 		$dados ["aplicaextensao"] = "NAO";
 	}
-	$dados["permitecomentario"] = $layer->getmetadata("permitecomentario");
-	if (empty ( $dados ["permitecomentario"] )) {
-		$dados ["permitecomentario"] = "NAO";
-	}
 	$dados["temporizador"] = $layer->getmetadata("temporizador");
 	if ($dados ["temporizador"] == 0) {
 		$dados ["temporizador"] = "";
@@ -51,7 +47,7 @@ function listar($locaplic,$codigo){
 	}
 	return $dados;
 }
-function alterar($locaplic, $id_tema, $codigo, $aplicaextensao, $permitecomentario, $temporizador, $escondido, $transitioneffect, $status, $iconetema, $mensagem, $wkttip){
+function alterar($locaplic, $id_tema, $codigo, $aplicaextensao, $temporizador, $escondido, $transitioneffect, $status, $iconetema, $mensagem, $wkttip){
 	$convUTF = $_SESSION["convUTF"];
 	$esquemaadmin = $_SESSION["esquemaadmin"];
 	$arq = $locaplic . "/temas/" . $codigo . ".map";
@@ -64,7 +60,6 @@ function alterar($locaplic, $id_tema, $codigo, $aplicaextensao, $permitecomentar
 		return false;
 	}
 	$layer->setmetadata ( "aplicaextensao", $aplicaextensao );
-	$layer->setmetadata ( "permitecomentario", $permitecomentario );
 	$layer->setmetadata ( "temporizador", $temporizador );
 	$layer->setmetadata ( "escondido", $escondido );
 	$layer->setmetadata ( "transitioneffect", $transitioneffect );

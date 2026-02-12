@@ -806,7 +806,6 @@ function removeCabecalhoMapfile($arq,$symbolset=true){
 	        "PERMITEDOWNLOAD",
 	        "LTEMPOFORMATODATA",
 	        "FILTROORIGINAL",
-	        "PERMITECOMENTARIO",
 	        "LTEMPOITEMICONE",
 	        "DATAORIGINAL",
 	        "PLUGINI3GEO",

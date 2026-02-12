@@ -21,23 +21,6 @@
 	<div class="col-md-12">
 		<div class="form-group form-group-lg">
 			<div class="col-md-6">
-				<label class="control-label" for="permitecomentario">
-					{{{comentarioTitulo}}}
-				</label>
-				<p class="small">
-					{{{comentario}}} (metadata: PERMITECOMENTARIO)
-				</p>
-			</div>
-			<div class="col-md-6">
-				<select name="permitecomentario" class="form-control" required >
-					{{{permitecomentario}}}
-				</select>
-			</div>
-		</div>
-	</div>
-	<div class="col-md-12">
-		<div class="form-group form-group-lg">
-			<div class="col-md-6">
 				<label class="control-label" for="escondido">
 					{{{escondidoTitulo}}}
 				</label>

@@ -2,8 +2,8 @@
 if($_SERVER['SCRIPT_FILENAME'] == __FILE__){
     exit;
 }
-error_reporting(E_ALL);
-ini_set('display_errors', 1);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 
 //verifica se o pai esta na mesma pasta
 if (!strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
@@ -290,7 +290,7 @@ buscarapida,conectarservicos,convertemapakml,cortina,editorsql,filtroarvore,inse
 inseretxt,mostraexten,outputformat,perfil
 
 */
-$i3geoBlFerramentas = array("upload","uploaddbf","uploadgpx","uploadkml","uploadshp","salvamapa","carregamapa");
+$i3geoBlFerramentas = array("imprimir","upload","uploaddbf","uploadgpx","uploadkml","uploadshp","salvamapa","carregamapa");
 /*
 Variable: $ogrOutput
 

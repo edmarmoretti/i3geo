@@ -1346,36 +1346,6 @@ function geo2utm($x, $y, $zona)
 /*
  * Section: web services
  */
-/*
- * georssCanais (depreciado)
- *
- * Lista os canais de um GeoRss.
- *
- * Parametros:
- * $servico - Endere&ccedil;o do RSS.
- *
- * $map_file - Nome do arquivo map file. Inclua o caminho completo no servidor.
- *
- * $dir_tmp - Diret&oacute;rio onde o arquivo ser&aacute; criado.
- *
- * $locaplic - Localiza&ccedil;&atilde;o do I3geo
- */
-function georssCanais($servico)
-{
-    $xml = simplexml_load_file($servico);
-    // var_dump($xml);
-    $resultado = [];
-    foreach ($xml->channel as $c) {
-        $resultado[] = array(
-            "title" => (ixml($c, "title")),
-            "link" => (ixml($c, "link")),
-            "description" => (ixml($c, "description")),
-            "category" => (ixml($c, "category"))
-        );
-    }
-    // var_dump($resultado);
-    return $resultado;
-}
 
 /*
  * Section: tema
