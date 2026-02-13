@@ -588,7 +588,7 @@ if (isset($url_wms)) {
 }
 
 adaptaLayers($tmpfname, $versao);
-if ($interface != "mashup") {
+if ($interface != "") {
     abreInterface($interface, $caminho);
 }
 

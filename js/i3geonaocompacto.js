@@ -72,10 +72,7 @@
 	//css
 	var allCssTags = "";
 	var cssfiles = new Array(
-		//"../css/input.css",
-		//"../css/geral.css",
 		"../pacotes/pickr/themes/classic.min.css"
-		//"../mashups/openlayers.css"
 	);
 	for (i = 0; i < cssfiles.length; i++) {
 		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";

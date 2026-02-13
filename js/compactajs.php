@@ -6,7 +6,7 @@
 	<p>Esse programa deve ser executado sempre que forem feitas altera&ccedil;&otilde;es nos c&oacute;digos javascript principais do i3Geo (aqueles que ficam na pasta i3geo/js).
 	A compacta&ccedil;&atilde;o reduz o tamanho dos arquivos e faz a concatena&ccedil;&atilde;o de v&aacute;rios arquivos em um s&oacute;. O compactador atua tamb&eacute;m sobre os arquivos CSS existentes
 	em i3geo/css. Ao utilizar o javascript i3geo/js/i3geo.js o arquivo compactado ser&aacute; carregado, assim como o CSS, correspondentes a &uacute;ltima vers&atilde;o do i3Geo.
-	A compacta&ccedil;&atilde;o tamb&eacute;m gera arquivos em i3geo/mashups. Os arquivos individuais compactados, da pasta i3geo/js, s&atilde;o armazenados em i3geo/js/compactados</p>
+	Os arquivos individuais compactados, da pasta i3geo/js, s&atilde;o armazenados em i3geo/js/compactados</p>
 
 <?php
 /*
@@ -78,16 +78,6 @@ if (!file_exists("../pacotes/teste.txt")){
 	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em pacotes";exit;
 } else {
 	unlink("../pacotes/teste.txt");
-}
-if(file_exists("../mashups/teste.txt")){
-	unlink("../mashups/teste.txt");
-}
-$f = @fopen("../mashups/teste.txt",w);
-@fclose($f);
-if (!file_exists("../mashups/teste.txt")){
-	echo "<br><span style='color:red'>N&atilde;o foi possivel escrever em mashups";exit;
-} else {
-	unlink("../mashups/teste.txt");
 }
 echo "<pre>";
 //

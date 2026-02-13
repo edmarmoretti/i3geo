@@ -4,12 +4,6 @@ verificaBlFerramentas(basename(dirname(__FILE__)), $_SESSION["i3geoBlFerramentas
 switch (strtoupper($_GET["funcao"]))
 {
 	case "PARAMETROSPLUGIN":
-		//no mashup o nome do tema e sempre o nome do mapfile
-	    if (file_exists($_SESSION["locaplic"]."/temas/".$_GET["tema"].".map")){
-	        $map1 = @ms_newMapObj($_SESSION["locaplic"]."/temas/".$_GET["tema"].".map");
-	        $layer1 = $map1->getlayerbyname($_GET["tema"]);
-		}
-		else{
 			//nesse caso, o mapfile vem da secao php
 		    $map = ms_newMapObj($_SESSION["map_file"]);
 			$layer = $map->getlayerbyname($_GET["tema"]);
@@ -18,7 +12,6 @@ switch (strtoupper($_GET["funcao"]))
 			    $map1 = @ms_newMapObj($_SESSION["locaplic"]."/temas/".$layer->getmetadata("nomeoriginal").".map");
 				$layer1 = $map1->getlayerbyname($layer->getmetadata("nomeoriginal"));
 			}
-		}
 		if($map1){
 			if($layer1 != ""){
 				$c = $layer1->getmetadata("PLUGINI3GEO");

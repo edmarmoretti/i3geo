@@ -136,29 +136,6 @@ i3GEO.pluginI3geo =
         return camada;
     },
     /**
-     * Cria um layer conforme a API em uso no aplicativo mashup
-     *
-     * Parametros
-     *
-     * {string} - nome da interface em uso openlayers|googlemaps
-     *
-     * {objeto} - objeto camada, conforme definido em i3GEO.arvoreDeCamadas.CAMADAS
-     *
-     * {string} - codigo epsg que sera usado no WMS
-     *
-     * {parametros} - objeto com parametros adicionais especificos da interface em uso
-     */
-    layerMashup: function (Interface, camada, epsg, parametros) {
-        if (camada.plugini3geo && camada.plugini3geo != "" && i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup) {
-            var l = i3GEO.pluginI3geo[camada.plugini3geo.plugin][Interface].layerMashup(camada, epsg, parametros);
-            return l;
-        } else {
-            return [
-                false
-            ];
-        }
-    },
-    /**
      * Section: i3GEO.pluginI3geo.heatmap
      *
      * Mapa de calor
@@ -266,10 +243,6 @@ i3GEO.pluginI3geo =
             camada.classe = "SIM";
             return camada;
         },
-        layerMashup: function (camada, epsg) {
-            i3GEO.pluginI3geo.heatmap.inicia(camada, i3geoOL);
-            return [];
-        },
         inicia: function (camada, objMapa) {
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.pluginI3geo.inicia heatmap");
@@ -280,7 +253,6 @@ i3GEO.pluginI3geo =
                     console.info("criaLayer heatmap");
 
                 var g, v = true, temp, heatmap, data = heatmap_dados, datalen = heatmap_dados.length, nudata = [];
-                // para uso com o mashup
                 if (!objMapa) {
                     objMapa = i3geoOL;
                 }
@@ -442,15 +414,10 @@ i3GEO.pluginI3geo =
             camada.classe = "NAO";
             return camada;
         },
-        layerMashup: function (camada, epsg) {
-            i3GEO.pluginI3geo.markercluster.inicia(camada, i3geoOL);
-            return [];
-        },
         inicia: function (camada, objMapa) {
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.pluginI3geo.inicia markercluster");
 
-            // para uso com o mashup
             if (!objMapa) {
                 objMapa = i3geoOL;
             }
@@ -654,10 +621,6 @@ i3GEO.pluginI3geo =
             camada.wms = false;
             camada.classe = "NAO";
             return camada;
-        },
-        layerMashup: function (camada, epsg) {
-            i3GEO.pluginI3geo.layerkml.inicia(camada, i3geoOL);
-            return [];
         },
         inicia: function (camada) {
             if (typeof (console) !== 'undefined')
@@ -983,10 +946,6 @@ i3GEO.pluginI3geo =
             camada.wms = false;
             camada.classe = "NAO";
             return camada;
-        },
-        layerMashup: function (camada, epsg) {
-            i3GEO.pluginI3geo.layergeojson.inicia(camada, i3geoOL);
-            return [];
         },
         inicia: function (camada) {
             if (typeof (console) !== 'undefined')

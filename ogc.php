@@ -817,7 +817,6 @@ if(ob_get_contents ()){
 //quando for do tipo tms $_GET["tms"] contem os parametros do tile
 //essa rotina faz um exit ao final
 //o cache tms so fucniona se houver apenas uma camada no mapa
-//tms e usado basicamente por mashup ou openlayers
 //
 if(isset($_GET["tms"])){
 	if(!isset($_GET["TileMatrix"])){
