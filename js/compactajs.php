@@ -126,7 +126,7 @@ packer("ini_i3geo.js","compactados/ini_i3geo_compacto.js","Normal");
 packer("social.js","compactados/social_compacto.js","Normal");
 packer("catalogoMenus.js","compactados/catalogoMenus_compacto.js","Normal");
 packer("catalogoInde.js","compactados/catalogoInde_compacto.js","Normal");
-packer("catalogoWs.js","compactados/.catalogoWs_compacto.js","Normal");
+packer("catalogoWs.js","compactados/catalogoWs_compacto.js","Normal");
 packer("catalogoMapas.js","compactados/catalogoMapas_compacto.js","Normal");
 packer("catalogoEstrelas.js","compactados/catalogoEstrelas_compacto.js","Normal");
 packer("catalogoSistemas.js","compactados/catalogoSistemas_compacto.js","Normal");
