@@ -243,13 +243,10 @@ i3GEO.calculo =
 		try {
 			var amext, longdd, latdd;
 
-			if (navm) {
-				xfign = xfign - 2.2;
-				yfign = yfign - 2.7;
-			} else {
-				xfign = xfign - 0.12;
-				yfign = yfign - 1.05;
-			}
+
+			xfign = xfign - 0.12;
+			yfign = yfign - 1.05;
+
 			amext = imgext.split(" ");
 			longdd = (amext[0] * 1) + (g_celula * xfign);
 			latdd = (amext[3] * 1) - (g_celula * yfign);

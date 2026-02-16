@@ -18,10 +18,6 @@ i3GEO.Interface =
      * Opacidade default dos layers de tipo imagem ou poligonais
      */
     LAYEROPACITY: "",
-    /**
-     * Opacidade aplicada ao mapa como um todo
-     */
-    MAPOPACITY: 100,
     /*
      * Objeto Overlay utilizado para tooltip na posicao do mouse
      * Criado quando e detectado um layer do tipo utfGrid
@@ -119,50 +115,7 @@ i3GEO.Interface =
             i3GEO.Interface.GRADE.setMap(null);
         }
     },
-    /**
-     * Function: aplicaOpacidade
-     *
-     * Aplica um fator de opacidade a todos os layers do mapa
-     *
-     * Parametro:
-     *
-     * {numerico} - 0 a 1
-     *
-     * {string} - (opcional) se for vazio aplica ao mapa todo
-     */
-    aplicaOpacidade: function (opacidade, layer) {
-        if (typeof (console) !== 'undefined')
-            console.info("i3GEO.Interface.aplicaOpacidade " + layer);
 
-        if (opacidade > 1) {
-            opacidade = opacidade / 100;
-        }
-
-        if (layer) {
-            var temp = i3geoOL.getLayersByName(layer);
-            if (temp.length > 0) {
-                i3geoOL.getLayersByName(layer)[0].setOpacity(opacidade * 1);
-                return;
-            }
-            layer = "";
-        } else {
-            layer = "";
-        }
-        var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length, l, i, camada;
-        if (!layer) {
-            layer = "";
-        }
-        for (i = nlayers - 1; i >= 0; i--) {
-            camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
-            l = i3geoOL.getLayersByName(camada.name)[0];
-            if (l && l.get("isBaseLayer") === false) {
-                if (layer == "" || layer == camada.name) {
-                    l.setOpacity(opacidade);
-                }
-            }
-        }
-        i3GEO.Interface.MAPOPACITY = opacidade * 100;
-    },
     atualizaMapa: function () {
         var camadas = i3GEO.arvoreDeCamadas.CAMADAS, n = camadas.length, i;
         for (i = 0; i < n; i++) {
@@ -1092,7 +1045,7 @@ i3GEO.Interface =
                                 }
                             }
 
-                            if (camada.cache) {
+                            if (camada.cache && camada.cache != undefined && camada.cache != "nao") {
                                 urllayer = url + "&cache=" + camada.cache + "&cacheprefixo=" + camada.cacheprefixo;
                             } else {
                                 urllayer = url + "&cache=nao";

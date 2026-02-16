@@ -27,13 +27,13 @@ i3GEOF.opacidademapa = {
 		hash["locaplic"] = i3GEO.configura.locaplic;
 		hash["namespace"] = "opacidademapa";
 		hash["idContainer"] = p.idContainer;
-		hash["valor"] = i3GEO.Interface.MAPOPACITY;
+		hash["valor"] = i3GEO.mapa.MAPOPACITY;
 		i3GEOF.opacidademapa.renderFunction.call(this, { texto: Mustache.render(p.mustache, hash) });
 		//i3GEO.janela.applyScrollBar(p.idContainer);
 		//i3GEOF.opacidademapa.slide();
 
 	},
 	slide: function (valor) {
-		i3GEO.Interface.aplicaOpacidade(valor);
+		i3GEO.mapa.aplicaOpacidade(valor);
 	}
 };

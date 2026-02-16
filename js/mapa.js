@@ -3,6 +3,10 @@ if (typeof (i3GEO) === 'undefined') {
 }
 i3GEO.mapa =
 {
+    /**
+     * Opacidade aplicada ao mapa como um todo
+     */
+    MAPOPACITY: 100,
     //mostra ou nao o balao de informacoes mesmo se nao existirem dados retornados
     OPENTIPIFEMPTY: true,
     /**
@@ -44,6 +48,50 @@ i3GEO.mapa =
                 $(v).addClass("itensvisib");
             }
         });
+    },
+    /**
+     * Function: aplicaOpacidade
+     *
+     * Aplica um fator de opacidade a todos os layers do mapa
+     *
+     * Parametro:
+     *
+     * {numerico} - 0 a 1
+     *
+     * {string} - (opcional) se for vazio aplica ao mapa todo
+     */
+    aplicaOpacidade: function (opacidade, layer) {
+        if (typeof (console) !== 'undefined')
+            console.info("i3GEO.mapa.aplicaOpacidade " + layer);
+
+        if (opacidade > 1) {
+            opacidade = opacidade / 100;
+        }
+
+        if (layer) {
+            var temp = i3geoOL.getLayersByName(layer);
+            if (temp.length > 0) {
+                i3geoOL.getLayersByName(layer)[0].setOpacity(opacidade * 1);
+                return;
+            }
+            layer = "";
+        } else {
+            layer = "";
+        }
+        var nlayers = i3GEO.arvoreDeCamadas.CAMADAS.length, l, i, camada;
+        if (!layer) {
+            layer = "";
+        }
+        for (i = nlayers - 1; i >= 0; i--) {
+            camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
+            l = i3geoOL.getLayersByName(camada.name)[0];
+            if (l && l.get("isBaseLayer") === false) {
+                if (layer == "" || layer == camada.name) {
+                    l.setOpacity(opacidade);
+                }
+            }
+        }
+        i3GEO.mapa.MAPOPACITY = opacidade * 100;
     },
     /**
      * Function: limpasel

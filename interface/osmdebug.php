@@ -234,9 +234,6 @@ include ($configInc["inc"] . "/css.php");
                 //id do elemento HTML onde o corpo do mapa sera renderizado
                 mapBody : "mapai3Geo",
                 //tipo de mapa. Pode ser:
-                //OL - utiliza o OpenLayers e coordenadas geograficas
-                //OSM - utiliza o OpenLayers e o OpenStreetMap como fundo, em projecao semelhante ao GoogleMaps
-                //GM - utiliza o GoogleMaps como motor de controle do mapa
                 mapType : "OSM",
                 //mostra ou nao a barra de progresso do carregamento de camadas
                 layerProgressBar: false,

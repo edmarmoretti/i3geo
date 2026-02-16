@@ -298,6 +298,9 @@ i3GEO.eventos =
 
 		if (!exy) {
 			i3GEO.eventos.executaEventos(this.MOUSEUP);
+		} else if (exy.target && exy.target.tagName === "CANVAS") {
+			//para evitar bubble
+			i3GEO.eventos.executaEventos(this.MOUSEUP);
 		}
 	},
 	/**
@@ -606,7 +609,7 @@ i3GEO.eventos =
 	 */
 	botaoDireita: function (exy) {
 		try {
-			var k = (navm) ? event.button : exy.button;
+			var k = exy.button;
 			if (k !== 2) {
 				return false;
 			} else {
@@ -635,7 +638,7 @@ i3GEO.eventos =
 			iym = "iym";
 			iys = "iys";
 			if ($i("wdocai")) {
-				doc = (navm) ? document.frames("wdocai").document : $i("wdocai").contentDocument;
+				doc = $i("wdocai").contentDocument;
 			}
 		}
 		try {
@@ -705,6 +708,9 @@ i3GEO.eventos =
 		 * Executa os eventos definidos em MOUSECLIQUEPERM
 		 */
 		executa: function (evt) {
+			if (typeof (console) !== 'undefined')
+				console.info("i3GEO.eventos.cliquePerm.executa()");
+
 			if (i3GEO.eventos.cliquePerm.ativo === true && i3GEO.eventos.cliquePerm.status === true) {
 				i3GEO.eventos.executaEventos(i3GEO.eventos.MOUSECLIQUEPERM);
 			}

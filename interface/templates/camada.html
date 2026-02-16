@@ -1,23 +1,29 @@
 <!--  ver arvoreDeCamadas.atualiza -->
-<div class="rangeScale{{{rangeScale}}} list-group condensed" style="margin: 10px; cursor: move;display: grid; grid-template-columns: 40px auto;">
+<div class="rangeScale{{{rangeScale}}} list-group condensed"
+    style="margin: 10px; cursor: move;display: grid; grid-template-columns: 40px auto;">
     <div class="dropdown">
-        <button class="btn btn-default btn-xs dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"
+        <button class="btn btn-default btn-xs dropdown-toggle" role="button" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false"
             style="margin-top: 0px; margin-bottom: 0px; padding-top: 0px; padding-bottom: 0px; padding-left: 5px; padding-right: 5px;">
             <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
         </button>
         <ul class="dropdown-menu I3GEOpropCamadas">
             <li class="container-fluid form-group">
-                <form onsubmit="console.log(this);i3GEO.tema.mudanome('{{{name}}}',this[0].value);return false;" action="">
+                <form onsubmit="console.log(this);i3GEO.tema.mudanome('{{{name}}}',this[0].value);return false;"
+                    action="">
                     <input style="color: black;" class="form-control" type='text' value='{{{nomeCamada}}}' />
                 </form>
             </li>
             <li style="margin-top:0px;" class="container-fluid form-group">
                 <label class="control-label"> {{{opacidade}}}</label>
-                <input style="background:none;" oninput="i3GEO.Interface.aplicaOpacidade(this.value,'{{{name}}}')" type="range" min="1" max="100" value="{{opaCamada}}" class="slider" >
+                <input style="background:none;" oninput="i3GEO.mapa.aplicaOpacidade(this.value,'{{{name}}}')"
+                    type="range" min="1" max="100" value="{{opaCamada}}" class="slider">
             </li>
             <li style="margin-top:0px;" class="container-fluid form-group">
                 <label class="control-label"> {{{cortina}}}</label>
-                <input style="background:none;" onmouseup="i3GEO.tema.cortina.stop()" onmousedown="i3GEO.tema.cortina.start(this,'{{{name}}}')" type="range" min="1" max="100" value="50" class="slider" >
+                <input style="background:none;" onmouseup="i3GEO.tema.cortina.stop()"
+                    onmousedown="i3GEO.tema.cortina.start(this,'{{{name}}}')" type="range" min="1" max="100" value="50"
+                    class="slider">
             </li>
             <li><a href="javascript:void(0)" onclick="i3GEO.tema.exclui('{{{name}}}',true)" title="{{{removerTitle}}}">
                     <span class="glyphicon glyphicon-trash"></span> {{{removerTexto}}}
@@ -28,22 +34,27 @@
             <li><a href="javascript:void(0)" onclick="i3GEO.tema.moveDown('{{{name}}}')" title="{{{desceTitle}}}">
                     <span class="glyphicon glyphicon-menu-down"></span> {{{desceTexto}}}
                 </a></li>
-            <li><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}" class='{{isnotvetor}} '>
+            <li><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.tabela('{{{name}}}')" title="{{{tabelaTitle}}}"
+                    class='{{isnotvetor}} '>
                     <span class="glyphicon glyphicon-list-alt"></span> {{{tabelaTexto}}}
                 </a></li>
-            <li><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')" >
+            <li><a href="javascript:void(0)" onclick="i3GEO.tema.dialogo.editaLegenda('{{{name}}}')">
                     <span class="glyphicon glyphicon-th-list"></span> {{{editorlegendaTexto}}}
                 </a></li>
-            <li><a class="{{{zoomtema}}} " href="javascript:void(0)" onclick="i3GEO.mapa.extentToLayer('{{{name}}}')" title="{{{zoomtemaTitle}}}" >
+            <li><a class="{{{zoomtema}}} " href="javascript:void(0)" onclick="i3GEO.mapa.extentToLayer('{{{name}}}')"
+                    title="{{{zoomtemaTitle}}}">
                     <span class="glyphicon glyphicon-fullscreen"></span> {{{zoomtemaTexto}}}
                 </a></li>
-            <li><a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')" title="{{{linkTitle}}}">
+            <li><a class="{{{link}}}" href="javascript:void(0)" onclick="i3GEO.tema.fonte('{{{name}}}')"
+                    title="{{{linkTitle}}}">
                     <span class="glyphicon glyphicon-file"></span> {{{linkTexto}}}
                 </a></li>
-            <li><a class="{{{download}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.download('{{{name}}}')" title="{{{downloadTitle}}}">
+            <li><a class="{{{download}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.download('{{{name}}}')"
+                    title="{{{downloadTitle}}}">
                     <span class="glyphicon glyphicon-cloud-download"></span> {{{downloadTexto}}}
                 </a></li>
-            <li><a class="{{{permiteogc}}}" href="javascript:void(0)" onclick="i3GEO.tema.dialogo.ogcwindow('{{{name}}}')">
+            <li><a class="{{{permiteogc}}}" href="javascript:void(0)"
+                    onclick="i3GEO.tema.dialogo.ogcwindow('{{{name}}}')">
                     <span class="glyphicon glyphicon-cloud"></span> WMS-OGC
                 </a></li>
             <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.busca('{{name}}')" class='{{isnotvetor}} '>
@@ -61,7 +72,8 @@
             <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.filtro('{{name}}')" class='{{isnotvetor}} '>
                     <span class="glyphicon glyphicon-filter"></span> {{{filtroTexto}}}
                 </a></li>
-            <li><a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')" title="{{{selTitle}}}">
+            <li><a class="{{{sel}}}" href="javascript:void(0)" onclick="i3GEO.tema.limpasel('{{{name}}}')"
+                    title="{{{selTitle}}}">
                     <span class="glyphicon glyphicon-erase"></span> {{{limpaselTexto}}}
                 </a></li>
             <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.selecao('{{name}}')" class='{{isnotvetor}} '>
@@ -70,26 +82,30 @@
             <li><a class="{{{zoomsel}}}" href="javascript:void(0)" onclick="i3GEO.tema.zoomsel('{{{name}}}')">
                     <span class="glyphicon glyphicon-fullscreen"></span> {{{zoomSelTexto}}}
                 </a></li>
-            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.graficotema('{{name}}')" class='{{isnotvetor}} '>
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.graficotema('{{name}}')"
+                    class='{{isnotvetor}} '>
                     <span class="glyphicon glyphicon-stats"></span> {{{graficoTexto}}}
                 </a></li>
-            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.mmscale('{{name}}')" >
+            <li><a href='javascript:void(0)' onclick="i3GEO.tema.dialogo.mmscale('{{name}}')">
                     <span class="glyphicon glyphicon-road"></span> {{{variaEscala}}}
                 </a></li>
         </ul>
     </div>
     <div class="checkbox" style="margin-top:0px;">
         <label class="rangeScale{{{rangeScale}}} {{{classeCss}}}" style="width: calc(100% - 50px)">
-            <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}"
-                {{{checked}}} onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
-            <span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} <span style="cursor: move;">{{{tema}}}</span>
+            <input class="noprint" type="checkbox" value="{{{name}}}" name="{{{name}}}" {{{checked}}}
+                onclick="i3GEO.Interface.ligaDesliga(this);i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);">
+            <span class="checkbox-material noprint"><span class="check"></span></span> {{{iconetema}}} <span
+                style="cursor: move;">{{{tema}}}</span>
             <!-- icones que trazem informacoes sobre o tema -->
             <!--  temporizador -->
-            <span id="timerCamada{{name}}" class="glyphicon glyphicon-time {{{iconeTimer}}}" ></span>
+            <span id="timerCamada{{name}}" class="glyphicon glyphicon-time {{{iconeTimer}}}"></span>
             <!-- farol que indica a relacao com a escala do mapa -->
-            <span id="farol{{name}}" title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}" style="color: {{{farol}}}"></span>
+            <span id="farol{{name}}" title="{{{farolTitle}}}" class="glyphicon glyphicon-certificate {{{farol}}}"
+                style="color: {{{farol}}}"></span>
             <!-- indica se os elementos da camada sao dependentes da escala do mapa -->
-            <span title="{{{contextoescalaTitle}}}" class="glyphicon glyphicon-alert {{{contextoescala}}}" style="color: orange;"></span>
+            <span title="{{{contextoescalaTitle}}}" class="glyphicon glyphicon-alert {{{contextoescala}}}"
+                style="color: orange;"></span>
             <!-- links para formularios que sao especificos de cada plugin do i3Geo  e de ferramentas salvas na camada-->
             {{{iconeFerramentas}}} {{{iconePlugin}}}
         </label>

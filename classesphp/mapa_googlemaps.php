@@ -58,6 +58,8 @@ if (! function_exists('ms_GetVersion')) {
     include_once ("carrega_ext.php");
 }
 error_reporting(0);
+//error_reporting(E_ALL);
+//ini_set('display_errors', 1);
 // verifica&ccedil;&atilde;o de seguran&ccedil;a
 ini_set("session.use_cookies", 0);
 $_SESSION = array();
@@ -86,6 +88,7 @@ if (! isset($_SESSION["map_file"])) {
 if (! isset($_GET["cacheprefixo"])) {
     $_GET["cacheprefixo"] = "";
 }
+
 $map_fileX = $_SESSION["map_file"];
 $postgis_mapa = $_SESSION["postgis_mapa"];
 $cachedir = $_SESSION["cachedir"];
@@ -100,14 +103,15 @@ if (! empty($_GET["request"])) {
 if ($_GET["REQUEST"] == "GetFeatureInfo" || strtolower($_GET["REQUEST"]) == "getfeature") {
     $_GET["DESLIGACACHE"] = "sim";
     $_GET["SRS"] = "EPSG:3857";
-} elseif ($_GET["X"] != "") {
+} elseif ($_GET["X"] != "" || $_GET["TileCol"] != "") {
     //
     // converte a requisi&ccedil;&atilde;o do tile em coordenadas geo
     // http://wiki.openstreetmap.org/wiki/Slippy_map_tilenames#tile_numbers_to_lon.2Flat_2
     //
-    $x = $_GET["X"];
-    $y = $_GET["Y"];
-    $z = $_GET["Z"];
+    //http://localhost/i3geo/classesphp/mapa_googlemaps.php?g_sid=p09h7sah8bcgafqlndl5670qg7&cache=sim&cacheprefixo=&layer=mundo&WIDTH=256&HEIGHT=256&tilematrixset=EPSG%3A3857&Service=WMTS&Request=GetTile&Version=1.0.0&Format=image%2Fpng&TileMatrix=9&TileCol=183&TileRow=283
+    $x = $_GET["X"] != "" ? $_GET["X"] : $_GET["TileCol"];
+    $y = $_GET["Y"] != "" ? $_GET["Y"] : $_GET["TileRow"];
+    $z = $_GET["Z"] != "" ? $_GET["Z"] : $_GET["TileMatrix"];
 
     $qyfile = dirname($map_fileX) . "/" . $_GET["layer"] . "_qy.map";
     $qy = file_exists($qyfile);

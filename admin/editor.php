@@ -387,30 +387,6 @@ include ($configInc["inc"] . "/css.php");
                 ViewOptions : {
 
                 }
-                },
-                //configuracoes especificas para a interface GoogleMaps
-                googleMaps : {
-                //opcoes de inicializacao do mapa conforme definido na API do GoogleMaps
-                MapOptions : {
-                    //estilo que sera utilizado no mapa
-                    //pode ser um desses: roadmap, satellite, hybrid, terrain, Red, Countries, Night, Blue, Greyscale, No roads, Mixed, Chilled
-                    //ver i3GEO.Interface.googleMaps.ESTILOS
-                    mapTypeId : "roadmap",
-                    scaleControl : true,
-                    mapTypeControl : true,
-                    mapTypeControlOptions : {
-                    //position : google.maps.ControlPosition.LEFT_BOTTOM
-                    },
-                    zoomControl : true,
-                    zoomControlOptions : {
-                    //style : google.maps.ZoomControlStyle.SMALL,
-                    //position : google.maps.ControlPosition.LEFT_CENTER
-                    },
-                    streetViewControl : true,
-                    streetViewControlOptions : {
-                    //position : google.maps.ControlPosition.LEFT_CENTER
-                    }
-                }
                 }
             };
             //

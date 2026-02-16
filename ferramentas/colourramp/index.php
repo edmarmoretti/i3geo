@@ -210,14 +210,10 @@ function geracores(codigo){
 //
 function aplicarCores()
 {
-	navm = false; // IE
-	navn = false; // netscape
-	var app = navigator.appName.substring(0,1);
-	if (app=='N') navn=true; else navm=true;
 	try{
 		var doc = "<?php echo $doc; ?>";
 		if(doc != "")
-		{var doc = (navm) ? window.parent.frames(doc).document : window.parent.document.getElementById(doc).contentDocument;}
+		{var doc = window.parent.document.getElementById(doc).contentDocument;}
 		else
 		{var doc = window.parent.document;}
 	}
