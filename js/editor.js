@@ -2,7 +2,6 @@ if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
 //os botoes sao inseridos em cada layer grafico na arvore de camadas
-//veja em js/arvoredecamadas.js -> adicionaLayersGr
 i3GEO.editor =
 {
     _mascCompose: "",

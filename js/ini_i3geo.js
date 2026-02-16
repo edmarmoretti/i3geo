@@ -419,8 +419,7 @@ var i3GEO = {
      *
      * Ap&oacute;s as defini&ccedil;&otilde;es b&aacute;sicas, &eacute;
      * executado o programa <i3GEO.Interface.cria> que ir&aacute; realizar as
-     * opera&ccedil;&otilde;es conforme a interface atualmente em uso. A
-     * interface &eacute; definida em <i3GEO.Interface.ATUAL>
+     * opera&ccedil;&otilde;es conforme a interface atualmente em uso.
      */
     cria: function () {
         if (typeof (console) !== 'undefined')
@@ -610,7 +609,7 @@ var i3GEO = {
         temp = $i("i3geo");
         //temp.className = "yui-skin-sam";
         //previne que o tooltip balao crie barras de overflow
-        if (document.body.id === "i3geo" && temp.style && !temp.style.overflow && i3GEO.Interface.ATUAL === "openlayers") {
+        if (document.body.id === "i3geo" && temp.style && !temp.style.overflow) {
             temp.style.overflow = "hidden";
         }
         //

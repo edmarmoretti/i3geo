@@ -30,34 +30,6 @@ i3GEO.Interface =
      */
     INFOOVERLAY: "",
     /**
-     * Propriedade: ATUAL
-     *
-     * Interface utilizada na cria&ccedil;&atilde;o e controle do mapa.
-     *
-     * Veja como usar nos arquivos de apresenta&ccedil;&atilde;o do mapa existentes no diret&oacute;rio i3geo/interface
-     *
-     * O i3Geo, al&eacute;m da interface pr&oacute;pria, permite o uso de outras APIs para a constru&ccedil;&atilde;o do mapa, como
-     * Google Maps ou Openlayers. Essa propriedade define qual interface ser&aacute; usada. N&atilde;o confundir com o nome do HTML que
-     * &eacute; utilizado para mostrar o mapa.
-     *
-     * Para definir a interface, utilize
-     *
-     * i3GEO.Interface.ATUAL = "<valor>"
-     *
-     * Tipo:
-     *
-     * {string}
-     *
-     * Valores:
-     *
-     * openlayers|googlemaps
-     *
-     * Default:
-     *
-     * openlayers
-     */
-    ATUAL: "openlayers",
-    /**
      * Propriedade: IDCORPO
      *
      * ID do elemento HTML que receber&aacute; o corpo do mapa

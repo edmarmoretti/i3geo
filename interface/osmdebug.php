@@ -121,7 +121,6 @@ include ($configInc["inc"] . "/css.php");
         } catch(e){}
     };
     */
-    i3GEO.Interface.ATUAL = "openlayers";
     i3GEO.janela.ativaAlerta();
     //Define camadas utilizadas como opções para o mapa de fundo
     (function() {

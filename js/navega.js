@@ -25,28 +25,19 @@ i3GEO.navega =
      *
      */
     offset: function (pixelx, pixely) {
-        if (i3GEO.Interface.ATUAL == "openlayers") {
-            var view = i3geoOL.getView(),
-                mover = [pixelx, pixely],
-                s = i3geoOL.getSize(),
-                dx = s[0] / 2 + mover[0],
-                dy = s[1] / 2 + mover[1];
-            view.centerOn(view.getCenter(), s, [dx, dy]);
-        }
+        var view = i3geoOL.getView(),
+            mover = [pixelx, pixely],
+            s = i3geoOL.getSize(),
+            dx = s[0] / 2 + mover[0],
+            dy = s[1] / 2 + mover[1];
+        view.centerOn(view.getCenter(), s, [dx, dy]);
     },
     /**
      * Ativa a funcao de navegacao do tipo pan
      */
     ativaPan: function () {
-        if (i3GEO.Interface.ATUAL === "googlemaps") {
-            i3GeoMap.setOptions({
-                draggable: true
-            });
-        }
-        if (i3GEO.Interface.ATUAL === "openlayers") {
-            marcadorZoom = "";
-            i3GEO.Interface.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);
-        }
+        marcadorZoom = "";
+        i3GEO.Interface.OLpanel.activateControl(i3GEO.Interface.openlayers.OLpan);
     },
     /**
      * Registra uma extensao na variavel EXTENSOES
@@ -152,32 +143,14 @@ i3GEO.navega =
         if (typeof (console) !== 'undefined')
             console.info("i3GEO.navega.centroDoMapa()");
 
-        var xy;
-        switch (i3GEO.Interface.ATUAL) {
-            case "openlayers":
-                xy = i3geoOL.getCenter();
-                if (xy) {
-                    return [
-                        xy.lon,
-                        xy.lat
-                    ];
-                } else {
-                    return false;
-                }
-                break;
-            case "googlemaps":
-                xy = i3GeoMap.getCenter();
-                if (xy) {
-                    return [
-                        xy.lng(),
-                        xy.lat()
-                    ];
-                } else {
-                    return false;
-                }
-                break;
-            default:
-                return false;
+        var xy = i3geoOL.getCenter();
+        if (xy) {
+            return [
+                xy.lon,
+                xy.lat
+            ];
+        } else {
+            return false;
         }
     },
     //a marca e fixa no mapa quando ocorre o PAN
@@ -219,10 +192,7 @@ i3GEO.navega =
         if (typeof (console) !== 'undefined')
             console.info("i3GEO.navega.zoomin()");
 
-        if (i3GEO.Interface.ATUAL === "openlayers") {
-            i3geoOL.zoomIn();
-            return;
-        }
+        i3geoOL.zoomIn();
     },
     /**
      * Function: zoomout
@@ -239,10 +209,7 @@ i3GEO.navega =
         if (typeof (console) !== 'undefined')
             console.info("i3GEO.navega.zoomout()");
 
-        if (i3GEO.Interface.ATUAL === "openlayers") {
-            i3geoOL.zoomOut();
-            return;
-        }
+        i3geoOL.zoomOut();
     },
     /**
      * Function: zoomponto
@@ -434,9 +401,6 @@ i3GEO.navega =
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.navega.lente()");
 
-            if (i3GEO.Interface.ATUAL != "openlayers") {
-                return;
-            }
             var container = i3geoOL.getTargetElement();
             var radius = 75;
             container.addEventListener('mousemove', i3GEO.navega.lente.eventMouseMove);
@@ -514,9 +478,6 @@ i3GEO.navega =
             if (typeof (console) !== 'undefined')
                 console.info("i3GEO.navega.basemapSpy()");
 
-            if (i3GEO.Interface.ATUAL != "openlayers") {
-                return;
-            }
             var imagery = i3geoOL.getLayerBase();
             if (!imagery) {
                 imagery = i3geoOL.getAllLayers()[0];

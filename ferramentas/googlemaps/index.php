@@ -56,7 +56,6 @@ function inicializa(){
             if(ATUALIZABOX === true){
                 var bd = map.getBounds();
                 var centro = bd.getCenter();
-                //i3GEO.Interface[i3GEO.Interface.ATUAL].pan2ponto(centro.lng(),centro.lat());
             }
             ATUALIZABOX = true;
             ondegoogle();
