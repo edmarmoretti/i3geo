@@ -19,9 +19,9 @@ echo "
     <link rel='icon' href='" . ONDEI3GEO . "/favicon.ico'>
     <title>i3Geo</title>
     <!-- Material Design fonts -->
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio'>
-    <link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons'>
+    <link rel='preload' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=optional'>
+    <link rel='preload' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio&display=optional'>
+    <link rel='preload' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons&display=optional'>
     <!-- Bootstrap core CSS -->
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
     <!-- Bootstrap Material Design -->

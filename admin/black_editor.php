@@ -23,7 +23,6 @@ session_write_close();
 <?php
 $configInc = array(
     "debug" => "", //posfixos inserido na carga do script do i3geo
-    "tipo" => "OL", // OL ou OSM
     "inc" => "../interface/inc", //caminho para os includes PHP com os componentes da interface
     "pathjs" => "..", //caminho para o include dos arquivos JS
     "pathcss" => "..", //caminho para o include dos arquivos css

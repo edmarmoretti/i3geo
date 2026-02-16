@@ -44,7 +44,6 @@
 		"arvoredecamadas.js",
 		"navega.js",
 		"geolocal.js",
-		"social.js",
 		"eventos.js",
 		"arvoredetemas.js",
 		"editor.js",

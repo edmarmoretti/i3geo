@@ -338,12 +338,7 @@ i3GEO.Interface =
         }
         i3GEO.Interface.IDMAPA = "openlayers";
         i3GEO.Interface.parametrosMap.target = "openlayers";
-        if (i3GEO.Interface.googleLike === false) {
-            i3GEO.Interface.parametrosView.projection = "EPSG:4326";
-        }
-        else {
-            i3GEO.Interface.parametrosView.projection = "EPSG:3857";
-        }
+        i3GEO.Interface.parametrosView.projection = "EPSG:3857";
         i3GEO.Interface.parametrosMap.view = new ol.View(
             i3GEO.Interface.parametrosView
         );
@@ -514,9 +509,6 @@ i3GEO.Interface =
         // inicializa&ccedil;&atilde;o que afeta todas as interfaces
         //
         var temp = window.location.href.split("?")[0];
-        if ($i("i3GEOcompartilhar")) {
-            i3GEO.social.compartilhar("i3GEOcompartilhar", temp, temp, "semtotal");
-        }
         //
         // esse id &eacute; utilizado apenas para manter o mapa n&atilde;o
         // vis&iacute;vel at&eacute; que tudo seja montado
@@ -525,12 +517,6 @@ i3GEO.Interface =
             $i("mst").style.display = "block";
         }
         i3GEO.util.defineValor("i3geo_escalanum", "value", i3geoOL.getScale());
-        //
-        //verifica se a projecao esta correta
-        //
-        if (i3GEO.Interface.googleLike === true && i3geoOL.getView().getProjection().getCode() != "EPSG:3857") {
-            alert("Alerta! Projecao diferente da esperada. Veja i3geo/guia_de_migracao.txt");
-        }
         //
         // monta o mapa ap&oacute;s receber o resultado da
         // cria&ccedil;&atilde;o do mapfile tempor&aacute;rio
@@ -692,20 +678,6 @@ i3GEO.Interface =
      *
      */
     LAYERSADICIONAIS: [],
-    /**
-     * Propriedade: googleLike
-     *
-     * Indica se a proje&ccedil;&atilde;o cartogr&aacute;fica do mapa atual &eacute; a mesma utilizada pela API do Google Maps
-     *
-     * Tipo:
-     *
-     * {boolean}
-     *
-     * Default:
-     *
-     * false
-     */
-    googleLike: false,
     //objeto com a grade de coordenadas
     GRADE: "",
     //controle fullscreen
@@ -859,10 +831,7 @@ i3GEO.Interface =
             //e.stopPropagation();
             //e.preventDefault();
             var lonlat = false, d, pos = "";
-            lonlat = e.coordinate;
-            if (i3GEO.Interface.googleLike === true) {
-                lonlat = ol.proj.transform(lonlat, 'EPSG:3857', 'EPSG:4326');
-            }
+            lonlat = ol.proj.transform(e.coordinate, 'EPSG:3857', 'EPSG:4326');
             d = i3GEO.calculo.dd2dms(lonlat[0], lonlat[1]);
             objposicaocursor.ddx = lonlat[0];
             objposicaocursor.ddy = lonlat[1];
@@ -907,10 +876,7 @@ i3GEO.Interface =
                 return;
             }
             var lonlat = false, d, pos = "";
-            lonlat = e.coordinate;
-            if (i3GEO.Interface.googleLike === true) {
-                lonlat = ol.proj.transform(lonlat, 'EPSG:3857', 'EPSG:4326');
-            }
+            lonlat = ol.proj.transform(e.coordinate, 'EPSG:3857', 'EPSG:4326');
             d = i3GEO.calculo.dd2dms(lonlat[0], lonlat[1]);
             objposicaocursor.ddx = lonlat[0];
             objposicaocursor.ddy = lonlat[1];
@@ -1002,15 +968,13 @@ i3GEO.Interface =
     },
     pan2ponto: function (x, y, anim) {
         // verifica se nao e necessario alterar as coordenadas
-        if (i3GEO.Interface.googleLike === true) {
-            var metrica;
-            if (x < 180 && x > -180) {
-                metrica = ol.proj.transform(
-                    [x, y], 'EPSG:4326', 'EPSG:3857'
-                );
-                x = metrica[0];
-                y = metrica[1];
-            }
+        var metrica;
+        if (x < 180 && x > -180) {
+            metrica = ol.proj.transform(
+                [x, y], 'EPSG:4326', 'EPSG:3857'
+            );
+            x = metrica[0];
+            y = metrica[1];
         }
         i3geoOL.panTo(x, y, anim);
     },
@@ -1029,13 +993,8 @@ i3GEO.Interface =
             temp.style.display = "none";
         }
         // url do programa i3Geo que renderiza camada
-        if (i3GEO.Interface.googleLike === true) {
-            url = configura.locaplic + "/classesphp/mapa_googlemaps.php?";
-            projectionExtent = ol.proj.get('EPSG:3857').getExtent();
-        } else {
-            url = configura.locaplic + "/classesphp/mapa_openlayers.php?";
-            projectionExtent = ol.proj.get('EPSG:4326').getExtent();
-        }
+        url = configura.locaplic + "/classesphp/mapa_googlemaps.php?";
+        projectionExtent = ol.proj.get('EPSG:3857').getExtent();
         url += "g_sid=" + i3GEO.configura.sid;
 
         size = ol.extent.getWidth(projectionExtent) / 256;
@@ -1061,11 +1020,8 @@ i3GEO.Interface =
             singleTile: !(i3GEO.Interface.TILES),
             tilePixelRatio: 1,
             preload: 0,
-            projection: 'EPSG:4326'
+            projection: 'EPSG:3857'
         };
-        if (i3GEO.Interface.googleLike === true) {
-            opcoes.projection = 'EPSG:3857';
-        }
         for (i = nlayers - 1; i >= 0; i--) {
             layer = "";
             camada = i3GEO.arvoreDeCamadas.CAMADAS[i];
@@ -1099,7 +1055,6 @@ i3GEO.Interface =
                         //
                         // layers marcados com o metadata wmstile com valor
                         // 1 sao inseridos com Layer.TileCache
-                        // i3GEO.Interface.googleLike === false
                         // FIXME testar isso
                         if (camada.connectiontype === 7
                             && camada.wmsurl !== "" && camada.wmstile == 1) {
@@ -1173,33 +1128,18 @@ i3GEO.Interface =
                             urllayer += "&layer=" + camada.name;
                             //se for do tipo utfgrid uma camada a mais e adicionada
                             if (camada.utfgrid == "sim" && i3GEO.parametros.w > 500) {
-                                if (i3GEO.Interface.googleLike === false) {
-                                    source = new ol.source.TileUTFGrid({
-                                        projection: opcoes.projection,
-                                        wrapX: true,
-                                        tileJSON: {
-                                            "tilejson": "2.1.0",
-                                            "scheme": "xyz",
-                                            //"scheme": "tms",
-                                            "grids": [
-                                                urllayer + "&FORMAT=utfgrid&tms=&TileCol={x}&TileRow={y}&TileMatrix={z}"
-                                            ]
-                                        }
-                                    });
-                                } else {
-                                    source = new ol.source.TileUTFGrid({
-                                        projection: opcoes.projection,
-                                        wrapX: true,
-                                        tileJSON: {
-                                            "tilejson": "2.1.0",
-                                            "scheme": "xyz",
-                                            //"scheme": "tms",
-                                            "grids": [
-                                                urllayer + "&FORMAT=utfgrid&tms=&X={x}&Y={y}&Z={z}"
-                                            ]
-                                        }
-                                    });
-                                }
+                                source = new ol.source.TileUTFGrid({
+                                    projection: opcoes.projection,
+                                    wrapX: true,
+                                    tileJSON: {
+                                        "tilejson": "2.1.0",
+                                        "scheme": "xyz",
+                                        //"scheme": "tms",
+                                        "grids": [
+                                            urllayer + "&FORMAT=utfgrid&tms=&TileCol={x}&TileRow={y}&TileMatrix={z}"
+                                        ]
+                                    }
+                                });
                                 source.set("tipoServico", "WMTS");
                                 var cloneopcoes = { ...opcoes };
                                 cloneopcoes.singleTile = false;
@@ -1242,33 +1182,21 @@ i3GEO.Interface =
                                 });
                                 source.set("tipoServico", "ImageWMS");
                             } else {
-                                if (i3GEO.Interface.googleLike === false) {
-                                    source = new ol.source.WMTS({
-                                        url: urllayer + "&WIDTH=256&HEIGHT=256",
-                                        crossOrigin: "anonymous",
-                                        matrixSet: opcoes.projection,
-                                        format: 'image/png',
-                                        projection: opcoes.projection,
-                                        tileGrid: new ol.tilegrid.WMTS({
-                                            origin: ol.extent.getTopLeft(projectionExtent),
-                                            resolutions: resolutions,
-                                            matrixIds: matrixIds,
-                                            tileSize: [256, 256]
-                                        }),
-                                        wrapX: true
-                                    });
-                                    source.set("tipoServico", "WMTS");
-                                } else {
-                                    source = new ol.source.XYZ({
-                                        crossOrigin: "anonymous",
-                                        url: urllayer + "&X={x}&Y={y}&Z={z}",
-                                        matrixSet: opcoes.projection,
-                                        format: 'image/png',
-                                        projection: opcoes.projection,
-                                        wrapX: true
-                                    });
-                                    source.set("tipoServico", "WMTS");
-                                }
+                                source = new ol.source.WMTS({
+                                    url: urllayer + "&WIDTH=256&HEIGHT=256",
+                                    crossOrigin: "anonymous",
+                                    matrixSet: opcoes.projection,
+                                    format: 'image/png',
+                                    projection: opcoes.projection,
+                                    tileGrid: new ol.tilegrid.WMTS({
+                                        origin: ol.extent.getTopLeft(projectionExtent),
+                                        resolutions: resolutions,
+                                        matrixIds: matrixIds,
+                                        tileSize: [256, 256]
+                                    }),
+                                    wrapX: true
+                                });
+                                source.set("tipoServico", "WMTS");
                             }
                             opcoes.title = camada.tema;
                             opcoes.name = camada.name;

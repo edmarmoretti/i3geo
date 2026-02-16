@@ -280,20 +280,10 @@ var i3GEO = {
                 p.openTipNoData = (c.components.tooltip.hasOwnProperty("openTipNoData")) ? c.components.tooltip.openTipNoData : true;
             }
         }
-        if (c.hasOwnProperty("openLayers") && c.mapType !== "GM") {
-            var d = c.openLayers;
-            i3GEO.Interface.ATUAL = "openlayers";
-            i3GEO.Interface.googleLike = (c.mapType == "OSM") ? true : false;
-            //TODO singletile nao funciona
-            i3GEO.Interface.TILES = (d.hasOwnProperty("singleTile") && d.singleTile != "") ? !d.singleTile : true;
-            i3GEO.Interface.parametrosMap = d.MapOptions;
-            i3GEO.Interface.parametrosView = d.ViewOptions;
-        }
-        if (c.hasOwnProperty("googleMaps") && c.mapType == "GM") {
-            i3GEO.Interface.ATUAL = "googlemaps";
-            i3GEO.Interface.googlemaps.ESTILOPADRAO = c.googleMaps.MapOptions.mapTypeId;
-            i3GEO.Interface.googlemaps.MAPOPTIONS = c.googleMaps.MapOptions;
-        }
+        var d = c.openLayers;
+        i3GEO.Interface.parametrosMap = d.MapOptions;
+        i3GEO.Interface.parametrosView = d.ViewOptions;
+
     },
     parametersMapSerialize: function (p) {
         if (typeof (console) !== 'undefined')
@@ -418,15 +408,6 @@ var i3GEO = {
         }
         if (temp && temp.style && temp.style.height) {
             par.push("&altura=" + parseInt(temp.style.height, 10));
-        }
-        if (i3GEO.Interface.googleLike == true) {
-            par.push("&interface=googlemaps");
-            //para a nova API rest
-            par.push("&projection=osm");
-        } else {
-            par.push("&interface=openlayers");
-            //para a nova API rest
-            par.push("&projection=geo");
         }
         return par.join("");
     },
@@ -570,9 +551,7 @@ var i3GEO = {
                     }
                     // obtem o cookie com a ultima extensao geografica
                     if (i3GEO.configura.guardaExtensao === true) {
-                        if (i3GEO.Interface.googleLike === true) {
-                            nomecookie = "i3geoUltima_ExtensaoOSM";
-                        }
+                        nomecookie = "i3geoUltima_ExtensaoOSM";
                         temp = i3GEO.util.pegaCookie(nomecookie);
                         if (temp && temp != "") {
                             temp = temp.replace(/[\+]/g, " ");

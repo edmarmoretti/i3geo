@@ -113,7 +113,6 @@ packer("analise.js","compactados/analise_compacto.js","Normal");
 packer("php.js","compactados/php_compacto.js","Normal");
 packer("interface.js","compactados/interface_compacto.js","Normal");
 packer("ini_i3geo.js","compactados/ini_i3geo_compacto.js","Normal");
-packer("social.js","compactados/social_compacto.js","Normal");
 packer("catalogoMenus.js","compactados/catalogoMenus_compacto.js","Normal");
 packer("catalogoInde.js","compactados/catalogoInde_compacto.js","Normal");
 packer("catalogoWs.js","compactados/catalogoWs_compacto.js","Normal");
@@ -168,7 +167,6 @@ $jsfiles = array(
 "compactados/arvoredetemas_compacto.js",
 "compactados/editor_compacto.js",
 "compactados/coordenadas_compacto.js",
-"compactados/social_compacto.js",
 "compactados/login_compacto.js",
 "compactados/marcador_compacto.js",
 "compactados/plugini3geo_compacto.js",
