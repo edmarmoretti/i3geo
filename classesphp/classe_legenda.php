@@ -170,11 +170,7 @@ class Legenda
             $this->templateleg = $template;
             return;
         }
-        if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-            $this->templateleg = $locaplic . "\\aplicmap\\" . $template;
-        } else {
-            $this->templateleg = $locaplic . "/aplicmap/" . $template;
-        }
+        $this->templateleg = $locaplic . "/aplicmap/" . $template;
     }
 
     /*
@@ -836,18 +832,10 @@ class Legenda
                 $t = "simlinv" . $versao . ".map";
                 $tamanho = $tamanho / 4;
             }
-            if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-                $mapatemp = ms_newMapObj($this->localaplicacao . "\\aplicmap\\" . $t);
-            } else {
-                $mapatemp = ms_newMapObj($this->localaplicacao . "/aplicmap/" . $t);
-            }
+            $mapatemp = ms_newMapObj($this->localaplicacao . "/aplicmap/" . $t);
             $l = $mapatemp->getlayer(0);
 
-            if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-                $novoss = dirname($this->mapa->symbolsetfilename) . "\\" . basename($mapatemp->symbolsetfilename);
-            } else {
-                $novoss = dirname($this->mapa->symbolsetfilename) . "/" . basename($mapatemp->symbolsetfilename);
-            }
+            $novoss = dirname($this->mapa->symbolsetfilename) . "/" . basename($mapatemp->symbolsetfilename);
 
             $this->mapa->setsymbolset($novoss);
 

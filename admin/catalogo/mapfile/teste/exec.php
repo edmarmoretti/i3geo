@@ -70,9 +70,6 @@ function mapaBase($locaplic, $versao, $base)
     include ($_SESSION["locaplic"] . "/ms_configura.php");
     if ($base == "" || ! isset($base)) {
         $base = "";
-        if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-            $base = $_SESSION["locaplic"] . "/aplicmap/geral1windowsv" . $versao . ".map";
-        } else {
             if ($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
                 $base = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
             }
@@ -85,7 +82,6 @@ function mapaBase($locaplic, $versao, $base)
             if ($base == "") {
                 $base = $_SESSION["locaplic"] . "/aplicmap/geral1v" . $versao . ".map";
             }
-        }
     }
     return $base;
 }

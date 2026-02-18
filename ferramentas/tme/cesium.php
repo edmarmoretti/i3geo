@@ -59,10 +59,6 @@ if(isset($base) && $base != ""){
 }
 else {
 	$f = "";
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-		$f = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
-	}
-	else {
 		if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 			$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 		}
@@ -76,7 +72,6 @@ else {
 		{
 			$f = $locaplic."/aplicmap/geral1v".$versao.".map";
 		}
-	}
 }
 $map_file = $dir_tmp."/".md5(implode("",$_GET)).".map";
 

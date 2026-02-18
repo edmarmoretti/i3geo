@@ -142,9 +142,6 @@ class Util
         }
         $versao = $this->mapserverversion();
         $versao = $versao["principal"];
-        if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-            $base = I3GEOPATH . "/aplicmap/geral1windowsv" . $versao . ".map";
-        } else {
             if ($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
                 $base = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
             }
@@ -157,7 +154,6 @@ class Util
             if ($base == "") {
                 $base = I3GEOPATH . "/aplicmap/geral1v" . $versao . ".map";
             }
-        }
         if (file_exists($base)) {
             return $base;
         } else {

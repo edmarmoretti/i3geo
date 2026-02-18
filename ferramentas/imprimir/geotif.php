@@ -22,12 +22,7 @@ include_once (dirname(__FILE__) . "/../../classesphp/carrega_ext.php");
 //
 $exts = get_loaded_extensions();
 if (array_search("MapScript", $exts) != TRUE) {
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-        if (! @dl('php_mapscript_48.dll'))
-            dl('php_mapscript.dll');
-    } else {
-        dl('php_mapscript.so');
-    }
+    dl('php_mapscript.so');
 }
 require (dirname(__FILE__) . "/../../classesphp/funcoes_gerais.php");
 // error_reporting(0);

@@ -440,9 +440,6 @@ if (isset($base) && $base != "") {
     }
 } else {
     $f = "";
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-        $f = $locaplic . "/aplicmap/geral1windowsv" . $versao . ".map";
-    } else {
         if ($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
             $f = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
         }
@@ -455,7 +452,6 @@ if (isset($base) && $base != "") {
         if ($f == "") {
             $f = $locaplic . "/aplicmap/geral1v" . $versao . ".map";
         }
-    }
 }
 echo "<div class='alert alert-success' role='alert'><h4>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: <strong>$f</strong></h4></div>";
 echo "<pre>";
@@ -501,11 +497,7 @@ echo "<h4>Carregando o map_file geral1... e acrescentando os limites estaduais (
 if (isset($estadosl)) {
     $maptemp = ms_newMapObj($locaplic . "/aplicmap/" . $estadosl . ".map");
 } else {
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-        $maptemp = ms_newMapObj($locaplic . "/aplicmap/estadoslwindows.map");
-    } else {
-        $maptemp = ms_newMapObj($locaplic . "/aplicmap/estadosl.map");
-    }
+    $maptemp = ms_newMapObj($locaplic . "/aplicmap/estadosl.map");
 }
 while ($error && $error->code != MS_NOERR) {
     printf("<div class='alert alert-danger' role='alert'>Error in %s: %s<br></div>", $error->routine, $error->message);

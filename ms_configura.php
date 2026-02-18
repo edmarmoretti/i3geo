@@ -6,10 +6,8 @@ if($_SERVER['SCRIPT_FILENAME'] == __FILE__){
 //ini_set('display_errors', 1);
 
 //verifica se o pai esta na mesma pasta
-if (!strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-	if(!stristr(dirname($_SERVER['SCRIPT_FILENAME']),"/".basename(dirname(__FILE__)))){
-	    exit;
-	}
+if(!stristr(dirname($_SERVER['SCRIPT_FILENAME']),"/".basename(dirname(__FILE__)))){
+    exit;
 }
 /*
 Title: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
@@ -614,23 +612,16 @@ Tipo:
 $i3geo_proxy_server = "";
 
 //valores de variaveis especificas para o sistema operacional em uso
-if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-{
-	$dir_tmp = "c:/ms4w/tmp/ms_tmp";
-	$locmapserv = "/cgi-bin/mapserv.exe";
-    $ogrOutput = false;
+
+$dir_tmp = "/tmp/ms_tmp";
+if(dirname($locaplic) == "/opt/www/html"){
+	$dir_tmp = "/var/tmp/ms_tmp";
 }
-else //se for linux
-{
+if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
 	$dir_tmp = "/tmp/ms_tmp";
-	if(dirname($locaplic) == "/opt/www/html"){
-		$dir_tmp = "/var/tmp/ms_tmp";
-	}
-	if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
-		$dir_tmp = "/tmp/ms_tmp";
-	}
-	$locmapserv = "/cgi-bin/mapserv";
 }
+$locmapserv = "/cgi-bin/mapserv";
+
 /**
  * Define o idioma de inicializacao (cookies nao devem ter sido definidos anteriormente)
  *

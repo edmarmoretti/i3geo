@@ -1731,9 +1731,6 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
     if (($map_file == "") || (! file_exists($map_file))) { // a funcao foi chamada do aplicativo datadownload
         if ($base == "" or ! isset($base)) {
             $base = "";
-            if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-                $base = $locaplic . "/aplicmap/geral1windowsv" . $versao . ".map";
-            } else {
                 if ($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
                     $base = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
                 }
@@ -1746,7 +1743,6 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
                 if ($base == "") {
                     $base = $locaplic . "/aplicmap/geral1v" . $versao . ".map";
                 }
-            }
         } else {
             if (! file_exists($base)) {
                 $base = $locaplic . "/aplicmap/" . $base;
