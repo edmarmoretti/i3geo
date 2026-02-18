@@ -393,20 +393,6 @@ Tipo:
 */
 $locaplic = dirname(__FILE__);
 /*
-Variable: locmapserv
-
-Localiza&ccedil;&atilde;o do execut&aacute;vel do Mapserver conforme deve ser acrescentado a URL ap&oacute;s o nome do host.
-
-Essa vari&aacute;vel &eacute; necess&aacute;ria em processos que utilizam o mapserver no modo CGI.
-
-Por exemplo, se o endere&ccedil;o for http://localhost/cgi-bin/mapserv.exe, a vari&aacute;vel dever&aacute; conter apenas /cgi-bin/mapserv.exe
-
-Tipo:
-{string}
-*/
-//ver opcao especifica abaixo para o sistema operacional
-$locmapserv = "";
-/*
 Variable: locmapas
 
 Onde fica o xml, para preencher a guia mapas.
@@ -610,7 +596,6 @@ $i3geo_proxy_server = "";
 //valores de variaveis especificas para o sistema operacional em uso
 
 $dir_tmp = "/tmp/ms_tmp";
-$locmapserv = "/cgi-bin/mapserv";
 
 /**
  * Define o idioma de inicializacao (cookies nao devem ter sido definidos anteriormente)

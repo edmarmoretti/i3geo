@@ -13,7 +13,7 @@ switch (strtoupper($_GET["funcao"]))
 		$protocolo1 = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'];
 		$protocolo = strtolower($protocolo) . '://'.$_SERVER['SERVER_NAME'] .":". $_SERVER['SERVER_PORT'];
 		$urli3geo = str_replace("/ferramentas/convertews/exec.php","",$protocolo.$_SERVER["PHP_SELF"]);
-		$wmc = $m->converteWMC($_SESSION["locmapserv"],$urli3geo);
+		$wmc = $m->converteWMC("/cgi-bin/mapserv",$urli3geo);
 		$retorno = array("wms"=>$wms,"wmc"=>$wmc);
 	break;
 }

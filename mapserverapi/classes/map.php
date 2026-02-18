@@ -127,7 +127,6 @@ class Map
         $res["mapres"] = $mapObj->resolution;
         $res["pixelsize"] = $celula;
         $res["mapfile"] = "";
-        $res["cgi"] = ""; // $locmapserv;
         $res["extentTotal"] = $ext;
         $res["geoip"] = "nao";
         $res["listavisual"] = "";

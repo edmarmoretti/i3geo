@@ -62,7 +62,6 @@
  *
  * $h - Altura da imagem do mapa.
  *
- * $locmapserv - Vari&aacute;vel definida no arquivo ms_configura.php que indica nome do mapserver cgi.
  *
  * $kmlurl - url de um arquivo kml que ser&aacute; inserido no mapa. V&aacute;lido para a interface google maps
  *
@@ -289,7 +288,6 @@
     $res["mapres"] = $m->mapa->resolution;
     $res["pixelsize"] = $celula;
     $res["mapfile"] = "";
-    $res["cgi"] = ""; // $locmapserv;
     $res["extentTotal"] = $ext;
     $geoip = "nao";
     $res["geoip"] = $geoip;

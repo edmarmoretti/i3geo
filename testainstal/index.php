@@ -290,7 +290,6 @@ echo <<<HTML
 		<div class="alert alert-success" role="alert">
 		<li>Mensagem de inicializa&ccedil;&atilde;o <span class="label label-default">$mensagemInicia</span></li>
 		<li>dir_tmp <span class="label label-default">$dir_tmp</span></li>
-		<li>locmapserv <span class="label label-default">$locmapserv</span></li>
 		<li>Localiza&ccedil;&atilde;o deste PHP <span class="label label-default">$loceste</span></li>
 		</div>
 HTML;
@@ -377,7 +376,7 @@ echo "</pre>";
 echo "<h3>CGI</h3>";
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
-$enderecocgi = $proto . $server . $locmapserv;
+$enderecocgi = $proto . $server . "/cgi-bin/mapserv";
 echo "<div class='alert alert-info' role='alert'>Voc&ecirc; pode testar o CGI clicando <a href='" . $enderecocgi . "' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'</div>";
 echo "<div class='alert alert-info' role='alert'>Em ambientes com SO Windows, algumas op&ccedil;&otilde;es de gera&ccedil;&atilde;o de servi&ccedil;os OGC apenas funcionam se a vari&aacute;vel ms_configura.php 'ogrOutput' estiver definida como 0 (false). <br>Valor da vari&aacute;vel ogrOutput: $ogrOutput </div>";
 

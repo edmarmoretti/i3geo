@@ -61,7 +61,7 @@ include_once($locaplic."/classesphp/classe_estatistica.php");
 
 function redesenhaMapa()
 {
-    global $locaplic,$map_file,$cp,$postgis_mapa,$locmapserv,$interface,$mapexten;
+    global $locaplic,$map_file,$cp,$postgis_mapa,$interface,$mapexten;
 	if (connection_aborted()){exit();}
 	include_once($locaplic."/classesphp/classe_mapa.php");
 	$m = New Mapa($map_file);

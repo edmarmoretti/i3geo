@@ -1454,7 +1454,7 @@ class Mapa
      *
      * Parametros:
      *
-     * $locmapserv - localiza&ccedil;&atilde;o do CGI do mapserver
+     * $loccgi - localiza&ccedil;&atilde;o do CGI do mapserver
      *
      * $h - host name
      *
@@ -1462,12 +1462,12 @@ class Mapa
      *
      * Endere&ccedil;o do WMC
      */
-    function converteWMC($locmapserv, $urli3geo)
+    function converteWMC($loccgi, $urli3geo)
     {
         $r = nomeRandomico(5);
         $nomews = str_replace(".map", $r . "wmc.map", $this->arquivo);
 
-        $nomeurl = $locmapserv . "?map=" . $nomews;
+        $nomeurl = $loccgi . "?map=" . $nomews;
         $nomeogc = $urli3geo . "/ogc.php?tema=" . $nomews;
         $w = $this->mapa->web;
         $w->set("template", "");

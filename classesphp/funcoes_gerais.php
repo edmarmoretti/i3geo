@@ -665,7 +665,6 @@ function restauraConObj($objMap, $postgis_mapa)
  * $objMapa {objeto} - Objeto map.
  *
  *
- * $locmapserv {string} - localliza&ccedil;&atilde;o do mapserver CGI
  *
  * $map_file {string} - mapfile que ser&aacute; processado
  *
@@ -679,7 +678,7 @@ function restauraConObj($objMap, $postgis_mapa)
  */
 function retornaReferencia($ext = "")
 {
-    global $nomeImagem, $objMapa,$locmapserv, $map_file;
+    global $nomeImagem, $objMapa, $map_file;
     if ($ext && $ext != "") {
         $e = explode(" ", $ext);
         $extatual = $objMapa->extent;
@@ -730,7 +729,6 @@ function retornaReferencia($ext = "")
  * $objMapa {objeto} - Objeto map.
  *
  *
- * $locmapserv {string} - localliza&ccedil;&atilde;o do mapserver CGI
  *
  * $map_file {string} - mapfile que ser&aacute; processado
  *
@@ -756,7 +754,7 @@ function retornaReferencia($ext = "")
  */
 function retornaReferenciaDinamica($ext = "", $w = "", $h = "", $zoom = -3, $tipo = "mapa")
 {
-    global $nomeImagem, $map_file, $locmapserv, $locaplic, $interface, $postgis_mapa;
+    global $nomeImagem, $map_file, $locaplic, $interface, $postgis_mapa;
     //
     // adiciona o tema com o web service com o mapa mundi
     //

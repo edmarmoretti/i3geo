@@ -129,7 +129,6 @@ class Mscriamapa
         $_SESSION["dir_tmp"] = $dir_tmp;
         $_SESSION["cachedir"] = $cachedir;
         $_SESSION["emailInstituicao"] = $emailInstituicao;
-        $_SESSION["locmapserv"] = $locmapserv;
         $_SESSION["locaplic"] = $locaplic;
         $_SESSION["debug"] = false;
         $_SESSION["ler_extensoes"] = [];

@@ -351,7 +351,6 @@ if (! isset($mapext) || empty($mapext)) {
 $cachedir_ = $cachedir;
 $dir_tmp_ = $dir_tmp;
 $emailInstituicao_ = $emailInstituicao;
-$locmapserv_ = $locmapserv;
 $locaplic_ = $locaplic;
 // $locsistemas_ = $locsistemas;
 // $locidentifica_ = $locidentifica;
@@ -428,7 +427,6 @@ if (isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined") {
 $_SESSION["dir_tmp"] = $dir_tmp_;
 $_SESSION["cachedir"] = $cachedir_;
 $_SESSION["emailInstituicao"] = $emailInstituicao_;
-$_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
 $_SESSION["mapext"] = $mapext_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
