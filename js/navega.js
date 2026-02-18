@@ -15,7 +15,6 @@ i3GEO.navega =
     /**
      * Function: offset
      *
-     * Nao implementado para googlemaps
      *
      * Desloca o centro do mapa
      *

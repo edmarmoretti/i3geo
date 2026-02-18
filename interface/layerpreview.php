@@ -53,7 +53,7 @@ include ($configInc["inc"] . "/css.php");
     <div id="i3GEONomeLogin"
         style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
     -->
-    <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
+    <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers
     Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
     -->
     <div id="mapai3Geo" style="width: 100vw; height: 100vh"></div>
@@ -325,7 +325,7 @@ include ($configInc["inc"] . "/css.php");
                 buscainde : {},
                 //ferramenta mapa de referencia
                 //difere das propriedades do mapa de referencia
-                //utilizado pela api openlayers ou googlemaps
+                //utilizado pela api openlayers
                 opcoesmaparef : {
                     //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
                     images : [ {

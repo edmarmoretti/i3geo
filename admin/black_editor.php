@@ -60,9 +60,6 @@ include ($configInc["inc"] . "/css.php");
     <div id="i3GEONomeLogin"
         style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
     -->
-    <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
-    Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
-    -->
     <div id="mapai3Geo" style="width: 100vw; height: 100vh"></div>
     <!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
     <?php include($configInc["inc"]."/escalanum.php");?>
@@ -205,7 +202,6 @@ include ($configInc["inc"] . "/css.php");
                 //opacidade default para camadas que nao sejam do tipo linha ou ponto
                 //a opacidade sera aplicada ao objeto HTML e nao ao LAYER original
                 //se for vazio, sera utilizado o valor definido no LAYER original
-                //Nao se aplica na interface googlemaps
                 layerOpacity : "",
                 //Funcao que sera executada apos a inicializacao do mapa
                 afterStart : function() {
@@ -327,7 +323,6 @@ include ($configInc["inc"] . "/css.php");
                 buscainde : {},
                 //ferramenta mapa de referencia
                 //difere das propriedades do mapa de referencia
-                //utilizado pela api openlayers ou googlemaps
                 opcoesmaparef : {
                     //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
                     images : [ {

@@ -460,10 +460,6 @@ class Temas
         if (! $this->layer) {
             return "erro";
         }
-        if ($this->mapa->getmetadata("interface") == "googlemaps") {
-            $projO = $this->mapa->getProjection();
-            $this->mapa->setProjection(pegaProjecaoDefault("proj4"));
-        }
         $prjMapa = "";
         $prjTema = "";
         if ($this->layer->type != MS_LAYER_RASTER) {
@@ -491,9 +487,6 @@ class Temas
         } else {
             $ret = explode(" ", $ret);
             $extatual->setextent($ret[0], $ret[1], $ret[2], $ret[3]);
-        }
-        if ($this->mapa->getmetadata("interface") == "googlemaps") {
-            $this->mapa->setProjection($projO);
         }
         $e = $this->mapa->extent;
         $ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
@@ -1228,11 +1221,6 @@ class Temas
         if (! $this->layer) {
             return "erro";
         }
-        if ($this->mapa->getmetadata("interface") == "googlemaps") {
-            $projO = $this->mapa->getProjection();
-            $projecao = pegaProjecaoDefault("epsg");
-            $this->mapa->setProjection("init=epsg:" . $projecao);
-        }
         $extatual = $this->mapa->extent;
         $prjMapa = $this->mapa->getProjection();
         $prjTema = $this->layer->getProjection();
@@ -1259,9 +1247,6 @@ class Temas
             $ret->project($projInObj, $projOutObj);
         }
         $extatual->setextent($ret->minx, $ret->miny, $ret->maxx, $ret->maxy);
-        if ($this->mapa->getmetadata("interface") == "googlemaps") {
-            $this->mapa->setProjection($projO);
-        }
         $e = $this->mapa->extent;
         $ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
         return ($ext);

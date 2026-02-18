@@ -2,126 +2,138 @@
 para nao selecionar
 */
 * {
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: -moz-none;
-    -o-user-select: none;
-    user-select: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: -moz-none;
+	-o-user-select: none;
+	user-select: none;
 }
-.bd input, .bd textarea, #escala input, .copyToMemory {
-    -webkit-user-select: text;
-    -khtml-user-select: text;
-    -moz-user-select: text;
-    -o-user-select: text;
-    user-select: text;
+
+.bd input,
+.bd textarea,
+#escala input,
+.copyToMemory {
+	-webkit-user-select: text;
+	-khtml-user-select: text;
+	-moz-user-select: text;
+	-o-user-select: text;
+	user-select: text;
 }
+
 #i3GEOlogoMarca {
 	display: block;
 	top: 4em;
 	zIndex: 5000;
 }
-#i3GEOlogoMarca > table {
+
+#i3GEOlogoMarca>table {
 	width: 100%;
 }
+
 .i3GEOlogoMarca {
-	font-size:14pt;
-	padding:5px;
+	font-size: 14pt;
+	padding: 5px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	background-color: white;
 }
-#i3GEOlogoMarca > img {
-	width:inherit;
-	padding:5px;
+
+#i3GEOlogoMarca>img {
+	width: inherit;
+	padding: 5px;
 }
 
 /*
 Banner inicial
 */
 #i3GEOlogoMarca {
-	width:95%;
-	max-width:600px;
-	text-align:center;
+	width: 95%;
+	max-width: 600px;
+	text-align: center;
 	margin: auto auto;
 	box-shadow: 0 1px 13px gray;
 	border-radius: 5px;
 }
+
 /*
 Para nao marcar links
 */
 a:active {
-    outline: none;
+	outline: none;
 }
+
 /*
 Popup do identifica no openlayers 3
 */
 .ol-popup {
-  position: absolute;
-  background-color: white;
-  -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-  padding: 8px;
-  border-radius: 10px;
-  border: 1px solid #cccccc;
-  bottom: 12px;
-  left: -50px;
-  z-Index: 2;
+	position: absolute;
+	background-color: white;
+	-webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+	filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+	padding: 8px;
+	border-radius: 10px;
+	border: 1px solid #cccccc;
+	bottom: 12px;
+	left: -50px;
+	z-Index: 2;
 }
-.ol-popup:after, .ol-popup:before {
-  top: 100%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-.ol-popup:after {
-  border-top-color: white;
-  border-width: 10px;
-  left: 48px;
-  margin-left: -10px;
-}
+
+.ol-popup:after,
 .ol-popup:before {
-  border-top-color: #cccccc;
-  border-width: 11px;
-  left: 48px;
-  margin-left: -11px;
+	top: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
 }
+
+.ol-popup:after {
+	border-top-color: white;
+	border-width: 10px;
+	left: 48px;
+	margin-left: -10px;
+}
+
+.ol-popup:before {
+	border-top-color: #cccccc;
+	border-width: 11px;
+	left: 48px;
+	margin-left: -11px;
+}
+
 .ol-popup-closer {
-  text-decoration: none;
-  position: absolute;
-  top: 2px;
-  right: 1px;
-  cursor:pointer;
+	text-decoration: none;
+	position: absolute;
+	top: 2px;
+	right: 1px;
+	cursor: pointer;
 }
+
 .ol-popup-closer:after {
-  content: "\2716";
-  color: red;
-  font-size: 16px;
+	content: "\2716";
+	color: red;
+	font-size: 16px;
 }
-/*
-Ajusta altura dos controles do googlemaps
-*/
-div.gmnoprint {
-	padding-top: 10px;
-}
+
 /*
 Utilizado na janela do buscador INDE
 */
-.meta-param, .meta-value{
+.meta-param,
+.meta-value {
 	text-align: left;
 	font-size: 12px;
 	padding: 5px;
 }
 
 .mensagemAjuda {
-	width:95%;
-	padding:2;
-	vertical-align:top;
+	width: 95%;
+	padding: 2;
+	vertical-align: top;
 }
 
 .mensagemAjuda th {
-	font-family:Verdana, Arial, Helvetica, sans-serif;
+	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 8pt;
 	border: 1px solid #B1CDEB;
 	text-align: left;
@@ -134,7 +146,7 @@ Utilizado na janela do buscador INDE
 }
 
 
-.i3GEOconteudoLegendaClass{
+.i3GEOconteudoLegendaClass {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 
@@ -144,9 +156,11 @@ Utilizado na janela do buscador INDE
 
 
 
-.i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
+.i3GEOarvCat input[type=radio],
+.i3GEOarvCat input[type=checkbox] {
 	display: none;
 }
+
 /*
 .i3GEOarvCat input[type=checkbox]+label:before {
     color: white;
@@ -173,16 +187,17 @@ Utilizado na janela do buscador INDE
 }
 */
 .i3GEOarvCat label {
-	left:12px;
+	left: 12px;
 }
 
 .i3GEOarvCam .ygtvitem {
-    text-align: left;
-    margin-top: 3px;
-    margin-bottom: 10px;
+	text-align: left;
+	margin-top: 3px;
+	margin-bottom: 10px;
 }
 
-.i3GEOarvCam input[type=radio], .i3GEOarvCam input[type=checkbox] {
+.i3GEOarvCam input[type=radio],
+.i3GEOarvCam input[type=checkbox] {
 	display: none;
 }
 
@@ -222,7 +237,7 @@ Utilizado na janela do buscador INDE
 	text-align: left;
 	cursor: pointer;
 	top: -1px;
-	font-weight : bold;
+	font-weight: bold;
 }
 
 .i3GEOarvCamTema {
@@ -231,7 +246,7 @@ Utilizado na janela do buscador INDE
 	text-align: left;
 	cursor: pointer;
 	top: -2px;
-	font-weight : bold;
+	font-weight: bold;
 }
 
 .i3GEOarvCamTemaIE {
@@ -239,23 +254,27 @@ Utilizado na janela do buscador INDE
 	font-size: 12pt;
 	vertical-align: middle;
 	display: table-cell;
-	font-weight : bold;
+	font-weight: bold;
 }
+
 .i3GEOarvCam .ygtvdepthcell {
-	background : none;
+	background: none;
 	display: none;
 }
 
-.i3GEOarvCamTema input, .i3GEOarvCamTemaIE input {
+.i3GEOarvCamTema input,
+.i3GEOarvCamTemaIE input {
 	cursor: pointer;
 }
 
-.i3GEOarvCamTema span, .i3GEOarvCamTemaIE span {
+.i3GEOarvCamTema span,
+.i3GEOarvCamTemaIE span {
 	vertical-align: top;
 	cursor: move;
 }
 
-.i3GEOarvCamTema img, .i3GEOarvCamTemaIE img {
+.i3GEOarvCamTema img,
+.i3GEOarvCamTemaIE img {
 	width: 15px;
 	height: 15px;
 	background-size: 15px;
@@ -263,7 +282,9 @@ Utilizado na janela do buscador INDE
 	top: 1px;
 	margin-left: 2px;
 }
-.i3GEOarvCamTemaIco img, .i3GEOarvCamTemaIcoIE img {
+
+.i3GEOarvCamTemaIco img,
+.i3GEOarvCamTemaIcoIE img {
 	width: 15px;
 	height: 15px;
 	background-size: 15px;
@@ -271,10 +292,13 @@ Utilizado na janela do buscador INDE
 	top: -1px;
 	margin-left: 3px;
 }
-.i3GEOarvCamTemaIco .arvCamFarol, .i3GEOarvCamTemaIcoIE .Farol {
+
+.i3GEOarvCamTemaIco .arvCamFarol,
+.i3GEOarvCamTemaIcoIE .Farol {
 	width: 11px;
 	height: 11px;
 }
+
 /*
 .i3GEOarvCamTemaIco .arvCamFerramentas, .i3GEOarvCamTemaIcoIE .Ferramentas {
 	background-image: url("../imagens/oxygen/16x16/configure-shortcuts.png");
@@ -320,24 +344,26 @@ Utilizado na janela do buscador INDE
 }
 */
 .i3GEObalaoInfo {
-	position : absolute;
-	textAlign : left;
-	background : white;
+	position: absolute;
+	textAlign: left;
+	background: white;
 	-moz-opacity: 0.9;
-	opacity:.90;
+	opacity: .90;
 	filter: alpha(opacity=90);
 	filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
 	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
 }
+
 .subbloco {
 	background-color: rgb(248, 248, 248);
 	width: 90%;
 	padding: 5px;
 	margin: 7px;
 }
-.i3GeoExemploImg{
-	margin:6px;
-	cursor:text;
+
+.i3GeoExemploImg {
+	margin: 6px;
+	cursor: text;
 	border: 0px solid gray;
 	box-shadow: 1px 1px 1px 1px #D3D3D3;
 	border-radius: 5px;
@@ -388,8 +414,8 @@ Utilizado na janela do buscador INDE
 	background-color: #e5e5e5;
 	color: black;
 	padding: 3px;
-	-webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-	filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+	-webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+	filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
 	border-radius: 6px;
 }
 
@@ -572,10 +598,12 @@ legend {
 	color: red;
 	font-size: 11px;
 }
+
 label {
 	margin-left: 5px;
 	margin-right: 2px;
 }
+
 caption {
 	font-size: 8px;
 	padding-top: 0px;
@@ -587,6 +615,7 @@ caption {
 span {
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+
 /*
 body {
 	background-color: black;
@@ -601,13 +630,13 @@ A {
 	font-size: 11pt;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	color: #26298D;
-	outline : none;
+	outline: none;
 }
 
 A:hover {
 	color: #4142ff;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
-	outline : none;
+	outline: none;
 }
 
 img {
@@ -622,6 +651,7 @@ table {
 	margin: 0px;
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 }
+
 td {
 	background-color: white;
 	border: 0px solid gray;
@@ -666,6 +696,7 @@ H1 {
 	width: 14px;
 	left: 2px;
 }
+
 /*
 .executar {
 	cursor: pointer;
@@ -914,7 +945,11 @@ H1 {
 	text-align: left;
 }
 
-#corpoMapa,#corpoMapaL,#corpoMapaO,#corpoMapaN,#corpoMapaS {
+#corpoMapa,
+#corpoMapaL,
+#corpoMapaO,
+#corpoMapaN,
+#corpoMapaS {
 	position: absolute;
 	left: 0px;
 	top: 0px;
@@ -996,12 +1031,16 @@ H1 {
 	z-index: 1000;
 }
 
-#legenda,#legendai,#corpoLegi,#listaPropriedades {
+#legenda,
+#legendai,
+#corpoLegi,
+#listaPropriedades {
 	overflow: auto;
 	background-color: white;
 	text-align: left;
 }
-#listaTemas{
+
+#listaTemas {
 	background-color: white;
 	text-align: left;
 	overflow: none;
@@ -1101,6 +1140,7 @@ h1 {
 	left: -1;
 	top: 0px
 }
+
 /*
 #vertBGDiv {
 	position: relative;
@@ -1122,6 +1162,7 @@ h1 {
 	-ms-user-select: none;
 	user-select: none;
 }
+
 /* utilizado pela ferramenta de cartogramas */
 .var_div_relatorio h1 {
 	font-size: 16px;
@@ -1159,6 +1200,7 @@ h1 {
 	width: 95%;
 	padding: 5px;
 }
+
 /*
 #editor_bd p {
 	margin-top: 15px;
@@ -1285,13 +1327,13 @@ h1 {
 
 
 .cabecalhoTemas {
-    display: inline-block;
-    line-height: 9px;
-    overflow: hidden;
-    text-align: left;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    width: 10em;
+	display: inline-block;
+	line-height: 9px;
+	overflow: hidden;
+	text-align: left;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	width: 10em;
 }
 
 .styled-select {
@@ -1313,7 +1355,8 @@ h1 {
 	border-radius: 2px;
 }
 
-.styled-select select, .styled-select150 select {
+.styled-select select,
+.styled-select150 select {
 	width: 100%;
 	height: 22px;
 	border: 0;
@@ -1341,46 +1384,60 @@ h1 {
 	.noprint {
 		display: none !important;
 	}
+
 	.yui-skin-sam .yui-panel .hd {
 		display: none !important;
 	}
+
 	.yui-skin-sam .yui-panel .ft {
 		display: none !important;
 	}
+
 	.yui-navset {
 		display: none !important;
 	}
+
 	.yui-skin-sam .yui-button {
 		display: none !important;
 	}
+
 	.yuimenubar {
 		display: none !important;
 	}
+
 	.eudockImagemBottom {
 		display: none !important;
 	}
+
 	.eudockImagemTop {
 		display: none !important;
 	}
+
 	#i3GEOcompartilhar {
 		display: none !important;
 	}
+
 	.iconesGuiaMovel {
 		display: none !important;
 	}
+
 	.localizarxy {
 		display: none !important;
 	}
+
 	.i3GEOfechaGuia {
 		display: none !important;
 	}
+
 	input[type="radio"] {
 		display: none !important;
 	}
+
 	input[type="checkbox"] {
 		display: none !important;
 	}
-	.legenda > label + input[type="checkbox"]:disabled {
+
+	.legenda>label+input[type="checkbox"]:disabled {
 		display: none !important;
- 	}
+	}
 }

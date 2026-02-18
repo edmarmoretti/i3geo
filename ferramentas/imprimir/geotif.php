@@ -36,13 +36,6 @@ $of = $map->outputformat;
 $of->set("driver", "GDAL/GTiff");
 $of->set("imagemode", "RGB");
 
-if ($map->getmetadata("interface") == "googlemaps") {
-    $proj4 = pegaProjecaoDefault("proj4");
-    $map->setProjection($proj4);
-    $map->set("units", MS_METERS);
-    $map->preparequery();
-    $map->set("scaledenom", $map->scaledenom * 100000);
-}
 $o = $map->outputformat;
 if ($mapexten != "") {
     $ext = explode(" ", $mapexten);

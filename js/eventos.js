@@ -435,10 +435,6 @@ i3GEO.eventos =
 	 */
 	posicaoMouseMapa: function (e) {
 		// Utilizado pelo mapa de referencia
-		// os eventos da interface googlemaps s&atilde;o definidos em i3GEO.Interface
-		// se a interface for googlemaps ou openlayers, os eventos s&atilde;o controlados
-		// pelas respectivas apis
-		// caso contr&aacute;rio, o i3geo ir&aacute; controlar os c&aacute;lculos
 		//
 		var teladd, teladms, container = "", targ = "", pos, mousex, mousey, xfig, yfig, xreffig, yreffig, xtela, ytela, c, ex;
 		if (!e) {

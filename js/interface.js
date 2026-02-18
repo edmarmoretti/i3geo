@@ -621,7 +621,6 @@ i3GEO.Interface =
     },
     /**
      * Cria as camadas de fundo default
-     * Usado na troca de interfaces entre googlemaps e openlayers
      */
     fundoDefault: function () {
     },
@@ -918,7 +917,7 @@ i3GEO.Interface =
             temp.style.display = "none";
         }
         // url do programa i3Geo que renderiza camada
-        url = configura.locaplic + "/classesphp/mapa_googlemaps.php?";
+        url = configura.locaplic + "/map.php?";
         projectionExtent = ol.proj.get('EPSG:3857').getExtent();
         url += "g_sid=" + i3GEO.configura.sid;
 
@@ -1052,7 +1051,13 @@ i3GEO.Interface =
                             }
                             urllayer += "&layer=" + camada.name;
                             //se for do tipo utfgrid uma camada a mais e adicionada
+                            if (typeof (console) !== 'undefined')
+                                console.info("i3GEO.Interface vefifica camada utfgrid para " + camada.name);
+
                             if (camada.utfgrid == "sim" && i3GEO.parametros.w > 500) {
+                                if (typeof (console) !== 'undefined')
+                                    console.info("i3GEO.Interface adiciona camada utfgrid para " + camada.name);
+
                                 source = new ol.source.TileUTFGrid({
                                     projection: opcoes.projection,
                                     wrapX: true,

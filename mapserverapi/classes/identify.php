@@ -204,10 +204,6 @@ class Identify
     {
         $resultado = array();
         $wkt = "nao";
-        if ($mapObj->getmetadata("interface") == "googlemaps") {
-            $projO = $mapObj->getProjection();
-            $mapObj->setProjection($_SESSION["i3GeoProjDefault"]["proj4"]);
-        }
         $ptimg = $this->map->xy2pixel($mapObj, $x, $y);
         $formatosinfo = $layerObj->getmetadata("formatosinfo");
         $formatosinfohtml = false;

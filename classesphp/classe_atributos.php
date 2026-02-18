@@ -145,10 +145,6 @@ class Atributos
                 $extatual = $this->mapa->extent;
                 $extatual->setextent((min($e[0], $e[2])), (min($e[1], $e[3])), (max($e[0], $e[2])), (max($e[1], $e[3])));
             }
-            if ($this->mapa->getmetadata("interface") == "googlemaps") {
-                $this->projO = $this->mapa->getProjection();
-                $this->mapa->setProjection(pegaProjecaoDefault("proj4"));
-            }
         }
     }
 
@@ -160,9 +156,6 @@ class Atributos
      */
     function salva()
     {
-        if ($this->mapa->getmetadata("interface") == "googlemaps") {
-            $this->mapa->setProjection($this->projO);
-        }
         restauraConObj($this->mapa, $this->postgis_mapa);
         if ($this->arquivo != "") {
             $this->mapa->save($this->arquivo);

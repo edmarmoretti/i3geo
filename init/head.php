@@ -6,7 +6,7 @@ if(extension_loaded('zlib')){
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
-<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=ISO-8859-1">
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=UTF-8">
 <?php
 //utilizado para o cabecalho das paginas que nao sao mapas e que usam bootstrap com material design
 echo "
@@ -19,15 +19,16 @@ echo "
     <link rel='icon' href='" . ONDEI3GEO . "/favicon.ico'>
     <title>i3Geo</title>
     <!-- Material Design fonts -->
-    <link rel='preload' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=optional'>
-    <link rel='preload' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio&display=optional'>
-    <link rel='preload' type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons&display=optional'>
+    <link type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=optional'>
+    <link type='text/css' href='//fonts.googleapis.com/css?family=Gelasio&display=optional'>
+    <link type='text/css' href='//fonts.googleapis.com/icon?family=Material+Icons&display=optional'>
     <!-- Bootstrap core CSS -->
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap/css/bootstrap.min.css' rel='stylesheet'>
     <!-- Bootstrap Material Design -->
     <link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/css/bootstrap-material-design.min.css'>
     <link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/pacotes/bootstrap-material-design/dist/css/ripples.min.css'>
     <link href='" . ONDEI3GEO . "/pacotes/bootstrap-accessibility-plugin/plugins/css/bootstrap-accessibility.css' rel='stylesheet'>
+    <link rel='stylesheet' type='text/css' href='" . ONDEI3GEO . "/css/font/material-icons.css'>
     <script src='" . ONDEI3GEO . "/init/headjs.php'></script>";
 ?>
 <style>

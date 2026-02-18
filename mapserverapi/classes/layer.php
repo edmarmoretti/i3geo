@@ -724,11 +724,6 @@ class Layer
             return false;
         }
         $layerObj = $mapObj->getLayerByname($layerName);
-        if ($mapObj->getmetadata("interface") == "googlemaps") {
-            $projO = $mapObj->getProjection();
-            $projecao = $this->util->getDefaultProjection("epsg");
-            $mapObj->setProjection("init=epsg:" . $projecao);
-        }
         $extatual = $mapObj->extent;
         $prjMapa = $mapObj->getProjection();
         $prjTema = $layerObj->getProjection();
@@ -759,9 +754,6 @@ class Layer
             $ret->project($projInObj, $projOutObj);
         }
         $extatual->setextent($ret->minx, $ret->miny, $ret->maxx, $ret->maxy);
-        if ($mapObj->getmetadata("interface") == "googlemaps") {
-            $mapObj->setProjection($projO);
-        }
         $e = $mapObj->extent;
         $ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;
         return ($ext);

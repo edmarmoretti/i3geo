@@ -239,10 +239,6 @@ if (! isset($funcao)) {
      */
     include_once (dirname(__FILE__) . "/classesphp/sani_request.php");
     include_once (dirname(__FILE__) . "/classesphp/funcoes_gerais.php");
-    if (! isset($_GET["interface"])) {
-        $_GET["interface"] = "";
-    }
-    $interface = $_GET["interface"];
 }
 $parurl = array_merge($_GET, $_POST);
 //
@@ -293,9 +289,6 @@ if (! isset($dir_tmp)) {
     include_once (dirname(__FILE__) . "/ms_configura.php");
     if (! empty($parurl["base"])) {
         $base = $parurl["base"];
-    }
-    if (! empty($parurl["interface"])) {
-        $interface = $parurl["interface"];
     }
 }
 if (! empty($restauramapa)) {
@@ -937,15 +930,15 @@ function criaDirMapa($dir_tmp, $cachedir = "")
             if (! file_exists($dir_tmp . "/cache")) {
                 @mkdir($dir_tmp . "/cache", 0744);
                 chmod($dir_tmp . "/cache", 0744);
-                @mkdir($dir_tmp . "/cache/googlemaps", 0744);
-                chmod($dir_tmp . "/cache/googlemaps", 0744);
+                @mkdir($dir_tmp . "/cache/wmts", 0744);
+                chmod($dir_tmp . "/cache/wmts", 0744);
             }
         } else {
             if (! file_exists($cachedir)) {
                 @mkdir($cachedir, 0744);
                 chmod($cachedir, 0744);
-                @mkdir($cachedir . "/googlemaps", 0744);
-                chmod($cachedir . "/googlemaps", 0744);
+                @mkdir($cachedir . "/wmts", 0744);
+                chmod($cachedir . "/wmts", 0744);
             }
         }
         if (file_exists($dir_tmp . "/" . $tmpdirname)) {

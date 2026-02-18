@@ -62,12 +62,6 @@ class Map
         $of->set("transparent", MS_ON);
         $of->setOption("QUANTIZE_FORCE", "OFF");
         $of->set("driver", "AGG/PNG");
-        if (empty(@$_SESSION["interface"])) {
-            $_SESSION["interface"] = "googlemaps";
-        }
-        if ($_SESSION["interface"] == "googlemaps") {
-            $mapObj->setProjection("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m");
-        }
         if (! empty($w)) {
             $mapObj->setsize($w, $h);
         } else {
@@ -237,8 +231,6 @@ class Map
             "legendaimg",
             "offsite",
             "numclasses",
-            "id_medida_variavel",
-            "codigo_tipo_regiao",
             "utfgrid",
             "maxscaledenom",
             "minscaledenom",
@@ -1479,10 +1471,6 @@ class Map
         }
         $mapObj = ms_newMapObj($_SESSION["map_file"]);
         $layerObj = $mapObj->getLayerByname($layerName);
-        if ($mapObj->getmetadata("interface") == "googlemaps") {
-            $projO = $mapObj->getProjection();
-            $mapObj->setProjection($_SESSION["i3GeoProjDefault"]["proj4"]);
-        }
         $prjMapa = "";
         $prjTema = "";
         if ($layerObj->type != MS_LAYER_RASTER) {
@@ -1510,9 +1498,6 @@ class Map
         } else {
             $ret = explode(" ", $ret);
             $extatual->setextent($ret[0], $ret[1], $ret[2], $ret[3]);
-        }
-        if ($mapObj->getmetadata("interface") == "googlemaps") {
-            $mapObj->setProjection($projO);
         }
         $e = $mapObj->extent;
         $ext = $e->minx . " " . $e->miny . " " . $e->maxx . " " . $e->maxy;

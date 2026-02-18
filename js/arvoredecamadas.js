@@ -1048,6 +1048,7 @@ i3GEO.arvoreDeCamadas =
 				t = {};
 				for (j = 0; j < nchaves; j++) {
 					t[chaves[j]] = tema[j];
+					//console.log(chaves[j] + " " + tema[j]);
 				}
 				novo.push(t);
 			}

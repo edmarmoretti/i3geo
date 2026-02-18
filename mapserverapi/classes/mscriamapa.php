@@ -122,7 +122,6 @@ class Mscriamapa
         }
         $_SESSION["kmlurl"] = $kmlurl;
         $_SESSION["projection"] = $projection;
-        $_SESSION["interface"] = ($projection == "geo") ? "openlayers" : "googlemaps";
         $_SESSION["mapext"] = str_replace(",", " ", $mapext);
 
         $_SESSION["base"] = $base;
@@ -194,15 +193,15 @@ class Mscriamapa
                 if (! file_exists($dir_tmp . "/cache")) {
                     @mkdir($dir_tmp . "/cache", 0744);
                     chmod($dir_tmp . "/cache", 0744);
-                    @mkdir($dir_tmp . "/cache/googlemaps", 0744);
-                    chmod($dir_tmp . "/cache/googlemaps", 0744);
+                    @mkdir($dir_tmp . "/cache/wmts", 0744);
+                    chmod($dir_tmp . "/cache/wmts", 0744);
                 }
             } else {
                 if (! file_exists($cachedir)) {
                     @mkdir($cachedir, 0744);
                     chmod($cachedir, 0744);
-                    @mkdir($cachedir . "/googlemaps", 0744);
-                    chmod($cachedir . "/googlemaps", 0744);
+                    @mkdir($cachedir . "/wmts", 0744);
+                    chmod($cachedir . "/wmts", 0744);
                 }
             }
             if (file_exists($dir_tmp . "/" . $tmpdirname)) {

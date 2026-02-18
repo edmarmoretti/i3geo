@@ -711,7 +711,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	}
 
 	if($cache == true){
-		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
+		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/wmts/$layer0->name/$z/$x/$y");
 	}
 	$n = pow(2,$z);
 	$lon1 = $x / $n * 360.0 - 180.0;
@@ -756,7 +756,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 		exit;
 	}
 	if($cache == true){
-		salvaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
+		salvaCacheImagem($cachedir,$nomeMapfileTmp,"/wmts/$layer0->name/$z/$x/$y");
 	}
 	renderNocacheTms();
 }

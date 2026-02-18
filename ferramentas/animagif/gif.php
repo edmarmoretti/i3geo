@@ -193,12 +193,6 @@ else{
 if ($ret != ""){
     $ret = explode(" ",$ret);
     $extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
-    if ($mapa->getmetadata("interface") == "googlemaps") {
-        $ret = $mapa->extent;
-        // reprojeta o retangulo
-        $ret->project($projInObj, $projOutObj);
-        $extatual->setextent($ret->minx, $ret->miny, $ret->maxx, $ret->maxy);
-    }
 }
 $mapa->setsize($w,$h);
 $sca = $mapa->scalebar;

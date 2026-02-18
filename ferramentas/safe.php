@@ -71,9 +71,6 @@ function redesenhaMapa()
 	include_once(dirname(__FILE__)."/../classesphp/classe_mapa.php");
 	$m = New Mapa($map_file);
 	$par = $m->parametrosTemas();
-	//
-	//na interface googlemaps n&atilde;o &eacute; necess&aacute;rio gerar a imagem
-	//
 	$e = $m->mapa->extent;
 	$ext = $e->minx." ".$e->miny." ".$e->maxx." ".$e->maxy;
 	$res["mapexten"] = $ext;

@@ -36,9 +36,9 @@ if (file_exists($dir_tmp)) {
         @mkdir($dir_tmp . "/cache", 0744);
         chmod($dir_tmp . "/cache", 0744);
     }
-    if (! file_exists($dir_tmp . "/cache/googlemaps")) {
-        @mkdir($dir_tmp . "/cache/googlemaps", 0744);
-        chmod($dir_tmp . "/cache/googlemaps", 0744);
+    if (! file_exists($dir_tmp . "/cache/wmts")) {
+        @mkdir($dir_tmp . "/cache/wmts", 0744);
+        chmod($dir_tmp . "/cache/wmts", 0744);
     }
     foreach (glob($dir_tmp . '/{,.}*.php', GLOB_BRACE) as $f) {
         unlink($f);

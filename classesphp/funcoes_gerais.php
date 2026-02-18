@@ -738,7 +738,6 @@ function retornaReferencia($ext = "")
  *
  * $tipo - tipo de refer&ecirc;ncia dinamico|mapa
  *
- * $interface - interface do mapa atual openlayers|googlemaps|googleearth
  *
  * Parametros:
  *
@@ -754,19 +753,12 @@ function retornaReferencia($ext = "")
  */
 function retornaReferenciaDinamica($ext = "", $w = "", $h = "", $zoom = -3, $tipo = "mapa")
 {
-    global $nomeImagem, $map_file, $locaplic, $interface, $postgis_mapa;
+    global $nomeImagem, $map_file, $locaplic, $postgis_mapa;
     //
     // adiciona o tema com o web service com o mapa mundi
     //
     $objMapa = ms_newMapObj($map_file);
     substituiConObj($objMapa, $postgis_mapa);
-    $i = $objMapa->getmetadata("interface");
-    if ($i == "") {
-        $i = $interface;
-    }
-    if ($i == "googlemaps") {
-        $objMapa->setProjection(pegaProjecaoDefault("proj4"));
-    }
     if ($ext && $ext != "") {
         $e = explode(" ", $ext);
         $extatual = $objMapa->extent;
@@ -817,9 +809,6 @@ function retornaReferenciaDinamica($ext = "", $w = "", $h = "", $zoom = -3, $tip
     $nomer = ($objImagem->imageurl) . basename($nomer);
     $s = "var refimagem='" . $nomer . "';var refwidth=" . $w . ";var refheight=" . $h . ";var refpath='" . $objImagem->imagepath . "';var refurl='" . $objImagem->imageurl . "'";
     $mapa = ms_newMapObj($map_file);
-    if ($i == "googlemaps") {
-        $mapa->setProjection(pegaProjecaoDefault("proj4"));
-    }
     $ref = $mapa->reference;
     $r = $ref->extent;
     //

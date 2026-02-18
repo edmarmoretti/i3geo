@@ -29,13 +29,6 @@ $nomes = nomeRandomico();
 
 $map = ms_newMapObj($map_file);
 substituiConObj($map,$postgis_mapa);
-if($map->getmetadata("interface") == "googlemaps"){
-	$proj4 = pegaProjecaoDefault("proj4");
-	$map->setProjection($proj4);
-	$map->set("units",MS_METERS);
-	$map->preparequery();
-	$map->set("scaledenom",$map->scaledenom * 100000);
-}
 
 $v = versao();
 
