@@ -233,8 +233,6 @@ include ($configInc["inc"] . "/css.php");
             var config = {
                 //id do elemento HTML onde o corpo do mapa sera renderizado
                 mapBody : "mapai3Geo",
-                //tipo de mapa. Pode ser:
-                mapType : "OSM",
                 //mostra ou nao a barra de progresso do carregamento de camadas
                 layerProgressBar: false,
 

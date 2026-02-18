@@ -209,7 +209,6 @@ include ($configInc["inc"] . "/css.php");
             };
             var config = {
                 mapBody : "mapai3Geo",
-                mapType : "OSM",
                 layerProgressBar: true,
                 saveExtension : false,
                 i3GeoServer : i3GeoUrl,

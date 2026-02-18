@@ -191,11 +191,6 @@ include ($configInc["inc"] . "/css.php");
             var config = {
                 //id do elemento HTML onde o corpo do mapa sera renderizado
                 mapBody : "mapai3Geo",
-                //tipo de mapa. Pode ser:
-                //OL - utiliza o OpenLayers e coordenadas geograficas
-                //OSM - utiliza o OpenLayers e o OpenStreetMap como fundo, em projecao semelhante ao GoogleMaps
-                //GM - utiliza o GoogleMaps como motor de controle do mapa
-                mapType : "OL",
                 //mostra ou nao a barra de progresso do carregamento de camadas
                 layerProgressBar: false,
 
@@ -208,7 +203,6 @@ include ($configInc["inc"] . "/css.php");
                 //opacidade default para camadas que nao sejam do tipo linha ou ponto
                 //a opacidade sera aplicada ao objeto HTML e nao ao LAYER original
                 //se for vazio, sera utilizado o valor definido no LAYER original
-                //Nao se aplica na interface googlemaps
                 layerOpacity : "",
                 //Funcao que sera executada apos a inicializacao do mapa
                 afterStart : function() {
