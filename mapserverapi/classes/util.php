@@ -140,17 +140,7 @@ class Util
         if ($_SESSION["base"] != "" && file_exists($_SESSION["base"])) {
             return $_SESSION["base"];
         }
-        $versao = $this->mapserverversion();
-        $versao = $versao["principal"];
-            if ($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
-                $base = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
-            }
-            if ($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
-                $base = "/var/www/html/i3geo/aplicmap/geral1fedorav" . $versao . ".map";
-            }
-            if ($base == "") {
-                $base = I3GEOPATH . "/aplicmap/geral1v" . $versao . ".map";
-            }
+        $base = I3GEOPATH . "/aplicmap/startmap.map";
         if (file_exists($base)) {
             return $base;
         } else {

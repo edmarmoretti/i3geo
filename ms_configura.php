@@ -540,7 +540,7 @@ Vc pode usar essa vari&aacute;vel para customizar a inicializa&ccedil;&atilde;o 
 Tipo:
 {string}
 */
-$base = "";
+$base = "/var/www/i3geo/aplicmap/startmap.map";
 /*
 Variable: cachedir
 
