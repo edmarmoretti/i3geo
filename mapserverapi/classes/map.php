@@ -1215,7 +1215,6 @@ class Map
             }
             $desligarLayer = array();
             if ($layerObj->status == MS_DEFAULT) {
-                // "legendawms" "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=biomas&format=image/png"
 
                 if ($layerObj->getmetadata("legendaimg") != "" || $layerObj->getmetadata("legendawms") != "") {
                     $imagem = $layerObj->getmetadata("legendaimg");
@@ -1680,7 +1679,6 @@ class Map
             }
             $desligarLayer = array();
             if ($la->status == MS_DEFAULT) {
-                // "legendawms" "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=biomas&format=image/png"
 
                 if ($la->getmetadata("legendaimg") != "" || $la->getmetadata("legendawms") != "") {
                     $imagem = $la->getmetadata("legendaimg");

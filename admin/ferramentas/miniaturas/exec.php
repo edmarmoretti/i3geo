@@ -106,12 +106,10 @@ function verificaMiniatura($map,$tipo,$admin=false)
 				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
 				}
-				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-					$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-				}
 				if($f == ""){
 					$f = $_SESSION["locaplic"]."/aplicmap/geral1v".$versao.".map";
 				}
+		}
 		$mapa = ms_newMapObj($f);
 		if($extensao == ".map"){
 			if(@ms_newMapObj($tema)){

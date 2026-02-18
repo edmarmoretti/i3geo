@@ -14,10 +14,6 @@ Title: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
 
 Nesse programa PHP s&atilde;o definidas as vari&aacute;veis globais principais necess&aacute;rias ao funcionamento do I3Geo do lado do servidor web.
 
-O ms_configura &eacute; inclu&iacute;do em v&aacute;rios programas do i3Geo e os valores das vari&aacute;veis devem ser editados
-caso a instala&ccedil;&atilde;o do i3geo tenha sido feita em um diret&oacute;rio diferente do padr&atilde;o.
-No windows o diret&oacute;rio padr&atilde;o &eacute; c:\ms4w\apache\htdocs\i3geo e no linux &eacute; /opt/www/html/i3geo
-
 Para verificar a instala&ccedil;&atilde;o do i3geo utilize o programa i3geo/testainstal.php, que pode fornecer algumas dicas
 caso estejam ocorrendo problemas na inicialliza&ccedil;&atilde;o.
 
@@ -614,12 +610,6 @@ $i3geo_proxy_server = "";
 //valores de variaveis especificas para o sistema operacional em uso
 
 $dir_tmp = "/tmp/ms_tmp";
-if(dirname($locaplic) == "/opt/www/html"){
-	$dir_tmp = "/var/tmp/ms_tmp";
-}
-if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
-	$dir_tmp = "/tmp/ms_tmp";
-}
 $locmapserv = "/cgi-bin/mapserv";
 
 /**
