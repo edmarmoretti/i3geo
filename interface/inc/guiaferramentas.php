@@ -10,13 +10,13 @@
     <div style="overflow-y: scroll; height: calc(100% - 45px);">
         <div class="form-inline text-center" style="width: 100%;">
             <div class="text-center form-group" style="margin: 4px; display: inline-block">
-                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.area();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
+                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.area();" role="button" class="btn btn-success btn-fab btn-fab-max" style="background-color:#eee"href="javascript:void(0)">
                     <img style="margin-top: 4px;" src="../imagens/gisicons/area-measure.png">
                 </a>
                 <h6>{{{d21at}}}</h6>
             </div>
             <div class="text-center form-group" style="margin: 4px; display: inline-block">
-                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.distancia();" role="button" class="btn btn-success btn-fab btn-fab-max" href="javascript:void(0)">
+                <a onclick="i3GEO.guias.abreFecha('fecha');i3GEO.analise.dialogo.distancia();" role="button" class="btn btn-success btn-fab btn-fab-max" style="background-color:#eee" href="javascript:void(0)">
                     <img style="margin-top: 4px;" src="../imagens/gisicons/length-measure.png">
                 </a>
                 <h6>{{{d21t}}}</h6>
@@ -25,7 +25,8 @@
         <div class="clearfix"></div>
         <div id="searchInputFerramentas" data-template="<?php echo $configInc["pathtemplates"];?>/searchInput.html" style='display: block; text-align: center; width: 100%; padding-left: 1rem; padding-right: 1rem;'></div>
         <div id="migalhaFerramentas" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasMigalha.html" style='display: block; text-align: left;'></div>
-        <div id="listaFerramentasLinks" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasLink.html" style='display: block; text-align: left'></div>
         <div id="listaFerramentas" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasFolder.html" style='display: block; text-align: left'></div>
+
+        <div id="listaFerramentasLinks" data-template="<?php echo $configInc["pathtemplates"];?>/ferramentasLink.html" style='display: block; text-align: left'></div>
     </div>
 </div>
