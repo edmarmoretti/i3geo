@@ -285,22 +285,22 @@ i3GEOF.area =
 			texto =
 				"<strong>Total </strong><br>" + $trad("d21at")
 				+ " km2: "
-				+ $.number((area / 1000000), 3, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat((area / 1000000), 3, $trad("dec"), $trad("mil"))
 				+ "<br>"
 				+ $trad("d21at")
 				+ " ha: "
-				+ $.number((area / 10000), 3, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat((area / 10000), 3, $trad("dec"), $trad("mil"))
 				+ "<div class='hidden-sm hidden-xs' >"
 				+ $trad("x98")
 				+ " km: "
-				+ $.number(per, 2, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat(per, 2, $trad("dec"), $trad("mil"))
 				+ "<br>"
 				+ $trad("x25")
 				+ ": "
 				+ i3GEO.calculo.metododistancia
 				+ "</div>";
 			mostra.innerHTML = texto;
-			i3GEOF.area._parameters.ultimaMedida = $.number((area / 1000000), 3, $trad("dec"), $trad("mil")) + " km2";
+			i3GEOF.area._parameters.ultimaMedida = i3GEO.NumberFormat((area / 1000000), 3, $trad("dec"), $trad("mil")) + " km2";
 		}
 	},
 	/**
@@ -312,19 +312,19 @@ i3GEOF.area =
 			texto =
 				"<strong>Parcial</strong> <br>" + $trad("d21at")
 				+ " km2:"
-				+ $.number((area / 1000000), 3, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat((area / 1000000), 3, $trad("dec"), $trad("mil"))
 				+ "<br>"
 				+ $trad("d21at")
 				+ " ha: "
-				+ $.number((area / 10000), 2, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat((area / 10000), 2, $trad("dec"), $trad("mil"))
 				+ "<div class='hidden-sm hidden-xs' >"
 				+ $trad("x95")
 				+ " km: "
-				+ $.number(trecho, 3, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat(trecho, 3, $trad("dec"), $trad("mil"))
 				+ "<br>"
 				+ $trad("x98")
 				+ " km: "
-				+ $.number(per, 3, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat(per, 3, $trad("dec"), $trad("mil"))
 				+ "<br>"
 				+ $trad("x23")
 				+ " (DMS):"

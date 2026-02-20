@@ -218,7 +218,7 @@ var i3GEO = {
     init: function (parametrosMapa, configMapa) {
         //corrige o problema da opcao de copiar para a memoria em modal
         //veja https://github.com/zenorocha/clipboard.js/issues/388
-        $.fn.modal.Constructor.prototype.enforceFocus = function () { };
+        //$.fn.modal.Constructor.prototype.enforceFocus = function () { };
         if ($.material) {
             $.material.init();
         }
@@ -800,5 +800,26 @@ var i3GEO = {
         } else {
             i3GEO.parametros.editor = "nao";
         }
+    },
+    NumberFormat: function (number, decimals, dec_point, thousands_sep) {
+        number = (number + '').replace(/[^0-9+\-Ee.]/g, '');
+        var n = !isFinite(+number) ? 0 : +number,
+            prec = !isFinite(+decimals) ? 0 : Math.abs(decimals),
+            sep = (typeof thousands_sep === 'undefined') ? ',' : thousands_sep,
+            dec = (typeof dec_point === 'undefined') ? '.' : dec_point,
+            s = '',
+            toFixedFix = function (n, prec) {
+                var k = Math.pow(10, prec);
+                return '' + Math.round(n * k) / k;
+            };
+        s = (prec ? toFixedFix(n, prec) : '' + Math.round(n)).split('.');
+        if (s[0].length > 3) {
+            s[0] = s[0].replace(/\B(?=(?:\d{3})+(?!\d))/g, sep);
+        }
+        if ((s[1] || '').length < prec) {
+            s[1] = s[1] || '';
+            s[1] += new Array(prec - s[1].length + 1).join('0');
+        }
+        return s.join(dec);
     }
 };

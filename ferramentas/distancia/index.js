@@ -272,7 +272,7 @@ i3GEOF.distancia =
 							})
 						}),
 						text: new ol.style.Text({
-							text: $.number(trecho, 3, $trad("dec"), $trad("mil")),
+							text: i3GEO.NumberFormat(trecho, 3, $trad("dec"), $trad("mil")),
 							font: 'Bold 14px Arial',
 							textAlign: 'left',
 							stroke: new ol.style.Stroke({
@@ -344,17 +344,17 @@ i3GEOF.distancia =
 			texto =
 				"<strong>Total</strong><br>" + $trad("x96")
 				+ " km: "
-				+ $.number(total, 3, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat(total, 3, $trad("dec"), $trad("mil"))
 				+ "<br>"
 				+ $trad("x96")
 				+ " m: "
-				+ $.number((total * 1000), 2, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat((total * 1000), 2, $trad("dec"), $trad("mil"))
 				+ "<div class='hidden-sm hidden-xs' >"
 				+ $trad("x25")
 				+ ": "
 				+ i3GEO.calculo.metododistancia
 				+ "</div>";
-			i3GEOF.distancia._parameters.ultimaMedida = $.number(total, 3, $trad("dec"), $trad("mil")) + " km";
+			i3GEOF.distancia._parameters.ultimaMedida = i3GEO.NumberFormat(total, 3, $trad("dec"), $trad("mil")) + " km";
 			mostra.innerHTML = texto;
 		}
 	},
@@ -367,11 +367,11 @@ i3GEOF.distancia =
 			texto =
 				"<strong>Parcial </strong><br>" + $trad("x95")
 				+ " km: "
-				+ $.number(trecho, 3, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat(trecho, 3, $trad("dec"), $trad("mil"))
 				+ "<br>"
 				+ $trad("x97")
 				+ " km: "
-				+ $.number((parcial + trecho), 3, $trad("dec"), $trad("mil"))
+				+ i3GEO.NumberFormat((parcial + trecho), 3, $trad("dec"), $trad("mil"))
 				+ "<div class='hidden-sm hidden-xs' >"
 				+ $trad("x23")
 				+ " (DMS): "

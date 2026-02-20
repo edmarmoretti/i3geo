@@ -360,9 +360,9 @@ i3GEO.navega =
             return;
         }
         if (arguments.length === 1) {
-            e.value = $.number(escala, 0, $trad("dec"), $trad("mil"));
+            e.value = i3GEO.NumberFormat(escala, 0, $trad("dec"), $trad("mil"));
         } else {
-            e.value = $.number(i3geoOL.getScale(), 0, $trad("dec"), $trad("mil"));
+            e.value = i3GEO.NumberFormat(i3geoOL.getScale(), 0, $trad("dec"), $trad("mil"));
         }
     },
     panFixo: function () {

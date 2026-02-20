@@ -1,5 +1,5 @@
 if (typeof (i3GEO) === 'undefined') {
-    var i3GEO = {};
+	var i3GEO = {};
 }
 //utilizado para armazenar templates HTML
 //alguns templates sao carregados sob demanda, por isso sao definidos aqui como false
@@ -10,21 +10,21 @@ if (typeof (i3GEO) === 'undefined') {
 //var html = Mustache.render("{{#data}}<option value='{{{img}}}'>{{{name}}}</option>{{/data}}", {data: [{name: 'xx',img:'yy'}]})
 i3GEO.template = {
 	botoes: {
-	    //lista de botoes na forma de icones
-	    listaDeIcones: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-xs" style="margin: 2px; padding: 2px;"><span class="material-icons {{{classe}}}" style="{{{estiloicon}}}">{{{icone}}}</span></button>',
-	    padrao: '<button id="{{{id}}}" title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-primary btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>',
-	    opcoes: '<button name="{{{name}}}" title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-default btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>&nbsp;'
+		//lista de botoes na forma de icones
+		listaDeIcones: '<button title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-xs" style="margin: 2px; padding: 2px;"><span class="material-icons {{{classe}}}" style="{{{estiloicon}}}">{{{icone}}}</span></button>',
+		padrao: '<button id="{{{id}}}" title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-primary btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>',
+		opcoes: '<button name="{{{name}}}" title="{{{title}}}" onclick="{{{onclick}}}" class="btn btn-default btn-sm btn-raised" style="{{{style}}}">{{{text}}}</button>&nbsp;'
 	},
 	checkbox: '<div class="checkbox text-left" title="{{{title}}}"><label><input {{checked}} name="{{{name}}}" id="{{id}}" type="checkbox" value="{{{value}}}"><span class="checkbox-material noprint"><span class="check" ></span></span> {{{label}}}</label></div>',
 	//utilizados nas janelas flutuantes
-	janela : {
-	    aguarde: "<div id='{{id}}_imagemCabecalho' class='i3GeoAguardeJanela progress' style='visibility:hidden; '><span class='progress-bar progress-bar-striped active' role='progressbar' style='width: 100%'></span></div>",
-	    msg: "<div class='modal fade' data-keyboard='false' tabindex='-1' role='dialog' aria-hidden='true' style='z-index:500000;overflow-y:visible;'><div class='modal-dialog' ><div class='modal-content'><div class='modal-header' style='padding-top: 5px;'><button type='button' class='closeModal close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button></div><div class='modal-body' style='padding-top: 0px;'><div id='i3GEOMensagemTempoModal' > {{{texto}}} </div></div></div></div></div>",
-	    closemsg: "<div class='modal fade' data-keyboard='false' tabindex='-1' role='dialog' aria-hidden='true' style='z-index:500000;overflow-y:visible;'><div class='modal-dialog'><div class='modal-content'><div class='modal-header' style='padding-top: 5px;'><button type='button' class='closeModal close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button></div><div class='modal-body' style='padding-top: 0px;'><div class='container-fluid' id='i3GEOMensagemCloseModal' > {{{texto}}} </div></div></div></div></div>",
-	    formModal: "<div class='modal-dialog' role='document' style='z-Index:60;'><div class='modal-content' style='height:100%;max-height: 100vh;'><div class='modal-header handleDraggable' style='padding-top: 5px;height:30px;'><span class='pull-left' id='i3GEOToolFormModalHeader{{{id}}}' style='text-align:left;'>{{{header}}}</span><button type='button' class='closeModal close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button><button type='button' class='close expandModal pull-right' aria-label='Expand'><i class='material-icons'>fullscreen</i></button></div><div class='modal-body' style='height:calc(100% - 75px);padding-top: 0px;cursor:default;'><div id='i3GEOToolFormModalWrap{{{id}}}' style='display:none;width:100%;height:100%;position:absolute; top:0px;left:0px;background-color: transparent;z-index: 100;'></div><div id='i3GEOToolFormModal{{{id}}}' style='height:100%;'> {{{texto}}} </div></div><div id='i3GEOToolFormModalFooter{{{id}}}' style='height:75px;' class='modal-footer'></div></div></div>"
+	janela: {
+		aguarde: "<div id='{{id}}_imagemCabecalho' class='i3GeoAguardeJanela progress' style='visibility:hidden; '><span class='progress-bar progress-bar-striped active' role='progressbar' style='width: 100%'></span></div>",
+		msg: "<div class='modal fade' data-keyboard='false' tabindex='-1' role='dialog' aria-hidden='true' style='z-index:500000;overflow-y:visible;'><div class='modal-dialog' ><div class='modal-content'><div class='modal-header' style='padding-top: 5px;'><button type='button' class='closeModal close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button></div><div class='modal-body' style='padding-top: 0px;'><div id='i3GEOMensagemTempoModal' > {{{texto}}} </div></div></div></div></div>",
+		closemsg: "<div class='modal fade' data-keyboard='false' tabindex='-1' role='dialog' aria-hidden='true' style='z-index:500000;overflow-y:visible;'><div class='modal-dialog'><div class='modal-content'><div class='modal-header' style='padding-top: 5px;'><button type='button' class='closeModal close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button></div><div class='modal-body' style='padding-top: 0px;'><div class='container-fluid' id='i3GEOMensagemCloseModal' > {{{texto}}} </div></div></div></div></div>",
+		formModal: "<div class='modal-dialog' data='xxx' role='document' style='z-Index:60;'><div class='modal-content' style='height:100%;max-height: 100vh;'><div class='modal-header handleDraggable' style='padding-top: 5px;height:30px;'><span class='pull-left' id='i3GEOToolFormModalHeader{{{id}}}' style='text-align:left;'>{{{header}}}</span><button type='button' class='closeModal close pull-right' data-dismiss='modal' aria-label='Close'><i class='material-icons'>highlight_off</i></button><button type='button' class='close expandModal pull-right' aria-label='Expand'><i class='material-icons'>fullscreen</i></button></div><div class='modal-body' style='height:calc(100% - 75px);padding-top: 0px;cursor:default;'><div id='i3GEOToolFormModalWrap{{{id}}}' style='display:none;width:100%;height:100%;position:absolute; top:0px;left:0px;background-color: transparent;z-index: 100;'></div><div id='i3GEOToolFormModal{{{id}}}' style='height:100%;'> {{{texto}}} </div></div><div id='i3GEOToolFormModalFooter{{{id}}}' style='height:75px;' class='modal-footer'></div></div></div>"
 	},
-	forms : {
-	    horizontaltextinput : "<div class='form-group label-fixed condensed'><label class='col-md-6 control-label'>{{{label}}}</label><div class='col-md-6'><input class='form-control input-lg' type='text' id='{{{id}}}' name='{{{name}}}' value='{{{value}}}' /></div></div>"
+	forms: {
+		horizontaltextinput: "<div class='form-group label-fixed condensed'><label class='col-md-6 control-label'>{{{label}}}</label><div class='col-md-6'><input class='form-control input-lg' type='text' id='{{{id}}}' name='{{{name}}}' value='{{{value}}}' /></div></div>"
 	},
 
 	//lista generica de opcoes
@@ -55,7 +55,7 @@ i3GEO.template = {
 	catalogoMigalha: false,
 	//formatacao da legenda (guia principal do mapa)
 	legenda: false, //para camadas com mais de uma classe
-	legenda1class : false, //para camadas com uma classe
+	legenda1class: false, //para camadas com uma classe
 	//formatacao da lista de marcadores salvos pelo usuario
 	marcador: false,
 	//campo do tipo input para a busca usando typeahead
