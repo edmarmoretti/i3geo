@@ -54,7 +54,7 @@ include "head.php";
     <nav class="navbar navbar-default navbar-fixed-top">
         <div class="container-fluid">
             <div class="navbar-header">
-                <button type="button" title="icon-bar" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+                <button type="button" title="icon-bar" class="navbar-toggle collapsed" data-bs-toggle="collapse"data-target="#navbar" aria-expanded="false" aria-controls="navbar">
                     <span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
                 </button>
                 <a class="navbar-brand" onclick="$('.cartao').fadeIn(600);" href="#">
@@ -67,7 +67,7 @@ include "head.php";
                 <div id="menuTpl" class="hidden">
                     <ul class="nav navbar-nav">
                         <li <?php if(isset($i3geoPermiteLogin) && $i3geoPermiteLogin == false) { echo "style=display:none "; }?>><a role="button"
-                                onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../');" href="#topo" data-toggle="modal" data-target="#modalLogin">
+                                onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('../');" href="#topo" data-bs-toggle="modal" data-bs-target="#modalLogin">
                                 Login <i class="material-icons md-18">input</i>
                             </a></li>
                     </ul>

@@ -38,7 +38,7 @@ if (! isset($_COOKIE["palavraFiltro"])) {
                 </h2>
                 <blockquote>
                     {{{txtDesc}}}<br>
-                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                    <a href="#expandeTxt" data-bs-toggle="collapse"class="collapsed">
                         <span class="text-primary readMore">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>
@@ -80,7 +80,7 @@ if (! isset($_COOKIE["palavraFiltro"])) {
                     </div>
                 </div>
                 <div class="clearfix"></div>
-                <div id="ajudaPrincipal" class="modal fade" tabindex="-1">
+                <div id="ajudaPrincipal" class="modal" tabindex="-1">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-body">
@@ -95,7 +95,7 @@ if (! isset($_COOKIE["palavraFiltro"])) {
                 <div class="panel panel-default" id="favoritos">
                     <div class="panel-heading icon" role="tab">
                         <h4 class="panel-title">
-                            <a class="collapsed in" role="button" data-toggle="collapse" href="#body-favoritos" aria-expanded="false">
+                            <a class="collapsed in" role="button" data-bs-toggle="collapse"href="#body-favoritos" aria-expanded="false">
                                 <i class="material-icons">star_border</i> {{{favoritos}}}
                             </a>
                         </h4>

@@ -671,7 +671,7 @@ var i3GEO = {
      * Executa tamb&eacute;m o que for definido em i3Geo.finaliza
      */
     aposIniciar: function () {
-        if (jQuery.isFunction(i3GEO.finaliza)) {
+        if (typeof i3GEO.finaliza === 'function') {
             i3GEO.finaliza.call();
         } else {
             if (i3GEO.finaliza != "") {

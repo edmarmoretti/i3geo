@@ -479,7 +479,7 @@ i3GEO.Interface =
         }
         // executa fun&ccedil;&atilde;o de finaliza&ccedil;&atilde;o, se
         // houver
-        if (jQuery.isFunction(i3GEO.finalizaAPI)) {
+        if (typeof i3GEO.finalizaAPI === 'function') {
             i3GEO.finalizaAPI.call();
         }
         i3GEO.desenho.criaLayerGrafico();

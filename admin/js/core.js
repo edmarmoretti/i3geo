@@ -14,8 +14,7 @@ Retorno:
 
 object - objeto javaScript
  */
-$i = function(id)
-{return document.getElementById(id);};
+$i = function (id) { return document.getElementById(id); };
 /*
 Variable: $mapfiles
 
@@ -39,169 +38,169 @@ $perfis = "";
 if (typeof (i3GEOadmin) === 'undefined') {
 	var i3GEOadmin = {};
 }
-if(typeof jQuery != 'undefined' ){
+if (typeof jQuery != 'undefined') {
 	i3GEOadmin.core = {
-			//valor do filtro utilizado ao iniciar a pagina
-			//usado para enviar parametros pela URL ao iniciar uma pagina
-			initFiltro: "",
-			defineSelecionados: function(idForm,hash){
-				$("#"+idForm + " select").each(
-					function(i){
-						$(this).val(hash[$(this).attr("name")]);
-					}
-				);
-			},
-			erroLogin: function(){
-				$("#loginOff").css("display","");
-				$("#loginOn").css("display","none");
-				//alert("Login!");
-				i3GEOadmin.core.mostraErro($trad("erroLogin",i3GEOadmin.principal.dicionario));
-			},
-			loginOn: function(){
-				$("#loginOff").css("display","none");
-				$("#loginOn").css("display","");
-			},
-			mostraErro: function(erro){
-				var html = '<div class="alert alert-danger alert-dismissible" role="alert">'
-					+ '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
-					+ '<strong>Erro!</strong> '
-					+ erro;
-				$(".navbar-fixed-bottom .container").html(html);
-			},
-			fechaModal: function(id){
-				$("#"+id).modal("hide");
-			},
-			abreModal: function(id,conteudo){
-				$("#"+id+" .modal-body").html(conteudo);
-				if($("#"+id).css("display") == "none"){
-					$("#"+id).modal("show");
-					//$.material.init();
+		//valor do filtro utilizado ao iniciar a pagina
+		//usado para enviar parametros pela URL ao iniciar uma pagina
+		initFiltro: "",
+		defineSelecionados: function (idForm, hash) {
+			$("#" + idForm + " select").each(
+				function (i) {
+					$(this).val(hash[$(this).attr("name")]);
 				}
-				$.material.init();
-			},
-			fechaModalGeral: function(){
-				i3GEOadmin.core.fechaModal("modalGeral");
-			},
-			abreModalGeral: function(conteudo){
-				i3GEOadmin.core.abreModal("modalGeral",conteudo);
-				$("#body-form-modal").collapse('show');
-			},
-			fechaModalConfirma: function(){
-				i3GEOadmin.core.fechaModal("modalGeral");
-			},
-			abreModalConfirma: function(hash){
-				//modalConfirmaTpl fica em head.php
-				var conteudo = Mustache.to_html(
-						$("#modalConfirmaTpl").html(),
-						hash
-				);
-				i3GEOadmin.core.abreModal("modalGeral",conteudo);
-			},
-			modalAguarde: function(open){
-				if(open === true){
-					i3GEOadmin.core.abreModalGeral($("#iconeAguardeTpl").html());
-				}
-				else{
-					i3GEOadmin.core.fechaModalGeral();
-				}
-			},
-			iconeAguarde: function(onde){
-				if(onde.html){
-					onde.html($("#iconeAguardeTpl").html());
-				}
-				else{
-					$("#"+onde).html($("#iconeAguardeTpl").html());
-				}
-			},
-			pegaFiltro: function(){
-				return $i("filtro");
-			},
-			valorFiltro: function(){
-				var v = "";
-				//verifica se o valor do filtro foi passado pela url
-				if(i3GEOadmin.core.initFiltro != ""){
-					v = i3GEOadmin.core.initFiltro;
-					i3GEOadmin.core.initFiltro = "";
-				}
-				else{
-					v = i3GEOadmin.core.pegaFiltro().value;
-				}
-				return v;
-			},
-			defineFiltro: function(valor){
-				i3GEOadmin.core.pegaFiltro().value = valor;
-			},
-			filtra: function(obj){
-				$("#corpo .panel").each(
-						function(i,el){
-							if(obj.value == ""){
-								$(el).show();
-								$("#body-"+el.id).collapse('hide');
-							}
-							else {
-								$(el).hide();
-							}
-						}
-				);
-				$("#corpo .list-group-item").each(
-						function(i,el){
-							if(obj.value == ""){
-								$(el).show();
-							}
-							else {
-								$(el).hide();
-							}
-						}
-				);
-				if(obj.value != ""){
-					$("#"+obj.value).show();
-					$("#body-"+obj.value).collapse('show');
-				}
+			);
+		},
+		erroLogin: function () {
+			$("#loginOff").css("display", "");
+			$("#loginOn").css("display", "none");
+			//alert("Login!");
+			i3GEOadmin.core.mostraErro($trad("erroLogin", i3GEOadmin.principal.dicionario));
+		},
+		loginOn: function () {
+			$("#loginOff").css("display", "none");
+			$("#loginOn").css("display", "");
+		},
+		mostraErro: function (erro) {
+			var html = '<div class="alert alert-danger alert-dismissible" role="alert">'
+				+ '<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+				+ '<strong>Erro!</strong> '
+				+ erro;
+			$(".navbar-fixed-bottom .container").html(html);
+		},
+		fechaModal: function (id) {
+			$("#" + id).modal("hide");
+		},
+		abreModal: function (id, conteudo) {
+			$("#" + id + " .modal-body").html(conteudo);
+			if ($("#" + id).css("display") == "none") {
+				$("#" + id).modal("show");
+				//$.material.init();
 			}
+			$.material.init();
+		},
+		fechaModalGeral: function () {
+			i3GEOadmin.core.fechaModal("modalGeral");
+		},
+		abreModalGeral: function (conteudo) {
+			i3GEOadmin.core.abreModal("modalGeral", conteudo);
+			$("#body-form-modal").collapse('show');
+		},
+		fechaModalConfirma: function () {
+			i3GEOadmin.core.fechaModal("modalGeral");
+		},
+		abreModalConfirma: function (hash) {
+			//modalConfirmaTpl fica em head.php
+			var conteudo = Mustache.to_html(
+				$("#modalConfirmaTpl").html(),
+				hash
+			);
+			i3GEOadmin.core.abreModal("modalGeral", conteudo);
+		},
+		modalAguarde: function (open) {
+			if (open === true) {
+				i3GEOadmin.core.abreModalGeral($("#iconeAguardeTpl").html());
+			}
+			else {
+				i3GEOadmin.core.fechaModalGeral();
+			}
+		},
+		iconeAguarde: function (onde) {
+			if (onde.html) {
+				onde.html($("#iconeAguardeTpl").html());
+			}
+			else {
+				$("#" + onde).html($("#iconeAguardeTpl").html());
+			}
+		},
+		pegaFiltro: function () {
+			return $i("filtro");
+		},
+		valorFiltro: function () {
+			var v = "";
+			//verifica se o valor do filtro foi passado pela url
+			if (i3GEOadmin.core.initFiltro != "") {
+				v = i3GEOadmin.core.initFiltro;
+				i3GEOadmin.core.initFiltro = "";
+			}
+			else {
+				v = i3GEOadmin.core.pegaFiltro().value;
+			}
+			return v;
+		},
+		defineFiltro: function (valor) {
+			i3GEOadmin.core.pegaFiltro().value = valor;
+		},
+		filtra: function (obj) {
+			$("#corpo .panel").each(
+				function (i, el) {
+					if (obj.value == "") {
+						$(el).show();
+						$("#body-" + el.id).collapse('hide');
+					}
+					else {
+						$(el).hide();
+					}
+				}
+			);
+			$("#corpo .list-group-item").each(
+				function (i, el) {
+					if (obj.value == "") {
+						$(el).show();
+					}
+					else {
+						$(el).hide();
+					}
+				}
+			);
+			if (obj.value != "") {
+				$("#" + obj.value).show();
+				$("#body-" + obj.value).collapse('show');
+			}
+		}
 	};
-	function core_parseMustacheBody (hashMustache){
+	function core_parseMustacheBody(hashMustache) {
 		var re = new RegExp("&amp;", "g"), m;
 		m = Mustache.render(document.body.innerHTML, i3GEO.idioma.objetoIdioma(hashMustache));
 		m = m.replace(re, '&');
 		document.body.innerHTML = m;
 	}
 	//autocomlete
-	(function( $ ) {
-		$.widget( "custom.combobox", $.ui.autocomplete, {
+	(function ($) {
+		$.widget("custom.combobox", $.ui.autocomplete, {
 
-			_create: function() {
-				this.wrapper = $( "<span>" )
-				.addClass( "custom-combobox" )
-				.insertAfter( this.element );
+			_create: function () {
+				this.wrapper = $("<span>")
+					.addClass("custom-combobox")
+					.insertAfter(this.element);
 
 				this.element.hide();
 				this._createAutocomplete();
 				this._createShowAllButton();
 			},
 
-			_createAutocomplete: function() {
-				var selected = this.element.children( ":selected" ),
-				value = selected.val() ? selected.text() : "";
+			_createAutocomplete: function () {
+				var selected = this.element.children(":selected"),
+					value = selected.val() ? selected.text() : "";
 				//console.info(this.element.context);
-				this.input = $( "<input>" )
-				.appendTo( this.wrapper )
-				.val( value )
-				.attr( "title", "" )
-				.addClass( "form-control" )
-				.autocomplete({
-					delay: 0,
-					minLength: 0,
-					source: $.proxy( this, "_source" ),
-					select: function( event, ui ) {
-						ui.item.el.context.value = ui.item.option.value;
-						ui.item.el.context.onchange.call(ui.item.el.context);
-					}
-				});
+				this.input = $("<input>")
+					.appendTo(this.wrapper)
+					.val(value)
+					.attr("title", "")
+					.addClass("form-control")
+					.autocomplete({
+						delay: 0,
+						minLength: 0,
+						source: $.proxy(this, "_source"),
+						select: function (event, ui) {
+							ui.item.el.context.value = ui.item.option.value;
+							ui.item.el.context.onchange.call(ui.item.el.context);
+						}
+					});
 
-				this._on( this.input, {
-					autocompleteselect: function( event, ui ) {
+				this._on(this.input, {
+					autocompleteselect: function (event, ui) {
 						ui.item.option.selected = true;
-						this._trigger( "select", event, {
+						this._trigger("select", event, {
 							item: ui.item.option
 						});
 					},
@@ -209,73 +208,73 @@ if(typeof jQuery != 'undefined' ){
 				});
 			},
 
-			_createShowAllButton: function() {
+			_createShowAllButton: function () {
 				var input = this.input,
-				wasOpen = false;
-				$( "<span>" )
-				.attr( "tabIndex", -1 )
-				.appendTo( this.wrapper )
-				.removeClass( "ui-corner-all" )
-				.addClass( "glyphicon glyphicon-search" )
-				.mousedown(function() {
-					wasOpen = input.autocomplete( "widget" ).is( ":visible" );
-				})
-				.click(function() {
-					input.focus();
-					// Close if already visible
-					if ( wasOpen ) {
-						return;
-					}
-					// Pass empty string as value to search for, displaying all results
-					input.autocomplete( "search", "" );
-				});
+					wasOpen = false;
+				$("<span>")
+					.attr("tabIndex", -1)
+					.appendTo(this.wrapper)
+					.removeClass("ui-corner-all")
+					.addClass("glyphicon glyphicon-search")
+					.mousedown(function () {
+						wasOpen = input.autocomplete("widget").is(":visible");
+					})
+					.click(function () {
+						input.focus();
+						// Close if already visible
+						if (wasOpen) {
+							return;
+						}
+						// Pass empty string as value to search for, displaying all results
+						input.autocomplete("search", "");
+					});
 			},
-			_source: function( request, response ) {
-				var matcher = new RegExp( $.ui.autocomplete.escapeRegex(request.term), "i" );
+			_source: function (request, response) {
+				var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
 				var el = this.element;
-				response( this.element.children( "option" ).map(function() {
-					var text = $( this ).text();
-					if ( ( !request.term || matcher.test(text) ) )
+				response(this.element.children("option").map(function () {
+					var text = $(this).text();
+					if ((!request.term || matcher.test(text)))
 						return {
 							label: text,
 							value: text,
 							option: this,
 							el: el
 						};
-					}
-				) );
+				}
+				));
 			},
 
-			_removeIfInvalid: function( event, ui ) {
+			_removeIfInvalid: function (event, ui) {
 				// Selected an item, nothing to do
-				if ( ui.item ) {
+				if (ui.item) {
 					return;
 				}
 				// Search for a match (case-insensitive)
 				var value = this.input.val(),
-				valueLowerCase = value.toLowerCase(),
-				valid = false;
-				this.element.children( "option" ).each(function() {
-					if ( $( this ).text().toLowerCase() === valueLowerCase ) {
+					valueLowerCase = value.toLowerCase(),
+					valid = false;
+				this.element.children("option").each(function () {
+					if ($(this).text().toLowerCase() === valueLowerCase) {
 						this.selected = valid = true;
 						return false;
 					}
 				});
 				// Found a match, nothing to do
-				if ( valid ) {
+				if (valid) {
 					return;
 				}
 				// Remove invalid value
-				this.input.val( "" );
-				this.element.val( "" );
-				this.input.autocomplete( "instance" ).term = "";
+				this.input.val("");
+				this.element.val("");
+				this.input.autocomplete("instance").term = "";
 			},
-			_destroy: function() {
+			_destroy: function () {
 				this.wrapper.remove();
 				this.element.show();
 			}
 		});
-	})( jQuery );
+	})(jQuery);
 }
 /**
 Function: core_montaEditor
@@ -298,65 +297,66 @@ bsalva - boolean botao salvar
 
 bcancela - boolean botao cancelar
 */
-function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
-{
-	if(!funcaoOK){
+function core_montaEditor(funcaoOK, w, h, funcaoClose, titulo, modal, bsalva, bcancela) {
+	if (!funcaoOK) {
 		funcaoOK = "";
 	}
-	if(!w){
+	if (!w) {
 		w = "400px";
 	}
-	if(!h){
+	if (!h) {
 		h = "354px";
 	}
-	if(modal == undefined){
+	if (modal == undefined) {
 		modal = false;
 	}
-	if(bsalva == undefined){
+	if (bsalva == undefined) {
 		bsalva = true;
 	}
-	if(bcancela  == undefined){
+	if (bcancela == undefined) {
 		bcancela = true;
 	}
-	if(!titulo){
+	if (!titulo) {
 		titulo = "Editor";
 	}
-	if(!funcaoClose){
+	if (!funcaoClose) {
 		funcaoClose = "";
 	}
-	if(!$i("janela_editor"))
-	{
+	if (!$i("janela_editor")) {
 		var ins = "", temp = "", lb,
 			salvai = "<input id=okcancel_checkboxOK type='buttom' value='Salva' />",
 			cancelai = "<input id=okcancel_checkboxCANCEL type='buttom' value='Cancela' />",
 			novoel = document.createElement("div");
-		novoel.id =  "janela_editor";
+		novoel.id = "janela_editor";
 		ins = '<div class="hd"><div id="okcancel_checkbox" ></div></div>' +
-			"<div class='bd' style='height:"+h+";overflow:auto'>" +
+			"<div class='bd' style='height:" + h + ";overflow:auto'>" +
 			"<div id='editor_bd'></div>";
 		novoel.innerHTML = ins;
 		document.body.appendChild(novoel);
-		if(funcaoOK != "")
-		{
+		if (funcaoOK != "") {
 			lb = $i("okcancel_checkbox");
-			if(bsalva === true){
+			if (bsalva === true) {
 				temp += salvai;
 			}
-			if(bcancela === true){
+			if (bcancela === true) {
 				temp += cancelai;
 			}
-			lb.innerHTML = temp + '<span style="margin-left:10px;position:relative;top:-5px">'+titulo+'</span>';
-			if(bsalva === true){
+			lb.innerHTML = temp + '<span style="margin-left:10px;position:relative;top:-5px">' + titulo + '</span>';
+			if (bsalva === true) {
 				new YAHOO.widget.Button(
 					"okcancel_checkboxOK",
-					{onclick:{fn: function(){
-						if(YAHOO.lang.isFunction(funcaoOK)){
-							funcaoOK.call();
+					{
+						onclick: {
+							fn: function () {
+								if (YAHOO.lang.isFunction(funcaoOK)) {
+									funcaoOK.call();
+								}
+								else {
+									eval(funcaoOK);
+								}
+							}
 						}
-						else{
-							eval(funcaoOK);
-						}
-					}}}
+					}
 				);
 				var temp = $i("okcancel_checkbox");
 				temp.style.top = "2px";
@@ -364,60 +364,61 @@ function core_montaEditor(funcaoOK,w,h,funcaoClose,titulo,modal,bsalva,bcancela)
 				var temp = $i("okcancel_checkboxOK-button");
 				temp.style.height = "23px";
 			}
-			if(bcancela === true){
+			if (bcancela === true) {
 				new YAHOO.widget.Button(
 					"okcancel_checkboxCANCEL",
-					{onclick:{fn: function(){
-						YAHOO.admin.container.panelEditor.destroy();
-						YAHOO.admin.container.panelEditor = null;
-					}}}
+					{
+						onclick: {
+							fn: function () {
+								YAHOO.admin.container.panelEditor.destroy();
+								YAHOO.admin.container.panelEditor = null;
+							}
+						}
+					}
 				);
 			}
 		}
 		YAHOO.admin.container.panelEditor = new YAHOO.widget.Panel(
-		        "janela_editor",
-		        {
-		            fixedcenter:"contained",
-		            close:true,
-		            width:w,
-		            overflow:"auto",
-		            modal: modal,
-		            visible:false,
-		            constraintoviewport:true,
-		            strings: {close: "<span class='material-icons'>cancel</span>"}
-		            }
-		        );
+			"janela_editor",
+			{
+				fixedcenter: "contained",
+				close: true,
+				width: w,
+				overflow: "auto",
+				modal: modal,
+				visible: false,
+				constraintoviewport: true,
+				strings: { close: "<span class='material-icons'>cancel</span>" }
+			}
+		);
 		YAHOO.admin.container.panelEditor.render();
 	}
-	else
-	{
-		if($i("editor_bd"))
-		{$i("editor_bd").innerHTML == "?";}
+	else {
+		if ($i("editor_bd")) { $i("editor_bd").innerHTML == "?"; }
 	}
-	var fecha = function()
-	{
-		try{
+	var fecha = function () {
+		try {
 			YAHOO.admin.container.panelEditor.destroy();
 			YAHOO.admin.container.panelEditor = null;
 		}
-		catch(e){}
-		try{
-			if(YAHOO.lang.isFunction(funcaoClose)){
+		catch (e) { }
+		try {
+			if (YAHOO.lang.isFunction(funcaoClose)) {
 				funcaoClose.call();
 			}
-			else if(funcaoClose != ""){
-				eval(funcaoClose+"()");
+			else if (funcaoClose != "") {
+				eval(funcaoClose + "()");
 			}
 		}
-		catch(e){};
+		catch (e) { };
 	};
 	YAHOO.util.Event.addListener(YAHOO.admin.container.panelEditor.close, "click", fecha);
 	YAHOO.admin.container.panelEditor.show();
 	//registra a janela no gerenciador de janelas default da classe i3GEO.janela caso ela exista
-	try{
+	try {
 		YAHOO.i3GEO.janela.manager.register(YAHOO.admin.container.panelEditor);
 	}
-	catch(e){}
+	catch (e) { }
 }
 /*
 Function: core_pegaDados
@@ -432,24 +433,22 @@ sUrl - url do programa que ser&aacute; executado no servidor
 
 funcaoRetorno - funcao que ser&aacute; executada ao terminar a busca pelos dados
 */
-function core_pegaDados(mensagem,sUrl,funcaoRetorno)
-{
+function core_pegaDados(mensagem, sUrl, funcaoRetorno) {
 	var callback =
 	{
-			success:function(o)
-			{
-				if(funcaoRetorno != ""){
-					if(YAHOO.lang.isFunction(funcaoRetorno)){
-						funcaoRetorno.call("",YAHOO.lang.JSON.parse(o.responseText));
-					}
-					else{
-						eval(funcaoRetorno+"(YAHOO.lang.JSON.parse(o.responseText))");
-					}
+		success: function (o) {
+			if (funcaoRetorno != "") {
+				if (YAHOO.lang.isFunction(funcaoRetorno)) {
+					funcaoRetorno.call("", YAHOO.lang.JSON.parse(o.responseText));
 				}
-			},
-			argument: { foo:"foo", bar:"bar" }
+				else {
+					eval(funcaoRetorno + "(YAHOO.lang.JSON.parse(o.responseText))");
+				}
+			}
+		},
+		argument: { foo: "foo", bar: "bar" }
 	};
-	core_makeRequest(sUrl,callback);
+	core_makeRequest(sUrl, callback);
 }
 /*
 Function: core_makeRequest
@@ -466,25 +465,23 @@ tipo - GET ou POST
 
 postpar - parametros quando o tipo for post
 */
-function core_makeRequest(sUrl,callback,tipo,postpar)
-{
+function core_makeRequest(sUrl, callback, tipo, postpar) {
 	sUrl = escape(sUrl);
 	re = new RegExp("%3F", "g");
-	sUrl = sUrl.replace(re,'?');
+	sUrl = sUrl.replace(re, '?');
 	re = new RegExp("%3D", "g");
-	sUrl = sUrl.replace(re,'=');
+	sUrl = sUrl.replace(re, '=');
 	re = new RegExp("%26", "g");
-	sUrl = sUrl.replace(re,'&');
+	sUrl = sUrl.replace(re, '&');
 
 	re = new RegExp("%3A", "g");
-	sUrl = sUrl.replace(re,':');
+	sUrl = sUrl.replace(re, ':');
 
-	if(arguments.length == 2)
-	{tipo = "GET";}
-	if(postpar){
+	if (arguments.length == 2) { tipo = "GET"; }
+	if (postpar) {
 		YAHOO.util.Connect.asyncRequest('POST', sUrl, callback, postpar);
 	}
-	else{
+	else {
 		YAHOO.util.Connect.asyncRequest(tipo, sUrl, callback);
 	}
 }

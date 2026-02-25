@@ -35,7 +35,7 @@ include "../../head.php";
                 </h2>
                 <blockquote>
                     {{{txtDesc}}}
-                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                    <a href="#expandeTxt" data-bs-toggle="collapse"class="collapsed">
                         <span class="text-primary readMore">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>

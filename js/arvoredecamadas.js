@@ -152,7 +152,7 @@ i3GEO.arvoreDeCamadas =
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA", ["i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()"]);
 			}
 			if (config.aposIniciar !== "") {
-				if (jQuery.isFunction(config.aposIniciar)) {
+				if (typeof config.aposIniciar === 'function') {
 					config.aposIniciar.call();
 				}
 			}

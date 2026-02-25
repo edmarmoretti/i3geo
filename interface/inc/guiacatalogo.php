@@ -6,11 +6,11 @@
             <span style="vertical-align: middle">{{{iconeCatalogo}}}</span>
         </button>
         <div class="dropdown">
-            <button title="{{{opcoes}}}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button title="{{{opcoes}}}" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
-                <li><a onclick="i3GEO.login.recarrega = false; i3GEO.login.dialogo.abreLogin();" href="javascript:void(0)" data-toggle="modal" data-target="#modalLogin">
+                <li><a onclick="i3GEO.login.recarrega = false; i3GEO.login.dialogo.abreLogin();" href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#modalLogin">
                         <span class="glyphicon glyphicon-log-in"></span> Login/Logout
                     </a></li>
                 <li><a href="javascript:void(0)" onclick="i3GEO.arvoreDeTemas.dialogo.downloadbase()">

@@ -487,8 +487,29 @@
 	cursor: pointer;
 }
 
+[data-bs-toggle*=collapse]:after {
+	font-family: "Glyphicons Halflings";
+	content: "\e113";
+	color: #cbd2d7;
+	font-size: 14px;
+	top: 0px;
+	position: absolute;
+	right: 16px;
+	cursor: pointer;
+}
+
 /* Icon when the collapsible content is hidden */
 [data-toggle*=collapse].collapsed:after {
+	content: "\e114";
+	color: #cbd2d7;
+	font-size: 14px;
+	top: 0px;
+	position: absolute;
+	right: 16px;
+	cursor: pointer;
+}
+
+[data-bs-toggle*=collapse].collapsed:after {
 	content: "\e114";
 	color: #cbd2d7;
 	font-size: 14px;

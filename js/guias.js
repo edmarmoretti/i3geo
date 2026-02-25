@@ -339,6 +339,8 @@ i3GEO.guias =
         if (typeof (console) !== 'undefined')
             console.info("guias.mostra");
 
+        $('.iconeGuiaMovel').tooltip('hide');
+
         var guias, nguias, g, temp, attributes, anim;
         guias = i3GEO.util.listaChaves(i3GEO.guias.CONFIGURA);
         nguias = guias.length;

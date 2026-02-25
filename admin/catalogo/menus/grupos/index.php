@@ -36,7 +36,7 @@ $_SESSION["nome_menu"] = $nome_menu;
 				  <h4 class="text-info"><?php echo $nome_menu; ?></h4>
 				</div>
 				<blockquote>{{{txtDesc}}}<br>
-                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                    <a href="#expandeTxt" data-bs-toggle="collapse"class="collapsed">
                         <span class="text-primary readMore">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>

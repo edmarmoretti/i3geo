@@ -1,50 +1,48 @@
 <!-- Guias -->
 <style>
-.panel-heading.legenda {
-	height: 48px;
-	display: block;
-	overflow-y: auto;
-	width: calc(100%);
-}
+	.panel-heading.legenda {
+		height: 48px;
+		display: block;
+		overflow-y: auto;
+		width: calc(100%);
+	}
 
-.panel.panel-default.legenda {
-	overflow: hidden
-}
+	.panel.panel-default.legenda {
+		overflow: hidden
+	}
 </style>
-<nav class='navbar navbar-default'
-	style='margin-bottom: 0px; min-height: 35px'>
+<nav class='navbar navbar-default' style='margin-bottom: 0px; min-height: 35px'>
 	<div class="container" style="margin: 0px;">
 		<div class="navbar-header">
-			<button type="button" class="navbar-toggle collapsed"
-				data-toggle="collapse" data-target="#i3GEO{{namespace}}guias"
-				aria-expanded="false">
+			<button type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse"
+				data-target="#i3GEO{{namespace}}guias" aria-expanded="false">
 				<span class="glyphicon glyphicon-menu-hamburger" aria-hidden="true"></span>
 			</button>
 		</div>
 		<div id='i3GEO{{namespace}}guias' class="collapse navbar-collapse"
 			style="padding: 10px; overflow-x: hidden; max-height: 200px;">
 			<ul class="nav navbar-nav ">
-				<li role="presentation"><a id='i3GEO{{namespace}}guia6'
-					href="javascript:void(0);"> <span class="material-icons">settings</span>
-				</a></li>
-				<li class="active" role="presentation"><a
-					id='i3GEO{{namespace}}guia1' href="javascript:void(0);"> <em>{{{legenda}}}</em>
-				</a></li>
-				<li role="presentation"><a id='i3GEO{{namespace}}guia2'
-					href="javascript:void(0);"> <em>{{{classes}}}</em>
-				</a></li>
-				<li role="presentation"><a id='i3GEO{{namespace}}guia3'
-					href="javascript:void(0);"> <em>{{{editor}}}</em>
-				</a></li>
-				<li role="presentation"><a id='i3GEO{{namespace}}guia4'
-					href="javascript:void(0);"> <em>{{{graficos}}}</em>
-				</a></li>
-				<li role="presentation"><a id='i3GEO{{namespace}}guia5'
-					href="javascript:void(0);"> <em>{{{importaExportaSLD}}}</em>
-				</a></li>
-				<li role="presentation"><a id='i3GEO{{namespace}}guia7'
-					href="javascript:void(0);"> <em>{{{cluster}}}</em>
-				</a></li>
+				<li role="presentation"><a id='i3GEO{{namespace}}guia6' href="javascript:void(0);"> <span
+							class="material-icons">settings</span>
+					</a></li>
+				<li class="active" role="presentation"><a id='i3GEO{{namespace}}guia1' href="javascript:void(0);">
+						<em>{{{legenda}}}</em>
+					</a></li>
+				<li role="presentation"><a id='i3GEO{{namespace}}guia2' href="javascript:void(0);">
+						<em>{{{classes}}}</em>
+					</a></li>
+				<li role="presentation"><a id='i3GEO{{namespace}}guia3' href="javascript:void(0);">
+						<em>{{{editor}}}</em>
+					</a></li>
+				<li role="presentation"><a id='i3GEO{{namespace}}guia4' href="javascript:void(0);">
+						<em>{{{graficos}}}</em>
+					</a></li>
+				<li role="presentation"><a id='i3GEO{{namespace}}guia5' href="javascript:void(0);">
+						<em>{{{importaExportaSLD}}}</em>
+					</a></li>
+				<li role="presentation"><a id='i3GEO{{namespace}}guia7' href="javascript:void(0);">
+						<em>{{{cluster}}}</em>
+					</a></li>
 			</ul>
 		</div>
 	</div>
@@ -60,31 +58,26 @@ Outros parametros devem ser enviados via form
 	style='text-align: left; display: block; overflow: auto; z-index: 100; height: calc(100% - 10px);'>
 	<!--- Propriedades -->
 	<div id='i3GEOlegendaguia6obj' class='container-fluid '>
-		<button data-refresh="false" data-prog="execlegenda"
-			data-funcao="contagemclasse" onclick="i3GEOF.legenda.run(this)"
-			class='btn btn-primary btn-sm btn-raised'>
+		<button data-refresh="false" data-prog="execlegenda" data-funcao="contagemclasse"
+			onclick="i3GEOF.legenda.run(this)" class='btn btn-primary btn-sm btn-raised'>
 			<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 			{{{incluiNumeroOcorrencia}}}
 		</button>
-		<button data-refresh="true" data-prog="execclasses"
-			data-funcao="adicionaOpacidade" onclick="i3GEOF.legenda.run(this)"
-			title='{{{aplicaOpacidade}}}'
-			class='btn btn-primary btn-sm btn-raised'>
+		<button data-refresh="true" data-prog="execclasses" data-funcao="adicionaOpacidade"
+			onclick="i3GEOF.legenda.run(this)" title='{{{aplicaOpacidade}}}' class='btn btn-primary btn-sm btn-raised'>
 			<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 			{{{aplicaOpacidadeVariavel}}}
 		</button>
-		<button onclick="i3GEOF.legenda.janelaCorRamp(this)"
-			title='{{{variaCoresExtremos}}}'
+		<button onclick="i3GEOF.legenda.janelaCorRamp(this)" title='{{{variaCoresExtremos}}}'
 			class='btn btn-primary btn-sm btn-raised'>
 			<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 			{{{escolhePaletaCores}}}
 		</button>
 		<div class="checkbox text-left">
-			<label> <input {{{values.mostra}}} type="checkbox"
-				id="i3GEOFlegendamostra"
-				onclick="i3GEO.tema.invertestatuslegenda(i3GEOF.legenda._parameters.tema);">
+			<label> <input {{{values.mostra}}} type="checkbox" id="i3GEOFlegendamostra"
+					onclick="i3GEO.tema.invertestatuslegenda(i3GEOF.legenda._parameters.tema);">
 				<span class="checkbox-material noprint"> <span class="check"></span>
-			</span> {{{mostraClassesLegenda}}}
+				</span> {{{mostraClassesLegenda}}}
 			</label>
 		</div>
 		<div class="row">
@@ -95,8 +88,7 @@ Outros parametros devem ser enviados via form
 						<div class="form-group condensed">
 							<div class="input-group">
 								<div style="display: contents;" class="form-group label-fixed">
-									<input id="i3GEOlegendaAutoSize" class="form-control"
-										type="number" value="5">
+									<input id="i3GEOlegendaAutoSize" class="form-control" type="number" value="5">
 								</div>
 							</div>
 						</div>
@@ -107,9 +99,8 @@ Outros parametros devem ser enviados via form
 				<div class="panel panel-default legenda">
 					<div class="panel-heading legenda">{{{legendaImg}}}</div>
 					<div class="panel-body">
-						<form data-refresh="true" data-prog="execlegenda"
-							data-funcao="aplicaLegendaImg" style="" action="#"
-							onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+						<form data-refresh="true" data-prog="execlegenda" data-funcao="aplicaLegendaImg" style=""
+							action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 							<div class="form-group condensed">
 								<div class="input-group">
 									<div style="display: contents;" class="form-group label-fixed">
@@ -117,8 +108,7 @@ Outros parametros devem ser enviados via form
 											value="{{{values.img}}}">
 									</div>
 									<span class="input-group-btn">
-										<button role="button" type="submit"
-											class="btn btn-primary btn-fab btn-fab-max">
+										<button role="button" type="submit" class="btn btn-primary btn-fab btn-fab-max">
 											<span class="material-icons ">send</span>
 										</button>
 									</span>
@@ -132,8 +122,7 @@ Outros parametros devem ser enviados via form
 				<div class="panel panel-default legenda">
 					<div class="panel-heading legenda">{{{offsite}}}</div>
 					<div class="panel-body">
-						<form data-refresh="true" data-prog="exectemas"
-							data-funcao="aplicaOffsite" style="" action="#"
+						<form data-refresh="true" data-prog="exectemas" data-funcao="aplicaOffsite" style="" action="#"
 							onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 							<div class="form-group condensed">
 								<div class="input-group">
@@ -143,8 +132,7 @@ Outros parametros devem ser enviados via form
 											value="{{{values.offsite}}}">
 									</div>
 									<span class="input-group-btn">
-										<button role="button" type="submit"
-											class="btn btn-primary btn-fab btn-fab-max">
+										<button role="button" type="submit" class="btn btn-primary btn-fab btn-fab-max">
 											<span class="material-icons ">send</span>
 										</button>
 									</span>
@@ -159,25 +147,20 @@ Outros parametros devem ser enviados via form
 					<div class="panel panel-default legenda">
 						<div class="panel-heading legenda">{{{geraCores}}}</div>
 						<div class="panel-body">
-							<form data-refresh="true" data-prog="execclasses"
-								data-funcao="alteraCoresClasses" style="" action="#"
-								onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+							<form data-refresh="true" data-prog="execclasses" data-funcao="alteraCoresClasses" style=""
+								action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 								<div class="form-group condensed">
 									<div class="input-group">
 										<div style="display: contents;" class="form-group label-fixed">
-											{{{de}}} &nbsp; <input
-												class="form-control i3geoFormIconeAquarela"
-												style="display: inline; width: 100px;"
-												id="i3GEOlegendaacori" name="cori" required size="10"
-												value="0,0,0" type="text"> {{{ate}}} &nbsp; <input
-												class="form-control i3geoFormIconeAquarela"
-												style="display: inline; width: 100px;"
-												id="i3GEOlegendaacorf" name="corf" required size="10"
-												value="255,255,255" type="text"> &nbsp;
+											{{{de}}} &nbsp; <input class="form-control i3geoFormIconeAquarela"
+												style="display: inline; width: 100px;" id="i3GEOlegendaacori"
+												name="cori" required size="10" value="0,0,0" type="text"> {{{ate}}}
+											&nbsp; <input class="form-control i3geoFormIconeAquarela"
+												style="display: inline; width: 100px;" id="i3GEOlegendaacorf"
+												name="corf" required size="10" value="255,255,255" type="text"> &nbsp;
 										</div>
 										<span class="input-group-btn">
-											<button role="button" type="submit"
-												title='{{{aplicaVariaCores}}}'
+											<button role="button" type="submit" title='{{{aplicaVariaCores}}}'
 												class="btn btn-primary btn-fab btn-fab-max">
 												<span class="material-icons ">send</span>
 											</button>
@@ -204,22 +187,21 @@ Outros parametros devem ser enviados via form
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labeltamanho_i">{{{labels_tamanho}}}</label>
-						<input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labeltamanho_i' value='8' />
+						<input class="form-control input-lg" type='text' id='i3GEOopcoes_labeltamanho_i' value='8' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
-						<label class="control-label" for="i3GEOopcoes_labeltamanho_c">{{{labels_larguraConector}}}</label>
-						<input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labeltamanho_c' value='2' />
+						<label class="control-label"
+							for="i3GEOopcoes_labeltamanho_c">{{{labels_larguraConector}}}</label>
+						<input class="form-control input-lg" type='text' id='i3GEOopcoes_labeltamanho_c' value='2' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labelfrente_c">{{{labels_corConector}}}</label>
-						<input class="form-control input-lg i3geoFormIconeAquarela"
-							type='text' id='i3GEOopcoes_labelfrente_c' value='0 0 0' />
+						<input class="form-control input-lg i3geoFormIconeAquarela" type='text'
+							id='i3GEOopcoes_labelfrente_c' value='0 0 0' />
 					</div>
 				</div>
 			</div>
@@ -227,29 +209,28 @@ Outros parametros devem ser enviados via form
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labelangulo_i">{{{labels_angulo}}}</label>
-						<input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labelangulo_i' value='0' />
+						<input class="form-control input-lg" type='text' id='i3GEOopcoes_labelangulo_i' value='0' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labeloffsetx_i">{{{labels_deslocamento}}}
-							X</label> <input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labeloffsetx_i' value='' />
+							X</label> <input class="form-control input-lg" type='text' id='i3GEOopcoes_labeloffsetx_i'
+							value='' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labeloffsety_i">{{{labels_deslocamento}}}
-							Y</label> <input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labeloffsety_i' value='' />
+							Y</label> <input class="form-control input-lg" type='text' id='i3GEOopcoes_labeloffsety_i'
+							value='' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed '>
 						<label class="control-label" for="i3GEOopcoes_labelfrente_i">{{{labels_corTexto}}}</label>
-						<input class="form-control input-lg i3geoFormIconeAquarela"
-							type='text' id='i3GEOopcoes_labelfrente_i' value='0 0 0' />
+						<input class="form-control input-lg i3geoFormIconeAquarela" type='text'
+							id='i3GEOopcoes_labelfrente_i' value='0 0 0' />
 					</div>
 				</div>
 			</div>
@@ -257,8 +238,8 @@ Outros parametros devem ser enviados via form
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labelmascara_i">{{{labels_corMascara}}}</label>
-						<input class="form-control input-lg i3geoFormIconeAquarela"
-							type='text' id='i3GEOopcoes_labelmascara_i' value='' />
+						<input class="form-control input-lg i3geoFormIconeAquarela" type='text'
+							id='i3GEOopcoes_labelmascara_i' value='' />
 					</div>
 				</div>
 				<div class="col-md-3">
@@ -285,76 +266,81 @@ Outros parametros devem ser enviados via form
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labelfundoc_i">{{{labels_corFundo}}}</label>
-						<input class="form-control input-lg i3geoFormIconeAquarela"
-							type='text' id='i3GEOopcoes_labelfundoc_i' value='' />
+						<input class="form-control input-lg i3geoFormIconeAquarela" type='text'
+							id='i3GEOopcoes_labelfundoc_i' value='' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labelsombra_i">{{{labels_corSombraFundo}}}</label>
-						<input class="form-control input-lg i3geoFormIconeAquarela"
-							type='text' id='i3GEOopcoes_labelsombra_i' value='' />
+						<input class="form-control input-lg i3geoFormIconeAquarela" type='text'
+							id='i3GEOopcoes_labelsombra_i' value='' />
 					</div>
 				</div>
 			</div>
 			<div class="row page-header">
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
-						<label class="control-label" for="i3GEOopcoes_labelsombrax_i">{{{labels_deslocamentoSombraFundo}}}
-							X</label> <input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labelsombrax_i' value='1' />
+						<label class="control-label"
+							for="i3GEOopcoes_labelsombrax_i">{{{labels_deslocamentoSombraFundo}}}
+							X</label> <input class="form-control input-lg" type='text' id='i3GEOopcoes_labelsombrax_i'
+							value='1' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
-						<label class="control-label" for="i3GEOopcoes_labelsombray_i">{{{labels_deslocamentoSombraFundo}}}
-							Y</label> <input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labelsombray_i' value='1' />
+						<label class="control-label"
+							for="i3GEOopcoes_labelsombray_i">{{{labels_deslocamentoSombraFundo}}}
+							Y</label> <input class="form-control input-lg" type='text' id='i3GEOopcoes_labelsombray_i'
+							value='1' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label" for="i3GEOopcoes_labelfrentes_i">{{{labels_corTextoFundo}}}</label>
-						<input class="form-control input-lg i3geoFormIconeAquarela"
-							type='text' id='i3GEOopcoes_labelfrentes_i' value='' />
+						<input class="form-control input-lg i3geoFormIconeAquarela" type='text'
+							id='i3GEOopcoes_labelfrentes_i' value='' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
-						<label class="control-label" for="i3GEOopcoes_labelfrentex_i">{{{labels_deslocamentoTextoFundo}}}
-							X</label> <input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labelfrentex_i' value='1' />
+						<label class="control-label"
+							for="i3GEOopcoes_labelfrentex_i">{{{labels_deslocamentoTextoFundo}}}
+							X</label> <input class="form-control input-lg" type='text' id='i3GEOopcoes_labelfrentex_i'
+							value='1' />
 					</div>
 				</div>
 			</div>
 			<div class="row page-header">
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
-						<label class="control-label" for="i3GEOopcoes_labelfrentey_i">{{{labels_deslocamentoTextoFundo}}}
-							Y</label> <input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labelfrentey_i' value='1' />
+						<label class="control-label"
+							for="i3GEOopcoes_labelfrentey_i">{{{labels_deslocamentoTextoFundo}}}
+							Y</label> <input class="form-control input-lg" type='text' id='i3GEOopcoes_labelfrentey_i'
+							value='1' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
-						<label class="control-label" for="i3GEOopcoes_labelmindistance_i">{{{labels_distanciaMinimaTextos}}}</label>
-						<input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labelmindistance_i' value='auto' />
+						<label class="control-label"
+							for="i3GEOopcoes_labelmindistance_i">{{{labels_distanciaMinimaTextos}}}</label>
+						<input class="form-control input-lg" type='text' id='i3GEOopcoes_labelmindistance_i'
+							value='auto' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
 						<label class="control-label"
 							for="i3GEOopcoes_labelminfeaturesize_i">{{{labels_tamanhoMinimoElemento}}}</label>
-						<input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labelminfeaturesize_i' value='auto' />
+						<input class="form-control input-lg" type='text' id='i3GEOopcoes_labelminfeaturesize_i'
+							value='auto' />
 					</div>
 				</div>
 				<div class="col-md-3">
 					<div class='form-group label-fixed condensed'>
-						<label class="control-label" for="i3GEOopcoes_labelwrap_i">{{{labels_caracterQuebraTexto}}}</label>
-						<input class="form-control input-lg" type='text'
-							id='i3GEOopcoes_labelwrap_i' value='' />
+						<label class="control-label"
+							for="i3GEOopcoes_labelwrap_i">{{{labels_caracterQuebraTexto}}}</label>
+						<input class="form-control input-lg" type='text' id='i3GEOopcoes_labelwrap_i' value='' />
 					</div>
 				</div>
 			</div>
@@ -394,25 +380,21 @@ Outros parametros devem ser enviados via form
 		<br>
 		<div class="row">
 			<div class="col-md-6">
-				<div class="" id="legendaClassesAccordion" role="tablist"
-					aria-multiselectable="true">
+				<div class="" id="legendaClassesAccordion" role="tablist" aria-multiselectable="true">
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion4">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion4">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion"
-									href="#legendaClassesCollapse4" aria-expanded="false"
-									aria-controls="legendaClassesCollapse4"> {{{simboloUnico}}}
+									data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse4"
+									aria-expanded="false" aria-controls="legendaClassesCollapse4"> {{{simboloUnico}}}
 								</a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse4" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion4">
+						<div id="legendaClassesCollapse4" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion4">
 							<div class="panel-body">
-								<form data-refresh="true" data-prog="execclasses"
-									data-funcao="simbolounico" style="" action="#"
-									onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+								<form data-refresh="true" data-prog="execclasses" data-funcao="simbolounico" style=""
+									action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 									<div class='form-group condensed'>
 										<div class="input-group">
 											<label class="control-label">{{{todosElementosUnicoSimbolo}}}</label>
@@ -429,21 +411,18 @@ Outros parametros devem ser enviados via form
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion9">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion9">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion"
-									href="#legendaClassesCollapse9" aria-expanded="false"
-									aria-controls="legendaClassesCollapse9"> {{{valorUnico}}} </a>
+									data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse9"
+									aria-expanded="false" aria-controls="legendaClassesCollapse9"> {{{valorUnico}}} </a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse9" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion9">
+						<div id="legendaClassesCollapse9" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion9">
 							<div class="panel-body">
-								<form data-refresh="true" data-prog="execclasses"
-									data-funcao="valorunico" style="" action="#"
-									onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+								<form data-refresh="true" data-prog="execclasses" data-funcao="valorunico" style=""
+									action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 									<div class='form-group condensed'>
 										<label class="control-label">{{{cadaOcorrenciaUnicoSimbolo}}}</label>
 										<div style="width: 100%;" class="input-group">
@@ -458,8 +437,7 @@ Outros parametros devem ser enviados via form
 									</div>
 									<div class='form-group condensed'>
 										<div class="input-group">
-											<label class="control-label">&nbsp;</label> <span
-												class="input-group-btn">
+											<label class="control-label">&nbsp;</label> <span class="input-group-btn">
 												<button role="button" type="submit"
 													class="btn btn-primary btn-fab btn-fab-max">
 													<span class="material-icons ">send</span>
@@ -473,22 +451,19 @@ Outros parametros devem ser enviados via form
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion5">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion5">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion"
-									href="#legendaClassesCollapse5" aria-expanded="false"
-									aria-controls="legendaClassesCollapse5"> {{{classesFixas}}}
+									data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse5"
+									aria-expanded="false" aria-controls="legendaClassesCollapse5"> {{{classesFixas}}}
 								</a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse5" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion5">
+						<div id="legendaClassesCollapse5" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion5">
 							<div class="panel-body">
-								<form data-refresh="true" data-prog="execclasses"
-									data-funcao="tipoClasses" style="" action="#"
-									onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+								<form data-refresh="true" data-prog="execclasses" data-funcao="tipoClasses" style=""
+									action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 									<div class='form-group condensed'>
 										<label class="control-label">{{{criaClassesItemNumerico}}}</label>
 										<div style="width: 100%;" class="input-group">
@@ -496,9 +471,8 @@ Outros parametros devem ser enviados via form
 										</div>
 									</div>
 									<div class='form-group label-floating'>
-										<label class="control-label">{{{numeroClasses}}}</label> <input
-											name="nclasses" required class="form-control input-lg"
-											type='number' value='5' />
+										<label class="control-label">{{{numeroClasses}}}</label> <input name="nclasses"
+											required class="form-control input-lg" type='number' value='5' />
 									</div>
 									<div class='form-group condensed'>
 										<label class="control-label">{{{tipoCalculo}}}</label>
@@ -512,8 +486,7 @@ Outros parametros devem ser enviados via form
 									</div>
 									<div class='form-group condensed'>
 										<div class="input-group">
-											<label class="control-label">&nbsp;</label> <span
-												class="input-group-btn">
+											<label class="control-label">&nbsp;</label> <span class="input-group-btn">
 												<button role="button" type="submit"
 													class="btn btn-primary btn-fab btn-fab-max">
 													<span class="material-icons ">send</span>
@@ -526,21 +499,18 @@ Outros parametros devem ser enviados via form
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion6">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion6">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion"
-									href="#legendaClassesCollapse6" aria-expanded="false"
-									aria-controls="legendaClassesCollapse6"> {{{metade}}} </a>
+									data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse6"
+									aria-expanded="false" aria-controls="legendaClassesCollapse6"> {{{metade}}} </a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse6" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion6">
+						<div id="legendaClassesCollapse6" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion6">
 							<div class="panel-body">
-								<form data-refresh="true" data-prog="execclasses"
-									data-funcao="metade" style="" action="#"
-									onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+								<form data-refresh="true" data-prog="execclasses" data-funcao="metade" style=""
+									action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 									<div class='form-group condensed'>
 										<label class="control-label">{{{duasmetades}}}</label>
 										<div style="width: 100%;" class="input-group">
@@ -555,8 +525,7 @@ Outros parametros devem ser enviados via form
 									</div>
 									<div class='form-group condensed'>
 										<div class="input-group">
-											<label class="control-label">&nbsp;</label> <span
-												class="input-group-btn">
+											<label class="control-label">&nbsp;</label> <span class="input-group-btn">
 												<button role="button" type="submit"
 													class="btn btn-primary btn-fab btn-fab-max">
 													<span class="material-icons ">send</span>
@@ -569,22 +538,19 @@ Outros parametros devem ser enviados via form
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion7">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion7">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion"
-									href="#legendaClassesCollapse7" aria-expanded="false"
-									aria-controls="legendaClassesCollapse7"> {{{media}}}
+									data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse7"
+									aria-expanded="false" aria-controls="legendaClassesCollapse7"> {{{media}}}
 									{{{duasmedias}}}</a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse7" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion7">
+						<div id="legendaClassesCollapse7" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion7">
 							<div class="panel-body">
-								<form data-refresh="true" data-prog="execclasses"
-									data-funcao="media" style="" action="#"
-									onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+								<form data-refresh="true" data-prog="execclasses" data-funcao="media" style=""
+									action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 									<div class='form-group condensed'>
 										<label class="control-label">{{{duasmetades}}}</label>
 										<div style="width: 100%;" class="input-group">
@@ -593,8 +559,7 @@ Outros parametros devem ser enviados via form
 									</div>
 									<div class='form-group condensed'>
 										<div class="input-group">
-											<label class="control-label">&nbsp;</label> <span
-												class="input-group-btn">
+											<label class="control-label">&nbsp;</label> <span class="input-group-btn">
 												<button role="button" type="submit"
 													class="btn btn-primary btn-fab btn-fab-max">
 													<span class="material-icons ">send</span>
@@ -607,22 +572,19 @@ Outros parametros devem ser enviados via form
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion8">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion8">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion"
-									href="#legendaClassesCollapse8" aria-expanded="false"
-									aria-controls="legendaClassesCollapse8">
+									data-parent="#legendaClassesAccordion" href="#legendaClassesCollapse8"
+									aria-expanded="false" aria-controls="legendaClassesCollapse8">
 									{{{calcularQuartil}}} </a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse8" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion8">
+						<div id="legendaClassesCollapse8" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion8">
 							<div class="panel-body">
-								<form data-refresh="true" data-prog="execclasses"
-									data-funcao="quartil" style="" action="#"
-									onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+								<form data-refresh="true" data-prog="execclasses" data-funcao="quartil" style=""
+									action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 									<div class='form-group condensed'>
 										<label class="control-label">{{{criaQuartis}}}</label>
 										<div style="width: 100%;" class="input-group">
@@ -641,8 +603,7 @@ Outros parametros devem ser enviados via form
 									</div>
 									<div class='form-group condensed'>
 										<div class="input-group">
-											<label class="control-label">&nbsp;</label> <span
-												class="input-group-btn">
+											<label class="control-label">&nbsp;</label> <span class="input-group-btn">
 												<button role="button" type="submit"
 													class="btn btn-primary btn-fab btn-fab-max">
 													<span class="material-icons ">send</span>
@@ -658,55 +619,49 @@ Outros parametros devem ser enviados via form
 			</div>
 
 			<div class="col-md-6">
-				<div class="" id="legendaClassesAccordion_" role="tablist"
-					aria-multiselectable="true">
+				<div class="" id="legendaClassesAccordion_" role="tablist" aria-multiselectable="true">
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion1">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion1">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion_"
-									href="#legendaClassesCollapse1" aria-expanded="false"
-									aria-controls="legendaClassesCollapse1"> Par&acirc;metros </a>
+									data-parent="#legendaClassesAccordion_" href="#legendaClassesCollapse1"
+									aria-expanded="false" aria-controls="legendaClassesCollapse1"> Par&acirc;metros </a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse1" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion1">
+						<div id="legendaClassesCollapse1" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion1">
 							<div class="panel-body">
 								<div class="checkbox text-left">
-									<label> <input checked id='i3GEOFlegendaaplicaextent'
-										type="checkbox" onclick=""> <span
-										class="checkbox-material noprint"> <span class="check"></span>
-									</span> {{{consideraElementosVisisveis}}}
+									<label> <input checked id='i3GEOFlegendaaplicaextent' type="checkbox" onclick="">
+										<span class="checkbox-material noprint"> <span class="check"></span>
+										</span> {{{consideraElementosVisisveis}}}
 									</label>
 								</div>
 								<div class='form-group label-fixed condensed'>
 									<label class="control-label"
 										for="{{{idjanela}}}i3GEOtabelaexcestat">{{{ignoraValores}}}</label>
-									<input class="form-control input-lg" type='text'
-										id='i3GEOlegendaignorar' value='' />
+									<input class="form-control input-lg" type='text' id='i3GEOlegendaignorar'
+										value='' />
 								</div>
 							</div>
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion2">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion2">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion_"
-									href="#legendaClassesCollapse2" aria-expanded="false"
-									aria-controls="legendaClassesCollapse2"> {{{alteraGeom}}} </a>
+									data-parent="#legendaClassesAccordion_" href="#legendaClassesCollapse2"
+									aria-expanded="false" aria-controls="legendaClassesCollapse2"> {{{alteraGeom}}} </a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse2" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion2">
+						<div id="legendaClassesCollapse2" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion2">
 							<div class="panel-body">
-								<form data-refresh="true" data-prog="execclasses"
-									data-funcao="alteraGeometria" style="" action="#"
-									onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+								<form data-refresh="true" data-prog="execclasses" data-funcao="alteraGeometria" style=""
+									action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 									<div class='form-group condensed'>
-										<label class="control-label" for="i3GEOlegentaTipoGeo">{{{transformaGeom}}}</label>
+										<label class="control-label"
+											for="i3GEOlegentaTipoGeo">{{{transformaGeom}}}</label>
 										<div style="width: 100%;" class="input-group">
 											<select name="tipo" class="form-control">
 												<option value=''>{{{semTransformacao}}}</option>
@@ -720,8 +675,7 @@ Outros parametros devem ser enviados via form
 									</div>
 									<div class='form-group condensed'>
 										<div class="input-group">
-											<label class="control-label">&nbsp;</label> <span
-												class="input-group-btn">
+											<label class="control-label">&nbsp;</label> <span class="input-group-btn">
 												<button role="button" type="submit"
 													class="btn btn-primary btn-fab btn-fab-max">
 													<span class="material-icons ">send</span>
@@ -734,21 +688,18 @@ Outros parametros devem ser enviados via form
 						</div>
 					</div>
 					<div class="panel panel-default">
-						<div class="panel-heading" role="tab"
-							id="legendaClassesAccordion3">
+						<div class="panel-heading" role="tab" id="legendaClassesAccordion3">
 							<h4 class="panel-title">
 								<a class="collapsed" role="button" data-toggle="collapse"
-									data-parent="#legendaClassesAccordion_"
-									href="#legendaClassesCollapse3" aria-expanded="false"
-									aria-controls="legendaClassesCollapse3"> {{{alteraTipo}}} </a>
+									data-parent="#legendaClassesAccordion_" href="#legendaClassesCollapse3"
+									aria-expanded="false" aria-controls="legendaClassesCollapse3"> {{{alteraTipo}}} </a>
 							</h4>
 						</div>
-						<div id="legendaClassesCollapse3" class="panel-collapse collapse"
-							role="tabpanel" aria-labelledby="legendaClassesAccordion3">
+						<div id="legendaClassesCollapse3" class="panel-collapse collapse" role="tabpanel"
+							aria-labelledby="legendaClassesAccordion3">
 							<div class="panel-body">
-								<form data-refresh="true" data-prog="exectemas"
-									data-funcao="alterarepresentacao" style="" action="#"
-									onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
+								<form data-refresh="true" data-prog="exectemas" data-funcao="alterarepresentacao"
+									style="" action="#" onsubmit="i3GEOF.legenda.run(this);return false;" role="form">
 									<div class='form-group condensed'>
 										<div class="input-group">
 											<label class="control-label">{{{alteraTipoGeom}}}</label> <span
@@ -776,13 +727,12 @@ Outros parametros devem ser enviados via form
 				<div class="panel panel-default legenda">
 					<div class="panel-heading legenda" role="tab">
 						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse"
-								href="#legendaEstilosCollapse1" aria-expanded="false">
+							<a class="collapsed" role="button" data-toggle="collapse" href="#legendaEstilosCollapse1"
+								aria-expanded="false">
 								{{{etiquetasClasse}}} </a>
 						</h4>
 					</div>
-					<div id="legendaEstilosCollapse1" class="panel-collapse collapse"
-						role="tabpanel">
+					<div id="legendaEstilosCollapse1" class="panel-collapse collapse" role="tabpanel">
 						<div class="panel-body">
 							<div class='form-group condensed'>
 								<label class="control-label" for="i3GEOlegendaitensLabel">{{{itemComTexto}}}</label>
@@ -792,14 +742,12 @@ Outros parametros devem ser enviados via form
 							</div>
 							<button onclick="i3GEOF.legenda.excluiLabels(this)"
 								class='btn btn-primary btn-sm btn-raised'>
-								<span
-									class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
+								<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 								{{{removeLabels}}}
 							</button>
 							<button onclick="i3GEOF.legenda.incluirLabels(this)"
 								class='btn btn-primary btn-sm btn-raised'>
-								<span
-									class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
+								<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 								{{{aplicar}}}
 							</button>
 						</div>
@@ -810,13 +758,12 @@ Outros parametros devem ser enviados via form
 				<div class="panel panel-default legenda">
 					<div class="panel-heading legenda" role="tab">
 						<h4 class="panel-title">
-							<a class="collapsed" role="button" data-toggle="collapse"
-								href="#legendaEstilosCollapse2" aria-expanded="false">
+							<a class="collapsed" role="button" data-toggle="collapse" href="#legendaEstilosCollapse2"
+								aria-expanded="false">
 								{{{estilos}}} </a>
 						</h4>
 					</div>
-					<div id="legendaEstilosCollapse2" class="panel-collapse collapse"
-						role="tabpanel">
+					<div id="legendaEstilosCollapse2" class="panel-collapse collapse" role="tabpanel">
 						<div class="panel-body">
 							<div class='form-group condensed'>
 								<label class="control-label" for="i3GEOlegendaestilos">{{{estiloEdicao}}}</label>
@@ -826,26 +773,21 @@ Outros parametros devem ser enviados via form
 							</div>
 							<button onclick="i3GEOF.legenda.excluiEstilo(this)"
 								class='btn btn-primary btn-sm btn-raised'>
-								<span
-									class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
+								<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 								{{{exclui}}}
 							</button>
 							<button onclick="i3GEOF.legenda.adicionaEstilo(this)"
 								class='btn btn-primary btn-sm btn-raised'>
-								<span
-									class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
+								<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 								{{{adiciona}}}
 							</button>
-							<button onclick="i3GEOF.legenda.sobeEstilo(this)"
-								class='btn btn-primary btn-sm btn-raised'>
-								<span
-									class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
+							<button onclick="i3GEOF.legenda.sobeEstilo(this)" class='btn btn-primary btn-sm btn-raised'>
+								<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 								{{{sobe}}}
 							</button>
 							<button onclick="i3GEOF.legenda.desceEstilo(this)"
 								class='btn btn-primary btn-sm btn-raised'>
-								<span
-									class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
+								<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 								{{{desce}}}
 							</button>
 						</div>
@@ -865,27 +807,31 @@ Outros parametros devem ser enviados via form
 	<!-- SLD -->
 	<div id='i3GEOlegendaguia5obj' class='container-fluid '>
 		<h4>
-			{{{geraSLD}}} <a href='http://mapserver.org/ogc/sld.html#sld'
-				target='_blank'> Mapserver SLD </a> {{{ajudaSLD}}}
+			{{{geraSLD}}} <a href='http://mapserver.org/ogc/sld.html#sld' target='_blank'> Mapserver SLD </a>
+			{{{ajudaSLD}}}
 		</h4>
-		<button onclick="i3GEOF.legenda.slde()"
-			class='btn btn-primary btn-sm btn-raised'>{{{exportaSLD}}}</button>
+		<button onclick="i3GEOF.legenda.slde()" class='btn btn-primary btn-sm btn-raised'>{{{exportaSLD}}}</button>
 		<h4>{{{msgAplicaSLD}}}</h4>
 
 		<div class='container-fluid'>
-		    <form class="form-horizontal" role="form" id='i3GEOaplicarsldf' target='i3GEOaplicarsldiframe' action='{{{locaplic}}}/ferramentas/legenda/uploadsld.php?layerName={{{layerName}}}' method='post'
-		        ENCTYPE='multipart/form-data'>
-		        <div class="input-group-btn">
-		            <button style="margin-right: 10px;" type="button" class="btn btn-primary btn-raised pull-left" onclick="$(this).parent().find('input[type=file]').click();">SLD</button>
-		            <input name="i3GEOaplicarsld" onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());" style="display: none;" type="file"> <span
-		                class="form-control upload"></span>
-		        </div>
-		        <br>
-		        <button onclick="submit" class='btn btn-primary btn-sm btn-raised' name='submit'>{{{aplica}}}</button>
-		        <input type='hidden' name='mapId' value='{{{mapId}}}'> <input type='hidden' name='MAX_FILE_SIZE' value='100000'>
-		    </form>
-		    <br>
-		    <iframe name='i3GEOaplicarsldiframe' style='text-align: left; border: 1px solid gray;' width='98%' height='60px'></iframe>
+			<form class="form-horizontal" role="form" id='i3GEOaplicarsldf' target='i3GEOaplicarsldiframe'
+				action='{{{locaplic}}}/ferramentas/legenda/uploadsld.php?layerName={{{layerName}}}' method='post'
+				ENCTYPE='multipart/form-data'>
+				<div class="input-group-btn">
+					<button style="margin-right: 10px;" type="button" class="btn btn-primary btn-raised pull-left"
+						onclick="$(this).parent().find('input[type=file]').click();">SLD</button>
+					<input name="i3GEOaplicarsld"
+						onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
+						style="display: none;" type="file"> <span class="form-control upload"></span>
+				</div>
+				<br>
+				<button onclick="submit" class='btn btn-primary btn-sm btn-raised' name='submit'>{{{aplica}}}</button>
+				<input type='hidden' name='mapId' value='{{{mapId}}}'> <input type='hidden' name='MAX_FILE_SIZE'
+					value='100000'>
+			</form>
+			<br>
+			<iframe name='i3GEOaplicarsldiframe' style='text-align: left; border: 1px solid gray;' width='98%'
+				height='60px'></iframe>
 		</div>
 
 	</div>
@@ -897,22 +843,19 @@ Outros parametros devem ser enviados via form
 			<div class='form-group label-fixed condensed'>
 				<label class="col-md-6 control-label">{{{ClusterMaxdistance}}}</label>
 				<div class="col-md-6 ">
-					<input class="form-control input-lg" type='number'
-						id='i3GEOlegendaClusterMaxdistance' value='5' />
+					<input class="form-control input-lg" type='number' id='i3GEOlegendaClusterMaxdistance' value='5' />
 				</div>
 			</div>
 			<div class='form-group label-fixed condensed'>
 				<label class="col-md-6 control-label">{{{ClusterBuffer}}}</label>
 				<div class="col-md-6 ">
-					<input class="form-control input-lg" type='number'
-						id='i3GEOlegendaClusterBuffer' value='10' />
+					<input class="form-control input-lg" type='number' id='i3GEOlegendaClusterBuffer' value='10' />
 				</div>
 			</div>
 			<div class='form-group label-fixed condensed'>
 				<label class="col-md-6 control-label">{{{ClusterFilter}}}</label>
 				<div class="col-md-6 ">
-					<input class="form-control input-lg" type='text'
-						id='i3GEOlegendaClusterFilter' value='' />
+					<input class="form-control input-lg" type='text' id='i3GEOlegendaClusterFilter' value='' />
 				</div>
 			</div>
 			<div class='form-group label-fixed condensed'>
@@ -932,18 +875,15 @@ Outros parametros devem ser enviados via form
 			</div>
 		</form>
 		<div style="text-align: center;">
-			<button onclick="i3GEOF.legenda.aplicarCluster(this)"
-				class='btn btn-primary btn-sm btn-raised'>
+			<button onclick="i3GEOF.legenda.aplicarCluster(this)" class='btn btn-primary btn-sm btn-raised'>
 				<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 				{{{aplicar}}}
 			</button>
-			<button onclick="i3GEOF.legenda.removerCluster(this)"
-				class='btn btn-primary btn-sm btn-raised'>
+			<button onclick="i3GEOF.legenda.removerCluster(this)" class='btn btn-primary btn-sm btn-raised'>
 				<span class="glyphicon glyphicon-repeat normal-right-spinner hidden"></span>
 				{{{remover}}}
 			</button>
 		</div>
 	</div>
-	<input type='hidden' value='' id='listaColourRamp'
-		onchange='javascript:i3GEOF.legenda.aplicaColourRamp()' />
+	<input type='hidden' value='' id='listaColourRamp' onchange='javascript:i3GEOF.legenda.aplicaColourRamp()' />
 </div>

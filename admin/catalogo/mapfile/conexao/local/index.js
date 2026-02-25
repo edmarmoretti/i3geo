@@ -24,92 +24,92 @@ Free Software Foundation, Inc., no endere&ccedil;o
  */
 i3GEOadmin.mapfile = {};
 i3GEOadmin.conexaolocal = {
-		inicia: function(codigo, id_tema){
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=lista",
-					"codigo="+codigo
-			)
+	inicia: function (codigo, id_tema) {
+		i3GEOadmin.core.modalAguarde(true);
+		$.post(
+			"exec.php?funcao=lista",
+			"codigo=" + codigo
+		)
 			.done(
-					function(data, status){
-						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data);
+				function (data, status) {
+					i3GEOadmin.core.modalAguarde(false);
+					var json = JSON.parse(data);
 
-						$("#corpo").html(
-								Mustache.to_html(
-										$("#templateFormConexaoLocal").html(),
-										$.extend(
-												{},
-												i3GEOadmin.conexaolocal.dicionario,
-												json.dados,
-												{
-													"codigo": codigo,
-													"id_tema": id_tema,
-													"onSalvar": "i3GEOadmin.conexaolocal.salvar",
-													"convcaracter": function(){
-														var hash = {
-																"sim": i3GEOadmin.conexaolocal.dicionario.sim,
-																"nao": i3GEOadmin.conexaolocal.dicionario.nao,
-																"NAO-sel" : "",
-																"SIM-sel": ""
-															};
-														hash[json.dados.convcaracter + "-sel"] = "selected";
-														return Mustache.to_html(
-																$("#templateOpcoesPublicado").html(),
-																hash
-														);
-													},
-													"type": function(){
-														var hash = {};
-														hash[json.dados.type + "-sel"] = "selected";
-														return Mustache.to_html(
-																$("#templateTiposLayer").html(),
-																hash
-														);
-													},
-													"connectiontype": function(){
-														var hash = {};
-														hash[json.dados.connectiontype + "-sel"] = "selected";
-														return Mustache.to_html(
-																$("#templateTiposConexao").html(),
-																hash
-														);
-													}
-												}
-										)
-								)
-						);
-						$.material.init();
-					}
+					$("#corpo").html(
+						Mustache.to_html(
+							$("#templateFormConexaoLocal").html(),
+							$.extend(
+								{},
+								i3GEOadmin.conexaolocal.dicionario,
+								json.dados,
+								{
+									"codigo": codigo,
+									"id_tema": id_tema,
+									"onSalvar": "i3GEOadmin.conexaolocal.salvar",
+									"convcaracter": function () {
+										var hash = {
+											"sim": i3GEOadmin.conexaolocal.dicionario.sim,
+											"nao": i3GEOadmin.conexaolocal.dicionario.nao,
+											"NAO-sel": "",
+											"SIM-sel": ""
+										};
+										hash[json.dados.convcaracter + "-sel"] = "selected";
+										return Mustache.to_html(
+											$("#templateOpcoesPublicado").html(),
+											hash
+										);
+									},
+									"type": function () {
+										var hash = {};
+										hash[json.dados.type + "-sel"] = "selected";
+										return Mustache.to_html(
+											$("#templateTiposLayer").html(),
+											hash
+										);
+									},
+									"connectiontype": function () {
+										var hash = {};
+										hash[json.dados.connectiontype + "-sel"] = "selected";
+										return Mustache.to_html(
+											$("#templateTiposConexao").html(),
+											hash
+										);
+									}
+								}
+							)
+						)
+					);
+					$.material.init();
+				}
 			)
 			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
+				function (data) {
+					i3GEOadmin.core.modalAguarde(false);
+					i3GEOadmin.core.mostraErro(data.status + " " + data.statusText);
+				}
 			);
-		},
-		salvar: function(codigo,id_tema){
-			var parametros = $("#form-edicao-conexaolocal").serialize();
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=alterar",
-					"codigo=" + codigo + "&id_tema="+ id_tema+"&"+parametros
-			)
+	},
+	salvar: function (codigo, id_tema) {
+		var parametros = $("#form-edicao-conexaolocal").serialize();
+		i3GEOadmin.core.modalAguarde(true);
+		$.post(
+			"exec.php?funcao=alterar",
+			"codigo=" + codigo + "&id_tema=" + id_tema + "&" + parametros
+		)
 			.done(
-					function(data, status){
-						i3GEOadmin.conexaolocal.inicia(codigo,id_tema);
-					}
+				function (data, status) {
+					i3GEOadmin.conexaolocal.inicia(codigo, id_tema);
+				}
 			)
 			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
+				function (data) {
+					i3GEOadmin.core.modalAguarde(false);
+					i3GEOadmin.core.mostraErro(data.status + " " + data.statusText);
+				}
 			);
-		},
-		testa: function(codigo){
-			i3GEOadmin.core.modalAguarde(true);
-			i3GEOadmin.teste.testaImg("../../../../..",codigo,"","",$("#modalGeral .modal-body"))
-		}
+	},
+	testa: function (codigo) {
+		i3GEOadmin.core.modalAguarde(true);
+		i3GEOadmin.teste.testaImg("../../../../..", codigo, "", "", $("#modalGeral .modal-body"))
+	}
 };

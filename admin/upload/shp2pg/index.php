@@ -45,7 +45,7 @@ $comboAliasConexao .= "</select>";
                 </h2>
                 <blockquote>
                     {{{txtDescShp2Pg}}}<br>
-                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                    <a href="#expandeTxt" data-bs-toggle="collapse"class="collapsed">
                         <span class="text-primary readMore">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>
@@ -177,11 +177,11 @@ $comboAliasConexao .= "</select>";
                 </div>
             </form>
         </div>
-        <div id="modalUpload" class="modal fade" tabindex="-1">
+        <div id="modalUpload" class="modal" tabindex="-1">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>

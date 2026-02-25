@@ -23,24 +23,24 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
  */
 i3GEOadmin.uploadshp = {
-	listaEpsg: function(){
+	listaEpsg: function () {
 		$.get(
-				"../../../serverapi/catalog?funcao=epsglist"
+			"../../../serverapi/catalog?funcao=epsglist"
 		)
-		.done(
-				function(data, status){
-					var json = jQuery.parseJSON(data);
+			.done(
+				function (data, status) {
+					var json = JSON.parse(data);
 					var html = Mustache.to_html(
-							"{{#data}}" + $("#templateProj").html() + "{{/data}}",
-							json
+						"{{#data}}" + $("#templateProj").html() + "{{/data}}",
+						json
 					);
 					$("#uploadEPSG").html("<option value='' ></option>" + html);
 				}
-		)
-		.fail(
-				function(data){
-					i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
+			)
+			.fail(
+				function (data) {
+					i3GEOadmin.core.mostraErro(data.status + " " + data.statusText);
 				}
-		);
+			);
 	}
 };

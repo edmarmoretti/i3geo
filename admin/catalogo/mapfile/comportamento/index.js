@@ -33,7 +33,7 @@ i3GEOadmin.comportamento = {
 			.done(
 				function (data, status) {
 					i3GEOadmin.core.modalAguarde(false);
-					var json = jQuery.parseJSON(data);
+					var json = JSON.parse(data);
 					$("#corpo").html(
 						Mustache.to_html(
 							$("#templateFormComportamento").html(),

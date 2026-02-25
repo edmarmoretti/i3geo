@@ -1204,7 +1204,7 @@ i3GEO.util =
 			head.appendChild(script);
 		} else {
 			if (ini !== "") {
-				if (jQuery.isFunction(ini)) {
+				if (typeof ini === 'function') {
 					ini.call();
 				} else {
 					eval(ini);
@@ -1820,7 +1820,7 @@ i3GEO.util =
 			} else {
 				i3GEO.janela.snackBar({ content: $trad("erroTpl"), style: "red" });
 			}
-			if (jQuery.isFunction(funcao)) {
+			if (typeof funcao === 'function') {
 				funcao.call(this, temp);
 			} else {
 				eval("funcao(temp)");
@@ -1893,7 +1893,7 @@ i3GEO.util =
 					tipo: "erro"
 				};
 			}
-			if (jQuery.isFunction(funcao)) {
+			if (typeof funcao === 'function') {
 				funcao.call(this, temp);
 			} else {
 				eval("funcao(temp)");
