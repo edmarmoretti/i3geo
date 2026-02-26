@@ -665,7 +665,6 @@ function restauraConObj($objMap, $postgis_mapa)
  * $objMapa {objeto} - Objeto map.
  *
  *
- * $locmapserv {string} - localliza&ccedil;&atilde;o do mapserver CGI
  *
  * $map_file {string} - mapfile que ser&aacute; processado
  *
@@ -679,7 +678,7 @@ function restauraConObj($objMap, $postgis_mapa)
  */
 function retornaReferencia($ext = "")
 {
-    global $nomeImagem, $objMapa,$locmapserv, $map_file;
+    global $nomeImagem, $objMapa, $map_file;
     if ($ext && $ext != "") {
         $e = explode(" ", $ext);
         $extatual = $objMapa->extent;
@@ -730,7 +729,6 @@ function retornaReferencia($ext = "")
  * $objMapa {objeto} - Objeto map.
  *
  *
- * $locmapserv {string} - localliza&ccedil;&atilde;o do mapserver CGI
  *
  * $map_file {string} - mapfile que ser&aacute; processado
  *
@@ -740,7 +738,6 @@ function retornaReferencia($ext = "")
  *
  * $tipo - tipo de refer&ecirc;ncia dinamico|mapa
  *
- * $interface - interface do mapa atual openlayers|googlemaps|googleearth
  *
  * Parametros:
  *
@@ -756,19 +753,12 @@ function retornaReferencia($ext = "")
  */
 function retornaReferenciaDinamica($ext = "", $w = "", $h = "", $zoom = -3, $tipo = "mapa")
 {
-    global $nomeImagem, $map_file, $locmapserv, $locaplic, $interface, $postgis_mapa;
+    global $nomeImagem, $map_file, $locaplic, $postgis_mapa;
     //
     // adiciona o tema com o web service com o mapa mundi
     //
     $objMapa = ms_newMapObj($map_file);
     substituiConObj($objMapa, $postgis_mapa);
-    $i = $objMapa->getmetadata("interface");
-    if ($i == "") {
-        $i = $interface;
-    }
-    if ($i == "googlemaps") {
-        $objMapa->setProjection(pegaProjecaoDefault("proj4"));
-    }
     if ($ext && $ext != "") {
         $e = explode(" ", $ext);
         $extatual = $objMapa->extent;
@@ -819,9 +809,6 @@ function retornaReferenciaDinamica($ext = "", $w = "", $h = "", $zoom = -3, $tip
     $nomer = ($objImagem->imageurl) . basename($nomer);
     $s = "var refimagem='" . $nomer . "';var refwidth=" . $w . ";var refheight=" . $h . ";var refpath='" . $objImagem->imagepath . "';var refurl='" . $objImagem->imageurl . "'";
     $mapa = ms_newMapObj($map_file);
-    if ($i == "googlemaps") {
-        $mapa->setProjection(pegaProjecaoDefault("proj4"));
-    }
     $ref = $mapa->reference;
     $r = $ref->extent;
     //
@@ -1731,22 +1718,15 @@ function downloadTema2($map_file, $tema, $locaplic, $dir_tmp, $postgis_mapa)
     if (($map_file == "") || (! file_exists($map_file))) { // a funcao foi chamada do aplicativo datadownload
         if ($base == "" or ! isset($base)) {
             $base = "";
-            if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-                $base = $locaplic . "/aplicmap/geral1windowsv" . $versao . ".map";
-            } else {
                 if ($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
                     $base = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
                 }
                 if ($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
                     $base = "/var/www/html/i3geo/aplicmap/geral1fedorav" . $versao . ".map";
                 }
-                if ($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
-                    $base = "/opt/www/html/i3geo/aplicmap/geral1v" . $versao . ".map";
-                }
                 if ($base == "") {
                     $base = $locaplic . "/aplicmap/geral1v" . $versao . ".map";
                 }
-            }
         } else {
             if (! file_exists($base)) {
                 $base = $locaplic . "/aplicmap/" . $base;

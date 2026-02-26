@@ -17,7 +17,6 @@ $_GET["temas"] = str_replace(" ",",",trim(strip_tags($_GET["temas"])));
 define('LISTADETEMAS', "'".implode("','",explode(",",$_GET["temas"]))."'");
 $configInc = array(
     "debug" => "", //posfixos inserido na carga do script do i3geo
-    "tipo" => "OSM", // OL ou OSM
     "inc" => "inc", //caminho para os includes PHP com os componentes da interface
     "pathjs" => "..", //caminho para o include dos arquivos JS
     "pathcss" => "..", //caminho para o include dos arquivos css
@@ -54,7 +53,7 @@ include ($configInc["inc"] . "/css.php");
     <div id="i3GEONomeLogin"
         style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
     -->
-    <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
+    <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers
     Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
     -->
     <div id="mapai3Geo" style="width: 100vw; height: 100vh"></div>
@@ -121,7 +120,12 @@ include ($configInc["inc"] . "/css.php");
     </div>
     </script>
     <script>
-            //ativa o banner de inicializacao
+    <?php
+        //para comodidade de nao ter de calcular isso
+        $u = basename(dirname(dirname(__FILE__)));
+        echo 'i3GeoUrl = i3GEO.util.protocolo() + "://" + window.location.host + "/'.$u.'";';
+    ?>
+//ativa o banner de inicializacao
             i3GEO.janela.tempoMsg(
                 $i("i3GEOlogoMarcaTemplate").innerHTML, 4000);
             (function() {
@@ -205,7 +209,6 @@ include ($configInc["inc"] . "/css.php");
             };
             var config = {
                 mapBody : "mapai3Geo",
-                mapType : "OSM",
                 layerProgressBar: true,
                 saveExtension : false,
                 i3GeoServer : i3GeoUrl,
@@ -322,7 +325,7 @@ include ($configInc["inc"] . "/css.php");
                 buscainde : {},
                 //ferramenta mapa de referencia
                 //difere das propriedades do mapa de referencia
-                //utilizado pela api openlayers ou googlemaps
+                //utilizado pela api openlayers
                 opcoesmaparef : {
                     //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
                     images : [ {
@@ -378,30 +381,6 @@ include ($configInc["inc"] . "/css.php");
                 //ver https://openlayers.org/en/latest/apidoc/ol.View.html
                 ViewOptions : {
 
-                }
-                },
-                //configuracoes especificas para a interface GoogleMaps
-                googleMaps : {
-                //opcoes de inicializacao do mapa conforme definido na API do GoogleMaps
-                MapOptions : {
-                    //estilo que sera utilizado no mapa
-                    //pode ser um desses: roadmap, satellite, hybrid, terrain, Red, Countries, Night, Blue, Greyscale, No roads, Mixed, Chilled
-                    //ver i3GEO.Interface.googleMaps.ESTILOS
-                    mapTypeId : "roadmap",
-                    scaleControl : true,
-                    mapTypeControl : true,
-                    mapTypeControlOptions : {
-                    //position : google.maps.ControlPosition.LEFT_BOTTOM
-                    },
-                    zoomControl : true,
-                    zoomControlOptions : {
-                    //style : google.maps.ZoomControlStyle.SMALL,
-                    //position : google.maps.ControlPosition.LEFT_CENTER
-                    },
-                    streetViewControl : true,
-                    streetViewControlOptions : {
-                    //position : google.maps.ControlPosition.LEFT_CENTER
-                    }
                 }
                 }
             };

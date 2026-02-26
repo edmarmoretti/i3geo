@@ -43,13 +43,7 @@ class DataConnector
     {
 		if (!function_exists('ms_GetVersion'))
 		{
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{
-				if(!@dl('php_mapscript_48.dll'))
-				dl('php_mapscript.dll');
-			}
-			else
-			{dl('php_mapscript.so');}
+			dl('php_mapscript.so');
 		}
 		//include("../../classesphp/carrega_ext.php");
 		//verifica��o de seguran�a

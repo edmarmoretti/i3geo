@@ -2,7 +2,6 @@ if (typeof (i3GEO) === 'undefined') {
     var i3GEO = {};
 }
 //os botoes sao inseridos em cada layer grafico na arvore de camadas
-//veja em js/arvoredecamadas.js -> adicionaLayersGr
 i3GEO.editor =
 {
     _mascCompose: "",
@@ -1279,7 +1278,7 @@ i3GEO.editor =
             ins = $trad("meneditor2");
         }
         ins = '<div class="alert alert-info alert-dismissible" role="alert" style="background-color:#d3eaf5;">'
-            + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
+            + '<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
             + ins
             + "</div>";
         $(seletor).html(ins);
@@ -1363,7 +1362,7 @@ i3GEO.editor =
             }
         ];
         ins = '<div class="alert alert-info alert-dismissible" role="alert" style="background-color:#d3eaf5;">'
-            + '<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+            + '<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
 
         //ins += "<div class='checkbox text-left'><label><input " + (i3GEO.editor._snap == false ? "" : "checked") + " type='checkbox' onclick='javascript:i3GEO.editor._snap = this.checked; i3GEO.editor.toggleSnap();'><span class='checkbox-material noprint'><span class='check'></span></span> " + $trad("ativasnaptol") + " </label></div>";
         ins += "<div class='checkbox text-left'><label><input " + (i3GEO.editor._freehand == false ? "" : "checked") + " type='checkbox' onclick='javascript:i3GEO.editor._freehand = this.checked; '><span class='checkbox-material noprint'><span class='check'></span></span> " + $trad("freehand") + " </label></div>";

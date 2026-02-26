@@ -21,13 +21,7 @@ include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
 $exts = get_loaded_extensions();
 if (array_search( "MapScript", $exts) != TRUE)
 {
-	if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-	{
-		if(!@dl('php_mapscript_48.dll'))
-		dl('php_mapscript.dll');
-	}
-	else
-	{dl('php_mapscript.so');}
+	dl('php_mapscript.so');
 }
 require(dirname(__FILE__)."/../../classesphp/funcoes_gerais.php");
 //error_reporting(0);
@@ -35,13 +29,6 @@ $nomes = nomeRandomico();
 
 $map = ms_newMapObj($map_file);
 substituiConObj($map,$postgis_mapa);
-if($map->getmetadata("interface") == "googlemaps"){
-	$proj4 = pegaProjecaoDefault("proj4");
-	$map->setProjection($proj4);
-	$map->set("units",MS_METERS);
-	$map->preparequery();
-	$map->set("scaledenom",$map->scaledenom * 100000);
-}
 
 $v = versao();
 

@@ -258,9 +258,9 @@ i3GEOadmin.mapfile.dicionario = {
 		es: "Disponibilidad"
 	}],
 	'txtDisponibilidade': [{
-		pt: "Os dados de uma camada podem ficar dispon&iacute;veis para download ou acess&iacute;veis por meio de servi&ccedil;os OGC. Para uso com o aplicativo 'mashup' os dados devem estar dispon&iacute;veis como servi&ccedil;os OGC.",
-		en: "Layer data can be available for downloading or accessible through OGC services. For use with the mashup application, data must be available as OGC services.",
-		es: "Los datos de una capa pueden estar disponibles para descargar o accesibles a trav&eacute;s de servicios OGC. Para uso con la aplicaci&oacute;n mashup, los datos deben estar disponibles como servicios de OGC."
+		pt: "Os dados de uma camada podem ficar dispon&iacute;veis para download ou acess&iacute;veis por meio de servi&ccedil;os OGC.",
+		en: "",
+		es: ""
 	}],
 	'conexaoLocal': [{
 		pt: "Conex&atilde;o local",

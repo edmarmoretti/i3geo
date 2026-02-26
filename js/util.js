@@ -33,55 +33,6 @@
 if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
-/**
- * Constant: navm
- *
- * Verdadeiro (true) se o navegador for o Internet Explorer
- *
- * Tipo:
- *
- * {boolean}
- */
-var navm = false;
-/**
- * Constant: navn
- *
- * Verdadeiro (true) se o navegador for o Firefox
- *
- * Tipo:
- *
- * {boolean}
- */
-var navn = false;
-/**
- * Constant: chro
- *
- * Verdadeiro (true) se o navegador for o Chrome
- *
- * Tipo:
- *
- * {boolean}
- */
-var chro = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-/**
- * Constant: opera
- *
- * Verdadeiro (true) se o navegador for o Opera
- *
- * Tipo:
- *
- * {boolean}
- */
-var opera = navigator.userAgent.toLowerCase().indexOf('opera') > -1;
-if (navigator.appName.substring(0, 1) === 'N') {
-	navn = true;
-}
-if (navigator.appName.substring(0, 1) === 'M') {
-	navm = true;
-}
-if (opera === true) {
-	navn = true;
-}
 
 /**
  * Function: $i
@@ -996,39 +947,24 @@ i3GEO.util =
 		obj = $i(id);
 		if (n === 1) {
 			obj.style.display = "block";
-			if (navm) {
-				obj.style.filter = 'alpha(opacity=100)';
-			} else {
-				obj.style.opacity = 1;
-			}
+			obj.style.opacity = 1;
 		}
 		tempo = n * intervalo;
 		intervalo = (intervalo * 100) / tempo;
 		opacidade = 0;
-		if (navm) {
-			obj.style.filter = 'alpha(opacity=0)';
-		} else {
-			obj.style.opacity = 0;
-		}
+		obj.style.opacity = 0;
 		obj.style.display = "block";
 		fadei = function () {
 			opacidade += intervalo;
-			if (navm) {
-				obj.style.filter = 'alpha(opacity=' + opacidade + ')';
-			} else {
-				obj.style.opacity = opacidade / 100;
-			}
+			obj.style.opacity = opacidade / 100;
+
 			if (opacidade < 100) {
 				tempoFadei = setTimeout(fadei, tempo);
 			} else {
 				if (tempoFadei) {
 					clearTimeout(tempoFadei);
 				}
-				if (navm) {
-					obj.style.filter = 'alpha(opacity=100)';
-				} else {
-					obj.style.opacity = 1;
-				}
+				obj.style.opacity = 1;
 			}
 		};
 		tempoFadei = setTimeout(fadei, tempo);
@@ -1065,19 +1001,13 @@ i3GEO.util =
 		tempo = n * intervalo;
 		intervalo = (intervalo * 100) / tempo;
 		opacidade = 100;
-		if (navm) {
-			obj.style.filter = 'alpha(opacity=100)';
-		} else {
-			obj.style.opacity = 1;
-		}
+		obj.style.opacity = 1;
+
 		obj.style.display = "block";
 		fade = function () {
 			opacidade -= intervalo;
-			if (navm) {
-				obj.style.filter = 'alpha(opacity=' + opacidade + ')';
-			} else {
-				obj.style.opacity = opacidade / 100;
-			}
+			obj.style.opacity = opacidade / 100;
+
 			if (opacidade > 0) {
 				tempoFade = setTimeout(fade, tempo);
 			} else {
@@ -1085,11 +1015,8 @@ i3GEO.util =
 					clearTimeout(tempoFade);
 				}
 				obj.style.display = "none";
-				if (navm) {
-					obj.style.filter = 'alpha(opacity=100)';
-				} else {
-					obj.style.opacity = 1;
-				}
+				obj.style.opacity = 1;
+
 				if (removeobj) {
 					p = obj.parentNode;
 					if (p) {
@@ -1277,7 +1204,7 @@ i3GEO.util =
 			head.appendChild(script);
 		} else {
 			if (ini !== "") {
-				if (jQuery.isFunction(ini)) {
+				if (typeof ini === 'function') {
 					ini.call();
 				} else {
 					eval(ini);
@@ -1893,7 +1820,7 @@ i3GEO.util =
 			} else {
 				i3GEO.janela.snackBar({ content: $trad("erroTpl"), style: "red" });
 			}
-			if (jQuery.isFunction(funcao)) {
+			if (typeof funcao === 'function') {
 				funcao.call(this, temp);
 			} else {
 				eval("funcao(temp)");
@@ -1966,7 +1893,7 @@ i3GEO.util =
 					tipo: "erro"
 				};
 			}
-			if (jQuery.isFunction(funcao)) {
+			if (typeof funcao === 'function') {
 				funcao.call(this, temp);
 			} else {
 				eval("funcao(temp)");
@@ -3146,10 +3073,6 @@ i3GEO.util =
 	 */
 	animaClique: function (obj) {
 		if (obj) {
-			//fecha o streetview
-			if (i3GEO.Interface.ATUAL === "googlemaps") {
-				i3GeoMap.getStreetView().setVisible(false);
-			}
 			obj.style.visibility = "hidden";
 			setTimeout(function () {
 				obj.style.visibility = "visible";

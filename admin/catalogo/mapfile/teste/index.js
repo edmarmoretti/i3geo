@@ -23,65 +23,65 @@ Free Software Foundation, Inc., no endere&ccedil;o
 
  */
 i3GEOadmin.teste = {
-	testaImg: function(locaplic,codigo,ondeMapa,ondeLegenda,ondeAmbos){
-		if(ondeMapa && ondeMapa != ""){
+	testaImg: function (locaplic, codigo, ondeMapa, ondeLegenda, ondeAmbos) {
+		if (ondeMapa && ondeMapa != "") {
 			i3GEOadmin.core.iconeAguarde(ondeMapa);
 		}
-		if(ondeLegenda && ondeLegenda != ""){
+		if (ondeLegenda && ondeLegenda != "") {
 			i3GEOadmin.core.iconeAguarde(ondeLegenda);
 		}
 		$.post(
-				locaplic+"/admin/catalogo/mapfile/teste/exec.php?funcao=testaImg",
-				"codigo=" + codigo
+			locaplic + "/admin/catalogo/mapfile/teste/exec.php?funcao=testaImg",
+			"codigo=" + codigo
 		)
-		.done(
-				function(data, status){
+			.done(
+				function (data, status) {
 					//objeto json com os dados vindos do banco
-					var json = jQuery.parseJSON(data);
-					if(ondeMapa && ondeMapa != ""){
+					var json = JSON.parse(data);
+					if (ondeMapa && ondeMapa != "") {
 						ondeMapa.html("<img src='" + json.imgMapa + "'>");
 					}
-					if(ondeLegenda && ondeLegenda != ""){
+					if (ondeLegenda && ondeLegenda != "") {
 						ondeLegenda.html("<img src='" + json.imgLegenda + "'>");
 					}
-					if(ondeAmbos && ondeAmbos != ""){
+					if (ondeAmbos && ondeAmbos != "") {
 						ondeAmbos.html("<img src='" + json.imgMapa + "'><br><br><img src='" + json.imgLegenda + "'><br><br><p>Time: " + json.tempo + "<br>Erros: " + json.erro);
 					}
 				}
-		)
-		.fail(function(data){
-			if(ondeMapa && ondeMapa != ""){
-				ondeMapa.html("");
-			}
-			if(ondeLegenda && ondeLegenda != ""){
-				ondeLegenda.html("");
-			}
-			i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-		});
+			)
+			.fail(function (data) {
+				if (ondeMapa && ondeMapa != "") {
+					ondeMapa.html("");
+				}
+				if (ondeLegenda && ondeLegenda != "") {
+					ondeLegenda.html("");
+				}
+				i3GEOadmin.core.mostraErro(data.status + " " + data.statusText);
+			});
 	},
-	testaTabela: function(locaplic,codigo,onde){
-		if(onde && onde != ""){
+	testaTabela: function (locaplic, codigo, onde) {
+		if (onde && onde != "") {
 			i3GEOadmin.core.iconeAguarde(onde);
 		}
 		$.post(
-				locaplic+"/admin/catalogo/mapfile/teste/exec.php?funcao=testaTabela",
-				"codigo=" + codigo
+			locaplic + "/admin/catalogo/mapfile/teste/exec.php?funcao=testaTabela",
+			"codigo=" + codigo
 		)
-		.done(
-				function(data, status){
+			.done(
+				function (data, status) {
 					//objeto json com os dados vindos do banco
-					var json = jQuery.parseJSON(data);
-					if(onde && onde != ""){
+					var json = JSON.parse(data);
+					if (onde && onde != "") {
 						onde.html(json);
 					}
 				}
-		)
-		.fail(function(data){
-			if(onde && onde != ""){
-				onde.html("");
-			}
+			)
+			.fail(function (data) {
+				if (onde && onde != "") {
+					onde.html("");
+				}
 
-			i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-		});
+				i3GEOadmin.core.mostraErro(data.status + " " + data.statusText);
+			});
 	}
 };

@@ -174,7 +174,7 @@ body {
 	z-index: 10000;
 }
 
-.panel-heading.icon [data-toggle="collapse"]:after {
+.panel-heading.icon [data-bs-toggle="collapse"]:after {
 	font-family: 'FontAwesome';
 	content: "\f054";
 	float: right;
@@ -189,7 +189,7 @@ body {
 	transform: rotate(-90deg);
 }
 
-.panel-heading.icon [data-toggle="collapse"].collapsed:after {
+.panel-heading.icon [data-bs-toggle="collapse"].collapsed:after {
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
@@ -462,7 +462,7 @@ a.collapsed .readLess {
 	<nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0px; max-height: 55px; height: 55px;">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button title="icon bar" type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+				<button title="icon bar" type="button" class="navbar-toggle collapsed" data-bs-toggle="collapse"data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span>
 				</button>
 				<a class="navbar-brand" href="<?php echo ONDEI3GEO; ?>/init/index.php"><?php echo $_SESSION["mensagemInicia"];?> <i class="fa fa-home fa-1x"></i>
@@ -473,8 +473,8 @@ a.collapsed .readLess {
 				</ul>
 				<ul class="nav navbar-nav">
 					<li class="dropdown">
-						<a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>');" href="#topo" data-toggle="modal"
-							data-target="#modalLogin">
+						<a role="button" onclick="i3GEO.login.recarrega = true; i3GEO.login.dialogo.abreLogin('<?php echo ONDEI3GEO; ?>');" href="#topo" data-bs-toggle="modal"
+							data-bs-target="#modalLogin">
 							Login <i id="loginOff" style="display: none;" class="material-icons md-18">lock</i><i id="loginOn" style="display: none;" class="material-icons md-18">lock_open</i>
 						</a>
 					</li>
@@ -483,11 +483,11 @@ a.collapsed .readLess {
 		</div>
 	</nav>
 	<!-- Modal para o filtro -->
-	<div id="modalFiltro" class="modal fade" tabindex="-1">
+	<div id="modalFiltro" class="modal" tabindex="-1">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -504,11 +504,11 @@ a.collapsed .readLess {
 	</div>
 
 	<!--Modal de uso geral Varia apenas o body -->
-	<div id="modalGeral" class="modal fade" tabindex="-1">
+	<div id="modalGeral" class="modal" tabindex="-1">
 		<div class="modal-dialog modal-lg">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>
@@ -517,11 +517,11 @@ a.collapsed .readLess {
 		</div>
 	</div>
 	<!--Modal usado para preview da arvore do catalogo -->
-	<div id="previewArvore" class="modal fade" tabindex="-1">
+	<div id="previewArvore" class="modal" tabindex="-1">
 		<div class="modal-dialog">
 			<div class="modal-content">
 				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					<button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
 						<span aria-hidden="true">&times;</span>
 					</button>
 				</div>

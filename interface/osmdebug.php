@@ -4,7 +4,6 @@
 <?php
 $configInc = array(
     "debug" => "naocompacto", //posfixos inserido na carga do script do i3geo
-    "tipo" => "OSM", // OL ou OSM
     "inc" => "inc", //caminho para os includes PHP com os componentes da interface
     "pathjs" => "..", //caminho para o include dos arquivos JS
     "pathcss" => "..", //caminho para o include dos arquivos css
@@ -41,7 +40,7 @@ include ($configInc["inc"] . "/css.php");
     <div id="i3GEONomeLogin"
         style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
     -->
-    <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
+    <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers
     Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
     -->
     <div id="mapai3Geo" style="width: 100vw; height: 100vh"></div>
@@ -107,6 +106,11 @@ include ($configInc["inc"] . "/css.php");
     </div>
     </script>
     <script>
+    <?php
+        //para comodidade de nao ter de calcular isso
+        $u = basename(dirname(dirname(__FILE__)));
+        echo 'i3GeoUrl = i3GEO.util.protocolo() + "://" + window.location.host + "/'.$u.'";';
+    ?>
     //teste da funcao utilizada apos adicionar uma camada
     /*
     i3GEO.Interface.aposAdicNovaCamada = function(camada){
@@ -117,7 +121,26 @@ include ($configInc["inc"] . "/css.php");
         } catch(e){}
     };
     */
+    i3GEO.janela.ativaAlerta();
+    //Define camadas utilizadas como opções para o mapa de fundo
+    (function() {
+			var attribOSMData = 'Map Data: &copy; <a  href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors';
+			var attribMapQuestAerial = 'Map Data: &copy; Portions Courtesy NASA/JPL-Caltech and U.S. Depart. of Agriculture, Farm Service Agency, Tiles Courtesy of <a href="https://www.mapquest.com/" target="_blank">MapQuest</a> <img src="https://developer.mapquest.com/content/osm/mq_logo.png">';
+			var attribStamen = 'Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under CC BY SA';
 
+			var osm = new ol.layer.Tile({
+				title : "OSM",
+				visible : true,
+				isBaseLayer : true,
+				name : "osm",
+				source: new ol.source.OSM({
+			    	  attributions : [new ol.Attribution({html: attribOSMData})],
+			    	  crossOrigin : "anonymous",
+			    	  url : "https://tile.openstreetmap.org/{z}/{x}/{y}.png"
+			      })
+			    });
+			i3GEO.Interface.LAYERSADICIONAIS = [ osm];
+    })();
 
     //ativa o banner de inicializacao
             i3GEO.janela.tempoMsg(
@@ -210,11 +233,6 @@ include ($configInc["inc"] . "/css.php");
             var config = {
                 //id do elemento HTML onde o corpo do mapa sera renderizado
                 mapBody : "mapai3Geo",
-                //tipo de mapa. Pode ser:
-                //OL - utiliza o OpenLayers e coordenadas geograficas
-                //OSM - utiliza o OpenLayers e o OpenStreetMap como fundo, em projecao semelhante ao GoogleMaps
-                //GM - utiliza o GoogleMaps como motor de controle do mapa
-                mapType : "OSM",
                 //mostra ou nao a barra de progresso do carregamento de camadas
                 layerProgressBar: false,
 
@@ -222,12 +240,11 @@ include ($configInc["inc"] . "/css.php");
                 saveExtension : false,
                 //Endereco do servidor i3Geo. Utilizado para gerar as requisicoes AJAX
                 //Por default e definido como: i3GEO.util.protocolo() + "://" + window.location.host + "/i3geo"
-                //Para facilitar as coisas, i3GeoUrl e definida em interface/config.php
+                //Para facilitar as coisas
                 i3GeoServer : i3GeoUrl,
                 //opacidade default para camadas que nao sejam do tipo linha ou ponto
                 //a opacidade sera aplicada ao objeto HTML e nao ao LAYER original
                 //se for vazio, sera utilizado o valor definido no LAYER original
-                //Nao se aplica na interface googlemaps
                 layerOpacity : "",
                 //Funcao que sera executada apos a inicializacao do mapa
                 afterStart : function() {
@@ -395,30 +412,6 @@ include ($configInc["inc"] . "/css.php");
                 //ver https://openlayers.org/en/latest/apidoc/ol.View.html
                 ViewOptions : {
 
-                }
-                },
-                //configuracoes especificas para a interface GoogleMaps
-                googleMaps : {
-                //opcoes de inicializacao do mapa conforme definido na API do GoogleMaps
-                MapOptions : {
-                    //estilo que sera utilizado no mapa
-                    //pode ser um desses: roadmap, satellite, hybrid, terrain, Red, Countries, Night, Blue, Greyscale, No roads, Mixed, Chilled
-                    //ver i3GEO.Interface.googleMaps.ESTILOS
-                    mapTypeId : "roadmap",
-                    scaleControl : true,
-                    mapTypeControl : true,
-                    mapTypeControlOptions : {
-                    //position : google.maps.ControlPosition.LEFT_BOTTOM
-                    },
-                    zoomControl : true,
-                    zoomControlOptions : {
-                    //style : google.maps.ZoomControlStyle.SMALL,
-                    //position : google.maps.ControlPosition.LEFT_CENTER
-                    },
-                    streetViewControl : true,
-                    streetViewControlOptions : {
-                    //position : google.maps.ControlPosition.LEFT_CENTER
-                    }
                 }
                 }
             };

@@ -170,11 +170,7 @@ class Legenda
             $this->templateleg = $template;
             return;
         }
-        if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-            $this->templateleg = $locaplic . "\\aplicmap\\" . $template;
-        } else {
-            $this->templateleg = $locaplic . "/aplicmap/" . $template;
-        }
+        $this->templateleg = $locaplic . "/aplicmap/" . $template;
     }
 
     /*
@@ -342,8 +338,6 @@ class Legenda
             }
             $desligarLayer = array();
             if ($la->status == MS_DEFAULT) {
-                // "legendawms" "http://mapas.mma.gov.br/cgi-bin/mapserv?map=/opt/www/html/webservices/biorregioes.map&service=wms&request=getlegendgraphic&version=1.1.1&service=wms&layer=biomas&format=image/png"
-
                 if ($la->getmetadata("legendaimg") != "" || $la->getmetadata("legendawms") != "") {
                     $imagem = $la->getmetadata("legendaimg");
                     if ($imagem == "") {
@@ -836,18 +830,10 @@ class Legenda
                 $t = "simlinv" . $versao . ".map";
                 $tamanho = $tamanho / 4;
             }
-            if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-                $mapatemp = ms_newMapObj($this->localaplicacao . "\\aplicmap\\" . $t);
-            } else {
-                $mapatemp = ms_newMapObj($this->localaplicacao . "/aplicmap/" . $t);
-            }
+            $mapatemp = ms_newMapObj($this->localaplicacao . "/aplicmap/" . $t);
             $l = $mapatemp->getlayer(0);
 
-            if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-                $novoss = dirname($this->mapa->symbolsetfilename) . "\\" . basename($mapatemp->symbolsetfilename);
-            } else {
-                $novoss = dirname($this->mapa->symbolsetfilename) . "/" . basename($mapatemp->symbolsetfilename);
-            }
+            $novoss = dirname($this->mapa->symbolsetfilename) . "/" . basename($mapatemp->symbolsetfilename);
 
             $this->mapa->setsymbolset($novoss);
 

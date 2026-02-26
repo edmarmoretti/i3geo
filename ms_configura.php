@@ -6,19 +6,13 @@ if($_SERVER['SCRIPT_FILENAME'] == __FILE__){
 //ini_set('display_errors', 1);
 
 //verifica se o pai esta na mesma pasta
-if (!strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-	if(!stristr(dirname($_SERVER['SCRIPT_FILENAME']),"/".basename(dirname(__FILE__)))){
-	    exit;
-	}
+if(!stristr(dirname($_SERVER['SCRIPT_FILENAME']),"/".basename(dirname(__FILE__)))){
+    exit;
 }
 /*
 Title: Vari&aacute;veis de inicializa&ccedil;&atilde;o ms_configura.php
 
 Nesse programa PHP s&atilde;o definidas as vari&aacute;veis globais principais necess&aacute;rias ao funcionamento do I3Geo do lado do servidor web.
-
-O ms_configura &eacute; inclu&iacute;do em v&aacute;rios programas do i3Geo e os valores das vari&aacute;veis devem ser editados
-caso a instala&ccedil;&atilde;o do i3geo tenha sido feita em um diret&oacute;rio diferente do padr&atilde;o.
-No windows o diret&oacute;rio padr&atilde;o &eacute; c:\ms4w\apache\htdocs\i3geo e no linux &eacute; /opt/www/html/i3geo
 
 Para verificar a instala&ccedil;&atilde;o do i3geo utilize o programa i3geo/testainstal.php, que pode fornecer algumas dicas
 caso estejam ocorrendo problemas na inicialliza&ccedil;&atilde;o.
@@ -399,20 +393,6 @@ Tipo:
 */
 $locaplic = dirname(__FILE__);
 /*
-Variable: locmapserv
-
-Localiza&ccedil;&atilde;o do execut&aacute;vel do Mapserver conforme deve ser acrescentado a URL ap&oacute;s o nome do host.
-
-Essa vari&aacute;vel &eacute; necess&aacute;ria em processos que utilizam o mapserver no modo CGI.
-
-Por exemplo, se o endere&ccedil;o for http://localhost/cgi-bin/mapserv.exe, a vari&aacute;vel dever&aacute; conter apenas /cgi-bin/mapserv.exe
-
-Tipo:
-{string}
-*/
-//ver opcao especifica abaixo para o sistema operacional
-$locmapserv = "";
-/*
 Variable: locmapas
 
 Onde fica o xml, para preencher a guia mapas.
@@ -560,7 +540,7 @@ Vc pode usar essa vari&aacute;vel para customizar a inicializa&ccedil;&atilde;o 
 Tipo:
 {string}
 */
-$base = "";
+$base = "/var/www/i3geo/aplicmap/startmap.map";
 /*
 Variable: cachedir
 
@@ -614,23 +594,9 @@ Tipo:
 $i3geo_proxy_server = "";
 
 //valores de variaveis especificas para o sistema operacional em uso
-if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-{
-	$dir_tmp = "c:/ms4w/tmp/ms_tmp";
-	$locmapserv = "/cgi-bin/mapserv.exe";
-    $ogrOutput = false;
-}
-else //se for linux
-{
-	$dir_tmp = "/tmp/ms_tmp";
-	if(dirname($locaplic) == "/opt/www/html"){
-		$dir_tmp = "/var/tmp/ms_tmp";
-	}
-	if((dirname($locaplic) == "/var/www") || (dirname($locaplic) == "/var/www/html")){
-		$dir_tmp = "/tmp/ms_tmp";
-	}
-	$locmapserv = "/cgi-bin/mapserv";
-}
+
+$dir_tmp = "/tmp/ms_tmp";
+
 /**
  * Define o idioma de inicializacao (cookies nao devem ter sido definidos anteriormente)
  *

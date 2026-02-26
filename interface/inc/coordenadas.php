@@ -1,7 +1,7 @@
 
 <div data-tutorial="coordenadas" class="localizarxy fundoRodape hidden-xs hidden-sm">
     <div class="dropdown dropup">
-        <a style="color: white;" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <a style="color: white;" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
         </a>
         <ul class="dropdown-menu dropdown-menu">

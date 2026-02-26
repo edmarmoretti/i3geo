@@ -290,7 +290,6 @@ echo <<<HTML
 		<div class="alert alert-success" role="alert">
 		<li>Mensagem de inicializa&ccedil;&atilde;o <span class="label label-default">$mensagemInicia</span></li>
 		<li>dir_tmp <span class="label label-default">$dir_tmp</span></li>
-		<li>locmapserv <span class="label label-default">$locmapserv</span></li>
 		<li>Localiza&ccedil;&atilde;o deste PHP <span class="label label-default">$loceste</span></li>
 		</div>
 HTML;
@@ -377,7 +376,7 @@ echo "</pre>";
 echo "<h3>CGI</h3>";
 $proto = "http" . ((isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] == "on") ? "s" : "") . "://";
 $server = isset($_SERVER['HTTP_HOST']) ? $_SERVER['HTTP_HOST'] : $_SERVER['SERVER_NAME'];
-$enderecocgi = $proto . $server . $locmapserv;
+$enderecocgi = $proto . $server . "/cgi-bin/mapserv";
 echo "<div class='alert alert-info' role='alert'>Voc&ecirc; pode testar o CGI clicando <a href='" . $enderecocgi . "' target='_blank'>aqui</a>, se o programa responder corretamente, dever&aacute; aparecer na tela algo como 'No query information to decode. QUERY_STRING is set, but empty.'</div>";
 echo "<div class='alert alert-info' role='alert'>Em ambientes com SO Windows, algumas op&ccedil;&otilde;es de gera&ccedil;&atilde;o de servi&ccedil;os OGC apenas funcionam se a vari&aacute;vel ms_configura.php 'ogrOutput' estiver definida como 0 (false). <br>Valor da vari&aacute;vel ogrOutput: $ogrOutput </div>";
 
@@ -440,22 +439,15 @@ if (isset($base) && $base != "") {
     }
 } else {
     $f = "";
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-        $f = $locaplic . "/aplicmap/geral1windowsv" . $versao . ".map";
-    } else {
         if ($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
             $f = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
         }
         if ($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
             $f = "/var/www/html/i3geo/aplicmap/geral1fedorav" . $versao . ".map";
         }
-        if ($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
-            $f = "/opt/www/html/i3geo/aplicmap/geral1v" . $versao . ".map";
-        }
         if ($f == "") {
             $f = $locaplic . "/aplicmap/geral1v" . $versao . ".map";
         }
-    }
 }
 echo "<div class='alert alert-success' role='alert'><h4>O arquivo mapfile de iniciliza&ccedil;&atilde;o &eacute;: <strong>$f</strong></h4></div>";
 echo "<pre>";
@@ -501,11 +493,7 @@ echo "<h4>Carregando o map_file geral1... e acrescentando os limites estaduais (
 if (isset($estadosl)) {
     $maptemp = ms_newMapObj($locaplic . "/aplicmap/" . $estadosl . ".map");
 } else {
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-        $maptemp = ms_newMapObj($locaplic . "/aplicmap/estadoslwindows.map");
-    } else {
-        $maptemp = ms_newMapObj($locaplic . "/aplicmap/estadosl.map");
-    }
+    $maptemp = ms_newMapObj($locaplic . "/aplicmap/estadosl.map");
 }
 while ($error && $error->code != MS_NOERR) {
     printf("<div class='alert alert-danger' role='alert'>Error in %s: %s<br></div>", $error->routine, $error->message);

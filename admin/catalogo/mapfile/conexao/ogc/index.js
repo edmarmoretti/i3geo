@@ -24,67 +24,67 @@ Free Software Foundation, Inc., no endere&ccedil;o
  */
 i3GEOadmin.mapfile = {};
 i3GEOadmin.ogc = {
-		inicia: function(codigo, id_tema){
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=lista",
-					"codigo="+codigo
-			)
+	inicia: function (codigo, id_tema) {
+		i3GEOadmin.core.modalAguarde(true);
+		$.post(
+			"exec.php?funcao=lista",
+			"codigo=" + codigo
+		)
 			.done(
-					function(data, status){
-						i3GEOadmin.core.modalAguarde(false);
-						var json = jQuery.parseJSON(data);
+				function (data, status) {
+					i3GEOadmin.core.modalAguarde(false);
+					var json = JSON.parse(data);
 
-						$("#corpo").html(
-								Mustache.to_html(
-										$("#templateFormConexaoOgc").html(),
-										$.extend(
-												{},
-												i3GEOadmin.ogc.dicionario,
-												json.dados,
-												{
-													"codigo": codigo,
-													"id_tema": id_tema,
-													"onSalvar": "i3GEOadmin.ogc.salvar",
-													"connectiontype": function(){
-														var hash = {};
-														hash[json.dados.connectiontype + "-sel"] = "selected";
-														return Mustache.to_html(
-																$("#templateTiposConexaoOgc").html(),
-																hash
-														);
-													}
-												}
-										)
-								)
-						);
-						$.material.init();
-					}
+					$("#corpo").html(
+						Mustache.to_html(
+							$("#templateFormConexaoOgc").html(),
+							$.extend(
+								{},
+								i3GEOadmin.ogc.dicionario,
+								json.dados,
+								{
+									"codigo": codigo,
+									"id_tema": id_tema,
+									"onSalvar": "i3GEOadmin.ogc.salvar",
+									"connectiontype": function () {
+										var hash = {};
+										hash[json.dados.connectiontype + "-sel"] = "selected";
+										return Mustache.to_html(
+											$("#templateTiposConexaoOgc").html(),
+											hash
+										);
+									}
+								}
+							)
+						)
+					);
+					$.material.init();
+				}
 			)
 			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
+				function (data) {
+					i3GEOadmin.core.modalAguarde(false);
+					i3GEOadmin.core.mostraErro(data.status + " " + data.statusText);
+				}
 			);
-		},
-		salvar: function(codigo,id_tema){
-			var parametros = $("#form-edicao-conexaoogc").serialize();
-			i3GEOadmin.core.modalAguarde(true);
-			$.post(
-					"exec.php?funcao=alterar",
-					"codigo=" + codigo + "&id_tema="+ id_tema+"&"+parametros
-			)
+	},
+	salvar: function (codigo, id_tema) {
+		var parametros = $("#form-edicao-conexaoogc").serialize();
+		i3GEOadmin.core.modalAguarde(true);
+		$.post(
+			"exec.php?funcao=alterar",
+			"codigo=" + codigo + "&id_tema=" + id_tema + "&" + parametros
+		)
 			.done(
-					function(data, status){
-						i3GEOadmin.ogc.inicia(codigo,id_tema);
-					}
+				function (data, status) {
+					i3GEOadmin.ogc.inicia(codigo, id_tema);
+				}
 			)
 			.fail(
-					function(data){
-						i3GEOadmin.core.modalAguarde(false);
-						i3GEOadmin.core.mostraErro(data.status + " " +data.statusText);
-					}
+				function (data) {
+					i3GEOadmin.core.modalAguarde(false);
+					i3GEOadmin.core.mostraErro(data.status + " " + data.statusText);
+				}
 			);
-		}
+	}
 };

@@ -50,9 +50,9 @@ if ($cache == true && $_GET["cache"] != "nao") {
         }
     } else {
         if ($_SESSION["cachedir"] == "") {
-            $nome = dirname(dirname($_SESSION["map_file"])) . "/cache" . "/googlemaps/".$_GET["layer"]."/$z/$x/$y";
+            $nome = dirname(dirname($_SESSION["map_file"])) . "/cache" . "/wmts/".$_GET["layer"]."/$z/$x/$y";
         } else {
-            $nome = $_SESSION["cachedir"] . "/googlemaps/".$_GET["layer"]."/$z/$x/$y";
+            $nome = $_SESSION["cachedir"] . "/wmts/".$_GET["layer"]."/$z/$x/$y";
         }
     }
     $nome = str_replace([".json",".png"], "", $nome);

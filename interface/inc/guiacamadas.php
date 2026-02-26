@@ -33,8 +33,8 @@ if(isset($i3geoBlFerramentas) && in_array("imprimir",$i3geoBlFerramentas)){
         <button class="pull-left text-left" onclick="i3GEO.guias.abreFecha('fecha');">
             <span style="vertical-align: middle">{{{iconeMapa}}}</span>
         </button>
-        <div class="dropdown">
-            <button title="{{{opcoes}}}" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <div class="dropdown opcoesCamadas">
+            <button title="{{{opcoes}}}" type="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span style="vertical-align: middle" class="material-icons">playlist_add_check</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-right">
@@ -109,7 +109,7 @@ if(isset($i3geoBlFerramentas) && in_array("imprimir",$i3geoBlFerramentas)){
                     Essa variavel e definida via javascript, e no caso das interfaces padrao do i3Geo, e definida
                     no programa interface/config.php
                     -->
-        <div style="width: calc(100% - 22px);overflow: none;" data-toggle="collapse" data-target="#collapseFundo" class="list-group condensed collapsed">
+        <div style="width: calc(100% - 22px);overflow: none;" data-bs-toggle="collapse" data-bs-target="#collapseFundo" class="list-group dropdown-toggle condensed collapsed">
             <label>{{{camadasDeFundo}}}</label>
         </div>
         <div style="width: calc(100% - 22px);overflow: none;margin-left: 0px;" class="collapse text-left" id="collapseFundo">

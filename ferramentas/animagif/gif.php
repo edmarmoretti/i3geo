@@ -135,13 +135,7 @@ if(file_exists($arqtemp.".gif")){
 //carrega o phpmapscript
 //
 if (!function_exists('ms_GetVersion')){
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-        if(!@dl('php_mapscript_48.dll'))
-            dl('php_mapscript.dll');
-    }
-    else{
-        dl('php_mapscript.so');
-    }
+    dl('php_mapscript.so');
 }
 $versao = versao();
 $versao = $versao["principal"];
@@ -150,23 +144,15 @@ $versao = $versao["principal"];
 //base vem de ms_configura
 if($base == "" or !isset($base)){
     $base = "";
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-        $base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
-    }
-    else{
         if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
             $base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
         }
         if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
             $base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
         }
-        if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-            $base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-        }
         if($base == ""){
             $base = $locaplic."/aplicmap/geral1v".$versao.".map";
         }
-    }
 }
 else{
     if(!file_exists($base)){
@@ -207,12 +193,6 @@ else{
 if ($ret != ""){
     $ret = explode(" ",$ret);
     $extatual->setextent($ret[0],$ret[1],$ret[2],$ret[3]);
-    if ($mapa->getmetadata("interface") == "googlemaps") {
-        $ret = $mapa->extent;
-        // reprojeta o retangulo
-        $ret->project($projInObj, $projOutObj);
-        $extatual->setextent($ret->minx, $ret->miny, $ret->maxx, $ret->maxy);
-    }
 }
 $mapa->setsize($w,$h);
 $sca = $mapa->scalebar;
@@ -333,7 +313,7 @@ foreach($listaunica as $d){
     $objImagem = $mapa->draw();
     //$objImagem->pasteImage($i,-1);
     $objImagem->saveImage($nomec);
-    if(file_exists($nomec)){ 
+    if(file_exists($nomec)){
         $imagens[] = $nomec;
         $duracao[] = $tempo;
     }

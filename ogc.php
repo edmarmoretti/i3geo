@@ -193,7 +193,7 @@ if(@$_GET["DESLIGACACHE"] != "sim" && isset($_GET["Z"]) && isset($_GET["X"])){
 	$x = $_GET["X"];
 	$y = $_GET["Y"];
 	$z = $_GET["Z"];
-	carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$tema/$z/$x/$y");
+	carregaCacheImagem($cachedir,$nomeMapfileTmp,"/wmts/$tema/$z/$x/$y");
 }
 set_time_limit(0);
 ini_set('memory_limit', '512M');
@@ -817,7 +817,6 @@ if(ob_get_contents ()){
 //quando for do tipo tms $_GET["tms"] contem os parametros do tile
 //essa rotina faz um exit ao final
 //o cache tms so fucniona se houver apenas uma camada no mapa
-//tms e usado basicamente por mashup ou openlayers
 //
 if(isset($_GET["tms"])){
 	if(!isset($_GET["TileMatrix"])){
@@ -923,7 +922,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 	}
 
 	if($cache == true){
-		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
+		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/wmts/$layer0->name/$z/$x/$y");
 	}
 	$n = pow(2,$z);
 	$lon1 = $x / $n * 360.0 - 180.0;
@@ -968,7 +967,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 		exit;
 	}
 	if($cache == true){
-		salvaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
+		salvaCacheImagem($cachedir,$nomeMapfileTmp,"/wmts/$layer0->name/$z/$x/$y");
 	}
 	renderNocacheTms();
 }

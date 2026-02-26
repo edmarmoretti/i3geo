@@ -26,7 +26,7 @@ function formConexaoLocalSelCon(valor){
 				<div id="typeAjuda" class="collapse leiaMais">
                 	<p class="small" >{{{Type}}}</p>
             	</div>
-            	<a href="#typeAjuda" data-toggle="collapse" class="collapsed">
+            	<a href="#typeAjuda" data-bs-toggle="collapse"class="collapsed">
                 	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
                 	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
             	</a>
@@ -47,7 +47,7 @@ function formConexaoLocalSelCon(valor){
 				<div id="projectionAjuda" class="collapse leiaMais">
                 	<p class="small" >{{{projecaoTitulo}}}</p>
             	</div>
-            	<a href="#projectionAjuda" data-toggle="collapse" class="collapsed">
+            	<a href="#projectionAjuda" data-bs-toggle="collapse"class="collapsed">
                 	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
                 	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
             	</a>
@@ -81,7 +81,7 @@ function formConexaoLocalSelCon(valor){
 				<div id="connectionAjuda" class="collapse leiaMais">
                 	<p class="small" >{{{Connection}}}</p>
             	</div>
-            	<a href="#connectionAjuda" data-toggle="collapse" class="collapsed">
+            	<a href="#connectionAjuda" data-bs-toggle="collapse"class="collapsed">
                 	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
                 	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
             	</a>
@@ -92,7 +92,7 @@ function formConexaoLocalSelCon(valor){
 			<div class="col-md-6">
 				<label class="control-label" for="listaConnection"></label>
 				<div class="btn-group">
-					<a href="javascript:void(0)" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">{{{escolhaDalista}}} <span class="caret"></span></a>
+					<a href="javascript:void(0)" class="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">{{{escolhaDalista}}} <span class="caret"></span></a>
 					<ul class="dropdown-menu">
 					<?php echo $_combo;?>
 					</ul>
@@ -109,7 +109,7 @@ function formConexaoLocalSelCon(valor){
 				<div id="dataAjuda" class="collapse leiaMais">
                 	<p class="small" >{{{Data}}}</p>
             	</div>
-            	<a href="#dataAjuda" data-toggle="collapse" class="collapsed">
+            	<a href="#dataAjuda" data-bs-toggle="collapse"class="collapsed">
                 	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
                 	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
             	</a>
@@ -128,7 +128,7 @@ function formConexaoLocalSelCon(valor){
 				<div id="tileindexAjuda" class="collapse leiaMais">
                 	<p class="small" >{{{tileIndex}}}</p>
             	</div>
-            	<a href="#tileindexAjuda" data-toggle="collapse" class="collapsed">
+            	<a href="#tileindexAjuda" data-bs-toggle="collapse"class="collapsed">
                 	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
                 	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
             	</a>
@@ -160,7 +160,7 @@ function formConexaoLocalSelCon(valor){
 				<div id="convcaracterAjuda" class="collapse leiaMais">
                 	<p class="small" >{{{convCaracter}}}</p>
             	</div>
-            	<a href="#convcaracterAjuda" data-toggle="collapse" class="collapsed">
+            	<a href="#convcaracterAjuda" data-bs-toggle="collapse"class="collapsed">
                 	<span class="text-primary readMore"><i class="material-icons">keyboard_arrow_down</i></span>
                 	<span class="text-primary readLess"><i class="material-icons">keyboard_arrow_up</i></span>
             	</a>

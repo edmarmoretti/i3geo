@@ -1,21 +1,25 @@
 <div style='min-width: {{minWidth}};' class='ol-popup'>
     <div class='i3GEOCabecalhoInfoWindow hiddenInfo'>
-        <div class='dropdown' style='display: inline; vertical-align: top' >
-            <button class='btn btn-default btn-xs dropdown-toggle' role='button' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'
-                style='padding: 2px; margin: 0px 3px 0px 0px;'>
+        <div class='dropdown' style='display: inline; vertical-align: top'>
+            <button class='btn btn-default btn-xs dropdown-toggle' role='button' data-bs-toggle='dropdown'
+                aria-haspopup='true' aria-expanded='false' style='padding: 2px; margin: 0px 3px 0px 0px;'>
                 <span class='material-icons'>playlist_add_check</span>
             </button>
             <ul class='dropdown-menu'>
                 <li style='margin-top: 0px;' class='container-fluid form-group'>
                     <label class='control-label' style='color:gray;'> {{{tolerancia}}}</label>
-                        <form onchange='i3GEO.configura.ferramentas.identifica.resolution = this[0].value*1;i3GEO.identify.mapTooltip({x:{{x}},y:{{y}},allColumns:false});'>
-                            <input class='form-control' style='background: none;color: black;' oninput='this.form[1].value=this.value;' type='text' value='{{resolution}}' >
-                            <input style='background: none;' oninput=';this.form[0].value=this.value;'  type='range' min='1' max='50' value='{{resolution}}' class='slider'>
-                        </form>
+                    <form
+                        onchange='i3GEO.configura.ferramentas.identifica.resolution = this[0].value*1;i3GEO.identify.mapTooltip({x:{{x}},y:{{y}},allColumns:false});'>
+                        <input class='form-control' style='background: none;color: black;'
+                            oninput='this.form[1].value=this.value;' type='text' value='{{resolution}}'>
+                        <input style='background: none;' oninput=';this.form[0].value=this.value;' type='range' min='1'
+                            max='50' value='{{resolution}}' class='slider'>
+                    </form>
                 </li>
             </ul>
         </div>
-        <button data-info='lockopen' style='padding: 2px; margin: 0px 3px 0px 0px;' class='{{lock_open}} btn btn-default btn-xs'>
+        <button data-info='lockopen' style='padding: 2px; margin: 0px 3px 0px 0px;'
+            class='{{lock_open}} btn btn-default btn-xs'>
             <span style='vertical-align: middle; padding: 0px;' class='material-icons'>lock_open</span>
         </button>
         <button data-info='lock' style='padding: 2px; margin: 0px 3px 0px 0px;' class='{{lock}} btn btn-default btn-xs'>
@@ -24,7 +28,8 @@
         <button data-info='info' style='padding: 2px; margin: 0px 3px 0px 0px;' class='btn btn-default btn-xs'>
             <span style='vertical-align: middle; padding: 0px;' class='material-icons'>info</span>
         </button>
-        <button data-info='wkt' style='padding: 2px; margin: 0px 3px 0px 0px;' class='{{wkt}} btn btn-default btn-xs' title='Fecha sem remover o desenho'>
+        <button data-info='wkt' style='padding: 2px; margin: 0px 3px 0px 0px;' class='{{wkt}} btn btn-default btn-xs'
+            title='Fecha sem remover o desenho'>
             <span style='color: red; vertical-align: middle; padding: 0px;' class='material-icons'>highlight_off</span>
         </button>
         <button data-info='copy' style='padding: 2px; margin: 0px 3px 0px 0px;' class='btn btn-default btn-xs'>
@@ -34,8 +39,10 @@
     <div class='tooltip-conteudo'>
         {{{texto}}}
     </div>
-    <small style='color:gray;'><span class='copyToMemory' onclick='i3GEO.util.copyToClipboard("{{{x}}},{{{y}}}");return false;'>{{{xtxt}}},{{{ytxt}}}</span></small>
-        <button data-info='close' style='padding: 2px; margin: 0px 3px 0px 0px; right: 0px; position: absolute;' class='btn btn-default btn-xs'>
-            <span style='color:gray;vertical-align: middle; padding: 0px;' class='material-icons'>highlight_off</span>
-        </button>
+    <small style='color:gray;'><span class='copyToMemory'
+            onclick='i3GEO.util.copyToClipboard("{{{x}}},{{{y}}}");return false;'>{{{xtxt}}},{{{ytxt}}}</span></small>
+    <button data-info='close' style='padding: 2px; margin: 0px 3px 0px 0px; right: 0px; position: absolute;'
+        class='btn btn-default btn-xs'>
+        <span style='color:gray;vertical-align: middle; padding: 0px;' class='material-icons'>highlight_off</span>
+    </button>
 </div>

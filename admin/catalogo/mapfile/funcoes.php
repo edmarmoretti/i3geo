@@ -461,14 +461,13 @@ function limpaCache($locaplic, $codigo, $cachedir, $dir_tmp){
 		$nome = strip_tags ( $nome );
 		$nome = htmlspecialchars ( $nome, ENT_QUOTES );
 		$dirs [] = $d . "/" . $nome;
-		$dirs [] = $d . "/googlemaps/" . $nome;
 		$dirs [] = $d . "/wmts/" . $nome;
 		foreach ( $dirs as $dir ) {
 			\admin\catalogo\mapfile\rrmdir ( $dir );
 		}
 	}
 	$nome = $nomes[0];
-	if(file_exists($d . "/" . $nome) || file_exists($d . "/googlemaps/" . $nome) || file_exists($d . "/wmts/" . $nome)){
+	if(file_exists($d . "/" . $nome) || file_exists($d . "/wmts/" . $nome) || file_exists($d . "/wmts/" . $nome)){
 		header ( "HTTP/1.1 403 cache nao removido" );
 		exit;
 	} else {

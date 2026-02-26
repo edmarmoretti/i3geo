@@ -29,34 +29,34 @@ if (typeof (i3GEO) === 'undefined') {
 	var i3GEO = {};
 }
 i3GEO.ajuda =
-	{
-		/**
-		 * Function: abreDoc
-		 *
-		 * Abre a documentacao do i3geo em uma nova janela do navegador
-		 *
-		 * Parametro:
-		 *
-		 * {string} - url que ser&aacute; adicionada a i3GEO.configura.locaplic
-		 */
-		abreDoc : function(url) {
-			if (!url) {
-				url = "/documentacao/index.html";
-			}
-			window.open(i3GEO.configura.locaplic + url);
-		},
-		ferramenta : function(idajuda){
-			var url = i3GEO.configura.locaplic + "/ferramentas/ajuda_usuario.php?"
-				+ "&idajuda="
-				+ idajuda;
-			$.get(url).done(function(data) {
-				var json = jQuery.parseJSON(data);
-				var texto = json[i3GEO.idioma.ATUAL];
-				var titulo = json["titulo"][i3GEO.idioma.ATUAL];
-				i3GEO.janela.closeMsg(texto);
-			}).fail(function() {
-
-			    return;
-			});
+{
+	/**
+	 * Function: abreDoc
+	 *
+	 * Abre a documentacao do i3geo em uma nova janela do navegador
+	 *
+	 * Parametro:
+	 *
+	 * {string} - url que ser&aacute; adicionada a i3GEO.configura.locaplic
+	 */
+	abreDoc: function (url) {
+		if (!url) {
+			url = "/documentacao/index.html";
 		}
-	};
+		window.open(i3GEO.configura.locaplic + url);
+	},
+	ferramenta: function (idajuda) {
+		var url = i3GEO.configura.locaplic + "/ferramentas/ajuda_usuario.php?"
+			+ "&idajuda="
+			+ idajuda;
+		$.get(url).done(function (data) {
+			var json = JSON.parse(data);
+			var texto = json[i3GEO.idioma.ATUAL];
+			var titulo = json["titulo"][i3GEO.idioma.ATUAL];
+			i3GEO.janela.closeMsg(texto);
+		}).fail(function () {
+
+			return;
+		});
+	}
+};

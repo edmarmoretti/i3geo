@@ -1090,11 +1090,6 @@ class Mapa
                     cloneInlineSymbol($nlayer, $nmap, $this->mapa);
                     ms_newLayerObj($this->mapa, $nlayer);
                     $l = $this->mapa->getlayerbyname($nlayer->name);
-                    if ($this->mapa->getmetadata("interface") == "googlemaps") {
-                        if (($l->opacity == 100 || $l->opacity == "") && ($l->type == 2 || $l->type == 3)) {
-                            $l->set("opacity", 50);
-                        }
-                    }
                     // reposiciona o layer se for o caso
                     if ($l->group == "") {
                         $ltipo = $l->type;
@@ -1454,7 +1449,7 @@ class Mapa
      *
      * Parametros:
      *
-     * $locmapserv - localiza&ccedil;&atilde;o do CGI do mapserver
+     * $loccgi - localiza&ccedil;&atilde;o do CGI do mapserver
      *
      * $h - host name
      *
@@ -1462,12 +1457,12 @@ class Mapa
      *
      * Endere&ccedil;o do WMC
      */
-    function converteWMC($locmapserv, $urli3geo)
+    function converteWMC($loccgi, $urli3geo)
     {
         $r = nomeRandomico(5);
         $nomews = str_replace(".map", $r . "wmc.map", $this->arquivo);
 
-        $nomeurl = $locmapserv . "?map=" . $nomews;
+        $nomeurl = $loccgi . "?map=" . $nomews;
         $nomeogc = $urli3geo . "/ogc.php?tema=" . $nomews;
         $w = $this->mapa->web;
         $w->set("template", "");
@@ -1701,48 +1696,6 @@ class Mapa
         $fecha = fclose($abre);
     }
 
-    /*
-     * Method: converteInterfacePara
-     *
-     * Converte o mapfile atual ajustando o funcionamento para uma interface espec&iacute;fica
-     *
-     * Parametros:
-     *
-     * $interface - googlemaps|openlayers
-     */
-    function converteInterfacePara($interface)
-    {
-        if ($interface == "openlayers") {
-            $prefixo = "ol";
-            $this->mapa->setProjection(pegaProjecaoDefault("proj4"));
-        } else {
-            $prefixo = "gm";
-        }
-        foreach ($this->layers as $l) {
-            $opacidadeM = $l->getmetadata($prefixo . "opacity");
-            $statusM = $l->getmetadata($prefixo . "status");
-            if ($opacidadeM == "") {
-                $l->setmetadata($prefixo . "opacity", 100);
-            } else {
-                $l->set("opacity", $prefixo . "opacity");
-            }
-            if ($statusM != "") {
-                if ($statusM == "OFF") {
-                    $l->set("status", MS_OFF);
-                }
-                if ($statusM == "DEFAULT") {
-                    $l->set("status", MS_DEFAULT);
-                }
-            }
-            if ($prefixo == "gm" && ($l->name == "mundo" || $l->name == "estados")) {
-                $l->set("status", MS_OFF);
-            }
-            if ($l->opacity == 0) {
-                $l->set("opacity", 100);
-            }
-        }
-        $this->salva();
-        return "ok";
-    }
+
 }
 ?>

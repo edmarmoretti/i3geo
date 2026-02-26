@@ -66,24 +66,16 @@ if($cache == true){
 $versao = versao();
 $versao = $versao["principal"];
 if(!isset($base) || $base == ""){
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-        $base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
-    }
-    else{
         if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
             $base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
         }
         if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
             $base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
         }
-        if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-            $base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-        }
         if($base == "")
         {
             $base = $locaplic."/aplicmap/geral1v".$versao.".map";
         }
-    }
 }
 
 //
@@ -146,7 +138,7 @@ if($format == "storymap"){
     if($storymap == ""){
         $mapaAtual = ms_newMapObj($_SESSION["map_file"]);
         $layerAtual = $mapaAtual->getlayerbyname($tema);
-        $storymap = $layerAtual->getmetadata("storymap");  
+        $storymap = $layerAtual->getmetadata("storymap");
         if($storymap == ""){
             echo "Parametros nao definidos no METADATA storymap";
             exit;
@@ -352,7 +344,7 @@ function nomeRand($n=10)
     $max = 51;
     for($i=0; $i < $n; ++$i)
     {
-        $nomes .= $a{mt_rand(0, $max)};
+        $nomes .= $a[mt_rand(0, $max)];
     }
     return $nomes;
 }

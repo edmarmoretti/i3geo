@@ -1,12 +1,4 @@
 <?php
-/**
-Esse programa e uma adaptacao do codigo i3geo/ogc.php
-E utilizado no mashup (i3geo/mashup) nas camadas que sao configuradas cm o plugin parametrossql
-Ao adicionar uma camada ao mapa, o i3Geo identifica se a camada usa o plugin e nesse caso, ao inves de usar
-o gerador de webservice i3geo/ogc.php ustiliza esse aqui.
-A diferenca e que esse servico processa o parametro "plugin", aplicando os filtros definidos
-no plugin parametrossql
- */
 $cache = true;
 include(dirname(__FILE__)."/../../classesphp/sani_request.php");
 include_once (dirname(__FILE__)."/../../classesphp/carrega_ext.php");
@@ -237,7 +229,7 @@ restauraCon($nomeMapfileTmp,$postgis_mapa);
 //quando for do tipo tms $_GET["tms"] contem os parametros do tile
 //essa rotina faz um exit ao final
 //o cache tms so fucniona se houver apenas uma camada no mapa
-//tms e usado basicamente por mashup ou openlayers
+//tms e usado basicamente por openlayers
 //
 if(isset($_GET["tms"])){
 	$temp = explode("/",$_GET["tms"]);
@@ -306,7 +298,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 		$cortePixels = $layer0->getmetadata("cortepixels");
 	}
 	if($cache == true){
-		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
+		carregaCacheImagem($cachedir,$nomeMapfileTmp,"/wmts/$layer0->name/$z/$x/$y");
 	}
 	$n = pow(2,$z);
 	$lon1 = $x / $n * 360.0 - 180.0;
@@ -352,7 +344,7 @@ if(isset($_GET["Z"]) && isset($_GET["X"])){
 		exit;
 	}
 	if($cache == true){
-		salvaCacheImagem($cachedir,$nomeMapfileTmp,"/googlemaps/$layer0->name/$z/$x/$y");
+		salvaCacheImagem($cachedir,$nomeMapfileTmp,"/wmts/$layer0->name/$z/$x/$y");
 	}
 	renderNocacheTms();
 }
@@ -464,7 +456,7 @@ function nomeRand($n=10)
 	$max = 51;
 	for($i=0; $i < $n; ++$i)
 	{
-		$nomes .= $a{mt_rand(0, $max)};
+		$nomes .= $a[mt_rand(0, $max)];
 	}
 	return $nomes;
 }

@@ -1,35 +1,38 @@
-
 .list-group {
 	position: relative;
 }
 
-.longText{
-    font-family: Gelasio,Roboto,Helvetica,Arial,sans-serif;
-    color: #0f0e0e66;
+.longText {
+	font-family: Gelasio, Roboto, Helvetica, Arial, sans-serif;
+	color: #0f0e0e66;
 }
+
 /** colorpicker */
-.i3geo-colorpicker-class{
+.i3geo-colorpicker-class {
 	padding: 10px;
 }
+
 /** botoes do editor vetorial */
 .editorBlock {
 	opacity: 0.2;
 }
-.editorIcon {
-}
+
 
 /** cores de fundo padronizadas */
 .i3GeoBgc1 {
-	background-color: rgba(0,60,136,.5) !Important;
+	background-color: rgba(0, 60, 136, .5) !Important;
 }
+
 .i3GeoBgc1:hover {
-    background-color: rgba(180, 180, 180, 0.7) !Important;
+	background-color: rgba(180, 180, 180, 0.7) !Important;
 }
+
 .i3GeoBgc2 {
 	background-color: rgba(3, 40, 87, 0.5) !Important;
 }
+
 .i3GeoBgc2:hover {
-    background-color: rgba(180, 180, 180, 0.7) !Important;
+	background-color: rgba(180, 180, 180, 0.7) !Important;
 }
 
 /** para ajustar itens de formularios */
@@ -37,92 +40,113 @@
 	color: initial;
 	background-color: initial;
 }
+
 .modal-body .form-group label {
 	color: initial;
 }
+
 .form-horizontal .form-group {
 	margin-right: -15px;
 	margin-left: -15px;
 	display: flex;
 	align-items: start;
 }
+
 .form-group label.control-label {
 	font-size: 1.5rem;
 	opacity: 0.8;
 	margin-top: 6px;
 }
-.form-group.label-floating.is-focused label.control-label, .form-group.label-floating:not
-	(.is-empty ) label.control-label, .form-group.label-static label.control-label
-	{
+
+.form-group.label-floating.is-focused label.control-label,
+.form-group.label-floating:not [is-empty] label.control-label,
+.form-group.label-static label.control-label {
 	top: -30px;
 	left: 0;
 	font-size: 1.5rem;
 	line-height: 1.07142857;
 }
+
 .form-group .form-control {
 	font-size: 1.5rem;
 }
-.form-group input[type=number] {
-    margin-top: 14px;
-    margin-bottom: 0px;
-}
-.form-group select, .form-group input[type=text] {
-    margin-top: 6px;
-    margin-bottom: 0px !important;
-}
-.modal-body .form-group input[type=text]{
-    background-color: #f9f9f9 !Important;
-}
-.form-group label {
 
+.form-group input[type=number] {
+	margin-top: 14px;
+	margin-bottom: 0px;
 }
+
+.form-group select,
+.form-group input[type=text] {
+	margin-top: 6px;
+	margin-bottom: 0px !important;
+}
+
+.modal-body .form-group input[type=text] {
+	background-color: #f9f9f9 !Important;
+}
+
 .form-group.label-static label.control-label {
 	top: -40px;
 	left: 0;
 	font-size: 1.5rem;
 	line-height: 1.07142857;
 }
+
 .form-control.upload {
 	font-size: 1.5rem;
 	color: inherit;
 	font-weight: 400;
 }
+
 .form-group .help-block {
 	margin-top: 0;
 	font-size: 10px;
 	color: #BDBDBD;
 	font-weight: initial;
 }
-.form-group.label-fixed.is-focused>label, .form-group.label-floating.is-focused>label,
-	.form-group.label-static.is-focused>label, .form-group.label-floating.is-empty.is-focused>label,
-	.form-group.condensed.is-focused>label, .form-group.is-focused>label {
+
+.form-group.label-fixed.is-focused>label,
+.form-group.label-floating.is-focused>label,
+.form-group.label-static.is-focused>label,
+.form-group.label-floating.is-empty.is-focused>label,
+.form-group.condensed.is-focused>label,
+.form-group.is-focused>label {
 	color: #BDBDBD;
 }
+
 .form-group.form-group-lg label.control-label {
 	color: #767676;
 }
-.form-group.form-group-lg .checkbox label, .form-group.form-group-lg .radio label,
-	.form-group.form-group-lg label {
+
+.form-group.form-group-lg .checkbox label,
+.form-group.form-group-lg .radio label,
+.form-group.form-group-lg label {
 	color: #767676;
 }
+
 .form-group.condensed {
 	margin: 0px;
 	padding: 0px;
 }
+
 /**/
 .pager li {
-    display: inline;
-    margin: 0px 10px;
+	display: inline;
+	margin: 0px 10px;
 }
+
 .proximoAnterior {
 	width: 300px;
 	text-align: center;
 	margin: auto !Important;
 }
+
 .itensvisib {
 	opacity: 0;
 }
-.itensvisib:hover{
+
+.itensvisib:hover {
 	opacity: initial;
 }
 
@@ -130,159 +154,183 @@
 	border: 1px solid #888a85;
 	z-index: 200;
 }
-.navbar .navbar-nav > li > a {
-    padding-top: 5px;
-    padding-bottom: 5px;
+
+.navbar .navbar-nav>li>a {
+	padding-top: 5px;
+	padding-bottom: 5px;
 }
 
 .ui-resizable-se {
-    cursor: se-resize;
-    right: 0px;
-    bottom: 0px;
+	cursor: se-resize;
+	right: 0px;
+	bottom: 0px;
 }
+
 .ui-resizable-n {
-    cursor: n-resize;
-    height: 12px;
-    width: 14px;
-    background-image: url("../pacotes/jquery/jquery-ui/images/ui-icons_444444_256x240.png");
-    background-position: -50px -224px;
-    left: 0px;
-    right: 0px;
-    margin: auto;
+	cursor: n-resize;
+	height: 12px;
+	width: 14px;
+	background-image: url("../pacotes/jquery/jquery-ui/images/ui-icons_444444_256x240.png");
+	background-position: -50px -224px;
+	left: 0px;
+	right: 0px;
+	margin: auto;
 }
 
 .glyphicon.normal-right-spinner {
-    -webkit-animation: glyphicon-spin-r 2s infinite linear;
-    animation: glyphicon-spin-r 2s infinite linear;
+	-webkit-animation: glyphicon-spin-r 2s infinite linear;
+	animation: glyphicon-spin-r 2s infinite linear;
 }
+
 @-webkit-keyframes glyphicon-spin-r {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
 
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
 }
+
 @keyframes glyphicon-spin-r {
-    0% {
-        -webkit-transform: rotate(0deg);
-        transform: rotate(0deg);
-    }
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
 
-    100% {
-        -webkit-transform: rotate(359deg);
-        transform: rotate(359deg);
-    }
+	100% {
+		-webkit-transform: rotate(359deg);
+		transform: rotate(359deg);
+	}
 }
+
 /* barra de rolagem no chrome */
 /* width */
 ::-webkit-scrollbar {
-    width: 10px;
+	width: 10px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 1px #f3e5e4;
-    border-radius: 10px;
+	box-shadow: inset 0 0 1px #f3e5e4;
+	border-radius: 10px;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #f3e5e4;
-    border-radius: 10px;
+	background: #f3e5e4;
+	border-radius: 10px;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #a29d9d;
+	background: #a29d9d;
 }
+
 /* snack */
 #snackbar-container {
-  position: fixed;
-  left: 20px;
-  bottom: 0;
-  z-index: 99999;
+	position: fixed;
+	left: 20px;
+	bottom: 0;
+	z-index: 99999;
 }
+
 .snackbar {
-  overflow: hidden;
-  clear: both;
-  min-width: 288px;
-  max-width: 568px;
-  cursor: pointer;
-  opacity: 0;
+	overflow: hidden;
+	clear: both;
+	min-width: 288px;
+	max-width: 568px;
+	cursor: pointer;
+	opacity: 0;
 }
+
 .snackbar.green {
 	background-color: green;
 }
+
 .snackbar.red {
 	background-color: red;
 }
+
 .snackbar:after {
-    font-family: "Glyphicons Halflings";
-    content: "\e014";
-    float: right;
-    color: white;
-    font-size: 14px;
-    top: 0px;
-    position: absolute;
-    right: 5px;
+	font-family: "Glyphicons Halflings";
+	content: "\e014";
+	float: right;
+	color: white;
+	font-size: 14px;
+	top: 0px;
+	position: absolute;
+	right: 5px;
 }
+
 .snackbar.snackbar-opened {
-  height: auto;
-  opacity: 1;
+	height: auto;
+	opacity: 1;
 }
+
 @media (max-width: 767px) {
-  #snackbar-container {
-    left: 0px !important;
-    right: 0px;
-    width: 100%;
-  }
-  #snackbar-container .snackbar {
-    min-width: 100%;
-  }
-  #snackbar-container [class="snackbar snackbar-opened"] ~ .snackbar.toast {
-    margin-top: 20px;
-  }
-  #snackbar-container [class="snackbar snackbar-opened"] {
-    border-radius: 0;
-    margin-bottom: 0;
-  }
+	#snackbar-container {
+		left: 0px !important;
+		right: 0px;
+		width: 100%;
+	}
+
+	#snackbar-container .snackbar {
+		min-width: 100%;
+	}
+
+	#snackbar-container [class="snackbar snackbar-opened"]~.snackbar.toast {
+		margin-top: 20px;
+	}
+
+	#snackbar-container [class="snackbar snackbar-opened"] {
+		border-radius: 0;
+		margin-bottom: 0;
+	}
 }
+
 /*slide*/
 .noUi-horizontal {
-    height: 5px;
+	height: 5px;
 }
+
 .noUi-horizontal .noUi-handle {
-    width: 18px;
-    height: 18px;
-    left: -9px;
-    top: -7px;
-    border-radius: 10px;
+	width: 18px;
+	height: 18px;
+	left: -9px;
+	top: -7px;
+	border-radius: 10px;
 }
-.noUi-handle::after, .noUi-handle::before {
+
+.noUi-handle::after,
+.noUi-handle::before {
 	display: none;
 }
+
 .noUi-horizontal .noUi-tooltip {
-    font-size: 1rem;
+	font-size: 1rem;
 }
+
 .noUi-connect {
-    background: #DAE1E0;
+	background: #DAE1E0;
 }
+
 .noUi-handle.noUi-active {
-  -webkit-transform: scale3d(1.2, 1.2, 1);
-  transform: scale3d(1.2, 1.2, 1);
+	-webkit-transform: scale3d(1.2, 1.2, 1);
+	transform: scale3d(1.2, 1.2, 1);
 }
+
 .noUi-active {
 	box-shadow: none;
 }
+
 .noUi-horizontal .noUi-tooltip {
-    -webkit-transform: translate(-50%,0);
-    transform: translate(-50%,0);
-    left: -60%;
-    bottom: 120%;
+	-webkit-transform: translate(-50%, 0);
+	transform: translate(-50%, 0);
+	left: -60%;
+	bottom: 120%;
 }
 
 #i3geo_janelaCor_c {
@@ -293,21 +341,28 @@
 	position: relative;
 	left: 20px;
 }
+
 .expandModal {
 	position: relative;
 	left: 16px;
 }
-.navbar, .navbar.navbar-default {
+
+.navbar,
+.navbar.navbar-default {
 	background-color: #386682 !Important;
 	border-bottom: 4px solid #7f9dc3;
 }
+
 .container-tools {
 	overflow: auto;
 	max-height: calc(100vh - 120px);
 }
+
 .waitSpin {
-	border: 16px solid #f3f3f3; /* Light grey */
-	border-top: 16px solid #005272; /* green */
+	border: 16px solid #f3f3f3;
+	/* Light grey */
+	border-top: 16px solid #005272;
+	/* green */
 	border-radius: 50%;
 	width: 100px;
 	height: 100px;
@@ -334,7 +389,8 @@
 	border-bottom: 1px solid #d2caca;
 }
 
-.i3GEOCabecalhoInfoWindow>button, .i3GEOCabecalhoInfoWindow>.dropdown>button {
+.i3GEOCabecalhoInfoWindow>button,
+.i3GEOCabecalhoInfoWindow>.dropdown>button {
 	color: #386682 !Important;
 }
 
@@ -353,6 +409,7 @@
 	border-radius: unset;
 	box-shadow: unset;
 }
+
 /* para evitar erros no logo de atribuicao quando nao ha mapa base ativado */
 .ol-logo-only {
 	visibility: hidden;
@@ -404,8 +461,10 @@
 	border-top: 1px solid #ededed;
 }
 
-#mostraarea_calculo_parcial, #mostraarea_calculo,
-	#mostradistancia_calculo, #mostradistancia_calculo_movel {
+#mostraarea_calculo_parcial,
+#mostraarea_calculo,
+#mostradistancia_calculo,
+#mostradistancia_calculo_movel {
 	font-size: 1.4rem;
 }
 
@@ -427,8 +486,30 @@
 	right: 16px;
 	cursor: pointer;
 }
+
+[data-bs-toggle*=collapse]:after {
+	font-family: "Glyphicons Halflings";
+	content: "\e113";
+	color: #cbd2d7;
+	font-size: 14px;
+	top: 0px;
+	position: absolute;
+	right: 16px;
+	cursor: pointer;
+}
+
 /* Icon when the collapsible content is hidden */
 [data-toggle*=collapse].collapsed:after {
+	content: "\e114";
+	color: #cbd2d7;
+	font-size: 14px;
+	top: 0px;
+	position: absolute;
+	right: 16px;
+	cursor: pointer;
+}
+
+[data-bs-toggle*=collapse].collapsed:after {
 	content: "\e114";
 	color: #cbd2d7;
 	font-size: 14px;
@@ -445,6 +526,7 @@
 	text-align: left;
 	padding: 5px;
 }
+
 /*
 Barra de botoes de navegacao
 */
@@ -462,57 +544,65 @@ Barra de botoes de navegacao
 }
 
 .ol-control button:hover {
-    text-decoration: none;
-    background-color: rgba(180, 180, 180, 0.7);
+	text-decoration: none;
+	background-color: rgba(180, 180, 180, 0.7);
 }
+
 /*
 Popup do identifica no openlayers
 */
 .ol-popup {
-  position: absolute;
-  background-color: white;
-  -webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-  filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-  padding: 8px;
-  border-radius: 10px;
-  border: 1px solid #cccccc;
-  bottom: 12px;
-  left: -50px;
-  z-Index: 2;
+	position: absolute;
+	background-color: white;
+	-webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+	filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+	padding: 8px;
+	border-radius: 10px;
+	border: 1px solid #cccccc;
+	bottom: 12px;
+	left: -50px;
+	z-Index: 2;
 }
-.ol-popup:after, .ol-popup:before {
-  top: 100%;
-  border: solid transparent;
-  content: " ";
-  height: 0;
-  width: 0;
-  position: absolute;
-  pointer-events: none;
-}
-.ol-popup:after {
-  border-top-color: white;
-  border-width: 10px;
-  left: 48px;
-  margin-left: -10px;
-}
+
+.ol-popup:after,
 .ol-popup:before {
-  border-top-color: #cccccc;
-  border-width: 11px;
-  left: 48px;
-  margin-left: -11px;
+	top: 100%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
 }
+
+.ol-popup:after {
+	border-top-color: white;
+	border-width: 10px;
+	left: 48px;
+	margin-left: -10px;
+}
+
+.ol-popup:before {
+	border-top-color: #cccccc;
+	border-width: 11px;
+	left: 48px;
+	margin-left: -11px;
+}
+
 .ol-popup-closer {
-  text-decoration: none;
-  position: absolute;
-  top: 2px;
-  right: 1px;
-  cursor:pointer;
+	text-decoration: none;
+	position: absolute;
+	top: 2px;
+	right: 1px;
+	cursor: pointer;
 }
+
 .ol-popup-closer:after {
-  content: "\2716";
-  color: red;
-  font-size: 16px;
+	content: "\2716";
+	color: red;
+	font-size: 16px;
 }
+
 /*
 Utilizado no elemento select
 */
@@ -550,6 +640,7 @@ tooltip dos botoes da guia movel
 	width: 120px;
 	min-height: 30px;
 }
+
 /* camadas de fundo*/
 .tooltip-inner>img {
 	padding: 0px;
@@ -569,6 +660,7 @@ tooltip balao info
 	overflow: auto;
 	max-height: 300px
 }
+
 /*
 Botoes material
 */
@@ -600,9 +692,11 @@ Botoes material
 	line-height: 1.5;
 	display: inherit;
 }
+
 button>.material-icons {
 	vertical-align: text-top;
 }
+
 .btn.btn-fab.btn-fab-max>.material-icons {
 	font-size: 20px;
 	display: block;
@@ -613,9 +707,9 @@ button>.material-icons {
 }
 
 .modal-content .modal-body {
-    padding-right: 10px;
-    padding-bottom: 16px;
-    padding-left: 0px;
+	padding-right: 10px;
+	padding-bottom: 16px;
+	padding-left: 0px;
 }
 
 
@@ -629,7 +723,9 @@ span.affix {
 	z-index: 1;
 }
 
-a, a:focus, a:hover {
+a,
+a:focus,
+a:hover {
 	color: #008579;
 }
 
@@ -663,17 +759,21 @@ hr {
 
 
 
-.withripple.condensed, .pager.condensed {
+.withripple.condensed,
+.pager.condensed {
 	margin: 0px;
 }
 
-.radio span, label.radio-inline span {
+.radio span,
+label.radio-inline span {
 	top: 4px;
 }
+
 /*Caso a camada tenha select*/
 .camadaSelecionada {
 	color: #4bd5d5 !Important;
 }
+
 /**************************/
 .mais {
 	background-image: URL('../imagens/sprite.png');
@@ -792,6 +892,7 @@ hr {
 	width: 230px;
 	vertical-align: middle;
 }
+
 /**************************/
 .i3GEOtemaComSel {
 	border-bottom: 1px solid cyan;
@@ -820,6 +921,7 @@ hr {
 	padding: 4px;
 	width: 100%;
 }
+
 /*utilizado para nao sobrepor com o icone de fechar guias, que e fixed*/
 .separadorCabecalhoGuias {
 	height: 0px;
@@ -828,8 +930,9 @@ hr {
 /*
 botoes da legenda
 */
-#legendaOpcoes button, #legendaOpcoes .yui-button, #legendaOpcoes .yuimenu
-	{
+#legendaOpcoes button,
+#legendaOpcoes .yui-button,
+#legendaOpcoes .yuimenu {
 	width: 250px;
 	color: black;
 	border-radius: 0px;
@@ -855,10 +958,12 @@ botoes da legenda
 #corpoLegi {
 	overflow: hidden;
 }
+
 /* cor do fundo da janela da legenda quando flutuante */
 #wlegenda_corpo {
 	background-color: white !Important;
 }
+
 /*
 Botao de ligar desligar do tipo chave da legenda
 */
@@ -970,7 +1075,8 @@ no caso do OL3
 	font-size: 1.8rem;
 }
 
-.ol-touch .ol-zoomslider, .ol-zoomslider {
+.ol-touch .ol-zoomslider,
+.ol-zoomslider {
 	top: 8.2em;
 	font-size: 1.8rem;
 }
@@ -991,6 +1097,7 @@ no caso do OL3
 	background-color: rgba(0, 60, 136, .3);
 	border-radius: 4px;
 }
+
 .copyToMemory::after {
 	font-family: "Glyphicons Halflings";
 	content: "\e205";
@@ -999,20 +1106,9 @@ no caso do OL3
 	margin-left: 2px;
 	opacity: 0.5
 }
+
 .copyToMemory {
 	cursor: copy;
-}
-
-.olControlEditingToolbar1 div {
-	background-image: url(../mashups/openlayers.png);
-	background-repeat: no-repeat;
-	float: right;
-	right: 50px;
-	height: 29px;
-	margin: 2px;
-	width: 29px;
-	cursor: pointer;
-	top: 30px;
 }
 
 /*
@@ -1119,7 +1215,8 @@ Configuracoes especificas dos elementos que ficam no rodape
 	position: absolute;
 }
 
-.localizarxy input, .localizarxy select {
+.localizarxy input,
+.localizarxy select {
 	font-size: 1em;
 	height: 1.8em;
 }
@@ -1141,7 +1238,8 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 
 /* Botoes das janelas flutuantes*/
-.yui-skin-sam .yui-button button, .yui-skin-sam .yui-button a {
+.yui-skin-sam .yui-button button,
+.yui-skin-sam .yui-button a {
 	color: #000000;
 	font-size: 95%;
 	line-height: 2;
@@ -1214,6 +1312,7 @@ Configuracoes especificas dos elementos que ficam no rodape
 .abrir100 .first-child button {
 	width: 100px;
 }
+
 /*balao de info*/
 .i3GEOiconeMais {
 	background-image: url("../imagens/oxygen/16x16/draw-cross.png");
@@ -1267,14 +1366,27 @@ Configuracoes especificas dos elementos que ficam no rodape
 }
 
 /* janelas */
-.bd .lista td, .bd .lista1 td, .bd .lista2 td, .bd .lista3 td, .bd .lista4 td,
-	.bd .lista5 td, .bd .lista6 td, .bd .lista7 td, .bd .lista8 td {
+.bd .lista td,
+.bd .lista1 td,
+.bd .lista2 td,
+.bd .lista3 td,
+.bd .lista4 td,
+.bd .lista5 td,
+.bd .lista6 td,
+.bd .lista7 td,
+.bd .lista8 td {
 	color: white;
 }
 
-.bd.i3geo6 .lista td, .bd.i3geo6 .lista1 td, .bd.i3geo6 .lista2 td, .bd.i3geo6 .lista3 td,
-	.bd.i3geo6 .lista4 td, .bd.i3geo6 .lista5 td, .bd.i3geo6 .lista6 td,
-	.bd.i3geo6 .lista7 td, .bd.i3geo6 .lista8 td {
+.bd.i3geo6 .lista td,
+.bd.i3geo6 .lista1 td,
+.bd.i3geo6 .lista2 td,
+.bd.i3geo6 .lista3 td,
+.bd.i3geo6 .lista4 td,
+.bd.i3geo6 .lista5 td,
+.bd.i3geo6 .lista6 td,
+.bd.i3geo6 .lista7 td,
+.bd.i3geo6 .lista8 td {
 	color: white;
 }
 
@@ -1310,12 +1422,18 @@ Configuracoes especificas dos elementos que ficam no rodape
 	text-align: left;
 }
 
-.bd a, .bd a:focus, .bd a:hover {
-	color: #9ceaea;;
+.bd a,
+.bd a:focus,
+.bd a:hover {
+	color: #9ceaea;
+	;
 }
 
-.bd.i3geo6 a, .bd.i3geo6 a:focus, .bd.i3geo6 a:hover {
-	color: #9ceaea;;
+.bd.i3geo6 a,
+.bd.i3geo6 a:focus,
+.bd.i3geo6 a:hover {
+	color: #9ceaea;
+	;
 }
 
 .bd p {
@@ -1410,14 +1528,16 @@ td {
 /* UTILIZADOS EM VRIOS LOCAIS */
 .ajuda_usuario {
 	background:
-		url("../imagens/janelas-flutuantes/botao-tiny-documentacao-hover.png")
-		no-repeat !important;
+		url("../imagens/janelas-flutuantes/botao-tiny-documentacao-hover.png") no-repeat !important;
 	width: 21px !important;
 	top: 3px;
 }
 
-.styled-select, .styled-select150, .styled-select100, .styled-select200,
-	.styled-select250 {
+.styled-select,
+.styled-select150,
+.styled-select100,
+.styled-select200,
+.styled-select250 {
 	background: none !important;
 	box-shadow: none;
 	border: none;
@@ -1438,8 +1558,7 @@ td {
 
 .tic {
 	background:
-		url("../imagens/menu-lateral-subitens/camadas/botao-buscar.png")
-		scroll 0 0 rgba(0, 0, 0, 0) !important;
+		url("../imagens/menu-lateral-subitens/camadas/botao-buscar.png") scroll 0 0 rgba(0, 0, 0, 0) !important;
 	box-shadow: none;
 	height: 36px;
 	margin-left: 0;
@@ -1474,7 +1593,7 @@ td {
 	z-index: 2001;
 	margin-left: 5px !important;
 	opacity: .60;
-	filter: alpha(opacity = 80);
+	filter: alpha(opacity=80);
 	background: none !important;
 	text-indent: 0px !important;
 	color: white;
@@ -1488,7 +1607,7 @@ td {
 	z-index: 2001;
 	margin-left: 5px !important;
 	opacity: .60;
-	filter: alpha(opacity = 80);
+	filter: alpha(opacity=80);
 	background: none !important;
 	text-indent: 0px !important;
 	color: white;
@@ -1502,6 +1621,7 @@ td {
 .container-duplica:hover {
 	background: none !important;
 }
+
 /*
 .yui-skin-sam .container-close {
 	cursor: pointer;
@@ -1526,12 +1646,13 @@ td {
 	z-index: 2001;
 	margin-left: 5px !important;
 	opacity: .60;
-	filter: alpha(opacity = 80);
+	filter: alpha(opacity=80);
 	background: none !important;
 	text-indent: 0px !important;
 	color: white;
 	top: 3px;
 }
+
 /*
 .yui-skin-sam .container-close::after {
   font-family: "Material Icons";
@@ -1542,13 +1663,19 @@ td {
 	background: none !important;
 }
 
-.yui-module .yui-overlay .yuimenu .yui-button-menu .yui-menu-button-menu .visible
-	{
+.yui-module .yui-overlay .yuimenu .yui-button-menu .yui-menu-button-menu .visible {
 	background-color: #094672;
 }
 
-.yui-skin-sam .yui-panel, #mostradistancia, #executa, #ferramentas,
-	#legenda, #legendai, #corpoLegi, #listaPropriedades, #areaRealce {
+.yui-skin-sam .yui-panel,
+#mostradistancia,
+#executa,
+#ferramentas,
+#legenda,
+#legendai,
+#corpoLegi,
+#listaPropriedades,
+#areaRealce {
 	background-color: #094672;
 	border: 13px none;
 	border-radius: 13px;
@@ -1556,8 +1683,7 @@ td {
 
 .yui-skin-sam .yui-resize .yui-resize-handle-br {
 	background:
-		url("../imagens/janelas-flutuantes/botao-arrastarpararedimensionar.png")
-		no-repeat !important;
+		url("../imagens/janelas-flutuantes/botao-arrastarpararedimensionar.png") no-repeat !important;
 	height: 20px;
 	width: 20px;
 	position: absolute;
@@ -1565,8 +1691,7 @@ td {
 
 .yui-skin-sam .yui-resize .yui-resize-handle-br:hover {
 	background:
-		url("../imagens/janelas-flutuantes/botao-arrastarpararedimensionar-hover.png")
-		no-repeat !important;
+		url("../imagens/janelas-flutuantes/botao-arrastarpararedimensionar-hover.png") no-repeat !important;
 }
 
 .i3GeoRodapeJanela {
@@ -1593,6 +1718,7 @@ td {
 	max-width: 100%;
 	font-weight: unset;
 }
+
 /*
 .bd table tr:first-of-type td {
    padding: 5px;
@@ -1615,7 +1741,7 @@ td {
 	min-height: 30px;
 }
 
-.yui-skin-sam .yui-panel .ft  div {
+.yui-skin-sam .yui-panel .ft div {
 	background: none !IMPORTANT;
 }
 
@@ -1664,11 +1790,14 @@ bd .i3geoFormIconeEdita {
 	border-bottom: 2px solid lightgray;
 }
 
-.yui-skin-sam .bd .yui-navset .yui-nav a, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,
-	.yui-skin-sam .bd .yui-navset .yui-nav a em, .yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,
-	.yui-skin-sam .bd .yui-button, .yui-skin-sam .bd .yui-button button,
-	.yui-skin-sam .bd .yui-button a, .yui-skin-sam .bd .yui-button .first-child
-	{
+.yui-skin-sam .bd .yui-navset .yui-nav a,
+.yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a,
+.yui-skin-sam .bd .yui-navset .yui-nav a em,
+.yui-skin-sam .bd .yui-navset .yui-navset-top .yui-nav a em,
+.yui-skin-sam .bd .yui-button,
+.yui-skin-sam .bd .yui-button button,
+.yui-skin-sam .bd .yui-button a,
+.yui-skin-sam .bd .yui-button .first-child {
 	border-color: lightgray;
 	font-family: arial;
 	font-size: 1.6rem;
@@ -1682,8 +1811,8 @@ bd .i3geoFormIconeEdita {
 	position: absolute;
 }
 
-.yui-skin-sam .yui-navset .yui-nav a, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a
-	{
+.yui-skin-sam .yui-navset .yui-nav a,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a {
 	background: rgba(5, 69, 108, 0.9) !IMPORTANT;
 	border: none;
 	font-family: arial;
@@ -1696,18 +1825,18 @@ bd .i3geoFormIconeEdita {
 	color: white;
 }
 
-.yui-skin-sam .yui-navset .yui-nav, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav
-	{
+.yui-skin-sam .yui-navset .yui-nav,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav {
 	background: rgba(5, 69, 108, 0.9) !IMPORTANT;
 }
 
-.yui-skin-sam .yui-navset .yui-nav a em, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em
-	{
+.yui-skin-sam .yui-navset .yui-nav a em,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav a em {
 	border: 0px;
 }
 
-.yui-skin-sam .yui-navset .yui-nav li, .yui-skin-sam .yui-navset .yui-navset-top .yui-nav li
-	{
+.yui-skin-sam .yui-navset .yui-nav li,
+.yui-skin-sam .yui-navset .yui-navset-top .yui-nav li {
 	margin: 0 -5px 0 0;
 }
 
@@ -1754,7 +1883,8 @@ bd .i3geoFormIconeEdita {
 	opacity: 1.0;
 }
 
-.yui-panel-container div .bd, .paragrafo>label {
+.yui-panel-container div .bd,
+.paragrafo>label {
 	background-color: none;
 	padding: 10px;
 	position: relative;
@@ -1764,7 +1894,8 @@ bd .i3geoFormIconeEdita {
 	color: rgba(255, 255, 255, 0.6);
 }
 
-.yui-panel-container div .bd.i3geo6, .bd.paragrafo>label {
+.yui-panel-container div .bd.i3geo6,
+.bd.paragrafo>label {
 	background-color: none;
 	padding: 10px;
 	position: relative;
@@ -1805,6 +1936,7 @@ bd .i3geoFormIconeEdita {
 	top: 10px;
 	left: 5px;
 }
+
 /*cabecalho das janelas adaptadas para bootstrap*/
 .comboTemasCabecalhoBs {
 	z-index: 100;
@@ -1815,6 +1947,7 @@ bd .i3geoFormIconeEdita {
 	max-width: 85%;
 	margin: 0px;
 }
+
 /* .form-group .form-control*/
 .comboTemasCabecalhoBs>select {
 	background-color: #094672 !Important;
@@ -1839,7 +1972,8 @@ bd .i3geoFormIconeEdita {
 	border-bottom: 1px solid #A6A8AA;
 	background-image: none !important;
 	/* tab background */
-	z-index: 1; /* 3000 */
+	z-index: 1;
+	/* 3000 */
 }
 
 .modal-body .yui-navset {
@@ -1855,11 +1989,15 @@ bd .i3geoFormIconeEdita {
 	font-weight: normal;
 }
 
-.i3geoForm input, .i3geoForm150 input, .i3geoForm100 input {
+.i3geoForm input,
+.i3geoForm150 input,
+.i3geoForm100 input {
 	width: 100%;
 }
 
-.digitar, .digitar:hover, .digitarOver {
+.digitar,
+.digitar:hover,
+.digitarOver {
 	background-color: #222222 !IMPORTANT;
 	opacity: 0.9 !IMPORTANT;
 	box-shadow: none !IMPORTANT;
@@ -1867,8 +2005,7 @@ bd .i3geoFormIconeEdita {
 
 .ticfind {
 	background:
-		url("../imagens/barra-inferior/botao-tiny-zoomparacoordenadas.png")
-		scroll 0 0 rgba(0, 0, 0, 0) !important;
+		url("../imagens/barra-inferior/botao-tiny-zoomparacoordenadas.png") scroll 0 0 rgba(0, 0, 0, 0) !important;
 	box-shadow: none;
 	height: 20px;
 	width: 20px;
@@ -1877,16 +2014,16 @@ bd .i3geoFormIconeEdita {
 
 .ticfind:hover {
 	background:
-		url("../imagens/barra-inferior/botao-tiny-zoomparacoordenadas-hover.png")
-		no-repeat !important;
+		url("../imagens/barra-inferior/botao-tiny-zoomparacoordenadas-hover.png") no-repeat !important;
 	box-shadow: none;
 }
 
-.linha, .linha1 {
+.linha,
+.linha1 {
 	color: white !important;
 }
 
-.lista2  td {
+.lista2 td {
 	background-color: none;
 	font-family: arial;
 	font-size: 13px;
@@ -1914,7 +2051,9 @@ bd .i3geoFormIconeEdita {
 	color: black;
 }
 
-.lista8 td, .lista6 td, .lista td {
+.lista8 td,
+.lista6 td,
+.lista td {
 	color: white;
 }
 
@@ -1928,13 +2067,15 @@ bd .i3geoFormIconeEdita {
 	left: 10px;
 }
 
-#mostraarea_c, #mostradistancia_c {
+#mostraarea_c,
+#mostradistancia_c {
 	z-index: 100000;
 }
 
 #mostradistancia {
 	background-color: none !IMPORTANT;
 }
+
 /*
 ver exemplos em https://bootsnipp.com/snippets/featured/glyphicon-animate-rotation-and-flip
 */
@@ -1945,78 +2086,68 @@ ver exemplos em https://bootsnipp.com/snippets/featured/glyphicon-animate-rotati
 	animation: spin 2s infinite linear;
 }
 
-@
--moz-keyframes spin { 0% {
-	-moz-transform: rotate(0deg);
+@-moz-keyframes spin {
+	0% {
+		-moz-transform: rotate(0deg);
+	}
+
+	100% {
+		-moz-transform:
+
+			rotate (359deg);
+
+
+	}
 }
 
-100%
-{
--moz-transform
-:
+@-webkit-keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+	}
 
-rotate
-(359deg);
+	100% {
+		-webkit-transform:
+
+			rotate (359deg);
 
 
-}
-}
-@
--webkit-keyframes spin { 0% {
-	-webkit-transform: rotate(0deg);
+	}
 }
 
-100%
-{
--webkit-transform
-:
+@-o-keyframes spin {
+	0% {
+		-o-transform: rotate(0deg);
+	}
 
-rotate
-(359deg);
+	100% {
+		-o-transform:
+
+			rotate (359deg);
 
 
-}
-}
-@
--o-keyframes spin { 0% {
-	-o-transform: rotate(0deg);
+	}
 }
 
-100%
-{
--o-transform
-:
+@keyframes spin {
+	0% {
+		-webkit-transform: rotate(0deg);
+		transform: rotate(0deg);
+	}
 
-rotate
-(359deg);
+	100% {
+		-webkit-transform:
+
+			rotate (359deg);
 
 
+		transform:
+
+			rotate (359deg);
+
+
+	}
 }
-}
-@
-keyframes spin { 0% {
-	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg);
-}
 
-100%
-{
--webkit-transform
-:
-
-rotate
-(359deg);
-
-
-transform
-:
-
-rotate
-(359deg);
-
-
-}
-}
 .gly-rotate-90 {
 	filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=1);
 	-webkit-transform: rotate(90deg);
@@ -2068,48 +2199,59 @@ rotate
 		width: unset !Important;
 	}
 }
+
 /* === For phones =================================== */
-@media ( max-width : 480px) {
+@media (max-width : 480px) {
 	#i3GEOguiaMovelMolde {
 		width: 100%;
 	}
+
 	#i3GEOguiaMovel {
 		width: 100%;
 	}
+
 	#i3GEOguiaMovelConteudo {
 		width: 100%;
 	}
+
 	.nomeTema {
 		width: 235px;
 		vertical-align: middle;
 	}
-	.ol-zoomslider, .ol-zoom {
+
+	.ol-zoomslider,
+	.ol-zoom {
 		display: none;
 	}
+
 	.ol-scale-line {
 		bottom: 0;
 	}
+
 	.tooltip-inner {
 		display: none;
 	}
+
 	.I3GEOpropCamadas {
 		right: 0px;
 		width: 280px;
 	}
-}
-/* === For meio phones =================================== */
-@media ( min-width : 480px) and (max-width:767px) {
-	.I3GEOpropCamadas {
-		right: 0px;
-		width: 280px;
-	}
-}
-/* === For tablets ================================== */
-@media ( min-width : 768px) and (max-width:991px) {
 }
 
+/* === For meio phones =================================== */
+@media (min-width : 480px) and (max-width:767px) {
+	.I3GEOpropCamadas {
+		right: 0px;
+		width: 280px;
+	}
+}
+
+/* === For tablets ================================== */
+@media (min-width : 768px) and (max-width:991px) {}
+
 /* === For desktops ================================== */
-@media ( min-width : 992px) {
+@media (min-width : 992px) {
+
 	/* classe incluida no balao de informacoes nos eventos mouseover e mouseout */
 	.hiddenInfo {
 		display: none;

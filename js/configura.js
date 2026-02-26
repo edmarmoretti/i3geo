@@ -25,7 +25,7 @@
  *
  */
 if (typeof (i3GEO) === 'undefined') {
-    var i3GEO = {};
+	var i3GEO = {};
 }
 i3GEO.configura =
 {
@@ -36,167 +36,166 @@ i3GEO.configura =
 	 *
 	 * que possuem par&acirc;metros definidos em cada mapfile. Normalmente, os par&acirc;metros
 	 *
-	 * s&atilde;o utilizados no mashup para criar &iacute;cones que executam opera&ccedil;&otilde;es especiais
+	 * s&atilde;o utilizados para criar &iacute;cones que executam opera&ccedil;&otilde;es especiais
 	 *
-	 * Veja também mashups/openlayers.php variavel $listaFerramentas
 	 */
-	ferramentasLayers : {
-	    //lista de ferramentas que aceitam parametros embutidos em mapfiles
-	    param : ["tme","storymap","animagif","wmstime"],
-	    "tme" : {
-		"arvoreDeCamadas" : true,
-		"metadata" : "tme",
-		"classe" : "i3GEOiconeTme",
-		init : function (codigo){
-		    window.open(i3GEO.configura.locaplic+"/ferramentas/tme/cesium.php?&tema="+codigo);
-		},
-		icone : function(layer) {
-		    var l, icone;
-		    if(typeof layer != "string"){
-			if(layer.params.LAYERS){
-			    l = layer.params.LAYERS;
-			} else{
-			    l = layer.layername;
-			}
-		    }
-		    else{
-			l = layer;
-		    }
-		    icone =
-			"<img class='i3GEOiconeTme' onclick='i3GEO.util.animaClique(this);"
-			+ "i3GEO.configura.ferramentasLayers.tme.init(\""
-			+ l
-			+ "\");return false;'"
-			+ "title='3d' "
-			+ "src='"
-			+ i3GEO.configura.locaplic
-			+ "/imagens/branco.gif' />";
-		    return icone;
-		}
-	    },
-	    "storymap" : {
-		"arvoreDeCamadas" : true,
-		"metadata" : "storymap",
-		"classe" : "i3GEOiconeStorymap",
-		init : function (codigo){
-		    window.open(i3GEO.configura.locaplic+"/ferramentas/storymap/default.php?&tema="+codigo);
-		},
-		icone : function(layer) {
-		    var l, icone;
-		    if(typeof layer != "string"){
-			if(layer.params.LAYERS){
-			    l = layer.params.LAYERS;
-			} else{
-			    l = layer.layername;
-			}
-		    }
-		    else{
-			l = layer;
-		    }
-		    icone =
-			"<img class='i3GEOiconeStorymap' onclick='i3GEO.util.animaClique(this);"
-			+ "i3GEO.configura.ferramentasLayers.storymap.init(\""
-			+ l
-			+ "\");return false;'"
-			+ "title='StoryMap' "
-			+ "src='"
-			+ i3GEO.configura.locaplic
-			+ "/imagens/branco.gif' />";
-		    return icone;
-		}
-	    },
-	    "animagif" : {
-		"arvoreDeCamadas" : true,
-		"metadata" : "animagif",
-		"classe" : "i3GEOiconeAnimagif",
-		init : function (codigo){
-		    window.open(i3GEO.configura.locaplic+"/ferramentas/animagif/index.php?&tema="+codigo);
-		},
-		icone : function(layer) {
-		    var l, icone;
-		    if(typeof layer != "string"){
-			if(layer.params.LAYERS){
-			    l = layer.params.LAYERS;
-			} else{
-			    l = layer.layername;
-			}
-		    }
-		    else{
-			l = layer;
-		    }
-		    icone =
-			"<img class='i3GEOiconeAnimagif' onclick='i3GEO.util.animaClique(this);"
-			+ "i3GEO.configura.ferramentasLayers.animagif.init(\""
-			+ l
-			+ "\");return false;'"
-			+ "title='Animagif' "
-			+ "src='"
-			+ i3GEO.configura.locaplic
-			+ "/imagens/branco.gif' />";
-		    return icone;
-		}
-	    },
-	    "wmstime" : {
-		parametrosForm: function(temaObj){
-		    if (typeof (console) !== 'undefined')
-			     console.info("configura wmstime parametrosForm");
-
-		    var html = [],
-		    	parametros = temaObj.ferramentas.wmstime,
-		    	times = parametros.times.split("|");
-
-		    html.push("<div style='width: 100%;' class='form-group label-fixed condensed'>");
-		    html.push("<div style='width: 100%;' class='input-group'>");
-		    html.push("<select name='" + temaObj.name + "' onchange='i3GEO.configura.ferramentasLayers.wmstime.changeTime(this)' class='form-control' >");
-		    $.each(times,function(i,v){
-			var s = "";
-			if(v == parametros.time){
-			    s = "selected";
-			}
-			html.push("<option " + s + " value='" + v + "'>" + v + "</option>");
-		    });
-
-		    html.push("</select>");
-		    html.push("<b class='caret careti'></b>");
-		    html.push("</div></div>");
-
-		    return html.join("");
-		},
-		changeTime: function(obj){
-		    var time = obj.value,
-		    	temaObj = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[obj.name];
-		    i3GEO.janela.abreAguarde();
-		    $.post(
-			    i3GEO.configura.locaplic+"/ferramentas/wmstime/exec.php",
-			    {
-				funcao: "alteratime",
-				g_sid: i3GEO.configura.sid,
-				layer: temaObj.name,
-				time: time,
-				times: temaObj.ferramentas.wmstime.times
-			    }
-		    )
-		    .done(
-			    function(data, status){
-
-				i3GEO.janela.fechaAguarde();
-				if(data.errorMsg != ""){
-				    i3GEO.janela.snackBar({content: data.errorMsg, style:'red'});
-				} else {
-				    i3GEO.Interface.atualizaTema("",temaObj.name);
-				    i3GEO.janela.snackBar({content: $trad("camadaatualizada")});
+	ferramentasLayers: {
+		//lista de ferramentas que aceitam parametros embutidos em mapfiles
+		param: ["tme", "storymap", "animagif", "wmstime"],
+		"tme": {
+			"arvoreDeCamadas": true,
+			"metadata": "tme",
+			"classe": "i3GEOiconeTme",
+			init: function (codigo) {
+				window.open(i3GEO.configura.locaplic + "/ferramentas/tme/cesium.php?&tema=" + codigo);
+			},
+			icone: function (layer) {
+				var l, icone;
+				if (typeof layer != "string") {
+					if (layer.params.LAYERS) {
+						l = layer.params.LAYERS;
+					} else {
+						l = layer.layername;
+					}
 				}
+				else {
+					l = layer;
+				}
+				icone =
+					"<img class='i3GEOiconeTme' onclick='i3GEO.util.animaClique(this);"
+					+ "i3GEO.configura.ferramentasLayers.tme.init(\""
+					+ l
+					+ "\");return false;'"
+					+ "title='3d' "
+					+ "src='"
+					+ i3GEO.configura.locaplic
+					+ "/imagens/branco.gif' />";
+				return icone;
+			}
+		},
+		"storymap": {
+			"arvoreDeCamadas": true,
+			"metadata": "storymap",
+			"classe": "i3GEOiconeStorymap",
+			init: function (codigo) {
+				window.open(i3GEO.configura.locaplic + "/ferramentas/storymap/default.php?&tema=" + codigo);
+			},
+			icone: function (layer) {
+				var l, icone;
+				if (typeof layer != "string") {
+					if (layer.params.LAYERS) {
+						l = layer.params.LAYERS;
+					} else {
+						l = layer.layername;
+					}
+				}
+				else {
+					l = layer;
+				}
+				icone =
+					"<img class='i3GEOiconeStorymap' onclick='i3GEO.util.animaClique(this);"
+					+ "i3GEO.configura.ferramentasLayers.storymap.init(\""
+					+ l
+					+ "\");return false;'"
+					+ "title='StoryMap' "
+					+ "src='"
+					+ i3GEO.configura.locaplic
+					+ "/imagens/branco.gif' />";
+				return icone;
+			}
+		},
+		"animagif": {
+			"arvoreDeCamadas": true,
+			"metadata": "animagif",
+			"classe": "i3GEOiconeAnimagif",
+			init: function (codigo) {
+				window.open(i3GEO.configura.locaplic + "/ferramentas/animagif/index.php?&tema=" + codigo);
+			},
+			icone: function (layer) {
+				var l, icone;
+				if (typeof layer != "string") {
+					if (layer.params.LAYERS) {
+						l = layer.params.LAYERS;
+					} else {
+						l = layer.layername;
+					}
+				}
+				else {
+					l = layer;
+				}
+				icone =
+					"<img class='i3GEOiconeAnimagif' onclick='i3GEO.util.animaClique(this);"
+					+ "i3GEO.configura.ferramentasLayers.animagif.init(\""
+					+ l
+					+ "\");return false;'"
+					+ "title='Animagif' "
+					+ "src='"
+					+ i3GEO.configura.locaplic
+					+ "/imagens/branco.gif' />";
+				return icone;
+			}
+		},
+		"wmstime": {
+			parametrosForm: function (temaObj) {
+				if (typeof (console) !== 'undefined')
+					console.info("configura wmstime parametrosForm");
 
-			    }
-		    )
-		    .fail(
-			    function(data){
-				i3GEO.janela.fechaAguarde();
-				i3GEO.janela.snackBar({content: data.status, style:'red'});
-			    }
-		    );
+				var html = [],
+					parametros = temaObj.ferramentas.wmstime,
+					times = parametros.times.split("|");
+
+				html.push("<div style='width: 100%;' class='form-group label-fixed condensed'>");
+				html.push("<div style='width: 100%;' class='input-group'>");
+				html.push("<select name='" + temaObj.name + "' onchange='i3GEO.configura.ferramentasLayers.wmstime.changeTime(this)' class='form-control' >");
+				$.each(times, function (i, v) {
+					var s = "";
+					if (v == parametros.time) {
+						s = "selected";
+					}
+					html.push("<option " + s + " value='" + v + "'>" + v + "</option>");
+				});
+
+				html.push("</select>");
+				html.push("<b class='caret careti'></b>");
+				html.push("</div></div>");
+
+				return html.join("");
+			},
+			changeTime: function (obj) {
+				var time = obj.value,
+					temaObj = i3GEO.arvoreDeCamadas.CAMADASINDEXADAS[obj.name];
+				i3GEO.janela.abreAguarde();
+				$.post(
+					i3GEO.configura.locaplic + "/ferramentas/wmstime/exec.php",
+					{
+						funcao: "alteratime",
+						g_sid: i3GEO.configura.sid,
+						layer: temaObj.name,
+						time: time,
+						times: temaObj.ferramentas.wmstime.times
+					}
+				)
+					.done(
+						function (data, status) {
+
+							i3GEO.janela.fechaAguarde();
+							if (data.errorMsg != "") {
+								i3GEO.janela.snackBar({ content: data.errorMsg, style: 'red' });
+							} else {
+								i3GEO.Interface.atualizaTema("", temaObj.name);
+								i3GEO.janela.snackBar({ content: $trad("camadaatualizada") });
+							}
+
+						}
+					)
+					.fail(
+						function (data) {
+							i3GEO.janela.fechaAguarde();
+							i3GEO.janela.snackBar({ content: data.status, style: 'red' });
+						}
+					);
+			}
 		}
-	    }
 	},
 	/**
 	 * Propriedade: ferramentas
@@ -207,9 +206,9 @@ i3GEO.configura =
 	 *
 	 */
 	ferramentas: {
-	    identifica : {
-		resolution : 8 //utilizado em verificaTipDefault (i3GEO.identify)
-	    }
+		identifica: {
+			resolution: 8 //utilizado em verificaTipDefault (i3GEO.identify)
+		}
 	},
 	/**
 	 * Propriedade: grupoLayers
@@ -239,7 +238,7 @@ i3GEO.configura =
 	 * ""
 	 */
 	//TODO implementar a funcionalidade de agrupamento
-	grupoLayers : "",
+	grupoLayers: "",
 	/**
 	 * Propriedade: guardaExtensao
 	 *
@@ -255,7 +254,7 @@ i3GEO.configura =
 	 *
 	 * {true}
 	 */
-	guardaExtensao : true,
+	guardaExtensao: true,
 	/**
 	 * Propriedade: tipoimagem
 	 *
@@ -272,7 +271,7 @@ i3GEO.configura =
 	 *
 	 * "nenhum"
 	 */
-	tipoimagem : "nenhum",
+	tipoimagem: "nenhum",
 	/**
 	 * Propriedade: alturatip
 	 *
@@ -287,7 +286,7 @@ i3GEO.configura =
 	 *
 	 * 200px
 	 */
-	alturatip : "100px",
+	alturatip: "100px",
 	/**
 	 * Propriedade: larguratip
 	 *
@@ -302,29 +301,7 @@ i3GEO.configura =
 	 *
 	 * 200px
 	 */
-	larguratip : "200px",
-	/**
-	 * Propriedade: mashuppar
-	 *
-	 * Define os par&acirc;metros que devem ser aplicados no modo mashup
-	 *
-	 * O modo mashup possibilita que o i3Geo seja embutido dentro de uma p&aacute;gina HTML. Nesse caso, o mapa n&atilde;o &eacute;
-	 * criado no modo convencional, que utiliza o programa i3geo/ms_criamapa.php A variavel mashuppar deve conter os par&acirc;metros
-	 * que s&atilde;o utilizados pelo programa ms_criamapa
-	 *
-	 * Exemplo:
-	 *
-	 * i3GEO.configura.mashuppar = "&pontos=-54 -12&temasa=biomas&layers=biomas"
-	 *
-	 * Tipo:
-	 *
-	 * string
-	 *
-	 * Default:
-	 *
-	 * ""
-	 */
-	mashuppar : "",
+	larguratip: "200px",
 	/**
 	 * C&oacute;digo da se&ccedil;&atilde;o aberta pelo i3Geo no servidor.
 	 *
@@ -334,7 +311,7 @@ i3GEO.configura =
 	 *
 	 * {String}
 	 */
-	sid : "",
+	sid: "",
 	/**
 	 * Localiza&ccedil;&atilde;o da instala&ccedil;&atilde;o do i3geo (URI)
 	 *
@@ -344,5 +321,5 @@ i3GEO.configura =
 	 *
 	 * {string}
 	 */
-	locaplic : ""
+	locaplic: ""
 };

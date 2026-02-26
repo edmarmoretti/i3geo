@@ -32,7 +32,7 @@ $_SESSION["nome_subgrupo"] = $nome_subgrupo;
 		<div class="col-md-12">
 			<div class="well hidden">
 				<span class="pull-right">&nbsp;&nbsp;</span>
-				<button data-toggle="modal" data-target="#modalFiltro"
+				<button data-bs-toggle="modal" data-target="#modalFiltro"
 					class="btn btn-primary btn-fab btn-fab-mini pull-right">
 					<i class="material-icons">search</i>
 				</button>
@@ -81,7 +81,7 @@ include("templates/templateOpcoesPerfil.php");
 	$(document).ready(function(){
 		//vem de admin/index.js
 		iniciaMenuPrincipal();
-		$('ul.dropdown-grupo [data-toggle=dropdown]').on('click', function(event) {
+		$('ul.dropdown-grupo [data-bs-toggle=dropdown]').on('click', function(event) {
 			event.preventDefault();
 			event.stopPropagation();
 			$(this).parent().siblings().removeClass('open');

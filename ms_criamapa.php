@@ -239,10 +239,6 @@ if (! isset($funcao)) {
      */
     include_once (dirname(__FILE__) . "/classesphp/sani_request.php");
     include_once (dirname(__FILE__) . "/classesphp/funcoes_gerais.php");
-    if (! isset($_GET["interface"])) {
-        $_GET["interface"] = "";
-    }
-    $interface = $_GET["interface"];
 }
 $parurl = array_merge($_GET, $_POST);
 //
@@ -293,9 +289,6 @@ if (! isset($dir_tmp)) {
     include_once (dirname(__FILE__) . "/ms_configura.php");
     if (! empty($parurl["base"])) {
         $base = $parurl["base"];
-    }
-    if (! empty($parurl["interface"])) {
-        $interface = $parurl["interface"];
     }
 }
 if (! empty($restauramapa)) {
@@ -351,7 +344,6 @@ if (! isset($mapext) || empty($mapext)) {
 $cachedir_ = $cachedir;
 $dir_tmp_ = $dir_tmp;
 $emailInstituicao_ = $emailInstituicao;
-$locmapserv_ = $locmapserv;
 $locaplic_ = $locaplic;
 // $locsistemas_ = $locsistemas;
 // $locidentifica_ = $locidentifica;
@@ -428,7 +420,6 @@ if (isset($_SESSION["map_file"]) || $g_sid != "" || $g_sid == "undefined") {
 $_SESSION["dir_tmp"] = $dir_tmp_;
 $_SESSION["cachedir"] = $cachedir_;
 $_SESSION["emailInstituicao"] = $emailInstituicao_;
-$_SESSION["locmapserv"] = $locmapserv_;
 $_SESSION["locaplic"] = $locaplic_;
 $_SESSION["mapext"] = $mapext_;
 $_SESSION["ler_extensoes"] = $ler_extensoes_;
@@ -481,21 +472,14 @@ $_SESSION["statusFerramentas"] = $statusFerramentas_;
 $versao = versao();
 $versao = $versao["principal"];
 if (! isset($base) || $base == "") {
-    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-        $base = $locaplic . "/aplicmap/geral1windowsv" . $versao . ".map";
-    } else {
-        if ($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
-            $base = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
-        }
-        if ($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
-            $base = "/var/www/html/i3geo/aplicmap/geral1fedorav" . $versao . ".map";
-        }
-        if ($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
-            $base = "/opt/www/html/i3geo/aplicmap/geral1v" . $versao . ".map";
-        }
-        if ($base == "") {
-            $base = $locaplic . "/aplicmap/geral1v" . $versao . ".map";
-        }
+    if ($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
+        $base = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
+    }
+    if ($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
+        $base = "/var/www/html/i3geo/aplicmap/geral1fedorav" . $versao . ".map";
+    }
+    if ($base == "") {
+        $base = $locaplic . "/aplicmap/geral1v" . $versao . ".map";
     }
 }
 // error_log($base);
@@ -588,7 +572,7 @@ if (isset($url_wms)) {
 }
 
 adaptaLayers($tmpfname, $versao);
-if ($interface != "mashup") {
+if ($interface != "") {
     abreInterface($interface, $caminho);
 }
 
@@ -752,11 +736,7 @@ function ligaTemas()
 function incluiTemasIniciais()
 {
     global $temasa, $mapn, $locaplic, $layers;
-    if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
-        $temasdir = $locaplic . "\\temas";
-    } else {
-        $temasdir = $locaplic . "/temas";
-    }
+    $temasdir = $locaplic . "/temas";
     if (! isset($temasa)) {
         $temasa = "";
     }
@@ -773,14 +753,10 @@ function incluiTemasIniciais()
         if (file_exists($arqt)) {
             $arqtemp = $arqt;
         }
-        if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($locaplic . "\\aplicmap\\" . $arqt . $extensao))) {
-            $arqtemp = $locaplic . "\\aplicmap\\" . $arqt . $extensao;
-        } elseif (file_exists($locaplic . "/aplicmap/" . $arqt . $extensao)) {
+        if (file_exists($locaplic . "/aplicmap/" . $arqt . $extensao)) {
             $arqtemp = $locaplic . "/aplicmap/" . $arqt . $extensao;
         }
-        if ((strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) && (file_exists($temasdir . "\\" . $arqt . $extensao))) {
-            $arqtemp = $temasdir . "\\" . $arqt . $extensao;
-        } elseif (file_exists($temasdir . "/" . $arqt . $extensao)) {
+        if (file_exists($temasdir . "/" . $arqt . $extensao)) {
             $arqtemp = $temasdir . "/" . $arqt . $extensao;
         }
         if ($arqtemp == "") {
@@ -954,15 +930,15 @@ function criaDirMapa($dir_tmp, $cachedir = "")
             if (! file_exists($dir_tmp . "/cache")) {
                 @mkdir($dir_tmp . "/cache", 0744);
                 chmod($dir_tmp . "/cache", 0744);
-                @mkdir($dir_tmp . "/cache/googlemaps", 0744);
-                chmod($dir_tmp . "/cache/googlemaps", 0744);
+                @mkdir($dir_tmp . "/cache/wmts", 0744);
+                chmod($dir_tmp . "/cache/wmts", 0744);
             }
         } else {
             if (! file_exists($cachedir)) {
                 @mkdir($cachedir, 0744);
                 chmod($cachedir, 0744);
-                @mkdir($cachedir . "/googlemaps", 0744);
-                chmod($cachedir . "/googlemaps", 0744);
+                @mkdir($cachedir . "/wmts", 0744);
+                chmod($cachedir . "/wmts", 0744);
             }
         }
         if (file_exists($dir_tmp . "/" . $tmpdirname)) {

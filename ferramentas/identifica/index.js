@@ -36,19 +36,16 @@ i3GEOF.identifica = {
         };
         var p = i3GEOF.identifica._parameters;
         if (p.mustache === "") {
-            i3GEO.janela.abreAguarde();
             var t1 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_mst.html",
                 t2 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_sistemas_mst.html",
                 t3 = i3GEO.configura.locaplic + "/ferramentas/identifica/template_dados_mst.html";
             $.when($.get(t1), $.get(t2), $.get(t3)).done(function (r1, r2, r3) {
-                i3GEO.janela.fechaAguarde();
                 var p = i3GEOF.identifica._parameters;
                 p.mustache = r1[0];
                 p.mustachesistemas = r2[0];
                 p.mustachedados = r3[0];
                 i3GEOF.identifica.html();
             }).fail(function () {
-                i3GEO.janela.fechaAguarde();
                 i3GEO.janela.tempoMsg($trad("erroTpl"));
             });
         } else {
@@ -85,17 +82,8 @@ i3GEOF.identifica = {
         $i("i3GEOidentificaguia6").onclick = function () {
             var p = i3GEOF.identifica._parameters;
             var gh = i3GEO.coordenadas.geohash.encodeGeoHash(p.y, p.x);
-            var linhas = [
-                {
-                    "nome": "GeoHash " + gh,
-                    "click": "window.open('https://geohash.softeng.co/" + gh + "')"
-                }
-            ];
-            var ins = Mustache.render("{{#data}}" + p.mustachesistemas + "{{/data}}", { "data": linhas });
-            $i("i3GEOidentificaSis").innerHTML = ins;
             i3GEO.guias.mostraGuiaFerramenta("i3GEOidentificaguia6", "i3GEOidentificaguia");
             if (i3GEOF.identifica.mostraSistemasAdicionais === true) {
-                i3GEO.janela.abreAguarde();
                 if (i3GEOF.identifica._sistemasAdicionais.length == 0) {
                     i3GEO.request.get({
                         snackbar: false,
@@ -107,7 +95,30 @@ i3GEOF.identifica = {
                         },
                         prog: "/serverapi/miscellaneous/",
                         fn: function (data) {
-                            i3GEOF.identifica.montaListaSistemas(data);
+                            var linhas = [
+                                {
+                                    "nome": "GeoHash " + gh,
+                                    "click": "window.open('https://geohash.softeng.co/" + gh + "')"
+                                }
+                            ];
+                            for (ig = 0; ig < data.length; ig++) {
+                                if (data[ig].PUBLICADO && data[ig].PUBLICADO.toLowerCase() == "sim") {
+                                    sistema = data[ig].NOME;
+                                    exec = data[ig].ABRIR;
+                                    exec = exec.replace("{{x}}", p.x);
+                                    exec = exec.replace("{{y}}", p.y);
+                                    t = "blank";
+                                    if (data[ig].TARGET) {
+                                        t = data[ig].TARGET;
+                                    }
+                                    linhas.push({
+                                        "nome": sistema,
+                                        "click": "window.open('" + exec + "', '" + t + "')"
+                                    });
+                                }
+                            }
+                            var ins = Mustache.render("{{#data}}" + p.mustachesistemas + "{{/data}}", { "data": linhas });
+                            $i("i3GEOidentificaSis").innerHTML = ins;
                         }
                     });
                 } else {
@@ -121,7 +132,6 @@ i3GEOF.identifica = {
         var par = i3GEO.util.getFormData(form);
         par.g_sid = i3GEO.configura.sid;
         if (par.distancia * 1 !== 0) {
-            i3GEO.janela.abreAguarde();
             i3GEO.janela._formModal.block();
             $.get(
                 i3GEO.configura.locaplic + "/ferramentas/buffer/exec.php",
@@ -130,7 +140,6 @@ i3GEOF.identifica = {
                 .done(
                     function (data, status) {
                         i3GEO.janela._formModal.unblock();
-                        i3GEO.janela.fechaAguarde();
                         i3GEO.janela.snackBar({ content: $trad('feito') });
                         i3GEO.mapa.refresh();
                     }
@@ -138,7 +147,6 @@ i3GEOF.identifica = {
                 .fail(
                     function (data) {
                         i3GEO.janela._formModal.unblock();
-                        i3GEO.janela.fechaAguarde();
                         i3GEO.janela.snackBar({ content: data.statusText, style: 'red' });
                     }
                 );
@@ -169,62 +177,9 @@ i3GEOF.identifica = {
         param = y[0] + "_" + y[1] + "_" + y[2] + "_" + s + "_" + x[0] + "_" + x[1] + "_" + x[2] + "_" + w;
         window.open("http://tools.wikimedia.de/~magnus/geo/geohack.php?params=" + param);
     },
-    /*
-     * Function: montaListaSistemas
-     *
-     * Obt&eacute;m a lista de sistemas especiais de consulta.
-     *
-     * O resultado &eacute; inserido no div com id "listaSistemas".
-     *
-     * Cada sistema consiste em uma URL para a qual ser&atilde;o passados os parametros x e y.
-     *
-     */
-    montaListaSistemas: function (data) {
-        i3GEO.janela.fechaAguarde();
-        var l, divins, ig, sistema, pub, exec, temp, t, linhas = [], ltema, i;
-        if (data !== undefined) {
-            if (data && i3GEOF.identifica._sistemasAdicionais.length == 0) {
-                sis = data;
-                for (ig = 0; ig < sis.length; ig++) {
-                    if (sis[ig].PUBLICADO && sis[ig].PUBLICADO.toLowerCase() == "sim") {
-                        sistema = sis[ig].NOME;
-                        exec = sis[ig].ABRIR;
-                        temp = exec.split("?");
-                        if (temp.length !== 2) {
-                            exec += "?";
-                        }
-                        t = "blank";
-                        if (sis[ig].TARGET) {
-                            t = sis[ig].TARGET;
-                        }
-                        i3GEOF.identifica._sistemasAdicionais.push(sistema + "," + exec + "," + t);
-                    }
-                }
-            }
-            if (i3GEOF.identifica._sistemasAdicionais.length > 0) {
-                divins = $i("i3GEOidentificalistaSistemas");
-                linhas = [];
-                if (divins) {
-                    for (l = 0; l < i3GEOF.identifica._sistemasAdicionais.length; l++) {
-                        ltema = i3GEOF.identifica._sistemasAdicionais[l].split(",");
-                        if (ltema.length > 1) {
-                            linhas.push({
-                                "nome": ltema[0],
-                                "click": "i3GEOF.identifica.mostraDadosSistema('" + ltema[1] + "','" + ltema[2] + "')"
-                            });
-                        }
-                    }
-                    temp = Mustache.render("{{#data}}" + i3GEOF.identifica._parameters.mustachesistemas + "{{/data}}", { "data": linhas });
-                    divins.innerHTML = temp;
-                }
-            }
-        }
-    },
     getData: function () {
-        i3GEO.janela.abreAguarde();
         var p = i3GEOF.identifica._parameters;
         var f = function (retorno) {
-            i3GEO.janela.fechaAguarde();
             if (retorno) {
                 i3GEOF.identifica.mostraDadosTema(retorno);
             }
@@ -237,22 +192,6 @@ i3GEOF.identifica = {
             layerNames: p.tema,
             allColumns: true
         });
-    },
-    /*
-     * Function: mostraDadosSistema
-     *
-     * Obt&eacute;m os dados de um sistema para o ponto de coordenadas clicado no mapa
-     *
-     * Parametros:
-     *
-     * exec {String} - url que ser&aacute; aberta
-     *
-     * target {String} (depreciado) - _self|self| onde a url ser&aacute; aberta. Se for "self", ser&aacute; aberta na mesma janela, caso
-     * contr&aacute;rio, em uma nova p&aacute;gina do navegador
-     */
-    mostraDadosSistema: function (exec, target) {
-        exec += "&x=" + i3GEOF.identifica._parameters.x + "&y=" + i3GEOF.identifica._parameters.y;
-        window.open(exec);
     },
     mostraDadosTema: function (retorno) {
         console.log("i3GEOF.identifica.mostraDadosTema()");
@@ -352,7 +291,6 @@ i3GEOF.identifica = {
         }
     },
     filtrar: function (tema, item, valor) {
-        i3GEO.janela.abreAguarde();
         $.get(
             i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php",
             {
@@ -365,19 +303,16 @@ i3GEOF.identifica = {
         )
             .done(
                 function (data, status) {
-                    i3GEO.janela.fechaAguarde();
                     i3GEO.Interface.atualizaTema(data, tema);
                 }
             )
             .fail(
                 function (data) {
-                    i3GEO.janela.fechaAguarde();
                     i3GEO.janela.snackBar({ content: data.statusText, style: 'red' });
                 }
             );
     },
     removeFiltro: function (tema) {
-        i3GEO.janela.abreAguarde();
         $.get(
             i3GEO.configura.locaplic + "/ferramentas/filtro/exec.php",
             {
@@ -389,13 +324,11 @@ i3GEOF.identifica = {
         )
             .done(
                 function (data, status) {
-                    i3GEO.janela.fechaAguarde();
                     i3GEO.Interface.atualizaTema(data, tema);
                 }
             )
             .fail(
                 function (data) {
-                    i3GEO.janela.fechaAguarde();
                     i3GEO.janela.snackBar({ content: data.statusText, style: 'red' });
                 }
             );

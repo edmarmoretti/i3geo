@@ -152,7 +152,7 @@ i3GEO.arvoreDeCamadas =
 				i3GEO.eventos.adicionaEventos("NAVEGAMAPA", ["i3GEO.arvoreDeCamadas.verificaAbrangenciaTemas()"]);
 			}
 			if (config.aposIniciar !== "") {
-				if (jQuery.isFunction(config.aposIniciar)) {
+				if (typeof config.aposIniciar === 'function') {
 					config.aposIniciar.call();
 				}
 			}
@@ -163,9 +163,6 @@ i3GEO.arvoreDeCamadas =
 		if (typeof (console) !== 'undefined')
 			console.info("i3GEO.arvoreDeCamadas.adicionaLayersGr()");
 
-		if (i3GEO.Interface.ATUAL != "openlayers") {
-			return;
-		}
 		//i3GEO.desenho.layergrafico nao e retornado com getLayers
 		var temp = $i(i3GEO.arvoreDeCamadas.config.idListaLayersGr),
 			layers = i3geoOL.getLayersGr(), lista = [], camada = {};
@@ -377,43 +374,41 @@ i3GEO.arvoreDeCamadas =
 		i3GEO.eventos.executaEventos(i3GEO.eventos.ATUALIZAARVORECAMADAS);
 	},
 	adicionaCamadasDeFundo: function (config) {
-		if (i3GEO.Interface.ATUAL == "openlayers") {
-			//camadas de fundo
-			var temp = temp = $i(config.idOnde);
-			if (temp && $("#" + config.idListaFundo).html() == "") {
-				//clone = [{"name":"camadaDeFundo","value":"nenhum","title":$trad("nenhum")}];
-				clone = [];
-				$.each(i3GEO.Interface.LAYERSADICIONAIS, function (i, layer) {
-					camada = {};
-					temp = layer.getProperties();
-					camada.name = "camadaDeFundo";
-					if (temp.preview) {
-						camada.preview = temp.preview;
-					} else {
-						camada.preview = "";
-					}
-					camada.value = temp.name;
-					camada.title = temp.title;
-					if (temp.visible === true) {
-						camada.checked = "checked";
-					} else {
-						camada.checked = "";
-					}
-					clone.push(camada);
-				});
-				var t = Mustache.to_html(
-					"{{#data}}" + i3GEO.template.camadaFundo + "{{/data}}",
-					{ "data": clone }
-				);
-				$("#" + config.idListaFundo).html(t);
-				$("#" + config.idListaFundo + " label").tooltip({
-					animation: false,
-					trigger: "hover",
-					placement: "auto",
-					html: true,
-					template: "<div class='tooltip ' ><div class='tooltip-inner'></div></div>"
-				});
-			}
+		//camadas de fundo
+		var temp = temp = $i(config.idOnde);
+		if (temp && $("#" + config.idListaFundo).html() == "") {
+			//clone = [{"name":"camadaDeFundo","value":"nenhum","title":$trad("nenhum")}];
+			clone = [];
+			$.each(i3GEO.Interface.LAYERSADICIONAIS, function (i, layer) {
+				camada = {};
+				temp = layer.getProperties();
+				camada.name = "camadaDeFundo";
+				if (temp.preview) {
+					camada.preview = temp.preview;
+				} else {
+					camada.preview = "";
+				}
+				camada.value = temp.name;
+				camada.title = temp.title;
+				if (temp.visible === true) {
+					camada.checked = "checked";
+				} else {
+					camada.checked = "";
+				}
+				clone.push(camada);
+			});
+			var t = Mustache.to_html(
+				"{{#data}}" + i3GEO.template.camadaFundo + "{{/data}}",
+				{ "data": clone }
+			);
+			$("#" + config.idListaFundo).html(t);
+			$("#" + config.idListaFundo + " label").tooltip({
+				animation: false,
+				trigger: "hover",
+				placement: "auto",
+				html: true,
+				template: "<div class='tooltip ' ><div class='tooltip-inner'></div></div>"
+			});
 		}
 	},
 	/**
@@ -1053,6 +1048,7 @@ i3GEO.arvoreDeCamadas =
 				t = {};
 				for (j = 0; j < nchaves; j++) {
 					t[chaves[j]] = tema[j];
+					//console.log(chaves[j] + " " + tema[j]);
 				}
 				novo.push(t);
 			}

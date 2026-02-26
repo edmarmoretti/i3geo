@@ -41,6 +41,7 @@ include ($_SESSION["locaplic"]."/admin/php/conexao.php");
 
 define ( "ONDEI3GEO", "../../../.." );
 include "../../../head.php";
+
 $codigo = filter_var ( $_GET ["codigo"], FILTER_SANITIZE_STRING );
 $id_tema = ( int ) $_GET ["id_tema"];
 
@@ -88,7 +89,6 @@ $versao = $versao ["principal"];
 			</blockquote>
             <a onclick="i3GEOadmin.editor.undo('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #0f4c81;" href="#" role="button"> Undo </a>
 			<a onclick="i3GEOadmin.editor.salvar()" class="btn btn-primary" style="color: #0f4c81;" href="#" role="button"> {{{salva}}} </a>
-			<a onclick="i3GEOadmin.editor.preview('<?php echo $codigo;?>')" class="btn btn-primary" style="color: #0f4c81;" href="#" role="button"> Preview </a>
 			<a onclick="i3GEOadmin.editor.testar('<?php echo $codigo;?>')" href="javascript:void(0)" class="btn btn-primary" style="color: #0f4c81;" role="button"> {{{testaLayer}}} </a>
 			<a onclick="window.open('../../../../ms_criamapa.php?temasa=<?php echo $codigo;?>&layers=<?php echo $codigo;?>')" class="btn btn-primary" style="color: #0f4c81;" href="javascript:void(0)"
 				role="button"> {{{testarI3geo}}} </a>
@@ -107,7 +107,7 @@ $versao = $versao ["principal"];
 $(document).ready(function(){
 		//vem de admin/index.js
 		iniciaMenuPrincipal();
-		$('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+		$('ul.dropdown-menu [data-bs-toggle=dropdown]').on('click', function(event) {
 			event.preventDefault();
 			event.stopPropagation();
 			$(this).parent().siblings().removeClass('open');
@@ -124,7 +124,6 @@ $(document).ready(function(){
 		i3GEOadmin.core.dicionario = null;
 
 		i3GEOadmin.editor.dicionario = i3GEO.idioma.objetoIdioma(i3GEOadmin.mapfile.dicionario);
-
 		//traducao
 		var t = $("#titulo");
 		t.html(
@@ -133,6 +132,7 @@ $(document).ready(function(){
 				i3GEOadmin.editor.dicionario
 			)
 		);
+		/*
 		t = $("#ajudantes");
 		t.html(
 			Mustache.to_html(
@@ -140,19 +140,13 @@ $(document).ready(function(){
 				i3GEOadmin.editor.dicionario
 			)
 		);
+		*/
 			i3GEOadmin.core.loginOn();
 			$(".hidden").removeClass('hidden');
 
 		$.material.init();
 		$("#editor").height(parseInt($("#editortemp").height()) + 50 + "px");
 		$("#editortemp").html("").hide();
-		//
-		//servidor utilizado no preview
-		//
-		var protocolo = window.location.href;
-		protocolo = protocolo.split(":")[0];
-
-		i3GEOadmin.editor.servidorPreview = protocolo + "://" + window.location.host + "/<?php echo basename($_SESSION["locaplic"]); ?>/admin/catalogo/mapfile/preview/index.php";
 	});
 </script>
 

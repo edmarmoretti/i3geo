@@ -17,10 +17,14 @@
 		"../pacotes/jsts/jsts_min.js",
 		"../pacotes/proj4js/lib/proj4js-compressed.js",
 		"../pacotes/mustache/mustache.js",
-		"../pacotes/jquery/dist/jquery.min.js",
-		"../pacotes/jquery/jquery-number/jquery.number.min.js",
-		"../pacotes/jquery/jquery-ui/jquery-ui.min.js",
-		"../pacotes/bootstrap/js/bootstrap.min.js",
+		//"../pacotes/jquery/dist/jquery.min.js",
+		"../pacotes/jquery/dist/jquery-4.0.0.min.js",
+		////"../pacotes/jquery/jquery-ui/jquery-ui.min.js",
+		"../pacotes/jquery/jquery-ui-1.14.2/jquery-ui.min.js",
+		//"../pacotes/bootstrap/js/bootstrap.min.js",
+		"../pacotes/bootstrap/bootstrap-5.3.8-dist/js/bootstrap.bundle.min.js",
+		//
+		//"../pacotes/jquery/jquery-number/jquery.number.min.js",
 		"../pacotes/bootstrap-material-design/dist/js/material.min.js",
 		"../pacotes/bootstrap-material-design/snackbarjs-1.1.0/dist/snackbar.min.js",
 		"../pacotes/pickr/pickr.min.js",
@@ -44,7 +48,6 @@
 		"arvoredecamadas.js",
 		"navega.js",
 		"geolocal.js",
-		"social.js",
 		"eventos.js",
 		"arvoredetemas.js",
 		"editor.js",
@@ -72,10 +75,7 @@
 	//css
 	var allCssTags = "";
 	var cssfiles = new Array(
-		//"../css/input.css",
-		//"../css/geral.css",
 		"../pacotes/pickr/themes/classic.min.css"
-		//"../mashups/openlayers.css"
 	);
 	for (i = 0; i < cssfiles.length; i++) {
 		var currentCssTag = "<link rel='stylesheet' type='text/css' href='" + scriptLocation + cssfiles[i] + "'/>";

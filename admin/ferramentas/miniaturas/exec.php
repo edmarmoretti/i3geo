@@ -100,23 +100,15 @@ function verificaMiniatura($map,$tipo,$admin=false)
 		}
 		else{
 			$f = "";
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')){
-				$f = $_SESSION["locaplic"]."/aplicmap/geral1windowsv".$versao.".map";
-			}
-			else{
 				if($f == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 					$f = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 				}
 				if($f == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$f = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
 				}
-				if($f == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-					$f = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-				}
 				if($f == ""){
 					$f = $_SESSION["locaplic"]."/aplicmap/geral1v".$versao.".map";
 				}
-			}
 		}
 		$mapa = ms_newMapObj($f);
 		if($extensao == ".map"){

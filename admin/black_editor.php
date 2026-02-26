@@ -23,7 +23,6 @@ session_write_close();
 <?php
 $configInc = array(
     "debug" => "", //posfixos inserido na carga do script do i3geo
-    "tipo" => "OL", // OL ou OSM
     "inc" => "../interface/inc", //caminho para os includes PHP com os componentes da interface
     "pathjs" => "..", //caminho para o include dos arquivos JS
     "pathcss" => "..", //caminho para o include dos arquivos css
@@ -60,9 +59,6 @@ include ($configInc["inc"] . "/css.php");
     <!-- inclui o nome do usuario logado
     <div id="i3GEONomeLogin"
         style="position: absolute; left: 10px; top: 2px; font-size: 11px; z-index: 50000"></div>
-    -->
-    <!-- Aqui vai o mapa. O div a ser inserido e padronizado e depende da interface usar openlayers ou googlemaps
-    Se os estilos width e height nao estiverem definidos, o tamanho do mapa abrangera a tela toda
     -->
     <div id="mapai3Geo" style="width: 100vw; height: 100vh"></div>
     <!-- aqui sera incluida a escala numerica. E necessario ter o id=i3GEOescalanum para que o valor seja atualizado-->
@@ -194,11 +190,6 @@ include ($configInc["inc"] . "/css.php");
             var config = {
                 //id do elemento HTML onde o corpo do mapa sera renderizado
                 mapBody : "mapai3Geo",
-                //tipo de mapa. Pode ser:
-                //OL - utiliza o OpenLayers e coordenadas geograficas
-                //OSM - utiliza o OpenLayers e o OpenStreetMap como fundo, em projecao semelhante ao GoogleMaps
-                //GM - utiliza o GoogleMaps como motor de controle do mapa
-                mapType : "OL",
                 //mostra ou nao a barra de progresso do carregamento de camadas
                 layerProgressBar: false,
 
@@ -211,7 +202,6 @@ include ($configInc["inc"] . "/css.php");
                 //opacidade default para camadas que nao sejam do tipo linha ou ponto
                 //a opacidade sera aplicada ao objeto HTML e nao ao LAYER original
                 //se for vazio, sera utilizado o valor definido no LAYER original
-                //Nao se aplica na interface googlemaps
                 layerOpacity : "",
                 //Funcao que sera executada apos a inicializacao do mapa
                 afterStart : function() {
@@ -333,7 +323,6 @@ include ($configInc["inc"] . "/css.php");
                 buscainde : {},
                 //ferramenta mapa de referencia
                 //difere das propriedades do mapa de referencia
-                //utilizado pela api openlayers ou googlemaps
                 opcoesmaparef : {
                     //opcoes de imagens. As imagens devem existir em i3geo/imagens e serem do tipo png
                     images : [ {
@@ -389,30 +378,6 @@ include ($configInc["inc"] . "/css.php");
                 //ver https://openlayers.org/en/latest/apidoc/ol.View.html
                 ViewOptions : {
 
-                }
-                },
-                //configuracoes especificas para a interface GoogleMaps
-                googleMaps : {
-                //opcoes de inicializacao do mapa conforme definido na API do GoogleMaps
-                MapOptions : {
-                    //estilo que sera utilizado no mapa
-                    //pode ser um desses: roadmap, satellite, hybrid, terrain, Red, Countries, Night, Blue, Greyscale, No roads, Mixed, Chilled
-                    //ver i3GEO.Interface.googleMaps.ESTILOS
-                    mapTypeId : "roadmap",
-                    scaleControl : true,
-                    mapTypeControl : true,
-                    mapTypeControlOptions : {
-                    //position : google.maps.ControlPosition.LEFT_BOTTOM
-                    },
-                    zoomControl : true,
-                    zoomControlOptions : {
-                    //style : google.maps.ZoomControlStyle.SMALL,
-                    //position : google.maps.ControlPosition.LEFT_CENTER
-                    },
-                    streetViewControl : true,
-                    streetViewControlOptions : {
-                    //position : google.maps.ControlPosition.LEFT_CENTER
-                    }
                 }
                 }
             };

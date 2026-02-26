@@ -36,26 +36,16 @@ function heatmapMapfile(){
 		$versao = $versao["principal"];
 		if(!isset($base) || $base == "")
 		{
-			if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-			{
-				$base = $locaplic."/aplicmap/geral1windowsv".$versao.".map";
-			}
-			else
-			{
 				if($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv'.$versao.'.map')){
 					$base = "/var/www/i3geo/aplicmap/geral1debianv".$versao.".map";
 				}
 				if($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
 					$base = "/var/www/html/i3geo/aplicmap/geral1fedorav".$versao.".map";
 				}
-				if($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav'.$versao.'.map')){
-					$base = "/opt/www/html/i3geo/aplicmap/geral1v".$versao.".map";
-				}
 				if($base == "")
 				{
 					$base = $locaplic."/aplicmap/geral1v".$versao.".map";
 				}
-			}
 		}
 		$map_file = $dir_tmp."/".nomeRandomico().".map";
 

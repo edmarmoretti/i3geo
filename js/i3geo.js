@@ -52,10 +52,9 @@ Retorno:
 
 object - objeto javaScript
  */
-$i = function(id)
-{return document.getElementById(id);};
+$i = function (id) { return document.getElementById(id); };
 
-(function(){
+(function () {
 	var scriptLocation = "";
 	var scripts = document.getElementsByTagName('script');
 	var i = 0;
@@ -71,8 +70,9 @@ $i = function(id)
 		}
 	}
 	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/font/material-icons.css'/>");
-	document.write("<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Roboto:300,400,500,700'>");
-	document.write("<link rel='stylesheet' type='text/css' href='//fonts.googleapis.com/css?family=Gelasio'>");
+	document.write("<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=optional'/>");
+	document.write("<link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Gelasio&display=optional'/>");
 	document.write("<link rel='stylesheet' type='text/css' href='" + scriptLocation + "../css/i3geo.css.php'></link>");
+	document.write("<script type='preload' src='" + scriptLocation + "i3geo_tudo_compacto.js.php' as='script'></script>");
 	document.write("<script type='text/javascript' src='" + scriptLocation + "i3geo_tudo_compacto.js.php'></script>");
 })();

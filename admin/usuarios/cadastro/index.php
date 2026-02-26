@@ -27,7 +27,7 @@ include "../../head.php";
         <div class="col-md-12" id="titulo">
             <div class="well hidden">
                 <span class="pull-right">&nbsp;&nbsp;</span>
-                <button data-toggle="modal" data-target="#modalFiltro" class="btn btn-primary btn-fab btn-fab-mini pull-right">
+                <button data-bs-toggle="modal" data-target="#modalFiltro" class="btn btn-primary btn-fab btn-fab-mini pull-right">
                     <i class="material-icons">search</i>
                 </button>
                 <h2>
@@ -35,7 +35,7 @@ include "../../head.php";
                 </h2>
                 <blockquote>
                     {{{txtDesc}}}
-                    <a href="#expandeTxt" data-toggle="collapse" class="collapsed">
+                    <a href="#expandeTxt" data-bs-toggle="collapse"class="collapsed">
                         <span class="text-primary readMore">
                             <i class="material-icons">keyboard_arrow_down</i>
                         </span>
@@ -74,7 +74,7 @@ include ("templates/templateFiltro.php");
 	$(document).ready(function(){
 		//vem de admin/index.js
 		iniciaMenuPrincipal();
-		$('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+		$('ul.dropdown-menu [data-bs-toggle=dropdown]').on('click', function(event) {
 			event.preventDefault();
 			event.stopPropagation();
 			$(this).parent().siblings().removeClass('open');

@@ -1072,30 +1072,19 @@ class LayerServer
             $this->postgis_mapa = $postgis_mapa;
             if (! file_exists($this->map)) {
                 $maptemp = ms_newMapObj($locaplic . "/temas/" . $this->map . ".map");
-                // if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN'))
-                // {$this->map = $locaplic."/aplicmap/geral1windows.map";}
-                // else
-                // {$this->map = $locaplic."/aplicmap/geral1.map";}
 
                 $versao = $this->versao();
                 $versao = $versao["principal"];
                 if (! isset($base) || $base == "") {
-                    if (strtoupper(substr(PHP_OS, 0, 3) == 'WIN')) {
-                        $base = $locaplic . "/aplicmap/geral1windowsv" . $versao . ".map";
-                    } else {
                         if ($base == "" && file_exists('/var/www/i3geo/aplicmap/geral1debianv' . $versao . '.map')) {
                             $base = "/var/www/i3geo/aplicmap/geral1debianv" . $versao . ".map";
                         }
                         if ($base == "" && file_exists('/var/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
                             $base = "/var/www/html/i3geo/aplicmap/geral1fedorav" . $versao . ".map";
                         }
-                        if ($base == "" && file_exists('/opt/www/html/i3geo/aplicmap/geral1fedorav' . $versao . '.map')) {
-                            $base = "/opt/www/html/i3geo/aplicmap/geral1v" . $versao . ".map";
-                        }
                         if ($base == "") {
                             $base = $locaplic . "/aplicmap/geral1v" . $versao . ".map";
                         }
-                    }
                 }
                 $this->map = $base;
 

@@ -350,8 +350,8 @@ i3GEO.coordenadas =
 	 */
 	atualizaGeo: function (dmsx, dmsy, prefixo) {
 		var x = dmsx.split(" "), y = dmsy.split(" ");
-		x[2] = $.number(x[2], 2, $trad("dec"), $trad("mil"));
-		y[2] = $.number(y[2], 2, $trad("dec"), $trad("mil"));
+		x[2] = i3GEO.NumberFormat(x[2], 2, $trad("dec"), $trad("mil"));
+		y[2] = i3GEO.NumberFormat(y[2], 2, $trad("dec"), $trad("mil"));
 		if ($i(prefixo + "xg")) {
 			$i(prefixo + "xg").value = x[0];
 			$i(prefixo + "xm").value = x[1];
@@ -526,8 +526,8 @@ i3GEO.coordenadas =
 		} else {
 			p = i3GEO.coordenadas.calculaProj4(i3GEO.coordenadas.defOrigem, destino, x, y);
 		}
-		p.x = $.number(p.x, 4, $trad("dec"), $trad("mil"));
-		p.y = $.number(p.y, 4, $trad("dec"), $trad("mil"));
+		p.x = i3GEO.NumberFormat(p.x, 4, $trad("dec"), $trad("mil"));
+		p.y = i3GEO.NumberFormat(p.y, 4, $trad("dec"), $trad("mil"));
 		iu.defineValor(onde + configProj + "X", "value", p.x);
 		iu.defineValor(onde + configProj + "Y", "value", p.y);
 		i3GEO.coordenadas.MODOTEXTO += temp.titulo + " - X: " + p.x + " Y: " + p.y + "<br><br>";

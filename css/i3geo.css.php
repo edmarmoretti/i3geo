@@ -8,7 +8,10 @@ para nao selecionar
 -o-user-select: none;
 user-select: none;
 }
-.bd input, .bd textarea, #escala input, .copyToMemory {
+.bd input,
+.bd textarea,
+#escala input,
+.copyToMemory {
 -webkit-user-select: text;
 -khtml-user-select: text;
 -moz-user-select: text;
@@ -20,26 +23,26 @@ display: block;
 top: 4em;
 zIndex: 5000;
 }
-#i3GEOlogoMarca > table {
+#i3GEOlogoMarca>table {
 width: 100%;
 }
 .i3GEOlogoMarca {
-font-size:14pt;
-padding:5px;
+font-size: 14pt;
+padding: 5px;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 background-color: white;
 }
-#i3GEOlogoMarca > img {
-width:inherit;
-padding:5px;
+#i3GEOlogoMarca>img {
+width: inherit;
+padding: 5px;
 }
 /*
 Banner inicial
 */
 #i3GEOlogoMarca {
-width:95%;
-max-width:600px;
-text-align:center;
+width: 95%;
+max-width: 600px;
+text-align: center;
 margin: auto auto;
 box-shadow: 0 1px 13px gray;
 border-radius: 5px;
@@ -56,8 +59,8 @@ Popup do identifica no openlayers 3
 .ol-popup {
 position: absolute;
 background-color: white;
--webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+-webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
 padding: 8px;
 border-radius: 10px;
 border: 1px solid #cccccc;
@@ -65,7 +68,8 @@ bottom: 12px;
 left: -50px;
 z-Index: 2;
 }
-.ol-popup:after, .ol-popup:before {
+.ol-popup:after,
+.ol-popup:before {
 top: 100%;
 border: solid transparent;
 content: " ";
@@ -91,7 +95,7 @@ text-decoration: none;
 position: absolute;
 top: 2px;
 right: 1px;
-cursor:pointer;
+cursor: pointer;
 }
 .ol-popup-closer:after {
 content: "\2716";
@@ -99,26 +103,21 @@ color: red;
 font-size: 16px;
 }
 /*
-Ajusta altura dos controles do googlemaps
-*/
-div.gmnoprint {
-padding-top: 10px;
-}
-/*
 Utilizado na janela do buscador INDE
 */
-.meta-param, .meta-value{
+.meta-param,
+.meta-value {
 text-align: left;
 font-size: 12px;
 padding: 5px;
 }
 .mensagemAjuda {
-width:95%;
-padding:2;
-vertical-align:top;
+width: 95%;
+padding: 2;
+vertical-align: top;
 }
 .mensagemAjuda th {
-font-family:Verdana, Arial, Helvetica, sans-serif;
+font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 8pt;
 border: 1px solid #B1CDEB;
 text-align: left;
@@ -128,13 +127,14 @@ padding-right: 11px;
 .botoesLegendaFlutuante {
 font-size: 10px;
 }
-.i3GEOconteudoLegendaClass{
+.i3GEOconteudoLegendaClass {
 font-family: Verdana, Arial, Helvetica, sans-serif;
 }
 .olPopupCloseBox {
 margin-top: -2px;
 }
-.i3GEOarvCat input[type=radio], .i3GEOarvCat input[type=checkbox] {
+.i3GEOarvCat input[type=radio],
+.i3GEOarvCat input[type=checkbox] {
 display: none;
 }
 /*
@@ -162,14 +162,15 @@ cursor : pointer;
 }
 */
 .i3GEOarvCat label {
-left:12px;
+left: 12px;
 }
 .i3GEOarvCam .ygtvitem {
 text-align: left;
 margin-top: 3px;
 margin-bottom: 10px;
 }
-.i3GEOarvCam input[type=radio], .i3GEOarvCam input[type=checkbox] {
+.i3GEOarvCam input[type=radio],
+.i3GEOarvCam input[type=checkbox] {
 display: none;
 }
 /*
@@ -206,7 +207,7 @@ margin: auto;
 text-align: left;
 cursor: pointer;
 top: -1px;
-font-weight : bold;
+font-weight: bold;
 }
 .i3GEOarvCamTema {
 font-size: 12pt;
@@ -214,27 +215,30 @@ margin: auto;
 text-align: left;
 cursor: pointer;
 top: -2px;
-font-weight : bold;
+font-weight: bold;
 }
 .i3GEOarvCamTemaIE {
 text-align: left;
 font-size: 12pt;
 vertical-align: middle;
 display: table-cell;
-font-weight : bold;
+font-weight: bold;
 }
 .i3GEOarvCam .ygtvdepthcell {
-background : none;
+background: none;
 display: none;
 }
-.i3GEOarvCamTema input, .i3GEOarvCamTemaIE input {
+.i3GEOarvCamTema input,
+.i3GEOarvCamTemaIE input {
 cursor: pointer;
 }
-.i3GEOarvCamTema span, .i3GEOarvCamTemaIE span {
+.i3GEOarvCamTema span,
+.i3GEOarvCamTemaIE span {
 vertical-align: top;
 cursor: move;
 }
-.i3GEOarvCamTema img, .i3GEOarvCamTemaIE img {
+.i3GEOarvCamTema img,
+.i3GEOarvCamTemaIE img {
 width: 15px;
 height: 15px;
 background-size: 15px;
@@ -242,7 +246,8 @@ position: relative;
 top: 1px;
 margin-left: 2px;
 }
-.i3GEOarvCamTemaIco img, .i3GEOarvCamTemaIcoIE img {
+.i3GEOarvCamTemaIco img,
+.i3GEOarvCamTemaIcoIE img {
 width: 15px;
 height: 15px;
 background-size: 15px;
@@ -250,7 +255,8 @@ position: relative;
 top: -1px;
 margin-left: 3px;
 }
-.i3GEOarvCamTemaIco .arvCamFarol, .i3GEOarvCamTemaIcoIE .Farol {
+.i3GEOarvCamTemaIco .arvCamFarol,
+.i3GEOarvCamTemaIcoIE .Farol {
 width: 11px;
 height: 11px;
 }
@@ -294,11 +300,11 @@ background-image: url("../imagens/gisicons/settings.png");
 }
 */
 .i3GEObalaoInfo {
-position : absolute;
-textAlign : left;
-background : white;
+position: absolute;
+textAlign: left;
+background: white;
 -moz-opacity: 0.9;
-opacity:.90;
+opacity: .90;
 filter: alpha(opacity=90);
 filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=90);
 -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
@@ -309,9 +315,9 @@ width: 90%;
 padding: 5px;
 margin: 7px;
 }
-.i3GeoExemploImg{
-margin:6px;
-cursor:text;
+.i3GeoExemploImg {
+margin: 6px;
+cursor: text;
 border: 0px solid gray;
 box-shadow: 1px 1px 1px 1px #D3D3D3;
 border-radius: 5px;
@@ -355,8 +361,8 @@ font-size: 8pt;
 background-color: #e5e5e5;
 color: black;
 padding: 3px;
--webkit-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
-filter: drop-shadow(0 1px 4px rgba(0,0,0,0.2));
+-webkit-filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
+filter: drop-shadow(0 1px 4px rgba(0, 0, 0, 0.2));
 border-radius: 6px;
 }
 fieldset {
@@ -548,12 +554,12 @@ text-align: left;
 font-size: 11pt;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 color: #26298D;
-outline : none;
+outline: none;
 }
 A:hover {
 color: #4142ff;
 font-family: Verdana, Arial, Helvetica, sans-serif;
-outline : none;
+outline: none;
 }
 img {
 border: 0px solid #FFFFFF;
@@ -830,7 +836,11 @@ font-family: Verdana, Arial, Helvetica, sans-serif;
 font-size: 12px;
 text-align: left;
 }
-#corpoMapa,#corpoMapaL,#corpoMapaO,#corpoMapaN,#corpoMapaS {
+#corpoMapa,
+#corpoMapaL,
+#corpoMapaO,
+#corpoMapaN,
+#corpoMapaS {
 position: absolute;
 left: 0px;
 top: 0px;
@@ -901,12 +911,15 @@ background-color: white;
 font-family: Verdana, Arial, Helvetica, sans-serif;
 z-index: 1000;
 }
-#legenda,#legendai,#corpoLegi,#listaPropriedades {
+#legenda,
+#legendai,
+#corpoLegi,
+#listaPropriedades {
 overflow: auto;
 background-color: white;
 text-align: left;
 }
-#listaTemas{
+#listaTemas {
 background-color: white;
 text-align: left;
 overflow: none;
@@ -1183,7 +1196,8 @@ border: 1px solid #DDDDDD;
 height: 22px;
 border-radius: 2px;
 }
-.styled-select select, .styled-select150 select {
+.styled-select select,
+.styled-select150 select {
 width: 100%;
 height: 22px;
 border: 0;
@@ -1249,7 +1263,7 @@ display: none !important;
 input[type="checkbox"] {
 display: none !important;
 }
-.legenda > label + input[type="checkbox"]:disabled {
+.legenda>label+input[type="checkbox"]:disabled {
 display: none !important;
 }
 }

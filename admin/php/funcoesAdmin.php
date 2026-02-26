@@ -911,14 +911,13 @@ function limpaCacheImg($locaplic, $codigo, $cachedir, $dir_tmp){
 		$nome = strip_tags ( $nome );
 		$nome = htmlspecialchars ( $nome, ENT_QUOTES );
 		$dirs [] = $d . "/" . $nome;
-		$dirs [] = $d . "/googlemaps/" . $nome;
 		$dirs [] = $d . "/wmts/" . $nome;
 		foreach ( $dirs as $dir ) {
 			\admin\php\funcoesAdmin\rrmdirImg ( $dir );
 		}
 	}
 	$nome = $nomes[0];
-	if(file_exists($d . "/" . $nome) || file_exists($d . "/googlemaps/" . $nome) || file_exists($d . "/wmts/" . $nome)){
+	if(file_exists($d . "/" . $nome) || file_exists($d . "/wmts/" . $nome)){
 		return false;
 	} else {
 		return true;

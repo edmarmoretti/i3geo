@@ -45,7 +45,6 @@
  *
  * Globais:
  *
- * $interface - nome da interface que ser&aacute; utilizada pelo mapa padrao|openlayers|googlemaps|googleearth|flamingo . O valor de $interface &eacute; tamb&eacute;m armazenado no metadata "interface" do objeto Map, podendo ser utilizada em outros programas do i3Geo.
  *
  * $openid - indica se o usu&aacute;rio foi ou n&atilde;o autenticado em alguma rede social (veja i3geo/pacotes/openid)
  *
@@ -62,7 +61,6 @@
  *
  * $h - Altura da imagem do mapa.
  *
- * $locmapserv - Vari&aacute;vel definida no arquivo ms_configura.php que indica nome do mapserver cgi.
  *
  * $kmlurl - url de um arquivo kml que ser&aacute; inserido no mapa. V&aacute;lido para a interface google maps
  *
@@ -134,49 +132,6 @@
             $layer->setmetadata("olopacity", $layer->opacity);
             // error_log($layer->name);
         }
-        $m->save($_SESSION["map_file"]);
-    }
-    if ($_SESSION["interface"] == "googlemaps") {
-        $m = ms_newMapObj($_SESSION["map_file"]);
-        $e = $m->extent;
-        $ext = ($e->minx) . " " . ($e->miny) . " " . ($e->maxx) . " " . ($e->maxy);
-        //if ($_SESSION["interface"] == "googlemaps") {
-            $m->setProjection("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m");
-        //}
-        $c = $m->numlayers;
-        for ($i = 0; $i < $c; ++ $i) {
-            $layer = $m->getlayer($i);
-            if ($layer->status == 2) {
-                $layer->setmetadata("gmstatus", "DEFAULT");
-            } else {
-                $layer->setmetadata("gmstatus", "OFF");
-            }
-            $layer->setmetadata("gmopacity", $layer->opacity);
-            if ($layer->name == "mundo" || $layer->name == "estados") {
-                $layer->set("status", MS_OFF);
-            }
-            if ($layer->type == MS_LAYER_POLYGON || $layer->type == MS_LAYER_RASTER) {
-                if ($layer->opacity == "" || $layer->opacity == 100) {
-                    $layer->set("opacity", 50);
-                }
-            }
-            if ($layer->name == "rosadosventos" || $layer->name == "copyright") {
-                $layer->set("status", MS_DELETE);
-            }
-        }
-        $temp = $m->scalebar;
-        $temp->set("status", MS_OFF);
-        $c = $m->imagecolor;
-        $c->setrgb(255, 255, 255);
-        if ($_SESSION["interface"] == "googleearth") {
-            $m->selectOutputFormat("jpeg");
-            $of = $m->outputformat;
-            $of->set("driver", "AGG/PNG");
-        } else {
-            $of = $m->outputformat;
-        }
-        $of->set("imagemode", MS_IMAGEMODE_RGBA);
-        $of->set("transparent", MS_ON);
         $m->save($_SESSION["map_file"]);
     }
     $protocolo = explode("/", $_SERVER['SERVER_PROTOCOL']);
@@ -289,7 +244,6 @@
     $res["mapres"] = $m->mapa->resolution;
     $res["pixelsize"] = $celula;
     $res["mapfile"] = "";
-    $res["cgi"] = ""; // $locmapserv;
     $res["extentTotal"] = $ext;
     $geoip = "nao";
     $res["geoip"] = $geoip;
