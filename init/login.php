@@ -15,7 +15,7 @@ include "head.php";
 	<nav class="navbar navbar-default navbar-fixed-top">
 		<div class="container-fluid">
 			<div class="navbar-header">
-				<button type="button" title="icon-bar" class="navbar-toggle collapsed" data-toggle="collapse"
+				<button type="button" title="icon-bar" class="navbar-toggle collapsed" data-bs-toggle="collapse"
 					data-target="#navbar" aria-expanded="false" aria-controls="navbar">
 					<span class="sr-only"></span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span
 						class="icon-bar"></span>

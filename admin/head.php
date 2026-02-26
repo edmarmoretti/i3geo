@@ -174,7 +174,7 @@ body {
 	z-index: 10000;
 }
 
-.panel-heading.icon [data-toggle="collapse"]:after {
+.panel-heading.icon [data-bs-toggle="collapse"]:after {
 	font-family: 'FontAwesome';
 	content: "\f054";
 	float: right;
@@ -189,7 +189,7 @@ body {
 	transform: rotate(-90deg);
 }
 
-.panel-heading.icon [data-toggle="collapse"].collapsed:after {
+.panel-heading.icon [data-bs-toggle="collapse"].collapsed:after {
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);

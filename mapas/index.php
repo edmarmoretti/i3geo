@@ -14,7 +14,7 @@ include "../init/head.php";
 	width: 100%;
 }
 
-.panel-heading [data-toggle="collapse"]:after {
+.panel-heading [data-bs-toggle="collapse"]:after {
 	font-family: 'FontAwesome';
 	content: "\f054";
 	float: right;
@@ -29,7 +29,7 @@ include "../init/head.php";
 	transform: rotate(-90deg);
 }
 
-.panel-heading [data-toggle="collapse"].collapsed:after {
+.panel-heading [data-bs-toggle="collapse"].collapsed:after {
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);

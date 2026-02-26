@@ -24,7 +24,7 @@ include "../../head.php";
 	$(document).ready(function(){
 		//vem de admin/index.js
 		iniciaMenuPrincipal();
-		$('ul.dropdown-menu [data-toggle=dropdown]').on('click', function(event) {
+		$('ul.dropdown-menu [data-bs-toggle=dropdown]').on('click', function(event) {
 			event.preventDefault();
 			event.stopPropagation();
 			$(this).parent().siblings().removeClass('open');

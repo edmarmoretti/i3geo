@@ -1,5 +1,4 @@
-<style>
-.panel-heading [data-toggle="collapse"]:after {
+<style>.panel-heading [data-bs-toggle="collapse"]:after {
 	font-family: 'FontAwesome';
 	content: "\f054";
 	float: right;
@@ -14,14 +13,16 @@
 	transform: rotate(-90deg);
 }
 
-.panel-heading [data-toggle="collapse"].collapsed:after {
+.panel-heading [data-bs-toggle="collapse"].collapsed:after {
 	-webkit-transform: rotate(90deg);
 	-moz-transform: rotate(90deg);
 	-ms-transform: rotate(90deg);
 	-o-transform: rotate(90deg);
 	transform: rotate(90deg);
 }
-.list-group-separator{
+
+.list-group-separator {
 	width: 100%;
 }
+
 </style>
