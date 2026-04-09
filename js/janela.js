@@ -435,7 +435,8 @@ i3GEO.janela =
 				handler: f2
 			});
 		}
-		msg.html("<h4 class='alertTitulo'>" + pergunta + "</h4><div class='form-group condensed' id='confirmaFooter'></div>");
+		msg.html("<h4 class='alertTitulo'></h4><div class='form-group condensed' id='confirmaFooter'></div>");
+		msg.find(".alertTitulo").text(pergunta);
 		var ins = "";
 		$.each(b, function (index, value) {
 			ins = Mustache.render(i3GEO.template.botoes.padrao, { style: 'margin-right:10px;', text: value.text });
