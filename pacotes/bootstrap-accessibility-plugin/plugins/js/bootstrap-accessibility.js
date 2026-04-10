@@ -521,8 +521,9 @@ CC0: http://creativecommons.org/publicdomain/zero/1.0/
 
           var tabName = document.createElement('span')
           tabName.setAttribute('class', 'sr-only')
-          tabName.innerHTML='Slide ' + (i+1)
-          if (caption) tabName.innerHTML += ": " +  caption
+          var tabLabel = 'Slide ' + (i + 1)
+          if (caption) tabLabel += ': ' + caption
+          tabName.textContent = tabLabel
           $tab.appendChild(tabName)
 
          }
