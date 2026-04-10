@@ -10,6 +10,15 @@ i3GEO.busca = {
         "ondeTemasMapa": "",
         "templateTemasMapa": ""
     },
+    escapeHtml: function (value) {
+        return String(value)
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#39;")
+            .replace(/\//g, "&#x2F;");
+    },
     carregaTemplates: function () {
         if (!i3GEO.template.buscaEmTemas) {
             $.get(i3GEO.busca.config.templateTemasMapa, function (template) {
@@ -19,7 +28,7 @@ i3GEO.busca = {
         }
     },
     aguarde: function () {
-        return '<div class="alert alert-warning" role="alert">' + $trad("o1") + '</div>';
+        return '<div class="alert alert-warning" role="alert">' + i3GEO.busca.escapeHtml($trad("o1")) + '</div>';
     },
     inicia: function (obj) {
         if (typeof (console) !== 'undefined')
@@ -49,7 +58,8 @@ i3GEO.busca = {
             i3GEO.busca.carregaTemplates();
             return;
         } else {
-            var palavra = $(config.ondeConteiner).find(config.inputOndePalavra).val();
+            var ondeConteiner = $($.find(config.ondeConteiner));
+            var palavra = ondeConteiner.find(config.inputOndePalavra).val();
             if (palavra != "") {
                 i3GEO.busca.PALAVRA = i3GEO.util.removeAcentos(palavra);
             } else {
@@ -57,7 +67,7 @@ i3GEO.busca = {
                 return false;
             }
             //faz as buscas
-            $(config.ondeConteiner).find(config.inputTemasMapa).html(i3GEO.busca.aguarde());
+            ondeConteiner.find(config.inputTemasMapa).html(i3GEO.busca.aguarde());
             i3GEO.busca.searchInLayers(i3GEO.busca.resultadoTemas, i3GEO.busca.PALAVRA);
         }
     },
