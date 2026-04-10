@@ -821,7 +821,7 @@ Outros parametros devem ser enviados via form
 					<button style="margin-right: 10px;" type="button" class="btn btn-primary btn-raised pull-left"
 						onclick="$(this).parent().find('input[type=file]').click();">SLD</button>
 					<input name="i3GEOaplicarsld"
-						onchange="$(this).parent().find('.form-control').html($(this).val().split(/[\\|/]/).pop());"
+						onchange="$(this).parent().find('.form-control').text($(this).val().split(/[\\|/]/).pop());"
 						style="display: none;" type="file"> <span class="form-control upload"></span>
 				</div>
 				<br>
