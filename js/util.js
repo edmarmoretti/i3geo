@@ -2182,16 +2182,24 @@ i3GEO.util =
 		if (c && c.style) {
 			//c.style.backgroundColor = "white";
 		}
+		var escapaHtml = function(textoSeguro) {
+			return String(textoSeguro)
+				.replace(/&/g, "&amp;")
+				.replace(/</g, "&lt;")
+				.replace(/>/g, "&gt;")
+				.replace(/"/g, "&quot;")
+				.replace(/'/g, "&#39;");
+		};
 		botoes = "<ul class='proximoAnterior pager condensed'>";
 		if (anterior !== "") {
 			anterior = anterior.replace("()", "");
 			botoes +=
-				"<li><a onclick='" + anterior + "();$(\"#" + container + "\").get(0).scrollIntoView();' class='withripple condensed' href='javascript:void(0)'><i class='material-icons'>navigate_before</i> " + $trad("anterior") + "</a></li>";
+				"<li><a onclick='" + anterior + "();$(\"#" + container + "\").get(0).scrollIntoView();' class='withripple condensed' href='javascript:void(0)'><i class='material-icons'>navigate_before</i> " + escapaHtml($trad("anterior")) + "</a></li>";
 		}
 		if (proxima !== "") {
 			proxima = proxima.replace("()", "");
 			botoes +=
-				"<li><a onclick='" + proxima + "();$(\"#" + container + "\").get(0).scrollIntoView();' class='withripple condensed' href='javascript:void(0)'>" + $trad("proximo") + " <i class='material-icons'>navigate_next</i></a></li>";
+				"<li><a onclick='" + proxima + "();$(\"#" + container + "\").get(0).scrollIntoView();' class='withripple condensed' href='javascript:void(0)'>" + escapaHtml($trad("proximo")) + " <i class='material-icons'>navigate_next</i></a></li>";
 		}
 		botoes += "</ul>";
 		if (onde) {
