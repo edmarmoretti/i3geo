@@ -9,7 +9,11 @@ document.body.appendChild(novoel);
 
 //var g_sid=window.opener.parent.g_sid;
 
-document.getElementById("mapa").innerHTML = "<img src=" + window.opener.parent.document.getElementById("img").src + " />";
+var mapaEl = document.getElementById("mapa");
+mapaEl.textContent = "";
+var mapaImg = document.createElement("img");
+mapaImg.src = window.opener.parent.document.getElementById("img").src;
+mapaEl.appendChild(mapaImg);
 document.getElementById("legenda").innerHTML = window.opener.g_legendaHTML;
 document.getElementById("escalanumerica").innerHTML = "1: " + window.opener.parent.i3GEO.parametros.mapscale;
 
