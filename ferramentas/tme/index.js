@@ -303,15 +303,10 @@ i3GEOF.tme = {
 					i3GEO.configura.locaplic + "/ferramentas/cesium/kml3d.php?"
 					+ "&g_sid=" + i3GEO.configura.sid
 					+ "&mapext=" + i3GEO.util.extOSM2Geo(i3GEO.parametros.mapexten);
-				var ins =
-					"<h5>" + $trad('abreNoCesium', i3GEOF.tme.dicionario)
-					+ "</h5><a href='"
-					+ url
-					+ "' target='new' >"
-					+ url
-					+ "</a>";
-
-				$("#i3GEOTMEresultado").html(ins);
+				var $resultado = $("#i3GEOTMEresultado");
+				$resultado.empty();
+				$("<h5>").text($trad('abreNoCesium', i3GEOF.tme.dicionario)).appendTo($resultado);
+				$("<a>").attr("href", url).attr("target", "new").text(url).appendTo($resultado);
 			},
 			btn: btn,
 			par: par,
