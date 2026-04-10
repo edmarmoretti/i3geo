@@ -22,7 +22,7 @@ i3GEO.catalogoRegioes = {
         },
         DADOS: "",
         aguarde: function(){
-            $("#" + i3GEO.catalogoRegioes.config.idCatalogoNavegacao).html($trad("o1"));
+            $("#" + i3GEO.catalogoRegioes.config.idCatalogoNavegacao).text($trad("o1"));
         },
         atualizaMigalha: function(){
             var migalha = i3GEO.catalogoRegioes.MIGALHA;
