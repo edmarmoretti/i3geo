@@ -65,7 +65,7 @@ i3GEO.catalogoMapas = {
 			console.info("i3GEO.catalogoMapas.inicia");
 
 		var t = Mustache.to_html(
-				$($("#" + i3GEO.catalogoMapas.config.idOndeMigalha).attr("data-template")).html(),
+				$($.find($("#" + i3GEO.catalogoMapas.config.idOndeMigalha).attr("data-template"))).html(),
 				{"nome":$trad("x57"),"onclick":"i3GEO.catalogoMapas.mostraCatalogoPrincipal()"}
 			);
 
