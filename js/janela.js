@@ -222,7 +222,7 @@ i3GEO.janela =
 			$(i3GEO.janela.closeModal).appendTo("body");
 			i3GEO.janela.closeModal.modal("show");
 		} else if (texto != "") {
-			$("#i3GEOMensagemCloseModal").html(texto);
+			$("#i3GEOMensagemCloseModal").text(texto);
 			i3GEO.janela.closeModal.modal("show");
 		}
 		if (texto == "") {
