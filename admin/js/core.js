@@ -64,8 +64,10 @@ if (typeof jQuery != 'undefined') {
 			var html = '<div class="alert alert-danger alert-dismissible" role="alert">'
 				+ '<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
 				+ '<strong>Erro!</strong> '
-				+ erro;
-			$(".navbar-fixed-bottom .container").html(html);
+				+ '<span class="i3geo-erro-msg"></span></div>';
+			var $container = $(".navbar-fixed-bottom .container");
+			$container.html(html);
+			$container.find(".i3geo-erro-msg").text(erro);
 		},
 		fechaModal: function (id) {
 			$("#" + id).modal("hide");
