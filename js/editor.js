@@ -1186,6 +1186,9 @@ i3GEO.editor =
     },
     table: function (seletor) {
         i3GEO.editor.table.seletor = seletor;
+        var escHtml = function (valor) {
+            return $("<div/>").text(valor == null ? "" : String(valor)).html();
+        };
         var keys, propriedades = [], id, temp, f, geos = i3GEO.desenho.layergrafico.getSource().getFeatures(), n = geos.length, ins = "", botoes = [];
         while (n > 0) {
             n -= 1;
@@ -1269,13 +1272,13 @@ i3GEO.editor =
                 }
                 ins += " <span style='color:" + color + "' >" + id + " ";
                 if (prop.fat && prop.fat.titulo) {
-                    ins += " " + prop.fat.titulo + " ";
+                    ins += " " + escHtml(prop.fat.titulo) + " ";
                 }
-                ins += propriedades.join(" ") + "</span><hr></br>";
+                ins += propriedades.map(escHtml).join(" ") + "</span><hr></br>";
             }
         }
         if (geos.length === 0) {
-            ins = $trad("meneditor2");
+            ins = escHtml($trad("meneditor2"));
         }
         ins = '<div class="alert alert-info alert-dismissible" role="alert" style="background-color:#d3eaf5;">'
             + '<button type="button" class="close" data-bs-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>'
