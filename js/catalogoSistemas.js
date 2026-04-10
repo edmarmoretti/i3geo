@@ -23,7 +23,7 @@ i3GEO.catalogoSistemas = {
 			});
 		},
 		aguarde: function(){
-			$("#" + i3GEO.catalogoSistemas.config.idCatalogoNavegacao).html($trad("o1"));
+			$("#" + i3GEO.catalogoSistemas.config.idCatalogoNavegacao).text($trad("o1"));
 		},
 		atualizaMigalha: function(){
 			var migalha = i3GEO.catalogoSistemas.MIGALHA;
