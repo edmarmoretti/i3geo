@@ -58,7 +58,8 @@ i3GEO.busca = {
             i3GEO.busca.carregaTemplates();
             return;
         } else {
-            var palavra = $($.find(config.ondeConteiner)).find(config.inputOndePalavra).val();
+            var ondeConteiner = $($.find(config.ondeConteiner));
+            var palavra = ondeConteiner.find(config.inputOndePalavra).val();
             if (palavra != "") {
                 i3GEO.busca.PALAVRA = i3GEO.util.removeAcentos(palavra);
             } else {
@@ -66,7 +67,7 @@ i3GEO.busca = {
                 return false;
             }
             //faz as buscas
-            $($.find(config.ondeConteiner)).find(config.inputTemasMapa).html(i3GEO.busca.aguarde());
+            ondeConteiner.find(config.inputTemasMapa).html(i3GEO.busca.aguarde());
             i3GEO.busca.searchInLayers(i3GEO.busca.resultadoTemas, i3GEO.busca.PALAVRA);
         }
     },
