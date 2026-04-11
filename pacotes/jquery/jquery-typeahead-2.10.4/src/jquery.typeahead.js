@@ -3677,6 +3677,15 @@
                 for (var i = 0, length = parts.length; i < length; i++) {
                     currentPart = parts[i];
 
+                    if (~["__proto__", "prototype", "constructor"].indexOf(currentPart)) {
+                        if (~["get", "delete"].indexOf(method)) {
+                            return typeof defaultValue !== "undefined"
+                                ? defaultValue
+                                : undefined;
+                        }
+                        return false;
+                    }
+
                     if (typeof parent[currentPart] === "undefined") {
                         if (~["get", "delete"].indexOf(method)) {
                             return typeof defaultValue !== "undefined"
