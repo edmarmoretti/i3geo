@@ -257,7 +257,7 @@ window['_pr_isIE6'] = function () {
   var pr_gtEnt = /&gt;/g;
   var pr_aposEnt = /&apos;/g;
   var pr_quotEnt = /&quot;/g;
-  var pr_ampEnt = /&/g;
+  var pr_ampEnt = /&amp;/g;
   var pr_nbspEnt = /&nbsp;/g;
   /** unescapes html to plain text. */
   function htmlToText(html) {
