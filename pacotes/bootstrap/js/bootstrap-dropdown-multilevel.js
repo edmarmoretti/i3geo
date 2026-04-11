@@ -114,7 +114,7 @@
     // Only allow simple ID selectors to avoid interpreting attacker-controlled HTML.
     if (selector && !/^#[A-Za-z][\w\-:.]*$/.test(selector)) selector = null
 
-    var $parent = selector ? $(selector) : null
+    var $parent = selector ? $($.find(selector)) : null
 
     return $parent && $parent.length ? $parent : $this.parent()
   }
