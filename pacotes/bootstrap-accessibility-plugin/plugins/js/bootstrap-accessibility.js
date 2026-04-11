@@ -301,7 +301,7 @@ CC0: http://creativecommons.org/publicdomain/zero/1.0/
         var colltab = $(this)
         , collpanel = (colltab.attr('data-target')) ? $(colltab.attr('data-target')) : $(colltab.attr('href'))
         , parent  = colltab.attr('data-parent')
-        , collparent = parent && $(parent)
+        , collparent = parent && $($.find(parent))
         , collid = colltab.attr('id') || uniqueId('ui-collapse')
 
           colltab.attr('id', collid)
