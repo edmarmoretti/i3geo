@@ -18,7 +18,7 @@ i3GEO.catalogoMapas = {
 		var onclick = migalha[n - 2].onclick;
 
 		var t = Mustache.to_html(
-				$($("#" + i3GEO.catalogoMapas.config.idOndeMigalha).attr("data-template")).html(),
+				$($.find($("#" + i3GEO.catalogoMapas.config.idOndeMigalha).attr("data-template"))).html(),
 				{"nome":nome,"onclick":"i3GEO.catalogoMapas.MIGALHA.pop();i3GEO.catalogoMapas.MIGALHA.pop();" + onclick}
 			);
 
