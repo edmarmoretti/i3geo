@@ -741,7 +741,7 @@
 			.replace('\.', dec_point) // because the number if passed in as a float (having . as decimal point per definition) we need to replace this with the passed in decimal point character
 			.replace(new RegExp(u_sep,'g'),'')
 			.replace(new RegExp(u_dec,'g'),'.')
-			.replace(new RegExp('[^0-9+\-Ee.]','g'),'');
+			.replace(new RegExp('[^0-9+Ee.-]','g'),'');
 
 		var n = !isFinite(+number) ? 0 : +number,
 			s = '',
