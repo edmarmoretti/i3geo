@@ -239,7 +239,7 @@ window['_pr_isIE6'] = function () {
   var pr_quot = /\"/g;
   /** like textToHtml but escapes double quotes to be attribute safe. */
   function attribToHtml(str) {
-    return str.replace(pr_amp, '&')
+    return str.replace(pr_amp, '&amp;')
         .replace(pr_lt, '&lt;')
         .replace(pr_gt, '&gt;')
         .replace(pr_quot, '&quot;');
