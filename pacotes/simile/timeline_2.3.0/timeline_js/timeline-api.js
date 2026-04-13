@@ -52,7 +52,7 @@
  *==================================================
  */
 
-(function() {
+(function () {
     var useLocalResources = false;
     if (document.location.search.length > 0) {
         var params = document.location.search.substr(1).split("&");
@@ -63,7 +63,7 @@
         }
     };
 
-    var loadMe = function() {
+    var loadMe = function () {
         if ("Timeline" in window) {
             return;
         }
@@ -118,11 +118,11 @@
         ];
 
         try {
-            var desiredLocales = [ "en" ],
+            var desiredLocales = ["en"],
                 defaultServerLocale = "en",
                 forceLocale = null;
 
-            var parseURLParameters = function(parameters) {
+            var parseURLParameters = function (parameters) {
                 var params = parameters.split("&");
                 for (var p = 0; p < params.length; p++) {
                     var pair = params[p].split("=");
@@ -139,7 +139,7 @@
                 }
             };
 
-            (function() {
+            (function () {
                 if (typeof Timeline_urlPrefix == "string") {
                     Timeline.urlPrefix = Timeline_urlPrefix;
                     if (typeof Timeline_parameters == "string") {
@@ -166,10 +166,10 @@
                 }
             })();
 
-            var includeJavascriptFiles = function(urlPrefix, filenames) {
+            var includeJavascriptFiles = function (urlPrefix, filenames) {
                 SimileAjax.includeJavascriptFiles(document, urlPrefix, filenames);
             }
-            var includeCssFiles = function(urlPrefix, filenames) {
+            var includeCssFiles = function (urlPrefix, filenames) {
                 SimileAjax.includeCssFiles(document, urlPrefix, filenames);
             }
 
@@ -177,8 +177,8 @@
              *  Include non-localized files
              */
             if (bundle) {
-                includeJavascriptFiles(Timeline.urlPrefix, [ "timeline-bundle.js" ]);
-                includeCssFiles(Timeline.urlPrefix, [ "timeline-bundle.css" ]);
+                includeJavascriptFiles(Timeline.urlPrefix, ["timeline-bundle.js"]);
+                includeCssFiles(Timeline.urlPrefix, ["timeline-bundle.css"]);
             } else {
                 includeJavascriptFiles(Timeline.urlPrefix + "scripts/", javascriptFiles);
                 includeCssFiles(Timeline.urlPrefix + "styles/", cssFiles);
@@ -190,7 +190,7 @@
             var loadLocale = [];
             loadLocale[defaultServerLocale] = true;
 
-            var tryExactLocale = function(locale) {
+            var tryExactLocale = function (locale) {
                 for (var l = 0; l < supportedLocales.length; l++) {
                     if (locale == supportedLocales[l]) {
                         loadLocale[locale] = true;
@@ -199,7 +199,7 @@
                 }
                 return false;
             }
-            var tryLocale = function(locale) {
+            var tryLocale = function (locale) {
                 if (tryExactLocale(locale)) {
                     return locale;
                 }
@@ -235,11 +235,11 @@
             }
 
             if (forceLocale == null) {
-              Timeline.serverLocale = defaultServerLocale;
-              Timeline.clientLocale = defaultClientLocale;
+                Timeline.serverLocale = defaultServerLocale;
+                Timeline.clientLocale = defaultClientLocale;
             } else {
-              Timeline.serverLocale = forceLocale;
-              Timeline.clientLocale = forceLocale;
+                Timeline.serverLocale = forceLocale;
+                Timeline.clientLocale = forceLocale;
             }
         } catch (e) {
             alert(e);
@@ -250,6 +250,8 @@
      *  Load SimileAjax if it's not already loaded
      */
     if (typeof SimileAjax == "undefined") {
+        //
+        /*
         window.SimileAjax_onLoad = loadMe;
 
         var url = useLocalResources ?
@@ -274,6 +276,7 @@
         } else {
             createScriptElement();
         }
+            */
     } else {
         loadMe();
     }
