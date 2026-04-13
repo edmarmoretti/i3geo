@@ -247,7 +247,7 @@ window['_pr_isIE6'] = function () {
 
   /** escapest html special characters to html. */
   function textToHtml(str) {
-    return str.replace(pr_amp, '&')
+    return str.replace(pr_amp, '&amp;')
         .replace(pr_lt, '&lt;')
         .replace(pr_gt, '&gt;');
   }
