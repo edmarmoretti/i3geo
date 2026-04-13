@@ -299,7 +299,8 @@ CC0: http://creativecommons.org/publicdomain/zero/1.0/
      var $colltabs =  $('[data-toggle="collapse"]')
       $colltabs.each(function( index ) {
         var colltab = $(this)
-        , collpanel = (colltab.attr('data-target')) ? $(colltab.attr('data-target')) : $(colltab.attr('href'))
+        , collselector = colltab.attr('data-target') || colltab.attr('href')
+        , collpanel = collselector ? $($.find(collselector)) : $()
         , parent  = colltab.attr('data-parent')
         , collparent = parent && $($.find(parent))
         , collid = colltab.attr('id') || uniqueId('ui-collapse')
