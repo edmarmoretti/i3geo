@@ -914,9 +914,12 @@ $.fn.position = function( options ) {
 			$( document ).find( options.of ) :
 			options.of && options.of.jquery ?
 				options.of :
-				options.of && typeof options.of === "object" &&
-					( options.of.nodeType || isWindow( options.of ) || options.of.preventDefault ) ?
-					$( options.of ) :
+				options.of && typeof options.of === "object" ?
+					options.of.nodeType || isWindow( options.of ) ?
+						$( options.of ) :
+						options.of.preventDefault ?
+							$( options.of.target || options.of.srcElement || document ) :
+							$() :
 					$(),
 
 		within = $.position.getWithinInfo( options.within ),
