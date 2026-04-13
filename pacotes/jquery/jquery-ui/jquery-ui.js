@@ -1176,7 +1176,7 @@ $.fn.position = function( options ) {
 
 	var atOffset, targetWidth, targetHeight, targetOffset, basePosition, dimensions,
 		target = typeof options.of === "string" ?
-			$( document ).find( options.of ) :
+			$( $.find( options.of, document ) ) :
 			$( options.of ),
 		within = $.position.getWithinInfo( options.within ),
 		scrollInfo = $.position.getScrollInfo( within ),
