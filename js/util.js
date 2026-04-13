@@ -1989,7 +1989,15 @@ i3GEO.util =
 			ordenacao = "nao";
 		}
 		if (onde !== "") {
-			$i(onde).innerHTML = "<span style=color:red;font-size:10px; >" + $trad("x65") + "</span>";
+			var elementoOnde = $i(onde), aviso;
+			if (elementoOnde) {
+				elementoOnde.innerHTML = "";
+				aviso = document.createElement("span");
+				aviso.style.color = "red";
+				aviso.style.fontSize = "10px";
+				aviso.textContent = $trad("x65");
+				elementoOnde.appendChild(aviso);
+			}
 		}
 		var monta =
 			function (data) {
