@@ -1,4 +1,4 @@
-i3GEO.catalogoMapas = {
+	i3GEO.catalogoMapas = {
 	MIGALHA: [],
 	config: {
 		'seletorTemplateDir': '#guia2objTemplateDir',
@@ -8,7 +8,7 @@ i3GEO.catalogoMapas = {
 		'idOndeMigalha': 'catalogoMigalha'
 	},
 	aguarde: function(){
-		$("#" + i3GEO.catalogoMapas.config.idCatalogoNavegacao).html($trad("o1"));
+		$("#" + i3GEO.catalogoMapas.config.idCatalogoNavegacao).text($trad("o1"));
 	},
 	atualizaMigalha: function(){
 		var migalha = i3GEO.catalogoMapas.MIGALHA;
