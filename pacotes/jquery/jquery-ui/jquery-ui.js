@@ -1175,13 +1175,17 @@ $.fn.position = function( options ) {
 	options = $.extend( {}, options );
 
 	var atOffset, targetWidth, targetHeight, targetOffset, basePosition, dimensions,
-		target = typeof options.of === "string" ?
-			$( $.find( options.of, document ) ) :
-			$( options.of ),
+		target,
 		within = $.position.getWithinInfo( options.within ),
 		scrollInfo = $.position.getScrollInfo( within ),
 		collision = ( options.collision || "flip" ).split( " " ),
 		offsets = {};
+
+	if ( typeof options.of === "string" ) {
+		target = $( $.find( options.of, document ) );
+	} else {
+		target = $( options.of );
+	}
 
 	dimensions = getDimensions( target );
 	if ( target[0].preventDefault ) {
