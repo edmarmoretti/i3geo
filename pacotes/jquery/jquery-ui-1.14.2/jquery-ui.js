@@ -915,7 +915,8 @@ $.fn.position = function( options ) {
 			options.of && options.of.jquery ?
 				options.of :
 				options.of && typeof options.of === "object" ?
-					options.of.nodeType || isWindow( options.of ) ?
+					( ( options.of.nodeType === 1 || options.of.nodeType === 9 ) ||
+						isWindow( options.of ) ) ?
 						$( options.of ) :
 						options.of.preventDefault ?
 							$( options.of.target || options.of.srcElement || document ) :
