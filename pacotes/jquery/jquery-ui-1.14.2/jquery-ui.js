@@ -910,18 +910,32 @@ $.fn.position = function( options ) {
 	var atOffset, targetWidth, targetHeight, targetOffset, basePosition, dimensions,
 
 		// Make sure string options are treated as CSS selectors
-		target = typeof options.of === "string" ?
-			$( document ).find( options.of ) :
-			options.of && options.of.jquery ?
-				options.of :
-				options.of && typeof options.of === "object" ?
-					( ( options.of.nodeType === 1 || options.of.nodeType === 9 ) ||
-						isWindow( options.of ) ) ?
-						$( options.of ) :
-						options.of.preventDefault ?
-							$( options.of.target || options.of.srcElement || document ) :
-							$() :
-					$(),
+		target = ( function() {
+			var of = options.of, eventTarget;
+
+			if ( typeof of === "string" ) {
+				return $( document ).find( of );
+			}
+
+			if ( of && of.jquery ) {
+				return of;
+			}
+
+			if ( of && typeof of === "object" ) {
+				if ( ( of.nodeType === 1 || of.nodeType === 9 ) || isWindow( of ) ) {
+					return $( of );
+				}
+				if ( of.preventDefault ) {
+					eventTarget = of.target || of.srcElement || document;
+					if ( ( eventTarget.nodeType === 1 || eventTarget.nodeType === 9 ) ||
+							isWindow( eventTarget ) ) {
+						return $( eventTarget );
+					}
+				}
+			}
+
+			return $();
+		} )(),
 
 		within = $.position.getWithinInfo( options.within ),
 		scrollInfo = $.position.getScrollInfo( within ),
