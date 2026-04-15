@@ -1183,8 +1183,14 @@ $.fn.position = function( options ) {
 
 	if ( typeof options.of === "string" ) {
 		target = $( $.find( options.of, document ) );
-	} else {
+	} else if ( options.of && options.of.jquery ) {
+		target = options.of;
+	} else if ( options.of && ( options.of.nodeType || $.isWindow( options.of ) ) ) {
 		target = $( options.of );
+	} else if ( options.of && options.of.preventDefault ) {
+		target = $( options.of );
+	} else {
+		target = $();
 	}
 
 	dimensions = getDimensions( target );
